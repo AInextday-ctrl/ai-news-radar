@@ -54,9 +54,10 @@ def save_news(items: list):
 
     print(f"\n💾 数据已成功保存在: {OUTPUT_FILE} 及 {PUBLIC_OUTPUT_FILE}")
     print("=" * 60)
-    for cat_key, cat_name in CATEGORIES.items():
+    for cat_key, cat_val in CATEGORIES.items():
         count = len(grouped[cat_key])
-        print(f"  {cat_name}: {count} 条")
+        name = cat_val.get("zh", cat_key) if isinstance(cat_val, dict) else cat_val
+        print(f"  {name}: {count} 条")
     print("=" * 60)
 
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 资讯雷达 | 实时热点与精选情报</title>
+  <title>AI 资讯雷达 | 实时热点与前沿情报站</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,105 +12,144 @@
       theme: {
         extend: {
           colors: {
-            brand: '#6366f1',
+            brand: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            }
           }
         }
       }
     }
   </script>
   <style>
-    /* 自定义滚动条 */
+    /* 自定义细腻极客滚动条 */
     ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #0f172a; }
-    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    ::-webkit-scrollbar-track { background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.35);
+      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.1);
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
 
-  <!-- 顶部导航栏 -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-slate-800 px-6 py-3.5 flex items-center justify-between shadow-sm">
-    <div class="flex items-center space-x-3">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/20">
+  <!-- 顶部科技感导航栏 -->
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#090d19]/90 border-b border-slate-800/80 px-6 py-3.5 flex items-center justify-between shadow-2xl">
+    <div class="flex items-center space-x-3.5">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
         🤖
       </div>
       <div>
-        <h1 class="text-lg font-bold bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
-          AI 资讯雷达 (AI Radar)
-        </h1>
-        <p class="text-xs text-slate-400">零成本全自动聚合 · Gemini 智能提炼看点</p>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-lg font-extrabold tracking-tight bg-gradient-to-r from-white via-indigo-100 to-indigo-400 bg-clip-text text-transparent">
+            AI 资讯雷达
+          </h1>
+          <span class="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+            PRO RADAR
+          </span>
+        </div>
+        <p class="text-xs text-slate-400 font-medium" id="header-subtitle">
+          全天候 7×24H 零成本全自动聚合 · Gemini 深度看点提炼
+        </p>
       </div>
     </div>
 
-    <!-- 状态指示器与刷新倒计时 -->
-    <div class="flex items-center space-x-4">
-      <div class="flex items-center space-x-2 text-xs bg-slate-800/90 px-3 py-1.5 rounded-full border border-slate-700/60">
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-slate-300" id="refresh-indicator">自动同步中 (<span id="timer">30</span>s)</span>
+    <!-- 顶部操作区：中英文切换、状态与手动刷新 -->
+    <div class="flex items-center space-x-3.5">
+      
+      <!-- 🌐 中英文切换按钮 (固定在显眼右上角) -->
+      <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-700/60 shadow-inner">
+        <button id="lang-zh" onclick="setLanguage('zh')" class="px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm">
+          🇨🇳 中文
+        </button>
+        <button id="lang-en" onclick="setLanguage('en')" class="px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white">
+          🇬🇧 EN
+        </button>
       </div>
-      <button onclick="loadNews(true)" class="text-xs bg-indigo-600 hover:bg-indigo-500 active:scale-95 transition text-white px-3 py-1.5 rounded-lg flex items-center space-x-1 shadow-md shadow-indigo-600/20">
-        <span>🔄 手动刷新</span>
+
+      <!-- 实时脉冲灯与倒计时 -->
+      <div class="hidden sm:flex items-center space-x-2 text-xs bg-slate-900/80 px-3.5 py-1.5 rounded-xl border border-slate-800">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span class="text-slate-300 font-mono text-[11px]" id="refresh-indicator">自动同步 (<span id="timer">30</span>s)</span>
+      </div>
+
+      <!-- 手动一键抓取刷新 -->
+      <button onclick="loadNews(true)" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 active:scale-95 transition-all px-3.5 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
+        <span id="refresh-icon">🔄</span>
+        <span id="refresh-btn-text" class="font-medium">刷新</span>
       </button>
     </div>
   </header>
 
-  <!-- 主体四分栏画廊 -->
-  <main class="flex-1 p-6 overflow-x-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 min-w-[1200px] h-[calc(100vh-100px)]">
+  <!-- 主体四分栏看板 -->
+  <main class="flex-1 p-5 overflow-x-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 min-w-[1250px] h-[calc(100vh-105px)]">
       
       <!-- 栏目 1: 突发·行业快讯 -->
-      <section class="flex flex-col bg-slate-900/60 rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
-        <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0">
-          <div class="flex items-center space-x-2">
-            <span class="text-amber-400 font-bold">⚡</span>
-            <h2 class="font-semibold text-sm text-slate-200">突发·行业快讯</h2>
+      <section class="flex flex-col bg-slate-900/40 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl backdrop-blur-sm">
+        <div class="px-4 py-3 bg-[#0d1322]/90 border-b border-slate-800/80 flex items-center justify-between sticky top-0 z-10">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
+            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-news">⚡ 突发·行业快讯</h2>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono" id="count-news">0</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 font-mono font-semibold" id="count-news">0</span>
         </div>
         <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-news">
-          <div class="text-xs text-slate-500 text-center py-10 animate-pulse">正在加载资讯...</div>
+          <div class="text-xs text-slate-500 text-center py-16 animate-pulse">正在加载最新快讯...</div>
         </div>
       </section>
 
       <!-- 栏目 2: 名人·大V热点 -->
-      <section class="flex flex-col bg-slate-900/60 rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
-        <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0">
-          <div class="flex items-center space-x-2">
-            <span class="text-sky-400 font-bold">🐦</span>
-            <h2 class="font-semibold text-sm text-slate-200">名人·大V观点</h2>
+      <section class="flex flex-col bg-slate-900/40 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl backdrop-blur-sm">
+        <div class="px-4 py-3 bg-[#0d1322]/90 border-b border-slate-800/80 flex items-center justify-between sticky top-0 z-10">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
+            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-celebrity">🐦 名人·大V热点</h2>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono" id="count-celebrity">0</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-mono font-semibold" id="count-celebrity">0</span>
         </div>
         <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-celebrity">
-          <div class="text-xs text-slate-500 text-center py-10 animate-pulse">正在加载资讯...</div>
+          <div class="text-xs text-slate-500 text-center py-16 animate-pulse">正在加载领袖观点...</div>
         </div>
       </section>
 
       <!-- 栏目 3: 爆款·新AI工具 -->
-      <section class="flex flex-col bg-slate-900/60 rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
-        <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0">
-          <div class="flex items-center space-x-2">
-            <span class="text-emerald-400 font-bold">🛠️</span>
-            <h2 class="font-semibold text-sm text-slate-200">爆款·新AI工具</h2>
+      <section class="flex flex-col bg-slate-900/40 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl backdrop-blur-sm">
+        <div class="px-4 py-3 bg-[#0d1322]/90 border-b border-slate-800/80 flex items-center justify-between sticky top-0 z-10">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
+            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-tools">🛠️ 爆款·新AI工具</h2>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono" id="count-tools">0</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-mono font-semibold" id="count-tools">0</span>
         </div>
         <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-tools">
-          <div class="text-xs text-slate-500 text-center py-10 animate-pulse">正在加载资讯...</div>
+          <div class="text-xs text-slate-500 text-center py-16 animate-pulse">正在加载热门工具...</div>
         </div>
       </section>
 
-      <!-- 栏目 4: 实操·精选视频 -->
-      <section class="flex flex-col bg-slate-900/60 rounded-2xl border border-slate-800/80 overflow-hidden shadow-xl">
-        <div class="px-4 py-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between sticky top-0">
-          <div class="flex items-center space-x-2">
-            <span class="text-purple-400 font-bold">💡</span>
-            <h2 class="font-semibold text-sm text-slate-200">实操·精选视频</h2>
+      <!-- 栏目 4: 实操·前沿精选 -->
+      <section class="flex flex-col bg-slate-900/40 rounded-2xl border border-slate-800/80 overflow-hidden shadow-2xl backdrop-blur-sm">
+        <div class="px-4 py-3 bg-[#0d1322]/90 border-b border-slate-800/80 flex items-center justify-between sticky top-0 z-10">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-sm shadow-purple-400/50"></span>
+            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-insights">💡 实操·前沿精选</h2>
           </div>
-          <span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-mono" id="count-insights">0</span>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 font-mono font-semibold" id="count-insights">0</span>
         </div>
         <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-insights">
-          <div class="text-xs text-slate-500 text-center py-10 animate-pulse">正在加载资讯...</div>
+          <div class="text-xs text-slate-500 text-center py-16 animate-pulse">正在加载前沿研究...</div>
         </div>
       </section>
 
@@ -118,28 +158,122 @@
 
   <script>
     const COLUMNS = ['news', 'celebrity', 'tools', 'insights'];
+    
+    // 当前语言环境: 'zh' | 'en' (默认中文)
+    let currentLang = localStorage.getItem('ai_radar_lang') || 'zh';
+    let cachedData = null;
     let countdown = 30;
 
+    const I18N = {
+      zh: {
+        subtitle: "全天候 7×24H 零成本全自动聚合 · Gemini 深度看点提炼",
+        autoSync: "自动同步",
+        refreshBtn: "刷新",
+        readingTakeaway: "核心看点",
+        readOriginal: "直达原文",
+        emptyText: "暂无此分类资讯",
+        colTitles: {
+          news: "⚡ 突发·行业快讯",
+          celebrity: "🐦 名人·大V热点",
+          tools: "🛠️ 爆款·新AI工具",
+          insights: "💡 实操·前沿精选"
+        }
+      },
+      en: {
+        subtitle: "24/7 Zero-Cost Automated AI Radar · Powered by Gemini Insights",
+        autoSync: "Syncing",
+        refreshBtn: "Refresh",
+        readingTakeaway: "Key Insight",
+        readOriginal: "Read Source",
+        emptyText: "No updates in this category",
+        colTitles: {
+          news: "⚡ Breaking News",
+          celebrity: "🐦 Leaders & Voices",
+          tools: "🛠️ Hot AI Tools",
+          insights: "💡 Insights & Guides"
+        }
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      localStorage.setItem('ai_radar_lang', lang);
+
+      // 切换按钮高亮样式
+      const btnZh = document.getElementById('lang-zh');
+      const btnEn = document.getElementById('lang-en');
+      if (lang === 'zh') {
+        btnZh.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+        btnEn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white";
+      } else {
+        btnEn.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+        btnZh.className = "px-3 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white";
+      }
+
+      // 更新静态文字
+      const text = I18N[lang];
+      document.getElementById('header-subtitle').textContent = text.subtitle;
+      document.getElementById('refresh-btn-text').textContent = text.refreshBtn;
+      COLUMNS.forEach(col => {
+        document.getElementById(`col-title-${col}`).textContent = text.colTitles[col];
+      });
+
+      // 重新渲染卡片
+      if (cachedData) {
+        renderAllColumns(cachedData);
+      }
+    }
+
     function renderCard(item) {
+      const text = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+
+      // 标题与摘要语言选择
+      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
+      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.summary || item.content_snippet || "");
+
+      // 来源标签颜色
       const sourceColors = {
-        'Hacker News': 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-        'Reddit LocalLLaMA': 'bg-red-500/10 text-red-400 border-red-500/20',
-        'Reddit Singularity': 'bg-pink-500/10 text-pink-400 border-pink-500/20',
-        'Hugging Face': 'bg-yellow-500/10 text-yellow-300 border-yellow-500/20',
-        'GitHub': 'bg-slate-700/50 text-slate-300 border-slate-600/30',
-        'YouTube': 'bg-rose-500/10 text-rose-400 border-rose-500/20'
+        'TechCrunch AI': 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
+        'The Verge AI': 'bg-pink-500/15 text-pink-400 border-pink-500/30',
+        'Hacker News': 'bg-orange-500/15 text-orange-400 border-orange-500/30',
+        'Sam Altman Blog': 'bg-sky-500/15 text-sky-400 border-sky-500/30',
+        'Reddit LocalLLaMA': 'bg-red-500/15 text-red-400 border-red-500/30',
+        'Hugging Face': 'bg-amber-500/15 text-amber-300 border-amber-500/30',
+        'GitHub': 'bg-slate-700/60 text-slate-200 border-slate-600/40',
+        'ArXiv AI': 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30'
       };
 
-      const sourceClass = sourceColors[item.source] || 'bg-slate-800 text-slate-400 border-slate-700';
+      const sourceBadge = sourceColors[item.source] || 'bg-slate-800 text-slate-300 border-slate-700';
 
-      const metricsHtml = item.metrics && Object.keys(item.metrics).length > 0 
-        ? Object.entries(item.metrics).map(([k, v]) => `<span class="text-[11px] text-slate-400 font-mono">${k}: ${v}</span>`).join('<span class="text-slate-600">·</span>')
-        : `<span class="text-[11px] text-slate-500">${item.author || 'AI Radar'}</span>`;
+      // 指标展示
+      let metricsHtml = '';
+      if (item.metrics && Object.keys(item.metrics).length > 0) {
+        metricsHtml = Object.entries(item.metrics).map(([k, v]) => {
+          let label = k;
+          if (k === 'score') label = '🔥';
+          if (k === 'comments') label = '💬';
+          if (k === 'stars') label = '⭐';
+          if (k === 'likes') label = '❤️';
+          return `<span class="text-[11px] text-slate-400 font-mono">${label} ${v}</span>`;
+        }).join('<span class="text-slate-700">·</span>');
+      } else {
+        metricsHtml = `<span class="text-[11px] text-slate-400 truncate max-w-[120px]">${item.author || item.source}</span>`;
+      }
+
+      // 封面主图 (如果有)
+      const imageHtml = item.image_url ? `
+        <div class="relative w-full h-36 rounded-lg overflow-hidden mb-2.5 bg-slate-800/70 border border-slate-700/50">
+          <img src="${item.image_url}" alt="news cover" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+        </div>
+      ` : '';
 
       return `
-        <article class="group bg-slate-900/80 hover:bg-slate-800/90 border border-slate-800 hover:border-slate-700 rounded-xl p-4 transition duration-200 flex flex-col space-y-2.5 shadow-sm hover:shadow-md">
+        <article class="group glass-card rounded-xl p-3.5 transition-all duration-200 flex flex-col space-y-2.5 shadow-md">
+          
+          <!-- 来源与热度 -->
           <div class="flex items-center justify-between space-x-2">
-            <span class="text-[11px] px-2 py-0.5 rounded-md border font-medium ${sourceClass}">
+            <span class="text-[10px] px-2 py-0.5 rounded-md border font-semibold ${sourceBadge}">
               ${item.source}
             </span>
             <div class="flex items-center space-x-1.5">
@@ -147,52 +281,66 @@
             </div>
           </div>
 
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-medium text-sm text-slate-200 group-hover:text-indigo-300 transition line-clamp-2 leading-snug">
-            ${item.title_zh || item.title}
+          <!-- 封面图 -->
+          ${imageHtml}
+
+          <!-- 标题 -->
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-semibold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
+            ${title}
           </a>
 
-          ${item.summary_zh ? `
-            <div class="bg-indigo-950/40 border-l-2 border-indigo-500 px-2.5 py-1.5 rounded-r text-xs text-indigo-200/90 leading-relaxed">
-              💡 <span class="font-medium">看点：</span>${item.summary_zh}
+          <!-- AI 看点提炼 / 摘要 -->
+          ${summary ? `
+            <div class="bg-indigo-950/40 border-l-2 border-indigo-400/80 px-2.5 py-1.5 rounded-r-md text-xs text-indigo-200/90 leading-relaxed font-normal">
+              <span class="font-semibold text-indigo-300">💡 ${text.readingTakeaway}：</span>${summary}
             </div>
           ` : ''}
 
-          <div class="pt-1 flex items-center justify-between text-[11px] text-slate-400">
+          <!-- 底部标签与直达链接 -->
+          <div class="pt-1 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/60">
             <div class="flex flex-wrap gap-1">
-              ${(item.tags || []).slice(0, 2).map(t => `<span class="bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded text-[10px]">${t}</span>`).join('')}
+              ${(item.tags || []).slice(0, 2).map(t => `<span class="bg-slate-800/80 border border-slate-700/40 text-slate-400 px-1.5 py-0.5 rounded text-[10px]">${t}</span>`).join('')}
             </div>
-            <a href="${item.url}" target="_blank" class="text-indigo-400 hover:underline flex items-center space-x-0.5">
-              <span>直达</span>
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:text-indigo-300 font-medium flex items-center space-x-1 transition-colors">
+              <span>${text.readOriginal}</span>
               <svg class="w-3 h-3 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
             </a>
           </div>
+
         </article>
       `;
     }
 
+    function renderAllColumns(data) {
+      const text = I18N[currentLang];
+      COLUMNS.forEach(col => {
+        const list = (data.grouped && data.grouped[col]) || [];
+        document.getElementById(`count-${col}`).textContent = list.length;
+        const container = document.getElementById(`col-${col}`);
+        if (list.length === 0) {
+          container.innerHTML = `<div class="text-xs text-slate-500 text-center py-20 font-medium">${text.emptyText}</div>`;
+        } else {
+          container.innerHTML = list.map(item => renderCard(item)).join('');
+        }
+      });
+    }
+
     async function loadNews(isManual = false) {
       const indicator = document.getElementById('refresh-indicator');
-      if (isManual) indicator.innerHTML = `<span class="text-amber-300 animate-spin mr-1">↻</span> 正在拉取最新数据...`;
+      const text = I18N[currentLang];
+      if (isManual) {
+        indicator.innerHTML = `<span class="text-amber-300 animate-spin mr-1">↻</span> 正在同步...`;
+      }
 
       try {
         const res = await fetch(`data/latest_news.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error("尚未生成数据文件");
+        if (!res.ok) throw new Error("无法读取最新数据");
         const data = await res.json();
-        
-        COLUMNS.forEach(col => {
-          const list = (data.grouped && data.grouped[col]) || [];
-          document.getElementById(`count-${col}`).textContent = list.length;
-          const container = document.getElementById(`col-${col}`);
-          if (list.length === 0) {
-            container.innerHTML = `<div class="text-xs text-slate-500 text-center py-10">暂无此分类资讯</div>`;
-          } else {
-            container.innerHTML = list.map(item => renderCard(item)).join('');
-          }
-        });
-
+        cachedData = data;
+        renderAllColumns(data);
         countdown = 30;
       } catch (err) {
-        console.warn(err);
+        console.warn("加载新闻数据失败:", err);
       }
     }
 
@@ -207,7 +355,8 @@
       if (timerEl) timerEl.textContent = countdown;
     }, 1000);
 
-    // 初始加载
+    // 初始应用语言并加载
+    setLanguage(currentLang);
     loadNews();
   </script>
 </body>

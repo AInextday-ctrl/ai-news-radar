@@ -2,12 +2,24 @@
 AI Radar Config - Data Sources and Category Definitions
 """
 
-# 分栏定义
+# 分栏定义 (支持中英文)
 CATEGORIES = {
-    "news": "⚡ 突发·行业快讯",
-    "celebrity": "🐦 名人·大V热点",
-    "tools": "🛠️ 爆款·新AI工具",
-    "insights": "💡 实操·前沿精选"
+    "news": {
+        "zh": "⚡ 突发·行业快讯",
+        "en": "⚡ Breaking News"
+    },
+    "celebrity": {
+        "zh": "🐦 名人·大V热点",
+        "en": "🐦 Leaders & Voices"
+    },
+    "tools": {
+        "zh": "🛠️ 爆款·新AI工具",
+        "en": "🛠️ Hot AI Tools"
+    },
+    "insights": {
+        "zh": "💡 实操·前沿精选",
+        "en": "💡 Insights & Guides"
+    }
 }
 
 # 抓取源配置 (全部为 100% 官方免费、公开、高可用源)
@@ -34,7 +46,15 @@ SOURCES = {
         "type": "hn_api"
     },
 
-    # 3. 极客开源经验社区 (Reddit LocalLLaMA RSS)
+    # 3. 名人与领袖博客
+    "sam_altman_blog": {
+        "name": "Sam Altman Blog",
+        "url": "https://blog.samaltman.com/posts.atom",
+        "default_category": "celebrity",
+        "type": "rss"
+    },
+
+    # 4. 极客开源经验社区 (Reddit LocalLLaMA RSS)
     "reddit_localllama": {
         "name": "Reddit LocalLLaMA",
         "url": "https://www.reddit.com/r/LocalLLaMA/.rss",
@@ -42,7 +62,7 @@ SOURCES = {
         "type": "rss"
     },
 
-    # 4. Hugging Face 热门趋势模型/应用
+    # 5. Hugging Face 热门趋势模型/应用
     "huggingface_trending": {
         "name": "Hugging Face",
         "url": "https://huggingface.co/api/trending?limit=10",
@@ -50,7 +70,7 @@ SOURCES = {
         "type": "hf_trending"
     },
 
-    # 5. GitHub 热门新星 AI 项目
+    # 6. GitHub 热门新星 AI 项目
     "github_trending": {
         "name": "GitHub",
         "url": "https://api.github.com/search/repositories?q=topic:artificial-intelligence+created:>2026-08-01&sort=stars&order=desc&per_page=10",
@@ -58,7 +78,21 @@ SOURCES = {
         "type": "github_api"
     },
 
-    # 6. 前沿研究预印本 (ArXiv CS.AI)
+    # 7. 前沿实操与实践博客
+    "huggingface_blog": {
+        "name": "Hugging Face Blog",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "default_category": "insights",
+        "type": "rss"
+    },
+    "simonw_ai": {
+        "name": "Simon Willison AI",
+        "url": "https://simonwillison.net/atom/everything/",
+        "default_category": "insights",
+        "type": "rss"
+    },
+
+    # 8. 前沿研究预印本 (ArXiv CS.AI)
     "arxiv_ai": {
         "name": "ArXiv AI",
         "url": "https://rss.arxiv.org/rss/cs.AI",

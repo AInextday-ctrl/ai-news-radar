@@ -1,5 +1,6 @@
 """
 Processor module - Uses Google Gemini API to clean, translate, summarize and categorize AI news.
+Includes automatic free translation fallback to guarantee Chinese translation out of the box.
 """
 
 import sys
@@ -12,9 +13,10 @@ if sys.platform == "win32":
         pass
 
 import os
-
+import re
 import json
 from typing import List, Dict, Any, Optional
+import httpx
 from dotenv import load_dotenv
 
 # 加载环境变量
@@ -22,6 +24,38 @@ load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+# 翻译内存缓存，避免重复请求
+_TRANSLATION_CACHE = {}
+
+
+def free_translate_zh(text: str) -> str:
+    """Free, no-auth translation fallback to ensure Chinese content is always available."""
+    if not text:
+        return ""
+    # 如果已经包含较多中文，直接返回
+    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', text))
+    if zh_chars > len(text) * 0.3:
+        return text
+
+    clean_text = text.strip()[:200]
+    if clean_text in _TRANSLATION_CACHE:
+        return _TRANSLATION_CACHE[clean_text]
+
+    try:
+        url = "https://api.mymemory.translated.net/get"
+        params = {"q": clean_text, "langpair": "en|zh"}
+        with httpx.Client(timeout=6) as client:
+            resp = client.get(url, params=params)
+            if resp.status_code == 200:
+                data = resp.json()
+                translated = data.get("responseData", {}).get("translatedText", "")
+                if translated and "MYMEMORY WARNING" not in translated:
+                    _TRANSLATION_CACHE[clean_text] = translated
+                    return translated
+    except Exception:
+        pass
+    return text
 
 
 def get_gemini_client():
@@ -36,29 +70,49 @@ def get_gemini_client():
         return None
 
 
+def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
+    """Generate a clean Chinese takeaway when Gemini is offline."""
+    source = item.get("source", "")
+    category = item.get("category", "")
+    snippet = item.get("content_snippet", "")
+    
+    if category == "celebrity":
+        return f"聚焦行业领袖最新发声与公开动态。{free_translate_zh(snippet[:60])}"
+    elif category == "tools":
+        return f"热门开源新工具/模型，推荐关注尝试。{free_translate_zh(snippet[:60])}"
+    elif category == "insights":
+        return f"实操经验与前沿研究精选。{free_translate_zh(snippet[:60])}"
+    else:
+        return f"来自 {source} 的最新行业突发报道：{free_translate_zh(snippet[:60])}"
+
+
 def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> List[Dict[str, Any]]:
     """
-    Process a list of items with Gemini in batches to maximize throughput and minimize quota usage.
+    Process a list of items with Gemini in batches to maximize throughput.
+    Falls back to automated translation if Gemini is not configured.
     """
     client = get_gemini_client()
 
     if not client:
-        print("⚠️ 未检测到 GEMINI_API_KEY，将使用原始数据直出模式（可在 .env 中填入 API Key 开启 AI 深度提炼）。")
-        # 降级处理：保留原样，简单填充中文缺省
+        print("💡 未检测到 GEMINI_API_KEY，启用内置全自动智能中文翻译器...")
         processed = []
         for item in items:
             p_item = dict(item)
-            p_item["title_zh"] = item["title"]
-            p_item["summary_zh"] = item["content_snippet"] or "暂无AI总结"
-            p_item["category"] = item["default_category"]
-            p_item["hot_score"] = 3
-            p_item["tags"] = [item["source"]]
+            p_item["category"] = item.get("default_category", "news")
+            title_zh = free_translate_zh(item["title"])
+            p_item["title_zh"] = title_zh
+            p_item["summary_zh"] = generate_smart_fallback_summary(item, title_zh)
+            p_item["hot_score"] = 4 if p_item["category"] == "celebrity" else 3
+            p_item["tags"] = [item["source"], "AI资讯"]
             processed.append(p_item)
+        print("  ✓ 中文自动化翻译与看点生成完毕！")
         return processed
 
-    print(f"🤖 正在调用 Google Gemini ({MODEL_NAME}) 进行批量智能翻译、提炼与分类...")
+    print(f"🤖 正在调用 Google Gemini 进行批量智能翻译、提炼与分类...")
 
     results = []
+    models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
+
     for i in range(0, len(items), batch_size):
         chunk = items[i:i + batch_size]
         simplified_chunk = [
@@ -73,16 +127,16 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         ]
 
         prompt = f"""
-你是一个顶级 AI 资讯雷达站的资深编辑。请对以下这批最新 AI 资讯进行分析、翻译和价值提炼。
+你是一个顶级 AI 资讯雷达站的资深主编。请对以下最新 AI 资讯进行精炼分析、纯正中文翻译和价值提炼。
 
 【分类规则】：
-- "news": 突发行业大事件、新突破、大厂官方发布
-- "celebrity": 马斯克、奥特曼、LeCun、Karpathy、Tibo 等名人博文或观点
-- "tools": 新开源工具、GitHub高赞项目、实用AI插件或新模型
-- "insights": 使用心得、深度长视频、Prompt技巧、最佳实操经验
+- "news": 行业大事件、技术突破、官方重磅发布
+- "celebrity": 马斯克、奥特曼、LeCun、Karpathy、Tibo、黄仁勋等名人大V言论或专访
+- "tools": 新开源工具、GitHub高星项目、实用AI新模型/新框架
+- "insights": 极客实操、本地部署避坑、Prompt技巧、深度论文研究
 
-【输出格式要求】：
-请以纯 JSON Array 形式输出（不要带有 ```json 代码块外围文字），数组内每个元素格式如下：
+【输出要求】：
+请以纯 JSON Array 形式输出（不要带有 ```json 标记），数组内每个元素格式如下：
 {{
   "index": 对应的序号,
   "title_zh": "自然流畅精炼的中文标题(25字以内)",
@@ -97,7 +151,6 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
 """
 
         try:
-            models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
             response = None
             last_err = None
             for m in models_to_try:
@@ -114,8 +167,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
 
             if not response or not response.text:
                 raise last_err or Exception("All Gemini models failed")
+
             raw_text = response.text.strip()
-            # 去除可能的 markdown 标记
             if raw_text.startswith("```json"):
                 raw_text = raw_text[7:]
             if raw_text.startswith("```"):
@@ -129,7 +182,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             for idx, orig_item in enumerate(chunk):
                 ai_data = parsed_dict.get(idx, {})
                 merged = dict(orig_item)
-                merged["title_zh"] = ai_data.get("title_zh") or orig_item["title"]
+                merged["title_zh"] = ai_data.get("title_zh") or free_translate_zh(orig_item["title"])
                 merged["summary_zh"] = ai_data.get("summary_zh") or orig_item["content_snippet"]
                 merged["category"] = ai_data.get("category") or orig_item["default_category"]
                 merged["hot_score"] = ai_data.get("hot_score", 3)
@@ -139,11 +192,12 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             print(f"  ✓ 已完成 {min(i + batch_size, len(items))}/{len(items)} 条")
 
         except Exception as e:
-            print(f"  ❌ Gemini 批量处理异常: {e}，回退使用原始数据")
+            print(f"  ❌ Gemini 处理异常: {e}，启用智能中文备用翻译")
             for orig_item in chunk:
                 fallback = dict(orig_item)
-                fallback["title_zh"] = orig_item["title"]
-                fallback["summary_zh"] = orig_item["content_snippet"]
+                title_zh = free_translate_zh(orig_item["title"])
+                fallback["title_zh"] = title_zh
+                fallback["summary_zh"] = generate_smart_fallback_summary(orig_item, title_zh)
                 fallback["category"] = orig_item["default_category"]
                 fallback["hot_score"] = 3
                 fallback["tags"] = [orig_item["source"]]
