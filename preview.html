@@ -760,11 +760,11 @@
     function renderUI(data) {
       if (!data) return;
 
-      // 1. 更新各分类角标数量
-      const newsList = filterList(data.industry_news || []);
-      const celebrityList = filterList(data.leader_opinions || []);
-      const toolsList = filterList(data.applied_tools || []);
-      const videosList = filterList(data.video_prompts || []);
+      // 1. 更新各分类角标数量 (兼顾 grouped 与扁平别名字段)
+      const newsList = filterList(data.grouped?.news || data.news || data.industry_news || []);
+      const celebrityList = filterList(data.grouped?.celebrity || data.celebrity || data.leader_opinions || []);
+      const toolsList = filterList(data.grouped?.tools || data.tools || data.applied_tools || []);
+      const videosList = filterList(data.grouped?.videos || data.videos || data.video_prompts || []);
       const totalCount = newsList.length + celebrityList.length + toolsList.length + videosList.length;
 
       document.getElementById('badge-count-all').textContent = totalCount;
@@ -784,17 +784,17 @@
 
       const streamCelebrity = document.getElementById('stream-celebrity');
       streamCelebrity.innerHTML = celebrityList.length > 0
-        ? celebrityList.slice(0, 8).map(renderCelebrityCard).join('')
+        ? celebrityList.slice(0, 10).map(renderCelebrityCard).join('')
         : '<div class="text-slate-500 text-xs py-4 text-center">暂无领袖观点</div>';
 
       const streamTools = document.getElementById('stream-tools');
       streamTools.innerHTML = toolsList.length > 0
-        ? toolsList.slice(0, 8).map(renderToolCard).join('')
+        ? toolsList.slice(0, 10).map(renderToolCard).join('')
         : '<div class="text-slate-500 text-xs py-4 text-center">暂无落地工具</div>';
 
       const streamVideos = document.getElementById('stream-videos');
       streamVideos.innerHTML = videosList.length > 0
-        ? videosList.slice(0, 6).map(renderVideoOrPromptCard).join('')
+        ? videosList.slice(0, 8).map(renderVideoOrPromptCard).join('')
         : '<div class="text-slate-500 text-xs py-4 text-center">暂无视频提示词</div>';
 
       // 4. 如果当前处于独立分类模式，重新刷新分类网格
@@ -818,22 +818,22 @@
       const container = document.getElementById('cat-grid-container');
 
       if (tab === 'news') {
-        const list = filterList(cachedData.industry_news || []);
+        const list = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
         container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderNewsCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-2">未找到匹配快讯</div>';
       } else if (tab === 'celebrity') {
-        const list = filterList(cachedData.leader_opinions || []);
+        const list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderCelebrityCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到领袖观点</div>';
       } else if (tab === 'tools') {
-        let list = filterList(cachedData.applied_tools || []);
+        let list = filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []);
         if (toolScenarioFilter !== 'all') {
           list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter));
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-4">未找到该分类落地工具</div>';
       } else if (tab === 'videos') {
-        const list = filterList(cachedData.video_prompts || []);
+        const list = filterList(cachedData.grouped?.videos || cachedData.videos || cachedData.video_prompts || []);
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到视频演示</div>';
       }

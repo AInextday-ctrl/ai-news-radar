@@ -39,7 +39,7 @@ def extract_top_three(items: list) -> list:
     top = []
     
     # 1. 最重要的大事件/突发 (严格取最新的当天大事件)
-    news_items = [i for i in items if i.get("category") == "news" and i.get("image_url")]
+    news_items = [i for i in items if i.get("category") == "news"]
     news_items.sort(key=parse_time_for_sort, reverse=True)
     if news_items:
         it = news_items[0]
@@ -76,7 +76,7 @@ def extract_top_three(items: list) -> list:
         })
 
     # 3. 最值得体验的新工具/新视频 (优先取今日最新爆款)
-    app_items = [i for i in items if i.get("category") in ["tools", "videos"] and (i.get("image_url") or i.get("video_id"))]
+    app_items = [i for i in items if i.get("category") in ["tools", "videos"]]
     app_items.sort(key=parse_time_for_sort, reverse=True)
     if app_items:
         it = app_items[0]
@@ -121,6 +121,14 @@ def save_news(items: list):
         "categories": CATEGORIES,
         "top_three": top_three,
         "grouped": grouped,
+        "news": grouped.get("news", []),
+        "celebrity": grouped.get("celebrity", []),
+        "tools": grouped.get("tools", []),
+        "videos": grouped.get("videos", []),
+        "industry_news": grouped.get("news", []),
+        "leader_opinions": grouped.get("celebrity", []),
+        "applied_tools": grouped.get("tools", []),
+        "video_prompts": grouped.get("videos", []),
         "items": items
     }
 
