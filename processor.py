@@ -97,10 +97,23 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
 """
 
         try:
-            response = client.models.generate_content(
-                model=MODEL_NAME,
-                contents=prompt
-            )
+            models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
+            response = None
+            last_err = None
+            for m in models_to_try:
+                try:
+                    response = client.models.generate_content(
+                        model=m,
+                        contents=prompt
+                    )
+                    if response and response.text:
+                        break
+                except Exception as m_err:
+                    last_err = m_err
+                    continue
+
+            if not response or not response.text:
+                raise last_err or Exception("All Gemini models failed")
             raw_text = response.text.strip()
             # 去除可能的 markdown 标记
             if raw_text.startswith("```json"):
