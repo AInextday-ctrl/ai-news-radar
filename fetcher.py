@@ -58,30 +58,12 @@ def parse_to_iso(published_parsed: Any = None, raw_str: str = "") -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def get_smart_cover_url(title: str, category: str = "news", source: str = "") -> str:
-    """Generate high-tech context-aware cover image for articles without native images."""
-    t = (title + " " + source).lower()
-    if any(k in t for k in ["openai", "gpt", "chatgpt", "sora", "o1", "o3", "altman"]):
-        return "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["anthropic", "claude", "amodei"]):
-        return "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["google", "gemini", "deepmind", "hassabis"]):
-        return "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["nvidia", "chip", "gpu", "hardware", "huang", "blackwell"]):
-        return "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["robot", "robotics", "humanoid", "figure", "tesla", "optimus"]):
-        return "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["agent", "autonomous", "workflow", "computer"]):
-        return "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["code", "coding", "developer", "terminal", "github", "bug"]):
-        return "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["voice", "audio", "speech", "sound", "music"]):
-        return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80&auto=format&fit=crop"
-    if any(k in t for k in ["image", "design", "art", "paint", "diffusion", "flux"]):
-        return "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop"
-    
-    # 极客科技默认封面
-    return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop"
+def get_smart_cover_url(title: str, category: str = "news", source: str = "") -> Optional[str]:
+    """
+    Return None for articles without authentic images, so frontend can render
+    clean, readable typographic cards instead of repetitive generic placeholder images.
+    """
+    return None
 
 
 def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 资讯雷达 2.0 | 全景多媒体 AI 情报与落地神器站</title>
+  <title>AI 资讯雷达 | 全景 AI 动态与场景落地神器站</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,33 +19,45 @@
     }
   </script>
   <style>
-    /* 自定义极客深色滚动条 */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    /* 全局极客深色平滑滚动，杜绝嵌套卡顿 */
+    html {
+      scroll-behavior: smooth;
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
     ::-webkit-scrollbar-track { background: #060913; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
     
     .glass-panel {
       background: rgba(13, 19, 34, 0.75);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
     }
     .glass-card {
-      background: rgba(17, 24, 43, 0.85);
-      backdrop-filter: blur(12px);
+      background: #0d1322;
       border: 1px solid rgba(255, 255, 255, 0.06);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.4);
-      box-shadow: 0 12px 30px -10px rgba(99, 102, 241, 0.15);
+      border-color: rgba(99, 102, 241, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(99, 102, 241, 0.15);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="bg-[#050811] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
+<body class="bg-[#060913] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
 
   <!-- 顶部科技导航栏 -->
-  <header class="sticky top-0 z-40 backdrop-blur-2xl bg-[#070b16]/90 border-b border-slate-800/80 px-6 py-3 flex items-center justify-between shadow-2xl">
-    <div class="flex items-center space-x-3.5">
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#070b16]/95 border-b border-slate-800/80 px-4 sm:px-8 py-3 flex items-center justify-between shadow-xl">
+    <div class="flex items-center space-x-3">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
         🤖
       </div>
@@ -55,17 +67,17 @@
             AI 资讯雷达
           </h1>
           <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 tracking-wider">
-            RADAR 2.0
+            RADAR 3.0
           </span>
         </div>
-        <p class="text-xs text-slate-400 font-medium" id="header-subtitle">
+        <p class="text-xs text-slate-400 font-medium hidden sm:block" id="header-subtitle">
           全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库
         </p>
       </div>
     </div>
 
     <!-- 右上角：中英文切换、状态指示灯与刷新 -->
-    <div class="flex items-center space-x-3">
+    <div class="flex items-center space-x-2.5 sm:space-x-3">
       
       <!-- 🌐 中英文切换胶囊 -->
       <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-700/60 shadow-inner">
@@ -78,7 +90,7 @@
       </div>
 
       <!-- 实时同步灯 -->
-      <div class="hidden sm:flex items-center space-x-2 text-xs bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+      <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
@@ -94,153 +106,240 @@
     </div>
   </header>
 
-  <!-- 🔥 今日 60 秒极速通 (Top 3 深度风向标横幅) -->
-  <section class="px-6 pt-4 pb-2">
-    <div class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/50 rounded-2xl border border-indigo-500/20 p-3.5 shadow-xl">
-      <div class="flex items-center space-x-2 mb-2.5">
-        <span class="text-sm font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
-          <span>🔥</span>
-          <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
-        </span>
-        <span class="text-[10px] text-slate-400">· 帮你在最短时间内抓住今日行业命脉</span>
+  <!-- 🧭 现代化固定分类导航栏 (Tabs Bar) -->
+  <nav class="sticky top-[57px] z-40 bg-[#090e1c]/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-8 py-2.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto no-scrollbar">
+      <div class="flex items-center space-x-2 shrink-0" id="nav-tabs">
+        <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
+          <span>🌐</span>
+          <span id="nav-text-all">综合全景</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 font-mono ml-0.5" id="badge-count-all">0</span>
+        </button>
+        <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5">
+          <span>⚡</span>
+          <span id="nav-text-news">突发·行业快讯</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-news">0</span>
+        </button>
+        <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5">
+          <span>🐦</span>
+          <span id="nav-text-celebrity">领袖观点·社交</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-celebrity">0</span>
+        </button>
+        <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5">
+          <span>🛠️</span>
+          <span id="nav-text-tools">场景落地·实用神器</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-tools">0</span>
+        </button>
+        <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5">
+          <span>🎬</span>
+          <span id="nav-text-videos">视频演示·咒语</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-videos">0</span>
+        </button>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3" id="top-three-container">
-        <!-- 由 JS 动态注入 Top 3 -->
-        <div class="bg-slate-900/60 rounded-xl p-2.5 border border-slate-800 text-xs text-slate-400 animate-pulse">正在提炼今日风向标...</div>
+
+      <!-- 搜索筛选器 -->
+      <div class="relative shrink-0 w-36 sm:w-56">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="搜索关键词..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+        <span class="absolute right-2.5 top-2 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- 主体四分栏画廊 -->
-  <main class="flex-1 px-6 py-4 overflow-x-auto">
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 min-w-[1320px] h-[calc(100vh-190px)]">
+  <!-- 主体内容区域 (支持全局顺畅自然纵向滚动，杜绝子容器卡顿与滚轮被困) -->
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-5 space-y-6">
+
+    <!-- 🔥 今日 AI 风向标 (Top 3 深度必读横幅) -->
+    <section id="top-three-section" class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60 rounded-2xl border border-indigo-500/20 p-4 shadow-xl">
+      <div class="flex items-center justify-between mb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-sm font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
+            <span>🔥</span>
+            <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
+          </span>
+          <span class="text-[11px] text-slate-400 hidden sm:inline">· 帮你在最短时间内抓住今日行业核心脉搏</span>
+        </div>
+        <span class="text-[11px] text-indigo-300/80 font-mono">当日实时更新</span>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
+        <!-- 动态渲染 Top 3 -->
+        <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 text-xs text-slate-400 animate-pulse">正在提炼今日重磅...</div>
+      </div>
+    </section>
+
+    <!-- 视图 1: 🌐 综合全景模式 (All-in-One Magazine Stream) -->
+    <div id="view-all" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
-      <!-- 栏目 1: ⚡ 突发·行业快讯 -->
-      <section class="flex flex-col glass-panel rounded-2xl overflow-hidden shadow-2xl">
-        <div class="px-4 py-3 bg-[#0c1220]/95 border-b border-slate-800/90 flex items-center justify-between sticky top-0 z-10">
+      <!-- 主屏快讯流 (约占 67% 宽度): ⚡ 行业突发快讯 -->
+      <section class="lg:col-span-8 space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
           <div class="flex items-center space-x-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
-            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-news">⚡ 突发·行业快讯</h2>
+            <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
+            <h2 class="font-bold text-base text-slate-100" id="section-title-news">⚡ 突发·行业快讯</h2>
           </div>
-          <span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/20 font-mono font-semibold" id="count-news">0</span>
+          <span class="text-xs text-slate-400 font-mono" id="news-sub-count">实时追踪</span>
         </div>
-        <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-news">
-          <div class="text-xs text-slate-500 text-center py-20 animate-pulse">正在侦测全球突发动态...</div>
+        <div class="space-y-3.5" id="stream-news">
+          <!-- 动态注入快讯卡片 -->
         </div>
       </section>
 
-      <!-- 栏目 2: 🐦 领袖观点·社交热议 -->
-      <section class="flex flex-col glass-panel rounded-2xl overflow-hidden shadow-2xl">
-        <div class="px-4 py-3 bg-[#0c1220]/95 border-b border-slate-800/90 flex items-center justify-between sticky top-0 z-10">
-          <div class="flex items-center space-x-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
-            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-celebrity">🐦 领袖观点·社交热议</h2>
+      <!-- 侧边雷达流 (约占 33% 宽度): 领袖观点 + 实用工具 + 视频实操 -->
+      <aside class="lg:col-span-4 space-y-6">
+        
+        <!-- 模块 A: 🐦 领袖观点·社交热议 -->
+        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
+          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
+              <h3 class="font-bold text-sm text-slate-100" id="section-title-celebrity">🐦 领袖观点·社交热议</h3>
+            </div>
+            <button onclick="switchTab('celebrity')" class="text-[11px] text-sky-400 hover:underline">更多 →</button>
           </div>
-          <span class="text-xs px-2.5 py-0.5 rounded-full bg-sky-500/10 text-sky-300 border border-sky-500/20 font-mono font-semibold" id="count-celebrity">0</span>
-        </div>
-        <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-celebrity">
-          <div class="text-xs text-slate-500 text-center py-20 animate-pulse">正在捕捉推特领袖交锋...</div>
-        </div>
-      </section>
-
-      <!-- 栏目 3: 🛠️ 场景落地·实用神器 -->
-      <section class="flex flex-col glass-panel rounded-2xl overflow-hidden shadow-2xl">
-        <div class="px-4 py-3 bg-[#0c1220]/95 border-b border-slate-800/90 flex items-center justify-between sticky top-0 z-10">
-          <div class="flex items-center space-x-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
-            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-tools">🛠️ 场景落地·实用神器</h2>
+          <div class="space-y-3" id="stream-celebrity">
+            <!-- 动态注入社交言论卡片 -->
           </div>
-          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-mono font-semibold" id="count-tools">0</span>
         </div>
-        <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-tools">
-          <div class="text-xs text-slate-500 text-center py-20 animate-pulse">正在筛选面向用户的开箱即用工具...</div>
-        </div>
-      </section>
 
-      <!-- 栏目 4: 🎬 爆款演示·实操技巧 -->
-      <section class="flex flex-col glass-panel rounded-2xl overflow-hidden shadow-2xl">
-        <div class="px-4 py-3 bg-[#0c1220]/95 border-b border-slate-800/90 flex items-center justify-between sticky top-0 z-10">
-          <div class="flex items-center space-x-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
-            <h2 class="font-bold text-sm tracking-wide text-slate-100" id="col-title-videos">🎬 爆款演示·实操技巧</h2>
+        <!-- 模块 B: 🛠️ 场景落地·实用神器 -->
+        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
+          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
+              <h3 class="font-bold text-sm text-slate-100" id="section-title-tools">🛠️ 场景落地·实用神器</h3>
+            </div>
+            <button onclick="switchTab('tools')" class="text-[11px] text-emerald-400 hover:underline">全部神器 →</button>
           </div>
-          <span class="text-xs px-2.5 py-0.5 rounded-full bg-rose-500/10 text-rose-300 border border-rose-500/20 font-mono font-semibold" id="count-videos">0</span>
+          <div class="space-y-3" id="stream-tools">
+            <!-- 动态注入落地工具卡片 -->
+          </div>
         </div>
-        <div class="flex-1 p-3.5 space-y-3.5 overflow-y-auto" id="col-videos">
-          <div class="text-xs text-slate-500 text-center py-20 animate-pulse">正在拉取 YouTube 实操视频与爆款 Prompt...</div>
-        </div>
-      </section>
 
+        <!-- 模块 C: 🎬 爆款演示与实战 Prompt -->
+        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
+          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
+              <h3 class="font-bold text-sm text-slate-100" id="section-title-videos">🎬 演示视频·提示词</h3>
+            </div>
+            <button onclick="switchTab('videos')" class="text-[11px] text-rose-400 hover:underline">全屏浏览 →</button>
+          </div>
+          <div class="space-y-3" id="stream-videos">
+            <!-- 动态注入视频与 Prompt -->
+          </div>
+        </div>
+
+      </aside>
     </div>
-  </main>
+
+    <!-- 视图 2: 独立专栏全屏广场模式 (当点击特定 Tab 时激活) -->
+    <div id="view-category" class="hidden space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-900/60 p-4 rounded-2xl border border-slate-800">
+        <div>
+          <h2 class="font-bold text-lg text-slate-100" id="cat-view-title">专栏全景浏览</h2>
+          <p class="text-xs text-slate-400 mt-0.5" id="cat-view-desc">查看该分类下的全部深度收录情报</p>
+        </div>
+        
+        <!-- 工具专用的场景快速筛选过滤器 -->
+        <div id="tools-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterToolScenario('all')" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white">全部</button>
+          <button onclick="filterToolScenario('图像')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎨 修图设计</button>
+          <button onclick="filterToolScenario('编程')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💻 编程提效</button>
+          <button onclick="filterToolScenario('客户端')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💬 AI客户端</button>
+          <button onclick="filterToolScenario('智能体')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🤖 Agent工作流</button>
+        </div>
+      </div>
+
+      <!-- 网格或列表呈现 -->
+      <div id="cat-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- 由 JS 渲染 -->
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 页脚 -->
+  <footer class="border-t border-slate-800/80 bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2">
+    <div class="flex items-center justify-center space-x-4">
+      <span>🤖 AI 资讯雷达 3.0</span>
+      <span>·</span>
+      <span>开源零成本架构</span>
+      <span>·</span>
+      <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="hover:text-indigo-400 underline">GitHub 源码</a>
+    </div>
+    <p>高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。</p>
+  </footer>
 
   <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放) -->
-  <div id="video-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-        <span class="text-xs font-semibold text-slate-300" id="modal-video-title">YouTube 视频播放器</span>
-        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg font-bold px-2 py-1">✕</button>
+        <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI 视频演示</h3>
+        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
       </div>
       <div class="relative w-full aspect-video bg-black">
-        <iframe id="video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="modal-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 
-  <!-- 复制成功的轻量 Toast 提示 -->
-  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2">
+  <!-- 复制成功 Toast 浮条 -->
+  <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
     <span>✅</span>
-    <span id="toast-text">提示词已成功复制到剪贴板！</span>
+    <span id="copy-toast-msg">已复制到剪贴板！</span>
   </div>
 
   <script>
-    const COLUMNS = ['news', 'celebrity', 'tools', 'videos'];
     let currentLang = localStorage.getItem('ai_radar_lang') || 'zh';
+    let currentTab = 'all';
     let cachedData = null;
-    let countdown = 30;
+    let refreshCountdown = 30;
+    let searchQuery = '';
+    let toolScenarioFilter = 'all';
 
     const I18N = {
       zh: {
-        subtitle: "全网突发 · 领袖观点 · 落地神器 · 视频实操 · 提示词神咒",
+        subtitle: "全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库",
         refreshBtn: "刷新",
-        digestTitle: "今日 AI 风向标 (60秒极速通 Top 3)",
-        takeaway: "核心看点",
-        readOriginal: "直达报道",
-        tryTool: "体验神器",
-        viewPost: "查看原帖/推文",
-        playVideo: "视频精讲",
-        copyPrompt: "📋 一键复制提示词",
-        justNow: "刚刚",
-        newsReport: "快讯简报",
-        colTitles: {
-          news: "⚡ 突发·行业快讯",
-          celebrity: "🐦 领袖观点·社交热议",
-          tools: "🛠️ 场景落地·实用神器",
-          videos: "🎬 爆款演示·实操技巧"
-        }
+        digestTitle: "今日 AI 风向标 (60秒必读 Top 3)",
+        tabs: {
+          all: "综合全景",
+          news: "突发·行业快讯",
+          celebrity: "领袖观点·社交",
+          tools: "场景落地·实用神器",
+          videos: "视频演示·咒语"
+        },
+        readMore: "阅读原文 ↗",
+        tryTool: "立即体验 ↗",
+        playVideo: "站内播放 ▶",
+        copyPrompt: "一键复制提示词 📋",
+        copySuccess: "Prompt 咒语已复制到剪贴板！",
+        todayTag: "🔥 今日首发",
+        toolPricingFree: "🟢 开源免费",
+        toolPricingTrial: "🟡 免费试玩"
       },
       en: {
-        subtitle: "Breaking News · Top Voices · Scenario Tools · Video Demos · Prompts",
+        subtitle: "Breaking AI · Leader Voices · Video Guides · Applied Tools · Prompt Bank",
         refreshBtn: "Refresh",
-        digestTitle: "Today's AI Digest (Top 3 in 60s)",
-        takeaway: "Key Insight",
-        readOriginal: "Read Story",
-        tryTool: "Try Tool",
-        viewPost: "View Post",
-        playVideo: "Video Demo",
-        copyPrompt: "📋 Copy Prompt",
-        justNow: "Just now",
-        newsReport: "Flash News",
-        colTitles: {
-          news: "⚡ Breaking News",
-          celebrity: "🐦 Leaders & Voices",
-          tools: "🛠️ Applied AI Tools",
-          videos: "🎬 Videos & Prompts"
-        }
+        digestTitle: "Today's Top 3 Highlights (60s Read)",
+        tabs: {
+          all: "All-in-One",
+          news: "Breaking News",
+          celebrity: "Voices & Social",
+          tools: "Applied Tools",
+          videos: "Videos & Prompts"
+        },
+        readMore: "Read More ↗",
+        tryTool: "Try It Out ↗",
+        playVideo: "Watch Video ▶",
+        copyPrompt: "Copy Prompt 📋",
+        copySuccess: "Prompt copied to clipboard!",
+        todayTag: "🔥 TODAY",
+        toolPricingFree: "🟢 Free & OSS",
+        toolPricingTrial: "🟡 Free Trial"
       }
     };
 
-    // 高精度时间格式化工具：精确时间 + 相对时间 + 是否今日
+    // 精确时间解析与相对时间
     function formatTime(rawTime, lang = 'zh') {
       if (!rawTime) return { display: (lang === 'zh' ? '刚刚更新' : 'Just now'), isToday: true };
       try {
@@ -274,12 +373,13 @@
           relative = lang === 'zh' ? `${days}天前` : `${days}d ago`;
         }
 
-        return { display: `${exactTime} · ${relative}`, isToday };
+        return { display: `${exactTime} · ${relative}`, relative, isToday };
       } catch (e) {
-        return { display: rawTime || '', isToday: false };
+        return { display: rawTime || '', relative: '', isToday: false };
       }
     }
 
+    // 切换语言
     function setLanguage(lang) {
       currentLang = lang;
       localStorage.setItem('ai_radar_lang', lang);
@@ -298,18 +398,82 @@
       document.getElementById('header-subtitle').textContent = t.subtitle;
       document.getElementById('refresh-btn-text').textContent = t.refreshBtn;
       document.getElementById('digest-title').textContent = t.digestTitle;
-
-      COLUMNS.forEach(col => {
-        document.getElementById(`col-title-${col}`).textContent = t.colTitles[col];
-      });
+      document.getElementById('nav-text-all').textContent = t.tabs.all;
+      document.getElementById('nav-text-news').textContent = t.tabs.news;
+      document.getElementById('nav-text-celebrity').textContent = t.tabs.celebrity;
+      document.getElementById('nav-text-tools').textContent = t.tabs.tools;
+      document.getElementById('nav-text-videos').textContent = t.tabs.videos;
 
       if (cachedData) {
-        renderTopThree(cachedData.top_three || []);
-        renderAllColumns(cachedData);
+        renderUI(cachedData);
       }
     }
 
-    // 渲染今日 60s Top 3 走马灯 (双语纯净切换 + 具体时间戳)
+    // 切换 Tab 分类
+    function switchTab(tab) {
+      currentTab = tab;
+      
+      const tabKeys = ['all', 'news', 'celebrity', 'tools', 'videos'];
+      tabKeys.forEach(k => {
+        const btn = document.getElementById(`tab-btn-${k}`);
+        if (k === tab) {
+          btn.className = "tab-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30";
+        } else {
+          btn.className = "tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5";
+        }
+      });
+
+      const viewAll = document.getElementById('view-all');
+      const viewCat = document.getElementById('view-category');
+      const toolsSubfilter = document.getElementById('tools-subfilter');
+
+      if (tab === 'all') {
+        viewAll.classList.remove('hidden');
+        viewCat.classList.add('hidden');
+      } else {
+        viewAll.classList.add('hidden');
+        viewCat.classList.remove('hidden');
+
+        if (tab === 'tools') {
+          toolsSubfilter.classList.remove('hidden');
+        } else {
+          toolsSubfilter.classList.add('hidden');
+        }
+
+        const t = I18N[currentLang];
+        document.getElementById('cat-view-title').textContent = t.tabs[tab];
+        renderCategoryView(tab);
+      }
+
+      // 平滑回滚到内容顶部
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 搜索输入过滤
+    function handleSearch(val) {
+      searchQuery = (val || '').trim().toLowerCase();
+      if (cachedData) {
+        renderUI(cachedData);
+      }
+    }
+
+    // 工具场景筛选
+    function filterToolScenario(scenario) {
+      toolScenarioFilter = scenario;
+      const btns = document.querySelectorAll('.tool-filter-btn');
+      btns.forEach(b => {
+        if ((scenario === 'all' && b.textContent.includes('全部')) || (scenario !== 'all' && b.textContent.includes(scenario))) {
+          b.className = "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white";
+        } else {
+          b.className = "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+        }
+      });
+      if (currentTab === 'tools') {
+        renderCategoryView('tools');
+      }
+    }
+
+    // 渲染今日 60s Top 3 走马灯
     function renderTopThree(topItems) {
       const container = document.getElementById('top-three-container');
       if (!topItems || topItems.length === 0) {
@@ -318,324 +482,425 @@
       }
 
       const isZh = currentLang === 'zh';
-      container.innerHTML = topItems.map(item => {
-        const badge = isZh ? (item.badge_zh || item.badge) : (item.badge_en || item.badge);
+      container.innerHTML = topItems.map((item, idx) => {
+        const badge = isZh ? (item.badge_zh || item.badge || "今日要闻") : (item.badge_en || item.badge || "Top Story");
         const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
         const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary);
         const timeObj = formatTime(item.raw_published_at, currentLang);
-        const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日' : 'TODAY'}</span>` : '';
+        const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日首发' : 'TODAY'}</span>` : '';
 
         return `
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/40 p-3 rounded-xl transition-all flex flex-col space-y-1.5 shadow-sm">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-1.5">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${badge}</span>
-                ${todayBadge}
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2 shadow-sm">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[10px]">
+                <div class="flex items-center space-x-1.5">
+                  <span class="font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-400 border border-amber-500/25">${badge}</span>
+                  ${todayBadge}
+                </div>
+                <span class="text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.display}</span>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
+                ${title}
+              </h3>
+              <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+                ${summary}
+              </p>
             </div>
-            <h3 class="font-semibold text-xs text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-1 leading-snug">
-              ${title}
-            </h3>
-            <p class="text-[11px] text-slate-400 line-clamp-1">
-              ${summary}
-            </p>
+            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/60">
+              <span>信源: ${item.source}</span>
+              <span class="text-indigo-400 group-hover:translate-x-0.5 transition-transform">阅读 →</span>
+            </div>
           </a>
         `;
       }).join('');
     }
 
-    // 渲染四分栏不同风格的资讯卡片 (图文并茂 + 精确时间戳)
-    function renderCard(item) {
+    // ==========================================
+    // 专门卡片渲染：新闻快讯卡片 (清爽排版，杜绝重复假图)
+    // ==========================================
+    function renderNewsCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
       const title = (isZh && item.title_zh) ? item.title_zh : item.title;
       const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const timeStr = timeObj.display;
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日首发' : 'TODAY'}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      // ===================================
-      // 样式 A: 🎬 视频与实战 Prompt 卡片
-      // ===================================
-      if (item.category === 'videos') {
-        // 如果是可一键复制的 Prompt
-        if (item.is_prompt) {
-          return `
-            <article class="glass-card rounded-xl p-3.5 transition-all flex flex-col space-y-2.5 border-purple-500/30 shadow-lg">
-              <div class="flex items-center justify-between">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
-                  💡 实操神咒
-                </span>
-                <div class="flex items-center space-x-1.5">
-                  ${todayBadge}
-                  <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
-                </div>
-              </div>
-              <h3 class="font-bold text-sm text-slate-100">${title}</h3>
-              <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
-                ${item.prompt_content}
-              </div>
-              <button onclick="copyToClipboard('${item.prompt_content.replace(/'/g, "\\'")}')" class="w-full bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-200 text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1">
-                <span>${t.copyPrompt}</span>
-              </button>
-            </article>
-          `;
-        }
+      // 判断是否有真实图片 (若无，采用清爽 Axios 风格排版，绝不放假图)
+      const hasRealImage = item.image_url && !item.image_url.includes('photo-1526374965328') && !item.image_url.includes('photo-1485827404703');
 
-        // 如果是 16:9 YouTube 视频
+      if (hasRealImage) {
         return `
-          <article class="group glass-card rounded-xl p-3 transition-all flex flex-col space-y-2.5 shadow-md">
-            <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-900 border border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
-              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
-              <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors">
-                <div class="w-11 h-11 rounded-full bg-rose-600/90 text-white flex items-center justify-center text-lg pl-0.5 shadow-xl group-hover:scale-110 transition-transform">
-                  ▶
+          <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 group">
+            <div class="w-full sm:w-44 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-950 border border-slate-800">
+              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+            </div>
+            <div class="flex-1 flex flex-col justify-between space-y-2">
+              <div class="space-y-1.5">
+                <div class="flex items-center justify-between flex-wrap gap-1.5 text-xs">
+                  <div class="flex items-center space-x-2">
+                    <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-500/15 text-indigo-300 border border-indigo-500/25">${item.source}</span>
+                    ${todayBadge}
+                  </div>
+                  <span class="text-[11px] text-slate-400 font-mono">🕒 ${timeObj.display}</span>
                 </div>
+                <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-100 group-hover:text-indigo-300 transition-colors leading-snug">
+                  ${title}
+                </a>
+                <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                  ${summary}
+                </p>
               </div>
-              <span class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${t.playVideo}</span>
-            </div>
-
-            <div class="flex items-center justify-between text-[11px]">
-              <span class="text-rose-400 font-medium">${item.source}</span>
-              <div class="flex items-center space-x-1.5">
-                ${todayBadge}
-                <span class="text-slate-400 font-mono text-[10px]">🕒 ${timeStr}</span>
+              <div class="flex items-center justify-between pt-1">
+                <span class="text-[10px] text-slate-500">点击直达报道</span>
+                <a href="${item.url}" target="_blank" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">${t.readMore}</a>
               </div>
-            </div>
-
-            <h3 class="font-semibold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
-              ${title}
-            </h3>
-
-            ${summary ? `
-              <div class="bg-slate-900/80 p-2 rounded text-xs text-slate-300 line-clamp-2">
-                ${summary}
-              </div>
-            ` : ''}
-          </article>
-        `;
-      }
-
-      // ===================================
-      // 样式 B: 🛠️ 场景化落地工具卡片
-      // ===================================
-      if (item.category === 'tools') {
-        const scenario = item.scenario_tag || "🤖 落地神器";
-        const pricing = item.pricing_tag || "🟢 开源免费";
-
-        return `
-          <article class="group glass-card rounded-xl p-3.5 transition-all flex flex-col space-y-2.5 shadow-md">
-            
-            ${item.image_url ? `
-              <div class="w-full h-32 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
-                <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop'">
-              </div>
-            ` : ''}
-
-            <div class="flex items-center justify-between space-x-2">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-                ${scenario}
-              </span>
-              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
-                ${pricing}
-              </span>
-            </div>
-
-            <div class="flex items-center space-x-1.5">
-              ${todayBadge}
-              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
-            </div>
-
-            <h3 class="font-bold text-sm text-slate-100 group-hover:text-emerald-300 transition-colors line-clamp-2 leading-snug">
-              ${title}
-            </h3>
-
-            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
-              💡 ${summary}
-            </p>
-
-            <div class="pt-1 flex items-center justify-between border-t border-slate-800/80">
-              <span class="text-[10px] text-slate-500">${item.source}</span>
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center space-x-1">
-                <span>${t.tryTool}</span>
-                <span>→</span>
-              </a>
             </div>
           </article>
         `;
       }
 
-      // ===================================
-      // 样式 C: 🐦 名人领袖与社交推文卡片
-      // ===================================
-      if (item.category === 'celebrity') {
-        const avatar = item.author_avatar || "https://unavatar.io/x/sama";
-        const handle = item.author_handle || "@sama";
-
-        return `
-          <article class="group glass-card rounded-xl p-3.5 transition-all flex flex-col space-y-2.5 shadow-md border-sky-500/20">
-            <!-- 领袖身份头部 -->
-            <div class="flex items-center space-x-2.5">
-              <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-400/40 object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${item.author}'">
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-100 truncate">${item.author}</span>
-                  <span class="text-sky-400 text-xs">✓</span>
-                </div>
-                <span class="text-[10px] text-slate-400 font-mono block truncate">${handle}</span>
-              </div>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">领袖声音</span>
-            </div>
-
-            <div class="flex items-center justify-between text-[10px]">
-              <div class="flex items-center space-x-1.5">
-                ${todayBadge}
-                <span class="text-slate-400 font-mono">🕒 ${timeStr}</span>
-              </div>
-              <span class="text-sky-400/80 font-medium">${item.source}</span>
-            </div>
-
-            <!-- 嵌入推文/社交配图 (如有) -->
-            ${(item.image_url && !item.image_url.includes('unavatar') && !item.image_url.includes('dicebear')) ? `
-              <div class="w-full h-32 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
-                <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
-              </div>
-            ` : ''}
-
-            <!-- 核心观点引用 -->
-            <blockquote class="bg-sky-950/20 border-l-2 border-sky-400 pl-2.5 py-1 text-xs text-sky-100/95 font-medium leading-relaxed italic">
-              “${title}”
-            </blockquote>
-
-            <!-- 详细解读 -->
-            ${summary ? `
-              <p class="text-[11px] text-slate-300 leading-relaxed">
-                ${summary}
-              </p>
-            ` : ''}
-
-            <div class="pt-1 flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800/80">
-              <span>${item.source}</span>
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline flex items-center space-x-0.5">
-                <span>${t.viewPost}</span>
-                <span>↗</span>
-              </a>
-            </div>
-          </article>
-        `;
-      }
-
-      // ===================================
-      // 样式 D: ⚡ 突发大事件快讯卡片 (图文并茂 + 具体时间戳)
-      // ===================================
+      // 清爽无图版 (排版极佳，重点突出)
       return `
-        <article class="group glass-card rounded-xl p-3.5 transition-all flex flex-col space-y-2.5 shadow-md">
-          
-          ${item.image_url ? `
-            <div class="w-full h-36 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
-              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop'">
+        <article class="glass-card rounded-xl p-4 flex flex-col space-y-2.5 group border-l-4 border-l-indigo-500/80">
+          <div class="flex items-center justify-between flex-wrap gap-1.5 text-xs">
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">${item.source}</span>
+              ${todayBadge}
             </div>
-          ` : ''}
+            <span class="text-[11px] text-slate-400 font-mono">🕒 ${timeObj.display}</span>
+          </div>
+          <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-100 group-hover:text-indigo-300 transition-colors leading-snug">
+            ${title}
+          </a>
+          <p class="text-xs text-slate-300/90 leading-relaxed bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/60">
+            ${summary}
+          </p>
+          <div class="flex items-center justify-between text-xs pt-1">
+            <span class="text-[11px] text-slate-500 font-mono">⚡ 突发快讯</span>
+            <a href="${item.url}" target="_blank" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">${t.readMore}</a>
+          </div>
+        </article>
+      `;
+    }
 
+    // ==========================================
+    // 专门卡片渲染：领袖观点·社交卡片 (X / Reddit 真实发言风格)
+    // ==========================================
+    function renderCelebrityCard(item) {
+      const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
+      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+
+      const avatar = item.author_avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(item.author || 'AI')}`;
+      const handle = item.author_handle ? `<span class="text-slate-500 text-[11px] font-mono">${item.author_handle}</span>` : '';
+
+      return `
+        <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group">
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
-              ${item.source}
-            </span>
+            <div class="flex items-center space-x-2.5">
+              <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-500/40 object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div>
+                <div class="flex items-center space-x-1">
+                  <span class="font-bold text-xs text-slate-100">${item.author || '行业大V'}</span>
+                  <span class="text-sky-400 text-xs" title="认证言论">✓</span>
+                </div>
+                ${handle}
+              </div>
+            </div>
             <div class="flex items-center space-x-1.5">
               ${todayBadge}
-              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
             </div>
           </div>
 
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-bold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
-            ${title}
-          </a>
+          <div class="text-xs text-slate-200 leading-relaxed bg-sky-950/20 p-2.5 rounded-lg border border-sky-900/30">
+            <span class="text-sky-400 font-serif text-sm mr-1">“</span>${title}<span class="text-sky-400 font-serif text-sm ml-1">”</span>
+          </div>
 
           ${summary ? `
-            <div class="bg-amber-950/20 border-l-2 border-amber-400/80 px-2.5 py-1.5 rounded-r text-xs text-amber-100/90 leading-relaxed">
-              <span class="font-bold text-amber-300">💡 ${t.takeaway}：</span>${summary}
-            </div>
+            <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
+              ${summary}
+            </p>
           ` : ''}
 
-          <div class="pt-1 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/80">
-            <span class="text-[10px] text-slate-500">${t.newsReport}</span>
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline flex items-center space-x-0.5 font-medium">
-              <span>${t.readOriginal}</span>
-              <span>↗</span>
+          <div class="flex items-center justify-between pt-1 border-t border-slate-800/60 text-[11px]">
+            <span class="text-sky-400/90 font-medium">平台: ${item.source}</span>
+            <a href="${item.url}" target="_blank" class="text-indigo-400 hover:underline">查看原帖 ↗</a>
+          </div>
+        </article>
+      `;
+    }
+
+    // ==========================================
+    // 专门卡片渲染：落地实用神器卡片 (对标 Toolify / Product Hunt)
+    // ==========================================
+    function renderToolCard(item) {
+      const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
+      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const scenario = item.scenario_tag || "🤖 实用神器";
+      const pricing = item.pricing_tag || "🟢 开源免费";
+
+      // 提取干净产品名
+      let appName = item.title.split(':')[0].replace(/【.*?】/, '').trim();
+      if (appName.length > 20) appName = appName.substring(0, 18);
+      const initialLetter = appName.charAt(0).toUpperCase() || 'A';
+
+      return `
+        <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-3 group border-t-2 border-t-emerald-500/70">
+          <div class="space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-700 flex items-center justify-center font-black text-white text-base shadow-md shadow-emerald-900/40">
+                  ${initialLetter}
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs sm:text-sm text-slate-100 group-hover:text-emerald-300 transition-colors line-clamp-1">
+                    ${appName}
+                  </h4>
+                  <div class="flex items-center space-x-1.5 mt-0.5">
+                    <span class="text-[9px] font-semibold px-1.5 py-0.2 rounded bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">${scenario}</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono">${pricing}</span>
+                  </div>
+                </div>
+              </div>
+              <span class="text-[10px] text-slate-500 font-mono shrink-0">🕒 ${timeObj.relative || '今日'}</span>
+            </div>
+
+            <p class="text-xs text-slate-300 leading-relaxed line-clamp-2">
+              ${title.includes(':') ? title.split(':').slice(1).join(':').trim() : title}
+            </p>
+
+            ${summary ? `
+              <p class="text-[11px] text-slate-400 line-clamp-2">
+                ${summary}
+              </p>
+            ` : ''}
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-slate-800/60 text-xs">
+            <span class="text-[10px] text-slate-500 font-mono">${item.source}</span>
+            <a href="${item.url}" target="_blank" class="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 text-emerald-300 text-xs font-semibold transition-colors flex items-center space-x-1">
+              <span>${t.tryTool}</span>
             </a>
           </div>
         </article>
       `;
     }
 
-    function renderAllColumns(data) {
-      COLUMNS.forEach(col => {
-        const list = (data.grouped && data.grouped[col]) || [];
-        document.getElementById(`count-${col}`).textContent = list.length;
-        const container = document.getElementById(`col-${col}`);
-        if (list.length === 0) {
-          container.innerHTML = `<div class="text-xs text-slate-500 text-center py-20 font-medium">暂无此分类资讯</div>`;
-        } else {
-          container.innerHTML = list.map(item => renderCard(item)).join('');
-        }
-      });
-    }
+    // ==========================================
+    // 专门卡片渲染：视频演示与 Prompt 咒语卡片
+    // ==========================================
+    function renderVideoOrPromptCard(item) {
+      const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
+      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-    // 复制 Prompt 到剪贴板并展示 Toast
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        toast.className = "fixed bottom-6 right-6 z-50 bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl transform translate-y-0 opacity-100 transition-all duration-300 flex items-center space-x-2";
-        setTimeout(() => {
-          toast.className = "fixed bottom-6 right-6 z-50 bg-indigo-600 text-white text-xs font-semibold px-4 py-2.5 rounded-xl shadow-2xl transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2";
-        }, 2500);
-      });
-    }
-
-    // 站内弹窗播放 YouTube 视频
-    function openVideoModal(embedUrl, title) {
-      if (!embedUrl) return;
-      document.getElementById('modal-video-title').textContent = title;
-      document.getElementById('video-iframe').src = embedUrl + "?autoplay=1";
-      document.getElementById('video-modal').classList.remove('hidden');
-    }
-
-    function closeVideoModal() {
-      document.getElementById('video-iframe').src = "";
-      document.getElementById('video-modal').classList.add('hidden');
-    }
-
-    // 数据加载与倒计时
-    async function loadNews(isManual = false) {
-      const indicator = document.getElementById('refresh-indicator');
-      if (isManual) {
-        indicator.innerHTML = `<span class="text-amber-300 animate-spin mr-1">↻</span> 正在拉取...`;
+      // Prompt 咒语卡片
+      if (item.is_prompt) {
+        return `
+          <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 border-purple-500/30 shadow-lg group">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                💡 实战提示词
+              </span>
+              <div class="flex items-center space-x-1.5">
+                ${todayBadge}
+                <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.relative || '今日'}</span>
+              </div>
+            </div>
+            <h4 class="font-bold text-xs sm:text-sm text-slate-100">${title}</h4>
+            <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
+              ${item.prompt_content}
+            </div>
+            <button onclick="copyToClipboard('${item.prompt_content.replace(/'/g, "\\'")}')" class="w-full bg-purple-600/25 hover:bg-purple-600/35 border border-purple-500/40 text-purple-200 text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1">
+              <span>${t.copyPrompt}</span>
+            </button>
+          </article>
+        `;
       }
+
+      // YouTube 演示视频卡片
+      return `
+        <article class="glass-card rounded-xl p-3 flex flex-col space-y-2 group">
+          <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+            <div class="absolute inset-0 bg-black/35 flex items-center justify-center group-hover:bg-black/10 transition-colors">
+              <div class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center text-base pl-0.5 shadow-xl group-hover:scale-110 transition-transform">
+                ▶
+              </div>
+            </div>
+            <span class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${t.playVideo}</span>
+          </div>
+
+          <div class="flex items-center justify-between text-[10px] pt-1">
+            <span class="text-rose-400 font-medium">${item.source}</span>
+            <span class="text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
+          </div>
+
+          <h4 class="font-semibold text-xs text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            ${title}
+          </h4>
+        </article>
+      `;
+    }
+
+    // ==========================================
+    // 渲染 UI 视图总入口
+    // ==========================================
+    function renderUI(data) {
+      if (!data) return;
+
+      // 1. 更新各分类角标数量
+      const newsList = filterList(data.industry_news || []);
+      const celebrityList = filterList(data.leader_opinions || []);
+      const toolsList = filterList(data.applied_tools || []);
+      const videosList = filterList(data.video_prompts || []);
+      const totalCount = newsList.length + celebrityList.length + toolsList.length + videosList.length;
+
+      document.getElementById('badge-count-all').textContent = totalCount;
+      document.getElementById('badge-count-news').textContent = newsList.length;
+      document.getElementById('badge-count-celebrity').textContent = celebrityList.length;
+      document.getElementById('badge-count-tools').textContent = toolsList.length;
+      document.getElementById('badge-count-videos').textContent = videosList.length;
+
+      // 2. 渲染顶部 Top 3
+      renderTopThree(data.top_three || []);
+
+      // 3. 渲染“综合全景”模式
+      const streamNews = document.getElementById('stream-news');
+      streamNews.innerHTML = newsList.length > 0 
+        ? newsList.map(renderNewsCard).join('')
+        : '<div class="text-slate-500 text-xs py-8 text-center">暂无符合条件的快讯</div>';
+
+      const streamCelebrity = document.getElementById('stream-celebrity');
+      streamCelebrity.innerHTML = celebrityList.length > 0
+        ? celebrityList.slice(0, 8).map(renderCelebrityCard).join('')
+        : '<div class="text-slate-500 text-xs py-4 text-center">暂无领袖观点</div>';
+
+      const streamTools = document.getElementById('stream-tools');
+      streamTools.innerHTML = toolsList.length > 0
+        ? toolsList.slice(0, 8).map(renderToolCard).join('')
+        : '<div class="text-slate-500 text-xs py-4 text-center">暂无落地工具</div>';
+
+      const streamVideos = document.getElementById('stream-videos');
+      streamVideos.innerHTML = videosList.length > 0
+        ? videosList.slice(0, 6).map(renderVideoOrPromptCard).join('')
+        : '<div class="text-slate-500 text-xs py-4 text-center">暂无视频提示词</div>';
+
+      // 4. 如果当前处于独立分类模式，重新刷新分类网格
+      if (currentTab !== 'all') {
+        renderCategoryView(currentTab);
+      }
+    }
+
+    // 搜索匹配过滤
+    function filterList(list) {
+      if (!searchQuery) return list;
+      return list.filter(item => {
+        const text = `${item.title || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.source || ''} ${item.author || ''}`.toLowerCase();
+        return text.includes(searchQuery);
+      });
+    }
+
+    // 渲染独立专栏广场视图
+    function renderCategoryView(tab) {
+      if (!cachedData) return;
+      const container = document.getElementById('cat-grid-container');
+
+      if (tab === 'news') {
+        const list = filterList(cachedData.industry_news || []);
+        container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
+        container.innerHTML = list.length > 0 ? list.map(renderNewsCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-2">未找到匹配快讯</div>';
+      } else if (tab === 'celebrity') {
+        const list = filterList(cachedData.leader_opinions || []);
+        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
+        container.innerHTML = list.length > 0 ? list.map(renderCelebrityCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到领袖观点</div>';
+      } else if (tab === 'tools') {
+        let list = filterList(cachedData.applied_tools || []);
+        if (toolScenarioFilter !== 'all') {
+          list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter));
+        }
+        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4";
+        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-4">未找到该分类落地工具</div>';
+      } else if (tab === 'videos') {
+        const list = filterList(cachedData.video_prompts || []);
+        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
+        container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到视频演示</div>';
+      }
+    }
+
+    // 加载数据
+    async function loadNews(isManual = false) {
+      const refreshBtn = document.getElementById('refresh-btn-text');
+      if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
         const res = await fetch(`data/latest_news.json?t=${Date.now()}`);
-        if (!res.ok) throw new Error("无法读取数据");
+        if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
         cachedData = data;
-        renderTopThree(data.top_three || []);
-        renderAllColumns(data);
-        countdown = 30;
+        renderUI(data);
+        refreshCountdown = 30;
       } catch (err) {
-        console.warn("加载新闻数据失败:", err);
+        console.error("加载数据失败:", err);
+      } finally {
+        if (refreshBtn) refreshBtn.textContent = I18N[currentLang].refreshBtn;
       }
     }
 
+    // 复制 Prompt 到剪贴板
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('copy-toast');
+        const toastMsg = document.getElementById('copy-toast-msg');
+        toastMsg.textContent = I18N[currentLang].copySuccess;
+        toast.classList.remove('translate-y-16', 'opacity-0');
+        setTimeout(() => {
+          toast.classList.add('translate-y-16', 'opacity-0');
+        }, 2200);
+      });
+    }
+
+    // 视频弹窗操作
+    function openVideoModal(embedUrl, title) {
+      const modal = document.getElementById('video-modal');
+      const iframe = document.getElementById('modal-video-iframe');
+      const titleEl = document.getElementById('modal-video-title');
+
+      if (!embedUrl) return;
+      iframe.src = embedUrl + "?autoplay=1";
+      titleEl.textContent = title || "AI 视频演示";
+      modal.classList.remove('hidden');
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('video-modal');
+      const iframe = document.getElementById('modal-video-iframe');
+      iframe.src = "";
+      modal.classList.add('hidden');
+    }
+
+    // 倒计时与定时轮询
     setInterval(() => {
-      countdown--;
-      if (countdown <= 0) {
+      refreshCountdown--;
+      const timer = document.getElementById('timer');
+      if (timer) timer.textContent = refreshCountdown;
+      if (refreshCountdown <= 0) {
         loadNews();
-        countdown = 30;
       }
-      const timerEl = document.getElementById('timer');
-      if (timerEl) timerEl.textContent = countdown;
     }, 1000);
 
+    // 初始化
     setLanguage(currentLang);
     loadNews();
   </script>
