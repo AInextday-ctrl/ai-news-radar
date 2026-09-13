@@ -1,0 +1,50 @@
+name: AI Radar - 24x7 Auto Update & Deploy
+
+on:
+  schedule:
+    # 每 30 分钟在云端自动抓取更新一次 (UTC)
+    - cron: '*/30 * * * *'
+  workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Fetcher & AI Summarizer
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: 'gemini-2.5-flash'
+        run: |
+          python main.py
+
+      - name: Commit Updated News Data to Repo
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/ public/data/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 自动同步最新 AI 资讯 [skip ci]" && git push)
+
+      - name: Deploy to Firebase Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: |
+          npx -y firebase-tools@latest deploy --only hosting --token "$FIREBASE_TOKEN"
