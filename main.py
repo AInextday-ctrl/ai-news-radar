@@ -24,12 +24,23 @@ OUTPUT_FILE = os.path.join(DATA_DIR, "latest_news.json")
 PUBLIC_OUTPUT_FILE = os.path.join(PUBLIC_DATA_DIR, "latest_news.json")
 
 
+def parse_time_for_sort(it):
+    raw = it.get("raw_published_at", "")
+    if not raw:
+        return 0
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
+    except Exception:
+        return 0
+
+
 def extract_top_three(items: list) -> list:
     """Extract 3 most impactful highlights across categories for the 60-second top banner."""
     top = []
     
-    # 1. 最重要的大事件/突发
+    # 1. 最重要的大事件/突发 (严格取最新的当天大事件)
     news_items = [i for i in items if i.get("category") == "news" and i.get("image_url")]
+    news_items.sort(key=parse_time_for_sort, reverse=True)
     if news_items:
         it = news_items[0]
         top.append({
@@ -45,8 +56,9 @@ def extract_top_three(items: list) -> list:
             "source": it["source"]
         })
 
-    # 2. 最重磅的领袖声音
+    # 2. 最重磅的领袖声音 (严格取最新的领袖推文/言论)
     celeb_items = [i for i in items if i.get("category") == "celebrity"]
+    celeb_items.sort(key=parse_time_for_sort, reverse=True)
     if celeb_items:
         it = celeb_items[0]
         author = it.get('author', '行业领袖')
@@ -63,8 +75,9 @@ def extract_top_three(items: list) -> list:
             "source": it.get("author_handle") or it["source"]
         })
 
-    # 3. 最值得体验的新工具/新视频
+    # 3. 最值得体验的新工具/新视频 (优先取今日最新爆款)
     app_items = [i for i in items if i.get("category") in ["tools", "videos"] and (i.get("image_url") or i.get("video_id"))]
+    app_items.sort(key=parse_time_for_sort, reverse=True)
     if app_items:
         it = app_items[0]
         top.append({
@@ -88,13 +101,16 @@ def save_news(items: list):
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
     
-    # 按照四大核心分类组织视图
+    # 按照四大核心分类组织视图，并严格按最新发布时间倒序排列
     grouped = {cat_key: [] for cat_key in CATEGORIES}
     for item in items:
         cat = item.get("category", "news")
         if cat not in grouped:
             cat = "news"
         grouped[cat].append(item)
+
+    for cat_key in grouped:
+        grouped[cat_key].sort(key=parse_time_for_sort, reverse=True)
 
     # 提炼今日 60 秒极速风向标 (Top 3)
     top_three = extract_top_three(items)

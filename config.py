@@ -66,7 +66,25 @@ CELEBRITY_PROFILES = {
 
 # 抓取源清单
 SOURCES = {
-    # 1. 行业突发权威媒体 (含高清配图)
+    # 1. 行业突发权威媒体与 24 小时高频突发源 (含高清配图)
+    "google_news_ai": {
+        "name": "Google AI 实时快讯",
+        "url": "https://news.google.com/rss/search?q=AI+OR+OpenAI+OR+Anthropic+OR+ChatGPT+when:1d&hl=en-US&gl=US&ceid=US:en",
+        "default_category": "news",
+        "type": "rss"
+    },
+    "google_news_zh": {
+        "name": "全球前沿中文AI雷达",
+        "url": "https://news.google.com/rss/search?q=人工智能+OR+大模型+OR+OpenAI+OR+DeepSeek+when:1d&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
+        "default_category": "news",
+        "type": "rss"
+    },
+    "techmeme_ai": {
+        "name": "Techmeme 硅谷风向",
+        "url": "https://www.techmeme.com/feed.xml",
+        "default_category": "news",
+        "type": "rss"
+    },
     "arstechnica_ai": {
         "name": "Ars Technica",
         "url": "https://feeds.arstechnica.com/arstechnica/technology-lab",

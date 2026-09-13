@@ -307,31 +307,41 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     """Fetch breaking news and celebrity tweets/posts with rich profiles."""
     items = []
 
-    # 1. 行业顶级资讯（自带高质量实拍与官方封面）
-    ars_items = fetch_rss_channel("arstechnica_ai", max_items=8)
+    # 1. 24小时超高频全球与中文AI突发（确保当天最新鲜的事件占绝对核心）
+    gn_items = fetch_rss_channel("google_news_ai", max_items=15)
+    items.extend(gn_items)
+
+    gn_zh_items = fetch_rss_channel("google_news_zh", max_items=12)
+    items.extend(gn_zh_items)
+
+    tm_items = fetch_rss_channel("techmeme_ai", max_items=8)
+    items.extend(tm_items)
+
+    # 2. 行业顶级资讯（深度报道）
+    ars_items = fetch_rss_channel("arstechnica_ai", max_items=6)
     items.extend(ars_items)
 
-    vb_items = fetch_rss_channel("venturebeat_ai", max_items=8)
+    vb_items = fetch_rss_channel("venturebeat_ai", max_items=6)
     items.extend(vb_items)
 
-    vg_items = fetch_rss_channel("theverge_ai", max_items=8)
+    vg_items = fetch_rss_channel("theverge_ai", max_items=6)
     items.extend(vg_items)
 
-    mit_items = fetch_rss_channel("mit_tech_review", max_items=6)
+    mit_items = fetch_rss_channel("mit_tech_review", max_items=4)
     items.extend(mit_items)
 
-    tc_items = fetch_rss_channel("techcrunch_ai", max_items=8)
+    tc_items = fetch_rss_channel("techcrunch_ai", max_items=6)
     items.extend(tc_items)
 
-    # 2. Hacker News 极客热榜
-    hn_items = fetch_hacker_news(max_items=10)
+    # 3. Hacker News 极客热榜
+    hn_items = fetch_hacker_news(max_items=8)
     items.extend(hn_items)
 
-    # 3. 领袖大V博客与推文热点
+    # 4. 领袖大V博客与推文热点
     altman_items = fetch_rss_channel("sam_altman_blog", max_items=4)
     items.extend(altman_items)
 
-    # 4. Reddit 极客社群真实热议
+    # 5. Reddit 极客社群真实热议
     sing_items = fetch_rss_channel("reddit_singularity", max_items=8)
     items.extend(sing_items)
 
@@ -361,6 +371,12 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         continue
                     url = entry.get("link", "")
                     author = entry.get("author", cfg["name"])
+
+                    # 针对 Google News 优化标题与信源识别
+                    if " - " in title and ("google" in source_key.lower()):
+                        parts = title.rsplit(" - ", 1)
+                        title = parts[0].strip()
+                        author = parts[1].strip()
                     
                     # 标准化时间戳
                     published_raw = entry.get("published") or entry.get("updated", "")
@@ -388,7 +404,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "title": title,
                         "url": url,
                         "image_url": img_url,
-                        "source": cfg["name"],
+                        "source": author if ("google" in source_key.lower()) else cfg["name"],
                         "author": author_display,
                         "author_handle": author_handle,
                         "author_avatar": author_avatar,
@@ -396,7 +412,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "metrics": {},
                         "content_snippet": clean_summary or f"From {cfg['name']}",
                         "category": category,
-                        "tags": [profile["name"] if profile else cfg["name"], "重大动态"]
+                        "tags": [profile["name"] if profile else (author if "google" in source_key.lower() else cfg["name"]), "今日要闻"]
                     })
     except Exception as e:
         print(f"  ❌ [{cfg['name']}] 抓取失败: {e}")
@@ -533,7 +549,7 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     print(f"  ✓ 精选可复制实战提示词: 获取到 {len(prompts)} 条")
     all_items.extend(prompts)
 
-    # 去重
+    # 去重并按时间全局倒序排列（最新发布的绝对排在最前）
     seen_ids = set()
     unique_items = []
     for it in all_items:
@@ -541,7 +557,19 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
             seen_ids.add(it["id"])
             unique_items.append(it)
 
-    print(f"🎉 聚合完成！共收集到 {len(unique_items)} 条高质量多媒体情报。\n")
+    def parse_time_for_sort(it):
+        raw = it.get("raw_published_at", "")
+        if not raw:
+            return 0
+        try:
+            # 标准 ISO 或 RFC 转换
+            return datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
+        except Exception:
+            return 0
+
+    unique_items.sort(key=parse_time_for_sort, reverse=True)
+
+    print(f"🎉 聚合完成！共收集到 {len(unique_items)} 条高质量多媒体情报 (已按最新时间严格倒序)。\n")
     return unique_items
 
 

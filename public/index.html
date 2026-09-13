@@ -240,15 +240,16 @@
       }
     };
 
-    // 高精度时间格式化工具：精确时间 + 相对时间
+    // 高精度时间格式化工具：精确时间 + 相对时间 + 是否今日
     function formatTime(rawTime, lang = 'zh') {
-      if (!rawTime) return lang === 'zh' ? '刚刚更新' : 'Just now';
+      if (!rawTime) return { display: (lang === 'zh' ? '刚刚更新' : 'Just now'), isToday: true };
       try {
         const date = new Date(rawTime);
-        if (isNaN(date.getTime())) return rawTime;
+        if (isNaN(date.getTime())) return { display: rawTime, isToday: false };
 
         const now = new Date();
         const diffSec = Math.max(0, Math.floor((now - date) / 1000));
+        const isToday = diffSec < 86400;
 
         const Y = date.getFullYear();
         const M = String(date.getMonth() + 1).padStart(2, '0');
@@ -273,9 +274,9 @@
           relative = lang === 'zh' ? `${days}天前` : `${days}d ago`;
         }
 
-        return `${exactTime} · ${relative}`;
+        return { display: `${exactTime} · ${relative}`, isToday };
       } catch (e) {
-        return rawTime || '';
+        return { display: rawTime || '', isToday: false };
       }
     }
 
@@ -321,13 +322,17 @@
         const badge = isZh ? (item.badge_zh || item.badge) : (item.badge_en || item.badge);
         const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
         const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary);
-        const timeStr = formatTime(item.raw_published_at, currentLang);
+        const timeObj = formatTime(item.raw_published_at, currentLang);
+        const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日' : 'TODAY'}</span>` : '';
 
         return `
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/40 p-3 rounded-xl transition-all flex flex-col space-y-1.5 shadow-sm">
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${badge}</span>
-              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+              <div class="flex items-center space-x-1.5">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${badge}</span>
+                ${todayBadge}
+              </div>
+              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.display}</span>
             </div>
             <h3 class="font-semibold text-xs text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-1 leading-snug">
               ${title}
@@ -346,7 +351,9 @@
       const isZh = currentLang === 'zh';
       const title = (isZh && item.title_zh) ? item.title_zh : item.title;
       const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
-      const timeStr = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeStr = timeObj.display;
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日首发' : 'TODAY'}</span>` : '';
 
       // ===================================
       // 样式 A: 🎬 视频与实战 Prompt 卡片
@@ -360,7 +367,10 @@
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                   💡 实操神咒
                 </span>
-                <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+                <div class="flex items-center space-x-1.5">
+                  ${todayBadge}
+                  <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+                </div>
               </div>
               <h3 class="font-bold text-sm text-slate-100">${title}</h3>
               <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
@@ -388,7 +398,10 @@
 
             <div class="flex items-center justify-between text-[11px]">
               <span class="text-rose-400 font-medium">${item.source}</span>
-              <span class="text-slate-400 font-mono text-[10px]">🕒 ${timeStr}</span>
+              <div class="flex items-center space-x-1.5">
+                ${todayBadge}
+                <span class="text-slate-400 font-mono text-[10px]">🕒 ${timeStr}</span>
+              </div>
             </div>
 
             <h3 class="font-semibold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
@@ -429,8 +442,9 @@
               </span>
             </div>
 
-            <div class="text-[10px] text-slate-400 font-mono">
-              🕒 ${timeStr}
+            <div class="flex items-center space-x-1.5">
+              ${todayBadge}
+              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
             </div>
 
             <h3 class="font-bold text-sm text-slate-100 group-hover:text-emerald-300 transition-colors line-clamp-2 leading-snug">
@@ -474,9 +488,12 @@
               <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">领袖声音</span>
             </div>
 
-            <!-- 具体时间戳 -->
-            <div class="text-[10px] text-slate-400 font-mono">
-              🕒 ${timeStr}
+            <div class="flex items-center justify-between text-[10px]">
+              <div class="flex items-center space-x-1.5">
+                ${todayBadge}
+                <span class="text-slate-400 font-mono">🕒 ${timeStr}</span>
+              </div>
+              <span class="text-sky-400/80 font-medium">${item.source}</span>
             </div>
 
             <!-- 嵌入推文/社交配图 (如有) -->
@@ -525,7 +542,10 @@
             <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
               ${item.source}
             </span>
-            <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+            <div class="flex items-center space-x-1.5">
+              ${todayBadge}
+              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+            </div>
           </div>
 
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-bold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
