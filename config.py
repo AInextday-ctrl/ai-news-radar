@@ -40,42 +40,38 @@ PRICING_TAGS = {
     "paid": "🔴 商业软件"
 }
 
-# 名人识别库及头像映射
+# 名人识别库及头像映射 (覆盖全球顶尖 AI 领袖)
 CELEBRITY_PROFILES = {
-    "sam altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama"},
-    "altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama"},
-    "elon musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk"},
-    "musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk"},
-    "dario amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic"},
-    "amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic"},
-    "andrej karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy"},
-    "karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy"},
-    "yann lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun"},
-    "lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun"},
-    "jensen huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia"},
-    "huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia"},
-    "demis hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis"},
-    "hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis"},
-    "greg brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb"},
-    "brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb"},
-    "tibo": {"name": "Tibo", "handle": "@tibo_maker", "role": "AI 独立开发者", "avatar": "https://unavatar.io/x/tibo_maker"},
-    "levelsio": {"name": "Pieter Levels", "handle": "@levelsio", "role": "AI 独角兽创作者", "avatar": "https://unavatar.io/x/levelsio"},
-    "ilya sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 联合创始人", "avatar": "https://unavatar.io/x/ilyasut"},
-    "sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 联合创始人", "avatar": "https://unavatar.io/x/ilyasut"}
+    "sam altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama", "platform": "x"},
+    "altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama", "platform": "x"},
+    "elon musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
+    "musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
+    "dario amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
+    "amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
+    "andrej karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
+    "karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
+    "yann lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
+    "lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
+    "jim fan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+    "drjimfan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+    "jensen huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
+    "huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
+    "demis hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
+    "hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
+    "greg brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
+    "brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
+    "ilya sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 创始人", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
+    "sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 创始人", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
+    "francois chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"},
+    "chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"}
 }
 
-# 抓取源清单
+# 抓取源清单：严格剔除地方政务/会议水文，仅聚合全球顶尖 AI 突破与极客一线动态
 SOURCES = {
-    # 1. 行业突发权威媒体与 24 小时高频突发源 (含高清配图)
+    # 1. 全球一线顶级科技媒体突发 (24小时超高频全球榜 + 深度突破)
     "google_news_ai": {
         "name": "Google AI 实时快讯",
         "url": "https://news.google.com/rss/search?q=AI+OR+OpenAI+OR+Anthropic+OR+ChatGPT+when:1d&hl=en-US&gl=US&ceid=US:en",
-        "default_category": "news",
-        "type": "rss"
-    },
-    "google_news_zh": {
-        "name": "全球前沿中文AI雷达",
-        "url": "https://news.google.com/rss/search?q=人工智能+OR+大模型+OR+OpenAI+OR+DeepSeek+when:1d&hl=zh-CN&gl=CN&ceid=CN:zh-Hans",
         "default_category": "news",
         "type": "rss"
     },
@@ -85,9 +81,9 @@ SOURCES = {
         "default_category": "news",
         "type": "rss"
     },
-    "arstechnica_ai": {
-        "name": "Ars Technica",
-        "url": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+    "wired_ai": {
+        "name": "Wired AI",
+        "url": "https://www.wired.com/feed/tag/ai/latest/rss",
         "default_category": "news",
         "type": "rss"
     },
@@ -103,15 +99,21 @@ SOURCES = {
         "default_category": "news",
         "type": "rss"
     },
+    "arstechnica_ai": {
+        "name": "Ars Technica",
+        "url": "https://feeds.arstechnica.com/arstechnica/technology-lab",
+        "default_category": "news",
+        "type": "rss"
+    },
     "mit_tech_review": {
         "name": "MIT Tech Review",
         "url": "https://www.technologyreview.com/feed/",
         "default_category": "news",
         "type": "rss"
     },
-    "techcrunch_ai": {
-        "name": "TechCrunch AI",
-        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+    "the_decoder": {
+        "name": "THE DECODER",
+        "url": "https://the-decoder.com/feed/",
         "default_category": "news",
         "type": "rss"
     },
@@ -122,47 +124,50 @@ SOURCES = {
         "type": "hn_api"
     },
 
-    # 2. 名人领袖与一手社区极客热议
-    "sam_altman_blog": {
-        "name": "Sam Altman 博客",
-        "url": "https://blog.samaltman.com/posts.atom",
-        "default_category": "celebrity",
-        "type": "rss"
-    },
+    # 2. 社交平台专栏：X (Twitter) 与 Reddit 独立监测
     "reddit_singularity": {
         "name": "Reddit r/singularity",
         "url": "https://www.reddit.com/r/singularity/.rss",
         "default_category": "celebrity",
+        "platform": "reddit",
         "type": "rss"
     },
     "reddit_chatgpt": {
         "name": "Reddit r/ChatGPT",
         "url": "https://www.reddit.com/r/ChatGPT/.rss",
         "default_category": "celebrity",
+        "platform": "reddit",
         "type": "rss"
     },
     "reddit_localllama": {
         "name": "Reddit r/LocalLLaMA",
         "url": "https://www.reddit.com/r/LocalLLaMA/.rss",
-        "default_category": "tools",
+        "default_category": "celebrity",
+        "platform": "reddit",
         "type": "rss"
     },
 
-    # 3. 场景化落地实用工具 (拒绝单纯模型)
+    # 3. 场景化落地实用工具 (每日最新免安装可玩应用与高频更新开源神器)
+    "github_tools": {
+        "name": "GitHub AI 应用",
+        "url": "https://api.github.com/search/repositories?q=topic:ai-app+OR+topic:ai-tool+OR+topic:llm-tool+stars:>30&sort=updated&order=desc&per_page=16",
+        "default_category": "tools",
+        "type": "github_tools"
+    },
+    "huggingface_spaces": {
+        "name": "Hugging Face 体验应用",
+        "url": "https://huggingface.co/api/spaces?sort=likes&direction=-1&limit=25",
+        "default_category": "tools",
+        "type": "hf_spaces"
+    },
     "product_hunt": {
-        "name": "Product Hunt AI",
+        "name": "Product Hunt 新品",
         "url": "https://www.producthunt.com/feed",
         "default_category": "tools",
         "type": "ph_feed"
     },
-    "github_tools": {
-        "name": "GitHub AI Tools",
-        "url": "https://api.github.com/search/repositories?q=topic:ai-tools+stars:>100&sort=updated&order=desc&per_page=12",
-        "default_category": "tools",
-        "type": "github_tools"
-    },
 
-    # 4. YouTube 顶级实战精讲
+    # 4. YouTube 高热度实战技巧、经验指南与工作流
     "youtube_channels": [
         {"name": "Fireship", "id": "UCsBjURrPoezykLs9EqgamOA"},
         {"name": "Two Minute Papers", "id": "UCbfYPyITQ-7l4upoX8nvctg"},

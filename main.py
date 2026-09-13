@@ -38,9 +38,24 @@ def extract_top_three(items: list) -> list:
     """Extract 3 most impactful highlights across categories for the 60-second top banner."""
     top = []
     
-    # 1. 最重要的大事件/突发 (严格取最新的当天大事件)
+    # 1. 最重要的大事件/突发 (优先前沿重大模型与技术突破)
     news_items = [i for i in items if i.get("category") == "news"]
-    news_items.sort(key=parse_time_for_sort, reverse=True)
+    
+    def news_weight(it):
+        title = (it.get("title", "") + " " + it.get("title_zh", "")).lower()
+        score = parse_time_for_sort(it)
+        # 降权非纯 AI 科技突破（如纯体育博彩下注等）
+        if any(bad in title for bad in ["betting", "nfl", "sports", "poker", "casino", "gambling"]):
+            score -= 10000000
+        # 优先重大模型/架构/领袖公司突破
+        keywords = ["openai", "deepseek", "anthropic", "claude", "gpt", "gemini", "nvidia", "meta", "superintelligence", "agi", "model", "chip", "reasoning", "breakthrough"]
+        if any(k in title for k in keywords):
+            score += 86400
+        if any(s in it.get("source", "").lower() for s in ["wired", "techmeme", "the verge", "ars technica", "mit", "the decoder"]):
+            score += 43200
+        return score
+
+    news_items.sort(key=news_weight, reverse=True)
     if news_items:
         it = news_items[0]
         top.append({

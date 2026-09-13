@@ -45,22 +45,23 @@ def free_translate_zh(text: str) -> str:
     if clean_text in _TRANSLATION_CACHE:
         return _TRANSLATION_CACHE[clean_text]
 
-    # 1. 优先调用有道高可用免密神经翻译 (毫秒级响应，翻译精准自然)
-    try:
-        url = "https://aidemo.youdao.com/trans"
-        data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
-        with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=5) as client:
-            resp = client.post(url, data=data)
-            if resp.status_code == 200:
-                res_data = resp.json()
-                t_list = res_data.get("translation", [])
-                if t_list and t_list[0]:
-                    zh_res = t_list[0].strip()
-                    if re.search(r'[\u4e00-\u9fa5]', zh_res):
-                        _TRANSLATION_CACHE[clean_text] = zh_res
-                        return zh_res
-    except Exception:
-        pass
+    # 1. 优先调用有道高可用免密神经翻译 (毫秒级响应，带自动重试)
+    for _ in range(2):
+        try:
+            url = "https://aidemo.youdao.com/trans"
+            data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=8) as client:
+                resp = client.post(url, data=data)
+                if resp.status_code == 200:
+                    res_data = resp.json()
+                    t_list = res_data.get("translation", [])
+                    if t_list and t_list[0]:
+                        zh_res = t_list[0].strip()
+                        if re.search(r'[\u4e00-\u9fa5]', zh_res):
+                            _TRANSLATION_CACHE[clean_text] = zh_res
+                            return zh_res
+        except Exception:
+            pass
 
     # 2. 备用 MyMemory 翻译服务
     try:
@@ -251,9 +252,9 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 merged = dict(orig_item)
                 merged["title_zh"] = ai_data.get("title_zh") or free_translate_zh(orig_item["title"])
                 merged["summary_zh"] = ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
-                merged["category"] = ai_data.get("category") or orig_item["default_category"]
+                merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
                 merged["hot_score"] = ai_data.get("hot_score", 3)
-                merged["tags"] = ai_data.get("tags", [orig_item["source"]])
+                merged["tags"] = ai_data.get("tags", orig_item.get("tags") or [orig_item["source"]])
                 results.append(merged)
 
             print(f"  ✓ 已完成 {min(i + batch_size, len(items))}/{len(items)} 条")
@@ -265,9 +266,9 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 title_zh = free_translate_zh(orig_item["title"])
                 fallback["title_zh"] = title_zh
                 fallback["summary_zh"] = generate_smart_fallback_summary(orig_item, title_zh)
-                fallback["category"] = orig_item["default_category"]
+                fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
                 fallback["hot_score"] = 3
-                fallback["tags"] = [orig_item["source"]]
+                fallback["tags"] = orig_item.get("tags") or [orig_item["source"]]
                 results.append(fallback)
 
     return results

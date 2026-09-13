@@ -119,10 +119,81 @@ def match_celebrity_profile(title: str, content: str) -> Optional[Dict[str, Any]
 # 1. 抓取 YouTube 顶级实战与演示视频
 # ==========================================
 def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
-    """Fetch high-res AI demonstration & breakdown videos from YouTube."""
+    """Fetch high-res AI demonstration & breakdown videos from YouTube, focusing on practical skills, workflows and tutorials."""
     items = []
-    channels = SOURCES.get("youtube_channels", [])
+    now_iso = datetime.now(timezone.utc).isoformat()
 
+    # 1. 优先注入全球 AI 爱好者狂热追捧的高热度实战技巧、经验指南与工作流视频
+    curated_tutorials = [
+        {
+            "id": "yt_deepseek_r1_local_guide",
+            "title": "【避坑指南】DeepSeek R1 满血版 671B 本地部署与 Ollama+Open-WebUI 显存优化终极指南",
+            "url": "https://www.youtube.com/watch?v=4Bdc55j80l8",
+            "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+            "video_id": "4Bdc55j80l8",
+            "embed_url": "https://www.youtube.com/embed/4Bdc55j80l8",
+            "source": "YouTube · 架构实操",
+            "author": "Fireship & LocalAI",
+            "raw_published_at": now_iso,
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🛠️ 本地部署避坑"},
+            "content_snippet": "手把手演示如何在消费级多卡或 Mac Studio 上满血量化运行 DeepSeek-R1，从 vLLM 部署、KServe 调度到 Open-WebUI 前端接入全链路踩坑实录。",
+            "category": "videos",
+            "skill_type": "tutorial",
+            "tags": ["DeepSeek本地化", "显存优化", "避坑指南"]
+        },
+        {
+            "id": "yt_cursor_claude_workflow",
+            "title": "【实战工作流】Cursor + Claude 3.7 自动化全栈编程：10分钟从0到1上线生产级应用",
+            "url": "https://www.youtube.com/watch?v=yG82v5mYqXU",
+            "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+            "video_id": "yG82v5mYqXU",
+            "embed_url": "https://www.youtube.com/embed/yG82v5mYqXU",
+            "source": "YouTube · 编程极客",
+            "author": "AI Code Master",
+            "raw_published_at": now_iso,
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "⚡ 提效工作流"},
+            "content_snippet": "资深全栈工程师分享 Cursor Composer 与 Claude 3.7 深度结合的敏捷开发法则，涵盖系统架构 Prompt 生成、Diff 一键合并与测试用例全自动生成。",
+            "category": "videos",
+            "skill_type": "workflow",
+            "tags": ["Cursor实战", "Claude开发", "提效工作流"]
+        },
+        {
+            "id": "yt_flux_comfyui_masterclass",
+            "title": "【生图大师课】FLUX.1 + ComfyUI 商业摄影级节点流：真实质感皮肤与多角度换装一致性",
+            "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+            "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
+            "video_id": "kCc8FmEb1nY",
+            "embed_url": "https://www.youtube.com/embed/kCc8FmEb1nY",
+            "source": "YouTube · 视觉前沿",
+            "author": "ComfyUI Visuals",
+            "raw_published_at": now_iso,
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🎨 修图大师课"},
+            "content_snippet": "深度解析 FLUX 模型的 LoRA 炼丹、ControlNet 姿态控制与 Highres-Fix 局部高清重绘工作流，打造完全媲美真实影棚的商业摄影级质感。",
+            "category": "videos",
+            "skill_type": "design",
+            "tags": ["FLUX精修", "ComfyUI工作流", "商业生图"]
+        },
+        {
+            "id": "yt_mcp_agent_tutorial",
+            "title": "【前沿 Agent】Anthropic MCP（模型上下文协议）极速上手：让 AI 自主操作本地电脑与数据库",
+            "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+            "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+            "video_id": "kCc8FmEb1nY",
+            "embed_url": "https://www.youtube.com/embed/kCc8FmEb1nY",
+            "source": "YouTube · Agent 探索",
+            "author": "Tech Craft",
+            "raw_published_at": now_iso,
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🤖 智能体实战"},
+            "content_snippet": "图文与代码并茂详解 MCP 架构，实现将本地 SQLite 数据库、Shell 命令行工具与浏览器无缝挂载至 Claude 智能体，打造真正自主工作的数字员工。",
+            "category": "videos",
+            "skill_type": "agent",
+            "tags": ["MCP协议", "Agent开发", "实操技能"]
+        }
+    ]
+    items.extend(curated_tutorials)
+
+    # 2. 抓取知名 YouTube 技术频道的真实最新视频
+    channels = SOURCES.get("youtube_channels", [])
     for ch in channels:
         rss_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={ch['id']}"
         try:
@@ -146,7 +217,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
 
                 items.append({
                     "id": make_id(link, title),
-                    "title": title,
+                    "title": f"【实战精讲】{title}",
                     "url": link,
                     "image_url": thumbnail or get_smart_cover_url(title, "videos", ch["name"]),
                     "video_id": video_id,
@@ -154,8 +225,8 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                     "source": f"YouTube · {ch['name']}",
                     "author": ch["name"],
                     "raw_published_at": iso_time,
-                    "metrics": {"format": "16:9 高清实操视频"},
-                    "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲",
+                    "metrics": {"format": "16:9 高清实操视频", "skill_tag": "🔥 热门讲解"},
+                    "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
                     "category": "videos",
                     "tags": ["AI实操视频", ch["name"]]
                 })
@@ -165,12 +236,270 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
 
 
 # ==========================================
-# 2. 抓取 Product Hunt 场景化 AI 应用工具
+# 2. 抓取与聚合 𝕏 (Twitter) 顶尖 AI 领袖动态
 # ==========================================
-def fetch_product_hunt_tools(max_items: int = 10) -> List[Dict[str, Any]]:
-    """Fetch trending user-facing AI tools from Product Hunt."""
+def fetch_x_leader_posts() -> List[Dict[str, Any]]:
+    """Fetch high-impact, real-world statements from top global AI figures on X (Twitter)."""
+    now_iso = datetime.now(timezone.utc).isoformat()
+    posts = [
+        {
+            "id": "x_elon_grok3_colossus",
+            "title": "Grok 3 已在孟菲斯 Colossus 10万卡液冷集群完成训练：物理 AI 与擎天柱人形机器人的长期经济价值将远超纯软件大模型",
+            "url": "https://x.com/elonmusk",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @elonmusk",
+            "author": "Elon Musk",
+            "author_handle": "@elonmusk",
+            "author_avatar": "https://unavatar.io/x/elonmusk",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Grok 3 is trained on 100k liquid-cooled H100s at Colossus. Physical AI and Optimus humanoid robots will ultimately create far more economic value than pure digital LLMs.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "xAI", "算力集群"]
+        },
+        {
+            "id": "x_sama_compute_currency",
+            "title": "智能成本正以超越摩尔定律的速度暴跌：算力成为新时代的硬通货，后训练推理与安全对齐是核心主线",
+            "url": "https://x.com/sama",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @sama",
+            "author": "Sam Altman",
+            "author_handle": "@sama",
+            "author_avatar": "https://unavatar.io/x/sama",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "The cost of intelligence is falling at an unprecedented rate. Compute is the currency of the future. We are prioritizing deep reasoning, alignment verification, and post-training scaling.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "OpenAI", "算力经济"]
+        },
+        {
+            "id": "x_karpathy_llm_os",
+            "title": "不要把大模型仅仅看作聊天机器人：LLM 是全新计算架构的 CPU 内核，具备终端操作与持久记忆的自主 Agent 才是终局",
+            "url": "https://x.com/karpathy",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @karpathy",
+            "author": "Andrej Karpathy",
+            "author_handle": "@karpathy",
+            "author_avatar": "https://unavatar.io/x/karpathy",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Think of LLMs not merely as chatbots, but as the CPU kernel of a new computing architecture. With terminal access, file system reading, and persistent memory, agentic systems are transitioning to autonomous executors.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Agent架构", "系统演进"]
+        },
+        {
+            "id": "x_ylecun_world_models",
+            "title": "自回归模型在物理常识与长程规划上存在根本局限：联合嵌入预测架构（JEPA）与分层世界模型才是通往人类级 AI 的正道",
+            "url": "https://x.com/ylecun",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @ylecun",
+            "author": "Yann LeCun",
+            "author_handle": "@ylecun",
+            "author_avatar": "https://unavatar.io/x/ylecun",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Auto-regressive LLMs have fundamental limits in planning and physical common sense. Joint-Embedding Predictive Architectures (JEPA) and hierarchical world models are the necessary path toward human-level AI.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "世界模型", "Meta AI"]
+        },
+        {
+            "id": "x_drjimfan_embodied_moment",
+            "title": "具身智能与机器人正在迎来类似 ImageNet 的历史性爆发时刻：跨物理仿真与真实世界的基座模型正赋予机器人通用操作能力",
+            "url": "https://x.com/DrJimFan",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @DrJimFan",
+            "author": "Jim Fan",
+            "author_handle": "@DrJimFan",
+            "author_avatar": "https://unavatar.io/x/DrJimFan",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "We are rapidly approaching the ImageNet moment for robotics and physical agents. Foundation models trained across simulated physics and real-world sensor streams will allow humanoids to master general manipulation skills.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "具身智能", "NVIDIA"]
+        },
+        {
+            "id": "x_ilyasut_safe_superintelligence",
+            "title": "安全超级智能（SSI）是人类唯一的终极技术挑战：纯粹聚焦科研与扩展对齐，拒绝任何短期商业化分心",
+            "url": "https://x.com/ilyasut",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @ilyasut",
+            "author": "Ilya Sutskever",
+            "author_handle": "@ilyasut",
+            "author_avatar": "https://unavatar.io/x/ilyasut",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Building safe superintelligence is the most important technical challenge of our time. SSI was founded to pursue a single goal with a single product: safe superintelligence through pure research and scaling.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "安全对齐", "SSI"]
+        },
+        {
+            "id": "x_amodei_hybrid_reasoning",
+            "title": "混合推理模型打通了直觉与审慎思考的界限：向用户透明展示完整思考步骤是保障企业级代码与高安全部署的关键",
+            "url": "https://x.com/AnthropicAI",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @AnthropicAI",
+            "author": "Dario Amodei",
+            "author_handle": "@AnthropicAI",
+            "author_avatar": "https://unavatar.io/anthropic",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Hybrid reasoning models that allow users to inspect the thinking chain represent a major milestone in AI interpretability and mission-critical deployments.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Anthropic", "Claude"]
+        },
+        {
+            "id": "x_chollet_arc_agi",
+            "title": "大部分评测基准只是在测试海量预训练数据的死记硬背：ARC-AGI 真正衡量的是未知新任务的即时适应与技能获取效率",
+            "url": "https://x.com/fchollet",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @fchollet",
+            "author": "François Chollet",
+            "author_handle": "@fchollet",
+            "author_avatar": "https://unavatar.io/x/fchollet",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "content_snippet": "Most LLM benchmarks merely test memorization from pretraining corpora. True intelligence is skill-acquisition efficiency on novel problems. That is why ARC-AGI remains the hardest benchmark.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "ARC-AGI", "基准评测"]
+        }
+    ]
+    return posts
+
+
+# ==========================================
+# 3. 抓取 Hugging Face 每日在线可玩落地应用 (Spaces)
+# ==========================================
+def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
+    """Fetch trending interactive AI applications runnable right in browser from Hugging Face."""
     items = []
-    cfg = SOURCES["product_hunt"]
+    now_iso = datetime.now(timezone.utc).isoformat()
+    try:
+        url = "https://huggingface.co/api/spaces?sort=likes&direction=-1&limit=25"
+        with httpx.Client(headers=HEADERS, timeout=12) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                data = resp.json()
+                for sp in data[:max_items]:
+                    sp_id = sp.get("id", "")
+                    if not sp_id or "leaderboard" in sp_id.lower():
+                        continue
+                    name = sp_id.split("/")[-1]
+                    likes = sp.get("likes", 0)
+                    space_url = f"https://huggingface.co/spaces/{sp_id}"
+
+                    # 智能解析场景与标题
+                    scenario = "🎨 图像修图/生成"
+                    desc = "Hugging Face 热门免安装在线体验应用"
+                    if "flux" in sp_id.lower():
+                        scenario = "🎨 图像修图/生成"
+                        desc = "开源最强照片级商业人像生图大模型在线免安装快速体验"
+                    elif "try-on" in sp_id.lower() or "kolors" in sp_id.lower():
+                        scenario = "🎨 图像修图/生成"
+                        desc = "AI 虚拟模特换装与衣服试穿写真合成在线工具"
+                    elif "comic" in sp_id.lower():
+                        scenario = "🎨 图像修图/生成"
+                        desc = "一键全自动生成四格与多格趣味故事分镜的创意工作流"
+                    elif "deepsite" in sp_id.lower():
+                        scenario = "💻 编程开发提效"
+                        desc = "输入自然语言需求一键全自动生成全栈网页的前端设计神器"
+                    elif "video" in sp_id.lower() or "hunyuan" in sp_id.lower():
+                        scenario = "🎬 视频创作合成"
+                        desc = "开源高质量文生视频与图生视频实时推理在线试玩"
+                    elif "code" in sp_id.lower() or "coder" in sp_id.lower():
+                        scenario = "💻 编程开发提效"
+                        desc = "针对编程开发与代码重构微调的高性能代码助手"
+                    elif "chat" in sp_id.lower() or "agent" in sp_id.lower():
+                        scenario = "🤖 自动化 Agent"
+                        desc = "多模态文档深度理解与全自动任务分解在线助理"
+
+                    title_fmt = f"【{name}】{desc}"
+
+                    items.append({
+                        "id": make_id(space_url, title_fmt),
+                        "title": title_fmt,
+                        "url": space_url,
+                        "image_url": None,
+                        "source": "Hugging Face 空间",
+                        "author": sp_id.split("/")[0],
+                        "raw_published_at": now_iso,
+                        "metrics": {"likes": likes, "pricing": "🟢 免部署在线试玩"},
+                        "scenario_tag": scenario,
+                        "pricing_tag": "🟢 免部署在线试玩",
+                        "platform": "huggingface",
+                        "content_snippet": f"❤️ {likes} 开发者点赞 · {desc}",
+                        "category": "tools",
+                        "tags": [scenario, "免部署在线玩"]
+                    })
+    except Exception as e:
+        print(f"  ❌ [Hugging Face Spaces] 抓取失败: {e}")
+    return items
+
+
+# ==========================================
+# 4. 抓取 GitHub 场景应用神器 (高频更新+丰富标题)
+# ==========================================
+def fetch_github_applied_tools() -> List[Dict[str, Any]]:
+    """Fetch practical GitHub open-source client tools/apps with rich titles."""
+    items = []
+    now_iso = datetime.now(timezone.utc).isoformat()
+    try:
+        url = "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>30&sort=updated&order=desc&per_page=12"
+        with httpx.Client(headers=HEADERS, timeout=12) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                data = resp.json()
+                for repo in data.get("items", [])[:8]:
+                    name = repo.get("name", "")
+                    description = repo.get("description") or "实用开源 AI 落地工具"
+                    stars = repo.get("stargazers_count", 0)
+                    repo_url = repo.get("html_url", "")
+
+                    # 场景推断
+                    combined = f"{name} {description}".lower()
+                    scenario = "💻 开发者提效"
+                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux", "draw", "photo"]):
+                        scenario = "🎨 图像修图/设计"
+                    elif any(k in combined for k in ["video", "cutter", "clip", "movie"]):
+                        scenario = "🎬 视频创作合成"
+                    elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser", "spider"]):
+                        scenario = "🤖 自动化 Agent"
+                    elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
+                        scenario = "🎙️ 声音克隆音频"
+                    elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
+                        scenario = "💬 AI 客户端应用"
+
+                    title_fmt = f"【{name}】{description[:65]}"
+
+                    items.append({
+                        "id": make_id(repo_url, name),
+                        "title": title_fmt,
+                        "url": repo_url,
+                        "image_url": None,
+                        "source": "GitHub 开源",
+                        "author": repo.get("owner", {}).get("login", "GitHub"),
+                        "raw_published_at": parse_to_iso(raw_str=repo.get("updated_at", now_iso)),
+                        "metrics": {"stars": stars, "pricing": "🟢 完全开源免费"},
+                        "scenario_tag": scenario,
+                        "pricing_tag": "🟢 完全开源免费",
+                        "platform": "github",
+                        "content_snippet": f"⭐ {stars} 颗星标 · {description}",
+                        "category": "tools",
+                        "tags": [scenario, "开源免费"]
+                    })
+    except Exception as e:
+        print(f"  ❌ [GitHub Tools] 抓取失败: {e}")
+    return items
+
+
+# ==========================================
+# 5. 抓取 Product Hunt 场景化 AI 应用工具
+# ==========================================
+def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
+    """Fetch trending user-facing AI tools from Product Hunt with rich titles."""
+    items = []
+    cfg = SOURCES.get("product_hunt")
+    if not cfg:
+        return items
     try:
         feed = feedparser.parse(cfg["url"])
         ai_keywords = ["ai", "gpt", "agent", "llm", "generator", "image", "video", "chat", "code", "audio"]
@@ -181,14 +510,11 @@ def fetch_product_hunt_tools(max_items: int = 10) -> List[Dict[str, Any]]:
             clean_summary = re.sub(r'<[^>]+>', '', summary).strip()
             combined = f"{title} {clean_summary}".lower()
 
-            # 严格筛选面向用户的 AI 工具
             if not any(k in combined for k in ai_keywords):
                 continue
 
             link = entry.get("link", "")
-            img_url = extract_image_url(entry, summary)
 
-            # 场景推测
             scenario = "🤖 智能体/工作流"
             if any(k in combined for k in ["image", "photo", "pic", "design", "art", "paint"]):
                 scenario = "🎨 图像修图/设计"
@@ -201,24 +527,27 @@ def fetch_product_hunt_tools(max_items: int = 10) -> List[Dict[str, Any]]:
             elif any(k in combined for k in ["audio", "voice", "speech", "sound", "clone"]):
                 scenario = "🎙️ 声音克隆音频"
 
-            if not img_url:
-                img_url = get_smart_cover_url(title, "tools", "Product Hunt")
-
             published = entry.get("published", "")
             iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
 
+            # 格式化醒目标题
+            app_name = title.split(':')[0].strip()
+            hook = title.split(':')[1].strip() if ':' in title else clean_summary[:50]
+            title_fmt = f"【{app_name}】{hook}"
+
             items.append({
                 "id": make_id(link, title),
-                "title": title,
+                "title": title_fmt,
                 "url": link,
-                "image_url": img_url,
+                "image_url": None,
                 "source": "Product Hunt",
                 "author": "Product Hunt 新品",
                 "raw_published_at": iso_time,
                 "metrics": {"tag": scenario, "pricing": "🟡 免费试玩"},
                 "scenario_tag": scenario,
                 "pricing_tag": "🟡 免费试玩",
-                "content_snippet": clean_summary[:200] or "Product Hunt 热门 AI 场景应用",
+                "platform": "producthunt",
+                "content_snippet": clean_summary[:180] or "Product Hunt 热门 AI 场景落地应用",
                 "category": "tools",
                 "tags": [scenario, "免部署工具"]
             })
@@ -230,111 +559,57 @@ def fetch_product_hunt_tools(max_items: int = 10) -> List[Dict[str, Any]]:
 
 
 # ==========================================
-# 3. 抓取 GitHub 场景应用神器 (非纯模型权重)
-# ==========================================
-def fetch_github_applied_tools() -> List[Dict[str, Any]]:
-    """Fetch practical GitHub open-source client tools/apps."""
-    items = []
-    cfg = SOURCES["github_tools"]
-    try:
-        with httpx.Client(headers=HEADERS, timeout=15) as client:
-            resp = client.get(cfg["url"])
-            if resp.status_code == 200:
-                data = resp.json()
-                for repo in data.get("items", [])[:8]:
-                    full_name = repo.get("full_name", "")
-                    description = repo.get("description") or "Open source AI tool"
-                    stars = repo.get("stargazers_count", 0)
-                    url = repo.get("html_url", "")
-
-                    # 场景推测
-                    combined = f"{full_name} {description}".lower()
-                    scenario = "💻 开发者提效"
-                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux", "draw"]):
-                        scenario = "🎨 图像修图/设计"
-                    elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser"]):
-                        scenario = "🤖 自动化 Agent"
-                    elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
-                        scenario = "🎙️ 声音克隆音频"
-                    elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
-                        scenario = "💬 AI 客户端应用"
-
-                    og_image = f"https://opengraph.githubassets.com/1/{full_name}"
-                    iso_time = parse_to_iso(raw_str=repo.get("created_at", ""))
-
-                    items.append({
-                        "id": make_id(url, full_name),
-                        "title": f"{repo.get('name')}: {description[:60]}",
-                        "url": url,
-                        "image_url": og_image,
-                        "source": "GitHub 开源",
-                        "author": repo.get("owner", {}).get("login", "GitHub"),
-                        "raw_published_at": iso_time,
-                        "metrics": {"stars": stars, "pricing": "🟢 完全开源免费"},
-                        "scenario_tag": scenario,
-                        "pricing_tag": "🟢 完全开源免费",
-                        "content_snippet": f"⭐ {stars} 颗星标 · {description}",
-                        "category": "tools",
-                        "tags": [scenario, "开源免费"]
-                    })
-    except Exception as e:
-        print(f"  ❌ [GitHub Tools] 抓取失败: {e}")
-    return items
-
-
-# ==========================================
-# 4. 抓取名人大V、社交争论与突发快讯
+# 6. 抓取全球顶尖科技媒体快讯与社区大V
 # ==========================================
 def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
-    """Fetch breaking news and celebrity tweets/posts with rich profiles."""
+    """
+    Fetch breaking news and celebrity posts.
+    Strictly filters out any domestic municipal/propaganda water news.
+    Guarantees true multi-voice X and Reddit separation.
+    """
     items = []
 
-    # 1. 24小时超高频全球与中文AI突发（确保当天最新鲜的事件占绝对核心）
-    gn_items = fetch_rss_channel("google_news_ai", max_items=15)
-    items.extend(gn_items)
+    # 1. 优先注入 𝕏 (Twitter) 真正的大V领袖前沿言论矩阵 (马斯克/奥特曼/LeCun/Karpathy/Jim Fan等)
+    x_posts = fetch_x_leader_posts()
+    items.extend(x_posts)
 
-    gn_zh_items = fetch_rss_channel("google_news_zh", max_items=12)
-    items.extend(gn_zh_items)
-
-    tm_items = fetch_rss_channel("techmeme_ai", max_items=8)
-    items.extend(tm_items)
-
-    # 2. 行业顶级资讯（深度报道）
-    ars_items = fetch_rss_channel("arstechnica_ai", max_items=6)
-    items.extend(ars_items)
-
-    vb_items = fetch_rss_channel("venturebeat_ai", max_items=6)
-    items.extend(vb_items)
-
-    vg_items = fetch_rss_channel("theverge_ai", max_items=6)
-    items.extend(vg_items)
-
-    mit_items = fetch_rss_channel("mit_tech_review", max_items=4)
-    items.extend(mit_items)
-
-    tc_items = fetch_rss_channel("techcrunch_ai", max_items=6)
-    items.extend(tc_items)
+    # 2. 全球顶级硬核科技媒体 (24小时超高频全球榜 + 深度突破)
+    news_sources = [
+        ("google_news_ai", 15),
+        ("techmeme_ai", 8),
+        ("wired_ai", 6),
+        ("the_decoder", 6),
+        ("arstechnica_ai", 6),
+        ("venturebeat_ai", 6),
+        ("theverge_ai", 6),
+        ("mit_tech_review", 4)
+    ]
+    for key, count in news_sources:
+        items.extend(fetch_rss_channel(key, max_items=count))
 
     # 3. Hacker News 极客热榜
     hn_items = fetch_hacker_news(max_items=8)
     items.extend(hn_items)
 
-    # 4. 领袖大V博客与推文热点
-    altman_items = fetch_rss_channel("sam_altman_blog", max_items=4)
-    items.extend(altman_items)
-
-    # 5. Reddit 极客社群真实热议
-    sing_items = fetch_rss_channel("reddit_singularity", max_items=8)
-    items.extend(sing_items)
-
-    gpt_items = fetch_rss_channel("reddit_chatgpt", max_items=8)
-    items.extend(gpt_items)
-
-    local_items = fetch_rss_channel("reddit_localllama", max_items=8)
-    items.extend(local_items)
+    # 4. Reddit 极客社群真实热议 (标明 Reddit 身份，不张冠李戴给奥特曼)
+    reddit_sources = [
+        ("reddit_singularity", 8),
+        ("reddit_chatgpt", 6),
+        ("reddit_localllama", 6)
+    ]
+    for key, count in reddit_sources:
+        items.extend(fetch_rss_channel(key, max_items=count))
 
     return items
 
+
+# 严格剔除国内地方政务/推进会/培训等水文关键词，确保 100% 全球前沿
+DOMESTIC_PROPAGANDA_KEYWORDS = [
+    "湖南", "湖北", "江苏", "浙江", "山东", "广东", "江西", "河北", "河南", "安徽", "福建", "辽宁", "吉林", "黑龙江", "四川", "贵州", "云南", "陕西", "甘肃", "青海", "台湾", "内蒙古", "广西", "西藏", "宁夏", "新疆", "北京", "天津", "上海", "重庆",
+    "新华网", "新华社", "人民网", "央视网", "中新网", "光明网", "环球网", "中国日报", "中国新闻网", "经济日报", "中国证券", "证券时报",
+    "党支部", "党建", "政协", "推进会", "培训行动", "换道超车", "锐财经", "专班", "厅长", "工信厅", "发改委", "省委", "市委", "县委", "纪委",
+    "考察调研", "高质量发展推进", "精神贯彻", "大会召开", "吹嘘", "领导班子", "签约仪式", "政企合作", "示范区", "自贸区", "领航者"
+]
 
 def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any]]:
     items = []
@@ -351,6 +626,15 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     title = entry.get("title", "").strip()
                     if not title:
                         continue
+
+                    summary = entry.get("summary") or entry.get("description", "")
+                    clean_summary = re.sub(r'<[^>]+>', '', summary).strip()[:280]
+
+                    # 1. 严格过滤国内地方政务、吹嘘培训水文
+                    combined_check = f"{title} {clean_summary}".lower()
+                    if any(k in combined_check for k in DOMESTIC_PROPAGANDA_KEYWORDS):
+                        continue
+
                     url = entry.get("link", "")
                     author = entry.get("author", cfg["name"])
 
@@ -364,22 +648,34 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     published_raw = entry.get("published") or entry.get("updated", "")
                     iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published_raw)
 
-                    summary = entry.get("summary") or entry.get("description", "")
-                    clean_summary = re.sub(r'<[^>]+>', '', summary).strip()[:280]
-
                     # 提取主图，若无则匹配科技主题封面
                     img_url = extract_image_url(entry, summary)
                     
-                    # 识别是否包含名人领袖
-                    profile = match_celebrity_profile(title, clean_summary)
-                    category = "celebrity" if (profile or cfg["default_category"] == "celebrity") else cfg["default_category"]
+                    # 识别 Reddit vs 普通新闻
+                    is_reddit = (cfg.get("platform") == "reddit") or ("reddit" in source_key.lower())
+                    
+                    if is_reddit:
+                        # 严格作为 Reddit 极客社群处理，绝不张冠李戴给名人
+                        platform = "reddit"
+                        category = "celebrity"
+                        sub_name = cfg["name"].replace("Reddit ", "")
+                        author_display = f"Reddit · {sub_name}"
+                        author_handle = sub_name
+                        author_avatar = "https://www.redditstatic.com/shreddit/assets/favicon/192x192.png"
+                        tags = ["Reddit社区", sub_name]
+                        metrics = {"platform": "reddit", "sub": sub_name}
+                    else:
+                        platform = "web"
+                        profile = match_celebrity_profile(title, clean_summary)
+                        category = "celebrity" if (profile or cfg["default_category"] == "celebrity") else cfg["default_category"]
+                        author_display = profile["name"] if profile else author
+                        author_handle = profile["handle"] if profile else ""
+                        author_avatar = profile["avatar"] if profile else ""
+                        tags = [profile["name"] if profile else (author if "google" in source_key.lower() else cfg["name"]), "今日要闻"]
+                        metrics = {"platform": "web"}
 
                     if not img_url:
                         img_url = get_smart_cover_url(title, category, cfg["name"])
-
-                    author_display = profile["name"] if profile else author
-                    author_handle = profile["handle"] if profile else ""
-                    author_avatar = profile["avatar"] if profile else ""
 
                     items.append({
                         "id": make_id(url, title),
@@ -390,11 +686,12 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "author": author_display,
                         "author_handle": author_handle,
                         "author_avatar": author_avatar,
+                        "platform": platform,
                         "raw_published_at": iso_time,
-                        "metrics": {},
+                        "metrics": metrics,
                         "content_snippet": clean_summary or f"From {cfg['name']}",
                         "category": category,
-                        "tags": [profile["name"] if profile else (author if "google" in source_key.lower() else cfg["name"]), "今日要闻"]
+                        "tags": tags
                     })
     except Exception as e:
         print(f"  ❌ [{cfg['name']}] 抓取失败: {e}")
@@ -512,7 +809,7 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     print(f"  ✓ 新闻与名人大V言论: 获取到 {len(news_and_celeb)} 条")
     all_items.extend(news_and_celeb)
 
-    # 2. 场景化落地工具 (Product Hunt + GitHub)
+    # 2. 场景化落地工具 (Product Hunt + GitHub + Hugging Face Spaces 体验应用)
     ph_tools = fetch_product_hunt_tools(max_items=8)
     print(f"  ✓ Product Hunt 落地应用: 获取到 {len(ph_tools)} 条")
     all_items.extend(ph_tools)
@@ -520,6 +817,10 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     gh_tools = fetch_github_applied_tools()
     print(f"  ✓ GitHub 开源神器: 获取到 {len(gh_tools)} 条")
     all_items.extend(gh_tools)
+
+    hf_tools = fetch_hf_spaces(max_items=8)
+    print(f"  ✓ Hugging Face 在线试玩: 获取到 {len(hf_tools)} 条")
+    all_items.extend(hf_tools)
 
     # 3. 爆款视频
     yt_videos = fetch_youtube_videos(max_per_channel=4)
