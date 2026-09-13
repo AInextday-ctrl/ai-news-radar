@@ -73,17 +73,19 @@ def get_gemini_client():
 def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
     """Generate a clean Chinese takeaway when Gemini is offline."""
     source = item.get("source", "")
-    category = item.get("category", "")
+    category = item.get("category") or item.get("default_category", "news")
     snippet = item.get("content_snippet", "")
     
     if category == "celebrity":
-        return f"聚焦行业领袖最新发声与公开动态。{free_translate_zh(snippet[:60])}"
+        return f"聚焦行业领袖最新发声与公开动态。{free_translate_zh(snippet[:70])}"
     elif category == "tools":
-        return f"热门开源新工具/模型，推荐关注尝试。{free_translate_zh(snippet[:60])}"
-    elif category == "insights":
-        return f"实操经验与前沿研究精选。{free_translate_zh(snippet[:60])}"
+        return f"落地实用新工具，推荐关注尝试。{free_translate_zh(snippet[:70])}"
+    elif category == "videos":
+        if item.get("is_prompt"):
+            return f"即抄即用的高阶实战提示词神咒：{snippet[:80]}"
+        return f"YouTube 爆款 AI 实操演示精讲：{free_translate_zh(snippet[:70])}"
     else:
-        return f"来自 {source} 的最新行业突发报道：{free_translate_zh(snippet[:60])}"
+        return f"来自 {source} 的行业前沿报道：{free_translate_zh(snippet[:70])}"
 
 
 def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> List[Dict[str, Any]]:
@@ -98,12 +100,13 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         processed = []
         for item in items:
             p_item = dict(item)
-            p_item["category"] = item.get("default_category", "news")
+            cat = item.get("category") or item.get("default_category", "news")
+            p_item["category"] = cat
             title_zh = free_translate_zh(item["title"])
             p_item["title_zh"] = title_zh
             p_item["summary_zh"] = generate_smart_fallback_summary(item, title_zh)
-            p_item["hot_score"] = 4 if p_item["category"] == "celebrity" else 3
-            p_item["tags"] = [item["source"], "AI资讯"]
+            p_item["hot_score"] = 4 if cat in ["celebrity", "videos"] else 3
+            p_item["tags"] = item.get("tags") or [item["source"]]
             processed.append(p_item)
         print("  ✓ 中文自动化翻译与看点生成完毕！")
         return processed
