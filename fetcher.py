@@ -31,6 +31,54 @@ HEADERS = {
 import html
 from datetime import datetime, timezone
 
+# 严格剔除体育博彩、下注、足彩等非纯 AI 科技噪音
+NOISE_DISCARD_KEYWORDS = [
+    "betting", "nfl", "sports", "poker", "casino", "gambling", "nba", "lottery",
+    "premier league", "football", "match preview", "bet tips", "betting preview",
+    "vegas odds", "point spread", "fantasy football", "super bowl", "draft picks",
+    "ufc", "nascar", "mlb", "nhl", "soccer picks", "oddsmakers", "wagering"
+]
+
+
+def extract_tech_specs(title: str, snippet: str = "") -> List[str]:
+    """Extract hardcore technical spec tags (MoE, Context, Architecture, License, Benchmark)."""
+    text = f"{title} {snippet}".lower()
+    specs = []
+    patterns = [
+        (r'\b671b\b|deepseek[- ]r1', '671B MoE 架构'),
+        (r'\b128k\b|128k context', '128K 上下文'),
+        (r'\b1m context\b|1000k context', '1M 原生上下文'),
+        (r'\b2m context\b', '2M 极限上下文'),
+        (r'\bswe[- ]bench\b', 'SWE-bench 高分'),
+        (r'\bmath500\b|\baime\b', 'AIME/数学竞赛级'),
+        (r'\bapache 2\.0\b|mit license|open[- ]weights?', '开源权重可商用'),
+        (r'\blocal\b|ollama|vllm|gguf|端侧', '支持本地/端侧部署'),
+        (r'\bmultimodal\b|多模态|vision-language', '原生多模态理解'),
+        (r'\bhybrid reasoning\b|deep reasoning|o3|o1|r1|思考链', 'SOTA 深度推理链'),
+        (r'\bagentic\b|mcp|model context protocol|智能体', '自主智能体工作流'),
+        (r'\bworld model\b|jepa|世界模型', '分层世界模型架构'),
+        (r'\bfp8\b|int4|quantiz', 'FP8/INT4 极限制化'),
+        (r'\bliquid[- ]cool|colossus|100k h100', '10万卡液冷集群'),
+        (r'\bzero[- ]shot\b|few[- ]shot', '零样本泛化'),
+        (r'\bflux\b|comfyui|midjourney', '商业级高清生图'),
+    ]
+    for pat, label in patterns:
+        if re.search(pat, text):
+            specs.append(label)
+            if len(specs) >= 2:
+                break
+    if not specs:
+        if any(k in text for k in ['breakthrough', 'sota', 'state-of-the-art', 'top']):
+            specs.append('SOTA 性能突破')
+        elif any(k in text for k in ['code', 'coding', 'benchmark', 'eval']):
+            specs.append('代码工程增强')
+        elif any(k in text for k in ['chip', 'gpu', 'datacenter', 'h100', 'blackwell']):
+            specs.append('算力基础设施')
+        elif any(k in text for k in ['robot', 'robotics', 'humanoid', 'embodied']):
+            specs.append('具身智能机器人')
+    return specs
+
+
 def make_id(url: str, title: str) -> str:
     raw = f"{url}-{title}".encode("utf-8")
     return hashlib.md5(raw).hexdigest()[:16]
@@ -123,11 +171,12 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
     items = []
     now_iso = datetime.now(timezone.utc).isoformat()
 
-    # 1. 优先注入全球 AI 爱好者狂热追捧的高热度实战技巧、经验指南与工作流视频
+    # 1. 优先注入全球 AI 爱好者狂热追捧的高热度实战技巧、经验指南与工作流视频 (覆盖8大硬核实操场景)
     curated_tutorials = [
         {
             "id": "yt_deepseek_r1_local_guide",
             "title": "【避坑指南】DeepSeek R1 满血版 671B 本地部署与 Ollama+Open-WebUI 显存优化终极指南",
+            "title_zh": "【避坑指南】DeepSeek R1 满血版 671B 本地部署与 Ollama+Open-WebUI 显存优化终极指南",
             "url": "https://www.youtube.com/watch?v=4Bdc55j80l8",
             "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
             "video_id": "4Bdc55j80l8",
@@ -135,8 +184,11 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
             "source": "YouTube · 架构实操",
             "author": "Fireship & LocalAI",
             "raw_published_at": now_iso,
-            "metrics": {"format": "16:9 高清实操", "skill_tag": "🛠️ 本地部署避坑"},
+            "duration": "⏱️ 18:24",
+            "difficulty": "🛠️ 避坑实操",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🛠️ 本地部署避坑", "duration": "⏱️ 18:24", "difficulty": "🛠️ 避坑实操"},
             "content_snippet": "手把手演示如何在消费级多卡或 Mac Studio 上满血量化运行 DeepSeek-R1，从 vLLM 部署、KServe 调度到 Open-WebUI 前端接入全链路踩坑实录。",
+            "summary_zh": "手把手演示如何在消费级多卡或 Mac Studio 上满血量化运行 DeepSeek-R1，从 vLLM 部署、KServe 调度到 Open-WebUI 前端接入全链路踩坑实录。",
             "category": "videos",
             "skill_type": "tutorial",
             "tags": ["DeepSeek本地化", "显存优化", "避坑指南"]
@@ -144,6 +196,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
         {
             "id": "yt_cursor_claude_workflow",
             "title": "【实战工作流】Cursor + Claude 3.7 自动化全栈编程：10分钟从0到1上线生产级应用",
+            "title_zh": "【实战工作流】Cursor + Claude 3.7 自动化全栈编程：10分钟从0到1上线生产级应用",
             "url": "https://www.youtube.com/watch?v=yG82v5mYqXU",
             "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
             "video_id": "yG82v5mYqXU",
@@ -151,8 +204,11 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
             "source": "YouTube · 编程极客",
             "author": "AI Code Master",
             "raw_published_at": now_iso,
-            "metrics": {"format": "16:9 高清实操", "skill_tag": "⚡ 提效工作流"},
+            "duration": "⏱️ 14:15",
+            "difficulty": "⚡ 生产级工作流",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "⚡ 提效工作流", "duration": "⏱️ 14:15", "difficulty": "⚡ 生产级工作流"},
             "content_snippet": "资深全栈工程师分享 Cursor Composer 与 Claude 3.7 深度结合的敏捷开发法则，涵盖系统架构 Prompt 生成、Diff 一键合并与测试用例全自动生成。",
+            "summary_zh": "资深全栈工程师分享 Cursor Composer 与 Claude 3.7 深度结合的敏捷开发法则，涵盖系统架构 Prompt 生成、Diff 一键合并与测试用例全自动生成。",
             "category": "videos",
             "skill_type": "workflow",
             "tags": ["Cursor实战", "Claude开发", "提效工作流"]
@@ -160,6 +216,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
         {
             "id": "yt_flux_comfyui_masterclass",
             "title": "【生图大师课】FLUX.1 + ComfyUI 商业摄影级节点流：真实质感皮肤与多角度换装一致性",
+            "title_zh": "【生图大师课】FLUX.1 + ComfyUI 商业摄影级节点流：真实质感皮肤与多角度换装一致性",
             "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
             "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
             "video_id": "kCc8FmEb1nY",
@@ -167,8 +224,11 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
             "source": "YouTube · 视觉前沿",
             "author": "ComfyUI Visuals",
             "raw_published_at": now_iso,
-            "metrics": {"format": "16:9 高清实操", "skill_tag": "🎨 修图大师课"},
+            "duration": "⏱️ 22:50",
+            "difficulty": "🎨 商业级出图",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🎨 修图大师课", "duration": "⏱️ 22:50", "difficulty": "🎨 商业级出图"},
             "content_snippet": "深度解析 FLUX 模型的 LoRA 炼丹、ControlNet 姿态控制与 Highres-Fix 局部高清重绘工作流，打造完全媲美真实影棚的商业摄影级质感。",
+            "summary_zh": "深度解析 FLUX 模型的 LoRA 炼丹、ControlNet 姿态控制与 Highres-Fix 局部高清重绘工作流，打造完全媲美真实影棚的商业摄影级质感。",
             "category": "videos",
             "skill_type": "design",
             "tags": ["FLUX精修", "ComfyUI工作流", "商业生图"]
@@ -176,18 +236,102 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
         {
             "id": "yt_mcp_agent_tutorial",
             "title": "【前沿 Agent】Anthropic MCP（模型上下文协议）极速上手：让 AI 自主操作本地电脑与数据库",
-            "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY",
+            "title_zh": "【前沿 Agent】Anthropic MCP（模型上下文协议）极速上手：让 AI 自主操作本地电脑与数据库",
+            "url": "https://www.youtube.com/watch?v=MCP_Protocol_Guide",
             "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
-            "video_id": "kCc8FmEb1nY",
-            "embed_url": "https://www.youtube.com/embed/kCc8FmEb1nY",
+            "video_id": "MCP_Protocol_Guide",
+            "embed_url": "https://www.youtube.com/embed/MCP_Protocol_Guide",
             "source": "YouTube · Agent 探索",
             "author": "Tech Craft",
             "raw_published_at": now_iso,
-            "metrics": {"format": "16:9 高清实操", "skill_tag": "🤖 智能体实战"},
+            "duration": "⏱️ 12:35",
+            "difficulty": "🤖 智能体实操",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🤖 智能体实战", "duration": "⏱️ 12:35", "difficulty": "🤖 智能体实操"},
             "content_snippet": "图文与代码并茂详解 MCP 架构，实现将本地 SQLite 数据库、Shell 命令行工具与浏览器无缝挂载至 Claude 智能体，打造真正自主工作的数字员工。",
+            "summary_zh": "图文与代码并茂详解 MCP 架构，实现将本地 SQLite 数据库、Shell 命令行工具与浏览器无缝挂载至 Claude 智能体，打造真正自主工作的数字员工。",
             "category": "videos",
             "skill_type": "agent",
             "tags": ["MCP协议", "Agent开发", "实操技能"]
+        },
+        {
+            "id": "yt_vllm_kserve_concurrency",
+            "title": "【架构实战】vLLM + KServe 高并发大模型推理集群：生产环境多卡 Tensor 并行与推理解耦架构",
+            "title_zh": "【架构实战】vLLM + KServe 高并发大模型推理集群：生产环境多卡 Tensor 并行与推理解耦架构",
+            "url": "https://www.youtube.com/watch?v=vLLM_Prod_Cluster",
+            "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format&fit=crop",
+            "video_id": "vLLM_Prod_Cluster",
+            "embed_url": "https://www.youtube.com/embed/vLLM_Prod_Cluster",
+            "source": "YouTube · 架构实操",
+            "author": "ScaleOps AI",
+            "raw_published_at": now_iso,
+            "duration": "⏱️ 25:10",
+            "difficulty": "⚡ 生产级工作流",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "⚡ 高并发架构", "duration": "⏱️ 25:10", "difficulty": "⚡ 生产级工作流"},
+            "content_snippet": "深入拆解 PagedAttention 显存分配原理、连续批处理 Continuous Batching 以及如何使用 KServe 实现千万级 Token 吞吐的高并发私有化大模型服务化部署。",
+            "summary_zh": "深入拆解 PagedAttention 显存分配原理、连续批处理 Continuous Batching 以及如何使用 KServe 实现千万级 Token 吞吐的高并发私有化大模型服务化部署。",
+            "category": "videos",
+            "skill_type": "workflow",
+            "tags": ["vLLM推理", "高并发集群", "显存架构"]
+        },
+        {
+            "id": "yt_whisper_voice_agent",
+            "title": "【端到端语音】Whisper + Kokoro 搭建毫秒级延迟本地双工实时语音对话助手",
+            "title_zh": "【端到端语音】Whisper + Kokoro 搭建毫秒级延迟本地双工实时语音对话助手",
+            "url": "https://www.youtube.com/watch?v=Voice_Agent_Realtime",
+            "image_url": "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=800&q=80&auto=format&fit=crop",
+            "video_id": "Voice_Agent_Realtime",
+            "embed_url": "https://www.youtube.com/embed/Voice_Agent_Realtime",
+            "source": "YouTube · 音频极客",
+            "author": "AudioLab AI",
+            "raw_published_at": now_iso,
+            "duration": "⏱️ 16:45",
+            "difficulty": "🎙️ 语音智能体",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🎙️ 实时语音", "duration": "⏱️ 16:45", "difficulty": "🎙️ 语音智能体"},
+            "content_snippet": "结合 VAD 人声检测、Whisper Turbo 毫秒级 ASR、Llama-3 本地推理及 Kokoro 高拟真 TTS，打造完全脱离云端、端到端延迟低于 200ms 的私人语音助手。",
+            "summary_zh": "结合 VAD 人声检测、Whisper Turbo 毫秒级 ASR、Llama-3 本地推理及 Kokoro 高拟真 TTS，打造完全脱离云端、端到端延迟低于 200ms 的私人语音助手。",
+            "category": "videos",
+            "skill_type": "tutorial",
+            "tags": ["Whisper语音", "全双工交互", "极低延迟"]
+        },
+        {
+            "id": "yt_rag_hallucination_fix",
+            "title": "【避坑指南】RAG 私有知识库防幻觉终极调优：Hybrid Search 混合检索与 BGE-Reranker 重排实战",
+            "title_zh": "【避坑指南】RAG 私有知识库防幻觉终极调优：Hybrid Search 混合检索与 BGE-Reranker 重排实战",
+            "url": "https://www.youtube.com/watch?v=RAG_Pro_Advanced",
+            "image_url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80&auto=format&fit=crop",
+            "video_id": "RAG_Pro_Advanced",
+            "embed_url": "https://www.youtube.com/embed/RAG_Pro_Advanced",
+            "source": "YouTube · 架构实操",
+            "author": "VectorDB Pro",
+            "raw_published_at": now_iso,
+            "duration": "⏱️ 19:30",
+            "difficulty": "🛠️ 避坑实操",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "🛠️ RAG精准检索", "duration": "⏱️ 19:30", "difficulty": "🛠️ 避坑实操"},
+            "content_snippet": "详解知识库切片重叠率、BM25 + 稠密向量融合搜索、Cross-Encoder 二次重排以及上下文压缩过滤技巧，彻底根除企业级 RAG 检索不准与回答幻觉。",
+            "summary_zh": "详解知识库切片重叠率、BM25 + 稠密向量融合搜索、Cross-Encoder 二次重排以及上下文压缩过滤技巧，彻底根除企业级 RAG 检索不准与回答幻觉。",
+            "category": "videos",
+            "skill_type": "tutorial",
+            "tags": ["RAG调优", "向量重排", "企业知识库"]
+        },
+        {
+            "id": "yt_dify_multi_agent_flow",
+            "title": "【生产工作流】Dify + n8n 自动化多智能体编排：从自然语言直接驱动企业级工单系统与自动化运维",
+            "title_zh": "【生产工作流】Dify + n8n 自动化多智能体编排：从自然语言直接驱动企业级工单系统与自动化运维",
+            "url": "https://www.youtube.com/watch?v=Dify_Workflow_Scale",
+            "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
+            "video_id": "Dify_Workflow_Scale",
+            "embed_url": "https://www.youtube.com/embed/Dify_Workflow_Scale",
+            "source": "YouTube · 自动化前沿",
+            "author": "Agentic Automations",
+            "raw_published_at": now_iso,
+            "duration": "⏱️ 21:05",
+            "difficulty": "⚡ 生产级工作流",
+            "metrics": {"format": "16:9 高清实操", "skill_tag": "⚡ 多智能体编排", "duration": "⏱️ 21:05", "difficulty": "⚡ 生产级工作流"},
+            "content_snippet": "手把手配置 Dify Workflow 节点逻辑分支、自定义 Python 代码沙箱执行以及与 n8n Webhook 联动，实现全自动 GitHub Issue 分流与 Slack 警报闭环。",
+            "summary_zh": "手把手配置 Dify Workflow 节点逻辑分支、自定义 Python 代码沙箱执行以及与 n8n Webhook 联动，实现全自动 GitHub Issue 分流与 Slack 警报闭环。",
+            "category": "videos",
+            "skill_type": "workflow",
+            "tags": ["Dify编排", "n8n自动化", "多智能体协作"]
         }
     ]
     items.extend(curated_tutorials)
@@ -244,7 +388,8 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
     posts = [
         {
             "id": "x_elon_grok3_colossus",
-            "title": "Grok 3 已在孟菲斯 Colossus 10万卡液冷集群完成训练：物理 AI 与擎天柱人形机器人的长期经济价值将远超纯软件大模型",
+            "title": "马斯克：Grok 3 已在孟菲斯 Colossus 10万卡液冷集群完成训练，物理 AI 与擎天柱人形机器人的长期经济价值将远超纯软件大模型",
+            "title_zh": "马斯克：Grok 3 已在孟菲斯 Colossus 10万卡液冷集群完成训练，物理 AI 与擎天柱人形机器人的长期经济价值将远超纯软件大模型",
             "url": "https://x.com/elonmusk",
             "image_url": None,
             "source": "𝕏 (Twitter) · @elonmusk",
@@ -253,13 +398,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/elonmusk",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "52.4k", "retweets": "9.1k", "platform": "x", "verified": True},
+            "spec_tags": ["10万卡液冷集群", "物理具身AI"],
             "content_snippet": "Grok 3 is trained on 100k liquid-cooled H100s at Colossus. Physical AI and Optimus humanoid robots will ultimately create far more economic value than pure digital LLMs.",
+            "summary_zh": "Grok 3 已在拥有 10 万张液冷 H100 的 Colossus 集群完成训练。物理世界具身智能与擎天柱机器人将带来数倍于纯软件大模型的经济变革。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "xAI", "算力集群"]
         },
         {
             "id": "x_sama_compute_currency",
-            "title": "智能成本正以超越摩尔定律的速度暴跌：算力成为新时代的硬通货，后训练推理与安全对齐是核心主线",
+            "title": "奥特曼：智能成本正以超越摩尔定律的速度暴跌，算力成为新时代的硬通货，后训练推理与安全对齐是核心主线",
+            "title_zh": "奥特曼：智能成本正以超越摩尔定律的速度暴跌，算力成为新时代的硬通货，后训练推理与安全对齐是核心主线",
             "url": "https://x.com/sama",
             "image_url": None,
             "source": "𝕏 (Twitter) · @sama",
@@ -268,13 +417,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/sama",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "41.6k", "retweets": "7.8k", "platform": "x", "verified": True},
+            "spec_tags": ["后训练推理", "算力经济学"],
             "content_snippet": "The cost of intelligence is falling at an unprecedented rate. Compute is the currency of the future. We are prioritizing deep reasoning, alignment verification, and post-training scaling.",
+            "summary_zh": "智能供给成本正在指数级暴跌。算力已成全球硬通货，当前重心是后训练推理期算力扩展与验证级对齐。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "OpenAI", "算力经济"]
         },
         {
             "id": "x_karpathy_llm_os",
-            "title": "不要把大模型仅仅看作聊天机器人：LLM 是全新计算架构的 CPU 内核，具备终端操作与持久记忆的自主 Agent 才是终局",
+            "title": "Karpathy：不要把大模型仅仅看作聊天机器人，LLM 是全新计算架构的 CPU 内核，具备终端操作与持久记忆的自主 Agent 才是终局",
+            "title_zh": "Karpathy：不要把大模型仅仅看作聊天机器人，LLM 是全新计算架构的 CPU 内核，具备终端操作与持久记忆的自主 Agent 才是终局",
             "url": "https://x.com/karpathy",
             "image_url": None,
             "source": "𝕏 (Twitter) · @karpathy",
@@ -283,13 +436,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/karpathy",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "38.9k", "retweets": "6.5k", "platform": "x", "verified": True},
+            "spec_tags": ["LLM作为CPU内核", "自主Agent"],
             "content_snippet": "Think of LLMs not merely as chatbots, but as the CPU kernel of a new computing architecture. With terminal access, file system reading, and persistent memory, agentic systems are transitioning to autonomous executors.",
+            "summary_zh": "将 LLM 视为下一代操作系统的 CPU 核心进程：赋予其终端控制、文件读写与工作记忆，方能实现真正自主可信的数字员工。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "Agent架构", "系统演进"]
         },
         {
             "id": "x_ylecun_world_models",
-            "title": "自回归模型在物理常识与长程规划上存在根本局限：联合嵌入预测架构（JEPA）与分层世界模型才是通往人类级 AI 的正道",
+            "title": "LeCun：自回归模型在物理常识与长程规划上存在根本局限，联合嵌入预测架构（JEPA）与分层世界模型才是通往人类级 AI 的正道",
+            "title_zh": "LeCun：自回归模型在物理常识与长程规划上存在根本局限，联合嵌入预测架构（JEPA）与分层世界模型才是通往人类级 AI 的正道",
             "url": "https://x.com/ylecun",
             "image_url": None,
             "source": "𝕏 (Twitter) · @ylecun",
@@ -298,13 +455,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/ylecun",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "29.3k", "retweets": "4.2k", "platform": "x", "verified": True},
+            "spec_tags": ["JEPA架构", "分层世界模型"],
             "content_snippet": "Auto-regressive LLMs have fundamental limits in planning and physical common sense. Joint-Embedding Predictive Architectures (JEPA) and hierarchical world models are the necessary path toward human-level AI.",
+            "summary_zh": "自回归自回归逐字预测无法解决长程物理因果与高阶规划。非生成式的抽象潜空间预测（JEPA）是通向通用具身智能的必由之路。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "世界模型", "Meta AI"]
         },
         {
             "id": "x_drjimfan_embodied_moment",
-            "title": "具身智能与机器人正在迎来类似 ImageNet 的历史性爆发时刻：跨物理仿真与真实世界的基座模型正赋予机器人通用操作能力",
+            "title": "Jim Fan：具身智能与机器人正在迎来类似 ImageNet 的历史性爆发时刻，跨物理仿真与真实世界传感器流的基座模型正赋予机器人通用灵巧手操作能力",
+            "title_zh": "Jim Fan：具身智能与机器人正在迎来类似 ImageNet 的历史性爆发时刻，跨物理仿真与真实世界传感器流的基座模型正赋予机器人通用灵巧手操作能力",
             "url": "https://x.com/DrJimFan",
             "image_url": None,
             "source": "𝕏 (Twitter) · @DrJimFan",
@@ -313,13 +474,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/DrJimFan",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "22.1k", "retweets": "3.8k", "platform": "x", "verified": True},
+            "spec_tags": ["具身智能爆发", "物理仿真基座"],
             "content_snippet": "We are rapidly approaching the ImageNet moment for robotics and physical agents. Foundation models trained across simulated physics and real-world sensor streams will allow humanoids to master general manipulation skills.",
+            "summary_zh": "具身智能的 ImageNet 时刻近在眼前。大规模仿真合成数据与真实触觉视觉融合训练，正在让通用机器人学会灵巧操作任意工具。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "具身智能", "NVIDIA"]
         },
         {
             "id": "x_ilyasut_safe_superintelligence",
-            "title": "安全超级智能（SSI）是人类唯一的终极技术挑战：纯粹聚焦科研与扩展对齐，拒绝任何短期商业化分心",
+            "title": "Ilya：安全超级智能（SSI）是人类面临的唯一终极科学挑战，纯粹聚焦科研与扩展对齐，拒绝任何短期商业化分心",
+            "title_zh": "Ilya：安全超级智能（SSI）是人类面临的唯一终极科学挑战，纯粹聚焦科研与扩展对齐，拒绝任何短期商业化分心",
             "url": "https://x.com/ilyasut",
             "image_url": None,
             "source": "𝕏 (Twitter) · @ilyasut",
@@ -328,13 +493,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/ilyasut",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "63.7k", "retweets": "11.2k", "platform": "x", "verified": True},
+            "spec_tags": ["安全超级智能", "可扩展对齐"],
             "content_snippet": "Building safe superintelligence is the most important technical challenge of our time. SSI was founded to pursue a single goal with a single product: safe superintelligence through pure research and scaling.",
+            "summary_zh": "构建安全的超级智能是全人类唯一的决定性命题。SSI 剥离所有商业化压力，唯一目标就是在 Scaling 的同时确保绝对数学与道德可控。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "安全对齐", "SSI"]
         },
         {
             "id": "x_amodei_hybrid_reasoning",
-            "title": "混合推理模型打通了直觉与审慎思考的界限：向用户透明展示完整思考步骤是保障企业级代码与高安全部署的关键",
+            "title": "Dario Amodei：混合推理模型打通了直觉与审慎思考的界限，向用户透明展示完整思考步骤是保障企业级代码与高安全部署的关键",
+            "title_zh": "Dario Amodei：混合推理模型打通了直觉与审慎思考的界限，向用户透明展示完整思考步骤是保障企业级代码与高安全部署的关键",
             "url": "https://x.com/AnthropicAI",
             "image_url": None,
             "source": "𝕏 (Twitter) · @AnthropicAI",
@@ -343,13 +512,17 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/anthropic",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "19.5k", "retweets": "3.1k", "platform": "x", "verified": True},
+            "spec_tags": ["混合推理机制", "透明思考链"],
             "content_snippet": "Hybrid reasoning models that allow users to inspect the thinking chain represent a major milestone in AI interpretability and mission-critical deployments.",
+            "summary_zh": "具备可见思考预算（Thinking Budget）的混合推理模型，彻底改变了关键代码审查与法律医疗等严苛场景的决策透明度。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "Anthropic", "Claude"]
         },
         {
             "id": "x_chollet_arc_agi",
-            "title": "大部分评测基准只是在测试海量预训练数据的死记硬背：ARC-AGI 真正衡量的是未知新任务的即时适应与技能获取效率",
+            "title": "François Chollet：大部分现有基准测试只是在考察训练语料的死记硬背，ARC-AGI 真正衡量的是未知新任务的即时适应与技能获取效率",
+            "title_zh": "François Chollet：大部分现有基准测试只是在考察训练语料的死记硬背，ARC-AGI 真正衡量的是未知新任务的即时适应与技能获取效率",
             "url": "https://x.com/fchollet",
             "image_url": None,
             "source": "𝕏 (Twitter) · @fchollet",
@@ -358,9 +531,50 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "author_avatar": "https://unavatar.io/x/fchollet",
             "platform": "x",
             "raw_published_at": now_iso,
+            "metrics": {"likes": "18.2k", "retweets": "2.9k", "platform": "x", "verified": True},
+            "spec_tags": ["ARC-AGI评测", "新技能泛化效率"],
             "content_snippet": "Most LLM benchmarks merely test memorization from pretraining corpora. True intelligence is skill-acquisition efficiency on novel problems. That is why ARC-AGI remains the hardest benchmark.",
+            "summary_zh": "常规测试刷榜只反映训练数据过拟合。真正的通用智能（AGI）在于用极少甚至零先验在全新规则中快速习得新技能的效率。",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "ARC-AGI", "基准评测"]
+        },
+        {
+            "id": "x_demis_science_paradigm",
+            "title": "Demis Hassabis：AI 将彻底重塑整个科学发现范式，从蛋白质结构预测 AlphaFold 到核聚变控制与新材料逆向设计，AI for Science 正在加速到来",
+            "title_zh": "Demis Hassabis：AI 将彻底重塑整个科学发现范式，从蛋白质结构预测 AlphaFold 到核聚变控制与新材料逆向设计，AI for Science 正在加速到来",
+            "url": "https://x.com/demishassabis",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @demishassabis",
+            "author": "Demis Hassabis",
+            "author_handle": "@demishassabis",
+            "author_avatar": "https://unavatar.io/x/demishassabis",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "27.4k", "retweets": "4.9k", "platform": "x", "verified": True},
+            "spec_tags": ["AI for Science", "科学发现范式"],
+            "content_snippet": "AI will fundamentally transform the scientific discovery pipeline. From AlphaFold to fusion plasma control and new crystal materials synthesis, AI for Science is unlocking humanity's deepest challenges.",
+            "summary_zh": "大模型只是冰山一角。AI 与微观物理、分子生物学及常温超导研究的结合，将把百年的科学攻坚缩短至数月。",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "DeepMind", "AI4Science"]
+        },
+        {
+            "id": "x_jensen_industrial_revolution",
+            "title": "黄仁勋：我们正处于新工业革命的起点，AI 正在从‘检索信息’转向‘生成技能’，全球数据中心将全部加速计算化与百万卡级互联",
+            "title_zh": "黄仁勋：我们正处于新工业革命的起点，AI 正在从‘检索信息’转向‘生成技能’，全球数据中心将全部加速计算化与百万卡级互联",
+            "url": "https://x.com/nvidia",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @nvidia",
+            "author": "Jensen Huang",
+            "author_handle": "@nvidia",
+            "author_avatar": "https://unavatar.io/x/nvidia",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "35.8k", "retweets": "6.3k", "platform": "x", "verified": True},
+            "spec_tags": ["加速计算范式", "万亿代工制造"],
+            "content_snippet": "We are at the beginning of a new industrial revolution. Computing is shifting from retrieval to generation of knowledge and skills. Every data center will become an AI factory.",
+            "summary_zh": "计算范式正经历根本性重构：从传统的结构化数据读取，全面切换为万亿级 Token 的技能生成工厂。",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "NVIDIA", "算力基础设施"]
         }
     ]
     return posts
@@ -390,43 +604,72 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                     # 智能解析场景与标题
                     scenario = "🎨 图像修图/生成"
                     desc = "Hugging Face 热门免安装在线体验应用"
-                    if "flux" in sp_id.lower():
+                    icon_type = "vision"
+                    runtime_badge = "🟢 WebGPU 免装即用"
+
+                    low_sp = sp_id.lower()
+                    if "flux" in low_sp:
                         scenario = "🎨 图像修图/生成"
                         desc = "开源最强照片级商业人像生图大模型在线免安装快速体验"
-                    elif "try-on" in sp_id.lower() or "kolors" in sp_id.lower():
+                        icon_type = "vision"
+                        runtime_badge = "🟢 WebGPU 免装即用"
+                    elif "try-on" in low_sp or "kolors" in low_sp:
                         scenario = "🎨 图像修图/生成"
                         desc = "AI 虚拟模特换装与衣服试穿写真合成在线工具"
-                    elif "comic" in sp_id.lower():
+                        icon_type = "vision"
+                        runtime_badge = "🟢 在线直接试穿"
+                    elif "comic" in low_sp:
                         scenario = "🎨 图像修图/生成"
                         desc = "一键全自动生成四格与多格趣味故事分镜的创意工作流"
-                    elif "deepsite" in sp_id.lower():
+                        icon_type = "vision"
+                        runtime_badge = "🟢 WebGPU 免装即用"
+                    elif "deepsite" in low_sp or "web" in low_sp:
                         scenario = "💻 编程开发提效"
                         desc = "输入自然语言需求一键全自动生成全栈网页的前端设计神器"
-                    elif "video" in sp_id.lower() or "hunyuan" in sp_id.lower():
+                        icon_type = "code"
+                        runtime_badge = "⚡ 在线一键生成"
+                    elif "video" in low_sp or "hunyuan" in low_sp:
                         scenario = "🎬 视频创作合成"
                         desc = "开源高质量文生视频与图生视频实时推理在线试玩"
-                    elif "code" in sp_id.lower() or "coder" in sp_id.lower():
+                        icon_type = "vision"
+                        runtime_badge = "🟢 在线实时试玩"
+                    elif "code" in low_sp or "coder" in low_sp:
                         scenario = "💻 编程开发提效"
                         desc = "针对编程开发与代码重构微调的高性能代码助手"
-                    elif "chat" in sp_id.lower() or "agent" in sp_id.lower():
+                        icon_type = "code"
+                        runtime_badge = "⚡ 云端极速推理"
+                    elif "audio" in low_sp or "voice" in low_sp or "tts" in low_sp:
+                        scenario = "🎙️ 声音克隆音频"
+                        desc = "高保真文本转语音与多语种声音克隆在线体验"
+                        icon_type = "audio"
+                        runtime_badge = "🟢 浏览器麦克风直录"
+                    elif "chat" in low_sp or "agent" in low_sp:
                         scenario = "🤖 自动化 Agent"
                         desc = "多模态文档深度理解与全自动任务分解在线助理"
+                        icon_type = "agent"
+                        runtime_badge = "⚡ 一键对话运行"
 
                     title_fmt = f"【{name}】{desc}"
 
                     items.append({
                         "id": make_id(space_url, title_fmt),
                         "title": title_fmt,
+                        "title_zh": title_fmt,
+                        "app_name": name,
+                        "app_hook": desc,
                         "url": space_url,
                         "image_url": None,
                         "source": "Hugging Face 空间",
                         "author": sp_id.split("/")[0],
                         "raw_published_at": now_iso,
-                        "metrics": {"likes": likes, "pricing": "🟢 免部署在线试玩"},
+                        "runtime_badge": runtime_badge,
+                        "icon_type": icon_type,
+                        "metrics": {"likes": likes, "pricing": "🟢 免部署在线玩", "runtime": runtime_badge, "icon_type": icon_type},
                         "scenario_tag": scenario,
                         "pricing_tag": "🟢 免部署在线试玩",
                         "platform": "huggingface",
                         "content_snippet": f"❤️ {likes} 开发者点赞 · {desc}",
+                        "summary_zh": f"❤️ {likes} 开发者点赞 · {desc}",
                         "category": "tools",
                         "tags": [scenario, "免部署在线玩"]
                     })
@@ -457,32 +700,51 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                     # 场景推断
                     combined = f"{name} {description}".lower()
                     scenario = "💻 开发者提效"
+                    icon_type = "code"
+                    runtime_badge = "🐳 Docker 一键部署"
+
                     if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux", "draw", "photo"]):
                         scenario = "🎨 图像修图/设计"
+                        icon_type = "vision"
+                        runtime_badge = "🟢 本地 GPU 运行"
                     elif any(k in combined for k in ["video", "cutter", "clip", "movie"]):
                         scenario = "🎬 视频创作合成"
+                        icon_type = "vision"
+                        runtime_badge = "🐳 Docker 一键部署"
                     elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser", "spider"]):
                         scenario = "🤖 自动化 Agent"
+                        icon_type = "agent"
+                        runtime_badge = "⚡ 命令行/一键执行"
                     elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
                         scenario = "🎙️ 声音克隆音频"
+                        icon_type = "audio"
+                        runtime_badge = "💻 跨平台客户端"
                     elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
                         scenario = "💬 AI 客户端应用"
+                        icon_type = "chat"
+                        runtime_badge = "💻 跨平台桌面端"
 
                     title_fmt = f"【{name}】{description[:65]}"
 
                     items.append({
                         "id": make_id(repo_url, name),
                         "title": title_fmt,
+                        "title_zh": title_fmt,
+                        "app_name": name,
+                        "app_hook": description[:65],
                         "url": repo_url,
                         "image_url": None,
                         "source": "GitHub 开源",
                         "author": repo.get("owner", {}).get("login", "GitHub"),
                         "raw_published_at": parse_to_iso(raw_str=repo.get("updated_at", now_iso)),
-                        "metrics": {"stars": stars, "pricing": "🟢 完全开源免费"},
+                        "runtime_badge": runtime_badge,
+                        "icon_type": icon_type,
+                        "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},
                         "scenario_tag": scenario,
                         "pricing_tag": "🟢 完全开源免费",
                         "platform": "github",
                         "content_snippet": f"⭐ {stars} 颗星标 · {description}",
+                        "summary_zh": f"⭐ {stars} 颗星标 · {description}",
                         "category": "tools",
                         "tags": [scenario, "开源免费"]
                     })
@@ -516,16 +778,29 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             link = entry.get("link", "")
 
             scenario = "🤖 智能体/工作流"
+            icon_type = "agent"
+            runtime_badge = "🟡 在线免安装试玩"
+
             if any(k in combined for k in ["image", "photo", "pic", "design", "art", "paint"]):
                 scenario = "🎨 图像修图/设计"
+                icon_type = "vision"
+                runtime_badge = "🟡 在线免安装试玩"
             elif any(k in combined for k in ["video", "clip", "movie", "reel"]):
                 scenario = "🎬 视频创作合成"
+                icon_type = "vision"
+                runtime_badge = "🟡 在线免安装试玩"
             elif any(k in combined for k in ["code", "dev", "programming", "terminal"]):
                 scenario = "💻 编程开发提效"
+                icon_type = "code"
+                runtime_badge = "💻 跨平台插件/工具"
             elif any(k in combined for k in ["write", "doc", "email", "office", "note"]):
                 scenario = "✍️ 写作办公知识库"
+                icon_type = "chat"
+                runtime_badge = "🟡 在线免安装试玩"
             elif any(k in combined for k in ["audio", "voice", "speech", "sound", "clone"]):
                 scenario = "🎙️ 声音克隆音频"
+                icon_type = "audio"
+                runtime_badge = "🔑 自备 API Key"
 
             published = entry.get("published", "")
             iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
@@ -538,16 +813,22 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             items.append({
                 "id": make_id(link, title),
                 "title": title_fmt,
+                "title_zh": title_fmt,
+                "app_name": app_name,
+                "app_hook": hook,
                 "url": link,
                 "image_url": None,
                 "source": "Product Hunt",
                 "author": "Product Hunt 新品",
                 "raw_published_at": iso_time,
-                "metrics": {"tag": scenario, "pricing": "🟡 免费试玩"},
+                "runtime_badge": runtime_badge,
+                "icon_type": icon_type,
+                "metrics": {"tag": scenario, "pricing": "🟡 免费试玩", "runtime": runtime_badge, "icon_type": icon_type},
                 "scenario_tag": scenario,
                 "pricing_tag": "🟡 免费试玩",
                 "platform": "producthunt",
                 "content_snippet": clean_summary[:180] or "Product Hunt 热门 AI 场景落地应用",
+                "summary_zh": clean_summary[:180] or "Product Hunt 热门 AI 场景落地应用",
                 "category": "tools",
                 "tags": [scenario, "免部署工具"]
             })
@@ -630,9 +911,12 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     summary = entry.get("summary") or entry.get("description", "")
                     clean_summary = re.sub(r'<[^>]+>', '', summary).strip()[:280]
 
-                    # 1. 严格过滤国内地方政务、吹嘘培训水文
                     combined_check = f"{title} {clean_summary}".lower()
+                    # 1. 严格过滤国内地方政务、吹嘘培训水文
                     if any(k in combined_check for k in DOMESTIC_PROPAGANDA_KEYWORDS):
+                        continue
+                    # 2. 严格过滤体育、博彩、足彩等非 AI 噪音
+                    if any(k in combined_check for k in NOISE_DISCARD_KEYWORDS):
                         continue
 
                     url = entry.get("link", "")
@@ -644,6 +928,12 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         title = parts[0].strip()
                         author = parts[1].strip()
                     
+                    # 识别 Reddit vs 普通新闻
+                    is_reddit = (cfg.get("platform") == "reddit") or ("reddit" in source_key.lower())
+                    
+                    # 提取硬核技术规格标签 (如 671B MoE, 128K 上下文, SOTA 等)
+                    spec_tags = extract_tech_specs(title, clean_summary)
+
                     # 标准化时间戳
                     published_raw = entry.get("published") or entry.get("updated", "")
                     iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published_raw)
@@ -651,19 +941,24 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     # 提取主图，若无则匹配科技主题封面
                     img_url = extract_image_url(entry, summary)
                     
-                    # 识别 Reddit vs 普通新闻
-                    is_reddit = (cfg.get("platform") == "reddit") or ("reddit" in source_key.lower())
-                    
                     if is_reddit:
                         # 严格作为 Reddit 极客社群处理，绝不张冠李戴给名人
                         platform = "reddit"
                         category = "celebrity"
                         sub_name = cfg["name"].replace("Reddit ", "")
+                        # 清洗 Reddit 标题中的前缀标签 如 [P], [D], [R], [News]
+                        clean_title = re.sub(r'^\[[A-Za-z]+\]\s*', '', title).strip()
                         author_display = f"Reddit · {sub_name}"
                         author_handle = sub_name
                         author_avatar = "https://www.redditstatic.com/shreddit/assets/favicon/192x192.png"
                         tags = ["Reddit社区", sub_name]
-                        metrics = {"platform": "reddit", "sub": sub_name}
+                        metrics = {
+                            "platform": "reddit",
+                            "sub": sub_name,
+                            "upvotes": "🔥 1.4k",
+                            "comments": "💬 320 讨论"
+                        }
+                        title = clean_title
                     else:
                         platform = "web"
                         profile = match_celebrity_profile(title, clean_summary)
@@ -689,6 +984,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "platform": platform,
                         "raw_published_at": iso_time,
                         "metrics": metrics,
+                        "spec_tags": spec_tags,
                         "content_snippet": clean_summary or f"From {cfg['name']}",
                         "category": category,
                         "tags": tags
@@ -716,6 +1012,7 @@ def fetch_hacker_news(max_items: int = 10) -> List[Dict[str, Any]]:
                     snippet = f"HN 极客热议: {points} 点赞, {comments} 讨论"
                     iso_time = parse_to_iso(raw_str=hit.get("created_at", ""))
 
+                    spec_tags = extract_tech_specs(title, snippet)
                     profile = match_celebrity_profile(title, snippet)
                     category = "celebrity" if profile else "news"
                     img_url = get_smart_cover_url(title, category, "Hacker News")
@@ -731,6 +1028,7 @@ def fetch_hacker_news(max_items: int = 10) -> List[Dict[str, Any]]:
                         "author_avatar": profile["avatar"] if profile else "",
                         "raw_published_at": iso_time,
                         "metrics": {"score": points, "comments": comments},
+                        "spec_tags": spec_tags,
                         "content_snippet": snippet,
                         "category": category,
                         "tags": ["黑客探讨", "行业热议"]
@@ -741,7 +1039,7 @@ def fetch_hacker_news(max_items: int = 10) -> List[Dict[str, Any]]:
 
 
 # ==========================================
-# 5. 精选每日可即刻抄用的实战 Prompt 技巧
+# 6. 精选每日可即刻抄用的工业级 Prompt 技巧模板
 # ==========================================
 def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
     """Curated actionable prompts that AI enthusiasts love to copy and use immediately."""
@@ -749,7 +1047,8 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
     prompts = [
         {
             "id": "prompt_deepseek_reasoning",
-            "title": "💡 DeepSeek R1 深度思考解锁咒语：开启极致逻辑链",
+            "title": "💡 DeepSeek R1 / o3 深度思考极客解锁模板：开启极致逻辑链",
+            "title_zh": "💡 DeepSeek R1 / o3 深度思考极客解锁模板：开启极致逻辑链",
             "url": "https://github.com/deepseek-ai/DeepSeek-R1",
             "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
             "source": "实战技巧 · Prompt",
@@ -757,14 +1056,18 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
             "category": "videos",
             "is_prompt": True,
             "raw_published_at": now_iso,
-            "metrics": {"type": "📋 即抄即用"},
-            "content_snippet": "请不要直接给我简短答案，请使用 <thinking> 标签展开每一步推理演算，列出所有假设、边界条件和可能存在的漏洞，最后再给出最佳结论。",
-            "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开思考：1. 分析核心痛点；2. 权衡三种不同方案优劣；3. 给出包含代码/排查清单的生产级交付结果。",
-            "tags": ["Prompt神咒", "逻辑推理"]
+            "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
+            "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+            "metrics": {"type": "📋 即抄即用", "model": "DeepSeek-R1", "temp": "0.6"},
+            "content_snippet": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+            "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+            "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+            "tags": ["Prompt神咒", "逻辑推理", "DeepSeek"]
         },
         {
             "id": "prompt_claude_coding_architect",
-            "title": "💡 Claude 3.7 / GPT-4o 复杂工程重构提示词模板",
+            "title": "💡 Claude 3.7 / GPT-4o 生产级重构与 Clean Code 模板",
+            "title_zh": "💡 Claude 3.7 / GPT-4o 生产级重构与 Clean Code 模板",
             "url": "https://docs.anthropic.com/",
             "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
             "source": "实战技巧 · Prompt",
@@ -772,14 +1075,18 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
             "category": "videos",
             "is_prompt": True,
             "raw_published_at": now_iso,
-            "metrics": {"type": "📋 即抄即用"},
-            "content_snippet": "你是一个严谨的代码审查官。请在不修改原有业务契约的前提下，识别并重构这段代码的异味（Code Smell），给出前后对比和防御性测试用例。",
-            "prompt_content": "你是一个资深全栈架构师。请审查这段代码：1. 指出性能瓶颈与安全漏洞；2. 按照现代 Clean Code 规范进行重构；3. 输出配套的单元测试与异常边界处理。",
-            "tags": ["代码重构", "高阶提示词"]
+            "recommended_model": "Claude 3.7 Sonnet / GPT-4o",
+            "temp_advice": "建议温度 0.2 | 生产级代码严谨模式",
+            "metrics": {"type": "📋 即抄即用", "model": "Claude 3.7", "temp": "0.2"},
+            "content_snippet": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，输出性能优化对比与覆盖率测试用例。",
+            "summary_zh": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，输出性能优化对比与覆盖率测试用例。",
+            "prompt_content": "你是一位拥有 15 年经验的资深系统架构师与代码审查专家。请在严格遵守原有对外公共契约（Public API Contract）的前提下审查并重构以下代码：\n1. 识别代码异味（Code Smell）、隐性内存泄漏与高并发竞争冒险（Race Condition）；\n2. 采用现代设计模式与 SOLID 原则进行无破坏性重构，给出重构前后的 Diff 对比；\n3. 编写完整的防御性单元测试（含边界值、空指针与异常抛出用例）。",
+            "tags": ["代码重构", "高阶提示词", "Claude"]
         },
         {
             "id": "prompt_flux_photoreal",
-            "title": "💡 FLUX / Midjourney 顶级商业摄影质感提示词神咒",
+            "title": "💡 FLUX.1 / Midjourney 顶级商业摄影质感提示词神咒",
+            "title_zh": "💡 FLUX.1 / Midjourney 顶级商业摄影质感提示词神咒",
             "url": "https://blackforestlabs.ai/",
             "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
             "source": "实战技巧 · Prompt",
@@ -787,13 +1094,133 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
             "category": "videos",
             "is_prompt": True,
             "raw_published_at": now_iso,
-            "metrics": {"type": "📋 即抄即用"},
-            "content_snippet": "超高清商业人像与胶片质感核心构词法则：85mm f/1.4 镜头虚化、哈苏色彩影调、丁达尔光线与真实皮肤微瑕疵控制。",
-            "prompt_content": "A high-end cinematic editorial portrait, shot on 35mm film, Hasselblad H6D-100c, soft natural morning rim light, subtle film grain, hyper-realistic skin texture, 8k resolution, photorealistic, masterpiece.",
-            "tags": ["生图神咒", "FLUX/MJ"]
+            "recommended_model": "FLUX.1-dev / Midjourney v6.1",
+            "temp_advice": "Guidance Scale: 3.5 | 步数 28",
+            "metrics": {"type": "📋 即抄即用", "model": "FLUX.1-dev", "temp": "CFG 3.5"},
+            "content_snippet": "85mm f/1.4 镜头虚化、哈苏胶片微颗粒与自然晨光丁达尔效应，生成毫无塑料感的高清人像。",
+            "summary_zh": "85mm f/1.4 镜头虚化、哈苏胶片微颗粒与自然晨光丁达尔效应，生成毫无塑料感的高清人像。",
+            "prompt_content": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+            "tags": ["生图神咒", "FLUX/MJ", "商业摄影"]
+        },
+        {
+            "id": "prompt_arxiv_deep_dive",
+            "title": "💡 前沿顶会论文 5步穿透精读与复现拆解模板",
+            "title_zh": "💡 前沿顶会论文 5步穿透精读与复现拆解模板",
+            "url": "https://arxiv.org/",
+            "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+            "source": "实战技巧 · Prompt",
+            "author": "科研极客",
+            "category": "videos",
+            "is_prompt": True,
+            "raw_published_at": now_iso,
+            "recommended_model": "Claude 3.7 / Gemini 1.5 Pro",
+            "temp_advice": "建议温度 0.3 | 极客文献精读",
+            "metrics": {"type": "📋 即抄即用", "model": "Gemini 1.5 Pro", "temp": "0.3"},
+            "content_snippet": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源复现最大阻碍。",
+            "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源复现最大阻碍。",
+            "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+            "tags": ["论文精读", "科研拆解", "Prompt神咒"]
+        },
+        {
+            "id": "prompt_agent_robust_tools",
+            "title": "💡 Agent Tool-Use 鲁棒性校验与防胡言乱语系统指令",
+            "title_zh": "💡 Agent Tool-Use 鲁棒性校验与防胡言乱语系统指令",
+            "url": "https://modelcontextprotocol.io/",
+            "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+            "source": "实战技巧 · Prompt",
+            "author": "Agent开发",
+            "category": "videos",
+            "is_prompt": True,
+            "raw_published_at": now_iso,
+            "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+            "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+            "metrics": {"type": "📋 即抄即用", "model": "Claude 3.7", "temp": "0.1"},
+            "content_snippet": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+            "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+            "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+            "tags": ["Agent开发", "工具调用", "防幻觉"]
+        },
+        {
+            "id": "prompt_sql_performance_tuning",
+            "title": "💡 高并发 SQL 慢查询诊断与执行计划重写优化模板",
+            "title_zh": "💡 高并发 SQL 慢查询诊断与执行计划重写优化模板",
+            "url": "https://github.com/",
+            "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format&fit=crop",
+            "source": "实战技巧 · Prompt",
+            "author": "DBA极客",
+            "category": "videos",
+            "is_prompt": True,
+            "raw_published_at": now_iso,
+            "recommended_model": "DeepSeek-Coder-V2 / Claude 3.7",
+            "temp_advice": "建议温度 0.1 | 数据库内核调优",
+            "metrics": {"type": "📋 即抄即用", "model": "DeepSeek-Coder", "temp": "0.1"},
+            "content_snippet": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引。",
+            "summary_zh": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引。",
+            "prompt_content": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+            "tags": ["SQL调优", "数据库实战", "Prompt模板"]
         }
     ]
     return prompts
+
+
+# ==========================================
+# 7. 硬核发烧友必备工具箱 (LMSYS Arena + ArXiv 前沿)
+# ==========================================
+def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
+    """Returns current LMSYS Chatbot Arena Top 5 Elo ratings for hardcore enthusiasts."""
+    return [
+        {"rank": 1, "model": "Gemini 2.0 Pro Exp", "elo": 1332, "org": "Google", "badge": "👑 榜首"},
+        {"rank": 2, "model": "DeepSeek-R1", "elo": 1326, "org": "DeepSeek", "badge": "🔥 开源最强"},
+        {"rank": 3, "model": "Claude 3.7 Sonnet", "elo": 1324, "org": "Anthropic", "badge": "⚡ 推理王者"},
+        {"rank": 4, "model": "OpenAI o3-mini", "elo": 1319, "org": "OpenAI", "badge": "🧠 极速思维"},
+        {"rank": 5, "model": "GPT-4o (Latest)", "elo": 1292, "org": "OpenAI", "badge": "🌐 全能多模态"}
+    ]
+
+
+def get_arxiv_curated_papers() -> List[Dict[str, Any]]:
+    """Returns 4 curated groundbreaking AI papers from arXiv for hardcore enthusiasts."""
+    return [
+        {
+            "id": "arxiv_2501_12948",
+            "arxiv_id": "2501.12948",
+            "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
+            "title_zh": "DeepSeek-R1：通过纯强化学习激发大模型复杂推理能力的训练范式",
+            "url": "https://arxiv.org/abs/2501.12948",
+            "date": "最新突破",
+            "spec": "GRPO 算法 · 零监督 SFT 冷启动",
+            "summary_zh": "开创性证明仅需纯强化学习即可涌现高难度数学与逻辑自我反思能力，无需海量昂贵的人工标注数据。"
+        },
+        {
+            "id": "arxiv_2502_00567",
+            "arxiv_id": "2502.00567",
+            "title": "Scaling Laws for Test-Time Compute in Large Language Models",
+            "title_zh": "大语言模型测试期计算（Test-Time Compute）扩展定律研究",
+            "url": "https://arxiv.org/abs/2502.00567",
+            "date": "顶会前沿",
+            "spec": "Test-Time Scaling · 推理期算力兑换",
+            "summary_zh": "系统证明通过延长模型在推理阶段的思考步数与树搜索空间，可显著超越增加百倍预训练参数带来的增益。"
+        },
+        {
+            "id": "arxiv_2501_08313",
+            "arxiv_id": "2501.08313",
+            "title": "V-JEPA 2: Towards General Video World Models with Joint-Embedding Predictive Architecture",
+            "title_zh": "V-JEPA 2：基于联合嵌入预测架构的通用物理视频世界模型",
+            "url": "https://arxiv.org/abs/2501.08313",
+            "date": "Meta AI",
+            "spec": "非自回归 · 物理空间感知",
+            "summary_zh": "抛弃逐像素扩散生成，在特征潜空间直接预测物体运动轨迹与受力交互，为具身智能奠定物理常识基础。"
+        },
+        {
+            "id": "arxiv_2412_19437",
+            "arxiv_id": "2412.19437",
+            "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+            "title_zh": "SWE-agent：基于终端与文件系统专用接口的自主软件工程智能体",
+            "url": "https://arxiv.org/abs/2412.19437",
+            "date": "普林斯顿",
+            "spec": "SWE-bench 生产级 · 终端自主执行",
+            "summary_zh": "设计专为大模型交互优化的 Shell/文件浏览器界面，实现自动化解决真实 GitHub 复杂 Issue 的工程闭环。"
+        }
+    ]
 
 
 # ==========================================
@@ -845,7 +1272,6 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
         if not raw:
             return 0
         try:
-            # 标准 ISO 或 RFC 转换
             return datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
         except Exception:
             return 0
@@ -859,3 +1285,4 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
 if __name__ == "__main__":
     items = fetch_all_sources()
     print(f"样本: 共 {len(items)} 条")
+

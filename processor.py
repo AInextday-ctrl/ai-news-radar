@@ -250,11 +250,11 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             for idx, orig_item in enumerate(chunk):
                 ai_data = parsed_dict.get(idx, {})
                 merged = dict(orig_item)
-                merged["title_zh"] = ai_data.get("title_zh") or free_translate_zh(orig_item["title"])
-                merged["summary_zh"] = ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
+                merged["title_zh"] = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item["title"])
+                merged["summary_zh"] = orig_item.get("summary_zh") or ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
                 merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
                 merged["hot_score"] = ai_data.get("hot_score", 3)
-                merged["tags"] = ai_data.get("tags", orig_item.get("tags") or [orig_item["source"]])
+                merged["tags"] = orig_item.get("tags") or ai_data.get("tags") or [orig_item["source"]]
                 results.append(merged)
 
             print(f"  ✓ 已完成 {min(i + batch_size, len(items))}/{len(items)} 条")
@@ -263,9 +263,9 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             print(f"  ❌ Gemini 处理异常: {e}，启用高可用神经中文翻译保障")
             for orig_item in chunk:
                 fallback = dict(orig_item)
-                title_zh = free_translate_zh(orig_item["title"])
+                title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item["title"])
                 fallback["title_zh"] = title_zh
-                fallback["summary_zh"] = generate_smart_fallback_summary(orig_item, title_zh)
+                fallback["summary_zh"] = orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh)
                 fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
                 fallback["hot_score"] = 3
                 fallback["tags"] = orig_item.get("tags") or [orig_item["source"]]

@@ -14,7 +14,7 @@ if sys.platform == "win32":
 import os
 import json
 from datetime import datetime, timezone
-from fetcher import fetch_all_sources
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers
 from processor import process_items_batch
 from config import CATEGORIES
 
@@ -45,7 +45,7 @@ def extract_top_three(items: list) -> list:
         title = (it.get("title", "") + " " + it.get("title_zh", "")).lower()
         score = parse_time_for_sort(it)
         # 降权非纯 AI 科技突破（如纯体育博彩下注等）
-        if any(bad in title for bad in ["betting", "nfl", "sports", "poker", "casino", "gambling"]):
+        if any(bad in title for bad in ["betting", "nfl", "sports", "poker", "casino", "gambling", "nba", "lottery"]):
             score -= 10000000
         # 优先重大模型/架构/领袖公司突破
         keywords = ["openai", "deepseek", "anthropic", "claude", "gpt", "gemini", "nvidia", "meta", "superintelligence", "agi", "model", "chip", "reasoning", "breakthrough"]
@@ -130,11 +130,17 @@ def save_news(items: list):
     # 提炼今日 60 秒极速风向标 (Top 3)
     top_three = extract_top_three(items)
 
+    # 载入发烧友必备基准：LMSYS Arena Top 5 与 ArXiv 前沿突破论文
+    chatbot_arena = get_chatbot_arena_top5()
+    arxiv_papers = get_arxiv_curated_papers()
+
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "total_count": len(items),
         "categories": CATEGORIES,
         "top_three": top_three,
+        "chatbot_arena": chatbot_arena,
+        "arxiv_papers": arxiv_papers,
         "grouped": grouped,
         "news": grouped.get("news", []),
         "celebrity": grouped.get("celebrity", []),
