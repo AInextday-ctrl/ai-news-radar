@@ -28,29 +28,85 @@ HEADERS = {
 }
 
 
+import html
+from datetime import datetime, timezone
+
 def make_id(url: str, title: str) -> str:
     raw = f"{url}-{title}".encode("utf-8")
     return hashlib.md5(raw).hexdigest()[:16]
 
 
+def parse_to_iso(published_parsed: Any = None, raw_str: str = "") -> str:
+    """Standardize publication time to ISO-8601 string."""
+    if published_parsed:
+        try:
+            dt = datetime(*published_parsed[:6], tzinfo=timezone.utc)
+            return dt.isoformat()
+        except Exception:
+            pass
+    if raw_str:
+        try:
+            import email.utils
+            parsed = email.utils.parsedate_to_datetime(raw_str)
+            if parsed:
+                return parsed.astimezone(timezone.utc).isoformat()
+        except Exception:
+            pass
+        # 匹配常见 ISO 格式
+        if re.match(r'^\d{4}-\d{2}-\d{2}', raw_str):
+            return raw_str
+    return datetime.now(timezone.utc).isoformat()
+
+
+def get_smart_cover_url(title: str, category: str = "news", source: str = "") -> str:
+    """Generate high-tech context-aware cover image for articles without native images."""
+    t = (title + " " + source).lower()
+    if any(k in t for k in ["openai", "gpt", "chatgpt", "sora", "o1", "o3", "altman"]):
+        return "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["anthropic", "claude", "amodei"]):
+        return "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["google", "gemini", "deepmind", "hassabis"]):
+        return "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["nvidia", "chip", "gpu", "hardware", "huang", "blackwell"]):
+        return "https://images.unsplash.com/photo-1591488320449-011701bb6704?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["robot", "robotics", "humanoid", "figure", "tesla", "optimus"]):
+        return "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["agent", "autonomous", "workflow", "computer"]):
+        return "https://images.unsplash.com/photo-1677442136019-21780efad99a?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["code", "coding", "developer", "terminal", "github", "bug"]):
+        return "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["voice", "audio", "speech", "sound", "music"]):
+        return "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80&auto=format&fit=crop"
+    if any(k in t for k in ["image", "design", "art", "paint", "diffusion", "flux"]):
+        return "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop"
+    
+    # 极客科技默认封面
+    return "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop"
+
+
 def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
     """Extract featured cover image from feed entry or HTML snippet."""
+    # 1. media:content
     if hasattr(entry, "media_content") and entry.media_content:
         for m in entry.media_content:
-            if "url" in m and (m.get("medium") == "image" or "image" in m.get("type", "")):
-                return m["url"]
+            if "url" in m and (m.get("medium") == "image" or "image" in m.get("type", "") or not m.get("medium")):
+                return html.unescape(m["url"])
         if "url" in entry.media_content[0]:
-            return entry.media_content[0]["url"]
+            return html.unescape(entry.media_content[0]["url"])
 
+    # 2. media:thumbnail
     if hasattr(entry, "media_thumbnail") and entry.media_thumbnail:
-        if "url" in entry.media_thumbnail[0]:
-            return entry.media_thumbnail[0]["url"]
+        for t in entry.media_thumbnail:
+            if "url" in t:
+                return html.unescape(t["url"])
 
+    # 3. enclosures
     if hasattr(entry, "enclosures") and entry.enclosures:
         for enc in entry.enclosures:
             if "image" in enc.get("type", "") and "href" in enc:
-                return enc["href"]
+                return html.unescape(enc["href"])
 
+    # 4. 正文与摘要中的 <img> 标签 (含 Reddit preview)
     text_to_search = raw_html or ""
     if hasattr(entry, "content") and entry.content:
         for c in entry.content:
@@ -58,10 +114,11 @@ def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
     if hasattr(entry, "summary"):
         text_to_search += " " + getattr(entry, "summary", "")
 
-    img_match = re.search(r'<img[^>]+src=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
-    if img_match:
-        img_url = img_match.group(1)
-        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar"]):
+    img_matches = re.findall(r'<img[^>]+src=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    for img_url in img_matches:
+        img_url = html.unescape(img_url)
+        # 过滤跟踪像素和无意义图标
+        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar", "icon", "1x1"]):
             return img_url
 
     return None
@@ -92,6 +149,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 title = entry.get("title", "").strip()
                 link = entry.get("link", "")
                 published = entry.get("published", "")
+                iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
                 summary = entry.get("summary", "")[:220]
 
                 # 提取 YouTube 视频 ID 与封面
@@ -108,12 +166,12 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                     "id": make_id(link, title),
                     "title": title,
                     "url": link,
-                    "image_url": thumbnail,
+                    "image_url": thumbnail or get_smart_cover_url(title, "videos", ch["name"]),
                     "video_id": video_id,
                     "embed_url": embed_url,
                     "source": f"YouTube · {ch['name']}",
                     "author": ch["name"],
-                    "raw_published_at": published,
+                    "raw_published_at": iso_time,
                     "metrics": {"format": "16:9 高清实操视频"},
                     "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲",
                     "category": "videos",
@@ -150,23 +208,31 @@ def fetch_product_hunt_tools(max_items: int = 10) -> List[Dict[str, Any]]:
 
             # 场景推测
             scenario = "🤖 智能体/工作流"
-            if any(k in combined for k in ["image", "photo", "pic", "design", "art"]):
-                scenario = "🎨 图像修图设计"
+            if any(k in combined for k in ["image", "photo", "pic", "design", "art", "paint"]):
+                scenario = "🎨 图像修图/设计"
             elif any(k in combined for k in ["video", "clip", "movie", "reel"]):
                 scenario = "🎬 视频创作合成"
             elif any(k in combined for k in ["code", "dev", "programming", "terminal"]):
                 scenario = "💻 编程开发提效"
             elif any(k in combined for k in ["write", "doc", "email", "office", "note"]):
-                scenario = "✍️ 写作办公辅助"
+                scenario = "✍️ 写作办公知识库"
+            elif any(k in combined for k in ["audio", "voice", "speech", "sound", "clone"]):
+                scenario = "🎙️ 声音克隆音频"
+
+            if not img_url:
+                img_url = get_smart_cover_url(title, "tools", "Product Hunt")
+
+            published = entry.get("published", "")
+            iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
 
             items.append({
                 "id": make_id(link, title),
                 "title": title,
                 "url": link,
-                "image_url": img_url or "",
+                "image_url": img_url,
                 "source": "Product Hunt",
                 "author": "Product Hunt 新品",
-                "raw_published_at": entry.get("published", ""),
+                "raw_published_at": iso_time,
                 "metrics": {"tag": scenario, "pricing": "🟡 免费试玩"},
                 "scenario_tag": scenario,
                 "pricing_tag": "🟡 免费试玩",
@@ -201,15 +267,18 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
 
                     # 场景推测
                     combined = f"{full_name} {description}".lower()
-                    scenario = "💻 开发者神器"
-                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux"]):
-                        scenario = "🎨 图像创意工作流"
-                    elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow"]):
+                    scenario = "💻 开发者提效"
+                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux", "draw"]):
+                        scenario = "🎨 图像修图/设计"
+                    elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser"]):
                         scenario = "🤖 自动化 Agent"
-                    elif any(k in combined for k in ["voice", "audio", "tts", "speech"]):
-                        scenario = "🎙️ 声音音频生成"
+                    elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
+                        scenario = "🎙️ 声音克隆音频"
+                    elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
+                        scenario = "💬 AI 客户端应用"
 
                     og_image = f"https://opengraph.githubassets.com/1/{full_name}"
+                    iso_time = parse_to_iso(raw_str=repo.get("created_at", ""))
 
                     items.append({
                         "id": make_id(url, full_name),
@@ -218,7 +287,7 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                         "image_url": og_image,
                         "source": "GitHub 开源",
                         "author": repo.get("owner", {}).get("login", "GitHub"),
-                        "raw_published_at": repo.get("created_at", ""),
+                        "raw_published_at": iso_time,
                         "metrics": {"stars": stars, "pricing": "🟢 完全开源免费"},
                         "scenario_tag": scenario,
                         "pricing_tag": "🟢 完全开源免费",
@@ -238,25 +307,39 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     """Fetch breaking news and celebrity tweets/posts with rich profiles."""
     items = []
 
-    # 1. TechCrunch AI
-    tc_items = fetch_rss_channel("techcrunch_ai", max_items=8)
-    items.extend(tc_items)
+    # 1. 行业顶级资讯（自带高质量实拍与官方封面）
+    ars_items = fetch_rss_channel("arstechnica_ai", max_items=8)
+    items.extend(ars_items)
 
-    # 2. The Verge AI
+    vb_items = fetch_rss_channel("venturebeat_ai", max_items=8)
+    items.extend(vb_items)
+
     vg_items = fetch_rss_channel("theverge_ai", max_items=8)
     items.extend(vg_items)
 
-    # 3. Hacker News AI
-    hn_items = fetch_hacker_news(max_items=12)
+    mit_items = fetch_rss_channel("mit_tech_review", max_items=6)
+    items.extend(mit_items)
+
+    tc_items = fetch_rss_channel("techcrunch_ai", max_items=8)
+    items.extend(tc_items)
+
+    # 2. Hacker News 极客热榜
+    hn_items = fetch_hacker_news(max_items=10)
     items.extend(hn_items)
 
-    # 4. Sam Altman 博客
+    # 3. 领袖大V博客与推文热点
     altman_items = fetch_rss_channel("sam_altman_blog", max_items=4)
     items.extend(altman_items)
 
-    # 5. Reddit AI 社交风暴 (Singularity)
-    sing_items = fetch_rss_channel("reddit_singularity", max_items=10)
+    # 4. Reddit 极客社群真实热议
+    sing_items = fetch_rss_channel("reddit_singularity", max_items=8)
     items.extend(sing_items)
+
+    gpt_items = fetch_rss_channel("reddit_chatgpt", max_items=8)
+    items.extend(gpt_items)
+
+    local_items = fetch_rss_channel("reddit_localllama", max_items=8)
+    items.extend(local_items)
 
     return items
 
@@ -278,16 +361,23 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         continue
                     url = entry.get("link", "")
                     author = entry.get("author", cfg["name"])
-                    published = entry.get("published") or entry.get("updated", "")
+                    
+                    # 标准化时间戳
+                    published_raw = entry.get("published") or entry.get("updated", "")
+                    iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published_raw)
+
                     summary = entry.get("summary") or entry.get("description", "")
-                    clean_summary = re.sub(r'<[^>]+>', '', summary).strip()[:260]
+                    clean_summary = re.sub(r'<[^>]+>', '', summary).strip()[:280]
 
-                    # 提取主图
+                    # 提取主图，若无则匹配科技主题封面
                     img_url = extract_image_url(entry, summary)
-
+                    
                     # 识别是否包含名人领袖
                     profile = match_celebrity_profile(title, clean_summary)
-                    category = "celebrity" if (profile or cfg["default_category"] == "celebrity") else "news"
+                    category = "celebrity" if (profile or cfg["default_category"] == "celebrity") else cfg["default_category"]
+
+                    if not img_url:
+                        img_url = get_smart_cover_url(title, category, cfg["name"])
 
                     author_display = profile["name"] if profile else author
                     author_handle = profile["handle"] if profile else ""
@@ -297,12 +387,12 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "id": make_id(url, title),
                         "title": title,
                         "url": url,
-                        "image_url": img_url or "",
+                        "image_url": img_url,
                         "source": cfg["name"],
                         "author": author_display,
                         "author_handle": author_handle,
                         "author_avatar": author_avatar,
-                        "raw_published_at": published,
+                        "raw_published_at": iso_time,
                         "metrics": {},
                         "content_snippet": clean_summary or f"From {cfg['name']}",
                         "category": category,
@@ -313,7 +403,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
     return items
 
 
-def fetch_hacker_news(max_items: int = 12) -> List[Dict[str, Any]]:
+def fetch_hacker_news(max_items: int = 10) -> List[Dict[str, Any]]:
     items = []
     cfg = SOURCES["hacker_news"]
     try:
@@ -329,20 +419,22 @@ def fetch_hacker_news(max_items: int = 12) -> List[Dict[str, Any]]:
                     points = hit.get("points") or 0
                     comments = hit.get("num_comments") or 0
                     snippet = f"HN 极客热议: {points} 点赞, {comments} 讨论"
+                    iso_time = parse_to_iso(raw_str=hit.get("created_at", ""))
 
                     profile = match_celebrity_profile(title, snippet)
                     category = "celebrity" if profile else "news"
+                    img_url = get_smart_cover_url(title, category, "Hacker News")
 
                     items.append({
                         "id": make_id(url, title),
                         "title": title,
                         "url": url,
-                        "image_url": "",
+                        "image_url": img_url,
                         "source": "Hacker News",
                         "author": profile["name"] if profile else hit.get("author", "HN User"),
                         "author_handle": profile["handle"] if profile else "",
                         "author_avatar": profile["avatar"] if profile else "",
-                        "raw_published_at": hit.get("created_at", ""),
+                        "raw_published_at": iso_time,
                         "metrics": {"score": points, "comments": comments},
                         "content_snippet": snippet,
                         "category": category,
@@ -358,16 +450,18 @@ def fetch_hacker_news(max_items: int = 12) -> List[Dict[str, Any]]:
 # ==========================================
 def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
     """Curated actionable prompts that AI enthusiasts love to copy and use immediately."""
+    now_iso = datetime.now(timezone.utc).isoformat()
     prompts = [
         {
             "id": "prompt_deepseek_reasoning",
             "title": "💡 DeepSeek R1 深度思考解锁咒语：开启极致逻辑链",
             "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-            "image_url": "",
+            "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
             "source": "实战技巧 · Prompt",
             "author": "社区实测",
             "category": "videos",
             "is_prompt": True,
+            "raw_published_at": now_iso,
             "metrics": {"type": "📋 即抄即用"},
             "content_snippet": "请不要直接给我简短答案，请使用 <thinking> 标签展开每一步推理演算，列出所有假设、边界条件和可能存在的漏洞，最后再给出最佳结论。",
             "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开思考：1. 分析核心痛点；2. 权衡三种不同方案优劣；3. 给出包含代码/排查清单的生产级交付结果。",
@@ -377,15 +471,31 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
             "id": "prompt_claude_coding_architect",
             "title": "💡 Claude 3.7 / GPT-4o 复杂工程重构提示词模板",
             "url": "https://docs.anthropic.com/",
-            "image_url": "",
+            "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
             "source": "实战技巧 · Prompt",
             "author": "工程实战",
             "category": "videos",
             "is_prompt": True,
+            "raw_published_at": now_iso,
             "metrics": {"type": "📋 即抄即用"},
             "content_snippet": "你是一个严谨的代码审查官。请在不修改原有业务契约的前提下，识别并重构这段代码的异味（Code Smell），给出前后对比和防御性测试用例。",
             "prompt_content": "你是一个资深全栈架构师。请审查这段代码：1. 指出性能瓶颈与安全漏洞；2. 按照现代 Clean Code 规范进行重构；3. 输出配套的单元测试与异常边界处理。",
             "tags": ["代码重构", "高阶提示词"]
+        },
+        {
+            "id": "prompt_flux_photoreal",
+            "title": "💡 FLUX / Midjourney 顶级商业摄影质感提示词神咒",
+            "url": "https://blackforestlabs.ai/",
+            "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
+            "source": "实战技巧 · Prompt",
+            "author": "视觉实测",
+            "category": "videos",
+            "is_prompt": True,
+            "raw_published_at": now_iso,
+            "metrics": {"type": "📋 即抄即用"},
+            "content_snippet": "超高清商业人像与胶片质感核心构词法则：85mm f/1.4 镜头虚化、哈苏色彩影调、丁达尔光线与真实皮肤微瑕疵控制。",
+            "prompt_content": "A high-end cinematic editorial portrait, shot on 35mm film, Hasselblad H6D-100c, soft natural morning rim light, subtle film grain, hyper-realistic skin texture, 8k resolution, photorealistic, masterpiece.",
+            "tags": ["生图神咒", "FLUX/MJ"]
         }
     ]
     return prompts

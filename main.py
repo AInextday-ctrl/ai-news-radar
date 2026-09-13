@@ -31,34 +31,53 @@ def extract_top_three(items: list) -> list:
     # 1. 最重要的大事件/突发
     news_items = [i for i in items if i.get("category") == "news" and i.get("image_url")]
     if news_items:
+        it = news_items[0]
         top.append({
-            "badge": "⚡ 今日头条",
-            "title": news_items[0].get("title_zh") or news_items[0]["title"],
-            "summary": news_items[0].get("summary_zh") or news_items[0]["content_snippet"][:80],
-            "url": news_items[0]["url"],
-            "source": news_items[0]["source"]
+            "badge_zh": "⚡ 今日头条",
+            "badge_en": "⚡ Top Story",
+            "title_zh": it.get("title_zh") or it["title"],
+            "title_en": it["title"],
+            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
+            "summary_en": it["content_snippet"][:80],
+            "url": it["url"],
+            "image_url": it.get("image_url"),
+            "raw_published_at": it.get("raw_published_at"),
+            "source": it["source"]
         })
 
     # 2. 最重磅的领袖声音
     celeb_items = [i for i in items if i.get("category") == "celebrity"]
     if celeb_items:
+        it = celeb_items[0]
+        author = it.get('author', '行业领袖')
         top.append({
-            "badge": "🐦 领袖观点",
-            "title": f"{celeb_items[0].get('author', '行业领袖')}：{celeb_items[0].get('title_zh') or celeb_items[0]['title']}",
-            "summary": celeb_items[0].get("summary_zh") or celeb_items[0]["content_snippet"][:80],
-            "url": celeb_items[0]["url"],
-            "source": celeb_items[0].get("author_handle") or celeb_items[0]["source"]
+            "badge_zh": "🐦 领袖观点",
+            "badge_en": "🐦 Top Voice",
+            "title_zh": f"{author}：{it.get('title_zh') or it['title']}",
+            "title_en": f"{author}: {it['title']}",
+            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
+            "summary_en": it["content_snippet"][:80],
+            "url": it["url"],
+            "image_url": it.get("image_url"),
+            "raw_published_at": it.get("raw_published_at"),
+            "source": it.get("author_handle") or it["source"]
         })
 
     # 3. 最值得体验的新工具/新视频
     app_items = [i for i in items if i.get("category") in ["tools", "videos"] and (i.get("image_url") or i.get("video_id"))]
     if app_items:
+        it = app_items[0]
         top.append({
-            "badge": "🛠️ 爆款尝鲜",
-            "title": app_items[0].get("title_zh") or app_items[0]["title"],
-            "summary": app_items[0].get("summary_zh") or app_items[0]["content_snippet"][:80],
-            "url": app_items[0]["url"],
-            "source": app_items[0]["source"]
+            "badge_zh": "🛠️ 爆款尝鲜",
+            "badge_en": "🛠️ Try It Out",
+            "title_zh": it.get("title_zh") or it["title"],
+            "title_en": it["title"],
+            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
+            "summary_en": it["content_snippet"][:80],
+            "url": it["url"],
+            "image_url": it.get("image_url"),
+            "raw_published_at": it.get("raw_published_at"),
+            "source": it["source"]
         })
 
     return top

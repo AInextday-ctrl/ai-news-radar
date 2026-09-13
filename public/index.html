@@ -201,14 +201,17 @@
 
     const I18N = {
       zh: {
-        subtitle: "全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库",
+        subtitle: "全网突发 · 领袖观点 · 落地神器 · 视频实操 · 提示词神咒",
         refreshBtn: "刷新",
-        digestTitle: "今日 AI 风向标 (60秒必读 Top 3)",
-        takeaway: "核心价值",
-        readOriginal: "直达",
-        tryTool: "试玩体验",
-        playVideo: "点击播放",
-        copyPrompt: "📋 一键复制 Prompt",
+        digestTitle: "今日 AI 风向标 (60秒极速通 Top 3)",
+        takeaway: "核心看点",
+        readOriginal: "直达报道",
+        tryTool: "体验神器",
+        viewPost: "查看原帖/推文",
+        playVideo: "视频精讲",
+        copyPrompt: "📋 一键复制提示词",
+        justNow: "刚刚",
+        newsReport: "快讯简报",
         colTitles: {
           news: "⚡ 突发·行业快讯",
           celebrity: "🐦 领袖观点·社交热议",
@@ -217,14 +220,17 @@
         }
       },
       en: {
-        subtitle: "Trending News · X Leaders · Video Demos · Scenario Tools · Prompts",
+        subtitle: "Breaking News · Top Voices · Scenario Tools · Video Demos · Prompts",
         refreshBtn: "Refresh",
         digestTitle: "Today's AI Digest (Top 3 in 60s)",
         takeaway: "Key Insight",
-        readOriginal: "View",
-        tryTool: "Try Live Demo",
-        playVideo: "Play Video",
+        readOriginal: "Read Story",
+        tryTool: "Try Tool",
+        viewPost: "View Post",
+        playVideo: "Video Demo",
         copyPrompt: "📋 Copy Prompt",
+        justNow: "Just now",
+        newsReport: "Flash News",
         colTitles: {
           news: "⚡ Breaking News",
           celebrity: "🐦 Leaders & Voices",
@@ -233,6 +239,45 @@
         }
       }
     };
+
+    // 高精度时间格式化工具：精确时间 + 相对时间
+    function formatTime(rawTime, lang = 'zh') {
+      if (!rawTime) return lang === 'zh' ? '刚刚更新' : 'Just now';
+      try {
+        const date = new Date(rawTime);
+        if (isNaN(date.getTime())) return rawTime;
+
+        const now = new Date();
+        const diffSec = Math.max(0, Math.floor((now - date) / 1000));
+
+        const Y = date.getFullYear();
+        const M = String(date.getMonth() + 1).padStart(2, '0');
+        const D = String(date.getDate()).padStart(2, '0');
+        const h = String(date.getHours()).padStart(2, '0');
+        const m = String(date.getMinutes()).padStart(2, '0');
+        const exactTime = `${Y}-${M}-${D} ${h}:${m}`;
+
+        let relative = '';
+        if (diffSec < 60) {
+          relative = lang === 'zh' ? '刚刚' : 'Just now';
+        } else if (diffSec < 3600) {
+          const mins = Math.floor(diffSec / 60);
+          relative = lang === 'zh' ? `${mins}分钟前` : `${mins}m ago`;
+        } else if (diffSec < 86400) {
+          const hours = Math.floor(diffSec / 3600);
+          relative = lang === 'zh' ? `${hours}小时前` : `${hours}h ago`;
+        } else if (diffSec < 86400 * 2) {
+          relative = lang === 'zh' ? `昨天 ${h}:${m}` : `Yesterday ${h}:${m}`;
+        } else {
+          const days = Math.floor(diffSec / 86400);
+          relative = lang === 'zh' ? `${days}天前` : `${days}d ago`;
+        }
+
+        return `${exactTime} · ${relative}`;
+      } catch (e) {
+        return rawTime || '';
+      }
+    }
 
     function setLanguage(lang) {
       currentLang = lang;
@@ -263,7 +308,7 @@
       }
     }
 
-    // 渲染今日 60s Top 3 走马灯
+    // 渲染今日 60s Top 3 走马灯 (双语纯净切换 + 具体时间戳)
     function renderTopThree(topItems) {
       const container = document.getElementById('top-three-container');
       if (!topItems || topItems.length === 0) {
@@ -271,28 +316,37 @@
         return;
       }
 
-      container.innerHTML = topItems.map(item => `
-        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/40 p-2.5 rounded-xl transition-all flex flex-col space-y-1 shadow-sm">
-          <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${item.badge}</span>
-            <span class="text-[10px] text-slate-400 font-mono">${item.source}</span>
-          </div>
-          <h3 class="font-semibold text-xs text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-1 leading-snug">
-            ${item.title}
-          </h3>
-          <p class="text-[11px] text-slate-400 line-clamp-1">
-            ${item.summary}
-          </p>
-        </a>
-      `).join('');
+      const isZh = currentLang === 'zh';
+      container.innerHTML = topItems.map(item => {
+        const badge = isZh ? (item.badge_zh || item.badge) : (item.badge_en || item.badge);
+        const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+        const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary);
+        const timeStr = formatTime(item.raw_published_at, currentLang);
+
+        return `
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/40 p-3 rounded-xl transition-all flex flex-col space-y-1.5 shadow-sm">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20">${badge}</span>
+              <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
+            </div>
+            <h3 class="font-semibold text-xs text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-1 leading-snug">
+              ${title}
+            </h3>
+            <p class="text-[11px] text-slate-400 line-clamp-1">
+              ${summary}
+            </p>
+          </a>
+        `;
+      }).join('');
     }
 
-    // 渲染四分栏不同风格的资讯卡片
+    // 渲染四分栏不同风格的资讯卡片 (图文并茂 + 精确时间戳)
     function renderCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
       const title = (isZh && item.title_zh) ? item.title_zh : item.title;
       const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const timeStr = formatTime(item.raw_published_at, currentLang);
 
       // ===================================
       // 样式 A: 🎬 视频与实战 Prompt 卡片
@@ -306,14 +360,14 @@
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30">
                   💡 实操神咒
                 </span>
-                <span class="text-[10px] text-slate-400">${item.author}</span>
+                <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
               </div>
               <h3 class="font-bold text-sm text-slate-100">${title}</h3>
               <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
                 ${item.prompt_content}
               </div>
               <button onclick="copyToClipboard('${item.prompt_content.replace(/'/g, "\\'")}')" class="w-full bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-200 text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1">
-                <span>📋 一键复制提示词</span>
+                <span>${t.copyPrompt}</span>
               </button>
             </article>
           `;
@@ -329,12 +383,12 @@
                   ▶
                 </div>
               </div>
-              <span class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">视频精讲</span>
+              <span class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${t.playVideo}</span>
             </div>
 
             <div class="flex items-center justify-between text-[11px]">
               <span class="text-rose-400 font-medium">${item.source}</span>
-              <span class="text-slate-400">${item.author}</span>
+              <span class="text-slate-400 font-mono text-[10px]">🕒 ${timeStr}</span>
             </div>
 
             <h3 class="font-semibold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
@@ -362,7 +416,7 @@
             
             ${item.image_url ? `
               <div class="w-full h-32 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
-                <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop'">
               </div>
             ` : ''}
 
@@ -373,6 +427,10 @@
               <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
                 ${pricing}
               </span>
+            </div>
+
+            <div class="text-[10px] text-slate-400 font-mono">
+              🕒 ${timeStr}
             </div>
 
             <h3 class="font-bold text-sm text-slate-100 group-hover:text-emerald-300 transition-colors line-clamp-2 leading-snug">
@@ -413,8 +471,20 @@
                 </div>
                 <span class="text-[10px] text-slate-400 font-mono block truncate">${handle}</span>
               </div>
-              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">大V发声</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 border border-sky-500/20">领袖声音</span>
             </div>
+
+            <!-- 具体时间戳 -->
+            <div class="text-[10px] text-slate-400 font-mono">
+              🕒 ${timeStr}
+            </div>
+
+            <!-- 嵌入推文/社交配图 (如有) -->
+            ${(item.image_url && !item.image_url.includes('unavatar') && !item.image_url.includes('dicebear')) ? `
+              <div class="w-full h-32 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
+                <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+              </div>
+            ` : ''}
 
             <!-- 核心观点引用 -->
             <blockquote class="bg-sky-950/20 border-l-2 border-sky-400 pl-2.5 py-1 text-xs text-sky-100/95 font-medium leading-relaxed italic">
@@ -431,7 +501,7 @@
             <div class="pt-1 flex items-center justify-between text-[10px] text-slate-400 border-t border-slate-800/80">
               <span>${item.source}</span>
               <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:underline flex items-center space-x-0.5">
-                <span>直达博文/推文</span>
+                <span>${t.viewPost}</span>
                 <span>↗</span>
               </a>
             </div>
@@ -440,22 +510,22 @@
       }
 
       // ===================================
-      // 样式 D: ⚡ 突发大事件卡片 (标准)
+      // 样式 D: ⚡ 突发大事件快讯卡片 (图文并茂 + 具体时间戳)
       // ===================================
       return `
         <article class="group glass-card rounded-xl p-3.5 transition-all flex flex-col space-y-2.5 shadow-md">
           
           ${item.image_url ? `
             <div class="w-full h-36 rounded-lg overflow-hidden bg-slate-900 border border-slate-800">
-              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop'">
             </div>
           ` : ''}
 
           <div class="flex items-center justify-between">
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30 font-mono">
               ${item.source}
             </span>
-            <span class="text-[10px] text-slate-400">${item.author || ''}</span>
+            <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeStr}</span>
           </div>
 
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="font-bold text-sm text-slate-100 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
@@ -469,7 +539,7 @@
           ` : ''}
 
           <div class="pt-1 flex items-center justify-between text-[11px] text-slate-400 border-t border-slate-800/80">
-            <span class="text-[10px] text-slate-500">快讯报道</span>
+            <span class="text-[10px] text-slate-500">${t.newsReport}</span>
             <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="text-indigo-400 hover:underline flex items-center space-x-0.5 font-medium">
               <span>${t.readOriginal}</span>
               <span>↗</span>
