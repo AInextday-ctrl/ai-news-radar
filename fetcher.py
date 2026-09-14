@@ -195,10 +195,40 @@ KNOWN_TITLE_TRANSLATIONS = {
     "but what is cross-entropy? | compression is intelligence part 2": "【系统教学】Andrej Karpathy: 到底什么是交叉熵？压缩即智能第二讲"
 }
 
-def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
-    """Fetch high-res AI demonstration & breakdown videos from YouTube, focusing on practical skills, workflows and tutorials."""
+def extract_clean_video_id(url: str) -> str:
+    """Extract canonical 11-char YouTube video ID."""
+    if not url:
+        return ""
+    m = re.search(r"(?:v=|\/embed\/|\/vi\/|youtu\.be\/|\/v\/|\/shorts\/)([a-zA-Z0-9_-]{11})", url)
+    return m.group(1) if m else ""
+
+
+def normalize_title_fingerprint(title: str) -> str:
+    """Normalize title to detect exact and near-duplicates."""
+    if not title:
+        return ""
+    t = re.sub(r"【[^】]*】", " ", title)
+    t = re.sub(r"\[[^\]]*\]", " ", t)
+    t = re.sub(r"\([^\)]*\)", " ", t)
+    t = re.sub(r"[^\w\s\u4e00-\u9fa5]", " ", t)
+    return re.sub(r"\s+", " ", t).strip().lower()
+
+
+def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
+    """
+    Fetch high-res AI demonstration & breakdown videos from YouTube.
+    Guarantees:
+    1. Zero duplicate video_id and normalized titles.
+    2. Author diversity protection: Max 1 viral hit per author, max 2 total items per author.
+    3. Author interleaving to eliminate repetitive author clustering.
+    4. Strict 30-day viral lifecycle gate.
+    """
     items = []
     now = datetime.now(timezone.utc)
+    seen_video_ids = set()
+    seen_title_fps = set()
+    author_viral_counts = {}
+    author_total_counts = {}
 
     # 1. 抓取知名 YouTube 官方技术频道的真实最新视频 (优先真实信源)
     channels = SOURCES.get("youtube_channels", [])
@@ -231,12 +261,20 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
                 summary = entry.get("summary", "")[:220]
 
-                # 提取 YouTube 视频 ID 与封面
-                video_id = ""
-                if "v=" in link:
-                    video_id = link.split("v=")[-1].split("&")[0]
-                elif "embed/" in link:
-                    video_id = link.split("embed/")[-1].split("?")[0]
+                # 提取标准 11 位 YouTube 视频 ID 与封面
+                video_id = extract_clean_video_id(link)
+                title_fp = normalize_title_fingerprint(title)
+
+                # 去重防线：完全相同的视频 ID 或标题语义指纹直接跳过
+                if video_id and video_id in seen_video_ids:
+                    continue
+                if title_fp and title_fp in seen_title_fps:
+                    continue
+
+                # 单一创作者总配额保护：单频次批次中同一作者最多保留 2 条
+                ch_name = ch["name"]
+                if author_total_counts.get(ch_name, 0) >= 2:
+                    continue
 
                 thumbnail = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg" if video_id else ""
                 embed_url = f"https://www.youtube.com/embed/{video_id}" if video_id else ""
@@ -250,18 +288,22 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                     except Exception:
                         pass
 
-                # 【近期爆点生命周期门禁】：严格限制 <= 30 天 (2,592,000 秒)，超过 30 天绝不打爆点标签
+                # 【近期爆点生命周期门禁】：严格限制 <= 30 天 (2,592,000 秒)，且同一作者在爆点中最多占 1 席
                 is_within_30_days = (diff_sec <= 30 * 86400)
                 t_lower = title.lower()
                 clean_t = t_lower.replace("’", "'").replace("`", "'").strip()
 
                 viral_keywords = ["fable", "astra", "gpt-6", "breakthrough", "r1", "deepseek", "open-source", "insanely", "billion", "shocked", "revolution", "benchmark", "agi"]
-                has_viral_topic = any(k in t_lower for k in viral_keywords) or (ch["name"] in ["Fireship", "Theo - t3.gg", "AI Explained"] and diff_sec <= 7 * 86400)
+                has_viral_topic = any(k in t_lower for k in viral_keywords) or (ch_name in ["Fireship", "Theo - t3.gg", "AI Explained"] and diff_sec <= 7 * 86400)
 
-                if is_within_30_days and has_viral_topic:
+                # 创作者防霸屏：单个作者在爆点榜单中最多只能占 1 个席位
+                can_be_viral = is_within_30_days and has_viral_topic and (author_viral_counts.get(ch_name, 0) < 1)
+
+                if can_be_viral:
                     is_viral = True
                     v_subtype = "viral"
                     v_skill = "🔥 近期爆点"
+                    author_viral_counts[ch_name] = author_viral_counts.get(ch_name, 0) + 1
                 elif any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn", "how to", "setup", "puzzle"]):
                     is_viral = False
                     v_subtype = "tutorial"
@@ -283,7 +325,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 if not title_zh:
                     title_zh = f"【{v_skill}】{title}" if is_viral else f"【实战精讲】{title}"
 
-                v_tags = [ch["name"]]
+                v_tags = [ch_name]
                 if is_viral:
                     v_tags.insert(0, "🔥 近期爆点")
                 else:
@@ -293,45 +335,87 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 if "astra" in t_lower or "gpt-6" in t_lower:
                     v_tags.insert(0, "GPT-6Astra")
 
-                items.append({
-                    "id": make_id(link, title),
+                item_obj = {
+                    "id": f"yt_{video_id}" if video_id else make_id(link, title),
                     "title": title_zh,
                     "title_zh": title_zh,
                     "title_en": title,
                     "url": link,
-                    "image_url": thumbnail or get_smart_cover_url(title, "videos", ch["name"]),
+                    "image_url": thumbnail or get_smart_cover_url(title, "videos", ch_name),
                     "video_id": video_id,
                     "embed_url": embed_url,
-                    "source": f"YouTube · {ch['name']}",
-                    "author": ch["name"],
+                    "source": f"YouTube · {ch_name}",
+                    "author": ch_name,
                     "raw_published_at": iso_time,
                     "is_viral": is_viral,
                     "sub_type": v_subtype,
-                    "purpose_zh": f"{v_skill} · {ch['name']} 深度实战",
-                    "purpose_en": f"{v_skill} · {ch['name']} Breakdown",
+                    "purpose_zh": f"{v_skill} · {ch_name} 深度实战",
+                    "purpose_en": f"{v_skill} · {ch_name} Breakdown",
                     "metrics": {"format": "16:9 真实实操视频", "skill_tag": v_skill, "difficulty": v_skill},
-                    "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
-                    "summary_zh": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
-                    "summary_en": summary or f"Latest hands-on AI demo and technical breakdown from {ch['name']}.",
+                    "content_snippet": summary or f"来自 {ch_name} 的最新 AI 演示精讲与架构解析",
+                    "summary_zh": summary or f"来自 {ch_name} 的最新 AI 演示精讲与架构解析",
+                    "summary_en": summary or f"Latest hands-on AI demo and technical breakdown from {ch_name}.",
                     "category": "videos",
                     "tags": v_tags
-                })
+                }
+
+                items.append(item_obj)
+                if video_id:
+                    seen_video_ids.add(video_id)
+                if title_fp:
+                    seen_title_fps.add(title_fp)
+                author_total_counts[ch_name] = author_total_counts.get(ch_name, 0) + 1
+
         except Exception as e:
             print(f"  ❌ YouTube [{ch['name']}] 抓取失败: {e}")
 
-    # 真实视频按发布时间严格倒序 (最新发布的排在最前面)
-    items.sort(key=lambda x: x.get("raw_published_at") or "", reverse=True)
-
-    # 2. 追加经典技术教学与沉淀指南 (确保不带伪造的今日时间与爆点标签，仅供系统教学和历史查阅)
+    # 2. 追加经典技术教学与沉淀指南 (执行严格全局去重)
     curated_tutorials = get_expanded_tutorials()
     for tut in curated_tutorials:
+        tut_vid = extract_clean_video_id(tut.get("url", "")) or tut.get("video_id", "")
+        tut_tfp = normalize_title_fingerprint(tut.get("title", ""))
+        if tut_vid and tut_vid in seen_video_ids:
+            continue
+        if tut_tfp and tut_tfp in seen_title_fps:
+            continue
+        if tut_vid:
+            seen_video_ids.add(tut_vid)
+        if tut_tfp:
+            seen_title_fps.add(tut_tfp)
+
         tut["is_viral"] = False
         tut["tags"] = [t for t in tut.get("tags", []) if t != "🔥 近期爆点"]
         if tut.get("sub_type") == "viral":
             tut["sub_type"] = "tutorial"
-    items.extend(curated_tutorials)
+        items.append(tut)
 
-    return items
+    # 3. 创作者交错排序 (Author Interleaving)，杜绝同一创作者连续霸屏
+    # 将爆点视频放在最前，普通教学在后；在各个区间内执行相邻不同博主交替排列
+    viral_items = [x for x in items if x.get("is_viral")]
+    regular_items = [x for x in items if not x.get("is_viral")]
+
+    def interleave_by_author(item_list):
+        if not item_list:
+            return []
+        # 按作者分桶
+        from collections import defaultdict
+        buckets = defaultdict(list)
+        for it in item_list:
+            buckets[it.get("author", "unknown")].append(it)
+        
+        # 轮询抽取，确保同一作者不相邻
+        interleaved = []
+        author_keys = list(buckets.keys())
+        while buckets:
+            for k in list(author_keys):
+                if k in buckets and buckets[k]:
+                    interleaved.append(buckets[k].pop(0))
+                    if not buckets[k]:
+                        del buckets[k]
+        return interleaved
+
+    final_ordered = interleave_by_author(viral_items) + interleave_by_author(regular_items)
+    return final_ordered
 
 
 # ==========================================

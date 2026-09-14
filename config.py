@@ -223,7 +223,121 @@ SOURCES = {
         {"name": "AI Explained", "id": "UCNJ1Ymd5yFuUPtn21xtRbbw"},
         {"name": "Two Minute Papers", "id": "UCbfYPyITQ-7l4upoX8nvctg"},
         {"name": "Matthew Berman", "id": "UCawZsQWqfGSbCI5yjkdVkTA"},
-        {"name": "Andrej Karpathy", "id": "UCYO_jab_esuFRV4b17AJtAw"},
+        {"name": "Andrej Karpathy", "id": "UCXUPKJO5MZQN11PqgIvyuvQ"},
+        {"name": "3Blue1Brown", "id": "UCYO_jab_esuFRV4b17AJtAw"},
+        {"name": "Matt Wolfe", "id": "UChpleBmo18P08aKCIgti38g"},
+        {"name": "Yannic Kilcher", "id": "UCZHmQk67mN31gbHey6BVyNw"},
         {"name": "NetworkChuck", "id": "UCOuGATIAbd2DvzJmUgXn2IQ"}
     ]
 }
+
+# 顶流 AI 创作者矩阵元数据（前端博主直达栏与多样性展示使用）
+AI_CREATORS = [
+    {
+        "id": "fireship",
+        "name": "Fireship",
+        "channel_id": "UCsBjURrPoezykLs9EqgamOA",
+        "handle": "@fireship",
+        "avatar": "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA",
+        "category": "⚡ 极速全栈实战",
+        "subscribers": "3.4M+",
+        "desc": "极速技术拆解与前沿模型实操"
+    },
+    {
+        "id": "theo",
+        "name": "Theo - t3.gg",
+        "channel_id": "UCbRP3c757lWg9M-U7TyEkXA",
+        "handle": "@t3dotgg",
+        "avatar": "https://unavatar.io/x/t3dotgg",
+        "category": "🛠️ 全栈工程与架构辩论",
+        "subscribers": "360K+",
+        "desc": "一线技术选型与模型落地深度评测"
+    },
+    {
+        "id": "aiexplained",
+        "name": "AI Explained",
+        "channel_id": "UCNJ1Ymd5yFuUPtn21xtRbbw",
+        "handle": "@aiexplained-official",
+        "avatar": "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw",
+        "category": "🔥 深度评测与基准盲测",
+        "subscribers": "450K+",
+        "desc": "严谨的大模型思考链与测试期计算极限盲测"
+    },
+    {
+        "id": "twominutepapers",
+        "name": "Two Minute Papers",
+        "channel_id": "UCbfYPyITQ-7l4upoX8nvctg",
+        "handle": "@TwoMinutePapers",
+        "avatar": "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg",
+        "category": "🎓 论文精讲与学术突破",
+        "subscribers": "1.7M+",
+        "desc": "通俗震撼的前沿 AI 论文与图形学突破精讲"
+    },
+    {
+        "id": "karpathy",
+        "name": "Andrej Karpathy",
+        "channel_id": "UCXUPKJO5MZQN11PqgIvyuvQ",
+        "handle": "@karpathy",
+        "avatar": "https://unavatar.io/x/karpathy",
+        "category": "🎓 泰斗从零手写原理",
+        "subscribers": "1.1M+",
+        "desc": "OpenAI 联创手写微积分链式法则与神经网络"
+    },
+    {
+        "id": "3blue1brown",
+        "name": "3Blue1Brown",
+        "channel_id": "UCYO_jab_esuFRV4b17AJtAw",
+        "handle": "@3blue1brown",
+        "avatar": "https://unavatar.io/youtube/UCYO_jab_esuFRV4b17AJtAw",
+        "category": "🎓 几何直觉与可视化",
+        "subscribers": "6.8M+",
+        "desc": "Transformer 几何空间与注意力权重无死角拆解"
+    },
+    {
+        "id": "matthew_berman",
+        "name": "Matthew Berman",
+        "channel_id": "UCawZsQWqfGSbCI5yjkdVkTA",
+        "handle": "@matthew_berman",
+        "avatar": "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA",
+        "category": "🤖 开源模型与本地实测",
+        "subscribers": "680K+",
+        "desc": "开源模型微调、极速推理与私有化实测"
+    },
+    {
+        "id": "matt_wolfe",
+        "name": "Matt Wolfe",
+        "channel_id": "UChpleBmo18P08aKCIgti38g",
+        "handle": "@mreflow",
+        "avatar": "https://unavatar.io/x/mreflow",
+        "category": "🎨 AI 工具与多模态",
+        "subscribers": "620K+",
+        "desc": "最新 AI 实用工具盘点与多模态工作流"
+    },
+    {
+        "id": "yannic_kilcher",
+        "name": "Yannic Kilcher",
+        "channel_id": "UCZHmQk67mN31gbHey6BVyNw",
+        "handle": "@YannicKilcher",
+        "avatar": "https://unavatar.io/youtube/UCZHmQk67mN31gbHey6BVyNw",
+        "category": "🎓 硬核论文逐行细读",
+        "subscribers": "260K+",
+        "desc": "强化学习与大模型底层数学架构精读"
+    },
+    {
+        "id": "networkchuck",
+        "name": "NetworkChuck",
+        "channel_id": "UCOuGATIAbd2DvzJmUgXn2IQ",
+        "handle": "@NetworkChuck",
+        "avatar": "https://unavatar.io/youtube/UCOuGATIAbd2DvzJmUgXn2IQ",
+        "category": "⚡ 极客网络与硬件本地化",
+        "subscribers": "4.2M+",
+        "desc": "5分钟在普通笔记本部署本地私密 AI"
+    }
+]
+
+# 创作者防霸屏与多样性门禁规则 (Author Diversity Gate)
+YOUTUBE_DIVERSITY_RULES = {
+    "max_viral_per_author": 1,  # 近期爆点专栏中，单个作者最多出现 1 条
+    "max_total_per_author": 2,  # 全站视频库中，单个作者最多出现 2 条
+}
+

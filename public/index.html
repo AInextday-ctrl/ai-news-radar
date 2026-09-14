@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <title>AI 资讯雷达 | 全景 AI 动态与场景落地神器站</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
+    // 零闪烁 (Zero-FOUC) 主题初始化
+    (function() {
+      const stored = localStorage.getItem('theme') || 'auto';
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (stored === 'dark' || (stored === 'auto' && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+
     tailwind.config = {
       darkMode: 'class',
       theme: {
@@ -19,29 +31,80 @@
     }
   </script>
   <style>
-    /* 全局极客深色平滑滚动，杜绝嵌套卡顿 */
+    /* 全局平滑滚动与自然过渡 */
     html {
       scroll-behavior: smooth;
     }
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: #060913; }
-    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #334155; }
-    
-    .glass-panel {
-      background: rgba(13, 19, 34, 0.75);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    body {
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    .glass-card {
+    
+    /* 深浅主题滚动条适配 */
+    html.dark ::-webkit-scrollbar-track { background: #060913; }
+    html.dark ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    html.dark ::-webkit-scrollbar-thumb:hover { background: #334155; }
+    
+    html:not(.dark) ::-webkit-scrollbar-track { background: #f1f5f9; }
+    html:not(.dark) ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+
+    /* 深色模式磨砂玻璃质感 */
+    html.dark .glass-panel {
+      background: rgba(13, 19, 34, 0.78);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    html.dark .glass-card {
       background: #0d1322;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.45);
+    html.dark .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.5);
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(99, 102, 241, 0.15);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(99, 102, 241, 0.2);
+    }
+
+    /* 浅色模式纯净微晶质感 */
+    html:not(.dark) .glass-panel {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);
+    }
+    html:not(.dark) .glass-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      color: #0f172a;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    html:not(.dark) .glass-card:hover {
+      border-color: #6366f1;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.15), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+    }
+    html:not(.dark) .text-slate-100 { color: #0f172a !important; }
+    html:not(.dark) .text-slate-200 { color: #1e293b !important; }
+    html:not(.dark) .text-slate-300 { color: #334155 !important; }
+    html:not(.dark) .text-slate-400 { color: #64748b !important; }
+    html:not(.dark) .bg-slate-950\/40,
+    html:not(.dark) .bg-slate-950\/60,
+    html:not(.dark) .bg-slate-950\/90,
+    html:not(.dark) .bg-slate-900,
+    html:not(.dark) .bg-slate-900\/50,
+    html:not(.dark) .bg-slate-900\/80,
+    html:not(.dark) .bg-slate-900\/90 {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    html:not(.dark) .border-slate-800,
+    html:not(.dark) .border-slate-800\/60,
+    html:not(.dark) .border-slate-800\/70,
+    html:not(.dark) .border-slate-800\/80 {
+      border-color: #e2e8f0 !important;
     }
 
     .no-scrollbar::-webkit-scrollbar {
@@ -53,17 +116,17 @@
     }
   </style>
 </head>
-<body class="bg-[#060913] text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
 
   <!-- 顶部科技导航栏 -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-[#070b16]/95 border-b border-slate-800/80 px-4 sm:px-8 py-3 flex items-center justify-between shadow-xl">
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#070b16]/95 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 flex items-center justify-between shadow-sm dark:shadow-xl">
     <div class="flex items-center space-x-3">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
         🤖
       </div>
       <div>
         <div class="flex items-center space-x-2">
-          <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent" id="header-title">
+          <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-700 dark:from-white dark:via-slate-100 dark:to-indigo-300 bg-clip-text text-transparent" id="header-title">
             AI 资讯雷达
           </h1>
           <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 tracking-wider">
@@ -76,30 +139,46 @@
       </div>
     </div>
 
-    <!-- 右上角：中英文切换、状态指示灯与刷新 -->
-    <div class="flex items-center space-x-2.5 sm:space-x-3">
+    <!-- 右上角：深浅主题切换、中英文切换、状态指示灯与刷新 -->
+    <div class="flex items-center space-x-2 sm:space-x-3">
       
+      <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
+      <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
+        <button id="theme-btn-light" onclick="setTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <span>☀️</span>
+          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-light">浅色</span>
+        </button>
+        <button id="theme-btn-dark" onclick="setTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <span>🌙</span>
+          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
+        </button>
+        <button id="theme-btn-auto" onclick="setTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <span>💻</span>
+          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
+        </button>
+      </div>
+
       <!-- 🌐 中英文切换胶囊 -->
-      <div class="flex items-center bg-slate-900/90 p-1 rounded-xl border border-slate-700/60 shadow-inner">
+      <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
         <button id="lang-zh" onclick="setLanguage('zh')" class="px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm">
           🇨🇳 中文
         </button>
-        <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white">
+        <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
           🇬🇧 EN
         </button>
       </div>
 
       <!-- 实时同步灯 -->
-      <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-800">
+      <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-200/80 dark:bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span class="text-slate-300 font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
+        <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
       </div>
 
       <!-- 手动刷新按钮 -->
-      <button onclick="loadNews(true)" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
+      <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
         <span>🔄</span>
         <span id="refresh-btn-text" class="font-medium">刷新</span>
       </button>
@@ -107,7 +186,7 @@
   </header>
 
   <!-- 🧭 现代化固定分类导航栏 (Tabs Bar) -->
-  <nav class="sticky top-[57px] z-40 bg-[#090e1c]/90 backdrop-blur-md border-b border-slate-800 px-4 sm:px-8 py-2.5">
+  <nav class="sticky top-[57px] z-40 bg-white/90 dark:bg-[#090e1c]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-2.5 shadow-sm dark:shadow-none">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-3 overflow-x-auto no-scrollbar">
       <div class="flex items-center space-x-2 shrink-0" id="nav-tabs">
         <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
@@ -139,7 +218,7 @@
 
       <!-- 全站搜索筛选器 -->
       <div class="relative shrink-0 w-44 sm:w-64">
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-3 pr-8 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 rounded-xl pl-3 pr-8 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
         <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-1.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
         <span class="absolute right-2.5 top-2 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
@@ -430,6 +509,22 @@
         </div>
       </div>
 
+      <!-- 创作者专区导引栏 (Top Creators Rail) -->
+      <div id="creators-rail-container" class="hidden glass-panel rounded-2xl p-3 border border-slate-200 dark:border-slate-800">
+        <div class="flex items-center justify-between mb-2 px-1">
+          <div class="flex items-center space-x-2">
+            <span class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center space-x-1.5" id="creators-rail-title">
+              <span>🌟 顶流 AI 创作者专栏</span>
+              <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">· 一键直达顶尖 AI 极客发布</span>
+            </span>
+          </div>
+          <span class="text-[10px] text-indigo-500 font-mono font-bold" id="creators-active-hint">全部创作者</span>
+        </div>
+        <div id="creators-rail" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1">
+          <!-- 由 JS 渲染创作者头像与名称 -->
+        </div>
+      </div>
+
       <!-- 网格或列表呈现 -->
       <div id="cat-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 由 JS 渲染 -->
@@ -439,7 +534,7 @@
   </div>
 
   <!-- 页脚 -->
-  <footer class="border-t border-slate-800/80 bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2">
+  <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2">
     <div class="flex items-center justify-center space-x-4">
       <span id="footer-brand">🤖 AI 资讯雷达 4.0</span>
       <span>·</span>
@@ -471,6 +566,8 @@
 
   <script>
     let currentLang = localStorage.getItem('ai_radar_lang') || 'zh';
+    let currentTheme = localStorage.getItem('theme') || 'auto';
+    let selectedCreator = null;
     let currentTab = 'all';
     let cachedData = null;
     let refreshCountdown = 30;
@@ -810,6 +907,38 @@
       }
     }
 
+    // 主题切换控制 (浅色 / 深色 / 系统自适应)
+    function setTheme(mode) {
+      currentTheme = mode;
+      localStorage.setItem('theme', mode);
+      applyTheme();
+    }
+
+    function applyTheme() {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDark = currentTheme === 'dark' || (currentTheme === 'auto' && prefersDark);
+      if (isDark) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      const btnLight = document.getElementById('theme-btn-light');
+      const btnDark = document.getElementById('theme-btn-dark');
+      const btnAuto = document.getElementById('theme-btn-auto');
+
+      const activeClass = "px-2 py-1 text-xs rounded-lg transition-all bg-indigo-600 text-white font-bold shadow-sm flex items-center space-x-1";
+      const inactiveClass = "px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1";
+
+      if (btnLight) btnLight.className = (currentTheme === 'light') ? activeClass : inactiveClass;
+      if (btnDark) btnDark.className = (currentTheme === 'dark') ? activeClass : inactiveClass;
+      if (btnAuto) btnAuto.className = (currentTheme === 'auto') ? activeClass : inactiveClass;
+    }
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (currentTheme === 'auto') applyTheme();
+    });
+
     // 切换语言
     function setLanguage(lang) {
       currentLang = lang;
@@ -819,11 +948,18 @@
       const btnEn = document.getElementById('lang-en');
       if (lang === 'zh') {
         btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
-        btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white";
+        btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
       } else {
         btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
-        btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-400 hover:text-white";
+        btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
       }
+
+      const txtLight = document.getElementById('theme-txt-light');
+      if (txtLight) txtLight.textContent = (lang === 'zh') ? '浅色' : 'Light';
+      const txtDark = document.getElementById('theme-txt-dark');
+      if (txtDark) txtDark.textContent = (lang === 'zh') ? '深色' : 'Dark';
+      const txtAuto = document.getElementById('theme-txt-auto');
+      if (txtAuto) txtAuto.textContent = (lang === 'zh') ? '自动' : 'Auto';
 
       const t = I18N[lang];
       document.title = t.pageTitle;
@@ -980,6 +1116,14 @@
         if (celebSubfilter) celebSubfilter.classList.toggle('hidden', tab !== 'celebrity');
         if (toolsSubfilter) toolsSubfilter.classList.toggle('hidden', tab !== 'tools');
         if (videosSubfilter) videosSubfilter.classList.toggle('hidden', tab !== 'videos');
+
+        const creatorsRail = document.getElementById('creators-rail-container');
+        if (creatorsRail) {
+          creatorsRail.classList.toggle('hidden', tab !== 'videos');
+          if (tab === 'videos') {
+            renderCreatorsRail();
+          }
+        }
 
         if (tab === 'videos') {
           renderVideoSubChips();
@@ -1196,6 +1340,10 @@
         }
       });
       renderVideoSubChips();
+      const creatorsRail = document.getElementById('creators-rail-container');
+      if (creatorsRail) {
+        creatorsRail.classList.toggle('hidden', type === 'prompt' || currentTab !== 'videos');
+      }
       if (currentTab === 'videos') {
         renderCategoryView('videos');
       }
@@ -1642,6 +1790,186 @@
       return 'insight';
     }
 
+    // 客户端双重防御性原子级去重 (提取 11 位 YouTube Video ID 与规范化标题指纹)
+    function dedupVideoItems(list) {
+      if (!Array.isArray(list)) return [];
+      const seenVids = new Set();
+      const seenTitles = new Set();
+      return list.filter(item => {
+        if (!item) return false;
+        if (item.is_prompt) {
+          const key = item.id || (item.title || '').trim();
+          if (seenTitles.has(key)) return false;
+          seenTitles.add(key);
+          return true;
+        }
+        let vid = null;
+        if (item.embed_url) {
+          const m = item.embed_url.match(/embed\/([a-zA-Z0-9_-]{11})/);
+          if (m) vid = m[1];
+        }
+        if (!vid && item.url) {
+          const m = item.url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
+          if (m) vid = m[1];
+        }
+        if (vid) {
+          if (seenVids.has(vid)) return false;
+          seenVids.add(vid);
+        }
+        const cleanTitle = (item.title || '').toLowerCase().replace(/[^\w\u4e00-\u9fa5]/g, '').slice(0, 30);
+        if (cleanTitle) {
+          if (seenTitles.has(cleanTitle)) return false;
+          seenTitles.add(cleanTitle);
+        }
+        return true;
+      });
+    }
+
+    // 顶流 AI 创作者专栏渲染
+    function renderCreatorsRail() {
+      const container = document.getElementById('creators-rail');
+      if (!container) return;
+      const isZh = currentLang === 'zh';
+      const creators = (cachedData && cachedData.ai_creators && cachedData.ai_creators.length)
+        ? cachedData.ai_creators
+        : [
+            { name: "Fireship", handle: "@fireship", category: "⚡ 极速全栈实战", subscribers: "3.4M+", avatar: "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA" },
+            { name: "Theo - t3.gg", handle: "@t3dotgg", category: "🛠️ 全栈工程与架构", subscribers: "360K+", avatar: "https://unavatar.io/x/t3dotgg" },
+            { name: "AI Explained", handle: "@aiexplained-official", category: "🔥 深度盲测", subscribers: "450K+", avatar: "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw" },
+            { name: "Two Minute Papers", handle: "@TwoMinutePapers", category: "🎓 论文精讲", subscribers: "1.7M+", avatar: "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg" },
+            { name: "Andrej Karpathy", handle: "@karpathy", category: "🎓 泰斗手写原理", subscribers: "1.1M+", avatar: "https://unavatar.io/x/karpathy" },
+            { name: "3Blue1Brown", handle: "@3blue1brown", category: "🎓 几何直觉", subscribers: "6.8M+", avatar: "https://unavatar.io/youtube/UCYO_jab_esuFRV4b17AJtAw" },
+            { name: "Matthew Berman", handle: "@matthew_berman", category: "🤖 开源模型实测", subscribers: "680K+", avatar: "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA" },
+            { name: "Matt Wolfe", handle: "@mreflow", category: "🎨 实用工作流", subscribers: "620K+", avatar: "https://unavatar.io/x/mreflow" },
+            { name: "Yannic Kilcher", handle: "@YannicKilcher", category: "🎓 硬核论文细读", subscribers: "260K+", avatar: "https://unavatar.io/youtube/UCZHmQk67mN31gbHey6BVyNw" },
+            { name: "NetworkChuck", handle: "@NetworkChuck", category: "⚡ 本地化部署", subscribers: "4.2M+", avatar: "https://unavatar.io/youtube/UCOuGATIAbd2DvzJmUgXn2IQ" }
+          ];
+
+      const allActive = !selectedCreator;
+      let html = `
+        <button onclick="filterByCreator(null)" class="shrink-0 px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center space-x-1.5 transition-all ${allActive ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 font-bold' : 'bg-slate-200/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'}">
+          <span>🌐</span>
+          <span>${isZh ? '全部创作者' : 'All Creators'}</span>
+        </button>
+      `;
+
+      creators.forEach(c => {
+        const isSelected = selectedCreator === c.name;
+        const avatarUrl = c.avatar || `https://unavatar.io/x/${(c.handle || '').replace('@', '')}`;
+        html += `
+          <button onclick="filterByCreator('${c.name}')" class="shrink-0 px-2.5 py-1.5 rounded-xl text-xs font-medium flex items-center space-x-2 transition-all group ${isSelected ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-2 ring-indigo-400 font-bold' : 'bg-slate-200/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'}">
+            <img src="${avatarUrl}" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'" class="w-5 h-5 rounded-full object-cover ring-1 ring-white/20">
+            <span class="font-bold whitespace-nowrap">${c.name}</span>
+            <span class="text-[9px] px-1.5 py-0.2 rounded font-mono ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-300/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}">${c.subscribers || ''}</span>
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+      const hintEl = document.getElementById('creators-active-hint');
+      if (hintEl) {
+        hintEl.textContent = selectedCreator ? `${isZh ? '已筛选' : 'Filtered'}: ${selectedCreator}` : (isZh ? '全部创作者' : 'All Creators');
+      }
+    }
+
+    function filterByCreator(authorName) {
+      selectedCreator = authorName;
+      renderCreatorsRail();
+      if (currentTab === 'videos') {
+        renderCategoryView('videos');
+      } else if (cachedData) {
+        renderUI(cachedData);
+      }
+    }
+
+    // 焦点首发大卡渲染 (Hero Spotlight)
+    function renderHeroSpotlight(item) {
+      const isZh = currentLang === 'zh';
+      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
+      const views = item.metrics?.views || '1.2M+ 播放';
+
+      return `
+        <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col space-y-4 border-2 border-amber-500/40 shadow-xl relative overflow-hidden group">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <div class="flex items-center space-x-2">
+              <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white text-[11px] font-black shadow-md flex items-center space-x-1">
+                <span>🔥</span>
+                <span>${isZh ? '本周全球 AI 爆款第一焦点' : 'Weekly #1 Global Viral AI Breakout'}</span>
+              </span>
+              <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[10px] font-bold">${views}</span>
+            </div>
+            <span class="text-[11px] text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
+          </div>
+
+          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-slate-700/60 cursor-pointer shadow-lg group-hover:border-indigo-500/60 transition-colors" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex items-center justify-center">
+              <div class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center text-2xl pl-1 shadow-2xl group-hover:scale-110 group-hover:bg-rose-500 transition-all">
+                ▶
+              </div>
+            </div>
+            <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-medium">
+              <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-sm border border-white/10 font-bold">${item.author || item.source}</span>
+              <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-sm border border-white/10 font-mono">${duration}</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <h2 class="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+              ${title}
+            </h2>
+            ${summary ? `<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">${summary}</p>` : ''}
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
+            <div class="flex items-center space-x-2">
+              <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5">
+                <span>▶</span>
+                <span>${isZh ? '站内播放' : 'Play Now'}</span>
+              </button>
+              <a href="${item.url}" target="_blank" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 font-medium transition-colors flex items-center space-x-1">
+                <span>YouTube ↗</span>
+              </a>
+            </div>
+            <div class="hidden sm:flex items-center space-x-1 text-[11px] text-slate-500">
+              <span>信源认证:</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">${item.source}</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    // 实时飙升榜单小卡渲染
+    function renderTrendingMiniCard(item, rank) {
+      const isZh = currentLang === 'zh';
+      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const medals = ['🥇', '🥈', '🥉'];
+      const medal = medals[rank - 1] || `#${rank}`;
+
+      return `
+        <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+          <div class="relative w-24 aspect-video rounded-lg overflow-hidden bg-black shrink-0">
+            <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy">
+            <span class="absolute top-1 left-1 text-xs drop-shadow">${medal}</span>
+          </div>
+          <div class="flex-1 min-w-0 space-y-1">
+            <div class="flex items-center justify-between text-[10px] text-slate-500">
+              <span class="font-bold text-rose-500 dark:text-rose-400 truncate max-w-[110px]">${item.author}</span>
+              <span class="font-mono">${timeObj.relative || ''}</span>
+            </div>
+            <h4 class="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
+              ${title}
+            </h4>
+          </div>
+        </div>
+      `;
+    }
+
     // ==========================================
     // 专门卡片渲染：视频演示与 Prompt 咒语卡片
     // ==========================================
@@ -1783,7 +2111,7 @@
       const newsHits = filterList(data.grouped?.news || data.news || data.industry_news || []);
       const celebHits = filterList(data.grouped?.celebrity || data.celebrity || data.leader_opinions || []);
       const toolsHits = filterList(data.grouped?.tools || data.tools || data.applied_tools || []);
-      const videosHits = filterList(data.grouped?.videos || data.videos || data.video_prompts || []);
+      const videosHits = dedupVideoItems(filterList(data.grouped?.videos || data.videos || data.video_prompts || []));
       const totalHits = newsHits.length + celebHits.length + toolsHits.length + videosHits.length;
 
       const headingEl = document.getElementById('search-results-heading');
@@ -1943,8 +2271,9 @@
       }
 
       // D. 视频演示与Prompt板块 (Videos)
-      const recentVideos = allVideos.filter(it => isWithin24Hours(it.raw_published_at));
-      const historyVideos = allVideos.filter(it => !isWithin24Hours(it.raw_published_at));
+      const dedupedVideos = dedupVideoItems(allVideos);
+      const recentVideos = dedupedVideos.filter(it => isWithin24Hours(it.raw_published_at));
+      const historyVideos = dedupedVideos.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamVideos = document.getElementById('stream-videos');
       streamVideos.innerHTML = recentVideos.length > 0
         ? recentVideos.slice(0, 12).map(renderVideoOrPromptCard).join('')
@@ -2065,7 +2394,10 @@
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-4">${t.toolsNoMatch}</div>`;
       } else if (tab === 'videos') {
-        let list = filterList(cachedData.grouped?.videos || cachedData.videos || cachedData.video_prompts || []);
+        const isZh = currentLang === 'zh';
+        let rawList = filterList(cachedData.grouped?.videos || cachedData.videos || cachedData.video_prompts || []);
+        let list = dedupVideoItems(rawList);
+
         if (videoTypeFilter === 'prompt') {
           list = list.filter(it => it.is_prompt);
         } else if (videoTypeFilter === 'video') {
@@ -2078,8 +2410,57 @@
             list = list.filter(it => (it.sub_type || getVideoSubType(it)) === videoSubFilter);
           }
         }
-        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.videosNoMatch}</div>`;
+        if (selectedCreator) {
+          list = list.filter(it => it.author === selectedCreator);
+        }
+
+        // 判断是否展示 Hero Spotlight 顶栏大卡与飙升热榜
+        const showHero = !searchQuery && !selectedCreator && videoTypeFilter !== 'prompt' && (!videoSubFilter || videoSubFilter === 'all' || videoSubFilter === 'viral');
+        const heroItem = showHero ? (list.find(it => it.is_viral && !it.is_prompt) || list.find(it => !it.is_prompt)) : null;
+
+        if (heroItem) {
+          const trendingItems = list.filter(it => it !== heroItem && !it.is_prompt).slice(0, 3);
+          const remainingItems = list.filter(it => it !== heroItem && !trendingItems.includes(it));
+          container.className = "space-y-6";
+          container.innerHTML = `
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+              <!-- 左侧 2/3: Hero Spotlight 焦点大卡 -->
+              <div class="lg:col-span-8 h-full">
+                ${renderHeroSpotlight(heroItem)}
+              </div>
+              <!-- 右侧 1/3: 实时飙升热播榜 -->
+              <div class="lg:col-span-4 glass-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between space-y-3">
+                <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
+                  <h3 class="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center space-x-1.5">
+                    <span class="text-rose-500">🔥</span>
+                    <span>${isZh ? '实时飙升热播榜' : 'Live Trending AI Radar'}</span>
+                  </h3>
+                  <span class="text-[10px] text-slate-400 font-mono">TOP 3</span>
+                </div>
+                <div class="space-y-2.5 flex-1 flex flex-col justify-around">
+                  ${trendingItems.map((it, idx) => renderTrendingMiniCard(it, idx + 1)).join('')}
+                </div>
+              </div>
+            </div>
+
+            <!-- 下方: 更多精选实战与提示词多元网格 -->
+            <div class="space-y-3 pt-2">
+              <div class="flex items-center justify-between">
+                <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center space-x-1.5">
+                  <span>⚡</span>
+                  <span>${isZh ? '更多顶流实战与提示词精选' : 'Curated Hands-on & Prompt Mastery'}</span>
+                </h3>
+                <span class="text-[11px] text-slate-400 font-mono">${remainingItems.length} items</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                ${remainingItems.length > 0 ? remainingItems.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-8 col-span-3 text-xs">${t.videosNoMatch}</div>`}
+              </div>
+            </div>
+          `;
+        } else {
+          container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
+          container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.videosNoMatch}</div>`;
+        }
       }
     }
 

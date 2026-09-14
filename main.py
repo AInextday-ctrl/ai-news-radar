@@ -17,9 +17,10 @@ import re
 import json
 import time
 from datetime import datetime, timezone
-from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint
 from processor import process_items_batch
-from config import CATEGORIES
+from config import CATEGORIES, AI_CREATORS
+
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 PUBLIC_DATA_DIR = os.path.join(os.path.dirname(__file__), "public", "data")
@@ -269,6 +270,7 @@ def save_news(items: list):
         "top_three": top_three,
         "chatbot_arena": chatbot_arena,
         "arxiv_papers": arxiv_papers,
+        "ai_creators": AI_CREATORS,
         "grouped": grouped,
         "news": grouped.get("news", []),
         "celebrity": grouped.get("celebrity", []),
@@ -351,29 +353,51 @@ def run_pipeline():
 
     # 5. 多轨合并：将历史资讯、AI处理的新闻与权威精选条目合并，严格按发布时间倒序（最新永远置顶在最上方）
     merged_pool = {}
+
+    def get_dedup_key(item):
+        if item.get("category") == "videos":
+            if item.get("is_prompt"):
+                return f"prompt_{item.get('id', '') or item.get('title_zh', '')}"
+            vid = extract_clean_video_id(item.get("url", "")) or item.get("video_id", "")
+            if vid:
+                return f"yt_vid_{vid}"
+            tfp = normalize_title_fingerprint(item.get("title", "") or item.get("title_zh", ""))
+            if tfp:
+                return f"yt_tfp_{tfp}"
+        u = item.get("url")
+        if u:
+            # 标准化推特与网页链接
+            u_clean = u.split("?")[0].rstrip("/")
+            return f"url_{u_clean}"
+        return f"id_{item.get('id', '')}"
+
     # 先入历史
     for it in existing_items:
-        key = it.get("url") or it.get("id")
+        key = get_dedup_key(it)
         if key:
             merged_pool[key] = it
     # 再入新增外部新闻（确保最新提取的属性生效）
     for it in new_processed_items:
-        key = it.get("url") or it.get("id")
+        key = get_dedup_key(it)
         if key:
             merged_pool[key] = it
     # 最后入权威精选（确保大V真实推文、教程、Prompt最新准确属性与真实时间戳绝对覆盖）
     for it in pre_curated_items:
-        key = it.get("url") or it.get("id")
+        key = get_dedup_key(it)
         if key:
             merged_pool[key] = it
 
     combined_items = list(merged_pool.values())
     combined_items.sort(key=parse_time_for_sort, reverse=True)
 
-    # 严格清理历史遗留的假爆款与执行 30 天爆点生命周期门禁 (30d Viral Lifecycle Gate)
+    # 严格清理历史遗留的假爆款、执行 30 天爆点时效门禁、创作者防垄断配额 (Author Diversity Gate)
     now_ts = time.time()
     MAX_VIRAL_SECONDS = 30 * 86400  # 30 天
     cleaned_items = []
+    seen_video_ids = set()
+    seen_video_tfps = set()
+    author_viral_counts = {}
+    author_total_counts = {}
 
     for it in combined_items:
         it_id = str(it.get("id", ""))
@@ -382,16 +406,59 @@ def run_pipeline():
         if any(fake_k in it_id for fake_k in ["yt_viral_fireship_deepseek", "yt_viral_theo_claude37_cursor", "yt_viral_matthew_berman_open_weights", "yt_viral_networkchuck_ollama", "yt_viral_karpathy_micrograd", "yt_viral_mcp_agentic_workflow", "yt_viral_ai_explained_hybrid_reasoning"]) or any(fake_u in it_url for fake_u in ["Cursor_Claude37_Theo", "Matthew_Berman_Shootout", "NetworkChuck_Ollama_Guide", "MCP_Protocol_Production", "Claude_37_Thinking_Tested"]):
             continue
 
-        # 30 天爆点生命周期门禁：
-        # 如果条目被打上了 is_viral: true 或 🔥 近期爆点，但发布时间距今已超过 30 天，强制降级并剥离爆点标签
+        # 确保基础 title 字段非空（适配各类精选模板）
+        if not it.get("title"):
+            it["title"] = it.get("title_zh") or it.get("title_en", "")
+
+        # 实操 Prompt 咒语卡片独立保留并直接通过
+        if it.get("category") == "videos" and it.get("is_prompt"):
+            cleaned_items.append(it)
+            continue
+
         diff = now_ts - parse_time_for_sort(it)
-        if diff > MAX_VIRAL_SECONDS:
+
+        # 视频专属：跨信源原子级去重与创作者配额防霸屏
+        if it.get("category") == "videos":
+            vid = extract_clean_video_id(it.get("url", "")) or it.get("video_id", "")
+            tfp = normalize_title_fingerprint(it.get("title", "") or it.get("title_zh", ""))
+            if vid and vid in seen_video_ids:
+                continue
+            if tfp and tfp in seen_video_tfps:
+                continue
+
+            author = it.get("author", "unknown")
+
+            # 30 天爆点生命周期门禁：超期强制降级并剥离爆点属性
+            if diff > MAX_VIRAL_SECONDS:
+                if it.get("is_viral"):
+                    it["is_viral"] = False
+                if "tags" in it and isinstance(it["tags"], list):
+                    it["tags"] = [t for t in it["tags"] if t != "🔥 近期爆点"]
+                if it.get("sub_type") == "viral":
+                    it["sub_type"] = "tutorial" if "教学" in (it.get("title", "") + it.get("title_zh", "")) else "insight"
+
+            # 创作者爆点防霸屏门禁：单个博主在爆点专栏中至多占 1 席
             if it.get("is_viral"):
+                if author_viral_counts.get(author, 0) >= 1:
+                    it["is_viral"] = False
+                    if "tags" in it and isinstance(it["tags"], list):
+                        it["tags"] = [t for t in it["tags"] if t != "🔥 近期爆点"]
+                    it["sub_type"] = "tutorial" if "教学" in (it.get("title", "") + it.get("title_zh", "")) else "insight"
+                else:
+                    author_viral_counts[author] = author_viral_counts.get(author, 0) + 1
+
+            # 创作者全库总配额门禁：单个博主在全库视频中至多保留 2 条，杜绝垄断
+            if author_total_counts.get(author, 0) >= 2:
+                continue
+
+            author_total_counts[author] = author_total_counts.get(author, 0) + 1
+            if vid:
+                seen_video_ids.add(vid)
+            if tfp:
+                seen_video_tfps.add(tfp)
+        else:
+            if diff > MAX_VIRAL_SECONDS and it.get("is_viral"):
                 it["is_viral"] = False
-            if "tags" in it and isinstance(it["tags"], list):
-                it["tags"] = [t for t in it["tags"] if t != "🔥 近期爆点"]
-            if it.get("sub_type") == "viral":
-                it["sub_type"] = "tutorial" if "教学" in (it.get("title", "") + it.get("title_zh", "")) else "insight"
 
         it["is_recent_24h"] = bool(diff <= 86400)
         cleaned_items.append(it)
