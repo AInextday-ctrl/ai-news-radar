@@ -33,6 +33,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: 'gemini-2.5-flash'
+          PYTHONIOENCODING: 'utf-8'
         run: |
           python main.py
 

@@ -6,12 +6,13 @@ Guarantees 100% pure Chinese translation for titles, summaries, tags and categor
 
 import sys
 
-if sys.platform == "win32":
-    try:
+try:
+    if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+except Exception:
+    pass
 
 import os
 import re
@@ -157,39 +158,59 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
     """
     Process a list of items with Gemini in batches, or high-speed neural translator.
     Guarantees 100% pure Chinese titles and takeaways.
+    Pre-curated items with existing title_zh & summary_zh are preserved directly.
     """
+    # 区分：已有优质中文的精选内容（领袖推特、场景工具、实战视频、Prompt）与需要 AI 翻译提炼的原始 RSS
+    direct_items = []
+    need_ai_items = []
+
+    for it in items:
+        # 补齐缺省 category 字段
+        if "category" not in it:
+            it["category"] = it.get("default_category", "news")
+        
+        if it.get("title_zh") and it.get("summary_zh"):
+            direct_items.append(it)
+        else:
+            need_ai_items.append(it)
+
+    print(f"📊 待处理清单：{len(direct_items)} 条已具备精选中文，{len(need_ai_items)} 条需要 AI 翻译提炼")
+
+    if not need_ai_items:
+        return direct_items
+
     client = get_gemini_client()
 
     if not client:
         print("💡 未检测到 GEMINI_API_KEY，启用内置神经翻译器保障 100% 纯中文呈现...")
-        processed = []
-        for item in items:
+        processed_ai = []
+        for item in need_ai_items:
             p_item = dict(item)
             cat = item.get("category") or item.get("default_category", "news")
             p_item["category"] = cat
-            title_zh = free_translate_zh(item["title"])
+            title_zh = free_translate_zh(item.get("title", ""))
             p_item["title_zh"] = title_zh
             p_item["summary_zh"] = generate_smart_fallback_summary(item, title_zh)
             p_item["hot_score"] = 4 if cat in ["celebrity", "videos"] else 3
-            p_item["tags"] = item.get("tags") or [item["source"]]
-            processed.append(p_item)
+            p_item["tags"] = item.get("tags") or [item.get("source", "AI快讯")]
+            processed_ai.append(p_item)
         print("  ✓ 纯正中文翻译与看点提炼生成完毕！")
-        return processed
+        return direct_items + processed_ai
 
     print("🤖 正在调用 Google Gemini 进行批量智能翻译、提炼与分类...")
 
     results = []
     models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
 
-    for i in range(0, len(items), batch_size):
-        chunk = items[i:i + batch_size]
+    for i in range(0, len(need_ai_items), batch_size):
+        chunk = need_ai_items[i:i + batch_size]
         simplified_chunk = [
             {
                 "index": idx,
-                "title": it["title"],
-                "source": it["source"],
-                "content": it["content_snippet"][:300],
-                "suggested_category": it["default_category"]
+                "title": it.get("title", ""),
+                "source": it.get("source", ""),
+                "content": it.get("content_snippet", "")[:300],
+                "suggested_category": it.get("category") or it.get("default_category", "news")
             }
             for idx, it in enumerate(chunk)
         ]
@@ -250,25 +271,25 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             for idx, orig_item in enumerate(chunk):
                 ai_data = parsed_dict.get(idx, {})
                 merged = dict(orig_item)
-                merged["title_zh"] = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item["title"])
+                merged["title_zh"] = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
                 merged["summary_zh"] = orig_item.get("summary_zh") or ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
                 merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
                 merged["hot_score"] = ai_data.get("hot_score", 3)
-                merged["tags"] = orig_item.get("tags") or ai_data.get("tags") or [orig_item["source"]]
+                merged["tags"] = orig_item.get("tags") or ai_data.get("tags") or [orig_item.get("source", "AI快讯")]
                 results.append(merged)
 
-            print(f"  ✓ 已完成 {min(i + batch_size, len(items))}/{len(items)} 条")
+            print(f"  ✓ 已完成 {min(i + batch_size, len(need_ai_items))}/{len(need_ai_items)} 条")
 
         except Exception as e:
             print(f"  ❌ Gemini 处理异常: {e}，启用高可用神经中文翻译保障")
             for orig_item in chunk:
                 fallback = dict(orig_item)
-                title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item["title"])
+                title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
                 fallback["title_zh"] = title_zh
                 fallback["summary_zh"] = orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh)
                 fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
                 fallback["hot_score"] = 3
-                fallback["tags"] = orig_item.get("tags") or [orig_item["source"]]
+                fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
                 results.append(fallback)
 
-    return results
+    return direct_items + results

@@ -4,12 +4,13 @@ Main pipeline entrypoint 2.0 - Coordinates fetching, Gemini processing, Top 3 di
 
 import sys
 
-if sys.platform == "win32":
-    try:
+try:
+    if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
+    if hasattr(sys.stderr, "reconfigure"):
         sys.stderr.reconfigure(encoding="utf-8")
-    except Exception:
-        pass
+except Exception:
+    pass
 
 import os
 import json
