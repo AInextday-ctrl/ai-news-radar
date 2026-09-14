@@ -1456,7 +1456,13 @@
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
-        const res = await fetch(`data/latest_news.json?t=${Date.now()}`);
+        const res = await fetch(`data/latest_news.json?t=${Date.now()}`, {
+          cache: 'no-store',
+          headers: {
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache'
+          }
+        });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
         cachedData = data;
