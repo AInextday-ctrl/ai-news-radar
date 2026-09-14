@@ -220,9 +220,25 @@ def load_existing_items() -> list:
                     if not x_status_pattern.search(u):
                         continue
 
-                # 4. 丢弃旧版可能残留假当前时间戳的提示词与教程，让新版真实发布时间的精选库自然覆盖
-                if it_id.startswith("prompt_") or it_id.startswith("tut_"):
+                # 4. 丢弃旧版提示词与教程，让新版真实发布时间的独立提示词库覆盖
+                if it_id.startswith("prompt_") or it_id.startswith("tut_") or it.get("category") == "prompts" or it.get("is_prompt"):
                     continue
+
+                # 5. 坚决清洗淘汰旧时代的陈旧模型与过时应用 (如 dalle-mini, FLUX.1 dev, IllusionDiffusion 等)
+                if it.get("category") == "tools":
+                    t_str = f"{it_id} {it.get('title', '')} {it.get('title_zh', '')} {u}".lower()
+                    if any(bad in t_str for bad in ["dalle-mini", "illusiondiffusion", "latent-consistency", "flux.1", "sd-webui"]):
+                        continue
+                    # 彻底丢弃带有本地毫秒级假时间戳的旧条目及历史残留远古应用
+                    if any(bad in u for bad in ["enzostvs/deepsite", "ai-comic-factory", "Kolors-Virtual-Try-On"]):
+                        continue
+                    raw_pub = it.get("raw_published_at", "")
+                    if re.search(r'\.\d{6}\+00:00', raw_pub):
+                        continue
+                    # 超过 180 天的古董工具坚决不留
+                    tool_ts = parse_time_for_sort(it)
+                    if tool_ts > 0 and (time.time() - tool_ts) > 180 * 86400:
+                        continue
 
                 valid_items.append(it)
 
@@ -237,7 +253,7 @@ def save_news(items: list):
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
     
-    # 按照四大核心分类组织视图，并严格按最新发布时间倒序排列
+    # 按照五大核心分类组织视图，并严格按最新发布时间倒序排列
     grouped = {cat_key: [] for cat_key in CATEGORIES}
     for item in items:
         cat = item.get("category", "news")
@@ -276,6 +292,7 @@ def save_news(items: list):
         "celebrity": grouped.get("celebrity", []),
         "tools": grouped.get("tools", []),
         "videos": grouped.get("videos", []),
+        "prompts": grouped.get("prompts", []),
         "industry_news": grouped.get("news", []),
         "leader_opinions": grouped.get("celebrity", []),
         "applied_tools": grouped.get("tools", []),
@@ -333,8 +350,8 @@ def run_pipeline():
     for it in raw_items:
         u = it.get("url")
         i = it.get("id")
-        # 若条目本身为视频，或已有高质量中文提炼（例如大V推特、实操Prompt）
-        if it.get("category") == "videos":
+        # 若条目本身为视频/提示词，或已有高质量中文提炼（例如大V推特、实操Prompt）
+        if it.get("category") in ["videos", "prompts"]:
             pre_curated_items.append(it)
         elif it.get("title_zh") and it.get("summary_zh"):
             pre_curated_items.append(it)
@@ -355,9 +372,9 @@ def run_pipeline():
     merged_pool = {}
 
     def get_dedup_key(item):
+        if item.get("category") == "prompts":
+            return f"prompt_{item.get('id', '') or item.get('title_zh', '')}"
         if item.get("category") == "videos":
-            if item.get("is_prompt"):
-                return f"prompt_{item.get('id', '') or item.get('title_zh', '')}"
             vid = extract_clean_video_id(item.get("url", "")) or item.get("video_id", "")
             if vid:
                 return f"yt_vid_{vid}"
@@ -411,7 +428,7 @@ def run_pipeline():
             it["title"] = it.get("title_zh") or it.get("title_en", "")
 
         # 实操 Prompt 咒语卡片独立保留并直接通过
-        if it.get("category") == "videos" and it.get("is_prompt"):
+        if it.get("category") == "prompts":
             cleaned_items.append(it)
             continue
 

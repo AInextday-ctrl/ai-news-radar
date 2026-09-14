@@ -110,7 +110,7 @@ def parse_to_iso(published_parsed: Any = None, raw_str: str = "") -> str:
         # 匹配常见 ISO 格式
         if re.match(r'^\d{4}-\d{2}-\d{2}', raw_str):
             return raw_str
-    return datetime.now(timezone.utc).isoformat()
+    return ""
 
 
 def get_smart_cover_url(title: str, category: str = "news", source: str = "") -> Optional[str]:
@@ -863,46 +863,62 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
 # 3. 抓取 Hugging Face 每日在线可玩落地应用 (Spaces)
 # ==========================================
 def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
-    """Fetch trending interactive AI applications runnable right in browser from Hugging Face."""
+    """Fetch trending interactive AI applications runnable right in browser from Hugging Face with authentic creation timestamps."""
     items = []
-    now_iso = datetime.now(timezone.utc).isoformat()
+    banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1"]
     try:
-        url = "https://huggingface.co/api/spaces?sort=likes&direction=-1&limit=25"
+        # 按实时飙升热度排序，获取当前最前沿的活跃空间
+        url = "https://huggingface.co/api/spaces?sort=trendingScore&direction=-1&limit=30"
         with httpx.Client(headers=HEADERS, timeout=12) as client:
             resp = client.get(url)
             if resp.status_code == 200:
                 data = resp.json()
-                for sp in data[:max_items]:
+                now_utc = datetime.now(timezone.utc)
+                for sp in data:
+                    if len(items) >= max_items:
+                        break
                     sp_id = sp.get("id", "")
                     if not sp_id or "leaderboard" in sp_id.lower():
                         continue
+                    low_sp = sp_id.lower()
+                    # 坚决过滤过时陈旧模型与黑名单应用
+                    if any(bad in low_sp for bad in banned_keywords):
+                        continue
+
+                    # 严格使用工具真实的发布/创建时间点，杜绝假时间
+                    created_raw = sp.get("createdAt") or sp.get("lastModified")
+                    if not created_raw:
+                        continue
+                    real_pub_iso = parse_to_iso(raw_str=str(created_raw))
+
+                    # 90 天时效门禁：超过 90 天的旧工具不作为当期前沿工具展示
+                    try:
+                        dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
+                        if (now_utc - dt).total_seconds() > 90 * 86400:
+                            continue
+                    except Exception:
+                        pass
+
                     name = sp_id.split("/")[-1]
                     likes = sp.get("likes", 0)
                     space_url = f"https://huggingface.co/spaces/{sp_id}"
 
                     # 智能解析场景与标题
                     scenario = "🎨 图像修图/生成"
-                    desc = "Hugging Face 热门免安装在线体验应用"
+                    desc = "Hugging Face 2026 前沿免安装在线交互应用"
                     desc_en = "Trending interactive AI browser application on Hugging Face"
                     icon_type = "vision"
                     runtime_badge = "🟢 WebGPU 免装即用"
 
-                    low_sp = sp_id.lower()
-                    if "flux" in low_sp:
+                    if "try-on" in low_sp or "fashion" in low_sp:
                         scenario = "🎨 图像修图/生成"
-                        desc = "开源最强照片级商业人像生图大模型在线免安装快速体验"
-                        desc_en = "Open-source photorealistic portrait generation model runnable online"
-                        icon_type = "vision"
-                        runtime_badge = "🟢 WebGPU 免装即用"
-                    elif "try-on" in low_sp or "kolors" in low_sp:
-                        scenario = "🎨 图像修图/生成"
-                        desc = "AI 虚拟模特换装与衣服试穿写真合成在线工具"
+                        desc = "AI 虚拟模特动态试衣与写真写真合成新一代工作流"
                         desc_en = "Virtual AI model try-on and fashion photo synthesis tool"
                         icon_type = "vision"
                         runtime_badge = "🟢 在线直接试穿"
-                    elif "comic" in low_sp:
+                    elif "comic" in low_sp or "story" in low_sp:
                         scenario = "🎨 图像修图/生成"
-                        desc = "一键全自动生成四格与多格趣味故事分镜的创意工作流"
+                        desc = "一键全自动生成多格趣味故事分镜的创意工作流"
                         desc_en = "Automated multi-panel comic and story illustration workflow"
                         icon_type = "vision"
                         runtime_badge = "🟢 WebGPU 免装即用"
@@ -912,16 +928,16 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                         desc_en = "Prompt-to-fullstack web application generator and design tool"
                         icon_type = "code"
                         runtime_badge = "⚡ 在线一键生成"
-                    elif "video" in low_sp or "hunyuan" in low_sp:
+                    elif "video" in low_sp or "i2v" in low_sp or "t2v" in low_sp or "wan" in low_sp:
                         scenario = "🎬 视频创作合成"
-                        desc = "开源高质量文生视频与图生视频实时推理在线试玩"
-                        desc_en = "Open-source high-quality text-to-video & image-to-video playground"
+                        desc = "新一代高质量图生视频/文生视频实时推理在线试玩"
+                        desc_en = "Next-gen high-quality video generation playground"
                         icon_type = "vision"
                         runtime_badge = "🟢 在线实时试玩"
-                    elif "code" in low_sp or "coder" in low_sp:
+                    elif "code" in low_sp or "coder" in low_sp or "edit" in low_sp:
                         scenario = "💻 编程开发提效"
-                        desc = "针对编程开发与代码重构微调的高性能代码助手"
-                        desc_en = "Fine-tuned code assistant for refactoring and developer velocity"
+                        desc = "针对编程重构与智能编辑微调的高性能助手"
+                        desc_en = "Fine-tuned AI assistant for developer velocity"
                         icon_type = "code"
                         runtime_badge = "⚡ 云端极速推理"
                     elif "audio" in low_sp or "voice" in low_sp or "tts" in low_sp:
@@ -930,10 +946,10 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                         desc_en = "High-fidelity text-to-speech and voice cloning web app"
                         icon_type = "audio"
                         runtime_badge = "🟢 浏览器麦克风直录"
-                    elif "chat" in low_sp or "agent" in low_sp:
+                    elif "chat" in low_sp or "agent" in low_sp or "reasoning" in low_sp:
                         scenario = "🤖 自动化 Agent"
-                        desc = "多模态文档深度理解与全自动任务分解在线助理"
-                        desc_en = "Multimodal document intelligence and autonomous agent assistant"
+                        desc = "多模态深度思考与全自动工作流助理"
+                        desc_en = "Multimodal intelligence and autonomous agent assistant"
                         icon_type = "agent"
                         runtime_badge = "⚡ 一键对话运行"
 
@@ -953,7 +969,7 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                         "image_url": None,
                         "source": "Hugging Face 空间",
                         "author": sp_id.split("/")[0],
-                        "raw_published_at": now_iso,
+                        "raw_published_at": real_pub_iso,
                         "runtime_badge": runtime_badge,
                         "icon_type": icon_type,
                         "metrics": {"likes": likes, "pricing": "🟢 免部署在线玩", "runtime": runtime_badge, "icon_type": icon_type},
@@ -975,28 +991,49 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
 # 4. 抓取 GitHub 场景应用神器 (高频更新+丰富标题)
 # ==========================================
 def fetch_github_applied_tools() -> List[Dict[str, Any]]:
-    """Fetch practical GitHub open-source client tools/apps with rich titles."""
+    """Fetch practical GitHub open-source client tools/apps with authentic creation timestamps."""
     items = []
-    now_iso = datetime.now(timezone.utc).isoformat()
+    banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1"]
+    now_utc = datetime.now(timezone.utc)
     try:
-        url = "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>30&sort=updated&order=desc&per_page=12"
+        url = "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>30&sort=updated&order=desc&per_page=20"
         with httpx.Client(headers=HEADERS, timeout=12) as client:
             resp = client.get(url)
             if resp.status_code == 200:
                 data = resp.json()
-                for repo in data.get("items", [])[:8]:
+                for repo in data.get("items", []):
+                    if len(items) >= 8:
+                        break
                     name = repo.get("name", "")
                     description = repo.get("description") or "实用开源 AI 落地工具"
+                    combined = f"{name} {description}".lower()
+                    
+                    # 过滤远古项目及过时模型
+                    if any(bad in combined for bad in banned_keywords):
+                        continue
+
+                    created_raw = repo.get("created_at")
+                    if not created_raw:
+                        continue
+                    real_pub_iso = parse_to_iso(raw_str=str(created_raw))
+
+                    # 时效把关：过滤超过 180 天的陈旧仓库，保证推荐的前沿度与新颖度
+                    try:
+                        dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
+                        if (now_utc - dt).total_seconds() > 180 * 86400:
+                            continue
+                    except Exception:
+                        pass
+
                     stars = repo.get("stargazers_count", 0)
                     repo_url = repo.get("html_url", "")
 
                     # 场景推断
-                    combined = f"{name} {description}".lower()
                     scenario = "💻 开发者提效"
                     icon_type = "code"
                     runtime_badge = "🐳 Docker 一键部署"
 
-                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "flux", "draw", "photo"]):
+                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo"]):
                         scenario = "🎨 图像修图/设计"
                         icon_type = "vision"
                         runtime_badge = "🟢 本地 GPU 运行"
@@ -1033,7 +1070,7 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                         "image_url": None,
                         "source": "GitHub",
                         "author": repo.get("owner", {}).get("login", "GitHub"),
-                        "raw_published_at": parse_to_iso(raw_str=repo.get("updated_at", now_iso)),
+                        "raw_published_at": real_pub_iso,
                         "runtime_badge": runtime_badge,
                         "icon_type": icon_type,
                         "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},

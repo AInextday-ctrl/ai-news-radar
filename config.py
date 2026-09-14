@@ -17,8 +17,12 @@ CATEGORIES = {
         "en": "🛠️ Applied AI Tools"
     },
     "videos": {
-        "zh": "🎬 爆款演示·实操技巧",
-        "en": "🎬 Videos & Prompts"
+        "zh": "🎬 实战视频·演示",
+        "en": "🎬 Hands-on Videos"
+    },
+    "prompts": {
+        "zh": "💡 提示词库·咒语",
+        "en": "💡 Prompt Bank"
     }
 }
 
