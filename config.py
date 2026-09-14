@@ -40,30 +40,72 @@ PRICING_TAGS = {
     "paid": "🔴 商业软件"
 }
 
-# 名人识别库及头像映射 (覆盖全球顶尖 AI 领袖)
+# 名人识别库及头像映射 (覆盖全球顶尖 AI 领袖、核心科学家与高频发声一线工程师)
 CELEBRITY_PROFILES = {
+    # 1. OpenAI 核心团队
     "sam altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama", "platform": "x"},
     "altman": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama", "platform": "x"},
-    "elon musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
-    "musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
-    "dario amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
-    "amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
-    "andrej karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
-    "karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
-    "yann lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
-    "lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
-    "jim fan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
-    "drjimfan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+    "sama": {"name": "Sam Altman", "handle": "@sama", "role": "OpenAI CEO", "avatar": "https://unavatar.io/x/sama", "platform": "x"},
+    "greg brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁兼联合创始人", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
+    "brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁兼联合创始人", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
+    "noam brown": {"name": "Noam Brown", "handle": "@polynoamial", "role": "OpenAI 推理与 o1/o3 研发负责人", "avatar": "https://unavatar.io/x/polynoamial", "platform": "x"},
+    "polynoamial": {"name": "Noam Brown", "handle": "@polynoamial", "role": "OpenAI 推理与 o1/o3 研发负责人", "avatar": "https://unavatar.io/x/polynoamial", "platform": "x"},
+    "mira murati": {"name": "Mira Murati", "handle": "@miramurati", "role": "前 OpenAI CTO / 前沿实验室创始人", "avatar": "https://unavatar.io/x/miramurati", "platform": "x"},
+    "murati": {"name": "Mira Murati", "handle": "@miramurati", "role": "前 OpenAI CTO / 前沿实验室创始人", "avatar": "https://unavatar.io/x/miramurati", "platform": "x"},
+    "mark chen": {"name": "Mark Chen", "handle": "@markchen90", "role": "OpenAI 研究高级副总裁", "avatar": "https://unavatar.io/x/markchen90", "platform": "x"},
+    "wojciech zaremba": {"name": "Wojciech Zaremba", "handle": "@woj_zaremba", "role": "OpenAI 联合创始人", "avatar": "https://unavatar.io/x/woj_zaremba", "platform": "x"},
+    "john schulman": {"name": "John Schulman", "handle": "@johnschulman2", "role": "PPO/RLHF 奠基人 / Anthropic 科学家", "avatar": "https://unavatar.io/x/johnschulman2", "platform": "x"},
+
+    # 2. Anthropic 核心团队
+    "dario amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO 兼联合创始人", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
+    "amodei": {"name": "Dario Amodei", "handle": "@AnthropicAI", "role": "Anthropic CEO 兼联合创始人", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
+    "amanda askell": {"name": "Amanda Askell", "handle": "@AmandaAskell", "role": "Anthropic 对齐与性格哲学负责人", "avatar": "https://unavatar.io/x/AmandaAskell", "platform": "x"},
+    "askell": {"name": "Amanda Askell", "handle": "@AmandaAskell", "role": "Anthropic 对齐与性格哲学负责人", "avatar": "https://unavatar.io/x/AmandaAskell", "platform": "x"},
+    "chris olah": {"name": "Chris Olah", "handle": "@ch402", "role": "Anthropic 联合创始人 / 可解释性先驱", "avatar": "https://unavatar.io/x/ch402", "platform": "x"},
+    "jack clark": {"name": "Jack Clark", "handle": "@jackclarkSF", "role": "Anthropic 联合创始人 / AI Policy", "avatar": "https://unavatar.io/x/jackclarkSF", "platform": "x"},
+
+    # 3. Google & DeepMind 核心团队
+    "demis hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO / 诺奖得主", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
+    "hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO / 诺奖得主", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
+    "jeff dean": {"name": "Jeff Dean", "handle": "@JeffDean", "role": "Google 首席科学家 / 架构泰斗", "avatar": "https://unavatar.io/x/JeffDean", "platform": "x"},
+    "oriol vinyals": {"name": "Oriol Vinyals", "handle": "@OriolVinyalsML", "role": "Google DeepMind 研究副总裁", "avatar": "https://unavatar.io/x/OriolVinyalsML", "platform": "x"},
+    "logan kilpatrick": {"name": "Logan Kilpatrick", "handle": "@OfficialLoganK", "role": "Google AI Studio 负责人", "avatar": "https://unavatar.io/x/OfficialLoganK", "platform": "x"},
+    "logank": {"name": "Logan Kilpatrick", "handle": "@OfficialLoganK", "role": "Google AI Studio 负责人", "avatar": "https://unavatar.io/x/OfficialLoganK", "platform": "x"},
+
+    # 4. Meta & 开源巨头
+    "yann lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家 / 图灵奖得主", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
+    "lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家 / 图灵奖得主", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
+    "mark zuckerberg": {"name": "Mark Zuckerberg", "handle": "@Meta", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/Meta", "platform": "x"},
+    "zuckerberg": {"name": "Mark Zuckerberg", "handle": "@Meta", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/Meta", "platform": "x"},
+    "soumith chintala": {"name": "Soumith Chintala", "handle": "@soumithchintala", "role": "PyTorch 创始人", "avatar": "https://unavatar.io/x/soumithchintala", "platform": "x"},
+
+    # 5. NVIDIA 核心团队
     "jensen huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
     "huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
-    "demis hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
-    "hassabis": {"name": "Demis Hassabis", "handle": "@demishassabis", "role": "Google DeepMind CEO", "avatar": "https://unavatar.io/x/demishassabis", "platform": "x"},
-    "greg brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
-    "brockman": {"name": "Greg Brockman", "handle": "@gdb", "role": "OpenAI 总裁", "avatar": "https://unavatar.io/x/gdb", "platform": "x"},
-    "ilya sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 创始人", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
-    "sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 创始人", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
-    "francois chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"},
-    "chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"}
+    "jim fan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+    "drjimfan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+
+    # 6. xAI / 独立前沿机构
+    "elon musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
+    "musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},
+    "ilya sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 联合创始人 / 深度学习泰斗", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
+    "sutskever": {"name": "Ilya Sutskever", "handle": "@ilyasut", "role": "SSI 联合创始人 / 深度学习泰斗", "avatar": "https://unavatar.io/x/ilyasut", "platform": "x"},
+    "andrej karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
+    "karpathy": {"name": "Andrej Karpathy", "handle": "@karpathy", "role": "AI 领军学者 / Eureka Labs", "avatar": "https://unavatar.io/x/karpathy", "platform": "x"},
+    "francois chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人 / Keras 作者", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"},
+    "chollet": {"name": "François Chollet", "handle": "@fchollet", "role": "ARC-AGI 创始人 / Keras 作者", "avatar": "https://unavatar.io/x/fchollet", "platform": "x"},
+
+    # 7. 一线热门 AI 工程师、明星创始人与布道师
+    "arthur mensch": {"name": "Arthur Mensch", "handle": "@arthurmensch", "role": "Mistral AI CEO 兼联合创始人", "avatar": "https://unavatar.io/x/arthurmensch", "platform": "x"},
+    "aravind srinivas": {"name": "Aravind Srinivas", "handle": "@AravSrinivas", "role": "Perplexity AI CEO", "avatar": "https://unavatar.io/x/AravSrinivas", "platform": "x"},
+    "simon willison": {"name": "Simon Willison", "handle": "@simonw", "role": "独立 AI 工程师 / Prompt Injection 提出者", "avatar": "https://unavatar.io/x/simonw", "platform": "x"},
+    "harrison chase": {"name": "Harrison Chase", "handle": "@hwchase17", "role": "LangChain 创始人兼 CEO", "avatar": "https://unavatar.io/x/hwchase17", "platform": "x"},
+    "swyx": {"name": "Swyx (Shawn Wang)", "handle": "@swyx", "role": "AI Engineer Foundation / Latent Space", "avatar": "https://unavatar.io/x/swyx", "platform": "x"},
+    "george hotz": {"name": "George Hotz (geohot)", "handle": "@realgeohot", "role": "tinygrad 创始人 / 极客黑客", "avatar": "https://unavatar.io/x/realgeohot", "platform": "x"},
+    "geohot": {"name": "George Hotz (geohot)", "handle": "@realgeohot", "role": "tinygrad 创始人 / 极客黑客", "avatar": "https://unavatar.io/x/realgeohot", "platform": "x"},
+    "bindu reddy": {"name": "Bindu Reddy", "handle": "@bindureddy", "role": "Abacus.ai CEO", "avatar": "https://unavatar.io/x/bindureddy", "platform": "x"},
+    "pieter abbeel": {"name": "Pieter Abbeel", "handle": "@pabbeel", "role": "UC 伯克利机器人实验室教授", "avatar": "https://unavatar.io/x/pabbeel", "platform": "x"},
+    "deepseek": {"name": "DeepSeek 核心研发团队", "handle": "@deepseek_ai", "role": "DeepSeek 官方研发团队", "avatar": "https://unavatar.io/github/deepseek-ai", "platform": "x"}
 }
 
 # 抓取源清单：严格剔除地方政务/会议水文，仅聚合全球顶尖 AI 突破与极客一线动态
@@ -74,6 +116,13 @@ SOURCES = {
         "url": "https://news.google.com/rss/search?q=AI+OR+OpenAI+OR+Anthropic+OR+ChatGPT+when:1d&hl=en-US&gl=US&ceid=US:en",
         "default_category": "news",
         "type": "rss"
+    },
+    "x_trending_ai": {
+        "name": "𝕏 实时爆款热议",
+        "url": "https://news.google.com/rss/search?q=site:x.com+AI+OR+LLM+when:1d&hl=en-US&gl=US&ceid=US:en",
+        "default_category": "celebrity",
+        "platform": "x",
+        "type": "x_trending"
     },
     "techmeme_ai": {
         "name": "Techmeme 硅谷风向",

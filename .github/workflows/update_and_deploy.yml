@@ -2,8 +2,8 @@ name: AI Radar - 24x7 Auto Update & Deploy
 
 on:
   schedule:
-    # 每 30 分钟在云端自动抓取更新一次 (UTC)
-    - cron: '*/30 * * * *'
+    # 每 15 分钟在云端高频增量抓取更新一次 (UTC)
+    - cron: '*/15 * * * *'
   workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
   push:
     branches:

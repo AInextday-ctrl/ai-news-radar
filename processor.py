@@ -46,12 +46,27 @@ def free_translate_zh(text: str) -> str:
     if clean_text in _TRANSLATION_CACHE:
         return _TRANSLATION_CACHE[clean_text]
 
-    # 1. 优先调用有道高可用免密神经翻译 (毫秒级响应，带自动重试)
+    # 1. 优先调用 Google Translate 免密神经翻译 (极速高精，支持长句)
+    try:
+        gt_url = "https://translate.googleapis.com/translate_a/single"
+        params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": clean_text[:350]}
+        with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6) as client:
+            resp = client.get(gt_url, params=params)
+            if resp.status_code == 200:
+                res = resp.json()
+                zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
+                    _TRANSLATION_CACHE[clean_text] = zh_res
+                    return zh_res
+    except Exception:
+        pass
+
+    # 2. 备用有道免密神经翻译 (毫秒级响应，带自动重试)
     for _ in range(2):
         try:
             url = "https://aidemo.youdao.com/trans"
             data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=8) as client:
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6) as client:
                 resp = client.post(url, data=data)
                 if resp.status_code == 200:
                     res_data = resp.json()

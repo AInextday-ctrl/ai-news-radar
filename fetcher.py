@@ -599,6 +599,216 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
             "summary_en": "Computing is shifting from data retrieval to generation of knowledge and skills. Data centers are turning into AI factories.",
             "category": "celebrity",
             "tags": ["𝕏推特大V", "NVIDIA", "算力基础设施"]
+        },
+        {
+            "id": "x_noam_reasoning_scaling",
+            "title": "Noam Brown: In o1 and o3, we proved that giving models test-time compute to deliberate and self-correct unlocks mathematical and coding capabilities that pretraining scaling alone could never achieve.",
+            "title_zh": "Noam Brown：在 o1 与 o3 研发中，我们证明赋予模型测试期推理算力（Test-time Compute）以展开反思和自我纠错，能解锁传统预训练 Scaling 绝无法企及的高阶数理与复杂代码能力。",
+            "title_en": "Noam Brown: In o1 and o3, we proved that giving models test-time compute to deliberate and self-correct unlocks mathematical and coding capabilities that pretraining scaling alone could never achieve.",
+            "url": "https://x.com/polynoamial",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @polynoamial",
+            "author": "Noam Brown",
+            "author_handle": "@polynoamial",
+            "author_avatar": "https://unavatar.io/x/polynoamial",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "31.2k", "retweets": "5.7k", "platform": "x", "verified": True},
+            "spec_tags": ["测试期算力扩展", "自我纠错推理"],
+            "content_snippet": "In o1 and o3, we proved that giving models test-time compute to deliberate and self-correct unlocks mathematical and coding capabilities that pretraining scaling alone could never achieve.",
+            "summary_zh": "测试期长思考推理链彻底拓宽了 Scaling Law 的第二曲线，让模型拥有了在草稿本上不断反思修错的高阶智能。",
+            "summary_en": "Test-time compute scaling unlocks higher-order reasoning, enabling models to deliberate, backtrack, and self-correct.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "OpenAI", "深度推理"]
+        },
+        {
+            "id": "x_gdb_infra_systems",
+            "title": "Greg Brockman: The future of AI systems engineering is about reliable infrastructure for millions of concurrent multi-agent environments. Building high-availability AI infra is the hardest distributed systems problem today.",
+            "title_zh": "Greg Brockman：AI 系统工程的未来在于为百万级并发多智能体环境提供绝对可靠的算力底座。构建高可用低延迟的 AI 分布式基础设施是当今最硬核的系统挑战。",
+            "title_en": "Greg Brockman: The future of AI systems engineering is about reliable infrastructure for millions of concurrent multi-agent environments. Building high-availability AI infra is the hardest distributed systems problem today.",
+            "url": "https://x.com/gdb",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @gdb",
+            "author": "Greg Brockman",
+            "author_handle": "@gdb",
+            "author_avatar": "https://unavatar.io/x/gdb",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "28.5k", "retweets": "4.6k", "platform": "x", "verified": True},
+            "spec_tags": ["分布式系统", "高并发Agent"],
+            "content_snippet": "The future of AI systems engineering is about reliable infrastructure for millions of concurrent multi-agent environments. Building high-availability AI infra is the hardest distributed systems problem today.",
+            "summary_zh": "分布式 AI 基础设施正在承受前所未有的压力：从超低延迟 KV Cache 调度到异构集群容灾，工程底座决定了智能规模的上限。",
+            "summary_en": "AI systems engineering must support millions of concurrent agents. Infra reliability and KV-cache scheduling define the scale of intelligence.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "OpenAI", "系统工程"]
+        },
+        {
+            "id": "x_askell_claude_character",
+            "title": "Amanda Askell: Training Claude's character isn't just about safety filters—it's about instilling genuine intellectual curiosity, epistemic humility, and nuanced ethical judgment into the foundational post-training process.",
+            "title_zh": "Amanda Askell：雕琢 Claude 的性格绝不仅仅是生硬的安全拦截，而是在后训练阶段注入真正的求知欲、知识谦逊感与精细的伦理思辨力。",
+            "title_en": "Amanda Askell: Training Claude's character isn't just about safety filters—it's about instilling genuine intellectual curiosity, epistemic humility, and nuanced ethical judgment into the foundational post-training process.",
+            "url": "https://x.com/AmandaAskell",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @AmandaAskell",
+            "author": "Amanda Askell",
+            "author_handle": "@AmandaAskell",
+            "author_avatar": "https://unavatar.io/x/AmandaAskell",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "24.1k", "retweets": "3.9k", "platform": "x", "verified": True},
+            "spec_tags": ["性格对齐", "RLHF哲学"],
+            "content_snippet": "Training Claude's character isn't just about safety filters—it's about instilling genuine intellectual curiosity, epistemic humility, and nuanced ethical judgment into the foundational post-training process.",
+            "summary_zh": "大模型的性格塑造是前沿科学：不仅要防止有害输出，更要让 AI 具备客观中立、勇于承认未知并善于探究真相的思维品质。",
+            "summary_en": "Shaping model personality requires imparting intellectual curiosity and epistemic humility rather than crude refusal rules.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Anthropic", "模型对齐"]
+        },
+        {
+            "id": "x_jeffdean_hardware_codesign",
+            "title": "Jeff Dean: Gemini's native multimodal architecture combined with specialized TPU v5p pods demonstrates that co-designing hardware interconnects and model topology is essential for next-gen frontier intelligence.",
+            "title_zh": "Jeff Dean：Gemini 原生多模态架构与定制 TPU v5p Pods 的结合证明，硬件光电互联拓扑与模型架构的深度协同设计（Co-design）是通往下一代前沿智能的基石。",
+            "title_en": "Jeff Dean: Gemini's native multimodal architecture combined with specialized TPU v5p pods demonstrates that co-designing hardware interconnects and model topology is essential for next-gen frontier intelligence.",
+            "url": "https://x.com/JeffDean",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @JeffDean",
+            "author": "Jeff Dean",
+            "author_handle": "@JeffDean",
+            "author_avatar": "https://unavatar.io/x/JeffDean",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "33.7k", "retweets": "5.4k", "platform": "x", "verified": True},
+            "spec_tags": ["硬件协同设计", "TPU超算集群"],
+            "content_snippet": "Gemini's native multimodal architecture combined with specialized TPU v5p pods demonstrates that co-designing hardware interconnects and model topology is essential for next-gen frontier intelligence.",
+            "summary_zh": "芯片硬件与神经网络结构绝不能脱节割裂。定制 TPU 互联拓扑与稀疏注意力的深度绑定，让百万级上下文实时推理成为可能。",
+            "summary_en": "Co-designing TPU interconnect topology and sparse attention architectures is essential for real-time million-token multimodal reasoning.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Google", "架构泰斗"]
+        },
+        {
+            "id": "x_logank_agent_developer",
+            "title": "Logan Kilpatrick: The barrier to building autonomous AI applications has completely collapsed. Millions of developers are using 2M+ context windows to ingest entire production codebases and build agents in an afternoon.",
+            "title_zh": "Logan Kilpatrick：构建自主 AI 应用的技术门槛已经彻底瓦解。全球数百万开发者正在利用 200万+ 超长上下文将整个生产级工程代码库注入模型，几个小时内就能上线自动化 Agent。",
+            "title_en": "Logan Kilpatrick: The barrier to building autonomous AI applications has completely collapsed. Millions of developers are using 2M+ context windows to ingest entire production codebases and build agents in an afternoon.",
+            "url": "https://x.com/OfficialLoganK",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @OfficialLoganK",
+            "author": "Logan Kilpatrick",
+            "author_handle": "@OfficialLoganK",
+            "author_avatar": "https://unavatar.io/x/OfficialLoganK",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "19.8k", "retweets": "2.8k", "platform": "x", "verified": True},
+            "spec_tags": ["超长上下文", "开发者生态"],
+            "content_snippet": "The barrier to building autonomous AI applications has completely collapsed. Millions of developers are using 2M+ context windows to ingest entire production codebases and build agents in an afternoon.",
+            "summary_zh": "长窗口彻底颠覆了复杂的外部 RAG 管道。直接将几十万行全栈仓库抛入模型，开发者在单日内就能打造出企业级智能体助手。",
+            "summary_en": "2M+ context windows replace fragile RAG setups, empowering developers to ingest full codebases and deploy agents in an afternoon.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Google AI", "开发者生态"]
+        },
+        {
+            "id": "x_arthur_open_weights",
+            "title": "Arthur Mensch: Open weights models are the backbone of sovereign AI and industrial independence. High-efficiency MoE architectures prove you don't need trillion-dollar data centers to achieve world-class intelligence.",
+            "title_zh": "Arthur Mensch：开源权重是全球主权 AI 与工业自主的根基。高效稀疏混合专家（MoE）架构证明，无需万亿美金数据中心同样能实现世界级前沿推理能力。",
+            "title_en": "Arthur Mensch: Open weights models are the backbone of sovereign AI and industrial independence. High-efficiency MoE architectures prove you don't need trillion-dollar data centers to achieve world-class intelligence.",
+            "url": "https://x.com/arthurmensch",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @arthurmensch",
+            "author": "Arthur Mensch",
+            "author_handle": "@arthurmensch",
+            "author_avatar": "https://unavatar.io/x/arthurmensch",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "21.6k", "retweets": "3.5k", "platform": "x", "verified": True},
+            "spec_tags": ["开源权重", "MoE高效架构"],
+            "content_snippet": "Open weights models are the backbone of sovereign AI and industrial independence. High-efficiency MoE architectures prove you don't need trillion-dollar data centers to achieve world-class intelligence.",
+            "summary_zh": "开源生态不仅打破了闭源寡头垄断，更让任何具备隐私要求的企业都能在自有受控硬件上满血运行顶级前沿智能。",
+            "summary_en": "Open weights protect data sovereignty and prove that lightweight, efficient MoE architectures rival centralized mega-clusters.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Mistral AI", "开源权重"]
+        },
+        {
+            "id": "x_aravind_realtime_search",
+            "title": "Aravind Srinivas: Traditional ten-blue-links search engines are permanently obsolete. The new search paradigm is real-time web synthesis powered by multi-model reasoning and live factual cross-verification.",
+            "title_zh": "Aravind Srinivas：传统的‘十条蓝色链接’网页搜索时代已永久终结。新一代搜索范式是基于实时全网检索的多模型推理综合与即时事实交叉核验。",
+            "title_en": "Aravind Srinivas: Traditional ten-blue-links search engines are permanently obsolete. The new search paradigm is real-time web synthesis powered by multi-model reasoning and live factual cross-verification.",
+            "url": "https://x.com/AravSrinivas",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @AravSrinivas",
+            "author": "Aravind Srinivas",
+            "author_handle": "@AravSrinivas",
+            "author_avatar": "https://unavatar.io/x/AravSrinivas",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "26.3k", "retweets": "4.1k", "platform": "x", "verified": True},
+            "spec_tags": ["实时搜索综合", "跨模型推理"],
+            "content_snippet": "Traditional ten-blue-links search engines are permanently obsolete. The new search paradigm is real-time web synthesis powered by multi-model reasoning and live factual cross-verification.",
+            "summary_zh": "用户不再想要满屏的 SEO 垃圾广告和死链接，他们要的是直接、精准且附带确切权威引注的事实答案与对比表格。",
+            "summary_en": "Users want verified answers with exact citations and structured tables rather than cluttered blue links and SEO spam.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Perplexity", "智能搜索"]
+        },
+        {
+            "id": "x_simonw_prompt_injection",
+            "title": "Simon Willison: Every software engineer must understand Prompt Injection and system prompt decoupling. As we give LLMs tool access and shell execution, security boundaries must be rebuilt from first principles.",
+            "title_zh": "Simon Willison：每位软件工程师都必须深刻理解 Prompt Injection（提示词注入）与系统隔离。当我们赋予大模型工具调用与终端执行权限时，安全防线必须从第一性原理彻底重构。",
+            "title_en": "Simon Willison: Every software engineer must understand Prompt Injection and system prompt decoupling. As we give LLMs tool access and shell execution, security boundaries must be rebuilt from first principles.",
+            "url": "https://x.com/simonw",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @simonw",
+            "author": "Simon Willison",
+            "author_handle": "@simonw",
+            "author_avatar": "https://unavatar.io/x/simonw",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "17.4k", "retweets": "2.9k", "platform": "x", "verified": True},
+            "spec_tags": ["提示词注入防护", "工具安全边界"],
+            "content_snippet": "Every software engineer must understand Prompt Injection and system prompt decoupling. As we give LLMs tool access and shell execution, security boundaries must be rebuilt from first principles.",
+            "summary_zh": "绝不要信任不可信外部输入拼接的 Prompt。构建具备沙箱隔离和指令权限制约的执行环境，是 Agent 落地生产的前提。",
+            "summary_en": "Unsanitized untrusted text fed to LLMs breaks traditional app security. Sandboxed privilege boundaries are mandatory for production agents.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "AI工程实战", "安全攻防"]
+        },
+        {
+            "id": "x_harrison_stateful_agents",
+            "title": "Harrison Chase: LangGraph and stateful multi-agent workflows have become the standard for mission-critical AI products. Deterministic control flow combined with probabilistic LLM reasoning is the only way to ship reliable software.",
+            "title_zh": "Harrison Chase：LangGraph 与具备状态持久化的多 Agent 工作流已成为生产级 AI 产品的标配。确定性控制流与概率性 LLM 推理的严谨结合，是交付高可靠软件的唯一途径。",
+            "title_en": "Harrison Chase: LangGraph and stateful multi-agent workflows have become the standard for mission-critical AI products. Deterministic control flow combined with probabilistic LLM reasoning is the only way to ship reliable software.",
+            "url": "https://x.com/hwchase17",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @hwchase17",
+            "author": "Harrison Chase",
+            "author_handle": "@hwchase17",
+            "author_avatar": "https://unavatar.io/x/hwchase17",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "18.9k", "retweets": "3.0k", "platform": "x", "verified": True},
+            "spec_tags": ["状态持久化", "确定性控制流"],
+            "content_snippet": "LangGraph and stateful multi-agent workflows have become the standard for mission-critical AI products. Deterministic control flow combined with probabilistic LLM reasoning is the only way to ship reliable software.",
+            "summary_zh": "纯粹依赖 LLM 自主循环极易死锁和失控。通过有向无环图（DAG）硬编码流程节点与检查点回滚，才能构建出可上线的生产应用。",
+            "summary_en": "Deterministic graph control flow plus rollback checkpoints turns volatile LLM stochastic outputs into production software.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "LangChain", "Agent架构"]
+        },
+        {
+            "id": "x_deepseek_grpo_breakthrough",
+            "title": "DeepSeek Core Team: GRPO (Group Relative Policy Optimization) proves that reasoning capabilities can be incentivized directly through pure reinforcement learning without supervised fine-tuning cold start, drastically reducing alignment overhead.",
+            "title_zh": "DeepSeek 研发团队：GRPO（群体相对策略优化）证明了纯强化学习可以直接激发模型的深层反思与推理能力，无需昂贵的监督微调冷启动，大幅降低了推理模型的训练开销。",
+            "title_en": "DeepSeek Core Team: GRPO (Group Relative Policy Optimization) proves that reasoning capabilities can be incentivized directly through pure reinforcement learning without supervised fine-tuning cold start, drastically reducing alignment overhead.",
+            "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @deepseek_ai",
+            "author": "DeepSeek 核心研发团队",
+            "author_handle": "@deepseek_ai",
+            "author_avatar": "https://unavatar.io/github/deepseek-ai",
+            "platform": "x",
+            "raw_published_at": now_iso,
+            "metrics": {"likes": "46.2k", "retweets": "8.8k", "platform": "x", "verified": True},
+            "spec_tags": ["GRPO纯强化学习", "零SFT冷启动"],
+            "content_snippet": "GRPO (Group Relative Policy Optimization) proves that reasoning capabilities can be incentivized directly through pure reinforcement learning without supervised fine-tuning cold start, drastically reducing alignment overhead.",
+            "summary_zh": "摒弃价值模型 Critic 网络、纯靠规则打分与组内相对比较，GRPO 彻底改写了大模型后训练范式，为全球开源社区提供了推理模型极速复现范本。",
+            "summary_en": "GRPO eliminates the Critic network, utilizing rule-based scoring and relative reward normalization to revolutionize reasoning RL.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "DeepSeek", "强化学习"]
         }
     ]
 
@@ -895,6 +1105,108 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
 
 
 # ==========================================
+# 5.5. 实时抓取当天全网轰动 𝕏 (Twitter) 爆款推文
+# ==========================================
+def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
+    """
+    Fetch viral, real-time X (Twitter) posts of the day by querying Google News site:x.com
+    and Techmeme direct X links.
+    """
+    items = []
+    gnews_url = "https://news.google.com/rss/search?q=site:x.com+AI+OR+LLM+OR+OpenAI+when:1d&hl=en-US&gl=US&ceid=US:en"
+    try:
+        with httpx.Client(headers=HEADERS, follow_redirects=True, timeout=12) as client:
+            resp = client.get(gnews_url)
+            if resp.status_code == 200:
+                feed = feedparser.parse(resp.text)
+                for entry in feed.entries:
+                    raw_title = entry.get("title", "").strip()
+                    cleaned_title = re.sub(r'\s*-\s*(?:x\.com|twitter\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()
+                    if not cleaned_title or len(cleaned_title) < 15:
+                        continue
+
+                    # 严格过滤非技术杂质
+                    if any(bad in cleaned_title.lower() for bad in ["betting", "nfl", "sports", "poker", "casino", "gambling", "nba", "lottery"]):
+                        continue
+
+                    profile = match_celebrity_profile(cleaned_title, "")
+                    author_name = profile["name"] if profile else "AI Tech Leader / X"
+                    author_handle = profile["handle"] if profile else "@x"
+                    author_avatar = profile["avatar"] if profile else "https://unavatar.io/x/x"
+
+                    iso_time = parse_to_iso(entry.get("published_parsed"))
+                    spec_tags = extract_tech_specs(cleaned_title, "") or ["𝕏当天爆款", "实时动态"]
+                    item_id = make_id(entry.get("link", ""), cleaned_title)
+
+                    items.append({
+                        "id": item_id,
+                        "title": cleaned_title,
+                        "title_en": cleaned_title,
+                        "title_zh": cleaned_title,
+                        "url": entry.get("link", "https://x.com"),
+                        "image_url": None,
+                        "source": f"𝕏 (Twitter) · {author_handle}",
+                        "author": author_name,
+                        "author_handle": author_handle,
+                        "author_avatar": author_avatar,
+                        "platform": "x",
+                        "raw_published_at": iso_time,
+                        "metrics": {"likes": "🔥 爆款热议", "retweets": "Trending", "platform": "x", "verified": True},
+                        "spec_tags": spec_tags,
+                        "content_snippet": cleaned_title,
+                        "summary_en": cleaned_title,
+                        "summary_zh": cleaned_title,
+                        "category": "celebrity",
+                        "tags": ["𝕏当天爆款", "实时推文"]
+                    })
+                    if len(items) >= max_items:
+                        break
+    except Exception as e:
+        print(f"  ❌ [𝕏 实时爆款] Google News 抓取失败: {e}")
+
+    # Techmeme X direct links
+    try:
+        with httpx.Client(headers=HEADERS, follow_redirects=True, timeout=10) as client:
+            resp = client.get("https://www.techmeme.com/feed.xml")
+            if resp.status_code == 200:
+                feed = feedparser.parse(resp.text)
+                for entry in feed.entries:
+                    desc = entry.get("summary", "") or entry.get("description", "")
+                    x_links = re.findall(r'https?://(?:twitter|x)\.com/([a-zA-Z0-9_]+)/status/(\d+)', desc)
+                    for user, status_id in x_links:
+                        x_url = f"https://x.com/{user}/status/{status_id}"
+                        if any(it["url"] == x_url for it in items):
+                            continue
+                        t_title = entry.get("title", "") or f"Tweet by @{user}"
+                        profile = match_celebrity_profile(f"{user} {t_title}", "")
+                        items.append({
+                            "id": make_id(x_url, t_title),
+                            "title": t_title,
+                            "title_en": t_title,
+                            "title_zh": t_title,
+                            "url": x_url,
+                            "image_url": None,
+                            "source": f"𝕏 (Twitter) · @{user}",
+                            "author": profile["name"] if profile else f"@{user}",
+                            "author_handle": f"@{user}",
+                            "author_avatar": profile["avatar"] if profile else f"https://unavatar.io/x/{user}",
+                            "platform": "x",
+                            "raw_published_at": parse_to_iso(entry.get("published_parsed")),
+                            "metrics": {"likes": "⚡ Techmeme焦点", "retweets": "Top Quote", "platform": "x", "verified": True},
+                            "spec_tags": ["硅谷焦点推文", "大V交锋"],
+                            "content_snippet": t_title,
+                            "summary_en": t_title,
+                            "summary_zh": t_title,
+                            "category": "celebrity",
+                            "tags": ["𝕏当天爆款", "硅谷风向"]
+                        })
+    except Exception as e:
+        print(f"  ❌ [𝕏 实时爆款] Techmeme 抓取失败: {e}")
+
+    return items
+
+
+# ==========================================
 # 6. 抓取全球顶尖科技媒体快讯与社区大V
 # ==========================================
 def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
@@ -905,11 +1217,15 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     """
     items = []
 
-    # 1. 优先注入 𝕏 (Twitter) 真正的大V领袖前沿言论矩阵 (马斯克/奥特曼/LeCun/Karpathy/Jim Fan等)
+    # 1. 优先注入 𝕏 (Twitter) 顶尖领袖与核心工程师矩阵 (马斯克/奥特曼/Noam Brown/Brockman/LeCun/Karpathy等)
     x_posts = fetch_x_leader_posts()
     items.extend(x_posts)
 
-    # 2. 全球顶级硬核科技媒体 (24小时超高频全球榜 + 深度突破)
+    # 2. 实时抓取当天全网轰动的 𝕏 爆款推文与大V交锋
+    live_x_posts = fetch_live_trending_x_posts(max_items=12)
+    items.extend(live_x_posts)
+
+    # 3. 全球顶级硬核科技媒体 (24小时超高频全球榜 + 深度突破)
     news_sources = [
         ("google_news_ai", 15),
         ("techmeme_ai", 8),
@@ -923,11 +1239,11 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     for key, count in news_sources:
         items.extend(fetch_rss_channel(key, max_items=count))
 
-    # 3. Hacker News 极客热榜
+    # 4. Hacker News 极客热榜
     hn_items = fetch_hacker_news(max_items=8)
     items.extend(hn_items)
 
-    # 4. Reddit 极客社群真实热议 (标明 Reddit 身份，不张冠李戴给奥特曼)
+    # 5. Reddit 极客社群真实热议 (标明 Reddit 身份，不张冠李戴给奥特曼)
     reddit_sources = [
         ("reddit_singularity", 8),
         ("reddit_chatgpt", 6),

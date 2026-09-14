@@ -118,8 +118,27 @@ def extract_top_three(items: list) -> list:
     return top
 
 
+def load_existing_items() -> list:
+    """Load previously saved news items from JSON to support incremental updates and history retention."""
+    target_file = PUBLIC_OUTPUT_FILE if os.path.exists(PUBLIC_OUTPUT_FILE) else OUTPUT_FILE
+    if not os.path.exists(target_file):
+        return []
+    try:
+        with open(target_file, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            # 优先从 items 取，次优从 grouped 展平
+            items = data.get("items", [])
+            if not items and "grouped" in data:
+                for cat_items in data["grouped"].values():
+                    items.extend(cat_items)
+            return items or []
+    except Exception as e:
+        print(f"⚠️ 读取历史数据失败: {e}，将从头构建数据池。")
+        return []
+
+
 def save_news(items: list):
-    """Save processed items to local JSON file for frontend and deployment."""
+    """Save processed items to local JSON file for frontend and deployment with historical retention."""
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
     
@@ -129,13 +148,21 @@ def save_news(items: list):
         cat = item.get("category", "news")
         if cat not in grouped:
             cat = "news"
-        grouped[cat].append(item)
+        # 各分类保留最多 200 条高质量深度历史情报
+        if len(grouped[cat]) < 200:
+            grouped[cat].append(item)
 
     for cat_key in grouped:
         grouped[cat_key].sort(key=parse_time_for_sort, reverse=True)
 
+    # 重新聚合去重后的有效项目池
+    final_items = []
+    for cat_key in grouped:
+        final_items.extend(grouped[cat_key])
+    final_items.sort(key=parse_time_for_sort, reverse=True)
+
     # 提炼今日 60 秒极速风向标 (Top 3)
-    top_three = extract_top_three(items)
+    top_three = extract_top_three(final_items)
 
     # 载入发烧友必备基准：LMSYS Arena Top 5 与 ArXiv 前沿突破论文
     chatbot_arena = get_chatbot_arena_top5()
@@ -143,7 +170,7 @@ def save_news(items: list):
 
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
-        "total_count": len(items),
+        "total_count": len(final_items),
         "categories": CATEGORIES,
         "top_three": top_three,
         "chatbot_arena": chatbot_arena,
@@ -157,7 +184,7 @@ def save_news(items: list):
         "leader_opinions": grouped.get("celebrity", []),
         "applied_tools": grouped.get("tools", []),
         "video_prompts": grouped.get("videos", []),
-        "items": items
+        "items": final_items
     }
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
@@ -179,24 +206,69 @@ def save_news(items: list):
 def run_pipeline():
     start_time = datetime.now()
     print("=" * 60)
-    print(f"🕒 AI 资讯雷达 2.0 启动: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"🕒 AI 资讯雷达 增量更新启动: {start_time.strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
 
-    # 1. 抓取多渠道资讯 (视频/工具/名人大V/新闻)
+    # 1. 载入已有历史资讯池以支持增量合并
+    existing_items = load_existing_items()
+    existing_by_url = {}
+    for it in existing_items:
+        url = it.get("url")
+        if url:
+            existing_by_url[url] = it
+        item_id = it.get("id")
+        if item_id:
+            existing_by_url[item_id] = it
+    print(f"📦 已载入历史资讯池: {len(existing_items)} 条 (已建立增量比对索引)")
+
+    # 2. 抓取多渠道全网最新资讯 (视频/工具/名人大V/新闻/当天爆款推文)
     raw_items = fetch_all_sources()
     if not raw_items:
         print("⚠️ 未抓取到任何数据，请检查网络连接或源配置。")
         return
 
-    # 2. 借助 Gemini 进行清洗、摘要和分类 (带自动中文翻译容错)
-    processed_items = process_items_batch(raw_items)
+    # 3. 增量筛选：分离出真正的新增条目 vs 历史已有条目
+    new_raw_items = []
+    reused_count = 0
+    for it in raw_items:
+        u = it.get("url")
+        i = it.get("id")
+        # 如果已经存在且已有中文提炼，直接复用已有结果
+        if (u and u in existing_by_url) or (i and i in existing_by_url):
+            reused_count += 1
+        else:
+            new_raw_items.append(it)
 
-    # 3. 存储结果
-    save_news(processed_items)
+    print(f"⚡ 增量分析完成: 发现 {len(new_raw_items)} 条全新情报，{reused_count} 条已有历史情报（直接秒级复用）")
+
+    # 4. 仅对增量新情报调用清洗翻译，历史数据零开销
+    if new_raw_items:
+        new_processed_items = process_items_batch(new_raw_items)
+    else:
+        new_processed_items = []
+
+    # 5. 双轨合并：将新资讯与历史资讯合并，严格按发布时间倒序（最新永远置顶在最上方）
+    merged_pool = {}
+    # 先入历史
+    for it in existing_items:
+        key = it.get("url") or it.get("id")
+        if key:
+            merged_pool[key] = it
+    # 再入新增（确保最新提取的属性生效）
+    for it in new_processed_items:
+        key = it.get("url") or it.get("id")
+        if key:
+            merged_pool[key] = it
+
+    combined_items = list(merged_pool.values())
+    combined_items.sort(key=parse_time_for_sort, reverse=True)
+
+    # 6. 存储增量融合后的完整大库
+    save_news(combined_items)
     
     end_time = datetime.now()
     duration = (end_time - start_time).total_seconds()
-    print(f"✨ 全流程执行完毕，耗时: {duration:.2f} 秒\n")
+    print(f"✨ 增量更新与历史合并全流程执行完毕，耗时: {duration:.2f} 秒\n")
 
 
 if __name__ == "__main__":

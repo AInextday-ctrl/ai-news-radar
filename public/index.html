@@ -794,6 +794,8 @@
 
         const t = I18N[currentLang];
         document.getElementById('cat-view-title').textContent = t.tabs[tab];
+        const catDesc = document.getElementById('cat-view-desc');
+        if (catDesc) catDesc.textContent = t.catViewDesc;
         renderCategoryView(tab);
       }
 
