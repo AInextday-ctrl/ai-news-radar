@@ -295,6 +295,24 @@
       color: #0f172a !important;
     }
 
+    /* 两侧摩天大楼广告翼深浅模式美学适配 */
+    html:not(.dark) .ad-skyscraper-card {
+      background: rgba(255, 255, 255, 0.88) !important;
+      border: 1px solid #e2e8f0 !important;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.dark .ad-skyscraper-card {
+      background: rgba(13, 19, 34, 0.78) !important;
+      border: 1px solid rgba(51, 65, 85, 0.65) !important;
+      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5) !important;
+    }
+    .ad-skyscraper-card:hover {
+      border-color: rgba(99, 102, 241, 0.45) !important;
+    }
+    ins.adsbygoogle iframe {
+      border-radius: 0.75rem !important;
+    }
+
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -418,8 +436,51 @@
     </div>
   </nav>
 
-  <!-- 主体内容区域 (支持全局顺畅自然纵向滚动，杜绝子容器卡顿与滚轮被困) -->
-  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-5 space-y-5">
+  <!-- 全站主体外层容器：支持超宽屏大桌面端两侧极客悬浮广告翼 (Dual Skyscraper Rail Ads) -->
+  <div class="relative w-full max-w-[1780px] mx-auto flex justify-center items-start px-2 sm:px-4 2xl:px-8">
+
+    <!-- 👈 左侧摩天大楼广告翼 (Left Side Rail Skyscraper) - 仅在 2xl (>=1536px) 超宽屏展示，绝对不遮挡主内容 -->
+    <aside class="hidden 2xl:flex flex-col shrink-0 w-[160px] sticky top-20 mr-4 z-20 select-none py-5">
+      <div class="ad-skyscraper-card rounded-2xl p-2.5 flex flex-col items-center justify-between text-center relative overflow-hidden transition-all duration-300 min-h-[600px] w-full backdrop-blur-md">
+        <!-- 头部合规标识 -->
+        <div class="w-full flex items-center justify-between px-1.5 py-0.5 border-b border-slate-200/80 dark:border-slate-800/80 mb-2">
+          <span class="text-[9px] font-mono tracking-widest text-slate-400 dark:text-slate-500 uppercase font-semibold">SPONSORED</span>
+          <span class="text-[9px] px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono scale-90 border border-slate-200 dark:border-slate-700">AD</span>
+        </div>
+        
+        <!-- 广告单元核心挂载点 -->
+        <div class="w-full flex-1 flex flex-col items-center justify-center relative overflow-hidden my-auto">
+          <!-- 优雅极客科技占位 (在广告加载前/审核期展示) -->
+          <div class="w-full flex flex-col items-center justify-center space-y-3 py-8 px-1 text-slate-400 dark:text-slate-500">
+            <div class="w-11 h-11 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/80 dark:border-indigo-800/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl shadow-inner">
+              🛰️
+            </div>
+            <div class="space-y-1">
+              <p class="text-xs font-bold text-slate-700 dark:text-slate-300">AI 品牌展示</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400">高价值极客定向</p>
+            </div>
+            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent my-1"></div>
+            <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
+          </div>
+
+          <!-- Google AdSense 垂直摩天大楼广告单元 -->
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; min-height:560px;"
+               data-ad-client="ca-pub-4912808437101130"
+               data-ad-slot="auto"
+               data-ad-format="vertical"
+               data-full-width-responsive="true"></ins>
+        </div>
+
+        <!-- 底部合规说明 -->
+        <div class="w-full pt-2 border-t border-slate-200/80 dark:border-slate-800/80 text-[9px] text-slate-400 dark:text-slate-500 font-mono">
+          Google AdSense
+        </div>
+      </div>
+    </aside>
+
+    <!-- 🎯 主体内容区域 (支持全局顺畅自然纵向滚动，杜绝子容器卡顿与滚轮被困) -->
+    <div class="flex-1 max-w-7xl w-full min-w-0 px-2 sm:px-6 py-5 space-y-5">
 
     <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs">
@@ -772,6 +833,48 @@
         <!-- 由 JS 渲染 -->
       </div>
     </div>
+
+  </div>
+
+    <!-- 👉 右侧摩天大楼广告翼 (Right Side Rail Skyscraper) - 仅在 2xl (>=1536px) 超宽屏展示，绝对对称美观 -->
+    <aside class="hidden 2xl:flex flex-col shrink-0 w-[160px] sticky top-20 ml-4 z-20 select-none py-5">
+      <div class="ad-skyscraper-card rounded-2xl p-2.5 flex flex-col items-center justify-between text-center relative overflow-hidden transition-all duration-300 min-h-[600px] w-full backdrop-blur-md">
+        <!-- 头部合规标识 -->
+        <div class="w-full flex items-center justify-between px-1.5 py-0.5 border-b border-slate-200/80 dark:border-slate-800/80 mb-2">
+          <span class="text-[9px] font-mono tracking-widest text-slate-400 dark:text-slate-500 uppercase font-semibold">SPONSORED</span>
+          <span class="text-[9px] px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono scale-90 border border-slate-200 dark:border-slate-700">AD</span>
+        </div>
+        
+        <!-- 广告单元核心挂载点 -->
+        <div class="w-full flex-1 flex flex-col items-center justify-center relative overflow-hidden my-auto">
+          <!-- 优雅极客科技占位 (在广告加载前/审核期展示) -->
+          <div class="w-full flex flex-col items-center justify-center space-y-3 py-8 px-1 text-slate-400 dark:text-slate-500">
+            <div class="w-11 h-11 rounded-2xl bg-purple-50 dark:bg-purple-950/50 border border-purple-200/80 dark:border-purple-800/60 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl shadow-inner">
+              ⚡
+            </div>
+            <div class="space-y-1">
+              <p class="text-xs font-bold text-slate-700 dark:text-slate-300">生态精选赞助</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400">前沿生产力触达</p>
+            </div>
+            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent my-1"></div>
+            <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
+          </div>
+
+          <!-- Google AdSense 垂直摩天大楼广告单元 -->
+          <ins class="adsbygoogle"
+               style="display:block; width:100%; min-height:560px;"
+               data-ad-client="ca-pub-4912808437101130"
+               data-ad-slot="auto"
+               data-ad-format="vertical"
+               data-full-width-responsive="true"></ins>
+        </div>
+
+        <!-- 底部合规说明 -->
+        <div class="w-full pt-2 border-t border-slate-200/80 dark:border-slate-800/80 text-[9px] text-slate-400 dark:text-slate-500 font-mono">
+          Google AdSense
+        </div>
+      </div>
+    </aside>
 
   </div>
 
@@ -2990,6 +3093,12 @@
         loadNews();
       }
     }, 1000);
+
+    // 初始化 Google AdSense 两侧摩天大楼广告单元
+    try {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {}
 
     // 初始化
     setLanguage(currentLang);
