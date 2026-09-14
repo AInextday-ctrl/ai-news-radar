@@ -216,10 +216,14 @@ SOURCES = {
         "type": "ph_feed"
     },
 
-    # 4. YouTube 高热度实战技巧、经验指南与工作流
+    # 4. YouTube 高热度实战技巧、经验指南与工作流（接入全球顶级 AI 极客技术源）
     "youtube_channels": [
-        {"name": "Fireship", "id": "UCsBjURrPoezykLs9EqgamOA"},
+        {"name": "Andrej Karpathy", "id": "UCXUPKJO5MZqnPe1NWs_Gcxg"},
         {"name": "Two Minute Papers", "id": "UCbfYPyITQ-7l4upoX8nvctg"},
-        {"name": "AI Explained", "id": "UCNJ1Ymd5yFuUPtn21xtRbbw"}
+        {"name": "Fireship", "id": "UCsBjURrPoezykLs9EqgamOA"},
+        {"name": "AI Explained", "id": "UCNJ1Ymd5yFuUPtn21xtRbbw"},
+        {"name": "Matthew Berman", "id": "UCaw1zb_pTKO_DwgHk3pQJvg"},
+        {"name": "Yannic Kilcher", "id": "UCZHmQk67mSJgfCCTn7xBfew"},
+        {"name": "Theo - t3.gg", "id": "UCbRP3c757lWg9M-U7TyEkXA"}
     ]
 }

@@ -292,11 +292,16 @@
           <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🤖 Agent工作流</button>
         </div>
 
-        <!-- 视频与Prompt专用的筛选器 -->
-        <div id="videos-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterVideoType('all')" id="video-filter-all" class="video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white">全部</button>
-          <button onclick="filterVideoType('video')" id="video-filter-video" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎬 实战视频</button>
-          <button onclick="filterVideoType('prompt')" id="video-filter-prompt" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💡 提示词神咒</button>
+        <!-- 视频与Prompt专用的复合筛选器 (主类型 + 细分子分类 Chips) -->
+        <div id="videos-subfilter" class="hidden flex flex-col space-y-2 py-1 max-w-full">
+          <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
+            <button onclick="filterVideoType('all')" id="video-filter-all" class="video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white shrink-0">全部 / All</button>
+            <button onclick="filterVideoType('prompt')" id="video-filter-prompt" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">💡 提示词模板库 (8类)</button>
+            <button onclick="filterVideoType('video')" id="video-filter-video" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0">🎬 实战视频精选 (4类)</button>
+          </div>
+          <div id="video-subchips-container" class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <!-- 由 JS 动态根据当前选中的 prompt / video 渲染细分标签 -->
+          </div>
         </div>
       </div>
 
@@ -349,6 +354,7 @@
     let sideSocialFilter = 'all';
     let socialPlatformFilter = 'all';
     let videoTypeFilter = 'all';
+    let videoSubFilter = 'all';
 
     const I18N = {
       zh: {
@@ -415,6 +421,10 @@
         videoFilterAll: "全部",
         videoFilterVideo: "🎬 实战视频",
         videoFilterPrompt: "💡 提示词神咒",
+        videoFilterPromptGroup: "💡 提示词模板库 (8类)",
+        videoFilterVideoGroup: "🎬 实战视频精选 (4类)",
+        promptDirectives: "提示词指令",
+        promptUsageGuide: "💡 使用指南: ",
         footerBrand: "🤖 AI 资讯雷达 4.0",
         footerArch: "开源零成本架构",
         footerGithub: "GitHub 源码",
@@ -492,6 +502,10 @@
         videoFilterAll: "All",
         videoFilterVideo: "🎬 Video Demos",
         videoFilterPrompt: "💡 Prompt Templates",
+        videoFilterPromptGroup: "💡 Prompt Bank (8 Sub)",
+        videoFilterVideoGroup: "🎬 Video Demos (4 Sub)",
+        promptDirectives: "Prompt Directives",
+        promptUsageGuide: "💡 Usage Guide: ",
         footerBrand: "🤖 AI Radar 4.0",
         footerArch: "Zero-Cost Open Source Architecture",
         footerGithub: "GitHub Source",
@@ -792,6 +806,10 @@
         if (toolsSubfilter) toolsSubfilter.classList.toggle('hidden', tab !== 'tools');
         if (videosSubfilter) videosSubfilter.classList.toggle('hidden', tab !== 'videos');
 
+        if (tab === 'videos') {
+          renderVideoSubChips();
+        }
+
         const t = I18N[currentLang];
         document.getElementById('cat-view-title').textContent = t.tabs[tab];
         const catDesc = document.getElementById('cat-view-desc');
@@ -873,6 +891,7 @@
     // 视频与Prompt类型筛选
     function filterVideoType(type) {
       videoTypeFilter = type;
+      videoSubFilter = 'all';
       const btnMap = {
         'all': 'video-filter-all',
         'video': 'video-filter-video',
@@ -882,13 +901,73 @@
         const b = document.getElementById(btnMap[tKey]);
         if (b) {
           b.className = (tKey === type)
-            ? "video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white"
-            : "video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+            ? "video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white shrink-0"
+            : "video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700 shrink-0";
         }
       });
+      renderVideoSubChips();
       if (currentTab === 'videos') {
         renderCategoryView('videos');
       }
+    }
+
+    // 细分子分类标签筛选
+    function filterVideoSub(sub) {
+      videoSubFilter = sub;
+      renderVideoSubChips();
+      if (currentTab === 'videos') {
+        renderCategoryView('videos');
+      }
+    }
+
+    // 动态渲染细分子分类 Chips 列表
+    function renderVideoSubChips() {
+      const container = document.getElementById('video-subchips-container');
+      if (!container) return;
+      const isZh = currentLang === 'zh';
+
+      let subOptions = [];
+      if (videoTypeFilter === 'prompt') {
+        subOptions = [
+          { id: 'all', label: isZh ? '全部提示词' : 'All Prompts' },
+          { id: 'coding', label: isZh ? '💻 编码架构' : '💻 Coding & Arch' },
+          { id: 'image_gen', label: isZh ? '🎨 图像生成' : '🎨 Image Gen' },
+          { id: 'video_gen', label: isZh ? '🎥 视频生成' : '🎥 Video Gen' },
+          { id: 'reasoning', label: isZh ? '🧠 深度推理' : '🧠 Deep Reasoning' },
+          { id: 'research', label: isZh ? '🔬 学术科研' : '🔬 Research & Papers' },
+          { id: 'agent', label: isZh ? '🤖 智能体与MCP' : '🤖 Agents & MCP' },
+          { id: 'game_3d', label: isZh ? '🎮 游戏与3D' : '🎮 Game Dev & 3D' },
+          { id: 'writing', label: isZh ? '✍️ 生产力写作' : '✍️ Writing' }
+        ];
+      } else if (videoTypeFilter === 'video') {
+        subOptions = [
+          { id: 'all', label: isZh ? '全部视频' : 'All Videos' },
+          { id: 'tutorial', label: isZh ? '🎓 系统教学' : '🎓 System Tutorials' },
+          { id: 'insight', label: isZh ? '💡 独家经验' : '💡 Expert Insights' },
+          { id: 'tips', label: isZh ? '⚡ 实操技巧' : '⚡ Practical Tips' },
+          { id: 'mastery', label: isZh ? '🤖 模型技巧' : '🤖 Model Mastery' }
+        ];
+      } else {
+        subOptions = [
+          { id: 'all', label: isZh ? '全部细分' : 'All Categories' },
+          { id: 'tutorial', label: isZh ? '🎓 系统教学' : '🎓 Tutorials' },
+          { id: 'tips', label: isZh ? '⚡ 实操技巧' : '⚡ Tips' },
+          { id: 'coding', label: isZh ? '💻 编码架构' : '💻 Coding' },
+          { id: 'image_gen', label: isZh ? '🎨 图像生成' : '🎨 Image Gen' },
+          { id: 'video_gen', label: isZh ? '🎥 视频生成' : '🎥 Video Gen' },
+          { id: 'reasoning', label: isZh ? '🧠 深度推理' : '🧠 Reasoning' },
+          { id: 'agent', label: isZh ? '🤖 智能体与MCP' : '🤖 Agents' }
+        ];
+      }
+
+      container.innerHTML = subOptions.map(opt => {
+        const isActive = videoSubFilter === opt.id;
+        return `<button onclick="filterVideoSub('${opt.id}')" class="px-2.5 py-1 rounded-lg text-xs font-medium shrink-0 transition-all ${
+          isActive
+            ? 'bg-rose-600 text-white font-bold shadow-sm shadow-rose-600/30'
+            : 'bg-slate-900/90 text-slate-400 hover:text-slate-200 hover:bg-slate-800 border border-slate-800'
+        }">${opt.label}</button>`;
+      }).join('');
     }
 
     // 渲染今日 60s Top 3 走马灯
@@ -1210,6 +1289,66 @@
       `;
     }
 
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function switchPromptLang(id, lang) {
+      window.__promptStore = window.__promptStore || {};
+      if (!window.__promptStore[id]) return;
+      window.__promptStore[id].active = lang;
+      const text = (lang === 'zh') ? window.__promptStore[id].zh : window.__promptStore[id].en;
+      const box = document.getElementById(`pbox-${id}`);
+      if (box) box.textContent = text;
+
+      const btnZh = document.getElementById(`plang-zh-${id}`);
+      const btnEn = document.getElementById(`plang-en-${id}`);
+      if (btnZh && btnEn) {
+        if (lang === 'zh') {
+          btnZh.className = "px-2 py-0.5 rounded bg-purple-600 text-white font-bold transition-colors";
+          btnEn.className = "px-2 py-0.5 rounded text-slate-400 hover:text-slate-200 transition-colors";
+        } else {
+          btnEn.className = "px-2 py-0.5 rounded bg-purple-600 text-white font-bold transition-colors";
+          btnZh.className = "px-2 py-0.5 rounded text-slate-400 hover:text-slate-200 transition-colors";
+        }
+      }
+    }
+
+    function copyCardPrompt(id) {
+      let text = "";
+      if (window.__promptStore && window.__promptStore[id]) {
+        const lang = window.__promptStore[id].active || 'zh';
+        text = (lang === 'zh') ? window.__promptStore[id].zh : window.__promptStore[id].en;
+      }
+      if (!text) {
+        const box = document.getElementById(`pbox-${id}`);
+        if (box) text = box.innerText || box.textContent;
+      }
+      if (text) {
+        copyToClipboard(text);
+      }
+    }
+
+    function getVideoSubType(it) {
+      if (it.sub_type) return it.sub_type;
+      if (it.is_prompt) return 'coding';
+      const text = `${it.title || ''} ${it.content_snippet || ''}`.toLowerCase();
+      if (text.includes('tutorial') || text.includes('course') || text.includes('zero to hero') || text.includes('scratch') || text.includes('手把手') || text.includes('原理')) {
+        return 'tutorial';
+      } else if (text.includes('benchmark') || text.includes('model') || text.includes('r1') || text.includes('llama') || text.includes('vllm') || text.includes('评测') || text.includes('deepseek')) {
+        return 'mastery';
+      } else if (text.includes('workflow') || text.includes('tips') || text.includes('comfyui') || text.includes('cursor') || text.includes('mcp') || text.includes('实操') || text.includes('技巧')) {
+        return 'tips';
+      }
+      return 'insight';
+    }
+
     // ==========================================
     // 专门卡片渲染：视频演示与 Prompt 咒语卡片
     // ==========================================
@@ -1226,26 +1365,55 @@
         const targetModel = item.recommended_model || (isZh ? "通用大模型" : "LLM");
         const rawTemp = item.temp_advice || (isZh ? "温度 0.3" : "Temp 0.3");
         const tempAdvice = isZh ? rawTemp : rawTemp.replace('温度', 'Temp');
+        const purpose = isZh ? (item.purpose_zh || "💡 高阶提示词") : (item.purpose_en || "💡 Advanced Prompt");
+        const promptZh = item.prompt_content_zh || item.prompt_content || "";
+        const promptEn = item.prompt_content_en || item.prompt_content || "";
+
+        window.__promptStore = window.__promptStore || {};
+        window.__promptStore[item.id] = {
+          zh: promptZh,
+          en: promptEn,
+          active: isZh ? 'zh' : 'en'
+        };
+
+        const activeText = isZh ? promptZh : promptEn;
+        const usageGuide = isZh ? (item.usage_guide_zh || "") : (item.usage_guide_en || "");
+
         return `
           <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 border-l-4 border-l-purple-500 shadow-lg group">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                ${t.promptBadge}
+                ${purpose}
               </span>
               <div class="flex items-center space-x-1.5">
                 ${todayBadge}
                 <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.relative || t.toolToday}</span>
               </div>
             </div>
-            <h4 class="font-bold text-xs sm:text-sm text-slate-100">${title}</h4>
-            <div class="flex items-center space-x-2 text-[9px] font-mono">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-100 leading-snug">${title}</h4>
+            <div class="flex items-center space-x-2 text-[9px] font-mono flex-wrap gap-y-1">
               <span class="px-1.5 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-500/30">${t.promptModelPrefix}${targetModel}</span>
               <span class="px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">${t.promptTempPrefix}${tempAdvice}</span>
             </div>
-            <div class="bg-slate-950/90 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
-              ${item.prompt_content}
+            ${summary ? `<p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">${summary}</p>` : ''}
+            
+            <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-800/60">
+              <span class="text-[10px] font-mono text-slate-400">${t.promptDirectives || (isZh ? '提示词指令' : 'Prompt Directives')}:</span>
+              <div class="inline-flex rounded-md bg-slate-900 p-0.5 border border-slate-800 text-[10px]">
+                <button type="button" onclick="switchPromptLang('${item.id}', 'zh')" id="plang-zh-${item.id}" class="px-2 py-0.5 rounded ${isZh ? 'bg-purple-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'} transition-colors">🇨🇳 中文</button>
+                <button type="button" onclick="switchPromptLang('${item.id}', 'en')" id="plang-en-${item.id}" class="px-2 py-0.5 rounded ${!isZh ? 'bg-purple-600 text-white font-bold' : 'text-slate-400 hover:text-slate-200'} transition-colors">🇬🇧 EN</button>
+              </div>
             </div>
-            <button onclick="copyToClipboard('${item.prompt_content.replace(/'/g, "\\'")}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1 shadow-md shadow-purple-600/30">
+
+            <div id="pbox-${item.id}" class="bg-slate-950/90 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all whitespace-pre-wrap max-h-44 overflow-y-auto">${escapeHtml(activeText)}</div>
+
+            ${usageGuide ? `
+              <div class="text-[10px] text-slate-400 bg-slate-900/50 p-2 rounded border border-slate-800/60 leading-relaxed font-sans">
+                <span class="text-purple-400 font-semibold">${t.promptUsageGuide || (isZh ? '💡 使用指南: ' : '💡 Usage: ')}</span>${escapeHtml(usageGuide)}
+              </div>
+            ` : ''}
+
+            <button type="button" onclick="copyCardPrompt('${item.id}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-md shadow-purple-600/30">
               <span>${t.copyPrompt}</span>
             </button>
           </article>
@@ -1253,7 +1421,7 @@
       }
 
       // YouTube 实操/工作流视频卡片
-      const skillTag = translateDifficultyTag(item.difficulty || item.metrics?.skill_tag || '🔥 热门实操', currentLang);
+      const skillTag = isZh ? (item.purpose_zh || item.metrics?.skill_tag || '🔥 热门实操') : (item.purpose_en || translateDifficultyTag(item.difficulty, currentLang) || '🔥 Top Tutorial');
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
       return `
         <article class="glass-card rounded-xl p-3 flex flex-col space-y-2 group border-t-2 border-t-rose-500/80 hover:border-rose-500/50 transition-all">
@@ -1264,12 +1432,12 @@
                 ▶
               </div>
             </div>
-            <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/80 text-rose-300 border border-rose-500/40 text-[10px] font-bold">${skillTag}</span>
-            <span class="absolute bottom-2 right-2 bg-black/80 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${duration}</span>
+            <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/85 text-rose-300 border border-rose-500/40 text-[10px] font-bold">${skillTag}</span>
+            <span class="absolute bottom-2 right-2 bg-black/85 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${duration}</span>
           </div>
 
           <div class="flex items-center justify-between text-[10px] pt-1">
-            <span class="text-rose-400 font-medium">${item.source}</span>
+            <span class="text-rose-400 font-medium">${item.source || item.author}</span>
             <div class="flex items-center space-x-1.5">
               ${todayBadge}
               <span class="text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
@@ -1339,7 +1507,7 @@
 
       const streamVideos = document.getElementById('stream-videos');
       streamVideos.innerHTML = videosList.length > 0
-        ? videosList.slice(0, 8).map(renderVideoOrPromptCard).join('')
+        ? videosList.slice(0, 12).map(renderVideoOrPromptCard).join('')
         : `<div class="text-slate-500 text-xs py-4 text-center">${t.videosNoMatch}</div>`;
 
       // 4. 渲染 LMSYS Chatbot Arena Top 5 天梯榜
@@ -1444,6 +1612,9 @@
           list = list.filter(it => it.is_prompt);
         } else if (videoTypeFilter === 'video') {
           list = list.filter(it => !it.is_prompt);
+        }
+        if (videoSubFilter && videoSubFilter !== 'all') {
+          list = list.filter(it => (it.sub_type || getVideoSubType(it)) === videoSubFilter);
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.videosNoMatch}</div>`;
