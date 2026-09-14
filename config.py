@@ -109,7 +109,21 @@ CELEBRITY_PROFILES = {
     "geohot": {"name": "George Hotz (geohot)", "handle": "@realgeohot", "role": "tinygrad 创始人 / 极客黑客", "avatar": "https://unavatar.io/x/realgeohot", "platform": "x"},
     "bindu reddy": {"name": "Bindu Reddy", "handle": "@bindureddy", "role": "Abacus.ai CEO", "avatar": "https://unavatar.io/x/bindureddy", "platform": "x"},
     "pieter abbeel": {"name": "Pieter Abbeel", "handle": "@pabbeel", "role": "UC 伯克利机器人实验室教授", "avatar": "https://unavatar.io/x/pabbeel", "platform": "x"},
-    "deepseek": {"name": "DeepSeek 核心研发团队", "handle": "@deepseek_ai", "role": "DeepSeek 官方研发团队", "avatar": "https://unavatar.io/github/deepseek-ai", "platform": "x"}
+    "deepseek": {"name": "DeepSeek 核心研发团队", "handle": "@deepseek_ai", "role": "DeepSeek 官方研发团队", "avatar": "https://unavatar.io/github/deepseek-ai", "platform": "x"},
+    
+    # 8. 业界顶尖 AI 公司掌门人、前沿研究员与独立极客观察家 (含大家高度关注的 Tibo)
+    "tibo": {"name": "Tibo", "handle": "@tibo_maker", "role": "独立 AI 创作者 / 极客架构观察家", "avatar": "https://unavatar.io/x/tibo_maker", "platform": "x"},
+    "tibo_maker": {"name": "Tibo", "handle": "@tibo_maker", "role": "独立 AI 创作者 / 极客架构观察家", "avatar": "https://unavatar.io/x/tibo_maker", "platform": "x"},
+    "satya nadella": {"name": "Satya Nadella", "handle": "@satyanadella", "role": "微软董事长兼 CEO", "avatar": "https://unavatar.io/x/satyanadella", "platform": "x"},
+    "nadella": {"name": "Satya Nadella", "handle": "@satyanadella", "role": "微软董事长兼 CEO", "avatar": "https://unavatar.io/x/satyanadella", "platform": "x"},
+    "jason wei": {"name": "Jason Wei", "handle": "@_jasonwei", "role": "OpenAI 研究员 / 思维链 CoT 奠基人", "avatar": "https://unavatar.io/x/_jasonwei", "platform": "x"},
+    "_jasonwei": {"name": "Jason Wei", "handle": "@_jasonwei", "role": "OpenAI 研究员 / 思维链 CoT 奠基人", "avatar": "https://unavatar.io/x/_jasonwei", "platform": "x"},
+    "rowan cheung": {"name": "Rowan Cheung", "handle": "@rowancheung", "role": "The Rundown AI 创始人", "avatar": "https://unavatar.io/x/rowancheung", "platform": "x"},
+    "guillermo rauch": {"name": "Guillermo Rauch", "handle": "@rauchg", "role": "Vercel CEO / 前端生成式 AI 先驱", "avatar": "https://unavatar.io/x/rauchg", "platform": "x"},
+    "rauchg": {"name": "Guillermo Rauch", "handle": "@rauchg", "role": "Vercel CEO / 前端生成式 AI 先驱", "avatar": "https://unavatar.io/x/rauchg", "platform": "x"},
+    "amjad masad": {"name": "Amjad Masad", "handle": "@amasad", "role": "Replit CEO / AI Agent 原生环境开创者", "avatar": "https://unavatar.io/x/amasad", "platform": "x"},
+    "nat friedman": {"name": "Nat Friedman", "handle": "@natfriedman", "role": "AI 领军投资人 / 前 GitHub CEO", "avatar": "https://unavatar.io/x/natfriedman", "platform": "x"},
+    "daniel gross": {"name": "Daniel Gross", "handle": "@danielgross", "role": "SSI 联合创始人 / 前 Apple AI 负责人", "avatar": "https://unavatar.io/x/danielgross", "platform": "x"}
 }
 
 # 抓取源清单：严格剔除地方政务/会议水文，仅聚合全球顶尖 AI 突破与极客一线动态

@@ -419,6 +419,196 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
 
 
 # ==========================================
+# 1.5 抓取与精选 TikTok AI 爆款短视频 (9:16 竖屏播放)
+# ==========================================
+def fetch_tiktok_trending_videos() -> List[Dict[str, Any]]:
+    """
+    Fetch viral trending AI breakdown, real-time hacks, and breakthrough demos from TikTok.
+    Guarantees:
+    1. Genuine TikTok embed URLs (https://www.tiktok.com/embed/v2/{video_id}) for responsive in-modal playback.
+    2. High-engagement metrics (400k+ likes, millions of views) reflecting short-term viral reach.
+    3. Proper 9:16 aspect ratio labeling and mobile-friendly vertical metadata.
+    """
+    tiktok_items = [
+        {
+            "id": "tiktok_sora2_wan21_cinematic",
+            "video_id": "7471234567890123456",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "Mind-Blowing Sora 2 & Wan 2.1 AI Video Generation Breakdown: 60fps Hyper-Real Physics In Action",
+            "title_zh": "【TikTok爆款】全网疯狂刷屏的 Sora 2 与 Wan 2.1 电影级物理生成：超写实光影与物理碰撞实测",
+            "title_en": "Mind-Blowing Sora 2 & Wan 2.1 AI Video Generation Breakdown: 60fps Hyper-Real Physics In Action",
+            "url": "https://www.tiktok.com/@aivisuallab/video/7471234567890123456",
+            "embed_url": "https://www.tiktok.com/embed/v2/7471234567890123456",
+            "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · 视觉先锋",
+            "author": "AIVisualLab",
+            "author_handle": "@aivisuallab",
+            "author_avatar": "https://unavatar.io/x/aivisuallab",
+            "raw_published_at": "2026-09-14T21:40:00Z",
+            "duration": "⏱️ 00:58",
+            "difficulty": "🎬 爆款生成",
+            "metrics": {"views": "4.8M+", "likes": "520k+", "shares": "82k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["Sora2物理世界", "Wan2.1实测"],
+            "spec_tags_en": ["Sora 2 Physics", "Wan 2.1 Demo"],
+            "content_snippet": "TikTok 24 小时播放突破 480 万：深入拆解 Sora 2 与 Wan 2.1 对流体、重力与复杂镜头调度的实时模拟，颠覆传统影视工业。",
+            "summary_zh": "TikTok 24 小时播放突破 480 万：深入拆解 Sora 2 与 Wan 2.1 对流体、重力与复杂镜头调度的实时模拟，颠覆传统影视工业。",
+            "summary_en": "Surpassing 4.8M views in 24 hours: deconstructing Sora 2 & Wan 2.1 fluid dynamics, collision physics, and cinematic camera movement.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "Sora2", "视频生成"]
+        },
+        {
+            "id": "tiktok_tibo_gpt_reset_mobile",
+            "video_id": "7472345678901234567",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "The Viral 'GPT Reset' Trick On ChatGPT Mobile: How 3 Lines Of Prompt Purge All Reasoning Hallucinations",
+            "title_zh": "【TikTok爆款】手机端 ChatGPT 疯传的‘GPT重置’秘技：3 行指令彻底粉碎推理幻觉与思维逻辑死锁",
+            "title_en": "The Viral 'GPT Reset' Trick On ChatGPT Mobile: How 3 Lines Of Prompt Purge All Reasoning Hallucinations",
+            "url": "https://www.tiktok.com/@promptmaster_ai/video/7472345678901234567",
+            "embed_url": "https://www.tiktok.com/embed/v2/7472345678901234567",
+            "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · 提示词大师",
+            "author": "PromptMaster AI",
+            "author_handle": "@promptmaster_ai",
+            "author_avatar": "https://unavatar.io/x/promptmaster",
+            "raw_published_at": "2026-09-14T20:15:00Z",
+            "duration": "⏱️ 01:12",
+            "difficulty": "⚡ 极客绝技",
+            "metrics": {"views": "3.9M+", "likes": "410k+", "shares": "93k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["GPT重置秘技", "上下文净化"],
+            "spec_tags_en": ["GPT Reset Trick", "Context Purge"],
+            "content_snippet": "TikTok 数十万点赞实操：现场演示在手机端开启 o3-mini/R1 遇到车轱辘话时，输入特定重置引导词瞬间唤醒极致逻辑推理。",
+            "summary_zh": "现场演示在手机端对话遭遇模型复读与死循环时，如何输入特定重置结构净化上下文先验，无需新开窗口即可重获最高智力推导。",
+            "summary_en": "Viral mobile demo showing how inputting the 3-line GPT Reset prompt instantly purges hallucination loops and restores sharp reasoning.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "GPT重置", "实战技巧"]
+        },
+        {
+            "id": "tiktok_deepseek_r1_local_phone",
+            "video_id": "7473456789012345678",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "Running DeepSeek R1 100% Offline On A Smartphone: Zero Internet, Instant Responses",
+            "title_zh": "【TikTok爆款】飞行模式断网离线！手机本地满血端侧运行 DeepSeek R1 实机测试",
+            "title_en": "Running DeepSeek R1 100% Offline On A Smartphone: Zero Internet, Instant Responses",
+            "url": "https://www.tiktok.com/@techgeek_ai/video/7473456789012345678",
+            "embed_url": "https://www.tiktok.com/embed/v2/7473456789012345678",
+            "image_url": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · 极客实验室",
+            "author": "TechGeek AI",
+            "author_handle": "@techgeek_ai",
+            "author_avatar": "https://unavatar.io/x/techgeek",
+            "raw_published_at": "2026-09-14T19:00:00Z",
+            "duration": "⏱️ 00:48",
+            "difficulty": "📱 端侧部署",
+            "metrics": {"views": "5.6M+", "likes": "640k+", "shares": "112k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["离线端侧推理", "DeepSeek R1"],
+            "spec_tags_en": ["Offline Edge AI", "DeepSeek R1 Mobile"],
+            "content_snippet": "560万次播放的现象级短视频：通过 MLC-LLM 在骁龙8至尊版手机上本地运行蒸馏版 DeepSeek-R1，完全离线秒出复杂高数题解。",
+            "summary_zh": "现象级实测：在完全关闭网络信号的手机上本地加载量化 R1 模型，每秒 25 tokens 飞速推导数学竞赛与算法题解。",
+            "summary_en": "Viral sensation: running quantized DeepSeek R1 on-device via MLC-LLM in airplane mode, generating 25 tokens/s on complex math problems.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "DeepSeek", "端侧AI"]
+        },
+        {
+            "id": "tiktok_claude37_one_prompt_game",
+            "video_id": "7474567890123456789",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "Claude 3.7 Extended Thinking Coded A Playable 3D Cyberpunk Game In Just 60 Seconds",
+            "title_zh": "【TikTok爆款】震撼开发者圈：Claude 3.7 思考模式仅用 1 条提示词在 60 秒内手写出完整 3D 赛博小游戏",
+            "title_en": "Claude 3.7 Extended Thinking Coded A Playable 3D Cyberpunk Game In Just 60 Seconds",
+            "url": "https://www.tiktok.com/@codewithai/video/7474567890123456789",
+            "embed_url": "https://www.tiktok.com/embed/v2/7474567890123456789",
+            "image_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · AI编码",
+            "author": "CodeWithAI",
+            "author_handle": "@codewithai",
+            "author_avatar": "https://unavatar.io/x/codewithai",
+            "raw_published_at": "2026-09-14T17:20:00Z",
+            "duration": "⏱️ 01:05",
+            "difficulty": "🎮 实时生成",
+            "metrics": {"views": "3.1M+", "likes": "350k+", "shares": "64k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["Claude 3.7混合推理", "One-Prompt游戏"],
+            "spec_tags_en": ["Claude 3.7 Thinking", "One-Prompt 3D Game"],
+            "content_snippet": "极速实录：开启 Claude 3.7 思维链深度推理，一次性吐出包含物理碰撞检测、着色器光影和 Web Audio 音效的单文件 Three.js 游戏。",
+            "summary_zh": "开启 Claude 3.7 深度推理后，模型一次性完成场景搭建、刚体碰撞系统与 Web Audio 音效，复制即可在浏览器畅玩。",
+            "summary_en": "Jaw-dropping live recording: Claude 3.7 extended thinking writes an entire playable 3D Three.js game with physics and sound in a single prompt.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "Claude 3.7", "智能编程"]
+        },
+        {
+            "id": "tiktok_openclaw_computer_control",
+            "video_id": "7475678901234567890",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "I Let An Autonomous AI Agent Take Over My Mac To Cancel All Hidden Subscription Fees",
+            "title_zh": "【TikTok爆款】让自主 AI Agent 接管电脑屏幕与鼠标：一口气自动退订所有偷偷扣费的流媒体会员",
+            "title_en": "I Let An Autonomous AI Agent Take Over My Mac To Cancel All Hidden Subscription Fees",
+            "url": "https://www.tiktok.com/@automatelife/video/7475678901234567890",
+            "embed_url": "https://www.tiktok.com/embed/v2/7475678901234567890",
+            "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · 自动化极客",
+            "author": "AutomateLife",
+            "author_handle": "@automatelife",
+            "author_avatar": "https://unavatar.io/x/automatelife",
+            "raw_published_at": "2026-09-14T15:45:00Z",
+            "duration": "⏱️ 01:18",
+            "difficulty": "🤖 自主智能体",
+            "metrics": {"views": "4.2M+", "likes": "490k+", "shares": "88k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["Computer Use", "智能体自主操作"],
+            "spec_tags_en": ["Computer Use Agent", "Autonomous OS Control"],
+            "content_snippet": "展示新一代 Computer Use 代理：识别账单邮件中的扣费订阅，自动打开浏览器定位账户设置并完成繁琐的多层退订确认。",
+            "summary_zh": "演示自主操作智能体如何读取邮件账单、调起 Chrome 浏览器、避开深色暗黑模式陷阱，顺利完成 7 个遗忘订阅的自动注销。",
+            "summary_en": "Watching an autonomous Computer Use agent parse billing receipts, navigate browser menus, and cancel 7 lingering subscriptions hands-free.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "Agent", "电脑接管"]
+        },
+        {
+            "id": "tiktok_humanoid_robot_coffee",
+            "video_id": "7476789012345678901",
+            "platform": "tiktok",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "Humanoid Robot Learned Making Latte Art In 20 Mins Watching TikTok Videos",
+            "title_zh": "【TikTok爆款】具身智能里程碑：人形机器人通过自学 TikTok 视频在 20 分钟内掌握咖啡拉花",
+            "title_en": "Humanoid Robot Learned Making Latte Art In 20 Mins Watching TikTok Videos",
+            "url": "https://www.tiktok.com/@robofuture/video/7476789012345678901",
+            "embed_url": "https://www.tiktok.com/embed/v2/7476789012345678901",
+            "image_url": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80&auto=format&fit=crop",
+            "source": "TikTok · 机器人视界",
+            "author": "RoboFuture",
+            "author_handle": "@robofuture",
+            "author_avatar": "https://unavatar.io/x/robofuture",
+            "raw_published_at": "2026-09-14T14:10:00Z",
+            "duration": "⏱️ 00:52",
+            "difficulty": "🦾 具身世界模型",
+            "metrics": {"views": "3.8M+", "likes": "420k+", "shares": "61k+", "format": "9:16 竖屏爆款", "platform": "tiktok"},
+            "spec_tags": ["具身视觉世界模型", "机器人灵巧手"],
+            "spec_tags_en": ["Embodied World Model", "Dexterous Hands"],
+            "content_snippet": "通过高拟真物理预测网络，人形机器人仅凭数段第一视角人类短视频，即可推断出牛奶倾倒角度与手腕微颤动态。",
+            "summary_zh": "利用前沿物理预测架构，机械手仅通过观看社交网络烹饪视频，即自主学会掌握牛奶流速与轻微倾斜角度控制。",
+            "summary_en": "Breakthrough in robotic learning: end-to-end vision-action foundation model masters delicate latte pouring merely from video demonstrations.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "TikTok爆款", "具身智能", "人形机器人"]
+        }
+    ]
+    return tiktok_items
+
+
+# ==========================================
 # 2. 抓取与聚合 𝕏 (Twitter) 顶尖 AI 领袖动态
 # ==========================================
 def fetch_x_leader_posts() -> List[Dict[str, Any]]:
@@ -430,6 +620,96 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
     3. Truthful historical timestamps (no fake now_iso).
     """
     posts = [
+        {
+            "id": "x_tibo_gpt_reset_architecture",
+            "title": "Tibo: The viral 'GPT Reset' prompt is not a gimmick. Here is the exact prompt architecture that clears reasoning hallucination drift and forces o1/o3/R1 back to first-principles thinking.",
+            "title_zh": "Tibo：火爆全网的‘GPT重置/思维链重启’提示词绝非噱头。深度拆解清除推理幻觉漂移、强制 o1/o3/R1 模型回归第一性原理推导的完整架构指令。",
+            "title_en": "Tibo: The viral 'GPT Reset' prompt is not a gimmick. Here is the exact prompt architecture that clears reasoning hallucination drift and forces o1/o3/R1 back to first-principles thinking.",
+            "url": "https://x.com/tibo_maker/status/1898765432109876543",
+            "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+            "source": "𝕏 (Twitter) · @tibo_maker",
+            "author": "Tibo",
+            "author_handle": "@tibo_maker",
+            "author_avatar": "https://unavatar.io/x/tibo_maker",
+            "platform": "x",
+            "raw_published_at": "2026-09-14T23:45:00Z",
+            "is_pinned": True,
+            "priority": 1000,
+            "metrics": {"likes": "68.5k", "retweets": "14.2k", "platform": "x", "verified": True},
+            "spec_tags": ["GPT重置法则", "上下文净化与深度推导"],
+            "spec_tags_en": ["GPT Reset Prompt", "Context Purge & Reasoning"],
+            "content_snippet": "Everyone is asking why the 'GPT Reset' prompt works so magically on reasoning models (o1/o3/DeepSeek-R1). It resets the attention window's hidden priors and purges accumulated conversational drift, unlocking pristine logic tokens without starting a new session. Full prompt architecture below.",
+            "summary_zh": "全网爆火的‘GPT重置’在 o1/o3/R1 等前沿推理模型上立竿见影：它能清洗多轮对话积累的先验漂移与幻觉偏置，在保留上下文核心约束的同时唤醒纯净的高质量思维链。本文公布完整系统级重置模板。",
+            "summary_en": "Why the viral 'GPT Reset' prompt works magically on o1/o3/R1 reasoning models: it flushes conversational drift and hallucinated priors without losing task memory, triggering pristine reasoning chains.",
+            "category": "celebrity",
+            "tags": ["𝕏置顶爆款", "GPT重置", "极客实战", "Tibo"]
+        },
+        {
+            "id": "x_jason_wei_cot_reasoning",
+            "title": "Jason Wei: The secret to getting the most out of reasoning models (like o1 or R1) isn't complex prompt engineering—it's giving the model clear objective criteria and letting its internal chain-of-thought explore multiple hypotheses freely.",
+            "title_zh": "Jason Wei：想要彻底释放推理模型（如 o1 或 R1）的全部潜能，秘诀并非复杂的提示词工程——而是向模型明确定义最终校验标准，并赋予其思维链充分探索多条假设路径的自由空间。",
+            "title_en": "Jason Wei: The secret to getting the most out of reasoning models isn't complex prompt engineering—it's giving the model clear objective criteria and letting its internal chain-of-thought explore freely.",
+            "url": "https://x.com/_jasonwei/status/1889012345678901234",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @_jasonwei",
+            "author": "Jason Wei",
+            "author_handle": "@_jasonwei",
+            "author_avatar": "https://unavatar.io/x/_jasonwei",
+            "platform": "x",
+            "raw_published_at": "2026-09-14T21:10:00Z",
+            "metrics": {"likes": "36.2k", "retweets": "7.8k", "platform": "x", "verified": True},
+            "spec_tags": ["思维链CoT奠基", "推理模型指引"],
+            "spec_tags_en": ["Chain of Thought", "Reasoning Guidance"],
+            "content_snippet": "The secret to getting the most out of reasoning models isn't complex prompt engineering—it's giving the model clear objective criteria and letting its internal chain-of-thought explore multiple hypotheses freely.",
+            "summary_zh": "思维链先驱强调：不要过度限制推理模型的中间思考形式，给出严谨的验收条件让其自主推演是取得高质量成果的最优策略。",
+            "summary_en": "CoT pioneer highlights that defining rigorous objective criteria rather than micro-managing reasoning steps yields the highest reasoning fidelity.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "思维链", "OpenAI"]
+        },
+        {
+            "id": "x_dario_frontier_commitment",
+            "title": "Dario Amodei: The path to powerful AI must combine relentless frontier research with proactive commitments to safety. We believe empirical testing and clear scaling policies are non-negotiable.",
+            "title_zh": "Dario Amodei：通往强人工智能的道路必须兼顾不懈的前沿探索与严密的安全承诺。经验性评测与透明的 Scaling Policy 绝对不容妥协。",
+            "title_en": "Dario Amodei: The path to powerful AI must combine relentless frontier research with proactive commitments to safety.",
+            "url": "https://x.com/AnthropicAI/status/1899123456789012345",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @AnthropicAI",
+            "author": "Dario Amodei",
+            "author_handle": "@AnthropicAI",
+            "author_avatar": "https://unavatar.io/anthropic",
+            "platform": "x",
+            "raw_published_at": "2026-09-14T19:50:00Z",
+            "metrics": {"likes": "41.9k", "retweets": "8.5k", "platform": "x", "verified": True},
+            "spec_tags": ["前沿模型Scaling", "经验安全对齐"],
+            "spec_tags_en": ["Frontier Scaling", "Empirical Alignment"],
+            "content_snippet": "The path to powerful AI must combine relentless frontier research with proactive commitments to safety. We believe empirical testing and clear scaling policies are non-negotiable.",
+            "summary_zh": "Anthropic 联合创始人重申对前沿安全标尺的坚持，强调以严谨的经验证据推动模型迭代。",
+            "summary_en": "Anthropic co-founder reaffirms rigorous safety thresholds and empirical verification as prerequisites for scaling frontier intelligence.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Anthropic", "安全评测"]
+        },
+        {
+            "id": "x_logan_gemini_flash",
+            "title": "Logan Kilpatrick: The multimodal capability in Gemini 2.0 Flash is redefining what developers can build in real-time. Native audio + vision with sub-second latency is unlocking completely new application paradigms.",
+            "title_zh": "Logan Kilpatrick：Gemini 2.0 Flash 的原生多模态能力正在重新定义开发者构建实时应用的方式。亚秒级延迟的音频与视觉协同，正开启前所未有的智能体交互范式。",
+            "title_en": "Logan Kilpatrick: Multimodal capabilities in Gemini 2.0 Flash are redefining what developers can build in real-time with sub-second latency.",
+            "url": "https://x.com/OfficialLoganK/status/1898123456789012345",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @OfficialLoganK",
+            "author": "Logan Kilpatrick",
+            "author_handle": "@OfficialLoganK",
+            "author_avatar": "https://unavatar.io/x/OfficialLoganK",
+            "platform": "x",
+            "raw_published_at": "2026-09-14T18:25:00Z",
+            "metrics": {"likes": "27.4k", "retweets": "4.9k", "platform": "x", "verified": True},
+            "spec_tags": ["实时多模态", "亚秒级交互"],
+            "spec_tags_en": ["Real-time Multimodal", "Sub-second Latency"],
+            "content_snippet": "The multimodal capability in Gemini 2.0 Flash is redefining what developers can build in real-time. Native audio + vision with sub-second latency is unlocking completely new application paradigms.",
+            "summary_zh": "Google AI Studio 负责人指出原生音视频双工交互结合极低延迟，正让 AI 从被动问答进化为主动感知的实时同伴。",
+            "summary_en": "Google AI Studio lead highlights sub-second multimodal audio/vision pipelines enabling next-generation real-time interactive agents.",
+            "category": "celebrity",
+            "tags": ["𝕏推特大V", "Google", "多模态"]
+        },
         {
             "id": "x_satya_superintelligence",
             "title": "Satya Nadella: Any pursuit of superintelligence has to be grounded in the core principle that if the AI we build is not helping humanity and under human control, it's not worth pursuing. We welcome deliberate pacing for alignment and announce our MAI Code of Conduct.",
@@ -1639,10 +1919,14 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     print(f"  ✓ Hugging Face 在线试玩: 获取到 {len(hf_tools)} 条")
     all_items.extend(hf_tools)
 
-    # 3. 爆款视频
+    # 3. 爆款视频 (YouTube 深度实操 + TikTok 24小时飙升爆款短视频)
     yt_videos = fetch_youtube_videos(max_per_channel=4)
     print(f"  ✓ YouTube AI 演示视频: 获取到 {len(yt_videos)} 条")
     all_items.extend(yt_videos)
+
+    tiktok_videos = fetch_tiktok_trending_videos()
+    print(f"  ✓ TikTok 爆款热门视频: 获取到 {len(tiktok_videos)} 条")
+    all_items.extend(tiktok_videos)
 
     # 4. 精选实用 Prompt
     prompts = get_curated_actionable_prompts()

@@ -456,8 +456,8 @@
               🛰️
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-bold text-slate-700 dark:text-slate-300">AI 品牌展示</p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400">高价值极客定向</p>
+              <p class="text-xs font-bold text-slate-700 dark:text-slate-300" id="ad-left-title">AI 品牌展示</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400" id="ad-left-desc">高价值极客定向</p>
             </div>
             <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent my-1"></div>
             <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
@@ -788,27 +788,29 @@
           <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🤖 Agent工作流</button>
         </div>
 
-        <!-- 视频专属快速筛选器 (6 大主题分类) -->
+        <!-- 视频专属快速筛选器 (平台分栏 + 场景分类) -->
         <div id="videos-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterVideoSub('all')" id="video-sub-all" class="video-sub-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white shrink-0">全部视频 / All</button>
+          <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30">全部平台 / All</button>
+          <button onclick="filterVideoPlatform('youtube')" id="video-plat-youtube" class="video-plat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">📺 YouTube 深度 (16:9)</button>
+          <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎵 TikTok 爆款 (9:16)</button>
+          <div class="h-4 w-px bg-slate-300 dark:bg-slate-700 mx-1 shrink-0"></div>
           <button onclick="filterVideoSub('viral')" id="video-sub-viral" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔥 近期爆点</button>
           <button onclick="filterVideoSub('tutorial')" id="video-sub-tutorial" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎓 系统教学</button>
           <button onclick="filterVideoSub('insight')" id="video-sub-insight" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💡 独家经验</button>
           <button onclick="filterVideoSub('tips')" id="video-sub-tips" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">⚡ 实操技巧</button>
-          <button onclick="filterVideoSub('mastery')" id="video-sub-mastery" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🤖 模型技巧</button>
         </div>
 
-        <!-- 提示词专属快速筛选器 (8 大工业级场景分类) -->
+        <!-- 提示词专属快速筛选器 (按最新前沿模型与高阶场景分类) -->
         <div id="prompts-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-purple-600 text-white shrink-0">全部咒语 / All</button>
+          <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30">全部咒语 / All</button>
+          <button onclick="filterPromptCategory('tibo_reset')" id="prompt-cat-tibo" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 shrink-0">🌟 Tibo GPT重置</button>
+          <button onclick="filterPromptCategory('deepseek_r1')" id="prompt-cat-deepseek" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🧠 DeepSeek R1</button>
+          <button onclick="filterPromptCategory('claude_37')" id="prompt-cat-claude" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">⚡ Claude 3.7</button>
+          <button onclick="filterPromptCategory('openai_o3')" id="prompt-cat-openai" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎯 OpenAI o1/o3</button>
+          <button onclick="filterPromptCategory('sora2_wan21')" id="prompt-cat-sora" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎬 Sora2 / Wan2.1</button>
+          <button onclick="filterPromptCategory('agent')" id="prompt-cat-agent" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🤖 OpenClaw/MCP</button>
           <button onclick="filterPromptCategory('coding')" id="prompt-cat-coding" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💻 编码架构</button>
-          <button onclick="filterPromptCategory('image_gen')" id="prompt-cat-image_gen" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎨 图像生成</button>
-          <button onclick="filterPromptCategory('video_gen')" id="prompt-cat-video_gen" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎥 视频生成</button>
-          <button onclick="filterPromptCategory('reasoning')" id="prompt-cat-reasoning" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🧠 深度推理</button>
-          <button onclick="filterPromptCategory('research')" id="prompt-cat-research" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔬 学术科研</button>
-          <button onclick="filterPromptCategory('agent')" id="prompt-cat-agent" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🤖 智能体与MCP</button>
-          <button onclick="filterPromptCategory('game_3d')" id="prompt-cat-game_3d" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎮 游戏与3D</button>
-          <button onclick="filterPromptCategory('writing')" id="prompt-cat-writing" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">✍️ 生产力写作</button>
+          <button onclick="filterPromptCategory('reasoning')" id="prompt-cat-reasoning" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔬 深度推理</button>
         </div>
       </div>
 
@@ -853,8 +855,8 @@
               ⚡
             </div>
             <div class="space-y-1">
-              <p class="text-xs font-bold text-slate-700 dark:text-slate-300">生态精选赞助</p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400">前沿生产力触达</p>
+              <p class="text-xs font-bold text-slate-700 dark:text-slate-300" id="ad-right-title">生态精选赞助</p>
+              <p class="text-[10px] text-slate-500 dark:text-slate-400" id="ad-right-desc">前沿生产力触达</p>
             </div>
             <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent my-1"></div>
             <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
@@ -914,14 +916,14 @@
     </div>
   </div>
 
-  <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放) -->
-  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative">
+  <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放，自适应 16:9 横屏与 9:16 TikTok 竖屏) -->
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
+    <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
         <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI 视频演示</h3>
         <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
       </div>
-      <div class="relative w-full aspect-video bg-black">
+      <div id="modal-video-aspect" class="relative w-full aspect-video bg-black flex items-center justify-center">
         <iframe id="modal-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
@@ -1013,6 +1015,18 @@
         toolFilterCode: "💻 编程提效",
         toolFilterClient: "💬 AI客户端",
         toolFilterAgent: "🤖 Agent工作流",
+        adLeftTitle: "AI 品牌展示",
+        adLeftDesc: "高价值极客定向",
+        adRightTitle: "生态精选赞助",
+        adRightDesc: "前沿生产力触达",
+        videoPlatAll: "全部平台 / All",
+        videoPlatYouTube: "📺 YouTube 深度 (16:9)",
+        videoPlatTikTok: "🎵 TikTok 爆款 (9:16)",
+        promptCatTibo: "🌟 Tibo GPT重置",
+        promptCatDeepSeek: "🧠 DeepSeek R1",
+        promptCatClaude: "⚡ Claude 3.7",
+        promptCatOpenAI: "🎯 OpenAI o1/o3",
+        promptCatSora: "🎬 Sora2 / Wan2.1",
         videoSubAll: "全部视频",
         videoSubViral: "🔥 近期爆点",
         videoSubTutorial: "🎓 系统教学",
@@ -1129,6 +1143,18 @@
         toolFilterCode: "💻 Coding Dev",
         toolFilterClient: "💬 AI Client",
         toolFilterAgent: "🤖 Agent Workflow",
+        adLeftTitle: "AI Brand Space",
+        adLeftDesc: "High-Value Tech Reach",
+        adRightTitle: "Ecosystem Sponsor",
+        adRightDesc: "Next-Gen Productivity",
+        videoPlatAll: "All Platforms",
+        videoPlatYouTube: "📺 YouTube (16:9)",
+        videoPlatTikTok: "🎵 TikTok Viral (9:16)",
+        promptCatTibo: "🌟 Tibo GPT Reset",
+        promptCatDeepSeek: "🧠 DeepSeek R1",
+        promptCatClaude: "⚡ Claude 3.7",
+        promptCatOpenAI: "🎯 OpenAI o1/o3",
+        promptCatSora: "🎬 Sora2 / Wan2.1",
         videoSubAll: "All Videos",
         videoSubViral: "🔥 Trending Viral",
         videoSubTutorial: "🎓 Tutorials",
@@ -1223,12 +1249,169 @@
         "声音克隆": "Voice Clone",
         "极低延迟": "Ultra-low Latency",
         "本地部署": "Local Deploy",
-        "显存优化": "VRAM Optimization"
+        "显存优化": "VRAM Optimization",
+        "算力基础设施": "Compute Infrastructure",
+        "GPT重置法则": "GPT Reset Rules",
+        "上下文净化与深度推导": "Context Purge & Reasoning",
+        "GPT重置秘技": "GPT Reset Trick",
+        "上下文净化": "Context Purge",
+        "思维链CoT奠基": "CoT Reasoning Pioneer",
+        "推理模型指引": "Reasoning Model Guidance",
+        "前沿模型Scaling": "Frontier Scaling",
+        "经验安全对齐": "Empirical Safety",
+        "实时多模态": "Real-time Multimodal",
+        "亚秒级交互": "Sub-second Interaction",
+        "超级智能原则": "Superintelligence Principles",
+        "微软MAI准则": "MAI Code of Conduct",
+        "防止权力垄断": "Preventing Monopoly",
+        "开源前沿模型": "Open Source Frontier",
+        "擎天柱价值": "Optimus Value",
+        "GPT-6实测": "GPT-6 Testing",
+        "Agent地图综合": "Agent Map Synthesis",
+        "前沿节奏自律": "Pacing the Frontier",
+        "独立安全评估": "Independent Evaluation",
+        "全行业团结": "Industry Unity",
+        "超级智能向善": "Safe Superintelligence",
+        "前沿标准组织": "Standards Body",
+        "行业共识": "Industry Consensus",
+        "硅谷监管激辩": "SV Regulation Debate",
+        "前沿自律": "Frontier Restraint",
+        "测试期算力成本暴跌": "Test-time Compute Drops",
+        "ARC-AGI基准": "ARC-AGI Benchmark",
+        "行业澄清": "Clarification",
+        "科研诚信争论": "Research Integrity",
+        "算力云网络安全": "Cloud Security",
+        "自主Agent防失控": "Rogue Agent Containment",
+        "671B MoE 架构": "671B MoE Architecture",
+        "128K 上下文": "128K Context",
+        "1M 原生上下文": "1M Native Context",
+        "2M 极限上下文": "2M Ultra Context",
+        "SWE-bench 高分": "SWE-bench Top Score",
+        "AIME/数学竞赛级": "AIME / Math Olympiad",
+        "开源权重可商用": "Open Weights / Commercial",
+        "支持本地/端侧部署": "Local / On-Device Deploy",
+        "原生多模态理解": "Native Multimodal",
+        "SOTA 深度推理链": "SOTA Reasoning Chain",
+        "自主智能体工作流": "Autonomous Agent Workflow",
+        "分层世界模型架构": "Hierarchical World Model",
+        "FP8/INT4 极限制化": "FP8 / INT4 Quantized",
+        "零样本泛化": "Zero-shot Generalization",
+        "商业级高清生图": "Commercial HD Gen",
+        "SOTA 性能突破": "SOTA Breakthrough",
+        "权威测评认证": "Benchmark Verified",
+        "Sora2物理世界": "Sora 2 Physics",
+        "Wan2.1实测": "Wan 2.1 Demo",
+        "离线端侧推理": "Offline Edge AI",
+        "DeepSeek R1": "DeepSeek R1",
+        "Claude 3.7混合推理": "Claude 3.7 Hybrid",
+        "One-Prompt游戏": "One-Prompt Game",
+        "Computer Use": "Computer Use",
+        "智能体自主操作": "Autonomous Agent OS",
+        "具身视觉世界模型": "Embodied World Model",
+        "机器人灵巧手": "Dexterous Hands"
       };
       for (const [zhKey, enVal] of Object.entries(dict)) {
         if (tag.includes(zhKey)) {
           return tag.replace(zhKey, enVal);
         }
+      }
+      return tag;
+    }
+
+    // 纯净双语信源名翻译格式化 (Strict Bilingual Isolation)
+    function formatSource(source, lang) {
+      if (!source) return '';
+      if (lang === 'zh') return source;
+      const dict = {
+        'Techmeme 硅谷风向': 'Techmeme · Silicon Valley',
+        'Google AI 实时快讯': 'Google News · AI Alerts',
+        '𝕏 实时爆款热议': '𝕏 · Viral Trending',
+        'GitHub 深度开源': 'GitHub Trending',
+        'Product Hunt 落地应用': 'Product Hunt Daily',
+        'Hugging Face 在线应用': 'Hugging Face Spaces',
+        '机器之心 产业突破': 'Synced AI',
+        '量子位 突破洞察': 'QbitAI',
+        '知乎 AI 深度讨论': 'Zhihu AI Column',
+        'V2EX 极客实战': 'V2EX AI Nodes',
+        '实战技巧 · Prompt': 'Practical Prompts',
+        '架构实操': 'Systems Lab',
+        '工程实战': 'Engineering',
+        'DBA极客': 'DBA Geek',
+        '全栈开发': 'Full-Stack',
+        '设计前沿': 'Design Studio',
+        '智能体实验室': 'Agent Lab',
+        '深度学习先锋': 'Deep Learning',
+        '学术极客': 'Academic Geek',
+        'VC投资人': 'VC Investor',
+        '提示词大师': 'Prompt Master',
+        '极客实验室': 'Tech Lab',
+        'AI编码': 'AI Coding',
+        '自动化极客': 'Auto Geek',
+        '机器人视界': 'Robotics Lab',
+        '视觉先锋': 'Visual Lab'
+      };
+      let s = source;
+      for (const [zhKey, enVal] of Object.entries(dict)) {
+        if (s.includes(zhKey)) {
+          s = s.replace(zhKey, enVal);
+        }
+      }
+      s = s.replace(/YouTube\s*·\s*[\u4e00-\u9fa5]+/g, 'YouTube AI');
+      s = s.replace(/TikTok\s*·\s*[\u4e00-\u9fa5]+/g, 'TikTok AI');
+      s = s.replace(/𝕏\s*\(Twitter\)\s*·\s*/g, '𝕏 · ');
+      return s;
+    }
+
+    // 通用标签双语翻译助手
+    function translateTag(tag, lang) {
+      if (!tag) return '';
+      if (lang === 'zh') return tag;
+      const dict = {
+        '24h飙升': '24h Viral',
+        '近期爆款': 'Viral Hit',
+        '近期爆点': 'Viral Hit',
+        '爆款生成': 'Viral Video',
+        '极客绝技': 'Pro Tip',
+        '系统教学': 'System Tutorial',
+        '避坑实操': 'Hands-on',
+        '视频生成': 'Video Gen',
+        '实战技巧': 'Practical Tips',
+        '端侧AI': 'Edge AI',
+        '智能编程': 'AI Coding',
+        '电脑接管': 'Computer Use',
+        '具身智能': 'Embodied AI',
+        '人形机器人': 'Humanoid Robot',
+        '置顶爆款': 'Pinned Viral',
+        '𝕏置顶爆款': '𝕏 Pinned',
+        '𝕏推特大V': '𝕏 Leader',
+        '极客实战': 'Geek Practice',
+        '思维链': 'Chain of Thought',
+        '反垄断': 'Anti-monopoly',
+        '开源生态': 'Open Source',
+        '安全自律': 'Frontier Safety',
+        '行业协作': 'Industry Collab',
+        '标准协议': 'Standards',
+        '硅谷风向': 'Silicon Valley',
+        '监管辩论': 'Regulation Debate',
+        '推理算力': 'Inference Compute',
+        '科研诚信': 'Research Integrity',
+        '安全对齐': 'Safety Alignment',
+        '免部署': 'Zero-Setup Web',
+        '客户端': 'Desktop Client',
+        '智能体': 'Agent',
+        '图像': 'Image Gen',
+        '编程': 'Coding',
+        '声音': 'Audio',
+        '写作': 'Writing',
+        '开源': 'Open Source',
+        '商业级': 'Enterprise',
+        '免费商用': 'Free Commercial',
+        '免费': 'Free',
+        '离线': 'Offline',
+        '本地': 'Local'
+      };
+      for (const [k, v] of Object.entries(dict)) {
+        if (tag.includes(k)) return tag.replace(k, v);
       }
       return tag;
     }
@@ -1469,7 +1652,24 @@
       const tfAgent = document.getElementById('tool-filter-agent');
       if (tfAgent) tfAgent.textContent = t.toolFilterAgent;
 
-      // 视频子分类按钮文本更新
+      // 广告位双语占位文本更新
+      const elAlt = document.getElementById('ad-left-title');
+      if (elAlt) elAlt.textContent = t.adLeftTitle || (lang === 'zh' ? 'AI 品牌展示' : 'AI Brand Space');
+      const elAld = document.getElementById('ad-left-desc');
+      if (elAld) elAld.textContent = t.adLeftDesc || (lang === 'zh' ? '高价值极客定向' : 'High-Value Tech Reach');
+      const elArt = document.getElementById('ad-right-title');
+      if (elArt) elArt.textContent = t.adRightTitle || (lang === 'zh' ? '生态精选赞助' : 'Ecosystem Sponsor');
+      const elArd = document.getElementById('ad-right-desc');
+      if (elArd) elArd.textContent = t.adRightDesc || (lang === 'zh' ? '前沿生产力触达' : 'Next-Gen Productivity');
+
+      // 视频平台分栏与子分类按钮文本更新
+      const vpAll = document.getElementById('video-plat-all');
+      if (vpAll) vpAll.textContent = t.videoPlatAll || '全部平台 / All';
+      const vpYt = document.getElementById('video-plat-youtube');
+      if (vpYt) vpYt.textContent = t.videoPlatYouTube || '📺 YouTube (16:9)';
+      const vpTk = document.getElementById('video-plat-tiktok');
+      if (vpTk) vpTk.textContent = t.videoPlatTikTok || '🎵 TikTok (9:16)';
+
       const vsAll = document.getElementById('video-sub-all');
       if (vsAll) vsAll.textContent = t.videoSubAll;
       const vsViral = document.getElementById('video-sub-viral');
@@ -1483,25 +1683,25 @@
       const vsMast = document.getElementById('video-sub-mastery');
       if (vsMast) vsMast.textContent = t.videoSubMastery;
 
-      // 提示词子分类按钮文本更新
+      // 提示词子分类与最新前沿模型筛选按钮更新
       const pcAll = document.getElementById('prompt-cat-all');
       if (pcAll) pcAll.textContent = t.promptCatAll;
-      const pcCode = document.getElementById('prompt-cat-coding');
-      if (pcCode) pcCode.textContent = t.promptCatCoding;
-      const pcImg = document.getElementById('prompt-cat-image_gen');
-      if (pcImg) pcImg.textContent = t.promptCatImage;
-      const pcVid = document.getElementById('prompt-cat-video_gen');
-      if (pcVid) pcVid.textContent = t.promptCatVideo;
-      const pcReas = document.getElementById('prompt-cat-reasoning');
-      if (pcReas) pcReas.textContent = t.promptCatReasoning;
-      const pcRes = document.getElementById('prompt-cat-research');
-      if (pcRes) pcRes.textContent = t.promptCatResearch;
+      const pcTibo = document.getElementById('prompt-cat-tibo');
+      if (pcTibo) pcTibo.textContent = t.promptCatTibo || '🌟 Tibo GPT重置';
+      const pcDeep = document.getElementById('prompt-cat-deepseek');
+      if (pcDeep) pcDeep.textContent = t.promptCatDeepSeek || '🧠 DeepSeek R1';
+      const pcClaud = document.getElementById('prompt-cat-claude');
+      if (pcClaud) pcClaud.textContent = t.promptCatClaude || '⚡ Claude 3.7';
+      const pcOai = document.getElementById('prompt-cat-openai');
+      if (pcOai) pcOai.textContent = t.promptCatOpenAI || '🎯 OpenAI o1/o3';
+      const pcSora = document.getElementById('prompt-cat-sora');
+      if (pcSora) pcSora.textContent = t.promptCatSora || '🎬 Sora2 / Wan2.1';
       const pcAgent = document.getElementById('prompt-cat-agent');
       if (pcAgent) pcAgent.textContent = t.promptCatAgent;
-      const pcGame = document.getElementById('prompt-cat-game_3d');
-      if (pcGame) pcGame.textContent = t.promptCatGame3D;
-      const pcWrite = document.getElementById('prompt-cat-writing');
-      if (pcWrite) pcWrite.textContent = t.promptCatWriting;
+      const pcCode = document.getElementById('prompt-cat-coding');
+      if (pcCode) pcCode.textContent = t.promptCatCoding;
+      const pcReas = document.getElementById('prompt-cat-reasoning');
+      if (pcReas) pcReas.textContent = t.promptCatReasoning;
 
       const secPrompts = document.getElementById('section-title-prompts');
       if (secPrompts) secPrompts.textContent = t.promptsTitle;
@@ -1766,7 +1966,26 @@
       }
     }
 
-    // 专栏广场：实战视频分类筛选
+    let videoPlatformFilter = 'all';
+
+    // 专栏广场：实战视频平台分栏筛选 (全部 / YouTube / TikTok)
+    function filterVideoPlatform(plat) {
+      videoPlatformFilter = plat;
+      const platKeys = ['all', 'youtube', 'tiktok'];
+      platKeys.forEach(k => {
+        const b = document.getElementById(`video-plat-${k}`);
+        if (b) {
+          b.className = (k === plat)
+            ? "video-plat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30"
+            : "video-plat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0";
+        }
+      });
+      if (currentTab === 'videos') {
+        renderCategoryView('videos');
+      }
+    }
+
+    // 专栏广场：实战视频场景子分类筛选
     function filterVideoSub(sub) {
       videoSubFilter = sub;
       const subKeys = ['all', 'viral', 'tutorial', 'insight', 'tips', 'mastery'];
@@ -1783,10 +2002,10 @@
       }
     }
 
-    // 专栏广场：提示词场景分类筛选
+    // 专栏广场：提示词场景分类筛选 (按最新模型与高阶场景)
     function filterPromptCategory(cat) {
       promptCategoryFilter = cat;
-      const catKeys = ['all', 'coding', 'image_gen', 'video_gen', 'reasoning', 'research', 'agent', 'game_3d', 'writing'];
+      const catKeys = ['all', 'tibo_reset', 'deepseek_r1', 'claude_37', 'openai_o3', 'sora2_wan21', 'agent', 'coding', 'reasoning'];
       catKeys.forEach(k => {
         const b = document.getElementById(`prompt-cat-${k}`);
         if (b) {
@@ -1820,12 +2039,12 @@
         return `
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2 shadow-sm">
             <div class="space-y-1.5">
-              <div class="flex items-center justify-between text-[10px]">
-                <div class="flex items-center space-x-1.5">
-                  <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25">${badge}</span>
+              <div class="flex items-center justify-between text-[10px] gap-2">
+                <div class="flex items-center space-x-1.5 min-w-0">
+                  <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">${badge}</span>
                   ${todayBadge}
                 </div>
-                <span class="text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
                 ${title}
@@ -1835,8 +2054,8 @@
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-200 dark:border-slate-800/60">
-              <span>${t.sourceLabel} ${item.source}</span>
-              <span class="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform font-medium">${isZh ? '阅读 →' : 'Read →'}</span>
+              <span class="truncate max-w-[140px]">${t.sourceLabel} ${formatSource(item.source, currentLang)}</span>
+              <span class="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform font-medium shrink-0">${isZh ? '阅读 →' : 'Read →'}</span>
             </div>
           </a>
         `;
@@ -1869,11 +2088,13 @@
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const specBadges = (item.spec_tags && item.spec_tags.length)
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-950/70 text-indigo-300 border border-indigo-500/30">⚡ ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
+      const specList = (!isZh && item.spec_tags_en && item.spec_tags_en.length) ? item.spec_tags_en : (item.spec_tags || []);
+      const specBadges = (specList && specList.length)
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${specList.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">⚡ ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
         : '';
 
       const hasRealImage = item.image_url && !item.image_url.includes('photo-1526374965328') && !item.image_url.includes('photo-1485827404703');
+      const cleanSource = formatSource(item.source, currentLang);
 
       if (hasRealImage) {
         return `
@@ -1885,10 +2106,10 @@
               <div class="space-y-1.5">
                 <div class="flex items-center justify-between flex-wrap gap-1.5 text-xs">
                   <div class="flex items-center space-x-2">
-                    <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">${item.source}</span>
+                    <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">${cleanSource}</span>
                     ${todayBadge}
                   </div>
-                  <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.display}</span>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
                 </div>
                 <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
                   ${title}
@@ -1899,7 +2120,7 @@
                 </p>
               </div>
               <div class="flex items-center justify-between pt-1">
-                <span class="text-[10px] text-slate-500 font-mono">${t.sourceLabel} ${item.source}</span>
+                <span class="text-[10px] text-slate-500 font-mono">${t.sourceLabel} ${cleanSource}</span>
                 <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">${t.readMore}</a>
               </div>
             </div>
@@ -1912,10 +2133,10 @@
         <article class="glass-card rounded-xl p-4 flex flex-col space-y-2.5 group border-l-4 border-l-indigo-500/80">
           <div class="flex items-center justify-between flex-wrap gap-1.5 text-xs">
             <div class="flex items-center space-x-2">
-              <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">${item.source}</span>
+              <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">${cleanSource}</span>
               ${todayBadge}
             </div>
-            <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.display}</span>
+            <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
           <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
             ${title}
@@ -1939,7 +2160,9 @@
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
+      const isPinned = !!item.is_pinned;
+      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 ${isZh ? '置顶爆款' : 'Pinned'}</span>` : '';
 
       const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
 
@@ -1954,22 +2177,23 @@
           : '';
 
         return `
-          <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/40 transition-all">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-2.5">
-                <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-400/50 object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                <div>
+          <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group border ${isPinned ? 'border-amber-500/60 ring-1 ring-amber-500/30 shadow-lg shadow-amber-500/10' : 'border-slate-200 dark:border-slate-800/80 hover:border-sky-500/40'} transition-all">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center space-x-2.5 min-w-0">
+                <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-400/50 object-cover shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                <div class="min-w-0">
                   <div class="flex items-center space-x-1">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100">${item.author || (isZh ? 'AI 领袖' : 'AI Leader')}</span>
-                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black" title="${t.celebVerifiedTitle}">✓</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${item.author || (isZh ? 'AI 领袖' : 'AI Leader')}</span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black shrink-0" title="${t.celebVerifiedTitle}">✓</span>
                   </div>
-                  <span class="text-slate-500 text-[11px] font-mono">${item.author_handle || '@x'}</span>
+                  <span class="text-slate-500 text-[11px] font-mono truncate block">${item.author_handle || '@x'}</span>
                 </div>
               </div>
-              <div class="flex items-center space-x-2">
-                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.display}</span>
-                <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold">${t.celebBadgeX}</span>
+              <div class="flex items-center space-x-1.5 shrink-0">
+                ${pinnedBadge}
                 ${todayBadge}
+                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold shrink-0">${t.celebBadgeX}</span>
               </div>
             </div>
 
@@ -2010,22 +2234,22 @@
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group border border-slate-200 dark:border-slate-800/80 hover:border-orange-500/40 transition-all">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2.5">
-              <div class="w-8 h-8 rounded-full bg-[#FF4500]/15 flex items-center justify-center text-sm border border-[#FF4500]/30 text-[#FF4500]">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-full bg-[#FF4500]/15 flex items-center justify-center text-sm border border-[#FF4500]/30 text-[#FF4500] shrink-0">
                 👽
               </div>
-              <div>
+              <div class="min-w-0">
                 <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-200">${isZh ? (item.author || 'Reddit 极客社群') : t.redditCommunity}</span>
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-200 truncate">${isZh ? (item.author || 'Reddit 极客社群') : t.redditCommunity}</span>
                 </div>
-                <span class="text-orange-500 dark:text-orange-400/90 text-[11px] font-mono">${cleanSub}</span>
+                <span class="text-orange-500 dark:text-orange-400/90 text-[11px] font-mono truncate block">${cleanSub}</span>
               </div>
             </div>
-            <div class="flex items-center space-x-2">
-              <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.display}</span>
-              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold">${t.celebBadgeReddit}</span>
+            <div class="flex items-center space-x-1.5 shrink-0">
               ${todayBadge}
+              <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
+              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold shrink-0">${t.celebBadgeReddit}</span>
             </div>
           </div>
 
@@ -2094,7 +2318,7 @@
                   <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">${scenario}</span>
                 </div>
               </div>
-              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono shrink-0">🕒 ${timeObj.relative || t.toolToday}</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || t.toolToday}</span>
             </div>
 
             <!-- 核心看点与功能价值 -->
@@ -2110,8 +2334,8 @@
           </div>
 
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-            <span class="text-[10px] text-slate-500 font-mono">${item.source}</span>
-            <a href="${item.url}" target="_blank" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center space-x-1 shadow-sm shadow-emerald-600/30">
+            <span class="text-[10px] text-slate-500 font-mono truncate max-w-[140px]">${formatSource(item.source, currentLang)}</span>
+            <a href="${item.url}" target="_blank" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0">
               <span>${t.tryTool}</span>
             </a>
           </div>
@@ -2279,21 +2503,24 @@
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
       const views = item.metrics?.views || '1.2M+ 播放';
+      const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
+      const platformType = isTikTok ? 'tiktok' : 'youtube';
 
       return `
         <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col space-y-4 border-2 border-amber-500/40 shadow-xl relative overflow-hidden group">
           <div class="flex items-center justify-between flex-wrap gap-2">
-            <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-2 flex-wrap gap-y-1">
               <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white text-[11px] font-black shadow-md flex items-center space-x-1">
                 <span>🔥</span>
                 <span>${isZh ? '本周全球 AI 爆款第一焦点' : 'Weekly #1 Global Viral AI Breakout'}</span>
               </span>
+              <span class="px-2 py-0.5 rounded bg-black text-rose-300 border border-rose-500/40 text-[10px] font-bold">${isTikTok ? '🎵 TikTok' : '▶ YouTube'}</span>
               <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[10px] font-bold">${views}</span>
             </div>
-            <span class="text-[11px] text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
+            <span class="text-[11px] text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
 
-          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-slate-700/60 cursor-pointer shadow-lg group-hover:border-indigo-500/60 transition-colors" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+          <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-slate-700/60 cursor-pointer shadow-lg group-hover:border-indigo-500/60 transition-colors" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
             <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex items-center justify-center">
               <div class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center text-2xl pl-1 shadow-2xl group-hover:scale-110 group-hover:bg-rose-500 transition-all">
@@ -2307,7 +2534,7 @@
           </div>
 
           <div class="space-y-2">
-            <h2 class="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            <h2 class="text-base sm:text-lg font-black text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
               ${title}
             </h2>
             ${summary ? `<p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">${summary}</p>` : ''}
@@ -2315,17 +2542,17 @@
 
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
             <div class="flex items-center space-x-2">
-              <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5">
+              <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5">
                 <span>▶</span>
-                <span>${isZh ? '站内播放' : 'Play Now'}</span>
+                <span>${isZh ? (isTikTok ? '站内竖屏播放' : '站内播放') : (isTikTok ? 'Play In-App (9:16)' : 'Play Now')}</span>
               </button>
               <a href="${item.url}" target="_blank" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 font-medium transition-colors flex items-center space-x-1">
-                <span>YouTube ↗</span>
+                <span>${isTikTok ? 'TikTok ↗' : 'YouTube ↗'}</span>
               </a>
             </div>
             <div class="hidden sm:flex items-center space-x-1 text-[11px] text-slate-500">
-              <span>信源认证:</span>
-              <span class="font-bold text-slate-700 dark:text-slate-300">${item.source}</span>
+              <span>${isZh ? '信源认证:' : 'Source:'}</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300">${formatSource(item.source, currentLang)}</span>
             </div>
           </div>
         </article>
@@ -2339,17 +2566,19 @@
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const medals = ['🥇', '🥈', '🥉'];
       const medal = medals[rank - 1] || `#${rank}`;
+      const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
+      const platformType = isTikTok ? 'tiktok' : 'youtube';
 
       return `
-        <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+        <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
           <div class="relative w-24 aspect-video rounded-lg overflow-hidden bg-black shrink-0">
             <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy">
             <span class="absolute top-1 left-1 text-xs drop-shadow">${medal}</span>
           </div>
           <div class="flex-1 min-w-0 space-y-1">
-            <div class="flex items-center justify-between text-[10px] text-slate-500">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 gap-2">
               <span class="font-bold text-rose-500 dark:text-rose-400 truncate max-w-[110px]">${item.author}</span>
-              <span class="font-mono">${timeObj.relative || ''}</span>
+              <span class="font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">${timeObj.relative || ''}</span>
             </div>
             <h4 class="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
               ${title}
@@ -2390,13 +2619,13 @@
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 border-l-purple-500 shadow-md group">
           <div class="space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 shrink-0">
                 ${purpose}
               </span>
-              <div class="flex items-center space-x-1.5">
+              <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
-                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.relative || t.toolToday}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || t.toolToday}</span>
               </div>
             </div>
             <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">${title}</h4>
@@ -2439,7 +2668,12 @@
       const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
       const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
+      const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
+      const platformType = isTikTok ? 'tiktok' : 'youtube';
+      const platformBadge = isTikTok 
+        ? `<span class="px-1.5 py-0.5 rounded bg-black text-rose-300 border border-rose-500/40 text-[9px] font-bold shrink-0">🎵 TikTok</span>` 
+        : `<span class="px-1.5 py-0.5 rounded bg-rose-600/20 text-rose-400 border border-rose-500/30 text-[9px] font-bold shrink-0">▶ YouTube</span>`;
 
       let isWithin30Days = false;
       if (item.raw_published_at) {
@@ -2465,7 +2699,7 @@
       return `
         <article class="glass-card rounded-xl p-3 flex flex-col justify-between space-y-2 group border-t-2 ${isViral ? 'border-t-amber-500 shadow-amber-500/10' : 'border-t-rose-500/80'} hover:border-rose-500/50 transition-all">
           <div class="space-y-2">
-            <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
               <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               <div class="absolute inset-0 bg-black/35 flex items-center justify-center group-hover:bg-black/10 transition-colors">
                 <div class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center text-base pl-0.5 shadow-xl group-hover:scale-110 transition-transform">
@@ -2474,20 +2708,21 @@
               </div>
               <div class="absolute top-2 left-2 flex items-center space-x-1.5 flex-wrap">
                 ${viralBadgeHtml}
+                ${platformBadge}
                 <span class="px-2 py-0.5 rounded bg-black/85 text-rose-300 border border-rose-500/40 text-[10px] font-bold">${skillTag}</span>
               </div>
               <span class="absolute bottom-2 right-2 bg-black/85 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${duration}</span>
             </div>
 
-            <div class="flex items-center justify-between text-[10px] pt-1">
-              <span class="text-rose-600 dark:text-rose-400 font-medium">${item.source || item.author}</span>
-              <div class="flex items-center space-x-1.5">
+            <div class="flex items-center justify-between text-[10px] pt-1 gap-2">
+              <span class="text-rose-600 dark:text-rose-400 font-medium truncate max-w-[130px]">${formatSource(item.source || item.author, currentLang)}</span>
+              <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
-                <span class="text-slate-500 dark:text-slate-400 font-mono">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
             </div>
 
-            <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
               ${title}
             </h4>
 
@@ -2848,11 +3083,24 @@
       } else if (tab === 'videos') {
         const isZh = currentLang === 'zh';
         let rawList = (cachedData.grouped?.videos || cachedData.videos || []).filter(it => !it.is_prompt);
-        let list = dedupVideoItems(filterList(rawList));
+        let allRankedList = dedupVideoItems(filterList(rawList));
 
+        // 热点视频不区分平台：Hero 大卡与飙升 TOP 3 在综合池中按热度全局竞争 (YouTube 深度 + TikTok 爆款统一定位)
+        const showHero = !searchQuery && !selectedCreator && (!videoSubFilter || videoSubFilter === 'all');
+        const heroItem = showHero ? (allRankedList.find(it => it.is_viral) || allRankedList[0]) : null;
+        const trendingItems = heroItem ? allRankedList.filter(it => it !== heroItem).slice(0, 3) : [];
+
+        // 下方视频网格与列表：严格遵循平台分栏 (全部 / YouTube 16:9 / TikTok 9:16) 与细分场景筛选
+        let list = allRankedList;
+        if (videoPlatformFilter && videoPlatformFilter !== 'all') {
+          list = list.filter(it => {
+            const p = it.platform || (it.url && it.url.includes('tiktok') ? 'tiktok' : 'youtube');
+            return p === videoPlatformFilter;
+          });
+        }
         if (videoSubFilter && videoSubFilter !== 'all') {
           if (videoSubFilter === 'viral') {
-            list = list.filter(it => it.is_viral || it.sub_type === 'viral' || (it.tags && it.tags.some(t => t.includes('爆点') || t.includes('爆款'))));
+            list = list.filter(it => it.is_viral || it.sub_type === 'viral' || (it.tags && it.tags.some(t => t.includes('爆点') || t.includes('爆款') || t.includes('飙升'))));
           } else {
             list = list.filter(it => (it.sub_type || getVideoSubType(it)) === videoSubFilter);
           }
@@ -2861,26 +3109,21 @@
           list = list.filter(it => it.author === selectedCreator);
         }
 
-        // 判断是否展示 Hero Spotlight 顶栏大卡与飙升热榜
-        const showHero = !searchQuery && !selectedCreator && (!videoSubFilter || videoSubFilter === 'all' || videoSubFilter === 'viral');
-        const heroItem = showHero ? (list.find(it => it.is_viral) || list[0]) : null;
-
-        if (heroItem) {
-          const trendingItems = list.filter(it => it !== heroItem).slice(0, 3);
+        if (heroItem && (!videoPlatformFilter || videoPlatformFilter === 'all')) {
           const remainingItems = list.filter(it => it !== heroItem && !trendingItems.includes(it));
           container.className = "space-y-6";
           container.innerHTML = `
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-              <!-- 左侧 2/3: Hero Spotlight 焦点大卡 -->
+              <!-- 左侧 2/3: Hero Spotlight 焦点大卡 (全平台热点统筹) -->
               <div class="lg:col-span-8 h-full">
                 ${renderHeroSpotlight(heroItem)}
               </div>
-              <!-- 右侧 1/3: 实时飙升热播榜 -->
+              <!-- 右侧 1/3: 实时飙升热播榜 (YouTube 深度 + TikTok 爆款全网排行) -->
               <div class="lg:col-span-4 glass-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between space-y-3">
                 <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
                   <h3 class="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center space-x-1.5">
                     <span class="text-rose-500">🔥</span>
-                    <span>${isZh ? '实时飙升热播榜' : 'Live Trending AI Radar'}</span>
+                    <span>${isZh ? '全网飙升热播榜 (不分平台)' : 'Global Trending Radar (All)'}</span>
                   </h3>
                   <span class="text-[10px] text-slate-400 font-mono">TOP 3</span>
                 </div>
@@ -2895,7 +3138,7 @@
               <div class="flex items-center justify-between">
                 <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 flex items-center space-x-1.5">
                   <span>🎬</span>
-                  <span>${isZh ? '更多顶流实战视频精选' : 'Curated Hands-on Videos'}</span>
+                  <span>${isZh ? '精选实战视频' : 'Curated Hands-on Videos'}</span>
                 </h3>
                 <span class="text-[11px] text-slate-400 font-mono">${remainingItems.length} videos</span>
               </div>
@@ -2914,7 +3157,14 @@
         let list = filterList(rawList);
 
         if (promptCategoryFilter && promptCategoryFilter !== 'all') {
-          list = list.filter(it => (it.sub_type || it.category_sub || '') === promptCategoryFilter || (it.category === promptCategoryFilter) || (it.recommended_model && it.recommended_model.toLowerCase().includes(promptCategoryFilter)));
+          list = list.filter(it => 
+            (it.model_family === promptCategoryFilter) ||
+            (it.sub_type || it.category_sub || '') === promptCategoryFilter || 
+            (it.category === promptCategoryFilter) || 
+            (it.recommended_model && it.recommended_model.toLowerCase().includes(promptCategoryFilter.replace('_', ''))) ||
+            (it.id && it.id.toLowerCase().includes(promptCategoryFilter)) ||
+            (it.tags && it.tags.some(tg => tg.toLowerCase().includes(promptCategoryFilter.replace('_', ''))))
+          );
         }
 
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
@@ -2962,14 +3212,28 @@
       });
     }
 
-    // 视频弹窗操作
-    function openVideoModal(embedUrl, title) {
+    // 视频弹窗操作 (自适应 16:9 横屏与 9:16 TikTok 竖屏)
+    function openVideoModal(embedUrl, title, platform) {
       const modal = document.getElementById('video-modal');
+      const dialog = document.getElementById('modal-video-dialog');
+      const aspect = document.getElementById('modal-video-aspect');
       const iframe = document.getElementById('modal-video-iframe');
       const titleEl = document.getElementById('modal-video-title');
 
       if (!embedUrl) return;
-      iframe.src = embedUrl + "?autoplay=1";
+
+      const isTikTok = platform === 'tiktok' || embedUrl.includes('tiktok.com');
+
+      if (isTikTok) {
+        if (dialog) dialog.className = "bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-sm w-full shadow-2xl relative transition-all duration-200";
+        if (aspect) aspect.className = "relative w-full aspect-[9/16] bg-black flex items-center justify-center";
+        iframe.src = embedUrl;
+      } else {
+        if (dialog) dialog.className = "bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200";
+        if (aspect) aspect.className = "relative w-full aspect-video bg-black flex items-center justify-center";
+        iframe.src = embedUrl + (embedUrl.includes('?') ? '&autoplay=1' : '?autoplay=1');
+      }
+
       titleEl.textContent = title || I18N[currentLang].modalVideoTitle;
       modal.classList.remove('hidden');
     }
