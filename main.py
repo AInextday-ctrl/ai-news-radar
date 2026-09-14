@@ -13,7 +13,9 @@ except Exception:
     pass
 
 import os
+import re
 import json
+import time
 from datetime import datetime, timezone
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers
 from processor import process_items_batch
@@ -36,19 +38,25 @@ def parse_time_for_sort(it):
 
 
 def extract_top_three(items: list) -> list:
-    """Extract 3 most impactful highlights across categories for the 60-second top banner."""
+    """
+    Extract 3 most impactful highlights across categories for the 60-second top banner.
+    Strictly enforces 24-hour freshness gate: No historical posts from days ago can ever
+    appear in the 'Today's Top 3' headliner banner.
+    """
     top = []
-    
-    # 1. 最重要的大事件/突发 (优先前沿重大模型与技术突破)
-    news_items = [i for i in items if i.get("category") == "news"]
-    
+    now_ts = time.time()
+    MAX_24H_SECONDS = 86400
+
+    # 1. 最重要的大事件/突发 (严格限定过去 24 小时以内的重大突破)
+    all_news = [i for i in items if i.get("category") == "news"]
+    today_news = [i for i in all_news if (now_ts - parse_time_for_sort(i)) <= MAX_24H_SECONDS]
+    news_pool = today_news if today_news else all_news
+
     def news_weight(it):
         title = (it.get("title", "") + " " + it.get("title_zh", "")).lower()
         score = parse_time_for_sort(it)
-        # 降权非纯 AI 科技突破（如纯体育博彩下注等）
         if any(bad in title for bad in ["betting", "nfl", "sports", "poker", "casino", "gambling", "nba", "lottery"]):
             score -= 10000000
-        # 优先重大模型/架构/领袖公司突破
         keywords = ["openai", "deepseek", "anthropic", "claude", "gpt", "gemini", "nvidia", "meta", "superintelligence", "agi", "model", "chip", "reasoning", "breakthrough"]
         if any(k in title for k in keywords):
             score += 86400
@@ -56,30 +64,50 @@ def extract_top_three(items: list) -> list:
             score += 43200
         return score
 
-    news_items.sort(key=news_weight, reverse=True)
-    if news_items:
-        it = news_items[0]
+    news_pool.sort(key=news_weight, reverse=True)
+    top_news_item = None
+    if news_pool:
+        top_news_item = news_pool[0]
         top.append({
             "badge_zh": "⚡ 今日头条",
             "badge_en": "⚡ Top Story",
-            "title_zh": it.get("title_zh") or it.get("title", ""),
-            "title_en": it.get("title_en") or it.get("title", ""),
-            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
-            "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
-            "url": it["url"],
-            "image_url": it.get("image_url"),
-            "raw_published_at": it.get("raw_published_at"),
-            "source": it["source"]
+            "title_zh": top_news_item.get("title_zh") or top_news_item.get("title", ""),
+            "title_en": top_news_item.get("title_en") or top_news_item.get("title", ""),
+            "summary_zh": top_news_item.get("summary_zh") or top_news_item.get("content_snippet", "")[:80],
+            "summary_en": top_news_item.get("summary_en") or top_news_item.get("content_snippet", "")[:120],
+            "url": top_news_item["url"],
+            "image_url": top_news_item.get("image_url"),
+            "raw_published_at": top_news_item.get("raw_published_at"),
+            "source": top_news_item["source"]
         })
 
-    # 2. 最重磅的领袖声音 (严格取最新的领袖推文/言论)
-    celeb_items = [i for i in items if i.get("category") == "celebrity"]
-    celeb_items.sort(key=parse_time_for_sort, reverse=True)
-    if celeb_items:
-        it = celeb_items[0]
+    # 2. 领袖声音 / 社区热议 (严格限定过去 24 小时以内发生的真实推文或社群讨论)
+    # 必须是真实的社交媒体发帖（直链到 status 的 𝕏 推文或 Reddit 原生讨论），绝不能是第三方的普通新闻报道或转折链接
+    all_celeb = [i for i in items if i.get("category") == "celebrity"]
+    def is_valid_social(it):
+        plat = it.get("platform", "").lower()
+        src = it.get("source", "").lower()
+        u = it.get("url", "")
+        # 1. 𝕏 推文：必须为直接定位到具体贴文的 status 深层链接
+        if plat == "x" or "twitter" in src or "/status/" in u:
+            return bool(re.search(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', u))
+        # 2. Reddit 讨论：必须为真实的 reddit.com 链接
+        if plat == "reddit" or "reddit" in src or "reddit.com" in u:
+            return "reddit.com" in u
+        return False
+
+    social_pool = [i for i in all_celeb if is_valid_social(i)]
+    today_celeb = [i for i in social_pool if (now_ts - parse_time_for_sort(i)) <= MAX_24H_SECONDS]
+    today_celeb.sort(key=parse_time_for_sort, reverse=True)
+
+    if today_celeb:
+        it = today_celeb[0]
         author = it.get('author', '行业领袖')
+        is_reddit = "reddit" in (it.get("source", "") + it.get("platform", "")).lower()
+        badge_zh = "🔥 社区热议" if is_reddit else "🐦 领袖观点"
+        badge_en = "🔥 Community Buzz" if is_reddit else "🐦 Top Voice"
+
         en_quote = it.get("title_en") or it.get("content_snippet", "") or it.get("title", "")
-        # 如果 en_quote 带有 Author: 前缀，避免重复
         if en_quote.startswith(f"{author}:"):
             title_en = en_quote
         else:
@@ -91,8 +119,8 @@ def extract_top_three(items: list) -> list:
             title_zh = f"{author}：{zh_quote}"
 
         top.append({
-            "badge_zh": "🐦 领袖观点",
-            "badge_en": "🐦 Top Voice",
+            "badge_zh": badge_zh,
+            "badge_en": badge_en,
             "title_zh": title_zh,
             "title_en": title_en,
             "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
@@ -102,12 +130,30 @@ def extract_top_three(items: list) -> list:
             "raw_published_at": it.get("raw_published_at"),
             "source": it.get("author_handle") or it["source"]
         })
+    elif len(news_pool) > 1:
+        # 若今日无大V或社群发帖，绝不拿多天前的旧闻充数，而是选取今日第二条重磅前沿突破
+        it = news_pool[1]
+        top.append({
+            "badge_zh": "⚡ 突破进展",
+            "badge_en": "⚡ Breakthrough",
+            "title_zh": it.get("title_zh") or it.get("title", ""),
+            "title_en": it.get("title_en") or it.get("title", ""),
+            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
+            "url": it["url"],
+            "image_url": it.get("image_url"),
+            "raw_published_at": it.get("raw_published_at"),
+            "source": it["source"]
+        })
 
     # 3. 最值得体验的新工具/新视频 (优先取今日最新爆款)
     app_items = [i for i in items if i.get("category") in ["tools", "videos"]]
-    app_items.sort(key=parse_time_for_sort, reverse=True)
-    if app_items:
-        it = app_items[0]
+    today_apps = [i for i in app_items if (now_ts - parse_time_for_sort(i)) <= MAX_24H_SECONDS * 2]
+    app_pool = today_apps if today_apps else app_items
+    app_pool.sort(key=parse_time_for_sort, reverse=True)
+
+    if app_pool:
+        it = app_pool[0]
         top.append({
             "badge_zh": "🛠️ 爆款尝鲜",
             "badge_en": "🛠️ Try It Out",
@@ -137,7 +183,49 @@ def load_existing_items() -> list:
             if not items and "grouped" in data:
                 for cat_items in data["grouped"].values():
                     items.extend(cat_items)
-            return items or []
+
+            # 严格清洗历史残留脏数据，杜绝非深层链接推文、伪造主页 URL 及旧格式测试数据污染
+            valid_items = []
+            obsolete_fake_ids = {
+                "x_noam_reasoning_scaling", "x_elon_grok3_colossus", 
+                "x_sama_compute_currency", "x_karpathy_llm_os",
+                "x_demis_alphafold3_impact", "x_fchollet_arc_prize"
+            }
+            x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
+
+            for it in items:
+                u = it.get("url", "")
+                it_id = it.get("id", "")
+                platform = it.get("platform", "").lower()
+                source = it.get("source", "").lower()
+
+                # 1. 丢弃废弃的旧版硬编码 fake ID
+                if it_id in obsolete_fake_ids:
+                    continue
+
+                # 2. 丢弃未解析成功的 Google News 中转链接
+                if "news.google.com/rss/articles" in u:
+                    continue
+
+                # 2.5 修正历史数据中被误归类为 celebrity 的普通 web 新闻
+                if it.get("category") == "celebrity" and platform == "web":
+                    it["category"] = "news"
+                    if "source" in it:
+                        it["author"] = it["source"]
+
+                # 3. 严格校验所有 𝕏 / Twitter 推文：必须为直接定位到具体贴文的 status 深层链接，杜绝纯主页 URL
+                is_x = platform == "x" or "twitter" in source or it_id.startswith("x_") or "x.com" in u or "twitter.com" in u
+                if is_x:
+                    if not x_status_pattern.search(u):
+                        continue
+
+                # 4. 丢弃旧版可能残留假当前时间戳的提示词与教程，让新版真实发布时间的精选库自然覆盖
+                if it_id.startswith("prompt_") or it_id.startswith("tut_"):
+                    continue
+
+                valid_items.append(it)
+
+            return valid_items
     except Exception as e:
         print(f"⚠️ 读取历史数据失败: {e}，将从头构建数据池。")
         return []
@@ -233,19 +321,25 @@ def run_pipeline():
         print("⚠️ 未抓取到任何数据，请检查网络连接或源配置。")
         return
 
-    # 3. 增量筛选：分离出真正的新增条目 vs 历史已有条目
+    # 3. 增量筛选：
+    # 具备完整精选中文与真实时间戳的内容（大V推特、实操Prompt、高星工具、核心视频）直接进入更新池
+    # 仅对缺失中文提炼的外部原始新闻/RSS做增量 AI 提炼
     new_raw_items = []
+    pre_curated_items = []
     reused_count = 0
+
     for it in raw_items:
         u = it.get("url")
         i = it.get("id")
-        # 如果已经存在且已有中文提炼，直接复用已有结果
-        if (u and u in existing_by_url) or (i and i in existing_by_url):
+        # 若条目本身已有高质量中文提炼（例如大V推特、精选教程、高质量提示词）
+        if it.get("title_zh") and it.get("summary_zh"):
+            pre_curated_items.append(it)
+        elif (u and u in existing_by_url) or (i and i in existing_by_url):
             reused_count += 1
         else:
             new_raw_items.append(it)
 
-    print(f"⚡ 增量分析完成: 发现 {len(new_raw_items)} 条全新情报，{reused_count} 条已有历史情报（直接秒级复用）")
+    print(f"⚡ 增量分析完成: 发现 {len(new_raw_items)} 条全新外部情报，{len(pre_curated_items)} 条权威精选推文/实战情报，{reused_count} 条已有历史情报（直接秒级复用）")
 
     # 4. 仅对增量新情报调用清洗翻译，历史数据零开销
     if new_raw_items:
@@ -253,15 +347,20 @@ def run_pipeline():
     else:
         new_processed_items = []
 
-    # 5. 双轨合并：将新资讯与历史资讯合并，严格按发布时间倒序（最新永远置顶在最上方）
+    # 5. 多轨合并：将历史资讯、AI处理的新闻与权威精选条目合并，严格按发布时间倒序（最新永远置顶在最上方）
     merged_pool = {}
     # 先入历史
     for it in existing_items:
         key = it.get("url") or it.get("id")
         if key:
             merged_pool[key] = it
-    # 再入新增（确保最新提取的属性生效）
+    # 再入新增外部新闻（确保最新提取的属性生效）
     for it in new_processed_items:
+        key = it.get("url") or it.get("id")
+        if key:
+            merged_pool[key] = it
+    # 最后入权威精选（确保大V真实推文、教程、Prompt最新准确属性与真实时间戳绝对覆盖）
+    for it in pre_curated_items:
         key = it.get("url") or it.get("id")
         if key:
             merged_pool[key] = it
