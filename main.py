@@ -368,6 +368,11 @@ def run_pipeline():
     combined_items = list(merged_pool.values())
     combined_items.sort(key=parse_time_for_sort, reverse=True)
 
+    # 标记是否为 24 小时内的最新内容
+    now_ts = time.time()
+    for it in combined_items:
+        it["is_recent_24h"] = bool((now_ts - parse_time_for_sort(it)) <= 86400)
+
     # 6. 存储增量融合后的完整大库
     save_news(combined_items)
     

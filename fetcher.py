@@ -204,6 +204,26 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 thumbnail = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg" if video_id else ""
                 embed_url = f"https://www.youtube.com/embed/{video_id}" if video_id else ""
 
+                # 动态识别视频细分类型与爆点
+                t_lower = title.lower()
+                is_viral = any(k in t_lower for k in ["deepseek", "claude", "cursor", "ollama", "karpathy", "breakthrough", "r1", "shocked", "billion"]) or ch["name"] in ["Fireship", "Andrej Karpathy"]
+                if any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn"]):
+                    v_subtype = "tutorial"
+                    v_skill = "🎓 系统教学"
+                elif any(k in t_lower for k in ["benchmark", "compare", "vs", "eval", "weights", "model", "vllm"]):
+                    v_subtype = "mastery"
+                    v_skill = "🤖 模型技巧"
+                elif any(k in t_lower for k in ["workflow", "tips", "tricks", "prompt", "cursor"]):
+                    v_subtype = "skills"
+                    v_skill = "⚡ 实操技巧"
+                else:
+                    v_subtype = "viral" if is_viral else "experience"
+                    v_skill = "🔥 近期爆点" if is_viral else "💡 独家经验"
+
+                v_tags = [ch["name"], v_skill]
+                if is_viral:
+                    v_tags.insert(0, "🔥 近期爆点")
+
                 items.append({
                     "id": make_id(link, title),
                     "title": f"【实战精讲】{title}",
@@ -216,12 +236,16 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                     "source": f"YouTube · {ch['name']}",
                     "author": ch["name"],
                     "raw_published_at": iso_time,
-                    "metrics": {"format": "16:9 高清实操视频", "skill_tag": "🔥 热门讲解"},
+                    "is_viral": is_viral,
+                    "sub_type": v_subtype,
+                    "purpose_zh": f"{v_skill} · {ch['name']} 深度实战",
+                    "purpose_en": f"{v_skill} · {ch['name']} Breakdown",
+                    "metrics": {"format": "16:9 高清实操视频", "skill_tag": v_skill, "difficulty": v_skill},
                     "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
                     "summary_zh": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
                     "summary_en": summary or f"Latest hands-on AI demo and technical breakdown from {ch['name']}.",
                     "category": "videos",
-                    "tags": ["AI实操视频", ch["name"]]
+                    "tags": v_tags
                 })
         except Exception as e:
             print(f"  ❌ YouTube [{ch['name']}] 抓取失败: {e}")

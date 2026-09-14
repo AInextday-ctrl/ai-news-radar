@@ -137,16 +137,97 @@
         </button>
       </div>
 
-      <!-- 搜索筛选器 -->
-      <div class="relative shrink-0 w-36 sm:w-56">
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="搜索关键词..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+      <!-- 全站搜索筛选器 -->
+      <div class="relative shrink-0 w-44 sm:w-64">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-900/90 border border-slate-700/80 rounded-xl pl-3 pr-8 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-1.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
         <span class="absolute right-2.5 top-2 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
     </div>
   </nav>
 
   <!-- 主体内容区域 (支持全局顺畅自然纵向滚动，杜绝子容器卡顿与滚轮被困) -->
-  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-5 space-y-6">
+  <div class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-8 py-5 space-y-5">
+
+    <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
+    <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs">
+      <div class="flex items-center space-x-1.5 text-slate-400 shrink-0 font-bold text-[11px]" id="hot-tags-label">
+        <span class="text-amber-400">🔥</span>
+        <span id="hot-tags-text">热门标签:</span>
+      </div>
+      <div class="flex items-center space-x-1.5 shrink-0" id="hot-tags-container">
+        <!-- 由 JS 渲染双语标签 Pills -->
+      </div>
+    </section>
+
+    <!-- 视图 0: 🔍 全站跨品类智能检索结果视图 (当用户搜索时自动激活) -->
+    <div id="view-search" class="hidden space-y-6">
+      <!-- 搜索状态栏与一键清空 -->
+      <div class="bg-gradient-to-r from-slate-900/90 via-indigo-950/40 to-slate-900/90 rounded-2xl border border-indigo-500/30 p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div>
+          <h2 class="text-sm sm:text-base font-bold text-slate-100 flex items-center space-x-2">
+            <span>🔍</span>
+            <span id="search-results-heading">全站智能检索</span>
+          </h2>
+          <p class="text-xs text-indigo-300/90 mt-1" id="search-results-summary">正在全站情报库中检索...</p>
+        </div>
+        <button type="button" onclick="clearSearch()" class="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 hover:text-white border border-slate-700 transition-colors flex items-center space-x-1.5 shadow-sm">
+          <span>✕</span>
+          <span id="btn-clear-search-text">清除搜索</span>
+        </button>
+      </div>
+
+      <!-- 4 大板块交叉命中结果网格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- 快讯命中列 -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <span class="text-xs font-bold text-amber-400 flex items-center space-x-1.5">
+              <span>⚡</span>
+              <span id="search-label-news">行业快讯</span>
+            </span>
+            <span id="search-count-news" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/25">0</span>
+          </div>
+          <div id="search-stream-news" class="space-y-3"></div>
+        </div>
+
+        <!-- 领袖观点命中列 -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <span class="text-xs font-bold text-sky-400 flex items-center space-x-1.5">
+              <span>🐦</span>
+              <span id="search-label-celeb">领袖观点·社交</span>
+            </span>
+            <span id="search-count-celeb" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-sky-500/15 text-sky-300 border border-sky-500/25">0</span>
+          </div>
+          <div id="search-stream-celeb" class="space-y-3"></div>
+        </div>
+
+        <!-- 落地工具命中列 -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <span class="text-xs font-bold text-emerald-400 flex items-center space-x-1.5">
+              <span>🛠️</span>
+              <span id="search-label-tools">场景落地神器</span>
+            </span>
+            <span id="search-count-tools" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/25">0</span>
+          </div>
+          <div id="search-stream-tools" class="space-y-3"></div>
+        </div>
+
+        <!-- 视频与Prompt命中列 -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+            <span class="text-xs font-bold text-rose-400 flex items-center space-x-1.5">
+              <span>🎬</span>
+              <span id="search-label-videos">视频演示·提示词</span>
+            </span>
+            <span id="search-count-videos" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/25">0</span>
+          </div>
+          <div id="search-stream-videos" class="space-y-3"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- 🔥 今日 AI 风向标 (Top 3 深度必读横幅) -->
     <section id="top-three-section" class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60 rounded-2xl border border-indigo-500/20 p-4 shadow-xl">
@@ -179,7 +260,18 @@
           <span class="text-xs text-slate-400 font-mono" id="news-sub-count">实时追踪</span>
         </div>
         <div class="space-y-3.5" id="stream-news">
-          <!-- 动态注入快讯卡片 -->
+          <!-- 动态注入快讯卡片 (默认仅展示 24 小时以内最新) -->
+        </div>
+        <!-- 快讯历史归档折叠区 -->
+        <div id="archive-section-news" class="hidden mt-4 pt-3 border-t border-slate-800/80">
+          <button type="button" onclick="toggleHistoryArchive('news')" id="btn-archive-news" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
+            <span class="flex items-center space-x-1.5">
+              <span>📜</span>
+              <span id="txt-archive-news">查看历史归档</span>
+            </span>
+            <span id="arrow-archive-news" class="text-slate-500 group-hover:text-amber-400 transition-transform duration-200">▼</span>
+          </button>
+          <div id="container-archive-news" class="hidden mt-3.5 space-y-3.5"></div>
         </div>
       </section>
 
@@ -200,7 +292,18 @@
             </div>
           </div>
           <div class="space-y-3" id="stream-celebrity">
-            <!-- 动态注入社交言论卡片 -->
+            <!-- 动态注入社交言论卡片 (默认 24h 内) -->
+          </div>
+          <!-- 社交历史归档折叠区 -->
+          <div id="archive-section-celebrity" class="hidden mt-3 pt-2.5 border-t border-slate-800/70">
+            <button type="button" onclick="toggleHistoryArchive('celebrity')" id="btn-archive-celebrity" class="w-full py-2 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-[11px] text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
+              <span class="flex items-center space-x-1.5">
+                <span>📜</span>
+                <span id="txt-archive-celebrity">查看历史大V观点</span>
+              </span>
+              <span id="arrow-archive-celebrity" class="text-slate-500 group-hover:text-sky-400 transition-transform duration-200">▼</span>
+            </button>
+            <div id="container-archive-celebrity" class="hidden mt-3 space-y-3"></div>
           </div>
         </div>
 
@@ -214,7 +317,18 @@
             <button onclick="switchTab('tools')" id="link-all-tools" class="text-[11px] text-emerald-400 hover:underline">全部神器 →</button>
           </div>
           <div class="space-y-3" id="stream-tools">
-            <!-- 动态注入落地工具卡片 -->
+            <!-- 动态注入落地工具卡片 (默认 24h 内) -->
+          </div>
+          <!-- 神器历史归档折叠区 -->
+          <div id="archive-section-tools" class="hidden mt-3 pt-2.5 border-t border-slate-800/70">
+            <button type="button" onclick="toggleHistoryArchive('tools')" id="btn-archive-tools" class="w-full py-2 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-[11px] text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
+              <span class="flex items-center space-x-1.5">
+                <span>📜</span>
+                <span id="txt-archive-tools">查看历史落地神器</span>
+              </span>
+              <span id="arrow-archive-tools" class="text-slate-500 group-hover:text-emerald-400 transition-transform duration-200">▼</span>
+            </button>
+            <div id="container-archive-tools" class="hidden mt-3 space-y-3"></div>
           </div>
         </div>
 
@@ -228,7 +342,18 @@
             <button onclick="switchTab('videos')" id="link-all-videos" class="text-[11px] text-rose-400 hover:underline">全屏浏览 →</button>
           </div>
           <div class="space-y-3" id="stream-videos">
-            <!-- 动态注入视频与 Prompt -->
+            <!-- 动态注入视频与 Prompt (默认 24h 内) -->
+          </div>
+          <!-- 视频历史归档折叠区 -->
+          <div id="archive-section-videos" class="hidden mt-3 pt-2.5 border-t border-slate-800/70">
+            <button type="button" onclick="toggleHistoryArchive('videos')" id="btn-archive-videos" class="w-full py-2 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-[11px] text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
+              <span class="flex items-center space-x-1.5">
+                <span>📜</span>
+                <span id="txt-archive-videos">查看历史视频与提示词</span>
+              </span>
+              <span id="arrow-archive-videos" class="text-slate-500 group-hover:text-rose-400 transition-transform duration-200">▼</span>
+            </button>
+            <div id="container-archive-videos" class="hidden mt-3 space-y-3"></div>
           </div>
         </div>
 
@@ -430,6 +555,24 @@
         footerGithub: "GitHub 源码",
         footerDesc: "高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。",
         modalVideoTitle: "AI 视频演示",
+        hotTagsLabel: "热门标签:",
+        searchResultsHeading: "全站智能检索",
+        clearSearch: "清除搜索",
+        searchHitsNews: "行业快讯",
+        searchHitsCeleb: "领袖观点·社交",
+        searchHitsTools: "场景落地神器",
+        searchHitsVideos: "视频演示·提示词",
+        archiveNews: "查看快讯历史归档",
+        archiveCeleb: "查看历史大V观点",
+        archiveTools: "查看历史落地神器",
+        archiveVideos: "查看历史视频与提示词",
+        archiveCollapse: "收起历史归档 ↑",
+        noRecentNews: "⚡ 今日暂无新增快讯，历史最新收录见下方归档",
+        noRecentCeleb: "🐦 今日暂无新增发言，历史最新收录见下方归档",
+        noRecentTools: "🛠️ 今日暂无新增神器，历史最新收录见下方归档",
+        noRecentVideos: "🎬 今日暂无新增视频，历史最新收录见下方归档",
+        viralBadge: "🔥 近期爆款",
+        viralChip: "🔥 近期爆点",
         tabs: {
           all: "综合全景",
           news: "突发·行业快讯",
@@ -444,7 +587,7 @@
         subtitle: "Breaking AI · Leader Voices · Video Guides · Applied Tools · Prompt Bank",
         refreshBtn: "Refresh",
         autoRefresh: "Auto Refresh",
-        searchPlaceholder: "Search keywords...",
+        searchPlaceholder: "Site-wide search (enter keyword or click hot tags)...",
         digestTitle: "Today's Top 3 Highlights (60s Read)",
         digestSubtitle: "· Grasp the pulse of AI breakthroughs in 60 seconds",
         digestUpdateTag: "Updated Daily in Real-Time",
@@ -511,6 +654,24 @@
         footerGithub: "GitHub Source",
         footerDesc: "Tracking global LLM breakthroughs, tech leader insights on 𝕏 & Reddit, applied tools, and hands-on YouTube tutorials in real time.",
         modalVideoTitle: "AI Video Demo",
+        hotTagsLabel: "Hot Tags:",
+        searchResultsHeading: "Site-wide Intelligence Search",
+        clearSearch: "Clear Search",
+        searchHitsNews: "Breaking News",
+        searchHitsCeleb: "Leader Voices & Social",
+        searchHitsTools: "Applied Tools",
+        searchHitsVideos: "Videos & Prompts",
+        archiveNews: "View Historical News Archive",
+        archiveCeleb: "View Historical Social Archive",
+        archiveTools: "View Historical Tools Archive",
+        archiveVideos: "View Historical Videos & Prompts",
+        archiveCollapse: "Collapse Archive ↑",
+        noRecentNews: "⚡ No new updates today, see historical archive below",
+        noRecentCeleb: "🐦 No new tweets today, see historical archive below",
+        noRecentTools: "🛠️ No new tools today, see historical archive below",
+        noRecentVideos: "🎬 No new videos today, see historical archive below",
+        viralBadge: "🔥 Viral Hit",
+        viralChip: "🔥 Trending Viral",
         tabs: {
           all: "All-in-One",
           news: "Breaking News",
@@ -679,6 +840,20 @@
       const searchInput = document.getElementById('search-input');
       if (searchInput) searchInput.placeholder = t.searchPlaceholder;
 
+      const htText = document.getElementById('hot-tags-text');
+      if (htText) htText.textContent = t.hotTagsLabel;
+      const bClearSearch = document.getElementById('btn-clear-search-text');
+      if (bClearSearch) bClearSearch.textContent = t.clearSearch;
+      const sLabelNews = document.getElementById('search-label-news');
+      if (sLabelNews) sLabelNews.textContent = t.searchHitsNews;
+      const sLabelCeleb = document.getElementById('search-label-celeb');
+      if (sLabelCeleb) sLabelCeleb.textContent = t.searchHitsCeleb;
+      const sLabelTools = document.getElementById('search-label-tools');
+      if (sLabelTools) sLabelTools.textContent = t.searchHitsTools;
+      const sLabelVideos = document.getElementById('search-label-videos');
+      if (sLabelVideos) sLabelVideos.textContent = t.searchHitsVideos;
+      renderHotTags();
+
       document.getElementById('digest-title').textContent = t.digestTitle;
       const digestSub = document.getElementById('digest-subtitle');
       if (digestSub) digestSub.textContent = t.digestSubtitle;
@@ -821,9 +996,124 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // 热门标签库定义 (支持双语与一键直达检索)
+    const HOT_TAGS = [
+      { id: 'viral', zh: '🔥 近期爆点', en: '🔥 Trending Viral', query: '爆点' },
+      { id: 'deepseek', zh: '#DeepSeek-R1', en: '#DeepSeek-R1', query: 'deepseek' },
+      { id: 'claude', zh: '#Claude3.7', en: '#Claude3.7', query: 'claude' },
+      { id: 'cursor', zh: '#Cursor', en: '#Cursor', query: 'cursor' },
+      { id: 'tutorial', zh: '#🎓 系统教学', en: '#🎓 Tutorials', query: '教学' },
+      { id: 'tips', zh: '#⚡ 实操技巧', en: '#⚡ Practical Tips', query: '实操技巧' },
+      { id: 'mastery', zh: '#🤖 模型技巧', en: '#🤖 Model Mastery', query: '模型技巧' },
+      { id: 'flux', zh: '#FLUX生图', en: '#FLUX', query: 'flux' },
+      { id: 'mcp', zh: '#MCP智能体', en: '#MCP Agents', query: 'mcp' },
+      { id: 'local', zh: '#本地部署', en: '#Local Deploy', query: '本地部署' },
+      { id: 'sql', zh: '#SQL调优', en: '#SQL Tuning', query: 'sql' },
+      { id: 'web', zh: '#免部署在线玩', en: '#Web Tools', query: '免部署' }
+    ];
+
+    // 渲染热门标签栏
+    function renderHotTags() {
+      const container = document.getElementById('hot-tags-container');
+      if (!container) return;
+      const isZh = currentLang === 'zh';
+      container.innerHTML = HOT_TAGS.map(t => {
+        const label = isZh ? t.zh : t.en;
+        const isActive = searchQuery === t.query.toLowerCase() || (searchQuery && label.toLowerCase().includes(searchQuery));
+        return `<button type="button" onclick="executeTagSearch('${t.query}')" class="px-2.5 py-1 rounded-full text-xs font-medium shrink-0 transition-all ${
+          isActive
+            ? 'bg-indigo-600 text-white font-bold shadow-md shadow-indigo-600/40 border border-indigo-400 scale-105'
+            : 'bg-slate-900/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800/90'
+        }">${label}</button>`;
+      }).join('');
+    }
+
+    // 点击标签直达全站检索
+    function executeTagSearch(query) {
+      const cleanQ = query.replace(/^#/, '').trim().toLowerCase();
+      const searchInput = document.getElementById('search-input');
+      if (searchQuery === cleanQ) {
+        clearSearch();
+      } else {
+        searchQuery = cleanQ;
+        if (searchInput) searchInput.value = query.replace(/^#/, '');
+        updateClearButtonVisibility();
+        renderHotTags();
+        if (cachedData) renderUI(cachedData);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // 清空全站搜索
+    function clearSearch() {
+      searchQuery = '';
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.value = '';
+      updateClearButtonVisibility();
+      renderHotTags();
+      if (cachedData) renderUI(cachedData);
+    }
+
+    // 更新搜索框内清除图标的显隐
+    function updateClearButtonVisibility() {
+      const btn = document.getElementById('btn-clear-search');
+      if (btn) {
+        btn.classList.toggle('hidden', !searchQuery);
+      }
+    }
+
+    // 历史归档折叠状态管理
+    const historyArchiveOpen = {
+      news: false,
+      celebrity: false,
+      tools: false,
+      videos: false
+    };
+
+    function toggleHistoryArchive(sectionKey) {
+      historyArchiveOpen[sectionKey] = !historyArchiveOpen[sectionKey];
+      const container = document.getElementById(`container-archive-${sectionKey}`);
+      const txt = document.getElementById(`txt-archive-${sectionKey}`);
+      const arrow = document.getElementById(`arrow-archive-${sectionKey}`);
+      const count = container ? (container.dataset.count || '0') : '0';
+      const isZh = currentLang === 'zh';
+
+      if (container) {
+        if (historyArchiveOpen[sectionKey]) {
+          container.classList.remove('hidden');
+          if (arrow) arrow.textContent = '▲';
+          if (txt) txt.textContent = isZh ? '收起历史归档 ↑' : 'Collapse Archive ↑';
+        } else {
+          container.classList.add('hidden');
+          if (arrow) arrow.textContent = '▼';
+          const defaultLabel = sectionKey === 'news' ? (isZh ? `查看历史归档 (已收录 ${count} 条)` : `View Historical News (${count} items)`)
+            : sectionKey === 'celebrity' ? (isZh ? `查看历史大V发言 (已收录 ${count} 条)` : `View Historical Voices (${count} items)`)
+            : sectionKey === 'tools' ? (isZh ? `查看历史落地神器 (已收录 ${count} 条)` : `View Historical Tools (${count} items)`)
+            : (isZh ? `查看历史视频与Prompt (已收录 ${count} 条)` : `View Historical Videos (${count} items)`);
+          if (txt) txt.textContent = defaultLabel + ' ↓';
+        }
+      }
+    }
+
+    // 判断条目是否处于 24 小时之内 (首页默认只显示 <= 24h 的最新热点)
+    function isWithin24Hours(rawTime) {
+      if (!rawTime) return true;
+      try {
+        const date = new Date(rawTime);
+        if (isNaN(date.getTime())) return false;
+        const now = new Date();
+        const diffSec = Math.max(0, Math.floor((now - date) / 1000));
+        return diffSec <= 86400;
+      } catch (e) {
+        return false;
+      }
+    }
+
     // 搜索输入过滤
     function handleSearch(val) {
       searchQuery = (val || '').trim().toLowerCase();
+      updateClearButtonVisibility();
+      renderHotTags();
       if (cachedData) {
         renderUI(cachedData);
       }
@@ -942,6 +1232,7 @@
       } else if (videoTypeFilter === 'video') {
         subOptions = [
           { id: 'all', label: isZh ? '全部视频' : 'All Videos' },
+          { id: 'viral', label: isZh ? '🔥 近期爆点' : '🔥 Trending Viral' },
           { id: 'tutorial', label: isZh ? '🎓 系统教学' : '🎓 System Tutorials' },
           { id: 'insight', label: isZh ? '💡 独家经验' : '💡 Expert Insights' },
           { id: 'tips', label: isZh ? '⚡ 实操技巧' : '⚡ Practical Tips' },
@@ -950,8 +1241,10 @@
       } else {
         subOptions = [
           { id: 'all', label: isZh ? '全部细分' : 'All Categories' },
+          { id: 'viral', label: isZh ? '🔥 近期爆点' : '🔥 Trending Viral' },
           { id: 'tutorial', label: isZh ? '🎓 系统教学' : '🎓 Tutorials' },
           { id: 'tips', label: isZh ? '⚡ 实操技巧' : '⚡ Tips' },
+          { id: 'mastery', label: isZh ? '🤖 模型技巧' : '🤖 Model Mastery' },
           { id: 'coding', label: isZh ? '💻 编码架构' : '💻 Coding' },
           { id: 'image_gen', label: isZh ? '🎨 图像生成' : '🎨 Image Gen' },
           { id: 'video_gen', label: isZh ? '🎥 视频生成' : '🎥 Video Gen' },
@@ -1421,10 +1714,19 @@
       }
 
       // YouTube 实操/工作流视频卡片
+      const isViral = !!item.is_viral || (item.tags && item.tags.some(t => t.includes('爆点') || t.includes('爆款')));
+      const viralBadgeHtml = isViral
+        ? `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white border border-rose-400/50 text-[10px] font-black shadow-md flex items-center space-x-1"><span>🔥</span><span>${isZh ? '近期爆款' : 'Viral Hit'}</span></span>`
+        : '';
       const skillTag = isZh ? (item.purpose_zh || item.metrics?.skill_tag || '🔥 热门实操') : (item.purpose_en || translateDifficultyTag(item.difficulty, currentLang) || '🔥 Top Tutorial');
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
+
+      const tagPills = (item.tags && item.tags.length)
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-1">${item.tags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-900/90 text-slate-300 hover:text-rose-300 hover:bg-rose-950/60 border border-slate-800 transition-colors">#${tag}</button>`).join('')}</div>`
+        : '';
+
       return `
-        <article class="glass-card rounded-xl p-3 flex flex-col space-y-2 group border-t-2 border-t-rose-500/80 hover:border-rose-500/50 transition-all">
+        <article class="glass-card rounded-xl p-3 flex flex-col space-y-2 group border-t-2 ${isViral ? 'border-t-amber-500 shadow-amber-500/10' : 'border-t-rose-500/80'} hover:border-rose-500/50 transition-all">
           <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}')">
             <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
             <div class="absolute inset-0 bg-black/35 flex items-center justify-center group-hover:bg-black/10 transition-colors">
@@ -1432,7 +1734,10 @@
                 ▶
               </div>
             </div>
-            <span class="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/85 text-rose-300 border border-rose-500/40 text-[10px] font-bold">${skillTag}</span>
+            <div class="absolute top-2 left-2 flex items-center space-x-1.5 flex-wrap">
+              ${viralBadgeHtml}
+              <span class="px-2 py-0.5 rounded bg-black/85 text-rose-300 border border-rose-500/40 text-[10px] font-bold">${skillTag}</span>
+            </div>
             <span class="absolute bottom-2 right-2 bg-black/85 px-1.5 py-0.5 rounded text-[10px] font-mono text-white">${duration}</span>
           </div>
 
@@ -1453,6 +1758,8 @@
               ${summary}
             </p>
           ` : ''}
+
+          ${tagPills}
         </article>
       `;
     }
@@ -1460,57 +1767,194 @@
     // ==========================================
     // 渲染 UI 视图总入口
     // ==========================================
+    // 全站跨分类智能检索视图渲染
+    function renderSiteWideSearchResults(data) {
+      const isZh = currentLang === 'zh';
+      const newsHits = filterList(data.grouped?.news || data.news || data.industry_news || []);
+      const celebHits = filterList(data.grouped?.celebrity || data.celebrity || data.leader_opinions || []);
+      const toolsHits = filterList(data.grouped?.tools || data.tools || data.applied_tools || []);
+      const videosHits = filterList(data.grouped?.videos || data.videos || data.video_prompts || []);
+      const totalHits = newsHits.length + celebHits.length + toolsHits.length + videosHits.length;
+
+      const headingEl = document.getElementById('search-results-heading');
+      if (headingEl) {
+        headingEl.textContent = isZh ? `全站智能检索: "${searchQuery}"` : `Site-wide Search: "${searchQuery}"`;
+      }
+      const summaryEl = document.getElementById('search-results-summary');
+      if (summaryEl) {
+        summaryEl.textContent = isZh
+          ? `共找到 ${totalHits} 条全站情报 · ⚡ 快讯 ${newsHits.length} 条 · 🐦 社交 ${celebHits.length} 条 · 🛠️ 工具 ${toolsHits.length} 条 · 🎬 视频/咒语 ${videosHits.length} 条`
+          : `Found ${totalHits} intelligence items · ⚡ News: ${newsHits.length} · 🐦 Social: ${celebHits.length} · 🛠️ Tools: ${toolsHits.length} · 🎬 Videos/Prompts: ${videosHits.length}`;
+      }
+
+      document.getElementById('search-count-news').textContent = newsHits.length;
+      document.getElementById('search-count-celeb').textContent = celebHits.length;
+      document.getElementById('search-count-tools').textContent = toolsHits.length;
+      document.getElementById('search-count-videos').textContent = videosHits.length;
+
+      document.getElementById('search-stream-news').innerHTML = newsHits.length > 0
+        ? newsHits.map(renderNewsCard).join('')
+        : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-800/60 rounded-xl bg-slate-900/40">${isZh ? '未找到匹配快讯' : 'No matching news'}</div>`;
+
+      document.getElementById('search-stream-celeb').innerHTML = celebHits.length > 0
+        ? celebHits.map(renderCelebrityCard).join('')
+        : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-800/60 rounded-xl bg-slate-900/40">${isZh ? '未找到匹配大V发言' : 'No matching voices'}</div>`;
+
+      document.getElementById('search-stream-tools').innerHTML = toolsHits.length > 0
+        ? toolsHits.map(renderToolCard).join('')
+        : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-800/60 rounded-xl bg-slate-900/40">${isZh ? '未找到匹配落地工具' : 'No matching tools'}</div>`;
+
+      document.getElementById('search-stream-videos').innerHTML = videosHits.length > 0
+        ? videosHits.map(renderVideoOrPromptCard).join('')
+        : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-800/60 rounded-xl bg-slate-900/40">${isZh ? '未找到匹配视频或咒语' : 'No matching videos/prompts'}</div>`;
+    }
+
+    // ==========================================
+    // 渲染 UI 视图总入口 (24 小时绝对新鲜拦截)
+    // ==========================================
     function renderUI(data) {
       if (!data) return;
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
 
-      // 1. 更新各分类角标数量
-      const newsList = filterList(data.grouped?.news || data.news || data.industry_news || []);
-      const celebrityList = filterList(data.grouped?.celebrity || data.celebrity || data.leader_opinions || []);
-      const toolsList = filterList(data.grouped?.tools || data.tools || data.applied_tools || []);
-      const videosList = filterList(data.grouped?.videos || data.videos || data.video_prompts || []);
-      const totalCount = newsList.length + celebrityList.length + toolsList.length + videosList.length;
+      // 1. 获取全量各分类列表
+      const allNews = data.grouped?.news || data.news || data.industry_news || [];
+      const allCeleb = data.grouped?.celebrity || data.celebrity || data.leader_opinions || [];
+      const allTools = data.grouped?.tools || data.tools || data.applied_tools || [];
+      const allVideos = data.grouped?.videos || data.videos || data.video_prompts || [];
 
-      document.getElementById('badge-count-all').textContent = totalCount;
-      document.getElementById('badge-count-news').textContent = newsList.length;
-      document.getElementById('badge-count-celebrity').textContent = celebrityList.length;
-      document.getElementById('badge-count-tools').textContent = toolsList.length;
-      document.getElementById('badge-count-videos').textContent = videosList.length;
+      // 更新导航角标总数
+      document.getElementById('badge-count-all').textContent = allNews.length + allCeleb.length + allTools.length + allVideos.length;
+      document.getElementById('badge-count-news').textContent = allNews.length;
+      document.getElementById('badge-count-celebrity').textContent = allCeleb.length;
+      document.getElementById('badge-count-tools').textContent = allTools.length;
+      document.getElementById('badge-count-videos').textContent = allVideos.length;
 
-      // 2. 渲染顶部 Top 3
+      // 2. 模式判断：若当前激活了全站搜索，进入全景检索视图
+      const isSearchActive = !!searchQuery;
+      const viewSearch = document.getElementById('view-search');
+      const viewAll = document.getElementById('view-all');
+      const viewCat = document.getElementById('view-category');
+      const topThreeSection = document.getElementById('top-three-section');
+
+      if (isSearchActive) {
+        if (viewSearch) viewSearch.classList.remove('hidden');
+        if (viewAll) viewAll.classList.add('hidden');
+        if (viewCat) viewCat.classList.add('hidden');
+        if (topThreeSection) topThreeSection.classList.add('hidden');
+        renderSiteWideSearchResults(data);
+        return;
+      } else {
+        if (viewSearch) viewSearch.classList.add('hidden');
+        if (topThreeSection) topThreeSection.classList.remove('hidden');
+        if (currentTab === 'all') {
+          if (viewAll) viewAll.classList.remove('hidden');
+          if (viewCat) viewCat.classList.add('hidden');
+        } else {
+          if (viewAll) viewAll.classList.add('hidden');
+          if (viewCat) viewCat.classList.remove('hidden');
+        }
+      }
+
+      // 3. 渲染今日 60 秒风向标 Top 3
       renderTopThree(data.top_three || []);
 
-      // 3. 渲染“综合全景”模式
+      // 4. 渲染“综合全景”模式 (核心：严格执行 24 小时新鲜度拦截，历史全部沉淀入折叠归档)
+      // A. 快讯板块 (News)
+      const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
+      const historyNews = allNews.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamNews = document.getElementById('stream-news');
-      streamNews.innerHTML = newsList.length > 0 
-        ? newsList.map(renderNewsCard).join('')
-        : `<div class="text-slate-500 text-xs py-8 text-center">${t.newsNoMatch}</div>`;
+      streamNews.innerHTML = recentNews.length > 0 
+        ? recentNews.map(renderNewsCard).join('')
+        : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-900/50 rounded-xl border border-slate-800">${t.noRecentNews}</div>`;
 
-      // 侧边栏社交流应用 sideSocialFilter
-      let sideCelebList = celebrityList;
+      const arcSecNews = document.getElementById('archive-section-news');
+      const arcContNews = document.getElementById('container-archive-news');
+      const arcTxtNews = document.getElementById('txt-archive-news');
+      if (historyNews.length > 0) {
+        arcSecNews.classList.remove('hidden');
+        arcContNews.dataset.count = historyNews.length;
+        arcContNews.innerHTML = historyNews.map(renderNewsCard).join('');
+        arcTxtNews.textContent = historyArchiveOpen.news
+          ? (isZh ? '收起历史归档 ↑' : 'Collapse Archive ↑')
+          : (isZh ? `查看历史归档 (已收录 ${historyNews.length} 条) ↓` : `View Historical News (${historyNews.length} items) ↓`);
+      } else {
+        arcSecNews.classList.add('hidden');
+      }
+
+      // B. 领袖社交板块 (Celebrity)
+      let sideCelebList = allCeleb;
       if (sideSocialFilter === 'x') {
         sideCelebList = sideCelebList.filter(it => it.platform === 'x' || (it.source && it.source.includes('Twitter')));
       } else if (sideSocialFilter === 'reddit') {
         sideCelebList = sideCelebList.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
       }
-
+      const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
+      const historyCeleb = sideCelebList.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamCelebrity = document.getElementById('stream-celebrity');
-      streamCelebrity.innerHTML = sideCelebList.length > 0
-        ? sideCelebList.slice(0, 10).map(renderCelebrityCard).join('')
-        : `<div class="text-slate-500 text-xs py-4 text-center">${t.celebNoMatch}</div>`;
+      streamCelebrity.innerHTML = recentCeleb.length > 0
+        ? recentCeleb.slice(0, 10).map(renderCelebrityCard).join('')
+        : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-900/50 rounded-xl border border-slate-800">${t.noRecentCeleb}</div>`;
 
+      const arcSecCeleb = document.getElementById('archive-section-celebrity');
+      const arcContCeleb = document.getElementById('container-archive-celebrity');
+      const arcTxtCeleb = document.getElementById('txt-archive-celebrity');
+      if (historyCeleb.length > 0) {
+        arcSecCeleb.classList.remove('hidden');
+        arcContCeleb.dataset.count = historyCeleb.length;
+        arcContCeleb.innerHTML = historyCeleb.map(renderCelebrityCard).join('');
+        arcTxtCeleb.textContent = historyArchiveOpen.celebrity
+          ? (isZh ? '收起历史发言 ↑' : 'Collapse Archive ↑')
+          : (isZh ? `查看历史大V发言 (已收录 ${historyCeleb.length} 条) ↓` : `View Historical Voices (${historyCeleb.length} items) ↓`);
+      } else {
+        arcSecCeleb.classList.add('hidden');
+      }
+
+      // C. 落地工具板块 (Tools)
+      const recentTools = allTools.filter(it => isWithin24Hours(it.raw_published_at));
+      const historyTools = allTools.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamTools = document.getElementById('stream-tools');
-      streamTools.innerHTML = toolsList.length > 0
-        ? toolsList.slice(0, 10).map(renderToolCard).join('')
-        : `<div class="text-slate-500 text-xs py-4 text-center">${t.toolsNoMatch}</div>`;
+      streamTools.innerHTML = recentTools.length > 0
+        ? recentTools.slice(0, 10).map(renderToolCard).join('')
+        : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-900/50 rounded-xl border border-slate-800">${t.noRecentTools}</div>`;
 
+      const arcSecTools = document.getElementById('archive-section-tools');
+      const arcContTools = document.getElementById('container-archive-tools');
+      const arcTxtTools = document.getElementById('txt-archive-tools');
+      if (historyTools.length > 0) {
+        arcSecTools.classList.remove('hidden');
+        arcContTools.dataset.count = historyTools.length;
+        arcContTools.innerHTML = historyTools.map(renderToolCard).join('');
+        arcTxtTools.textContent = historyArchiveOpen.tools
+          ? (isZh ? '收起历史神器 ↑' : 'Collapse Archive ↑')
+          : (isZh ? `查看历史落地神器 (已收录 ${historyTools.length} 条) ↓` : `View Historical Tools (${historyTools.length} items) ↓`);
+      } else {
+        arcSecTools.classList.add('hidden');
+      }
+
+      // D. 视频演示与Prompt板块 (Videos)
+      const recentVideos = allVideos.filter(it => isWithin24Hours(it.raw_published_at));
+      const historyVideos = allVideos.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamVideos = document.getElementById('stream-videos');
-      streamVideos.innerHTML = videosList.length > 0
-        ? videosList.slice(0, 12).map(renderVideoOrPromptCard).join('')
-        : `<div class="text-slate-500 text-xs py-4 text-center">${t.videosNoMatch}</div>`;
+      streamVideos.innerHTML = recentVideos.length > 0
+        ? recentVideos.slice(0, 12).map(renderVideoOrPromptCard).join('')
+        : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-900/50 rounded-xl border border-slate-800">${t.noRecentVideos}</div>`;
 
-      // 4. 渲染 LMSYS Chatbot Arena Top 5 天梯榜
+      const arcSecVideos = document.getElementById('archive-section-videos');
+      const arcContVideos = document.getElementById('container-archive-videos');
+      const arcTxtVideos = document.getElementById('txt-archive-videos');
+      if (historyVideos.length > 0) {
+        arcSecVideos.classList.remove('hidden');
+        arcContVideos.dataset.count = historyVideos.length;
+        arcContVideos.innerHTML = historyVideos.map(renderVideoOrPromptCard).join('');
+        arcTxtVideos.textContent = historyArchiveOpen.videos
+          ? (isZh ? '收起历史视频与Prompt ↑' : 'Collapse Archive ↑')
+          : (isZh ? `查看历史视频与Prompt (已收录 ${historyVideos.length} 条) ↓` : `View Historical Videos (${historyVideos.length} items) ↓`);
+      } else {
+        arcSecVideos.classList.add('hidden');
+      }
+
+      // 5. 渲染 LMSYS Chatbot Arena Top 5 天梯榜
       const streamArena = document.getElementById('stream-arena');
       if (streamArena) {
         const arenaList = data.chatbot_arena || [];
@@ -1539,7 +1983,7 @@
         }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
       }
 
-      // 5. 渲染 ArXiv 每日学术突破精选论文
+      // 6. 渲染 ArXiv 每日学术突破精选论文
       const streamArXiv = document.getElementById('stream-arxiv');
       if (streamArXiv) {
         const arxivList = data.arxiv_papers || [];
@@ -1565,18 +2009,22 @@
         }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arxivNoMatch}</div>`;
       }
 
-      // 6. 如果当前处于独立分类模式，重新刷新分类网格
+      // 7. 如果当前处于独立分类模式，重新刷新分类网格
       if (currentTab !== 'all') {
         renderCategoryView(currentTab);
       }
     }
 
-    // 搜索匹配过滤
-    function filterList(list) {
-      if (!searchQuery) return list;
+    // 全站高精度多字段多词检索过滤器
+    function filterList(list, q = searchQuery) {
+      if (!q) return list;
+      const terms = q.toLowerCase().split(/\s+/).filter(Boolean);
       return list.filter(item => {
-        const text = `${item.title || ''} ${item.title_en || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.summary_en || ''} ${item.source || ''} ${item.author || ''}`.toLowerCase();
-        return text.includes(searchQuery);
+        const tagsStr = Array.isArray(item.tags) ? item.tags.join(' ') : '';
+        const specStr = Array.isArray(item.spec_tags) ? item.spec_tags.join(' ') : '';
+        const metricsStr = item.metrics ? Object.values(item.metrics).join(' ') : '';
+        const text = `${item.title || ''} ${item.title_en || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.summary_en || ''} ${item.content_snippet || ''} ${item.source || ''} ${item.author || ''} ${item.scenario_tag || ''} ${item.purpose_zh || ''} ${item.purpose_en || ''} ${item.prompt_content_zh || ''} ${item.prompt_content_en || ''} ${tagsStr} ${specStr} ${metricsStr}`.toLowerCase();
+        return terms.every(term => text.includes(term));
       });
     }
 
@@ -1614,7 +2062,11 @@
           list = list.filter(it => !it.is_prompt);
         }
         if (videoSubFilter && videoSubFilter !== 'all') {
-          list = list.filter(it => (it.sub_type || getVideoSubType(it)) === videoSubFilter);
+          if (videoSubFilter === 'viral') {
+            list = list.filter(it => it.is_viral || it.sub_type === 'viral' || (it.tags && it.tags.some(t => t.includes('爆点') || t.includes('爆款'))));
+          } else {
+            list = list.filter(it => (it.sub_type || getVideoSubType(it)) === videoSubFilter);
+          }
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.videosNoMatch}</div>`;
