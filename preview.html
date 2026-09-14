@@ -30,6 +30,9 @@
   }
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <!-- Google AdSense Verification & Auto Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130"
+     crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     // 零闪烁 (Zero-FOUC) 主题初始化
@@ -773,16 +776,40 @@
   </div>
 
   <!-- 页脚 -->
-  <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2">
-    <div class="flex items-center justify-center space-x-4">
+  <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2.5">
+    <div class="flex items-center justify-center space-x-3 flex-wrap gap-y-1">
       <span id="footer-brand">🤖 AI 资讯雷达 4.0</span>
       <span>·</span>
       <span id="footer-arch">开源零成本架构</span>
       <span>·</span>
-      <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="hover:text-indigo-400 underline" id="footer-github">GitHub 源码</a>
+      <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline" id="footer-github">GitHub 源码</a>
+      <span>·</span>
+      <button onclick="openLegalModal('privacy')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-privacy">隐私政策 (Privacy)</button>
+      <span>·</span>
+      <button onclick="openLegalModal('terms')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-terms">服务条款 (Terms)</button>
+      <span>·</span>
+      <button onclick="openLegalModal('about')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-about">关于本站 (About)</button>
     </div>
     <p id="footer-desc">高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。</p>
+    <p class="text-[10px] text-slate-400 dark:text-slate-600">© 2026 AI News Radar (ainewsradar.xyz) · All Rights Reserved</p>
   </footer>
+
+  <!-- 法律合规与隐私弹窗 Modal (满足 Google AdSense 强制政策要求) -->
+  <div id="legal-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[85vh]">
+      <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <button id="legal-tab-privacy" onclick="switchLegalTab('privacy')" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition-colors">隐私政策 (Privacy)</button>
+          <button id="legal-tab-terms" onclick="switchLegalTab('terms')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">服务条款 (Terms)</button>
+          <button id="legal-tab-about" onclick="switchLegalTab('about')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">关于本站 (About)</button>
+        </div>
+        <button onclick="closeLegalModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-lg px-2">✕</button>
+      </div>
+      <div id="legal-content" class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed max-h-[65vh]">
+        <!-- 动态注入合规法律内容 -->
+      </div>
+    </div>
+  </div>
 
   <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放) -->
   <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4">
@@ -2849,6 +2876,109 @@
       const iframe = document.getElementById('modal-video-iframe');
       iframe.src = "";
       modal.classList.add('hidden');
+    }
+
+    // ==========================================
+    // 法律合规与隐私政策控制 (满足 Google AdSense 审核强制要求)
+    // ==========================================
+    const LEGAL_DOCS = {
+      privacy: {
+        title_zh: "隐私政策 (Privacy Policy)",
+        title_en: "Privacy Policy",
+        content: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">隐私政策 / Privacy Policy</h3>
+          <p class="text-[11px] text-slate-500">生效日期：2026年1月1日 | 最近更新：2026年9月14日</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">1. 概述 / Overview</h4>
+          <p>AI 资讯雷达 (ainewsradar.xyz) 极为重视用户的隐私保护。本政策阐明了当您访问和使用本网站时，我们如何处理信息及保护您的数据权益。</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">2. Cookie 与第三方广告供应商声明 (Google AdSense)</h4>
+          <p><strong>Google 是本站的第三方广告供应商，使用 Cookie 在本站投放广告：</strong></p>
+          <ul class="list-disc pl-4 space-y-1 my-1 text-slate-600 dark:text-slate-300">
+            <li>Google 等第三方供应商会根据用户此前对本网站或其他网站的访问情况使用 Cookie（包括 DART Cookie）投放广告。</li>
+            <li>Google 使用广告 Cookie，使它及其合作伙伴能够根据用户对本网站和/或互联网上其他网站的访问情况向他们投放符合兴趣的相关广告。</li>
+            <li><strong>用户选择停用个性化广告：</strong>您可以随时访问 <a href="https://www.google.com/settings/ads" target="_blank" class="text-indigo-500 underline font-medium">Google 广告设置 (Google Ads Settings)</a> 选择停用个性化广告。</li>
+            <li>您还可以通过访问 <a href="https://www.aboutads.info/choices/" target="_blank" class="text-indigo-500 underline font-medium">www.aboutads.info</a>，选择停用第三方供应商为投放个性化广告而使用的 Cookie。</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">3. 日志文件与分析 / Log Files</h4>
+          <p>与许多其他网站一样，本网站会利用日志文件和匿名分析指标（如浏览器类型、访问时间、引用页面、语言偏好）。这些信息不包含任何个人身份识别信息，仅用于分析趋势、维护系统安全与优化网站性能。</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">4. 外部链接与数据安全 / External Links</h4>
+          <p>本站收录并链接至第三方外部平台（如 GitHub、Hugging Face、YouTube、𝕏 等）。我们对这些第三方网站的内容或隐私政策不承担责任，建议用户查阅相关网站的隐私声明。</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">5. 联系与咨询 / Contact</h4>
+          <p>如果您对本隐私政策或广告合规有任何疑问，可通过 GitHub 仓库提交 Issue 或联系站长团队：<a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="text-indigo-500 underline">AInextday-ctrl/ai-news-radar</a>。</p>
+        `
+      },
+      terms: {
+        title_zh: "服务条款 (Terms of Service)",
+        title_en: "Terms of Service",
+        content: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">服务条款 / Terms of Service</h3>
+          <p class="text-[11px] text-slate-500">生效日期：2026年1月1日</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">1. 接受条款 / Acceptance</h4>
+          <p>通过访问 ainewsradar.xyz，您同意受本服务条款的约束。如果您不同意这些条款，请勿使用本网站。</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">2. 资讯内容与免责声明 / Disclaimer</h4>
+          <p>本站提供的 AI 行业动态、领袖推文精选、开源落地工具及实操提示词仅供学习与学术参考之用。本站按“现状”提供服务，不对任何内容的绝对准确性、时效性或由此产生的商业损失承担法律责任。</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">3. 知识产权与署名 / Intellectual Property</h4>
+          <p>本站所有聚合引用的第三方商标、博主名片、论文摘要、开源软件均属于其各自合法持有者所有。本站恪守合理使用（Fair Use）原则，所有外部内容均附有明确来源署名和原生链接直达。</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">4. 广告与商业赞助 / Advertisements</h4>
+          <p>本站可能展示由 Google AdSense 等合作伙伴提供的赞助商广告。用户与广告主的任何互动或交易均由用户与广告主自行负责。</p>
+        `
+      },
+      about: {
+        title_zh: "关于本站 (About Us)",
+        title_en: "About Us",
+        content: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">关于 AI 资讯雷达 / About AI News Radar</h3>
+          <p class="mt-2 leading-relaxed"><strong>AI 资讯雷达 (ainewsradar.xyz)</strong> 致力于为全球开发者、科研人员、AI 创业者与技术发烧友打造纯净、高效的 24 小时 AI 前沿科技风向标。</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">🌟 我们的核心价值：</h4>
+          <ul class="list-disc pl-4 space-y-1.5 my-2 text-slate-600 dark:text-slate-300">
+            <li><strong>⚡ 突发大事件与行业快讯</strong>：高频监控全球 AI 突破，提炼核心结论；</li>
+            <li><strong>🐦 顶流领袖社交观点</strong>：实时抓取业界权威人物在 𝕏 等社交平台的真实思想交锋；</li>
+            <li><strong>🛠️ 落地实用神器</strong>：筛选验证免装即用 WebGPU 应用与高星 GitHub 工具，严格按真实发布时间排列；</li>
+            <li><strong>🎬 实战演示与教程视频</strong>：汇聚全球顶尖 AI 创作者的深度拆解与实战；</li>
+            <li><strong>💡 工业级高阶提示词库</strong>：精选可直接用于生产力提效的结构化系统级 Prompt。</li>
+          </ul>
+
+          <p class="mt-3 text-[11px] text-slate-500">项目完全开源开放，欢迎访问我们的 <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="text-indigo-500 underline font-medium">GitHub 开源仓库</a> 参与贡献与建议！</p>
+        `
+      }
+    };
+
+    function openLegalModal(tab = 'privacy') {
+      const modal = document.getElementById('legal-modal');
+      switchLegalTab(tab);
+      modal.classList.remove('hidden');
+    }
+
+    function closeLegalModal() {
+      const modal = document.getElementById('legal-modal');
+      modal.classList.add('hidden');
+    }
+
+    function switchLegalTab(tab) {
+      ['privacy', 'terms', 'about'].forEach(t => {
+        const btn = document.getElementById(`legal-tab-${t}`);
+        if (btn) {
+          if (t === tab) {
+            btn.className = "text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition-colors";
+          } else {
+            btn.className = "text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors";
+          }
+        }
+      });
+
+      const container = document.getElementById('legal-content');
+      if (container && LEGAL_DOCS[tab]) {
+        container.innerHTML = LEGAL_DOCS[tab].content;
+      }
     }
 
     // 倒计时与定时轮询
