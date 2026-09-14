@@ -84,10 +84,16 @@ def extract_top_three(items: list) -> list:
             title_en = en_quote
         else:
             title_en = f"{author}: {en_quote}"
+        zh_quote = it.get('title_zh') or it.get('title', '')
+        if zh_quote.startswith(f"{author}：") or zh_quote.startswith(f"{author}:"):
+            title_zh = zh_quote
+        else:
+            title_zh = f"{author}：{zh_quote}"
+
         top.append({
             "badge_zh": "🐦 领袖观点",
             "badge_en": "🐦 Top Voice",
-            "title_zh": f"{author}：{it.get('title_zh') or it.get('title', '')}",
+            "title_zh": title_zh,
             "title_en": title_en,
             "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
             "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
