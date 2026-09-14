@@ -999,16 +999,16 @@
     // 热门标签库定义 (支持双语与一键直达检索)
     const HOT_TAGS = [
       { id: 'viral', zh: '🔥 近期爆点', en: '🔥 Trending Viral', query: '爆点' },
-      { id: 'deepseek', zh: '#DeepSeek-R1', en: '#DeepSeek-R1', query: 'deepseek' },
-      { id: 'claude', zh: '#Claude3.7', en: '#Claude3.7', query: 'claude' },
+      { id: 'fable', zh: '#Fable5.1', en: '#Fable5.1', query: 'fable' },
+      { id: 'astra', zh: '#GPT-6Astra', en: '#GPT-6Astra', query: 'astra' },
+      { id: 'deepseek', zh: '#DeepSeek', en: '#DeepSeek', query: 'deepseek' },
       { id: 'cursor', zh: '#Cursor', en: '#Cursor', query: 'cursor' },
       { id: 'tutorial', zh: '#🎓 系统教学', en: '#🎓 Tutorials', query: '教学' },
       { id: 'tips', zh: '#⚡ 实操技巧', en: '#⚡ Practical Tips', query: '实操技巧' },
       { id: 'mastery', zh: '#🤖 模型技巧', en: '#🤖 Model Mastery', query: '模型技巧' },
-      { id: 'flux', zh: '#FLUX生图', en: '#FLUX', query: 'flux' },
       { id: 'mcp', zh: '#MCP智能体', en: '#MCP Agents', query: 'mcp' },
       { id: 'local', zh: '#本地部署', en: '#Local Deploy', query: '本地部署' },
-      { id: 'sql', zh: '#SQL调优', en: '#SQL Tuning', query: 'sql' },
+      { id: 'opensource', zh: '#开源神器', en: '#Open Source', query: '开源' },
       { id: 'web', zh: '#免部署在线玩', en: '#Web Tools', query: '免部署' }
     ];
 
@@ -1713,8 +1713,18 @@
         `;
       }
 
-      // YouTube 实操/工作流视频卡片
-      const isViral = !!item.is_viral || (item.tags && item.tags.some(t => t.includes('爆点') || t.includes('爆款')));
+      // YouTube 实操/工作流视频卡片 (带 30 天时效门禁)
+      let isWithin30Days = false;
+      if (item.raw_published_at) {
+        try {
+          const d = new Date(item.raw_published_at);
+          if (!isNaN(d.getTime())) {
+            const diffSec = Math.max(0, (new Date() - d) / 1000);
+            isWithin30Days = (diffSec <= 30 * 86400);
+          }
+        } catch (e) {}
+      }
+      const isViral = (!!item.is_viral || (item.tags && item.tags.some(t => t.includes('爆点') || t.includes('爆款')))) && isWithin30Days;
       const viralBadgeHtml = isViral
         ? `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white border border-rose-400/50 text-[10px] font-black shadow-md flex items-center space-x-1"><span>🔥</span><span>${isZh ? '近期爆款' : 'Viral Hit'}</span></span>`
         : '';

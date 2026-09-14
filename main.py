@@ -331,8 +331,10 @@ def run_pipeline():
     for it in raw_items:
         u = it.get("url")
         i = it.get("id")
-        # 若条目本身已有高质量中文提炼（例如大V推特、精选教程、高质量提示词）
-        if it.get("title_zh") and it.get("summary_zh"):
+        # 若条目本身为视频，或已有高质量中文提炼（例如大V推特、实操Prompt）
+        if it.get("category") == "videos":
+            pre_curated_items.append(it)
+        elif it.get("title_zh") and it.get("summary_zh"):
             pre_curated_items.append(it)
         elif (u and u in existing_by_url) or (i and i in existing_by_url):
             reused_count += 1
@@ -368,13 +370,34 @@ def run_pipeline():
     combined_items = list(merged_pool.values())
     combined_items.sort(key=parse_time_for_sort, reverse=True)
 
-    # 标记是否为 24 小时内的最新内容
+    # 严格清理历史遗留的假爆款与执行 30 天爆点生命周期门禁 (30d Viral Lifecycle Gate)
     now_ts = time.time()
+    MAX_VIRAL_SECONDS = 30 * 86400  # 30 天
+    cleaned_items = []
+
     for it in combined_items:
-        it["is_recent_24h"] = bool((now_ts - parse_time_for_sort(it)) <= 86400)
+        it_id = str(it.get("id", ""))
+        it_url = str(it.get("url", ""))
+        # 彻底移除历史残留的假视频条目
+        if any(fake_k in it_id for fake_k in ["yt_viral_fireship_deepseek", "yt_viral_theo_claude37_cursor", "yt_viral_matthew_berman_open_weights", "yt_viral_networkchuck_ollama", "yt_viral_karpathy_micrograd", "yt_viral_mcp_agentic_workflow", "yt_viral_ai_explained_hybrid_reasoning"]) or any(fake_u in it_url for fake_u in ["Cursor_Claude37_Theo", "Matthew_Berman_Shootout", "NetworkChuck_Ollama_Guide", "MCP_Protocol_Production", "Claude_37_Thinking_Tested"]):
+            continue
+
+        # 30 天爆点生命周期门禁：
+        # 如果条目被打上了 is_viral: true 或 🔥 近期爆点，但发布时间距今已超过 30 天，强制降级并剥离爆点标签
+        diff = now_ts - parse_time_for_sort(it)
+        if diff > MAX_VIRAL_SECONDS:
+            if it.get("is_viral"):
+                it["is_viral"] = False
+            if "tags" in it and isinstance(it["tags"], list):
+                it["tags"] = [t for t in it["tags"] if t != "🔥 近期爆点"]
+            if it.get("sub_type") == "viral":
+                it["sub_type"] = "tutorial" if "教学" in (it.get("title", "") + it.get("title_zh", "")) else "insight"
+
+        it["is_recent_24h"] = bool(diff <= 86400)
+        cleaned_items.append(it)
 
     # 6. 存储增量融合后的完整大库
-    save_news(combined_items)
+    save_news(cleaned_items)
     
     end_time = datetime.now()
     duration = (end_time - start_time).total_seconds()

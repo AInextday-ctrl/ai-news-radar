@@ -19,6 +19,7 @@ except Exception:
 import re
 import hashlib
 import time
+import urllib.request
 from typing import List, Dict, Any, Optional
 import httpx
 import feedparser
@@ -170,23 +171,59 @@ def match_celebrity_profile(title: str, content: str) -> Optional[Dict[str, Any]
 
 
 # ==========================================
-# 1. 抓取 YouTube 顶级实战与演示视频
+# 1. 抓取 YouTube 顶级实战与演示视频 (优先真实抓取最新，并执行严格 30 天爆点生命周期门禁)
 # ==========================================
+KNOWN_TITLE_TRANSLATIONS = {
+    "i built the same game with astra and fable 5.1... only one was fun": "【近期爆点】Fireship: 用 Astra 和 Fable 5.1 开发同款游戏极限实测",
+    "openai's biggest math breakthrough is getting ugly...": "【实战精讲】Fireship: OpenAI 最新重大数学突破背后的技术争端剖析",
+    "5 open source tools that replaced my $320/mo ai stack...": "【实战精讲】Fireship: 彻底替代每月 320 美元商业 AI 订阅的 5 款开源神器",
+    "did openai actually build agi? gpt-6 astra first look": "【近期爆点】Fireship: OpenAI 真的造出 AGI 了吗？GPT-6 Astra 独家首测",
+    "i think they mean it this time": "【实战精讲】Theo: 前沿 AI 发布会深度复盘与落地实测",
+    "astra is a next-gen model": "【近期爆点】Theo: Astra 新一代模型深度实测！架构全面跃升",
+    "fable vs astra debate is over": "【近期爆点】Theo: Fable 5.1 与 Astra 终极论辩！开发者该如何抉择",
+    "this is really bad…": "【实战精讲】Theo: 深度剖析当前大模型技术栈潜在隐患与技术分歧",
+    "gpt 6 astra, so good even openai are worried": "【近期爆点】AI Explained: GPT-6 Astra 深度评测！性能震撼引发硅谷热议",
+    "sam altman : 'agi in 2026', just as models start to [mis]train themselves": "【近期爆点】AI Explained: 奥特曼预测 2026 年实现 AGI！模型自我训练偏离深度拆解",
+    "the $1 million fluid problem": "【实战精讲】Matthew Berman: 悬赏百万美元的流体力学 AI 模拟挑战实测",
+    "deepseek is insanely fast": "【近期爆点】Matthew Berman: DeepSeek 极速推理实测！响应速度震撼全网",
+    "deepseek fails the rubik's cube test": "【实战精讲】Matthew Berman: 极限盲测！DeepSeek 魔方空间推理表现深度解析",
+    "gpt-6 astra changes everything": "【近期爆点】Two Minute Papers: GPT-6 Astra 彻底改写一切！前沿论文与演示精讲",
+    "claude fable ai is much stranger than the headlines suggest": "【近期爆点】Two Minute Papers: Claude Fable AI 深度探索！比头条新闻更不可思议的突破",
+    "i never thought i'd see this happen": "【实战精讲】Two Minute Papers: 见证前沿物理模拟与生成式 AI 历史性跨越",
+    "the jumping pegs puzzle": "【实战精讲】Andrej Karpathy: 经典逻辑益智谜题与启发式算法",
+    "the 64 sugar cubes puzzle": "【实战精讲】Andrej Karpathy: 64块方糖数学谜题与几何推导",
+    "but what is cross-entropy? | compression is intelligence part 2": "【系统教学】Andrej Karpathy: 到底什么是交叉熵？压缩即智能第二讲"
+}
+
 def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
     """Fetch high-res AI demonstration & breakdown videos from YouTube, focusing on practical skills, workflows and tutorials."""
     items = []
-    now_iso = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
 
-    # 1. 优先注入全球 AI 爱好者狂热追捧的高热度实战技巧、经验指南与工作流视频 (全面覆盖系统教学/独家经验/实操技巧/模型技巧 4 大细分场景)
-    curated_tutorials = get_expanded_tutorials()
-    items.extend(curated_tutorials)
-
-    # 2. 抓取知名 YouTube 技术频道的真实最新视频
+    # 1. 抓取知名 YouTube 官方技术频道的真实最新视频 (优先真实信源)
     channels = SOURCES.get("youtube_channels", [])
     for ch in channels:
         rss_url = f"https://www.youtube.com/feeds/videos.xml?channel_id={ch['id']}"
+        feed = None
         try:
-            feed = feedparser.parse(rss_url)
+            req = urllib.request.Request(
+                rss_url,
+                headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                xml_content = resp.read()
+            feed = feedparser.parse(xml_content)
+        except Exception:
+            try:
+                feed = feedparser.parse(rss_url)
+            except Exception as e:
+                print(f"  ❌ YouTube [{ch['name']}] 抓取失败: {e}")
+                continue
+
+        if not feed or not hasattr(feed, "entries") or not feed.entries:
+            continue
+
+        try:
             for entry in feed.entries[:max_per_channel]:
                 title = entry.get("title", "").strip()
                 link = entry.get("link", "")
@@ -204,30 +241,62 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 thumbnail = f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg" if video_id else ""
                 embed_url = f"https://www.youtube.com/embed/{video_id}" if video_id else ""
 
-                # 动态识别视频细分类型与爆点
+                # 计算发布时间距离现在的精确秒数 (生命周期控制)
+                diff_sec = 999999999
+                if iso_time:
+                    try:
+                        pub_dt = datetime.fromisoformat(iso_time.replace('Z', '+00:00'))
+                        diff_sec = max(0, (now - pub_dt).total_seconds())
+                    except Exception:
+                        pass
+
+                # 【近期爆点生命周期门禁】：严格限制 <= 30 天 (2,592,000 秒)，超过 30 天绝不打爆点标签
+                is_within_30_days = (diff_sec <= 30 * 86400)
                 t_lower = title.lower()
-                is_viral = any(k in t_lower for k in ["deepseek", "claude", "cursor", "ollama", "karpathy", "breakthrough", "r1", "shocked", "billion"]) or ch["name"] in ["Fireship", "Andrej Karpathy"]
-                if any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn"]):
+                clean_t = t_lower.replace("’", "'").replace("`", "'").strip()
+
+                viral_keywords = ["fable", "astra", "gpt-6", "breakthrough", "r1", "deepseek", "open-source", "insanely", "billion", "shocked", "revolution", "benchmark", "agi"]
+                has_viral_topic = any(k in t_lower for k in viral_keywords) or (ch["name"] in ["Fireship", "Theo - t3.gg", "AI Explained"] and diff_sec <= 7 * 86400)
+
+                if is_within_30_days and has_viral_topic:
+                    is_viral = True
+                    v_subtype = "viral"
+                    v_skill = "🔥 近期爆点"
+                elif any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn", "how to", "setup", "puzzle"]):
+                    is_viral = False
                     v_subtype = "tutorial"
                     v_skill = "🎓 系统教学"
-                elif any(k in t_lower for k in ["benchmark", "compare", "vs", "eval", "weights", "model", "vllm"]):
+                elif any(k in t_lower for k in ["benchmark", "compare", "vs", "eval", "weights", "model", "vllm", "speed", "fast"]):
+                    is_viral = False
                     v_subtype = "mastery"
                     v_skill = "🤖 模型技巧"
-                elif any(k in t_lower for k in ["workflow", "tips", "tricks", "prompt", "cursor"]):
+                elif any(k in t_lower for k in ["workflow", "tips", "tricks", "prompt", "cursor", "tools", "stack"]):
+                    is_viral = False
                     v_subtype = "skills"
                     v_skill = "⚡ 实操技巧"
                 else:
-                    v_subtype = "viral" if is_viral else "experience"
-                    v_skill = "🔥 近期爆点" if is_viral else "💡 独家经验"
+                    is_viral = False
+                    v_subtype = "insight"
+                    v_skill = "💡 独家经验"
 
-                v_tags = [ch["name"], v_skill]
+                title_zh = KNOWN_TITLE_TRANSLATIONS.get(clean_t)
+                if not title_zh:
+                    title_zh = f"【{v_skill}】{title}" if is_viral else f"【实战精讲】{title}"
+
+                v_tags = [ch["name"]]
                 if is_viral:
                     v_tags.insert(0, "🔥 近期爆点")
+                else:
+                    v_tags.append(v_skill)
+                if "fable" in t_lower:
+                    v_tags.insert(0, "Fable5.1")
+                if "astra" in t_lower or "gpt-6" in t_lower:
+                    v_tags.insert(0, "GPT-6Astra")
 
                 items.append({
                     "id": make_id(link, title),
-                    "title": f"【实战精讲】{title}",
-                    "title_zh": f"【实战精讲】{title}",
+                    "title": title_zh,
+                    "title_zh": title_zh,
                     "title_en": title,
                     "url": link,
                     "image_url": thumbnail or get_smart_cover_url(title, "videos", ch["name"]),
@@ -240,7 +309,7 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                     "sub_type": v_subtype,
                     "purpose_zh": f"{v_skill} · {ch['name']} 深度实战",
                     "purpose_en": f"{v_skill} · {ch['name']} Breakdown",
-                    "metrics": {"format": "16:9 高清实操视频", "skill_tag": v_skill, "difficulty": v_skill},
+                    "metrics": {"format": "16:9 真实实操视频", "skill_tag": v_skill, "difficulty": v_skill},
                     "content_snippet": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
                     "summary_zh": summary or f"来自 {ch['name']} 的最新 AI 演示精讲与架构解析",
                     "summary_en": summary or f"Latest hands-on AI demo and technical breakdown from {ch['name']}.",
@@ -249,6 +318,19 @@ def fetch_youtube_videos(max_per_channel: int = 4) -> List[Dict[str, Any]]:
                 })
         except Exception as e:
             print(f"  ❌ YouTube [{ch['name']}] 抓取失败: {e}")
+
+    # 真实视频按发布时间严格倒序 (最新发布的排在最前面)
+    items.sort(key=lambda x: x.get("raw_published_at") or "", reverse=True)
+
+    # 2. 追加经典技术教学与沉淀指南 (确保不带伪造的今日时间与爆点标签，仅供系统教学和历史查阅)
+    curated_tutorials = get_expanded_tutorials()
+    for tut in curated_tutorials:
+        tut["is_viral"] = False
+        tut["tags"] = [t for t in tut.get("tags", []) if t != "🔥 近期爆点"]
+        if tut.get("sub_type") == "viral":
+            tut["sub_type"] = "tutorial"
+    items.extend(curated_tutorials)
+
     return items
 
 
