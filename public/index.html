@@ -63,7 +63,7 @@
       </div>
       <div>
         <div class="flex items-center space-x-2">
-          <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
+          <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent" id="header-title">
             AI 资讯雷达
           </h1>
           <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 tracking-wider">
@@ -156,13 +156,13 @@
             <span>🔥</span>
             <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
           </span>
-          <span class="text-[11px] text-slate-400 hidden sm:inline">· 帮你在最短时间内抓住今日行业核心脉搏</span>
+          <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· 帮你在最短时间内抓住今日行业核心脉搏</span>
         </div>
-        <span class="text-[11px] text-indigo-300/80 font-mono">当日实时更新</span>
+        <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">当日实时更新</span>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
         <!-- 动态渲染 Top 3 -->
-        <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 text-xs text-slate-400 animate-pulse">正在提炼今日重磅...</div>
+        <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 text-xs text-slate-400 animate-pulse" id="top-three-loading">正在提炼今日重磅...</div>
       </div>
     </section>
 
@@ -186,7 +186,6 @@
       <!-- 侧边雷达流 (约占 33% 宽度): 领袖观点 + 实用工具 + 视频实操 -->
       <aside class="lg:col-span-4 space-y-6">
         
-        <!-- 模块 A: 🐦 领袖观点·社交热议 -->
         <!-- 模块 A: 🐦 领袖观点·社交热议 (支持 𝕏 / Reddit 独立筛选) -->
         <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
           <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
@@ -212,7 +211,7 @@
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
               <h3 class="font-bold text-sm text-slate-100" id="section-title-tools">🛠️ 场景落地·实用神器</h3>
             </div>
-            <button onclick="switchTab('tools')" class="text-[11px] text-emerald-400 hover:underline">全部神器 →</button>
+            <button onclick="switchTab('tools')" id="link-all-tools" class="text-[11px] text-emerald-400 hover:underline">全部神器 →</button>
           </div>
           <div class="space-y-3" id="stream-tools">
             <!-- 动态注入落地工具卡片 -->
@@ -226,7 +225,7 @@
               <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
               <h3 class="font-bold text-sm text-slate-100" id="section-title-videos">🎬 演示视频·提示词</h3>
             </div>
-            <button onclick="switchTab('videos')" class="text-[11px] text-rose-400 hover:underline">全屏浏览 →</button>
+            <button onclick="switchTab('videos')" id="link-all-videos" class="text-[11px] text-rose-400 hover:underline">全屏浏览 →</button>
           </div>
           <div class="space-y-3" id="stream-videos">
             <!-- 动态注入视频与 Prompt -->
@@ -238,11 +237,11 @@
           <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5">
+              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5" id="section-title-arena">
                 <span>🏆 LMSYS 大模型天梯榜</span>
               </h3>
             </div>
-            <span class="text-[10px] text-amber-400/90 font-mono">盲测 Elo 实时榜</span>
+            <span class="text-[10px] text-amber-400/90 font-mono" id="arena-sub-tag">盲测 Elo 实时榜</span>
           </div>
           <div class="space-y-2" id="stream-arena">
             <!-- 动态注入 Arena Top 5 -->
@@ -254,11 +253,11 @@
           <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-sm shadow-purple-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5">
+              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5" id="section-title-arxiv">
                 <span>📄 ArXiv 每日突破论文</span>
               </h3>
             </div>
-            <span class="text-[10px] text-purple-400/90 font-mono">极客前沿研读</span>
+            <span class="text-[10px] text-purple-400/90 font-mono" id="arxiv-sub-tag">极客前沿研读</span>
           </div>
           <div class="space-y-2.5" id="stream-arxiv">
             <!-- 动态注入 ArXiv Papers -->
@@ -278,26 +277,26 @@
         
         <!-- 领袖观点专用的平台快速筛选器 (𝕏 vs Reddit 独立分开) -->
         <div id="celebrity-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterSocialPlatform('all')" class="celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white">全部平台</button>
-          <button onclick="filterSocialPlatform('x')" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">𝕏 (Twitter) 大V</button>
-          <button onclick="filterSocialPlatform('reddit')" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">Reddit 极客社群</button>
+          <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white">全部平台</button>
+          <button onclick="filterSocialPlatform('x')" id="celeb-filter-x" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">𝕏 (Twitter) 大V</button>
+          <button onclick="filterSocialPlatform('reddit')" id="celeb-filter-reddit" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">Reddit 极客社群</button>
         </div>
 
         <!-- 工具专用的场景快速筛选过滤器 -->
         <div id="tools-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterToolScenario('all')" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white">全部神器</button>
-          <button onclick="filterToolScenario('免部署')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🟢 免部署在线玩</button>
-          <button onclick="filterToolScenario('图像')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎨 修图设计</button>
-          <button onclick="filterToolScenario('编程')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💻 编程提效</button>
-          <button onclick="filterToolScenario('客户端')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💬 AI客户端</button>
-          <button onclick="filterToolScenario('智能体')" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🤖 Agent工作流</button>
+          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white">全部神器</button>
+          <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🟢 免部署在线玩</button>
+          <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎨 修图设计</button>
+          <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💻 编程提效</button>
+          <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💬 AI客户端</button>
+          <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🤖 Agent工作流</button>
         </div>
 
         <!-- 视频与Prompt专用的筛选器 -->
         <div id="videos-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterVideoType('all')" class="video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white">全部</button>
-          <button onclick="filterVideoType('video')" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎬 实战视频</button>
-          <button onclick="filterVideoType('prompt')" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💡 提示词神咒</button>
+          <button onclick="filterVideoType('all')" id="video-filter-all" class="video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white">全部</button>
+          <button onclick="filterVideoType('video')" id="video-filter-video" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">🎬 实战视频</button>
+          <button onclick="filterVideoType('prompt')" id="video-filter-prompt" class="video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700">💡 提示词神咒</button>
         </div>
       </div>
 
@@ -312,13 +311,13 @@
   <!-- 页脚 -->
   <footer class="border-t border-slate-800/80 bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2">
     <div class="flex items-center justify-center space-x-4">
-      <span>🤖 AI 资讯雷达 3.0</span>
+      <span id="footer-brand">🤖 AI 资讯雷达 4.0</span>
       <span>·</span>
-      <span>开源零成本架构</span>
+      <span id="footer-arch">开源零成本架构</span>
       <span>·</span>
-      <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="hover:text-indigo-400 underline">GitHub 源码</a>
+      <a href="https://github.com/AInextday-ctrl/ai-news-radar" target="_blank" class="hover:text-indigo-400 underline" id="footer-github">GitHub 源码</a>
     </div>
-    <p>高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。</p>
+    <p id="footer-desc">高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。</p>
   </footer>
 
   <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放) -->
@@ -353,53 +352,255 @@
 
     const I18N = {
       zh: {
+        pageTitle: "AI 资讯雷达 | 全景 AI 动态与场景落地神器站",
+        headerTitle: "AI 资讯雷达",
         subtitle: "全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库",
         refreshBtn: "刷新",
+        autoRefresh: "自动刷新",
+        searchPlaceholder: "搜索关键词...",
         digestTitle: "今日 AI 风向标 (60秒必读 Top 3)",
+        digestSubtitle: "· 帮你在最短时间内抓住今日行业核心脉搏",
+        digestUpdateTag: "当日实时更新",
+        digestLoading: "正在提炼今日重磅...",
+        newsTitle: "⚡ 突发·行业快讯",
+        newsSubCount: "实时追踪",
+        newsNoMatch: "暂无符合条件的快讯",
+        newsBreakingTag: "⚡ 突发快讯 · 全球追踪",
+        sourceLabel: "信源:",
+        readMore: "阅读原文 ↗",
+        celebTitle: "🐦 领袖观点·社交",
+        celebSideAll: "全部",
+        celebSideX: "𝕏 大V",
+        celebSideReddit: "Reddit",
+        celebBadgeX: "𝕏 领袖推特",
+        celebBadgeReddit: "Reddit 深度热议",
+        celebVerifiedTitle: "已认证权威领袖",
+        celebOriginalTweet: "直达原推 ↗",
+        celebViewPost: "查看热帖 ↗",
+        celebNoMatch: "暂无该平台动态",
+        redditCommunity: "Reddit 极客社群",
+        toolsTitle: "🛠️ 场景落地·实用神器",
+        allToolsLink: "全部神器 →",
+        toolsNoMatch: "暂无落地工具",
+        tryTool: "立即体验 ↗",
+        toolToday: "今日",
+        videosTitle: "🎬 演示视频·提示词",
+        allVideosLink: "全屏浏览 →",
+        videosNoMatch: "暂无视频提示词",
+        promptBadge: "💡 高阶提示词神咒",
+        promptModelPrefix: "🎯 推荐: ",
+        promptTempPrefix: "⚙️ ",
+        copyPrompt: "一键复制提示词 📋",
+        copySuccess: "Prompt 咒语已复制到剪贴板！",
+        playVideo: "站内播放 ▶",
+        todayTag: "🔥 今日首发",
+        readPaper: "精读 →",
+        arenaTitle: "🏆 LMSYS 大模型天梯榜",
+        arenaSubTag: "盲测 Elo 实时榜",
+        arenaNoMatch: "暂无评测数据",
+        arxivTitle: "📄 ArXiv 每日突破论文",
+        arxivSubTag: "极客前沿研读",
+        arxivNoMatch: "暂无论文推荐",
+        catViewTitle: "专栏全景浏览",
+        catViewDesc: "查看该分类下的全部深度收录情报",
+        celebFilterAll: "全部平台",
+        celebFilterX: "𝕏 (Twitter) 大V",
+        celebFilterReddit: "Reddit 极客社群",
+        toolFilterAll: "全部神器",
+        toolFilterWeb: "🟢 免部署在线玩",
+        toolFilterDesign: "🎨 修图设计",
+        toolFilterCode: "💻 编程提效",
+        toolFilterClient: "💬 AI客户端",
+        toolFilterAgent: "🤖 Agent工作流",
+        videoFilterAll: "全部",
+        videoFilterVideo: "🎬 实战视频",
+        videoFilterPrompt: "💡 提示词神咒",
+        footerBrand: "🤖 AI 资讯雷达 4.0",
+        footerArch: "开源零成本架构",
+        footerGithub: "GitHub 源码",
+        footerDesc: "高频追踪全球顶级大模型突发、领袖推特交锋、Toolify 落地神器与 YouTube 实战实操演示。",
+        modalVideoTitle: "AI 视频演示",
         tabs: {
           all: "综合全景",
           news: "突发·行业快讯",
           celebrity: "领袖观点·社交",
           tools: "场景落地·实用神器",
           videos: "视频演示·咒语"
-        },
-        readMore: "阅读原文 ↗",
-        tryTool: "立即体验 ↗",
-        playVideo: "站内播放 ▶",
-        copyPrompt: "一键复制提示词 📋",
-        copySuccess: "Prompt 咒语已复制到剪贴板！",
-        todayTag: "🔥 今日首发",
-        toolPricingFree: "🟢 开源免费",
-        toolPricingTrial: "🟡 免费试玩"
+        }
       },
       en: {
+        pageTitle: "AI Radar | Real-Time Global AI Intel & Applied Tools",
+        headerTitle: "AI News Radar",
         subtitle: "Breaking AI · Leader Voices · Video Guides · Applied Tools · Prompt Bank",
         refreshBtn: "Refresh",
+        autoRefresh: "Auto Refresh",
+        searchPlaceholder: "Search keywords...",
         digestTitle: "Today's Top 3 Highlights (60s Read)",
+        digestSubtitle: "· Grasp the pulse of AI breakthroughs in 60 seconds",
+        digestUpdateTag: "Updated Daily in Real-Time",
+        digestLoading: "Extracting today's top stories...",
+        newsTitle: "⚡ Breaking News & Industry",
+        newsSubCount: "Live Radar",
+        newsNoMatch: "No matching news found",
+        newsBreakingTag: "⚡ Breaking · Global Intel",
+        sourceLabel: "Source:",
+        readMore: "Read More ↗",
+        celebTitle: "🐦 Leader Voices & Social",
+        celebSideAll: "All",
+        celebSideX: "𝕏 Leaders",
+        celebSideReddit: "Reddit",
+        celebBadgeX: "𝕏 AI Leader",
+        celebBadgeReddit: "Reddit Discussion",
+        celebVerifiedTitle: "Verified AI Leader",
+        celebOriginalTweet: "Original Tweet ↗",
+        celebViewPost: "View Post ↗",
+        celebNoMatch: "No social posts found",
+        redditCommunity: "Reddit Tech Community",
+        toolsTitle: "🛠️ Applied AI Tools",
+        allToolsLink: "All Tools →",
+        toolsNoMatch: "No tools found",
+        tryTool: "Try It Out ↗",
+        toolToday: "Today",
+        videosTitle: "🎬 Demos & Prompts",
+        allVideosLink: "View All →",
+        videosNoMatch: "No videos or prompts found",
+        promptBadge: "💡 Advanced Prompt Master",
+        promptModelPrefix: "🎯 Model: ",
+        promptTempPrefix: "⚙️ ",
+        copyPrompt: "Copy Prompt 📋",
+        copySuccess: "Prompt copied to clipboard!",
+        playVideo: "Watch Video ▶",
+        todayTag: "🔥 TODAY",
+        readPaper: "Read Paper →",
+        arenaTitle: "🏆 LMSYS LLM Leaderboard",
+        arenaSubTag: "Blind Test Live Elo",
+        arenaNoMatch: "No benchmark data available",
+        arxivTitle: "📄 ArXiv Daily Breakthroughs",
+        arxivSubTag: "Geek Research Highlights",
+        arxivNoMatch: "No papers available",
+        catViewTitle: "Category Panoramic View",
+        catViewDesc: "Explore all curated intelligence and tools in this category",
+        celebFilterAll: "All Platforms",
+        celebFilterX: "𝕏 (Twitter) Leaders",
+        celebFilterReddit: "Reddit Community",
+        toolFilterAll: "All Tools",
+        toolFilterWeb: "🟢 Online Web App",
+        toolFilterDesign: "🎨 Image & Design",
+        toolFilterCode: "💻 Coding Dev",
+        toolFilterClient: "💬 AI Client",
+        toolFilterAgent: "🤖 Agent Workflow",
+        videoFilterAll: "All",
+        videoFilterVideo: "🎬 Video Demos",
+        videoFilterPrompt: "💡 Prompt Templates",
+        footerBrand: "🤖 AI Radar 4.0",
+        footerArch: "Zero-Cost Open Source Architecture",
+        footerGithub: "GitHub Source",
+        footerDesc: "Tracking global LLM breakthroughs, tech leader insights on 𝕏 & Reddit, applied tools, and hands-on YouTube tutorials in real time.",
+        modalVideoTitle: "AI Video Demo",
         tabs: {
           all: "All-in-One",
           news: "Breaking News",
           celebrity: "Voices & Social",
           tools: "Applied Tools",
           videos: "Videos & Prompts"
-        },
-        readMore: "Read More ↗",
-        tryTool: "Try It Out ↗",
-        playVideo: "Watch Video ▶",
-        copyPrompt: "Copy Prompt 📋",
-        copySuccess: "Prompt copied to clipboard!",
-        todayTag: "🔥 TODAY",
-        toolPricingFree: "🟢 Free & OSS",
-        toolPricingTrial: "🟡 Free Trial"
+        }
       }
     };
 
+    // 技术规格标签翻译助手
+    function translateSpecTag(tag, lang) {
+      if (lang === 'zh') return tag;
+      const dict = {
+        "10万卡液冷集群": "100k Liquid Cooled GPUs",
+        "物理具身AI": "Physical Embodied AI",
+        "后训练推理": "Post-training Reasoning",
+        "算力经济学": "Compute Economics",
+        "LLM作为CPU内核": "LLM as CPU Kernel",
+        "自主Agent": "Autonomous Agents",
+        "JEPA架构": "JEPA Architecture",
+        "分层世界模型": "World Models",
+        "具身智能爆发": "Embodied AI Boom",
+        "物理仿真基座": "Physics Simulation Base",
+        "安全超级智能": "Safe Superintelligence",
+        "可扩展对齐": "Scalable Alignment",
+        "混合推理机制": "Hybrid Reasoning",
+        "透明思考链": "Transparent Thinking Chain",
+        "ARC-AGI评测": "ARC-AGI Benchmark",
+        "新技能泛化效率": "Skill Acquisition Speed",
+        "科学发现范式": "Scientific Paradigm",
+        "加速计算范式": "Accelerated Computing",
+        "万亿代工制造": "AI Factory",
+        "开源权重": "Open Weights",
+        "视觉生成": "Vision Gen",
+        "推理模型": "Reasoning Model",
+        "长上下文": "Long Context",
+        "基准评测": "Benchmark",
+        "企业落地": "Enterprise",
+        "智能体": "Agent",
+        "具身智能": "Embodied AI",
+        "算力集群": "Compute Cluster",
+        "系统演进": "Systems",
+        "世界模型": "World Models",
+        "科学发现": "AI for Science",
+        "代码生成": "Code Gen",
+        "多模态": "Multimodal",
+        "声音克隆": "Voice Clone",
+        "极低延迟": "Ultra-low Latency",
+        "本地部署": "Local Deploy",
+        "显存优化": "VRAM Optimization"
+      };
+      for (const [zhKey, enVal] of Object.entries(dict)) {
+        if (tag.includes(zhKey)) {
+          return tag.replace(zhKey, enVal);
+        }
+      }
+      return tag;
+    }
+
+    // 场景标签翻译助手
+    function translateScenarioTag(scenario, lang) {
+      if (lang === 'zh') return scenario;
+      if (scenario.includes('图像') || scenario.includes('设计') || scenario.includes('修图')) return '🎨 Image & Design';
+      if (scenario.includes('编程') || scenario.includes('提效') || scenario.includes('开发')) return '💻 Coding & Dev';
+      if (scenario.includes('客户端') || scenario.includes('应用') || scenario.includes('chat')) return '💬 AI Client App';
+      if (scenario.includes('智能体') || scenario.includes('Agent') || scenario.includes('工作流')) return '🤖 Agent Workflow';
+      if (scenario.includes('声音') || scenario.includes('音频') || scenario.includes('语音')) return '🎙️ Voice & Audio';
+      if (scenario.includes('视频')) return '🎬 Video Creation';
+      if (scenario.includes('写作') || scenario.includes('知识库')) return '✍️ Writing & Notes';
+      return '🤖 Applied AI Tool';
+    }
+
+    // 运行方式/计费标签翻译助手
+    function translateRuntimeBadge(badge, lang) {
+      if (lang === 'zh') return badge;
+      if (badge.includes('开源免装') || badge.includes('完全开源免费') || badge.includes('开源免费')) return '🟢 Open Source';
+      if (badge.includes('WebGPU') || badge.includes('免装即用') || badge.includes('免部署') || badge.includes('在线')) return '🟢 Web Online Play';
+      if (badge.includes('免费试玩') || badge.includes('免费试用')) return '🟡 Free Trial';
+      if (badge.includes('Docker')) return '🐳 Docker Deploy';
+      if (badge.includes('本地 GPU')) return '🟢 Local GPU';
+      if (badge.includes('命令行')) return '⚡ CLI Executable';
+      if (badge.includes('桌面端') || badge.includes('客户端')) return '💻 Desktop App';
+      if (badge.includes('API Key')) return '🔑 Bring API Key';
+      return '🟢 Online App';
+    }
+
+    // 实操难度标签翻译助手
+    function translateDifficultyTag(tag, lang) {
+      if (lang === 'zh') return tag;
+      if (tag.includes('避坑')) return '🛠️ Hands-on Guide';
+      if (tag.includes('工作流')) return '⚡ Production Workflow';
+      if (tag.includes('大师课') || tag.includes('出图')) return '🎨 Studio Masterclass';
+      if (tag.includes('智能体')) return '🤖 Agent Tutorial';
+      if (tag.includes('语音')) return '🎙️ Voice Agent';
+      return '🔥 Trending Tutorial';
+    }
+
     // 精确时间解析与相对时间
     function formatTime(rawTime, lang = 'zh') {
-      if (!rawTime) return { display: (lang === 'zh' ? '刚刚更新' : 'Just now'), isToday: true };
+      if (!rawTime) return { display: (lang === 'zh' ? '刚刚更新' : 'Just now'), isToday: true, relative: (lang === 'zh' ? '刚刚' : 'Just now') };
       try {
         const date = new Date(rawTime);
-        if (isNaN(date.getTime())) return { display: rawTime, isToday: false };
+        if (isNaN(date.getTime())) return { display: rawTime, isToday: false, relative: rawTime };
 
         const now = new Date();
         const diffSec = Math.max(0, Math.floor((now - date) / 1000));
@@ -450,14 +651,110 @@
       }
 
       const t = I18N[lang];
+      document.title = t.pageTitle;
+      const headerTitle = document.getElementById('header-title');
+      if (headerTitle) headerTitle.textContent = t.headerTitle;
       document.getElementById('header-subtitle').textContent = t.subtitle;
       document.getElementById('refresh-btn-text').textContent = t.refreshBtn;
+      
+      const refreshIndicator = document.getElementById('refresh-indicator');
+      if (refreshIndicator) {
+        refreshIndicator.innerHTML = `${t.autoRefresh} (<span id="timer">${refreshCountdown}</span>s)`;
+      }
+
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+
       document.getElementById('digest-title').textContent = t.digestTitle;
+      const digestSub = document.getElementById('digest-subtitle');
+      if (digestSub) digestSub.textContent = t.digestSubtitle;
+      const digestTag = document.getElementById('digest-update-tag');
+      if (digestTag) digestTag.textContent = t.digestUpdateTag;
+
+      const topThreeLoading = document.getElementById('top-three-loading');
+      if (topThreeLoading) topThreeLoading.textContent = t.digestLoading;
+
+      document.getElementById('section-title-news').textContent = t.newsTitle;
+      const newsSub = document.getElementById('news-sub-count');
+      if (newsSub) newsSub.textContent = t.newsSubCount;
+
+      document.getElementById('section-title-celebrity').textContent = t.celebTitle;
+      const sideAll = document.getElementById('side-social-all');
+      if (sideAll) sideAll.textContent = t.celebSideAll;
+      const sideX = document.getElementById('side-social-x');
+      if (sideX) sideX.textContent = t.celebSideX;
+      const sideReddit = document.getElementById('side-social-reddit');
+      if (sideReddit) sideReddit.textContent = t.celebSideReddit;
+
+      document.getElementById('section-title-tools').textContent = t.toolsTitle;
+      const linkTools = document.getElementById('link-all-tools');
+      if (linkTools) linkTools.textContent = t.allToolsLink;
+
+      document.getElementById('section-title-videos').textContent = t.videosTitle;
+      const linkVideos = document.getElementById('link-all-videos');
+      if (linkVideos) linkVideos.textContent = t.allVideosLink;
+
+      const secArena = document.getElementById('section-title-arena');
+      if (secArena) secArena.innerHTML = `<span>${t.arenaTitle}</span>`;
+      const arenaTag = document.getElementById('arena-sub-tag');
+      if (arenaTag) arenaTag.textContent = t.arenaSubTag;
+
+      const secArxiv = document.getElementById('section-title-arxiv');
+      if (secArxiv) secArxiv.innerHTML = `<span>${t.arxivTitle}</span>`;
+      const arxivTag = document.getElementById('arxiv-sub-tag');
+      if (arxivTag) arxivTag.textContent = t.arxivSubTag;
+
       document.getElementById('nav-text-all').textContent = t.tabs.all;
       document.getElementById('nav-text-news').textContent = t.tabs.news;
       document.getElementById('nav-text-celebrity').textContent = t.tabs.celebrity;
       document.getElementById('nav-text-tools').textContent = t.tabs.tools;
       document.getElementById('nav-text-videos').textContent = t.tabs.videos;
+
+      const catTitle = document.getElementById('cat-view-title');
+      if (catTitle) catTitle.textContent = t.tabs[currentTab] || t.catViewTitle;
+      const catDesc = document.getElementById('cat-view-desc');
+      if (catDesc) catDesc.textContent = t.catViewDesc;
+
+      // 更新专栏子筛选按钮文本
+      const cfAll = document.getElementById('celeb-filter-all');
+      if (cfAll) cfAll.textContent = t.celebFilterAll;
+      const cfX = document.getElementById('celeb-filter-x');
+      if (cfX) cfX.textContent = t.celebFilterX;
+      const cfReddit = document.getElementById('celeb-filter-reddit');
+      if (cfReddit) cfReddit.textContent = t.celebFilterReddit;
+
+      const tfAll = document.getElementById('tool-filter-all');
+      if (tfAll) tfAll.textContent = t.toolFilterAll;
+      const tfWeb = document.getElementById('tool-filter-web');
+      if (tfWeb) tfWeb.textContent = t.toolFilterWeb;
+      const tfDesign = document.getElementById('tool-filter-design');
+      if (tfDesign) tfDesign.textContent = t.toolFilterDesign;
+      const tfCode = document.getElementById('tool-filter-code');
+      if (tfCode) tfCode.textContent = t.toolFilterCode;
+      const tfClient = document.getElementById('tool-filter-client');
+      if (tfClient) tfClient.textContent = t.toolFilterClient;
+      const tfAgent = document.getElementById('tool-filter-agent');
+      if (tfAgent) tfAgent.textContent = t.toolFilterAgent;
+
+      const vfAll = document.getElementById('video-filter-all');
+      if (vfAll) vfAll.textContent = t.videoFilterAll;
+      const vfVideo = document.getElementById('video-filter-video');
+      if (vfVideo) vfVideo.textContent = t.videoFilterVideo;
+      const vfPrompt = document.getElementById('video-filter-prompt');
+      if (vfPrompt) vfPrompt.textContent = t.videoFilterPrompt;
+
+      // 更新页脚与弹窗
+      const fBrand = document.getElementById('footer-brand');
+      if (fBrand) fBrand.textContent = t.footerBrand;
+      const fArch = document.getElementById('footer-arch');
+      if (fArch) fArch.textContent = t.footerArch;
+      const fGit = document.getElementById('footer-github');
+      if (fGit) fGit.textContent = t.footerGithub;
+      const fDesc = document.getElementById('footer-desc');
+      if (fDesc) fDesc.textContent = t.footerDesc;
+
+      const modalTitle = document.getElementById('modal-video-title');
+      if (modalTitle) modalTitle.textContent = t.modalVideoTitle;
 
       if (cachedData) {
         renderUI(cachedData);
@@ -529,14 +826,17 @@
     // 专栏广场：社交平台过滤
     function filterSocialPlatform(platform) {
       socialPlatformFilter = platform;
-      const btns = document.querySelectorAll('.celeb-filter-btn');
-      btns.forEach(b => {
-        if ((platform === 'all' && b.textContent.includes('全部')) ||
-            (platform === 'x' && b.textContent.includes('Twitter')) ||
-            (platform === 'reddit' && b.textContent.includes('Reddit'))) {
-          b.className = "celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white";
-        } else {
-          b.className = "celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+      const btnMap = {
+        'all': 'celeb-filter-all',
+        'x': 'celeb-filter-x',
+        'reddit': 'celeb-filter-reddit'
+      };
+      ['all', 'x', 'reddit'].forEach(p => {
+        const b = document.getElementById(btnMap[p]);
+        if (b) {
+          b.className = (p === platform)
+            ? "celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white"
+            : "celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
         }
       });
       if (currentTab === 'celebrity') {
@@ -547,12 +847,20 @@
     // 工具场景筛选
     function filterToolScenario(scenario) {
       toolScenarioFilter = scenario;
-      const btns = document.querySelectorAll('.tool-filter-btn');
-      btns.forEach(b => {
-        if ((scenario === 'all' && b.textContent.includes('全部')) || (scenario !== 'all' && b.textContent.includes(scenario))) {
-          b.className = "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white";
-        } else {
-          b.className = "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+      const btnMap = {
+        'all': 'tool-filter-all',
+        '免部署': 'tool-filter-web',
+        '图像': 'tool-filter-design',
+        '编程': 'tool-filter-code',
+        '客户端': 'tool-filter-client',
+        '智能体': 'tool-filter-agent'
+      };
+      Object.entries(btnMap).forEach(([scenKey, btnId]) => {
+        const b = document.getElementById(btnId);
+        if (b) {
+          b.className = (scenKey === scenario)
+            ? "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white"
+            : "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
         }
       });
       if (currentTab === 'tools') {
@@ -563,14 +871,17 @@
     // 视频与Prompt类型筛选
     function filterVideoType(type) {
       videoTypeFilter = type;
-      const btns = document.querySelectorAll('.video-filter-btn');
-      btns.forEach(b => {
-        if ((type === 'all' && b.textContent.includes('全部')) ||
-            (type === 'video' && b.textContent.includes('实战视频')) ||
-            (type === 'prompt' && b.textContent.includes('提示词'))) {
-          b.className = "video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white";
-        } else {
-          b.className = "video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
+      const btnMap = {
+        'all': 'video-filter-all',
+        'video': 'video-filter-video',
+        'prompt': 'video-filter-prompt'
+      };
+      ['all', 'video', 'prompt'].forEach(tKey => {
+        const b = document.getElementById(btnMap[tKey]);
+        if (b) {
+          b.className = (tKey === type)
+            ? "video-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-rose-600 text-white"
+            : "video-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-800 text-slate-300 hover:bg-slate-700";
         }
       });
       if (currentTab === 'videos') {
@@ -581,8 +892,9 @@
     // 渲染今日 60s Top 3 走马灯
     function renderTopThree(topItems) {
       const container = document.getElementById('top-three-container');
+      const t = I18N[currentLang];
       if (!topItems || topItems.length === 0) {
-        container.innerHTML = `<div class="text-xs text-slate-400 col-span-3">今日要闻正在生成中...</div>`;
+        container.innerHTML = `<div class="text-xs text-slate-400 col-span-3">${t.digestLoading}</div>`;
         return;
       }
 
@@ -590,9 +902,9 @@
       container.innerHTML = topItems.map((item, idx) => {
         const badge = isZh ? (item.badge_zh || item.badge || "今日要闻") : (item.badge_en || item.badge || "Top Story");
         const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-        const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary);
+        const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary || item.content_snippet);
         const timeObj = formatTime(item.raw_published_at, currentLang);
-        const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">🔥 ${isZh ? '今日首发' : 'TODAY'}</span>` : '';
+        const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
         return `
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2 shadow-sm">
@@ -612,8 +924,8 @@
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/60">
-              <span>信源: ${item.source}</span>
-              <span class="text-indigo-400 group-hover:translate-x-0.5 transition-transform">阅读 →</span>
+              <span>${t.sourceLabel} ${item.source}</span>
+              <span class="text-indigo-400 group-hover:translate-x-0.5 transition-transform">${isZh ? '阅读 →' : 'Read →'}</span>
             </div>
           </a>
         `;
@@ -631,24 +943,23 @@
       } else if (iconType === 'chat') {
         return `<svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>`;
       } else {
-        // Agent / Workflow
         return `<svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>`;
       }
     }
 
     // ==========================================
-    // 专门卡片渲染：新闻快讯卡片 (清爽排版，硬核规格标签)
+    // 专门卡片渲染：新闻快讯卡片
     // ==========================================
     function renderNewsCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
-      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
-      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const title = (isZh && item.title_zh) ? item.title_zh : (item.title_en || item.title);
+      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.summary_en || item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       const specBadges = (item.spec_tags && item.spec_tags.length)
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-950/70 text-indigo-300 border border-indigo-500/30">⚡ ${s}</span>`).join('')}</div>`
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-950/70 text-indigo-300 border border-indigo-500/30">⚡ ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
         : '';
 
       const hasRealImage = item.image_url && !item.image_url.includes('photo-1526374965328') && !item.image_url.includes('photo-1485827404703');
@@ -677,7 +988,7 @@
                 </p>
               </div>
               <div class="flex items-center justify-between pt-1">
-                <span class="text-[10px] text-slate-500 font-mono">信源: ${item.source}</span>
+                <span class="text-[10px] text-slate-500 font-mono">${t.sourceLabel} ${item.source}</span>
                 <a href="${item.url}" target="_blank" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">${t.readMore}</a>
               </div>
             </div>
@@ -703,7 +1014,7 @@
             ${summary}
           </p>
           <div class="flex items-center justify-between text-xs pt-1">
-            <span class="text-[11px] text-slate-500 font-mono">⚡ 突发快讯 · 全球追踪</span>
+            <span class="text-[11px] text-slate-500 font-mono">${t.newsBreakingTag}</span>
             <a href="${item.url}" target="_blank" class="text-xs text-indigo-400 hover:text-indigo-300 font-medium">${t.readMore}</a>
           </div>
         </article>
@@ -716,19 +1027,19 @@
     function renderCelebrityCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
-      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
-      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
 
       if (isX) {
+        const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.content_snippet || item.title);
+        const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
         const avatar = item.author_avatar || `https://unavatar.io/x/${(item.author_handle || 'x').replace('@','')}`;
         const likes = item.metrics?.likes || '42k';
         const retweets = item.metrics?.retweets || '7.5k';
         const specBadges = (item.spec_tags && item.spec_tags.length)
-          ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-950/70 text-sky-300 border border-sky-500/30"># ${s}</span>`).join('')}</div>`
+          ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-950/70 text-sky-300 border border-sky-500/30"># ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
           : '';
 
         return `
@@ -738,14 +1049,14 @@
                 <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-400/50 object-cover" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                 <div>
                   <div class="flex items-center space-x-1">
-                    <span class="font-bold text-xs text-slate-100">${item.author || 'AI 领袖'}</span>
-                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black" title="已认证权威领袖">✓</span>
+                    <span class="font-bold text-xs text-slate-100">${item.author || (isZh ? 'AI 领袖' : 'AI Leader')}</span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black" title="${t.celebVerifiedTitle}">✓</span>
                   </div>
                   <span class="text-slate-500 text-[11px] font-mono">${item.author_handle || '@x'}</span>
                 </div>
               </div>
               <div class="flex items-center space-x-1.5">
-                <span class="px-2 py-0.5 rounded bg-black text-slate-200 border border-slate-700 text-[10px] font-bold">𝕏 领袖推特</span>
+                <span class="px-2 py-0.5 rounded bg-black text-slate-200 border border-slate-700 text-[10px] font-bold">${t.celebBadgeX}</span>
                 ${todayBadge}
               </div>
             </div>
@@ -756,7 +1067,7 @@
 
             ${specBadges}
 
-            ${summary ? `
+            ${summary && summary !== title ? `
               <p class="text-[11px] text-slate-400 line-clamp-2 leading-relaxed">
                 ${summary}
               </p>
@@ -768,8 +1079,7 @@
                 <span>🔁 ${retweets}</span>
               </div>
               <a href="${item.url}" target="_blank" class="text-sky-400 hover:text-sky-300 font-medium flex items-center space-x-1">
-                <span>直达原推</span>
-                <span>↗</span>
+                <span>${t.celebOriginalTweet}</span>
               </a>
             </div>
           </article>
@@ -777,10 +1087,14 @@
       }
 
       // Reddit 社区专有排版
+      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
       const subName = item.author_handle || (item.source || '').replace('Reddit ', '') || 'r/singularity';
       const cleanSub = subName.startsWith('r/') ? subName : 'r/' + subName;
       const upvotes = item.metrics?.upvotes || '🔥 1.4k Upvotes';
-      const comments = item.metrics?.comments || '💬 320 讨论';
+      const comments = isZh 
+        ? (item.metrics?.comments || '💬 320 讨论')
+        : (item.metrics?.comments_en || (item.metrics?.comments || '').replace('讨论', 'comments') || '💬 320 comments');
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group border border-slate-800/80 hover:border-orange-500/40 transition-all">
@@ -791,13 +1105,13 @@
               </div>
               <div>
                 <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-200">${item.author || 'Reddit 极客社群'}</span>
+                  <span class="font-bold text-xs text-slate-200">${isZh ? (item.author || 'Reddit 极客社群') : t.redditCommunity}</span>
                 </div>
                 <span class="text-orange-400/90 text-[11px] font-mono">${cleanSub}</span>
               </div>
             </div>
             <div class="flex items-center space-x-1.5">
-              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/25 text-[10px] font-bold">Reddit 深度热议</span>
+              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-400 border border-orange-500/25 text-[10px] font-bold">${t.celebBadgeReddit}</span>
               ${todayBadge}
             </div>
           </div>
@@ -818,8 +1132,7 @@
               <span>${comments}</span>
             </div>
             <a href="${item.url}" target="_blank" class="text-orange-400 hover:text-orange-300 font-medium flex items-center space-x-1">
-              <span>查看热帖</span>
-              <span>↗</span>
+              <span>${t.celebViewPost}</span>
             </a>
           </div>
         </article>
@@ -827,35 +1140,27 @@
     }
 
     // ==========================================
-    // 专门卡片渲染：落地实用神器卡片 (去除单一字母绿块，精细矢量微图标与结构化标题)
+    // 专门卡片渲染：落地实用神器卡片
     // ==========================================
     function renderToolCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
-      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
-      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const scenario = item.scenario_tag || "🤖 场景落地";
-      const runtimeBadge = item.runtime_badge || item.pricing_tag || "🟢 开源免装";
+      const scenario = translateScenarioTag(item.scenario_tag || "🤖 场景落地", currentLang);
+      const runtimeBadge = translateRuntimeBadge(item.runtime_badge || item.pricing_tag || "🟢 开源免装", currentLang);
       const iconSvg = getToolSvgIcon(item.icon_type);
 
-      let appName = item.app_name;
-      let hook = item.app_hook;
+      const appName = isZh 
+        ? (item.app_name || (item.title ? item.title.split(':')[0].replace(/【(.*?)】/, '$1') : 'AI 工具'))
+        : (item.app_name_en || item.app_name || 'AI Tool');
 
-      if (!appName) {
-        const match = title.match(/【(.*?)】(.*)/);
-        if (match) {
-          appName = match[1].trim();
-          hook = match[2].trim();
-        } else if (title.includes(':')) {
-          appName = title.split(':')[0].trim();
-          hook = title.split(':')[1].trim();
-        } else {
-          appName = "AI 实用神器";
-          hook = title;
-        }
-      }
-      if (!hook) hook = summary || title;
+      const hook = isZh
+        ? (item.app_hook || item.title_zh || item.title || "")
+        : (item.app_hook_en || item.summary_en || item.title_en || item.app_hook || "");
+
+      const summary = isZh
+        ? (item.summary_zh || item.content_snippet || "")
+        : (item.summary_en || item.content_snippet || "");
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-3 group border-t-2 border-t-emerald-500/80 hover:border-emerald-500/50 transition-all">
@@ -876,10 +1181,10 @@
                   <span class="text-[10px] font-medium text-slate-400">${scenario}</span>
                 </div>
               </div>
-              <span class="text-[10px] text-slate-400 font-mono shrink-0">🕒 ${timeObj.relative || '今日'}</span>
+              <span class="text-[10px] text-slate-400 font-mono shrink-0">🕒 ${timeObj.relative || t.toolToday}</span>
             </div>
 
-            <!-- 核心看点与功能价值 (无截断) -->
+            <!-- 核心看点与功能价值 -->
             <p class="text-xs font-semibold text-slate-200 group-hover:text-white transition-colors leading-snug">
               ${hook}
             </p>
@@ -907,30 +1212,31 @@
     function renderVideoOrPromptCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
-      const title = (isZh && item.title_zh) ? item.title_zh : item.title;
-      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.content_snippet || "");
+      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       // Prompt 咒语卡片
       if (item.is_prompt) {
-        const targetModel = item.recommended_model || "通用大模型";
-        const tempAdvice = item.temp_advice || "温度 0.3";
+        const targetModel = item.recommended_model || (isZh ? "通用大模型" : "LLM");
+        const rawTemp = item.temp_advice || (isZh ? "温度 0.3" : "Temp 0.3");
+        const tempAdvice = isZh ? rawTemp : rawTemp.replace('温度', 'Temp');
         return `
           <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 border-l-4 border-l-purple-500 shadow-lg group">
             <div class="flex items-center justify-between">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                💡 高阶提示词神咒
+                ${t.promptBadge}
               </span>
               <div class="flex items-center space-x-1.5">
                 ${todayBadge}
-                <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.relative || '今日'}</span>
+                <span class="text-[10px] text-slate-400 font-mono">🕒 ${timeObj.relative || t.toolToday}</span>
               </div>
             </div>
             <h4 class="font-bold text-xs sm:text-sm text-slate-100">${title}</h4>
             <div class="flex items-center space-x-2 text-[9px] font-mono">
-              <span class="px-1.5 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-500/30">🎯 推荐: ${targetModel}</span>
-              <span class="px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">⚙️ ${tempAdvice}</span>
+              <span class="px-1.5 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-500/30">${t.promptModelPrefix}${targetModel}</span>
+              <span class="px-1.5 py-0.5 rounded bg-slate-900 text-slate-400 border border-slate-800">${t.promptTempPrefix}${tempAdvice}</span>
             </div>
             <div class="bg-slate-950/90 p-2.5 rounded-lg border border-slate-800 text-[11px] text-purple-200 font-mono leading-relaxed select-all">
               ${item.prompt_content}
@@ -943,7 +1249,7 @@
       }
 
       // YouTube 实操/工作流视频卡片
-      const skillTag = item.difficulty || item.metrics?.skill_tag || (title.includes('避坑') ? '🛠️ 避坑实操' : (title.includes('工作流') ? '⚡ 生产级工作流' : '🔥 热门实操'));
+      const skillTag = translateDifficultyTag(item.difficulty || item.metrics?.skill_tag || '🔥 热门实操', currentLang);
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
       return `
         <article class="glass-card rounded-xl p-3 flex flex-col space-y-2 group border-t-2 border-t-rose-500/80 hover:border-rose-500/50 transition-all">
@@ -984,8 +1290,10 @@
     // ==========================================
     function renderUI(data) {
       if (!data) return;
+      const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
 
-      // 1. 更新各分类角标数量 (兼顾 grouped 与扁平别名字段)
+      // 1. 更新各分类角标数量
       const newsList = filterList(data.grouped?.news || data.news || data.industry_news || []);
       const celebrityList = filterList(data.grouped?.celebrity || data.celebrity || data.leader_opinions || []);
       const toolsList = filterList(data.grouped?.tools || data.tools || data.applied_tools || []);
@@ -1005,7 +1313,7 @@
       const streamNews = document.getElementById('stream-news');
       streamNews.innerHTML = newsList.length > 0 
         ? newsList.map(renderNewsCard).join('')
-        : '<div class="text-slate-500 text-xs py-8 text-center">暂无符合条件的快讯</div>';
+        : `<div class="text-slate-500 text-xs py-8 text-center">${t.newsNoMatch}</div>`;
 
       // 侧边栏社交流应用 sideSocialFilter
       let sideCelebList = celebrityList;
@@ -1018,62 +1326,71 @@
       const streamCelebrity = document.getElementById('stream-celebrity');
       streamCelebrity.innerHTML = sideCelebList.length > 0
         ? sideCelebList.slice(0, 10).map(renderCelebrityCard).join('')
-        : '<div class="text-slate-500 text-xs py-4 text-center">暂无该平台动态</div>';
+        : `<div class="text-slate-500 text-xs py-4 text-center">${t.celebNoMatch}</div>`;
 
       const streamTools = document.getElementById('stream-tools');
       streamTools.innerHTML = toolsList.length > 0
         ? toolsList.slice(0, 10).map(renderToolCard).join('')
-        : '<div class="text-slate-500 text-xs py-4 text-center">暂无落地工具</div>';
+        : `<div class="text-slate-500 text-xs py-4 text-center">${t.toolsNoMatch}</div>`;
 
       const streamVideos = document.getElementById('stream-videos');
       streamVideos.innerHTML = videosList.length > 0
         ? videosList.slice(0, 8).map(renderVideoOrPromptCard).join('')
-        : '<div class="text-slate-500 text-xs py-4 text-center">暂无视频提示词</div>';
+        : `<div class="text-slate-500 text-xs py-4 text-center">${t.videosNoMatch}</div>`;
 
       // 4. 渲染 LMSYS Chatbot Arena Top 5 天梯榜
       const streamArena = document.getElementById('stream-arena');
       if (streamArena) {
         const arenaList = data.chatbot_arena || [];
-        streamArena.innerHTML = arenaList.map(item => `
-          <div class="flex items-center justify-between p-2 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-500/40 transition-colors">
-            <div class="flex items-center space-x-2.5">
-              <span class="w-5 h-5 rounded-full ${item.rank === 1 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : (item.rank === 2 ? 'bg-slate-300/20 text-slate-200 border border-slate-400/40' : 'bg-slate-800 text-slate-400')} flex items-center justify-center text-[10px] font-bold font-mono">
-                ${item.rank}
-              </span>
-              <div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="font-bold text-xs text-slate-100">${item.model}</span>
-                  <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-900 text-slate-400 font-mono border border-slate-800">${item.org}</span>
+        streamArena.innerHTML = arenaList.map(item => {
+          const badgeText = isZh ? (item.badge || '') : (item.badge_en || item.badge || '');
+          return `
+            <div class="flex items-center justify-between p-2 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-amber-500/40 transition-colors">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-5 h-5 rounded-full ${item.rank === 1 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : (item.rank === 2 ? 'bg-slate-300/20 text-slate-200 border border-slate-400/40' : 'bg-slate-800 text-slate-400')} flex items-center justify-center text-[10px] font-bold font-mono">
+                  ${item.rank}
+                </span>
+                <div>
+                  <div class="flex items-center space-x-1.5 flex-wrap gap-1">
+                    <span class="font-bold text-xs text-slate-100">${item.model}</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-900 text-slate-400 font-mono border border-slate-800">${item.org}</span>
+                    ${badgeText ? `<span class="text-[9px] px-1 py-0.2 rounded bg-amber-500/10 text-amber-300 font-mono">${badgeText}</span>` : ''}
+                  </div>
                 </div>
               </div>
+              <div class="text-right shrink-0">
+                <span class="text-xs font-mono font-bold text-amber-400">${item.elo}</span>
+                <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
+              </div>
             </div>
-            <div class="text-right">
-              <span class="text-xs font-mono font-bold text-amber-400">${item.elo}</span>
-              <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
-            </div>
-          </div>
-        `).join('') || '<div class="text-xs text-slate-500 py-2">暂无评测数据</div>';
+          `;
+        }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
       }
 
       // 5. 渲染 ArXiv 每日学术突破精选论文
       const streamArXiv = document.getElementById('stream-arxiv');
       if (streamArXiv) {
         const arxivList = data.arxiv_papers || [];
-        streamArXiv.innerHTML = arxivList.map(item => `
-          <a href="${item.url}" target="_blank" class="block p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-purple-500/40 transition-all group space-y-1.5">
-            <div class="flex items-center justify-between text-[10px]">
-              <span class="font-mono text-purple-400 font-semibold">arXiv:${item.arxiv_id}</span>
-              <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30 font-mono">${item.date}</span>
-            </div>
-            <h5 class="text-xs font-bold text-slate-100 group-hover:text-purple-300 transition-colors leading-snug line-clamp-2">
-              ${item.title_zh || item.title}
-            </h5>
-            <div class="flex items-center justify-between text-[10px] text-slate-400 pt-0.5">
-              <span class="font-mono text-[9px] text-slate-400 truncate max-w-[190px]">⚡ ${item.spec}</span>
-              <span class="text-purple-400 group-hover:translate-x-0.5 transition-transform shrink-0 font-medium">精读 →</span>
-            </div>
-          </a>
-        `).join('') || '<div class="text-xs text-slate-500 py-2">暂无论文推荐</div>';
+        streamArXiv.innerHTML = arxivList.map(item => {
+          const paperTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+          const paperSpec = isZh ? item.spec : (item.spec_en || item.spec);
+          const paperDate = isZh ? item.date : (item.date_en || item.date);
+          return `
+            <a href="${item.url}" target="_blank" class="block p-2.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-purple-500/40 transition-all group space-y-1.5">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="font-mono text-purple-400 font-semibold">arXiv:${item.arxiv_id}</span>
+                <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/15 text-purple-300 border border-purple-500/30 font-mono">${paperDate}</span>
+              </div>
+              <h5 class="text-xs font-bold text-slate-100 group-hover:text-purple-300 transition-colors leading-snug line-clamp-2">
+                ${paperTitle}
+              </h5>
+              <div class="flex items-center justify-between text-[10px] text-slate-400 pt-0.5">
+                <span class="font-mono text-[9px] text-slate-400 truncate max-w-[190px]">⚡ ${paperSpec}</span>
+                <span class="text-purple-400 group-hover:translate-x-0.5 transition-transform shrink-0 font-medium">${t.readPaper}</span>
+              </div>
+            </a>
+          `;
+        }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arxivNoMatch}</div>`;
       }
 
       // 6. 如果当前处于独立分类模式，重新刷新分类网格
@@ -1086,7 +1403,7 @@
     function filterList(list) {
       if (!searchQuery) return list;
       return list.filter(item => {
-        const text = `${item.title || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.source || ''} ${item.author || ''}`.toLowerCase();
+        const text = `${item.title || ''} ${item.title_en || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.summary_en || ''} ${item.source || ''} ${item.author || ''}`.toLowerCase();
         return text.includes(searchQuery);
       });
     }
@@ -1095,11 +1412,12 @@
     function renderCategoryView(tab) {
       if (!cachedData) return;
       const container = document.getElementById('cat-grid-container');
+      const t = I18N[currentLang];
 
       if (tab === 'news') {
         const list = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
         container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderNewsCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-2">未找到匹配快讯</div>';
+        container.innerHTML = list.length > 0 ? list.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-2">${t.newsNoMatch}</div>`;
       } else if (tab === 'celebrity') {
         let list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
         if (socialPlatformFilter === 'x') {
@@ -1108,14 +1426,14 @@
           list = list.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderCelebrityCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到领袖观点</div>';
+        container.innerHTML = list.length > 0 ? list.map(renderCelebrityCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.celebNoMatch}</div>`;
       } else if (tab === 'tools') {
         let list = filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []);
         if (toolScenarioFilter !== 'all') {
           list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-4">未找到该分类落地工具</div>';
+        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-4">${t.toolsNoMatch}</div>`;
       } else if (tab === 'videos') {
         let list = filterList(cachedData.grouped?.videos || cachedData.videos || cachedData.video_prompts || []);
         if (videoTypeFilter === 'prompt') {
@@ -1124,7 +1442,7 @@
           list = list.filter(it => !it.is_prompt);
         }
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : '<div class="text-slate-500 text-center py-12 col-span-3">未找到视频演示</div>';
+        container.innerHTML = list.length > 0 ? list.map(renderVideoOrPromptCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.videosNoMatch}</div>`;
       }
     }
 
@@ -1168,7 +1486,7 @@
 
       if (!embedUrl) return;
       iframe.src = embedUrl + "?autoplay=1";
-      titleEl.textContent = title || "AI 视频演示";
+      titleEl.textContent = title || I18N[currentLang].modalVideoTitle;
       modal.classList.remove('hidden');
     }
 

@@ -62,10 +62,10 @@ def extract_top_three(items: list) -> list:
         top.append({
             "badge_zh": "⚡ 今日头条",
             "badge_en": "⚡ Top Story",
-            "title_zh": it.get("title_zh") or it["title"],
-            "title_en": it["title"],
-            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
-            "summary_en": it["content_snippet"][:80],
+            "title_zh": it.get("title_zh") or it.get("title", ""),
+            "title_en": it.get("title_en") or it.get("title", ""),
+            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
@@ -78,13 +78,19 @@ def extract_top_three(items: list) -> list:
     if celeb_items:
         it = celeb_items[0]
         author = it.get('author', '行业领袖')
+        en_quote = it.get("title_en") or it.get("content_snippet", "") or it.get("title", "")
+        # 如果 en_quote 带有 Author: 前缀，避免重复
+        if en_quote.startswith(f"{author}:"):
+            title_en = en_quote
+        else:
+            title_en = f"{author}: {en_quote}"
         top.append({
             "badge_zh": "🐦 领袖观点",
             "badge_en": "🐦 Top Voice",
-            "title_zh": f"{author}：{it.get('title_zh') or it['title']}",
-            "title_en": f"{author}: {it['title']}",
-            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
-            "summary_en": it["content_snippet"][:80],
+            "title_zh": f"{author}：{it.get('title_zh') or it.get('title', '')}",
+            "title_en": title_en,
+            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
@@ -99,10 +105,10 @@ def extract_top_three(items: list) -> list:
         top.append({
             "badge_zh": "🛠️ 爆款尝鲜",
             "badge_en": "🛠️ Try It Out",
-            "title_zh": it.get("title_zh") or it["title"],
-            "title_en": it["title"],
-            "summary_zh": it.get("summary_zh") or it["content_snippet"][:80],
-            "summary_en": it["content_snippet"][:80],
+            "title_zh": it.get("title_zh") or it.get("title", ""),
+            "title_en": it.get("title_en") or it.get("title", ""),
+            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
