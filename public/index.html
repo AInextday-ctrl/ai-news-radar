@@ -1078,7 +1078,7 @@
     let selectedCreator = null;
     let currentTab = 'all';
     let cachedData = null;
-    let refreshCountdown = 30;
+    let refreshCountdown = 180;
     let searchQuery = '';
     let toolScenarioFilter = 'all';
     let sideSocialFilter = 'all';
@@ -1156,10 +1156,10 @@
         adLeftDesc: "高价值极客定向",
         adRightTitle: "生态精选赞助",
         adRightDesc: "前沿生产力触达",
-        videoPlatAll: "🎬 全部精选",
-        videoPlatYtLong: "🖥️ YouTube 横屏长视频",
-        videoPlatYtShorts: "📱 YouTube Shorts 短视频",
-        videoPlatTikTok: "🎵 TikTok 爆款短视频",
+        videoPlatAll: "全部精选",
+        videoPlatYtLong: "YouTube 横屏长视频",
+        videoPlatYtShorts: "YouTube Shorts 短视频",
+        videoPlatTikTok: "TikTok 爆款短视频",
         promptCatTibo: "🌟 Tibo GPT重置",
         promptCatDeepSeek: "🧠 DeepSeek R1",
         promptCatClaude: "⚡ Claude 3.7",
@@ -1285,10 +1285,10 @@
         adLeftDesc: "High-Value Tech Reach",
         adRightTitle: "Ecosystem Sponsor",
         adRightDesc: "Next-Gen Productivity",
-        videoPlatAll: "🎬 All Curated",
-        videoPlatYtLong: "🖥️ YouTube Landscape",
-        videoPlatYtShorts: "📱 YouTube Shorts",
-        videoPlatTikTok: "🎵 TikTok Viral",
+        videoPlatAll: "All Curated",
+        videoPlatYtLong: "YouTube Landscape",
+        videoPlatYtShorts: "YouTube Shorts",
+        videoPlatTikTok: "TikTok Viral",
         promptCatTibo: "🌟 Tibo GPT Reset",
         promptCatDeepSeek: "🧠 DeepSeek R1",
         promptCatClaude: "⚡ Claude 3.7",
@@ -2282,13 +2282,25 @@
       if (!btnEl) return;
       const card = btnEl.closest('.vertical-video-card');
       if (!card) return;
-      const iframe = card.querySelector('iframe');
-      const isMuted = btnEl.getAttribute('data-muted') !== 'false';
+      const playerSlot = card.querySelector('.vertical-player-slot');
+      const iframe = playerSlot ? playerSlot.querySelector('iframe') : null;
 
+      // 如果尚未挂载播放器，点击取消静音按钮自动触发原位播放并解开静音
+      if (!iframe) {
+        const playTarget = card.querySelector('[data-embed-src]');
+        if (playTarget) {
+          const embedSrc = playTarget.getAttribute('data-embed-src');
+          const platform = playTarget.getAttribute('data-platform');
+          mountInPlaceVerticalVideo(card, embedSrc, platform);
+        }
+        return;
+      }
+
+      const isMuted = btnEl.getAttribute('data-muted') !== 'false';
       if (isMuted) {
         btnEl.setAttribute('data-muted', 'false');
         btnEl.innerHTML = '<span>🔊</span><span>声音已开</span>';
-        btnEl.className = 'px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-emerald-400/40';
+        btnEl.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-emerald-400/40 backdrop-blur-md';
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
@@ -2296,7 +2308,7 @@
       } else {
         btnEl.setAttribute('data-muted', 'true');
         btnEl.innerHTML = '<span>🔇</span><span>取消静音</span>';
-        btnEl.className = 'px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20';
+        btnEl.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md';
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
         }
@@ -2373,27 +2385,37 @@
     }
 
     // ==========================================
-    // TikTok 原位播放引擎 (In-Place Frame Playback)
+    // 9:16 竖屏短视频通用原位即开即播引擎 (In-Place Video Playback Engine)
+    // 彻底解决多 iframe 并发加载导致的风控卡顿、黑屏转圈与内存消耗
     // ==========================================
-    let activeInPlaceTikTokCard = null;
+    let activeInPlaceVideoCard = null;
 
-    function mountInPlaceTikTok(cardEl, videoId, embedUrl) {
+    function mountInPlaceVerticalVideo(cardEl, embedUrl, platform) {
       if (!cardEl) return;
-      const playerSlot = cardEl.querySelector('.tiktok-inplace-slot');
+      const playerSlot = cardEl.querySelector('.vertical-player-slot');
       if (!playerSlot) return;
 
       // 如果当前卡片已在播放，则不重复挂载
       if (playerSlot.querySelector('iframe')) return;
 
-      // 注销其他正在原位播放的卡片
-      if (activeInPlaceTikTokCard && activeInPlaceTikTokCard !== cardEl) {
-        unmountInPlaceTikTok(activeInPlaceTikTokCard);
+      // 如果有其他正在播放的短视频卡片，先优雅注销，保证同一时刻全站仅播放单个音频流
+      if (activeInPlaceVideoCard && activeInPlaceVideoCard !== cardEl) {
+        unmountInPlaceVerticalVideo(activeInPlaceVideoCard);
       }
 
-      // 创建内嵌 TikTok 播放器
+      // 创建内嵌原生播放器
       const iframe = document.createElement('iframe');
-      iframe.className = "w-full h-full absolute inset-0 z-20 bg-black";
-      iframe.src = `${embedUrl}?autoplay=1`;
+      iframe.className = "w-full h-full absolute inset-0 z-10 bg-black border-0 rounded-xl";
+      
+      const isTikTok = platform === 'tiktok' || embedUrl.includes('tiktok.com');
+      let finalSrc = embedUrl;
+      if (isTikTok) {
+        finalSrc = embedUrl + (embedUrl.includes('?') ? '&autoplay=1' : '?autoplay=1');
+      } else {
+        finalSrc = embedUrl + (embedUrl.includes('?') ? '&autoplay=1&mute=0' : '?autoplay=1&mute=0');
+      }
+      
+      iframe.src = finalSrc;
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
       iframe.setAttribute('allowfullscreen', 'true');
@@ -2402,24 +2424,42 @@
       playerSlot.appendChild(iframe);
       playerSlot.classList.remove('hidden');
 
-      // 隐藏卡片上的播放遮罩和海报微光，使 iframe 获得直接交互
-      const overlay = cardEl.querySelector('.tiktok-cover-overlay');
-      if (overlay) overlay.classList.add('opacity-0', 'pointer-events-none');
+      // 隐藏封面引导层，让 iframe 接收直接点击交互
+      const overlay = cardEl.querySelector('.vertical-cover-overlay');
+      if (overlay) {
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+      }
 
-      activeInPlaceTikTokCard = cardEl;
+      // 自动更新左上角静音按钮为“声音已开”高亮状态
+      const muteBtn = cardEl.querySelector('.video-mute-btn');
+      if (muteBtn) {
+        muteBtn.setAttribute('data-muted', 'false');
+        muteBtn.innerHTML = '<span>🔊</span><span>声音已开</span>';
+        muteBtn.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-emerald-400/40 backdrop-blur-md';
+      }
+
+      activeInPlaceVideoCard = cardEl;
     }
 
-    function unmountInPlaceTikTok(cardEl) {
+    function unmountInPlaceVerticalVideo(cardEl) {
       if (!cardEl) return;
-      const playerSlot = cardEl.querySelector('.tiktok-inplace-slot');
+      const playerSlot = cardEl.querySelector('.vertical-player-slot');
       if (playerSlot) {
         playerSlot.innerHTML = '';
         playerSlot.classList.add('hidden');
       }
-      const overlay = cardEl.querySelector('.tiktok-cover-overlay');
-      if (overlay) overlay.classList.remove('opacity-0', 'pointer-events-none');
-      if (activeInPlaceTikTokCard === cardEl) {
-        activeInPlaceTikTokCard = null;
+      const overlay = cardEl.querySelector('.vertical-cover-overlay');
+      if (overlay) {
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+      }
+      const muteBtn = cardEl.querySelector('.video-mute-btn');
+      if (muteBtn) {
+        muteBtn.setAttribute('data-muted', 'true');
+        muteBtn.innerHTML = '<span>🔇</span><span>取消静音</span>';
+        muteBtn.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md';
+      }
+      if (activeInPlaceVideoCard === cardEl) {
+        activeInPlaceVideoCard = null;
       }
     }
 
@@ -3124,19 +3164,46 @@
             </span>
           </div>
 
-          <!-- 9:16 沉浸竖屏视频播放视口 (直接内嵌可看，比例完美符合手机屏幕) -->
-          <div class="relative w-full aspect-[9/16] rounded-xl overflow-hidden bg-black shadow-inner my-1 group/player" style="background-image: url('${item.image_url || ''}'); background-size: cover; background-position: center;">
-            <!-- 真实播放器 iframe (懒加载) -->
-            <iframe src="${embedSrc}" class="w-full h-full absolute inset-0 border-0 rounded-xl z-10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+          <!-- 9:16 沉浸竖屏视频播放视口 (首屏海报秒开，点击原位即播，绝不卡死/打扰) -->
+          <div class="relative w-full aspect-[9/16] rounded-xl overflow-hidden bg-black shadow-inner my-1 group/player cursor-pointer select-none"
+               data-embed-src="${embedSrc}"
+               data-platform="${platformType}"
+               onclick="mountInPlaceVerticalVideo(this.closest('.vertical-video-card'), '${embedSrc}', '${platformType}')">
+            
+            <!-- 原生海报封面 -->
+            <img src="${item.image_url || ''}" class="absolute inset-0 w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-500 ease-out" loading="lazy" alt="${title}">
 
-            <!-- 浮动操作栏：左侧取消静音按钮 + 右侧全屏放大按钮 -->
-            <div class="absolute top-2.5 inset-x-2.5 z-20 flex items-center justify-between pointer-events-none">
-              <button type="button" onclick="event.stopPropagation(); toggleVideoCardMute(this)" data-muted="true" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="点击取消静音 / 开启声音">
-                <span>🔇</span><span>取消静音</span>
-              </button>
-              <button type="button" onclick="event.stopPropagation(); openVideoModal('${modalEmbedUrl}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${jumpUrl}')" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="单击全屏放大">
-                <span>⛶</span><span>全屏放大</span>
-              </button>
+            <!-- 原位播放器动态挂载槽 (点击后注入 iframe，平时不发送并发请求，彻底杜绝 TikTok 反爬风控与加载卡死) -->
+            <div class="vertical-player-slot hidden absolute inset-0 w-full h-full z-10 bg-black"></div>
+
+            <!-- 卡片封面操作引导层 (点击播放后自动隐去) -->
+            <div class="vertical-cover-overlay absolute inset-0 w-full h-full z-20 flex flex-col justify-between p-3 bg-gradient-to-b from-black/60 via-transparent to-black/80 transition-opacity duration-300">
+              <!-- 浮动控制栏：左侧取消静音 + 右侧全屏放大 -->
+              <div class="flex items-center justify-between w-full pointer-events-none">
+                <button type="button" onclick="event.stopPropagation(); toggleVideoCardMute(this)" data-muted="true" class="pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="点击取消静音并播放">
+                  <span>🔇</span><span>取消静音</span>
+                </button>
+                <button type="button" onclick="event.stopPropagation(); openVideoModal('${modalEmbedUrl}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${jumpUrl}')" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="单击全屏放大">
+                  <span>⛶</span><span>全屏放大</span>
+                </button>
+              </div>
+
+              <!-- 中心播放按钮与引导 -->
+              <div class="flex-1 flex flex-col items-center justify-center space-y-2 pointer-events-none">
+                <button type="button" class="play-inplace-btn w-14 h-14 rounded-full ${isTikTok ? 'bg-gradient-to-tr from-rose-600 to-pink-500 group-hover/player:from-rose-500 group-hover/player:to-pink-400' : 'bg-red-600 group-hover/player:bg-red-500'} text-white flex items-center justify-center text-xl pl-1 shadow-2xl border-2 border-white/30 group-hover/player:scale-110 transition-all duration-300">
+                  ▶
+                </button>
+                <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold border border-white/20 shadow-md">
+                  点击原位即开即看
+                </span>
+              </div>
+
+              <!-- 底部时长胶囊 -->
+              <div class="flex items-center justify-end pointer-events-none">
+                <span class="px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-slate-200 text-[10px] font-mono border border-white/10 font-medium">
+                  ${duration}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -3812,8 +3879,15 @@
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
         cachedData = data;
+
+        // 核心防打扰：如果当前在视频专区且为定时后台轮询，仅静默更新缓存，绝不粗暴清空 DOM 重绘视频卡片
+        if (currentTab === 'videos' && !isManual) {
+          refreshCountdown = 180;
+          return;
+        }
+
         renderUI(data);
-        refreshCountdown = 30;
+        refreshCountdown = 180;
       } catch (err) {
         console.error("加载数据失败:", err);
       } finally {
