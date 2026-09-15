@@ -891,32 +891,21 @@
         <div id="videos-subfilter" class="hidden flex flex-col space-y-2 py-1">
           <!-- 第一梯队：平台与长短形态 (突出 YouTube 核心大标签，细分长短视频) -->
           <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5">
-            <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30 transition-all flex items-center space-x-1.5">
+            <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30 transition-all flex items-center space-x-1.5">
               <span>🎬</span>
               <span>全部精选</span>
             </button>
-            
-            <!-- YouTube 核心大标签聚合组 (包含深度长视频与 Shorts 短视频) -->
-            <div class="inline-flex items-center rounded-xl bg-red-600/10 dark:bg-red-950/40 p-0.5 border border-red-500/30 shrink-0">
-              <button onclick="filterVideoPlatform('youtube')" id="video-plat-youtube" class="video-plat-btn px-2.5 py-1 rounded-lg text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-500/20 transition-all flex items-center space-x-1" title="查看所有 YouTube 视频">
-                <span>▶️</span>
-                <span>YouTube 专区</span>
-              </button>
-              <div class="h-3.5 w-px bg-red-500/30 mx-0.5"></div>
-              <button onclick="filterVideoPlatform('youtube-long')" id="video-plat-youtube-long" class="video-plat-btn px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-500/10 transition-all flex items-center space-x-1" title="深度系统长视频">
-                <span>🖥️</span>
-                <span>深度长视频</span>
-              </button>
-              <button onclick="filterVideoPlatform('youtube-shorts')" id="video-plat-youtube-shorts" class="video-plat-btn px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-500/10 transition-all flex items-center space-x-1" title="Shorts 竖屏精选短视频">
-                <span>📱</span>
-                <span>Shorts 短视频</span>
-              </button>
-            </div>
-
-            <!-- TikTok 爆款 -->
-            <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5">
+            <button onclick="filterVideoPlatform('youtube-long')" id="video-plat-yt-long" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="YouTube 16:9 深度系统长视频">
+              <span>🖥️</span>
+              <span>YouTube 横屏长视频</span>
+            </button>
+            <button onclick="filterVideoPlatform('youtube-shorts')" id="video-plat-yt-shorts" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="YouTube 9:16 竖屏精选短视频">
+              <span>📱</span>
+              <span>YouTube Shorts 短视频</span>
+            </button>
+            <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="TikTok 9:16 爆款短视频">
               <span>🎵</span>
-              <span>TikTok 爆款</span>
+              <span>TikTok 爆款短视频</span>
             </button>
           </div>
 
@@ -1167,9 +1156,10 @@
         adLeftDesc: "高价值极客定向",
         adRightTitle: "生态精选赞助",
         adRightDesc: "前沿生产力触达",
-        videoPlatAll: "全部平台 / All",
-        videoPlatYouTube: "📺 YouTube 深度 (16:9)",
-        videoPlatTikTok: "🎵 TikTok 爆款 (9:16)",
+        videoPlatAll: "🎬 全部精选",
+        videoPlatYtLong: "🖥️ YouTube 横屏长视频",
+        videoPlatYtShorts: "📱 YouTube Shorts 短视频",
+        videoPlatTikTok: "🎵 TikTok 爆款短视频",
         promptCatTibo: "🌟 Tibo GPT重置",
         promptCatDeepSeek: "🧠 DeepSeek R1",
         promptCatClaude: "⚡ Claude 3.7",
@@ -1295,9 +1285,10 @@
         adLeftDesc: "High-Value Tech Reach",
         adRightTitle: "Ecosystem Sponsor",
         adRightDesc: "Next-Gen Productivity",
-        videoPlatAll: "All Platforms",
-        videoPlatYouTube: "📺 YouTube (16:9)",
-        videoPlatTikTok: "🎵 TikTok Viral (9:16)",
+        videoPlatAll: "🎬 All Curated",
+        videoPlatYtLong: "🖥️ YouTube Landscape",
+        videoPlatYtShorts: "📱 YouTube Shorts",
+        videoPlatTikTok: "🎵 TikTok Viral",
         promptCatTibo: "🌟 Tibo GPT Reset",
         promptCatDeepSeek: "🧠 DeepSeek R1",
         promptCatClaude: "⚡ Claude 3.7",
@@ -1949,11 +1940,13 @@
 
       // 视频平台分栏与子分类按钮文本更新
       const vpAll = document.getElementById('video-plat-all');
-      if (vpAll) vpAll.textContent = t.videoPlatAll || '全部平台 / All';
-      const vpYt = document.getElementById('video-plat-youtube');
-      if (vpYt) vpYt.textContent = t.videoPlatYouTube || '📺 YouTube (16:9)';
+      if (vpAll) vpAll.innerHTML = `<span>🎬</span><span>${t.videoPlatAll || '全部精选'}</span>`;
+      const vpYtLong = document.getElementById('video-plat-yt-long');
+      if (vpYtLong) vpYtLong.innerHTML = `<span>🖥️</span><span>${t.videoPlatYtLong || 'YouTube 横屏长视频'}</span>`;
+      const vpYtShorts = document.getElementById('video-plat-yt-shorts');
+      if (vpYtShorts) vpYtShorts.innerHTML = `<span>📱</span><span>${t.videoPlatYtShorts || 'YouTube Shorts 短视频'}</span>`;
       const vpTk = document.getElementById('video-plat-tiktok');
-      if (vpTk) vpTk.textContent = t.videoPlatTikTok || '🎵 TikTok (9:16)';
+      if (vpTk) vpTk.innerHTML = `<span>🎵</span><span>${t.videoPlatTikTok || 'TikTok 爆款短视频'}</span>`;
 
       const vsAll = document.getElementById('video-sub-all');
       if (vsAll) vsAll.textContent = t.videoSubAll;
@@ -2253,37 +2246,60 @@
 
     let videoPlatformFilter = 'all';
 
-    // 专栏广场：实战视频平台分栏筛选 (全部 / YouTube专区 / YouTube长视频 / YouTube Shorts / TikTok)
+    // 专栏广场：实战视频平台分栏筛选 (全部精选 / YouTube横屏 / YouTube Shorts / TikTok)
     function filterVideoPlatform(plat) {
       videoPlatformFilter = plat;
       const bAll = document.getElementById('video-plat-all');
-      const bYt = document.getElementById('video-plat-youtube');
-      const bYtLong = document.getElementById('video-plat-youtube-long');
-      const bYtShorts = document.getElementById('video-plat-youtube-shorts');
+      const bYtLong = document.getElementById('video-plat-yt-long');
+      const bYtShorts = document.getElementById('video-plat-yt-shorts');
       const bTt = document.getElementById('video-plat-tiktok');
 
-      // 默认基础样式还原
-      if (bAll) bAll.className = "video-plat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5";
-      if (bYt) bYt.className = "video-plat-btn px-2.5 py-1 rounded-lg text-xs font-bold text-red-600 dark:text-red-400 hover:bg-red-500/20 transition-all flex items-center space-x-1";
-      if (bYtLong) bYtLong.className = "video-plat-btn px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-500/10 transition-all flex items-center space-x-1";
-      if (bYtShorts) bYtShorts.className = "video-plat-btn px-2.5 py-1 rounded-lg text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-500/10 transition-all flex items-center space-x-1";
-      if (bTt) bTt.className = "video-plat-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5";
+      const normalClass = "video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5";
+
+      if (bAll) bAll.className = normalClass;
+      if (bYtLong) bYtLong.className = normalClass;
+      if (bYtShorts) bYtShorts.className = normalClass;
+      if (bTt) bTt.className = normalClass;
 
       // 激活态赋能
       if (plat === 'all' && bAll) {
-        bAll.className = "video-plat-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30 transition-all flex items-center space-x-1.5";
-      } else if (plat === 'youtube' && bYt) {
-        bYt.className = "video-plat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-red-600 text-white shadow-sm shadow-red-600/30 transition-all flex items-center space-x-1";
+        bAll.className = "video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30 transition-all flex items-center space-x-1.5";
       } else if (plat === 'youtube-long' && bYtLong) {
-        bYtLong.className = "video-plat-btn active px-2.5 py-1 rounded-lg text-[11px] font-bold bg-red-600 text-white shadow-sm shadow-red-600/30 transition-all flex items-center space-x-1";
+        bYtLong.className = "video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-sm shadow-red-600/30 transition-all flex items-center space-x-1.5";
       } else if (plat === 'youtube-shorts' && bYtShorts) {
-        bYtShorts.className = "video-plat-btn active px-2.5 py-1 rounded-lg text-[11px] font-bold bg-red-600 text-white shadow-sm shadow-red-600/30 transition-all flex items-center space-x-1";
+        bYtShorts.className = "video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-red-600 text-white shadow-sm shadow-red-600/30 transition-all flex items-center space-x-1.5";
       } else if (plat === 'tiktok' && bTt) {
-        bTt.className = "video-plat-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-slate-900 to-black text-rose-300 border border-rose-500/60 shadow-sm shadow-rose-500/30 shrink-0 transition-all flex items-center space-x-1.5";
+        bTt.className = "video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-gradient-to-r from-slate-900 to-black text-rose-300 border border-rose-500/60 shadow-sm shadow-rose-500/30 shrink-0 transition-all flex items-center space-x-1.5";
       }
 
       if (currentTab === 'videos') {
         renderCategoryView('videos');
+      }
+    }
+
+    // 切换短视频静音 / 取消静音
+    function toggleVideoCardMute(btnEl) {
+      if (!btnEl) return;
+      const card = btnEl.closest('.vertical-video-card');
+      if (!card) return;
+      const iframe = card.querySelector('iframe');
+      const isMuted = btnEl.getAttribute('data-muted') !== 'false';
+
+      if (isMuted) {
+        btnEl.setAttribute('data-muted', 'false');
+        btnEl.innerHTML = '<span>🔊</span><span>声音已开</span>';
+        btnEl.className = 'px-2.5 py-1 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-emerald-400/40';
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+          iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'setVolume', args: [100] }), '*');
+        }
+      } else {
+        btnEl.setAttribute('data-muted', 'true');
+        btnEl.innerHTML = '<span>🔇</span><span>取消静音</span>';
+        btnEl.className = 'px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20';
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+        }
       }
     }
 
@@ -3078,138 +3094,70 @@
     // ==========================================
     function renderVerticalVideoCard(item) {
       const t = I18N[currentLang];
-      const title = item.title_zh || item.title;
+      const title = item.title_zh || item.title || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
+      const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com')) || (item.url && item.url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'shorts';
-      const cleanSource = item.author || item.source || "";
+      const cleanSource = item.author || item.source || (isTikTok ? "TikTok Creator" : "YouTube Creator");
       const duration = item.duration || item.metrics?.duration || "⏱️ 00:45";
       const views = item.metrics?.views || "🔥 爆款热播";
-      const jumpUrl = item.url || item.link || item.embed_url;
+      const jumpUrl = item.url || item.link || item.embed_url || "";
+      const embedSrc = isTikTok 
+        ? (item.embed_url || `https://www.tiktok.com/embed/v2/${item.video_id}`)
+        : `https://www.youtube-nocookie.com/embed/${item.video_id}?enablejsapi=1&autoplay=0&mute=1&playsinline=1&rel=0&modestbranding=1`;
+      const modalEmbedUrl = isTikTok 
+        ? (item.embed_url || `https://www.tiktok.com/embed/v2/${item.video_id}`)
+        : `https://www.youtube.com/embed/${item.video_id}?autoplay=1&mute=0`;
 
-      if (isTikTok) {
-        return `
-          <article class="vertical-video-card group relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-black border border-slate-700/60 hover:border-rose-500/80 shadow-lg hover:shadow-2xl hover:shadow-rose-500/20 transition-all duration-300 flex flex-col justify-between cursor-pointer select-none"
-            onclick="mountInPlaceTikTok(this, '${item.video_id || ''}', '${item.embed_url}')">
-            
-            <!-- 背景海报图 -->
-            <img src="${item.image_url}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
-
-            <!-- TikTok 原位播放器挂载槽 (In-Place Frame Player) -->
-            <div class="tiktok-inplace-slot hidden absolute inset-0 w-full h-full z-20 bg-black"></div>
-
-            <!-- 卡片封面与操作层 (原位播放后隐藏，让位给原生交互) -->
-            <div class="tiktok-cover-overlay absolute inset-0 w-full h-full z-10 flex flex-col justify-between transition-opacity duration-200">
-              <!-- 顶部信息栏：平台发光胶囊 + 全屏扩展按钮 + 时长 -->
-              <div class="p-2.5 flex items-center justify-between w-full bg-gradient-to-b from-black/85 via-black/40 to-transparent">
-                <span class="px-2 py-0.5 rounded-full bg-black/90 text-rose-300 border border-rose-500/50 text-[10px] font-black shadow-md flex items-center space-x-1">
-                  <span class="text-rose-400">🎵</span><span>TikTok</span>
-                </span>
-                <div class="flex items-center space-x-1.5">
-                  <button type="button" onclick="event.stopPropagation(); openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', 'tiktok', '${jumpUrl}')" class="px-2 py-0.5 rounded-full bg-rose-600/90 hover:bg-rose-500 text-white text-[10px] font-bold border border-rose-400/40 transition-all flex items-center space-x-1 shadow-md" title="扩展全屏窗口">
-                    <span>⛶</span><span>全屏</span>
-                  </button>
-                  <span class="px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-slate-200 text-[10px] font-mono border border-white/10 font-medium">
-                    ${duration}
-                  </span>
-                </div>
-              </div>
-
-              <!-- 中间：点击卡片原位播放引导 -->
-              <div class="flex-1 flex flex-col items-center justify-center space-y-1.5 pointer-events-none">
-                <div class="w-12 h-12 rounded-full bg-rose-600/95 text-white flex items-center justify-center text-lg pl-0.5 shadow-2xl group-hover:scale-110 transition-all duration-300 border border-white/30">
-                  ▶
-                </div>
-                <span class="px-2.5 py-0.5 rounded-full bg-black/75 backdrop-blur-md text-[10px] text-rose-200 font-bold border border-rose-500/30 opacity-85 group-hover:opacity-100 transition-opacity">
-                  点击原位播放
-                </span>
-              </div>
-
-              <!-- 底部沉浸遮罩：作者头像 + 标题 + 原站快捷键 -->
-              <div class="p-3 pt-8 bg-gradient-to-t from-black via-black/85 to-transparent flex flex-col space-y-2">
-                <div class="flex items-center justify-between">
-                  <div class="flex items-center space-x-1.5 truncate max-w-[130px]">
-                    <span class="text-xs font-bold text-white truncate notranslate">${cleanSource}</span>
-                  </div>
-                  <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="px-2 py-0.5 rounded-full bg-white/15 hover:bg-rose-600 text-white text-[9px] font-medium border border-white/20 transition-all shrink-0 notranslate flex items-center space-x-0.5" title="在 TikTok 原站直接打开">
-                    <span>原站 ↗</span>
-                  </a>
-                </div>
-
-                <h4 class="font-bold text-xs text-white group-hover:text-rose-300 transition-colors line-clamp-2 leading-snug drop-shadow-sm">
-                  ${title}
-                </h4>
-
-                <div class="flex items-center justify-between text-[10px] text-slate-300 pt-0.5">
-                  <span class="font-mono text-amber-300/90 text-[10px]">${views}</span>
-                  <span class="font-mono text-[9px] text-slate-400" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
-                </div>
-              </div>
-            </div>
-          </article>
-        `;
-      }
-
-      // YouTube Shorts 卡片：悬停静音预览，单击直达原视频，并提供显式[▶ 站内]按钮
       return `
-        <article class="vertical-video-card group relative w-full aspect-[9/16] rounded-2xl overflow-hidden bg-slate-950 border border-slate-700/60 hover:border-red-500/80 shadow-lg hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-300 flex flex-col justify-between cursor-pointer select-none"
-          onmouseenter="startVideoHoverPreview(this, '${item.video_id || ''}', 'shorts')"
-          onmouseleave="stopVideoHoverPreview(this)"
-          onclick="window.open('${jumpUrl}', '_blank')">
-          
-          <!-- 背景海报图 -->
-          <img src="${item.image_url}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" loading="lazy">
-
-          <!-- 视频悬停静音预览挂载层 (Hover Preview Layer) -->
-          <div class="video-preview-slot absolute inset-0 w-full h-full pointer-events-none overflow-hidden"></div>
-
-          <!-- 静音预览中发光提示胶囊 -->
-          <div class="preview-indicator hidden absolute top-10 left-1/2 -translate-x-1/2 z-30 px-2.5 py-0.5 rounded-full bg-emerald-500/90 backdrop-blur-md text-white font-bold text-[9px] shadow-lg animate-pulse whitespace-nowrap flex items-center space-x-1 pointer-events-none">
-            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-            <span>静音预览中 · 单击直达原视频</span>
-          </div>
-
-          <!-- 顶部信息栏：平台发光胶囊 + 时长 -->
-          <div class="relative z-20 p-2.5 flex items-center justify-between w-full bg-gradient-to-b from-black/80 via-black/40 to-transparent">
-            <span class="px-2 py-0.5 rounded-full bg-red-600/95 text-white border border-red-400/50 text-[10px] font-black shadow-md flex items-center space-x-1">
-              <span>🔴</span><span>Shorts</span>
-            </span>
-            <span class="px-2 py-0.5 rounded-full bg-black/75 backdrop-blur-sm text-slate-200 text-[10px] font-mono border border-white/10 font-medium">
-              ${duration}
+        <article class="vertical-video-card group relative flex flex-col justify-between glass-card rounded-2xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 dark:hover:border-rose-500/50 shadow-md hover:shadow-xl transition-all duration-300 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md">
+          <!-- 顶部创作者与平台标头 -->
+          <div class="flex items-center justify-between pb-2">
+            <div class="flex items-center space-x-2 truncate max-w-[170px]">
+              <div class="w-6 h-6 rounded-full ${isTikTok ? 'bg-gradient-to-tr from-rose-600 to-pink-500' : 'bg-red-600'} text-white flex items-center justify-center text-[10px] font-black shrink-0 shadow-sm">
+                ${isTikTok ? 'TT' : 'YT'}
+              </div>
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200 truncate notranslate" title="${cleanSource}">${cleanSource}</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full ${isTikTok ? 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30' : 'bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/30'} border text-[10px] font-black shrink-0 flex items-center space-x-1">
+              <span>${isTikTok ? '🎵 TikTok' : '🔴 Shorts'}</span>
             </span>
           </div>
 
-          <!-- 中间：悬浮播放按钮微光 -->
-          <div class="relative z-20 flex-1 flex items-center justify-center pointer-events-none">
-            <div class="w-12 h-12 rounded-full bg-red-600/90 text-white flex items-center justify-center text-lg pl-0.5 shadow-2xl opacity-80 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300 border border-white/20">
-              ▶
+          <!-- 9:16 沉浸竖屏视频播放视口 (直接内嵌可看，比例完美符合手机屏幕) -->
+          <div class="relative w-full aspect-[9/16] rounded-xl overflow-hidden bg-black shadow-inner my-1 group/player" style="background-image: url('${item.image_url || ''}'); background-size: cover; background-position: center;">
+            <!-- 真实播放器 iframe (懒加载) -->
+            <iframe src="${embedSrc}" class="w-full h-full absolute inset-0 border-0 rounded-xl z-10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+
+            <!-- 浮动操作栏：左侧取消静音按钮 + 右侧全屏放大按钮 -->
+            <div class="absolute top-2.5 inset-x-2.5 z-20 flex items-center justify-between pointer-events-none">
+              <button type="button" onclick="event.stopPropagation(); toggleVideoCardMute(this)" data-muted="true" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="点击取消静音 / 开启声音">
+                <span>🔇</span><span>取消静音</span>
+              </button>
+              <button type="button" onclick="event.stopPropagation(); openVideoModal('${modalEmbedUrl}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${jumpUrl}')" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="单击全屏放大">
+                <span>⛶</span><span>全屏放大</span>
+              </button>
             </div>
           </div>
 
-          <!-- 底部沉浸渐变遮罩：作者头像 + 标题 + 站内与原站快捷键 -->
-          <div class="relative z-20 p-3 pt-8 bg-gradient-to-t from-black via-black/85 to-transparent flex flex-col space-y-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center space-x-1.5 truncate max-w-[120px]">
-                <span class="text-xs font-bold text-white truncate notranslate">${cleanSource}</span>
-              </div>
-              <div class="flex items-center space-x-1">
-                <button type="button" onclick="event.stopPropagation(); openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', 'shorts', '${jumpUrl}')" class="px-2 py-0.5 rounded-full bg-white/20 hover:bg-red-600 text-white text-[9px] font-bold border border-white/20 transition-all shrink-0 flex items-center space-x-0.5" title="在站内弹窗播放">
-                  <span>▶ 站内</span>
-                </button>
-                <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="px-2 py-0.5 rounded-full bg-red-600/80 hover:bg-red-600 text-white text-[9px] font-medium border border-white/20 transition-all shrink-0 notranslate flex items-center space-x-0.5" title="在 YouTube 原站直接打开">
-                  <span>原站 ↗</span>
-                </a>
-              </div>
-            </div>
-
-            <h4 class="font-bold text-xs text-white group-hover:text-red-300 transition-colors line-clamp-2 leading-snug drop-shadow-sm">
+          <!-- 底部详情与直达原视频链接 -->
+          <div class="pt-3 flex flex-col space-y-2">
+            <!-- 标题 (点击亦可前往原视频) -->
+            <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug hover:text-rose-500 dark:hover:text-rose-400 transition-colors cursor-pointer" onclick="window.open('${jumpUrl}', '_blank')" title="${title}">
               ${title}
             </h4>
 
-            <div class="flex items-center justify-between text-[10px] text-slate-300 pt-0.5">
-              <span class="font-mono text-amber-300/90 text-[10px]">${views}</span>
-              <span class="font-mono text-[9px] text-slate-400" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
+            <!-- 播放量与发布时间 -->
+            <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
+              <span class="text-amber-500 dark:text-amber-400 font-bold">${views}</span>
+              <span title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
             </div>
+
+            <!-- 专门的原视频直达大按钮 (醒目快捷) -->
+            <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl ${isTikTok ? 'bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 shadow-rose-600/20 hover:shadow-rose-600/40' : 'bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 shadow-red-600/20 hover:shadow-red-600/40'} text-white font-bold text-xs flex items-center justify-center space-x-1.5 shadow-md transition-all duration-200 mt-1">
+              <span>${isTikTok ? '🎵 访问 TikTok 原视频' : '🔴 访问 YouTube Shorts 原视频'}</span>
+              <span>↗</span>
+            </a>
           </div>
         </article>
       `;
@@ -3722,9 +3670,9 @@
                   <span class="text-rose-500">${videoPlatformFilter === 'tiktok' ? '🎵' : '🔴'}</span>
                   <span>${videoPlatformFilter === 'tiktok' ? (isZh ? 'TikTok 爆款竖屏专区' : 'TikTok Viral Feed') : (isZh ? 'YouTube Shorts 竖屏精选' : 'YouTube Shorts Feed')}</span>
                 </h3>
-                <span class="text-xs text-slate-400 font-mono">${list.length} 个视频 · 悬停直接预览</span>
+                <span class="text-xs text-slate-400 font-mono">${list.length} 个视频 · 原位即开即看</span>
               </div>
-              <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 ${list.map(renderVerticalVideoCard).join('')}
               </div>
             </div>
@@ -3792,9 +3740,9 @@
                     </h3>
                     <span class="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 text-[10px] font-bold border border-rose-500/20">沉浸视界</span>
                   </div>
-                  <span class="text-xs text-slate-400 font-mono">${verticalCards.length} 条 · 悬停直接预览</span>
+                  <span class="text-xs text-slate-400 font-mono">${verticalCards.length} 条 · 原位即开即看</span>
                 </div>
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 sm:gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   ${verticalCards.map(renderVerticalVideoCard).join('')}
                 </div>
               </div>
