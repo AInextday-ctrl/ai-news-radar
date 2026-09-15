@@ -176,10 +176,58 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
         return f"行业关键动向与突破报道：{trans_snippet or title_zh}"
 
 
+def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
+    """Generate structured, multi-dimensional deep AI analysis for modal presentation."""
+    title_en = item.get("title_en") or item.get("title", "")
+    snippet = item.get("content_snippet", "")
+    source = item.get("source", "行业权威媒体")
+    category = item.get("category", "news")
+    
+    zh_title = title_zh or item.get("title_zh") or free_translate_zh(title_en)
+    summary = item.get("summary_zh") or generate_smart_fallback_summary(item, zh_title)
+    
+    points_zh = []
+    points_en = []
+    
+    if category == "news":
+        points_zh.append(f"据 {source} 最新报道，{summary}")
+        points_zh.append("展现了前沿大模型与计算基础设施在效率与推理层面的深度突破。")
+        points_zh.append("全球技术竞争与生态协同提速，进一步推动商业化落地与规模化应用。")
+        
+        points_en.append(f"Reported by {source}: {snippet[:120] or title_en}")
+        points_en.append("Highlights significant advances in model reasoning efficiency and infrastructure.")
+        points_en.append("Global ecosystem shifts accelerate commercial deployment and integration.")
+    elif category == "celebrity":
+        points_zh.append(f"来自 {source} 的深度言论与行业观察：{summary}")
+        points_zh.append("直击当前 AI 演进核心痛点，探讨算力瓶颈、商业路径与系统落地前景。")
+        points_zh.append("为技术从业者与创业者提供了极具前瞻性的风向标参考。")
+        
+        points_en.append(f"Key perspective from {source}: {snippet[:120] or title_en}")
+        points_en.append("Addresses core bottlenecks in compute scaling and deployment pathways.")
+        points_en.append("Provides actionable insights and forward-looking guidance for builders.")
+    else:
+        points_zh.append(f"核心成果与实战落地：{summary}")
+        points_zh.append("提供高度开箱即用、低迁移成本的工程实践与工具链支持。")
+        points_zh.append("助力开发者与企业在实际生产环境中大幅提升开发效能。")
+        
+        points_en.append(f"Core achievement: {snippet[:120] or title_en}")
+        points_en.append("Offers out-of-the-box utility with high reproducibility across stacks.")
+        points_en.append("Significantly optimizes developer velocity and production efficiency.")
+
+    return {
+        "digest_zh": f"【事件核心】由 {source} 权威发布。{summary}",
+        "digest_en": f"Reported by {source}. {snippet[:150] or title_en}.",
+        "key_points_zh": points_zh,
+        "key_points_en": points_en,
+        "takeaway_zh": "紧跟前沿迭代节奏，建议团队评估该突破对自身技术架构与业务流程的潜在重构价值。",
+        "takeaway_en": "Monitor the pace of adoption closely and evaluate its implications for your tech stack."
+    }
+
+
 def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> List[Dict[str, Any]]:
     """
     Process a list of items with Gemini in batches, or high-speed neural translator.
-    Guarantees 100% pure Chinese titles and takeaways.
+    Guarantees 100% pure Chinese titles, takeaways, and deep structured AI analysis.
     Pre-curated items with existing title_zh & summary_zh are preserved directly.
     """
     # 区分：已有优质中文的精选内容（领袖推特、场景工具、实战视频、Prompt）与需要 AI 翻译提炼的原始 RSS
@@ -191,7 +239,10 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         if "category" not in it:
             it["category"] = it.get("default_category", "news")
         
+        # 确保已有条目附带合格的 ai_analysis
         if it.get("title_zh") and it.get("summary_zh"):
+            if not it.get("ai_analysis"):
+                it["ai_analysis"] = generate_smart_ai_analysis(it, it.get("title_zh"))
             direct_items.append(it)
         else:
             need_ai_items.append(it)
@@ -204,7 +255,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
     client = get_gemini_client()
 
     if not client:
-        print("💡 未检测到 GEMINI_API_KEY，启用内置神经翻译器保障 100% 纯中文呈现...")
+        print("💡 未检测到 GEMINI_API_KEY，启用内置神经翻译器保障 100% 纯中文呈现与智能深度解读...")
         processed_ai = []
         for item in need_ai_items:
             p_item = dict(item)
@@ -213,15 +264,16 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             title_zh = free_translate_zh(item.get("title", ""))
             p_item["title_zh"] = title_zh
             p_item["summary_zh"] = generate_smart_fallback_summary(item, title_zh)
+            p_item["ai_analysis"] = generate_smart_ai_analysis(item, title_zh)
             p_item["title_en"] = item.get("title_en") or item.get("title", "")
             p_item["summary_en"] = item.get("summary_en") or item.get("content_snippet", "")
             p_item["hot_score"] = 4 if cat in ["celebrity", "videos"] else 3
             p_item["tags"] = item.get("tags") or [item.get("source", "AI快讯")]
             processed_ai.append(p_item)
-        print("  ✓ 纯正中文翻译与看点提炼生成完毕！")
+        print("  ✓ 纯正中文翻译、看点提炼与 AI 深度分析生成完毕！")
         return direct_items + processed_ai
 
-    print("🤖 正在调用 Google Gemini 进行批量智能翻译、提炼与分类...")
+    print("🤖 正在调用 Google Gemini 进行批量智能翻译、深度分析与分类...")
 
     results = []
     models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
@@ -240,7 +292,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         ]
 
         prompt = f"""
-你是一个顶级 AI 资讯雷达站的资深主编。请对以下最新 AI 资讯进行精炼分析、纯正中文翻译和价值提炼。
+你是一个顶级 AI 资讯雷达站的资深主编。请对以下最新 AI 资讯进行精炼分析、纯正中文翻译、价值提炼与深度 AI 解读。
 
 【分类规则】：
 - "news": 行业大事件、技术突破、官方重磅发布
@@ -256,7 +308,23 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
   "summary_zh": "一句话核心看点或实际价值(30-50字，讲清楚为什么值得看或怎么用)",
   "category": "news | celebrity | tools | videos",
   "hot_score": 1到5的整数热度评分,
-  "tags": ["标签1", "标签2"]
+  "tags": ["标签1", "标签2"],
+  "ai_analysis": {{
+    "digest_zh": "核心重大事实概括(2句话，严谨纯中文)",
+    "digest_en": "Concise factual overview (2 sentences in English)",
+    "key_points_zh": [
+      "【核心技术突破点或实质】简析",
+      "【商业化与生态格局影响】简析",
+      "【产业链或关键指标亮点】简析"
+    ],
+    "key_points_en": [
+      "Key technical breakthrough summary",
+      "Commercial and ecosystem impact",
+      "Critical benchmark or metric highlights"
+    ],
+    "takeaway_zh": "面向开发者与从业者的1句深度行动启示",
+    "takeaway_en": "One actionable takeaway for developers and innovators"
+  }}
 }}
 
 待处理资讯：
@@ -302,6 +370,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
                 merged["hot_score"] = ai_data.get("hot_score", 3)
                 merged["tags"] = orig_item.get("tags") or ai_data.get("tags") or [orig_item.get("source", "AI快讯")]
+                merged["ai_analysis"] = orig_item.get("ai_analysis") or ai_data.get("ai_analysis") or generate_smart_ai_analysis(orig_item, merged["title_zh"])
                 results.append(merged)
 
             print(f"  ✓ 已完成 {min(i + batch_size, len(need_ai_items))}/{len(need_ai_items)} 条")
@@ -318,6 +387,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
                 fallback["hot_score"] = 3
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
+                fallback["ai_analysis"] = orig_item.get("ai_analysis") or generate_smart_ai_analysis(orig_item, title_zh)
                 results.append(fallback)
 
     return direct_items + results

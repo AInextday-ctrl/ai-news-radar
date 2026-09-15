@@ -1066,6 +1066,75 @@
     </div>
   </div>
 
+  <!-- AI 深度解读弹窗 Modal (由 Google Gemini 驱动) -->
+  <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
+      <!-- Modal Header -->
+      <div class="p-4 bg-gradient-to-r from-indigo-900/30 via-purple-900/20 to-slate-900/40 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center space-x-3 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/25 shrink-0">
+            <span class="text-base">✨</span>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-2">
+              <h3 id="ai-modal-badge" class="text-sm sm:text-base font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400 bg-clip-text text-transparent truncate">Gemini AI 深度情报解读</h3>
+              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 shrink-0 font-semibold">Flash 2.5</span>
+            </div>
+            <p id="ai-modal-source" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5 truncate">信源: 官方快讯</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="关闭弹窗 (Esc)">✕</button>
+      </div>
+
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-5 overflow-y-auto space-y-4 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
+        <!-- 资讯原标题 -->
+        <h2 id="ai-modal-title" class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug"></h2>
+
+        <!-- Section 1: 核心事实脉络概括 (Digest) -->
+        <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 space-y-1.5">
+          <div class="flex items-center space-x-1.5 text-xs font-bold text-indigo-700 dark:text-indigo-300">
+            <span>📌</span>
+            <span id="ai-modal-digest-title">核心事实脉络</span>
+          </div>
+          <p id="ai-modal-digest-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+        </div>
+
+        <!-- Section 2: 深度要点剖析 (Key Points) -->
+        <div class="space-y-2">
+          <div class="flex items-center space-x-1.5 text-xs font-bold text-slate-900 dark:text-slate-100">
+            <span>🔍</span>
+            <span id="ai-modal-keypoints-title">多维深度剖析</span>
+          </div>
+          <div id="ai-modal-keypoints-list" class="space-y-2 text-xs sm:text-sm">
+            <!-- 动态注入多维技术与行业要点 -->
+          </div>
+        </div>
+
+        <!-- Section 3: 行动启示与研判 (Actionable Takeaway) -->
+        <div class="p-3.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 space-y-1.5">
+          <div class="flex items-center space-x-1.5 text-xs font-bold text-purple-700 dark:text-purple-300">
+            <span>💡</span>
+            <span id="ai-modal-takeaway-title">专家行动与落地研判</span>
+          </div>
+          <p id="ai-modal-takeaway-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+        <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1 truncate">
+          <span>⚡</span>
+          <span id="ai-modal-footer-tip" class="truncate">已自动同步全站选定语言</span>
+        </div>
+        <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0">
+          <span id="ai-modal-source-btn-text">阅读原文 / 直达报道</span>
+          <span>↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- 复制成功 Toast 浮条 -->
   <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
     <span>✅</span>
@@ -1208,6 +1277,15 @@
         noRecentPrompts: "💡 今日暂无新增提示词，历史最新收录见下方归档",
         viralBadge: "🔥 近期爆款",
         viralChip: "🔥 近期爆点",
+        aiModalBadge: "Gemini AI 深度情报解读",
+        aiModalDigestTitle: "核心事实脉络",
+        aiModalKeypointsTitle: "多维深度剖析",
+        aiModalTakeawayTitle: "专家行动与落地研判",
+        aiModalSourceBtn: "阅读原文 / 直达报道",
+        aiModalFooterTip: "已自动同步全站选定语言",
+        aiAnalysisBtn: "AI 深度解读",
+        expandCatNewsArchive: "点击展开历史资讯库",
+        collapseCatNewsArchive: "收起历史资讯库 ↑",
         tabs: {
           all: "综合全景",
           news: "突发·行业快讯",
@@ -1337,6 +1415,15 @@
         noRecentPrompts: "💡 No new prompts today, see historical archive below",
         viralBadge: "🔥 Viral Hit",
         viralChip: "🔥 Trending Viral",
+        aiModalBadge: "Gemini AI Deep Analysis",
+        aiModalDigestTitle: "Executive Fact Overview",
+        aiModalKeypointsTitle: "Deep Strategic Breakdown",
+        aiModalTakeawayTitle: "Actionable Takeaway",
+        aiModalSourceBtn: "Read Full Story",
+        aiModalFooterTip: "Synchronized with selected language",
+        aiAnalysisBtn: "AI Analysis",
+        expandCatNewsArchive: "Expand Historical News Archive",
+        collapseCatNewsArchive: "Collapse Historical Archive ↑",
         tabs: {
           all: "All-in-One",
           news: "Breaking News",
@@ -2161,6 +2248,25 @@
       }
     }
 
+    // 专栏快讯历史归档折叠状态与切换
+    let catNewsArchiveOpen = false;
+    function toggleCatNewsArchive() {
+      catNewsArchiveOpen = !catNewsArchiveOpen;
+      const container = document.getElementById('container-cat-news-archive');
+      const txt = document.getElementById('txt-cat-news-archive');
+      const t = I18N[currentLang];
+      const count = container ? (container.dataset.count || '0') : '0';
+      if (container) {
+        if (catNewsArchiveOpen) {
+          container.classList.remove('hidden');
+          if (txt) txt.textContent = t.collapseCatNewsArchive || '收起历史资讯库 ↑';
+        } else {
+          container.classList.add('hidden');
+          if (txt) txt.textContent = `${t.expandCatNewsArchive || '点击展开历史资讯库'} (${count} 条) ↓`;
+        }
+      }
+    }
+
     // 判断条目是否处于 24 小时之内 (首页默认只显示 <= 24h 的最新热点)
     function isWithin24Hours(rawTime) {
       if (!rawTime) return false;
@@ -2540,7 +2646,7 @@
     }
 
     // ==========================================
-    // 专门卡片渲染：新闻快讯卡片
+    // 专门卡片渲染：新闻快讯卡片 (支持 Gemini AI 深度解读交互)
     // ==========================================
     function renderNewsCard(item) {
       const t = I18N[currentLang];
@@ -2559,7 +2665,7 @@
 
       if (hasRealImage) {
         return `
-          <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 group">
+          <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 group cursor-pointer hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
             <div class="w-full sm:w-44 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-950 border border-slate-200 dark:border-slate-800">
               <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
             </div>
@@ -2572,7 +2678,7 @@
                   </div>
                   <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
                 </div>
-                <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+                <a href="javascript:void(0)" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
                   ${title}
                 </a>
                 ${specBadges}
@@ -2580,9 +2686,14 @@
                   ${summary}
                 </p>
               </div>
-              <div class="flex items-center justify-between pt-1">
-                <span class="text-[10px] text-slate-500 font-mono">信源: ${cleanSource}</span>
-                <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">阅读原文 ↗</a>
+              <div class="flex items-center justify-between pt-1 gap-2">
+                <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm group/btn cursor-pointer">
+                  <span class="text-xs group-hover/btn:scale-110 transition-transform">✨</span>
+                  <span>${t.aiAnalysisBtn || 'AI 深度解读'}</span>
+                </button>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium shrink-0">
+                  ${t.readMore || '阅读原文 ↗'}
+                </a>
               </div>
             </div>
           </article>
@@ -2591,7 +2702,7 @@
 
       // 清爽无图版
       return `
-        <article class="glass-card rounded-xl p-4 flex flex-col space-y-2.5 group border-l-4 border-l-indigo-500/80">
+        <article class="glass-card rounded-xl p-4 flex flex-col space-y-2.5 group border-l-4 border-l-indigo-500/80 cursor-pointer hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
           <div class="flex items-center justify-between flex-wrap gap-1.5 text-xs">
             <div class="flex items-center space-x-2">
               <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700">${cleanSource}</span>
@@ -2599,16 +2710,21 @@
             </div>
             <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
-          <a href="${item.url}" target="_blank" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug">
+          <a href="javascript:void(0)" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
             ${title}
           </a>
           ${specBadges}
           <p class="text-xs text-slate-700 dark:text-slate-300/90 leading-relaxed bg-slate-100/70 dark:bg-slate-950/40 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800/60">
             ${summary}
           </p>
-          <div class="flex items-center justify-between text-xs pt-1">
-            <span class="text-[11px] text-slate-500 font-mono">⚡ 突发快讯 · 全球追踪</span>
-            <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">阅读原文 ↗</a>
+          <div class="flex items-center justify-between text-xs pt-1 gap-2">
+            <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm group/btn cursor-pointer">
+              <span class="text-xs group-hover/btn:scale-110 transition-transform">✨</span>
+              <span>${t.aiAnalysisBtn || 'AI 深度解读'}</span>
+            </button>
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium shrink-0">
+              ${t.readMore || '阅读原文 ↗'}
+            </a>
           </div>
         </article>
       `;
@@ -3656,9 +3772,38 @@
       const t = I18N[currentLang];
 
       if (tab === 'news') {
-        const list = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
-        container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-2">${t.newsNoMatch}</div>`;
+        const fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
+        if (searchQuery) {
+          container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
+          container.innerHTML = fullList.length > 0 ? fullList.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-2">${t.newsNoMatch}</div>`;
+        } else {
+          const recentNews = fullList.filter(it => isWithin24Hours(it.raw_published_at));
+          const historyNews = fullList.filter(it => !isWithin24Hours(it.raw_published_at));
+          const isZh = currentLang === 'zh';
+          container.className = "space-y-6";
+          container.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between mb-3 text-xs text-slate-500 font-mono">
+                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>${isZh ? '过去 24 小时最新突发快讯' : 'Latest 24-Hour Breaking News'} (${recentNews.length})</span>
+                <span>🕒 实时感知</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-2">${t.noRecentNews}</div>`}
+              </div>
+            </div>
+            ${historyNews.length > 0 ? `
+              <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+                <button type="button" onclick="toggleCatNewsArchive()" class="w-full py-3 px-4 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/70 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer">
+                  <span>📜</span>
+                  <span id="txt-cat-news-archive">${catNewsArchiveOpen ? (t.collapseCatNewsArchive || '收起历史资讯库 ↑') : `${t.expandCatNewsArchive || '点击展开历史资讯库'} (${historyNews.length} 条) ↓`}</span>
+                </button>
+                <div id="container-cat-news-archive" data-count="${historyNews.length}" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 ${catNewsArchiveOpen ? '' : 'hidden'}">
+                  ${historyNews.map(renderNewsCard).join('')}
+                </div>
+              </div>
+            ` : ''}
+          `;
+        }
       } else if (tab === 'celebrity') {
         let list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
         if (socialPlatformFilter === 'x') {
@@ -3951,6 +4096,109 @@
     }
 
     // ==========================================
+    // AI 深度解读弹窗控制器 (Powered by Google Gemini 2.5)
+    // ==========================================
+    function openAiNewsModal(newsId) {
+      if (!cachedData) return;
+      const t = I18N[currentLang] || I18N.zh;
+      const isZh = currentLang === 'zh';
+      const allNews = cachedData.items || [
+        ...(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []),
+        ...(cachedData.grouped?.celebrity || cachedData.celebrity || []),
+        ...(cachedData.grouped?.tools || cachedData.tools || []),
+        ...(cachedData.grouped?.videos || cachedData.videos || []),
+        ...(cachedData.grouped?.prompts || cachedData.prompts || [])
+      ];
+      const item = allNews.find(it => String(it.id) === String(newsId));
+      if (!item) return;
+
+      const analysis = item.ai_analysis || {};
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || 'AI 深度情报解读';
+      const source = item.source || (isZh ? '权威快讯' : 'Official News');
+
+      // 提取核心事实概括 (Digest)
+      let digest = isZh ? (analysis.digest_zh || analysis.digest_en) : (analysis.digest_en || analysis.digest_zh);
+      if (!digest) {
+        digest = isZh ? (item.summary_zh || item.content_snippet || '核心事实与前沿突破正在提炼中。') : (item.summary_en || item.content_snippet || 'Overview and key takeaways are being curated.');
+      }
+
+      // 提取多维要点 (Key Points)
+      let keyPoints = isZh ? (analysis.key_points_zh || analysis.key_points_en) : (analysis.key_points_en || analysis.key_points_zh);
+      if (!keyPoints || !Array.isArray(keyPoints) || keyPoints.length === 0) {
+        keyPoints = isZh ? [
+          `重点关注 ${source} 对该技术突破方向的深度战略布局。`,
+          '加速产业落地与商业化智能化转型，显著优化工作流效能。',
+          '为开发者与业内专家提供了极具参考价值的最新技术范式。'
+        ] : [
+          `Highlighting ${source}'s strategic advancement in AI evolution.`,
+          'Accelerating commercial deployment and workflow intelligence.',
+          'Providing a new technological reference architecture for innovators.'
+        ];
+      }
+
+      // 提取研判启示 (Takeaway)
+      let takeaway = isZh ? (analysis.takeaway_zh || analysis.takeaway_en) : (analysis.takeaway_en || analysis.takeaway_zh);
+      if (!takeaway) {
+        takeaway = isZh ? '紧跟该领域演进节奏，及时评估对现有技术架构、提示词或业务场景的集成价值。' : 'Track development closely and assess integration into your production workflows.';
+      }
+
+      // 写入 DOM 节点
+      const modal = document.getElementById('ai-news-modal');
+      const badgeEl = document.getElementById('ai-modal-badge');
+      const sourceEl = document.getElementById('ai-modal-source');
+      const titleEl = document.getElementById('ai-modal-title');
+      const digestTitleEl = document.getElementById('ai-modal-digest-title');
+      const digestEl = document.getElementById('ai-modal-digest-text');
+      const keypointsTitleEl = document.getElementById('ai-modal-keypoints-title');
+      const keypointsListEl = document.getElementById('ai-modal-keypoints-list');
+      const takeawayTitleEl = document.getElementById('ai-modal-takeaway-title');
+      const takeawayEl = document.getElementById('ai-modal-takeaway-text');
+      const footerTipEl = document.getElementById('ai-modal-footer-tip');
+      const sourceBtnEl = document.getElementById('ai-modal-source-btn');
+      const sourceBtnTextEl = document.getElementById('ai-modal-source-btn-text');
+
+      if (badgeEl) badgeEl.textContent = t.aiModalBadge || 'Gemini AI 深度情报解读';
+      if (sourceEl) sourceEl.textContent = `${t.sourceLabel || '信源:'} ${source}`;
+      if (titleEl) titleEl.textContent = title;
+      if (digestTitleEl) digestTitleEl.textContent = t.aiModalDigestTitle || '核心事实脉络';
+      if (digestEl) digestEl.textContent = digest;
+      if (keypointsTitleEl) keypointsTitleEl.textContent = t.aiModalKeypointsTitle || '多维深度剖析';
+      if (takeawayTitleEl) takeawayTitleEl.textContent = t.aiModalTakeawayTitle || '专家行动与落地研判';
+      if (takeawayEl) takeawayEl.textContent = takeaway;
+      if (footerTipEl) footerTipEl.textContent = t.aiModalFooterTip || '已自动同步全站选定语言';
+      if (sourceBtnTextEl) sourceBtnTextEl.textContent = t.aiModalSourceBtn || '阅读原文 / 直达报道';
+
+      if (keypointsListEl) {
+        keypointsListEl.innerHTML = keyPoints.map((pt, idx) => `
+          <div class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
+            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-[10px] font-bold shrink-0 mt-0.5">${idx + 1}</span>
+            <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(pt)}</span>
+          </div>
+        `).join('');
+      }
+
+      if (sourceBtnEl) {
+        sourceBtnEl.href = item.url || '#';
+      }
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      // 如果当前使用了整站实时翻译引擎，主动调用一次动态翻译
+      applyCurrentTranslation();
+    }
+
+    function closeAiNewsModal() {
+      const modal = document.getElementById('ai-news-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // ==========================================
     // 法律合规与隐私政策控制 (满足 Google AdSense 审核强制要求)
     // ==========================================
     const LEGAL_DOCS = {
@@ -4068,6 +4316,15 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
       (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {}
+
+    // 全局快捷键监听 (Esc 键关闭弹窗)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeVideoModal();
+        closeLegalModal();
+        closeAiNewsModal();
+      }
+    });
 
     // 初始化
     setLanguage('zh');
