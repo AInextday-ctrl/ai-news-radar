@@ -429,17 +429,47 @@
         </button>
       </div>
 
-      <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动) -->
+      <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
       <div class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
         <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
         <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
-          <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
-          <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
-          <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
-          <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
-          <option value="spanish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇪🇸 Español</option>
-          <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
-          <option value="german" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
+          <optgroup label="主流语言 / Popular">
+            <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
+            <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
+            <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
+            <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
+            <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
+            <option value="deutsch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
+            <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
+            <option value="spanish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇪🇸 Español</option>
+            <option value="russian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇺 Русский</option>
+            <option value="arabic" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇦 العربية</option>
+          </optgroup>
+          <optgroup label="欧洲语系 / European">
+            <option value="portuguese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇹 Português</option>
+            <option value="italian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇹 Italiano</option>
+            <option value="dutch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇱 Nederlands</option>
+            <option value="polish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇱 Polski</option>
+            <option value="ukrainian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇺🇦 Українська</option>
+            <option value="swedish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇪 Svenska</option>
+            <option value="norwegian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇴 Norsk</option>
+            <option value="danish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇰 Dansk</option>
+            <option value="finnish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇮 Suomi</option>
+            <option value="czech" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇿 Čeština</option>
+            <option value="hungarian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇺 Magyar</option>
+            <option value="romanian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇴 Română</option>
+            <option value="greek" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇷 Ελληνικά</option>
+          </optgroup>
+          <optgroup label="亚太与更多 / Asia-Pacific & More">
+            <option value="hindi" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇳 हिन्दी</option>
+            <option value="vietnamese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇻🇳 Tiếng Việt</option>
+            <option value="thai" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇭 ภาษาไทย</option>
+            <option value="indonesian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇩 Bahasa Indonesia</option>
+            <option value="malay" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇲🇾 Bahasa Melayu</option>
+            <option value="filipino" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇭 Filipino</option>
+            <option value="turkish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇷 Türkçe</option>
+            <option value="hebrew" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇱 עברית</option>
+          </optgroup>
         </select>
       </div>
 
@@ -1598,19 +1628,63 @@
     });
 
     // ==========================================
-    // 国际化整站自适应翻译引擎配置 (Translate.js)
+    // 国际化整站自适应翻译引擎配置 (Translate.js - 支持 70+ 全球语种)
     // ==========================================
+    const BROWSER_LANG_MAP = {
+      'zh-tw': 'chinese_traditional',
+      'zh-hk': 'chinese_traditional',
+      'zh-mo': 'chinese_traditional',
+      'zh-hant': 'chinese_traditional',
+      'zh': 'chinese_simplified',
+      'zh-cn': 'chinese_simplified',
+      'zh-sg': 'chinese_simplified',
+      'en': 'english',
+      'ja': 'japanese',
+      'ko': 'korean',
+      'de': 'deutsch', // 德语对应 translate.js 标识为 deutsch (de)
+      'fr': 'french',
+      'es': 'spanish',
+      'ru': 'russian',
+      'pt': 'portuguese',
+      'it': 'italian',
+      'nl': 'dutch',
+      'ar': 'arabic',
+      'hi': 'hindi',
+      'vi': 'vietnamese',
+      'th': 'thai',
+      'id': 'indonesian',
+      'tr': 'turkish',
+      'pl': 'polish',
+      'uk': 'ukrainian',
+      'sv': 'swedish',
+      'no': 'norwegian',
+      'nb': 'norwegian',
+      'nn': 'norwegian',
+      'da': 'danish',
+      'fi': 'finnish',
+      'cs': 'czech',
+      'el': 'greek',
+      'he': 'hebrew',
+      'iw': 'hebrew',
+      'ms': 'malay',
+      'fil': 'filipino',
+      'tl': 'filipino',
+      'hu': 'hungarian',
+      'ro': 'romanian'
+    };
+
     let currentSiteLang = localStorage.getItem('ai_radar_translate_lang');
 
+    // 自动探测访客系统/浏览器语言
     function detectVisitorLanguage() {
       const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      if (navLang.startsWith('zh')) return 'chinese_simplified';
-      if (navLang.startsWith('ja')) return 'japanese';
-      if (navLang.startsWith('ko')) return 'korean';
-      if (navLang.startsWith('es')) return 'spanish';
-      if (navLang.startsWith('fr')) return 'french';
-      if (navLang.startsWith('de')) return 'german';
-      if (navLang.startsWith('en')) return 'english';
+      if (BROWSER_LANG_MAP[navLang]) {
+        return BROWSER_LANG_MAP[navLang];
+      }
+      const prefix = navLang.split('-')[0];
+      if (BROWSER_LANG_MAP[prefix]) {
+        return BROWSER_LANG_MAP[prefix];
+      }
       return 'chinese_simplified';
     }
 
@@ -1635,6 +1709,14 @@
 
       const selectEl = document.getElementById('site-lang-select');
       if (selectEl && currentSiteLang) {
+        // 如果当前语言不在预设的常用选项里，动态添加一个选项显示
+        let opt = selectEl.querySelector(`option[value="${currentSiteLang}"]`);
+        if (!opt && currentSiteLang !== 'chinese_simplified') {
+          opt = document.createElement('option');
+          opt.value = currentSiteLang;
+          opt.textContent = `🌐 ${currentSiteLang}`;
+          selectEl.appendChild(opt);
+        }
         selectEl.value = currentSiteLang;
       }
 
@@ -1652,7 +1734,14 @@
         selectEl.value = targetLang;
       }
       if (typeof translate !== 'undefined') {
-        translate.changeLanguage(targetLang);
+        if (targetLang === 'chinese_simplified') {
+          try {
+            if (translate.reset) translate.reset();
+          } catch (e) {}
+          translate.changeLanguage('chinese_simplified');
+        } else {
+          translate.changeLanguage(targetLang);
+        }
       }
     }
 
