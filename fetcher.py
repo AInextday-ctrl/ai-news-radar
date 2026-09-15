@@ -638,6 +638,35 @@ def fetch_tiktok_trending_videos() -> List[Dict[str, Any]]:
             "summary_en": "Stunning geometric animations explaining how Queries, Keys, and Values compute attention scores in high-dimensional vector spaces.",
             "category": "videos",
             "tags": ["🔥 24h飙升", "3Blue1Brown", "数学之美", "Transformer"]
+        },
+        {
+            "id": "yt_short_jeffsu_prompt",
+            "video_id": "jC4v5AS4RIM",
+            "platform": "shorts",
+            "aspect_ratio": "9:16",
+            "sub_type": "viral",
+            "is_viral": True,
+            "title": "Master the Perfect ChatGPT Prompt Formula (in just 8 minutes)",
+            "title_zh": "【爆款实操】Jeff Su 8分钟大模型提示词终极公式：从小白到高手的万能框架",
+            "title_en": "Master the Perfect ChatGPT Prompt Formula (in just 8 minutes)",
+            "url": "https://www.youtube.com/watch?v=jC4v5AS4RIM",
+            "embed_url": "https://www.youtube-nocookie.com/embed/jC4v5AS4RIM",
+            "image_url": "https://i.ytimg.com/vi/jC4v5AS4RIM/hqdefault.jpg",
+            "source": "YouTube · Jeff Su",
+            "author": "Jeff Su",
+            "author_handle": "@jeffsu",
+            "author_avatar": "https://unavatar.io/x/jeffsu",
+            "raw_published_at": "2026-09-14T12:00:00Z",
+            "duration": "⏱️ 08:24",
+            "difficulty": "⚡ 效率提升",
+            "metrics": {"views": "3.8M+", "likes": "210k+", "shares": "55k+", "format": "9:16 竖屏实操", "platform": "shorts"},
+            "spec_tags": ["提示词框架", "ChatGPT提效"],
+            "spec_tags_en": ["Prompt Formula", "ChatGPT Productivity"],
+            "content_snippet": "全网数百万职场极客推崇的提示词工程实录：拆解任务上下文、角色锚定与边界约束的高效组合法。",
+            "summary_zh": "全网数百万职场极客推崇的提示词工程实录：拆解任务上下文、角色锚定与边界约束的高效组合法。",
+            "summary_en": "Viral productivity blueprint watched by millions: breaking down context, persona, and constraints into a reusable formula.",
+            "category": "videos",
+            "tags": ["🔥 24h飙升", "提示词技巧", "ChatGPT", "生产力"]
         }
     ]
 
