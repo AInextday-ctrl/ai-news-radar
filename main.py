@@ -32,7 +32,7 @@ SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 
 
 def generate_sitemap():
-    """Dynamically generate fresh sitemap.xml with current UTC lastmod and section routes."""
+    """Dynamically generate fresh sitemap.xml with current UTC lastmod adhering strictly to Google sitemaps.org standard (no fragments)."""
     now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -42,42 +42,12 @@ def generate_sitemap():
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
   </url>
-  <url>
-    <loc>https://ainewsradar.xyz/#news</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ainewsradar.xyz/#celebrity</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://ainewsradar.xyz/#tools</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ainewsradar.xyz/#videos</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ainewsradar.xyz/#prompts</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
 </urlset>
 """
     try:
         os.makedirs(PUBLIC_DIR, exist_ok=True)
-        with open(SITEMAP_FILE, "w", encoding="utf-8") as f:
-            f.write(xml_content.strip() + "\n")
+        with open(SITEMAP_FILE, "wb") as f:
+            f.write(xml_content.strip().encode("utf-8") + b"\n")
         print(f"🗺️ 站点地图已动态更新: {SITEMAP_FILE} (lastmod: {now_date})")
     except Exception as e:
         print(f"⚠️ 更新站点地图失败: {e}")
