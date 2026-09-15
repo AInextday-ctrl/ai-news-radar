@@ -82,6 +82,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130"
      crossorigin="anonymous"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 国际化整站轻量级无感翻译引擎 (零 API 成本，自适应访客系统语言) -->
+  <script src="https://res.zvo.cn/translate/translate.js"></script>
   <script>
     // 零闪烁 (Zero-FOUC) 主题初始化
     (function() {
@@ -427,14 +429,18 @@
         </button>
       </div>
 
-      <!-- 🌐 中英文切换胶囊 -->
-      <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
-        <button id="lang-zh" onclick="setLanguage('zh')" class="px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm">
-          🇨🇳 中文
-        </button>
-        <button id="lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
-          🇬🇧 EN
-        </button>
+      <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动) -->
+      <div class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
+        <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
+        <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
+          <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
+          <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
+          <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
+          <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
+          <option value="spanish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇪🇸 Español</option>
+          <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
+          <option value="german" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
+        </select>
       </div>
 
       <!-- 实时同步灯 -->
@@ -1591,19 +1597,97 @@
       if (currentTheme === 'auto') applyTheme();
     });
 
-    // 切换语言
+    // ==========================================
+    // 国际化整站自适应翻译引擎配置 (Translate.js)
+    // ==========================================
+    let currentSiteLang = localStorage.getItem('ai_radar_translate_lang');
+
+    function detectVisitorLanguage() {
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      if (navLang.startsWith('zh')) return 'chinese_simplified';
+      if (navLang.startsWith('ja')) return 'japanese';
+      if (navLang.startsWith('ko')) return 'korean';
+      if (navLang.startsWith('es')) return 'spanish';
+      if (navLang.startsWith('fr')) return 'french';
+      if (navLang.startsWith('de')) return 'german';
+      if (navLang.startsWith('en')) return 'english';
+      return 'chinese_simplified';
+    }
+
+    if (!currentSiteLang) {
+      currentSiteLang = detectVisitorLanguage();
+    }
+
+    function initTranslateEngine() {
+      if (typeof translate === 'undefined') return;
+
+      translate.selectLanguageTag.show = false;
+      translate.service.use('client.edge');
+      translate.language.setLocal('chinese_simplified');
+      if (translate.listener) {
+        translate.listener.use = true;
+      }
+
+      translate.ignore.class.push('notranslate');
+      translate.ignore.class.push('code-box');
+      translate.ignore.tag.push('code');
+      translate.ignore.tag.push('pre');
+
+      const selectEl = document.getElementById('site-lang-select');
+      if (selectEl && currentSiteLang) {
+        selectEl.value = currentSiteLang;
+      }
+
+      translate.execute();
+      if (currentSiteLang && currentSiteLang !== 'chinese_simplified') {
+        translate.changeLanguage(currentSiteLang);
+      }
+    }
+
+    function changeSiteLanguage(targetLang) {
+      currentSiteLang = targetLang;
+      localStorage.setItem('ai_radar_translate_lang', targetLang);
+      const selectEl = document.getElementById('site-lang-select');
+      if (selectEl && selectEl.value !== targetLang) {
+        selectEl.value = targetLang;
+      }
+      if (typeof translate !== 'undefined') {
+        translate.changeLanguage(targetLang);
+      }
+    }
+
+    function applyCurrentTranslation() {
+      if (typeof translate !== 'undefined' && translate.execute) {
+        const lang = localStorage.getItem('ai_radar_translate_lang') || currentSiteLang;
+        if (lang && lang !== 'chinese_simplified') {
+          setTimeout(() => {
+            try {
+              translate.execute();
+            } catch (e) {}
+          }, 60);
+        }
+      }
+    }
+
+    // 切换语言基底
     function setLanguage(lang) {
       currentLang = lang;
       localStorage.setItem('ai_radar_lang', lang);
 
       const btnZh = document.getElementById('lang-zh');
       const btnEn = document.getElementById('lang-en');
-      if (lang === 'zh') {
-        btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
-        btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
-      } else {
-        btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
-        btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+      if (btnZh && btnEn) {
+        if (lang === 'zh') {
+          btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+          btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+        } else {
+          btnEn.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+          btnZh.className = "px-2.5 py-1 text-xs font-semibold rounded-lg transition-all duration-200 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white";
+        }
+      }
+      const selectEl = document.getElementById('site-lang-select');
+      if (selectEl && currentSiteLang) {
+        selectEl.value = currentSiteLang;
       }
 
       const txtLight = document.getElementById('theme-txt-light');
@@ -2093,11 +2177,12 @@
 
       const isZh = currentLang === 'zh';
       container.innerHTML = topItems.map((item, idx) => {
-        const badge = isZh ? (item.badge_zh || item.badge || "今日要闻") : (item.badge_en || item.badge || "Top Story");
-        const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-        const summary = isZh ? (item.summary_zh || item.summary) : (item.summary_en || item.summary || item.content_snippet);
+        const badge = item.badge_zh || item.badge || "⚡ 今日头条";
+        const title = item.title_zh || item.title;
+        const summary = item.summary_zh || item.summary || item.content_snippet;
         const timeObj = formatTime(item.raw_published_at, currentLang);
         const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+        const cleanSource = item.source || "";
 
         return `
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2 shadow-sm">
@@ -2117,8 +2202,8 @@
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-200 dark:border-slate-800/60">
-              <span class="truncate max-w-[140px]">${t.sourceLabel} ${formatSource(item.source, currentLang)}</span>
-              <span class="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform font-medium shrink-0">${isZh ? '阅读 →' : 'Read →'}</span>
+              <span class="truncate max-w-[140px]">信源: ${cleanSource}</span>
+              <span class="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform font-medium shrink-0">阅读 →</span>
             </div>
           </a>
         `;
@@ -2145,19 +2230,18 @@
     // ==========================================
     function renderNewsCard(item) {
       const t = I18N[currentLang];
-      const isZh = currentLang === 'zh';
-      const title = (isZh && item.title_zh) ? item.title_zh : (item.title_en || item.title);
-      const summary = (isZh && item.summary_zh) ? item.summary_zh : (item.summary_en || item.content_snippet || "");
+      const title = item.title_zh || item.title;
+      const summary = item.summary_zh || item.content_snippet || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const specList = (!isZh && item.spec_tags_en && item.spec_tags_en.length) ? item.spec_tags_en : (item.spec_tags || []);
+      const specList = item.spec_tags || [];
       const specBadges = (specList && specList.length)
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${specList.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">⚡ ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${specList.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">⚡ ${s}</span>`).join('')}</div>`
         : '';
 
       const hasRealImage = item.image_url && !item.image_url.includes('photo-1526374965328') && !item.image_url.includes('photo-1485827404703');
-      const cleanSource = formatSource(item.source, currentLang);
+      const cleanSource = item.source || "";
 
       if (hasRealImage) {
         return `
@@ -2183,8 +2267,8 @@
                 </p>
               </div>
               <div class="flex items-center justify-between pt-1">
-                <span class="text-[10px] text-slate-500 font-mono">${t.sourceLabel} ${cleanSource}</span>
-                <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">${t.readMore}</a>
+                <span class="text-[10px] text-slate-500 font-mono">信源: ${cleanSource}</span>
+                <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">阅读原文 ↗</a>
               </div>
             </div>
           </article>
@@ -2209,8 +2293,8 @@
             ${summary}
           </p>
           <div class="flex items-center justify-between text-xs pt-1">
-            <span class="text-[11px] text-slate-500 font-mono">${t.newsBreakingTag}</span>
-            <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">${t.readMore}</a>
+            <span class="text-[11px] text-slate-500 font-mono">⚡ 突发快讯 · 全球追踪</span>
+            <a href="${item.url}" target="_blank" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline font-medium">阅读原文 ↗</a>
           </div>
         </article>
       `;
@@ -2238,22 +2322,23 @@
 
     function renderCelebrityCard(item) {
       const t = I18N[currentLang];
-      const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const isPinned = isItemPinnedActive(item);
-      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 ${isZh ? '置顶爆款' : 'Pinned'}</span>` : '';
+      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 置顶爆款</span>` : '';
 
       const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
 
       if (isX) {
-        const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.content_snippet || item.title);
-        const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+        const title = item.title_zh || item.title;
+        const summary = item.summary_zh || item.content_snippet || "";
         const avatar = item.author_avatar || `https://unavatar.io/x/${(item.author_handle || 'x').replace('@','')}`;
-        const likes = item.metrics?.likes || '42k';
-        const retweets = item.metrics?.retweets || '7.5k';
+        let likes = item.metrics?.likes || '38.2k';
+        likes = String(likes).replace(/[^0-9.kKmM]/g, '') || '38.2k';
+        let retweets = item.metrics?.retweets || '5.6k';
+        retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '5.6k';
         const specBadges = (item.spec_tags && item.spec_tags.length)
-          ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30"># ${translateSpecTag(s, currentLang)}</span>`).join('')}</div>`
+          ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30"># ${s}</span>`).join('')}</div>`
           : '';
 
         return `
@@ -2263,17 +2348,17 @@
                 <img src="${avatar}" class="w-8 h-8 rounded-full border border-sky-400/50 object-cover shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                 <div class="min-w-0">
                   <div class="flex items-center space-x-1">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${item.author || (isZh ? 'AI 领袖' : 'AI Leader')}</span>
-                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black shrink-0" title="${t.celebVerifiedTitle}">✓</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate notranslate">${item.author || 'AI 领袖'}</span>
+                    <span class="w-3.5 h-3.5 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black shrink-0" title="已认证权威领袖">✓</span>
                   </div>
-                  <span class="text-slate-500 text-[11px] font-mono truncate block">${item.author_handle || '@x'}</span>
+                  <span class="text-slate-500 text-[11px] font-mono truncate block notranslate">${item.author_handle || '@x'}</span>
                 </div>
               </div>
               <div class="flex items-center space-x-1.5 shrink-0">
                 ${pinnedBadge}
                 ${todayBadge}
                 <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
-                <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold shrink-0">${t.celebBadgeX}</span>
+                <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold shrink-0">𝕏 领袖推特</span>
               </div>
             </div>
 
@@ -2291,11 +2376,11 @@
 
             <div class="flex items-center justify-between pt-1 border-t border-slate-200 dark:border-slate-800/60 text-[11px]">
               <div class="flex items-center space-x-2 text-[10px] text-slate-500 dark:text-slate-400 font-mono">
-                <span>❤️ ${likes}</span>
-                <span>🔁 ${retweets}</span>
+                <span>❤️ <span class="notranslate">${likes}</span></span>
+                <span>🔁 <span class="notranslate">${retweets}</span></span>
               </div>
               <a href="${item.url}" target="_blank" class="text-sky-600 dark:text-sky-400 hover:underline font-medium flex items-center space-x-1">
-                <span>${t.celebOriginalTweet}</span>
+                <span>直达原推 ↗</span>
               </a>
             </div>
           </article>
@@ -2303,14 +2388,14 @@
       }
 
       // Reddit 社区专有排版
-      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+      const title = item.title_zh || item.title;
+      const summary = item.summary_zh || item.content_snippet || "";
       const subName = item.author_handle || (item.source || '').replace('Reddit ', '') || 'r/singularity';
       const cleanSub = subName.startsWith('r/') ? subName : 'r/' + subName;
-      const upvotes = item.metrics?.upvotes || '🔥 1.4k Upvotes';
-      const comments = isZh 
-        ? (item.metrics?.comments || '💬 320 讨论')
-        : (item.metrics?.comments_en || (item.metrics?.comments || '').replace('讨论', 'comments') || '💬 320 comments');
+      let upvotes = item.metrics?.upvotes || '1.4k';
+      upvotes = String(upvotes).replace(/[^0-9.kKmM]/g, '') || '1.4k';
+      let comments = item.metrics?.comments || '320';
+      comments = String(comments).replace(/[^0-9.kKmM]/g, '') || '320';
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col space-y-2.5 group border border-slate-200 dark:border-slate-800/80 hover:border-orange-500/40 transition-all">
@@ -2321,15 +2406,15 @@
               </div>
               <div class="min-w-0">
                 <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-200 truncate">${isZh ? (item.author || 'Reddit 极客社群') : t.redditCommunity}</span>
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-200 truncate notranslate">${item.author || 'Reddit 极客社群'}</span>
                 </div>
-                <span class="text-orange-500 dark:text-orange-400/90 text-[11px] font-mono truncate block">${cleanSub}</span>
+                <span class="text-orange-500 dark:text-orange-400/90 text-[11px] font-mono truncate block notranslate">${cleanSub}</span>
               </div>
             </div>
             <div class="flex items-center space-x-1.5 shrink-0">
               ${todayBadge}
               <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
-              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold shrink-0">${t.celebBadgeReddit}</span>
+              <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold shrink-0">Reddit 深度热议</span>
             </div>
           </div>
 
@@ -2345,11 +2430,11 @@
 
           <div class="flex items-center justify-between pt-1 border-t border-slate-200 dark:border-slate-800/60 text-[11px]">
             <div class="flex items-center space-x-2 text-[10px] text-orange-600 dark:text-orange-400/80 font-mono">
-              <span>${upvotes}</span>
-              <span>${comments}</span>
+              <span>🔥 <span class="notranslate">${upvotes}</span> 点赞</span>
+              <span>💬 <span class="notranslate">${comments}</span> 讨论</span>
             </div>
             <a href="${item.url}" target="_blank" class="text-orange-600 dark:text-orange-400 hover:underline font-medium flex items-center space-x-1">
-              <span>${t.celebViewPost}</span>
+              <span>查看热帖 ↗</span>
             </a>
           </div>
         </article>
@@ -2361,23 +2446,15 @@
     // ==========================================
     function renderToolCard(item) {
       const t = I18N[currentLang];
-      const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const scenario = translateScenarioTag(item.scenario_tag || "🤖 场景落地", currentLang);
-      const runtimeBadge = translateRuntimeBadge(item.runtime_badge || item.pricing_tag || "🟢 开源免装", currentLang);
+      const scenario = item.scenario_tag || "🤖 场景落地";
+      const runtimeBadge = item.runtime_badge || item.pricing_tag || "🟢 开源免装";
       const iconSvg = getToolSvgIcon(item.icon_type);
 
-      const appName = isZh 
-        ? (item.app_name || (item.title ? item.title.split(':')[0].replace(/【(.*?)】/, '$1') : 'AI 工具'))
-        : (item.app_name_en || item.app_name || 'AI Tool');
-
-      const hook = isZh
-        ? (item.app_hook || item.title_zh || item.title || "")
-        : (item.app_hook_en || item.summary_en || item.title_en || item.app_hook || "");
-
-      const summary = isZh
-        ? (item.summary_zh || item.content_snippet || "")
-        : (item.summary_en || item.content_snippet || "");
+      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/【(.*?)】/, '$1') : 'AI 工具');
+      const hook = item.app_hook || item.title_zh || item.title || "";
+      const summary = item.summary_zh || item.content_snippet || "";
+      const cleanSource = item.source || "";
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-3 group border-t-2 border-t-emerald-500/80 hover:border-emerald-500/50 transition-all">
@@ -2390,7 +2467,7 @@
                 </div>
                 <div>
                   <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
+                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors notranslate">
                       ${appName}
                     </h4>
                     <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono border border-emerald-200 dark:border-emerald-500/20">${runtimeBadge}</span>
@@ -2398,7 +2475,7 @@
                   <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">${scenario}</span>
                 </div>
               </div>
-              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || t.toolToday}</span>
+              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
             </div>
 
             <!-- 核心看点与功能价值 -->
@@ -2414,9 +2491,9 @@
           </div>
 
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-            <span class="text-[10px] text-slate-500 font-mono truncate max-w-[140px]">${formatSource(item.source, currentLang)}</span>
+            <span class="text-[10px] text-slate-500 font-mono truncate max-w-[140px]">${cleanSource}</span>
             <a href="${item.url}" target="_blank" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0">
-              <span>${t.tryTool}</span>
+              <span>立即体验 ↗</span>
             </a>
           </div>
         </article>
@@ -2577,9 +2654,8 @@
 
     // 焦点首发大卡渲染 (Hero Spotlight)
     function renderHeroSpotlight(item) {
-      const isZh = currentLang === 'zh';
-      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+      const title = item.title_zh || item.title;
+      const summary = item.summary_zh || item.content_snippet || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
       const views = item.metrics?.views || '1.2M+ 播放';
@@ -2592,7 +2668,7 @@
             <div class="flex items-center space-x-2 flex-wrap gap-y-1">
               <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white text-[11px] font-black shadow-md flex items-center space-x-1">
                 <span>🔥</span>
-                <span>${isZh ? '本周全球 AI 爆款第一焦点' : 'Weekly #1 Global Viral AI Breakout'}</span>
+                <span>本周全球 AI 爆款第一焦点</span>
               </span>
               <span class="px-2 py-0.5 rounded bg-black text-rose-300 border border-rose-500/40 text-[10px] font-bold">${isTikTok ? '🎵 TikTok' : '▶ YouTube'}</span>
               <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[10px] font-bold">${views}</span>
@@ -2608,7 +2684,7 @@
               </div>
             </div>
             <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs font-medium">
-              <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-sm border border-white/10 font-bold">${item.author || item.source}</span>
+              <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-sm border border-white/10 font-bold notranslate">${item.author || item.source}</span>
               <span class="px-2.5 py-1 rounded-md bg-black/80 backdrop-blur-sm border border-white/10 font-mono">${duration}</span>
             </div>
           </div>
@@ -2624,15 +2700,15 @@
             <div class="flex items-center space-x-2">
               <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5">
                 <span>▶</span>
-                <span>${isZh ? (isTikTok ? '站内竖屏播放' : '站内播放') : (isTikTok ? 'Play In-App (9:16)' : 'Play Now')}</span>
+                <span>${isTikTok ? '站内竖屏播放' : '站内播放'}</span>
               </button>
               <a href="${item.url}" target="_blank" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 font-medium transition-colors flex items-center space-x-1">
                 <span>${isTikTok ? 'TikTok ↗' : 'YouTube ↗'}</span>
               </a>
             </div>
             <div class="hidden sm:flex items-center space-x-1 text-[11px] text-slate-500">
-              <span>${isZh ? '信源认证:' : 'Source:'}</span>
-              <span class="font-bold text-slate-700 dark:text-slate-300">${formatSource(item.source, currentLang)}</span>
+              <span>信源认证:</span>
+              <span class="font-bold text-slate-700 dark:text-slate-300 notranslate">${item.source || item.author}</span>
             </div>
           </div>
         </article>
@@ -2641,8 +2717,7 @@
 
     // 实时飙升榜单小卡渲染
     function renderTrendingMiniCard(item, rank) {
-      const isZh = currentLang === 'zh';
-      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      const title = item.title_zh || item.title;
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const medals = ['🥇', '🥈', '🥉'];
       const medal = medals[rank - 1] || `#${rank}`;
@@ -2657,7 +2732,7 @@
           </div>
           <div class="flex-1 min-w-0 space-y-1">
             <div class="flex items-center justify-between text-[10px] text-slate-500 gap-2">
-              <span class="font-bold text-rose-500 dark:text-rose-400 truncate max-w-[110px]">${item.author}</span>
+              <span class="font-bold text-rose-500 dark:text-rose-400 truncate max-w-[110px] notranslate">${item.author}</span>
               <span class="font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">${timeObj.relative || ''}</span>
             </div>
             <h4 class="text-xs font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors line-clamp-2 leading-snug">
@@ -2673,16 +2748,14 @@
     // ==========================================
     function renderPromptCard(item) {
       const t = I18N[currentLang];
-      const isZh = currentLang === 'zh';
-      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+      const title = item.title_zh || item.title;
+      const summary = item.summary_zh || item.content_snippet || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const targetModel = item.recommended_model || (isZh ? "通用大模型" : "LLM");
-      const rawTemp = item.temp_advice || (isZh ? "温度 0.3" : "Temp 0.3");
-      const tempAdvice = isZh ? rawTemp : rawTemp.replace('温度', 'Temp');
-      const purpose = isZh ? (item.purpose_zh || "💡 高阶提示词") : (item.purpose_en || "💡 Advanced Prompt");
+      const targetModel = item.recommended_model || "通用大模型";
+      const tempAdvice = item.temp_advice || "温度 0.3";
+      const purpose = item.purpose_zh || "💡 高阶提示词";
       const promptZh = item.prompt_content_zh || item.prompt_content || "";
       const promptEn = item.prompt_content_en || item.prompt_content || "";
 
@@ -2690,11 +2763,11 @@
       window.__promptStore[item.id] = {
         zh: promptZh,
         en: promptEn,
-        active: isZh ? 'zh' : 'en'
+        active: 'zh'
       };
 
-      const activeText = isZh ? promptZh : promptEn;
-      const usageGuide = isZh ? (item.usage_guide_zh || "") : (item.usage_guide_en || "");
+      const activeText = promptZh || promptEn;
+      const usageGuide = item.usage_guide_zh || item.usage_guide || "";
 
       return `
         <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 border-l-purple-500 shadow-md group">
@@ -2705,35 +2778,35 @@
               </span>
               <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
-                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || t.toolToday}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
               </div>
             </div>
             <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">${title}</h4>
             <div class="flex items-center space-x-2 text-[9px] font-mono flex-wrap gap-y-1">
-              <span class="px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">${t.promptModelPrefix}${targetModel}</span>
-              <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800">${t.promptTempPrefix}${tempAdvice}</span>
+              <span class="px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">🎯 推荐: <span class="notranslate">${targetModel}</span></span>
+              <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800">⚙️ ${tempAdvice}</span>
             </div>
             ${summary ? `<p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">${summary}</p>` : ''}
             
             <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200 dark:border-slate-800/60">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400">${t.promptDirectives || (isZh ? '提示词指令' : 'Prompt Directives')}:</span>
+              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400">提示词指令:</span>
               <div class="inline-flex rounded-md bg-slate-100 dark:bg-slate-900 p-0.5 border border-slate-200 dark:border-slate-800 text-[10px]">
-                <button type="button" onclick="switchPromptLang('${item.id}', 'zh')" id="plang-zh-${item.id}" class="px-2 py-0.5 rounded ${isZh ? 'bg-purple-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'} transition-colors">🇨🇳 中文</button>
-                <button type="button" onclick="switchPromptLang('${item.id}', 'en')" id="plang-en-${item.id}" class="px-2 py-0.5 rounded ${!isZh ? 'bg-purple-600 text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'} transition-colors">🇬🇧 EN</button>
+                <button type="button" onclick="switchPromptLang('${item.id}', 'zh')" id="plang-zh-${item.id}" class="px-2 py-0.5 rounded bg-purple-600 text-white font-bold transition-colors">🇨🇳 中文</button>
+                <button type="button" onclick="switchPromptLang('${item.id}', 'en')" id="plang-en-${item.id}" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors">🇬🇧 EN</button>
               </div>
             </div>
 
-            <div id="pbox-${item.id}" class="bg-purple-50/70 dark:bg-slate-950/90 p-2.5 rounded-lg border border-purple-200/80 dark:border-slate-800 text-[11px] text-purple-950 dark:text-purple-200 font-mono leading-relaxed select-all whitespace-pre-wrap max-h-44 overflow-y-auto">${escapeHtml(activeText)}</div>
+            <div id="pbox-${item.id}" class="notranslate bg-purple-50/70 dark:bg-slate-950/90 p-2.5 rounded-lg border border-purple-200/80 dark:border-slate-800 text-[11px] text-purple-950 dark:text-purple-200 font-mono leading-relaxed select-all whitespace-pre-wrap max-h-44 overflow-y-auto">${escapeHtml(activeText)}</div>
 
             ${usageGuide ? `
               <div class="text-[10px] text-slate-600 dark:text-slate-400 bg-slate-100/70 dark:bg-slate-900/50 p-2 rounded border border-slate-200 dark:border-slate-800/60 leading-relaxed font-sans">
-                <span class="text-purple-600 dark:text-purple-400 font-semibold">${t.promptUsageGuide || (isZh ? '💡 使用指南: ' : '💡 Usage: ')}</span>${escapeHtml(usageGuide)}
+                <span class="text-purple-600 dark:text-purple-400 font-semibold">💡 使用指南: </span>${escapeHtml(usageGuide)}
               </div>
             ` : ''}
           </div>
 
           <button type="button" onclick="copyCardPrompt('${item.id}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-md shadow-purple-600/30">
-            <span>${t.copyPrompt}</span>
+            <span>一键复制提示词 📋</span>
           </button>
         </article>
       `;
@@ -2744,9 +2817,8 @@
     // ==========================================
     function renderVideoCard(item) {
       const t = I18N[currentLang];
-      const isZh = currentLang === 'zh';
-      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-      const summary = isZh ? (item.summary_zh || item.content_snippet || "") : (item.summary_en || item.content_snippet || "");
+      const title = item.title_zh || item.title;
+      const summary = item.summary_zh || item.content_snippet || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
@@ -2767,10 +2839,11 @@
       }
       const isViral = (!!item.is_viral || (item.tags && item.tags.some(t => t.includes('爆点') || t.includes('爆款')))) && isWithin30Days;
       const viralBadgeHtml = isViral
-        ? `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white border border-rose-400/50 text-[10px] font-black shadow-md flex items-center space-x-1"><span>🔥</span><span>${isZh ? '近期爆款' : 'Viral Hit'}</span></span>`
+        ? `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white border border-rose-400/50 text-[10px] font-black shadow-md flex items-center space-x-1"><span>🔥</span><span>近期爆款</span></span>`
         : '';
-      const skillTag = isZh ? (item.purpose_zh || item.metrics?.skill_tag || '🔥 热门实操') : (item.purpose_en || translateDifficultyTag(item.difficulty, currentLang) || '🔥 Top Tutorial');
+      const skillTag = item.purpose_zh || item.metrics?.skill_tag || '🔥 热门实操';
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
+      const cleanSource = item.source || item.author || "";
 
       const tagPills = (item.tags && item.tags.length)
         ? `<div class="flex items-center gap-1.5 flex-wrap pt-1">${item.tags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-950/60 border border-slate-200 dark:border-slate-800 transition-colors">#${tag}</button>`).join('')}</div>`
@@ -2795,7 +2868,7 @@
             </div>
 
             <div class="flex items-center justify-between text-[10px] pt-1 gap-2">
-              <span class="text-rose-600 dark:text-rose-400 font-medium truncate max-w-[130px]">${formatSource(item.source || item.author, currentLang)}</span>
+              <span class="text-rose-600 dark:text-rose-400 font-medium truncate max-w-[130px] notranslate">${cleanSource}</span>
               <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
@@ -2878,6 +2951,7 @@
           ? promptsHits.map(renderPromptCard).join('')
           : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-200 dark:border-slate-800/60 rounded-xl bg-slate-100/50 dark:bg-slate-900/40">${isZh ? '未找到匹配提示词' : 'No matching prompts'}</div>`;
       }
+      applyCurrentTranslation();
     }
 
     // ==========================================
@@ -3127,6 +3201,7 @@
       if (currentTab !== 'all') {
         renderCategoryView(currentTab);
       }
+      applyCurrentTranslation();
     }
 
     // 全站高精度多字段多词检索过滤器
@@ -3269,6 +3344,7 @@
           ? list.map(renderPromptCard).join('')
           : `<div class="text-slate-500 text-center py-12 col-span-3 text-xs">${isZh ? '暂无符合条件的提示词咒语' : 'No matching prompts'}</div>`;
       }
+      applyCurrentTranslation();
     }
 
     // 加载数据
@@ -3462,8 +3538,14 @@
     } catch (e) {}
 
     // 初始化
-    setLanguage(currentLang);
+    setLanguage('zh');
     loadNews();
+    window.addEventListener('DOMContentLoaded', () => {
+      initTranslateEngine();
+    });
+    setTimeout(() => {
+      initTranslateEngine();
+    }, 300);
   </script>
 </body>
 </html>

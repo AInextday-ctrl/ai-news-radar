@@ -37,27 +37,34 @@ def free_translate_zh(text: str) -> str:
         return ""
     
     clean_text = text.strip()
-    # 如果已经包含较多中文，直接返回
-    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', clean_text))
-    if zh_chars > len(clean_text) * 0.35:
+    prefix_match = re.match(r'^([【\[].*?[】\]]\s*)', clean_text)
+    prefix = prefix_match.group(1) if prefix_match else ""
+    body_text = clean_text[len(prefix):].strip()
+
+    if not body_text:
+        return clean_text
+
+    # 如果正文主体已经包含较多中文，直接返回
+    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', body_text))
+    if zh_chars > len(body_text) * 0.35:
         return clean_text
 
     # 查内存缓存
-    if clean_text in _TRANSLATION_CACHE:
-        return _TRANSLATION_CACHE[clean_text]
+    if body_text in _TRANSLATION_CACHE:
+        return prefix + _TRANSLATION_CACHE[body_text]
 
     # 1. 优先调用 Google Translate 免密神经翻译 (极速高精，支持长句)
     try:
         gt_url = "https://translate.googleapis.com/translate_a/single"
-        params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": clean_text[:350]}
+        params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": body_text[:350]}
         with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6) as client:
             resp = client.get(gt_url, params=params)
             if resp.status_code == 200:
                 res = resp.json()
                 zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
                 if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
-                    _TRANSLATION_CACHE[clean_text] = zh_res
-                    return zh_res
+                    _TRANSLATION_CACHE[body_text] = zh_res
+                    return prefix + zh_res
     except Exception:
         pass
 
