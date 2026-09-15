@@ -1015,15 +1015,29 @@
     </div>
   </div>
 
-  <!-- 视频播放弹窗 Modal (点击视频卡片在站内直接播放，自适应 16:9 横屏与 9:16 TikTok 竖屏) -->
+  <!-- 视频播放弹窗 Modal (自适应 16:9 横屏与 9:16 竖屏，支持跨域/区域限制直达原站容灾) -->
   <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
     <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
-      <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+      <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
         <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI 视频演示</h3>
-        <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
+        <div class="flex items-center space-x-2 shrink-0">
+          <a id="modal-video-direct-link" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors flex items-center space-x-1 shadow-md">
+            <span>原站直达 ↗</span>
+          </a>
+          <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
+        </div>
       </div>
       <div id="modal-video-aspect" class="relative w-full aspect-video bg-black flex items-center justify-center">
-        <iframe id="modal-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe id="modal-video-iframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+      <div id="modal-video-fallback-bar" class="p-2.5 bg-slate-950/95 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between gap-2">
+        <span class="line-clamp-1 flex items-center space-x-1">
+          <span>💡</span>
+          <span>若内嵌受地区网络（如香港/内地）或 Cookie 限制提示“无法观看”，请点击原站直接播放</span>
+        </span>
+        <a id="modal-video-fallback-btn" href="#" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-rose-400 hover:text-rose-300 text-[10px] font-bold border border-slate-700 transition-colors">
+          原站打开 ↗
+        </a>
       </div>
     </div>
   </div>
@@ -2941,7 +2955,7 @@
       return `
         <article class="glass-card rounded-xl p-3 flex flex-col justify-between space-y-2 group border-t-2 ${isViral ? 'border-t-amber-500 shadow-amber-500/10' : 'border-t-rose-500/80'} hover:border-rose-500/50 transition-all">
           <div class="space-y-2">
-            <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
+            <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-200 dark:border-slate-800 cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${item.url || item.link || item.embed_url}')">
               <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               <div class="absolute inset-0 bg-black/35 flex items-center justify-center group-hover:bg-black/10 transition-colors">
                 <div class="w-10 h-10 rounded-full bg-rose-600 text-white flex items-center justify-center text-base pl-0.5 shadow-xl group-hover:scale-110 transition-transform">
@@ -2957,14 +2971,17 @@
             </div>
 
             <div class="flex items-center justify-between text-[10px] pt-1 gap-2">
-              <span class="text-rose-600 dark:text-rose-400 font-medium truncate max-w-[130px] notranslate">${cleanSource}</span>
+              <div class="flex items-center space-x-1.5 truncate max-w-[150px]">
+                <span class="text-rose-600 dark:text-rose-400 font-medium truncate notranslate">${cleanSource}</span>
+                <a href="${item.url || item.link || item.embed_url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/60 border border-slate-300 dark:border-slate-700 shrink-0 notranslate font-semibold transition-colors" title="在原站直接打开">原站 ↗</a>
+              </div>
               <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
             </div>
 
-            <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
+            <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${item.url || item.link || item.embed_url}')">
               ${title}
             </h4>
 
@@ -3474,37 +3491,46 @@
       });
     }
 
-    // 视频弹窗操作 (自适应 16:9 横屏与 9:16 TikTok 竖屏)
-    function openVideoModal(embedUrl, title, platform) {
+    // 视频弹窗操作 (自适应 16:9 横屏与 9:16 竖屏短视频，支持外部直达)
+    function openVideoModal(embedUrl, title, platform, directUrl) {
       const modal = document.getElementById('video-modal');
       const dialog = document.getElementById('modal-video-dialog');
       const aspect = document.getElementById('modal-video-aspect');
       const iframe = document.getElementById('modal-video-iframe');
       const titleEl = document.getElementById('modal-video-title');
+      const directLink = document.getElementById('modal-video-direct-link');
+      const fallbackBtn = document.getElementById('modal-video-fallback-btn');
 
       if (!embedUrl) return;
 
-      const isTikTok = platform === 'tiktok' || embedUrl.includes('tiktok.com');
+      const isVertical = platform === 'tiktok' || platform === 'shorts' || embedUrl.includes('tiktok.com') || embedUrl.includes('/shorts/');
 
-      if (isTikTok) {
+      if (isVertical) {
         if (dialog) dialog.className = "bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-sm w-full shadow-2xl relative transition-all duration-200";
         if (aspect) aspect.className = "relative w-full aspect-[9/16] bg-black flex items-center justify-center";
-        iframe.src = embedUrl;
       } else {
         if (dialog) dialog.className = "bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200";
         if (aspect) aspect.className = "relative w-full aspect-video bg-black flex items-center justify-center";
-        iframe.src = embedUrl + (embedUrl.includes('?') ? '&autoplay=1' : '?autoplay=1');
       }
 
-      titleEl.textContent = title || I18N[currentLang].modalVideoTitle;
+      const autoplayUrl = embedUrl.includes('youtube') 
+        ? embedUrl + (embedUrl.includes('?') ? '&autoplay=1' : '?autoplay=1')
+        : embedUrl;
+      iframe.src = autoplayUrl;
+
+      if (titleEl) titleEl.textContent = title || I18N[currentLang].modalVideoTitle;
+      const jumpUrl = directUrl || embedUrl;
+      if (directLink) directLink.href = jumpUrl;
+      if (fallbackBtn) fallbackBtn.href = jumpUrl;
+
       modal.classList.remove('hidden');
     }
 
     function closeVideoModal() {
       const modal = document.getElementById('video-modal');
       const iframe = document.getElementById('modal-video-iframe');
-      iframe.src = "";
-      modal.classList.add('hidden');
+      if (iframe) iframe.src = "";
+      if (modal) modal.classList.add('hidden');
     }
 
     // ==========================================
