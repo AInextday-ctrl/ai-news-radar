@@ -17,6 +17,7 @@ import re
 import json
 import time
 from datetime import datetime, timezone
+import httpx
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status
 from processor import process_items_batch
 from config import CATEGORIES, AI_CREATORS
@@ -225,6 +226,40 @@ def extract_top_three(items: list) -> list:
     return top
 
 
+TECHMEME_PAGE_CACHE = {}
+
+def resolve_techmeme_url_and_source(curr_url: str, title: str) -> tuple:
+    """Resolve Techmeme story permalink into direct publisher URL and clean media name."""
+    m_source = re.search(r'\((?:[^)]+?/)?([^)/]+)\)\s*$', title)
+    real_source = m_source.group(1).strip() if m_source else None
+
+    parts = curr_url.split('#')
+    base_page = parts[0]
+    anchor = parts[1] if len(parts) > 1 else ""
+    if not anchor:
+        return None, real_source
+
+    if base_page not in TECHMEME_PAGE_CACHE:
+        try:
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, follow_redirects=True, timeout=8) as client:
+                resp = client.get(base_page)
+                TECHMEME_PAGE_CACHE[base_page] = resp.text if resp.status_code == 200 else ""
+        except Exception:
+            TECHMEME_PAGE_CACHE[base_page] = ""
+
+    page_text = TECHMEME_PAGE_CACHE.get(base_page, "")
+    if page_text and anchor:
+        pos = page_text.find(anchor)
+        if pos != -1:
+            chunk = page_text[pos:pos+3000]
+            m_ourh = re.search(r'<[Aa]\s+[^>]*CLASS=["\']ourh["\'][^>]*HREF=["\']([^"\']+)["\']', chunk, re.I)
+            if not m_ourh:
+                m_ourh = re.search(r'<[Aa]\s+[^>]*HREF=["\']([^"\']+)["\'][^>]*CLASS=["\']ourh["\']', chunk, re.I)
+            if m_ourh:
+                return m_ourh.group(1).replace('&amp;', '&'), real_source
+    return None, real_source
+
+
 def load_existing_items() -> list:
     """Load previously saved news items from JSON to support incremental updates and history retention."""
     target_file = PUBLIC_OUTPUT_FILE if os.path.exists(PUBLIC_OUTPUT_FILE) else OUTPUT_FILE
@@ -295,6 +330,20 @@ def load_existing_items() -> list:
                     # 超过 180 天的古董工具坚决不留
                     tool_ts = parse_time_for_sort(it)
                     if tool_ts > 0 and (time.time() - tool_ts) > 180 * 86400:
+                        continue
+
+                # 6. 严禁任何 Techmeme 聚合列表链接存留，必须解析还原为 Bloomberg、Reuters、WSJ 等源头正文真实 URL
+                if "techmeme.com" in u:
+                    if "/p" in u:
+                        real_u, real_s = resolve_techmeme_url_and_source(u, it.get("title", ""))
+                        if real_u:
+                            it["url"] = real_u
+                            if real_s:
+                                it["source"] = real_s
+                                it["author"] = real_s
+                        else:
+                            continue
+                    else:
                         continue
 
                 valid_items.append(it)

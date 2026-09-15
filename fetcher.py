@@ -1632,6 +1632,29 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     url = entry.get("link", "")
                     author = entry.get("author", cfg["name"])
 
+                    # 针对 Techmeme 硅谷风向聚合源：提取其摘要中内嵌的真实原始报道正文链接 (如 Bloomberg, WSJ, Reuters 等)
+                    is_techmeme = ("techmeme" in source_key.lower()) or ("techmeme.com" in url)
+                    if is_techmeme:
+                        raw_summary = entry.get("summary") or entry.get("description", "")
+                        bold_match = re.search(r'<b>\s*<a\s+[^>]*href=[\'"]([^\'"]+)[\'"]', raw_summary, re.I)
+                        if bold_match and "techmeme.com" not in bold_match.group(1):
+                            url = bold_match.group(1).replace("&amp;", "&")
+                        else:
+                            all_hrefs = re.findall(r'href=[\'"]([^\'"]+)[\'"]', raw_summary)
+                            for h in all_hrefs:
+                                if "techmeme.com" not in h and h.startswith("http"):
+                                    url = h.replace("&amp;", "&")
+                                    break
+                        
+                        # 提取真实发稿媒体 (如 (Mark Gurman/Bloomberg) -> Bloomberg)
+                        m_source = re.search(r'\((?:[^)]+?/)?([^)/]+)\)\s*$', title)
+                        if m_source:
+                            author = m_source.group(1).strip()
+                        else:
+                            m_cite = re.search(r'/\s*<a[^>]*>([^<]+)</a>\s*:', raw_summary)
+                            if m_cite:
+                                author = m_cite.group(1).strip()
+
                     # 针对 Google News 优化标题与信源识别
                     if " - " in title and ("google" in source_key.lower()):
                         parts = title.rsplit(" - ", 1)
@@ -1661,6 +1684,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         author_display = f"Reddit · {sub_name}"
                         author_handle = sub_name
                         author_avatar = "https://www.redditstatic.com/shreddit/assets/favicon/192x192.png"
+                        source_display = f"Reddit · {sub_name}"
                         tags = ["Reddit社区", sub_name]
                         metrics = {
                             "platform": "reddit",
@@ -1673,10 +1697,20 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     else:
                         platform = "web"
                         category = cfg.get("default_category", "news")
-                        author_display = author if ("google" in source_key.lower()) else cfg["name"]
+                        if is_techmeme:
+                            author_display = author
+                            source_display = author
+                            tags = [author, "今日要闻"]
+                        elif "google" in source_key.lower():
+                            author_display = author
+                            source_display = author
+                            tags = [author, "今日要闻"]
+                        else:
+                            author_display = cfg["name"]
+                            source_display = cfg["name"]
+                            tags = [cfg["name"], "今日要闻"]
                         author_handle = ""
                         author_avatar = ""
-                        tags = [author if "google" in source_key.lower() else cfg["name"], "今日要闻"]
                         metrics = {"platform": "web"}
 
                         # 解码 Google News 重定向链接为实际媒体原始 URL
@@ -1697,7 +1731,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "title_en": title,
                         "url": url,
                         "image_url": img_url,
-                        "source": author if ("google" in source_key.lower()) else cfg["name"],
+                        "source": source_display,
                         "author": author_display,
                         "author_handle": author_handle,
                         "author_avatar": author_avatar,
@@ -1705,8 +1739,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "raw_published_at": iso_time,
                         "metrics": metrics,
                         "spec_tags": spec_tags,
-                        "content_snippet": clean_summary or f"From {cfg['name']}",
-                        "summary_en": clean_summary or f"From {cfg['name']}",
+                        "content_snippet": clean_summary or f"From {source_display}",
+                        "summary_en": clean_summary or f"From {source_display}",
                         "category": category,
                         "tags": tags
                     })
