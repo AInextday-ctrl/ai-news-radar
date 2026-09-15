@@ -17,7 +17,7 @@ import re
 import json
 import time
 from datetime import datetime, timezone
-from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status
 from processor import process_items_batch
 from config import CATEGORIES, AI_CREATORS
 
@@ -190,7 +190,10 @@ def load_existing_items() -> list:
             obsolete_fake_ids = {
                 "x_noam_reasoning_scaling", "x_elon_grok3_colossus", 
                 "x_sama_compute_currency", "x_karpathy_llm_os",
-                "x_demis_alphafold3_impact", "x_fchollet_arc_prize"
+                "x_demis_alphafold3_impact", "x_fchollet_arc_prize",
+                "x_tibo_gpt_reset_architecture", "x_jason_wei_cot_reasoning",
+                "x_dario_frontier_commitment", "x_logan_gemini_flash",
+                "x_noam_plagiarism_clarify"
             }
             x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
 
@@ -253,9 +256,10 @@ def save_news(items: list):
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
     
-    # 按照五大核心分类组织视图，并严格按最新发布时间倒序排列
+    # 按照五大核心分类组织视图，严格核验 24 小时动态置顶状态，并按时间倒序排位
     grouped = {cat_key: [] for cat_key in CATEGORIES}
     for item in items:
+        evaluate_dynamic_pinned_status(item)
         cat = item.get("category", "news")
         if cat not in grouped:
             cat = "news"
@@ -264,7 +268,11 @@ def save_news(items: list):
             grouped[cat].append(item)
 
     for cat_key in grouped:
-        grouped[cat_key].sort(key=parse_time_for_sort, reverse=True)
+        # 仅当发布时间在 24 小时内且包含重置突破内容时享受优先置顶，超 24 小时自然倒序
+        grouped[cat_key].sort(key=lambda x: (
+            1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
+            parse_time_for_sort(x)
+        ), reverse=True)
 
     # 重新聚合去重后的有效项目池
     final_items = []

@@ -2156,12 +2156,29 @@
     // ==========================================
     // 专门卡片渲染：领袖观点·社交卡片 (𝕏 / Reddit 独立排版)
     // ==========================================
+    // 严苛的 24 小时动态置顶判定 (仅限 24h 内且包含重置相关突破内容的资讯，超 24h 自动注销置顶特权)
+    function isItemPinnedActive(item) {
+      if (!item || !item.is_pinned) return false;
+      if (!item.raw_published_at) return false;
+      try {
+        const pubTime = new Date(item.raw_published_at).getTime();
+        const now = Date.now();
+        const diffSec = (now - pubTime) / 1000;
+        // 超过 24 小时 (86400秒) 严格取消置顶特权
+        if (diffSec < 0 || diffSec > 86400) return false;
+      } catch (e) {
+        return false;
+      }
+      const text = `${item.title || ''} ${item.title_zh || ''} ${item.content_snippet || ''} ${(item.tags || []).join(' ')}`.toLowerCase();
+      return text.includes('重置') || text.includes('reset') || text.includes('思维链重启');
+    }
+
     function renderCelebrityCard(item) {
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
-      const isPinned = !!item.is_pinned;
+      const isPinned = isItemPinnedActive(item);
       const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 ${isZh ? '置顶爆款' : 'Pinned'}</span>` : '';
 
       const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
@@ -2884,6 +2901,14 @@
         sideCelebList = sideCelebList.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
       }
       const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
+      recentCeleb.sort((a, b) => {
+        const aPinned = isItemPinnedActive(a) ? 1 : 0;
+        const bPinned = isItemPinnedActive(b) ? 1 : 0;
+        if (aPinned !== bPinned) return bPinned - aPinned;
+        const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+        const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+        return timeB - timeA;
+      });
       const historyCeleb = sideCelebList.filter(it => !isWithin24Hours(it.raw_published_at));
       const streamCelebrity = document.getElementById('stream-celebrity');
       streamCelebrity.innerHTML = recentCeleb.length > 0
@@ -3071,6 +3096,15 @@
         } else if (socialPlatformFilter === 'reddit') {
           list = list.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
         }
+        // 严苛 24 小时动态置顶：仅在 24 小时内且包含重置内容时置顶，超 24 小时自动降级恢复自然时间倒序排位
+        list.sort((a, b) => {
+          const aPinned = isItemPinnedActive(a) ? 1 : 0;
+          const bPinned = isItemPinnedActive(b) ? 1 : 0;
+          if (aPinned !== bPinned) return bPinned - aPinned;
+          const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+          const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+          return timeB - timeA;
+        });
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0 ? list.map(renderCelebrityCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-3">${t.celebNoMatch}</div>`;
       } else if (tab === 'tools') {
