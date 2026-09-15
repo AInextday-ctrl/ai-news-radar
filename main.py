@@ -24,8 +24,62 @@ from config import CATEGORIES, AI_CREATORS
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 PUBLIC_DATA_DIR = os.path.join(os.path.dirname(__file__), "public", "data")
+PUBLIC_DIR = os.path.join(os.path.dirname(__file__), "public")
 OUTPUT_FILE = os.path.join(DATA_DIR, "latest_news.json")
 PUBLIC_OUTPUT_FILE = os.path.join(PUBLIC_DATA_DIR, "latest_news.json")
+SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
+
+
+def generate_sitemap():
+    """Dynamically generate fresh sitemap.xml with current UTC lastmod and section routes."""
+    now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://ainewsradar.xyz/</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/#news</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/#celebrity</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/#tools</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/#videos</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/#prompts</loc>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>
+"""
+    try:
+        os.makedirs(PUBLIC_DIR, exist_ok=True)
+        with open(SITEMAP_FILE, "w", encoding="utf-8") as f:
+            f.write(xml_content.strip() + "\n")
+        print(f"🗺️ 站点地图已动态更新: {SITEMAP_FILE} (lastmod: {now_date})")
+    except Exception as e:
+        print(f"⚠️ 更新站点地图失败: {e}")
 
 
 def parse_time_for_sort(it):
@@ -313,6 +367,9 @@ def save_news(items: list):
 
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(payload, f, ensure_ascii=False, indent=2)
+
+    # 动态同步更新搜索引擎站点地图 sitemap.xml
+    generate_sitemap()
 
     print(f"\n💾 数据已成功保存在: {OUTPUT_FILE} 及 {PUBLIC_OUTPUT_FILE}")
     print("=" * 60)
