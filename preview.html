@@ -5480,12 +5480,195 @@
       renderCategoryView('celebrity');
     }
 
+    // ==========================================
+    // 全网平台爆帖 · 单列原生社交流 (Threads & 𝕏 Native Feed)
+    // 彻底告别 3 列等高呆板卡片，采用类 𝕏/Threads 单列瀑布流
+    // 直显完整原帖段落、配图、Seedance/可灵/通义 AI 视频流预览、终端代码与一键双语切换
+    // ==========================================
+
+    const cardLangState = {};
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function formatSocialText(text) {
+      if (!text) return '';
+      const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
+      return lines.map(line => {
+        let formatted = escapeHtml(line);
+        // 高亮 #标签 与 @提及
+        formatted = formatted.replace(/#([\w\u4e00-\u9fa5]+)/g, '<span class="text-rose-500 hover:underline cursor-pointer font-medium">#$1</span>');
+        formatted = formatted.replace(/@([a-zA-Z0-9_]+)/g, '<span class="text-sky-500 hover:underline cursor-pointer font-medium">@$1</span>');
+        return `<p class="leading-relaxed mb-2.5 text-slate-800 dark:text-slate-100">${formatted}</p>`;
+      }).join('');
+    }
+
+    function detectSocialMediaType(item) {
+      const textLower = ((item.title || '') + ' ' + (item.full_text_en || '') + ' ' + (item.spec_tags || []).join(' ')).toLowerCase();
+      if (item.image_url) return 'image';
+      if (textLower.includes('seedance') || textLower.includes('dreamina') || textLower.includes('wan 2.1') || textLower.includes('kling') || textLower.includes('fastvideo') || textLower.includes('video') || (item.spec_tags && item.spec_tags.some(t => t.includes('视频')))) {
+        return 'video';
+      }
+      if (textLower.includes('flux') || textLower.includes('midjourney') || textLower.includes('sref') || textLower.includes('comfyui') || textLower.includes('generative ui')) {
+        return 'art_prompt';
+      }
+      if (textLower.includes('vibe coding') || textLower.includes('claude code') || textLower.includes('cursor') || textLower.includes('mcp') || textLower.includes('jarvis') || textLower.includes('mla') || textLower.includes('attention') || textLower.includes('context caching') || textLower.includes('factory')) {
+        return 'code_terminal';
+      }
+      return 'text';
+    }
+
+    function renderSocialMediaPreview(item, mediaType, isZh) {
+      const itemId = escapeHtml(item.id || item.url || '');
+      const textLower = ((item.title || '') + ' ' + (item.full_text_en || '')).toLowerCase();
+
+      if (mediaType === 'image' && item.image_url) {
+        return `
+          <div class="mt-3.5 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
+            <img src="${escapeHtml(item.image_url)}" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="window.open('${escapeHtml(item.image_url)}', '_blank')">
+          </div>
+        `;
+      }
+
+      if (mediaType === 'video') {
+        let videoModel = 'Seedance 2.5 电影级原生视频';
+        if (textLower.includes('kling') || textLower.includes('可灵')) videoModel = '快手可灵 Kling 3.0 高清实测';
+        else if (textLower.includes('wan 2.1') || textLower.includes('通义')) videoModel = '阿里通义 Wan 2.1 4K 生成';
+        else if (textLower.includes('hailuo') || textLower.includes('minimax') || textLower.includes('fasth3')) videoModel = 'MiniMax Hailuo / FastVideo 9x 加速';
+        else if (textLower.includes('comfyui')) videoModel = 'ComfyUI 广告级产品视频工作流';
+
+        let promptSnippet = '';
+        const m = (item.full_text_zh || item.full_text_en || '').match(/Prompt[：:\s]+([^\n]+)/i);
+        if (m) {
+          promptSnippet = m[1].trim();
+        } else if (item.title && item.title.includes('Seedance')) {
+          promptSnippet = item.title;
+        }
+
+        return `
+          <div class="mt-3.5 rounded-2xl overflow-hidden border border-slate-800/80 bg-gradient-to-b from-slate-900 via-slate-950 to-black p-3.5 sm:p-4 relative group shadow-xl">
+            <div class="flex items-center justify-between mb-3 text-xs">
+              <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 font-mono text-[11px] font-bold border border-rose-500/30">
+                🎬 ${videoModel}
+              </span>
+              <span class="text-slate-400 font-mono text-[10px] bg-slate-800/70 px-2 py-0.5 rounded-full border border-slate-700/50">4K · 60fps · 电影级运镜</span>
+            </div>
+            
+            <div class="relative w-full aspect-video rounded-xl bg-gradient-to-br from-slate-800/90 via-slate-900 to-black flex flex-col items-center justify-center border border-slate-700/60 overflow-hidden cursor-pointer group-hover:border-rose-500/40 transition-all" onclick="openSocialPostModal('${itemId}')">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(244,63,94,0.18),transparent_70%)]"></div>
+              
+              <div class="w-14 h-14 rounded-full bg-rose-600/90 hover:bg-rose-500 text-white flex items-center justify-center shadow-lg shadow-rose-600/50 group-hover:scale-110 transition-all z-10">
+                <svg class="w-6 h-6 fill-current translate-x-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+              <span class="text-xs font-semibold text-slate-200 mt-2.5 z-10 tracking-wide">${isZh ? '点击预览 AI 连续动态视频与原帖' : 'Click to preview AI dynamic video stream'}</span>
+              
+              <div class="absolute bottom-2.5 right-3 text-[10px] font-mono text-slate-300 bg-black/70 px-2.5 py-1 rounded-md backdrop-blur border border-white/10">
+                GEN-3 CINEMA · MULTI-SHOT
+              </div>
+            </div>
+
+            ${promptSnippet ? `
+              <div class="mt-3 text-[11px] font-mono text-slate-300 bg-black/50 p-2.5 rounded-xl border border-slate-800 leading-relaxed">
+                <span class="text-rose-400 font-bold">✨ Generation Prompt:</span> ${escapeHtml(promptSnippet)}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      if (mediaType === 'art_prompt') {
+        return `
+          <div class="mt-3.5 rounded-2xl border border-purple-500/30 bg-gradient-to-br from-purple-950/30 via-slate-900/80 to-slate-950 p-4 shadow-lg">
+            <div class="flex items-center justify-between mb-2 text-xs">
+              <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 font-mono text-[11px] font-bold border border-purple-500/30">
+                🎨 Midjourney v7 / FLUX.1 生图工程工作流
+              </span>
+              <span class="text-purple-400 font-mono text-[10px]">Prompt & Architecture</span>
+            </div>
+            <div class="text-xs font-mono text-slate-200 bg-black/60 p-3 rounded-xl border border-purple-900/40 leading-relaxed">
+              <span class="text-purple-400">/imagine prompt:</span> ${escapeHtml(item.title || '')} <span class="text-slate-400">--v 7.0 --style raw --ar 16:9 --quality 2</span>
+            </div>
+          </div>
+        `;
+      }
+
+      if (mediaType === 'code_terminal') {
+        let terminalTitle = 'bash - claude-code / cursor-composer';
+        let codeSnippet = '';
+        if (textLower.includes('vibe coding')) {
+          terminalTitle = 'vibe-coding-agent · cursor-composer';
+          codeSnippet = `$ cursor --composer "Build full native SaaS, Stripe billing, auth, deploy to Vercel"\n✔ Architecture synthesized (48 files modified)\n✔ All integration tests passed\n🚀 Live at https://app.example.com | $10k MRR achieved`;
+        } else if (textLower.includes('mcp')) {
+          terminalTitle = 'mcp-server · legacy-refactor-agent';
+          codeSnippet = `[MCP] Connecting to filesystem & postgres servers...\n[Claude 3.7 Thinking] Dissecting 100,000 LOC monolithic architecture\n✔ Automated test suite executed: 421/421 passing\n✔ Refactored dependency injection without regression`;
+        } else if (textLower.includes('jarvis')) {
+          terminalTitle = 'local-jarvis · apple-silicon-metal';
+          codeSnippet = `[Metal] Neural Engine loaded: 0ms cloud latency\n[Voice Duplex] Listening & synthesizing parallel threads...\n[Browser Action] Navigating repository & executing shell pipelines`;
+        } else {
+          terminalTitle = 'terminal · ai-agentic-workflow';
+          codeSnippet = `$ ai-run --model hybrid-reasoning --mode deep-solve\n✔ Synthesizing contextual cache (1M tokens loaded in 28ms)\n✔ Completed end-to-end task validation`;
+        }
+
+        return `
+          <div class="mt-3.5 rounded-2xl border border-slate-800 bg-slate-950 p-3.5 font-mono text-xs shadow-xl">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-800/80 mb-2.5 text-[11px] text-slate-400">
+              <div class="flex items-center space-x-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500/90"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90"></span>
+                <span class="ml-2 text-slate-300 font-semibold">${terminalTitle}</span>
+              </div>
+              <span class="text-[10px] text-slate-500">vibe-coding · terminal</span>
+            </div>
+            <pre class="text-slate-300 text-[11px] sm:text-xs leading-relaxed overflow-x-auto p-1 font-mono whitespace-pre-wrap">${codeSnippet}</pre>
+          </div>
+        `;
+      }
+
+      return '';
+    }
+
+    function toggleCardLanguage(cardKey, itemId) {
+      const isZhSystem = currentLang === 'zh';
+      const currentState = cardLangState[cardKey] || (isZhSystem ? 'zh' : 'en');
+      const nextLang = currentState === 'zh' ? 'en' : 'zh';
+      cardLangState[cardKey] = nextLang;
+
+      const allItems = [
+        ...(cachedData.items || []),
+        ...(cachedData.grouped?.viral_posts || cachedData.viral_posts || []),
+        ...(cachedData.grouped?.celebrity || cachedData.celebrity || [])
+      ];
+      const item = allItems.find(it => String(it.id) === String(itemId) || it.url === itemId || it.title === itemId);
+      if (!item) return;
+
+      const textContainer = document.getElementById(`post-text-${cardKey}`);
+      const langBtn = document.getElementById(`lang-btn-${cardKey}`);
+
+      if (textContainer) {
+        const newText = nextLang === 'zh'
+          ? (item.full_text_zh || item.title_zh || item.title)
+          : (item.full_text_en || item.title_en || item.title);
+        textContainer.innerHTML = formatSocialText(newText);
+      }
+
+      if (langBtn) {
+        langBtn.textContent = nextLang === 'zh' ? (isZhSystem ? '查看英文原文' : 'Switch to English') : (isZhSystem ? '查看中文译文' : 'Switch to Chinese');
+      }
+    }
+
     function renderViralPostsSection(list) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       if (!list || list.length === 0) {
         return `
-          <div class="text-center py-16 px-4 bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800">
+          <div class="text-center py-16 px-4 bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 max-w-2xl mx-auto">
             <span class="text-4xl block mb-2">🔥</span>
             <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-1">${t.viralNoMatch || '暂无符合条件的平台爆帖'}</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400">${isZh ? '过去 24 小时未探测到该分类下满足爆发指标的 AI 贴文，雷达系统持续嗅探中...' : 'No viral threads detected matching criteria in the past 24 hours.'}</p>
@@ -5494,9 +5677,9 @@
       }
 
       return `
-        <div class="space-y-4">
+        <div class="space-y-5">
           <!-- 爆帖顶部热度全景统计横幅 -->
-          <div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs">
+          <div class="max-w-2xl mx-auto flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs">
             <div class="flex items-center space-x-2 text-rose-600 dark:text-rose-300 font-medium">
               <span class="text-base">🚀</span>
               <span>${isZh ? `已捕获 <strong>${list.length}</strong> 条过去 24h 全网现象级 AI 爆帖 · 聚合 𝕏 与 Threads 真实极客第一手突破` : `Tracking <strong>${list.length}</strong> viral AI threads across 𝕏 & Threads in the last 24h`}</span>
@@ -5506,13 +5689,13 @@
             </div>
           </div>
 
-          <!-- 爆款贴文响应式网格 -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            ${list.map(renderViralPostCard).join('')}
+          <!-- 原生社交流：单列逐帖纵向流式瀑布流 (类 Threads / 𝕏 原生体验，长短图文视频自适应) -->
+          <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6">
+            ${list.map((item, idx) => renderViralPostCard(item, idx)).join('')}
           </div>
 
           <!-- 底部全网爆帖归档直通车 -->
-          <div class="mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
+          <div class="max-w-2xl mx-auto mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
             <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/30 to-slate-900 hover:from-rose-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-rose-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
               <div class="flex items-center space-x-2.5">
                 <span class="text-lg p-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 group-hover:scale-110 transition-transform">📜</span>
@@ -5531,12 +5714,12 @@
       `;
     }
 
-    function renderViralPostCard(item) {
-      const t = I18N[currentLang];
+    function renderViralPostCard(item, index) {
       const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const isThreads = item.platform === 'threads' || (item.url && item.url.includes('threads.net'));
-      const itemId = item.id || item.url || '';
+      const itemId = escapeHtml(item.id || item.url || `viral-${index}`);
+      const cardKey = `viral-card-${index !== undefined ? index : Math.random().toString(36).slice(2, 7)}`;
 
       const m = item.metrics || {};
       let views = m.views || '24.5k';
@@ -5548,70 +5731,104 @@
       let retweets = m.retweets || '310';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '310';
 
-      const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
-      const author = item.author || (isThreads ? 'Threads 极客' : '𝕏 极客');
-      const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@viral');
-      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
+      const author = escapeHtml(item.author || (isThreads ? 'Threads 极客' : '𝕏 极客'));
+      const handle = escapeHtml(item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@viral'));
+      const avatar = escapeHtml(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`);
 
       const platformBadge = isThreads
         ? `<span class="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">🧵 Threads 热帖</span>`
         : `<span class="px-2 py-0.5 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">𝕏 平台爆款</span>`;
 
       const surgeBadge = item.surge_badge
-        ? `<span class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-rose-500/15 to-amber-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>${item.surge_badge}</span>`
+        ? `<span class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-rose-500/15 to-amber-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>${escapeHtml(item.surge_badge)}</span>`
         : `<span class="px-2 py-0.5 rounded-lg bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold shrink-0">⚡ 24h 飙升</span>`;
+
+      const mediaType = detectSocialMediaType(item);
+      const mediaHtml = renderSocialMediaPreview(item, mediaType, isZh);
+
+      const initialText = isZh ? (item.full_text_zh || item.title_zh || item.title) : (item.full_text_en || item.title_en || item.title);
+      const formattedBody = formatSocialText(initialText);
 
       const tags = isZh ? (item.spec_tags || []) : (item.spec_tags_en || item.spec_tags || []);
       const tagsHtml = tags.length > 0
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${tags.map(s => `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60"># ${s}</span>`).join('')}</div>`
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-2">${tags.map(s => `<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60">#${escapeHtml(s)}</span>`).join('')}</div>`
         : '';
 
       return `
-        <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 border border-slate-200 dark:border-slate-800/80 hover:border-rose-500/50 hover:shadow-xl hover:shadow-rose-500/10 transition-all cursor-pointer group bg-gradient-to-b from-white/95 to-slate-50/70 dark:from-slate-900/90 dark:to-slate-950/70" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
-          <!-- 卡片顶部平台与爆发速度标签 -->
-          <div class="flex items-center justify-between gap-2 border-b border-slate-200/70 dark:border-slate-800/70 pb-2.5">
-            <div class="flex items-center space-x-1.5 min-w-0">
+        <article id="${cardKey}" class="glass-card rounded-2xl p-4 sm:p-5 border border-slate-200/90 dark:border-slate-800/90 hover:border-slate-300 dark:hover:border-slate-700/80 transition-all bg-white/95 dark:bg-slate-900/90 shadow-sm hover:shadow-md">
+          <!-- 头部：作者信息、发布时间、平台徽章与飙升速度 -->
+          <div class="flex items-start justify-between gap-2">
+            <div class="flex items-center space-x-3 min-w-0">
+              <div class="relative shrink-0">
+                <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author}'">
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isThreads ? 'bg-purple-600' : 'bg-sky-500'} text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow">✓</span>
+              </div>
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1.5 flex-wrap">
+                  <a href="${escapeHtml(item.url)}" target="_blank" class="font-extrabold text-[14px] sm:text-[15px] text-slate-900 dark:text-slate-100 hover:text-rose-600 dark:hover:text-rose-400 transition-colors notranslate">${author}</a>
+                  <span class="text-slate-400 text-xs">·</span>
+                  <span class="text-[11px] font-mono text-slate-400 dark:text-slate-500 shrink-0">${timeObj.display || timeObj.relative}</span>
+                </div>
+                <div class="flex items-center space-x-1.5">
+                  <span class="text-slate-500 dark:text-slate-400 text-xs font-mono truncate notranslate">${handle}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center space-x-1.5 shrink-0">
               ${platformBadge}
               ${surgeBadge}
             </div>
-            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500 shrink-0">🕒 ${timeObj.display || timeObj.relative}</span>
           </div>
 
-          <!-- 作者真实身份信息 (100% 真实头像，认证徽章，真实 handle) -->
-          <div class="flex items-center space-x-3 min-w-0">
-            <div class="relative shrink-0">
-              <img src="${avatar}" class="w-10 h-10 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'Viral'}'">
-              <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isThreads ? 'bg-purple-600' : 'bg-sky-500'} text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow">✓</span>
+          <!-- 正文内容：直显完整段落，随系统语言自适应，支持卡片级即时双语切换 -->
+          <div class="mt-3.5 select-text">
+            <div id="post-text-${cardKey}" class="text-[14px] sm:text-[15px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal">
+              ${formattedBody}
             </div>
-            <div class="min-w-0">
-              <div class="flex items-center space-x-1">
-                <span class="font-extrabold text-sm text-slate-900 dark:text-slate-100 truncate notranslate group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">${author}</span>
-              </div>
-              <span class="text-slate-500 dark:text-slate-400 text-[11px] font-mono truncate block notranslate">${handle}</span>
+            
+            <!-- 卡片级即时双语切换按钮 -->
+            <div class="flex items-center justify-end mt-2 pt-1 border-t border-slate-100/60 dark:border-slate-800/40">
+              <button type="button" onclick="toggleCardLanguage('${cardKey}', '${itemId}')" class="inline-flex items-center gap-1 text-[11px] font-medium text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 py-1 px-2.5 rounded-lg bg-rose-50/80 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200/60 dark:border-rose-800/60 transition-all cursor-pointer">
+                <span>🌐</span>
+                <span id="lang-btn-${cardKey}">${isZh ? '查看英文原文' : '查看中文译文'}</span>
+              </button>
             </div>
           </div>
 
-          <!-- 爆款贴文核心观点精髓 -->
-          <div class="text-xs sm:text-[13px] text-slate-800 dark:text-slate-100 leading-relaxed bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200/80 dark:border-slate-800/80 quote-box group-hover:border-rose-400/30 transition-colors">
-            <span class="text-rose-500 font-serif text-base mr-1">“</span>${displayQuote}<span class="text-rose-500 font-serif text-base ml-1">”</span>
-          </div>
+          <!-- 配图、AI 动态视频流或终端代码直显容器 -->
+          ${mediaHtml}
 
+          <!-- 标签体系 -->
           ${tagsHtml}
 
-          <!-- 四维爆发指标 + 原文与热评入口 -->
-          <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-            <div class="flex items-center space-x-2.5 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono flex-wrap">
-              <span title="全网阅读浏览量">👁️ <span class="notranslate font-semibold">${views}</span></span>
-              <span title="全网点赞数" class="text-rose-500/90 font-semibold">❤️ <span class="notranslate">${likes}</span></span>
-              <span title="热议讨论数" class="text-sky-600 dark:text-sky-400">💬 <span class="notranslate font-semibold">${comments}</span></span>
-              <span title="转推数" class="hidden sm:inline text-purple-500/90">🔁 <span class="notranslate font-semibold">${retweets}</span></span>
+          <!-- 底部原生社交交互指标与直通车 -->
+          <div class="flex items-center justify-between pt-3.5 mt-3.5 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 font-mono">
+            <div class="flex items-center space-x-3 sm:space-x-5 text-[11px]">
+              <span class="flex items-center space-x-1 hover:text-sky-500 cursor-pointer transition-colors" onclick="openSocialPostModal('${itemId}')" title="${isZh ? '查看评论与热议' : 'View Comments'}">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                <span>${comments}</span>
+              </span>
+              <span class="flex items-center space-x-1 hover:text-emerald-500 transition-colors" title="${isZh ? '转推 / 转发' : 'Reposts'}">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>${retweets}</span>
+              </span>
+              <span class="flex items-center space-x-1 hover:text-rose-500 transition-colors text-rose-500/80" title="${isZh ? '点赞' : 'Likes'}">
+                <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                <span>${likes}</span>
+              </span>
+              <span class="flex items-center space-x-1 hover:text-blue-500 transition-colors" title="${isZh ? '全网阅读浏览' : 'Views'}">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                <span>${views}</span>
+              </span>
             </div>
-            <div class="flex items-center space-x-2 shrink-0">
-              <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 text-[10px] sm:text-[11px] font-semibold transition-all shadow-sm">
-                💬 原文与热评
+
+            <div class="flex items-center space-x-2">
+              <button type="button" onclick="openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-600 dark:text-rose-400 border border-rose-500/30 text-[11px] font-semibold transition-all">
+                ${isZh ? '💬 讨论与热评' : '💬 Hot Takes'}
               </button>
-              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 font-medium text-[11px] flex items-center space-x-0.5">
-                <span>${isThreads ? 'Threads 原帖' : '𝕏 原推'}</span>
+              <a href="${escapeHtml(item.url)}" target="_blank" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition-all flex items-center space-x-0.5">
+                <span>${isThreads ? (isZh ? 'Threads 原帖' : 'Threads Post') : (isZh ? '𝕏 原文' : '𝕏 Post')}</span>
                 <span>↗</span>
               </a>
             </div>
