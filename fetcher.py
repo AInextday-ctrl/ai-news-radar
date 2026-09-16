@@ -1671,7 +1671,7 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
 # ==========================================
 # 5.5 抓取 24 小时全网平台爆帖 (𝕏 & Threads 2026 四大赛道野生极客与现象级突破)
 # ==========================================
-def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
+def fetch_viral_social_posts(max_items: int = 80) -> List[Dict[str, Any]]:
     """
     Fetch 24-hour viral AI posts from 𝕏 (Twitter) and Threads across the 4 major contemporary tracks:
     1. AI 视频生成 (Seedance 2.0/2.5, Wan 2.1, Kling 3.0, Hailuo, Runway, Sora)
@@ -1680,7 +1680,7 @@ def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
     4. AI 实际应用与本地化部署 (DeepSeek R1/V3, Ollama, Computer Use, AI Agents)
     Strictly enforces:
     1. 100% authentic individual creators / developers (zero fake/synthetic bot accounts).
-    2. Surging engagement: views >= 10k or likes >= 1k within 24 hours.
+    2. Surging engagement: views >= 10k or likes >= 1k on 𝕏; likes >= 50 on Threads.
     3. Direct status URLs (x.com/{user}/status/{id} or threads.net/@{user}/post/{id}).
     4. Bilingual quotes and verbatim full texts with comments list.
     """
@@ -1755,7 +1755,7 @@ def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
                         feed = feedparser.parse(resp.text)
                         track_added = 0
                         for entry in feed.entries:
-                            if len(items) >= max_items or track_added >= 6:
+                            if len(items) >= max_items or track_added >= 20:
                                 break
                             raw_title = entry.get("title", "").strip()
                             clean_t = re.sub(r'\s*-\s*(?:threads\.net|Threads|x\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()

@@ -928,9 +928,11 @@
             <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">👤 行业领袖与大V</button>
           </div>
 
-          <!-- 子筛选 B：24h平台爆帖专属 (全部爆款 / 𝕏 (Twitter) 爆款 / 🧵 Threads 热议) -->
+          <!-- 子筛选 B：24h平台爆帖专属 (全部爆款 / 🚀 极速飙升黑马 / 💡 极客硬核首发 / 𝕏 爆款 / 🧵 Threads 热议) -->
           <div id="viral-platform-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
             <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all">🔥 全部爆款</button>
+            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">🚀 极速飙升黑马</button>
+            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">💡 极客硬核首发</button>
             <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">𝕏 (Twitter) 爆款</button>
             <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">🧵 Threads 热议</button>
           </div>
@@ -4990,7 +4992,11 @@
           viralList = viralList.filter(it => isWithin24Hours(it.raw_published_at));
 
           if (viralPlatformFilter !== 'all') {
-            viralList = viralList.filter(it => it.platform === viralPlatformFilter);
+            if (viralPlatformFilter === 'x' || viralPlatformFilter === 'threads') {
+              viralList = viralList.filter(it => it.platform === viralPlatformFilter);
+            } else if (viralPlatformFilter === 'surging' || viralPlatformFilter === 'breakthrough' || viralPlatformFilter === 'top_viral') {
+              viralList = viralList.filter(it => it.trend_type === viralPlatformFilter);
+            }
           }
           if (searchQuery) {
             viralList = filterList(viralList);

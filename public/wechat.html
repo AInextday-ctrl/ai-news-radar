@@ -100,15 +100,18 @@
       
       <!-- 快捷操作工具条 -->
       <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
-        <div class="flex items-center gap-2">
-          <button id="copyAllHtmlBtn" onclick="copyActiveArticleHtml()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-emerald-900/30 flex items-center gap-2">
-            <span>🟢 一键复制微信排版</span>
+        <div class="flex items-center flex-wrap gap-2">
+          <button id="copyMdBtn" onclick="copyActiveArticleMarkdown()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-emerald-900/40 flex items-center gap-2 border border-emerald-400/30">
+            <span>⚡ 一键复制 Markdown (免掉格式·强烈推荐)</span>
           </button>
-          <button onclick="selectAllArticleContent()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-600" title="若一键复制被浏览器拦截，可点击此按钮自动全选，直接在键盘按 Ctrl+C 即可带完整样式复制">
-            <span>📋 全选排版 (备用)</span>
+          <a href="https://editor.mdnice.com/" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 shadow-md">
+            <span>👉 打开 MDNice ↗</span>
+          </a>
+          <button id="copyAllHtmlBtn" onclick="copyActiveArticleHtml()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-600" title="复制原生内联 HTML 格式">
+            <span>🟢 复制原生 HTML (备用)</span>
           </button>
-          <button onclick="copyCurrentHeadline()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5">
-            <span>🏷️ 复制当前标题</span>
+          <button onclick="copyCurrentHeadline()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-700">
+            <span>🏷️ 复制主标题</span>
           </button>
         </div>
 
@@ -119,6 +122,27 @@
           <a id="sourceLinkBtn" href="#" target="_blank" class="text-slate-400 hover:text-slate-200 underline">
             查看原文 ↗
           </a>
+        </div>
+      </div>
+
+      <!-- 3步无损排版指引横幅 -->
+      <div class="bg-gradient-to-r from-emerald-950/40 via-slate-900/60 to-blue-950/40 border border-emerald-700/40 rounded-xl p-3.5 text-xs text-slate-300 shadow-sm">
+        <div class="flex items-center gap-2 font-bold text-emerald-400 mb-2 text-sm">
+          <span>🚀</span> <span>微信排版 100% 不掉色·不挤字极速 3 步指南：</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300">
+          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
+            <span class="bg-emerald-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">1</span>
+            <div>点击上方 <strong class="text-emerald-400">⚡ 复制 Markdown</strong></div>
+          </div>
+          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
+            <span class="bg-blue-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">2</span>
+            <div>点击 <strong class="text-blue-400">👉 打开 MDNice ↗</strong> 粘贴内容，在右上角任意挑选喜欢的主题</div>
+          </div>
+          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
+            <span class="bg-teal-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">3</span>
+            <div>点击 MDNice 右上角 <strong class="text-teal-300">复制到公众号</strong>，Ctrl+V 粘贴进微信后台！</div>
+          </div>
         </div>
       </div>
 
@@ -176,8 +200,21 @@
         </div>
       </div>
 
+      <!-- 视图切换选项卡 (手机预览 vs Markdown 源码) -->
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2 pt-1">
+        <div class="flex items-center gap-2">
+          <button id="tabPreviewBtn" onclick="switchViewTab('preview')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm flex items-center gap-1.5">
+            <span>📱 手机效果预览</span>
+          </button>
+          <button id="tabMarkdownBtn" onclick="switchViewTab('markdown')" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5">
+            <span>📝 MDNice 专属 Markdown 源码</span>
+          </button>
+        </div>
+        <span class="text-xs text-slate-500" id="viewTabHint">当前模式：手机 1:1 仿真预览</span>
+      </div>
+
       <!-- 手机端 1:1 模拟预览器容器 (标定 375px~390px 真实手机黄金视口) -->
-      <div class="flex justify-center py-2">
+      <div id="phoneViewSection" class="flex justify-center py-2">
         <div class="phone-mockup w-full max-w-[395px] bg-slate-950 rounded-[40px] border-4 border-slate-700 overflow-hidden flex flex-col shadow-2xl shadow-blue-950/40">
           <!-- 手机流海与状态栏 -->
           <div class="bg-slate-950 h-8 px-6 flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800 select-none">
@@ -208,6 +245,19 @@
             <div class="w-28 h-1 bg-slate-700 rounded-full"></div>
           </div>
         </div>
+      </div>
+
+      <!-- Markdown 源码直览器容器 -->
+      <div id="markdownViewSection" class="hidden flex-col space-y-2 py-2">
+        <div class="flex items-center justify-between bg-slate-900 px-4 py-2.5 rounded-t-xl border border-slate-700 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="text-emerald-400 font-mono font-bold">📄 MDNice 专属适配源码 (支持所有 Markdown 编辑器)</span>
+          </div>
+          <button onclick="copyActiveArticleMarkdown()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold px-3 py-1.5 rounded text-xs transition flex items-center gap-1.5 shadow">
+            <span>📋 一键复制 Markdown</span>
+          </button>
+        </div>
+        <textarea id="markdownSourceTextarea" readonly class="w-full h-[620px] p-4 bg-slate-950 font-mono text-xs text-slate-200 rounded-b-xl border border-slate-800 border-t-0 focus:outline-none custom-scrollbar select-text leading-relaxed resize-none"></textarea>
       </div>
 
     </section>
@@ -448,6 +498,12 @@
       const renderArea = document.getElementById('wechatArticleRenderArea');
       renderArea.innerHTML = art.inline_html || '<div class="p-6 text-slate-400">无排版内容</div>';
 
+      // 渲染 Markdown 专属源码
+      const mdArea = document.getElementById('markdownSourceTextarea');
+      if (mdArea) {
+        mdArea.value = art.markdown_content || '';
+      }
+
       // 绑定原文链接
       const srcBtn = document.getElementById('sourceLinkBtn');
       if (art.url) {
@@ -459,6 +515,59 @@
 
       // 重置滚动条
       document.getElementById('phoneScrollContainer').scrollTop = 0;
+    }
+
+    function switchViewTab(tab) {
+      const phoneSec = document.getElementById('phoneViewSection');
+      const mdSec = document.getElementById('markdownViewSection');
+      const tabPrevBtn = document.getElementById('tabPreviewBtn');
+      const tabMdBtn = document.getElementById('tabMarkdownBtn');
+      const hint = document.getElementById('viewTabHint');
+
+      if (tab === 'markdown') {
+        phoneSec.classList.add('hidden');
+        phoneSec.classList.remove('flex');
+        mdSec.classList.remove('hidden');
+        mdSec.classList.add('flex');
+
+        tabPrevBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5";
+        tabMdBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm flex items-center gap-1.5";
+        hint.innerText = "当前模式：Markdown 源码直览 (专为 MDNice / 135 打造)";
+      } else {
+        mdSec.classList.add('hidden');
+        mdSec.classList.remove('flex');
+        phoneSec.classList.remove('hidden');
+        phoneSec.classList.add('flex');
+
+        tabPrevBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-blue-600 text-white shadow-sm flex items-center gap-1.5";
+        tabMdBtn.className = "px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center gap-1.5";
+        hint.innerText = "当前模式：手机 1:1 仿真预览";
+      }
+    }
+
+    async function copyActiveArticleMarkdown() {
+      const art = currentArticles[activeArticleIndex];
+      const md = (art && art.markdown_content) || '';
+      if (!md) {
+        showToast("暂无可复制的 Markdown 源码");
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(md);
+        showToast("✓ Markdown 源码已复制！请到 MDNice (editor.mdnice.com) 粘贴并一键导出到微信");
+      } catch (e) {
+        const textarea = document.getElementById('markdownSourceTextarea');
+        if (textarea) {
+          switchViewTab('markdown');
+          textarea.focus();
+          textarea.select();
+          document.execCommand('copy');
+          showToast("✓ 已为您自动全选 Markdown！按键盘 Ctrl+C 复制");
+        } else {
+          prompt("请手动复制 Markdown 源码：", md);
+        }
+      }
     }
 
     async function copyActiveArticleHtml() {
