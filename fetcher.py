@@ -1490,7 +1490,7 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
 # ==========================================
 # 5.5. 实时抓取当天全网轰动 𝕏 (Twitter) 爆款推文
 # ==========================================
-def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
+def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
     """
     Fetch viral, real-time X (Twitter) posts of the day.
     Strictly enforces direct status URLs (https://x.com/<user>/status/<id>) - never generic profile pages.
@@ -1549,81 +1549,88 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
 
     # 2. 从 Google News site:x.com 检索当天高热推文，并严格解析出真实的 status 深度直链
     if len(items) < max_items and googlenewsdecoder:
-        gnews_url = "https://news.google.com/rss/search?q=site:x.com+AI+OR+LLM+OR+OpenAI+when:1d&hl=en-US&gl=US&ceid=US:en"
-        try:
-            with httpx.Client(headers=HEADERS, follow_redirects=True, timeout=12) as client:
-                resp = client.get(gnews_url)
-                if resp.status_code == 200:
-                    feed = feedparser.parse(resp.text)
-                    for entry in feed.entries:
-                        raw_title = entry.get("title", "").strip()
-                        cleaned_title = re.sub(r'\s*-\s*(?:x\.com|twitter\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()
-                        if not cleaned_title or len(cleaned_title) < 15:
-                            continue
+        search_queries = [
+            "https://news.google.com/rss/search?q=site:x.com+(AI+OR+LLM+OR+OpenAI+OR+Anthropic+OR+Claude+OR+DeepSeek)+when:1d&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=site:x.com+(Gemini+OR+Grok+OR+Cursor+OR+Perplexity+OR+Runway+OR+Midjourney)+when:1d&hl=en-US&gl=US&ceid=US:en",
+            "https://news.google.com/rss/search?q=site:x.com+(\"Sam+Altman\"+OR+\"Yann+LeCun\"+OR+\"Karpathy\"+OR+\"Jim+Fan\")+when:1d&hl=en-US&gl=US&ceid=US:en"
+        ]
+        for gnews_url in search_queries:
+            if len(items) >= max_items:
+                break
+            try:
+                with httpx.Client(headers=HEADERS, follow_redirects=True, timeout=12) as client:
+                    resp = client.get(gnews_url)
+                    if resp.status_code == 200:
+                        feed = feedparser.parse(resp.text)
+                        for entry in feed.entries:
+                            raw_title = entry.get("title", "").strip()
+                            cleaned_title = re.sub(r'\s*-\s*(?:x\.com|twitter\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()
+                            if not cleaned_title or len(cleaned_title) < 15:
+                                continue
 
-                        # 严格过滤非技术杂质
-                        if any(bad in cleaned_title.lower() for bad in NOISE_DISCARD_KEYWORDS):
-                            continue
+                            # 严格过滤非技术杂质
+                            if any(bad in cleaned_title.lower() for bad in NOISE_DISCARD_KEYWORDS):
+                                continue
 
-                        raw_link = entry.get("link", "")
-                        real_url = None
-                        try:
-                            dec = googlenewsdecoder.new_decoderv1(raw_link)
-                            if dec.get("status"):
-                                real_url = dec.get("decoded_url")
-                        except Exception:
-                            pass
+                            raw_link = entry.get("link", "")
+                            real_url = None
+                            try:
+                                dec = googlenewsdecoder.new_decoderv1(raw_link)
+                                if dec.get("status"):
+                                    real_url = dec.get("decoded_url")
+                            except Exception:
+                                pass
 
-                        if not real_url:
-                            continue
+                            if not real_url:
+                                continue
 
-                        # 必须是真实的 tweet status 深度直链，严禁个人主页或重定向中间页
-                        m = re.search(r'https?://(?:twitter|x)\.com/([^/]+)/status/(\d+)', real_url)
-                        if not m:
-                            continue
+                            # 必须是真实的 tweet status 深度直链，严禁个人主页或重定向中间页
+                            m = re.search(r'https?://(?:twitter|x)\.com/([^/]+)/status/(\d+)', real_url)
+                            if not m:
+                                continue
 
-                        u_user, s_id = m.groups()
-                        canonical_url = f"https://x.com/{u_user}/status/{s_id}"
-                        if any(it["url"] == canonical_url for it in items):
-                            continue
-                        if not is_tweet_live(canonical_url):
-                            continue
+                            u_user, s_id = m.groups()
+                            canonical_url = f"https://x.com/{u_user}/status/{s_id}"
+                            if any(it["url"] == canonical_url for it in items):
+                                continue
+                            if not is_tweet_live(canonical_url):
+                                continue
 
-                        profile = match_celebrity_profile(u_user)
-                        author_name = profile["name"] if profile else f"@{u_user}"
-                        author_handle = profile["handle"] if profile else f"@{u_user}"
-                        author_avatar = profile["avatar"] if profile else f"https://unavatar.io/x/{u_user}"
-                        is_leader = profile is not None
+                            profile = match_celebrity_profile(u_user)
+                            author_name = profile["name"] if profile else f"@{u_user}"
+                            author_handle = profile["handle"] if profile else f"@{u_user}"
+                            author_avatar = profile["avatar"] if profile else f"https://unavatar.io/x/{u_user}"
+                            is_leader = profile is not None
 
-                        iso_time = parse_to_iso(entry.get("published_parsed"))
-                        spec_tags = extract_tech_specs(cleaned_title, "") or (["𝕏当天爆款", "实时动态"] if is_leader else ["科技资讯", "行业快讯"])
-                        item_id = make_id(canonical_url, cleaned_title)
+                            iso_time = parse_to_iso(entry.get("published_parsed"))
+                            spec_tags = extract_tech_specs(cleaned_title, "") or (["𝕏当天爆款", "实时动态"] if is_leader else ["科技资讯", "行业快讯"])
+                            item_id = make_id(canonical_url, cleaned_title)
 
-                        items.append({
-                            "id": item_id,
-                            "title": cleaned_title,
-                            "title_en": cleaned_title,
-                            "title_zh": None,
-                            "url": canonical_url,
-                            "image_url": None,
-                            "source": f"𝕏 (Twitter) · {author_handle}",
-                            "author": author_name,
-                            "author_handle": author_handle,
-                            "author_avatar": author_avatar,
-                            "platform": "x",
-                            "raw_published_at": iso_time,
-                            "metrics": {"views": "152.0k", "likes": "38.2k", "comments": "2.1k", "retweets": "5.6k", "platform": "x", "verified": True},
-                            "spec_tags": spec_tags,
-                            "content_snippet": cleaned_title,
-                            "summary_en": cleaned_title,
-                            "summary_zh": None,
-                            "category": "celebrity" if is_leader else "news",
-                            "tags": ["𝕏当天爆款", "实时推文"] if is_leader else ["𝕏快讯", "行业动态"]
-                        })
-                        if len(items) >= max_items:
-                            break
-        except Exception as e:
-            print(f"  ❌ [𝕏 实时爆款] Google News 抓取失败: {e}")
+                            items.append({
+                                "id": item_id,
+                                "title": cleaned_title,
+                                "title_en": cleaned_title,
+                                "title_zh": None,
+                                "url": canonical_url,
+                                "image_url": None,
+                                "source": f"𝕏 (Twitter) · {author_handle}",
+                                "author": author_name,
+                                "author_handle": author_handle,
+                                "author_avatar": author_avatar,
+                                "platform": "x",
+                                "raw_published_at": iso_time,
+                                "metrics": {"views": "152.0k", "likes": "38.2k", "comments": "2.1k", "retweets": "5.6k", "platform": "x", "verified": True},
+                                "spec_tags": spec_tags,
+                                "content_snippet": cleaned_title,
+                                "summary_en": cleaned_title,
+                                "summary_zh": None,
+                                "category": "celebrity" if is_leader else "news",
+                                "tags": ["𝕏当天爆款", "实时推文"] if is_leader else ["𝕏快讯", "行业动态"]
+                            })
+                            if len(items) >= max_items:
+                                break
+            except Exception as e:
+                print(f"  ❌ [𝕏 实时爆款] Google News 抓取异常 ({gnews_url[:60]}...): {e}")
 
     for it in items:
         evaluate_dynamic_pinned_status(it)

@@ -571,6 +571,11 @@
           <span id="nav-text-prompts">提示词库·咒语</span>
           <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-prompts">0</span>
         </button>
+        <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-slate-200 hover:bg-slate-800/80 transition-all flex items-center space-x-1.5">
+          <span>📜</span>
+          <span id="nav-text-archive">历史资讯库</span>
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800/80 text-slate-400 font-mono ml-0.5" id="badge-count-archive">0</span>
+        </button>
       </div>
 
       <!-- 全站搜索筛选器 -->
@@ -754,16 +759,24 @@
         <div class="space-y-3.5" id="stream-news">
           <!-- 动态注入快讯卡片 (默认仅展示 24 小时以内最新) -->
         </div>
-        <!-- 快讯历史归档折叠区 -->
-        <div id="archive-section-news" class="hidden mt-4 pt-3 border-t border-slate-800/80">
-          <button type="button" onclick="toggleHistoryArchive('news')" id="btn-archive-news" class="w-full py-2.5 px-3.5 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-xs text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
-            <span class="flex items-center space-x-1.5">
-              <span>📜</span>
-              <span id="txt-archive-news">查看历史归档</span>
-            </span>
-            <span id="arrow-archive-news" class="text-slate-500 group-hover:text-amber-400 transition-transform duration-200">▼</span>
+        <!-- 快讯全量历史归档库入口 (超 24 小时沉淀库，带完整多页翻查) -->
+        <div id="archive-section-news" class="mt-4 pt-3 border-t border-slate-800/80">
+          <button type="button" onclick="switchTab('archive'); filterArchiveCategory('news');" id="btn-archive-news" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+            <div class="flex items-center space-x-2.5">
+              <span class="text-lg p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
+              <div class="text-left">
+                <div class="font-bold flex items-center space-x-2">
+                  <span id="txt-archive-news">查看历史资讯全量归档库</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono border border-indigo-500/30">分页回溯</span>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-0.5">超出 24 小时的深度快讯已安全沉淀，支持分类检索与翻页查阅</p>
+              </div>
+            </div>
+            <div class="flex items-center space-x-1 text-xs text-indigo-400 group-hover:text-indigo-300 font-mono shrink-0 pl-2">
+              <span class="hidden sm:inline">前往归档库</span>
+              <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
+            </div>
           </button>
-          <div id="container-archive-news" class="hidden mt-3.5 space-y-3.5"></div>
         </div>
       </section>
 
@@ -1004,6 +1017,53 @@
       <!-- 网格或列表呈现 -->
       <div id="cat-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 由 JS 渲染 -->
+      </div>
+    </div>
+
+    <!-- 视图 3: 历史资讯全量归档库 (带分类筛选与完整翻页机制) -->
+    <div id="view-archive" class="hidden space-y-5">
+      <!-- 归档库头部横幅 -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-100 dark:bg-slate-900/60 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xl">📜</span>
+            <h2 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-slate-100" id="archive-view-title">历史资讯全量归档库</h2>
+            <span id="archive-total-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-mono font-semibold border border-indigo-500/30">已收录 0 篇</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="archive-view-desc">全量沉淀超出 24 小时的历史快讯、权威领袖观点与落地神器，支持即时分类检索与跨页回溯</p>
+        </div>
+
+        <!-- 归档库内快捷搜索框 -->
+        <div class="relative shrink-0 w-full sm:w-72">
+          <input type="text" id="archive-search-input" oninput="handleArchiveSearch(this.value)" placeholder="在历史归档中检索..." class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-2 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors shadow-inner">
+          <button id="btn-clear-archive-search" onclick="clearArchiveSearch()" class="hidden absolute right-6 top-2 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
+          <span class="absolute right-2.5 top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
+        </div>
+      </div>
+
+      <!-- 归档分类二级筛选栏 -->
+      <div class="flex items-center justify-between flex-wrap gap-2 pb-1 border-b border-slate-200 dark:border-slate-800/80">
+        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
+          <button onclick="filterArchiveCategory('all')" id="arch-cat-all" class="arch-filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30">📚 全部归档 (<span id="arch-count-all">0</span>)</button>
+          <button onclick="filterArchiveCategory('news')" id="arch-cat-news" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">⚡ 行业快讯 (<span id="arch-count-news">0</span>)</button>
+          <button onclick="filterArchiveCategory('celebrity')" id="arch-cat-celebrity" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🐦 领袖观点 (<span id="arch-count-celeb">0</span>)</button>
+          <button onclick="filterArchiveCategory('tools')" id="arch-cat-tools" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🛠️ 落地神器 (<span id="arch-count-tools">0</span>)</button>
+          <button onclick="filterArchiveCategory('videos')" id="arch-cat-videos" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🎬 实战视频 (<span id="arch-count-videos">0</span>)</button>
+        </div>
+
+        <div class="text-xs text-slate-400 font-mono" id="archive-page-summary">
+          <!-- 第 1 / 14 页 · 共 162 条 -->
+        </div>
+      </div>
+
+      <!-- 归档卡片网格容器 -->
+      <div id="archive-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[300px]">
+        <!-- 骨架屏或内容注入 -->
+      </div>
+
+      <!-- 优雅分页导航组件 -->
+      <div id="archive-pagination-container" class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
+        <!-- 由 renderArchivePagination() 动态生成 -->
       </div>
     </div>
 
@@ -1444,13 +1504,17 @@
         aiAnalysisBtn: "资讯概要",
         expandCatNewsArchive: "点击展开历史资讯库",
         collapseCatNewsArchive: "收起历史资讯库 ↑",
+        archiveViewTitle: "历史资讯全量归档库",
+        archiveViewDesc: "全量沉淀超出24小时的历史快讯、权威领袖观点与落地神器，支持即时分类检索与跨页回溯",
+        archiveSearchPlaceholder: "在历史归档中检索...",
         tabs: {
           all: "综合全景",
           news: "突发·行业快讯",
           celebrity: "领袖观点·社交",
           tools: "场景落地·实用神器",
           videos: "实战视频·演示",
-          prompts: "提示词库·咒语"
+          prompts: "提示词库·咒语",
+          archive: "历史资讯库"
         }
       },
       en: {
@@ -1580,13 +1644,17 @@
         aiAnalysisBtn: "Briefing",
         expandCatNewsArchive: "Expand Historical News Archive",
         collapseCatNewsArchive: "Collapse Historical Archive ↑",
+        archiveViewTitle: "Historical Intelligence Archive",
+        archiveViewDesc: "Comprehensive repository of past AI news, expert voices, and practical tools with search and pagination",
+        archiveSearchPlaceholder: "Search within archives...",
         tabs: {
           all: "All-in-One",
           news: "Breaking News",
           celebrity: "Voices & Social",
           tools: "Applied Tools",
           videos: "Hands-on Videos",
-          prompts: "Prompt Bank"
+          prompts: "Prompt Bank",
+          archive: "Historical Archive"
         }
       }
     };
@@ -2244,6 +2312,15 @@
       const modalTitle = document.getElementById('modal-video-title');
       if (modalTitle) modalTitle.textContent = t.modalVideoTitle;
 
+      const navArchive = document.getElementById('nav-text-archive');
+      if (navArchive) navArchive.textContent = t.tabs.archive || '历史资讯库';
+      const arcTitle = document.getElementById('archive-view-title');
+      if (arcTitle) arcTitle.textContent = t.archiveViewTitle || '历史资讯全量归档库';
+      const arcDesc = document.getElementById('archive-view-desc');
+      if (arcDesc) arcDesc.textContent = t.archiveViewDesc || '全量沉淀超出24小时的历史快讯...';
+      const arcInput = document.getElementById('archive-search-input');
+      if (arcInput) arcInput.placeholder = t.archiveSearchPlaceholder || '在历史归档中检索...';
+
       if (cachedData) {
         renderUI(cachedData);
       }
@@ -2253,7 +2330,7 @@
     function switchTab(tab) {
       currentTab = tab;
       
-      const tabKeys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
+      const tabKeys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts', 'archive'];
       tabKeys.forEach(k => {
         const btn = document.getElementById(`tab-btn-${k}`);
         if (btn) {
@@ -2267,17 +2344,25 @@
 
       const viewAll = document.getElementById('view-all');
       const viewCat = document.getElementById('view-category');
+      const viewArchive = document.getElementById('view-archive');
       const celebSubfilter = document.getElementById('celebrity-subfilter');
       const toolsSubfilter = document.getElementById('tools-subfilter');
       const videosSubfilter = document.getElementById('videos-subfilter');
       const promptsSubfilter = document.getElementById('prompts-subfilter');
 
       if (tab === 'all') {
-        viewAll.classList.remove('hidden');
-        viewCat.classList.add('hidden');
+        if (viewAll) viewAll.classList.remove('hidden');
+        if (viewCat) viewCat.classList.add('hidden');
+        if (viewArchive) viewArchive.classList.add('hidden');
+      } else if (tab === 'archive') {
+        if (viewAll) viewAll.classList.add('hidden');
+        if (viewCat) viewCat.classList.add('hidden');
+        if (viewArchive) viewArchive.classList.remove('hidden');
+        renderArchiveView();
       } else {
-        viewAll.classList.add('hidden');
-        viewCat.classList.remove('hidden');
+        if (viewAll) viewAll.classList.add('hidden');
+        if (viewCat) viewCat.classList.remove('hidden');
+        if (viewArchive) viewArchive.classList.add('hidden');
 
         if (celebSubfilter) celebSubfilter.classList.toggle('hidden', tab !== 'celebrity');
         if (toolsSubfilter) toolsSubfilter.classList.toggle('hidden', tab !== 'tools');
@@ -2293,7 +2378,8 @@
         }
 
         const t = I18N[currentLang];
-        document.getElementById('cat-view-title').textContent = t.tabs[tab];
+        const titleEl = document.getElementById('cat-view-title');
+        if (titleEl) titleEl.textContent = t.tabs[tab] || tab;
         const catDesc = document.getElementById('cat-view-desc');
         if (catDesc) catDesc.textContent = t.catViewDesc;
         renderCategoryView(tab);
@@ -2447,14 +2533,32 @@
       }
     }
 
-    // 官方企业、前沿实验室与技术品牌官方推特白名单与判定引擎
+    // 官方企业、前沿实验室与技术品牌官方推特白名单与判定引擎 (124+ 全景知名品牌矩阵)
     const COMPANY_HANDLES = new Set([
-      'openaidevs', 'openai', 'googleai', 'googleaistudio', 'googledeepmind',
-      'anthropicai', 'nvidia', 'deepseek_ai', 'openrouter', 'mistralai',
-      'perplexity_ai', 'midjourney', 'cursor_ai', 'huggingface', 'cohere',
-      'replicate', 'togetherai', 'groqinc', 'stabilityai', 'runwayml',
-      'blackforestlabs', 'xai', 'meta', 'microsoft', 'apple', 'ft', 'foxnews',
-      'orbitionnetwork', 'unusual_whales', 'kobeissiletter', 'mtslive', 'businessbarista'
+      'aider_ai', 'alibaba_qwen', 'amd', 'anthropic', 'anthropicai', 'anyscalecompute',
+      'apple', 'arm', 'artificialanlys', 'augmentcode', 'awscloud', 'baichuanai',
+      'baidu_inc', 'baseten', 'bfl_ml', 'businessbarista', 'bytedancetalk', 'cartesia_ai',
+      'cerebras', 'cerebrassystems', 'character_ai', 'civitai', 'claudeai', 'clayrun',
+      'codeiumdev', 'cognition_labs', 'cohere', 'continuedev', 'coreweave', 'crewaiinc',
+      'cursor_ai', 'decagon_ai', 'deepseek', 'deepseek_ai', 'dify_ai', 'elevenlabsio',
+      'factoryai', 'fireworksai', 'foxnews', 'ft', 'genspark_ai', 'github',
+      'gleansearch', 'googleai', 'googleaistudio', 'googledeepmind', 'groq', 'groqinc',
+      'hailuo_ai', 'harvey_ai', 'hedra_labs', 'heptabase', 'heygen_official', 'huggingface',
+      'ibmresearch', 'ideogram_ai', 'intelai', 'jandotai', 'kling_ai', 'kobeissiletter',
+      'krea_ai', 'lambdaapi', 'langchainai', 'leonardoai_', 'llama_index', 'lmstudioai',
+      'lmsysorg', 'lovable_dev', 'luma_ai', 'magic_dev', 'magnific_ai', 'meshyai',
+      'meta', 'metaai', 'microsoft', 'midjourney', 'milvusio', 'minimax_ai',
+      'mistral', 'mistralai', 'modal_labs', 'moonshotai', 'msftresearch', 'mtslive',
+      'notionhq', 'nvidia', 'nvidiaai', 'nvidiaomniverse', 'ollama', 'openai',
+      'openaidevs', 'openinterpreter', 'openrouter', 'orbitionnetwork', 'perplexity', 'perplexity_ai',
+      'pika_labs', 'pinecone', 'play_ht', 'poe_platform', 'pyautogen', 'qdrant_engine',
+      'qualcomm', 'recraftai', 'replicate', 'replit', 'runpod_io', 'runwayml',
+      'sambanovaai', 'scale_ai', 'sensetime_tech', 'sgl_project', 'sierra_ai', 'sourcegraph',
+      'stabilityai', 'stackblitz', 'stepfun_ai', 'suno_ai_', 'supermaven_ai', 'synthesiaio',
+      'tabnine', 'tencentglobal', 'tenstorrent', 'together', 'togethercompute', 'tripoai',
+      'trychroma', 'udio', 'unslothai', 'unusual_whales', 'v0', 'vercel',
+      'vllm_project', 'warpdotdev', 'weaviate_io', 'weights_biases', 'xai', 'yousearchengine',
+      'zhipuai'
     ]);
 
     function isCompanyOrBrand(it) {
@@ -2469,6 +2573,250 @@
       if (/(?:team|devs|studio|labs|corp|inc|media|news|network|letter)/i.test(h)) return true;
       if (a.includes('官方') || a.includes('团队') || a.includes('平台') || a.includes('机构') || a.includes('developers') || a.includes('research team')) return true;
       return false;
+    }
+
+
+    // ==========================================
+    // 历史全量归档库管理引擎 (带分类筛选、实时搜索与优雅多页翻查)
+    // ==========================================
+    let cachedArchiveData = null;
+    let archiveLoading = false;
+    let archiveCurrentCategory = 'all';
+    let archiveSearchQuery = '';
+    let archiveCurrentPage = 1;
+    const ARCHIVE_PAGE_SIZE = 12;
+
+    async function loadArchiveData() {
+      if (cachedArchiveData) return cachedArchiveData;
+      if (archiveLoading) return null;
+      archiveLoading = true;
+      try {
+        const res = await fetch('data/archive_news.json?t=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        cachedArchiveData = data;
+        updateArchiveBadges();
+        return data;
+      } catch (e) {
+        console.warn('Load archive error:', e);
+        return null;
+      } finally {
+        archiveLoading = false;
+      }
+    }
+
+    function updateArchiveBadges() {
+      const items = cachedArchiveData?.items || [];
+      const total = items.length;
+      const counts = {
+        all: total,
+        news: items.filter(it => it.category === 'news').length,
+        celebrity: items.filter(it => it.category === 'celebrity').length,
+        tools: items.filter(it => it.category === 'tools').length,
+        videos: items.filter(it => it.category === 'videos').length
+      };
+
+      const setTxt = (id, txt) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = txt;
+      };
+
+      setTxt('badge-count-archive', total);
+      setTxt('arch-count-all', counts.all);
+      setTxt('arch-count-news', counts.news);
+      setTxt('arch-count-celeb', counts.celebrity);
+      setTxt('arch-count-tools', counts.tools);
+      setTxt('arch-count-videos', counts.videos);
+
+      const totalBadge = document.getElementById('archive-total-badge');
+      if (totalBadge) {
+        const isZh = currentLang === 'zh';
+        totalBadge.textContent = isZh ? `已收录 ${total} 篇` : `${total} items archived`;
+      }
+    }
+
+    function filterArchiveCategory(cat) {
+      archiveCurrentCategory = cat;
+      archiveCurrentPage = 1;
+      
+      const cats = ['all', 'news', 'celebrity', 'tools', 'videos'];
+      cats.forEach(c => {
+        const btn = document.getElementById(`arch-cat-${c}`);
+        if (!btn) return;
+        if (c === cat) {
+          btn.className = "arch-filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30";
+        } else {
+          btn.className = "arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700";
+        }
+      });
+
+      renderArchiveView();
+    }
+
+    function handleArchiveSearch(val) {
+      archiveSearchQuery = (val || '').trim().toLowerCase();
+      archiveCurrentPage = 1;
+      const btnClear = document.getElementById('btn-clear-archive-search');
+      if (btnClear) btnClear.classList.toggle('hidden', !archiveSearchQuery);
+      renderArchiveView();
+    }
+
+    function clearArchiveSearch() {
+      const input = document.getElementById('archive-search-input');
+      if (input) input.value = '';
+      archiveSearchQuery = '';
+      const btnClear = document.getElementById('btn-clear-archive-search');
+      if (btnClear) btnClear.classList.add('hidden');
+      archiveCurrentPage = 1;
+      renderArchiveView();
+    }
+
+    function renderArchiveCard(item) {
+      const cat = item.category || 'news';
+      if (cat === 'celebrity' || cat === 'leader_opinions') return renderCelebrityCard(item);
+      if (cat === 'tools' || cat === 'applied_tools') return renderToolCard(item);
+      if (cat === 'videos' || cat === 'video_prompts') return renderVideoCard(item);
+      if (cat === 'prompts') return renderPromptCard(item);
+      return renderNewsCard(item);
+    }
+
+    async function renderArchiveView() {
+      const container = document.getElementById('archive-grid-container');
+      const pageSummary = document.getElementById('archive-page-summary');
+      const pagination = document.getElementById('archive-pagination-container');
+      if (!container) return;
+
+      const isZh = currentLang === 'zh';
+
+      if (!cachedArchiveData) {
+        container.innerHTML = `
+          <div class="col-span-1 md:col-span-2 lg:col-span-3 py-16 flex flex-col items-center justify-center space-y-3">
+            <div class="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+            <p class="text-xs text-slate-400 font-mono">${isZh ? '正在从云端调取全量历史资讯归档库...' : 'Loading full historical archive from cloud...'}</p>
+          </div>
+        `;
+        const data = await loadArchiveData();
+        if (!data || !data.items) {
+          container.innerHTML = `<div class="col-span-1 md:col-span-2 lg:col-span-3 py-12 text-center text-xs text-slate-400">${isZh ? '暂未加载到归档数据或网络波动，请稍后刷新重试' : 'No archive data available or network error.'}</div>`;
+          return;
+        }
+      }
+
+      let items = cachedArchiveData.items || [];
+
+      // 1. 分类过滤
+      if (archiveCurrentCategory !== 'all') {
+        items = items.filter(it => it.category === archiveCurrentCategory);
+      }
+
+      // 2. 搜索过滤
+      if (archiveSearchQuery) {
+        items = items.filter(it => {
+          const t = (it.title || '').toLowerCase();
+          const s = (it.summary || '').toLowerCase();
+          const a = (it.author || '').toLowerCase();
+          const h = (it.author_handle || '').toLowerCase();
+          const tags = Array.isArray(it.tags) ? it.tags.join(' ').toLowerCase() : '';
+          return t.includes(archiveSearchQuery) || s.includes(archiveSearchQuery) || a.includes(archiveSearchQuery) || h.includes(archiveSearchQuery) || tags.includes(archiveSearchQuery);
+        });
+      }
+
+      const totalItems = items.length;
+      const totalPages = Math.max(1, Math.ceil(totalItems / ARCHIVE_PAGE_SIZE));
+
+      if (archiveCurrentPage > totalPages) archiveCurrentPage = totalPages;
+      if (archiveCurrentPage < 1) archiveCurrentPage = 1;
+
+      // 摘要文本
+      if (pageSummary) {
+        pageSummary.textContent = isZh
+          ? `第 ${archiveCurrentPage} / ${totalPages} 页 · 共 ${totalItems} 条`
+          : `Page ${archiveCurrentPage} / ${totalPages} · Total ${totalItems} items`;
+      }
+
+      if (totalItems === 0) {
+        container.innerHTML = `
+          <div class="col-span-1 md:col-span-2 lg:col-span-3 py-16 text-center text-slate-400">
+            <span class="text-3xl block mb-2">🔍</span>
+            <p class="text-xs">${isZh ? '未找到符合条件的归档情报，请尝试切换分类或搜索关键词' : 'No matching archived items found.'}</p>
+          </div>
+        `;
+        if (pagination) pagination.innerHTML = '';
+        return;
+      }
+
+      // 3. 切片分页
+      const startIndex = (archiveCurrentPage - 1) * ARCHIVE_PAGE_SIZE;
+      const pageItems = items.slice(startIndex, startIndex + ARCHIVE_PAGE_SIZE);
+
+      container.innerHTML = pageItems.map(renderArchiveCard).join('');
+
+      // 4. 渲染分页控制器
+      renderArchivePagination(totalPages, totalItems);
+    }
+
+    function renderArchivePagination(totalPages, totalItems) {
+      const pagination = document.getElementById('archive-pagination-container');
+      if (!pagination) return;
+      if (totalPages <= 1) {
+        pagination.innerHTML = '';
+        return;
+      }
+
+      const isZh = currentLang === 'zh';
+      const cur = archiveCurrentPage;
+
+      // 生成页码序列 (智能省略算法)
+      const pageNumbers = [];
+      if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+      } else {
+        pageNumbers.push(1);
+        if (cur > 3) pageNumbers.push('...');
+        const start = Math.max(2, cur - 1);
+        const end = Math.min(totalPages - 1, cur + 1);
+        for (let i = start; i <= end; i++) pageNumbers.push(i);
+        if (cur < totalPages - 2) pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      }
+
+      let html = `
+        <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">
+          ${isZh ? `显示第 ${(cur-1)*ARCHIVE_PAGE_SIZE + 1} - ${Math.min(cur*ARCHIVE_PAGE_SIZE, totalItems)} 条 · 共 ${totalItems} 条` : `Showing ${(cur-1)*ARCHIVE_PAGE_SIZE + 1}-${Math.min(cur*ARCHIVE_PAGE_SIZE, totalItems)} of ${totalItems}`}
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <button type="button" onclick="changeArchivePage(${cur - 1})" ${cur === 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === 1 ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer'} transition-all flex items-center space-x-1">
+            <span>◀</span>
+            <span class="hidden sm:inline">${isZh ? '上一页' : 'Prev'}</span>
+          </button>
+      `;
+
+      pageNumbers.forEach(p => {
+        if (p === '...') {
+          html += `<span class="px-2 py-1 text-slate-400 font-mono text-xs">...</span>`;
+        } else if (p === cur) {
+          html += `<button type="button" class="w-8 h-8 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 flex items-center justify-center">${p}</button>`;
+        } else {
+          html += `<button type="button" onclick="changeArchivePage(${p})" class="w-8 h-8 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center transition-all cursor-pointer">${p}</button>`;
+        }
+      });
+
+      html += `
+          <button type="button" onclick="changeArchivePage(${cur + 1})" ${cur === totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === totalPages ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer'} transition-all flex items-center space-x-1">
+            <span class="hidden sm:inline">${isZh ? '下一页' : 'Next'}</span>
+            <span>▶</span>
+          </button>
+        </div>
+      `;
+
+      pagination.innerHTML = html;
+    }
+
+    function changeArchivePage(p) {
+      archiveCurrentPage = p;
+      renderArchiveView();
+      const el = document.getElementById('view-archive');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
 
     // 侧边栏社交平台过滤
@@ -3992,6 +4340,10 @@
       document.getElementById('badge-count-videos').textContent = allVideos.length;
       const bPrompts = document.getElementById('badge-count-prompts');
       if (bPrompts) bPrompts.textContent = allPrompts.length;
+      const bArchive = document.getElementById('badge-count-archive');
+      if (bArchive) {
+        bArchive.textContent = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : 0);
+      }
 
       // 2. 模式判断：若当前激活了全站搜索，进入全景检索视图
       const isSearchActive = !!searchQuery;
@@ -4032,17 +4384,15 @@
         : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
 
       const arcSecNews = document.getElementById('archive-section-news');
-      const arcContNews = document.getElementById('container-archive-news');
       const arcTxtNews = document.getElementById('txt-archive-news');
-      if (historyNews.length > 0) {
+      const totalArchivedCount = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : historyNews.length);
+      if (arcSecNews) {
         arcSecNews.classList.remove('hidden');
-        arcContNews.dataset.count = historyNews.length;
-        arcContNews.innerHTML = historyNews.map(renderNewsCard).join('');
-        arcTxtNews.textContent = historyArchiveOpen.news
-          ? (isZh ? '收起历史归档 ↑' : 'Collapse Archive ↑')
-          : (isZh ? `查看历史归档 (已收录 ${historyNews.length} 条) ↓` : `View Historical News (${historyNews.length} items) ↓`);
-      } else {
-        arcSecNews.classList.add('hidden');
+        if (arcTxtNews) {
+          arcTxtNews.textContent = isZh
+            ? `查看历史快讯全量归档库 (已累计收录 ${totalArchivedCount} 篇)`
+            : `View Full Historical News Archive (${totalArchivedCount} items)`;
+        }
       }
 
       // B. 领袖社交板块 (Celebrity) - 100% 纯净 𝕏 权威领袖矩阵
@@ -4266,17 +4616,18 @@
                 ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-2">${t.noRecentNews}</div>`}
               </div>
             </div>
-            ${historyNews.length > 0 ? `
-              <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-                <button type="button" onclick="toggleCatNewsArchive()" class="w-full py-3 px-4 rounded-xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/70 dark:bg-slate-900/40 text-slate-700 dark:text-slate-300 flex items-center justify-center gap-2 text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer">
-                  <span>📜</span>
-                  <span id="txt-cat-news-archive">${catNewsArchiveOpen ? (t.collapseCatNewsArchive || '收起历史资讯库 ↑') : `${t.expandCatNewsArchive || '点击展开历史资讯库'} (${historyNews.length} 条) ↓`}</span>
-                </button>
-                <div id="container-cat-news-archive" data-count="${historyNews.length}" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 ${catNewsArchiveOpen ? '' : 'hidden'}">
-                  ${historyNews.map(renderNewsCard).join('')}
-                </div>
-              </div>
-            ` : ''}
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
+              <button type="button" onclick="switchTab('archive'); filterArchiveCategory('news');" class="w-full py-3.5 px-4 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/80 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 flex items-center justify-between text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer group">
+                <span class="flex items-center space-x-2.5">
+                  <span class="text-lg">📜</span>
+                  <span id="txt-cat-news-archive">${isZh ? '查看超出 24 小时的历史快讯库归档' : 'View Full Historical Breaking News Archive'}</span>
+                </span>
+                <span class="text-xs text-indigo-500 dark:text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
+                  <span>${isZh ? '前往全量归档库翻页查阅' : 'Go to Paginated Archive'}</span>
+                  <span>→</span>
+                </span>
+              </button>
+            </div>
           `;
         }
       } else if (tab === 'celebrity') {

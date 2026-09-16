@@ -28,6 +28,9 @@ PUBLIC_DATA_DIR = os.path.join(os.path.dirname(__file__), "public", "data")
 PUBLIC_DIR = os.path.join(os.path.dirname(__file__), "public")
 OUTPUT_FILE = os.path.join(DATA_DIR, "latest_news.json")
 PUBLIC_OUTPUT_FILE = os.path.join(PUBLIC_DATA_DIR, "latest_news.json")
+MASTER_ARCHIVE_FILE = os.path.join(DATA_DIR, "master_archive.json")
+ARCHIVE_OUTPUT_FILE = os.path.join(DATA_DIR, "archive_news.json")
+PUBLIC_ARCHIVE_OUTPUT_FILE = os.path.join(PUBLIC_DATA_DIR, "archive_news.json")
 SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 
 
@@ -243,165 +246,234 @@ def resolve_techmeme_url_and_source(curr_url: str, title: str) -> tuple:
 
 
 def load_existing_items() -> list:
-    """Load previously saved news items from JSON to support incremental updates and history retention."""
-    target_file = PUBLIC_OUTPUT_FILE if os.path.exists(PUBLIC_OUTPUT_FILE) else OUTPUT_FILE
-    if not os.path.exists(target_file):
-        return []
-    try:
-        with open(target_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            # 优先从 items 取，次优从 grouped 展平
-            items = data.get("items", [])
-            if not items and "grouped" in data:
-                for cat_items in data["grouped"].values():
-                    items.extend(cat_items)
+    """Load previously saved news items from JSON to support incremental updates and complete history retention."""
+    files_to_check = [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_OUTPUT_FILE, OUTPUT_FILE]
+    raw_items = []
+    seen_urls = set()
 
-            # 严格清洗历史残留脏数据，杜绝非深层链接推文、伪造主页 URL 及旧格式测试数据污染
-            valid_items = []
-            obsolete_fake_ids = {
-                "x_noam_reasoning_scaling", "x_elon_grok3_colossus", 
-                "x_sama_compute_currency", "x_karpathy_llm_os",
-                "x_demis_alphafold3_impact", "x_fchollet_arc_prize",
-                "x_tibo_gpt_reset_architecture", "x_jason_wei_cot_reasoning",
-                "x_dario_frontier_commitment", "x_logan_gemini_flash",
-                "x_noam_plagiarism_clarify"
-            }
-            x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
+    for target_file in files_to_check:
+        if not target_file or not os.path.exists(target_file):
+            continue
+        try:
+            with open(target_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                file_items = data.get("items", [])
+                if not file_items and "grouped" in data and isinstance(data["grouped"], dict):
+                    for cat_items in data["grouped"].values():
+                        if isinstance(cat_items, list):
+                            file_items.extend(cat_items)
+                for it in file_items:
+                    k = it.get("url") or it.get("id")
+                    if k and k not in seen_urls:
+                        seen_urls.add(k)
+                        raw_items.append(it)
+        except Exception as e:
+            print(f"⚠️ 读取历史文件 {target_file} 失败: {e}")
 
-            for it in items:
-                u = it.get("url", "")
-                it_id = it.get("id", "")
-                platform = it.get("platform", "").lower()
-                source = it.get("source", "").lower()
+    items = raw_items
 
-                # 1. 丢弃废弃的旧版硬编码 fake ID
-                if it_id in obsolete_fake_ids:
+    # 严格清洗历史残留脏数据，杜绝非深层链接推文、伪造主页 URL 及旧格式测试数据污染
+    valid_items = []
+    obsolete_fake_ids = {
+        "x_noam_reasoning_scaling", "x_elon_grok3_colossus", 
+        "x_sama_compute_currency", "x_karpathy_llm_os",
+        "x_demis_alphafold3_impact", "x_fchollet_arc_prize",
+        "x_tibo_gpt_reset_architecture", "x_jason_wei_cot_reasoning",
+        "x_dario_frontier_commitment", "x_logan_gemini_flash",
+        "x_noam_plagiarism_clarify"
+    }
+    x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
+
+    for it in items:
+        u = it.get("url", "")
+        it_id = it.get("id", "")
+        platform = it.get("platform", "").lower()
+        source = it.get("source", "").lower()
+
+        # 1. 丢弃废弃的旧版硬编码 fake ID
+        if it_id in obsolete_fake_ids:
+            continue
+
+        # 2. 丢弃未解析成功的 Google News 中转链接
+        if "news.google.com/rss/articles" in u:
+            continue
+
+        # 2.5 修正历史数据中被误归类为 celebrity 的普通 web 新闻
+        if it.get("category") == "celebrity" and platform == "web":
+            it["category"] = "news"
+            if "source" in it:
+                it["author"] = it["source"]
+
+        # 3. 严格校验所有 𝕏 / Twitter 推文：必须为直接定位到具体贴文的 status 深层链接，杜绝纯主页 URL
+        is_x = platform == "x" or "twitter" in source or it_id.startswith("x_") or "x.com" in u or "twitter.com" in u
+        if is_x:
+            if not x_status_pattern.search(u):
+                continue
+
+        # 4. 丢弃旧版提示词与教程，让新版真实发布时间的独立提示词库覆盖
+        if it_id.startswith("prompt_") or it_id.startswith("tut_") or it.get("category") == "prompts" or it.get("is_prompt"):
+            continue
+
+        # 5. 坚决清洗淘汰旧时代的陈旧模型与过时应用 (如 dalle-mini, FLUX.1 dev, IllusionDiffusion 等)
+        if it.get("category") == "tools":
+            t_str = f"{it_id} {it.get('title', '')} {it.get('title_zh', '')} {u}".lower()
+            if any(bad in t_str for bad in ["dalle-mini", "illusiondiffusion", "latent-consistency", "flux.1", "sd-webui"]):
+                continue
+            # 彻底丢弃带有本地毫秒级假时间戳的旧条目及历史残留远古应用
+            if any(bad in u for bad in ["enzostvs/deepsite", "ai-comic-factory", "Kolors-Virtual-Try-On"]):
+                continue
+            raw_pub = it.get("raw_published_at", "")
+            if re.search(r'\.\d{6}\+00:00', raw_pub):
+                continue
+            # 超过 180 天的古董工具坚决不留
+            tool_ts = parse_time_for_sort(it)
+            if tool_ts > 0 and (time.time() - tool_ts) > 180 * 86400:
+                continue
+
+        # 6. 严禁任何 Techmeme 聚合列表链接存留，必须解析还原为 Bloomberg、Reuters、WSJ 等源头正文真实 URL
+        if "techmeme.com" in u:
+            if "/p" in u:
+                real_u, real_s = resolve_techmeme_url_and_source(u, it.get("title", ""))
+                if real_u:
+                    it["url"] = real_u
+                    if real_s:
+                        it["source"] = real_s
+                        it["author"] = real_s
+                else:
                     continue
+            else:
+                continue
 
-                # 2. 丢弃未解析成功的 Google News 中转链接
-                if "news.google.com/rss/articles" in u:
-                    continue
+        # 7. 清洗与补全社交互动指标 (阅读量 views、点赞 likes、评论 comments、转发 retweets)
+        metrics = it.get("metrics")
+        if isinstance(metrics, dict):
+            likes = str(metrics.get("likes", ""))
+            if "爆款" in likes or "热议" in likes or not re.search(r'[\d.]', likes):
+                metrics["likes"] = "38.2k"
+            retweets = str(metrics.get("retweets", ""))
+            if "trending" in retweets.lower() or "热门" in retweets or not re.search(r'[\d.]', retweets):
+                metrics["retweets"] = "5.6k"
+            upvotes = str(metrics.get("upvotes", ""))
+            if "upvotes" in upvotes.lower() or "点赞" in upvotes:
+                num_m = re.search(r'([\d.]+[kKmM]?)', upvotes)
+                metrics["upvotes"] = num_m.group(1) if num_m else "1.4k"
+            comments = str(metrics.get("comments", ""))
+            if "讨论" in comments or "comments" in comments.lower() or not re.search(r'[\d.]', comments):
+                num_m = re.search(r'([\d.]+[kKmM]?)', comments)
+                metrics["comments"] = num_m.group(1) if num_m else "1.8k"
+            views = str(metrics.get("views", ""))
+            if not views or not re.search(r'[\d.]', views):
+                metrics["views"] = "156.8k"
 
-                # 2.5 修正历史数据中被误归类为 celebrity 的普通 web 新闻
-                if it.get("category") == "celebrity" and platform == "web":
-                    it["category"] = "news"
-                    if "source" in it:
-                        it["author"] = it["source"]
+        # 8. 修复历史遗留的未翻译视频标题
+        if "GPT-6 Built a City Out of Text" in it.get("title", "") or "GPT-6 Built a City Out of Text" in it.get("title_zh", ""):
+            it["title_zh"] = "【🔥 近期爆点】GPT-6用文本构建了一座虚拟城市"
+            it["summary_zh"] = "深度解析最新前沿模型实验：通过自回归文本架构模拟动态虚拟城市的构建与交互演进。"
 
-                # 3. 严格校验所有 𝕏 / Twitter 推文：必须为直接定位到具体贴文的 status 深层链接，杜绝纯主页 URL
-                is_x = platform == "x" or "twitter" in source or it_id.startswith("x_") or "x.com" in u or "twitter.com" in u
-                if is_x:
-                    if not x_status_pattern.search(u):
-                        continue
+        valid_items.append(it)
 
-                # 4. 丢弃旧版提示词与教程，让新版真实发布时间的独立提示词库覆盖
-                if it_id.startswith("prompt_") or it_id.startswith("tut_") or it.get("category") == "prompts" or it.get("is_prompt"):
-                    continue
-
-                # 5. 坚决清洗淘汰旧时代的陈旧模型与过时应用 (如 dalle-mini, FLUX.1 dev, IllusionDiffusion 等)
-                if it.get("category") == "tools":
-                    t_str = f"{it_id} {it.get('title', '')} {it.get('title_zh', '')} {u}".lower()
-                    if any(bad in t_str for bad in ["dalle-mini", "illusiondiffusion", "latent-consistency", "flux.1", "sd-webui"]):
-                        continue
-                    # 彻底丢弃带有本地毫秒级假时间戳的旧条目及历史残留远古应用
-                    if any(bad in u for bad in ["enzostvs/deepsite", "ai-comic-factory", "Kolors-Virtual-Try-On"]):
-                        continue
-                    raw_pub = it.get("raw_published_at", "")
-                    if re.search(r'\.\d{6}\+00:00', raw_pub):
-                        continue
-                    # 超过 180 天的古董工具坚决不留
-                    tool_ts = parse_time_for_sort(it)
-                    if tool_ts > 0 and (time.time() - tool_ts) > 180 * 86400:
-                        continue
-
-                # 6. 严禁任何 Techmeme 聚合列表链接存留，必须解析还原为 Bloomberg、Reuters、WSJ 等源头正文真实 URL
-                if "techmeme.com" in u:
-                    if "/p" in u:
-                        real_u, real_s = resolve_techmeme_url_and_source(u, it.get("title", ""))
-                        if real_u:
-                            it["url"] = real_u
-                            if real_s:
-                                it["source"] = real_s
-                                it["author"] = real_s
-                        else:
-                            continue
-                    else:
-                        continue
-
-                # 7. 清洗与补全社交互动指标 (阅读量 views、点赞 likes、评论 comments、转发 retweets)
-                metrics = it.get("metrics")
-                if isinstance(metrics, dict):
-                    likes = str(metrics.get("likes", ""))
-                    if "爆款" in likes or "热议" in likes or not re.search(r'[\d.]', likes):
-                        metrics["likes"] = "38.2k"
-                    retweets = str(metrics.get("retweets", ""))
-                    if "trending" in retweets.lower() or "热门" in retweets or not re.search(r'[\d.]', retweets):
-                        metrics["retweets"] = "5.6k"
-                    upvotes = str(metrics.get("upvotes", ""))
-                    if "upvotes" in upvotes.lower() or "点赞" in upvotes:
-                        num_m = re.search(r'([\d.]+[kKmM]?)', upvotes)
-                        metrics["upvotes"] = num_m.group(1) if num_m else "1.4k"
-                    comments = str(metrics.get("comments", ""))
-                    if "讨论" in comments or "comments" in comments.lower() or not re.search(r'[\d.]', comments):
-                        num_m = re.search(r'([\d.]+[kKmM]?)', comments)
-                        metrics["comments"] = num_m.group(1) if num_m else "1.8k"
-                    views = str(metrics.get("views", ""))
-                    if not views or not re.search(r'[\d.]', views):
-                        metrics["views"] = "156.8k"
-
-                # 8. 修复历史遗留的未翻译视频标题
-                if "GPT-6 Built a City Out of Text" in it.get("title", "") or "GPT-6 Built a City Out of Text" in it.get("title_zh", ""):
-                    it["title_zh"] = "【🔥 近期爆点】GPT-6用文本构建了一座虚拟城市"
-                    it["summary_zh"] = "深度解析最新前沿模型实验：通过自回归文本架构模拟动态虚拟城市的构建与交互演进。"
-
-                valid_items.append(it)
-
-            return valid_items
-    except Exception as e:
-        print(f"⚠️ 读取历史数据失败: {e}，将从头构建数据池。")
-        return []
+    return valid_items
 
 
 
 def save_news(items: list):
-    """Save processed items to local JSON file for frontend and deployment with historical retention."""
+    """Save processed items with tiered storage: lightweight 24h latest_news.json and complete paginated archive_news.json."""
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
-    
-    # 按照五大核心分类组织视图，严格核验 24 小时动态置顶状态，并按时间倒序排位
+    now_ts = time.time()
+    MAX_24H_SECONDS = 86400
+
+    # 1. 载入并合并持久化主库 (Master Archive)，确保历史零丢失
+    master_dict = {}
+    def get_it_key(it):
+        return it.get("url") or it.get("id")
+
+    for old_file in [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE]:
+        if os.path.exists(old_file):
+            try:
+                with open(old_file, "r", encoding="utf-8") as f:
+                    old_data = json.load(f)
+                    old_list = old_data.get("items", []) if isinstance(old_data, dict) else old_data
+                    if isinstance(old_list, list):
+                        for it in old_list:
+                            k = get_it_key(it)
+                            if k:
+                                master_dict[k] = it
+            except Exception as e:
+                print(f"⚠️ 读取历史归档 {old_file} 异常: {e}")
+
+    for it in items:
+        k = get_it_key(it)
+        if k:
+            master_dict[k] = it
+
+    all_master_items = list(master_dict.values())
+    all_master_items.sort(key=parse_time_for_sort, reverse=True)
+
+    # 滚动保留 1 年（最多 25,000 条高质量前沿深度资讯），杜绝存储无限膨胀
+    if len(all_master_items) > 25000:
+        all_master_items = all_master_items[:25000]
+
+    # 保存全量主库 (永久持久化存储)
+    with open(MASTER_ARCHIVE_FILE, "w", encoding="utf-8") as f:
+        json.dump({"updated_at": datetime.now(timezone.utc).isoformat(), "total_count": len(all_master_items), "items": all_master_items}, f, ensure_ascii=False, indent=2)
+
+    # 2. 严格按 24 小时门禁分级分离：24 小时热数据看板 vs 超出 24 小时的历史归档库
+    recent_items = []
+    historical_items = []
+
+    for it in all_master_items:
+        evaluate_dynamic_pinned_status(it)
+        ts = parse_time_for_sort(it)
+        diff = now_ts - ts
+        cat = it.get("category", "news")
+
+        # 资讯与推特：严格限定在 24 小时以内（或享有重置动态置顶特权）
+        # 实用工具/视频/提示词：生命周期为 30 天以内的精选内容
+        is_fresh_news = cat in ["news", "celebrity"] and (diff <= MAX_24H_SECONDS or it.get("is_pinned"))
+        is_fresh_tool = cat in ["tools", "videos", "prompts"] and diff <= (30 * 86400)
+
+        if is_fresh_news or is_fresh_tool:
+            recent_items.append(it)
+        else:
+            historical_items.append(it)
+
+    # 保证在极端冷启动或外部源更新停滞时，首页不至于完全空白（最低保留 12 条）
+    news_recent = [it for it in recent_items if it.get("category") == "news"]
+    if len(news_recent) < 12:
+        extra_news = [it for it in historical_items if it.get("category") == "news"][:(12 - len(news_recent))]
+        recent_items.extend(extra_news)
+
+    # 3. 构建 24 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}
-    for item in items:
-        evaluate_dynamic_pinned_status(item)
+    for item in recent_items:
         cat = item.get("category", "news")
         if cat not in grouped:
             cat = "news"
-        # 各分类保留最多 200 条高质量深度历史情报
-        if len(grouped[cat]) < 200:
-            grouped[cat].append(item)
+        grouped[cat].append(item)
 
     for cat_key in grouped:
-        # 仅当发布时间在 24 小时内且包含重置突破内容时享受优先置顶，超 24 小时自然倒序
         grouped[cat_key].sort(key=lambda x: (
             1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
             parse_time_for_sort(x)
         ), reverse=True)
 
-    # 重新聚合去重后的有效项目池
-    final_items = []
+    recent_final = []
     for cat_key in grouped:
-        final_items.extend(grouped[cat_key])
-    final_items.sort(key=parse_time_for_sort, reverse=True)
+        recent_final.extend(grouped[cat_key])
+    recent_final.sort(key=parse_time_for_sort, reverse=True)
 
-    # 提炼今日 60 秒极速风向标 (Top 3)
-    top_three = extract_top_three(final_items)
-
-    # 载入发烧友必备基准：LMSYS Arena Top 5 与 ArXiv 前沿突破论文
+    top_three = extract_top_three(recent_final)
     chatbot_arena = get_chatbot_arena_top5()
     arxiv_papers = get_arxiv_curated_papers()
 
-    payload = {
+    latest_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
-        "total_count": len(final_items),
+        "total_count": len(recent_final),
+        "archive_meta": {
+            "total_archived": len(historical_items),
+            "archive_url": "data/archive_news.json"
+        },
         "categories": CATEGORIES,
         "top_three": top_three,
         "chatbot_arena": chatbot_arena,
@@ -417,24 +489,40 @@ def save_news(items: list):
         "leader_opinions": grouped.get("celebrity", []),
         "applied_tools": grouped.get("tools", []),
         "video_prompts": grouped.get("videos", []),
-        "items": final_items
+        "items": recent_final
     }
 
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    # 4. 构建全量历史归档库 payload (archive_news.json)
+    archive_payload = {
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "total_count": len(historical_items),
+        "items": historical_items,
+        "categories": CATEGORIES
+    }
 
+    # 写入 latest_news.json
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(latest_payload, f, ensure_ascii=False, indent=2)
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+        json.dump(latest_payload, f, ensure_ascii=False, indent=2)
+
+    # 写入 archive_news.json
+    with open(ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(archive_payload, f, ensure_ascii=False, indent=2)
+    with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(archive_payload, f, ensure_ascii=False, indent=2)
 
     # 动态同步更新搜索引擎站点地图 sitemap.xml
     generate_sitemap()
 
-    print(f"\n💾 数据已成功保存在: {OUTPUT_FILE} 及 {PUBLIC_OUTPUT_FILE}")
+    print(f"\n💾 分级存储同步完成:")
+    print(f"  ⚡ 24小时实时热数据: {len(recent_final)} 篇 (体积大幅缩减，首屏极速秒开)")
+    print(f"  📜 历史全量归档库: {len(historical_items)} 篇 -> {PUBLIC_ARCHIVE_OUTPUT_FILE}")
     print("=" * 60)
     for cat_key, cat_val in CATEGORIES.items():
         count = len(grouped[cat_key])
         name = cat_val.get("zh", cat_key) if isinstance(cat_val, dict) else cat_val
-        print(f"  {name}: {count} 条")
+        print(f"  {name}: {count} 条 (24h)")
     print(f"  🔥 今日必读 60s Top 3: {len(top_three)} 条")
     print("=" * 60)
 
