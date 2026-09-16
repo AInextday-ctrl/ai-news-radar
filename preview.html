@@ -1101,13 +1101,13 @@
           <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
         </div>
 
-        <!-- 板块 2: 💡 深度洞察与行业研判 (In-Depth Analysis) -->
+        <!-- 板块 2: 💡 AI 点评 (幽默风趣、直击核心、网感神评) -->
         <div class="p-4 rounded-xl bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-slate-50/60 dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-slate-950/40 border border-indigo-200/70 dark:border-indigo-800/50 space-y-2">
           <div class="flex items-center space-x-2 text-xs font-bold text-purple-700 dark:text-purple-300">
             <span>💡</span>
-            <span id="ai-modal-insight-title">深度洞察与行业研判</span>
+            <span id="ai-modal-insight-title">AI 点评</span>
           </div>
-          <p id="ai-modal-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+          <p id="ai-modal-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-line"></p>
         </div>
       </div>
 
@@ -1269,7 +1269,7 @@
         viralChip: "🔥 近期爆点",
         aiModalBadge: "资讯概要",
         aiModalBriefingTitle: "事件脉络速览",
-        aiModalInsightTitle: "深度洞察与行业研判",
+        aiModalInsightTitle: "AI 点评",
         aiModalSourceBtn: "阅读原文 / 直达报道",
         aiAnalysisBtn: "资讯概要",
         expandCatNewsArchive: "点击展开历史资讯库",
@@ -1404,8 +1404,8 @@
         viralBadge: "🔥 Viral Hit",
         viralChip: "🔥 Trending Viral",
         aiModalBadge: "News Briefing",
-        aiModalBriefingTitle: "Executive 5W1H Briefing",
-        aiModalInsightTitle: "In-Depth Strategic Insight",
+        aiModalBriefingTitle: "Executive News Briefing",
+        aiModalInsightTitle: "AI Hot Take",
         aiModalSourceBtn: "Read Full Story",
         aiAnalysisBtn: "Briefing",
         expandCatNewsArchive: "Expand Historical News Archive",
@@ -4138,14 +4138,14 @@
         .replace(/([。！？；，、])\1+/g, '$1')
         .trim();
 
-      // 2. 深度洞察与行业研判 (Insight)
+      // 2. AI 点评 (犀利幽默、直指核心、网感神评)
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh)
         : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh);
-      if (!insightText) {
+      if (!insightText || insightText.includes('【行业研判】该动态折射出当前AI产业链')) {
         insightText = isZh
-          ? '【行业研判】该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配，对相关领域的工程实践与商业策略具有重要参考风向标意义。'
-          : '[Strategic Insight] Highlights the strategic transition towards enterprise integration and sustainable business value.';
+          ? '【AI 点评】科技圈的公关通稿常把商业算计包装成“全人类福祉”，但剥开华丽辞藻，本质无非是争夺算力、抢占流量与构筑壁垒的现实博弈。且看各方如何继续在这个高烧不退的名利场里各显神通。'
+          : '[AI Hot Take] Strip away the tech PR jargon and lofty promises, and what remains is the timeless hustle for capital, compute, and captive audiences.';
       }
 
       // 写入 DOM 节点 (信源仅在标题栏呈现，正文杜绝冗余；六要素自然融合在正文中，不搞机械卡片)
@@ -4168,7 +4168,7 @@
       if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive News Briefing');
       if (summaryEl) summaryEl.textContent = briefingText;
 
-      if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '深度洞察与行业研判' : 'In-Depth Strategic Insight');
+      if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? 'AI 点评' : 'AI Hot Take');
       if (insightEl) insightEl.textContent = insightText;
 
       if (sourceBtnEl) {

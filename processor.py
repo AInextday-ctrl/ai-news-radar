@@ -205,6 +205,56 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
     return clean_title
 
 
+def generate_witty_ai_commentary(full_text: str, title: str) -> str:
+    """Generate deep, witty, humorous, slightly sarcastic AI commentary in sharp internet tone."""
+    text = f"{title} {full_text}".lower()
+    
+    if any(k in text for k in ["智能眼镜", "无摄像头", "六个麦克风", "6个麦克风", "camera-free", "眼镜"]):
+        return "【AI 点评】雷朋联名款被群嘲成“偷拍狂神器”之后，Meta终于悟了：把摄像头抠掉，再塞进6个麦克风。一方面彻底打消了公共澡堂和会议室的防偷拍警惕，另一方面把硬件成本打了下来。当然，坏处是它再也不能帮你“看世界”了，充其量就是个架在鼻梁上的高级AirPods——但这年头，只要挂上“AI”标签，耳机也能叫下一代空间计算平台。"
+
+    elif "muse" in text and any(k in text for k in ["推迟", "延迟", "安全", "专注", "呼吁", "pause"]):
+        return "【AI 点评】小扎这一波看似在讲“注重安全”，实则精准背刺了当年联名呼吁“行业暂停6个月”的马斯克与同行们。潜台词明摆着：“我推迟发布是因为我对自己要求严，而不是像某些人自己跑不过就喊裁判吹哨暂停。” 不过按大厂一贯尿性，所谓的“为了安全性推迟几个月”，翻译成人话多半是：Demo演示虽然酷炫，但内部灰度测试时又翻车了。"
+
+    elif any(k in text for k in ["选民", "数据中心", "两党", "不喜欢人工智能", "民意调查"]):
+        return "【AI 点评】科技巨头在国会作证时言必称“星辰大海与人类未来”，然而地方选民只关心一件事：“我家电费账单怎么又涨了？你们那嗡嗡响的机房到底要吞多少地下水？” 当AI遇上现实的水电账单和地方选票，科技乌托邦瞬间被打回原形。两党谁也不敢打包票，毕竟谁也不想在拉票时被老乡质问：“你到底是支持我们吹空调，还是支持大模型通宵刷题？”"
+
+    elif any(k in text for k in ["1.2万亿", "1.2t", "估值", "ipo之前", "私募融资"]):
+        return "【AI 点评】奥特曼又来重新定义人类货币单位了。在还没实现规模盈利甚至现金流还在疯狂燃烧的前提下，直接把私募估值开到了1.2万亿美元。这架势像极了：“只要我融钱的速度快过烧钱的速度，地心引力就追不上我。” 资本市场一边骂泡沫太疯狂，一边又生怕错过下一轮，只能一边闭着眼掏钱一边祈祷IPO时有更大的接盘侠。"
+
+    elif any(k in text for k in ["豁免", "责任豁免", "斯科特·贝森特", "bessent", "众议院听证会"]):
+        return "【AI 点评】科技巨头们天天游说国会“AI责任太复杂，求法律免责金牌”，结果财政部长一盆冷水泼过来：想免责？门都没有。赚钱的时候高呼“自由创新纯市场化”，出了事就想学当年的互联网避风港原则把锅甩给算法。贝森特的态度很明确：既然想享受万亿估值的盛宴，就得做好随时在法庭上被重罚的觉悟。"
+
+    elif any(k in text for k in ["桑德斯", "班农", "bernie sanders", "steve bannon", "限制ai", "亲人类"]):
+        return "【AI 点评】当极左的桑德斯和极右的班农在同一个讲台上并肩坐下时，你就知道AI这玩意儿把人类政客逼到了什么地步。两个在地球上几乎所有议题都势同水火的人，居然在“限制AI、保护人类饭碗”上达成了高度默契。能让极左极右握手言和的不是爱，而是AI抢大家选票的恐怖速度。"
+
+    elif any(k in text for k in ["carplay", "android auto", "通用汽车", "车载操作系统", "移除"]):
+        return "【AI 点评】通用汽车这场长达三年的“自研车机闭关修炼”，终于以向手机巨头低头认输画上句号。当年信誓旦旦要把车主牢牢锁在自己的付费订阅生态里，结果车主用脚投票教做人——谁愿意放弃流畅的手机导航，去忍受车企那卡顿还要按月扣费的自研系统？这再次证明了一个真理：车企以为自己能做软件，往往是最大的错觉。"
+
+    elif any(k in text for k in ["黄仁勋", "jensen", "免提", "特朗普"]):
+        return "【AI 点评】老黄这一波现场接电话可以说是“顶级公关名场面”。一个造出了地表最强算力芯片的万亿市值掌舵人，在台上慌慌张张搞不定手机免提；而前总统在电话那头一边夸老黄一边宣布“AI不会抢人类饭碗”。两位顶级流量玩家在台上互相抬轿，不仅打消了市场的反垄断恐慌，还顺便把英伟达的股价安全垫又垫厚了几层。"
+
+    elif any(k in text for k in ["upi", "商户费", "卢比", "支付", "手续费"]):
+        return "【AI 点评】核心基建逐步告别“免费补贴阶段”，开始露出商业獠牙。当年靠着免费狂圈几亿用户，现在算力成本和结算带宽实在扛不住了，算盘珠子终于崩到了商家脸上。“羊毛出在羊身上”虽迟但到，接下来就看商家是咬牙吞下这笔手续费，还是悄悄加价转嫁给终端消费者了。"
+
+    elif any(k in text for k in ["typesafe", "4000万", "种子轮", "概率估计"]):
+        return "【AI 点评】做模型不稀奇，专门做一个“给模型输出结果算算命看靠不靠谱”的模型，居然直接融了4000万美元种子轮。这说明业内终于从盲目迷信大模型幻觉，清醒到了“必须花大钱给大模型买保险”的阶段。当卖铲子的人太多时，给铲子做安全帽的人反倒成了最赚钱的新赛道。"
+
+    elif any(k in text for k in ["开源", "闭源", "权重", "参数", "开源模型"]):
+        return "【AI 点评】闭源巨头们天天把“安全”挂在嘴边，把模型权重锁在保险箱里收高昂API过路费；开源阵营则直接把代码和权重甩在GitHub上打价格战。说到底，闭源为了守住利润护城河，开源为了联合天下开发者偷袭珍珠港。天下苦闭源API垄断久矣，每一次开源突破都是打在商业巨头脸上的一记响亮耳光。"
+
+    elif any(k in text for k in ["芯片", "gpu", "算力", "英伟达", "数据中心"]):
+        return "【AI 点评】前线大模型公司天天为架构创新争得面红耳赤，后方军火商英伟达默默把出货单价又往上调了一截。不管未来是AGI统治世界还是泡沫破裂，至少现在这帮造铲子和收电费的已经把真金白银揣进了兜里。真理永远只有一个：淘金热里最赚钱的永远不是淘金者，而是卖牛仔裤和铲子的掌柜。"
+
+    elif any(k in text for k in ["编程", "coding", "cursor", "copilot", "程序员", "代码"]):
+        return "【AI 点评】从“人人都要学编程”到“AI替人人写代码”，科技圈只用了两年。表面上看程序员效率暴增十倍，实际上是代码屎山生成的效率暴增了百倍。以前是自己写Bug自己改，现在是AI写了一千行充满自信的Bug，程序员还得毕恭毕敬求AI帮忙排查。所谓人机协同，本质上就是给AI当高级监工加职业背锅侠。"
+
+    elif any(k in text for k in ["机器人", "具身智能", "robot", "人形"]):
+        return "【AI 点评】发布会上的机器人个个步履矫健、后空翻加泡咖啡无所不能，一旦脱离预设跑道和安全绳，可能连一块地毯或者门槛都能让它原地思考人生。投资人狂砸百亿为科幻买单，工厂老板只想问一句：“这铁疙瘩进车间拧螺丝，一天到底能干满八小时不短路吗？”"
+
+    else:
+        return "【AI 点评】科技圈的公关通稿向来习惯把精打细算的商业博弈包装成“全人类福祉”。但剥开所有前沿术语的外衣，底层逻辑始终逃不过算力成本、用户注意力与资本回报周期的现实引力。且看各路玩家在这场高烧不退的军备竞赛里，谁能真正把故事讲到最后。"
+
+
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
     """Generate professional News Briefing (新闻简报) based on factual synthesis and industry insights."""
     clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
@@ -315,22 +365,8 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     briefing_zh = re.sub(r'([。！？；，、])\1+', r'\1', briefing_zh).strip()
     briefing_zh = re.sub(r'消息来源[：:]\s*', '', briefing_zh)
 
-    # 6. 专业深度洞察与行业研判 (In-Depth Insight)
-    insight_zh = ""
-    if any(k in full_text for k in ["智能眼镜", "穿戴", "无摄像头"]):
-        insight_zh = "【硬件与生态研判】在雷朋联名眼镜验证了AI音频交互需求后，取消摄像头是Meta针对办公室、医疗与学校等隐私敏感场景的精准破局。更轻便的形态与更低的制造门槛，将有助于Meta将大模型多模态语音助手渗透至更广泛的日常大众消费群体。"
-    elif any(k in full_text for k in ["选民", "数据中心", "民调"]):
-        insight_zh = "【产业与政策研判】AI算力扩张正从纯技术/商业投资议题，加速演变为关乎电力、水资源、地方环境与民意选票的公共议题。科技巨头未来在算力中心选址与电网协同上，需面临更为严苛的社区沟通与合规审查。"
-    elif any(k in full_text for k in ["豁免", "责任", "听证会", "监管"]):
-        insight_zh = "【监管研判】宏观决策层在“支持科技创新”与“划定法律红线”之间寻求平衡。拒绝授予全面免责特权将倒逼实验室提升模型可控性；而政策对开源模型的倾斜，将为去中心化AI生态带来重要战略契机。"
-    elif any(k in full_text for k in ["1.2万亿", "1.2T", "估值", "IPO", "融资"]):
-        insight_zh = "【资本研判】万亿美元级别的高估值预期反映出前沿AI竞争已进入极致资本密集阶段。高昂的算力开销迫使独角兽在资本市场争夺头部流动性，商业化造血能力将成为决定后续估值支撑度的决定性指标。"
-    elif any(k in full_text for k in ["UPI", "商户费", "订阅", "收费"]):
-        insight_zh = "【商业研判】核心数字基础设施逐步告别“免费补贴阶段”，步入精细化商业收费周期。交易与服务成本的调整将加速行业洗牌，并驱动厂商在差异化增值服务上展开更深维度的竞争。"
-    elif any(k in full_text for k in ["CarPlay", "车机", "汽车"]):
-        insight_zh = "【生态研判】传统软硬件巨头垄断座舱数据的自研路径再次面临现实检验。移动端生态与座舱的强耦合具有极高的用户心智壁垒，兼容成熟主流开放生态依然是目前保障用户体验的最稳妥选择。"
-    else:
-        insight_zh = "【行业研判】该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配，对相关领域的工程实践与商业策略具有重要参考风向标意义。"
+    # 6. AI 点评 (犀利幽默、直指核心、网感神评)
+    insight_zh = generate_witty_ai_commentary(full_text, clean_title)
 
     title_en = item.get("title_en") or item.get("title", "")
     return {
@@ -435,11 +471,14 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         ]
 
         prompt = f"""
-你是一个顶级科技智库的新闻主编。请对以下最新资讯进行专业新闻简报（News Briefing）提炼。
+你是一个顶级科技智库的新闻主编与科技大V。请对以下最新资讯进行专业新闻简报（News Briefing）提炼与犀利AI点评。
 【关键原则】：
 1. 严禁在正文出现“据XX报道”、“由XX发布”、记者姓名或链接等杂质（信源已在界面标题栏统一展示）。
 2. 必须交代清楚新闻六要素（5W1H）：谁（Who）、在什么场合/场景（Where）、做了/说了什么具体动作或事实（What）、起因背景动因（Why），让用户无需查看原资讯详情即可完全掌握事件脉络。
-3. 给出基于该事实的有价值深度分析和观点（insight_zh），避免假大空的套话。
+3. 【AI 点评（insight_zh）要求】：
+   - 必须深刻而幽默风趣、直指事件核心、看情况可带微讽刺口感，具有科技圈网络高赞神评/毒舌大V的鲜明语感（2-3句话）。
+   - 严禁假大空的套话（如“该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配...”这类无意义公文废话一律严禁）。
+   - 一针见血揭穿大厂公关话术背后的真实算计或利益博弈，让读者会心一笑。
 
 【输出要求】：
 请以纯 JSON Array 形式输出（不要带有 ```json 标记），数组内每个元素格式如下：
@@ -465,8 +504,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
       "what": "Core statement or action with details",
       "why": "Key motivation or background"
     }},
-    "insight_zh": "基于该事实的专业深度研判与观点（1-2句，客观分析对行业生态、政策、商业或开发者的实际影响）",
-    "insight_en": "Objective industry insight and strategic takeaway (1-2 sentences)",
+    "insight_zh": "【AI 点评】深刻、幽默风趣、直指核心、带微讽刺的科技圈网络高赞神评（2-3句，严禁公文假大空套话）",
+    "insight_en": "Witty, humorous, sharp tech-insider hot take and commentary (2-3 sentences)",
     "digest_zh": "新闻简报事实正文（与briefing_zh一致）",
     "digest_en": "Executive briefing in English",
     "key_points_zh": [
@@ -479,8 +518,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
       "Key action & details",
       "Motivation & impact"
     ],
-    "takeaway_zh": "专业深度研判与观点（与insight_zh一致）",
-    "takeaway_en": "Strategic takeaway in English"
+    "takeaway_zh": "AI 点评（与insight_zh一致）",
+    "takeaway_en": "Tech-insider hot take (same as insight_en)"
   }}
 }}
 
