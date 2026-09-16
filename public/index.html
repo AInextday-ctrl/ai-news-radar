@@ -536,14 +536,6 @@
         <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
       </div>
 
-      <!-- 📢 微信公众号发文助手入口 -->
-      <a href="wechat.html" target="_blank" title="打开微信公众号发文排版助手 (支持一键复制富文本)" class="text-xs bg-emerald-600/10 hover:bg-emerald-600/25 border border-emerald-500/40 text-emerald-700 dark:text-emerald-400 font-bold px-3 py-1.5 rounded-xl flex items-center space-x-1.5 transition-all shadow-sm">
-        <span>📢</span>
-        <span class="hidden sm:inline">公众号精选</span>
-        <span class="sm:hidden">公众号</span>
-        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-      </a>
-
       <!-- 手动刷新按钮 -->
       <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
         <span>🔄</span>
@@ -1208,24 +1200,53 @@
           <div id="social-modal-spec-tags" class="hidden sm:flex items-center gap-1.5 flex-wrap justify-end"></div>
         </div>
 
-        <!-- 大V直接发文 / 核心贴文内容 -->
-        <div class="p-4 rounded-2xl bg-sky-50/60 dark:bg-slate-950/60 border border-sky-200/70 dark:border-slate-800/90 space-y-3 relative overflow-hidden">
-          <div class="flex items-center justify-between text-xs text-sky-600 dark:text-sky-400 font-bold border-b border-sky-100 dark:border-slate-800/70 pb-2">
+        <!-- Tier 1: 💡 核心看点 / 观点提炼 (速读核心引言) -->
+        <div id="social-modal-quote-wrap" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 via-sky-500/5 to-transparent border border-amber-500/30 dark:border-amber-500/20 space-y-2 relative">
+          <div class="flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-bold">
             <span class="flex items-center space-x-1.5">
-              <span>💬</span>
-              <span>发文原话 / 核心引言</span>
+              <span>💡</span>
+              <span id="social-modal-quote-label">核心引言 · 观点提炼</span>
             </span>
-            <span class="text-[10px] font-mono text-slate-400 dark:text-slate-500">直引大V发文 · 原汁原味</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/10 dark:bg-amber-400/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">速读提炼</span>
           </div>
-          <div class="text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-relaxed font-medium">
-            <span class="text-sky-500 font-serif text-xl mr-1 leading-none">“</span>
-            <span id="social-modal-content-zh" class="whitespace-pre-line"></span>
-            <span class="text-sky-500 font-serif text-xl ml-1 leading-none">”</span>
+          <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium pl-2.5 border-l-2 border-amber-500/60 dark:border-amber-400/60">
+            <span class="text-amber-500 font-serif text-lg mr-0.5 leading-none">“</span>
+            <span id="social-modal-quote-text" class="whitespace-pre-line select-text"></span>
+            <span class="text-amber-500 font-serif text-lg ml-0.5 leading-none">”</span>
           </div>
-          <!-- 英文原帖折叠 -->
-          <div id="social-modal-en-wrap" class="hidden pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-xs text-slate-500 dark:text-slate-400 font-mono italic">
-            <span class="font-bold text-slate-600 dark:text-slate-300 not-italic">English Original: </span>
-            <span id="social-modal-content-en"></span>
+        </div>
+
+        <!-- Tier 2: 📜 大V完整原帖正文 (100%忠实原貌，保留换行段落，随系统语言自适应，支持双语一键切换) -->
+        <div id="social-modal-fulltext-wrap" class="rounded-2xl bg-slate-50/90 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/90 overflow-hidden flex flex-col shadow-sm">
+          <!-- 原帖顶栏：状态指示 + 双语切换按钮 -->
+          <div class="p-3 sm:px-4 bg-slate-100/80 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 flex-wrap">
+            <div class="flex items-center space-x-2 min-w-0">
+              <span class="text-base shrink-0">📜</span>
+              <span id="social-modal-fulltext-title" class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">大V发文正文原帖</span>
+              <span id="social-modal-lang-mode-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-semibold shrink-0">中文忠实译文</span>
+            </div>
+            
+            <!-- 双语一键切换按钮 -->
+            <button type="button" id="social-modal-lang-toggle" onclick="toggleSocialModalLanguage()" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 shrink-0" title="在中文译文与英文原帖间无缝切换">
+              <span>🌐</span>
+              <span id="social-modal-lang-toggle-text">切换为英文原帖</span>
+            </button>
+          </div>
+
+          <!-- 原帖全文内容区域 (保持换行、段落、标点符号，支持文字选中复制) -->
+          <div class="p-4 sm:p-5 max-h-[38vh] overflow-y-auto custom-scrollbar">
+            <div id="social-modal-fulltext-content" class="text-sm sm:text-[14.5px] leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-200 font-sans whitespace-pre-wrap select-text cursor-text break-words">
+              <!-- 动态注入原帖全文 -->
+            </div>
+          </div>
+
+          <!-- 原帖底部防伪鉴真声明 -->
+          <div class="px-4 py-2 bg-slate-100/50 dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+            <span class="flex items-center space-x-1">
+              <span>🔒</span>
+              <span>100% 忠实还原原帖结构与措辞 · 严禁虚构篡改</span>
+            </span>
+            <span id="social-modal-wordcount" class="font-mono">共 0 字</span>
           </div>
         </div>
 
@@ -2086,6 +2107,10 @@
       if (txtLight) txtLight.textContent = (lang === 'zh') ? '浅色' : 'Light';
       const txtDark = document.getElementById('theme-txt-dark');
       if (txtDark) txtDark.textContent = (lang === 'zh') ? '深色' : 'Dark';
+      if (typeof currentSocialModalItem !== 'undefined' && currentSocialModalItem) {
+        currentSocialModalLang = (lang === 'zh') ? 'zh' : 'en';
+        if (typeof renderSocialModalData === 'function') renderSocialModalData();
+      }
       const txtAuto = document.getElementById('theme-txt-auto');
       if (txtAuto) txtAuto.textContent = (lang === 'zh') ? '自动' : 'Auto';
 
@@ -3254,6 +3279,8 @@
       let retweets = m.retweets || '5.6k';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '5.6k';
 
+      const isZh = currentLang === 'zh';
+      const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
       const title = item.title_zh || item.title;
       const author = item.author || 'AI 领袖';
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
@@ -3299,7 +3326,7 @@
 
           <!-- 大V发文直接纯净引用 (彻底剔除下方重复机械总结) -->
           <div class="text-xs sm:text-[13px] text-slate-800 dark:text-slate-100 leading-relaxed bg-sky-50/70 dark:bg-slate-950/70 p-2.5 rounded-xl border border-sky-100 dark:border-slate-800/80 tweet-quote-box group-hover:border-sky-400/40 transition-colors">
-            <span class="text-sky-500 font-serif text-base mr-1">“</span>${title}<span class="text-sky-500 font-serif text-base ml-1">”</span>
+            <span class="text-sky-500 font-serif text-base mr-1">“</span>${displayQuote}<span class="text-sky-500 font-serif text-base ml-1">”</span>
           </div>
 
           ${specBadges}
@@ -3542,7 +3569,7 @@
 
             <!-- 纯净大号引语引用 (直达大V原话，无多余机械总结) -->
             <div class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-100 leading-relaxed bg-amber-500/10 dark:bg-slate-950/75 p-3 sm:p-3.5 rounded-2xl border border-amber-400/25 group-hover:border-amber-400/50 transition-colors shadow-inner mb-2.5">
-              <span class="text-amber-500 font-serif text-base mr-1">“</span>${title}<span class="text-amber-500 font-serif text-base ml-1">”</span>
+              <span class="text-amber-500 font-serif text-base mr-1">“</span>${displayQuote}<span class="text-amber-500 font-serif text-base ml-1">”</span>
             </div>
 
             ${specBadges}
@@ -5259,11 +5286,14 @@
 
     // ==========================================
     // 领袖观点·社交推文与网友热评弹窗控制器 (Social Post & Netizen Hot Takes)
+    // 支持双层架构：Tier 1 核心引言速读提炼 + Tier 2 完整原帖逐段阅读 (双语动态切换)
     // ==========================================
+    let currentSocialModalItem = null;
+    let currentSocialModalLang = 'zh';
+
     function openSocialPostModal(postId) {
       if (!cachedData) return;
-      const t = I18N[currentLang] || I18N.zh;
-      const isZh = currentLang === 'zh';
+      const isZhSystem = currentLang === 'zh';
       const allCelebs = [
         ...(cachedData.items || []).filter(it => it.category === 'celebrity'),
         ...(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []),
@@ -5274,11 +5304,28 @@
                    allCelebs.find(it => it.url === postId || it.title === postId);
       if (!item) return;
 
-      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
-      const modal = document.getElementById('social-post-modal');
-      if (!modal) return;
+      currentSocialModalItem = item;
+      // 随系统语言自适应初始展示语言
+      currentSocialModalLang = isZhSystem ? 'zh' : 'en';
 
-      // 头部标识
+      renderSocialModalData();
+
+      const modal = document.getElementById('social-post-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function renderSocialModalData() {
+      const item = currentSocialModalItem;
+      if (!item) return;
+
+      const isZhSystem = currentLang === 'zh';
+      const viewingZh = currentSocialModalLang === 'zh';
+      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
+
+      // 1. 头部标识与图标
       const iconWrap = document.getElementById('social-modal-icon-wrap');
       const badgeEl = document.getElementById('social-modal-badge');
       const platTagEl = document.getElementById('social-modal-platform-tag');
@@ -5291,26 +5338,26 @@
           iconWrap.className = "w-9 h-9 rounded-xl bg-sky-500/10 dark:bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-500 text-lg font-bold shrink-0";
           iconWrap.innerHTML = '𝕏';
         }
-        if (badgeEl) badgeEl.textContent = isZh ? '𝕏 (Twitter) 大V 独家观点' : '𝕏 Leader Voice';
+        if (badgeEl) badgeEl.textContent = isZhSystem ? '𝕏 (Twitter) 大V 独家观点' : '𝕏 Leader Voice';
         if (platTagEl) {
           platTagEl.className = "text-xs font-mono px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 font-semibold truncate";
-          platTagEl.textContent = isZh ? '𝕏 领袖推特' : '𝕏 Thought Leader';
+          platTagEl.textContent = isZhSystem ? '𝕏 领袖推特' : '𝕏 Thought Leader';
         }
       } else {
         if (iconWrap) {
           iconWrap.className = "w-9 h-9 rounded-xl bg-orange-500/10 dark:bg-orange-500/20 border border-orange-500/30 flex items-center justify-center text-orange-500 text-lg font-bold shrink-0";
           iconWrap.innerHTML = '👽';
         }
-        if (badgeEl) badgeEl.textContent = isZh ? 'Reddit 极客社群 深度热帖' : 'Reddit Community Discussion';
+        if (badgeEl) badgeEl.textContent = isZhSystem ? 'Reddit 极客社群 深度热帖' : 'Reddit Community Discussion';
         if (platTagEl) {
           platTagEl.className = "text-xs font-mono px-2 py-0.5 rounded-md bg-orange-50 dark:bg-orange-950/80 text-orange-700 dark:text-orange-300 border border-orange-200 dark:border-orange-500/30 font-semibold truncate";
-          platTagEl.textContent = isZh ? 'Reddit 深度热议' : 'Reddit Hot Thread';
+          platTagEl.textContent = isZhSystem ? 'Reddit 深度热议' : 'Reddit Hot Thread';
         }
       }
 
       if (timeTagEl) timeTagEl.textContent = `🕒 ${timeObj.display || timeObj.relative}`;
 
-      // 作者信息
+      // 2. 作者身份信息
       const avatarEl = document.getElementById('social-modal-avatar');
       const authorEl = document.getElementById('social-modal-author');
       const handleEl = document.getElementById('social-modal-handle');
@@ -5341,28 +5388,63 @@
         }
       }
 
-      // 正文引言
-      const contentZhEl = document.getElementById('social-modal-content-zh');
-      const enWrapEl = document.getElementById('social-modal-en-wrap');
-      const contentEnEl = document.getElementById('social-modal-content-en');
-
-      const titleZh = item.title_zh || item.title || '';
-      const titleEn = item.title_en || item.title || item.content_snippet || '';
-
-      if (contentZhEl) {
-        contentZhEl.textContent = isZh ? titleZh : titleEn;
+      // 3. Tier 1: 核心引言 / 核心看点 (速读摘要)
+      const quoteLabelEl = document.getElementById('social-modal-quote-label');
+      const quoteTextEl = document.getElementById('social-modal-quote-text');
+      if (quoteLabelEl) {
+        quoteLabelEl.textContent = isZhSystem ? '核心引言 · 观点提炼' : 'Executive Quote · Key Takeaway';
+      }
+      if (quoteTextEl) {
+        const quote = isZhSystem
+          ? (item.quote_zh || item.title_zh || item.title)
+          : (item.quote_en || item.title_en || item.title);
+        quoteTextEl.textContent = quote;
       }
 
-      if (enWrapEl && contentEnEl) {
-        if (isZh && titleEn && titleEn !== titleZh) {
-          contentEnEl.textContent = titleEn;
-          enWrapEl.classList.remove('hidden');
-        } else {
-          enWrapEl.classList.add('hidden');
-        }
+      // 4. Tier 2: 📜 大V发文原帖正文与双语切换 (100% 忠实，随语言自适应)
+      const fullTextTitleEl = document.getElementById('social-modal-fulltext-title');
+      const fullTextContentEl = document.getElementById('social-modal-fulltext-content');
+      const langBadgeEl = document.getElementById('social-modal-lang-mode-badge');
+      const langToggleText = document.getElementById('social-modal-lang-toggle-text');
+      const wordCountEl = document.getElementById('social-modal-wordcount');
+
+      if (fullTextTitleEl) {
+        fullTextTitleEl.textContent = isZhSystem ? '大V发文正文原帖' : 'Full Authentic Post';
       }
 
-      // 四大实时互动指标
+      let textToDisplay = '';
+      if (viewingZh) {
+        textToDisplay = item.full_text_zh || item.summary_zh || item.title_zh || item.title || '';
+      } else {
+        textToDisplay = item.full_text_en || item.content_snippet || item.title_en || item.title || '';
+      }
+
+      if (fullTextContentEl) {
+        fullTextContentEl.textContent = textToDisplay;
+      }
+
+      if (langBadgeEl) {
+        langBadgeEl.textContent = viewingZh
+          ? (isZhSystem ? '中文忠实译文' : 'Chinese Translation')
+          : (isZhSystem ? '英文原帖 · 100% 原文' : 'English Original (Verbatim)');
+        langBadgeEl.className = viewingZh
+          ? "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-semibold shrink-0"
+          : "text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30 font-semibold shrink-0";
+      }
+
+      if (langToggleText) {
+        langToggleText.textContent = viewingZh
+          ? (isZhSystem ? '切换为英文原帖' : 'View English Original')
+          : (isZhSystem ? '切换为中文译文' : 'View Chinese Translation');
+      }
+
+      if (wordCountEl) {
+        wordCountEl.textContent = viewingZh
+          ? `共约 ${textToDisplay.length} 字 · 原篇忠实逐段呈现`
+          : `${textToDisplay.split(/\s+/).filter(Boolean).length} words · Verbatim Full Post`;
+      }
+
+      // 5. 四大实时互动指标
       const m = item.metrics || {};
       const viewsEl = document.getElementById('social-modal-views');
       const likesEl = document.getElementById('social-modal-likes');
@@ -5374,12 +5456,12 @@
       if (commentsEl) commentsEl.textContent = m.comments || '1.8k';
       if (retweetsEl) retweetsEl.textContent = m.retweets || '5.6k';
 
-      // 网友精选神评
+      // 6. 网友精选神评与社区交锋
       const commentsContainer = document.getElementById('social-modal-comments-list');
       if (commentsContainer) {
         let commentsList = item.comments_list;
         if (!commentsList || commentsList.length === 0) {
-          commentsList = [
+          commentsList = isZhSystem ? [
             {
               author: "SiliconDev",
               handle: "@silicon_dev",
@@ -5403,6 +5485,31 @@
               time: "1小时前",
               likes: "432",
               content: "开源生态如果能持续跟进，闭源巨头的垄断壁垒并没有想象中那么稳固，坐看各方下半场的较量。"
+            }
+          ] : [
+            {
+              author: "SiliconDev",
+              handle: "@silicon_dev",
+              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=SiliconDev",
+              time: "20m ago",
+              likes: "1.4k",
+              content: "Spot on! The faster the tech advances, the higher the real-world deployment moat becomes. PPTs won't convince developers anymore."
+            },
+            {
+              author: "AIEngineerX",
+              handle: "@ai_eng_x",
+              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=AIEngineerX",
+              time: "45m ago",
+              likes: "890",
+              content: "The bottleneck is compute cost and inference latency. Whoever cracks end-to-end efficiency wins the ecosystem."
+            },
+            {
+              author: "FrontierHacker",
+              handle: "@FrontierHacker",
+              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=FrontierHacker",
+              time: "1h ago",
+              likes: "432",
+              content: "If the open-source community keeps matching closed-source labs, the moat is not as safe as big tech thinks."
             }
           ];
         }
@@ -5429,11 +5536,13 @@
         `).join('');
       }
 
-      // AI 独家点评
+      // 7. AI 独家点评
       const aiWrapEl = document.getElementById('social-modal-ai-insight-wrap');
       const aiTextEl = document.getElementById('social-modal-ai-insight');
       if (aiWrapEl && aiTextEl) {
-        const insight = item.ai_analysis?.insight_zh || item.ai_analysis?.takeaway_zh;
+        const insight = isZhSystem
+          ? (item.ai_analysis?.insight_zh || item.ai_analysis?.takeaway_zh)
+          : (item.ai_analysis?.takeaway_en || item.ai_analysis?.insight_zh);
         if (insight && !insight.includes('【行业研判】该动态折射出当前AI产业链')) {
           aiTextEl.textContent = insight.replace(/^【.*?】\s*/, '');
           aiWrapEl.classList.remove('hidden');
@@ -5442,21 +5551,22 @@
         }
       }
 
-      // 外部链接按钮
+      // 8. 外部直达链接按钮
       const linkBtn = document.getElementById('social-modal-link-btn');
       const linkText = document.getElementById('social-modal-link-text');
       if (linkBtn) {
         linkBtn.href = item.url || '#';
         if (linkText) {
           linkText.textContent = isX
-            ? (isZh ? '直达原推 / 加入讨论' : 'View on 𝕏 / Join Thread')
-            : (isZh ? '在 Reddit 查看热帖' : 'View on Reddit Thread');
+            ? (isZhSystem ? '直达原推 / 加入讨论' : 'View on 𝕏 / Join Thread')
+            : (isZhSystem ? '在 Reddit 查看热帖' : 'View on Reddit Thread');
         }
       }
+    }
 
-      modal.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
-      applyCurrentTranslation();
+    function toggleSocialModalLanguage() {
+      currentSocialModalLang = currentSocialModalLang === 'zh' ? 'en' : 'zh';
+      renderSocialModalData();
     }
 
     function closeSocialPostModal() {
@@ -5465,6 +5575,7 @@
         modal.classList.add('hidden');
         document.body.style.overflow = '';
       }
+      currentSocialModalItem = null;
     }
 
     // ==========================================

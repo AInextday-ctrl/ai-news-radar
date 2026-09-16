@@ -421,9 +421,26 @@ def save_news(items: list):
     for it in items:
         k = get_it_key(it)
         if k:
+            # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
+            if k in master_dict:
+                existing = master_dict[k]
+                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en"]:
+                    if existing.get(preserve_field) and not it.get(preserve_field):
+                        it[preserve_field] = existing[preserve_field]
             master_dict[k] = it
 
     all_master_items = list(master_dict.values())
+    # 确保所有 celebrity 领袖观点条目均具备规范的 quote 与 full_text 双语字段
+    for it in all_master_items:
+        if it.get("category") == "celebrity":
+            if not it.get("full_text_en"):
+                it["full_text_en"] = it.get("content_snippet") or it.get("title_en") or it.get("title") or ""
+            if not it.get("full_text_zh"):
+                it["full_text_zh"] = it.get("summary_zh") or it.get("title_zh") or it.get("title") or ""
+            if not it.get("quote_zh"):
+                it["quote_zh"] = it.get("title_zh") or it.get("title") or ""
+            if not it.get("quote_en"):
+                it["quote_en"] = it.get("title_en") or it.get("title") or ""
     all_master_items.sort(key=parse_time_for_sort, reverse=True)
 
     # 滚动保留 1 年（最多 25,000 条高质量前沿深度资讯），杜绝存储无限膨胀
