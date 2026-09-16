@@ -3596,6 +3596,8 @@
       let retweets = m.retweets || '8.6k';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '8.6k';
 
+      const isZh = currentLang === 'zh';
+      const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
       const title = item.title_zh || item.title;
       const author = item.author || 'AI 领袖';
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
@@ -4892,12 +4894,7 @@
       const spotlightEl = document.getElementById('celebrity-spotlight-banner');
       const t = I18N[currentLang];
 
-      if (tab === 'celebrity') {
-        if (spotlightEl) {
-          spotlightEl.classList.remove('hidden');
-          renderCelebritySpotlightBanner();
-        }
-      } else {
+      if (tab !== 'celebrity' || socialViewMode === 'viral') {
         if (spotlightEl) {
           spotlightEl.classList.add('hidden');
           spotlightEl.innerHTML = '';
