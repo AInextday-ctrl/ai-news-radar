@@ -161,12 +161,25 @@ def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
     return None
 
 
-def match_celebrity_profile(title: str, content: str) -> Optional[Dict[str, Any]]:
-    """Match leader profile based on names."""
-    combined = f"{title} {content}".lower()
-    for key, profile in CELEBRITY_PROFILES.items():
-        if re.search(r'\b' + re.escape(key) + r'\b', combined):
+def match_celebrity_profile(handle_or_user: str) -> Optional[Dict[str, Any]]:
+    """
+    Match leader profile based STRICTLY on the author's X handle/username.
+    Never matches against tweet text or headline to prevent false attribution.
+    """
+    if not handle_or_user:
+        return None
+    clean = handle_or_user.lstrip('@').lower().strip()
+
+    # 1. Check direct profile handle match
+    for profile in CELEBRITY_PROFILES.values():
+        p_handle = profile.get("handle", "").lstrip('@').lower().strip()
+        if clean == p_handle:
             return profile
+
+    # 2. Check key match in CELEBRITY_PROFILES (e.g. sama, ylecun, finkd, karpathy)
+    if clean in CELEBRITY_PROFILES:
+        return CELEBRITY_PROFILES[clean]
+
     return None
 
 
@@ -1501,11 +1514,12 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
                         if not is_tweet_live(x_url):
                             continue
                         t_title = entry.get("title", "") or f"Tweet by @{user}"
-                        profile = match_celebrity_profile(f"{user} {t_title}", "")
+                        profile = match_celebrity_profile(user)
                         author_name = profile["name"] if profile else f"@{user}"
-                        author_handle = f"@{user}"
+                        author_handle = profile["handle"] if profile else f"@{user}"
                         author_avatar = profile["avatar"] if profile else f"https://unavatar.io/x/{user}"
-                        spec_tags = extract_tech_specs(t_title, "") or ["硅谷焦点推文", "大V交锋"]
+                        is_leader = profile is not None
+                        spec_tags = extract_tech_specs(t_title, "") or (["硅谷焦点推文", "大V交锋"] if is_leader else ["科技动态", "媒体快讯"])
 
                         items.append({
                             "id": make_id(x_url, t_title),
@@ -1514,7 +1528,7 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
                             "title_zh": None,
                             "url": x_url,
                             "image_url": None,
-                            "source": f"𝕏 (Twitter) · @{user}",
+                            "source": f"𝕏 (Twitter) · {author_handle}",
                             "author": author_name,
                             "author_handle": author_handle,
                             "author_avatar": author_avatar,
@@ -1525,8 +1539,8 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
                             "content_snippet": t_title,
                             "summary_en": t_title,
                             "summary_zh": None,
-                            "category": "celebrity",
-                            "tags": ["𝕏当天爆款", "硅谷风向"]
+                            "category": "celebrity" if is_leader else "news",
+                            "tags": ["𝕏当天爆款", "硅谷风向"] if is_leader else ["𝕏快讯", "媒体动态"]
                         })
                         if len(items) >= max_items:
                             break
@@ -1575,13 +1589,14 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
                         if not is_tweet_live(canonical_url):
                             continue
 
-                        profile = match_celebrity_profile(f"{u_user} {cleaned_title}", "")
+                        profile = match_celebrity_profile(u_user)
                         author_name = profile["name"] if profile else f"@{u_user}"
-                        author_handle = f"@{u_user}"
+                        author_handle = profile["handle"] if profile else f"@{u_user}"
                         author_avatar = profile["avatar"] if profile else f"https://unavatar.io/x/{u_user}"
+                        is_leader = profile is not None
 
                         iso_time = parse_to_iso(entry.get("published_parsed"))
-                        spec_tags = extract_tech_specs(cleaned_title, "") or ["𝕏当天爆款", "实时动态"]
+                        spec_tags = extract_tech_specs(cleaned_title, "") or (["𝕏当天爆款", "实时动态"] if is_leader else ["科技资讯", "行业快讯"])
                         item_id = make_id(canonical_url, cleaned_title)
 
                         items.append({
@@ -1602,8 +1617,8 @@ def fetch_live_trending_x_posts(max_items: int = 15) -> List[Dict[str, Any]]:
                             "content_snippet": cleaned_title,
                             "summary_en": cleaned_title,
                             "summary_zh": None,
-                            "category": "celebrity",
-                            "tags": ["𝕏当天爆款", "实时推文"]
+                            "category": "celebrity" if is_leader else "news",
+                            "tags": ["𝕏当天爆款", "实时推文"] if is_leader else ["𝕏快讯", "行业动态"]
                         })
                         if len(items) >= max_items:
                             break

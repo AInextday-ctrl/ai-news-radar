@@ -79,15 +79,20 @@ CELEBRITY_PROFILES = {
     # 4. Meta & 开源巨头
     "yann lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家 / 图灵奖得主", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
     "lecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家 / 图灵奖得主", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
-    "mark zuckerberg": {"name": "Mark Zuckerberg", "handle": "@Meta", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/Meta", "platform": "x"},
-    "zuckerberg": {"name": "Mark Zuckerberg", "handle": "@Meta", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/Meta", "platform": "x"},
+    "ylecun": {"name": "Yann LeCun", "handle": "@ylecun", "role": "Meta 首席AI科学家 / 图灵奖得主", "avatar": "https://unavatar.io/x/ylecun", "platform": "x"},
+    "mark zuckerberg": {"name": "Mark Zuckerberg", "handle": "@finkd", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/finkd", "platform": "x"},
+    "zuckerberg": {"name": "Mark Zuckerberg", "handle": "@finkd", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/finkd", "platform": "x"},
+    "finkd": {"name": "Mark Zuckerberg", "handle": "@finkd", "role": "Meta CEO / 开源模型推手", "avatar": "https://unavatar.io/x/finkd", "platform": "x"},
     "soumith chintala": {"name": "Soumith Chintala", "handle": "@soumithchintala", "role": "PyTorch 创始人", "avatar": "https://unavatar.io/x/soumithchintala", "platform": "x"},
+    "soumithchintala": {"name": "Soumith Chintala", "handle": "@soumithchintala", "role": "PyTorch 创始人", "avatar": "https://unavatar.io/x/soumithchintala", "platform": "x"},
 
     # 5. NVIDIA 核心团队
-    "jensen huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
-    "huang": {"name": "黄仁勋", "handle": "@NVIDIA", "role": "NVIDIA CEO", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
+    "nvidia": {"name": "NVIDIA 官方团队", "handle": "@NVIDIA", "role": "NVIDIA 官方技术与算力前沿", "avatar": "https://unavatar.io/nvidia", "platform": "x"},
     "jim fan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
     "drjimfan": {"name": "Jim Fan", "handle": "@DrJimFan", "role": "NVIDIA AI Agent 负责人", "avatar": "https://unavatar.io/x/DrJimFan", "platform": "x"},
+    "openaidevs": {"name": "OpenAI Developers", "handle": "@OpenAIDevs", "role": "OpenAI 开发者官方平台", "avatar": "https://unavatar.io/openai", "platform": "x"},
+    "googleai": {"name": "Google AI", "handle": "@GoogleAI", "role": "Google AI 研发官方团队", "avatar": "https://unavatar.io/google", "platform": "x"},
+    "anthropicai": {"name": "Anthropic 官方团队", "handle": "@AnthropicAI", "role": "Claude 研发官方团队", "avatar": "https://unavatar.io/anthropic", "platform": "x"},
 
     # 6. xAI / 独立前沿机构
     "elon musk": {"name": "Elon Musk", "handle": "@elonmusk", "role": "xAI / Tesla", "avatar": "https://unavatar.io/x/elonmusk", "platform": "x"},

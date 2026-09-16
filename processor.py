@@ -19,10 +19,11 @@ import re
 import json
 from typing import List, Dict, Any, Optional
 import httpx
-from dotenv import load_dotenv
-
-# 加载环境变量
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
@@ -246,11 +247,35 @@ def generate_witty_ai_commentary(full_text: str, title: str) -> str:
     elif any(k in text for k in ["编程", "coding", "cursor", "copilot", "程序员", "代码"]):
         return "从“人人都要学编程”到“AI替人人写代码”，科技圈只用了两年。表面上看程序员效率暴增十倍，实际上是代码屎山生成的效率暴增了百倍。以前是自己写Bug自己改，现在是AI写了一千行充满自信的Bug，程序员还得毕恭毕敬求AI帮忙排查。所谓人机协同，本质上就是给AI当高级监工加职业背锅侠。"
 
-    elif any(k in text for k in ["机器人", "具身智能", "robot", "人形"]):
-        return "发布会上的机器人个个步履矫健、后空翻加泡咖啡无所不能，一旦脱离预设跑道和安全绳，可能连一块地毯或者门槛都能让它原地思考人生。投资人狂砸百亿为科幻买单，工厂老板只想问一句：“这铁疙瘩进车间拧螺丝，一天到底能干满八小时不短路吗？”"
+    elif any(k in text for k in ["虚拟演员", "蒂莉", "tilly", "actor", "虚拟角色", "数字人", "演艺", "好莱坞"]):
+        return "好莱坞演职人员刚抗议完“AI抢饭碗”，科技公司就已经迫不及待把虚拟女演员推到了镁光灯下。更讽刺的是，一面对敏感现实政治话题，这位号称有灵魂的“AI演员”立马开启防御性回避，开始复读机般点评记者的毛衣好看不好看。给算法戴上公关防翻车紧箍咒可以理解，但把政治回避做成强行聊穿搭，所谓的数字明星演艺，本质上依然是套了漂亮皮囊的客服对话机器人。"
+
+    elif any(k in text for k in ["黑客", "末日", "网络安全", "漏洞", "cybersecurity", "hacker", "doom", "不连贯", "白帽子"]):
+        return "大厂高管天天在国会与聚光灯前渲染“AI可能自主发动末日级网络战毁灭人类”，网安一线的白帽子专家终于忍不住掀桌子了。天天拿科幻末日剧本忽悠议员要监管特权与豁免金牌，现实中连最基础的内网鉴权与漏洞挖掘机理都解释不清。把自身工程架构的疏漏强行神话为“超级AI黑客”，既掩盖了安全治理的失职，又顺便贩卖了一波末日焦虑。"
+
+    elif any(k in text for k in ["数据信任", "信任问题", "data trust", "爬虫", "授权", "版权", "policy", "policies"]):
+        return "模型训练时巨头们在全网大肆抓取数据，把知识资产据为己有；等商业化落地收月租时，面对原创作者和公众的质疑，反手掏出几十页推诿责任的“数据政策声明”。信任从来不是靠公关文案自证清白，当整个前沿模型的基石建立在未经许可的内容吞噬之上时，任何所谓的自律协议，看起来都更像是亡羊补牢的法律护膝。"
+
+    elif any(k in text for k in ["gemini 3.8", "live", "语音模型", "音频", "speech", "1.38", "gpt-live"]):
+        return "谷歌在实时语音赛道祭出了“降维打击”式的价格屠刀，把全双工对话成本直接砸到每小时1.38美元。当OpenAI还在为端到端语音高昂的推理算力心疼时，谷歌用自研TPU的规模效应打响了价格战第一枪。语音交互彻底告别机械延时，下一代AI硬件与实时智能体的门槛被瞬间踏平。"
+
+    elif any(k in text for k in ["电网", "能源", "核电", "耗电", "电力", "power", "grid", "nuclear"]):
+        return "当大模型参数狂飙到千亿万亿，AI的终极对手终于从算法工程师变成了国家电网。算力中心的尽头不是算法突破，而是变压器和高压输电线。科技寡头一边高喊绿色环保，一边四处包圆老旧核电站甚至重启火电机组。这场前沿竞赛里，谁掌握了稳定的兆瓦级供电，谁才真正握住了通往AGI的钥匙。"
+
+    elif any(k in text for k in ["芯片出口", "出口管制", "华盛顿", "特朗普", "trump", "关税", "减缓"]):
+        return "老黄直接把算力底气亮在台前：政策风向再怎么变，前沿算力的大旗英伟达绝不松手。华盛顿政客在国家安全与地缘博弈间精打细算，全球客户却在争先恐后排队加价抢卡。在技术冷酷的算力物理定律面前，地缘政治的行政干预与全球商业资本的扩张本能，注定要上演一场旷日持久的极限拉扯。"
+
+    elif any(k in text for k in ["deepseek", "arena", "v4", "flash", "成本", "性价比", "知识蒸馏"]):
+        return "前脚硅谷巨头刚发布了号称“重新定义物理法则”的超豪华旗舰模型，后脚开源小分队就带着成本只有几十分之一的轻量模型在评测榜上迎头赶上。大厂们还在算计每百万Token收几美分才能回本几百亿GPU的折旧费，极客们已经在用极致的工程优化告诉市场：别拿烧钱当护城河，只要架构够精妙，几张卡照样能在竞技场里把庞然大物挑落下马。"
 
     else:
-        return "科技圈的公关通稿向来习惯把精打细算的商业博弈包装成“全人类福祉”。但剥开所有前沿术语的外衣，底层逻辑始终逃不过算力成本、用户注意力与资本回报周期的现实引力。且看各路玩家在这场高烧不退的军备竞赛里，谁能真正把故事讲到最后。"
+        who_guess = "科技巨头"
+        for kw, name in [("Meta", "Meta"), ("谷歌", "谷歌"), ("Google", "谷歌"), ("OpenAI", "OpenAI"), ("微软", "微软"), ("Anthropic", "Anthropic"), ("英伟达", "英伟达"), ("苹果", "苹果")]:
+            if kw.lower() in text:
+                who_guess = name
+                break
+        title_clean = re.sub(r'^[【\[].*?[】\]]\s*', '', title)[:25]
+        return f"围绕“{title_clean}”，{who_guess}正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。"
 
 
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
@@ -337,8 +362,18 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     what = clean_title
 
     # 4. 推理起因背景与深层动因 (Why)
-    why = "顺应技术迭代与市场刚需，提升生态壁垒与综合服务能力。"
-    if any(k in full_text for k in ["智能眼镜", "穿戴", "无摄像头", "麦克风"]):
+    why = ""
+    if any(k in full_text for k in ["虚拟演员", "蒂莉", "tilly", "actor", "虚拟角色", "数字人", "演艺", "好莱坞"]):
+        why = "生成式数字人与虚拟演员渗透演艺工业引发行业伦理与从业者权益博弈，算法在敏感议题上的回避机制暴露出防御性对齐的技术短板。"
+    elif any(k in full_text for k in ["黑客", "末日", "网络安全", "漏洞", "cybersecurity", "hacker", "doom", "不连贯"]):
+        why = "网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。"
+    elif any(k in full_text for k in ["数据信任", "信任问题", "data trust", "爬虫", "授权", "版权", "policy", "policies"]):
+        why = "前沿模型研发面临海量数据抓取合规争议与创作者信任危机，亟需构建透明可信的追溯机制与合理的版权利益分配方案。"
+    elif any(k in full_text for k in ["gemini 3.8", "live", "语音模型", "音频", "speech", "1.38", "gpt-live"]):
+        why = "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。"
+    elif any(k in full_text for k in ["电网", "能源", "核电", "耗电", "电力", "power", "grid", "nuclear"]):
+        why = "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。"
+    elif any(k in full_text for k in ["智能眼镜", "穿戴", "无摄像头", "麦克风"]):
         why = "该举措主要旨在解决公共场合摄像头带来的隐私争议，同时降低硬件成本与佩戴门槛，加速以音频和语音为核心的多模态AI助手渗透至日常消费场景。"
     elif any(k in full_text for k in ["豁免", "责任", "听证会", "监管", "法案"]):
         why = "此举深层背景在于防范前沿AI系统引发法律追责真空与安全失控风险，同时通过划定合规红线与扶持开源生态，防止闭源科技巨头形成行业事实垄断。"
@@ -352,14 +387,29 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
         why = "该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。"
     elif any(k in full_text for k in ["CarPlay", "Android Auto", "车机", "通用汽车"]):
         why = "通用汽车重新引入手机互联映射方案，表明封闭自研车机在抗衡成熟移动生态心智时遭遇现实阻力，顺应用户对无缝导航与音频交互的刚需成为保障终端口碑的务实选择。"
+    elif any(k in full_text for k in ["编程", "coding", "cursor", "copilot", "程序员", "代码"]):
+        why = "自主编程智能体深刻改变软件工程交付模式，开发者正加速从重复性代码编写者转向更高阶的系统架构把控与逻辑审查者。"
     elif any(k in full_text for k in ["开源", "突破", "发布", "模型"]):
         why = "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+    else:
+        title_core = re.sub(r'^[【\[].*?[】\]]\s*', '', clean_title)[:22]
+        why = f"行业核心力量围绕“{title_core}”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
 
-    # 5. 整合新闻简报正文 (Natural News Briefing，杜绝机械套话与多余前缀)
+    # 5. 整合新闻简报正文 (Natural News Briefing，融合标题事实、摘要细节与深层动因)
     first_stmt = clean_title
     if not first_stmt.endswith(('。', '！', '？')):
         first_stmt += '。'
-    briefing_zh = f"{first_stmt} {why}".strip()
+
+    # 若有正文摘要片段且不与标题重复，翻译并提取补充细节
+    detail_stmt = ""
+    if clean_snippet and len(clean_snippet) > 15:
+        trans_snippet = clean_news_text(free_translate_zh(clean_snippet[:150]))
+        if trans_snippet and len(trans_snippet) > 10 and trans_snippet not in clean_title:
+            detail_stmt = trans_snippet
+            if not detail_stmt.endswith(('。', '！', '？')):
+                detail_stmt += '。'
+
+    briefing_zh = f"{first_stmt} {detail_stmt} {why}".strip()
     briefing_zh = re.sub(r'([。！？；，、])\1+', r'\1', briefing_zh).strip()
     briefing_zh = re.sub(r'消息来源[：:]\s*', '', briefing_zh)
 

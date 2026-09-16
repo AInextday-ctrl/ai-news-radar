@@ -4554,10 +4554,12 @@
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh)
         : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh);
-      if (!insightText || insightText.includes('【行业研判】该动态折射出当前AI产业链')) {
+      if (!insightText || insightText.includes('【行业研判】该动态折射出当前AI产业链') || insightText.includes('科技圈的公关通稿向来习惯把精打细算')) {
+        const whoStr = (analysis.elements_zh && analysis.elements_zh.who) ? analysis.elements_zh.who : '行业各方';
+        const whatShort = (item.title_zh || item.title || '').replace(/^[【\[].*?[】\]]\s*/, '').slice(0, 26);
         insightText = isZh
-          ? '科技圈的公关通稿向来习惯把精打细算的商业博弈包装成“全人类福祉”。但剥开所有前沿术语的外衣，底层逻辑始终逃不过算力成本、用户注意力与资本回报周期的现实引力。且看各路玩家在这场高烧不退的军备竞赛里，谁能真正把故事讲到最后。'
-          : 'Strip away the tech PR jargon and lofty promises, and what remains is the timeless hustle for capital, compute, and captive audiences.';
+          ? `围绕${whatShort ? `“${whatShort}”` : '该项进展'}，${whoStr}正在加速技术卡位。剥开宣传层面的光环，真正的竞争力不在于概念有多新奇，而在于能否在真实工程场景中经受住算力成本与用户留存的双重检验。`
+          : `Behind the headlines, players are racing to establish defensibility. Real industry advantage will not be decided by marketing buzz, but by sustained engineering execution and real-world unit economics.`;
       }
 
       // 彻底滤除正文开头可能存在的【AI 点评】、【AI点评】等前缀，因为小标题栏已包含该标识
