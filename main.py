@@ -35,15 +35,30 @@ SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 
 
 def generate_sitemap():
-    """Dynamically generate fresh sitemap.xml with current UTC lastmod adhering strictly to Google sitemaps.org standard (no fragments)."""
+    """Dynamically generate fresh multilingual sitemap.xml adhering strictly to Google sitemaps.org standard."""
     now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://ainewsradar.xyz/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
     <lastmod>{now_date}</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://ainewsradar.xyz/?lang=en</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
   </url>
 </urlset>
 """

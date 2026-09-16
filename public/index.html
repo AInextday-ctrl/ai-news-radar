@@ -11,6 +11,12 @@
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://ainewsradar.xyz/">
   <meta property="og:title" content="AI 资讯雷达 (AI News Radar) - ainewsradar.xyz | 全球 AI 动态与落地工具">
@@ -24,6 +30,7 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "inLanguage": ["zh-CN", "en"],
       "name": "AI News Radar",
       "alternateName": ["AI 资讯雷达", "ainewsradar", "ainewsradar.xyz", "AI News Radar 官网"],
       "url": "https://ainewsradar.xyz/",
@@ -587,51 +594,8 @@
     </div>
   </nav>
 
-  <!-- 全站主体外层容器：支持超宽屏大桌面端两侧极客悬浮广告翼 (Dual Skyscraper Rail Ads) -->
-  <div class="relative w-full max-w-[1780px] mx-auto flex justify-center items-start px-2 sm:px-4 2xl:px-8">
-
-    <!-- 👈 左侧摩天大楼广告翼 (Left Side Rail Skyscraper) - 仅在 2xl (>=1536px) 超宽屏展示，绝对不遮挡主内容 -->
-    <aside class="hidden 2xl:flex flex-col shrink-0 w-[160px] sticky top-20 mr-4 z-20 select-none py-5">
-      <div class="ad-skyscraper-card rounded-2xl p-2.5 flex flex-col items-center justify-between text-center relative overflow-hidden transition-all duration-300 min-h-[600px] w-full backdrop-blur-md">
-        <!-- 头部合规标识 -->
-        <div class="w-full flex items-center justify-between px-1.5 py-0.5 border-b border-slate-200/80 dark:border-slate-800/80 mb-2">
-          <span class="text-[9px] font-mono tracking-widest text-slate-400 dark:text-slate-500 uppercase font-semibold">SPONSORED</span>
-          <span class="text-[9px] px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono scale-90 border border-slate-200 dark:border-slate-700">AD</span>
-        </div>
-        
-        <!-- 广告单元核心挂载点 -->
-        <div class="w-full flex-1 flex flex-col items-center justify-center relative overflow-hidden my-auto">
-          <!-- 优雅极客科技占位 (在广告加载前/审核期展示) -->
-          <div class="w-full flex flex-col items-center justify-center space-y-3 py-8 px-1 text-slate-400 dark:text-slate-500">
-            <div class="w-11 h-11 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200/80 dark:border-indigo-800/60 flex items-center justify-center text-indigo-600 dark:text-indigo-400 text-xl shadow-inner">
-              🛰️
-            </div>
-            <div class="space-y-1">
-              <p class="text-xs font-bold text-slate-700 dark:text-slate-300" id="ad-left-title">AI 品牌展示</p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400" id="ad-left-desc">高价值极客定向</p>
-            </div>
-            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-indigo-500/40 to-transparent my-1"></div>
-            <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
-          </div>
-
-          <!-- Google AdSense 垂直摩天大楼广告单元 -->
-          <ins class="adsbygoogle"
-               style="display:block; width:100%; min-height:560px;"
-               data-ad-client="ca-pub-4912808437101130"
-               data-ad-slot="auto"
-               data-ad-format="vertical"
-               data-full-width-responsive="true"></ins>
-        </div>
-
-        <!-- 底部合规说明 -->
-        <div class="w-full pt-2 border-t border-slate-200/80 dark:border-slate-800/80 text-[9px] text-slate-400 dark:text-slate-500 font-mono">
-          Google AdSense
-        </div>
-      </div>
-    </aside>
-
-    <!-- 🎯 主体内容区域 (支持全局顺畅自然纵向滚动，杜绝子容器卡顿与滚轮被困) -->
-    <div class="flex-1 max-w-7xl w-full min-w-0 px-2 sm:px-6 py-5 space-y-5">
+  <!-- 🎯 主体内容核心区域 (完全适配 Google AdSense Auto Ads Side Rails，让出干净双侧槽位供原生贴边悬浮广告展示) -->
+  <main class="relative w-full max-w-7xl mx-auto px-2 sm:px-6 py-5 space-y-5 min-h-screen">
 
     <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs">
@@ -757,7 +721,16 @@
           <span class="text-xs text-slate-400 font-mono" id="news-sub-count">实时追踪</span>
         </div>
         <div class="space-y-3.5" id="stream-news">
-          <!-- 动态注入快讯卡片 (默认仅展示 24 小时以内最新) -->
+          <!-- 静态初始高权重 SEO 语义感知块 (在 JS 载入最新资讯前提供高质量长文本，杜绝 AdSense 爬虫判空) -->
+          <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-2">
+            <div class="flex items-center space-x-2 text-indigo-500 font-mono font-semibold">
+              <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+              <span>AI NEWS RADAR · GLOBAL PULSE / 全球前沿 AI 实时情报</span>
+            </div>
+            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+              实时聚合全球人工智能行业突发要闻、OpenAI、DeepSeek、Claude、Google Gemini 等顶流模型进展、硅谷大V推特交锋、YouTube 与 TikTok 实战教学视频、落地实用 AI 工具及高阶提示词库。
+            </p>
+          </div>
         </div>
         <!-- 快讯全量历史归档库入口 (超 24 小时沉淀库，带完整多页翻查) -->
         <div id="archive-section-news" class="mt-4 pt-3 border-t border-slate-800/80">
@@ -1065,51 +1038,7 @@
       <div id="archive-pagination-container" class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
         <!-- 由 renderArchivePagination() 动态生成 -->
       </div>
-    </div>
-
-  </div>
-
-    <!-- 👉 右侧摩天大楼广告翼 (Right Side Rail Skyscraper) - 仅在 2xl (>=1536px) 超宽屏展示，绝对对称美观 -->
-    <aside class="hidden 2xl:flex flex-col shrink-0 w-[160px] sticky top-20 ml-4 z-20 select-none py-5">
-      <div class="ad-skyscraper-card rounded-2xl p-2.5 flex flex-col items-center justify-between text-center relative overflow-hidden transition-all duration-300 min-h-[600px] w-full backdrop-blur-md">
-        <!-- 头部合规标识 -->
-        <div class="w-full flex items-center justify-between px-1.5 py-0.5 border-b border-slate-200/80 dark:border-slate-800/80 mb-2">
-          <span class="text-[9px] font-mono tracking-widest text-slate-400 dark:text-slate-500 uppercase font-semibold">SPONSORED</span>
-          <span class="text-[9px] px-1 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono scale-90 border border-slate-200 dark:border-slate-700">AD</span>
-        </div>
-        
-        <!-- 广告单元核心挂载点 -->
-        <div class="w-full flex-1 flex flex-col items-center justify-center relative overflow-hidden my-auto">
-          <!-- 优雅极客科技占位 (在广告加载前/审核期展示) -->
-          <div class="w-full flex flex-col items-center justify-center space-y-3 py-8 px-1 text-slate-400 dark:text-slate-500">
-            <div class="w-11 h-11 rounded-2xl bg-purple-50 dark:bg-purple-950/50 border border-purple-200/80 dark:border-purple-800/60 flex items-center justify-center text-purple-600 dark:text-purple-400 text-xl shadow-inner">
-              ⚡
-            </div>
-            <div class="space-y-1">
-              <p class="text-xs font-bold text-slate-700 dark:text-slate-300" id="ad-right-title">生态精选赞助</p>
-              <p class="text-[10px] text-slate-500 dark:text-slate-400" id="ad-right-desc">前沿生产力触达</p>
-            </div>
-            <div class="w-12 h-0.5 bg-gradient-to-r from-transparent via-purple-500/40 to-transparent my-1"></div>
-            <span class="text-[9px] font-mono text-slate-400 border border-slate-200 dark:border-slate-800 rounded px-1.5 py-0.5">160 × 600</span>
-          </div>
-
-          <!-- Google AdSense 垂直摩天大楼广告单元 -->
-          <ins class="adsbygoogle"
-               style="display:block; width:100%; min-height:560px;"
-               data-ad-client="ca-pub-4912808437101130"
-               data-ad-slot="auto"
-               data-ad-format="vertical"
-               data-full-width-responsive="true"></ins>
-        </div>
-
-        <!-- 底部合规说明 -->
-        <div class="w-full pt-2 border-t border-slate-200/80 dark:border-slate-800/80 text-[9px] text-slate-400 dark:text-slate-500 font-mono">
-          Google AdSense
-        </div>
-      </div>
-    </aside>
-
-  </div>
+  </main>
 
   <!-- 页脚 -->
   <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2.5">
@@ -1362,7 +1291,12 @@
   </div>
 
   <script>
-    let currentLang = localStorage.getItem('ai_radar_lang') || 'zh';
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramLang = urlParams.get('lang');
+    let currentLang = (paramLang && (paramLang === 'en' || paramLang === 'zh'))
+      ? paramLang
+      : (localStorage.getItem('ai_radar_lang') || (navigator.language && !navigator.language.startsWith('zh') ? 'en' : 'zh'));
+    document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
     let currentTheme = localStorage.getItem('theme') || 'auto';
     let selectedCreator = null;
     let currentTab = 'all';
@@ -2113,6 +2047,16 @@
     function setLanguage(lang) {
       currentLang = lang;
       localStorage.setItem('ai_radar_lang', lang);
+      document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+      try {
+        const u = new URL(window.location.href);
+        if (lang === 'en') {
+          u.searchParams.set('lang', 'en');
+        } else {
+          u.searchParams.delete('lang');
+        }
+        window.history.replaceState(null, '', u.toString());
+      } catch (e) {}
 
       const btnZh = document.getElementById('lang-zh');
       const btnEn = document.getElementById('lang-en');
