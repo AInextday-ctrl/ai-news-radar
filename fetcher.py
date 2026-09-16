@@ -693,14 +693,19 @@ def is_tweet_live(url: str, timeout: float = 3.5) -> bool:
     """
     if not url or "status/" not in url:
         return False
+    if "2099981245892182012" in url or "DG91929381" in url or "DG82019382" in url or "DG71928371" in url:
+        return False
     try:
         tw_url = url.replace("x.com", "twitter.com")
         with httpx.Client(follow_redirects=True, timeout=timeout) as client:
             res = client.get(f"https://publish.twitter.com/oembed?url={tw_url}")
+            if res.status_code == 404:
+                return False
             return res.status_code == 200
     except Exception:
-        # 网络偶发超时时不激进拦截，仅供安全兜底
-        return True
+        # 异常或不可达时安全拦截
+        return False
+
 
 
 def evaluate_dynamic_pinned_status(item: Dict[str, Any]) -> bool:
@@ -1697,8 +1702,17 @@ def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
                 vps = d.get("viral_posts", []) or d.get("grouped", {}).get("viral_posts", [])
                 if not vps and isinstance(d.get("items"), list):
                     vps = [it for it in d["items"] if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
+                FAKE_VIRAL_IDS = {
+                    "viral_x_levelsio_vibe_coding", "viral_threads_mckaywrigley_local_jarvis",
+                    "viral_x_alexalbert_claude_hybrid", "viral_x_swyx_context_caching",
+                    "viral_threads_danshipper_claude_code", "viral_x_minhpham_generative_ui",
+                    "viral_threads_garrytan_yc_swarm", "viral_x_sulaimanghauri_deepseek_mla"
+                }
                 for vp in vps:
+                    vid = vp.get("id", "")
                     u = vp.get("url")
+                    if vid in FAKE_VIRAL_IDS or "2099981245892182012" in (u or ""):
+                        continue
                     if u and u not in seen_urls:
                         pub = vp.get("raw_published_at")
                         if pub:

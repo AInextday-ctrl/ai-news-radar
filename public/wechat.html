@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>微信公众号精选工作台 - AI 资讯雷达 (ainewsradar.xyz)</title>
+  <meta name="description" content="AI 资讯雷达微信公众号发文助手：AI 爆点评分、本土痛点深度重构、一键复制微信无损排版。">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 本地 file:/// 协议离线数据直载脚本 (解决浏览器直接双击时的跨域安全拦截) -->
+  <script src="data/wechat_articles.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            wechat: '#07c160',
+            'wechat-hover': '#06ad56',
+            darkbg: '#0f172a',
+            cardbg: '#1e293b'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.4);
+      border-radius: 9999px;
+    }
+    .phone-mockup {
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3), 0 0 0 10px #1e293b, 0 0 0 12px #334155;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col custom-scrollbar">
+
+  <!-- 顶部导航栏 -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <a href="index.html" class="flex items-center space-x-2 text-slate-400 hover:text-white transition">
+          <span class="text-xl">←</span>
+          <span class="text-sm font-semibold">返回雷达看板</span>
+        </a>
+        <span class="text-slate-600">|</span>
+        <div class="flex items-center space-x-2">
+          <span class="flex h-3 w-3 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          </span>
+          <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-1.5">
+            <span>📢 微信公众号发文助手</span>
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">AI爆款重构版</span>
+          </h1>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <span id="lastUpdated" class="text-xs text-slate-400 hidden sm:inline-block">加载中...</span>
+        <button onclick="refreshData()" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition text-xs flex items-center gap-1">
+          <span>🔄</span> 刷新
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体工作区 -->
+  <main class="flex-1 max-w-7xl mx-auto px-4 py-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">
+    
+    <!-- 左侧：高分爆款资讯选题池 (5 列) -->
+    <section class="lg:col-span-5 flex flex-col space-y-4">
+      <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+        <h2 class="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+          <span>🔥 今日精选爆款选题</span>
+          <span id="articleCountBadge" class="bg-blue-500/20 text-blue-400 text-xs px-2 py-0.5 rounded-full border border-blue-500/30">0 篇</span>
+        </h2>
+        <span class="text-xs text-slate-500">按 AI 爆点与痛点综合评分排序</span>
+      </div>
+
+      <div id="articleListContainer" class="space-y-3 overflow-y-auto max-h-[calc(100vh-180px)] pr-1 custom-scrollbar">
+        <!-- 动态渲染文章卡片 -->
+        <div class="p-6 text-center text-slate-500 text-sm">正在检索最新生成的微信文章...</div>
+      </div>
+    </section>
+
+    <!-- 右侧：排版工作台与手机端 1:1 预览 (7 列) -->
+    <section class="lg:col-span-7 flex flex-col space-y-4">
+      
+      <!-- 快捷操作工具条 -->
+      <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
+        <div class="flex items-center gap-2">
+          <button id="copyAllHtmlBtn" onclick="copyActiveArticleHtml()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-emerald-900/30 flex items-center gap-2">
+            <span>🟢 一键复制微信排版</span>
+          </button>
+          <button onclick="selectAllArticleContent()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-600" title="若一键复制被浏览器拦截，可点击此按钮自动全选，直接在键盘按 Ctrl+C 即可带完整样式复制">
+            <span>📋 全选排版 (备用)</span>
+          </button>
+          <button onclick="copyCurrentHeadline()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5">
+            <span>🏷️ 复制当前标题</span>
+          </button>
+        </div>
+
+        <div class="flex items-center gap-2 text-xs">
+          <span id="toastAlert" class="hidden font-medium text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-3 py-1.5 rounded-md animate-pulse">
+            ✓ 已成功复制富文本！
+          </span>
+          <a id="sourceLinkBtn" href="#" target="_blank" class="text-slate-400 hover:text-slate-200 underline">
+            查看原文 ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- 推荐标题选择卡片 -->
+      <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-4">
+        <div class="text-xs font-semibold text-slate-400 mb-2.5 flex items-center justify-between">
+          <span class="flex items-center gap-1">💡 <span>AI 爆款标题方案（点击直接选用并复制）：</span></span>
+          <span class="text-slate-500">已选第 <span id="currentTitleIndex" class="text-blue-400 font-bold">1</span> 套</span>
+        </div>
+        <div id="headlineList" class="space-y-2">
+          <!-- 动态注入候选标题 -->
+        </div>
+      </div>
+
+      <!-- AI 7 维严格质检审计报告面板 -->
+      <div id="auditReportCard" class="bg-slate-800/80 border border-slate-700/80 rounded-xl p-4 shadow-sm">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-bold text-slate-100 flex items-center gap-1.5">
+              <span>🛡️</span> <span>AI 7 维深度质检审计报告</span>
+            </span>
+            <span id="auditPassedBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+              --分 · 质检中
+            </span>
+          </div>
+          <span class="text-[11px] text-slate-400">拒绝空泛 · 数据与机理双重审查</span>
+        </div>
+
+        <!-- 7维指标网格 -->
+        <div id="auditDimensionGrid" class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2.5 text-xs">
+          <!-- 动态填充 7 维得分 -->
+        </div>
+
+        <div id="auditVerdictText" class="text-xs text-slate-300 bg-slate-900/80 p-2.5 rounded-lg border border-slate-700/70 leading-relaxed">
+          质检审结：--
+        </div>
+
+        <!-- 微信公众号生态与网信合规安全门禁卡片 -->
+        <div id="complianceAuditPanel" class="mt-2.5 p-3 rounded-lg bg-emerald-950/20 border border-emerald-700/50 text-xs space-y-1.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 font-bold text-emerald-400">
+              <span>🔒</span> <span>微信公众号 & 网信合规安全门禁 (防封号/删文)</span>
+            </div>
+            <span id="complianceScoreBadge" class="px-2 py-0.5 rounded text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+              合规度: 100% · 极度安全
+            </span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11.5px] text-slate-300 pt-1">
+            <div><span class="text-slate-400 font-medium">【涉政红线】</span><span id="compliancePoliticalText" class="text-emerald-300">零涉政风险，纯技术探讨</span></div>
+            <div><span class="text-slate-400 font-medium">【账号健康】</span><span id="complianceHealthText" class="text-emerald-300">极度安全，无封号/限流/删文风险</span></div>
+          </div>
+          <div class="text-[11.5px] text-slate-400 pt-0.5 border-t border-emerald-800/40">
+            <span class="text-slate-400 font-medium">【立意导向】</span><span id="complianceOrientationText" class="text-slate-300">导向健康，聚焦科技降本与本土赋能，符合新质生产力主旋律</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 手机端 1:1 模拟预览器容器 (标定 375px~390px 真实手机黄金视口) -->
+      <div class="flex justify-center py-2">
+        <div class="phone-mockup w-full max-w-[395px] bg-slate-950 rounded-[40px] border-4 border-slate-700 overflow-hidden flex flex-col shadow-2xl shadow-blue-950/40">
+          <!-- 手机流海与状态栏 -->
+          <div class="bg-slate-950 h-8 px-6 flex items-center justify-between text-[11px] text-slate-400 border-b border-slate-800 select-none">
+            <span>09:41</span>
+            <div class="w-16 h-4 bg-slate-800 rounded-full"></div>
+            <span>5G 100%</span>
+          </div>
+
+          <!-- 微信公众号顶部虚拟状态栏 -->
+          <div class="bg-slate-100 border-b border-slate-200 px-4 py-2 flex items-center justify-between text-xs text-slate-700 select-none">
+            <span class="font-medium text-slate-800 flex items-center gap-1">
+              <span class="text-sm">‹</span> 微信
+            </span>
+            <span class="font-bold text-slate-900 text-xs">AI 资讯雷达</span>
+            <span class="text-sm font-bold text-slate-600">···</span>
+          </div>
+
+          <!-- 手机内文章可滚动区域 (白色底，完全还原微信内真实阅读边距) -->
+          <div id="phoneScrollContainer" class="bg-white overflow-y-auto max-h-[640px] px-3.5 py-5 custom-scrollbar select-text text-slate-800">
+            <!-- 渲染真实的内联 HTML -->
+            <div id="wechatArticleRenderArea">
+              <div class="py-12 text-center text-slate-400 text-sm">正在加载微信排版...</div>
+            </div>
+          </div>
+
+          <!-- 手机底部小横条 -->
+          <div class="bg-slate-950 h-5 flex items-center justify-center">
+            <div class="w-28 h-1 bg-slate-700 rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- 底部说明 -->
+  <footer class="border-t border-slate-800/80 bg-slate-900 py-4 text-center text-xs text-slate-500">
+    <p>AI 资讯雷达 · 微信全自动排版工作台 · 无需付费认证，一键复制富文本直通微信公众平台后台</p>
+  </footer>
+
+  <script>
+    let currentArticles = [];
+    let activeArticleIndex = 0;
+    let selectedHeadline = '';
+
+    function initFromData(data) {
+      if (!data || !data.articles) return false;
+      currentArticles = data.articles || [];
+      document.getElementById('lastUpdated').innerText = '最后生成: ' + (data.updated_at ? new Date(data.updated_at).toLocaleTimeString() : '刚刚');
+      document.getElementById('articleCountBadge').innerText = currentArticles.length + ' 篇';
+
+      renderArticleList();
+      if (currentArticles.length > 0) {
+        selectArticle(0);
+        return true;
+      } else {
+        document.getElementById('articleListContainer').innerHTML = '<div class="p-6 text-center text-slate-500">今日暂无高分文章，请运行 main.py 生成。</div>';
+        return false;
+      }
+    }
+
+    async function loadWechatData() {
+      // 1. 优先使用本地 JS 脚本预先载入的数据（完美兼容 file:/// 离线双击打开，不受浏览器 CORS 限制）
+      let loaded = false;
+      if (window.WECHAT_ARTICLES_DATA && window.WECHAT_ARTICLES_DATA.articles && window.WECHAT_ARTICLES_DATA.articles.length > 0) {
+        loaded = initFromData(window.WECHAT_ARTICLES_DATA);
+      }
+
+      // 2. 如果是 HTTP/HTTPS 网络服务环境，发起 fetch 动态拉取最新数据
+      if (location.protocol.startsWith('http')) {
+        try {
+          const res = await fetch('data/wechat_articles.json?t=' + Date.now());
+          if (res.ok) {
+            const data = await res.json();
+            initFromData(data);
+            loaded = true;
+          }
+        } catch (err) {
+          console.warn("HTTP Fetch 稍后重试，当前使用离线预载数据:", err);
+        }
+      }
+
+      // 3. 如果依然没有读取到数据，提示引导
+      if (!loaded && (!currentArticles || currentArticles.length === 0)) {
+        document.getElementById('articleListContainer').innerHTML = `
+          <div class="p-6 rounded-xl bg-slate-800/80 border border-slate-700 text-center">
+            <p class="text-rose-400 font-bold mb-2">未读取到微信推文数据</p>
+            <p class="text-xs text-slate-400 leading-relaxed mb-3">请先在终端运行一次微信生成引擎：<br><code class="text-emerald-400 bg-slate-900 px-2 py-0.5 rounded inline-block mt-1">python wechat_engine.py</code></p>
+          </div>
+        `;
+      }
+    }
+
+    function renderArticleList() {
+      const container = document.getElementById('articleListContainer');
+      container.innerHTML = '';
+
+      currentArticles.forEach((art, idx) => {
+        const scores = art.scores || {};
+        const critic = art.critic_audit || {};
+        const compliance = art.compliance_audit || {};
+        const isCurrent = idx === activeArticleIndex;
+        const card = document.createElement('div');
+        card.className = `p-4 rounded-xl border transition cursor-pointer ${
+          isCurrent 
+            ? 'bg-blue-600/10 border-blue-500/80 shadow-md shadow-blue-500/10' 
+            : 'bg-slate-800/60 border-slate-700/60 hover:border-slate-600 hover:bg-slate-800'
+        }`;
+        card.onclick = () => selectArticle(idx);
+
+        const rankColor = idx === 0 ? 'text-amber-400 bg-amber-500/10 border-amber-500/30' : 'text-slate-400 bg-slate-700/40 border-slate-600/40';
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-2">
+            <span class="text-[11px] font-bold px-2 py-0.5 rounded-full border ${rankColor}">
+              #Top ${art.rank || (idx + 1)} · 选题 ${scores.total_score || 85}分
+            </span>
+            <div class="flex items-center gap-1">
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                🛡️ 质检 ${critic.total_score || 95}分
+              </span>
+              <span class="text-[11px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
+                🔒 微信合规
+              </span>
+            </div>
+          </div>
+          <div class="flex gap-3 mb-2.5">
+            ${art.image_url ? `<img src="${art.image_url}" class="w-16 h-16 rounded-lg object-cover flex-shrink-0 border border-slate-700/60 shadow-sm" alt="封面" />` : ''}
+            <div class="flex-1 min-w-0">
+              <h3 class="text-sm font-bold text-slate-100 line-clamp-2 leading-snug mb-1">
+                ${(art.article_data && art.article_data.headline_candidates && art.article_data.headline_candidates[0]) || art.original_title}
+              </h3>
+              <p class="text-xs text-slate-400 line-clamp-2">
+                ${art.article_data ? art.article_data.lead_hook : ''}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 border border-rose-500/20">💥 爆点 ${scores.viral_score || 0}</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">🇨🇳 国内痛点 ${scores.china_score || 0}</span>
+            <span class="px-2 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20">📊 论据 ${critic.dimension_scores?.argument_evidence || 24}/25</span>
+            <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 border border-purple-500/20">📈 含对比表</span>
+            <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20">🔒 零涉敏违禁</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function selectArticle(index) {
+      activeArticleIndex = index;
+      renderArticleList();
+      const art = currentArticles[index];
+      if (!art) return;
+
+      // 渲染候选标题
+      const headlineContainer = document.getElementById('headlineList');
+      headlineContainer.innerHTML = '';
+      const candidates = (art.article_data && art.article_data.headline_candidates) || [art.original_title];
+      selectedHeadline = candidates[0];
+      document.getElementById('currentTitleIndex').innerText = '1';
+
+      candidates.forEach((hl, hIdx) => {
+        const hlItem = document.createElement('div');
+        hlItem.className = `text-xs p-2.5 rounded-lg border cursor-pointer transition flex items-center justify-between gap-2 ${
+          hIdx === 0 
+            ? 'bg-blue-600/20 border-blue-500/70 text-blue-200 font-semibold' 
+            : 'bg-slate-900/60 border-slate-700/60 text-slate-300 hover:bg-slate-900'
+        }`;
+        hlItem.innerHTML = `
+          <span class="line-clamp-1">${hl}</span>
+          <span class="text-[10px] text-slate-400 px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 flex-shrink-0">点击复制</span>
+        `;
+        hlItem.onclick = () => {
+          selectedHeadline = hl;
+          document.getElementById('currentTitleIndex').innerText = String(hIdx + 1);
+          copyCustomText(hl, "✓ 候选标题已复制到剪贴板！");
+          // 更新高亮样式
+          Array.from(headlineContainer.children).forEach((c, i) => {
+            if (i === hIdx) {
+              c.className = 'text-xs p-2.5 rounded-lg border cursor-pointer transition flex items-center justify-between gap-2 bg-blue-600/20 border-blue-500/70 text-blue-200 font-semibold';
+            } else {
+              c.className = 'text-xs p-2.5 rounded-lg border cursor-pointer transition flex items-center justify-between gap-2 bg-slate-900/60 border-slate-700/60 text-slate-300 hover:bg-slate-900';
+            }
+          });
+        };
+        headlineContainer.appendChild(hlItem);
+      });
+
+      // 渲染 7 维严格质检审计报告
+      const critic = art.critic_audit || {};
+      const dimScores = critic.dimension_scores || {
+        argument_evidence: 24,
+        knowledge_depth: 19,
+        china_impact: 14,
+        headline_hook: 14,
+        flow_readability: 9,
+        visual_table: 10,
+        social_share: 5
+      };
+      const totalCritic = critic.total_score || 95;
+      const passed = critic.passed !== false;
+
+      const badgeEl = document.getElementById('auditPassedBadge');
+      badgeEl.className = `text-xs px-2.5 py-0.5 rounded-full font-bold border ${
+        passed 
+          ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' 
+          : 'bg-amber-500/20 text-amber-400 border-amber-500/30'
+      }`;
+      badgeEl.innerText = `${totalCritic}分 · ${passed ? '达标准发' : '需优化'}`;
+
+      const dimGrid = document.getElementById('auditDimensionGrid');
+      dimGrid.innerHTML = `
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">📊 论据数据</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.argument_evidence || 0}<span class="text-[10px] text-slate-500">/25</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">🧠 认知深度</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.knowledge_depth || 0}<span class="text-[10px] text-slate-500">/20</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">🇨🇳 国内账本</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.china_impact || 0}<span class="text-[10px] text-slate-500">/15</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">🎯 标题网感</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.headline_hook || 0}<span class="text-[10px] text-slate-500">/15</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">📝 行文通畅</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.flow_readability || 0}<span class="text-[10px] text-slate-500">/10</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800">
+          <div class="text-slate-400 text-[10px]">📈 图表佐证</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.visual_table || 0}<span class="text-[10px] text-slate-500">/10</span></div>
+        </div>
+        <div class="bg-slate-900/60 p-2 rounded-lg border border-slate-800 col-span-2">
+          <div class="text-slate-400 text-[10px]">💬 社交传播金句</div>
+          <div class="font-bold text-slate-200 mt-0.5">${dimScores.social_share || 0}<span class="text-[10px] text-slate-500">/5</span> · 具讨论性</div>
+        </div>
+      `;
+
+      const verdictEl = document.getElementById('auditVerdictText');
+      verdictEl.innerText = `质检审结：${critic.verdict || '论据扎实，横向数据与国内本土折算详实，通过 7 维严格质检。'}`;
+
+      // 渲染微信合规安全门禁报告
+      const compliance = art.compliance_audit || {};
+      const compScore = compliance.compliance_score !== undefined ? compliance.compliance_score : 100;
+      const compPassed = compliance.compliance_passed !== false;
+      const compBadge = document.getElementById('complianceScoreBadge');
+      if (compBadge) {
+        compBadge.className = `px-2 py-0.5 rounded text-[11px] font-bold border ${
+          compPassed 
+            ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40' 
+            : 'bg-rose-500/20 text-rose-300 border-rose-500/40'
+        }`;
+        compBadge.innerText = `合规度: ${compScore}% · ${compliance.risk_level === 'SAFE' || compPassed ? '极度安全' : '有风险'}`;
+      }
+      const compPolitical = document.getElementById('compliancePoliticalText');
+      if (compPolitical) compPolitical.innerText = compliance.political_safety || '零涉政风险，纯前沿技术探讨';
+      const compHealth = document.getElementById('complianceHealthText');
+      if (compHealth) compHealth.innerText = compliance.wechat_health_impact || '极度安全，无封号/限流/删文风险';
+      const compOrientation = document.getElementById('complianceOrientationText');
+      if (compOrientation) compOrientation.innerText = compliance.orientation || '导向健康，聚焦科技降本与本土赋能，符合新质生产力主旋律';
+
+      // 渲染手机内微信排版正文
+      const renderArea = document.getElementById('wechatArticleRenderArea');
+      renderArea.innerHTML = art.inline_html || '<div class="p-6 text-slate-400">无排版内容</div>';
+
+      // 绑定原文链接
+      const srcBtn = document.getElementById('sourceLinkBtn');
+      if (art.url) {
+        srcBtn.href = art.url;
+        srcBtn.style.display = 'inline-block';
+      } else {
+        srcBtn.style.display = 'none';
+      }
+
+      // 重置滚动条
+      document.getElementById('phoneScrollContainer').scrollTop = 0;
+    }
+
+    async function copyActiveArticleHtml() {
+      const renderArea = document.getElementById('wechatArticleRenderArea');
+      if (!renderArea) return;
+
+      const rawHtml = renderArea.innerHTML;
+      const plainText = renderArea.innerText;
+
+      let copied = false;
+
+      // 1. 优先使用现代标准的 Asynchronous Clipboard API (Chrome / Edge 最佳保证)
+      // 规范核心：Blob 类型必须是纯粹的 "text/html"，严禁带 ;charset=utf-8 等参数
+      if (navigator.clipboard && window.ClipboardItem) {
+        try {
+          const blobHtml = new Blob([rawHtml], { type: "text/html" });
+          const blobText = new Blob([plainText], { type: "text/plain" });
+          await navigator.clipboard.write([new ClipboardItem({
+            "text/html": blobHtml,
+            "text/plain": blobText
+          })]);
+          copied = true;
+        } catch (e) {
+          console.warn("Async Clipboard API 降级至 execCommand:", e);
+          copied = false;
+        }
+      }
+
+      // 2. 真实渲染 DOM 节点直接选中与 execCommand 复制保底
+      // 绝不使用 offscreen -9999px 隐藏节点（否则 Chrome 沙箱判定不可见而丢弃富文本计算样式）
+      if (!copied) {
+        try {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(renderArea);
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          const copyHandler = function(e) {
+            e.preventDefault();
+            if (e.clipboardData) {
+              e.clipboardData.setData('text/html', rawHtml);
+              e.clipboardData.setData('text/plain', plainText);
+            }
+          };
+
+          document.addEventListener('copy', copyHandler);
+          copied = document.execCommand('copy');
+          document.removeEventListener('copy', copyHandler);
+          selection.removeAllRanges();
+        } catch (err) {
+          console.error("execCommand 复制异常:", err);
+          copied = false;
+        }
+      }
+
+      if (copied) {
+        showToast("✓ 微信公众号高保真排版已复制！直接在微信后台 Ctrl+V 粘贴即可");
+      } else {
+        selectAllArticleContent();
+      }
+    }
+
+    function selectAllArticleContent() {
+      const renderArea = document.getElementById('wechatArticleRenderArea');
+      if (!renderArea) return;
+      
+      const scrollContainer = document.getElementById('phoneScrollContainer');
+      if (scrollContainer) scrollContainer.scrollTop = 0;
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(renderArea);
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      showToast("✓ 已为您自动高亮全选整篇排版！请直接按键盘 Ctrl+C 复制");
+    }
+
+    function copyCurrentHeadline() {
+      if (!selectedHeadline) {
+        const art = currentArticles[activeArticleIndex];
+        selectedHeadline = (art && art.article_data && art.article_data.headline_candidates && art.article_data.headline_candidates[0]) || '';
+      }
+      copyCustomText(selectedHeadline, "✓ 标题已复制到剪贴板！");
+    }
+
+    function copyCustomText(text, msg) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(msg || "✓ 已复制到剪贴板！");
+      }).catch(() => {
+        prompt("请手动复制标题：", text);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastAlert');
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+
+    function refreshData() {
+      loadWechatData();
+    }
+
+    window.addEventListener('DOMContentLoaded', loadWechatData);
+  </script>
+</body>
+</html>

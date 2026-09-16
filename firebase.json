@@ -2,6 +2,17 @@
   "hosting": {
     "site": "ai-radar-news",
     "public": "public",
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/wechat",
+        "destination": "/wechat.html"
+      },
+      {
+        "source": "/wechat/",
+        "destination": "/wechat.html"
+      }
+    ],
     "ignore": [
       "firebase.json",
       "**/.*",
