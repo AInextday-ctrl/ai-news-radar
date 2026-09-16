@@ -2572,7 +2572,7 @@
       }
     }
 
-    // 渲染今日 60s Top 3 走马灯
+    // 渲染今日 60s Top 3 走马灯 (支持 AI 资讯概要弹窗与直达原文)
     function renderTopThree(topItems) {
       const container = document.getElementById('top-three-container');
       const t = I18N[currentLang];
@@ -2589,9 +2589,10 @@
         const timeObj = formatTime(item.raw_published_at, currentLang);
         const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
         const cleanSource = item.source || "";
+        const itemId = item.id || `top_${idx}`;
 
         return `
-          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2 shadow-sm">
+          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm cursor-pointer" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${itemId}')">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
                 <div class="flex items-center space-x-1.5 min-w-0">
@@ -2600,18 +2601,26 @@
                 </div>
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug">
+              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug cursor-pointer" onclick="event.stopPropagation(); openAiNewsModal('${itemId}')">
                 ${title}
               </h3>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                 ${summary}
               </p>
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-200 dark:border-slate-800/60">
-              <span class="truncate max-w-[140px]">信源: ${cleanSource}</span>
-              <span class="text-indigo-600 dark:text-indigo-400 group-hover:translate-x-0.5 transition-transform font-medium shrink-0">阅读 →</span>
+            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60 gap-2">
+              <span class="truncate max-w-[110px] sm:max-w-[130px]">信源: ${cleanSource}</span>
+              <div class="flex items-center space-x-1.5 shrink-0">
+                <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${itemId}')" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-[10px] font-semibold transition-all shadow-sm cursor-pointer">
+                  <span>📋</span>
+                  <span>${t.aiAnalysisBtn || '资讯概要'}</span>
+                </button>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium shrink-0">
+                  ${t.readMore || '阅读原文 ↗'}
+                </a>
+              </div>
             </div>
-          </a>
+          </article>
         `;
       }).join('');
     }
@@ -4089,14 +4098,24 @@
       if (!cachedData) return;
       const t = I18N[currentLang] || I18N.zh;
       const isZh = currentLang === 'zh';
-      const allNews = cachedData.items || [
+      const allNews = [
+        ...(cachedData.top_three || []),
+        ...(cachedData.items || []),
         ...(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []),
         ...(cachedData.grouped?.celebrity || cachedData.celebrity || []),
         ...(cachedData.grouped?.tools || cachedData.tools || []),
         ...(cachedData.grouped?.videos || cachedData.videos || []),
         ...(cachedData.grouped?.prompts || cachedData.prompts || [])
       ];
-      const item = allNews.find(it => String(it.id) === String(newsId));
+
+      let item = allNews.find(it => String(it.id) === String(newsId));
+      if (!item && String(newsId).startsWith('top_')) {
+        const topIdx = parseInt(newsId.replace('top_', ''), 10);
+        item = (cachedData.top_three || [])[topIdx];
+      }
+      if (!item) {
+        item = allNews.find(it => (it.url && it.url === newsId) || (it.title && it.title === newsId));
+      }
       if (!item) return;
 
       const analysis = item.ai_analysis || {};
@@ -4138,15 +4157,20 @@
         .replace(/([。！？；，、])\1+/g, '$1')
         .trim();
 
-      // 2. AI 点评 (犀利幽默、直指核心、网感神评)
+      // 2. AI 点评 (犀利幽默、直指核心、网感神评，去除正文冗余前缀标签)
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh)
         : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh);
       if (!insightText || insightText.includes('【行业研判】该动态折射出当前AI产业链')) {
         insightText = isZh
-          ? '【AI 点评】科技圈的公关通稿常把商业算计包装成“全人类福祉”，但剥开华丽辞藻，本质无非是争夺算力、抢占流量与构筑壁垒的现实博弈。且看各方如何继续在这个高烧不退的名利场里各显神通。'
-          : '[AI Hot Take] Strip away the tech PR jargon and lofty promises, and what remains is the timeless hustle for capital, compute, and captive audiences.';
+          ? '科技圈的公关通稿向来习惯把精打细算的商业博弈包装成“全人类福祉”。但剥开所有前沿术语的外衣，底层逻辑始终逃不过算力成本、用户注意力与资本回报周期的现实引力。且看各路玩家在这场高烧不退的军备竞赛里，谁能真正把故事讲到最后。'
+          : 'Strip away the tech PR jargon and lofty promises, and what remains is the timeless hustle for capital, compute, and captive audiences.';
       }
+
+      // 彻底滤除正文开头可能存在的【AI 点评】、【AI点评】等前缀，因为小标题栏已包含该标识
+      let cleanInsight = String(insightText)
+        .replace(/^(?:【(?:AI\s*点评|AI点评|AI\s*Hot\s*Take|行业研判|深度洞察|专家点评)】|\[(?:AI\s*Hot\s*Take|AI\s*Commentary|AI\s*Takeaway)\])\s*/i, '')
+        .trim();
 
       // 写入 DOM 节点 (信源仅在标题栏呈现，正文杜绝冗余；六要素自然融合在正文中，不搞机械卡片)
       const modal = document.getElementById('ai-news-modal');
@@ -4169,7 +4193,7 @@
       if (summaryEl) summaryEl.textContent = briefingText;
 
       if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? 'AI 点评' : 'AI Hot Take');
-      if (insightEl) insightEl.textContent = insightText;
+      if (insightEl) insightEl.textContent = cleanInsight;
 
       if (sourceBtnEl) {
         sourceBtnEl.href = item.url || '#';

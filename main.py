@@ -19,7 +19,7 @@ import time
 from datetime import datetime, timezone
 import httpx
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status
-from processor import process_items_batch
+from processor import process_items_batch, clean_news_text
 from config import CATEGORIES, AI_CREATORS
 
 
@@ -95,16 +95,19 @@ def extract_top_three(items: list) -> list:
     if news_pool:
         top_news_item = news_pool[0]
         top.append({
+            "id": top_news_item.get("id"),
+            "category": top_news_item.get("category", "news"),
             "badge_zh": "⚡ 今日头条",
             "badge_en": "⚡ Top Story",
-            "title_zh": top_news_item.get("title_zh") or top_news_item.get("title", ""),
-            "title_en": top_news_item.get("title_en") or top_news_item.get("title", ""),
-            "summary_zh": top_news_item.get("summary_zh") or top_news_item.get("content_snippet", "")[:80],
+            "title_zh": clean_news_text(top_news_item.get("title_zh") or top_news_item.get("title", "")),
+            "title_en": clean_news_text(top_news_item.get("title_en") or top_news_item.get("title", "")),
+            "summary_zh": clean_news_text(top_news_item.get("summary_zh") or top_news_item.get("content_snippet", "")[:120]),
             "summary_en": top_news_item.get("summary_en") or top_news_item.get("content_snippet", "")[:120],
             "url": top_news_item["url"],
             "image_url": top_news_item.get("image_url"),
             "raw_published_at": top_news_item.get("raw_published_at"),
-            "source": top_news_item["source"]
+            "source": top_news_item["source"],
+            "ai_analysis": top_news_item.get("ai_analysis")
         })
 
     # 2. 领袖声音 / 社区热议 (严格限定过去 24 小时以内发生的真实推文或社群讨论)
@@ -145,31 +148,37 @@ def extract_top_three(items: list) -> list:
             title_zh = f"{author}：{zh_quote}"
 
         top.append({
+            "id": it.get("id"),
+            "category": it.get("category", "celebrity"),
             "badge_zh": badge_zh,
             "badge_en": badge_en,
-            "title_zh": title_zh,
-            "title_en": title_en,
-            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "title_zh": clean_news_text(title_zh),
+            "title_en": clean_news_text(title_en),
+            "summary_zh": clean_news_text(it.get("summary_zh") or it.get("content_snippet", "")[:120]),
             "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
-            "source": it.get("author_handle") or it["source"]
+            "source": it.get("author_handle") or it["source"],
+            "ai_analysis": it.get("ai_analysis")
         })
     elif len(news_pool) > 1:
         # 若今日无大V或社群发帖，绝不拿多天前的旧闻充数，而是选取今日第二条重磅前沿突破
         it = news_pool[1]
         top.append({
+            "id": it.get("id"),
+            "category": it.get("category", "news"),
             "badge_zh": "⚡ 突破进展",
             "badge_en": "⚡ Breakthrough",
-            "title_zh": it.get("title_zh") or it.get("title", ""),
-            "title_en": it.get("title_en") or it.get("title", ""),
-            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "title_zh": clean_news_text(it.get("title_zh") or it.get("title", "")),
+            "title_en": clean_news_text(it.get("title_en") or it.get("title", "")),
+            "summary_zh": clean_news_text(it.get("summary_zh") or it.get("content_snippet", "")[:120]),
             "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
-            "source": it["source"]
+            "source": it["source"],
+            "ai_analysis": it.get("ai_analysis")
         })
 
     # 3. 最值得体验的新工具/新视频 (优先取今日最新爆款)
@@ -181,16 +190,19 @@ def extract_top_three(items: list) -> list:
     if app_pool:
         it = app_pool[0]
         top.append({
+            "id": it.get("id"),
+            "category": it.get("category", "tools"),
             "badge_zh": "🛠️ 爆款尝鲜",
             "badge_en": "🛠️ Try It Out",
-            "title_zh": it.get("title_zh") or it.get("title", ""),
-            "title_en": it.get("title_en") or it.get("title", ""),
-            "summary_zh": it.get("summary_zh") or it.get("content_snippet", "")[:80],
+            "title_zh": clean_news_text(it.get("title_zh") or it.get("title", "")),
+            "title_en": clean_news_text(it.get("title_en") or it.get("title", "")),
+            "summary_zh": clean_news_text(it.get("summary_zh") or it.get("content_snippet", "")[:120]),
             "summary_en": it.get("summary_en") or it.get("content_snippet", "")[:120],
             "url": it["url"],
             "image_url": it.get("image_url"),
             "raw_published_at": it.get("raw_published_at"),
-            "source": it["source"]
+            "source": it["source"],
+            "ai_analysis": it.get("ai_analysis")
         })
 
     return top
