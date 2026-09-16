@@ -191,28 +191,8 @@ SOURCES = {
         "type": "hn_api"
     },
 
-    # 2. 社交平台专栏：X (Twitter) 与 Reddit 独立监测
-    "reddit_singularity": {
-        "name": "Reddit r/singularity",
-        "url": "https://www.reddit.com/r/singularity/.rss",
-        "default_category": "celebrity",
-        "platform": "reddit",
-        "type": "rss"
-    },
-    "reddit_chatgpt": {
-        "name": "Reddit r/ChatGPT",
-        "url": "https://www.reddit.com/r/ChatGPT/.rss",
-        "default_category": "celebrity",
-        "platform": "reddit",
-        "type": "rss"
-    },
-    "reddit_localllama": {
-        "name": "Reddit r/LocalLLaMA",
-        "url": "https://www.reddit.com/r/LocalLLaMA/.rss",
-        "default_category": "celebrity",
-        "platform": "reddit",
-        "type": "rss"
-    },
+    # 2. 社交平台专栏：全面聚焦 𝕏 (Twitter) 顶尖领袖与科学家独家发声，严禁匿名论坛水帖
+
 
     # 3. 场景化落地实用工具 (每日最新免安装可玩应用与高频更新开源神器)
     "github_tools": {

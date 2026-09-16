@@ -1653,16 +1653,9 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     hn_items = fetch_hacker_news(max_items=8)
     items.extend(hn_items)
 
-    # 5. Reddit 极客社群真实热议 (标明 Reddit 身份，不张冠李戴给奥特曼)
-    reddit_sources = [
-        ("reddit_singularity", 8),
-        ("reddit_chatgpt", 6),
-        ("reddit_localllama", 6)
-    ]
-    for key, count in reddit_sources:
-        items.extend(fetch_rss_channel(key, max_items=count))
-
+    # 领袖观点分类严格由 𝕏 权威领袖矩阵与实时大V推文驱动，杜绝匿名论坛水文
     return items
+
 
 
 # 严格剔除国内地方政务/推进会/培训等水文关键词，确保 100% 全球前沿
@@ -1746,17 +1739,16 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     img_url = extract_image_url(entry, summary)
                     
                     if is_reddit:
-                        # 严格作为 Reddit 极客社群处理，绝不张冠李戴给名人
+                        # 若有 Reddit 来源，归入社区快讯，绝不污染领袖板块
                         platform = "reddit"
-                        category = "celebrity"
+                        category = "news"
                         sub_name = cfg["name"].replace("Reddit ", "")
-                        # 清洗 Reddit 标题中的前缀标签 如 [P], [D], [R], [News]
                         clean_title = re.sub(r'^\[[A-Za-z]+\]\s*', '', title).strip()
                         author_display = f"Reddit · {sub_name}"
                         author_handle = sub_name
                         author_avatar = "https://www.redditstatic.com/shreddit/assets/favicon/192x192.png"
                         source_display = f"Reddit · {sub_name}"
-                        tags = ["Reddit社区", sub_name]
+                        tags = ["社区热议", sub_name]
                         metrics = {
                             "platform": "reddit",
                             "sub": sub_name,

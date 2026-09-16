@@ -778,9 +778,7 @@
               <h3 class="font-bold text-sm text-slate-100" id="section-title-celebrity">🐦 领袖观点·社交</h3>
             </div>
             <div class="flex items-center space-x-1">
-              <button onclick="setSidebarSocialFilter('all')" id="side-social-all" class="text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-semibold">全部</button>
-              <button onclick="setSidebarSocialFilter('x')" id="side-social-x" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white font-semibold">𝕏 大V</button>
-              <button onclick="setSidebarSocialFilter('reddit')" id="side-social-reddit" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-300 hover:text-white font-semibold">Reddit</button>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-400 font-semibold border border-sky-500/30">𝕏 权威领袖矩阵</span>
             </div>
           </div>
           <div class="space-y-3" id="stream-celebrity">
@@ -920,11 +918,11 @@
           <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="cat-view-desc">查看该分类下的全部深度收录情报</p>
         </div>
         
-        <!-- 领袖观点专用的平台快速筛选器 (𝕏 vs Reddit 独立分开) -->
+        <!-- 领袖观点专用的分类快速筛选器 (全部 / 科技巨头 / 顶尖科学家与极客) -->
         <div id="celebrity-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white">全部平台</button>
-          <button onclick="filterSocialPlatform('x')" id="celeb-filter-x" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">𝕏 (Twitter) 大V</button>
-          <button onclick="filterSocialPlatform('reddit')" id="celeb-filter-reddit" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">Reddit 极客社群</button>
+          <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30">全部领袖</button>
+          <button onclick="filterSocialPlatform('giants')" id="celeb-filter-giants" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">👑 科技巨头掌舵人</button>
+          <button onclick="filterSocialPlatform('scientists')" id="celeb-filter-scientists" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🔬 顶级科学家与极客</button>
         </div>
 
         <!-- 工具专用的场景快速筛选过滤器 -->
@@ -1374,9 +1372,9 @@
         arxivNoMatch: "暂无论文推荐",
         catViewTitle: "专栏全景浏览",
         catViewDesc: "查看该分类下的全部深度收录情报",
-        celebFilterAll: "全部平台",
-        celebFilterX: "𝕏 (Twitter) 大V",
-        celebFilterReddit: "Reddit 极客社群",
+        celebFilterAll: "全部领袖",
+        celebFilterGiants: "👑 科技巨头掌舵人",
+        celebFilterScientists: "🔬 顶级科学家与极客",
         toolFilterAll: "全部神器",
         toolFilterWeb: "🟢 免部署在线玩",
         toolFilterDesign: "🎨 修图设计",
@@ -1510,9 +1508,9 @@
         arxivNoMatch: "No papers available",
         catViewTitle: "Category Panoramic View",
         catViewDesc: "Explore all curated intelligence and tools in this category",
-        celebFilterAll: "All Platforms",
-        celebFilterX: "𝕏 (Twitter) Leaders",
-        celebFilterReddit: "Reddit Community",
+        celebFilterAll: "All Leaders",
+        celebFilterGiants: "👑 Tech Giants",
+        celebFilterScientists: "🔬 Top Scientists & Geeks",
         toolFilterAll: "All Tools",
         toolFilterWeb: "🟢 Online Web App",
         toolFilterDesign: "🎨 Image & Design",
@@ -2155,10 +2153,10 @@
       // 更新专栏子筛选按钮文本
       const cfAll = document.getElementById('celeb-filter-all');
       if (cfAll) cfAll.textContent = t.celebFilterAll;
-      const cfX = document.getElementById('celeb-filter-x');
-      if (cfX) cfX.textContent = t.celebFilterX;
-      const cfReddit = document.getElementById('celeb-filter-reddit');
-      if (cfReddit) cfReddit.textContent = t.celebFilterReddit;
+      const cfGiants = document.getElementById('celeb-filter-giants');
+      if (cfGiants) cfGiants.textContent = t.celebFilterGiants;
+      const cfScientists = document.getElementById('celeb-filter-scientists');
+      if (cfScientists) cfScientists.textContent = t.celebFilterScientists;
 
       const tfAll = document.getElementById('tool-filter-all');
       if (tfAll) tfAll.textContent = t.toolFilterAll;
@@ -2449,33 +2447,37 @@
       }
     }
 
-    // 侧边栏社交平台过滤 (全部 / 𝕏 / Reddit)
+    // 判断是否为科技巨头核心掌舵人与顶级 Lab (Meta/微软/OpenAI/谷歌等)
+    function isGiantLeader(it) {
+      if (!it) return false;
+      const handle = (it.author_handle || '').toLowerCase();
+      const author = (it.author || '').toLowerCase();
+      return handle.includes('finkd') || author.includes('zuckerberg') || author.includes('扎克伯格') ||
+             handle.includes('satyanadella') || author.includes('nadella') || author.includes('纳德拉') ||
+             handle.includes('openaidevs') || handle.includes('openai') ||
+             handle.includes('googleai') || handle.includes('googleaistudio') ||
+             handle.includes('openrouter') || author.includes('altman') || author.includes('奥特曼');
+    }
+
+    // 侧边栏社交平台过滤
     function setSidebarSocialFilter(platform) {
       sideSocialFilter = platform;
-      ['all', 'x', 'reddit'].forEach(p => {
-        const btn = document.getElementById(`side-social-${p}`);
-        if (btn) {
-          btn.className = (p === platform)
-            ? "text-[10px] px-1.5 py-0.5 rounded bg-sky-600 text-white font-semibold"
-            : "text-[10px] px-1.5 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-white font-semibold";
-        }
-      });
       if (cachedData) renderUI(cachedData);
     }
 
-    // 专栏广场：社交平台过滤
-    function filterSocialPlatform(platform) {
-      socialPlatformFilter = platform;
+    // 专栏广场：领袖分类过滤 (全部 / 科技巨头 / 顶尖科学家与极客)
+    function filterSocialPlatform(filterType) {
+      socialPlatformFilter = filterType;
       const btnMap = {
         'all': 'celeb-filter-all',
-        'x': 'celeb-filter-x',
-        'reddit': 'celeb-filter-reddit'
+        'giants': 'celeb-filter-giants',
+        'scientists': 'celeb-filter-scientists'
       };
-      ['all', 'x', 'reddit'].forEach(p => {
-        const b = document.getElementById(btnMap[p]);
+      Object.keys(btnMap).forEach(k => {
+        const b = document.getElementById(btnMap[k]);
         if (b) {
-          b.className = (p === platform)
-            ? "celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-sky-600 text-white"
+          b.className = (k === filterType)
+            ? "celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30"
             : "celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700";
         }
       });
@@ -2924,7 +2926,6 @@
       const isPinned = isItemPinnedActive(item);
       const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 置顶爆款</span>` : '';
 
-      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
       const itemId = item.id || item.url || '';
 
       // 规范化四大核心指标 (阅读量 views, 点赞数 likes, 评论数 comments, 转发数 retweets)
@@ -2938,122 +2939,65 @@
       let retweets = m.retweets || '5.6k';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '5.6k';
 
-      if (isX) {
-        const title = item.title_zh || item.title;
-        const avatar = item.author_avatar || `https://unavatar.io/x/${(item.author_handle || 'x').replace('@','')}`;
-        const specBadges = (item.spec_tags && item.spec_tags.length)
-          ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30"># ${s}</span>`).join('')}</div>`
-          : '';
-
-        return `
-          <article class="glass-card cyber-timeline-card rounded-2xl p-4 flex flex-col space-y-3 group border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all cursor-pointer" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
-            <!-- 卡片顶部时间锚点与平台标签 (推文框左上角完整时间点) -->
-            <div class="flex items-center justify-between gap-2 border-b border-slate-200/70 dark:border-slate-800/70 pb-2 text-[11px] font-mono">
-              <div class="flex items-center space-x-1.5 text-sky-600 dark:text-sky-400 font-semibold min-w-0">
-                <span class="text-xs shrink-0">⏱️</span>
-                <span class="truncate notranslate font-mono tracking-tight text-[11px]" title="${timeObj.display}">${timeObj.exactTime || timeObj.display}</span>
-                <span class="text-slate-400 dark:text-slate-500 text-[10px] font-normal shrink-0">(${timeObj.relative || '今日'})</span>
-                ${todayBadge}
-              </div>
-              <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold shrink-0">𝕏 领袖推特</span>
-            </div>
-
-            <!-- 头部身份信息 (放大头像设计) -->
-            <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center space-x-3 min-w-0">
-                <div class="relative shrink-0">
-                  <img src="${avatar}" class="w-11 h-11 rounded-full ring-2 ring-sky-400/80 object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${(item.author || 'VIP').replace(/[^a-zA-Z0-9]/g, '')}'">
-                  <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow" title="${t.celebVerifiedTitle || '已认证权威领袖'}">✓</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="flex items-center space-x-1">
-                    <span class="font-extrabold text-sm text-slate-900 dark:text-slate-100 truncate notranslate">${item.author || 'AI 领袖'}</span>
-                  </div>
-                  <span class="text-slate-500 dark:text-slate-400 text-[11px] font-mono truncate block notranslate">${item.author_handle || '@x'}</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 大V发文直接纯净引用 (彻底剔除下方重复机械总结) -->
-            <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-100 leading-relaxed bg-sky-50/70 dark:bg-slate-950/70 p-3 rounded-xl border border-sky-100 dark:border-slate-800/80 tweet-quote-box group-hover:border-sky-400/40 transition-colors">
-              <span class="text-sky-500 font-serif text-base mr-1">“</span>${title}<span class="text-sky-500 font-serif text-base ml-1">”</span>
-            </div>
-
-            ${specBadges}
-
-            <!-- 实时三维互动指标 + 转发 + 双操作入口 -->
-            <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-              <div class="flex items-center space-x-2.5 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono flex-wrap">
-                <span title="浏览阅读量">👁️ <span class="notranslate font-semibold">${views}</span></span>
-                <span title="点赞数" class="text-rose-500/90">❤️ <span class="notranslate font-semibold">${likes}</span></span>
-                <span title="讨论数" class="text-sky-600 dark:text-sky-400">💬 <span class="notranslate font-semibold">${comments}</span></span>
-                <span title="转推数" class="hidden sm:inline text-purple-500/90">🔁 <span class="notranslate font-semibold">${retweets}</span></span>
-              </div>
-              <div class="flex items-center space-x-2 shrink-0">
-                <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-300 border border-sky-500/30 text-[10px] sm:text-[11px] font-semibold transition-all shadow-sm">
-                  💬 贴文与热评
-                </button>
-                <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 font-medium text-[11px] flex items-center space-x-0.5">
-                  <span>直达原推</span>
-                  <span>↗</span>
-                </a>
-              </div>
-            </div>
-          </article>
-        `;
-      }
-
-      // Reddit 社区专有排版
       const title = item.title_zh || item.title;
-      const subName = item.author_handle || (item.source || '').replace('Reddit ', '') || 'r/singularity';
-      const cleanSub = subName.startsWith('r/') ? subName : 'r/' + subName;
+      const author = item.author || 'AI 领袖';
+      const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
+      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
+      const specBadges = (item.spec_tags && item.spec_tags.length)
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/70 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30"># ${s}</span>`).join('')}</div>`
+        : '';
 
       return `
-        <article class="glass-card cyber-timeline-card rounded-2xl p-4 flex flex-col space-y-3 group border border-slate-200 dark:border-slate-800/80 hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/10 transition-all cursor-pointer" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
+        <article class="glass-card cyber-timeline-card rounded-2xl p-4 flex flex-col space-y-3 group border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all cursor-pointer" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
           <!-- 卡片顶部时间锚点与平台标签 (推文框左上角完整时间点) -->
           <div class="flex items-center justify-between gap-2 border-b border-slate-200/70 dark:border-slate-800/70 pb-2 text-[11px] font-mono">
-            <div class="flex items-center space-x-1.5 text-orange-600 dark:text-orange-400 font-semibold min-w-0">
+            <div class="flex items-center space-x-1.5 text-sky-600 dark:text-sky-400 font-semibold min-w-0">
               <span class="text-xs shrink-0">⏱️</span>
               <span class="truncate notranslate font-mono tracking-tight text-[11px]" title="${timeObj.display}">${timeObj.exactTime || timeObj.display}</span>
               <span class="text-slate-400 dark:text-slate-500 text-[10px] font-normal shrink-0">(${timeObj.relative || '今日'})</span>
               ${todayBadge}
+              ${pinnedBadge}
             </div>
-            <span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold shrink-0">Reddit 深度热议</span>
+            <span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 dark:text-slate-200 border border-slate-700 text-[10px] font-bold shrink-0">𝕏 领袖推特</span>
           </div>
 
-          <!-- 头部身份信息 (放大头像设计) -->
+          <!-- 头部身份信息 (放大头像设计，认证蓝V徽章) -->
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center space-x-3 min-w-0">
-              <div class="w-11 h-11 rounded-full bg-[#FF4500]/15 flex items-center justify-center text-xl border-2 border-[#FF4500]/40 text-[#FF4500] shrink-0 shadow-sm">
-                👽
+              <div class="relative shrink-0">
+                <img src="${avatar}" class="w-11 h-11 rounded-full ring-2 ring-sky-400/80 object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow" title="${t.celebVerifiedTitle || '已认证权威领袖'}">✓</span>
               </div>
               <div class="min-w-0">
                 <div class="flex items-center space-x-1">
-                  <span class="font-extrabold text-sm text-slate-900 dark:text-slate-200 truncate notranslate">${item.author || 'Reddit 极客社群'}</span>
+                  <span class="font-extrabold text-sm text-slate-900 dark:text-slate-100 truncate notranslate">${author}</span>
                 </div>
-                <span class="text-orange-500 dark:text-orange-400/90 text-[11px] font-mono truncate block notranslate">${cleanSub}</span>
+                <span class="text-slate-500 dark:text-slate-400 text-[11px] font-mono truncate block notranslate">${handle}</span>
               </div>
             </div>
           </div>
 
-          <!-- 社区热帖直接引用 (彻底剔除下方重复机械总结) -->
-          <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 group-hover:text-orange-500 dark:group-hover:text-orange-300 transition-colors leading-snug bg-slate-50/70 dark:bg-slate-950/50 p-3 rounded-xl border border-slate-200 dark:border-slate-800/80">
-            ${title}
+          <!-- 大V发文直接纯净引用 (彻底剔除下方重复机械总结) -->
+          <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-100 leading-relaxed bg-sky-50/70 dark:bg-slate-950/70 p-3 rounded-xl border border-sky-100 dark:border-slate-800/80 tweet-quote-box group-hover:border-sky-400/40 transition-colors">
+            <span class="text-sky-500 font-serif text-base mr-1">“</span>${title}<span class="text-sky-500 font-serif text-base ml-1">”</span>
           </div>
 
-          <!-- 实时三维互动指标 + 双操作入口 -->
+          ${specBadges}
+
+          <!-- 实时三维互动指标 + 转发 + 双操作入口 -->
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-            <div class="flex items-center space-x-2.5 text-[10px] sm:text-[11px] text-orange-600 dark:text-orange-400/90 font-mono flex-wrap">
-              <span title="浏览量" class="text-slate-500 dark:text-slate-400">👁️ <span class="notranslate font-semibold">${views}</span></span>
-              <span title="点赞数">🔥 <span class="notranslate font-semibold">${likes}</span></span>
-              <span title="讨论数">💬 <span class="notranslate font-semibold">${comments}</span></span>
+            <div class="flex items-center space-x-2.5 text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-mono flex-wrap">
+              <span title="浏览阅读量">👁️ <span class="notranslate font-semibold">${views}</span></span>
+              <span title="点赞数" class="text-rose-500/90">❤️ <span class="notranslate font-semibold">${likes}</span></span>
+              <span title="讨论数" class="text-sky-600 dark:text-sky-400">💬 <span class="notranslate font-semibold">${comments}</span></span>
+              <span title="转推数" class="hidden sm:inline text-purple-500/90">🔁 <span class="notranslate font-semibold">${retweets}</span></span>
             </div>
             <div class="flex items-center space-x-2 shrink-0">
-              <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2 py-1 rounded-lg bg-orange-500/10 hover:bg-orange-500/20 text-orange-600 dark:text-orange-400 border border-orange-500/30 text-[10px] sm:text-[11px] font-semibold transition-all shadow-sm">
+              <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2 py-1 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-300 border border-sky-500/30 text-[10px] sm:text-[11px] font-semibold transition-all shadow-sm">
                 💬 贴文与热评
               </button>
-              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 font-medium text-[11px] flex items-center space-x-0.5">
-                <span>查看热帖</span>
+              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="text-slate-500 dark:text-slate-400 hover:text-sky-500 dark:hover:text-sky-400 font-medium text-[11px] flex items-center space-x-0.5">
+                <span>直达原推</span>
                 <span>↗</span>
               </a>
             </div>
@@ -3064,7 +3008,15 @@
 
     // ==========================================
     // 领袖头条 · 24小时重点爆款卡片排布 (Celebrity Spotlight Cards Grid)
+    // 动态支持最多容纳 10 篇重磅爆文，提供首屏 3 黄金大卡 + 交互式展开全部机制
     // ==========================================
+    let celebritySpotlightExpanded = false;
+
+    function toggleCelebritySpotlight() {
+      celebritySpotlightExpanded = !celebritySpotlightExpanded;
+      renderCelebritySpotlightBanner();
+    }
+
     function getCelebritySpotlightCards(filter = socialPlatformFilter) {
       if (!cachedData) return [];
       const allCeleb = (cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || (cachedData.items ? cachedData.items.filter(it => it.category === 'celebrity') : []));
@@ -3072,10 +3024,10 @@
       // 严格 24 小时新鲜度拦截，历史与失效推文严禁进入 Spotlight
       let list = allCeleb.filter(it => isWithin24Hours(it.raw_published_at));
       
-      if (filter === 'x') {
-        list = list.filter(it => it.platform === 'x' || (it.source && it.source.includes('Twitter')));
-      } else if (filter === 'reddit') {
-        list = list.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
+      if (filter === 'giants') {
+        list = list.filter(isGiantLeader);
+      } else if (filter === 'scientists') {
+        list = list.filter(it => !isGiantLeader(it));
       }
       
       // 领袖权重优先级 (确保首屏多卡片网格聚焦最重磅的行业领袖最新发声)
@@ -3087,8 +3039,7 @@
         if (handle.includes('openaidevs') || handle.includes('openai')) return 8;
         if (handle.includes('googleai') || handle.includes('googleaistudio')) return 7;
         if (handle.includes('openrouter')) return 6;
-        if (it.platform === 'x') return 5;
-        return 1;
+        return 5;
       };
       
       list.sort((a, b) => {
@@ -3100,7 +3051,8 @@
         return timeB - timeA;
       });
       
-      return list.slice(0, 3);
+      // 最多提取当天 10 篇重磅爆文，彻底消除数量截断缺陷
+      return list.slice(0, 10);
     }
 
     function renderCelebritySpotlightBanner() {
@@ -3114,25 +3066,43 @@
         return;
       }
 
+      // 如果爆款大于 3 条，未展开时只渲染 Top 3，点击展开后渲染全部（最多 10 张）
+      const hasMore = cards.length > 3;
+      const displayCards = (hasMore && !celebritySpotlightExpanded) ? cards.slice(0, 3) : cards;
+      const hiddenCount = cards.length - 3;
+      const isZh = currentLang === 'zh';
+
       bannerEl.className = "mb-6 block";
       bannerEl.innerHTML = `
         <div class="glass-panel relative rounded-3xl p-4 sm:p-5 border-2 border-amber-500/40 dark:border-amber-500/30 bg-gradient-to-br from-amber-50/70 via-slate-50 to-indigo-50/60 dark:from-slate-900/95 dark:via-indigo-950/40 dark:to-slate-900/95 shadow-2xl shadow-amber-500/10 transition-all">
-          <!-- 顶部标题行 (彻底删除人物标签切换栏，杜绝误导) -->
+          <!-- 顶部标题行 (包含动态爆款数量角标) -->
           <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-200 dark:border-slate-800/80">
-            <div class="flex items-center space-x-2.5">
+            <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
               <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></span>
               <h3 class="font-black text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center space-x-1.5">
                 <span class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 bg-clip-text text-transparent">⚡ 领袖头条 · 24小时重点爆款聚焦</span>
               </h3>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 shrink-0">🔥 顶级影响力</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 shrink-0">
+                🔥 今日共 ${cards.length} 篇重磅聚焦
+              </span>
             </div>
-            <span class="text-[10px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">实时真实动态 · 探针存活保障</span>
+            <span class="text-[10px] sm:text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline">真实 𝕏 大V · 存活探针实时保障</span>
           </div>
 
-          <!-- 重点爆款卡片并排阵列 (多卡网格呈现，无任何多余人物标签) -->
+          <!-- 重点爆款卡片多行响应式网格阵列 -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            ${cards.map(it => renderSpotlightCard(it)).join('')}
+            ${displayCards.map(it => renderSpotlightCard(it)).join('')}
           </div>
+
+          <!-- 当爆款多于 3 条时提供丝滑展开/收起切换按钮 -->
+          ${hasMore ? `
+            <div class="mt-4 pt-3.5 border-t border-amber-500/20 flex justify-center">
+              <button type="button" onclick="toggleCelebritySpotlight()" class="group inline-flex items-center space-x-2 px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-amber-500/15 hover:from-amber-500/25 hover:to-orange-500/25 text-amber-700 dark:text-amber-300 border border-amber-500/35 text-xs font-bold transition-all shadow-sm hover:shadow-md cursor-pointer">
+                <span>${celebritySpotlightExpanded ? (isZh ? '▲ 收起更多爆款' : '▲ Collapse Extra Spotlight') : (isZh ? `⚡ 展开查看今日全部 ${cards.length} 篇大V爆款焦点 (还有 ${hiddenCount} 篇) ▾` : `⚡ Show All ${cards.length} Spotlight Posts (${hiddenCount} More) ▾`)}</span>
+                <span class="text-xs transition-transform duration-200 group-hover:scale-110">${celebritySpotlightExpanded ? '↑' : '↓'}</span>
+              </button>
+            </div>
+          ` : ''}
         </div>
       `;
     }
@@ -3141,26 +3111,23 @@
       const t = I18N[currentLang];
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
-      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
-      const platformBadge = isX 
-        ? `<span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 border border-slate-700 text-[10px] font-bold shrink-0">𝕏 领袖发声</span>`
-        : `<span class="px-2 py-0.5 rounded bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/25 text-[10px] font-bold shrink-0">Reddit 深度热议</span>`;
+      const platformBadge = `<span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-slate-100 border border-slate-700 text-[10px] font-bold shrink-0">𝕏 领袖发声</span>`;
 
       const itemId = item.id || item.url || '';
       const m = item.metrics || {};
-      let views = m.views || (isX ? '240.5k' : '98.2k');
+      let views = m.views || '240.5k';
       views = String(views).replace(/[^0-9.kKmM]/g, '') || '240.5k';
-      let likes = m.likes || m.upvotes || (isX ? '45.8k' : '18.4k');
+      let likes = m.likes || m.upvotes || '45.8k';
       likes = String(likes).replace(/[^0-9.kKmM]/g, '') || '45.8k';
-      let comments = m.comments || (isX ? '3.2k' : '1.5k');
+      let comments = m.comments || '3.2k';
       comments = String(comments).replace(/[^0-9.kKmM]/g, '') || '3.2k';
       let retweets = m.retweets || '8.6k';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '8.6k';
 
       const title = item.title_zh || item.title;
-      const author = item.author || (isX ? 'AI 领袖' : 'Reddit 极客');
-      const handle = item.author_handle || (isX ? '@x' : 'r/singularity');
-      const avatar = item.author_avatar || `https://unavatar.io/x/${(handle || 'x').replace('@','')}`;
+      const author = item.author || 'AI 领袖';
+      const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
+      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
 
       const specBadges = (item.spec_tags && item.spec_tags.length)
         ? `<div class="flex items-center gap-1.5 flex-wrap my-2">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 font-semibold"># ${s}</span>`).join('')}</div>`
@@ -3234,7 +3201,7 @@
     function renderCelebrityTimeline(list) {
       const t = I18N[currentLang];
       if (!list || list.length === 0) {
-        return `<div class="text-slate-500 text-center py-12">${t.celebNoMatch || '暂无该平台动态'}</div>`;
+        return `<div class="text-slate-500 text-center py-12">${t.celebNoMatch || '暂无该分类领袖动态'}</div>`;
       }
 
       const isZh = currentLang === 'zh';
@@ -3249,7 +3216,7 @@
               <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
                 <span>⚡</span>
                 <span>${isZh ? '全球 AI 领袖观点 · 时空流动时间轴' : 'Global AI Leaders · Chrono Flow Timeline'}</span>
-                <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '条动态' : 'Posts'}</span>
+                <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '条领袖动态' : 'Posts'}</span>
               </h3>
             </div>
           </div>
@@ -3268,16 +3235,13 @@
 
     function renderTimelineRow(item, idx) {
       const isLeft = idx % 2 === 0;
-      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
       const cardHtml = renderCelebrityCard(item, true, !isLeft);
-      const icon = isX ? '𝕏' : '👽';
-      const nodeColor = isX ? 'border-sky-400 text-sky-400' : 'border-orange-500 text-orange-500';
 
       return `
         <div class="timeline-item-anim relative w-full flex flex-col lg:flex-row items-center ${isLeft ? 'lg:justify-start' : 'lg:justify-end'} pl-11 lg:pl-0">
           <!-- 居中呼吸发光时间锚点 Node (Desktop 居中，Mobile 靠左固定) -->
-          <div class="cyber-timeline-node absolute left-5 lg:left-1/2 top-5 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 ${nodeColor} flex items-center justify-center font-black text-xs shadow-lg z-10 select-none">
-            ${icon}
+          <div class="cyber-timeline-node absolute left-5 lg:left-1/2 top-5 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 border-sky-400 text-sky-400 flex items-center justify-center font-black text-xs shadow-lg z-10 select-none">
+            𝕏
           </div>
 
           <!-- 卡片容器 (Desktop 左侧占 ~46%，右侧占 ~46%；Mobile 占全宽) -->
@@ -3287,6 +3251,8 @@
         </div>
       `;
     }
+
+
 
     // ==========================================
     // 专门卡片渲染：落地实用神器卡片
@@ -3995,13 +3961,8 @@
         arcSecNews.classList.add('hidden');
       }
 
-      // B. 领袖社交板块 (Celebrity)
+      // B. 领袖社交板块 (Celebrity) - 100% 纯净 𝕏 权威领袖矩阵
       let sideCelebList = allCeleb;
-      if (sideSocialFilter === 'x') {
-        sideCelebList = sideCelebList.filter(it => it.platform === 'x' || (it.source && it.source.includes('Twitter')));
-      } else if (sideSocialFilter === 'reddit') {
-        sideCelebList = sideCelebList.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
-      }
       const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
       recentCeleb.sort((a, b) => {
         const aPinned = isItemPinnedActive(a) ? 1 : 0;
@@ -4236,10 +4197,10 @@
         }
       } else if (tab === 'celebrity') {
         let list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
-        if (socialPlatformFilter === 'x') {
-          list = list.filter(it => it.platform === 'x' || (it.source && it.source.includes('Twitter')));
-        } else if (socialPlatformFilter === 'reddit') {
-          list = list.filter(it => it.platform === 'reddit' || (it.source && it.source.toLowerCase().includes('reddit')));
+        if (socialPlatformFilter === 'giants') {
+          list = list.filter(isGiantLeader);
+        } else if (socialPlatformFilter === 'scientists') {
+          list = list.filter(it => !isGiantLeader(it));
         }
         // 严格按照真实时间线倒序排列 (不受置顶与聚焦版面干扰，纯净时空流动)
         list.sort((a, b) => {
