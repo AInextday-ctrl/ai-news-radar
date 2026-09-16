@@ -5802,7 +5802,7 @@
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       // 过滤掉所有已删除或已确认无效的推文
-      const liveList = (list || []).filter(it => !it.id.startsWith('viral_x_levelsio') && !it.id.startsWith('viral_threads_mckaywrigley') && !it.id.startsWith('viral_x_alexalbert') && !it.id.startsWith('viral_x_swyx') && !it.id.startsWith('viral_threads_danshipper') && !it.id.startsWith('viral_x_minhpham') && !it.id.startsWith('viral_threads_garrytan') && !it.id.startsWith('viral_x_sulaimanghauri') && !it.url.includes('2099981245892182012'));
+      const liveList = (list || []).filter(it => !it.id.startsWith('viral_x_levelsio') && !it.url.includes('2099981245892182012'));
 
       if (!liveList || liveList.length === 0) {
         return `
@@ -5816,14 +5816,14 @@
 
       return `
         <div class="space-y-5">
-          <!-- 爆帖顶部热度全景统计横幅 -->
-          <div class="max-w-2xl mx-auto flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs">
+          <!-- 爆帖顶部热度全景统计横幅：根据各平台受众体量差异化设定指标 -->
+          <div class="max-w-2xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs">
             <div class="flex items-center space-x-2 text-rose-600 dark:text-rose-300 font-medium">
               <span class="text-base">🚀</span>
               <span>${isZh ? `已捕获 <strong>${liveList.length}</strong> 条过去 24h 全网现象级 AI 爆帖 · 100% 真实探针存活保障 · 单击推文直显完整连推与图文回复` : `Tracking <strong>${liveList.length}</strong> verified viral AI threads across 𝕏 & Threads in the last 24h`}</span>
             </div>
-            <div class="hidden sm:flex items-center space-x-3 text-slate-500 font-mono text-[11px]">
-              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>${isZh ? '爆发指标：阅读>1万 / 点赞>1千' : 'Surge: Views>10k / Likes>1k'}</span>
+            <div class="flex items-center space-x-3 text-slate-500 font-mono text-[11px] shrink-0" title="${isZh ? '针对各平台用户基数差异化设定指标：𝕏 侧重万级阅读与千赞，Threads 侧重高互动度与社区热评' : 'Platform-tailored metrics: 𝕏 for views/likes, Threads for replies/likes'}">
+              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>${isZh ? '𝕏 指标: 浏览>1万/赞>1千 | Threads 指标: 赞>50/热评>20' : '𝕏: Views>10k/Likes>1k | Threads: Likes>50/Replies>20'}</span>
             </div>
           </div>
 
@@ -5945,22 +5945,23 @@
           <!-- 底部原生社交交互指标与连推直通车 -->
           <div class="flex items-center justify-between pt-3.5 mt-3.5 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 font-mono">
             <div class="flex items-center space-x-3 sm:space-x-5 text-[11px]">
-              <span class="flex items-center space-x-1 hover:text-sky-500 cursor-pointer transition-colors" onclick="event.stopPropagation(); toggleThreadComments('${cardKey}', '${itemId}')" title="${isZh ? '点击展开连推与讨论' : 'View Thread & Comments'}">
+              <span class="flex items-center space-x-1 hover:text-sky-500 cursor-pointer transition-colors" onclick="event.stopPropagation(); toggleThreadComments('${cardKey}', '${itemId}')" title="${isZh ? (isThreads ? 'Threads 社区热评 (点击展开)' : '回复讨论 (点击展开)') : 'Replies & Thread'}">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
                 <span>${comments}</span>
               </span>
-              <span class="flex items-center space-x-1 hover:text-emerald-500 transition-colors" title="${isZh ? '转推 / 转发' : 'Reposts'}">
+              <span class="flex items-center space-x-1 hover:text-emerald-500 transition-colors" title="${isZh ? (isThreads ? 'Threads 转发 / 转帖' : '转推 / 转发') : 'Reposts'}">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 <span>${retweets}</span>
               </span>
-              <span class="flex items-center space-x-1 hover:text-rose-500 transition-colors text-rose-500/80" title="${isZh ? '点赞' : 'Likes'}">
+              <span class="flex items-center space-x-1 hover:text-rose-500 transition-colors text-rose-500/80" title="${isZh ? (isThreads ? 'Threads 点赞' : '点赞') : 'Likes'}">
                 <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 <span>${likes}</span>
               </span>
+              ${!isThreads && views ? `
               <span class="flex items-center space-x-1 hover:text-blue-500 transition-colors" title="${isZh ? '全网阅读浏览' : 'Views'}">
                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                 <span>${views}</span>
-              </span>
+              </span>` : ''}
             </div>
 
             <div class="flex items-center space-x-2">

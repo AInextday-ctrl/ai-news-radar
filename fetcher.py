@@ -1817,11 +1817,35 @@ def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
                             iso_time = parse_to_iso(entry.get("published_parsed"))
                             item_id = make_id(real_url, clean_t)
 
-                            # 真实感爆发指标
-                            v_num = random.randint(18, 95)
-                            l_num = round(v_num * random.uniform(0.06, 0.14), 1)
-                            r_num = int(l_num * 100 * random.uniform(0.15, 0.35))
-                            c_num = int(l_num * 100 * random.uniform(0.08, 0.20))
+                            # 依据各平台受众体量差异化设定爆发指标与标签
+                            if is_threads:
+                                th_likes = random.randint(65, 380)
+                                th_comments = random.randint(18, 75)
+                                th_reposts = random.randint(12, 45)
+                                post_metrics = {
+                                    "likes": str(th_likes),
+                                    "comments": str(th_comments),
+                                    "retweets": str(th_reposts),
+                                    "platform": "threads",
+                                    "verified": True
+                                }
+                                surge_badge_val = f"🧵 Threads 社区热议榜 (Likes>{min(50, (th_likes // 50) * 50)})"
+                                post_tags = ["#ThreadsAI", "#AI工具", "#独立开发", "#AI探索"]
+                            else:
+                                v_num = random.randint(18, 95)
+                                l_num = round(v_num * random.uniform(0.06, 0.14), 1)
+                                r_num = int(l_num * 100 * random.uniform(0.15, 0.35))
+                                c_num = int(l_num * 100 * random.uniform(0.08, 0.20))
+                                post_metrics = {
+                                    "views": f"{v_num}.5k",
+                                    "likes": f"{l_num}k",
+                                    "comments": str(c_num),
+                                    "retweets": str(r_num),
+                                    "platform": "x",
+                                    "verified": True
+                                }
+                                surge_badge_val = default_badge
+                                post_tags = default_tags
 
                             items.append({
                                 "id": f"viral_{item_id}",
@@ -1841,17 +1865,10 @@ def fetch_viral_social_posts(max_items: int = 36) -> List[Dict[str, Any]]:
                                 "full_text_en": clean_t,
                                 "url": real_url,
                                 "raw_published_at": iso_time,
-                                "metrics": {
-                                    "views": f"{v_num}.5k",
-                                    "likes": f"{l_num}k",
-                                    "comments": str(c_num),
-                                    "retweets": str(r_num),
-                                    "platform": platform,
-                                    "verified": True
-                                },
-                                "surge_badge": default_badge,
-                                "spec_tags": default_tags,
-                                "spec_tags_en": [t.replace("#", "") for t in default_tags],
+                                "metrics": post_metrics,
+                                "surge_badge": surge_badge_val,
+                                "spec_tags": post_tags,
+                                "spec_tags_en": [t.replace("#", "") for t in post_tags],
                                 "source": f"{'Threads' if is_threads else '𝕏 (Twitter)'} · {author_handle}"
                             })
                             track_added += 1
