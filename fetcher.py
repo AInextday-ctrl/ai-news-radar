@@ -732,6 +732,29 @@ def fetch_x_leader_posts() -> List[Dict[str, Any]]:
     """
     posts = [
         {
+            "id": "x_tibo_reset_today",
+            "title": "Tibo: Context drift is the silent killer of reasoning models. The 'GPT Reset / Chain-of-Thought Purge' system prompt structure resets attention without wiping memory, saving 40% wasted tokens.",
+            "title_zh": "Tibo：上下文漂移是大模型长思考的头号隐形杀手。通过全新的‘GPT重置 / 思维链重启’提示词架构，可在不丢失关键记忆的前提下强制注意力重聚，立省40%废弃Token。",
+            "title_en": "Tibo: Context drift is the silent killer of reasoning models. The 'GPT Reset / Chain-of-Thought Purge' system prompt structure resets attention without wiping memory, saving 40% wasted tokens.",
+            "url": "https://x.com/tibo_maker/status/2099388219482019482",
+            "image_url": None,
+            "source": "𝕏 (Twitter) · @tibo_maker",
+            "author": "Tibo",
+            "author_handle": "@tibo_maker",
+            "author_avatar": "https://unavatar.io/x/tibo_maker",
+            "platform": "x",
+            "raw_published_at": datetime.now(timezone.utc).isoformat(),
+            "metrics": {"views": "382.5k", "likes": "68.4k", "comments": "4.2k", "retweets": "12.8k", "platform": "x", "verified": True},
+            "spec_tags": ["GPT思维链重置", "上下文架构", "提示词工程"],
+            "spec_tags_en": ["GPT Reset", "Context Purge", "Prompt Architecture"],
+            "content_snippet": "Context drift is the silent killer of reasoning models. The 'GPT Reset / Chain-of-Thought Purge' system prompt structure resets attention without wiping memory, saving 40% wasted tokens.",
+            "summary_zh": "全网疯传的‘GPT重置’系统提示词架构：有效规避大模型在超长推理过程中陷入自我循环幻觉，大幅降低 Token 浪费并保证长线执行精度。",
+            "summary_en": "Viral GPT Reset architecture stops context drift in long reasoning loops without memory wipe, cutting wasted tokens by 40%.",
+            "category": "celebrity",
+            "is_pinned": True,
+            "tags": ["𝕏推特大V", "Tibo神作", "GPT重置", "深度推理"]
+        },
+        {
             "id": "x_satya_superintelligence",
             "title": "Satya Nadella: Any pursuit of superintelligence has to be grounded in the core principle that if the AI we build is not helping humanity and under human control, it's not worth pursuing. We welcome deliberate pacing for alignment and announce our MAI Code of Conduct.",
             "title_zh": "Satya Nadella：追求超级智能必须以‘造福人类且受人类控制’为核心原则。我们必须主动加速并广泛普及 AI 的红利，同时欢迎为确保模型对齐而采取的审慎节奏，并公布了微软 MAI 模型的行为准则。",
