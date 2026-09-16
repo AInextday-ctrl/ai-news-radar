@@ -690,26 +690,28 @@
       </div>
     </div>
 
-    <!-- 🔥 今日 AI 风向标 (Top 3 深度必读横幅) -->
-    <section id="top-three-section" class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60 rounded-2xl border border-indigo-500/20 p-4 shadow-xl">
-      <div class="flex items-center justify-between mb-3">
-        <div class="flex items-center space-x-2">
-          <span class="text-sm font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
-            <span>🔥</span>
-            <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
-          </span>
-          <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· 帮你在最短时间内抓住今日行业核心脉搏</span>
+    <!-- 视图 1: 🌐 综合全景模式 (All-in-One Magazine Stream，今日必读仅在本视图呈现) -->
+    <div id="view-all" class="space-y-6">
+      <!-- 🔥 今日 AI 风向标 (Top 3 深度必读横幅，仅在首页综合全景呈现) -->
+      <section id="top-three-section" class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60 rounded-2xl border border-indigo-500/20 p-4 shadow-xl">
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center space-x-2">
+            <span class="text-sm font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
+              <span>🔥</span>
+              <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
+            </span>
+            <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· 帮你在最短时间内抓住今日行业核心脉搏</span>
+          </div>
+          <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">当日实时更新</span>
         </div>
-        <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">当日实时更新</span>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
-        <!-- 动态渲染 Top 3 -->
-        <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 text-xs text-slate-400 animate-pulse" id="top-three-loading">正在提炼今日重磅...</div>
-      </div>
-    </section>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
+          <!-- 动态渲染 Top 3 -->
+          <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 text-xs text-slate-400 animate-pulse" id="top-three-loading">正在提炼今日重磅...</div>
+        </div>
+      </section>
 
-    <!-- 视图 1: 🌐 综合全景模式 (All-in-One Magazine Stream) -->
-    <div id="view-all" class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- 双列综合快讯与侧栏流 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
       
       <!-- 主屏快讯流 (约占 67% 宽度): ⚡ 行业突发快讯 -->
       <section class="lg:col-span-8 space-y-4">
@@ -891,6 +893,7 @@
         </div>
 
       </aside>
+      </div>
     </div>
 
     <!-- 视图 2: 独立专栏全屏广场模式 (当点击特定 Tab 时激活) -->
@@ -2326,6 +2329,11 @@
       const toolsSubfilter = document.getElementById('tools-subfilter');
       const videosSubfilter = document.getElementById('videos-subfilter');
       const promptsSubfilter = document.getElementById('prompts-subfilter');
+
+      const topThreeSection = document.getElementById('top-three-section');
+      if (topThreeSection) {
+        topThreeSection.classList.toggle('hidden', tab !== 'all');
+      }
 
       if (tab === 'all') {
         if (viewAll) viewAll.classList.remove('hidden');
@@ -4596,7 +4604,7 @@
         return;
       } else {
         if (viewSearch) viewSearch.classList.add('hidden');
-        if (topThreeSection) topThreeSection.classList.remove('hidden');
+        if (topThreeSection) topThreeSection.classList.toggle('hidden', currentTab !== 'all');
         if (currentTab === 'all') {
           if (viewAll) viewAll.classList.remove('hidden');
           if (viewCat) viewCat.classList.add('hidden');
