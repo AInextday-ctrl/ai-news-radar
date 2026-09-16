@@ -155,72 +155,192 @@ def get_gemini_client():
         return None
 
 
+import html
+
+def clean_news_text(text: str) -> str:
+    """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes."""
+    if not text:
+        return ""
+    t = html.unescape(text)
+    t = t.replace("&nbsp;", " ").replace("\u00a0", " ")
+    
+    # 移除陈旧模板前缀
+    t = re.sub(r'^【.*?】\s*', '', t)
+    t = re.sub(r'^由\s*.*?\s*(?:权威发布|最新报道)[。：:]\s*', '', t)
+    t = re.sub(r'^据\s*.*?\s*(?:最新报道|报道)[，,：:]\s*', '', t)
+    t = re.sub(r'^行业关键动向与突破报道[：:]\s*', '', t)
+    t = re.sub(r'^领袖前沿发声与社区论战[：:]\s*', '', t)
+    t = re.sub(r'^开箱即用落地利器与提效神器[：:]\s*', '', t)
+    t = re.sub(r'^实操深度演示与架构解析[：:]\s*', '', t)
+    
+    # 移除开头的记者署名与外媒名称（如 "Matt Bracken / FedScoop:" 或 "Jagmeet Singh / TechCrunch："）
+    t = re.sub(r'^[A-Za-z\s.\'\-]+/(?:[A-Za-z\s.\'\-]+|\s*)[：:]\s*', '', t)
+    t = re.sub(r'^[A-Za-z\s.\'\-]+[：:]\s*', '', t)
+    t = re.sub(r'[A-Za-z\s.\'\-]+/(?:[A-Za-z\s.\'\-]+|\s*)[：:]\s*', '', t)
+    
+    # 移除标题末尾括号中的记者及媒体名（如 " (Jagmeet Singh/TechCrunch)" 或 "（David Welch/Bloomberg）"）
+    t = re.sub(r'[\(（][^()（）]*?/(?:TechCrunch|Bloomberg|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|Financial Times|CNBC|Business Insider)[^()（）]*?[\)）]\s*$', '', t)
+    t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）]\s*$', '', t)
+    
+    t = re.sub(r'\s+', ' ', t).strip()
+    return t
+
+
 def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
-    """Generate a clean, 100% Chinese takeaway."""
-    source = item.get("source", "")
-    category = item.get("category") or item.get("default_category", "news")
-    snippet = item.get("content_snippet", "")
+    """Generate a clean, pure Chinese fact statement without source/reporter noise."""
+    snippet = clean_news_text(item.get("content_snippet", ""))
+    clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
+    trans_snippet = clean_news_text(free_translate_zh(snippet[:120]))
     
-    # 将摘要核心信息翻译为纯中文
-    trans_snippet = free_translate_zh(snippet[:120])
-    
-    if category == "celebrity":
-        return f"领袖前沿发声与社区论战：{trans_snippet or title_zh}"
-    elif category == "tools":
-        return f"开箱即用落地利器与提效神器：{trans_snippet or title_zh}"
-    elif category == "videos":
-        if item.get("is_prompt"):
-            return "即抄即用的高阶实战 Prompt 咒语，一键提升大模型推理输出质量。"
-        return f"实操深度演示与架构解析：{trans_snippet or title_zh}"
-    else:
-        return f"行业关键动向与突破报道：{trans_snippet or title_zh}"
+    if trans_snippet and len(trans_snippet) > 15 and trans_snippet not in clean_title:
+        return f"{clean_title}。{trans_snippet}"
+    return clean_title
 
 
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
-    """Generate structured, multi-dimensional deep AI analysis for modal presentation."""
-    title_en = item.get("title_en") or item.get("title", "")
-    snippet = item.get("content_snippet", "")
-    source = item.get("source", "行业权威媒体")
+    """Generate professional News Briefing (新闻简报) based on 5W1H facts and industry insights."""
+    clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
+    clean_snippet = clean_news_text(item.get("content_snippet", ""))
+    source = item.get("source", "")
+    author = item.get("author", "")
     category = item.get("category", "news")
-    
-    zh_title = title_zh or item.get("title_zh") or free_translate_zh(title_en)
-    summary = item.get("summary_zh") or generate_smart_fallback_summary(item, zh_title)
-    
-    points_zh = []
-    points_en = []
-    
-    if category == "news":
-        points_zh.append(f"据 {source} 最新报道，{summary}")
-        points_zh.append("展现了前沿大模型与计算基础设施在效率与推理层面的深度突破。")
-        points_zh.append("全球技术竞争与生态协同提速，进一步推动商业化落地与规模化应用。")
-        
-        points_en.append(f"Reported by {source}: {snippet[:120] or title_en}")
-        points_en.append("Highlights significant advances in model reasoning efficiency and infrastructure.")
-        points_en.append("Global ecosystem shifts accelerate commercial deployment and integration.")
-    elif category == "celebrity":
-        points_zh.append(f"来自 {source} 的深度言论与行业观察：{summary}")
-        points_zh.append("直击当前 AI 演进核心痛点，探讨算力瓶颈、商业路径与系统落地前景。")
-        points_zh.append("为技术从业者与创业者提供了极具前瞻性的风向标参考。")
-        
-        points_en.append(f"Key perspective from {source}: {snippet[:120] or title_en}")
-        points_en.append("Addresses core bottlenecks in compute scaling and deployment pathways.")
-        points_en.append("Provides actionable insights and forward-looking guidance for builders.")
-    else:
-        points_zh.append(f"核心成果与实战落地：{summary}")
-        points_zh.append("提供高度开箱即用、低迁移成本的工程实践与工具链支持。")
-        points_zh.append("助力开发者与企业在实际生产环境中大幅提升开发效能。")
-        
-        points_en.append(f"Core achievement: {snippet[:120] or title_en}")
-        points_en.append("Offers out-of-the-box utility with high reproducibility across stacks.")
-        points_en.append("Significantly optimizes developer velocity and production efficiency.")
+    full_text = f"{clean_title} {clean_snippet}".strip()
 
+    # 1. 识别核心主体 (Who)
+    who = ""
+    who_candidates = [
+        ("贝森特", "财政部长斯科特·贝森特 (Scott Bessent)"),
+        ("Bessent", "财政部长斯科特·贝森特 (Scott Bessent)"),
+        ("黄仁勋", "英伟达创始人兼CEO 黄仁勋 (Jensen Huang)"),
+        ("Jensen", "英伟达创始人兼CEO 黄仁勋 (Jensen Huang)"),
+        ("特朗普", "美国总统 特朗普 (Donald Trump)"),
+        ("Trump", "美国总统 特朗普 (Donald Trump)"),
+        ("拜登", "美国前总统 拜登"),
+        ("众议院", "美国众议院 (U.S. House of Representatives)"),
+        ("参议院", "美国参议院 (U.S. Senate)"),
+        ("国会", "美国国会立法机构"),
+        ("白宫", "美国白宫决策机构"),
+        ("FTC", "美国联邦贸易委员会 (FTC)"),
+        ("SEC", "美国证券交易委员会 (SEC)"),
+        ("DOJ", "美国司法部 (DOJ)"),
+        ("欧盟", "欧盟委员会 (European Commission)"),
+        ("OpenAI", "OpenAI 官方团队"),
+        ("Anthropic", "Anthropic (Claude 研发团队)"),
+        ("Google", "谷歌 (Google / DeepMind)"),
+        ("谷歌", "谷歌 (Google / DeepMind)"),
+        ("Meta", "Meta (扎克伯格团队)"),
+        ("微软", "微软公司 (Microsoft)"),
+        ("Microsoft", "微软公司 (Microsoft)"),
+        ("通用汽车", "通用汽车 (General Motors)"),
+        ("苹果", "苹果公司 (Apple Inc.)"),
+        ("Apple", "苹果公司 (Apple Inc.)"),
+        ("英伟达", "英伟达 (NVIDIA / 黄仁勋)"),
+        ("NVIDIA", "英伟达 (NVIDIA / 黄仁勋)"),
+        ("马斯克", "埃隆·马斯克 (Elon Musk)"),
+        ("Musk", "埃隆·马斯克 (Elon Musk)"),
+        ("特斯拉", "特斯拉 (Tesla / 马斯克)"),
+        ("Tesla", "特斯拉 (Tesla / 马斯克)"),
+        ("UPI", "印度统一支付接口 (UPI / NPCI)"),
+        ("DeepSeek", "深度求索 (DeepSeek 团队)"),
+        ("Cursor", "Anysphere (Cursor 团队)"),
+        ("CoinEx", "加密货币交易所 CoinEx"),
+        ("Salesforce", "Salesforce 研发团队"),
+        ("字节", "字节跳动 (ByteDance)"),
+        ("阿里", "阿里巴巴云智能"),
+        ("腾讯", "腾讯混元团队"),
+        ("百度", "百度文心团队")
+    ]
+    for k, name in who_candidates:
+        if k.lower() in full_text.lower():
+            who = name
+            break
+    if not who:
+        if author and author != source:
+            who = author
+        else:
+            title_no_lead = re.sub(r'^(?:周[一二三四五六日天]|今日|昨日|当地时间|刚刚|近期|日前|据报道|消息称)[，,\s]*', '', clean_title)
+            match = re.match(r'^([^，,。：:\s]{2,15})', title_no_lead)
+            who = match.group(1) if match else "行业核心机构与领袖"
+
+    # 2. 识别场景与场合 (Where/When)
+    where = "全球产业与技术前沿一线"
+    if any(k in full_text for k in ["听证会", "国会", "法案", "白宫", "监管", "起诉", "审判"]):
+        where = "美国国会听证会与联邦监管审议现场"
+    elif any(k in full_text for k in ["CarPlay", "车机", "汽车", "电动车", "座舱"]):
+        where = "智能网联汽车座舱与车载操作系统生态"
+    elif any(k in full_text for k in ["UPI", "印度", "卢比", "支付", "商户费"]):
+        where = "印度移动金融与大额数字支付市场"
+    elif any(k in full_text for k in ["One订阅", "订阅", "定价", "会员", "套餐"]):
+        where = "全球社交网络与AI增值服务商业化市场"
+    elif any(k in full_text for k in ["开源", "模型", "参数", "权重", "GitHub"]):
+        where = "全球大模型开源社区与技术研发一线"
+    elif any(k in full_text for k in ["芯片", "GPU", "算力", "数据中心", "半导体"]):
+        where = "算力芯片供应链与云端基础设施"
+
+    # 3. 提取核心事实与举措 (What)
+    what = clean_title
+    if clean_snippet and clean_snippet not in clean_title and len(clean_snippet) > 15:
+        what = f"{clean_title}。据细节披露，{clean_snippet}"
+        if len(what) > 160:
+            what = what[:155] + "..."
+
+    # 4. 推理起因背景与深层动因 (Why)
+    why = "顺应技术迭代与市场刚需，提升生态壁垒与综合服务能力。"
+    if any(k in full_text for k in ["豁免", "责任", "听证会", "监管", "安全", "垄断"]):
+        why = "防范前沿AI引发系统性安全与法律责任真空风险，同时打破闭源头部垄断，维护国家技术安全与公平竞争。"
+    elif any(k in full_text for k in ["商户费", "收费", "订阅", "商业化", "定价", "成本"]):
+        why = "覆盖持续攀升的底层结算、算力基础设施与网络高昂运维成本，推动业务由盲目补贴迈向自我造血与商业可持续。"
+    elif any(k in full_text for k in ["CarPlay", "Android Auto", "体验", "消费者", "不满"]):
+        why = "自研封闭车机生态遭遇用户习惯壁垒，顺应车主对手机无缝互联的刚性需求以挽回产品口碑。"
+    elif any(k in full_text for k in ["开源", "突破", "发布", "模型"]):
+        why = "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+
+    # 5. 整合新闻简报正文 (Summary Briefing)
+    briefing_zh = f"在{where}，{who}正式推进关键动向：{clean_title}。此举深层背景主要在于{why}"
+
+    # 6. 专业深度洞察与行业研判 (In-Depth Insight)
+    insight_zh = ""
+    if any(k in full_text for k in ["豁免", "责任", "听证会", "监管"]):
+        insight_zh = "【监管研判】监管层在“支持科技创新”与“划定法律红线”之间寻求平衡。拒绝授予全面免责特权将倒逼实验室提升模型可控性；而政策对开源模型的倾斜，将为去中心化AI生态带来重要战略契机。"
+    elif any(k in full_text for k in ["UPI", "商户费", "订阅", "收费"]):
+        insight_zh = "【商业研判】核心数字基础设施逐步告别“免费补贴阶段”，步入精细化商业收费周期。交易与服务成本的调整将加速行业洗牌，并驱动厂商在差异化增值服务上展开更深维度的竞争。"
+    elif any(k in full_text for k in ["CarPlay", "车机", "汽车"]):
+        insight_zh = "【生态研判】传统软硬件巨头垄断座舱数据的自研路径再次面临现实检验。移动端生态与座舱的强耦合具有极高的用户心智壁垒，兼容成熟主流开放生态依然是目前保障用户体验的最稳妥选择。"
+    else:
+        insight_zh = "【行业研判】该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配，对相关领域的工程实践与商业策略具有重要参考风向标意义。"
+
+    title_en = item.get("title_en") or item.get("title", "")
     return {
-        "digest_zh": f"【事件核心】由 {source} 权威发布。{summary}",
-        "digest_en": f"Reported by {source}. {snippet[:150] or title_en}.",
-        "key_points_zh": points_zh,
-        "key_points_en": points_en,
-        "takeaway_zh": "紧跟前沿迭代节奏，建议团队评估该突破对自身技术架构与业务流程的潜在重构价值。",
-        "takeaway_en": "Monitor the pace of adoption closely and evaluate its implications for your tech stack."
+        "briefing_zh": briefing_zh,
+        "briefing_en": f"Executive Briefing: In {where}, {who} advanced a key development: {title_en}. Context: {why}",
+        "elements_zh": {
+            "who": who,
+            "where": where,
+            "what": clean_title,
+            "why": why
+        },
+        "elements_en": {
+            "who": who,
+            "where": where,
+            "what": title_en,
+            "why": why
+        },
+        "insight_zh": insight_zh,
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": briefing_zh,
+        "digest_en": f"Executive Briefing: In {where}, {who} announced: {title_en}.",
+        "key_points_zh": [
+            f"主体与场景：{who}在{where}",
+            f"核心事实：{clean_title}",
+            f"动因背景：{why}"
+        ],
+        "key_points_en": [
+            f"Actor & Context: {who} in {where}",
+            f"Key Action: {title_en}",
+            f"Motivation: {why}"
+        ],
+        "takeaway_zh": insight_zh,
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
     }
 
 
@@ -292,38 +412,52 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         ]
 
         prompt = f"""
-你是一个顶级 AI 资讯雷达站的资深主编。请对以下最新 AI 资讯进行精炼分析、纯正中文翻译、价值提炼与深度 AI 解读。
-
-【分类规则】：
-- "news": 行业大事件、技术突破、官方重磅发布
-- "celebrity": 马斯克、奥特曼、LeCun、Karpathy、Tibo、黄仁勋等名人大V言论或专访
-- "tools": 新开源工具、GitHub高星项目、实用AI新模型/新框架
-- "videos": YouTube视频演示、高阶提示词实操
+你是一个顶级科技智库的新闻主编。请对以下最新资讯进行专业新闻简报（News Briefing）提炼。
+【关键原则】：
+1. 严禁在正文出现“据XX报道”、“由XX发布”、记者姓名或链接等杂质（信源已在界面标题栏统一展示）。
+2. 必须交代清楚新闻六要素（5W1H）：谁（Who）、在什么场合/场景（Where）、做了/说了什么具体动作或事实（What）、起因背景动因（Why），让用户无需查看原资讯详情即可完全掌握事件脉络。
+3. 给出基于该事实的有价值深度分析和观点（insight_zh），避免假大空的套话。
 
 【输出要求】：
 请以纯 JSON Array 形式输出（不要带有 ```json 标记），数组内每个元素格式如下：
 {{
   "index": 对应的序号,
-  "title_zh": "自然流畅精炼的纯中文标题(25字以内，杜绝夹杂英文)",
-  "summary_zh": "一句话核心看点或实际价值(30-50字，讲清楚为什么值得看或怎么用)",
+  "title_zh": "自然流畅精炼的纯中文标题(25字以内，杜绝夹杂英文与媒体记者名字)",
+  "summary_zh": "一句话核心事实交代(30-50字，讲清楚核心事件)",
   "category": "news | celebrity | tools | videos",
   "hot_score": 1到5的整数热度评分,
   "tags": ["标签1", "标签2"],
   "ai_analysis": {{
-    "digest_zh": "核心重大事实概括(2句话，严谨纯中文)",
-    "digest_en": "Concise factual overview (2 sentences in English)",
+    "briefing_zh": "新闻简报事实正文：清晰交代谁在什么场景做了/说了什么具体动作与细节、起因动因背景（2-3句完整中文，严禁包含信源或记者名字）",
+    "briefing_en": "Executive news briefing: clearly stating who, occasion, core facts, and motivation (2-3 sentences)",
+    "elements_zh": {{
+      "who": "核心主体/人物/机构",
+      "where": "事件场合/场景",
+      "what": "核心陈述/决议/具体事实细节",
+      "why": "起因背景/深层动因"
+    }},
+    "elements_en": {{
+      "who": "Key actor/entity",
+      "where": "Occasion / context",
+      "what": "Core statement or action with details",
+      "why": "Key motivation or background"
+    }},
+    "insight_zh": "基于该事实的专业深度研判与观点（1-2句，客观分析对行业生态、政策、商业或开发者的实际影响）",
+    "insight_en": "Objective industry insight and strategic takeaway (1-2 sentences)",
+    "digest_zh": "新闻简报事实正文（与briefing_zh一致）",
+    "digest_en": "Executive briefing in English",
     "key_points_zh": [
-      "【核心技术突破点或实质】简析",
-      "【商业化与生态格局影响】简析",
-      "【产业链或关键指标亮点】简析"
+      "主体与场景简述",
+      "核心举措与细节简述",
+      "起因动因与影响简述"
     ],
     "key_points_en": [
-      "Key technical breakthrough summary",
-      "Commercial and ecosystem impact",
-      "Critical benchmark or metric highlights"
+      "Actor & context",
+      "Key action & details",
+      "Motivation & impact"
     ],
-    "takeaway_zh": "面向开发者与从业者的1句深度行动启示",
-    "takeaway_en": "One actionable takeaway for developers and innovators"
+    "takeaway_zh": "专业深度研判与观点（与insight_zh一致）",
+    "takeaway_en": "Strategic takeaway in English"
   }}
 }}
 

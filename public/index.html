@@ -1066,68 +1066,66 @@
     </div>
   </div>
 
-  <!-- AI 深度解读弹窗 Modal (由 Google Gemini 驱动) -->
+  <!-- 资讯概要 / 新闻简报弹窗 Modal (News Briefing) -->
   <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
-      <!-- Modal Header -->
-      <div class="p-4 bg-gradient-to-r from-indigo-900/30 via-purple-900/20 to-slate-900/40 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+      <!-- 窗口标题栏 Header (信源只在此处显示，杜绝正文冗余) -->
+      <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center space-x-3 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-md shadow-indigo-500/25 shrink-0">
-            <span class="text-base">✨</span>
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-sm shrink-0">
+            <span class="text-base">📰</span>
           </div>
-          <div class="min-w-0">
-            <div class="flex items-center space-x-2">
-              <h3 id="ai-modal-badge" class="text-sm sm:text-base font-bold bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400 bg-clip-text text-transparent truncate">Gemini AI 深度情报解读</h3>
-              <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 shrink-0 font-semibold">Flash 2.5</span>
-            </div>
-            <p id="ai-modal-source" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono mt-0.5 truncate">信源: 官方快讯</p>
+          <div class="min-w-0 flex items-center flex-wrap gap-2">
+            <h3 id="ai-modal-badge" class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 shrink-0">资讯概要</h3>
+            <span class="text-slate-300 dark:text-slate-700">|</span>
+            <span id="ai-modal-source-tag" class="text-xs font-mono px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold truncate">信源: 官方快讯</span>
+            <span id="ai-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 实时发布</span>
           </div>
         </div>
         <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="关闭弹窗 (Esc)">✕</button>
       </div>
 
-      <!-- Modal Body (Scrollable) -->
+      <!-- 简报正文区 (Scrollable) -->
       <div class="p-5 overflow-y-auto space-y-4 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
-        <!-- 资讯原标题 -->
+        <!-- 资讯原标题 (已脱敏清洗杂质) -->
         <h2 id="ai-modal-title" class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug"></h2>
 
-        <!-- Section 1: 核心事实脉络概括 (Digest) -->
-        <div class="p-3.5 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800/60 space-y-1.5">
-          <div class="flex items-center space-x-1.5 text-xs font-bold text-indigo-700 dark:text-indigo-300">
-            <span>📌</span>
-            <span id="ai-modal-digest-title">核心事实脉络</span>
+        <!-- 板块 1: 📋 事件脉络速览 (新闻六要素 5W1H 简报) -->
+        <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-3">
+          <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2">
+            <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
+              <span>📋</span>
+              <span id="ai-modal-briefing-title">事件脉络速览</span>
+            </div>
+            <span class="text-[10px] text-slate-500 font-mono">5W1H 核心事实</span>
           </div>
-          <p id="ai-modal-digest-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+
+          <!-- 核心事实全貌 (2-3句完整流畅交代，让用户无需查看原资讯详情) -->
+          <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal"></p>
+
+          <!-- 六要素结构化网格卡片 -->
+          <div id="ai-modal-elements-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs">
+            <!-- 动态注入 who, where, what, why 4大核心要素卡片 -->
+          </div>
         </div>
 
-        <!-- Section 2: 深度要点剖析 (Key Points) -->
-        <div class="space-y-2">
-          <div class="flex items-center space-x-1.5 text-xs font-bold text-slate-900 dark:text-slate-100">
-            <span>🔍</span>
-            <span id="ai-modal-keypoints-title">多维深度剖析</span>
-          </div>
-          <div id="ai-modal-keypoints-list" class="space-y-2 text-xs sm:text-sm">
-            <!-- 动态注入多维技术与行业要点 -->
-          </div>
-        </div>
-
-        <!-- Section 3: 行动启示与研判 (Actionable Takeaway) -->
-        <div class="p-3.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 space-y-1.5">
-          <div class="flex items-center space-x-1.5 text-xs font-bold text-purple-700 dark:text-purple-300">
+        <!-- 板块 2: 💡 深度洞察与行业研判 (In-Depth Analysis) -->
+        <div class="p-4 rounded-xl bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-slate-50/60 dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-slate-950/40 border border-indigo-200/70 dark:border-indigo-800/50 space-y-2">
+          <div class="flex items-center space-x-2 text-xs font-bold text-purple-700 dark:text-purple-300">
             <span>💡</span>
-            <span id="ai-modal-takeaway-title">专家行动与落地研判</span>
+            <span id="ai-modal-insight-title">深度洞察与行业研判</span>
           </div>
-          <p id="ai-modal-takeaway-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
+          <p id="ai-modal-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed"></p>
         </div>
       </div>
 
-      <!-- Modal Footer -->
+      <!-- 简报底部 Footer (去除废话，保留直接跳转原文按钮) -->
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
-        <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1 truncate">
+        <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1.5 font-mono">
           <span>⚡</span>
-          <span id="ai-modal-footer-tip" class="truncate">已自动同步全站选定语言</span>
+          <span>新闻速报简报 · 无需跳转原文即可掌握核心</span>
         </div>
-        <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-bold bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0">
+        <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0">
           <span id="ai-modal-source-btn-text">阅读原文 / 直达报道</span>
           <span>↗</span>
         </a>
@@ -1277,13 +1275,11 @@
         noRecentPrompts: "💡 今日暂无新增提示词，历史最新收录见下方归档",
         viralBadge: "🔥 近期爆款",
         viralChip: "🔥 近期爆点",
-        aiModalBadge: "Gemini AI 深度情报解读",
-        aiModalDigestTitle: "核心事实脉络",
-        aiModalKeypointsTitle: "多维深度剖析",
-        aiModalTakeawayTitle: "专家行动与落地研判",
+        aiModalBadge: "资讯概要",
+        aiModalBriefingTitle: "事件脉络速览",
+        aiModalInsightTitle: "深度洞察与行业研判",
         aiModalSourceBtn: "阅读原文 / 直达报道",
-        aiModalFooterTip: "已自动同步全站选定语言",
-        aiAnalysisBtn: "AI 深度解读",
+        aiAnalysisBtn: "资讯概要",
         expandCatNewsArchive: "点击展开历史资讯库",
         collapseCatNewsArchive: "收起历史资讯库 ↑",
         tabs: {
@@ -1415,13 +1411,11 @@
         noRecentPrompts: "💡 No new prompts today, see historical archive below",
         viralBadge: "🔥 Viral Hit",
         viralChip: "🔥 Trending Viral",
-        aiModalBadge: "Gemini AI Deep Analysis",
-        aiModalDigestTitle: "Executive Fact Overview",
-        aiModalKeypointsTitle: "Deep Strategic Breakdown",
-        aiModalTakeawayTitle: "Actionable Takeaway",
+        aiModalBadge: "News Briefing",
+        aiModalBriefingTitle: "Executive 5W1H Briefing",
+        aiModalInsightTitle: "In-Depth Strategic Insight",
         aiModalSourceBtn: "Read Full Story",
-        aiModalFooterTip: "Synchronized with selected language",
-        aiAnalysisBtn: "AI Analysis",
+        aiAnalysisBtn: "Briefing",
         expandCatNewsArchive: "Expand Historical News Archive",
         collapseCatNewsArchive: "Collapse Historical Archive ↑",
         tabs: {
@@ -2688,8 +2682,8 @@
               </div>
               <div class="flex items-center justify-between pt-1 gap-2">
                 <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm group/btn cursor-pointer">
-                  <span class="text-xs group-hover/btn:scale-110 transition-transform">✨</span>
-                  <span>${t.aiAnalysisBtn || 'AI 深度解读'}</span>
+                  <span class="text-xs group-hover/btn:scale-110 transition-transform">📋</span>
+                  <span>${t.aiAnalysisBtn || '资讯概要'}</span>
                 </button>
                 <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium shrink-0">
                   ${t.readMore || '阅读原文 ↗'}
@@ -2719,8 +2713,8 @@
           </p>
           <div class="flex items-center justify-between text-xs pt-1 gap-2">
             <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${item.id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm group/btn cursor-pointer">
-              <span class="text-xs group-hover/btn:scale-110 transition-transform">✨</span>
-              <span>${t.aiAnalysisBtn || 'AI 深度解读'}</span>
+              <span class="text-xs group-hover/btn:scale-110 transition-transform">📋</span>
+              <span>${t.aiAnalysisBtn || '资讯概要'}</span>
             </button>
             <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium shrink-0">
               ${t.readMore || '阅读原文 ↗'}
@@ -4096,7 +4090,7 @@
     }
 
     // ==========================================
-    // AI 深度解读弹窗控制器 (Powered by Google Gemini 2.5)
+    // 资讯概要简报控制器 (News Briefing & 5W1H Elements)
     // ==========================================
     function openAiNewsModal(newsId) {
       if (!cachedData) return;
@@ -4113,72 +4107,117 @@
       if (!item) return;
 
       const analysis = item.ai_analysis || {};
-      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || 'AI 深度情报解读';
-      const source = item.source || (isZh ? '权威快讯' : 'Official News');
+      const rawTitle = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '资讯概要';
+      // 深度清洗标题杂质 (记者署名、外媒尾缀、杂乱符号)
+      const cleanTitle = rawTitle.replace(/^[A-Za-z\s.\'\-]+[：:]\s*/, '')
+                                 .replace(/[\(（][^()（）]*?(?:TechCrunch|Bloomberg|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|Financial Times|CNBC|Business Insider)[^()（）]*?[\)）]\s*$/i, '')
+                                 .replace(/[\(（][^()（）]*?\/[^()（）]*?[\)）]\s*$/, '')
+                                 .trim();
 
-      // 提取核心事实概括 (Digest)
-      let digest = isZh ? (analysis.digest_zh || analysis.digest_en) : (analysis.digest_en || analysis.digest_zh);
-      if (!digest) {
-        digest = isZh ? (item.summary_zh || item.content_snippet || '核心事实与前沿突破正在提炼中。') : (item.summary_en || item.content_snippet || 'Overview and key takeaways are being curated.');
+      const source = item.source || (isZh ? '官方快讯' : 'Official News');
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+
+      // 1. 核心简报段落 (Briefing / Summary)
+      let briefingText = isZh
+        ? (analysis.briefing_zh || analysis.digest_zh)
+        : (analysis.briefing_en || analysis.digest_en || analysis.briefing_zh);
+      if (!briefingText) {
+        briefingText = isZh
+          ? (item.summary_zh || item.content_snippet || cleanTitle)
+          : (item.summary_en || item.content_snippet || cleanTitle);
       }
 
-      // 提取多维要点 (Key Points)
-      let keyPoints = isZh ? (analysis.key_points_zh || analysis.key_points_en) : (analysis.key_points_en || analysis.key_points_zh);
-      if (!keyPoints || !Array.isArray(keyPoints) || keyPoints.length === 0) {
-        keyPoints = isZh ? [
-          `重点关注 ${source} 对该技术突破方向的深度战略布局。`,
-          '加速产业落地与商业化智能化转型，显著优化工作流效能。',
-          '为开发者与业内专家提供了极具参考价值的最新技术范式。'
-        ] : [
-          `Highlighting ${source}'s strategic advancement in AI evolution.`,
-          'Accelerating commercial deployment and workflow intelligence.',
-          'Providing a new technological reference architecture for innovators.'
-        ];
+      // 2. 六要素 (5W1H Elements)
+      const elements = isZh
+        ? (analysis.elements_zh || {})
+        : (analysis.elements_en || analysis.elements_zh || {});
+
+      const who = elements.who || (isZh ? '核心机构与行业主体' : 'Key Industry Entity');
+      const where = elements.where || (isZh ? '全球技术与产业前沿一线' : 'Global Frontier Context');
+      const what = elements.what || cleanTitle;
+      const why = elements.why || (isZh ? '顺应技术迭代与市场刚需，提升生态壁垒与综合服务能力。' : 'Driving ecosystem evolution and operational efficiency.');
+
+      // 3. 深度洞察与行业研判 (Insight)
+      let insightText = isZh
+        ? (analysis.insight_zh || analysis.takeaway_zh)
+        : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh);
+      if (!insightText) {
+        insightText = isZh
+          ? '【行业研判】该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配，对相关领域的工程实践与商业策略具有重要参考风向标意义。'
+          : '[Strategic Insight] Highlights the strategic transition towards enterprise integration and sustainable business value.';
       }
 
-      // 提取研判启示 (Takeaway)
-      let takeaway = isZh ? (analysis.takeaway_zh || analysis.takeaway_en) : (analysis.takeaway_en || analysis.takeaway_zh);
-      if (!takeaway) {
-        takeaway = isZh ? '紧跟该领域演进节奏，及时评估对现有技术架构、提示词或业务场景的集成价值。' : 'Track development closely and assess integration into your production workflows.';
-      }
-
-      // 写入 DOM 节点
+      // 写入 DOM 节点 (信源仅在标题栏呈现，正文杜绝冗余)
       const modal = document.getElementById('ai-news-modal');
       const badgeEl = document.getElementById('ai-modal-badge');
-      const sourceEl = document.getElementById('ai-modal-source');
+      const sourceTagEl = document.getElementById('ai-modal-source-tag');
+      const timeTagEl = document.getElementById('ai-modal-time-tag');
       const titleEl = document.getElementById('ai-modal-title');
-      const digestTitleEl = document.getElementById('ai-modal-digest-title');
-      const digestEl = document.getElementById('ai-modal-digest-text');
-      const keypointsTitleEl = document.getElementById('ai-modal-keypoints-title');
-      const keypointsListEl = document.getElementById('ai-modal-keypoints-list');
-      const takeawayTitleEl = document.getElementById('ai-modal-takeaway-title');
-      const takeawayEl = document.getElementById('ai-modal-takeaway-text');
-      const footerTipEl = document.getElementById('ai-modal-footer-tip');
+      const briefingTitleEl = document.getElementById('ai-modal-briefing-title');
+      const summaryEl = document.getElementById('ai-modal-summary-text');
+      const elementsGridEl = document.getElementById('ai-modal-elements-grid');
+      const insightTitleEl = document.getElementById('ai-modal-insight-title');
+      const insightEl = document.getElementById('ai-modal-insight-text');
       const sourceBtnEl = document.getElementById('ai-modal-source-btn');
       const sourceBtnTextEl = document.getElementById('ai-modal-source-btn-text');
 
-      if (badgeEl) badgeEl.textContent = t.aiModalBadge || 'Gemini AI 深度情报解读';
-      if (sourceEl) sourceEl.textContent = `${t.sourceLabel || '信源:'} ${source}`;
-      if (titleEl) titleEl.textContent = title;
-      if (digestTitleEl) digestTitleEl.textContent = t.aiModalDigestTitle || '核心事实脉络';
-      if (digestEl) digestEl.textContent = digest;
-      if (keypointsTitleEl) keypointsTitleEl.textContent = t.aiModalKeypointsTitle || '多维深度剖析';
-      if (takeawayTitleEl) takeawayTitleEl.textContent = t.aiModalTakeawayTitle || '专家行动与落地研判';
-      if (takeawayEl) takeawayEl.textContent = takeaway;
-      if (footerTipEl) footerTipEl.textContent = t.aiModalFooterTip || '已自动同步全站选定语言';
-      if (sourceBtnTextEl) sourceBtnTextEl.textContent = t.aiModalSourceBtn || '阅读原文 / 直达报道';
+      if (badgeEl) badgeEl.textContent = t.aiModalBadge || (isZh ? '资讯概要' : 'News Briefing');
+      if (sourceTagEl) sourceTagEl.textContent = `${t.sourceLabel || '信源:'} ${source}`;
+      if (timeTagEl) timeTagEl.textContent = `🕒 ${timeObj.relative || timeObj.display}`;
+      if (titleEl) titleEl.textContent = cleanTitle;
+      if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive 5W1H Briefing');
+      if (summaryEl) summaryEl.textContent = briefingText;
 
-      if (keypointsListEl) {
-        keypointsListEl.innerHTML = keyPoints.map((pt, idx) => `
-          <div class="flex items-start space-x-2.5 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800">
-            <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 text-[10px] font-bold shrink-0 mt-0.5">${idx + 1}</span>
-            <span class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">${escapeHtml(pt)}</span>
+      // 渲染 4 个要素卡片 (Who, Where, What, Why)
+      if (elementsGridEl) {
+        const labels = isZh ? {
+          who: '核心主体 (Who)',
+          where: '事件场景 (Where)',
+          what: '关键举措 (What)',
+          why: '起因动因 (Why)'
+        } : {
+          who: 'Key Actor (Who)',
+          where: 'Venue / Context (Where)',
+          what: 'Key Action (What)',
+          why: 'Core Motivation (Why)'
+        };
+
+        elementsGridEl.innerHTML = `
+          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1">
+            <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
+              <span>👤</span> ${labels.who}
+            </span>
+            <span class="text-xs text-slate-800 dark:text-slate-200 leading-snug font-medium">${escapeHtml(who)}</span>
           </div>
-        `).join('');
+          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1">
+            <span class="text-[11px] font-bold text-sky-600 dark:text-sky-400 flex items-center gap-1">
+              <span>📍</span> ${labels.where}
+            </span>
+            <span class="text-xs text-slate-800 dark:text-slate-200 leading-snug">${escapeHtml(where)}</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1 sm:col-span-2">
+            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
+              <span>⚡</span> ${labels.what}
+            </span>
+            <span class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${escapeHtml(what)}</span>
+          </div>
+          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1 sm:col-span-2">
+            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+              <span>🎯</span> ${labels.why}
+            </span>
+            <span class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${escapeHtml(why)}</span>
+          </div>
+        `;
       }
+
+      if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '深度洞察与行业研判' : 'In-Depth Strategic Insight');
+      if (insightEl) insightEl.textContent = insightText;
 
       if (sourceBtnEl) {
         sourceBtnEl.href = item.url || '#';
+      }
+      if (sourceBtnTextEl) {
+        sourceBtnTextEl.textContent = t.aiModalSourceBtn || (isZh ? '阅读原文 / 直达报道' : 'Read Full Story');
       }
 
       if (modal) {
