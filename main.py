@@ -729,6 +729,22 @@ def run_pipeline():
         it["is_recent_24h"] = bool(diff <= 86400)
         cleaned_items.append(it)
 
+    # 5.5 自动纠偏与分类恢复：凡是真实 𝕏 / Threads 个人极客、开发者或前沿团队的技术贴文，修正其归入 celebrity 爆帖
+    news_orgs = {"techmeme", "theverge", "techcrunch", "bloomberg", "reuters", "wsj", "nytimes", "guardian", "bbcnews", "engadget", "wired", "arstechnica", "venturebeat", "zdnet", "mashable", "cnet", "cnbc", "forbes", "ft", "businessinsider"}
+    for it in cleaned_items:
+        u = it.get("url", "")
+        plat = it.get("platform", "")
+        auth = it.get("author", "").lstrip("@").lower()
+        if (plat == "x" or "x.com" in u or "twitter.com" in u or "threads.net" in u) and auth not in news_orgs:
+            if it.get("category") == "news":
+                it["category"] = "celebrity"
+                it["sub_category"] = "viral_post"
+                it["is_viral"] = True
+                if not it.get("surge_badge"):
+                    it["surge_badge"] = "⚡ 24h 极客热推"
+                if not it.get("spec_tags"):
+                    it["spec_tags"] = ["𝕏平台爆帖", "极客前沿"]
+
     # 6. 存储增量融合后的完整大库
     save_news(cleaned_items)
     

@@ -2567,7 +2567,8 @@
         if (isNaN(date.getTime())) return false;
         const now = new Date();
         const diffSec = Math.floor((now - date) / 1000);
-        return diffSec >= 0 && diffSec <= 86400;
+        // 允许时钟偏置与时区容差（最高 8 小时），并在 24 小时以内
+        return diffSec >= -28800 && diffSec <= 86400;
       } catch (e) {
         return false;
       }
@@ -2723,7 +2724,12 @@
 
     function renderArchiveCard(item) {
       const cat = item.category || 'news';
-      if (cat === 'celebrity' || cat === 'leader_opinions') return renderCelebrityCard(item);
+      if (cat === 'celebrity' || cat === 'leader_opinions') {
+        if (item.sub_category === 'viral_post' || item.is_viral) {
+          return renderViralPostCard(item);
+        }
+        return renderCelebrityCard(item);
+      }
       if (cat === 'tools' || cat === 'applied_tools') return renderToolCard(item);
       if (cat === 'videos' || cat === 'video_prompts') return renderVideoCard(item);
       if (cat === 'prompts') return renderPromptCard(item);
@@ -3993,6 +3999,23 @@
               ${clustersHtml}
             </div>
           </div>
+
+          <!-- 底部历史大V归档直通车 -->
+          <div class="mt-12 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
+            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-lg p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
+                <div class="text-left">
+                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的历史大V推文与言论' : 'Archived Leader Posts Older Than 24 Hours'}</span>
+                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更早观点沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical statements preserved in master archive'}</span>
+                </div>
+              </div>
+              <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
+                <span>${isZh ? '查看历史大V与爆帖归档' : 'View Historical Archive'}</span>
+                <span>→</span>
+              </span>
+            </button>
+          </div>
         </div>
       `;
     }
@@ -4940,9 +4963,11 @@
         const catTitle = document.getElementById('cat-view-title');
         const catDesc = document.getElementById('cat-view-desc');
         
-        // 更新大V与爆帖的计数角标
-        const leaderCount = (cachedData.grouped?.celebrity || cachedData.celebrity || []).filter(it => it.sub_category !== 'viral_post').length;
-        const viralCount = (cachedData.grouped?.viral_posts || cachedData.viral_posts || []).length || (cachedData.items || []).filter(it => it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral)).length;
+        // 严格 24 小时门禁下的计数 (超出 24 小时自动归档至历史库)
+        const leaderFresh = (cachedData.grouped?.celebrity || cachedData.celebrity || []).filter(it => it.sub_category !== 'viral_post' && (isWithin24Hours(it.raw_published_at) || it.is_pinned));
+        const viralFresh = (cachedData.grouped?.viral_posts || cachedData.viral_posts || []).filter(it => isWithin24Hours(it.raw_published_at));
+        const leaderCount = leaderFresh.length;
+        const viralCount = viralFresh.length || (cachedData.items || []).filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral)) && isWithin24Hours(it.raw_published_at)).length;
         const bLeader = document.getElementById('badge-count-leader');
         if (bLeader) bLeader.textContent = leaderCount;
         const bViral = document.getElementById('badge-count-viral');
@@ -4961,6 +4986,9 @@
             const allItems = cachedData.items || [];
             viralList = allItems.filter(it => it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral));
           }
+          // 严格倒退 24 小时门禁：超出 24h 的自动沉淀至历史归档库
+          viralList = viralList.filter(it => isWithin24Hours(it.raw_published_at));
+
           if (viralPlatformFilter !== 'all') {
             viralList = viralList.filter(it => it.platform === viralPlatformFilter);
           }
@@ -4985,6 +5013,9 @@
 
           let list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
           list = list.filter(it => it.sub_category !== 'viral_post');
+          // 严格倒退 24 小时门禁：超出 24h 的自动沉淀至历史归档库
+          list = list.filter(it => isWithin24Hours(it.raw_published_at) || it.is_pinned);
+
           if (socialPlatformFilter === 'company') {
             list = list.filter(isCompanyOrBrand);
           } else if (socialPlatformFilter === 'person') {
@@ -5478,6 +5509,23 @@
           <!-- 爆款贴文响应式网格 -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             ${list.map(renderViralPostCard).join('')}
+          </div>
+
+          <!-- 底部全网爆帖归档直通车 -->
+          <div class="mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
+            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/30 to-slate-900 hover:from-rose-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-rose-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-lg p-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 group-hover:scale-110 transition-transform">📜</span>
+                <div class="text-left">
+                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的全网平台爆帖与极客讨论' : 'Archived Viral Posts Older Than 24 Hours'}</span>
+                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更多历史极客神贴沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical viral threads preserved in master archive'}</span>
+                </div>
+              </div>
+              <span class="text-xs text-rose-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
+                <span>${isZh ? '查看历史大V与爆帖归档' : 'View Historical Archive'}</span>
+                <span>→</span>
+              </span>
+            </button>
           </div>
         </div>
       `;
