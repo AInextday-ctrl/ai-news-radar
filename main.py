@@ -424,7 +424,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en"]:
+                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
             master_dict[k] = it
@@ -496,6 +496,10 @@ def save_news(items: list):
         recent_final.extend(grouped[cat_key])
     recent_final.sort(key=parse_time_for_sort, reverse=True)
 
+    # 提取 24h 全网平台爆帖 (𝕏 & Threads 突破与极客神贴)
+    viral_posts = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
+    grouped["viral_posts"] = viral_posts
+
     top_three = extract_top_three(recent_final)
     chatbot_arena = get_chatbot_arena_top5()
     arxiv_papers = get_arxiv_curated_papers()
@@ -518,6 +522,7 @@ def save_news(items: list):
         "tools": grouped.get("tools", []),
         "videos": grouped.get("videos", []),
         "prompts": grouped.get("prompts", []),
+        "viral_posts": viral_posts,
         "industry_news": grouped.get("news", []),
         "leader_opinions": grouped.get("celebrity", []),
         "applied_tools": grouped.get("tools", []),
