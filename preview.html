@@ -3260,7 +3260,7 @@
         : `<span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-sky-300 dark:text-sky-400 border border-sky-500/40 text-[10px] font-bold shrink-0">👤 大V推文</span>`;
 
       return `
-        <article class="glass-card cyber-timeline-card rounded-2xl p-4 flex flex-col space-y-3 group border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all cursor-pointer" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
+        <article class="glass-card cyber-timeline-card rounded-2xl p-3 sm:p-3.5 flex flex-col space-y-2 group border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all cursor-pointer" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
           <!-- 卡片顶部时间锚点与平台标签 (推文框左上角完整时间点) -->
           <div class="flex items-center justify-between gap-2 border-b border-slate-200/70 dark:border-slate-800/70 pb-2 text-[11px] font-mono">
             <div class="flex items-center space-x-1.5 text-sky-600 dark:text-sky-400 font-semibold min-w-0">
@@ -3277,7 +3277,7 @@
           <div class="flex items-center justify-between gap-2">
             <div class="flex items-center space-x-3 min-w-0">
               <div class="relative shrink-0">
-                <img src="${avatar}" class="w-11 h-11 rounded-full ring-2 ${isCo ? 'ring-amber-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <img src="${avatar}" class="w-10 h-10 rounded-full ring-2 ${isCo ? 'ring-amber-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
                 <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-500' : 'bg-sky-500'} text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow" title="${isCo ? '已认证官方企业/品牌' : (t.celebVerifiedTitle || '已认证权威领袖')}">✓</span>
               </div>
               <div class="min-w-0">
@@ -3290,7 +3290,7 @@
           </div>
 
           <!-- 大V发文直接纯净引用 (彻底剔除下方重复机械总结) -->
-          <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-100 leading-relaxed bg-sky-50/70 dark:bg-slate-950/70 p-3 rounded-xl border border-sky-100 dark:border-slate-800/80 tweet-quote-box group-hover:border-sky-400/40 transition-colors">
+          <div class="text-xs sm:text-[13px] text-slate-800 dark:text-slate-100 leading-relaxed bg-sky-50/70 dark:bg-slate-950/70 p-2.5 rounded-xl border border-sky-100 dark:border-slate-800/80 tweet-quote-box group-hover:border-sky-400/40 transition-colors">
             <span class="text-sky-500 font-serif text-base mr-1">“</span>${title}<span class="text-sky-500 font-serif text-base ml-1">”</span>
           </div>
 
@@ -3564,7 +3564,8 @@
     }
 
     // ==========================================
-    // 领袖观点·社交 双侧交错时间轴渲染 (Cyber Chrono Timeline)
+    // 领袖观点·社交 紧凑型双列交错时间轴渲染 (Compact Cyber Chrono Timeline)
+    // 告别单行50%留白虚掷，左右双列紧凑向上补位，消除巨大间隙
     // ==========================================
     function renderCelebrityTimeline(list) {
       const t = I18N[currentLang];
@@ -3581,49 +3582,83 @@
         timelineTitle = isZh ? '全球 AI 行业领袖与大V · 时空流动时间轴' : 'Global AI Leaders & Researchers Timeline';
       }
 
+      // 将列表切分为左列与右列，实现紧凑交错并排 (彻底消除单行 50% 虚掷空白)
+      const leftItems = [];
+      const rightItems = [];
+      list.forEach((item, idx) => {
+        if (idx % 2 === 0) {
+          leftItems.push({ item, idx });
+        } else {
+          rightItems.push({ item, idx });
+        }
+      });
+
       return `
-        <div class="cyber-timeline-wrapper relative max-w-5xl mx-auto py-4 px-1 sm:px-4">
+        <div class="cyber-timeline-wrapper relative max-w-5xl mx-auto py-2 px-1 sm:px-3">
           <!-- 顶部时间线前导提示与统计 -->
-          <div class="flex items-center justify-between pb-5 mb-4 border-b border-slate-200 dark:border-slate-800/80">
+          <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-200 dark:border-slate-800/80">
             <div class="flex items-center space-x-2.5">
-              <span class="w-3 h-3 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.8)] animate-pulse"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse"></span>
               <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
                 <span>⚡</span>
                 <span>${timelineTitle}</span>
                 <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '条动态' : 'Posts'}</span>
               </h3>
             </div>
+            <span class="text-xs text-slate-400 font-mono hidden sm:inline">⏱️ 紧凑流式时空轴</span>
           </div>
 
-          <!-- 中央纵贯发光能量轴 (Desktop 绝对居中，Mobile 靠左) -->
-          <div class="cyber-timeline-axis hidden lg:block absolute left-1/2 top-16 bottom-8 -translate-x-1/2 w-[3px] rounded-full"></div>
-          <div class="cyber-timeline-axis lg:hidden absolute left-5 top-16 bottom-8 w-[3px] rounded-full"></div>
+          <!-- 移动端视图 (< 1024px): 经典单侧左侧时间轴 -->
+          <div class="lg:hidden relative pl-8 space-y-3.5">
+            <div class="absolute left-3.5 top-2 bottom-4 w-[2px] bg-gradient-to-b from-sky-500 via-indigo-500 to-slate-800 rounded-full z-0"></div>
+            ${list.map((item, idx) => {
+              const isCo = isCompanyOrBrand(item);
+              const nodeIcon = isCo ? '🏢' : '𝕏';
+              return `
+                <div class="timeline-item-anim relative">
+                  <div class="absolute -left-8 top-4 w-6 h-6 rounded-full bg-slate-900 border-2 ${isCo ? 'border-amber-400 text-amber-400' : 'border-sky-400 text-sky-400'} flex items-center justify-center font-bold text-[10px] shadow z-10 select-none">
+                    ${nodeIcon}
+                  </div>
+                  ${renderCelebrityCard(item, true, false)}
+                </div>
+              `;
+            }).join('')}
+          </div>
 
-          <!-- 动态卡片序列 (根据当前筛选结果动态重新计算左右，保证筛选后无缝向上补位) -->
-          <div class="space-y-6 lg:space-y-8 relative">
-            ${list.map((item, idx) => renderTimelineRow(item, idx)).join('')}
+          <!-- 桌面端视图 (>= 1024px): 紧凑双列交错瀑布流时间轴 (左右自动向上靠拢补位，彻底告别单行空旷) -->
+          <div class="hidden lg:block relative">
+            <!-- 中央纵贯发光时间轴线 -->
+            <div class="absolute left-1/2 top-3 bottom-3 -translate-x-1/2 w-[2px] bg-gradient-to-b from-sky-500 via-indigo-500/60 to-purple-500/30 rounded-full z-0 pointer-events-none"></div>
+
+            <div class="grid grid-cols-2 gap-x-10 items-start">
+              <!-- 左侧列 (按时间紧凑排列) -->
+              <div class="space-y-3.5 flex flex-col">
+                ${leftItems.map(({ item, idx }) => renderDesktopTimelineCard(item, idx, 'left')).join('')}
+              </div>
+
+              <!-- 右侧列 (微幅错落 28px，形成经典珍珠穿线律动，绝不重叠) -->
+              <div class="space-y-3.5 flex flex-col pt-7">
+                ${rightItems.map(({ item, idx }) => renderDesktopTimelineCard(item, idx, 'right')).join('')}
+              </div>
+            </div>
           </div>
         </div>
       `;
     }
 
-    function renderTimelineRow(item, idx) {
-      const isLeft = idx % 2 === 0;
-      const cardHtml = renderCelebrityCard(item, true, !isLeft);
+    function renderDesktopTimelineCard(item, idx, side) {
+      const isLeft = side === 'left';
       const isCo = isCompanyOrBrand(item);
       const nodeIcon = isCo ? '🏢' : '𝕏';
+      const cardHtml = renderCelebrityCard(item, true, !isLeft);
 
       return `
-        <div class="timeline-item-anim relative w-full flex flex-col lg:flex-row items-center ${isLeft ? 'lg:justify-start' : 'lg:justify-end'} pl-11 lg:pl-0">
-          <!-- 居中呼吸发光时间锚点 Node (Desktop 居中，Mobile 靠左固定) -->
-          <div class="cyber-timeline-node absolute left-5 lg:left-1/2 top-5 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 ${isCo ? 'border-amber-400 text-amber-400' : 'border-sky-400 text-sky-400'} flex items-center justify-center font-black text-xs shadow-lg z-10 select-none">
+        <div class="timeline-item-anim relative group">
+          <!-- 贴向中央时间轴的圆形锚点节点 (精准对齐中央发光轴) -->
+          <div class="absolute ${isLeft ? '-right-5 translate-x-1/2' : '-left-5 -translate-x-1/2'} top-5 w-6 h-6 rounded-full bg-slate-900 border-2 ${isCo ? 'border-amber-400 text-amber-400' : 'border-sky-400 text-sky-400'} flex items-center justify-center font-bold text-[10px] shadow-lg z-20 select-none group-hover:scale-110 transition-transform">
             ${nodeIcon}
           </div>
-
-          <!-- 卡片容器 (Desktop 左侧占 ~46%，右侧占 ~46%；Mobile 占全宽) -->
-          <div class="w-full lg:w-[calc(50%-2.2rem)] ${isLeft ? 'lg:mr-auto' : 'lg:ml-auto'}">
-            ${cardHtml}
-          </div>
+          ${cardHtml}
         </div>
       `;
     }
