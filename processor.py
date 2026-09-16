@@ -164,7 +164,7 @@ def clean_news_text(text: str) -> str:
     t = html.unescape(text)
     t = t.replace("&nbsp;", " ").replace("\u00a0", " ")
     
-    # 移除陈旧模板前缀
+    # 1. 移除陈旧模板前缀
     t = re.sub(r'^【.*?】\s*', '', t)
     t = re.sub(r'^由\s*.*?\s*(?:权威发布|最新报道)[。：:]\s*', '', t)
     t = re.sub(r'^据\s*.*?\s*(?:最新报道|报道)[，,：:]\s*', '', t)
@@ -172,16 +172,24 @@ def clean_news_text(text: str) -> str:
     t = re.sub(r'^领袖前沿发声与社区论战[：:]\s*', '', t)
     t = re.sub(r'^开箱即用落地利器与提效神器[：:]\s*', '', t)
     t = re.sub(r'^实操深度演示与架构解析[：:]\s*', '', t)
+    t = re.sub(r'^(?:Opinion\s*\|\s*|专栏\s*\|\s*|观点\s*\|\s*)', '', t, flags=re.IGNORECASE)
     
-    # 移除开头的记者署名与外媒名称（如 "Matt Bracken / FedScoop:" 或 "Jagmeet Singh / TechCrunch："）
+    # 2. 移除引语、信源、记者署名等开头前缀 (如 "消息来源:" / "Sources:" / "据报道" 等)
+    t = re.sub(r'^(?:消息来源|消息称|知情人士称|知情人士透露|知情人透露|据知情人士|据知情人|据外媒|据报道|外媒称|外媒报道|传|报道称)[：:，,\s]*', '', t)
+    t = re.sub(r'^(?:Sources?|Report|Reports?|Exclusive|Analysis)[：:\s]+', '', t, flags=re.IGNORECASE)
     t = re.sub(r'^[A-Za-z\s.\'\-]+/(?:[A-Za-z\s.\'\-]+|\s*)[：:]\s*', '', t)
     t = re.sub(r'^[A-Za-z\s.\'\-]+[：:]\s*', '', t)
-    t = re.sub(r'[A-Za-z\s.\'\-]+/(?:[A-Za-z\s.\'\-]+|\s*)[：:]\s*', '', t)
+    t = re.sub(r'消息来源[：:]\s*', '', t)
+    t = re.sub(r'Sources?[：:]\s*', '', t, flags=re.IGNORECASE)
     
-    # 移除标题末尾括号中的记者及媒体名（如 " (Jagmeet Singh/TechCrunch)" 或 "（David Welch/Bloomberg）"）
-    t = re.sub(r'[\(（][^()（）]*?/(?:TechCrunch|Bloomberg|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|Financial Times|CNBC|Business Insider)[^()（）]*?[\)）]\s*$', '', t)
-    t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）]\s*$', '', t)
+    # 3. 移除末尾括号中的媒体或记者标识 (支持末尾带有句号的情况)
+    t = re.sub(r'[\(（][^()（）]*?(?:The Information|Forbes|Financial Times|Guardian|Bloomberg|TechCrunch|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|CNBC|Business Insider|金融时报|纽约时报|彭博|路透|福布斯|卫报)[^()（）]*?[\)）][。.\s]*$', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'[\(（]@[A-Za-z0-9_]+[\)）][。.\s]*$', '', t)
+    t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）][。.\s]*$', '', t)
+    t = re.sub(r'[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$', '', t)
     
+    # 4. 清理连续重复符号与空白
+    t = re.sub(r'([。！？；，、])\1+', r'\1', t)
     t = re.sub(r'\s+', ' ', t).strip()
     return t
 
@@ -198,7 +206,7 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
 
 
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
-    """Generate professional News Briefing (新闻简报) based on 5W1H facts and industry insights."""
+    """Generate professional News Briefing (新闻简报) based on factual synthesis and industry insights."""
     clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
     clean_snippet = clean_news_text(item.get("content_snippet", ""))
     source = item.get("source", "")
@@ -279,29 +287,44 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
 
     # 3. 提取核心事实与举措 (What)
     what = clean_title
-    if clean_snippet and clean_snippet not in clean_title and len(clean_snippet) > 15:
-        what = f"{clean_title}。据细节披露，{clean_snippet}"
-        if len(what) > 160:
-            what = what[:155] + "..."
 
     # 4. 推理起因背景与深层动因 (Why)
     why = "顺应技术迭代与市场刚需，提升生态壁垒与综合服务能力。"
-    if any(k in full_text for k in ["豁免", "责任", "听证会", "监管", "安全", "垄断"]):
-        why = "防范前沿AI引发系统性安全与法律责任真空风险，同时打破闭源头部垄断，维护国家技术安全与公平竞争。"
-    elif any(k in full_text for k in ["商户费", "收费", "订阅", "商业化", "定价", "成本"]):
-        why = "覆盖持续攀升的底层结算、算力基础设施与网络高昂运维成本，推动业务由盲目补贴迈向自我造血与商业可持续。"
-    elif any(k in full_text for k in ["CarPlay", "Android Auto", "体验", "消费者", "不满"]):
-        why = "自研封闭车机生态遭遇用户习惯壁垒，顺应车主对手机无缝互联的刚性需求以挽回产品口碑。"
+    if any(k in full_text for k in ["智能眼镜", "穿戴", "无摄像头", "麦克风"]):
+        why = "该举措主要旨在解决公共场合摄像头带来的隐私争议，同时降低硬件成本与佩戴门槛，加速以音频和语音为核心的多模态AI助手渗透至日常消费场景。"
+    elif any(k in full_text for k in ["豁免", "责任", "听证会", "监管", "法案"]):
+        why = "此举深层背景在于防范前沿AI系统引发法律追责真空与安全失控风险，同时通过划定合规红线与扶持开源生态，防止闭源科技巨头形成行业事实垄断。"
+    elif any(k in full_text for k in ["选民", "数据中心", "民调", "两党"]):
+        why = "调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。"
+    elif any(k in full_text for k in ["1.2万亿", "1.2T", "估值", "IPO", "融资"]):
+        why = "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。"
+    elif any(k in full_text for k in ["对齐", "alignment", "安全训练", "动力"]):
+        why = "这体现出行业领袖正在重塑大模型安全的行业话语权，强调缺乏有效安全对齐与伦理约束的模型将难以在企业级真实复杂业务中通过可用性检验。"
+    elif any(k in full_text for k in ["UPI", "商户费", "订阅", "收费", "定价"]):
+        why = "该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。"
+    elif any(k in full_text for k in ["CarPlay", "Android Auto", "车机", "通用汽车"]):
+        why = "通用汽车重新引入手机互联映射方案，表明封闭自研车机在抗衡成熟移动生态心智时遭遇现实阻力，顺应用户对无缝导航与音频交互的刚需成为保障终端口碑的务实选择。"
     elif any(k in full_text for k in ["开源", "突破", "发布", "模型"]):
         why = "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
 
-    # 5. 整合新闻简报正文 (Summary Briefing)
-    briefing_zh = f"在{where}，{who}正式推进关键动向：{clean_title}。此举深层背景主要在于{why}"
+    # 5. 整合新闻简报正文 (Natural News Briefing，杜绝机械套话与多余前缀)
+    first_stmt = clean_title
+    if not first_stmt.endswith(('。', '！', '？')):
+        first_stmt += '。'
+    briefing_zh = f"{first_stmt} {why}".strip()
+    briefing_zh = re.sub(r'([。！？；，、])\1+', r'\1', briefing_zh).strip()
+    briefing_zh = re.sub(r'消息来源[：:]\s*', '', briefing_zh)
 
     # 6. 专业深度洞察与行业研判 (In-Depth Insight)
     insight_zh = ""
-    if any(k in full_text for k in ["豁免", "责任", "听证会", "监管"]):
-        insight_zh = "【监管研判】监管层在“支持科技创新”与“划定法律红线”之间寻求平衡。拒绝授予全面免责特权将倒逼实验室提升模型可控性；而政策对开源模型的倾斜，将为去中心化AI生态带来重要战略契机。"
+    if any(k in full_text for k in ["智能眼镜", "穿戴", "无摄像头"]):
+        insight_zh = "【硬件与生态研判】在雷朋联名眼镜验证了AI音频交互需求后，取消摄像头是Meta针对办公室、医疗与学校等隐私敏感场景的精准破局。更轻便的形态与更低的制造门槛，将有助于Meta将大模型多模态语音助手渗透至更广泛的日常大众消费群体。"
+    elif any(k in full_text for k in ["选民", "数据中心", "民调"]):
+        insight_zh = "【产业与政策研判】AI算力扩张正从纯技术/商业投资议题，加速演变为关乎电力、水资源、地方环境与民意选票的公共议题。科技巨头未来在算力中心选址与电网协同上，需面临更为严苛的社区沟通与合规审查。"
+    elif any(k in full_text for k in ["豁免", "责任", "听证会", "监管"]):
+        insight_zh = "【监管研判】宏观决策层在“支持科技创新”与“划定法律红线”之间寻求平衡。拒绝授予全面免责特权将倒逼实验室提升模型可控性；而政策对开源模型的倾斜，将为去中心化AI生态带来重要战略契机。"
+    elif any(k in full_text for k in ["1.2万亿", "1.2T", "估值", "IPO", "融资"]):
+        insight_zh = "【资本研判】万亿美元级别的高估值预期反映出前沿AI竞争已进入极致资本密集阶段。高昂的算力开销迫使独角兽在资本市场争夺头部流动性，商业化造血能力将成为决定后续估值支撑度的决定性指标。"
     elif any(k in full_text for k in ["UPI", "商户费", "订阅", "收费"]):
         insight_zh = "【商业研判】核心数字基础设施逐步告别“免费补贴阶段”，步入精细化商业收费周期。交易与服务成本的调整将加速行业洗牌，并驱动厂商在差异化增值服务上展开更深维度的竞争。"
     elif any(k in full_text for k in ["CarPlay", "车机", "汽车"]):
@@ -497,14 +520,23 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             for idx, orig_item in enumerate(chunk):
                 ai_data = parsed_dict.get(idx, {})
                 merged = dict(orig_item)
-                merged["title_zh"] = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
-                merged["summary_zh"] = orig_item.get("summary_zh") or ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
+                raw_title_zh = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
+                merged["title_zh"] = clean_news_text(raw_title_zh)
+                raw_summary_zh = orig_item.get("summary_zh") or ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
+                merged["summary_zh"] = clean_news_text(raw_summary_zh)
                 merged["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
                 merged["summary_en"] = orig_item.get("summary_en") or orig_item.get("content_snippet", "")
                 merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
                 merged["hot_score"] = ai_data.get("hot_score", 3)
                 merged["tags"] = orig_item.get("tags") or ai_data.get("tags") or [orig_item.get("source", "AI快讯")]
-                merged["ai_analysis"] = orig_item.get("ai_analysis") or ai_data.get("ai_analysis") or generate_smart_ai_analysis(orig_item, merged["title_zh"])
+                
+                ai_analysis = orig_item.get("ai_analysis") or ai_data.get("ai_analysis") or generate_smart_ai_analysis(orig_item, merged["title_zh"])
+                if ai_analysis and isinstance(ai_analysis, dict):
+                    if "briefing_zh" in ai_analysis:
+                        ai_analysis["briefing_zh"] = clean_news_text(ai_analysis["briefing_zh"])
+                    if "digest_zh" in ai_analysis:
+                        ai_analysis["digest_zh"] = clean_news_text(ai_analysis["digest_zh"])
+                merged["ai_analysis"] = ai_analysis
                 results.append(merged)
 
             print(f"  ✓ 已完成 {min(i + batch_size, len(need_ai_items))}/{len(need_ai_items)} 条")
@@ -513,15 +545,16 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             print(f"  ❌ Gemini 处理异常: {e}，启用高可用神经中文翻译保障")
             for orig_item in chunk:
                 fallback = dict(orig_item)
-                title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
+                raw_title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
+                title_zh = clean_news_text(raw_title_zh)
                 fallback["title_zh"] = title_zh
-                fallback["summary_zh"] = orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh)
+                fallback["summary_zh"] = clean_news_text(orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh))
                 fallback["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
                 fallback["summary_en"] = orig_item.get("summary_en") or orig_item.get("content_snippet", "")
                 fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
                 fallback["hot_score"] = 3
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
-                fallback["ai_analysis"] = orig_item.get("ai_analysis") or generate_smart_ai_analysis(orig_item, title_zh)
+                fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
                 results.append(fallback)
 
     return direct_items + results

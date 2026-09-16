@@ -1090,23 +1090,15 @@
         <!-- 资讯原标题 (已脱敏清洗杂质) -->
         <h2 id="ai-modal-title" class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug"></h2>
 
-        <!-- 板块 1: 📋 事件脉络速览 (新闻六要素 5W1H 简报) -->
-        <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2">
-            <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400">
-              <span>📋</span>
-              <span id="ai-modal-briefing-title">事件脉络速览</span>
-            </div>
-            <span class="text-[10px] text-slate-500 font-mono">5W1H 核心事实</span>
+        <!-- 板块 1: 📋 事件脉络速览 (新闻简报) -->
+        <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
+          <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b border-slate-200/80 dark:border-slate-800 pb-2">
+            <span>📋</span>
+            <span id="ai-modal-briefing-title">事件脉络速览</span>
           </div>
 
-          <!-- 核心事实全貌 (2-3句完整流畅交代，让用户无需查看原资讯详情) -->
-          <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal"></p>
-
-          <!-- 六要素结构化网格卡片 -->
-          <div id="ai-modal-elements-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs">
-            <!-- 动态注入 who, where, what, why 4大核心要素卡片 -->
-          </div>
+          <!-- 核心事实全貌 (自然流畅交代，无需查看原资讯详情) -->
+          <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
         </div>
 
         <!-- 板块 2: 💡 深度洞察与行业研判 (In-Depth Analysis) -->
@@ -4090,7 +4082,8 @@
     }
 
     // ==========================================
-    // 资讯概要简报控制器 (News Briefing & 5W1H Elements)
+    // ==========================================
+    // 资讯概要简报控制器 (News Briefing & Natural Synthesis)
     // ==========================================
     function openAiNewsModal(newsId) {
       if (!cachedData) return;
@@ -4108,36 +4101,44 @@
 
       const analysis = item.ai_analysis || {};
       const rawTitle = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '资讯概要';
-      // 深度清洗标题杂质 (记者署名、外媒尾缀、杂乱符号)
-      const cleanTitle = rawTitle.replace(/^[A-Za-z\s.\'\-]+[：:]\s*/, '')
-                                 .replace(/[\(（][^()（）]*?(?:TechCrunch|Bloomberg|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|Financial Times|CNBC|Business Insider)[^()（）]*?[\)）]\s*$/i, '')
-                                 .replace(/[\(（][^()（）]*?\/[^()（）]*?[\)）]\s*$/, '')
-                                 .trim();
+      
+      // 深度清洗标题杂质 (彻底滤除开头的 "消息来源:" / "Sources:" / "据报道" / 记者署名 / 尾部外媒括号)
+      const cleanTitle = rawTitle
+        .replace(/^(?:消息来源|消息称|知情人士称|知情人士透露|知情人透露|据知情人士|据知情人|据外媒|据报道|外媒称|外媒报道|传|报道称|Sources?|Report|Reports?|Exclusive|Analysis)[：:，,\s]+/i, '')
+        .replace(/消息来源[：:]\s*/g, '')
+        .replace(/^[A-Za-z\s.\'\-]+[：:]\s*/, '')
+        .replace(/[\(（][^()（）]*?(?:The Information|Forbes|Financial Times|Guardian|Bloomberg|TechCrunch|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|CNBC|Business Insider|金融时报|纽约时报|彭博|路透|福布斯|卫报)[^()（）]*?[\)）][。.\s]*$/i, '')
+        .replace(/[\(（]@[A-Za-z0-9_]+[\)）][。.\s]*$/i, '')
+        .replace(/[\(（][^()（）]*?\/[^()（）]*?[\)）][。.\s]*$/, '')
+        .replace(/[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$/, '')
+        .replace(/([。！？；，、])\1+/g, '$1')
+        .trim();
 
       const source = item.source || (isZh ? '官方快讯' : 'Official News');
       const timeObj = formatTime(item.raw_published_at, currentLang);
 
       // 1. 核心简报段落 (Briefing / Summary)
-      let briefingText = isZh
+      let rawBriefing = isZh
         ? (analysis.briefing_zh || analysis.digest_zh)
         : (analysis.briefing_en || analysis.digest_en || analysis.briefing_zh);
-      if (!briefingText) {
-        briefingText = isZh
+      if (!rawBriefing) {
+        rawBriefing = isZh
           ? (item.summary_zh || item.content_snippet || cleanTitle)
           : (item.summary_en || item.content_snippet || cleanTitle);
       }
 
-      // 2. 六要素 (5W1H Elements)
-      const elements = isZh
-        ? (analysis.elements_zh || {})
-        : (analysis.elements_en || analysis.elements_zh || {});
+      // 清洗简报段落杂质，保证自然通畅
+      const briefingText = String(rawBriefing)
+        .replace(/^(?:消息来源|消息称|知情人士称|知情人士透露|知情人透露|据知情人士|据知情人|据外媒|据报道|外媒称|外媒报道|传|报道称|Sources?|Report|Reports?|Exclusive)[：:，,\s]+/i, '')
+        .replace(/消息来源[：:]\s*/g, '')
+        .replace(/正式推进关键动向[：:]\s*/g, '')
+        .replace(/[\(（][^()（）]*?(?:The Information|Forbes|Financial Times|Guardian|Bloomberg|TechCrunch|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|CNBC|Business Insider|金融时报|纽约时报|彭博|路透|福布斯|卫报)[^()（）]*?[\)）][。.\s]*$/i, '')
+        .replace(/[\(（]@[A-Za-z0-9_]+[\)）][。.\s]*$/i, '')
+        .replace(/[\(（][^()（）]*?\/[^()（）]*?[\)）][。.\s]*$/, '')
+        .replace(/([。！？；，、])\1+/g, '$1')
+        .trim();
 
-      const who = elements.who || (isZh ? '核心机构与行业主体' : 'Key Industry Entity');
-      const where = elements.where || (isZh ? '全球技术与产业前沿一线' : 'Global Frontier Context');
-      const what = elements.what || cleanTitle;
-      const why = elements.why || (isZh ? '顺应技术迭代与市场刚需，提升生态壁垒与综合服务能力。' : 'Driving ecosystem evolution and operational efficiency.');
-
-      // 3. 深度洞察与行业研判 (Insight)
+      // 2. 深度洞察与行业研判 (Insight)
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh)
         : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh);
@@ -4147,7 +4148,7 @@
           : '[Strategic Insight] Highlights the strategic transition towards enterprise integration and sustainable business value.';
       }
 
-      // 写入 DOM 节点 (信源仅在标题栏呈现，正文杜绝冗余)
+      // 写入 DOM 节点 (信源仅在标题栏呈现，正文杜绝冗余；六要素自然融合在正文中，不搞机械卡片)
       const modal = document.getElementById('ai-news-modal');
       const badgeEl = document.getElementById('ai-modal-badge');
       const sourceTagEl = document.getElementById('ai-modal-source-tag');
@@ -4155,7 +4156,6 @@
       const titleEl = document.getElementById('ai-modal-title');
       const briefingTitleEl = document.getElementById('ai-modal-briefing-title');
       const summaryEl = document.getElementById('ai-modal-summary-text');
-      const elementsGridEl = document.getElementById('ai-modal-elements-grid');
       const insightTitleEl = document.getElementById('ai-modal-insight-title');
       const insightEl = document.getElementById('ai-modal-insight-text');
       const sourceBtnEl = document.getElementById('ai-modal-source-btn');
@@ -4165,50 +4165,8 @@
       if (sourceTagEl) sourceTagEl.textContent = `${t.sourceLabel || '信源:'} ${source}`;
       if (timeTagEl) timeTagEl.textContent = `🕒 ${timeObj.relative || timeObj.display}`;
       if (titleEl) titleEl.textContent = cleanTitle;
-      if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive 5W1H Briefing');
+      if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive News Briefing');
       if (summaryEl) summaryEl.textContent = briefingText;
-
-      // 渲染 4 个要素卡片 (Who, Where, What, Why)
-      if (elementsGridEl) {
-        const labels = isZh ? {
-          who: '核心主体 (Who)',
-          where: '事件场景 (Where)',
-          what: '关键举措 (What)',
-          why: '起因动因 (Why)'
-        } : {
-          who: 'Key Actor (Who)',
-          where: 'Venue / Context (Where)',
-          what: 'Key Action (What)',
-          why: 'Core Motivation (Why)'
-        };
-
-        elementsGridEl.innerHTML = `
-          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1">
-            <span class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1">
-              <span>👤</span> ${labels.who}
-            </span>
-            <span class="text-xs text-slate-800 dark:text-slate-200 leading-snug font-medium">${escapeHtml(who)}</span>
-          </div>
-          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1">
-            <span class="text-[11px] font-bold text-sky-600 dark:text-sky-400 flex items-center gap-1">
-              <span>📍</span> ${labels.where}
-            </span>
-            <span class="text-xs text-slate-800 dark:text-slate-200 leading-snug">${escapeHtml(where)}</span>
-          </div>
-          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1 sm:col-span-2">
-            <span class="text-[11px] font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">
-              <span>⚡</span> ${labels.what}
-            </span>
-            <span class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${escapeHtml(what)}</span>
-          </div>
-          <div class="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 flex flex-col space-y-1 sm:col-span-2">
-            <span class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
-              <span>🎯</span> ${labels.why}
-            </span>
-            <span class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${escapeHtml(why)}</span>
-          </div>
-        `;
-      }
 
       if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '深度洞察与行业研判' : 'In-Depth Strategic Insight');
       if (insightEl) insightEl.textContent = insightText;
