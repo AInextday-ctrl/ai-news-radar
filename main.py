@@ -38,6 +38,7 @@ def generate_sitemap():
     """Dynamically generate fresh multilingual sitemap.xml adhering strictly to Google sitemaps.org standard."""
     now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
@@ -709,6 +710,13 @@ def run_pipeline():
     # 6. 存储增量融合后的完整大库
     save_news(cleaned_items)
     
+    # 7. 自动触发微信公众号爆款资讯筛选与内联排版引擎
+    try:
+        from wechat_engine import generate_daily_wechat_digest
+        generate_daily_wechat_digest(cleaned_items, top_k=3)
+    except Exception as wechat_err:
+        print(f"⚠️ 生成微信公众号精选排版时出现异常: {wechat_err}")
+
     end_time = datetime.now()
     duration = (end_time - start_time).total_seconds()
     print(f"✨ 增量更新与历史合并全流程执行完毕，耗时: {duration:.2f} 秒\n")
