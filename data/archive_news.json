@@ -1,7 +1,296 @@
 {
-  "updated_at": "2026-09-17T08:42:05.976740+00:00",
-  "total_count": 354,
+  "updated_at": "2026-09-17T08:55:29.305641+00:00",
+  "total_count": 357,
   "items": [
+    {
+      "id": "threads_bilawalsidhu_sam3d_splatting",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "is_viral": true,
+      "platform": "threads",
+      "author": "Bilawal Sidhu",
+      "author_handle": "@bilawal.ai",
+      "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=bilawal_threads",
+      "url": "https://www.threads.net/@bilawal.ai",
+      "title": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间",
+      "title_en": "Meta SAM 3D & 3D Gaussian Splatting Leap: Reconstructing Photorealistic 3D Spaces from a Single Phone Photo",
+      "title_zh": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间",
+      "quote_zh": "空间智能正在跨越二维像素的局限。SAM 3D 让计算机不仅看见图像，更能理解现实世界的几何深度与物理遮挡关系。",
+      "quote_en": "Spatial intelligence is breaking through 2D pixel limits. SAM 3D enables machines to comprehend real-world depth and physical occlusion.",
+      "full_text_zh": "我们在空间智能（Spatial Intelligence）上见证了重大突破！\n\n过去用摄影测量或高斯泼溅（3DGS）重建一个房间需要拍几百张照片，渲染耗费数小时。而 Meta 最新发布的 SAM 3D 与神经辐射场结合后：\n\n📌 仅凭单张普通 iPhone 抓拍的照片，AI 就能自动推断未拍摄的遮挡背面；\n📌 结合 3D Gaussian Splatting，在浏览器端就能以 90fps 流畅自由漫游；\n📌 边缘反光、玻璃折射与金属粗糙度还原度惊人，直接打通了向 VR/AR 与物理仿真引擎的导出管道。\n\n这意味着现实世界的数字化成本彻底跌到了人人可用的门槛。技术细节见下方连推：",
+      "full_text_en": "A massive milestone in Spatial Intelligence!\n\nPreviously, reconstructing a room with photogrammetry or 3D Gaussian Splatting (3DGS) required hundreds of captures and hours of compute. With Meta's new SAM 3D fused with neural radiance:\n\n📌 A single iPhone photo lets the AI infer hidden occlusions and depth geometry;\n📌 Rendered in-browser with 3D Gaussian Splatting at smooth 90fps interactive speeds;\n📌 Specular highlights, reflections, and roughness are preserved seamlessly for VR/AR.\n\nDetails and interactive demo breakdown below👇",
+      "raw_published_at": "2026-09-16T08:50:39.526188+00:00",
+      "metrics": {
+        "views": "2.9k",
+        "likes": "164",
+        "comments": "38",
+        "retweets": "19"
+      },
+      "surge_badge": "🧵 Threads 极客推荐 (Likes>160 / 空间智能)",
+      "spec_tags": [
+        "ThreadsAI",
+        "3DGaussianSplatting",
+        "SAM3D",
+        "空间计算"
+      ],
+      "spec_tags_en": [
+        "ThreadsAI",
+        "3DGaussianSplatting",
+        "SAM3D",
+        "SpatialComputing"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1633493106185-5b8ebfa4a07f?w=800&q=80",
+      "thread_replies": [
+        {
+          "step": "1/2",
+          "author": "Bilawal Sidhu",
+          "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=bilawal_threads",
+          "content_zh": "核心突破在于 SAM 3D 的先验深度大模型。传统 NeRF 遇到单张图会产生严重的“空洞拉伸”，而新模型通过物理世界的几何先验预训练，直接把不可见区域合理补全为物理真实的 3D 点云网格。",
+          "content_en": "The core breakthrough lies in SAM 3D's depth prior foundation model. Unlike traditional NeRF which stretches into empty space, the model completes unobserved occlusions using geometric priors into true 3D point cloud meshes.",
+          "image_url": "https://images.unsplash.com/photo-1633493106185-5b8ebfa4a07f?w=800&q=80",
+          "time_zh": "5小时前",
+          "time_en": "5h ago",
+          "likes": "112"
+        },
+        {
+          "step": "2/2",
+          "author": "Bilawal Sidhu",
+          "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=bilawal_threads",
+          "content_zh": "我们在 Vision Pro 与 WebGPU 上进行了对比跑分：单张 4K 输入仅需 1.8 秒即可完成高斯拟合，显存占用不足 1.2GB，完全可以部署到移动端！",
+          "content_en": "Tested on Vision Pro and WebGPU: 4K input fits into Gaussians in 1.8 seconds with under 1.2GB VRAM. Mobile spatial computing is finally here.",
+          "time_zh": "4小时前",
+          "time_en": "4h ago",
+          "likes": "86"
+        }
+      ],
+      "comments_list": [
+        {
+          "author": "SpatialDev",
+          "handle": "@spatialdev",
+          "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=spatialdev",
+          "content_zh": "单图 3DGS 绝对是今年空间智能最重要的里程碑，室内设计和游戏场景资产生成要变天了。",
+          "content_en": "Single-image 3DGS is hands down the biggest spatial AI breakthrough this year. Game dev assets will never be the same.",
+          "likes": "27",
+          "time": "4小时前",
+          "time_en": "4h ago"
+        }
+      ],
+      "trend_type": "surging",
+      "summary_zh": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间",
+      "summary_en": "",
+      "hot_score": 3,
+      "tags": [
+        "AI快讯"
+      ],
+      "ai_analysis": {
+        "briefing_zh": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间。  行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, Meta (扎克伯格团队) advanced a key development: Meta SAM 3D & 3D Gaussian Splatting Leap: Reconstructing Photorealistic 3D Spaces from a Single Phone Photo. Context: 行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "elements_zh": {
+          "who": "Meta (扎克伯格团队)",
+          "where": "全球产业与技术前沿一线",
+          "what": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间",
+          "why": "行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "elements_en": {
+          "who": "Meta (扎克伯格团队)",
+          "where": "全球产业与技术前沿一线",
+          "what": "Meta SAM 3D & 3D Gaussian Splatting Leap: Reconstructing Photorealistic 3D Spaces from a Single Phone Photo",
+          "why": "行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "insight_zh": "围绕“Meta SAM 3D 与 3D Gaussian”，Meta正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": "Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间。  行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "digest_en": "Executive Briefing: In 全球产业与技术前沿一线, Meta (扎克伯格团队) announced: Meta SAM 3D & 3D Gaussian Splatting Leap: Reconstructing Photorealistic 3D Spaces from a Single Phone Photo.",
+        "key_points_zh": [
+          "主体与场景：Meta (扎克伯格团队)在全球产业与技术前沿一线",
+          "核心事实：Meta SAM 3D 与 3D Gaussian Splatting 跨越式演进：单张手机照片秒级重建逼真 3D 空间",
+          "动因背景：行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "key_points_en": [
+          "Actor & Context: Meta (扎克伯格团队) in 全球产业与技术前沿一线",
+          "Key Action: Meta SAM 3D & 3D Gaussian Splatting Leap: Reconstructing Photorealistic 3D Spaces from a Single Phone Photo",
+          "Motivation: 行业核心力量围绕“Meta SAM 3D 与 3D Gauss”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "takeaway_zh": "围绕“Meta SAM 3D 与 3D Gaussian”，Meta正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+      },
+      "is_recent_24h": false,
+      "is_pinned": false
+    },
+    {
+      "id": "threads_generative_ui_react",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "is_viral": true,
+      "platform": "threads",
+      "author": "Frontend Ninja",
+      "author_handle": "@frontend_ninja",
+      "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=frontend_ninja",
+      "url": "https://www.threads.net/@frontend_ninja",
+      "title": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件",
+      "title_en": "Generative UI in Production: Streaming Interactive React Components Directly from LLM Tool Calls",
+      "title_zh": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件",
+      "quote_zh": "未来的用户界面不再由前端工程师提前把所有按钮焊死在页面上，而是由 AI 根据对话意图动态组装并渲染出最合适的小组件。",
+      "quote_en": "Future UIs won't have buttons hardcoded beforehand; AI dynamically composes and renders the exact interactive widgets needed on the fly.",
+      "full_text_zh": "在 Threads 分享我们刚上线生产环境的 Generative UI 极简实现：\n\n📌 当用户问‘帮我对比这两款车的参数’，模型不再输出冗长的纯文本或 Markdown 表格；\n📌 而是直接触发 `render_comparison_card` 工具，前端接收 JSON 流式数据，毫秒级水合（Hydrate）出带筛选、滑块和雷达图的交互式 React 组件；\n📌 用户可直接在组件内点击下单或切换参数！\n\n开源 Demo 与组件协议在下方跟帖：",
+      "full_text_en": "Sharing our production Generative UI implementation on Threads:\n\n📌 Ask 'Compare these two cars', and instead of markdown text, the model triggers `render_comparison_card`;\n📌 Next.js streams JSON tool calls, hydrating interactive React sliders and radar charts instantly;\n📌 Users interact, filter, and checkout right within the dynamically rendered widget!\n\nOpen source demo & protocol below👇",
+      "raw_published_at": "2026-09-16T08:48:30.982458+00:00",
+      "metrics": {
+        "views": "4.5k",
+        "likes": "260",
+        "comments": "56",
+        "retweets": "38",
+        "platform": "threads",
+        "verified": true
+      },
+      "trend_type": "surging",
+      "surge_badge": "🚀 极速飙升黑马 (Threads前端热榜 Top 1)",
+      "spec_tags": [
+        "ThreadsAI",
+        "GenerativeUI",
+        "React",
+        "Nextjs",
+        "前端革新"
+      ],
+      "spec_tags_en": [
+        "ThreadsAI",
+        "GenerativeUI",
+        "React",
+        "Nextjs",
+        "FrontendRevolution"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
+      "thread_replies": [
+        {
+          "step": "1/2",
+          "author": "Frontend Ninja",
+          "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=frontend_ninja",
+          "content_zh": "【核心协议架构】\n采用 Vercel AI SDK 的 `toolCallStreaming`，利用 Zod 校验 Schema，确保模型返回的 props 具备 100% 类型安全，杜绝前端白屏崩溃。",
+          "content_en": "[Protocol Architecture]\nPowered by Vercel AI SDK `toolCallStreaming` + Zod schemas, guaranteeing 100% type-safe props to prevent runtime white-screen crashes.",
+          "image_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80",
+          "time_zh": "6小时前",
+          "time_en": "6h ago",
+          "likes": "165"
+        }
+      ],
+      "comments_list": [
+        {
+          "author": "React Dev Leo",
+          "handle": "@leo_react",
+          "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=leo_react",
+          "content_zh": "这种动态组件才是人机交互的未来形态，文本聊天窗口早该淘汰了！",
+          "content_en": "Dynamic streaming widgets are the future of human-computer interaction. Pure text chats are obsolete.",
+          "likes": "48",
+          "time": "5小时前",
+          "time_en": "5h ago"
+        }
+      ],
+      "summary_zh": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件",
+      "summary_en": "",
+      "hot_score": 3,
+      "tags": [
+        "AI快讯"
+      ],
+      "ai_analysis": {
+        "briefing_zh": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件。  降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+        "briefing_en": "Executive Briefing: In 全球大模型开源社区与技术研发一线, Frontend Ninja advanced a key development: Generative UI in Production: Streaming Interactive React Components Directly from LLM Tool Calls. Context: 降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+        "elements_zh": {
+          "who": "Frontend Ninja",
+          "where": "全球大模型开源社区与技术研发一线",
+          "what": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件",
+          "why": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+        },
+        "elements_en": {
+          "who": "Frontend Ninja",
+          "where": "全球大模型开源社区与技术研发一线",
+          "what": "Generative UI in Production: Streaming Interactive React Components Directly from LLM Tool Calls",
+          "why": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+        },
+        "insight_zh": "围绕“Generative UI 生成式前端实操：让大模”，科技巨头正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": "Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件。  降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+        "digest_en": "Executive Briefing: In 全球大模型开源社区与技术研发一线, Frontend Ninja announced: Generative UI in Production: Streaming Interactive React Components Directly from LLM Tool Calls.",
+        "key_points_zh": [
+          "主体与场景：Frontend Ninja在全球大模型开源社区与技术研发一线",
+          "核心事实：Generative UI 生成式前端实操：让大模型直接流式吐出交互式 React 组件",
+          "动因背景：降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+        ],
+        "key_points_en": [
+          "Actor & Context: Frontend Ninja in 全球大模型开源社区与技术研发一线",
+          "Key Action: Generative UI in Production: Streaming Interactive React Components Directly from LLM Tool Calls",
+          "Motivation: 降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
+        ],
+        "takeaway_zh": "围绕“Generative UI 生成式前端实操：让大模”，科技巨头正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+      },
+      "is_recent_24h": false,
+      "is_pinned": false
+    },
+    {
+      "id": "2a82c2edb7de9a98",
+      "title": "Why the US and China are at odds on AI threats",
+      "title_en": "Why the US and China are at odds on AI threats",
+      "url": "https://www.ft.com/content/83023f2f-0c12-4239-bf27-99d8e378ec5d?syn-25a6b1a6=1",
+      "image_url": null,
+      "source": "Financial Times",
+      "author": "Financial Times",
+      "author_handle": "",
+      "author_avatar": "",
+      "platform": "web",
+      "raw_published_at": "2026-09-16T08:43:55+00:00",
+      "metrics": {
+        "platform": "web",
+        "likes": "38.2k",
+        "retweets": "5.6k",
+        "comments": "1.8k",
+        "views": "156.8k"
+      },
+      "spec_tags": [],
+      "content_snippet": "Why the US and China are at odds on AI threats&nbsp;&nbsp;Financial Times",
+      "summary_en": "Why the US and China are at odds on AI threats&nbsp;&nbsp;Financial Times",
+      "category": "news",
+      "tags": [
+        "Financial Times",
+        "今日要闻"
+      ],
+      "title_zh": "为什么美国和中国在人工智能威胁上存在分歧",
+      "summary_zh": "为什么美国和中国在人工智能威胁上存在分歧",
+      "hot_score": 3,
+      "ai_analysis": {
+        "briefing_zh": "为什么美国和中国在人工智能威胁上存在分歧。  行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, 为什么美国和中国在人工智能威胁 advanced a key development: Why the US and China are at odds on AI threats. Context: 行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "elements_zh": {
+          "who": "为什么美国和中国在人工智能威胁",
+          "where": "全球产业与技术前沿一线",
+          "what": "为什么美国和中国在人工智能威胁上存在分歧",
+          "why": "行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "elements_en": {
+          "who": "为什么美国和中国在人工智能威胁",
+          "where": "全球产业与技术前沿一线",
+          "what": "Why the US and China are at odds on AI threats",
+          "why": "行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "insight_zh": "围绕“为什么美国和中国在人工智能威胁上存在分歧”，科技巨头正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": "为什么美国和中国在人工智能威胁上存在分歧。  行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "digest_en": "Executive Briefing: In 全球产业与技术前沿一线, 为什么美国和中国在人工智能威胁 announced: Why the US and China are at odds on AI threats.",
+        "key_points_zh": [
+          "主体与场景：为什么美国和中国在人工智能威胁在全球产业与技术前沿一线",
+          "核心事实：为什么美国和中国在人工智能威胁上存在分歧",
+          "动因背景：行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "key_points_en": [
+          "Actor & Context: 为什么美国和中国在人工智能威胁 in 全球产业与技术前沿一线",
+          "Key Action: Why the US and China are at odds on AI threats",
+          "Motivation: 行业核心力量围绕“为什么美国和中国在人工智能威胁上存在分歧”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "takeaway_zh": "围绕“为什么美国和中国在人工智能威胁上存在分歧”，科技巨头正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。",
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+      },
+      "is_recent_24h": false,
+      "is_pinned": false
+    },
     {
       "id": "16322d0f5b6f310c",
       "title": "Why Trump is all-in on AI despite the warnings",
