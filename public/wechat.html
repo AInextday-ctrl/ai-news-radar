@@ -101,18 +101,18 @@
       <!-- 快捷操作工具条 -->
       <div class="bg-slate-800/90 border border-slate-700/80 rounded-xl p-4 flex flex-wrap items-center justify-between gap-3 shadow-lg">
         <div class="flex items-center flex-wrap gap-2">
-          <button id="copyMdBtn" onclick="copyActiveArticleMarkdown()" class="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-emerald-900/40 flex items-center gap-2 border border-emerald-400/30">
-            <span>⚡ 一键复制 Markdown (免掉格式·强烈推荐)</span>
+          <button id="copyAllHtmlBtn" onclick="copyActiveArticleHtml()" class="bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-white font-bold px-4 py-2.5 rounded-lg text-sm transition shadow-lg shadow-emerald-900/50 flex items-center gap-2 border border-emerald-400/40" title="复制包含高保真色彩、卡片底色与数据对比表的完整微信排版">
+            <span>🟢 一键复制微信排版 (直接粘贴进微信后台)</span>
           </button>
-          <a href="https://editor.mdnice.com/" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-3.5 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 shadow-md">
-            <span>👉 打开 MDNice ↗</span>
-          </a>
-          <button id="copyAllHtmlBtn" onclick="copyActiveArticleHtml()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-600" title="复制原生内联 HTML 格式">
-            <span>🟢 复制原生 HTML (备用)</span>
-          </button>
-          <button onclick="copyCurrentHeadline()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-700">
+          <button onclick="copyCurrentHeadline()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-600">
             <span>🏷️ 复制主标题</span>
           </button>
+          <button id="copyMdBtn" onclick="copyActiveArticleMarkdown()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold px-3 py-2.5 rounded-lg text-sm transition flex items-center gap-1.5 border border-slate-700" title="复制原始 Markdown，仅用于导入 MDNice 等第三方排版工具">
+            <span>📝 复制 Markdown (备用·供MDNice)</span>
+          </button>
+          <a href="https://editor.mdnice.com/" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-slate-200 px-2.5 py-2.5 rounded-lg text-xs transition flex items-center gap-1 border border-slate-700">
+            <span>MDNice ↗</span>
+          </a>
         </div>
 
         <div class="flex items-center gap-2 text-xs">
@@ -125,23 +125,30 @@
         </div>
       </div>
 
-      <!-- 3步无损排版指引横幅 -->
-      <div class="bg-gradient-to-r from-emerald-950/40 via-slate-900/60 to-blue-950/40 border border-emerald-700/40 rounded-xl p-3.5 text-xs text-slate-300 shadow-sm">
-        <div class="flex items-center gap-2 font-bold text-emerald-400 mb-2 text-sm">
-          <span>🚀</span> <span>微信排版 100% 不掉色·不挤字极速 3 步指南：</span>
+      <!-- 极速直贴指南与核心避坑提示 -->
+      <div class="bg-slate-800/90 border-2 border-emerald-500/50 rounded-xl p-4 text-xs shadow-lg space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2 font-bold text-emerald-400 text-sm">
+            <span>🚀</span> <span>微信公众号 1 键极速直贴指南 (不掉色·不塌陷·零第三方依赖)：</span>
+          </div>
+          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded font-bold">100% 微信原生白名单规范</span>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-slate-300">
-          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
-            <span class="bg-emerald-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">1</span>
-            <div>点击上方 <strong class="text-emerald-400">⚡ 复制 Markdown</strong></div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300 pt-1">
+          <div class="bg-slate-900/90 p-3 rounded-lg border border-slate-700/70">
+            <div class="font-bold text-slate-100 flex items-center gap-1.5 mb-1 text-[13px]">
+              <span class="bg-emerald-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">1</span>
+              <span>点击上方【🟢 一键复制微信排版】</span>
+            </div>
+            <p class="text-slate-400 text-[11.5px] leading-relaxed">系统已将完整的背景色卡片、指标徽章、数据对比表以原生微信规范写入剪贴板。</p>
           </div>
-          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
-            <span class="bg-blue-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">2</span>
-            <div>点击 <strong class="text-blue-400">👉 打开 MDNice ↗</strong> 粘贴内容，在右上角任意挑选喜欢的主题</div>
-          </div>
-          <div class="bg-slate-800/80 p-2.5 rounded-lg border border-slate-700/60 flex items-start gap-2">
-            <span class="bg-teal-600 text-white font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 text-xs">3</span>
-            <div>点击 MDNice 右上角 <strong class="text-teal-300">复制到公众号</strong>，Ctrl+V 粘贴进微信后台！</div>
+          <div class="bg-slate-900/90 p-3 rounded-lg border border-amber-600/40">
+            <div class="font-bold text-amber-300 flex items-center gap-1.5 mb-1 text-[13px]">
+              <span class="bg-amber-600 text-white w-4 h-4 rounded-full flex items-center justify-center text-[10px]">2</span>
+              <span>直接 Ctrl+V 粘贴进微信编辑区</span>
+            </div>
+            <p class="text-amber-200/90 text-[11.5px] leading-relaxed font-medium">
+              ⚠️ <strong class="underline decoration-amber-400">避坑关键</strong>：若微信后台弹出“检测到 Markdown 语法是否转换？”，<strong class="text-white bg-amber-600/60 px-1 rounded">请务必点击【取消 / 忽略】</strong>！点击转换会导致微信将彩色排版重置为黑白纯文本！
+            </p>
           </div>
         </div>
       </div>
@@ -625,7 +632,7 @@
       }
 
       if (copied) {
-        showToast("✓ 微信公众号高保真排版已复制！直接在微信后台 Ctrl+V 粘贴即可");
+        showToast("✓ 已复制高保真微信排版！直接 Ctrl+V 粘贴进微信后台（若微信提示转换Markdown请选【取消】）");
       } else {
         selectAllArticleContent();
       }

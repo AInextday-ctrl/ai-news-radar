@@ -1422,13 +1422,24 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
         for entry in feed.entries:
             title = entry.get("title", "").strip()
             summary = entry.get("summary", "")
-            clean_summary = re.sub(r'<[^>]+>', '', summary).strip()
+            
+            # 提取真实直达官网链接 (<a href="https://www.producthunt.com/r/p/...">Link</a>)
+            outbound_match = re.search(r'href="([^"]+)"[^>]*>Link</a>', summary, re.IGNORECASE)
+            official_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
+            source_url = entry.get("link", "")
+
+            # 彻底清洗 RSS 摘要，杜绝 Discussion | Link 乱码
+            clean_summary = re.sub(r'<[^>]+>', '', summary)
+            clean_summary = re.sub(r'Discussion\s*\|\s*Link', '', clean_summary, flags=re.IGNORECASE)
+            clean_summary = re.sub(r'Discussion\s*\|', '', clean_summary, flags=re.IGNORECASE)
+            clean_summary = re.sub(r'\|\s*Link', '', clean_summary, flags=re.IGNORECASE)
+            clean_summary = re.sub(r'\s+', ' ', clean_summary).strip()
             combined = f"{title} {clean_summary}".lower()
 
             if not any(k in combined for k in ai_keywords):
                 continue
 
-            link = entry.get("link", "")
+            link = official_url
 
             scenario = "🤖 智能体/工作流"
             icon_type = "agent"
@@ -1464,8 +1475,17 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             title_fmt = f"【{app_name}】{hook}"
             title_en = f"[{app_name}] {hook}"
 
+            scenario_img_map = {
+                "vision": ["https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80"],
+                "code": ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1000&auto=format&fit=crop&q=80"],
+                "agent": ["https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1000&auto=format&fit=crop&q=80"],
+                "audio": ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1000&auto=format&fit=crop&q=80"],
+                "chat": ["https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1000&auto=format&fit=crop&q=80"]
+            }
+            preview_imgs = scenario_img_map.get(icon_type, scenario_img_map["agent"])
+
             items.append({
-                "id": make_id(link, title),
+                "id": make_id(source_url, title),
                 "title": title_fmt,
                 "title_zh": title_fmt,
                 "title_en": title_en,
@@ -1473,8 +1493,24 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 "app_name_en": app_name,
                 "app_hook": hook,
                 "app_hook_en": hook,
-                "url": link,
-                "image_url": None,
+                "url": official_url,
+                "official_url": official_url,
+                "source_url": source_url,
+                "preview_images": preview_imgs,
+                "image_url": preview_imgs[0],
+                "rank_badge": "🔥 Product Hunt 热门精选",
+                "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",
+                "overview_en": f"{app_name} is an innovative practical tool designed for {scenario}. {hook}.",
+                "features_zh": [
+                    f"针对 {scenario} 场景深度调优与工程封装",
+                    f"支持 {runtime_badge}，开箱即用",
+                    "结构化操作界面，极简人机交互体验"
+                ],
+                "features_en": [
+                    f"Specialized optimization for {scenario}",
+                    f"Native support for {runtime_badge}",
+                    "Intuitive modern user interface for daily productivity"
+                ],
                 "source": "Product Hunt",
                 "author": "Product Hunt",
                 "raw_published_at": iso_time,

@@ -682,8 +682,8 @@ def build_hardcore_evidence_table(item: Dict[str, Any], article_data: Dict[str, 
 def render_evidence_table_html(table_data: Dict[str, Any]) -> str:
     """
     Render 100% WeChat-compatible mobile responsive data cards and summary table.
-    - Zero fake class="135editor" / data-tools="135editor" to prevent WeChat server filter stripping.
-    - Zero layout tables: Card metrics use clean Flexbox/inline-blocks to prevent WeChat table border hijacking.
+    - Zero div tags: 100% pure <section> containers to completely bypass WeChat div-to-p stripping.
+    - Zero flexbox: metrics use classical inline-block layout to bypass UEditor flex/gap purge.
     - Flat DOM structure to prevent WeChat deep nesting flattening.
     - 3-Column Golden Table with explicit cell styling for the data overview.
     """
@@ -701,21 +701,21 @@ def render_evidence_table_html(table_data: Dict[str, Any]) -> str:
     html = []
 
     # 1. 主容器：纯内联样式，遵从微信排版标准
-    html.append('<section style="margin: 24px 0; box-sizing: border-box;">')
+    html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
 
     # 2. 顶部深蓝科技标题条
     html.append(
-        f'<div style="background-color: #1e3a8a; border-radius: 6px 6px 0 0; padding: 12px 14px; box-sizing: border-box;">'
+        f'<section style="background-color: #1e3a8a; padding: 12px 14px; box-sizing: border-box;">'
         f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">{title}</p>'
     )
     if subtitle:
         html.append(
             f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #bfdbfe; line-height: 1.4;">{subtitle}</p>'
         )
-    html.append('</div>')
+    html.append('</section>')
 
-    # 3. 矩阵对比卡片库 (无任何嵌套 table，纯 flex 布局，微信绝对不加默认灰色边框)
-    html.append('<div style="background-color: #f8fafc; border: 1px solid #cbd5e1; border-top: none; border-radius: 0 0 6px 6px; padding: 14px 12px; box-sizing: border-box;">')
+    # 3. 矩阵对比卡片库 (无任何嵌套 table，纯 inline-block 布局，微信绝对不剥离样式)
+    html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
     for r in rows:
         is_hl = r.get("highlight", False)
         name = r.get("name", "")
@@ -727,69 +727,69 @@ def render_evidence_table_html(table_data: Dict[str, Any]) -> str:
         if is_hl:
             # 优选高光卡片 (绿色高饱和度)
             html.append(
-                f'<div style="margin: 0 0 12px 0; background-color: #f0fdf4; border: 2px solid #16a34a; border-radius: 6px; padding: 12px 14px; box-sizing: border-box;">'
-                f'  <div style="margin-bottom: 8px;">'
+                f'<section style="margin: 0 0 12px 0; background-color: #f0fdf4; border: 2px solid #16a34a; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                f'  <section style="margin-bottom: 8px; box-sizing: border-box;">'
                 f'    <span style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 11px; font-weight: bold; padding: 2px 7px; border-radius: 4px; vertical-align: middle;">{badge}</span>'
                 f'    <strong style="font-size: 15px; color: #14532d; vertical-align: middle; margin-left: 6px;">{name}</strong>'
                 f'    <span style="float: right; font-size: 11px; font-weight: bold; color: #15803d; background-color: #dcfce7; padding: 2px 6px; border-radius: 4px; border: 1px solid #86efac;">{tag}</span>'
-                f'    <div style="clear: both;"></div>'
-                f'  </div>'
+                f'    <section style="clear: both;"></section>'
+                f'  </section>'
             )
             if metrics:
                 html.append(
-                    f'  <div style="display: flex; gap: 6px; margin: 8px 0; background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 6px; padding: 8px 4px; box-sizing: border-box;">'
+                    f'  <section style="margin: 8px 0; background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 4px; padding: 8px 2px; box-sizing: border-box; text-align: center;">'
                 )
                 for m_idx, m in enumerate(metrics):
                     border_right = "border-right: 1px solid #dcfce7;" if m_idx < len(metrics) - 1 else ""
                     m_color = m.get("color", "#16a34a")
                     html.append(
-                        f'    <div style="flex: 1; text-align: center; {border_right} padding: 0 2px;">'
-                        f'      <div style="font-size: 10.5px; color: #64748b; margin-bottom: 2px;">{m.get("label", "")}</div>'
-                        f'      <div style="font-size: 14px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</div>'
-                        f'      <div style="font-size: 10px; color: #94a3b8; margin-top: 1px;">{m.get("sub", "")}</div>'
-                        f'    </div>'
+                        f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
+                        f'      <p style="margin: 0 0 2px 0; font-size: 10.5px; color: #64748b;">{m.get("label", "")}</p>'
+                        f'      <p style="margin: 0; font-size: 14px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
+                        f'      <p style="margin: 1px 0 0 0; font-size: 10px; color: #94a3b8;">{m.get("sub", "")}</p>'
+                        f'    </section>'
                     )
-                html.append('  </div>')
+                html.append('  </section>')
             if card_highlight:
                 html.append(
                     f'  <p style="margin: 8px 0 0 0; padding-top: 8px; border-top: 1px dashed #bbf7d0; font-size: 11.5px; color: #166534; line-height: 1.55; text-align: justify;">'
                     f'    💡 <strong>核心亮点</strong>：{card_highlight}'
                     f'  </p>'
                 )
-            html.append('</div>')
+            html.append('</section>')
         else:
             # 对照卡片 (浅灰/蓝灰清爽风格)
             html.append(
-                f'<div style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #64748b; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
-                f'  <div style="margin-bottom: 6px;">'
+                f'<section style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #64748b; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
+                f'  <section style="margin-bottom: 6px; box-sizing: border-box;">'
                 f'    <span style="display: inline-block; background-color: #64748b; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">{badge}</span>'
                 f'    <strong style="font-size: 13.5px; color: #1e293b; vertical-align: middle; margin-left: 6px;">{name}</strong>'
                 f'    <span style="float: right; font-size: 10.5px; color: #475569; background-color: #f1f5f9; padding: 1px 6px; border-radius: 3px; border: 1px solid #cbd5e1;">{tag}</span>'
-                f'    <div style="clear: both;"></div>'
-                f'  </div>'
+                f'    <section style="clear: both;"></section>'
+                f'  </section>'
             )
             if metrics:
                 html.append(
-                    f'  <div style="display: flex; gap: 6px; margin: 6px 0; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 7px 4px; box-sizing: border-box;">'
+                    f'  <section style="margin: 6px 0; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 7px 2px; box-sizing: border-box; text-align: center;">'
                 )
                 for m_idx, m in enumerate(metrics):
                     border_right = "border-right: 1px solid #f1f5f9;" if m_idx < len(metrics) - 1 else ""
                     m_color = m.get("color", "#334155")
                     html.append(
-                        f'    <div style="flex: 1; text-align: center; {border_right} padding: 0 2px;">'
-                        f'      <div style="font-size: 10px; color: #64748b; margin-bottom: 1px;">{m.get("label", "")}</div>'
-                        f'      <div style="font-size: 12px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</div>'
-                        f'      <div style="font-size: 9.5px; color: #94a3b8;">{m.get("sub", "")}</div>'
-                        f'    </div>'
+                        f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
+                        f'      <p style="margin: 0 0 1px 0; font-size: 10px; color: #64748b;">{m.get("label", "")}</p>'
+                        f'      <p style="margin: 0; font-size: 12px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
+                        f'      <p style="margin: 0; font-size: 9.5px; color: #94a3b8;">{m.get("sub", "")}</p>'
+                        f'    </section>'
                     )
-                html.append('  </div>')
-            html.append('</div>')
+                html.append('  </section>')
+            html.append('</section>')
 
     # 4. 极简 3 列横向速查总表 (单层标准 table，微信完美兼容)
     html.append(
-        '<div style="margin-top: 14px; box-sizing: border-box;">'
+        '<section style="margin-top: 14px; box-sizing: border-box;">'
         '  <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #1e293b;">📋 核心指标横向速查一览表</p>'
-        '  <table style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 11.5px; text-align: center; background-color: #ffffff; margin: 0; box-sizing: border-box;">'
+        '  <table style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 11.5px; text-align: center; background-color: #ffffff; margin: 0; box-sizing: border-box; table-layout: fixed;">'
         '    <thead>'
         '      <tr style="background-color: #f1f5f9; color: #1e293b;">'
     )
@@ -839,34 +839,35 @@ def render_evidence_table_html(table_data: Dict[str, Any]) -> str:
     html.append(
         '    </tbody>'
         '  </table>'
-        '</div>'
+        '</section>'
     )
 
     # 5. 核心测算结论
     if conclusion:
         html.append(
-            f'<div style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 12px 14px; margin-top: 14px; box-sizing: border-box;">'
+            f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 14px; box-sizing: border-box;">'
             f'  <p style="margin: 0; font-size: 12.5px; color: #334155; line-height: 1.7; text-align: justify;">{conclusion}</p>'
             f'  <p style="margin: 6px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 官方 API 开发文档费率与行业基准综合测算 · AI 资讯雷达工程测算室</p>'
-            f'</div>'
+            f'</section>'
         )
 
     # 6. 深度技术与决策卡片
     if detail_cards:
-        html.append('<div style="margin-top: 14px; box-sizing: border-box;">')
+        html.append('<section style="margin-top: 14px; box-sizing: border-box;">')
         for card in detail_cards:
             c_title = card.get("title", "")
             c_content = card.get("content", "")
             html.append(
-                f'<div style="background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; box-sizing: border-box;">'
+                f'<section style="background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; box-sizing: border-box;">'
                 f'  <p style="margin: 0 0 4px 0; font-size: 12.5px; font-weight: bold; color: #1d4ed8;">{c_title}</p>'
                 f'  <p style="margin: 0; font-size: 11.5px; color: #334155; line-height: 1.65; text-align: justify;">{c_content}</p>'
-                f'</div>'
+                f'</section>'
             )
-        html.append('</div>')
+        html.append('</section>')
 
-    html.append('</div>')   # 闭合内部卡片库
-    html.append('</section>') # 闭合主容器
+    html.append('</section>')
+    html.append('</section>')
+
     return "".join(html)
 
 
@@ -1421,21 +1422,21 @@ def render_wechat_inline_html(
         '<section style="box-sizing: border-box; font-size: 15px; line-height: 1.85; color: #333333; letter-spacing: 0.5px; word-break: break-word; padding: 2px 4px;">'
     )
 
-    # 1. 顶部小标与评分认证标签 (纯 Flex/浮动，绝无 table 标签，手机端绝对不塌陷)
+    # 1. 顶部小标与评分认证标签 (纯 section/浮动，绝无 table/div 标签，手机端绝对不塌陷)
     html_parts.append(
-        f'<div style="margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1; box-sizing: border-box;">'
+        f'<section style="margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1; box-sizing: border-box;">'
         f'  <span style="display: inline-block; background-color: #eff6ff; color: #2563eb; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #bfdbfe; box-sizing: border-box;">🔥 AI雷达精选 · 🛡️ 7维质检 {critic_total}分</span>'
         f'  <span style="display: inline-block; background-color: #f0fdf4; color: #16a34a; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #86efac; margin-left: 4px; box-sizing: border-box;">🔒 微信合规认证</span>'
         f'  <span style="float: right; font-size: 11.5px; color: #94a3b8; line-height: 22px;">{date_str}</span>'
-        f'  <div style="clear: both;"></div>'
-        f'</div>'
+        f'  <section style="clear: both;"></section>'
+        f'</section>'
     )
 
     # 2. 推荐主标题 (纯原生 h2 标题)
     html_parts.append(
-        f'<div style="margin: 0 0 18px 0; box-sizing: border-box;">'
+        f'<section style="margin: 0 0 18px 0; box-sizing: border-box;">'
         f'  <h2 style="font-size: 21px; font-weight: bold; color: #0f172a; line-height: 1.45; margin: 0; text-align: left; letter-spacing: 0.5px;">{main_title}</h2>'
-        f'</div>'
+        f'</section>'
     )
 
     # 3. 焦点大图卡片 (Cover Banner Image)
@@ -1452,22 +1453,22 @@ def render_wechat_inline_html(
             caption = "▲ 全球前沿 AI 技术代际跃迁与产业落地应用场景"
 
         html_parts.append(
-            f'<div style="margin: 20px 0 24px 0; text-align: center; box-sizing: border-box;">'
+            f'<section style="margin: 20px 0 24px 0; text-align: center; box-sizing: border-box;">'
             f'  <img src="{cover_image}" style="width: 100%; max-width: 100%; border-radius: 8px; display: block; margin: 0 auto; box-sizing: border-box;" alt="资讯核心视觉图" />'
             f'  <p style="margin: 8px 0 0 0; font-size: 12px; color: #94a3b8; text-align: center; line-height: 1.5;">{caption}</p>'
-            f'</div>'
+            f'</section>'
         )
 
     # 4. 黄金导读卡片 (Lead Hook Box - 单值 border-radius 4px，彻底免疫微信样式过滤)
     html_parts.append(
-        f'<div style="margin: 22px 0 24px 0; padding: 14px 16px; background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; box-sizing: border-box;">'
+        f'<section style="margin: 22px 0 24px 0; padding: 14px 16px; background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; box-sizing: border-box;">'
         f'  <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1d4ed8; letter-spacing: 1px;">'
         f'    ✦ 深度导读 · 抢先洞察 ✦'
         f'  </p>'
         f'  <p style="margin: 0; font-size: 14.5px; color: #334155; line-height: 1.8; text-align: justify; letter-spacing: 0.5px;">'
         f'    {lead_hook}'
         f'  </p>'
-        f'</div>'
+        f'</section>'
     )
 
     # 5. 正文各个分节（在第 1 小节之后插入移动端高适配横向对比数据表）
@@ -1485,10 +1486,10 @@ def render_wechat_inline_html(
             title_text = sub_title
 
         html_parts.append(
-            f'<div style="margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; box-sizing: border-box;">'
+            f'<section style="margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; box-sizing: border-box;">'
             f'  <span style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 13px; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-right: 8px; vertical-align: middle; line-height: 1.2;">{num_val}</span>'
             f'  <span style="font-size: 17px; font-weight: bold; color: #0f172a; line-height: 1.5; letter-spacing: 0.5px; vertical-align: middle;">{title_text}</span>'
-            f'</div>'
+            f'</section>'
         )
 
         for p in paragraphs:
@@ -1503,30 +1504,30 @@ def render_wechat_inline_html(
     # 6. 爆款金句卡片 (单值 border-radius 4px，微信 100% 保留背景与边框)
     if golden_takeaway:
         html_parts.append(
-            f'<div style="margin: 26px 0 22px 0; padding: 16px 18px; background-color: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 4px; box-sizing: border-box; text-align: center;">'
+            f'<section style="margin: 26px 0 22px 0; padding: 16px 18px; background-color: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 4px; box-sizing: border-box; text-align: center;">'
             f'  <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #16a34a; letter-spacing: 2px;">✦ 极客金句神评 ✦</p>'
             f'  <p style="margin: 0; font-size: 15px; font-weight: bold; color: #14532d; line-height: 1.75;">“{golden_takeaway.strip("“”")}”</p>'
-            f'</div>'
+            f'</section>'
         )
 
     # 7. 文末互动与引导 (虚线互动框)
     html_parts.append(
-        f'<div style="margin: 26px 0 20px 0; padding: 16px 18px; background-color: #f8fafc; border: 1px dashed #94a3b8; border-radius: 6px; box-sizing: border-box;">'
+        f'<section style="margin: 26px 0 20px 0; padding: 16px 18px; background-color: #f8fafc; border: 1px dashed #94a3b8; border-radius: 6px; box-sizing: border-box;">'
         f'  <p style="margin: 0 0 6px 0; font-size: 14.5px; font-weight: bold; color: #0f172a;">💬 聊聊你的看法：</p>'
         f'  <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.75; text-align: justify; margin: 0;">{interactive_ending}</p>'
-        f'</div>'
+        f'</section>'
     )
 
-    # 8. AI 7 维深度质检 & 网信安全合规双重认证卡片 (纯 flex/div 布局，绝无 table 标签)
+    # 8. AI 7 维深度质检 & 网信安全合规双重认证卡片 (纯 section 布局，绝无 table/div 标签)
     compliance = meta.get("compliance_audit") or {}
     compliance_impact = compliance.get("wechat_health_impact", "极度安全，无封号、限流或删文风险")
     html_parts.append(
-        f'<div style="margin: 24px 0 20px 0; padding: 14px 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">'
-        f'  <div style="margin-bottom: 8px;">'
+        f'<section style="margin: 24px 0 20px 0; padding: 14px 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">'
+        f'  <section style="margin-bottom: 8px; box-sizing: border-box;">'
         f'    <span style="font-size: 13px; font-weight: bold; color: #0f172a;">🛡️ AI 资讯雷达 · 7维质检 & 网信安全合规双重认证</span>'
         f'    <span style="float: right; font-size: 11px; font-weight: bold; color: #15803d; background-color: #dcfce7; padding: 2px 8px; border-radius: 4px; border: 1px solid #86efac; white-space: nowrap;">合规评级: 极度安全</span>'
-        f'    <div style="clear: both;"></div>'
-        f'  </div>'
+        f'    <section style="clear: both;"></section>'
+        f'  </section>'
         f'  <p style="margin: 0 0 5px 0; font-size: 12px; color: #475569; line-height: 1.65;">'
         f'    <strong style="color: #1e293b;">【质检指标】</strong> 论据数据 {dim_scores.get("argument_evidence", 24)}/25 · 认知深度 {dim_scores.get("knowledge_depth", 19)}/20 · 国内账本 {dim_scores.get("china_impact", 14)}/15 · 标题钩子 {dim_scores.get("headline_hook", 14)}/15 · 排版图表 {dim_scores.get("visual_table", 10)}/10'
         f'  </p>'
@@ -1536,14 +1537,14 @@ def render_wechat_inline_html(
         f'  <p style="margin: 0; font-size: 11.5px; color: #64748b; line-height: 1.5;">'
         f'    <strong style="color: #475569;">【质检审结】</strong> {verdict}'
         f'  </p>'
-        f'</div>'
+        f'</section>'
     )
 
     # 9. 文末版权与信源声明
     html_parts.append(
-        f'<div style="text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid #f1f5f9; box-sizing: border-box;">'
+        f'<section style="text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid #f1f5f9; box-sizing: border-box;">'
         f'  <p style="margin: 0; font-size: 12px; color: #94a3b8;">情报雷达实时聚合 · 关注我们抢先洞察全球 AI 前沿</p>'
-        f'</div>'
+        f'</section>'
     )
 
     html_parts.append('</section>')
@@ -1914,12 +1915,12 @@ def generate_daily_wechat_digest(items: List[Dict[str, Any]], top_k: int = 3) ->
   <div class="container">
     <div class="actions">
       <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="btn" style="background:#2563eb;" onclick="copyMarkdown()">⚡ 复制 MDNice 专用 Markdown (100%免掉格式)</button>
-        <a href="https://editor.mdnice.com/" target="_blank" class="btn" style="background:#475569; text-decoration:none;">👉 打开 MDNice ↗</a>
-        <button class="btn" onclick="copyWechatHtml()">🟢 一键复制原生 HTML (备用)</button>
+        <button class="btn" onclick="copyWechatHtml()">🟢 一键复制微信排版 (直接粘贴微信后台)</button>
         <button class="btn btn-secondary" onclick="copyTitle()">📋 复制推荐主标题</button>
+        <button class="btn" style="background:#475569;" onclick="copyMarkdown()">📝 复制 Markdown (备用)</button>
+        <a href="https://editor.mdnice.com/" target="_blank" class="btn" style="background:#64748b; text-decoration:none;">MDNice ↗</a>
       </div>
-      <span class="toast" id="toastMsg">✓ 已复制！切到微信后台 Ctrl+V 即可</span>
+      <span class="toast" id="toastMsg">✓ 已复制！切到微信后台直接 Ctrl+V 即可</span>
     </div>
 
     <!-- 质检合格标签与备选标题栏 -->
@@ -1987,7 +1988,7 @@ def generate_daily_wechat_digest(items: List[Dict[str, Any]], top_k: int = 3) ->
       }}
 
       if (copied) {{
-        showToast("✓ 已成功复制微信排版！切到微信公众号后台 Ctrl+V 即可");
+        showToast("✓ 已成功复制微信排版！切到微信公众号后台直接 Ctrl+V 粘贴（若微信弹出转换为Markdown请选【取消】）");
       }} else {{
         alert("复制遇到浏览器权限限制，请直接手动全选页面内容按 Ctrl+C 复制");
       }}

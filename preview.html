@@ -1340,6 +1340,140 @@
     </div>
   </div>
 
+  <!-- 落地工具·抓取情报与交互式预览画廊弹窗 Modal (Tool Detail & Screenshot Gallery Modal) -->
+  <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden max-w-3xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
+      
+      <!-- 窗口顶栏 Header -->
+      <div class="p-4 sm:p-5 bg-slate-50/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center space-x-3.5 min-w-0">
+          <div id="tool-modal-icon-wrap" class="w-11 h-11 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-500 text-xl font-bold shrink-0 shadow-inner">
+            🛠️
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-2 flex-wrap gap-1">
+              <h3 id="tool-modal-title" class="text-base sm:text-lg font-black text-slate-900 dark:text-slate-100 truncate notranslate"></h3>
+              <span id="tool-modal-rank-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 shrink-0"></span>
+            </div>
+            <div class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              <span id="tool-modal-scenario" class="font-medium"></span>
+              <span class="text-slate-300 dark:text-slate-700">·</span>
+              <span id="tool-modal-time" class="font-mono text-[11px]"></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flex items-center space-x-2 shrink-0">
+          <!-- 核心行动按钮：直达官网 (Visit Website) -->
+          <a id="tool-modal-official-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 sm:px-4 py-2 text-xs font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl shadow-md shadow-emerald-600/30 transition-all flex items-center space-x-1.5 transform hover:-translate-y-0.5">
+            <span id="tool-modal-visit-text">🚀 直达官网</span>
+            <span class="text-[10px] font-mono opacity-80 hidden sm:inline">(Visit website)</span>
+            <span>↗</span>
+          </a>
+          <button type="button" onclick="closeToolDetailModal()" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-lg" title="关闭 (Esc)">✕</button>
+        </div>
+      </div>
+
+      <!-- 正文滚动区 Body -->
+      <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
+        
+        <!-- 一句话核心定位 Hook Banner -->
+        <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent border border-emerald-500/20">
+          <p id="tool-modal-hook" class="text-sm sm:text-base font-bold text-emerald-950 dark:text-emerald-200 leading-snug"></p>
+        </div>
+
+        <!-- 交互式多图轮播画廊 (Interactive Screenshot Carousel) -->
+        <div class="space-y-2">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100">
+            <span class="flex items-center space-x-1.5">
+              <span>🖼️</span>
+              <span id="tool-modal-gallery-label">产品界面实测与功能截图画廊</span>
+            </span>
+            <span id="tool-carousel-counter" class="text-[11px] font-mono text-slate-400">1 / 2</span>
+          </div>
+
+          <div class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 aspect-[16/9] max-h-[380px] shadow-lg group">
+            <img id="tool-carousel-image" src="" alt="Tool UI preview" class="w-full h-full object-cover sm:object-contain transition-all duration-300 cursor-pointer" onclick="openToolImageLightbox()">
+            
+            <!-- 上一张 / 下一张导航箭头 -->
+            <button id="tool-carousel-prev" type="button" onclick="prevToolCarouselSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-sm transition-all shadow-md opacity-80 hover:opacity-100">
+              ‹
+            </button>
+            <button id="tool-carousel-next" type="button" onclick="nextToolCarouselSlide()" class="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-sm transition-all shadow-md opacity-80 hover:opacity-100">
+              ›
+            </button>
+
+            <!-- 底部小圆点指示器 -->
+            <div id="tool-carousel-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md"></div>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-slate-400 font-mono">💡 点击图片可查看原尺寸大图</span>
+          </div>
+        </div>
+
+        <!-- 详细情报与深度解析 (Overview) -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5">
+          <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span>📋</span>
+            <span id="tool-modal-overview-label">工具核心情报与解决痛点</span>
+          </div>
+          <p id="tool-modal-overview" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
+        </div>
+
+        <!-- 核心功能要点 Checklist (Key Features) -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
+          <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <span>⚡</span>
+            <span id="tool-modal-features-label">核心特性与技术亮点</span>
+          </div>
+          <ul id="tool-modal-features-list" class="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300"></ul>
+        </div>
+
+        <!-- 极客技术规格与参数 (Tech Specs Grid) -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
+            <span class="text-[11px] text-slate-400 font-medium">体验门槛</span>
+            <span id="tool-modal-spec-pricing" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
+            <span class="text-[11px] text-slate-400 font-medium">部署方式</span>
+            <span id="tool-modal-spec-runtime" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
+            <span class="text-[11px] text-slate-400 font-medium">业务赛道</span>
+            <span id="tool-modal-spec-scenario" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
+            <span class="text-[11px] text-slate-400 font-medium">收录来源</span>
+            <span id="tool-modal-spec-source" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 底部 Footer: 辅助链接与直接跳转官方按钮 -->
+      <div class="p-4 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 flex-wrap shrink-0">
+        <!-- 辅助来源链接 (Product Hunt / GitHub 等) -->
+        <div class="flex items-center space-x-2 text-xs text-slate-500">
+          <span>信源出处:</span>
+          <a id="tool-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 hover:underline font-medium flex items-center space-x-1">
+            <span id="tool-modal-source-btn-text">在 Product Hunt 查看榜单讨论</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <div class="flex items-center space-x-2.5">
+          <button type="button" onclick="closeToolDetailModal()" class="px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 rounded-xl transition-all">关闭</button>
+          <a id="tool-modal-footer-official-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-5 py-2 text-xs font-black bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl shadow-md shadow-emerald-600/30 transition-all flex items-center space-x-1.5">
+            <span>🚀 立即访问官网 (Visit website)</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- 复制成功 Toast 浮条 -->
   <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
     <span>✅</span>
@@ -4031,49 +4165,82 @@
       const runtimeBadge = item.runtime_badge || item.pricing_tag || "🟢 开源免装";
       const iconSvg = getToolSvgIcon(item.icon_type);
 
-      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/【(.*?)】/, '$1') : 'AI 工具');
+      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI 工具');
       const hook = item.app_hook || item.title_zh || item.title || "";
-      const summary = item.summary_zh || item.content_snippet || "";
-      const cleanSource = item.source || "";
+      const summary = item.overview_zh || item.summary_zh || item.content_snippet || "";
+      const cleanSource = item.source || "Product Hunt";
+      const officialUrl = item.official_url || item.url || "#";
+      const rankBadge = item.rank_badge || "🔥 热门推荐";
+      const previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
+      const itemId = escapeHtml(item.id || item.url || '');
 
       return `
-        <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-3 group border-t-2 border-t-emerald-500/80 hover:border-emerald-500/50 transition-all">
-          <div class="space-y-2">
-            <!-- 头部：微图标 + 应用名 + 运行方式徽章 -->
-            <div class="flex items-start justify-between gap-2">
-              <div class="flex items-center space-x-2.5">
-                <div class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-300 dark:border-slate-700/80 flex items-center justify-center shadow-inner shrink-0 group-hover:border-emerald-500/50 transition-colors">
+        <article onclick="openToolDetailModal('${itemId}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
+          <!-- 顶部视觉高光 Preview Banner -->
+          <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0">
+            ${previewImg ? `
+              <img src="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
+            ` : `
+              <div class="w-full h-full bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl text-emerald-400">
                   ${iconSvg}
                 </div>
-                <div>
-                  <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                    <h4 class="font-extrabold text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors notranslate">
-                      ${appName}
-                    </h4>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono border border-emerald-200 dark:border-emerald-500/20">${runtimeBadge}</span>
-                  </div>
-                  <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">${scenario}</span>
-                </div>
               </div>
-              <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
+            `}
+            
+            <!-- 悬浮 Logo 微图标 -->
+            <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
+              <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform">
+                ${iconSvg}
+              </div>
+              <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
             </div>
 
-            <!-- 核心看点与功能价值 -->
-            <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-white transition-colors leading-snug">
-              ${hook}
-            </p>
-
-            ${summary && summary !== hook ? `
-              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed bg-slate-100/70 dark:bg-slate-950/40 p-2 rounded-lg border border-slate-200 dark:border-slate-800/60">
-                ${summary}
-              </p>
-            ` : ''}
+            <!-- 悬浮排名/热度徽章 -->
+            <div class="absolute top-2.5 right-2.5">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-slate-900/85 backdrop-blur-md text-amber-300 border border-amber-500/30 shadow-sm">
+                ${escapeHtml(rankBadge)}
+              </span>
+            </div>
           </div>
 
-          <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800/60 text-xs">
-            <span class="text-[10px] text-slate-500 font-mono truncate max-w-[140px]">${cleanSource}</span>
-            <a href="${item.url}" target="_blank" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-colors flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0">
-              <span>立即体验 ↗</span>
+          <!-- 卡片核心情报区 -->
+          <div class="p-4 flex-1 flex flex-col justify-between space-y-2.5">
+            <div>
+              <!-- 业务赛道与时间 -->
+              <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1">
+                <span class="font-semibold text-emerald-600 dark:text-emerald-400">${escapeHtml(scenario)}</span>
+                <span class="font-mono text-[10px]" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
+              </div>
+
+              <!-- 核心看点与功能定位 -->
+              <h4 class="text-xs sm:text-sm font-bold text-slate-900 dark:text-slate-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors leading-snug line-clamp-2">
+                ${escapeHtml(hook)}
+              </h4>
+
+              <!-- 深度特性要点摘录 -->
+              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mt-1.5 font-normal">
+                ${escapeHtml(summary)}
+              </p>
+            </div>
+
+            <!-- 运行与部署方式标签 -->
+            <div class="flex items-center space-x-1.5 flex-wrap gap-1 pt-1">
+              <span class="text-[9px] px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono border border-emerald-200 dark:border-emerald-500/20">${escapeHtml(runtimeBadge)}</span>
+              <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono">${escapeHtml(cleanSource)}</span>
+            </div>
+          </div>
+
+          <!-- 双行动入口 Footer -->
+          <div class="p-3 bg-slate-50/70 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-xs">
+            <button type="button" onclick="event.stopPropagation(); openToolDetailModal('${itemId}')" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors flex items-center space-x-1">
+              <span>🔍 详情与截图</span>
+            </button>
+            <a href="${escapeHtml(officialUrl)}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
+              <span>🚀 直达官网</span>
+              <span class="text-[10px] font-mono opacity-80 hidden sm:inline">(Visit website)</span>
+              <span>↗</span>
             </a>
           </div>
         </article>
@@ -6357,6 +6524,182 @@
     }
 
     // ==========================================
+    // 落地工具·抓取情报与交互式预览画廊控制器 (Tool Detail & Screenshot Gallery Modal)
+    // ==========================================
+    let currentToolModalItem = null;
+    let currentToolImages = [];
+    let currentToolImageIndex = 0;
+
+    function openToolDetailModal(toolId) {
+      if (!cachedData) return;
+      const allTools = [
+        ...(cachedData.grouped?.tools || cachedData.tools || []),
+        ...(cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools')
+      ];
+
+      const item = allTools.find(it => String(it.id) === String(toolId)) ||
+                   allTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId);
+      if (!item) return;
+
+      currentToolModalItem = item;
+      const isZh = currentLang === 'zh';
+      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const iconSvg = getToolSvgIcon(item.icon_type);
+
+      const titleEl = document.getElementById('tool-modal-title');
+      const rankBadgeEl = document.getElementById('tool-modal-rank-badge');
+      const scenarioEl = document.getElementById('tool-modal-scenario');
+      const timeEl = document.getElementById('tool-modal-time');
+      const iconWrapEl = document.getElementById('tool-modal-icon-wrap');
+      const officialBtnEl = document.getElementById('tool-modal-official-btn');
+      const footerOfficialBtnEl = document.getElementById('tool-modal-footer-official-btn');
+      const hookEl = document.getElementById('tool-modal-hook');
+      const overviewEl = document.getElementById('tool-modal-overview');
+      const featuresListEl = document.getElementById('tool-modal-features-list');
+      const sourceBtnEl = document.getElementById('tool-modal-source-btn');
+      const sourceBtnTextEl = document.getElementById('tool-modal-source-btn-text');
+
+      const pricingEl = document.getElementById('tool-modal-spec-pricing');
+      const runtimeEl = document.getElementById('tool-modal-spec-runtime');
+      const specScenarioEl = document.getElementById('tool-modal-spec-scenario');
+      const specSourceEl = document.getElementById('tool-modal-spec-source');
+
+      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI 工具');
+      const hook = item.app_hook || item.title_zh || item.title || "";
+      const officialUrl = item.official_url || item.url || "#";
+      const sourceUrl = item.source_url || item.url || "#";
+      const sourceName = item.source || "Product Hunt";
+
+      if (titleEl) titleEl.textContent = appName;
+      if (rankBadgeEl) {
+        rankBadgeEl.textContent = item.rank_badge || (isZh ? '🔥 热门推荐' : '🔥 Popular');
+      }
+      if (scenarioEl) scenarioEl.textContent = item.scenario_tag || (isZh ? '🤖 AI 场景落地' : '🤖 Applied AI');
+      if (timeEl) timeEl.textContent = `🕒 ${timeObj.display || timeObj.relative || (isZh ? '今日' : 'Today')}`;
+      if (iconWrapEl) iconWrapEl.innerHTML = iconSvg;
+      
+      if (officialBtnEl) officialBtnEl.href = officialUrl;
+      if (footerOfficialBtnEl) footerOfficialBtnEl.href = officialUrl;
+      if (hookEl) hookEl.textContent = hook;
+
+      const overviewText = isZh
+        ? (item.overview_zh || item.summary_zh || item.content_snippet || hook)
+        : (item.overview_en || item.summary_en || item.content_snippet || hook);
+      if (overviewEl) overviewEl.textContent = overviewText;
+
+      const features = isZh ? (item.features_zh || []) : (item.features_en || []);
+      if (featuresListEl) {
+        if (features.length > 0) {
+          featuresListEl.innerHTML = features.map(f => `
+            <li class="flex items-start space-x-2.5">
+              <span class="text-emerald-500 font-bold shrink-0 mt-0.5">✓</span>
+              <span class="leading-relaxed">${escapeHtml(f)}</span>
+            </li>
+          `).join('');
+          featuresListEl.parentElement.classList.remove('hidden');
+        } else {
+          featuresListEl.parentElement.classList.add('hidden');
+        }
+      }
+
+      if (pricingEl) pricingEl.textContent = item.pricing_tag || (isZh ? '🟡 免费试玩' : 'Freemium');
+      if (runtimeEl) runtimeEl.textContent = item.runtime_badge || (isZh ? '🟢 免部署在线玩' : 'Cloud / Web');
+      if (specScenarioEl) specScenarioEl.textContent = item.scenario_tag || (isZh ? 'AI 场景落地' : 'Applied AI');
+      if (specSourceEl) specSourceEl.textContent = sourceName;
+
+      if (sourceBtnEl) {
+        sourceBtnEl.href = sourceUrl;
+        if (sourceBtnTextEl) {
+          sourceBtnTextEl.textContent = isZh ? `在 ${sourceName} 查看榜单与讨论` : `View on ${sourceName}`;
+        }
+      }
+
+      // 轮播画廊设置
+      currentToolImages = (item.preview_images && item.preview_images.length > 0)
+        ? item.preview_images
+        : [item.image_url || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80'];
+      currentToolImageIndex = 0;
+      updateToolCarousel();
+
+      const modal = document.getElementById('tool-detail-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function updateToolCarousel() {
+      const imgEl = document.getElementById('tool-carousel-image');
+      const counterEl = document.getElementById('tool-carousel-counter');
+      const dotsEl = document.getElementById('tool-carousel-dots');
+      const prevBtn = document.getElementById('tool-carousel-prev');
+      const nextBtn = document.getElementById('tool-carousel-next');
+
+      if (!currentToolImages || currentToolImages.length === 0) return;
+
+      if (currentToolImageIndex < 0) currentToolImageIndex = currentToolImages.length - 1;
+      if (currentToolImageIndex >= currentToolImages.length) currentToolImageIndex = 0;
+
+      if (imgEl) {
+        imgEl.src = currentToolImages[currentToolImageIndex];
+      }
+      if (counterEl) {
+        counterEl.textContent = `${currentToolImageIndex + 1} / ${currentToolImages.length}`;
+      }
+
+      if (dotsEl) {
+        if (currentToolImages.length <= 1) {
+          dotsEl.classList.add('hidden');
+        } else {
+          dotsEl.classList.remove('hidden');
+          dotsEl.innerHTML = currentToolImages.map((_, idx) => `
+            <button type="button" onclick="setToolCarouselSlide(${idx})" class="w-2 h-2 rounded-full transition-all ${idx === currentToolImageIndex ? 'bg-white w-5' : 'bg-white/40 hover:bg-white/70'}" title="切换至第 ${idx+1} 张截图"></button>
+          `).join('');
+        }
+      }
+
+      if (prevBtn && nextBtn) {
+        if (currentToolImages.length <= 1) {
+          prevBtn.classList.add('hidden');
+          nextBtn.classList.add('hidden');
+        } else {
+          prevBtn.classList.remove('hidden');
+          nextBtn.classList.remove('hidden');
+        }
+      }
+    }
+
+    function prevToolCarouselSlide() {
+      currentToolImageIndex--;
+      updateToolCarousel();
+    }
+
+    function nextToolCarouselSlide() {
+      currentToolImageIndex++;
+      updateToolCarousel();
+    }
+
+    function setToolCarouselSlide(idx) {
+      currentToolImageIndex = idx;
+      updateToolCarousel();
+    }
+
+    function openToolImageLightbox() {
+      if (currentToolImages && currentToolImages[currentToolImageIndex]) {
+        window.open(currentToolImages[currentToolImageIndex], '_blank');
+      }
+    }
+
+    function closeToolDetailModal() {
+      const modal = document.getElementById('tool-detail-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      currentToolModalItem = null;
+    }
+
+    // ==========================================
     // 法律合规与隐私政策控制 (满足 Google AdSense 审核强制要求)
     // ==========================================
     const LEGAL_DOCS = {
@@ -6475,13 +6818,19 @@
       (adsbygoogle = window.adsbygoogle || []).push({});
     } catch (e) {}
 
-    // 全局快捷键监听 (Esc 键关闭弹窗)
+    // 全局快捷键监听 (Esc 键关闭弹窗，左右箭头切换轮播)
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeVideoModal();
         closeLegalModal();
         closeAiNewsModal();
         closeSocialPostModal();
+        closeToolDetailModal();
+      }
+      const toolModal = document.getElementById('tool-detail-modal');
+      if (toolModal && !toolModal.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') prevToolCarouselSlide();
+        if (e.key === 'ArrowRight') nextToolCarouselSlide();
       }
     });
 
