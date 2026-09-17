@@ -424,7 +424,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en"]:
+                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！

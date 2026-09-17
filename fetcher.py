@@ -273,6 +273,71 @@ def resolve_techmeme_hd_image(permalink_or_thumb: str, client: Optional[Any] = N
     return None
 
 
+def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str, Any]:
+    """
+    Universal Fallback Media Resolver (全网通用降级图文与多媒体穿透解析器):
+    当 RSS 流仅输出纯文本 (如 Google News RSS, Hacker News 等精简订阅) 时，
+    主动穿透目标落地页提取 1200px+ 官方高清主图 (og:image / twitter:image) 并侦测视频媒体 (video tags/embeds)。
+    """
+    result = {
+        "cover_image": None,
+        "inline_images": [],
+        "has_video": False,
+        "video_url": None
+    }
+    if not url or not url.startswith("http"):
+        return result
+
+    clean_url = url.split("#")[0].strip()
+    
+    # 针对 YouTube 链接快速提取
+    m_yt = re.search(r'(?:youtube\.com/watch\?v=|youtu\.be/)([\w\-]+)', clean_url)
+    if m_yt:
+        yt_id = m_yt.group(1)
+        result["cover_image"] = f"https://i.ytimg.com/vi/{yt_id}/maxresdefault.jpg"
+        result["has_video"] = True
+        result["video_url"] = f"https://www.youtube.com/watch?v={yt_id}"
+        return result
+
+    # 针对已知存在强 WAF 拦截的域名 (如 reuters, bloomberg) 进行智能降级
+    is_reuters = "reuters.com" in clean_url.lower()
+    is_bloomberg = "bloomberg.com" in clean_url.lower()
+
+    try:
+        html_text = ""
+        # 针对常规公开媒体，快速探测落地页 (超时时间 4s，防阻塞主爬虫流程)
+        if not is_reuters and not is_bloomberg:
+            if client and hasattr(client, "get"):
+                resp = client.get(clean_url, timeout=4)
+                if resp.status_code == 200:
+                    html_text = resp.text
+            else:
+                req = urllib.request.Request(
+                    clean_url,
+                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 AI-Radar/2.0"}
+                )
+                with urllib.request.urlopen(req, timeout=4) as r:
+                    if r.status == 200:
+                        html_text = r.read().decode("utf-8", errors="ignore")
+
+        if html_text:
+            m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
+            if m_img:
+                cand = m_img.group(1).replace("&amp;", "&").strip()
+                if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "spacer", "tracking", "avatar", "icon"]):
+                    result["cover_image"] = cand
+
+            # 侦测是否包含视频 (Brightcove, HTML5 video, YouTube, Vimeo, mp4, m3u8)
+            if re.search(r'<video\b|brightcove|jwplayer|youtube\.com/embed|player\.vimeo\.com|\.mp4\b|\.m3u8\b', html_text, re.I):
+                result["has_video"] = True
+                result["video_url"] = clean_url
+
+    except Exception:
+        pass
+
+    return result
+
+
 def match_celebrity_profile(handle_or_user: str) -> Optional[Dict[str, Any]]:
     """
     Match leader profile based STRICTLY on the author's X handle/username.
@@ -2365,6 +2430,16 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                                 pass
 
                     if not img_url:
+                        # 尝试穿透落地页提取 1200px+ 高清配图并识别视频媒体
+                        og_media = resolve_article_og_media(url, client)
+                        if og_media.get("cover_image"):
+                            img_url = og_media["cover_image"]
+                        if og_media.get("has_video"):
+                            media_assets["has_video"] = True
+                            if og_media.get("video_url"):
+                                media_assets["video_url"] = og_media["video_url"]
+
+                    if not img_url:
                         img_url = get_smart_cover_url(title, category, cfg["name"])
 
                     items.append({
@@ -2374,6 +2449,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "url": url,
                         "image_url": img_url,
                         "inline_images": media_assets.get("inline_images", []),
+                        "has_video": media_assets.get("has_video", False),
+                        "video_url": media_assets.get("video_url"),
                         "source": source_display,
                         "author": author_display,
                         "author_handle": author_handle,
