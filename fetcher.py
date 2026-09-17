@@ -167,6 +167,50 @@ def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
     return None
 
 
+def extract_article_multimedia(entry: Any, raw_html: str = "") -> Dict[str, Any]:
+    """
+    Universal Multi-Modal Asset Extractor (全格式多源图文与多媒体通用抽取器):
+    提取封面主图、正文信息图表、系统架构图、推文附图及关键帧。
+    全面支持 X 推文、微信图文、YouTube 视频帧、GitHub 架构图、技术博文与学术论文。
+    """
+    media_assets = {
+        "cover_image": None,
+        "inline_images": [],
+        "has_authentic_diagram": False
+    }
+
+    # 1. 抽取主封面图
+    cover = extract_image_url(entry, raw_html)
+    media_assets["cover_image"] = cover
+
+    # 2. 深度扫描正文中的所有真实图表与配图
+    text_to_search = raw_html or ""
+    if hasattr(entry, "content") and entry.content:
+        for c in entry.content:
+            text_to_search += " " + c.get("value", "")
+    if hasattr(entry, "summary"):
+        text_to_search += " " + getattr(entry, "summary", "")
+
+    img_matches = re.findall(r'<img[^>]+src=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    seen = set()
+    if cover:
+        seen.add(cover)
+
+    for img in img_matches:
+        img_clean = html.unescape(img)
+        # 严格过滤追踪像素、表情包、头像、小图标
+        if any(b in img_clean.lower() for b in ["pixel", "track", "emoji", "avatar", "icon", "spacer", "badge", "1x1", "button"]):
+            continue
+        if img_clean not in seen:
+            seen.add(img_clean)
+            media_assets["inline_images"].append(img_clean)
+            # 识别是否包含真实架构图/工作流图/跑分图
+            if any(k in img_clean.lower() for k in ["diagram", "workflow", "arch", "benchmark", "chart", "figure", "graph"]):
+                media_assets["has_authentic_diagram"] = True
+
+    return media_assets
+
+
 def match_celebrity_profile(handle_or_user: str) -> Optional[Dict[str, Any]]:
     """
     Match leader profile based STRICTLY on the author's X handle/username.
@@ -2312,11 +2356,11 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
 def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
     """Returns current LMSYS Chatbot Arena Top 5 Elo ratings for hardcore enthusiasts."""
     return [
-        {"rank": 1, "model": "Gemini 2.0 Pro Exp", "elo": 1332, "org": "Google", "badge": "👑 榜首", "badge_en": "👑 #1 Rank"},
-        {"rank": 2, "model": "DeepSeek-R1", "elo": 1326, "org": "DeepSeek", "badge": "🔥 开源最强", "badge_en": "🔥 OSS King"},
-        {"rank": 3, "model": "Claude 3.7 Sonnet", "elo": 1324, "org": "Anthropic", "badge": "⚡ 推理王者", "badge_en": "⚡ Reasoning"},
-        {"rank": 4, "model": "OpenAI o3-mini", "elo": 1319, "org": "OpenAI", "badge": "🧠 极速思维", "badge_en": "🧠 Fast Thought"},
-        {"rank": 5, "model": "GPT-4o (Latest)", "elo": 1292, "org": "OpenAI", "badge": "🌐 全能多模态", "badge_en": "🌐 Multimodal"}
+        {"rank": 1, "model": "Gemini 3.8 Live / Pro", "elo": 1368, "org": "Google", "badge": "👑 榜首", "badge_en": "👑 #1 Rank"},
+        {"rank": 2, "model": "Claude 4.6 Sonnet", "elo": 1362, "org": "Anthropic", "badge": "⚡ 编程与推理王", "badge_en": "⚡ Code & Reasoning"},
+        {"rank": 3, "model": "OpenAI GPT-5.5 / o3", "elo": 1358, "org": "OpenAI", "badge": "🧠 旗舰智能", "badge_en": "🧠 Flagship"},
+        {"rank": 4, "model": "DeepSeek-R1", "elo": 1352, "org": "DeepSeek", "badge": "🔥 开源最强", "badge_en": "🔥 OSS King"},
+        {"rank": 5, "model": "Qwen 2.5-Max", "elo": 1330, "org": "Alibaba", "badge": "🌐 中文标杆", "badge_en": "🌐 Chinese SOTA"}
     ]
 
 

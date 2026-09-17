@@ -1,0 +1,215 @@
+{
+  "updated_at": "2026-09-17T01:30:55.257305+00:00",
+  "domains": {
+    "llm_reasoning": {
+      "name_zh": "大语言模型与深度推理",
+      "tiers": {
+        "global_closed_flagship": {
+          "family": "OpenAI",
+          "active_model": "OpenAI GPT-6.0 / o3",
+          "tag": "闭源标杆",
+          "rates": "$1.25 - $5.00 / 1M (约¥9~36)",
+          "capability": "旗舰智商 · 闭源前沿",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "全球前沿性能基准",
+          "highlight": "OpenAI 新一代 GPT-6.0 具备极高智能密度与超强长思维链，代表闭源前沿性能基准。"
+        },
+        "coding_agent_pioneer": {
+          "family": "Anthropic",
+          "active_model": "Claude 4.6 Sonnet",
+          "tag": "编程王者",
+          "rates": "$3.00 - $15.00 / 1M (约¥21~108)",
+          "capability": "编程王道 · Agent首选",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "混合深度思考先锋",
+          "highlight": "Anthropic Claude 4.6 旗舰支持标准与 Extended Thinking 深度思考，在万行级长链代码、自适应重构与自主智能体工程上稳居行业标杆。"
+        },
+        "open_source_sota": {
+          "family": "DeepSeek",
+          "active_model": "DeepSeek-R1 / V3",
+          "tag": "🔥 降维突破",
+          "rates": "¥1.0 - ¥2.0 / 1M (本地为0)",
+          "capability": "逼平旗舰 · 省93.5%",
+          "stars": "⭐⭐⭐⭐⭐",
+          "badge": "👑 综合回报最高 · 首选",
+          "highlight": "以纯强化学习驱动推理思维链自进化，在几乎追平海外旗舰性能前提下算力成本不到 1/15，支持 100% 物理隔离私有化部署。"
+        },
+        "domestic_industry": {
+          "family": "Domestic",
+          "active_model": "阿里 Qwen 2.5-Max / 豆包",
+          "tag": "国内落地",
+          "rates": "¥2.4 - ¥4.0 / 1M",
+          "capability": "中文扎实 · 稳定合规",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "本土产业高可用标杆",
+          "highlight": "针对国内政企业务场景、安全合规与复杂业务管线深度调优，网络零延迟且具备企业级服务保障，是国内落地的稳健之选。"
+        }
+      }
+    },
+    "video_generation": {
+      "name_zh": "视频生成与世界模型",
+      "tiers": {
+        "overseas_closed_flagship": {
+          "family": "OpenAI / Runway",
+          "active_model": "OpenAI Sora 2 / Runway Gen-3 Alpha",
+          "tag": "闭源巨头",
+          "rates": "约 $0.20 - $0.50 / 次 (约¥1.5~3.6)",
+          "capability": "物理仿真 · 电影质感",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "影视级闭源标杆",
+          "highlight": "OpenAI Sora 2 与 Runway Gen-3 具备极高时空连贯性与电影光影质感，但按次计费昂贵且云端排队延时较长。"
+        },
+        "commercial_cinema_sota": {
+          "family": "ByteDance / Kuaishou",
+          "active_model": "字节跳动 Seedance 2.5 / 快手可灵 Kling 3.0",
+          "tag": "商用爆款",
+          "rates": "约 ¥0.2 - ¥0.6 / 次 (剪映/即梦商业生态)",
+          "capability": "多镜头一致 · 商业落地第一",
+          "stars": "⭐⭐⭐⭐⭐",
+          "badge": "国内商业量产渗透率第一 · 首选",
+          "highlight": "字节跳动 Seedance 2.5 依托即梦与剪映生态，在商业电商、短剧工业量产与多镜头人物保真上渗透率稳居行业第一，调用量远超同行；快手可灵 3.0 则在大动态物理运镜上互为补充。"
+        },
+        "open_source_local_sota": {
+          "family": "Alibaba Wan",
+          "active_model": "阿里通义 Wan 2.1 (14B/1.3B)",
+          "tag": "🔥 开源降维",
+          "rates": "本地边际成本为 0 (仅电费)",
+          "capability": "4K 60fps · 单卡90秒",
+          "stars": "⭐⭐⭐⭐⭐",
+          "badge": "👑 消费级显卡颠覆者 · 首选",
+          "highlight": "通过 FP8 量化与显存切片优化，让 16G 消费级显卡（RTX 4070Ti/4080）稳定出片，单卡 90 秒出 4K 60fps，把视频生成拉进平民时代。"
+        },
+        "open_source_ecosystem": {
+          "family": "Tencent Hunyuan / Zhipu",
+          "active_model": "腾讯混元 HunyuanVideo / 智谱 CogVideoX",
+          "tag": "社区基座",
+          "rates": "本地免费 / API极低",
+          "capability": "DiT 架构 · 开源透明",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "开源生态研发底座",
+          "highlight": "完整开源权重与训练管线，支持深入二次微调与 LoRA 风格化训练，是学术界与个人极客探索世界模型的开放基座。"
+        }
+      }
+    },
+    "voice_speech": {
+      "name_zh": "实时全双工与端到端语音",
+      "tiers": {
+        "native_duplex_pioneer": {
+          "family": "Google Gemini",
+          "active_model": "Google Gemini 3.8 Live",
+          "tag": "🔥 极速端到端",
+          "rates": "¥9.9 / 小时 (.38/h)",
+          "capability": "~290ms 延迟 · 原生双工",
+          "stars": "⭐⭐⭐⭐⭐",
+          "badge": "👑 价格屠刀 · 降幅87%",
+          "highlight": "打通 Audio-to-Audio 原生直连，每小时不到 10 元人民币，击穿行业底价。"
+        },
+        "proprietary_cloud_sota": {
+          "family": "OpenAI",
+          "active_model": "OpenAI GPT-4o Realtime",
+          "tag": "原厂标杆",
+          "rates": "¥78 - ¥130 / 小时",
+          "capability": "~460ms 延迟 · 音色自然",
+          "stars": "⭐⭐⭐",
+          "badge": "行业基准对照",
+          "highlight": "原厂音色自然但 Token 单价极高，中小团队与全天候硬件难以承受账单。"
+        },
+        "domestic_cost_sota": {
+          "family": "ByteDance / MiniMax",
+          "active_model": "字节豆包语音 / MiniMax 语音",
+          "tag": "国内落地",
+          "rates": "¥5.4 - ¥9.0 / 小时",
+          "capability": "~350ms 延迟 · 中文扎实",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "国内高性价比标杆",
+          "highlight": "针对中文场景与国内业务管线调优，输入仅 ¥0.0008/k，落地成熟。"
+        }
+      }
+    },
+    "image_multimodal": {
+      "name_zh": "多模态图像生成与视觉大模型",
+      "tiers": {
+        "commercial_aesthetic_sota": {
+          "family": "Midjourney",
+          "active_model": "Midjourney v7.0",
+          "tag": "商业审美",
+          "rates": " -  / 月订阅",
+          "capability": "顶级审美 · 光影质感",
+          "stars": "⭐⭐⭐⭐",
+          "badge": "商业插画与视觉审美标杆",
+          "highlight": "色彩感知、构图审美与商业插画直出表现无可挑剔，但闭源订阅门槛与 API 封闭。"
+        },
+        "open_source_dit_sota": {
+          "family": "Black Forest Labs",
+          "active_model": "FLUX.1 (Dev / Schnell / Pro)",
+          "tag": "🔥 开源画王",
+          "rates": "本地免费 / API低廉",
+          "capability": "手部细节 · 提示词贴合",
+          "stars": "⭐⭐⭐⭐⭐",
+          "badge": "👑 开源生图新王者 · 首选",
+          "highlight": "120 亿参数整流匹配 DiT 架构，解决手指畸变与文字渲染难题，支持本地消费级显卡部署。"
+        }
+      }
+    }
+  },
+  "tiers": {
+    "global_closed_flagship": {
+      "family": "OpenAI",
+      "active_model": "OpenAI GPT-6.0 / o3",
+      "tag": "闭源标杆",
+      "rates": "$1.25 - $5.00 / 1M (约¥9~36)",
+      "capability": "旗舰智商 · 闭源前沿",
+      "stars": "⭐⭐⭐⭐",
+      "badge": "全球前沿性能基准",
+      "highlight": "OpenAI 新一代 GPT-6.0 具备极高智能密度与超强长思维链，代表闭源前沿性能基准。"
+    },
+    "coding_agent_pioneer": {
+      "family": "Anthropic",
+      "active_model": "Claude 4.6 Sonnet",
+      "tag": "编程王者",
+      "rates": "$3.00 - $15.00 / 1M (约¥21~108)",
+      "capability": "编程王道 · Agent首选",
+      "stars": "⭐⭐⭐⭐",
+      "badge": "混合深度思考先锋",
+      "highlight": "Anthropic Claude 4.6 旗舰支持标准与 Extended Thinking 深度思考，在万行级长链代码、自适应重构与自主智能体工程上稳居行业标杆。"
+    },
+    "open_source_sota": {
+      "family": "DeepSeek",
+      "active_model": "DeepSeek-R1 / V3",
+      "tag": "🔥 降维突破",
+      "rates": "¥1.0 - ¥2.0 / 1M (本地为0)",
+      "capability": "逼平旗舰 · 省93.5%",
+      "stars": "⭐⭐⭐⭐⭐",
+      "badge": "👑 综合回报最高 · 首选",
+      "highlight": "以纯强化学习驱动推理思维链自进化，在几乎追平海外旗舰性能前提下算力成本不到 1/15，支持 100% 物理隔离私有化部署。"
+    },
+    "domestic_industry": {
+      "family": "Domestic",
+      "active_model": "阿里 Qwen 2.5-Max / 豆包",
+      "tag": "国内落地",
+      "rates": "¥2.4 - ¥4.0 / 1M",
+      "capability": "中文扎实 · 稳定合规",
+      "stars": "⭐⭐⭐⭐",
+      "badge": "本土产业高可用标杆",
+      "highlight": "针对国内政企业务场景、安全合规与复杂业务管线深度调优，网络零延迟且具备企业级服务保障，是国内落地的稳健之选。"
+    }
+  },
+  "tracked_max_versions": {
+    "claude": 4.6,
+    "gpt": 6.0,
+    "gemini": 3.8,
+    "deepseek_r": 1,
+    "deepseek_v": 3,
+    "qwen": 2.5,
+    "sora": 2.0,
+    "kling": 3.0,
+    "runway_gen": 3.0,
+    "wan": 2.1,
+    "hailuo": 1.0,
+    "cogvideo": 2.0,
+    "hunyuan_video": 1.0,
+    "midjourney": 7.0,
+    "flux": 1.0,
+    "seedance": 2.5
+  }
+}

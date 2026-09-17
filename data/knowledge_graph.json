@@ -1,0 +1,332 @@
+{
+  "updated_at": "2026-09-17T01:47:54.004738+00:00",
+  "system_description": "开放式实体动态知识图谱与全生命周期状态机 (Open Entity Knowledge Graph & Lifecycle State Machine)",
+  "entities": {
+    "seadance": {
+      "id": "seadance",
+      "display_name": "SeaDance 动作舞蹈生成模型",
+      "domain_tag": "motion_video_generation",
+      "half_life_days": 120,
+      "first_learned_at": "2026-04-10T08:00:00Z",
+      "last_updated_at": "2026-09-17T01:47:54.004732+00:00",
+      "active_version": "2.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2025-11-10",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "2.0",
+          "deprecation_warning": "存在上位替代: 2.0 已大幅解决肢体拉伸与脚部滑步伪影，1.0 严禁作为当前主流横评标杆"
+        },
+        {
+          "version": "2.0",
+          "release_date": "2026-04-15",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "AnimateAnyone-v2",
+            "Champ-v2",
+            "Wan 2.1"
+          ],
+          "benchmark_highlights": "1080P 60FPS · 动作骨骼贴合度94.2% · 消费级显卡部署"
+        }
+      ]
+    },
+    "wan": {
+      "id": "wan",
+      "display_name": "阿里通义 Wan 视频生成模型",
+      "domain_tag": "video_generation",
+      "half_life_days": 120,
+      "first_learned_at": "2026-02-20T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "2.1",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2024-10-01",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "2.1",
+          "deprecation_warning": "早期预览版已被 2.1 全面替代"
+        },
+        {
+          "version": "2.1",
+          "release_date": "2026-02-25",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "Sora 2",
+            "Kling 3.0",
+            "Runway Gen-3 Alpha",
+            "HunyuanVideo"
+          ],
+          "benchmark_highlights": "14B/1.3B 双参数 · 消费级显卡单卡90秒出片 · 480P/720P原生"
+        }
+      ]
+    },
+    "kling": {
+      "id": "kling",
+      "display_name": "快手可灵 Kling 商业视频模型",
+      "domain_tag": "video_generation",
+      "half_life_days": 120,
+      "first_learned_at": "2024-06-06T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "3.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2024-06-06",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "2.0",
+          "deprecation_warning": "初代模型运镜畸变大，已被 2.0/3.0 替代"
+        },
+        {
+          "version": "2.0",
+          "release_date": "2025-03-01",
+          "lifecycle_status": "HISTORICAL_BENCHMARK",
+          "superseded_by": "3.0",
+          "deprecation_warning": "3.0 商业版已上线，2.0 作为稳定基准对照"
+        },
+        {
+          "version": "3.0",
+          "release_date": "2026-05-18",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "Sora 2",
+            "Runway Gen-3",
+            "Wan 2.1",
+            "Hailuo"
+          ],
+          "benchmark_highlights": "电影级动态连贯度 · 商业短剧与特效量产首选"
+        }
+      ]
+    },
+    "sora": {
+      "id": "sora",
+      "display_name": "OpenAI Sora 视频生成模型",
+      "domain_tag": "video_generation",
+      "half_life_days": 180,
+      "first_learned_at": "2024-02-15T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "2.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2024-02-15",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "2.0",
+          "deprecation_warning": "1.0 早期技术展示已被 2.0 商业版替代"
+        },
+        {
+          "version": "2.0",
+          "release_date": "2025-12-09",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "Runway Gen-3",
+            "Kling 3.0",
+            "Wan 2.1"
+          ],
+          "benchmark_highlights": "影视级物理光影渲染 · 闭源云端旗舰"
+        }
+      ]
+    },
+    "claude": {
+      "id": "claude",
+      "display_name": "Anthropic Claude 旗舰推理模型",
+      "domain_tag": "llm_reasoning",
+      "half_life_days": 180,
+      "first_learned_at": "2024-03-04T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "4.6",
+      "versions": [
+        {
+          "version": "3.5",
+          "release_date": "2024-06-20",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "3.7",
+          "deprecation_warning": "已被具备混合思考能力的 3.7 及 4.6 旗舰替代"
+        },
+        {
+          "version": "3.7",
+          "release_date": "2025-02-24",
+          "lifecycle_status": "HISTORICAL_BENCHMARK",
+          "superseded_by": "4.6",
+          "deprecation_warning": "4.6 已全面接管旗舰长链推理与 Agent 工程，3.7 作为阶段性对照"
+        },
+        {
+          "version": "4.6",
+          "release_date": "2026-03-12",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "OpenAI GPT-6.0",
+            "DeepSeek-R1",
+            "Qwen 2.5-Max"
+          ],
+          "benchmark_highlights": "Extended Thinking 深度思考 · 行业最强自主编程与代码重构"
+        }
+      ]
+    },
+    "gpt": {
+      "id": "gpt",
+      "display_name": "OpenAI GPT 系列大模型",
+      "domain_tag": "llm_reasoning",
+      "half_life_days": 180,
+      "first_learned_at": "2023-03-14T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "6.0",
+      "versions": [
+        {
+          "version": "3.5",
+          "release_date": "2022-11-30",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "4.0",
+          "deprecation_warning": "严禁使用！古董级基准，任何文章引用此模型作横评直接扣除时效分"
+        },
+        {
+          "version": "4.0",
+          "release_date": "2023-03-14",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "5.0",
+          "deprecation_warning": "已被新一代具备长思维链的多模态基座全面替代"
+        },
+        {
+          "version": "5.5",
+          "release_date": "2025-10-01",
+          "lifecycle_status": "HISTORICAL_BENCHMARK",
+          "superseded_by": "6.0",
+          "deprecation_warning": "6.0 已上线，5.5 作为高频调用参照"
+        },
+        {
+          "version": "6.0",
+          "release_date": "2026-04-08",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "Claude 4.6",
+            "DeepSeek-R1",
+            "Gemini 3.8"
+          ],
+          "benchmark_highlights": "超高智能密度 · 闭源顶级逻辑与长思维链"
+        }
+      ]
+    },
+    "deepseek_r": {
+      "id": "deepseek_r",
+      "display_name": "DeepSeek-R 推理大模型",
+      "domain_tag": "llm_reasoning",
+      "half_life_days": 180,
+      "first_learned_at": "2025-01-20T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2025-01-20",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "OpenAI o3",
+            "GPT-6.0",
+            "Claude 4.6 Sonnet",
+            "Qwen 2.5-Max"
+          ],
+          "benchmark_highlights": "纯强化学习自进化 · 算力成本仅为海外旗舰 1/15 · 100% 私有化支持"
+        }
+      ]
+    },
+    "midjourney": {
+      "id": "midjourney",
+      "display_name": "Midjourney 商业级生图模型",
+      "domain_tag": "image_multimodal",
+      "half_life_days": 150,
+      "first_learned_at": "2022-08-01T00:00:00Z",
+      "last_updated_at": "2026-09-17T09:45:00Z",
+      "active_version": "7.0",
+      "versions": [
+        {
+          "version": "5.2",
+          "release_date": "2023-06-23",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "6.0",
+          "deprecation_warning": "早期版本，文字渲染与光影较弱"
+        },
+        {
+          "version": "6.1",
+          "release_date": "2024-07-30",
+          "lifecycle_status": "HISTORICAL_BENCHMARK",
+          "superseded_by": "7.0",
+          "deprecation_warning": "7.0 商业版已推出，6.1 作为稳定参照"
+        },
+        {
+          "version": "7.0",
+          "release_date": "2026-02-14",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "FLUX.1",
+            "Ideogram 2",
+            "SD 3.5"
+          ],
+          "benchmark_highlights": "商业插画与摄影级构图审美天花板"
+        }
+      ]
+    },
+    "figure": {
+      "id": "figure",
+      "display_name": "Figure 具身智能机器人",
+      "domain_tag": "motion_video_generation",
+      "half_life_days": 120,
+      "first_learned_at": "2026-09-17T01:47:54.002930+00:00",
+      "last_updated_at": "2026-09-17T01:47:54.002930+00:00",
+      "active_version": "1.0",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2026-09-17",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "benchmark_highlights": "最新一代 Figure 具身智能机器人 前沿架构与落地实践"
+        }
+      ]
+    },
+    "seedance": {
+      "id": "seedance",
+      "display_name": "字节跳动 Seedance 视频生成模型",
+      "domain_tag": "video_generation",
+      "half_life_days": 120,
+      "first_learned_at": "2025-05-01T00:00:00Z",
+      "last_updated_at": "2026-09-17T10:15:00Z",
+      "active_version": "2.5",
+      "versions": [
+        {
+          "version": "1.0",
+          "release_date": "2025-05-01",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "2.0",
+          "deprecation_warning": "初代模型已被 2.0/2.5 替代"
+        },
+        {
+          "version": "2.0",
+          "release_date": "2025-11-15",
+          "lifecycle_status": "HISTORICAL_BENCHMARK",
+          "superseded_by": "2.5",
+          "deprecation_warning": "2.5 商业版已全面部署于即梦与剪映，2.0 作为对照基准"
+        },
+        {
+          "version": "2.5",
+          "release_date": "2026-03-20",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "direct_competitors": [
+            "阿里通义 Wan 2.1",
+            "快手可灵 Kling 3.0",
+            "OpenAI Sora 2"
+          ],
+          "benchmark_highlights": "商业电商与短剧量产渗透率行业第一 · 单次 ¥0.2~0.6 · 多镜头人物一致性极佳"
+        }
+      ]
+    }
+  }
+}
