@@ -21,6 +21,7 @@ import json
 import re
 import hashlib
 import time
+import subprocess
 import urllib.request
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
@@ -1418,14 +1419,30 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     if not product_url or "producthunt.com" not in product_url:
         return {}
     slug = product_url.split('?')[0]
-    headers = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+    page_html = ""
     try:
-        with httpx.Client(headers=headers, follow_redirects=True, timeout=8.0) as client:
-            resp = client.get(slug)
-            if resp.status_code != 200 or len(resp.text) < 1500 or "Just a moment..." in resp.text:
-                return {}
-            page_html = resp.text
+        cmd = [
+            "curl.exe", "-s", "-L", slug,
+            "-H", "User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+            "--max-time", "6"
+        ]
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+        if res.stdout and len(res.stdout) >= 1500 and "Just a moment..." not in res.stdout:
+            page_html = res.stdout
     except Exception:
+        pass
+
+    if not page_html:
+        headers = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+        try:
+            with httpx.Client(headers=headers, follow_redirects=True, timeout=6.0, trust_env=True) as client:
+                resp = client.get(slug)
+                if resp.status_code == 200 and len(resp.text) >= 1500 and "Just a moment..." not in resp.text:
+                    page_html = resp.text
+        except Exception:
+            pass
+
+    if not page_html:
         return {}
 
     data = {}
@@ -1458,6 +1475,9 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     preview_images = []
     yt_ids = re.findall(r'youtu(?:be\.com/(?:watch\?v=|embed/)|.be/)([a-zA-Z0-9_\-]+)', page_html)
     for yid in yt_ids:
+        # 防护：3CyW24Pkz4o 为 Gemini 官方发布会视频，严禁泄露到其它产品
+        if yid == '3CyW24Pkz4o' and 'gemini' not in slug.lower():
+            continue
         thumb = f"https://i.ytimg.com/vi/{yid}/maxresdefault.jpg"
         if thumb not in preview_images:
             preview_images.append(thumb)
@@ -1596,7 +1616,7 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 rank_badge = "🔥 Product Hunt 热门精选"
 
             if not preview_imgs:
-                preview_imgs = ["https://ph-files.imgix.net/feeb7666-f92a-44bd-8442-461e1a93021d.jpeg?auto=format&fit=crop&w=1200&q=85"]
+                preview_imgs = []
 
             items.append({
                 "id": make_id(source_url, title),
@@ -1611,7 +1631,7 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 "official_url": official_url,
                 "source_url": source_url,
                 "preview_images": preview_imgs,
-                "image_url": preview_imgs[0],
+                "image_url": preview_imgs[0] if preview_imgs else "",
                 "logo_url": logo_url,
                 "rank_badge": rank_badge,
                 "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",

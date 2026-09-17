@@ -4156,8 +4156,30 @@
       `;
     }
 
+    function dedupToolItems(items) {
+      if (!Array.isArray(items)) return [];
+      const seen = new Set();
+      const result = [];
+      for (const it of items) {
+        if (!it) continue;
+        const rawName = it.app_name || (it.title ? it.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : '');
+        const normName = rawName.trim().toLowerCase();
+        const src = (it.source_url || it.url || '').split('?')[0].toLowerCase();
+        let key = normName;
+        if (src.includes('producthunt.com/products/')) {
+          key = 'ph:' + src.split('producthunt.com/products/')[1].replace(/\/+$/, '');
+        } else if (normName) {
+          key = 'name:' + normName;
+        } else if (src) {
+          key = 'url:' + src;
+        }
+        if (!key || seen.has(key)) continue;
+        seen.add(key);
+        result.push(it);
+      }
+      return result;
+    }
 
-    
     function renderToolCard(item) {
       const t = I18N[currentLang];
       const timeObj = formatTime(item.raw_published_at, currentLang);
@@ -4171,7 +4193,15 @@
       const cleanSource = item.source || "Product Hunt";
       const officialUrl = item.official_url || item.url || "#";
       const rankBadge = item.rank_badge || "🔥 热门推荐";
-      const previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
+
+      const isGeminiProduct = appName.toLowerCase().includes('gemini');
+      let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
+      // 绝不允许 Gemini 宣传物料泄露到其它独立产品卡片
+      if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
+        const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
+        previewImg = safeImgs[0] || "";
+      }
+
       const itemId = escapeHtml(item.id || item.url || '');
 
       return `
@@ -4803,7 +4833,7 @@
         : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-200 dark:border-slate-800/60 rounded-xl bg-slate-100/50 dark:bg-slate-900/40">${isZh ? '未找到匹配大V发言' : 'No matching voices'}</div>`;
 
       document.getElementById('search-stream-tools').innerHTML = toolsHits.length > 0
-        ? toolsHits.map(renderToolCard).join('')
+        ? dedupToolItems(toolsHits).map(renderToolCard).join('')
         : `<div class="text-slate-500 text-xs py-8 text-center border border-slate-200 dark:border-slate-800/60 rounded-xl bg-slate-100/50 dark:bg-slate-900/40">${isZh ? '未找到匹配落地工具' : 'No matching tools'}</div>`;
 
       document.getElementById('search-stream-videos').innerHTML = videosHits.length > 0
@@ -4830,7 +4860,7 @@
       // 1. 获取全量各分类列表 (视频与提示词彻底独立)
       const allNews = data.grouped?.news || data.news || data.industry_news || [];
       const allCeleb = data.grouped?.celebrity || data.celebrity || data.leader_opinions || [];
-      const allTools = data.grouped?.tools || data.tools || data.applied_tools || [];
+      const allTools = dedupToolItems(data.grouped?.tools || data.tools || data.applied_tools || []);
       const allVideos = (data.grouped?.videos || data.videos || []).filter(it => !it.is_prompt);
       const allPrompts = data.grouped?.prompts || data.prompts || (data.grouped?.videos || data.videos || []).filter(it => it.is_prompt);
 
@@ -5204,7 +5234,7 @@
           container.innerHTML = renderCelebrityTimeline(list);
         }
       } else if (tab === 'tools') {
-        let list = filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []);
+        let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []));
         if (toolScenarioFilter !== 'all') {
           list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
         }
@@ -6620,10 +6650,18 @@
         }
       }
 
-      // 轮播画廊设置
-      currentToolImages = (item.preview_images && item.preview_images.length > 0)
+      // 轮播画廊设置 (严禁 Gemini 官方宣传物料泄露到其它独立产品)
+      const isGeminiItem = (item.app_name || item.title || '').toLowerCase().includes('gemini');
+      let galleryImages = (item.preview_images && item.preview_images.length > 0)
         ? item.preview_images
-        : [item.image_url || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80'];
+        : (item.image_url ? [item.image_url] : []);
+      if (!isGeminiItem) {
+        galleryImages = galleryImages.filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
+      }
+      if (galleryImages.length === 0) {
+        galleryImages = ['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80'];
+      }
+      currentToolImages = galleryImages;
       currentToolImageIndex = 0;
       updateToolCarousel();
 

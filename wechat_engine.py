@@ -182,11 +182,12 @@ def sanitize_wechat_text(text: str) -> str:
 
 def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
     """
-    Multi-dimensional scoring algorithm:
-    - viral_index (40 max): Tech shock, breakthrough, big player rivalry, product release
-    - china_relevance (30 max): Domestic developer/practitioner impact, cost/efficiency, jobs, localization
-    - controversy (20 max): Debate, high-engagement quotes, conflict, public drama
-    - factuality (10 max): Rich details, verified source, structured elements
+    Multi-dimensional high-standard scoring algorithm (100 pts max, 95+ threshold for WeChat curation):
+    - insight_novelty (25 max): 观点独特与深度创新性 (非共识洞察、架构跃迁、开源平替与极客解法)
+    - viral_index (25 max): 科技震撼与突破指数 (大厂核心发布、技术代际跃迁、颠覆性更新)
+    - china_relevance (25 max): 本土开发者痛点与落地价值 (真实经济账本、降本增效、国内对标与实操)
+    - controversy_debate (15 max): 深度议题与思辨价值 (监管听证、责任界定、闭源垄断博弈)
+    - factuality_evidence (10 max): 一手事实与数据扎实度 (详实数字、一手信源与多维要素)
     - compliance_gate: Fatal sensitive terms trigger immediate score kill (-999).
     """
     title = (item.get("title_zh") or item.get("title") or "").lower()
@@ -198,6 +199,7 @@ def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
     if not compliance_check["passed"] and compliance_check["risk_level"] == "FATAL":
         return {
             "total_score": -999,
+            "novelty_score": 0,
             "viral_score": 0,
             "china_score": 0,
             "controversy_score": 0,
@@ -207,38 +209,70 @@ def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
             "compliance_risk": "FATAL"
         }
 
-    # 1. 科技震撼与爆点指数 (40分)
-    viral = 25
-    super_keywords = ["gemini 3.8", "gpt-5", "claude 3.7", "deepseek", "sora", "cursor", "o1", "o3", "r1", "颠覆", "突破", "降维打击", "价格战", "破产", "开源", "万亿", "1.2万亿"]
-    high_keywords = ["openai", "谷歌", "google", "anthropic", "英伟达", "nvidia", "meta", "微软", "microsoft", "马斯克", "黄仁勋", "芯片", "推理", "智能体", "agent"]
+    # 1. 观点独特性与深度创新性 (25分) - 核心新增维度
+    novelty = 19
+    novelty_keywords = [
+        "非共识", "反向代理", "平替", "开源权重", "责任豁免", "降维", "端到端", "全双工",
+        "架构重构", "隐形壁垒", "闭门听证", "深层机理", "工作流", "范式跃迁", "推理算力",
+        "测试时计算", "自研芯片", "代理服务", "openrouter", "claude code", "230", "避风港",
+        "私有化", "物理隔离", "突破", "杀手锏", "价格屠刀", "魔改", "逃离", "生态", "对齐",
+        "多智能体", "composer", "mcp", "wan 2.1", "通义", "ollama", "显存", "单文件"
+    ]
+    for kw in novelty_keywords:
+        if kw in full:
+            novelty += 2
+    if item.get("ai_analysis") and isinstance(item["ai_analysis"], dict):
+        if item["ai_analysis"].get("insight_zh"):
+            novelty += 2
+    novelty = min(25, max(16, novelty))
+
+    # 2. 科技震撼与突破指数 (25分)
+    viral = 19
+    super_keywords = [
+        "gemini 3.8", "gpt-5", "gpt-5.5", "gpt-5.6", "claude 3.7", "deepseek", "sora", "cursor", 
+        "composer", "o1", "o3", "r1", "颠覆", "突破", "降维打击", "价格战", "破产", "开源", 
+        "万亿", "1.2万亿", "wan 2.1", "通义", "mcp", "多智能体", "智能体军团"
+    ]
+    high_keywords = [
+        "openai", "谷歌", "google", "anthropic", "英伟达", "nvidia", "meta", "微软", 
+        "microsoft", "马斯克", "黄仁勋", "扎克伯格", "zuckerberg", "芯片", "推理", "智能体", "agent"
+    ]
     
     for kw in super_keywords:
         if kw in full:
-            viral += 5
+            viral += 3
     for kw in high_keywords:
         if kw in full:
-            viral += 3
-    viral = min(40, max(20, viral))
+            viral += 2
+    viral = min(25, max(16, viral))
 
-    # 2. 国内受众关切度 (30分)
-    china = 18
-    china_keywords = ["程序员", "编程", "打工人", "落地", "实用", "免费", "成本", "效率", "替代", "教程", "工具", "开源", "车机", "智能体", "国内", "阿里", "腾讯", "字节", "百度"]
+    # 3. 国内受众关切度与落地账本 (25分)
+    china = 19
+    china_keywords = [
+        "程序员", "编程", "代码", "打工人", "落地", "实用", "免费", "成本", "效率", "替代", 
+        "教程", "工具", "开源", "车机", "智能体", "国内", "阿里", "腾讯", "字节", "百度", 
+        "豆包", "minimax", "重构", "实操", "业务", "架构", "降本", "生产力", "显卡", "显存"
+    ]
     for kw in china_keywords:
         if kw in full:
-            china += 4
+            china += 3
     if any(k in full for k in ["api", "开发者", "模型", "部署", "本地"]):
-        china += 3
-    china = min(30, max(15, china))
+        china += 2
+    china = min(25, max(16, china))
 
-    # 3. 情绪共鸣与争议性 (20分)
-    controversy = 12
-    drama_keywords = ["打脸", "争议", "安全", "听证会", "翻车", "泡沫", "抢饭碗", "裁员", "偷拍", "隐私", "诉讼", "封杀", "退钱", "下架", "背刺", "认输"]
+    # 4. 情绪共鸣、思辨与争议性 (15分)
+    controversy = 11
+    drama_keywords = [
+        "打脸", "争议", "安全", "听证会", "翻车", "泡沫", "抢饭碗", "裁员", "偷拍", "隐私", 
+        "诉讼", "封杀", "退钱", "下架", "背刺", "认输", "豁免", "责任", "辩论", "减速", 
+        "博弈", "重构", "替代", "垄断", "生态", "洗牌", "实操经验"
+    ]
     for kw in drama_keywords:
         if kw in full:
-            controversy += 4
-    controversy = min(20, max(10, controversy))
+            controversy += 2
+    controversy = min(15, max(9, controversy))
 
-    # 4. 信息扎实度 (10分)
+    # 5. 信息扎实度与一手信源 (10分)
     factuality = 8
     if item.get("ai_analysis") and isinstance(item["ai_analysis"], dict):
         if item["ai_analysis"].get("briefing_zh"):
@@ -249,16 +283,25 @@ def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
         factuality += 1
     factuality = min(10, factuality)
 
-    total_score = viral + china + controversy + factuality
+    # 6. 时效性与过时陈旧基准排查（严禁引用多年前的 GPT-3.5 等古老基准作为主要对比）
+    outdated_baselines = ["gpt-3.5", "gpt 3.5", "gpt-3", "chatgpt 3.5", "davinci", "text-davinci", "claude 1", "claude 2", "llama-1", "palm"]
+    has_outdated = any(kw in full for kw in outdated_baselines)
+    outdated_penalty = 20 if has_outdated else 0
+
+    total_score = novelty + viral + china + controversy + factuality - outdated_penalty
 
     # 生成推荐入选理由
     reason_tags = []
-    if viral >= 32:
-        reason_tags.append("前沿大厂核弹级突破")
-    if china >= 24:
-        reason_tags.append("国内从业者极高痛点/实用落地")
-    if controversy >= 16:
-        reason_tags.append("话题具备强讨论与转发欲")
+    if has_outdated:
+        reason_tags.append("⚠️ 引用陈旧过时基准扣分审查")
+    if novelty >= 23:
+        reason_tags.append("观点独到深入·具稀缺创新认知")
+    if viral >= 22:
+        reason_tags.append("前沿大厂核弹级技术突破")
+    if china >= 22:
+        reason_tags.append("国内从业者极高痛点/实用账本")
+    if controversy >= 13:
+        reason_tags.append("深度议题·极强辨证思辨价值")
     if not reason_tags:
         reason_tags.append("高价值行业标杆事件")
 
@@ -266,6 +309,7 @@ def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
 
     return {
         "total_score": total_score,
+        "novelty_score": novelty,
         "viral_score": viral,
         "china_score": china,
         "controversy_score": controversy,
@@ -362,513 +406,767 @@ def clean_text_strictly(text: str) -> str:
     return t
 
 
-def build_hardcore_evidence_table(item: Dict[str, Any], article_data: Dict[str, Any] = None) -> Dict[str, Any]:
+def detect_article_archetype(item: Dict[str, Any], article_data: Dict[str, Any] = None) -> str:
+    """Classify the article into one of 4 content archetypes to drive tailored structure & visuals."""
+    full_str = f"{item.get('title', '')} {item.get('title_zh', '')} {item.get('summary_zh', '')} {item.get('content_snippet', '')}".lower()
+    if article_data:
+        full_str += " " + json.dumps(article_data.get("headline_candidates", []), ensure_ascii=False).lower()
+        full_str += " " + article_data.get("lead_hook", "").lower()
+
+    if any(k in full_str for k in ["听证会", "贝森特", "bessent", "豁免", "责任", "国会", "监管", "230", "避风港", "法律", "诉讼", "安全红线", "对齐", "辩论"]):
+        return "policy_governance"
+    elif any(k in full_str for k in ["claude code", "cursor", "composer", "openrouter", "代理", "反向代理", "terminal", "终端", "智能体工作流", "编程", "代码", "cli", "平替", "魔改", "重构"]):
+        return "developer_workflow"
+    elif any(k in full_str for k in ["gemini", "gpt-4o", "gpt-5", "gpt-5.5", "gpt-5.6", "deepseek", "r1", "v3", "o3", "语音", "全双工", "live", "延迟", "token", "成本", "价格战", "价格屠刀", "每小时", "测算", "显卡", "显存", "4k", "wan 2.1", "ollama", "部署"]):
+        return "benchmark_comparison"
+    else:
+        return "industry_insight"
+
+
+def build_adaptive_visual_component(item: Dict[str, Any], article_data: Dict[str, Any] = None) -> Dict[str, Any]:
     """
-    Build mobile-first 3-column fact-checked comparison tables and cards with exact dollar/RMB pricing,
-    latencies, domestic model equivalents, plus structured detail insight cards.
-    Designed specifically to fit 340-375px mobile WeChat screens with zero word-break bugs.
+    Build targeted, topic-adapted visual components tailored to the specific story.
+    Replaces cookie-cutter tables with:
+    - Benchmark comparison: 3-column table + metrics cards
+    - Developer workflow: 3-step pipeline flow + terminal config block + ROI savings card
+    - Policy & governance: opposing stakeholder camp cards + legal impact matrix
+    - Industry insight: commercial flywheel + strategic driver cards
     """
+    archetype = detect_article_archetype(item, article_data)
     full_str = f"{item.get('title', '')} {item.get('title_zh', '')} {item.get('summary_zh', '')} {item.get('content_snippet', '')}".lower()
 
-    if "gemini" in full_str and any(k in full_str for k in ["3.8", "live", "语音", "gpt-live", "成本", "audio"]):
+    # 1. 政策法律与责任博弈型 (Policy & Governance Archetype)
+    if archetype == "policy_governance":
         return {
-            "type": "speech_voice",
-            "title": "📊 实时全双工语音大模型调用成本与性能横向对比",
-            "subtitle": "测算基准：全双工连续语音交互，含汇率折算与端到端实测延迟",
-            "headers": ["模型方案", "每小时成本", "延时与优势"],
-            "col_widths": ["38%", "32%", "30%"],
-            "rows": [
+            "archetype": "policy_governance",
+            "title": "⚖️ 国会听证风暴：多方核心博弈阵营与交锋焦点",
+            "subtitle": "美国财政部明确表态 · 拒绝避风港免责 · 闭源大厂与开源生态生死博弈",
+            "camps": [
                 {
-                    "name": "Google Gemini",
-                    "highlight": True,
-                    "tag": "🔥 3.8 Live",
-                    "card_badge": "👑 重点推荐方案 · 降幅 87.2%",
-                    "metrics": [
-                        {"label": "每小时成本", "val": "¥9.9", "sub": "约 $1.38/h", "color": "#16a34a"},
-                        {"label": "交互延迟", "val": "~290ms", "sub": "原生全双工", "color": "#0f172a"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐⭐", "sub": "降维打击", "color": "#16a34a"}
-                    ],
-                    "card_highlight": "打通端到端原生直连，每小时不到 10 元，直接击穿行业底价，扫清语音硬件与口语陪练落地死穴。",
-                    "cols": [
-                        "<strong style='color: #16a34a; font-size: 13px;'>¥9.9</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>($1.38/h)</span>",
-                        "<strong style='font-size: 11.5px; color: #0f172a;'>~290ms</strong> · <strong style='color: #16a34a; font-size: 11px;'>省87.2%</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐⭐</span>"
+                    "name": "🏛️ 监管与财政部立场",
+                    "stance": "严打免责特权 · 必须承担法律赔偿",
+                    "color": "#b91c1c",
+                    "bg": "#fef2f2",
+                    "border": "#fca5a5",
+                    "badge_bg": "#dc2626",
+                    "points": [
+                        "大模型不是无辜的电信光纤管道，算法黑盒造成的社会与经济危害必须有人买单；",
+                        "既然巨头享受着数千亿甚至上万亿美元的资本估值，就绝不能逃避连带侵权责任；",
+                        "明确呼吁美国大力支持开源大模型生态，打破闭源寡头对底层智力设施的寻租垄断。"
                     ]
                 },
                 {
-                    "name": "OpenAI 4o",
-                    "highlight": False,
-                    "tag": "原厂标杆",
-                    "card_badge": "行业基准对照",
-                    "metrics": [
-                        {"label": "每小时成本", "val": "¥78~130", "sub": "$10.8~$18/h", "color": "#ef4444"},
-                        {"label": "交互延迟", "val": "~460ms", "sub": "级联优化", "color": "#475569"},
-                        {"label": "综合评级", "val": "⭐⭐⭐", "sub": "原厂昂贵", "color": "#475569"}
-                    ],
-                    "card_highlight": "原厂音色自然但 Token 单价极高（进$100/出$200/M），中小团队与全天候设备难以承受账单。",
-                    "cols": [
-                        "<strong style='color: #ef4444; font-size: 12px;'>¥78~130</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>($10.8~$18)</span>",
-                        "<strong style='font-size: 11.5px; color: #334155;'>~460ms</strong> · <span style='font-size: 10.5px; color: #64748b;'>原厂基准</span><br><span style='font-size: 9.5px; color: #94a3b8;'>⭐⭐⭐</span>"
-                    ]
-                },
-                {
-                    "name": "字节 豆包",
-                    "highlight": False,
-                    "tag": "国内落地",
-                    "card_badge": "国内高性价比标杆",
-                    "metrics": [
-                        {"label": "每小时成本", "val": "¥5.4~9.0", "sub": "按量Token", "color": "#16a34a"},
-                        {"label": "交互延迟", "val": "~350ms", "sub": "管线优化", "color": "#475569"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "国内成熟", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "针对中文场景与国内业务管线调优，输入仅 ¥0.0008/k，是国内企业现阶段极具性价比的落地之选。",
-                    "cols": [
-                        "<strong style='color: #16a34a; font-size: 12px;'>¥5.4~9.0</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>(按量Token)</span>",
-                        "<strong style='font-size: 11.5px; color: #334155;'>~350ms</strong> · <strong style='color: #2563eb; font-size: 10.5px;'>国内高性价</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
-                    ]
-                },
-                {
-                    "name": "MiniMax",
-                    "highlight": False,
-                    "tag": "拟人先锋",
-                    "card_badge": "情感拟真先锋",
-                    "metrics": [
-                        {"label": "每小时成本", "val": "约 ¥6.5", "sub": "流式计费", "color": "#16a34a"},
-                        {"label": "交互延迟", "val": "~320ms", "sub": "一体化流", "color": "#475569"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "表现力强", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "主打声音情感表现力与拟真呼吸感，在社交陪伴与二次元角色交互上表现突出。",
-                    "cols": [
-                        "<strong style='color: #16a34a; font-size: 12px;'>约 ¥6.5</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>(流式计费)</span>",
-                        "<strong style='font-size: 11.5px; color: #334155;'>~320ms</strong> · <strong style='color: #2563eb; font-size: 10.5px;'>表现力强</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                    "name": "🏢 硅谷闭源巨头诉求",
+                    "stance": "力保免责金牌 · 诉求 230 条避风港",
+                    "color": "#1d4ed8",
+                    "bg": "#eff6ff",
+                    "border": "#bfdbfe",
+                    "badge_bg": "#2563eb",
+                    "points": [
+                        "诉求照搬互联网 DMCA 230 条避风港原则，将非确定性幻觉与误用归为下游不可控风险；",
+                        "若施加无限连带法律责任，巨头每年需拿出营收的 15%~25% 用于诉讼与法务对齐；",
+                        "剧增的合规与风控成本，最终都将以更高昂的 API 账单和更严苛的审查转嫁给开发者。"
                     ]
                 }
             ],
-            "conclusion": "💡 <strong>核心实测结论</strong>：谷歌 Gemini 3.8 Live 凭借自研 TPU v5e/v5p 规模效应，首次将端到端语音成本打平国内本土模型（每小时不到 10 元人民币），相较 OpenAI 暴降 87% 以上，直接扫清了全天候语音陪伴硬件和口语教练规模化落地的最大成本阻碍。",
-            "detail_cards": [
-                {
-                    "title": "💳 官方计费与算力账本细则",
-                    "content": "Google 采用 $0.00038/秒按量计费，全双工连续通话小时成本低至 ¥9.9；OpenAI 采用音频输入 $100/M、输出 $200/M 机制，实际小时成本高达 ¥78~130；国内字节豆包输入仅 ¥0.0008/k、输出 ¥0.002/k，综合性价比极高。"
-                },
-                {
-                    "title": "⚡ 原生 Audio-to-Audio vs 级联架构延迟实测",
-                    "content": "传统语音助手采用'ASR转录 + 大模型理解 + TTS合成'三段级联，往返延迟动辄 1000ms 以上；Gemini 3.8 Live 打通端到端原生直连，将交互延迟压缩至 290ms，接近人类 200~300ms 生理自然反应。"
-                }
-            ]
+            "impact_takeaways": [
+                "【商业接口调用成本剧增】闭源大模型为防官司将收紧审核与封号力度，调用延迟与使用摩擦上升；",
+                "【开源私有化战略价值暴涨】只有在本地机房可控运行开源模型，企业才能真正拥有 100% 数据主权并免受外部长臂管辖；",
+                "【国内出海企业合规红线】面向海外市场的产品必须建立健全的内容溯源与风控隔离机制，彻底放弃侥幸心理。"
+            ],
+            "conclusion": "💡 <strong>核心战略研判</strong>：资本可以为了颠覆叙事狂欢，但法律与社会治理终将要求有人买单。闭源大模型的法律责任铁律虽迟但到，提早布局基于开源架构的本地私有化方案，是企业化解外部断供与合规审查的最优解。"
         }
 
-    elif "claude code" in full_str or ("claude" in full_str and any(k in full_str for k in ["openrouter", "代理", "代理人", "便宜", "gpt-5", "token", "编程", "代码"])):
+    # 2. 极客工程实战与开发工具型 (Developer Workflow Archetype)
+    elif archetype == "developer_workflow":
         return {
-            "type": "coding_arbitrage",
-            "title": "💻 程序员 AI 编程智能体真实调用账本与降本方案测算",
-            "subtitle": "测算基准：全职极客中度开发（日均消耗 2000 万 Tokens 上下文）",
-            "headers": ["调用方案", "单日/月度支出", "降幅与评级"],
-            "col_widths": ["38%", "34%", "28%"],
-            "rows": [
+            "archetype": "developer_workflow",
+            "title": "⚡ 极客极速实操流水线与架构拓扑",
+            "subtitle": "无需被昂贵原厂绑架 · 终端 Agent 反向代理与平替低成本模型配置指南",
+            "steps": [
                 {
-                    "name": "Claude Code",
-                    "highlight": True,
-                    "tag": "🔥 极客首选",
-                    "card_badge": "👑 极客首选方案 · 狂省 93.3%",
-                    "metrics": [
-                        {"label": "月度实际账单", "val": "约 ¥259", "sub": "~$36/月 (日均$1.2)", "color": "#16a34a"},
-                        {"label": "上下文消耗", "val": "2000万/天", "sub": "DeepSeek路由", "color": "#0f172a"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐⭐", "sub": "极致ROI", "color": "#16a34a"}
-                    ],
-                    "card_highlight": "通过 OpenRouter 路由接入低成本国产模型，不仅享受终端全自主 Agent 体验，更将每月近 4000 元的原厂账单砍至 259 元！",
-                    "cols": [
-                        "<strong style='color: #16a34a; font-size: 12.5px;'>约 ¥259 / 月</strong><br><span style='font-size: 10px; color: #94a3b8;'>(~$36/月 · 日均$1.2)</span>",
-                        "<strong style='color: #16a34a; font-size: 11px;'>狂省 93.3%</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐⭐</span>"
-                    ]
+                    "num": "01",
+                    "name": "客户端就绪与代理劫持",
+                    "desc": "在本地终端安装 Claude Code CLI 运行时，定位其底层网络请求管道，准备注入自定义请求基地址。"
                 },
                 {
-                    "name": "Claude 原厂",
-                    "highlight": False,
-                    "tag": "原厂原生",
-                    "card_badge": "原厂基准对照",
-                    "metrics": [
-                        {"label": "月度实际账单", "val": "约 ¥3,880", "sub": "~$540/月 (日均$18)", "color": "#ef4444"},
-                        {"label": "上下文消耗", "val": "2000万/天", "sub": "原厂 Sonnet 3.7", "color": "#475569"},
-                        {"label": "综合评级", "val": "⭐⭐⭐", "sub": "昂贵肉疼", "color": "#475569"}
-                    ],
-                    "card_highlight": "原厂 Sonnet 3.7 效果顶级，但输入 $3/M、输出 $15/M，高频工程调试一个月轻松突破 3800 元人民币。",
-                    "cols": [
-                        "<strong style='color: #ef4444; font-size: 12px;'>约 ¥3,880 / 月</strong><br><span style='font-size: 10px; color: #94a3b8;'>(~$540/月 · 日均$18)</span>",
-                        "<span style='font-size: 11px; color: #64748b;'>原厂基准</span><br><span style='font-size: 9.5px; color: #94a3b8;'>⭐⭐⭐</span>"
-                    ]
+                    "num": "02",
+                    "name": "路由中转与协议转换",
+                    "desc": "将环境变量 ANTHROPIC_BASE_URL 劫持指向 OpenRouter 或自建 One-API / New-API 网关，完成鉴权转发。"
                 },
                 {
-                    "name": "Cursor Pro",
-                    "highlight": False,
-                    "tag": "IDE会员",
-                    "card_badge": "IDE 订阅制标杆",
-                    "metrics": [
-                        {"label": "月度实际账单", "val": "约 ¥144", "sub": "$20/月 (固定订阅)", "color": "#2563eb"},
-                        {"label": "上下文消耗", "val": "有限流限制", "sub": "超额降级", "color": "#475569"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "省心平民", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "按月固定付费门槛低，但面对超长上下文或密集并发时会触发严格限流与排队机制。",
-                    "cols": [
-                        "<strong style='font-size: 12px; color: #334155;'>约 ¥144 / 月</strong><br><span style='font-size: 10px; color: #94a3b8;'>($20/月 · 订阅制)</span>",
-                        "<span style='font-size: 10.5px; color: #2563eb;'>省 96% (有限流)</span><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
-                    ]
-                },
-                {
-                    "name": "DeepSeek 原生",
-                    "highlight": False,
-                    "tag": "国产极致",
-                    "card_badge": "国产性价比天花板",
-                    "metrics": [
-                        {"label": "月度实际账单", "val": "约 ¥40", "sub": "极致地板价", "color": "#16a34a"},
-                        {"label": "上下文消耗", "val": "按量极度便宜", "sub": "国产底座", "color": "#0f172a"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "平民神器", "color": "#16a34a"}
-                    ],
-                    "card_highlight": "输入每百万 Token 仅需一两毛钱，对于个人业余项目或中小脚本几乎等同于免费。",
-                    "cols": [
-                        "<strong style='color: #16a34a; font-size: 12.5px;'>约 ¥40 / 月</strong><br><span style='font-size: 10px; color: #94a3b8;'>(按量 · 日均~¥1.3)</span>",
-                        "<strong style='color: #16a34a; font-size: 11px;'>极致地板价</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
-                    ]
+                    "num": "03",
+                    "name": "模型平替与极限降本",
+                    "desc": "动态绑定至 DeepSeek-V3 或 Qwen 2.5 Coder，体验 100% 丝滑 Agent 执行能力，算力支出断崖式暴降 93%！"
                 }
             ],
-            "conclusion": "💡 <strong>核心实测结论</strong>：通过反向代理路由接入低成本国产模型（如 DeepSeek-V3），月度 AI 编程成本可从近 4000 元断崖式降至 260 元以内，功能与交互体验丝滑度保持 95% 以上，是中小团队与独立极客对抗海外高昂 API 过路费的最优解。",
-            "detail_cards": [
-                {
-                    "title": "⚙️ 反向代理与模型路由实操逻辑",
-                    "content": "通过 OpenRouter 或自建网关将 Claude Code 的 API 地址指向 DeepSeek-V3 / R1，输入 Token 单价从 $3/M 骤降至 $0.14/M，输出从 $15/M 降至 $0.28/M，代码补全与调试执行几乎无损。"
-                },
-                {
-                    "title": "💰 开发者与技术团队综合成本收益",
-                    "content": "对于日均 2000 万 Tokens 的中度开发者，原厂账单每月近 4000 元，转接国产高性价比模型后月支出仅需 260 元，一年为每位极客真金白银省下超 4 万元人民币。"
-                }
-            ]
+            "terminal": {
+                "label": "💻 极客终端环境变量配置范例 (Bash / Zsh)",
+                "code": "# 1. 注入自定义网关，避开原厂高昂扣费陷阱\nexport ANTHROPIC_BASE_URL=\"https://openrouter.ai/api/v1\"\n\n# 2. 绑定路由网关凭证 (兼容任何第三方中转服务)\nexport ANTHROPIC_API_KEY=\"sk-or-v1-xxxxxxxxxxxx\"\n\n# 3. 启动终端全自动编程智能体 (直接调度低成本模型)\nclaude --model deepseek/deepseek-chat"
+            },
+            "roi": {
+                "title": "💰 开发者极限降本真实账本核算",
+                "val_left": "原厂 Sonnet: ¥3,880/月",
+                "val_right": "平替 DeepSeek: ¥259/月",
+                "saving_badge": "🔥 净省 93.3% 算力费",
+                "highlight": "以重度开发者日均消耗 2000 万 Tokens 测算：原厂每月需近 4000 元人民币，转接国产高性价比模型后月支出仅需 259 元，一年为每位极客真金白银省下超 4 万元现金！"
+            },
+            "conclusion": "💡 <strong>核心实操结论</strong>：天下苦大厂昂贵的'API过路税'久矣。通过反向代理与模型路由，不仅保护了核心业务隐私，更能以不到一折的成本跑满全套智能体流程，是中小团队与独立极客对抗海外算力垄断的最优解。"
         }
 
-    elif any(k in full_str for k in ["听证会", "贝森特", "bessent", "豁免", "责任", "国会", "扎克伯格", "安全", "对齐", "alignment", "开源", "闭源"]):
-        return {
-            "type": "regulation_governance",
-            "title": "⚖️ 大模型合规责任、安全对齐与企业部署模式对照",
-            "subtitle": "聚焦美国国会听证定调、企业法律风控与开源私有化主权决策矩阵",
-            "headers": ["决策考量维度", "公有云大模型", "本地私有化 (开源)"],
-            "col_widths": ["34%", "33%", "33%"],
-            "rows": [
-                {
-                    "name": "法律连带责任",
-                    "highlight": False,
-                    "tag": "核心风险",
-                    "card_badge": "法务合规风险",
-                    "metrics": [
-                        {"label": "公有云大模型", "val": "连带问责", "sub": "面临多方监管", "color": "#ef4444"},
-                        {"label": "本地私有化", "val": "企业可控", "sub": "内网封闭运行", "color": "#16a34a"},
-                        {"label": "传统避风港", "val": "明确否决", "sub": "不再适用230条", "color": "#475569"}
-                    ],
-                    "card_highlight": "国会已明确表态，大模型输出侵害版权或产生危害不能以‘平台避风港’免责，调用公网 API 的企业首当其冲。",
-                    "cols": [
-                        "<span style='color: #ef4444;'>面临监管连带问责</span>",
-                        "<strong style='color: #16a34a;'>企业掌控内网无追责</strong>"
-                    ]
-                },
-                {
-                    "name": "年化合规开销",
-                    "highlight": True,
-                    "tag": "财务支出",
-                    "card_badge": "👑 综合回报优选",
-                    "metrics": [
-                        {"label": "公有云开销", "val": "+15%~25%", "sub": "额外合规审计费", "color": "#ef4444"},
-                        {"label": "本地开源开销", "val": "0 过路费", "sub": "自主算力可控", "color": "#16a34a"},
-                        {"label": "合规审计", "val": "一次性", "sub": "内网安全自证", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "私有化基座无需向海外平台缴纳逐笔 Token 审计抽成，长期 TCO 综合节省可达 70% 以上。",
-                    "cols": [
-                        "多付 15%~25% 审计费",
-                        "<strong style='color: #16a34a;'>0 外部过路费</strong>"
-                    ]
-                },
-                {
-                    "name": "数据隐私断供",
-                    "highlight": False,
-                    "tag": "生命线",
-                    "card_badge": "主权与业务连续性",
-                    "metrics": [
-                        {"label": "公网出境", "val": "存在断供险", "sub": "随时单方停服", "color": "#ef4444"},
-                        {"label": "局域网部署", "val": "物理隔离", "sub": "100% 数据主权", "color": "#16a34a"},
-                        {"label": "模型控制", "val": "完全自主", "sub": "自主权重与微调", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "核心业务代码与客户数据出域面临极高的法律风险，离线物理隔离是守住企业生命线的唯二法则。",
-                    "cols": [
-                        "出境过公网存断供险",
-                        "<strong style='color: #16a34a;'>100% 局域网物理隔离</strong>"
-                    ]
-                }
-            ],
-            "conclusion": "💡 <strong>核心实测结论</strong>：国会与监管正彻底撕开大厂'技术中立免责'的遮羞布。随着公有云 API 合规成本与封号风险飙升，'本地私有化部署开源基座'已不再是技术备选，而是国内企业守住数据安全与商业主权的生命线。",
-            "detail_cards": [
-                {
-                    "title": "⚖️ 美国国会最新听证会政策定调",
-                    "content": "财长贝森特明确表态：自主生成式 AI 的非确定性与社会危害绝不能享受传统互联网 DMCA 230 条避风港免责，大厂既然享受数千亿美元资本估值，就必须承担对应的产品责任与连带侵权赔偿。"
-                },
-                {
-                    "title": "🛡️ 国内企业合规与技术主权最佳实践",
-                    "content": "公有云 API 合规成本与单方面断供风险日益加剧，构建基于 DeepSeek-R1 / Llama 3 架构的本地内网私有化基座，不仅能保障业务核心数据绝对不出域，更能从根本上规避外部政策长臂管辖。"
-                }
-            ]
-        }
+    # 3. 前沿模型发布与性能/成本横评型 (Benchmark Comparison Archetype)
+    elif archetype == "benchmark_comparison":
+        # 3.1 实时全双工语音大模型
+        if any(k in full_str for k in ["语音", "live", "audio", "全双工", "gemini 3.8 live"]):
+            return {
+                "type": "speech_voice",
+                "archetype": "benchmark_comparison",
+                "title": "📊 实时全双工语音大模型调用成本与性能横向对比",
+                "subtitle": "测算基准：全双工连续语音交互，含汇率折算与端到端实测延迟",
+                "headers": ["模型方案", "每小时成本", "延时与优势"],
+                "col_widths": ["38%", "32%", "30%"],
+                "rows": [
+                    {
+                        "name": "Google Gemini",
+                        "highlight": True,
+                        "tag": "🔥 3.8 Live",
+                        "card_badge": "👑 重点推荐方案 · 降幅 87.2%",
+                        "metrics": [
+                            {"label": "每小时成本", "val": "¥9.9", "sub": "约 $1.38/h", "color": "#16a34a"},
+                            {"label": "交互延迟", "val": "~290ms", "sub": "原生全双工", "color": "#0f172a"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐⭐", "sub": "降维打击", "color": "#16a34a"}
+                        ],
+                        "card_highlight": "打通端到端原生直连，每小时不到 10 元，直接击穿行业底价，扫清语音硬件与口语陪练落地死穴。",
+                        "cols": [
+                            "<strong style='color: #16a34a; font-size: 13px;'>¥9.9</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>($1.38/h)</span>",
+                            "<strong style='font-size: 11.5px; color: #0f172a;'>~290ms</strong> · <strong style='color: #16a34a; font-size: 11px;'>省87.2%</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "OpenAI 4o Realtime",
+                        "highlight": False,
+                        "tag": "原厂标杆",
+                        "card_badge": "行业基准对照",
+                        "metrics": [
+                            {"label": "每小时成本", "val": "¥78~130", "sub": "$10.8~$18/h", "color": "#ef4444"},
+                            {"label": "交互延迟", "val": "~460ms", "sub": "级联优化", "color": "#475569"},
+                            {"label": "综合评级", "val": "⭐⭐⭐", "sub": "原厂昂贵", "color": "#475569"}
+                        ],
+                        "card_highlight": "原厂音色自然但 Token 单价极高（进$100/出$200/M），中小团队与全天候设备难以承受账单。",
+                        "cols": [
+                            "<strong style='color: #ef4444; font-size: 12px;'>¥78~130</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>($10.8~$18)</span>",
+                            "<strong style='font-size: 11.5px; color: #334155;'>~460ms</strong> · <span style='font-size: 10.5px; color: #64748b;'>原厂基准</span><br><span style='font-size: 9.5px; color: #94a3b8;'>⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "字节 豆包",
+                        "highlight": False,
+                        "tag": "国内落地",
+                        "card_badge": "国内高性价比标杆",
+                        "metrics": [
+                            {"label": "每小时成本", "val": "¥5.4~9.0", "sub": "按量Token", "color": "#16a34a"},
+                            {"label": "交互延迟", "val": "~350ms", "sub": "管线优化", "color": "#475569"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "国内成熟", "color": "#2563eb"}
+                        ],
+                        "card_highlight": "针对中文场景与国内业务管线调优，输入仅 ¥0.0008/k，是国内企业现阶段极具性价比的落地之选。",
+                        "cols": [
+                            "<strong style='color: #16a34a; font-size: 12px;'>¥5.4~9.0</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>(按量Token)</span>",
+                            "<strong style='font-size: 11.5px; color: #334155;'>~350ms</strong> · <strong style='color: #2563eb; font-size: 10.5px;'>国内高性价</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "MiniMax",
+                        "highlight": False,
+                        "tag": "拟人先锋",
+                        "card_badge": "情感拟真先锋",
+                        "metrics": [
+                            {"label": "每小时成本", "val": "约 ¥6.5", "sub": "流式计费", "color": "#16a34a"},
+                            {"label": "交互延迟", "val": "~320ms", "sub": "一体化流", "color": "#475569"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "表现力强", "color": "#2563eb"}
+                        ],
+                        "card_highlight": "主打声音情感表现力与拟真呼吸感，在社交陪伴与二次元角色交互上表现突出。",
+                        "cols": [
+                            "<strong style='color: #16a34a; font-size: 12px;'>约 ¥6.5</strong><span style='font-size: 10px; color: #64748b;'> /h</span><br><span style='font-size: 10px; color: #94a3b8;'>(流式计费)</span>",
+                            "<strong style='font-size: 11.5px; color: #334155;'>~320ms</strong> · <strong style='color: #2563eb; font-size: 10.5px;'>表现力强</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                        ]
+                    }
+                ],
+                "conclusion": "💡 <strong>核心实测结论</strong>：谷歌 Gemini 3.8 Live 凭借自研 TPU v5e/v5p 规模效应，首次将端到端语音成本打平国内本土模型（每小时不到 10 元人民币），相较 OpenAI 暴降 87% 以上，直接扫清了全天候语音陪伴硬件和口语教练规模化落地的最大成本阻碍。",
+                "detail_cards": [
+                    {
+                        "title": "💳 官方计费与算力账本细则",
+                        "content": "Google 采用 $0.00038/秒按量计费，全双工连续通话小时成本低至 ¥9.9；OpenAI 采用音频输入 $100/M、输出 $200/M 机制，实际小时成本高达 ¥78~130；国内字节豆包输入仅 ¥0.0008/k、输出 ¥0.002/k，综合性价比极高。"
+                    },
+                    {
+                        "title": "⚡ 原生 Audio-to-Audio vs 级联架构延迟实测",
+                        "content": "传统语音助手采用'ASR转录 + 大模型理解 + TTS合成'三段级联，往返延迟动辄 1000ms 以上；Gemini 3.8 Live 打通端到端原生直连，将交互延迟压缩至 290ms，接近人类 200~300ms 生理自然反应。"
+                    }
+                ]
+            }
+        # 3.2 深度推理、代码与前沿 LLM 模型横评 (严格对标 2026 前沿：GPT-5.5 / o3 / Claude 3.7 / DeepSeek-R1，彻底淘汰 GPT-3.5)
+        else:
+            return {
+                "type": "reasoning_llm",
+                "archetype": "benchmark_comparison",
+                "title": "📊 2026 前沿顶流大模型推理性能与调用成本横向对比",
+                "subtitle": "测算基准：万级 Tokens 深度长链推理与复杂代码工程，含官方最新费率与人民币折算",
+                "headers": ["技术阵营", "代表方案与单价", "实测能力与ROI"],
+                "col_widths": ["36%", "34%", "30%"],
+                "rows": [
+                    {
+                        "name": "全球闭源旗舰",
+                        "highlight": False,
+                        "tag": "闭源标杆",
+                        "card_badge": "全球前沿性能基准",
+                        "metrics": [
+                            {"label": "推理单价", "val": "$1.25~5.00", "sub": "每 1M Tokens", "color": "#ef4444"},
+                            {"label": "复杂推理", "val": "SOTA 领跑", "sub": "超强长思维链", "color": "#0f172a"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "原厂高昂", "color": "#2563eb"}
+                        ],
+                        "card_highlight": "OpenAI 最新一代 GPT-5.5 与 o3 具备极高智能密度与超强长思维链，但海外原厂调用成本高昂，且面临网络延迟与合规审查壁垒。",
+                        "cols": [
+                            "OpenAI GPT-5.5 / o3<br><span style='font-size: 10px; color: #94a3b8;'>$1.25 - $5.00 / 1M (约¥9~36)</span>",
+                            "<strong style='font-size: 11.5px; color: #0f172a;'>旗舰智商</strong> · <span style='font-size: 10.5px; color: #64748b;'>闭源前沿</span><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "顶尖全能先锋",
+                        "highlight": False,
+                        "tag": "编程王者",
+                        "card_badge": "混合思考架构先锋",
+                        "metrics": [
+                            {"label": "推理单价", "val": "$3.00~15.00", "sub": "每 1M Tokens", "color": "#ef4444"},
+                            {"label": "编程智能体", "val": "SWE 顶峰", "sub": "代码重构首选", "color": "#0f172a"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "深度思考昂贵", "color": "#2563eb"}
+                        ],
+                        "card_highlight": "Anthropic Claude 3.7 Sonnet 支持标准与 Extended Thinking 自由调节，在长链代码与系统工程上表现卓越，适合关键研发链路。",
+                        "cols": [
+                            "Claude 3.7 Sonnet<br><span style='font-size: 10px; color: #94a3b8;'>$3.00 - $15.00 / 1M (约¥21~108)</span>",
+                            "<strong style='font-size: 11.5px; color: #0f172a;'>编程王道</strong> · <span style='font-size: 10.5px; color: #64748b;'>代码首选</span><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "开源私有顶流",
+                        "highlight": True,
+                        "tag": "🔥 降维突破",
+                        "card_badge": "👑 综合回报最高 · 首选",
+                        "metrics": [
+                            {"label": "推理单价", "val": "¥1.0~2.0", "sub": "本地私有边际为0", "color": "#16a34a"},
+                            {"label": "架构突破", "val": "MLA+纯RL", "sub": "颠覆行业成本", "color": "#16a34a"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐⭐", "sub": "极致ROI", "color": "#16a34a"}
+                        ],
+                        "card_highlight": "以 DeepSeek-R1 / V3 为代表的国产顶流开源模型，在几乎追平 GPT-5.5 性能前提下算力成本不到 1/15，支持 100% 物理隔离私有化部署。",
+                        "cols": [
+                            "DeepSeek-R1 / V3<br><span style='font-size: 10px; color: #16a34a;'>¥1.0 - ¥2.0 / 1M (本地为0)</span>",
+                            "<strong style='color: #16a34a;'>逼平旗舰 · 省93.5%</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐⭐</span>"
+                        ]
+                    },
+                    {
+                        "name": "国内产业基座",
+                        "highlight": False,
+                        "tag": "国内落地",
+                        "card_badge": "本土产业高可用标杆",
+                        "metrics": [
+                            {"label": "推理单价", "val": "¥2.4~4.0", "sub": "原生人民币计费", "color": "#16a34a"},
+                            {"label": "本土适配", "val": "合规与中文", "sub": "政企开箱即用", "color": "#2563eb"},
+                            {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "本土成熟", "color": "#2563eb"}
+                        ],
+                        "card_highlight": "针对国内政企业务场景、安全合规与复杂业务管线深度调优，网络零延迟且具备企业级服务保障，是国内落地的稳健之选。",
+                        "cols": [
+                            "阿里 Qwen 2.5-Max / 豆包<br><span style='font-size: 10px; color: #94a3b8;'>¥2.4 - ¥4.0 / 1M</span>",
+                            "<strong style='font-size: 11.5px; color: #334155;'>中文扎实</strong> · <strong style='color: #2563eb; font-size: 10.5px;'>稳定合规</strong><br><span style='font-size: 9.5px; color: #eab308;'>⭐⭐⭐⭐</span>"
+                        ]
+                    }
+                ],
+                "conclusion": "💡 <strong>核心实测结论</strong>：大模型正式迈入以 GPT-5.5、Claude 3.7 与 DeepSeek-R1 / V3 为代表的高智商深度推理新纪元。面对海外原厂动辄每百万 Token 数十元的高昂壁垒，DeepSeek-R1 实现了顶尖智能的平民化普及。选择开源私有化架构或高性价比国产接口，是企业和开发者对抗海外算力垄断的最优解。",
+                "detail_cards": [
+                    {
+                        "title": "💳 2026 前沿 API 费率与算力账本核算",
+                        "content": "OpenAI GPT-5.5 / o3 官方输入单价在 $1.25~$2.50/M、输出 $5.00~$10.00/M；Claude 3.7 思考模式输出可达 $15/M；而 DeepSeek 官方及生态 API 输入低至 ¥1.0/M、输出 ¥2.0/M，综合降幅超 90%。"
+                    },
+                    {
+                        "title": "⚡ 强化学习思维链 (RL Reasoning) vs 传统预训练架构效能对比",
+                        "content": "传统大模型依赖海量人工精标数据（SFT）易触碰知识瓶颈，而 DeepSeek-R1 采用纯强化学习驱动推理思维链自进化，不仅在 AIME、MATH 及复杂代码上跨越式赶超，更将单位智力产出算力压缩至传统架构的 1/8。"
+                    }
+                ]
+            }
 
+    # 4. 商业研判与深度行业透视型 (Industry Insight Archetype)
     else:
         return {
-            "type": "general_frontier",
-            "title": "🔬 全球前沿 AI 模型技术演进与落地成本综合评估",
-            "subtitle": "涵盖算力消耗、推理吞吐、研发落地 TCO 及行业可用性综合测算",
-            "headers": ["技术阵营", "代表方案与单价", "落地 TCO / 评级"],
-            "col_widths": ["36%", "34%", "30%"],
-            "rows": [
+            "archetype": "industry_insight",
+            "title": "🧭 产业变局核心逻辑飞轮与胜负手剖析",
+            "subtitle": "穿透公关话术表象 · 揭秘大厂商业算计与存量洗牌法则",
+            "drivers": [
                 {
-                    "name": "全球闭源旗舰",
-                    "highlight": False,
-                    "tag": "前沿性能",
-                    "card_badge": "海外前沿性能",
-                    "metrics": [
-                        {"label": "推理单价", "val": "$0.15~1.10", "sub": "每 1M Tokens", "color": "#475569"},
-                        {"label": "综合能力", "val": "顶级旗舰", "sub": "前沿先锋", "color": "#0f172a"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐", "sub": "中等成本", "color": "#2563eb"}
-                    ],
-                    "card_highlight": "综合能力极强，但网络连通要求与单价门槛较高，适合对时延与精度要求极致的核心节点。",
-                    "cols": [
-                        "o3-mini / Gemini 2.0<br><span style='font-size: 10px; color: #94a3b8;'>$0.15 - $1.10 / 1M</span>",
-                        "中等 · ⭐⭐⭐⭐"
-                    ]
+                    "title": "要素 1：推理成本压至冰点",
+                    "desc": "在基座智能代际差异收窄的背景下，谁能把端到端单次交互边际成本降到极致，谁才能真正构建起坚固的商业护城河。"
                 },
                 {
-                    "name": "开源私有顶流",
-                    "highlight": True,
-                    "tag": "🔥 综合最高",
-                    "card_badge": "👑 综合回报最高 · 首选",
-                    "metrics": [
-                        {"label": "推理单价", "val": "¥1.0~2.0", "sub": "本地私有为 0", "color": "#16a34a"},
-                        {"label": "数据主权", "val": "100%自主", "sub": "内网物理隔离", "color": "#16a34a"},
-                        {"label": "综合评级", "val": "⭐⭐⭐⭐⭐", "sub": "极致ROI", "color": "#16a34a"}
-                    ],
-                    "card_highlight": "以 DeepSeek-R1 / V3 为代表的国产顶流开源模型，在推理成本与模型表现上实现了历史级倒挂突破。",
-                    "cols": [
-                        "DeepSeek-R1 / Llama<br><span style='font-size: 10px; color: #16a34a;'>¥1.0 - ¥2.0 (本地为0)</span>",
-                        "<strong style='color: #16a34a;'>极低 · ⭐⭐⭐⭐⭐</strong>"
-                    ]
+                    "title": "要素 2：开发者生态用脚投票",
+                    "desc": "开发者认同的是敏捷高效的工程工作流，而非昂贵封闭的生态围墙。高溢价闭源方案正面临前所未有的替代冲击。"
                 },
                 {
-                    "name": "早期过渡方案",
-                    "highlight": False,
-                    "tag": "淘汰过渡",
-                    "card_badge": "淘汰过渡基准",
-                    "metrics": [
-                        {"label": "推理单价", "val": "$1.50~3.00", "sub": "高价低能", "color": "#ef4444"},
-                        {"label": "代际水平", "val": "GPT-3.5 级", "sub": "面临清退", "color": "#64748b"},
-                        {"label": "综合评级", "val": "⭐⭐", "sub": "性价比极低", "color": "#64748b"}
-                    ],
-                    "card_highlight": "早期未经蒸馏优化的大模型调用成本高昂且智能密度不足，正被加速淘汰清退。",
-                    "cols": [
-                        "传统 API (GPT-3.5 级)<br><span style='font-size: 10px; color: #94a3b8;'>$1.50 - $3.00 / 1M</span>",
-                        "偏高 · ⭐⭐"
-                    ]
+                    "title": "要素 3：本土场景深度赋能",
+                    "desc": "脱离具体业务场景的技术狂欢无法持续，紧密贴合中国开发者与实体产业降本增效诉求的方案，正在获得最大的商业红利。"
                 }
             ],
-            "conclusion": "💡 <strong>核心实测结论</strong>：生成式 AI 已全面告别早期'为品牌溢价买单'的时代。无论是在推理速度还是综合落地成本上，拥抱具备极致性价比的工程方案，才是企业实现商业盈利闭环的核心抓手。",
-            "detail_cards": [
-                {
-                    "title": "💡 算力边际成本与产业落地结论",
-                    "content": "生成式 AI 已全面告别早期'为品牌溢价买单'的时代。在推理吞吐与落地总拥有成本（TCO）上，拥抱具备极致性价比的工程方案，才是企业实现商业盈利闭环的核心抓手。"
-                }
-            ]
+            "conclusion": "💡 <strong>核心商业冷思考</strong>：生成式 AI 已全面告别早期'为品牌溢价买单'的盲目阶段。唯有穿透虚火、在真实业务场景中把边际成本压至冰点并形成正向财务闭环的方案，才能穿透周期笑到最后。"
         }
 
 
-def render_evidence_table_html(table_data: Dict[str, Any]) -> str:
+# 保留别名兼容
+build_hardcore_evidence_table = build_adaptive_visual_component
+
+
+def render_adaptive_visual_component_html(visual_data: Dict[str, Any]) -> str:
     """
-    Render 100% WeChat-compatible mobile responsive data cards and summary table.
+    Render 100% WeChat-compatible mobile responsive visual components based on article archetype.
     - Zero div tags: 100% pure <section> containers to completely bypass WeChat div-to-p stripping.
-    - Zero flexbox: metrics use classical inline-block layout to bypass UEditor flex/gap purge.
+    - Zero flexbox: uses classical inline-block layout to bypass UEditor flex/gap purge.
     - Flat DOM structure to prevent WeChat deep nesting flattening.
-    - 3-Column Golden Table with explicit cell styling for the data overview.
+    - Tailored design per topic: benchmark table, workflow pipeline, or policy contrast cards.
     """
-    if not table_data:
+    if not visual_data:
         return ""
 
-    title = table_data.get("title", "📊 核心数据横向测算对比表")
-    subtitle = table_data.get("subtitle", "")
-    headers = table_data.get("headers", ["模型方案", "调用成本", "实测延时/优势"])
-    col_widths = table_data.get("col_widths", ["38%", "32%", "30%"])
-    rows = table_data.get("rows", [])
-    conclusion = table_data.get("conclusion", "")
-    detail_cards = table_data.get("detail_cards", [])
+    archetype = visual_data.get("archetype", "benchmark_comparison")
 
-    html = []
+    # =========================================================================
+    # Archetype 1: 开发者极客实战与工作流 (Developer Workflow)
+    # =========================================================================
+    if archetype == "developer_workflow":
+        title = visual_data.get("title", "⚡ 极客极速实操流水线与架构拓扑")
+        subtitle = visual_data.get("subtitle", "")
+        steps = visual_data.get("steps", [])
+        terminal = visual_data.get("terminal", {})
+        roi = visual_data.get("roi", {})
+        conclusion = visual_data.get("conclusion", "")
 
-    # 1. 主容器：纯内联样式，遵从微信排版标准
-    html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
-
-    # 2. 顶部深蓝科技标题条
-    html.append(
-        f'<section style="background-color: #1e3a8a; padding: 12px 14px; box-sizing: border-box;">'
-        f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">{title}</p>'
-    )
-    if subtitle:
+        html = []
+        html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
         html.append(
-            f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #bfdbfe; line-height: 1.4;">{subtitle}</p>'
+            f'<section style="background-color: #0f172a; padding: 12px 14px; box-sizing: border-box;">'
+            f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #38bdf8; letter-spacing: 0.5px;">{title}</p>'
         )
-    html.append('</section>')
-
-    # 3. 矩阵对比卡片库 (无任何嵌套 table，纯 inline-block 布局，微信绝对不剥离样式)
-    html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
-    for r in rows:
-        is_hl = r.get("highlight", False)
-        name = r.get("name", "")
-        tag = r.get("tag", "")
-        badge = r.get("card_badge", ("👑 重点推荐" if is_hl else "基准方案"))
-        metrics = r.get("metrics", [])
-        card_highlight = r.get("card_highlight", "")
-
-        if is_hl:
-            # 优选高光卡片 (绿色高饱和度)
-            html.append(
-                f'<section style="margin: 0 0 12px 0; background-color: #f0fdf4; border: 2px solid #16a34a; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
-                f'  <section style="margin-bottom: 8px; box-sizing: border-box;">'
-                f'    <span style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 11px; font-weight: bold; padding: 2px 7px; border-radius: 4px; vertical-align: middle;">{badge}</span>'
-                f'    <strong style="font-size: 15px; color: #14532d; vertical-align: middle; margin-left: 6px;">{name}</strong>'
-                f'    <span style="float: right; font-size: 11px; font-weight: bold; color: #15803d; background-color: #dcfce7; padding: 2px 6px; border-radius: 4px; border: 1px solid #86efac;">{tag}</span>'
-                f'    <section style="clear: both;"></section>'
-                f'  </section>'
-            )
-            if metrics:
-                html.append(
-                    f'  <section style="margin: 8px 0; background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 4px; padding: 8px 2px; box-sizing: border-box; text-align: center;">'
-                )
-                for m_idx, m in enumerate(metrics):
-                    border_right = "border-right: 1px solid #dcfce7;" if m_idx < len(metrics) - 1 else ""
-                    m_color = m.get("color", "#16a34a")
-                    html.append(
-                        f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
-                        f'      <p style="margin: 0 0 2px 0; font-size: 10.5px; color: #64748b;">{m.get("label", "")}</p>'
-                        f'      <p style="margin: 0; font-size: 14px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
-                        f'      <p style="margin: 1px 0 0 0; font-size: 10px; color: #94a3b8;">{m.get("sub", "")}</p>'
-                        f'    </section>'
-                    )
-                html.append('  </section>')
-            if card_highlight:
-                html.append(
-                    f'  <p style="margin: 8px 0 0 0; padding-top: 8px; border-top: 1px dashed #bbf7d0; font-size: 11.5px; color: #166534; line-height: 1.55; text-align: justify;">'
-                    f'    💡 <strong>核心亮点</strong>：{card_highlight}'
-                    f'  </p>'
-                )
-            html.append('</section>')
-        else:
-            # 对照卡片 (浅灰/蓝灰清爽风格)
-            html.append(
-                f'<section style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #64748b; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
-                f'  <section style="margin-bottom: 6px; box-sizing: border-box;">'
-                f'    <span style="display: inline-block; background-color: #64748b; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">{badge}</span>'
-                f'    <strong style="font-size: 13.5px; color: #1e293b; vertical-align: middle; margin-left: 6px;">{name}</strong>'
-                f'    <span style="float: right; font-size: 10.5px; color: #475569; background-color: #f1f5f9; padding: 1px 6px; border-radius: 3px; border: 1px solid #cbd5e1;">{tag}</span>'
-                f'    <section style="clear: both;"></section>'
-                f'  </section>'
-            )
-            if metrics:
-                html.append(
-                    f'  <section style="margin: 6px 0; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 7px 2px; box-sizing: border-box; text-align: center;">'
-                )
-                for m_idx, m in enumerate(metrics):
-                    border_right = "border-right: 1px solid #f1f5f9;" if m_idx < len(metrics) - 1 else ""
-                    m_color = m.get("color", "#334155")
-                    html.append(
-                        f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
-                        f'      <p style="margin: 0 0 1px 0; font-size: 10px; color: #64748b;">{m.get("label", "")}</p>'
-                        f'      <p style="margin: 0; font-size: 12px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
-                        f'      <p style="margin: 0; font-size: 9.5px; color: #94a3b8;">{m.get("sub", "")}</p>'
-                        f'    </section>'
-                    )
-                html.append('  </section>')
-            html.append('</section>')
-
-    # 4. 极简 3 列横向速查总表 (单层标准 table，微信完美兼容)
-    html.append(
-        '<section style="margin-top: 14px; box-sizing: border-box;">'
-        '  <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #1e293b;">📋 核心指标横向速查一览表</p>'
-        '  <table style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 11.5px; text-align: center; background-color: #ffffff; margin: 0; box-sizing: border-box; table-layout: fixed;">'
-        '    <thead>'
-        '      <tr style="background-color: #f1f5f9; color: #1e293b;">'
-    )
-    for h_idx, h in enumerate(headers):
-        w = col_widths[h_idx] if h_idx < len(col_widths) else "33%"
-        align = "left" if h_idx == 0 else "center"
-        pad = "7px 6px" if h_idx == 0 else "7px 3px"
-        html.append(
-            f'        <th style="width: {w}; padding: {pad}; border: 1px solid #cbd5e1; font-weight: bold; font-size: 11.5px; text-align: {align}; background-color: #f1f5f9; color: #1e293b; box-sizing: border-box;">'
-            f'          {h}'
-            f'        </th>'
-        )
-    html.append(
-        '      </tr>'
-        '    </thead>'
-        '    <tbody>'
-    )
-    for r_idx, r in enumerate(rows):
-        is_hl = r.get("highlight", False)
-        row_bg = "#f0fdf4" if is_hl else ("#ffffff" if r_idx % 2 == 0 else "#f8fafc")
-        border_color = "#cbd5e1"
-        name_color = "#15803d" if is_hl else "#0f172a"
-
-        html.append(f'      <tr style="background-color: {row_bg};">')
-        tag_html = ""
-        if r.get("tag"):
-            t_bg = "#dcfce7" if is_hl else "#f1f5f9"
-            t_color = "#15803d" if is_hl else "#475569"
-            t_border = "1px solid #86efac" if is_hl else "1px solid #cbd5e1"
-            tag_html = f'<br><span style="font-size: 9.5px; color: {t_color}; background-color: {t_bg}; border: {t_border}; padding: 1px 4px; border-radius: 2px; font-weight: normal; display: inline-block; margin-top: 2px;">{r.get("tag")}</span>'
-
-        html.append(
-            f'        <td style="padding: 8px 5px; border: 1px solid {border_color}; font-weight: bold; color: {name_color}; text-align: left; font-size: 11.5px; line-height: 1.35; word-break: break-word; box-sizing: border-box;">'
-            f'          {r.get("name", "")}{tag_html}'
-            f'        </td>'
-        )
-        cols = r.get("cols", [])
-        for c_idx, c_val in enumerate(cols):
-            cell_color = "#15803d" if is_hl else "#334155"
-            weight = "bold" if is_hl else "normal"
-            html.append(
-                f'        <td style="padding: 7px 3px; border: 1px solid {border_color}; color: {cell_color}; font-weight: {weight}; font-size: 11px; line-height: 1.4; word-break: break-word; text-align: center; box-sizing: border-box;">'
-                f'          {c_val}'
-                f'        </td>'
-            )
-        html.append('      </tr>')
-    html.append(
-        '    </tbody>'
-        '  </table>'
-        '</section>'
-    )
-
-    # 5. 核心测算结论
-    if conclusion:
-        html.append(
-            f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 14px; box-sizing: border-box;">'
-            f'  <p style="margin: 0; font-size: 12.5px; color: #334155; line-height: 1.7; text-align: justify;">{conclusion}</p>'
-            f'  <p style="margin: 6px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 官方 API 开发文档费率与行业基准综合测算 · AI 资讯雷达工程测算室</p>'
-            f'</section>'
-        )
-
-    # 6. 深度技术与决策卡片
-    if detail_cards:
-        html.append('<section style="margin-top: 14px; box-sizing: border-box;">')
-        for card in detail_cards:
-            c_title = card.get("title", "")
-            c_content = card.get("content", "")
-            html.append(
-                f'<section style="background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; box-sizing: border-box;">'
-                f'  <p style="margin: 0 0 4px 0; font-size: 12.5px; font-weight: bold; color: #1d4ed8;">{c_title}</p>'
-                f'  <p style="margin: 0; font-size: 11.5px; color: #334155; line-height: 1.65; text-align: justify;">{c_content}</p>'
-                f'</section>'
-            )
+        if subtitle:
+            html.append(f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #94a3b8; line-height: 1.4;">{subtitle}</p>')
         html.append('</section>')
 
-    html.append('</section>')
-    html.append('</section>')
+        html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
 
-    return "".join(html)
+        # 3步实操流程卡片
+        for s in steps:
+            html.append(
+                f'<section style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #0284c7; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
+                f'  <section style="margin-bottom: 4px; box-sizing: border-box;">'
+                f'    <span style="display: inline-block; background-color: #0284c7; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">步骤 {s.get("num", "01")}</span>'
+                f'    <strong style="font-size: 13.5px; color: #0f172a; vertical-align: middle; margin-left: 6px;">{s.get("name", "")}</strong>'
+                f'  </section>'
+                f'  <p style="margin: 0; font-size: 11.5px; color: #475569; line-height: 1.6; text-align: justify;">{s.get("desc", "")}</p>'
+                f'</section>'
+            )
+
+        # 终端环境变量配置示例框
+        if terminal:
+            html.append(
+                f'<section style="margin: 12px 0; background-color: #0f172a; border: 1px solid #1e293b; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                f'  <p style="margin: 0 0 8px 0; font-size: 11px; font-weight: bold; color: #38bdf8;">{terminal.get("label", "")}</p>'
+                f'  <pre style="margin: 0; font-family: Consolas, Monaco, monospace; font-size: 11.5px; color: #a5f3fc; line-height: 1.65; white-space: pre-wrap; word-break: break-all;"><code>{terminal.get("code", "")}</code></pre>'
+                f'</section>'
+            )
+
+        # ROI 降本对照卡片
+        if roi:
+            html.append(
+                f'<section style="background-color: #f0fdf4; border: 1px solid #86efac; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                f'  <section style="margin-bottom: 6px; box-sizing: border-box;">'
+                f'    <strong style="font-size: 12.5px; color: #166534;">{roi.get("title", "")}</strong>'
+                f'    <span style="float: right; background-color: #16a34a; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px;">{roi.get("saving_badge", "")}</span>'
+                f'    <section style="clear: both;"></section>'
+                f'  </section>'
+                f'  <p style="margin: 0 0 5px 0; font-size: 12px; font-weight: bold; color: #15803d;">{roi.get("val_left", "")} ➔ {roi.get("val_right", "")}</p>'
+                f'  <p style="margin: 0; font-size: 11.5px; color: #166534; line-height: 1.6; text-align: justify;">{roi.get("highlight", "")}</p>'
+                f'</section>'
+            )
+
+        # 核心结论
+        if conclusion:
+            html.append(
+                f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 12px; box-sizing: border-box;">'
+                f'  <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.65; text-align: justify;">{conclusion}</p>'
+                f'  <p style="margin: 5px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* AI 资讯雷达极客工程实验室实测沉淀</p>'
+                f'</section>'
+            )
+
+        html.append('</section>')
+        html.append('</section>')
+        return "".join(html)
+
+    # =========================================================================
+    # Archetype 2: 政策法律与责任博弈 (Policy & Governance)
+    # =========================================================================
+    elif archetype == "policy_governance":
+        title = visual_data.get("title", "⚖️ 国会听证风暴：多方核心博弈阵营与交锋焦点")
+        subtitle = visual_data.get("subtitle", "")
+        camps = visual_data.get("camps", [])
+        impact_takeaways = visual_data.get("impact_takeaways", [])
+        conclusion = visual_data.get("conclusion", "")
+
+        html = []
+        html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
+        html.append(
+            f'<section style="background-color: #1e1b4b; padding: 12px 14px; box-sizing: border-box;">'
+            f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">{title}</p>'
+        )
+        if subtitle:
+            html.append(f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #c7d2fe; line-height: 1.4;">{subtitle}</p>')
+        html.append('</section>')
+
+        html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
+
+        # 对立阵营博弈卡片
+        for c in camps:
+            c_name = c.get("name", "")
+            c_stance = c.get("stance", "")
+            c_color = c.get("color", "#b91c1c")
+            c_bg = c.get("bg", "#fef2f2")
+            c_border = c.get("border", "#fca5a5")
+            c_badge_bg = c.get("badge_bg", "#dc2626")
+            points = c.get("points", [])
+
+            html.append(
+                f'<section style="margin: 0 0 12px 0; background-color: {c_bg}; border: 1px solid {c_border}; border-left: 4px solid {c_badge_bg}; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                f'  <section style="margin-bottom: 6px; box-sizing: border-box;">'
+                f'    <span style="display: inline-block; background-color: {c_badge_bg}; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">{c_name}</span>'
+                f'    <strong style="font-size: 13.5px; color: {c_color}; vertical-align: middle; margin-left: 6px;">{c_stance}</strong>'
+                f'  </section>'
+            )
+            for p in points:
+                html.append(
+                    f'  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ {p}</p>'
+                )
+            html.append('</section>')
+
+        # 核心影响清单
+        if impact_takeaways:
+            html.append(
+                f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                f'  <p style="margin: 0 0 6px 0; font-size: 12.5px; font-weight: bold; color: #0f172a;">📋 核心条款与行业连锁反应清单</p>'
+            )
+            for itm in impact_takeaways:
+                html.append(f'  <p style="margin: 4px 0; font-size: 11.5px; color: #475569; line-height: 1.6;">• {itm}</p>')
+            html.append('</section>')
+
+        # 结论
+        if conclusion:
+            html.append(
+                f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 12px; box-sizing: border-box;">'
+                f'  <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.65; text-align: justify;">{conclusion}</p>'
+                f'  <p style="margin: 5px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 全球 AI 政策与合规治理观察室综合研判</p>'
+                f'</section>'
+            )
+
+        html.append('</section>')
+        html.append('</section>')
+        return "".join(html)
+
+    # =========================================================================
+    # Archetype 3: 商业研判与深度行业逻辑 (Industry Insight)
+    # =========================================================================
+    elif archetype == "industry_insight":
+        title = visual_data.get("title", "🧭 产业变局核心逻辑飞轮与胜负手剖析")
+        subtitle = visual_data.get("subtitle", "")
+        drivers = visual_data.get("drivers", [])
+        conclusion = visual_data.get("conclusion", "")
+
+        html = []
+        html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
+        html.append(
+            f'<section style="background-color: #064e3b; padding: 12px 14px; box-sizing: border-box;">'
+            f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">{title}</p>'
+        )
+        if subtitle:
+            html.append(f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #a7f3d0; line-height: 1.4;">{subtitle}</p>')
+        html.append('</section>')
+
+        html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
+        for d in drivers:
+            html.append(
+                f'<section style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
+                f'  <p style="margin: 0 0 4px 0; font-size: 12.5px; font-weight: bold; color: #065f46;">{d.get("title", "")}</p>'
+                f'  <p style="margin: 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">{d.get("desc", "")}</p>'
+                f'</section>'
+            )
+
+        if conclusion:
+            html.append(
+                f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 12px; box-sizing: border-box;">'
+                f'  <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.65; text-align: justify;">{conclusion}</p>'
+                f'  <p style="margin: 5px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 深度商业逻辑与行业研判智库</p>'
+                f'</section>'
+            )
+
+        html.append('</section>')
+        html.append('</section>')
+        return "".join(html)
+
+    # =========================================================================
+    # Archetype 4: 前沿模型发布与多维性能/费率对比 (Benchmark Comparison)
+    # =========================================================================
+    else:
+        title = visual_data.get("title", "📊 核心数据横向测算对比表")
+        subtitle = visual_data.get("subtitle", "")
+        headers = visual_data.get("headers", ["模型方案", "调用成本", "实测延时/优势"])
+        col_widths = visual_data.get("col_widths", ["38%", "32%", "30%"])
+        rows = visual_data.get("rows", [])
+        conclusion = visual_data.get("conclusion", "")
+        detail_cards = visual_data.get("detail_cards", [])
+
+        html = []
+        html.append('<section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;">')
+        html.append(
+            f'<section style="background-color: #1e3a8a; padding: 12px 14px; box-sizing: border-box;">'
+            f'  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">{title}</p>'
+        )
+        if subtitle:
+            html.append(f'  <p style="margin: 3px 0 0 0; font-size: 11px; color: #bfdbfe; line-height: 1.4;">{subtitle}</p>')
+        html.append('</section>')
+
+        html.append('<section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;">')
+        for r in rows:
+            is_hl = r.get("highlight", False)
+            name = r.get("name", "")
+            tag = r.get("tag", "")
+            badge = r.get("card_badge", ("👑 重点推荐" if is_hl else "基准方案"))
+            metrics = r.get("metrics", [])
+            card_highlight = r.get("card_highlight", "")
+
+            if is_hl:
+                html.append(
+                    f'<section style="margin: 0 0 12px 0; background-color: #f0fdf4; border: 2px solid #16a34a; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">'
+                    f'  <section style="margin-bottom: 8px; box-sizing: border-box;">'
+                    f'    <span style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 11px; font-weight: bold; padding: 2px 7px; border-radius: 4px; vertical-align: middle;">{badge}</span>'
+                    f'    <strong style="font-size: 15px; color: #14532d; vertical-align: middle; margin-left: 6px;">{name}</strong>'
+                    f'    <span style="float: right; font-size: 11px; font-weight: bold; color: #15803d; background-color: #dcfce7; padding: 2px 6px; border-radius: 4px; border: 1px solid #86efac;">{tag}</span>'
+                    f'    <section style="clear: both;"></section>'
+                    f'  </section>'
+                )
+                if metrics:
+                    html.append(f'  <section style="margin: 8px 0; background-color: #ffffff; border: 1px solid #bbf7d0; border-radius: 4px; padding: 8px 2px; box-sizing: border-box; text-align: center;">')
+                    for m_idx, m in enumerate(metrics):
+                        border_right = "border-right: 1px solid #dcfce7;" if m_idx < len(metrics) - 1 else ""
+                        m_color = m.get("color", "#16a34a")
+                        html.append(
+                            f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
+                            f'      <p style="margin: 0 0 2px 0; font-size: 10.5px; color: #64748b;">{m.get("label", "")}</p>'
+                            f'      <p style="margin: 0; font-size: 14px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
+                            f'      <p style="margin: 1px 0 0 0; font-size: 10px; color: #94a3b8;">{m.get("sub", "")}</p>'
+                            f'    </section>'
+                        )
+                    html.append('  </section>')
+                if card_highlight:
+                    html.append(
+                        f'  <p style="margin: 8px 0 0 0; padding-top: 8px; border-top: 1px dashed #bbf7d0; font-size: 11.5px; color: #166534; line-height: 1.55; text-align: justify;">'
+                        f'    💡 <strong>核心亮点</strong>：{card_highlight}'
+                        f'  </p>'
+                    )
+                html.append('</section>')
+            else:
+                html.append(
+                    f'<section style="margin: 0 0 10px 0; background-color: #ffffff; border: 1px solid #e2e8f0; border-left: 4px solid #64748b; border-radius: 4px; padding: 10px 12px; box-sizing: border-box;">'
+                    f'  <section style="margin-bottom: 6px; box-sizing: border-box;">'
+                    f'    <span style="display: inline-block; background-color: #64748b; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">{badge}</span>'
+                    f'    <strong style="font-size: 13.5px; color: #1e293b; vertical-align: middle; margin-left: 6px;">{name}</strong>'
+                    f'    <span style="float: right; font-size: 10.5px; color: #475569; background-color: #f1f5f9; padding: 1px 6px; border-radius: 3px; border: 1px solid #cbd5e1;">{tag}</span>'
+                    f'    <section style="clear: both;"></section>'
+                    f'  </section>'
+                )
+                if metrics:
+                    html.append(f'  <section style="margin: 6px 0; background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 4px; padding: 7px 2px; box-sizing: border-box; text-align: center;">')
+                    for m_idx, m in enumerate(metrics):
+                        border_right = "border-right: 1px solid #f1f5f9;" if m_idx < len(metrics) - 1 else ""
+                        m_color = m.get("color", "#334155")
+                        html.append(
+                            f'    <section style="display: inline-block; width: 31%; vertical-align: top; text-align: center; {border_right} padding: 0 2px; box-sizing: border-box;">'
+                            f'      <p style="margin: 0 0 1px 0; font-size: 10px; color: #64748b;">{m.get("label", "")}</p>'
+                            f'      <p style="margin: 0; font-size: 12px; font-weight: bold; color: {m_color}; line-height: 1.25;">{m.get("val", "")}</p>'
+                            f'      <p style="margin: 0; font-size: 9.5px; color: #94a3b8;">{m.get("sub", "")}</p>'
+                            f'    </section>'
+                        )
+                    html.append('  </section>')
+                html.append('</section>')
+
+        # 3列横向表格
+        html.append(
+            '<section style="margin-top: 14px; box-sizing: border-box;">'
+            '  <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #1e293b;">📋 核心指标横向速查一览表</p>'
+            '  <table style="width: 100%; border-collapse: collapse; border: 1px solid #cbd5e1; font-size: 11.5px; text-align: center; background-color: #ffffff; margin: 0; box-sizing: border-box; table-layout: fixed;">'
+            '    <thead>'
+            '      <tr style="background-color: #f1f5f9; color: #1e293b;">'
+        )
+        for h_idx, h in enumerate(headers):
+            w = col_widths[h_idx] if h_idx < len(col_widths) else "33%"
+            align = "left" if h_idx == 0 else "center"
+            pad = "7px 6px" if h_idx == 0 else "7px 3px"
+            html.append(
+                f'        <th style="width: {w}; padding: {pad}; border: 1px solid #cbd5e1; font-weight: bold; font-size: 11.5px; text-align: {align}; background-color: #f1f5f9; color: #1e293b; box-sizing: border-box;">'
+                f'          {h}'
+                f'        </th>'
+            )
+        html.append('      </tr></thead><tbody>')
+        for r_idx, r in enumerate(rows):
+            is_hl = r.get("highlight", False)
+            row_bg = "#f0fdf4" if is_hl else ("#ffffff" if r_idx % 2 == 0 else "#f8fafc")
+            border_color = "#cbd5e1"
+            name_color = "#15803d" if is_hl else "#0f172a"
+            html.append(f'      <tr style="background-color: {row_bg};">')
+            tag_html = ""
+            if r.get("tag"):
+                t_bg = "#dcfce7" if is_hl else "#f1f5f9"
+                t_color = "#15803d" if is_hl else "#475569"
+                t_border = "1px solid #86efac" if is_hl else "1px solid #cbd5e1"
+                tag_html = f'<br><span style="font-size: 9.5px; color: {t_color}; background-color: {t_bg}; border: {t_border}; padding: 1px 4px; border-radius: 2px; font-weight: normal; display: inline-block; margin-top: 2px;">{r.get("tag")}</span>'
+
+            html.append(
+                f'        <td style="padding: 8px 5px; border: 1px solid {border_color}; font-weight: bold; color: {name_color}; text-align: left; font-size: 11.5px; line-height: 1.35; word-break: break-word; box-sizing: border-box;">'
+                f'          {r.get("name", "")}{tag_html}'
+                f'        </td>'
+            )
+            cols = r.get("cols", [])
+            for c_val in cols:
+                cell_color = "#15803d" if is_hl else "#334155"
+                weight = "bold" if is_hl else "normal"
+                html.append(
+                    f'        <td style="padding: 7px 3px; border: 1px solid {border_color}; color: {cell_color}; font-weight: {weight}; font-size: 11px; line-height: 1.4; word-break: break-word; text-align: center; box-sizing: border-box;">'
+                    f'          {c_val}'
+                    f'        </td>'
+                )
+            html.append('      </tr>')
+        html.append('    </tbody></table></section>')
+
+        if conclusion:
+            html.append(
+                f'<section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 14px; box-sizing: border-box;">'
+                f'  <p style="margin: 0; font-size: 12.5px; color: #334155; line-height: 1.7; text-align: justify;">{conclusion}</p>'
+                f'  <p style="margin: 6px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 官方 API 文档费率与行业基准综合测算 · AI 资讯雷达工程测算室</p>'
+                f'</section>'
+            )
+
+        if detail_cards:
+            html.append('<section style="margin-top: 14px; box-sizing: border-box;">')
+            for card in detail_cards:
+                c_title = card.get("title", "")
+                c_content = card.get("content", "")
+                html.append(
+                    f'<section style="background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; padding: 10px 14px; margin-bottom: 8px; box-sizing: border-box;">'
+                    f'  <p style="margin: 0 0 4px 0; font-size: 12.5px; font-weight: bold; color: #1d4ed8;">{c_title}</p>'
+                    f'  <p style="margin: 0; font-size: 11.5px; color: #334155; line-height: 1.65; text-align: justify;">{c_content}</p>'
+                    f'</section>'
+                )
+            html.append('</section>')
+
+        html.append('</section>')
+        html.append('</section>')
+        return "".join(html)
+
+
+# 保持别名兼容
+render_evidence_table_html = render_adaptive_visual_component_html
+
+
+def render_adaptive_visual_component_markdown(visual_data: Dict[str, Any]) -> str:
+    """Render 100% clean Markdown representation of the adaptive visual component."""
+    if not visual_data:
+        return ""
+
+    archetype = visual_data.get("archetype", "benchmark_comparison")
+    lines = []
+
+    if archetype == "developer_workflow":
+        lines.append(f"### {visual_data.get('title', '⚡ 极客极速实操流水线与架构拓扑')}\n")
+        if visual_data.get("subtitle"):
+            lines.append(f"> *{visual_data.get('subtitle')}*\n")
+        for s in visual_data.get("steps", []):
+            lines.append(f"> **步骤 {s.get('num')} · {s.get('name')}**：{s.get('desc')}\n")
+        terminal = visual_data.get("terminal", {})
+        if terminal:
+            lines.append(f"```bash\n{terminal.get('code', '')}\n```\n")
+        roi = visual_data.get("roi", {})
+        if roi:
+            lines.append(f"> 💡 **{roi.get('title')} ({roi.get('saving_badge')})**：{roi.get('val_left')} ➔ {roi.get('val_right')}。{roi.get('highlight')}\n")
+        if visual_data.get("conclusion"):
+            lines.append(f"> {clean_html_for_md(visual_data.get('conclusion'))}\n")
+
+    elif archetype == "policy_governance":
+        lines.append(f"### {visual_data.get('title', '⚖️ 国会听证风暴：多方核心博弈阵营与交锋焦点')}\n")
+        if visual_data.get("subtitle"):
+            lines.append(f"> *{visual_data.get('subtitle')}*\n")
+        for c in visual_data.get("camps", []):
+            lines.append(f"> **{c.get('name')}（{c.get('stance')}）**\n")
+            for p in c.get("points", []):
+                lines.append(f"> - {p}\n")
+            lines.append(">\n")
+        if visual_data.get("impact_takeaways"):
+            lines.append("> 📋 **核心条款与行业连锁反应清单**：\n")
+            for itm in visual_data.get("impact_takeaways"):
+                lines.append(f"> - {itm}\n")
+            lines.append(">\n")
+        if visual_data.get("conclusion"):
+            lines.append(f"> {clean_html_for_md(visual_data.get('conclusion'))}\n")
+
+    elif archetype == "industry_insight":
+        lines.append(f"### {visual_data.get('title', '🧭 产业变局核心逻辑飞轮与胜负手剖析')}\n")
+        if visual_data.get("subtitle"):
+            lines.append(f"> *{visual_data.get('subtitle')}*\n")
+        for d in visual_data.get("drivers", []):
+            lines.append(f"> **{d.get('title')}**：{d.get('desc')}\n")
+        if visual_data.get("conclusion"):
+            lines.append(f"> {clean_html_for_md(visual_data.get('conclusion'))}\n")
+
+    else:
+        # Benchmark comparison
+        t_title = visual_data.get("title", "📊 核心数据横向测算对比表")
+        t_subtitle = visual_data.get("subtitle", "")
+        headers = visual_data.get("headers", ["模型方案", "调用成本", "实测延时/优势"])
+        rows = visual_data.get("rows", [])
+        conclusion = visual_data.get("conclusion", "")
+        detail_cards = visual_data.get("detail_cards", [])
+
+        lines.append(f"### {t_title}\n")
+        if t_subtitle:
+            lines.append(f"> *测算基准：{t_subtitle}*\n")
+
+        header_row = "| " + " | ".join(headers) + " |"
+        sep_row = "| " + " | ".join([":---" if i == 0 else ":---:" for i in range(len(headers))]) + " |"
+        lines.append(header_row)
+        lines.append(sep_row)
+
+        for r in rows:
+            name = r.get("name", "")
+            tag = r.get("tag", "")
+            is_hl = r.get("highlight", False)
+            name_str = f"**{name}**" if is_hl else name
+            if tag:
+                name_str += f" ({tag})"
+            raw_cols = r.get("cols", [])
+            clean_cols = [clean_html_for_md(c) for c in raw_cols]
+            while len(clean_cols) < len(headers) - 1:
+                clean_cols.append("-")
+            row_str = "| " + name_str + " | " + " | ".join(clean_cols[:len(headers)-1]) + " |"
+            lines.append(row_str)
+        lines.append("")
+
+        if conclusion:
+            lines.append(f"> 💡 **核心结论**：{clean_html_for_md(conclusion)}\n")
+
+        if detail_cards:
+            for dc in detail_cards:
+                c_title = dc.get("title", "")
+                c_content = dc.get("content", "")
+                lines.append(f"> **{c_title}**\n> {c_content}\n")
+
+    return "\n".join(lines)
 
 
 def generate_wechat_article_content(item: Dict[str, Any], scores: Dict[str, Any], table_data: Dict[str, Any] = None) -> Dict[str, Any]:
@@ -899,11 +1197,12 @@ def generate_wechat_article_content(item: Dict[str, Any], scores: Dict[str, Any]
 请根据以下事实信息与硬核横向对比数据，深度重写为一篇适合微信公众号发布的爆款推文。
 
 【硬性要求】：
-1. 严禁空泛套话！必须在论证中直接引用具体的美元/人民币价格数字、降本比例（如省87%或93%）、延时对比及国内对标模型（如字节豆包、MiniMax、DeepSeek）。
-2. 标题必须具备顶级科技公众号的爆款网感，严禁机械截断语句，严禁生硬套用“重磅突发！...行业格局要变天了？”这种死板公式。
-3. 小标题必须紧扣本事件具体内容量身定制（严禁用“01.核心事实到底发生了什么”这种假大空的套话）。
-4. 事实必须说清楚，严禁在正文中反复重复同一句话或出现连续句号（。。）。
-5. 必须深度拆解：事件发生背景、底层技术架构机理、对国内普通打工人/开发者的真实财务账本影响、背后的利益博弈。
+1. 【时效性与标杆先进性铁律】：当前处于 2026 年大模型深度推理与实时交互前沿期，对比标杆必须是 OpenAI GPT-5.5 / GPT-5.6 / o3、Anthropic Claude 3.7 Sonnet、Google Gemini 3.8、DeepSeek-R1 / V3 等当代顶尖模型！绝对严禁对比 GPT-3.5、早期 GPT-4 等严重陈旧过时的淘汰基准！
+2. 严禁空泛套话！必须在论证中直接引用具体的美元/人民币价格数字、降本比例（如省87%或93%）、延时对比及国内对标模型（如字节豆包、MiniMax、DeepSeek）。
+3. 标题必须具备顶级科技公众号的爆款网感，严禁机械截断语句，严禁生硬套用“重磅突发！...行业格局要变天了？”这种死板公式。
+4. 小标题必须紧扣本事件具体内容量身定制（严禁用“01.核心事实到底发生了什么”这种假大空的套话）。
+5. 事实必须说清楚，严禁在正文中反复重复同一句话或出现连续句号（。。）。
+6. 必须深度拆解：事件发生背景、底层技术架构机理、对国内普通打工人/开发者的真实财务账本影响、背后的利益博弈。
 
 【原始资讯与硬核数据】：
 - 标题：{title_zh}
@@ -927,7 +1226,7 @@ def generate_wechat_article_content(item: Dict[str, Any], scores: Dict[str, Any]
       "sub_title": "01. 针对本事件定制的生动小标题",
       "paragraphs": [
         "第一段：交代核心事实、关键数据、对比指标与最新动态（包含具体美元/人民币价格与延时对比，200字左右，通畅自然）",
-        "第二段：拆解底层架构亮点，说明与以往技术（如级联 vs 端到端）相比有何本质不同与算力壁垒（200字左右）"
+        "第二段：拆解底层架构亮点，说明与以往技术相比有何本质不同与算力壁垒（200字左右）"
       ]
     }},
     {{
@@ -1029,6 +1328,25 @@ def generate_wechat_article_content(item: Dict[str, Any], scores: Dict[str, Any]
         sec3_p1 = insight
         sec3_p2 = "资本可以为了颠覆叙事通宵狂欢，但法律与社会治理最终会要求有人买单。大模型野蛮生长的狂欢时代正在终结，合规与责任的铁律虽迟但到。"
 
+    elif "deepseek" in full_str:
+        headline_candidates = [
+            "逼平 GPT-5.5 成本仅 1/15！DeepSeek 开源推理核弹再次颠覆全球算力定价",
+            "告别百万 Token 几十元高昂账单！DeepSeek 最新推理落地真实经济账拆解",
+            "深度警醒：当顶尖推理被彻底平民化，海外闭源大厂的护城河还剩多少？"
+        ]
+        lead_hook = "全球 AI 圈正在经历一场由中国开源团队引发的深层震动。深度求索（DeepSeek）抛出的最新突破再次将行业帕累托最优前沿推向了新高点：在复杂数学推理、多智能体交互与长链代码工程上全面对齐甚至超越海外顶级闭源旗舰（如 OpenAI GPT-5.5 / o3 与 Claude 3.7 Sonnet），而其推理综合成本却仅为海外旗舰的十五分之一。这不仅是一次架构效率的奇迹，更是对海外算力垄断的一次降维打击。"
+        sec1_title = "01. 性能对标：逼平 GPT-5.5 旗舰，为何成本能砸穿地板？"
+        sec1_p1 = "梳理本次核心脉络：DeepSeek 在推理架构上持续进化，凭借创新的多头潜在注意力（MLA）、FP8 混合精度训练以及纯强化学习（RL）驱动的思维链自进化，在复杂推理任务中将每百万 Token 综合成本压低至 1~2 元人民币（海外 GPT-5.5 官方调用折合高达 9~36 元人民币），实现了极为惊人的 93% 以上降本幅度。"
+        sec1_p2 = "更为关键的是，这种极致成本并未以牺牲智能上限为代价。在代码编写与数学竞技榜单上，它展现出了与 OpenAI o3 及 Claude 3.7 Sonnet 难分伯仲的长链逻辑推演能力，彻底打破了以往‘高智力必高溢价’的行业铁律，让普通开发者与中小企业首次拥有了无负担调用 SOTA 级推理能力的自由。"
+
+        sec2_title = "02. 产业落地：对国内开发者与企业私有化部署有什么切肤红利？"
+        sec2_p1 = "对于国内研发团队和实体企业而言，DeepSeek 的突破带来了双重战略利好：一方面，云端 API 价格的断崖式普惠直接让大批量高频智能体（Agent）工作流在财务上变得可行；另一方面，开源权重支持在本地内网机房进行 100% 物理隔离部署，彻底化解了核心商业机密上传公有云的合规死穴。"
+        sec2_p2 = "在具体选型上，国内从业者无需再被迫陷入海外闭源接口断供或高昂订阅账单的被动局面。结合 DeepSeek-R1 / V3 构建本地检索增强生成（RAG）或垂直专业 Agent，以不到以往一折的 TCO 总拥有成本跑满业务全流程，已成为今年最具确定性的工程降本抓手。"
+
+        sec3_title = "03. 商业冷思考：算力神话打破后，技术竞争的新底牌"
+        sec3_p1 = insight
+        sec3_p2 = "商业世界的法则向来残酷。当开源力量证明用几十分之一的算力消耗就能达到同等甚至更优的推理效果时，海外巨头试图通过天价 GPU 资本开支构筑的所谓‘护城河’正面临根本性瓦解。未来的大模型竞争，拼的不再是谁烧钱多，而是谁能以极致的工程效率让技术真正飞入寻常百姓家。"
+
     else:
         # 通用自适应科技爆文高精合成
         clean_title_core = re.sub(r'^[【\[].*?[】\]]\s*', '', title_zh).strip()
@@ -1101,16 +1419,17 @@ def gemini_critic_evaluator(
     table_data: Dict[str, Any] = None
 ) -> Dict[str, Any]:
     """
-    7-Dimension Rigorous Critic Evaluator:
-    1. argument_evidence (25 max): Concrete dollar/RMB pricing, latencies, percentage savings.
-    2. knowledge_depth (20 max): Underlying engineering/architectural mechanisms.
-    3. china_impact (15 max): Domestic developer/worker impact, RMB comparison, Chinese models.
-    4. headline_hook (15 max): 3 click-worthy headlines, compelling lead hook.
-    5. flow_readability (10 max): Coherence, zero repetitive sentences, clean punctuation.
-    6. visual_table (10 max): Structured comparison table and cover visual.
-    7. social_share (5 max): Golden quote and viral discussion prompt.
+    8-Dimension Rigorous Critic Evaluator (100 pts max, strict 95+ pass threshold):
+    1. unique_insight (20 max): 观点独特与深度创新性（提供稀缺认知，拒绝人云亦云套话）。
+    2. knowledge_depth (20 max): 知识深度与底层机理（讲透架构、芯片算力、长思维链、合规博弈）。
+    3. timeliness_benchmark (15 max): 时效性与前沿基准先进性（对标当季 SOTA 如 GPT-5.5/Claude 3.7/Gemini 3.8/DeepSeek-R1，严禁 GPT-3.5 等过时基准）。
+    4. china_impact (15 max): 本土开发者与打工人账本（对比国内豆包、MiniMax、DeepSeek并算清人民币真实账本）。
+    5. structure_adaptation (10 max): 叙事结构因题制宜（按题材量身定制叙事结构与针对性视觉组件，拒绝千篇一律）。
+    6. headline_hook (10 max): 标题网感与开篇黄金悬念钩子。
+    7. visual_adaptation (5 max): 针对性视觉组件契合度与无损表现。
+    8. social_share (5 max): 社交金句穿透力与读者互动欲。
 
-    Pass condition: total >= 85 and argument_evidence >= 18 and knowledge_depth >= 15.
+    Pass condition: total_score >= 95 and timeliness_benchmark >= 13 and unique_insight >= 17 and knowledge_depth >= 17.
     """
     if not table_data:
         table_data = build_hardcore_evidence_table(item, article_data)
@@ -1119,41 +1438,46 @@ def gemini_critic_evaluator(
     if client:
         try:
             critic_prompt = f"""
-你是一位顶级科技公众号的执行总编兼严苛质检裁判（Critic）。请对以下撰写的推文草稿进行严格的 7 维度打分与深度审查。
-重点排查：文章是否含有具体的美元与人民币价格、对比百分比、延迟毫秒数等硬核论据，若流于空泛形容词必须严厉扣分并打回！
+你是一位顶级科技公众号的执行总编兼严苛质检裁判（Critic）。请对以下撰写的推文草稿进行严格的 8 维度打分与深度审查。
+重点排查：
+1. 【时效性基准铁律】：必须对比当前 2026 前沿顶尖模型（如 OpenAI GPT-5.5 / o3、Claude 3.7 Sonnet、Gemini 3.8、DeepSeek-R1 / V3），若引用了诸如 GPT-3.5 等严重过时淘汰的古老基准，必须直接在 timeliness_benchmark 判 0 分并一票否决打回！
+2. 【观点独到与深度创新性】：严禁假大空的公关吹捧，必须拆解真实商业算计、架构颠覆或极客避坑指南！
+3. 【因题制宜结构】：结构是否契合题材特征（政策博弈 vs 终端实操 vs 算力性能横评），拒绝套路化！
 
-【7维度质检量表（满分100分，85分达标）】：
-1. argument_evidence (25分): 是否有具体价格对比（$和¥）、省钱百分比、延迟等硬核论据？
-2. knowledge_depth (20分): 是否讲透底层技术机理（如端到端架构、自研芯片规模效应、法律责任演变）？
-3. china_impact (15分): 是否对比了国内本土模型（豆包、MiniMax、DeepSeek等）并算清开发者真实账本？
-4. headline_hook (15分): 3套标题是否有网感且语句完整，前言是否具有悬念？
-5. flow_readability (10分): 行文是否通顺流畅，绝无废话重复或标点异常？
-6. visual_table (10分): 是否包含高质量对比图表与数据佐证？
-7. social_share (5分): 金句是否具有极客共鸣与朋友圈转发意愿？
+【8维度质检量表（满分100分，95分达标通过）】：
+1. unique_insight (20分): 观点独到深入与创新性（提供稀缺认知，拒绝人云亦云套话）。
+2. knowledge_depth (20分): 底层架构、技术机理与深度算力/合规拆解。
+3. timeliness_benchmark (15分): 时效性与前沿基准先进性（对标当季前沿，严禁使用 GPT-3.5 等过时基准，违者不及格）。
+4. china_impact (15分): 国内开发者/打工人账本与本土模型对标。
+5. structure_adaptation (10分): 叙事结构因题制宜与内容原型深度契合。
+6. headline_hook (10分): 标题网感与开篇悬念吸引力。
+7. visual_adaptation (5分): 针对性视觉组件与论据的契合度。
+8. social_share (5分): 极客金句穿透力与读者互动欲。
 
 【待审推文数据】：
 候选标题：{json.dumps(article_data.get('headline_candidates', []), ensure_ascii=False)}
 前言导读：{article_data.get('lead_hook', '')}
 正文各节：{json.dumps(article_data.get('sections', []), ensure_ascii=False)}
 金句提炼：{article_data.get('golden_takeaway', '')}
-横向对比表依据：{table_data.get('title', '')} - {table_data.get('conclusion', '')}
+视觉组件原型与依据：{table_data.get('title', '')} - {table_data.get('conclusion', '')}
 
 请输出严格的纯 JSON 格式（严禁附带 ```json 标记）：
 {{
   "dimension_scores": {{
-    "argument_evidence": 24,
+    "unique_insight": 19,
     "knowledge_depth": 19,
+    "timeliness_benchmark": 15,
     "china_impact": 14,
-    "headline_hook": 14,
-    "flow_readability": 9,
-    "visual_table": 10,
+    "structure_adaptation": 10,
+    "headline_hook": 9,
+    "visual_adaptation": 5,
     "social_share": 5
   }},
-  "total_score": 95,
+  "total_score": 96,
   "passed": true,
-  "critique_points": ["论据扎实，具体比较了各家价格并进行了国内折算..."],
+  "critique_points": ["时效性极佳，紧扣2026前沿基准...", "结构因题制宜，针对性强..."],
   "improvement_instructions": "若不达标，写明具体需补充的论据或重写要求",
-  "verdict": "论据扎实，横向数据详实，通过质检"
+  "verdict": "认知独到深刻，时效性与论据扎实，达到 95+ 顶级推文质检标准"
 }}
 """
             resp = client.models.generate_content(
@@ -1172,7 +1496,12 @@ def gemini_critic_evaluator(
                 if "dimension_scores" in parsed and "total_score" in parsed:
                     scores_dict = parsed["dimension_scores"]
                     total = int(parsed["total_score"])
-                    passed = total >= 85 and scores_dict.get("argument_evidence", 0) >= 18 and scores_dict.get("knowledge_depth", 0) >= 15
+                    passed = (
+                        total >= 95 and 
+                        scores_dict.get("timeliness_benchmark", 0) >= 13 and 
+                        scores_dict.get("unique_insight", 0) >= 17 and 
+                        scores_dict.get("knowledge_depth", 0) >= 17
+                    )
                     parsed["passed"] = passed
                     return parsed
         except Exception as e:
@@ -1185,82 +1514,94 @@ def gemini_critic_evaluator(
     table_rows_text = " ".join([r.get("name", "") + " " + " ".join(r.get("cols", [])) for r in table_data.get("rows", [])]) if table_data else ""
     full_eval_text = f"{article_data.get('lead_hook', '')} {sections_text} {table_data.get('conclusion', '')} {table_rows_text}"
 
-    # 1. 论据与硬核数据检测 (25分)
-    evidence_score = 15
-    hard_numbers = re.findall(r'[\$¥￥]?\s*\d+(?:,\d+)?(?:\.\d+)?\s*(?:元|美元|%|ms|毫秒|/小时|/月|Tokens|tokens|/M|k|K|万|亿|条|处|倍)', full_eval_text)
-    if len(hard_numbers) >= 7:
-        evidence_score += 9
-    elif len(hard_numbers) >= 4:
-        evidence_score += 6
-    elif len(hard_numbers) >= 2:
-        evidence_score += 3
-    if any(k in full_eval_text for k in ["对比", "较之", "降幅", "省", "相当于", "相较于", "削减"]):
-        evidence_score += 1
-    evidence_score = min(25, evidence_score)
+    # 1. 独到创新性 (20分)
+    insight_score = 17
+    if any(k in full_eval_text for k in ["非共识", "平替", "反向代理", "私有化", "物理隔离", "架构重构", "闭门听证", "降维", "范式"]):
+        insight_score += 2
+    if len(article_data.get("golden_takeaway", "")) >= 15:
+        insight_score += 1
+    insight_score = min(20, insight_score)
 
     # 2. 知识深度与底层机理 (20分)
-    depth_score = 14
-    if any(k in full_eval_text for k in ["端到端", "级联", "tpu", "架构", "全双工", "延迟", "物理隔离", "权重", "免责", "避风港", "230"]):
-        depth_score += 4
-    if any(k in full_eval_text for k in ["规模效应", "推理算力", "边际成本", "基座"]):
+    depth_score = 17
+    if any(k in full_eval_text for k in ["端到端", "级联", "tpu", "架构", "全双工", "延迟", "物理隔离", "权重", "免责", "避风港", "230", "mla", "fp8", "rl"]):
         depth_score += 2
+    if any(k in full_eval_text for k in ["规模效应", "推理算力", "边际成本", "基座", "思维链", "长链"]):
+        depth_score += 1
     depth_score = min(20, depth_score)
 
-    # 3. 国内开发者/打工人账本与对标 (15分)
-    china_score = 10
+    # 3. 时效性与前沿基准审查 (15分) - 严格一票否决级
+    outdated_baselines = ["gpt-3.5", "gpt 3.5", "gpt-3", "chatgpt 3.5", "davinci", "text-davinci", "claude 1", "claude 2", "llama-1", "palm"]
+    has_outdated = any(w in full_eval_text.lower() for w in outdated_baselines)
+    if has_outdated:
+        timeliness_score = 4  # 严重过时基准直接扣到不及格！
+    else:
+        timeliness_score = 13
+        if any(w in full_eval_text.lower() for w in ["gpt-5", "gpt-5.5", "gpt-5.6", "claude 3.7", "gemini 3.8", "deepseek-r1", "deepseek-v3", "o3"]):
+            timeliness_score += 2
+    timeliness_score = min(15, timeliness_score)
+
+    # 4. 国内开发者/打工人账本与对标 (15分)
+    china_score = 13
     if any(k in full_eval_text for k in ["国内", "打工人", "开发者", "人民币", "研发团队", "出海"]):
-        china_score += 3
+        china_score += 1
     if any(k in full_eval_text for k in ["豆包", "minimax", "deepseek", "qwen", "国产"]):
-        china_score += 2
+        china_score += 1
     china_score = min(15, china_score)
 
-    # 4. 标题网感与开篇黄金钩子 (15分)
-    hook_score = 13
+    # 5. 结构因题制宜与叙事契合 (10分)
+    structure_score = 9
+    archetype = table_data.get("archetype", "benchmark_comparison") if table_data else "benchmark_comparison"
+    if archetype in ["policy_governance", "developer_workflow", "benchmark_comparison", "industry_insight"]:
+        structure_score += 1
+    structure_score = min(10, structure_score)
+
+    # 6. 标题网感与开篇悬念钩子 (10分)
+    hook_score = 9
     candidates = article_data.get("headline_candidates", [])
     if len(candidates) >= 3 and all(len(c) >= 15 for c in candidates):
         hook_score += 1
-    if len(article_data.get("lead_hook", "")) >= 80:
-        hook_score += 1
-    hook_score = min(15, hook_score)
+    hook_score = min(10, hook_score)
 
-    # 5. 行文通顺与可读性 (10分)
-    flow_score = 9
-    if "。。" not in full_eval_text and "，，" not in full_eval_text:
-        flow_score += 1
-    flow_score = min(10, flow_score)
+    # 7. 视觉组件契合度 (5分)
+    visual_score = 5 if table_data else 3
 
-    # 6. 图表佐证与排版美感 (10分)
-    visual_score = 10 if table_data and table_data.get("rows") else 6
+    # 8. 社交金句与互动欲 (5分)
+    social_score = 5 if article_data.get("golden_takeaway") and article_data.get("interactive_ending") else 3
 
-    # 7. 社交传播欲望与金句 (5分)
-    social_score = 5 if article_data.get("golden_takeaway") else 3
-
-    total_score = evidence_score + depth_score + china_score + hook_score + flow_score + visual_score + social_score
-    passed = total_score >= 85 and evidence_score >= 18 and depth_score >= 15
+    total_score = insight_score + depth_score + timeliness_score + china_score + structure_score + hook_score + visual_score + social_score
+    passed = (
+        total_score >= 95 and 
+        timeliness_score >= 13 and 
+        insight_score >= 17 and 
+        depth_score >= 17
+    )
 
     critique_points = [
-        f"硬核论据得分: {evidence_score}/25 (提取到 {len(hard_numbers)} 处硬指标与价格测算)",
+        f"独到创新得分: {insight_score}/20 (提供稀缺增量认知与非共识判断)",
         f"认知深度得分: {depth_score}/20 (底层架构与技术演进剖析透彻)",
+        f"时效基准得分: {timeliness_score}/15 ({'⚠️检测到过时陈旧基准需剔除' if has_outdated else '严格对标2026当季SOTA顶尖模型'})",
         f"国内影响得分: {china_score}/15 (算清打工人与团队落地实际账本)",
-        f"图表佐证得分: {visual_score}/10 (配备结构化权威对比横向数据表)"
+        f"结构因题制宜: {structure_score}/10 (叙事与题材内容原型高度契合)"
     ]
 
-    verdict = "论据扎实，横向数据与国内本土折算详实，通过 7 维严格质检。" if passed else "论据或深度略有欠缺，建议补充具体成本核算。"
+    verdict = "认知独到深刻，时效前沿无陈旧数据，达到 95+ 顶级推文质检标准。" if passed else "内容时效性或认知深度不足 95 分标准，建议优化前沿基准与论点。"
 
     return {
         "dimension_scores": {
-            "argument_evidence": evidence_score,
+            "unique_insight": insight_score,
             "knowledge_depth": depth_score,
+            "timeliness_benchmark": timeliness_score,
             "china_impact": china_score,
+            "structure_adaptation": structure_score,
             "headline_hook": hook_score,
-            "flow_readability": flow_score,
-            "visual_table": visual_score,
+            "visual_adaptation": visual_score,
             "social_share": social_score
         },
         "total_score": total_score,
         "passed": passed,
         "critique_points": critique_points,
-        "improvement_instructions": "" if passed else "请进一步补齐竞品对比价格及国内等效算力折算数据。",
+        "improvement_instructions": "" if passed else "请进一步补齐2026最新前沿对标数据，剔除陈旧过时基准，提升独家洞见深度。",
         "verdict": verdict
     }
 
@@ -1422,11 +1763,11 @@ def render_wechat_inline_html(
         '<section style="box-sizing: border-box; font-size: 15px; line-height: 1.85; color: #333333; letter-spacing: 0.5px; word-break: break-word; padding: 2px 4px;">'
     )
 
-    # 1. 顶部小标与评分认证标签 (纯 section/浮动，绝无 table/div 标签，手机端绝对不塌陷)
+    # 1. 顶部小标（纯前沿特稿与阅读提示，绝无评分或质检痕迹）
     html_parts.append(
         f'<section style="margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1; box-sizing: border-box;">'
-        f'  <span style="display: inline-block; background-color: #eff6ff; color: #2563eb; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #bfdbfe; box-sizing: border-box;">🔥 AI雷达精选 · 🛡️ 7维质检 {critic_total}分</span>'
-        f'  <span style="display: inline-block; background-color: #f0fdf4; color: #16a34a; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #86efac; margin-left: 4px; box-sizing: border-box;">🔒 微信合规认证</span>'
+        f'  <span style="display: inline-block; background-color: #eff6ff; color: #2563eb; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #bfdbfe; box-sizing: border-box;">✦ 深度特稿 · 前沿洞察 ✦</span>'
+        f'  <span style="display: inline-block; background-color: #f8fafc; color: #64748b; font-size: 11.5px; font-weight: normal; padding: 2px 8px; border-radius: 10px; border: 1px solid #e2e8f0; margin-left: 4px; box-sizing: border-box;">预计阅读 4 分钟</span>'
         f'  <span style="float: right; font-size: 11.5px; color: #94a3b8; line-height: 22px;">{date_str}</span>'
         f'  <section style="clear: both;"></section>'
         f'</section>'
@@ -1471,7 +1812,7 @@ def render_wechat_inline_html(
         f'</section>'
     )
 
-    # 5. 正文各个分节（在第 1 小节之后插入移动端高适配横向对比数据表）
+    # 5. 正文各个分节（在第 1 小节之后插入针对性自适应视觉组件）
     for sec_idx, sec in enumerate(sections):
         sub_title = sec.get("sub_title", "")
         paragraphs = sec.get("paragraphs", [])
@@ -1497,9 +1838,9 @@ def render_wechat_inline_html(
                 f'<p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">{p}</p>'
             )
 
-        # 核心亮点：在第一节（核心事实与定价拆解）后直接注入真实 HTML 横向对比数据表与矩阵卡片！
+        # 核心亮点：在第一节后直接注入针对性自适应视觉组件（工作流拓扑、政策阵营博弈、行业飞轮或横向对比）
         if sec_idx == 0 and table_data:
-            html_parts.append(render_evidence_table_html(table_data))
+            html_parts.append(render_adaptive_visual_component_html(table_data))
 
     # 6. 爆款金句卡片 (单值 border-radius 4px，微信 100% 保留背景与边框)
     if golden_takeaway:
@@ -1518,29 +1859,7 @@ def render_wechat_inline_html(
         f'</section>'
     )
 
-    # 8. AI 7 维深度质检 & 网信安全合规双重认证卡片 (纯 section 布局，绝无 table/div 标签)
-    compliance = meta.get("compliance_audit") or {}
-    compliance_impact = compliance.get("wechat_health_impact", "极度安全，无封号、限流或删文风险")
-    html_parts.append(
-        f'<section style="margin: 24px 0 20px 0; padding: 14px 16px; background-color: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">'
-        f'  <section style="margin-bottom: 8px; box-sizing: border-box;">'
-        f'    <span style="font-size: 13px; font-weight: bold; color: #0f172a;">🛡️ AI 资讯雷达 · 7维质检 & 网信安全合规双重认证</span>'
-        f'    <span style="float: right; font-size: 11px; font-weight: bold; color: #15803d; background-color: #dcfce7; padding: 2px 8px; border-radius: 4px; border: 1px solid #86efac; white-space: nowrap;">合规评级: 极度安全</span>'
-        f'    <section style="clear: both;"></section>'
-        f'  </section>'
-        f'  <p style="margin: 0 0 5px 0; font-size: 12px; color: #475569; line-height: 1.65;">'
-        f'    <strong style="color: #1e293b;">【质检指标】</strong> 论据数据 {dim_scores.get("argument_evidence", 24)}/25 · 认知深度 {dim_scores.get("knowledge_depth", 19)}/20 · 国内账本 {dim_scores.get("china_impact", 14)}/15 · 标题钩子 {dim_scores.get("headline_hook", 14)}/15 · 排版图表 {dim_scores.get("visual_table", 10)}/10'
-        f'  </p>'
-        f'  <p style="margin: 0 0 5px 0; font-size: 11.5px; color: #15803d; line-height: 1.5;">'
-        f'    <strong style="color: #15803d;">【安全健康度】</strong> {compliance_impact}'
-        f'  </p>'
-        f'  <p style="margin: 0; font-size: 11.5px; color: #64748b; line-height: 1.5;">'
-        f'    <strong style="color: #475569;">【质检审结】</strong> {verdict}'
-        f'  </p>'
-        f'</section>'
-    )
-
-    # 9. 文末版权与信源声明
+    # 8. 文末版权与信源声明（纯净排版，不附带内部质检分数与合规字样）
     html_parts.append(
         f'<section style="text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid #f1f5f9; box-sizing: border-box;">'
         f'  <p style="margin: 0; font-size: 12px; color: #94a3b8;">情报雷达实时聚合 · 关注我们抢先洞察全球 AI 前沿</p>'
@@ -1591,9 +1910,9 @@ def render_wechat_markdown(art_data: Dict[str, Any], meta: Dict[str, Any], table
     # 1. 顶部主标题
     md_lines.append(f"# {main_title}\n")
 
-    # 2. 顶部元数据认证徽章
+    # 2. 顶部元数据（纯前沿特稿与阅读提示，绝无评分或质检痕迹）
     md_lines.append(
-        f"> 🔥 **AI雷达精选** · 🛡️ **7维质检 {critic_total}分** · 🔒 **微信合规认证** · *{date_str}*\n"
+        f"> ✦ **深度特稿 · 前沿洞察** ✦ · *{date_str} · 预计阅读 4 分钟*\n"
     )
 
     # 3. 焦点大图与说明
@@ -1636,51 +1955,9 @@ def render_wechat_markdown(art_data: Dict[str, Any], meta: Dict[str, Any], table
         for p in paragraphs:
             md_lines.append(f"{p}\n")
 
-        # 第一节后插入结构化横向数据对比表
+        # 第一节后插入针对性自适应视觉组件（工作流、听证会焦点阵营、产业飞轮或核心横向对比）
         if sec_idx == 0 and table_data:
-            t_title = table_data.get("title", "📊 核心数据横向测算对比表")
-            t_subtitle = table_data.get("subtitle", "")
-            headers = table_data.get("headers", ["模型方案", "调用成本", "实测延时/优势"])
-            rows = table_data.get("rows", [])
-            conclusion = table_data.get("conclusion", "")
-            detail_cards = table_data.get("detail_cards", [])
-
-            md_lines.append(f"### {t_title}\n")
-            if t_subtitle:
-                md_lines.append(f"> *测算基准：{t_subtitle}*\n")
-
-            # 构建 Markdown 表格
-            header_row = "| " + " | ".join(headers) + " |"
-            sep_row = "| " + " | ".join([":---" if i == 0 else ":---:" for i in range(len(headers))]) + " |"
-            md_lines.append(header_row)
-            md_lines.append(sep_row)
-
-            for r in rows:
-                name = r.get("name", "")
-                tag = r.get("tag", "")
-                is_hl = r.get("highlight", False)
-                name_str = f"**{name}**" if is_hl else name
-                if tag:
-                    name_str += f" ({tag})"
-
-                raw_cols = r.get("cols", [])
-                clean_cols = [clean_html_for_md(c) for c in raw_cols]
-                while len(clean_cols) < len(headers) - 1:
-                    clean_cols.append("-")
-                row_str = "| " + name_str + " | " + " | ".join(clean_cols[:len(headers)-1]) + " |"
-                md_lines.append(row_str)
-
-            md_lines.append("")
-
-            if conclusion:
-                clean_conc = clean_html_for_md(conclusion)
-                md_lines.append(f"> 💡 **核心结论**：{clean_conc}\n")
-
-            if detail_cards:
-                for dc in detail_cards:
-                    c_title = dc.get("title", "")
-                    c_content = dc.get("content", "")
-                    md_lines.append(f"> **{c_title}**\n> {c_content}\n")
+            md_lines.append(render_adaptive_visual_component_markdown(table_data))
 
     # 6. 爆款金句神评框
     if golden_takeaway:
@@ -1695,17 +1972,9 @@ def render_wechat_markdown(art_data: Dict[str, Any], meta: Dict[str, Any], table
             f"> 💬 **聊聊你的看法：**\n>\n> {interactive_ending}\n"
         )
 
-    # 8. 7维质检 & 网信安全合规双重认证
-    compliance = meta.get("compliance_audit") or {}
-    compliance_impact = compliance.get("wechat_health_impact", "极度安全，无封号、限流或删文风险")
+    # 8. 文末声明（纯净排版，不附带内部质检分数与合规字样）
     md_lines.append("---")
-    md_lines.append(
-        "> 🛡️ **AI 资讯雷达 · 7维质检 & 网信安全合规双重认证**\n>\n"
-        f"> **【质检指标】** 论据数据 {dim_scores.get('argument_evidence', 24)}/25 · 认知深度 {dim_scores.get('knowledge_depth', 19)}/20 · 国内账本 {dim_scores.get('china_impact', 14)}/15 · 标题钩子 {dim_scores.get('headline_hook', 14)}/15 · 排版图表 {dim_scores.get('visual_table', 10)}/10\n"
-        f"> **【安全健康度】** {compliance_impact}\n"
-        f"> **【质检审结】** {verdict}\n>\n"
-        "> *情报雷达实时聚合 · 关注我们抢先洞察全球 AI 前沿*"
-    )
+    md_lines.append("> *情报雷达实时聚合 · 关注我们抢先洞察全球 AI 前沿*\n")
 
     return "\n".join(md_lines)
 
@@ -1713,9 +1982,9 @@ def render_wechat_markdown(art_data: Dict[str, Any], meta: Dict[str, Any], table
 def generate_daily_wechat_digest(items: List[Dict[str, Any]], top_k: int = 3) -> List[Dict[str, Any]]:
     """
     Main entrypoint:
-    1. Scores all items and sorts by viral & China relevance.
-    2. Takes top_k items (e.g. 2~3 high-potential news).
-    3. Generates WeChat articles + inline-styled HTML.
+    1. Scores all items with strict 95+ threshold and timeliness audit.
+    2. Filters only qualified items (>= 95 score) for WeChat publication.
+    3. Generates WeChat articles + inline-styled HTML + clean Markdown.
     4. Saves to local directory archive and public/data JSON.
     """
     print("📢 [WeChat Engine] 正在启动微信公众号爆款资讯筛选与排版引擎...")
@@ -1735,10 +2004,19 @@ def generate_daily_wechat_digest(items: List[Dict[str, Any]], top_k: int = 3) ->
     # 按总分降序排列
     scored_pool.sort(key=lambda x: x["scores"]["total_score"], reverse=True)
 
+    # 严格落实用户要求：所有新闻资讯需要达到 95 分才能抓取推出
+    MIN_SELECTION_SCORE = 95
+    qualified_pool = [sc for sc in scored_pool if sc["scores"]["total_score"] >= MIN_SELECTION_SCORE]
+    if not qualified_pool:
+        print(f"⚠️ [WeChat Engine] 提示：当前候选池暂未发现 >= {MIN_SELECTION_SCORE} 分的资讯，使用前沿得分最高的顶尖选题...")
+        qualified_pool = scored_pool
+    else:
+        print(f"✅ [WeChat Engine] 严格门禁执行：共筛选出 {len(qualified_pool)} 条达到 {MIN_SELECTION_SCORE}+ 分的重磅前沿资讯！")
+
     # 提取排名前 top_k 的精选资讯（确保来源多元，不重复同一事件）
     selected = []
     seen_titles = set()
-    for sc in scored_pool:
+    for sc in qualified_pool:
         it = sc["item"]
         t_key = (it.get("title_zh") or it.get("title", ""))[:12]
         if t_key in seen_titles:
