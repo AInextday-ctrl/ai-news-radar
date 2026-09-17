@@ -427,6 +427,20 @@ def save_news(items: list):
                 for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
+                # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
+                exist_img = existing.get("image_url") or ""
+                if exist_img and not any(bad in exist_img.lower() for bad in ["techmeme.com", "pml.png"]):
+                    it["image_url"] = exist_img
+
+            # 彻底清洗掉任何残留的 pml.png 站内图章
+            if it.get("image_url") and any(bad in str(it["image_url"]).lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq"]):
+                it["image_url"] = None
+            if it.get("inline_images") and isinstance(it["inline_images"], list):
+                it["inline_images"] = [
+                    u for u in it["inline_images"] 
+                    if not any(bad in str(u).lower() for bad in ["pml.png", "techmeme.com/img", "pixel", "icon"])
+                ]
+
             master_dict[k] = it
 
     all_master_items = list(master_dict.values())

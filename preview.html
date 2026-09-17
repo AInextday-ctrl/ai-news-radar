@@ -5510,22 +5510,26 @@
       const t = I18N[currentLang] || I18N.zh;
       const isZh = currentLang === 'zh';
       const allNews = [
+        ...(cachedData.grouped?.news || []),
+        ...(cachedData.news || []),
         ...(cachedData.top_three || []),
+        ...(cachedData.grouped?.celebrity || []),
         ...(cachedData.items || []),
-        ...(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []),
-        ...(cachedData.grouped?.celebrity || cachedData.celebrity || []),
-        ...(cachedData.grouped?.tools || cachedData.tools || []),
-        ...(cachedData.grouped?.videos || cachedData.videos || []),
-        ...(cachedData.grouped?.prompts || cachedData.prompts || [])
+        ...(cachedData.industry_news || []),
+        ...(cachedData.grouped?.tools || []),
+        ...(cachedData.grouped?.videos || []),
+        ...(cachedData.grouped?.prompts || [])
       ];
 
-      let item = allNews.find(it => String(it.id) === String(newsId));
+      const matches = allNews.filter(it => String(it.id) === String(newsId));
+      let item = matches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || matches[0];
       if (!item && String(newsId).startsWith('top_')) {
         const topIdx = parseInt(newsId.replace('top_', ''), 10);
         item = (cachedData.top_three || [])[topIdx];
       }
       if (!item) {
-        item = allNews.find(it => (it.url && it.url === newsId) || (it.title && it.title === newsId));
+        const urlMatches = allNews.filter(it => (it.url && it.url === newsId) || (it.title && it.title === newsId));
+        item = urlMatches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || urlMatches[0];
       }
       if (!item) return;
 
@@ -5617,7 +5621,14 @@
       });
 
       let validImages = allImages.filter(img => 
-        img.length > 0 &&
+        img && typeof img === 'string' &&
+        img.trim().length > 12 &&
+        !img.includes('pml.png') &&
+        !img.includes('techmeme.com/img') &&
+        !img.includes('techmeme.com/pml') &&
+        !img.includes('techmeme_sq') &&
+        !img.includes('pixel') &&
+        !img.includes('spacer') &&
         !img.includes('photo-1526374965328') &&
         !img.includes('photo-1485827404703')
       ).map(img => {

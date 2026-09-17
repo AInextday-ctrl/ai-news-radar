@@ -182,8 +182,8 @@ def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
 
     for img_url in img_matches:
         img_url = html.unescape(img_url)
-        # 过滤跟踪像素和无意义图标
-        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar", "icon", "1x1", "feed-icon", "wp-includes"]):
+        # 过滤跟踪像素、无意义图标与 Techmeme 站内永久链接图章 pml.png
+        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar", "icon", "1x1", "feed-icon", "wp-includes", "pml.png", "techmeme.com/img", "techmeme.com/pml"]):
             return img_url
 
     return None
@@ -222,8 +222,8 @@ def extract_article_multimedia(entry: Any, raw_html: str = "") -> Dict[str, Any]
 
     for img in img_matches:
         img_clean = html.unescape(img)
-        # 严格过滤追踪像素、表情包、头像、小图标
-        if any(b in img_clean.lower() for b in ["pixel", "track", "emoji", "avatar", "icon", "spacer", "badge", "1x1", "button"]):
+        # 严格过滤追踪像素、表情包、头像、小图标、站内角标 pml.png
+        if any(b in img_clean.lower() for b in ["pixel", "track", "emoji", "avatar", "icon", "spacer", "badge", "1x1", "button", "pml.png", "techmeme.com/img", "techmeme.com/pml"]):
             continue
         if img_clean not in seen:
             seen.add(img_clean)
@@ -240,28 +240,34 @@ def resolve_techmeme_hd_image(permalink_or_thumb: str, client: Optional[Any] = N
     if not permalink_or_thumb:
         return None
     permalink = permalink_or_thumb
-    if "techmeme.com" in permalink_or_thumb and "/i" in permalink_or_thumb:
-        m = re.search(r'techmeme\.com/(\d+)/i(\d+)\.jpg', permalink_or_thumb)
-        if m:
-            permalink = f"https://www.techmeme.com/{m.group(1)}/p{m.group(2)}"
+    # 提取数字编号并转为标准落地页 URL: https://www.techmeme.com/YYMMDD/pNN
+    m_thumb = re.search(r'techmeme\.com/(\d+)/i(\d+)\.jpg', permalink_or_thumb)
+    m_perm = re.search(r'techmeme\.com/(\d+)/p(\d+)', permalink_or_thumb)
+    if m_thumb:
+        permalink = f"https://www.techmeme.com/{m_thumb.group(1)}/p{m_thumb.group(2)}"
+    elif m_perm:
+        permalink = f"https://www.techmeme.com/{m_perm.group(1)}/p{m_perm.group(2)}"
+    
+    if "#" in permalink:
+        permalink = permalink.split("#")[0]
+        
     try:
+        html_text = ""
         if client and hasattr(client, "get"):
             resp = client.get(permalink, timeout=6)
             if resp.status_code == 200:
-                m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', resp.text, re.I)
-                if m_img:
-                    cand = m_img.group(1).replace("&amp;", "&")
-                    if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "pixel"]):
-                        return cand
+                html_text = resp.text
         else:
             req = urllib.request.Request(permalink, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
             with urllib.request.urlopen(req, timeout=6) as r:
                 html_text = r.read().decode("utf-8", errors="ignore")
-                m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
-                if m_img:
-                    cand = m_img.group(1).replace("&amp;", "&")
-                    if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "pixel"]):
-                        return cand
+                
+        if html_text:
+            m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
+            if m_img:
+                cand = m_img.group(1).replace("&amp;", "&")
+                if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
+                    return cand
     except Exception:
         pass
     return None
@@ -2279,10 +2285,26 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     img_url = media_assets.get("cover_image") or extract_image_url(entry, summary)
 
                     # 若为 Techmeme 聚合源，自动穿透其落地页提取 1200px+ 高清官方大图 (如 Bloomberg/WSJ/FT 原图)
-                    if is_techmeme and img_url and "techmeme.com" in img_url:
-                        hd_img = resolve_techmeme_hd_image(entry.get("link", "") or img_url, client)
+                    if is_techmeme:
+                        # 1. 绝不将 pml.png 或 Techmeme 站内图章作为文章配图
+                        if img_url and any(bad in img_url.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq"]):
+                            img_url = None
+                        
+                        # 2. 尝试穿透 Techmeme 落地页解析 1200px+ 官方原厂大图
+                        hd_target = img_url or entry.get("link", "") or entry.get("id", "")
+                        hd_img = resolve_techmeme_hd_image(hd_target, client)
                         if hd_img:
                             img_url = hd_img
+                        elif img_url and any(bad in img_url.lower() for bad in ["techmeme.com", "pml.png"]):
+                            # 若没有解析出源站高清大图，且该图只是 Techmeme 的微缩图或站内图标，清空避免拉伸失真
+                            img_url = None
+
+                        # 3. 严格清洗正文 inline_images，杜绝 pml.png 污染画廊
+                        if media_assets and media_assets.get("inline_images"):
+                            media_assets["inline_images"] = [
+                                u for u in media_assets["inline_images"]
+                                if not any(bad in u.lower() for bad in ["pml.png", "techmeme.com/img", "pixel", "icon"])
+                            ]
 
                     # 若为 YouTube 视频封面，优先升级为 1080P 超高清 maxresdefault
                     if img_url and "i.ytimg.com/vi/" in img_url and "/hqdefault.jpg" in img_url:
