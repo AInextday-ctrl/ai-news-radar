@@ -19,7 +19,7 @@ import time
 from datetime import datetime, timezone
 import httpx
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url
-from processor import process_items_batch, clean_news_text
+from processor import process_items_batch, clean_news_text, generate_smart_fallback_summary
 from config import CATEGORIES, AI_CREATORS
 
 
@@ -463,8 +463,33 @@ def save_news(items: list):
             master_dict[k] = it
 
     all_master_items = list(master_dict.values())
-    # 确保所有 celebrity 领袖观点条目均具备规范的 quote 与 full_text 双语字段
     for it in all_master_items:
+        # 1. 确保全库条目 100% 具备超清封面，绝无白卡或垃圾图章
+        img_val = str(it.get("image_url") or "")
+        if (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
+            it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
+
+        # 2. 彻底清洗所有复读机摘要 (即使历史残留多次重复也彻底剥离)
+        title_zh = (it.get("title_zh") or it.get("title") or "").strip()
+        curr_sum = (it.get("summary_zh") or "").strip()
+        if title_zh and curr_sum:
+            s = curr_sum
+            while title_zh and s.startswith(title_zh):
+                s = s[len(title_zh):].lstrip('。，, ：: -—').strip()
+            if title_zh and title_zh in s and len(s) <= len(title_zh) * 2.5:
+                s = s.replace(title_zh, "").lstrip('。，, ：: -—').strip()
+            
+            zh_media = r'[\s.·|《]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|NBC News|自由新闻报|The Free Press|IEEE频谱|IEEE Spectrum|NPR|西雅图时报|Seattle Times|半岛电视台|德国之声|DW\.com|DW|美联社|AP新闻|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
+            s = re.sub(zh_media, '', s, flags=re.IGNORECASE).strip('。，, ：: -—|·《》')
+
+            zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', s))
+            common = sum(1 for c in s if c in title_zh)
+            if len(s) >= 12 and zh_chars >= 8 and s != title_zh and (title_zh not in s) and (common / max(len(s), 1) < 0.65):
+                it["summary_zh"] = s
+            else:
+                it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
+
+        # 3. 确保所有 celebrity 领袖观点条目均具备规范的 quote 与 full_text 双语字段
         if it.get("category") == "celebrity":
             if not it.get("full_text_en"):
                 it["full_text_en"] = it.get("content_snippet") or it.get("title_en") or it.get("title") or ""
@@ -474,6 +499,7 @@ def save_news(items: list):
                 it["quote_zh"] = it.get("title_zh") or it.get("title") or ""
             if not it.get("quote_en"):
                 it["quote_en"] = it.get("title_en") or it.get("title") or ""
+
     all_master_items.sort(key=parse_time_for_sort, reverse=True)
 
     # 滚动保留 1 年（最多 25,000 条高质量前沿深度资讯），杜绝存储无限膨胀
