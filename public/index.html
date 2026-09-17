@@ -4191,8 +4191,8 @@
             
             <!-- 悬浮 Logo 微图标 -->
             <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
-              <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform">
-                ${iconSvg}
+              <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
+                ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover">` : iconSvg}
               </div>
               <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
             </div>
@@ -6576,7 +6576,13 @@
       }
       if (scenarioEl) scenarioEl.textContent = item.scenario_tag || (isZh ? '🤖 AI 场景落地' : '🤖 Applied AI');
       if (timeEl) timeEl.textContent = `🕒 ${timeObj.display || timeObj.relative || (isZh ? '今日' : 'Today')}`;
-      if (iconWrapEl) iconWrapEl.innerHTML = iconSvg;
+      if (iconWrapEl) {
+        if (item.logo_url) {
+          iconWrapEl.innerHTML = `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover rounded-2xl">`;
+        } else {
+          iconWrapEl.innerHTML = iconSvg;
+        }
+      }
       
       if (officialBtnEl) officialBtnEl.href = officialUrl;
       if (footerOfficialBtnEl) footerOfficialBtnEl.href = officialUrl;

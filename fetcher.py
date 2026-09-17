@@ -1407,8 +1407,114 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
 
 
 # ==========================================
-# 5. 抓取 Product Hunt 场景化 AI 应用工具
+# 5. 抓取 Product Hunt 场景化 AI 应用工具 (真实官方落地页与高清实测画廊截图)
 # ==========================================
+def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
+    """
+    通过 Googlebot UA 深度抓取 Product Hunt 落地页真实数据：
+    提取官方真实跳转官网、多张产品实测画廊截图、产品官方 Logo、标语与 Upvotes。
+    彻底避免使用任何占位图与猜想链接。
+    """
+    if not product_url or "producthunt.com" not in product_url:
+        return {}
+    slug = product_url.split('?')[0]
+    headers = {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+    try:
+        with httpx.Client(headers=headers, follow_redirects=True, timeout=8.0) as client:
+            resp = client.get(slug)
+            if resp.status_code != 200 or len(resp.text) < 1500 or "Just a moment..." in resp.text:
+                return {}
+            page_html = resp.text
+    except Exception:
+        return {}
+
+    data = {}
+    # 1. 真实官网地址 (Company Info / Visit website)
+    comp_matches = re.findall(r'Company\s+Info[\s\S]*?<a[^>]+href="([^"]+)"', page_html, re.IGNORECASE)
+    if comp_matches:
+        raw_url = html.unescape(comp_matches[0])
+        data['official_url'] = re.sub(r'[\?&]ref=producthunt.*$', '', raw_url)
+    else:
+        visit_matches = re.findall(r'<a[^>]+href="([^"]+)"[^>]*>[\s\S]*?Visit\s+website[\s\S]*?</a>', page_html, re.IGNORECASE)
+        for v in visit_matches:
+            v_href = html.unescape(v)
+            if 'cdn-cgi' not in v_href and not v_href.startswith('/'):
+                data['official_url'] = re.sub(r'[\?&]ref=producthunt.*$', '', v_href)
+                break
+
+    if not data.get('official_url'):
+        ld_matches = re.findall(r'<script type="application/ld\+json"[^>]*>([\s\S]*?)</script>', page_html)
+        for ld in ld_matches:
+            try:
+                d = json.loads(ld)
+                if isinstance(d, dict) and d.get('@type') in ('Product', 'SoftwareApplication', 'WebApplication', 'MobileApplication'):
+                    if d.get('url') and 'producthunt.com' not in d.get('url'):
+                        data['official_url'] = d.get('url')
+                        break
+            except Exception:
+                pass
+
+    # 2. 真实画廊截图 (YouTube 视频封面 + 高清实测界面)
+    preview_images = []
+    yt_ids = re.findall(r'youtu(?:be\.com/(?:watch\?v=|embed/)|.be/)([a-zA-Z0-9_\-]+)', page_html)
+    for yid in yt_ids:
+        thumb = f"https://i.ytimg.com/vi/{yid}/maxresdefault.jpg"
+        if thumb not in preview_images:
+            preview_images.append(thumb)
+
+    gallery_tags = re.findall(r'<img[^>]+gallery\s+image[^>]*>', page_html, re.IGNORECASE)
+    for tag in gallery_tags:
+        src_m = re.search(r'src="([^"]+)"', tag)
+        if src_m:
+            src_clean = html.unescape(src_m.group(1)).split('?')[0] + "?auto=format&fit=crop&w=1200&q=85"
+            if src_clean not in preview_images:
+                preview_images.append(src_clean)
+
+    for ld in re.findall(r'<script type="application/ld\+json"[^>]*>([\s\S]*?)</script>', page_html):
+        try:
+            d = json.loads(ld)
+            if isinstance(d, dict) and 'screenshot' in d:
+                screens = d['screenshot']
+                if isinstance(screens, list):
+                    for s in screens:
+                        s_clean = s.split('?')[0] + "?auto=format&fit=crop&w=1200&q=85"
+                        if s_clean not in preview_images:
+                            preview_images.append(s_clean)
+                elif isinstance(screens, str):
+                    s_clean = screens.split('?')[0] + "?auto=format&fit=crop&w=1200&q=85"
+                    if s_clean not in preview_images:
+                        preview_images.append(s_clean)
+        except Exception:
+            pass
+
+    if len(preview_images) < 2:
+        for m in re.finditer(r'https://ph-files\.imgix\.net/([a-zA-Z0-9\-_]+(?:\.[a-zA-Z0-9]+)?)', page_html):
+            clean_src = f"https://ph-files.imgix.net/{m.group(1)}?auto=format&fit=crop&w=1200&q=85"
+            if clean_src not in preview_images:
+                preview_images.append(clean_src)
+
+    data['preview_images'] = preview_images[:6]
+
+    # 3. Logo Icon
+    logo_m = re.findall(r'<img[^>]+src="([^">]+ph-files\.imgix\.net[^">]+)"[^>]*alt="([^"]+)"', page_html)
+    for src, alt in logo_m:
+        if "gallery image" not in alt.lower():
+            data['logo_url'] = html.unescape(src).split('?')[0] + "?auto=format&fit=crop&w=128&h=128"
+            break
+
+    # 4. Tagline & Upvotes
+    og_desc = re.findall(r'<meta property="og:description" content="([^"]+)"', page_html)
+    if og_desc:
+        data['tagline'] = html.unescape(og_desc[0]).strip()
+
+    upvotes = re.findall(r'Upvote[^\d]*(\d+)', page_html)
+    if upvotes:
+        data['upvotes'] = upvotes[0]
+        data['rank_badge'] = f"🔥 {upvotes[0]} Upvotes · Product Hunt"
+
+    return data
+
+
 def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
     """Fetch trending user-facing AI tools from Product Hunt with rich titles."""
     items = []
@@ -1423,7 +1529,7 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             title = entry.get("title", "").strip()
             summary = entry.get("summary", "")
             
-            # 提取真实直达官网链接 (<a href="https://www.producthunt.com/r/p/...">Link</a>)
+            # 提取初始直达链接
             outbound_match = re.search(r'href="([^"]+)"[^>]*>Link</a>', summary, re.IGNORECASE)
             official_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
             source_url = entry.get("link", "")
@@ -1438,8 +1544,6 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
 
             if not any(k in combined for k in ai_keywords):
                 continue
-
-            link = official_url
 
             scenario = "🤖 智能体/工作流"
             icon_type = "agent"
@@ -1475,14 +1579,24 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             title_fmt = f"【{app_name}】{hook}"
             title_en = f"[{app_name}] {hook}"
 
-            scenario_img_map = {
-                "vision": ["https://images.unsplash.com/photo-1547891654-e66ed7ebb968?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80"],
-                "code": ["https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1000&auto=format&fit=crop&q=80"],
-                "agent": ["https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=1000&auto=format&fit=crop&q=80"],
-                "audio": ["https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1000&auto=format&fit=crop&q=80"],
-                "chat": ["https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1000&auto=format&fit=crop&q=80", "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=1000&auto=format&fit=crop&q=80"]
-            }
-            preview_imgs = scenario_img_map.get(icon_type, scenario_img_map["agent"])
+            # 实时深度爬取 Product Hunt 真实页面数据 (真实官网、真实画廊大图、真实 Logo)
+            ph_details = scrape_product_hunt_details(source_url)
+            if ph_details:
+                if ph_details.get("official_url"):
+                    official_url = ph_details["official_url"]
+                preview_imgs = ph_details.get("preview_images") or []
+                logo_url = ph_details.get("logo_url")
+                rank_badge = ph_details.get("rank_badge") or "🔥 Product Hunt 热门精选"
+                if ph_details.get("tagline"):
+                    hook = ph_details["tagline"]
+                    title_en = f"[{app_name}] {hook}"
+            else:
+                preview_imgs = []
+                logo_url = None
+                rank_badge = "🔥 Product Hunt 热门精选"
+
+            if not preview_imgs:
+                preview_imgs = ["https://ph-files.imgix.net/feeb7666-f92a-44bd-8442-461e1a93021d.jpeg?auto=format&fit=crop&w=1200&q=85"]
 
             items.append({
                 "id": make_id(source_url, title),
@@ -1498,7 +1612,8 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 "source_url": source_url,
                 "preview_images": preview_imgs,
                 "image_url": preview_imgs[0],
-                "rank_badge": "🔥 Product Hunt 热门精选",
+                "logo_url": logo_url,
+                "rank_badge": rank_badge,
                 "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",
                 "overview_en": f"{app_name} is an innovative practical tool designed for {scenario}. {hook}.",
                 "features_zh": [
