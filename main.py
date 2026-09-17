@@ -18,7 +18,7 @@ import json
 import time
 from datetime import datetime, timezone
 import httpx
-from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url
 from processor import process_items_batch, clean_news_text
 from config import CATEGORIES, AI_CREATORS
 
@@ -404,12 +404,12 @@ def save_news(items: list):
     def get_it_key(it):
         return it.get("url") or it.get("id")
 
-    for old_file in [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE]:
+    for old_file in [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_OUTPUT_FILE, OUTPUT_FILE]:
         if os.path.exists(old_file):
             try:
                 with open(old_file, "r", encoding="utf-8") as f:
                     old_data = json.load(f)
-                    old_list = old_data.get("items", []) if isinstance(old_data, dict) else old_data
+                    old_list = old_data.get("items", []) or old_data.get("news", []) if isinstance(old_data, dict) else old_data
                     if isinstance(old_list, list):
                         for it in old_list:
                             k = get_it_key(it)
@@ -431,15 +431,34 @@ def save_news(items: list):
                 exist_img = existing.get("image_url") or ""
                 if exist_img and not any(bad in exist_img.lower() for bad in ["techmeme.com", "pml.png"]):
                     it["image_url"] = exist_img
+                # 严密保护已人工清洗或高质量提炼的中文摘要，绝不被复读机摘要覆盖
+                exist_sum = existing.get("summary_zh") or ""
+                curr_sum = it.get("summary_zh") or ""
+                clean_t = (it.get("title_zh") or it.get("title") or "").strip()
+                if exist_sum and clean_t and not exist_sum.startswith(clean_t) and (not curr_sum or curr_sum.startswith(clean_t)):
+                    it["summary_zh"] = exist_sum
 
-            # 彻底清洗掉任何残留的 pml.png 站内图章
-            if it.get("image_url") and any(bad in str(it["image_url"]).lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq"]):
-                it["image_url"] = None
+            # 彻底清洗掉任何残留的 pml.png 站内图章，并确保所有卡片绝对具备超清封面 (100% 覆盖)
+            img_val = str(it.get("image_url") or "")
+            if (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
+                it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
+
             if it.get("inline_images") and isinstance(it["inline_images"], list):
                 it["inline_images"] = [
                     u for u in it["inline_images"] 
                     if not any(bad in str(u).lower() for bad in ["pml.png", "techmeme.com/img", "pixel", "icon"])
                 ]
+
+            # 坚决杜绝摘要复读标题与媒体噪音
+            title_zh = (it.get("title_zh") or it.get("title") or "").strip()
+            curr_sum = (it.get("summary_zh") or "").strip()
+            if title_zh and curr_sum:
+                if curr_sum.startswith(title_zh):
+                    remainder = curr_sum[len(title_zh):].lstrip('。，, ：: -—').strip()
+                    zh_media = r'[\s.·|]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|自由新闻报|IEEE频谱|NPR|西雅图时报|半岛电视台|德国之声|DW)[\s.]*$'
+                    remainder = re.sub(zh_media, '', remainder).strip()
+                    if len(remainder) >= 12 and remainder != title_zh:
+                        it["summary_zh"] = remainder
 
             master_dict[k] = it
 

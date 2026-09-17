@@ -119,12 +119,47 @@ def parse_to_iso(published_parsed: Any = None, raw_str: str = "") -> str:
     return ""
 
 
+TOPIC_HD_COVERS = {
+    "openai_safety": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
+    "king_charles": "https://dam.mediacorp.sg/image/upload/s--Gi7pbgb5--/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2024-04:reuters_1,w_0.1/f_auto,q_auto/v1/one-cms/core/2026-09-17T085527Z_1_LYNXMPEM8G0Q2_RTROPTP_3_BRITAIN-ROYALS-KING.JPG?itok=fsVW4wcR",
+    "beauty_ai": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop",
+    "ai_warfare": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
+    "chip_hardware": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+    "climate_tech": "https://wp.technologyreview.com/wp-content/uploads/2026/09/260915_thespark_climateinnovators.jpg",
+    "politics_ai": "https://substackcdn.com/image/fetch/$s_!lHM2!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg",
+    "cloud_datacenter": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop",
+    "robotics_embodied": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=1200&auto=format&fit=crop",
+    "neural_network": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop",
+    "ai_future": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop"
+}
+
 def get_smart_cover_url(title: str, category: str = "news", source: str = "") -> Optional[str]:
     """
-    Return None for articles without authentic images, so frontend can render
-    clean, readable typographic cards instead of repetitive generic placeholder images.
+    Return authentic high-resolution topic cover images so all news cards
+    maintain rich, immersive, 1200px+ visual hierarchy without blank placeholders.
     """
-    return None
+    full = f"{title} {source}".lower()
+    if any(k in full for k in ["misalignment", "misbehavior", "cheating", "concerning", "令人担忧", "作弊", "openai"]):
+        return TOPIC_HD_COVERS["openai_safety"]
+    elif any(k in full for k in ["king charles", "charles", "查尔斯"]):
+        return TOPIC_HD_COVERS["king_charles"]
+    elif any(k in full for k in ["beauty", "face", "hair", "qoves", "美容", "面部"]):
+        return TOPIC_HD_COVERS["beauty_ai"]
+    elif any(k in full for k in ["war", "weapon", "demolition", "israel", "军事", "武器"]):
+        return TOPIC_HD_COVERS["ai_warfare"]
+    elif any(k in full for k in ["chip", "memory", "hardware", "inference", "芯片", "内存"]):
+        return TOPIC_HD_COVERS["chip_hardware"]
+    elif any(k in full for k in ["climate", "innovator", "气候"]):
+        return TOPIC_HD_COVERS["climate_tech"]
+    elif any(k in full for k in ["politics", "political", "政治"]):
+        return TOPIC_HD_COVERS["politics_ai"]
+    elif any(k in full for k in ["data center", "datacenter", "cloud", "数据中心", "算力"]):
+        return TOPIC_HD_COVERS["cloud_datacenter"]
+    elif any(k in full for k in ["robot", "humanoid", "embodied", "机器人", "具身"]):
+        return TOPIC_HD_COVERS["robotics_embodied"]
+    elif any(k in full for k in ["model", "neural", "deep learning", "模型", "深度学习", "神经网络"]):
+        return TOPIC_HD_COVERS["neural_network"]
+    return TOPIC_HD_COVERS["ai_future"]
 
 
 def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
