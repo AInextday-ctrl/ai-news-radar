@@ -235,6 +235,38 @@ def extract_article_multimedia(entry: Any, raw_html: str = "") -> Dict[str, Any]
     return media_assets
 
 
+def resolve_techmeme_hd_image(permalink_or_thumb: str, client: Optional[Any] = None) -> Optional[str]:
+    """从 Techmeme permalink 落地页穿透提取原始 1200px+ 高清官方大图 (如 Bloomberg, WSJ, Wired, Verge, etc.)"""
+    if not permalink_or_thumb:
+        return None
+    permalink = permalink_or_thumb
+    if "techmeme.com" in permalink_or_thumb and "/i" in permalink_or_thumb:
+        m = re.search(r'techmeme\.com/(\d+)/i(\d+)\.jpg', permalink_or_thumb)
+        if m:
+            permalink = f"https://www.techmeme.com/{m.group(1)}/p{m.group(2)}"
+    try:
+        if client and hasattr(client, "get"):
+            resp = client.get(permalink, timeout=6)
+            if resp.status_code == 200:
+                m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', resp.text, re.I)
+                if m_img:
+                    cand = m_img.group(1).replace("&amp;", "&")
+                    if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "pixel"]):
+                        return cand
+        else:
+            req = urllib.request.Request(permalink, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+            with urllib.request.urlopen(req, timeout=6) as r:
+                html_text = r.read().decode("utf-8", errors="ignore")
+                m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
+                if m_img:
+                    cand = m_img.group(1).replace("&amp;", "&")
+                    if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "pixel"]):
+                        return cand
+    except Exception:
+        pass
+    return None
+
+
 def match_celebrity_profile(handle_or_user: str) -> Optional[Dict[str, Any]]:
     """
     Match leader profile based STRICTLY on the author's X handle/username.
@@ -2245,6 +2277,21 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     # 提取主图与正文多媒体图表
                     media_assets = extract_article_multimedia(entry, summary)
                     img_url = media_assets.get("cover_image") or extract_image_url(entry, summary)
+
+                    # 若为 Techmeme 聚合源，自动穿透其落地页提取 1200px+ 高清官方大图 (如 Bloomberg/WSJ/FT 原图)
+                    if is_techmeme and img_url and "techmeme.com" in img_url:
+                        hd_img = resolve_techmeme_hd_image(entry.get("link", "") or img_url, client)
+                        if hd_img:
+                            img_url = hd_img
+
+                    # 若为 YouTube 视频封面，优先升级为 1080P 超高清 maxresdefault
+                    if img_url and "i.ytimg.com/vi/" in img_url and "/hqdefault.jpg" in img_url:
+                        hd_yt = img_url.replace("/hqdefault.jpg", "/maxresdefault.jpg")
+                        try:
+                            if client.head(hd_yt, timeout=3).status_code == 200:
+                                img_url = hd_yt
+                        except Exception:
+                            pass
                     
                     if is_reddit:
                         # 若有 Reddit 来源，归入社区快讯，绝不污染领袖板块
