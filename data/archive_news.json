@@ -1,13 +1,119 @@
 {
-  "updated_at": "2026-09-17T11:13:59.573069+00:00",
-  "total_count": 388,
+  "updated_at": "2026-09-17T11:17:16.305556+00:00",
+  "total_count": 389,
   "items": [
+    {
+      "id": "threads_indie_shao_ollama_tools",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "is_viral": true,
+      "platform": "threads",
+      "author": "Shao Developer",
+      "author_handle": "@shao_dev",
+      "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=shao_dev",
+      "url": "https://www.threads.net/@shao_dev",
+      "title": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本",
+      "title_en": "Replacing 4 Paid SaaS Tools with a Single Local Ollama Script: Slashing Indie Dev Costs to Zero",
+      "title_zh": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本",
+      "quote_zh": "大多数所谓的 AI SaaS 本质上只是个带前端的 API 包装壳。一旦你在本地掌握了批处理脚本，每年轻松省下数千美金。",
+      "quote_en": "Most AI SaaS products are thin API wrappers. Once you master local batch scripts, you save thousands of dollars annually.",
+      "full_text_zh": "在 Threads 看到很多独立开发者每个月要给各种摘要工具、语音转写工具、文案优化工具交几十刀订阅费。\n\n这周把所有日常工作流全部收敛到一个 Python 自动化脚本：\n\n📌 语音转文字：本地 Whisper.cpp（0 延迟）；\n📌 客户反馈分类与打标：本地 Ollama 驱动的小尺寸 Qwen 2.5 7B；\n📌 SEO 软文生成与改写：DeepSeek-R1 本地推理。\n\n不需要充 token，断网状态下照常运转。完整脚本架构见第一条连推：",
+      "full_text_en": "Seeing so many indie makers on Threads paying hundreds in monthly SaaS fees for transcriptions and copy editors.\n\nThis week I consolidated all of it into one local Python script:\n\n📌 Speech-to-text: Local Whisper.cpp;\n📌 Feedback tagging: Local Qwen 2.5 7B via Ollama;\n📌 Long-form copywriting: DeepSeek-R1 locally.\n\nZero API bills, runs completely offline. Code in thread below👇",
+      "raw_published_at": "2026-09-16T11:16:34.758066+00:00",
+      "metrics": {
+        "views": "3.9k",
+        "likes": "245",
+        "comments": "48",
+        "retweets": "35",
+        "platform": "threads",
+        "verified": true
+      },
+      "trend_type": "breakthrough",
+      "surge_badge": "💡 极客硬核首发 (Threads独立开发省钱秘籍)",
+      "spec_tags": [
+        "ThreadsAI",
+        "独立开发",
+        "Ollama",
+        "效率神器"
+      ],
+      "spec_tags_en": [
+        "ThreadsAI",
+        "IndieDev",
+        "Ollama",
+        "Productivity"
+      ],
+      "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80",
+      "thread_replies": [
+        {
+          "step": "1/2",
+          "author": "Shao Developer",
+          "author_avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=shao_dev",
+          "content_zh": "【核心架构代码】\n```python\nimport ollama\ndef process_feedback(text):\n    return ollama.generate(model='qwen2.5:7b', prompt=f'Tag this feedback: {text}')\n```\n结合本地 cron 定时任务，每晚自动归纳全天用户邮件与 Bug 报告。",
+          "content_en": "[Core Architecture]\n```python\nimport ollama\ndef process_feedback(text):\n    return ollama.generate(model='qwen2.5:7b', prompt=f'Tag this feedback: {text}')\n```\nPaired with a cron job, it auto-triages daily user bug reports every midnight.",
+          "time_zh": "4小时前",
+          "time_en": "4h ago",
+          "likes": "160"
+        }
+      ],
+      "comments_list": [
+        {
+          "author": "Chris Vance",
+          "handle": "@chris_v",
+          "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=chris_v",
+          "content_zh": "已经把 Otter.ai 退订了，本地 Whisper 准确度高还不用担心泄密，太值了！",
+          "content_en": "Cancelled Otter.ai today. Local Whisper is faster and completely private!",
+          "likes": "38",
+          "time": "3小时前",
+          "time_en": "3h ago"
+        }
+      ],
+      "summary_zh": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本",
+      "summary_en": "",
+      "hot_score": 3,
+      "tags": [
+        "AI快讯"
+      ],
+      "ai_analysis": {
+        "briefing_zh": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本。  行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, Shao Developer advanced a key development: Replacing 4 Paid SaaS Tools with a Single Local Ollama Script: Slashing Indie Dev Costs to Zero. Context: 行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "elements_zh": {
+          "who": "Shao Developer",
+          "where": "全球产业与技术前沿一线",
+          "what": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本",
+          "why": "行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "elements_en": {
+          "who": "Shao Developer",
+          "where": "全球产业与技术前沿一线",
+          "what": "Replacing 4 Paid SaaS Tools with a Single Local Ollama Script: Slashing Indie Dev Costs to Zero",
+          "why": "行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        },
+        "insight_zh": "前脚硅谷巨头刚发布了号称“重新定义物理法则”的超豪华旗舰模型，后脚开源小分队就带着成本只有几十分之一的轻量模型在评测榜上迎头赶上。大厂们还在算计每百万Token收几美分才能回本几百亿GPU的折旧费，极客们已经在用极致的工程优化告诉市场：别拿烧钱当护城河，只要架构够精妙，几张卡照样能在竞技场里把庞然大物挑落下马。",
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": "用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本。  行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。",
+        "digest_en": "Executive Briefing: In 全球产业与技术前沿一线, Shao Developer announced: Replacing 4 Paid SaaS Tools with a Single Local Ollama Script: Slashing Indie Dev Costs to Zero.",
+        "key_points_zh": [
+          "主体与场景：Shao Developer在全球产业与技术前沿一线",
+          "核心事实：用单个本地 Ollama 脚本替代 4 款付费 SaaS：独立开发者如何彻底抹平成本",
+          "动因背景：行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "key_points_en": [
+          "Actor & Context: Shao Developer in 全球产业与技术前沿一线",
+          "Key Action: Replacing 4 Paid SaaS Tools with a Single Local Ollama Script: Slashing Indie Dev Costs to Zero",
+          "Motivation: 行业核心力量围绕“用单个本地 Ollama 脚本替代 4 款付”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        ],
+        "takeaway_zh": "前脚硅谷巨头刚发布了号称“重新定义物理法则”的超豪华旗舰模型，后脚开源小分队就带着成本只有几十分之一的轻量模型在评测榜上迎头赶上。大厂们还在算计每百万Token收几美分才能回本几百亿GPU的折旧费，极客们已经在用极致的工程优化告诉市场：别拿烧钱当护城河，只要架构够精妙，几张卡照样能在竞技场里把庞然大物挑落下马。",
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+      },
+      "is_recent_24h": false,
+      "is_pinned": false
+    },
     {
       "id": "9e81dc07aa70c76c",
       "title": "An in-depth look at loss-of-control incidents at OpenAI and Anthropic, the polarized reactions between the AI safety and cybersecurity communities, and more (AI as Normal Technology)",
       "title_en": "An in-depth look at loss-of-control incidents at OpenAI and Anthropic, the polarized reactions between the AI safety and cybersecurity communities, and more (AI as Normal Technology)",
       "url": "https://www.normaltech.ai/p/the-ai-as-normal-technology-view",
-      "image_url": "http://www.techmeme.com/260916/i16.jpg",
+      "image_url": "https://substackcdn.com/image/fetch/$s_!tFvu!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4a6ee35c-82c7-443c-b1c6-5f1f808f360d_3012x1682.jpeg",
       "source": "AI as Normal Technology",
       "author": "AI as Normal Technology",
       "author_handle": "",
