@@ -149,19 +149,41 @@ def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
             if "image" in enc.get("type", "") and "href" in enc:
                 return html.unescape(enc["href"])
 
-    # 4. 正文与摘要中的 <img> 标签 (含 Reddit preview)
+    # 3.1 links
+    if hasattr(entry, "links") and entry.links:
+        for link in entry.links:
+            href = link.get("href", "")
+            rel = link.get("rel", "")
+            ltype = link.get("type", "")
+            if href and ("image" in ltype or rel in ("enclosure", "image_src")):
+                return html.unescape(href)
+
+    # 3.2 entry.image
+    if hasattr(entry, "image") and entry.image:
+        img_val = entry.image
+        if isinstance(img_val, dict) and "href" in img_val:
+            return html.unescape(img_val["href"])
+        elif isinstance(img_val, str) and img_val.startswith("http"):
+            return html.unescape(img_val)
+
+    # 4. 正文与摘要中的 <img> 标签 (含 Reddit preview, WordPress, data-src, srcset)
     text_to_search = raw_html or ""
     if hasattr(entry, "content") and entry.content:
         for c in entry.content:
             text_to_search += " " + c.get("value", "")
     if hasattr(entry, "summary"):
         text_to_search += " " + getattr(entry, "summary", "")
+    if hasattr(entry, "description"):
+        text_to_search += " " + getattr(entry, "description", "")
 
-    img_matches = re.findall(r'<img[^>]+src=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    img_matches = re.findall(r'<img[^>]+(?:src|data-src|data-original|data-lazy-src)=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    meta_matches = re.findall(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    img_matches.extend(meta_matches)
+
     for img_url in img_matches:
         img_url = html.unescape(img_url)
         # 过滤跟踪像素和无意义图标
-        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar", "icon", "1x1"]):
+        if not any(bad in img_url.lower() for bad in ["tracking", "spacer", "pixel", "avatar", "icon", "1x1", "feed-icon", "wp-includes"]):
             return img_url
 
     return None
@@ -190,8 +212,10 @@ def extract_article_multimedia(entry: Any, raw_html: str = "") -> Dict[str, Any]
             text_to_search += " " + c.get("value", "")
     if hasattr(entry, "summary"):
         text_to_search += " " + getattr(entry, "summary", "")
+    if hasattr(entry, "description"):
+        text_to_search += " " + getattr(entry, "description", "")
 
-    img_matches = re.findall(r'<img[^>]+src=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
+    img_matches = re.findall(r'<img[^>]+(?:src|data-src|data-original|data-lazy-src)=["\'](https?://[^"\'>]+)["\']', text_to_search, re.IGNORECASE)
     seen = set()
     if cover:
         seen.add(cover)
@@ -2218,8 +2242,9 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     published_raw = entry.get("published") or entry.get("updated", "")
                     iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published_raw)
 
-                    # 提取主图，若无则匹配科技主题封面
-                    img_url = extract_image_url(entry, summary)
+                    # 提取主图与正文多媒体图表
+                    media_assets = extract_article_multimedia(entry, summary)
+                    img_url = media_assets.get("cover_image") or extract_image_url(entry, summary)
                     
                     if is_reddit:
                         # 若有 Reddit 来源，归入社区快讯，绝不污染领袖板块
@@ -2279,6 +2304,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "title_en": title,
                         "url": url,
                         "image_url": img_url,
+                        "inline_images": media_assets.get("inline_images", []),
                         "source": source_display,
                         "author": author_display,
                         "author_handle": author_handle,

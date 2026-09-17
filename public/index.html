@@ -1154,6 +1154,19 @@
         <!-- 资讯原标题 (已脱敏清洗杂质) -->
         <h2 id="ai-modal-title" class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug"></h2>
 
+        <!-- 资讯原文配图 (支持点击查看大图、多图切换，防裂图自动隐藏) -->
+        <div id="ai-modal-image-wrap" class="hidden space-y-2">
+          <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-950/60 max-h-[360px] shadow-sm relative group flex items-center justify-center">
+            <img id="ai-modal-image" src="" alt="资讯原文配图" class="w-full max-h-[360px] object-contain sm:object-cover transition-transform duration-300 group-hover:scale-[1.01] cursor-pointer" onclick="window.open(this.src, '_blank')" onerror="document.getElementById('ai-modal-image-wrap').classList.add('hidden')">
+            <span class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md text-white text-[11px] font-medium pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-md">
+              <span>🔍</span>
+              <span id="ai-modal-image-hint">点击查看原图</span>
+            </span>
+          </div>
+          <!-- 多图缩略条 (若有附加配图/图表) -->
+          <div id="ai-modal-gallery-strip" class="hidden flex items-center gap-2 overflow-x-auto py-1"></div>
+        </div>
+
         <!-- 板块 1: 📋 事件脉络速览 (新闻简报) -->
         <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b border-slate-200/80 dark:border-slate-800 pb-2">
@@ -1617,6 +1630,7 @@
         aiModalBriefingTitle: "事件脉络速览",
         aiModalInsightTitle: "AI 点评",
         aiModalSourceBtn: "阅读原文 / 直达报道",
+        aiModalImageHint: "点击查看原图",
         aiAnalysisBtn: "资讯概要",
         expandCatNewsArchive: "点击展开历史资讯库",
         collapseCatNewsArchive: "收起历史资讯库 ↑",
@@ -1767,6 +1781,7 @@
         aiModalBriefingTitle: "Executive News Briefing",
         aiModalInsightTitle: "AI Hot Take",
         aiModalSourceBtn: "Read Full Story",
+        aiModalImageHint: "Click to view full image",
         aiAnalysisBtn: "Briefing",
         expandCatNewsArchive: "Expand Historical News Archive",
         collapseCatNewsArchive: "Collapse Historical Archive ↑",
@@ -5594,6 +5609,59 @@
       const sourceBtnEl = document.getElementById('ai-modal-source-btn');
       const sourceBtnTextEl = document.getElementById('ai-modal-source-btn-text');
 
+      // 写入配图 (原文配图优先展示，支持多图缩略条，滤除通用重复占位图与裂图)
+      const imageWrapEl = document.getElementById('ai-modal-image-wrap');
+      const imageEl = document.getElementById('ai-modal-image');
+      const galleryStripEl = document.getElementById('ai-modal-gallery-strip');
+      const imgHintEl = document.getElementById('ai-modal-image-hint');
+
+      if (imgHintEl) {
+        imgHintEl.textContent = t.aiModalImageHint || (isZh ? '点击查看原图' : 'Click to view full image');
+      }
+
+      const allImages = [];
+      const primaryImg = item.image_url || item.cover_image || (item.media_assets && item.media_assets.cover_image);
+      if (primaryImg && typeof primaryImg === 'string') allImages.push(primaryImg.trim());
+      const inlines = item.inline_images || (item.media_assets && item.media_assets.inline_images) || [];
+      inlines.forEach(img => {
+        if (img && typeof img === 'string' && !allImages.includes(img.trim())) allImages.push(img.trim());
+      });
+
+      const validImages = allImages.filter(img => 
+        img.length > 0 &&
+        !img.includes('photo-1526374965328') &&
+        !img.includes('photo-1485827404703')
+      );
+
+      if (imageWrapEl && imageEl) {
+        if (validImages.length > 0) {
+          imageEl.src = validImages[0];
+          imageEl.alt = cleanTitle || '资讯原文配图';
+          imageWrapEl.classList.remove('hidden');
+
+          if (galleryStripEl) {
+            if (validImages.length > 1) {
+              galleryStripEl.innerHTML = validImages.map((img) => `
+                <button type="button" onclick="document.getElementById('ai-modal-image').src='${img.replace(/'/g, "\\'")}'" class="w-14 h-14 rounded-lg overflow-hidden border-2 border-slate-300 dark:border-slate-700 hover:border-indigo-500 focus:border-indigo-500 shrink-0 bg-slate-900 transition-all opacity-80 hover:opacity-100 cursor-pointer">
+                  <img src="${img}" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
+                </button>
+              `).join('');
+              galleryStripEl.classList.remove('hidden');
+            } else {
+              galleryStripEl.innerHTML = '';
+              galleryStripEl.classList.add('hidden');
+            }
+          }
+        } else {
+          imageEl.src = '';
+          imageWrapEl.classList.add('hidden');
+          if (galleryStripEl) {
+            galleryStripEl.innerHTML = '';
+            galleryStripEl.classList.add('hidden');
+          }
+        }
+      }
+
       if (badgeEl) badgeEl.textContent = t.aiModalBadge || (isZh ? '资讯概要' : 'News Briefing');
       if (sourceTagEl) sourceTagEl.textContent = `${t.sourceLabel || '信源:'} ${source}`;
       if (timeTagEl) timeTagEl.textContent = `🕒 ${timeObj.relative || timeObj.display}`;
@@ -5622,6 +5690,17 @@
 
     function closeAiNewsModal() {
       const modal = document.getElementById('ai-news-modal');
+      const imageWrapEl = document.getElementById('ai-modal-image-wrap');
+      const imageEl = document.getElementById('ai-modal-image');
+      const galleryStripEl = document.getElementById('ai-modal-gallery-strip');
+      if (imageWrapEl && imageEl) {
+        imageEl.src = '';
+        imageWrapEl.classList.add('hidden');
+        if (galleryStripEl) {
+          galleryStripEl.innerHTML = '';
+          galleryStripEl.classList.add('hidden');
+        }
+      }
       if (modal) {
         modal.classList.add('hidden');
         document.body.style.overflow = '';
