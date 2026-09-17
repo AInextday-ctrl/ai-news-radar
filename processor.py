@@ -194,13 +194,27 @@ def clean_news_text(text: str) -> str:
 
 
 def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
-    """Generate a clean, pure Chinese fact statement without source/reporter noise."""
+    """Generate a clean, pure Chinese fact statement without repetitive title or publisher noise."""
     snippet = clean_news_text(item.get("content_snippet", ""))
     clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
-    trans_snippet = clean_news_text(free_translate_zh(snippet[:120]))
     
-    if trans_snippet and len(trans_snippet) > 15 and trans_snippet not in clean_title:
-        return f"{clean_title}。{trans_snippet}"
+    # 彻底滤除末尾可能跟随的英文媒体噪音
+    snippet_clean = re.sub(r'[\s&nbsp;]*(?:CNN|The Guardian|The Washington Post|Reuters|Bloomberg|Financial Times|Wall Street Journal|New York Times|The Verge|Ars Technica|TechCrunch|Wired|Pew Research|BBC)[\s.]*$', '', snippet, flags=re.IGNORECASE).strip()
+    
+    trans_snippet = clean_news_text(free_translate_zh(snippet_clean[:180]))
+    
+    # 如果翻译后的片段包含或起始于标题，剥离重复标题与复读机废话
+    if trans_snippet and clean_title:
+        if trans_snippet.startswith(clean_title):
+            trans_snippet = trans_snippet[len(clean_title):].lstrip('。，, ：:').strip()
+        elif clean_title.startswith(trans_snippet):
+            trans_snippet = ""
+        # 移除末尾翻译后的中文媒体名
+        trans_snippet = re.sub(r'(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司)[\s.]*$', '', trans_snippet).strip()
+    
+    if trans_snippet and len(trans_snippet) > 15 and trans_snippet != clean_title:
+        sep = " " if clean_title.endswith(('。', '？', '！', '…')) else "。"
+        return f"{clean_title}{sep}{trans_snippet}"
     return clean_title
 
 

@@ -282,6 +282,7 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
     result = {
         "cover_image": None,
         "inline_images": [],
+        "description": None,
         "has_video": False,
         "video_url": None
     }
@@ -326,6 +327,13 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
                 cand = m_img.group(1).replace("&amp;", "&").strip()
                 if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "spacer", "tracking", "avatar", "icon"]):
                     result["cover_image"] = cand
+
+            # 提取落地页真实文章摘要导语 (og:description / twitter:description / description)
+            m_desc = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|twitter:description|description)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
+            if m_desc:
+                desc_cand = html.unescape(m_desc.group(1)).strip()
+                if len(desc_cand) > 20 and not any(bad in desc_cand.lower() for bad in ["javascript", "enable cookies", "404 not found", "cloudflare", "access denied"]):
+                    result["description"] = desc_cand
 
             # 侦测是否包含视频 (Brightcove, HTML5 video, YouTube, Vimeo, mp4, m3u8)
             if re.search(r'<video\b|brightcove|jwplayer|youtube\.com/embed|player\.vimeo\.com|\.mp4\b|\.m3u8\b', html_text, re.I):
@@ -2429,15 +2437,24 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             except Exception:
                                 pass
 
-                    if not img_url:
-                        # 尝试穿透落地页提取 1200px+ 高清配图并识别视频媒体
+                    # 识别 Google News 等聚合器典型的“标题复读机虚假摘要”
+                    is_dummy_summary = False
+                    if not clean_summary or len(clean_summary) < 25:
+                        is_dummy_summary = True
+                    elif title.lower() in clean_summary.lower() and len(clean_summary) <= len(title) + 40:
+                        is_dummy_summary = True
+
+                    if not img_url or is_dummy_summary:
+                        # 尝试穿透落地页提取 1200px+ 官方原图、真实文章导语及视频媒体
                         og_media = resolve_article_og_media(url, client)
-                        if og_media.get("cover_image"):
+                        if not img_url and og_media.get("cover_image"):
                             img_url = og_media["cover_image"]
                         if og_media.get("has_video"):
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
+                        if is_dummy_summary and og_media.get("description"):
+                            clean_summary = og_media["description"]
 
                     if not img_url:
                         img_url = get_smart_cover_url(title, category, cfg["name"])
