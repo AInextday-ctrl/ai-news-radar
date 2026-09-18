@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T00:59:24.197107+00:00",
+  "updated_at": "2026-09-18T16:13:35.233967+00:00",
   "system_description": "开放式实体动态知识图谱与全生命周期状态机 (Open Entity Knowledge Graph & Lifecycle State Machine)",
   "entities": {
     "seadance": {
@@ -38,8 +38,8 @@
       "domain_tag": "video_generation",
       "half_life_days": 120,
       "first_learned_at": "2026-02-20T00:00:00Z",
-      "last_updated_at": "2026-09-18T00:59:24.197103+00:00",
-      "active_version": "3.0",
+      "last_updated_at": "2026-09-18T16:13:35.233960+00:00",
+      "active_version": "777",
       "versions": [
         {
           "version": "1.0",
@@ -65,9 +65,17 @@
         {
           "version": "3.0",
           "release_date": "2026-09-18",
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "777",
+          "benchmark_highlights": "新晋跃迁版本 3.0，性能与时效处于当前生命周期黄金期",
+          "deprecation_warning": "存在上位替代: 777 已上线，旧版 3.0 严禁作为当前主流横评标杆"
+        },
+        {
+          "version": "777",
+          "release_date": "2026-09-18",
           "lifecycle_status": "ACTIVE_SOTA",
           "superseded_by": null,
-          "benchmark_highlights": "新晋跃迁版本 3.0，性能与时效处于当前生命周期黄金期"
+          "benchmark_highlights": "新晋跃迁版本 777，性能与时效处于当前生命周期黄金期"
         }
       ]
     },
