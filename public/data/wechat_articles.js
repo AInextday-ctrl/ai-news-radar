@@ -1,5 +1,5 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-09-22T04:54:15.375487+00:00",
+  "updated_at": "2026-09-22T05:13:11.237930+00:00",
   "date": "2026-09-22",
   "total_articles": 1,
   "audit_funnel": {
