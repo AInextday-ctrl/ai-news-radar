@@ -187,6 +187,14 @@ def clean_news_text(text: str) -> str:
     t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）][。.\s]*$', '', t)
     t = re.sub(r'[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$', '', t)
     
+    # 3.5 强力剔除搜索引擎聚合器默认的模板噪音与元描述废话
+    t = re.sub(r'全面的最新新闻报道[，,]?\s*(?:从|由)?\s*(?:Google|谷歌|b谷歌)\s*新闻(?:汇总|聚合)?[^。！]*[。！]?', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'(?:从|由)\s*(?:世界各地的|Google|谷歌|b谷歌)\s*(?:新闻|来源)?[^。！]*?(?:汇总|聚合)[^。！]*?[。！]?', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News\.?', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'A comprehensive overview of the latest news stories from around the world aggregated from Google News sources\.?', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'aggregated from sources all over the world by Google News', '', t, flags=re.IGNORECASE)
+    t = re.sub(r'行业核心力量围绕[“"\'「][^”"\'」]*?[”"\'」]\s*加速推进关键技术攻坚与工程落地[，,]?\s*力求在激烈的产业竞赛中确立先发优势[。！]?', '', t)
+    
     # 4. 清理连续重复符号与空白
     t = re.sub(r'([。！？；，、])\1+', r'\1', t)
     t = re.sub(r'\s+', ' ', t).strip()
@@ -324,13 +332,8 @@ def generate_witty_ai_commentary(full_text: str, title: str) -> str:
         return "前脚硅谷巨头刚发布了号称“重新定义物理法则”的超豪华旗舰模型，后脚开源小分队就带着成本只有几十分之一的轻量模型在评测榜上迎头赶上。大厂们还在算计每百万Token收几美分才能回本几百亿GPU的折旧费，极客们已经在用极致的工程优化告诉市场：别拿烧钱当护城河，只要架构够精妙，几张卡照样能在竞技场里把庞然大物挑落下马。"
 
     else:
-        who_guess = "科技巨头"
-        for kw, name in [("Meta", "Meta"), ("谷歌", "谷歌"), ("Google", "谷歌"), ("OpenAI", "OpenAI"), ("微软", "微软"), ("Anthropic", "Anthropic"), ("英伟达", "英伟达"), ("苹果", "苹果")]:
-            if kw.lower() in text:
-                who_guess = name
-                break
-        title_clean = re.sub(r'^[【\[].*?[】\]]\s*', '', title)[:25]
-        return f"围绕“{title_clean}”，{who_guess}正在加速布局以构筑关键护城河。剥开宣传层面的光环，技术突破最终能否转化为真实生产力与商业闭环，仍取决于在真实应用中能否经受住效率与成本的双重检验。"
+        # 无法执行高精准针对性点评时，绝不编造虚假套话模版，直接返回空，由前端优雅隐藏
+        return ""
 
 
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
@@ -447,10 +450,10 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     elif any(k in full_text for k in ["开源", "突破", "发布", "模型"]):
         why = "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。"
     else:
-        title_core = re.sub(r'^[【\[].*?[】\]]\s*', '', clean_title)[:22]
-        why = f"行业核心力量围绕“{title_core}”加速推进关键技术攻坚与工程落地，力求在激烈的产业竞赛中确立先发优势。"
+        # 无明确特定动因时，置空，坚决不拼凑虚假套话
+        why = ""
 
-    # 5. 整合新闻简报正文 (Natural News Briefing，融合标题事实、摘要细节与深层动因)
+    # 5. 整合新闻简报正文 (Natural News Briefing，客观纯净陈述事件事实，严禁机械模版)
     first_stmt = clean_title
     if not first_stmt.endswith(('。', '！', '？')):
         first_stmt += '。'
@@ -459,16 +462,24 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     detail_stmt = ""
     if clean_snippet and len(clean_snippet) > 15:
         trans_snippet = clean_news_text(free_translate_zh(clean_snippet[:150]))
-        if trans_snippet and len(trans_snippet) > 10 and trans_snippet not in clean_title:
+        # 严格过滤聚合器废话与标题复读
+        if trans_snippet and len(trans_snippet) > 10 and trans_snippet not in clean_title and clean_title not in trans_snippet:
             detail_stmt = trans_snippet
             if not detail_stmt.endswith(('。', '！', '？')):
                 detail_stmt += '。'
 
-    briefing_zh = f"{first_stmt} {detail_stmt} {why}".strip()
+    # 仅拼接真实事实细节；若无 detail_stmt 则结合有意义的 why，否则直接使用 first_stmt，绝不产生空话
+    parts = [first_stmt]
+    if detail_stmt:
+        parts.append(detail_stmt)
+    elif why:
+        parts.append(why)
+
+    briefing_zh = " ".join(parts).strip()
     briefing_zh = re.sub(r'([。！？；，、])\1+', r'\1', briefing_zh).strip()
     briefing_zh = re.sub(r'消息来源[：:]\s*', '', briefing_zh)
 
-    # 6. AI 点评 (犀利幽默、直指核心、网感神评)
+    # 6. AI 点评 (犀利幽默、直指核心，无针对性内容时保持为空，交由前端隐藏)
     insight_zh = generate_witty_ai_commentary(full_text, clean_title)
 
     title_en = item.get("title_en") or item.get("title", "")

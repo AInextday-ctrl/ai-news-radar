@@ -831,9 +831,11 @@ def save_news(items: list):
         if (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
             it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
 
-        # 2. 彻底清洗所有复读机摘要 (即使历史残留多次重复也彻底剥离)
+        # 2. 彻底清洗所有复读机摘要、聚合器噪音与假模版套话
         title_zh = (it.get("title_zh") or it.get("title") or "").strip()
         curr_sum = (it.get("summary_zh") or "").strip()
+        if curr_sum:
+            curr_sum = clean_news_text(curr_sum)
         if title_zh and curr_sum:
             s = curr_sum
             while title_zh and s.startswith(title_zh):
@@ -850,6 +852,42 @@ def save_news(items: list):
                 it["summary_zh"] = s
             else:
                 it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
+        elif title_zh:
+            it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
+
+        # 2.5 深度净化 ai_analysis 简报与点评 (彻底清除聚合器元废话与对不上的假模版套话)
+        if it.get("ai_analysis") and isinstance(it["ai_analysis"], dict):
+            ana = it["ai_analysis"]
+            
+            # 清理简报中的聚合器噪音与机械套话
+            for b_field in ["briefing_zh", "digest_zh"]:
+                if ana.get(b_field):
+                    cleaned_b = clean_news_text(ana[b_field])
+                    # 剥除假模版 "行业核心力量围绕...加速推进关键技术攻坚与工程落地..."
+                    cleaned_b = re.sub(r'行业核心力量围绕[“"\'「][^”"\'」]*?[”"\'」]\s*加速推进关键技术攻坚与工程落地[，,]?\s*力求在激烈的产业竞赛中确立先发优势[。！]?', '', cleaned_b)
+                    cleaned_b = re.sub(r'全面的最新新闻报道[，,]?\s*(?:从|由)?\s*(?:Google|谷歌|b谷歌)\s*新闻(?:汇总|聚合)?[^。！]*[。！]?', '', cleaned_b, flags=re.IGNORECASE)
+                    cleaned_b = re.sub(r'(?:从|由)\s*(?:世界各地的|Google|谷歌|b谷歌)\s*(?:新闻|来源)?[^。！]*?(?:汇总|聚合)[^。！]*?[。！]?', '', cleaned_b, flags=re.IGNORECASE)
+                    cleaned_b = re.sub(r'([。！？；，、])\1+', r'\1', cleaned_b).strip(' ，,：:')
+                    if not cleaned_b or len(cleaned_b) < 10:
+                        cleaned_b = it.get("summary_zh") or (title_zh + "。")
+                    ana[b_field] = cleaned_b
+
+            # 严格核验 AI 点评：凡属于胡乱拼接的通用套话模版，一律彻底清空！确保无针对性分析时前端优雅隐藏
+            for i_field in ["insight_zh", "takeaway_zh"]:
+                raw_ins = str(ana.get(i_field) or "")
+                is_fake = any(bad in raw_ins for bad in [
+                    "正在加速布局以构筑关键护城河",
+                    "正在加速技术卡位",
+                    "经受住效率与成本的双重检验",
+                    "经受住算力成本与用户留存的双重检验",
+                    "【行业研判】该动态折射出当前AI产业链",
+                    "科技圈的公关通稿向来习惯把精打细算",
+                    "剥开宣传层面的光环",
+                    "商业世界的法则向来残酷",
+                    "行业各方正在加速技术卡位"
+                ])
+                if is_fake or len(raw_ins.strip()) < 10:
+                    ana[i_field] = ""
 
         # 3. 确保所有 celebrity 领袖观点条目均具备规范的 quote 与 full_text 双语字段
         if it.get("category") == "celebrity":
