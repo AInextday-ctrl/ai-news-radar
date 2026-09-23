@@ -305,7 +305,6 @@ def generate_daily_briefing(recent_items: list):
     </h2>
     {f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>' if title_en and title_en != title else ''}
     {f'<p itemprop="description" style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 14px;">{summary}</p>' if summary else ''}
-    {f'<div style="background:#f8fafc;border-left:3px solid #6366f1;padding:10px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:13px;color:#334155;line-height:1.6;"><strong>📰 权威报道原文要点：</strong><br><span style="white-space:pre-line;">{safe_html(item.get("article_text_en") or item.get("article_text_zh") or "", 800)}</span></div>' if (item.get("article_text_en") or item.get("article_text_zh")) and len(item.get("article_text_en") or item.get("article_text_zh") or "") >= 25 else ''}
     <a href="{url}" target="_blank" rel="noopener noreferrer"
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:{cat_color};font-weight:600;text-decoration:none;border:1px solid {cat_color}40;padding:6px 14px;border-radius:8px;transition:all 0.2s;">
       阅读原文 →

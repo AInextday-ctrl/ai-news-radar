@@ -517,26 +517,6 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     }
 
 
-def translate_article_paragraphs(text_en: Optional[str]) -> Optional[str]:
-    """将英文长篇报道段落翻译为流畅中文，保持段落换行"""
-    if not text_en or len(text_en.strip()) < 30:
-        return None
-    clean = text_en.strip()
-    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', clean))
-    if zh_chars > len(clean) * 0.3:
-        return clean
-
-    paragraphs = [p.strip() for p in clean.split("\n\n") if p.strip()]
-    translated_paras = []
-    for p in paragraphs:
-        zh = free_translate_zh(p)
-        if zh:
-            translated_paras.append(clean_news_text(zh))
-    if translated_paras:
-        return "\n\n".join(translated_paras)
-    return clean_news_text(free_translate_zh(clean))
-
-
 def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> List[Dict[str, Any]]:
     """
     Process a list of items with Gemini in batches, or high-speed neural translator.
@@ -563,9 +543,6 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
     print(f"📊 待处理清单：{len(direct_items)} 条已具备精选中文，{len(need_ai_items)} 条需要 AI 翻译提炼")
 
     if not need_ai_items:
-        for it in direct_items:
-            if it.get("article_text_en") and not it.get("article_text_zh"):
-                it["article_text_zh"] = translate_article_paragraphs(it["article_text_en"])
         return direct_items
 
     client = get_gemini_client()
@@ -585,13 +562,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             p_item["summary_en"] = item.get("summary_en") or item.get("content_snippet", "")
             p_item["hot_score"] = 4 if cat in ["celebrity", "videos"] else 3
             p_item["tags"] = item.get("tags") or [item.get("source", "AI快讯")]
-            if p_item.get("article_text_en") and not p_item.get("article_text_zh"):
-                p_item["article_text_zh"] = translate_article_paragraphs(p_item["article_text_en"])
             processed_ai.append(p_item)
         print("  ✓ 纯正中文翻译、看点提炼与 AI 深度分析生成完毕！")
-        for it in direct_items:
-            if it.get("article_text_en") and not it.get("article_text_zh"):
-                it["article_text_zh"] = translate_article_paragraphs(it["article_text_en"])
         return direct_items + processed_ai
 
     print("🤖 正在调用 Google Gemini 进行批量智能翻译、深度分析与分类...")
@@ -737,7 +709,4 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
                 fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
     all_final = direct_items + results
-    for it in all_final:
-        if it.get("article_text_en") and not it.get("article_text_zh"):
-            it["article_text_zh"] = translate_article_paragraphs(it["article_text_en"])
     return all_final

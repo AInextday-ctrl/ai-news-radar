@@ -2585,8 +2585,6 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "spec_tags": spec_tags,
                         "content_snippet": clean_summary or f"From {source_display}",
                         "summary_en": clean_summary or f"From {source_display}",
-                        "article_text_en": article_text_en,
-                        "article_text_zh": None,
                         "category": category,
                         "tags": tags
                     })
