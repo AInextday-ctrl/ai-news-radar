@@ -2330,7 +2330,7 @@ def extract_rich_article_text(entry: Any, is_techmeme: bool = False) -> Optional
         val = contents[0].get("value", "")
         if val:
             paras = re.findall(r'<p[^>]*>(.*?)</p>', val, flags=re.DOTALL)
-            clean_paras = [re.sub(r'<[^>]+>', '', p).strip() for p in paras]
+            clean_paras = [html.unescape(re.sub(r'<[^>]+>', '', p)).strip() for p in paras]
             clean_paras = [
                 p for p in clean_paras 
                 if len(p) > 35 and not any(w in p.lower() for w in ["cookie", "newsletter", "subscribe", "sign up", "read more", "copyright", "all rights reserved"])
@@ -2345,7 +2345,7 @@ def extract_rich_article_text(entry: Any, is_techmeme: bool = False) -> Optional
     if is_techmeme and raw_desc:
         m_dash = re.search(r'(?:&mdash;|—|--)\s*(.+)$', raw_desc, re.DOTALL)
         if m_dash:
-            clean = re.sub(r'<[^>]+>', ' ', m_dash.group(1))
+            clean = html.unescape(re.sub(r'<[^>]+>', ' ', m_dash.group(1)))
             clean = re.sub(r'\s+', ' ', clean).strip()
             clean = re.sub(r'&hellip;|\.\.\.$', '...', clean).strip()
             if len(clean) >= 45:
@@ -2354,7 +2354,7 @@ def extract_rich_article_text(entry: Any, is_techmeme: bool = False) -> Optional
     # 3. 常规 description / summary 中的多段落实质正文
     if raw_desc:
         paras = re.findall(r'<p[^>]*>(.*?)</p>', raw_desc, flags=re.DOTALL)
-        clean_paras = [re.sub(r'<[^>]+>', '', p).strip() for p in paras]
+        clean_paras = [html.unescape(re.sub(r'<[^>]+>', '', p)).strip() for p in paras]
         clean_paras = [
             p for p in clean_paras 
             if len(p) > 35 and not any(w in p.lower() for w in ["cookie", "newsletter", "subscribe", "sign up", "read more", "all rights reserved"])
@@ -2365,7 +2365,7 @@ def extract_rich_article_text(entry: Any, is_techmeme: bool = False) -> Optional
                 return res[:1000]
         
         # 纯文本 fallback
-        plain = re.sub(r'<[^>]+>', ' ', raw_desc)
+        plain = html.unescape(re.sub(r'<[^>]+>', ' ', raw_desc))
         plain = re.sub(r'\s+', ' ', plain).strip()
         if len(plain) >= 80:
             return plain[:800]
