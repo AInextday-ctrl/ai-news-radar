@@ -286,6 +286,16 @@ def generate_daily_briefing(recent_items: list):
         if not title:
             continue
 
+        url_to_use = url
+        rel_attr = 'rel="noopener noreferrer"'
+        btn_label = '阅读原文 →'
+        if cat == "tools" and url and url != "#" and url.startswith("http"):
+            import urllib.parse
+            clean_name = item.get("app_name") or title.split("】")[-1].strip()
+            url_to_use = f"/go?target={urllib.parse.quote(url)}&name={urllib.parse.quote(clean_name)}"
+            rel_attr = 'rel="nofollow noopener noreferrer"'
+            btn_label = '🚀 访问官网 →'
+
         img_html = ""
         if image_url and image_url.startswith("http"):
             img_html = f'<img src="{image_url}" alt="{title}" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:12px;" onerror="this.style.display=\'none\'">'
@@ -301,13 +311,13 @@ def generate_daily_briefing(recent_items: list):
       {f'<span style="color:#94a3b8;font-size:12px;">· {source}</span>' if source else ''}
     </div>
     <h2 itemprop="headline" style="font-size:18px;font-weight:700;color:#1e293b;margin:0 0 10px;line-height:1.5;">
-      <a href="{url}" target="_blank" rel="noopener noreferrer" itemprop="url" style="color:inherit;text-decoration:none;">{title}</a>
+      <a href="{url_to_use}" target="_blank" {rel_attr} itemprop="url" style="color:inherit;text-decoration:none;">{title}</a>
     </h2>
     {f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>' if title_en and title_en != title else ''}
     {f'<p itemprop="description" style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 14px;">{summary}</p>' if summary else ''}
-    <a href="{url}" target="_blank" rel="noopener noreferrer"
+    <a href="{url_to_use}" target="_blank" {rel_attr}
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:{cat_color};font-weight:600;text-decoration:none;border:1px solid {cat_color}40;padding:6px 14px;border-radius:8px;transition:all 0.2s;">
-      阅读原文 →
+      {btn_label}
     </a>
   </article>"""
 
