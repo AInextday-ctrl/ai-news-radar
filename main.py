@@ -902,6 +902,44 @@ def save_news(items: list):
             if not it.get("quote_en"):
                 it["quote_en"] = it.get("title_en") or it.get("title") or ""
 
+        # 3.5 严格清洗落地场景·实用工具（彻底剥除第三方平台 Product Hunt / GitHub 痕迹，统一官网直连与 ref=ainewsradar）
+        if it.get("category") == "tools" or it.get("platform") == "producthunt":
+            it["platform"] = "tool"
+            if it.get("source") in ("Product Hunt", "GitHub", "ProductHunt"):
+                it["source"] = "AI 资讯雷达"
+            if it.get("author") in ("Product Hunt", "GitHub", "ProductHunt"):
+                t_str = it.get("title", "")
+                app_name = t_str.split("】")[0].replace("【", "").strip() if "】" in t_str else ""
+                it["author"] = app_name or "AI 工具"
+            if it.get("rank_badge"):
+                rb = str(it["rank_badge"])
+                rb = re.sub(r'\s*·\s*Product\s*Hunt', '', rb, flags=re.I)
+                rb = re.sub(r'Product\s*Hunt\s*热门精选', '热门推荐', rb, flags=re.I)
+                rb = re.sub(r'Product\s*Hunt', '', rb, flags=re.I)
+                rb = re.sub(r'\s*·\s*GitHub', '', rb, flags=re.I)
+                rb = re.sub(r'GitHub', '', rb, flags=re.I)
+                it["rank_badge"] = rb.strip() or "🔥 热门推荐"
+            for k in ["summary_zh", "summary_en", "content_snippet"]:
+                if it.get(k):
+                    it[k] = re.sub(r'Product\s*Hunt', 'AI 场景工具', str(it[k]), flags=re.I)
+                    it[k] = re.sub(r'GitHub\s*开源项目', '落地项目', str(it[k]), flags=re.I)
+                    it[k] = re.sub(r'GitHub', '', str(it[k]), flags=re.I).strip()
+            # 净化 URL，统一补充 ref=ainewsradar
+            for ukey in ["official_url", "url"]:
+                cur_u = str(it.get(ukey) or "")
+                if cur_u and cur_u != "#" and "/r/p/" not in cur_u:
+                    clean_u = re.sub(r'[\?&]ref=[^&]*', '', cur_u)
+                    sep = '&' if '?' in clean_u else '?'
+                    it[ukey] = f"{clean_u}{sep}ref=ainewsradar"
+            # 补齐高清截图兜底
+            p_imgs = it.get("preview_images") or []
+            p_imgs = [img for img in p_imgs if "3CyW24Pkz4o" not in img and "feeb7666" not in img and "photo-1618005182384-a83a8bd57fbe" not in img]
+            target_dom = (it.get("official_url") or it.get("url") or "").split("?")[0]
+            if not p_imgs and target_dom and target_dom != "#" and "producthunt.com" not in target_dom:
+                enc = urllib.parse.quote(target_dom, safe="")
+                p_imgs = [f"https://api.microlink.io/?url={enc}&screenshot=true&meta=false&embed=screenshot.url"]
+            it["preview_images"] = p_imgs
+
     # 4. 【核心内容质量门禁】：坚决剔除任何无法展现具体事件事实的空壳资讯，杜绝 Low value content
     valid_master_items = []
     for it in all_master_items:
