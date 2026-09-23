@@ -5207,7 +5207,7 @@
         const catDesc = document.getElementById('cat-view-desc');
         
         // 严格 24 小时门禁下的计数 (超出 24 小时自动归档至历史库)
-        const leaderFresh = (cachedData.grouped?.celebrity || cachedData.celebrity || []).filter(it => it.sub_category !== 'viral_post' && (isWithin24Hours(it.raw_published_at) || it.is_pinned));
+        const leaderFresh = (cachedData.grouped?.celebrity || cachedData.celebrity || []).filter(it => (isWithin24Hours(it.raw_published_at) || it.is_pinned));
         const viralFresh = (cachedData.grouped?.viral_posts || cachedData.viral_posts || []).filter(it => isWithin24Hours(it.raw_published_at));
         const leaderCount = leaderFresh.length;
         const viralCount = viralFresh.length || (cachedData.items || []).filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral)) && isWithin24Hours(it.raw_published_at)).length;
@@ -5259,7 +5259,6 @@
           if (catDesc) catDesc.textContent = isZh ? '实时捕捉全球 AI 顶尖舵手、科学家与先锋极客的原生发声与时空流动' : 'Real-time timeline tracking statements from AI pioneers and leading labs';
 
           let list = filterList(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []);
-          list = list.filter(it => it.sub_category !== 'viral_post');
           // 严格倒退 24 小时门禁：超出 24h 的自动沉淀至历史归档库
           list = list.filter(it => isWithin24Hours(it.raw_published_at) || it.is_pinned);
 
