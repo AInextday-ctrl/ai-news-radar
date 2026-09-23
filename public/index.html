@@ -4384,10 +4384,27 @@
       `;
     }
 
-    function formatCleanToolUrl(rawUrl) {
+    function formatCleanToolUrl(rawUrl, item) {
       if (!rawUrl || rawUrl === '#' || rawUrl === '') return '#';
       try {
         let u = String(rawUrl).trim();
+        // 如果是 Product Hunt /r/p/ 转链，优先使用已经解析成功的官方直达网址
+        if (u.includes('/r/p/') || u.includes('producthunt.com/r/')) {
+          if (item) {
+            const alt = (item.official_url !== u && item.official_url) || (item.url !== u && item.url) || '';
+            if (alt && !alt.includes('/r/p/') && !alt.includes('producthunt.com')) {
+              u = alt;
+            }
+          }
+          if ((u.includes('/r/p/') || u.includes('producthunt.com/r/')) && window.__toolCleanMap) {
+            const raw = item?.app_name || (item?.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : '');
+            let app = raw.replace(/^[【\[].*?[】\]]\s*/, '').trim().toLowerCase();
+            if (app.includes('】')) app = app.split('】')[0].replace('【', '').trim().toLowerCase();
+            if (app && window.__toolCleanMap[app]) {
+              u = window.__toolCleanMap[app];
+            }
+          }
+        }
         if (/([?&])ref=producthunt(&|$)/i.test(u)) {
           u = u.replace(/([?&])ref=producthunt(&|$)/i, '$1ref=ainewsradar$2');
         } else if (/([?&])ref=[^&]+(&|$)/i.test(u)) {
@@ -4404,30 +4421,40 @@
 
     function dedupToolItems(items) {
       if (!Array.isArray(items)) return [];
+      window.__toolCleanMap = window.__toolCleanMap || {};
       const map = new Map();
       for (const it of items) {
         if (!it) continue;
         const rawName = it.app_name || (it.title ? it.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : '');
-        const normName = rawName.trim().toLowerCase();
-        const src = (it.source_url || it.url || '').split('?')[0].toLowerCase();
-        let key = normName;
-        if (src.includes('producthunt.com/products/')) {
-          key = 'ph:' + src.split('producthunt.com/products/')[1].replace(/\/+$/, '');
-        } else if (normName) {
-          key = 'name:' + normName;
-        } else if (src) {
-          key = 'url:' + src;
+        let cleanName = rawName.replace(/^[【\[].*?[】\]]\s*/, '').trim().toLowerCase();
+        if (cleanName.includes('】')) cleanName = cleanName.split('】')[0].replace('【', '').trim().toLowerCase();
+        if (cleanName.includes(']')) cleanName = cleanName.split(']')[0].replace('[', '').trim().toLowerCase();
+
+        let key = cleanName;
+        if (!key) {
+          key = (it.source_url || it.url || '').split('?')[0].toLowerCase();
         }
         if (!key) continue;
+
+        // 记录全局直达官网缓存
+        const off = (it.official_url || it.url || '').trim();
+        if (off && !off.includes('/r/p/') && !off.includes('producthunt.com') && off !== '#') {
+          window.__toolCleanMap[key] = off;
+        }
+
         if (!map.has(key)) {
           map.set(key, it);
         } else {
           const existing = map.get(key);
           const existHasImg = existing.preview_images && existing.preview_images.length > 0 && !existing.preview_images[0].includes('unsplash.com/photo-1618005182384-a83a8bd57fbe');
           const curHasImg = it.preview_images && it.preview_images.length > 0 && !it.preview_images[0].includes('unsplash.com/photo-1618005182384-a83a8bd57fbe');
-          const existIsPHRedirect = (existing.official_url || existing.url || '').includes('/r/p/');
-          const curIsDirect = (it.official_url || it.url || '') && !(it.official_url || it.url || '').includes('/r/p/');
-          if ((!existHasImg && curHasImg) || (existIsPHRedirect && curIsDirect)) {
+          const existIsPHRedirect = (existing.official_url || existing.url || '').includes('/r/p/') || (existing.official_url || existing.url || '').includes('producthunt.com');
+          const curIsDirect = (it.official_url || it.url || '') && !(it.official_url || it.url || '').includes('/r/p/') && !(it.official_url || it.url || '').includes('producthunt.com');
+
+          // 核心决策：只要当前条目具备官方直达网址且旧条目是转链，或当前具备真实画廊大图，强制替换为最优项
+          if ((existIsPHRedirect && curIsDirect) || (!existHasImg && curHasImg)) {
+            map.set(key, it);
+          } else if (curIsDirect && (it.preview_images && (!existing.preview_images || it.preview_images.length > existing.preview_images.length))) {
             map.set(key, it);
           }
         }
@@ -6964,10 +6991,29 @@
         ...(cachedData.grouped?.tools || cachedData.tools || []),
         ...(cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools')
       ];
+      const dedupedTools = dedupToolItems(allTools);
 
-      const item = allTools.find(it => String(it.id) === String(toolId)) ||
-                   allTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId);
+      let item = dedupedTools.find(it => String(it.id) === String(toolId)) ||
+                 allTools.find(it => String(it.id) === String(toolId)) ||
+                 dedupedTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId) ||
+                 allTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId);
       if (!item) return;
+
+      // 始终优先选用去重合并后的最优版本（具备真实官网直达链接与完整实测画廊大图）
+      const rawTitle = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : '');
+      let cleanApp = rawTitle.replace(/^[【\[].*?[】\]]\s*/, '').trim().toLowerCase();
+      if (cleanApp.includes('】')) cleanApp = cleanApp.split('】')[0].replace('【', '').trim().toLowerCase();
+      if (cleanApp.includes(']')) cleanApp = cleanApp.split(']')[0].replace('[', '').trim().toLowerCase();
+      if (cleanApp) {
+        const best = dedupedTools.find(it => {
+          const r = it.app_name || (it.title ? it.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : '');
+          let n = r.replace(/^[【\[].*?[】\]]\s*/, '').trim().toLowerCase();
+          if (n.includes('】')) n = n.split('】')[0].replace('【', '').trim().toLowerCase();
+          if (n.includes(']')) n = n.split(']')[0].replace('[', '').trim().toLowerCase();
+          return n === cleanApp;
+        });
+        if (best) item = best;
+      }
 
       currentToolModalItem = item;
       const isZh = currentLang === 'zh';
@@ -6992,7 +7038,7 @@
 
       const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI 工具');
       const hook = item.app_hook || item.title_zh || item.title || "";
-      const officialUrl = item.official_url || item.url || "#";
+      const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const sourceUrl = item.source_url || item.url || "#";
       const sourceName = item.source || "AI 资讯雷达";
 

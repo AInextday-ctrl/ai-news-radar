@@ -18,7 +18,7 @@ import json
 import time
 from datetime import datetime, timezone
 import httpx
-from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url, resolve_product_hunt_redirect
 from processor import process_items_batch, clean_news_text, generate_smart_fallback_summary
 from config import CATEGORIES, AI_CREATORS
 
@@ -924,13 +924,20 @@ def save_news(items: list):
                     it[k] = re.sub(r'Product\s*Hunt', 'AI 场景工具', str(it[k]), flags=re.I)
                     it[k] = re.sub(r'GitHub\s*开源项目', '落地项目', str(it[k]), flags=re.I)
                     it[k] = re.sub(r'GitHub', '', str(it[k]), flags=re.I).strip()
-            # 净化 URL，统一补充 ref=ainewsradar
+            # 净化 URL，统一补充 ref=ainewsradar 与解析 /r/p/
             for ukey in ["official_url", "url"]:
                 cur_u = str(it.get(ukey) or "")
-                if cur_u and cur_u != "#" and "/r/p/" not in cur_u:
-                    clean_u = re.sub(r'[\?&]ref=[^&]*', '', cur_u)
-                    sep = '&' if '?' in clean_u else '?'
-                    it[ukey] = f"{clean_u}{sep}ref=ainewsradar"
+                if cur_u and cur_u != "#":
+                    if "/r/p/" in cur_u:
+                        resolved = resolve_product_hunt_redirect(cur_u)
+                        if resolved and "/r/p/" not in resolved and "producthunt.com" not in resolved:
+                            cur_u = resolved
+                    if "/r/p/" not in cur_u:
+                        clean_u = re.sub(r'[\?&]ref=[^&]*', '', cur_u)
+                        sep = '&' if '?' in clean_u else '?'
+                        it[ukey] = f"{clean_u}{sep}ref=ainewsradar"
+                    else:
+                        it[ukey] = cur_u
             # 补齐高清截图兜底
             p_imgs = it.get("preview_images") or []
             p_imgs = [img for img in p_imgs if "3CyW24Pkz4o" not in img and "feeb7666" not in img and "photo-1618005182384-a83a8bd57fbe" not in img]
