@@ -42,7 +42,6 @@ def generate_sitemap():
     # 固定页面
     static_pages = [
         {"loc": "https://ainewsradar.xyz/", "changefreq": "hourly", "priority": "1.0", "hreflang": True},
-        {"loc": "https://ainewsradar.xyz/?lang=en", "changefreq": "hourly", "priority": "0.9", "hreflang": True},
         {"loc": "https://ainewsradar.xyz/about", "changefreq": "monthly", "priority": "0.8"},
         {"loc": "https://ainewsradar.xyz/contact", "changefreq": "monthly", "priority": "0.7"},
         {"loc": "https://ainewsradar.xyz/editorial-policy", "changefreq": "monthly", "priority": "0.7"},
