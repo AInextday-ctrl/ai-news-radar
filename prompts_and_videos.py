@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 
 PROMPTS = [
     # 0. 🌟 前沿模型专属核心爆款 (DeepSeek R1 / Claude 4.6 / o1 / o3 / Sora 2 / OpenClaw)
@@ -1130,8 +1131,51 @@ CURATED_TUTORIALS = [
 
 
 def get_curated_actionable_prompts():
-    """Returns the curated bilingual prompt templates across 8 subcategories."""
-    return [dict(p) for p in PROMPTS]
+    """Returns the curated bilingual prompt templates across SOTA models and real-world scenarios."""
+    curated_items = []
+    try:
+        candidates = [
+            os.path.join(os.path.dirname(__file__), "public", "data", "curated_prompts_library.json"),
+            os.path.join(os.path.dirname(__file__), "data", "curated_prompts_library.json")
+        ]
+        raw_curated = None
+        for cp in candidates:
+            if os.path.exists(cp):
+                with open(cp, "r", encoding="utf-8") as f:
+                    raw_curated = json.load(f)
+                    break
+        if raw_curated:
+            for item in raw_curated:
+                it = dict(item)
+                it["is_prompt"] = True
+                it["category"] = "prompts"
+                if "raw_published_at" not in it:
+                    it["raw_published_at"] = it.get("created_at", "2026-09-24T00:00:00Z")
+                if not it.get("recommended_model") and it.get("target_model"):
+                    it["recommended_model"] = it["target_model"]
+                if not it.get("target_model") and it.get("recommended_model"):
+                    it["target_model"] = it["recommended_model"]
+                curated_items.append(it)
+    except Exception as e:
+        print(f"Warning: could not load curated_prompts_library.json: {e}")
+
+    seen_ids = set()
+    result = []
+    for p in curated_items:
+        seen_ids.add(p.get("id"))
+        result.append(p)
+
+    for p in PROMPTS:
+        p_dict = dict(p)
+        if p_dict.get("id") not in seen_ids:
+            seen_ids.add(p_dict.get("id"))
+            if "generation_tier" not in p_dict:
+                p_dict["generation_tier"] = "sota"
+            if "model_tier_score" not in p_dict:
+                p_dict["model_tier_score"] = 90
+            result.append(p_dict)
+
+    return result
 
 
 def get_curated_tutorials():

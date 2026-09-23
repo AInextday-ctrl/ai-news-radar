@@ -1168,17 +1168,40 @@
           </div>
         </div>
 
-        <!-- 提示词专属快速筛选器 (按最新前沿模型与高阶场景分类) -->
-        <div id="prompts-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30">全部咒语 / All</button>
-          <button onclick="filterPromptCategory('tibo_reset')" id="prompt-cat-tibo" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 hover:bg-amber-500/25 shrink-0">🌟 Tibo GPT重置</button>
-          <button onclick="filterPromptCategory('deepseek_r1')" id="prompt-cat-deepseek" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🧠 DeepSeek R1</button>
-          <button onclick="filterPromptCategory('claude_46')" id="prompt-cat-claude" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">⚡ Claude 4.6</button>
-          <button onclick="filterPromptCategory('openai_o3')" id="prompt-cat-openai" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎯 OpenAI o1/o3</button>
-          <button onclick="filterPromptCategory('sora2_wan21')" id="prompt-cat-sora" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎬 Sora2 / Wan2.1</button>
-          <button onclick="filterPromptCategory('agent')" id="prompt-cat-agent" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🤖 OpenClaw/MCP</button>
-          <button onclick="filterPromptCategory('coding')" id="prompt-cat-coding" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💻 编码架构</button>
-          <button onclick="filterPromptCategory('reasoning')" id="prompt-cat-reasoning" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔬 深度推理</button>
+        <!-- 提示词专属高阶筛选体系 (包含代际切换与核心应用场景) -->
+        <div id="prompts-subfilter" class="hidden space-y-2 py-1">
+          <!-- 第一排：代际模式与版本排序切换 -->
+          <div class="flex items-center justify-between flex-wrap gap-2 pb-1.5 border-b border-slate-200 dark:border-slate-800/60">
+            <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1">
+                <span>⚡</span><span id="lbl-prompt-gen">模型版本:</span>
+              </span>
+              <button onclick="switchPromptGeneration('sota')" id="prompt-gen-sota" class="prompt-gen-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm shadow-purple-600/30 flex items-center gap-1 shrink-0">
+                <span>⚡</span><span id="txt-prompt-gen-sota">当前最新 SOTA 旗舰 (版本优先)</span>
+              </button>
+              <button onclick="switchPromptGeneration('legacy')" id="prompt-gen-legacy" class="prompt-gen-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0">
+                <span>📦</span><span id="txt-prompt-gen-legacy">历史模型归档库 (Legacy Archive)</span>
+              </button>
+            </div>
+            <div class="text-[11px] text-slate-400 dark:text-slate-500 font-mono hidden md:flex items-center gap-1">
+              <span>👑 自动按前沿大模型代际能力权重降序排列</span>
+            </div>
+          </div>
+
+          <!-- 第二排：高频生活与生产力场景分类 -->
+          <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1 px-1">
+              <span>🎯</span><span id="lbl-prompt-scenario">场景:</span>
+            </span>
+            <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30">全部场景 / All</button>
+            <button onclick="filterPromptCategory('code')" id="prompt-cat-code" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💻 编程开发</button>
+            <button onclick="filterPromptCategory('novel')" id="prompt-cat-novel" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">✍️ 短剧小说</button>
+            <button onclick="filterPromptCategory('analysis')" id="prompt-cat-analysis" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">📊 数据分析</button>
+            <button onclick="filterPromptCategory('report')" id="prompt-cat-report" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">📑 商业报告</button>
+            <button onclick="filterPromptCategory('travel')" id="prompt-cat-travel" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">✈️ 生活旅行</button>
+            <button onclick="filterPromptCategory('image')" id="prompt-cat-image" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎨 灵感生图</button>
+            <button onclick="filterPromptCategory('video')" id="prompt-cat-video" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎬 动态视效</button>
+          </div>
         </div>
       </div>
 
@@ -1728,6 +1751,19 @@
         promptTempPrefix: "⚙️ ",
         copyPrompt: "一键复制提示词 📋",
         copySuccess: "Prompt 咒语已复制到剪贴板！",
+        promptGenSota: "当前最新 SOTA 旗舰 (版本优先)",
+        promptGenLegacy: "历史模型归档库 (Legacy Archive)",
+        promptScenarioAll: "全部场景 / All",
+        promptScenarioCode: "💻 编程开发",
+        promptScenarioNovel: "✍️ 短剧小说",
+        promptScenarioAnalysis: "📊 数据分析",
+        promptScenarioReport: "📑 商业报告",
+        promptScenarioTravel: "✈️ 生活旅行",
+        promptScenarioImage: "🎨 灵感生图",
+        promptScenarioVideo: "🎬 动态视效",
+        viewSampleOutput: "👀 查看实测生成效果样例 (Sample Output)",
+        hideSampleOutput: "收起效果样例 ↑",
+        copySampleCodeBtn: "复制代码 📋",
         playVideo: "站内播放 ▶",
         todayTag: "🔥 今日首发",
         readPaper: "精读 →",
@@ -1877,6 +1913,19 @@
         promptTempPrefix: "⚙️ ",
         copyPrompt: "Copy Prompt 📋",
         copySuccess: "Prompt copied to clipboard!",
+        promptGenSota: "Current SOTA Flagships (Version Priority)",
+        promptGenLegacy: "Historical Archive (Legacy Models)",
+        promptScenarioAll: "All Scenarios",
+        promptScenarioCode: "💻 Code Engineering",
+        promptScenarioNovel: "✍️ Fiction & Drama",
+        promptScenarioAnalysis: "📊 Data Analysis",
+        promptScenarioReport: "📑 Executive Reports",
+        promptScenarioTravel: "✈️ Travel & Living",
+        promptScenarioImage: "🎨 Visual Generation",
+        promptScenarioVideo: "🎬 Dynamic VFX & Video",
+        viewSampleOutput: "👀 View Tangible Sample Output",
+        hideSampleOutput: "Collapse Sample Output ↑",
+        copySampleCodeBtn: "Copy Code 📋",
         playVideo: "Watch Video ▶",
         todayTag: "🔥 TODAY",
         readPaper: "Read Paper →",
@@ -2622,25 +2671,28 @@
       const vsMast = document.getElementById('video-sub-mastery');
       if (vsMast) vsMast.textContent = t.videoSubMastery;
 
-      // 提示词子分类与最新前沿模型筛选按钮更新
+      // 提示词代际模式与场景分类筛选按钮更新
+      const pgSota = document.getElementById('txt-prompt-gen-sota');
+      if (pgSota) pgSota.textContent = t.promptGenSota;
+      const pgLegacy = document.getElementById('txt-prompt-gen-legacy');
+      if (pgLegacy) pgLegacy.textContent = t.promptGenLegacy;
+
       const pcAll = document.getElementById('prompt-cat-all');
-      if (pcAll) pcAll.textContent = t.promptCatAll;
-      const pcTibo = document.getElementById('prompt-cat-tibo');
-      if (pcTibo) pcTibo.textContent = t.promptCatTibo || '🌟 Tibo GPT重置';
-      const pcDeep = document.getElementById('prompt-cat-deepseek');
-      if (pcDeep) pcDeep.textContent = t.promptCatDeepSeek || '🧠 DeepSeek R1';
-      const pcClaud = document.getElementById('prompt-cat-claude');
-      if (pcClaud) pcClaud.textContent = t.promptCatClaude || '⚡ Claude 4.6';
-      const pcOai = document.getElementById('prompt-cat-openai');
-      if (pcOai) pcOai.textContent = t.promptCatOpenAI || '🎯 OpenAI o1/o3';
-      const pcSora = document.getElementById('prompt-cat-sora');
-      if (pcSora) pcSora.textContent = t.promptCatSora || '🎬 Sora2 / Wan2.1';
-      const pcAgent = document.getElementById('prompt-cat-agent');
-      if (pcAgent) pcAgent.textContent = t.promptCatAgent;
-      const pcCode = document.getElementById('prompt-cat-coding');
-      if (pcCode) pcCode.textContent = t.promptCatCoding;
-      const pcReas = document.getElementById('prompt-cat-reasoning');
-      if (pcReas) pcReas.textContent = t.promptCatReasoning;
+      if (pcAll) pcAll.textContent = t.promptScenarioAll || '全部场景 / All';
+      const pcCode = document.getElementById('prompt-cat-code');
+      if (pcCode) pcCode.textContent = t.promptScenarioCode || '💻 编程开发';
+      const pcNovel = document.getElementById('prompt-cat-novel');
+      if (pcNovel) pcNovel.textContent = t.promptScenarioNovel || '✍️ 短剧小说';
+      const pcAnalysis = document.getElementById('prompt-cat-analysis');
+      if (pcAnalysis) pcAnalysis.textContent = t.promptScenarioAnalysis || '📊 数据分析';
+      const pcReport = document.getElementById('prompt-cat-report');
+      if (pcReport) pcReport.textContent = t.promptScenarioReport || '📑 商业报告';
+      const pcTravel = document.getElementById('prompt-cat-travel');
+      if (pcTravel) pcTravel.textContent = t.promptScenarioTravel || '✈️ 生活旅行';
+      const pcImage = document.getElementById('prompt-cat-image');
+      if (pcImage) pcImage.textContent = t.promptScenarioImage || '🎨 灵感生图';
+      const pcVideo = document.getElementById('prompt-cat-video');
+      if (pcVideo) pcVideo.textContent = t.promptScenarioVideo || '🎬 动态视效';
 
       const secPrompts = document.getElementById('section-title-prompts');
       if (secPrompts) secPrompts.textContent = t.promptsTitle;
@@ -3463,32 +3515,128 @@
       }
     }
 
-    // 专栏广场：提示词场景分类筛选 (按最新模型与高阶场景)
+    // 专栏广场：提示词场景分类筛选 (按最新前沿大模型与高阶核心应用场景)
+    let promptGenerationFilter = 'sota'; // 'sota' (当前旗舰优先) | 'legacy' (历史模型归档)
+
+    function switchPromptGeneration(gen) {
+      promptGenerationFilter = gen;
+      const btnSota = document.getElementById('prompt-gen-sota');
+      const btnLegacy = document.getElementById('prompt-gen-legacy');
+      if (btnSota && btnLegacy) {
+        if (gen === 'sota') {
+          btnSota.className = "prompt-gen-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm shadow-purple-600/30 flex items-center gap-1 shrink-0";
+          btnLegacy.className = "prompt-gen-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0";
+        } else {
+          btnLegacy.className = "prompt-gen-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-amber-600 to-orange-600 text-white shadow-sm shadow-amber-600/30 flex items-center gap-1 shrink-0";
+          btnSota.className = "prompt-gen-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0";
+        }
+      }
+      if (currentTab === 'prompts') {
+        renderCategoryView('prompts');
+      }
+    }
+
     function filterPromptCategory(cat) {
       promptCategoryFilter = cat;
-      const btnMap = {
-        'all': 'prompt-cat-all',
-        'tibo_reset': 'prompt-cat-tibo',
-        'deepseek_r1': 'prompt-cat-deepseek',
-        'claude_46': 'prompt-cat-claude',
-        'claude_37': 'prompt-cat-claude',
-        'openai_o3': 'prompt-cat-openai',
-        'sora2_wan21': 'prompt-cat-sora',
-        'agent': 'prompt-cat-agent',
-        'coding': 'prompt-cat-coding',
-        'reasoning': 'prompt-cat-reasoning'
-      };
-      Object.entries(btnMap).forEach(([k, btnId]) => {
-        const b = document.getElementById(btnId);
+      const catBtns = [
+        { id: 'prompt-cat-all', key: 'all' },
+        { id: 'prompt-cat-code', key: 'code' },
+        { id: 'prompt-cat-novel', key: 'novel' },
+        { id: 'prompt-cat-analysis', key: 'analysis' },
+        { id: 'prompt-cat-report', key: 'report' },
+        { id: 'prompt-cat-travel', key: 'travel' },
+        { id: 'prompt-cat-image', key: 'image' },
+        { id: 'prompt-cat-video', key: 'video' },
+        { id: 'prompt-cat-tibo', key: 'tibo_reset' },
+        { id: 'prompt-cat-deepseek', key: 'deepseek_r1' },
+        { id: 'prompt-cat-claude', key: 'claude_46' },
+        { id: 'prompt-cat-openai', key: 'openai_o3' },
+        { id: 'prompt-cat-sora', key: 'sora2_wan21' },
+        { id: 'prompt-cat-agent', key: 'agent' },
+        { id: 'prompt-cat-coding', key: 'coding' },
+        { id: 'prompt-cat-reasoning', key: 'reasoning' }
+      ];
+
+      catBtns.forEach(item => {
+        const b = document.getElementById(item.id);
         if (b) {
-          const isActive = (k === cat || (cat.startsWith('claude') && k.startsWith('claude')));
+          const isActive = (item.key === cat);
           b.className = isActive
-            ? "prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30 font-bold"
+            ? "prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30"
             : "prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0";
         }
       });
+
       if (currentTab === 'prompts') {
         renderCategoryView('prompts');
+      }
+    }
+
+    function toggleSampleDrawer(id) {
+      const drawer = document.getElementById(`sample-drawer-${id}`);
+      const arrow = document.getElementById(`sample-arrow-${id}`);
+      const btnTxt = document.getElementById(`sample-btn-txt-${id}`);
+      const t = I18N[currentLang];
+      if (drawer) {
+        const isHidden = drawer.classList.contains('hidden');
+        drawer.classList.toggle('hidden');
+        if (arrow) {
+          arrow.style.transform = isHidden ? 'rotate(180deg)' : 'rotate(0deg)';
+        }
+        if (btnTxt) {
+          btnTxt.textContent = isHidden ? (t.hideSampleOutput || '收起效果样例 ↑') : (t.viewSampleOutput || '👀 查看实测生成效果样例 (Sample Output)');
+        }
+      }
+    }
+
+    function copySampleCode(id) {
+      const codeEl = document.getElementById(`sample-code-${id}`);
+      if (codeEl) {
+        copyToClipboard(codeEl.textContent || codeEl.innerText);
+      }
+    }
+
+    function renderSampleOutputContent(id, sample) {
+      if (!sample) return '';
+      const t = I18N[currentLang];
+      if (sample.type === 'image') {
+        return `
+          <div class="space-y-2">
+            <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-black max-h-72 relative group/img cursor-pointer" onclick="window.open('${sample.media_url}', '_blank')">
+              <img src="${sample.media_url}" class="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300" loading="lazy" alt="${escapeHtml(sample.title || '生成效果大图')}">
+              <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md">🔍 点击看超清原图</span>
+            </div>
+            ${sample.content ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sample.content)}</p>` : ''}
+          </div>
+        `;
+      } else if (sample.type === 'video') {
+        return `
+          <div class="space-y-2">
+            <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-black aspect-video relative group/vid">
+              <video src="${sample.media_url}" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
+              <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span>MP4 实测动效</span>
+              </span>
+            </div>
+            ${sample.content ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sample.content)}</p>` : ''}
+          </div>
+        `;
+      } else if (sample.type === 'code') {
+        return `
+          <div class="space-y-1.5">
+            <div class="relative group/code">
+              <pre class="p-2.5 rounded-lg bg-slate-900 text-emerald-400 font-mono text-[10px] overflow-x-auto leading-relaxed max-h-60 whitespace-pre"><code id="sample-code-${id}">${escapeHtml(sample.content || '')}</code></pre>
+              <button type="button" onclick="copySampleCode('${id}')" class="absolute top-1.5 right-1.5 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[9px] font-mono border border-slate-700 shadow-sm transition-colors cursor-pointer">
+                ${t.copySampleCodeBtn || '复制代码 📋'}
+              </button>
+            </div>
+          </div>
+        `;
+      } else {
+        return `
+          <div class="p-2.5 rounded-lg bg-white/80 dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-[11px] leading-relaxed max-h-60 overflow-y-auto whitespace-pre-wrap border border-slate-200 dark:border-slate-800 font-sans shadow-inner select-all">${escapeHtml(sample.content || '')}</div>
+        `;
       }
     }
 
@@ -4836,14 +4984,25 @@
       const t = I18N[currentLang];
       const title = item.title_zh || item.title;
       const summary = item.summary_zh || item.content_snippet || "";
-      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatTime(item.raw_published_at || item.created_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const targetModel = item.recommended_model || "通用大模型";
+      const targetModel = item.target_model || item.recommended_model || "通用大模型";
       const tempAdvice = item.temp_advice || "温度 0.3";
-      const purpose = item.purpose_zh || "💡 高阶提示词";
+      const purpose = item.scenario_label || item.purpose_zh || "💡 核心模版";
       const promptZh = item.prompt_content_zh || item.prompt_content || "";
       const promptEn = item.prompt_content_en || item.prompt_content || "";
+      const isLegacy = item.generation_tier === 'legacy';
+      const tierScore = Number(item.model_tier_score) || 80;
+
+      let modelBadge = '';
+      if (isLegacy) {
+        modelBadge = `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-[9px] font-bold border border-slate-300 dark:border-slate-700">📦 历史模型归档</span>`;
+      } else if (tierScore >= 95) {
+        modelBadge = `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-indigo-500/20 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 font-mono text-[9px] font-bold flex items-center gap-1">👑 旗舰SOTA · <span class="notranslate">${escapeHtml(targetModel)}</span></span>`;
+      } else {
+        modelBadge = `<span class="px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[9px] font-mono">🎯 <span class="notranslate">${escapeHtml(targetModel)}</span></span>`;
+      }
 
       window.__promptStore = window.__promptStore || {};
       window.__promptStore[item.id] = {
@@ -4854,9 +5013,36 @@
 
       const activeText = promptZh || promptEn;
       const usageGuide = item.usage_guide_zh || item.usage_guide || "";
+      const variables = item.variables || [];
+
+      const variablesHtml = (variables && variables.length > 0)
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">
+             <span class="text-[9px] text-slate-500 dark:text-slate-400 font-mono">参数占位符:</span>
+             ${variables.map(v => `<span class="px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 font-mono text-[9px]">${escapeHtml(v)}</span>`).join('')}
+           </div>`
+        : '';
+
+      const sampleOutputHtml = item.sample_output ? `
+        <div class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800/60">
+          <button type="button" onclick="toggleSampleDrawer('${item.id}')" class="w-full py-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-[11px] text-purple-600 dark:text-purple-300 font-semibold flex items-center justify-between transition-colors cursor-pointer group shadow-sm">
+            <span class="flex items-center gap-1.5">
+              <span>👀</span>
+              <span id="sample-btn-txt-${item.id}">${t.viewSampleOutput || '查看实测效果样例 (Sample Output)'}</span>
+            </span>
+            <span id="sample-arrow-${item.id}" class="text-xs transition-transform duration-200">▼</span>
+          </button>
+          <div id="sample-drawer-${item.id}" class="hidden mt-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/90 border border-slate-200 dark:border-slate-800 space-y-2">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 font-bold border-b border-slate-200 dark:border-slate-800 pb-1">
+              <span>✨ ${escapeHtml(item.sample_output.title || '实测生成效果')}</span>
+              <span class="font-mono uppercase text-[9px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-500">${item.sample_output.type || 'text'}</span>
+            </div>
+            ${renderSampleOutputContent(item.id, item.sample_output)}
+          </div>
+        </div>
+      ` : '';
 
       return `
-        <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 border-l-purple-500 shadow-md group">
+        <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 ${isLegacy ? 'border-l-slate-400 dark:border-l-slate-600 opacity-90' : 'border-l-purple-500'} shadow-md group">
           <div class="space-y-2">
             <div class="flex items-center justify-between gap-2">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 shrink-0">
@@ -4867,11 +5053,16 @@
                 <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
               </div>
             </div>
+
             <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 leading-snug group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">${title}</h4>
-            <div class="flex items-center space-x-2 text-[9px] font-mono flex-wrap gap-y-1">
-              <span class="px-1.5 py-0.5 rounded bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">🎯 推荐: <span class="notranslate">${targetModel}</span></span>
+
+            <div class="flex items-center space-x-1.5 text-[9px] font-mono flex-wrap gap-y-1">
+              ${modelBadge}
               <span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800">⚙️ ${tempAdvice}</span>
             </div>
+
+            ${variablesHtml}
+
             ${summary ? `<p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">${summary}</p>` : ''}
             
             <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200 dark:border-slate-800/60">
@@ -4884,6 +5075,8 @@
 
             <div id="pbox-${item.id}" class="notranslate bg-purple-50/70 dark:bg-slate-950/90 p-2.5 rounded-lg border border-purple-200/80 dark:border-slate-800 text-[11px] text-purple-950 dark:text-purple-200 font-mono leading-relaxed select-all whitespace-pre-wrap max-h-44 overflow-y-auto">${escapeHtml(activeText)}</div>
 
+            ${sampleOutputHtml}
+
             ${usageGuide ? `
               <div class="text-[10px] text-slate-600 dark:text-slate-400 bg-slate-100/70 dark:bg-slate-900/50 p-2 rounded border border-slate-200 dark:border-slate-800/60 leading-relaxed font-sans">
                 <span class="text-purple-600 dark:text-purple-400 font-semibold">💡 使用指南: </span>${escapeHtml(usageGuide)}
@@ -4892,7 +5085,7 @@
           </div>
 
           <button type="button" onclick="copyCardPrompt('${item.id}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-md shadow-purple-600/30">
-            <span>一键复制提示词 📋</span>
+            <span>${t.copyPrompt || '一键复制提示词 📋'}</span>
           </button>
         </article>
       `;
@@ -5316,9 +5509,21 @@
         }
       }
 
-      // E. 提示词库板块 (Prompts)
-      const recentPrompts = allPrompts.filter(it => isWithin24Hours(it.raw_published_at));
-      const displayPrompts = recentPrompts.length > 0 ? recentPrompts.slice(0, 8) : allPrompts.slice(0, 6);
+      // E. 提示词库板块 (Prompts) - 优先展现前沿 SOTA 旗舰模型模版
+      const sortedPrompts = allPrompts.slice().sort((a, b) => {
+        const isLegA = a.generation_tier === 'legacy' ? 1 : 0;
+        const isLegB = b.generation_tier === 'legacy' ? 1 : 0;
+        if (isLegA !== isLegB) return isLegA - isLegB;
+        const scoreA = Number(a.model_tier_score) || 80;
+        const scoreB = Number(b.model_tier_score) || 80;
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+        const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+        return timeB - timeA;
+      });
+
+      const sotaPrompts = sortedPrompts.filter(it => it.generation_tier !== 'legacy');
+      const displayPrompts = sotaPrompts.length > 0 ? sotaPrompts.slice(0, 8) : sortedPrompts.slice(0, 8);
       const streamPrompts = document.getElementById('stream-prompts');
       if (streamPrompts) {
         streamPrompts.innerHTML = displayPrompts.length > 0
@@ -5330,14 +5535,14 @@
       const arcContPrompts = document.getElementById('container-archive-prompts');
       const arcTxtPrompts = document.getElementById('txt-archive-prompts');
       if (arcSecPrompts && arcContPrompts && arcTxtPrompts) {
-        const remainingPrompts = allPrompts.filter(it => !displayPrompts.includes(it));
+        const remainingPrompts = sortedPrompts.filter(it => !displayPrompts.includes(it));
         if (remainingPrompts.length > 0) {
           arcSecPrompts.classList.remove('hidden');
           arcContPrompts.dataset.count = remainingPrompts.length;
           arcContPrompts.innerHTML = remainingPrompts.map(renderPromptCard).join('');
           arcTxtPrompts.textContent = historyArchiveOpen.prompts
             ? (isZh ? '收起历史提示词 ↑' : 'Collapse Archive ↑')
-            : (isZh ? `查看更多经典提示词 (已收录 ${remainingPrompts.length} 条) ↓` : `View More Classic Prompts (${remainingPrompts.length} items) ↓`);
+            : (isZh ? `查看更多模型提示词与历史归档 (已收录 ${remainingPrompts.length} 条) ↓` : `View More Prompts & Historical Archive (${remainingPrompts.length} items) ↓`);
         } else {
           arcSecPrompts.classList.add('hidden');
         }
@@ -5413,7 +5618,7 @@
         const tagsStr = Array.isArray(item.tags) ? item.tags.join(' ') : '';
         const specStr = Array.isArray(item.spec_tags) ? item.spec_tags.join(' ') : '';
         const metricsStr = item.metrics ? Object.values(item.metrics).join(' ') : '';
-        const text = `${item.title || ''} ${item.title_en || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.summary_en || ''} ${item.content_snippet || ''} ${item.source || ''} ${item.author || ''} ${item.scenario_tag || ''} ${item.purpose_zh || ''} ${item.purpose_en || ''} ${item.prompt_content_zh || ''} ${item.prompt_content_en || ''} ${tagsStr} ${specStr} ${metricsStr}`.toLowerCase();
+        const text = `${item.title || ''} ${item.title_en || ''} ${item.title_zh || ''} ${item.summary_zh || ''} ${item.summary_en || ''} ${item.content_snippet || ''} ${item.source || ''} ${item.author || ''} ${item.target_model || ''} ${item.recommended_model || ''} ${item.scenario_label || ''} ${item.scenario_tag || ''} ${item.purpose_zh || ''} ${item.purpose_en || ''} ${item.prompt_content_zh || ''} ${item.prompt_content_en || ''} ${tagsStr} ${specStr} ${metricsStr}`.toLowerCase();
         return terms.every(term => text.includes(term));
       });
     }
@@ -5706,23 +5911,67 @@
       } else if (tab === 'prompts') {
         const isZh = currentLang === 'zh';
         let rawList = cachedData.grouped?.prompts || cachedData.prompts || (cachedData.grouped?.videos || cachedData.videos || []).filter(it => it.is_prompt);
+
+        // 1. Generation Tier Filter (sota vs legacy)
+        if (promptGenerationFilter === 'sota') {
+          rawList = rawList.filter(it => it.generation_tier !== 'legacy');
+        } else if (promptGenerationFilter === 'legacy') {
+          rawList = rawList.filter(it => it.generation_tier === 'legacy');
+        }
+
+        // 2. Scenario Category Filter
+        if (promptCategoryFilter && promptCategoryFilter !== 'all') {
+          rawList = rawList.filter(it => {
+            if (it.category === promptCategoryFilter) return true;
+            if (it.sub_type === promptCategoryFilter) return true;
+            if (promptCategoryFilter === 'code') {
+              return it.category === 'code' || it.sub_type === 'coding' || it.model_family === 'coding' || (it.scenario_label && it.scenario_label.includes('编程')) || (it.title_zh && (it.title_zh.includes('代码') || it.title_zh.includes('重构') || it.title_zh.includes('开发'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('code') || tg.toLowerCase().includes('coding')));
+            }
+            if (promptCategoryFilter === 'novel') {
+              return it.category === 'novel' || (it.scenario_label && it.scenario_label.includes('短剧')) || (it.title_zh && (it.title_zh.includes('短剧') || it.title_zh.includes('小说') || it.title_zh.includes('剧本') || it.title_zh.includes('创作'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('writing') || tg.toLowerCase().includes('story')));
+            }
+            if (promptCategoryFilter === 'analysis') {
+              return it.category === 'analysis' || (it.scenario_label && it.scenario_label.includes('分析')) || (it.title_zh && (it.title_zh.includes('分析') || it.title_zh.includes('Excel') || it.title_zh.includes('指标') || it.title_zh.includes('推理'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('reasoning') || tg.toLowerCase().includes('analysis')));
+            }
+            if (promptCategoryFilter === 'report') {
+              return it.category === 'report' || (it.scenario_label && it.scenario_label.includes('报告')) || (it.title_zh && (it.title_zh.includes('报告') || it.title_zh.includes('述职') || it.title_zh.includes('总结') || it.title_zh.includes('公关'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('report') || tg.toLowerCase().includes('business')));
+            }
+            if (promptCategoryFilter === 'travel') {
+              return it.category === 'travel' || (it.scenario_label && it.scenario_label.includes('旅行')) || (it.title_zh && (it.title_zh.includes('旅行') || it.title_zh.includes('行程') || it.title_zh.includes('攻略'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('travel')));
+            }
+            if (promptCategoryFilter === 'image') {
+              return it.category === 'image' || it.sample_output?.type === 'image' || (it.scenario_label && it.scenario_label.includes('生图')) || (it.title_zh && (it.title_zh.includes('生图') || it.title_zh.includes('Flux') || it.title_zh.includes('Midjourney') || it.title_zh.includes('绘画'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('image') || tg.toLowerCase().includes('midjourney') || tg.toLowerCase().includes('flux')));
+            }
+            if (promptCategoryFilter === 'video') {
+              return it.category === 'video' || it.sample_output?.type === 'video' || (it.scenario_label && it.scenario_label.includes('视效')) || (it.title_zh && (it.title_zh.includes('视频') || it.title_zh.includes('运镜') || it.title_zh.includes('Wan') || it.title_zh.includes('Sora'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('video') || tg.toLowerCase().includes('sora') || tg.toLowerCase().includes('wan')));
+            }
+            return (it.model_family === promptCategoryFilter) ||
+                   (it.recommended_model && it.recommended_model.toLowerCase().includes(promptCategoryFilter.replace('_', ''))) ||
+                   (it.target_model && it.target_model.toLowerCase().includes(promptCategoryFilter.replace('_', ''))) ||
+                   (it.id && it.id.toLowerCase().includes(promptCategoryFilter)) ||
+                   (it.tags && it.tags.some(tg => tg.toLowerCase().includes(promptCategoryFilter.replace('_', ''))));
+          });
+        }
+
         let list = filterList(rawList);
 
-        if (promptCategoryFilter && promptCategoryFilter !== 'all') {
-          list = list.filter(it => 
-            (it.model_family === promptCategoryFilter) ||
-            (it.sub_type || it.category_sub || '') === promptCategoryFilter || 
-            (it.category === promptCategoryFilter) || 
-            (it.recommended_model && it.recommended_model.toLowerCase().includes(promptCategoryFilter.replace('_', ''))) ||
-            (it.id && it.id.toLowerCase().includes(promptCategoryFilter)) ||
-            (it.tags && it.tags.some(tg => tg.toLowerCase().includes(promptCategoryFilter.replace('_', ''))))
-          );
-        }
+        // 3. SOTA Model Tier Ranking (最新模型优先，高代际高权重排列)
+        list.sort((a, b) => {
+          const scoreA = Number(a.model_tier_score) || 80;
+          const scoreB = Number(b.model_tier_score) || 80;
+          if (scoreB !== scoreA) return scoreB - scoreA;
+          const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+          const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+          return timeB - timeA;
+        });
 
         container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
         container.innerHTML = list.length > 0
           ? list.map(renderPromptCard).join('')
-          : `<div class="text-slate-500 text-center py-12 col-span-3 text-xs">${isZh ? '暂无符合条件的提示词咒语' : 'No matching prompts'}</div>`;
+          : `<div class="text-slate-500 text-center py-12 col-span-3 text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
+               <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">${isZh ? (promptGenerationFilter === 'legacy' ? '📦 历史模型归档库暂无此类模版' : '💡 该场景下暂无提示词模版') : 'No matching prompt templates'}</p>
+               <p class="text-slate-400 text-xs">${isZh ? '可切换上方“模型版本”或选择“全部场景”查阅更多' : 'Try switching model version or selecting all scenarios'}</p>
+             </div>`;
       }
       applyCurrentTranslation();
     }
@@ -5742,6 +5991,28 @@
         });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
+
+        // 动态载入前沿模型应用场景提示词库 (Prompt Library v2.0)
+        try {
+          const promptRes = await fetch(`data/curated_prompts_library.json?t=${Date.now()}`);
+          if (promptRes.ok) {
+            const curatedPrompts = await promptRes.json();
+            if (Array.isArray(curatedPrompts)) {
+              const existingPrompts = data.grouped?.prompts || data.prompts || [];
+              const curatedIds = new Set(curatedPrompts.map(p => p.id));
+              const mergedPrompts = [
+                ...curatedPrompts.map(p => ({ ...p, is_prompt: true, category: 'prompts' })),
+                ...existingPrompts.filter(p => !curatedIds.has(p.id))
+              ];
+              if (!data.grouped) data.grouped = {};
+              data.grouped.prompts = mergedPrompts;
+              data.prompts = mergedPrompts;
+            }
+          }
+        } catch (e) {
+          console.warn("curated_prompts_library fetch fallback:", e);
+        }
+
         cachedData = data;
 
         // 核心防打扰：如果当前在视频专区且为定时后台轮询，仅静默更新缓存，绝不粗暴清空 DOM 重绘视频卡片

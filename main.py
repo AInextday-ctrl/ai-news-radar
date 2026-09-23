@@ -1036,10 +1036,17 @@ def save_news(items: list):
         grouped[cat].append(item)
 
     for cat_key in grouped:
-        grouped[cat_key].sort(key=lambda x: (
-            1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
-            parse_time_for_sort(x)
-        ), reverse=True)
+        if cat_key == "prompts":
+            grouped[cat_key].sort(key=lambda x: (
+                1 if x.get("generation_tier") != "legacy" else 0,
+                x.get("model_tier_score", 80),
+                parse_time_for_sort(x)
+            ), reverse=True)
+        else:
+            grouped[cat_key].sort(key=lambda x: (
+                1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
+                parse_time_for_sort(x)
+            ), reverse=True)
 
     recent_final = []
     for cat_key in grouped:

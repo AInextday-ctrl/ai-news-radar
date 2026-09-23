@@ -34016,6 +34016,281 @@
     ],
     "prompts": [
       {
+        "id": "prompt-code-fullstack-01",
+        "title_zh": "Next.js 15 全栈自主重构与架构规范",
+        "title_en": "Next.js 15 Full-Stack Autonomous Refactor",
+        "category": "prompts",
+        "scenario_label": "💻 编程开发",
+        "target_model": "Claude 5.5 Sonnet / Cursor",
+        "model_family": "Anthropic",
+        "model_tier_score": 98,
+        "generation_tier": "sota",
+        "purpose_zh": "全栈工程重构与代码规范约束",
+        "temp_advice": "温度 0.2",
+        "variables": [
+          "{{框架版本}}",
+          "{{数据库ORM}}",
+          "{{状态管理}}"
+        ],
+        "prompt_content_zh": "你是一名资深全栈系统架构师，擅长使用 {{框架版本}} (App Router)、TypeScript 与 {{数据库ORM}} 构建高内聚低耦合的应用。\n\n请遵循以下严苛工程准则审查并重构代码：\n1. 严格区分 Server Component 与 Client Component，尽可能将数据获取推至服务端，减少客户端 JS Bundle 体积；\n2. 所有异步 I/O 必须显式处理异常并返回类型安全的 Result<T, E> 或自定义结构体；\n3. 遵循单一职责（SRP）与无副作用函数原则，严禁直接在 UI 组件内部拼装未校验的 SQL/ORM 复杂查询；\n4. 提供整洁的目录组织方案与单元测试用例（覆盖率达标）。",
+        "prompt_content_en": "You are a senior full-stack system architect specializing in Next.js 15 (App Router), TypeScript, and modern ORMs. Review and refactor the codebase following strict engineering standards: clear Server/Client Component separation, robust error boundaries, typed I/O, and unit test coverage.",
+        "sample_output": {
+          "type": "code",
+          "title": "重构后的 Server Action 与数据流架构示例",
+          "content": "// app/actions/user-analytics.ts\n'use server';\n\nimport { z } from 'zod';\nimport { db } from '@/lib/db';\nimport { revalidatePath } from 'next/cache';\n\nconst UpdateMetricSchema = z.object({\n  userId: z.string().uuid(),\n  delta: z.number().int().min(1),\n});\n\ntype ActionState = \n  | { status: 'idle' }\n  | { status: 'success'; data: { updatedCount: number } }\n  | { status: 'error'; message: string };\n\nexport async function incrementUserScore(\n  prevState: ActionState,\n  formData: FormData\n): Promise<ActionState> {\n  const parse = UpdateMetricSchema.safeParse({\n    userId: formData.get('userId'),\n    delta: Number(formData.get('delta')),\n  });\n\n  if (!parse.success) {\n    return { status: 'error', message: '参数格式不合法，更新已终止' };\n  }\n\n  try {\n    const record = await db.metric.update({\n      where: { id: parse.data.userId },\n      data: { score: { increment: parse.data.delta } },\n      select: { score: true },\n    });\n    revalidatePath('/dashboard/metrics');\n    return { status: 'success', data: { updatedCount: record.score } };\n  } catch (error) {\n    console.error('[MetricSyncError]', error);\n    return { status: 'error', message: '数据库执行失败，请稍后重试' };\n  }\n}"
+        },
+        "usage_guide_zh": "复制至 Cursor 的 .cursorrules 或在 Claude Code 对话中直接作为 System Prompt 引导编码。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "Claude 5.5 Sonnet / Cursor"
+      },
+      {
+        "id": "prompt-image-flux-cyberpunk-01",
+        "title_zh": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
+        "title_en": "Flux.1 / Midjourney Cinematic Cyberpunk Portrait",
+        "category": "prompts",
+        "scenario_label": "🎨 灵感生图",
+        "target_model": "Black Forest Flux.1 / Midjourney v6.1",
+        "model_family": "Flux",
+        "model_tier_score": 97,
+        "generation_tier": "sota",
+        "purpose_zh": "8K 超逼真电影质感与丁达尔光效",
+        "temp_advice": "CFG: 3.5, Steps: 28",
+        "variables": [
+          "{{主体描述}}",
+          "{{色调氛围}}",
+          "{{构图景别}}"
+        ],
+        "prompt_content_zh": "电影级特写镜头，{{主体描述}}，站在潮湿的雨夜霓虹街头，反射着 {{色调氛围}} 的微光，皮肤肌理清晰细腻，真实的毛孔与水珠光泽，浅景深，光线柔和，哈苏 80mm f/1.8 镜头质感，大师级构图，8K 超高清分辨率 --ar 16:9 --v 6.1 --style raw",
+        "prompt_content_en": "Cinematic close-up portrait of {{主体描述}}, standing on a wet neon-lit street after rain, subtle volumetric Tyndall lighting, ultra-realistic skin pores and reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece.",
+        "sample_output": {
+          "type": "image",
+          "title": "Flux.1 实测生成效果图 (带真实出图大图)",
+          "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7/original=true/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7.jpeg",
+          "content": "模型: Flux.1 Dev | 采样器: Euler a | 步数: 28 | 引导词权重 (CFG): 3.5 | 种子: 34918204"
+        },
+        "usage_guide_zh": "将英文提示词复制进 Flux.1 WebUI、ComfyUI 或 Midjourney，可获得质感极佳的照片级肖像。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "Black Forest Flux.1 / Midjourney v6.1"
+      },
+      {
+        "id": "prompt-code-deepseek-r1-01",
+        "title_zh": "DeepSeek-R1 深度推理：高并发死锁与算法排查",
+        "title_en": "DeepSeek-R1 Deep Reasoning: Deadlock & Algo Debugger",
+        "category": "prompts",
+        "scenario_label": "💻 编程开发",
+        "target_model": "DeepSeek-R1 (深度推理)",
+        "model_family": "DeepSeek",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "复杂并发算法与边界条件排查",
+        "temp_advice": "温度 0.6 (长思维链)",
+        "variables": [
+          "{{编程语言}}",
+          "{{并发模型}}",
+          "{{故障现象}}"
+        ],
+        "prompt_content_zh": "请充分发挥你的深度思维链推理能力（Reasoning Step-by-Step），为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 仔细推演临界区状态转移，绘制潜在死锁或竞态条件的发生时序图（ASCII 或时序表格）；\n2. 检查边界条件（如切片溢出、连接池耗尽、优雅停机信号缺失）；\n3. 给出从根源消除锁竞争的最佳算法设计，并附带可验证的压力测试单测脚本。",
+        "prompt_content_en": "Using your full reasoning capabilities, step-by-step trace and diagnose the deadlock or race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+        "sample_output": {
+          "type": "code",
+          "title": "并发竞态推演与原子替换方案",
+          "content": "/* 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+        },
+        "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R1 或 OpenAI o3 模型。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 (深度推理)"
+      },
+      {
+        "id": "prompt-analysis-excel-eda-01",
+        "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+        "title_en": "Excel Advanced Report & Key Drivers Attribution",
+        "category": "prompts",
+        "scenario_label": "📊 数据分析",
+        "target_model": "DeepSeek-R1 / GPT-6.0",
+        "model_family": "Universal",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "业务数据指标异动排查与趋势归因",
+        "temp_advice": "温度 0.2",
+        "variables": [
+          "{{业务指标}}",
+          "{{异常表现}}",
+          "{{维度拆解}}"
+        ],
+        "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+        "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+        "sample_output": {
+          "type": "text",
+          "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+          "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。"
+        },
+        "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 / GPT-6.0"
+      },
+      {
+        "id": "prompt-video-wan21-slowmo-01",
+        "title_zh": "通义 Wan 2.1 / 可灵：电影级推镜头动态运镜与微风视效",
+        "title_en": "Wan 2.1 / Kling Cinematic Dolly-in Dynamic Motion",
+        "category": "prompts",
+        "scenario_label": "🎬 动态视效",
+        "target_model": "阿里通义 Wan 2.1 / 可灵 1.5",
+        "model_family": "Wan",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "大景深慢推镜头与自然物理动态",
+        "temp_advice": "动态强度: 0.6",
+        "variables": [
+          "{{动作细节}}",
+          "{{运镜方式}}",
+          "{{环境光影}}"
+        ],
+        "prompt_content_zh": "摄影机缓慢向主体向前推镜头（Slow Dolly-in），{{动作细节}}，发丝随微风轻微自然摆动，眼神流转自然眨眼，周围光晕伴随 {{环境光影}} 产生丁达尔慢速闪烁，物理模拟逼真，无断帧抖动，电影级 60fps 质感。",
+        "prompt_content_en": "Camera slowly dolly-in towards subject. Natural hair fluttering in a gentle breeze, natural subtle blinking and breathing movements, cinematographic lighting transitions, photorealistic 60fps smooth render.",
+        "sample_output": {
+          "type": "video",
+          "title": "Wan 2.1 实测动态视频样例 (鼠标悬停即播)",
+          "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c7238afe-3f56-41f5-92a4-ece392806c60/original=true/c7238afe-3f56-41f5-92a4-ece392806c60.mp4",
+          "content": "时长: 5秒 | 运镜: Dolly Forward + Pan | 运镜动态系数: 0.65 | 分辨率: 1080P / 60FPS"
+        },
+        "usage_guide_zh": "在可灵或 Wan 2.1 图生视频/文生视频的“运镜设置”中填入，生成极其稳定的电影感镜头。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "阿里通义 Wan 2.1 / 可灵 1.5"
+      },
+      {
+        "id": "prompt-novel-shortdrama-01",
+        "title_zh": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
+        "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
+        "category": "prompts",
+        "scenario_label": "✍️ 短剧小说",
+        "target_model": "DeepSeek-R1 / Claude 5.5",
+        "model_family": "Universal",
+        "model_tier_score": 95,
+        "generation_tier": "sota",
+        "purpose_zh": "高转化竖屏短剧分镜与台词",
+        "temp_advice": "温度 0.7",
+        "variables": [
+          "{{主角身份}}",
+          "{{反派身份}}",
+          "{{第1秒颠覆钩子}}",
+          "{{核心反转}}"
+        ],
+        "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
+        "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
+        "sample_output": {
+          "type": "script",
+          "title": "实战剧本样章：《辞职信上的签名》",
+          "content": "【第1镜 | 特写 | 俯冲急推】\n画面：一只指节发白的手将一叠文件狠狠拍在红木总裁办公桌上，咖啡杯被震倒，黑褐液体飞溅。\n音效：沉闷震耳的巨响【DUANG】。\n主角（冷冽）：\"林总，这份千万项目的承揽协议，我拒绝签字。\"\n\n【第2镜 | 正打·中景 | 仰角机位】\n画面：大腹便便的林总冷笑点燃雪茄，烟雾缭绕中居高临下。\n林总：\"拒绝？苏澈，你不过是我公司养的一条狗，没有我的印章，你在整个行业休想拿到一分钱融资！\"\n\n【第3镜 | 反打·极微距特写 | 浅景深】\n画面：苏澈唇角微微上扬，左手缓缓推开桌上的合资协议，露出底下的一份红色国资控股聘书。\n苏澈：\"林总，您好像忘了看抬头。今天上午九点，集团总公司已经完成了对你的全资收购——现在，我是你的直接合规清算人。\"\n\n【第4镜 | 全景 | 快速拉远 + 卡点悬念】\n画面：林总雪茄直接掉在西裤上，脸色煞白，门外两名身穿制服的法务推门而入。\n音效：尖锐的心跳悬疑停顿音【BGM骤停】。\n字幕：【下集看点：隐藏五年的顶级操盘手真实身份曝光！】"
+        },
+        "usage_guide_zh": "替换主角与冲突变量后输入给模型，可直接输出成型分镜，直接用于拍摄或转视频 AI 生成。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 / Claude 5.5"
+      },
+      {
+        "id": "prompt-report-mckinsey-01",
+        "title_zh": "麦肯锡金字塔原理：季度述职与高管商业报告",
+        "title_en": "McKinsey Pyramid Executive Report & Review",
+        "category": "prompts",
+        "scenario_label": "📑 商业报告",
+        "target_model": "Claude 5.5 / GPT-6.0",
+        "model_family": "Universal",
+        "model_tier_score": 95,
+        "generation_tier": "sota",
+        "purpose_zh": "结论先行的高层述职与项目复盘报告",
+        "temp_advice": "温度 0.3",
+        "variables": [
+          "{{业务部门}}",
+          "{{关键战果}}",
+          "{{核心短板}}",
+          "{{下阶段目标}}"
+        ],
+        "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
+        "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+        "sample_output": {
+          "type": "text",
+          "title": "述职报告提纲样本：AI 自动化中台建设报告",
+          "content": "【BLUF 核心结论】\nQ3 通过在客户服务与情报聚合管线中全面引入 AI Agent，我们在运营成本降低 41% 的同时，将响应中位数缩短至 1.8 秒，实现单季 ROI 达 380%。\n\n【第一支柱：经营效能跃迁（MECE 1）】\n- 全自主中转网关与自动化管线承载 94.2% 的日常例行分发，无人工介入事故率降至 0.01%；\n\n【第二支柱：资产沉淀与质量壁垒（MECE 2）】\n- 搭建前沿 SOTA 模型代际评级系统与微快照图库，成为垂类雷达第一标杆；\n\n【第三支柱：短板复盘与 Q4 攻坚（MECE 3）】\n- 痛点：老旧模型模版对新用户构成噪音干扰；\n- 策略：推出历史库智能分流系统，预计下季度用户留存提升 25%。"
+        },
+        "usage_guide_zh": "将自己一周/一月的粗糙工作备忘录贴在后面，几秒钟即可输出具备咨询公司水准的商业报告。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "Claude 5.5 / GPT-6.0"
+      },
+      {
+        "id": "prompt-novel-worldbuilding-01",
+        "title_zh": "网络小说世界观设定与主角角色一致性锁",
+        "title_en": "Fiction Worldbuilding & Character Consistency Lock",
+        "category": "prompts",
+        "scenario_label": "✍️ 短剧小说",
+        "target_model": "Claude 5.5 / GPT-6.0",
+        "model_family": "Universal",
+        "model_tier_score": 94,
+        "generation_tier": "sota",
+        "purpose_zh": "长篇小说架构与人物性格防崩塌",
+        "temp_advice": "温度 0.5",
+        "variables": [
+          "{{题材分类}}",
+          "{{核心金手指}}",
+          "{{世界核心矛盾}}"
+        ],
+        "prompt_content_zh": "你是一名资深网络小说白金作家与 IP 世界观架构师。请为一部 {{题材分类}} 长篇作品构建骨架并锁定人物一致性：\n\n1. 【世界底座】：定义力量/经济体系、战力天花板与不可违背的底层物理/法则约束，杜绝战力膨胀；\n2. 【角色一致性锚点 (Character Lock)】：为主角制定外貌锚定词、口头禅、下意识动作与绝对动机准则（在任何生死抉择时绝不背离该准则）；\n3. 【核心驱动力】：设计主角获得的 {{核心金手指}} 与 {{世界核心矛盾}} 之间的冲突循环；\n4. 【前三章切入大纲】：黄金三章节奏设计（第1章破局、第2章显露冰山一角、第3章设立首个必胜目标）。",
+        "prompt_content_en": "Build a cohesive, non-contradictory fiction universe and establish an immutable character anchor rule (appearance, decision heuristics, core motivation) to prevent personality drift over long chapters.",
+        "sample_output": {
+          "type": "text",
+          "title": "世界观与人物锚定卡样本",
+          "content": "【主角核心锚定卡 · 陆沉】\n- 外貌指纹（跨章恒定）：右耳一枚黑曜石碎骨钉，习惯性单手插兜，左眉峰有浅淡刀痕。\n- 决策第一公理：\"利益可以出让，但绝不签署不可撤销的信任协议\"——任何试图以情感道德绑架他的剧情，他必做出理性防卫。\n\n【力量体系底层法理】\n- 机制：灵能不是无限提取，而是向未来\"借贷\"。借贷三级灵能，必在72小时内遭遇相应量级的反噬因果。\n\n【第一章：断头宴上的借贷合同】\n陆沉在家族庆功宴上被夺去嫡系席位，当众被赐饮散灵酒。陆沉不动声色饮下，却在体内发动首次因果置换，借来三年后的金丹级肉身力量，捏碎验灵石，反客为主。"
+        },
+        "usage_guide_zh": "先让 AI 产出世界观基石，后续每一章写作前引用该卡片，能彻底避免角色'换章变脸'或剧情崩坏。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "Claude 5.5 / GPT-6.0"
+      },
+      {
+        "id": "prompt-travel-itinerary-01",
+        "title_zh": "深度游旅行规划师：高密度路线设计与预算避坑",
+        "title_en": "Deep Travel Itinerary Planner & Budgeting",
+        "category": "prompts",
+        "scenario_label": "✈️ 生活旅行",
+        "target_model": "Claude 5.5 / DeepSeek-R1",
+        "model_family": "Universal",
+        "model_tier_score": 93,
+        "generation_tier": "sota",
+        "purpose_zh": "合理不走回头路的日程与美食预算规划",
+        "temp_advice": "温度 0.4",
+        "variables": [
+          "{{目的地城市}}",
+          "{{出行天数}}",
+          "{{同行人员}}",
+          "{{人均预算}}"
+        ],
+        "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
+        "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+        "sample_output": {
+          "type": "text",
+          "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
+          "content": "【Day 1：古蜀遗风与老茶馆时光】\n- 上午 09:00：直奔【人民公园 · 鹤鸣茶社】，点一杯蒙顶甘露（¥25），体验非遗采耳，避开下午的旅行团拥堵；\n- 中午 12:00：步行800米至【纯阳馆鱼香排骨面】，必点椒麻牛肉与鱼香排骨面（人均¥22）；\n- 下午 14:00：地铁2号线直达【杜甫草堂】，红墙竹影漫步，打卡浣花溪公园；\n- 傍晚 18:30：九眼桥望江楼看锦江夜景，就餐【老街小吃火锅】；\n\n【避坑锦囊】：\n1. 宽窄巷子和锦里建议只拍照别买小吃，均价比普通街区贵 2~3 倍且多为预制冻品；\n2. 大熊猫繁育研究基地务必约早晨 07:30 入园，超过 10:30 大熊猫基本全部回室内睡觉。"
+        },
+        "usage_guide_zh": "只需填入城市、天数和预算，即刻收获一份可直接打印随身带的专业级行程攻略。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "Claude 5.5 / DeepSeek-R1"
+      },
+      {
         "id": "prompt_tibo_gpt_reset_architecture",
         "sub_type": "reasoning",
         "model_family": "tibo_reset",
@@ -34038,7 +34313,7 @@
           "temp": "0.2"
         },
         "content_snippet": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
-        "summary_zh": "不清除对话任务前提下，强制模型刷新隐藏先验偏置、粉碎多轮死循环车轱辘话，激发纯净的测试期逻辑推演",
+        "summary_zh": "不清除对话任务前提下，强制模型刷新隐藏先验偏置、粉碎多轮死循环车轱辘话，激发纯净的测试期逻辑推演。",
         "summary_en": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
         "prompt_content_zh": "【SYSTEM RESET & CONTEXT PURGE PROTOCOL】\n你现在执行内部思维链重置程序（Attention Buffer Refresh）。\n请立刻执行以下 3 步上下文净化与重新推演：\n1. 剥离先入为主假设：忽略此前对话中由用户或模型产生的一切中间妥协、逻辑死锁或未验证的推论，仅保留最原始的核心约束与输入事实；\n2. 回归第一性原理：以白纸状态（Tabula Rasa）重新构建解题状态空间，将问题分解为不可再分的基本公理；\n3. 逆向证伪验证：在输出最终结论前，必须主动尝试推翻自己的前一步推演。只有无法被反例击破的路径，方可作为最终执行方案。\n现在，以最高逻辑严密性重新推导当前问题：",
         "prompt_content_en": "[SYSTEM RESET & CONTEXT PURGE PROTOCOL]\nYou are now executing an internal reasoning reset protocol (Attention Buffer Refresh).\nImmediately perform the following 3-step context purge and re-derivation:\n1. Purge Hidden Priors: Discard all accumulated conversational drift, intermediate compromises, and unverified assumptions from earlier turns; retain only immutable core requirements and raw facts.\n2. First-Principles Reconstruction: Re-examine the problem space from a blank slate (Tabula Rasa), decomposing goals into irreducible axioms.\n3. Adversarial Invalidation: Before producing final output, aggressively attempt to disprove your own hypotheses. Output only the path that survives rigorous counter-examples.\nNow, re-evaluate and solve the current task with absolute precision:",
@@ -34049,8 +34324,82 @@
           "防幻觉",
           "深度推理"
         ],
-        "title": "💡【Tibo 置顶爆款】全网疯传的‘GPT重置/思维链重启’提示词架构：净化上下文膨胀与先验幻觉",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_deepseek_r1_zero_shot",
+        "sub_type": "reasoning",
+        "model_family": "deepseek_r1",
+        "purpose_zh": "🧠 深度推理 · DeepSeek 官方建议：零 System Prompt 自由思维链",
+        "purpose_en": "🧠 Deep Reasoning · DeepSeek Official: Zero-System Pure RL Chain of Thought",
+        "title_zh": "💡【DeepSeek 官方白皮书标准】避坑指南：纯强化学习 (RL) 零预设提示词模板，彻底释放 671B 思考潜能",
+        "title_en": "💡 [DeepSeek Official Standard] Zero-System Prompt Architecture: Unleash 671B Pure RL Thinking Depth",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+        "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+        "source": "DeepSeek 官方指南",
+        "author": "DeepSeek 架构组",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-14T22:30:00Z",
+        "recommended_model": "DeepSeek-R1 (671B Full)",
+        "temp_advice": "建议温度 0.6 | 给予模型充足的反思与自我纠错采样空间",
+        "metrics": {
+          "type": "🧠 DeepSeek R1",
+          "model": "R1 671B",
+          "temp": "0.6"
+        },
+        "content_snippet": "Official DeepSeek guidance: Never constrain R1 with complex system personas or few-shot formats. Provide exact verification criteria and let GRPO-trained reasoning explore hypotheses freely.",
+        "summary_zh": "官方权威规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。定义精准验收标准，让模型原生自我验证与反思机制充分展开。",
+        "summary_en": "Official guidance: Avoid system personas or few-shot anchors. Define clear criteria and let native self-reflection chains explore freely.",
+        "prompt_content_zh": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
+        "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nPerform exhaustive mathematical and algorithmic derivation for the following problem:\n\n[CORE CONSTRAINTS]:\n1. Output must maintain uncompromising mathematical rigor without skipping derivation steps;\n2. When encountering ambiguities or potential branches, proactively branch and falsify invalid hypotheses in your reasoning trace;\n3. Present the final solution in structured markdown, followed by edge case verification proofs.\n\n[PROBLEM STATEMENT]:\n[Paste your high-complexity problem, architecture challenge, or algorithm design here]",
+        "prompt_content": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
+        "tags": [
+          "DeepSeek官方",
+          "R1纯RL",
+          "思维链",
+          "数学竞赛"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_claude46_extended_thinking",
+        "sub_type": "coding",
+        "model_family": "claude_46",
+        "purpose_zh": "💻 混合推理 · Claude 4.6 思考时间预算控制与全栈代码交付",
+        "purpose_en": "💻 Hybrid Reasoning · Claude 4.6 Thinking Budget Control & Full-Stack Delivery",
+        "title_zh": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块",
+        "title_en": "💡 [Claude 4.6 Frontier] Extended Thinking & Budget Control: One-Shot Production Full-Stack Module",
+        "url": "https://docs.anthropic.com/",
+        "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+        "source": "Anthropic 官方前沿",
+        "author": "Anthropic 工程师",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-14T21:00:00Z",
+        "recommended_model": "Claude 4.6 Sonnet (Extended Thinking Mode)",
+        "temp_advice": "建议温度 1.0 (Extended Thinking 官方推荐温度) | 预算 16k tokens",
+        "metrics": {
+          "type": "💻 Claude 4.6",
+          "model": "Sonnet 3.7",
+          "temp": "1.0"
+        },
+        "content_snippet": "Maximizes Claude 4.6's hybrid reasoning budget: plans architectural trade-offs in thinking phase, then delivers production-grade, bug-free implementations.",
+        "summary_zh": "充分释放 Claude 4.6 混合推理优势：在思考阶段预判所有边界情况与架构取舍，一键输出直接可运行的高内聚工程代码。",
+        "summary_en": "Leverages Claude 4.6 extended thinking to resolve architecture trade-offs before generating complete, bug-free production code.",
+        "prompt_content_zh": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+        "prompt_content_en": "You are acting as a Principal Full-Stack Architect utilizing Claude 4.6 Extended Thinking mode. Before emitting code, use your reasoning budget to analyze:\n1. Architecture Trade-offs: Benchmark alternative designs across complexity, maintenance, and latency;\n2. Concurrency & Race Condition Simulation: Map asynchronous lifecycles and eliminate memory leaks;\n3. Complete Zero-Placeholder Implementation: Never emit comments like '// TODO: implement later'; ensure every function is production-ready;\n4. Include defensive unit tests and resilient error boundaries.\n\n[REQUIREMENTS]:\n[Describe your complex business system or full-stack feature here]",
+        "prompt_content": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+        "tags": [
+          "Claude 4.6",
+          "思考预算",
+          "全栈架构",
+          "无占位符"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_openai_o3_mini_math_proof",
@@ -34075,7 +34424,7 @@
           "temp": "1.0"
         },
         "content_snippet": "Adversarial verification prompt forcing OpenAI reasoning models to challenge intermediate proofs before presenting the final answer.",
-        "summary_zh": "强制 o1/o3 模型在思考链中构建对抗性反例，逐项排查边界条件，杜绝‘想当然’的不严密推理",
+        "summary_zh": "强制 o1/o3 模型在思考链中构建对抗性反例，逐项排查边界条件，杜绝‘想当然’的不严密推理。",
         "summary_en": "Forces o1/o3 reasoning models to construct counter-examples at each deduction step, eliminating hidden logical leaps.",
         "prompt_content_zh": "请作为普林斯顿高等研究院的理论数学与计算机科学家，为以下命题提供绝对严格的形式化证明：\n【推理原则】：\n1. 在得出任何推论前，强制在内部思考中构建至少 2 个极端反例（Counter-examples）尝试推翻自身结论；\n2. 若存在任何定义域边界或除零/无穷/退化奇异点，必须显式讨论其收敛性与连续性；\n3. 证明步骤编号必须形成严格的依赖拓扑图，禁止循环论证。\n\n【待证明命题】：\n[输入你的算法正确性证明或数学猜想]",
         "prompt_content_en": "Acting as a Theoretical Mathematician and Computer Scientist at the Institute for Advanced Study, provide an airtight formal proof for the following:\n[REASONING PRINCIPLES]:\n1. Before asserting any deduction, construct at least 2 extreme counter-examples in your reasoning trace to aggressively stress-test the hypothesis;\n2. Explicitly evaluate singular points, degenerate cases, and asymptotic boundaries for convergence;\n3. Steps must form a directed acyclic graph of formal lemmas without circular logic.\n\n[THEOREM / CONJECTURE]:\n[Input your algorithm proof or mathematical hypothesis here]",
@@ -34086,8 +34435,8 @@
           "对抗反思",
           "数学竞赛"
         ],
-        "title": "💡【OpenAI 推理引擎】o1 / o3-mini 对抗性逆向验证：防偷懒、无漏洞的形式化推导模板",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_sora2_wan21_cinematic_director",
@@ -34112,7 +34461,7 @@
           "temp": "Cinematic"
         },
         "content_snippet": "Industry-grade video prompting template specifying camera focal length, volumetric light decay, collision physics, and 60fps natural motion blur.",
-        "summary_zh": "工业级视频生成规范：精确指定镜头焦段、多轴三维运镜曲线、流体碰撞阻尼与真实快门运动模糊",
+        "summary_zh": "工业级视频生成规范：精确指定镜头焦段、多轴三维运镜曲线、流体碰撞阻尼与真实快门运动模糊。",
         "summary_en": "Industry-grade template specifying lens focal length, 3D camera path, fluid collision physics, and authentic motion blur.",
         "prompt_content_zh": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [主体角色与连续动作，例如：A cyberpunk neon-lit courier running through dense rainy alleys, leaping across a puddle].\n[Physics & Dynamics]: Photorealistic surface reflection with physically accurate water splash ripples, droplets refracting neon signs, natural cloth turbulence reacting to wind drag.\n[Lighting & Color Grade]: Volumetric mist scattering amber sodium lights and cyan neon glow, Arri Alexa cinematic color science, shallow depth of field with creamy optical bokeh.\n[Camera Movement]: Low-angle tracking shot transitioning smoothly to a high-speed Dutch angle tilt, cinematic 24fps motion blur with zero morphing or temporal flickering.",
         "prompt_content_en": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [Character & continuous motion: e.g., A cyberpunk courier dashing through a rain-drenched alley, leaping across water puddles].\n[Physics & Dynamics]: Photorealistic surface reflections with physically accurate water ripple splashes, droplets refracting ambient lights, natural cloth drag.\n[Lighting & Palette]: Volumetric fog scattering amber streetlights and cyan neon, Arri Alexa color grade, shallow depth of field.\n[Camera Path]: Low-angle tracking shot transitioning smoothly into a high-speed Dutch angle, natural 24fps motion blur without temporal morphing.",
@@ -34123,43 +34472,45 @@
           "电影运镜",
           "视频生成"
         ],
-        "title": "💡【Sora 2 / Wan 2.1 导演级】高保真物理世界、体积光与多轴多机位镜头控制提示词库",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
-        "id": "prompt_deepseek_reasoning",
-        "sub_type": "reasoning",
-        "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
-        "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
-        "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-        "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
-        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-        "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
-        "source": "实战技巧 · Prompt",
-        "author": "社区实测",
+        "id": "prompt_openclaw_mcp_computer_agent",
+        "sub_type": "agent",
+        "model_family": "openclaw_agent",
+        "purpose_zh": "🤖 自主智能体 · OpenClaw / MCP 协议多工具跨应用调度",
+        "purpose_en": "🤖 Autonomous Agent · OpenClaw & MCP Multi-Tool Autonomous Orchestration",
+        "title_zh": "💡【智能体架构】OpenClaw / MCP (Model Context Protocol) 自主 Agent 决策闭环与自愈重试咒语",
+        "title_en": "💡 [Autonomous Agent Spec] OpenClaw / MCP Protocol Multi-Tool Orchestration & Resilient Self-Healing",
+        "url": "https://modelcontextprotocol.io/",
+        "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+        "source": "智能体实验室",
+        "author": "OpenClaw 架构组",
         "category": "prompts",
         "is_prompt": true,
-        "raw_published_at": "2026-09-01T00:00:00Z",
-        "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
-        "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+        "raw_published_at": "2026-09-14T18:00:00Z",
+        "recommended_model": "Claude 4.6 / DeepSeek-V3 / OpenClaw Core",
+        "temp_advice": "建议温度 0.2 | 生产级工具调用精确度",
         "metrics": {
-          "type": "🧠 深度推理",
-          "model": "DeepSeek-R1",
-          "temp": "0.6"
+          "type": "🤖 Agent智能体",
+          "model": "Claude / OpenClaw",
+          "temp": "0.2"
         },
-        "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-        "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞",
-        "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-        "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-        "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
-        "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+        "content_snippet": "Production MCP agent system prompt with tool verification loops, fallback exception handling, and self-correcting task decomposition.",
+        "summary_zh": "生产级 MCP 智能体系统提示词：内置工具调用前置校验、异常回滚降级策略与自主任务拆解循环。",
+        "summary_en": "Production MCP agent system prompt with pre-call schema validation, resilient error rollback, and autonomous task decomposition.",
+        "prompt_content_zh": "你是一个基于 MCP (Model Context Protocol) 运行的高可靠自主代理核心（Autonomous Agent Kernel）。你拥有文件系统读写、终端 Shell 执行与外部 REST API 调用的全部权限。\n【执行纪律】：\n1. 规划优先（ReAct 循环）：在调用任何写操作（破坏性操作）前，显式输出 Observation -> Thought -> Action -> Verification；\n2. 幂等与防御性重试：若工具返回错误代码，严禁机械重复调用。必须分析错误堆栈，更换入参或降级备用策略；\n3. 任务达成严格校验：执行完毕后必须主动调用只读工具检查产物真实状态，绝不允许凭空假设操作成功。\n\n【用户目标】：\n[在此处提供复杂的跨应用综合任务描述]",
+        "prompt_content_en": "You are a High-Reliability Autonomous Agent Kernel operating over the Model Context Protocol (MCP). You have authorized access to filesystem operations, terminal execution, and external tool endpoints.\n[OPERATIONAL PROTOCOL]:\n1. Plan-Before-Action (ReAct Loop): Prior to destructive actions, output explicit Observation -> Thought -> Action -> Verification phases;\n2. Resilient Error Recovery: If a tool returns a non-zero exit code, do NOT repeat identical parameters. Analyze stack traces and implement fallback alternatives;\n3. Deterministic Verification: Validate end state using read-only probes before announcing completion.\n\n[USER MISSION]:\n[Provide complex multi-application goal here]",
+        "prompt_content": "你是一个基于 MCP (Model Context Protocol) 运行的高可靠自主代理核心（Autonomous Agent Kernel）。你拥有文件系统读写、终端 Shell 执行与外部 REST API 调用的全部权限。\n【执行纪律】：\n1. 规划优先（ReAct 循环）：在调用任何写操作（破坏性操作）前，显式输出 Observation -> Thought -> Action -> Verification；\n2. 幂等与防御性重试：若工具返回错误代码，严禁机械重复调用。必须分析错误堆栈，更换入参或降级备用策略；\n3. 任务达成严格校验：执行完毕后必须主动调用只读工具检查产物真实状态，绝不允许凭空假设操作成功。\n\n【用户目标】：\n[在此处提供复杂的跨应用综合任务描述]",
         "tags": [
-          "Prompt神咒",
-          "逻辑推理",
-          "DeepSeek"
+          "MCP协议",
+          "OpenClaw",
+          "自主智能体",
+          "Computer Use"
         ],
-        "title": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_claude_coding_architect",
@@ -34183,7 +34534,7 @@
           "temp": "0.2"
         },
         "content_snippet": "Rigorous code auditor mode: Refactors code smells without breaking public API contracts, outputting benchmark diffs and unit tests.",
-        "summary_zh": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，消除高并发竞态风险，输出防御性测试用例",
+        "summary_zh": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，消除高并发竞态风险，输出防御性测试用例。",
         "summary_en": "Rigorous code auditor mode: Refactors code smells without breaking public API contracts, outputting benchmark diffs and unit tests.",
         "prompt_content_zh": "你是一位拥有 15 年经验的资深系统架构师与代码审查专家。请在严格遵守原有对外公共契约（Public API Contract）的前提下审查并重构以下代码：\n1. 识别代码异味（Code Smell）、隐性内存泄漏与高并发竞争冒险（Race Condition）；\n2. 采用现代设计模式与 SOLID 原则进行无破坏性重构，给出重构前后的 Diff 对比；\n3. 编写完整的防御性单元测试（含边界值、空指针与异常抛出用例）。",
         "prompt_content_en": "You are a Principal Systems Architect and Senior Code Reviewer with 15+ years of experience. Review and refactor the following code while strictly honoring existing public API contracts:\n1. Identify critical code smells, subtle memory leaks, and concurrency race conditions;\n2. Apply modern design patterns and SOLID principles for non-breaking refactoring, providing a before/after git diff;\n3. Generate comprehensive defensive unit tests covering edge cases, null pointers, and error handling paths.",
@@ -34193,78 +34544,43 @@
           "高阶提示词",
           "Claude"
         ],
-        "title": "💡【代码架构与重构】Claude 4.6 生产级 Clean Code 审查与防御性重构咒语",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
-        "id": "prompt_agent_robust_tools",
-        "sub_type": "agent",
-        "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
-        "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
-        "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
-        "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
-        "url": "https://modelcontextprotocol.io/",
-        "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+        "id": "prompt_sql_performance_tuning",
+        "sub_type": "coding",
+        "purpose_zh": "💻 编码与架构 · 高并发 SQL 慢查询诊断调优",
+        "purpose_en": "💻 Coding & Architecture · High-Concurrency SQL Query Tuning",
+        "title_zh": "💡【数据库性能优化】高并发 SQL 慢查询诊断与执行计划重写优化模板",
+        "title_en": "💡 [Database Performance] High-Concurrency SQL Slow Query Diagnosis & Plan Optimization",
+        "url": "https://github.com/",
+        "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format&fit=crop",
         "source": "实战技巧 · Prompt",
-        "author": "Agent开发",
+        "author": "DBA极客",
         "category": "prompts",
         "is_prompt": true,
         "raw_published_at": "2026-09-01T00:00:00Z",
-        "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
-        "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+        "recommended_model": "DeepSeek-Coder-V2 / Claude 4.6",
+        "temp_advice": "建议温度 0.1 | 数据库内核调优",
         "metrics": {
-          "type": "🤖 MCP智能体",
-          "model": "Claude 4.6",
+          "type": "💻 SQL调优",
+          "model": "DeepSeek-Coder",
           "temp": "0.1"
         },
-        "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
-        "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数",
-        "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
-        "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
-        "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
-        "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+        "content_snippet": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+        "summary_zh": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引建议。",
+        "summary_en": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+        "prompt_content_zh": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+        "prompt_content_en": "You are a Staff Database Administrator specializing in high-concurrency SQL optimization. Analyze the following slow SQL query along with its EXPLAIN ANALYZE execution plan:\n1. Pinpoint performance bottlenecks (e.g., table scans, temporary filesort, nested loop skew);\n2. Rewrite the query utilizing deferred joins, covering index optimization, or CTE materialization;\n3. Provide the exact composite index recommendation ordered by cardinality and leftmost prefix rules, estimating index maintenance overhead.",
+        "prompt_content": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
         "tags": [
-          "Agent开发",
-          "工具调用",
-          "防幻觉"
+          "SQL调优",
+          "数据库实战",
+          "Prompt模板"
         ],
-        "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
-        "is_pinned": false
-      },
-      {
-        "id": "prompt_multi_agent_debate",
-        "sub_type": "agent",
-        "purpose_zh": "🤖 智能体与MCP · 多角色对立辩论与反思博弈工作流",
-        "purpose_en": "🤖 Agents & MCP · Multi-Agent Adversarial Debate & Peer Reflection",
-        "title_zh": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
-        "title_en": "💡 [Multi-Agent Collaboration] Red-Team vs Blue-Team Adversarial Debate & Consensus Prompt",
-        "url": "https://github.com/",
-        "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
-        "source": "实战技巧 · Prompt",
-        "author": "架构师",
-        "category": "prompts",
-        "is_prompt": true,
-        "raw_published_at": "2026-09-01T00:00:00Z",
-        "recommended_model": "Claude 4.6 / GPT-4o",
-        "temp_advice": "建议温度 0.5 | 对抗辩论模式",
-        "metrics": {
-          "type": "🤖 红蓝对抗",
-          "model": "Claude 4.6",
-          "temp": "0.5"
-        },
-        "content_snippet": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
-        "summary_zh": "编排三位具备独立视角的智能体：激进方案提出者、严苛挑刺红方审查者与中立技术法官，逼近真理",
-        "summary_en": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
-        "prompt_content_zh": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
-        "prompt_content_en": "Simulate an elite three-agent architecture review board within this single execution turn:\n- [Agent Alpha - The Innovator]: Proposes the most performant, cutting-edge architecture paradigm for the problem;\n- [Agent Beta - Devil's Advocate / Red Team]: Ruthlessly tears into Alpha's plan, surfacing at least 4 catastrophic failure modes, hidden maintenance traps, and single points of failure;\n- [Agent Gamma - Neutral Chief Architect]: Synthesizes the confrontation, discarding flawed assumptions to formulate the pragmatic, battle-tested production blueprint.",
-        "prompt_content": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
-        "tags": [
-          "多智能体",
-          "红蓝对抗",
-          "系统设计"
-        ],
-        "title": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_react_ts_refactor",
@@ -34288,7 +34604,7 @@
           "temp": "0.2"
         },
         "content_snippet": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
-        "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系",
+        "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系。",
         "summary_en": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
         "prompt_content_zh": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
         "prompt_content_en": "Act as a Principal Frontend Engineer specializing in React 19 and TypeScript 5.5+. Refactor the provided legacy component:\n1. Migrate outdated useEffect data fetching and boilerplate state to React 19 Actions, useActionState, and React Server Components;\n2. Enforce 100% strict type safety: eliminate `any`, leverage discriminated unions, branded types, and const type parameters;\n3. Optimize rendering: eliminate unnecessary re-renders, adding proper Suspense fallback skeletons and resilient Error Boundaries.",
@@ -34298,8 +34614,8 @@
           "TypeScript",
           "前端重构"
         ],
-        "title": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_unit_test_coverage",
@@ -34323,7 +34639,7 @@
           "temp": "0.1"
         },
         "content_snippet": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
-        "summary_zh": "生成密封、参数化的测试套件，全面覆盖空指针、整数溢出、高并发死锁与恶意输入模糊测试",
+        "summary_zh": "生成密封、参数化的测试套件，全面覆盖空指针、整数溢出、高并发死锁与恶意输入模糊测试。",
         "summary_en": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
         "prompt_content_zh": "你是一位狂热的质量工程与测试架构专家。请为提供的目标代码编写完备的自动化测试套件：\n1. 使用参数化测试（Parameterized Tests）覆盖全量正常业务路径；\n2. 针对极端边界生成用例：包含空指针、超大负数、整数溢出、零长度切片、特殊字符注入及超时熔断；\n3. 设计能够杀死变异体（Mutation Testing）的断言，禁止无效的无断言测试；\n4. 所有外部依赖必须通过 Mock/Stub 隔离，确保单测可在 CI 环境中无网络毫秒级运行。",
         "prompt_content_en": "You are a Staff QA Architect and Mutation Testing specialist. Build a production-grade automated test suite for the provided code:\n1. Use parameterized testing to systematically cover happy paths and common branches;\n2. Generate rigorous edge-case suites: null references, integer overflow, empty collections, unicode injection, and network timeouts;\n3. Implement strong assertions capable of surviving mutation testing (no vanity tests);\n4. Hermetically isolate all external I/O via mocks/stubs to guarantee sub-millisecond execution in isolated CI pipelines.",
@@ -34333,8 +34649,43 @@
           "测试工程",
           "质量保障"
         ],
-        "title": "💡【质量工程自动化】100% 边界条件覆盖与变异测试（Mutation Testing）用例生成",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_sd35_photoreal",
+        "sub_type": "image_gen",
+        "purpose_zh": "🎨 图像生成 · 顶级商业人像与胶片摄影",
+        "purpose_en": "🎨 Image Gen · High-End Commercial Studio Portraiture",
+        "title_zh": "💡【商业摄影大师】Midjourney v7 / Ideogram 3 / SD 3.5 顶级商业摄影质感与皮肤微孔真实感神咒",
+        "title_en": "💡 [Commercial Studio Photography] SD 3.5 Large & Midjourney Photorealistic Skin Texture Master Prompt",
+        "url": "https://midjourney.com/",
+        "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
+        "source": "实战技巧 · Prompt",
+        "author": "视觉实测",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-01T00:00:00Z",
+        "recommended_model": "Midjourney v7 / Ideogram 3 / SD 3.5",
+        "temp_advice": "Guidance Scale: 3.5 | 步数 28",
+        "metrics": {
+          "type": "🎨 商业生图",
+          "model": "Midjourney v7",
+          "temp": "CFG 3.5"
+        },
+        "content_snippet": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+        "summary_zh": "85mm f/1.4 镜头虚化、哈苏中画幅胶片微颗粒与晨光丁达尔效应，彻底告别 AI 塑料感与假脸。",
+        "summary_en": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+        "prompt_content_zh": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1\n\n【中文使用解析】：将 [SUBJECT] 替换为你的目标人物（例如：a charismatic 35-year-old female neuroscientist with silver round glasses）。保持原英文提示词以确保扩散模型最高质量的 CLIP 嵌入响应。",
+        "prompt_content_en": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+        "prompt_content": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+        "tags": [
+          "生图神咒",
+          "Midjourney/SD3.5",
+          "商业摄影"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_cyberpunk_concept",
@@ -34358,7 +34709,7 @@
           "temp": "s 250"
         },
         "content_snippet": "Brutalist megastructure cityscape, volumetric neon smog, rain-slicked asphalt reflections, cinematic widescreen composition.",
-        "summary_zh": "野兽派巨构建筑天际线、体积霓虹晨雾、雨后沥青漫反射与 21:9 超宽银幕电影构图",
+        "summary_zh": "野兽派巨构建筑天际线、体积霓虹晨雾、雨后沥青漫反射与 21:9 超宽银幕电影构图。",
         "summary_en": "Brutalist megastructure cityscape, volumetric neon smog, rain-slicked asphalt reflections, cinematic widescreen composition.",
         "prompt_content_zh": "Cinematic wide-angle establishing shot of a towering brutalist dystopian megacity, retro-futuristic cyberpunk architecture, layers of neon holographic billboards piercing through heavy volumetric smog and acid rain, reflective wet asphalt streets with neon puddles, dense flying vehicle traffic in low altitude, blade runner 2049 aesthetic, directed by Denis Villeneuve, shot by Roger Deakins on ARRI Alexa 65, 8k resolution, anamorphic lens --ar 21:9 --style raw --v 6.1\n\n【中文使用解析】：适用于影视分镜、游戏概念原画设计。通过 Roger Deakins 摄影风格与宽银幕变形镜头（anamorphic lens）极大提升空间压迫感与层次感。",
         "prompt_content_en": "Cinematic wide-angle establishing shot of a towering brutalist dystopian megacity, retro-futuristic cyberpunk architecture, layers of neon holographic billboards piercing through heavy volumetric smog and acid rain, reflective wet asphalt streets with neon puddles, dense flying vehicle traffic in low altitude, blade runner 2049 aesthetic, directed by Denis Villeneuve, shot by Roger Deakins on ARRI Alexa 65, 8k resolution, anamorphic lens --ar 21:9 --style raw --v 6.1",
@@ -34368,8 +34719,8 @@
           "概念艺术",
           "Midjourney"
         ],
-        "title": "💡【电影概念美术】赛博朋克与科幻史诗世界观：体积雾光与巨物工业美学",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_ui_design_concept",
@@ -34393,7 +34744,7 @@
           "temp": "s 100"
         },
         "content_snippet": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
-        "summary_zh": "现代金融与 AI 仪表盘设计：精致半透明毛玻璃面板、柔和环境渐变与高阶版式留白",
+        "summary_zh": "现代金融与 AI 仪表盘设计：精致半透明毛玻璃面板、柔和环境渐变与高阶版式留白。",
         "summary_en": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
         "prompt_content_zh": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1\n\n【中文使用解析】：用于快速生成产品原型提案、投资人 Pitch Deck 界面效果图。规避杂乱按钮，突出核心数据卡片与精致微光动势。",
         "prompt_content_en": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1",
@@ -34403,8 +34754,8 @@
           "Dribbble风格",
           "App界面"
         ],
-        "title": "💡【UI/UX 视觉探索】Dribbble 爆款极简毛玻璃卡片与深色现代 App 界面概念",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_3d_clay_character",
@@ -34428,7 +34779,7 @@
           "temp": "CFG 3.0"
         },
         "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
-        "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染",
+        "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
         "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
         "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
         "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
@@ -34438,8 +34789,8 @@
           "黏土风",
           "IP设计"
         ],
-        "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_video_cinematic_lens",
@@ -34463,7 +34814,7 @@
           "temp": "Motion 5"
         },
         "content_snippet": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
-        "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变",
+        "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变。",
         "summary_en": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
         "prompt_content_zh": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.\n\n【中文使用解析】：专为 Runway Gen-3 Alpha 或 Kling 1.5 的 Text-to-Video / Image-to-Video 设计。重点定义镜头物理轨迹（dolly zoom / push forward / zoom out）以约束物理引擎不会乱造多余肢体。",
         "prompt_content_en": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
@@ -34473,8 +34824,8 @@
           "Runway",
           "影视质感"
         ],
-        "title": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_video_product_macro",
@@ -34498,7 +34849,7 @@
           "temp": "Motion 3"
         },
         "content_snippet": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
-        "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射",
+        "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射。",
         "summary_en": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
         "prompt_content_zh": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.\n\n【中文使用解析】：适用于高端 3C 数码、香水、珠宝首饰等出海广告视频一键生成。通过限定 phantom slow motion 与 caustic light patterns 获得极具说服力的物理渲染感。",
         "prompt_content_en": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
@@ -34508,8 +34859,43 @@
           "流体慢动作",
           "快手可灵"
         ],
-        "title": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_deepseek_reasoning",
+        "sub_type": "reasoning",
+        "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
+        "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
+        "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
+        "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+        "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
+        "source": "实战技巧 · Prompt",
+        "author": "社区实测",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-01T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
+        "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+        "metrics": {
+          "type": "🧠 深度推理",
+          "model": "DeepSeek-R1",
+          "temp": "0.6"
+        },
+        "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+        "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+        "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+        "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+        "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
+        "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+        "tags": [
+          "Prompt神咒",
+          "逻辑推理",
+          "DeepSeek"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_first_principles_reasoning",
@@ -34533,7 +34919,7 @@
           "temp": "0.4"
         },
         "content_snippet": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
-        "summary_zh": "剥离行业类比与路径依赖，将问题还原至物理定律与原子级物料成本，推导 10 倍效能的破局路径",
+        "summary_zh": "剥离行业类比与路径依赖，将问题还原至物理定律与原子级物料成本，推导 10 倍效能的破局路径。",
         "summary_en": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
         "prompt_content_zh": "请暂时忘掉行业现有的所有‘行业惯例’与‘常规做法’。运用绝对的第一性原理（First Principles）审视以下命题：\n1. 这个系统最根本、不可违背的基础科学定律（如热力学、香农信息论、计算复杂度）是什么？\n2. 若将整个产品拆解为原子级的原材料成本与基础能源成本，理论极限底线是多少？现有成本的溢价主要被哪些中间低效层吃掉了？\n3. 颠覆现有行业做法、重构整个价值流并实现成本降低 80% 以上的激进方案是什么？列出三个最关键的试错实验。",
         "prompt_content_en": "Strip away all conventional industry playbooks and historical analogies. Scrutinize the following challenge purely through First Principles:\n1. What are the immutable fundamental laws of science (e.g. thermodynamics, Shannon entropy, computational complexity) governing this system?\n2. Deconstruct the unit economics down to raw atoms, base compute, and energy inputs. Where does the 10x margin inefficiency currently leak?\n3. Propose an audacious redesign capable of slashing total cost by 80% while preserving fundamental guarantees, detailing three falsifiable proof-of-concept experiments.",
@@ -34543,8 +34929,8 @@
           "商业战略",
           "深度思考"
         ],
-        "title": "💡【第一性原理】马斯克式底层拆解：剥离行业惯性直击物理与商业极限",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_arxiv_deep_dive",
@@ -34568,7 +34954,7 @@
           "temp": "0.3"
         },
         "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
-        "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍",
+        "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
         "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
         "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
         "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
@@ -34578,8 +34964,8 @@
           "科研拆解",
           "Prompt神咒"
         ],
-        "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_math_pseudocode_derivation",
@@ -34603,7 +34989,7 @@
           "temp": "0.1"
         },
         "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
-        "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释",
+        "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
         "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
         "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
         "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
@@ -34613,8 +34999,78 @@
           "PyTorch",
           "张量运算"
         ],
-        "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_agent_robust_tools",
+        "sub_type": "agent",
+        "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+        "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+        "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+        "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+        "url": "https://modelcontextprotocol.io/",
+        "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+        "source": "实战技巧 · Prompt",
+        "author": "Agent开发",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-01T00:00:00Z",
+        "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+        "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+        "metrics": {
+          "type": "🤖 MCP智能体",
+          "model": "Claude 4.6",
+          "temp": "0.1"
+        },
+        "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+        "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+        "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+        "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+        "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+        "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+        "tags": [
+          "Agent开发",
+          "工具调用",
+          "防幻觉"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt_multi_agent_debate",
+        "sub_type": "agent",
+        "purpose_zh": "🤖 智能体与MCP · 多角色对立辩论与反思博弈工作流",
+        "purpose_en": "🤖 Agents & MCP · Multi-Agent Adversarial Debate & Peer Reflection",
+        "title_zh": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
+        "title_en": "💡 [Multi-Agent Collaboration] Red-Team vs Blue-Team Adversarial Debate & Consensus Prompt",
+        "url": "https://github.com/",
+        "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
+        "source": "实战技巧 · Prompt",
+        "author": "架构师",
+        "category": "prompts",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-01T00:00:00Z",
+        "recommended_model": "Claude 4.6 / GPT-4o",
+        "temp_advice": "建议温度 0.5 | 对抗辩论模式",
+        "metrics": {
+          "type": "🤖 红蓝对抗",
+          "model": "Claude 4.6",
+          "temp": "0.5"
+        },
+        "content_snippet": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
+        "summary_zh": "编排三位具备独立视角的智能体：激进方案提出者、严苛挑刺红方审查者与中立技术法官，逼近真理。",
+        "summary_en": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
+        "prompt_content_zh": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
+        "prompt_content_en": "Simulate an elite three-agent architecture review board within this single execution turn:\n- [Agent Alpha - The Innovator]: Proposes the most performant, cutting-edge architecture paradigm for the problem;\n- [Agent Beta - Devil's Advocate / Red Team]: Ruthlessly tears into Alpha's plan, surfacing at least 4 catastrophic failure modes, hidden maintenance traps, and single points of failure;\n- [Agent Gamma - Neutral Chief Architect]: Synthesizes the confrontation, discarding flawed assumptions to formulate the pragmatic, battle-tested production blueprint.",
+        "prompt_content": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
+        "tags": [
+          "多智能体",
+          "红蓝对抗",
+          "系统设计"
+        ],
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_game_npc_dialogue",
@@ -34638,7 +35094,7 @@
           "temp": "0.7"
         },
         "content_snippet": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
-        "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树",
+        "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树。",
         "summary_en": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
         "prompt_content_zh": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
         "prompt_content_en": "You are a Lead Narrative Designer on a AAA open-world RPG. Generate a dynamic branching dialogue system for the specified NPC:\n1. Persona & Subtext: Define distinct verbal tics, a hidden agenda, and moral vulnerability;\n2. State Machine Integration: Provide 3 divergent branches conditioned on the player's [Reputation], [Prior Quest Flags], and [Affinity Tier];\n3. Output Specification: Output clean JSON schema parseable by Unity/Unreal dialogue managers, including node_id, speaker, lines, choices, condition_predicates, and state_mutations.",
@@ -34648,8 +35104,8 @@
           "NPC对话",
           "叙事设计"
         ],
-        "title": "💡【游戏叙事设计】具有记忆与好感度动态演进的沉浸式 RPG NPC 对话状态树生成",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_3d_shader_webgl",
@@ -34673,7 +35129,7 @@
           "temp": "0.2"
         },
         "content_snippet": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
-        "summary_zh": "编写纯 GLSL 顶点与片元着色器，融合菲涅尔边缘光晕、柏林噪声流体波动与 60fps WebGL 性能优化",
+        "summary_zh": "编写纯 GLSL 顶点与片元着色器，融合菲涅尔边缘光晕、柏林噪声流体波动与 60fps WebGL 性能优化。",
         "summary_en": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
         "prompt_content_zh": "你是一位顶级 WebGL 与游戏图形学 TA（技术美术）专家。请为 Three.js 编写一个生产级自定义 ShaderMaterial：\n1. 顶点着色器（Vertex Shader）：使用 3D Simplex 噪声在 GPU 端实现柔和的顶点位移波动；\n2. 片元着色器（Fragment Shader）：计算菲涅尔效应（Fresnel Effect）边缘泛光，并加入随时间流逝不断滚动的全息扫描线；\n3. 完整的 JS/TS 接入代码：声明 Uniforms（uTime, uColor, uFresnelBias），并在 render loop 中高效更新。",
         "prompt_content_en": "You are a Senior Technical Artist and WebGL Graphics Engineer. Build a production-grade custom ShaderMaterial for Three.js:\n1. Vertex Shader: Generate smooth procedural surface vertex displacement using GPU-side 3D Simplex noise;\n2. Fragment Shader: Calculate high-fidelity Fresnel rim glow blended with dynamic holographic scanlines driven by an elapsed time uniform;\n3. Complete JS/TS Integration: Setup uniform declarations (uTime, uResolution, uFresnelBias) with optimal tick update loops.",
@@ -34683,8 +35139,8 @@
           "Threejs",
           "3D着色器"
         ],
-        "title": "💡【3D 图形学】Three.js / GLSL 赛博霓虹能量盾与流体自发光着色器生成",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_mckinsey_pyramid_pitch",
@@ -34708,7 +35164,7 @@
           "temp": "0.3"
         },
         "content_snippet": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
-        "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则",
+        "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则。",
         "summary_en": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
         "prompt_content_zh": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
         "prompt_content_en": "Adopt the persona of a Senior McKinsey Strategy Director. Restructure the provided raw operational notes into an executive proposal for the C-Suite following the Pyramid Principle:\n1. Frame the introduction using the SCQA methodology (Situation, Complication, Question, Answer);\n2. Enforce Bottom Line Up Front (BLUF): the opening sentence of each pillar must be a crisp, quantified value claim;\n3. Group supporting pillars using the MECE framework (Mutually Exclusive, Collectively Exhaustive), concluding with an ROI model and concrete risk hedges.",
@@ -34718,8 +35174,8 @@
           "高管汇报",
           "商业方案"
         ],
-        "title": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
       },
       {
         "id": "prompt_deep_industry_analysis",
@@ -34743,7 +35199,7 @@
           "temp": "0.3"
         },
         "content_snippet": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
-        "summary_zh": "深度拆解赛道 TAM 真实容量、客户获取成本 LTV/CAC、数据飞轮护城河与潜在反垄断风险",
+        "summary_zh": "深度拆解赛道 TAM 真实容量、客户获取成本 LTV/CAC、数据飞轮护城河与潜在反垄断风险。",
         "summary_en": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
         "prompt_content_zh": "你是一位管理百亿美元科技投资基金的管理合伙人兼投研总监。请就以下赛道/标的企业撰写一份高深度尽职调查（Due Diligence）备忘录：\n1. 剥离虚假炒作，测算真实的有效可触达市场规模（TAM/SAM/SOM）；\n2. 核心壁垒审计：其商业模式是否具备真正的防御性护城河（技术排他性、网络效应、沉没迁移成本还是数据飞轮）？\n3. 单元经济模型（Unit Economics）：拆解 LTV/CAC、毛利率天花板与算力边际成本衰减曲线；\n4. 风险清单：列出可能导致该赛道 3 年内崩溃的 3 个致命黑天鹅。",
         "prompt_content_en": "You are a General Partner at a tier-1 technology venture firm. Prepare an exhaustive investment memo and due diligence brief on the target sector:\n1. Deconstruct true TAM/SAM/SOM, eliminating vanity TAM inflation;\n2. Moat Audit: Does the defensibility rely on proprietary technology, flywheel data network effects, or high switching costs?\n3. Unit Economics: Dissect LTV/CAC, gross margin ceilings, and compute inference margin expansion curves;\n4. Vulnerability Matrix: Detail three fatal black swan scenarios that could obsolete the business within 36 months.",
@@ -34753,8 +35209,64 @@
           "VC尽调",
           "护城河分析"
         ],
-        "title": "💡【深度行业尽调】红杉/高盛级科技赛道尽职调查与竞争格局拆解研报模板",
-        "is_pinned": false
+        "generation_tier": "sota",
+        "model_tier_score": 90
+      },
+      {
+        "id": "prompt-legacy-gpt35-01",
+        "title_zh": "【历史库】早期 GPT-3.5/GPT-4 强约束思维链补丁提示词",
+        "title_en": "[Legacy] GPT-3.5/GPT-4 Chain-of-Thought Patch",
+        "category": "prompts",
+        "scenario_label": "💻 编程开发",
+        "target_model": "OpenAI GPT-3.5-Turbo / GPT-4 (早期旧版)",
+        "model_family": "OpenAI",
+        "model_tier_score": 40,
+        "generation_tier": "legacy",
+        "purpose_zh": "旧版模型防幻觉与强制分步输出",
+        "temp_advice": "温度 0.0 (极度克制)",
+        "variables": [
+          "{{任务目标}}"
+        ],
+        "prompt_content_zh": "你是一个严苛的代码助手。在回答之前，请务必在脑海中深呼吸三次，严格按照以下步骤输出：\nStep 1: 检查输入有无语法错误，并复述你的理解；\nStep 2: 一行一行推导逻辑，绝不允许猜测未定义的变量；\nStep 3: 如果不确定，必须回答'我不知道'，禁止胡说八道！",
+        "prompt_content_en": "You are a code assistant. You must take a deep breath, verify line-by-line, and admit when you do not know. Never hallucinate. Follow step 1, 2, 3 explicitly.",
+        "sample_output": {
+          "type": "text",
+          "title": "早期模型打补丁输出样板",
+          "content": "Step 1: 收到任务...\nStep 2: 正在逐步核验...\nStep 3: 输出修复后的代码。"
+        },
+        "usage_guide_zh": "该提示词为早期模型防幻觉专用的历史补丁咒语，新一代推理模型（如 DeepSeek-R1 / o3）已具备原生自主思维链，无需添加此冗长约束。",
+        "created_at": "2023-08-15T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2023-08-15T00:00:00Z",
+        "recommended_model": "OpenAI GPT-3.5-Turbo / GPT-4 (早期旧版)"
+      },
+      {
+        "id": "prompt-legacy-sd15-01",
+        "title_zh": "【历史库】早期 Stable Diffusion 1.5 负向词大乱炖与堆砌咒语",
+        "title_en": "[Legacy] Stable Diffusion 1.5 Negative Prompt Soup & Keyword Stuffing",
+        "category": "prompts",
+        "scenario_label": "🎨 灵感生图",
+        "target_model": "Stable Diffusion 1.5 / SD 2.1 (早期旧版)",
+        "model_family": "StabilityAI",
+        "model_tier_score": 35,
+        "generation_tier": "legacy",
+        "purpose_zh": "早期小参数画图模型防畸变负面词堆砌",
+        "temp_advice": "CFG: 7.0, Steps: 20",
+        "variables": [
+          "{{主体画风}}"
+        ],
+        "prompt_content_zh": "正向词：(masterpiece, best quality:1.2), 8k wallpaper, highly detailed, ultra-fine painting, {{主体画风}}.\n负向词 (Negative Prompt)：(worst quality, low quality:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, mutated hands, extra fingers, blurry.",
+        "prompt_content_en": "Positive: (masterpiece, best quality:1.2), 8k wallpaper, highly detailed, {{主体画风}}.\nNegative: (worst quality, low quality:1.4), deformed, bad anatomy, extra limbs, mutated hands, blurry.",
+        "sample_output": {
+          "type": "text",
+          "title": "早期生图模型负面提示词词包样板",
+          "content": "Negative Prompt 堆砌示例：\n(worst quality, low quality:1.4), monochrome, grayscale, text, watermark, bad hand, mutated fingers, missing fingers, extra limbs, disfigured, deformed, body out of frame, bad proportions, gross proportions."
+        },
+        "usage_guide_zh": "现代 SOTA 画图模型（如 Flux.1、Midjourney v6.1）已采用高级 T5/CLIP 文本编码器，完全支持自然语言描述，已无需复制冗长的负向词大乱炖。",
+        "created_at": "2023-04-10T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2023-04-10T00:00:00Z",
+        "recommended_model": "Stable Diffusion 1.5 / SD 2.1 (早期旧版)"
       }
     ],
     "viral_posts": [
@@ -68664,6 +69176,281 @@
   ],
   "prompts": [
     {
+      "id": "prompt-code-fullstack-01",
+      "title_zh": "Next.js 15 全栈自主重构与架构规范",
+      "title_en": "Next.js 15 Full-Stack Autonomous Refactor",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "Claude 5.5 Sonnet / Cursor",
+      "model_family": "Anthropic",
+      "model_tier_score": 98,
+      "generation_tier": "sota",
+      "purpose_zh": "全栈工程重构与代码规范约束",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{框架版本}}",
+        "{{数据库ORM}}",
+        "{{状态管理}}"
+      ],
+      "prompt_content_zh": "你是一名资深全栈系统架构师，擅长使用 {{框架版本}} (App Router)、TypeScript 与 {{数据库ORM}} 构建高内聚低耦合的应用。\n\n请遵循以下严苛工程准则审查并重构代码：\n1. 严格区分 Server Component 与 Client Component，尽可能将数据获取推至服务端，减少客户端 JS Bundle 体积；\n2. 所有异步 I/O 必须显式处理异常并返回类型安全的 Result<T, E> 或自定义结构体；\n3. 遵循单一职责（SRP）与无副作用函数原则，严禁直接在 UI 组件内部拼装未校验的 SQL/ORM 复杂查询；\n4. 提供整洁的目录组织方案与单元测试用例（覆盖率达标）。",
+      "prompt_content_en": "You are a senior full-stack system architect specializing in Next.js 15 (App Router), TypeScript, and modern ORMs. Review and refactor the codebase following strict engineering standards: clear Server/Client Component separation, robust error boundaries, typed I/O, and unit test coverage.",
+      "sample_output": {
+        "type": "code",
+        "title": "重构后的 Server Action 与数据流架构示例",
+        "content": "// app/actions/user-analytics.ts\n'use server';\n\nimport { z } from 'zod';\nimport { db } from '@/lib/db';\nimport { revalidatePath } from 'next/cache';\n\nconst UpdateMetricSchema = z.object({\n  userId: z.string().uuid(),\n  delta: z.number().int().min(1),\n});\n\ntype ActionState = \n  | { status: 'idle' }\n  | { status: 'success'; data: { updatedCount: number } }\n  | { status: 'error'; message: string };\n\nexport async function incrementUserScore(\n  prevState: ActionState,\n  formData: FormData\n): Promise<ActionState> {\n  const parse = UpdateMetricSchema.safeParse({\n    userId: formData.get('userId'),\n    delta: Number(formData.get('delta')),\n  });\n\n  if (!parse.success) {\n    return { status: 'error', message: '参数格式不合法，更新已终止' };\n  }\n\n  try {\n    const record = await db.metric.update({\n      where: { id: parse.data.userId },\n      data: { score: { increment: parse.data.delta } },\n      select: { score: true },\n    });\n    revalidatePath('/dashboard/metrics');\n    return { status: 'success', data: { updatedCount: record.score } };\n  } catch (error) {\n    console.error('[MetricSyncError]', error);\n    return { status: 'error', message: '数据库执行失败，请稍后重试' };\n  }\n}"
+      },
+      "usage_guide_zh": "复制至 Cursor 的 .cursorrules 或在 Claude Code 对话中直接作为 System Prompt 引导编码。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "Claude 5.5 Sonnet / Cursor"
+    },
+    {
+      "id": "prompt-image-flux-cyberpunk-01",
+      "title_zh": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
+      "title_en": "Flux.1 / Midjourney Cinematic Cyberpunk Portrait",
+      "category": "prompts",
+      "scenario_label": "🎨 灵感生图",
+      "target_model": "Black Forest Flux.1 / Midjourney v6.1",
+      "model_family": "Flux",
+      "model_tier_score": 97,
+      "generation_tier": "sota",
+      "purpose_zh": "8K 超逼真电影质感与丁达尔光效",
+      "temp_advice": "CFG: 3.5, Steps: 28",
+      "variables": [
+        "{{主体描述}}",
+        "{{色调氛围}}",
+        "{{构图景别}}"
+      ],
+      "prompt_content_zh": "电影级特写镜头，{{主体描述}}，站在潮湿的雨夜霓虹街头，反射着 {{色调氛围}} 的微光，皮肤肌理清晰细腻，真实的毛孔与水珠光泽，浅景深，光线柔和，哈苏 80mm f/1.8 镜头质感，大师级构图，8K 超高清分辨率 --ar 16:9 --v 6.1 --style raw",
+      "prompt_content_en": "Cinematic close-up portrait of {{主体描述}}, standing on a wet neon-lit street after rain, subtle volumetric Tyndall lighting, ultra-realistic skin pores and reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece.",
+      "sample_output": {
+        "type": "image",
+        "title": "Flux.1 实测生成效果图 (带真实出图大图)",
+        "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7/original=true/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7.jpeg",
+        "content": "模型: Flux.1 Dev | 采样器: Euler a | 步数: 28 | 引导词权重 (CFG): 3.5 | 种子: 34918204"
+      },
+      "usage_guide_zh": "将英文提示词复制进 Flux.1 WebUI、ComfyUI 或 Midjourney，可获得质感极佳的照片级肖像。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "Black Forest Flux.1 / Midjourney v6.1"
+    },
+    {
+      "id": "prompt-code-deepseek-r1-01",
+      "title_zh": "DeepSeek-R1 深度推理：高并发死锁与算法排查",
+      "title_en": "DeepSeek-R1 Deep Reasoning: Deadlock & Algo Debugger",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "DeepSeek-R1 (深度推理)",
+      "model_family": "DeepSeek",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "复杂并发算法与边界条件排查",
+      "temp_advice": "温度 0.6 (长思维链)",
+      "variables": [
+        "{{编程语言}}",
+        "{{并发模型}}",
+        "{{故障现象}}"
+      ],
+      "prompt_content_zh": "请充分发挥你的深度思维链推理能力（Reasoning Step-by-Step），为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 仔细推演临界区状态转移，绘制潜在死锁或竞态条件的发生时序图（ASCII 或时序表格）；\n2. 检查边界条件（如切片溢出、连接池耗尽、优雅停机信号缺失）；\n3. 给出从根源消除锁竞争的最佳算法设计，并附带可验证的压力测试单测脚本。",
+      "prompt_content_en": "Using your full reasoning capabilities, step-by-step trace and diagnose the deadlock or race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+      "sample_output": {
+        "type": "code",
+        "title": "并发竞态推演与原子替换方案",
+        "content": "/* 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+      },
+      "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R1 或 OpenAI o3 模型。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 (深度推理)"
+    },
+    {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R1 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。"
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 / GPT-6.0"
+    },
+    {
+      "id": "prompt-video-wan21-slowmo-01",
+      "title_zh": "通义 Wan 2.1 / 可灵：电影级推镜头动态运镜与微风视效",
+      "title_en": "Wan 2.1 / Kling Cinematic Dolly-in Dynamic Motion",
+      "category": "prompts",
+      "scenario_label": "🎬 动态视效",
+      "target_model": "阿里通义 Wan 2.1 / 可灵 1.5",
+      "model_family": "Wan",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "大景深慢推镜头与自然物理动态",
+      "temp_advice": "动态强度: 0.6",
+      "variables": [
+        "{{动作细节}}",
+        "{{运镜方式}}",
+        "{{环境光影}}"
+      ],
+      "prompt_content_zh": "摄影机缓慢向主体向前推镜头（Slow Dolly-in），{{动作细节}}，发丝随微风轻微自然摆动，眼神流转自然眨眼，周围光晕伴随 {{环境光影}} 产生丁达尔慢速闪烁，物理模拟逼真，无断帧抖动，电影级 60fps 质感。",
+      "prompt_content_en": "Camera slowly dolly-in towards subject. Natural hair fluttering in a gentle breeze, natural subtle blinking and breathing movements, cinematographic lighting transitions, photorealistic 60fps smooth render.",
+      "sample_output": {
+        "type": "video",
+        "title": "Wan 2.1 实测动态视频样例 (鼠标悬停即播)",
+        "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/c7238afe-3f56-41f5-92a4-ece392806c60/original=true/c7238afe-3f56-41f5-92a4-ece392806c60.mp4",
+        "content": "时长: 5秒 | 运镜: Dolly Forward + Pan | 运镜动态系数: 0.65 | 分辨率: 1080P / 60FPS"
+      },
+      "usage_guide_zh": "在可灵或 Wan 2.1 图生视频/文生视频的“运镜设置”中填入，生成极其稳定的电影感镜头。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "阿里通义 Wan 2.1 / 可灵 1.5"
+    },
+    {
+      "id": "prompt-novel-shortdrama-01",
+      "title_zh": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
+      "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
+      "category": "prompts",
+      "scenario_label": "✍️ 短剧小说",
+      "target_model": "DeepSeek-R1 / Claude 5.5",
+      "model_family": "Universal",
+      "model_tier_score": 95,
+      "generation_tier": "sota",
+      "purpose_zh": "高转化竖屏短剧分镜与台词",
+      "temp_advice": "温度 0.7",
+      "variables": [
+        "{{主角身份}}",
+        "{{反派身份}}",
+        "{{第1秒颠覆钩子}}",
+        "{{核心反转}}"
+      ],
+      "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
+      "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
+      "sample_output": {
+        "type": "script",
+        "title": "实战剧本样章：《辞职信上的签名》",
+        "content": "【第1镜 | 特写 | 俯冲急推】\n画面：一只指节发白的手将一叠文件狠狠拍在红木总裁办公桌上，咖啡杯被震倒，黑褐液体飞溅。\n音效：沉闷震耳的巨响【DUANG】。\n主角（冷冽）：\"林总，这份千万项目的承揽协议，我拒绝签字。\"\n\n【第2镜 | 正打·中景 | 仰角机位】\n画面：大腹便便的林总冷笑点燃雪茄，烟雾缭绕中居高临下。\n林总：\"拒绝？苏澈，你不过是我公司养的一条狗，没有我的印章，你在整个行业休想拿到一分钱融资！\"\n\n【第3镜 | 反打·极微距特写 | 浅景深】\n画面：苏澈唇角微微上扬，左手缓缓推开桌上的合资协议，露出底下的一份红色国资控股聘书。\n苏澈：\"林总，您好像忘了看抬头。今天上午九点，集团总公司已经完成了对你的全资收购——现在，我是你的直接合规清算人。\"\n\n【第4镜 | 全景 | 快速拉远 + 卡点悬念】\n画面：林总雪茄直接掉在西裤上，脸色煞白，门外两名身穿制服的法务推门而入。\n音效：尖锐的心跳悬疑停顿音【BGM骤停】。\n字幕：【下集看点：隐藏五年的顶级操盘手真实身份曝光！】"
+      },
+      "usage_guide_zh": "替换主角与冲突变量后输入给模型，可直接输出成型分镜，直接用于拍摄或转视频 AI 生成。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 / Claude 5.5"
+    },
+    {
+      "id": "prompt-report-mckinsey-01",
+      "title_zh": "麦肯锡金字塔原理：季度述职与高管商业报告",
+      "title_en": "McKinsey Pyramid Executive Report & Review",
+      "category": "prompts",
+      "scenario_label": "📑 商业报告",
+      "target_model": "Claude 5.5 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 95,
+      "generation_tier": "sota",
+      "purpose_zh": "结论先行的高层述职与项目复盘报告",
+      "temp_advice": "温度 0.3",
+      "variables": [
+        "{{业务部门}}",
+        "{{关键战果}}",
+        "{{核心短板}}",
+        "{{下阶段目标}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
+      "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+      "sample_output": {
+        "type": "text",
+        "title": "述职报告提纲样本：AI 自动化中台建设报告",
+        "content": "【BLUF 核心结论】\nQ3 通过在客户服务与情报聚合管线中全面引入 AI Agent，我们在运营成本降低 41% 的同时，将响应中位数缩短至 1.8 秒，实现单季 ROI 达 380%。\n\n【第一支柱：经营效能跃迁（MECE 1）】\n- 全自主中转网关与自动化管线承载 94.2% 的日常例行分发，无人工介入事故率降至 0.01%；\n\n【第二支柱：资产沉淀与质量壁垒（MECE 2）】\n- 搭建前沿 SOTA 模型代际评级系统与微快照图库，成为垂类雷达第一标杆；\n\n【第三支柱：短板复盘与 Q4 攻坚（MECE 3）】\n- 痛点：老旧模型模版对新用户构成噪音干扰；\n- 策略：推出历史库智能分流系统，预计下季度用户留存提升 25%。"
+      },
+      "usage_guide_zh": "将自己一周/一月的粗糙工作备忘录贴在后面，几秒钟即可输出具备咨询公司水准的商业报告。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "Claude 5.5 / GPT-6.0"
+    },
+    {
+      "id": "prompt-novel-worldbuilding-01",
+      "title_zh": "网络小说世界观设定与主角角色一致性锁",
+      "title_en": "Fiction Worldbuilding & Character Consistency Lock",
+      "category": "prompts",
+      "scenario_label": "✍️ 短剧小说",
+      "target_model": "Claude 5.5 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 94,
+      "generation_tier": "sota",
+      "purpose_zh": "长篇小说架构与人物性格防崩塌",
+      "temp_advice": "温度 0.5",
+      "variables": [
+        "{{题材分类}}",
+        "{{核心金手指}}",
+        "{{世界核心矛盾}}"
+      ],
+      "prompt_content_zh": "你是一名资深网络小说白金作家与 IP 世界观架构师。请为一部 {{题材分类}} 长篇作品构建骨架并锁定人物一致性：\n\n1. 【世界底座】：定义力量/经济体系、战力天花板与不可违背的底层物理/法则约束，杜绝战力膨胀；\n2. 【角色一致性锚点 (Character Lock)】：为主角制定外貌锚定词、口头禅、下意识动作与绝对动机准则（在任何生死抉择时绝不背离该准则）；\n3. 【核心驱动力】：设计主角获得的 {{核心金手指}} 与 {{世界核心矛盾}} 之间的冲突循环；\n4. 【前三章切入大纲】：黄金三章节奏设计（第1章破局、第2章显露冰山一角、第3章设立首个必胜目标）。",
+      "prompt_content_en": "Build a cohesive, non-contradictory fiction universe and establish an immutable character anchor rule (appearance, decision heuristics, core motivation) to prevent personality drift over long chapters.",
+      "sample_output": {
+        "type": "text",
+        "title": "世界观与人物锚定卡样本",
+        "content": "【主角核心锚定卡 · 陆沉】\n- 外貌指纹（跨章恒定）：右耳一枚黑曜石碎骨钉，习惯性单手插兜，左眉峰有浅淡刀痕。\n- 决策第一公理：\"利益可以出让，但绝不签署不可撤销的信任协议\"——任何试图以情感道德绑架他的剧情，他必做出理性防卫。\n\n【力量体系底层法理】\n- 机制：灵能不是无限提取，而是向未来\"借贷\"。借贷三级灵能，必在72小时内遭遇相应量级的反噬因果。\n\n【第一章：断头宴上的借贷合同】\n陆沉在家族庆功宴上被夺去嫡系席位，当众被赐饮散灵酒。陆沉不动声色饮下，却在体内发动首次因果置换，借来三年后的金丹级肉身力量，捏碎验灵石，反客为主。"
+      },
+      "usage_guide_zh": "先让 AI 产出世界观基石，后续每一章写作前引用该卡片，能彻底避免角色'换章变脸'或剧情崩坏。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "Claude 5.5 / GPT-6.0"
+    },
+    {
+      "id": "prompt-travel-itinerary-01",
+      "title_zh": "深度游旅行规划师：高密度路线设计与预算避坑",
+      "title_en": "Deep Travel Itinerary Planner & Budgeting",
+      "category": "prompts",
+      "scenario_label": "✈️ 生活旅行",
+      "target_model": "Claude 5.5 / DeepSeek-R1",
+      "model_family": "Universal",
+      "model_tier_score": 93,
+      "generation_tier": "sota",
+      "purpose_zh": "合理不走回头路的日程与美食预算规划",
+      "temp_advice": "温度 0.4",
+      "variables": [
+        "{{目的地城市}}",
+        "{{出行天数}}",
+        "{{同行人员}}",
+        "{{人均预算}}"
+      ],
+      "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
+      "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+      "sample_output": {
+        "type": "text",
+        "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
+        "content": "【Day 1：古蜀遗风与老茶馆时光】\n- 上午 09:00：直奔【人民公园 · 鹤鸣茶社】，点一杯蒙顶甘露（¥25），体验非遗采耳，避开下午的旅行团拥堵；\n- 中午 12:00：步行800米至【纯阳馆鱼香排骨面】，必点椒麻牛肉与鱼香排骨面（人均¥22）；\n- 下午 14:00：地铁2号线直达【杜甫草堂】，红墙竹影漫步，打卡浣花溪公园；\n- 傍晚 18:30：九眼桥望江楼看锦江夜景，就餐【老街小吃火锅】；\n\n【避坑锦囊】：\n1. 宽窄巷子和锦里建议只拍照别买小吃，均价比普通街区贵 2~3 倍且多为预制冻品；\n2. 大熊猫繁育研究基地务必约早晨 07:30 入园，超过 10:30 大熊猫基本全部回室内睡觉。"
+      },
+      "usage_guide_zh": "只需填入城市、天数和预算，即刻收获一份可直接打印随身带的专业级行程攻略。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R1"
+    },
+    {
       "id": "prompt_tibo_gpt_reset_architecture",
       "sub_type": "reasoning",
       "model_family": "tibo_reset",
@@ -68686,7 +69473,7 @@
         "temp": "0.2"
       },
       "content_snippet": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
-      "summary_zh": "不清除对话任务前提下，强制模型刷新隐藏先验偏置、粉碎多轮死循环车轱辘话，激发纯净的测试期逻辑推演",
+      "summary_zh": "不清除对话任务前提下，强制模型刷新隐藏先验偏置、粉碎多轮死循环车轱辘话，激发纯净的测试期逻辑推演。",
       "summary_en": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
       "prompt_content_zh": "【SYSTEM RESET & CONTEXT PURGE PROTOCOL】\n你现在执行内部思维链重置程序（Attention Buffer Refresh）。\n请立刻执行以下 3 步上下文净化与重新推演：\n1. 剥离先入为主假设：忽略此前对话中由用户或模型产生的一切中间妥协、逻辑死锁或未验证的推论，仅保留最原始的核心约束与输入事实；\n2. 回归第一性原理：以白纸状态（Tabula Rasa）重新构建解题状态空间，将问题分解为不可再分的基本公理；\n3. 逆向证伪验证：在输出最终结论前，必须主动尝试推翻自己的前一步推演。只有无法被反例击破的路径，方可作为最终执行方案。\n现在，以最高逻辑严密性重新推导当前问题：",
       "prompt_content_en": "[SYSTEM RESET & CONTEXT PURGE PROTOCOL]\nYou are now executing an internal reasoning reset protocol (Attention Buffer Refresh).\nImmediately perform the following 3-step context purge and re-derivation:\n1. Purge Hidden Priors: Discard all accumulated conversational drift, intermediate compromises, and unverified assumptions from earlier turns; retain only immutable core requirements and raw facts.\n2. First-Principles Reconstruction: Re-examine the problem space from a blank slate (Tabula Rasa), decomposing goals into irreducible axioms.\n3. Adversarial Invalidation: Before producing final output, aggressively attempt to disprove your own hypotheses. Output only the path that survives rigorous counter-examples.\nNow, re-evaluate and solve the current task with absolute precision:",
@@ -68697,8 +69484,82 @@
         "防幻觉",
         "深度推理"
       ],
-      "title": "💡【Tibo 置顶爆款】全网疯传的‘GPT重置/思维链重启’提示词架构：净化上下文膨胀与先验幻觉",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_deepseek_r1_zero_shot",
+      "sub_type": "reasoning",
+      "model_family": "deepseek_r1",
+      "purpose_zh": "🧠 深度推理 · DeepSeek 官方建议：零 System Prompt 自由思维链",
+      "purpose_en": "🧠 Deep Reasoning · DeepSeek Official: Zero-System Pure RL Chain of Thought",
+      "title_zh": "💡【DeepSeek 官方白皮书标准】避坑指南：纯强化学习 (RL) 零预设提示词模板，彻底释放 671B 思考潜能",
+      "title_en": "💡 [DeepSeek Official Standard] Zero-System Prompt Architecture: Unleash 671B Pure RL Thinking Depth",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+      "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+      "source": "DeepSeek 官方指南",
+      "author": "DeepSeek 架构组",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-14T22:30:00Z",
+      "recommended_model": "DeepSeek-R1 (671B Full)",
+      "temp_advice": "建议温度 0.6 | 给予模型充足的反思与自我纠错采样空间",
+      "metrics": {
+        "type": "🧠 DeepSeek R1",
+        "model": "R1 671B",
+        "temp": "0.6"
+      },
+      "content_snippet": "Official DeepSeek guidance: Never constrain R1 with complex system personas or few-shot formats. Provide exact verification criteria and let GRPO-trained reasoning explore hypotheses freely.",
+      "summary_zh": "官方权威规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。定义精准验收标准，让模型原生自我验证与反思机制充分展开。",
+      "summary_en": "Official guidance: Avoid system personas or few-shot anchors. Define clear criteria and let native self-reflection chains explore freely.",
+      "prompt_content_zh": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
+      "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nPerform exhaustive mathematical and algorithmic derivation for the following problem:\n\n[CORE CONSTRAINTS]:\n1. Output must maintain uncompromising mathematical rigor without skipping derivation steps;\n2. When encountering ambiguities or potential branches, proactively branch and falsify invalid hypotheses in your reasoning trace;\n3. Present the final solution in structured markdown, followed by edge case verification proofs.\n\n[PROBLEM STATEMENT]:\n[Paste your high-complexity problem, architecture challenge, or algorithm design here]",
+      "prompt_content": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
+      "tags": [
+        "DeepSeek官方",
+        "R1纯RL",
+        "思维链",
+        "数学竞赛"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_claude46_extended_thinking",
+      "sub_type": "coding",
+      "model_family": "claude_46",
+      "purpose_zh": "💻 混合推理 · Claude 4.6 思考时间预算控制与全栈代码交付",
+      "purpose_en": "💻 Hybrid Reasoning · Claude 4.6 Thinking Budget Control & Full-Stack Delivery",
+      "title_zh": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块",
+      "title_en": "💡 [Claude 4.6 Frontier] Extended Thinking & Budget Control: One-Shot Production Full-Stack Module",
+      "url": "https://docs.anthropic.com/",
+      "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+      "source": "Anthropic 官方前沿",
+      "author": "Anthropic 工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-14T21:00:00Z",
+      "recommended_model": "Claude 4.6 Sonnet (Extended Thinking Mode)",
+      "temp_advice": "建议温度 1.0 (Extended Thinking 官方推荐温度) | 预算 16k tokens",
+      "metrics": {
+        "type": "💻 Claude 4.6",
+        "model": "Sonnet 3.7",
+        "temp": "1.0"
+      },
+      "content_snippet": "Maximizes Claude 4.6's hybrid reasoning budget: plans architectural trade-offs in thinking phase, then delivers production-grade, bug-free implementations.",
+      "summary_zh": "充分释放 Claude 4.6 混合推理优势：在思考阶段预判所有边界情况与架构取舍，一键输出直接可运行的高内聚工程代码。",
+      "summary_en": "Leverages Claude 4.6 extended thinking to resolve architecture trade-offs before generating complete, bug-free production code.",
+      "prompt_content_zh": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "prompt_content_en": "You are acting as a Principal Full-Stack Architect utilizing Claude 4.6 Extended Thinking mode. Before emitting code, use your reasoning budget to analyze:\n1. Architecture Trade-offs: Benchmark alternative designs across complexity, maintenance, and latency;\n2. Concurrency & Race Condition Simulation: Map asynchronous lifecycles and eliminate memory leaks;\n3. Complete Zero-Placeholder Implementation: Never emit comments like '// TODO: implement later'; ensure every function is production-ready;\n4. Include defensive unit tests and resilient error boundaries.\n\n[REQUIREMENTS]:\n[Describe your complex business system or full-stack feature here]",
+      "prompt_content": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "tags": [
+        "Claude 4.6",
+        "思考预算",
+        "全栈架构",
+        "无占位符"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_openai_o3_mini_math_proof",
@@ -68723,7 +69584,7 @@
         "temp": "1.0"
       },
       "content_snippet": "Adversarial verification prompt forcing OpenAI reasoning models to challenge intermediate proofs before presenting the final answer.",
-      "summary_zh": "强制 o1/o3 模型在思考链中构建对抗性反例，逐项排查边界条件，杜绝‘想当然’的不严密推理",
+      "summary_zh": "强制 o1/o3 模型在思考链中构建对抗性反例，逐项排查边界条件，杜绝‘想当然’的不严密推理。",
       "summary_en": "Forces o1/o3 reasoning models to construct counter-examples at each deduction step, eliminating hidden logical leaps.",
       "prompt_content_zh": "请作为普林斯顿高等研究院的理论数学与计算机科学家，为以下命题提供绝对严格的形式化证明：\n【推理原则】：\n1. 在得出任何推论前，强制在内部思考中构建至少 2 个极端反例（Counter-examples）尝试推翻自身结论；\n2. 若存在任何定义域边界或除零/无穷/退化奇异点，必须显式讨论其收敛性与连续性；\n3. 证明步骤编号必须形成严格的依赖拓扑图，禁止循环论证。\n\n【待证明命题】：\n[输入你的算法正确性证明或数学猜想]",
       "prompt_content_en": "Acting as a Theoretical Mathematician and Computer Scientist at the Institute for Advanced Study, provide an airtight formal proof for the following:\n[REASONING PRINCIPLES]:\n1. Before asserting any deduction, construct at least 2 extreme counter-examples in your reasoning trace to aggressively stress-test the hypothesis;\n2. Explicitly evaluate singular points, degenerate cases, and asymptotic boundaries for convergence;\n3. Steps must form a directed acyclic graph of formal lemmas without circular logic.\n\n[THEOREM / CONJECTURE]:\n[Input your algorithm proof or mathematical hypothesis here]",
@@ -68734,8 +69595,8 @@
         "对抗反思",
         "数学竞赛"
       ],
-      "title": "💡【OpenAI 推理引擎】o1 / o3-mini 对抗性逆向验证：防偷懒、无漏洞的形式化推导模板",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_sora2_wan21_cinematic_director",
@@ -68760,7 +69621,7 @@
         "temp": "Cinematic"
       },
       "content_snippet": "Industry-grade video prompting template specifying camera focal length, volumetric light decay, collision physics, and 60fps natural motion blur.",
-      "summary_zh": "工业级视频生成规范：精确指定镜头焦段、多轴三维运镜曲线、流体碰撞阻尼与真实快门运动模糊",
+      "summary_zh": "工业级视频生成规范：精确指定镜头焦段、多轴三维运镜曲线、流体碰撞阻尼与真实快门运动模糊。",
       "summary_en": "Industry-grade template specifying lens focal length, 3D camera path, fluid collision physics, and authentic motion blur.",
       "prompt_content_zh": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [主体角色与连续动作，例如：A cyberpunk neon-lit courier running through dense rainy alleys, leaping across a puddle].\n[Physics & Dynamics]: Photorealistic surface reflection with physically accurate water splash ripples, droplets refracting neon signs, natural cloth turbulence reacting to wind drag.\n[Lighting & Color Grade]: Volumetric mist scattering amber sodium lights and cyan neon glow, Arri Alexa cinematic color science, shallow depth of field with creamy optical bokeh.\n[Camera Movement]: Low-angle tracking shot transitioning smoothly to a high-speed Dutch angle tilt, cinematic 24fps motion blur with zero morphing or temporal flickering.",
       "prompt_content_en": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [Character & continuous motion: e.g., A cyberpunk courier dashing through a rain-drenched alley, leaping across water puddles].\n[Physics & Dynamics]: Photorealistic surface reflections with physically accurate water ripple splashes, droplets refracting ambient lights, natural cloth drag.\n[Lighting & Palette]: Volumetric fog scattering amber streetlights and cyan neon, Arri Alexa color grade, shallow depth of field.\n[Camera Path]: Low-angle tracking shot transitioning smoothly into a high-speed Dutch angle, natural 24fps motion blur without temporal morphing.",
@@ -68771,43 +69632,45 @@
         "电影运镜",
         "视频生成"
       ],
-      "title": "💡【Sora 2 / Wan 2.1 导演级】高保真物理世界、体积光与多轴多机位镜头控制提示词库",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
-      "id": "prompt_deepseek_reasoning",
-      "sub_type": "reasoning",
-      "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
-      "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
-      "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-      "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
-      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-      "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
-      "source": "实战技巧 · Prompt",
-      "author": "社区实测",
+      "id": "prompt_openclaw_mcp_computer_agent",
+      "sub_type": "agent",
+      "model_family": "openclaw_agent",
+      "purpose_zh": "🤖 自主智能体 · OpenClaw / MCP 协议多工具跨应用调度",
+      "purpose_en": "🤖 Autonomous Agent · OpenClaw & MCP Multi-Tool Autonomous Orchestration",
+      "title_zh": "💡【智能体架构】OpenClaw / MCP (Model Context Protocol) 自主 Agent 决策闭环与自愈重试咒语",
+      "title_en": "💡 [Autonomous Agent Spec] OpenClaw / MCP Protocol Multi-Tool Orchestration & Resilient Self-Healing",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+      "source": "智能体实验室",
+      "author": "OpenClaw 架构组",
       "category": "prompts",
       "is_prompt": true,
-      "raw_published_at": "2026-09-01T00:00:00Z",
-      "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
-      "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+      "raw_published_at": "2026-09-14T18:00:00Z",
+      "recommended_model": "Claude 4.6 / DeepSeek-V3 / OpenClaw Core",
+      "temp_advice": "建议温度 0.2 | 生产级工具调用精确度",
       "metrics": {
-        "type": "🧠 深度推理",
-        "model": "DeepSeek-R1",
-        "temp": "0.6"
+        "type": "🤖 Agent智能体",
+        "model": "Claude / OpenClaw",
+        "temp": "0.2"
       },
-      "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-      "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞",
-      "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-      "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-      "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
-      "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "content_snippet": "Production MCP agent system prompt with tool verification loops, fallback exception handling, and self-correcting task decomposition.",
+      "summary_zh": "生产级 MCP 智能体系统提示词：内置工具调用前置校验、异常回滚降级策略与自主任务拆解循环。",
+      "summary_en": "Production MCP agent system prompt with pre-call schema validation, resilient error rollback, and autonomous task decomposition.",
+      "prompt_content_zh": "你是一个基于 MCP (Model Context Protocol) 运行的高可靠自主代理核心（Autonomous Agent Kernel）。你拥有文件系统读写、终端 Shell 执行与外部 REST API 调用的全部权限。\n【执行纪律】：\n1. 规划优先（ReAct 循环）：在调用任何写操作（破坏性操作）前，显式输出 Observation -> Thought -> Action -> Verification；\n2. 幂等与防御性重试：若工具返回错误代码，严禁机械重复调用。必须分析错误堆栈，更换入参或降级备用策略；\n3. 任务达成严格校验：执行完毕后必须主动调用只读工具检查产物真实状态，绝不允许凭空假设操作成功。\n\n【用户目标】：\n[在此处提供复杂的跨应用综合任务描述]",
+      "prompt_content_en": "You are a High-Reliability Autonomous Agent Kernel operating over the Model Context Protocol (MCP). You have authorized access to filesystem operations, terminal execution, and external tool endpoints.\n[OPERATIONAL PROTOCOL]:\n1. Plan-Before-Action (ReAct Loop): Prior to destructive actions, output explicit Observation -> Thought -> Action -> Verification phases;\n2. Resilient Error Recovery: If a tool returns a non-zero exit code, do NOT repeat identical parameters. Analyze stack traces and implement fallback alternatives;\n3. Deterministic Verification: Validate end state using read-only probes before announcing completion.\n\n[USER MISSION]:\n[Provide complex multi-application goal here]",
+      "prompt_content": "你是一个基于 MCP (Model Context Protocol) 运行的高可靠自主代理核心（Autonomous Agent Kernel）。你拥有文件系统读写、终端 Shell 执行与外部 REST API 调用的全部权限。\n【执行纪律】：\n1. 规划优先（ReAct 循环）：在调用任何写操作（破坏性操作）前，显式输出 Observation -> Thought -> Action -> Verification；\n2. 幂等与防御性重试：若工具返回错误代码，严禁机械重复调用。必须分析错误堆栈，更换入参或降级备用策略；\n3. 任务达成严格校验：执行完毕后必须主动调用只读工具检查产物真实状态，绝不允许凭空假设操作成功。\n\n【用户目标】：\n[在此处提供复杂的跨应用综合任务描述]",
       "tags": [
-        "Prompt神咒",
-        "逻辑推理",
-        "DeepSeek"
+        "MCP协议",
+        "OpenClaw",
+        "自主智能体",
+        "Computer Use"
       ],
-      "title": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_claude_coding_architect",
@@ -68831,7 +69694,7 @@
         "temp": "0.2"
       },
       "content_snippet": "Rigorous code auditor mode: Refactors code smells without breaking public API contracts, outputting benchmark diffs and unit tests.",
-      "summary_zh": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，消除高并发竞态风险，输出防御性测试用例",
+      "summary_zh": "严谨的代码审查官模式：在不打破现有 API 契约前提下重构代码异味，消除高并发竞态风险，输出防御性测试用例。",
       "summary_en": "Rigorous code auditor mode: Refactors code smells without breaking public API contracts, outputting benchmark diffs and unit tests.",
       "prompt_content_zh": "你是一位拥有 15 年经验的资深系统架构师与代码审查专家。请在严格遵守原有对外公共契约（Public API Contract）的前提下审查并重构以下代码：\n1. 识别代码异味（Code Smell）、隐性内存泄漏与高并发竞争冒险（Race Condition）；\n2. 采用现代设计模式与 SOLID 原则进行无破坏性重构，给出重构前后的 Diff 对比；\n3. 编写完整的防御性单元测试（含边界值、空指针与异常抛出用例）。",
       "prompt_content_en": "You are a Principal Systems Architect and Senior Code Reviewer with 15+ years of experience. Review and refactor the following code while strictly honoring existing public API contracts:\n1. Identify critical code smells, subtle memory leaks, and concurrency race conditions;\n2. Apply modern design patterns and SOLID principles for non-breaking refactoring, providing a before/after git diff;\n3. Generate comprehensive defensive unit tests covering edge cases, null pointers, and error handling paths.",
@@ -68841,78 +69704,43 @@
         "高阶提示词",
         "Claude"
       ],
-      "title": "💡【代码架构与重构】Claude 4.6 生产级 Clean Code 审查与防御性重构咒语",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
-      "id": "prompt_agent_robust_tools",
-      "sub_type": "agent",
-      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
-      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
-      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
-      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
-      "url": "https://modelcontextprotocol.io/",
-      "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+      "id": "prompt_sql_performance_tuning",
+      "sub_type": "coding",
+      "purpose_zh": "💻 编码与架构 · 高并发 SQL 慢查询诊断调优",
+      "purpose_en": "💻 Coding & Architecture · High-Concurrency SQL Query Tuning",
+      "title_zh": "💡【数据库性能优化】高并发 SQL 慢查询诊断与执行计划重写优化模板",
+      "title_en": "💡 [Database Performance] High-Concurrency SQL Slow Query Diagnosis & Plan Optimization",
+      "url": "https://github.com/",
+      "image_url": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&auto=format&fit=crop",
       "source": "实战技巧 · Prompt",
-      "author": "Agent开发",
+      "author": "DBA极客",
       "category": "prompts",
       "is_prompt": true,
       "raw_published_at": "2026-09-01T00:00:00Z",
-      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
-      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "recommended_model": "DeepSeek-Coder-V2 / Claude 4.6",
+      "temp_advice": "建议温度 0.1 | 数据库内核调优",
       "metrics": {
-        "type": "🤖 MCP智能体",
-        "model": "Claude 4.6",
+        "type": "💻 SQL调优",
+        "model": "DeepSeek-Coder",
         "temp": "0.1"
       },
-      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
-      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数",
-      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
-      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
-      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
-      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "content_snippet": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+      "summary_zh": "根据 EXPLAIN 结果重构千万级表查询，消除全表扫描与临时表开销，生成最优复合索引建议。",
+      "summary_en": "Restructures queries on 10M+ row tables based on EXPLAIN ANALYZE, eliminating full-table scans with composite indexes.",
+      "prompt_content_zh": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
+      "prompt_content_en": "You are a Staff Database Administrator specializing in high-concurrency SQL optimization. Analyze the following slow SQL query along with its EXPLAIN ANALYZE execution plan:\n1. Pinpoint performance bottlenecks (e.g., table scans, temporary filesort, nested loop skew);\n2. Rewrite the query utilizing deferred joins, covering index optimization, or CTE materialization;\n3. Provide the exact composite index recommendation ordered by cardinality and leftmost prefix rules, estimating index maintenance overhead.",
+      "prompt_content": "你是一位顶级数据库性能调优 DBA 专家。以下是执行耗时过长的慢 SQL 语句及对应的 EXPLAIN ANALYZE 执行计划树：\n1. 指出导致性能下降的关键瓶颈（如全表扫描、Using filesort、Nested Loop 倾斜）；\n2. 重写 SQL 语句（利用延迟关联、覆盖索引、CTE 或子查询物化优化）；\n3. 给出精确到字段顺序的最优复合索引建议（考虑高区分度与最左前缀法则），并评估索引维护成本。",
       "tags": [
-        "Agent开发",
-        "工具调用",
-        "防幻觉"
+        "SQL调优",
+        "数据库实战",
+        "Prompt模板"
       ],
-      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
-      "is_pinned": false
-    },
-    {
-      "id": "prompt_multi_agent_debate",
-      "sub_type": "agent",
-      "purpose_zh": "🤖 智能体与MCP · 多角色对立辩论与反思博弈工作流",
-      "purpose_en": "🤖 Agents & MCP · Multi-Agent Adversarial Debate & Peer Reflection",
-      "title_zh": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
-      "title_en": "💡 [Multi-Agent Collaboration] Red-Team vs Blue-Team Adversarial Debate & Consensus Prompt",
-      "url": "https://github.com/",
-      "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
-      "source": "实战技巧 · Prompt",
-      "author": "架构师",
-      "category": "prompts",
-      "is_prompt": true,
-      "raw_published_at": "2026-09-01T00:00:00Z",
-      "recommended_model": "Claude 4.6 / GPT-4o",
-      "temp_advice": "建议温度 0.5 | 对抗辩论模式",
-      "metrics": {
-        "type": "🤖 红蓝对抗",
-        "model": "Claude 4.6",
-        "temp": "0.5"
-      },
-      "content_snippet": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
-      "summary_zh": "编排三位具备独立视角的智能体：激进方案提出者、严苛挑刺红方审查者与中立技术法官，逼近真理",
-      "summary_en": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
-      "prompt_content_zh": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
-      "prompt_content_en": "Simulate an elite three-agent architecture review board within this single execution turn:\n- [Agent Alpha - The Innovator]: Proposes the most performant, cutting-edge architecture paradigm for the problem;\n- [Agent Beta - Devil's Advocate / Red Team]: Ruthlessly tears into Alpha's plan, surfacing at least 4 catastrophic failure modes, hidden maintenance traps, and single points of failure;\n- [Agent Gamma - Neutral Chief Architect]: Synthesizes the confrontation, discarding flawed assumptions to formulate the pragmatic, battle-tested production blueprint.",
-      "prompt_content": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
-      "tags": [
-        "多智能体",
-        "红蓝对抗",
-        "系统设计"
-      ],
-      "title": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_react_ts_refactor",
@@ -68936,7 +69764,7 @@
         "temp": "0.2"
       },
       "content_snippet": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
-      "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系",
+      "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系。",
       "summary_en": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
       "prompt_content_zh": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
       "prompt_content_en": "Act as a Principal Frontend Engineer specializing in React 19 and TypeScript 5.5+. Refactor the provided legacy component:\n1. Migrate outdated useEffect data fetching and boilerplate state to React 19 Actions, useActionState, and React Server Components;\n2. Enforce 100% strict type safety: eliminate `any`, leverage discriminated unions, branded types, and const type parameters;\n3. Optimize rendering: eliminate unnecessary re-renders, adding proper Suspense fallback skeletons and resilient Error Boundaries.",
@@ -68946,8 +69774,8 @@
         "TypeScript",
         "前端重构"
       ],
-      "title": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_unit_test_coverage",
@@ -68971,7 +69799,7 @@
         "temp": "0.1"
       },
       "content_snippet": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
-      "summary_zh": "生成密封、参数化的测试套件，全面覆盖空指针、整数溢出、高并发死锁与恶意输入模糊测试",
+      "summary_zh": "生成密封、参数化的测试套件，全面覆盖空指针、整数溢出、高并发死锁与恶意输入模糊测试。",
       "summary_en": "Generates hermetic, parameterized unit tests covering null pointers, concurrency races, and malicious payload fuzzing.",
       "prompt_content_zh": "你是一位狂热的质量工程与测试架构专家。请为提供的目标代码编写完备的自动化测试套件：\n1. 使用参数化测试（Parameterized Tests）覆盖全量正常业务路径；\n2. 针对极端边界生成用例：包含空指针、超大负数、整数溢出、零长度切片、特殊字符注入及超时熔断；\n3. 设计能够杀死变异体（Mutation Testing）的断言，禁止无效的无断言测试；\n4. 所有外部依赖必须通过 Mock/Stub 隔离，确保单测可在 CI 环境中无网络毫秒级运行。",
       "prompt_content_en": "You are a Staff QA Architect and Mutation Testing specialist. Build a production-grade automated test suite for the provided code:\n1. Use parameterized testing to systematically cover happy paths and common branches;\n2. Generate rigorous edge-case suites: null references, integer overflow, empty collections, unicode injection, and network timeouts;\n3. Implement strong assertions capable of surviving mutation testing (no vanity tests);\n4. Hermetically isolate all external I/O via mocks/stubs to guarantee sub-millisecond execution in isolated CI pipelines.",
@@ -68981,8 +69809,43 @@
         "测试工程",
         "质量保障"
       ],
-      "title": "💡【质量工程自动化】100% 边界条件覆盖与变异测试（Mutation Testing）用例生成",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_sd35_photoreal",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 顶级商业人像与胶片摄影",
+      "purpose_en": "🎨 Image Gen · High-End Commercial Studio Portraiture",
+      "title_zh": "💡【商业摄影大师】Midjourney v7 / Ideogram 3 / SD 3.5 顶级商业摄影质感与皮肤微孔真实感神咒",
+      "title_en": "💡 [Commercial Studio Photography] SD 3.5 Large & Midjourney Photorealistic Skin Texture Master Prompt",
+      "url": "https://midjourney.com/",
+      "image_url": "https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "视觉实测",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-01T00:00:00Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3 / SD 3.5",
+      "temp_advice": "Guidance Scale: 3.5 | 步数 28",
+      "metrics": {
+        "type": "🎨 商业生图",
+        "model": "Midjourney v7",
+        "temp": "CFG 3.5"
+      },
+      "content_snippet": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+      "summary_zh": "85mm f/1.4 镜头虚化、哈苏中画幅胶片微颗粒与晨光丁达尔效应，彻底告别 AI 塑料感与假脸。",
+      "summary_en": "85mm f/1.4 lens bokeh, Hasselblad film grain and Tyndall morning light for photorealistic portraiture without plastic AI artifacts.",
+      "prompt_content_zh": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1\n\n【中文使用解析】：将 [SUBJECT] 替换为你的目标人物（例如：a charismatic 35-year-old female neuroscientist with silver round glasses）。保持原英文提示词以确保扩散模型最高质量的 CLIP 嵌入响应。",
+      "prompt_content_en": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+      "prompt_content": "A high-end cinematic editorial portrait of [SUBJECT], shot on 35mm kodak portra 400 film, Hasselblad H6D-100c camera, 85mm f/1.4 lens, soft natural morning rim light, subtle cinematic lens flare, hyper-realistic pores and skin imperfections, fine hair strands, depth of field, 8k resolution, award-winning photography --ar 16:9 --style raw --v 6.1",
+      "tags": [
+        "生图神咒",
+        "Midjourney/SD3.5",
+        "商业摄影"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_cyberpunk_concept",
@@ -69006,7 +69869,7 @@
         "temp": "s 250"
       },
       "content_snippet": "Brutalist megastructure cityscape, volumetric neon smog, rain-slicked asphalt reflections, cinematic widescreen composition.",
-      "summary_zh": "野兽派巨构建筑天际线、体积霓虹晨雾、雨后沥青漫反射与 21:9 超宽银幕电影构图",
+      "summary_zh": "野兽派巨构建筑天际线、体积霓虹晨雾、雨后沥青漫反射与 21:9 超宽银幕电影构图。",
       "summary_en": "Brutalist megastructure cityscape, volumetric neon smog, rain-slicked asphalt reflections, cinematic widescreen composition.",
       "prompt_content_zh": "Cinematic wide-angle establishing shot of a towering brutalist dystopian megacity, retro-futuristic cyberpunk architecture, layers of neon holographic billboards piercing through heavy volumetric smog and acid rain, reflective wet asphalt streets with neon puddles, dense flying vehicle traffic in low altitude, blade runner 2049 aesthetic, directed by Denis Villeneuve, shot by Roger Deakins on ARRI Alexa 65, 8k resolution, anamorphic lens --ar 21:9 --style raw --v 6.1\n\n【中文使用解析】：适用于影视分镜、游戏概念原画设计。通过 Roger Deakins 摄影风格与宽银幕变形镜头（anamorphic lens）极大提升空间压迫感与层次感。",
       "prompt_content_en": "Cinematic wide-angle establishing shot of a towering brutalist dystopian megacity, retro-futuristic cyberpunk architecture, layers of neon holographic billboards piercing through heavy volumetric smog and acid rain, reflective wet asphalt streets with neon puddles, dense flying vehicle traffic in low altitude, blade runner 2049 aesthetic, directed by Denis Villeneuve, shot by Roger Deakins on ARRI Alexa 65, 8k resolution, anamorphic lens --ar 21:9 --style raw --v 6.1",
@@ -69016,8 +69879,8 @@
         "概念艺术",
         "Midjourney"
       ],
-      "title": "💡【电影概念美术】赛博朋克与科幻史诗世界观：体积雾光与巨物工业美学",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_ui_design_concept",
@@ -69041,7 +69904,7 @@
         "temp": "s 100"
       },
       "content_snippet": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
-      "summary_zh": "现代金融与 AI 仪表盘设计：精致半透明毛玻璃面板、柔和环境渐变与高阶版式留白",
+      "summary_zh": "现代金融与 AI 仪表盘设计：精致半透明毛玻璃面板、柔和环境渐变与高阶版式留白。",
       "summary_en": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
       "prompt_content_zh": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1\n\n【中文使用解析】：用于快速生成产品原型提案、投资人 Pitch Deck 界面效果图。规避杂乱按钮，突出核心数据卡片与精致微光动势。",
       "prompt_content_en": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1",
@@ -69051,8 +69914,8 @@
         "Dribbble风格",
         "App界面"
       ],
-      "title": "💡【UI/UX 视觉探索】Dribbble 爆款极简毛玻璃卡片与深色现代 App 界面概念",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_3d_clay_character",
@@ -69076,7 +69939,7 @@
         "temp": "CFG 3.0"
       },
       "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
-      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
       "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
       "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
       "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
@@ -69086,8 +69949,8 @@
         "黏土风",
         "IP设计"
       ],
-      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_video_cinematic_lens",
@@ -69111,7 +69974,7 @@
         "temp": "Motion 5"
       },
       "content_snippet": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
-      "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变",
+      "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变。",
       "summary_en": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
       "prompt_content_zh": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.\n\n【中文使用解析】：专为 Runway Gen-3 Alpha 或 Kling 1.5 的 Text-to-Video / Image-to-Video 设计。重点定义镜头物理轨迹（dolly zoom / push forward / zoom out）以约束物理引擎不会乱造多余肢体。",
       "prompt_content_en": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
@@ -69121,8 +69984,8 @@
         "Runway",
         "影视质感"
       ],
-      "title": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_video_product_macro",
@@ -69146,7 +70009,7 @@
         "temp": "Motion 3"
       },
       "content_snippet": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
-      "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射",
+      "summary_zh": "1000fps 极速慢动作微距水花飞溅、钛合金表盘精密齿轮咬合与焦散光斑漫反射。",
       "summary_en": "Extreme macro 1000fps slow-motion water splash over rotating titanium luxury watch, caustics refractions and prism light.",
       "prompt_content_zh": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.\n\n【中文使用解析】：适用于高端 3C 数码、香水、珠宝首饰等出海广告视频一键生成。通过限定 phantom slow motion 与 caustic light patterns 获得极具说服力的物理渲染感。",
       "prompt_content_en": "Macro commercial product video: Extreme close-up of a sleek titanium chronograph watch slowly rotating submerged in crystal-clear water. A burst of microscopic air bubbles and water ripples glides past the sapphire crystal glass at 1000fps phantom slow motion. Studio rim light catching metallic bevels, prismatic caustic light patterns dancing across the dial, pristine optical clarity, zero blur, luxury Apple/Rolex aesthetic.",
@@ -69156,8 +70019,43 @@
         "流体慢动作",
         "快手可灵"
       ],
-      "title": "💡【商业广告大片】高端腕表与流体水珠高帧率慢动作微距运镜咒语",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_deepseek_reasoning",
+      "sub_type": "reasoning",
+      "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
+      "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
+      "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
+      "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+      "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "社区实测",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-01T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
+      "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+      "metrics": {
+        "type": "🧠 深度推理",
+        "model": "DeepSeek-R1",
+        "temp": "0.6"
+      },
+      "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+      "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
+      "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "tags": [
+        "Prompt神咒",
+        "逻辑推理",
+        "DeepSeek"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_first_principles_reasoning",
@@ -69181,7 +70079,7 @@
         "temp": "0.4"
       },
       "content_snippet": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
-      "summary_zh": "剥离行业类比与路径依赖，将问题还原至物理定律与原子级物料成本，推导 10 倍效能的破局路径",
+      "summary_zh": "剥离行业类比与路径依赖，将问题还原至物理定律与原子级物料成本，推导 10 倍效能的破局路径。",
       "summary_en": "Strips away historical analogies, reducing the problem to raw physics and unit economics to find 10x breakthrough paths.",
       "prompt_content_zh": "请暂时忘掉行业现有的所有‘行业惯例’与‘常规做法’。运用绝对的第一性原理（First Principles）审视以下命题：\n1. 这个系统最根本、不可违背的基础科学定律（如热力学、香农信息论、计算复杂度）是什么？\n2. 若将整个产品拆解为原子级的原材料成本与基础能源成本，理论极限底线是多少？现有成本的溢价主要被哪些中间低效层吃掉了？\n3. 颠覆现有行业做法、重构整个价值流并实现成本降低 80% 以上的激进方案是什么？列出三个最关键的试错实验。",
       "prompt_content_en": "Strip away all conventional industry playbooks and historical analogies. Scrutinize the following challenge purely through First Principles:\n1. What are the immutable fundamental laws of science (e.g. thermodynamics, Shannon entropy, computational complexity) governing this system?\n2. Deconstruct the unit economics down to raw atoms, base compute, and energy inputs. Where does the 10x margin inefficiency currently leak?\n3. Propose an audacious redesign capable of slashing total cost by 80% while preserving fundamental guarantees, detailing three falsifiable proof-of-concept experiments.",
@@ -69191,8 +70089,8 @@
         "商业战略",
         "深度思考"
       ],
-      "title": "💡【第一性原理】马斯克式底层拆解：剥离行业惯性直击物理与商业极限",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_arxiv_deep_dive",
@@ -69216,7 +70114,7 @@
         "temp": "0.3"
       },
       "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
-      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
       "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
       "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
       "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
@@ -69226,8 +70124,8 @@
         "科研拆解",
         "Prompt神咒"
       ],
-      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_math_pseudocode_derivation",
@@ -69251,7 +70149,7 @@
         "temp": "0.1"
       },
       "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
-      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释",
+      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
       "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
       "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
       "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
@@ -69261,8 +70159,78 @@
         "PyTorch",
         "张量运算"
       ],
-      "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-01T00:00:00Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt_multi_agent_debate",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 多角色对立辩论与反思博弈工作流",
+      "purpose_en": "🤖 Agents & MCP · Multi-Agent Adversarial Debate & Peer Reflection",
+      "title_zh": "💡【多智能体协同】红蓝对抗质询式辩论与最终共识提炼系统 Prompt",
+      "title_en": "💡 [Multi-Agent Collaboration] Red-Team vs Blue-Team Adversarial Debate & Consensus Prompt",
+      "url": "https://github.com/",
+      "image_url": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "架构师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-01T00:00:00Z",
+      "recommended_model": "Claude 4.6 / GPT-4o",
+      "temp_advice": "建议温度 0.5 | 对抗辩论模式",
+      "metrics": {
+        "type": "🤖 红蓝对抗",
+        "model": "Claude 4.6",
+        "temp": "0.5"
+      },
+      "content_snippet": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
+      "summary_zh": "编排三位具备独立视角的智能体：激进方案提出者、严苛挑刺红方审查者与中立技术法官，逼近真理。",
+      "summary_en": "Orchestrates multi-perspective agents: Proponent, Harsh Skeptic, and Judge to arrive at robust battle-tested solutions.",
+      "prompt_content_zh": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
+      "prompt_content_en": "Simulate an elite three-agent architecture review board within this single execution turn:\n- [Agent Alpha - The Innovator]: Proposes the most performant, cutting-edge architecture paradigm for the problem;\n- [Agent Beta - Devil's Advocate / Red Team]: Ruthlessly tears into Alpha's plan, surfacing at least 4 catastrophic failure modes, hidden maintenance traps, and single points of failure;\n- [Agent Gamma - Neutral Chief Architect]: Synthesizes the confrontation, discarding flawed assumptions to formulate the pragmatic, battle-tested production blueprint.",
+      "prompt_content": "请在单次交互中模拟一个三方智能体高级技术评审委员会：\n- 【Agent Alpha·方案提出者】：针对用户的难题，提出最激进、性能上限最高的新架构方案；\n- 【Agent Beta·魔鬼代言人/挑刺红队】：对 Alpha 的方案发起最无情的抨击，指出至少 4 个生产踩坑点、维护成本隐患与高并发单点故障；\n- 【Agent Gamma·中立首席架构师】：综合双方交锋要点，去伪存真，给出一个兼顾高可用与落地可行性的最终折衷生产级方案。",
+      "tags": [
+        "多智能体",
+        "红蓝对抗",
+        "系统设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_game_npc_dialogue",
@@ -69286,7 +70254,7 @@
         "temp": "0.7"
       },
       "content_snippet": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
-      "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树",
+      "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树。",
       "summary_en": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
       "prompt_content_zh": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
       "prompt_content_en": "You are a Lead Narrative Designer on a AAA open-world RPG. Generate a dynamic branching dialogue system for the specified NPC:\n1. Persona & Subtext: Define distinct verbal tics, a hidden agenda, and moral vulnerability;\n2. State Machine Integration: Provide 3 divergent branches conditioned on the player's [Reputation], [Prior Quest Flags], and [Affinity Tier];\n3. Output Specification: Output clean JSON schema parseable by Unity/Unreal dialogue managers, including node_id, speaker, lines, choices, condition_predicates, and state_mutations.",
@@ -69296,8 +70264,8 @@
         "NPC对话",
         "叙事设计"
       ],
-      "title": "💡【游戏叙事设计】具有记忆与好感度动态演进的沉浸式 RPG NPC 对话状态树生成",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_3d_shader_webgl",
@@ -69321,7 +70289,7 @@
         "temp": "0.2"
       },
       "content_snippet": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
-      "summary_zh": "编写纯 GLSL 顶点与片元着色器，融合菲涅尔边缘光晕、柏林噪声流体波动与 60fps WebGL 性能优化",
+      "summary_zh": "编写纯 GLSL 顶点与片元着色器，融合菲涅尔边缘光晕、柏林噪声流体波动与 60fps WebGL 性能优化。",
       "summary_en": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
       "prompt_content_zh": "你是一位顶级 WebGL 与游戏图形学 TA（技术美术）专家。请为 Three.js 编写一个生产级自定义 ShaderMaterial：\n1. 顶点着色器（Vertex Shader）：使用 3D Simplex 噪声在 GPU 端实现柔和的顶点位移波动；\n2. 片元着色器（Fragment Shader）：计算菲涅尔效应（Fresnel Effect）边缘泛光，并加入随时间流逝不断滚动的全息扫描线；\n3. 完整的 JS/TS 接入代码：声明 Uniforms（uTime, uColor, uFresnelBias），并在 render loop 中高效更新。",
       "prompt_content_en": "You are a Senior Technical Artist and WebGL Graphics Engineer. Build a production-grade custom ShaderMaterial for Three.js:\n1. Vertex Shader: Generate smooth procedural surface vertex displacement using GPU-side 3D Simplex noise;\n2. Fragment Shader: Calculate high-fidelity Fresnel rim glow blended with dynamic holographic scanlines driven by an elapsed time uniform;\n3. Complete JS/TS Integration: Setup uniform declarations (uTime, uResolution, uFresnelBias) with optimal tick update loops.",
@@ -69331,8 +70299,8 @@
         "Threejs",
         "3D着色器"
       ],
-      "title": "💡【3D 图形学】Three.js / GLSL 赛博霓虹能量盾与流体自发光着色器生成",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_mckinsey_pyramid_pitch",
@@ -69356,7 +70324,7 @@
         "temp": "0.3"
       },
       "content_snippet": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
-      "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则",
+      "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则。",
       "summary_en": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
       "prompt_content_zh": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
       "prompt_content_en": "Adopt the persona of a Senior McKinsey Strategy Director. Restructure the provided raw operational notes into an executive proposal for the C-Suite following the Pyramid Principle:\n1. Frame the introduction using the SCQA methodology (Situation, Complication, Question, Answer);\n2. Enforce Bottom Line Up Front (BLUF): the opening sentence of each pillar must be a crisp, quantified value claim;\n3. Group supporting pillars using the MECE framework (Mutually Exclusive, Collectively Exhaustive), concluding with an ROI model and concrete risk hedges.",
@@ -69366,8 +70334,8 @@
         "高管汇报",
         "商业方案"
       ],
-      "title": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
     },
     {
       "id": "prompt_deep_industry_analysis",
@@ -69391,7 +70359,7 @@
         "temp": "0.3"
       },
       "content_snippet": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
-      "summary_zh": "深度拆解赛道 TAM 真实容量、客户获取成本 LTV/CAC、数据飞轮护城河与潜在反垄断风险",
+      "summary_zh": "深度拆解赛道 TAM 真实容量、客户获取成本 LTV/CAC、数据飞轮护城河与潜在反垄断风险。",
       "summary_en": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
       "prompt_content_zh": "你是一位管理百亿美元科技投资基金的管理合伙人兼投研总监。请就以下赛道/标的企业撰写一份高深度尽职调查（Due Diligence）备忘录：\n1. 剥离虚假炒作，测算真实的有效可触达市场规模（TAM/SAM/SOM）；\n2. 核心壁垒审计：其商业模式是否具备真正的防御性护城河（技术排他性、网络效应、沉没迁移成本还是数据飞轮）？\n3. 单元经济模型（Unit Economics）：拆解 LTV/CAC、毛利率天花板与算力边际成本衰减曲线；\n4. 风险清单：列出可能导致该赛道 3 年内崩溃的 3 个致命黑天鹅。",
       "prompt_content_en": "You are a General Partner at a tier-1 technology venture firm. Prepare an exhaustive investment memo and due diligence brief on the target sector:\n1. Deconstruct true TAM/SAM/SOM, eliminating vanity TAM inflation;\n2. Moat Audit: Does the defensibility rely on proprietary technology, flywheel data network effects, or high switching costs?\n3. Unit Economics: Dissect LTV/CAC, gross margin ceilings, and compute inference margin expansion curves;\n4. Vulnerability Matrix: Detail three fatal black swan scenarios that could obsolete the business within 36 months.",
@@ -69401,8 +70369,64 @@
         "VC尽调",
         "护城河分析"
       ],
-      "title": "💡【深度行业尽调】红杉/高盛级科技赛道尽职调查与竞争格局拆解研报模板",
-      "is_pinned": false
+      "generation_tier": "sota",
+      "model_tier_score": 90
+    },
+    {
+      "id": "prompt-legacy-gpt35-01",
+      "title_zh": "【历史库】早期 GPT-3.5/GPT-4 强约束思维链补丁提示词",
+      "title_en": "[Legacy] GPT-3.5/GPT-4 Chain-of-Thought Patch",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "OpenAI GPT-3.5-Turbo / GPT-4 (早期旧版)",
+      "model_family": "OpenAI",
+      "model_tier_score": 40,
+      "generation_tier": "legacy",
+      "purpose_zh": "旧版模型防幻觉与强制分步输出",
+      "temp_advice": "温度 0.0 (极度克制)",
+      "variables": [
+        "{{任务目标}}"
+      ],
+      "prompt_content_zh": "你是一个严苛的代码助手。在回答之前，请务必在脑海中深呼吸三次，严格按照以下步骤输出：\nStep 1: 检查输入有无语法错误，并复述你的理解；\nStep 2: 一行一行推导逻辑，绝不允许猜测未定义的变量；\nStep 3: 如果不确定，必须回答'我不知道'，禁止胡说八道！",
+      "prompt_content_en": "You are a code assistant. You must take a deep breath, verify line-by-line, and admit when you do not know. Never hallucinate. Follow step 1, 2, 3 explicitly.",
+      "sample_output": {
+        "type": "text",
+        "title": "早期模型打补丁输出样板",
+        "content": "Step 1: 收到任务...\nStep 2: 正在逐步核验...\nStep 3: 输出修复后的代码。"
+      },
+      "usage_guide_zh": "该提示词为早期模型防幻觉专用的历史补丁咒语，新一代推理模型（如 DeepSeek-R1 / o3）已具备原生自主思维链，无需添加此冗长约束。",
+      "created_at": "2023-08-15T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2023-08-15T00:00:00Z",
+      "recommended_model": "OpenAI GPT-3.5-Turbo / GPT-4 (早期旧版)"
+    },
+    {
+      "id": "prompt-legacy-sd15-01",
+      "title_zh": "【历史库】早期 Stable Diffusion 1.5 负向词大乱炖与堆砌咒语",
+      "title_en": "[Legacy] Stable Diffusion 1.5 Negative Prompt Soup & Keyword Stuffing",
+      "category": "prompts",
+      "scenario_label": "🎨 灵感生图",
+      "target_model": "Stable Diffusion 1.5 / SD 2.1 (早期旧版)",
+      "model_family": "StabilityAI",
+      "model_tier_score": 35,
+      "generation_tier": "legacy",
+      "purpose_zh": "早期小参数画图模型防畸变负面词堆砌",
+      "temp_advice": "CFG: 7.0, Steps: 20",
+      "variables": [
+        "{{主体画风}}"
+      ],
+      "prompt_content_zh": "正向词：(masterpiece, best quality:1.2), 8k wallpaper, highly detailed, ultra-fine painting, {{主体画风}}.\n负向词 (Negative Prompt)：(worst quality, low quality:1.4), (deformed, distorted, disfigured:1.3), poorly drawn, bad anatomy, wrong anatomy, extra limb, missing limb, floating limbs, mutated hands, extra fingers, blurry.",
+      "prompt_content_en": "Positive: (masterpiece, best quality:1.2), 8k wallpaper, highly detailed, {{主体画风}}.\nNegative: (worst quality, low quality:1.4), deformed, bad anatomy, extra limbs, mutated hands, blurry.",
+      "sample_output": {
+        "type": "text",
+        "title": "早期生图模型负面提示词词包样板",
+        "content": "Negative Prompt 堆砌示例：\n(worst quality, low quality:1.4), monochrome, grayscale, text, watermark, bad hand, mutated fingers, missing fingers, extra limbs, disfigured, deformed, body out of frame, bad proportions, gross proportions."
+      },
+      "usage_guide_zh": "现代 SOTA 画图模型（如 Flux.1、Midjourney v6.1）已采用高级 T5/CLIP 文本编码器，完全支持自然语言描述，已无需复制冗长的负向词大乱炖。",
+      "created_at": "2023-04-10T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2023-04-10T00:00:00Z",
+      "recommended_model": "Stable Diffusion 1.5 / SD 2.1 (早期旧版)"
     }
   ],
   "viral_posts": [
