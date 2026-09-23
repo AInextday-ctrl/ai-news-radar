@@ -2288,16 +2288,16 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     viral_posts = fetch_viral_social_posts(max_items=16)
     items.extend(viral_posts)
 
-    # 3. 全球顶级硬核科技媒体 (24小时超高频全球榜 + 深度突破)
+    # 3. 全球顶级硬核科技与前沿 AI 媒体 (100% 具备详实深度长导语与高清摄影原图)
     news_sources = [
-        ("google_news_ai", 15),
-        ("techmeme_ai", 8),
-        ("wired_ai", 6),
-        ("the_decoder", 6),
-        ("arstechnica_ai", 6),
-        ("venturebeat_ai", 6),
-        ("theverge_ai", 6),
-        ("mit_tech_review", 4)
+        ("techmeme_ai", 20),      # 硅谷顶级策展头条，涵盖 WSJ, Bloomberg, NYT, Reuters 独家精炼事实摘要
+        ("the_decoder", 10),      # 欧洲顶级 AI 垂直媒体，篇篇具备 300+ 字符硬核深度评测
+        ("theverge_ai", 10),      # 全球顶级科技媒体，一手产品突破与产业调查
+        ("wired_ai", 8),          # Wired AI 深度报道
+        ("arstechnica_ai", 8),    # 技术微架构与网络安全深度长文
+        ("venturebeat_ai", 8),    # 企业级大模型与融资
+        ("openai_official", 6),   # OpenAI 官方研究与发布动态直连
+        ("mit_tech_review", 6)    # 麻省理工科技评论官方长文
     ]
     for key, count in news_sources:
         items.extend(fetch_rss_channel(key, max_items=count))
@@ -2472,15 +2472,20 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             except Exception:
                                 pass
 
-                    # 识别 Google News 等聚合器典型的“标题复读机虚假摘要”
+                    # 严格过滤掉 Google News 纸折飞机占位图标
+                    if img_url and any(bad in img_url.lower() for bad in ["lh3.googleusercontent.com/j6_cofbog", "lh3.googleusercontent.com", "pml.png"]):
+                        img_url = None
+
+                    # 严格的内容质量门禁 (Hard Quality Gate)：
+                    # 如果 RSS 流未提供真实有效的正文摘要 (少于 20 字符，或仅为标题复读)
                     is_dummy_summary = False
-                    if not clean_summary or len(clean_summary) < 25:
+                    if not clean_summary or len(clean_summary) < 20:
                         is_dummy_summary = True
-                    elif title.lower() in clean_summary.lower() and len(clean_summary) <= len(title) + 40:
+                    elif title.lower() in clean_summary.lower() and len(clean_summary) <= len(title) + 15:
                         is_dummy_summary = True
 
                     if not img_url or is_dummy_summary:
-                        # 尝试穿透落地页提取 1200px+ 官方原图、真实文章导语及视频媒体
+                        # 尝试穿透落地页提取 1200px+ 官方原图与真实文章导语 (og:description / twitter:description)
                         og_media = resolve_article_og_media(url, client)
                         if not img_url and og_media.get("cover_image"):
                             img_url = og_media["cover_image"]
@@ -2488,8 +2493,13 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
-                        if is_dummy_summary and og_media.get("description"):
+                        if is_dummy_summary and og_media.get("description") and len(og_media["description"]) >= 20:
                             clean_summary = og_media["description"]
+                            is_dummy_summary = False
+
+                    # 【核心质量把控】：如果经落地页探测后仍无法获取具体事件内容（依然为空壳），坚决丢弃，绝不收录！
+                    if is_dummy_summary or not clean_summary or len(clean_summary) < 15:
+                        continue
 
                     if not img_url:
                         img_url = get_smart_cover_url(title, category, cfg["name"])

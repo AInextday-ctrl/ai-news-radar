@@ -501,9 +501,9 @@ CELEBRITY_PROFILES = {
 # 抓取源清单：严格剔除地方政务/会议水文，仅聚合全球顶尖 AI 突破与极客一线动态
 SOURCES = {
     # 1. 全球一线顶级科技媒体突发 (24小时超高频全球榜 + 深度突破)
-    "google_news_ai": {
-        "name": "Google AI 实时快讯",
-        "url": "https://news.google.com/rss/search?q=AI+OR+OpenAI+OR+Anthropic+OR+ChatGPT+when:1d&hl=en-US&gl=US&ceid=US:en",
+    "openai_official": {
+        "name": "OpenAI 官方动态",
+        "url": "https://openai.com/news/rss.xml",
         "default_category": "news",
         "type": "rss"
     },

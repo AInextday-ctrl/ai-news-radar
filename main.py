@@ -900,6 +900,31 @@ def save_news(items: list):
             if not it.get("quote_en"):
                 it["quote_en"] = it.get("title_en") or it.get("title") or ""
 
+    # 4. 【核心内容质量门禁】：坚决剔除任何无法展现具体事件事实的空壳资讯，杜绝 Low value content
+    valid_master_items = []
+    for it in all_master_items:
+        cat = it.get("category", "news")
+        if cat in ["news", "celebrity"]:
+            snip = str(it.get("content_snippet") or "").strip()
+            sum_zh = str(it.get("summary_zh") or "").strip()
+            title = str(it.get("title_zh") or it.get("title") or "").strip()
+            img = str(it.get("image_url") or "").strip()
+
+            # 过滤 1: 封面为 Google News 纸折飞机占位图标 (无法破译真实大图)
+            if "lh3.googleusercontent.com/j6_cofbog" in img.lower():
+                continue
+
+            # 过滤 2: 摘要为单薄占位词、空字符串或无意义机械填充
+            if sum_zh in ["来源", "官方快讯", "今日要闻", ""] or "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响" in sum_zh:
+                continue
+
+            # 过滤 3: 仅标题单句复读且无实质正文细节支撑
+            if title and sum_zh.startswith(title) and len(sum_zh) <= len(title) + 5 and len(snip) < 25:
+                continue
+
+        valid_master_items.append(it)
+
+    all_master_items = valid_master_items
     all_master_items.sort(key=parse_time_for_sort, reverse=True)
 
     # 滚动保留 1 年（最多 25,000 条高质量前沿深度资讯），杜绝存储无限膨胀
