@@ -1425,14 +1425,27 @@ def resolve_product_hunt_redirect(ph_url: str) -> str:
     """Resolve /r/p/... redirect URLs to the actual official product website."""
     if not ph_url or '/r/p/' not in ph_url:
         return format_clean_tool_url(ph_url)
+    # 1. 优先使用标准 HTTP 客户端获取 301/302 重定向 Location
     try:
-        with httpx.Client(follow_redirects=False, timeout=5.0) as client:
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36"}
+        with httpx.Client(headers=headers, follow_redirects=False, timeout=6.0) as client:
             resp = client.get(ph_url)
             if resp.status_code in (301, 302, 303, 307, 308) and 'location' in resp.headers:
                 loc = resp.headers['location']
                 return format_clean_tool_url(loc)
     except Exception:
         pass
+
+    # 2. 备选方案：利用原生 curl 追踪最终重定向目标
+    try:
+        curl_bin = "curl.exe" if (sys.platform == "win32" and shutil.which("curl.exe")) else (shutil.which("curl") or "curl")
+        cmd = [curl_bin, "-ILs", "-o", "NUL", "-w", "%{url_effective}", ph_url, "--max-time", "6"]
+        res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
+        if res.stdout and res.stdout.startswith("http") and "/r/p/" not in res.stdout:
+            return format_clean_tool_url(res.stdout.strip())
+    except Exception:
+        pass
+
     return format_clean_tool_url(ph_url)
 
 
@@ -1659,6 +1672,11 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 clean_target = official_url.split('?')[0]
                 ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
                 preview_imgs = [ss_url]
+
+            # 【严格门禁】：如果未能解析出产品官网或依然残留 /r/p/ 转链，直接剔除，绝不入库
+            if not official_url or official_url == '#' or '/r/p/' in official_url or 'producthunt.com/r/' in official_url:
+                print(f"  ⚠️ [Tools] 拦截未解析出真实官网的转链工具: {app_name}")
+                continue
 
             items.append({
                 "id": make_id(source_url, title),

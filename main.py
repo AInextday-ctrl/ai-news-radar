@@ -969,6 +969,16 @@ def save_news(items: list):
             if title and sum_zh.startswith(title) and len(sum_zh) <= len(title) + 5 and len(snip) < 25:
                 continue
 
+        if cat == "tools":
+            # 工具门禁 1: 坚决剔除任何无法解析出真实官网、依然为 /r/p/ 转链或纯 Product Hunt 页面的劣质工具
+            u = str(it.get("official_url") or it.get("url") or "")
+            if not u or u == "#" or "/r/p/" in u or "producthunt.com/r/" in u:
+                continue
+            # 工具门禁 2: 必须具备预览大图或官网实测截图，杜绝空壳或纯占位符
+            imgs = it.get("preview_images") or []
+            if not imgs and not it.get("image_url"):
+                continue
+
         valid_master_items.append(it)
 
     all_master_items = valid_master_items
