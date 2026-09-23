@@ -35,39 +35,66 @@ SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 
 
 def generate_sitemap():
-    """Dynamically generate fresh multilingual sitemap.xml adhering strictly to Google sitemaps.org standard."""
+    """Dynamically generate fresh multilingual sitemap.xml.
+    Includes: homepage, trust pages, and last 30 days of daily briefings."""
     now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    # 固定页面
+    static_pages = [
+        {"loc": "https://ainewsradar.xyz/", "changefreq": "hourly", "priority": "1.0", "hreflang": True},
+        {"loc": "https://ainewsradar.xyz/?lang=en", "changefreq": "hourly", "priority": "0.9", "hreflang": True},
+        {"loc": "https://ainewsradar.xyz/about", "changefreq": "monthly", "priority": "0.8"},
+        {"loc": "https://ainewsradar.xyz/contact", "changefreq": "monthly", "priority": "0.7"},
+        {"loc": "https://ainewsradar.xyz/editorial-policy", "changefreq": "monthly", "priority": "0.7"},
+        {"loc": "https://ainewsradar.xyz/privacy", "changefreq": "monthly", "priority": "0.6"},
+        {"loc": "https://ainewsradar.xyz/terms", "changefreq": "monthly", "priority": "0.6"},
+    ]
+
+    url_entries = []
+    for p in static_pages:
+        hreflang_block = ""
+        if p.get("hreflang"):
+            hreflang_block = """
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>"""
+        url_entries.append(f"""  <url>
+    <loc>{p['loc']}</loc>{hreflang_block}
+    <lastmod>{now_date}</lastmod>
+    <changefreq>{p['changefreq']}</changefreq>
+    <priority>{p['priority']}</priority>
+  </url>""")
+
+    # 扫描 public/daily/ 目录，收录最近 30 天的每日简报页
+    daily_dir = os.path.join(PUBLIC_DIR, "daily")
+    if os.path.isdir(daily_dir):
+        daily_files = sorted(
+            [f for f in os.listdir(daily_dir) if f.endswith(".html") and len(f) == 15],
+            reverse=True
+        )[:30]  # 最多收录最近 30 天
+        for fname in daily_files:
+            date_slug = fname.replace(".html", "")
+            url_entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/daily/{date_slug}</loc>
+    <lastmod>{date_slug}</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.75</priority>
+  </url>""")
+
+    urls_xml = "\n".join(url_entries)
     xml_content = f"""<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>https://ainewsradar.xyz/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://ainewsradar.xyz/?lang=en</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-  </url>
+{urls_xml}
 </urlset>
 """
     try:
         os.makedirs(PUBLIC_DIR, exist_ok=True)
         with open(SITEMAP_FILE, "wb") as f:
             f.write(xml_content.strip().encode("utf-8") + b"\n")
-        print(f"🗺️ 站点地图已动态更新: {SITEMAP_FILE} (lastmod: {now_date})")
+        print(f"🗺️ 站点地图已动态更新: {SITEMAP_FILE} (lastmod: {now_date}, 共 {len(url_entries)} 个 URL)")
     except Exception as e:
         print(f"⚠️ 更新站点地图失败: {e}")
 
@@ -168,6 +195,243 @@ def inject_seo_static_content(recent_items: list):
         print(f"🕷️ SEO 静态内容注入完成: {len(seo_items)} 条资讯已写入 index.html（Googlebot 可见）")
     except Exception as e:
         print(f"⚠️ SEO 静态内容注入失败: {e}")
+
+
+def generate_daily_briefing(recent_items: list):
+    """
+    生成当日 AI 简报独立静态 HTML 页面：public/daily/YYYY-MM-DD.html
+    每篇页面包含当日 Top 15 资讯的完整标题、摘要、来源、时间与原文链接。
+    每次 pipeline 运行时幂等覆盖当天文件（内容持续更新至深夜）。
+    """
+    DAILY_DIR = os.path.join(PUBLIC_DIR, "daily")
+    os.makedirs(DAILY_DIR, exist_ok=True)
+
+    now_utc = datetime.now(timezone.utc)
+    # 用北京时间日期作为文件名（UTC+8）
+    now_cst = datetime.fromtimestamp(now_utc.timestamp() + 8 * 3600)
+    date_slug = now_cst.strftime("%Y-%m-%d")
+    date_zh = now_cst.strftime("%Y年%m月%d日")
+    output_path = os.path.join(DAILY_DIR, f"{date_slug}.html")
+
+    # 筛选过去 36 小时内的资讯（覆盖跨日情况）
+    cutoff_ts = now_utc.timestamp() - 36 * 3600
+    today_items = []
+    for it in recent_items:
+        raw = it.get("raw_published_at", "")
+        if not raw:
+            continue
+        try:
+            ts = datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
+            if ts >= cutoff_ts:
+                today_items.append(it)
+        except Exception:
+            continue
+
+    # 分类筛选
+    news_items = [i for i in today_items if i.get("category") == "news"][:8]
+    celeb_items = [i for i in today_items if i.get("category") == "celebrity"][:4]
+    tool_items = [i for i in today_items if i.get("category") == "tools"][:3]
+    briefing_items = news_items + celeb_items + tool_items
+    if not briefing_items:
+        # fallback: 用全量最新的前 15 条
+        briefing_items = recent_items[:15]
+
+    def safe_html(text, max_len=300):
+        if not text:
+            return ""
+        text = str(text).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+        return text[:max_len]
+
+    def fmt_time(raw):
+        try:
+            dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            cst = datetime.fromtimestamp(dt.timestamp() + 8 * 3600)
+            return cst.strftime("%H:%M")
+        except Exception:
+            return ""
+
+    cat_labels = {
+        "news": ("⚡ AI 行业快讯", "#4f46e5"),
+        "celebrity": ("🐦 领袖观点", "#7c3aed"),
+        "tools": ("🛠️ 场景工具", "#0891b2"),
+        "videos": ("🎬 实战视频", "#dc2626"),
+        "prompts": ("💡 提示词库", "#d97706"),
+    }
+
+    # 生成 JSON-LD Article schema
+    schema_items = []
+    for it in briefing_items[:5]:
+        title = safe_html(it.get("title_zh") or it.get("title", ""), 120)
+        url = it.get("url", "")
+        pub = it.get("raw_published_at", now_utc.isoformat())
+        if title and url:
+            schema_items.append(f'{{"@type":"NewsArticle","headline":"{title}","url":"{url}","datePublished":"{pub}"}}')
+    schema_list = ",\n    ".join(schema_items)
+
+    # 生成文章卡片 HTML
+    articles_html = ""
+    for i, item in enumerate(briefing_items, 1):
+        title = safe_html(item.get("title_zh") or item.get("title", ""), 120)
+        title_en = safe_html(item.get("title_en") or item.get("title", ""), 120)
+        summary = safe_html(item.get("summary_zh") or item.get("content_snippet", ""), 300)
+        source = safe_html(item.get("source", ""), 60)
+        url = item.get("url", "#")
+        time_str = fmt_time(item.get("raw_published_at", ""))
+        cat = item.get("category", "news")
+        cat_label, cat_color = cat_labels.get(cat, ("AI 资讯", "#4f46e5"))
+        image_url = item.get("image_url", "")
+
+        if not title:
+            continue
+
+        img_html = ""
+        if image_url and image_url.startswith("http"):
+            img_html = f'<img src="{image_url}" alt="{title}" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:12px;" onerror="this.style.display=\'none\'">'
+
+        articles_html += f"""
+  <article style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;" itemscope itemtype="https://schema.org/NewsArticle">
+    <meta itemprop="datePublished" content="{item.get('raw_published_at', '')}">
+    <meta itemprop="publisher" content="AI 资讯雷达">
+    {img_html}
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+      <span style="background:{cat_color}15;color:{cat_color};font-size:12px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid {cat_color}30;">{cat_label}</span>
+      {f'<span style="color:#94a3b8;font-size:12px;">🕒 {time_str} CST</span>' if time_str else ''}
+      {f'<span style="color:#94a3b8;font-size:12px;">· {source}</span>' if source else ''}
+    </div>
+    <h2 itemprop="headline" style="font-size:18px;font-weight:700;color:#1e293b;margin:0 0 10px;line-height:1.5;">
+      <a href="{url}" target="_blank" rel="noopener noreferrer" itemprop="url" style="color:inherit;text-decoration:none;">{title}</a>
+    </h2>
+    {f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>' if title_en and title_en != title else ''}
+    {f'<p itemprop="description" style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 14px;">{summary}</p>' if summary else ''}
+    <a href="{url}" target="_blank" rel="noopener noreferrer"
+       style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:{cat_color};font-weight:600;text-decoration:none;border:1px solid {cat_color}40;padding:6px 14px;border-radius:8px;transition:all 0.2s;">
+      阅读原文 →
+    </a>
+  </article>"""
+
+    total = len(briefing_items)
+    page_title = f"AI 日报 · {date_zh} | 今日精选 {total} 条 AI 前沿动态 | AI 资讯雷达"
+    page_desc = f"{date_zh} AI 资讯雷达精选：涵盖大模型突破、硅谷动态、AI 工具上线与领袖观点。共 {total} 条经人工审核的 AI 行业快报，附原始来源链接。"
+
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{page_title}</title>
+  <meta name="description" content="{page_desc}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://ainewsradar.xyz/daily/{date_slug}">
+  <meta property="og:title" content="{page_title}">
+  <meta property="og:description" content="{page_desc}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://ainewsradar.xyz/daily/{date_slug}">
+  <meta property="article:published_time" content="{now_utc.isoformat()}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <script type="application/ld+json">
+  {{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "{page_title}",
+    "description": "{page_desc}",
+    "url": "https://ainewsradar.xyz/daily/{date_slug}",
+    "publisher": {{
+      "@type": "Organization",
+      "name": "AI 资讯雷达",
+      "url": "https://ainewsradar.xyz",
+      "logo": {{"@type": "ImageObject", "url": "https://ainewsradar.xyz/"}}
+    }},
+    "datePublished": "{now_utc.date().isoformat()}",
+    "dateModified": "{now_utc.isoformat()}",
+    "hasPart": [
+      {schema_list}
+    ]
+  }}
+  </script>
+  <style>
+    * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+    body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }}
+    .container {{ max-width: 800px; margin: 0 auto; padding: 0 16px; }}
+    a:hover {{ opacity: 0.8; }}
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header style="background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+    <div class="container" style="padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);display:flex;align-items:center;justify-content:center;font-size:18px;">🤖</div>
+        <div>
+          <div style="font-size:16px;font-weight:900;background:linear-gradient(to right,#312e81,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI 资讯雷达</div>
+          <div style="font-size:11px;color:#94a3b8;">ainewsradar.xyz</div>
+        </div>
+      </a>
+      <a href="/" style="font-size:13px;color:#4f46e5;font-weight:600;text-decoration:none;">← 返回实时首页</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <div style="background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#ec4899 100%);padding:40px 16px;">
+    <div class="container" style="text-align:center;color:#fff;">
+      <div style="font-size:13px;font-weight:600;opacity:0.85;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;">AI 资讯雷达 · 每日简报</div>
+      <h1 style="font-size:28px;font-weight:900;margin-bottom:10px;line-height:1.3;">{date_zh} AI 日报</h1>
+      <p style="font-size:15px;opacity:0.9;max-width:500px;margin:0 auto 16px;line-height:1.6;">今日精选 {total} 条全球 AI 前沿动态，经 AI 辅助翻译与人工编辑审核，所有资讯均附原始来源链接。</p>
+      <div style="display:flex;justify-content:center;gap:20px;flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:13px;">📰 {len(news_items)} 条行业快讯</span>
+        <span style="background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:13px;">🐦 {len(celeb_items)} 条领袖观点</span>
+        <span style="background:rgba(255,255,255,0.2);padding:6px 16px;border-radius:20px;font-size:13px;">🛠️ {len(tool_items)} 款场景工具</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- About This Briefing -->
+  <div class="container" style="padding-top:24px;padding-bottom:8px;">
+    <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:16px 20px;">
+      <p style="font-size:14px;color:#1e40af;line-height:1.7;">
+        <strong>关于本期简报：</strong>AI 资讯雷达每日从全球 50+ 权威 AI 信源（包括 OpenAI、Anthropic、Google DeepMind 官博，彭博社、路透社、The Verge 等主流媒体，以及 Andrej Karpathy、Sam Altman 等行业领袖的社交账号）自动聚合最新资讯，经 Google Gemini API 辅助翻译为中文并由人工编辑审核后发布。所有内容均附原始来源链接，版权归原作者所有。
+      </p>
+    </div>
+  </div>
+
+  <!-- Articles -->
+  <main class="container" style="padding-top:20px;padding-bottom:40px;">
+    {articles_html}
+  </main>
+
+  <!-- Footer -->
+  <footer style="background:#fff;border-top:1px solid #e2e8f0;padding:32px 16px;">
+    <div class="container">
+      <!-- Navigation to other daily briefings would go here -->
+      <div style="text-align:center;margin-bottom:20px;">
+        <a href="/" style="display:inline-flex;align-items:center;gap:8px;background:#4f46e5;color:#fff;text-decoration:none;font-weight:700;padding:12px 28px;border-radius:10px;font-size:14px;">
+          🤖 返回 AI 资讯雷达实时首页
+        </a>
+      </div>
+      <nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:16px 24px;margin-bottom:16px;">
+        <a href="/about" style="font-size:13px;color:#64748b;text-decoration:none;">关于我们</a>
+        <a href="/editorial-policy" style="font-size:13px;color:#64748b;text-decoration:none;">编辑方针</a>
+        <a href="/contact" style="font-size:13px;color:#64748b;text-decoration:none;">联系我们</a>
+        <a href="/privacy" style="font-size:13px;color:#64748b;text-decoration:none;">隐私政策</a>
+        <a href="/terms" style="font-size:13px;color:#64748b;text-decoration:none;">服务条款</a>
+      </nav>
+      <p style="text-align:center;font-size:12px;color:#94a3b8;">
+        © 2026 AI News Radar (ainewsradar.xyz). 内容经 AI 辅助处理与人工编辑审核 · 版权归原作者所有
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>"""
+
+    try:
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(html)
+        print(f"📰 每日简报已生成: /daily/{date_slug}.html ({total} 条资讯, {len(html)//1024}KB)")
+    except Exception as e:
+        print(f"⚠️ 每日简报生成失败: {e}")
 
 
 def parse_time_for_sort(it):
@@ -712,6 +976,9 @@ def save_news(items: list):
 
     # 注入静态资讯快照到 index.html，让 Googlebot 可直接爬取内容
     inject_seo_static_content(recent_final)
+
+    # 生成每日 AI 简报独立静态页面 (public/daily/YYYY-MM-DD.html)
+    generate_daily_briefing(recent_final)
 
     print(f"\n💾 分级存储同步完成:")
     print(f"  ⚡ 24小时实时热数据: {len(recent_final)} 篇 (体积大幅缩减，首屏极速秒开)")
