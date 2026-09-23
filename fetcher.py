@@ -2319,6 +2319,60 @@ DOMESTIC_PROPAGANDA_KEYWORDS = [
     "考察调研", "高质量发展推进", "精神贯彻", "大会召开", "吹嘘", "领导班子", "签约仪式", "政企合作", "示范区", "自贸区", "领航者"
 ]
 
+def extract_rich_article_text(entry: Any, is_techmeme: bool = False) -> Optional[str]:
+    """
+    从 RSS 条目中深度提取权威媒体原始报道要点/多段落正文文本 (如 The Verge, Ars Technica, Wired, The Decoder, Techmeme 援引的 WSJ/彭博原文等)。
+    若无实质内容或长度不足，返回 None，以便前端执行优雅隐藏。
+    """
+    # 1. 尝试从 content:encoded / content 获取完整文章段落 (The Verge, Ars Technica, Wired 等)
+    contents = entry.get("content", [])
+    if contents and isinstance(contents, list) and len(contents) > 0:
+        val = contents[0].get("value", "")
+        if val:
+            paras = re.findall(r'<p[^>]*>(.*?)</p>', val, flags=re.DOTALL)
+            clean_paras = [re.sub(r'<[^>]+>', '', p).strip() for p in paras]
+            clean_paras = [
+                p for p in clean_paras 
+                if len(p) > 35 and not any(w in p.lower() for w in ["cookie", "newsletter", "subscribe", "sign up", "read more", "copyright", "all rights reserved"])
+            ]
+            if clean_paras:
+                res = "\n\n".join(clean_paras[:3])
+                if len(res) >= 60:
+                    return res[:1200]
+
+    # 2. 针对 Techmeme 策展源：提取破折号 (&mdash; / — / --) 之后内嵌的 WSJ/Bloomberg/FT 原文核心事实段落
+    raw_desc = entry.get("summary") or entry.get("description", "")
+    if is_techmeme and raw_desc:
+        m_dash = re.search(r'(?:&mdash;|—|--)\s*(.+)$', raw_desc, re.DOTALL)
+        if m_dash:
+            clean = re.sub(r'<[^>]+>', ' ', m_dash.group(1))
+            clean = re.sub(r'\s+', ' ', clean).strip()
+            clean = re.sub(r'&hellip;|\.\.\.$', '...', clean).strip()
+            if len(clean) >= 45:
+                return clean[:800]
+
+    # 3. 常规 description / summary 中的多段落实质正文
+    if raw_desc:
+        paras = re.findall(r'<p[^>]*>(.*?)</p>', raw_desc, flags=re.DOTALL)
+        clean_paras = [re.sub(r'<[^>]+>', '', p).strip() for p in paras]
+        clean_paras = [
+            p for p in clean_paras 
+            if len(p) > 35 and not any(w in p.lower() for w in ["cookie", "newsletter", "subscribe", "sign up", "read more", "all rights reserved"])
+        ]
+        if clean_paras:
+            res = "\n\n".join(clean_paras[:3])
+            if len(res) >= 60:
+                return res[:1000]
+        
+        # 纯文本 fallback
+        plain = re.sub(r'<[^>]+>', ' ', raw_desc)
+        plain = re.sub(r'\s+', ' ', plain).strip()
+        if len(plain) >= 80:
+            return plain[:800]
+
+    return None
+
+
 def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any]]:
     items = []
     cfg = SOURCES.get(source_key)
@@ -2476,6 +2530,9 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     if img_url and any(bad in img_url.lower() for bad in ["lh3.googleusercontent.com/j6_cofbog", "lh3.googleusercontent.com", "pml.png"]):
                         img_url = None
 
+                    # 提取权威媒体长篇原文段落/深入摘要 (The Verge, Ars Technica, The Decoder, Techmeme 援引的 WSJ/彭博等)
+                    article_text_en = extract_rich_article_text(entry, is_techmeme=is_techmeme)
+
                     # 严格的内容质量门禁 (Hard Quality Gate)：
                     # 如果 RSS 流未提供真实有效的正文摘要 (少于 20 字符，或仅为标题复读)
                     is_dummy_summary = False
@@ -2483,6 +2540,11 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         is_dummy_summary = True
                     elif title.lower() in clean_summary.lower() and len(clean_summary) <= len(title) + 15:
                         is_dummy_summary = True
+
+                    # 若 clean_summary 判定偏弱但成功提取出长篇报道要点，以长篇要点救回
+                    if is_dummy_summary and article_text_en and len(article_text_en) >= 30:
+                        clean_summary = article_text_en[:280]
+                        is_dummy_summary = False
 
                     if not img_url or is_dummy_summary:
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章导语 (og:description / twitter:description)
@@ -2523,6 +2585,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "spec_tags": spec_tags,
                         "content_snippet": clean_summary or f"From {source_display}",
                         "summary_en": clean_summary or f"From {source_display}",
+                        "article_text_en": article_text_en,
+                        "article_text_zh": None,
                         "category": category,
                         "tags": tags
                     })

@@ -208,7 +208,9 @@ def generate_daily_briefing(recent_items: list):
 
     now_utc = datetime.now(timezone.utc)
     # 用北京时间日期作为文件名（UTC+8）
-    now_cst = datetime.fromtimestamp(now_utc.timestamp() + 8 * 3600)
+    from datetime import timedelta
+    cst_tz = timezone(timedelta(hours=8))
+    now_cst = now_utc.astimezone(cst_tz)
     date_slug = now_cst.strftime("%Y-%m-%d")
     date_zh = now_cst.strftime("%Y年%m月%d日")
     output_path = os.path.join(DAILY_DIR, f"{date_slug}.html")
@@ -245,7 +247,7 @@ def generate_daily_briefing(recent_items: list):
     def fmt_time(raw):
         try:
             dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
-            cst = datetime.fromtimestamp(dt.timestamp() + 8 * 3600)
+            cst = dt.astimezone(cst_tz)
             return cst.strftime("%H:%M")
         except Exception:
             return ""
@@ -303,6 +305,7 @@ def generate_daily_briefing(recent_items: list):
     </h2>
     {f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>' if title_en and title_en != title else ''}
     {f'<p itemprop="description" style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 14px;">{summary}</p>' if summary else ''}
+    {f'<div style="background:#f8fafc;border-left:3px solid #6366f1;padding:10px 14px;border-radius:0 8px 8px 0;margin:0 0 14px;font-size:13px;color:#334155;line-height:1.6;"><strong>📰 权威报道原文要点：</strong><br><span style="white-space:pre-line;">{safe_html(item.get("article_text_en") or item.get("article_text_zh") or "", 800)}</span></div>' if (item.get("article_text_en") or item.get("article_text_zh")) and len(item.get("article_text_en") or item.get("article_text_zh") or "") >= 25 else ''}
     <a href="{url}" target="_blank" rel="noopener noreferrer"
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:{cat_color};font-weight:600;text-decoration:none;border:1px solid {cat_color}40;padding:6px 14px;border-radius:8px;transition:all 0.2s;">
       阅读原文 →
@@ -786,7 +789,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url"]:
+                for preserve_field in ["article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
