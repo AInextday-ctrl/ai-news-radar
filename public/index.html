@@ -4405,6 +4405,7 @@
             }
           }
         }
+        u = u.replace(/#.*producthunt.*/i, '');
         if (/([?&])ref=producthunt(&|$)/i.test(u)) {
           u = u.replace(/([?&])ref=producthunt(&|$)/i, '$1ref=ainewsradar$2');
         } else if (/([?&])ref=[^&]+(&|$)/i.test(u)) {

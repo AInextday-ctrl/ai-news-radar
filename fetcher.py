@@ -1409,6 +1409,7 @@ def format_clean_tool_url(url: str) -> str:
     if not url or url == '#':
         return url
     u = url.strip()
+    u = re.sub(r'#.*producthunt.*$', '', u, flags=re.I)
     if 'ref=producthunt' in u:
         u = re.sub(r'([?&])ref=producthunt(&|$)', r'\1ref=ainewsradar\2', u)
     elif 'ref=' in u:
