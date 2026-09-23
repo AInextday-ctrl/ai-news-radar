@@ -72,6 +72,104 @@ def generate_sitemap():
         print(f"⚠️ 更新站点地图失败: {e}")
 
 
+def inject_seo_static_content(recent_items: list):
+    """
+    将最新资讯以静态 HTML 形式注入 public/index.html 的 SEO 占位区块。
+    Googlebot 可直接爬取这部分内容，绕过 JS 渲染限制。
+    内容放在 sr-only 不可见区域，不影响视觉呈现。
+    """
+    INDEX_FILE = os.path.join(PUBLIC_DIR, "index.html")
+    START_MARKER = "<!-- ========== SEO_STATIC_NEWS_START ========== -->"
+    END_MARKER = "<!-- ========== SEO_STATIC_NEWS_END ========== -->"
+
+    # 取最新 20 条，优先 news 类，补充其他类
+    news_items = [i for i in recent_items if i.get("category") == "news"][:10]
+    celeb_items = [i for i in recent_items if i.get("category") == "celebrity"][:4]
+    tool_items = [i for i in recent_items if i.get("category") == "tools"][:3]
+    video_items = [i for i in recent_items if i.get("category") == "videos"][:3]
+    seo_items = (news_items + celeb_items + tool_items + video_items)[:20]
+
+    if not seo_items:
+        print("⚠️ SEO 静态内容注入: 无可用资讯，跳过。")
+        return
+
+    cat_labels = {
+        "news": "AI 行业快讯",
+        "celebrity": "领袖观点",
+        "tools": "场景工具",
+        "videos": "实战视频",
+        "prompts": "提示词库",
+    }
+
+    def fmt_date(raw: str) -> str:
+        try:
+            dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            return dt.strftime("%Y年%m月%d日")
+        except Exception:
+            return ""
+
+    def safe(text: str, max_len: int = 200) -> str:
+        if not text:
+            return ""
+        text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;")
+        return text[:max_len]
+
+    # 生成 article 列表
+    articles_html = ""
+    for item in seo_items:
+        title = safe(item.get("title_zh") or item.get("title", ""), 120)
+        summary = safe(item.get("summary_zh") or item.get("content_snippet", ""), 200)
+        source = safe(item.get("source", ""), 60)
+        url = item.get("url", "#")
+        date_str = fmt_date(item.get("raw_published_at", ""))
+        cat = item.get("category", "news")
+        cat_label = cat_labels.get(cat, "AI 资讯")
+
+        if not title:
+            continue
+
+        articles_html += f"""    <article>
+      <h3><a href="{url}" target="_blank" rel="noopener noreferrer">{title}</a></h3>
+      {f'<p>{summary}</p>' if summary else ''}
+      <footer>
+        <span>{cat_label}</span>
+        {f'<span>{source}</span>' if source else ''}
+        {f'<time>{date_str}</time>' if date_str else ''}
+      </footer>
+    </article>\n"""
+
+    now_str = datetime.now(timezone.utc).strftime("%Y年%m月%d日 %H:%M UTC")
+    static_block = f"""{START_MARKER}
+  <section class="sr-only" aria-label="AI 资讯雷达最新动态（搜索引擎索引区）">
+    <h2>AI 资讯雷达 · 今日精选（更新于 {now_str}）</h2>
+    <p>以下是 AI 资讯雷达从全球 50+ 权威 AI 信源实时聚合的最新动态，涵盖大模型突破、产业新闻、领袖观点与实战工具。所有内容经 AI 辅助翻译与人工编辑审核，附原始来源链接。</p>
+{articles_html}  </section>
+  {END_MARKER}"""
+
+    try:
+        with open(INDEX_FILE, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        if START_MARKER not in content or END_MARKER not in content:
+            print("⚠️ SEO 静态注入: index.html 中未找到占位标记，跳过。")
+            return
+
+        # 替换占位区块
+        import re as _re
+        pattern = _re.compile(
+            r"<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->",
+            _re.DOTALL
+        )
+        new_content = pattern.sub(static_block, content)
+
+        with open(INDEX_FILE, "w", encoding="utf-8") as f:
+            f.write(new_content)
+
+        print(f"🕷️ SEO 静态内容注入完成: {len(seo_items)} 条资讯已写入 index.html（Googlebot 可见）")
+    except Exception as e:
+        print(f"⚠️ SEO 静态内容注入失败: {e}")
+
+
 def parse_time_for_sort(it):
     raw = it.get("raw_published_at", "")
     if not raw:
@@ -611,6 +709,9 @@ def save_news(items: list):
 
     # 动态同步更新搜索引擎站点地图 sitemap.xml
     generate_sitemap()
+
+    # 注入静态资讯快照到 index.html，让 Googlebot 可直接爬取内容
+    inject_seo_static_content(recent_final)
 
     print(f"\n💾 分级存储同步完成:")
     print(f"  ⚡ 24小时实时热数据: {len(recent_final)} 篇 (体积大幅缩减，首屏极速秒开)")
