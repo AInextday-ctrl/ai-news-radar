@@ -22,6 +22,8 @@ import re
 import hashlib
 import time
 import subprocess
+import shutil
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
@@ -1368,6 +1370,7 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                     title_fmt = f"【{name}】{description[:65]}"
                     title_en = f"[{name}] {description[:65]}"
 
+                    repo_img = f"https://opengraph.githubassets.com/1/{repo.get('full_name')}" if repo.get("full_name") else None
                     items.append({
                         "id": make_id(repo_url, name),
                         "title": title_fmt,
@@ -1378,16 +1381,18 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                         "app_hook": description[:65],
                         "app_hook_en": description[:65],
                         "url": repo_url,
-                        "image_url": None,
-                        "source": "GitHub",
-                        "author": repo.get("owner", {}).get("login", "GitHub"),
+                        "official_url": repo_url,
+                        "image_url": repo_img or "",
+                        "preview_images": [repo_img] if repo_img else [],
+                        "source": "AI 资讯雷达",
+                        "author": repo.get("owner", {}).get("login", ""),
                         "raw_published_at": real_pub_iso,
                         "runtime_badge": runtime_badge,
                         "icon_type": icon_type,
                         "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},
                         "scenario_tag": scenario,
                         "pricing_tag": "🟢 完全开源免费",
-                        "platform": "github",
+                        "platform": "tool",
                         "content_snippet": f"⭐ {stars} stars · {description}",
                         "summary_zh": f"⭐ {stars} 颗星标 · {description}",
                         "summary_en": f"⭐ {stars} stars · {description}",
@@ -1399,22 +1404,54 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
     return items
 
 
+def format_clean_tool_url(url: str) -> str:
+    """Ensure direct product URL with ref=ainewsradar instead of third-party platforms."""
+    if not url or url == '#':
+        return url
+    u = url.strip()
+    if 'ref=producthunt' in u:
+        u = re.sub(r'([?&])ref=producthunt(&|$)', r'\1ref=ainewsradar\2', u)
+    elif 'ref=' in u:
+        u = re.sub(r'([?&])ref=[^&]+(&|$)', r'\1ref=ainewsradar\2', u)
+    elif not ('producthunt.com' in u or 'github.com' in u or 'huggingface.co' in u) and u.startswith('http'):
+        sep = '&' if '?' in u else '?'
+        u = f"{u}{sep}ref=ainewsradar"
+    u = re.sub(r'[?&]$', '', u)
+    return u
+
+
+def resolve_product_hunt_redirect(ph_url: str) -> str:
+    """Resolve /r/p/... redirect URLs to the actual official product website."""
+    if not ph_url or '/r/p/' not in ph_url:
+        return format_clean_tool_url(ph_url)
+    try:
+        with httpx.Client(follow_redirects=False, timeout=5.0) as client:
+            resp = client.get(ph_url)
+            if resp.status_code in (301, 302, 303, 307, 308) and 'location' in resp.headers:
+                loc = resp.headers['location']
+                return format_clean_tool_url(loc)
+    except Exception:
+        pass
+    return format_clean_tool_url(ph_url)
+
+
 # ==========================================
-# 5. 抓取 Product Hunt 场景化 AI 应用工具 (真实官方落地页与高清实测画廊截图)
+# 5. 抓取场景化 AI 应用工具 (真实官方落地页与高清实测画廊截图)
 # ==========================================
 def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     """
-    通过 Googlebot UA 深度抓取 Product Hunt 落地页真实数据：
+    通过 Googlebot UA 深度抓取落地页真实数据：
     提取官方真实跳转官网、多张产品实测画廊截图、产品官方 Logo、标语与 Upvotes。
-    彻底避免使用任何占位图与猜想链接。
+    彻底避免使用任何占位图与第三方平台猜想链接。
     """
     if not product_url or "producthunt.com" not in product_url:
         return {}
     slug = product_url.split('?')[0]
     page_html = ""
+    curl_bin = "curl.exe" if (sys.platform == "win32" and shutil.which("curl.exe")) else (shutil.which("curl") or "curl")
     try:
         cmd = [
-            "curl.exe", "-s", "-L", slug,
+            curl_bin, "-s", "-L", slug,
             "-H", "User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
             "--max-time", "6"
         ]
@@ -1442,13 +1479,13 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     comp_matches = re.findall(r'Company\s+Info[\s\S]*?<a[^>]+href="([^"]+)"', page_html, re.IGNORECASE)
     if comp_matches:
         raw_url = html.unescape(comp_matches[0])
-        data['official_url'] = re.sub(r'[\?&]ref=producthunt.*$', '', raw_url)
+        data['official_url'] = resolve_product_hunt_redirect(raw_url)
     else:
         visit_matches = re.findall(r'<a[^>]+href="([^"]+)"[^>]*>[\s\S]*?Visit\s+website[\s\S]*?</a>', page_html, re.IGNORECASE)
         for v in visit_matches:
             v_href = html.unescape(v)
             if 'cdn-cgi' not in v_href and not v_href.startswith('/'):
-                data['official_url'] = re.sub(r'[\?&]ref=producthunt.*$', '', v_href)
+                data['official_url'] = resolve_product_hunt_redirect(v_href)
                 break
 
     if not data.get('official_url'):
@@ -1458,7 +1495,7 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
                 d = json.loads(ld)
                 if isinstance(d, dict) and d.get('@type') in ('Product', 'SoftwareApplication', 'WebApplication', 'MobileApplication'):
                     if d.get('url') and 'producthunt.com' not in d.get('url'):
-                        data['official_url'] = d.get('url')
+                        data['official_url'] = format_clean_tool_url(d.get('url'))
                         break
             except Exception:
                 pass
@@ -1505,6 +1542,12 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
             if clean_src not in preview_images:
                 preview_images.append(clean_src)
 
+    # 兜底：若未抓取到产品截图，利用官网生成高清实测截图
+    if not preview_images and data.get('official_url') and not ('producthunt.com' in data['official_url'] or data['official_url'] == '#'):
+        clean_target = data['official_url'].split('?')[0]
+        ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
+        preview_images.append(ss_url)
+
     data['preview_images'] = preview_images[:6]
 
     # 3. Logo Icon
@@ -1522,7 +1565,7 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     upvotes = re.findall(r'Upvote[^\d]*(\d+)', page_html)
     if upvotes:
         data['upvotes'] = upvotes[0]
-        data['rank_badge'] = f"🔥 {upvotes[0]} Upvotes · Product Hunt"
+        data['rank_badge'] = f"🔥 {upvotes[0]} Upvotes"
 
     return data
 
@@ -1545,6 +1588,10 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             outbound_match = re.search(r'href="([^"]+)"[^>]*>Link</a>', summary, re.IGNORECASE)
             official_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
             source_url = entry.get("link", "")
+            if '/r/p/' in official_url:
+                official_url = resolve_product_hunt_redirect(official_url)
+            else:
+                official_url = format_clean_tool_url(official_url)
 
             # 彻底清洗 RSS 摘要，杜绝 Discussion | Link 乱码
             clean_summary = re.sub(r'<[^>]+>', '', summary)
@@ -1591,24 +1638,26 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             title_fmt = f"【{app_name}】{hook}"
             title_en = f"[{app_name}] {hook}"
 
-            # 实时深度爬取 Product Hunt 真实页面数据 (真实官网、真实画廊大图、真实 Logo)
+            # 实时深度抓取真实落地页数据 (真实官网、真实画廊大图、真实 Logo)
             ph_details = scrape_product_hunt_details(source_url)
             if ph_details:
                 if ph_details.get("official_url"):
                     official_url = ph_details["official_url"]
                 preview_imgs = ph_details.get("preview_images") or []
                 logo_url = ph_details.get("logo_url")
-                rank_badge = ph_details.get("rank_badge") or "🔥 Product Hunt 热门精选"
+                rank_badge = ph_details.get("rank_badge") or "🔥 热门推荐"
                 if ph_details.get("tagline"):
                     hook = ph_details["tagline"]
                     title_en = f"[{app_name}] {hook}"
             else:
                 preview_imgs = []
                 logo_url = None
-                rank_badge = "🔥 Product Hunt 热门精选"
+                rank_badge = "🔥 热门推荐"
 
-            if not preview_imgs:
-                preview_imgs = []
+            if not preview_imgs and official_url and not ('producthunt.com' in official_url or official_url == '#'):
+                clean_target = official_url.split('?')[0]
+                ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
+                preview_imgs = [ss_url]
 
             items.append({
                 "id": make_id(source_url, title),
@@ -1638,25 +1687,25 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                     f"Native support for {runtime_badge}",
                     "Intuitive modern user interface for daily productivity"
                 ],
-                "source": "Product Hunt",
-                "author": "Product Hunt",
+                "source": "AI 资讯雷达",
+                "author": app_name,
                 "raw_published_at": iso_time,
                 "runtime_badge": runtime_badge,
                 "icon_type": icon_type,
                 "metrics": {"tag": scenario, "pricing": "🟡 免费试玩", "runtime": runtime_badge, "icon_type": icon_type},
                 "scenario_tag": scenario,
                 "pricing_tag": "🟡 免费试玩",
-                "platform": "producthunt",
-                "content_snippet": clean_summary[:180] or "Trending AI app on Product Hunt",
-                "summary_zh": clean_summary[:180] or "Product Hunt 热门 AI 场景落地应用",
-                "summary_en": clean_summary[:180] or "Trending practical AI application on Product Hunt",
+                "platform": "tool",
+                "content_snippet": clean_summary[:180] or "Trending AI app",
+                "summary_zh": clean_summary[:180] or "热门 AI 场景落地应用",
+                "summary_en": clean_summary[:180] or "Trending practical AI application",
                 "category": "tools",
                 "tags": [scenario, "免部署工具"]
             })
             if len(items) >= max_items:
                 break
     except Exception as e:
-        print(f"  ❌ [Product Hunt] 抓取失败: {e}")
+        print(f"  ❌ [Tools] 抓取失败: {e}")
     return items
 
 
