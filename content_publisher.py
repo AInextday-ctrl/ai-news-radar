@@ -815,7 +815,6 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
 
     xml_body = "\n".join(entries)
     full_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {xml_body}
