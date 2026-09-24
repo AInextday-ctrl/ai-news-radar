@@ -121,7 +121,7 @@ def inject_seo_static_content(recent_items: list):
 
     cat_labels = {
         "news": "AI 行业快讯",
-        "celebrity": "领袖观点",
+        "celebrity": "社交动态",
         "tools": "场景工具",
         "videos": "实战视频",
         "prompts": "提示词库",
@@ -253,7 +253,7 @@ def generate_daily_briefing(recent_items: list):
 
     cat_labels = {
         "news": ("⚡ AI 行业快讯", "#4f46e5"),
-        "celebrity": ("🐦 领袖观点", "#7c3aed"),
+        "celebrity": ("🐦 社交动态", "#0284c7"),
         "tools": ("🛠️ 场景工具", "#0891b2"),
         "videos": ("🎬 实战视频", "#dc2626"),
         "prompts": ("💡 提示词库", "#d97706"),
@@ -1021,11 +1021,21 @@ def save_news(items: list):
         else:
             historical_items.append(it)
 
-    # 保证在极端冷启动或外部源更新停滞时，首页不至于完全空白（最低保留 12 条）
+    # 保证在极端冷启动或外部源更新停滞时，首页与专栏不至于空白或稀疏
     news_recent = [it for it in recent_items if it.get("category") == "news"]
     if len(news_recent) < 12:
         extra_news = [it for it in historical_items if it.get("category") == "news"][:(12 - len(news_recent))]
         recent_items.extend(extra_news)
+
+    celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
+    if len(celeb_recent) < 18:
+        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(18 - len(celeb_recent))]
+        recent_items.extend(extra_celeb)
+
+    viral_recent = [it for it in recent_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
+    if len(viral_recent) < 8:
+        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(8 - len(viral_recent))]
+        recent_items.extend(extra_viral)
 
     # 3. 构建 24 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}

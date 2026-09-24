@@ -9,8 +9,8 @@ CATEGORIES = {
         "en": "⚡ Breaking News"
     },
     "celebrity": {
-        "zh": "🐦 领袖观点·社交热议",
-        "en": "🐦 Voices & Social X"
+        "zh": "🐦 社交雷达·𝕏前沿",
+        "en": "🐦 Social Radar · 𝕏"
     },
     "tools": {
         "zh": "🛠️ 场景落地·实用神器",
