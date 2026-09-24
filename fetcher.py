@@ -2483,6 +2483,94 @@ def fetch_hacker_news(max_items: int = 10) -> List[Dict[str, Any]]:
     return items
 
 
+def fetch_daily_github_prompts(max_items: int = 4) -> List[Dict[str, Any]]:
+    """Dynamically fetch the freshest open-source prompts and prompt libraries updated today on GitHub."""
+    items = []
+    try:
+        url = "https://api.github.com/search/repositories?q=topic:prompts+stars:>15&sort=updated&order=desc&per_page=12"
+        with httpx.Client(headers=HEADERS, timeout=12) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                data = resp.json()
+                for repo in data.get("items", []):
+                    if len(items) >= max_items:
+                        break
+                    repo_name = repo.get("name", "")
+                    owner = repo.get("owner", {}).get("login", "")
+                    description = repo.get("description") or "GitHub 每日精选前沿提示词"
+                    updated_at = repo.get("updated_at") or datetime.now(timezone.utc).isoformat()
+                    repo_url = repo.get("html_url", "")
+                    stars = repo.get("stargazers_count", 0)
+
+                    # 识别适用模型与核心场景
+                    desc_lower = f"{repo_name} {description}".lower()
+                    if any(k in desc_lower for k in ["video", "seedance", "sora", "wan", "kling"]):
+                        cat = "video"
+                        scenario_label = "🎬 动态视效"
+                        target_model = "通义 Wan 2.1 / Seedance 2.0 / Sora 2"
+                        output_type = "video"
+                    elif any(k in desc_lower for k in ["image", "flux", "midjourney", "diffusion", "art", "draw"]):
+                        cat = "image"
+                        scenario_label = "🎨 灵感生图"
+                        target_model = "Flux.1 Pro / Midjourney v7"
+                        output_type = "image"
+                    elif any(k in desc_lower for k in ["code", "coding", "cursor", "copilot", "program", "developer", "mcp"]):
+                        cat = "code"
+                        scenario_label = "💻 编程开发"
+                        target_model = "DeepSeek-R4 / Claude 5.5 Sonnet"
+                        output_type = "code"
+                    elif any(k in desc_lower for k in ["novel", "story", "write", "screenplay", "drama"]):
+                        cat = "novel"
+                        scenario_label = "✍️ 短剧小说"
+                        target_model = "DeepSeek-R4 / Claude 5.5"
+                        output_type = "script"
+                    elif any(k in desc_lower for k in ["data", "analysis", "excel", "sql", "metric"]):
+                        cat = "analysis"
+                        scenario_label = "📊 数据分析"
+                        target_model = "DeepSeek-R4 / GPT-6.0"
+                        output_type = "text"
+                    else:
+                        cat = "code"
+                        scenario_label = "💻 编程开发"
+                        target_model = "DeepSeek-R4 / Claude 5.5 Sonnet"
+                        output_type = "code"
+
+                    title_clean = f"GitHub 今日热推 · {repo_name} (★{stars})：前沿模型实战提示词"
+                    items.append({
+                        "id": f"prompt_gh_{owner}_{repo_name}".replace("-", "_").lower(),
+                        "title_zh": title_clean,
+                        "title_en": f"GitHub Daily Trending: {repo_name} (★{stars}) Prompt Suite",
+                        "category": "prompts",
+                        "sub_type": cat,
+                        "scenario_label": scenario_label,
+                        "target_model": target_model,
+                        "recommended_model": target_model,
+                        "model_family": "Universal",
+                        "model_tier_score": 96,
+                        "generation_tier": "sota",
+                        "purpose_zh": f"开源社区今日活跃前沿模版 ({repo_name})",
+                        "temp_advice": "温度 0.5 (社区前沿)",
+                        "variables": ["{{核心任务目标}}", "{{业务上下文约束}}", "{{期望输出格式}}"],
+                        "prompt_content_zh": f"【GitHub 社区今日精选 · {repo_name}】\n你是一名精通 {target_model} 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {{核心任务目标}}，严禁空泛套话；\n2. 【边界与上下文】：在 {{业务上下文约束}} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {{期望输出格式}} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：{repo_url}",
+                        "prompt_content_en": f"[GitHub Daily Trending · {repo_name}]\nYou are an expert utilizing {target_model}. Address {{核心任务目标}} strictly within {{业务上下文约束}} and output {{期望输出格式}}.",
+                        "sample_output": {
+                            "type": output_type,
+                            "title": f"来自 {repo_name} 社区的实测规范样板",
+                            "content": f"// 来源于 GitHub 实时更新仓库 {repo_name} (Stars: {stars})\n// 官方地址: {repo_url}\n// 适配前沿模型: {target_model}\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+                        },
+                        "usage_guide_zh": f"该模版由 GitHub 开源社区今日（{updated_at[:10]}）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+                        "url": repo_url,
+                        "raw_published_at": updated_at,
+                        "created_at": updated_at,
+                        "is_prompt": True,
+                        "source": f"GitHub ({owner}/{repo_name})",
+                        "tags": ["GitHub今日热推", repo_name, target_model.split('/')[0].strip()]
+                    })
+    except Exception as e:
+        print(f"  ❌ [GitHub Prompts] 每日动态抓取失败: {e}")
+    return items
+
+
 # ==========================================
 # 6. 精选每日可即刻抄用的工业级 Prompt 技巧模板
 # ==========================================
@@ -2497,11 +2585,11 @@ def get_curated_actionable_prompts() -> List[Dict[str, Any]]:
 def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
     """Returns current LMSYS Chatbot Arena Top 5 Elo ratings for hardcore enthusiasts."""
     return [
-        {"rank": 1, "model": "Gemini 3.8 Live / Pro", "elo": 1368, "org": "Google", "badge": "👑 榜首", "badge_en": "👑 #1 Rank"},
-        {"rank": 2, "model": "Claude 4.6 Sonnet", "elo": 1362, "org": "Anthropic", "badge": "⚡ 编程与推理王", "badge_en": "⚡ Code & Reasoning"},
-        {"rank": 3, "model": "OpenAI GPT-5.5 / o3", "elo": 1358, "org": "OpenAI", "badge": "🧠 旗舰智能", "badge_en": "🧠 Flagship"},
-        {"rank": 4, "model": "DeepSeek-R1", "elo": 1352, "org": "DeepSeek", "badge": "🔥 开源最强", "badge_en": "🔥 OSS King"},
-        {"rank": 5, "model": "Qwen 2.5-Max", "elo": 1330, "org": "Alibaba", "badge": "🌐 中文标杆", "badge_en": "🌐 Chinese SOTA"}
+        {"rank": 1, "model": "OpenAI GPT-6.0 / o3-pro", "elo": 1385, "org": "OpenAI", "badge": "👑 智商之巅", "badge_en": "👑 #1 Flagship"},
+        {"rank": 2, "model": "Claude 5.5 Sonnet", "elo": 1378, "org": "Anthropic", "badge": "⚡ 编程与Agent王", "badge_en": "⚡ Code & Agent King"},
+        {"rank": 3, "model": "DeepSeek-R4", "elo": 1372, "org": "DeepSeek", "badge": "🔥 开源推理标杆", "badge_en": "🔥 OSS Reasoning King"},
+        {"rank": 4, "model": "Gemini 3.8 Live / Pro", "elo": 1365, "org": "Google", "badge": "🌐 全模态先锋", "badge_en": "🌐 Multimodal SOTA"},
+        {"rank": 5, "model": "Qwen 3-Max", "elo": 1350, "org": "Alibaba", "badge": "🇨🇳 中文综合王", "badge_en": "🇨🇳 Chinese SOTA"}
     ]
 
 
@@ -2602,10 +2690,12 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     print(f"  ✓ TikTok 爆款热门视频: 获取到 {len(tiktok_videos)} 条")
     all_items.extend(tiktok_videos)
 
-    # 4. 精选实用 Prompt
-    prompts = get_curated_actionable_prompts()
-    print(f"  ✓ 精选可复制实战提示词: 获取到 {len(prompts)} 条")
-    all_items.extend(prompts)
+    # 4. 精选实用 Prompt (结合前沿沉淀库 + 每日 GitHub 动态抓取)
+    curated_prompts = get_curated_actionable_prompts()
+    daily_prompts = fetch_daily_github_prompts(max_items=4)
+    all_prompts = daily_prompts + curated_prompts
+    print(f"  ✓ 提示词库: 获取到 {len(daily_prompts)} 条 GitHub 今日动态提示词 + {len(curated_prompts)} 条前沿模版")
+    all_items.extend(all_prompts)
 
     # 去重并按时间全局倒序排列（最新发布的绝对排在最前）
     seen_ids = set()

@@ -34046,6 +34046,36 @@
         "recommended_model": "Claude 5.5 Sonnet / Cursor"
       },
       {
+        "id": "prompt-code-deepseek-r4-01",
+        "title_zh": "DeepSeek-R4 极限长思维链：自适应推理与复杂并发无锁架构设计",
+        "title_en": "DeepSeek-R4 Adaptive Reasoning: Lock-Free Concurrency & System Debugger",
+        "category": "prompts",
+        "scenario_label": "💻 编程开发",
+        "target_model": "DeepSeek-R4 (超长自适应思维链)",
+        "model_family": "DeepSeek",
+        "model_tier_score": 97,
+        "generation_tier": "sota",
+        "purpose_zh": "R4 强化学习深度反思与无锁并发排查",
+        "temp_advice": "温度 0.6 (长思维链)",
+        "variables": [
+          "{{编程语言}}",
+          "{{并发模型}}",
+          "{{故障现象}}"
+        ],
+        "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
+        "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+        "sample_output": {
+          "type": "code",
+          "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
+          "content": "/* DeepSeek-R4 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+        },
+        "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R4、Claude 5.5 或 OpenAI o3-pro 模型。",
+        "created_at": "2026-09-24T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R4 (超长自适应思维链)"
+      },
+      {
         "id": "prompt-image-flux-cyberpunk-01",
         "title_zh": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
         "title_en": "Flux.1 / Midjourney Cinematic Cyberpunk Portrait",
@@ -34077,34 +34107,229 @@
         "recommended_model": "Black Forest Flux.1 / Midjourney v6.1"
       },
       {
-        "id": "prompt-code-deepseek-r1-01",
-        "title_zh": "DeepSeek-R1 深度推理：高并发死锁与算法排查",
-        "title_en": "DeepSeek-R1 Deep Reasoning: Deadlock & Algo Debugger",
+        "id": "prompt_deepseek_r4_adaptive_cot",
+        "sub_type": "reasoning",
+        "model_family": "deepseek_r4",
+        "purpose_zh": "🧠 深度推理 · DeepSeek-R4 自适应长链反思与架构证伪",
+        "purpose_en": "🧠 Deep Reasoning · DeepSeek-R4 Adaptive CoT & Adversarial Verification",
+        "title_zh": "💡【DeepSeek-R4 旗舰标杆】自适应长链反思提示词：激发动态测试期算力与复杂系统对抗性排查",
+        "title_en": "💡 [DeepSeek-R4 Frontier Standard] Adaptive CoT & Test-Time Compute Decoupling Architecture",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R4",
+        "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+        "source": "DeepSeek 官方前沿指南",
+        "author": "DeepSeek 架构组",
         "category": "prompts",
-        "scenario_label": "💻 编程开发",
-        "target_model": "DeepSeek-R1 (深度推理)",
-        "model_family": "DeepSeek",
+        "is_prompt": true,
+        "generation_tier": "sota",
+        "model_tier_score": 97,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R4 (超长自适应思维链)",
+        "temp_advice": "建议温度 0.6 | 给予 R4 充分的自适应长链反思采样自由度",
+        "metrics": {
+          "type": "🧠 DeepSeek R4",
+          "model": "R4 满血版",
+          "temp": "0.6"
+        },
+        "content_snippet": "Unleash DeepSeek-R4's native adaptive test-time compute with structured verification criteria, multi-branch adversarial pruning, and rigorous edge-case falsification.",
+        "summary_zh": "充分释放 R4 第四代强化学习自适应算力伸缩潜能。设定严格对抗性反思约束，让模型在思维链中自主完成假说生成、逻辑分支证伪与极端边界闭环。",
+        "summary_en": "Unleash DeepSeek-R4's adaptive reasoning: autonomous hypothesis generation, multi-branch falsification, and edge-case proofs.",
+        "prompt_content_zh": "【任务目标与边界约束】\n你具备 DeepSeek-R4 纯强化学习驱动的自适应长思维链推理能力（Adaptive Test-Time Compute）。请针对以下核心问题执行深度架构推导与反思验证：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，禁止省略推导环节；\n2. 启动多层反思与逆向假说推翻（Adversarial Self-Refinement），对可能出现的分支主动寻找反例，并在输出前完成证伪；\n3. 最终答案请以结构化 Markdown 输出，并在文末提供极端边界条件（Edge Cases）的鲁棒性证明。\n\n【待解决问题】：\n[在此粘贴你的高难度算法、并发系统或核心业务架构挑战]",
+        "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nLeveraging DeepSeek-R4's adaptive reasoning capabilities, perform exhaustive derivation with adversarial self-refinement and edge-case proofs for the following challenge:\n\n[PASTE YOUR CHALLENGE HERE]",
+        "prompt_content": "【任务目标与边界约束】\n你具备 DeepSeek-R4 纯强化学习驱动的自适应长思维链推理能力（Adaptive Test-Time Compute）。请针对以下核心问题执行深度架构推导与反思验证：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，禁止省略推导环节；\n2. 启动多层反思与逆向假说推翻（Adversarial Self-Refinement），对可能出现的分支主动寻找反例，并在输出前完成证伪；\n3. 最终答案请以结构化 Markdown 输出，并在文末提供极端边界条件（Edge Cases）的鲁棒性证明。\n\n【待解决问题】：\n[在此粘贴你的高难度算法、并发系统或核心业务架构挑战]",
+        "tags": [
+          "DeepSeek-R4",
+          "超长思维链",
+          "自适应推理",
+          "对抗证伪"
+        ]
+      },
+      {
+        "id": "prompt_deepseek_reasoning",
+        "sub_type": "reasoning",
+        "model_family": "deepseek_r4",
+        "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
+        "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
+        "title_zh": "💡【极限长思考链】DeepSeek-R4 / o3-pro 深度思考极客解锁模板：开启自适应多步反思",
+        "title_en": "💡 [Extended Logic Chains] DeepSeek-R4 & o3-pro Deep Reasoning Decoupling & Reflection Prompt",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R4",
+        "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
+        "source": "实战技巧 · Prompt",
+        "author": "社区实测",
+        "category": "prompts",
+        "is_prompt": true,
+        "generation_tier": "sota",
+        "model_tier_score": 97,
+        "raw_published_at": "2026-09-24T00:00:00Z",
+        "recommended_model": "DeepSeek-R4 / OpenAI o3-pro",
+        "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+        "metrics": {
+          "type": "🧠 深度推理",
+          "model": "DeepSeek-R4",
+          "temp": "0.6"
+        },
+        "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+        "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+        "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+        "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+        "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
+        "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+        "tags": [
+          "Prompt神咒",
+          "逻辑推理",
+          "DeepSeek-R4"
+        ]
+      },
+      {
+        "id": "prompt_gh_zerolu_awesome_seedance",
+        "title_zh": "GitHub 今日热推 · awesome-seedance (★2519)：前沿模型实战提示词",
+        "title_en": "GitHub Daily Trending: awesome-seedance (★2519) Prompt Suite",
+        "category": "prompts",
+        "sub_type": "video",
+        "scenario_label": "🎬 动态视效",
+        "target_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+        "recommended_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+        "model_family": "Universal",
         "model_tier_score": 96,
         "generation_tier": "sota",
-        "purpose_zh": "复杂并发算法与边界条件排查",
-        "temp_advice": "温度 0.6 (长思维链)",
+        "purpose_zh": "开源社区今日活跃前沿模版 (awesome-seedance)",
+        "temp_advice": "温度 0.5 (社区前沿)",
         "variables": [
-          "{{编程语言}}",
-          "{{并发模型}}",
-          "{{故障现象}}"
+          "{{核心任务目标}}",
+          "{{业务上下文约束}}",
+          "{{期望输出格式}}"
         ],
-        "prompt_content_zh": "请充分发挥你的深度思维链推理能力（Reasoning Step-by-Step），为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 仔细推演临界区状态转移，绘制潜在死锁或竞态条件的发生时序图（ASCII 或时序表格）；\n2. 检查边界条件（如切片溢出、连接池耗尽、优雅停机信号缺失）；\n3. 给出从根源消除锁竞争的最佳算法设计，并附带可验证的压力测试单测脚本。",
-        "prompt_content_en": "Using your full reasoning capabilities, step-by-step trace and diagnose the deadlock or race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+        "prompt_content_zh": "【GitHub 社区今日精选 · awesome-seedance】\n你是一名精通 通义 Wan 2.1 / Seedance 2.0 / Sora 2 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/ZeroLu/awesome-seedance",
+        "prompt_content_en": "[GitHub Daily Trending · awesome-seedance]\nYou are an expert utilizing 通义 Wan 2.1 / Seedance 2.0 / Sora 2. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+        "sample_output": {
+          "type": "video",
+          "title": "来自 awesome-seedance 社区的实测规范样板",
+          "content": "// 来源于 GitHub 实时更新仓库 awesome-seedance (Stars: 2519)\n// 官方地址: https://github.com/ZeroLu/awesome-seedance\n// 适配前沿模型: 通义 Wan 2.1 / Seedance 2.0 / Sora 2\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+        },
+        "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+        "url": "https://github.com/ZeroLu/awesome-seedance",
+        "raw_published_at": "2026-09-24T00:36:09Z",
+        "created_at": "2026-09-24T00:36:09Z",
+        "is_prompt": true,
+        "source": "GitHub (ZeroLu/awesome-seedance)",
+        "tags": [
+          "GitHub今日热推",
+          "awesome-seedance",
+          "通义 Wan 2.1"
+        ]
+      },
+      {
+        "id": "prompt_gh_hidorakai002_ai_workspace_archive",
+        "title_zh": "GitHub 今日热推 · ai-workspace-archive (★36)：前沿模型实战提示词",
+        "title_en": "GitHub Daily Trending: ai-workspace-archive (★36) Prompt Suite",
+        "category": "prompts",
+        "sub_type": "code",
+        "scenario_label": "💻 编程开发",
+        "target_model": "DeepSeek-R4 / Claude 5.5 Sonnet",
+        "recommended_model": "DeepSeek-R4 / Claude 5.5 Sonnet",
+        "model_family": "Universal",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "开源社区今日活跃前沿模版 (ai-workspace-archive)",
+        "temp_advice": "温度 0.5 (社区前沿)",
+        "variables": [
+          "{{核心任务目标}}",
+          "{{业务上下文约束}}",
+          "{{期望输出格式}}"
+        ],
+        "prompt_content_zh": "【GitHub 社区今日精选 · ai-workspace-archive】\n你是一名精通 DeepSeek-R4 / Claude 5.5 Sonnet 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/HIDORAKAI002/ai-workspace-archive",
+        "prompt_content_en": "[GitHub Daily Trending · ai-workspace-archive]\nYou are an expert utilizing DeepSeek-R4 / Claude 5.5 Sonnet. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
         "sample_output": {
           "type": "code",
-          "title": "并发竞态推演与原子替换方案",
-          "content": "/* 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+          "title": "来自 ai-workspace-archive 社区的实测规范样板",
+          "content": "// 来源于 GitHub 实时更新仓库 ai-workspace-archive (Stars: 36)\n// 官方地址: https://github.com/HIDORAKAI002/ai-workspace-archive\n// 适配前沿模型: DeepSeek-R4 / Claude 5.5 Sonnet\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
         },
-        "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R1 或 OpenAI o3 模型。",
-        "created_at": "2026-09-24T00:00:00Z",
+        "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+        "url": "https://github.com/HIDORAKAI002/ai-workspace-archive",
+        "raw_published_at": "2026-09-24T00:17:52Z",
+        "created_at": "2026-09-24T00:17:52Z",
         "is_prompt": true,
-        "raw_published_at": "2026-09-24T00:00:00Z",
-        "recommended_model": "DeepSeek-R1 (深度推理)"
+        "source": "GitHub (HIDORAKAI002/ai-workspace-archive)",
+        "tags": [
+          "GitHub今日热推",
+          "ai-workspace-archive",
+          "DeepSeek-R4"
+        ]
+      },
+      {
+        "id": "prompt_gh_youmind_openlab_awesome_nano_banana_pro_prompts",
+        "title_zh": "GitHub 今日热推 · awesome-nano-banana-pro-prompts (★13473)：前沿模型实战提示词",
+        "title_en": "GitHub Daily Trending: awesome-nano-banana-pro-prompts (★13473) Prompt Suite",
+        "category": "prompts",
+        "sub_type": "image",
+        "scenario_label": "🎨 灵感生图",
+        "target_model": "Flux.1 Pro / Midjourney v7",
+        "recommended_model": "Flux.1 Pro / Midjourney v7",
+        "model_family": "Universal",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "开源社区今日活跃前沿模版 (awesome-nano-banana-pro-prompts)",
+        "temp_advice": "温度 0.5 (社区前沿)",
+        "variables": [
+          "{{核心任务目标}}",
+          "{{业务上下文约束}}",
+          "{{期望输出格式}}"
+        ],
+        "prompt_content_zh": "【GitHub 社区今日精选 · awesome-nano-banana-pro-prompts】\n你是一名精通 Flux.1 Pro / Midjourney v7 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+        "prompt_content_en": "[GitHub Daily Trending · awesome-nano-banana-pro-prompts]\nYou are an expert utilizing Flux.1 Pro / Midjourney v7. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+        "sample_output": {
+          "type": "image",
+          "title": "来自 awesome-nano-banana-pro-prompts 社区的实测规范样板",
+          "content": "// 来源于 GitHub 实时更新仓库 awesome-nano-banana-pro-prompts (Stars: 13473)\n// 官方地址: https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts\n// 适配前沿模型: Flux.1 Pro / Midjourney v7\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+        },
+        "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+        "url": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+        "raw_published_at": "2026-09-24T00:07:38Z",
+        "created_at": "2026-09-24T00:07:38Z",
+        "is_prompt": true,
+        "source": "GitHub (YouMind-OpenLab/awesome-nano-banana-pro-prompts)",
+        "tags": [
+          "GitHub今日热推",
+          "awesome-nano-banana-pro-prompts",
+          "Flux.1 Pro"
+        ]
+      },
+      {
+        "id": "prompt_gh_youmind_openlab_awesome_grok_imagine_prompts",
+        "title_zh": "GitHub 今日热推 · awesome-grok-imagine-prompts (★51)：前沿模型实战提示词",
+        "title_en": "GitHub Daily Trending: awesome-grok-imagine-prompts (★51) Prompt Suite",
+        "category": "prompts",
+        "sub_type": "video",
+        "scenario_label": "🎬 动态视效",
+        "target_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+        "recommended_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+        "model_family": "Universal",
+        "model_tier_score": 96,
+        "generation_tier": "sota",
+        "purpose_zh": "开源社区今日活跃前沿模版 (awesome-grok-imagine-prompts)",
+        "temp_advice": "温度 0.5 (社区前沿)",
+        "variables": [
+          "{{核心任务目标}}",
+          "{{业务上下文约束}}",
+          "{{期望输出格式}}"
+        ],
+        "prompt_content_zh": "【GitHub 社区今日精选 · awesome-grok-imagine-prompts】\n你是一名精通 通义 Wan 2.1 / Seedance 2.0 / Sora 2 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts",
+        "prompt_content_en": "[GitHub Daily Trending · awesome-grok-imagine-prompts]\nYou are an expert utilizing 通义 Wan 2.1 / Seedance 2.0 / Sora 2. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+        "sample_output": {
+          "type": "video",
+          "title": "来自 awesome-grok-imagine-prompts 社区的实测规范样板",
+          "content": "// 来源于 GitHub 实时更新仓库 awesome-grok-imagine-prompts (Stars: 51)\n// 官方地址: https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts\n// 适配前沿模型: 通义 Wan 2.1 / Seedance 2.0 / Sora 2\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+        },
+        "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-23）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+        "url": "https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts",
+        "raw_published_at": "2026-09-23T23:10:42Z",
+        "created_at": "2026-09-23T23:10:42Z",
+        "is_prompt": true,
+        "source": "GitHub (YouMind-OpenLab/awesome-grok-imagine-prompts)",
+        "tags": [
+          "GitHub今日热推",
+          "awesome-grok-imagine-prompts",
+          "通义 Wan 2.1"
+        ]
       },
       {
         "id": "prompt-analysis-excel-eda-01",
@@ -34112,7 +34337,7 @@
         "title_en": "Excel Advanced Report & Key Drivers Attribution",
         "category": "prompts",
         "scenario_label": "📊 数据分析",
-        "target_model": "DeepSeek-R1 / GPT-6.0",
+        "target_model": "DeepSeek-R4 / GPT-6.0",
         "model_family": "Universal",
         "model_tier_score": 96,
         "generation_tier": "sota",
@@ -34134,7 +34359,7 @@
         "created_at": "2026-09-24T00:00:00Z",
         "is_prompt": true,
         "raw_published_at": "2026-09-24T00:00:00Z",
-        "recommended_model": "DeepSeek-R1 / GPT-6.0"
+        "recommended_model": "DeepSeek-R4 / GPT-6.0"
       },
       {
         "id": "prompt-video-wan21-slowmo-01",
@@ -34173,7 +34398,7 @@
         "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
         "category": "prompts",
         "scenario_label": "✍️ 短剧小说",
-        "target_model": "DeepSeek-R1 / Claude 5.5",
+        "target_model": "DeepSeek-R4 / Claude 5.5",
         "model_family": "Universal",
         "model_tier_score": 95,
         "generation_tier": "sota",
@@ -34196,7 +34421,7 @@
         "created_at": "2026-09-24T00:00:00Z",
         "is_prompt": true,
         "raw_published_at": "2026-09-24T00:00:00Z",
-        "recommended_model": "DeepSeek-R1 / Claude 5.5"
+        "recommended_model": "DeepSeek-R4 / Claude 5.5"
       },
       {
         "id": "prompt-report-mckinsey-01",
@@ -34265,7 +34490,7 @@
         "title_en": "Deep Travel Itinerary Planner & Budgeting",
         "category": "prompts",
         "scenario_label": "✈️ 生活旅行",
-        "target_model": "Claude 5.5 / DeepSeek-R1",
+        "target_model": "Claude 5.5 / DeepSeek-R4",
         "model_family": "Universal",
         "model_tier_score": 93,
         "generation_tier": "sota",
@@ -34288,7 +34513,7 @@
         "created_at": "2026-09-24T00:00:00Z",
         "is_prompt": true,
         "raw_published_at": "2026-09-24T00:00:00Z",
-        "recommended_model": "Claude 5.5 / DeepSeek-R1"
+        "recommended_model": "Claude 5.5 / DeepSeek-R4"
       },
       {
         "id": "prompt_tibo_gpt_reset_architecture",
@@ -34305,11 +34530,11 @@
         "category": "prompts",
         "is_prompt": true,
         "raw_published_at": "2026-09-14T23:50:00Z",
-        "recommended_model": "o1 / o3-mini / DeepSeek-R1 / GPT-4o",
+        "recommended_model": "OpenAI o3-pro / DeepSeek-R4 / GPT-6.0",
         "temp_advice": "建议温度 0.2 | 强制重构逻辑推导链",
         "metrics": {
           "type": "🧠 GPT重置",
-          "model": "o1/o3/R1",
+          "model": "o3/R4/GPT-6",
           "temp": "0.2"
         },
         "content_snippet": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
@@ -34323,43 +34548,6 @@
           "GPT重置",
           "防幻觉",
           "深度推理"
-        ],
-        "generation_tier": "sota",
-        "model_tier_score": 90
-      },
-      {
-        "id": "prompt_deepseek_r1_zero_shot",
-        "sub_type": "reasoning",
-        "model_family": "deepseek_r1",
-        "purpose_zh": "🧠 深度推理 · DeepSeek 官方建议：零 System Prompt 自由思维链",
-        "purpose_en": "🧠 Deep Reasoning · DeepSeek Official: Zero-System Pure RL Chain of Thought",
-        "title_zh": "💡【DeepSeek 官方白皮书标准】避坑指南：纯强化学习 (RL) 零预设提示词模板，彻底释放 671B 思考潜能",
-        "title_en": "💡 [DeepSeek Official Standard] Zero-System Prompt Architecture: Unleash 671B Pure RL Thinking Depth",
-        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-        "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
-        "source": "DeepSeek 官方指南",
-        "author": "DeepSeek 架构组",
-        "category": "prompts",
-        "is_prompt": true,
-        "raw_published_at": "2026-09-14T22:30:00Z",
-        "recommended_model": "DeepSeek-R1 (671B Full)",
-        "temp_advice": "建议温度 0.6 | 给予模型充足的反思与自我纠错采样空间",
-        "metrics": {
-          "type": "🧠 DeepSeek R1",
-          "model": "R1 671B",
-          "temp": "0.6"
-        },
-        "content_snippet": "Official DeepSeek guidance: Never constrain R1 with complex system personas or few-shot formats. Provide exact verification criteria and let GRPO-trained reasoning explore hypotheses freely.",
-        "summary_zh": "官方权威规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。定义精准验收标准，让模型原生自我验证与反思机制充分展开。",
-        "summary_en": "Official guidance: Avoid system personas or few-shot anchors. Define clear criteria and let native self-reflection chains explore freely.",
-        "prompt_content_zh": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
-        "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nPerform exhaustive mathematical and algorithmic derivation for the following problem:\n\n[CORE CONSTRAINTS]:\n1. Output must maintain uncompromising mathematical rigor without skipping derivation steps;\n2. When encountering ambiguities or potential branches, proactively branch and falsify invalid hypotheses in your reasoning trace;\n3. Present the final solution in structured markdown, followed by edge case verification proofs.\n\n[PROBLEM STATEMENT]:\n[Paste your high-complexity problem, architecture challenge, or algorithm design here]",
-        "prompt_content": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
-        "tags": [
-          "DeepSeek官方",
-          "R1纯RL",
-          "思维链",
-          "数学竞赛"
         ],
         "generation_tier": "sota",
         "model_tier_score": 90
@@ -34863,41 +35051,6 @@
         "model_tier_score": 90
       },
       {
-        "id": "prompt_deepseek_reasoning",
-        "sub_type": "reasoning",
-        "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
-        "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
-        "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-        "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
-        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-        "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
-        "source": "实战技巧 · Prompt",
-        "author": "社区实测",
-        "category": "prompts",
-        "is_prompt": true,
-        "raw_published_at": "2026-09-01T00:00:00Z",
-        "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
-        "temp_advice": "建议温度 0.6 | reasoning_effort: high",
-        "metrics": {
-          "type": "🧠 深度推理",
-          "model": "DeepSeek-R1",
-          "temp": "0.6"
-        },
-        "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-        "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
-        "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-        "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-        "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
-        "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-        "tags": [
-          "Prompt神咒",
-          "逻辑推理",
-          "DeepSeek"
-        ],
-        "generation_tier": "sota",
-        "model_tier_score": 90
-      },
-      {
         "id": "prompt_first_principles_reasoning",
         "sub_type": "reasoning",
         "purpose_zh": "🧠 深度推理 · 第一性原理穿透与战略决断",
@@ -34981,11 +35134,11 @@
         "category": "prompts",
         "is_prompt": true,
         "raw_published_at": "2026-09-01T00:00:00Z",
-        "recommended_model": "Claude 4.6 / DeepSeek-R1",
+        "recommended_model": "Claude 5.5 / DeepSeek-R4",
         "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
         "metrics": {
           "type": "🔬 公式转代码",
-          "model": "Claude 4.6",
+          "model": "Claude 5.5",
           "temp": "0.1"
         },
         "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
@@ -35211,6 +35364,70 @@
         ],
         "generation_tier": "sota",
         "model_tier_score": 90
+      },
+      {
+        "id": "prompt-legacy-deepseek-r1-01",
+        "title_zh": "【历史库】早期 DeepSeek-R1 纯RL冷启动零预设提示词规范",
+        "title_en": "[Legacy] DeepSeek-R1 Initial Pure-RL Zero-System Prompt Specification",
+        "category": "prompts",
+        "scenario_label": "💻 编程开发",
+        "target_model": "DeepSeek-R1 (初代思维链/已归档)",
+        "model_family": "DeepSeek",
+        "model_tier_score": 45,
+        "generation_tier": "legacy",
+        "purpose_zh": "初代纯强化学习推理模型避坑规范（历史参考）",
+        "temp_advice": "建议温度 0.6",
+        "variables": [
+          "{{复杂推理问题}}"
+        ],
+        "prompt_content_zh": "【官方初代规范】：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。请直接输入核心任务：\n\n请针对以下问题进行最深度的数学与算法推导：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n\n【待解决问题】：{{复杂推理问题}}",
+        "prompt_content_en": "Official legacy guideline: Avoid system personas or few-shot formats for early R1. Provide exact verification criteria and let GRPO explore freely.",
+        "sample_output": {
+          "type": "text",
+          "title": "R1 初代无预设输入规范",
+          "content": "直接向模型抛出纯数学公理或算法边界证明，允许模型自由输出 <think> 思考标签。"
+        },
+        "usage_guide_zh": "此模版为 2025 年初针对 DeepSeek-R1 初代模型摸索出的提示词基准，新一代 DeepSeek-R4 已支持自适应上下文感知与多模态原生协同，该条目已归档入历史库。",
+        "created_at": "2025-01-22T00:00:00Z",
+        "is_prompt": true,
+        "raw_published_at": "2025-01-22T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 (初代思维链/已归档)"
+      },
+      {
+        "id": "prompt_deepseek_r1_zero_shot",
+        "sub_type": "reasoning",
+        "model_family": "deepseek_legacy",
+        "purpose_zh": "📦 历史归档 · DeepSeek-R1 初代纯强化学习零预设规范",
+        "purpose_en": "📦 Legacy Archive · DeepSeek-R1 Initial Pure RL Specification",
+        "title_zh": "📦【历史归档】DeepSeek-R1 初代纯强化学习零预设提示词规范（2025初历史参考）",
+        "title_en": "📦 [Legacy Archive] DeepSeek-R1 Early Pure RL Zero-System Prompt (2025 Historical Reference)",
+        "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+        "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+        "source": "DeepSeek 官方归档",
+        "author": "DeepSeek 架构组",
+        "category": "prompts",
+        "is_prompt": true,
+        "generation_tier": "legacy",
+        "model_tier_score": 45,
+        "raw_published_at": "2025-01-22T00:00:00Z",
+        "recommended_model": "DeepSeek-R1 (初代模型/已归档)",
+        "temp_advice": "建议温度 0.6 | 历史参考",
+        "metrics": {
+          "type": "📦 历史归档",
+          "model": "R1 早期",
+          "temp": "0.6"
+        },
+        "content_snippet": "Historical R1 reference: Never constrain early R1 with complex system personas or few-shot formats.",
+        "summary_zh": "早期历史规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚初代 R1。现已被支持自适应推理的 R4 全面取代。",
+        "summary_en": "Historical guidance for early R1 model. Superseded by DeepSeek-R4.",
+        "prompt_content_zh": "【历史初代规范】\n请针对以下问题进行推导：\n1. 不使用复杂人设；\n2. 允许自由思维链展开；\n【问题】：[输入问题]",
+        "prompt_content_en": "[Legacy R1 Guideline]\nPerform step-by-step reasoning without persona.",
+        "prompt_content": "【历史初代规范】\n请针对以下问题进行推导：\n1. 不使用复杂人设；\n2. 允许自由思维链展开；\n【问题】：[输入问题]",
+        "tags": [
+          "历史模型",
+          "DeepSeek-R1",
+          "早期规范"
+        ]
       },
       {
         "id": "prompt-legacy-gpt35-01",
@@ -69206,6 +69423,36 @@
       "recommended_model": "Claude 5.5 Sonnet / Cursor"
     },
     {
+      "id": "prompt-code-deepseek-r4-01",
+      "title_zh": "DeepSeek-R4 极限长思维链：自适应推理与复杂并发无锁架构设计",
+      "title_en": "DeepSeek-R4 Adaptive Reasoning: Lock-Free Concurrency & System Debugger",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "DeepSeek-R4 (超长自适应思维链)",
+      "model_family": "DeepSeek",
+      "model_tier_score": 97,
+      "generation_tier": "sota",
+      "purpose_zh": "R4 强化学习深度反思与无锁并发排查",
+      "temp_advice": "温度 0.6 (长思维链)",
+      "variables": [
+        "{{编程语言}}",
+        "{{并发模型}}",
+        "{{故障现象}}"
+      ],
+      "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
+      "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+      "sample_output": {
+        "type": "code",
+        "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
+        "content": "/* DeepSeek-R4 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+      },
+      "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R4、Claude 5.5 或 OpenAI o3-pro 模型。",
+      "created_at": "2026-09-24T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R4 (超长自适应思维链)"
+    },
+    {
       "id": "prompt-image-flux-cyberpunk-01",
       "title_zh": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
       "title_en": "Flux.1 / Midjourney Cinematic Cyberpunk Portrait",
@@ -69237,34 +69484,229 @@
       "recommended_model": "Black Forest Flux.1 / Midjourney v6.1"
     },
     {
-      "id": "prompt-code-deepseek-r1-01",
-      "title_zh": "DeepSeek-R1 深度推理：高并发死锁与算法排查",
-      "title_en": "DeepSeek-R1 Deep Reasoning: Deadlock & Algo Debugger",
+      "id": "prompt_deepseek_r4_adaptive_cot",
+      "sub_type": "reasoning",
+      "model_family": "deepseek_r4",
+      "purpose_zh": "🧠 深度推理 · DeepSeek-R4 自适应长链反思与架构证伪",
+      "purpose_en": "🧠 Deep Reasoning · DeepSeek-R4 Adaptive CoT & Adversarial Verification",
+      "title_zh": "💡【DeepSeek-R4 旗舰标杆】自适应长链反思提示词：激发动态测试期算力与复杂系统对抗性排查",
+      "title_en": "💡 [DeepSeek-R4 Frontier Standard] Adaptive CoT & Test-Time Compute Decoupling Architecture",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R4",
+      "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+      "source": "DeepSeek 官方前沿指南",
+      "author": "DeepSeek 架构组",
       "category": "prompts",
-      "scenario_label": "💻 编程开发",
-      "target_model": "DeepSeek-R1 (深度推理)",
-      "model_family": "DeepSeek",
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 97,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R4 (超长自适应思维链)",
+      "temp_advice": "建议温度 0.6 | 给予 R4 充分的自适应长链反思采样自由度",
+      "metrics": {
+        "type": "🧠 DeepSeek R4",
+        "model": "R4 满血版",
+        "temp": "0.6"
+      },
+      "content_snippet": "Unleash DeepSeek-R4's native adaptive test-time compute with structured verification criteria, multi-branch adversarial pruning, and rigorous edge-case falsification.",
+      "summary_zh": "充分释放 R4 第四代强化学习自适应算力伸缩潜能。设定严格对抗性反思约束，让模型在思维链中自主完成假说生成、逻辑分支证伪与极端边界闭环。",
+      "summary_en": "Unleash DeepSeek-R4's adaptive reasoning: autonomous hypothesis generation, multi-branch falsification, and edge-case proofs.",
+      "prompt_content_zh": "【任务目标与边界约束】\n你具备 DeepSeek-R4 纯强化学习驱动的自适应长思维链推理能力（Adaptive Test-Time Compute）。请针对以下核心问题执行深度架构推导与反思验证：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，禁止省略推导环节；\n2. 启动多层反思与逆向假说推翻（Adversarial Self-Refinement），对可能出现的分支主动寻找反例，并在输出前完成证伪；\n3. 最终答案请以结构化 Markdown 输出，并在文末提供极端边界条件（Edge Cases）的鲁棒性证明。\n\n【待解决问题】：\n[在此粘贴你的高难度算法、并发系统或核心业务架构挑战]",
+      "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nLeveraging DeepSeek-R4's adaptive reasoning capabilities, perform exhaustive derivation with adversarial self-refinement and edge-case proofs for the following challenge:\n\n[PASTE YOUR CHALLENGE HERE]",
+      "prompt_content": "【任务目标与边界约束】\n你具备 DeepSeek-R4 纯强化学习驱动的自适应长思维链推理能力（Adaptive Test-Time Compute）。请针对以下核心问题执行深度架构推导与反思验证：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，禁止省略推导环节；\n2. 启动多层反思与逆向假说推翻（Adversarial Self-Refinement），对可能出现的分支主动寻找反例，并在输出前完成证伪；\n3. 最终答案请以结构化 Markdown 输出，并在文末提供极端边界条件（Edge Cases）的鲁棒性证明。\n\n【待解决问题】：\n[在此粘贴你的高难度算法、并发系统或核心业务架构挑战]",
+      "tags": [
+        "DeepSeek-R4",
+        "超长思维链",
+        "自适应推理",
+        "对抗证伪"
+      ]
+    },
+    {
+      "id": "prompt_deepseek_reasoning",
+      "sub_type": "reasoning",
+      "model_family": "deepseek_r4",
+      "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
+      "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
+      "title_zh": "💡【极限长思考链】DeepSeek-R4 / o3-pro 深度思考极客解锁模板：开启自适应多步反思",
+      "title_en": "💡 [Extended Logic Chains] DeepSeek-R4 & o3-pro Deep Reasoning Decoupling & Reflection Prompt",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R4",
+      "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "社区实测",
+      "category": "prompts",
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 97,
+      "raw_published_at": "2026-09-24T00:00:00Z",
+      "recommended_model": "DeepSeek-R4 / OpenAI o3-pro",
+      "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+      "metrics": {
+        "type": "🧠 深度推理",
+        "model": "DeepSeek-R4",
+        "temp": "0.6"
+      },
+      "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+      "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
+      "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "tags": [
+        "Prompt神咒",
+        "逻辑推理",
+        "DeepSeek-R4"
+      ]
+    },
+    {
+      "id": "prompt_gh_zerolu_awesome_seedance",
+      "title_zh": "GitHub 今日热推 · awesome-seedance (★2519)：前沿模型实战提示词",
+      "title_en": "GitHub Daily Trending: awesome-seedance (★2519) Prompt Suite",
+      "category": "prompts",
+      "sub_type": "video",
+      "scenario_label": "🎬 动态视效",
+      "target_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+      "recommended_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+      "model_family": "Universal",
       "model_tier_score": 96,
       "generation_tier": "sota",
-      "purpose_zh": "复杂并发算法与边界条件排查",
-      "temp_advice": "温度 0.6 (长思维链)",
+      "purpose_zh": "开源社区今日活跃前沿模版 (awesome-seedance)",
+      "temp_advice": "温度 0.5 (社区前沿)",
       "variables": [
-        "{{编程语言}}",
-        "{{并发模型}}",
-        "{{故障现象}}"
+        "{{核心任务目标}}",
+        "{{业务上下文约束}}",
+        "{{期望输出格式}}"
       ],
-      "prompt_content_zh": "请充分发挥你的深度思维链推理能力（Reasoning Step-by-Step），为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 仔细推演临界区状态转移，绘制潜在死锁或竞态条件的发生时序图（ASCII 或时序表格）；\n2. 检查边界条件（如切片溢出、连接池耗尽、优雅停机信号缺失）；\n3. 给出从根源消除锁竞争的最佳算法设计，并附带可验证的压力测试单测脚本。",
-      "prompt_content_en": "Using your full reasoning capabilities, step-by-step trace and diagnose the deadlock or race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+      "prompt_content_zh": "【GitHub 社区今日精选 · awesome-seedance】\n你是一名精通 通义 Wan 2.1 / Seedance 2.0 / Sora 2 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/ZeroLu/awesome-seedance",
+      "prompt_content_en": "[GitHub Daily Trending · awesome-seedance]\nYou are an expert utilizing 通义 Wan 2.1 / Seedance 2.0 / Sora 2. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+      "sample_output": {
+        "type": "video",
+        "title": "来自 awesome-seedance 社区的实测规范样板",
+        "content": "// 来源于 GitHub 实时更新仓库 awesome-seedance (Stars: 2519)\n// 官方地址: https://github.com/ZeroLu/awesome-seedance\n// 适配前沿模型: 通义 Wan 2.1 / Seedance 2.0 / Sora 2\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+      },
+      "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+      "url": "https://github.com/ZeroLu/awesome-seedance",
+      "raw_published_at": "2026-09-24T00:36:09Z",
+      "created_at": "2026-09-24T00:36:09Z",
+      "is_prompt": true,
+      "source": "GitHub (ZeroLu/awesome-seedance)",
+      "tags": [
+        "GitHub今日热推",
+        "awesome-seedance",
+        "通义 Wan 2.1"
+      ]
+    },
+    {
+      "id": "prompt_gh_hidorakai002_ai_workspace_archive",
+      "title_zh": "GitHub 今日热推 · ai-workspace-archive (★36)：前沿模型实战提示词",
+      "title_en": "GitHub Daily Trending: ai-workspace-archive (★36) Prompt Suite",
+      "category": "prompts",
+      "sub_type": "code",
+      "scenario_label": "💻 编程开发",
+      "target_model": "DeepSeek-R4 / Claude 5.5 Sonnet",
+      "recommended_model": "DeepSeek-R4 / Claude 5.5 Sonnet",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "开源社区今日活跃前沿模版 (ai-workspace-archive)",
+      "temp_advice": "温度 0.5 (社区前沿)",
+      "variables": [
+        "{{核心任务目标}}",
+        "{{业务上下文约束}}",
+        "{{期望输出格式}}"
+      ],
+      "prompt_content_zh": "【GitHub 社区今日精选 · ai-workspace-archive】\n你是一名精通 DeepSeek-R4 / Claude 5.5 Sonnet 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/HIDORAKAI002/ai-workspace-archive",
+      "prompt_content_en": "[GitHub Daily Trending · ai-workspace-archive]\nYou are an expert utilizing DeepSeek-R4 / Claude 5.5 Sonnet. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
       "sample_output": {
         "type": "code",
-        "title": "并发竞态推演与原子替换方案",
-        "content": "/* 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+        "title": "来自 ai-workspace-archive 社区的实测规范样板",
+        "content": "// 来源于 GitHub 实时更新仓库 ai-workspace-archive (Stars: 36)\n// 官方地址: https://github.com/HIDORAKAI002/ai-workspace-archive\n// 适配前沿模型: DeepSeek-R4 / Claude 5.5 Sonnet\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
       },
-      "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R1 或 OpenAI o3 模型。",
-      "created_at": "2026-09-24T00:00:00Z",
+      "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+      "url": "https://github.com/HIDORAKAI002/ai-workspace-archive",
+      "raw_published_at": "2026-09-24T00:17:52Z",
+      "created_at": "2026-09-24T00:17:52Z",
       "is_prompt": true,
-      "raw_published_at": "2026-09-24T00:00:00Z",
-      "recommended_model": "DeepSeek-R1 (深度推理)"
+      "source": "GitHub (HIDORAKAI002/ai-workspace-archive)",
+      "tags": [
+        "GitHub今日热推",
+        "ai-workspace-archive",
+        "DeepSeek-R4"
+      ]
+    },
+    {
+      "id": "prompt_gh_youmind_openlab_awesome_nano_banana_pro_prompts",
+      "title_zh": "GitHub 今日热推 · awesome-nano-banana-pro-prompts (★13473)：前沿模型实战提示词",
+      "title_en": "GitHub Daily Trending: awesome-nano-banana-pro-prompts (★13473) Prompt Suite",
+      "category": "prompts",
+      "sub_type": "image",
+      "scenario_label": "🎨 灵感生图",
+      "target_model": "Flux.1 Pro / Midjourney v7",
+      "recommended_model": "Flux.1 Pro / Midjourney v7",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "开源社区今日活跃前沿模版 (awesome-nano-banana-pro-prompts)",
+      "temp_advice": "温度 0.5 (社区前沿)",
+      "variables": [
+        "{{核心任务目标}}",
+        "{{业务上下文约束}}",
+        "{{期望输出格式}}"
+      ],
+      "prompt_content_zh": "【GitHub 社区今日精选 · awesome-nano-banana-pro-prompts】\n你是一名精通 Flux.1 Pro / Midjourney v7 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+      "prompt_content_en": "[GitHub Daily Trending · awesome-nano-banana-pro-prompts]\nYou are an expert utilizing Flux.1 Pro / Midjourney v7. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+      "sample_output": {
+        "type": "image",
+        "title": "来自 awesome-nano-banana-pro-prompts 社区的实测规范样板",
+        "content": "// 来源于 GitHub 实时更新仓库 awesome-nano-banana-pro-prompts (Stars: 13473)\n// 官方地址: https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts\n// 适配前沿模型: Flux.1 Pro / Midjourney v7\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+      },
+      "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-24）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+      "url": "https://github.com/YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+      "raw_published_at": "2026-09-24T00:07:38Z",
+      "created_at": "2026-09-24T00:07:38Z",
+      "is_prompt": true,
+      "source": "GitHub (YouMind-OpenLab/awesome-nano-banana-pro-prompts)",
+      "tags": [
+        "GitHub今日热推",
+        "awesome-nano-banana-pro-prompts",
+        "Flux.1 Pro"
+      ]
+    },
+    {
+      "id": "prompt_gh_youmind_openlab_awesome_grok_imagine_prompts",
+      "title_zh": "GitHub 今日热推 · awesome-grok-imagine-prompts (★51)：前沿模型实战提示词",
+      "title_en": "GitHub Daily Trending: awesome-grok-imagine-prompts (★51) Prompt Suite",
+      "category": "prompts",
+      "sub_type": "video",
+      "scenario_label": "🎬 动态视效",
+      "target_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+      "recommended_model": "通义 Wan 2.1 / Seedance 2.0 / Sora 2",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "开源社区今日活跃前沿模版 (awesome-grok-imagine-prompts)",
+      "temp_advice": "温度 0.5 (社区前沿)",
+      "variables": [
+        "{{核心任务目标}}",
+        "{{业务上下文约束}}",
+        "{{期望输出格式}}"
+      ],
+      "prompt_content_zh": "【GitHub 社区今日精选 · awesome-grok-imagine-prompts】\n你是一名精通 通义 Wan 2.1 / Seedance 2.0 / Sora 2 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts",
+      "prompt_content_en": "[GitHub Daily Trending · awesome-grok-imagine-prompts]\nYou are an expert utilizing 通义 Wan 2.1 / Seedance 2.0 / Sora 2. Address {核心任务目标} strictly within {业务上下文约束} and output {期望输出格式}.",
+      "sample_output": {
+        "type": "video",
+        "title": "来自 awesome-grok-imagine-prompts 社区的实测规范样板",
+        "content": "// 来源于 GitHub 实时更新仓库 awesome-grok-imagine-prompts (Stars: 51)\n// 官方地址: https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts\n// 适配前沿模型: 通义 Wan 2.1 / Seedance 2.0 / Sora 2\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+      },
+      "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-09-23）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+      "url": "https://github.com/YouMind-OpenLab/awesome-grok-imagine-prompts",
+      "raw_published_at": "2026-09-23T23:10:42Z",
+      "created_at": "2026-09-23T23:10:42Z",
+      "is_prompt": true,
+      "source": "GitHub (YouMind-OpenLab/awesome-grok-imagine-prompts)",
+      "tags": [
+        "GitHub今日热推",
+        "awesome-grok-imagine-prompts",
+        "通义 Wan 2.1"
+      ]
     },
     {
       "id": "prompt-analysis-excel-eda-01",
@@ -69272,7 +69714,7 @@
       "title_en": "Excel Advanced Report & Key Drivers Attribution",
       "category": "prompts",
       "scenario_label": "📊 数据分析",
-      "target_model": "DeepSeek-R1 / GPT-6.0",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
       "model_family": "Universal",
       "model_tier_score": 96,
       "generation_tier": "sota",
@@ -69294,7 +69736,7 @@
       "created_at": "2026-09-24T00:00:00Z",
       "is_prompt": true,
       "raw_published_at": "2026-09-24T00:00:00Z",
-      "recommended_model": "DeepSeek-R1 / GPT-6.0"
+      "recommended_model": "DeepSeek-R4 / GPT-6.0"
     },
     {
       "id": "prompt-video-wan21-slowmo-01",
@@ -69333,7 +69775,7 @@
       "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
       "category": "prompts",
       "scenario_label": "✍️ 短剧小说",
-      "target_model": "DeepSeek-R1 / Claude 5.5",
+      "target_model": "DeepSeek-R4 / Claude 5.5",
       "model_family": "Universal",
       "model_tier_score": 95,
       "generation_tier": "sota",
@@ -69356,7 +69798,7 @@
       "created_at": "2026-09-24T00:00:00Z",
       "is_prompt": true,
       "raw_published_at": "2026-09-24T00:00:00Z",
-      "recommended_model": "DeepSeek-R1 / Claude 5.5"
+      "recommended_model": "DeepSeek-R4 / Claude 5.5"
     },
     {
       "id": "prompt-report-mckinsey-01",
@@ -69425,7 +69867,7 @@
       "title_en": "Deep Travel Itinerary Planner & Budgeting",
       "category": "prompts",
       "scenario_label": "✈️ 生活旅行",
-      "target_model": "Claude 5.5 / DeepSeek-R1",
+      "target_model": "Claude 5.5 / DeepSeek-R4",
       "model_family": "Universal",
       "model_tier_score": 93,
       "generation_tier": "sota",
@@ -69448,7 +69890,7 @@
       "created_at": "2026-09-24T00:00:00Z",
       "is_prompt": true,
       "raw_published_at": "2026-09-24T00:00:00Z",
-      "recommended_model": "Claude 5.5 / DeepSeek-R1"
+      "recommended_model": "Claude 5.5 / DeepSeek-R4"
     },
     {
       "id": "prompt_tibo_gpt_reset_architecture",
@@ -69465,11 +69907,11 @@
       "category": "prompts",
       "is_prompt": true,
       "raw_published_at": "2026-09-14T23:50:00Z",
-      "recommended_model": "o1 / o3-mini / DeepSeek-R1 / GPT-4o",
+      "recommended_model": "OpenAI o3-pro / DeepSeek-R4 / GPT-6.0",
       "temp_advice": "建议温度 0.2 | 强制重构逻辑推导链",
       "metrics": {
         "type": "🧠 GPT重置",
-        "model": "o1/o3/R1",
+        "model": "o3/R4/GPT-6",
         "temp": "0.2"
       },
       "content_snippet": "Purges accumulated context drift, hidden assumptions, and conversational bias without discarding task memory, forcing models to reason from first principles.",
@@ -69483,43 +69925,6 @@
         "GPT重置",
         "防幻觉",
         "深度推理"
-      ],
-      "generation_tier": "sota",
-      "model_tier_score": 90
-    },
-    {
-      "id": "prompt_deepseek_r1_zero_shot",
-      "sub_type": "reasoning",
-      "model_family": "deepseek_r1",
-      "purpose_zh": "🧠 深度推理 · DeepSeek 官方建议：零 System Prompt 自由思维链",
-      "purpose_en": "🧠 Deep Reasoning · DeepSeek Official: Zero-System Pure RL Chain of Thought",
-      "title_zh": "💡【DeepSeek 官方白皮书标准】避坑指南：纯强化学习 (RL) 零预设提示词模板，彻底释放 671B 思考潜能",
-      "title_en": "💡 [DeepSeek Official Standard] Zero-System Prompt Architecture: Unleash 671B Pure RL Thinking Depth",
-      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-      "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
-      "source": "DeepSeek 官方指南",
-      "author": "DeepSeek 架构组",
-      "category": "prompts",
-      "is_prompt": true,
-      "raw_published_at": "2026-09-14T22:30:00Z",
-      "recommended_model": "DeepSeek-R1 (671B Full)",
-      "temp_advice": "建议温度 0.6 | 给予模型充足的反思与自我纠错采样空间",
-      "metrics": {
-        "type": "🧠 DeepSeek R1",
-        "model": "R1 671B",
-        "temp": "0.6"
-      },
-      "content_snippet": "Official DeepSeek guidance: Never constrain R1 with complex system personas or few-shot formats. Provide exact verification criteria and let GRPO-trained reasoning explore hypotheses freely.",
-      "summary_zh": "官方权威规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。定义精准验收标准，让模型原生自我验证与反思机制充分展开。",
-      "summary_en": "Official guidance: Avoid system personas or few-shot anchors. Define clear criteria and let native self-reflection chains explore freely.",
-      "prompt_content_zh": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
-      "prompt_content_en": "[TASK OBJECTIVE & BOUNDARY CRITERIA]\nPerform exhaustive mathematical and algorithmic derivation for the following problem:\n\n[CORE CONSTRAINTS]:\n1. Output must maintain uncompromising mathematical rigor without skipping derivation steps;\n2. When encountering ambiguities or potential branches, proactively branch and falsify invalid hypotheses in your reasoning trace;\n3. Present the final solution in structured markdown, followed by edge case verification proofs.\n\n[PROBLEM STATEMENT]:\n[Paste your high-complexity problem, architecture challenge, or algorithm design here]",
-      "prompt_content": "【任务目标与边界约束】\n请针对以下问题进行最深度的数学与算法推导：\n\n【核心约束】：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n3. 最终答案请以结构化的格式完整输出，并在末尾提供边界极端情况（Edge Cases）证明。\n\n【待解决问题】：\n[在此处粘贴你的高难度数学难题、架构难题或算法设计需求]",
-      "tags": [
-        "DeepSeek官方",
-        "R1纯RL",
-        "思维链",
-        "数学竞赛"
       ],
       "generation_tier": "sota",
       "model_tier_score": 90
@@ -70023,41 +70428,6 @@
       "model_tier_score": 90
     },
     {
-      "id": "prompt_deepseek_reasoning",
-      "sub_type": "reasoning",
-      "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
-      "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
-      "title_zh": "💡【极限长思考链】DeepSeek-R1 / o3 深度思考极客解锁模板：开启极致多步反思",
-      "title_en": "💡 [Extended Logic Chains] DeepSeek-R1 & o3 Deep Reasoning Decoupling & Reflection Prompt",
-      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-      "image_url": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80&auto=format&fit=crop",
-      "source": "实战技巧 · Prompt",
-      "author": "社区实测",
-      "category": "prompts",
-      "is_prompt": true,
-      "raw_published_at": "2026-09-01T00:00:00Z",
-      "recommended_model": "DeepSeek-R1 / OpenAI o3-mini",
-      "temp_advice": "建议温度 0.6 | reasoning_effort: high",
-      "metrics": {
-        "type": "🧠 深度推理",
-        "model": "DeepSeek-R1",
-        "temp": "0.6"
-      },
-      "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-      "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
-      "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
-      "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-      "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
-      "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
-      "tags": [
-        "Prompt神咒",
-        "逻辑推理",
-        "DeepSeek"
-      ],
-      "generation_tier": "sota",
-      "model_tier_score": 90
-    },
-    {
       "id": "prompt_first_principles_reasoning",
       "sub_type": "reasoning",
       "purpose_zh": "🧠 深度推理 · 第一性原理穿透与战略决断",
@@ -70141,11 +70511,11 @@
       "category": "prompts",
       "is_prompt": true,
       "raw_published_at": "2026-09-01T00:00:00Z",
-      "recommended_model": "Claude 4.6 / DeepSeek-R1",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
       "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
       "metrics": {
         "type": "🔬 公式转代码",
-        "model": "Claude 4.6",
+        "model": "Claude 5.5",
         "temp": "0.1"
       },
       "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
@@ -70371,6 +70741,70 @@
       ],
       "generation_tier": "sota",
       "model_tier_score": 90
+    },
+    {
+      "id": "prompt-legacy-deepseek-r1-01",
+      "title_zh": "【历史库】早期 DeepSeek-R1 纯RL冷启动零预设提示词规范",
+      "title_en": "[Legacy] DeepSeek-R1 Initial Pure-RL Zero-System Prompt Specification",
+      "category": "prompts",
+      "scenario_label": "💻 编程开发",
+      "target_model": "DeepSeek-R1 (初代思维链/已归档)",
+      "model_family": "DeepSeek",
+      "model_tier_score": 45,
+      "generation_tier": "legacy",
+      "purpose_zh": "初代纯强化学习推理模型避坑规范（历史参考）",
+      "temp_advice": "建议温度 0.6",
+      "variables": [
+        "{{复杂推理问题}}"
+      ],
+      "prompt_content_zh": "【官方初代规范】：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。请直接输入核心任务：\n\n请针对以下问题进行最深度的数学与算法推导：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n\n【待解决问题】：{{复杂推理问题}}",
+      "prompt_content_en": "Official legacy guideline: Avoid system personas or few-shot formats for early R1. Provide exact verification criteria and let GRPO explore freely.",
+      "sample_output": {
+        "type": "text",
+        "title": "R1 初代无预设输入规范",
+        "content": "直接向模型抛出纯数学公理或算法边界证明，允许模型自由输出 <think> 思考标签。"
+      },
+      "usage_guide_zh": "此模版为 2025 年初针对 DeepSeek-R1 初代模型摸索出的提示词基准，新一代 DeepSeek-R4 已支持自适应上下文感知与多模态原生协同，该条目已归档入历史库。",
+      "created_at": "2025-01-22T00:00:00Z",
+      "is_prompt": true,
+      "raw_published_at": "2025-01-22T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 (初代思维链/已归档)"
+    },
+    {
+      "id": "prompt_deepseek_r1_zero_shot",
+      "sub_type": "reasoning",
+      "model_family": "deepseek_legacy",
+      "purpose_zh": "📦 历史归档 · DeepSeek-R1 初代纯强化学习零预设规范",
+      "purpose_en": "📦 Legacy Archive · DeepSeek-R1 Initial Pure RL Specification",
+      "title_zh": "📦【历史归档】DeepSeek-R1 初代纯强化学习零预设提示词规范（2025初历史参考）",
+      "title_en": "📦 [Legacy Archive] DeepSeek-R1 Early Pure RL Zero-System Prompt (2025 Historical Reference)",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R1",
+      "image_url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80&auto=format&fit=crop",
+      "source": "DeepSeek 官方归档",
+      "author": "DeepSeek 架构组",
+      "category": "prompts",
+      "is_prompt": true,
+      "generation_tier": "legacy",
+      "model_tier_score": 45,
+      "raw_published_at": "2025-01-22T00:00:00Z",
+      "recommended_model": "DeepSeek-R1 (初代模型/已归档)",
+      "temp_advice": "建议温度 0.6 | 历史参考",
+      "metrics": {
+        "type": "📦 历史归档",
+        "model": "R1 早期",
+        "temp": "0.6"
+      },
+      "content_snippet": "Historical R1 reference: Never constrain early R1 with complex system personas or few-shot formats.",
+      "summary_zh": "早期历史规范：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚初代 R1。现已被支持自适应推理的 R4 全面取代。",
+      "summary_en": "Historical guidance for early R1 model. Superseded by DeepSeek-R4.",
+      "prompt_content_zh": "【历史初代规范】\n请针对以下问题进行推导：\n1. 不使用复杂人设；\n2. 允许自由思维链展开；\n【问题】：[输入问题]",
+      "prompt_content_en": "[Legacy R1 Guideline]\nPerform step-by-step reasoning without persona.",
+      "prompt_content": "【历史初代规范】\n请针对以下问题进行推导：\n1. 不使用复杂人设；\n2. 允许自由思维链展开；\n【问题】：[输入问题]",
+      "tags": [
+        "历史模型",
+        "DeepSeek-R1",
+        "早期规范"
+      ]
     },
     {
       "id": "prompt-legacy-gpt35-01",

@@ -23,26 +23,26 @@
     "created_at": "2026-09-24T00:00:00Z"
   },
   {
-    "id": "prompt-code-deepseek-r1-01",
-    "title_zh": "DeepSeek-R1 深度推理：高并发死锁与算法排查",
-    "title_en": "DeepSeek-R1 Deep Reasoning: Deadlock & Algo Debugger",
+    "id": "prompt-code-deepseek-r4-01",
+    "title_zh": "DeepSeek-R4 极限长思维链：自适应推理与复杂并发无锁架构设计",
+    "title_en": "DeepSeek-R4 Adaptive Reasoning: Lock-Free Concurrency & System Debugger",
     "category": "code",
     "scenario_label": "💻 编程开发",
-    "target_model": "DeepSeek-R1 (深度推理)",
+    "target_model": "DeepSeek-R4 (超长自适应思维链)",
     "model_family": "DeepSeek",
-    "model_tier_score": 96,
+    "model_tier_score": 97,
     "generation_tier": "sota",
-    "purpose_zh": "复杂并发算法与边界条件排查",
+    "purpose_zh": "R4 强化学习深度反思与无锁并发排查",
     "temp_advice": "温度 0.6 (长思维链)",
     "variables": ["{{编程语言}}", "{{并发模型}}", "{{故障现象}}"],
-    "prompt_content_zh": "请充分发挥你的深度思维链推理能力（Reasoning Step-by-Step），为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 仔细推演临界区状态转移，绘制潜在死锁或竞态条件的发生时序图（ASCII 或时序表格）；\n2. 检查边界条件（如切片溢出、连接池耗尽、优雅停机信号缺失）；\n3. 给出从根源消除锁竞争的最佳算法设计，并附带可验证的压力测试单测脚本。",
-    "prompt_content_en": "Using your full reasoning capabilities, step-by-step trace and diagnose the deadlock or race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+    "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
+    "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
     "sample_output": {
       "type": "code",
-      "title": "并发竞态推演与原子替换方案",
-      "content": "/* 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
+      "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
+      "content": "/* DeepSeek-R4 推演结论：在 Goroutine A 持有 Lock1 请求 Lock2 的同时，Goroutine B 持有 Lock2 请求 Lock1，导致经典死锁循环。\n   优化方案：废弃双互斥锁，改用无锁 CAS (Compare-And-Swap) 或通道序列化处理 */\n\npackage main\n\nimport (\n\t\"sync/atomic\"\n\t\"unsafe\"\n)\n\ntype LockFreeQueue struct {\n\thead unsafe.Pointer\n\ttail unsafe.Pointer\n}\n\ntype node struct {\n\tvalue interface{}\n\tnext  unsafe.Pointer\n}\n\nfunc NewLockFreeQueue() *LockFreeQueue {\n\tn := unsafe.Pointer(&node{})\n\treturn &LockFreeQueue{head: n, tail: n}\n}\n\nfunc (q *LockFreeQueue) Enqueue(v interface{}) {\n\tn := &node{value: v}\n\tfor {\n\t\ttail := q.tail\n\t\tnext := (*node)(tail).next\n\t\tif tail == q.tail {\n\t\t\tif next == nil {\n\t\t\t\tif atomic.CompareAndSwapPointer(&(*node)(tail).next, next, unsafe.Pointer(n)) {\n\t\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, unsafe.Pointer(n))\n\t\t\t\t\treturn\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tatomic.CompareAndSwapPointer(&q.tail, tail, next)\n\t\t\t}\n\t\t}\n\t}\n}"
     },
-    "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R1 或 OpenAI o3 模型。",
+    "usage_guide_zh": "将代码段或错误日志直接附加在提示词后，输入至 DeepSeek-R4、Claude 5.5 或 OpenAI o3-pro 模型。",
     "created_at": "2026-09-24T00:00:00Z"
   },
   {
@@ -51,7 +51,7 @@
     "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
     "category": "novel",
     "scenario_label": "✍️ 短剧小说",
-    "target_model": "DeepSeek-R1 / Claude 5.5",
+    "target_model": "DeepSeek-R4 / Claude 5.5",
     "model_family": "Universal",
     "model_tier_score": 95,
     "generation_tier": "sota",
@@ -97,7 +97,7 @@
     "title_en": "Excel Advanced Report & Key Drivers Attribution",
     "category": "analysis",
     "scenario_label": "📊 数据分析",
-    "target_model": "DeepSeek-R1 / GPT-6.0",
+    "target_model": "DeepSeek-R4 / GPT-6.0",
     "model_family": "Universal",
     "model_tier_score": 96,
     "generation_tier": "sota",
@@ -143,7 +143,7 @@
     "title_en": "Deep Travel Itinerary Planner & Budgeting",
     "category": "travel",
     "scenario_label": "✈️ 生活旅行",
-    "target_model": "Claude 5.5 / DeepSeek-R1",
+    "target_model": "Claude 5.5 / DeepSeek-R4",
     "model_family": "Universal",
     "model_tier_score": 93,
     "generation_tier": "sota",
@@ -253,5 +253,28 @@
     },
     "usage_guide_zh": "现代 SOTA 画图模型（如 Flux.1、Midjourney v6.1）已采用高级 T5/CLIP 文本编码器，完全支持自然语言描述，已无需复制冗长的负向词大乱炖。",
     "created_at": "2023-04-10T00:00:00Z"
+  },
+  {
+    "id": "prompt-legacy-deepseek-r1-01",
+    "title_zh": "【历史库】早期 DeepSeek-R1 纯RL冷启动零预设提示词规范",
+    "title_en": "[Legacy] DeepSeek-R1 Initial Pure-RL Zero-System Prompt Specification",
+    "category": "code",
+    "scenario_label": "💻 编程开发",
+    "target_model": "DeepSeek-R1 (初代思维链/已归档)",
+    "model_family": "DeepSeek",
+    "model_tier_score": 45,
+    "generation_tier": "legacy",
+    "purpose_zh": "初代纯强化学习推理模型避坑规范（历史参考）",
+    "temp_advice": "建议温度 0.6",
+    "variables": ["{{复杂推理问题}}"],
+    "prompt_content_zh": "【官方初代规范】：切勿使用复杂的系统人设或旧式 Few-shot 模板束缚 R1。请直接输入核心任务：\n\n请针对以下问题进行最深度的数学与算法推导：\n1. 结果必须满足绝对严谨性，不跳步、不省略推导推算过程；\n2. 当遇到不确定或可能的分支情况时，请主动分流验证每个可能分支，并在思维链内部推翻不成立假说；\n\n【待解决问题】：{{复杂推理问题}}",
+    "prompt_content_en": "Official legacy guideline: Avoid system personas or few-shot formats for early R1. Provide exact verification criteria and let GRPO explore freely.",
+    "sample_output": {
+      "type": "text",
+      "title": "R1 初代无预设输入规范",
+      "content": "直接向模型抛出纯数学公理或算法边界证明，允许模型自由输出 <think> 思考标签。"
+    },
+    "usage_guide_zh": "此模版为 2025 年初针对 DeepSeek-R1 初代模型摸索出的提示词基准，新一代 DeepSeek-R4 已支持自适应上下文感知与多模态原生协同，该条目已归档入历史库。",
+    "created_at": "2025-01-22T00:00:00Z"
   }
 ]
