@@ -730,59 +730,61 @@
     </div>
   </header>
 
-  <!-- 🧭 现代化全景分类导航栏 (自适应单行向两边挤压分布布局) -->
-  <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 lg:px-8 py-2.5 shadow-sm dark:shadow-none">
-    <div class="max-w-[1760px] w-full mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5 sm:gap-3 xl:gap-4">
-      <!-- 左侧：雷达高频态势微标 (紧凑精致，自适应平衡布局) -->
-      <div class="hidden lg:flex items-center space-x-2 shrink-0 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 select-none">
+  <!-- 🧭 现代化全景分类导航栏 (单行固定等比栅格专业门户布局) -->
+  <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 lg:px-8 py-2 shadow-sm dark:shadow-none select-none">
+    <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between gap-2 sm:gap-3 xl:gap-4">
+      <!-- 左侧：雷达高频态势微标 (精致紧凑标定物) -->
+      <div class="hidden xl:flex items-center space-x-2 shrink-0 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 select-none notranslate">
         <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse"></span>
         <span class="font-bold text-[11px] xl:text-xs tracking-wider uppercase font-mono">RADAR LIVE</span>
       </div>
 
-      <!-- 中间：7 大核心专栏切换胶囊阵列 (自适应向两边挤压分布，单行永不折行) -->
-      <div class="flex items-center justify-between sm:justify-center gap-1 sm:gap-1.5 xl:gap-2 flex-nowrap flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth" id="nav-tabs">
-        <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">🌐</span>
-          <span id="nav-text-all" class="truncate">综合全景</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">0</span>
-        </button>
-        <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">⚡</span>
-          <span id="nav-text-news" class="truncate">行业快讯</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">0</span>
-        </button>
-        <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">🐦</span>
-          <span id="nav-text-celebrity" class="truncate">社交雷达</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">0</span>
-        </button>
-        <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">🛠️</span>
-          <span id="nav-text-tools" class="truncate">落地工具</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-tools">0</span>
-        </button>
-        <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">🎬</span>
-          <span id="nav-text-videos" class="truncate">实战视频</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-videos">0</span>
-        </button>
-        <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">💡</span>
-          <span id="nav-text-prompts" class="truncate">提示词库</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5" id="badge-count-prompts">0</span>
-        </button>
-        <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap">
-          <span class="text-xs sm:text-sm shrink-0">📜</span>
-          <span id="nav-text-archive" class="truncate">全量归档</span>
-          <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-archive">0</span>
-        </button>
+      <!-- 中间：7 大核心专栏切换阵列 (严格单行、7等分固定比例 grid-cols-7，禁止机翻破坏布局) -->
+      <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+        <div class="grid grid-cols-7 gap-1.5 sm:gap-2 min-w-[700px] md:min-w-0 w-full" id="nav-tabs">
+          <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">🌐</span>
+            <span id="nav-text-all" class="truncate font-semibold">综合全景</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">0</span>
+          </button>
+          <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">⚡</span>
+            <span id="nav-text-news" class="truncate font-semibold">行业快讯</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">0</span>
+          </button>
+          <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">🐦</span>
+            <span id="nav-text-celebrity" class="truncate font-semibold">社交雷达</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">0</span>
+          </button>
+          <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">🛠️</span>
+            <span id="nav-text-tools" class="truncate font-semibold">落地工具</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-tools">0</span>
+          </button>
+          <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">🎬</span>
+            <span id="nav-text-videos" class="truncate font-semibold">实战视频</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-videos">0</span>
+          </button>
+          <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">💡</span>
+            <span id="nav-text-prompts" class="truncate font-semibold">提示词库</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5" id="badge-count-prompts">0</span>
+          </button>
+          <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
+            <span class="text-xs sm:text-sm shrink-0">📜</span>
+            <span id="nav-text-archive" class="truncate font-semibold">全量归档</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-archive">0</span>
+          </button>
+        </div>
       </div>
 
-      <!-- 右侧：全站搜索筛选器 (自适应伸缩) -->
-      <div class="relative shrink-0 w-full md:w-44 lg:w-56 xl:w-64 focus-within:md:w-56 focus-within:lg:w-64 focus-within:xl:w-72 transition-all duration-300">
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索 (模型/动态/工具/论文)..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3.5 pr-9 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
-        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-7 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
-        <span class="absolute right-3 top-2 sm:top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
+      <!-- 右侧：全站搜索筛选器 (单行紧凑自适应，永不挤压中间 7 栏等比结构) -->
+      <div class="relative shrink-0 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60 focus-within:w-48 sm:focus-within:w-56 md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
+        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
+        <span class="absolute right-2.5 top-2 sm:top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
     </div>
   </nav>
@@ -2426,6 +2428,44 @@
       currentSiteLang = detectVisitorLanguage();
     }
 
+    // 🌐 全局7大核心专栏官方规范术语字典 (严格单行、固定等比、不受第三方机翻破坏)
+    const NAV_TABS_I18N = {
+      chinese_simplified: { all: "综合全景", news: "行业快讯", celebrity: "社交雷达", tools: "落地工具", videos: "实战视频", prompts: "提示词库", archive: "全量归档" },
+      chinese_traditional: { all: "綜合全景", news: "行業快訊", celebrity: "社交雷達", tools: "落地工具", videos: "實戰影片", prompts: "提示詞庫", archive: "全量歸檔" },
+      english: { all: "Overview", news: "News", celebrity: "Social Radar", tools: "Tools", videos: "Videos", prompts: "Prompts", archive: "Archive" },
+      russian: { all: "Обзор", news: "Новости", celebrity: "Соцсети", tools: "Инструменты", videos: "Видео", prompts: "Промпты", archive: "Архив" },
+      arabic: { all: "نظرة عامة", news: "أخبار", celebrity: "رادار التواصل", tools: "أدوات", videos: "فيديوهات", prompts: "موجهات", archive: "الأرشيف" },
+      japanese: { all: "総合", news: "ニュース", celebrity: "ソーシャル", tools: "AIツール", videos: "動画", prompts: "プロンプト", archive: "アーカイブ" },
+      korean: { all: "종합", news: "뉴스", celebrity: "소셜 레이더", tools: "AI 툴", videos: "실전 영상", prompts: "프롬프트", archive: "아카이브" },
+      french: { all: "Vue globale", news: "Actualités", celebrity: "Radar Social", tools: "Outils AI", videos: "Vidéos", prompts: "Prompts", archive: "Archives" },
+      deutsch: { all: "Übersicht", news: "News", celebrity: "Social Radar", tools: "AI-Tools", videos: "Videos", prompts: "Prompts", archive: "Archiv" },
+      spanish: { all: "Panorama", news: "Noticias", celebrity: "Radar Social", tools: "Herramientas", videos: "Videos", prompts: "Prompts", archive: "Archivo" },
+      italian: { all: "Panoramica", news: "Notizie", celebrity: "Radar Sociale", tools: "Strumenti", videos: "Video", prompts: "Prompt", archive: "Archivio" },
+      portuguese: { all: "Visão Geral", news: "Notícias", celebrity: "Radar Social", tools: "Ferramentas", videos: "Vídeos", prompts: "Prompts", archive: "Arquivo" },
+      dutch: { all: "Overzicht", news: "Nieuws", celebrity: "Sociaal Radar", tools: "AI-Tools", videos: "Video's", prompts: "Prompts", archive: "Archief" },
+      polish: { all: "Przegląd", news: "Wiadomości", celebrity: "Radar Społeczny", tools: "Narzędzia", videos: "Wideo", prompts: "Prompty", archive: "Archiwum" },
+      ukrainian: { all: "Огляд", news: "Новини", celebrity: "Соцмережі", tools: "Інструменти", videos: "Відео", prompts: "Промпти", archive: "Архів" },
+      turkish: { all: "Genel Bakış", news: "Haberler", celebrity: "Sosyal Radar", tools: "AI Araçları", videos: "Videolar", prompts: "Promptlar", archive: "Arşiv" },
+      vietnamese: { all: "Tổng quan", news: "Tin vắn", celebrity: "Radar MXH", tools: "Công cụ", videos: "Video", prompts: "Prompt", archive: "Lưu trữ" },
+      thai: { all: "ภาพรวม", news: "ข่าวสาร", celebrity: "โซเชียลเรดาร์", tools: "เครื่องมือ AI", videos: "วิดีโอ", prompts: "พรอมต์", archive: "คลังข้อมูล" },
+      indonesian: { all: "Ikhtisar", news: "Berita", celebrity: "Radar Sosial", tools: "Alat AI", videos: "Video", prompts: "Prompt", archive: "Arsip" },
+      hindi: { all: "समग्र", news: "समाचार", celebrity: "सोशल रडार", tools: "टूल्स", videos: "वीडियो", prompts: "प्रॉम्प्ट्स", archive: "संग्रह" },
+      hebrew: { all: "סקירה", news: "חדשות", celebrity: "רדאר חברתי", tools: "כלי AI", videos: "סרטונים", prompts: "פרומפטים", archive: "ארכיון" },
+      greek: { all: "Επισκόπηση", news: "Ειδήσεις", celebrity: "Κοινωνικά", tools: "Εργαλεία AI", videos: "Βίντεο", prompts: "Prompts", archive: "Αρχείο" }
+    };
+
+    function updateNavTabsLanguage(lang) {
+      if (!lang) lang = currentSiteLang || 'chinese_simplified';
+      const dict = NAV_TABS_I18N[lang] || (lang === 'zh' ? NAV_TABS_I18N['chinese_simplified'] : NAV_TABS_I18N['english']);
+      const keys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts', 'archive'];
+      keys.forEach(k => {
+        const el = document.getElementById(`nav-text-${k}`);
+        if (el && dict[k]) {
+          el.textContent = dict[k];
+        }
+      });
+    }
+
     function initTranslateEngine() {
       if (typeof translate === 'undefined') return;
 
@@ -2437,6 +2477,7 @@
       }
 
       translate.ignore.class.push('notranslate');
+      translate.ignore.id.push('nav-tabs');
       translate.ignore.class.push('code-box');
       translate.ignore.tag.push('code');
       translate.ignore.tag.push('pre');
@@ -2576,6 +2617,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (currentSiteLang === 'english') {
         setLanguage('en');
       }
+      updateNavTabsLanguage(currentSiteLang);
 
       translate.execute();
       if (currentSiteLang && currentSiteLang !== 'chinese_simplified') {
@@ -2595,6 +2637,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } else {
         setLanguage('zh');
       }
+      updateNavTabsLanguage(targetLang);
       if (typeof translate !== 'undefined') {
         if (targetLang === 'chinese_simplified') {
           try {
@@ -2730,13 +2773,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const arxivTag = document.getElementById('arxiv-sub-tag');
       if (arxivTag) arxivTag.textContent = t.arxivSubTag;
 
-      document.getElementById('nav-text-all').textContent = t.tabs.all;
-      document.getElementById('nav-text-news').textContent = t.tabs.news;
-      document.getElementById('nav-text-celebrity').textContent = t.tabs.celebrity;
-      document.getElementById('nav-text-tools').textContent = t.tabs.tools;
-      document.getElementById('nav-text-videos').textContent = t.tabs.videos;
-      const navPrompts = document.getElementById('nav-text-prompts');
-      if (navPrompts) navPrompts.textContent = t.tabs.prompts;
+      if (currentSiteLang && currentSiteLang !== 'chinese_simplified') {
+        updateNavTabsLanguage(currentSiteLang);
+      } else {
+        updateNavTabsLanguage(lang === 'zh' ? 'chinese_simplified' : 'english');
+      }
 
       const catTitle = document.getElementById('cat-view-title');
       if (catTitle) catTitle.textContent = t.tabs[currentTab] || t.catViewTitle;
@@ -2850,9 +2891,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const modalTitle = document.getElementById('modal-video-title');
       if (modalTitle) modalTitle.textContent = t.modalVideoTitle;
-
-      const navArchive = document.getElementById('nav-text-archive');
-      if (navArchive) navArchive.textContent = t.tabs.archive || '历史资讯库';
       const arcTitle = document.getElementById('archive-view-title');
       if (arcTitle) arcTitle.textContent = t.archiveViewTitle || '历史资讯全量归档库';
       const arcDesc = document.getElementById('archive-view-desc');
@@ -2920,17 +2958,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const isActive = (k === tab);
           if (isActive) {
             if (k === 'prompts') {
-              btn.className = "tab-btn active flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 whitespace-nowrap";
+              btn.className = "tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/30 overflow-hidden whitespace-nowrap";
             } else {
-              btn.className = "tab-btn active flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 whitespace-nowrap";
+              btn.className = "tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap";
             }
             if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5";
           } else {
             if (k === 'prompts') {
-              btn.className = "tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap";
+              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
               if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5";
             } else {
-              btn.className = "tab-btn flex-1 sm:flex-initial min-w-0 shrink-1 px-2 sm:px-2.5 xl:px-3 py-1.5 sm:py-2 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 whitespace-nowrap";
+              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
               if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5";
             }
           }
