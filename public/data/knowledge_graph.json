@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-18T16:13:35.233967+00:00",
+  "updated_at": "2026-09-24T08:01:59.494283+00:00",
   "system_description": "开放式实体动态知识图谱与全生命周期状态机 (Open Entity Knowledge Graph & Lifecycle State Machine)",
   "entities": {
     "seadance": {
@@ -153,8 +153,8 @@
       "domain_tag": "llm_reasoning",
       "half_life_days": 180,
       "first_learned_at": "2024-03-04T00:00:00Z",
-      "last_updated_at": "2026-09-17T09:45:00Z",
-      "active_version": "4.6",
+      "last_updated_at": "2026-09-24T08:01:59.494272+00:00",
+      "active_version": "5.5",
       "versions": [
         {
           "version": "3.5",
@@ -173,14 +173,22 @@
         {
           "version": "4.6",
           "release_date": "2026-03-12",
-          "lifecycle_status": "ACTIVE_SOTA",
-          "superseded_by": null,
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "5.5",
           "direct_competitors": [
             "OpenAI GPT-6.0",
             "DeepSeek-R1",
             "Qwen 2.5-Max"
           ],
-          "benchmark_highlights": "Extended Thinking 深度思考 · 行业最强自主编程与代码重构"
+          "benchmark_highlights": "Extended Thinking 深度思考 · 行业最强自主编程与代码重构",
+          "deprecation_warning": "存在上位替代: 5.5 已上线，旧版 4.6 严禁作为当前主流横评标杆"
+        },
+        {
+          "version": "5.5",
+          "release_date": "2026-09-24",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "benchmark_highlights": "新晋跃迁版本 5.5，性能与时效处于当前生命周期黄金期"
         }
       ]
     },
@@ -357,6 +365,30 @@
           "lifecycle_status": "ACTIVE_SOTA",
           "superseded_by": null,
           "benchmark_highlights": "新晋跃迁版本 25，性能与时效处于当前生命周期黄金期"
+        }
+      ]
+    },
+    "alphafold": {
+      "id": "alphafold",
+      "display_name": "AlphaFold 蛋白质结构大模型",
+      "domain_tag": "bio_computing",
+      "half_life_days": 240,
+      "first_learned_at": "2026-09-24T08:01:59.488652+00:00",
+      "last_updated_at": "2026-09-24T08:01:59.488652+00:00",
+      "active_version": [
+        "alphafold ",
+        "3"
+      ],
+      "versions": [
+        {
+          "version": [
+            "alphafold ",
+            "3"
+          ],
+          "release_date": "2026-09-24",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "benchmark_highlights": "最新一代 AlphaFold 蛋白质结构大模型 前沿架构与落地实践"
         }
       ]
     }

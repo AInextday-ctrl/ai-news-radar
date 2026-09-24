@@ -55,7 +55,14 @@ LEADER_HANDLES = [
     "OfficialLoganK",
     "gdb",
     "thsottiaux",
-    "danshipper"
+    "danshipper",
+    "alexandr_wang",
+    "AravSrinivas",
+    "bindureddy",
+    "svpino",
+    "rowancheung",
+    "swyx",
+    "samyamiam"
 ]
 
 LAB_HANDLES = [
@@ -66,29 +73,61 @@ LAB_HANDLES = [
     "GoogleDeepMind",
     "cursor_ai",
     "huggingface",
-    "ArtificialAnlys"
+    "ArtificialAnlys",
+    "PerplexityAI",
+    "MistralAI",
+    "LangChainAI",
+    "ollama",
+    "Cohere"
 ]
 
 
-def get_apify_token() -> Optional[str]:
-    """获取 Apify API Token (优先环境变量，其次 .env 文件)"""
-    token = os.getenv("APIFY_API_TOKEN")
-    if token and token.strip():
-        return token.strip()
+def get_apify_tokens() -> List[str]:
+    """获取所有配置的 Apify API Token 列表，支持逗号/分号/换行分隔的多 Token 轮询容灾"""
+    raw_tokens = []
+    
+    # 1. 优先读取主环境变量 APIFY_API_TOKEN / APIFY_API_TOKENS
+    for key in ["APIFY_API_TOKEN", "APIFY_API_TOKENS", "APIFY_TOKEN"]:
+        val = os.getenv(key)
+        if val:
+            raw_tokens.extend(re.split(r'[,;\s\n]+', val.strip()))
 
+    # 2. 读取带编号的环境变量 (如 APIFY_API_TOKEN_1, APIFY_API_TOKEN_2, ...)
+    for key, val in os.environ.items():
+        if key.startswith("APIFY_API_TOKEN_") and val.strip():
+            raw_tokens.append(val.strip())
+
+    # 3. 读取本地 .env 文件
     env_path = os.path.join(BASE_DIR, ".env")
     if os.path.exists(env_path):
         try:
             with open(env_path, "r", encoding="utf-8") as f:
                 for line in f:
                     line = line.strip()
-                    if line.startswith("APIFY_API_TOKEN="):
+                    if line.startswith("APIFY_API_TOKEN=") or line.startswith("APIFY_API_TOKENS="):
+                        val = line.split("=", 1)[1].strip().strip('"').strip("'")
+                        raw_tokens.extend(re.split(r'[,;\s\n]+', val))
+                    elif line.startswith("APIFY_API_TOKEN_"):
                         val = line.split("=", 1)[1].strip().strip('"').strip("'")
                         if val:
-                            return val
+                            raw_tokens.append(val)
         except Exception:
             pass
-    return None
+
+    clean_tokens = []
+    seen = set()
+    for tok in raw_tokens:
+        tok = tok.strip()
+        if tok and tok not in seen and len(tok) > 10:
+            clean_tokens.append(tok)
+            seen.add(tok)
+    return clean_tokens
+
+
+def get_apify_token() -> Optional[str]:
+    """兼容旧接口：返回首个可用 Token"""
+    tokens = get_apify_tokens()
+    return tokens[0] if tokens else None
 
 
 def load_crawler_state() -> Dict[str, Any]:
@@ -145,51 +184,61 @@ def parse_twitter_created_at(time_str: str) -> Optional[datetime]:
     return None
 
 
-def _call_apify_actor(token: str, query: str, max_items: int = 20) -> List[Dict[str, Any]]:
+def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict[str, Any]]:
     """
-    通过 Apify 执行搜索查询，优先使用无配额限制的 xquik~x-tweet-scraper
+    通过 Apify 执行搜索查询，支持多账号 Token 轮询与自动故障转移
     """
-    # 方案 1: xquik~x-tweet-scraper (极速、低成本、无月度免费限制)
-    url_xquik = f"https://api.apify.com/v2/acts/xquik~x-tweet-scraper/run-sync-get-dataset-items?token={token}"
-    payload_xquik = {
-        "searchTerms": [query],
-        "maxItems": max_items,
-        "queryType": "Latest"
-    }
+    if isinstance(tokens, str):
+        tokens = [tokens]
+    if not tokens:
+        return []
 
-    try:
-        with httpx.Client(timeout=60) as client:
-            resp = client.post(url_xquik, json=payload_xquik)
-            if resp.status_code in [200, 201]:
-                data = resp.json()
-                if isinstance(data, list):
-                    # 过滤掉 noResults 占位
-                    valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
-                    if valid:
-                        return valid
-            else:
-                print(f"  ⚠️ [xquik] HTTP {resp.status_code}: {resp.text[:120]}")
-    except Exception as e:
-        print(f"  ⚠️ [xquik] 异常: {e}")
+    for t_idx, token in enumerate(tokens):
+        masked_tok = token[:6] + "..." + token[-4:] if len(token) > 10 else "***"
+        url_xquik = f"https://api.apify.com/v2/acts/xquik~x-tweet-scraper/run-sync-get-dataset-items?token={token}"
+        payload_xquik = {
+            "searchTerms": [query],
+            "maxItems": max_items,
+            "queryType": "Latest"
+        }
 
-    # 方案 2: apidojo~tweet-scraper 作为备用
-    url_apidojo = f"https://api.apify.com/v2/acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={token}"
-    payload_apidojo = {
-        "searchTerms": [query],
-        "maxItems": max_items,
-        "sort": "Latest"
-    }
-    try:
-        with httpx.Client(timeout=60) as client:
-            resp = client.post(url_apidojo, json=payload_apidojo)
-            if resp.status_code in [200, 201]:
-                data = resp.json()
-                if isinstance(data, list):
-                    valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
-                    if valid:
-                        return valid
-    except Exception as e:
-        print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
+        try:
+            with httpx.Client(timeout=60) as client:
+                resp = client.post(url_xquik, json=payload_xquik)
+                if resp.status_code in [200, 201]:
+                    data = resp.json()
+                    if isinstance(data, list):
+                        valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
+                        if valid:
+                            return valid
+                elif resp.status_code in [401, 402, 403, 429]:
+                    print(f"  ⚠️ [Apify Token 轮换] Token [{masked_tok}] 触发状态 {resp.status_code} (额度不足或被限流)，尝试切换备用 Token...")
+                    continue
+                else:
+                    print(f"  ⚠️ [xquik] HTTP {resp.status_code}: {resp.text[:120]}")
+        except Exception as e:
+            print(f"  ⚠️ [xquik] 异常: {e}")
+
+        url_apidojo = f"https://api.apify.com/v2/acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={token}"
+        payload_apidojo = {
+            "searchTerms": [query],
+            "maxItems": max_items,
+            "sort": "Latest"
+        }
+        try:
+            with httpx.Client(timeout=60) as client:
+                resp = client.post(url_apidojo, json=payload_apidojo)
+                if resp.status_code in [200, 201]:
+                    data = resp.json()
+                    if isinstance(data, list):
+                        valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
+                        if valid:
+                            return valid
+                elif resp.status_code in [401, 402, 403, 429]:
+                    print(f"  ⚠️ [Apify Token 轮换] 备用 Actor Token [{masked_tok}] 状态 {resp.status_code}，切换备用 Token...")
+                    continue
+        except Exception as e:
+            print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
 
     return []
 
@@ -204,8 +253,8 @@ def fetch_incremental_tweets(
     2. 已有推文仅实时同步互动量 (likes, retweets, views)
     3. 全新推文执行翻译与结构化归入
     """
-    token = get_apify_token()
-    if not token:
+    tokens = get_apify_tokens()
+    if not tokens:
         print("  ⚠️ [Apify 增量采集器] 未检测到 APIFY_API_TOKEN，跳过 Apify 抓取通道。")
         return []
 
@@ -228,7 +277,7 @@ def fetch_incremental_tweets(
             except Exception:
                 pass
 
-    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控领袖与实验室大V，已收录历史真实推文 {len(known_ids)} 篇...")
+    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控领袖与实验室大V (已配置 {len(tokens)} 个 Token 轮换池)，已收录历史真实推文 {len(known_ids)} 篇...")
 
     # 分组构建精准搜索查询
     q_leaders = "(" + " OR ".join([f"from:{h}" for h in LEADER_HANDLES]) + ")"
@@ -236,10 +285,10 @@ def fetch_incremental_tweets(
 
     raw_items = []
     # 抓取领袖推文
-    res1 = _call_apify_actor(token, q_leaders, max_items=20)
+    res1 = _call_apify_actor(tokens, q_leaders, max_items=35)
     raw_items.extend(res1)
     # 抓取官方实验室推文
-    res2 = _call_apify_actor(token, q_labs, max_items=20)
+    res2 = _call_apify_actor(tokens, q_labs, max_items=35)
     raw_items.extend(res2)
 
     print(f"  📥 [Apify 增量采集器] 云端抓取完成，共返回 {len(raw_items)} 条原生推文，开始执行时间增量校验与去重过滤...")

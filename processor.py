@@ -30,10 +30,12 @@ MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # 翻译内存缓存，避免重复请求
 _TRANSLATION_CACHE = {}
+_GOOGLE_BLOCKED = False
 
 
 def free_translate_zh(text: str) -> str:
     """Bulletproof translation engine to guarantee 100% fluent Chinese output."""
+    global _GOOGLE_BLOCKED
     if not text:
         return ""
     
@@ -54,38 +56,40 @@ def free_translate_zh(text: str) -> str:
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # 1. 优先调用 Google Translate 免密神经翻译 (极速高精，支持长句)
+    # 1. 优先调用有道免密神经翻译 (国内低延迟、高并发、毫秒级响应)
     try:
-        gt_url = "https://translate.googleapis.com/translate_a/single"
-        params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": body_text[:350]}
-        with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6) as client:
-            resp = client.get(gt_url, params=params)
+        url = "https://aidemo.youdao.com/trans"
+        data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
+        with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=3.5) as client:
+            resp = client.post(url, data=data)
             if resp.status_code == 200:
-                res = resp.json()
-                zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
-                if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
-                    _TRANSLATION_CACHE[body_text] = zh_res
-                    return prefix + zh_res
+                res_data = resp.json()
+                t_list = res_data.get("translation", [])
+                if t_list and t_list[0]:
+                    zh_res = t_list[0].strip()
+                    if re.search(r'[\u4e00-\u9fa5]', zh_res):
+                        _TRANSLATION_CACHE[body_text] = zh_res
+                        return prefix + zh_res
     except Exception:
         pass
 
-    # 2. 备用有道免密神经翻译 (毫秒级响应，带自动重试)
-    for _ in range(2):
+    # 2. 备用 Google Translate (若之前未触发429则尝试，超时控制在2秒内)
+    if not _GOOGLE_BLOCKED:
         try:
-            url = "https://aidemo.youdao.com/trans"
-            data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6) as client:
-                resp = client.post(url, data=data)
+            gt_url = "https://translate.googleapis.com/translate_a/single"
+            params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": body_text[:350]}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.0) as client:
+                resp = client.get(gt_url, params=params)
                 if resp.status_code == 200:
-                    res_data = resp.json()
-                    t_list = res_data.get("translation", [])
-                    if t_list and t_list[0]:
-                        zh_res = t_list[0].strip()
-                        if re.search(r'[\u4e00-\u9fa5]', zh_res):
-                            _TRANSLATION_CACHE[clean_text] = zh_res
-                            return zh_res
+                    res = resp.json()
+                    zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                    if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
+                        _TRANSLATION_CACHE[body_text] = zh_res
+                        return prefix + zh_res
+                elif resp.status_code in (429, 403):
+                    _GOOGLE_BLOCKED = True
         except Exception:
-            pass
+            _GOOGLE_BLOCKED = True
 
     # 2. 备用 MyMemory 翻译服务
     try:
@@ -158,6 +162,73 @@ def get_gemini_client():
 
 import html
 
+# ==============================================================================
+# 全网聚合器废话、冗余模板与无实质事实噪音过滤库 (Aggregator Noise & Boilerplate Discard Library)
+# 彻底消除诸如 Google News 默认汇总废话、各媒体订阅与免责声明、记者署名、社交元数据等
+# ==============================================================================
+AGGREGATOR_NOISE_RULES = [
+    # 1. Google 新闻 / 搜索引擎聚合器标准废话 (英文 + 中文双语变体)
+    r'Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News\.?',
+    r'A comprehensive overview of the latest news stories from around the world aggregated from Google News sources\.?',
+    r'aggregated from sources all over the world by Google News',
+    r'全面的最新新闻报道[，,]?\s*(?:从|由)?\s*(?:Google|谷歌|b谷歌)\s*新闻(?:汇总|聚合)?[^。！]*[。！]?',
+    r'(?:从|由)\s*(?:世界各地的|Google|谷歌|b谷歌)\s*(?:新闻|来源)?[^。！]*?(?:汇总|聚合)[^。！]*?[。！]?',
+    r'View Full Coverage on Google News',
+    r'在\s*Google\s*新闻上查看完整报道',
+    r'在\s*谷歌新闻上查看完整报道',
+    r'Full coverage on Google News',
+    r'Google News\s*[-·|]\s*',
+
+    # 2. 媒体付费墙、订阅诱导与邮件列表提示废话
+    r'Sign up for our (?:daily|weekly|free)?\s*(?:newsletter|briefing|bulletin|update)[^。！\n]*[。！\n]?',
+    r'Subscribe (?:now|today)? to (?:read|unlock) the full (?:story|article)[^。！\n]*[。！\n]?',
+    r'To continue reading, subscribe to[^。！\n]*[。！\n]?',
+    r'订阅获取完整报道[^。！\n]*[。！\n]?',
+    r'注册免费获取每日科技简报[^。！\n]*[。！\n]?',
+    r'点击订阅科技早报[^。！\n]*[。！\n]?',
+
+    # 3. 版权声明、转载声明与免责废话
+    r'All rights reserved\.?',
+    r'版权所有[，,]?(?:未经许可不得转载|未经授权禁止转载)?[。！]?',
+    r'未经允许不得转载[。！]?',
+    r'本文由.*?原创，未经允许禁止转载[。！]?',
+    r'This story was originally published on [A-Za-z0-9\s\.\-]+[。！]?',
+    r'The post .*? appeared first on [A-Za-z0-9\s\.\-]+[。！]?',
+    r'本文最初发表于.*?，现由.*?编译[。！]?',
+
+    # 4. 阅读引导与平台跳转废话
+    r'Click here to read (?:more|the full article)[^。！\n]*[。！\n]?',
+    r'Read the full (?:story|article) (?:on|at) [A-Za-z0-9\s\.\-]+[。！]?',
+    r'Continue reading at [A-Za-z0-9\s\.\-]+[。！]?',
+    r'点击阅读全文[^。！\n]*[。！\n]?',
+    r'阅读更多详情[^。！\n]*[。！\n]?',
+    r'查看完整内容[^。！\n]*[。！\n]?',
+
+    # 5. 图片摄影署名与配图废话
+    r'(?:Photo|Image|Illustration) (?:credit|via|by)[：:\s]+[^\n。]+[。！\n]?',
+    r'图片来源[：:\s]+[^\n。]+[。！\n]?',
+    r'图源[：:\s]+[^\n。]+[。！\n]?',
+
+    # 6. 电头与记者署名前缀
+    r'^(?:By|Author:)\s+[A-Za-z\s.\'\-]+(?:\s*\|\s*[A-Za-z\s.\'\-]+)?\s*[-—–:：|]\s*',
+    r'^(?:REUTERS|AP|BLOOMBERG|AFP|DPA|UPI)\s*[-—–]\s*',
+    r'^(?:美联社|路透社|新华社|彭博社|法新社|央视网|CNN|DW|AP)\s*[\(（]?[^）\)]*?[\)）]?[讯电]?\s*[-—–:：·]\s*',
+    r'^据(?:知情人士|外媒|外媒报道|多位知情人士|业内人士|最新消息|相关报道|彭博社|路透社|美联社)(?:透露|称|报道|指出|消息)[，,：:]\s*',
+    r'^(?:Sources?|Report|Reports?|Exclusive|Analysis)[：:\s]+',
+
+    # 7. 社交推特元数据废话
+    r'^Thread by @[A-Za-z0-9_]+[：:\s]*',
+    r'^Replying to @[A-Za-z0-9_]+[：:\s]*',
+    r'https?://t\.co/[a-zA-Z0-9]+',
+    r'[\(（]?(?:1/\d+|1/n|🧵|👇)[\)）]?',
+    r'View on (?:Twitter|X)[^。！\n]*',
+
+    # 8. 营销与空壳套话
+    r'行业核心力量围绕[“"\'「][^”"\'」]*?[”"\'」]\s*加速推进关键技术攻坚与工程落地[，,]?\s*力求在激烈的产业竞赛中确立先发优势[。！]?',
+    r'行业最新动态持续跟踪报道[。！]?'
+]
+
+
 def clean_news_text(text: str) -> str:
     """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes."""
     if not text:
@@ -165,7 +236,11 @@ def clean_news_text(text: str) -> str:
     t = html.unescape(text)
     t = t.replace("&nbsp;", " ").replace("\u00a0", " ")
     
-    # 1. 移除陈旧模板前缀与多余标识
+    # 1. 深度应用全网聚合器废话黑名单规则库
+    for rule in AGGREGATOR_NOISE_RULES:
+        t = re.sub(rule, '', t, flags=re.IGNORECASE)
+
+    # 2. 移除陈旧模板前缀与多余标识
     t = re.sub(r'^【.*?】\s*', '', t)
     t = re.sub(r'^由\s*.*?\s*(?:权威发布|最新报道)[。：:]\s*', '', t)
     t = re.sub(r'^据\s*.*?\s*(?:最新报道|报道)[，,：:]\s*', '', t)
@@ -173,27 +248,11 @@ def clean_news_text(text: str) -> str:
     t = re.sub(r'^b([\u4e00-\u9fa5])', r'\1', t)
     t = re.sub(r'^(?:Opinion\s*\|\s*|专栏\s*\|\s*|观点\s*\|\s*)', '', t, flags=re.IGNORECASE)
     
-    # 2. 移除引语、信源、记者署名等开头前缀 (如 "消息来源:" / "Sources:" / "据报道" 等)
-    t = re.sub(r'^(?:消息来源|消息称|知情人士称|知情人士透露|知情人透露|据知情人士|据知情人|据外媒|据报道|外媒称|外媒报道|传|报道称)[：:，,\s]*', '', t)
-    t = re.sub(r'^(?:Sources?|Report|Reports?|Exclusive|Analysis)[：:\s]+', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'^[A-Za-z\s.\'\-]+/(?:[A-Za-z\s.\'\-]+|\s*)[：:]\s*', '', t)
-    t = re.sub(r'^[A-Za-z\s.\'\-]+[：:]\s*', '', t)
-    t = re.sub(r'消息来源[：:]\s*', '', t)
-    t = re.sub(r'Sources?[：:]\s*', '', t, flags=re.IGNORECASE)
-    
     # 3. 移除末尾括号中的媒体或记者标识 (支持末尾带有句号的情况)
     t = re.sub(r'[\(（][^()（）]*?(?:The Information|Forbes|Financial Times|Guardian|Bloomberg|TechCrunch|Reuters|The Verge|FedScoop|Wall Street Journal|New York Times|Wired|Ars Technica|CNBC|Business Insider|金融时报|纽约时报|彭博|路透|福布斯|卫报)[^()（）]*?[\)）][。.\s]*$', '', t, flags=re.IGNORECASE)
     t = re.sub(r'[\(（]@[A-Za-z0-9_]+[\)）][。.\s]*$', '', t)
     t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）][。.\s]*$', '', t)
     t = re.sub(r'[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$', '', t)
-    
-    # 3.5 强力剔除搜索引擎聚合器默认的模板噪音与元描述废话
-    t = re.sub(r'全面的最新新闻报道[，,]?\s*(?:从|由)?\s*(?:Google|谷歌|b谷歌)\s*新闻(?:汇总|聚合)?[^。！]*[。！]?', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'(?:从|由)\s*(?:世界各地的|Google|谷歌|b谷歌)\s*(?:新闻|来源)?[^。！]*?(?:汇总|聚合)[^。！]*?[。！]?', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'Comprehensive up-to-date news coverage, aggregated from sources all over the world by Google News\.?', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'A comprehensive overview of the latest news stories from around the world aggregated from Google News sources\.?', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'aggregated from sources all over the world by Google News', '', t, flags=re.IGNORECASE)
-    t = re.sub(r'行业核心力量围绕[“"\'「][^”"\'」]*?[”"\'」]\s*加速推进关键技术攻坚与工程落地[，,]?\s*力求在激烈的产业竞赛中确立先发优势[。！]?', '', t)
     
     # 4. 清理连续重复符号与空白
     t = re.sub(r'([。！？；，、])\1+', r'\1', t)
@@ -554,12 +613,14 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             p_item = dict(item)
             cat = item.get("category") or item.get("default_category", "news")
             p_item["category"] = cat
-            title_zh = free_translate_zh(item.get("title", ""))
+            raw_title_zh = item.get("title_zh") or free_translate_zh(item.get("title", ""))
+            title_zh = clean_news_text(raw_title_zh)
             p_item["title_zh"] = title_zh
-            p_item["summary_zh"] = generate_smart_fallback_summary(item, title_zh)
+            raw_summary = item.get("summary_zh") or generate_smart_fallback_summary(item, title_zh)
+            p_item["summary_zh"] = clean_news_text(raw_summary)
             p_item["ai_analysis"] = generate_smart_ai_analysis(item, title_zh)
             p_item["title_en"] = item.get("title_en") or item.get("title", "")
-            p_item["summary_en"] = item.get("summary_en") or item.get("content_snippet", "")
+            p_item["summary_en"] = clean_news_text(item.get("summary_en") or item.get("content_snippet", ""))
             p_item["hot_score"] = 4 if cat in ["celebrity", "videos"] else 3
             p_item["tags"] = item.get("tags") or [item.get("source", "AI快讯")]
             processed_ai.append(p_item)
@@ -708,5 +769,6 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 fallback["hot_score"] = 3
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
                 fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
+                results.append(fallback)
     all_final = direct_items + results
     return all_final

@@ -922,16 +922,16 @@
       <!-- 🌟 第 2 层: 核心情报与对决 3 栏矩阵 (⚡ 突发快讯 + 🐦 社交雷达 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
-        <!-- 栏目 A: ⚡ 突发·行业快讯 (占用 5/12 宽度，信息充盈) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-2 lg:col-span-5">
-          <div class="space-y-3.5">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
+        <!-- 栏目 A: ⚡ 突发·行业快讯 (占用 5/12 宽度，纵向 100% 占满可用框格) -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-5 h-full">
+          <div class="flex-1 flex flex-col min-h-0 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
                 <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
                 <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-news">
                   <span>⚡ 突发·行业快讯</span>
                 </h2>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20" id="news-sub-count">Top 5 精选</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20" id="news-sub-count">24h 实时</span>
               </div>
               <button type="button" onclick="switchTab('news')" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center space-x-1 font-medium cursor-pointer">
                 <span>全部快讯</span>
@@ -939,7 +939,8 @@
               </button>
             </div>
             
-            <div class="space-y-3" id="stream-news">
+            <!-- 快讯列表容器：纵向 100% 占满可用框格，支持丝滑滚动浏览 24h 全部快讯 -->
+            <div class="space-y-3 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <!-- 静态初始高权重 SEO 语义感知块 -->
               <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-2">
                 <div class="flex items-center space-x-2 text-indigo-500 font-mono font-semibold">
@@ -954,23 +955,23 @@
           </div>
 
           <!-- 快讯专栏直达底栏 -->
-          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+          <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <button type="button" onclick="switchTab('news')" id="btn-view-all-news" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
               <span id="txt-view-all-news">查看全部行业快讯 →</span>
             </button>
           </div>
         </section>
 
-        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 平台前沿动态与头条 (占用 4/12 宽度) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-sky-500/70 md:col-span-1 lg:col-span-4">
-          <div class="space-y-3.5">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
+        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 平台前沿动态与头条 (占用 4/12 宽度，纵向 100% 占满可用框格) -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-sky-500/70 md:col-span-1 lg:col-span-4 h-full">
+          <div class="flex-1 flex flex-col min-h-0 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
                 <span class="w-3 h-3 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
                 <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-celebrity">
                   <span>🐦 社交雷达 · 𝕏 动态</span>
                 </h2>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20">前沿交锋</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20" id="celebrity-sub-count">24h 实时</span>
               </div>
               <button type="button" onclick="switchTab('celebrity')" class="text-xs text-sky-600 dark:text-sky-400 hover:underline flex items-center space-x-1 font-medium cursor-pointer">
                 <span>全部动态</span>
@@ -978,13 +979,14 @@
               </button>
             </div>
             
-            <div class="space-y-3" id="stream-celebrity">
-              <!-- 动态注入 Top 4 社交动态卡片 -->
+            <!-- 社交动态列表容器：纵向 100% 占满可用框格，支持丝滑滚动浏览 24h 全部大V发声 -->
+            <div class="space-y-3 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-celebrity">
+              <!-- 动态注入 24h 社交动态卡片 -->
             </div>
           </div>
 
           <!-- 社交专栏直达底栏 -->
-          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+          <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <button type="button" onclick="switchTab('celebrity')" id="btn-view-all-celebrity" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
               <span id="txt-view-all-celebrity">查看全部社交雷达 →</span>
             </button>
@@ -4144,7 +4146,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const retweets = m.retweets ? String(m.retweets).replace(/[^0-9.kKmM]/g, '') : '';
 
       const isZh = currentLang === 'zh';
-      const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
+      const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
       const author = item.author || 'AI 开发者';
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
       const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
@@ -4403,7 +4405,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '8.6k';
 
       const isZh = currentLang === 'zh';
-      const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
+      const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
       const title = item.title_zh || item.title;
       const author = item.author || 'AI 开发者';
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
@@ -5475,14 +5477,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       renderTopThree(data.top_three || []);
 
       // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，绝不无限堆叠，各板块均支持一键直达完整专区)
-      // A. 快讯板块 (News) - 首页仅展示 Top 5 重点推荐
+      // A. 快讯板块 (News) - 充分占满框格，展示所有 24h 优质快讯
       const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
-      const displayNews = recentNews.length >= 3 ? recentNews.slice(0, 5) : allNews.slice(0, 5);
+      const displayNews = recentNews.length >= 6 ? recentNews : allNews.slice(0, 16);
       const streamNews = document.getElementById('stream-news');
       if (streamNews) {
         streamNews.innerHTML = displayNews.length > 0 
           ? displayNews.map(renderNewsCard).join('')
           : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
+      }
+      const newsSubCount = document.getElementById('news-sub-count');
+      if (newsSubCount) {
+        newsSubCount.textContent = isZh ? `24h 实时 (${displayNews.length})` : `24h Live (${displayNews.length})`;
       }
       const txtViewAllNews = document.getElementById('txt-view-all-news');
       if (txtViewAllNews) {
@@ -5502,7 +5508,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // B. 领袖社交板块 (Celebrity) - 首页仅精选 Top 4 焦点动态
+      // B. 领袖社交板块 (Celebrity) - 充分占满框格，展示所有 24h 大V真实动态
       let sideCelebList = allCeleb;
       const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
       recentCeleb.sort((a, b) => {
@@ -5513,12 +5519,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
         return timeB - timeA;
       });
-      const displayCeleb = recentCeleb.length >= 2 ? recentCeleb.slice(0, 4) : sideCelebList.slice(0, 4);
+      const displayCeleb = recentCeleb.length >= 6 ? recentCeleb : sideCelebList.slice(0, 16);
       const streamCelebrity = document.getElementById('stream-celebrity');
       if (streamCelebrity) {
         streamCelebrity.innerHTML = displayCeleb.length > 0
           ? displayCeleb.map(renderCelebrityCard).join('')
           : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentCeleb}</div>`;
+      }
+      const celebSubCount = document.getElementById('celebrity-sub-count');
+      if (celebSubCount) {
+        celebSubCount.textContent = isZh ? `24h 实时 (${displayCeleb.length})` : `24h Live (${displayCeleb.length})`;
       }
       const txtViewAllCeleb = document.getElementById('txt-view-all-celebrity');
       if (txtViewAllCeleb) {
@@ -7093,8 +7103,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (quoteTextEl) {
         const quote = isZhSystem
-          ? (item.quote_zh || item.title_zh || item.title)
-          : (item.quote_en || item.title_en || item.title);
+          ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title)
+          : (item.full_text_en || item.quote_en || item.title_en || item.title);
         quoteTextEl.textContent = quote;
       }
 

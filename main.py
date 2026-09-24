@@ -17,6 +17,7 @@ import re
 import json
 import time
 from datetime import datetime, timezone
+import urllib.parse
 import httpx
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url, resolve_product_hunt_redirect
 from processor import process_items_batch, clean_news_text, generate_smart_fallback_summary
@@ -953,29 +954,48 @@ def save_news(items: list):
                 p_imgs = [f"https://api.microlink.io/?url={enc}&screenshot=true&meta=false&embed=screenshot.url"]
             it["preview_images"] = p_imgs
 
-    # 4. 【核心内容质量门禁】：坚决剔除任何无法展现具体事件事实的空壳资讯，杜绝 Low value content
+    # 4. 【核心内容质量门禁与跨版块降级隐藏机制】：坚决剔除任何无法展现具体事实的空壳或伪造内容
     valid_master_items = []
     for it in all_master_items:
         cat = it.get("category", "news")
-        if cat in ["news", "celebrity"]:
-            snip = str(it.get("content_snippet") or "").strip()
-            sum_zh = str(it.get("summary_zh") or "").strip()
-            title = str(it.get("title_zh") or it.get("title") or "").strip()
+        title = str(it.get("title_zh") or it.get("title") or "").strip()
+        if not title or len(title) < 4:
+            continue
+
+        if cat == "news":
+            # 资讯门禁 1: 自动清洗聚合器废话与前缀后缀
+            sum_zh = clean_news_text(str(it.get("summary_zh") or ""))
+            it["title_zh"] = clean_news_text(title)
+            
+            # 若清洗后摘要变为空壳或模板套话，智能补充事实导语
+            if not sum_zh or len(sum_zh) < 12 or any(k in sum_zh for k in ["全面的最新新闻报道", "Google 新闻", "聚焦该事件"]):
+                sum_zh = generate_smart_fallback_summary(it, it["title_zh"])
+            it["summary_zh"] = sum_zh
+
+            # 资讯门禁 2: 纸折飞机占位图自动平滑补齐高清行业封面，绝不裂图
             img = str(it.get("image_url") or "").strip()
+            if not img or "lh3.googleusercontent.com/j6_cofbog" in img.lower():
+                it["image_url"] = get_smart_cover_url(it["title_zh"], "news", it.get("source", ""))
 
-            # 过滤 1: 封面为 Google News 纸折飞机占位图标 (无法破译真实大图)
-            if "lh3.googleusercontent.com/j6_cofbog" in img.lower():
+            # 资讯门禁 3: 依然无法展现具体事实或为纯标题复读且缺乏实质细节的，安全隐藏
+            snip = str(it.get("content_snippet") or "").strip()
+            if sum_zh.startswith(it["title_zh"]) and len(sum_zh) <= len(it["title_zh"]) + 5 and len(snip) < 25:
                 continue
 
-            # 过滤 2: 摘要为单薄占位词、空字符串或无意义机械填充
-            if sum_zh in ["来源", "官方快讯", "今日要闻", ""] or "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响" in sum_zh:
+        elif cat == "celebrity":
+            # 社交雷达门禁 1: 彻底隐藏任何历史遗留的模拟虚构推文 (mock_celeb_*)
+            if str(it.get("id", "")).startswith("mock_celeb_"):
+                continue
+            # 社交雷达门禁 2: 必须包含真实推文状态链接 status/ID 与作者 Handle
+            u = str(it.get("url") or "")
+            if not re.search(r'status/\d+', u) and not it.get("status_id"):
+                continue
+            # 社交雷达门禁 3: 推文正文不能为空
+            txt = str(it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
+            if not txt or len(txt) < 5:
                 continue
 
-            # 过滤 3: 仅标题单句复读且无实质正文细节支撑
-            if title and sum_zh.startswith(title) and len(sum_zh) <= len(title) + 5 and len(snip) < 25:
-                continue
-
-        if cat == "tools":
+        elif cat == "tools":
             # 工具门禁 1: 坚决剔除任何无法解析出真实官网、依然为 /r/p/ 转链或纯 Product Hunt 页面的劣质工具
             u = str(it.get("official_url") or it.get("url") or "")
             if not u or u == "#" or "/r/p/" in u or "producthunt.com/r/" in u:
@@ -983,6 +1003,12 @@ def save_news(items: list):
             # 工具门禁 2: 必须具备预览大图或官网实测截图，杜绝空壳或纯占位符
             imgs = it.get("preview_images") or []
             if not imgs and not it.get("image_url"):
+                continue
+
+        elif cat == "videos":
+            # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url
+            vid = str(it.get("video_id") or "").strip()
+            if not vid or len(vid) < 6:
                 continue
 
         valid_master_items.append(it)
@@ -1020,18 +1046,18 @@ def save_news(items: list):
 
     # 保证在极端冷启动或外部源更新停滞时，首页与专栏不至于空白或稀疏
     news_recent = [it for it in recent_items if it.get("category") == "news"]
-    if len(news_recent) < 12:
-        extra_news = [it for it in historical_items if it.get("category") == "news"][:(12 - len(news_recent))]
+    if len(news_recent) < 25:
+        extra_news = [it for it in historical_items if it.get("category") == "news"][:(25 - len(news_recent))]
         recent_items.extend(extra_news)
 
     celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
-    if len(celeb_recent) < 18:
-        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(18 - len(celeb_recent))]
+    if len(celeb_recent) < 25:
+        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(25 - len(celeb_recent))]
         recent_items.extend(extra_celeb)
 
     viral_recent = [it for it in recent_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
-    if len(viral_recent) < 8:
-        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(8 - len(viral_recent))]
+    if len(viral_recent) < 10:
+        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(10 - len(viral_recent))]
         recent_items.extend(extra_viral)
 
     # 3. 构建 24 小时热看板 payload (latest_news.json)
