@@ -1140,14 +1140,19 @@ def save_news(items: list):
     with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, indent=2)
 
-    # 动态同步更新搜索引擎站点地图 sitemap.xml
-    generate_sitemap()
-
-    # 注入静态资讯快照到 index.html，让 Googlebot 可直接爬取内容
-    inject_seo_static_content(recent_final)
-
-    # 生成每日 AI 简报独立静态页面 (public/daily/YYYY-MM-DD.html)
-    generate_daily_briefing(recent_final)
+    # 自动执行 AdSense 高价值合规重构引擎：
+    # 1. 发布独家深度专栏文章 (public/articles/*.html)
+    # 2. 回溯并生成全量历史每日简报 (public/daily/*.html)
+    # 3. 首页 index.html 真实可见 DOM 预渲染 (Top 3 + 快讯卡片 + 往期导航)
+    # 4. 全量更新 35+ 页面站点地图 (public/sitemap.xml)
+    try:
+        from content_publisher import run_full_content_publication
+        run_full_content_publication(recent_final, top_three)
+    except Exception as e:
+        print(f"⚠️ [content_publisher] 执行异常: {e}")
+        generate_sitemap()
+        inject_seo_static_content(recent_final)
+        generate_daily_briefing(recent_final)
 
     print(f"\n💾 分级存储同步完成:")
     print(f"  ⚡ 24小时实时热数据: {len(recent_final)} 篇 (体积大幅缩减，首屏极速秒开)")
