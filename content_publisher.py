@@ -74,6 +74,20 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
 
         lines = md_content.split("\n")
         raw_title = lines[0].replace("#", "").strip() if lines else ""
+        
+        # 优化标题修剪与括号截断问题
+        title_fixes = {
+            "DeepSeek-V4.1-Flash (M": "DeepSeek-V4.1-Flash (Max) 震撼登场",
+            "Image-to-WebDev竞技场更新：四": "Image-to-WebDev 代码竞技场重磅更新",
+            "Noam Brow": "Noam Brown：多智能体协同与范式演进",
+            "OpenAI推出了GPT-6 Sol和Luna": "OpenAI 推出 GPT-6 Sol 与 Luna 双子星大模型",
+            "现实世界的结果是在GPT-6 Sol （Ma": "OpenAI GPT-6 Sol (Max) 登顶代码竞技场，重塑大模型帕累托边界",
+        }
+        for bad_k, good_v in title_fixes.items():
+            if bad_k in raw_title:
+                raw_title = raw_title.replace(f"围绕“{bad_k}”", f"围绕“{good_v}”")
+                raw_title = raw_title.replace(bad_k, good_v)
+
         if not raw_title or raw_title in seen_titles:
             continue
         seen_titles.add(raw_title)
