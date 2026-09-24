@@ -1079,6 +1079,21 @@ def fetch_x_leader_posts(max_items: int = 25) -> List[Dict[str, Any]]:
     """
     items = []
     seen_urls = set()
+
+    # 1. 优先使用 Apify 官方真实增量抓取通道（100% 真实推文、真实点赞互动指标、按时间增量去重）
+    try:
+        from apify_crawler import fetch_incremental_tweets, get_apify_token
+        if get_apify_token():
+            print("  🚀 [𝕏 领袖雷达] 启用 Apify 官方增量抓取引擎...")
+            apify_posts = fetch_incremental_tweets()
+            if apify_posts:
+                print(f"  ✓ [𝕏 领袖雷达] Apify 增量抓取成功获取 {len(apify_posts)} 篇全新真实推文")
+                items.extend(apify_posts)
+                if len(items) >= max_items:
+                    return items[:max_items]
+    except Exception as apify_err:
+        print(f"  ⚠️ [𝕏 领袖雷达] Apify 增量抓取异常: {apify_err}")
+
     print("  🔍 [𝕏 领袖雷达] 正在实时嗅探硅谷顶级 AI 舵手与核心研发团队最新发声...")
 
     leader_queries = build_dynamic_x_queries()[:3]
@@ -1151,7 +1166,7 @@ def fetch_x_leader_posts(max_items: int = 25) -> List[Dict[str, Any]]:
                         "entity_type": entity_type,
                         "platform": "x",
                         "raw_published_at": iso_time,
-                        "metrics": {"views": "165.0k", "likes": "42.5k", "comments": "2.8k", "retweets": "6.8k", "platform": "x", "verified": True},
+                        "metrics": {"views": "", "likes": "", "comments": "", "retweets": "", "platform": "x", "verified": True},
                         "spec_tags": spec_tags,
                         "content_snippet": cleaned_title,
                         "summary_en": cleaned_title,

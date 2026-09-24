@@ -733,26 +733,23 @@ def load_existing_items() -> list:
             else:
                 continue
 
-        # 7. 清洗与补全社交互动指标 (阅读量 views、点赞 likes、评论 comments、转发 retweets)
+        # 7. 清洗社交互动指标 (阅读量 views、点赞 likes、评论 comments、转发 retweets，坚决不捏造虚假数据)
         metrics = it.get("metrics")
         if isinstance(metrics, dict):
             likes = str(metrics.get("likes", ""))
-            if "爆款" in likes or "热议" in likes or not re.search(r'[\d.]', likes):
-                metrics["likes"] = "38.2k"
+            if "爆款" in likes or "热议" in likes:
+                metrics["likes"] = ""
             retweets = str(metrics.get("retweets", ""))
-            if "trending" in retweets.lower() or "热门" in retweets or not re.search(r'[\d.]', retweets):
-                metrics["retweets"] = "5.6k"
+            if "trending" in retweets.lower() or "热门" in retweets:
+                metrics["retweets"] = ""
             upvotes = str(metrics.get("upvotes", ""))
             if "upvotes" in upvotes.lower() or "点赞" in upvotes:
                 num_m = re.search(r'([\d.]+[kKmM]?)', upvotes)
-                metrics["upvotes"] = num_m.group(1) if num_m else "1.4k"
+                metrics["upvotes"] = num_m.group(1) if num_m else ""
             comments = str(metrics.get("comments", ""))
-            if "讨论" in comments or "comments" in comments.lower() or not re.search(r'[\d.]', comments):
+            if "讨论" in comments or "comments" in comments.lower():
                 num_m = re.search(r'([\d.]+[kKmM]?)', comments)
-                metrics["comments"] = num_m.group(1) if num_m else "1.8k"
-            views = str(metrics.get("views", ""))
-            if not views or not re.search(r'[\d.]', views):
-                metrics["views"] = "156.8k"
+                metrics["comments"] = num_m.group(1) if num_m else ""
 
         # 8. 修复历史遗留的未翻译视频标题
         if "GPT-6 Built a City Out of Text" in it.get("title", "") or "GPT-6 Built a City Out of Text" in it.get("title_zh", ""):
