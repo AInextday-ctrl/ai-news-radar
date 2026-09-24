@@ -166,101 +166,289 @@
   "chatbot_arena": [
     {
       "rank": 1,
-      "model": "Gemini 3.8 Live / Pro",
-      "elo": 1368,
-      "org": "Google",
-      "badge": "👑 榜首",
-      "badge_en": "👑 #1 Rank"
+      "model": "Claude 5.5 Sonnet",
+      "elo": 1392,
+      "org": "Anthropic",
+      "badge": "👑 综合榜首 · 编码与Agent王",
+      "badge_en": "👑 #1 Flagship · Code & Agent King"
     },
     {
       "rank": 2,
-      "model": "Claude 4.6 Sonnet",
-      "elo": 1362,
-      "org": "Anthropic",
-      "badge": "⚡ 编程与推理王",
-      "badge_en": "⚡ Code & Reasoning"
+      "model": "OpenAI GPT-6.0 / o3-pro",
+      "elo": 1388,
+      "org": "OpenAI",
+      "badge": "🧠 极限推理与数学",
+      "badge_en": "🧠 Extreme Reasoning"
     },
     {
       "rank": 3,
-      "model": "OpenAI GPT-5.5 / o3",
-      "elo": 1358,
-      "org": "OpenAI",
-      "badge": "🧠 旗舰智能",
-      "badge_en": "🧠 Flagship"
+      "model": "Claude 5.5 Opus",
+      "elo": 1385,
+      "org": "Anthropic",
+      "badge": "⚡ 深度认知长上下文",
+      "badge_en": "⚡ Deep Cognition"
     },
     {
       "rank": 4,
-      "model": "DeepSeek-R1",
-      "elo": 1352,
-      "org": "DeepSeek",
-      "badge": "🔥 开源最强",
-      "badge_en": "🔥 OSS King"
+      "model": "OpenAI o3",
+      "elo": 1378,
+      "org": "OpenAI",
+      "badge": "🎯 自适应测试期算力",
+      "badge_en": "🎯 Adaptive Test-Time Compute"
     },
     {
       "rank": 5,
-      "model": "Qwen 2.5-Max",
-      "elo": 1330,
+      "model": "Gemini 3.8 Ultra",
+      "elo": 1375,
+      "org": "Google",
+      "badge": "🌐 原生全模态霸主",
+      "badge_en": "🌐 Multimodal SOTA"
+    },
+    {
+      "rank": 6,
+      "model": "Gemini 3.8 Live / Pro",
+      "elo": 1370,
+      "org": "Google",
+      "badge": "⚡ 超低延迟实时流",
+      "badge_en": "⚡ Real-time Low Latency"
+    },
+    {
+      "rank": 7,
+      "model": "DeepSeek-R4",
+      "elo": 1368,
+      "org": "DeepSeek",
+      "badge": "🔥 开源推理标杆",
+      "badge_en": "🔥 OSS Reasoning Benchmark"
+    },
+    {
+      "rank": 8,
+      "model": "Claude 4.6 Sonnet",
+      "elo": 1362,
+      "org": "Anthropic",
+      "badge": "⚡ 商业落地极客王",
+      "badge_en": "⚡ Production Workhorse"
+    },
+    {
+      "rank": 9,
+      "model": "OpenAI GPT-5.5",
+      "elo": 1358,
+      "org": "OpenAI",
+      "badge": "🚀 旗舰生产力基座",
+      "badge_en": "🚀 Flagship Foundation"
+    },
+    {
+      "rank": 10,
+      "model": "DeepSeek-V3",
+      "elo": 1354,
+      "org": "DeepSeek",
+      "badge": "🔥 高性价比MoE旗舰",
+      "badge_en": "🔥 High ROI MoE"
+    },
+    {
+      "rank": 11,
+      "model": "Grok-3",
+      "elo": 1352,
+      "org": "xAI",
+      "badge": "🪐 真实世界未过滤智力",
+      "badge_en": "🪐 Real-world Unfiltered"
+    },
+    {
+      "rank": 12,
+      "model": "Qwen 3-Max",
+      "elo": 1349,
       "org": "Alibaba",
-      "badge": "🌐 中文标杆",
-      "badge_en": "🌐 Chinese SOTA"
+      "badge": "🇨🇳 中文综合榜首",
+      "badge_en": "🇨🇳 Chinese Benchmark SOTA"
+    },
+    {
+      "rank": 13,
+      "model": "Llama 4-405B",
+      "elo": 1345,
+      "org": "Meta",
+      "badge": "🦙 全球最强开源稠密",
+      "badge_en": "🦙 Open Weights Heavyweight"
+    },
+    {
+      "rank": 14,
+      "model": "Kimi k1.5",
+      "elo": 1340,
+      "org": "Moonshot",
+      "badge": "📚 超长上下文推理",
+      "badge_en": "📚 Long Context Reasoning"
+    },
+    {
+      "rank": 15,
+      "model": "GLM-5",
+      "elo": 1336,
+      "org": "Zhipu AI",
+      "badge": "🇨🇳 智谱新一代基座",
+      "badge_en": "🇨🇳 GLM SOTA Generation"
+    },
+    {
+      "rank": 16,
+      "model": "Qwen 2.5-Coder-32B",
+      "elo": 1332,
+      "org": "Alibaba",
+      "badge": "💻 极客代码专属王者",
+      "badge_en": "💻 Coding Specialist SOTA"
+    },
+    {
+      "rank": 17,
+      "model": "Mistral Large 3",
+      "elo": 1328,
+      "org": "Mistral",
+      "badge": "🇪🇺 欧洲顶级开源旗舰",
+      "badge_en": "🇪🇺 European Open SOTA"
+    },
+    {
+      "rank": 18,
+      "model": "DeepSeek-R1",
+      "elo": 1325,
+      "org": "DeepSeek",
+      "badge": "⚡ 纯RL推理开拓者",
+      "badge_en": "⚡ Pure RL Pioneer"
+    },
+    {
+      "rank": 19,
+      "model": "OpenAI o1",
+      "elo": 1322,
+      "org": "OpenAI",
+      "badge": "🧠 推理代际奠基者",
+      "badge_en": "🧠 Reasoning Frontier"
+    },
+    {
+      "rank": 20,
+      "model": "Llama 4-70B",
+      "elo": 1318,
+      "org": "Meta",
+      "badge": "🦙 单卡微调黄金规格",
+      "badge_en": "🦙 Open Efficient SOTA"
+    },
+    {
+      "rank": 21,
+      "model": "Claude 3.5 Sonnet",
+      "elo": 1310,
+      "org": "Anthropic",
+      "badge": "⭐ 经典长青编程王者",
+      "badge_en": "⭐ Evergreen Code Legend"
+    },
+    {
+      "rank": 22,
+      "model": "Yi-Lightning",
+      "elo": 1305,
+      "org": "01.AI",
+      "badge": "⚡ 闪电推理极速响应",
+      "badge_en": "⚡ Ultra-Fast Inference"
+    },
+    {
+      "rank": 23,
+      "model": "MiniMax-abab 7.5",
+      "elo": 1302,
+      "org": "MiniMax",
+      "badge": "🇨🇳 拟人角色与长文",
+      "badge_en": "🇨🇳 Persona & Long Form"
+    },
+    {
+      "rank": 24,
+      "model": "Gemma 3-27B",
+      "elo": 1298,
+      "org": "Google",
+      "badge": "💎 边缘端最强开源",
+      "badge_en": "💎 Edge SOTA Open"
+    },
+    {
+      "rank": 25,
+      "model": "Command R+ 2",
+      "elo": 1295,
+      "org": "Cohere",
+      "badge": "🏢 企业级RAG工作流",
+      "badge_en": "🏢 Enterprise RAG SOTA"
     }
   ],
   "arxiv_papers": [
     {
-      "id": "arxiv_2501_12948",
-      "arxiv_id": "2501.12948",
-      "title": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
-      "title_en": "DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning",
-      "title_zh": "DeepSeek-R1：通过纯强化学习激发大模型复杂推理能力的训练范式",
-      "url": "https://arxiv.org/abs/2501.12948",
-      "date": "最新突破",
-      "date_en": "SOTA Breakthrough",
-      "spec": "GRPO 算法 · 零监督 SFT 冷启动",
-      "spec_en": "GRPO Algorithm · Zero SFT Cold Start",
-      "summary_zh": "开创性证明仅需纯强化学习即可涌现高难度数学与逻辑自我反思能力，无需海量昂贵的人工标注数据。",
-      "summary_en": "Groundbreaking demonstration that pure reinforcement learning can directly incentivize complex mathematical reasoning and self-reflection without expensive human SFT data."
+      "id": "arxiv_2609_25010",
+      "arxiv_id": "2609.25010",
+      "title": "Do Synthetic Personas Predict Real Audience Response? A Sim-to-Real Study Where a No-Persona Baseline Beats Persona-Based Copy Simulation",
+      "title_en": "Do Synthetic Personas Predict Real Audience Response? A Sim-to-Real Study Where a No-Persona Baseline Beats Persona-Based Copy Simulation",
+      "title_zh": "Do Synthetic Personas Predict Real Audience Response? A Sim-to-Real Study Where a No-Persona Baseline Beats Persona-Based Copy Simulation",
+      "url": "https://arxiv.org/abs/2609.25010",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "LLM · 基础模型范式",
+      "spec_en": "LANGUAGE MODEL · SOTA Breakthrough",
+      "summary_zh": "Marketers increasingly use large language models (LLMs) as \"synthetic personas\" to predict how an audience will react to a piece of copy before it ships, encouraged by evidence that profile-conditioned LLMs mimic human s...",
+      "summary_en": "Marketers increasingly use large language models (LLMs) as \"synthetic personas\" to predict how an audience will react to a piece of copy before it ships, encouraged by evidence that profile-conditioned LLMs mimic human s..."
     },
     {
-      "id": "arxiv_2502_00567",
-      "arxiv_id": "2502.00567",
-      "title": "Scaling Laws for Test-Time Compute in Large Language Models",
-      "title_en": "Scaling Laws for Test-Time Compute in Large Language Models",
-      "title_zh": "大语言模型测试期计算（Test-Time Compute）扩展定律研究",
-      "url": "https://arxiv.org/abs/2502.00567",
-      "date": "顶会前沿",
-      "date_en": "Frontier Research",
-      "spec": "Test-Time Scaling · 推理期算力兑换",
-      "spec_en": "Test-Time Scaling · Inference Compute Tradeoff",
-      "summary_zh": "系统证明通过延长模型在推理阶段的思考步数与树搜索空间，可显著超越增加百倍预训练参数带来的增益。",
-      "summary_en": "Proves that scaling search and reflection during inference can significantly outperform 100x pretraining parameter scaling."
+      "id": "arxiv_2609_25013",
+      "arxiv_id": "2609.25013",
+      "title": "Do Existing Preconditioners Improve Biomedical Tabular Foundation Learning? An Empirical Study on TabPFN Optimization",
+      "title_en": "Do Existing Preconditioners Improve Biomedical Tabular Foundation Learning? An Empirical Study on TabPFN Optimization",
+      "title_zh": "Do Existing Preconditioners Improve Biomedical Tabular Foundation Learning? An Empirical Study on TabPFN Optimization",
+      "url": "https://arxiv.org/abs/2609.25013",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "BENCHMARK · 前沿突破",
+      "spec_en": "BENCHMARK · SOTA Breakthrough",
+      "summary_zh": "Tabular foundation models have recently shown strong potential for structured biomedical data analysis. Among them, TabPFN has emerged as an effective approach for low-data tabular classification tasks. However, the impa...",
+      "summary_en": "Tabular foundation models have recently shown strong potential for structured biomedical data analysis. Among them, TabPFN has emerged as an effective approach for low-data tabular classification tasks. However, the impa..."
     },
     {
-      "id": "arxiv_2501_08313",
-      "arxiv_id": "2501.08313",
-      "title": "V-JEPA 2: Towards General Video World Models with Joint-Embedding Predictive Architecture",
-      "title_en": "V-JEPA 2: Towards General Video World Models with Joint-Embedding Predictive Architecture",
-      "title_zh": "V-JEPA 2：基于联合嵌入预测架构的通用物理视频世界模型",
-      "url": "https://arxiv.org/abs/2501.08313",
-      "date": "Meta AI",
-      "date_en": "Meta AI",
-      "spec": "非自回归 · 物理空间感知",
-      "spec_en": "Non-Autoregressive · Physical Dynamics",
-      "summary_zh": "抛弃逐像素扩散生成，在特征潜空间直接预测物体运动轨迹与受力交互，为具身智能奠定物理常识基础。",
-      "summary_en": "Abandons pixel-by-pixel generative diffusion to predict motion trajectories and physical dynamics directly in latent space."
+      "id": "arxiv_2609_25036",
+      "arxiv_id": "2609.25036",
+      "title": "4DGS-JEPA: Temporally Compositional Joint-Embedding Prediction for Dynamic Gaussian Splatting",
+      "title_en": "4DGS-JEPA: Temporally Compositional Joint-Embedding Prediction for Dynamic Gaussian Splatting",
+      "title_zh": "4DGS-JEPA: Temporally Compositional Joint-Embedding Prediction for Dynamic Gaussian Splatting",
+      "url": "https://arxiv.org/abs/2609.25036",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "RL · 强化对齐与自博弈",
+      "spec_en": "RL · SOTA Breakthrough",
+      "summary_zh": "Dynamic Gaussian Splatting provides an explicit representation of evolving 3D scenes, but existing approaches are primarily optimized for reconstruction, future-state generation, or rendering rather than for learning reu...",
+      "summary_en": "Dynamic Gaussian Splatting provides an explicit representation of evolving 3D scenes, but existing approaches are primarily optimized for reconstruction, future-state generation, or rendering rather than for learning reu..."
     },
     {
-      "id": "arxiv_2412_19437",
-      "arxiv_id": "2412.19437",
-      "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
-      "title_en": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
-      "title_zh": "SWE-agent：基于终端与文件系统专用接口的自主软件工程智能体",
-      "url": "https://arxiv.org/abs/2412.19437",
-      "date": "普林斯顿",
-      "date_en": "Princeton",
-      "spec": "SWE-bench 生产级 · 终端自主执行",
-      "spec_en": "SWE-bench SOTA · Autonomous Terminal Agent",
-      "summary_zh": "设计专为大模型交互优化的 Shell/文件浏览器界面，实现自动化解决真实 GitHub 复杂 Issue 的工程闭环。",
-      "summary_en": "Specially designed Agent-Computer Interfaces that allow LLMs to autonomously browse codebases, run tests, and fix real GitHub issues end-to-end."
+      "id": "arxiv_2609_25165",
+      "arxiv_id": "2609.25165",
+      "title": "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+      "title_en": "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+      "title_zh": "Ovis-Embedding: Pushing the Frontiers of Universal Omni-Modal Embeddings",
+      "url": "https://arxiv.org/abs/2609.25165",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "RL · 强化对齐与自博弈",
+      "spec_en": "RL · SOTA Breakthrough",
+      "summary_zh": "In this report, we introduce \\textbf{Ovis-Embedding}, a state-of-the-art omni-modal embedding family built on native integration of text, image, video, and audio. Instead of assembling separate modality towers, Ovis-Embe...",
+      "summary_en": "In this report, we introduce \\textbf{Ovis-Embedding}, a state-of-the-art omni-modal embedding family built on native integration of text, image, video, and audio. Instead of assembling separate modality towers, Ovis-Embe..."
+    },
+    {
+      "id": "arxiv_2609_25187",
+      "arxiv_id": "2609.25187",
+      "title": "X-Planner: Event-Structured Task Planning for Embodied Intelligence",
+      "title_en": "X-Planner: Event-Structured Task Planning for Embodied Intelligence",
+      "title_zh": "X-Planner: Event-Structured Task Planning for Embodied Intelligence",
+      "url": "https://arxiv.org/abs/2609.25187",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "推理增强 · 复杂逻辑思维",
+      "spec_en": "REASONING · SOTA Breakthrough",
+      "summary_zh": "Task planning bridges high-level instructions and executable behavior in long-horizon manipulation, yet modern Vision-Language-Action (VLA) systems often leave this intermediate structure implicit. Existing chain-of-thou...",
+      "summary_en": "Task planning bridges high-level instructions and executable behavior in long-horizon manipulation, yet modern Vision-Language-Action (VLA) systems often leave this intermediate structure implicit. Existing chain-of-thou..."
+    },
+    {
+      "id": "arxiv_2609_25199",
+      "arxiv_id": "2609.25199",
+      "title": "Lean Pool: An AI-Maintained Archive of Formalized Mathematics",
+      "title_en": "Lean Pool: An AI-Maintained Archive of Formalized Mathematics",
+      "title_zh": "Lean Pool: An AI-Maintained Archive of Formalized Mathematics",
+      "url": "https://arxiv.org/abs/2609.25199",
+      "date": "今日实时前沿",
+      "date_en": "Today Live",
+      "spec": "AI Agent · 自主智能体工程",
+      "spec_en": "AGENT · SOTA Breakthrough",
+      "summary_zh": "Lean Pool is a repository of formalized mathematics. It is grown, maintained and optimized by AI agents.",
+      "summary_en": "Lean Pool is a repository of formalized mathematics. It is grown, maintained and optimized by AI agents."
     }
   ],
   "ai_creators": [
