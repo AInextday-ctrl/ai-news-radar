@@ -905,189 +905,203 @@
         </div>
       </section>
 
-      <!-- 双列综合快讯与侧栏流 -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-      
-      <!-- 主屏快讯流 (约占 67% 宽度): ⚡ 行业突发快讯 -->
-      <section class="lg:col-span-8 space-y-4">
-        <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
-          <div class="flex items-center space-x-2">
-            <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
-            <h2 class="font-bold text-base text-slate-100" id="section-title-news">⚡ 突发·行业快讯</h2>
-          </div>
-          <span class="text-xs text-slate-400 font-mono" id="news-sub-count">实时追踪</span>
-        </div>
-        <div class="space-y-3.5" id="stream-news">
-          <!-- 静态初始高权重 SEO 语义感知块 (在 JS 载入最新资讯前提供高质量长文本，杜绝 AdSense 爬虫判空) -->
-          <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-2">
-            <div class="flex items-center space-x-2 text-indigo-500 font-mono font-semibold">
-              <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-              <span>AI NEWS RADAR · GLOBAL PULSE / 全球前沿 AI 实时情报</span>
+      <!-- 🌟 第 2 层: 核心情报双子星 (Equal 2 Columns: ⚡ 突发快讯 Top 5 + 🐦 社交雷达 Top 4) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- 栏目 A: ⚡ 突发·行业快讯 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80">
+          <div class="space-y-3.5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
+                <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-news">
+                  <span>⚡ 突发·行业快讯</span>
+                </h2>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20" id="news-sub-count">Top 5 精选</span>
+              </div>
+              <button type="button" onclick="switchTab('news')" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center space-x-1 font-medium">
+                <span>全部快讯</span>
+                <span>→</span>
+              </button>
             </div>
-            <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
-              实时聚合全球人工智能行业突发要闻、OpenAI、DeepSeek、Claude、Google Gemini 等顶流模型进展、硅谷大V推特交锋、YouTube 与 TikTok 实战教学视频、落地实用 AI 工具及高阶提示词库。
-            </p>
-          </div>
-        </div>
-        <!-- 快讯全量历史归档库入口 (超 24 小时沉淀库，带完整多页翻查) -->
-        <div id="archive-section-news" class="mt-4 pt-3 border-t border-slate-800/80">
-          <button type="button" onclick="switchTab('archive'); filterArchiveCategory('news');" id="btn-archive-news" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
-            <div class="flex items-center space-x-2.5">
-              <span class="text-lg p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
-              <div class="text-left">
-                <div class="font-bold flex items-center space-x-2">
-                  <span id="txt-archive-news">查看历史资讯全量归档库</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono border border-indigo-500/30">分页回溯</span>
+            
+            <div class="space-y-3" id="stream-news">
+              <!-- 静态初始高权重 SEO 语义感知块 -->
+              <div class="p-4 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 space-y-2">
+                <div class="flex items-center space-x-2 text-indigo-500 font-mono font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
+                  <span>AI NEWS RADAR · GLOBAL PULSE / 全球前沿 AI 实时情报</span>
                 </div>
-                <p class="text-[11px] text-slate-400 mt-0.5">超出 24 小时的深度快讯已安全沉淀，支持分类检索与翻页查阅</p>
+                <p class="text-slate-700 dark:text-slate-300 leading-relaxed">
+                  实时聚合全球人工智能行业突发要闻、OpenAI、DeepSeek、Claude、Google Gemini 等顶流模型进展、硅谷大V推特交锋、YouTube 与 TikTok 实战教学视频、落地实用 AI 工具及高阶提示词库。
+                </p>
               </div>
             </div>
-            <div class="flex items-center space-x-1 text-xs text-indigo-400 group-hover:text-indigo-300 font-mono shrink-0 pl-2">
-              <span class="hidden sm:inline">前往归档库</span>
-              <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
-            </div>
-          </button>
-        </div>
-      </section>
+          </div>
 
-      <!-- 侧边雷达流 (约占 33% 宽度): 领袖观点 + 实用工具 + 视频实操 -->
-      <aside class="lg:col-span-4 space-y-6">
-        
-        <!-- 模块 A: 🐦 领袖观点·社交热议 (支持 𝕏 / Reddit 独立筛选) -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100" id="section-title-celebrity">🐦 社交雷达 · 𝕏 动态</h3>
-            </div>
-            <div class="flex items-center space-x-1">
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/15 text-sky-400 font-semibold border border-sky-500/30">𝕏 前沿动态矩阵</span>
-            </div>
-          </div>
-          <div class="space-y-3" id="stream-celebrity">
-            <!-- 动态注入社交言论卡片 (默认 24h 内) -->
-          </div>
-          <!-- 社交历史归档折叠区 -->
-          <div id="archive-section-celebrity" class="hidden mt-3 pt-2.5 border-t border-slate-800/70">
-            <button type="button" onclick="toggleHistoryArchive('celebrity')" id="btn-archive-celebrity" class="w-full py-2 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-[11px] text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
-              <span class="flex items-center space-x-1.5">
-                <span>📜</span>
-                <span id="txt-archive-celebrity">查看历史社交动态</span>
-              </span>
-              <span id="arrow-archive-celebrity" class="text-slate-500 group-hover:text-sky-400 transition-transform duration-200">▼</span>
+          <!-- 快讯专栏直达底栏 -->
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+            <button type="button" onclick="switchTab('news')" id="btn-view-all-news" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
+              <span id="txt-view-all-news">查看全部行业快讯 →</span>
             </button>
-            <div id="container-archive-celebrity" class="hidden mt-3 space-y-3"></div>
           </div>
-        </div>
+        </section>
 
-        <!-- 模块 B: 🛠️ 场景落地·实用神器 -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100" id="section-title-tools">🛠️ 场景落地·实用神器</h3>
+        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 动态 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80">
+          <div class="space-y-3.5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
+              <div class="flex items-center space-x-2.5">
+                <span class="w-3 h-3 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
+                <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-celebrity">
+                  <span>🐦 社交雷达 · 𝕏 动态</span>
+                </h2>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20">前沿交锋</span>
+              </div>
+              <button type="button" onclick="switchTab('celebrity')" class="text-xs text-sky-600 dark:text-sky-400 hover:underline flex items-center space-x-1 font-medium">
+                <span>全部动态</span>
+                <span>→</span>
+              </button>
             </div>
-            <button onclick="switchTab('tools')" id="link-all-tools" class="text-[11px] text-emerald-400 hover:underline">全部神器 →</button>
+            
+            <div class="space-y-3" id="stream-celebrity">
+              <!-- 动态注入 Top 4 社交动态卡片 -->
+            </div>
           </div>
-          <div class="space-y-3" id="stream-tools">
-            <!-- 动态注入落地工具卡片 (默认 24h 内) -->
-          </div>
-          <!-- 神器历史归档折叠区 -->
-          <div id="archive-section-tools" class="hidden mt-3 pt-2.5 border-t border-slate-800/70">
-            <button type="button" onclick="toggleHistoryArchive('tools')" id="btn-archive-tools" class="w-full py-2 px-3 rounded-xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-[11px] text-slate-300 hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
-              <span class="flex items-center space-x-1.5">
-                <span>📜</span>
-                <span id="txt-archive-tools">查看历史落地神器</span>
-              </span>
-              <span id="arrow-archive-tools" class="text-slate-500 group-hover:text-emerald-400 transition-transform duration-200">▼</span>
-            </button>
-            <div id="container-archive-tools" class="hidden mt-3 space-y-3"></div>
-          </div>
-        </div>
 
-        <!-- 模块 C: 🎬 实战视频·演示 (纯实战视频) -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
+          <!-- 社交专栏直达底栏 -->
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+            <button type="button" onclick="switchTab('celebrity')" id="btn-view-all-celebrity" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
+              <span id="txt-view-all-celebrity">查看全部社交雷达 →</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 🌟 第 3 层: 落地与视界 3 等分精选栅格 (3 Equal Columns: 🛠️ 实用神器 + 🎬 实战视频 + 💡 提示词库) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- 栏目 C: 🛠️ 场景落地·实用神器 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80">
+          <div class="space-y-3.5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-tools">🛠️ 场景落地·实用神器</h3>
+              </div>
+              <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline">全部神器 →</button>
+            </div>
+            <div class="space-y-3" id="stream-tools">
+              <!-- 动态注入 Top 3 落地工具卡片 -->
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+            <button type="button" onclick="switchTab('tools')" id="btn-view-all-tools" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
+              <span id="txt-view-all-tools">查看全部落地神器 →</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 栏目 D: 🎬 实战视频·精选演示 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80">
+          <div class="space-y-3.5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-videos">🎬 实战视频·精选演示</h3>
+              </div>
+              <button onclick="switchTab('videos')" id="link-all-videos" class="text-xs text-rose-600 dark:text-rose-400 hover:underline">全部视频 →</button>
+            </div>
+            <div class="space-y-3" id="stream-videos">
+              <!-- 动态注入 Top 2 精选视频 -->
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+            <button type="button" onclick="switchTab('videos')" id="btn-view-all-videos" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-rose-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
+              <span id="txt-view-all-videos">查看全部精选视频 →</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 栏目 E: 💡 提示词库·高阶咒语 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-2 lg:col-span-1">
+          <div class="space-y-3.5">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm shadow-purple-500/50"></span>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">💡 提示词库·高阶咒语</h3>
+              </div>
+              <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-xs text-purple-600 dark:text-purple-400 hover:underline">全部咒语 →</button>
+            </div>
+            <div class="space-y-3" id="stream-prompts">
+              <!-- 动态注入 Top 3 提示词卡片 -->
+            </div>
+          </div>
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+            <button type="button" onclick="switchTab('prompts')" id="btn-view-all-prompts" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
+              <span id="txt-view-all-prompts">查看全部实操咒语 →</span>
+            </button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 🌟 第 4 层: 基准与学术前沿 (2 Equal Columns: 🏆 LMSYS 天梯榜 + 📄 ArXiv 突破论文) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+        <!-- 栏目 F: 🏆 LMSYS Chatbot Arena Top 5 天梯榜 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl space-y-3 border-t-2 border-t-amber-500/70 border border-slate-200/80 dark:border-slate-800/80">
           <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
-              <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-videos">🎬 实战视频·演示</h3>
-            </div>
-            <button onclick="switchTab('videos')" id="link-all-videos" class="text-[11px] text-rose-500 dark:text-rose-400 hover:underline">全部视频 →</button>
-          </div>
-          <div class="space-y-3" id="stream-videos">
-            <!-- 动态注入实战视频 (默认 24h 内) -->
-          </div>
-          <!-- 视频历史归档折叠区 -->
-          <div id="archive-section-videos" class="hidden mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800/70">
-            <button type="button" onclick="toggleHistoryArchive('videos')" id="btn-archive-videos" class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-900/80 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-[11px] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
-              <span class="flex items-center space-x-1.5">
-                <span>📜</span>
-                <span id="txt-archive-videos">查看历史视频</span>
-              </span>
-              <span id="arrow-archive-videos" class="text-slate-500 group-hover:text-rose-400 transition-transform duration-200">▼</span>
-            </button>
-            <div id="container-archive-videos" class="hidden mt-3 space-y-3"></div>
-          </div>
-        </div>
-
-        <!-- 模块 D: 💡 提示词库·咒语 (纯提示词) -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3.5">
-          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2">
-            <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm shadow-purple-500/50"></span>
-              <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">💡 提示词库·咒语</h3>
-            </div>
-            <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-[11px] text-purple-600 dark:text-purple-400 hover:underline">全部咒语 →</button>
-          </div>
-          <div class="space-y-3" id="stream-prompts">
-            <!-- 动态注入 Prompt 咒语卡片 -->
-          </div>
-          <!-- 提示词历史归档折叠区 -->
-          <div id="archive-section-prompts" class="hidden mt-3 pt-2.5 border-t border-slate-200 dark:border-slate-800/70">
-            <button type="button" onclick="toggleHistoryArchive('prompts')" id="btn-archive-prompts" class="w-full py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-900/80 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 text-[11px] text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white transition-all flex items-center justify-between group shadow-sm font-medium">
-              <span class="flex items-center space-x-1.5">
-                <span>📜</span>
-                <span id="txt-archive-prompts">查看历史提示词</span>
-              </span>
-              <span id="arrow-archive-prompts" class="text-slate-500 group-hover:text-purple-400 transition-transform duration-200">▼</span>
-            </button>
-            <div id="container-archive-prompts" class="hidden mt-3 space-y-3"></div>
-          </div>
-        </div>
-
-        <!-- 模块 E: 🏆 LMSYS Chatbot Arena Top 5 天梯榜 (发烧友必备基准) -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3 border-t border-amber-500/30">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5" id="section-title-arena">
+              <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center space-x-1.5" id="section-title-arena">
                 <span>🏆 LMSYS 大模型天梯榜</span>
               </h3>
             </div>
-            <span class="text-[10px] text-amber-400/90 font-mono" id="arena-sub-tag">盲测 Elo 实时榜</span>
+            <span class="text-[10px] text-amber-600 dark:text-amber-400 font-mono" id="arena-sub-tag">盲测 Elo 实时榜</span>
           </div>
           <div class="space-y-2" id="stream-arena">
             <!-- 动态注入 Arena Top 5 -->
           </div>
-        </div>
+        </section>
 
-        <!-- 模块 F: 📄 ArXiv 每日学术突破 (硬核前沿精选) -->
-        <div class="glass-panel rounded-2xl p-4 shadow-xl space-y-3 border-t border-purple-500/30">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-2">
+        <!-- 栏目 G: 📄 ArXiv 每日学术突破 -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl space-y-3 border-t-2 border-t-purple-500/70 border border-slate-200/80 dark:border-slate-800/80">
+          <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2">
             <div class="flex items-center space-x-2">
               <span class="w-2.5 h-2.5 rounded-full bg-purple-400 shadow-sm shadow-purple-400/50"></span>
-              <h3 class="font-bold text-sm text-slate-100 flex items-center space-x-1.5" id="section-title-arxiv">
+              <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100 flex items-center space-x-1.5" id="section-title-arxiv">
                 <span>📄 ArXiv 每日突破论文</span>
               </h3>
             </div>
-            <span class="text-[10px] text-purple-400/90 font-mono" id="arxiv-sub-tag">极客前沿研读</span>
+            <span class="text-[10px] text-purple-600 dark:text-purple-400 font-mono" id="arxiv-sub-tag">极客前沿研读</span>
           </div>
           <div class="space-y-2.5" id="stream-arxiv">
-            <!-- 动态注入 ArXiv Papers -->
+            <!-- 动态注入 ArXiv Papers Top 4 -->
           </div>
-        </div>
+        </section>
 
-      </aside>
+      </div>
+
+      <!-- 🌟 第 5 层: 全站全量历史归档库入口 (超 24 小时沉淀库，带分类与多页回溯) -->
+      <div id="archive-section-news" class="pt-2">
+        <button type="button" onclick="switchTab('archive')" id="btn-archive-news" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-xl cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
+            <div class="text-left">
+              <div class="font-bold flex items-center space-x-2">
+                <span id="txt-archive-news">查看历史情报全量归档库</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono border border-indigo-500/30">分页回溯</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5" id="txt-archive-news-sub">超出 24 小时的深度快讯、社交发声与工具已安全沉淀，支持全站多维检索与翻页查阅</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-1.5 text-xs text-indigo-400 group-hover:text-indigo-300 font-mono shrink-0 pl-2">
+            <span class="hidden sm:inline">前往全量归档库</span>
+            <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
+          </div>
+        </button>
       </div>
     </div>
 
@@ -5404,28 +5418,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 3. 渲染今日 60 秒风向标 Top 3
       renderTopThree(data.top_three || []);
 
-      // 4. 渲染“综合全景”模式 (核心：严格执行 24 小时新鲜度拦截，历史全部沉淀入折叠归档)
-      // A. 快讯板块 (News)
+      // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，绝不无限堆叠，各板块均支持一键直达完整专区)
+      // A. 快讯板块 (News) - 首页仅展示 Top 5 重点推荐
       const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
-      const historyNews = allNews.filter(it => !isWithin24Hours(it.raw_published_at));
+      const displayNews = recentNews.length >= 3 ? recentNews.slice(0, 5) : allNews.slice(0, 5);
       const streamNews = document.getElementById('stream-news');
-      streamNews.innerHTML = recentNews.length > 0 
-        ? recentNews.map(renderNewsCard).join('')
-        : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
+      if (streamNews) {
+        streamNews.innerHTML = displayNews.length > 0 
+          ? displayNews.map(renderNewsCard).join('')
+          : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
+      }
+      const txtViewAllNews = document.getElementById('txt-view-all-news');
+      if (txtViewAllNews) {
+        txtViewAllNews.textContent = isZh ? `查看全部行业快讯 (${allNews.length} 条) →` : `View All Breaking News (${allNews.length}) →`;
+      }
 
+      // 全站全量历史归档库入口横幅 (超 24 小时沉淀库，带完整多页翻查)
       const arcSecNews = document.getElementById('archive-section-news');
       const arcTxtNews = document.getElementById('txt-archive-news');
-      const totalArchivedCount = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : historyNews.length);
+      const totalArchivedCount = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : 0);
       if (arcSecNews) {
         arcSecNews.classList.remove('hidden');
         if (arcTxtNews) {
           arcTxtNews.textContent = isZh
-            ? `查看历史快讯全量归档库 (已累计收录 ${totalArchivedCount} 篇)`
-            : `View Full Historical News Archive (${totalArchivedCount} items)`;
+            ? `查看历史情报全量归档库 (已累计收录 ${totalArchivedCount} 篇)`
+            : `View Full Historical Intelligence Archive (${totalArchivedCount} items)`;
         }
       }
 
-      // B. 领袖社交板块 (Celebrity) - 100% 纯净 𝕏 权威领袖矩阵
+      // B. 领袖社交板块 (Celebrity) - 首页仅精选 Top 4 焦点动态
       let sideCelebList = allCeleb;
       const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
       recentCeleb.sort((a, b) => {
@@ -5436,76 +5457,47 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
         return timeB - timeA;
       });
-      const historyCeleb = sideCelebList.filter(it => !isWithin24Hours(it.raw_published_at));
+      const displayCeleb = recentCeleb.length >= 2 ? recentCeleb.slice(0, 4) : sideCelebList.slice(0, 4);
       const streamCelebrity = document.getElementById('stream-celebrity');
-      streamCelebrity.innerHTML = recentCeleb.length > 0
-        ? recentCeleb.slice(0, 10).map(renderCelebrityCard).join('')
-        : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentCeleb}</div>`;
-
-      const arcSecCeleb = document.getElementById('archive-section-celebrity');
-      const arcContCeleb = document.getElementById('container-archive-celebrity');
-      const arcTxtCeleb = document.getElementById('txt-archive-celebrity');
-      if (historyCeleb.length > 0) {
-        arcSecCeleb.classList.remove('hidden');
-        arcContCeleb.dataset.count = historyCeleb.length;
-        arcContCeleb.innerHTML = historyCeleb.map(renderCelebrityCard).join('');
-        arcTxtCeleb.textContent = historyArchiveOpen.celebrity
-          ? (isZh ? '收起历史发言 ↑' : 'Collapse Archive ↑')
-          : (isZh ? `查看历史大V发言 (已收录 ${historyCeleb.length} 条) ↓` : `View Historical Voices (${historyCeleb.length} items) ↓`);
-      } else {
-        arcSecCeleb.classList.add('hidden');
+      if (streamCelebrity) {
+        streamCelebrity.innerHTML = displayCeleb.length > 0
+          ? displayCeleb.map(renderCelebrityCard).join('')
+          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentCeleb}</div>`;
+      }
+      const txtViewAllCeleb = document.getElementById('txt-view-all-celebrity');
+      if (txtViewAllCeleb) {
+        txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
       }
 
-      // C. 落地工具板块 (Tools)
+      // C. 落地工具板块 (Tools) - 首页仅精选 Top 3 实用神器
       const recentTools = allTools.filter(it => isWithin24Hours(it.raw_published_at));
-      const historyTools = allTools.filter(it => !isWithin24Hours(it.raw_published_at));
+      const displayTools = recentTools.length >= 2 ? recentTools.slice(0, 3) : allTools.slice(0, 3);
       const streamTools = document.getElementById('stream-tools');
-      streamTools.innerHTML = recentTools.length > 0
-        ? recentTools.slice(0, 10).map(renderToolCard).join('')
-        : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentTools}</div>`;
-
-      const arcSecTools = document.getElementById('archive-section-tools');
-      const arcContTools = document.getElementById('container-archive-tools');
-      const arcTxtTools = document.getElementById('txt-archive-tools');
-      if (historyTools.length > 0) {
-        arcSecTools.classList.remove('hidden');
-        arcContTools.dataset.count = historyTools.length;
-        arcContTools.innerHTML = historyTools.map(renderToolCard).join('');
-        arcTxtTools.textContent = historyArchiveOpen.tools
-          ? (isZh ? '收起历史工具 ↑' : 'Collapse Archive ↑')
-          : (isZh ? `查看历史落地神器 (已收录 ${historyTools.length} 条) ↓` : `View Historical Tools (${historyTools.length} items) ↓`);
-      } else {
-        arcSecTools.classList.add('hidden');
+      if (streamTools) {
+        streamTools.innerHTML = displayTools.length > 0
+          ? displayTools.map(renderToolCard).join('')
+          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentTools}</div>`;
+      }
+      const txtViewAllTools = document.getElementById('txt-view-all-tools');
+      if (txtViewAllTools) {
+        txtViewAllTools.textContent = isZh ? `查看全部落地神器 (${allTools.length} 个) →` : `View All Applied Tools (${allTools.length}) →`;
       }
 
-      // D. 视频演示板块 (Videos) - 彻底解除 24 小时时间限制，全量精选长短视频直接呈现
+      // D. 视频演示板块 (Videos) - 首页仅精选 Top 2 实战演示
       const dedupedVideos = dedupVideoItems(allVideos);
-      const displayVideos = dedupedVideos.slice(0, 12);
-      const remainingVideos = dedupedVideos.slice(12);
+      const displayVideos = dedupedVideos.slice(0, 2);
       const streamVideos = document.getElementById('stream-videos');
       if (streamVideos) {
         streamVideos.innerHTML = displayVideos.length > 0
           ? displayVideos.map(renderVideoCard).join('')
           : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentVideos}</div>`;
       }
-
-      const arcSecVideos = document.getElementById('archive-section-videos');
-      const arcContVideos = document.getElementById('container-archive-videos');
-      const arcTxtVideos = document.getElementById('txt-archive-videos');
-      if (arcSecVideos && arcContVideos && arcTxtVideos) {
-        if (remainingVideos.length > 0) {
-          arcSecVideos.classList.remove('hidden');
-          arcContVideos.dataset.count = remainingVideos.length;
-          arcContVideos.innerHTML = remainingVideos.map(renderVideoCard).join('');
-          arcTxtVideos.textContent = historyArchiveOpen.videos
-            ? (isZh ? '收起更多精选视频 ↑' : 'Collapse More Videos ↑')
-            : (isZh ? `展开更多精选视频 (全库已收录 ${dedupedVideos.length} 条，点击查看剩余 ${remainingVideos.length} 条) ↓` : `Show More Videos (${remainingVideos.length} items) ↓`);
-        } else {
-          arcSecVideos.classList.add('hidden');
-        }
+      const txtViewAllVideos = document.getElementById('txt-view-all-videos');
+      if (txtViewAllVideos) {
+        txtViewAllVideos.textContent = isZh ? `查看全部精选视频 (${dedupedVideos.length} 个) →` : `View All Hands-on Videos (${dedupedVideos.length}) →`;
       }
 
-      // E. 提示词库板块 (Prompts) - 优先展现前沿 SOTA 旗舰模型模版
+      // E. 提示词库板块 (Prompts) - 首页仅精选 Top 3 SOTA 实战咒语
       const sortedPrompts = allPrompts.slice().sort((a, b) => {
         const isLegA = a.generation_tier === 'legacy' ? 1 : 0;
         const isLegB = b.generation_tier === 'legacy' ? 1 : 0;
@@ -5519,29 +5511,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       });
 
       const sotaPrompts = sortedPrompts.filter(it => it.generation_tier !== 'legacy');
-      const displayPrompts = sotaPrompts.length > 0 ? sotaPrompts.slice(0, 8) : sortedPrompts.slice(0, 8);
+      const displayPrompts = sotaPrompts.length > 0 ? sotaPrompts.slice(0, 3) : sortedPrompts.slice(0, 3);
       const streamPrompts = document.getElementById('stream-prompts');
       if (streamPrompts) {
         streamPrompts.innerHTML = displayPrompts.length > 0
           ? displayPrompts.map(renderPromptCard).join('')
           : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentPrompts || (isZh ? '暂无提示词' : 'No prompts')}</div>`;
       }
-
-      const arcSecPrompts = document.getElementById('archive-section-prompts');
-      const arcContPrompts = document.getElementById('container-archive-prompts');
-      const arcTxtPrompts = document.getElementById('txt-archive-prompts');
-      if (arcSecPrompts && arcContPrompts && arcTxtPrompts) {
-        const remainingPrompts = sortedPrompts.filter(it => !displayPrompts.includes(it));
-        if (remainingPrompts.length > 0) {
-          arcSecPrompts.classList.remove('hidden');
-          arcContPrompts.dataset.count = remainingPrompts.length;
-          arcContPrompts.innerHTML = remainingPrompts.map(renderPromptCard).join('');
-          arcTxtPrompts.textContent = historyArchiveOpen.prompts
-            ? (isZh ? '收起历史提示词 ↑' : 'Collapse Archive ↑')
-            : (isZh ? `查看更多模型提示词与历史归档 (已收录 ${remainingPrompts.length} 条) ↓` : `View More Prompts & Historical Archive (${remainingPrompts.length} items) ↓`);
-        } else {
-          arcSecPrompts.classList.add('hidden');
-        }
+      const txtViewAllPrompts = document.getElementById('txt-view-all-prompts');
+      if (txtViewAllPrompts) {
+        txtViewAllPrompts.textContent = isZh ? `查看全部实操咒语 (${allPrompts.length} 条) →` : `View All SOTA Prompts (${allPrompts.length}) →`;
       }
 
       // 5. 渲染 LMSYS Chatbot Arena Top 5 天梯榜
