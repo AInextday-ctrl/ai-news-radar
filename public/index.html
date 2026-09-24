@@ -628,158 +628,161 @@
   <!-- ========== SEO_STATIC_NEWS_END ========== -->
 
   <!-- 顶部科技导航栏 -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#070b16]/95 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 flex items-center justify-between shadow-sm dark:shadow-xl">
-    <div class="flex items-center space-x-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
-        🤖
-      </div>
-      <div>
-        <div class="flex items-center space-x-2">
-          <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-700 dark:from-white dark:via-slate-100 dark:to-indigo-300 bg-clip-text text-transparent" id="header-title">
-            AI 资讯雷达
-          </h1>
-          <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 tracking-wider">
-            RADAR 4.0
-          </span>
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#070b16]/95 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 shadow-sm dark:shadow-xl">
+    <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
+          🤖
         </div>
-        <p class="text-xs text-slate-400 font-medium hidden sm:block" id="header-subtitle">
-          全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库
-        </p>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h1 class="text-lg font-black tracking-tight bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-700 dark:from-white dark:via-slate-100 dark:to-indigo-300 bg-clip-text text-transparent" id="header-title">
+              AI 资讯雷达
+            </h1>
+            <span class="text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-400 border border-indigo-500/30 tracking-wider">
+              RADAR 4.0
+            </span>
+          </div>
+          <p class="text-xs text-slate-400 font-medium hidden sm:block" id="header-subtitle">
+            全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库
+          </p>
+        </div>
       </div>
-    </div>
 
-    <!-- 右上角：深浅主题切换、中英文切换、状态指示灯与刷新 -->
-    <div class="flex items-center space-x-2 sm:space-x-3">
-      
-      <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
-      <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
-        <button id="theme-btn-light" onclick="setTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
-          <span>☀️</span>
-          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-light">浅色</span>
+      <!-- 右上角：深浅主题切换、中英文切换、状态指示灯与刷新 -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        
+        <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
+        <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
+          <button id="theme-btn-light" onclick="setTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+            <span>☀️</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-light">浅色</span>
+          </button>
+          <button id="theme-btn-dark" onclick="setTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+            <span>🌙</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
+          </button>
+          <button id="theme-btn-auto" onclick="setTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+            <span>💻</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
+          </button>
+        </div>
+
+        <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
+        <div class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
+          <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
+          <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
+            <optgroup label="主流语言 / Popular">
+              <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
+              <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
+              <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
+              <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
+              <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
+              <option value="deutsch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
+              <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
+              <option value="spanish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇪🇸 Español</option>
+              <option value="russian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇺 Русский</option>
+              <option value="arabic" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇦 العربية</option>
+            </optgroup>
+            <optgroup label="欧洲语系 / European">
+              <option value="portuguese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇹 Português</option>
+              <option value="italian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇹 Italiano</option>
+              <option value="dutch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇱 Nederlands</option>
+              <option value="polish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇱 Polski</option>
+              <option value="ukrainian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇺🇦 Українська</option>
+              <option value="swedish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇪 Svenska</option>
+              <option value="norwegian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇴 Norsk</option>
+              <option value="danish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇰 Dansk</option>
+              <option value="finnish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇮 Suomi</option>
+              <option value="czech" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇿 Čeština</option>
+              <option value="hungarian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇺 Magyar</option>
+              <option value="romanian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇴 Română</option>
+              <option value="greek" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇷 Ελληνικά</option>
+            </optgroup>
+            <optgroup label="亚太与更多 / Asia-Pacific & More">
+              <option value="hindi" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇳 हिन्दी</option>
+              <option value="vietnamese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇻🇳 Tiếng Việt</option>
+              <option value="thai" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇭 ภาษาไทย</option>
+              <option value="indonesian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇩 Bahasa Indonesia</option>
+              <option value="malay" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇲🇾 Bahasa Melayu</option>
+              <option value="filipino" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇭 Filipino</option>
+              <option value="turkish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇷 Türkçe</option>
+              <option value="hebrew" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇱 עברית</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- 实时同步灯 -->
+        <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-200/80 dark:bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
+        </div>
+
+        <!-- 手动刷新按钮 -->
+        <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
+          <span>🔄</span>
+          <span id="refresh-btn-text" class="font-medium">刷新</span>
         </button>
-        <button id="theme-btn-dark" onclick="setTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
-          <span>🌙</span>
-          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
-        </button>
-        <button id="theme-btn-auto" onclick="setTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
-          <span>💻</span>
-          <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
-        </button>
       </div>
-
-      <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
-      <div class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
-        <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
-        <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
-          <optgroup label="主流语言 / Popular">
-            <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
-            <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
-            <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
-            <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
-            <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
-            <option value="deutsch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
-            <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
-            <option value="spanish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇪🇸 Español</option>
-            <option value="russian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇺 Русский</option>
-            <option value="arabic" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇦 العربية</option>
-          </optgroup>
-          <optgroup label="欧洲语系 / European">
-            <option value="portuguese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇹 Português</option>
-            <option value="italian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇹 Italiano</option>
-            <option value="dutch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇱 Nederlands</option>
-            <option value="polish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇱 Polski</option>
-            <option value="ukrainian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇺🇦 Українська</option>
-            <option value="swedish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇪 Svenska</option>
-            <option value="norwegian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇴 Norsk</option>
-            <option value="danish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇰 Dansk</option>
-            <option value="finnish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇮 Suomi</option>
-            <option value="czech" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇿 Čeština</option>
-            <option value="hungarian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇺 Magyar</option>
-            <option value="romanian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇴 Română</option>
-            <option value="greek" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇷 Ελληνικά</option>
-          </optgroup>
-          <optgroup label="亚太与更多 / Asia-Pacific & More">
-            <option value="hindi" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇳 हिन्दी</option>
-            <option value="vietnamese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇻🇳 Tiếng Việt</option>
-            <option value="thai" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇭 ภาษาไทย</option>
-            <option value="indonesian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇩 Bahasa Indonesia</option>
-            <option value="malay" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇲🇾 Bahasa Melayu</option>
-            <option value="filipino" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇭 Filipino</option>
-            <option value="turkish" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇷 Türkçe</option>
-            <option value="hebrew" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇱 עברית</option>
-          </optgroup>
-        </select>
-      </div>
-
-      <!-- 实时同步灯 -->
-      <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-200/80 dark:bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
-      </div>
-
-      <!-- 手动刷新按钮 -->
-      <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
-        <span>🔄</span>
-        <span id="refresh-btn-text" class="font-medium">刷新</span>
-      </button>
     </div>
   </header>
 
-  <!-- 🧭 现代化固定分类导航栏 (Tabs Bar) -->
-  <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 py-2 shadow-sm dark:shadow-none">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-stretch md:items-center justify-between gap-2.5">
-      <div class="flex items-center gap-1.5 sm:gap-2 flex-wrap flex-1" id="nav-tabs">
-        <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 shrink-0">
+  <!-- 🧭 现代化全景分类导航栏 (Tabs Bar) -->
+  <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-2.5 shadow-sm dark:shadow-none">
+    <div class="max-w-[1760px] w-full mx-auto flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
+      <!-- 7 大核心专栏切换胶囊阵列 -->
+      <div class="flex items-center gap-2 flex-wrap flex-1" id="nav-tabs">
+        <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all flex items-center space-x-1.5 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 shrink-0">
           <span>🌐</span>
-          <span id="nav-text-all">综合</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono ml-0.5" id="badge-count-all">0</span>
+          <span id="nav-text-all">综合全景</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-mono ml-1 font-semibold" id="badge-count-all">0</span>
         </button>
-        <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
           <span>⚡</span>
-          <span id="nav-text-news">快讯</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 font-mono ml-0.5" id="badge-count-news">0</span>
+          <span id="nav-text-news">行业快讯</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono ml-1 font-semibold" id="badge-count-news">0</span>
         </button>
-        <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
           <span>🐦</span>
-          <span id="nav-text-celebrity">领袖</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 font-mono ml-0.5" id="badge-count-celebrity">0</span>
+          <span id="nav-text-celebrity">领袖动态</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono ml-1 font-semibold" id="badge-count-celebrity">0</span>
         </button>
-        <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
           <span>🛠️</span>
-          <span id="nav-text-tools">神器</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 font-mono ml-0.5" id="badge-count-tools">0</span>
+          <span id="nav-text-tools">落地工具</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono ml-1 font-semibold" id="badge-count-tools">0</span>
         </button>
-        <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
           <span>🎬</span>
-          <span id="nav-text-videos">视频</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 font-mono ml-0.5" id="badge-count-videos">0</span>
+          <span id="nav-text-videos">实战视频</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono ml-1 font-semibold" id="badge-count-videos">0</span>
         </button>
-        <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-semibold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/60 hover:bg-purple-100 dark:hover:bg-purple-900/60 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center space-x-1.5 shrink-0">
           <span>💡</span>
-          <span id="nav-text-prompts">提示词</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-600 dark:text-purple-300 font-mono ml-0.5" id="badge-count-prompts">0</span>
+          <span id="nav-text-prompts">提示词库</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono ml-1 font-bold" id="badge-count-prompts">0</span>
         </button>
-        <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-xs font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
+        <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center space-x-1.5 shrink-0">
           <span>📜</span>
-          <span id="nav-text-archive">归档</span>
-          <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 font-mono ml-0.5" id="badge-count-archive">0</span>
+          <span id="nav-text-archive">全量归档</span>
+          <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono ml-1 font-semibold" id="badge-count-archive">0</span>
         </button>
       </div>
 
       <!-- 全站搜索筛选器 -->
-      <div class="relative shrink-0 w-full md:w-56 lg:w-64">
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 rounded-xl pl-3 pr-8 py-1.5 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
-        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-1.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
-        <span class="absolute right-2.5 top-2 text-xs text-slate-500 pointer-events-none">🔍</span>
+      <div class="relative shrink-0 w-full lg:w-80 xl:w-96">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索 (模型/领袖/工具/论文)..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3.5 pr-9 py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
+        <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-7 top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
+        <span class="absolute right-3 top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
     </div>
   </nav>
 
-  <!-- 🎯 主体内容核心区域 (完全适配 Google AdSense Auto Ads Side Rails，让出干净双侧槽位供原生贴边悬浮广告展示) -->
-  <main class="relative w-full max-w-7xl mx-auto px-2 sm:px-6 py-5 space-y-5 min-h-screen">
+  <!-- 🎯 主体内容核心区域 -->
+  <main class="relative w-full max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 min-h-screen">
 
     <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs">
@@ -1081,85 +1084,86 @@
     </div>
 
     <!-- 视图 2: 独立专栏全屏广场模式 (当点击特定 Tab 时激活) -->
-    <div id="view-category" class="hidden space-y-4">
-      <!-- 🌟 领袖大V火爆推文焦点展位 (Spotlight Banner: Tibo/马斯克/奥特曼/黄仁勋/扎克伯格) -->
+    <div id="view-category" class="hidden space-y-5">
+      <!-- 🌟 领袖大V火爆推文焦点展位 (Spotlight Banner) -->
       <div id="celebrity-spotlight-banner" class="hidden"></div>
 
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-100 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      <!-- 专栏标题横幅 -->
+      <div class="bg-gradient-to-r from-slate-100 via-indigo-50/40 to-slate-100 dark:from-slate-900/90 dark:via-indigo-950/20 dark:to-slate-900/90 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 class="font-bold text-lg text-slate-900 dark:text-slate-100" id="cat-view-title">专栏全景浏览</h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5" id="cat-view-desc">查看该分类下的全部深度收录情报</p>
+          <div class="flex items-center space-x-2.5">
+            <span class="w-3 h-3 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/50"></span>
+            <h2 class="font-black text-xl text-slate-900 dark:text-slate-100 tracking-tight" id="cat-view-title">专栏全景浏览</h2>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 pl-5.5" id="cat-view-desc">查看该分类下的全部深度收录情报</p>
         </div>
-        
+        <div id="cat-header-stat" class="flex items-center space-x-2 shrink-0">
+          <span class="px-3 py-1 rounded-xl text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">实时深度监测</span>
+        </div>
+      </div>
+
+      <!-- 专栏次级控制器全宽卡片 (包含模式切换与分类标签，宽度100%舒展，彻底杜绝按钮挤压变形) -->
+      <div id="cat-controls-bar" class="w-full space-y-3">
         <!-- 领袖观点与全网爆帖专属次级控制器容器 -->
-        <div id="social-mode-switcher-wrap" class="hidden flex flex-col sm:flex-row sm:items-center gap-2.5">
-          <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台爆帖) -->
-          <div class="inline-flex p-1 rounded-xl bg-slate-200/90 dark:bg-slate-800/90 border border-slate-300/70 dark:border-slate-700/70 shrink-0">
-            <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1.5 bg-sky-600 text-white shadow-sm shadow-sky-600/30">
-              <span id="txt-social-mode-leader">👤 行业大V领袖</span>
-              <span id="badge-count-leader" class="px-1.5 py-0.2 rounded-full text-[10px] bg-white/20 text-white font-mono">16</span>
+        <div id="social-mode-switcher-wrap" class="hidden flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台热帖) -->
+          <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
+            <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
+              <span id="txt-social-mode-leader">👤 行业领袖观点</span>
+              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">0</span>
             </button>
-            <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5">
-              <span id="txt-social-mode-viral" class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 平台爆帖</span>
-              <span id="badge-count-viral" class="px-1.5 py-0.2 rounded-full text-[10px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">8</span>
+            <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
+              <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 全网热帖</span>
+              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">0</span>
             </button>
           </div>
 
-          <!-- 子筛选 A：大V领袖专属 (全部动态 / 官方企业与品牌 / 行业领袖与大V) -->
-          <div id="celebrity-subfilter" class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-            <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30">全部动态</button>
-            <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🏢 官方企业与品牌</button>
-            <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">👤 行业领袖与大V</button>
+          <!-- 子筛选 A：大V领袖专属 (全部动态 / 官方机构与实验室 / 行业领袖与科学家) -->
+          <div id="celebrity-subfilter" class="flex items-center gap-2 flex-wrap">
+            <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">全部动态</button>
+            <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 官方机构与实验室</button>
+            <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 行业领袖与科学家</button>
           </div>
 
-          <!-- 子筛选 B：24h平台爆帖专属 (全部爆款 / 🚀 极速飙升黑马 / 💡 极客硬核首发 / 𝕏 爆款 / 🧵 Threads 热议) -->
-          <div id="viral-platform-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-            <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all">🔥 全部爆款</button>
-            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">🚀 极速飙升黑马</button>
-            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">💡 极客硬核首发</button>
-            <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">𝕏 爆款</button>
-            <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all">🧵 Threads 热议</button>
+          <!-- 子筛选 B：24h平台热帖专属 -->
+          <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
+            <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 全部热帖</button>
+            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 极速飙升</button>
+            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">💡 极客硬核首发</button>
+            <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">𝕏 平台热榜</button>
+            <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🧵 Threads 讨论</button>
           </div>
         </div>
 
         <!-- 工具专用的场景快速筛选过滤器 -->
-        <div id="tools-subfilter" class="hidden flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white">全部神器</button>
-          <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🟢 免部署在线玩</button>
-          <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🎨 修图设计</button>
-          <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">💻 编程提效</button>
-          <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">💬 AI客户端</button>
-          <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🤖 Agent工作流</button>
+        <div id="tools-subfilter" class="hidden flex items-center gap-2 flex-wrap p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ 工具场景:</span>
+          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">全部工具</button>
+          <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 免部署在线玩</button>
+          <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 修图设计</button>
+          <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 编程提效</button>
+          <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI客户端</button>
+          <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent工作流</button>
         </div>
 
-        <!-- 视频专属快速筛选器 (YouTube 优先大标签 + 长/短形态分流 + 场景主题) -->
-        <div id="videos-subfilter" class="hidden flex flex-col space-y-2 py-1">
-          <!-- 第一梯队：平台与长短形态 (突出 YouTube 核心大标签，细分长短视频) -->
-          <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5">
-            <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-rose-600 text-white shrink-0 shadow-sm shadow-rose-600/30 transition-all flex items-center space-x-1.5">
-              <span>🎬</span>
-              <span>全部精选</span>
+        <!-- 视频专属快速筛选器 -->
+        <div id="videos-subfilter" class="hidden space-y-2 p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center gap-2 flex-wrap">
+            <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shrink-0 shadow-sm whitespace-nowrap flex items-center space-x-1.5">
+              <span>🎬</span><span>全部精选</span>
             </button>
-            <button onclick="filterVideoPlatform('youtube-long')" id="video-plat-yt-long" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="YouTube 16:9 深度系统长视频">
-              <span>🖥️</span>
-              <span>YouTube 横屏长视频</span>
+            <button onclick="filterVideoPlatform('youtube-long')" id="video-plat-yt-long" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
+              <span>🖥️</span><span>YouTube 横屏长视频</span>
             </button>
-            <button onclick="filterVideoPlatform('youtube-shorts')" id="video-plat-yt-shorts" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="YouTube 9:16 竖屏精选短视频">
-              <span>📱</span>
-              <span>YouTube Shorts 短视频</span>
+            <button onclick="filterVideoPlatform('youtube-shorts')" id="video-plat-yt-shorts" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
+              <span>📱</span><span>YouTube Shorts 短视频</span>
             </button>
-            <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0 transition-all flex items-center space-x-1.5" title="TikTok 9:16 爆款短视频">
-              <span>🎵</span>
-              <span>TikTok 爆款短视频</span>
+            <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
+              <span>🎵</span><span>TikTok 爆款短视频</span>
             </button>
           </div>
-
-          <!-- 第二梯队：主题场景与教学经验细分 -->
-          <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5 text-xs">
-            <span class="text-[11px] text-slate-400 dark:text-slate-500 shrink-0 font-medium px-1 flex items-center space-x-1">
-              <span>🎯</span>
-              <span>主题:</span>
-            </span>
+          <div class="flex items-center gap-1.5 flex-wrap pt-1 border-t border-slate-100 dark:border-slate-800 text-xs">
+            <span class="text-xs text-slate-400 font-medium px-1">🎯 主题:</span>
             <button onclick="filterVideoSub('all')" id="video-sub-all" class="video-sub-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white shrink-0">全部主题</button>
             <button onclick="filterVideoSub('viral')" id="video-sub-viral" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔥 现象级爆款</button>
             <button onclick="filterVideoSub('tutorial')" id="video-sub-tutorial" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎓 系统实操课</button>
@@ -1169,40 +1173,39 @@
         </div>
 
         <!-- 提示词专属高阶筛选体系 (包含代际切换与核心应用场景) -->
-        <div id="prompts-subfilter" class="hidden space-y-2 py-1">
-          <!-- 第一排：代际模式与版本排序切换 -->
-          <div class="flex items-center justify-between flex-wrap gap-2 pb-1.5 border-b border-slate-200 dark:border-slate-800/60">
-            <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar">
-              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1">
+        <div id="prompts-subfilter" class="hidden space-y-2 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-slate-200 dark:border-slate-800/60">
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1">
                 <span>⚡</span><span id="lbl-prompt-gen">模型版本:</span>
               </span>
-              <button onclick="switchPromptGeneration('sota')" id="prompt-gen-sota" class="prompt-gen-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm shadow-purple-600/30 flex items-center gap-1 shrink-0">
+              <button onclick="switchPromptGeneration('sota')" id="prompt-gen-sota" class="prompt-gen-btn active px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm flex items-center gap-1 shrink-0 whitespace-nowrap">
                 <span>⚡</span><span id="txt-prompt-gen-sota">当前最新 SOTA 旗舰 (版本优先)</span>
               </button>
-              <button onclick="switchPromptGeneration('legacy')" id="prompt-gen-legacy" class="prompt-gen-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0">
+              <button onclick="switchPromptGeneration('legacy')" id="prompt-gen-legacy" class="prompt-gen-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0 whitespace-nowrap">
                 <span>📦</span><span id="txt-prompt-gen-legacy">历史模型归档库 (Legacy Archive)</span>
               </button>
             </div>
-            <div class="text-[11px] text-slate-400 dark:text-slate-500 font-mono hidden md:flex items-center gap-1">
+            <div class="text-xs text-slate-400 dark:text-slate-500 font-mono hidden md:flex items-center gap-1">
               <span>👑 自动按前沿大模型代际能力权重降序排列</span>
             </div>
           </div>
 
-          <!-- 第二排：高频生活与生产力场景分类 -->
-          <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-0.5">
-            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1 px-1">
+          <div class="flex items-center gap-1.5 flex-wrap pt-1">
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1 px-1">
               <span>🎯</span><span id="lbl-prompt-scenario">场景:</span>
             </span>
-            <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-purple-600 text-white shrink-0 shadow-sm shadow-purple-600/30">全部场景 / All</button>
-            <button onclick="filterPromptCategory('code')" id="prompt-cat-code" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💻 编程开发</button>
-            <button onclick="filterPromptCategory('novel')" id="prompt-cat-novel" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">✍️ 短剧小说</button>
-            <button onclick="filterPromptCategory('analysis')" id="prompt-cat-analysis" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">📊 数据分析</button>
-            <button onclick="filterPromptCategory('report')" id="prompt-cat-report" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">📑 商业报告</button>
-            <button onclick="filterPromptCategory('travel')" id="prompt-cat-travel" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">✈️ 生活旅行</button>
-            <button onclick="filterPromptCategory('image')" id="prompt-cat-image" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎨 灵感生图</button>
-            <button onclick="filterPromptCategory('video')" id="prompt-cat-video" class="prompt-cat-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎬 动态视效</button>
+            <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-3 py-1 rounded-lg text-xs sm:text-sm font-bold bg-purple-600 text-white shrink-0 shadow-sm whitespace-nowrap">全部场景 / All</button>
+            <button onclick="filterPromptCategory('code')" id="prompt-cat-code" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">💻 编程开发</button>
+            <button onclick="filterPromptCategory('novel')" id="prompt-cat-novel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✍️ 短剧小说</button>
+            <button onclick="filterPromptCategory('analysis')" id="prompt-cat-analysis" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📊 数据分析</button>
+            <button onclick="filterPromptCategory('report')" id="prompt-cat-report" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📑 商业报告</button>
+            <button onclick="filterPromptCategory('travel')" id="prompt-cat-travel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✈️ 生活旅行</button>
+            <button onclick="filterPromptCategory('image')" id="prompt-cat-image" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎨 灵感生图</button>
+            <button onclick="filterPromptCategory('video')" id="prompt-cat-video" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎬 动态视效</button>
           </div>
         </div>
+      </div>
       </div>
 
       <!-- 创作者专区导引栏 (Top Creators Rail) -->
@@ -1708,7 +1711,7 @@
 
     const I18N = {
       zh: {
-        pageTitle: "AI 资讯雷达 | 全景 AI 动态与场景落地神器站",
+        pageTitle: "AI 资讯雷达 | 全景 AI 动态与场景落地工具站",
         headerTitle: "AI 资讯雷达",
         subtitle: "全网热点 · 领袖推特 · 视频实战 · 场景工具 · 提示词库",
         refreshBtn: "刷新",
@@ -1735,22 +1738,22 @@
         celebViewPost: "查看热帖 ↗",
         celebNoMatch: "暂无该平台动态",
         redditCommunity: "Reddit 极客社群",
-        toolsTitle: "🛠️ 场景落地·实用神器",
-        allToolsLink: "全部神器 →",
+        toolsTitle: "🛠️ 场景落地·实用工具",
+        allToolsLink: "全部工具 →",
         toolsNoMatch: "暂无落地工具",
         tryTool: "立即体验 ↗",
         toolToday: "今日",
         videosTitle: "🎬 实战视频·演示",
         allVideosLink: "全部视频 →",
         videosNoMatch: "暂无实战视频",
-        promptsTitle: "💡 提示词库·咒语",
-        allPromptsLink: "全部咒语 →",
+        promptsTitle: "💡 提示词库·实战模版",
+        allPromptsLink: "全部提示词 →",
         promptsNoMatch: "暂无符合条件的提示词",
-        promptBadge: "💡 高阶提示词神咒",
+        promptBadge: "💡 核心提示词模版",
         promptModelPrefix: "🎯 推荐: ",
         promptTempPrefix: "⚙️ ",
         copyPrompt: "一键复制提示词 📋",
-        copySuccess: "Prompt 咒语已复制到剪贴板！",
+        copySuccess: "Prompt 提示词已复制到剪贴板！",
         promptGenSota: "当前最新 SOTA 旗舰 (版本优先)",
         promptGenLegacy: "历史模型归档库 (Legacy Archive)",
         promptScenarioAll: "全部场景 / All",
@@ -1780,15 +1783,15 @@
         celebFilterPerson: "👤 行业领袖与大V",
         socialModeLeader: "👤 行业大V领袖",
         socialModeViral: "🔥 24h 平台爆帖",
-        viralFilterAll: "🔥 全部爆款",
-        viralFilterX: "𝕏 (Twitter) 爆款",
+        viralFilterAll: "🔥 全部热门",
+        viralFilterX: "𝕏 (Twitter) 热门",
         viralFilterThreads: "🧵 Threads 热议",
         viralNoMatch: "暂无符合条件的 24 小时平台爆帖",
         viralSectionTitle: "🔥 24小时全网平台爆帖 (𝕏 & Threads)",
         viralSectionDesc: "实时感知过去 24 小时内阅读量破万、点赞飙升的全球 AI 极客、开发者与前沿实验原生热帖",
         viralSurgeTag: "⚡ 24h 飙升",
         viewOnThreads: "直达 Threads 原帖 / 互动",
-        toolFilterAll: "全部神器",
+        toolFilterAll: "全部工具",
         toolFilterWeb: "🟢 免部署在线玩",
         toolFilterDesign: "🎨 修图设计",
         toolFilterCode: "💻 编程提效",
@@ -1813,7 +1816,7 @@
         videoSubInsight: "💡 独家经验",
         videoSubTips: "⚡ 实操技巧",
         videoSubMastery: "🤖 模型技巧",
-        promptCatAll: "全部咒语",
+        promptCatAll: "全部提示词",
         promptCatCoding: "💻 编码架构",
         promptCatImage: "🎨 图像生成",
         promptCatVideo: "🎥 视频生成",
@@ -1857,13 +1860,13 @@
         expandCatNewsArchive: "点击展开历史资讯库",
         collapseCatNewsArchive: "收起历史资讯库 ↑",
         archiveViewTitle: "历史资讯全量归档库",
-        archiveViewDesc: "全量沉淀超出24小时的历史快讯、权威领袖观点与落地神器，支持即时分类检索与跨页回溯",
+        archiveViewDesc: "全量沉淀超出24小时的历史快讯、权威领袖观点与落地工具，支持即时分类检索与跨页回溯",
         archiveSearchPlaceholder: "在历史归档中检索...",
         tabs: {
           all: "综合",
           news: "快讯",
           celebrity: "领袖",
-          tools: "神器",
+          tools: "工具",
           videos: "视频",
           prompts: "提示词",
           archive: "归档"
@@ -2857,9 +2860,9 @@
         const catTitles = {
           news: currentLang === 'zh' ? '⚡ 行业突发快讯专栏' : '⚡ Breaking AI News',
           celebrity: currentLang === 'zh' ? '🐦 领袖观点与社交风向' : '🐦 Leader Voices & Social Radar',
-          tools: currentLang === 'zh' ? '🛠️ 场景落地·实用神器专栏' : '🛠️ Applied AI Tools Directory',
+          tools: currentLang === 'zh' ? '🛠️ 场景落地·实用工具专栏' : '🛠️ Applied AI Tools Directory',
           videos: currentLang === 'zh' ? '🎬 实战视频·深度演示专栏' : '🎬 Hands-on Video Tutorials',
-          prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战咒语' : '💡 Prompt Bank · SOTA AI System Prompts',
+          prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战模版' : '💡 Prompt Bank · SOTA AI System Prompts',
           archive: currentLang === 'zh' ? '📜 历史资讯全量归档库' : '📜 Historical Intelligence Archive'
         };
         if (titleEl) titleEl.textContent = catTitles[tab] || t.tabs[tab] || tab;
@@ -2965,7 +2968,7 @@
           if (arrow) arrow.textContent = '▼';
           const defaultLabel = sectionKey === 'news' ? (isZh ? `查看历史归档 (已收录 ${count} 条)` : `View Historical News (${count} items)`)
             : sectionKey === 'celebrity' ? (isZh ? `查看历史大V发言 (已收录 ${count} 条)` : `View Historical Voices (${count} items)`)
-            : sectionKey === 'tools' ? (isZh ? `查看历史落地神器 (已收录 ${count} 条)` : `View Historical Tools (${count} items)`)
+            : sectionKey === 'tools' ? (isZh ? `查看历史落地工具 (已收录 ${count} 条)` : `View Historical Tools (${count} items)`)
             : sectionKey === 'videos' ? (isZh ? `查看历史实战视频 (已收录 ${count} 条)` : `View Historical Videos (${count} items)`)
             : (isZh ? `查看历史提示词 (已收录 ${count} 条)` : `View Historical Prompts (${count} items)`);
           if (txt) txt.textContent = defaultLabel + ' ↓';
@@ -4097,6 +4100,11 @@
       const isFirstPage = celebritySpotlightPage === 0;
       const isLastPage = celebritySpotlightPage >= totalPages - 1;
 
+      // 动态网格布局：单张卡片居中英雄展示，两张双列，三张及以上三列
+      const gridClass = displayCards.length === 1
+        ? 'max-w-3xl mx-auto'
+        : (displayCards.length === 2 ? 'grid grid-cols-1 md:grid-cols-2 gap-5 max-w-5xl mx-auto' : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5');
+
       bannerEl.className = "mb-6 block";
       bannerEl.innerHTML = `
         <div class="glass-panel relative rounded-3xl p-4 sm:p-5 border-2 border-amber-500/40 dark:border-amber-500/30 bg-gradient-to-br from-amber-50/70 via-slate-50 to-indigo-50/60 dark:from-slate-900/95 dark:via-indigo-950/40 dark:to-slate-900/95 shadow-2xl shadow-amber-500/10 transition-all">
@@ -4105,7 +4113,7 @@
             <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
               <span class="w-3 h-3 rounded-full bg-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></span>
               <h3 class="font-black text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center space-x-1.5">
-                <span class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 bg-clip-text text-transparent">⚡ 领袖头条 · 24小时重点爆款聚焦</span>
+                <span class="bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 bg-clip-text text-transparent">${isZh ? '⚡ 领袖焦点 · 24小时重点动态聚焦' : '⚡ Leader Spotlight · 24h Highlights'}</span>
               </h3>
               <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30 shrink-0">
                 🔥 ${isZh ? `今日共 ${cards.length} 篇` : `${cards.length} Total`}
@@ -4126,8 +4134,8 @@
             </div>
           </div>
 
-          <!-- 重点爆款卡片 6 卡片网格阵列 (3列 × 2行自适应) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- 重点动态卡片阵列 (单卡居中英雄位，双卡双列，多卡三列) -->
+          <div class="${gridClass}">
             ${displayCards.map(it => renderSpotlightCard(it)).join('')}
           </div>
 
@@ -4258,338 +4266,55 @@
     }
 
     // ==========================================
-    // 领袖观点·社交 紧凑型双列交错时间轴渲染 (Compact Cyber Chrono Timeline)
-    // 告别单行50%留白虚掷，左右双列紧凑向上补位，消除巨大间隙
-    // ==========================================
-    // ==========================================
-    // 领袖观点·社交 时空聚类热度按比例时间轴渲染 (Chrono-Cluster Heat Timeline)
-    // 根据发布时间差智能聚类：突发连击并排双峰，独立发声优雅错落，长间隔呈现时空静默桥
+    // 领袖观点·社交 24H 实时动态多列网格流 (Leader Voices Multi-Column Stream)
+    // 自适应 1/2/3 列，无缝铺满宽屏画布，彻底消除单列狭窄与单边大面积留白
     // ==========================================
     function renderCelebrityTimeline(list) {
       const t = I18N[currentLang];
       if (!list || list.length === 0) {
-        return `<div class="text-slate-500 text-center py-12">${t.celebNoMatch || '暂无该分类动态'}</div>`;
+        return `<div class="text-slate-500 text-center py-16 col-span-full">${t.celebNoMatch || '暂无该分类动态'}</div>`;
       }
 
       const isZh = currentLang === 'zh';
       const count = list.length;
-      let timelineTitle = isZh ? '全球 AI 领袖与官方动态 · 时空流动时间轴' : 'Global AI Dynamics · Chrono Flow Timeline';
+      let timelineTitle = isZh ? '全球 AI 领袖与官方动态流' : 'Global AI Leader & Official Feed';
       if (socialPlatformFilter === 'company') {
-        timelineTitle = isZh ? '全球 AI 官方企业与品牌 · 时空流动时间轴' : 'Global AI Companies & Official Labs Timeline';
+        timelineTitle = isZh ? '全球 AI 官方企业与机构动态' : 'Global AI Companies & Labs Feed';
       } else if (socialPlatformFilter === 'person') {
-        timelineTitle = isZh ? '全球 AI 行业领袖与大V · 时空流动时间轴' : 'Global AI Leaders & Researchers Timeline';
+        timelineTitle = isZh ? '全球 AI 行业领袖与大V动态' : 'Global AI Leaders & Researchers Feed';
       }
-
-      // 1. 24小时时段舆论热力统计 (Hourly Heat Distribution)
-      const now = new Date();
-      const hourlySlots = new Array(24).fill(0);
-      let maxHourlyCount = 1;
-      let peakHourStr = '';
-      let maxCount = 0;
-      let longestGapMin = 0;
-
-      list.forEach(item => {
-        if (!item.raw_published_at) return;
-        const d = new Date(item.raw_published_at);
-        const diffHours = Math.floor((now - d) / (1000 * 60 * 60));
-        if (diffHours >= 0 && diffHours < 24) {
-          const slot = 23 - diffHours;
-          hourlySlots[slot]++;
-          if (hourlySlots[slot] > maxHourlyCount) {
-            maxHourlyCount = hourlySlots[slot];
-          }
-        }
-      });
-
-      // 2. 动态时空聚类算法 (Chrono-Clustering Engine)
-      const clusters = [];
-      let curCluster = [];
-
-      for (let i = 0; i < list.length; i++) {
-        const item = list[i];
-        const curTime = item.raw_published_at ? new Date(item.raw_published_at).getTime() : 0;
-
-        if (curCluster.length === 0) {
-          curCluster.push({ item, idx: i, curTime });
-        } else {
-          const prevTime = curCluster[curCluster.length - 1].curTime;
-          const diffMin = Math.max(0, Math.round((prevTime - curTime) / 60000));
-          if (diffMin > longestGapMin) longestGapMin = diffMin;
-
-          if (diffMin <= 30) {
-            curCluster.push({ item, idx: i, curTime, diffMinFromPrev: diffMin });
-          } else {
-            clusters.push({
-              items: curCluster,
-              timeGapToNext: diffMin
-            });
-            curCluster = [{ item, idx: i, curTime }];
-          }
-        }
-      }
-      if (curCluster.length > 0) {
-        clusters.push({ items: curCluster, timeGapToNext: 0 });
-      }
-
-      for (let s = 0; s < 24; s++) {
-        if (hourlySlots[s] > maxCount) {
-          maxCount = hourlySlots[s];
-          const h = (now.getHours() - (23 - s) + 24) % 24;
-          peakHourStr = `${String(h).padStart(2, '0')}:00 (${maxCount} ${isZh ? '条密集连击' : 'posts'})`;
-        }
-      }
-      if (!peakHourStr) {
-        peakHourStr = isZh ? '平稳流淌' : 'Evenly Paced';
-      }
-
-      const longestGapHours = (longestGapMin / 60).toFixed(1);
-
-      // 3. 顶部 24小时 AI 舆论热度脉冲图渲染
-      const heatBarometerHtml = `
-        <div class="glass-card rounded-2xl p-3.5 sm:p-4 mb-6 border border-sky-500/20 bg-gradient-to-r from-slate-900/90 via-slate-900/60 to-purple-950/20 shadow-lg">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-2.5 border-b border-slate-200/40 dark:border-slate-800/60">
-            <div class="flex items-center space-x-2">
-              <span class="text-base animate-pulse">🔥</span>
-              <span class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">
-                ${isZh ? '24小时大V与官方 AI 舆论热度态势' : '24H AI Social Heatmap & Pulse'}
-              </span>
-              <span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-400 border border-rose-500/20">${isZh ? '时空聚类感知' : 'Chrono Clustered'}</span>
-            </div>
-            <div class="flex items-center gap-2 sm:gap-3 text-[11px] font-mono flex-wrap">
-              <span class="text-slate-400">${isZh ? '24H 动态' : '24H Posts'}: <strong class="text-sky-400 font-bold notranslate">${count}</strong></span>
-              <span class="text-slate-500">|</span>
-              <span class="text-slate-400">${isZh ? '爆发峰值' : 'Peak Wave'}: <strong class="text-rose-400 font-bold notranslate">${peakHourStr}</strong></span>
-              <span class="text-slate-500">|</span>
-              <span class="text-slate-400">${isZh ? '最长静默' : 'Max Lull'}: <strong class="text-amber-400 font-bold notranslate">${longestGapHours}h</strong></span>
-            </div>
-          </div>
-
-          <!-- 24小时脉冲直方图 -->
-          <div class="pt-3 pb-1">
-            <div class="flex items-end justify-between h-10 gap-0.5 sm:gap-1 px-1">
-              ${hourlySlots.map((cnt, idx) => {
-                const h = (now.getHours() - (23 - idx) + 24) % 24;
-                const hStr = `${String(h).padStart(2, '0')}:00`;
-                let heightPercent = cnt === 0 ? 8 : Math.max(20, Math.round((cnt / maxHourlyCount) * 100));
-                let barBg = 'bg-slate-800/60 hover:bg-slate-700';
-                if (cnt >= 3) {
-                  barBg = 'bg-gradient-to-t from-rose-600 to-amber-400 shadow-[0_0_8px_rgba(244,63,94,0.6)]';
-                } else if (cnt === 2) {
-                  barBg = 'bg-gradient-to-t from-indigo-600 to-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.4)]';
-                } else if (cnt === 1) {
-                  barBg = 'bg-sky-500/60 hover:bg-sky-400';
-                }
-                return `
-                  <div class="flex-1 flex flex-col items-center group relative cursor-pointer" title="${hStr}: ${cnt} ${isZh ? '条动态' : 'posts'}">
-                    <div class="w-full ${barBg} rounded-t transition-all group-hover:scale-y-110" style="height: ${heightPercent}%;"></div>
-                  </div>
-                `;
-              }).join('')}
-            </div>
-            <div class="flex items-center justify-between text-[9px] font-mono text-slate-500 pt-1 px-1 select-none">
-              <span>${isZh ? '24小时前' : '24h ago'}</span>
-              <span>${isZh ? '12小时前' : '12h ago'}</span>
-              <span>${isZh ? '当前' : 'Now'}</span>
-            </div>
-          </div>
-
-          <!-- 图例与时间差比例提示 -->
-          <div class="flex items-center justify-between pt-2 mt-1 border-t border-slate-200/30 dark:border-slate-800/40 text-[10px] text-slate-400 font-mono">
-            <div class="flex items-center space-x-3 flex-wrap gap-y-1">
-              <span class="flex items-center space-x-1"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span><span>${isZh ? '🔥 密集爆发 (≤30m)' : '🔥 Burst (≤30m)'}</span></span>
-              <span class="flex items-center space-x-1"><span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span><span>${isZh ? '⚡ 活跃热议 (30-90m)' : '⚡ Active (30-90m)'}</span></span>
-              <span class="flex items-center space-x-1"><span class="w-1.5 h-1.5 rounded-full bg-slate-600"></span><span>${isZh ? '🌙 静默过渡 (>2.5h)' : '🌙 Quiet Lull (>2.5h)'}</span></span>
-            </div>
-            <span class="hidden sm:inline text-[9px] text-slate-500">${isZh ? '上下左右排布按推文发布时间差等比自适应' : 'Spacing scaled proportionally by tweet time intervals'}</span>
-          </div>
-        </div>
-      `;
-
-      // 4. 渲染时空聚类集群流 (Chrono-Cluster Stream)
-      let soloToggle = 0;
-
-      const clustersHtml = clusters.map((cluster, cIdx) => {
-        const isDual = cluster.items.length === 2;
-        let clusterBody = '';
-
-        if (cluster.items.length === 1) {
-          const { item } = cluster.items[0];
-          const side = soloToggle % 2 === 0 ? 'left' : 'right';
-          soloToggle++;
-          const isLeft = side === 'left';
-          const isCo = isCompanyOrBrand(item);
-          const nodeIcon = isCo ? '🏢' : '𝕏';
-          const nodeBorder = isCo ? 'border-amber-400 text-amber-400' : 'border-sky-400 text-sky-400';
-          const cardHtml = renderCelebrityCard(item, true, !isLeft);
-
-          clusterBody = `
-            <div class="relative w-full flex ${isLeft ? 'justify-start' : 'justify-end'} items-center">
-              <div class="w-full lg:w-[calc(50%-24px)] relative group">
-                <div class="hidden lg:flex absolute ${isLeft ? '-right-[31px]' : '-left-[31px]'} top-6 w-6 h-6 rounded-full bg-slate-900 border-2 ${nodeBorder} items-center justify-center font-bold text-[10px] shadow-lg z-20 select-none group-hover:scale-110 transition-transform">
-                  ${nodeIcon}
-                </div>
-                <div class="hidden lg:block absolute ${isLeft ? '-right-[24px]' : '-left-[24px]'} top-[35px] w-[24px] h-[2px] ${isLeft ? 'bg-gradient-to-r from-sky-500/40 to-sky-500' : 'bg-gradient-to-l from-sky-500/40 to-sky-500'}"></div>
-                ${cardHtml}
-              </div>
-            </div>
-          `;
-        } else if (isDual) {
-          const itemLeft = cluster.items[0];
-          const itemRight = cluster.items[1];
-          const diffMins = itemRight.diffMinFromPrev || 2;
-          const isCoL = isCompanyOrBrand(itemLeft.item);
-          const isCoR = isCompanyOrBrand(itemRight.item);
-          const cardHtmlL = renderCelebrityCard(itemLeft.item, true, false);
-          const cardHtmlR = renderCelebrityCard(itemRight.item, true, true);
-
-          clusterBody = `
-            <div class="relative w-full">
-              <div class="hidden lg:flex items-center justify-center mb-2">
-                <div class="px-3 py-0.5 rounded-full bg-rose-500/15 border border-rose-500/40 text-rose-400 text-[10px] font-mono shadow-sm flex items-center space-x-1.5 animate-pulse z-20 backdrop-blur-md">
-                  <span>🔥</span>
-                  <span>${isZh ? `密集同频 · ${diffMins}分钟内连发` : `Dual Wave · Within ${diffMins}m`}</span>
-                </div>
-              </div>
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 items-start">
-                <div class="relative group">
-                  <div class="hidden lg:flex absolute -right-[23px] top-6 w-6 h-6 rounded-full bg-slate-900 border-2 ${isCoL ? 'border-amber-400 text-amber-400' : 'border-rose-400 text-rose-400'} items-center justify-center font-bold text-[10px] shadow-lg z-20 select-none">
-                    ${isCoL ? '🏢' : '𝕏'}
-                  </div>
-                  <div class="hidden lg:block absolute -right-[17px] top-[35px] w-[17px] h-[2px] bg-gradient-to-r from-rose-500/40 to-rose-500"></div>
-                  ${cardHtmlL}
-                </div>
-                <div class="relative group">
-                  <div class="hidden lg:flex absolute -left-[23px] top-6 w-6 h-6 rounded-full bg-slate-900 border-2 ${isCoR ? 'border-amber-400 text-amber-400' : 'border-rose-400 text-rose-400'} items-center justify-center font-bold text-[10px] shadow-lg z-20 select-none">
-                    ${isCoR ? '🏢' : '𝕏'}
-                  </div>
-                  <div class="hidden lg:block absolute -left-[17px] top-[35px] w-[17px] h-[2px] bg-gradient-to-l from-rose-500/40 to-rose-500"></div>
-                  ${cardHtmlR}
-                </div>
-              </div>
-            </div>
-          `;
-        } else {
-          const countClustered = cluster.items.length;
-          clusterBody = `
-            <div class="relative w-full">
-              <div class="flex items-center justify-center mb-3">
-                <div class="px-4 py-1 rounded-full bg-gradient-to-r from-rose-500/20 via-amber-500/20 to-purple-500/20 border border-rose-500/50 text-rose-300 text-xs font-mono shadow-md flex items-center space-x-2 z-20">
-                  <span class="animate-bounce">⚡</span>
-                  <span class="font-bold">${isZh ? `舆论爆发峰值 · ${countClustered}篇密集扎堆联动` : `Peak Buzz Wave · ${countClustered} Posts Clustered`}</span>
-                </div>
-              </div>
-              <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 items-start">
-                ${cluster.items.map((it, idxInC) => {
-                  const isLeft = idxInC % 2 === 0;
-                  const isCo = isCompanyOrBrand(it.item);
-                  return `
-                    <div class="relative group">
-                      <div class="hidden lg:flex absolute ${isLeft ? '-right-[20px]' : '-left-[20px]'} top-6 w-5 h-5 rounded-full bg-slate-900 border-2 ${isCo ? 'border-amber-400 text-amber-400' : 'border-rose-400 text-rose-400'} items-center justify-center font-bold text-[9px] shadow z-20 select-none">
-                        ${isCo ? '🏢' : '𝕏'}
-                      </div>
-                      ${renderCelebrityCard(it.item, true, !isLeft)}
-                    </div>
-                  `;
-                }).join('')}
-              </div>
-            </div>
-          `;
-        }
-
-        // 5. 群落之间的按比例时间差流转过渡带 (Proportional Time Gap / Quiet Bridge)
-        let gapHtml = '';
-        const gapMin = cluster.timeGapToNext;
-        if (gapMin >= 150) {
-          const hours = (gapMin / 60).toFixed(1);
-          gapHtml = `
-            <div class="my-8 sm:my-12 flex flex-col items-center justify-center relative select-none">
-              <div class="h-10 w-[2px] bg-gradient-to-b from-sky-500/70 via-purple-500/40 to-slate-800"></div>
-              <div class="px-3.5 py-1 -my-2 rounded-full bg-slate-900/95 border border-purple-500/40 text-[11px] font-mono text-purple-300 shadow-lg shadow-purple-500/10 flex items-center space-x-2 backdrop-blur-md z-10">
-                <span>🌙</span>
-                <span>${isZh ? `跨越 ${hours} 小时 · 讨论平稳静默期` : `Quiet Period · ${hours}h lull (No new posts)`}</span>
-              </div>
-              <div class="h-8 w-[2px] bg-gradient-to-b from-slate-800 via-indigo-500/40 to-sky-500/70"></div>
-            </div>
-          `;
-        } else if (gapMin >= 60) {
-          const hours = (gapMin / 60).toFixed(1);
-          gapHtml = `
-            <div class="my-5 sm:my-7 flex items-center justify-center relative select-none">
-              <div class="h-8 w-[2px] bg-gradient-to-b from-sky-500/50 to-indigo-500/50"></div>
-              <div class="absolute px-2.5 py-0.5 rounded-full bg-slate-900/90 border border-slate-700/80 text-[10px] font-mono text-slate-400 z-10">
-                ⏱️ ${isZh ? `间隔 ${hours} 小时` : `${hours}h gap`}
-              </div>
-            </div>
-          `;
-        } else if (gapMin > 0) {
-          gapHtml = `<div class="h-4 sm:h-6"></div>`;
-        }
-
-        return `
-          <div class="chrono-cluster-block relative">
-            ${clusterBody}
-            ${gapHtml}
-          </div>
-        `;
-      }).join('');
 
       return `
-        <div class="cyber-timeline-wrapper relative max-w-5xl mx-auto py-2 px-1 sm:px-3">
-          <!-- 顶部时间线前导提示与统计 -->
-          <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-200 dark:border-slate-800/80">
-            <div class="flex items-center space-x-2.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] animate-pulse"></span>
-              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-                <span>⚡</span>
+        <div class="space-y-4">
+          <!-- 动态流头部统计条 -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 font-mono">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
+              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <span>${timelineTitle}</span>
-                <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '条动态' : 'Posts'}</span>
+                <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '篇实时动态' : 'Posts'}</span>
               </h3>
             </div>
-            <span class="text-xs text-slate-400 font-mono hidden sm:inline">⏱️ ${isZh ? '时空聚类热度轴' : 'Chrono Heat Timeline'}</span>
+            <span class="text-slate-400 hidden sm:inline font-sans">${isZh ? '过去 24 小时高频追踪 · 涵盖 OpenAI · Anthropic · Google · xAI · DeepSeek 等核心领袖' : 'Tracking OpenAI, Anthropic, Google, xAI, DeepSeek leaders within 24h'}</span>
           </div>
 
-          <!-- 24小时 AI 舆论热度脉冲图 -->
-          ${heatBarometerHtml}
-
-          <!-- 移动端视图 (< 1024px): 经典单侧左侧时间轴，继承聚类热度与静默桥 -->
-          <div class="lg:hidden relative pl-8 space-y-4">
-            <div class="absolute left-3.5 top-2 bottom-4 w-[2px] bg-gradient-to-b from-sky-500 via-indigo-500 to-slate-800 rounded-full z-0"></div>
-            ${list.map((item, idx) => {
-              const isCo = isCompanyOrBrand(item);
-              const nodeIcon = isCo ? '🏢' : '𝕏';
-              return `
-                <div class="timeline-item-anim relative">
-                  <div class="absolute -left-8 top-4 w-6 h-6 rounded-full bg-slate-900 border-2 ${isCo ? 'border-amber-400 text-amber-400' : 'border-sky-400 text-sky-400'} flex items-center justify-center font-bold text-[10px] shadow z-10 select-none">
-                    ${nodeIcon}
-                  </div>
-                  ${renderCelebrityCard(item, true, false)}
-                </div>
-              `;
-            }).join('')}
+          <!-- 全宽多列网格卡片流 (自适应 1/2/3 列，无缝铺满宽屏，彻底告别单边留白) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            ${list.map(it => renderCelebrityCard(it)).join('')}
           </div>
 
-          <!-- 桌面端视图 (>= 1024px): 时空聚类按比例左右上下排布时间轴 (中央发光中轴纵贯) -->
-          <div class="hidden lg:block relative">
-            <!-- 中央纵贯发光时间轴线 -->
-            <div class="absolute left-1/2 top-4 bottom-4 -translate-x-1/2 w-[2px] bg-gradient-to-b from-sky-500/80 via-indigo-500/60 to-purple-500/40 rounded-full z-0 pointer-events-none"></div>
-
-            <div class="flex flex-col">
-              ${clustersHtml}
-            </div>
-          </div>
-
-          <!-- 底部历史大V归档直通车 -->
-          <div class="mt-12 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
-            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
-              <div class="flex items-center space-x-2.5">
+          <!-- 底部历史动态归档入口 -->
+          <div class="mt-8 pt-5 border-t border-slate-200/60 dark:border-slate-800/80">
+            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+              <div class="flex items-center space-x-3">
                 <span class="text-lg p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
                 <div class="text-left">
-                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的历史大V推文与言论' : 'Archived Leader Posts Older Than 24 Hours'}</span>
+                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的历史领袖推文与言论' : 'Archived Leader Posts Older Than 24 Hours'}</span>
                   <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更早观点沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical statements preserved in master archive'}</span>
                 </div>
               </div>
               <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
-                <span>${isZh ? '查看历史大V与爆帖归档' : 'View Historical Archive'}</span>
+                <span>${isZh ? '查看历史领袖归档' : 'View Historical Archive'}</span>
                 <span>→</span>
               </span>
             </button>
@@ -5569,7 +5294,7 @@
         arcContTools.dataset.count = historyTools.length;
         arcContTools.innerHTML = historyTools.map(renderToolCard).join('');
         arcTxtTools.textContent = historyArchiveOpen.tools
-          ? (isZh ? '收起历史神器 ↑' : 'Collapse Archive ↑')
+          ? (isZh ? '收起历史工具 ↑' : 'Collapse Archive ↑')
           : (isZh ? `查看历史落地神器 (已收录 ${historyTools.length} 条) ↓` : `View Historical Tools (${historyTools.length} items) ↓`);
       } else {
         arcSecTools.classList.add('hidden');
@@ -5733,8 +5458,8 @@
       if (tab === 'news') {
         const fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
         if (searchQuery) {
-          container.className = "grid grid-cols-1 md:grid-cols-2 gap-4";
-          container.innerHTML = fullList.length > 0 ? fullList.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-2">${t.newsNoMatch}</div>`;
+          container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
+          container.innerHTML = fullList.length > 0 ? fullList.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.newsNoMatch}</div>`;
         } else {
           const recentNews = fullList.filter(it => isWithin24Hours(it.raw_published_at));
           const historyNews = fullList.filter(it => !isWithin24Hours(it.raw_published_at));
@@ -5746,8 +5471,8 @@
                 <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>${isZh ? '过去 24 小时最新突发快讯' : 'Latest 24-Hour Breaking News'} (${recentNews.length})</span>
                 <span>🕒 实时感知</span>
               </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-2">${t.noRecentNews}</div>`}
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-full">${t.noRecentNews}</div>`}
               </div>
             </div>
             <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
@@ -5844,8 +5569,8 @@
         if (toolScenarioFilter !== 'all') {
           list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
         }
-        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4";
-        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-4">${t.toolsNoMatch}</div>`;
+        container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
+        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;
       } else if (tab === 'videos') {
         const isZh = currentLang === 'zh';
         let rawList = (cachedData.grouped?.videos || cachedData.videos || []).filter(it => !it.is_prompt);
@@ -6058,7 +5783,7 @@
           return timeB - timeA;
         });
 
-        container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4";
+        container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
         container.innerHTML = list.length > 0
           ? list.map(renderPromptCard).join('')
           : `<div class="text-slate-500 text-center py-12 col-span-3 text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
@@ -6815,7 +6540,7 @@
 
       if (!liveList || liveList.length === 0) {
         return `
-          <div class="text-center py-16 px-4 bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 max-w-2xl mx-auto">
+          <div class="text-center py-16 px-4 bg-slate-50/50 dark:bg-slate-900/30 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800 w-full">
             <span class="text-4xl block mb-2">🔥</span>
             <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm mb-1">${t.viralNoMatch || '暂无符合条件的平台爆帖'}</h3>
             <p class="text-xs text-slate-500 dark:text-slate-400">${isZh ? '过去 24 小时未探测到该分类下满足爆发指标的 AI 贴文，雷达系统持续嗅探中...' : 'No viral threads detected matching criteria in the past 24 hours.'}</p>
@@ -6825,34 +6550,34 @@
 
       return `
         <div class="space-y-5">
-          <!-- 爆帖顶部热度全景统计横幅：根据各平台受众体量差异化设定指标 -->
-          <div class="max-w-2xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs">
+          <!-- 热门动态顶部热度全景统计横幅：根据各平台受众体量差异化设定指标 -->
+          <div class="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-rose-500/10 via-amber-500/5 to-transparent border border-rose-500/20 text-xs shadow-sm">
             <div class="flex items-center space-x-2 text-rose-600 dark:text-rose-300 font-medium">
               <span class="text-base">🚀</span>
-              <span>${isZh ? `已捕获 <strong>${liveList.length}</strong> 条过去 24h 全网现象级 AI 爆帖 · 100% 真实探针存活保障 · 单击推文直显完整连推与图文回复` : `Tracking <strong>${liveList.length}</strong> verified viral AI threads across 𝕏 & Threads in the last 24h`}</span>
+              <span>${isZh ? `已捕获 <strong>${liveList.length}</strong> 条过去 24h 全网现象级 AI 热门动态 · 100% 真实探针存活保障 · 单击推文直显完整连推与图文回复` : `Tracking <strong>${liveList.length}</strong> verified trending AI threads across 𝕏 & Threads in the last 24h`}</span>
             </div>
             <div class="flex items-center space-x-3 text-slate-500 font-mono text-[11px] shrink-0" title="${isZh ? '针对各平台用户基数差异化设定指标：𝕏 侧重万级阅读与千赞，Threads 侧重高互动度与社区热评' : 'Platform-tailored metrics: 𝕏 for views/likes, Threads for replies/likes'}">
               <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>${isZh ? '𝕏 指标: 浏览>1万/赞>1千 | Threads 指标: 赞>50/热评>20' : '𝕏: Views>10k/Likes>1k | Threads: Likes>50/Replies>20'}</span>
             </div>
           </div>
 
-          <!-- 原生社交流：单列逐帖纵向流式瀑布流 (类 Threads / 𝕏 原生体验，长短图文视频自适应) -->
-          <div class="max-w-2xl mx-auto space-y-4 sm:space-y-6">
+          <!-- 全宽多列网格流 (自适应 1/2/3 列，无缝铺满宽屏，彻底告别单列狭窄) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             ${liveList.map((item, idx) => renderViralPostCard(item, idx)).join('')}
           </div>
 
-          <!-- 底部全网爆帖归档直通车 -->
-          <div class="max-w-2xl mx-auto mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
-            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/30 to-slate-900 hover:from-rose-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-rose-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+          <!-- 底部全网热门动态归档直通车 -->
+          <div class="w-full mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
+            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/30 to-slate-900 hover:from-rose-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-rose-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
               <div class="flex items-center space-x-2.5">
                 <span class="text-lg p-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 group-hover:scale-110 transition-transform">📜</span>
                 <div class="text-left">
-                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的全网平台爆帖与极客讨论' : 'Archived Viral Posts Older Than 24 Hours'}</span>
-                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更多历史极客神贴沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical viral threads preserved in master archive'}</span>
+                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的全网平台热门动态与极客讨论' : 'Archived Trending Posts Older Than 24 Hours'}</span>
+                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更多历史极客讨论沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical discussions preserved in master archive'}</span>
                 </div>
               </div>
               <span class="text-xs text-rose-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
-                <span>${isZh ? '查看历史大V与爆帖归档' : 'View Historical Archive'}</span>
+                <span>${isZh ? '查看历史领袖与热门动态归档' : 'View Historical Archive'}</span>
                 <span>→</span>
               </span>
             </button>
@@ -7740,7 +7465,7 @@
 
   <!-- ===== 全站底部导航页脚 (AdSense E-E-A-T 信任信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8">
+    <div class="max-w-[1760px] w-full mx-auto px-4 sm:px-8 py-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
 
         <!-- 品牌介绍 -->
