@@ -991,32 +991,32 @@
           </div>
         </section>
 
-        <!-- 栏目 C: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 3/12 宽度，天梯榜适度收窄，匹配右侧对决需求) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-1 lg:col-span-3">
-          <div class="space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
-              <div class="flex items-center space-x-2.5">
-                <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
-                <h3 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-1.5" id="section-title-arena">
-                  <span>🏆 LMSYS 大模型天梯榜</span>
+        <!-- 栏目 C: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 3/12 宽度，天梯榜纵向 100% 占满可用框格) -->
+        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-1 lg:col-span-3 h-full">
+          <div class="flex-1 flex flex-col min-h-0 space-y-3">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0">
+              <div class="flex items-center space-x-1.5 min-w-0">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50 shrink-0"></span>
+                <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate whitespace-nowrap" id="section-title-arena">
+                  <span>🏆 LMSYS 天梯榜</span>
                 </h3>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20" id="arena-sub-tag">Top 25 盲测</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20 shrink-0 whitespace-nowrap" id="arena-sub-tag">Top 25 盲测</span>
               </div>
-              <a href="https://lmarena.ai/" target="_blank" class="text-xs text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-1 font-medium">
+              <a href="https://lmarena.ai/" target="_blank" class="text-xs text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-0.5 font-medium shrink-0 whitespace-nowrap ml-1">
                 <span>对战台</span>
                 <span>↗</span>
               </a>
             </div>
             
-            <!-- 天梯榜列表容器：高保真排版，高度自适应对其左边 𝕏 动态栏目，支持丝滑滚动浏览前 25 名 -->
-            <div class="space-y-1.5 max-h-[600px] overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
+            <!-- 天梯榜列表容器：彻底破除 600px 限制，纵向 100% 占满可用框格，完整滚开展现全量 Top 25 排名 -->
+            <div class="space-y-1.5 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
               <!-- 动态注入 Arena Top 25 榜单 -->
             </div>
           </div>
 
           <!-- 天梯直达底栏 -->
-          <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
-            <a href="https://lmarena.ai/" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer text-center">
+          <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
+            <a href="https://lmarena.ai/" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer text-center">
               <span>LMSYS 对战平台 (lmarena.ai) ↗</span>
             </a>
           </div>
@@ -1829,8 +1829,8 @@
         playVideo: "站内播放 ▶",
         todayTag: "🔥 今日首发",
         readPaper: "精读 →",
-        arenaTitle: "🏆 LMSYS 大模型天梯榜",
-        arenaSubTag: "Top 25 盲测实时榜",
+        arenaTitle: "🏆 LMSYS 天梯榜",
+        arenaSubTag: "Top 25 盲测",
         arenaNoMatch: "暂无评测数据",
         arxivTitle: "📄 ArXiv 每日突破论文",
         arxivSubTag: "极客前沿研读",
@@ -1991,8 +1991,8 @@
         playVideo: "Watch Video ▶",
         todayTag: "🔥 TODAY",
         readPaper: "Read Paper →",
-        arenaTitle: "🏆 LMSYS LLM Leaderboard",
-        arenaSubTag: "Top 25 Live Elo",
+        arenaTitle: "🏆 LMSYS Leaderboard",
+        arenaSubTag: "Top 25 Live",
         arenaNoMatch: "No benchmark data available",
         arxivTitle: "📄 ArXiv Daily Breakthroughs",
         arxivSubTag: "Geek Research Highlights",
@@ -5583,7 +5583,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const streamArena = document.getElementById('stream-arena');
       if (streamArena) {
         const arenaList = data.chatbot_arena || [];
-        streamArena.innerHTML = arenaList.map(item => {
+        const arenaCards = arenaList.map(item => {
           const badgeText = isZh ? (item.badge || '') : (item.badge_en || item.badge || '');
           let rankBadgeClass = 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700';
           if (item.rank === 1) {
@@ -5615,7 +5615,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
           `;
-        }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
+        }).join('');
+
+        const footerNotice = arenaList.length > 0 ? `
+          <div class="py-2 text-center border-t border-dashed border-slate-200 dark:border-slate-800/80 mt-1.5">
+            <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+              ${isZh ? `✓ 全网 LMSYS 盲测 Top ${arenaList.length} 强已全量就绪` : `✓ All Top ${arenaList.length} LMSYS Rankings Loaded`}
+            </span>
+          </div>
+        ` : '';
+
+        streamArena.innerHTML = arenaCards ? (arenaCards + footerNotice) : `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
       }
 
       // 6. 渲染 ArXiv 每日学术突破精选论文 (每日与 arXiv 实时同步)
