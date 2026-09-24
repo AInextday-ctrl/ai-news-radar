@@ -4136,16 +4136,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const itemId = item.id || item.url || '';
 
-      // 规范化四大核心指标 (阅读量 views, 点赞数 likes, 评论数 comments, 转发数 retweets)
+      // 规范化指标 (真实性优先：仅当源数据含有真实统计时展示，绝不虚构数字)
       const m = item.metrics || {};
-      let views = m.views || '168.5k';
-      views = String(views).replace(/[^0-9.kKmM]/g, '') || '168.5k';
-      let likes = m.likes || m.upvotes || '38.2k';
-      likes = String(likes).replace(/[^0-9.kKmM]/g, '') || '38.2k';
-      let comments = m.comments || '1.8k';
-      comments = String(comments).replace(/[^0-9.kKmM]/g, '') || '1.8k';
-      let retweets = m.retweets || '5.6k';
-      retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '5.6k';
+      const views = m.views ? String(m.views).replace(/[^0-9.kKmM]/g, '') : '';
+      const likes = (m.likes || m.upvotes) ? String(m.likes || m.upvotes).replace(/[^0-9.kKmM]/g, '') : '';
+      const comments = m.comments ? String(m.comments).replace(/[^0-9.kKmM]/g, '') : '';
+      const retweets = m.retweets ? String(m.retweets).replace(/[^0-9.kKmM]/g, '') : '';
 
       const isZh = currentLang === 'zh';
       const displayQuote = isZh ? (item.quote_zh || item.title_zh || item.title) : (item.quote_en || item.title_en || item.title);
@@ -4202,30 +4198,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           ${specBadges}
 
-          <!-- 𝕏 经典四互动底栏 (💬 回复, 🔁 转推, ❤️ 点赞, 📊 浏览) + 详情弹窗与直达入口 -->
+          <!-- 𝕏 经典底栏 + 详情弹窗与直达入口 -->
           <div class="flex items-center justify-between pt-2.5 mt-1 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 select-none">
-            <div class="flex items-center space-x-3.5 sm:space-x-5 font-mono text-[11px] sm:text-xs">
-              <div class="flex items-center space-x-1 group/rep hover:text-sky-500 transition-colors cursor-pointer" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" title="讨论数">
-                <span class="text-xs">💬</span>
-                <span class="notranslate font-semibold">${comments}</span>
-              </div>
-              <div class="flex items-center space-x-1 group/rt hover:text-emerald-500 transition-colors cursor-pointer" title="转推数">
-                <span class="text-xs">🔁</span>
-                <span class="notranslate font-semibold">${retweets}</span>
-              </div>
-              <div class="flex items-center space-x-1 group/like hover:text-rose-500 transition-colors cursor-pointer" title="点赞数">
-                <span class="text-xs">❤️</span>
-                <span class="notranslate font-semibold">${likes}</span>
-              </div>
-              <div class="flex items-center space-x-1 group/view hover:text-sky-500 transition-colors" title="阅读浏览量">
-                <span class="text-xs">📊</span>
-                <span class="notranslate font-semibold">${views}</span>
-              </div>
+            <div class="flex items-center space-x-3 sm:space-x-4 font-mono text-[11px] sm:text-xs">
+              ${comments ? `<div class="flex items-center space-x-1 group/rep hover:text-sky-500 transition-colors" title="讨论数"><span class="text-xs">💬</span><span class="font-semibold">${comments}</span></div>` : ''}
+              ${retweets ? `<div class="flex items-center space-x-1 group/rt hover:text-emerald-500 transition-colors" title="转推数"><span class="text-xs">🔁</span><span class="font-semibold">${retweets}</span></div>` : ''}
+              ${likes ? `<div class="flex items-center space-x-1 group/like hover:text-rose-500 transition-colors" title="点赞数"><span class="text-xs">❤️</span><span class="font-semibold">${likes}</span></div>` : ''}
+              ${views ? `<div class="flex items-center space-x-1 group/view hover:text-sky-500 transition-colors" title="阅读浏览量"><span class="text-xs">📊</span><span class="font-semibold">${views}</span></div>` : ''}
+              ${(!comments && !likes && !views) ? `<span class="text-[10px] text-sky-500/80 font-mono">⚡ 真实前沿原声</span>` : ''}
             </div>
 
             <div class="flex items-center space-x-2 shrink-0">
               <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 text-[11px] font-semibold transition-all">
-                💬 贴文与热评
+                💬 贴文详情
               </button>
               <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 text-slate-400 hover:text-sky-400 transition-colors" title="直达 𝕏 原文">
                 ↗
@@ -4498,6 +4483,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 社交雷达 · 𝕏 与前沿社区 实时动态多列网格流 (Social Radar Multi-Column Stream)
     // 自适应 1/2/3 列，无缝铺满宽屏画布，彻底消除单列狭窄与单边大面积留白
     // ==========================================
+    // 社交雷达 · 𝕏 与前沿社区 时空流动时间轴 (Chrono Flow Timeline)
+    // 专栏首页严格采用时间轴展现时空流动，历史归档展开才是卡片
+    // ==========================================
     function renderCelebrityTimeline(list) {
       const t = I18N[currentLang];
       if (!list || list.length === 0) {
@@ -4514,39 +4502,70 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <div class="space-y-4">
+        <div class="cyber-timeline-wrapper relative max-w-5xl mx-auto py-4 px-1 sm:px-4">
           <!-- 动态流头部统计条 -->
-          <div class="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 font-mono">
+          <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 font-mono">
             <div class="flex items-center gap-2">
               <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
               <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <span>${timelineTitle}</span>
+                <span>⏱️</span>
+                <span>${timelineTitle} · ${isZh ? '前沿时空时间轴' : 'Chronological Timeline'}</span>
                 <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '篇实时动态' : 'Posts'}</span>
               </h3>
             </div>
-            <span class="text-slate-400 hidden sm:inline font-sans">${isZh ? '24小时高频追踪 · 涵盖 OpenAI · Anthropic · Google · xAI · DeepSeek · Cursor 等官方机构与核心大V' : 'Tracking OpenAI, Anthropic, Google, xAI, DeepSeek, Cursor official labs & creators'}</span>
+            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono hidden sm:flex items-center space-x-2">
+              <span>⚡ 严格按真实发布时间倒序排列</span>
+              <span class="text-slate-300 dark:text-slate-700">|</span>
+              <span>时空能量轴</span>
+            </div>
           </div>
 
-          <!-- 全宽多列网格卡片流 (自适应 1/2/3 列，无缝铺满宽屏，彻底告别单边留白) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            ${list.map(it => renderCelebrityCard(it)).join('')}
+          <!-- 纵贯发光能量轴 (Desktop 居中，Mobile 靠左) -->
+          <div class="cyber-timeline-axis hidden lg:block absolute left-1/2 top-16 bottom-16 -translate-x-1/2 w-[3px] rounded-full"></div>
+          <div class="cyber-timeline-axis lg:hidden absolute left-5 top-16 bottom-16 w-[3px] rounded-full"></div>
+
+          <!-- 动态时间轴卡片序列 (双侧交错布局) -->
+          <div class="space-y-6 lg:space-y-8 relative">
+            ${list.map((item, idx) => renderTimelineRow(item, idx)).join('')}
           </div>
 
-          <!-- 底部历史动态归档入口 -->
-          <div class="mt-8 pt-5 border-t border-slate-200/60 dark:border-slate-800/80">
-            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+          <!-- 底部历史动态归档入口 (历史归档展开才是卡片) -->
+          <div class="mt-12 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
+            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
               <div class="flex items-center space-x-3">
-                <span class="text-lg p-1.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
+                <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
                 <div class="text-left">
-                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的历史推文与前沿动态' : 'Archived Social Posts Older Than 24 Hours'}</span>
-                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更早内容沉淀至全量归档库' : 'Keeping radar within 24h freshness, historical posts preserved in master archive'}</span>
+                  <span class="font-bold tracking-wide">${isZh ? '展开历史推文全量归档库 (卡片式多页查阅)' : 'Open Full Social Archive (Card View with Pagination)'}</span>
+                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '专栏首页聚焦 24h 前沿动态时间轴，历史情报以网格卡片全面归档' : 'Live timeline for 24h pulse, cards for historical archive'}</span>
                 </div>
               </div>
-              <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
-                <span>${isZh ? '查看历史社交动态归档' : 'View Historical Social Archive'}</span>
+              <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1 shrink-0">
+                <span>${isZh ? '进入历史卡片归档库' : 'Browse Archive Cards'}</span>
                 <span>→</span>
               </span>
             </button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTimelineRow(item, idx) {
+      const isLeft = idx % 2 === 0;
+      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
+      const cardHtml = renderCelebrityCard(item, true, !isLeft);
+      const icon = isX ? '𝕏' : '💬';
+      const nodeColor = isX ? 'border-sky-400 text-sky-400' : 'border-indigo-400 text-indigo-400';
+
+      return `
+        <div class="timeline-item-anim relative w-full flex flex-col lg:flex-row items-center ${isLeft ? 'lg:justify-start' : 'lg:justify-end'} pl-11 lg:pl-0">
+          <!-- 居中呼吸发光时间锚点 Node (Desktop 居中，Mobile 靠左固定) -->
+          <div class="cyber-timeline-node absolute left-5 lg:left-1/2 top-5 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 ${nodeColor} flex items-center justify-center font-black text-xs shadow-lg z-10 select-none">
+            ${icon}
+          </div>
+
+          <!-- 卡片容器 (Desktop 左侧占 ~47%，右侧占 ~47%；Mobile 占全宽) -->
+          <div class="w-full lg:w-[calc(50%-2.2rem)] ${isLeft ? 'lg:mr-auto' : 'lg:ml-auto'}">
+            ${cardHtml}
           </div>
         </div>
       `;
@@ -5754,8 +5773,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           container.innerHTML = renderViralPostsSection(viralList);
         } else {
           if (spotlightEl) {
-            spotlightEl.classList.remove('hidden');
-            renderCelebritySpotlightBanner();
+            spotlightEl.classList.add('hidden');
+            spotlightEl.innerHTML = '';
           }
           if (catTitle) catTitle.textContent = t.tabs.celebrity;
           if (catDesc) catDesc.textContent = isZh ? '实时捕捉全球 AI 顶尖实验室、核心架构师与先锋开发者的原生发声与前沿动态' : 'Real-time timeline tracking statements from AI labs and frontier creators';
@@ -7116,75 +7135,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           : `${textToDisplay.split(/\s+/).filter(Boolean).length} words · Verbatim Full Post`;
       }
 
-      // 5. 四大实时互动指标
+      // 5. 真实互动指标 (真实性第一：仅展示真实源数据，绝不虚构数字)
       const m = item.metrics || {};
       const viewsEl = document.getElementById('social-modal-views');
       const likesEl = document.getElementById('social-modal-likes');
       const commentsEl = document.getElementById('social-modal-comments-count');
       const retweetsEl = document.getElementById('social-modal-retweets');
 
-      if (viewsEl) viewsEl.textContent = m.views || '168.5k';
-      if (likesEl) likesEl.textContent = m.likes || m.upvotes || '38.2k';
-      if (commentsEl) commentsEl.textContent = m.comments || '1.8k';
-      if (retweetsEl) retweetsEl.textContent = m.retweets || '5.6k';
+      if (viewsEl) viewsEl.textContent = m.views || '-';
+      if (likesEl) likesEl.textContent = m.likes || m.upvotes || '-';
+      if (commentsEl) commentsEl.textContent = m.comments || '-';
+      if (retweetsEl) retweetsEl.textContent = m.retweets || '-';
 
-      // 6. 网友精选神评与社区交锋
+      // 6. 网友精选神评与社区交锋 (真实性第一：绝不伪造虚假评论，真实引导至 𝕏 原文查看数万条真实热议)
       const commentsContainer = document.getElementById('social-modal-comments-list');
       if (commentsContainer) {
-        let commentsList = item.comments_list;
-        if (!commentsList || commentsList.length === 0) {
-          commentsList = isZhSystem ? [
-            {
-              author: "SiliconDev",
-              handle: "@silicon_dev",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=SiliconDev",
-              time: "20分钟前",
-              likes: "1.4k",
-              content: "说得很到位！技术迭代越快，真实场景的工程落地壁垒反而越厚，光靠PPT故事已经无法打动开发者了。"
-            },
-            {
-              author: "AIEngineerX",
-              handle: "@ai_eng_x",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=AIEngineerX",
-              time: "45分钟前",
-              likes: "890",
-              content: "这一波核心还在于算力成本与调用延迟，谁能把端到端推演效率做极致，谁就能掌握真正的生态话语权。"
-            },
-            {
-              author: "FrontierHacker",
-              handle: "@FrontierHacker",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=FrontierHacker",
-              time: "1小时前",
-              likes: "432",
-              content: "开源生态如果能持续跟进，闭源巨头的垄断壁垒并没有想象中那么稳固，坐看各方下半场的较量。"
-            }
-          ] : [
-            {
-              author: "SiliconDev",
-              handle: "@silicon_dev",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=SiliconDev",
-              time: "20m ago",
-              likes: "1.4k",
-              content: "Spot on! The faster the tech advances, the higher the real-world deployment moat becomes. PPTs won't convince developers anymore."
-            },
-            {
-              author: "AIEngineerX",
-              handle: "@ai_eng_x",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=AIEngineerX",
-              time: "45m ago",
-              likes: "890",
-              content: "The bottleneck is compute cost and inference latency. Whoever cracks end-to-end efficiency wins the ecosystem."
-            },
-            {
-              author: "FrontierHacker",
-              handle: "@FrontierHacker",
-              avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=FrontierHacker",
-              time: "1h ago",
-              likes: "432",
-              content: "If the open-source community keeps matching closed-source labs, the moat is not as safe as big tech thinks."
-            }
-          ];
-        }
+        let commentsList = item.comments_list || [];
 
         // 如果原帖存在作者连推回复 (Thread 1/n, 2/n)，先在弹窗顶部完整呈现连推与配图
         let modalThreadsHtml = '';
@@ -7255,7 +7221,27 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           `;
         }).join('');
 
-        commentsContainer.innerHTML = modalThreadsHtml + commentsCardsHtml;
+        if (!modalThreadsHtml && !commentsCardsHtml) {
+          commentsContainer.innerHTML = `
+            <div class="p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-center space-y-2.5">
+              <div class="w-9 h-9 mx-auto rounded-full bg-sky-500/10 text-sky-500 flex items-center justify-center text-base">
+                💬
+              </div>
+              <div>
+                <h4 class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-200">${isZhSystem ? '前往 𝕏 原文查看实时热评与社区交锋' : 'View Real-time Replies & Discussion on 𝕏'}</h4>
+                <p class="text-[11px] text-slate-400 mt-1 max-w-md mx-auto leading-relaxed">${isZhSystem ? '本站遵循真实性第一原则，不编造虚假网友评论。请点击下方“直达 𝕏 原推”参与全球开发者实时深度讨论。' : 'We strictly preserve data integrity without synthetic comments. Click below to join the discussion on 𝕏.'}</p>
+              </div>
+              <div class="pt-1">
+                <a href="${item.url}" target="_blank" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-xs font-semibold shadow transition-all">
+                  <span>${isZhSystem ? '直达 𝕏 原推实时讨论区' : 'Open 𝕏 Thread'}</span>
+                  <span>↗</span>
+                </a>
+              </div>
+            </div>
+          `;
+        } else {
+          commentsContainer.innerHTML = modalThreadsHtml + commentsCardsHtml;
+        }
       }
 
       // 7. AI 独家点评
