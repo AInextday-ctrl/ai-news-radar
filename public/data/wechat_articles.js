@@ -1,6 +1,6 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-09-26T23:55:44.667329+00:00",
-  "date": "2026-09-26",
+  "updated_at": "2026-09-27T00:20:46.916631+00:00",
+  "date": "2026-09-27",
   "total_articles": 1,
   "audit_funnel": {
     "total_candidates": 1286,
