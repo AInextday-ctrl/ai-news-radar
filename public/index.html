@@ -808,6 +808,26 @@
             <!-- 快讯列表容器：纵向 100% 占满可用框格，支持丝滑滚动浏览 24h 全部快讯 -->
             <div class="space-y-3 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop" alt="在最新的美国财报电话会议中，提到开放模型的次数同比激增6倍，8月份开放模型占Vercel代币的56%，占AT&amp;T人工智能工作负载的40%" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: Financial Times</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.ft.com/content/d9de4776-1fc9-4f2b-aaaf-9961c35d8acd" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">在最新的美国财报电话会议中，提到开放模型的次数同比激增6倍，8月份开放模型占Vercel代币的56%，占AT&amp;T人工智能工作负载的40%</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      OpenAI 正式发布针对大模型潜在异常与风险行为的新型跟踪框架，持续监测并透明化披露模型对齐与安全审查结果
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.ft.com/content/d9de4776-1fc9-4f2b-aaaf-9961c35d8acd" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="人工智能的加速如何造成全球政策真空，因为欧盟人工智能法案的执行滞后，监管机构仍然在利用人工智能和担心其风险之间徘徊" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -1024,26 +1044,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://the-decoder.com/nvidia-drops-a-free-100m-parameter-model-that-identifies-up-to-eight-speakers-in-real-time/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" alt="在中国，最近关于人工智能存在风险的警告被视为明显是西方的，或者是一种阻止中国人工智能公司超越美国竞争对手的策略" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: New York Times</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.nytimes.com/2026/09/27/world/asia/china-us-ai-distrust.html?unlocked_article_code=1.EVE.h8tG.lRHxbBc3XBI8&smid=url-share" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">在中国，最近关于人工智能存在风险的警告被视为明显是西方的，或者是一种阻止中国人工智能公司超越美国竞争对手的策略</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      查尔斯国王在苏格兰前沿科技会议上发表主旨演讲，呼吁国际社会与科技领袖将人类福祉置于首位，共同建立负责任的人工智能安全护栏
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.nytimes.com/2026/09/27/world/asia/china-us-ai-distrust.html?unlocked_article_code=1.EVE.h8tG.lRHxbBc3XBI8&smid=url-share" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
