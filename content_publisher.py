@@ -741,7 +741,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         content = re.sub(pattern_top, r'\1' + top_three_html + r'\3', content, flags=re.DOTALL)
 
     # B. 替换 stream-news 内容
-    pattern_news = r'(<div class="space-y-3 flex-1 min-h-\[480px\] lg:min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-news">)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
+    pattern_news = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-news">)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
     if re.search(pattern_news, content, re.DOTALL):
         content = re.sub(pattern_news, r'\1' + news_cards_html + r'\3', content, flags=re.DOTALL)
 

@@ -788,8 +788,8 @@
       <!-- 🌟 第 2 层: 核心情报与对决 3 栏矩阵 (⚡ 突发快讯 + 🐦 社交雷达 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
-        <!-- 栏目 A: ⚡ 突发·行业快讯 (占用 5/12 宽度，纵向 100% 占满可用框格) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-5 h-full">
+        <!-- 栏目 A: ⚡ 突发·行业快讯 (占用 5/12 宽度，与天梯榜等高对齐) -->
+        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-5 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
@@ -805,8 +805,8 @@
               </button>
             </div>
             
-            <!-- 快讯列表容器：纵向 100% 占满可用框格，支持丝滑滚动浏览 24h 全部快讯 -->
-            <div class="space-y-3 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+            <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
+            <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://cdn.sanity.io/images/6vfeftx9/articles/999ebbf1268783eb424dbfee102630eea457f176-1254x1254.png?w=1200&auto=format" alt="人工分析的智能指数：十四行诗5.5（最大）排名高于GPT-6 Astra（最大），仅落后于Opus 5.5（最大），但拥有最高的代币使用（人工分析）" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -1057,8 +1057,8 @@
           </div>
         </section>
 
-        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 平台前沿动态与头条 (占用 4/12 宽度，纵向 100% 占满可用框格) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-sky-500/70 md:col-span-1 lg:col-span-4 h-full">
+        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 平台前沿动态与头条 (占用 4/12 宽度，与天梯榜等高对齐) -->
+        <section id="section-col-celebrity" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-sky-500/70 md:col-span-1 lg:col-span-4 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
@@ -1074,8 +1074,8 @@
               </button>
             </div>
             
-            <!-- 社交动态列表容器：纵向 100% 占满可用框格，支持丝滑滚动浏览 24h 全部大V发声 -->
-            <div class="space-y-3 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-celebrity">
+            <!-- 社交动态列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
+            <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-celebrity">
               <!-- 动态注入 24h 社交动态卡片 -->
             </div>
           </div>
@@ -1088,10 +1088,10 @@
           </div>
         </section>
 
-        <!-- 栏目 C: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 3/12 宽度，天梯榜纵向 100% 占满可用框格) -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-1 lg:col-span-3 h-full">
+        <!-- 栏目 C: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 3/12 宽度，天梯基准列) -->
+        <section id="section-col-arena" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-1 lg:col-span-3 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0">
               <div class="flex items-center space-x-1.5 min-w-0">
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50 shrink-0"></span>
                 <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate whitespace-nowrap" id="section-title-arena">
@@ -1105,8 +1105,8 @@
               </a>
             </div>
             
-            <!-- 天梯榜列表容器：彻底破除 600px 限制，纵向 100% 占满可用框格，完整滚开展现全量 Top 25 排名 -->
-            <div class="space-y-1.5 flex-1 min-h-[480px] lg:min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
+            <!-- 天梯榜列表容器：全量展现 Top 25 排名，与左侧两栏完美等高 -->
+            <div class="space-y-1.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
               <!-- 动态注入 Arena Top 25 榜单 -->
             </div>
           </div>
@@ -3205,6 +3205,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (viewAll) viewAll.classList.remove('hidden');
         if (viewCat) viewCat.classList.add('hidden');
         if (viewArchive) viewArchive.classList.add('hidden');
+        if (typeof syncThreeColumnsHeight === 'function') setTimeout(syncThreeColumnsHeight, 50);
       } else if (tab === 'archive') {
         if (viewAll) viewAll.classList.add('hidden');
         if (viewCat) viewCat.classList.add('hidden');
@@ -5634,10 +5635,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 3. 渲染今日 60 秒风向标 Top 3
       renderTopThree(data.top_three || []);
 
-      // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，绝不无限堆叠，各板块均支持一键直达完整专区)
-      // A. 快讯板块 (News) - 充分占满框格，展示所有 24h 优质快讯
+      // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，与天梯榜等高对齐，各板块均支持一键直达完整专区)
+      // A. 快讯板块 (News) - 与天梯图等高自适应，展示最新 18 条高价值快讯
       const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
-      const displayNews = recentNews.length >= 6 ? recentNews : allNews.slice(0, 16);
+      const poolNews = recentNews.length >= 6 ? recentNews : allNews;
+      const displayNews = poolNews.slice(0, 18);
       const streamNews = document.getElementById('stream-news');
       if (streamNews) {
         streamNews.innerHTML = displayNews.length > 0 
@@ -5666,7 +5668,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // B. 领袖社交板块 (Celebrity) - 充分占满框格，展示所有 24h 大V真实动态
+      // B. 领袖社交板块 (Celebrity) - 与天梯图等高自适应，展示最新精选推文
       let sideCelebList = allCeleb;
       const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
       recentCeleb.sort((a, b) => {
@@ -5677,7 +5679,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
         return timeB - timeA;
       });
-      const displayCeleb = recentCeleb.length >= 6 ? recentCeleb : sideCelebList.slice(0, 16);
+      const poolCeleb = recentCeleb.length >= 6 ? recentCeleb : sideCelebList;
+      const displayCeleb = poolCeleb.slice(0, 14);
       const streamCelebrity = document.getElementById('stream-celebrity');
       if (streamCelebrity) {
         streamCelebrity.innerHTML = displayCeleb.length > 0
@@ -5834,6 +5837,30 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         renderCategoryView(currentTab);
       }
       applyCurrentTranslation();
+      setTimeout(syncThreeColumnsHeight, 60);
+    }
+
+    // 动态同步“综合全景” 3 栏（行业快讯、社交雷达、天梯榜）的等高对齐，保持视觉美感与严格一致性
+    function syncThreeColumnsHeight() {
+      const colArena = document.getElementById('section-col-arena');
+      const colNews = document.getElementById('section-col-news');
+      const colCeleb = document.getElementById('section-col-celebrity');
+      if (!colArena || !colNews || !colCeleb) return;
+
+      if (window.innerWidth >= 1024) {
+        colArena.style.height = 'auto';
+        const naturalH = colArena.offsetHeight;
+        if (naturalH > 400) {
+          const target = `${naturalH}px`;
+          colArena.style.height = target;
+          colNews.style.height = target;
+          colCeleb.style.height = target;
+        }
+      } else {
+        colArena.style.height = '';
+        colNews.style.height = '';
+        colCeleb.style.height = '';
+      }
     }
 
     // 全站高精度多字段多词检索过滤器
@@ -7838,9 +7865,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
     loadNews();
     window.addEventListener('hashchange', handleHashNavigation);
+    let resizeSyncTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeSyncTimer);
+      resizeSyncTimer = setTimeout(syncThreeColumnsHeight, 100);
+    });
     window.addEventListener('DOMContentLoaded', () => {
       initTranslateEngine();
       handleHashNavigation();
+      syncThreeColumnsHeight();
     });
     setTimeout(() => {
       initTranslateEngine();
