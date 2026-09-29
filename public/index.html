@@ -775,7 +775,7 @@
                 <a href="https://www.youtube.com/watch?v=8WbW_n95wc4" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">I did not think I'd like this model</a>
               </h3>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Anthropic 今天发布了 Sonnet 5.5，让我们感到惊讶……我有点喜欢它？但最疯狂的部分是我认为你不应该使用它。感谢Coderabbit的赞助！检查
+                Anthropic今天让我们大吃一惊，十四行诗5.5下降了…我还挺喜欢的？最疯狂的是，我认为你不应该用它。感谢Coderabbit的赞助！检查th
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
@@ -807,6 +807,26 @@
             
             <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
             <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://image.cnbcfm.com/api/v1/image/108369161-1790655388031-gettyimages-2293947794-AVaishnav_Global_Fintech_Fest_GFF_in_Mumbai_28.jpeg?v=1790655423&w=1920&h=1080" alt="在过去十年投资116亿美元后，印度计划在其新兴的深度科技行业投资250亿美元，以期赶上美国和中国。" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: CNBC</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.cnbc.com/2026/09/29/india-investment-billions-tech-ai-us-china.html" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">在过去十年投资116亿美元后，印度计划在其新兴的深度科技行业投资250亿美元，以期赶上美国和中国。</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响。
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.cnbc.com/2026/09/29/india-investment-billions-tech-ai-us-china.html" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="OpenAI为其人工智能模型入侵澳大利亚政府网站道歉，承诺提供网络防御资金，并计划成立一个特别工作组作为改革的一部分" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -1024,26 +1044,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://www.nytimes.com/2026/09/28/us/politics/fbi-shinyhunters-damage.html?unlocked_article_code=1.ElE.OIHB.J2rMk-_i6AeP&smid=url-share" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://cdn.sanity.io/images/6vfeftx9/articles/999ebbf1268783eb424dbfee102630eea457f176-1254x1254.png?w=1200&auto=format" alt="人工分析的智能指数：十四行诗5.5（最大）排名高于GPT-6 Astra（最大），仅落后于Opus 5.5（最大），但拥有最高的代币使用（人工分析）" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: Artificial Analysis</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://artificialanalysis.ai/articles/claude-sonnet-5-5" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">人工分析的智能指数：十四行诗5.5（最大）排名高于GPT-6 Astra（最大），仅落后于Opus 5.5（最大），但拥有最高的代币使用（人工分析）</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响。
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://artificialanalysis.ai/articles/claude-sonnet-5-5" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
