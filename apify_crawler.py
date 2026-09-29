@@ -45,41 +45,47 @@ STATE_FILE = os.path.join(BASE_DIR, "data", "apify_crawler_state.json")
 LATEST_NEWS_FILE = os.path.join(BASE_DIR, "data", "latest_news.json")
 PUBLIC_NEWS_FILE = os.path.join(BASE_DIR, "public", "data", "latest_news.json")
 
-# 重点追踪的全球 AI 顶尖实验室与领袖大V分组
+# 重点追踪的全球 AI 顶尖实验室与领袖大V分组 (深度扩展 70+ 全球前沿领袖与官方研发团队)
 LEADER_HANDLES = [
-    "sama",
-    "karpathy",
-    "ylecun",
-    "demishassabis",
-    "DrJimFan",
-    "OfficialLoganK",
-    "gdb",
-    "thsottiaux",
-    "danshipper",
-    "alexandr_wang",
-    "AravSrinivas",
-    "bindureddy",
-    "svpino",
-    "rowancheung",
-    "swyx",
-    "samyamiam"
+    # 核心实验室掌舵人与首席科学家
+    "sama", "karpathy", "ylecun", "demishassabis", "ilyasut", "DarioAmodei",
+    "gdb", "elonmusk", "finkd", "satyanadella", "sundarpichai", "AndrewYNg",
+    "DrJimFan", "JeffDean", "drfeifei", "AravSrinivas", "arthurmensch", "aidangomez",
+    # 一线核心架构师、技术副总与关键布道者
+    "thsottiaux", "polynoamial", "OfficialLoganK", "swyx", "danshipper",
+    "alexandr_wang", "bindureddy", "svpino", "rowancheung", "samyamiam",
+    "mikeyk", "alexalbert__", "kevin_t_ngo", "hwchase17", "jerryjliu0",
+    "levelsio", "amasad", "emostaque", "fchollet", "_jasonwei", "markchen90",
+    "woj_zaremba", "johnschulman2", "AmandaAskell", "ch402", "jackclarkSF",
+    "percyliang", "pabbeel", "svlevine", "chelseabfinn", "chrmanning", "danqic",
+    "npew", "DanHendrycks", "Paul_Christiano", "janleike", "leopoldasch",
+    "dwarkesh_sp", "tegmark", "ESYudkowsky", "ClementDelangue", "tunguz", "Kantrowitz"
 ]
 
 LAB_HANDLES = [
-    "OpenAI",
-    "AnthropicAI",
-    "ClaudeAI",
-    "deepseek_ai",
-    "GoogleDeepMind",
-    "cursor_ai",
-    "huggingface",
-    "ArtificialAnlys",
-    "PerplexityAI",
-    "MistralAI",
-    "LangChainAI",
-    "ollama",
-    "Cohere"
+    # 顶尖模型实验室与云巨头
+    "OpenAI", "OpenAIDevs", "AnthropicAI", "ClaudeAI", "ClaudeDevs",
+    "deepseek_ai", "GoogleDeepMind", "GoogleAI", "GoogleAIStudio", "xai",
+    "MistralAI", "cursor_ai", "huggingface", "MetaAI", "MSFTResearch",
+    "NVIDIAAI", "Alibaba_Qwen", "MoonshotAI", "ZhipuAI", "MiniMax_AI",
+    "stepfun_ai", "Cohere", "PerplexityAI", "LangChainAI", "llama_index",
+    "ollama", "LMStudioAI", "vllm_project", "sgl_project", "UnslothAI",
+    "crewAIInc", "replit", "v0", "stackblitz", "codeiumdev",
+    "togethercompute", "GroqInc", "bfl_ml", "midjourney", "runwayml",
+    "luma_ai", "Kling_ai", "Hailuo_AI", "suno_ai_", "elevenlabsio", "ArtificialAnlys"
 ]
+
+# 引入动态知识库与自适应搜索生成器 (彻底告别写死过时模型名称)
+try:
+    from knowledge_base import get_dynamic_trending_queries
+except ImportError:
+    def get_dynamic_trending_queries() -> List[str]:
+        return [
+            '(#AI OR #LLM OR #GenerativeAI OR #GenAI) (min_faves:50 OR min_retweets:10)',
+            '(#ClaudeCode OR #Cursor OR #DeepSeek OR #ChatGPT OR #OpenAI) (min_faves:30 OR min_retweets:5)',
+            '(#AIAgent OR #VibeCoding OR #PromptEngineering OR #ComfyUI OR #FLUX) (min_faves:25)',
+            '("Claude Fable" OR "Opus 5.5" OR "GPT 6" OR "DeepSeek-V4") (min_faves:30)'
+        ]
 
 
 def get_apify_tokens() -> List[str]:
@@ -277,19 +283,32 @@ def fetch_incremental_tweets(
             except Exception:
                 pass
 
-    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控领袖与实验室大V (已配置 {len(tokens)} 个 Token 轮换池)，已收录历史真实推文 {len(known_ids)} 篇...")
-
-    # 分组构建精准搜索查询
-    q_leaders = "(" + " OR ".join([f"from:{h}" for h in LEADER_HANDLES]) + ")"
-    q_labs = "(" + " OR ".join([f"from:{h}" for h in LAB_HANDLES]) + ")"
+    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控全球 {len(LEADER_HANDLES)} 位领袖 + {len(LAB_HANDLES)} 家前沿实验室 + {len(TRENDING_AI_QUERIES)} 组全网飙升标签 (Token 池: {len(tokens)} 个)...")
 
     raw_items = []
-    # 抓取领袖推文
-    res1 = _call_apify_actor(tokens, q_leaders, max_items=35)
-    raw_items.extend(res1)
-    # 抓取官方实验室推文
-    res2 = _call_apify_actor(tokens, q_labs, max_items=35)
-    raw_items.extend(res2)
+    
+    # 1. 批量抓取全球顶尖 AI 领袖 (每组 15 人，保证检索式在 X API 长度限制内高效执行)
+    for i in range(0, len(LEADER_HANDLES), 15):
+        batch = LEADER_HANDLES[i:i+15]
+        q_leaders = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
+        res = _call_apify_actor(tokens, q_leaders, max_items=25)
+        if res:
+            raw_items.extend(res)
+
+    # 2. 批量抓取官方实验室与前沿研发团队 (每组 15 家)
+    for i in range(0, len(LAB_HANDLES), 15):
+        batch = LAB_HANDLES[i:i+15]
+        q_labs = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
+        res = _call_apify_actor(tokens, q_labs, max_items=25)
+        if res:
+            raw_items.extend(res)
+
+    # 3. 实时全网抓取由知识图谱动态自适应生成的 AI 热门标签与高热讨论推文
+    dynamic_queries = get_dynamic_trending_queries()
+    for q_trending in dynamic_queries:
+        res = _call_apify_actor(tokens, q_trending, max_items=20)
+        if res:
+            raw_items.extend(res)
 
     print(f"  📥 [Apify 增量采集器] 云端抓取完成，共返回 {len(raw_items)} 条原生推文，开始执行时间增量校验与去重过滤...")
 
@@ -378,8 +397,27 @@ def fetch_incremental_tweets(
         author_role = profile.get("role") if profile else (author_obj.get("description") or "AI 前沿领袖 / 核心开发者")
         entity_type = profile.get("entity_type") if profile else ("company" if user_name.lower() in ["openai", "anthropicai", "deepseek_ai", "googledeepmind", "cursor_ai", "huggingface"] else "person")
 
+        # 识别爆款与全网飙升状态
+        is_viral = False
+        surge_badge = None
+        try:
+            num_likes = int(likes_raw or 0)
+            num_rts = int(retweets_raw or 0)
+            if num_likes >= 1000 or num_rts >= 150:
+                is_viral = True
+                surge_badge = "⚡ 24h 飙升热推"
+        except Exception:
+            pass
+
         # 规格标签与高亮翻译
-        spec_tags = extract_tech_specs(tweet_text, "") or (["硅谷前沿原声", "大V发声"] if entity_type == "person" else ["官方发布", "模型突破"])
+        if profile:
+            spec_tags = extract_tech_specs(tweet_text, "") or (["硅谷前沿原声", "大V发声"] if entity_type == "person" else ["官方发布", "模型突破"])
+            tags_list = ["𝕏领袖观点", "前沿发声"] if entity_type == "person" else ["官方动态", "模型发布"]
+        else:
+            spec_tags = extract_tech_specs(tweet_text, "") or ["🔥 24h飙升", "𝕏平台热推"]
+            tags_list = ["🔥 24h飙升", "𝕏平台热推", "极客前沿"]
+            if is_viral:
+                tags_list.insert(0, "🔥 飙升热帖")
 
         # 智能翻译中文
         trans_zh = free_translate_zh(tweet_text)
@@ -391,7 +429,7 @@ def fetch_incremental_tweets(
             "id": id_hash,
             "status_id": tweet_id,
             "category": "celebrity",
-            "sub_category": "viral_post" if (likes_raw and int(likes_raw) >= 3000) else None,
+            "sub_category": "viral_post" if is_viral else None,
             "title": tweet_text[:120],
             "title_en": tweet_text,
             "title_zh": trans_zh[:120] if trans_zh else None,
@@ -414,9 +452,10 @@ def fetch_incremental_tweets(
             "content_snippet": tweet_text,
             "summary_en": tweet_text,
             "summary_zh": trans_zh,
-            "is_viral": bool(likes_raw and int(likes_raw) >= 3000),
+            "is_viral": is_viral,
+            "surge_badge": surge_badge,
             "is_pinned": False,
-            "tags": ["𝕏领袖观点", "前沿发声"] if entity_type == "person" else ["官方动态", "模型发布"]
+            "tags": tags_list
         }
 
         new_items.append(news_item)

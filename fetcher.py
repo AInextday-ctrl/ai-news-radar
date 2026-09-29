@@ -1028,24 +1028,36 @@ def evaluate_dynamic_pinned_status(item: Dict[str, Any]) -> bool:
 def build_dynamic_x_queries(extra_entities: Optional[List[str]] = None) -> List[str]:
     """
     动态自适应构建 𝕏 智能雷达检索式。
-    具备模型演进学习能力（自适应 GPT-6/7/8、Claude 4/5/6、以及 Codex/Antigravity/Cursor reset 等突破事件），
-    绝不局限于写死单一静态关键词。
+    全面覆盖全球顶尖 AI 领袖、官方实验室旗舰、全网飙升 AI 标签、Vibe Coding 以及前沿模型突破。
     """
-    # 1. 突破事件与代际模型演进通配 (覆盖 GPT-6/7/8, Claude, Opus, Sonnet, Gemini, Grok, DeepSeek 等)
-    models_pattern = '%22GPT-6%22+OR+%22GPT-7%22+OR+%22GPT+6%22+OR+%22GPT+7%22+OR+Sol+OR+Luna+OR+Terria+OR+Astra+OR+%22Claude+Code%22+OR+%22Opus+5.5%22+OR+%22Sonnet+5.5%22+OR+Opus+OR+Sonnet+OR+Cursor+OR+DeepSeek+OR+Gemini'
+    # 1. 突破事件与代际模型演进通配 (从动态知识图谱提取当前活跃的 ACTIVE_SOTA 旗舰模型，自动剔除历史废弃版本如 Claude 3.7)
+    try:
+        from knowledge_base import get_active_sota_models
+        active_models = get_active_sota_models()
+        formatted_models = []
+        for am in active_models[:12]:
+            clean_m = am.replace('"', '').replace(' ', '+')
+            if clean_m and len(clean_m) >= 3:
+                formatted_models.append(f"%22{clean_m}%22" if '+' in clean_m else clean_m)
+        models_pattern = "+OR+".join(formatted_models) if formatted_models else '%22Claude+Opus+5.5%22+OR+%22Claude+Fable+5.1%22+OR+%22GPT-6%22+OR+%22GPT-5.6%22+OR+DeepSeek'
+    except Exception:
+        models_pattern = '%22Claude+Opus+5.5%22+OR+%22Claude+Fable+5.1%22+OR+%22GPT-6%22+OR+%22GPT-5.6%22+OR+%22Claude+Code%22+OR+DeepSeek+OR+Gemini+OR+Grok'
     
-    # 2. 突破行动词与多元重置 (Codex reset, Antigravity reset, Cursor reset, model reset)
-    resets_pattern = '%22Codex+reset%22+OR+%22Antigravity+reset%22+OR+%22Cursor+reset%22+OR+%22model+reset%22+OR+weights+OR+checkpoint+OR+%22vibe+coding%22'
+    # 2. 突破行动词与多元重置 (Codex reset, Antigravity reset, Cursor reset, model reset, Vibe Coding, Agentic)
+    resets_pattern = '%22Codex+reset%22+OR+%22Antigravity+reset%22+OR+%22Cursor+reset%22+OR+%22model+reset%22+OR+%22vibe+coding%22+OR+%22AI+agent%22+OR+mcp+OR+%22test-time+compute%22'
     
-    # 3. 核心舵手、科学家与一线技术骨干 (Tibo, Sam Altman, Karpathy, LeCun, Dan Shipper, Mike Krieger, Sam Yam, Logan Kilpatrick 等)
-    leaders_pattern = 'thsottiaux+OR+%22Thibault+Sottiaux%22+OR+%22Sam+Altman%22+OR+sama+OR+karpathy+OR+ylecun+OR+gdb+OR+danshipper+OR+samyamiam+OR+mikeyk+OR+DrJimFan+OR+OfficialLoganK'
+    # 3. 核心舵手、科学家与一线技术骨干 (Sam Altman, Karpathy, LeCun, Demis Hassabis, Ilya Sutskever, Dario Amodei, Noam Brown, Greg Brockman, Jim Fan, Dan Shipper, Logan Kilpatrick, Swyx, Bindu Reddy, Pieter Levels, Amjad Masad, Jason Wei, François Chollet 等)
+    leaders_pattern = 'sama+OR+karpathy+OR+ylecun+OR+demishassabis+OR+ilyasut+OR+DarioAmodei+OR+gdb+OR+polynoamial+OR+DrJimFan+OR+OfficialLoganK+OR+swyx+OR+danshipper+OR+alexandr_wang+OR+bindureddy+OR+svpino+OR+rowancheung+OR+samyamiam+OR+mikeyk+OR+alexalbert__+OR+levelsio+OR+amasad+OR+fchollet+OR+_jasonwei'
     
-    # 4. 官方旗舰认证账号 (OpenAI, Anthropic, Claude, Cursor, ClaudeDevs 等)
-    official_pattern = 'from:OpenAI+OR+from:AnthropicAI+OR+from:ClaudeAI+OR+from:cursor_ai+OR+from:ClaudeDevs+OR+from:higgsfield_ai+OR+from:GoogleDeepMind+OR+from:ArtificialAnlys'
+    # 4. 官方旗舰认证账号 (OpenAI, Anthropic, Claude, DeepSeek, Cursor, GoogleDeepMind, xAI, Mistral, HuggingFace, LangChain, Qwen, Moonshot, Zhipu, MiniMax 等)
+    official_pattern = 'from:OpenAI+OR+from:AnthropicAI+OR+from:ClaudeAI+OR+from:deepseek_ai+OR+from:cursor_ai+OR+from:GoogleDeepMind+OR+from:xai+OR+from:MistralAI+OR+from:huggingface+OR+from:LangChainAI+OR+from:Alibaba_Qwen+OR+from:MoonshotAI+OR+from:ZhipuAI+OR+from:MiniMax_AI+OR+from:ArtificialAnlys'
     
-    # 5. 全网高热 AI 标签与现象级实操转推 (#AI, #LLM, #ClaudeCode, #Cursor, #Codex, #VibeCoding 等)
-    tags_pattern = '%23AI+OR+%23LLM+OR+%23ClaudeCode+OR+%23Cursor+OR+%23Codex+OR+%23VibeCoding+OR+%22AI+agent%22+OR+Seedance+OR+Kling+OR+FLUX'
+    # 5. 全网高热迅速飙升 AI 标签与现象级实操 (#AI, #LLM, #GenerativeAI, #ClaudeCode, #Cursor, #DeepSeek, #AIAgents, #VibeCoding, #ComfyUI, #PromptEngineering 等)
+    tags_pattern = '%23AI+OR+%23LLM+OR+%23GenerativeAI+OR+%23ClaudeCode+OR+%23Cursor+OR+%23DeepSeek+OR+%23AIAgent+OR+%23AIAgents+OR+%23VibeCoding+OR+%23PromptEngineering+OR+%23ComfyUI+OR+%23FLUX'
     
+    # 6. 高频极客热评与模型评测
+    eval_pattern = '(%22SWE-bench%22+OR+%22Chatbot+Arena%22+OR+LMSYS+OR+%22Reasoning+model%22+OR+Ollama+OR+vLLM)+(AI+OR+LLM+OR+model)'
+
     # 动态融入从全网前沿快讯中学习到的新兴实体
     if extra_entities:
         clean_extras = []
@@ -1058,24 +1070,26 @@ def build_dynamic_x_queries(extra_entities: Optional[List[str]] = None) -> List[
             tags_pattern = f"({tags_pattern}+OR+{extra_pattern})"
 
     return [
-        f"https://news.google.com/rss/search?q=site:x.com+({models_pattern}+OR+{resets_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
+        f"https://news.google.com/rss/search?q=site:x.com+({tags_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
         f"https://news.google.com/rss/search?q=site:x.com+({leaders_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
         f"https://news.google.com/rss/search?q=site:x.com+({official_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
-        f"https://news.google.com/rss/search?q=site:x.com+({tags_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en"
+        f"https://news.google.com/rss/search?q=site:x.com+({models_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
+        f"https://news.google.com/rss/search?q=site:x.com+({resets_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en",
+        f"https://news.google.com/rss/search?q=site:x.com+({eval_pattern})+when:1d&hl=en-US&gl=US&ceid=US:en"
     ]
 
 
 # ==========================================
 # 2. 抓取与聚合 𝕏 (Twitter) 顶尖 AI 领袖与核心工程师动态 (纯动态 24h 实时嗅探)
 # ==========================================
-def fetch_x_leader_posts(max_items: int = 25) -> List[Dict[str, Any]]:
+def fetch_x_leader_posts(max_items: int = 50) -> List[Dict[str, Any]]:
     """
-    通过 Google News 深度嗅探通道，精准捕获 24 小时内全球顶尖 AI 领袖与一线核心工程师的原生推文。
+    通过 Google News 深度嗅探通道与 Apify 官方通道，精准捕获 24 小时内全球顶尖 AI 领袖与一线核心工程师的原生推文。
     重点涵盖：
-    1. OpenAI 核心团队：Thibault Sottiaux (@thsottiaux - Codex 负责人 / 重置发布), Sam Altman (@sama), Greg Brockman (@gdb), Noam Brown, Sam Yam (@samyamiam)
-    2. Anthropic 核心团队：Dario Amodei, Mike Krieger (@mikeyk), Kevin Ngo (@kevin_t_ngo)
-    3. 顶尖科学家与极客领袖：Andrej Karpathy (@karpathy), Yann LeCun (@ylecun), Dan Shipper (@danshipper), Logan Kilpatrick (@OfficialLoganK), Jim Fan (@DrJimFan)
-    4. 官方旗舰发布：OpenAI (@OpenAI), Anthropic (@AnthropicAI), Claude (@ClaudeAI), Cursor (@cursor_ai)
+    1. OpenAI 核心团队：Thibault Sottiaux (@thsottiaux - Codex 负责人 / 重置发布), Sam Altman (@sama), Greg Brockman (@gdb), Noam Brown (@polynoamial), Sam Yam (@samyamiam)
+    2. Anthropic 核心团队：Dario Amodei, Mike Krieger (@mikeyk), Alex Albert (@alexalbert__), Kevin Ngo (@kevin_t_ngo)
+    3. 顶尖科学家与极客领袖：Andrej Karpathy (@karpathy), Yann LeCun (@ylecun), Demis Hassabis (@demishassabis), Ilya Sutskever (@ilyasut), Dan Shipper (@danshipper), Logan Kilpatrick (@OfficialLoganK), Jim Fan (@DrJimFan), Pieter Levels (@levelsio), Amjad Masad (@amasad)
+    4. 官方旗舰发布：OpenAI (@OpenAI), Anthropic (@AnthropicAI), Claude (@ClaudeAI), Cursor (@cursor_ai), DeepSeek (@deepseek_ai)
     """
     items = []
     seen_urls = set()
@@ -1096,7 +1110,7 @@ def fetch_x_leader_posts(max_items: int = 25) -> List[Dict[str, Any]]:
 
     print("  🔍 [𝕏 领袖雷达] 正在实时嗅探硅谷顶级 AI 舵手与核心研发团队最新发声...")
 
-    leader_queries = build_dynamic_x_queries()[:3]
+    leader_queries = build_dynamic_x_queries()
 
     for q_url in leader_queries:
         if len(items) >= max_items:
@@ -2137,15 +2151,15 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     items = []
 
     # 1. 优先注入 𝕏 (Twitter) 顶尖领袖与核心工程师矩阵 (马斯克/奥特曼/Noam Brown/Brockman/LeCun/Karpathy等)
-    x_posts = fetch_x_leader_posts()
+    x_posts = fetch_x_leader_posts(max_items=50)
     items.extend(x_posts)
 
     # 2. 实时抓取当天全网轰动的 𝕏 爆款推文与大V交锋
-    live_x_posts = fetch_live_trending_x_posts(max_items=12)
+    live_x_posts = fetch_live_trending_x_posts(max_items=30)
     items.extend(live_x_posts)
 
     # 2.5 实时捕获 24h 全网平台爆帖 (𝕏 & Threads 野生极客与现象级突破，万级阅读/千赞)
-    viral_posts = fetch_viral_social_posts(max_items=16)
+    viral_posts = fetch_viral_social_posts(max_items=35)
     items.extend(viral_posts)
 
     # 3. 全球顶级硬核科技与前沿 AI 媒体 (100% 具备详实深度长导语与高清摄影原图)

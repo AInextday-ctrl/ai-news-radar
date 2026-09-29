@@ -1050,13 +1050,13 @@ def save_news(items: list):
         recent_items.extend(extra_news)
 
     celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
-    if len(celeb_recent) < 25:
-        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(25 - len(celeb_recent))]
+    if len(celeb_recent) < 50:
+        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(50 - len(celeb_recent))]
         recent_items.extend(extra_celeb)
 
     viral_recent = [it for it in recent_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
-    if len(viral_recent) < 10:
-        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(10 - len(viral_recent))]
+    if len(viral_recent) < 20:
+        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(20 - len(viral_recent))]
         recent_items.extend(extra_viral)
 
     # 3. 构建 24 小时热看板 payload (latest_news.json)
@@ -1348,6 +1348,15 @@ def run_pipeline():
     # 6. 存储增量融合后的完整大库
     save_news(cleaned_items)
     
+    # 6.5 全局动态知识图谱与全网前沿标签持续自习闭环 (SSOT Knowledge Base Self-Learning)
+    try:
+        from knowledge_base import learn_from_feed_items
+        from fetcher import get_chatbot_arena_top5
+        arena_current = get_chatbot_arena_top5()
+        learn_from_feed_items(cleaned_items, arena_current)
+    except Exception as kb_err:
+        print(f"⚠️ [Knowledge Base 学习闭环] 执行异常: {kb_err}")
+
     # 7. 自动触发微信公众号爆款资讯筛选与内联排版引擎
     try:
         from wechat_engine import generate_daily_wechat_digest
