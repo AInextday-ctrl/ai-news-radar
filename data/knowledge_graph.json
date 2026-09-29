@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-09-27T10:43:07.469692+00:00",
+  "updated_at": "2026-09-29T01:23:35.151665+00:00",
   "system_description": "开放式实体动态知识图谱与全生命周期状态机 (Open Entity Knowledge Graph & Lifecycle State Machine)",
   "entities": {
     "seadance": {
@@ -85,8 +85,8 @@
       "domain_tag": "video_generation",
       "half_life_days": 120,
       "first_learned_at": "2024-06-06T00:00:00Z",
-      "last_updated_at": "2026-09-17T09:45:00Z",
-      "active_version": "3.0",
+      "last_updated_at": "2026-09-29T01:23:35.151657+00:00",
+      "active_version": "4.0",
       "versions": [
         {
           "version": "1.0",
@@ -105,15 +105,23 @@
         {
           "version": "3.0",
           "release_date": "2026-05-18",
-          "lifecycle_status": "ACTIVE_SOTA",
-          "superseded_by": null,
+          "lifecycle_status": "DEPRECATED",
+          "superseded_by": "4.0",
           "direct_competitors": [
             "Sora 2",
             "Runway Gen-3",
             "Wan 2.1",
             "Hailuo"
           ],
-          "benchmark_highlights": "电影级动态连贯度 · 商业短剧与特效量产首选"
+          "benchmark_highlights": "电影级动态连贯度 · 商业短剧与特效量产首选",
+          "deprecation_warning": "存在上位替代: 4.0 已上线，旧版 3.0 严禁作为当前主流横评标杆"
+        },
+        {
+          "version": "4.0",
+          "release_date": "2026-09-29",
+          "lifecycle_status": "ACTIVE_SOTA",
+          "superseded_by": null,
+          "benchmark_highlights": "新晋跃迁版本 4.0，性能与时效处于当前黄金期"
         }
       ]
     },
