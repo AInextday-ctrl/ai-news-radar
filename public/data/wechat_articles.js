@@ -1,24 +1,24 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-09-29T21:59:23.170771+00:00",
+  "updated_at": "2026-09-29T22:18:28.312764+00:00",
   "date": "2026-09-29",
   "total_articles": 1,
   "audit_funnel": {
-    "total_candidates": 1700,
+    "total_candidates": 1702,
     "previously_published_excluded": 9,
-    "fresh_candidates_scanned": 1691,
-    "disqualified_count": 1691,
+    "fresh_candidates_scanned": 1693,
+    "disqualified_count": 1693,
     "qualified_count": 3,
     "published_count": 3,
     "pass_rate_percent": 0.2,
     "disqualified_breakdown": {
       "previously_published": 9,
-      "no_authentic_media": 644,
+      "no_authentic_media": 646,
       "outdated_baselines": 0,
       "below_score_threshold": 1047
     },
     "disqualification_reasons_desc": [
       "历史已发条目排除 (防止重复炒冷饭): 9 篇 (打标永久封存，0 Token 跳过)",
-      "缺少一手真实图文/视频凭证: 644 篇 (按硬门禁扣40分一票否决)",
+      "缺少一手真实图文/视频凭证: 646 篇 (按硬门禁扣40分一票否决)",
       "引用过时淘汰陈旧基准: 0 篇 (扣20分)",
       "观点平庸/缺乏硬核架构与落地账本 (<95分): 1047 篇"
     ],
