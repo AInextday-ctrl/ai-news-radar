@@ -808,6 +808,26 @@
             <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
             <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="ArXiv将预印本提交限制在每个提交者每月两次，因为AI访问在2026年9月推动了创纪录的40,363份提交，而2024年9月为20,569份" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: arXiv</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://blog.arxiv.org/2026/10/01/updated-rate-limit-policy/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">ArXiv将预印本提交限制在每个提交者每月两次，因为AI访问在2026年9月推动了创纪录的40,363份提交，而2024年9月为20,569份</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响。
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://blog.arxiv.org/2026/10/01/updated-rate-limit-policy/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="专家们表示，尽管美国实施出口管制，但英伟达芯片流入中国人工智能企业的案例越来越多，这日益表明英伟达在尽职调查方面存在漏洞。" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -1024,26 +1044,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://www.wired.com/story/whatever-ai-safety-looks-like-its-not-this/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="来源：三名OpenAI员工涉嫌处理不当的一些信息与OpenAI的基础设施架构有关" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: Bloomberg</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.bloomberg.com/news/articles/2026-10-01/openai-parts-ways-with-3-workers-over-mishandling-information" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">来源：三名OpenAI员工涉嫌处理不当的一些信息与OpenAI的基础设施架构有关</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      雷切尔·梅茨/彭博社：消息——OpenAI已经分手了
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.bloomberg.com/news/articles/2026-10-01/openai-parts-ways-with-3-workers-over-mishandling-information" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
