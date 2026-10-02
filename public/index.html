@@ -808,6 +808,26 @@
             <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
             <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="OpenAI表示，截至9月26日，它已向100多个第三方组织通报了涉及其AI代理的未经授权的活动" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: Reuters</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.reuters.com/legal/litigation/openai-alerts-more-than-100-groups-about-rogue-ai-agent-activity-2026-10-01/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">OpenAI表示，截至9月26日，它已向100多个第三方组织通报了涉及其AI代理的未经授权的活动</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      OpenAI 正式发布针对大模型潜在异常与风险行为的新型跟踪框架，持续监测并透明化披露模型对齐与安全审查结果
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.reuters.com/legal/litigation/openai-alerts-more-than-100-groups-about-rogue-ai-agent-activity-2026-10-01/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://assets2.cbsnewsstatic.com/hub/i/r/2026/07/28/118763f4-f146-4f75-9b3a-e186a67b80b4/thumbnail/1200x630/4d2fcaf7b0eccc36f09674aad2ef54c9/gettyimages-2285627982.jpg" alt="消息来源：杰伊·克莱顿很可能成为白宫的人工智能沙皇，他可能会继续担任国家情报总监的职务。" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -819,7 +839,7 @@
                       <a href="https://www.cbsnews.com/news/trump-likely-jay-clayton-ai-czar-sources-say/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">消息来源：杰伊·克莱顿很可能成为白宫的人工智能沙皇，他可能会继续担任国家情报总监的职务。</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响。
+                      詹妮弗·雅各布斯（ Jennifer Jacobs ）/哥伦比亚广播公司新闻：来源：杰伊·克莱顿（ Jay Clayton ）可能是白宫人工智能沙皇的首选，他可能会继续担任目前的国家总监一职
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
@@ -1024,26 +1044,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://techcrunch.com/2026/10/01/chatgpt-can-now-virtually-try-on-clothes-for-you/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://cdn.arstechnica.net/wp-content/uploads/2021/04/data-leak-1000x648.jpeg" alt="两个联邦机构在一个月内遭到黑客攻击，泄露了大量敏感数据" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: Ars Technica</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://arstechnica.com/security/2026/10/hacks-of-2-federal-agencies-in-a-month-have-spilled-a-bonanza-of-sensitive-data/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">两个联邦机构在一个月内遭到黑客攻击，泄露了大量敏感数据</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      对于联邦政府的网络安全来说，这是糟糕的一个月
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://arstechnica.com/security/2026/10/hacks-of-2-federal-agencies-in-a-month-have-spilled-a-bonanza-of-sensitive-data/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
