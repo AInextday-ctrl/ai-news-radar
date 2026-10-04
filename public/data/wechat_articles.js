@@ -1,12 +1,12 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-10-04T21:42:50.970185+00:00",
+  "updated_at": "2026-10-04T22:01:15.275357+00:00",
   "date": "2026-10-04",
   "total_articles": 1,
   "audit_funnel": {
-    "total_candidates": 1970,
+    "total_candidates": 1971,
     "previously_published_excluded": 9,
-    "fresh_candidates_scanned": 1961,
-    "disqualified_count": 1961,
+    "fresh_candidates_scanned": 1962,
+    "disqualified_count": 1962,
     "qualified_count": 3,
     "published_count": 3,
     "pass_rate_percent": 0.2,
@@ -14,13 +14,13 @@ window.WECHAT_ARTICLES_DATA = {
       "previously_published": 9,
       "no_authentic_media": 737,
       "outdated_baselines": 0,
-      "below_score_threshold": 1224
+      "below_score_threshold": 1225
     },
     "disqualification_reasons_desc": [
       "历史已发条目排除 (防止重复炒冷饭): 9 篇 (打标永久封存，0 Token 跳过)",
       "缺少一手真实图文/视频凭证: 737 篇 (按硬门禁扣40分一票否决)",
       "引用过时淘汰陈旧基准: 0 篇 (扣20分)",
-      "观点平庸/缺乏硬核架构与落地账本 (<95分): 1224 篇"
+      "观点平庸/缺乏硬核架构与落地账本 (<95分): 1225 篇"
     ],
     "processed_marking_mode": "全量打标与去重流水线 (Ledger & Anti-Repeat Pipeline 已激活)",
     "token_economy_mode": "极速省Token分级防线: 98.8% 候选在本地规则层 0 Token 拦截，已发布文章永久排除防重复生成"
