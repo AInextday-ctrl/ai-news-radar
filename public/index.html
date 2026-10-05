@@ -541,9 +541,9 @@
           </select>
 
           <!-- 💡 语言建议切换气泡指示框 (自动检测系统语言，数秒后自动淡出消失，不主动强制切换) -->
-          <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-200 dark:border-indigo-800/80 shadow-2xl z-50 transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none">
+          <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-300 dark:border-indigo-700/80 shadow-2xl z-[9999] transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none select-none">
             <!-- 箭头 -->
-            <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-200 dark:border-indigo-800/80 transform rotate-45"></div>
+            <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-300 dark:border-indigo-700/80 transform rotate-45"></div>
             
             <div class="relative flex items-start space-x-2.5">
               <div class="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800/60 flex items-center justify-center text-base shrink-0 shadow-sm">
@@ -561,12 +561,12 @@
                     <span>🇨🇳</span>
                     <span id="lang-suggest-btn-text">切换为中文</span>
                   </button>
-                  <button type="button" onclick="dismissLangSuggestion()" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
+                  <button type="button" onclick="dismissLangSuggestion(true)" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
                     保持英文
                   </button>
                 </div>
               </div>
-              <button type="button" onclick="dismissLangSuggestion()" class="absolute -top-0.5 right-0 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs p-1 cursor-pointer" title="关闭提示">
+              <button type="button" onclick="dismissLangSuggestion(true)" class="absolute -top-0.5 right-0 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs p-1 cursor-pointer" title="关闭提示">
                 ✕
               </button>
             </div>
@@ -1950,10 +1950,10 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const paramLang = urlParams.get('lang');
-    // 英文为主站 (English-First)：优先尊重 URL 参数与用户已保存偏好，默认一律为 'en'
+    // 英文为主站 (English-First)：优先尊重 URL 参数与用户主动设定的语言，默认一律为 'en'
     let currentLang = (paramLang && (paramLang === 'en' || paramLang === 'zh'))
       ? paramLang
-      : (localStorage.getItem('ai_radar_lang') || 'en');
+      : (localStorage.getItem('ai_radar_user_lang') || 'en');
     document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
     let currentTheme = localStorage.getItem('theme') || 'auto';
     let selectedCreator = null;
@@ -2662,7 +2662,7 @@
       'ro': 'romanian'
     };
 
-    let currentSiteLang = localStorage.getItem('ai_radar_translate_lang');
+    let currentSiteLang = localStorage.getItem('ai_radar_user_site_lang');
 
     // 自动探测访客系统/浏览器语言 (仅用于智能提供切换建议，不主动替用户强制修改)
     function detectVisitorLanguage() {
@@ -2882,20 +2882,23 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    function changeSiteLanguage(targetLang) {
+    function changeSiteLanguage(targetLang, persist = true) {
       currentSiteLang = targetLang;
-      localStorage.setItem('ai_radar_translate_lang', targetLang);
+      if (persist) {
+        localStorage.setItem('ai_radar_user_site_lang', targetLang);
+        localStorage.setItem('ai_radar_user_lang', targetLang === 'english' ? 'en' : 'zh');
+      }
       const selectEl = document.getElementById('site-lang-select');
       if (selectEl && selectEl.value !== targetLang) {
         selectEl.value = targetLang;
       }
       if (targetLang === 'english') {
-        setLanguage('en');
+        setLanguage('en', persist);
         if (typeof translate !== 'undefined' && translate.reset) {
           try { translate.reset(); } catch (e) {}
         }
       } else {
-        setLanguage('zh');
+        setLanguage('zh', persist);
         if (typeof translate !== 'undefined') {
           if (targetLang === 'chinese_simplified') {
             try {
@@ -2912,7 +2915,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function applyCurrentTranslation() {
       if (typeof translate !== 'undefined' && translate.execute) {
-        const lang = localStorage.getItem('ai_radar_translate_lang') || currentSiteLang;
+        const lang = localStorage.getItem('ai_radar_user_site_lang') || currentSiteLang;
         if (lang && lang !== 'chinese_simplified' && lang !== 'english') {
           setTimeout(() => {
             try {
@@ -2925,14 +2928,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 💡 智能系统语言检测与温和建议提示 (数秒后自动淡出消失，绝不主动强行替用户切换)
     function checkAndShowLangSuggestion() {
-      // 若当前 Session 已提示过，避免重复弹出
-      if (sessionStorage.getItem('ai_radar_lang_suggest_shown')) return;
-      // 若用户曾显式保存过语言选择，严格尊重用户设置，不弹窗
-      if (localStorage.getItem('ai_radar_translate_lang') || localStorage.getItem('ai_radar_lang')) return;
+      // 若用户在当前页面会话中已主动点击关闭或保持，不再重复弹窗打扰
+      if (sessionStorage.getItem('ai_radar_lang_suggest_dismissed')) return;
 
       const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      // 若访客系统本就是英文，无需提示，已在英文主站
-      if (!navLang || navLang.startsWith('en')) return;
+      
+      // 用户系统主要语言类别
+      let userPrimaryLang = 'en';
+      if (navLang.startsWith('zh')) {
+        userPrimaryLang = (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant') || navLang.includes('mo')) ? 'zh-tw' : 'zh';
+      } else {
+        userPrimaryLang = navLang.split('-')[0] || 'en';
+      }
+
+      // 网站当前实际激活语言 ('en' | 'zh' | 'zh-tw' | ...)
+      const siteLang = currentSiteLang || (currentLang === 'zh' ? 'chinese_simplified' : 'english');
+      let sitePrimaryLang = 'en';
+      if (siteLang === 'chinese_simplified' || (currentLang === 'zh' && siteLang !== 'chinese_traditional')) {
+        sitePrimaryLang = 'zh';
+      } else if (siteLang === 'chinese_traditional') {
+        sitePrimaryLang = 'zh-tw';
+      } else if (siteLang === 'english' || currentLang === 'en') {
+        sitePrimaryLang = 'en';
+      } else {
+        sitePrimaryLang = siteLang;
+      }
+
+      // 核心判断：当系统语言与网站当前语言完全不一致时，必须弹出提示！
+      const isMismatch = (userPrimaryLang !== sitePrimaryLang);
+      if (!isMismatch) return;
 
       const bubble = document.getElementById('lang-suggest-bubble');
       if (!bubble) return;
@@ -2943,23 +2967,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const btnTextEl = document.getElementById('lang-suggest-btn-text');
 
       let targetSiteLang = 'chinese_simplified';
-      if (navLang.startsWith('zh')) {
-        if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
-          targetSiteLang = 'chinese_traditional';
-          if (titleEl) titleEl.innerHTML = '<span>偵測到系統語言為繁體中文</span>';
-          if (descEl) descEl.textContent = '本站預設以一手英文呈現。如需繁體中文閱讀，可在此切換（數秒後提示自動消失）。';
-          if (btnTextEl) btnTextEl.textContent = '切換為繁體中文';
-        } else {
-          targetSiteLang = 'chinese_simplified';
-          if (titleEl) titleEl.innerHTML = '<span>检测到系统语言为中文</span>';
-          if (descEl) descEl.textContent = '本站默认以一手英文呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。';
-          if (btnTextEl) btnTextEl.textContent = '切换为中文';
-        }
+      if (userPrimaryLang === 'zh') {
+        targetSiteLang = 'chinese_simplified';
+        if (titleEl) titleEl.innerHTML = '<span>🌐 检测到系统语言为中文</span>';
+        if (descEl) descEl.textContent = '本站默认以英文一手信源呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。';
+        if (btnTextEl) btnTextEl.textContent = '切换为中文';
+      } else if (userPrimaryLang === 'zh-tw') {
+        targetSiteLang = 'chinese_traditional';
+        if (titleEl) titleEl.innerHTML = '<span>🌐 偵測到系統語言為繁體中文</span>';
+        if (descEl) descEl.textContent = '本站預設以一手英文呈現。如需繁體中文閱讀，可在此切換（數秒後提示自動消失）。';
+        if (btnTextEl) btnTextEl.textContent = '切換為繁體中文';
+      } else if (userPrimaryLang === 'en') {
+        targetSiteLang = 'english';
+        if (titleEl) titleEl.innerHTML = '<span>🌐 Switch to English?</span>';
+        if (descEl) descEl.textContent = 'Detected English system. Click below to view original English intelligence.';
+        if (btnTextEl) btnTextEl.textContent = 'Switch to English';
       } else {
-        const matched = BROWSER_LANG_MAP[navLang] || BROWSER_LANG_MAP[navLang.split('-')[0]];
+        const matched = BROWSER_LANG_MAP[navLang] || BROWSER_LANG_MAP[userPrimaryLang];
         if (matched) {
           targetSiteLang = matched;
-          if (titleEl) titleEl.innerHTML = '<span>Switch to your language?</span>';
+          if (titleEl) titleEl.innerHTML = '<span>🌐 Translate to your language?</span>';
           if (descEl) descEl.textContent = 'Defaults to original English. Click below to translate (auto-dismisses soon).';
           if (btnTextEl) btnTextEl.textContent = `Translate to ${targetSiteLang}`;
         } else {
@@ -2969,46 +2996,55 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (btnEl) {
         btnEl.onclick = () => {
-          changeSiteLanguage(targetSiteLang);
-          dismissLangSuggestion();
+          changeSiteLanguage(targetSiteLang, true);
+          dismissLangSuggestion(true);
         };
       }
 
+      // 展开提示框 (保证高层级与优雅平滑淡入)
+      bubble.classList.remove('hidden', 'pointer-events-none');
+      bubble.style.display = 'block';
       setTimeout(() => {
-        bubble.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          bubble.classList.remove('pointer-events-none', 'opacity-0', '-translate-y-2');
-          bubble.classList.add('opacity-100', 'translate-y-0');
-        });
-        sessionStorage.setItem('ai_radar_lang_suggest_shown', '1');
+        bubble.style.opacity = '1';
+        bubble.style.transform = 'translateY(0)';
+      }, 50);
 
-        // 7 秒后自动平滑淡出消失 (严格不主动替用户修改)
-        window.langSuggestDismissTimer = setTimeout(() => {
-          dismissLangSuggestion();
-        }, 7000);
-      }, 1000);
+      // 7 秒后自动平滑淡出消失 (严格不主动替用户强制修改语言)
+      if (window.langSuggestDismissTimer) clearTimeout(window.langSuggestDismissTimer);
+      window.langSuggestDismissTimer = setTimeout(() => {
+        dismissLangSuggestion(false);
+      }, 7000);
     }
 
-    function dismissLangSuggestion() {
+    function dismissLangSuggestion(userDismissed = true) {
       if (window.langSuggestDismissTimer) {
         clearTimeout(window.langSuggestDismissTimer);
         window.langSuggestDismissTimer = null;
       }
       const bubble = document.getElementById('lang-suggest-bubble');
       if (bubble) {
-        bubble.classList.remove('opacity-100', 'translate-y-0');
-        bubble.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+        bubble.style.opacity = '0';
+        bubble.style.transform = 'translateY(-8px)';
         setTimeout(() => {
-          bubble.classList.add('hidden');
-        }, 500);
+          bubble.style.display = 'none';
+          bubble.classList.add('hidden', 'pointer-events-none');
+        }, 400);
       }
-      sessionStorage.setItem('ai_radar_lang_suggest_shown', '1');
+      if (userDismissed) {
+        sessionStorage.setItem('ai_radar_lang_suggest_dismissed', '1');
+      }
     }
 
+    // 挂载到全局方便测试与调试
+    window.checkAndShowLangSuggestion = checkAndShowLangSuggestion;
+    window.dismissLangSuggestion = dismissLangSuggestion;
+
     // 切换语言基底
-    function setLanguage(lang) {
+    function setLanguage(lang, persist = true) {
       currentLang = lang;
-      localStorage.setItem('ai_radar_lang', lang);
+      if (persist) {
+        localStorage.setItem('ai_radar_user_lang', lang);
+      }
       document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
       try {
         const u = new URL(window.location.href);
@@ -8109,8 +8145,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     });
 
-    // 初始化路由与语言状态 (英文为主站 English-First)
-    setLanguage(currentLang);
+    // 初始化路由与语言状态 (英文为主站 English-First，不污染持久化配置)
+    setLanguage(currentLang, false);
     const initHashTab = getTabFromHash();
     if (initHashTab) {
       switchTab(initHashTab, false);
@@ -8122,16 +8158,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       clearTimeout(resizeSyncTimer);
       resizeSyncTimer = setTimeout(syncThreeColumnsHeight, 100);
     });
-    window.addEventListener('DOMContentLoaded', () => {
-      initTranslateEngine();
-      handleHashNavigation();
-      syncThreeColumnsHeight();
-      checkAndShowLangSuggestion();
-    });
-    setTimeout(() => {
+
+    const runLangCheck = () => {
       initTranslateEngine();
       checkAndShowLangSuggestion();
-    }, 400);
+    };
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      setTimeout(runLangCheck, 300);
+    } else {
+      window.addEventListener('DOMContentLoaded', () => {
+        handleHashNavigation();
+        syncThreeColumnsHeight();
+        setTimeout(runLangCheck, 300);
+      });
+    }
+    setTimeout(runLangCheck, 600);
   </script>
 
   <!-- ===== 全站底部导航页脚 (AdSense E-E-A-T 信任信号) ===== -->
