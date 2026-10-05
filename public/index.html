@@ -2504,7 +2504,46 @@
       return tag;
     }
 
-    // 场景标签翻译助手
+    function hasChineseText(str) {
+      return typeof str === 'string' && /[\u4e00-\u9fa5]/.test(str);
+    }
+
+    function formatVideoTitle(item, lang) {
+      if (!item) return '';
+      const rawTitle = item.title || '';
+      const rawTitleZh = item.title_zh || '';
+      if (lang !== 'zh') {
+        return item.title_en || rawTitle;
+      }
+      // 中文模式：处理类似 "【🔥 近期爆点】The Billion Dollar AI Advantage..."
+      const prefixMatch = rawTitleZh.match(/^([【\[].*?[】\]]\s*)/) || rawTitle.match(/^([【\[].*?[】\]]\s*)/);
+      const prefix = prefixMatch ? prefixMatch[1] : '';
+      const bodyZh = rawTitleZh ? rawTitleZh.replace(/^([【\[].*?[】\]]\s*)/, '').trim() : '';
+      
+      // 如果 bodyZh 已经有实质中文
+      if (hasChineseText(bodyZh)) {
+        return prefix + bodyZh;
+      }
+      
+      // 检查摘要 summary_zh 是否包含高质量中文提取
+      const summaryZh = item.summary_zh || '';
+      if (hasChineseText(summaryZh)) {
+        // 滤除常见链接和赞赏前缀
+        const cleanSum = summaryZh
+          .replace(/^[❤️\s\d+赞·个赞]+\s*/g, '')
+          .replace(/https?:\/\/\S+/g, '')
+          .replace(/📝.*?https?:\/\/\S+/g, '')
+          .replace(/🙏.*?/g, '')
+          .trim();
+        const firstSentence = cleanSum.split(/[。！？\n]/)[0].trim();
+        if (firstSentence && firstSentence.length >= 6 && firstSentence.length <= 45 && hasChineseText(firstSentence)) {
+          return prefix + firstSentence;
+        }
+      }
+
+      // 如果有 bodyZh 则返回，否则返回 rawTitleZh 或 rawTitle
+      return rawTitleZh || rawTitle;
+    }
     function translateScenarioTag(scenario, lang) {
       if (lang === 'zh') return scenario;
       if (scenario.includes('图像') || scenario.includes('设计') || scenario.includes('修图')) return '🎨 Image & Design';
@@ -5187,8 +5226,31 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const iconSvg = getToolSvgIcon(item.icon_type);
 
       const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI Tool');
-      const hook = (isZh ? (item.app_hook || item.title_zh || item.title) : (item.app_hook_en || item.title_en || item.title)) || "";
-      const summary = (isZh ? (item.overview_zh || item.summary_zh || item.content_snippet) : (item.overview_en || item.summary_en || item.content_snippet)) || "";
+      let hook = "";
+      let summary = "";
+      if (isZh) {
+        // 中文模式：优先取纯正中文看点，坚决杜绝生硬英文长句
+        const candSummary = item.summary_zh || item.overview_zh || "";
+        const candHook = item.app_hook || "";
+        const candTitleZh = item.title_zh || "";
+        
+        if (hasChineseText(candHook)) {
+          hook = candHook;
+          summary = candSummary || item.content_snippet || "";
+        } else if (hasChineseText(candSummary)) {
+          hook = candSummary;
+          summary = hasChineseText(candTitleZh) ? candTitleZh : (candHook || item.content_snippet || "");
+        } else if (hasChineseText(candTitleZh)) {
+          hook = candTitleZh;
+          summary = candHook || item.content_snippet || "";
+        } else {
+          hook = candHook || candTitleZh || item.title || "";
+          summary = candSummary || item.content_snippet || "";
+        }
+      } else {
+        hook = item.app_hook_en || item.title_en || item.app_hook || item.title || "";
+        summary = item.overview_en || item.summary_en || item.content_snippet || "";
+      }
       const cleanSource = item.source || (isZh ? "AI 资讯雷达" : "AI News Radar");
       const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const transitUrl = formatTransitGoUrl(officialUrl, item);
@@ -5656,7 +5718,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function renderVerticalVideoCard(item) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || "";
+      const title = formatVideoTitle(item, currentLang);
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com')) || (item.url && item.url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'shorts';
@@ -5758,7 +5820,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function renderHorizontalVideoCard(item) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const title = formatVideoTitle(item, currentLang);
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
@@ -6963,16 +7025,31 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive News Briefing');
       if (summaryEl) summaryEl.textContent = briefingText;
 
-      // 深度报道原文 / 核心段落展示控制 (若具备长篇报道原文，原汁原味呈现其格式与上下文)
+      // 深度报道长文实录 / 核心段落展示控制 (优先按语言呈现对应译文或原文)
       const originalCardEl = document.getElementById('ai-modal-original-card');
       const originalTitleEl = document.getElementById('ai-modal-original-title');
       const originalTextEl = document.getElementById('ai-modal-original-text');
-      const origContent = String(item.article_content || item.original_content || '').trim();
+      const origContentEn = String(item.article_content || item.original_content || '').trim();
+      const origContentZh = String(item.article_content_zh || '').trim();
+      const contentToDisplay = isZh 
+        ? (origContentZh || origContentEn) 
+        : (origContentEn || origContentZh);
+
       if (originalCardEl && originalTextEl) {
-        if (origContent && origContent.length > 70 && origContent !== briefingText && origContent !== cleanTitle) {
+        if (contentToDisplay && contentToDisplay.length > 70 && contentToDisplay !== briefingText && contentToDisplay !== cleanTitle) {
           originalCardEl.classList.remove('hidden');
-          if (originalTitleEl) originalTitleEl.textContent = isZh ? '深度报道与访谈实录 (英文原文)' : 'Original Coverage & Interview';
-          originalTextEl.innerHTML = formatRichArticleContent(origContent, isZh);
+          if (originalTitleEl) {
+            originalTitleEl.textContent = isZh ? '深度报道与访谈实录' : 'Original Coverage & Interview';
+          }
+          originalTextEl.innerHTML = formatRichArticleContent(contentToDisplay, isZh);
+          // 若为非英语且正在使用整站翻译插件，触发动态区域翻译
+          if (typeof translate !== 'undefined' && currentSiteLang && currentSiteLang !== 'chinese_simplified' && currentSiteLang !== 'english') {
+            try {
+              setTimeout(() => {
+                translate.execute(originalTextEl);
+              }, 50);
+            } catch (e) {}
+          }
         } else {
           originalCardEl.classList.add('hidden');
           originalTextEl.innerHTML = '';
@@ -8000,7 +8077,29 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const specSourceEl = document.getElementById('tool-modal-spec-source');
 
       const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI 工具');
-      const hook = item.app_hook || item.title_zh || item.title || "";
+      let hook = "";
+      let overviewText = "";
+      if (isZh) {
+        const candSummary = item.summary_zh || item.overview_zh || "";
+        const candHook = item.app_hook || "";
+        const candTitleZh = item.title_zh || "";
+        if (hasChineseText(candHook)) {
+          hook = candHook;
+          overviewText = candSummary || item.content_snippet || candHook;
+        } else if (hasChineseText(candSummary)) {
+          hook = candSummary;
+          overviewText = hasChineseText(candTitleZh) ? candTitleZh : (candHook || item.content_snippet || candSummary);
+        } else if (hasChineseText(candTitleZh)) {
+          hook = candTitleZh;
+          overviewText = candHook || item.content_snippet || candTitleZh;
+        } else {
+          hook = candHook || candTitleZh || item.title || "";
+          overviewText = candSummary || item.content_snippet || hook;
+        }
+      } else {
+        hook = item.app_hook_en || item.title_en || item.app_hook || item.title || "";
+        overviewText = item.overview_en || item.summary_en || item.content_snippet || hook;
+      }
       const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const sourceUrl = item.source_url || item.url || "#";
       const sourceName = item.source || "AI 资讯雷达";
@@ -8034,9 +8133,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (visitTextEl) visitTextEl.textContent = isZh ? '🚀 访问官网' : '🚀 Visit Website';
       if (hookEl) hookEl.textContent = hook;
 
-      const overviewText = isZh
-        ? (item.overview_zh || item.summary_zh || item.content_snippet || hook)
-        : (item.overview_en || item.summary_en || item.content_snippet || hook);
       if (overviewEl) overviewEl.textContent = overviewText;
 
       const features = isZh ? (item.features_zh || []) : (item.features_en || []);
