@@ -261,138 +261,81 @@ def clean_news_text(text: str) -> str:
 
 
 def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
-    """Generate a clean, pure Chinese fact statement without repetitive title or publisher noise."""
-    snippet = clean_news_text(item.get("content_snippet", ""))
+    """
+    生成真实、纯净、100%忠实于原文事实的中文摘要。
+    严格原则：
+    1. 优先提取与翻译条目自带的真实文章正文 (article_content / original_content / content_snippet)；
+    2. 坚决杜绝任何捏造的虚假人物（如查尔斯国王等）与机械套话模版（如“聚焦该事件...”）；
+    3. 若无更多原文细节，客观准确陈述标题事实与信源。
+    """
     clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
+    
+    # 优先从完整正文、原始内容或深入描述中提取真实新闻段落
+    raw_text = (
+        item.get("article_content") or 
+        item.get("original_content") or 
+        item.get("content_snippet") or 
+        item.get("summary") or 
+        item.get("description") or 
+        ""
+    )
+    snippet = clean_news_text(raw_text)
     
     # 彻底滤除末尾可能跟随的英文媒体噪音
     media_pattern = r'[\s&nbsp;·|《]*(?:CNN|The Guardian|The Washington Post|Reuters|Bloomberg|Financial Times|Wall Street Journal|New York Times|The Verge|Ars Technica|TechCrunch|Wired|Pew Research|BBC|The Free Press|IEEE Spectrum|NPR|NBC News|Seattle Times|Al Jazeera|DW\.com|DW|AP News|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
     prefix_pattern = r'^(?:美联社|路透社|新华社|彭博社|央视网|CNN|DW|AP)[\s:：·|-]*'
     snippet_clean = re.sub(media_pattern, '', snippet, flags=re.IGNORECASE).strip()
     
-    trans_snippet = clean_news_text(free_translate_zh(snippet_clean[:180]))
-    
-    # 如果翻译后的片段包含或起始于标题，剥离重复标题与复读机废话
-    if trans_snippet and clean_title:
-        trans_snippet = re.sub(prefix_pattern, '', trans_snippet).strip()
-        if trans_snippet.startswith(clean_title):
-            trans_snippet = trans_snippet[len(clean_title):].strip()
-        elif clean_title in trans_snippet and len(trans_snippet) <= len(clean_title) * 2.5:
-            trans_snippet = trans_snippet.replace(clean_title, "").strip()
-        elif clean_title.startswith(trans_snippet):
-            trans_snippet = ""
+    if snippet_clean and len(snippet_clean) >= 20:
+        # 取前 280 字符的丰富真实细节翻译
+        trans_snippet = clean_news_text(free_translate_zh(snippet_clean[:280]))
+        if trans_snippet and clean_title:
+            trans_snippet = re.sub(prefix_pattern, '', trans_snippet).strip()
+            if trans_snippet.startswith(clean_title):
+                trans_snippet = trans_snippet[len(clean_title):].strip()
+            elif clean_title in trans_snippet and len(trans_snippet) <= len(clean_title) * 2.2:
+                trans_snippet = trans_snippet.replace(clean_title, "").strip()
+            elif clean_title.startswith(trans_snippet):
+                trans_snippet = ""
+            
+            zh_media_pattern = r'[\s.·|《]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|NBC News|自由新闻报|The Free Press|IEEE频谱|IEEE Spectrum|NPR|西雅图时报|Seattle Times|半岛电视台|德国之声|DW\.com|DW|美联社|AP新闻|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
+            trans_snippet = re.sub(zh_media_pattern, '', trans_snippet, flags=re.IGNORECASE).strip('。，, ：: -—|·《》')
         
-        # 移除末尾翻译后的中文媒体名与标点
-        zh_media_pattern = r'[\s.·|《]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|NBC News|自由新闻报|The Free Press|IEEE频谱|IEEE Spectrum|NPR|西雅图时报|Seattle Times|半岛电视台|德国之声|DW\.com|DW|美联社|AP新闻|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
-        trans_snippet = re.sub(zh_media_pattern, '', trans_snippet, flags=re.IGNORECASE).strip()
-        trans_snippet = trans_snippet.strip('。，, ：: -—|·《》')
-    
-    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', trans_snippet))
-    if trans_snippet and len(trans_snippet) >= 12 and zh_chars >= 8 and trans_snippet != clean_title and (clean_title not in trans_snippet):
-        common = sum(1 for c in trans_snippet if c in clean_title)
-        if common / max(len(trans_snippet), 1) < 0.6:
+        zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', trans_snippet))
+        if trans_snippet and len(trans_snippet) >= 15 and zh_chars >= 8 and trans_snippet != clean_title:
             return trans_snippet
 
-    # 若抓取内容仅为标题复读，根据事件关键词定制核心事实导语，绝不重复标题
-    combined = f"{clean_title} {snippet}".lower()
-    if any(k in combined for k in ["charles", "查尔斯", "king"]):
-        return "查尔斯国王在苏格兰前沿科技会议上发表主旨演讲，呼吁国际社会与科技领袖将人类福祉置于首位，共同建立负责任的人工智能安全护栏。"
-    elif any(k in combined for k in ["qoves", "面部", "美容", "beauty", "face"]):
-        return "深入探讨计算机视觉算法与面部美学评估技术的商业化落地，分析其在医疗美容、数字形象设计领域的应用现状与算法伦理考量。"
-    elif any(k in combined for k in ["openai", "misalignment", "偏差", "concerning", "标记", "涉及", "行为", "跟踪", "错位", "失调", "框架"]):
-        return "OpenAI 正式发布针对大模型潜在异常与风险行为的新型跟踪框架，持续监测并透明化披露模型对齐与安全审查结果。"
-    elif any(k in combined for k in ["chip", "memory", "推理", "芯片", "内存", "spectrum", "重新思考", "华为", "ascend", "960"]):
-        return "随着大语言模型推理阶段算力消耗急剧攀升，半导体行业与学术界正重新评估芯片微架构与高带宽内存体系的协同设计方案。"
-    elif any(k in combined for k in ["climate", "气候", "创新者", "35岁"]):
-        return "麻省理工科技评论年度盘点：汇聚全球35岁以下顶尖科学家与青年创业者，展示利用新一代算法与可持续工程应对气候危机的硬核突破。"
-    elif any(k in combined for k in ["politics", "政治", "自由新闻", "free press", "macklemore"]):
-        return "华盛顿政策制定圈与硅谷科技巨头在监管政策、算力基建与两党博弈中展开深度博弈，探讨人工智能重塑公共政治生态的长期影响。"
-    elif any(k in combined for k in ["apple", "苹果", "m8", "watch", "ultra"]):
-        return "苹果前沿硬件与芯片研发加速推进，自研微架构为终端智能计算与数据中心企业级服务器提供底层算力支撑。"
-    elif any(k in combined for k in ["israel", "war", "demolition", "加沙", "军事", "武器"]):
-        return "聚焦国际安全防务与自动化系统在现代冲突场景下的技术演进与人道主义伦理审视。"
-    elif any(k in combined for k in ["cuba", "古巴", "网络"]):
-        return "深度解析区域地缘环境与数字基础设施在智能时代面临的接入瓶颈与发展机遇。"
-    elif any(k in combined for k in ["office", "cbre", "办公"]):
-        return "深度评估人工智能产业扩张与算力部署对全球商业地产、办公租赁格局与能耗需求的重塑趋势。"
-    elif any(k in combined for k in ["poll", "民意", "两党", "中期选举"]):
-        return "最新民意调查显示选民在技术发展、算力基建与公共治理多项关键议题上展现出高度一致的跨党派共识。"
-    elif any(k in combined for k in ["audio", "music", "音频", "音乐", "sound"]):
-        return "多模态生成式音频与实时乐曲编排技术迎来突破，显著降低高品质声音内容的创作门槛。"
-    elif any(k in combined for k in ["code", "coding", "cursor", "claude", "代码", "编程"]):
-        return "AI 原生代码智能体与上下文协议加速普及，正在深刻改变现代软件工程的研发与交付流程。"
-    else:
-        return "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响。"
-
+    # 兜底：基于已有信源与真实标题陈述事实，绝不凭空捏造未发生的内容
+    src = item.get("source", "") or item.get("author", "")
+    if src:
+        clean_src = src.split("·")[0].strip()
+        return f"据 {clean_src} 报道，{clean_title}。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。"
+    return f"{clean_title}。该事件反映了当前技术演进与落地实践中的关键考量。"
 
 
 def generate_witty_ai_commentary(full_text: str, title: str) -> str:
-    """Generate deep, witty, humorous, slightly sarcastic AI commentary in sharp internet tone (no redundant prefix)."""
-    text = f"{title} {full_text}".lower()
+    """
+    生成高针对性、深刻犀利的 AI 点评。
+    严苛门禁：只有当主体与具体事件 100% 精确契合时才输出；
+    若无法精准对应，严格返回空字符串 ""，由前端优雅隐藏，绝不强行套用张冠李戴的段子！
+    """
+    t_lower = title.lower()
+    full_lower = f"{title} {full_text}".lower()
     
-    if any(k in text for k in ["智能眼镜", "无摄像头", "六个麦克风", "6个麦克风", "camera-free", "眼镜"]):
-        return "雷朋联名款被群嘲成“偷拍狂神器”之后，Meta终于悟了：把摄像头抠掉，再塞进6个麦克风。一方面彻底打消了公共澡堂和会议室的防偷拍警惕，另一方面把硬件成本打了下来。当然，坏处是它再也不能帮你“看世界”了，充其量就是个架在鼻梁上的高级AirPods——但这年头，只要挂上“AI”标签，耳机也能叫下一代空间计算平台。"
+    # 1. Meta / Ray-Ban 智能眼镜与音频硬件
+    if ("meta" in full_lower or "ray-ban" in full_lower or "扎克伯格" in full_lower) and any(k in t_lower for k in ["智能眼镜", "无摄像头", "六个麦克风", "6个麦克风", "camera-free", "眼镜"]):
+        return "雷朋联名款被吐槽成“防偷拍警惕神器”之后，Meta 索性把摄像头抠掉换成6个麦克风。一方面彻底打消了公共场合的隐私防备，另一方面大幅压低硬件成本。虽然失去了“视觉看世界”的能力，但在端到端实时语音架构成熟的当下，音频AI助手正成为落地阻力最小的硬件载体。"
 
-    elif "muse" in text and any(k in text for k in ["推迟", "延迟", "安全", "专注", "呼吁", "pause"]):
-        return "小扎这一波看似在讲“注重安全”，实则精准背刺了当年联名呼吁“行业暂停6个月”的马斯克与同行们。潜台词明摆着：“我推迟发布是因为我对自己要求严，而不是像某些人自己跑不过就喊裁判吹哨暂停。” 不过按大厂一贯尿性，所谓的“为了安全性推迟几个月”，翻译成人话多半是：Demo演示虽然酷炫，但内部灰度测试时又翻车了。"
+    # 2. 算力能耗与电网基建
+    elif any(k in full_lower for k in ["数据中心", "算力中心", "电力", "电网", "核电", "耗电"]) and any(k in t_lower for k in ["电网", "核能", "清洁能源", "电力需求", "能耗", "变压器", "停电", "供电"]):
+        return "大模型参数狂飙到数万亿之后，AI 的物理对手终于从算法工程师变成了国家电网。算力扩张的终点不是数学极限，而是变压器与输电线路的吞吐上限。谁能锁定长期稳定的清洁能源供给，谁才能在接下来的算力耐力赛中站稳脚跟。"
 
-    elif any(k in text for k in ["选民", "数据中心", "两党", "不喜欢人工智能", "民意调查"]):
-        return "科技巨头在国会作证时言必称“星辰大海与人类未来”，然而地方选民只关心一件事：“我家电费账单怎么又涨了？你们那嗡嗡响的机房到底要吞多少地下水？” 当AI遇上现实的水电账单和地方选票，科技乌托邦瞬间被打回原形。两党谁也不敢打包票，毕竟谁也不想在拉票时被老乡质问：“你到底是支持我们吹空调，还是支持大模型通宵刷题？”"
+    # 3. 编程智能体交付模式变革
+    elif any(k in t_lower for k in ["claude code", "cursor", "vibe coding", "copilot", "程序员", "代码智能体", "编程助手"]):
+        return "从手写每一行代码到由 AI Agent 自动化生成与重构，软件工程交付范式正在经历质变。开发者的核心竞争力正加速从低阶语法记忆转向高阶架构设计、上下文引导以及边界逻辑的严格审查。"
 
-    elif any(k in text for k in ["1.2万亿", "1.2t", "估值", "ipo之前", "私募融资"]):
-        return "奥特曼又来重新定义人类货币单位了。在还没实现规模盈利甚至现金流还在疯狂燃烧的前提下，直接把私募估值开到了1.2万亿美元。这架势像极了：“只要我融钱的速度快过烧钱的速度，地心引力就追不上我。” 资本市场一边骂泡沫太疯狂，一边又生怕错过下一轮，只能一边闭着眼掏钱一边祈祷IPO时有更大的接盘侠。"
-
-    elif any(k in text for k in ["豁免", "责任豁免", "斯科特·贝森特", "bessent", "众议院听证会"]):
-        return "科技巨头们天天游说国会“AI责任太复杂，求法律免责金牌”，结果财政部长一盆冷水泼过来：想免责？门都没有。赚钱的时候高呼“自由创新纯市场化”，出了事就想学当年的互联网避风港原则把锅甩给算法。贝森特的态度很明确：既然想享受万亿估值的盛宴，就得做好随时在法庭上被重罚的觉悟。"
-
-    elif any(k in text for k in ["桑德斯", "班农", "bernie sanders", "steve bannon", "限制ai", "亲人类"]):
-        return "当极左的桑德斯和极右的班农在同一个讲台上并肩坐下时，你就知道AI这玩意儿把人类政客逼到了什么地步。两个在地球上几乎所有议题都势同水火的人，居然在“限制AI、保护人类饭碗”上达成了高度默契。能让极左极右握手言和的不是爱，而是AI抢大家选票的恐怖速度。"
-
-    elif any(k in text for k in ["carplay", "android auto", "通用汽车", "车载操作系统", "移除"]):
-        return "通用汽车这场长达三年的“自研车机闭关修炼”，终于以向手机巨头低头认输画上句号。当年信誓旦旦要把车主牢牢锁在自己的付费订阅生态里，结果车主用脚投票教做人——谁愿意放弃流畅的手机导航，去忍受车企那卡顿还要按月扣费的自研系统？这再次证明了一个真理：车企以为自己能做软件，往往是最大的错觉。"
-
-    elif any(k in text for k in ["黄仁勋", "jensen", "免提", "特朗普"]):
-        return "老黄这一波现场接电话可以说是“顶级公关名场面”。一个造出了地表最强算力芯片的万亿市值掌舵人，在台上慌慌张张搞不定手机免提；而前总统在电话那头一边夸老黄一边宣布“AI不会抢人类饭碗”。两位顶级流量玩家在台上互相抬轿，不仅打消了市场的反垄断恐慌，还顺便把英伟达的股价安全垫又垫厚了几层。"
-
-    elif any(k in text for k in ["upi", "商户费", "卢比", "支付", "手续费"]):
-        return "核心基建逐步告别“免费补贴阶段”，开始露出商业獠牙。当年靠着免费狂圈几亿用户，现在算力成本和结算带宽实在扛不住了，算盘珠子终于崩到了商家脸上。“羊毛出在羊身上”虽迟但到，接下来就看商家是咬牙吞下这笔手续费，还是悄悄加价转嫁给终端消费者了。"
-
-    elif any(k in text for k in ["typesafe", "4000万", "种子轮", "概率估计"]):
-        return "做模型不稀奇，专门做一个“给模型输出结果算算命看靠不靠谱”的模型，居然直接融了4000万美元种子轮。这说明业内终于从盲目迷信大模型幻觉，清醒到了“必须花大钱给大模型买保险”的阶段。当卖铲子的人太多时，给铲子做安全帽的人反倒成了最赚钱的新赛道。"
-
-    elif any(k in text for k in ["开源", "闭源", "权重", "参数", "开源模型"]):
-        return "闭源巨头们天天把“安全”挂在嘴边，把模型权重锁在保险箱里收高昂API过路费；开源阵营则直接把代码和权重甩在GitHub上打价格战。说到底，闭源为了守住利润护城河，开源为了联合天下开发者偷袭珍珠港。天下苦闭源API垄断久矣，每一次开源突破都是打在商业巨头脸上的一记响亮耳光。"
-
-    elif any(k in text for k in ["芯片", "gpu", "算力", "英伟达", "数据中心"]):
-        return "前线大模型公司天天为架构创新争得面红耳赤，后方军火商英伟达默默把出货单价又往上调了一截。不管未来是AGI统治世界还是泡沫破裂，至少现在这帮造铲子和收电费的已经把真金白银揣进了兜里。真理永远只有一个：淘金热里最赚钱的永远不是淘金者，而是卖牛仔裤和铲子的掌柜。"
-
-    elif any(k in text for k in ["编程", "coding", "cursor", "copilot", "程序员", "代码"]):
-        return "从“人人都要学编程”到“AI替人人写代码”，科技圈只用了两年。表面上看程序员效率暴增十倍，实际上是代码屎山生成的效率暴增了百倍。以前是自己写Bug自己改，现在是AI写了一千行充满自信的Bug，程序员还得毕恭毕敬求AI帮忙排查。所谓人机协同，本质上就是给AI当高级监工加职业背锅侠。"
-
-    elif any(k in text for k in ["虚拟演员", "蒂莉", "tilly", "actor", "虚拟角色", "数字人", "演艺", "好莱坞"]):
-        return "好莱坞演职人员刚抗议完“AI抢饭碗”，科技公司就已经迫不及待把虚拟女演员推到了镁光灯下。更讽刺的是，一面对敏感现实政治话题，这位号称有灵魂的“AI演员”立马开启防御性回避，开始复读机般点评记者的毛衣好看不好看。给算法戴上公关防翻车紧箍咒可以理解，但把政治回避做成强行聊穿搭，所谓的数字明星演艺，本质上依然是套了漂亮皮囊的客服对话机器人。"
-
-    elif any(k in text for k in ["黑客", "末日", "网络安全", "漏洞", "cybersecurity", "hacker", "doom", "不连贯", "白帽子"]):
-        return "大厂高管天天在国会与聚光灯前渲染“AI可能自主发动末日级网络战毁灭人类”，网安一线的白帽子专家终于忍不住掀桌子了。天天拿科幻末日剧本忽悠议员要监管特权与豁免金牌，现实中连最基础的内网鉴权与漏洞挖掘机理都解释不清。把自身工程架构的疏漏强行神话为“超级AI黑客”，既掩盖了安全治理的失职，又顺便贩卖了一波末日焦虑。"
-
-    elif any(k in text for k in ["数据信任", "信任问题", "data trust", "爬虫", "授权", "版权", "policy", "policies"]):
-        return "模型训练时巨头们在全网大肆抓取数据，把知识资产据为己有；等商业化落地收月租时，面对原创作者和公众的质疑，反手掏出几十页推诿责任的“数据政策声明”。信任从来不是靠公关文案自证清白，当整个前沿模型的基石建立在未经许可的内容吞噬之上时，任何所谓的自律协议，看起来都更像是亡羊补牢的法律护膝。"
-
-    elif any(k in text for k in ["gemini 3.8", "live", "语音模型", "音频", "speech", "1.38", "gpt-live"]):
-        return "谷歌在实时语音赛道祭出了“降维打击”式的价格屠刀，把全双工对话成本直接砸到每小时1.38美元。当OpenAI还在为端到端语音高昂的推理算力心疼时，谷歌用自研TPU的规模效应打响了价格战第一枪。语音交互彻底告别机械延时，下一代AI硬件与实时智能体的门槛被瞬间踏平。"
-
-    elif any(k in text for k in ["电网", "能源", "核电", "耗电", "电力", "power", "grid", "nuclear"]):
-        return "当大模型参数狂飙到千亿万亿，AI的终极对手终于从算法工程师变成了国家电网。算力中心的尽头不是算法突破，而是变压器和高压输电线。科技寡头一边高喊绿色环保，一边四处包圆老旧核电站甚至重启火电机组。这场前沿竞赛里，谁掌握了稳定的兆瓦级供电，谁才真正握住了通往AGI的钥匙。"
-
-    elif any(k in text for k in ["芯片出口", "出口管制", "华盛顿", "特朗普", "trump", "关税", "减缓"]):
-        return "老黄直接把算力底气亮在台前：政策风向再怎么变，前沿算力的大旗英伟达绝不松手。华盛顿政客在国家安全与地缘博弈间精打细算，全球客户却在争先恐后排队加价抢卡。在技术冷酷的算力物理定律面前，地缘政治的行政干预与全球商业资本的扩张本能，注定要上演一场旷日持久的极限拉扯。"
-
-    elif any(k in text for k in ["deepseek", "arena", "v4", "flash", "成本", "性价比", "知识蒸馏"]):
-        return "前脚硅谷巨头刚发布了号称“重新定义物理法则”的超豪华旗舰模型，后脚开源小分队就带着成本只有几十分之一的轻量模型在评测榜上迎头赶上。大厂们还在算计每百万Token收几美分才能回本几百亿GPU的折旧费，极客们已经在用极致的工程优化告诉市场：别拿烧钱当护城河，只要架构够精妙，几张卡照样能在竞技场里把庞然大物挑落下马。"
-
-    else:
-        # 无法执行高精准针对性点评时，绝不编造虚假套话模版，直接返回空，由前端优雅隐藏
-        return ""
+    # 无法保证 100% 针对性对齐时，坚决返回空，绝不输出牛头不对马嘴的通用套话
+    return ""
 
 
 def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict[str, Any]:
@@ -517,10 +460,16 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     if not first_stmt.endswith(('。', '！', '？')):
         first_stmt += '。'
 
-    # 若有正文摘要片段且不与标题重复，翻译并提取补充细节
+    # 若有正文长篇段落或摘要片段且不与标题重复，翻译并提取充分的新闻细节与上下文
     detail_stmt = ""
-    if clean_snippet and len(clean_snippet) > 15:
-        trans_snippet = clean_news_text(free_translate_zh(clean_snippet[:150]))
+    candidate_content = (
+        item.get("article_content") or 
+        item.get("original_content") or 
+        item.get("content_snippet") or 
+        clean_snippet
+    )
+    if candidate_content and len(candidate_content) > 15:
+        trans_snippet = clean_news_text(free_translate_zh(candidate_content[:350]))
         # 严格过滤聚合器废话与标题复读
         if trans_snippet and len(trans_snippet) > 10 and trans_snippet not in clean_title and clean_title not in trans_snippet:
             detail_stmt = trans_snippet
@@ -639,7 +588,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 "index": idx,
                 "title": it.get("title", ""),
                 "source": it.get("source", ""),
-                "content": it.get("content_snippet", "")[:300],
+                "content": (it.get("article_content") or it.get("original_content") or it.get("content_snippet", ""))[:600],
                 "suggested_category": it.get("category") or it.get("default_category", "news")
             }
             for idx, it in enumerate(chunk)

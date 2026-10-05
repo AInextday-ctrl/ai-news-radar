@@ -834,10 +834,20 @@ def save_news(items: list):
 
     all_master_items = list(master_dict.values())
     for it in all_master_items:
-        # 1. 确保全库条目 100% 具备超清封面，绝无白卡或垃圾图章
-        img_val = str(it.get("image_url") or "")
-        if (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
-            it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
+        # 1. 彻底剔除假图、占位图、垃圾图章与抽象渐变色壁纸，无真实原图时保留 None，以纯文字排版优雅呈现
+        img_val = str(it.get("image_url") or "").strip()
+        if (not img_val) or any(bad in img_val.lower() for bad in [
+            "pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon", "spacer", "tracking",
+            "lh3.googleusercontent.com/j6_cofbog", "lh3.googleusercontent.com",
+            "photo-1618005182384-a83a8bd57fbe",
+            "photo-1620712943543",
+            "photo-1558494949-ef010cbdcc31",
+            "photo-1526374965328",
+            "photo-1485827404703",
+            "260915_thespark_climateinnovators.jpg",
+            "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg"
+        ]):
+            it["image_url"] = None
 
         # 2. 彻底清洗所有复读机摘要、聚合器噪音与假模版套话
         title_zh = (it.get("title_zh") or it.get("title") or "").strip()
@@ -967,14 +977,20 @@ def save_news(items: list):
             it["title_zh"] = clean_news_text(title)
             
             # 若清洗后摘要变为空壳或模板套话，智能补充事实导语
-            if not sum_zh or len(sum_zh) < 12 or any(k in sum_zh for k in ["全面的最新新闻报道", "Google 新闻", "聚焦该事件"]):
+            if not sum_zh or len(sum_zh) < 12 or any(k in sum_zh for k in ["全面的最新新闻报道", "Google 新闻", "聚焦该事件", "查尔斯国王在苏格兰"]):
                 sum_zh = generate_smart_fallback_summary(it, it["title_zh"])
             it["summary_zh"] = sum_zh
 
-            # 资讯门禁 2: 纸折飞机占位图自动平滑补齐高清行业封面，绝不裂图
+            # 资讯门禁 2: 占位图、假图与垃圾图彻底清除为 None，坚决不展示虚假图片
             img = str(it.get("image_url") or "").strip()
-            if not img or "lh3.googleusercontent.com/j6_cofbog" in img.lower():
-                it["image_url"] = get_smart_cover_url(it["title_zh"], "news", it.get("source", ""))
+            if (not img) or any(bad in img.lower() for bad in [
+                "lh3.googleusercontent.com/j6_cofbog", "lh3.googleusercontent.com",
+                "pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon", "spacer", "tracking",
+                "photo-1618005182384-a83a8bd57fbe", "photo-1620712943543",
+                "photo-1558494949-ef010cbdcc31", "photo-1526374965328", "photo-1485827404703",
+                "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg"
+            ]):
+                it["image_url"] = None
 
             # 资讯门禁 3: 依然无法展现具体事实或为纯标题复读且缺乏实质细节的，安全隐藏
             snip = str(it.get("content_snippet") or "").strip()
