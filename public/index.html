@@ -808,6 +808,26 @@
             <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
             <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://media.vanityfair.com/photos/6ac01c910b7bf2b9f3f76532/16:9/w_1280,c_limit/SA_Digital3%20(1).jpg" alt="山姆·奥特曼关于他的生活、孩子、竞争、个人主义、为世界末日“做准备”、新产品、IPO计划、卢卡·瓜达格尼诺的人造产品等问题的问答（《名利场》）" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: Vanity Fair</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.vanityfair.com/story/sam-altman-exclusive-interview-part-1" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">山姆·奥特曼关于他的生活、孩子、竞争、个人主义、为世界末日“做准备”、新产品、IPO计划、卢卡·瓜达格尼诺的人造产品等问题的问答（《名利场》）</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      OpenAI 正式发布针对大模型潜在异常与风险行为的新型跟踪框架，持续监测并透明化披露模型对齐与安全审查结果
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.vanityfair.com/story/sam-altman-exclusive-interview-part-1" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" alt="前Groq工程师在特拉华州起诉Groq，指控其在2025年以200亿美元“非排他性”收购英伟达的协议亏了员工" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -1024,26 +1044,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://app.ft.com/content/ac1f4db2-54fe-4a36-b3db-bb96675231f5" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop" alt="山姆·奥特曼表示，他对将宗教力量归因于人工智能感到“非常不舒服”，称这是“一个真正的安全问题”，因为Anthropic与宗教领袖接触" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: Axios</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.axios.com/2026/10/03/openai-anthropic-altman-amodei-religious-force-models" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">山姆·奥特曼表示，他对将宗教力量归因于人工智能感到“非常不舒服”，称这是“一个真正的安全问题”，因为Anthropic与宗教领袖接触</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      OpenAI 正式发布针对大模型潜在异常与风险行为的新型跟踪框架，持续监测并透明化披露模型对齐与安全审查结果
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.axios.com/2026/10/03/openai-anthropic-altman-amodei-religious-force-models" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
