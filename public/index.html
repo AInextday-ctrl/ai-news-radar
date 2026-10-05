@@ -498,13 +498,13 @@
         </div>
 
         <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
-        <div class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
+        <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
           <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
             <optgroup label="主流语言 / Popular">
+              <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
               <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
               <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
-              <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
               <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
               <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
               <option value="deutsch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
@@ -539,6 +539,38 @@
               <option value="hebrew" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇱 עברית</option>
             </optgroup>
           </select>
+
+          <!-- 💡 语言建议切换气泡指示框 (自动检测系统语言，数秒后自动淡出消失，不主动强制切换) -->
+          <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-200 dark:border-indigo-800/80 shadow-2xl z-50 transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none">
+            <!-- 箭头 -->
+            <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-200 dark:border-indigo-800/80 transform rotate-45"></div>
+            
+            <div class="relative flex items-start space-x-2.5">
+              <div class="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200 dark:border-indigo-800/60 flex items-center justify-center text-base shrink-0 shadow-sm">
+                🌐
+              </div>
+              <div class="flex-1 min-w-0 pr-4">
+                <div class="text-[12px] font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5" id="lang-suggest-title">
+                  <span>检测到系统语言为中文</span>
+                </div>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-snug" id="lang-suggest-desc">
+                  本站默认以英文一手信源呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。
+                </p>
+                <div class="mt-2.5 flex items-center space-x-2">
+                  <button type="button" id="lang-suggest-switch-btn" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
+                    <span>🇨🇳</span>
+                    <span id="lang-suggest-btn-text">切换为中文</span>
+                  </button>
+                  <button type="button" onclick="dismissLangSuggestion()" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
+                    保持英文
+                  </button>
+                </div>
+              </div>
+              <button type="button" onclick="dismissLangSuggestion()" class="absolute -top-0.5 right-0 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs p-1 cursor-pointer" title="关闭提示">
+                ✕
+              </button>
+            </div>
+          </div>
         </div>
 
         <!-- 实时同步灯 -->
@@ -1918,9 +1950,10 @@
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const paramLang = urlParams.get('lang');
+    // 英文为主站 (English-First)：优先尊重 URL 参数与用户已保存偏好，默认一律为 'en'
     let currentLang = (paramLang && (paramLang === 'en' || paramLang === 'zh'))
       ? paramLang
-      : (localStorage.getItem('ai_radar_lang') || (navigator.language && !navigator.language.startsWith('zh') ? 'en' : 'zh'));
+      : (localStorage.getItem('ai_radar_lang') || 'en');
     document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
     let currentTheme = localStorage.getItem('theme') || 'auto';
     let selectedCreator = null;
@@ -2631,7 +2664,7 @@
 
     let currentSiteLang = localStorage.getItem('ai_radar_translate_lang');
 
-    // 自动探测访客系统/浏览器语言
+    // 自动探测访客系统/浏览器语言 (仅用于智能提供切换建议，不主动替用户强制修改)
     function detectVisitorLanguage() {
       const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
       if (BROWSER_LANG_MAP[navLang]) {
@@ -2641,11 +2674,12 @@
       if (BROWSER_LANG_MAP[prefix]) {
         return BROWSER_LANG_MAP[prefix];
       }
-      return 'chinese_simplified';
+      return 'english';
     }
 
+    // 默认主站语言为英文 (English-First)，若用户未手动设置过偏好，保持为 'english'
     if (!currentSiteLang) {
-      currentSiteLang = detectVisitorLanguage();
+      currentSiteLang = (currentLang === 'zh') ? 'chinese_simplified' : 'english';
     }
 
     // 🌐 全局7大核心专栏官方规范术语字典 (严格单行、固定等比、不受第三方机翻破坏)
@@ -2836,12 +2870,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (currentSiteLang === 'english') {
         setLanguage('en');
-      }
-      updateNavTabsLanguage(currentSiteLang);
-
-      translate.execute();
-      if (currentSiteLang && currentSiteLang !== 'chinese_simplified') {
-        translate.changeLanguage(currentSiteLang);
+        try {
+          if (translate.reset) translate.reset();
+        } catch (e) {}
+      } else {
+        updateNavTabsLanguage(currentSiteLang);
+        translate.execute();
+        if (currentSiteLang !== 'chinese_simplified') {
+          translate.changeLanguage(currentSiteLang);
+        }
       }
     }
 
@@ -2854,26 +2891,29 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (targetLang === 'english') {
         setLanguage('en');
+        if (typeof translate !== 'undefined' && translate.reset) {
+          try { translate.reset(); } catch (e) {}
+        }
       } else {
         setLanguage('zh');
-      }
-      updateNavTabsLanguage(targetLang);
-      if (typeof translate !== 'undefined') {
-        if (targetLang === 'chinese_simplified') {
-          try {
-            if (translate.reset) translate.reset();
-          } catch (e) {}
-          translate.changeLanguage('chinese_simplified');
-        } else {
-          translate.changeLanguage(targetLang);
+        if (typeof translate !== 'undefined') {
+          if (targetLang === 'chinese_simplified') {
+            try {
+              if (translate.reset) translate.reset();
+            } catch (e) {}
+            translate.changeLanguage('chinese_simplified');
+          } else {
+            translate.changeLanguage(targetLang);
+          }
         }
       }
+      updateNavTabsLanguage(targetLang);
     }
 
     function applyCurrentTranslation() {
       if (typeof translate !== 'undefined' && translate.execute) {
         const lang = localStorage.getItem('ai_radar_translate_lang') || currentSiteLang;
-        if (lang && lang !== 'chinese_simplified') {
+        if (lang && lang !== 'chinese_simplified' && lang !== 'english') {
           setTimeout(() => {
             try {
               translate.execute();
@@ -2881,6 +2921,88 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }, 60);
         }
       }
+    }
+
+    // 💡 智能系统语言检测与温和建议提示 (数秒后自动淡出消失，绝不主动强行替用户切换)
+    function checkAndShowLangSuggestion() {
+      // 若当前 Session 已提示过，避免重复弹出
+      if (sessionStorage.getItem('ai_radar_lang_suggest_shown')) return;
+      // 若用户曾显式保存过语言选择，严格尊重用户设置，不弹窗
+      if (localStorage.getItem('ai_radar_translate_lang') || localStorage.getItem('ai_radar_lang')) return;
+
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      // 若访客系统本就是英文，无需提示，已在英文主站
+      if (!navLang || navLang.startsWith('en')) return;
+
+      const bubble = document.getElementById('lang-suggest-bubble');
+      if (!bubble) return;
+
+      const titleEl = document.getElementById('lang-suggest-title');
+      const descEl = document.getElementById('lang-suggest-desc');
+      const btnEl = document.getElementById('lang-suggest-switch-btn');
+      const btnTextEl = document.getElementById('lang-suggest-btn-text');
+
+      let targetSiteLang = 'chinese_simplified';
+      if (navLang.startsWith('zh')) {
+        if (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant')) {
+          targetSiteLang = 'chinese_traditional';
+          if (titleEl) titleEl.innerHTML = '<span>偵測到系統語言為繁體中文</span>';
+          if (descEl) descEl.textContent = '本站預設以一手英文呈現。如需繁體中文閱讀，可在此切換（數秒後提示自動消失）。';
+          if (btnTextEl) btnTextEl.textContent = '切換為繁體中文';
+        } else {
+          targetSiteLang = 'chinese_simplified';
+          if (titleEl) titleEl.innerHTML = '<span>检测到系统语言为中文</span>';
+          if (descEl) descEl.textContent = '本站默认以一手英文呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。';
+          if (btnTextEl) btnTextEl.textContent = '切换为中文';
+        }
+      } else {
+        const matched = BROWSER_LANG_MAP[navLang] || BROWSER_LANG_MAP[navLang.split('-')[0]];
+        if (matched) {
+          targetSiteLang = matched;
+          if (titleEl) titleEl.innerHTML = '<span>Switch to your language?</span>';
+          if (descEl) descEl.textContent = 'Defaults to original English. Click below to translate (auto-dismisses soon).';
+          if (btnTextEl) btnTextEl.textContent = `Translate to ${targetSiteLang}`;
+        } else {
+          return;
+        }
+      }
+
+      if (btnEl) {
+        btnEl.onclick = () => {
+          changeSiteLanguage(targetSiteLang);
+          dismissLangSuggestion();
+        };
+      }
+
+      setTimeout(() => {
+        bubble.classList.remove('hidden');
+        requestAnimationFrame(() => {
+          bubble.classList.remove('pointer-events-none', 'opacity-0', '-translate-y-2');
+          bubble.classList.add('opacity-100', 'translate-y-0');
+        });
+        sessionStorage.setItem('ai_radar_lang_suggest_shown', '1');
+
+        // 7 秒后自动平滑淡出消失 (严格不主动替用户修改)
+        window.langSuggestDismissTimer = setTimeout(() => {
+          dismissLangSuggestion();
+        }, 7000);
+      }, 1000);
+    }
+
+    function dismissLangSuggestion() {
+      if (window.langSuggestDismissTimer) {
+        clearTimeout(window.langSuggestDismissTimer);
+        window.langSuggestDismissTimer = null;
+      }
+      const bubble = document.getElementById('lang-suggest-bubble');
+      if (bubble) {
+        bubble.classList.remove('opacity-100', 'translate-y-0');
+        bubble.classList.add('opacity-0', '-translate-y-2', 'pointer-events-none');
+        setTimeout(() => {
+          bubble.classList.add('hidden');
+        }, 500);
+      }
+      sessionStorage.setItem('ai_radar_lang_suggest_shown', '1');
     }
 
     // 切换语言基底
@@ -4113,9 +4235,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isZh = currentLang === 'zh';
       container.innerHTML = topItems.map((item, idx) => {
-        const badge = item.badge_zh || item.badge || "⚡ 今日头条";
-        const title = item.title_zh || item.title;
-        const summary = item.summary_zh || item.summary || item.content_snippet;
+        const badge = (isZh ? (item.badge_zh || item.badge) : (item.badge_en || item.badge)) || (isZh ? "⚡ 今日头条" : "⚡ Top Story");
+        const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+        const summary = (isZh ? (item.summary_zh || item.summary || item.content_snippet) : (item.summary_en || item.summary || item.content_snippet)) || "";
         const timeObj = formatTime(item.raw_published_at, currentLang);
         const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
         const cleanSource = item.source || "";
@@ -4139,7 +4261,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60 gap-2">
-              <span class="truncate max-w-[110px] sm:max-w-[130px]">信源: ${cleanSource}</span>
+              <span class="truncate max-w-[110px] sm:max-w-[130px]">${t.sourceLabel || '信源:'} ${cleanSource}</span>
               <div class="flex items-center space-x-1.5 shrink-0">
                 <button type="button" onclick="event.stopPropagation(); openAiNewsModal('${itemId}')" class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-[10px] font-semibold transition-all shadow-sm cursor-pointer">
                   <span>📋</span>
@@ -4174,15 +4296,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专门卡片渲染：新闻快讯卡片 (支持 Gemini AI 深度解读交互)
     // ==========================================
     function renderNewsCard(item) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = item.title_zh || item.title;
-      const summary = item.summary_zh || item.content_snippet || "";
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       const specList = item.spec_tags || [];
       const specBadges = (specList && specList.length)
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${specList.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">⚡ ${s}</span>`).join('')}</div>`
+        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5">${specList.map(s => `<span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">⚡ ${escapeHtml(translateSpecTag(s, currentLang))}</span>`).join('')}</div>`
         : '';
 
       const isFakeOrGenericCover = (url) => {
@@ -4214,14 +4337,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const hasRealImage = !!(item.image_url && !isFakeOrGenericCover(item.image_url));
       const cleanSource = item.source || "";
       const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
-      const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">📹 现场视频</span>` : '';
+      const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
 
       if (hasRealImage) {
         return `
           <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 group cursor-pointer hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
             <div class="w-full sm:w-44 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-950 border border-slate-200 dark:border-slate-800 relative">
               <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
-              ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">▶ 现场视频</span>` : ''}
+              ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶ 现场视频' : '▶ Video'}</span>` : ''}
             </div>
             <div class="flex-1 flex flex-col justify-between space-y-2">
               <div class="space-y-1.5">
@@ -4862,16 +4985,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     function renderToolCard(item) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const scenario = item.scenario_tag || "🤖 场景落地";
-      const runtimeBadge = item.runtime_badge || item.pricing_tag || "🟢 开源免装";
+      const scenario = translateScenarioTag(item.scenario_tag || "🤖 场景落地", currentLang);
+      const runtimeBadge = translateRuntimeBadge(item.runtime_badge || item.pricing_tag || "🟢 开源免装", currentLang);
       const iconSvg = getToolSvgIcon(item.icon_type);
 
-      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI 工具');
-      const hook = item.app_hook || item.title_zh || item.title || "";
-      const summary = item.overview_zh || item.summary_zh || item.content_snippet || "";
-      const cleanSource = item.source || "AI 资讯雷达";
+      const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI Tool');
+      const hook = (isZh ? (item.app_hook || item.title_zh || item.title) : (item.app_hook_en || item.title_en || item.title)) || "";
+      const summary = (isZh ? (item.overview_zh || item.summary_zh || item.content_snippet) : (item.overview_en || item.summary_en || item.content_snippet)) || "";
+      const cleanSource = item.source || (isZh ? "AI 资讯雷达" : "AI News Radar");
       const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const transitUrl = formatTransitGoUrl(officialUrl, item);
       let rankBadge = (item.rank_badge || "🔥 热门推荐")
@@ -5123,11 +5247,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 焦点首发大卡渲染 (Hero Spotlight)
     function renderHeroSpotlight(item) {
-      const title = item.title_zh || item.title;
-      const summary = item.summary_zh || item.content_snippet || "";
+      const isZh = currentLang === 'zh';
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const duration = item.duration || item.metrics?.duration || '⏱️ 16:00';
-      const views = item.metrics?.views || '1.2M+ 播放';
+      const views = item.metrics?.views || (isZh ? '1.2M+ 播放' : '1.2M+ Views');
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'youtube';
 
@@ -5137,7 +5262,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="flex items-center space-x-2 flex-wrap gap-y-1">
               <span class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-rose-600 via-orange-600 to-amber-500 text-white text-[11px] font-black shadow-md flex items-center space-x-1">
                 <span>🔥</span>
-                <span>本周全球 AI 爆款第一焦点</span>
+                <span>${isZh ? '本周全球 AI 爆款第一焦点' : 'Top AI Spotlight of the Week'}</span>
               </span>
               <span class="px-2 py-0.5 rounded bg-black text-rose-300 border border-rose-500/40 text-[10px] font-bold">${isTikTok ? '🎵 TikTok' : '▶ YouTube'}</span>
               <span class="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/30 text-[10px] font-bold">${views}</span>
@@ -5167,16 +5292,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           <div class="flex items-center justify-between pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
             <div class="flex items-center space-x-2">
-              <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${item.url}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5">
+              <button onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${item.url}')" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-md shadow-indigo-600/30 flex items-center space-x-1.5 cursor-pointer">
                 <span>▶</span>
-                <span>${isTikTok ? '站内竖屏播放' : '站内影院模式'}</span>
+                <span>${isTikTok ? (isZh ? '站内竖屏播放' : 'Play In-Site') : (isZh ? '站内影院模式' : 'Theater Mode')}</span>
               </button>
               <a href="${item.url}" target="_blank" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 font-medium transition-colors flex items-center space-x-1">
                 <span>${isTikTok ? 'TikTok ↗' : 'YouTube ↗'}</span>
               </a>
             </div>
             <div class="hidden sm:flex items-center space-x-1 text-[11px] text-slate-500">
-              <span>信源认证:</span>
+              <span>${isZh ? '信源认证:' : 'Verified Source:'}</span>
               <span class="font-bold text-slate-700 dark:text-slate-300 notranslate">${item.source || item.author}</span>
             </div>
           </div>
@@ -5186,7 +5311,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 实时飙升榜单小卡渲染
     function renderTrendingMiniCard(item, rank) {
-      const title = item.title_zh || item.title;
+      const isZh = currentLang === 'zh';
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const medals = ['🥇', '🥈', '🥉'];
       const medal = medals[rank - 1] || `#${rank}`;
@@ -5216,15 +5342,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专门卡片渲染：高阶提示词 (Prompt) 咒语卡片
     // ==========================================
     function renderPromptCard(item) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = item.title_zh || item.title;
-      const summary = item.summary_zh || item.content_snippet || "";
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at || item.created_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const targetModel = item.target_model || item.recommended_model || "通用大模型";
-      const tempAdvice = item.temp_advice || "温度 0.3";
-      const purpose = item.scenario_label || item.purpose_zh || "💡 核心模版";
+      const targetModel = item.target_model || item.recommended_model || (isZh ? "通用大模型" : "General LLM");
+      const tempAdvice = item.temp_advice || (isZh ? "温度 0.3" : "Temp 0.3");
+      const purpose = item.scenario_label || (isZh ? (item.purpose_zh || "💡 核心模版") : (item.purpose_en || "💡 Core Template"));
       const promptZh = item.prompt_content_zh || item.prompt_content || "";
       const promptEn = item.prompt_content_en || item.prompt_content || "";
       const isLegacy = item.generation_tier === 'legacy';
@@ -5232,9 +5359,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       let modelBadge = '';
       if (isLegacy) {
-        modelBadge = `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-[9px] font-bold border border-slate-300 dark:border-slate-700 break-words">📦 历史模型归档</span>`;
+        modelBadge = `<span class="px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono text-[9px] font-bold border border-slate-300 dark:border-slate-700 break-words">${isZh ? '📦 历史模型归档' : '📦 Legacy Archive'}</span>`;
       } else if (tierScore >= 95) {
-        modelBadge = `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-indigo-500/20 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 font-mono text-[9px] font-bold flex items-center gap-1 break-words">👑 旗舰SOTA · <span class="notranslate">${escapeHtml(targetModel)}</span></span>`;
+        modelBadge = `<span class="px-2 py-0.5 rounded bg-gradient-to-r from-purple-500/20 via-pink-500/20 to-indigo-500/20 text-purple-700 dark:text-purple-300 border border-purple-300 dark:border-purple-500/40 font-mono text-[9px] font-bold flex items-center gap-1 break-words">${isZh ? '👑 旗舰SOTA' : '👑 Flagship SOTA'} · <span class="notranslate">${escapeHtml(targetModel)}</span></span>`;
       } else {
         modelBadge = `<span class="px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/80 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[9px] font-mono break-words">🎯 <span class="notranslate">${escapeHtml(targetModel)}</span></span>`;
       }
@@ -5243,10 +5370,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       window.__promptStore[item.id] = {
         zh: promptZh,
         en: promptEn,
-        active: 'zh'
+        active: isZh ? 'zh' : 'en'
       };
 
-      const activeText = promptZh || promptEn;
+      const activeText = isZh ? (promptZh || promptEn) : (promptEn || promptZh);
       const usageGuide = item.usage_guide_zh || item.usage_guide || "";
       const variables = item.variables || [];
 
@@ -5333,14 +5460,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专门卡片渲染：9:16 竖屏手机卡片 (Shorts & TikTok 沉浸式视效)
     // ==========================================
     function renderVerticalVideoCard(item) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = item.title_zh || item.title || "";
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com')) || (item.url && item.url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'shorts';
       const cleanSource = item.author || item.source || (isTikTok ? "TikTok Creator" : "YouTube Creator");
       const duration = item.duration || item.metrics?.duration || "⏱️ 00:45";
-      const views = item.metrics?.views || "🔥 爆款热播";
+      const views = item.metrics?.views || (isZh ? "🔥 爆款热播" : "🔥 Trending");
       const jumpUrl = item.url || item.link || item.embed_url || "";
       const embedSrc = isTikTok 
         ? (item.embed_url || `https://www.tiktok.com/embed/v2/${item.video_id}`)
@@ -5434,13 +5562,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专门卡片渲染：16:9 横屏经典视频卡片 (YouTube 深度长视频)
     // ==========================================
     function renderHorizontalVideoCard(item) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
-      const title = item.title_zh || item.title;
-      const summary = item.summary_zh || item.content_snippet || "";
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const cleanSource = item.author || item.source || "";
-      const skillTag = item.purpose_zh || item.metrics?.skill_tag || '🎓 系统教学';
+      const skillTag = item.purpose_zh || item.metrics?.skill_tag || (isZh ? '🎓 系统教学' : '🎓 Masterclass');
       const duration = item.duration || item.metrics?.duration || '⏱️ 20:00';
       const jumpUrl = item.url || item.link || item.embed_url;
 
@@ -6499,13 +6628,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       // 1. 核心简报段落 (Briefing / Summary)
       let rawBriefing = isZh
-        ? (analysis.briefing_zh || analysis.digest_zh)
-        : (analysis.briefing_en || analysis.digest_en || analysis.briefing_zh);
-      if (!rawBriefing) {
-        rawBriefing = isZh
-          ? (item.summary_zh || item.content_snippet || cleanTitle)
-          : (item.summary_en || item.content_snippet || cleanTitle);
-      }
+        ? (analysis.briefing_zh || analysis.digest_zh || item.summary_zh || item.content_snippet || cleanTitle)
+        : (analysis.briefing_en || item.summary_en || analysis.digest_en || item.content_snippet || cleanTitle);
 
       // 清洗简报段落杂质，过滤搜索引擎聚合器噪音与机械模板废话，保证自然通畅真实
       const briefingText = String(rawBriefing)
@@ -6527,7 +6651,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 2. AI 点评 (仅当存在高价值针对性深度分析时保留；模板化/对不上/无有效分析时坚决隐藏，杜绝硬套话)
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh || '')
-        : (analysis.insight_en || analysis.takeaway_en || analysis.insight_zh || '');
+        : (analysis.insight_en || analysis.takeaway_en || '');
 
       // 过滤前缀标签
       let cleanInsight = String(insightText || '')
@@ -6653,7 +6777,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (originalCardEl && originalTextEl) {
         if (origContent && origContent.length > 70 && origContent !== briefingText && origContent !== cleanTitle) {
           originalCardEl.classList.remove('hidden');
-          if (originalTitleEl) originalTitleEl.textContent = isZh ? '深度报道与访谈实录' : 'Original Coverage & Interview';
+          if (originalTitleEl) originalTitleEl.textContent = isZh ? '深度报道与访谈实录 (英文原文)' : 'Original Coverage & Interview';
           originalTextEl.innerHTML = formatRichArticleContent(origContent, isZh);
         } else {
           originalCardEl.classList.add('hidden');
@@ -7985,8 +8109,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     });
 
-    // 初始化路由与语言状态
-    setLanguage('zh');
+    // 初始化路由与语言状态 (英文为主站 English-First)
+    setLanguage(currentLang);
     const initHashTab = getTabFromHash();
     if (initHashTab) {
       switchTab(initHashTab, false);
@@ -8002,10 +8126,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       initTranslateEngine();
       handleHashNavigation();
       syncThreeColumnsHeight();
+      checkAndShowLangSuggestion();
     });
     setTimeout(() => {
       initTranslateEngine();
-    }, 300);
+      checkAndShowLangSuggestion();
+    }, 400);
   </script>
 
   <!-- ===== 全站底部导航页脚 (AdSense E-E-A-T 信任信号) ===== -->
