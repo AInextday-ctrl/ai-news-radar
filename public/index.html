@@ -561,8 +561,8 @@
                     <span>🇨🇳</span>
                     <span id="lang-suggest-btn-text">切换为中文</span>
                   </button>
-                  <button type="button" onclick="dismissLangSuggestion(true)" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
-                    保持英文
+                  <button type="button" id="lang-suggest-keep-btn" onclick="dismissLangSuggestion(true)" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
+                    Keep English
                   </button>
                 </div>
               </div>
@@ -2926,37 +2926,210 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 💡 智能系统语言检测与温和建议提示 (数秒后自动淡出消失，绝不主动强行替用户切换)
+    // 💡 智能系统语言检测与多语言系统本地化提示 (根据访客系统母语自适应呈现提示语，绝不主动强行替用户切换)
+    const LANG_SUGGESTION_I18N = {
+      'zh-cn': {
+        name: '简体中文',
+        flag: '🇨🇳',
+        target: 'chinese_simplified',
+        title: '网页语言切换与翻译',
+        desc: '网页语言可在此切换，或使用翻译插件浏览。',
+        btn: '切换为中文',
+        keep: '保持英文'
+      },
+      'zh-tw': {
+        name: '繁體中文',
+        flag: '🇭🇰',
+        target: 'chinese_traditional',
+        title: '網頁語言切換與翻譯',
+        desc: '網頁語言可在此切換，或使用翻譯外掛閱讀。',
+        btn: '切換為繁體中文',
+        keep: '保持英文'
+      },
+      'ja': {
+        name: '日本語',
+        flag: '🇯🇵',
+        target: 'japanese',
+        title: '言語の切り替えと翻訳',
+        desc: 'ウェブページの言語はここで切り替えるか、翻訳プラグインをご利用いただけます。',
+        btn: '日本語に切り替え',
+        keep: '英語のまま'
+      },
+      'ko': {
+        name: '한국어',
+        flag: '🇰🇷',
+        target: 'korean',
+        title: '언어 전환 및 번역',
+        desc: '웹페이지 언어를 여기서 전환하거나 번역 기능을 사용할 수 있습니다.',
+        btn: '한국어로 전환',
+        keep: '영어 유지'
+      },
+      'de': {
+        name: 'Deutsch',
+        flag: '🇩🇪',
+        target: 'deutsch',
+        title: 'Sprachwechsel & Übersetzung',
+        desc: 'Die Website-Sprache kann hier gewechselt oder per Übersetzungs-Plugin gelesen werden.',
+        btn: 'Auf Deutsch wechseln',
+        keep: 'Englisch behalten'
+      },
+      'fr': {
+        name: 'Français',
+        flag: '🇫🇷',
+        target: 'french',
+        title: 'Changement de langue & Traduction',
+        desc: 'La langue de la page peut être modifiée ici, ou vous pouvez utiliser le plugin de traduction.',
+        btn: 'Passer en français',
+        keep: 'Garder l’anglais'
+      },
+      'es': {
+        name: 'Español',
+        flag: '🇪🇸',
+        target: 'spanish',
+        title: 'Cambio de idioma y traducción',
+        desc: 'Puede cambiar el idioma de la página aquí o usar el complemento de traducción.',
+        btn: 'Cambiar a español',
+        keep: 'Mantener inglés'
+      },
+      'ru': {
+        name: 'Русский',
+        flag: '🇷🇺',
+        target: 'russian',
+        title: 'Смена языка и перевод',
+        desc: 'Язык веб-страницы можно переключить здесь или использовать плагин перевода.',
+        btn: 'Переключить на русский',
+        keep: 'Оставить английский'
+      },
+      'ar': {
+        name: 'العربية',
+        flag: '🇸🇦',
+        target: 'arabic',
+        title: 'تغيير اللغة والترجمة',
+        desc: 'يمكنك تغيير لغة الصفحة هنا أو استخدام أداة الترجمة.',
+        btn: 'التبديل إلى العربية',
+        keep: 'الإبقاء على الإنجليزية'
+      },
+      'pt': {
+        name: 'Português',
+        flag: '🇧🇷',
+        target: 'portuguese',
+        title: 'Mudança de idioma e tradução',
+        desc: 'O idioma da página pode ser alterado aqui ou use o recurso de tradução.',
+        btn: 'Mudar para português',
+        keep: 'Manter em inglês'
+      },
+      'it': {
+        name: 'Italiano',
+        flag: '🇮🇹',
+        target: 'italian',
+        title: 'Cambio lingua e traduzione',
+        desc: 'La lingua della pagina può essere modificata qui o usa lo strumento di traduzione.',
+        btn: 'Passa all’italiano',
+        keep: 'Mantieni l’inglese'
+      },
+      'vi': {
+        name: 'Tiếng Việt',
+        flag: '🇻🇳',
+        target: 'vietnamese',
+        title: 'Chuyển đổi ngôn ngữ & dịch thuật',
+        desc: 'Bạn có thể chuyển đổi ngôn ngữ trang web tại đây hoặc sử dụng tiện ích dịch.',
+        btn: 'Chuyển sang Tiếng Việt',
+        keep: 'Giữ tiếng Anh'
+      },
+      'id': {
+        name: 'Bahasa Indonesia',
+        flag: '🇮🇩',
+        target: 'indonesian',
+        title: 'Ubah Bahasa & Terjemahan',
+        desc: 'Bahasa halaman dapat diubah di sini, atau gunakan fitur terjemahan.',
+        btn: 'Ubah ke Bahasa Indonesia',
+        keep: 'Tetap Bahasa Inggris'
+      },
+      'th': {
+        name: 'ไทย',
+        flag: '🇹🇭',
+        target: 'thai',
+        title: 'เปลี่ยนภาษาและการแปล',
+        desc: 'คุณสามารถเปลี่ยนภาษาของหน้าเว็บได้ที่นี่ หรือใช้ปลั๊กอินแปลภาษา',
+        btn: 'เปลี่ยนเป็นภาษาไทย',
+        keep: 'ใช้ภาษาอังกฤษต่อไป'
+      },
+      'en': {
+        name: 'English',
+        flag: '🇬🇧',
+        target: 'english',
+        title: 'Language Switcher & Translation',
+        desc: 'Webpage language can be switched here, or use the translation widget.',
+        btn: 'Switch to English',
+        keep: 'Dismiss'
+      }
+    };
+
     function checkAndShowLangSuggestion() {
       // 若用户在当前页面会话中已主动点击关闭或保持，不再重复弹窗打扰
       if (sessionStorage.getItem('ai_radar_lang_suggest_dismissed')) return;
 
-      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
-      
-      // 用户系统主要语言类别
-      let userPrimaryLang = 'en';
-      if (navLang.startsWith('zh')) {
-        userPrimaryLang = (navLang.includes('tw') || navLang.includes('hk') || navLang.includes('hant') || navLang.includes('mo')) ? 'zh-tw' : 'zh';
-      } else {
-        userPrimaryLang = navLang.split('-')[0] || 'en';
+      // 综合检测浏览器与系统语言列表 (支持 navigator.languages 数组与无痕模式 fallback)
+      const langCandidates = [];
+      if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+        navigator.languages.forEach(l => {
+          if (l && typeof l === 'string') langCandidates.push(l.toLowerCase());
+        });
+      }
+      const singleLang = (navigator.language || navigator.userLanguage || navigator.browserLanguage || '').toLowerCase();
+      if (singleLang && !langCandidates.includes(singleLang)) {
+        langCandidates.push(singleLang);
       }
 
-      // 网站当前实际激活语言 ('en' | 'zh' | 'zh-tw' | ...)
+      // 识别访客首选非英语语言（优先匹配系统实际母语）
+      let detectedKey = null;
+      for (const raw of langCandidates) {
+        if (!raw) continue;
+        if (raw.startsWith('zh')) {
+          if (raw.includes('tw') || raw.includes('hk') || raw.includes('hant') || raw.includes('mo')) {
+            detectedKey = 'zh-tw';
+          } else {
+            detectedKey = 'zh-cn';
+          }
+          break;
+        }
+        const prefix = raw.split('-')[0];
+        if (LANG_SUGGESTION_I18N[prefix]) {
+          detectedKey = prefix;
+          break;
+        }
+      }
+
+      // 如果完全没匹配到具体小语种，但含有英文以外的 BROWSER_LANG_MAP
+      if (!detectedKey) {
+        for (const raw of langCandidates) {
+          const prefix = raw.split('-')[0];
+          if (BROWSER_LANG_MAP[raw] || BROWSER_LANG_MAP[prefix]) {
+            const mapped = BROWSER_LANG_MAP[raw] || BROWSER_LANG_MAP[prefix];
+            if (mapped !== 'english') {
+              // 匹配对应配置或回退简中
+              detectedKey = (LANG_SUGGESTION_I18N[prefix]) ? prefix : 'zh-cn';
+              break;
+            }
+          }
+        }
+      }
+
+      // 网站当前实际激活语言 ('english' | 'chinese_simplified' | 'chinese_traditional' | ...)
       const siteLang = currentSiteLang || (currentLang === 'zh' ? 'chinese_simplified' : 'english');
-      let sitePrimaryLang = 'en';
-      if (siteLang === 'chinese_simplified' || (currentLang === 'zh' && siteLang !== 'chinese_traditional')) {
-        sitePrimaryLang = 'zh';
-      } else if (siteLang === 'chinese_traditional') {
-        sitePrimaryLang = 'zh-tw';
-      } else if (siteLang === 'english' || currentLang === 'en') {
-        sitePrimaryLang = 'en';
-      } else {
-        sitePrimaryLang = siteLang;
+
+      // 如果用户系统全部都是 pure en，且网站已经是 english，则无需打扰
+      if (!detectedKey) {
+        // 如果是英文系统且主站也是英文，不弹窗
+        if (siteLang === 'english') return;
+        // 如果网站不是英文但系统是英文，则提示切换回英文
+        detectedKey = 'en';
       }
 
-      // 核心判断：当系统语言与网站当前语言完全不一致时，必须弹出提示！
-      const isMismatch = (userPrimaryLang !== sitePrimaryLang);
-      if (!isMismatch) return;
+      const config = LANG_SUGGESTION_I18N[detectedKey] || LANG_SUGGESTION_I18N['zh-cn'];
+      
+      // 判断是否与网站当前语言冲突（如果网站已经切换为该目标语言，不重复提示）
+      if (siteLang === config.target) return;
 
       const bubble = document.getElementById('lang-suggest-bubble');
       if (!bubble) return;
@@ -2965,40 +3138,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const descEl = document.getElementById('lang-suggest-desc');
       const btnEl = document.getElementById('lang-suggest-switch-btn');
       const btnTextEl = document.getElementById('lang-suggest-btn-text');
+      const keepBtnEl = document.getElementById('lang-suggest-keep-btn');
 
-      let targetSiteLang = 'chinese_simplified';
-      if (userPrimaryLang === 'zh') {
-        targetSiteLang = 'chinese_simplified';
-        if (titleEl) titleEl.innerHTML = '<span>🌐 检测到系统语言为中文</span>';
-        if (descEl) descEl.textContent = '本站默认以英文一手信源呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。';
-        if (btnTextEl) btnTextEl.textContent = '切换为中文';
-      } else if (userPrimaryLang === 'zh-tw') {
-        targetSiteLang = 'chinese_traditional';
-        if (titleEl) titleEl.innerHTML = '<span>🌐 偵測到系統語言為繁體中文</span>';
-        if (descEl) descEl.textContent = '本站預設以一手英文呈現。如需繁體中文閱讀，可在此切換（數秒後提示自動消失）。';
-        if (btnTextEl) btnTextEl.textContent = '切換為繁體中文';
-      } else if (userPrimaryLang === 'en') {
-        targetSiteLang = 'english';
-        if (titleEl) titleEl.innerHTML = '<span>🌐 Switch to English?</span>';
-        if (descEl) descEl.textContent = 'Detected English system. Click below to view original English intelligence.';
-        if (btnTextEl) btnTextEl.textContent = 'Switch to English';
-      } else {
-        const matched = BROWSER_LANG_MAP[navLang] || BROWSER_LANG_MAP[userPrimaryLang];
-        if (matched) {
-          targetSiteLang = matched;
-          if (titleEl) titleEl.innerHTML = '<span>🌐 Translate to your language?</span>';
-          if (descEl) descEl.textContent = 'Defaults to original English. Click below to translate (auto-dismisses soon).';
-          if (btnTextEl) btnTextEl.textContent = `Translate to ${targetSiteLang}`;
-        } else {
-          return;
-        }
+      if (titleEl) {
+        titleEl.innerHTML = `<span>🌐 ${config.title}</span>`;
       }
-
+      if (descEl) {
+        descEl.textContent = config.desc;
+      }
       if (btnEl) {
+        const flagSpan = btnEl.querySelector('span:first-child');
+        if (flagSpan) flagSpan.textContent = config.flag;
+        if (btnTextEl) btnTextEl.textContent = config.btn;
         btnEl.onclick = () => {
-          changeSiteLanguage(targetSiteLang, true);
+          changeSiteLanguage(config.target, true);
           dismissLangSuggestion(true);
         };
+      }
+      if (keepBtnEl) {
+        keepBtnEl.textContent = config.keep;
       }
 
       // 展开提示框 (保证高层级与优雅平滑淡入)
@@ -3009,11 +3167,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         bubble.style.transform = 'translateY(0)';
       }, 50);
 
-      // 7 秒后自动平滑淡出消失 (严格不主动替用户强制修改语言)
+      // 8 秒后自动平滑淡出消失 (严格不主动替用户强制修改语言)
       if (window.langSuggestDismissTimer) clearTimeout(window.langSuggestDismissTimer);
       window.langSuggestDismissTimer = setTimeout(() => {
         dismissLangSuggestion(false);
-      }, 7000);
+      }, 8000);
     }
 
     function dismissLangSuggestion(userDismissed = true) {
