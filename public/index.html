@@ -6383,6 +6383,71 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     // ==========================================
+    // 专访与深度长文富文本排版引擎 (Rich Interview & Article Formatter)
+    // ==========================================
+    function formatRichArticleContent(rawText, isZh) {
+      if (!rawText || typeof rawText !== 'string') return '';
+      const rawParas = rawText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 25);
+      if (rawParas.length === 0) return `<p class="leading-relaxed text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-normal">${escapeHtml(rawText)}</p>`;
+
+      const renderPara = (p) => {
+        const clean = p.replace(/^&[a-z]+;\s*/i, '').trim();
+        // 1. 识别记者/采访提问 (Q: / 问: / 简短问句且包含问号)
+        const isQ = clean.startsWith('Q:') || clean.startsWith('问：') || clean.startsWith('问:') || 
+                    (clean.endsWith('?') && clean.length < 260) || (clean.endsWith('？') && clean.length < 260) ||
+                    (/^([A-Z][a-zA-Z\s]+[：:])/.test(clean) && clean.length < 260 && (clean.includes('?') || clean.includes('？')));
+
+        if (isQ) {
+          const qText = clean.replace(/^(?:Q:?|问[：:])\s*/i, '');
+          return `
+            <div class="my-2.5 p-3 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/50 border-l-4 border-indigo-500 font-semibold text-slate-900 dark:text-slate-100 text-xs sm:text-sm shadow-sm flex items-start gap-2.5">
+              <span class="text-indigo-600 dark:text-indigo-400 font-bold shrink-0">💬 ${isZh ? '提问' : 'Q'}:</span>
+              <span class="flex-1 leading-relaxed">${escapeHtml(qText)}</span>
+            </div>
+          `;
+        }
+
+        // 2. 识别受访领袖发言 (如 Altman: / Sam: / 奥特曼:)
+        if (/^(?:Altman|Sam|奥特曼|山姆)[：:]/i.test(clean)) {
+          const aText = clean.replace(/^(?:Altman|Sam|奥特曼|山姆)[：:]\s*/i, '');
+          return `
+            <div class="my-2 pl-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed border-l-2 border-emerald-500/80 bg-emerald-50/40 dark:bg-emerald-950/30 rounded-r-xl p-3 space-y-1">
+              <div class="font-bold text-[11px] text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                <span>🎙️</span>
+                <span>山姆·奥特曼 (Sam Altman)</span>
+              </div>
+              <p class="leading-relaxed font-normal">${escapeHtml(aText)}</p>
+            </div>
+          `;
+        }
+
+        // 3. 常规段落与报道叙述
+        return `
+          <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${escapeHtml(clean)}</p>
+        `;
+      };
+
+      if (rawParas.length <= 6) {
+        return `<div class="space-y-3">${rawParas.map(renderPara).join('')}</div>`;
+      }
+
+      const initialBatch = rawParas.slice(0, 6).map(renderPara).join('');
+      const remainingBatch = rawParas.slice(6).map(renderPara).join('');
+      const expandId = 'modal-full-article-' + Math.random().toString(36).substring(2, 8);
+
+      return `
+        <div class="space-y-3">
+          ${initialBatch}
+          <div id="${expandId}" class="hidden space-y-3 pt-2 border-t border-dashed border-slate-200 dark:border-slate-800">
+            ${remainingBatch}
+          </div>
+          <button type="button" onclick="const f=document.getElementById('${expandId}'); const b=this; if(f.classList.contains('hidden')){ f.classList.remove('hidden'); b.innerHTML='▲ ${isZh ? '收起部分实录' : 'Collapse Article'}'; } else { f.classList.add('hidden'); b.innerHTML='▼ ${isZh ? `展开阅读完整访谈实录 (共 ${rawParas.length} 段)` : `Expand Full Transcript (${rawParas.length} paragraphs)`}'; }" class="w-full py-2.5 px-4 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/70 dark:bg-indigo-950/40 hover:bg-indigo-100/80 dark:hover:bg-indigo-900/60 rounded-xl border border-indigo-200/80 dark:border-indigo-800/80 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
+            ▼ ${isZh ? `展开阅读完整访谈实录 (共 ${rawParas.length} 段)` : `Expand Full Transcript (${rawParas.length} paragraphs)`}
+          </button>
+        </div>
+      `;
+    }
+
     // ==========================================
     // 资讯概要简报控制器 (News Briefing & Natural Synthesis)
     // ==========================================
@@ -6588,10 +6653,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (originalCardEl && originalTextEl) {
         if (origContent && origContent.length > 70 && origContent !== briefingText && origContent !== cleanTitle) {
           originalCardEl.classList.remove('hidden');
-          if (originalTitleEl) originalTitleEl.textContent = isZh ? '深度报道原文精选' : 'Original Coverage Excerpt';
-          originalTextEl.textContent = origContent;
+          if (originalTitleEl) originalTitleEl.textContent = isZh ? '深度报道与访谈实录' : 'Original Coverage & Interview';
+          originalTextEl.innerHTML = formatRichArticleContent(origContent, isZh);
         } else {
           originalCardEl.classList.add('hidden');
+          originalTextEl.innerHTML = '';
         }
       }
 

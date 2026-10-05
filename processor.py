@@ -334,6 +334,10 @@ def generate_witty_ai_commentary(full_text: str, title: str) -> str:
     elif any(k in t_lower for k in ["claude code", "cursor", "vibe coding", "copilot", "程序员", "代码智能体", "编程助手"]):
         return "从手写每一行代码到由 AI Agent 自动化生成与重构，软件工程交付范式正在经历质变。开发者的核心竞争力正加速从低阶语法记忆转向高阶架构设计、上下文引导以及边界逻辑的严格审查。"
 
+    # 4. 山姆·奥特曼深度人物专访与名利场访谈
+    elif ("奥特曼" in full_lower or "altman" in full_lower or "sama" in full_lower) and any(k in full_lower for k in ["名利场", "vanity fair", "专访", "q&a", "生活", "孩子", "反派", "villain", "奥本海默", "oppenheimer"]):
+        return "从硅谷科技救世主被舆论推到‘AI奥本海默’的反派位置，奥特曼很清楚自己成了全人类对失控未来焦虑的泄洪口。在专访里大谈‘准备末日’、育儿与反思扎克伯格，看似放下身段展现人性脆弱，实则把无可避免的技术垄断与权力集中巧妙包装成了背负人类原罪的‘沉重担当’。"
+
     # 无法保证 100% 针对性对齐时，坚决返回空，绝不输出牛头不对马嘴的通用套话
     return ""
 
@@ -425,8 +429,10 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     why = ""
     if any(k in full_text for k in ["虚拟演员", "蒂莉", "tilly", "actor", "虚拟角色", "数字人", "演艺", "好莱坞"]):
         why = "生成式数字人与虚拟演员渗透演艺工业引发行业伦理与从业者权益博弈，算法在敏感议题上的回避机制暴露出防御性对齐的技术短板。"
-    elif any(k in full_text for k in ["黑客", "末日", "网络安全", "漏洞", "cybersecurity", "hacker", "doom", "不连贯"]):
+    elif any(k in full_text for k in ["网络安全", "漏洞", "cybersecurity", "漏洞挖掘"]) and any(k in full_text for k in ["黑客", "hacker", "doom"]):
         why = "网络安全一线专家对大模型‘末日黑客’的夸大叙事提出技术质疑，呼吁将行业安全重心从宏大恐慌叙事回归到代码审计与实战防御。"
+    elif ("奥特曼" in full_text or "altman" in full_text) and any(k in full_text for k in ["采访", "问答", "专访", "q&a", "interview", "名利场", "vanity fair", "生活", "孩子"]):
+        why = "伴随通用人工智能竞赛进入深水区，作为行业标志性人物的奥特曼直面外界对技术失控与权力集中的伦理关切，深度回应了关于企业治理、上市节奏及个人角色定位的争论。"
     elif any(k in full_text for k in ["数据信任", "信任问题", "data trust", "爬虫", "授权", "版权", "policy", "policies"]):
         why = "前沿模型研发面临海量数据抓取合规争议与创作者信任危机，亟需构建透明可信的追溯机制与合理的版权利益分配方案。"
     elif any(k in full_text for k in ["gemini 3.8", "live", "语音模型", "音频", "speech", "1.38", "gpt-live"]):

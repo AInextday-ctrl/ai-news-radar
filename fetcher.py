@@ -319,6 +319,7 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
         "cover_image": None,
         "inline_images": [],
         "description": None,
+        "article_content": None,
         "has_video": False,
         "video_url": None
     }
@@ -342,10 +343,10 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
 
     try:
         html_text = ""
-        # 针对常规公开媒体，快速探测落地页 (超时时间 4s，防阻塞主爬虫流程)
+        # 针对常规公开媒体，快速探测落地页 (超时时间 6s，防阻塞主爬虫流程)
         if not is_reuters and not is_bloomberg:
             if client and hasattr(client, "get"):
-                resp = client.get(clean_url, timeout=4)
+                resp = client.get(clean_url, timeout=6)
                 if resp.status_code == 200:
                     html_text = resp.text
             else:
@@ -353,7 +354,7 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
                     clean_url,
                     headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 AI-Radar/2.0"}
                 )
-                with urllib.request.urlopen(req, timeout=4) as r:
+                with urllib.request.urlopen(req, timeout=6) as r:
                     if r.status == 200:
                         html_text = r.read().decode("utf-8", errors="ignore")
 
@@ -370,6 +371,20 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
                 desc_cand = html.unescape(m_desc.group(1)).strip()
                 if len(desc_cand) > 20 and not any(bad in desc_cand.lower() for bad in ["javascript", "enable cookies", "404 not found", "cloudflare", "access denied"]):
                     result["description"] = desc_cand
+
+            # 深度提取落地页真实正文段落 (Article Body Paragraphs / Q&A 实录)
+            paras = re.findall(r'<p[^>]*>(.*?)</p>', html_text, flags=re.DOTALL)
+            clean_paras = [html.unescape(re.sub(r'<[^>]+>', '', p)).strip() for p in paras]
+            clean_paras = [
+                p for p in clean_paras 
+                if len(p) > 50 and not any(bad in p.lower() for bad in [
+                    "cookie", "newsletter", "subscribe", "sign up", "read more", 
+                    "all rights reserved", "terms of service", "privacy policy",
+                    "advertisement", "enable javascript"
+                ])
+            ]
+            if clean_paras:
+                result["article_content"] = "\n\n".join(clean_paras[:30])
 
             # 侦测是否包含视频 (Brightcove, HTML5 video, YouTube, Vimeo, mp4, m3u8)
             if re.search(r'<video\b|brightcove|jwplayer|youtube\.com/embed|player\.vimeo\.com|\.mp4\b|\.m3u8\b', html_text, re.I):
@@ -2419,8 +2434,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    if not img_url or is_dummy_summary:
-                        # 尝试穿透落地页提取 1200px+ 官方原图与真实文章导语 (og:description / twitter:description)
+                    if not img_url or is_dummy_summary or not article_text_en:
+                        # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语
                         og_media = resolve_article_og_media(url, client)
                         if not img_url and og_media.get("cover_image"):
                             img_url = og_media["cover_image"]
@@ -2428,8 +2443,13 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
+                        if not article_text_en and og_media.get("article_content"):
+                            article_text_en = og_media["article_content"]
                         if is_dummy_summary and og_media.get("description") and len(og_media["description"]) >= 20:
                             clean_summary = og_media["description"]
+                            is_dummy_summary = False
+                        elif is_dummy_summary and article_text_en and len(article_text_en) >= 30:
+                            clean_summary = article_text_en[:280]
                             is_dummy_summary = False
 
                     # 【核心质量把控】：如果经落地页探测后仍无法获取具体事件内容（依然为空壳），坚决丢弃，绝不收录！
