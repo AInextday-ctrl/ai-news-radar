@@ -132,14 +132,17 @@
 
     /* 深色模式磨砂玻璃质感 */
     html.dark .glass-panel {
-      background: rgba(13, 19, 34, 0.78);
-      backdrop-filter: blur(14px);
+      background: rgba(13, 19, 34, 0.82) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     }
     html.dark .glass-card {
-      background: #0d1322;
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(13, 19, 34, 0.84) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08);
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html.dark .glass-card:hover {
@@ -148,24 +151,27 @@
       box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(99, 102, 241, 0.2);
     }
 
-    /* 浅色模式纯净微晶质感 */
+    /* 浅色模式纯净微晶质感与自适应雷达通透度 */
     html:not(.dark) .glass-panel {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(14px);
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);
+      background: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      border: 1px solid rgba(226, 232, 240, 0.9) !important;
+      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05) !important;
     }
     html:not(.dark) .glass-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      color: #0f172a;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      background: rgba(255, 255, 255, 0.88) !important;
+      backdrop-filter: blur(10px) !important;
+      -webkit-backdrop-filter: blur(10px) !important;
+      border: 1px solid rgba(226, 232, 240, 0.9) !important;
+      color: #0f172a !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02) !important;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     html:not(.dark) .glass-card:hover {
-      border-color: #6366f1;
+      border-color: #6366f1 !important;
       transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.15), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.15), 0 4px 10px -2px rgba(0, 0, 0, 0.04) !important;
     }
     /* 浅色模式纯净微晶高对比系统 (Light Theme Contrast Mastery) */
     html:not(.dark) body {
@@ -174,23 +180,10 @@
     }
     html:not(.dark) header,
     html:not(.dark) nav {
-      background-color: rgba(255, 255, 255, 0.96) !important;
+      background-color: rgba(255, 255, 255, 0.92) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
       border-color: #e2e8f0 !important;
-    }
-    html:not(.dark) .glass-panel {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 4px 20px -4px rgba(15, 23, 42, 0.05) !important;
-    }
-    html:not(.dark) .glass-card {
-      background: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #0f172a !important;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02) !important;
-    }
-    html:not(.dark) .glass-card:hover {
-      border-color: #6366f1 !important;
-      box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.03) !important;
     }
     html:not(.dark) .text-slate-100 { color: #0f172a !important; }
     html:not(.dark) .text-slate-200 { color: #1e293b !important; }
@@ -437,15 +430,235 @@
     }
 
     /* ========================================== */
-    /* 📡 全球 AI 社交雷达 · 动态声呐扫描背景 (Light & Dark 双主题自适应) */
-    /* ========================================== */
+    /* ========================================================= */
+    /* 🌐 全站科技动态雷达扫描背景系统 (Global Radar Scan Background HUD) */
+    /* ========================================================= */
+    .global-radar-hud {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    /* 全局背景极客微网格 */
+    .global-radar-grid {
+      position: absolute;
+      inset: 0;
+      background-size: 48px 48px;
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
+    }
+    html:not(.dark) .global-radar-grid {
+      background-image: 
+        linear-gradient(to right, rgba(14, 165, 233, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14, 165, 233, 0.07) 1px, transparent 1px);
+    }
+
+    /* 雷达中心锚点 (稍微向上偏，使波束自然覆盖首屏和主要阅读区) */
+    .global-radar-center {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 0;
+      height: 0;
+    }
+
+    /* 全局同心测距环 */
+    .global-radar-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed rgba(56, 189, 248, 0.18);
+      pointer-events: none;
+      box-sizing: border-box;
+    }
+    html:not(.dark) .global-radar-ring {
+      border-color: rgba(14, 165, 233, 0.22);
+    }
+
+    .gr-ring-1 { width: 360px; height: 360px; border-style: solid; border-color: rgba(56, 189, 248, 0.25); }
+    .gr-ring-2 { width: 720px; height: 720px; }
+    .gr-ring-3 { width: 1160px; height: 1160px; border-style: solid; border-color: rgba(56, 189, 248, 0.22); }
+    .gr-ring-4 { width: 1680px; height: 1680px; }
+    .gr-ring-5 { width: 2280px; height: 2280px; border-style: solid; border-color: rgba(56, 189, 248, 0.16); }
+    .gr-ring-6 { width: 2980px; height: 2980px; }
+
+    html:not(.dark) .gr-ring-1 { border-color: rgba(14, 165, 233, 0.32); }
+    html:not(.dark) .gr-ring-3 { border-color: rgba(14, 165, 233, 0.26); }
+    html:not(.dark) .gr-ring-5 { border-color: rgba(14, 165, 233, 0.18); }
+
+    /* 全局雷达十字交叉轴 */
+    .global-radar-axis-x {
+      position: absolute;
+      top: 50%;
+      left: -2000px;
+      right: -2000px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
+    }
+    .global-radar-axis-y {
+      position: absolute;
+      left: 50%;
+      top: -2000px;
+      bottom: -2000px;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
+    }
+    html:not(.dark) .global-radar-axis-x {
+      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.28) 50%, transparent 100%);
+    }
+    html:not(.dark) .global-radar-axis-y {
+      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.28) 50%, transparent 100%);
+    }
+
+    /* 45° 辅助方位角对角线 */
+    .global-radar-diagonal-1, .global-radar-diagonal-2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3400px;
+      height: 1px;
+      margin-left: -1700px;
+      background: linear-gradient(90deg, transparent 15%, rgba(56, 189, 248, 0.12) 50%, transparent 85%);
+    }
+    .global-radar-diagonal-1 { transform: rotate(45deg); }
+    .global-radar-diagonal-2 { transform: rotate(-45deg); }
+    html:not(.dark) .global-radar-diagonal-1, 
+    html:not(.dark) .global-radar-diagonal-2 {
+      background: linear-gradient(90deg, transparent 15%, rgba(14, 165, 233, 0.14) 50%, transparent 85%);
+    }
+
+    /* 360° 全局旋转扫描扇面 (Full-Screen Radar Sweep Beam) */
+    .global-radar-beam {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 3200px;
+      height: 3200px;
+      margin-top: -1600px;
+      margin-left: -1600px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(56, 189, 248, 0.32) 0deg,
+        rgba(56, 189, 248, 0.14) 22deg,
+        rgba(14, 165, 233, 0.03) 55deg,
+        transparent 75deg,
+        transparent 360deg
+      );
+      animation: globalRadarSweep 9s linear infinite;
+      pointer-events: none;
+    }
+    html:not(.dark) .global-radar-beam {
+      background: conic-gradient(
+        from 0deg,
+        rgba(14, 165, 233, 0.25) 0deg,
+        rgba(56, 189, 248, 0.10) 22deg,
+        rgba(14, 165, 233, 0.02) 55deg,
+        transparent 75deg,
+        transparent 360deg
+      );
+    }
+
+    @keyframes globalRadarSweep {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 全局雷达中心声呐脉冲波 (Sonar Ping Pulse) */
+    .global-radar-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 2px solid rgba(56, 189, 248, 0.6);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
+      animation: globalSonarPulse 4.5s cubic-bezier(0.1, 0.7, 0.2, 1) infinite;
+    }
+    html:not(.dark) .global-radar-pulse {
+      border-color: rgba(14, 165, 233, 0.5);
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+    }
+
+    @keyframes globalSonarPulse {
+      0% {
+        width: 40px;
+        height: 40px;
+        opacity: 0.9;
+        transform: translate(-50%, -50%) scale(0.8);
+      }
+      80% {
+        opacity: 0.18;
+      }
+      100% {
+        width: 1600px;
+        height: 1600px;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    /* 信号捕获标定信标 (AI Intercept Blips) */
+    .global-radar-blip {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+      animation: blipGlow 3s ease-in-out infinite alternate;
+      z-index: 1;
+    }
+    .global-radar-blip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 10px #38bdf8, 0 0 20px #0284c7;
+    }
+    .global-radar-blip-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: rgba(56, 189, 248, 0.85);
+      background: rgba(15, 23, 42, 0.65);
+      padding: 1.5px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      backdrop-blur: 4px;
+    }
+    html:not(.dark) .global-radar-blip-dot {
+      background: #0284c7;
+      box-shadow: 0 0 8px #0284c7;
+    }
+    html:not(.dark) .global-radar-blip-label {
+      color: #0369a1;
+      background: rgba(255, 255, 255, 0.75);
+      border-color: rgba(14, 165, 233, 0.35);
+    }
+
+    @keyframes blipGlow {
+      0% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.9); }
+      100% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.05); }
+    }
+
+    /* 局部时间线卡片雷达样式 (保留兼容) */
     .radar-scanner-container {
       position: relative;
       overflow: hidden;
       border-radius: 1.5rem;
     }
-    
-    /* 动态雷达极坐标扫描网格画布 */
     .radar-scan-canvas {
       position: absolute;
       inset: 0;
@@ -453,8 +666,6 @@
       z-index: 0;
       overflow: hidden;
     }
-    
-    /* 雷达同心圆距标圈 (Concentric Distance Rings) */
     .radar-ring {
       position: absolute;
       top: 50%;
@@ -471,98 +682,87 @@
     .radar-ring-2 { width: 620px; height: 620px; }
     .radar-ring-3 { width: 920px; height: 920px; }
     .radar-ring-4 { width: 1240px; height: 1240px; border-style: solid; opacity: 0.45; }
-
-    /* 雷达经纬十字扫描线 (Crosshairs) */
     .radar-crosshair-x {
       position: absolute;
-      left: 0;
-      right: 0;
-      top: 50%;
-      height: 1px;
+      left: 0; right: 0; top: 50%; height: 1px;
       background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
     }
     .radar-crosshair-y {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 1px;
+      top: 0; bottom: 0; left: 50%; width: 1px;
       background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
     }
-    html:not(.dark) .radar-crosshair-x {
-      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.22) 50%, transparent 100%);
-    }
-    html:not(.dark) .radar-crosshair-y {
-      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.22) 50%, transparent 100%);
-    }
-
-    /* 360° 旋转雷达声呐波束 (Radar Sweep Beam) */
     .radar-sweep-beam {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1400px;
-      height: 1400px;
-      margin-top: -700px;
-      margin-left: -700px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(56, 189, 248, 0.25) 0deg,
-        rgba(14, 165, 233, 0.08) 35deg,
-        transparent 65deg,
-        transparent 360deg
-      );
-      animation: radarSweepRotate 6s linear infinite;
-      mix-blend-mode: screen;
-      pointer-events: none;
+      top: 50%; left: 50%; width: 1400px; height: 1400px;
+      margin-top: -700px; margin-left: -700px; border-radius: 50%;
+      background: conic-gradient(from 0deg, rgba(56, 189, 248, 0.25) 0deg, rgba(14, 165, 233, 0.08) 35deg, transparent 65deg, transparent 360deg);
+      animation: globalRadarSweep 6s linear infinite; pointer-events: none;
     }
     html:not(.dark) .radar-sweep-beam {
-      background: conic-gradient(
-        from 0deg,
-        rgba(14, 165, 233, 0.18) 0deg,
-        rgba(56, 189, 248, 0.06) 30deg,
-        transparent 60deg,
-        transparent 360deg
-      );
-      mix-blend-mode: multiply;
+      background: conic-gradient(from 0deg, rgba(14, 165, 233, 0.18) 0deg, rgba(56, 189, 248, 0.06) 30deg, transparent 60deg, transparent 360deg);
     }
-
-    @keyframes radarSweepRotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* 脉冲声呐波光晕 (Sonar Pulse Wave) */
     .radar-sonar-pulse {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 40px; height: 40px; border-radius: 50%;
       background: rgba(56, 189, 248, 0.35);
       animation: sonarPulseExpand 3.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
     }
     @keyframes sonarPulseExpand {
-      0% {
-        width: 30px;
-        height: 30px;
-        opacity: 0.85;
-      }
-      100% {
-        width: 850px;
-        height: 850px;
-        opacity: 0;
-      }
+      0% { width: 30px; height: 30px; opacity: 0.85; }
+      100% { width: 850px; height: 850px; opacity: 0; }
     }
     html:not(.dark) .radar-sonar-pulse {
       background: rgba(14, 165, 233, 0.22);
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
+<body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
+
+  <!-- 📡 全网实时动态科技雷达扫描背景系统 (Global Radar Scan Background HUD - Light & Dark Dual Theme) -->
+  <div class="global-radar-hud" aria-hidden="true">
+    <div class="global-radar-grid"></div>
+    <div class="global-radar-center">
+      <!-- 同心测距标定圈 -->
+      <div class="global-radar-ring gr-ring-1"></div>
+      <div class="global-radar-ring gr-ring-2"></div>
+      <div class="global-radar-ring gr-ring-3"></div>
+      <div class="global-radar-ring gr-ring-4"></div>
+      <div class="global-radar-ring gr-ring-5"></div>
+      <div class="global-radar-ring gr-ring-6"></div>
+      <!-- 十字经纬轴线与对角基准线 -->
+      <div class="global-radar-axis-x"></div>
+      <div class="global-radar-axis-y"></div>
+      <div class="global-radar-diagonal-1"></div>
+      <div class="global-radar-diagonal-2"></div>
+      <!-- 动态旋转声呐波束 -->
+      <div class="global-radar-beam"></div>
+      <!-- 周期脉冲扩散光晕 -->
+      <div class="global-radar-pulse"></div>
+      <!-- AI 动态侦听目标信标 (Blinking AI Intercept Blips) -->
+      <div class="global-radar-blip" style="top: -240px; left: 340px; animation-delay: 0.2s;">
+        <span class="global-radar-blip-dot"></span>
+        <span class="global-radar-blip-label">TARGET · OPENAI</span>
+      </div>
+      <div class="global-radar-blip" style="top: 190px; left: -390px; animation-delay: 1.2s;">
+        <span class="global-radar-blip-dot"></span>
+        <span class="global-radar-blip-label">TARGET · ANTHROPIC</span>
+      </div>
+      <div class="global-radar-blip" style="top: -330px; left: -280px; animation-delay: 2.1s;">
+        <span class="global-radar-blip-dot"></span>
+        <span class="global-radar-blip-label">TARGET · DEEPSEEK</span>
+      </div>
+      <div class="global-radar-blip" style="top: 340px; left: 360px; animation-delay: 3.0s;">
+        <span class="global-radar-blip-dot"></span>
+        <span class="global-radar-blip-label">TARGET · GEMINI</span>
+      </div>
+      <div class="global-radar-blip" style="top: 90px; left: 540px; animation-delay: 1.8s;">
+        <span class="global-radar-blip-dot"></span>
+        <span class="global-radar-blip-label">TARGET · META AI</span>
+      </div>
+    </div>
+  </div>
 
   <!-- 🕷️ 搜索引擎友好语义区 -->
   <section class="sr-only" aria-label="AI 资讯雷达核心介绍与索引">
