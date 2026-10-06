@@ -648,10 +648,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     # 1. 预渲染 Top 3 容器: id="top-three-container"
     top_three_html = ""
     for idx, item in enumerate(top_three[:3]):
-        badge = safe_text(item.get("badge_zh") or item.get("badge") or "⚡ 今日头条", 30)
-        title = safe_text(item.get("title_zh") or item.get("title", ""), 100)
-        raw_sum = item.get("summary_zh") or f"{title}。该动态引发产业界与技术前沿广泛关注。"
-        summary = safe_text(raw_sum, 250)
+        badge = safe_text(item.get("badge") or item.get("badge_zh") or "⚡ Top Highlight", 30)
+        title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
+        title_zh = safe_text(item.get("title_zh") or "", 120)
+        sum_en = safe_text(item.get("summary_en") or item.get("title_en") or "", 250)
+        sum_zh = safe_text(item.get("summary_zh") or "", 250)
         source = safe_text(item.get("source", ""), 40)
         url = item.get("url", "#")
         top_three_html += f"""
@@ -659,18 +660,19 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
                 <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">{badge}</span>
-                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">今日精选</span>
+                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="{url}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">{title}</a>
+                <a href="{url}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">{title_en}</a>
               </h3>
+              {f'<p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">{title_zh}</p>' if title_zh and title_zh != title_en else ''}
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                {summary}
+                {sum_en or sum_zh}
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>信源: {source}</span>
-              <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">阅读原文 ↗</a>
+              <span>Source: {source}</span>
+              <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article>"""
 
@@ -678,15 +680,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     news_items = [i for i in items if i.get("category") == "news"][:12]
     news_cards_html = ""
     for it in news_items:
-        t_zh = safe_text(it.get("title_zh") or it.get("title", ""), 100)
-        raw_s_zh = it.get("summary_zh") or f"{t_zh}。该动态引发技术专家与行业核心关注。"
-        s_zh = safe_text(raw_s_zh, 250)
+        t_en = safe_text(it.get("title_en") or it.get("title", ""), 120)
+        t_zh = safe_text(it.get("title_zh") or "", 120)
+        s_en = safe_text(it.get("summary_en") or it.get("title_en") or "", 250)
+        s_zh = safe_text(it.get("summary_zh") or "", 250)
         src = safe_text(it.get("source", ""), 40)
         u = it.get("url", "#")
         img = it.get("image_url", "")
         img_tag = ""
         if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
-            img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_zh}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+            img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_en}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
 
         news_cards_html += f"""
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
@@ -694,18 +697,19 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: {src}</span>
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: {src}</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_zh}</a>
+                      <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_en}</a>
                     </h3>
+                    {f'<p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">{t_zh}</p>' if t_zh and t_zh != t_en else ''}
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      {s_zh}
+                      {s_en or s_zh}
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>"""
@@ -731,9 +735,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📅</span>
-            <span>往期 AI 每日简报全量归档 (最近 15 天)</span>
+            <span>Historical AI Daily Intelligence Archive (往期简报)</span>
           </h2>
-          <span class="text-[11px] text-slate-500">每日更新 · 历史可查 · 附完整出处</span>
+          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources · 每日更新附出处</span>
         </div>
         <div class="flex flex-wrap gap-2">
           {daily_links}
@@ -745,9 +749,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📚</span>
-            <span>AI 深度智库 · 前沿专栏特稿</span>
+            <span>AI Deep-Dive Intelligence & Analysis (深度专栏智库)</span>
           </h2>
-          <span class="text-[11px] text-indigo-500 font-semibold">万字深度拆解 · 交叉实测验伪</span>
+          <span class="text-[11px] text-indigo-500 font-semibold">In-Depth Analysis & Empirical Benchmarks</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {articles_links}
@@ -800,9 +804,9 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
     # 1. 核心制度页
     entries.append(f"""  <url>
     <loc>https://ainewsradar.xyz/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/?lang=zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
     <lastmod>{now_date}</lastmod>
     <changefreq>hourly</changefreq>
