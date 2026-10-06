@@ -11,11 +11,18 @@ content_publisher.py
 """
 
 import os
+import sys
 import re
 import json
 import glob
 from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any, Optional
+
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
+except Exception:
+    pass
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
@@ -394,13 +401,25 @@ def backfill_historical_daily_briefings() -> List[str]:
         return []
 
     # 按 YYYY-MM-DD 分组
+    today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    # 融合 master_archive 与当前最新 latest_news
+    all_source_items = list(items)
+    latest_file = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+    if os.path.exists(latest_file):
+        try:
+            with open(latest_file, "r", encoding="utf-8") as lf:
+                ld = json.load(lf)
+                all_source_items.extend(ld.get("items", []))
+        except Exception:
+            pass
+
     by_date = {}
-    for it in items:
+    for it in all_source_items:
         raw_pub = it.get("raw_published_at", "")
         if len(raw_pub) >= 10:
             d = raw_pub[:10]
-            # 仅处理 2026 年 9 月以后的有效日报
-            if d >= "2026-09-10" and d <= "2026-09-30":
+            # 动态生成从 2026-09-10 起至当天的全部日报
+            if d >= "2026-09-10" and d <= today_str:
                 if d not in by_date:
                     by_date[d] = []
                 by_date[d].append(it)
