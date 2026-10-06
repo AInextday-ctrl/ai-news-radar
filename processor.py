@@ -140,10 +140,7 @@ def free_translate_zh(text: str) -> str:
     for en_w, zh_w in tech_map.items():
         fallback_title = re.sub(r'\b' + re.escape(en_w) + r'\b', zh_w, fallback_title, flags=re.IGNORECASE)
 
-    # 若仍然没有中文，加前缀标示
-    if not re.search(r'[\u4e00-\u9fa5]', fallback_title):
-        fallback_title = f"【最新动态】{clean_text}"
-
+    # 若仍然没有中文，不强加【最新动态】等伪装前缀，保持真实原样避免干扰汉字检测
     _TRANSLATION_CACHE[clean_text] = fallback_title
     return fallback_title
 

@@ -794,7 +794,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url"]:
+                for preserve_field in ["article_content_zh", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
@@ -1134,6 +1134,16 @@ def save_news(items: list):
         "video_prompts": grouped.get("videos", []),
         "items": recent_final
     }
+
+    # 确保长文实录 100% 具备纯中文翻译，杜绝中英文混杂
+    try:
+        from translate_fast import ensure_articles_translated
+        c_recent = ensure_articles_translated(recent_final)
+        c_hist = ensure_articles_translated(historical_items)
+        if c_recent or c_hist:
+            print(f"🌐 自动补全长文实录中文翻译: 近期 {c_recent} 条, 历史 {c_hist} 条")
+    except Exception as e:
+        print(f"⚠️ [translate_fast] 自动补译异常: {e}")
 
     # 4. 构建全量历史归档库 payload (archive_news.json)
     archive_payload = {
