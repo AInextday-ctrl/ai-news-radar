@@ -371,12 +371,31 @@ def fetch_incremental_tweets(
             except Exception:
                 pass
 
-        # 3. 过滤低价值无意义单句短回复 (例如纯 @ 闲聊且点赞不足 100)
+        # 3. 严格过滤低价值、无观点、无实质内容的水帖与寒暄碎碎念
         tweet_text = (it.get("text") or it.get("fullText") or "").strip()
         if not tweet_text:
             continue
+            
+        # 剔除 URL 与 @提及后计算实质正文字符
+        substantive_text = re.sub(r'https?://\S+|@\w+', '', tweet_text).strip()
+        
+        # 排除纯寒暄、无营养一句话与表情包水帖
+        low_value_patterns = [
+            r'^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao)[!.\s]*$',
+            r'^(?:check this out|excited for this|wow|nice|👀|🔥|🚀|💯)[!.\s]*$',
+            r'^(?:thanks for having me|happy to help|appreciate it)[!.\s]*$'
+        ]
+        if any(re.match(p, substantive_text, re.IGNORECASE) for p in low_value_patterns):
+            continue
+            
+        # 非官方重大发布的极短碎碎念（无图、无视频、无实质技术论述且字符 < 40）坚决过滤
+        has_media = bool(it.get("media") or (it.get("entities") and it.get("entities", {}).get("media")))
+        num_likes = int(likes_raw or 0)
+        if len(substantive_text) < 40 and not has_media and num_likes < 300:
+            continue
+            
         is_reply = it.get("isReply") or False
-        if is_reply and len(tweet_text) < 30 and (likes_raw is None or int(likes_raw or 0) < 100):
+        if is_reply and (len(substantive_text) < 50 or num_likes < 150):
             continue
 
         # 媒体配图解析

@@ -42,9 +42,9 @@ def is_pure_chinese_paragraph(p: str, min_chars: int = 6) -> bool:
     zh_count = count_chinese_chars(clean)
     if zh_count < min_chars:
         return False
-    # 汉字占比
+    # 汉字占比：科技资讯常密集列举多个企业名与模型代号，门槛设为 0.20；若中文字数 >= 15 且无长英文整句，均判定为合规
     ratio = zh_count / max(len(clean), 1)
-    if ratio < 0.25:
+    if ratio < 0.20 and zh_count < 15:
         return False
     # 检查是否包含未翻译的整句英文长子串 (连续 8 个以上英文单词且无中文穿插)
     if re.search(r'(?:[A-Za-z0-9\',.-]+\s+){8,}[A-Za-z0-9\',.-]+', clean):

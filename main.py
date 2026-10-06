@@ -1059,21 +1059,30 @@ def save_news(items: list):
         else:
             historical_items.append(it)
 
+    # 严格去重键集合，杜绝历史归档与近期流发生任何碰撞重复
+    recent_keys = {get_it_key(it) for it in recent_items if get_it_key(it)}
+
     # 保证在极端冷启动或外部源更新停滞时，首页与专栏不至于空白或稀疏
     news_recent = [it for it in recent_items if it.get("category") == "news"]
     if len(news_recent) < 25:
-        extra_news = [it for it in historical_items if it.get("category") == "news"][:(25 - len(news_recent))]
-        recent_items.extend(extra_news)
+        extra_news = [it for it in historical_items if it.get("category") == "news" and get_it_key(it) not in recent_keys][:(25 - len(news_recent))]
+        for it in extra_news:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
 
     celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
     if len(celeb_recent) < 50:
-        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity"][:(50 - len(celeb_recent))]
-        recent_items.extend(extra_celeb)
+        extra_celeb = [it for it in historical_items if it.get("category") == "celebrity" and get_it_key(it) not in recent_keys][:(50 - len(celeb_recent))]
+        for it in extra_celeb:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
 
     viral_recent = [it for it in recent_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
     if len(viral_recent) < 20:
-        extra_viral = [it for it in historical_items if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))][:(20 - len(viral_recent))]
-        recent_items.extend(extra_viral)
+        extra_viral = [it for it in historical_items if (it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))) and get_it_key(it) not in recent_keys][:(20 - len(viral_recent))]
+        for it in extra_viral:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
 
     # 3. 构建 24 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}

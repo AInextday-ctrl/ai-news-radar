@@ -4709,49 +4709,56 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">🏢 官方动态</span>`
         : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0">👤 大V动态</span>`;
 
+      const signalLevel = (likes && (parseInt(likes.replace(/k/i, '000'), 10) > 1000)) 
+        ? '<span class="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 shrink-0">📶 强信号</span>' 
+        : '<span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 shrink-0">📶 稳定截获</span>';
+
       return `
-        <article class="glass-card cyber-timeline-card rounded-2xl p-3.5 sm:p-4 flex flex-col space-y-2.5 group border border-slate-200 dark:border-slate-800/90 hover:border-sky-500/50 hover:shadow-lg hover:shadow-sky-500/10 transition-all cursor-pointer bg-white/95 dark:bg-black/85" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
-          <!-- 头部：原生 X (Twitter) 左右分栏流式布局 -->
-          <div class="flex items-start space-x-3">
-            <!-- 左侧：经典圆形头像 + 金V/蓝V认证标 -->
-            <div class="relative shrink-0 pt-0.5">
-              <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
-              <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-400 text-slate-950' : 'bg-sky-500 text-white'} flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? '已认证官方机构/品牌 (Gold Badge)' : (t.celebVerifiedTitle || '已认证大V/开发者 (Blue Badge)')}">✓</span>
-            </div>
-
-            <!-- 右侧：作者信息、时间锚点与 𝕏 平台徽章 -->
-            <div class="min-w-0 flex-1">
-              <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                <div class="flex items-center space-x-1.5 min-w-0 flex-wrap">
-                  <span class="font-bold text-[14px] sm:text-[15px] text-slate-900 dark:text-slate-100 hover:underline truncate notranslate">${author}</span>
-                  ${isCo ? '<span class="text-amber-500 text-xs shrink-0" title="官方认证机构">🏢</span>' : ''}
-                  <span class="text-slate-500 dark:text-slate-400 text-xs sm:text-[13px] font-mono truncate notranslate">${handle}</span>
-                  <span class="text-slate-400 dark:text-slate-600 text-xs">·</span>
-                  <span class="text-slate-500 dark:text-slate-400 text-xs sm:text-[13px] hover:underline shrink-0 font-mono" title="${timeObj.exactTime || timeObj.display}">${timeObj.relative || timeObj.display}</span>
-                  ${todayBadge}
-                  ${pinnedBadge}
-                </div>
-                <div class="flex items-center space-x-1.5 shrink-0">
-                  ${platformBadge}
-                  <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 rounded text-slate-400 hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="前往 𝕏 查看原推">
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                  </a>
-                </div>
+        <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 ${isCo ? 'border-l-amber-500/90' : 'border-l-sky-500/90'} hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10 transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
+          <div class="space-y-2.5">
+            <!-- 头部：原生 X (Twitter) 左右分栏流式布局 + 雷达信号强度指示 -->
+            <div class="flex items-start space-x-3">
+              <!-- 左侧：经典圆形头像 + 金V/蓝V认证标 -->
+              <div class="relative shrink-0 pt-0.5">
+                <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-400 text-slate-950' : 'bg-sky-500 text-white'} flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? '已认证官方机构/品牌' : '已认证大V/科学家'}">✓</span>
               </div>
-              <!-- 领袖/团队职务角色 (若存在) -->
-              ${item.author_role ? `<div class="text-[11px] text-slate-500 dark:text-slate-400 font-sans truncate mt-0.5">${item.author_role}</div>` : ''}
+
+              <!-- 右侧：作者信息、时间锚点与 𝕏 平台徽章 -->
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between gap-1.5 flex-wrap">
+                  <div class="flex items-center space-x-1.5 min-w-0 flex-wrap">
+                    <span class="font-bold text-[14px] sm:text-[15px] text-slate-900 dark:text-slate-100 hover:underline truncate notranslate">${author}</span>
+                    ${isCo ? '<span class="text-amber-500 text-xs shrink-0" title="官方认证机构">🏢</span>' : ''}
+                    <span class="text-slate-500 dark:text-slate-400 text-xs sm:text-[13px] font-mono truncate notranslate">${handle}</span>
+                    <span class="text-slate-400 dark:text-slate-600 text-xs">·</span>
+                    <span class="text-slate-500 dark:text-slate-400 text-xs sm:text-[13px] hover:underline shrink-0 font-mono" title="${timeObj.exactTime || timeObj.display}">${timeObj.relative || timeObj.display}</span>
+                    ${todayBadge}
+                    ${pinnedBadge}
+                  </div>
+                  <div class="flex items-center space-x-1.5 shrink-0">
+                    ${signalLevel}
+                    ${platformBadge}
+                    <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 rounded text-slate-400 hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="前往 𝕏 查看原推">
+                      <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                  </div>
+                </div>
+                <!-- 领袖/团队职务角色 (若存在) -->
+                ${item.author_role ? `<div class="text-[11px] text-slate-500 dark:text-slate-400 font-sans truncate mt-0.5">${item.author_role}</div>` : ''}
+              </div>
             </div>
-          </div>
 
-          <!-- 𝕏 原生推文正文 (保留真实折行，自动高亮 #标签 与 @提及，告别机械引号，原生沉浸) -->
-          <div class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5">
-            ${formatTweetText(displayQuote)}
-          </div>
+            <!-- 𝕏 原生推文正文 (保留真实排版与观点，支持高亮与多图视频) -->
+            <div class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5">
+              ${formatTweetText(displayQuote)}
+            </div>
 
-          ${specBadges}
+            ${specBadges}
+          </div>
 
           <!-- 𝕏 经典底栏 + 详情弹窗与直达入口 -->
-          <div class="flex items-center justify-between pt-2.5 mt-1 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 select-none">
+          <div class="flex items-center justify-between pt-2.5 mt-auto border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 select-none">
             <div class="flex items-center space-x-3 sm:space-x-4 font-mono text-[11px] sm:text-xs">
               ${comments ? `<div class="flex items-center space-x-1 group/rep hover:text-sky-500 transition-colors" title="讨论数"><span class="text-xs">💬</span><span class="font-semibold">${comments}</span></div>` : ''}
               ${retweets ? `<div class="flex items-center space-x-1 group/rt hover:text-emerald-500 transition-colors" title="转推数"><span class="text-xs">🔁</span><span class="font-semibold">${retweets}</span></div>` : ''}
@@ -5032,11 +5039,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     // ==========================================
-    // 社交雷达 · 𝕏 与前沿社区 实时动态多列网格流 (Social Radar Multi-Column Stream)
-    // 自适应 1/2/3 列，无缝铺满宽屏画布，彻底消除单列狭窄与单边大面积留白
-    // ==========================================
-    // 社交雷达 · 𝕏 与前沿社区 时空流动时间轴 (Chrono Flow Timeline)
-    // 专栏首页严格采用时间轴展现时空流动，历史归档展开才是卡片
+    // 社交雷达 · 𝕏 与前沿社区 AI 社交雷达态势流 (Adaptive Radar Stream)
+    // 采用自适应双列网格与雷达态势控制台 HUD，告别死板的左右交替蛇形时间轴
+    // 严格保留博主头像、名称、Handle、认证标、真实原声与互动指标，前端强制去重
     // ==========================================
     function renderCelebrityTimeline(list) {
       const t = I18N[currentLang];
@@ -5044,51 +5049,87 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `<div class="text-slate-500 text-center py-16 col-span-full">${t.celebNoMatch || '暂无该分类动态'}</div>`;
       }
 
+      // 前端严格去重 (基于 URL、ID 或 Handle+Text 联合键，物理杜绝并排重复)
+      const seen = new Set();
+      const uniqueList = [];
+      for (const item of list) {
+        const key = item.id || item.url || ((item.author_handle || item.author) + '_' + (item.title || item.title_zh || ''));
+        if (key && !seen.has(key)) {
+          seen.add(key);
+          uniqueList.push(item);
+        }
+      }
+
       const isZh = currentLang === 'zh';
-      const count = list.length;
-      let timelineTitle = isZh ? '全球 AI 官方机构与大V前沿动态流' : 'Global AI Labs & Creators Live Feed';
+      const count = uniqueList.length;
+      let timelineTitle = isZh ? '全球 AI 社交雷达 · 态势感知流' : 'Global AI Social Radar · Pulse Stream';
+      let subDesc = isZh ? '📡 覆盖全球 70+ 核心 AI 实验室与顶级科学家 · 实时截获高价值前沿思考' : '📡 Scanning 70+ Core AI Labs & Pioneers in Real-Time';
       if (socialPlatformFilter === 'company') {
-        timelineTitle = isZh ? '🏢 官方机构与前沿实验室动态' : '🏢 Official Labs & Foundations Feed';
+        timelineTitle = isZh ? '🏢 官方机构与实验室 · 官方动态雷达' : '🏢 Official AI Labs Radar Feed';
+        subDesc = isZh ? '聚焦 OpenAI, DeepMind, Anthropic, Meta AI 等机构一手发布' : 'Tracking OpenAI, DeepMind, Anthropic, Meta AI official dispatches';
       } else if (socialPlatformFilter === 'person') {
-        timelineTitle = isZh ? '👤 科学家、大V与开发者动态' : '👤 Researchers & Creators Feed';
+        timelineTitle = isZh ? '👤 科学家与领袖大V · 前沿观点雷达' : '👤 AI Pioneers & Researchers Radar';
+        subDesc = isZh ? '聚焦 Hinton, LeCun, Karpathy, Altman 等领袖推文深度探讨' : 'Tracking Hinton, LeCun, Karpathy, Altman and top voices';
       }
 
       return `
-        <div class="cyber-timeline-wrapper relative max-w-5xl mx-auto py-4 px-1 sm:px-4">
-          <!-- 动态流头部统计条 -->
-          <div class="flex items-center justify-between pb-4 mb-6 border-b border-slate-200 dark:border-slate-800 text-xs text-slate-500 font-mono">
-            <div class="flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-sky-500 animate-pulse"></span>
-              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <span>⏱️</span>
-                <span>${timelineTitle} · ${isZh ? '前沿时空时间轴' : 'Chronological Timeline'}</span>
-                <span class="text-xs font-mono font-normal text-sky-500 bg-sky-500/10 px-2 py-0.5 rounded-full border border-sky-500/20">${count} ${isZh ? '篇实时动态' : 'Posts'}</span>
-              </h3>
-            </div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono hidden sm:flex items-center space-x-2">
-              <span>⚡ 严格按真实发布时间倒序排列</span>
-              <span class="text-slate-300 dark:text-slate-700">|</span>
-              <span>时空能量轴</span>
+        <div class="radar-stream-wrapper relative max-w-6xl mx-auto py-3 px-1 sm:px-2">
+          <!-- 雷达态势控制台 HUD (Radar Telemetry Header) -->
+          <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-sky-950/40 to-slate-900 border border-sky-500/30 p-4 sm:p-5 mb-5 shadow-xl shadow-sky-500/5">
+            <!-- 极客扫描线光效装饰背景 -->
+            <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-sky-500/10 blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-44 h-44 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
+            
+            <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div class="flex items-start sm:items-center space-x-3.5">
+                <!-- 动态脉冲雷达信标 -->
+                <div class="relative w-11 h-11 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center shrink-0 shadow-inner">
+                  <span class="absolute inset-0 rounded-xl bg-sky-400/20 animate-ping"></span>
+                  <span class="text-xl">📡</span>
+                </div>
+                <div>
+                  <div class="flex items-center space-x-2 flex-wrap">
+                    <h3 class="font-extrabold text-base sm:text-lg text-white tracking-wide flex items-center gap-1.5">
+                      <span>${timelineTitle}</span>
+                    </h3>
+                    <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold flex items-center gap-1">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                      <span>${count} ${isZh ? '篇前沿动态' : 'Intercepts'}</span>
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-300 dark:text-slate-400 mt-1 font-sans">
+                    ${subDesc}
+                  </p>
+                </div>
+              </div>
+
+              <!-- 右侧雷达态势参数条 -->
+              <div class="flex items-center gap-2 sm:gap-3 text-[11px] font-mono text-slate-300 bg-black/40 px-3 py-2 rounded-xl border border-slate-800 self-start md:self-auto shrink-0">
+                <span class="flex items-center gap-1 text-emerald-400">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                  <span>实时侦听</span>
+                </span>
+                <span class="text-slate-600">|</span>
+                <span class="text-sky-300">纯净原声解译</span>
+                <span class="text-slate-600">|</span>
+                <span class="text-slate-400">零口水零重合</span>
+              </div>
             </div>
           </div>
 
-          <!-- 纵贯发光能量轴 (Desktop 居中，Mobile 靠左) -->
-          <div class="cyber-timeline-axis hidden lg:block absolute left-1/2 top-16 bottom-16 -translate-x-1/2 w-[3px] rounded-full"></div>
-          <div class="cyber-timeline-axis lg:hidden absolute left-5 top-16 bottom-16 w-[3px] rounded-full"></div>
-
-          <!-- 动态时间轴卡片序列 (双侧交错布局) -->
-          <div class="space-y-6 lg:space-y-8 relative">
-            ${list.map((item, idx) => renderTimelineRow(item, idx)).join('')}
+          <!-- 自适应雷达双列态势流 (Adaptive Radar Grid) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 relative">
+            ${uniqueList.map(item => renderCelebrityCard(item)).join('')}
           </div>
 
-          <!-- 底部历史动态归档入口 (历史归档展开才是卡片) -->
-          <div class="mt-12 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
+          <!-- 底部历史动态归档入口 -->
+          <div class="mt-10 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
             <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
               <div class="flex items-center space-x-3">
                 <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
                 <div class="text-left">
                   <span class="font-bold tracking-wide">${isZh ? '展开历史推文全量归档库 (卡片式多页查阅)' : 'Open Full Social Archive (Card View with Pagination)'}</span>
-                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '专栏首页聚焦 24h 前沿动态时间轴，历史情报以网格卡片全面归档' : 'Live timeline for 24h pulse, cards for historical archive'}</span>
+                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '雷达前线聚焦 24h 前沿态势，历史深空数据以卡片库全面归档' : 'Live radar stream for 24h pulse, deep card view for full archive'}</span>
                 </div>
               </div>
               <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1 shrink-0">
@@ -5096,28 +5137,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <span>→</span>
               </span>
             </button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderTimelineRow(item, idx) {
-      const isLeft = idx % 2 === 0;
-      const isX = item.platform === 'x' || (item.source && item.source.includes('Twitter'));
-      const cardHtml = renderCelebrityCard(item, true, !isLeft);
-      const icon = isX ? '𝕏' : '💬';
-      const nodeColor = isX ? 'border-sky-400 text-sky-400' : 'border-indigo-400 text-indigo-400';
-
-      return `
-        <div class="timeline-item-anim relative w-full flex flex-col lg:flex-row items-center ${isLeft ? 'lg:justify-start' : 'lg:justify-end'} pl-11 lg:pl-0">
-          <!-- 居中呼吸发光时间锚点 Node (Desktop 居中，Mobile 靠左固定) -->
-          <div class="cyber-timeline-node absolute left-5 lg:left-1/2 top-5 lg:top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border-2 ${nodeColor} flex items-center justify-center font-black text-xs shadow-lg z-10 select-none">
-            ${icon}
-          </div>
-
-          <!-- 卡片容器 (Desktop 左侧占 ~47%，右侧占 ~47%；Mobile 占全宽) -->
-          <div class="w-full lg:w-[calc(50%-2.2rem)] ${isLeft ? 'lg:mr-auto' : 'lg:ml-auto'}">
-            ${cardHtml}
           </div>
         </div>
       `;
