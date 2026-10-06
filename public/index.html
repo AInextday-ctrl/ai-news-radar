@@ -429,15 +429,7 @@
       animation: timelineItemEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    /* ========================================== */
     /* ========================================================= */
-    /* 🌐 全站科技动态雷达扫描背景系统 (Global Radar Scan Background HUD) */
-    /* ========================================================= */
-    .global-radar-hud {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      /* ========================================================= */
     /* 🌐 全站科技动态雷达扫描背景系统 (Global Radar Scan HUD - 60/120 FPS GPU Engine) */
     /* ========================================================= */
     .global-radar-hud {
@@ -612,9 +604,7 @@
       );
       /* 开启强制 GPU 硬件合成层加速，消除掉帧与重排 */
       will-change: transform;
-      transform: translate3d(0, 0, 0) rotate(0deg);
       transform-origin: 50% 50%;
-      backface-visibility: hidden;
       animation: globalRadarSweep 12s linear infinite;
       pointer-events: none;
       -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.6) 70%, transparent 92%);
@@ -649,11 +639,11 @@
     }
 
     @keyframes globalRadarSweep {
-      0% {
-        transform: translate3d(0, 0, 0) rotate(0deg);
+      from {
+        transform: rotate(0deg);
       }
-      100% {
-        transform: translate3d(0, 0, 0) rotate(360deg);
+      to {
+        transform: rotate(360deg);
       }
     }
 
@@ -664,12 +654,14 @@
       left: 50%;
       width: 1400px;
       height: 1400px;
+      margin-top: -700px;
+      margin-left: -700px;
       border-radius: 50%;
       border: 1.5px solid rgba(56, 189, 248, 0.65);
       background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 65%);
       pointer-events: none;
       will-change: transform, opacity;
-      transform: translate3d(-50%, -50%, 0) scale(0.04);
+      transform-origin: 50% 50%;
       animation: globalSonarGpuPulse 5s cubic-bezier(0.12, 0.7, 0.22, 1) infinite;
     }
     .global-radar-pulse-secondary {
@@ -682,14 +674,14 @@
 
     @keyframes globalSonarGpuPulse {
       0% {
-        transform: translate3d(-50%, -50%, 0) scale(0.04);
+        transform: scale(0.04);
         opacity: 0.95;
       }
       65% {
         opacity: 0.35;
       }
       100% {
-        transform: translate3d(-50%, -50%, 0) scale(1.1);
+        transform: scale(1.1);
         opacity: 0;
       }
     }
