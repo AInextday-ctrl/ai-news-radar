@@ -437,17 +437,25 @@
       position: fixed;
       inset: 0;
       width: 100vw;
+      /* ========================================================= */
+    /* 🌐 全站科技动态雷达扫描背景系统 (Global Radar Scan HUD - 60/120 FPS GPU Engine) */
+    /* ========================================================= */
+    .global-radar-hud {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
       height: 100vh;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
+      contain: strict;
     }
 
-    /* 全局背景极客微网格 */
+    /* 全局背景微坐标网格 */
     .global-radar-grid {
       position: absolute;
       inset: 0;
-      background-size: 48px 48px;
+      background-size: 56px 56px;
       background-image: 
         linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
@@ -466,6 +474,40 @@
       transform: translate(-50%, -50%);
       width: 0;
       height: 0;
+      pointer-events: none;
+    }
+
+    /* 雷达中心信标指示器 (Central HUD Beacon) */
+    .global-radar-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 16px #38bdf8, 0 0 32px #0284c7;
+      z-index: 3;
+    }
+    .global-radar-core::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      animation: coreRingPulse 2s ease-out infinite;
+    }
+    html:not(.dark) .global-radar-core {
+      background: #0284c7;
+      box-shadow: 0 0 14px rgba(14, 165, 233, 0.9);
+    }
+    html:not(.dark) .global-radar-core::after {
+      border-color: rgba(14, 165, 233, 0.7);
+    }
+    @keyframes coreRingPulse {
+      0% { transform: scale(0.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
     }
 
     /* 全局同心测距环 */
@@ -483,15 +525,15 @@
       border-color: rgba(14, 165, 233, 0.22);
     }
 
-    .gr-ring-1 { width: 360px; height: 360px; border-style: solid; border-color: rgba(56, 189, 248, 0.25); }
+    .gr-ring-1 { width: 360px; height: 360px; border-style: solid; border-color: rgba(56, 189, 248, 0.28); }
     .gr-ring-2 { width: 720px; height: 720px; }
     .gr-ring-3 { width: 1160px; height: 1160px; border-style: solid; border-color: rgba(56, 189, 248, 0.22); }
     .gr-ring-4 { width: 1680px; height: 1680px; }
     .gr-ring-5 { width: 2280px; height: 2280px; border-style: solid; border-color: rgba(56, 189, 248, 0.16); }
     .gr-ring-6 { width: 2980px; height: 2980px; }
 
-    html:not(.dark) .gr-ring-1 { border-color: rgba(14, 165, 233, 0.32); }
-    html:not(.dark) .gr-ring-3 { border-color: rgba(14, 165, 233, 0.26); }
+    html:not(.dark) .gr-ring-1 { border-color: rgba(14, 165, 233, 0.35); }
+    html:not(.dark) .gr-ring-3 { border-color: rgba(14, 165, 233, 0.28); }
     html:not(.dark) .gr-ring-5 { border-color: rgba(14, 165, 233, 0.18); }
 
     /* 全局雷达十字交叉轴 */
@@ -512,10 +554,10 @@
       background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
     }
     html:not(.dark) .global-radar-axis-x {
-      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.28) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.32) 50%, transparent 100%);
     }
     html:not(.dark) .global-radar-axis-y {
-      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.28) 50%, transparent 100%);
+      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.32) 50%, transparent 100%);
     }
 
     /* 45° 辅助方位角对角线 */
@@ -535,76 +577,120 @@
       background: linear-gradient(90deg, transparent 15%, rgba(14, 165, 233, 0.14) 50%, transparent 85%);
     }
 
-    /* 360° 全局旋转扫描扇面 (Full-Screen Radar Sweep Beam) */
+    /* 方位刻度角标签 (Azimuth Marks) */
+    .gr-azimuth {
+      position: absolute;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(56, 189, 248, 0.55);
+      user-select: none;
+      pointer-events: none;
+    }
+    html:not(.dark) .gr-azimuth {
+      color: rgba(14, 165, 233, 0.65);
+    }
+
+    /* 360° 全局旋转扫描扇面 (Full-Screen Radar Sweep Beam - GPU Hardware Accelerated) */
     .global-radar-beam {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 3200px;
-      height: 3200px;
-      margin-top: -1600px;
-      margin-left: -1600px;
+      width: 2400px;
+      height: 2400px;
+      margin-top: -1200px;
+      margin-left: -1200px;
       border-radius: 50%;
       background: conic-gradient(
         from 0deg,
-        rgba(56, 189, 248, 0.32) 0deg,
-        rgba(56, 189, 248, 0.14) 22deg,
-        rgba(14, 165, 233, 0.03) 55deg,
-        transparent 75deg,
+        rgba(56, 189, 248, 0.38) 0deg,
+        rgba(56, 189, 248, 0.18) 16deg,
+        rgba(14, 165, 233, 0.04) 45deg,
+        transparent 70deg,
         transparent 360deg
       );
-      animation: globalRadarSweep 9s linear infinite;
+      /* 开启强制 GPU 硬件合成层加速，消除掉帧与重排 */
+      will-change: transform;
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      transform-origin: 50% 50%;
+      backface-visibility: hidden;
+      animation: globalRadarSweep 12s linear infinite;
+      pointer-events: none;
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.6) 70%, transparent 92%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.6) 70%, transparent 92%);
+    }
+    /* 高亮激光先导扫描线 (Leading Scan Ray - 划破天际的真实雷达刀锋) */
+    .global-radar-beam::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 50%;
+      height: 2px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, #ffffff 0%, #38bdf8 35%, rgba(56, 189, 248, 0.7) 75%, transparent 100%);
+      box-shadow: 0 0 10px #38bdf8, 0 0 20px rgba(14, 165, 233, 0.7);
       pointer-events: none;
     }
     html:not(.dark) .global-radar-beam {
       background: conic-gradient(
         from 0deg,
-        rgba(14, 165, 233, 0.25) 0deg,
-        rgba(56, 189, 248, 0.10) 22deg,
-        rgba(14, 165, 233, 0.02) 55deg,
-        transparent 75deg,
+        rgba(14, 165, 233, 0.32) 0deg,
+        rgba(56, 189, 248, 0.14) 16deg,
+        rgba(14, 165, 233, 0.03) 45deg,
+        transparent 70deg,
         transparent 360deg
       );
     }
-
-    @keyframes globalRadarSweep {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    html:not(.dark) .global-radar-beam::before {
+      background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 35%, rgba(14, 165, 233, 0.7) 75%, transparent 100%);
+      box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
     }
 
-    /* 全局雷达中心声呐脉冲波 (Sonar Ping Pulse) */
+    @keyframes globalRadarSweep {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(0deg);
+      }
+      100% {
+        transform: translate3d(0, 0, 0) rotate(360deg);
+      }
+    }
+
+    /* 全局雷达双频中心声呐脉冲波 (100% GPU Transform Scale - 零重排零卡顿) */
     .global-radar-pulse {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 50px;
-      height: 50px;
+      width: 1400px;
+      height: 1400px;
       border-radius: 50%;
-      border: 2px solid rgba(56, 189, 248, 0.6);
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, transparent 70%);
-      animation: globalSonarPulse 4.5s cubic-bezier(0.1, 0.7, 0.2, 1) infinite;
+      border: 1.5px solid rgba(56, 189, 248, 0.65);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 65%);
+      pointer-events: none;
+      will-change: transform, opacity;
+      transform: translate3d(-50%, -50%, 0) scale(0.04);
+      animation: globalSonarGpuPulse 5s cubic-bezier(0.12, 0.7, 0.22, 1) infinite;
+    }
+    .global-radar-pulse-secondary {
+      animation-delay: 2.5s;
     }
     html:not(.dark) .global-radar-pulse {
-      border-color: rgba(14, 165, 233, 0.5);
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.2) 0%, transparent 70%);
+      border-color: rgba(14, 165, 233, 0.55);
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.03) 40%, transparent 65%);
     }
 
-    @keyframes globalSonarPulse {
+    @keyframes globalSonarGpuPulse {
       0% {
-        width: 40px;
-        height: 40px;
-        opacity: 0.9;
-        transform: translate(-50%, -50%) scale(0.8);
+        transform: translate3d(-50%, -50%, 0) scale(0.04);
+        opacity: 0.95;
       }
-      80% {
-        opacity: 0.18;
+      65% {
+        opacity: 0.35;
       }
       100% {
-        width: 1600px;
-        height: 1600px;
+        transform: translate3d(-50%, -50%, 0) scale(1.1);
         opacity: 0;
-        transform: translate(-50%, -50%) scale(1);
       }
     }
 
@@ -618,39 +704,54 @@
       pointer-events: none;
       animation: blipGlow 3s ease-in-out infinite alternate;
       z-index: 1;
+      will-change: opacity, transform;
     }
     .global-radar-blip-dot {
-      width: 7px;
-      height: 7px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #38bdf8;
       box-shadow: 0 0 10px #38bdf8, 0 0 20px #0284c7;
+      position: relative;
+    }
+    .global-radar-blip-dot::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      animation: coreRingPulse 2s ease-out infinite;
     }
     .global-radar-blip-label {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: 0.05em;
-      color: rgba(56, 189, 248, 0.85);
-      background: rgba(15, 23, 42, 0.65);
-      padding: 1.5px 6px;
+      letter-spacing: 0.06em;
+      color: rgba(56, 189, 248, 0.9);
+      background: rgba(15, 23, 42, 0.7);
+      padding: 1.5px 7px;
       border-radius: 4px;
-      border: 1px solid rgba(56, 189, 248, 0.25);
+      border: 1px solid rgba(56, 189, 248, 0.3);
       backdrop-blur: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     html:not(.dark) .global-radar-blip-dot {
       background: #0284c7;
       box-shadow: 0 0 8px #0284c7;
     }
+    html:not(.dark) .global-radar-blip-dot::after {
+      border-color: rgba(14, 165, 233, 0.7);
+    }
     html:not(.dark) .global-radar-blip-label {
       color: #0369a1;
-      background: rgba(255, 255, 255, 0.75);
-      border-color: rgba(14, 165, 233, 0.35);
+      background: rgba(255, 255, 255, 0.8);
+      border-color: rgba(14, 165, 233, 0.4);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
     }
 
     @keyframes blipGlow {
-      0% { opacity: 0.35; transform: translate(-50%, -50%) scale(0.9); }
-      100% { opacity: 0.95; transform: translate(-50%, -50%) scale(1.05); }
+      0% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.95); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
     }
 
     /* 局部时间线卡片雷达样式 (保留兼容) */
@@ -736,30 +837,38 @@
       <div class="global-radar-axis-y"></div>
       <div class="global-radar-diagonal-1"></div>
       <div class="global-radar-diagonal-2"></div>
-      <!-- 动态旋转声呐波束 -->
+      <!-- 方位刻度标记 (Azimuth Marks) -->
+      <div class="gr-azimuth" style="top: -190px; left: 0; transform: translate(-50%, -100%);">000° N</div>
+      <div class="gr-azimuth" style="top: 0; right: -190px; transform: translate(100%, -50%);">090° E</div>
+      <div class="gr-azimuth" style="bottom: -190px; left: 0; transform: translate(-50%, 100%);">180° S</div>
+      <div class="gr-azimuth" style="top: 0; left: -190px; transform: translate(-100%, -50%);">270° W</div>
+      <!-- 动态旋转声呐波束 (GPU 独立硬件加速) -->
       <div class="global-radar-beam"></div>
-      <!-- 周期脉冲扩散光晕 -->
+      <!-- 双频声呐脉冲波 (100% GPU Scale，交替涟漪) -->
       <div class="global-radar-pulse"></div>
+      <div class="global-radar-pulse global-radar-pulse-secondary"></div>
+      <!-- 雷达中心高频信标核心 -->
+      <div class="global-radar-core"></div>
       <!-- AI 动态侦听目标信标 (Blinking AI Intercept Blips) -->
       <div class="global-radar-blip" style="top: -240px; left: 340px; animation-delay: 0.2s;">
         <span class="global-radar-blip-dot"></span>
-        <span class="global-radar-blip-label">TARGET · OPENAI</span>
+        <span class="global-radar-blip-label">TGT-01 · OPENAI [SIG 98%]</span>
       </div>
       <div class="global-radar-blip" style="top: 190px; left: -390px; animation-delay: 1.2s;">
         <span class="global-radar-blip-dot"></span>
-        <span class="global-radar-blip-label">TARGET · ANTHROPIC</span>
+        <span class="global-radar-blip-label">TGT-02 · ANTHROPIC [SIG 95%]</span>
       </div>
       <div class="global-radar-blip" style="top: -330px; left: -280px; animation-delay: 2.1s;">
         <span class="global-radar-blip-dot"></span>
-        <span class="global-radar-blip-label">TARGET · DEEPSEEK</span>
+        <span class="global-radar-blip-label">TGT-03 · DEEPSEEK [SIG 99%]</span>
       </div>
       <div class="global-radar-blip" style="top: 340px; left: 360px; animation-delay: 3.0s;">
         <span class="global-radar-blip-dot"></span>
-        <span class="global-radar-blip-label">TARGET · GEMINI</span>
+        <span class="global-radar-blip-label">TGT-04 · GEMINI [SIG 96%]</span>
       </div>
       <div class="global-radar-blip" style="top: 90px; left: 540px; animation-delay: 1.8s;">
         <span class="global-radar-blip-dot"></span>
-        <span class="global-radar-blip-label">TARGET · META AI</span>
+        <span class="global-radar-blip-label">TGT-05 · META AI [SIG 92%]</span>
       </div>
     </div>
   </div>
