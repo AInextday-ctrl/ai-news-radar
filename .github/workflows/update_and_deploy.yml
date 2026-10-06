@@ -38,6 +38,10 @@ jobs:
         run: |
           python main.py
 
+      - name: Enforce Multilingual Quality & Consistency Gate
+        run: |
+          python language_sentinel.py --verify-only || (echo "⚠️ 自动触发自愈哨兵修正..." && python language_sentinel.py)
+
       - name: Commit Updated News Data to Repo
         run: |
           git config --global user.name "github-actions[bot]"

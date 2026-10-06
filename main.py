@@ -1135,15 +1135,17 @@ def save_news(items: list):
         "items": recent_final
     }
 
-    # 确保长文实录 100% 具备纯中文翻译，杜绝中英文混杂
+    # 🛡️ 语言规范质检与自愈哨兵：确保写入 latest_news.json 与 archive_news.json 前 100% 纯净达标
     try:
-        from translate_fast import ensure_articles_translated
-        c_recent = ensure_articles_translated(recent_final)
-        c_hist = ensure_articles_translated(historical_items)
-        if c_recent or c_hist:
-            print(f"🌐 自动补全长文实录中文翻译: 近期 {c_recent} 条, 历史 {c_hist} 条")
+        from language_sentinel import run_pipeline_language_audit
+        recent_final, _ = run_pipeline_language_audit(recent_final)
+        historical_items, _ = run_pipeline_language_audit(historical_items)
+        latest_payload["items"] = recent_final
+        # 同步更新 latest_payload 中的分类列表与头条列表
+        for cat_k in latest_payload.get("grouped", {}):
+            latest_payload["grouped"][cat_k] = [it for it in recent_final if it.get("category") == cat_k]
     except Exception as e:
-        print(f"⚠️ [translate_fast] 自动补译异常: {e}")
+        print(f"⚠️ [language_sentinel] 自动质检异常: {e}")
 
     # 4. 构建全量历史归档库 payload (archive_news.json)
     archive_payload = {

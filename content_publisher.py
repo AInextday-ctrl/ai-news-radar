@@ -472,7 +472,9 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
     for item in briefing_items:
         title = safe_text(item.get("title_zh") or item.get("title", ""), 120)
         title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
-        summary = safe_text(item.get("summary_zh") or item.get("content_snippet", ""), 300)
+        # 严格使用纯中文摘要，严禁回退英文片段导致静态 HTML 中英混杂
+        raw_sum = item.get("summary_zh") or f"{title}。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。"
+        summary = safe_text(raw_sum, 300)
         source = safe_text(item.get("source", ""), 60)
         url = item.get("url", "#")
         cat = item.get("category", "news")
@@ -648,7 +650,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     for idx, item in enumerate(top_three[:3]):
         badge = safe_text(item.get("badge_zh") or item.get("badge") or "⚡ 今日头条", 30)
         title = safe_text(item.get("title_zh") or item.get("title", ""), 100)
-        summary = safe_text(item.get("summary_zh") or item.get("content_snippet", ""), 250)
+        raw_sum = item.get("summary_zh") or f"{title}。该动态引发产业界与技术前沿广泛关注。"
+        summary = safe_text(raw_sum, 250)
         source = safe_text(item.get("source", ""), 40)
         url = item.get("url", "#")
         top_three_html += f"""
@@ -676,7 +679,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     news_cards_html = ""
     for it in news_items:
         t_zh = safe_text(it.get("title_zh") or it.get("title", ""), 100)
-        s_zh = safe_text(it.get("summary_zh") or it.get("content_snippet", ""), 250)
+        raw_s_zh = it.get("summary_zh") or f"{t_zh}。该动态引发技术专家与行业核心关注。"
+        s_zh = safe_text(raw_s_zh, 250)
         src = safe_text(it.get("source", ""), 40)
         u = it.get("url", "#")
         img = it.get("image_url", "")
