@@ -283,32 +283,33 @@ def fetch_incremental_tweets(
             except Exception:
                 pass
 
-    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控全球 {len(LEADER_HANDLES)} 位领袖 + {len(LAB_HANDLES)} 家前沿实验室 + {len(TRENDING_AI_QUERIES)} 组全网飙升标签 (Token 池: {len(tokens)} 个)...")
+    dynamic_queries = get_dynamic_trending_queries()
+    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控全球 {len(LEADER_HANDLES)} 位领袖 + {len(LAB_HANDLES)} 家前沿实验室 + {len(dynamic_queries)} 组全网飙升标签 (Token 池: {len(tokens)} 个)...")
 
-    raw_items = []
-    
+    all_queries = []
     # 1. 批量抓取全球顶尖 AI 领袖 (每组 15 人，保证检索式在 X API 长度限制内高效执行)
     for i in range(0, len(LEADER_HANDLES), 15):
         batch = LEADER_HANDLES[i:i+15]
         q_leaders = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
-        res = _call_apify_actor(tokens, q_leaders, max_items=25)
-        if res:
-            raw_items.extend(res)
+        all_queries.append((q_leaders, 25))
 
     # 2. 批量抓取官方实验室与前沿研发团队 (每组 15 家)
     for i in range(0, len(LAB_HANDLES), 15):
         batch = LAB_HANDLES[i:i+15]
         q_labs = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
-        res = _call_apify_actor(tokens, q_labs, max_items=25)
-        if res:
-            raw_items.extend(res)
+        all_queries.append((q_labs, 25))
 
-    # 3. 实时全网抓取由知识图谱动态自适应生成的 AI 热门标签与高热讨论推文
-    dynamic_queries = get_dynamic_trending_queries()
-    for q_trending in dynamic_queries:
-        res = _call_apify_actor(tokens, q_trending, max_items=20)
-        if res:
-            raw_items.extend(res)
+    raw_items = []
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {executor.submit(_call_apify_actor, tokens, q, max_i): q for q, max_i in all_queries}
+        for future in as_completed(futures):
+            try:
+                res = future.result()
+                if res:
+                    raw_items.extend(res)
+            except Exception as e:
+                print(f"  ⚠️ 查询失败: {e}")
 
     print(f"  📥 [Apify 增量采集器] 云端抓取完成，共返回 {len(raw_items)} 条原生推文，开始执行时间增量校验与去重过滤...")
 
@@ -354,22 +355,10 @@ def fetch_incremental_tweets(
         # 记录指标映射以供刷新现有推文
         live_metrics_map[tweet_id] = metrics
 
-        # 1. 如果已存在该推文：严格跳过，不要重复采集
-        if tweet_id in known_ids and not force_update:
+        # 1. 如果本地数据库已收录该推文：严格跳过，避免重复入库
+        if tweet_id in existing_file_ids and not force_update:
             skipped_known += 1
             continue
-
-        # 2. 检查作者时间游标 (按时间进行增加采集)
-        author_mark = watermarks.get(user_name, {})
-        last_dt_str = author_mark.get("latest_created_at")
-        if last_dt_str:
-            try:
-                last_dt = datetime.fromisoformat(last_dt_str)
-                if dt <= last_dt and not force_update:
-                    skipped_known += 1
-                    continue
-            except Exception:
-                pass
 
         # 3. 严格过滤低价值、无观点、无实质内容的水帖与寒暄碎碎念
         tweet_text = (it.get("text") or it.get("fullText") or "").strip()
@@ -382,6 +371,7 @@ def fetch_incremental_tweets(
         # 排除纯寒暄、无营养一句话与表情包水帖
         low_value_patterns = [
             r'^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao)[!.\s]*$',
+            r'^(?:congrats|congratulations)\b.*(?:can\'?t\s+wait|cheers|excited for you|looking forward|welcome|proud of you).*$',
             r'^(?:check this out|excited for this|wow|nice|👀|🔥|🚀|💯)[!.\s]*$',
             r'^(?:thanks for having me|happy to help|appreciate it)[!.\s]*$'
         ]
@@ -408,8 +398,17 @@ def fetch_incremental_tweets(
             elif isinstance(first_media, dict):
                 image_url = first_media.get("media_url_https") or first_media.get("url")
 
-        # 资料与认证匹配
+        # 严格身份门禁：只收录已在白名单池中的全球 AI 核心领袖与顶尖官方实验室
+        is_known_handle = user_name.lower() in [h.lower() for h in LEADER_HANDLES + LAB_HANDLES]
         profile = match_celebrity_profile(user_name)
+        if not is_known_handle and not profile:
+            continue
+
+        # 严格过滤垃圾与无关主题 (加密货币/NFT/成人/无营养闲扯)
+        noise_keywords = ["crypto", "bitcoin", "eth ", "solana", "memecoin", "airdrop", "nsfw", "hentai", "futa", "porn", "giveaway", "follow & rt", "aiart", "dildo"]
+        if any(w in tweet_text.lower() for w in noise_keywords):
+            continue
+
         author_name = profile.get("name") if profile else (author_obj.get("name") or user_name)
         author_handle = f"@{user_name}"
         author_avatar = profile.get("avatar") if profile else (author_obj.get("profilePicture") or f"https://unavatar.io/x/{user_name}")
@@ -463,6 +462,7 @@ def fetch_incremental_tweets(
             "author_handle": author_handle,
             "author_avatar": author_avatar,
             "author_role": author_role,
+            "author_role_en": profile.get("role_en") if profile else (author_obj.get("description") or "AI Researcher & Builder"),
             "entity_type": entity_type,
             "platform": "x",
             "raw_published_at": iso_time,
@@ -494,9 +494,79 @@ def fetch_incremental_tweets(
 
     # 4. 刷新已有推文的实时指标并合并新增推文入库
     updated_metrics_count = update_existing_tweet_metrics(live_metrics_map)
+    inserted_count = merge_new_items_to_database(new_items)
 
-    print(f"  ✨ [Apify 增量采集器] 增量捕获新推文: {len(new_items)} 篇，跳过已有推文: {skipped_known} 篇，刷新已有推文指标: {updated_metrics_count} 条。")
+    print(f"  ✨ [Apify 增量采集器] 增量捕获新推文: {len(new_items)} 篇，新增入库: {inserted_count} 篇，跳过已有推文: {skipped_known} 篇，刷新已有推文指标: {updated_metrics_count} 条。")
     return new_items
+
+
+def merge_new_items_to_database(new_items: List[Dict[str, Any]]) -> int:
+    """直接将最新增量推文写入 latest_news.json, public/data/latest_news.json 以及 master_archive.json"""
+    if not new_items:
+        return 0
+
+    inserted_total = 0
+    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
+        if not os.path.exists(target_path):
+            continue
+        try:
+            with open(target_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            existing_items = data.get("items", [])
+            existing_urls = {it.get("url") for it in existing_items if it.get("url")}
+            
+            # 过滤出未入库的新条目
+            to_add = [it for it in new_items if it.get("url") not in existing_urls]
+            if to_add:
+                # 插入 items 头部并按发布时间倒序
+                merged_items = to_add + existing_items
+                merged_items.sort(key=lambda x: str(x.get("raw_published_at") or ""), reverse=True)
+                data["items"] = merged_items
+                
+                # 插入 grouped.celebrity
+                grouped = data.get("grouped", {})
+                existing_celeb = grouped.get("celebrity", [])
+                existing_celeb_urls = {it.get("url") for it in existing_celeb if it.get("url")}
+                to_add_celeb = [it for it in to_add if it.get("url") not in existing_celeb_urls]
+                merged_celeb = to_add_celeb + existing_celeb
+                merged_celeb.sort(key=lambda x: str(x.get("raw_published_at") or ""), reverse=True)
+                grouped["celebrity"] = merged_celeb
+                data["grouped"] = grouped
+                
+                # 兼容旧字段
+                data["celebrity"] = merged_celeb
+                data["leader_opinions"] = merged_celeb
+                
+                # 更新 total_count
+                data["total_count"] = len(data["items"])
+                data["updated_at"] = datetime.now(timezone.utc).isoformat()
+
+                with open(target_path, "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                inserted_total = len(to_add)
+        except Exception as e:
+            print(f"  ⚠️ 合并入库异常 ({target_path}): {e}")
+
+    # 同时归档入 master_archive.json
+    master_file = os.path.join(BASE_DIR, "data", "master_archive.json")
+    if os.path.exists(master_file):
+        try:
+            with open(master_file, "r", encoding="utf-8") as f:
+                m_data = json.load(f)
+            m_items = m_data.get("items", [])
+            m_urls = {it.get("url") for it in m_items if it.get("url")}
+            m_add = [it for it in new_items if it.get("url") not in m_urls]
+            if m_add:
+                merged_m = m_add + m_items
+                merged_m.sort(key=lambda x: str(x.get("raw_published_at") or ""), reverse=True)
+                m_data["items"] = merged_m
+                with open(master_file, "w", encoding="utf-8") as f:
+                    json.dump(m_data, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"  ⚠️ 归档入库异常: {e}")
+
+    return inserted_total
 
 
 def update_existing_tweet_metrics(live_metrics_map: Dict[str, Dict[str, Any]]) -> int:

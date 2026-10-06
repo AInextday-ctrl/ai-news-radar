@@ -435,6 +435,131 @@
     .timeline-item-anim {
       animation: timelineItemEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
+
+    /* ========================================== */
+    /* 📡 全球 AI 社交雷达 · 动态声呐扫描背景 (Light & Dark 双主题自适应) */
+    /* ========================================== */
+    .radar-scanner-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1.5rem;
+    }
+    
+    /* 动态雷达极坐标扫描网格画布 */
+    .radar-scan-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    
+    /* 雷达同心圆距标圈 (Concentric Distance Rings) */
+    .radar-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 1px dashed rgba(56, 189, 248, 0.22);
+      pointer-events: none;
+    }
+    html:not(.dark) .radar-ring {
+      border: 1px dashed rgba(14, 165, 233, 0.18);
+    }
+    .radar-ring-1 { width: 320px; height: 320px; border-style: solid; opacity: 0.6; }
+    .radar-ring-2 { width: 620px; height: 620px; }
+    .radar-ring-3 { width: 920px; height: 920px; }
+    .radar-ring-4 { width: 1240px; height: 1240px; border-style: solid; opacity: 0.45; }
+
+    /* 雷达经纬十字扫描线 (Crosshairs) */
+    .radar-crosshair-x {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
+    }
+    .radar-crosshair-y {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
+    }
+    html:not(.dark) .radar-crosshair-x {
+      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.22) 50%, transparent 100%);
+    }
+    html:not(.dark) .radar-crosshair-y {
+      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.22) 50%, transparent 100%);
+    }
+
+    /* 360° 旋转雷达声呐波束 (Radar Sweep Beam) */
+    .radar-sweep-beam {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1400px;
+      height: 1400px;
+      margin-top: -700px;
+      margin-left: -700px;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(56, 189, 248, 0.25) 0deg,
+        rgba(14, 165, 233, 0.08) 35deg,
+        transparent 65deg,
+        transparent 360deg
+      );
+      animation: radarSweepRotate 6s linear infinite;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+    html:not(.dark) .radar-sweep-beam {
+      background: conic-gradient(
+        from 0deg,
+        rgba(14, 165, 233, 0.18) 0deg,
+        rgba(56, 189, 248, 0.06) 30deg,
+        transparent 60deg,
+        transparent 360deg
+      );
+      mix-blend-mode: multiply;
+    }
+
+    @keyframes radarSweepRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* 脉冲声呐波光晕 (Sonar Pulse Wave) */
+    .radar-sonar-pulse {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.35);
+      animation: sonarPulseExpand 3.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+    }
+    @keyframes sonarPulseExpand {
+      0% {
+        width: 30px;
+        height: 30px;
+        opacity: 0.85;
+      }
+      100% {
+        width: 850px;
+        height: 850px;
+        opacity: 0;
+      }
+    }
+    html:not(.dark) .radar-sonar-pulse {
+      background: rgba(14, 165, 233, 0.22);
+    }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased">
@@ -980,26 +1105,6 @@
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://substackcdn.com/image/fetch/$s_!0Lmd!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9dbae198-0201-4307-b79a-55c3d79c8f85_1672x941.png" alt="分析：对于使用Claude Opus 5.5的代理工作负载， Anthropic的订阅每月提供的API等效值约为OpenAI的5倍，而GPT-6.1 Sol （半" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span>信源: SemiAnalysis</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">分析：对于使用Claude Opus 5.5的代理工作负载， Anthropic的订阅每月提供的API等效值约为OpenAI的5倍，而GPT-6.1 Sol （半</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      分析：对于使用Claude Opus 5.5的代理工作负载， Anthropic的订阅每月提供的API等效值约为OpenAI的5倍，而GPT-6.1 Sol （半。相关动态引发全球产业界广泛讨论与技术跟踪。
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://newsletter.semianalysis.com/p/anthropic-subscriptions-offer-5x" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://image.cnbcfm.com/api/v1/image/108368089-1790695523016-108368089-1790346944343-gettyimages-2296349180-TRUMP_XI.jpg?v=1790695530&w=1920&h=1080" alt="在摩根士丹利称SPCX “便宜”之后， SpaceX股价收盘上涨7.6% ，达到自6月中旬以来的最高水平，并使埃隆·马斯克（ Elon Musk ）重返万亿富翁地位（" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -1076,6 +1181,26 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://www.theverge.com/ai-artificial-intelligence/1004933/ai-math-openai-breakthrough-solution" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://img.semafor.com/20372becaab08e9627492155cd30b7426faa073b-2048x1365.avif?rect=0,146,2048,1075&w=1200&h=630&q=75&auto=format" alt="总部位于纽约的Reflection推出了Beam ，这是一种开放式模型，它声称竞争对手GLM 5.2在推理方面使用了3倍至4倍的计算能力，并在代理任务上接近Qwen3.8-Max" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
+                      <span>信源: Semafor</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.semafor.com/article/10/05/2026/reflection-ai-unveils-an-open-source-answer-to-chinese-labs" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">总部位于纽约的Reflection推出了Beam ，这是一种开放式模型，它声称竞争对手GLM 5.2在推理方面使用了3倍至4倍的计算能力，并在代理任务上接近Qwen3.8-Max</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      自称是美国对开源中国人工智能的回应的初创公司Reflection AI正在发布其第一个名为Beam的模型
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.semafor.com/article/10/05/2026/reflection-ai-unveils-an-open-source-answer-to-chinese-labs" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">查看详情 ↗</a>
                   </div>
                 </div>
               </article></div>
@@ -4664,27 +4789,37 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function formatTweetText(text) {
       if (!text) return '';
+      // 1. 先反转义 HTML entities，防止双重转义 (如 &#039; &quot; &amp; &lt; &gt;)
       let str = String(text)
+        .replace(/&amp;/g, '&')
+        .replace(/&#039;/g, "'")
+        .replace(/&apos;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>');
+
+      // 2. 安全转义 HTML 尖括号与与号，防止 XSS，保留纯单引号与双引号
+      str = str
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-      // 高亮 #标签 (英中数字及下划线)
+        .replace(/>/g, '&gt;');
+
+      // 3. 高亮 #标签 (英中数字及下划线)
       str = str.replace(/#([\w\u4e00-\u9fa5]+)/g, '<span class="text-sky-500 dark:text-sky-400 font-medium hover:underline cursor-pointer">#$1</span>');
-      // 高亮 @提及 (Twitter Handle)
+      // 4. 高亮 @提及 (Twitter Handle)
       str = str.replace(/@([a-zA-Z0-9_]+)/g, '<span class="text-sky-500 dark:text-sky-400 font-medium hover:underline cursor-pointer">@$1</span>');
-      // 高亮 http/https 链接
-      str = str.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-sky-500 dark:text-sky-400 hover:underline">$1</a>');
+      // 5. 高亮 http/https 链接
+      str = str.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-sky-500 dark:text-sky-400 hover:underline break-all">$1</a>');
       return str;
     }
 
     function renderCelebrityCard(item, isTimeline = false, isRight = false) {
+      const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${isZh ? (t.todayTag || '今日最新') : 'Today'}</span>` : '';
       const isPinned = isItemPinnedActive(item);
-      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">📌 置顶爆款</span>` : '';
+      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">${isZh ? '📌 置顶爆款' : '📌 Pinned'}</span>` : '';
 
       const itemId = item.id || item.url || '';
 
@@ -4695,9 +4830,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const comments = m.comments ? String(m.comments).replace(/[^0-9.kKmM]/g, '') : '';
       const retweets = m.retweets ? String(m.retweets).replace(/[^0-9.kKmM]/g, '') : '';
 
-      const isZh = currentLang === 'zh';
       const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
-      const author = item.author || 'AI 开发者';
+      const author = item.author || (isZh ? 'AI 开发者' : 'AI Creator');
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
       const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
       const specBadges = (item.spec_tags && item.spec_tags.length)
@@ -4706,12 +4840,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isCo = isCompanyOrBrand(item);
       const platformBadge = isCo
-        ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">🏢 官方动态</span>`
-        : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0">👤 大V动态</span>`;
+        ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">${isZh ? '🏢 官方动态' : '🏢 Official'}</span>`
+        : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0">${isZh ? '👤 大V动态' : '👤 Pioneer'}</span>`;
 
       const signalLevel = (likes && (parseInt(likes.replace(/k/i, '000'), 10) > 1000)) 
-        ? '<span class="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 shrink-0">📶 强信号</span>' 
-        : '<span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 shrink-0">📶 稳定截获</span>';
+        ? `<span class="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 shrink-0">${isZh ? '📶 强信号' : '📶 Strong Signal'}</span>` 
+        : `<span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 shrink-0">${isZh ? '📶 稳定截获' : '📶 Intercept'}</span>`;
+
+      // 语言统一：英文视图下若作者身份包含中文，转换为对应的纯英文头衔
+      let authorRole = item.author_role || '';
+      if (!isZh && authorRole) {
+        if (item.author_role_en) {
+          authorRole = item.author_role_en;
+        } else if (/[\u4e00-\u9fa5]/.test(authorRole)) {
+          if (authorRole.includes('创始人') || authorRole.includes('CEO')) authorRole = 'Co-Founder & CEO';
+          else if (authorRole.includes('研究员') || authorRole.includes('科学家')) authorRole = 'AI Researcher';
+          else if (authorRole.includes('猎头') || authorRole.includes('投行')) authorRole = 'AI Talent & Venture Partner';
+          else if (isCo) authorRole = 'Official Lab & Team';
+          else authorRole = 'AI Pioneer & Builder';
+        }
+      }
 
       return `
         <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 ${isCo ? 'border-l-amber-500/90' : 'border-l-sky-500/90'} hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10 transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
@@ -4721,7 +4869,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 左侧：经典圆形头像 + 金V/蓝V认证标 -->
               <div class="relative shrink-0 pt-0.5">
                 <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
-                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-400 text-slate-950' : 'bg-sky-500 text-white'} flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? '已认证官方机构/品牌' : '已认证大V/科学家'}">✓</span>
+                <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-400 text-slate-950' : 'bg-sky-500 text-white'} flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? (isZh ? '已认证官方机构/品牌' : 'Verified Official Organization') : (isZh ? '已认证大V/科学家' : 'Verified Pioneer')}">✓</span>
               </div>
 
               <!-- 右侧：作者信息、时间锚点与 𝕏 平台徽章 -->
@@ -4739,13 +4887,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <div class="flex items-center space-x-1.5 shrink-0">
                     ${signalLevel}
                     ${platformBadge}
-                    <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 rounded text-slate-400 hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="前往 𝕏 查看原推">
+                    <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 rounded text-slate-400 hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="${isZh ? '前往 𝕏 查看原推' : 'View on 𝕏'}">
                       <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
                   </div>
                 </div>
                 <!-- 领袖/团队职务角色 (若存在) -->
-                ${item.author_role ? `<div class="text-[11px] text-slate-500 dark:text-slate-400 font-sans truncate mt-0.5">${item.author_role}</div>` : ''}
+                ${authorRole ? `<div class="text-[11px] text-slate-500 dark:text-slate-400 font-sans truncate mt-0.5">${authorRole}</div>` : ''}
               </div>
             </div>
 
@@ -4760,18 +4908,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <!-- 𝕏 经典底栏 + 详情弹窗与直达入口 -->
           <div class="flex items-center justify-between pt-2.5 mt-auto border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400 select-none">
             <div class="flex items-center space-x-3 sm:space-x-4 font-mono text-[11px] sm:text-xs">
-              ${comments ? `<div class="flex items-center space-x-1 group/rep hover:text-sky-500 transition-colors" title="讨论数"><span class="text-xs">💬</span><span class="font-semibold">${comments}</span></div>` : ''}
-              ${retweets ? `<div class="flex items-center space-x-1 group/rt hover:text-emerald-500 transition-colors" title="转推数"><span class="text-xs">🔁</span><span class="font-semibold">${retweets}</span></div>` : ''}
-              ${likes ? `<div class="flex items-center space-x-1 group/like hover:text-rose-500 transition-colors" title="点赞数"><span class="text-xs">❤️</span><span class="font-semibold">${likes}</span></div>` : ''}
-              ${views ? `<div class="flex items-center space-x-1 group/view hover:text-sky-500 transition-colors" title="阅读浏览量"><span class="text-xs">📊</span><span class="font-semibold">${views}</span></div>` : ''}
-              ${(!comments && !likes && !views) ? `<span class="text-[10px] text-sky-500/80 font-mono">⚡ 真实前沿原声</span>` : ''}
+              ${comments ? `<div class="flex items-center space-x-1 group/rep hover:text-sky-500 transition-colors" title="${isZh ? '讨论数' : 'Replies'}"><span class="text-xs">💬</span><span class="font-semibold">${comments}</span></div>` : ''}
+              ${retweets ? `<div class="flex items-center space-x-1 group/rt hover:text-emerald-500 transition-colors" title="${isZh ? '转推数' : 'Retweets'}"><span class="text-xs">🔁</span><span class="font-semibold">${retweets}</span></div>` : ''}
+              ${likes ? `<div class="flex items-center space-x-1 group/like hover:text-rose-500 transition-colors" title="${isZh ? '点赞数' : 'Likes'}"><span class="text-xs">❤️</span><span class="font-semibold">${likes}</span></div>` : ''}
+              ${views ? `<div class="flex items-center space-x-1 group/view hover:text-sky-500 transition-colors" title="${isZh ? '阅读浏览量' : 'Views'}"><span class="text-xs">📊</span><span class="font-semibold">${views}</span></div>` : ''}
+              ${(!comments && !likes && !views) ? `<span class="text-[10px] text-sky-500/80 font-mono">${isZh ? '⚡ 真实前沿原声' : '⚡ Verified Authentic'}</span>` : ''}
             </div>
 
             <div class="flex items-center space-x-2 shrink-0">
               <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 text-[11px] font-semibold transition-all">
-                💬 贴文详情
+                ${isZh ? '💬 贴文详情' : '💬 Post Details'}
               </button>
-              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 text-slate-400 hover:text-sky-400 transition-colors" title="直达 𝕏 原文">
+              <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 text-slate-400 hover:text-sky-400 transition-colors" title="${isZh ? '直达 𝕏 原文' : 'Open on 𝕏'}">
                 ↗
               </a>
             </div>
@@ -5073,70 +5221,85 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <div class="radar-stream-wrapper relative max-w-6xl mx-auto py-3 px-1 sm:px-2">
-          <!-- 雷达态势控制台 HUD (Radar Telemetry Header) -->
-          <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-sky-950/40 to-slate-900 border border-sky-500/30 p-4 sm:p-5 mb-5 shadow-xl shadow-sky-500/5">
-            <!-- 极客扫描线光效装饰背景 -->
-            <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-sky-500/10 blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-10 -top-10 w-44 h-44 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none"></div>
-            
-            <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-3">
-              <div class="flex items-start sm:items-center space-x-3.5">
-                <!-- 动态脉冲雷达信标 -->
-                <div class="relative w-11 h-11 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center shrink-0 shadow-inner">
-                  <span class="absolute inset-0 rounded-xl bg-sky-400/20 animate-ping"></span>
-                  <span class="text-xl">📡</span>
-                </div>
-                <div>
-                  <div class="flex items-center space-x-2 flex-wrap">
-                    <h3 class="font-extrabold text-base sm:text-lg text-white tracking-wide flex items-center gap-1.5">
-                      <span>${timelineTitle}</span>
-                    </h3>
-                    <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold flex items-center gap-1">
-                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                      <span>${count} ${isZh ? '篇前沿动态' : 'Intercepts'}</span>
-                    </span>
-                  </div>
-                  <p class="text-xs text-slate-300 dark:text-slate-400 mt-1 font-sans">
-                    ${subDesc}
-                  </p>
-                </div>
-              </div>
+        <!-- 全球 AI 社交雷达 · 动态声呐扫描画布容器 (Light & Dark 双主题自适应) -->
+        <div class="radar-scanner-container relative max-w-6xl mx-auto my-3 p-3 sm:p-5 sm:rounded-3xl bg-slate-900/40 dark:bg-[#070b19]/80 border border-sky-400/30 dark:border-sky-500/30 shadow-2xl shadow-sky-500/10 backdrop-blur-xl">
+          <!-- 动态雷达极坐标扫描网格 (背景旋转光束与同心圆距标) -->
+          <div class="radar-scan-canvas">
+            <div class="radar-crosshair-x"></div>
+            <div class="radar-crosshair-y"></div>
+            <div class="radar-ring radar-ring-1"></div>
+            <div class="radar-ring radar-ring-2"></div>
+            <div class="radar-ring radar-ring-3"></div>
+            <div class="radar-ring radar-ring-4"></div>
+            <div class="radar-sweep-beam"></div>
+            <div class="radar-sonar-pulse"></div>
+          </div>
 
-              <!-- 右侧雷达态势参数条 -->
-              <div class="flex items-center gap-2 sm:gap-3 text-[11px] font-mono text-slate-300 bg-black/40 px-3 py-2 rounded-xl border border-slate-800 self-start md:self-auto shrink-0">
-                <span class="flex items-center gap-1 text-emerald-400">
-                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  <span>实时侦听</span>
-                </span>
-                <span class="text-slate-600">|</span>
-                <span class="text-sky-300">纯净原声解译</span>
-                <span class="text-slate-600">|</span>
-                <span class="text-slate-400">零口水零重合</span>
+          <div class="relative z-10 space-y-4 sm:space-y-5">
+            <!-- 雷达态势控制台 HUD (Radar Telemetry Header) -->
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900/90 via-sky-950/60 to-slate-900/90 dark:from-black/80 dark:via-sky-950/70 dark:to-black/80 border border-sky-500/40 p-4 sm:p-5 shadow-xl shadow-sky-500/10 backdrop-blur-md">
+              <!-- 极客扫描线光效装饰背景 -->
+              <div class="absolute -right-10 -bottom-10 w-44 h-44 rounded-full bg-sky-500/15 blur-3xl pointer-events-none"></div>
+              <div class="absolute -left-10 -top-10 w-44 h-44 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none"></div>
+              
+              <div class="relative flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <div class="flex items-start sm:items-center space-x-3.5">
+                  <!-- 动态脉冲雷达信标 -->
+                  <div class="relative w-11 h-11 rounded-xl bg-sky-500/20 border border-sky-500/40 flex items-center justify-center shrink-0 shadow-inner">
+                    <span class="absolute inset-0 rounded-xl bg-sky-400/30 animate-ping"></span>
+                    <span class="text-xl">📡</span>
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-2 flex-wrap">
+                      <h3 class="font-extrabold text-base sm:text-lg text-white tracking-wide flex items-center gap-1.5">
+                        <span>${timelineTitle}</span>
+                      </h3>
+                      <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-sky-500/25 text-sky-300 border border-sky-500/40 font-bold flex items-center gap-1">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>${count} ${isZh ? '篇前沿动态' : 'Intercepts'}</span>
+                      </span>
+                    </div>
+                    <p class="text-xs text-slate-300 dark:text-slate-400 mt-1 font-sans">
+                      ${subDesc}
+                    </p>
+                  </div>
+                </div>
+
+                <!-- 右侧雷达态势参数条 (自适应多语言) -->
+                <div class="flex items-center gap-2 sm:gap-3 text-[11px] font-mono text-slate-300 bg-black/60 px-3 py-2 rounded-xl border border-sky-500/30 self-start md:self-auto shrink-0 shadow">
+                  <span class="flex items-center gap-1 text-emerald-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span>${isZh ? '实时侦听' : 'Live Intercept'}</span>
+                  </span>
+                  <span class="text-slate-600">|</span>
+                  <span class="text-sky-300">${isZh ? '纯净原声解译' : 'Decoded Voices'}</span>
+                  <span class="text-slate-600">|</span>
+                  <span class="text-slate-400">${isZh ? '零口水零重合' : 'Zero Clutter'}</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- 自适应雷达双列态势流 (Adaptive Radar Grid) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 relative">
-            ${uniqueList.map(item => renderCelebrityCard(item)).join('')}
-          </div>
+            <!-- 自适应雷达双列态势流 (Adaptive Radar Grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 relative">
+              ${uniqueList.map(item => renderCelebrityCard(item)).join('')}
+            </div>
 
-          <!-- 底部历史动态归档入口 -->
-          <div class="mt-10 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
-            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
-              <div class="flex items-center space-x-3">
-                <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
-                <div class="text-left">
-                  <span class="font-bold tracking-wide">${isZh ? '展开历史推文全量归档库 (卡片式多页查阅)' : 'Open Full Social Archive (Card View with Pagination)'}</span>
-                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '雷达前线聚焦 24h 前沿态势，历史深空数据以卡片库全面归档' : 'Live radar stream for 24h pulse, deep card view for full archive'}</span>
+            <!-- 底部历史动态归档入口 -->
+            <div class="mt-8 pt-5 border-t border-slate-700/50">
+              <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-indigo-950/50 to-slate-900/90 hover:from-indigo-900/60 hover:to-slate-800 border border-slate-700/80 hover:border-indigo-500/60 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
+                <div class="flex items-center space-x-3">
+                  <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
+                  <div class="text-left">
+                    <span class="font-bold tracking-wide">${isZh ? '展开历史推文全量归档库 (卡片式多页查阅)' : 'Open Full Social Archive (Card View with Pagination)'}</span>
+                    <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '雷达前线聚焦 24h 前沿态势，历史深空数据以卡片库全面归档' : 'Live radar stream for 24h pulse, deep card view for full archive'}</span>
+                  </div>
                 </div>
-              </div>
-              <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1 shrink-0">
-                <span>${isZh ? '进入历史卡片归档库' : 'Browse Archive Cards'}</span>
-                <span>→</span>
-              </span>
-            </button>
+                <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1 shrink-0">
+                  <span>${isZh ? '进入历史卡片归档库' : 'Browse Archive Cards'}</span>
+                  <span>→</span>
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       `;
