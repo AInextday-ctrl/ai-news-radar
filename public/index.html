@@ -1026,9 +1026,9 @@
         <span class="font-bold text-[11px] xl:text-xs tracking-wider uppercase font-mono">RADAR LIVE</span>
       </div>
 
-      <!-- 中间：7 大核心专栏切换阵列 (严格单行、7等分固定比例 grid-cols-7，禁止机翻破坏布局) -->
+      <!-- 中间：6 大核心专栏切换阵列 (严格单行、6等分固定比例 grid-cols-6，禁止机翻破坏布局) -->
       <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
-        <div class="grid grid-cols-7 gap-1.5 sm:gap-2 min-w-[700px] md:min-w-0 w-full" id="nav-tabs">
+        <div class="grid grid-cols-6 gap-1.5 sm:gap-2 min-w-[600px] md:min-w-0 w-full" id="nav-tabs">
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
@@ -1058,11 +1058,6 @@
             <span class="text-xs sm:text-sm shrink-0">💡</span>
             <span id="nav-text-prompts" class="truncate font-semibold">Prompts</span>
             <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5" id="badge-count-prompts">0</span>
-          </button>
-          <button onclick="switchTab('archive')" id="tab-btn-archive" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
-            <span class="text-xs sm:text-sm shrink-0">📜</span>
-            <span id="nav-text-archive" class="truncate font-semibold">Archive</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-archive">0</span>
           </button>
         </div>
       </div>
@@ -1194,16 +1189,16 @@
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Gemini Call for Me might tell your mom you’re running late</a>
+                <a href="https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">DeepSeek is close to raising $12B+ in a round that could reach ~$14.9B, with Tencent and CATL as the biggest contributor</a>
               </h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">双子座给我打电话可能会告诉你妈妈你迟到了</p>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">消息来源：DeepSeek即将在本轮融资中融资120多亿美元，融资规模可能达到149亿美元，腾讯和宁德时代是最大的贡献者，该公司将于2027年初进行IPO</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Google may be expanding its &quot;Call for Me&quot; AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a &quot;Gemini Calling&quot; introductory screen in an APK teardown with 
+                DeepSeek is close to securing at least 80 billion yuan ($12 billion) in its latest round of funding, blowing past …
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: The Verge AI</span>
-              <a href="https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: Bloomberg</span>
+              <a href="https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article>
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
@@ -1213,17 +1208,25 @@
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://x.com/vllm_project/status/2107382595239682065" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">vLLM Project: Day-0 support for Kandinsky 6.0 Video in vLLM-Omni: ! Great work from @kandinskylab_ai: 5-second video cli</a>
+                <a href="https://x.com/levelsio/status/2107463864375803997" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">@levelsio: There's entire guides and how-to videos for Airbnb hosts on how to remove guest reviews All you have to do is</a>
               </h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">vLLM Project：第0天支持康定斯基6.0视频在vLLM-Omni: ！ 来自@kandinskylab_ai的伟大工作：5秒的视频剪辑，同步音频和口型同步，从文本或图像输入。在MIT下开放代码和检查点，并在发布</p>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">@levelsio：Airbnb的房东有完整的指南和如何删除客人评论的视频 你所要做的就是陈述它是： ——报复 ——勒索 - - - - - -无关 -私人资料 ——歧视 他们甚至会告诉你，你应该选择哪种最喜欢</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Day-0 support for Kandinsky 6.0 Video in vLLM-Omni: https://t.co/gtjWU6I8eT!
-Great work from @kandinskylab_ai: 5-second video clips with synchronized audio and lip-sync, from text or image inputs. Open code and checkpoints under MIT, with inference s
+                There's entire guides and how-to videos for Airbnb hosts on how to remove guest reviews
+
+All you have to do is state it's either:
+- retaliation
+- extortion
+- irrelevant
+- private informaton
+- discrimination
+
+They even show you what is the one you sho
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: @vllm_project</span>
-              <a href="https://x.com/vllm_project/status/2107382595239682065" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: @levelsio</span>
+              <a href="https://x.com/levelsio/status/2107463864375803997" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article>
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
@@ -1233,22 +1236,16 @@ Great work from @kandinskylab_ai: 5-second video clips with synchronized audio a
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://www.youtube.com/shorts/yrn7FqgVOW8" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Video Game Mashups: Minecraft and Mario in Elden Ring</a>
+                <a href="https://github.com/ianalloway/solvent-agent?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">[solvent-agent] Offline-first demo of a self-funding analyst agent: earns via Str</a>
               </h3>
-              
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">Offline-first demo of a self-funding analyst agent: earns via Str</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Join My Newsletter for Regular AI Updates 👇🏼
-https://forwardfuture.com
-
-My Links 🔗
-👉🏻 X: https://x.com/matthewberman
-👉🏻 Forward Future X: https://x.com/forwardfuture
-👉🏻 Instagram: https://www.instagram.com/matthewberman_
+                ⭐ 106 stars · Offline-first demo of a self-funding analyst agent: earns via Stripe, fulfils with NVIDIA Nemotron, pays vendor bills within guardrails, never works at a loss.
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: YouTube · Matthew Berman</span>
-              <a href="https://www.youtube.com/shorts/yrn7FqgVOW8" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: AI 资讯雷达</span>
+              <a href="https://github.com/ianalloway/solvent-agent?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article></div>
       </section>
@@ -1698,26 +1695,6 @@ In the past five months,
             <span>探索更多前沿突破论文 (arXiv.org) ↗</span>
           </a>
         </div>
-      </section>
-
-      <!-- 🌟 第 5 层: 全站全量历史归档库入口 (超 24 小时沉淀库，带分类与多页回溯) -->
-      <div id="archive-section-news" class="pt-2">
-        <button type="button" onclick="switchTab('archive')" id="btn-archive-news" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/40 to-slate-900 hover:from-indigo-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-indigo-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-xl cursor-pointer">
-          <div class="flex items-center space-x-3">
-            <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
-            <div class="text-left">
-              <div class="font-bold flex items-center space-x-2">
-                <span id="txt-archive-news">查看历史情报全量归档库</span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 font-mono border border-indigo-500/30">分页回溯</span>
-              </div>
-              <p class="text-[11px] text-slate-400 mt-0.5" id="txt-archive-news-sub">超出 24 小时的深度快讯、社交发声与工具已安全沉淀，支持全站多维检索与翻页查阅</p>
-            </div>
-          </div>
-          <div class="flex items-center space-x-1.5 text-xs text-indigo-400 group-hover:text-indigo-300 font-mono shrink-0 pl-2">
-            <span class="hidden sm:inline">前往全量归档库</span>
-            <span class="text-base group-hover:translate-x-1 transition-transform">→</span>
-          </div>
-        </button>
       </div>
     </div>
 
@@ -1868,51 +1845,7 @@ In the past five months,
       </div>
     </div>
 
-    <!-- 视图 3: 历史资讯全量归档库 (带分类筛选与完整翻页机制) -->
-    <div id="view-archive" class="hidden space-y-5">
-      <!-- 归档库头部横幅 -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-100 dark:bg-slate-900/60 p-4 sm:p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xl">📜</span>
-            <h2 class="font-bold text-lg sm:text-xl text-slate-900 dark:text-slate-100" id="archive-view-title">历史资讯全量归档库</h2>
-            <span id="archive-total-badge" class="text-xs px-2.5 py-0.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-600 dark:text-indigo-400 font-mono font-semibold border border-indigo-500/30">已收录 0 篇</span>
-          </div>
-          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="archive-view-desc">全量沉淀超出 24 小时的历史快讯、社交前沿动态与落地神器，支持即时分类检索与跨页回溯</p>
-        </div>
 
-        <!-- 归档库内快捷搜索框 -->
-        <div class="relative shrink-0 w-full sm:w-72">
-          <input type="text" id="archive-search-input" oninput="handleArchiveSearch(this.value)" placeholder="在历史归档中检索..." class="w-full bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-2 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors shadow-inner">
-          <button id="btn-clear-archive-search" onclick="clearArchiveSearch()" class="hidden absolute right-6 top-2 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
-          <span class="absolute right-2.5 top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
-        </div>
-      </div>
-
-      <!-- 归档分类二级筛选栏 -->
-      <div class="flex items-center justify-between flex-wrap gap-2 pb-1 border-b border-slate-200 dark:border-slate-800/80">
-        <div class="flex items-center space-x-1.5 overflow-x-auto no-scrollbar py-1">
-          <button onclick="filterArchiveCategory('all')" id="arch-cat-all" class="arch-filter-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30">📚 全部归档 (<span id="arch-count-all">0</span>)</button>
-          <button onclick="filterArchiveCategory('news')" id="arch-cat-news" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">⚡ 行业快讯 (<span id="arch-count-news">0</span>)</button>
-          <button onclick="filterArchiveCategory('celebrity')" id="arch-cat-celebrity" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🐦 社交动态 (<span id="arch-count-celeb">0</span>)</button>
-          <button onclick="filterArchiveCategory('tools')" id="arch-cat-tools" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🛠️ 落地神器 (<span id="arch-count-tools">0</span>)</button>
-          <button onclick="filterArchiveCategory('videos')" id="arch-cat-videos" class="arch-filter-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700">🎬 实战视频 (<span id="arch-count-videos">0</span>)</button>
-        </div>
-
-        <div class="text-xs text-slate-400 font-mono" id="archive-page-summary">
-          <!-- 第 1 / 14 页 · 共 162 条 -->
-        </div>
-      </div>
-
-      <!-- 归档卡片网格容器 -->
-      <div id="archive-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[300px]">
-        <!-- 骨架屏或内容注入 -->
-      </div>
-
-      <!-- 优雅分页导航组件 -->
-      <div id="archive-pagination-container" class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-        <!-- 由 renderArchivePagination() 动态生成 -->
-      </div>
   
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
     <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
@@ -3171,36 +3104,36 @@ In the past five months,
       currentSiteLang = (currentLang === 'zh') ? 'chinese_simplified' : 'english';
     }
 
-    // 🌐 全局7大核心专栏官方规范术语字典 (严格单行、固定等比、不受第三方机翻破坏)
+    // 🌐 全局6大核心专栏官方规范术语字典 (严格单行、固定等比、不受第三方机翻破坏)
     const NAV_TABS_I18N = {
-      chinese_simplified: { all: "综合全景", news: "行业快讯", celebrity: "社交雷达", tools: "落地工具", videos: "实战视频", prompts: "提示词库", archive: "全量归档" },
-      chinese_traditional: { all: "綜合全景", news: "行業快訊", celebrity: "社交雷達", tools: "落地工具", videos: "實戰影片", prompts: "提示詞庫", archive: "全量歸檔" },
-      english: { all: "Overview", news: "News", celebrity: "Social Radar", tools: "Tools", videos: "Videos", prompts: "Prompts", archive: "Archive" },
-      russian: { all: "Обзор", news: "Новости", celebrity: "Соцсети", tools: "Инструменты", videos: "Видео", prompts: "Промпты", archive: "Архив" },
-      arabic: { all: "نظرة عامة", news: "أخبار", celebrity: "رادار التواصل", tools: "أدوات", videos: "فيديوهات", prompts: "موجهات", archive: "الأرشيف" },
-      japanese: { all: "総合", news: "ニュース", celebrity: "ソーシャル", tools: "AIツール", videos: "動画", prompts: "プロンプト", archive: "アーカイブ" },
-      korean: { all: "종합", news: "뉴스", celebrity: "소셜 레이더", tools: "AI 툴", videos: "실전 영상", prompts: "프롬프트", archive: "아카이브" },
-      french: { all: "Vue globale", news: "Actualités", celebrity: "Radar Social", tools: "Outils AI", videos: "Vidéos", prompts: "Prompts", archive: "Archives" },
-      deutsch: { all: "Übersicht", news: "News", celebrity: "Social Radar", tools: "AI-Tools", videos: "Videos", prompts: "Prompts", archive: "Archiv" },
-      spanish: { all: "Panorama", news: "Noticias", celebrity: "Radar Social", tools: "Herramientas", videos: "Videos", prompts: "Prompts", archive: "Archivo" },
-      italian: { all: "Panoramica", news: "Notizie", celebrity: "Radar Sociale", tools: "Strumenti", videos: "Video", prompts: "Prompt", archive: "Archivio" },
-      portuguese: { all: "Visão Geral", news: "Notícias", celebrity: "Radar Social", tools: "Ferramentas", videos: "Vídeos", prompts: "Prompts", archive: "Arquivo" },
-      dutch: { all: "Overzicht", news: "Nieuws", celebrity: "Sociaal Radar", tools: "AI-Tools", videos: "Video's", prompts: "Prompts", archive: "Archief" },
-      polish: { all: "Przegląd", news: "Wiadomości", celebrity: "Radar Społeczny", tools: "Narzędzia", videos: "Wideo", prompts: "Prompty", archive: "Archiwum" },
-      ukrainian: { all: "Огляд", news: "Новини", celebrity: "Соцмережі", tools: "Інструменти", videos: "Відео", prompts: "Промпти", archive: "Архів" },
-      turkish: { all: "Genel Bakış", news: "Haberler", celebrity: "Sosyal Radar", tools: "AI Araçları", videos: "Videolar", prompts: "Promptlar", archive: "Arşiv" },
-      vietnamese: { all: "Tổng quan", news: "Tin vắn", celebrity: "Radar MXH", tools: "Công cụ", videos: "Video", prompts: "Prompt", archive: "Lưu trữ" },
-      thai: { all: "ภาพรวม", news: "ข่าวสาร", celebrity: "โซเชียลเรดาร์", tools: "เครื่องมือ AI", videos: "วิดีโอ", prompts: "พรอมต์", archive: "คลังข้อมูล" },
-      indonesian: { all: "Ikhtisar", news: "Berita", celebrity: "Radar Sosial", tools: "Alat AI", videos: "Video", prompts: "Prompt", archive: "Arsip" },
-      hindi: { all: "समग्र", news: "समाचार", celebrity: "सोशल रडार", tools: "टूल्स", videos: "वीडियो", prompts: "प्रॉम्प्ट्स", archive: "संग्रह" },
-      hebrew: { all: "סקירה", news: "חדשות", celebrity: "רדאר חברתי", tools: "כלי AI", videos: "סרטונים", prompts: "פרומפטים", archive: "ארכיון" },
-      greek: { all: "Επισκόπηση", news: "Ειδήσεις", celebrity: "Κοινωνικά", tools: "Εργαλεία AI", videos: "Βίντεο", prompts: "Prompts", archive: "Αρχείο" }
+      chinese_simplified: { all: "综合全景", news: "行业快讯", celebrity: "社交雷达", tools: "落地工具", videos: "实战视频", prompts: "提示词库" },
+      chinese_traditional: { all: "綜合全景", news: "行業快訊", celebrity: "社交雷達", tools: "落地工具", videos: "實戰影片", prompts: "提示詞庫" },
+      english: { all: "Overview", news: "News", celebrity: "Social Radar", tools: "Tools", videos: "Videos", prompts: "Prompts" },
+      russian: { all: "Обзор", news: "Новости", celebrity: "Соцсети", tools: "Инструменты", videos: "Видео", prompts: "Промпты" },
+      arabic: { all: "نظرة عامة", news: "أخبار", celebrity: "رادار التواصل", tools: "أدوات", videos: "فيديوهات", prompts: "موجهات" },
+      japanese: { all: "総合", news: "ニュース", celebrity: "ソーシャル", tools: "AIツール", videos: "動画", prompts: "プロンプト" },
+      korean: { all: "종합", news: "뉴스", celebrity: "소셜 레이더", tools: "AI 툴", videos: "실전 영상", prompts: "프롬프트" },
+      french: { all: "Vue globale", news: "Actualités", celebrity: "Radar Social", tools: "Outils AI", videos: "Vidéos", prompts: "Prompts" },
+      deutsch: { all: "Übersicht", news: "News", celebrity: "Social Radar", tools: "AI-Tools", videos: "Videos", prompts: "Prompts" },
+      spanish: { all: "Panorama", news: "Noticias", celebrity: "Radar Social", tools: "Herramientas", videos: "Videos", prompts: "Prompts" },
+      italian: { all: "Panoramica", news: "Notizie", celebrity: "Radar Sociale", tools: "Strumenti", videos: "Video", prompts: "Prompt" },
+      portuguese: { all: "Visão Geral", news: "Notícias", celebrity: "Radar Social", tools: "Ferramentas", videos: "Vídeos", prompts: "Prompts" },
+      dutch: { all: "Overzicht", news: "Nieuws", celebrity: "Sociaal Radar", tools: "AI-Tools", videos: "Video's", prompts: "Prompts" },
+      polish: { all: "Przegląd", news: "Wiadomości", celebrity: "Radar Społeczny", tools: "Narzędzia", videos: "Wideo", prompts: "Prompty" },
+      ukrainian: { all: "Огляд", news: "Новини", celebrity: "Соцмережі", tools: "Інструменти", videos: "Відео", prompts: "Промпти" },
+      turkish: { all: "Genel Bakış", news: "Haberler", celebrity: "Sosyal Radar", tools: "AI Araçları", videos: "Videolar", prompts: "Promptlar" },
+      vietnamese: { all: "Tổng quan", news: "Tin vắn", celebrity: "Radar MXH", tools: "Công cụ", videos: "Video", prompts: "Prompt" },
+      thai: { all: "ภาพรวม", news: "ข่าวสาร", celebrity: "โซเชียลเรดาร์", tools: "เครื่องมือ AI", videos: "วิดีโอ", prompts: "พรอมต์" },
+      indonesian: { all: "Ikhtisar", news: "Berita", celebrity: "Radar Sosial", tools: "Alat AI", videos: "Video", prompts: "Prompt" },
+      hindi: { all: "समग्र", news: "समाचार", celebrity: "सोशल रडार", tools: "टूल्स", videos: "वीडियो", prompts: "प्रॉम्प्ट्स" },
+      hebrew: { all: "סקירה", news: "חדשות", celebrity: "רדאר חברתי", tools: "כלי AI", videos: "סרטונים", prompts: "פרומפטים" },
+      greek: { all: "Επισκόπηση", news: "Ειδήσεις", celebrity: "Κοινωνικά", tools: "Εργαλεία AI", videos: "Βίντεο", prompts: "Prompts" }
     };
 
     function updateNavTabsLanguage(lang) {
       if (!lang) lang = currentSiteLang || 'chinese_simplified';
       const dict = NAV_TABS_I18N[lang] || (lang === 'zh' ? NAV_TABS_I18N['chinese_simplified'] : NAV_TABS_I18N['english']);
-      const keys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts', 'archive'];
+      const keys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
       keys.forEach(k => {
         const el = document.getElementById(`nav-text-${k}`);
         if (el && dict[k]) {
@@ -3928,7 +3861,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    const VALID_TABS = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts', 'archive'];
+    const VALID_TABS = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
 
     function getTabFromHash() {
       const hash = (window.location.hash || '').replace('#', '').trim().toLowerCase();
@@ -3975,7 +3908,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (clearBtn) clearBtn.classList.add('hidden');
       }
       
-      const tabKeys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts', 'archive'];
+      const tabKeys = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
       tabKeys.forEach(k => {
         const btn = document.getElementById(`tab-btn-${k}`);
         const badge = document.getElementById(`badge-count-${k}`);
@@ -4002,7 +3935,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const viewAll = document.getElementById('view-all');
       const viewCat = document.getElementById('view-category');
-      const viewArchive = document.getElementById('view-archive');
       const viewSearch = document.getElementById('view-search');
       if (viewSearch) viewSearch.classList.add('hidden');
       const celebSubfilter = document.getElementById('celebrity-subfilter');
@@ -4018,17 +3950,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (tab === 'all') {
         if (viewAll) viewAll.classList.remove('hidden');
         if (viewCat) viewCat.classList.add('hidden');
-        if (viewArchive) viewArchive.classList.add('hidden');
         if (typeof syncThreeColumnsHeight === 'function') setTimeout(syncThreeColumnsHeight, 50);
-      } else if (tab === 'archive') {
-        if (viewAll) viewAll.classList.add('hidden');
-        if (viewCat) viewCat.classList.add('hidden');
-        if (viewArchive) viewArchive.classList.remove('hidden');
-        renderArchiveView();
       } else {
         if (viewAll) viewAll.classList.add('hidden');
         if (viewCat) viewCat.classList.remove('hidden');
-        if (viewArchive) viewArchive.classList.add('hidden');
 
         const socialSwitcherWrap = document.getElementById('social-mode-switcher-wrap');
         if (socialSwitcherWrap) {
@@ -4060,8 +3985,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           celebrity: currentLang === 'zh' ? '🐦 社交雷达 · 𝕏 与前沿社区动态' : '🐦 Social Radar · 𝕏 & Community Pulse',
           tools: currentLang === 'zh' ? '🛠️ 场景落地·实用工具专栏' : '🛠️ Applied AI Tools Directory',
           videos: currentLang === 'zh' ? '🎬 实战视频·深度演示专栏' : '🎬 Hands-on Video Tutorials',
-          prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战模版' : '💡 Prompt Bank · SOTA AI System Prompts',
-          archive: currentLang === 'zh' ? '📜 历史资讯全量归档库' : '📜 Historical Intelligence Archive'
+          prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战模版' : '💡 Prompt Bank · SOTA AI System Prompts'
         };
         if (titleEl) titleEl.textContent = catTitles[tab] || t.tabs[tab] || tab;
         const catDesc = document.getElementById('cat-view-desc');
@@ -5608,23 +5532,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 relative">
               ${uniqueList.map(item => renderCelebrityCard(item)).join('')}
             </div>
-
-            <!-- 底部历史动态归档入口 -->
-            <div class="mt-8 pt-5 border-t border-slate-700/50">
-              <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-slate-900/90 via-indigo-950/50 to-slate-900/90 hover:from-indigo-900/60 hover:to-slate-800 border border-slate-700/80 hover:border-indigo-500/60 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
-                <div class="flex items-center space-x-3">
-                  <span class="text-xl p-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 group-hover:scale-110 transition-transform">📜</span>
-                  <div class="text-left">
-                    <span class="font-bold tracking-wide">${isZh ? '展开历史推文全量归档库 (卡片式多页查阅)' : 'Open Full Social Archive (Card View with Pagination)'}</span>
-                    <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '雷达前线聚焦 24h 前沿态势，历史深空数据以卡片库全面归档' : 'Live radar stream for 24h pulse, deep card view for full archive'}</span>
-                  </div>
-                </div>
-                <span class="text-xs text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1 shrink-0">
-                  <span>${isZh ? '进入历史卡片归档库' : 'Browse Archive Cards'}</span>
-                  <span>→</span>
-                </span>
-              </button>
-            </div>
           </div>
         </div>
       `;
@@ -6523,20 +6430,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } else {
         if (viewSearch) viewSearch.classList.add('hidden');
         if (topThreeSection) topThreeSection.classList.toggle('hidden', currentTab !== 'all');
-        const viewArchive = document.getElementById('view-archive');
         if (currentTab === 'all') {
           if (viewAll) viewAll.classList.remove('hidden');
           if (viewCat) viewCat.classList.add('hidden');
-          if (viewArchive) viewArchive.classList.add('hidden');
-        } else if (currentTab === 'archive') {
-          if (viewAll) viewAll.classList.add('hidden');
-          if (viewCat) viewCat.classList.add('hidden');
-          if (viewArchive) viewArchive.classList.remove('hidden');
-          renderArchiveView();
         } else {
           if (viewAll) viewAll.classList.add('hidden');
           if (viewCat) viewCat.classList.remove('hidden');
-          if (viewArchive) viewArchive.classList.add('hidden');
           const celebSubfilter = document.getElementById('celebrity-subfilter');
           const toolsSubfilter = document.getElementById('tools-subfilter');
           const videosSubfilter = document.getElementById('videos-subfilter');
@@ -6552,8 +6451,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             celebrity: currentLang === 'zh' ? '🐦 社交雷达 · 𝕏 与前沿社区动态' : '🐦 Social Radar · 𝕏 & Community Pulse',
             tools: currentLang === 'zh' ? '🛠️ 场景落地·实用神器专栏' : '🛠️ Applied AI Tools Directory',
             videos: currentLang === 'zh' ? '🎬 实战视频·深度演示专栏' : '🎬 Hands-on Video Tutorials',
-            prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战咒语' : '💡 Prompt Bank · SOTA AI System Prompts',
-            archive: currentLang === 'zh' ? '📜 历史资讯全量归档库' : '📜 Historical Intelligence Archive'
+            prompts: currentLang === 'zh' ? '💡 提示词库·前沿模型实战咒语' : '💡 Prompt Bank · SOTA AI System Prompts'
           };
           if (titleEl) titleEl.textContent = catTitles[currentTab] || t.tabs[currentTab] || currentTab;
         }
@@ -6837,18 +6735,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-full">${t.noRecentNews}</div>`}
               </div>
             </div>
-            <div class="pt-6 border-t border-slate-200 dark:border-slate-800">
-              <button type="button" onclick="switchTab('archive'); filterArchiveCategory('news');" class="w-full py-3.5 px-4 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700 hover:border-indigo-500 dark:hover:border-indigo-400 bg-slate-50/80 dark:bg-slate-900/50 text-slate-700 dark:text-slate-300 flex items-center justify-between text-xs sm:text-sm font-semibold transition-all shadow-sm cursor-pointer group">
-                <span class="flex items-center space-x-2.5">
-                  <span class="text-lg">📜</span>
-                  <span id="txt-cat-news-archive">${isZh ? '查看超出 24 小时的历史快讯库归档' : 'View Full Historical Breaking News Archive'}</span>
-                </span>
-                <span class="text-xs text-indigo-500 dark:text-indigo-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
-                  <span>${isZh ? '前往全量归档库翻页查阅' : 'Go to Paginated Archive'}</span>
-                  <span>→</span>
-                </span>
-              </button>
-            </div>
+            ${historyNews.length > 0 ? `
+            <div class="pt-4 border-t border-slate-200/80 dark:border-slate-800/80">
+              <div class="flex items-center justify-between mb-3 text-xs text-slate-500 font-mono">
+                <span class="flex items-center gap-1.5"><span>📰</span>${isZh ? '近期行业深度精选' : 'Recent In-Depth Industry News'} (${historyNews.length})</span>
+                <span>📚 持续追踪</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                ${historyNews.map(renderNewsCard).join('')}
+              </div>
+            </div>` : ''}
           `;
         }
       } else if (tab === 'celebrity') {
@@ -6862,8 +6758,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const allViralRaw = (cachedData.grouped?.viral_posts || cachedData.viral_posts || (cachedData.items ? cachedData.items.filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral))) : []));
         const viralFresh = allViralRaw.filter(it => isWithin24Hours(it.raw_published_at));
 
-        const leaderCount = leaderFresh.length >= 6 ? leaderFresh.length : Math.min(allCelebRaw.length, 24);
-        const viralCount = viralFresh.length >= 4 ? viralFresh.length : Math.min(allViralRaw.length, 12);
+        const leaderCount = allCelebRaw.length;
+        const viralCount = allViralRaw.length;
         const bLeader = document.getElementById('badge-count-leader');
         if (bLeader) bLeader.textContent = leaderCount;
         const bViral = document.getElementById('badge-count-viral');
@@ -6878,13 +6774,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (catDesc) catDesc.textContent = t.viralSectionDesc || (isZh ? '实时感知过去 24 小时内阅读量破万、点赞飙升的全球 AI 极客与开发者原生热帖' : 'Real-time radar tracking 10k+ views & surging AI threads across 𝕏 and Threads');
 
           let viralList = allViralRaw.slice();
-          const freshViral = viralList.filter(it => isWithin24Hours(it.raw_published_at));
-          if (freshViral.length >= 4) {
-            viralList = freshViral;
-          } else if (viralList.length > 0) {
-            viralList = viralList.slice(0, 15);
-          }
-
           if (viralPlatformFilter !== 'all') {
             if (viralPlatformFilter === 'x' || viralPlatformFilter === 'threads') {
               viralList = viralList.filter(it => it.platform === viralPlatformFilter);
@@ -6912,19 +6801,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (catDesc) catDesc.textContent = isZh ? '实时捕捉全球 AI 顶尖实验室、核心架构师与先锋开发者的原生发声与前沿动态' : 'Real-time timeline tracking statements from AI labs and frontier creators';
 
           let list = filterList(allCelebRaw);
-          const freshCeleb = list.filter(it => isWithin24Hours(it.raw_published_at) || it.is_pinned);
-          if (freshCeleb.length >= 6) {
-            list = freshCeleb;
-          } else if (list.length > 0) {
-            list = list.slice(0, 24);
+          if (list.length > 50) {
+            list = list.slice(0, 50);
           }
 
           if (socialPlatformFilter === 'company') {
             const coList = list.filter(isCompanyOrBrand);
-            list = coList.length > 0 ? coList : allCelebRaw.filter(isCompanyOrBrand).slice(0, 15);
+            list = coList.length > 0 ? coList : allCelebRaw.filter(isCompanyOrBrand).slice(0, 20);
           } else if (socialPlatformFilter === 'person') {
             const peList = list.filter(it => !isCompanyOrBrand(it));
-            list = peList.length > 0 ? peList : allCelebRaw.filter(it => !isCompanyOrBrand(it)).slice(0, 15);
+            list = peList.length > 0 ? peList : allCelebRaw.filter(it => !isCompanyOrBrand(it)).slice(0, 20);
           }
           // 严格按照真实时间线倒序排列 (不受置顶与聚焦版面干扰，纯净时空流动)
           list.sort((a, b) => {
@@ -8060,23 +7946,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             ${liveList.map((item, idx) => renderViralPostCard(item, idx)).join('')}
           </div>
-
-          <!-- 底部全网热门动态归档直通车 -->
-          <div class="w-full mt-8 pt-4 border-t border-slate-200/60 dark:border-slate-800/80">
-            <button type="button" onclick="switchTab('archive'); filterArchiveCategory('celebrity');" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-slate-900 via-rose-950/30 to-slate-900 hover:from-rose-900/40 hover:to-slate-800/90 border border-slate-800 hover:border-rose-500/50 text-xs sm:text-sm text-slate-200 hover:text-white transition-all flex items-center justify-between group shadow-lg cursor-pointer">
-              <div class="flex items-center space-x-2.5">
-                <span class="text-lg p-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 group-hover:scale-110 transition-transform">📜</span>
-                <div class="text-left">
-                  <span class="font-bold tracking-wide">${isZh ? '已自动归档超出 24 小时的全网平台热门动态与极客讨论' : 'Archived Trending Posts Older Than 24 Hours'}</span>
-                  <span class="text-[11px] text-slate-400 block sm:inline sm:ml-2">${isZh ? '保持雷达 24 小时高时效动态流动，更多历史极客讨论沉淀至永久知识库' : 'Keeping radar within 24h freshness, historical discussions preserved in master archive'}</span>
-                </div>
-              </div>
-              <span class="text-xs text-rose-400 group-hover:translate-x-1 transition-transform font-mono flex items-center space-x-1">
-                <span>${isZh ? '查看历史社交与热门动态归档' : 'View Historical Social & Buzz Archive'}</span>
-                <span>→</span>
-              </span>
-            </button>
-          </div>
         </div>
       `;
     }
@@ -8996,8 +8865,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <a href="#prompts" onclick="switchTab('prompts'); return false;" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 dark:hover:text-purple-300 transition-colors flex items-center space-x-1.5">
               <span class="text-xs">💡</span><span>提示词库·咒语</span>
             </a>
-            <a href="#archive" onclick="switchTab('archive'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">📜</span><span>历史资讯库</span>
+            <a href="#all" onclick="switchTab('all'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
+              <span class="text-xs">🌐</span><span>综合全景·大盘</span>
             </a>
           </nav>
         </div>

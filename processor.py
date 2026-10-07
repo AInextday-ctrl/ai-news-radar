@@ -30,12 +30,13 @@ MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
 # 翻译内存缓存，避免重复请求
 _TRANSLATION_CACHE = {}
+_YOUDAO_BLOCKED = False
 _GOOGLE_BLOCKED = False
 
 
 def free_translate_zh(text: str) -> str:
     """Bulletproof translation engine to guarantee 100% fluent Chinese output."""
-    global _GOOGLE_BLOCKED
+    global _YOUDAO_BLOCKED, _GOOGLE_BLOCKED
     if not text:
         return ""
     
@@ -56,22 +57,25 @@ def free_translate_zh(text: str) -> str:
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # 1. 优先调用有道免密神经翻译 (国内低延迟、高并发、毫秒级响应)
-    try:
-        url = "https://aidemo.youdao.com/trans"
-        data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
-        with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=3.5) as client:
-            resp = client.post(url, data=data)
-            if resp.status_code == 200:
-                res_data = resp.json()
-                t_list = res_data.get("translation", [])
-                if t_list and t_list[0]:
-                    zh_res = t_list[0].strip()
-                    if re.search(r'[\u4e00-\u9fa5]', zh_res):
-                        _TRANSLATION_CACHE[body_text] = zh_res
-                        return prefix + zh_res
-    except Exception:
-        pass
+    # 1. 优先调用有道免密神经翻译 (若未熔断，超时1.5秒)
+    if not _YOUDAO_BLOCKED:
+        try:
+            url = "https://aidemo.youdao.com/trans"
+            data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
+                resp = client.post(url, data=data)
+                if resp.status_code == 200:
+                    res_data = resp.json()
+                    t_list = res_data.get("translation", [])
+                    if t_list and t_list[0]:
+                        zh_res = t_list[0].strip()
+                        if re.search(r'[\u4e00-\u9fa5]', zh_res):
+                            _TRANSLATION_CACHE[body_text] = zh_res
+                            return prefix + zh_res
+                else:
+                    _YOUDAO_BLOCKED = True
+        except Exception:
+            _YOUDAO_BLOCKED = True
 
     # 2. 备用 Google Translate (若之前未触发429则尝试，超时控制在2秒内)
     if not _GOOGLE_BLOCKED:
@@ -284,6 +288,15 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
     snippet_clean = re.sub(media_pattern, '', snippet, flags=re.IGNORECASE).strip()
     
     if snippet_clean and len(snippet_clean) >= 20:
+        # 若已具备有效中文内容，直接提炼，避免无谓的网络翻译耗时
+        zh_count = len(re.findall(r'[\u4e00-\u9fa5]', snippet_clean))
+        if zh_count >= 10:
+            clean_s = re.sub(prefix_pattern, '', snippet_clean).strip()
+            if clean_title and clean_s.startswith(clean_title):
+                clean_s = clean_s[len(clean_title):].strip()
+            if len(clean_s) >= 15:
+                return clean_s[:220]
+
         # 取前 280 字符的丰富真实细节翻译
         trans_snippet = clean_news_text(free_translate_zh(snippet_clean[:280]))
         if trans_snippet and clean_title:

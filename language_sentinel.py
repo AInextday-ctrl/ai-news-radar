@@ -63,8 +63,8 @@ def translate_and_purify_article(content: str) -> str:
         return ""
         
     raw_paras = [p.strip() for p in re.split(r'\n+', str(content)) if p.strip()]
-    if len(raw_paras) > 25:
-        raw_paras = raw_paras[:25]
+    if len(raw_paras) > 8:
+        raw_paras = raw_paras[:8]
         
     pure_zh_paras = []
     for p in raw_paras:
@@ -93,6 +93,18 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
     """
     fixes = []
     
+    # 落地工具、实操提示词与前沿视频专区：包含大量专业专有名词、GitHub 库名、Prompt 咒语与视频原名，直接保留结构化字段，避免外部翻译网络拥堵
+    if item.get("category") in ("tools", "prompts", "videos"):
+        if not item.get("title_zh"):
+            item["title_zh"] = item.get("title") or "AI 创新前沿内容"
+        if not item.get("title_en"):
+            item["title_en"] = item.get("title") or item["title_zh"]
+        if not item.get("summary_zh"):
+            item["summary_zh"] = item.get("content_snippet") or "热门 AI 场景落地与多模态动态"
+        if not item.get("summary_en"):
+            item["summary_en"] = item.get("content_snippet") or "Trending AI applications and dynamic content"
+        return item, fixes
+
     # 1. 标题治理：title_zh 必须为纯正中文
     title_zh = item.get("title_zh") or ""
     # 剔除机械伪前缀
@@ -137,35 +149,22 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
         item["summary_zh"] = clean_news_text(sum_zh)
 
     # 3. 深度长文实录治理：article_content 与 article_content_zh
-    art_en = item.get("article_content") or item.get("original_content")
     art_zh = item.get("article_content_zh")
-    
-    if art_en and len(str(art_en).strip()) > 30:
-        # 检验现存的 article_content_zh
-        needs_art_retranslation = False
-        if not art_zh or len(str(art_zh).strip()) < 20:
-            needs_art_retranslation = True
+    if art_zh and len(str(art_zh).strip()) >= 20:
+        # 净化现存的 article_content_zh，过滤掉其中的纯英文或广告段落，保留纯正中文段落
+        clean_paras = []
+        for p in re.split(r'\n+', str(art_zh)):
+            p_clean = re.sub(r'^[【\[].*?[】\]]\s*', '', p).strip()
+            if count_chinese_chars(p_clean) >= 4 and not re.search(r'(?:[A-Za-z0-9\',.-]+\s+){8,}[A-Za-z0-9\',.-]+', p_clean):
+                clean_paras.append(p_clean)
+        if clean_paras and count_chinese_chars('\n\n'.join(clean_paras)) >= 15:
+            item["article_content_zh"] = '\n\n'.join(clean_paras)
         else:
-            # 检查是否有任何段落是纯英文或假前缀
-            paras = [p.strip() for p in re.split(r'\n+', str(art_zh)) if p.strip()]
-            for p in paras:
-                if not is_pure_chinese_paragraph(p, min_chars=6):
-                    needs_art_retranslation = True
-                    break
-                    
-        if needs_art_retranslation:
-            purified_zh = translate_and_purify_article(str(art_en))
-            if purified_zh and len(purified_zh) > 30:
-                item["article_content_zh"] = purified_zh
-                fixes.append("article_content_zh 逐段纯真翻译完成")
-            else:
-                item["article_content_zh"] = None
-                fixes.append("article_content_zh 无法提纯，置空以防英文泄露")
-    else:
-        # 没有英文长文时，如果原有的 zh 是纯英文脏数据，立即清理
-        if art_zh and not is_pure_chinese_paragraph(str(art_zh), min_chars=10):
             item["article_content_zh"] = None
-            fixes.append("清理无源伪中文长文实录")
+            fixes.append("清理不合规长文实录")
+    else:
+        # 无中文长文实录或过短，置空以防英文泄露（前台自动降级为AI精炼速览与深度拆解）
+        item["article_content_zh"] = None
 
     # 4. 结构化 AI 深度解读治理：ai_analysis 内部中英对齐
     ai_ana = item.get("ai_analysis")

@@ -849,29 +849,30 @@ def save_news(items: list):
         ]):
             it["image_url"] = None
 
-        # 2. 彻底清洗所有复读机摘要、聚合器噪音与假模版套话
-        title_zh = (it.get("title_zh") or it.get("title") or "").strip()
-        curr_sum = (it.get("summary_zh") or "").strip()
-        if curr_sum:
-            curr_sum = clean_news_text(curr_sum)
-        if title_zh and curr_sum:
-            s = curr_sum
-            while title_zh and s.startswith(title_zh):
-                s = s[len(title_zh):].lstrip('。，, ：: -—').strip()
-            if title_zh and title_zh in s and len(s) <= len(title_zh) * 2.5:
-                s = s.replace(title_zh, "").lstrip('。，, ：: -—').strip()
-            
-            zh_media = r'[\s.·|《]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|NBC News|自由新闻报|The Free Press|IEEE频谱|IEEE Spectrum|NPR|西雅图时报|Seattle Times|半岛电视台|德国之声|DW\.com|DW|美联社|AP新闻|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
-            s = re.sub(zh_media, '', s, flags=re.IGNORECASE).strip('。，, ：: -—|·《》')
+        # 2. 彻底清洗资讯快讯复读机摘要、聚合器噪音与假模版套话（严格限定于 news 分类）
+        if it.get("category") == "news":
+            title_zh = (it.get("title_zh") or it.get("title") or "").strip()
+            curr_sum = (it.get("summary_zh") or "").strip()
+            if curr_sum:
+                curr_sum = clean_news_text(curr_sum)
+            if title_zh and curr_sum:
+                s = curr_sum
+                while title_zh and s.startswith(title_zh):
+                    s = s[len(title_zh):].lstrip('。，, ：: -—').strip()
+                if title_zh and title_zh in s and len(s) <= len(title_zh) * 2.5:
+                    s = s.replace(title_zh, "").lstrip('。，, ：: -—').strip()
+                
+                zh_media = r'[\s.·|《]*(?:美国有线电视新闻网|CNN|卫报|华盛顿邮报|路透社|彭博社|金融时报|华尔街日报|纽约时报|皮尤研究中心|英国广播公司|全国广播公司|NBC新闻|NBC News|自由新闻报|The Free Press|IEEE频谱|IEEE Spectrum|NPR|西雅图时报|Seattle Times|半岛电视台|德国之声|DW\.com|DW|美联社|AP新闻|AP|CBRE|OpenAI|Anthropic|Google|Microsoft|Apple|Meta)[》\s.]*$'
+                s = re.sub(zh_media, '', s, flags=re.IGNORECASE).strip('。，, ：: -—|·《》')
 
-            zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', s))
-            common = sum(1 for c in s if c in title_zh)
-            if len(s) >= 12 and zh_chars >= 8 and s != title_zh and (title_zh not in s) and (common / max(len(s), 1) < 0.65):
-                it["summary_zh"] = s
-            else:
+                zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', s))
+                common = sum(1 for c in s if c in title_zh)
+                if len(s) >= 12 and zh_chars >= 8 and s != title_zh and (title_zh not in s) and (common / max(len(s), 1) < 0.65):
+                    it["summary_zh"] = s
+                else:
+                    it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
+            elif title_zh:
                 it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
-        elif title_zh:
-            it["summary_zh"] = generate_smart_fallback_summary(it, title_zh)
 
         # 2.5 深度净化 ai_analysis 简报与点评 (彻底清除聚合器元废话与对不上的假模版套话)
         if it.get("ai_analysis") and isinstance(it["ai_analysis"], dict):
@@ -1084,6 +1085,27 @@ def save_news(items: list):
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
+    tools_recent = [it for it in recent_items if it.get("category") == "tools"]
+    if len(tools_recent) < 30:
+        extra_tools = [it for it in historical_items if it.get("category") == "tools" and get_it_key(it) not in recent_keys][:(30 - len(tools_recent))]
+        for it in extra_tools:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
+
+    videos_recent = [it for it in recent_items if it.get("category") == "videos"]
+    if len(videos_recent) < 20:
+        extra_videos = [it for it in historical_items if it.get("category") == "videos" and get_it_key(it) not in recent_keys][:(20 - len(videos_recent))]
+        for it in extra_videos:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
+
+    prompts_recent = [it for it in recent_items if it.get("category") == "prompts"]
+    if len(prompts_recent) < 30:
+        extra_prompts = [it for it in historical_items if it.get("category") == "prompts" and get_it_key(it) not in recent_keys][:(30 - len(prompts_recent))]
+        for it in extra_prompts:
+            recent_items.append(it)
+            recent_keys.add(get_it_key(it))
+
     # 3. 构建 24 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}
     for item in recent_items:
@@ -1148,11 +1170,24 @@ def save_news(items: list):
     try:
         from language_sentinel import run_pipeline_language_audit
         recent_final, _ = run_pipeline_language_audit(recent_final)
-        historical_items, _ = run_pipeline_language_audit(historical_items)
         latest_payload["items"] = recent_final
-        # 同步更新 latest_payload 中的分类列表与头条列表
-        for cat_k in latest_payload.get("grouped", {}):
+        # 同步更新 latest_payload 中的分类列表与全网爆帖列表
+        for cat_k in CATEGORIES:
             latest_payload["grouped"][cat_k] = [it for it in recent_final if it.get("category") == cat_k]
+
+        viral_list = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
+        latest_payload["grouped"]["viral_posts"] = viral_list
+        latest_payload["viral_posts"] = viral_list
+
+        latest_payload["news"] = latest_payload["grouped"].get("news", [])
+        latest_payload["celebrity"] = latest_payload["grouped"].get("celebrity", [])
+        latest_payload["tools"] = latest_payload["grouped"].get("tools", [])
+        latest_payload["videos"] = latest_payload["grouped"].get("videos", [])
+        latest_payload["prompts"] = latest_payload["grouped"].get("prompts", [])
+        latest_payload["industry_news"] = latest_payload["grouped"].get("news", [])
+        latest_payload["leader_opinions"] = latest_payload["grouped"].get("celebrity", [])
+        latest_payload["applied_tools"] = latest_payload["grouped"].get("tools", [])
+        latest_payload["video_prompts"] = latest_payload["grouped"].get("videos", [])
     except Exception as e:
         print(f"⚠️ [language_sentinel] 自动质检异常: {e}")
 
@@ -1236,8 +1271,8 @@ def run_pipeline():
     for it in raw_items:
         u = it.get("url")
         i = it.get("id")
-        # 若条目本身为视频/提示词，或已有高质量中文提炼（例如大V推特、实操Prompt）
-        if it.get("category") in ["videos", "prompts"]:
+        # 若条目本身为视频/提示词/精选落地工具，或已有高质量中文提炼（例如大V推特、实操Prompt、开源工具）
+        if it.get("category") in ["videos", "prompts", "tools"]:
             pre_curated_items.append(it)
         elif it.get("title_zh") and it.get("summary_zh"):
             pre_curated_items.append(it)

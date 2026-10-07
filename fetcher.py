@@ -1347,101 +1347,119 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
 # 4. 抓取 GitHub 场景应用神器 (高频更新+丰富标题)
 # ==========================================
 def fetch_github_applied_tools() -> List[Dict[str, Any]]:
-    """Fetch practical GitHub open-source client tools/apps with authentic creation timestamps."""
+    """Fetch practical GitHub open-source client tools/apps with authentic push/update timestamps."""
     items = []
+    seen_urls = set()
     banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1"]
     now_utc = datetime.now(timezone.utc)
+    search_queries = [
+        "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>20&sort=updated&order=desc&per_page=20",
+        "https://api.github.com/search/repositories?q=topic:ai-agent+stars:>50&sort=updated&order=desc&per_page=20",
+        "https://api.github.com/search/repositories?q=topic:ai-tools+stars:>20&sort=updated&order=desc&per_page=15",
+    ]
     try:
-        url = "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>30&sort=updated&order=desc&per_page=20"
         with httpx.Client(headers=HEADERS, timeout=12) as client:
-            resp = client.get(url)
-            if resp.status_code == 200:
-                data = resp.json()
-                for repo in data.get("items", []):
-                    if len(items) >= 8:
-                        break
-                    name = repo.get("name", "")
-                    description = repo.get("description") or "实用开源 AI 落地工具"
-                    combined = f"{name} {description}".lower()
-                    
-                    # 过滤远古项目及过时模型
-                    if any(bad in combined for bad in banned_keywords):
+            for url in search_queries:
+                if len(items) >= 20:
+                    break
+                try:
+                    resp = client.get(url)
+                    if resp.status_code != 200:
                         continue
-
-                    created_raw = repo.get("created_at")
-                    if not created_raw:
-                        continue
-                    real_pub_iso = parse_to_iso(raw_str=str(created_raw))
-
-                    # 时效把关：过滤超过 180 天的陈旧仓库，保证推荐的前沿度与新颖度
-                    try:
-                        dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
-                        if (now_utc - dt).total_seconds() > 180 * 86400:
+                    data = resp.json()
+                    for repo in data.get("items", []):
+                        if len(items) >= 20:
+                            break
+                        repo_url = repo.get("html_url", "")
+                        if not repo_url or repo_url in seen_urls:
                             continue
-                    except Exception:
-                        pass
+                        seen_urls.add(repo_url)
 
-                    stars = repo.get("stargazers_count", 0)
-                    repo_url = repo.get("html_url", "")
+                        name = repo.get("name", "")
+                        description = repo.get("description") or "实用开源 AI 落地工具"
+                        combined = f"{name} {description}".lower()
+                        
+                        # 过滤远古项目及过时模型
+                        if any(bad in combined for bad in banned_keywords):
+                            continue
 
-                    # 场景推断
-                    scenario = "💻 开发者提效"
-                    icon_type = "code"
-                    runtime_badge = "🐳 Docker 一键部署"
+                        # 使用最新活跃提交/发布时间戳，确保展示工具为当期活跃维护项目
+                        pushed_raw = repo.get("pushed_at") or repo.get("updated_at") or repo.get("created_at")
+                        if not pushed_raw:
+                            continue
+                        real_pub_iso = parse_to_iso(raw_str=str(pushed_raw))
 
-                    if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo"]):
-                        scenario = "🎨 图像修图/设计"
-                        icon_type = "vision"
-                        runtime_badge = "🟢 本地 GPU 运行"
-                    elif any(k in combined for k in ["video", "cutter", "clip", "movie"]):
-                        scenario = "🎬 视频创作合成"
-                        icon_type = "vision"
+                        # 时效把关：过滤超过 30 天未更新维护的休眠仓库，保证落地工具的绝对活跃度
+                        try:
+                            dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
+                            if (now_utc - dt).total_seconds() > 30 * 86400:
+                                continue
+                        except Exception:
+                            pass
+
+                        stars = repo.get("stargazers_count", 0)
+
+                        # 场景推断
+                        scenario = "💻 开发者提效"
+                        icon_type = "code"
                         runtime_badge = "🐳 Docker 一键部署"
-                    elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser", "spider"]):
-                        scenario = "🤖 自动化 Agent"
-                        icon_type = "agent"
-                        runtime_badge = "⚡ 命令行/一键执行"
-                    elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
-                        scenario = "🎙️ 声音克隆音频"
-                        icon_type = "audio"
-                        runtime_badge = "💻 跨平台客户端"
-                    elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
-                        scenario = "💬 AI 客户端应用"
-                        icon_type = "chat"
-                        runtime_badge = "💻 跨平台桌面端"
 
-                    title_fmt = f"【{name}】{description[:65]}"
-                    title_en = f"[{name}] {description[:65]}"
+                        if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo"]):
+                            scenario = "🎨 图像修图/设计"
+                            icon_type = "vision"
+                            runtime_badge = "🟢 本地 GPU 运行"
+                        elif any(k in combined for k in ["video", "cutter", "clip", "movie"]):
+                            scenario = "🎬 视频创作合成"
+                            icon_type = "vision"
+                            runtime_badge = "🐳 Docker 一键部署"
+                        elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser", "spider"]):
+                            scenario = "🤖 自动化 Agent"
+                            icon_type = "agent"
+                            runtime_badge = "⚡ 命令行/一键执行"
+                        elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
+                            scenario = "🎙️ 声音克隆音频"
+                            icon_type = "audio"
+                            runtime_badge = "💻 跨平台客户端"
+                        elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
+                            scenario = "💬 AI 客户端应用"
+                            icon_type = "chat"
+                            runtime_badge = "💻 跨平台桌面端"
 
-                    repo_img = f"https://opengraph.githubassets.com/1/{repo.get('full_name')}" if repo.get("full_name") else None
-                    items.append({
-                        "id": make_id(repo_url, name),
-                        "title": title_fmt,
-                        "title_zh": title_fmt,
-                        "title_en": title_en,
-                        "app_name": name,
-                        "app_name_en": name,
-                        "app_hook": description[:65],
-                        "app_hook_en": description[:65],
-                        "url": repo_url,
-                        "official_url": repo_url,
-                        "image_url": repo_img or "",
-                        "preview_images": [repo_img] if repo_img else [],
-                        "source": "AI 资讯雷达",
-                        "author": repo.get("owner", {}).get("login", ""),
-                        "raw_published_at": real_pub_iso,
-                        "runtime_badge": runtime_badge,
-                        "icon_type": icon_type,
-                        "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},
-                        "scenario_tag": scenario,
-                        "pricing_tag": "🟢 完全开源免费",
-                        "platform": "tool",
-                        "content_snippet": f"⭐ {stars} stars · {description}",
-                        "summary_zh": f"⭐ {stars} 颗星标 · {description}",
-                        "summary_en": f"⭐ {stars} stars · {description}",
-                        "category": "tools",
-                        "tags": [scenario, "开源免费"]
-                    })
+                        title_fmt = f"【{name}】{description[:65]}"
+                        title_en = f"[{name}] {description[:65]}"
+
+                        repo_img = f"https://opengraph.githubassets.com/1/{repo.get('full_name')}" if repo.get("full_name") else None
+                        items.append({
+                            "id": make_id(repo_url, name),
+                            "title": title_fmt,
+                            "title_zh": title_fmt,
+                            "title_en": title_en,
+                            "app_name": name,
+                            "app_name_en": name,
+                            "app_hook": description[:65],
+                            "app_hook_en": description[:65],
+                            "url": repo_url,
+                            "official_url": repo_url,
+                            "image_url": repo_img or "",
+                            "preview_images": [repo_img] if repo_img else [],
+                            "source": "AI 资讯雷达",
+                            "author": repo.get("owner", {}).get("login", ""),
+                            "raw_published_at": real_pub_iso,
+                            "runtime_badge": runtime_badge,
+                            "icon_type": icon_type,
+                            "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},
+                            "scenario_tag": scenario,
+                            "pricing_tag": "🟢 完全开源免费",
+                            "platform": "tool",
+                            "content_snippet": f"⭐ {stars} stars · {description}",
+                            "summary_zh": f"⭐ {stars} 颗星标 · {description}",
+                            "summary_en": f"⭐ {stars} stars · {description}",
+                            "category": "tools",
+                            "tags": [scenario, "开源免费"]
+                        })
+                except Exception as inner_e:
+                    print(f"  ⚠️ [GitHub Tools] 查询异常: {inner_e}")
+                    continue
     except Exception as e:
         print(f"  ❌ [GitHub Tools] 抓取失败: {e}")
     return items
@@ -1482,7 +1500,8 @@ def resolve_product_hunt_redirect(ph_url: str) -> str:
     # 2. 备选方案：利用原生 curl 追踪最终重定向目标
     try:
         curl_bin = "curl.exe" if (sys.platform == "win32" and shutil.which("curl.exe")) else (shutil.which("curl") or "curl")
-        cmd = [curl_bin, "-ILs", "-o", "NUL", "-w", "%{url_effective}", ph_url, "--max-time", "6"]
+        devnull = "NUL" if sys.platform == "win32" else "/dev/null"
+        cmd = [curl_bin, "-ILs", "-o", devnull, "-w", "%{url_effective}", ph_url, "--max-time", "6"]
         res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="ignore")
         if res.stdout and res.stdout.startswith("http") and "/r/p/" not in res.stdout:
             return format_clean_tool_url(res.stdout.strip())
@@ -1627,7 +1646,7 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     return data
 
 
-def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
+def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
     """Fetch trending user-facing AI tools from Product Hunt with rich titles."""
     items = []
     cfg = SOURCES.get("product_hunt")
@@ -1637,20 +1656,10 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
         feed = feedparser.parse(cfg["url"])
         ai_keywords = ["ai", "gpt", "agent", "llm", "generator", "image", "video", "chat", "code", "audio"]
         
+        candidates = []
         for entry in feed.entries:
             title = entry.get("title", "").strip()
             summary = entry.get("summary", "")
-            
-            # 提取初始直达链接
-            outbound_match = re.search(r'href="([^"]+)"[^>]*>Link</a>', summary, re.IGNORECASE)
-            official_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
-            source_url = entry.get("link", "")
-            if '/r/p/' in official_url:
-                official_url = resolve_product_hunt_redirect(official_url)
-            else:
-                official_url = format_clean_tool_url(official_url)
-
-            # 彻底清洗 RSS 摘要，杜绝 Discussion | Link 乱码
             clean_summary = re.sub(r'<[^>]+>', '', summary)
             clean_summary = re.sub(r'Discussion\s*\|\s*Link', '', clean_summary, flags=re.IGNORECASE)
             clean_summary = re.sub(r'Discussion\s*\|', '', clean_summary, flags=re.IGNORECASE)
@@ -1658,8 +1667,17 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             clean_summary = re.sub(r'\s+', ' ', clean_summary).strip()
             combined = f"{title} {clean_summary}".lower()
 
-            if not any(k in combined for k in ai_keywords):
-                continue
+            if any(k in combined for k in ai_keywords):
+                candidates.append((entry, title, clean_summary, combined))
+            if len(candidates) >= max_items:
+                break
+
+        def _process_ph_entry(cand):
+            entry, title, clean_summary, combined = cand
+            summary = entry.get("summary", "")
+            outbound_match = re.search(r'href="([^"]+)"[^>]*>Link</a>', summary, re.IGNORECASE)
+            outbound_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
+            source_url = entry.get("link", "")
 
             scenario = "🤖 智能体/工作流"
             icon_type = "agent"
@@ -1689,14 +1707,15 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
             published = entry.get("published", "")
             iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
 
-            # 格式化醒目标题
             app_name = title.split(':')[0].strip()
             hook = title.split(':')[1].strip() if ':' in title else clean_summary[:50]
-            title_fmt = f"【{app_name}】{hook}"
-            title_en = f"[{app_name}] {hook}"
 
-            # 实时深度抓取真实落地页数据 (真实官网、真实画廊大图、真实 Logo)
             ph_details = scrape_product_hunt_details(source_url)
+            official_url = None
+            preview_imgs = []
+            logo_url = None
+            rank_badge = "🔥 热门推荐"
+
             if ph_details:
                 if ph_details.get("official_url"):
                     official_url = ph_details["official_url"]
@@ -1705,31 +1724,37 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 rank_badge = ph_details.get("rank_badge") or "🔥 热门推荐"
                 if ph_details.get("tagline"):
                     hook = ph_details["tagline"]
-                    title_en = f"[{app_name}] {hook}"
-            else:
-                preview_imgs = []
-                logo_url = None
-                rank_badge = "🔥 热门推荐"
+
+            if not official_url:
+                if '/r/p/' in outbound_url:
+                    official_url = resolve_product_hunt_redirect(outbound_url)
+                else:
+                    official_url = format_clean_tool_url(outbound_url)
+
+            # 优雅降级：若重定向依然无法穿透或遭遇 Cloudflare 挑战，直连 Product Hunt 官方页面，绝不丢弃宝贵新品
+            if not official_url or official_url == '#' or '/r/p/' in official_url or 'producthunt.com/r/' in official_url:
+                official_url = source_url
 
             if not preview_imgs and official_url and not ('producthunt.com' in official_url or official_url == '#'):
                 clean_target = official_url.split('?')[0]
                 ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
                 preview_imgs = [ss_url]
 
-            # 【严格门禁】：如果未能解析出产品官网或依然残留 /r/p/ 转链，直接剔除，绝不入库
-            if not official_url or official_url == '#' or '/r/p/' in official_url or 'producthunt.com/r/' in official_url:
-                print(f"  ⚠️ [Tools] 拦截未解析出真实官网的转链工具: {app_name}")
-                continue
+            title_fmt = f"【{app_name}】{hook[:65]}"
+            title_en = f"[{app_name}] {hook[:65]}"
 
-            items.append({
+            summary_zh = f"🔥 {rank_badge} · {scenario} · {hook[:140]}"
+            summary_en = f"{scenario} · {hook[:140]}"
+
+            return {
                 "id": make_id(source_url, title),
                 "title": title_fmt,
                 "title_zh": title_fmt,
                 "title_en": title_en,
                 "app_name": app_name,
                 "app_name_en": app_name,
-                "app_hook": hook,
-                "app_hook_en": hook,
+                "app_hook": hook[:120],
+                "app_hook_en": hook[:120],
                 "url": official_url,
                 "official_url": official_url,
                 "source_url": source_url,
@@ -1759,13 +1784,23 @@ def fetch_product_hunt_tools(max_items: int = 8) -> List[Dict[str, Any]]:
                 "pricing_tag": "🟡 免费试玩",
                 "platform": "tool",
                 "content_snippet": clean_summary[:180] or "Trending AI app",
-                "summary_zh": clean_summary[:180] or "热门 AI 场景落地应用",
-                "summary_en": clean_summary[:180] or "Trending practical AI application",
+                "summary_zh": summary_zh,
+                "summary_en": summary_en,
                 "category": "tools",
                 "tags": [scenario, "免部署工具"]
-            })
-            if len(items) >= max_items:
-                break
+            }
+
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        with ThreadPoolExecutor(max_workers=6) as executor:
+            future_to_cand = {executor.submit(_process_ph_entry, c): c for c in candidates}
+            for future in as_completed(future_to_cand):
+                try:
+                    res = future.result()
+                    if res:
+                        items.append(res)
+                except Exception as inner_e:
+                    print(f"  ⚠️ [Tools] Product Hunt 单项解析异常: {inner_e}")
+                    continue
     except Exception as e:
         print(f"  ❌ [Tools] 抓取失败: {e}")
     return items
@@ -2921,7 +2956,7 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     all_items.extend(news_and_celeb)
 
     # 2. 场景化落地工具 (Product Hunt + GitHub + Hugging Face Spaces 体验应用)
-    ph_tools = fetch_product_hunt_tools(max_items=8)
+    ph_tools = fetch_product_hunt_tools(max_items=25)
     print(f"  ✓ Product Hunt 落地应用: 获取到 {len(ph_tools)} 条")
     all_items.extend(ph_tools)
 
@@ -2929,7 +2964,7 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     print(f"  ✓ GitHub 开源神器: 获取到 {len(gh_tools)} 条")
     all_items.extend(gh_tools)
 
-    hf_tools = fetch_hf_spaces(max_items=8)
+    hf_tools = fetch_hf_spaces(max_items=12)
     print(f"  ✓ Hugging Face 在线试玩: 获取到 {len(hf_tools)} 条")
     all_items.extend(hf_tools)
 
