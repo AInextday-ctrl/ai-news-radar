@@ -748,6 +748,92 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </article>"""
 
+        # 2b. Social Radar English (Top 8)
+        celeb_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        celeb_cards_en_html = ""
+        for it in celeb_items:
+            author = safe_text(it.get("author") or "AI Pioneer", 40)
+            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
+            role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
+            text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
+            u = it.get("url", "#")
+            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            celeb_cards_en_html += f"""
+              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
+                <div class="space-y-2.5">
+                  <div class="flex items-start space-x-3">
+                    <div class="relative shrink-0 pt-0.5">
+                      <img src="{avatar}" alt="{author}" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
+                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">{author}</span>
+                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
+                        <span>{handle}</span>
+                        <span>·</span>
+                        <span class="text-slate-400">{role}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
+                    {text_en}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
+                </div>
+              </article>"""
+
+        # 2c. LMSYS Arena English (Top 25)
+        arena_file = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+        chatbot_arena = []
+        if os.path.exists(arena_file):
+            try:
+                with open(arena_file, "r", encoding="utf-8") as f:
+                    ndata = json.load(f)
+                    chatbot_arena = ndata.get("chatbot_arena", [])
+            except Exception:
+                pass
+
+        arena_cards_en_html = ""
+        for item in chatbot_arena[:25]:
+            rank = item.get("rank", 1)
+            model = safe_text(item.get("model", ""), 40)
+            org = safe_text(item.get("org", ""), 20)
+            elo = item.get("elo", 1200)
+            badge_text = safe_text(item.get("badge_en") or item.get("badge", ""), 50)
+            rank_class = "bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700"
+            if rank == 1:
+                rank_class = "bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm ring-1 ring-amber-300"
+            elif rank == 2:
+                rank_class = "bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300"
+            elif rank == 3:
+                rank_class = "bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600"
+            elif rank <= 10:
+                rank_class = "bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30"
+            badge_html = f'<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">{badge_text}</span>' if badge_text else ''
+            arena_cards_en_html += f"""
+              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
+                  <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
+                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{model}</span>
+                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
+                      {badge_html}
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right shrink-0">
+                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
+                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
+                </div>
+              </div>"""
+
         # 3. Hub Section English
         daily_en_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} Briefing</a>' for d in reversed(recent_dates)])
         articles_en_links = ""
@@ -800,6 +886,14 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_news, en_content, re.DOTALL):
             en_content = re.sub(pattern_news, r'\1' + news_cards_en_html + r'\3', en_content, flags=re.DOTALL)
 
+        pattern_celeb = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-celebrity">)(.*?)(</div>\s*</div>\s*<!-- 社交专栏直达底栏 -->)'
+        if re.search(pattern_celeb, en_content, re.DOTALL):
+            en_content = re.sub(pattern_celeb, r'\1\n' + celeb_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
+
+        pattern_arena = r'(<div class="space-y-1\.5 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-arena">)(.*?)(</div>\s*</div>\s*<!-- 天梯直达底栏 -->)'
+        if re.search(pattern_arena, en_content, re.DOTALL):
+            en_content = re.sub(pattern_arena, r'\1\n' + arena_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
+
         if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in en_content:
             en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
                                 hub_en_html.strip(), en_content, flags=re.DOTALL)
@@ -812,7 +906,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         with open(INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(en_content)
 
-        print("🏠 [首页预渲染引擎] index.html (English) 已成功写入纯正英文 Top 3 头条与 12 条核心快讯！")
+        print("🏠 [首页预渲染引擎] index.html (English) 已成功写入纯正英文 Top 3、12条快讯、社交雷达与天梯榜！")
 
     # ==========================
     # B. 中文精翻版 (public/zh/index.html)
@@ -883,6 +977,81 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </article>"""
 
+        # 2b. Social Radar Chinese (Top 8)
+        celeb_cards_zh_html = ""
+        for it in celeb_items:
+            author = safe_text(it.get("author") or "AI 领袖", 40)
+            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
+            role = safe_text(it.get("author_role") or "AI 前沿探索者", 60)
+            text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
+            u = it.get("url", "#")
+            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            celeb_cards_zh_html += f"""
+              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
+                <div class="space-y-2.5">
+                  <div class="flex items-start space-x-3">
+                    <div class="relative shrink-0 pt-0.5">
+                      <img src="{avatar}" alt="{author}" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
+                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">{author}</span>
+                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 稳定截获</span>
+                      </div>
+                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
+                        <span>{handle}</span>
+                        <span>·</span>
+                        <span class="text-slate-400">{role}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
+                    {text_zh}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="text-slate-400 font-mono text-[10px]">𝕏 社交雷达</span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">查看原文 ↗</a>
+                </div>
+              </article>"""
+
+        # 2c. LMSYS Arena Chinese (Top 25)
+        arena_cards_zh_html = ""
+        for item in chatbot_arena[:25]:
+            rank = item.get("rank", 1)
+            model = safe_text(item.get("model", ""), 40)
+            org = safe_text(item.get("org", ""), 20)
+            elo = item.get("elo", 1200)
+            badge_text = safe_text(item.get("badge", ""), 50)
+            rank_class = "bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700"
+            if rank == 1:
+                rank_class = "bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm ring-1 ring-amber-300"
+            elif rank == 2:
+                rank_class = "bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300"
+            elif rank == 3:
+                rank_class = "bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600"
+            elif rank <= 10:
+                rank_class = "bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30"
+            badge_html = f'<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">{badge_text}</span>' if badge_text else ''
+            arena_cards_zh_html += f"""
+              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
+                  <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
+                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{model}</span>
+                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
+                      {badge_html}
+                    </div>
+                  </div>
+                </div>
+                <div class="text-right shrink-0">
+                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
+                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
+                </div>
+              </div>"""
+
         # 3. Hub Section Chinese
         daily_zh_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} 日报</a>' for d in reversed(recent_dates)])
         articles_zh_links = ""
@@ -932,6 +1101,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_news, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_news, r'\1' + news_cards_zh_html + r'\3', zh_content, flags=re.DOTALL)
 
+        if re.search(pattern_celeb, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_celeb, r'\1\n' + celeb_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
+
+        if re.search(pattern_arena, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_arena, r'\1\n' + arena_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
+
         if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in zh_content:
             zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
                                 hub_zh_html.strip(), zh_content, flags=re.DOTALL)
@@ -944,7 +1119,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(zh_content)
 
-        print("🏠 [首页预渲染引擎] zh/index.html (Chinese) 已成功写入精致中文 Top 3 头条与 12 条核心快讯！")
+        print("🏠 [首页预渲染引擎] zh/index.html (Chinese) 已成功写入精致中文 Top 3、12条快讯、社交雷达与天梯榜！")
 
 
 # ==============================================================================
