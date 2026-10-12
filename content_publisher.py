@@ -830,7 +830,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
                 <div class="text-right shrink-0">
                   <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
+                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
                 </div>
               </div>"""
 
@@ -1048,7 +1048,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
                 <div class="text-right shrink-0">
                   <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Elo</span>
+                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
                 </div>
               </div>"""
 

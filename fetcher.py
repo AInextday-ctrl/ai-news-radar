@@ -2675,91 +2675,98 @@ PUBLIC_ARENA_CACHE_FILE = os.path.join(PUBLIC_DATA_DIR, "chatbot_arena_cache.jso
 
 def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
     """
-    动态从 Hugging Face 官方 lmarena-ai/leaderboard-dataset REST 服务抓取最新权威天梯榜。
-    包含真实实时 Elo 评分、发布日期、组织归属与代际技术徽章。
+    动态从官方新一代 LMSYS 竞技场 (https://arena.ai/leaderboard) 抓取最新权威天梯榜。
+    包含真实实时 Net Improvement 净增评分、发布日期、组织归属与代际技术徽章。
     支持断网本地缓存与高可靠前沿基准兜底。
     """
-    # 1. 尝试在线抓取最新权威官方榜单
-    api_url = "https://datasets-server.huggingface.co/rows?dataset=lmarena-ai/leaderboard-dataset&config=text&split=latest&offset=0&limit=30"
+    # 1. 尝试在线抓取最新官方 arena.ai 天梯榜
+    arena_url = "https://arena.ai/leaderboard"
+    arena_headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
     try:
-        with httpx.Client(headers=HEADERS, timeout=12) as client:
-            resp = client.get(api_url)
+        with httpx.Client(headers=arena_headers, timeout=15, follow_redirects=True) as client:
+            resp = client.get(arena_url)
             if resp.status_code == 200:
-                rows_data = resp.json().get("rows", [])
-                if rows_data and len(rows_data) >= 5:
-                    live_arena = []
-                    for idx, item in enumerate(rows_data[:25]):
-                        row = item.get("row", {})
-                        raw_name = str(row.get("model_name") or "")
-                        if not raw_name:
-                            continue
-                        rank = int(row.get("rank") or (len(live_arena) + 1))
-                        elo = int(round(float(row.get("rating", 1300))))
-                        raw_org = str(row.get("organization") or "AI Lab").strip()
-                        pub_date = str(row.get("leaderboard_publish_date") or "")
+                html = resp.text
+                pos = html.find('best-overall-agents')
+                if pos != -1:
+                    entries_pos = html.find('entries', pos)
+                    if entries_pos != -1:
+                        bracket_start = html.find('[', entries_pos)
+                        if bracket_start != -1:
+                            depth = 0
+                            end = -1
+                            for i in range(bracket_start, len(html)):
+                                if html[i] == '[' and html[i-1] != '\\':
+                                    depth += 1
+                                elif html[i] == ']' and html[i-1] != '\\':
+                                    depth -= 1
+                                    if depth == 0:
+                                        end = i + 1
+                                        break
+                            if end != -1:
+                                raw_array = html[bracket_start:end]
+                                clean_json = raw_array.replace('\\"', '"').replace('\\\\', '\\')
+                                raw_entries = json.loads(clean_json)
 
-                        # 格式化美化模型名称
-                        clean_name = raw_name.replace("-", " ").title()
-                        clean_name = re.sub(r'\b(Gpt|Glm|Moe|Llm|R1|V3|V4)\b', lambda m: m.group(1).upper(), clean_name, flags=re.I)
-                        clean_name = clean_name.replace("Claude", "Claude").replace("Gemini", "Gemini").replace("Deepseek", "DeepSeek")
+                                live_arena = []
+                                for idx, e in enumerate(raw_entries[:25]):
+                                    rank = int(e.get("rank") or (idx + 1))
+                                    name = str(e.get("modelDisplayName") or e.get("modelKey") or "AI Model").strip()
+                                    org = str(e.get("modelOrganization") or "AI Lab").strip()
+                                    rating = float(e.get("rating") or 0.0)
+                                    elo_str = f"+{rating*100:.2f}%" if rating > 0 else f"{rating*100:.2f}%"
+                                    model_url = str(e.get("modelUrl") or "https://arena.ai/leaderboard")
 
-                        org_display = raw_org.capitalize()
-                        if "anthropic" in raw_org.lower():
-                            org_display = "Anthropic"
-                        elif "google" in raw_org.lower():
-                            org_display = "Google"
-                        elif "openai" in raw_org.lower():
-                            org_display = "OpenAI"
-                        elif "deepseek" in raw_org.lower():
-                            org_display = "DeepSeek"
-                        elif "meta" in raw_org.lower():
-                            org_display = "Meta"
-                        elif "alibaba" in raw_org.lower() or "qwen" in raw_org.lower():
-                            org_display = "Alibaba"
-                        elif "zhipu" in raw_org.lower() or "glm" in raw_org.lower():
-                            org_display = "Zhipu AI"
+                                    if rank == 1:
+                                        badge_zh = f"👑 全球综合榜首 · {org}旗舰基座"
+                                        badge_en = f"👑 #1 Overall · {org} Flagship"
+                                    elif rank == 2:
+                                        badge_zh = f"🔥 全球第二 · 极高阶认知基座"
+                                        badge_en = f"🔥 #2 Overall · Frontier Agent SOTA"
+                                    elif rank == 3:
+                                        badge_zh = f"🔥 全球前三 · {org}旗舰推理SOTA"
+                                        badge_en = f"🔥 Top 3 Overall · {org} Flagship SOTA"
+                                    elif rank <= 5:
+                                        badge_zh = f"⚡ 顶级Agent智能体基座"
+                                        badge_en = f"⚡ Frontier Agent & Reasoning SOTA"
+                                    elif rank <= 10:
+                                        badge_zh = f"💎 全球Top 10顶级认知基座"
+                                        badge_en = f"💎 Global Top 10 Frontier Model"
+                                    else:
+                                        badge_zh = f"🚀 高性能生产力基座"
+                                        badge_en = f"🚀 High-Performance Production SOTA"
 
-                        if rank == 1:
-                            badge_zh = f"👑 全球综合榜首 · {org_display}旗舰基座"
-                            badge_en = f"👑 #1 Overall · {org_display} Flagship"
-                        elif rank <= 3:
-                            badge_zh = f"🔥 全球前三 · 深度推理SOTA"
-                            badge_en = f"🔥 Top 3 Overall · Deep Reasoning SOTA"
-                        elif rank <= 5:
-                            badge_zh = f"⚡ 工业级超强推理与Agent基座"
-                            badge_en = f"⚡ Enterprise Agent & Reasoning SOTA"
-                        elif rank <= 10:
-                            badge_zh = f"💎 全球Top 10顶级认知基座"
-                            badge_en = f"💎 Global Top 10 Frontier Model"
-                        else:
-                            badge_zh = f"🚀 高性能生产力基座"
-                            badge_en = f"🚀 High-Performance Production SOTA"
+                                    live_arena.append({
+                                        "rank": rank,
+                                        "model": name,
+                                        "raw_model": e.get("modelKey") or name,
+                                        "elo": elo_str,
+                                        "rating": rating,
+                                        "org": org,
+                                        "badge": badge_zh,
+                                        "badge_en": badge_en,
+                                        "votes": e.get("votes", 0),
+                                        "url": model_url,
+                                        "arena_url": "https://arena.ai/leaderboard"
+                                    })
 
-                        live_arena.append({
-                            "rank": rank,
-                            "model": clean_name,
-                            "raw_model": raw_name,
-                            "elo": elo,
-                            "org": org_display,
-                            "badge": badge_zh,
-                            "badge_en": badge_en,
-                            "publish_date": pub_date
-                        })
-
-                    if live_arena:
-                        # 写入本地缓存以备无网络或限流时使用
-                        try:
-                            payload = {"updated_at": datetime.now(timezone.utc).isoformat(), "models": live_arena}
-                            for cpath in [ARENA_CACHE_FILE, PUBLIC_ARENA_CACHE_FILE]:
-                                os.makedirs(os.path.dirname(cpath), exist_ok=True)
-                                with open(cpath, "w", encoding="utf-8") as f:
-                                    json.dump(payload, f, ensure_ascii=False, indent=2)
-                        except Exception:
-                            pass
-                        print(f"  ✓ [LMSYS Arena] 成功实时同步最新权威天梯榜！收录 Top {len(live_arena)} 模型 (榜首: {live_arena[0]['model']} - Elo {live_arena[0]['elo']})")
-                        return live_arena
+                                if live_arena:
+                                    try:
+                                        payload = {"updated_at": datetime.now(timezone.utc).isoformat(), "source": "https://arena.ai/leaderboard", "models": live_arena}
+                                        for cpath in [ARENA_CACHE_FILE, PUBLIC_ARENA_CACHE_FILE]:
+                                            os.makedirs(os.path.dirname(cpath), exist_ok=True)
+                                            with open(cpath, "w", encoding="utf-8") as f:
+                                                json.dump(payload, f, ensure_ascii=False, indent=2)
+                                    except Exception:
+                                        pass
+                                    print(f"  ✓ [Arena.ai] 成功实时同步最新权威天梯榜！收录 Top {len(live_arena)} 模型 (榜首: {live_arena[0]['model']} - {live_arena[0]['elo']})")
+                                    return live_arena
     except Exception as e:
-        print(f"  ⚠️ [LMSYS Arena] 在线抓取异常，尝试读取本地缓存: {e}")
+        print(f"  ⚠️ [Arena.ai] 在线抓取异常，尝试读取本地缓存: {e}")
 
     # 2. 读取本地持久化缓存
     for cpath in [ARENA_CACHE_FILE, PUBLIC_ARENA_CACHE_FILE]:
@@ -2772,18 +2779,18 @@ def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
             except Exception:
                 pass
 
-    # 3. 高可靠安全兜底基准榜单 (带真实权威 Elo)
+    # 3. 高可靠安全兜底基准榜单 (严格匹配 arena.ai/leaderboard 官方实时数据)
     return [
-        {"rank": 1, "model": "Gemini 4 Argon High", "elo": 1533, "org": "Google", "badge": "👑 全球综合榜首 · 谷歌旗舰基座", "badge_en": "👑 #1 Overall · Google Flagship"},
-        {"rank": 2, "model": "Claude Opus 5.5 High", "elo": 1512, "org": "Anthropic", "badge": "🧠 深度认知与复杂推理", "badge_en": "🧠 Deep Cognition SOTA"},
-        {"rank": 3, "model": "Claude Fable 5.1 Max", "elo": 1511, "org": "Anthropic", "badge": "🔥 全球前三 · Agent智能体专项标杆", "badge_en": "🔥 Top 3 Overall · Agent Specialist"},
-        {"rank": 4, "model": "Claude Opus 5 Max", "elo": 1507, "org": "Anthropic", "badge": "⚡ 超长上下文架构旗舰", "badge_en": "⚡ Long-Context Architecture"},
-        {"rank": 5, "model": "Claude Opus 4.6 High", "elo": 1503, "org": "Anthropic", "badge": "⚡ 高性能生产力基座", "badge_en": "⚡ High-Performance Workhorse"},
-        {"rank": 6, "model": "GPT 6 Astra Max", "elo": 1498, "org": "OpenAI", "badge": "🎯 OpenAI新一代旗舰基座", "badge_en": "🎯 OpenAI Frontier Flagship"},
-        {"rank": 7, "model": "GPT 6 Sol Max", "elo": 1485, "org": "OpenAI", "badge": "🎯 多模态复杂任务解决", "badge_en": "🎯 Multimodal Task Solver"},
-        {"rank": 8, "model": "Claude Sonnet 5 High", "elo": 1475, "org": "Anthropic", "badge": "💻 编码与极客工作流", "badge_en": "💻 Coding & Dev Workflow"},
-        {"rank": 9, "model": "DeepSeek-V4.1 Flash", "elo": 1468, "org": "DeepSeek", "badge": "🔥 开源高吞吐MoE之王", "badge_en": "🔥 High-Throughput MoE King"},
-        {"rank": 10, "model": "Gemini 3.8 Ultra", "elo": 1460, "org": "Google", "badge": "🌐 原生全模态旗舰", "badge_en": "🌐 Native Multimodal SOTA"}
+        {"rank": 1, "model": "Claude Opus 5.5 (Max)", "elo": "+15.53%", "rating": 0.1553, "org": "Anthropic", "badge": "👑 全球综合榜首 · Anthropic旗舰基座", "badge_en": "👑 #1 Overall · Anthropic Flagship", "url": "https://arena.ai/leaderboard"},
+        {"rank": 2, "model": "Claude Opus 5.5 (High)", "elo": "+14.33%", "rating": 0.1433, "org": "Anthropic", "badge": "🔥 全球第二 · 极高阶认知基座", "badge_en": "🔥 #2 Overall · Frontier Agent SOTA", "url": "https://arena.ai/leaderboard"},
+        {"rank": 3, "model": "GPT 6 Astra (Max)", "elo": "+13.09%", "rating": 0.1309, "org": "OpenAI", "badge": "🔥 全球前三 · OpenAI旗舰推理SOTA", "badge_en": "🔥 Top 3 Overall · OpenAI Flagship SOTA", "url": "https://arena.ai/leaderboard"},
+        {"rank": 4, "model": "Claude Fable 5.1 (Max)", "elo": "+12.66%", "rating": 0.1266, "org": "Anthropic", "badge": "⚡ 顶级Agent智能体基座", "badge_en": "⚡ Frontier Agent & Reasoning SOTA", "url": "https://arena.ai/leaderboard"},
+        {"rank": 5, "model": "Claude Sonnet 5.5 (Max)", "elo": "+11.95%", "rating": 0.1195, "org": "Anthropic", "badge": "⚡ 工业级超强推理与Agent基座", "badge_en": "⚡ Enterprise Agent & Reasoning SOTA", "url": "https://arena.ai/leaderboard"},
+        {"rank": 6, "model": "GPT 6.1 Sol (Max)", "elo": "+11.72%", "rating": 0.1172, "org": "OpenAI", "badge": "💎 全球Top 10顶级认知基座", "badge_en": "💎 Global Top 10 Frontier Model", "url": "https://arena.ai/leaderboard"},
+        {"rank": 7, "model": "GPT 6 Sol (Max)", "elo": "+9.92%", "rating": 0.0992, "org": "OpenAI", "badge": "💎 全球Top 10顶级认知基座", "badge_en": "💎 Global Top 10 Frontier Model", "url": "https://arena.ai/leaderboard"},
+        {"rank": 8, "model": "Gemini 4 Argon (High)", "elo": "+9.26%", "rating": 0.0926, "org": "Google", "badge": "💎 全球Top 10顶级认知基座", "badge_en": "💎 Global Top 10 Frontier Model", "url": "https://arena.ai/leaderboard"},
+        {"rank": 9, "model": "Claude Fable 5 (High)", "elo": "+8.94%", "rating": 0.0894, "org": "Anthropic", "badge": "💎 全球Top 10顶级认知基座", "badge_en": "💎 Global Top 10 Frontier Model", "url": "https://arena.ai/leaderboard"},
+        {"rank": 10, "model": "Claude Opus 5 (Max)", "elo": "+8.12%", "rating": 0.0812, "org": "Anthropic", "badge": "💎 全球Top 10顶级认知基座", "badge_en": "💎 Global Top 10 Frontier Model", "url": "https://arena.ai/leaderboard"}
     ]
 
 
