@@ -31,6 +31,8 @@ DAILY_DIR = os.path.join(PUBLIC_DIR, "daily")
 ARTICLES_DIR = os.path.join(PUBLIC_DIR, "articles")
 SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 INDEX_FILE = os.path.join(PUBLIC_DIR, "index.html")
+ZH_DIR = os.path.join(PUBLIC_DIR, "zh")
+ZH_INDEX_FILE = os.path.join(ZH_DIR, "index.html")
 
 ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>"""
 ADSENSE_SLOT = """<!-- Google AdSense Responsive Unit -->
@@ -630,32 +632,66 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         f.write(html)
 
 
+ARTICLE_TITLE_EN_MAP = {
+    "国会听证会炸锅！美财长贝森特重锤发难：AI 实验室休想获得责任豁免金牌":
+        "Congressional Storm: US Treasury Secretary Bessent Rejects AI Lab Liability Immunity",
+    "英伟达对流氓特工的回应是一个开源的人工智能安":
+        "Deep-Dive: Nvidia Releases Open-Source AI Agent Security Framework to Counter Rogue Agents",
+    "OpenAI GPT-6 Sol (Max) 登顶代码竞技场，重塑大模型帕累托边界":
+        "Deep-Dive: OpenAI GPT-6 Sol (Max) Crowns Code Arena, Reshaping Pareto Frontiers",
+    "OpenAI 推出 GPT-6 Sol 与 Luna 双子星大模型":
+        "Deep-Dive: OpenAI Unveils Dual Frontier Flagships GPT-6 Sol and Luna",
+    "Noam Brown：多智能体协同与范式演进":
+        "Deep-Dive: Inside Noam Brown's Paradigm on Multi-Agent Reasoning and Collaboration",
+    "逼平 GPT-5.5 成本仅 1/15！DeepSeek 开源推理核弹再次颠覆全球算力定价":
+        "DeepSeek Open-Source Reasoning Leap Rivaling GPT-5.5 at 1/15th Cost Disrupts Global Compute",
+    "Image-to-WebDev 代码竞技场重磅更新":
+        "Image-to-WebDev Arena Major Update: Benchmarking Multimodal Front-end Generation",
+    "DeepSeek-V4.1-Flash (Max) 震撼登场":
+        "DeepSeek-V4.1-Flash (Max) Architecture and Empirical Benchmarks Breakdown"
+}
+
+def get_english_article_title(zh_title: str) -> str:
+    for k, v in ARTICLE_TITLE_EN_MAP.items():
+        if k in zh_title or zh_title in k:
+            return v
+    # Fallback to smart English title extraction
+    clean = re.sub(r'^(?:深度拆解[：:]|围绕)', '', zh_title)
+    clean = re.sub(r'[，,]?一线技术人必须看清.*$', '', clean)
+    clean = re.sub(r'^[【\[].*?[】\]]\s*', '', clean)
+    return clean.strip('“"\' ') or zh_title
+
+
 # ==============================================================================
 # 3. 根首页 index.html 真实可见静态 DOM 预渲染 (彻底解决 654 字单薄问题)
 # ==============================================================================
 def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, Any]],
                        articles_meta: List[Dict[str, Any]], daily_dates: List[str]):
     """
-    直接将真实 Top 3 头条、前 12 条高价值新闻、前 6 条大V推特真实渲染写入 index.html！
-    彻底消除 sr-only 隐藏作假嫌疑，让 Google 爬虫一打开首页就能读到 15,000+ 字符高价值文本！
+    双版本独立预渲染引擎：
+    1. 根首页 public/index.html：纯正地道英文，严禁混入中文字符或中文字幕。
+    2. 中文专版 public/zh/index.html：流畅精致中文，严禁遗留生硬机翻或英文代码模板。
     """
-    if not os.path.exists(INDEX_FILE):
-        return
+    recent_dates = daily_dates[-12:] if daily_dates else ["2026-09-24", "2026-09-23"]
 
-    with open(INDEX_FILE, "r", encoding="utf-8") as f:
-        content = f.read()
+    # ==========================
+    # A. 英文主站 (public/index.html)
+    # ==========================
+    if os.path.exists(INDEX_FILE):
+        with open(INDEX_FILE, "r", encoding="utf-8") as f:
+            en_content = f.read()
 
-    # 1. 预渲染 Top 3 容器: id="top-three-container"
-    top_three_html = ""
-    for idx, item in enumerate(top_three[:3]):
-        badge = safe_text(item.get("badge") or item.get("badge_zh") or "⚡ Top Highlight", 30)
-        title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
-        title_zh = safe_text(item.get("title_zh") or "", 120)
-        sum_en = safe_text(item.get("summary_en") or item.get("title_en") or "", 250)
-        sum_zh = safe_text(item.get("summary_zh") or "", 250)
-        source = safe_text(item.get("source", ""), 40)
-        url = item.get("url", "#")
-        top_three_html += f"""
+        # 1. Top 3 English
+        top_three_en_html = ""
+        for idx, item in enumerate(top_three[:3]):
+            badge = safe_text(item.get("badge") or "⚡ Top Highlight", 30)
+            title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
+            sum_en = safe_text(item.get("summary_en") or item.get("title_en") or "", 250)
+            source = safe_text(item.get("source", ""), 40)
+            if not source or "AI 资讯雷达" in source:
+                source = "AI News Radar"
+            url = item.get("url", "#")
+            top_three_en_html += f"""
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
@@ -665,9 +701,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                 <a href="{url}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">{title_en}</a>
               </h3>
-              {f'<p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">{title_zh}</p>' if title_zh and title_zh != title_en else ''}
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                {sum_en or sum_zh}
+                {sum_en}
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
@@ -676,22 +711,22 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             </div>
           </article>"""
 
-    # 2. 预渲染 行业快讯容器: id="stream-news"
-    news_items = [i for i in items if i.get("category") == "news"][:12]
-    news_cards_html = ""
-    for it in news_items:
-        t_en = safe_text(it.get("title_en") or it.get("title", ""), 120)
-        t_zh = safe_text(it.get("title_zh") or "", 120)
-        s_en = safe_text(it.get("summary_en") or it.get("title_en") or "", 250)
-        s_zh = safe_text(it.get("summary_zh") or "", 250)
-        src = safe_text(it.get("source", ""), 40)
-        u = it.get("url", "#")
-        img = it.get("image_url", "")
-        img_tag = ""
-        if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
-            img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_en}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+        # 2. News Stream English
+        news_items = [i for i in items if i.get("category") == "news"][:12]
+        news_cards_en_html = ""
+        for it in news_items:
+            t_en = safe_text(it.get("title_en") or it.get("title", ""), 120)
+            s_en = safe_text(it.get("summary_en") or it.get("title_en") or "", 250)
+            src = safe_text(it.get("source", ""), 40)
+            if not src or "AI 资讯雷达" in src:
+                src = "AI News Radar"
+            u = it.get("url", "#")
+            img = it.get("image_url", "")
+            img_tag = ""
+            if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
+                img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_en}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
 
-        news_cards_html += f"""
+            news_cards_en_html += f"""
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_tag}
                 <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -703,9 +738,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_en}</a>
                     </h3>
-                    {f'<p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">{t_zh}</p>' if t_zh and t_zh != t_en else ''}
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      {s_en or s_zh}
+                      {s_en}
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
@@ -714,80 +748,203 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </article>"""
 
-    # 3. 预渲染 往期日报 + 深度专栏 静态导航板块（置于 Footer 之前，建立 Google 抓取蜘蛛网）
-    recent_dates = daily_dates[-12:] if daily_dates else ["2026-09-24", "2026-09-23"]
-    daily_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} 日报</a>' for d in reversed(recent_dates)])
-
-    articles_links = ""
-    for art in articles_meta[:6]:
-        articles_links += f"""
+        # 3. Hub Section English
+        daily_en_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} Briefing</a>' for d in reversed(recent_dates)])
+        articles_en_links = ""
+        for art in articles_meta[:6]:
+            en_title = get_english_article_title(art['title'])
+            articles_en_links += f"""
         <a href="{art['rel_url']}" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · {art['date']}</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">{safe_text(art['title'], 60)}</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 ({art['chars']} 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · {art['date']}</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">{safe_text(en_title, 80)}</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis ({art['chars']} chars) →</div>
         </a>"""
 
-    hub_section_html = f"""
+        hub_en_html = f"""
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
     <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
-      <!-- 往期日报索引 -->
       <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📅</span>
-            <span>Historical AI Daily Intelligence Archive (往期简报)</span>
+            <span>Historical AI Daily Intelligence Archive</span>
           </h2>
-          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources · 每日更新附出处</span>
+          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources</span>
         </div>
         <div class="flex flex-wrap gap-2">
-          {daily_links}
+          {daily_en_links}
         </div>
       </div>
 
-      <!-- 独家深度专栏推荐 -->
       <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📚</span>
-            <span>AI Deep-Dive Intelligence & Analysis (深度专栏智库)</span>
+            <span>AI Deep-Dive Intelligence & Analysis</span>
           </h2>
           <span class="text-[11px] text-indigo-500 font-semibold">In-Depth Analysis & Empirical Benchmarks</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {articles_links}
+          {articles_en_links}
         </div>
       </div>
     </section>
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
     """
 
-    # 执行文本替换注入
-    # A. 替换 top-three-container
-    pattern_top = r'(<div class="grid grid-cols-1 md:grid-cols-3 gap-3\.5" id="top-three-container">)(.*?)(</div>\s*</section>)'
-    if re.search(pattern_top, content, re.DOTALL):
-        content = re.sub(pattern_top, r'\1' + top_three_html + r'\3', content, flags=re.DOTALL)
+        pattern_top = r'(<div class="grid grid-cols-1 md:grid-cols-3 gap-3\.5" id="top-three-container">)(.*?)(</div>\s*</section>)'
+        if re.search(pattern_top, en_content, re.DOTALL):
+            en_content = re.sub(pattern_top, r'\1' + top_three_en_html + r'\3', en_content, flags=re.DOTALL)
 
-    # B. 替换 stream-news 内容
-    pattern_news = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-news">)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
-    if re.search(pattern_news, content, re.DOTALL):
-        content = re.sub(pattern_news, r'\1' + news_cards_html + r'\3', content, flags=re.DOTALL)
+        pattern_news = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-news">)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
+        if re.search(pattern_news, en_content, re.DOTALL):
+            en_content = re.sub(pattern_news, r'\1' + news_cards_en_html + r'\3', en_content, flags=re.DOTALL)
 
-    # C. 替换或注入静态 Hub 导航
-    if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in content:
-        content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
-                         hub_section_html.strip(), content, flags=re.DOTALL)
-    else:
-        # 插入在 </main> 之前
-        content = content.replace("</main>", f"{hub_section_html}\n</main>")
+        if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in en_content:
+            en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
+                                hub_en_html.strip(), en_content, flags=re.DOTALL)
+        else:
+            en_content = en_content.replace("</main>", f"{hub_en_html}\n</main>")
 
-    # D. 清除原先有作假嫌疑的 sr-only 隐藏块
-    content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
-                     '', content, flags=re.DOTALL)
+        en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
+                            '', en_content, flags=re.DOTALL)
 
-    with open(INDEX_FILE, "w", encoding="utf-8") as f:
-        f.write(content)
+        with open(INDEX_FILE, "w", encoding="utf-8") as f:
+            f.write(en_content)
 
-    print("🏠 [首页预渲染引擎] index.html 已成功写入真实可见 Top 3 头条、12 条核心快讯及历史专栏导航！")
+        print("🏠 [首页预渲染引擎] index.html (English) 已成功写入纯正英文 Top 3 头条与 12 条核心快讯！")
+
+    # ==========================
+    # B. 中文精翻版 (public/zh/index.html)
+    # ==========================
+    if os.path.exists(ZH_INDEX_FILE):
+        with open(ZH_INDEX_FILE, "r", encoding="utf-8") as f:
+            zh_content = f.read()
+
+        # 1. Top 3 Chinese
+        top_three_zh_html = ""
+        for idx, item in enumerate(top_three[:3]):
+            badge = safe_text(item.get("badge_zh") or item.get("badge") or "⚡ 重磅头条", 30)
+            title_zh = safe_text(item.get("title_zh") or item.get("title", ""), 120)
+            sum_zh = safe_text(item.get("summary_zh") or item.get("title_zh") or "", 250)
+            source = safe_text(item.get("source", ""), 40)
+            url = item.get("url", "#")
+            top_three_zh_html += f"""
+          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] gap-2">
+                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">{badge}</span>
+                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">今日精选</span>
+              </div>
+              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                <a href="{url}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">{title_zh}</a>
+              </h3>
+              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+                {sum_zh}
+              </p>
+            </div>
+            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
+              <span>信源: {source}</span>
+              <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">阅读原文 ↗</a>
+            </div>
+          </article>"""
+
+        # 2. News Stream Chinese
+        news_cards_zh_html = ""
+        for it in news_items:
+            t_zh = safe_text(it.get("title_zh") or it.get("title", ""), 120)
+            s_zh = safe_text(it.get("summary_zh") or it.get("title_zh") or "", 250)
+            src = safe_text(it.get("source", ""), 40)
+            u = it.get("url", "#")
+            img = it.get("image_url", "")
+            img_tag = ""
+            if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
+                img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_zh}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+
+            news_cards_zh_html += f"""
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                {img_tag}
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 突发快讯</span>
+                      <span>信源: {src}</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_zh}</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      {s_zh}
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">阅读详情 ↗</a>
+                  </div>
+                </div>
+              </article>"""
+
+        # 3. Hub Section Chinese
+        daily_zh_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} 日报</a>' for d in reversed(recent_dates)])
+        articles_zh_links = ""
+        for art in articles_meta[:6]:
+            articles_zh_links += f"""
+        <a href="{art['rel_url']}" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · {art['date']}</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">{safe_text(art['title'], 60)}</div>
+          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 ({art['chars']} 字) →</div>
+        </a>"""
+
+        hub_zh_html = f"""
+    <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
+    <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
+      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+            <span>📅</span>
+            <span>往期 AI 日报精选索引</span>
+          </h2>
+          <span class="text-[11px] text-slate-500">每日高频更新 · 权威信源交叉验证</span>
+        </div>
+        <div class="flex flex-wrap gap-2">
+          {daily_zh_links}
+        </div>
+      </div>
+
+      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
+            <span>📚</span>
+            <span>AI 独家深度专栏与前沿智库</span>
+          </h2>
+          <span class="text-[11px] text-indigo-500 font-semibold">前沿深度剖析与实测基准报告</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {articles_zh_links}
+        </div>
+      </div>
+    </section>
+    <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
+    """
+
+        if re.search(pattern_top, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_top, r'\1' + top_three_zh_html + r'\3', zh_content, flags=re.DOTALL)
+
+        if re.search(pattern_news, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_news, r'\1' + news_cards_zh_html + r'\3', zh_content, flags=re.DOTALL)
+
+        if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in zh_content:
+            zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
+                                hub_zh_html.strip(), zh_content, flags=re.DOTALL)
+        else:
+            zh_content = zh_content.replace("</main>", f"{hub_zh_html}\n</main>")
+
+        zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
+                            '', zh_content, flags=re.DOTALL)
+
+        with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
+            f.write(zh_content)
+
+        print("🏠 [首页预渲染引擎] zh/index.html (Chinese) 已成功写入精致中文 Top 3 头条与 12 条核心快讯！")
 
 
 # ==============================================================================
@@ -795,22 +952,33 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 # ==============================================================================
 def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Dict[str, Any]]):
     """
-    汇聚所有公开页面：首页、6个条款页、15个日报页、11+篇深度文章页，
+    汇聚所有公开页面：英文主页、中文专版、核心制度页、日报页、深度文章页，
     生成收录 35+ 个高质量页面的权威 sitemap.xml！
     """
     now_date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     entries = []
 
-    # 1. 核心制度页
+    # 1. 核心制度页与双版本主页
     entries.append(f"""  <url>
     <loc>https://ainewsradar.xyz/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/?lang=zh"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/?lang=zh"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
     <lastmod>{now_date}</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
+  </url>""")
+
+    entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.95</priority>
   </url>""")
 
     trust_pages = ["about", "editorial-policy", "contact", "privacy", "terms"]

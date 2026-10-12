@@ -1,0 +1,23 @@
+{
+  "name": "ai-news",
+  "version": "1.0.0",
+  "description": "零成本（$0/月）全自动 AI 资讯情报站，支持多源抓取、Google Gemini AI 智能翻译与提炼一句话看点、深色极客风四分栏实时看板，并一键部署到 Google Firebase Hosting。",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "tailwindcss -i src/input.css -o public/css/style.min.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AInextday-ctrl/ai-news-radar.git"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AInextday-ctrl/ai-news-radar/issues"
+  },
+  "homepage": "https://github.com/AInextday-ctrl/ai-news-radar#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

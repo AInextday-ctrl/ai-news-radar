@@ -6,6 +6,18 @@
     "trailingSlash": false,
     "rewrites": [
       {
+        "source": "/zh",
+        "destination": "/zh/index.html"
+      },
+      {
+        "source": "/zh/",
+        "destination": "/zh/index.html"
+      },
+      {
+        "source": "/zh/**",
+        "destination": "/zh/index.html"
+      },
+      {
         "source": "/wechat",
         "destination": "/wechat.html"
       },
@@ -69,19 +81,20 @@
     ],
     "headers": [
       {
+        "source": "**/*.@(css|js|mjs|svg|png|jpg|jpeg|webp|gif|ico|woff|woff2|ttf)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
         "source": "data/latest_news.json",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate, max-age=0"
-          },
-          {
-            "key": "Pragma",
-            "value": "no-cache"
-          },
-          {
-            "key": "Expires",
-            "value": "0"
+            "value": "public, max-age=60, s-maxage=120, stale-while-revalidate=300"
           }
         ]
       },
@@ -90,7 +103,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate, max-age=0"
+            "value": "public, max-age=0, must-revalidate"
           }
         ]
       },

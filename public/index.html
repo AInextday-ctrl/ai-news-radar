@@ -6,14 +6,14 @@
   <meta name="color-scheme" content="light dark">
   <title>AI News Radar - Real-Time Frontier AI Intel, Social Signals & Applied Tools | ainewsradar.xyz</title>
   <meta name="description" content="AI News Radar (ainewsradar.xyz) is a premier 24/7 AI intelligence aggregator delivering breaking frontier LLM news, verified social radar signals from leaders, actionable tutorials, and practical developer tools.">
-  <meta name="keywords" content="AI News Radar, ainewsradar, ainewsradar.xyz, AI Radar, Artificial Intelligence News, LLM Frontier, AI Agent, OpenAI, Anthropic, Claude, DeepSeek, Cursor, Machine Learning, AI Tools, AI Prompt Engineering, AI资讯雷达">
+  <meta name="keywords" content="AI News Radar, ainewsradar, ainewsradar.xyz, AI Radar, Artificial Intelligence News, LLM Frontier, AI Agent, OpenAI, Anthropic, Claude, DeepSeek, Cursor, Machine Learning, AI Tools, AI Prompt Engineering, AI Frontier Intel">
   <meta name="author" content="AI News Radar Team">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
-  <link rel="canonical" href="https://ainewsradar.xyz/">
+    <link rel="canonical" href="https://ainewsradar.xyz/">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/">
-  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/?lang=zh">
-  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/?lang=zh">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh">
   <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -82,14 +82,10 @@
   ]
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
-  <!-- Google AdSense Verification & Auto Ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130"
-     crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 国际化整站轻量级无感翻译引擎 (零 API 成本，自适应访客系统语言) -->
-  <script src="https://res.zvo.cn/translate/translate.js"></script>
+  <!-- Precompiled Production CSS -->
+  <link rel="stylesheet" href="/css/style.min.css">
   <script>
-    // 零闪烁 (Zero-FOUC) 主题初始化
+    // Zero-FOUC theme initialization
     (function() {
       const stored = localStorage.getItem('theme') || 'auto';
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -99,717 +95,10 @@
         document.documentElement.classList.remove('dark');
       }
     })();
-
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: '#6366f1',
-          }
-        }
-      }
-    }
   </script>
-  <style>
-    /* 全局平滑滚动与自然过渡 */
-    html {
-      scroll-behavior: smooth;
-    }
-    body {
-      transition: background-color 0.25s ease, color 0.25s ease;
-    }
-    
-    /* 深浅主题滚动条适配 */
-    html.dark ::-webkit-scrollbar-track { background: #060913; }
-    html.dark ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
-    html.dark ::-webkit-scrollbar-thumb:hover { background: #334155; }
-    
-    html:not(.dark) ::-webkit-scrollbar-track { background: #f1f5f9; }
-    html:not(.dark) ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    html:not(.dark) ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    ::-webkit-scrollbar { width: 8px; height: 8px; }
-
-    /* 深色模式磨砂玻璃质感 */
-    html.dark .glass-panel {
-      background: rgba(13, 19, 34, 0.82) !important;
-      backdrop-filter: blur(14px) !important;
-      -webkit-backdrop-filter: blur(14px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
-    }
-    html.dark .glass-card {
-      background: rgba(13, 19, 34, 0.84) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    html.dark .glass-card:hover {
-      border-color: rgba(99, 102, 241, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.6), 0 0 20px -5px rgba(99, 102, 241, 0.2);
-    }
-
-    /* 浅色模式纯净微晶质感与自适应雷达通透度 */
-    html:not(.dark) .glass-panel {
-      background: rgba(255, 255, 255, 0.88) !important;
-      backdrop-filter: blur(14px) !important;
-      -webkit-backdrop-filter: blur(14px) !important;
-      border: 1px solid rgba(226, 232, 240, 0.9) !important;
-      box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05) !important;
-    }
-    html:not(.dark) .glass-card {
-      background: rgba(255, 255, 255, 0.88) !important;
-      backdrop-filter: blur(10px) !important;
-      -webkit-backdrop-filter: blur(10px) !important;
-      border: 1px solid rgba(226, 232, 240, 0.9) !important;
-      color: #0f172a !important;
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02) !important;
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    html:not(.dark) .glass-card:hover {
-      border-color: #6366f1 !important;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.15), 0 4px 10px -2px rgba(0, 0, 0, 0.04) !important;
-    }
-    /* 浅色模式纯净微晶高对比系统 (Light Theme Contrast Mastery) */
-    html:not(.dark) body {
-      background-color: #f8fafc !important;
-      color: #0f172a !important;
-    }
-    html:not(.dark) header,
-    html:not(.dark) nav {
-      background-color: rgba(255, 255, 255, 0.92) !important;
-      backdrop-filter: blur(14px) !important;
-      -webkit-backdrop-filter: blur(14px) !important;
-      border-color: #e2e8f0 !important;
-    }
-    html:not(.dark) .text-slate-100 { color: #0f172a !important; }
-    html:not(.dark) .text-slate-200 { color: #1e293b !important; }
-    html:not(.dark) .text-slate-300 { color: #334155 !important; }
-    html:not(.dark) .text-slate-400 { color: #64748b !important; }
-    html:not(.dark) .text-slate-500 { color: #64748b !important; }
-
-    /* 彻底重构浅色模式下的所有背景色，严禁出现深黑灰底色 */
-    html:not(.dark) .bg-slate-950,
-    html:not(.dark) .bg-slate-950\/40,
-    html:not(.dark) .bg-slate-950\/50,
-    html:not(.dark) .bg-slate-950\/60,
-    html:not(.dark) .bg-slate-950\/70,
-    html:not(.dark) .bg-slate-950\/80,
-    html:not(.dark) .bg-slate-950\/90,
-    html:not(.dark) .bg-slate-900,
-    html:not(.dark) .bg-slate-900\/40,
-    html:not(.dark) .bg-slate-900\/50,
-    html:not(.dark) .bg-slate-900\/60,
-    html:not(.dark) .bg-slate-900\/70,
-    html:not(.dark) .bg-slate-900\/80,
-    html:not(.dark) .bg-slate-900\/90,
-    html:not(.dark) .bg-slate-800,
-    html:not(.dark) .bg-slate-800\/40,
-    html:not(.dark) .bg-slate-800\/50,
-    html:not(.dark) .bg-slate-800\/60,
-    html:not(.dark) .bg-slate-800\/70,
-    html:not(.dark) .bg-slate-800\/80,
-    html:not(.dark) .bg-slate-800\/90 {
-      background-color: #f8fafc !important;
-      border-color: #e2e8f0 !important;
-    }
-
-    /* 浅色模式边框高对比统一 */
-    html:not(.dark) .border-slate-800,
-    html:not(.dark) .border-slate-800\/40,
-    html:not(.dark) .border-slate-800\/50,
-    html:not(.dark) .border-slate-800\/60,
-    html:not(.dark) .border-slate-800\/70,
-    html:not(.dark) .border-slate-800\/80,
-    html:not(.dark) .border-slate-800\/90,
-    html:not(.dark) .border-slate-700,
-    html:not(.dark) .border-slate-700\/80 {
-      border-color: #e2e8f0 !important;
-    }
-
-    /* 浅色模式领袖推特引言块 (彻底根除黑底黑字) */
-    html:not(.dark) .tweet-quote-box {
-      background-color: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #0f172a !important;
-    }
-
-    /* 浅色模式推特来源胶囊 */
-    html:not(.dark) .badge-x-pill {
-      background-color: #0f172a !important;
-      color: #ffffff !important;
-      border-color: #0f172a !important;
-    }
-
-    /* 浅色模式导航未激活按钮与过滤按钮 */
-    html:not(.dark) .tab-btn:not(.active) {
-      color: #475569 !important;
-      background-color: transparent !important;
-    }
-    html:not(.dark) .tab-btn:not(.active):hover {
-      color: #0f172a !important;
-      background-color: #f1f5f9 !important;
-    }
-    html:not(.dark) .celeb-filter-btn:not(.active),
-    html:not(.dark) .tool-filter-btn:not(.active),
-    html:not(.dark) .video-filter-btn:not(.active),
-    html:not(.dark) .prompt-filter-btn:not(.active) {
-      background-color: #ffffff !important;
-      color: #475569 !important;
-      border: 1px solid #cbd5e1 !important;
-    }
-    html:not(.dark) .celeb-filter-btn:not(.active):hover,
-    html:not(.dark) .tool-filter-btn:not(.active):hover,
-    html:not(.dark) .video-filter-btn:not(.active):hover,
-    html:not(.dark) .prompt-filter-btn:not(.active):hover {
-      background-color: #f1f5f9 !important;
-      color: #0f172a !important;
-      border-color: #94a3b8 !important;
-    }
-
-    /* 浅色模式导航未激活徽标计数 */
-    html:not(.dark) [id^="badge-count-"] {
-      background-color: #e2e8f0 !important;
-      color: #475569 !important;
-    }
-    html:not(.dark) .tab-btn.active [id^="badge-count-"] {
-      background-color: rgba(255, 255, 255, 0.25) !important;
-      color: #ffffff !important;
-    }
-
-    /* 浅色模式 Top 3 走马灯 */
-    html:not(.dark) #top-three-section {
-      background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #ffffff 100%) !important;
-      border: 1px solid #c7d2fe !important;
-      box-shadow: 0 4px 20px -4px rgba(99, 102, 241, 0.08) !important;
-    }
-    html:not(.dark) #top-three-container > div,
-    html:not(.dark) #top-three-container > a {
-      background-color: #ffffff !important;
-      border-color: #e0e7ff !important;
-      box-shadow: 0 2px 8px -2px rgba(99, 102, 241, 0.06) !important;
-    }
-
-    /* 浅色模式 Prompt 咒语卡代码块 */
-    html:not(.dark) [id^="pbox-"] {
-      background-color: #f8fafc !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #1e1b4b !important;
-    }
-
-    /* 浅色模式历史归档展开按钮 */
-    html:not(.dark) [id^="btn-archive-"] {
-      background-color: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
-      color: #475569 !important;
-    }
-    html:not(.dark) [id^="btn-archive-"]:hover {
-      background-color: #f8fafc !important;
-      color: #0f172a !important;
-      border-color: #cbd5e1 !important;
-    }
-
-    /* 浅色模式彩色微胶囊 */
-    html:not(.dark) .bg-indigo-950\/70 { background-color: #eef2ff !important; color: #4338ca !important; border-color: #c7d2fe !important; }
-    html:not(.dark) .bg-sky-950\/70 { background-color: #f0f9ff !important; color: #0369a1 !important; border-color: #bae6fd !important; }
-    html:not(.dark) .bg-emerald-950\/70, html:not(.dark) .bg-emerald-500\/10 { background-color: #ecfdf5 !important; color: #047857 !important; border-color: #a7f3d0 !important; }
-    html:not(.dark) .bg-purple-950\/80, html:not(.dark) .bg-purple-950\/70 { background-color: #faf5ff !important; color: #6b21a8 !important; border-color: #e9d5ff !important; }
-    html:not(.dark) .bg-amber-950\/70, html:not(.dark) .bg-amber-500\/10 { background-color: #fffbeb !important; color: #b45309 !important; border-color: #fde68a !important; }
-    html:not(.dark) .bg-rose-950\/70, html:not(.dark) .bg-rose-950\/60 { background-color: #fff1f2 !important; color: #be123c !important; border-color: #fecdd3 !important; }
-
-    /* 浅色模式搜索框 */
-    html:not(.dark) #search-input {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
-      color: #0f172a !important;
-    }
-    html:not(.dark) #search-input:focus {
-      border-color: #6366f1 !important;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
-    }
-
-    /* 浅色模式热门标签 */
-    html:not(.dark) #hot-tags-container button:not(.bg-indigo-600) {
-      background-color: #ffffff !important;
-      color: #475569 !important;
-      border-color: #e2e8f0 !important;
-    }
-    html:not(.dark) #hot-tags-container button:not(.bg-indigo-600):hover {
-      background-color: #f1f5f9 !important;
-      color: #0f172a !important;
-    }
-
-    /* 两侧摩天大楼广告翼深浅模式美学适配 */
-    html:not(.dark) .ad-skyscraper-card {
-      background: rgba(255, 255, 255, 0.88) !important;
-      border: 1px solid #e2e8f0 !important;
-      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
-    }
-    html.dark .ad-skyscraper-card {
-      background: rgba(13, 19, 34, 0.78) !important;
-      border: 1px solid rgba(51, 65, 85, 0.65) !important;
-      box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5) !important;
-    }
-    .ad-skyscraper-card:hover {
-      border-color: rgba(99, 102, 241, 0.45) !important;
-    }
-    ins.adsbygoogle iframe {
-      border-radius: 0.75rem !important;
-    }
-
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(156, 163, 175, 0.4);
-      border-radius: 9999px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-      background: rgba(156, 163, 175, 0.7);
-    }
-
-    /* ========================================== */
-    /* 领袖观点·社交 极客科技感双侧时间轴样式 */
-    /* ========================================== */
-    .cyber-timeline-wrapper {
-      position: relative;
-    }
-    .cyber-timeline-axis {
-      background: linear-gradient(180deg, #38bdf8 0%, #6366f1 50%, #a855f7 100%);
-      box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
-    }
-    html:not(.dark) .cyber-timeline-axis {
-      background: linear-gradient(180deg, #0284c7 0%, #4f46e5 50%, #7c3aed 100%);
-      box-shadow: 0 0 8px rgba(79, 70, 229, 0.25);
-    }
-    .cyber-timeline-node {
-      animation: pulseNode 3s infinite ease-in-out;
-      transition: all 0.3s ease;
-    }
-    @keyframes pulseNode {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.5), 0 0 12px rgba(99, 102, 241, 0.4);
-      }
-      50% {
-        box-shadow: 0 0 0 8px rgba(56, 189, 248, 0), 0 0 18px rgba(99, 102, 241, 0.7);
-      }
-    }
-    .cyber-timeline-card {
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      position: relative;
-    }
-    .cyber-timeline-card:hover {
-      transform: translateY(-3px);
-    }
-    @keyframes timelineItemEntry {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .timeline-item-anim {
-      animation: timelineItemEntry 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-
-    /* ========================================================= */
-    /* 🌐 全站科技动态雷达扫描背景系统 (Global Radar Scan HUD - 60/120 FPS GPU Engine) */
-    /* ========================================================= */
-    .global-radar-hud {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      contain: strict;
-    }
-
-    /* 全局背景微坐标网格 */
-    .global-radar-grid {
-      position: absolute;
-      inset: 0;
-      background-size: 56px 56px;
-      background-image: 
-        linear-gradient(to right, rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-    }
-    html:not(.dark) .global-radar-grid {
-      background-image: 
-        linear-gradient(to right, rgba(14, 165, 233, 0.07) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(14, 165, 233, 0.07) 1px, transparent 1px);
-    }
-
-    /* 雷达中心锚点 (稍微向上偏，使波束自然覆盖首屏和主要阅读区) */
-    .global-radar-center {
-      position: absolute;
-      top: 40%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 0;
-      height: 0;
-      pointer-events: none;
-    }
-
-    /* 雷达中心信标指示器 (Central HUD Beacon) */
-    .global-radar-core {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 16px #38bdf8, 0 0 32px #0284c7;
-      z-index: 3;
-    }
-    .global-radar-core::after {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      border: 1px solid rgba(56, 189, 248, 0.6);
-      animation: coreRingPulse 2s ease-out infinite;
-    }
-    html:not(.dark) .global-radar-core {
-      background: #0284c7;
-      box-shadow: 0 0 14px rgba(14, 165, 233, 0.9);
-    }
-    html:not(.dark) .global-radar-core::after {
-      border-color: rgba(14, 165, 233, 0.7);
-    }
-    @keyframes coreRingPulse {
-      0% { transform: scale(0.6); opacity: 1; }
-      100% { transform: scale(2.2); opacity: 0; }
-    }
-
-    /* 全局同心测距环 */
-    .global-radar-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px dashed rgba(56, 189, 248, 0.18);
-      pointer-events: none;
-      box-sizing: border-box;
-    }
-    html:not(.dark) .global-radar-ring {
-      border-color: rgba(14, 165, 233, 0.22);
-    }
-
-    .gr-ring-1 { width: 360px; height: 360px; border-style: solid; border-color: rgba(56, 189, 248, 0.28); }
-    .gr-ring-2 { width: 720px; height: 720px; }
-    .gr-ring-3 { width: 1160px; height: 1160px; border-style: solid; border-color: rgba(56, 189, 248, 0.22); }
-    .gr-ring-4 { width: 1680px; height: 1680px; }
-    .gr-ring-5 { width: 2280px; height: 2280px; border-style: solid; border-color: rgba(56, 189, 248, 0.16); }
-    .gr-ring-6 { width: 2980px; height: 2980px; }
-
-    html:not(.dark) .gr-ring-1 { border-color: rgba(14, 165, 233, 0.35); }
-    html:not(.dark) .gr-ring-3 { border-color: rgba(14, 165, 233, 0.28); }
-    html:not(.dark) .gr-ring-5 { border-color: rgba(14, 165, 233, 0.18); }
-
-    /* 全局雷达十字交叉轴 */
-    .global-radar-axis-x {
-      position: absolute;
-      top: 50%;
-      left: -2000px;
-      right: -2000px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
-    }
-    .global-radar-axis-y {
-      position: absolute;
-      left: 50%;
-      top: -2000px;
-      bottom: -2000px;
-      width: 1px;
-      background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
-    }
-    html:not(.dark) .global-radar-axis-x {
-      background: linear-gradient(90deg, transparent 0%, rgba(14, 165, 233, 0.32) 50%, transparent 100%);
-    }
-    html:not(.dark) .global-radar-axis-y {
-      background: linear-gradient(180deg, transparent 0%, rgba(14, 165, 233, 0.32) 50%, transparent 100%);
-    }
-
-    /* 45° 辅助方位角对角线 */
-    .global-radar-diagonal-1, .global-radar-diagonal-2 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 3400px;
-      height: 1px;
-      margin-left: -1700px;
-      background: linear-gradient(90deg, transparent 15%, rgba(56, 189, 248, 0.12) 50%, transparent 85%);
-    }
-    .global-radar-diagonal-1 { transform: rotate(45deg); }
-    .global-radar-diagonal-2 { transform: rotate(-45deg); }
-    html:not(.dark) .global-radar-diagonal-1, 
-    html:not(.dark) .global-radar-diagonal-2 {
-      background: linear-gradient(90deg, transparent 15%, rgba(14, 165, 233, 0.14) 50%, transparent 85%);
-    }
-
-    /* 方位刻度角标签 (Azimuth Marks) */
-    .gr-azimuth {
-      position: absolute;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      color: rgba(56, 189, 248, 0.55);
-      user-select: none;
-      pointer-events: none;
-    }
-    html:not(.dark) .gr-azimuth {
-      color: rgba(14, 165, 233, 0.65);
-    }
-
-    /* 360° 全局旋转扫描扇面 (Full-Screen Radar Sweep Beam - GPU Hardware Accelerated) */
-    .global-radar-beam {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 2400px;
-      height: 2400px;
-      margin-top: -1200px;
-      margin-left: -1200px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(56, 189, 248, 0.38) 0deg,
-        rgba(56, 189, 248, 0.18) 16deg,
-        rgba(14, 165, 233, 0.04) 45deg,
-        transparent 70deg,
-        transparent 360deg
-      );
-      /* 开启强制 GPU 硬件合成层加速，消除掉帧与重排 */
-      will-change: transform;
-      transform-origin: 50% 50%;
-      animation: globalRadarSweep 12s linear infinite;
-      pointer-events: none;
-      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.6) 70%, transparent 92%);
-      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0.6) 70%, transparent 92%);
-    }
-    /* 高亮激光先导扫描线 (Leading Scan Ray - 划破天际的真实雷达刀锋) */
-    .global-radar-beam::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 50%;
-      height: 2px;
-      transform: translateY(-50%);
-      background: linear-gradient(90deg, #ffffff 0%, #38bdf8 35%, rgba(56, 189, 248, 0.7) 75%, transparent 100%);
-      box-shadow: 0 0 10px #38bdf8, 0 0 20px rgba(14, 165, 233, 0.7);
-      pointer-events: none;
-    }
-    html:not(.dark) .global-radar-beam {
-      background: conic-gradient(
-        from 0deg,
-        rgba(14, 165, 233, 0.32) 0deg,
-        rgba(56, 189, 248, 0.14) 16deg,
-        rgba(14, 165, 233, 0.03) 45deg,
-        transparent 70deg,
-        transparent 360deg
-      );
-    }
-    html:not(.dark) .global-radar-beam::before {
-      background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 35%, rgba(14, 165, 233, 0.7) 75%, transparent 100%);
-      box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
-    }
-
-    @keyframes globalRadarSweep {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    /* 全局雷达双频中心声呐脉冲波 (100% GPU Transform Scale - 零重排零卡顿) */
-    .global-radar-pulse {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1400px;
-      height: 1400px;
-      margin-top: -700px;
-      margin-left: -700px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(56, 189, 248, 0.65);
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, rgba(56, 189, 248, 0.04) 40%, transparent 65%);
-      pointer-events: none;
-      will-change: transform, opacity;
-      transform-origin: 50% 50%;
-      animation: globalSonarGpuPulse 5s cubic-bezier(0.12, 0.7, 0.22, 1) infinite;
-    }
-    .global-radar-pulse-secondary {
-      animation-delay: 2.5s;
-    }
-    html:not(.dark) .global-radar-pulse {
-      border-color: rgba(14, 165, 233, 0.55);
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, rgba(14, 165, 233, 0.03) 40%, transparent 65%);
-    }
-
-    @keyframes globalSonarGpuPulse {
-      0% {
-        transform: scale(0.04);
-        opacity: 0.95;
-      }
-      65% {
-        opacity: 0.35;
-      }
-      100% {
-        transform: scale(1.1);
-        opacity: 0;
-      }
-    }
-
-    /* 信号捕获标定信标 (AI Intercept Blips) */
-    .global-radar-blip {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      pointer-events: none;
-      animation: blipGlow 3s ease-in-out infinite alternate;
-      z-index: 1;
-      will-change: opacity, transform;
-    }
-    .global-radar-blip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 10px #38bdf8, 0 0 20px #0284c7;
-      position: relative;
-    }
-    .global-radar-blip-dot::after {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      border: 1px solid rgba(56, 189, 248, 0.8);
-      animation: coreRingPulse 2s ease-out infinite;
-    }
-    .global-radar-blip-label {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: rgba(56, 189, 248, 0.9);
-      background: rgba(15, 23, 42, 0.7);
-      padding: 1.5px 7px;
-      border-radius: 4px;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      backdrop-blur: 4px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    html:not(.dark) .global-radar-blip-dot {
-      background: #0284c7;
-      box-shadow: 0 0 8px #0284c7;
-    }
-    html:not(.dark) .global-radar-blip-dot::after {
-      border-color: rgba(14, 165, 233, 0.7);
-    }
-    html:not(.dark) .global-radar-blip-label {
-      color: #0369a1;
-      background: rgba(255, 255, 255, 0.8);
-      border-color: rgba(14, 165, 233, 0.4);
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
-    }
-
-    @keyframes blipGlow {
-      0% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.95); }
-      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-    }
-
-    /* 局部时间线卡片雷达样式 (保留兼容) */
-    .radar-scanner-container {
-      position: relative;
-      overflow: hidden;
-      border-radius: 1.5rem;
-    }
-    .radar-scan-canvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-    .radar-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      border: 1px dashed rgba(56, 189, 248, 0.22);
-      pointer-events: none;
-    }
-    html:not(.dark) .radar-ring {
-      border: 1px dashed rgba(14, 165, 233, 0.18);
-    }
-    .radar-ring-1 { width: 320px; height: 320px; border-style: solid; opacity: 0.6; }
-    .radar-ring-2 { width: 620px; height: 620px; }
-    .radar-ring-3 { width: 920px; height: 920px; }
-    .radar-ring-4 { width: 1240px; height: 1240px; border-style: solid; opacity: 0.45; }
-    .radar-crosshair-x {
-      position: absolute;
-      left: 0; right: 0; top: 50%; height: 1px;
-      background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
-    }
-    .radar-crosshair-y {
-      position: absolute;
-      top: 0; bottom: 0; left: 50%; width: 1px;
-      background: linear-gradient(180deg, transparent 0%, rgba(56, 189, 248, 0.28) 50%, transparent 100%);
-    }
-    .radar-sweep-beam {
-      position: absolute;
-      top: 50%; left: 50%; width: 1400px; height: 1400px;
-      margin-top: -700px; margin-left: -700px; border-radius: 50%;
-      background: conic-gradient(from 0deg, rgba(56, 189, 248, 0.25) 0deg, rgba(14, 165, 233, 0.08) 35deg, transparent 65deg, transparent 360deg);
-      animation: globalRadarSweep 6s linear infinite; pointer-events: none;
-    }
-    html:not(.dark) .radar-sweep-beam {
-      background: conic-gradient(from 0deg, rgba(14, 165, 233, 0.18) 0deg, rgba(56, 189, 248, 0.06) 30deg, transparent 60deg, transparent 360deg);
-    }
-    .radar-sonar-pulse {
-      position: absolute;
-      top: 50%; left: 50%; transform: translate(-50%, -50%);
-      width: 40px; height: 40px; border-radius: 50%;
-      background: rgba(56, 189, 248, 0.35);
-      animation: sonarPulseExpand 3.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
-    }
-    @keyframes sonarPulseExpand {
-      0% { width: 30px; height: 30px; opacity: 0.85; }
-      100% { width: 850px; height: 850px; opacity: 0; }
-    }
-    html:not(.dark) .radar-sonar-pulse {
-      background: rgba(14, 165, 233, 0.22);
-    }
-  </style>
+  <!-- Google AdSense Verification & Auto Ads -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130"
+     crossorigin="anonymous"></script>
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
 
@@ -865,17 +154,17 @@
     </div>
   </div>
 
-  <!-- 🕷️ 搜索引擎友好语义区 -->
-  <section class="sr-only" aria-label="AI 资讯雷达核心介绍与索引">
-    <h2>AI 资讯雷达 - ainewsradar.xyz</h2>
-    <p>AI 资讯雷达是面向全球 AI 开发者、研究员与产业从业者的高频情报聚合雷达。每日实时追踪 OpenAI、Anthropic、DeepSeek、Google Gemini、Meta 等顶级大模型突发动态，汇聚顶级实验室与核心开发者的深度社交动态，甄选实战短视频教程与落地生产力工具。</p>
-    <nav aria-label="核心版块索引导航">
+  <!-- 🕷️ Search Engine Crawl Semantic Index -->
+  <section class="sr-only" aria-label="AI News Radar Overview and Section Index">
+    <h2>AI News Radar - ainewsradar.xyz</h2>
+    <p>AI News Radar is a high-frequency intelligence aggregator for global AI developers, researchers, and technology leaders. We provide real-time updates on frontier breakthroughs from OpenAI, Anthropic, DeepSeek, Google Gemini, and Meta, curated social insights from top labs and creators, practical video guides, and deployed productivity tools.</p>
+    <nav aria-label="Core Section Navigation">
       <ul>
-        <li><a href="#news">⚡ 突发·行业快讯：实时捕捉全网重大模型更新与商业突破。</a></li>
-        <li><a href="#celebrity">🐦 社交雷达 · 𝕏 前沿动态：聚合 OpenAI、Anthropic、DeepSeek、Google 等官方机构与先锋开发者的前沿发声。</a></li>
-        <li><a href="#tools">🛠️ 场景落地·实用神器：甄选全球前沿 AI 场景落地产品与生产力工具。</a></li>
-        <li><a href="#videos">🎬 实战视频·演示：精选 YouTube 深度讲解与 TikTok 9:16 爆款短视频实战。</a></li>
-        <li><a href="#prompts">💡 提示词库·咒语：收录 DeepSeek-R4 自适应长思维链、Claude 5.5 Artifacts、OpenAI GPT-6 / o3-pro 与通义 Wan 2.1 等前沿实战架构。</a></li>
+        <li><a href="#news">⚡ Breaking News: Capture major model releases and industry milestones in real time.</a></li>
+        <li><a href="#celebrity">🐦 Social Radar · 𝕏 Feed: Curated signals and discussions from pioneer labs and core developers.</a></li>
+        <li><a href="#tools">🛠️ Applied Tools: Discover cutting-edge AI products and practical developer tools.</a></li>
+        <li><a href="#videos">🎬 Hands-on Videos: Curated YouTube in-depth tutorials and high-impact short videos.</a></li>
+        <li><a href="#prompts">💡 Prompt Bank: Battle-tested prompts for DeepSeek-R4 reasoning, Claude 5.5 Artifacts, OpenAI GPT-6 / o3-pro, and Sora / Wan 2.1.</a></li>
       </ul>
     </nav>
   </section>
@@ -909,25 +198,26 @@
         
         <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
         <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
-          <button id="theme-btn-light" onclick="setTheme('light')" title="浅色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-light" onclick="setTheme('light')" title="Light Mode" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>☀️</span>
-            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-light">浅色</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-light">Light</span>
           </button>
-          <button id="theme-btn-dark" onclick="setTheme('dark')" title="深色模式" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-dark" onclick="setTheme('dark')" title="Dark Mode" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>🌙</span>
-            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">Dark</span>
           </button>
-          <button id="theme-btn-auto" onclick="setTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-auto" onclick="setTheme('auto')" title="Follow System" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>💻</span>
-            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
+            <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">Auto</span>
           </button>
         </div>
 
         <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
         <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
-          <select id="site-lang-select" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
-            <optgroup label="主流语言 / Popular">
+          <label for="site-lang-select" class="sr-only">Select website language</label>
+          <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
+            <optgroup label="Popular Languages">
               <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
               <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
               <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
@@ -939,7 +229,7 @@
               <option value="russian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇺 Русский</option>
               <option value="arabic" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇸🇦 العربية</option>
             </optgroup>
-            <optgroup label="欧洲语系 / European">
+            <optgroup label="European Languages">
               <option value="portuguese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇵🇹 Português</option>
               <option value="italian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇹 Italiano</option>
               <option value="dutch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇳🇱 Nederlands</option>
@@ -954,7 +244,7 @@
               <option value="romanian" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇷🇴 Română</option>
               <option value="greek" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇷 Ελληνικά</option>
             </optgroup>
-            <optgroup label="亚太与更多 / Asia-Pacific & More">
+            <optgroup label="Asia-Pacific & Other Languages">
               <option value="hindi" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇮🇳 हिन्दी</option>
               <option value="vietnamese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇻🇳 Tiếng Việt</option>
               <option value="thai" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇹🇭 ภาษาไทย</option>
@@ -968,7 +258,7 @@
 
           <!-- 💡 语言建议切换气泡指示框 (自动检测系统语言，数秒后自动淡出消失，不主动强制切换) -->
           <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-300 dark:border-indigo-700/80 shadow-2xl z-[9999] transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none select-none">
-            <!-- 箭头 -->
+            <!-- Arrow -->
             <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-300 dark:border-indigo-700/80 transform rotate-45"></div>
             
             <div class="relative flex items-start space-x-2.5">
@@ -977,22 +267,22 @@
               </div>
               <div class="flex-1 min-w-0 pr-4">
                 <div class="text-[12px] font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5" id="lang-suggest-title">
-                  <span>检测到系统语言为中文</span>
+                  <span>Language Preference</span>
                 </div>
                 <p class="text-[11px] text-slate-600 dark:text-slate-300 mt-1 leading-snug" id="lang-suggest-desc">
-                  本站默认以英文一手信源呈现。如需中文阅读，可在此切换（数秒后提示自动消失）。
+                  This site defaults to authentic English sources. You can also explore our refined Chinese edition or other languages.
                 </p>
                 <div class="mt-2.5 flex items-center space-x-2">
-                  <button type="button" id="lang-suggest-switch-btn" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
+                  <button type="button" id="lang-suggest-switch-btn" onclick="window.location.href='/zh'" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
                     <span>🇨🇳</span>
-                    <span id="lang-suggest-btn-text">切换为中文</span>
+                    <span id="lang-suggest-btn-text">中文精翻版 (/zh)</span>
                   </button>
                   <button type="button" id="lang-suggest-keep-btn" onclick="dismissLangSuggestion(true)" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
                     Keep English
                   </button>
                 </div>
               </div>
-              <button type="button" onclick="dismissLangSuggestion(true)" class="absolute -top-0.5 right-0 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs p-1 cursor-pointer" title="关闭提示">
+              <button type="button" onclick="dismissLangSuggestion(true)" class="absolute -top-0.5 right-0 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs p-1 cursor-pointer" title="Dismiss">
                 ✕
               </button>
             </div>
@@ -1005,13 +295,13 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
+          <span class="font-mono text-[11px]" id="refresh-indicator">Auto Refresh (<span id="timer">30</span>s)</span>
         </div>
 
         <!-- 手动刷新按钮 -->
         <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
           <span>🔄</span>
-          <span id="refresh-btn-text" class="font-medium">刷新</span>
+          <span id="refresh-btn-text" class="font-medium">Refresh</span>
         </button>
       </div>
     </div>
@@ -1064,7 +354,7 @@
 
       <!-- 右侧：全站搜索筛选器 (单行紧凑自适应，永不挤压中间 7 栏等比结构) -->
       <div class="relative shrink-0 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60 focus-within:w-48 sm:focus-within:w-56 md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
-        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
+        <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search breaking AI news, models, tools..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
         <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
         <span class="absolute right-2.5 top-2 sm:top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
       </div>
@@ -1078,7 +368,7 @@
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs">
       <div class="flex items-center space-x-1.5 text-slate-400 shrink-0 font-bold text-[11px]" id="hot-tags-label">
         <span class="text-amber-400">🔥</span>
-        <span id="hot-tags-text">热门标签:</span>
+        <span id="hot-tags-text">Hot Tags:</span>
       </div>
       <div class="flex items-center space-x-1.5 shrink-0" id="hot-tags-container">
         <!-- 由 JS 渲染双语标签 Pills -->
@@ -1092,13 +382,13 @@
         <div>
           <h2 class="text-sm sm:text-base font-bold text-slate-100 flex items-center space-x-2">
             <span>🔍</span>
-            <span id="search-results-heading">全站智能检索</span>
+            <span id="search-results-heading">Site-wide Intelligence Search</span>
           </h2>
-          <p class="text-xs text-indigo-300/90 mt-1" id="search-results-summary">正在全站情报库中检索...</p>
+          <p class="text-xs text-indigo-300/90 mt-1" id="search-results-summary">Searching intelligence across all categories...</p>
         </div>
         <button type="button" onclick="clearSearch()" class="self-start sm:self-auto px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-slate-200 hover:text-white border border-slate-700 transition-colors flex items-center space-x-1.5 shadow-sm">
           <span>✕</span>
-          <span id="btn-clear-search-text">清除搜索</span>
+          <span id="btn-clear-search-text">Clear Search</span>
         </button>
       </div>
 
@@ -1110,7 +400,7 @@
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-amber-500 dark:text-amber-400 flex items-center space-x-1.5">
               <span>⚡</span>
-              <span id="search-label-news">行业快讯</span>
+              <span id="search-label-news">Breaking News</span>
             </span>
             <span id="search-count-news" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-300 border border-amber-500/25">0</span>
           </div>
@@ -1122,7 +412,7 @@
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-sky-500 dark:text-sky-400 flex items-center space-x-1.5">
               <span>🐦</span>
-              <span id="search-label-celeb">社交雷达 · 𝕏 动态</span>
+              <span id="search-label-celeb">Social Radar · 𝕏 Feed</span>
             </span>
             <span id="search-count-celeb" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/25">0</span>
           </div>
@@ -1134,7 +424,7 @@
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1.5">
               <span>🛠️</span>
-              <span id="search-label-tools">场景落地神器</span>
+              <span id="search-label-tools">Applied Tools</span>
             </span>
             <span id="search-count-tools" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/25">0</span>
           </div>
@@ -1146,7 +436,7 @@
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-rose-500 dark:text-rose-400 flex items-center space-x-1.5">
               <span>🎬</span>
-              <span id="search-label-videos">实战视频</span>
+              <span id="search-label-videos">Hands-on Videos</span>
             </span>
             <span id="search-count-videos" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-rose-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/25">0</span>
           </div>
@@ -1158,7 +448,7 @@
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-purple-600 dark:text-purple-400 flex items-center space-x-1.5">
               <span>💡</span>
-              <span id="search-label-prompts">提示词库</span>
+              <span id="search-label-prompts">Prompt Bank</span>
             </span>
             <span id="search-count-prompts" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/25">0</span>
           </div>
@@ -1175,68 +465,74 @@
           <div class="flex items-center space-x-2">
             <span class="text-sm font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
               <span>🔥</span>
-              <span id="digest-title">今日 AI 风向标 (60秒必读 Top 3)</span>
+              <span id="digest-title">Today's AI Pulse (60s Read Top 3)</span>
             </span>
-            <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· 帮你在最短时间内抓住今日行业核心脉搏</span>
+            <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· Grasp the core pulse of frontier AI breakthroughs in 60 seconds</span>
           </div>
-          <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">当日实时更新</span>
+          <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">Updated Real-Time</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ 今日头条</span>
+                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Gemini Call for Me might tell your mom you’re running late</a>
+                <a href="https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">DeepSeek is close to raising $12B+ in a round that could reach ~$14.9B, with Tencent and CATL as the biggest contributor</a>
               </h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">双子座给我打电话可能会告诉你妈妈你迟到了</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Google may be expanding its &quot;Call for Me&quot; AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a &quot;Gemini Calling&quot; introductory screen in an APK teardown with 
+                DeepSeek is close to securing at least 80 billion yuan ($12 billion) in its latest round of funding, blowing past …
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: The Verge AI</span>
-              <a href="https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: Bloomberg</span>
+              <a href="https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article>
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ 突破进展</span>
+                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://www.theverge.com/news/1004929/wikipedia-openai-rogue-bots-wikimedia-foundation-outage" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Wikipedia operator says OpenAI’s ‘rogue’ bots may be linked to a May outage</a>
+                <a href="https://x.com/levelsio/status/2107463864375803997" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">@levelsio: There's entire guides and how-to videos for Airbnb hosts on how to remove guest reviews All you have to do is</a>
               </h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">维基百科运营商表示， OpenAI的“流氓”机器人可能与5月份的停电有关</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Following many recent disclosures about AI agents accessing third-party websites and services, the Wikimedia Foundation, which hosts Wikipedia, says that it &quot;can confirm that we have discovered some activity&quot; by &quot;rogue&quot; OpenAI age
+                There's entire guides and how-to videos for Airbnb hosts on how to remove guest reviews
+
+All you have to do is state it's either:
+- retaliation
+- extortion
+- irrelevant
+- private informaton
+- discrimination
+
+They even show you what is the one you sho
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: The Verge AI</span>
-              <a href="https://www.theverge.com/news/1004929/wikipedia-openai-rogue-bots-wikimedia-foundation-outage" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: @levelsio</span>
+              <a href="https://x.com/levelsio/status/2107463864375803997" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article>
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">🛠️ 爆款尝鲜</span>
+                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
               </div>
               <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://github.com/BrokkAi/mjolnir?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">[mjolnir] Manage Codex, Claude Code, Muse Code, Kimi Code, Grok Build, and</a>
+                <a href="https://github.com/ianalloway/solvent-agent?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">[solvent-agent] Offline-first demo of a self-funding analyst agent: earns via Str</a>
               </h3>
-              <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium line-clamp-1">Manage Codex, Claude Code, Muse Code, Kimi Code, Grok Build, and</p>
               <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                ⭐ 92 stars · Manage Codex, Claude Code, Muse Code, Kimi Code, Grok Build, and DeepSeek Harness with durable sessions, isolated environments, quotas, and remote control. A Rust terminal and web control plane for Agent Client Protocol (ACP) coding agen
+                ⭐ 106 stars · Offline-first demo of a self-funding analyst agent: earns via Stripe, fulfils with NVIDIA Nemotron, pays vendor bills within guardrails, never works at a loss.
               </p>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: AI 资讯雷达</span>
-              <a href="https://github.com/BrokkAi/mjolnir?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
+              <span>Source: AI News Radar</span>
+              <a href="https://github.com/ianalloway/solvent-agent?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
             </div>
           </article></div>
       </section>
@@ -1251,12 +547,12 @@
               <div class="flex items-center space-x-2.5">
                 <span class="w-3 h-3 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50"></span>
                 <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-news">
-                  <span>⚡ 突发·行业快讯</span>
+                  <span>⚡ Breaking AI News</span>
                 </h2>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20" id="news-sub-count">24h 实时</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-semibold border border-amber-500/20" id="news-sub-count">24h Live</span>
               </div>
               <button type="button" onclick="switchTab('news')" class="text-xs text-indigo-600 dark:text-indigo-400 hover:underline flex items-center space-x-1 font-medium cursor-pointer">
-                <span>全部快讯</span>
+                <span>All News</span>
                 <span>→</span>
               </button>
             </div>
@@ -1274,7 +570,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.bloomberg.com/news/articles/2026-10-06/deepseek-to-raise-at-least-12-billion-in-tencent-backed-funding" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: DeepSeek is close to raising $12B+ in a round that could reach ~$14.9B, with Tencent and CATL as the biggest co</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">消息来源：DeepSeek即将在本轮融资中融资120多亿美元，融资规模可能达到149亿美元，腾讯和宁德时代是最大的贡献者，该公司将于2027年初进行IPO</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       DeepSeek is close to securing at least 80 billion yuan ($12 billion) in its latest round of funding, blowing past …
                     </p>
@@ -1295,7 +590,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.bloomberg.com/news/articles/2026-10-06/seagate-is-said-to-battle-toshiba-for-tdk-s-hard-drive-head-unit" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: Seagate and Toshiba are bidding for TDK's HDD magnetic head business in a multibillion-dollar deal, as they com</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">消息来源：希捷和东芝正在以数十亿美元的价格竞购TDK的硬盘磁头业务，因为它们在争夺人工智能数据中心存储需求。</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Seagate Technology Holdings Plc and Toshiba Corp. are locked in a contest for TDK Corp.'s magnetic-heads business for hard-disk drives …
                     </p>
@@ -1316,7 +610,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.reuters.com/legal/transactional/dayone-data-centers-files-us-ipo-2026-10-05/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Singapore-based data center operator DayOne files for a US IPO, reporting its H1 revenue more than tripled YoY to $512M </a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">总部位于新加坡的数据中心运营商DayOne申请在美国上市，报告称其上半年收入同比增长两倍多，达到5.12亿美元，而净亏损扩大至7720万美元。</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Data center operator DayOne Data Centers filed for an initial public offering in the United States on Monday …
                     </p>
@@ -1337,7 +630,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.bloomberg.com/news/articles/2026-10-06/moonshot-said-to-eye-early-2027-ipo-after-value-hits-50-billion" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: Moonshot AI closes its final private funding round at a ~$50B valuation and is targeting a Hong Kong IPO in Q1 </a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">消息来源：Moonshot AI完成了最后一轮私募融资，估值约为500亿美元，并计划于2027年第一季度在香港上市，筹资至多50亿美元</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Moonshot AI has closed the final round of private fundraising at a valuation of about $50 billion and is heading toward an initial public offering …
                     </p>
@@ -1358,7 +650,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://techcrunch.com/2026/10/05/etched-fields-funding-offers-at-40b-valuation-sources-say/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: AI inference-chip startup Etched is in early talks to raise funding at a $40B-$50B valuation, up from $21B in A</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">资料来源：人工智能推理芯片初创公司Etched正在进行早期谈判，以400亿至500亿美元的估值筹集资金，高于8月份的210亿美元</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Although it's only been a couple of months since Etched raised $700 million at a $21 billion valuation, the AI chip startup is already being plied with investment offers …
                     </p>
@@ -1379,7 +670,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.theverge.com/ai-artificial-intelligence/1005177/google-gemini-call-for-me-expansion-rumors" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Gemini Call for Me might tell your mom you&amp;#8217;re running late</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">双子座给我打电话可能会告诉你妈妈你迟到了</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Google may be expanding its &quot;Call for Me&quot; AI feature beyond business calls so you can use it to send messages to friends and family. Android Authority reports finding a &quot;Gemini Calling&quot; introductory screen in an APK teardown with 
                     </p>
@@ -1400,7 +690,6 @@
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://arstechnica.com/security/2026/10/vulnerability-in-agents-from-google-and-others-exposes-structural-flaw-in-mcp/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">MCP for agent-to-agent comms may be the riskiest protocol you've never heard of</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">客服代表与客服代表沟通的MCP可能是您从未听说过的风险最高的协议</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       The adoption of AI agents in millions of organizations is creating new opportunities for attackers to make them take malicious actions, such as exfiltrating database contents and sensitive business and personal information.
 
@@ -1423,7 +712,6 @@ In the past five months,
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.cnbc.com/2026/10/05/spacex-stock-climbs-highest-since-june-returning-musk-to-trillionaire.html" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">SpaceX stock closes up 7.6% after Morgan Stanley called SPCX &quot;cheap&quot;, reaching its highest level since mid-Jun</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">在摩根士丹利称SPCX “便宜”之后， SpaceX股价收盘上涨7.6% ，达到自6月中旬以来的最高水平，并使埃隆·马斯克（ Elon Musk ）重返万亿富翁地位（</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       SpaceX shares rose almost 8% on Monday, reaching their highest since mid-June, shortly after Elon Musk's company held its record initial public offering.
                     </p>
@@ -1444,7 +732,6 @@ In the past five months,
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.theverge.com/ai-artificial-intelligence/1005075/nolla-health-acne-ai-prescriptions" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">This startup is issuing AI-generated acne prescriptions</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">这家初创公司正在发布人工智能生成的痤疮处方</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       People in Utah can now use AI to get a prescription for acne treatment. On Monday, healthcare startup Nolla Health announced that users in the state can scan their faces using its app, allowing its AI system to analyze acne severity and autonomously 
                     </p>
@@ -1465,7 +752,6 @@ In the past five months,
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://techcrunch.com/2026/10/05/tiktok-rolls-out-an-ai-shopping-assistant-and-one-click-checkout/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">TikTok debuts Shopping Assistant, a conversational AI agent that helps users find and buy products, and Buy Direct for o</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">TikTok推出了购物助手，这是一款会话式人工智能代理，可以帮助用户查找和购买产品，并通过for You feed一键购买buy Direct。</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       TikTok announced Monday that it's launching an AI shopping assistant and a new in-app checkout feature that lets users buy directly from brands.
                     </p>
@@ -1486,7 +772,6 @@ In the past five months,
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.theverge.com/ai-artificial-intelligence/1004933/ai-math-openai-breakthrough-solution" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">All the drama around AI&amp;#8217;s takeover of mathematics</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">所有关于人工智能接管数学的戏剧性事件</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       This past year, OpenAI, Anthropic, and other labs have announced breakthroughs on numerous long-standing mathematical problems, in some cases pushing well beyond what researchers expected current systems to be capable of — including resolving one of 
                     </p>
@@ -1507,7 +792,6 @@ In the past five months,
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
                       <a href="https://www.semafor.com/article/10/05/2026/reflection-ai-unveils-an-open-source-answer-to-chinese-labs" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">NY-based Reflection unveils Beam, an open model it claims rivals GLM 5.2 on reasoning while using 3x-4x less compute and</a>
                     </h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium line-clamp-1 mt-0.5">总部位于纽约的Reflection推出了Beam ，这是一种开放式模型，它声称竞争对手GLM 5.2在推理方面使用了3倍至4倍的计算能力，并在代理任务上接近Qwen3.8-Max</p>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Reflection AI, the startup billing itself as America's answer to open-source Chinese AI, is releasing its first model, called Beam.
                     </p>
@@ -1522,7 +806,7 @@ In the past five months,
           <!-- 快讯专栏直达底栏 -->
           <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <button type="button" onclick="switchTab('news')" id="btn-view-all-news" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-news">查看全部行业快讯 →</span>
+              <span id="txt-view-all-news">View All Breaking News →</span>
             </button>
           </div>
         </section>
@@ -1534,12 +818,12 @@ In the past five months,
               <div class="flex items-center space-x-2.5">
                 <span class="w-3 h-3 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
                 <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-celebrity">
-                  <span>🐦 社交雷达 · 𝕏 动态</span>
+                  <span>🐦 Social Radar · 𝕏 Feed</span>
                 </h2>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20" id="celebrity-sub-count">24h 实时</span>
+                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20" id="celebrity-sub-count">24h Live</span>
               </div>
               <button type="button" onclick="switchTab('celebrity')" class="text-xs text-sky-600 dark:text-sky-400 hover:underline flex items-center space-x-1 font-medium cursor-pointer">
-                <span>全部动态</span>
+                <span>All Feed</span>
                 <span>→</span>
               </button>
             </div>
@@ -1553,7 +837,7 @@ In the past five months,
           <!-- 社交专栏直达底栏 -->
           <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <button type="button" onclick="switchTab('celebrity')" id="btn-view-all-celebrity" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-celebrity">查看全部社交雷达 →</span>
+              <span id="txt-view-all-celebrity">View All Social Pulse →</span>
             </button>
           </div>
         </section>
@@ -1565,12 +849,12 @@ In the past five months,
               <div class="flex items-center space-x-1.5 min-w-0">
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50 shrink-0"></span>
                 <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate whitespace-nowrap" id="section-title-arena">
-                  <span>🏆 LMSYS 天梯榜</span>
+                  <span>🏆 LMSYS Chatbot Arena</span>
                 </h3>
-                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20 shrink-0 whitespace-nowrap" id="arena-sub-tag">Top 25 盲测</span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20 shrink-0 whitespace-nowrap" id="arena-sub-tag">Top 25 Live</span>
               </div>
               <a href="https://lmarena.ai/" target="_blank" class="text-xs text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-0.5 font-medium shrink-0 whitespace-nowrap ml-1">
-                <span>对战台</span>
+                <span>Arena</span>
                 <span>↗</span>
               </a>
             </div>
@@ -1584,7 +868,7 @@ In the past five months,
           <!-- 天梯直达底栏 -->
           <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <a href="https://lmarena.ai/" target="_blank" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer text-center">
-              <span>LMSYS 对战平台 (lmarena.ai) ↗</span>
+              <span>LMSYS Leaderboard (lmarena.ai) ↗</span>
             </a>
           </div>
         </section>
@@ -1600,9 +884,9 @@ In the past five months,
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-tools">🛠️ 场景落地·实用神器</h3>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-tools">🛠️ Applied AI Tools</h3>
               </div>
-              <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer">全部神器 →</button>
+              <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer">All Tools →</button>
             </div>
             <div class="space-y-3" id="stream-tools">
               <!-- 动态注入 Top 3 落地工具卡片 -->
@@ -1610,7 +894,7 @@ In the past five months,
           </div>
           <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
             <button type="button" onclick="switchTab('tools')" id="btn-view-all-tools" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-tools">查看全部落地神器 →</span>
+              <span id="txt-view-all-tools">View All Applied Tools →</span>
             </button>
           </div>
         </section>
@@ -1621,9 +905,9 @@ In the past five months,
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/50"></span>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-videos">🎬 实战视频·精选演示</h3>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-videos">🎬 Hands-on Videos</h3>
               </div>
-              <button onclick="switchTab('videos')" id="link-all-videos" class="text-xs text-rose-600 dark:text-rose-400 hover:underline cursor-pointer">全部视频 →</button>
+              <button onclick="switchTab('videos')" id="link-all-videos" class="text-xs text-rose-600 dark:text-rose-400 hover:underline cursor-pointer">All Videos →</button>
             </div>
             <div class="space-y-3" id="stream-videos">
               <!-- 动态注入 Top 2 精选视频 -->
@@ -1631,7 +915,7 @@ In the past five months,
           </div>
           <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
             <button type="button" onclick="switchTab('videos')" id="btn-view-all-videos" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-rose-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-rose-600 dark:hover:text-rose-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-videos">查看全部精选视频 →</span>
+              <span id="txt-view-all-videos">View All Hands-on Videos →</span>
             </button>
           </div>
         </section>
@@ -1642,9 +926,9 @@ In the past five months,
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm shadow-purple-500/50"></span>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">💡 提示词库·高阶咒语</h3>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">💡 Prompt Bank</h3>
               </div>
-              <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-xs text-purple-600 dark:text-purple-400 hover:underline cursor-pointer">全部咒语 →</button>
+              <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-xs text-purple-600 dark:text-purple-400 hover:underline cursor-pointer">All Prompts →</button>
             </div>
             <div class="space-y-3 min-w-0 overflow-hidden" id="stream-prompts">
               <!-- 动态注入 Top 3 提示词卡片 -->
@@ -1652,7 +936,7 @@ In the past five months,
           </div>
           <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
             <button type="button" onclick="switchTab('prompts')" id="btn-view-all-prompts" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-prompts">查看全部实操咒语 →</span>
+              <span id="txt-view-all-prompts">View All Prompts →</span>
             </button>
           </div>
         </section>
@@ -1665,13 +949,13 @@ In the past five months,
           <div class="flex items-center space-x-2.5">
             <span class="w-3 h-3 rounded-full bg-purple-500 shadow-sm shadow-purple-500/50"></span>
             <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-arxiv">
-              <span>📄 ArXiv 每日突破论文</span>
+              <span>📄 ArXiv Daily Breakthrough Papers</span>
             </h2>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold border border-purple-500/20 font-mono" id="arxiv-sub-tag">极客前沿研读</span>
-            <span class="text-xs text-slate-400 hidden sm:inline">· 每日与 arXiv 实时同步前沿 SOTA 成果</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-purple-500/10 text-purple-600 dark:text-purple-400 font-semibold border border-purple-500/20 font-mono" id="arxiv-sub-tag">Geek Research Highlights</span>
+            <span class="text-xs text-slate-400 hidden sm:inline">· Real-time sync with latest SOTA arXiv papers</span>
           </div>
           <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" class="text-xs text-purple-600 dark:text-purple-400 hover:underline flex items-center space-x-1 font-medium">
-            <span>探索全部论文 (arXiv.org)</span>
+            <span>Explore All Papers (arXiv.org)</span>
             <span>↗</span>
           </a>
         </div>
@@ -1683,7 +967,7 @@ In the past five months,
         <!-- 学术突破直达底栏 -->
         <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
           <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-            <span>探索更多前沿突破论文 (arXiv.org) ↗</span>
+            <span>Explore Breakthrough Papers (arXiv.org) ↗</span>
           </a>
         </div>
       </div>
@@ -1699,12 +983,12 @@ In the past five months,
         <div>
           <div class="flex items-center space-x-2.5">
             <span class="w-3 h-3 rounded-full bg-indigo-500 shadow-sm shadow-indigo-500/50"></span>
-            <h2 class="font-black text-xl text-slate-900 dark:text-slate-100 tracking-tight" id="cat-view-title">专栏全景浏览</h2>
+            <h2 class="font-black text-xl text-slate-900 dark:text-slate-100 tracking-tight" id="cat-view-title">Category Panoramic View</h2>
           </div>
-          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 pl-5.5" id="cat-view-desc">查看该分类下的全部深度收录情报</p>
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 pl-5.5" id="cat-view-desc">Explore all curated intelligence and tools in this category</p>
         </div>
         <div id="cat-header-stat" class="flex items-center space-x-2 shrink-0">
-          <span class="px-3 py-1 rounded-xl text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">实时深度监测</span>
+          <span class="px-3 py-1 rounded-xl text-xs font-mono font-semibold bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">Live Monitored</span>
         </div>
       </div>
 
@@ -1715,66 +999,66 @@ In the past five months,
           <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台热帖) -->
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
-              <span id="txt-social-mode-leader">🐦 前沿发声</span>
+              <span id="txt-social-mode-leader">🐦 Frontier Feed</span>
               <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">0</span>
             </button>
             <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
-              <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
+              <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h Trending Buzz</span>
               <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">0</span>
             </button>
           </div>
 
           <!-- 子筛选 A：前沿社交专属 (全部动态 / 官方机构 / 大V与研发者) -->
           <div id="celebrity-subfilter" class="flex items-center gap-2 flex-wrap">
-            <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">全部动态</button>
-            <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 官方机构</button>
-            <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 大V与研发者</button>
+            <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">All Feed</button>
+            <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 Official Labs</button>
+            <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 Creators & Pioneers</button>
           </div>
 
           <!-- 子筛选 B：24h平台热帖专属 -->
           <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
-            <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 全部热帖</button>
-            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 极速飙升</button>
-            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">💡 极客硬核首发</button>
-            <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">𝕏 平台热榜</button>
-            <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🧵 Threads 讨论</button>
+            <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 All Viral</button>
+            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 Surging</button>
+            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">💡 Breakthroughs</button>
+            <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">𝕏 Trending</button>
+            <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🧵 Threads Buzz</button>
           </div>
         </div>
 
         <!-- 工具专用的场景快速筛选过滤器 -->
         <div id="tools-subfilter" class="hidden flex items-center gap-2 flex-wrap p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ 工具场景:</span>
-          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">全部工具</button>
-          <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 免部署在线玩</button>
-          <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 修图设计</button>
-          <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 编程提效</button>
-          <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI客户端</button>
-          <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent工作流</button>
+          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ Scenarios:</span>
+          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">All Tools</button>
+          <button onclick="filterToolScenario('web')" id="tool-filter-web" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 Cloud / Online</button>
+          <button onclick="filterToolScenario('design')" id="tool-filter-design" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 Design & Vision</button>
+          <button onclick="filterToolScenario('code')" id="tool-filter-code" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 Coding & Dev</button>
+          <button onclick="filterToolScenario('client')" id="tool-filter-client" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI Clients</button>
+          <button onclick="filterToolScenario('agent')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent Workflows</button>
         </div>
 
         <!-- 视频专属快速筛选器 -->
         <div id="videos-subfilter" class="hidden space-y-2 p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <div class="flex items-center gap-2 flex-wrap">
             <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shrink-0 shadow-sm whitespace-nowrap flex items-center space-x-1.5">
-              <span>🎬</span><span>全部精选</span>
+              <span>🎬</span><span>All Videos</span>
             </button>
             <button onclick="filterVideoPlatform('youtube-long')" id="video-plat-yt-long" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
-              <span>🖥️</span><span>YouTube 横屏长视频</span>
+              <span>🖥️</span><span>YouTube Long-Form</span>
             </button>
             <button onclick="filterVideoPlatform('youtube-shorts')" id="video-plat-yt-shorts" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
-              <span>📱</span><span>YouTube Shorts 短视频</span>
+              <span>📱</span><span>YouTube Shorts</span>
             </button>
             <button onclick="filterVideoPlatform('tiktok')" id="video-plat-tiktok" class="video-plat-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap flex items-center space-x-1.5">
-              <span>🎵</span><span>TikTok 爆款短视频</span>
+              <span>🎵</span><span>TikTok Viral</span>
             </button>
           </div>
           <div class="flex items-center gap-1.5 flex-wrap pt-1 border-t border-slate-100 dark:border-slate-800 text-xs">
-            <span class="text-xs text-slate-400 font-medium px-1">🎯 主题:</span>
-            <button onclick="filterVideoSub('all')" id="video-sub-all" class="video-sub-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white shrink-0">全部主题</button>
-            <button onclick="filterVideoSub('viral')" id="video-sub-viral" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔥 现象级爆款</button>
-            <button onclick="filterVideoSub('tutorial')" id="video-sub-tutorial" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎓 系统实操课</button>
-            <button onclick="filterVideoSub('insight')" id="video-sub-insight" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💡 独家深度经验</button>
-            <button onclick="filterVideoSub('tips')" id="video-sub-tips" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">⚡ 极客实操技巧</button>
+            <span class="text-xs text-slate-400 font-medium px-1">🎯 Topics:</span>
+            <button onclick="filterVideoSub('all')" id="video-sub-all" class="video-sub-btn active px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-white shrink-0">All Topics</button>
+            <button onclick="filterVideoSub('viral')" id="video-sub-viral" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🔥 Phenomenal Viral</button>
+            <button onclick="filterVideoSub('tutorial')" id="video-sub-tutorial" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">🎓 Step-by-Step Guides</button>
+            <button onclick="filterVideoSub('insight')" id="video-sub-insight" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">💡 In-Depth Insights</button>
+            <button onclick="filterVideoSub('tips')" id="video-sub-tips" class="video-sub-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 shrink-0">⚡ Pro Hacks</button>
           </div>
         </div>
 
@@ -1783,32 +1067,32 @@ In the past five months,
           <div class="flex items-center justify-between flex-wrap gap-2 pb-2 border-b border-slate-200 dark:border-slate-800/60">
             <div class="flex items-center gap-2 flex-wrap">
               <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1">
-                <span>⚡</span><span id="lbl-prompt-gen">模型版本:</span>
+                <span>⚡</span><span id="lbl-prompt-gen">Model Generation:</span>
               </span>
               <button onclick="switchPromptGeneration('sota')" id="prompt-gen-sota" class="prompt-gen-btn active px-3 py-1.5 rounded-lg text-xs sm:text-sm font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-sm flex items-center gap-1 shrink-0 whitespace-nowrap">
-                <span>⚡</span><span id="txt-prompt-gen-sota">当前最新 SOTA 旗舰 (版本优先)</span>
+                <span>⚡</span><span id="txt-prompt-gen-sota">Latest SOTA Flagships (Priority)</span>
               </button>
               <button onclick="switchPromptGeneration('legacy')" id="prompt-gen-legacy" class="prompt-gen-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 shrink-0 whitespace-nowrap">
-                <span>📦</span><span id="txt-prompt-gen-legacy">历史模型归档库 (Legacy Archive)</span>
+                <span>📦</span><span id="txt-prompt-gen-legacy">Legacy Archive</span>
               </button>
             </div>
             <div class="text-xs text-slate-400 dark:text-slate-500 font-mono hidden md:flex items-center gap-1">
-              <span>👑 自动按前沿大模型代际能力权重降序排列</span>
+              <span>👑 Ranked by Frontier Model Capability</span>
             </div>
           </div>
 
           <div class="flex items-center gap-1.5 flex-wrap pt-1">
             <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center gap-1 px-1">
-              <span>🎯</span><span id="lbl-prompt-scenario">场景:</span>
+              <span>🎯</span><span id="lbl-prompt-scenario">Scenario:</span>
             </span>
-            <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-3 py-1 rounded-lg text-xs sm:text-sm font-bold bg-purple-600 text-white shrink-0 shadow-sm whitespace-nowrap">全部场景 / All</button>
-            <button onclick="filterPromptCategory('code')" id="prompt-cat-code" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">💻 编程开发</button>
-            <button onclick="filterPromptCategory('novel')" id="prompt-cat-novel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✍️ 短剧小说</button>
-            <button onclick="filterPromptCategory('analysis')" id="prompt-cat-analysis" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📊 数据分析</button>
-            <button onclick="filterPromptCategory('report')" id="prompt-cat-report" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📑 商业报告</button>
-            <button onclick="filterPromptCategory('travel')" id="prompt-cat-travel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✈️ 生活旅行</button>
-            <button onclick="filterPromptCategory('image')" id="prompt-cat-image" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎨 灵感生图</button>
-            <button onclick="filterPromptCategory('video')" id="prompt-cat-video" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎬 动态视效</button>
+            <button onclick="filterPromptCategory('all')" id="prompt-cat-all" class="prompt-cat-btn active px-3 py-1 rounded-lg text-xs sm:text-sm font-bold bg-purple-600 text-white shrink-0 shadow-sm whitespace-nowrap">All Scenarios</button>
+            <button onclick="filterPromptCategory('code')" id="prompt-cat-code" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">💻 Coding & Dev</button>
+            <button onclick="filterPromptCategory('novel')" id="prompt-cat-novel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✍️ Creative Writing</button>
+            <button onclick="filterPromptCategory('analysis')" id="prompt-cat-analysis" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📊 Data Analysis</button>
+            <button onclick="filterPromptCategory('report')" id="prompt-cat-report" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">📑 Business Reports</button>
+            <button onclick="filterPromptCategory('travel')" id="prompt-cat-travel" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">✈️ Life & Travel</button>
+            <button onclick="filterPromptCategory('image')" id="prompt-cat-image" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎨 Visual Inspiration</button>
+            <button onclick="filterPromptCategory('video')" id="prompt-cat-video" class="prompt-cat-btn px-3 py-1 rounded-lg text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 shrink-0 whitespace-nowrap">🎬 Video & VFX</button>
           </div>
         </div>
       </div>
@@ -1819,11 +1103,11 @@ In the past five months,
         <div class="flex items-center justify-between mb-2 px-1">
           <div class="flex items-center space-x-2">
             <span class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center space-x-1.5" id="creators-rail-title">
-              <span>🌟 顶流 AI 创作者专栏</span>
-              <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">· 一键直达顶尖 AI 极客发布</span>
+              <span>🌟 Frontier AI Creators</span>
+              <span class="text-[10px] font-normal text-slate-500 dark:text-slate-400">· Direct feed from pioneer AI researchers and engineers</span>
             </span>
           </div>
-          <span class="text-[10px] text-indigo-500 font-mono font-bold" id="creators-active-hint">全部创作者</span>
+          <span class="text-[10px] text-indigo-500 font-mono font-bold" id="creators-active-hint">All Creators</span>
         </div>
         <div id="creators-rail" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1">
           <!-- 由 JS 渲染创作者头像与名称 -->
@@ -1840,60 +1124,58 @@ In the past five months,
   
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
     <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
-      <!-- 往期日报索引 -->
       <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📅</span>
-            <span>Historical AI Daily Intelligence Archive (往期简报)</span>
+            <span>Historical AI Daily Intelligence Archive</span>
           </h2>
-          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources · 每日更新附出处</span>
+          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources</span>
         </div>
         <div class="flex flex-wrap gap-2">
-          <a href="/daily/2026-10-12" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-12 日报</a><a href="/daily/2026-10-11" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-11 日报</a><a href="/daily/2026-10-10" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-10 日报</a><a href="/daily/2026-10-09" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-09 日报</a><a href="/daily/2026-10-08" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-08 日报</a><a href="/daily/2026-10-07" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-07 日报</a><a href="/daily/2026-10-06" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-06 日报</a><a href="/daily/2026-10-05" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-05 日报</a><a href="/daily/2026-10-04" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-04 日报</a><a href="/daily/2026-10-03" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-03 日报</a><a href="/daily/2026-10-02" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-02 日报</a><a href="/daily/2026-10-01" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-01 日报</a>
+          <a href="/daily/2026-10-07" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-07 Briefing</a><a href="/daily/2026-10-06" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-06 Briefing</a><a href="/daily/2026-10-05" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-05 Briefing</a><a href="/daily/2026-10-04" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-04 Briefing</a><a href="/daily/2026-10-03" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-03 Briefing</a><a href="/daily/2026-10-02" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-02 Briefing</a><a href="/daily/2026-10-01" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-10-01 Briefing</a><a href="/daily/2026-09-30" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-09-30 Briefing</a><a href="/daily/2026-09-29" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-09-29 Briefing</a><a href="/daily/2026-09-28" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-09-28 Briefing</a><a href="/daily/2026-09-27" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-09-27 Briefing</a><a href="/daily/2026-09-26" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 2026-09-26 Briefing</a>
         </div>
       </div>
 
-      <!-- 独家深度专栏推荐 -->
       <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
         <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
           <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
             <span>📚</span>
-            <span>AI Deep-Dive Intelligence & Analysis (深度专栏智库)</span>
+            <span>AI Deep-Dive Intelligence & Analysis</span>
           </h2>
           <span class="text-[11px] text-indigo-500 font-semibold">In-Depth Analysis & Empirical Benchmarks</span>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           
-        <a href="/articles/2026-10-07-article_1_fa21cdd8" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-10-07</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Claude Code 还能这么玩？开发者开挂：套壳第三方代理直接狂省 93% 算力费</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (2237 字) →</div>
-        </a>
         <a href="/articles/2026-09-29-article_1_1b1d1a62" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-09-29</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">国会听证会炸锅！美财长贝森特重锤发难：AI 实验室休想获得责任豁免金牌</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (2103 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-29</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Congressional Storm: US Treasury Secretary Bessent Rejects AI Lab Liability Immu</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (2103 chars) →</div>
         </a>
         <a href="/articles/2026-09-28-article_1_d2cf8a46" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-09-28</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">深度拆解：围绕“英伟达对流氓特工的回应是一个开源的人工智能安”，一线技术人必须看清的核心变化</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (1651 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-28</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Deep-Dive: Nvidia Releases Open-Source AI Agent Security Framework to Counter Ro</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (1651 chars) →</div>
         </a>
         <a href="/articles/2026-09-24-article_1_32761389" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-09-24</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">深度拆解：围绕“OpenAI GPT-6 Sol (Max) 登顶代码竞技场，重塑大模型帕累托边界”，一线技术人必须看清</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (2198 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-24</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Deep-Dive: OpenAI GPT-6 Sol (Max) Crowns Code Arena, Reshaping Pareto Frontiers</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (2198 chars) →</div>
         </a>
         <a href="/articles/2026-09-22-article_1_86787808" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-09-22</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">深度拆解：围绕“OpenAI 推出 GPT-6 Sol 与 Luna 双子星大模型”，一线技术人必须看清的核心变化</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (2085 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-22</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Deep-Dive: OpenAI Unveils Dual Frontier Flagships GPT-6 Sol and Luna</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (2085 chars) →</div>
         </a>
         <a href="/articles/2026-09-18-article_1_43cb11cb" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · 2026-09-18</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">深度拆解：围绕“对 OpenAI 研究员 Noam Brown：多智能体协同与范式演进”，一线技术人必须看清的核心变化</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 (2198 字) →</div>
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-18</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">Deep-Dive: Inside Noam Brown's Paradigm on Multi-Agent Reasoning and Collaborati</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (2198 chars) →</div>
+        </a>
+        <a href="/articles/2026-09-17-article_3_yt_deeps" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
+          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · 2026-09-17</div>
+          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">DeepSeek Open-Source Reasoning Leap Rivaling GPT-5.5 at 1/15th Cost Disrupts Glo</div>
+          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis (2906 chars) →</div>
         </a>
         </div>
       </div>
@@ -1902,29 +1184,14 @@ In the past five months,
     
 </main>
 
-  <!-- 页脚 -->
-  <footer class="border-t border-slate-200 dark:border-slate-800/80 bg-slate-100 dark:bg-[#060913] py-6 px-4 sm:px-8 text-center text-xs text-slate-500 space-y-2.5">
-    <div class="flex items-center justify-center space-x-3 flex-wrap gap-y-1">
-      <span id="footer-brand">🤖 AI 资讯雷达</span>
-      <span>·</span>
-      <button onclick="openLegalModal('privacy')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-privacy">隐私政策</button>
-      <span>·</span>
-      <button onclick="openLegalModal('terms')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-terms">服务条款</button>
-      <span>·</span>
-      <button onclick="openLegalModal('about')" class="hover:text-indigo-500 dark:hover:text-indigo-400 underline cursor-pointer" id="footer-about">关于本站</button>
-    </div>
-    <p id="footer-desc">高频追踪全球顶级大模型突发、社交前沿动态、落地应用神器与 YouTube 实战实操演示。</p>
-    <p class="text-[10px] text-slate-400 dark:text-slate-600">© 2026 AI News Radar (ainewsradar.xyz) · All Rights Reserved</p>
-  </footer>
-
   <!-- 法律合规与隐私弹窗 Modal (满足 Google AdSense 强制政策要求) -->
   <div id="legal-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[85vh]">
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <button id="legal-tab-privacy" onclick="switchLegalTab('privacy')" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition-colors">隐私政策</button>
-          <button id="legal-tab-terms" onclick="switchLegalTab('terms')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">服务条款</button>
-          <button id="legal-tab-about" onclick="switchLegalTab('about')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">关于本站</button>
+          <button id="legal-tab-privacy" onclick="switchLegalTab('privacy')" class="text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition-colors">Privacy Policy</button>
+          <button id="legal-tab-terms" onclick="switchLegalTab('terms')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">Terms of Service</button>
+          <button id="legal-tab-about" onclick="switchLegalTab('about')" class="text-xs font-medium px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors">About Us</button>
         </div>
         <button onclick="closeLegalModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-lg px-2">✕</button>
       </div>
@@ -1938,10 +1205,10 @@ In the past five months,
   <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
     <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
-        <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI 视频演示</h3>
+        <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI Video Demonstration</h3>
         <div class="flex items-center space-x-2 shrink-0">
           <a id="modal-video-direct-link" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 text-xs font-bold bg-rose-600 hover:bg-rose-500 text-white rounded-lg transition-colors flex items-center space-x-1 shadow-md">
-            <span>原站直达 ↗</span>
+            <span>Source ↗</span>
           </a>
           <button onclick="closeVideoModal()" class="text-slate-400 hover:text-white text-lg px-2">✕</button>
         </div>
@@ -1952,10 +1219,10 @@ In the past five months,
       <div id="modal-video-fallback-bar" class="p-2.5 bg-slate-950/95 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between gap-2">
         <span class="line-clamp-1 flex items-center space-x-1">
           <span>💡</span>
-          <span>提示：如遇跨域安全策略或需 App 交互，可随时点击【原站直达 ↗】在官方端畅享全屏原画质</span>
+          <span>Notice: For DRM or cross-origin restrictions, click "Source ↗" to watch in full quality on the original platform.</span>
         </span>
         <a id="modal-video-fallback-btn" href="#" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-rose-400 hover:text-rose-300 text-[10px] font-bold border border-slate-700 transition-colors">
-          原站直达 ↗
+          Source ↗
         </a>
       </div>
     </div>
@@ -1971,13 +1238,13 @@ In the past five months,
             <span class="text-base">📰</span>
           </div>
           <div class="min-w-0 flex items-center flex-wrap gap-2">
-            <h3 id="ai-modal-badge" class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 shrink-0">资讯概要</h3>
+            <h3 id="ai-modal-badge" class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 shrink-0">Executive News Briefing</h3>
             <span class="text-slate-300 dark:text-slate-700">|</span>
-            <span id="ai-modal-source-tag" class="text-xs font-mono px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold truncate">信源: 官方快讯</span>
-            <span id="ai-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 实时发布</span>
+            <span id="ai-modal-source-tag" class="text-xs font-mono px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold truncate">Source: Official Intel</span>
+            <span id="ai-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 Live Radar</span>
           </div>
         </div>
-        <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="关闭弹窗">✕</button>
+        <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
       </div>
 
       <!-- 简报正文区 (Scrollable) -->
@@ -1988,10 +1255,10 @@ In the past five months,
         <!-- 资讯原文配图 (支持点击查看大图、多图切换，防裂图自动隐藏) -->
         <div id="ai-modal-image-wrap" class="hidden space-y-2">
           <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900/90 dark:bg-slate-950/80 max-h-[380px] shadow-md relative group flex items-center justify-center p-0.5">
-            <img id="ai-modal-image" src="" alt="资讯原文配图" class="max-w-full max-h-[380px] w-auto h-auto object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01] cursor-zoom-in" onclick="window.open(this.src, '_blank')" onerror="document.getElementById('ai-modal-image-wrap').classList.add('hidden')">
+            <img id="ai-modal-image" src="" alt="News Coverage Photo" class="max-w-full max-h-[380px] w-auto h-auto object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01] cursor-zoom-in" onclick="window.open(this.src, '_blank')" onerror="document.getElementById('ai-modal-image-wrap').classList.add('hidden')">
             <span class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-lg bg-black/75 backdrop-blur-md text-white text-[11px] font-medium pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 shadow-lg border border-white/10">
               <span>🔍</span>
-              <span id="ai-modal-image-hint">点击查看高清原图</span>
+              <span id="ai-modal-image-hint">Click to view full resolution</span>
             </span>
           </div>
           <!-- 多图缩略条 (若有附加配图/图表) -->
@@ -2002,10 +1269,10 @@ In the past five months,
         <div id="ai-modal-video-badge" class="hidden flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs shadow-sm">
           <div class="flex items-center space-x-2 min-w-0">
             <span class="text-base shrink-0">📹</span>
-            <span id="ai-modal-video-text" class="font-medium truncate">原文包含路透社一线现场独家视频报道</span>
+            <span id="ai-modal-video-text" class="font-medium truncate">Original coverage includes live video report</span>
           </div>
           <a id="ai-modal-video-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold transition-all shadow-sm flex items-center gap-1 shrink-0 cursor-pointer">
-            <span id="ai-modal-video-btn-text">播放视频</span>
+            <span id="ai-modal-video-btn-text">Watch Video</span>
             <span>▶</span>
           </a>
         </div>
@@ -2014,7 +1281,7 @@ In the past five months,
         <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b border-slate-200/80 dark:border-slate-800 pb-2">
             <span>📋</span>
-            <span id="ai-modal-briefing-title">事件脉络速览</span>
+            <span id="ai-modal-briefing-title">Executive News Briefing</span>
           </div>
 
           <!-- 核心事实全貌 (自然流畅交代，无需查看原资讯详情) -->
@@ -2025,7 +1292,7 @@ In the past five months,
         <div id="ai-modal-original-card" class="hidden p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200/80 dark:border-slate-800 pb-2">
             <span>📰</span>
-            <span id="ai-modal-original-title">深度报道原文精选</span>
+            <span id="ai-modal-original-title">Original In-depth Coverage</span>
           </div>
           <div id="ai-modal-original-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line space-y-2"></div>
         </div>
@@ -2034,7 +1301,7 @@ In the past five months,
         <div id="ai-modal-insight-card" class="p-4 rounded-xl bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-slate-50/60 dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-slate-950/40 border border-indigo-200/70 dark:border-indigo-800/50 space-y-2">
           <div class="flex items-center space-x-2 text-xs font-bold text-purple-700 dark:text-purple-300">
             <span>💡</span>
-            <span id="ai-modal-insight-title">AI 点评</span>
+            <span id="ai-modal-insight-title">AI Hot Take</span>
           </div>
           <p id="ai-modal-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-line"></p>
         </div>
@@ -2044,10 +1311,10 @@ In the past five months,
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1.5 font-mono">
           <span>⚡</span>
-          <span>新闻速报简报 · 无需跳转原文即可掌握核心</span>
+          <span>Executive Intelligence Summary · Grasp core facts without leaving</span>
         </div>
         <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0">
-          <span id="ai-modal-source-btn-text">阅读原文 / 直达报道</span>
+          <span id="ai-modal-source-btn-text">Read Full Story</span>
           <span>↗</span>
         </a>
       </div>
@@ -2065,13 +1332,13 @@ In the past five months,
             𝕏
           </div>
           <div class="min-w-0 flex items-center flex-wrap gap-2">
-            <h3 id="social-modal-badge" class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 shrink-0">社交前沿动态</h3>
+            <h3 id="social-modal-badge" class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 shrink-0">Social Radar Post</h3>
             <span class="text-slate-300 dark:text-slate-700">|</span>
-            <span id="social-modal-platform-tag" class="text-xs font-mono px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 font-semibold truncate">𝕏 社交动态</span>
-            <span id="social-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 实时发布</span>
+            <span id="social-modal-platform-tag" class="text-xs font-mono px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-950/80 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/30 font-semibold truncate">𝕏 Social Post</span>
+            <span id="social-modal-time-tag" class="text-[11px] text-slate-500 dark:text-slate-400 font-mono">🕒 Live Radar</span>
           </div>
         </div>
-        <button type="button" onclick="closeSocialPostModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="关闭">✕</button>
+        <button type="button" onclick="closeSocialPostModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
       </div>
 
       <!-- 正文滚动区 Body -->
@@ -2080,11 +1347,11 @@ In the past five months,
         <!-- 作者个人信息栏 -->
         <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800/80">
           <div class="flex items-center space-x-3 min-w-0">
-            <img id="social-modal-avatar" src="" class="w-12 h-12 rounded-full border-2 border-sky-400/60 object-cover shrink-0 shadow-md">
+            <img id="social-modal-avatar" src="" alt="Author Avatar" class="w-12 h-12 rounded-full border-2 border-sky-400/60 object-cover shrink-0 shadow-md">
             <div class="min-w-0">
               <div class="flex items-center space-x-1.5">
                 <span id="social-modal-author" class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate notranslate"></span>
-                <span id="social-modal-verified" class="w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[10px] font-black shrink-0" title="已认证官方/大V">✓</span>
+                <span id="social-modal-verified" class="w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[10px] font-black shrink-0" title="Verified Pioneer / Lab">✓</span>
               </div>
               <span id="social-modal-handle" class="text-xs text-slate-500 dark:text-slate-400 font-mono truncate block notranslate"></span>
             </div>
@@ -2097,9 +1364,9 @@ In the past five months,
           <div class="flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-bold">
             <span class="flex items-center space-x-1.5">
               <span>💡</span>
-              <span id="social-modal-quote-label">核心引言 · 观点提炼</span>
+              <span id="social-modal-quote-label">Executive Quote · Key Takeaway</span>
             </span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/10 dark:bg-amber-400/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">速读提炼</span>
+            <span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-amber-500/10 dark:bg-amber-400/10 text-amber-700 dark:text-amber-300 border border-amber-500/20">Key Takeaway</span>
           </div>
           <div class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-medium pl-2.5 border-l-2 border-amber-500/60 dark:border-amber-400/60">
             <span class="text-amber-500 font-serif text-lg mr-0.5 leading-none">“</span>
@@ -2114,14 +1381,14 @@ In the past five months,
           <div class="p-3 sm:px-4 bg-slate-100/80 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 flex-wrap">
             <div class="flex items-center space-x-2 min-w-0">
               <span class="text-base shrink-0">📜</span>
-              <span id="social-modal-fulltext-title" class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">大V发文正文原帖</span>
-              <span id="social-modal-lang-mode-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-semibold shrink-0">中文忠实译文</span>
+              <span id="social-modal-fulltext-title" class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100">Full Authentic Post</span>
+              <span id="social-modal-lang-mode-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30 font-semibold shrink-0">English Original (Verbatim)</span>
             </div>
             
             <!-- 双语一键切换按钮 -->
-            <button type="button" id="social-modal-lang-toggle" onclick="toggleSocialModalLanguage()" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 shrink-0" title="在中文译文与英文原帖间无缝切换">
+            <button type="button" id="social-modal-lang-toggle" onclick="toggleSocialModalLanguage()" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 shrink-0" title="Toggle original and translation">
               <span>🌐</span>
-              <span id="social-modal-lang-toggle-text">切换为英文原帖</span>
+              <span id="social-modal-lang-toggle-text">Switch to Chinese Translation</span>
             </button>
           </div>
 
@@ -2136,28 +1403,28 @@ In the past five months,
           <div class="px-4 py-2 bg-slate-100/50 dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[10px] text-slate-400 font-mono">
             <span class="flex items-center space-x-1">
               <span>🔒</span>
-              <span>100% 忠实还原原帖结构与措辞 · 严禁虚构篡改</span>
+              <span>100% authentic post structure & verbatim content · Zero hallucinations</span>
             </span>
-            <span id="social-modal-wordcount" class="font-mono">共 0 字</span>
+            <span id="social-modal-wordcount" class="font-mono">0 words</span>
           </div>
         </div>
 
         <!-- 实时四维互动看板 (阅读量 👁️, 点赞数 ❤️, 评论数 💬, 转推数 🔁) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">👁️ 浏览阅读</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">👁️ Views</span>
             <span id="social-modal-views" class="text-base font-bold text-slate-900 dark:text-slate-100 font-mono mt-0.5 notranslate">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-xs text-rose-500 dark:text-rose-400 font-medium flex items-center gap-1">❤️ 点赞认同</span>
+            <span class="text-xs text-rose-500 dark:text-rose-400 font-medium flex items-center gap-1">❤️ Likes</span>
             <span id="social-modal-likes" class="text-base font-bold text-rose-600 dark:text-rose-400 font-mono mt-0.5 notranslate">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-xs text-sky-600 dark:text-sky-400 font-medium flex items-center gap-1">💬 讨论热评</span>
+            <span class="text-xs text-sky-600 dark:text-sky-400 font-medium flex items-center gap-1">💬 Replies</span>
             <span id="social-modal-comments-count" class="text-base font-bold text-sky-600 dark:text-sky-400 font-mono mt-0.5 notranslate">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-xs text-purple-600 dark:text-purple-400 font-medium flex items-center gap-1">🔁 转推分享</span>
+            <span class="text-xs text-purple-600 dark:text-purple-400 font-medium flex items-center gap-1">🔁 Reposts</span>
             <span id="social-modal-retweets" class="text-base font-bold text-purple-600 dark:text-purple-400 font-mono mt-0.5 notranslate">--</span>
           </div>
         </div>
@@ -2167,9 +1434,9 @@ In the past five months,
           <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span class="flex items-center space-x-1.5">
               <span>🔥</span>
-              <span>网友精选热评 & 社区热烈交锋</span>
+              <span>Notable Community Discussion & Responses</span>
             </span>
-            <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">● 实时热烈讨论中</span>
+            <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">● Live Discussion</span>
           </div>
           <div id="social-modal-comments-list" class="space-y-3">
             <!-- 动态注入 3 条真实有深度的网友评论 -->
@@ -2180,7 +1447,7 @@ In the past five months,
         <div id="social-modal-ai-insight-wrap" class="hidden p-3.5 rounded-xl bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-transparent border border-purple-500/20 text-xs leading-relaxed space-y-1">
           <div class="flex items-center space-x-1.5 font-bold text-purple-600 dark:text-purple-300">
             <span>💡</span>
-            <span>AI 犀利点评</span>
+            <span>AI Hot Take</span>
           </div>
           <p id="social-modal-ai-insight" class="text-slate-700 dark:text-slate-300 font-medium"></p>
         </div>
@@ -2191,12 +1458,12 @@ In the past five months,
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1.5 font-mono">
           <span>⚡</span>
-          <span>原汁原味大V发文 · 实时互动热度感知</span>
+          <span>Verbatim creator post · Real-time engagement signals</span>
         </div>
         <div class="flex items-center space-x-2">
-          <button type="button" onclick="closeSocialPostModal()" class="px-3 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">关闭</button>
+          <button type="button" onclick="closeSocialPostModal()" class="px-3 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-all">Close</button>
           <a id="social-modal-link-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white rounded-xl transition-all shadow-md shadow-sky-500/25 flex items-center space-x-1.5 shrink-0">
-            <span id="social-modal-link-text">直达原推 / 加入讨论</span>
+            <span id="social-modal-link-text">Open Post on 𝕏 / Join Discussion</span>
             <span>↗</span>
           </a>
         </div>
@@ -2230,10 +1497,10 @@ In the past five months,
         <div class="flex items-center space-x-2 shrink-0">
           <!-- 核心行动按钮：直达官网 -->
           <a id="tool-modal-official-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 sm:px-4 py-2 text-xs font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl shadow-md shadow-emerald-600/30 transition-all flex items-center space-x-1.5 transform hover:-translate-y-0.5">
-            <span id="tool-modal-visit-text">🚀 访问官网</span>
+            <span id="tool-modal-visit-text">🚀 Visit Website</span>
             <span>↗</span>
           </a>
-          <button type="button" onclick="closeToolDetailModal()" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-lg" title="关闭">✕</button>
+          <button type="button" onclick="closeToolDetailModal()" class="w-8 h-8 rounded-xl flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-lg" title="Close">✕</button>
         </div>
       </div>
 
@@ -2250,7 +1517,7 @@ In the past five months,
           <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100">
             <span class="flex items-center space-x-1.5">
               <span>🖼️</span>
-              <span id="tool-modal-gallery-label">产品界面实测与功能截图画廊</span>
+              <span id="tool-modal-gallery-label">Product Screenshots & UI Gallery</span>
             </span>
             <span id="tool-carousel-counter" class="text-[11px] font-mono text-slate-400">1 / 2</span>
           </div>
@@ -2270,7 +1537,7 @@ In the past five months,
             <div id="tool-carousel-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md"></div>
           </div>
           <div class="text-right">
-            <span class="text-[10px] text-slate-400 font-mono">💡 点击图片可查看原尺寸大图</span>
+            <span class="text-[10px] text-slate-400 font-mono">💡 Click image to view full resolution</span>
           </div>
         </div>
 
@@ -2278,7 +1545,7 @@ In the past five months,
         <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span>📋</span>
-            <span id="tool-modal-overview-label">工具核心情报与解决痛点</span>
+            <span id="tool-modal-overview-label">Core Overview & Problem Solved</span>
           </div>
           <p id="tool-modal-overview" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
         </div>
@@ -2287,7 +1554,7 @@ In the past five months,
         <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span>⚡</span>
-            <span id="tool-modal-features-label">核心特性与技术亮点</span>
+            <span id="tool-modal-features-label">Key Features & Technical Capabilities</span>
           </div>
           <ul id="tool-modal-features-list" class="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300"></ul>
         </div>
@@ -2295,15 +1562,15 @@ In the past five months,
         <!-- 极客技术规格与参数 (Tech Specs Grid) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">体验门槛</span>
+            <span class="text-[11px] text-slate-400 font-medium">Pricing Tier</span>
             <span id="tool-modal-spec-pricing" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">部署方式</span>
+            <span class="text-[11px] text-slate-400 font-medium">Deployment</span>
             <span id="tool-modal-spec-runtime" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">业务赛道</span>
+            <span class="text-[11px] text-slate-400 font-medium">Category</span>
             <span id="tool-modal-spec-scenario" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
         </div>
@@ -2318,16 +1585,14 @@ In the past five months,
   <!-- 复制成功 Toast 浮条 -->
   <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
     <span>✅</span>
-    <span id="copy-toast-msg">已复制到剪贴板！</span>
+    <span id="copy-toast-msg">Copied to clipboard!</span>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const paramLang = urlParams.get('lang');
     // 英文为主站 (English-First)：优先尊重 URL 参数与用户主动设定的语言，默认一律为 'en'
-    let currentLang = (paramLang && (paramLang === 'en' || paramLang === 'zh'))
-      ? paramLang
-      : (localStorage.getItem('ai_radar_user_lang') || 'en');
+    let currentLang = 'en';
     document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
     let currentTheme = localStorage.getItem('theme') || 'auto';
     let selectedCreator = null;
@@ -2369,7 +1634,7 @@ In the past five months,
         celebBadgeX: "𝕏 社交动态",
         celebBadgeReddit: "Reddit 深度热议",
         celebVerifiedTitle: "已认证官方/开发者",
-        celebOriginalTweet: "直达原推 ↗",
+        celebOriginalTweet: "${isZh ? '直达原推' : 'Original'} ↗",
         celebViewPost: "查看热帖 ↗",
         celebNoMatch: "暂无该平台动态",
         redditCommunity: "Reddit 极客社群",
@@ -3075,7 +2340,7 @@ In the past five months,
       'ro': 'romanian'
     };
 
-    let currentSiteLang = localStorage.getItem('ai_radar_user_site_lang');
+    let currentSiteLang = 'english';
 
     // 自动探测访客系统/浏览器语言 (仅用于智能提供切换建议，不主动替用户强制修改)
     function detectVisitorLanguage() {
@@ -3299,31 +2564,73 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       currentSiteLang = targetLang;
       if (persist) {
         localStorage.setItem('ai_radar_user_site_lang', targetLang);
-        localStorage.setItem('ai_radar_user_lang', targetLang === 'english' ? 'en' : 'zh');
       }
       const selectEl = document.getElementById('site-lang-select');
       if (selectEl && selectEl.value !== targetLang) {
         selectEl.value = targetLang;
       }
+
+      // 1. 如果选择中文，直接跳转精美无瑕的中文版 /zh
+      if (targetLang === 'chinese_simplified' || targetLang === 'chinese_traditional') {
+        localStorage.setItem('ai_radar_user_lang', 'zh');
+        if (!window.location.pathname.startsWith('/zh')) {
+          window.location.href = '/zh';
+          return;
+        }
+        setLanguage('zh', persist);
+        return;
+      }
+
+      // 2. 如果选择英文，保持在主站 /
       if (targetLang === 'english') {
+        localStorage.setItem('ai_radar_user_lang', 'en');
+        if (window.location.pathname.startsWith('/zh')) {
+          window.location.href = '/';
+          return;
+        }
         setLanguage('en', persist);
         if (typeof translate !== 'undefined' && translate.reset) {
           try { translate.reset(); } catch (e) {}
         }
-      } else {
-        setLanguage('zh', persist);
-        if (typeof translate !== 'undefined') {
-          if (targetLang === 'chinese_simplified') {
-            try {
-              if (translate.reset) translate.reset();
-            } catch (e) {}
-            translate.changeLanguage('chinese_simplified');
-          } else {
+        updateNavTabsLanguage('english');
+        return;
+      }
+
+      // 3. 其它小语种（日、韩、法、德、西等）：按需动态加载 Translate.js，绝不拖累首屏性能
+      loadAndExecuteTranslatePlugin(targetLang);
+      updateNavTabsLanguage(targetLang);
+    }
+
+    // 动态按需加载翻译插件引擎
+    function loadAndExecuteTranslatePlugin(targetLang) {
+      const exec = () => {
+        try {
+          if (typeof translate !== 'undefined') {
+            translate.selectLanguageTag.show = false;
+            translate.service.use('client.edge');
+            translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
+            translate.ignore.class.push('notranslate');
+            translate.ignore.id.push('nav-tabs');
+            translate.ignore.class.push('code-box');
+            translate.ignore.tag.push('code');
+            translate.ignore.tag.push('pre');
+            translate.execute();
             translate.changeLanguage(targetLang);
           }
+        } catch (err) {
+          console.warn('Translate execution failed:', err);
         }
+      };
+
+      if (typeof translate === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://res.zvo.cn/translate/translate.js';
+        script.async = true;
+        script.onload = exec;
+        document.body.appendChild(script);
+      } else {
+        exec();
       }
-      updateNavTabsLanguage(targetLang);
     }
 
     function applyCurrentTranslation() {
@@ -4456,19 +3763,31 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 工具场景筛选
     function filterToolScenario(scenario) {
-      toolScenarioFilter = scenario;
+      const alias = {
+        'web': '免部署',
+        'design': '图像',
+        'code': '编程',
+        'client': '客户端',
+        'agent': '智能体'
+      };
+      toolScenarioFilter = alias[scenario] || scenario;
       const btnMap = {
         'all': 'tool-filter-all',
         '免部署': 'tool-filter-web',
         '图像': 'tool-filter-design',
         '编程': 'tool-filter-code',
         '客户端': 'tool-filter-client',
-        '智能体': 'tool-filter-agent'
+        '智能体': 'tool-filter-agent',
+        'web': 'tool-filter-web',
+        'design': 'tool-filter-design',
+        'code': 'tool-filter-code',
+        'client': 'tool-filter-client',
+        'agent': 'tool-filter-agent'
       };
       Object.entries(btnMap).forEach(([scenKey, btnId]) => {
         const b = document.getElementById(btnId);
         if (b) {
-          b.className = (scenKey === scenario)
+          b.className = (scenKey === toolScenarioFilter || scenKey === scenario)
             ? "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white"
             : "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700";
         }
@@ -4541,7 +3860,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       } else {
         btnEl.setAttribute('data-muted', 'true');
-        btnEl.innerHTML = '<span>🔇</span><span>取消静音</span>';
+        btnEl.innerHTML = '<span>🔇</span><span>${isZh ? '取消静音' : 'Unmute'}</span>';
         btnEl.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md';
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
@@ -4689,7 +4008,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const muteBtn = cardEl.querySelector('.video-mute-btn');
       if (muteBtn) {
         muteBtn.setAttribute('data-muted', 'true');
-        muteBtn.innerHTML = '<span>🔇</span><span>取消静音</span>';
+        muteBtn.innerHTML = '<span>🔇</span><span>${isZh ? '取消静音' : 'Unmute'}</span>';
         muteBtn.className = 'pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md';
       }
       if (activeInPlaceVideoCard === cardEl) {
@@ -4941,7 +4260,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `
           <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 group cursor-pointer hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
             <div class="w-full sm:w-44 h-32 rounded-lg overflow-hidden shrink-0 bg-slate-950 border border-slate-200 dark:border-slate-800 relative">
-              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+              <img src="${item.image_url}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
               ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶ 现场视频' : '▶ Video'}</span>` : ''}
             </div>
             <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -4954,9 +4273,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   </div>
                   <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
                 </div>
-                <a href="javascript:void(0)" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+                <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
                   ${title}
-                </a>
+                </button>
                 ${specBadges}
                 <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                   ${summary}
@@ -4987,7 +4306,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
-          <a href="javascript:void(0)" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+          <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
             ${title}
           </a>
           ${specBadges}
@@ -5108,7 +4427,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="flex items-start space-x-3">
               <!-- 左侧：经典圆形头像 + 金V/蓝V认证标 -->
               <div class="relative shrink-0 pt-0.5">
-                <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <img src="${avatar}" alt="${escapeHtml(author)} avatar" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
                 <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isCo ? 'bg-amber-400 text-slate-950' : 'bg-sky-500 text-white'} flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? (isZh ? '已认证官方机构/品牌' : 'Verified Official Organization') : (isZh ? '已认证大V/科学家' : 'Verified Pioneer')}">✓</span>
               </div>
 
@@ -5383,7 +4702,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <!-- 醒目放大头像设计 (w-14 h-14 sm:w-16 sm:h-16 搭配光环与大V标，一眼即知是谁说的) -->
             <div class="flex items-center space-x-3.5 mb-3.5">
               <div class="relative shrink-0">
-                <img src="${avatar}" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ${isCo ? 'ring-amber-400/90 dark:ring-amber-400/80' : 'ring-sky-400/90 dark:ring-sky-400/80'} shadow-lg shadow-amber-500/20 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <img src="${avatar}" alt="${escapeHtml(author)} avatar" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ${isCo ? 'ring-amber-400/90 dark:ring-amber-400/80' : 'ring-sky-400/90 dark:ring-sky-400/80'} shadow-lg shadow-amber-500/20 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
                 <span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full ${isCo ? 'bg-amber-500' : 'bg-sky-500'} text-white flex items-center justify-center text-[10px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? '已认证官方机构/品牌' : '已认证大V/开发者'}">✓</span>
               </div>
               <div class="min-w-0 flex-1">
@@ -5414,10 +4733,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
             <div class="flex items-center space-x-2">
               <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="flex-1 py-1.5 px-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition-all text-center">
-                💬 贴文与热评
+                ${isZh ? '💬 贴文与热评' : '💬 Post & Comments'}
               </button>
               <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="px-2.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all flex items-center space-x-1 shrink-0">
-                <span>直达原推</span>
+                <span>${isZh ? '直达原推' : 'Original'}</span>
                 <span>↗</span>
               </a>
             </div>
@@ -5743,10 +5062,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <!-- 双行动入口 Footer -->
           <div class="p-3 bg-slate-50/70 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-xs">
             <button type="button" onclick="event.stopPropagation(); openToolDetailModal('${itemId}')" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors flex items-center space-x-1">
-              <span>🔍 详情与截图</span>
+              <span>${isZh ? '🔍 详情与截图' : '🔍 Details & Specs'}</span>
             </button>
             <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
-              <span>🚀 访问官网</span>
+              <span>${isZh ? '🚀 访问官网' : '🚀 Visit Site'}</span>
               <span>↗</span>
             </a>
           </div>
@@ -6040,7 +5359,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const variablesHtml = (variables && variables.length > 0)
         ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5 w-full min-w-0">
-             <span class="text-[9px] text-slate-500 dark:text-slate-400 font-mono shrink-0">参数占位符:</span>
+             <span class="text-[9px] text-slate-500 dark:text-slate-400 font-mono shrink-0">${isZh ? "参数占位符:" : "Variables:"}</span>
              ${variables.map(v => `<span class="px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 font-mono text-[9px] break-all">${escapeHtml(v)}</span>`).join('')}
            </div>`
         : '';
@@ -6089,7 +5408,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             ${summary ? `<p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed break-words w-full min-w-0">${summary}</p>` : ''}
             
             <div class="flex items-center justify-between mt-1 pt-1 border-t border-slate-200 dark:border-slate-800/60 w-full min-w-0">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 shrink-0">提示词指令:</span>
+              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 shrink-0">${t.promptDirectives || (isZh ? "提示词指令:" : "Directives:")}</span>
               <div class="inline-flex rounded-md bg-slate-100 dark:bg-slate-900 p-0.5 border border-slate-200 dark:border-slate-800 text-[10px] shrink-0">
                 <button type="button" onclick="switchPromptLang('${item.id}', 'zh')" id="plang-zh-${item.id}" class="px-2 py-0.5 rounded bg-purple-600 text-white font-bold transition-colors cursor-pointer">🇨🇳 中文</button>
                 <button type="button" onclick="switchPromptLang('${item.id}', 'en')" id="plang-en-${item.id}" class="px-2 py-0.5 rounded text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 transition-colors cursor-pointer">🇬🇧 EN</button>
@@ -6102,7 +5421,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
             ${usageGuide ? `
               <div class="text-[10px] text-slate-600 dark:text-slate-400 bg-slate-100/70 dark:bg-slate-900/50 p-2 rounded border border-slate-200 dark:border-slate-800/60 leading-relaxed font-sans break-words w-full min-w-0">
-                <span class="text-purple-600 dark:text-purple-400 font-semibold">💡 使用指南: </span>${escapeHtml(usageGuide)}
+                <span class="text-purple-600 dark:text-purple-400 font-semibold">${t.promptUsageGuide || (isZh ? "💡 使用指南: " : "💡 Usage Guide: ")}</span>${escapeHtml(usageGuide)}
               </div>
             ` : ''}
           </div>
@@ -6170,10 +5489,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 浮动控制栏：左侧取消静音 + 右侧全屏放大 -->
               <div class="flex items-center justify-between w-full pointer-events-none">
                 <button type="button" onclick="event.stopPropagation(); toggleVideoCardMute(this)" data-muted="true" class="pointer-events-auto video-mute-btn px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="点击取消静音并播放">
-                  <span>🔇</span><span>取消静音</span>
+                  <span>🔇</span><span>${isZh ? '取消静音' : 'Unmute'}</span>
                 </button>
                 <button type="button" onclick="event.stopPropagation(); openVideoModal('${modalEmbedUrl}', '${title.replace(/'/g, "\\'")}', '${platformType}', '${jumpUrl}')" class="pointer-events-auto px-2.5 py-1 rounded-full bg-black/80 hover:bg-rose-600 text-white font-bold text-[11px] shadow-lg transition-all flex items-center space-x-1 border border-white/20 backdrop-blur-md" title="单击全屏放大">
-                  <span>⛶</span><span>全屏放大</span>
+                  <span>⛶</span><span>${isZh ? '全屏放大' : 'Fullscreen'}</span>
                 </button>
               </div>
 
@@ -6183,7 +5502,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   ▶
                 </button>
                 <span class="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md text-white text-[11px] font-bold border border-white/20 shadow-md">
-                  点击原位即开即看
+                  ${isZh ? '点击原位即开即看' : 'Click to Play'}
                 </span>
               </div>
 
@@ -6211,7 +5530,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
             <!-- 专门的原视频直达大按钮 (醒目快捷) -->
             <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 rounded-xl ${isTikTok ? 'bg-gradient-to-r from-rose-600 via-pink-600 to-rose-700 hover:from-rose-500 hover:to-pink-500 shadow-rose-600/20 hover:shadow-rose-600/40' : 'bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-500 hover:to-rose-500 shadow-red-600/20 hover:shadow-red-600/40'} text-white font-bold text-xs flex items-center justify-center space-x-1.5 shadow-md transition-all duration-200 mt-1">
-              <span>${isTikTok ? '🎵 访问 TikTok 原视频' : '🔴 访问 YouTube Shorts 原视频'}</span>
+              <span>${isTikTok ? (isZh ? "🎵 访问 TikTok 原视频" : "🎵 Watch on TikTok") : (isZh ? "🔴 访问 YouTube Shorts 原视频" : "🔴 Watch on YouTube Shorts")}</span>
               <span>↗</span>
             </a>
           </div>
@@ -6242,7 +5561,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               onmouseleave="stopVideoHoverPreview(this)"
               onclick="window.open('${jumpUrl}', '_blank')">
               
-              <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+              <img src="${item.image_url}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
               
               <!-- 悬停静音预览挂载层 -->
               <div class="video-preview-slot absolute inset-0 w-full h-full pointer-events-none overflow-hidden"></div>
@@ -6250,7 +5569,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 静音预览中发光提示胶囊 -->
               <div class="preview-indicator hidden absolute top-3 right-3 z-30 px-2.5 py-0.5 rounded-full bg-emerald-500/90 backdrop-blur-md text-white font-bold text-[9px] shadow-lg animate-pulse whitespace-nowrap flex items-center space-x-1 pointer-events-none">
                 <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                <span>静音预览中 · 单击直达原视频</span>
+                <span>${isZh ? '静音预览中 · 单击直达原视频' : 'Muted Preview · Click for Video'}</span>
               </div>
 
               <div class="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/10 transition-colors pointer-events-none">
@@ -6267,7 +5586,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 缩略图底部操作条：站内播放入口 + 时长 -->
               <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between z-20">
                 <button type="button" onclick="event.stopPropagation(); openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', 'youtube', '${jumpUrl}')" class="px-2 py-0.5 rounded bg-black/85 hover:bg-red-600 text-white text-[10px] font-bold border border-white/20 transition-all flex items-center space-x-1 shadow-lg" title="在站内弹窗播放">
-                  <span>▶</span><span>站内播放</span>
+                  <span>▶</span><span>${isZh ? '站内播放' : 'Watch Here'}</span>
                 </button>
                 <span class="bg-black/85 px-1.5 py-0.5 rounded text-[10px] font-mono text-white pointer-events-none border border-white/10">${duration}</span>
               </div>
@@ -6276,7 +5595,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="flex items-center justify-between text-[10px] pt-1 gap-2">
               <div class="flex items-center space-x-1.5 truncate max-w-[160px]">
                 <span class="text-red-600 dark:text-red-400 font-bold truncate notranslate">${cleanSource}</span>
-                <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-300 dark:border-slate-700 shrink-0 notranslate font-semibold transition-colors" title="在原站直接打开">原站 ↗</a>
+                <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-300 dark:border-slate-700 shrink-0 notranslate font-semibold transition-colors" title="Source">${isZh ? "原站 ↗" : "Source ↗"}</a>
               </div>
               <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
                 ${todayBadge}
@@ -7383,7 +6702,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             if (validImages.length > 1) {
               galleryStripEl.innerHTML = validImages.map((img) => `
                 <button type="button" onclick="document.getElementById('ai-modal-image').src='${img.replace(/'/g, "\\'")}'" class="w-14 h-14 rounded-lg overflow-hidden border-2 border-slate-300 dark:border-slate-700 hover:border-indigo-500 focus:border-indigo-500 shrink-0 bg-slate-900 transition-all opacity-80 hover:opacity-100 cursor-pointer">
-                  <img src="${img}" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
+                  <img src="${img}" alt="${escapeHtml(cleanTitle)} preview" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
                 </button>
               `).join('');
               galleryStripEl.classList.remove('hidden');
@@ -7760,7 +7079,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 return `
                   <div class="pt-1.5 pb-2">
                     <div class="flex items-center space-x-2 text-xs">
-                      <img src="${escapeHtml(reply.author_avatar || item.author_avatar)}" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${escapeHtml(reply.author||'user')}'">
+                      <img src="${escapeHtml(reply.author_avatar || item.author_avatar)}" alt="${escapeHtml(reply.author || item.author)} avatar" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${escapeHtml(reply.author||'user')}'">
                       <span class="font-bold text-slate-900 dark:text-slate-100 text-xs">${escapeHtml(reply.author || item.author)}</span>
                       <span class="px-1.5 py-0.5 rounded-md bg-rose-500/15 text-rose-600 dark:text-rose-400 font-mono text-[10px] font-bold">作者连推 · ${reply.step || `${rIdx+1}楼`}</span>
                       <span class="text-slate-400 text-[10px] font-mono">${replyTime}</span>
@@ -7798,7 +7117,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/70 dark:border-slate-800/70 text-xs">
                     <div class="flex items-center justify-between mb-1.5">
                       <div class="flex items-center space-x-2">
-                        <img src="${escapeHtml(c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + (c.author||'user'))}" class="w-5 h-5 rounded-full object-cover">
+                        <img src="${escapeHtml(c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + (c.author||'user'))}" alt="${escapeHtml(c.author)} avatar" class="w-5 h-5 rounded-full object-cover">
                         <span class="font-bold text-slate-900 dark:text-slate-200">${escapeHtml(c.author)}</span>
                         <span class="text-slate-400 text-[10px] font-mono">${escapeHtml(c.handle || '')}</span>
                       </div>
@@ -7989,7 +7308,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="flex items-start justify-between gap-2">
             <div class="flex items-center space-x-3 min-w-0">
               <div class="relative shrink-0">
-                <img src="${avatar}" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author}'">
+                <img src="${avatar}" alt="${author} avatar" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author}'">
                 <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isThreads ? 'bg-purple-600' : 'bg-sky-500'} text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow">✓</span>
               </div>
               <div class="min-w-0">
@@ -8073,7 +7392,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // ==========================================
     // 领袖观点·社交推文与网友热评弹窗控制器 (Social Post & Netizen Hot Takes)
-    // 支持双层架构：Tier 1 核心引言速读提炼 + Tier 2 完整原帖逐段阅读 (双语动态切换)
+    // 支持双层架构：Tier 1 核心引言Key Takeaway + Tier 2 完整原帖逐段阅读 (双语动态切换)
     // ==========================================
     let currentSocialModalItem = null;
     let currentSocialModalLang = 'zh';
@@ -8818,81 +8137,81 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     setTimeout(runLangCheck, 600);
   </script>
 
-  <!-- ===== 全站底部导航页脚 (AdSense E-E-A-T 信任信号) ===== -->
+  <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
     <div class="max-w-[1760px] w-full mx-auto px-4 sm:px-8 py-10">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
 
-        <!-- 品牌介绍 -->
+        <!-- Brand Overview -->
         <div class="space-y-3">
           <div class="flex items-center space-x-2">
             <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-base shadow-md">🤖</div>
-            <span class="font-black text-base bg-gradient-to-r from-indigo-700 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">AI 资讯雷达</span>
+            <span class="font-black text-base bg-gradient-to-r from-indigo-700 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">AI News Radar</span>
           </div>
           <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            全球 AI 前沿动态聚合平台，每日实时追踪大模型突发快讯、社交前沿动态、实战视频精选与场景落地工具。内容经 AI 辅助处理与人工编辑审核，所有资讯均附原始来源链接。
+            High-frequency global AI intelligence aggregator, tracking frontier model updates, social pulse, hands-on video tutorials, and applied tools in real time. Rigorously vetted with direct links to authoritative sources.
           </p>
           <p class="text-xs text-slate-400 dark:text-slate-500">
-            监控 50+ 全球权威 AI 信源 · 每小时自动更新
+            Monitoring 50+ authoritative global AI sources · Automatically updated hourly
           </p>
         </div>
 
-        <!-- 快速导航 -->
+        <!-- Section Navigation -->
         <div class="space-y-3">
-          <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">内容板块</h3>
+          <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">Sections</h3>
           <nav class="grid grid-cols-2 gap-x-4 gap-y-2">
             <a href="#news" onclick="switchTab('news'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">⚡</span><span>突发·行业快讯</span>
+              <span class="text-xs">⚡</span><span>Breaking News</span>
             </a>
             <a href="#celebrity" onclick="switchTab('celebrity'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">🐦</span><span>社交雷达</span>
+              <span class="text-xs">🐦</span><span>Social Radar</span>
             </a>
             <a href="#tools" onclick="switchTab('tools'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">🛠️</span><span>场景落地·神器</span>
+              <span class="text-xs">🛠️</span><span>Applied Tools</span>
             </a>
             <a href="#videos" onclick="switchTab('videos'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">🎬</span><span>实战视频·演示</span>
+              <span class="text-xs">🎬</span><span>Hands-on Videos</span>
             </a>
             <a href="#prompts" onclick="switchTab('prompts'); return false;" class="text-sm text-purple-600 dark:text-purple-400 font-medium hover:text-purple-700 dark:hover:text-purple-300 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">💡</span><span>提示词库·咒语</span>
+              <span class="text-xs">💡</span><span>Prompt Bank</span>
             </a>
             <a href="#all" onclick="switchTab('all'); return false;" class="text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors flex items-center space-x-1.5">
-              <span class="text-xs">🌐</span><span>综合全景·大盘</span>
+              <span class="text-xs">🌐</span><span>Overview</span>
             </a>
           </nav>
         </div>
 
-        <!-- 法律与信任链接 -->
+        <!-- Trust & Policies -->
         <div class="space-y-3">
-          <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">关于本站</h3>
+          <h3 class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">About & Trust</h3>
           <nav class="space-y-2">
             <a href="/about" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              👥 关于我们 (About Us)
+              👥 About Us
             </a>
             <a href="/editorial-policy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              📋 编辑方针 (Editorial Policy)
+              📋 Editorial Policy
             </a>
             <a href="/contact" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              ✉️ 联系我们 (Contact Us)
+              ✉️ Contact Us
             </a>
             <a href="/privacy" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              🔒 隐私政策 (Privacy Policy)
+              🔒 Privacy Policy
             </a>
             <a href="/terms" class="block text-sm text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              📄 服务条款 (Terms of Service)
+              📄 Terms of Service
             </a>
           </nav>
         </div>
 
       </div>
 
-      <!-- 版权栏 -->
+      <!-- Copyright Bar -->
       <div class="border-t border-slate-200 dark:border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
         <p class="text-xs text-slate-400 dark:text-slate-500">
           © 2026 AI News Radar (ainewsradar.xyz). All rights reserved.
         </p>
         <p class="text-xs text-slate-400 dark:text-slate-500 text-center sm:text-right">
-          内容经 AI 辅助处理与人工编辑审核 · 所有资讯均附原始来源链接 · 版权归原作者所有
+          Content AI-assisted & editorially curated · Direct links to original publishers · Rights belong to respective owners
         </p>
       </div>
     </div>
