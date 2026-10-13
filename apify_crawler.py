@@ -190,16 +190,24 @@ def parse_twitter_created_at(time_str: str) -> Optional[datetime]:
     return None
 
 
+_APIFY_CIRCUIT_BROKEN = False
+
 def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict[str, Any]]:
     """
     通过 Apify 执行搜索查询，支持多账号 Token 轮询与自动故障转移
     """
+    global _APIFY_CIRCUIT_BROKEN
+    if _APIFY_CIRCUIT_BROKEN:
+        return []
     if isinstance(tokens, str):
         tokens = [tokens]
     if not tokens:
         return []
 
+    all_exhausted = True
     for t_idx, token in enumerate(tokens):
+        if _APIFY_CIRCUIT_BROKEN:
+            return []
         masked_tok = token[:6] + "..." + token[-4:] if len(token) > 10 else "***"
         url_xquik = f"https://api.apify.com/v2/acts/xquik~x-tweet-scraper/run-sync-get-dataset-items?token={token}"
         payload_xquik = {
@@ -209,7 +217,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
         }
 
         try:
-            with httpx.Client(timeout=60) as client:
+            with httpx.Client(timeout=15) as client:
                 resp = client.post(url_xquik, json=payload_xquik)
                 if resp.status_code in [200, 201]:
                     data = resp.json()
@@ -217,12 +225,15 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                         valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
                         if valid:
                             return valid
+                    all_exhausted = False
                 elif resp.status_code in [401, 402, 403, 429]:
                     print(f"  ⚠️ [Apify Token 轮换] Token [{masked_tok}] 触发状态 {resp.status_code} (额度不足或被限流)，尝试切换备用 Token...")
                     continue
                 else:
+                    all_exhausted = False
                     print(f"  ⚠️ [xquik] HTTP {resp.status_code}: {resp.text[:120]}")
         except Exception as e:
+            all_exhausted = False
             print(f"  ⚠️ [xquik] 异常: {e}")
 
         url_apidojo = f"https://api.apify.com/v2/acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={token}"
@@ -232,7 +243,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
             "sort": "Latest"
         }
         try:
-            with httpx.Client(timeout=60) as client:
+            with httpx.Client(timeout=15) as client:
                 resp = client.post(url_apidojo, json=payload_apidojo)
                 if resp.status_code in [200, 201]:
                     data = resp.json()
@@ -240,11 +251,20 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                         valid = [d for d in data if isinstance(d, dict) and not d.get("noResults") and d.get("id")]
                         if valid:
                             return valid
+                    all_exhausted = False
                 elif resp.status_code in [401, 402, 403, 429]:
                     print(f"  ⚠️ [Apify Token 轮换] 备用 Actor Token [{masked_tok}] 状态 {resp.status_code}，切换备用 Token...")
                     continue
+                else:
+                    all_exhausted = False
+                    print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
         except Exception as e:
+            all_exhausted = False
             print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
+
+    if all_exhausted:
+        _APIFY_CIRCUIT_BROKEN = True
+        print("  🛑 [Apify 熔断] 所有 Apify Token 均额度耗尽(401/402/403/429)，立即全局熔断并切换备用信源。")
 
     return []
 
@@ -259,6 +279,9 @@ def fetch_incremental_tweets(
     2. 已有推文仅实时同步互动量 (likes, retweets, views)
     3. 全新推文执行翻译与结构化归入
     """
+    global _APIFY_CIRCUIT_BROKEN
+    if _APIFY_CIRCUIT_BROKEN:
+        return []
     tokens = get_apify_tokens()
     if not tokens:
         print("  ⚠️ [Apify 增量采集器] 未检测到 APIFY_API_TOKEN，跳过 Apify 抓取通道。")

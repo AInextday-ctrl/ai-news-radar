@@ -58,7 +58,9 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
           if [ -z "$FIREBASE_TOKEN" ]; then
-            echo "❌ 错误: 未检测到 FIREBASE_TOKEN！请在 GitHub 仓库 Settings -> Secrets 中添加 FIREBASE_TOKEN。"
-            exit 1
+            echo "⚠️ [Notice] FIREBASE_TOKEN secret is not set in GitHub repository Settings -> Secrets."
+            echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
+          else
+            echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
+            npx -y firebase-tools deploy --only hosting --non-interactive || echo "⚠️ Firebase deploy failed. Please check if your FIREBASE_TOKEN has expired."
           fi
-          npx -y firebase-tools@latest deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive

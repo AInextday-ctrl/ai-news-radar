@@ -38,6 +38,12 @@ except ImportError:
 from config import SOURCES, CELEBRITY_PROFILES, SCENARIO_TAGS, PRICING_TAGS
 from prompts_and_videos import get_curated_actionable_prompts as get_expanded_prompts, get_curated_tutorials as get_expanded_tutorials
 
+try:
+    from processor import free_translate_zh, clean_news_text
+except ImportError:
+    def free_translate_zh(t: str) -> str: return t
+    def clean_news_text(t: str) -> str: return t
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 AI-Radar/2.0"
 }

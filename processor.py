@@ -846,6 +846,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 fallback["hot_score"] = 3
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
                 fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
+                results.append(fallback)
     all_final = direct_items + results
     # 🛡️ 强制执行语言质检与自愈哨兵流水线：对所有产出资讯进行双语对称性与纯净度门禁审查
     try:
