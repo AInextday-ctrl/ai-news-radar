@@ -4762,14 +4762,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function renderSampleOutputContent(id, sample) {
       if (!sample) return '';
       const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+      const sampleTitle = isZh
+        ? (sample.title || '生成效果大图')
+        : (sample.title_en || (!/[\u4e00-\u9fa5]/.test(sample.title || '') && sample.title) || 'Verified Sample Output');
+      const sampleText = isZh
+        ? (sample.content || '')
+        : (sample.content_en || (!/[\u4e00-\u9fa5]/.test(sample.content || '') ? (sample.content || '') : '// Verified sample output preview. Copy prompt above to execute.'));
       if (sample.type === 'image') {
         return `
           <div class="space-y-2">
             <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-black max-h-72 relative group/img cursor-pointer" onclick="window.open('${sample.media_url}', '_blank')">
-              <img src="${sample.media_url}" class="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300" loading="lazy" alt="${escapeHtml(sample.title || '生成效果大图')}">
-              <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md">🔍 点击看超清原图</span>
+              <img src="${sample.media_url}" class="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300" loading="lazy" alt="${escapeHtml(sampleTitle)}">
+              <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md">${isZh ? '🔍 点击看超清原图' : '🔍 View Full Resolution'}</span>
             </div>
-            ${sample.content ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sample.content)}</p>` : ''}
+            ${sampleText ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sampleText)}</p>` : ''}
           </div>
         `;
       } else if (sample.type === 'video') {
@@ -4779,26 +4786,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <video src="${sample.media_url}" class="w-full h-full object-cover" autoplay loop muted playsinline></video>
               <span class="absolute top-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md flex items-center gap-1">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>MP4 实测动效</span>
+                <span>${isZh ? 'MP4 实测动效' : 'MP4 Demo Video'}</span>
               </span>
             </div>
-            ${sample.content ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sample.content)}</p>` : ''}
+            ${sampleText ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sampleText)}</p>` : ''}
           </div>
         `;
       } else if (sample.type === 'code') {
         return `
           <div class="space-y-1.5">
             <div class="relative group/code">
-              <pre class="p-2.5 rounded-lg bg-slate-900 text-emerald-400 font-mono text-[10px] overflow-x-auto leading-relaxed max-h-60 whitespace-pre"><code id="sample-code-${id}">${escapeHtml(sample.content || '')}</code></pre>
+              <pre class="p-2.5 rounded-lg bg-slate-900 text-emerald-400 font-mono text-[10px] overflow-x-auto leading-relaxed max-h-60 whitespace-pre"><code id="sample-code-${id}">${escapeHtml(sampleText)}</code></pre>
               <button type="button" onclick="copySampleCode('${id}')" class="absolute top-1.5 right-1.5 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-[9px] font-mono border border-slate-700 shadow-sm transition-colors cursor-pointer">
-                ${t.copySampleCodeBtn || '复制代码 📋'}
+                ${t.copySampleCodeBtn || (isZh ? '复制代码 📋' : 'Copy Code 📋')}
               </button>
             </div>
           </div>
         `;
       } else {
         return `
-          <div class="p-2.5 rounded-lg bg-white/80 dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-[11px] leading-relaxed max-h-60 overflow-y-auto whitespace-pre-wrap border border-slate-200 dark:border-slate-800 font-sans shadow-inner select-all">${escapeHtml(sample.content || '')}</div>
+          <div class="p-2.5 rounded-lg bg-white/80 dark:bg-slate-900 text-slate-800 dark:text-slate-200 text-[11px] leading-relaxed max-h-60 overflow-y-auto whitespace-pre-wrap border border-slate-200 dark:border-slate-800 font-sans shadow-inner select-all">${escapeHtml(sampleText)}</div>
         `;
       }
     }
@@ -5992,9 +5999,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const timeObj = formatTime(item.raw_published_at || item.created_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
-      const targetModel = item.target_model || item.recommended_model || (isZh ? "通用大模型" : "General LLM");
-      const tempAdvice = item.temp_advice || (isZh ? "温度 0.3" : "Temp 0.3");
-      const purpose = item.scenario_label || (isZh ? (item.purpose_zh || "💡 核心模版") : (item.purpose_en || "💡 Core Template"));
+      const targetModelRaw = item.target_model || item.recommended_model || (isZh ? "通用大模型" : "General LLM");
+      const targetModel = isZh
+        ? targetModelRaw
+        : targetModelRaw.replace(/阿里通义|通义/g, '').replace(/可灵/g, 'Kling').replace(/\([\u4e00-\u9fa5/·]+\)/g, '').trim();
+      const tempAdvice = isZh
+        ? (item.temp_advice || "温度 0.3")
+        : (item.temp_advice_en || (item.temp_advice && !/[\u4e00-\u9fa5]/.test(item.temp_advice) ? item.temp_advice : "Temp 0.3"));
+      const purpose = isZh
+        ? (item.scenario_label || item.purpose_zh || "💡 核心模版")
+        : (item.scenario_label_en || item.purpose_en || "💡 Core Template");
       const promptZh = item.prompt_content_zh || item.prompt_content || "";
       const promptEn = item.prompt_content_en || item.prompt_content || "";
       const isLegacy = item.generation_tier === 'legacy';
@@ -6017,8 +6031,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       };
 
       const activeText = isZh ? (promptZh || promptEn) : (promptEn || promptZh);
-      const usageGuide = item.usage_guide_zh || item.usage_guide || "";
-      const variables = item.variables || [];
+      const usageGuide = isZh
+        ? (item.usage_guide_zh || item.usage_guide || "")
+        : (item.usage_guide_en || (item.usage_guide && !/[\u4e00-\u9fa5]/.test(item.usage_guide) ? item.usage_guide : "Replace the bracketed variables with your parameters and run in the recommended model."));
+      const variables = isZh
+        ? (item.variables || [])
+        : (item.variables_en || (item.variables || []).filter(v => !/[\u4e00-\u9fa5]/.test(v)));
 
       const variablesHtml = (variables && variables.length > 0)
         ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5 w-full min-w-0">
@@ -6027,18 +6045,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
            </div>`
         : '';
 
+      const sampleHeaderTitle = item.sample_output
+        ? (isZh ? (item.sample_output.title || '实测生成效果') : (item.sample_output.title_en || (!/[\u4e00-\u9fa5]/.test(item.sample_output.title || '') && item.sample_output.title) || 'Verified Sample Output'))
+        : '';
+
       const sampleOutputHtml = item.sample_output ? `
         <div class="mt-2 pt-2 border-t border-slate-200 dark:border-slate-800/60 w-full min-w-0">
           <button type="button" onclick="toggleSampleDrawer('${item.id}')" class="w-full py-1.5 px-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/80 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-[11px] text-purple-600 dark:text-purple-300 font-semibold flex items-center justify-between transition-colors cursor-pointer group shadow-sm">
             <span class="flex items-center gap-1.5 min-w-0 flex-1 text-left">
               <span>👀</span>
-              <span id="sample-btn-txt-${item.id}" class="truncate">${t.viewSampleOutput || '查看实测效果样例 (Sample Output)'}</span>
+              <span id="sample-btn-txt-${item.id}" class="truncate">${t.viewSampleOutput || (isZh ? '查看实测效果样例 (Sample Output)' : 'View Sample Output')}</span>
             </span>
             <span id="sample-arrow-${item.id}" class="text-xs transition-transform duration-200 shrink-0 ml-1">▼</span>
           </button>
           <div id="sample-drawer-${item.id}" class="hidden mt-2 p-2.5 rounded-xl bg-slate-50 dark:bg-slate-950/90 border border-slate-200 dark:border-slate-800 space-y-2 w-full min-w-0 overflow-hidden">
             <div class="flex items-center justify-between text-[10px] text-slate-500 font-bold border-b border-slate-200 dark:border-slate-800 pb-1">
-              <span class="truncate">✨ ${escapeHtml(item.sample_output.title || '实测生成效果')}</span>
+              <span class="truncate">✨ ${escapeHtml(sampleHeaderTitle)}</span>
               <span class="font-mono uppercase text-[9px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-500 shrink-0">${item.sample_output.type || 'text'}</span>
             </div>
             ${renderSampleOutputContent(item.id, item.sample_output)}
@@ -6212,7 +6234,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const cleanSource = item.author || item.source || "";
-      const skillTag = item.purpose_zh || item.metrics?.skill_tag || (isZh ? '🎓 系统教学' : '🎓 Masterclass');
+      const skillTag = isZh
+        ? (item.purpose_zh || item.metrics?.skill_tag || '🎓 系统教学')
+        : (item.purpose_en || '🎓 Masterclass');
       const duration = item.duration || item.metrics?.duration || '⏱️ 20:00';
       const jumpUrl = item.url || item.link || item.embed_url;
 

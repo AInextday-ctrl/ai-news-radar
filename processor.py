@@ -32,11 +32,12 @@ MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 _TRANSLATION_CACHE = {}
 _YOUDAO_BLOCKED = False
 _GOOGLE_BLOCKED = False
+_MYMEMORY_BLOCKED = False
 
 
 def free_translate_zh(text: str) -> str:
     """Bulletproof translation engine to guarantee 100% fluent Chinese output."""
-    global _YOUDAO_BLOCKED, _GOOGLE_BLOCKED
+    global _YOUDAO_BLOCKED, _GOOGLE_BLOCKED, _MYMEMORY_BLOCKED
     if not text:
         return ""
     
@@ -77,12 +78,12 @@ def free_translate_zh(text: str) -> str:
         except Exception:
             _YOUDAO_BLOCKED = True
 
-    # 2. 备用 Google Translate (若之前未触发429则尝试，超时控制在2秒内)
+    # 2. 备用 Google Translate (若之前未触发429则尝试，超时控制在1.5秒内)
     if not _GOOGLE_BLOCKED:
         try:
             gt_url = "https://translate.googleapis.com/translate_a/single"
             params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": body_text[:350]}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.0) as client:
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
                 resp = client.get(gt_url, params=params)
                 if resp.status_code == 200:
                     res = resp.json()
@@ -90,27 +91,32 @@ def free_translate_zh(text: str) -> str:
                     if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
                         _TRANSLATION_CACHE[body_text] = zh_res
                         return prefix + zh_res
-                elif resp.status_code in (429, 403):
+                else:
                     _GOOGLE_BLOCKED = True
         except Exception:
             _GOOGLE_BLOCKED = True
 
-    # 2. 备用 MyMemory 翻译服务
-    try:
-        url = "https://api.mymemory.translated.net/get"
-        params = {"q": clean_text[:160], "langpair": "en|zh"}
-        with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=5) as client:
-            resp = client.get(url, params=params)
-            if resp.status_code == 200:
-                data = resp.json()
-                translated = data.get("responseData", {}).get("translatedText", "")
-                if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated):
-                    _TRANSLATION_CACHE[clean_text] = translated
-                    return translated
-    except Exception:
-        pass
+    # 3. 备用 MyMemory 翻译服务 (若未熔断，超时1.5秒)
+    if not _MYMEMORY_BLOCKED:
+        try:
+            url = "https://api.mymemory.translated.net/get"
+            params = {"q": clean_text[:160], "langpair": "en|zh"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=1.5) as client:
+                resp = client.get(url, params=params)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    translated = data.get("responseData", {}).get("translatedText", "")
+                    if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated):
+                        _TRANSLATION_CACHE[clean_text] = translated
+                        return translated
+                    else:
+                        _MYMEMORY_BLOCKED = True
+                else:
+                    _MYMEMORY_BLOCKED = True
+        except Exception:
+            _MYMEMORY_BLOCKED = True
 
-    # 3. 极客词汇核心语义映射兜底（绝不返回纯英文导致混杂）
+    # 4. 极客词汇核心语义映射兜底（绝不返回纯英文导致混杂）
     tech_map = {
         "OpenAI": "OpenAI",
         "Anthropic": "Anthropic",
@@ -144,9 +150,115 @@ def free_translate_zh(text: str) -> str:
     for en_w, zh_w in tech_map.items():
         fallback_title = re.sub(r'\b' + re.escape(en_w) + r'\b', zh_w, fallback_title, flags=re.IGNORECASE)
 
-    # 若仍然没有中文，不强加【最新动态】等伪装前缀，保持真实原样避免干扰汉字检测
     _TRANSLATION_CACHE[clean_text] = fallback_title
     return fallback_title
+
+
+def free_translate_en(text: str) -> str:
+    """Bulletproof translation engine to guarantee 100% clean English output from Chinese or non-English text."""
+    global _YOUDAO_BLOCKED, _MYMEMORY_BLOCKED
+    if not text:
+        return ""
+    
+    clean_text = str(text).strip()
+    prefix_match = re.match(r'^([【\[].*?[】\]]\s*)', clean_text)
+    prefix = prefix_match.group(1) if prefix_match else ""
+    body_text = clean_text[len(prefix):].strip()
+
+    if not body_text:
+        return clean_text
+
+    # 如果正文主体不含任何汉字，直接返回原英文
+    if not re.search(r'[\u4e00-\u9fa5]', body_text):
+        return clean_text
+
+    # 查内存缓存
+    cache_key = f"zh2en_{body_text}"
+    if cache_key in _TRANSLATION_CACHE:
+        return prefix + _TRANSLATION_CACHE[cache_key]
+
+    # 1. 优先调用有道免密神经翻译 (zh-CHS -> en)
+    if not _YOUDAO_BLOCKED:
+        try:
+            url = "https://aidemo.youdao.com/trans"
+            data = {"q": body_text[:280], "from": "zh-CHS", "to": "en"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
+                resp = client.post(url, data=data)
+                if resp.status_code == 200:
+                    t_list = resp.json().get("translation", [])
+                    if t_list and t_list[0]:
+                        en_res = t_list[0].strip()
+                        if not re.search(r'[\u4e00-\u9fa5]', en_res):
+                            _TRANSLATION_CACHE[cache_key] = en_res
+                            return prefix + en_res
+                else:
+                    _YOUDAO_BLOCKED = True
+        except Exception:
+            _YOUDAO_BLOCKED = True
+
+    # 2. 备用 MyMemory 翻译服务 (zh|en)
+    if not _MYMEMORY_BLOCKED:
+        try:
+            url = "https://api.mymemory.translated.net/get"
+            params = {"q": body_text[:160], "langpair": "zh|en"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=1.5) as client:
+                resp = client.get(url, params=params)
+                if resp.status_code == 200:
+                    translated = resp.json().get("responseData", {}).get("translatedText", "")
+                    if translated and "MYMEMORY WARNING" not in translated and not re.search(r'[\u4e00-\u9fa5]', translated):
+                        _TRANSLATION_CACHE[cache_key] = translated
+                        return prefix + translated
+                    else:
+                        _MYMEMORY_BLOCKED = True
+                else:
+                    _MYMEMORY_BLOCKED = True
+        except Exception:
+            _MYMEMORY_BLOCKED = True
+
+    # 3. 极客中英词典语义映射 + 彻底剥离中文兜底
+    zh_to_en_map = {
+        "A股行情分析": "A-share market analysis",
+        "智能投研": "intelligent investment research",
+        "智能体": "AI agent",
+        "股票分析": "stock analysis",
+        "量化交易分析": "quantitative trading analysis",
+        "盘后复盘桌面工作台": "post-market review desktop workbench",
+        "便捷标签式笔记文件平台": "convenient tabbed note-taking & file platform",
+        "内置 AI 助手": "with built-in AI assistant",
+        "开源私域": "open-source private domain",
+        "营销": "marketing",
+        "系统": "system",
+        "中国电商": "e-commerce",
+        "核心知识": "core fundamentals",
+        "架构": "architecture",
+        "实用开源 AI 落地工具": "Open-source applied AI productivity tool",
+        "热门 AI 场景落地与多模态动态": "Trending applied AI tools and multimodal innovations",
+        "一键脚本搞定": "One-click script automation for",
+        "桌面端": "desktop client",
+        "工作流": "workflow",
+        "自动化": "automation",
+        "开源免费": "open-source & free",
+        "大模型": "large language model",
+        "代码": "coding",
+        "助手": "assistant",
+        "平台": "platform",
+        "插件": "extension",
+        "工具": "tool"
+    }
+    mapped = body_text
+    for zh_k, en_v in zh_to_en_map.items():
+        mapped = mapped.replace(zh_k, f" {en_v} ")
+
+    clean_en = re.sub(r'[\u4e00-\u9fa5，。！？【】（）《》、—：；“”‘’]+', ' ', mapped).strip()
+    clean_en = re.sub(r'\s+', ' ', clean_en).strip()
+    if len(clean_en) >= 8 and re.search(r'[a-zA-Z]{3,}', clean_en):
+        res = (prefix + clean_en).strip()
+        _TRANSLATION_CACHE[cache_key] = clean_en
+        return res
+    res = (prefix + "Autonomous AI productivity tool and workflow application").strip()
+    _TRANSLATION_CACHE[cache_key] = "Autonomous AI productivity tool and workflow application"
+    return res
+
 
 
 def get_gemini_client():

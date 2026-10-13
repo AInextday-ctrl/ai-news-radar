@@ -16,10 +16,17 @@ from concurrent.futures import ThreadPoolExecutor
 
 # 引入项目基础翻译能力
 try:
-    from processor import free_translate_zh, clean_news_text
+    from processor import free_translate_zh, free_translate_en, clean_news_text
 except ImportError:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from processor import free_translate_zh, clean_news_text
+    from processor import free_translate_zh, free_translate_en, clean_news_text
+
+
+def has_cjk(text: str) -> bool:
+    """检测文本是否包含中日韩字符"""
+    if not text:
+        return False
+    return bool(re.search(r'[\u4e00-\u9fa5\u3040-\u30ff\uac00-\ud7af]', str(text)))
 
 
 def count_chinese_chars(text: str) -> int:
@@ -88,24 +95,48 @@ def translate_and_purify_article(content: str) -> str:
 
 def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[str]]:
     """
-    核心哨兵规则：对单条资讯执行严格的语言规范审查与自愈修正。
+    核心哨兵规则：对单条资讯执行严格的双向语言规范审查与自愈修正。
     返回: (修正后的 item, 修复日志列表)
     """
     fixes = []
-    
-    # 落地工具、实操提示词与前沿视频专区：包含大量专业专有名词、GitHub 库名、Prompt 咒语与视频原名，直接保留结构化字段，避免外部翻译网络拥堵
-    if item.get("category") in ("tools", "prompts", "videos"):
+    cat = item.get("category", "")
+
+    # 落地工具、实操提示词与前沿视频专区：严格执行双向 *_en 无中文、*_zh 纯中文校验
+    if cat in ("tools", "prompts", "videos"):
+        app_name = item.get("app_name_en") or item.get("app_name") or "AI Tool"
+        # 校验 *_en 字段严禁含中文
+        for en_key in ("title_en", "summary_en", "app_hook_en", "overview_en", "prompt_content_en"):
+            val = item.get(en_key)
+            if val and has_cjk(val):
+                item[en_key] = free_translate_en(str(val))
+                fixes.append(f"{en_key} 剔除中文混杂并转为纯英文")
+        # 校验 tools 的 *_zh 字段必须包含中文
+        if cat == "tools":
+            hook_zh = item.get("app_hook") or ""
+            if hook_zh and not has_cjk(hook_zh):
+                t_zh = clean_news_text(free_translate_zh(hook_zh[:160]))
+                if has_cjk(t_zh):
+                    item["app_hook"] = t_zh[:120]
+                    item["title_zh"] = f"【{app_name}】{t_zh[:65]}"
+                    item["title"] = item["title_zh"]
+                    fixes.append("tools.app_hook 翻译为中文")
+            ov_zh = item.get("overview_zh") or ""
+            if ov_zh and re.search(r'(?:[A-Za-z0-9\',.-]+\s+){6,}[A-Za-z0-9\',.-]+', ov_zh):
+                hook_c = item.get("app_hook") if has_cjk(item.get("app_hook", "")) else "提供前沿生成式 AI 与自动化工作流能力"
+                scen = item.get("scenario_tag") or "💻 编程与开发"
+                item["overview_zh"] = f"{app_name} 是一款专注于 {scen} 领域的开源与实战 AI 工具。{hook_c}，支持开发者与创作者快速集成部署。"
+                fixes.append("tools.overview_zh 清除英文长句")
         if not item.get("title_zh"):
             item["title_zh"] = item.get("title") or "AI 创新前沿内容"
         if not item.get("title_en"):
-            item["title_en"] = item.get("title") or item["title_zh"]
+            item["title_en"] = free_translate_en(item.get("title") or item["title_zh"])
         if not item.get("summary_zh"):
             item["summary_zh"] = item.get("content_snippet") or "热门 AI 场景落地与多模态动态"
         if not item.get("summary_en"):
-            item["summary_en"] = item.get("content_snippet") or "Trending AI applications and dynamic content"
+            item["summary_en"] = free_translate_en(item.get("content_snippet") or "Trending AI applications and dynamic content")
         return item, fixes
 
-    # 1. 标题治理：title_zh 必须为纯正中文
+    # 1. 标题治理：title_zh 必须为纯正中文，title_en 必须为纯正英文
     title_zh = item.get("title_zh") or ""
     # 剔除机械伪前缀
     title_zh = re.sub(r'^[【\[].*?[】\]]\s*', '', str(title_zh)).strip()
@@ -125,9 +156,11 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
     else:
         item["title_zh"] = clean_news_text(title_zh)
 
-    # 保证 title_en 存在
-    if not item.get("title_en"):
-        item["title_en"] = item.get("title") or item.get("title_zh", "")
+    # 保证 title_en 存在且不含中文
+    title_en = item.get("title_en") or item.get("title") or ""
+    if not title_en or has_cjk(title_en):
+        item["title_en"] = free_translate_en(title_en or item.get("title_zh", "AI Industry Update"))
+        fixes.append("title_en 纯英文自愈")
 
     # 2. 摘要治理：summary_zh 必须为纯中文
     sum_zh = item.get("summary_zh") or ""
@@ -147,6 +180,11 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
             item["summary_zh"] = f"{item['title_zh']}。相关动态引发全球产业界广泛讨论与技术跟踪。"
     else:
         item["summary_zh"] = clean_news_text(sum_zh)
+
+    sum_en = item.get("summary_en") or ""
+    if not sum_en or has_cjk(sum_en):
+        item["summary_en"] = free_translate_en(sum_en or item.get("title_en") or "Latest development and technical analysis in AI.")
+        fixes.append("summary_en 纯英文自愈")
 
     # 3. 深度长文实录治理：article_content 与 article_content_zh
     art_zh = item.get("article_content_zh")

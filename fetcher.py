@@ -99,6 +99,22 @@ def make_id(url: str, title: str) -> str:
     return hashlib.md5(raw).hexdigest()[:16]
 
 
+def is_primarily_english(text: str) -> bool:
+    """
+    Strict language gate for crawled content:
+    Returns True ONLY if the text is primarily English (contains Latin characters and ZERO CJK/Japanese/Korean/Cyrillic/Arabic script).
+    """
+    if not text or not str(text).strip():
+        return False
+    s = str(text).strip()
+    # Reject any Chinese, Japanese (Hiragana/Katakana/Halfwidth Kana), Korean (Hangul), Cyrillic, or Arabic script
+    if re.search(r'[\u4e00-\u9fa5\u3040-\u30ff\uff65-\uff9f\uac00-\ud7af\u0400-\u04ff\u0600-\u06ff]', s):
+        return False
+    ascii_letters = len(re.findall(r'[A-Za-z]', s))
+    return ascii_letters >= 4
+
+
+
 def parse_to_iso(published_parsed: Any = None, raw_str: str = "") -> str:
     """Standardize publication time to ISO-8601 string."""
     if published_parsed:
@@ -552,27 +568,35 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                     is_viral = True
                     v_subtype = "viral"
                     v_skill = "🔥 近期爆点"
+                    v_skill_en = "🔥 Viral Hit"
                     author_viral_counts[ch_name] = author_viral_counts.get(ch_name, 0) + 1
                 elif any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn", "how to", "setup", "puzzle"]):
                     is_viral = False
                     v_subtype = "tutorial"
                     v_skill = "🎓 系统教学"
+                    v_skill_en = "🎓 System Tutorial"
                 elif any(k in t_lower for k in ["benchmark", "compare", "vs", "eval", "weights", "model", "vllm", "speed", "fast"]):
                     is_viral = False
                     v_subtype = "mastery"
                     v_skill = "🤖 模型技巧"
+                    v_skill_en = "🤖 Model Mastery"
                 elif any(k in t_lower for k in ["workflow", "tips", "tricks", "prompt", "cursor", "tools", "stack"]):
                     is_viral = False
                     v_subtype = "skills"
                     v_skill = "⚡ 实操技巧"
+                    v_skill_en = "⚡ Practical Tips"
                 else:
                     is_viral = False
                     v_subtype = "insight"
                     v_skill = "💡 独家经验"
+                    v_skill_en = "💡 Expert Insights"
 
                 title_zh = KNOWN_TITLE_TRANSLATIONS.get(clean_t)
                 if not title_zh:
-                    title_zh = f"【{v_skill}】{title}" if is_viral else f"【实战精讲】{title}"
+                    trans_t = clean_news_text(free_translate_zh(title[:150]))
+                    if not re.search(r'[\u4e00-\u9fa5]', trans_t):
+                        trans_t = f"{ch_name} 最新 AI 前沿解析：{title}"
+                    title_zh = f"【{v_skill}】{trans_t}" if is_viral else f"【实战精讲】{trans_t}"
 
                 v_tags = [ch_name]
                 if is_viral:
@@ -590,6 +614,11 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                 format_label = "9:16 竖屏短视频" if is_shorts else "16:9 深度长视频"
                 if is_shorts:
                     v_tags.append("YouTube Shorts")
+
+                summary_en_val = summary if (summary and is_primarily_english(summary)) else f"Latest hands-on AI demo and technical breakdown from {ch_name}: {title}"
+                summary_zh_val = clean_news_text(free_translate_zh(summary[:200])) if summary else ""
+                if not summary_zh_val or not re.search(r'[\u4e00-\u9fa5]', summary_zh_val):
+                    summary_zh_val = f"来自 {ch_name} 的最新 AI 演示精讲与深度架构拆解。"
 
                 item_obj = {
                     "id": f"yt_{video_id}" if video_id else make_id(link, title),
@@ -609,11 +638,11 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                     "is_viral": is_viral,
                     "sub_type": v_subtype,
                     "purpose_zh": f"{v_skill} · {ch_name} 竖屏精讲" if is_shorts else f"{v_skill} · {ch_name} 深度实战",
-                    "purpose_en": f"{v_skill} · {ch_name} Breakdown",
+                    "purpose_en": f"{v_skill_en} · {ch_name} Breakdown",
                     "metrics": {"format": format_label, "platform": platform_type, "skill_tag": v_skill, "difficulty": v_skill},
-                    "content_snippet": summary or f"来自 {ch_name} 的最新 AI 演示精讲与架构解析",
-                    "summary_zh": summary or f"来自 {ch_name} 的最新 AI 演示精讲与架构解析",
-                    "summary_en": summary or f"Latest hands-on AI demo and technical breakdown from {ch_name}.",
+                    "content_snippet": summary_zh_val,
+                    "summary_zh": summary_zh_val,
+                    "summary_en": summary_en_val,
                     "category": "videos",
                     "tags": v_tags
                 }
@@ -1139,7 +1168,7 @@ def fetch_x_leader_posts(max_items: int = 50) -> List[Dict[str, Any]]:
                 for entry in feed.entries[:16]:
                     raw_title = entry.get("title", "").strip()
                     cleaned_title = re.sub(r'\s*-\s*(?:x\.com|twitter\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()
-                    if not cleaned_title or len(cleaned_title) < 15:
+                    if not cleaned_title or len(cleaned_title) < 15 or not is_primarily_english(cleaned_title):
                         continue
                     # 过滤纯 @ 开头的极短回复闲聊，除非为有深度的推文
                     if cleaned_title.startswith("@") and len(cleaned_title) < 45:
@@ -1346,16 +1375,29 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
 # ==========================================
 # 4. 抓取 GitHub 场景应用神器 (高频更新+丰富标题)
 # ==========================================
+def is_primarily_english(text: str) -> bool:
+    """Strictly verify that crawled content is primarily in English (no CJK/Cyrillic/Arabic script)."""
+    if not text or not str(text).strip():
+        return False
+    s = str(text).strip()
+    # Reject any Chinese, Japanese, Korean, Cyrillic, or Arabic characters
+    if re.search(r'[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af\u0400-\u04ff\u0600-\u06ff]', s):
+        return False
+    ascii_letters = len(re.findall(r'[a-zA-Z]', s))
+    return ascii_letters >= 6
+
+
 def fetch_github_applied_tools() -> List[Dict[str, Any]]:
-    """Fetch practical GitHub open-source client tools/apps with authentic push/update timestamps."""
+    """Fetch practical GitHub open-source client tools/apps (English-only repositories) with dual-language processing."""
+    from processor import free_translate_zh
     items = []
     seen_urls = set()
     banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1"]
     now_utc = datetime.now(timezone.utc)
     search_queries = [
-        "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>20&sort=updated&order=desc&per_page=20",
-        "https://api.github.com/search/repositories?q=topic:ai-agent+stars:>50&sort=updated&order=desc&per_page=20",
-        "https://api.github.com/search/repositories?q=topic:ai-tools+stars:>20&sort=updated&order=desc&per_page=15",
+        "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>20&sort=updated&order=desc&per_page=25",
+        "https://api.github.com/search/repositories?q=topic:ai-agent+stars:>50&sort=updated&order=desc&per_page=25",
+        "https://api.github.com/search/repositories?q=topic:ai-tools+stars:>20&sort=updated&order=desc&per_page=20",
     ]
     try:
         with httpx.Client(headers=HEADERS, timeout=12) as client:
@@ -1376,8 +1418,13 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                         seen_urls.add(repo_url)
 
                         name = repo.get("name", "")
-                        description = repo.get("description") or "实用开源 AI 落地工具"
-                        combined = f"{name} {description}".lower()
+                        raw_desc = (repo.get("description") or "").strip()
+                        # 严格英文抓取门禁：不爬取非英文描述或无描述仓库，确保源内容及 GitHub OpenGraph 预览图 100% 纯英文
+                        if not is_primarily_english(raw_desc) or not is_primarily_english(name):
+                            continue
+
+                        description_en = raw_desc
+                        combined = f"{name} {description_en}".lower()
                         
                         # 过滤远古项目及过时模型
                         if any(bad in combined for bad in banned_keywords):
@@ -1425,8 +1472,13 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                             icon_type = "chat"
                             runtime_badge = "💻 跨平台桌面端"
 
-                        title_fmt = f"【{name}】{description[:65]}"
-                        title_en = f"[{name}] {description[:65]}"
+                        # 抓取阶段双向语言处理：英文站保留原生纯英文，中文站自动翻译为地道中文
+                        description_zh = free_translate_zh(description_en[:160])
+                        if not re.search(r'[\u4e00-\u9fff]', description_zh):
+                            description_zh = f"专注于 {scenario} 的高星开源 AI 实用项目 ({description_en[:60]})"
+
+                        title_fmt = f"【{name}】{description_zh[:65]}"
+                        title_en = f"[{name}] {description_en[:65]}"
 
                         repo_img = f"https://opengraph.githubassets.com/1/{repo.get('full_name')}" if repo.get("full_name") else None
                         items.append({
@@ -1436,13 +1488,13 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                             "title_en": title_en,
                             "app_name": name,
                             "app_name_en": name,
-                            "app_hook": description[:65],
-                            "app_hook_en": description[:65],
+                            "app_hook": description_zh[:80],
+                            "app_hook_en": description_en[:80],
                             "url": repo_url,
                             "official_url": repo_url,
                             "image_url": repo_img or "",
                             "preview_images": [repo_img] if repo_img else [],
-                            "source": "AI 资讯雷达",
+                            "source": "AI News Radar",
                             "author": repo.get("owner", {}).get("login", ""),
                             "raw_published_at": real_pub_iso,
                             "runtime_badge": runtime_badge,
@@ -1451,9 +1503,21 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                             "scenario_tag": scenario,
                             "pricing_tag": "🟢 完全开源免费",
                             "platform": "tool",
-                            "content_snippet": f"⭐ {stars} stars · {description}",
-                            "summary_zh": f"⭐ {stars} 颗星标 · {description}",
-                            "summary_en": f"⭐ {stars} stars · {description}",
+                            "content_snippet": f"⭐ {stars} stars · {description_en}",
+                            "summary_zh": f"⭐ {stars} 颗星标 · {description_zh}",
+                            "summary_en": f"⭐ {stars} stars · {description_en}",
+                            "overview_zh": f"{name} 是一款专注于 {scenario} 的开源 AI 工具。{description_zh}，支持免费部署与使用。",
+                            "overview_en": f"{name} is an open-source practical tool designed for {to_en_scenario(scenario)}. {description_en}.",
+                            "features_zh": [
+                                f"针对 {scenario} 场景深度调优与工程封装",
+                                f"支持 {runtime_badge}，开箱即用",
+                                "结构化操作界面，极简人机交互体验"
+                            ],
+                            "features_en": [
+                                f"Specialized optimization for {to_en_scenario(scenario)}",
+                                f"Native support for {to_en_runtime(runtime_badge)}",
+                                "Intuitive modern user interface for daily productivity"
+                            ],
                             "category": "tools",
                             "tags": [scenario, "开源免费"]
                         })
@@ -1784,11 +1848,19 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
                 preview_imgs = [ss_url]
 
-            title_fmt = f"【{app_name}】{hook[:65]}"
-            title_en = f"[{app_name}] {hook[:65]}"
+            if not is_primarily_english(hook) or not is_primarily_english(app_name):
+                return None
 
-            summary_zh = f"🔥 {rank_badge} · {scenario} · {hook[:140]}"
-            summary_en = f"{scenario} · {hook[:140]}"
+            hook_en = hook[:120]
+            hook_zh = clean_news_text(free_translate_zh(hook_en)) if not re.search(r'[\u4e00-\u9fa5]', hook_en) else hook_en
+            if not hook_zh or not re.search(r'[\u4e00-\u9fa5]', hook_zh):
+                hook_zh = f"专注于 {scenario} 场景的创新 AI 效率工具"
+
+            title_fmt = f"【{app_name}】{hook_zh[:65]}"
+            title_en = f"[{app_name}] {hook_en[:65]}"
+
+            summary_zh = f"🔥 {rank_badge} · {scenario} · {hook_zh[:140]}"
+            summary_en = f"{to_en_scenario(scenario)} · {hook_en[:140]}"
 
             return {
                 "id": make_id(source_url, title),
@@ -1797,8 +1869,8 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "title_en": title_en,
                 "app_name": app_name,
                 "app_name_en": app_name,
-                "app_hook": hook[:120],
-                "app_hook_en": hook[:120],
+                "app_hook": hook_zh[:120],
+                "app_hook_en": hook_en[:120],
                 "url": official_url,
                 "official_url": official_url,
                 "source_url": source_url,
@@ -1806,8 +1878,8 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "image_url": preview_imgs[0] if preview_imgs else "",
                 "logo_url": logo_url,
                 "rank_badge": rank_badge,
-                "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",
-                "overview_en": f"{app_name} is an innovative practical tool designed for {to_en_scenario(scenario)}. {hook}.",
+                "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook_zh}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",
+                "overview_en": f"{app_name} is an innovative practical tool designed for {to_en_scenario(scenario)}. {hook_en}.",
                 "features_zh": [
                     f"针对 {scenario} 场景深度调优与工程封装",
                     f"支持 {runtime_badge}，开箱即用",
@@ -1941,7 +2013,7 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
                         for entry in feed.entries[:16]:
                             raw_title = entry.get("title", "").strip()
                             cleaned_title = re.sub(r'\s*-\s*(?:x\.com|twitter\.com|Twitter|X)\s*$', '', raw_title, flags=re.IGNORECASE).strip()
-                            if not cleaned_title or len(cleaned_title) < 15:
+                            if not cleaned_title or len(cleaned_title) < 15 or not is_primarily_english(cleaned_title):
                                 continue
                             if any(bad in cleaned_title.lower() for bad in NOISE_DISCARD_KEYWORDS):
                                 continue
@@ -2626,7 +2698,9 @@ def fetch_daily_github_prompts(max_items: int = 4) -> List[Dict[str, Any]]:
                         break
                     repo_name = repo.get("name", "")
                     owner = repo.get("owner", {}).get("login", "")
-                    description = repo.get("description") or "GitHub 每日精选前沿提示词"
+                    description = (repo.get("description") or "").strip()
+                    if not description or not is_primarily_english(description) or not is_primarily_english(repo_name):
+                        continue
                     updated_at = repo.get("updated_at") or datetime.now(timezone.utc).isoformat()
                     repo_url = repo.get("html_url", "")
                     stars = repo.get("stargazers_count", 0)
@@ -2636,31 +2710,37 @@ def fetch_daily_github_prompts(max_items: int = 4) -> List[Dict[str, Any]]:
                     if any(k in desc_lower for k in ["video", "seedance", "sora", "wan", "kling"]):
                         cat = "video"
                         scenario_label = "🎬 动态视效"
-                        target_model = "通义 Wan 2.1 / Seedance 2.0 / Sora 2"
+                        scenario_label_en = "🎬 Video & VFX"
+                        target_model = "Wan 2.1 / Seedance 2.0 / Sora 2"
                         output_type = "video"
                     elif any(k in desc_lower for k in ["image", "flux", "midjourney", "diffusion", "art", "draw"]):
                         cat = "image"
                         scenario_label = "🎨 灵感生图"
+                        scenario_label_en = "🎨 Image Gen"
                         target_model = "Flux.1 Pro / Midjourney v7"
                         output_type = "image"
                     elif any(k in desc_lower for k in ["code", "coding", "cursor", "copilot", "program", "developer", "mcp"]):
                         cat = "code"
                         scenario_label = "💻 编程开发"
+                        scenario_label_en = "💻 Coding & Dev"
                         target_model = "DeepSeek-R4 / Claude 5.5 Sonnet"
                         output_type = "code"
                     elif any(k in desc_lower for k in ["novel", "story", "write", "screenplay", "drama"]):
                         cat = "novel"
                         scenario_label = "✍️ 短剧小说"
+                        scenario_label_en = "✍️ Creative Writing"
                         target_model = "DeepSeek-R4 / Claude 5.5"
                         output_type = "script"
                     elif any(k in desc_lower for k in ["data", "analysis", "excel", "sql", "metric"]):
                         cat = "analysis"
                         scenario_label = "📊 数据分析"
+                        scenario_label_en = "📊 Data Analysis"
                         target_model = "DeepSeek-R4 / GPT-6.0"
                         output_type = "text"
                     else:
                         cat = "code"
                         scenario_label = "💻 编程开发"
+                        scenario_label_en = "💻 Coding & Dev"
                         target_model = "DeepSeek-R4 / Claude 5.5 Sonnet"
                         output_type = "code"
 
@@ -2672,22 +2752,29 @@ def fetch_daily_github_prompts(max_items: int = 4) -> List[Dict[str, Any]]:
                         "category": "prompts",
                         "sub_type": cat,
                         "scenario_label": scenario_label,
+                        "scenario_label_en": scenario_label_en,
                         "target_model": target_model,
                         "recommended_model": target_model,
                         "model_family": "Universal",
                         "model_tier_score": 96,
                         "generation_tier": "sota",
                         "purpose_zh": f"开源社区今日活跃前沿模版 ({repo_name})",
+                        "purpose_en": f"Daily Active Open-Source Prompt Suite ({repo_name})",
                         "temp_advice": "温度 0.5 (社区前沿)",
+                        "temp_advice_en": "Temp 0.5 (Community SOTA)",
                         "variables": ["{{核心任务目标}}", "{{业务上下文约束}}", "{{期望输出格式}}"],
+                        "variables_en": ["{{Core Objective}}", "{{Context Constraints}}", "{{Output Format}}"],
                         "prompt_content_zh": f"【GitHub 社区今日精选 · {repo_name}】\n你是一名精通 {target_model} 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {{核心任务目标}}，严禁空泛套话；\n2. 【边界与上下文】：在 {{业务上下文约束}} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {{期望输出格式}} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：{repo_url}",
-                        "prompt_content_en": f"[GitHub Daily Trending · {repo_name}]\nYou are an expert utilizing {target_model}. Address {{核心任务目标}} strictly within {{业务上下文约束}} and output {{期望输出格式}}.",
+                        "prompt_content_en": f"[GitHub Daily Trending · {repo_name}]\nYou are an expert engineer/creator utilizing {target_model}. Execute the task under the following constraints:\n\n1. [Core Objective]: Deeply solve {{{{Core Objective}}}} with actionable precision;\n2. [Context & Boundaries]: Align strictly within {{{{Context Constraints}}}};\n3. [Structured Deliverable]: Deliver in {{{{Output Format}}}} with verifiable examples.\n\nRepository: {repo_url}",
                         "sample_output": {
                             "type": output_type,
                             "title": f"来自 {repo_name} 社区的实测规范样板",
-                            "content": f"// 来源于 GitHub 实时更新仓库 {repo_name} (Stars: {stars})\n// 官方地址: {repo_url}\n// 适配前沿模型: {target_model}\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。"
+                            "title_en": f"Verified Sample Output from {repo_name}",
+                            "content": f"// 来源于 GitHub 实时更新仓库 {repo_name} (Stars: {stars})\n// 官方地址: {repo_url}\n// 适配前沿模型: {target_model}\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。",
+                            "content_en": f"// Sourced from active GitHub repository {repo_name} (Stars: {stars})\n// Official URL: {repo_url}\n// Target Models: {target_model}\n\n// Core execution pipeline ready. Fill in the variables above to run."
                         },
                         "usage_guide_zh": f"该模版由 GitHub 开源社区今日（{updated_at[:10]}）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+                        "usage_guide_en": f"Pulled from active GitHub open-source community updates ({updated_at[:10]}). Click the repository link for extended configurations.",
                         "url": repo_url,
                         "raw_published_at": updated_at,
                         "created_at": updated_at,
