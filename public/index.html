@@ -322,12 +322,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">392</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">394</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">57</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">59</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -821,6 +821,58 @@
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('758328d497de03af')" itemscope itemtype="https://schema.org/NewsArticle">
+                
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Reuters</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('758328d497de03af')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                      Bumble says it has agreed to be taken private by Ithaca Holdings in a $1.3B deal; Ithaca co-founders Ravi Gupta and John
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Bumble (BMBL.O) said on Tuesday it had agreed to be taken private by Ithaca Holdings in a deal valued at $1.3 billion …
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('758328d497de03af')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.reuters.com/technology/bumble-go-private-13-billion-deal-2026-10-13/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('2ba86fdcc98f412d')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://gamesbeat.com/wp-content/uploads/2025/06/GB_Default.png" alt="Sources: Rockstar plans to release the PC version of GTA 6 within the first three months of 2027, after releasing it on " loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: GamesBeat</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('2ba86fdcc98f412d')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                      Sources: Rockstar plans to release the PC version of GTA 6 within the first three months of 2027, after releasing it on 
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Become a member of GB MAX to gain exclusive access to the industry and to the most influential global B2B leadership community …
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('2ba86fdcc98f412d')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://gamesbeat.com/grand-theft-auto-vis-pc-release-is-slated-for-q1-2027/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4eacbc9904d55484')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/2025/06/STK083_NVIDIA_2.jpg?quality=90&strip=all&crop=0,0,100,100" alt="DLSS 5 gets toned down for its Hogwarts Legacy debut next month" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -1078,58 +1130,6 @@ The warning was the late
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.technologyreview.com/2026/10/13/1146382/the-download-open-models-trade-offs-geothermal-power/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d27a61c9378be146')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="Sources: Anthropic and OpenAI have pushed for substantial control over what external AI evaluators can publish, out of c" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('d27a61c9378be146')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
-                      Sources: Anthropic and OpenAI have pushed for substantial control over what external AI evaluators can publish, out of c
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Anthropic and OpenAI have sought significant control over what outside evaluators can publish, concerned that findings could reveal trade secrets …
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-1 gap-2">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d27a61c9378be146')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.reuters.com/world/behind-ai-industrys-call-independent-reviews-fight-over-what-gets-made-public-2026-10-13/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('a3f83693512e6c20')" itemscope itemtype="https://schema.org/NewsArticle">
-                
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('a3f83693512e6c20')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
-                      Sources: US banking regulators are questioning banks about their deployment of agentic AI, use of Chinese-developed AI m
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Banking regulators are stepping up efforts to contain growing AI risks, six people familiar with the matter said …
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-1 gap-2">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a3f83693512e6c20')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.reuters.com/legal/litigation/banking-watchdogs-ramp-up-ai-scrutiny-stability-fears-mount-sources-say-2026-10-13/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
