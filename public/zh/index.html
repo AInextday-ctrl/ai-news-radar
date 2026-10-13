@@ -1016,7 +1016,7 @@
                       资料来源：自动驾驶仿真软件制造商Applied Intuition已收到估值超过300亿美元的投资报价，高于6月份的150亿美元（ Stephanie P
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      在过去的三年里， OpenAI、Anthropic和xAI等人工智能实验室吸引了很多投资者的关注，也吸引了很多投资者的估值
+                      自动驾驶仿真与测试软件领头羊 Applied Intuition 收到外部投资邀约，其估值飙升至超 300 亿美元，较今年 6 月的 150 亿美元估值在短短数月内实现翻倍。
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -8271,11 +8271,38 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
+      // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)
+      const isPaywalled = (() => {
+        if (item.is_paywalled) return true;
+        const s = (source || item.source || '').toLowerCase();
+        const u = (item.url || '').toLowerCase();
+        const paywallKeywords = ['the information', 'bloomberg', 'wsj', 'wall street journal', 'financial times', 'ft.com', 'theinformation.com', 'bloomberg.com', 'wsj.com'];
+        return paywallKeywords.some(k => s.includes(k) || u.includes(k));
+      })();
+
+      // 付费墙专属横幅提示控制
+      const paywallNoticeEl = document.getElementById('ai-modal-paywall-notice');
+      const paywallTextEl = document.getElementById('ai-modal-paywall-text');
+      if (paywallNoticeEl && paywallTextEl) {
+        if (isPaywalled) {
+          paywallNoticeEl.classList.remove('hidden');
+          paywallTextEl.textContent = isZh
+            ? `本条情报为《${source}》独家付费报道（源站设有硬付费墙，非订阅会员将跳转付费购买页）。AI 资讯雷达已为您提炼并结构化呈现核心内幕事实，站内即可通读。`
+            : `Exclusive scoop from ${source} (paywall-protected; direct link requires subscription). AI News Radar has structured and unpacked all core intelligence facts above for seamless reading.`;
+        } else {
+          paywallNoticeEl.classList.add('hidden');
+        }
+      }
+
       if (sourceBtnEl) {
         sourceBtnEl.href = item.url || '#';
       }
       if (sourceBtnTextEl) {
-        sourceBtnTextEl.textContent = t.aiModalSourceBtn || (isZh ? '阅读原文 / 直达报道' : 'Read Full Story');
+        if (isPaywalled) {
+          sourceBtnTextEl.textContent = isZh ? '前往源站 ↗ (需付费订阅)' : 'Read Source ↗ (Paywalled)';
+        } else {
+          sourceBtnTextEl.textContent = t.aiModalSourceBtn || (isZh ? '阅读原文 / 直达报道' : 'Read Full Story');
+        }
       }
 
       // 现场视频报道提示栏控制

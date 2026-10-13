@@ -1041,7 +1041,7 @@ by Jon Hicks
                       Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at 
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      For the last three years, AI labs like OpenAI, Anthropic and xAI have sucked up a lot of investor attention—as well as nosebleed valuations.
+                      Autonomous driving simulation software provider Applied Intuition has received investment offers valuing the firm at over $30 billion, doubling its $15 billion valuation recorded just months ago in June.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -2024,6 +2024,14 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
             <span id="ai-modal-video-btn-text">Watch Video</span>
             <span>▶</span>
           </a>
+        </div>
+
+        <!-- 顶级付费墙媒体独家报道专属提示条 (针对 The Information, Bloomberg, WSJ 等硬付费墙) -->
+        <div id="ai-modal-paywall-notice" class="hidden flex items-start space-x-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs shadow-sm">
+          <span class="text-base shrink-0 leading-none">🔒</span>
+          <div class="flex-1 leading-relaxed">
+            <span id="ai-modal-paywall-text" class="font-medium"></span>
+          </div>
         </div>
 
         <!-- 板块 1: 📋 事件脉络速览 (新闻简报) -->
@@ -8292,11 +8300,38 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
+      // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)
+      const isPaywalled = (() => {
+        if (item.is_paywalled) return true;
+        const s = (source || item.source || '').toLowerCase();
+        const u = (item.url || '').toLowerCase();
+        const paywallKeywords = ['the information', 'bloomberg', 'wsj', 'wall street journal', 'financial times', 'ft.com', 'theinformation.com', 'bloomberg.com', 'wsj.com'];
+        return paywallKeywords.some(k => s.includes(k) || u.includes(k));
+      })();
+
+      // 付费墙专属横幅提示控制
+      const paywallNoticeEl = document.getElementById('ai-modal-paywall-notice');
+      const paywallTextEl = document.getElementById('ai-modal-paywall-text');
+      if (paywallNoticeEl && paywallTextEl) {
+        if (isPaywalled) {
+          paywallNoticeEl.classList.remove('hidden');
+          paywallTextEl.textContent = isZh
+            ? `本条情报为《${source}》独家付费报道（源站设有硬付费墙，非订阅会员将跳转付费购买页）。AI 资讯雷达已为您提炼并结构化呈现核心内幕事实，站内即可通读。`
+            : `Exclusive scoop from ${source} (paywall-protected; direct link requires subscription). AI News Radar has structured and unpacked all core intelligence facts above for seamless reading.`;
+        } else {
+          paywallNoticeEl.classList.add('hidden');
+        }
+      }
+
       if (sourceBtnEl) {
         sourceBtnEl.href = item.url || '#';
       }
       if (sourceBtnTextEl) {
-        sourceBtnTextEl.textContent = t.aiModalSourceBtn || (isZh ? '阅读原文 / 直达报道' : 'Read Full Story');
+        if (isPaywalled) {
+          sourceBtnTextEl.textContent = isZh ? '前往源站 ↗ (需付费订阅)' : 'Read Source ↗ (Paywalled)';
+        } else {
+          sourceBtnTextEl.textContent = t.aiModalSourceBtn || (isZh ? '阅读原文 / 直达报道' : 'Read Full Story');
+        }
       }
 
       // 现场视频报道提示栏控制
