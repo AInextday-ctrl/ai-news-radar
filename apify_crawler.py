@@ -291,6 +291,22 @@ def fetch_incremental_tweets(
     known_ids = set(state.get("known_status_ids", []))
     watermarks = state.get("author_watermarks", {})
 
+    # 策略 B: 动静分频调度与额度保护
+    # 免费信源 (Google News / RSS / 爆款探针) 每 15 分钟高频跑
+    # 付费 Apify 增量抓取每 2.5 小时跑 1 次，避免无意义空转烧钱
+    last_crawl = state.get("last_crawl_utc")
+    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "2.5"))
+    if not force_update and last_crawl:
+        try:
+            lc_dt = datetime.fromisoformat(last_crawl.replace("Z", "+00:00"))
+            now_dt = datetime.now(timezone.utc)
+            elapsed_hours = (now_dt - lc_dt).total_seconds() / 3600.0
+            if elapsed_hours < interval_hours:
+                print(f"  ℹ️ [Apify 策略 B 分频调度] 距上次增量深捞仅 {elapsed_hours:.2f} 小时 (调度间隔: {interval_hours}h)，跳过本次 Apify 爬虫以节省额度。由免费 15min 信源全天候接管。")
+                return []
+        except Exception:
+            pass
+
     # 也从本地数据库加载已收录的推文 ID
     existing_file_ids = set()
     for fp in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
@@ -307,20 +323,19 @@ def fetch_incremental_tweets(
                 pass
 
     dynamic_queries = get_dynamic_trending_queries()
-    print(f"  🚀 [Apify 增量采集器] 启动增量抓取: 监控全球 {len(LEADER_HANDLES)} 位领袖 + {len(LAB_HANDLES)} 家前沿实验室 + {len(dynamic_queries)} 组全网飙升标签 (Token 池: {len(tokens)} 个)...")
+    print(f"  🚀 [Apify 策略 B 增量采集器] 启动增量抓取 (Token 池: {len(tokens)} 个)...")
 
+    # 策略 B 查询合并：将核心领袖与权威实验室合并为 2 组高内聚紧凑查询 (减少 80% 的 Actor 启动开销)
     all_queries = []
-    # 1. 批量抓取全球顶尖 AI 领袖 (每组 15 人，保证检索式在 X API 长度限制内高效执行)
-    for i in range(0, len(LEADER_HANDLES), 15):
-        batch = LEADER_HANDLES[i:i+15]
-        q_leaders = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
-        all_queries.append((q_leaders, 25))
+    # 1. 核心 AI 顶尖领袖 (Top 25 舵手与核心科学家)
+    core_leaders = LEADER_HANDLES[:25]
+    q_leaders = "(" + " OR ".join([f"from:{h}" for h in core_leaders]) + ")"
+    all_queries.append((q_leaders, 35))
 
-    # 2. 批量抓取官方实验室与前沿研发团队 (每组 15 家)
-    for i in range(0, len(LAB_HANDLES), 15):
-        batch = LAB_HANDLES[i:i+15]
-        q_labs = "(" + " OR ".join([f"from:{h}" for h in batch]) + ")"
-        all_queries.append((q_labs, 25))
+    # 2. 官方核心旗舰实验室 (Top 20 核心模型机构)
+    core_labs = LAB_HANDLES[:20]
+    q_labs = "(" + " OR ".join([f"from:{h}" for h in core_labs]) + ")"
+    all_queries.append((q_labs, 35))
 
     raw_items = []
     from concurrent.futures import ThreadPoolExecutor, as_completed
