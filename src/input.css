@@ -1303,3 +1303,24 @@ ins.adsbygoogle iframe {
       background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%);
     }
 
+    /* Viral Ticker Viewport & Slider Vertical Auto-Carousel */
+    #viral-ticker-viewport {
+      position: relative;
+      overflow: hidden !important;
+      height: 480px;
+      max-height: 480px;
+      transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    @media (min-width: 768px) {
+      #viral-ticker-viewport {
+        height: 155px;
+        max-height: 155px;
+      }
+    }
+
+    #viral-ticker-slider {
+      transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+

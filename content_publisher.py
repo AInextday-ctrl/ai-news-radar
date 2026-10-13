@@ -1019,6 +1019,32 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
+        # 严格约束走马灯视口高度，杜绝全部展开
+        en_content = re.sub(
+            r'id="viral-ticker-viewport"[^>]*>',
+            'id="viral-ticker-viewport" class="relative overflow-hidden h-[480px] md:h-[155px] max-h-[480px] md:max-h-[155px] transition-all duration-300" style="height: 155px; max-height: 155px;">',
+            en_content
+        )
+
+        # 静态预渲染各分类与社交角标数量，杜绝首屏全0
+        if _nd:
+            c_news = len(_nd.get("grouped", {}).get("news") or _nd.get("news") or [])
+            c_celeb = len(_nd.get("grouped", {}).get("celebrity") or _nd.get("celebrity") or [])
+            c_tools = len(_nd.get("grouped", {}).get("tools") or _nd.get("tools") or [])
+            c_videos = len([v for v in (_nd.get("grouped", {}).get("videos") or _nd.get("videos") or []) if not v.get("is_prompt")])
+            c_prompts = len(_nd.get("grouped", {}).get("prompts") or _nd.get("prompts") or [])
+            c_viral = len(_nd.get("grouped", {}).get("viral_posts") or _nd.get("viral_posts") or [])
+            c_all = c_news + c_celeb + c_tools + c_videos + c_prompts
+
+            en_content = re.sub(r'(id="badge-count-all"[^>]*>)\d*(</span>)', f'\\g<1>{c_all}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-news"[^>]*>)\d*(</span>)', f'\\g<1>{c_news}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-celebrity"[^>]*>)\d*(</span>)', f'\\g<1>{c_celeb}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-leader"[^>]*>)\d*(</span>)', f'\\g<1>{c_celeb}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-viral"[^>]*>)\d*(</span>)', f'\\g<1>{c_viral}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-tools"[^>]*>)\d*(</span>)', f'\\g<1>{c_tools}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-videos"[^>]*>)\d*(</span>)', f'\\g<1>{c_videos}\\g<2>', en_content)
+            en_content = re.sub(r'(id="badge-count-prompts"[^>]*>)\d*(</span>)', f'\\g<1>{c_prompts}\\g<2>', en_content)
+
         with open(INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(en_content)
 
@@ -1233,6 +1259,32 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
+
+        # 严格约束走马灯视口高度，杜绝全部展开
+        zh_content = re.sub(
+            r'id="viral-ticker-viewport"[^>]*>',
+            'id="viral-ticker-viewport" class="relative overflow-hidden h-[480px] md:h-[155px] max-h-[480px] md:max-h-[155px] transition-all duration-300" style="height: 155px; max-height: 155px;">',
+            zh_content
+        )
+
+        # 静态预渲染各分类与社交角标数量，杜绝首屏全0
+        if _nd:
+            c_news = len(_nd.get("grouped", {}).get("news") or _nd.get("news") or [])
+            c_celeb = len(_nd.get("grouped", {}).get("celebrity") or _nd.get("celebrity") or [])
+            c_tools = len(_nd.get("grouped", {}).get("tools") or _nd.get("tools") or [])
+            c_videos = len([v for v in (_nd.get("grouped", {}).get("videos") or _nd.get("videos") or []) if not v.get("is_prompt")])
+            c_prompts = len(_nd.get("grouped", {}).get("prompts") or _nd.get("prompts") or [])
+            c_viral = len(_nd.get("grouped", {}).get("viral_posts") or _nd.get("viral_posts") or [])
+            c_all = c_news + c_celeb + c_tools + c_videos + c_prompts
+
+            zh_content = re.sub(r'(id="badge-count-all"[^>]*>)\d*(</span>)', f'\\g<1>{c_all}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-news"[^>]*>)\d*(</span>)', f'\\g<1>{c_news}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-celebrity"[^>]*>)\d*(</span>)', f'\\g<1>{c_celeb}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-leader"[^>]*>)\d*(</span>)', f'\\g<1>{c_celeb}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-viral"[^>]*>)\d*(</span>)', f'\\g<1>{c_viral}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-tools"[^>]*>)\d*(</span>)', f'\\g<1>{c_tools}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-videos"[^>]*>)\d*(</span>)', f'\\g<1>{c_videos}\\g<2>', zh_content)
+            zh_content = re.sub(r'(id="badge-count-prompts"[^>]*>)\d*(</span>)', f'\\g<1>{c_prompts}\\g<2>', zh_content)
 
         with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(zh_content)
