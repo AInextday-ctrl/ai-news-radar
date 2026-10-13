@@ -26,7 +26,7 @@ except ImportError:
     pass
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
 
 # 翻译内存缓存，避免重复请求
 _TRANSLATION_CACHE = {}
@@ -719,7 +719,14 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
     print("🤖 正在调用 Google Gemini 进行批量智能翻译、深度分析与分类...")
 
     results = []
-    models_to_try = [MODEL_NAME, "gemini-2.0-flash", "gemini-1.5-flash"]
+    models_to_try = [
+        MODEL_NAME,
+        "gemini-flash-latest",
+        "gemini-3.7-flash",
+        "gemini-3.8-flash",
+        "gemini-flash-lite-latest",
+        "gemini-3.1-flash-lite"
+    ]
 
     for i in range(0, len(need_ai_items), batch_size):
         chunk = need_ai_items[i:i + batch_size]

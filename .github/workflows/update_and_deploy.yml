@@ -32,7 +32,7 @@ jobs:
       - name: Run Fetcher & AI Summarizer
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: 'gemini-2.5-flash'
+          GEMINI_MODEL: 'gemini-flash-latest'
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
           PYTHONIOENCODING: 'utf-8'
         run: |
