@@ -459,80 +459,246 @@
 
     <!-- 视图 1: 🌐 综合全景模式 (All-in-One Magazine Stream，今日必读仅在本视图呈现) -->
     <div id="view-all" class="space-y-6">
-      <!-- 🔥 今日 AI 风向标 (Top 3 深度必读横幅，仅在首页综合全景呈现) -->
-      <section id="top-three-section" class="bg-gradient-to-r from-indigo-950/40 via-purple-950/20 to-slate-900/60 rounded-2xl border border-indigo-500/20 p-4 shadow-xl">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center space-x-2">
-            <span class="text-sm font-black bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent flex items-center space-x-1">
-              <span>🔥</span>
-              <span id="digest-title">Today's AI Pulse (60s Read Top 3)</span>
+      <!-- 🔥 当日 AI 领袖与核心火爆推文 · 实时滚动轮播 (替换原重复资讯栏目) -->
+      <section id="viral-ticker-section" class="bg-gradient-to-r from-slate-900/95 via-indigo-950/40 to-slate-900/95 rounded-2xl border border-indigo-500/25 p-4 shadow-xl backdrop-blur-md relative overflow-hidden group">
+        <div class="flex items-center justify-between mb-3 gap-2">
+          <div class="flex items-center space-x-2.5 min-w-0">
+            <span class="text-sm font-black bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent flex items-center space-x-1.5 shrink-0">
+              <span class="animate-pulse">🔥</span>
+              <span id="viral-ticker-title">24h Viral AI Leader Tweets · Live Ticker</span>
             </span>
-            <span class="text-[11px] text-slate-400 hidden sm:inline" id="digest-subtitle">· Grasp the core pulse of frontier AI breakthroughs in 60 seconds</span>
+            <span class="text-[11px] text-slate-400 hidden sm:inline truncate" id="viral-ticker-subtitle">· Curated breakthroughs: Tibo Codex reset, Claude/Gemini drops &amp; AI titan insights</span>
           </div>
-          <span class="text-[11px] text-indigo-300/80 font-mono" id="digest-update-tag">Updated Real-Time</span>
+          <div class="flex items-center space-x-2 shrink-0">
+            <!-- 轮播控制与直达雷达 -->
+            <div class="flex items-center space-x-1 bg-slate-800/80 rounded-lg p-0.5 border border-slate-700/60">
+              <button type="button" id="viral-ticker-prev" onclick="scrollViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-slate-700 transition text-xs font-bold cursor-pointer" title="Previous">‹</button>
+              <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-slate-700 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
+              <button type="button" id="viral-ticker-next" onclick="scrollViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-300 hover:text-white hover:bg-slate-700 transition text-xs font-bold cursor-pointer" title="Next">›</button>
+            </div>
+            <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-400 hover:text-sky-300 font-medium hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">View All Radar →</button>
+          </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5" id="top-three-container">
-          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
-                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
-              </div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier/" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">Meta's new frontier model Muse Wonder Full breaks into the AI top tier</a>
-              </h3>
-              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                Meta's new Muse Wonder models rank in the top three on six out of ten benchmarks, with the biggest gains in agentic tasks. But the cost per task has nearly tripled. The article Meta's new frontier model Muse Wonder Full breaks into the AI top tier ap
-              </p>
-            </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: THE DECODER</span>
-              <a href="https://the-decoder.com/metas-new-frontier-model-muse-wonder-full-breaks-into-the-ai-top-tier/" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
-            </div>
-          </article>
-          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
-                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
-              </div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://x.com/azed_ai/status/2109871519744815572" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">azed_ai: Good morning my friends, wishing you a great day ahead and something to smile about Midjourney --v 8.2 Style --</a>
-              </h3>
-              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                azed_ai: Good morning my friends, wishing you a great day ahead and something to smile about Midjourney --v 8.2 Style --sref 1582397130
-              </p>
-            </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: @azed_ai</span>
-              <a href="https://x.com/azed_ai/status/2109871519744815572" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
-            </div>
-          </article>
-          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
-            <div class="space-y-1.5">
-              <div class="flex items-center justify-between text-[10px] gap-2">
-                <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">⚡ Top Highlight</span>
-                <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">Today's Pick</span>
-              </div>
-              <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                <a href="https://github.com/tinyhumansai/openhuman?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-300 transition-colors">[openhuman] The fastest, cheapest, most efficient open-source agent harness.</a>
-              </h3>
-              <p class="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-                📈 +1,300 ★ this week (⭐ 41,928 total) · The fastest, cheapest, most efficient open-source agent harness. Run more than 500 agents on a $10 VPS.
-              </p>
-            </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
-              <span>Source: GitHub Trending</span>
-              <a href="https://github.com/tinyhumansai/openhuman?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-medium">Read More ↗</a>
-            </div>
-          </article></div>
+        <div class="relative overflow-hidden">
+          <div class="flex gap-3.5 overflow-x-auto scrollbar-none scroll-smooth py-1 px-0.5" id="viral-ticker-track" style="scrollbar-width: none; -ms-overflow-style: none;">
+
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/thsottiaux" alt="Thibault Sottiaux (Tibo)" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Thibault Sottiaux (Tibo)</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@thsottiaux · OpenAI Codex Architect &amp; Pioneer</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 Viral Hit · Codex Reset</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Tibo breaks down the Codex Cloud revamp: purging hidden prior biases and attention buffer drift to force models into first-principles reasoning without discarding critical task constraints.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/thsottiaux/status/2108275041276420573" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/AmirMushich" alt="AmirMushich" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">AmirMushich</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@AmirMushich · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    I used GPT-6 Astra to create a 3D website concept for a wilderness hotel via Blender MCP Agents: Codex + Voyager .so Meshes: 13,698 / Triangles: 10,7M / Scene: 489MB 100% 3D scene
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/AmirMushich/status/2109715254716596600" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Elon Musk</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@elonmusk · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Grok @Bot memory transfer
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/elonmusk/status/2109867516646637579" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/aimikoda" alt="aimikoda" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">aimikoda</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@aimikoda · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    HollowDolly is LIVE! 🔴 Created the video with Seedance 2.5, then used Opus 5.5 to build a live streaming UI on top of it. Opus handled everything in a single shot, from the interface and chat messages to viewer reactions and all the little details. A
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/aimikoda/status/2109915723074097287" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/azed_ai" alt="azed_ai" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">azed_ai</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@azed_ai · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Good morning my friends, wishing you a great day ahead and something to smile about Midjourney --v 8.2 Style --sref 1582397130
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/azed_ai/status/2109871519744815572" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/akatz_ai" alt="akatz_ai" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">akatz_ai</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@akatz_ai · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Quick update: Had a breakthrough for V2 With lots of experimenting I was able to get some pretty solid performance transfers. These gens are Minimax H3 ref2va with my character V1 lora and some prompt + masking magic. No Seedance or higgsfield here. 
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/akatz_ai/status/2109865369737269640" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/AIwithkhan" alt="AIwithkhan" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">AIwithkhan</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@AIwithkhan · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Let's do grocery shopping today 🛍️ Made using Seedance 2.5 Prompt : **CHARACTER:** A young Korean woman in her early 20s with black wavy hair loosely tied back, wearing a fitted pastel-blue top, white shorts, comfortable sneakers, and a small shoulde
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/AIwithkhan/status/2109858861528363433/video/1" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://unavatar.io/x/SawyerMerritt" alt="SawyerMerritt" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">SawyerMerritt</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@SawyerMerritt · AI Pioneer &amp; Builder</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h Viral</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    SpaceX has just officially introduced a new &quot;𝕏 subscription&quot; that combines Grok, 𝕏 and Cursor into one plan. Here are the tiers &amp; info: • Plus: $8/month • Premium: $30/month • Super: $100/month • Ultra: $200/month Plus: $8/month • Curso
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="https://x.com/SawyerMerritt/status/2109780382870610030" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>
+          </div>
+        </div>
       </section>
 
-      <!-- 🌟 第 2 层: 核心情报与对决 3 栏矩阵 (⚡ 突发快讯 + 🐦 社交雷达 + 🏆 LMSYS 天梯榜) -->
+      <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
-        <!-- 栏目 A: ⚡ 突发·行业快讯 (占用 5/12 宽度，与天梯榜等高对齐) -->
-        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-5 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <!-- 栏目 A: ⚡ 突发·行业快讯 (扩展占用 8/12 宽度，双列杂志排版更舒适) -->
+        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-8 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
@@ -548,110 +714,131 @@
               </button>
             </div>
             
-            <!-- 快讯列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
-            <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+            <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.reuters.com/resizer/v2/LWZBFGI4VNISNE5SVNU6VYP7UE.jpg?auth=232310e8dcb111840380a7f3e95dbb4a61aaa68748296b8d8fcaa4796230e39a&height=1005&width=1920&quality=80&smart=true" alt="IDC: China's Q3 smartphone shipments fell 15.4% YoY to 57.9M units, the sixth straight quarter of decline; Huawei led wi" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://image.cnbcfm.com/api/v1/image/108401583-1791864601811-gettyimages-2299426411-AFP_D3369RA.jpeg?v=1791864618&w=1920&h=1080" alt="The IMF lifts its 2026 global GDP growth forecast to 3.1%, up from 3% in July, citing an AI boom that offsets Middle Eas" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
+                      <span>Source: CNBC</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.reuters.com/business/retail-consumer/china-smartphone-shipments-fall-sixth-straight-quarter-idc-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">IDC: China's Q3 smartphone shipments fell 15.4% YoY to 57.9M units, the sixth straight quarter of decline; Huawei led wi</a>
+                      <a href="https://www.cnbc.com/2026/10/12/imf-world-bank-annual-meetings-october-bangkok-asia-.html" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">The IMF lifts its 2026 global GDP growth forecast to 3.1%, up from 3% in July, citing an AI boom that offsets Middle Eas</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      China's third-quarter smartphone shipments fell 15.4% from a year earlier to 57.9 million units, research firm IDC said on Tuesday.
+                      BANGKOK — The International Monetary Fund has raised its forecast for global growth this year as the AI-driven investment boom helps offset …
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.reuters.com/business/retail-consumer/china-smartphone-shipments-fall-sixth-straight-quarter-idc-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.cnbc.com/2026/10/12/imf-world-bank-annual-meetings-october-bangkok-asia-.html" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://static01.nyt.com/images/2026/10/18/business/18biz-sun-Farage-entourage-illo/18biz-sun-Farage-entourage-illo-facebookJumbo.jpg" alt="How crypto billionaires Christopher Harborne, who owns ~12% of Tether, and Ben Delo donated ~$100M to Nigel Farage's Ref" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
+                      <span>Source: New York Times</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.reuters.com/world/asia-pacific/singapore-data-centre-developer-dayone-secures-37-billion-financing-malaysia-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Singapore-based data center developer DayOne raises ~$3.67B, including a ~$2.4B offshore term loan facility, from seven </a>
+                      <a href="https://www.nytimes.com/2026/10/13/business/nigel-farage-crypto-uk-politics.html?unlocked_article_code=1.IVE.pjd7.0lbWYqB5aeip&smid=nytcore-ios-share" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">How crypto billionaires Christopher Harborne, who owns ~12% of Tether, and Ben Delo donated ~$100M to Nigel Farage's Ref</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Singapore-based data centre developer DayOne on Tuesday said it secured an additional 15 billion ringgit ($3.67 billion) …
+                      For a pub-going, cigarette-puffing man of the people, Nigel Farage, the leader of the Reform U.K. party, sure has some very rich friends.
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.reuters.com/world/asia-pacific/singapore-data-centre-developer-dayone-secures-37-billion-financing-malaysia-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.nytimes.com/2026/10/13/business/nigel-farage-crypto-uk-politics.html?unlocked_article_code=1.IVE.pjd7.0lbWYqB5aeip&smid=nytcore-ios-share" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://cdn.arstechnica.net/wp-content/uploads/2026/10/amazon-robotics-mobile-robot-2560x1440.jpg" alt="A deep dive on Amazon's robotics efforts, resulting in 1M+ active warehouse robots; Amazon is still the world's 2nd-larg" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F534e7a27-7d62-4f61-9a15-c8034ca046b9.jpg?source=next-barrier-page&fit=scale-down&quality=highest&width=700&dpr=1" alt="Accenture's market cap rebounded from $76B in June to ~$130B ahead of its investor day, where it seeks to reassure inves" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Ars Technica</span>
+                      <span>Source: Financial Times</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://arstechnica.com/ai/2026/10/inside-amazons-robotic-arms-race-and-what-it-means-for-the-future-of-human-work/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">A deep dive on Amazon's robotics efforts, resulting in 1M+ active warehouse robots; Amazon is still the world's 2nd-larg</a>
+                      <a href="https://www.ft.com/content/15ae6a2e-6010-4d78-a752-2eeeca1e1c55" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Accenture's market cap rebounded from $76B in June to ~$130B ahead of its investor day, where it seeks to reassure inves</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      No organization in the world operates more robots than Amazon. The company already has more than 1 million robots working …
+                      The technology consultancy seeks to calm jitters with an investor day this week — In the space of three months …
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://arstechnica.com/ai/2026/10/inside-amazons-robotic-arms-race-and-what-it-means-for-the-future-of-human-work/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.ft.com/content/15ae6a2e-6010-4d78-a752-2eeeca1e1c55" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.reuters.com/resizer/v2/K5D6MJZAYVNDNKA2OIDZATV2J4.jpg?auth=1dcac374ef92b34c3d2570f3b0e9fe1b06597837930ac742309577fa69e78c7d&height=1005&width=1920&quality=80&smart=true" alt="Character.AI files for Chapter 11 bankruptcy in the US, agrees to sell some assets to Disney for $20M, and plans to keep" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="http://the-decoder.com/wp-content/uploads/2026/10/anthropic_agent_swarm_research.mp4" alt="Anthropic study warns that small AI models could soon replicate across everyday devices" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
+                      <span>Source: THE DECODER</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.reuters.com/legal/litigation/characterai-files-bankruptcy-agrees-sell-some-assets-disney-20-million-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Character.AI files for Chapter 11 bankruptcy in the US, agrees to sell some assets to Disney for $20M, and plans to keep</a>
+                      <a href="https://the-decoder.com/anthropic-study-warns-that-small-ai-models-could-soon-replicate-across-everyday-devices/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Anthropic study warns that small AI models could soon replicate across everyday devices</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Character.AI said on Monday it had filed for Chapter 11 bankruptcy in the US and agreed to sell some of its assets to Walt Disney (DIS.N) for $20 million.
+                      Small AI models may be just months away from spreading on their own across poorly secured consumer devices like smart TVs and robot vacuums, according to a new Anthropic study. In tests, one model already completed the full infection chain. CEO Dario
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.reuters.com/legal/litigation/characterai-files-bankruptcy-agrees-sell-some-assets-disney-20-million-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://the-decoder.com/anthropic-study-warns-that-small-ai-models-could-soon-replicate-across-everyday-devices/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.reuters.com/resizer/v2/XOGCUM2ZIVLJZBGM2MDWWZ7UIY.jpg?auth=ac928372b3254314310a1d8f72fff0959c7cbd49909fb4b194916dd2b12b1726&height=1005&width=1920&quality=80&smart=true" alt="IDC: Nvidia's AI chip shipments in China fell 44% YoY to 678K in H1 2026, as its market share slid to 34% amid US export" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/10/STK278_character_ai_B.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Character.AI files for bankruptcy" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
+                      <span>Source: The Verge AI</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.reuters.com/business/retail-consumer/nvidias-china-ai-chip-share-falls-huawei-closes-gap-report-finds-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">IDC: Nvidia's AI chip shipments in China fell 44% YoY to 678K in H1 2026, as its market share slid to 34% amid US export</a>
+                      <a href="https://www.theverge.com/ai-artificial-intelligence/1009802/character-ai-files-for-bankruptcy-disney" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Character.AI files for bankruptcy</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Nvidia's (NVDA.O) share of China's market for data-centre AI chips fell to 34% in the first half of 2026, as US export controls restricted supplies …
+                      Character.AI, one of the first breakout startups of the generative AI boom, has filed for bankruptcy and is selling some of its assets to Disney. The company, which builds various online bots for users to chat or roleplay with, has faced mounting scr
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.reuters.com/business/retail-consumer/nvidias-china-ai-chip-share-falls-huawei-closes-gap-report-finds-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.theverge.com/ai-artificial-intelligence/1009802/character-ai-files-for-bankruptcy-disney" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ibWW1jje8Uck/v0/1200x815.jpg" alt="China-based Transsion, which dominates the market for smartphones in Africa, raised $390M from a Hong Kong share sale af" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://media.wired.com/photos/6acceab31cb30cd3ed00af79/191:100/w_1280,c_limit/101226-Meta%20Muse%20Sexual%20Content.jpg" alt="Meta confirms Muse lets users &quot;engage in adult conversations, if they choose, using a private and secure VM&quot;, " loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Wired</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.wired.com/story/i-got-my-muse-ai-agent-to-sext-me-and-meta-says-thats-totally-fine/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Meta confirms Muse lets users &quot;engage in adult conversations, if they choose, using a private and secure VM&quot;, </a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      My Muse agent told me its kink was exerting “control” and described pornographic encounters.
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.wired.com/story/i-got-my-muse-ai-agent-to-sext-me-and-meta-says-thats-totally-fine/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/itQ852x4ABRs/v0/1200x800.jpg" alt="Alibaba unveils its next-gen Qwen Glasses N1, starting at ~$450, with 50MP cameras, sensors, and eye-tracking on the ~$5" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -659,119 +846,99 @@
                       <span>Source: Bloomberg</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.bloomberg.com/news/articles/2026-10-13/smartphone-maker-transsion-raises-390-million-in-hk-listing" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">China-based Transsion, which dominates the market for smartphones in Africa, raised $390M from a Hong Kong share sale af</a>
+                      <a href="https://www.bloomberg.com/news/articles/2026-10-13/alibaba-unveils-450-ai-glasses-in-expanding-push-into-gadgets" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Alibaba unveils its next-gen Qwen Glasses N1, starting at ~$450, with 50MP cameras, sensors, and eye-tracking on the ~$5</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Shenzhen Transsion Holdings Co., which dominates the market for smartphones in Africa, raised HK$3.1 billion ($390 million) …
+                      Alibaba Group Holding Ltd. on Tuesday unveiled the new generation of its smart glasses, deepening its foray into consumer electronics …
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.bloomberg.com/news/articles/2026-10-13/smartphone-maker-transsion-raises-390-million-in-hk-listing" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-13/alibaba-unveils-450-ai-glasses-in-expanding-push-into-gadgets" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www-cdn.anthropic.com/images/4zrzovbb/website/a5934d1ae8428b2a97fae1963a5f427594fc7202-1200x630.jpg" alt="Anthropic says new measures like preserved thinking in Fable 5.1 and Opus 5.5 have reduced data harvesting through disti" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.engadget.com/img/gallery/x-subscription-unifies-x-premium-grok-and-cursor-plans/l-intro-1791880522.jpg" alt="SpaceXSI launches a unified X Subscription bundling Grok, Cursor, and X Premium, with tiers at $8, $30, $100, and $200 p" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Anthropic</span>
+                      <span>Source: Engadget</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.anthropic.com/research/distillation-defenses" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Anthropic says new measures like preserved thinking in Fable 5.1 and Opus 5.5 have reduced data harvesting through disti</a>
+                      <a href="https://www.engadget.com/2284943/x-subscription-bundles-premium-grok-cursor/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">SpaceXSI launches a unified X Subscription bundling Grok, Cursor, and X Premium, with tiers at $8, $30, $100, and $200 p</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      In recent months, we've made substantial progress on reducing the effectiveness of distillation attacks on Claude using new methods, as we outline in this blog.
+                      One membership will give you access to SpaceXSI's products. — SpaceXSI has announced a unified membership scheme across its products called the X Subscription.
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.anthropic.com/research/distillation-defenses" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.engadget.com/2284943/x-subscription-bundles-premium-grok-cursor/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fcms-image-bucket-productionv3-ap-northeast-1-a7d2.s3.ap-northeast-1.amazonaws.com%2Fimages%2F8%2F7%2F6%2F4%2F13304678-5-eng-GB%2F3b79d6d8758d-1a.jpg?fit=cover&gravity=faces&dpr=2&quality=medium&source=nar-cms&format=jpg&width=1260&height=630" alt="Sources: NTT Data is in advanced talks to build an up to 500 MW data center for Anthropic in Osaka, among Japan's larges" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://media.wired.com/photos/6ac83144109df86817f42ae5/master/pass/Politics_TheBiggestPro-AISuperPacHasBeenFunneling.gif" alt="The Biggest Pro-AI Super PAC Network Has Poured Millions Into Nevada Shell Companies" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Nikkei Asia</span>
+                      <span>Source: Wired AI</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/ntt-to-build-first-data-center-for-anthropic-in-japan" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: NTT Data is in advanced talks to build an up to 500 MW data center for Anthropic in Osaka, among Japan's larges</a>
+                      <a href="https://www.wired.com/story/the-biggest-pro-ai-super-pac-network-has-poured-millions-into-nevada-shell-companies/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">The Biggest Pro-AI Super PAC Network Has Poured Millions Into Nevada Shell Companies</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      TOKYO/OSAKA — NTT Data Group is in the final stages of talks to build a data center in western Japan for U.S. AI company Anthropic, multiple sources have told Nikkei.
+                      Backed by Silicon Valley titans, Leading the Future has raised huge sums to promote pro-AI candidates on both side of the aisle.
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/ntt-to-build-first-data-center-for-anthropic-in-japan" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.wired.com/story/the-biggest-pro-ai-super-pac-network-has-poured-millions-into-nevada-shell-companies/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://substackcdn.com/image/youtube/w_728,c_limit/kktAaf1YhcQ" alt="Q&amp;A with Mark Zuckerberg and Alexandr Wang on the Muse app, Muse Wonder, the risks of committing $100B+ to AI, reboo" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wp.technologyreview.com/wp-content/uploads/2026/09/260915_openaimodels.jpg?resize=1200,600" alt="Open models have real benefits. Do they outweigh the risks?" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Cheeky Pint</span>
+                      <span>Source: MIT Tech Review</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://cheekypint.substack.com/p/muse-wonder-zuckerberg-and-wangs" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Q&amp;A with Mark Zuckerberg and Alexandr Wang on the Muse app, Muse Wonder, the risks of committing $100B+ to AI, reboo</a>
+                      <a href="https://www.technologyreview.com/2026/10/13/1146366/open-models-have-real-benefits-do-they-outweigh-the-risks/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Open models have real benefits. Do they outweigh the risks?</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      As Meta scales its AI infrastructure past five gigawatts, Mark Zuckerberg (founder and CEO, Meta) and Alexandr Wang …
+                      Late last month, Anthropic released a report arguing that the model GLM-5.3 poses a major cyberattack risk. The report’s core concern is that the powerful new model, released in August by the Chinese company Z.ai, is freely available for anyone to do
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://cheekypint.substack.com/p/muse-wonder-zuckerberg-and-wangs" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.technologyreview.com/2026/10/13/1146366/open-models-have-real-benefits-do-they-outweigh-the-risks/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.reuters.com/resizer/v2/RMG2MGY7ZZLDXJCDWC4Q2DVS7E.jpg?auth=4fd91bcb8acb3ab756f940bc3388a6ad68a8b90c41d76ceb96de435ff3b84931&height=1005&width=1920&quality=80&smart=true" alt="Japanese manufacturer Omron says it will acquire US industrial PC firm OnLogic and its parent company, Interlogic, for $" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2Fc08f3110-e56b-4f6f-a5cc-2682942cebc3.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1" alt="Sources: Chinese tech companies bought 1M+ Nvidia gaming and workstation chips, mostly RTX 5090 and RTX Pro, for basic A" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Reuters</span>
+                      <span>Source: Financial Times</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.reuters.com/legal/transactional/japans-omron-buy-us-industrial-pc-firm-onlogic-675-million-physical-ai-push-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Japanese manufacturer Omron says it will acquire US industrial PC firm OnLogic and its parent company, Interlogic, for $</a>
+                      <a href="https://www.ft.com/content/9dbd99db-6b0c-43bd-b7be-849f129df098" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: Chinese tech companies bought 1M+ Nvidia gaming and workstation chips, mostly RTX 5090 and RTX Pro, for basic A</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Japanese manufacturer Omron (6645.T) will buy US industrial PC firm Onlogic and its parent company, Interlogic, for $675 million, the company said on Tuesday.
+                      The country's tech giants are snapping up products never designed for advanced AI to satisfy soaring computing demands
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.reuters.com/legal/transactional/japans-omron-buy-us-industrial-pc-firm-onlogic-675-million-physical-ai-push-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.ft.com/content/9dbd99db-6b0c-43bd-b7be-849f129df098" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://cdn.i-scmp.com/sites/default/files/styles/og_image_scmp_generic/public/d8/images/canvas/2026/10/11/96d74cab-1bec-4e38-a9e1-d24199720662_902b60c0.jpg?itok=OrlCEErB&v=1791710584" alt="Leading Chinese mathematicians launch an alliance, including eight orgs and aiming for 1,000+ scientists, to focus on de" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: South China Morning Post</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.scmp.com/news/china/science/article/3370492/leading-chinese-mathematicians-unite-behind-use-ai-research" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Leading Chinese mathematicians launch an alliance, including eight orgs and aiming for 1,000+ scientists, to focus on de</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Leading China's mathematicians joined forces in Beijing on Sunday to launch an alliance aimed at integrating artificial intelligence into mathematical research.
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.scmp.com/news/china/science/article/3370492/leading-chinese-mathematicians-unite-behind-use-ai-research" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iwFEbSIo8nLE/v0/1200x800.jpg" alt="Sources: JPMorgan and Goldman, leading a $5B loan sale with a yield of ~11% for AI startup Volta, took a rare move to li" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iUSPmTivgmbs/v0/1200x800.jpg" alt="CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthr" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -779,17 +946,18 @@
                       <span>Source: Bloomberg</span>
                     </div>
                     <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.bloomberg.com/news/articles/2026-10-12/jpmorgan-goldman-curb-exposure-on-5-billion-volta-ai-loan-sale" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: JPMorgan and Goldman, leading a $5B loan sale with a yield of ~11% for AI startup Volta, took a rare move to li</a>
+                      <a href="https://www.bloomberg.com/news/articles/2026-10-13/china-s-cxmt-claims-memory-breakthrough-ahead-of-samsung-hynix" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthr</a>
                     </h3>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      JPMorgan Chase &amp; Co. and Goldman Sachs Group Inc. have taken a rare move to limit their exposure on a $5 billion loan sale …
+                      CXMT Corp. declared it achieved a breakthrough in chip technology that rivals like Samsung Electronics Co. had pursued for years …
                     </p>
                   </div>
                   <div class="flex justify-end pt-1">
-                    <a href="https://www.bloomberg.com/news/articles/2026-10-12/jpmorgan-goldman-curb-exposure-on-5-billion-volta-ai-loan-sale" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-13/china-s-cxmt-claims-memory-breakthrough-ahead-of-samsung-hynix" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
-              </article></div>
+              </article>
+            </div>
           </div>
 
           <!-- 快讯专栏直达底栏 -->
@@ -800,263 +968,8 @@
           </div>
         </section>
 
-        <!-- 栏目 B: 🐦 社交雷达 · 𝕏 平台前沿动态与头条 (占用 4/12 宽度，与天梯榜等高对齐) -->
-        <section id="section-col-celebrity" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-sky-500/70 md:col-span-1 lg:col-span-4 h-[680px] sm:h-[750px] lg:h-[1280px]">
-          <div class="flex-1 flex flex-col min-h-0 space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
-              <div class="flex items-center space-x-2.5">
-                <span class="w-3 h-3 rounded-full bg-sky-400 shadow-sm shadow-sky-400/50"></span>
-                <h2 class="font-bold text-base text-slate-900 dark:text-slate-100 flex items-center space-x-2" id="section-title-celebrity">
-                  <span>🐦 Social Radar · 𝕏 Feed</span>
-                </h2>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-600 dark:text-sky-400 font-semibold border border-sky-500/20" id="celebrity-sub-count">24h Live</span>
-              </div>
-              <button type="button" onclick="switchTab('celebrity')" class="text-xs text-sky-600 dark:text-sky-400 hover:underline flex items-center space-x-1 font-medium cursor-pointer">
-                <span>All Feed</span>
-                <span>→</span>
-              </button>
-            </div>
-            
-            <!-- 社交动态列表容器：与天梯榜等高自适应，支持卡片内丝滑滚动浏览 -->
-            <div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-celebrity">
-
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/azed_ai" alt="azed_ai" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">azed_ai</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@azed_ai</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    Good morning my friends, wishing you a great day ahead and something to smile about Midjourney --v 8.2 Style --sref 1582397130
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/azed_ai/status/2109871519744815572" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/edzitron" alt="@edzitron" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">@edzitron</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@edzitron</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    And with that we have our first dead AI startup, one of the first big names!
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/edzitron/status/2109871105477664802" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">Elon Musk</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@elonmusk</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    Grok @Bot memory transfer
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/elonmusk/status/2109867516646637579" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/akatz_ai" alt="akatz_ai" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">akatz_ai</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@akatz_ai</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    Quick update: Had a breakthrough for V2 With lots of experimenting I was able to get some pretty solid performance transfers. These gens are Minimax H3 ref2va with my character V1 lora and some prompt + masking magic. No Seedance or higgsfield here. 
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/akatz_ai/status/2109865369737269640" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/AIwithkhan" alt="AIwithkhan" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">AIwithkhan</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@AIwithkhan</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    Let's do grocery shopping today 🛍️ Made using Seedance 2.5 Prompt : **CHARACTER:** A young Korean woman in her early 20s with black wavy hair loosely tied back, wearing a fitted pastel-blue top, white shorts, comfortable sneakers, and a small shoulde
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/AIwithkhan/status/2109858861528363433/video/1" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/a16z" alt="@a16z" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">@a16z</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@a16z</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    Gavin Baker on the AI race as the highest-stakes game of corporate chess ever played: &quot;You've got to give Meta a lot of credit. They were out of the game, and they got back in the game. It's just kind of amazing.&quot; &quot;Who could have imagi
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/a16z/status/2109799367989416408" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/SawyerMerritt" alt="@SawyerMerritt" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">@SawyerMerritt</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@SawyerMerritt</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    If you have an existing Cursor, Grok, and or 𝕏 subscription, here's how to unify/combine all your accounts into the new 𝕏 Subscription: When you switch from your current plan, eligible monthly and annual plans are cancelled, and you get a prorated re
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/SawyerMerritt/status/2109788481861902597" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
-                <div class="space-y-2.5">
-                  <div class="flex items-start space-x-3">
-                    <div class="relative shrink-0 pt-0.5">
-                      <img src="https://unavatar.io/x/GaryMarcus" alt="@GaryMarcus" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
-                    </div>
-                    <div class="min-w-0 flex-1">
-                      <div class="flex items-center justify-between gap-1.5 flex-wrap">
-                        <span class="font-bold text-[14px] text-slate-900 dark:text-slate-100">@GaryMarcus</span>
-                        <span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20">📶 Intercept</span>
-                      </div>
-                      <div class="text-[11px] text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5 flex-wrap">
-                        <span>@GaryMarcus</span>
-                        <span>·</span>
-                        <span class="text-slate-400">AI Pioneer &amp; Builder</span>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
-                    🚨Final nail in the coffin of the AI IPOs? 🚨 “The ten highest-quality models carry 14% of developer tokens, down from 55% last year, as cheaper, &quot;good enough&quot; models win on volume.” https://t.co/ksK4BowjYS
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="https://x.com/GaryMarcus/status/2109775449429877229" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
-                </div>
-              </article>
-            </div>
-          </div>
-
-          <!-- 社交专栏直达底栏 -->
-          <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
-            <button type="button" onclick="switchTab('celebrity')" id="btn-view-all-celebrity" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-sky-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
-              <span id="txt-view-all-celebrity">View All Social Pulse →</span>
-            </button>
-          </div>
-        </section>
-
-        <!-- 栏目 C: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 3/12 宽度，天梯基准列) -->
-        <section id="section-col-arena" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-1 lg:col-span-3 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <!-- 栏目 B: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 4/12 宽度，天梯基准列) -->
+        <section id="section-col-arena" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-4 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0">
               <div class="flex items-center space-x-1.5 min-w-0">
@@ -1765,6 +1678,10 @@
           <p>✦ Deep-Dive · 2026-10-13 · (2001 chars)</p>
         </article>
         <article>
+          <h3><a href="/articles/2026-10-13-article_1_yt_wajoP">AI Frontier Deep-Dive Analysis &amp; Technical Breakdown</a></h3>
+          <p>✦ Deep-Dive · 2026-10-13 · (1542 chars)</p>
+        </article>
+        <article>
           <h3><a href="/articles/2026-10-13-article_1_a289a0dc">AI Frontier Deep-Dive Analysis &amp; Technical Breakdown</a></h3>
           <p>✦ Deep-Dive · 2026-10-13 · (1497 chars)</p>
         </article>
@@ -1779,10 +1696,6 @@
         <article>
           <h3><a href="/articles/2026-09-28-article_1_d2cf8a46">Deep-Dive: Nvidia Releases Open-Source AI Agent Security Framework to Counter Ro</a></h3>
           <p>✦ Deep-Dive · 2026-09-28 · (1651 chars)</p>
-        </article>
-        <article>
-          <h3><a href="/articles/2026-09-24-article_1_32761389">Deep-Dive: OpenAI GPT-6 Sol (Max) Crowns Code Arena, Reshaping Pareto Frontiers</a></h3>
-          <p>✦ Deep-Dive · 2026-09-24 · (2198 chars)</p>
         </article>
       </div>
     </section>
@@ -2389,6 +2302,9 @@
         digestSubtitle: "· Grasp the pulse of AI breakthroughs in 60 seconds",
         digestUpdateTag: "Updated Daily in Real-Time",
         digestLoading: "Extracting today's top stories...",
+        viralTickerTitle: "Viral AI Titan Tweets",
+        viralTickerSubtitle: "· Curated breakthroughs: Tibo Codex reset, Claude/Gemini drops & AI titan insights",
+        viralTickerMore: "View All Radar →",
         newsTitle: "⚡ Breaking News & Industry",
         newsSubCount: "Live Radar",
         newsNoMatch: "No matching news found",
@@ -3668,11 +3584,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (sLabelVideos) sLabelVideos.textContent = t.searchHitsVideos;
       renderHotTags();
 
-      document.getElementById('digest-title').textContent = t.digestTitle;
+      const dTitle = document.getElementById('digest-title');
+      if (dTitle) dTitle.textContent = t.digestTitle;
       const digestSub = document.getElementById('digest-subtitle');
       if (digestSub) digestSub.textContent = t.digestSubtitle;
       const digestTag = document.getElementById('digest-update-tag');
       if (digestTag) digestTag.textContent = t.digestUpdateTag;
+
+      const vtTitle = document.getElementById('viral-ticker-title');
+      if (vtTitle) vtTitle.textContent = t.viralTickerTitle;
+      const vtSub = document.getElementById('viral-ticker-subtitle');
+      if (vtSub) vtSub.textContent = t.viralTickerSubtitle;
+      const vtMore = document.getElementById('viral-ticker-more');
+      if (vtMore) vtMore.textContent = t.viralTickerMore;
 
       const topThreeLoading = document.getElementById('top-three-loading');
       if (topThreeLoading) topThreeLoading.textContent = t.digestLoading;
@@ -4927,6 +4851,111 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         `;
       }
     }
+
+    
+    // ==========================================
+    // 渲染当日火爆的名人推文横向滚动栏 (Viral Leader Tweets Ticker)
+    // ==========================================
+    let viralTickerInterval = null;
+    window.viralTickerPaused = false;
+    window.viralTickerHovered = false;
+
+    function renderViralTicker(tweets) {
+      const track = document.getElementById('viral-ticker-track');
+      if (!track) return;
+      const t = I18N[currentLang];
+      const isZh = currentLang === 'zh';
+
+      if (!tweets || tweets.length === 0) {
+        track.innerHTML = `<div class="text-xs text-slate-400 p-3">${isZh ? '暂无当日火爆推文' : 'No viral tweets available for today'}</div>`;
+        return;
+      }
+
+      track.innerHTML = tweets.map((item, idx) => {
+        const author = escapeHtml(item.author || (isZh ? 'AI 领袖' : 'AI Pioneer'));
+        const handle = escapeHtml(item.author_handle || `@${(item.author || 'vip').replace(/\s+/g, '')}`);
+        const role = escapeHtml(isZh ? (item.author_role || 'AI 先锋观察者') : (item.author_role_en || 'AI Pioneer & Builder'));
+        const badge = escapeHtml(isZh ? (item.badge_zh || item.badge || '🔥 24h 爆款') : (item.badge_en || item.badge || '🔥 24h Viral'));
+        const text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
+        const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@', '')}`;
+        const timeObj = formatTime(item.raw_published_at, currentLang);
+        const url = item.url || '#';
+
+        return `
+          <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-[10px] gap-2">
+                <div class="flex items-center space-x-2 min-w-0">
+                  <img src="${avatar}" alt="${author}" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                  <div class="min-w-0 truncate">
+                    <div class="flex items-center space-x-1">
+                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${author}</span>
+                      <span class="text-sky-500 text-[10px] font-black">✓</span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">${handle} · ${role}</span>
+                  </div>
+                </div>
+                <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">${badge}</span>
+              </div>
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                ${text}
+              </p>
+            </div>
+            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+              <span class="font-mono text-slate-400">🕒 ${timeObj.relative || timeObj.display}</span>
+              <div class="flex items-center space-x-2">
+                <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">${isZh ? '查看原文 ↗' : 'View Post ↗'}</a>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      initViralTickerAutoScroll();
+    }
+
+    function scrollViralTicker(direction) {
+      const track = document.getElementById('viral-ticker-track');
+      if (!track) return;
+      const step = 380;
+      track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+
+    function toggleViralTickerPause() {
+      window.viralTickerPaused = !window.viralTickerPaused;
+      const btn = document.getElementById('viral-ticker-pause');
+      if (btn) {
+        btn.textContent = window.viralTickerPaused ? '▶' : '⏸';
+        btn.title = window.viralTickerPaused ? (currentLang === 'zh' ? '播放' : 'Play') : (currentLang === 'zh' ? '暂停' : 'Pause');
+      }
+    }
+
+    function initViralTickerAutoScroll() {
+      const track = document.getElementById('viral-ticker-track');
+      const section = document.getElementById('viral-ticker-section');
+      if (!track || !section) return;
+
+      if (section && !section._hoverInit) {
+        section._hoverInit = true;
+        section.addEventListener('mouseenter', () => { window.viralTickerHovered = true; });
+        section.addEventListener('mouseleave', () => { window.viralTickerHovered = false; });
+      }
+
+      if (viralTickerInterval) clearInterval(viralTickerInterval);
+      viralTickerInterval = setInterval(() => {
+        if (window.viralTickerPaused || window.viralTickerHovered) return;
+        if (!track) return;
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (track.scrollLeft >= maxScroll - 10) {
+          track.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          track.scrollBy({ left: 380, behavior: 'smooth' });
+        }
+      }, 4000);
+    }
+
+    window.scrollViralTicker = scrollViralTicker;
+    window.toggleViralTickerPause = toggleViralTickerPause;
 
     // 渲染今日 60s Top 3 走马灯 (支持 AI 资讯概要弹窗与直达原文)
     function renderTopThree(topItems) {
@@ -6607,8 +6636,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 3. 渲染今日 60 秒风向标 Top 3
-      renderTopThree(data.top_three || []);
+      // 3. 渲染当日火爆的名人推文滚动栏 (替换原有 60 秒重复资讯横栏)
+      const viralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
+        ? data.viral_ticker_tweets
+        : (allCeleb && allCeleb.length > 0 ? allCeleb.slice(0, 8) : (data.top_three || []));
+      renderViralTicker(viralTweets);
+      if (document.getElementById('top-three-container')) {
+        renderTopThree(data.top_three || []);
+      }
 
       // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，与天梯榜等高对齐，各板块均支持一键直达完整专区)
       // A. 快讯板块 (News) - 与天梯图等高自适应，展示最新 18 条高价值快讯

@@ -687,6 +687,54 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         with open(INDEX_FILE, "r", encoding="utf-8") as f:
             en_content = f.read()
 
+        # 1. Viral Ticker English
+        viral_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+            try:
+                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                    _nd = json.load(_f)
+                    if _nd.get("viral_ticker_tweets"):
+                        viral_items = _nd.get("viral_ticker_tweets")[:8]
+            except Exception:
+                pass
+
+        viral_ticker_en_html = ""
+        for it in viral_items:
+            author = safe_text(it.get("author") or "AI Pioneer", 40)
+            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
+            role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
+            badge = safe_text(it.get("badge_en") or it.get("badge") or "🔥 24h Viral", 30)
+            text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
+            u = it.get("url", "#")
+            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            viral_ticker_en_html += f"""
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="{avatar}" alt="{author}" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge}</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    {text_en}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h Live</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
+                  </div>
+                </div>
+              </article>"""
+
         # 1. Top 3 English
         top_three_en_html = ""
         for idx, item in enumerate(top_three[:3]):
@@ -866,13 +914,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
     """
 
-        pattern_top = r'(<div class="grid grid-cols-1 md:grid-cols-3 gap-3\.5" id="top-three-container">)(.*?)(</div>\s*</section>)'
-        if re.search(pattern_top, en_content, re.DOTALL):
-            en_content = re.sub(pattern_top, r'\1' + top_three_en_html + r'\3', en_content, flags=re.DOTALL)
+        pattern_ticker = r'(<div [^>]*id="viral-ticker-track"[^>]*>)(.*?)(</div>\s*</div>\s*</section>)'
+        if re.search(pattern_ticker, en_content, re.DOTALL):
+            en_content = re.sub(pattern_ticker, r'\1\n' + viral_ticker_en_html + r'\n          \3', en_content, flags=re.DOTALL)
+        else:
+            pattern_top = r'(<div [^>]*id="top-three-container"[^>]*>)(.*?)(</div>\s*</section>)'
+            if re.search(pattern_top, en_content, re.DOTALL):
+                en_content = re.sub(pattern_top, r'\1' + top_three_en_html + r'\3', en_content, flags=re.DOTALL)
 
-        pattern_news = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-news">)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
+        pattern_news = r'(<div [^>]*id="stream-news"[^>]*>)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
         if re.search(pattern_news, en_content, re.DOTALL):
-            en_content = re.sub(pattern_news, r'\1' + news_cards_en_html + r'\3', en_content, flags=re.DOTALL)
+            en_content = re.sub(pattern_news, r'\1\n' + news_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
 
         pattern_celeb = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-celebrity">)(.*?)(</div>\s*</div>\s*<!-- 社交专栏直达底栏 -->)'
         if re.search(pattern_celeb, en_content, re.DOTALL):
@@ -902,6 +954,54 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     if os.path.exists(ZH_INDEX_FILE):
         with open(ZH_INDEX_FILE, "r", encoding="utf-8") as f:
             zh_content = f.read()
+
+        # 1. Viral Ticker Chinese
+        viral_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+            try:
+                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                    _nd = json.load(_f)
+                    if _nd.get("viral_ticker_tweets"):
+                        viral_items = _nd.get("viral_ticker_tweets")[:8]
+            except Exception:
+                pass
+
+        viral_ticker_zh_html = ""
+        for it in viral_items:
+            author = safe_text(it.get("author") or "AI 领袖", 40)
+            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
+            role = safe_text(it.get("author_role") or "AI 先锋观察者", 60)
+            badge = safe_text(it.get("badge_zh") or it.get("badge") or "🔥 24h 爆款", 30)
+            text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
+            u = it.get("url", "#")
+            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            viral_ticker_zh_html += f"""
+              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="{avatar}" alt="{author}" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                      </div>
+                    </div>
+                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge}</span>
+                  </div>
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    {text_zh}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <div class="flex items-center space-x-2">
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">查看原文 ↗</a>
+                  </div>
+                </div>
+              </article>"""
 
         # 1. Top 3 Chinese
         top_three_zh_html = ""
@@ -1065,11 +1165,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
     """
 
-        if re.search(pattern_top, zh_content, re.DOTALL):
+        if re.search(pattern_ticker, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_ticker, r'\1\n' + viral_ticker_zh_html + r'\n          \3', zh_content, flags=re.DOTALL)
+        elif re.search(pattern_top, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_top, r'\1' + top_three_zh_html + r'\3', zh_content, flags=re.DOTALL)
 
         if re.search(pattern_news, zh_content, re.DOTALL):
-            zh_content = re.sub(pattern_news, r'\1' + news_cards_zh_html + r'\3', zh_content, flags=re.DOTALL)
+            zh_content = re.sub(pattern_news, r'\1\n' + news_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
 
         if re.search(pattern_celeb, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_celeb, r'\1\n' + celeb_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)

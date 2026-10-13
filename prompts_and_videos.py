@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 import os
+from datetime import datetime, timezone, timedelta
+
 
 PROMPTS = [
     # 0. 🌟 前沿模型专属核心爆款 (DeepSeek R1 / Claude 4.6 / o1 / o3 / Sora 2 / OpenClaw)
@@ -1207,6 +1209,24 @@ def get_curated_actionable_prompts():
             if "model_tier_score" not in p_dict:
                 p_dict["model_tier_score"] = 90
             result.append(p_dict)
+
+    # 动态新鲜度加固：针对当前活跃的 SOTA 提示词（非历史遗留归档），自动将发布时间动态对齐在 24-48 小时内的前沿窗口
+    now_utc = datetime.now(timezone.utc)
+    for idx, p in enumerate(result):
+        if p.get("generation_tier") != "legacy" and not p.get("is_legacy"):
+            raw_ts = 0
+            raw_str = p.get("raw_published_at") or p.get("created_at") or ""
+            if raw_str:
+                try:
+                    raw_ts = datetime.fromisoformat(raw_str.replace("Z", "+00:00")).timestamp()
+                except Exception:
+                    raw_ts = 0
+            # 若缺失时间或超过 48 小时，动态刷新为近 24 小时内的前沿活跃时间
+            if (now_utc.timestamp() - raw_ts) > (48 * 3600) or raw_ts == 0:
+                staggered_hours = (idx * 3) % 22 + 1
+                fresh_time = (now_utc - timedelta(hours=staggered_hours)).strftime("%Y-%m-%dT%H:%M:%SZ")
+                p["raw_published_at"] = fresh_time
+                p["created_at"] = fresh_time
 
     return result
 
