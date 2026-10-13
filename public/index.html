@@ -322,12 +322,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">387</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">389</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">47</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">49</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -822,6 +822,48 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wp.technologyreview.com/wp-content/uploads/2023/05/identity-distortion3.jpeg?fit=1456,818" alt="The Download: open model trade-offs and geothermal power’s promise" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: MIT Tech Review</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.technologyreview.com/2026/10/13/1146382/the-download-open-models-trade-offs-geothermal-power/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">The Download: open model trade-offs and geothermal power’s promise</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Anthropic recently released a report arguing that a powerful new model released by the Chinese company Z.ai, poses a major cyberattack risk. Its core concern was that it is freely available for anyone to download and modify.
+
+The warning was the late
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.technologyreview.com/2026/10/13/1146382/the-download-open-models-trade-offs-geothermal-power/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="Sources: Anthropic and OpenAI have pushed for substantial control over what external AI evaluators can publish, out of c" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Reuters</span>
+                    </div>
+                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
+                      <a href="https://www.reuters.com/world/behind-ai-industrys-call-independent-reviews-fight-over-what-gets-made-public-2026-10-13/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Sources: Anthropic and OpenAI have pushed for substantial control over what external AI evaluators can publish, out of c</a>
+                    </h3>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Anthropic and OpenAI have sought significant control over what outside evaluators can publish, concerned that findings could reveal trade secrets …
+                    </p>
+                  </div>
+                  <div class="flex justify-end pt-1">
+                    <a href="https://www.reuters.com/world/behind-ai-industrys-call-independent-reviews-fight-over-what-gets-made-public-2026-10-13/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
                 
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -1019,46 +1061,6 @@
                   </div>
                   <div class="flex justify-end pt-1">
                     <a href="https://www.bloomberg.com/news/articles/2026-10-13/alibaba-unveils-450-ai-glasses-in-expanding-push-into-gadgets" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://www.engadget.com/img/gallery/x-subscription-unifies-x-premium-grok-and-cursor-plans/l-intro-1791880522.jpg" alt="SpaceXSI launches a unified X Subscription bundling Grok, Cursor, and X Premium, with tiers at $8, $30, $100, and $200 p" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Engadget</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.engadget.com/2284943/x-subscription-bundles-premium-grok-cursor/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">SpaceXSI launches a unified X Subscription bundling Grok, Cursor, and X Premium, with tiers at $8, $30, $100, and $200 p</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      One membership will give you access to SpaceXSI's products. — SpaceXSI has announced a unified membership scheme across its products called the X Subscription.
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.engadget.com/2284943/x-subscription-bundles-premium-grok-cursor/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://media.wired.com/photos/6ac83144109df86817f42ae5/master/pass/Politics_TheBiggestPro-AISuperPacHasBeenFunneling.gif" alt="The Biggest Pro-AI Super PAC Network Has Poured Millions Into Nevada Shell Companies" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Wired AI</span>
-                    </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="https://www.wired.com/story/the-biggest-pro-ai-super-pac-network-has-poured-millions-into-nevada-shell-companies/" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">The Biggest Pro-AI Super PAC Network Has Poured Millions Into Nevada Shell Companies</a>
-                    </h3>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      Backed by Silicon Valley titans, Leading the Future has raised huge sums to promote pro-AI candidates on both side of the aisle.
-                    </p>
-                  </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="https://www.wired.com/story/the-biggest-pro-ai-super-pac-network-has-poured-millions-into-nevada-shell-companies/" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
                   </div>
                 </div>
               </article>
