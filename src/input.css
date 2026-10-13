@@ -60,15 +60,15 @@ html.dark .glass-panel {
 
 html.dark .glass-card {
 
-  background: rgba(13, 19, 34, 0.84) !important;
-
-  backdrop-filter: blur(10px) !important;
-
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(13, 19, 34, 0.94) !important;
 
   border: 1px solid rgba(255, 255, 255, 0.08);
 
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+
+  content-visibility: auto;
+
+  contain-intrinsic-size: auto 160px;
 
 }
 
@@ -102,11 +102,7 @@ html:not(.dark) .glass-panel {
 
 html:not(.dark) .glass-card {
 
-  background: rgba(255, 255, 255, 0.88) !important;
-
-  backdrop-filter: blur(10px) !important;
-
-  -webkit-backdrop-filter: blur(10px) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
 
   border: 1px solid rgba(226, 232, 240, 0.9) !important;
 
@@ -114,7 +110,11 @@ html:not(.dark) .glass-card {
 
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.02) !important;
 
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+
+  content-visibility: auto;
+
+  contain-intrinsic-size: auto 160px;
 
 }
 
@@ -574,9 +574,13 @@ ins.adsbygoogle iframe {
 
     .cyber-timeline-card {
 
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 
       position: relative;
+
+      content-visibility: auto;
+
+      contain-intrinsic-size: auto 200px;
 
     }
 
@@ -921,119 +925,22 @@ ins.adsbygoogle iframe {
 
     /* 360° 全局旋转扫描扇面 (Full-Screen Radar Sweep Beam - GPU Hardware Accelerated) */
 
+    /* 360° 全局旋转扫描扇面 (已硬件加速优化为静音节能模式) */
+
     .global-radar-beam {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1800px;
-      height: 1800px;
-      margin-top: -900px;
-      margin-left: -900px;
-      border-radius: 50%;
-      background: conic-gradient(
-        from 0deg,
-        rgba(56, 189, 248, 0.35) 0deg,
-        rgba(56, 189, 248, 0.16) 16deg,
-        rgba(14, 165, 233, 0.03) 45deg,
-        transparent 70deg,
-        transparent 360deg
-      );
-      will-change: transform;
-      transform-origin: 50% 50%;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      animation: globalRadarSweep 14s linear infinite;
-      pointer-events: none;
+      display: none !important;
     }
 
-    /* 高亮激光先导扫描线 (Leading Scan Ray - 划破天际的真实雷达刀? */
+    /* 高亮激光先导扫描线 */
 
     .global-radar-beam::before {
-
-      content: '';
-
-      position: absolute;
-
-      top: 50%;
-
-      left: 50%;
-
-      width: 50%;
-
-      height: 2px;
-
-      transform: translateY(-50%);
-
-      background: linear-gradient(90deg, #ffffff 0%, #38bdf8 35%, rgba(56, 189, 248, 0.7) 75%, transparent 100%);
-
-      box-shadow: 0 0 10px #38bdf8, 0 0 20px rgba(14, 165, 233, 0.7);
-
-      pointer-events: none;
-
+      display: none !important;
     }
 
-    html:not(.dark) .global-radar-beam {
-
-      background: conic-gradient(
-
-        from 0deg,
-
-        rgba(14, 165, 233, 0.32) 0deg,
-
-        rgba(56, 189, 248, 0.14) 16deg,
-
-        rgba(14, 165, 233, 0.03) 45deg,
-
-        transparent 70deg,
-
-        transparent 360deg
-
-      );
-
-    }
-
-    html:not(.dark) .global-radar-beam::before {
-
-      background: linear-gradient(90deg, #0284c7 0%, #0ea5e9 35%, rgba(14, 165, 233, 0.7) 75%, transparent 100%);
-
-      box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
-
-    }
-
-
-
-    @keyframes globalRadarSweep {
-      from {
-        transform: translate3d(0, 0, 0) rotate(0deg);
-      }
-      to {
-        transform: translate3d(0, 0, 0) rotate(360deg);
-      }
-    }
-
-
-
-    /* 全局雷达双频中心声呐脉冲?(100% GPU Transform Scale - 零重排零卡顿) */
+    /* 全局雷达双频中心声呐脉冲 (已硬件加速优化为静音节能模式) */
 
     .global-radar-pulse {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 1200px;
-      height: 1200px;
-      margin-top: -600px;
-      margin-left: -600px;
-      border-radius: 50%;
-      border: 1.5px solid rgba(56, 189, 248, 0.65);
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0.03) 40%, transparent 65%);
-      pointer-events: none;
-      will-change: transform, opacity;
-      transform-origin: 50% 50%;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      animation: globalSonarGpuPulse 5s cubic-bezier(0.12, 0.7, 0.22, 1) infinite;
+      display: none !important;
     }
 
     .global-radar-pulse-secondary {
@@ -1263,44 +1170,11 @@ ins.adsbygoogle iframe {
     }
 
     .radar-sweep-beam {
-      position: absolute;
-      top: 50%; left: 50%; width: 1000px; height: 1000px;
-      margin-top: -500px; margin-left: -500px; border-radius: 50%;
-      background: conic-gradient(from 0deg, rgba(56, 189, 248, 0.25) 0deg, rgba(14, 165, 233, 0.08) 35deg, transparent 65deg, transparent 360deg);
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      animation: globalRadarSweep 7s linear infinite; pointer-events: none;
-    }
-
-    html:not(.dark) .radar-sweep-beam {
-
-      background: conic-gradient(from 0deg, rgba(14, 165, 233, 0.18) 0deg, rgba(56, 189, 248, 0.06) 30deg, transparent 60deg, transparent 360deg);
-
+      display: none !important;
     }
 
     .radar-sonar-pulse {
-      position: absolute;
-      top: 50%; left: 50%;
-      width: 700px; height: 700px;
-      margin-top: -350px; margin-left: -350px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.4) 0%, rgba(56, 189, 248, 0.08) 45%, transparent 70%);
-      pointer-events: none;
-      will-change: transform, opacity;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      animation: sonarPulseExpand 3.5s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
-    }
-
-    @keyframes sonarPulseExpand {
-      0% { transform: translate3d(0, 0, 0) scale(0.04); opacity: 0.85; }
-      100% { transform: translate3d(0, 0, 0) scale(1.15); opacity: 0; }
-    }
-
-    html:not(.dark) .radar-sonar-pulse {
-      background: radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, rgba(14, 165, 233, 0.06) 45%, transparent 70%);
+      display: none !important;
     }
 
     /* Viral Ticker Viewport & Slider Vertical Auto-Carousel */

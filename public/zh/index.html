@@ -89,6 +89,19 @@
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
       .lg\:col-span-3 { grid-column: span 3 / span 3 !important; }
     }
+    .global-radar-beam, .global-radar-pulse, .radar-sweep-beam, .radar-sonar-pulse {
+      display: none !important;
+    }
+    .glass-card {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 160px;
+    }
+    .cyber-timeline-card {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 200px;
+    }
   </style>
   <script>
     // Zero-FOUC theme initialization
@@ -5211,18 +5224,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       setTimeout(fitViralTickerHeight, 600);
     }
 
+    let _fitTickerRaf = null;
     function fitViralTickerHeight() {
-      const viewport = document.getElementById('viral-ticker-viewport');
-      const slider = document.getElementById('viral-ticker-slider');
-      if (!viewport || !slider) return;
-      const pages = slider.querySelectorAll('.viral-ticker-page');
-      const cur = window.viralTickerCurrentPage || 0;
-      const targetPage = pages[cur] || pages[0];
-      if (targetPage && targetPage.offsetHeight > 0) {
-        const h = Math.max(targetPage.offsetHeight, 130);
-        viewport.style.height = `${h}px`;
-        viewport.style.maxHeight = `${h}px`;
-      }
+      if (_fitTickerRaf) cancelAnimationFrame(_fitTickerRaf);
+      _fitTickerRaf = requestAnimationFrame(() => {
+        const viewport = document.getElementById('viral-ticker-viewport');
+        const slider = document.getElementById('viral-ticker-slider');
+        if (!viewport || !slider) return;
+        const pages = slider.querySelectorAll('.viral-ticker-page');
+        const cur = window.viralTickerCurrentPage || 0;
+        const targetPage = pages[cur] || pages[0];
+        if (targetPage && targetPage.offsetHeight > 0) {
+          const h = Math.max(targetPage.offsetHeight, 130);
+          const hPx = `${h}px`;
+          if (viewport.style.height !== hPx) {
+            viewport.style.height = hPx;
+            viewport.style.maxHeight = hPx;
+          }
+        }
+      });
     }
 
     function flipViralTicker(direction) {
@@ -7262,29 +7282,37 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       setTimeout(syncThreeColumnsHeight, 60);
     }
 
-    // 动态同步“综合全景”核心栏（行业快讯、天梯榜）的等高对齐，保持视觉美感与严格一致性
+    // 动态同步“综合全景”核心栏（行业快讯、天梯榜）的等高对齐（RAF 防抖防重排优化）
+    let _syncHeightRaf = null;
     function syncThreeColumnsHeight() {
-      const colArena = document.getElementById('section-col-arena');
-      const colNews = document.getElementById('section-col-news');
-      const colCeleb = document.getElementById('section-col-celebrity');
-      if (!colArena || !colNews) return;
+      if (_syncHeightRaf) cancelAnimationFrame(_syncHeightRaf);
+      _syncHeightRaf = requestAnimationFrame(() => {
+        const colArena = document.getElementById('section-col-arena');
+        const colNews = document.getElementById('section-col-news');
+        const colCeleb = document.getElementById('section-col-celebrity');
+        if (!colArena || !colNews) return;
 
-      if (window.innerWidth >= 1024) {
-        colArena.style.height = 'auto';
-        colNews.style.height = 'auto';
-        if (colCeleb) colCeleb.style.height = 'auto';
-        const naturalH = Math.max(colArena.offsetHeight, colNews.offsetHeight);
-        if (naturalH > 400) {
-          const target = `${naturalH}px`;
-          colArena.style.height = target;
-          colNews.style.height = target;
-          if (colCeleb) colCeleb.style.height = target;
+        if (window.innerWidth >= 1024) {
+          colArena.style.height = 'auto';
+          colNews.style.height = 'auto';
+          if (colCeleb) colCeleb.style.height = 'auto';
+          requestAnimationFrame(() => {
+            const hArena = colArena.offsetHeight;
+            const hNews = colNews.offsetHeight;
+            const naturalH = Math.max(hArena, hNews);
+            if (naturalH > 400) {
+              const target = `${naturalH}px`;
+              if (colArena.style.height !== target) colArena.style.height = target;
+              if (colNews.style.height !== target) colNews.style.height = target;
+              if (colCeleb && colCeleb.style.height !== target) colCeleb.style.height = target;
+            }
+          });
+        } else {
+          if (colArena.style.height) colArena.style.height = '';
+          if (colNews.style.height) colNews.style.height = '';
+          if (colCeleb && colCeleb.style.height) colCeleb.style.height = '';
         }
-      } else {
-        colArena.style.height = '';
-        colNews.style.height = '';
-        if (colCeleb) colCeleb.style.height = '';
-      }
+      });
     }
 
     // 全站高精度多字段多词检索过滤器
@@ -7696,21 +7724,30 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       applyCurrentTranslation();
     }
 
-    // 加载数据
+    // 加载数据 (高性能智能缓存版)
     async function loadNews(isManual = false) {
       const refreshBtn = document.getElementById('refresh-btn-text');
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
-        const res = await fetch(`/data/latest_news.json?t=${Date.now()}`, {
-          cache: 'no-store'
+        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
+        const res = await fetch(fetchUrl, {
+          cache: isManual ? 'reload' : 'no-cache'
         });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
 
+        // 智能兼容：若服务端精简了 items，动态构建 items 集合，确保向下兼容
+        if (data.grouped && !data.items) {
+          data.items = [];
+          ['news', 'celebrity', 'tools', 'videos', 'prompts'].forEach(k => {
+            if (Array.isArray(data.grouped[k])) data.items.push(...data.grouped[k]);
+          });
+        }
+
         // 动态载入前沿模型应用场景提示词库 (Prompt Library v2.0)
         try {
-          const promptRes = await fetch(`/data/curated_prompts_library.json?t=${Date.now()}`);
+          const promptRes = await fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' });
           if (promptRes.ok) {
             const curatedPrompts = await promptRes.json();
             if (Array.isArray(curatedPrompts)) {
@@ -7729,9 +7766,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           console.warn("curated_prompts_library fetch fallback:", e);
         }
 
+        // 性能防护锁：若数据版本未发生变更且非手动点击，跳过全量 DOM 抹除与重渲染，彻底杜绝后台轮询造成的卡顿
+        const isSameUpdate = cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
         cachedData = data;
+        if (isSameUpdate && !isManual) {
+          refreshCountdown = 180;
+          return;
+        }
+
+        // 轻量保存最新更新时间戳，避免将数兆数据序列化进 sessionStorage 导致主线程 GC 挂起与存储超限
         try {
-          sessionStorage.setItem('ainews_cached_data', JSON.stringify({ ...data, _saved_at: Date.now() }));
+          sessionStorage.setItem('ainews_updated_at', data.updated_at || '');
         } catch (e) {}
 
         // 核心防打扰：如果当前在视频专区且为定时后台轮询，仅静默更新缓存，绝不粗暴清空 DOM 重绘视频卡片
@@ -7744,18 +7789,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         refreshCountdown = 180;
       } catch (err) {
         console.error("加载数据失败:", err);
-        if (!cachedData) {
-          try {
-            const cachedStr = sessionStorage.getItem('ainews_cached_data');
-            if (cachedStr) {
-              const parsed = JSON.parse(cachedStr);
-              if (parsed) {
-                cachedData = parsed;
-                renderUI(parsed);
-              }
-            }
-          } catch (e) {}
-        }
       } finally {
         if (refreshBtn) refreshBtn.textContent = I18N[currentLang].refreshBtn;
       }

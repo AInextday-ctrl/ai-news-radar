@@ -1397,7 +1397,8 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
             try:
                 with open(news_file, "r", encoding="utf-8") as f:
                     ndata = json.load(f)
-                    items = items or ndata.get("items", [])
+                    if not items:
+                        items = ndata.get("items") or [it for cat in ndata.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
                     top_three = top_three or ndata.get("top_three", [])
             except Exception:
                 items = items or []

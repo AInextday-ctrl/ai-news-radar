@@ -277,7 +277,7 @@ if __name__ == "__main__":
     if os.path.exists(test_file):
         with open(test_file, "r", encoding="utf-8") as f:
             d = json.load(f)
-        items = d.get("items", [])
+        items = d.get("items") or [it for cat in d.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
         if verify_only:
             violations = 0
             for idx, it in enumerate(items):

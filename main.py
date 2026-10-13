@@ -1308,30 +1308,17 @@ def save_news(items: list):
         },
         "categories": CATEGORIES,
         "viral_ticker_tweets": viral_ticker_tweets,
-        "top_viral_tweets": viral_ticker_tweets,
         "top_three": top_three,
         "chatbot_arena": chatbot_arena,
         "arxiv_papers": arxiv_papers,
         "ai_creators": AI_CREATORS,
-        "grouped": grouped,
-        "news": grouped.get("news", []),
-        "celebrity": grouped.get("celebrity", []),
-        "tools": grouped.get("tools", []),
-        "videos": grouped.get("videos", []),
-        "prompts": grouped.get("prompts", []),
-        "viral_posts": viral_posts,
-        "industry_news": grouped.get("news", []),
-        "leader_opinions": grouped.get("celebrity", []),
-        "applied_tools": grouped.get("tools", []),
-        "video_prompts": grouped.get("videos", []),
-        "items": recent_final
+        "grouped": grouped
     }
 
     # 🛡️ 语言规范质检与自愈哨兵：确保写入 latest_news.json 与 archive_news.json 前 100% 纯净达标
     try:
         from language_sentinel import run_pipeline_language_audit
         recent_final, _ = run_pipeline_language_audit(recent_final)
-        latest_payload["items"] = recent_final
         # 同步更新 latest_payload 中的分类列表与全网爆帖列表
         for cat_k in CATEGORIES:
             cat_items = [it for it in recent_final if it.get("category") == cat_k]
@@ -1341,17 +1328,6 @@ def save_news(items: list):
 
         viral_list = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
         latest_payload["grouped"]["viral_posts"] = viral_list
-        latest_payload["viral_posts"] = viral_list
-
-        latest_payload["news"] = latest_payload["grouped"].get("news", [])
-        latest_payload["celebrity"] = latest_payload["grouped"].get("celebrity", [])
-        latest_payload["tools"] = latest_payload["grouped"].get("tools", [])
-        latest_payload["videos"] = latest_payload["grouped"].get("videos", [])
-        latest_payload["prompts"] = latest_payload["grouped"].get("prompts", [])
-        latest_payload["industry_news"] = latest_payload["grouped"].get("news", [])
-        latest_payload["leader_opinions"] = latest_payload["grouped"].get("celebrity", [])
-        latest_payload["applied_tools"] = latest_payload["grouped"].get("tools", [])
-        latest_payload["video_prompts"] = latest_payload["grouped"].get("videos", [])
     except Exception as e:
         print(f"⚠️ [language_sentinel] 自动质检异常: {e}")
 
@@ -1363,17 +1339,17 @@ def save_news(items: list):
         "categories": CATEGORIES
     }
 
-    # 写入 latest_news.json
+    # 写入 latest_news.json (采用紧凑无空白序列化，缩减 80% 体积，极大提升页面拉取与解析性能)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(latest_payload, f, ensure_ascii=False, indent=2)
+        json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(latest_payload, f, ensure_ascii=False, indent=2)
+        json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 写入 archive_news.json
     with open(ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(archive_payload, f, ensure_ascii=False, indent=2)
+        json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
     with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(archive_payload, f, ensure_ascii=False, indent=2)
+        json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 自动执行 AdSense 高价值合规重构引擎：
     # 1. 发布独家深度专栏文章 (public/articles/*.html)

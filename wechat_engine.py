@@ -755,11 +755,11 @@ def sync_processed_marks_to_datasets(marked_items: List[Dict[str, Any]]):
                         total_up += update_item_list(sub_list)
             
             with open(latest_file, "w", encoding="utf-8") as f:
-                json.dump(d, f, ensure_ascii=False, indent=2)
+                json.dump(d, f, ensure_ascii=False, separators=(',', ':'))
             
             pub_latest = os.path.join(PUBLIC_DATA_DIR, "latest_news.json")
             with open(pub_latest, "w", encoding="utf-8") as f:
-                json.dump(d, f, ensure_ascii=False, indent=2)
+                json.dump(d, f, ensure_ascii=False, separators=(',', ':'))
             print(f"📦 [Ledger] 已将打标元数据同步至最新雷达资讯库 (更新 {total_up} 处)")
         except Exception as e:
             print(f"⚠️ [Ledger] 同步 latest_news.json 异常: {e}")
