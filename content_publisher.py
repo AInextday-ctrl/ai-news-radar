@@ -834,45 +834,27 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </div>"""
 
-        # 3. Hub Section English
-        daily_en_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} Briefing</a>' for d in reversed(recent_dates)])
+        # 3. Hub Section English (Hidden visually via sr-only, fully crawlable by search engines)
+        daily_en_links = "".join([f'<a href="/daily/{d}">📅 {d} Briefing</a> ' for d in reversed(recent_dates)])
         articles_en_links = ""
         for art in articles_meta[:6]:
             en_title = get_english_article_title(art['title'])
             articles_en_links += f"""
-        <a href="{art['rel_url']}" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ Deep-Dive · {art['date']}</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">{safe_text(en_title, 80)}</div>
-          <div class="text-[10px] text-slate-400 mt-2">Read In-Depth Analysis ({art['chars']} chars) →</div>
-        </a>"""
+        <article>
+          <h3><a href="{art['rel_url']}">{safe_text(en_title, 80)}</a></h3>
+          <p>✦ Deep-Dive · {art['date']} · ({art['chars']} chars)</p>
+        </article>"""
 
         hub_en_html = f"""
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
-    <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
-      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-            <span>📅</span>
-            <span>Historical AI Daily Intelligence Archive</span>
-          </h2>
-          <span class="text-[11px] text-slate-500">Updated Daily · Verified Original Sources</span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          {daily_en_links}
-        </div>
-      </div>
-
-      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-            <span>📚</span>
-            <span>AI Deep-Dive Intelligence & Analysis</span>
-          </h2>
-          <span class="text-[11px] text-indigo-500 font-semibold">In-Depth Analysis & Empirical Benchmarks</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {articles_en_links}
-        </div>
+    <section class="sr-only" aria-label="Historical AI Daily Intelligence & Deep-Dive Archives">
+      <h2>Historical AI Daily Intelligence Archive</h2>
+      <nav aria-label="Daily Briefings Archive">
+        {daily_en_links}
+      </nav>
+      <h2>AI Deep-Dive Intelligence & Analysis</h2>
+      <div>
+        {articles_en_links}
       </div>
     </section>
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
@@ -1052,44 +1034,26 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </div>"""
 
-        # 3. Hub Section Chinese
-        daily_zh_links = "".join([f'<a href="/daily/{d}" class="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 text-xs font-mono text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all font-semibold">📅 {d} 日报</a>' for d in reversed(recent_dates)])
+        # 3. Hub Section Chinese (通过 sr-only 视觉隐藏，仅供搜索引擎爬虫与无障碍阅读器索引)
+        daily_zh_links = "".join([f'<a href="/daily/{d}">📅 {d} 日报</a> ' for d in reversed(recent_dates)])
         articles_zh_links = ""
         for art in articles_meta[:6]:
             articles_zh_links += f"""
-        <a href="{art['rel_url']}" class="p-3 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 border border-slate-200 dark:border-slate-700/60 transition-all flex flex-col justify-between group">
-          <div class="text-[10px] text-indigo-600 dark:text-indigo-400 font-bold mb-1">✦ 深度特稿 · {art['date']}</div>
-          <div class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 line-clamp-2 leading-snug">{safe_text(art['title'], 60)}</div>
-          <div class="text-[10px] text-slate-400 mt-2">阅读深度剖析 ({art['chars']} 字) →</div>
-        </a>"""
+        <article>
+          <h3><a href="{art['rel_url']}">{safe_text(art['title'], 60)}</a></h3>
+          <p>✦ 深度特稿 · {art['date']} · ({art['chars']} 字)</p>
+        </article>"""
 
         hub_zh_html = f"""
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
-    <section class="max-w-7xl mx-auto px-4 mt-12 mb-8 space-y-6">
-      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-            <span>📅</span>
-            <span>往期 AI 日报精选索引</span>
-          </h2>
-          <span class="text-[11px] text-slate-500">每日高频更新 · 权威信源交叉验证</span>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          {daily_zh_links}
-        </div>
-      </div>
-
-      <div class="p-5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
-        <div class="flex items-center justify-between mb-3 flex-wrap gap-2">
-          <h2 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-            <span>📚</span>
-            <span>AI 独家深度专栏与前沿智库</span>
-          </h2>
-          <span class="text-[11px] text-indigo-500 font-semibold">前沿深度剖析与实测基准报告</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {articles_zh_links}
-        </div>
+    <section class="sr-only" aria-label="往期 AI 日报精选与深度专栏索引">
+      <h2>往期 AI 日报精选索引</h2>
+      <nav aria-label="往期 AI 日报列表">
+        {daily_zh_links}
+      </nav>
+      <h2>AI 独家深度专栏与前沿智库</h2>
+      <div>
+        {articles_zh_links}
       </div>
     </section>
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
