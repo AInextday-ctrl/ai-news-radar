@@ -800,8 +800,8 @@
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
-        <!-- 栏目 A: ⚡ 突发·行业快讯 (扩展占用 8/12 宽度，双列杂志排版更舒适) -->
-        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-8 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <!-- 栏目 A: ⚡ 突发·行业快讯 (扩展占用 9/12 宽度，双列大面积杂志排版更舒适) -->
+        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-9 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
@@ -1143,19 +1143,19 @@
           </div>
         </section>
 
-        <!-- 栏目 B: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (占用 4/12 宽度，天梯基准列) -->
-        <section id="section-col-arena" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-4 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <!-- 栏目 B: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (压缩为 3/12 宽度，天梯紧凑基准列) -->
+        <section id="section-col-arena" class="glass-panel rounded-2xl p-3.5 sm:p-4 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-3 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0">
-              <div class="flex items-center space-x-1.5 min-w-0">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0 gap-1">
+              <div class="flex items-center space-x-1.5 min-w-0 flex-1">
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-400 shadow-sm shadow-amber-400/50 shrink-0"></span>
-                <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 truncate whitespace-nowrap" id="section-title-arena">
+                <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 truncate" id="section-title-arena">
                   <span>🏆 LMSYS 天梯榜</span>
                 </h3>
-                <span class="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20 shrink-0 whitespace-nowrap" id="arena-sub-tag">Top 25 盲测</span>
+                <span class="text-[9px] px-1 py-0.2 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-semibold border border-amber-500/20 shrink-0" id="arena-sub-tag">Top 25</span>
               </div>
-              <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener noreferrer" class="text-xs text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-0.5 font-medium shrink-0 whitespace-nowrap ml-1">
-                <span>天梯榜</span>
+              <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener noreferrer" class="text-[11px] text-amber-600 dark:text-amber-400 hover:underline flex items-center space-x-0.5 font-medium shrink-0 whitespace-nowrap">
+                <span>天梯</span>
                 <span>↗</span>
               </a>
             </div>
@@ -1163,404 +1163,404 @@
             <!-- 天梯榜列表容器：全量展现 Top 25 排名，与左侧两栏完美等高 -->
             <div class="space-y-1.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
 
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm ring-1 ring-amber-300 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">1</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Opus 5.5 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">👑 全球综合榜首 · Anthropic旗舰基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm ring-1 ring-amber-300 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">1</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Opus 5.5 (Max)">Claude Opus 5.5 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+15.53%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+15.53%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">👑 全球综合榜首 · Anthropic旗舰基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">2</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 6 Astra (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🔥 全球第二 · 极高阶认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">2</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 6 Astra (Max)">GPT 6 Astra (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+13.09%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+13.09%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🔥 全球第二 · 极高阶认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">3</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Fable 5.1 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🔥 全球前三 · Anthropic旗舰推理SOTA</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">3</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Fable 5.1 (Max)">Claude Fable 5.1 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+12.66%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+12.66%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🔥 全球前三 · Anthropic旗舰推理SOTA</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">4</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Sonnet 5.5 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">⚡ 顶级Agent智能体基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">4</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Sonnet 5.5 (Max)">Claude Sonnet 5.5 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+11.95%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+11.95%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">⚡ 顶级Agent智能体基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">5</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 6.1 Sol (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">⚡ 顶级Agent智能体基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">5</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 6.1 Sol (Max)">GPT 6.1 Sol (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+11.72%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+11.72%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">⚡ 顶级Agent智能体基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">6</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 6 Sol (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">6</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 6 Sol (Max)">GPT 6 Sol (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+9.92%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+9.92%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">7</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Gemini 4 Argon (High)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Google</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">7</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Gemini 4 Argon (High)">Gemini 4 Argon (High)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Google</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+9.26%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+9.26%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">8</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Fable 5 (High)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">8</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Fable 5 (High)">Claude Fable 5 (High)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+8.94%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+8.94%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">9</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Opus 5 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">9</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Opus 5 (Max)">Claude Opus 5 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+8.12%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+8.12%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">10</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Opus 4.8 (High)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">10</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Opus 4.8 (High)">Claude Opus 4.8 (High)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+7.13%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+7.13%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">💎 全球Top 10顶级认知基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">11</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 5.6 Sol (xHigh)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">11</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 5.6 Sol (xHigh)">GPT 5.6 Sol (xHigh)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+6.23%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+6.23%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">12</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Sonnet 5 (High)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">12</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Claude Sonnet 5 (High)">Claude Sonnet 5 (High)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Anthropic</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.91%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.91%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">13</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 5.5 (xHigh)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">13</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 5.5 (xHigh)">GPT 5.5 (xHigh)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.38%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.38%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">14</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Muse Spark 1.3 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Meta</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">14</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Muse Spark 1.3 (Max)">Muse Spark 1.3 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Meta</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.04%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+4.04%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">15</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Deepseek V4.1 Flash (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">DeepSeek</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">15</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Deepseek V4.1 Flash (Max)">Deepseek V4.1 Flash (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">DeepSeek</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.80%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.80%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">16</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Kimi K3 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Moonshot</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">16</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Kimi K3 (Max)">Kimi K3 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Moonshot</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.78%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.78%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">17</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Hy4 preview</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Tencent</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">17</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Hy4 preview">Hy4 preview</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Tencent</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.61%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.61%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">18</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">MiMo V2.6 Pro</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Xiaomi</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">18</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="MiMo V2.6 Pro">MiMo V2.6 Pro</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Xiaomi</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.52%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.52%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">19</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GLM 5.2 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Z.ai</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">19</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GLM 5.2 (Max)">GLM 5.2 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Z.ai</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.19%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+3.19%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">20</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Grok 4.7 (xHigh)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">SpaceXAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">20</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Grok 4.7 (xHigh)">Grok 4.7 (xHigh)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">SpaceXAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.83%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.83%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">21</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Gemini 3.8 Flash (High)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Google</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">21</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Gemini 3.8 Flash (High)">Gemini 3.8 Flash (High)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Google</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.75%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.75%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">22</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Qwen3.8 Max</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Alibaba</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">22</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="Qwen3.8 Max">Qwen3.8 Max</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Alibaba</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.35%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.35%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">23</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GLM 5.3 (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Z.ai</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">23</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GLM 5.3 (Max)">GLM 5.3 (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">Z.ai</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.15%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+2.15%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">24</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">GPT 6 Luna (Max)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">24</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="GPT 6 Luna (Max)">GPT 6 Luna (Max)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">OpenAI</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+1.93%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+1.93%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">25</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">DeepSeek V4 Pro (High) (0813)</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">DeepSeek</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">🚀 高性能生产力基座</span>
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-[10px] font-bold font-mono shrink-0">25</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="DeepSeek V4 Pro (High) (0813)">DeepSeek V4 Pro (High) (0813)</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">DeepSeek</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+1.34%</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
                   </div>
                 </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">+1.34%</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">Score</span>
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">🚀 高性能生产力基座</span>
                 </div>
               </div>
             </div>
@@ -2097,10 +2097,12 @@
           </div>
 
           <!-- 原帖全文内容区域 (保持换行、段落、标点符号，支持文字选中复制) -->
-          <div class="p-4 sm:p-5 max-h-[38vh] overflow-y-auto custom-scrollbar">
+          <div class="p-4 sm:p-5 max-h-[45vh] overflow-y-auto custom-scrollbar">
             <div id="social-modal-fulltext-content" class="text-sm sm:text-[14.5px] leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-200 font-sans whitespace-pre-wrap select-text cursor-text break-words">
               <!-- 动态注入原帖全文 -->
             </div>
+            <!-- 原帖原图与视频媒体呈现区域 -->
+            <div id="social-modal-media-content" class="mt-3 empty:hidden"></div>
           </div>
 
           <!-- 原帖底部防伪鉴真声明 -->
@@ -5583,6 +5585,60 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               ${formatTweetText(displayQuote)}
             </div>
 
+            <!-- 原推图片/视频媒体展示 (仅在独立推文雷达栏目呈现，首页全景模式保持纯净文字流) -->
+            ${(() => {
+              const isCelebrityTab = (typeof currentTab !== 'undefined' && currentTab === 'celebrity') || isTimeline;
+              if (!isCelebrityTab) return '';
+
+              const imgUrl = item.image_url || (item.media_urls && item.media_urls[0]) || (item.photos && item.photos[0]);
+              const allMediaUrls = item.media_urls || (item.photos ? item.photos : (imgUrl ? [imgUrl] : []));
+              const hasVideo = item.has_video || item.video_url || (item.url && item.url.includes('/video/')) || (displayQuote && /video|▶|🎬/i.test(displayQuote) && imgUrl);
+              const videoSrc = item.video_url;
+
+              if (videoSrc) {
+                return `
+                  <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-black relative group/media" onclick="event.stopPropagation()">
+                    <video src="${escapeHtml(videoSrc)}" controls poster="${imgUrl ? escapeHtml(imgUrl) : ''}" class="w-full max-h-80 object-contain rounded-xl" preload="metadata"></video>
+                  </div>`;
+              }
+              if (hasVideo && imgUrl) {
+                return `
+                  <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer" onclick="event.stopPropagation(); window.open('${item.url}', '_blank')">
+                    <img src="${escapeHtml(imgUrl)}" alt="Tweet video preview" class="w-full max-h-72 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="absolute inset-0 bg-slate-950/40 flex items-center justify-center group-hover/media:bg-slate-950/20 transition-colors">
+                      <div class="w-12 h-12 rounded-full bg-sky-500/90 text-white flex items-center justify-center shadow-lg group-hover/media:scale-110 transition-transform">
+                        <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                      </div>
+                    </div>
+                    <div class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-sm text-[10px] font-mono text-white flex items-center gap-1">
+                      <span>🎬</span>
+                      <span>${isZh ? '播放原视频 ↗' : 'Play Video on 𝕏 ↗'}</span>
+                    </div>
+                  </div>`;
+              }
+              if (allMediaUrls && allMediaUrls.length > 1) {
+                return `
+                  <div class="mt-2.5 grid grid-cols-2 gap-1.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
+                    ${allMediaUrls.slice(0, 4).map(u => `
+                      <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(u)}', '_blank')">
+                        <img src="${escapeHtml(u)}" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                      </div>
+                    `).join('')}
+                  </div>`;
+              }
+              if (imgUrl) {
+                return `
+                  <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer max-h-80" onclick="event.stopPropagation(); window.open('${escapeHtml(imgUrl)}', '_blank')">
+                    <img src="${escapeHtml(imgUrl)}" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] text-white/90 font-mono opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center gap-1">
+                      <span>🔍</span>
+                      <span>${isZh ? '查看原图' : 'View Full Image'}</span>
+                    </div>
+                  </div>`;
+              }
+              return '';
+            })()}
+
             ${specBadges}
           </div>
 
@@ -7103,24 +7159,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           } else if (item.rank <= 10) {
             rankBadgeClass = 'bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30';
           }
+          const badgeRow = badgeText ? `
+            <div class="flex items-center pl-7 min-w-0">
+              <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">${escapeHtml(badgeText)}</span>
+            </div>` : '';
           return `
-            <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-              <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                <span class="w-5 h-5 rounded-full ${rankBadgeClass} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">
-                  ${item.rank}
-                </span>
-                <div class="min-w-0 flex-1">
-                  <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${escapeHtml(item.model)}</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">${escapeHtml(item.org)}</span>
-                    ${badgeText ? `<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">${escapeHtml(badgeText)}</span>` : ''}
-                  </div>
+            <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+              <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                <div class="flex items-center space-x-2 min-w-0 flex-1">
+                  <span class="w-5 h-5 rounded-full ${rankBadgeClass} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">
+                    ${item.rank}
+                  </span>
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="${escapeHtml(item.model)}">${escapeHtml(item.model)}</span>
+                  <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">${escapeHtml(item.org)}</span>
+                </div>
+                <div class="text-right shrink-0 whitespace-nowrap">
+                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">${item.elo}</span>
+                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">${(item.elo && String(item.elo).includes('%')) ? 'Score' : 'Elo'}</span>
                 </div>
               </div>
-              <div class="text-right shrink-0">
-                <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">${item.elo}</span>
-                <span class="text-[9px] text-slate-500 ml-0.5 font-mono">${(item.elo && String(item.elo).includes('%')) ? 'Score' : 'Elo'}</span>
-              </div>
+              ${badgeRow}
             </div>
           `;
         }).join('');
@@ -8857,6 +8915,52 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (fullTextContentEl) {
         fullTextContentEl.textContent = textToDisplay;
+      }
+
+      // 动态呈现社交原帖的多媒体资产 (原图/相册/视频)
+      const mediaContentEl = document.getElementById('social-modal-media-content');
+      if (mediaContentEl) {
+        const imgUrl = item.image_url || (item.media_urls && item.media_urls[0]) || (item.photos && item.photos[0]);
+        const allMediaUrls = item.media_urls || (item.photos ? item.photos : (imgUrl ? [imgUrl] : []));
+        const videoSrc = item.video_url;
+        const hasVideo = item.has_video || videoSrc || (item.url && item.url.includes('/video/'));
+
+        if (videoSrc) {
+          mediaContentEl.innerHTML = `
+            <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-black shadow-md mt-3">
+              <video src="${escapeHtml(videoSrc)}" controls poster="${imgUrl ? escapeHtml(imgUrl) : ''}" class="w-full max-h-96 object-contain rounded-xl" preload="metadata"></video>
+            </div>`;
+        } else if (hasVideo && imgUrl) {
+          mediaContentEl.innerHTML = `
+            <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer shadow-md mt-3" onclick="window.open('${item.url}', '_blank')">
+              <img src="${escapeHtml(imgUrl)}" alt="Tweet video" class="w-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.01] transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+              <div class="absolute inset-0 bg-slate-950/40 flex items-center justify-center group-hover/media:bg-slate-950/20 transition-colors">
+                <div class="w-14 h-14 rounded-full bg-sky-500/90 text-white flex items-center justify-center shadow-xl group-hover/media:scale-110 transition-transform">
+                  <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </div>
+              </div>
+              <div class="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-md bg-black/75 backdrop-blur-sm text-xs font-mono text-white flex items-center gap-1.5">
+                <span>🎬</span>
+                <span>${isZhSystem ? '播放原帖视频 ↗' : 'Play Video on 𝕏 ↗'}</span>
+              </div>
+            </div>`;
+        } else if (allMediaUrls && allMediaUrls.length > 1) {
+          mediaContentEl.innerHTML = `
+            <div class="grid grid-cols-2 gap-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md mt-3">
+              ${allMediaUrls.slice(0, 4).map(u => `
+                <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="window.open('${escapeHtml(u)}', '_blank')">
+                  <img src="${escapeHtml(u)}" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+                </div>
+              `).join('')}
+            </div>`;
+        } else if (imgUrl) {
+          mediaContentEl.innerHTML = `
+            <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md cursor-pointer max-h-96 mt-3" onclick="window.open('${escapeHtml(imgUrl)}', '_blank')">
+              <img src="${escapeHtml(imgUrl)}" alt="Tweet media" class="w-full h-full max-h-96 object-cover rounded-xl hover:scale-[1.01] transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+            </div>`;
+        } else {
+          mediaContentEl.innerHTML = '';
+        }
       }
 
       if (langBadgeEl) {

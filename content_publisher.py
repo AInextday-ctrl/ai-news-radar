@@ -952,23 +952,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 rank_class = "bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600"
             elif rank <= 10:
                 rank_class = "bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30"
-            badge_html = f'<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">{badge_text}</span>' if badge_text else ''
+            badge_row = f"""
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">{badge_text}</span>
+                </div>""" if badge_text else ''
             arena_cards_en_html += f"""
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{model}</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
-                      {badge_html}
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="{model}">{model}</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
                   </div>
-                </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
-                </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
+                  </div>
+                </div>{badge_row}
               </div>"""
 
         # 3. Hub Section English (Hidden visually via sr-only, fully crawlable by search engines)
@@ -1207,23 +1207,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 rank_class = "bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600"
             elif rank <= 10:
                 rank_class = "bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30"
-            badge_html = f'<span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium shrink-0 border border-amber-500/20">{badge_text}</span>' if badge_text else ''
+            badge_row = f"""
+                <div class="flex items-center pl-7 min-w-0">
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">{badge_text}</span>
+                </div>""" if badge_text else ''
             arena_cards_zh_html += f"""
-              <div class="flex items-center justify-between p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-                <div class="flex items-center space-x-2.5 min-w-0 flex-1 mr-2">
-                  <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
-                  <div class="min-w-0 flex-1">
-                    <div class="flex items-center space-x-1.5 flex-wrap gap-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{model}</span>
-                      <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
-                      {badge_html}
-                    </div>
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full {rank_class} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">{rank}</span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="{model}">{model}</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">{org}</span>
                   </div>
-                </div>
-                <div class="text-right shrink-0">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
-                </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">{elo}</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">{'Score' if '%' in str(elo) else 'Elo'}</span>
+                  </div>
+                </div>{badge_row}
               </div>"""
 
         # 3. Hub Section Chinese (通过 sr-only 视觉隐藏，仅供搜索引擎爬虫与无障碍阅读器索引)

@@ -293,16 +293,18 @@ def fetch_incremental_tweets(
 
     # 策略 B: 动静分频调度与额度保护
     # 免费信源 (Google News / RSS / 爆款探针) 每 15 分钟高频跑
-    # 付费 Apify 增量抓取每 2.5 小时跑 1 次，避免无意义空转烧钱
+    # 多账户 Apify 额度池: 每账户 $5/月 × 2个账户 = $10/月可用
+    # 每次增量抓取仅消耗 ~0.002 CU (~$0.001 - $0.0015 USD)
+    # 按 1.0 小时频次: 24次/天 = 720次/月 ≈ $1.08/月 (仅占 $10 免费额度的 10.8%，极端安全且富余)
     last_crawl = state.get("last_crawl_utc")
-    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "2.5"))
+    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "1.0"))
     if not force_update and last_crawl:
         try:
             lc_dt = datetime.fromisoformat(last_crawl.replace("Z", "+00:00"))
             now_dt = datetime.now(timezone.utc)
             elapsed_hours = (now_dt - lc_dt).total_seconds() / 3600.0
             if elapsed_hours < interval_hours:
-                print(f"  ℹ️ [Apify 策略 B 分频调度] 距上次增量深捞仅 {elapsed_hours:.2f} 小时 (调度间隔: {interval_hours}h)，跳过本次 Apify 爬虫以节省额度。由免费 15min 信源全天候接管。")
+                print(f"  ℹ️ [Apify 策略 B 分频调度] 距上次增量深捞仅 {elapsed_hours:.2f} 小时 (当前调度间隔: {interval_hours}h)，跳过本次 Apify 爬虫以节省额度。由免费 15min 信源全天候接管。")
                 return []
         except Exception:
             pass
@@ -426,15 +428,54 @@ def fetch_incremental_tweets(
         if is_reply and (len(substantive_text) < 50 or num_likes < 150):
             continue
 
-        # 媒体配图解析
+        # 媒体与视频原资产多维解析 (提取原推配图、相册流与原生视频)
         image_url = None
-        media_list = it.get("media") or []
-        if isinstance(media_list, list) and len(media_list) > 0:
-            first_media = media_list[0]
-            if isinstance(first_media, str) and first_media.startswith("http"):
-                image_url = first_media
-            elif isinstance(first_media, dict):
-                image_url = first_media.get("media_url_https") or first_media.get("url")
+        media_urls = []
+        video_url = None
+        has_video = False
+
+        raw_media_candidates = []
+        for m_key in ["media", "photos", "videos"]:
+            val = it.get(m_key)
+            if isinstance(val, list):
+                raw_media_candidates.extend(val)
+            elif isinstance(val, dict):
+                raw_media_candidates.append(val)
+
+        for ext_key in ["extended_entities", "entities"]:
+            ext_dict = it.get(ext_key)
+            if isinstance(ext_dict, dict) and isinstance(ext_dict.get("media"), list):
+                raw_media_candidates.extend(ext_dict.get("media"))
+
+        for m in raw_media_candidates:
+            if isinstance(m, str) and m.startswith("http"):
+                if any(ext in m.lower() for ext in [".mp4", ".m3u8", ".mov"]):
+                    video_url = video_url or m
+                    has_video = True
+                elif m not in media_urls:
+                    media_urls.append(m)
+            elif isinstance(m, dict):
+                m_type = m.get("type", "")
+                if m_type in ["video", "animated_gif"]:
+                    has_video = True
+                    v_info = m.get("video_info") or m.get("videoInfo") or {}
+                    variants = v_info.get("variants") or m.get("variants") or []
+                    mp4s = [v.get("url") for v in variants if isinstance(v, dict) and "video/mp4" in v.get("content_type", "") and v.get("url")]
+                    if mp4s:
+                        video_url = video_url or mp4s[-1]
+                    elif m.get("url") and any(ext in m.get("url", "").lower() for ext in [".mp4", ".m3u8"]):
+                        video_url = video_url or m.get("url")
+
+                img = m.get("media_url_https") or m.get("media_url") or m.get("url") or m.get("preview_image_url")
+                if img and isinstance(img, str) and img.startswith("http") and img not in media_urls:
+                    media_urls.append(img)
+
+        raw_url = it.get("url") or ""
+        if "/video/" in raw_url:
+            has_video = True
+
+        if media_urls:
+            image_url = media_urls[0]
 
         # 严格身份门禁：只收录已在白名单池中的全球 AI 核心领袖与顶尖官方实验室
         is_known_handle = user_name.lower() in [h.lower() for h in LEADER_HANDLES + LAB_HANDLES]
@@ -495,6 +536,9 @@ def fetch_incremental_tweets(
             "full_text_zh": trans_zh,
             "url": canonical_url,
             "image_url": image_url,
+            "media_urls": media_urls if media_urls else ([] if not image_url else [image_url]),
+            "video_url": video_url,
+            "has_video": has_video,
             "source": f"𝕏 (Twitter) · {author_handle}",
             "author": author_name,
             "author_handle": author_handle,
