@@ -578,11 +578,11 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
             else: card["topic_tag"] = "#FrontierAI"
 
         selected_list.append(card)
-        if len(selected_list) >= 8:
+        if len(selected_list) >= 9:
             break
 
-    # 兜底补齐：保证至少 6 条
-    if len(selected_list) < 6:
+    # 兜底补齐：保证至少 6 条，理想 9 条 (3版 × 3条)
+    if len(selected_list) < 9:
         for it in social_items:
             if it.get("id") not in {x.get("id") for x in selected_list}:
                 card = dict(it)
@@ -590,10 +590,10 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
                 if not card.get("viral_tag_en"): card["viral_tag_en"] = "⚡ 24h Leader Pulse"
                 if not card.get("topic_tag"): card["topic_tag"] = "#FrontierAI"
                 selected_list.append(card)
-                if len(selected_list) >= 8:
+                if len(selected_list) >= 9:
                     break
 
-    return selected_list[:8]
+    return selected_list[:9]
 
 
 def extract_top_three(items: list) -> list:

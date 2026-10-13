@@ -671,6 +671,112 @@ def get_english_article_title(zh_title: str) -> str:
 # ==============================================================================
 # 3. 根首页 index.html 真实可见静态 DOM 预渲染 (彻底解决 654 字单薄问题)
 # ==============================================================================
+
+def is_viral_highlight_item(it: dict) -> bool:
+    author = (str(it.get("author", "")) + " " + str(it.get("author_handle", ""))).lower()
+    title = (str(it.get("title", "")) + " " + str(it.get("title_zh", "")) + " " + str(it.get("title_en", ""))).lower()
+    text = (str(it.get("full_text_zh", "")) + " " + str(it.get("full_text_en", "")) + " " + str(it.get("summary_zh", ""))).lower()
+    badge = (str(it.get("badge", "")) + " " + str(it.get("badge_zh", ""))).lower()
+    combo = author + " " + title + " " + text + " " + badge
+    return any(k in combo for k in ["codex", "claude code", "reset", "重置", "gpt-6", "gpt 6", "gpt-5", "gpt 5", "opus 5", "fable 5", "deepseek", "r4", "r1", "突破", "breakthrough", "首发", "sota", "reasoning", "cursor", "seedance"])
+
+def format_viral_page_card(it: dict, is_zh: bool) -> str:
+    is_hl = is_viral_highlight_item(it)
+    author = safe_text(it.get("author") or ("AI 领袖" if is_zh else "AI Pioneer"), 40)
+    handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
+    role = safe_text((it.get("author_role") if is_zh else it.get("author_role_en")) or ("AI 先锋观察者" if is_zh else "AI Pioneer & Builder"), 60)
+    
+    if is_hl:
+        raw_text = (author + " " + str(it.get("title", ""))).lower()
+        if "codex" in raw_text:
+            badge_text = "⚡ 重大重置 · Codex" if is_zh else "⚡ BREAKTHROUGH RESET"
+        elif "claude" in raw_text:
+            badge_text = "⚡ 重大重置 · Claude" if is_zh else "⚡ CLAUDE BREAKTHROUGH"
+        else:
+            badge_text = "⚡ 核心突破 · SOTA" if is_zh else "⚡ FRONTIER SOTA"
+    else:
+        badge_text = safe_text((it.get("badge_zh") if is_zh else it.get("badge_en")) or it.get("badge") or ("🔥 24h 爆款" if is_zh else "🔥 24h Viral"), 30)
+
+    if is_zh:
+        text = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
+        time_str = "24h 实时"
+        btn_text = "查看原帖 ↗"
+    else:
+        text = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
+        time_str = "24h Live"
+        btn_text = "View Post ↗"
+
+    u = it.get("url", "#")
+    avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+
+    if is_hl:
+        return f"""
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)] hover:shadow-[0_0_28px_rgba(251,191,36,0.35)] hover:-translate-y-0.5">
+                <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
+                <div class="space-y-2 pt-0.5">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <div class="relative shrink-0">
+                        <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400/80 shadow-sm" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-500 text-amber-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
+                      </div>
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                      </div>
+                    </div>
+                    <span class="relative inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-sm shadow-amber-500/30 shrink-0">
+                      <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                      <span>{badge_text}</span>
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                    {text}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/60 dark:border-amber-500/20">
+                  <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-semibold">
+                    <span>⚡</span>
+                    <span>{time_str}</span>
+                  </span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
+                    <span>{btn_text}</span>
+                  </a>
+                </div>
+              </article>"""
+    else:
+        return f"""
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer bg-white/95 dark:bg-slate-900/85 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200/90 dark:border-slate-800/80 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge_text}</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    {text}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 {time_str}</span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    {btn_text}
+                  </a>
+                </div>
+              </article>"""
+
+
 def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, Any]],
                        articles_meta: List[Dict[str, Any]], daily_dates: List[str]):
     """
@@ -688,52 +794,22 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             en_content = f.read()
 
         # 1. Viral Ticker English
-        viral_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        viral_items = [i for i in items if i.get("category") == "celebrity"][:9]
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd = json.load(_f)
                     if _nd.get("viral_ticker_tweets"):
-                        viral_items = _nd.get("viral_ticker_tweets")[:8]
+                        viral_items = _nd.get("viral_ticker_tweets")[:9]
             except Exception:
                 pass
 
+        # Viral Ticker English Chunks (3 cards per page)
         viral_ticker_en_html = ""
-        for it in viral_items:
-            author = safe_text(it.get("author") or "AI Pioneer", 40)
-            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
-            role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
-            badge = safe_text(it.get("badge_en") or it.get("badge") or "🔥 24h Viral", 30)
-            text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
-            u = it.get("url", "#")
-            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
-            viral_ticker_en_html += f"""
-              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2 min-w-0">
-                      <img src="{avatar}" alt="{author}" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
-                        </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
-                      </div>
-                    </div>
-                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge}</span>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    {text_en}
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <div class="flex items-center space-x-2">
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">View Post ↗</a>
-                  </div>
-                </div>
-              </article>"""
+        for p_idx in range(0, len(viral_items), 3):
+            p_slice = viral_items[p_idx:p_idx+3]
+            cards_html = "\n".join([format_viral_page_card(it, is_zh=False) for it in p_slice])
+            viral_ticker_en_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 English
         top_three_en_html = ""
@@ -914,9 +990,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->
     """
 
-        pattern_ticker = r'(<div [^>]*id="viral-ticker-track"[^>]*>)(.*?)(</div>\s*</div>\s*</section>)'
+        pattern_ticker = r'(<div [^>]*id="(?:viral-ticker-slider|viral-ticker-track)"[^>]*>)(.*?)(</div>\s*</div>\s*</section>)'
         if re.search(pattern_ticker, en_content, re.DOTALL):
-            en_content = re.sub(pattern_ticker, r'\1\n' + viral_ticker_en_html + r'\n          \3', en_content, flags=re.DOTALL)
+            en_content = re.sub(pattern_ticker, lambda m: f"{m.group(1)}\n{viral_ticker_en_html}\n          {m.group(3)}", en_content, flags=re.DOTALL)
         else:
             pattern_top = r'(<div [^>]*id="top-three-container"[^>]*>)(.*?)(</div>\s*</section>)'
             if re.search(pattern_top, en_content, re.DOTALL):
@@ -956,52 +1032,22 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             zh_content = f.read()
 
         # 1. Viral Ticker Chinese
-        viral_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        viral_items = [i for i in items if i.get("category") == "celebrity"][:9]
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd = json.load(_f)
                     if _nd.get("viral_ticker_tweets"):
-                        viral_items = _nd.get("viral_ticker_tweets")[:8]
+                        viral_items = _nd.get("viral_ticker_tweets")[:9]
             except Exception:
                 pass
 
+        # Viral Ticker Chinese Chunks (3 cards per page)
         viral_ticker_zh_html = ""
-        for it in viral_items:
-            author = safe_text(it.get("author") or "AI 领袖", 40)
-            handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
-            role = safe_text(it.get("author_role") or "AI 先锋观察者", 60)
-            badge = safe_text(it.get("badge_zh") or it.get("badge") or "🔥 24h 爆款", 30)
-            text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
-            u = it.get("url", "#")
-            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
-            viral_ticker_zh_html += f"""
-              <article class="min-w-[320px] sm:min-w-[360px] md:min-w-[400px] max-w-[440px] shrink-0 bg-white/95 dark:bg-slate-900/90 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800/80 hover:border-sky-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm group">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2 min-w-0">
-                      <img src="{avatar}" alt="{author}" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
-                        </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
-                      </div>
-                    </div>
-                    <span class="font-bold px-2 py-0.5 rounded bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge}</span>
-                  </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2 font-sans group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    {text_zh}
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
-                  <div class="flex items-center space-x-2">
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:underline font-medium">查看原文 ↗</a>
-                  </div>
-                </div>
-              </article>"""
+        for p_idx in range(0, len(viral_items), 3):
+            p_slice = viral_items[p_idx:p_idx+3]
+            cards_html = "\n".join([format_viral_page_card(it, is_zh=True) for it in p_slice])
+            viral_ticker_zh_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 Chinese
         top_three_zh_html = ""
@@ -1166,7 +1212,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     """
 
         if re.search(pattern_ticker, zh_content, re.DOTALL):
-            zh_content = re.sub(pattern_ticker, r'\1\n' + viral_ticker_zh_html + r'\n          \3', zh_content, flags=re.DOTALL)
+            zh_content = re.sub(pattern_ticker, lambda m: f"{m.group(1)}\n{viral_ticker_zh_html}\n          {m.group(3)}", zh_content, flags=re.DOTALL)
         elif re.search(pattern_top, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_top, r'\1' + top_three_zh_html + r'\3', zh_content, flags=re.DOTALL)
 
