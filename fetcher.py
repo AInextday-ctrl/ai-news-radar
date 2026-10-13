@@ -164,6 +164,9 @@ def get_smart_cover_url(title: str, category: str = "news", source: str = "") ->
     Return authentic high-resolution topic cover images so all news cards
     maintain rich, immersive, 1200px+ visual hierarchy without blank placeholders.
     """
+    # 严格限制：仅允许 news 分类使用主题配图，推文 (celebrity) 坚决不使用任何 Unsplash 假图
+    if category != "news":
+        return None
     full = f"{title} {source}".lower()
     if any(k in full for k in ["misalignment", "misbehavior", "cheating", "concerning", "令人担忧", "作弊", "openai"]):
         return TOPIC_HD_COVERS["openai_safety"]
@@ -185,6 +188,146 @@ def get_smart_cover_url(title: str, category: str = "news", source: str = "") ->
         return TOPIC_HD_COVERS["robotics_embodied"]
     # 严禁返回通用假渐变占位图！无真实新闻配图时严格返回 None，以纯文字排版展示
     return None
+
+
+def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = None) -> Dict[str, Any]:
+    """
+    通过官方 Twitter Syndication API 与 VxTwitter 双通道，深度提取真实的推文原图、视频缩略图及 MP4 视频流。
+    - 绝不使用任何 Unsplash 等虚构图库；
+    - 若推文原本即为纯文字，则维持无图纯文字排版；
+    - 若推文含图/含视频，则 100% 提取官方 pbs.twimg.com 原生素材。
+    """
+    u = str(item.get("url") or "")
+    m = re.search(r'https?://(?:twitter|x)\.com/([^/]+)/status/(\d+)', u)
+    if not m:
+        return item
+    user, status_id = m.groups()
+
+    # 规范化 URL 并记录 status_id
+    item["url"] = f"https://x.com/{user}/status/{status_id}"
+    item["status_id"] = status_id
+
+    # 剔除已存在的假图库 URL
+    existing_img = str(item.get("image_url") or "")
+    if "unsplash.com" in existing_img:
+        item["image_url"] = None
+        existing_img = ""
+
+    needs_enrich = (
+        not item.get("image_url")
+        or not item.get("video_url")
+        or "/video/" in u
+        or "amplify_video_thumb" not in existing_img
+    )
+    if not needs_enrich and item.get("media_urls"):
+        return item
+
+    close_client = False
+    if client is None:
+        client = httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=6.0)
+        close_client = True
+
+    try:
+        # 通道 1: Twitter Syndication (官方轻量只读接口)
+        syn_url = f"https://cdn.syndication.twimg.com/tweet-result?id={status_id}&token=4"
+        r = client.get(syn_url)
+        if r.status_code == 200:
+            data = r.json()
+            media_details = data.get("mediaDetails") or []
+            video_obj = data.get("video")
+            photos = data.get("photos") or []
+
+            extracted_images = []
+            extracted_video_url = None
+            has_video = False
+
+            if video_obj and isinstance(video_obj, dict):
+                has_video = True
+                poster = video_obj.get("poster")
+                if poster:
+                    extracted_images.append(poster)
+                variants = video_obj.get("variants") or []
+                mp4s = [v.get("src") for v in variants if isinstance(v, dict) and "video/mp4" in v.get("type", "") and v.get("src")]
+                if mp4s:
+                    extracted_video_url = mp4s[min(2, len(mp4s)-1)]
+
+            for md in media_details:
+                if not isinstance(md, dict):
+                    continue
+                m_type = md.get("type")
+                m_url = md.get("media_url_https")
+                if m_url and m_url not in extracted_images:
+                    extracted_images.append(m_url)
+                if m_type in ["video", "animated_gif"]:
+                    has_video = True
+                    v_info = md.get("video_info") or {}
+                    vars_list = v_info.get("variants") or []
+                    mp4s = [v.get("url") for v in vars_list if isinstance(v, dict) and "video/mp4" in v.get("content_type", "") and v.get("url")]
+                    if mp4s and not extracted_video_url:
+                        extracted_video_url = mp4s[min(2, len(mp4s)-1)]
+
+            for p in photos:
+                if isinstance(p, dict) and p.get("url") and p["url"] not in extracted_images:
+                    extracted_images.append(p["url"])
+
+            if extracted_images:
+                item["image_url"] = extracted_images[0]
+                item["media_urls"] = extracted_images
+            if extracted_video_url:
+                item["video_url"] = extracted_video_url
+            if has_video:
+                item["has_video"] = True
+
+            return item
+    except Exception:
+        pass
+    finally:
+        if close_client:
+            client.close()
+
+    # 通道 2: VxTwitter 备用
+    try:
+        vx_client = httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=6.0)
+        try:
+            r_vx = vx_client.get(f"https://api.vxtwitter.com/{user}/status/{status_id}")
+            if r_vx.status_code == 200:
+                vx_data = r_vx.json()
+                media_ext = vx_data.get("mediaExtended") or []
+                media_urls = vx_data.get("media_URLs") or []
+                vx_imgs = []
+                vx_video = None
+                has_video = False
+
+                for me in media_ext:
+                    if not isinstance(me, dict):
+                        continue
+                    if me.get("type") in ["video", "gif"]:
+                        has_video = True
+                        if me.get("thumbnail_url"):
+                            vx_imgs.append(me["thumbnail_url"])
+                        if me.get("url") and any(ext in me["url"].lower() for ext in [".mp4", ".mov"]):
+                            vx_video = vx_video or me["url"]
+                    elif me.get("type") == "image":
+                        if me.get("url"):
+                            vx_imgs.append(me["url"])
+
+                for u_str in media_urls:
+                    if u_str not in vx_imgs:
+                        vx_imgs.append(u_str)
+
+                if vx_imgs:
+                    item["image_url"] = vx_imgs[0]
+                    item["media_urls"] = vx_imgs
+                if vx_video:
+                    item["video_url"] = vx_video
+                if has_video:
+                    item["has_video"] = True
+        finally:
+            vx_client.close()
+    except Exception:
+        pass
+
+    return item
 
 
 def extract_image_url(entry: Any, raw_html: str = "") -> Optional[str]:
@@ -1241,6 +1384,8 @@ def fetch_x_leader_posts(max_items: int = 50) -> List[Dict[str, Any]]:
                         "is_viral": False,
                         "tags": ["𝕏领袖观点", "前沿发声"] if entity_type == "person" else ["官方动态", "模型发布"]
                     }
+                    item["status_id"] = s_id
+                    enrich_tweet_media(item)
                     evaluate_dynamic_pinned_status(item)
                     items.append(item)
                     if len(items) >= max_items:
@@ -2223,8 +2368,9 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
                         is_viral = False if is_leader else (True if category == "celebrity" else False)
                         spec_tags = extract_tech_specs(t_title, "") or (["硅谷焦点推文", "大V交锋"] if is_leader else (["科技动态", "媒体快讯"] if is_news_org else ["𝕏平台爆帖", "极客前沿"]))
 
-                        items.append({
+                        tweet_item = {
                             "id": make_id(x_url, t_title),
+                            "status_id": status_id,
                             "title": t_title,
                             "title_en": t_title,
                             "title_zh": None,
@@ -2248,7 +2394,9 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
                             "is_viral": is_viral,
                             "surge_badge": "⚡ 24h 极客热推" if is_viral else None,
                             "tags": ["𝕏当天爆款", "硅谷风向"] if is_leader else (["𝕏快讯", "媒体动态"] if is_news_org else ["𝕏平台爆帖", "极客前沿"])
-                        })
+                        }
+                        enrich_tweet_media(tweet_item, client)
+                        items.append(tweet_item)
                         if len(items) >= max_items:
                             break
     except Exception as e:
@@ -2312,8 +2460,9 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
                             spec_tags = extract_tech_specs(cleaned_title, "") or (["𝕏当天爆款", "实时动态"] if is_leader else (["科技资讯", "行业快讯"] if is_news_org else ["𝕏平台爆帖", "极客前沿"]))
                             item_id = make_id(canonical_url, cleaned_title)
 
-                            items.append({
+                            tweet_item = {
                                 "id": item_id,
+                                "status_id": s_id,
                                 "title": cleaned_title,
                                 "title_en": cleaned_title,
                                 "title_zh": None,
@@ -2337,7 +2486,9 @@ def fetch_live_trending_x_posts(max_items: int = 40) -> List[Dict[str, Any]]:
                                 "is_viral": is_viral,
                                 "surge_badge": "⚡ 24h 极客热推" if is_viral else None,
                                 "tags": ["𝕏当天爆款", "实时推文"] if is_leader else (["𝕏快讯", "行业动态"] if is_news_org else ["𝕏平台爆帖", "极客前沿"])
-                            })
+                            }
+                            enrich_tweet_media(tweet_item)
+                            items.append(tweet_item)
                             if len(items) >= max_items:
                                 break
             except Exception as e:

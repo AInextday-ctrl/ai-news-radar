@@ -84,6 +84,12 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <!-- Precompiled Production CSS -->
   <link rel="stylesheet" href="/css/style.min.css">
+  <style>
+    @media (min-width: 1024px) {
+      .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
+      .lg\:col-span-3 { grid-column: span 3 / span 3 !important; }
+    }
+  </style>
   <script>
     // Zero-FOUC theme initialization
     (function() {
@@ -321,7 +327,7 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">综合全景</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">392</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">389</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
@@ -331,7 +337,7 @@
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
             <span id="nav-text-celebrity" class="truncate font-semibold">社交雷达</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">73</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">70</span>
           </button>
           <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🛠️</span>
@@ -1701,11 +1707,11 @@
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-leader">🐦 前沿发声</span>
-              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">73</span>
+              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">70</span>
             </button>
             <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
-              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">37</span>
+              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">34</span>
             </button>
           </div>
 
@@ -5934,15 +5940,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `<div class="text-slate-500 text-center py-16 col-span-full">${t.celebNoMatch || '暂无该分类动态'}</div>`;
       }
 
-      // 前端严格去重 (基于 URL、ID 或 Handle+Text 联合键，物理杜绝并排重复)
+      // 前端严格去重 (状态 ID、规范化 URL、作者+文本指纹三重锁，物理杜绝并排重复推文)
       const seen = new Set();
       const uniqueList = [];
       for (const item of list) {
-        const key = item.id || item.url || ((item.author_handle || item.author) + '_' + (item.title || item.title_zh || ''));
-        if (key && !seen.has(key)) {
-          seen.add(key);
-          uniqueList.push(item);
+        if (!item) continue;
+        const urlStr = String(item.url || '');
+        const statusMatch = urlStr.match(/(?:twitter|x)\.com\/[^/]+\/status\/(\d+)/);
+        const statusId = item.status_id || (statusMatch ? statusMatch[1] : null);
+
+        // 主去重键：Status ID 或规范化 URL
+        let primaryKey = '';
+        if (statusId) {
+          primaryKey = 'status_' + statusId;
+        } else if (item.id && !String(item.id).startsWith('item_') && !String(item.id).startsWith('viral_')) {
+          primaryKey = 'id_' + String(item.id);
+        } else if (urlStr) {
+          primaryKey = 'url_' + urlStr.split('?')[0].replace(/\/video\/\d+$/, '');
         }
+
+        // 辅助文本指纹去重（消除同一大V反复转推或微调重发的重复推文）
+        const rawText = String(item.title || item.title_en || item.content_snippet || '').toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 45);
+        const textKey = (item.author_handle || item.author || '') + '_' + rawText;
+
+        if (primaryKey && seen.has(primaryKey)) continue;
+        if (rawText.length >= 15 && seen.has(textKey)) continue;
+
+        if (primaryKey) seen.add(primaryKey);
+        if (rawText.length >= 15) seen.add(textKey);
+        uniqueList.push(item);
       }
 
       const isZh = currentLang === 'zh';
@@ -7236,26 +7262,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       setTimeout(syncThreeColumnsHeight, 60);
     }
 
-    // 动态同步“综合全景” 3 栏（行业快讯、社交雷达、天梯榜）的等高对齐，保持视觉美感与严格一致性
+    // 动态同步“综合全景”核心栏（行业快讯、天梯榜）的等高对齐，保持视觉美感与严格一致性
     function syncThreeColumnsHeight() {
       const colArena = document.getElementById('section-col-arena');
       const colNews = document.getElementById('section-col-news');
       const colCeleb = document.getElementById('section-col-celebrity');
-      if (!colArena || !colNews || !colCeleb) return;
+      if (!colArena || !colNews) return;
 
       if (window.innerWidth >= 1024) {
         colArena.style.height = 'auto';
-        const naturalH = colArena.offsetHeight;
+        colNews.style.height = 'auto';
+        if (colCeleb) colCeleb.style.height = 'auto';
+        const naturalH = Math.max(colArena.offsetHeight, colNews.offsetHeight);
         if (naturalH > 400) {
           const target = `${naturalH}px`;
           colArena.style.height = target;
           colNews.style.height = target;
-          colCeleb.style.height = target;
+          if (colCeleb) colCeleb.style.height = target;
         }
       } else {
         colArena.style.height = '';
         colNews.style.height = '';
-        colCeleb.style.height = '';
+        if (colCeleb) colCeleb.style.height = '';
       }
     }
 

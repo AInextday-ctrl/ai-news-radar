@@ -32,12 +32,14 @@ except ImportError:
         return text
 
 try:
-    from fetcher import match_celebrity_profile, extract_tech_specs
+    from fetcher import match_celebrity_profile, extract_tech_specs, enrich_tweet_media
 except ImportError:
     def match_celebrity_profile(handle: str) -> Optional[Dict[str, Any]]:
         return None
     def extract_tech_specs(title: str, snippet: str = "") -> List[str]:
         return ["前沿发声"]
+    def enrich_tweet_media(item: Dict[str, Any], client: Any = None) -> Dict[str, Any]:
+        return item
 
 # 状态记录文件
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -558,6 +560,9 @@ def fetch_incremental_tweets(
             "is_pinned": False,
             "tags": tags_list
         }
+
+        if not news_item.get("image_url") or news_item.get("has_video"):
+            enrich_tweet_media(news_item)
 
         new_items.append(news_item)
         known_ids.add(tweet_id)

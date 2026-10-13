@@ -19,7 +19,7 @@ import time
 from datetime import datetime, timezone, timedelta
 import urllib.parse
 import httpx
-from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url, resolve_product_hunt_redirect
+from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url, resolve_product_hunt_redirect, enrich_tweet_media
 from processor import process_items_batch, clean_news_text, generate_smart_fallback_summary
 from config import CATEGORIES, AI_CREATORS
 
@@ -776,7 +776,19 @@ def save_news(items: list):
     # 1. 载入并合并持久化主库 (Master Archive)，确保历史零丢失
     master_dict = {}
     def get_it_key(it):
-        return it.get("url") or it.get("id")
+        if not it:
+            return ""
+        u = str(it.get("url") or "")
+        m = re.search(r'https?://(?:twitter|x)\.com/([^/]+)/status/(\d+)', u)
+        if m:
+            user, sid = m.groups()
+            it["url"] = f"https://x.com/{user}/status/{sid}"
+            it["status_id"] = sid
+            return f"tweet_{sid}"
+        sid = str(it.get("status_id") or "").strip()
+        if sid:
+            return f"tweet_{sid}"
+        return it.get("url") or it.get("id") or ""
 
     for old_file in [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_OUTPUT_FILE, OUTPUT_FILE]:
         if os.path.exists(old_file):
@@ -804,7 +816,10 @@ def save_news(items: list):
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
                 exist_img = existing.get("image_url") or ""
                 if exist_img and not any(bad in exist_img.lower() for bad in ["techmeme.com", "pml.png"]):
-                    it["image_url"] = exist_img
+                    if it.get("category") == "celebrity" and "unsplash.com" in exist_img:
+                        it["image_url"] = None
+                    else:
+                        it["image_url"] = exist_img
                 # 严密保护已人工清洗或高质量提炼的中文摘要，绝不被复读机摘要覆盖
                 exist_sum = existing.get("summary_zh") or ""
                 curr_sum = it.get("summary_zh") or ""
@@ -812,10 +827,16 @@ def save_news(items: list):
                 if exist_sum and clean_t and not exist_sum.startswith(clean_t) and (not curr_sum or curr_sum.startswith(clean_t)):
                     it["summary_zh"] = exist_sum
 
-            # 彻底清洗掉任何残留的 pml.png 站内图章，并确保所有卡片绝对具备超清封面 (100% 覆盖)
+            # 严格分类配图策略：推文 (celebrity) 严禁挂载任何 Unsplash 假图，纯文字推文保留纯文字排版
             img_val = str(it.get("image_url") or "")
-            if (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
-                it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
+            if it.get("category") == "celebrity":
+                if "unsplash.com" in img_val:
+                    it["image_url"] = None
+                if not it.get("image_url") or it.get("has_video"):
+                    enrich_tweet_media(it)
+            elif (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
+                if it.get("category") == "news":
+                    it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))
 
             if it.get("inline_images") and isinstance(it["inline_images"], list):
                 it["inline_images"] = [
