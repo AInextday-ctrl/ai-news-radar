@@ -6,6 +6,8 @@ Fetcher 2.0 - Rich multi-media data collector:
 - Curated practical prompts
 """
 
+from __future__ import annotations
+
 import sys
 
 try:
@@ -26,7 +28,7 @@ import shutil
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 import httpx
 import feedparser
 try:
@@ -1366,6 +1368,7 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                         "icon_type": icon_type,
                         "metrics": {"likes": likes, "pricing": "🟢 免部署在线玩", "runtime": runtime_badge, "icon_type": icon_type, "origin": "huggingface"},
                         "scenario_tag": scenario,
+                        "scenario_key": to_scenario_key(scenario),
                         "pricing_tag": "🟢 免部署在线试玩",
                         "platform": "huggingface",
                         "content_snippet": f"❤️ {likes} likes · {desc_en}",
@@ -1722,6 +1725,7 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                     "has_live_demo": has_live_demo
                 },
                 "scenario_tag": scenario,
+                "scenario_key": to_scenario_key(scenario),
                 "pricing_tag": "🟢 完全开源免费",
                 "platform": "tool",
                 "content_snippet": f"📈 +{weekly_stars:,} ★/wk (Total ⭐ {stars:,}) · {description_en}",
@@ -1961,6 +1965,35 @@ def to_en_scenario(s: str) -> str:
     return "Applied AI Workflows"
 
 
+def to_scenario_key(s: str) -> str:
+    s = str(s or "").lower()
+    if any(k in s for k in ['办公', '文档', 'ppt', '表格', '会议', 'office']):
+        return "office"
+    if any(k in s for k in ['视频', '剪辑', '短剧', 'video']):
+        return "video"
+    if any(k in s for k in ['声音', '音频', '语音', '对话', 'voice', 'audio', 'speech']):
+        return "audio"
+    if any(k in s for k in ['图像', '设计', '修图', '3d', 'image', 'design']):
+        return "design"
+    if any(k in s for k in ['联网', '搜索', '浏览器', '爬虫', 'browser', 'search']):
+        return "browser"
+    if any(k in s for k in ['知识库', '学术', '研究', '记忆', '笔记', 'knowledge', 'research']):
+        return "knowledge"
+    if any(k in s for k in ['金融', '看盘', '求职', '生活', '商业', 'finance', 'life']):
+        return "life"
+    if any(k in s for k in ['写作', '创作', '营销', '文案', 'writing']):
+        return "writing"
+    if any(k in s for k in ['编程', '开发', '提效', '代码', 'code', 'dev']):
+        return "code"
+    if any(k in s for k in ['桌面', '客户端', '助手', '应用', 'client', 'assistant']):
+        return "client"
+    if any(k in s for k in ['模型', 'api', '部署', '沙盒', 'infra', 'model', 'sandbox']):
+        return "infra"
+    if any(k in s for k in ['智能体', '工作流', '编排', 'agent', 'workflow']):
+        return "agent"
+    return "code"
+
+
 def to_en_runtime(b: str) -> str:
     b = b or ""
     if any(k in b for k in ['命令行', '一键执行']):
@@ -2113,6 +2146,7 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "icon_type": icon_type,
                 "metrics": {"tag": scenario, "pricing": "🟡 免费试玩", "runtime": runtime_badge, "icon_type": icon_type, "utility_score": 88},
                 "scenario_tag": scenario,
+                "scenario_key": to_scenario_key(scenario),
                 "pricing_tag": "🟡 免费试玩",
                 "platform": "tool",
                 "content_snippet": clean_summary[:180] or "Trending AI app",
