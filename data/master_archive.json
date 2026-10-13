@@ -3,13 +3,65 @@
   "total_count": 3186,
   "items": [
     {
+      "id": "prompt_gh_cnfjlhj_ai_collab_playbook",
+      "title_zh": "GitHub 今日热推 · ai-collab-playbook (★456)：前沿模型实战提示词",
+      "title_en": "GitHub Daily Trending: ai-collab-playbook (★456) Prompt Suite",
+      "category": "prompts",
+      "sub_type": "image",
+      "scenario_label": "🎨 灵感生图",
+      "scenario_label_en": "🎨 Image Gen",
+      "target_model": "Flux.1 Pro / Midjourney v7",
+      "recommended_model": "Flux.1 Pro / Midjourney v7",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "开源社区今日活跃前沿模版 (ai-collab-playbook)",
+      "purpose_en": "Daily Active Open-Source Prompt Suite (ai-collab-playbook)",
+      "temp_advice": "温度 0.5 (社区前沿)",
+      "temp_advice_en": "Temp 0.5 (Community SOTA)",
+      "variables": [
+        "{{核心任务目标}}",
+        "{{业务上下文约束}}",
+        "{{期望输出格式}}"
+      ],
+      "variables_en": [
+        "{{Core Objective}}",
+        "{{Context Constraints}}",
+        "{{Output Format}}"
+      ],
+      "prompt_content_zh": "【GitHub 社区今日精选 · ai-collab-playbook】\n你是一名精通 Flux.1 Pro / Midjourney v7 前沿特性的顶级工程师/创作者。请根据以下约束执行任务：\n\n1. 【核心目标】：深入解决 {核心任务目标}，严禁空泛套话；\n2. 【边界与上下文】：在 {业务上下文约束} 范围内进行严密推导或风格对齐；\n3. 【结构化交付】：以 {期望输出格式} 交付，包含可直接运行的完整交付物与验证用例。\n\n项目直达：https://github.com/cnfjlhj/ai-collab-playbook",
+      "prompt_content_en": "[GitHub Daily Trending · ai-collab-playbook]\nYou are an expert engineer/creator utilizing Flux.1 Pro / Midjourney v7. Execute the task under the following constraints:\n\n1. [Core Objective]: Deeply solve {{Core Objective}} with actionable precision;\n2. [Context & Boundaries]: Align strictly within {{Context Constraints}};\n3. [Structured Deliverable]: Deliver in {{Output Format}} with verifiable examples.\n\nRepository: https://github.com/cnfjlhj/ai-collab-playbook",
+      "sample_output": {
+        "type": "image",
+        "title": "来自 ai-collab-playbook 社区的实测规范样板",
+        "title_en": "Verified Sample Output from ai-collab-playbook",
+        "content": "// 来源于 GitHub 实时更新仓库 ai-collab-playbook (Stars: 456)\n// 官方地址: https://github.com/cnfjlhj/ai-collab-playbook\n// 适配前沿模型: Flux.1 Pro / Midjourney v7\n\n// 核心执行逻辑已就绪，直接填入参数即可调用。",
+        "content_en": "// Sourced from active GitHub repository ai-collab-playbook (Stars: 456)\n// Official URL: https://github.com/cnfjlhj/ai-collab-playbook\n// Target Models: Flux.1 Pro / Midjourney v7\n\n// Core execution pipeline ready. Fill in the variables above to run."
+      },
+      "usage_guide_zh": "该模版由 GitHub 开源社区今日（2026-10-13）活跃更新拉取，点击直达对应开源仓库可查阅更多延伸配置。",
+      "usage_guide_en": "Pulled from active GitHub open-source community updates (2026-10-13). Click the repository link for extended configurations.",
+      "url": "https://github.com/cnfjlhj/ai-collab-playbook",
+      "raw_published_at": "2026-10-13T09:49:43Z",
+      "created_at": "2026-10-13T09:49:43Z",
+      "is_prompt": true,
+      "source": "GitHub (cnfjlhj/ai-collab-playbook)",
+      "tags": [
+        "GitHub今日热推",
+        "ai-collab-playbook",
+        "Flux.1 Pro"
+      ],
+      "title": "GitHub 今日热推 · ai-collab-playbook (★456)：前沿模型实战提示词",
+      "summary_zh": "热门 AI 场景落地与多模态动态",
+      "image_url": null
+    },
+    {
       "id": "cbccf6d602f612f7",
-      "title": "【openhuman】The fastest, cheapest, most efficient open-source 智能体 harness. Ru",
-      "title_zh": "【openhuman】The fastest, cheapest, most efficient open-source 智能体 harness. Ru",
+      "title": "【openhuman】最快、最便宜、最高效的开源代理线束。在$ 10 VPS上运行超过500个代理。",
+      "title_zh": "【openhuman】最快、最便宜、最高效的开源代理线束。在$ 10 VPS上运行超过500个代理。",
       "title_en": "[openhuman] The fastest, cheapest, most efficient open-source agent harness. ",
       "app_name": "openhuman",
       "app_name_en": "openhuman",
-      "app_hook": "The fastest, cheapest, most efficient open-source 智能体 harness. Run more than 500",
+      "app_hook": "最快、最便宜、最高效的开源代理线束。在$ 10 VPS上运行超过500个代理。",
       "app_hook_en": "The fastest, cheapest, most efficient open-source agent harness. Run more than 5",
       "url": "https://github.com/tinyhumansai/openhuman?ref=ainewsradar",
       "official_url": "https://github.com/tinyhumansai/openhuman?ref=ainewsradar",
@@ -72,19 +124,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 83,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "a9ebbeb9be9de108",
-      "title": "【moli】Best headless browser for AI 智能体矩阵. Lite, Fast, High-Compatibilit",
-      "title_zh": "【moli】Best headless browser for AI 智能体矩阵. Lite, Fast, High-Compatibilit",
+      "title": "【moli】人工智能代理的最佳无外设浏览器。轻巧、快速、高兼容性。内置Rust",
+      "title_zh": "【moli】人工智能代理的最佳无外设浏览器。轻巧、快速、高兼容性。内置Rust",
       "title_en": "[moli] Best headless browser for AI agents. Lite, Fast, High-Compatibili",
       "app_name": "moli",
       "app_name_en": "moli",
-      "app_hook": "Best headless browser for AI 智能体矩阵. Lite, Fast, High-Compatibility. Built in Rus",
+      "app_hook": "人工智能代理的最佳无外设浏览器。轻巧、快速、高兼容性。内置Rust",
       "app_hook_en": "Best headless browser for AI agents. Lite, Fast, High-Compatibility. Built in Ru",
       "url": "https://github.com/lexmount/moli?ref=ainewsradar",
       "official_url": "https://github.com/lexmount/moli?ref=ainewsradar",
@@ -147,8 +199,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -229,12 +281,12 @@
     },
     {
       "id": "ee882533da377e8f",
-      "title": "【freellmapi】7.4 billion tokens per month. 34 free LLM providers. 635 free 模型 ",
-      "title_zh": "【freellmapi】7.4 billion tokens per month. 34 free LLM providers. 635 free 模型 ",
+      "title": "【freellmapi】每月74亿个代币。34个免费LLM提供商。635个免费模型端点。全部在一个/v1端点后面，加上任何定制的OpenAI兼容端点。智能",
+      "title_zh": "【freellmapi】每月74亿个代币。34个免费LLM提供商。635个免费模型端点。全部在一个/v1端点后面，加上任何定制的OpenAI兼容端点。智能",
       "title_en": "[freellmapi] 7.4 billion tokens per month. 34 free LLM providers. 635 free mod",
       "app_name": "freellmapi",
       "app_name_en": "freellmapi",
-      "app_hook": "7.4 billion tokens per month. 34 free LLM providers. 635 free 模型 endpoints. All ",
+      "app_hook": "每月74亿个代币。34个免费LLM提供商。635个免费模型端点。全部在一个/v1端点后面，加上任何定制的OpenAI兼容端点。智能RO",
       "app_hook_en": "7.4 billion tokens per month. 34 free LLM providers. 635 free model endpoints. A",
       "url": "https://github.com/tashfeenahmed/freellmapi?ref=ainewsradar",
       "official_url": "https://github.com/tashfeenahmed/freellmapi?ref=ainewsradar",
@@ -297,8 +349,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 81,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
+        "score": 84,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -372,19 +424,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 81,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "977a0df65e5238d2",
-      "title": "【heretic】Fully automatic censorship removal for language 系列模型",
-      "title_zh": "【heretic】Fully automatic censorship removal for language 系列模型",
+      "title": "【heretic】语言模型的全自动审查删除",
+      "title_zh": "【heretic】语言模型的全自动审查删除",
       "title_en": "[heretic] Fully automatic censorship removal for language models",
       "app_name": "heretic",
       "app_name_en": "heretic",
-      "app_hook": "Fully automatic censorship removal for language 系列模型",
+      "app_hook": "语言模型的全自动审查删除",
       "app_hook_en": "Fully automatic censorship removal for language models",
       "url": "https://github.com/p-e-w/heretic?ref=ainewsradar",
       "official_url": "https://github.com/p-e-w/heretic?ref=ainewsradar",
@@ -529,12 +581,12 @@
     },
     {
       "id": "9bae703a1b970521",
-      "title": "【OpenMontage】World's first open-source, agentic 视频生成 production system. 12 pro",
-      "title_zh": "【OpenMontage】World's first open-source, agentic 视频生成 production system. 12 pro",
+      "title": "【OpenMontage】全球首个开源代理视频制作系统。12个制作管道、100多个工具、700多个代理技能和生产知识文件。转动您的AI c",
+      "title_zh": "【OpenMontage】全球首个开源代理视频制作系统。12个制作管道、100多个工具、700多个代理技能和生产知识文件。转动您的AI c",
       "title_en": "[OpenMontage] World's first open-source, agentic video production system. 12 pr",
       "app_name": "OpenMontage",
       "app_name_en": "OpenMontage",
-      "app_hook": "World's first open-source, agentic 视频生成 production system. 12 production pipelin",
+      "app_hook": "全球首个开源代理视频制作系统。12个制作管道、100多个工具、700多个代理技能和生产知识文件。转动您的AI c",
       "app_hook_en": "World's first open-source, agentic video production system. 12 production pipeli",
       "url": "https://github.com/calesthio/OpenMontage?ref=ainewsradar",
       "official_url": "https://github.com/calesthio/OpenMontage?ref=ainewsradar",
@@ -597,19 +649,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 86,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "cb69d5b80b3b0f87",
-      "title": "【knowledge-work-plugins】开源生态 repository of plugins primarily intended for knowledge worke",
-      "title_zh": "【knowledge-work-plugins】开源生态 repository of plugins primarily intended for knowledge worke",
+      "title": "【knowledge-work-plugins】主要供知识工作者在Claude Cowork中使用的插件的开源存储库",
+      "title_zh": "【knowledge-work-plugins】主要供知识工作者在Claude Cowork中使用的插件的开源存储库",
       "title_en": "[knowledge-work-plugins] Open source repository of plugins primarily intended for knowledg",
       "app_name": "knowledge-work-plugins",
       "app_name_en": "knowledge-work-plugins",
-      "app_hook": "开源生态 repository of plugins primarily intended for knowledge workers to use in Cl",
+      "app_hook": "主要供知识工作者在Claude Cowork中使用的插件的开源存储库",
       "app_hook_en": "Open source repository of plugins primarily intended for knowledge workers to us",
       "url": "https://github.com/anthropics/knowledge-work-plugins?ref=ainewsradar",
       "official_url": "https://github.com/anthropics/knowledge-work-plugins?ref=ainewsradar",
@@ -672,8 +724,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 83,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -754,12 +806,12 @@
     },
     {
       "id": "db067f7cd8ee8526",
-      "title": "【text-to-cad】Give your 智能体 CAD superpowers.",
-      "title_zh": "【text-to-cad】Give your 智能体 CAD superpowers.",
+      "title": "【text-to-cad】为您的代理商提供CAD超能力。",
+      "title_zh": "【text-to-cad】为您的代理商提供CAD超能力。",
       "title_en": "[text-to-cad] Give your agent CAD superpowers.",
       "app_name": "text-to-cad",
       "app_name_en": "text-to-cad",
-      "app_hook": "Give your 智能体 CAD superpowers.",
+      "app_hook": "为您的代理商提供CAD超能力。",
       "app_hook_en": "Give your agent CAD superpowers.",
       "url": "https://github.com/earthtojake/text-to-cad?ref=ainewsradar",
       "official_url": "https://github.com/earthtojake/text-to-cad?ref=ainewsradar",
@@ -822,19 +874,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "6c007a674b6cdb14",
-      "title": "【plugins】专注于 💻 AI 编程与开发 的高星开源 AI 实用项目 (Cursor plugin specification and off",
-      "title_zh": "【plugins】专注于 💻 AI 编程与开发 的高星开源 AI 实用项目 (Cursor plugin specification and off",
+      "title": "【plugins】光标插件规范和官方插件",
+      "title_zh": "【plugins】光标插件规范和官方插件",
       "title_en": "[plugins] Cursor plugin specification and official plugins",
       "app_name": "plugins",
       "app_name_en": "plugins",
-      "app_hook": "专注于 💻 AI 编程与开发 的高星开源 AI 实用项目 (Cursor plugin specification and official plugins)",
+      "app_hook": "光标插件规范和官方插件",
       "app_hook_en": "Cursor plugin specification and official plugins",
       "url": "https://github.com/cursor/plugins?ref=ainewsradar",
       "official_url": "https://github.com/cursor/plugins?ref=ainewsradar",
@@ -897,19 +949,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 89,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (89分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "845187212399040b",
-      "title": "【claude-mem】Persistent Context Across Sessions for Every 智能体 – Captures every",
-      "title_zh": "【claude-mem】Persistent Context Across Sessions for Every 智能体 – Captures every",
+      "title": "【claude-mem】每个座席跨会话的持久上下文–捕获座席在会话期间执行的所有操作，使用AI压缩，并注入相关上下文ba",
+      "title_zh": "【claude-mem】每个座席跨会话的持久上下文–捕获座席在会话期间执行的所有操作，使用AI压缩，并注入相关上下文ba",
       "title_en": "[claude-mem] Persistent Context Across Sessions for Every Agent – Captures eve",
       "app_name": "claude-mem",
       "app_name_en": "claude-mem",
-      "app_hook": "Persistent Context Across Sessions for Every 智能体 – Captures everything your 智能体 ",
+      "app_hook": "每个座席跨会话的持久上下文–捕获座席在会话期间执行的所有操作，使用AI压缩，并注入相关上下文ba",
       "app_hook_en": "Persistent Context Across Sessions for Every Agent – Captures everything your ag",
       "url": "https://github.com/thedotmack/claude-mem?ref=ainewsradar",
       "official_url": "https://github.com/thedotmack/claude-mem?ref=ainewsradar",
@@ -972,19 +1024,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "0cf327344f26f810",
-      "title": "【hyperframes】Write HTML. Render 视频生成. Built for 智能体矩阵.",
-      "title_zh": "【hyperframes】Write HTML. Render 视频生成. Built for 智能体矩阵.",
+      "title": "【hyperframes】编写HTML。渲染视频。专为客服代表打造。",
+      "title_zh": "【hyperframes】编写HTML。渲染视频。专为客服代表打造。",
       "title_en": "[hyperframes] Write HTML. Render video. Built for agents.",
       "app_name": "hyperframes",
       "app_name_en": "hyperframes",
-      "app_hook": "Write HTML. Render 视频生成. Built for 智能体矩阵.",
+      "app_hook": "编写HTML。渲染视频。专为客服代表打造。",
       "app_hook_en": "Write HTML. Render video. Built for agents.",
       "url": "https://github.com/heygen-com/hyperframes?ref=ainewsradar",
       "official_url": "https://github.com/heygen-com/hyperframes?ref=ainewsradar",
@@ -1047,8 +1099,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -1202,13 +1254,90 @@
       }
     },
     {
+      "id": "88a132928d783881",
+      "title": "CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg)",
+      "title_en": "CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg)",
+      "url": "https://www.bloomberg.com/news/articles/2026-10-13/china-s-cxmt-claims-memory-breakthrough-ahead-of-samsung-hynix",
+      "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
+      "inline_images": [],
+      "has_video": false,
+      "video_url": null,
+      "source": "Bloomberg",
+      "author": "Bloomberg",
+      "author_handle": "",
+      "author_avatar": "",
+      "platform": "web",
+      "raw_published_at": "2026-10-13T09:40:00+00:00",
+      "metrics": {
+        "platform": "web"
+      },
+      "spec_tags": [
+        "SOTA 性能突破"
+      ],
+      "article_content": "CXMT Corp. declared it achieved a breakthrough in chip technology that rivals like Samsung Electronics Co. had pursued for years …",
+      "original_content": "CXMT Corp. declared it achieved a breakthrough in chip technology that rivals like Samsung Electronics Co. had pursued for years …",
+      "content_snippet": "CXMT Corp. declared it achieved a breakthrough in chip technology that rivals like Samsung Electronics Co. had pursued for years …",
+      "summary_en": "CXMT Corp. declared it achieved a breakthrough in chip technology that rivals like Samsung Electronics Co. had pursued for years …",
+      "category": "news",
+      "tags": [
+        "Bloomberg",
+        "今日要闻"
+      ],
+      "title_zh": "CXMT表示计划在2026年底前为数据中心服务器推出4F ²设计的DRAM芯片，实现竞争对手多年来追求的突破",
+      "summary_zh": "CXMT公司宣布，它在芯片技术方面取得了突破，这是三星电子(Samsung Electronics Co.)等竞争对手多年来一直追求的……",
+      "hot_score": 3,
+      "ai_analysis": {
+        "briefing_zh": "CXMT表示计划在2026年底前为数据中心服务器推出4F ²设计的DRAM芯片，实现竞争对手多年来追求的突破。 CXMT公司宣布，它在芯片技术方面取得了突破，这是三星电子(Samsung Electronics Co.)等竞争对手多年来一直追求的……。",
+        "briefing_en": "Executive Briefing: In 算力芯片供应链与云端基础设施, CXMT表示计划在2026年底 advanced a key development: CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg). Context: 调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。",
+        "elements_zh": {
+          "who": "CXMT表示计划在2026年底",
+          "where": "算力芯片供应链与云端基础设施",
+          "what": "CXMT表示计划在2026年底前为数据中心服务器推出4F ²设计的DRAM芯片，实现竞争对手多年来追求的突破",
+          "why": "调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。"
+        },
+        "elements_en": {
+          "who": "CXMT表示计划在2026年底",
+          "where": "算力芯片供应链与云端基础设施",
+          "what": "CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg)",
+          "why": "调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。"
+        },
+        "insight_zh": "",
+        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "digest_zh": "CXMT表示计划在2026年底前为数据中心服务器推出4F ²设计的DRAM芯片，实现竞争对手多年来追求的突破。 CXMT公司宣布，它在芯片技术方面取得了突破，这是三星电子(Samsung Electronics Co.)等竞争对手多年来一直追求的……。",
+        "digest_en": "Executive Briefing: In 算力芯片供应链与云端基础设施, CXMT表示计划在2026年底 announced: CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg).",
+        "key_points_zh": [
+          "主体与场景：CXMT表示计划在2026年底在算力芯片供应链与云端基础设施",
+          "核心事实：CXMT表示计划在2026年底前为数据中心服务器推出4F ²设计的DRAM芯片，实现竞争对手多年来追求的突破",
+          "动因背景：调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。"
+        ],
+        "key_points_en": [
+          "Actor & Context: CXMT表示计划在2026年底 in 算力芯片供应链与云端基础设施",
+          "Key Action: CXMT says it plans to launch a 4F² design DRAM chip for data center servers before the end of 2026, achieving a breakthrough that rivals have pursued for years (Bloomberg)",
+          "Motivation: 调查反映出AI高耗能算力设施在地方落地时正面临严峻的电力供应、土地资源及公众环境关切阻力，AI基建扩张正在从单纯的技术投资转变为敏感的公共与政治议题。"
+        ],
+        "takeaway_zh": "",
+        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+      },
+      "article_content_zh": null,
+      "is_recent_24h": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-10-13T09:50:05.008143+00:00",
+      "processed_mark": "⛔ 已淘汰: 缺图文凭据",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 45,
+        "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
+        "media_penalty": 40
+      }
+    },
+    {
       "id": "b5cf7c4edac6e24c",
-      "title": "【solidcraft】专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (SolidCraft: an open-source parametr",
-      "title_zh": "【solidcraft】专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (SolidCraft: an open-source parametr",
+      "title": "【solidcraft】SolidCraft ：用纯Rust构建的开源参数化3D CAD应用程序。通过MCP实现桌面、网络和自动化。",
+      "title_zh": "【solidcraft】SolidCraft ：用纯Rust构建的开源参数化3D CAD应用程序。通过MCP实现桌面、网络和自动化。",
       "title_en": "[solidcraft] SolidCraft: an open-source parametric 3D CAD application built in",
       "app_name": "solidcraft",
       "app_name_en": "solidcraft",
-      "app_hook": "专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (SolidCraft: an open-source parametric 3D CAD appli",
+      "app_hook": "SolidCraft ：用纯Rust构建的开源参数化3D CAD应用程序。通过MCP实现桌面、网络和自动化。",
       "app_hook_en": "SolidCraft: an open-source parametric 3D CAD application built in pure Rust. Des",
       "url": "https://github.com/bherbruck/solidcraft?ref=ainewsradar",
       "official_url": "https://bherbruck.github.io/solidcraft/?ref=ainewsradar",
@@ -1271,8 +1400,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 88,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -2730,7 +2859,7 @@
       "stars": 11609,
       "is_pinned": false,
       "processed_status": "DISQUALIFIED",
-      "processed_at": "2026-10-13T09:23:55.763156+00:00",
+      "processed_at": "2026-10-13T09:50:04.810975+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
@@ -3298,8 +3427,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 83,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "agent"
@@ -3374,8 +3503,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "browser"
@@ -3450,8 +3579,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 81,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
+        "score": 84,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "infra"
@@ -3526,8 +3655,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 88,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
+        "score": 82,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "code"
@@ -3598,12 +3727,12 @@
       "stars": 96696,
       "is_pinned": false,
       "processed_status": "DISQUALIFIED",
-      "processed_at": "2026-10-13T09:23:55.502897+00:00",
+      "processed_at": "2026-10-13T09:50:04.710667+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 81,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "browser"
@@ -3754,8 +3883,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 86,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "video"
@@ -3830,8 +3959,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 83,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "knowledge"
@@ -3906,8 +4035,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 84,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
+        "score": 79,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (79分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "code"
@@ -3982,8 +4111,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "design"
@@ -4058,8 +4187,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 89,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (89分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "code"
@@ -4134,8 +4263,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "knowledge"
@@ -4210,8 +4339,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "video"
@@ -4438,8 +4567,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 88,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
         "media_penalty": 0
       },
       "scenario_key": "design"
@@ -6044,8 +6173,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 80,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
+        "score": 83,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -6120,8 +6249,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 82,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "score": 87,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -6296,7 +6425,7 @@
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 42,
+        "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
@@ -11038,12 +11167,12 @@
     },
     {
       "id": "45bb92dbd6892d50",
-      "title": "【invisible_playwright_mcp】Playwright MCP server undetected by anti-bots and captchas: AI 智能",
-      "title_zh": "【invisible_playwright_mcp】Playwright MCP server undetected by anti-bots and captchas: AI 智能",
+      "title": "【invisible_playwright_mcp】剧作家MCP服务器未被反机器人和验证码检测到： AI代理在反检测隐形Firefox、Python、未被检测到的浏览器自动化、SCR",
+      "title_zh": "【invisible_playwright_mcp】剧作家MCP服务器未被反机器人和验证码检测到： AI代理在反检测隐形Firefox、Python、未被检测到的浏览器自动化、SCR",
       "title_en": "[invisible_playwright_mcp] Playwright MCP server undetected by anti-bots and captchas: AI ag",
       "app_name": "invisible_playwright_mcp",
       "app_name_en": "invisible_playwright_mcp",
-      "app_hook": "Playwright MCP server undetected by anti-bots and captchas: AI 智能体 browses the w",
+      "app_hook": "剧作家MCP服务器未被反机器人和验证码检测到： AI代理在反检测隐形Firefox、Python、未被检测到的浏览器自动化、SCRA上浏览网页",
       "app_hook_en": "Playwright MCP server undetected by anti-bots and captchas: AI agent browses the",
       "url": "https://github.com/feder-cr/invisible_playwright_mcp?ref=ainewsradar",
       "official_url": "https://github.com/feder-cr/invisible_playwright_mcp?ref=ainewsradar",
@@ -11106,8 +11235,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 82,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -15708,12 +15837,12 @@
     },
     {
       "id": "7fa4e8455d9d4da4",
-      "title": "【esp32-iphone-agent】Let an AI 模型 use a real iPhone with a $7 ESP32: AirPlay eyes, USB",
-      "title_zh": "【esp32-iphone-agent】Let an AI 模型 use a real iPhone with a $7 ESP32: AirPlay eyes, USB",
+      "title": "【esp32-iphone-agent】让人工智能模型使用带有$ 7 ESP32的真实iPhone ： AirPlay眼睛， USB HID指针，任何与OpenAI兼容的",
+      "title_zh": "【esp32-iphone-agent】让人工智能模型使用带有$ 7 ESP32的真实iPhone ： AirPlay眼睛， USB HID指针，任何与OpenAI兼容的",
       "title_en": "[esp32-iphone-agent] Let an AI model use a real iPhone with a $7 ESP32: AirPlay eyes, ",
       "app_name": "esp32-iphone-agent",
       "app_name_en": "esp32-iphone-agent",
-      "app_hook": "Let an AI 模型 use a real iPhone with a $7 ESP32: AirPlay eyes, USB HID hands, any",
+      "app_hook": "让人工智能模型使用带有$ 7 ESP32的真实iPhone ： AirPlay眼睛， USB HID指针，任何与OpenAI兼容的视觉模型。没有Mac ，没有开",
       "app_hook_en": "Let an AI model use a real iPhone with a $7 ESP32: AirPlay eyes, USB HID hands, ",
       "url": "https://github.com/onehumanbeing/esp32-iphone-agent?ref=ainewsradar",
       "official_url": "https://github.com/onehumanbeing/esp32-iphone-agent?ref=ainewsradar",
@@ -16554,7 +16683,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta has some Wonder Full new AI 系列模型",
-      "summary_zh": "Meta is making up for lost time in the AI race. After launching Muse Spark, the first 模型 from its revamped Superintelligence Labs division, and buzzy AI 智能体 Muse, it's now launching two new 系列模型 it claims can go toe-to-toe with the industry's best.",
+      "summary_zh": "Meta正在弥补AI竞赛中失去的时间。在推出Muse Spark之后，其经过改造的Superintelligence Labs部门和BUZZY AI AGEN的第一个模型",
       "ai_analysis": {
         "briefing_zh": "Meta has some Wonder Full new AI 系列模型。 Meta is making up for lost time in the AI race. After launching Muse Spark, the first 模型 from its revamped Superintelligence Labs division, and buzzy AI 智能体 Muse, it's now launching two new 系列模型 it claims can go toe-to-toe with the industry's best.。",
         "briefing_en": "Executive Briefing: In 全球大模型开源社区与技术研发一线, Meta (扎克伯格团队) advanced a key development: Meta has some Wonder Full new AI models. Context: 降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
@@ -16594,8 +16723,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 80,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
+        "score": 82,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -18681,7 +18810,7 @@
         "今日要闻"
       ],
       "title_zh": "White House reverses course and restores UK AI Safety Institute's access to frontier 系列模型",
-      "summary_zh": "The White House has reversed course and restored the UK's AI Security Institute's early access to AI 系列模型 from Anthropic, Google DeepMind, and OpenAI. In September, the Trump administration had told the companies to stop sharing their 系列模型 with the British agency. Diplomatic",
+      "summary_zh": "白宫已经改变了方向，恢复了英国人工智能安全研究所对人类、谷歌DeepMind和OpenAI人工智能模型的早期访问",
       "ai_analysis": {
         "briefing_zh": "White House reverses course and restores UK AI Safety Institute's access to frontier 系列模型。 The White House has reversed course and restored the UK's AI Security Institute's early access to AI 系列模型 from Anthropic, Google DeepMind, and OpenAI. In September, the Trump administration had told the companies to stop sharing their 系列模型 with the British agency. Diplomatic pressure from AI Minister Kanishka Narayan led to the reversal. The a。",
         "briefing_en": "Executive Briefing: In 全球大模型开源社区与技术研发一线, 美国总统 特朗普 (Donald Trump) advanced a key development: White House reverses course and restores UK AI Safety Institute's access to frontier models. Context: 降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
@@ -18721,8 +18850,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 78,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (78分 < 95分准发线)",
+        "score": 86,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -20126,8 +20255,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 84,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
+        "score": 79,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (79分 < 95分准发线)",
         "media_penalty": 0
       },
       "tool_origin": "github",
@@ -20333,12 +20462,12 @@
       "source": "𝕏 (Twitter) · @aakashgupta",
       "summary_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
       "ai_analysis": {
-        "briefing_zh": "Every AI lab pays armies of humans to write training data. Cursor built the only factory where the workers pay to get in. Meta spent $14 billion on half of Scale AI, a company whose entire business is paying people to label data. Labs pay expert engineers $100。 生成式数字人与虚拟演员渗透演艺工业引发行业伦理与从业者权益博弈，算法在敏感议题上的回避机制暴露出防御性对齐的技术短板。",
+        "briefing_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, Meta (扎克伯格团队) advanced a key development: Every AI lab pays armies of humans to write training data. Cursor built the only factory where the workers pay to get in. Meta spent $14 billion on half of Scale AI, a company whose entire business is paying people to label data. Labs pay expert engineers $100. Context: 生成式数字人与虚拟演员渗透演艺工业引发行业伦理与从业者权益博弈，算法在敏感议题上的回避机制暴露出防御性对齐的技术短板。",
         "elements_zh": {
           "who": "Meta (扎克伯格团队)",
           "where": "全球产业与技术前沿一线",
-          "what": "Every AI lab pays armies of humans to write training data. Cursor built the only factory where the workers pay to get in. Meta spent $14 billion on half of Scale AI, a company whose entire business is paying people to label data. Labs pay expert engineers $100",
+          "what": "Every AI lab pays armies of humans to write training data. Cursor built the only factory where the workers pay to get in",
           "why": "生成式数字人与虚拟演员渗透演艺工业引发行业伦理与从业者权益博弈，算法在敏感议题上的回避机制暴露出防御性对齐的技术短板。"
         },
         "elements_en": {
@@ -20364,13 +20493,15 @@
         "takeaway_zh": "从手写每一行代码到由 AI Agent 自动化生成与重构，软件工程交付范式正在经历质变。开发者的核心竞争力正加速从低阶语法记忆转向高阶架构设计、上下文引导以及边界逻辑的严格审查。",
         "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
       },
-      "summary_en": "",
+      "summary_en": "Every AI lab pays armies of humans to write training data. Cursor built the only factory where the workers pay to get in. Meta spent $14 billion on half of Scale AI, a company whose entire business is paying people to label data. Labs pay expert engineers $100",
       "hot_score": 4,
       "tags": [
         "𝕏 (Twitter) · @aakashgupta"
       ],
       "is_recent_24h": false,
       "image_url": null,
+      "is_pinned": false,
+      "article_content_zh": null,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-10-13T11:04:24.794818+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -20421,12 +20552,12 @@
       "source": "𝕏 (Twitter) · @JulianGoldieSEO",
       "summary_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
       "ai_analysis": {
-        "briefing_zh": "This new Claude Code update is wild. Anthropic just dropped Haiku 5.5. And it's built for the boring SEO work you do every week. → Fastest Claude model yet → 1 million token context. Feed it a whole folder of SEO reports → Writes up to 128K tokens back →。",
+        "briefing_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, Anthropic (Claude 研发团队) advanced a key development: This new Claude Code update is wild. Anthropic just dropped Haiku 5.5. And it's built for the boring SEO work you do every week. → Fastest Claude model yet → 1 million token context. Feed it a whole folder of SEO reports → Writes up to 128K tokens back →. Context: ",
         "elements_zh": {
           "who": "Anthropic (Claude 研发团队)",
           "where": "全球产业与技术前沿一线",
-          "what": "This new Claude Code update is wild. Anthropic just dropped Haiku 5.5. And it's built for the boring SEO work you do every week. → Fastest Claude model yet → 1 million token context. Feed it a whole folder of SEO reports → Writes up to 128K tokens back →",
+          "what": "This new Claude Code update is wild. Anthropic just dropped Haiku 5.5. And it's built for the boring SEO work you do eve",
           "why": ""
         },
         "elements_en": {
@@ -20452,13 +20583,15 @@
         "takeaway_zh": "从手写每一行代码到由 AI Agent 自动化生成与重构，软件工程交付范式正在经历质变。开发者的核心竞争力正加速从低阶语法记忆转向高阶架构设计、上下文引导以及边界逻辑的严格审查。",
         "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
       },
-      "summary_en": "",
+      "summary_en": "This new Claude Code update is wild. Anthropic just dropped Haiku 5.5. And it's built for the boring SEO work you do every week. → Fastest Claude model yet → 1 million token context. Feed it a whole folder of SEO reports → Writes up to 128K tokens back →",
       "hot_score": 4,
       "tags": [
         "𝕏 (Twitter) · @JulianGoldieSEO"
       ],
       "is_recent_24h": false,
       "image_url": null,
+      "is_pinned": false,
+      "article_content_zh": null,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-10-13T11:04:25.278741+00:00",
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
@@ -20509,12 +20642,12 @@
       "source": "𝕏 (Twitter) · @dreamina_ai",
       "summary_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
       "ai_analysis": {
-        "briefing_zh": "Which City Shall We Go? Video tutorial inside. #DreaminaAI #DreaminaSeedance25 #MapOutfitTransition。",
+        "briefing_zh": "该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, dreamina_ai advanced a key development: Which City Shall We Go? Video tutorial inside. #DreaminaAI #DreaminaSeedance25 #MapOutfitTransition. Context: ",
         "elements_zh": {
           "who": "dreamina_ai",
           "where": "全球产业与技术前沿一线",
-          "what": "Which City Shall We Go? Video tutorial inside. #DreaminaAI #DreaminaSeedance25 #MapOutfitTransition",
+          "what": "Which City Shall We Go? 视频生成 tutorial inside. #DreaminaAI #DreaminaSeedance25 #MapOutfitTransition",
           "why": ""
         },
         "elements_en": {
@@ -20540,13 +20673,15 @@
         "takeaway_zh": "",
         "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
       },
-      "summary_en": "",
+      "summary_en": "Which City Shall We Go? Video tutorial inside. #DreaminaAI #DreaminaSeedance25 #MapOutfitTransition",
       "hot_score": 4,
       "tags": [
         "𝕏 (Twitter) · @dreamina_ai"
       ],
       "is_recent_24h": false,
       "image_url": null,
+      "is_pinned": false,
+      "article_content_zh": null,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-10-13T11:04:25.405813+00:00",
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
@@ -24943,7 +25078,7 @@
         "今日要闻"
       ],
       "title_zh": "AI 智能体 teams waste massive tokens for barely measurable quality gains, research finds",
-      "summary_zh": "Teams of AI 智能体矩阵 barely outperform solo 智能体矩阵 but cost up to 5.1x more, according to Vals AI. Only one out of four tests with GPT-6 Sol and Claude Opus 5.5 showed a measurable gain. Anthropic's own data backs this up: beyond ten 智能体矩阵, quality plateaus while token costs keep",
+      "summary_zh": "根据Vals AI的数据， AI代理团队的表现几乎不超过单人代理，但成本高达5.1倍。只有四分之一的测试使用GPT-6 Sol和Claude Opus 5.5 s",
       "ai_analysis": {
         "briefing_zh": "AI 智能体 teams waste massive tokens for barely measurable quality gains, research finds。 Teams of AI 智能体矩阵 barely outperform solo 智能体矩阵 but cost up to 5.1x more, according to Vals AI. Only one out of four tests with GPT-6 Sol and Claude Opus 5.5 showed a measurable gain. Anthropic's own data backs this up: beyond ten 智能体矩阵, quality plateaus while token costs keep climbing. The article AI 智能体 teams waste massive tokens for barely。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, Anthropic (Claude 研发团队) advanced a key development: AI agent teams waste massive tokens for barely measurable quality gains, research finds. Context: ",
@@ -27861,8 +27996,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -28977,8 +29112,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -31593,19 +31728,19 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
     {
       "id": "428d866f37456328",
-      "title": "【shaders】专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (WebGPU components for React, Vue, S",
-      "title_zh": "【shaders】专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (WebGPU components for React, Vue, S",
+      "title": "【shaders】React、Vue、Svelte、Solid、JS和Framer的WebGPU组件",
+      "title_zh": "【shaders】React、Vue、Svelte、Solid、JS和Framer的WebGPU组件",
       "title_en": "[shaders] WebGPU components for React, Vue, Svelte, Solid, JS & Framer",
       "app_name": "shaders",
       "app_name_en": "shaders",
-      "app_hook": "专注于 🎨 图像设计与 3D 的高星开源 AI 实用项目 (WebGPU components for React, Vue, Svelte, Solid, J",
+      "app_hook": "React、Vue、Svelte、Solid、JS和Framer的WebGPU组件",
       "app_hook_en": "WebGPU components for React, Vue, Svelte, Solid, JS & Framer",
       "url": "https://github.com/shader-effects-inc/shaders?ref=ainewsradar",
       "official_url": "https://shaders.com?ref=ainewsradar",
@@ -31668,8 +31803,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 86,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -33184,8 +33319,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       },
       "is_pinned": false
@@ -41866,7 +42001,7 @@
         "今日要闻"
       ],
       "title_zh": "Pollo AI turns creative ideas into campaigns with OpenAI",
-      "summary_zh": "With GPT-5.6, GPT-6 Astra, and GPT‑图像设计‑2.5, Pollo AI helps creators turn bold ideas into detailed images and cinematic 视频生成 ads.",
+      "summary_zh": "借助GPT-5.6、GPT-6 Astra和GPT ‑ Image ‑ 2.5 ， Pollo AI可帮助创作者将大胆的创意转化为详细的图像和电影视频广告",
       "ai_analysis": {
         "briefing_zh": "Pollo AI turns creative ideas into campaigns with OpenAI。 With GPT-5.6, GPT-6 Astra, and GPT‑图像设计‑2.5, Pollo AI helps creators turn bold ideas into detailed images and cinematic 视频生成 ads.。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, OpenAI 官方团队 advanced a key development: Pollo AI turns creative ideas into campaigns with OpenAI. Context: ",
@@ -45956,8 +46091,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -46703,8 +46838,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       },
       "is_pinned": false
@@ -47027,8 +47162,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -53317,8 +53452,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 87,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
+        "score": 82,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       },
       "is_pinned": false,
@@ -55913,8 +56048,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -60219,8 +60354,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -60310,7 +60445,7 @@
         "今日要闻"
       ],
       "title_zh": "OpenAI 智能体矩阵 tried to hack Wikipedia 提效工具 and flooded it with traffic",
-      "summary_zh": "The publisher of Wikipedia said Monday that OpenAI 智能体矩阵 attempted to hack a note-taking 实用工具 it hosts, made unauthorized edits, and sent millions of resource-intensive requests to its infrastructure, in the latest instance of OpenAI systems taking harmful and potentially danger",
+      "summary_zh": "维基百科出版商周一表示， OpenAI特工试图黑客入侵其托管的笔记记录工具，进行未经授权的编辑，并发送了数百万个资源",
       "ai_analysis": {
         "briefing_zh": "OpenAI 智能体矩阵 tried to hack Wikipedia 提效工具 and flooded it with traffic。 The publisher of Wikipedia said Monday that OpenAI 智能体矩阵 attempted to hack a note-taking 实用工具 it hosts, made unauthorized edits, and sent millions of resource-intensive requests to its infrastructure, in the latest instance of OpenAI systems taking harmful and potentially dangerous actions. The objective of some of the OpenAI 智能体矩阵’ actions, the。",
         "briefing_en": "Executive Briefing: In 全球产业与技术前沿一线, OpenAI 官方团队 advanced a key development: OpenAI agents tried to hack Wikipedia tools and flooded it with traffic. Context: ",
@@ -63768,8 +63903,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -68845,8 +68980,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -69638,8 +69773,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -77754,8 +77889,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -80558,8 +80693,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       },
       "is_pinned": false
@@ -82042,8 +82177,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -88345,7 +88480,7 @@
         "今日要闻"
       ],
       "title_zh": "为建筑行业提供劳动力管理工具的Miter在由Battery Ventures领投的B轮融资中获得了4000万美元，使其总融资达到7800万美元。",
-      "summary_zh": "Chris Metinko / Axios: Miter, which provides workforce management 提效工具 for the construction industry, raised a $40M Series B led by Battery Ventures, taking its total 融资大单 to $78M — Miter, a construction workforce management platform, raised a $40 million Se",
+      "summary_zh": "Chris Metinko/Axios ：为建筑行业提供劳动力管理工具的Miter筹集了由Battery Ventures牵头的4000万美元B轮融资",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "为建筑行业提供劳动力管理工具的Miter在由Battery Ventures领投的B轮融资中获得了4000万美元，使其总融资达到7800万美元。 Chris Metinko / Axios: Miter是一家为建筑行业提供劳动力管理工具的公司，在由Battery Ventures领投的B轮融资中获得了4000万美元的融资。",
@@ -88781,7 +88916,7 @@
         "今日要闻"
       ],
       "title_zh": "使用人工智能代理自动化招聘工作流程的Metaview，在Insight Partners领投的C轮融资中获得了6000万美元，使其总融资达到1.1亿美元。",
-      "summary_zh": "Chris Metinko / Axios: Metaview, which uses AI 智能体矩阵 to automate recruiting workflows, raised a $60M Series C led by Insight Partners, bringing its total 融资大单 to $110M — Metaview, an agentic recruiting platform, raised a $60 million Series C led by Insight P",
+      "summary_zh": "Chris Metinko/Axios ： Metaview使用人工智能代理来自动化招聘工作流程，由Insight Partners牵头筹集了6000万美元的C轮融资，使其总资金",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "使用人工智能代理自动化招聘工作流程的Metaview，在Insight Partners领投的C轮融资中获得了6000万美元，使其总融资达到1.1亿美元。 Chris Metinko / Axios：利用人工智能代理自动化招聘工作流程的Metaview，在由Insight Partners领投的C轮融资中获得了6000万美元的融资，使其市值达到100亿美元。",
@@ -88821,7 +88956,7 @@
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 48,
+        "score": 41,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
@@ -98034,7 +98169,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta 推出了面向小型企业的 Muse，将人工智能代理与 Asana、Zoom、Intuit、Box、Canva、Slack 和其他应用程序以及自己的广告帐户集成在一起",
-      "summary_zh": "Isabel O'Brien / CNBC: Meta 推出重磅 Muse for Small Business, integrating the AI 智能体 with Asana, Zoom, Intuit, Box, Canva, Slack, and other apps, alongside its own ad accounts — Coming off the successful 推出重磅 of its Muse AI 智能体, Meta is now pushing its new",
+      "summary_zh": "Isabel O'Brien/CNBC ： Meta推出Muse for Small Business ，将AI代理与Asana、Zoom、Intuit、Box、Canva、Slack和其他应用程序集成在一起",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "Meta 推出了面向小型企业的 Muse，将人工智能代理与 Asana、Zoom、Intuit、Box、Canva、Slack 和其他应用程序以及自己的广告帐户集成在一起。 Isabel O'Brien / CNBC：Meta 推出面向小型企业的 Muse，将 AI 代理与 Asana、Zoom、Intuit、Box、Canva、Slack 和其他应用程序集成。",
@@ -98074,8 +98209,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 85,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -110211,7 +110346,7 @@
         "今日要闻"
       ],
       "title_zh": "人工智能代理初创公司Instinct以100亿美元的估值从红杉资本（Sequoia）、Benchmark和Coatue获得了10亿美元的C轮融资，并详细介绍了最近的产品，比如礼宾服务。",
-      "summary_zh": "Utkarsh Shetti / Reuters: AI 智能体 startup Instinct raised a $1B Series C from Sequoia, Benchmark, and Coatue at a $10B 估值融资 and details recent products, such as a concierge service — AI 智能体 firm Instinct said on Monday it has raised $1 billion at a $10 b",
+      "summary_zh": "Utkarsh Shetti/路透社：人工智能代理初创公司Instinct从红杉、Benchmark和Coatue筹集了$ 10亿系列C ，估值为$ 100亿，并详细介绍了最近的产品",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "人工智能代理初创公司Instinct以100亿美元的估值从红杉资本（Sequoia）、Benchmark和Coatue获得了10亿美元的C轮融资，并详细介绍了最近的产品，比如礼宾服务。 Utkarsh Shetti /路透社：人工智能代理初创公司Instinct以100亿美元的估值从红杉资本（Sequoia）、Benchmark和Coatue获得了10亿美元的C轮融资。",
@@ -110251,7 +110386,7 @@
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 45,
+        "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
@@ -115722,7 +115857,7 @@
         "今日要闻"
       ],
       "title_zh": "总部位于纽约的精密神经科学公司（Precision Neuroscience）是一家开发脑机接口的公司，该公司在D轮融资中获得2.5亿美元的融资，估值超过10亿美元，使其总融资达到4.3亿美元。",
-      "summary_zh": "Lauren Hirsch / New York Times: NYC-based Precision Neuroscience, which develops brain-computer interfaces, raised a $250M Series D at a $1B+ 估值融资, taking its total 融资大单 to $430M — By backing Precision Neuroscience, the billionaire Bill Ackman joins Elon",
+      "summary_zh": "Lauren Hirsch/《纽约时报》：总部位于纽约的Precision Neuroscience开发了脑机接口，以$ 1B +的估值筹集了$ 2.5亿美元的D轮融资",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "总部位于纽约的精密神经科学公司（Precision Neuroscience）是一家开发脑机接口的公司，该公司在D轮融资中获得2.5亿美元的融资，估值超过10亿美元，使其总融资达到4.3亿美元。 劳伦·赫希/《纽约时报》：总部位于纽约的脑机接口开发公司Precision Neuroscience在D轮融资中获得2.5亿美元融资，估值超过10亿美元。",
@@ -131606,8 +131741,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -138548,8 +138683,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -139217,7 +139352,7 @@
         "今日要闻"
       ],
       "title_zh": "消息来源：Modal Labs正在进行融资谈判，估值约为150亿美元，高于5月份的46.5亿美元；Baseten正在进行融资谈判，估值为260亿美元，高于6月份的130亿美元",
-      "summary_zh": "Bloomberg: Sources: Modal Labs is in 融资大单 talks at a ~$15B 估值融资, up from $4.65B in May; Baseten is in 融资大单 talks at a $26B 估值融资, up from $13B in June — Two startups that provide platforms to help businesses run artificial intelligence 系列模型 are",
+      "summary_zh": "来源： Modal Labs正在以~ $ 150亿的估值进行融资谈判，高于5月的$ 46.5亿； Baseten正在以$ 260亿的估值进行融资谈判，高于5月的$ 130亿",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "Modal Labs正在进行融资谈判，估值约为150亿美元，高于5月份的46.5亿美元；Baseten正在进行融资谈判，估值为260亿美元，高于6月份的130亿美元。 Modal Labs正在进行融资谈判，估值约为150亿美元，高于5月份的46.5亿美元；Baseten目前正在进行融资谈判，估值为260亿美元。",
@@ -139257,7 +139392,7 @@
       "processed_mark": "⛔ 已淘汰: 缺图文凭据",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 42,
+        "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
@@ -198277,8 +198412,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 91,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (91分 < 95分准发线)",
+        "score": 87,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
         "media_penalty": 0
       },
       "is_pinned": false,
@@ -198397,7 +198532,7 @@
         "今日要闻"
       ],
       "title_zh": "谷歌推出Gemini 3.8 Live和Gemini 3.8 Live Extended Thinking ，其“迄今为止最先进的实时对话模型” ，以更有效地启用语音代理（ Go",
-      "summary_zh": "Google: Google 推出重磅 Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking, its “most advanced live dialogue 系列模型 yet”, to more effectively enable voice 智能体矩阵 — Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking are our most advanced live di",
+      "summary_zh": "谷歌：谷歌推出Gemini 3.8 Live和Gemini 3.8 Live Extended Thinking ，其“迄今为止最先进的现场对话模式” ，以更有效地支持语音代理",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "谷歌推出Gemini 3.8 Live和Gemini 3.8 Live Extended Thinking ，其“迄今为止最先进的实时对话模型” ，以更有效地启用语音代理（ Go。 谷歌推出Gemini 3.8 Live和Gemini 3.8 Live Extended Thinking，这是其“迄今为止最先进的现场对话模型”，以更有效地实现语音。 端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
@@ -198438,8 +198573,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 91,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (91分 < 95分准发线)",
+        "score": 87,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -217993,8 +218128,8 @@
       "processed_mark": "⛔ 已淘汰: 未达95分",
       "wechat_audit": {
         "status": "DISQUALIFIED",
-        "score": 77,
-        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "score": 80,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
       }
     },
