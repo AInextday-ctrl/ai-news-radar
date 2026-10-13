@@ -1041,7 +1041,7 @@ by Jon Hicks
                       Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at 
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      For the last three years, AI labs like OpenAI, Anthropic and xAI have sucked up a lot of investor attention—as well as nosebleed valuations.
+                      Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at $30B+, up from $15B in June (The Information).
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -8110,8 +8110,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       // 2. AI 点评 (仅当存在高价值针对性深度分析时保留；模板化/对不上/无有效分析时坚决隐藏，杜绝硬套话)
       let insightText = isZh
-        ? (analysis.insight_zh || analysis.takeaway_zh || '')
-        : (analysis.insight_en || analysis.takeaway_en || '');
+        ? (analysis.insight_zh || analysis.takeaway_zh || item.ai_hot_take_zh || item.insight_zh || '')
+        : (analysis.insight_en || analysis.takeaway_en || item.ai_hot_take_en || item.insight_en || '');
 
       // 过滤前缀标签
       let cleanInsight = String(insightText || '')

@@ -1016,7 +1016,7 @@
                       资料来源：自动驾驶仿真软件制造商Applied Intuition已收到估值超过300亿美元的投资报价，高于6月份的150亿美元（ Stephanie P
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      在过去的三年里， OpenAI、Anthropic和xAI等人工智能实验室吸引了很多投资者的关注，也吸引了很多投资者的估值
+                      据知情人士透露：自动驾驶仿真与测试平台 Applied Intuition 已接获外部投资要约，最新估值超 300 亿美元，相比今年 6 月的 150 亿美元估值实现翻倍（信源：The Information）。
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -1995,6 +1995,14 @@
           </div>
           <!-- 多图缩略条 (若有附加配图/图表) -->
           <div id="ai-modal-gallery-strip" class="hidden flex items-center gap-2 overflow-x-auto py-1"></div>
+        </div>
+
+        <!-- 顶级付费墙媒体独家报道专属提示条 (针对 The Information, Bloomberg, WSJ 等硬付费墙) -->
+        <div id="ai-modal-paywall-notice" class="hidden flex items-start space-x-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs shadow-sm">
+          <span class="text-base shrink-0 leading-none">🔒</span>
+          <div class="flex-1 leading-relaxed">
+            <span id="ai-modal-paywall-text" class="font-medium"></span>
+          </div>
         </div>
 
         <!-- 原文包含现场视频报道专属标识栏 (针对源站含路透社/彭博等受 HLS/DRM 保护的现场视频报道) -->
@@ -8081,8 +8089,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       // 2. AI 点评 (仅当存在高价值针对性深度分析时保留；模板化/对不上/无有效分析时坚决隐藏，杜绝硬套话)
       let insightText = isZh
-        ? (analysis.insight_zh || analysis.takeaway_zh || '')
-        : (analysis.insight_en || analysis.takeaway_en || '');
+        ? (analysis.insight_zh || analysis.takeaway_zh || item.ai_hot_take_zh || item.insight_zh || '')
+        : (analysis.insight_en || analysis.takeaway_en || item.ai_hot_take_en || item.insight_en || '');
 
       // 过滤前缀标签
       let cleanInsight = String(insightText || '')
