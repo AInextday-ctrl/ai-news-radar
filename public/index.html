@@ -1656,15 +1656,24 @@ good food, drinks, and better arguments about evals, inside a glowing digital ar
           </div>
         </div>
 
-        <!-- 工具专用的场景快速筛选过滤器 -->
-        <div id="tools-subfilter" class="hidden flex items-center gap-2 flex-wrap p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ Scenarios:</span>
-          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">All Tools</button>
-          <button onclick="filterToolScenario('web')" id="tool-filter-web" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 Cloud / Online</button>
-          <button onclick="filterToolScenario('design')" id="tool-filter-design" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 Design & Vision</button>
-          <button onclick="filterToolScenario('code')" id="tool-filter-code" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 Coding & Dev</button>
-          <button onclick="filterToolScenario('client')" id="tool-filter-client" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI Clients</button>
-          <button onclick="filterToolScenario('agent')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent Workflows</button>
+        <!-- 工具专用的多维价值与场景快速筛选过滤器 -->
+        <div id="tools-subfilter" class="hidden space-y-2.5 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <div class="flex items-center gap-2 flex-wrap pb-2 border-b border-slate-100 dark:border-slate-800">
+            <span id="tool-origin-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🧭 Dimension:</span>
+            <button onclick="filterToolOrigin('all')" id="tool-origin-all" class="tool-origin-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 whitespace-nowrap shrink-0 flex items-center space-x-1.5">⚡ All Curated</button>
+            <button onclick="filterToolOrigin('github')" id="tool-origin-github" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5">📈 Weekly Star Surge (GitHub)</button>
+            <button onclick="filterToolOrigin('web')" id="tool-origin-web" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5">🌐 Web Apps (Zero-Install)</button>
+            <button onclick="filterToolOrigin('huggingface')" id="tool-origin-huggingface" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5">🤗 Live Spaces</button>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="tool-scenario-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ Scenarios:</span>
+            <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">All Tools</button>
+            <button onclick="filterToolScenario('web')" id="tool-filter-web" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 Cloud / Online</button>
+            <button onclick="filterToolScenario('design')" id="tool-filter-design" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 Design & Vision</button>
+            <button onclick="filterToolScenario('code')" id="tool-filter-code" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 Coding & Dev</button>
+            <button onclick="filterToolScenario('client')" id="tool-filter-client" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI Clients</button>
+            <button onclick="filterToolScenario('agent')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent Workflows</button>
+          </div>
         </div>
 
         <!-- 视频专属快速筛选器 -->
@@ -3730,6 +3739,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const vfThreads = document.getElementById('viral-filter-threads');
       if (vfThreads) vfThreads.textContent = t.viralFilterThreads;
 
+      const toLabel = document.getElementById('tool-origin-label');
+      if (toLabel) toLabel.textContent = (lang === 'zh') ? '🧭 价值维度:' : '🧭 Dimension:';
+      const tsLabel = document.getElementById('tool-scenario-label');
+      if (tsLabel) tsLabel.textContent = (lang === 'zh') ? '🛠️ 业务场景:' : '🛠️ Scenarios:';
+      const toAll = document.getElementById('tool-origin-all');
+      if (toAll) toAll.textContent = (lang === 'zh') ? '⚡ 综合多源精选' : '⚡ All Curated';
+      const toGh = document.getElementById('tool-origin-github');
+      if (toGh) toGh.textContent = (lang === 'zh') ? '📈 本周指数飙升 (GitHub)' : '📈 Weekly Star Surge (GitHub)';
+      const toWeb = document.getElementById('tool-origin-web');
+      if (toWeb) toWeb.textContent = (lang === 'zh') ? '🌐 免装 Web 应用' : '🌐 Web Apps (Zero-Install)';
+      const toHf = document.getElementById('tool-origin-huggingface');
+      if (toHf) toHf.textContent = (lang === 'zh') ? '🤗 在线试玩 Space' : '🤗 Live Spaces';
+
       const tfAll = document.getElementById('tool-filter-all');
       if (tfAll) tfAll.textContent = t.toolFilterAll;
       const tfWeb = document.getElementById('tool-filter-web');
@@ -4429,6 +4451,30 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         renderCategoryView('celebrity');
       } else {
         renderCelebritySpotlightBanner();
+      }
+    }
+
+    let toolOriginFilter = 'all';
+
+    // 工具多维价值与来源筛选 (综合多源混排 / GitHub本周指数飙升 / 免装Web应用 / HF在线试玩)
+    function filterToolOrigin(origin) {
+      toolOriginFilter = origin || 'all';
+      const originBtns = {
+        'all': 'tool-origin-all',
+        'github': 'tool-origin-github',
+        'web': 'tool-origin-web',
+        'huggingface': 'tool-origin-huggingface'
+      };
+      Object.entries(originBtns).forEach(([k, btnId]) => {
+        const b = document.getElementById(btnId);
+        if (b) {
+          b.className = (k === toolOriginFilter)
+            ? "tool-origin-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 whitespace-nowrap shrink-0 flex items-center space-x-1.5 transition-all"
+            : "tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5 transition-all";
+        }
+      });
+      if (currentTab === 'tools') {
+        renderCategoryView('tools');
       }
     }
 
@@ -5658,12 +5704,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const cleanSource = item.source || (isZh ? "AI 资讯雷达" : "AI News Radar");
       const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const transitUrl = formatTransitGoUrl(officialUrl, item);
-      let rankBadge = (item.rank_badge || "🔥 热门推荐")
+
+      const isGhTool = item.tool_origin === 'github' || (item.url && item.url.includes('github.com')) || (item.source_url && item.source_url.includes('github.com'));
+      const isHfTool = item.tool_origin === 'huggingface' || (item.url && item.url.includes('huggingface.co/spaces'));
+      let rankBadge = isZh
+        ? (item.growth_badge_zh || item.rank_badge || "🔥 热门推荐")
+        : (item.growth_badge_en || item.rank_badge_en || item.rank_badge || "🔥 Popular");
+      rankBadge = String(rankBadge)
         .replace(/\s*·\s*Product\s*Hunt/gi, '')
         .replace(/Product\s*Hunt\s*热门精选/gi, isZh ? '热门推荐' : 'Popular')
         .replace(/Product\s*Hunt\s*/gi, '')
         .replace(/\s*·\s*GitHub/gi, '')
-        .replace(/GitHub\s*/gi, '')
         .trim();
       if (!rankBadge || rankBadge === '🔥') rankBadge = isZh ? "🔥 热门推荐" : "🔥 Popular";
       if (!isZh) {
@@ -5671,9 +5722,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           .replace(/热门推荐/g, 'Popular')
           .replace(/编辑精选/g, 'Editor Choice')
           .replace(/开源精选/g, 'Open Source')
+          .replace(/开源高星/g, 'Top Stars')
+          .replace(/开源新锐/g, 'Rising Open Source')
           .replace(/最新发布/g, 'Fresh Release')
           .replace(/精选/g, 'Featured');
       }
+
+      const starsVal = Number(item.stars) || 0;
+      const starsDisplay = starsVal >= 1000 ? `★ ${(starsVal / 1000).toFixed(1)}k` : (starsVal > 0 ? `★ ${starsVal}` : (item.metrics && item.metrics.stars ? String(item.metrics.stars) : ''));
+      const originPillHtml = isGhTool
+        ? `<span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ${starsDisplay ? `· ${escapeHtml(starsDisplay)}` : ''}</span>`
+        : (isHfTool
+            ? `<span class="text-[9px] px-2 py-0.5 rounded-md bg-amber-50 dark:bg-amber-500/10 text-amber-700 dark:text-amber-300 font-mono border border-amber-200 dark:border-amber-500/20">🤗 HF Space</span>`
+            : `<span class="text-[9px] px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-mono border border-sky-200 dark:border-sky-500/20">🌐 ${isZh ? '免装Web' : 'Web App'}</span>`);
+      const liveDemoPillHtml = (isGhTool && item.has_live_demo)
+        ? `<span class="text-[9px] px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-mono border border-indigo-200 dark:border-indigo-500/30">🚀 Live Demo</span>`
+        : '';
+      const badgeColorClass = isGhTool
+        ? "bg-emerald-950/90 text-emerald-300 border-emerald-400/40"
+        : (isHfTool ? "bg-amber-950/90 text-amber-300 border-amber-400/40" : "bg-slate-900/85 text-amber-300 border-amber-500/30");
+      const ctaLabel = isGhTool
+        ? (item.has_live_demo ? (isZh ? '🚀 在线体验' : '🚀 Live Demo') : (isZh ? '📦 开源仓库' : '📦 GitHub Repo'))
+        : (isHfTool ? (isZh ? '🤗 在线试玩' : '🤗 Try Space') : (isZh ? '🚀 访问官网' : '🚀 Visit Site'));
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
       let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
@@ -5713,9 +5783,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
             </div>
 
-            <!-- 悬浮排名/热度徽章 -->
+            <!-- 悬浮排名/周飙升速度徽章 -->
             <div class="absolute top-2.5 right-2.5">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-slate-900/85 backdrop-blur-md text-amber-300 border border-amber-500/30 shadow-sm">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono backdrop-blur-md border shadow-sm ${badgeColorClass}">
                 ${escapeHtml(rankBadge)}
               </span>
             </div>
@@ -5741,9 +5811,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </p>
             </div>
 
-            <!-- 运行与部署方式标签 -->
-            <div class="flex items-center space-x-1.5 flex-wrap gap-1 pt-1">
+            <!-- 多维交付形态与来源标签 -->
+            <div class="flex items-center flex-wrap gap-1.5 pt-1">
+              ${originPillHtml}
               <span class="text-[9px] px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono border border-emerald-200 dark:border-emerald-500/20">${escapeHtml(runtimeBadge)}</span>
+              ${liveDemoPillHtml}
             </div>
           </div>
 
@@ -5753,7 +5825,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span>${isZh ? '🔍 详情与截图' : '🔍 Details & Specs'}</span>
             </button>
             <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
-              <span>${isZh ? '🚀 访问官网' : '🚀 Visit Site'}</span>
+              <span>${ctaLabel}</span>
               <span>↗</span>
             </a>
           </div>
@@ -6536,9 +6608,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
       }
 
-      // C. 落地工具板块 (Tools) - 首页仅精选 Top 3 实用神器
-      const recentTools = allTools.filter(it => isWithin24Hours(it.raw_published_at));
-      const displayTools = recentTools.length >= 2 ? recentTools.slice(0, 3) : allTools.slice(0, 3);
+      // C. 落地工具板块 (Tools) - 首页精选多源高价值 Top 3 (Web应用 + 本周指数飙升GitHub + 在线试玩)
+      const topWebTool = allTools.find(it => it.tool_origin === 'web' || (!it.tool_origin && !(it.url || '').includes('github.com')));
+      const topGhTool = allTools.filter(it => it.tool_origin === 'github' || (it.url || '').includes('github.com')).sort((a, b) => (Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0))[0];
+      const topHfOrSecondWeb = allTools.find(it => it !== topWebTool && it !== topGhTool && (it.tool_origin === 'huggingface' || it.tool_origin === 'web'));
+      const displayTools = [topWebTool, topGhTool, topHfOrSecondWeb].filter(Boolean);
+      if (displayTools.length < 3) {
+        allTools.forEach(it => { if (displayTools.length < 3 && !displayTools.includes(it)) displayTools.push(it); });
+      }
       const streamTools = document.getElementById('stream-tools');
       if (streamTools) {
         streamTools.innerHTML = displayTools.length > 0
@@ -6838,7 +6915,42 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           container.innerHTML = renderCelebrityTimeline(list);
         }
       } else if (tab === 'tools') {
-        let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []));
+        const getToolOrigin = (it) => {
+          if (it.tool_origin) return it.tool_origin;
+          const u = String(it.official_url || it.url || '').toLowerCase();
+          const su = String(it.source_url || '').toLowerCase();
+          if (u.includes('github.com') || su.includes('github.com')) return 'github';
+          if (u.includes('huggingface.co/spaces') || su.includes('huggingface.co/spaces')) return 'huggingface';
+          return 'web';
+        };
+        let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || [])).filter(it => {
+          if (getToolOrigin(it) === 'github') {
+            const s = Number(it.stars) || 0;
+            if (s > 0 && s < 200) return false;
+          }
+          return true;
+        });
+        if (toolOriginFilter && toolOriginFilter !== 'all') {
+          list = list.filter(it => getToolOrigin(it) === toolOriginFilter);
+          if (toolOriginFilter === 'github') {
+            list.sort((a, b) => ((Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0)) || ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)) || ((Number(b.stars) || 0) - (Number(a.stars) || 0)));
+          } else {
+            list.sort((a, b) => ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)));
+          }
+        } else {
+          // 综合多源混排：打破 GitHub 刷屏垄断，按 2个免装Web应用 + 2个本周指数飙升GitHub + 1个HF Space 循环交错
+          const webList = list.filter(it => getToolOrigin(it) === 'web');
+          const ghList = list.filter(it => getToolOrigin(it) === 'github').sort((a, b) => ((Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0)) || ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)));
+          const hfList = list.filter(it => getToolOrigin(it) === 'huggingface');
+          const mixed = [];
+          let wi = 0, gi = 0, hi = 0;
+          while (wi < webList.length || gi < ghList.length || hi < hfList.length) {
+            for (let k = 0; k < 2 && wi < webList.length; k++) mixed.push(webList[wi++]);
+            for (let k = 0; k < 2 && gi < ghList.length; k++) mixed.push(ghList[gi++]);
+            if (hi < hfList.length) mixed.push(hfList[hi++]);
+          }
+          list = mixed;
+        }
         if (toolScenarioFilter !== 'all') {
           list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
         }
@@ -8524,12 +8636,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (titleEl) titleEl.textContent = appName;
       if (rankBadgeEl) {
-        let rankText = (item.rank_badge || (isZh ? '🔥 热门推荐' : '🔥 Popular'))
+        let rankText = isZh
+          ? (item.growth_badge_zh || item.rank_badge || '🔥 热门推荐')
+          : (item.growth_badge_en || item.rank_badge_en || item.rank_badge || '🔥 Popular');
+        rankText = String(rankText)
           .replace(/\s*·\s*Product\s*Hunt/gi, '')
           .replace(/Product\s*Hunt\s*热门精选/gi, isZh ? '热门推荐' : 'Popular')
           .replace(/Product\s*Hunt\s*/gi, '')
           .replace(/\s*·\s*GitHub/gi, '')
-          .replace(/GitHub\s*/gi, '')
           .trim();
         if (!rankText || rankText === '🔥') rankText = isZh ? '🔥 热门推荐' : '🔥 Popular';
         if (!isZh) {
@@ -8537,6 +8651,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             .replace(/热门推荐/g, 'Popular')
             .replace(/编辑精选/g, 'Editor Choice')
             .replace(/开源精选/g, 'Open Source')
+            .replace(/开源高星/g, 'Top Stars')
+            .replace(/开源新锐/g, 'Rising Open Source')
             .replace(/最新发布/g, 'Fresh Release')
             .replace(/精选/g, 'Featured');
         }
@@ -8556,7 +8672,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         officialBtnEl.href = formatTransitGoUrl(officialUrl, item);
         officialBtnEl.setAttribute('rel', 'nofollow noopener noreferrer');
       }
-      if (visitTextEl) visitTextEl.textContent = isZh ? '🚀 访问官网' : '🚀 Visit Website';
+      const isGhModal = item.tool_origin === 'github' || (item.url && item.url.includes('github.com')) || (item.source_url && item.source_url.includes('github.com'));
+      if (visitTextEl) {
+        visitTextEl.textContent = isGhModal
+          ? (item.has_live_demo ? (isZh ? '🚀 在线体验 / 官网' : '🚀 Live Demo / Site') : (isZh ? '📦 访问开源仓库' : '📦 Visit GitHub Repo'))
+          : (isZh ? '🚀 访问官网' : '🚀 Visit Website');
+      }
       if (hookEl) hookEl.textContent = hook;
 
       if (overviewEl) overviewEl.textContent = overviewText;

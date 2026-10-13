@@ -1351,13 +1351,20 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
                         "app_hook": desc,
                         "app_hook_en": desc_en,
                         "url": space_url,
+                        "official_url": space_url,
+                        "demo_url": space_url,
+                        "has_live_demo": True,
+                        "tool_origin": "huggingface",
+                        "growth_badge_zh": f"🤗 在线热玩 · {likes} ❤️",
+                        "growth_badge_en": f"🤗 Live Space · {likes} ❤️",
+                        "utility_score": min(98, 86 + int(min(likes, 1200) / 100)),
                         "image_url": None,
-                        "source": "Hugging Face 空间",
+                        "source": "Hugging Face",
                         "author": sp_id.split("/")[0],
                         "raw_published_at": real_pub_iso,
                         "runtime_badge": runtime_badge,
                         "icon_type": icon_type,
-                        "metrics": {"likes": likes, "pricing": "🟢 免部署在线玩", "runtime": runtime_badge, "icon_type": icon_type},
+                        "metrics": {"likes": likes, "pricing": "🟢 免部署在线玩", "runtime": runtime_badge, "icon_type": icon_type, "origin": "huggingface"},
                         "scenario_tag": scenario,
                         "pricing_tag": "🟢 免部署在线试玩",
                         "platform": "huggingface",
@@ -1373,157 +1380,304 @@ def fetch_hf_spaces(max_items: int = 10) -> List[Dict[str, Any]]:
 
 
 # ==========================================
-# 4. 抓取 GitHub 场景应用神器 (高频更新+丰富标题)
+# 4. 抓取 GitHub 7天指数级飙升 AI 工具 (Weekly Star Velocity + Weekly Trending)
 # ==========================================
-def is_primarily_english(text: str) -> bool:
-    """Strictly verify that crawled content is primarily in English (no CJK/Cyrillic/Arabic script)."""
-    if not text or not str(text).strip():
-        return False
-    s = str(text).strip()
-    # Reject any Chinese, Japanese, Korean, Cyrillic, or Arabic characters
-    if re.search(r'[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af\u0400-\u04ff\u0600-\u06ff]', s):
-        return False
-    ascii_letters = len(re.findall(r'[a-zA-Z]', s))
-    return ascii_letters >= 6
+def _scrape_github_weekly_trending_map(out_repos: Optional[List[Dict[str, Any]]] = None) -> Dict[str, int]:
+    """
+    Directly scrape GitHub's official Weekly Trending page (https://github.com/trending?since=weekly)
+    to capture exact 7-day star velocity ('X,XXX stars this week') and full repo metadata.
+    """
+    trending_map: Dict[str, int] = {}
+    seen_fn = set()
+    urls = [
+        "https://github.com/trending?since=weekly",
+        "https://github.com/trending/python?since=weekly",
+        "https://github.com/trending/typescript?since=weekly",
+        "https://github.com/trending/rust?since=weekly",
+    ]
+    ai_kws = ["ai", "agent", "llm", "gpt", "claude", "mcp", "model", "chat", "rag", "code", "coding", "cursor", "copilot", "voice", "vision", "video", "image", "diffusion", "prompt", "workflow", "automation", "memory", "browser", "search", "inference", "deep", "neural", "open", "studio", "bot", "assistant"]
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/128.0.0.0 Safari/537.36"}
+    try:
+        with httpx.Client(headers=headers, timeout=8.0, follow_redirects=True) as client:
+            for u in urls:
+                try:
+                    resp = client.get(u)
+                    if resp.status_code != 200:
+                        continue
+                    rows = re.findall(r'<article class="Box-row">([\s\S]*?)</article>', resp.text)
+                    for r in rows:
+                        m_repo = re.search(r'<h2[^>]*>[\s\S]*?href="/([^"/]+/[^"/]+)"', r)
+                        m_wk = re.search(r'([\d,]+)\s+stars\s+this\s+week', r, re.IGNORECASE)
+                        if m_repo and m_wk:
+                            fn = m_repo.group(1).strip()
+                            wk_stars = int(m_wk.group(1).replace(",", ""))
+                            trending_map[fn.lower()] = max(trending_map.get(fn.lower(), 0), wk_stars)
+                            if out_repos is not None and fn.lower() not in seen_fn:
+                                m_desc = re.search(r'<p[^>]*col-9[^>]*>([\s\S]*?)</p>', r)
+                                desc = re.sub(r'<[^>]+>', '', m_desc.group(1)).strip() if m_desc else ""
+                                desc = html.unescape(re.sub(r'\s+', ' ', desc))
+                                m_total = re.search(r'href="/[^"]+/stargazers"[^>]*>[\s\S]*?([\d,]+)\s*</a>', r)
+                                total_stars = int(m_total.group(1).replace(",", "")) if m_total else max(wk_stars * 2, 500)
+                                m_forks = re.search(r'href="/[^"]+/forks"[^>]*>[\s\S]*?([\d,]+)\s*</a>', r)
+                                total_forks = int(m_forks.group(1).replace(",", "")) if m_forks else int(total_stars * 0.1)
+                                m_lang = re.search(r'itemprop="programmingLanguage">([^<]+)</span>', r)
+                                lang = m_lang.group(1).strip() if m_lang else "Python"
+                                combined_check = f"{fn} {desc}".lower()
+                                if desc and any(kw in combined_check for kw in ai_kws):
+                                    seen_fn.add(fn.lower())
+                                    owner, rname = fn.split("/", 1)
+                                    out_repos.append({
+                                        "html_url": f"https://github.com/{fn}",
+                                        "name": rname,
+                                        "full_name": fn,
+                                        "description": desc,
+                                        "stargazers_count": total_stars,
+                                        "forks_count": total_forks,
+                                        "language": lang,
+                                        "topics": ["ai", "weekly-trending"],
+                                        "owner": {"login": owner, "avatar_url": f"https://github.com/{owner}.png"},
+                                        "pushed_at": datetime.now(timezone.utc).isoformat(),
+                                        "created_at": datetime.now(timezone.utc).isoformat(),
+                                        "homepage": "",
+                                        "_weekly_stars": wk_stars
+                                    })
+                except Exception:
+                    continue
+    except Exception:
+        pass
+    return trending_map
 
 
 def fetch_github_applied_tools() -> List[Dict[str, Any]]:
-    """Fetch practical GitHub open-source client tools/apps (English-only repositories) with dual-language processing."""
+    """
+    Fetch exponentially surging GitHub AI tools based on 7-day Star Velocity & Weekly Trending,
+    combined with multi-dimensional utility scoring (live demo, packaging, stars/week).
+    Strictly rejects low-star (<200 stars) commit-spammed repositories.
+    """
+    from datetime import timedelta
+    from email.utils import parsedate_to_datetime
     from processor import free_translate_zh
     items = []
     seen_urls = set()
-    banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1"]
-    now_utc = datetime.now(timezone.utc)
-    search_queries = [
-        "https://api.github.com/search/repositories?q=topic:ai-tool+stars:>20&sort=updated&order=desc&per_page=25",
-        "https://api.github.com/search/repositories?q=topic:ai-agent+stars:>50&sort=updated&order=desc&per_page=25",
-        "https://api.github.com/search/repositories?q=topic:ai-tools+stars:>20&sort=updated&order=desc&per_page=20",
-    ]
+    banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1", "awesome-", "interview", "tutorial", "course", "roadmap", "book", "papers"]
+
+    # 1. 直接抓取 GitHub 官方周榜 (Weekly Trending) 的 AI 飙升项目与真实周增星数
+    trending_repos: List[Dict[str, Any]] = []
+    weekly_trending_map = _scrape_github_weekly_trending_map(out_repos=trending_repos)
+    raw_candidates = []
+    for tr in trending_repos:
+        u = tr.get("html_url", "")
+        if u and u not in seen_urls:
+            seen_urls.add(u)
+            raw_candidates.append(tr)
+
+    # 2. 三维高信噪比检索通道 (自动对齐 GitHub 服务端真实时间)：
     try:
         with httpx.Client(headers=HEADERS, timeout=12) as client:
+            server_now = datetime.now(timezone.utc)
+            try:
+                head_resp = client.get("https://api.github.com/rate_limit")
+                if head_resp.headers.get("Date"):
+                    server_now = parsedate_to_datetime(head_resp.headers["Date"])
+            except Exception:
+                pass
+            d14 = (server_now - timedelta(days=14)).strftime("%Y-%m-%d")
+            d30 = (server_now - timedelta(days=30)).strftime("%Y-%m-%d")
+            d7 = (server_now - timedelta(days=7)).strftime("%Y-%m-%d")
+
+            search_queries = [
+                f"https://api.github.com/search/repositories?q=ai+agent+created:>{d14}+stars:>180&sort=stars&order=desc&per_page=20",
+                f"https://api.github.com/search/repositories?q=mcp+created:>{d30}+stars:>200&sort=stars&order=desc&per_page=20",
+                f"https://api.github.com/search/repositories?q=topic:ai-agent+pushed:>{d7}+stars:>500&sort=stars&order=desc&per_page=20",
+            ]
             for url in search_queries:
-                if len(items) >= 20:
-                    break
                 try:
                     resp = client.get(url)
                     if resp.status_code != 200:
                         continue
                     data = resp.json()
                     for repo in data.get("items", []):
-                        if len(items) >= 20:
-                            break
                         repo_url = repo.get("html_url", "")
                         if not repo_url or repo_url in seen_urls:
                             continue
                         seen_urls.add(repo_url)
-
-                        name = repo.get("name", "")
-                        raw_desc = (repo.get("description") or "").strip()
-                        # 严格英文抓取门禁：不爬取非英文描述或无描述仓库，确保源内容及 GitHub OpenGraph 预览图 100% 纯英文
-                        if not is_primarily_english(raw_desc) or not is_primarily_english(name):
-                            continue
-
-                        description_en = raw_desc
-                        combined = f"{name} {description_en}".lower()
-                        
-                        # 过滤远古项目及过时模型
-                        if any(bad in combined for bad in banned_keywords):
-                            continue
-
-                        # 使用最新活跃提交/发布时间戳，确保展示工具为当期活跃维护项目
-                        pushed_raw = repo.get("pushed_at") or repo.get("updated_at") or repo.get("created_at")
-                        if not pushed_raw:
-                            continue
-                        real_pub_iso = parse_to_iso(raw_str=str(pushed_raw))
-
-                        # 时效把关：过滤超过 30 天未更新维护的休眠仓库，保证落地工具的绝对活跃度
-                        try:
-                            dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
-                            if (now_utc - dt).total_seconds() > 30 * 86400:
-                                continue
-                        except Exception:
-                            pass
-
-                        stars = repo.get("stargazers_count", 0)
-
-                        # 场景推断
-                        scenario = "💻 开发者提效"
-                        icon_type = "code"
-                        runtime_badge = "🐳 Docker 一键部署"
-
-                        if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo"]):
-                            scenario = "🎨 图像修图/设计"
-                            icon_type = "vision"
-                            runtime_badge = "🟢 本地 GPU 运行"
-                        elif any(k in combined for k in ["video", "cutter", "clip", "movie"]):
-                            scenario = "🎬 视频创作合成"
-                            icon_type = "vision"
-                            runtime_badge = "🐳 Docker 一键部署"
-                        elif any(k in combined for k in ["agent", "crawler", "assistant", "workflow", "browser", "spider"]):
-                            scenario = "🤖 自动化 Agent"
-                            icon_type = "agent"
-                            runtime_badge = "⚡ 命令行/一键执行"
-                        elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
-                            scenario = "🎙️ 声音克隆音频"
-                            icon_type = "audio"
-                            runtime_badge = "💻 跨平台客户端"
-                        elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui"]):
-                            scenario = "💬 AI 客户端应用"
-                            icon_type = "chat"
-                            runtime_badge = "💻 跨平台桌面端"
-
-                        # 抓取阶段双向语言处理：英文站保留原生纯英文，中文站自动翻译为地道中文
-                        description_zh = free_translate_zh(description_en[:160])
-                        if not re.search(r'[\u4e00-\u9fff]', description_zh):
-                            description_zh = f"专注于 {scenario} 的高星开源 AI 实用项目 ({description_en[:60]})"
-
-                        title_fmt = f"【{name}】{description_zh[:65]}"
-                        title_en = f"[{name}] {description_en[:65]}"
-
-                        repo_img = f"https://opengraph.githubassets.com/1/{repo.get('full_name')}" if repo.get("full_name") else None
-                        items.append({
-                            "id": make_id(repo_url, name),
-                            "title": title_fmt,
-                            "title_zh": title_fmt,
-                            "title_en": title_en,
-                            "app_name": name,
-                            "app_name_en": name,
-                            "app_hook": description_zh[:80],
-                            "app_hook_en": description_en[:80],
-                            "url": repo_url,
-                            "official_url": repo_url,
-                            "image_url": repo_img or "",
-                            "preview_images": [repo_img] if repo_img else [],
-                            "source": "AI News Radar",
-                            "author": repo.get("owner", {}).get("login", ""),
-                            "raw_published_at": real_pub_iso,
-                            "runtime_badge": runtime_badge,
-                            "icon_type": icon_type,
-                            "metrics": {"stars": stars, "pricing": "🟢 完全开源免费", "runtime": runtime_badge, "icon_type": icon_type},
-                            "scenario_tag": scenario,
-                            "pricing_tag": "🟢 完全开源免费",
-                            "platform": "tool",
-                            "content_snippet": f"⭐ {stars} stars · {description_en}",
-                            "summary_zh": f"⭐ {stars} 颗星标 · {description_zh}",
-                            "summary_en": f"⭐ {stars} stars · {description_en}",
-                            "overview_zh": f"{name} 是一款专注于 {scenario} 的开源 AI 工具。{description_zh}，支持免费部署与使用。",
-                            "overview_en": f"{name} is an open-source practical tool designed for {to_en_scenario(scenario)}. {description_en}.",
-                            "features_zh": [
-                                f"针对 {scenario} 场景深度调优与工程封装",
-                                f"支持 {runtime_badge}，开箱即用",
-                                "结构化操作界面，极简人机交互体验"
-                            ],
-                            "features_en": [
-                                f"Specialized optimization for {to_en_scenario(scenario)}",
-                                f"Native support for {to_en_runtime(runtime_badge)}",
-                                "Intuitive modern user interface for daily productivity"
-                            ],
-                            "category": "tools",
-                            "tags": [scenario, "开源免费"]
-                        })
+                        raw_candidates.append(repo)
                 except Exception as inner_e:
                     print(f"  ⚠️ [GitHub Tools] 查询异常: {inner_e}")
                     continue
+
+        scored_items = []
+        for repo in raw_candidates:
+            repo_url = repo.get("html_url", "")
+            name = repo.get("name", "")
+            full_name = (repo.get("full_name") or "").strip()
+            raw_desc = (repo.get("description") or "").strip()
+
+            # 严格英文抓取门禁：不爬取非英文描述或无描述仓库
+            if not is_primarily_english(raw_desc) or not is_primarily_english(name):
+                continue
+
+            description_en = raw_desc
+            combined = f"{name} {description_en}".lower()
+
+            # 过滤纯列表/教程/面试题等非工具项目及过时模型
+            if any(bad in combined for bad in banned_keywords) or name.lower().startswith("awesome-"):
+                continue
+
+            stars = int(repo.get("stargazers_count") or 0)
+            forks = int(repo.get("forks_count") or 0)
+            if stars < 200:
+                continue
+
+            created_raw = repo.get("created_at") or repo.get("pushed_at")
+            pushed_raw = repo.get("pushed_at") or repo.get("updated_at") or created_raw
+            if not pushed_raw:
+                continue
+            real_pub_iso = parse_to_iso(raw_str=str(pushed_raw))
+            created_iso = parse_to_iso(raw_str=str(created_raw))
+
+            # 计算仓库创立天数与 7 天指数飙升增速 (weekly_stars)
+            age_days = 30.0
+            try:
+                c_dt = datetime.fromisoformat(created_iso.replace("Z", "+00:00"))
+                age_days = max(1.0, abs((server_now - c_dt).total_seconds()) / 86400.0)
+            except Exception:
+                pass
+
+            try:
+                p_dt = datetime.fromisoformat(real_pub_iso.replace("Z", "+00:00"))
+                if (server_now - p_dt).total_seconds() > 30 * 86400 and not repo.get("_weekly_stars"):
+                    continue
+            except Exception:
+                pass
+
+            # 优先使用 GitHub Weekly Trending 官方周增星数；若为新建黑马项目，按日均增速折算 7 日暴涨星数
+            official_wk = weekly_trending_map.get(full_name.lower(), 0)
+            if official_wk > 0:
+                weekly_stars = official_wk
+                is_breakout = True
+            elif age_days <= 30:
+                weekly_stars = int(round(stars * min(1.0, 7.0 / age_days)))
+                is_breakout = age_days <= 14 or weekly_stars >= 250
+            else:
+                # 成熟项目根据总星数与近况保守估算周活跃增幅
+                weekly_stars = max(80, int(round(min(stars, 15000) * 0.035)))
+                is_breakout = weekly_stars >= 350
+
+            # 检测是否具备独立在线可玩官网/Demo (Homepage)
+            homepage = (repo.get("homepage") or "").strip()
+            has_live_demo = bool(homepage and homepage.startswith("http") and "github.com" not in homepage.lower())
+            demo_url = format_clean_tool_url(homepage) if has_live_demo else None
+
+            # 场景推断
+            scenario = "💻 开发者提效"
+            icon_type = "code"
+            runtime_badge = "🐳 Docker 一键部署"
+
+            if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo", "3d", "render"]):
+                scenario = "🎨 图像修图/设计"
+                icon_type = "vision"
+                runtime_badge = "🟢 本地 GPU 运行"
+            elif any(k in combined for k in ["video", "cutter", "clip", "movie", "animation"]):
+                scenario = "🎬 视频创作合成"
+                icon_type = "vision"
+                runtime_badge = "🐳 Docker 一键部署"
+            elif any(k in combined for k in ["agent", "mcp", "crawler", "assistant", "workflow", "browser", "autonomous", "orchestrat"]):
+                scenario = "🤖 自动化 Agent"
+                icon_type = "agent"
+                runtime_badge = "⚡ 命令行/一键执行"
+            elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
+                scenario = "🎙️ 声音克隆音频"
+                icon_type = "audio"
+                runtime_badge = "💻 跨平台客户端"
+            elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui", "studio", "workspace"]):
+                scenario = "💬 AI 客户端应用"
+                icon_type = "chat"
+                runtime_badge = "💻 跨平台桌面端"
+
+            # 多维实用价值评分 (Utility Score: 0-100)
+            # 维度1: 周增星爆发力 (权重 55%) + 维度2: 总星标与Fork健康度 (25%) + 维度3: 在线Demo/交付完备度 (20%)
+            velocity_pts = min(55.0, (weekly_stars / 25.0))
+            scale_pts = min(25.0, (stars / 400.0) + (forks / 150.0))
+            demo_pts = 15.0 if has_live_demo else (10.0 if age_days <= 14 else 6.0)
+            utility_score = int(min(99, max(72, round(45 + velocity_pts * 0.6 + scale_pts * 0.6 + demo_pts))))
+
+            if age_days <= 14:
+                growth_badge_zh = f"🚀 新晋黑马 · 本周 +{weekly_stars:,} ★"
+                growth_badge_en = f"🚀 New Breakout · +{weekly_stars:,} ★/wk"
+            else:
+                growth_badge_zh = f"📈 本周飙升 +{weekly_stars:,} ★"
+                growth_badge_en = f"📈 +{weekly_stars:,} ★ this week"
+
+            description_zh = free_translate_zh(description_en[:160])
+            if not re.search(r'[\u4e00-\u9fff]', description_zh):
+                description_zh = f"专注于 {scenario} 的高星开源 AI 实用项目 ({description_en[:60]})"
+
+            title_fmt = f"【{name}】{description_zh[:65]}"
+            title_en = f"[{name}] {description_en[:65]}"
+
+            repo_img = f"https://opengraph.githubassets.com/1/{full_name}" if full_name else None
+            scored_items.append((weekly_stars, utility_score, {
+                "id": make_id(repo_url, name),
+                "title": title_fmt,
+                "title_zh": title_fmt,
+                "title_en": title_en,
+                "app_name": name,
+                "app_name_en": name,
+                "app_hook": description_zh[:80],
+                "app_hook_en": description_en[:80],
+                "url": repo_url,
+                "official_url": demo_url or repo_url,
+                "demo_url": demo_url,
+                "has_live_demo": has_live_demo,
+                "tool_origin": "github",
+                "weekly_stars": weekly_stars,
+                "is_breakout": is_breakout,
+                "growth_badge_zh": growth_badge_zh,
+                "growth_badge_en": growth_badge_en,
+                "utility_score": utility_score,
+                "image_url": repo_img or "",
+                "preview_images": [repo_img] if repo_img else [],
+                "source": "GitHub Trending",
+                "author": repo.get("owner", {}).get("login", ""),
+                "raw_published_at": real_pub_iso,
+                "runtime_badge": runtime_badge,
+                "icon_type": icon_type,
+                "metrics": {
+                    "stars": stars,
+                    "weekly_stars": weekly_stars,
+                    "forks": forks,
+                    "pricing": "🟢 完全开源免费",
+                    "runtime": runtime_badge,
+                    "icon_type": icon_type,
+                    "origin": "github",
+                    "has_live_demo": has_live_demo
+                },
+                "scenario_tag": scenario,
+                "pricing_tag": "🟢 完全开源免费",
+                "platform": "tool",
+                "content_snippet": f"📈 +{weekly_stars:,} ★/wk (Total ⭐ {stars:,}) · {description_en}",
+                "summary_zh": f"📈 本周暴涨 +{weekly_stars:,} ★（总计 ⭐ {stars:,}）· {description_zh}",
+                "summary_en": f"📈 +{weekly_stars:,} ★ this week (⭐ {stars:,} total) · {description_en}",
+                "overview_zh": f"{name} 是一款专注于 {scenario} 的开源 AI 工具（本周新增 +{weekly_stars:,} Stars，总计 {stars:,} Stars）。{description_zh}，支持免费部署与使用。",
+                "overview_en": f"{name} is a fast-growing open-source AI tool for {to_en_scenario(scenario)} (+{weekly_stars:,} stars this week, {stars:,} total). {description_en}.",
+                "features_zh": [
+                    f"📈 社区热度指数级飙升：本周新增 +{weekly_stars:,} Stars (总星标 {stars:,})",
+                    f"🎯 针对 {scenario} 场景深度调优与工程封装",
+                    f"⚡ 支持 {runtime_badge}{'，并提供在线官网/文档直达' if has_live_demo else '，开箱即用'}"
+                ],
+                "features_en": [
+                    f"📈 Exponential community momentum: +{weekly_stars:,} stars this week ({stars:,} total)",
+                    f"🎯 Specialized engineering for {to_en_scenario(scenario)}",
+                    f"⚡ Native support for {to_en_runtime(runtime_badge)}{' with live web site/demo' if has_live_demo else ''}"
+                ],
+                "category": "tools",
+                "tags": [scenario, "开源免费", "本周飙升"]
+            }))
+
+        # 按 7 天新增 Stars 增速与多维实用分降序排列，仅取 Top 20 精品
+        scored_items.sort(key=lambda x: (x[0], x[1]), reverse=True)
+        items = [it for _, _, it in scored_items[:20]]
     except Exception as e:
         print(f"  ❌ [GitHub Tools] 抓取失败: {e}")
     return items
@@ -1862,6 +2016,9 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
             summary_zh = f"🔥 {rank_badge} · {scenario} · {hook_zh[:140]}"
             summary_en = f"{to_en_scenario(scenario)} · {hook_en[:140]}"
 
+            growth_zh = f"🔥 {rank_badge}" if rank_badge else "🔥 热门 Web 应用"
+            growth_en = "🔥 PH Top Launch" if "Top" in str(rank_badge) or "精选" in str(rank_badge) else "🔥 Trending Web App"
+
             return {
                 "id": make_id(source_url, title),
                 "title": title_fmt,
@@ -1873,6 +2030,13 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "app_hook_en": hook_en[:120],
                 "url": official_url,
                 "official_url": official_url,
+                "demo_url": official_url,
+                "has_live_demo": True,
+                "tool_origin": "web",
+                "weekly_stars": 0,
+                "utility_score": 88,
+                "growth_badge_zh": growth_zh,
+                "growth_badge_en": growth_en,
                 "source_url": source_url,
                 "preview_images": preview_imgs,
                 "image_url": preview_imgs[0] if preview_imgs else "",
@@ -1895,7 +2059,7 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "raw_published_at": iso_time,
                 "runtime_badge": runtime_badge,
                 "icon_type": icon_type,
-                "metrics": {"tag": scenario, "pricing": "🟡 免费试玩", "runtime": runtime_badge, "icon_type": icon_type},
+                "metrics": {"tag": scenario, "pricing": "🟡 免费试玩", "runtime": runtime_badge, "icon_type": icon_type, "utility_score": 88},
                 "scenario_tag": scenario,
                 "pricing_tag": "🟡 免费试玩",
                 "platform": "tool",

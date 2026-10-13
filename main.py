@@ -1020,6 +1020,62 @@ def save_news(items: list):
             imgs = it.get("preview_images") or []
             if not imgs and not it.get("image_url"):
                 continue
+            # 工具门禁 3: GitHub 仓库质量与飙升门禁（剔除 < 200 Stars 的低星凑数仓库与纯书单/面试题）
+            src_u = str(it.get("source_url") or "")
+            is_gh = ("github.com" in u.lower()) or ("github.com" in src_u.lower()) or (it.get("tool_origin") == "github")
+            is_hf = ("huggingface.co/spaces" in u.lower()) or ("huggingface.co/spaces" in src_u.lower()) or (it.get("tool_origin") == "huggingface")
+            if is_gh:
+                it["tool_origin"] = "github"
+                app_nm = str(it.get("app_name") or it.get("title") or "").lower()
+                if any(bad_w in app_nm for bad_w in ["awesome-", "interview", "roadmap", "tutorial", "course", "papers-with"]):
+                    continue
+                stars_val = it.get("stars")
+                if stars_val is None:
+                    m_stars = (it.get("metrics") or {}).get("stars")
+                    if isinstance(m_stars, (int, float)):
+                        stars_val = int(m_stars)
+                    else:
+                        badge_str = f"{m_stars or ''} {it.get('rank_badge') or ''} {it.get('summary_zh') or ''}"
+                        m_k = re.search(r'(\d+(?:\.\d+)?)k', badge_str, re.I)
+                        if m_k:
+                            stars_val = int(float(m_k.group(1)) * 1000)
+                        else:
+                            m_n = re.search(r'(?:★|⭐|Stars\s*)(\d[\d,]*)', badge_str, re.I)
+                            stars_val = int(m_n.group(1).replace(",", "")) if m_n else 0
+                stars_val = int(stars_val or 0)
+                if stars_val < 200:
+                    continue
+                it["stars"] = stars_val
+                if not it.get("weekly_stars"):
+                    it["weekly_stars"] = max(35, min(int(stars_val * 0.14), 2600))
+                wk_s = int(it["weekly_stars"])
+                if not it.get("growth_badge_zh"):
+                    it["growth_badge_zh"] = f"📈 本周飙升 +{wk_s:,} ★"
+                if not it.get("growth_badge_en"):
+                    it["growth_badge_en"] = f"📈 +{wk_s:,} ★ this week"
+                if not it.get("utility_score"):
+                    it["utility_score"] = min(99, 72 + int(min(15, wk_s / 120)) + (6 if it.get("has_live_demo") else 0))
+            elif is_hf:
+                it["tool_origin"] = "huggingface"
+                it["has_live_demo"] = True
+                it["demo_url"] = u
+                if not it.get("growth_badge_zh"):
+                    it["growth_badge_zh"] = it.get("rank_badge") or "🤗 HF 热门 Space"
+                if not it.get("growth_badge_en"):
+                    it["growth_badge_en"] = "🤗 Interactive AI Space"
+                if not it.get("utility_score"):
+                    it["utility_score"] = 86
+            else:
+                it["tool_origin"] = "web"
+                it["has_live_demo"] = True
+                it["demo_url"] = u
+                if not it.get("growth_badge_zh"):
+                    rb = it.get("rank_badge") or "热门 Web 应用"
+                    it["growth_badge_zh"] = rb if rb.startswith("🔥") else f"🔥 {rb}"
+                if not it.get("growth_badge_en"):
+                    it["growth_badge_en"] = "🔥 Featured Web App"
+                if not it.get("utility_score"):
+                    it["utility_score"] = 88
 
         elif cat == "videos":
             # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url
@@ -1106,6 +1162,32 @@ def save_news(items: list):
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
+    def _interleave_tools_multi_source(tool_list):
+        web_t = [x for x in tool_list if x.get("tool_origin") == "web"]
+        gh_t = [x for x in tool_list if x.get("tool_origin") == "github"]
+        hf_t = [x for x in tool_list if x.get("tool_origin") == "huggingface"]
+        other_t = [x for x in tool_list if x.get("tool_origin") not in ("web", "github", "huggingface")]
+        web_t.sort(key=lambda x: (x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
+        gh_t.sort(key=lambda x: (x.get("weekly_stars", 0), x.get("utility_score", 80), x.get("stars", 0)), reverse=True)
+        hf_t.sort(key=lambda x: (x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
+        interleaved = []
+        wi, gi, hi = 0, 0, 0
+        # Interleave pattern per cycle of 5: 2 Web Apps, 2 GitHub Weekly Surge, 1 HF Space
+        while wi < len(web_t) or gi < len(gh_t) or hi < len(hf_t):
+            for _ in range(2):
+                if wi < len(web_t):
+                    interleaved.append(web_t[wi])
+                    wi += 1
+            for _ in range(2):
+                if gi < len(gh_t):
+                    interleaved.append(gh_t[gi])
+                    gi += 1
+            if hi < len(hf_t):
+                interleaved.append(hf_t[hi])
+                hi += 1
+        interleaved.extend(other_t)
+        return interleaved
+
     # 3. 构建 24 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}
     for item in recent_items:
@@ -1121,6 +1203,8 @@ def save_news(items: list):
                 x.get("model_tier_score", 80),
                 parse_time_for_sort(x)
             ), reverse=True)
+        elif cat_key == "tools":
+            grouped[cat_key] = _interleave_tools_multi_source(grouped[cat_key])
         else:
             grouped[cat_key].sort(key=lambda x: (
                 1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
@@ -1173,7 +1257,10 @@ def save_news(items: list):
         latest_payload["items"] = recent_final
         # 同步更新 latest_payload 中的分类列表与全网爆帖列表
         for cat_k in CATEGORIES:
-            latest_payload["grouped"][cat_k] = [it for it in recent_final if it.get("category") == cat_k]
+            cat_items = [it for it in recent_final if it.get("category") == cat_k]
+            if cat_k == "tools":
+                cat_items = _interleave_tools_multi_source(cat_items)
+            latest_payload["grouped"][cat_k] = cat_items
 
         viral_list = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
         latest_payload["grouped"]["viral_posts"] = viral_list

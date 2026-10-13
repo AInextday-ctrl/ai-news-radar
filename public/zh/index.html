@@ -1647,15 +1647,34 @@ Open Haus Berlin阵容：
           </div>
         </div>
 
-        <!-- 工具专用的场景快速筛选过滤器 -->
-        <div id="tools-subfilter" class="hidden flex items-center gap-2 flex-wrap p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ 工具场景:</span>
-          <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">全部工具</button>
-          <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 免部署在线玩</button>
-          <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 修图设计</button>
-          <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 编程提效</button>
-          <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI客户端</button>
-          <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent工作流</button>
+        <!-- 工具专用的多维价值评估与场景快速筛选器 -->
+        <div id="tools-subfilter" class="hidden space-y-2.5 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <!-- 第一行：核心衡量维度 (多源精选 / 7天指数飙升 / 免装Web应用 / HF在线Space) -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <span id="tool-dim-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">📊 发现维度:</span>
+            <button onclick="filterToolOrigin('all')" id="tool-origin-all" class="tool-origin-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0 flex items-center space-x-1">
+              <span>⚡</span><span id="txt-tool-origin-all">综合多源精选</span>
+            </button>
+            <button onclick="filterToolOrigin('github')" id="tool-origin-github" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1">
+              <span>📈</span><span id="txt-tool-origin-github">本周指数飙升 (GitHub)</span>
+            </button>
+            <button onclick="filterToolOrigin('web')" id="tool-origin-web" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1">
+              <span>🌐</span><span id="txt-tool-origin-web">免装 Web 应用</span>
+            </button>
+            <button onclick="filterToolOrigin('huggingface')" id="tool-origin-huggingface" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1">
+              <span>🤗</span><span id="txt-tool-origin-hf">在线试玩 Space</span>
+            </button>
+          </div>
+          <!-- 第二行：细分业务场景 -->
+          <div class="flex items-center gap-1.5 flex-wrap pt-2 border-t border-slate-100 dark:border-slate-800">
+            <span id="tool-scen-label" class="text-xs font-medium text-slate-400 shrink-0 px-1">🛠️ 业务场景:</span>
+            <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white whitespace-nowrap shrink-0">全部工具</button>
+            <button onclick="filterToolScenario('免部署')" id="tool-filter-web" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 免部署在线玩</button>
+            <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 修图设计</button>
+            <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 编程提效</button>
+            <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI客户端</button>
+            <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent工作流</button>
+          </div>
         </div>
 
         <!-- 视频专属快速筛选器 -->
@@ -3734,6 +3753,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const tfAgent = document.getElementById('tool-filter-agent');
       if (tfAgent) tfAgent.textContent = t.toolFilterAgent;
 
+      const tDimLbl = document.getElementById('tool-dim-label');
+      if (tDimLbl) tDimLbl.textContent = lang === 'zh' ? '📊 发现维度:' : '📊 Dimension:';
+      const tScenLbl = document.getElementById('tool-scen-label');
+      if (tScenLbl) tScenLbl.textContent = lang === 'zh' ? '🛠️ 业务场景:' : '🛠️ Scenario:';
+      const toAll = document.getElementById('txt-tool-origin-all');
+      if (toAll) toAll.textContent = lang === 'zh' ? '综合多源精选' : 'All Curated';
+      const toGh = document.getElementById('txt-tool-origin-github');
+      if (toGh) toGh.textContent = lang === 'zh' ? '本周指数飙升 (GitHub)' : 'Weekly Star Surge (GitHub)';
+      const toWeb = document.getElementById('txt-tool-origin-web');
+      if (toWeb) toWeb.textContent = lang === 'zh' ? '免装 Web 应用' : 'Web Apps (No-Install)';
+      const toHf = document.getElementById('txt-tool-origin-hf');
+      if (toHf) toHf.textContent = lang === 'zh' ? '在线试玩 Space' : 'Live Spaces (HF)';
+
       // 广告位双语占位文本更新
       const elAlt = document.getElementById('ad-left-title');
       if (elAlt) elAlt.textContent = t.adLeftTitle || (lang === 'zh' ? 'AI 品牌展示' : 'AI Brand Space');
@@ -4452,6 +4484,30 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           b.className = (scenKey === toolScenarioFilter || scenKey === scenario)
             ? "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white"
             : "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700";
+        }
+      });
+      if (currentTab === 'tools') {
+        renderCategoryView('tools');
+      }
+    }
+
+    let toolOriginFilter = 'all';
+
+    // 工具发现维度与来源筛选 (all / github / web / huggingface)
+    function filterToolOrigin(origin) {
+      toolOriginFilter = origin || 'all';
+      const originBtns = {
+        'all': 'tool-origin-all',
+        'github': 'tool-origin-github',
+        'web': 'tool-origin-web',
+        'huggingface': 'tool-origin-huggingface'
+      };
+      Object.entries(originBtns).forEach(([k, id]) => {
+        const b = document.getElementById(id);
+        if (b) {
+          b.className = (k === toolOriginFilter)
+            ? "tool-origin-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0 flex items-center space-x-1"
+            : "tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1";
         }
       });
       if (currentTab === 'tools') {
@@ -5648,14 +5704,49 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const cleanSource = item.source || (isZh ? "AI 资讯雷达" : "AI News Radar");
       const officialUrl = formatCleanToolUrl(item.official_url || item.url || "#", item);
       const transitUrl = formatTransitGoUrl(officialUrl, item);
-      let rankBadge = (item.rank_badge || "🔥 热门推荐")
-        .replace(/\s*·\s*Product\s*Hunt/gi, '')
-        .replace(/Product\s*Hunt\s*热门精选/gi, '热门推荐')
-        .replace(/Product\s*Hunt\s*/gi, '')
-        .replace(/\s*·\s*GitHub/gi, '')
-        .replace(/GitHub\s*/gi, '')
-        .trim();
-      if (!rankBadge || rankBadge === '🔥') rankBadge = (currentLang === 'zh') ? "🔥 热门推荐" : "🔥 Popular";
+
+      // 多维价值评估徽章体系 (优先展示 7天指数飙升 / 在线免装形态)
+      const toolOrigin = item.tool_origin || (String(item.url || '').includes('github.com/') ? 'github' : (String(item.url || '').includes('huggingface.co/spaces') ? 'huggingface' : 'web'));
+      const starsCount = Number(item.stars || 0);
+      const weeklyStars = Number(item.weekly_stars || 0);
+      const hasLiveDemo = Boolean(item.has_live_demo || toolOrigin === 'web' || toolOrigin === 'huggingface');
+
+      let rankBadge = isZh
+        ? (item.growth_badge_zh || item.rank_badge || "🔥 热门精选")
+        : (item.growth_badge_en || item.rank_badge || "🔥 Featured");
+      if (!item.growth_badge_zh && !item.growth_badge_en) {
+        rankBadge = rankBadge
+          .replace(/\s*·\s*Product\s*Hunt/gi, '')
+          .replace(/Product\s*Hunt\s*热门精选/gi, isZh ? '热门精选' : 'Featured')
+          .replace(/Product\s*Hunt\s*/gi, '')
+          .replace(/\s*·\s*GitHub/gi, '')
+          .replace(/GitHub\s*/gi, '')
+          .trim();
+        if (!rankBadge || rankBadge === '🔥') rankBadge = isZh ? "🔥 热门精选" : "🔥 Featured";
+      }
+
+      // 形态与来源小胶囊
+      let originPill = "";
+      if (toolOrigin === 'github') {
+        const starFmt = starsCount >= 1000 ? `${(starsCount / 1000).toFixed(1)}k` : (starsCount > 0 ? String(starsCount) : '');
+        originPill = starFmt ? `📦 GitHub · ★ ${starFmt}` : `📦 GitHub`;
+      } else if (toolOrigin === 'huggingface') {
+        originPill = isZh ? `🤗 HF 在线试玩` : `🤗 HF Space`;
+      } else {
+        originPill = isZh ? `🌐 免装 Web 应用` : `🌐 Web App`;
+      }
+
+      // 行动按钮文案按真实交付形态区分
+      let ctaText = isZh ? '🚀 访问官网' : '🚀 Visit Site';
+      if (toolOrigin === 'github') {
+        if (hasLiveDemo && item.demo_url && !String(item.demo_url).includes('github.com/')) {
+          ctaText = isZh ? '🚀 在线体验' : '🚀 Live Demo';
+        } else {
+          ctaText = isZh ? '📦 GitHub 仓库' : '📦 GitHub Repo';
+        }
+      } else if (toolOrigin === 'huggingface') {
+        ctaText = isZh ? '🤗 在线试玩' : '🤗 Try Space';
+      }
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
       let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
@@ -5695,9 +5786,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
             </div>
 
-            <!-- 悬浮排名/热度徽章 -->
+            <!-- 悬浮 7天飙升/热度 徽章 -->
             <div class="absolute top-2.5 right-2.5">
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-slate-900/85 backdrop-blur-md text-amber-300 border border-amber-500/30 shadow-sm">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono ${weeklyStars >= 500 ? 'bg-emerald-950/90 text-emerald-300 border-emerald-400/50' : 'bg-slate-900/85 text-amber-300 border-amber-500/30'} backdrop-blur-md border shadow-sm">
                 ${escapeHtml(rankBadge)}
               </span>
             </div>
@@ -5709,7 +5800,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 业务赛道与时间 -->
               <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1">
                 <span class="font-semibold text-emerald-600 dark:text-emerald-400">${escapeHtml(scenario)}</span>
-                <span class="font-mono text-[10px]" title="${timeObj.display}">🕒 ${timeObj.relative || '今日'}</span>
+                <span class="font-mono text-[10px]" title="${timeObj.display}">🕒 ${timeObj.relative || (isZh ? '今日' : 'Today')}</span>
               </div>
 
               <!-- 核心看点与功能定位 -->
@@ -5723,9 +5814,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </p>
             </div>
 
-            <!-- 运行与部署方式标签 -->
+            <!-- 多维交付形态与来源标签 -->
             <div class="flex items-center space-x-1.5 flex-wrap gap-1 pt-1">
+              <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/90 text-slate-700 dark:text-slate-300 font-mono border border-slate-200 dark:border-slate-700">${escapeHtml(originPill)}</span>
               <span class="text-[9px] px-2 py-0.5 rounded-md bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono border border-emerald-200 dark:border-emerald-500/20">${escapeHtml(runtimeBadge)}</span>
+              ${hasLiveDemo && toolOrigin === 'github' ? `<span class="text-[9px] px-1.5 py-0.5 rounded-md bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-mono border border-sky-200 dark:border-sky-500/20">🚀 Live Demo</span>` : ''}
             </div>
           </div>
 
@@ -5735,7 +5828,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span>${isZh ? '🔍 详情与截图' : '🔍 Details & Specs'}</span>
             </button>
             <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
-              <span>${isZh ? '🚀 访问官网' : '🚀 Visit Site'}</span>
+              <span>${escapeHtml(ctaText)}</span>
               <span>↗</span>
             </a>
           </div>
@@ -6518,9 +6611,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
       }
 
-      // C. 落地工具板块 (Tools) - 首页仅精选 Top 3 实用神器
-      const recentTools = allTools.filter(it => isWithin24Hours(it.raw_published_at));
-      const displayTools = recentTools.length >= 2 ? recentTools.slice(0, 3) : allTools.slice(0, 3);
+      // C. 落地工具板块 (Tools) - 首页精选 Top 3 多源高势能神器 (直接采用多源混排队列前3)
+      const displayTools = dedupToolItems(allTools).slice(0, 3);
       const streamTools = document.getElementById('stream-tools');
       if (streamTools) {
         streamTools.innerHTML = displayTools.length > 0
@@ -6821,8 +6913,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       } else if (tab === 'tools') {
         let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || []));
+        // 1. 先过滤掉任何历史残留的 < 200 stars GitHub 凑数仓库
+        list = list.filter(it => {
+          const orig = it.tool_origin || (String(it.url || '').includes('github.com/') ? 'github' : (String(it.url || '').includes('huggingface.co/spaces') ? 'huggingface' : 'web'));
+          if (orig === 'github' && Number(it.stars || 0) > 0 && Number(it.stars || 0) < 200) return false;
+          return true;
+        });
+        // 2. 发现维度过滤 (综合多源精选 / 本周指数飙升 GitHub / 免装 Web 应用 / HF 在线试玩)
+        if (toolOriginFilter && toolOriginFilter !== 'all') {
+          list = list.filter(it => {
+            const orig = it.tool_origin || (String(it.url || '').includes('github.com/') ? 'github' : (String(it.url || '').includes('huggingface.co/spaces') ? 'huggingface' : 'web'));
+            return orig === toolOriginFilter;
+          });
+          if (toolOriginFilter === 'github') {
+            // 在 GitHub 飙升维度下，严格按 7天新增星数 (weekly_stars) 与综合实用分降序排列
+            list.sort((a, b) => (Number(b.weekly_stars || 0) - Number(a.weekly_stars || 0)) || (Number(b.utility_score || 0) - Number(a.utility_score || 0)) || (Number(b.stars || 0) - Number(a.stars || 0)));
+          }
+        }
+        // 3. 业务场景过滤
         if (toolScenarioFilter !== 'all') {
-          list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
+          list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter) || (it.runtime_badge || '').includes(toolScenarioFilter));
         }
         container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
         container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;
@@ -8497,14 +8607,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (titleEl) titleEl.textContent = appName;
       if (rankBadgeEl) {
-        let rankText = (item.rank_badge || (isZh ? '🔥 热门推荐' : '🔥 Popular'))
-          .replace(/\s*·\s*Product\s*Hunt/gi, '')
-          .replace(/Product\s*Hunt\s*热门精选/gi, isZh ? '热门推荐' : 'Popular')
-          .replace(/Product\s*Hunt\s*/gi, '')
-          .replace(/\s*·\s*GitHub/gi, '')
-          .replace(/GitHub\s*/gi, '')
-          .trim();
-        if (!rankText || rankText === '🔥') rankText = isZh ? '🔥 热门推荐' : '🔥 Popular';
+        let rankText = isZh
+          ? (item.growth_badge_zh || item.rank_badge || '🔥 热门精选')
+          : (item.growth_badge_en || item.rank_badge || '🔥 Featured');
+        if (!item.growth_badge_zh && !item.growth_badge_en) {
+          rankText = rankText
+            .replace(/\s*·\s*Product\s*Hunt/gi, '')
+            .replace(/Product\s*Hunt\s*热门精选/gi, isZh ? '热门精选' : 'Featured')
+            .replace(/Product\s*Hunt\s*/gi, '')
+            .replace(/\s*·\s*GitHub/gi, '')
+            .replace(/GitHub\s*/gi, '')
+            .trim();
+          if (!rankText || rankText === '🔥') rankText = isZh ? '🔥 热门精选' : '🔥 Featured';
+        }
         rankBadgeEl.textContent = rankText;
       }
       if (scenarioEl) scenarioEl.textContent = translateScenarioTag(item.scenario_tag, currentLang);
@@ -8521,7 +8636,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         officialBtnEl.href = formatTransitGoUrl(officialUrl, item);
         officialBtnEl.setAttribute('rel', 'nofollow noopener noreferrer');
       }
-      if (visitTextEl) visitTextEl.textContent = isZh ? '🚀 访问官网' : '🚀 Visit Website';
+      if (visitTextEl) {
+        const modalOrigin = item.tool_origin || (String(item.url || '').includes('github.com/') ? 'github' : (String(item.url || '').includes('huggingface.co/spaces') ? 'huggingface' : 'web'));
+        if (modalOrigin === 'github') {
+          visitTextEl.textContent = isZh ? '📦 访问 GitHub 仓库' : '📦 View GitHub Repo';
+        } else if (modalOrigin === 'huggingface') {
+          visitTextEl.textContent = isZh ? '🤗 在线试玩 Space' : '🤗 Try HF Space';
+        } else {
+          visitTextEl.textContent = isZh ? '🚀 访问产品官网' : '🚀 Visit Website';
+        }
+      }
       if (hookEl) hookEl.textContent = hook;
 
       if (overviewEl) overviewEl.textContent = overviewText;
