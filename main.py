@@ -1021,9 +1021,13 @@ def save_news(items: list):
             if not imgs and not it.get("image_url"):
                 continue
             # 工具门禁 3: GitHub 仓库质量与飙升门禁（剔除 < 200 Stars 的低星凑数仓库与纯书单/面试题）
+            from fetcher import classify_tool_daily_scenario, BAD_TOOL_REPO_NAMES
             src_u = str(it.get("source_url") or "")
             is_gh = ("github.com" in u.lower()) or ("github.com" in src_u.lower()) or (it.get("tool_origin") == "github")
             is_hf = ("huggingface.co/spaces" in u.lower()) or ("huggingface.co/spaces" in src_u.lower()) or (it.get("tool_origin") == "huggingface")
+            clean_app_nm = str(it.get("app_name") or "").strip().lower()
+            if clean_app_nm in BAD_TOOL_REPO_NAMES:
+                continue
             if is_gh:
                 it["tool_origin"] = "github"
                 app_nm = str(it.get("app_name") or it.get("title") or "").lower()
@@ -1076,6 +1080,18 @@ def save_news(items: list):
                     it["growth_badge_en"] = "🔥 Featured Web App"
                 if not it.get("utility_score"):
                     it["utility_score"] = 88
+
+            # 统一将每个工具归入 12 大用户日常应用场景标签
+            scen_tag, ic_type, rt_badge = classify_tool_daily_scenario(
+                str(it.get("app_name") or ""),
+                f"{it.get('title_en') or it.get('title') or ''} {it.get('overview_en') or it.get('summary_en') or it.get('app_hook_en') or ''}",
+                f"{it.get('title_zh') or ''} {it.get('app_hook') or ''} {it.get('summary_zh') or ''}",
+                origin=it.get("tool_origin", "github")
+            )
+            it["scenario_tag"] = scen_tag
+            it["icon_type"] = ic_type
+            if not it.get("runtime_badge"):
+                it["runtime_badge"] = rt_badge
 
         elif cat == "videos":
             # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url

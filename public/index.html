@@ -1665,14 +1665,21 @@ good food, drinks, and better arguments about evals, inside a glowing digital ar
             <button onclick="filterToolOrigin('web')" id="tool-origin-web" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5">🌐 Web Apps (Zero-Install)</button>
             <button onclick="filterToolOrigin('huggingface')" id="tool-origin-huggingface" class="tool-origin-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center space-x-1.5">🤗 Live Spaces</button>
           </div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span id="tool-scenario-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ Scenarios:</span>
-            <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0">All Tools</button>
-            <button onclick="filterToolScenario('web')" id="tool-filter-web" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🟢 Cloud / Online</button>
-            <button onclick="filterToolScenario('design')" id="tool-filter-design" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🎨 Design & Vision</button>
-            <button onclick="filterToolScenario('code')" id="tool-filter-code" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💻 Coding & Dev</button>
-            <button onclick="filterToolScenario('client')" id="tool-filter-client" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">💬 AI Clients</button>
-            <button onclick="filterToolScenario('agent')" id="tool-filter-agent" class="tool-filter-btn px-3 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🤖 Agent Workflows</button>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span id="tool-scenario-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🛠️ Daily Scenarios:</span>
+            <button onclick="filterToolScenario('all')" id="tool-filter-all" class="tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-all">All Scenarios</span><span id="tool-cnt-all" class="text-[10px] font-mono opacity-85 px-1 rounded bg-black/15 dark:bg-white/15"></span></button>
+            <button onclick="filterToolScenario('编程')" id="tool-filter-code" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-code">💻 AI Coding & Dev</span><span id="tool-cnt-code" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('客户端')" id="tool-filter-client" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-client">💬 AI Clients & Assistants</span><span id="tool-cnt-client" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('智能体')" id="tool-filter-agent" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-agent">🤖 Multi-Agent Workflow</span><span id="tool-cnt-agent" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('知识库')" id="tool-filter-knowledge" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-knowledge">🧠 Knowledge & Research</span><span id="tool-cnt-knowledge" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('浏览器')" id="tool-filter-browser" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-browser">🌐 Web Search & Browser</span><span id="tool-cnt-browser" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('写作')" id="tool-filter-writing" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-writing">✍️ Writing, Copy & Growth</span><span id="tool-cnt-writing" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('金融')" id="tool-filter-life" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-life">💼 Finance, Career & Life</span><span id="tool-cnt-life" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('图像')" id="tool-filter-design" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-design">🎨 Image, Design & 3D</span><span id="tool-cnt-design" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('办公')" id="tool-filter-office" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-office">📊 Office, Docs & PPT</span><span id="tool-cnt-office" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('视频')" id="tool-filter-video" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-video">🎬 Video Editing & Gen</span><span id="tool-cnt-video" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('模型')" id="tool-filter-infra" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-infra">🔌 Model API & Sandbox</span><span id="tool-cnt-infra" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
+            <button onclick="filterToolScenario('音频')" id="tool-filter-audio" class="tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1"><span id="tool-lbl-audio">🎙️ Voice, Speech & Audio</span><span id="tool-cnt-audio" class="text-[10px] font-mono opacity-75 px-1 rounded bg-slate-200/80 dark:bg-slate-700/80"></span></button>
           </div>
         </div>
 
@@ -2801,28 +2808,37 @@ good food, drinks, and better arguments about evals, inside a glowing digital ar
       return rawTitleZh || rawTitle;
     }
     function translateScenarioTag(scenario, lang = 'en') {
-      if (!scenario) return lang === 'zh' ? '🤖 实用 AI 工具' : '🤖 Applied AI Tool';
+      if (!scenario) return lang === 'zh' ? '💻 AI 编程与开发' : '💻 AI Coding & Dev';
       const s = String(scenario);
       if (lang === 'zh') {
-        if (/图像|设计|修图|image|design|photo/i.test(s)) return '🎨 图像与设计';
-        if (/编程|开发|提效|coding|dev|code/i.test(s)) return '💻 编程开发提效';
-        if (/客户端|应用|chat|client|app/i.test(s)) return '💬 AI 客户端';
-        if (/自动化|智能体|agent|工作流|workflow/i.test(s)) return '🤖 AI 智能体工作流';
-        if (/声音|音频|语音|voice|audio|sound|tts/i.test(s)) return '🎙️ 声音与音频';
-        if (/视频|video/i.test(s)) return '🎬 视频创作';
-        if (/写作|知识库|writing|notes|note/i.test(s)) return '✍️ 写作与笔记';
+        if (/办公|文档|表格|ppt|slide|spreadsheet|excel|pdf|office/i.test(s)) return '📊 办公文档与 PPT';
+        if (/视频|剪辑|动漫|短剧|字幕|video|film|subtitle/i.test(s)) return '🎬 视频剪辑与生成';
+        if (/语音|声音|音频|音乐|配音|播客|voice|audio|speech|tts|asr/i.test(s)) return '🎙️ 语音对话与音频';
+        if (/图像|设计|修图|绘画|3d|建模|画板|image|design|photo|canvas/i.test(s)) return '🎨 图像设计与 3D';
+        if (/联网|搜索|浏览器|网页|爬虫|search|browser|crawl|scrape/i.test(s)) return '🌐 联网搜索与浏览器';
+        if (/知识库|记忆|笔记|论文|学术|文献|翻译|knowledge|memory|research|rag/i.test(s)) return '🧠 知识库与学术研究';
+        if (/金融|量化|交易|股票|求职|简历|面试|健康|医疗|看盘|finance|trading|career|life/i.test(s)) return '💼 金融看盘·求职与生活';
+        if (/写作|小说|文案|剧本|社媒|营销|内容创作|writing|copy|marketing|growth/i.test(s)) return '✍️ 写作创作与营销';
+        if (/编程|代码|开发|终端|调试|测试|coding|dev|code/i.test(s)) return '💻 AI 编程与开发';
+        if (/桌面助手|客户端|聊天|工作台|client|assistant|desktop/i.test(s)) return '💬 AI 桌面助手与客户端';
+        if (/网关|路由|推理|算力|沙箱|微调|模型|本地部署|model|api|sandbox|gateway/i.test(s)) return '🔌 模型 API 与本地部署';
+        if (/智能体|工作流|多智能体|编排|自动化|agent|workflow/i.test(s)) return '🤖 智能体工作流编排';
         if (hasChineseText(s)) return s;
-        return '🤖 实用 AI 工具';
+        return '💻 AI 编程与开发';
       } else {
-        if (/自动化|智能体|agent/i.test(s)) return '🤖 Autonomous Agent';
-        if (/工作流|workflow/i.test(s)) return '🤖 Agent & Workflow';
-        if (/图像|设计|修图|image|design|photo/i.test(s)) return '🎨 Image Design & Edit';
-        if (/编程|开发|提效|coding|dev|code/i.test(s)) return '💻 Coding & Dev Tool';
-        if (/客户端|应用|chat|client|app/i.test(s)) return '💬 AI Client App';
-        if (/声音|音频|语音|voice|audio|tts/i.test(s)) return '🎙️ Voice & Audio';
-        if (/视频|video/i.test(s)) return '🎬 Video Creation';
-        if (/写作|知识库|writing|note/i.test(s)) return '✍️ Writing & Notes';
-        return '🤖 Applied AI Tool';
+        if (/办公|文档|表格|ppt|slide|spreadsheet|excel|pdf|office/i.test(s)) return '📊 Office, Docs & PPT';
+        if (/视频|剪辑|动漫|短剧|字幕|video|film|subtitle/i.test(s)) return '🎬 Video Editing & Gen';
+        if (/语音|声音|音频|音乐|配音|播客|voice|audio|speech|tts|asr/i.test(s)) return '🎙️ Voice, Speech & Audio';
+        if (/图像|设计|修图|绘画|3d|建模|画板|image|design|photo|canvas/i.test(s)) return '🎨 Image, Design & 3D';
+        if (/联网|搜索|浏览器|网页|爬虫|search|browser|crawl|scrape/i.test(s)) return '🌐 Web Search & Browser';
+        if (/知识库|记忆|笔记|论文|学术|文献|翻译|knowledge|memory|research|rag/i.test(s)) return '🧠 Knowledge & Research';
+        if (/金融|量化|交易|股票|求职|简历|面试|健康|医疗|看盘|finance|trading|career|life/i.test(s)) return '💼 Finance, Career & Life';
+        if (/写作|小说|文案|剧本|社媒|营销|内容创作|writing|copy|marketing|growth/i.test(s)) return '✍️ Writing, Copy & Growth';
+        if (/编程|代码|开发|终端|调试|测试|coding|dev|code/i.test(s)) return '💻 AI Coding & Dev';
+        if (/桌面助手|客户端|聊天|工作台|client|assistant|desktop/i.test(s)) return '💬 AI Clients & Assistants';
+        if (/网关|路由|推理|算力|沙箱|微调|模型|本地部署|model|api|sandbox|gateway/i.test(s)) return '🔌 Model API & Sandbox';
+        if (/智能体|工作流|多智能体|编排|自动化|agent|workflow/i.test(s)) return '🤖 Multi-Agent Workflow';
+        return '💻 AI Coding & Dev';
       }
     }
 
@@ -3742,7 +3758,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const toLabel = document.getElementById('tool-origin-label');
       if (toLabel) toLabel.textContent = (lang === 'zh') ? '🧭 价值维度:' : '🧭 Dimension:';
       const tsLabel = document.getElementById('tool-scenario-label');
-      if (tsLabel) tsLabel.textContent = (lang === 'zh') ? '🛠️ 业务场景:' : '🛠️ Scenarios:';
+      if (tsLabel) tsLabel.textContent = (lang === 'zh') ? '🛠️ 日常场景:' : '🛠️ Daily Scenarios:';
       const toAll = document.getElementById('tool-origin-all');
       if (toAll) toAll.textContent = (lang === 'zh') ? '⚡ 综合多源精选' : '⚡ All Curated';
       const toGh = document.getElementById('tool-origin-github');
@@ -3752,18 +3768,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const toHf = document.getElementById('tool-origin-huggingface');
       if (toHf) toHf.textContent = (lang === 'zh') ? '🤗 在线试玩 Space' : '🤗 Live Spaces';
 
-      const tfAll = document.getElementById('tool-filter-all');
-      if (tfAll) tfAll.textContent = t.toolFilterAll;
-      const tfWeb = document.getElementById('tool-filter-web');
-      if (tfWeb) tfWeb.textContent = t.toolFilterWeb;
-      const tfDesign = document.getElementById('tool-filter-design');
-      if (tfDesign) tfDesign.textContent = t.toolFilterDesign;
-      const tfCode = document.getElementById('tool-filter-code');
-      if (tfCode) tfCode.textContent = t.toolFilterCode;
-      const tfClient = document.getElementById('tool-filter-client');
-      if (tfClient) tfClient.textContent = t.toolFilterClient;
-      const tfAgent = document.getElementById('tool-filter-agent');
-      if (tfAgent) tfAgent.textContent = t.toolFilterAgent;
+      const scenLabels = {
+        'tool-lbl-all': (lang === 'zh') ? '全部场景' : 'All Scenarios',
+        'tool-lbl-code': (lang === 'zh') ? '💻 AI 编程与开发' : '💻 AI Coding & Dev',
+        'tool-lbl-client': (lang === 'zh') ? '💬 桌面助手与客户端' : '💬 AI Clients & Assistants',
+        'tool-lbl-agent': (lang === 'zh') ? '🤖 智能体工作流' : '🤖 Multi-Agent Workflow',
+        'tool-lbl-knowledge': (lang === 'zh') ? '🧠 知识库与学术研究' : '🧠 Knowledge & Research',
+        'tool-lbl-browser': (lang === 'zh') ? '🌐 联网搜索与浏览器' : '🌐 Web Search & Browser',
+        'tool-lbl-writing': (lang === 'zh') ? '✍️ 写作创作与营销' : '✍️ Writing, Copy & Growth',
+        'tool-lbl-life': (lang === 'zh') ? '💼 金融·求职与生活' : '💼 Finance, Career & Life',
+        'tool-lbl-design': (lang === 'zh') ? '🎨 图像设计与 3D' : '🎨 Image, Design & 3D',
+        'tool-lbl-office': (lang === 'zh') ? '📊 办公文档与 PPT' : '📊 Office, Docs & PPT',
+        'tool-lbl-video': (lang === 'zh') ? '🎬 视频剪辑与生成' : '🎬 Video Editing & Gen',
+        'tool-lbl-infra': (lang === 'zh') ? '🔌 模型 API 与部署' : '🔌 Model API & Sandbox',
+        'tool-lbl-audio': (lang === 'zh') ? '🎙️ 语音对话与音频' : '🎙️ Voice, Speech & Audio'
+      };
+      Object.entries(scenLabels).forEach(([id, txt]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = txt;
+      });
 
       // 广告位双语占位文本更新
       const elAlt = document.getElementById('ad-left-title');
@@ -4478,35 +4501,93 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 工具场景筛选
-    function filterToolScenario(scenario) {
-      const alias = {
-        'web': '免部署',
-        'design': '图像',
-        'code': '编程',
-        'client': '客户端',
-        'agent': '智能体'
+    function normalizeToolScenarioKey(raw) {
+      if (!raw || raw === 'all') return 'all';
+      const s = String(raw);
+      if (/办公|文档|表格|ppt|slide|spreadsheet|excel|pdf|office/i.test(s)) return '办公';
+      if (/视频|剪辑|动漫|短剧|字幕|video|film|subtitle/i.test(s)) return '视频';
+      if (/语音|声音|音频|音乐|配音|播客|voice|audio|speech|tts|asr/i.test(s)) return '音频';
+      if (/图像|设计|修图|绘画|3d|建模|画板|image|design|photo|canvas/i.test(s)) return '图像';
+      if (/联网|搜索|浏览器|网页|爬虫|search|browser|crawl|scrape/i.test(s)) return '浏览器';
+      if (/知识库|记忆|笔记|论文|学术|文献|翻译|knowledge|memory|research|rag/i.test(s)) return '知识库';
+      if (/金融|量化|交易|股票|求职|简历|面试|健康|医疗|看盘|finance|trading|career|life/i.test(s)) return '金融';
+      if (/写作|小说|文案|剧本|社媒|营销|内容创作|writing|copy|marketing|growth/i.test(s)) return '写作';
+      if (/编程|代码|开发|终端|调试|测试|coding|dev|code/i.test(s)) return '编程';
+      if (/桌面助手|客户端|聊天|工作台|client|assistant|desktop/i.test(s)) return '客户端';
+      if (/网关|路由|推理|算力|沙箱|微调|模型|本地部署|model|api|sandbox|gateway|infra/i.test(s)) return '模型';
+      if (/智能体|工作流|多智能体|编排|自动化|agent|workflow/i.test(s)) return '智能体';
+      return '编程';
+    }
+
+    function updateToolScenarioCounts(baseList) {
+      if (!Array.isArray(baseList)) return;
+      const counts = {
+        'all': baseList.length,
+        '编程': 0,
+        '客户端': 0,
+        '智能体': 0,
+        '知识库': 0,
+        '浏览器': 0,
+        '写作': 0,
+        '金融': 0,
+        '图像': 0,
+        '办公': 0,
+        '视频': 0,
+        '模型': 0,
+        '音频': 0
       };
-      toolScenarioFilter = alias[scenario] || scenario;
+      baseList.forEach(it => {
+        const k = normalizeToolScenarioKey(it.scenario_tag || '');
+        if (counts[k] !== undefined) counts[k]++;
+      });
+      const cntMap = {
+        'all': 'tool-cnt-all',
+        '编程': 'tool-cnt-code',
+        '客户端': 'tool-cnt-client',
+        '智能体': 'tool-cnt-agent',
+        '知识库': 'tool-cnt-knowledge',
+        '浏览器': 'tool-cnt-browser',
+        '写作': 'tool-cnt-writing',
+        '金融': 'tool-cnt-life',
+        '图像': 'tool-cnt-design',
+        '办公': 'tool-cnt-office',
+        '视频': 'tool-cnt-video',
+        '模型': 'tool-cnt-infra',
+        '音频': 'tool-cnt-audio'
+      };
+      Object.entries(cntMap).forEach(([k, elId]) => {
+        const el = document.getElementById(elId);
+        if (el) {
+          el.textContent = counts[k] || 0;
+        }
+      });
+    }
+
+    // 工具场景筛选 (覆盖12大真实日常场景)
+    function filterToolScenario(scenario) {
+      toolScenarioFilter = normalizeToolScenarioKey(scenario);
       const btnMap = {
         'all': 'tool-filter-all',
-        '免部署': 'tool-filter-web',
-        '图像': 'tool-filter-design',
         '编程': 'tool-filter-code',
         '客户端': 'tool-filter-client',
         '智能体': 'tool-filter-agent',
-        'web': 'tool-filter-web',
-        'design': 'tool-filter-design',
-        'code': 'tool-filter-code',
-        'client': 'tool-filter-client',
-        'agent': 'tool-filter-agent'
+        '知识库': 'tool-filter-knowledge',
+        '浏览器': 'tool-filter-browser',
+        '写作': 'tool-filter-writing',
+        '金融': 'tool-filter-life',
+        '图像': 'tool-filter-design',
+        '办公': 'tool-filter-office',
+        '视频': 'tool-filter-video',
+        '模型': 'tool-filter-infra',
+        '音频': 'tool-filter-audio'
       };
       Object.entries(btnMap).forEach(([scenKey, btnId]) => {
         const b = document.getElementById(btnId);
         if (b) {
-          b.className = (scenKey === toolScenarioFilter || scenKey === scenario)
-            ? "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-medium bg-emerald-600 text-white"
-            : "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700";
+          const isActive = (scenKey === toolScenarioFilter);
+          b.className = isActive
+            ? "tool-filter-btn active px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm whitespace-nowrap shrink-0 flex items-center gap-1 transition-all"
+            : "tool-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1 transition-all";
         }
       });
       if (currentTab === 'tools') {
@@ -5796,7 +5877,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div>
               <!-- 业务赛道与时间 -->
               <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1">
-                <span class="font-semibold text-emerald-600 dark:text-emerald-400">${escapeHtml(scenario)}</span>
+                <span onclick="event.stopPropagation(); if(currentTab!=='tools') switchTab('tools'); filterToolScenario('${escapeHtml(item.scenario_tag || '')}');" class="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer px-1.5 py-0.5 -ml-1.5 rounded-md hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition-colors" title="${isZh ? '点击筛选该日常应用场景' : 'Click to filter by this daily scenario'}">${escapeHtml(scenario)}</span>
                 <span class="font-mono text-[10px]" title="${timeObj.display}">🕒 ${timeObj.relative || (isZh ? '今日' : 'Today')}</span>
               </div>
 
@@ -6951,8 +7032,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
           list = mixed;
         }
-        if (toolScenarioFilter !== 'all') {
-          list = list.filter(it => (it.scenario_tag || '').includes(toolScenarioFilter) || (it.title || '').includes(toolScenarioFilter) || (it.pricing_tag || '').includes(toolScenarioFilter));
+        updateToolScenarioCounts(list);
+        if (toolScenarioFilter && toolScenarioFilter !== 'all') {
+          list = list.filter(it => normalizeToolScenarioKey(it.scenario_tag || '') === toolScenarioFilter || (it.scenario_tag || '').includes(toolScenarioFilter));
         }
         container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
         container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;

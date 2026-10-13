@@ -1448,6 +1448,88 @@ def _scrape_github_weekly_trending_map(out_repos: Optional[List[Dict[str, Any]]]
     return trending_map
 
 
+BAD_TOOL_REPO_NAMES = {
+    "opengym", "openaver", "anything_about_game", "claude-code-guide",
+    "agent-design-patterns", "best-of-agent-harnesses", "makemoneywithai",
+    "red", "kubeterm", "cryptocurrency.cv", "labtether", "peakhour 6", "the sentient world"
+}
+
+
+def classify_tool_daily_scenario(name: str, desc_en: str = "", desc_zh: str = "", origin: str = "github") -> Tuple[str, str, str]:
+    """
+    将每个 GitHub 项目与 Web/HF 工具精准归类到符合用户日常真实应用场景的 12 大标签体系：
+    1. 💻 AI 编程与开发 (AI Coding & Dev)
+    2. 📊 办公文档与 PPT (Office, Docs & PPT)
+    3. 🧠 知识库与学术研究 (Knowledge & Research)
+    4. 🌐 联网搜索与浏览器 (Web Search & Browser)
+    5. 🎬 视频剪辑与生成 (Video Editing & Gen)
+    6. 🎨 图像设计与 3D (Image, Design & 3D)
+    7. 🎙️ 语音对话与音频 (Voice, Speech & Audio)
+    8. ✍️ 写作创作与营销 (Writing, Copy & Growth)
+    9. 💼 金融看盘·求职与生活 (Finance, Career & Life)
+    10. 💬 AI 桌面助手与客户端 (AI Clients & Assistants)
+    11. 🔌 模型 API 与本地部署 (Model API & Sandbox)
+    12. 🤖 智能体工作流编排 (Multi-Agent Workflow)
+    返回 (scenario_tag, icon_type, runtime_badge)
+    """
+    name_l = str(name or "").strip().lower()
+    raw = f"{name_l} {str(desc_en or '').lower()} {str(desc_zh or '').lower()}"
+    default_runtime = "🟡 在线免安装试玩" if origin == "web" else ("🟢 WebGPU 浏览器直跑" if origin == "huggingface" else "⚡ 命令行/一键执行")
+
+    # 1. 📊 办公文档与 PPT (Office, Docs, PPT, Slides, Excel, PDF, Meeting notes, Email assistant, Project Mgmt)
+    if re.search(r'\b(ppt|powerpoint|presentation|slide|slides|slides_maker|oh-my-ppt|ppt-master|presenton|genoffice|wzrd|kition|staycharted|deck|decks|spreadsheet|sheets|excel|docx|office\s+suite|meeting\s+assistant|meeting\s+notes|meetnote|voicecap|jottoo|cluely|plugnmeet|video\s+conferencing|forms\s+and\s+sheets|mailyte|slashy|does\s+email\s+for\s+you|doneit|paca|jira|trello|clickup|okou)\b|演示文稿|幻灯片|办公套件|会议助手|会议纪要|转写纪要|表格处理|邮件助手', raw):
+        rt = "💻 跨平台桌面端" if origin == "github" and ("desktop" in raw or "app" in raw) else default_runtime
+        return ("📊 办公文档与 PPT", "chat", rt)
+
+    # 2. 🎬 视频剪辑与生成 (Video editing, film, CapCut, animation, short drama, render video, screen recorder)
+    if re.search(r'\b(video|videos|capcut|opencut|easycut|film|movie|montage|openmontage|dramaclaw|fablecut|hyperframes|render\s+video|short\s+drama|sora|veo|animation|subtitle|videoflow|nomi|video\s+workbench|keet|video\s+courses|slurp|s-roll|zella|clueso|narrative|viggle)\b|视频剪辑|视频生成|短剧|漫剧|影视|成片|字幕', raw) and not re.search(r'read\s+&\s+search.*youtube', raw):
+        rt = "🐳 Docker 一键部署" if origin == "github" else default_runtime
+        return ("🎬 视频剪辑与生成", "vision", rt)
+
+    # 3. 🎙️ 语音对话与音频 (Voice, TTS, ASR, Speech, Music, Audio, Podcast, Dictation, Voicemail)
+    if re.search(r'\b(tts|text-to-speech|speech-to-text|asr|voice\s+clon|voice-first|voice\s+assistant|voicemail|dictation|push-to-talk|practice\s+speaking|audio\s+model|gemini\s+audio|stilltalk|photo\s+that\s+talks|switch\s+between\s+voice|audio\s+gen|music\s+gen|podcast|whisper|kokoro|cosyvoice|f5-tts|fish-speech|acestep|suno|udio|ava-pro|hola\s+ai|blurt|reeno)\b|声音克隆|语音合成|实时语音|播客生成|音频处理|配音|语音输入|口语练习', raw):
+        rt = "💻 跨平台客户端" if origin == "github" else default_runtime
+        return ("🎙️ 语音对话与音频", "audio", rt)
+
+    # 4. 🎨 图像设计与 3D (Image, Design, 3D, CAD, Shader, Canvas, ComfyUI, SVG, UI design, ASCII art)
+    if re.search(r'\b(image\s+gen|image\s+edit|qwen-image|krea|bfs-best-face-swap|face-swap|diffusion|flux|comfyui|midjourney|photoshop|upscal|background\s+remov|3d|cad|solidcraft|solidworks|text-to-cad|shader|shaders|vgpu|webgpu\s+library|webgpu\s+component|canvas|visual\s+generation|ima2-gen|pixelcrew|omadesign|creative\s+suite|image\s+to\s+ascii|ascii\s+art|floani|visual\s+stories|figma|ui\s+design|icon|logo\s+gen|universal-modder|ai-canvas|google\s+flow|creative\s+studio|forma\s+by\s+caid|laya-demo|chessfly|milliseconds\.ai)\b|图像生成|修图|海报设计|3d建模|工程制图|视觉画布', raw):
+        rt = "🟢 本地 GPU 运行" if origin == "github" else default_runtime
+        return ("🎨 图像设计与 3D", "vision", rt)
+
+    # 5. 🌐 联网搜索与浏览器 (Browser automation, Web scraping, Search, Playwright, Computer Use, OSINT)
+    if re.search(r'\b(headless\s+browser|browser\s+agent|browser\s+harness|browser\s+driver|browser\s+extension|browser-native|ai-native\s+browser|rill\s+browser|playwright|puppeteer|scraper|scraping|crawl|crawler|agent-reach|see\s+the\s+entire\s+internet|x-twitter-scraper|xactions|osint|dark\s+web|computer-use|computer\s+use|use\s+computers|agent\s+interface|zerosphere|own\s+display|semwright|structured\s+access\s+to\s+real\s+software|clawdcursor|screen\s+into\s+one\s+ui|operate.*phone|physiclaw|esp32-iphone|moli|bladebro|webbrain|peerd|frontman|dots|sai|autonomous\s+computer\s+fleet)\b|无头浏览器|网页抓取|爬虫|全网搜索|浏览器自动化|操控手机|屏幕接管', raw):
+        return ("🌐 联网搜索与浏览器", "agent", default_runtime)
+
+    # 6. 🧠 知识库与学术研究 (Knowledge base, Second brain, Memory, RAG, Deep Research, Science, Paper, Zotero)
+    if re.search(r'\b(knowledge\s+base|knowledge\s+workspace|knowledge\s+management|knowledge\s+system|knowledge-work|second\s+brain|evernote|obsidian|siyuan|edgeever|noteworthy|ai-notes|thoughts\s+for\s+mac|capture\s+notes|thread|ai\s+journal|marqly|bookmarks|lokalbot|gbrain|zotero|deep-research|deep\s+research|research\s+agent|research\s+workbench|research-report|industry-research|scientific\s+research|evoscientist|feynman|open-science|wisp-science|persistent\s+context|claude-mem|memory\s+layer|shared\s+memory|long-term\s+memory|scoped\s+memory|remnic|scope-recall|valori|resumecontext|opyt|bkmr|ebook\s+reader|read-aware|learning\s+workbench|deep-student|agent-me|distilly|skillalchemy|noan|punch|mateclaw|gencode)\b|知识库|第二大脑|双链笔记|长期记忆|深度研究|科研工作台|学术论文|文献管理', raw):
+        rt = "🐳 Docker 一键部署" if origin == "github" else default_runtime
+        return ("🧠 知识库与学术研究", "chat", rt)
+
+    # 7. 💼 金融看盘·求职与生活 (Trading, Stock, Crypto, Finance, Job search, Resume, Recruiting, Travel, Support, Smart Home)
+    if re.search(r'\b(trading|trade|stock|stocks|a-shares|crypto|wallet|usdc|credit\s+risk|pricing\s+models|chargebee|negotiation\s+agent|software\s+purchases|applyseed|raise\s+your\s+seed|minicart|launch\s+your\s+store|duvi|panwatch|vibe-trading|dsh-trading|marvis-risk|franklin|job\s+search|job\s+finder|job\s+application|sourcing\s+employee|recruiting|amy\s+by\s+jellyfish|ari\s+by\s+ariso|career-ops|boss\s+zhipin|boss-agent|jobsync|resume|flight|hotel\s+search|letsfg|customer\s+support|customer\s+service|buyer\s+messages|productbridge|support\s+agent|helpdesk|libredesk|agent-desk|koreshield|hire\s+ai\s+employees|staff\s+ai|home\s+assistant|smart\s+home|family\s+in\s+sync|lastbox)\b|量化交易|股票盯盘|行情监控|求职助手|简历投递|机票酒店|智能客服|智能家居|电商运营', raw):
+        return ("💼 金融看盘·求职与生活", "agent", default_runtime)
+
+    # 8. ✍️ 写作创作与营销 (Novel, Story, Copywriting, Translation, SEO, Marketing, Sales, GTM, Leads, Social Media)
+    if re.search(r'\b(story\s+creation|storytailor|novel\s+writing|write.*novel|script\s+writing|inkos|vela|oh-story|copywriting|seo|seobuild|niubigeo|chinamarketing|geo\s+workspace|ai\s+visibility|verity\s+score|polishory|jevtown|simple\s+commenter|postsider|social\s+media\s+scheduling|morsa\s+signals|ami\s+ai|getting\s+customers|creative\s+insights|predict\s+which\s+ad|zeroclick|sell\s+your\s+product|unfetch|manage\s+your\s+ads|convo|people\s+who\s+sell|extrovert|finds\s+prospects|banger|fuse\s+ai|cosmic|headless\s+cms|ai\s+cmo|okara|email\s+marketing|xem|tonebird|reply\s+assistant|freebuff\s+ads|marketing|sales\s+&\s+marketing|find\s+leads|business-leads|gtm\s+agent|oneshot-gtm|claude-ops|linguo\s+translate|translator|answer-me-with-html|jev\s+wrapped)\b|小说创作|剧本创作|文案生成|营销获客|seo优化|社媒运营|翻译工具', raw):
+        return ("✍️ 写作创作与营销", "chat", default_runtime)
+
+    # 9. 💻 AI 编程与开发 (Coding agent, IDE, Claude Code, Codex, Cursor, Terminal coding, Dev, Pentesting, SQL, Git, QA)
+    if re.search(r'\b(coding\s+agent|coding\s+agents|coding\s+platform|code\s+agent|claude\s+code|codex|cursor|opencode|qwen-code|deepseek-reasonix|codewhale|alphacode|codealta|dscode|agentty|autoloom|jcode|monkeycode|oh-my-pi|ralph-claude-code|copilotkit|repobrain|graphmind|static\s+analysis|gograph|pentesting|penetration\s+testing|cain-agent|xalgorix|pull\s+request|pull\s+requests|codecrab|review.*git\s+branches|brnch|code\s+hosting|awakado|harness\s+manager|appto|ios\s+app\s+factory|embeddinggemma|contextsbase|prowler\s+cloud|cloud\s+security|vibedefend|secures\s+the\s+code|edgee|bitrise|remote\s+dev|qagent|automated\s+qa|2ba\.ai|start\s+shipping|die\s+with\s+me|appwrite|arcjet|kodro|buddy\s+ai\s+access|no_human|ships\s+your\s+tickets|pilot|software\s+factory|orbi|flock|dev-team|sql\s+workspace|tabularis|whodb|elasticsearch|dockit|chmonitor|clickhouse|uniterm|proxmox|zabbix|aish|ctrlops|codespotlight|pheebs|ai\s+class\s+by\s+kanary|m9r|plane\s+agents|skills\s+for\s+real\s+engineers|\.agents\s+directory|cursor\s+plugin|wmux|clay|percho|pi-app|zot|monet|govctl|agent-deck|moai-adk|easy-agent|zero|hax|piclaw|pig|phi|mu|pi-agent-desktop|claw-orchestrator|oh-my-hermes|neo|adminforth|spring-ai|ternary-bonsai|fullstack\s+web\s+application|kirocrew)\b|编程助手|代码生成|vibe\s*coding|代码审查|安全渗透|数据库管理|终端开发', raw):
+        return ("💻 AI 编程与开发", "code", default_runtime)
+
+    # 10. 💬 AI 桌面助手与客户端 (Desktop client, Personal assistant, iOS/Android/macOS/Windows app, Chat UI, Companion)
+    if re.search(r'\b(cherry-studio|personal\s+ai\s+assistant|personal\s+assistant|personal\s+ai\s+agent|personal\s+agent|desktop\s+companion|desktop\s+app|desktop\s+workspace|desktop\s+client|private\s+cloud\s+desktop|ruos|proto-mind|floating\s+ai\s+workspace|sider\s+omni\s+sidebar|agent\s+sidebar|brev|ai\s+coworker|unvendor|shared\s+ui|gametomac|text\s+agent\s+store|mela|macos\s+app|ios\s+client|ipados|android.*agent|openclaw-android|eac-desktop|telegram.*assistant|leon|qwenpaw|open-cowork|openworkbuddy|hermes-desktop|hermes-conduit|hermes-relay|floe-agent|dorabot|iva-agent|skales|octop|ekko-studio|invisible_dots|open-dots|nextclaw|amadeus|free4chat|dsh_desktop|dsh-desktop|pi-desktop|deepseek-harness-local-android|ari\s+helper|chat\s+with\s+local|arc\s+puts\s+ai|minimi|nanomuse|talorys|agenvoy|lexora|cindy|kun|bitterbot|pinvou-agent|sutando|cortico|persona\s+bot|googlebook|pi-pocket|codex-rehome|dsh-plugin-subscriptions|epismo|surface\s+laptop)\b|桌面客户端|个人助手|私人助理|多模型聊天|跨平台客户端', raw):
+        rt = "💻 跨平台桌面端" if origin == "github" else default_runtime
+        return ("💬 AI 桌面助手与客户端", "chat", rt)
+
+    # 11. 🔌 模型 API 与本地部署 (Free LLM API, Model router, Sandbox, MicroVM, Local models, Governance)
+    if re.search(r'\b(freellmapi|free\s+llm\s+providers|llm\s+router|model\s+router|bitrouter|zerg\s+router|liquid\s+inference|aster\s+by\s+asterwise|sandbox|opensandbox|e2b|boxlite|micro-vm|microvms|jurniti|firecracker|heretic|censorship\s+removal|atomic-agent|open-weight\s+models|late-cli|local\s+models|node9-proxy|access\s+control|clawmetry|observability|agentscore|opencontroller|kasetto|mantle|mimo-v2|jev-27b|jev-9b|model-pulse|jev-reproductions|jev-decision|openai\s+agents\s+api)\b|模型路由|免费api|安全沙盒|本地部署|模型推理', raw):
+        return ("🔌 模型 API 与本地部署", "code", default_runtime)
+
+    # 12. 🤖 智能体工作流编排 (Multi-agent orchestration, Workflow automation, MCP pipelines)
+    return ("🤖 智能体工作流编排", "agent", default_runtime)
+
+
 def fetch_github_applied_tools() -> List[Dict[str, Any]]:
     """
     Fetch exponentially surging GitHub AI tools based on 7-day Star Velocity & Weekly Trending,
@@ -1460,6 +1542,10 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
     items = []
     seen_urls = set()
     banned_keywords = ["flux", "dalle-mini", "illusiondiffusion", "latent-consistency", "sd-webui", "stable-diffusion-v1", "awesome-", "interview", "tutorial", "course", "roadmap", "book", "papers"]
+    ai_relevance_re = re.compile(
+        r'\b(ai|llm|llms|gpt|claude|gemini|deepseek|qwen|openai|anthropic|agent|agents|agentic|mcp|rag|prompt|diffusion|vlm|tts|asr|whisper|voice|copilot|codex|cursor|comfyui|webgpu|ollama|vllm|gguf|lora|embedding|neural|model|models|chat|assistant|automation|autonomous|skill|skills|harness|aigc)\b',
+        re.I
+    )
 
     # 1. 直接抓取 GitHub 官方周榜 (Weekly Trending) 的 AI 飙升项目与真实周增星数
     trending_repos: List[Dict[str, Any]] = []
@@ -1513,6 +1599,9 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
             full_name = (repo.get("full_name") or "").strip()
             raw_desc = (repo.get("description") or "").strip()
 
+            if name.lower().strip() in BAD_TOOL_REPO_NAMES:
+                continue
+
             # 严格英文抓取门禁：不爬取非英文描述或无描述仓库
             if not is_primarily_english(raw_desc) or not is_primarily_english(name):
                 continue
@@ -1520,7 +1609,9 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
             description_en = raw_desc
             combined = f"{name} {description_en}".lower()
 
-            # 过滤纯列表/教程/面试题等非工具项目及过时模型
+            # 过滤非 AI 通用仓库、纯列表/教程/面试题等非工具项目及过时模型
+            if not ai_relevance_re.search(combined):
+                continue
             if any(bad in combined for bad in banned_keywords) or name.lower().startswith("awesome-"):
                 continue
 
@@ -1569,31 +1660,8 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
             has_live_demo = bool(homepage and homepage.startswith("http") and "github.com" not in homepage.lower())
             demo_url = format_clean_tool_url(homepage) if has_live_demo else None
 
-            # 场景推断
-            scenario = "💻 开发者提效"
-            icon_type = "code"
-            runtime_badge = "🐳 Docker 一键部署"
-
-            if any(k in combined for k in ["image", "paint", "diffusion", "comfyui", "draw", "photo", "3d", "render"]):
-                scenario = "🎨 图像修图/设计"
-                icon_type = "vision"
-                runtime_badge = "🟢 本地 GPU 运行"
-            elif any(k in combined for k in ["video", "cutter", "clip", "movie", "animation"]):
-                scenario = "🎬 视频创作合成"
-                icon_type = "vision"
-                runtime_badge = "🐳 Docker 一键部署"
-            elif any(k in combined for k in ["agent", "mcp", "crawler", "assistant", "workflow", "browser", "autonomous", "orchestrat"]):
-                scenario = "🤖 自动化 Agent"
-                icon_type = "agent"
-                runtime_badge = "⚡ 命令行/一键执行"
-            elif any(k in combined for k in ["voice", "audio", "tts", "speech", "sound"]):
-                scenario = "🎙️ 声音克隆音频"
-                icon_type = "audio"
-                runtime_badge = "💻 跨平台客户端"
-            elif any(k in combined for k in ["chat", "client", "desktop", "ui", "webui", "studio", "workspace"]):
-                scenario = "💬 AI 客户端应用"
-                icon_type = "chat"
-                runtime_badge = "💻 跨平台桌面端"
+            # 12大用户日常场景精准推断
+            scenario, icon_type, runtime_badge = classify_tool_daily_scenario(name, description_en, "", origin="github")
 
             # 多维实用价值评分 (Utility Score: 0-100)
             # 维度1: 周增星爆发力 (权重 55%) + 维度2: 总星标与Fork健康度 (25%) + 维度3: 在线Demo/交付完备度 (20%)
@@ -1866,22 +1934,30 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
 
 def to_en_scenario(s: str) -> str:
     s = s or ""
-    if any(k in s for k in ['自动化', 'Agent', '智能体']):
-        return "Autonomous Agents & Workflows"
-    if '工作流' in s:
-        return "AI Workflows & Orchestration"
-    if any(k in s for k in ['图像', '设计', '修图']):
-        return "Image Design & Generation"
-    if any(k in s for k in ['编程', '开发', '提效']):
-        return "Coding & Developer Productivity"
-    if any(k in s for k in ['客户端', '应用', 'chat']):
-        return "AI Client Applications"
-    if any(k in s for k in ['声音', '音频', '语音']):
-        return "Voice & Audio Processing"
-    if '视频' in s:
-        return "Video Creation & Synthesis"
-    if any(k in s for k in ['写作', '知识库']):
-        return "Writing & Knowledge Bases"
+    if any(k in s for k in ['办公', '文档', 'PPT', '表格', '会议']):
+        return "Office, Docs & Slides"
+    if any(k in s for k in ['视频', '剪辑', '短剧']):
+        return "Video Editing & Generation"
+    if any(k in s for k in ['声音', '音频', '语音', '对话']):
+        return "Voice, Speech & Audio"
+    if any(k in s for k in ['图像', '设计', '修图', '3D']):
+        return "Image, Design & 3D/CAD"
+    if any(k in s for k in ['联网', '搜索', '浏览器', '爬虫']):
+        return "Web Search & Browser Automation"
+    if any(k in s for k in ['知识库', '学术', '研究', '记忆', '笔记']):
+        return "Knowledge Base & Deep Research"
+    if any(k in s for k in ['金融', '看盘', '求职', '生活', '商业']):
+        return "Finance, Career & Daily Life"
+    if any(k in s for k in ['写作', '创作', '营销', '文案']):
+        return "Writing, Copy & Marketing"
+    if any(k in s for k in ['编程', '开发', '提效', '代码']):
+        return "AI Coding & Developer Tools"
+    if any(k in s for k in ['桌面', '客户端', '助手', '应用', 'chat']):
+        return "AI Desktop Clients & Assistants"
+    if any(k in s for k in ['模型', 'API', '部署', '沙盒']):
+        return "LLM API, Sandbox & Local Run"
+    if any(k in s for k in ['自动化', 'Agent', '智能体', '工作流']):
+        return "Multi-Agent Workflows"
     return "Applied AI Workflows"
 
 
@@ -1941,36 +2017,12 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
             outbound_url = outbound_match.group(1) if outbound_match else entry.get("link", "")
             source_url = entry.get("link", "")
 
-            scenario = "🤖 智能体/工作流"
-            icon_type = "agent"
-            runtime_badge = "🟡 在线免安装试玩"
-
-            if any(k in combined for k in ["image", "photo", "pic", "design", "art", "paint"]):
-                scenario = "🎨 图像修图/设计"
-                icon_type = "vision"
-                runtime_badge = "🟡 在线免安装试玩"
-            elif any(k in combined for k in ["video", "clip", "movie", "reel"]):
-                scenario = "🎬 视频创作合成"
-                icon_type = "vision"
-                runtime_badge = "🟡 在线免安装试玩"
-            elif any(k in combined for k in ["code", "dev", "programming", "terminal"]):
-                scenario = "💻 编程开发提效"
-                icon_type = "code"
-                runtime_badge = "💻 跨平台插件/工具"
-            elif any(k in combined for k in ["write", "doc", "email", "office", "note"]):
-                scenario = "✍️ 写作办公知识库"
-                icon_type = "chat"
-                runtime_badge = "🟡 在线免安装试玩"
-            elif any(k in combined for k in ["audio", "voice", "speech", "sound", "clone"]):
-                scenario = "🎙️ 声音克隆音频"
-                icon_type = "audio"
-                runtime_badge = "🔑 自备 API Key"
-
             published = entry.get("published", "")
             iso_time = parse_to_iso(getattr(entry, "published_parsed", None), published)
 
             app_name = title.split(':')[0].strip()
             hook = title.split(':')[1].strip() if ':' in title else clean_summary[:50]
+            scenario, icon_type, runtime_badge = classify_tool_daily_scenario(app_name, f"{title} {clean_summary}", "", origin="web")
 
             ph_details = scrape_product_hunt_details(source_url)
             official_url = None
