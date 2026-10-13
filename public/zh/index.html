@@ -5902,8 +5902,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <!-- 全球 AI 社交雷达 · 动态声呐扫描画布容器 (Light & Dark 双主题自适应) -->
-        <div class="radar-scanner-container relative max-w-6xl mx-auto my-3 p-3 sm:p-5 sm:rounded-3xl bg-slate-900/40 dark:bg-[#070b19]/80 border border-sky-400/30 dark:border-sky-500/30 shadow-2xl shadow-sky-500/10 backdrop-blur-xl">
+        <!-- 全球 AI 社交雷达 · 动态声呐扫描画布容器 (对齐页眉全宽设计) -->
+        <div class="radar-scanner-container relative w-full mx-auto my-3 p-3 sm:p-5 sm:rounded-3xl bg-slate-900/40 dark:bg-[#070b19]/80 border border-sky-400/30 dark:border-sky-500/30 shadow-2xl shadow-sky-500/10 backdrop-blur-xl">
           <!-- 动态雷达极坐标扫描网格 (背景旋转光束与同心圆距标) -->
           <div class="radar-scan-canvas">
             <div class="radar-crosshair-x"></div>
@@ -5960,8 +5960,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
 
-            <!-- 自适应雷达双列态势流 (Adaptive Radar Grid) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-5 relative">
+            <!-- 自适应雷达 3 列态势流 (Adaptive Radar Grid: 1/2/3 列，展示更多信息，降低翻页) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 relative">
               ${uniqueList.map(item => renderCelebrityCard(item)).join('')}
             </div>
           </div>
@@ -7828,7 +7828,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (!item) return;
 
       const analysis = item.ai_analysis || {};
-      const rawTitle = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '资讯概要';
+      let rawTitle = '';
+      if (isZh) {
+        rawTitle = (item.title_zh && /[\u4e00-\u9fa5]/.test(item.title_zh)) ? item.title_zh : (item.title || '资讯概要');
+      } else {
+        rawTitle = (item.title_en && !/[\u4e00-\u9fa5]/.test(item.title_en)) ? item.title_en : (item.title || 'News Briefing');
+        if (/[\u4e00-\u9fa5]/.test(rawTitle) && item.title_en) {
+          rawTitle = item.title_en;
+        }
+      }
       
       // 深度清洗标题杂质 (彻底滤除开头的 "消息来源:" / "Sources:" / "据报道" / 记者署名 / 尾部外媒括号)
       const cleanTitle = rawTitle
@@ -7845,13 +7853,43 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const source = item.source || (isZh ? '官方快讯' : 'Official News');
       const timeObj = formatTime(item.raw_published_at, currentLang);
 
-      // 1. 核心简报段落 (Briefing / Summary)
-      let rawBriefing = isZh
-        ? (analysis.briefing_zh || analysis.digest_zh || item.summary_zh || item.content_snippet || cleanTitle)
-        : (analysis.briefing_en || item.summary_en || analysis.digest_en || item.content_snippet || cleanTitle);
+      // 1. 核心简报段落 (Briefing / Summary) - 严格语言隔离，严防中英杂交
+      let rawBriefing = '';
+      if (isZh) {
+        // 中文模式：优先使用高品质中文简报与中文摘要，严格过滤纯英文
+        const zhCandidates = [
+          analysis.briefing_zh,
+          item.summary_zh,
+          analysis.digest_zh,
+          item.content_snippet_zh
+        ];
+        const validZh = zhCandidates.find(c => c && typeof c === 'string' && /[\u4e00-\u9fa5]/.test(c) && c.trim().length > 10);
+        rawBriefing = validZh || cleanTitle;
+      } else {
+        // 英文模式：严格过滤任何中文字符，优先使用原版英文摘要与原版英文简报
+        const enCandidates = [
+          item.summary_en,
+          item.content_snippet,
+          analysis.briefing_en,
+          analysis.digest_en,
+          item.title_en
+        ];
+        const validEn = enCandidates.find(c => {
+          if (!c || typeof c !== 'string') return false;
+          const s = c.trim();
+          if (s.length < 10) return false;
+          if (/[\u4e00-\u9fa5]/.test(s)) return false; // 严禁含中文字符
+          if (s.includes('Executive Briefing: In ') || s.includes('Context: ')) return false; // 严禁残留旧模板
+          return true;
+        });
+        rawBriefing = validEn || cleanTitle;
+      }
 
       // 清洗简报段落杂质，过滤搜索引擎聚合器噪音与机械模板废话，保证自然通畅真实
-      const briefingText = String(rawBriefing)
+      let briefingText = String(rawBriefing)
+        .replace(/^Executive Briefing:\s*(?:In [^,]+,\s*)?[^:]*advanced a key development:\s*/i, '')
+        .replace(/^Executive Briefing:\s*/i, '')
+        .replace(/^Context:\s*/i, '')
         .replace(/^(?:消息来源|消息称|知情人士称|知情人士透露|知情人透露|据知情人士|据知情人|据外媒|据报道|外媒称|外媒报道|传|报道称|Sources?|Report|Reports?|Exclusive)[：:，,\s]+/i, '')
         .replace(/消息来源[：:]\s*/g, '')
         .replace(/正式推进关键动向[：:]\s*/g, '')
@@ -7867,6 +7905,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         .replace(/([。！？；，、])\1+/g, '$1')
         .trim();
 
+      // 英文模式终极防护：如果处理后的文本仍意外混入了汉字，坚决回退到纯英文标题
+      if (!isZh && /[\u4e00-\u9fa5]/.test(briefingText)) {
+        briefingText = (item.title_en && !/[\u4e00-\u9fa5]/.test(item.title_en)) ? item.title_en : cleanTitle;
+      }
+
       // 2. AI 点评 (仅当存在高价值针对性深度分析时保留；模板化/对不上/无有效分析时坚决隐藏，杜绝硬套话)
       let insightText = isZh
         ? (analysis.insight_zh || analysis.takeaway_zh || '')
@@ -7877,10 +7920,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         .replace(/^(?:【(?:AI\s*点评|AI点评|AI\s*Hot\s*Take|行业研判|深度洞察|专家点评)】|\[(?:AI\s*Hot\s*Take|AI\s*Commentary|AI\s*Takeaway)\])\s*/i, '')
         .trim();
 
-      // 识别是否为低质模版句或对不上的假套话
+      // 识别是否为低质模版句或对不上的假套话与跨语言污染
       const isGenericTemplate = (text) => {
         if (!text || text.length < 10) return true;
         const s = String(text);
+        if (!isZh && /[\u4e00-\u9fa5]/.test(s)) return true; // 英文模式下出现任何汉字直接判定为无效
+        if (isZh && !/[\u4e00-\u9fa5]/.test(s)) return true; // 中文模式下纯英文直接判定为无效
         return s.includes('正在加速布局以构筑关键护城河') ||
                s.includes('正在加速技术卡位') ||
                s.includes('经受住效率与成本的双重检验') ||
@@ -7891,7 +7936,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                s.includes('商业世界的法则向来残酷') ||
                s.includes('行业各方正在加速技术卡位') ||
                s.includes('查尔斯国王') ||
-               s.includes('聚焦该事件');
+               s.includes('聚焦该事件') ||
+               s.includes('Reflects the ongoing transition towards sustainable deployment') ||
+               s.includes('commercial maturity, and balanced governance') ||
+               s.includes('Reflects the transition towards commercial maturity') ||
+               s.includes('Executive Briefing:') ||
+               s.includes('全球产业与技术前沿一线');
       };
 
       const hasValidInsight = cleanInsight && !isGenericTemplate(cleanInsight);
@@ -8027,8 +8077,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             originalTextEl.innerHTML = '';
           }
         } else {
-          // 英文模式
-          const enContent = hasValidEn ? origContentEn : (hasValidZh ? origContentZh : '');
+          // 英文模式：仅当具备真实英文深度长文时展示，绝不回退到中文长文，彻底杜绝混用
+          const enContent = (hasValidEn && !/[\u4e00-\u9fa5]/.test(origContentEn)) ? origContentEn : '';
           if (enContent && enContent.length > 50 && enContent !== briefingText && enContent !== cleanTitle) {
             originalCardEl.classList.remove('hidden');
             if (originalTitleEl) originalTitleEl.textContent = 'Original Coverage & In-depth Story';

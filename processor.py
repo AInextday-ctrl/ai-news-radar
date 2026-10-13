@@ -619,9 +619,21 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     insight_zh = generate_witty_ai_commentary(full_text, clean_title)
 
     title_en = item.get("title_en") or item.get("title", "")
+    summary_en = item.get("summary_en") or ""
+    # 严格保证 briefing_en 与 digest_en 100% 纯正英文，严禁混入任何汉字变量
+    briefing_en = ""
+    if summary_en and not re.search(r'[\u4e00-\u9fa5]', summary_en) and len(summary_en) > 15:
+        briefing_en = clean_news_text(summary_en)
+    else:
+        cand = item.get("article_content") or item.get("original_content") or item.get("content_snippet") or ""
+        if cand and not re.search(r'[\u4e00-\u9fa5]', cand) and len(cand) > 15:
+            briefing_en = clean_news_text(cand[:350])
+        else:
+            briefing_en = title_en
+
     return {
         "briefing_zh": briefing_zh,
-        "briefing_en": f"Executive Briefing: In {where}, {who} advanced a key development: {title_en}. Context: {why}",
+        "briefing_en": briefing_en,
         "elements_zh": {
             "who": who,
             "where": where,
@@ -629,27 +641,27 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
             "why": why
         },
         "elements_en": {
-            "who": who,
-            "where": where,
+            "who": author if author and author != source else "Industry Leaders",
+            "where": "Global AI Frontier",
             "what": title_en,
-            "why": why
+            "why": ""
         },
         "insight_zh": insight_zh,
-        "insight_en": "Industry Insight: Reflects the ongoing transition towards sustainable deployment, commercial maturity, and balanced governance across the AI ecosystem.",
+        "insight_en": "",
         "digest_zh": briefing_zh,
-        "digest_en": f"Executive Briefing: In {where}, {who} announced: {title_en}.",
+        "digest_en": briefing_en,
         "key_points_zh": [
             f"主体与场景：{who}在{where}",
             f"核心事实：{clean_title}",
             f"动因背景：{why}"
+        ] if why else [
+            f"核心事实：{clean_title}"
         ],
         "key_points_en": [
-            f"Actor & Context: {who} in {where}",
-            f"Key Action: {title_en}",
-            f"Motivation: {why}"
+            f"Key Development: {title_en}"
         ],
         "takeaway_zh": insight_zh,
-        "takeaway_en": "Industry Insight: Reflects the transition towards commercial maturity and balanced governance."
+        "takeaway_en": ""
     }
 
 
