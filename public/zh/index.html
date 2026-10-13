@@ -2161,15 +2161,15 @@ Open Haus Berlin阵容：
         <!-- 极客技术规格与参数 (Tech Specs Grid) -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">Pricing Tier</span>
+            <span class="text-[11px] text-slate-400 font-medium">收费模式</span>
             <span id="tool-modal-spec-pricing" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">Deployment</span>
+            <span class="text-[11px] text-slate-400 font-medium">部署形态</span>
             <span id="tool-modal-spec-runtime" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
-            <span class="text-[11px] text-slate-400 font-medium">Category</span>
+            <span class="text-[11px] text-slate-400 font-medium">场景分类</span>
             <span id="tool-modal-spec-scenario" class="text-xs font-bold text-slate-800 dark:text-slate-200 mt-1">--</span>
           </div>
         </div>
@@ -2782,41 +2782,104 @@ Open Haus Berlin阵容：
       // 如果有 bodyZh 则返回，否则返回 rawTitleZh 或 rawTitle
       return rawTitleZh || rawTitle;
     }
-    function translateScenarioTag(scenario, lang) {
-      if (lang === 'zh') return scenario;
-      if (scenario.includes('图像') || scenario.includes('设计') || scenario.includes('修图')) return '🎨 Image & Design';
-      if (scenario.includes('编程') || scenario.includes('提效') || scenario.includes('开发')) return '💻 Coding & Dev';
-      if (scenario.includes('客户端') || scenario.includes('应用') || scenario.includes('chat')) return '💬 AI Client App';
-      if (scenario.includes('智能体') || scenario.includes('Agent') || scenario.includes('工作流')) return '🤖 Agent Workflow';
-      if (scenario.includes('声音') || scenario.includes('音频') || scenario.includes('语音')) return '🎙️ Voice & Audio';
-      if (scenario.includes('视频')) return '🎬 Video Creation';
-      if (scenario.includes('写作') || scenario.includes('知识库')) return '✍️ Writing & Notes';
-      return '🤖 Applied AI Tool';
+    function translateScenarioTag(scenario, lang = 'zh') {
+      if (!scenario) return lang === 'zh' ? '🤖 实用 AI 工具' : '🤖 Applied AI Tool';
+      const s = String(scenario);
+      if (lang === 'zh') {
+        if (/图像|设计|修图|image|design|photo/i.test(s)) return '🎨 图像与设计';
+        if (/编程|开发|提效|coding|dev|code/i.test(s)) return '💻 编程开发提效';
+        if (/客户端|应用|chat|client|app/i.test(s)) return '💬 AI 客户端';
+        if (/自动化|智能体|agent|工作流|workflow/i.test(s)) return '🤖 AI 智能体工作流';
+        if (/声音|音频|语音|voice|audio|sound|tts/i.test(s)) return '🎙️ 声音与音频';
+        if (/视频|video/i.test(s)) return '🎬 视频创作';
+        if (/写作|知识库|writing|notes|note/i.test(s)) return '✍️ 写作与笔记';
+        if (hasChineseText(s)) return s;
+        return '🤖 实用 AI 工具';
+      } else {
+        if (/自动化|智能体|agent/i.test(s)) return '🤖 Autonomous Agent';
+        if (/工作流|workflow/i.test(s)) return '🤖 Agent & Workflow';
+        if (/图像|设计|修图|image|design|photo/i.test(s)) return '🎨 Image Design & Edit';
+        if (/编程|开发|提效|coding|dev|code/i.test(s)) return '💻 Coding & Dev Tool';
+        if (/客户端|应用|chat|client|app/i.test(s)) return '💬 AI Client App';
+        if (/声音|音频|语音|voice|audio|tts/i.test(s)) return '🎙️ Voice & Audio';
+        if (/视频|video/i.test(s)) return '🎬 Video Creation';
+        if (/写作|知识库|writing|note/i.test(s)) return '✍️ Writing & Notes';
+        return '🤖 Applied AI Tool';
+      }
     }
 
-    // 运行方式/计费标签翻译助手
-    function translateRuntimeBadge(badge, lang) {
-      if (lang === 'zh') return badge;
-      if (badge.includes('开源免装') || badge.includes('完全开源免费') || badge.includes('开源免费')) return '🟢 Open Source';
-      if (badge.includes('WebGPU') || badge.includes('免装即用') || badge.includes('免部署') || badge.includes('在线')) return '🟢 Web Online Play';
-      if (badge.includes('免费试玩') || badge.includes('免费试用')) return '🟡 Free Trial';
-      if (badge.includes('Docker')) return '🐳 Docker Deploy';
-      if (badge.includes('本地 GPU')) return '🟢 Local GPU';
-      if (badge.includes('命令行')) return '⚡ CLI Executable';
-      if (badge.includes('桌面端') || badge.includes('客户端')) return '💻 Desktop App';
-      if (badge.includes('API Key')) return '🔑 Bring API Key';
-      return '🟢 Online App';
+    // 运行方式/部署形态标签翻译助手
+    function translateRuntimeBadge(badge, lang = 'zh') {
+      if (!badge) return lang === 'zh' ? '🟢 免部署在线玩' : '🟢 Cloud / Web';
+      const b = String(badge);
+      if (lang === 'zh') {
+        if (/命令行|cli|terminal/i.test(b)) return '⚡ 命令行执行';
+        if (/完全开源免费|开源免装|开源免费|开源|open\s*source/i.test(b)) return '🟢 完全开源免费';
+        if (/webgpu|免装即用|免部署|在线|web|cloud|online/i.test(b)) return '🟢 免部署在线玩';
+        if (/免费试玩|免费试用|试玩|trial|freemium/i.test(b)) return '🟡 免费试玩';
+        if (/docker/i.test(b)) return '🐳 Docker 一键部署';
+        if (/本地\s*gpu|local\s*gpu/i.test(b)) return '🟢 本地 GPU 运行';
+        if (/桌面端|客户端|desktop|native/i.test(b)) return '💻 跨平台桌面端';
+        if (/插件|扩展|extension|plugin/i.test(b)) return '💻 浏览器插件';
+        if (/api\s*key/i.test(b)) return '🔑 自备 API Key';
+        if (hasChineseText(b)) return b;
+        return '🟢 免部署在线玩';
+      } else {
+        if (/命令行|一键执行|cli/i.test(b)) return '⚡ CLI / 1-Click Run';
+        if (/开源|open\s*source/i.test(b)) return '🟢 Open Source';
+        if (/webgpu|免装即用|免部署|在线|web|cloud|online/i.test(b)) return '🟢 Web Online / Zero-Install';
+        if (/免费试玩|免费试用|试玩|trial|freemium/i.test(b)) return '🟡 Free Trial';
+        if (/docker/i.test(b)) return '🐳 Docker 1-Click Deploy';
+        if (/本地\s*gpu|local\s*gpu/i.test(b)) return '🟢 Local GPU Run';
+        if (/桌面端|客户端|desktop/i.test(b)) return '💻 Cross-Platform App';
+        if (/插件|工具|extension/i.test(b)) return '💻 Browser Extension';
+        if (/api\s*key/i.test(b)) return '🔑 Bring API Key';
+        return '🟢 Web App';
+      }
+    }
+
+    // 计费/收费模式标签翻译助手
+    function translatePricingTag(pricing, lang = 'zh') {
+      if (!pricing) return lang === 'zh' ? '🟢 完全开源免费' : '🟢 Free / Open Source';
+      const p = String(pricing);
+      if (lang === 'zh') {
+        if (/完全开源免费|开源免费|开源|open\s*source/i.test(p)) return '🟢 完全开源免费';
+        if (/免费试玩|免费试用|试玩|freemium|trial/i.test(p)) return '🟡 免费试玩 / Freemium';
+        if (/免部署在线|在线试玩|web\s*demo/i.test(p)) return '🟢 在线免费体验';
+        if (/付费|商业|paid|commercial/i.test(p)) return '💳 商业付费';
+        if (/免费|free/i.test(p)) return '🟢 免费使用';
+        if (hasChineseText(p)) return p;
+        return '🟢 免费使用';
+      } else {
+        if (/完全开源免费|开源免费|开源|open\s*source/i.test(p)) return '🟢 Open Source & Free';
+        if (/免费试玩|免费试用|试玩|freemium|trial/i.test(p)) return '🟡 Free Trial / Freemium';
+        if (/免部署在线|在线试玩|web\s*demo/i.test(p)) return '🟢 Free Web Demo';
+        if (/付费|商业|paid|commercial/i.test(p)) return '💳 Paid / Commercial';
+        if (/免费|free/i.test(p)) return '🟢 Free';
+        return '🟢 Freemium';
+      }
     }
 
     // 实操难度标签翻译助手
-    function translateDifficultyTag(tag, lang) {
-      if (lang === 'zh') return tag;
-      if (tag.includes('避坑')) return '🛠️ Hands-on Guide';
-      if (tag.includes('工作流')) return '⚡ Production Workflow';
-      if (tag.includes('大师课') || tag.includes('出图')) return '🎨 Studio Masterclass';
-      if (tag.includes('智能体')) return '🤖 Agent Tutorial';
-      if (tag.includes('语音')) return '🎙️ Voice Agent';
-      return '🔥 Trending Tutorial';
+    function translateDifficultyTag(tag, lang = 'zh') {
+      if (!tag) return lang === 'zh' ? '🔥 热门实操' : '🔥 Trending Tutorial';
+      const t = String(tag);
+      if (lang === 'zh') {
+        if (/避坑|guide/i.test(t)) return '🛠️ 实战避坑指南';
+        if (/工作流|workflow/i.test(t)) return '⚡ 生产级工作流';
+        if (/大师课|出图|masterclass/i.test(t)) return '🎨 进阶大师课';
+        if (/智能体|agent/i.test(t)) return '🤖 智能体实战';
+        if (/语音|voice/i.test(t)) return '🎙️ 语音 Agent 教程';
+        if (hasChineseText(t)) return t;
+        return '🔥 热门实操';
+      } else {
+        if (/避坑|guide/i.test(t)) return '🛠️ Hands-on Guide';
+        if (/工作流|workflow/i.test(t)) return '⚡ Production Workflow';
+        if (/大师课|出图|masterclass/i.test(t)) return '🎨 Studio Masterclass';
+        if (/智能体|agent/i.test(t)) return '🤖 Agent Tutorial';
+        if (/语音|voice/i.test(t)) return '🎙️ Voice Agent';
+        return '🔥 Trending Tutorial';
+      }
     }
 
     // 精确时间解析与相对时间
@@ -5494,6 +5557,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (cleanName) {
         goUrl += `&name=${encodeURIComponent(cleanName)}`;
       }
+      goUrl += `&lang=zh`;
       return goUrl;
     }
 
@@ -8419,7 +8483,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (!rankText || rankText === '🔥') rankText = isZh ? '🔥 热门推荐' : '🔥 Popular';
         rankBadgeEl.textContent = rankText;
       }
-      if (scenarioEl) scenarioEl.textContent = item.scenario_tag || (isZh ? '🤖 AI 场景落地' : '🤖 Applied AI');
+      if (scenarioEl) scenarioEl.textContent = translateScenarioTag(item.scenario_tag, currentLang);
       if (timeEl) timeEl.textContent = `🕒 ${timeObj.display || timeObj.relative || (isZh ? '今日' : 'Today')}`;
       if (iconWrapEl) {
         if (item.logo_url) {
@@ -8438,6 +8502,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (overviewEl) overviewEl.textContent = overviewText;
 
+      const galleryLabelEl = document.getElementById('tool-modal-gallery-label');
+      const overviewLabelEl = document.getElementById('tool-modal-overview-label');
+      const featuresLabelEl = document.getElementById('tool-modal-features-label');
+      if (galleryLabelEl) galleryLabelEl.textContent = isZh ? '实测截图与画廊展示' : 'Product Screenshots & UI Gallery';
+      if (overviewLabelEl) overviewLabelEl.textContent = isZh ? '核心亮点与解决痛点' : 'Core Overview & Problem Solved';
+      if (featuresLabelEl) featuresLabelEl.textContent = isZh ? '核心功能要点清单' : 'Key Features & Technical Capabilities';
+
       const features = isZh ? (item.features_zh || []) : (item.features_en || []);
       if (featuresListEl) {
         if (features.length > 0) {
@@ -8453,9 +8524,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      if (pricingEl) pricingEl.textContent = item.pricing_tag || (isZh ? '🟡 免费试玩' : 'Freemium');
-      if (runtimeEl) runtimeEl.textContent = item.runtime_badge || (isZh ? '🟢 免部署在线玩' : 'Cloud / Web');
-      if (specScenarioEl) specScenarioEl.textContent = item.scenario_tag || (isZh ? 'AI 场景落地' : 'Applied AI');
+      if (pricingEl) pricingEl.textContent = translatePricingTag(item.pricing_tag, currentLang);
+      if (runtimeEl) runtimeEl.textContent = translateRuntimeBadge(item.runtime_badge, currentLang);
+      if (specScenarioEl) specScenarioEl.textContent = translateScenarioTag(item.scenario_tag, currentLang);
       if (specSourceEl) specSourceEl.textContent = sourceName;
 
       // 轮播画廊设置 (严禁 Gemini 官方宣传物料泄露到其它独立产品)
@@ -8574,7 +8645,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       privacy: {
         title_zh: "隐私政策",
         title_en: "Privacy Policy",
-        content: `
+        content_zh: `
           <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">隐私政策</h3>
           <p class="text-[11px] text-slate-500">生效日期：2026年1月1日 | 最近更新：2026年9月14日</p>
           
@@ -8598,12 +8669,37 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">5. 联系与咨询</h4>
           <p>如果您对本隐私政策或广告合规有任何疑问，可联系站长团队邮箱：<a href="mailto:contact@ainewsradar.xyz" class="text-indigo-500 underline">contact@ainewsradar.xyz</a>。</p>
+        `,
+        content_en: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Privacy Policy</h3>
+          <p class="text-[11px] text-slate-500">Effective Date: January 1, 2026 | Last Updated: September 14, 2026</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">1. Overview</h4>
+          <p>AI News Radar (ainewsradar.xyz) takes your privacy seriously. This policy explains how information is handled when you visit and use our website.</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">2. Cookies and Third-Party Advertising</h4>
+          <p><strong>Google is a third-party vendor on our site and uses cookies to serve ads:</strong></p>
+          <ul class="list-disc pl-4 space-y-1 my-1 text-slate-600 dark:text-slate-300">
+            <li>Third-party vendors, including Google, use cookies to serve ads based on a user's prior visits to this website or other websites.</li>
+            <li>Google's use of advertising cookies enables it and its partners to serve ads to users based on their visit to this site and/or other sites on the Internet.</li>
+            <li><strong>Opting Out:</strong> Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" class="text-indigo-500 underline font-medium">Google Ads Settings</a>.</li>
+            <li>Alternatively, users can opt out of third-party vendor use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" target="_blank" class="text-indigo-500 underline font-medium">www.aboutads.info</a>.</li>
+          </ul>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">3. Log Files & Analytics</h4>
+          <p>Like many websites, AI News Radar utilizes log files and anonymous technical analytics (such as browser type, timestamps, referring pages, language preferences). This information does not contain personally identifiable data and is solely used to analyze trends, administer the site, and improve performance.</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">4. Outbound Links & External Services</h4>
+          <p>Our platform indexes and links to official third-party resources (such as product homepages, YouTube, 𝕏). We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites.</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">5. Contact Information</h4>
+          <p>If you have any questions or concerns regarding our privacy practices, please contact us at: <a href="mailto:contact@ainewsradar.xyz" class="text-indigo-500 underline">contact@ainewsradar.xyz</a>.</p>
         `
       },
       terms: {
         title_zh: "服务条款",
         title_en: "Terms of Service",
-        content: `
+        content_zh: `
           <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">服务条款</h3>
           <p class="text-[11px] text-slate-500">生效日期：2026年1月1日</p>
           
@@ -8618,12 +8714,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">4. 广告与商业赞助</h4>
           <p>本站可能展示由 Google AdSense 等合作伙伴提供的赞助商广告。用户与广告主的任何互动或交易均由用户与广告主自行负责。</p>
+        `,
+        content_en: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Terms of Service</h3>
+          <p class="text-[11px] text-slate-500">Effective Date: January 1, 2026</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">1. Acceptance of Terms</h4>
+          <p>By accessing and browsing ainewsradar.xyz, you agree to be bound by these Terms of Service. If you do not agree, please discontinue using the service.</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">2. Content & Disclaimer</h4>
+          <p>The AI intelligence, social intercepts, applied tools, and engineering prompts aggregated on this platform are provided solely for educational, research, and technical reference purposes. The service is provided "AS IS", without warranties of completeness, merchantability, or fitness for a particular purpose.</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">3. Intellectual Property & Fair Use</h4>
+          <p>All third-party trademarks, creator profiles, papers, and software tools cited or indexed belong to their respective rightful owners. We adhere strictly to Fair Use principles; all external materials feature direct attribution and official outbound links.</p>
+
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">4. Advertising & Sponsored Content</h4>
+          <p>This website may display commercial advertisements served by partners such as Google AdSense. Any interaction or transaction between users and advertisers is strictly between the respective parties.</p>
         `
       },
       about: {
         title_zh: "关于本站",
         title_en: "About Us",
-        content: `
+        content_zh: `
           <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">关于 AI 资讯雷达</h3>
           <p class="mt-2 leading-relaxed"><strong>AI 资讯雷达 (ainewsradar.xyz)</strong> 致力于为全球开发者、科研人员、AI 创业者与技术发烧友打造纯净、高效的 24 小时 AI 前沿科技风向标。</p>
           
@@ -8637,6 +8749,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           </ul>
 
           <p class="mt-3 text-[11px] text-slate-500">欢迎联系站长团队与我们交流合作，共同推动 AI 应用创新！</p>
+        `,
+        content_en: `
+          <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">About AI News Radar</h3>
+          <p class="mt-2 leading-relaxed"><strong>AI News Radar (ainewsradar.xyz)</strong> is dedicated to providing a clutter-free, real-time 24-hour intelligence hub for developers, researchers, founders, and AI enthusiasts worldwide.</p>
+          
+          <h4 class="font-bold text-slate-800 dark:text-slate-200 mt-3">🌟 Core Capabilities & Focus:</h4>
+          <ul class="list-disc pl-4 space-y-1.5 my-2 text-slate-600 dark:text-slate-300">
+            <li><strong>⚡ Breaking Intelligence & Industry News</strong>: High-frequency tracking of global AI breakthroughs with extracted key takeaways;</li>
+            <li><strong>🐦 Social Radar & Frontier Intercepts</strong>: Real-time authentic posts from AI pioneers and labs on 𝕏 and Threads;</li>
+            <li><strong>🛠️ Applied AI Tools & Production Utilities</strong>: Verified, zero-install WebGPU and developer tools sorted strictly by real release dates;</li>
+            <li><strong>🎬 Hands-on Masterclasses & Video Demos</strong>: Curated video walkthroughs and system architecture lessons from top global creators;</li>
+            <li><strong>💡 Production-Grade System Prompt Library</strong>: Structured, high-yield system prompts ready for engineering workflows.</li>
+          </ul>
+
+          <p class="mt-3 text-[11px] text-slate-500">Feel free to reach out to our team at <a href="mailto:contact@ainewsradar.xyz" class="text-indigo-500 underline">contact@ainewsradar.xyz</a> for partnerships and feedback!</p>
         `
       }
     };
@@ -8653,9 +8780,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     function switchLegalTab(tab) {
+      const isZh = currentLang === 'zh';
       ['privacy', 'terms', 'about'].forEach(t => {
         const btn = document.getElementById(`legal-tab-${t}`);
         if (btn) {
+          if (t === 'privacy') btn.textContent = isZh ? '隐私政策' : 'Privacy Policy';
+          if (t === 'terms') btn.textContent = isZh ? '服务条款' : 'Terms of Service';
+          if (t === 'about') btn.textContent = isZh ? '关于本站' : 'About Us';
           if (t === tab) {
             btn.className = "text-xs font-bold px-3 py-1.5 rounded-lg bg-indigo-600 text-white transition-colors";
           } else {
@@ -8666,7 +8797,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const container = document.getElementById('legal-content');
       if (container && LEGAL_DOCS[tab]) {
-        container.innerHTML = LEGAL_DOCS[tab].content;
+        container.innerHTML = isZh ? (LEGAL_DOCS[tab].content_zh || LEGAL_DOCS[tab].content) : (LEGAL_DOCS[tab].content_en || LEGAL_DOCS[tab].content);
       }
     }
 

@@ -1646,6 +1646,50 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
     return data
 
 
+def to_en_scenario(s: str) -> str:
+    s = s or ""
+    if any(k in s for k in ['自动化', 'Agent', '智能体']):
+        return "Autonomous Agents & Workflows"
+    if '工作流' in s:
+        return "AI Workflows & Orchestration"
+    if any(k in s for k in ['图像', '设计', '修图']):
+        return "Image Design & Generation"
+    if any(k in s for k in ['编程', '开发', '提效']):
+        return "Coding & Developer Productivity"
+    if any(k in s for k in ['客户端', '应用', 'chat']):
+        return "AI Client Applications"
+    if any(k in s for k in ['声音', '音频', '语音']):
+        return "Voice & Audio Processing"
+    if '视频' in s:
+        return "Video Creation & Synthesis"
+    if any(k in s for k in ['写作', '知识库']):
+        return "Writing & Knowledge Bases"
+    return "Applied AI Workflows"
+
+
+def to_en_runtime(b: str) -> str:
+    b = b or ""
+    if any(k in b for k in ['命令行', '一键执行']):
+        return "CLI & 1-Click Run"
+    if any(k in b for k in ['开源免装', '完全开源免费', '开源免费', '开源']):
+        return "Open-Source & Free"
+    if any(k in b for k in ['WebGPU', '免装即用', '免部署', '在线']):
+        return "Zero-Install Web App"
+    if any(k in b for k in ['免费试玩', '免费试用']):
+        return "Free Trial / Freemium"
+    if 'Docker' in b:
+        return "Docker 1-Click Deploy"
+    if '本地 GPU' in b:
+        return "Local GPU Execution"
+    if any(k in b for k in ['桌面端', '客户端']):
+        return "Cross-Platform Desktop"
+    if any(k in b for k in ['插件', '工具']):
+        return "Browser Extension"
+    if 'API Key' in b:
+        return "BYO API Key"
+    return "Cloud Web App"
+
+
 def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
     """Fetch trending user-facing AI tools from Product Hunt with rich titles."""
     items = []
@@ -1763,15 +1807,15 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
                 "logo_url": logo_url,
                 "rank_badge": rank_badge,
                 "overview_zh": f"{app_name} 是一款专注于 {scenario} 的创新 AI 神器。{hook}，旨在通过生成式 AI 大幅提升工作与创作流转效率。",
-                "overview_en": f"{app_name} is an innovative practical tool designed for {scenario}. {hook}.",
+                "overview_en": f"{app_name} is an innovative practical tool designed for {to_en_scenario(scenario)}. {hook}.",
                 "features_zh": [
                     f"针对 {scenario} 场景深度调优与工程封装",
                     f"支持 {runtime_badge}，开箱即用",
                     "结构化操作界面，极简人机交互体验"
                 ],
                 "features_en": [
-                    f"Specialized optimization for {scenario}",
-                    f"Native support for {runtime_badge}",
+                    f"Specialized optimization for {to_en_scenario(scenario)}",
+                    f"Native support for {to_en_runtime(runtime_badge)}",
                     "Intuitive modern user interface for daily productivity"
                 ],
                 "source": "AI 资讯雷达",

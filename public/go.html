@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="dark">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="referrer" content="no-referrer-when-downgrade">
-  <title>安全出站中转 | AI 资讯雷达</title>
+  <title>Secure Outbound Redirect | AI News Radar</title>
   <link rel="icon" href="/images/cursor_composer_workflow.jpg" type="image/jpeg">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -53,20 +53,20 @@
 
   <!-- 顶部极简导航 -->
   <header class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 flex items-center justify-between">
-    <a href="/" class="flex items-center space-x-2.5 group">
+    <a id="header-brand-link" href="/" class="flex items-center space-x-2.5 group">
       <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
         <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
           <span class="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">AI</span>
         </div>
       </div>
       <div>
-        <span class="text-sm font-black tracking-wider text-white">AI 资讯雷达</span>
+        <span id="header-brand-name" class="text-sm font-black tracking-wider text-white">AI News Radar</span>
         <span class="text-[10px] block text-emerald-400/80 font-mono tracking-widest">OUTBOUND GATEWAY</span>
       </div>
     </a>
 
-    <a href="/" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center space-x-1 border border-slate-800 bg-slate-900/60 px-3 py-1.5 rounded-lg backdrop-blur-md">
-      <span>← 返回雷达首页</span>
+    <a id="header-back-link" href="/" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center space-x-1 border border-slate-800 bg-slate-900/60 px-3 py-1.5 rounded-lg backdrop-blur-md">
+      <span id="header-back-text">← Back to Radar Home</span>
     </a>
   </header>
 
@@ -92,28 +92,28 @@
       <!-- 标题与状态 -->
       <div class="text-center space-y-1.5 mb-6">
         <h1 class="text-lg sm:text-xl font-black text-white tracking-tight flex items-center justify-center gap-2">
-          <span>安全出站重定向</span>
+          <span id="gateway-title">Secure Outbound Redirect</span>
         </h1>
         <p id="countdown-text" class="text-xs text-slate-400">
-          正在为您安全导航至目标官方网站，请稍候...
+          Safely routing you to the official target destination, please wait...
         </p>
       </div>
 
       <!-- 目标信息卡片 -->
       <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 mb-6 space-y-2">
         <div class="flex items-center justify-between text-xs">
-          <span class="text-slate-400">目标产品：</span>
-          <span id="target-name" class="font-bold text-emerald-400 notranslate">加载中...</span>
+          <span id="label-target-name" class="text-slate-400">Target Product:</span>
+          <span id="target-name" class="font-bold text-emerald-400 notranslate">Loading...</span>
         </div>
         <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-800/50">
-          <span class="text-slate-400">官方网址：</span>
+          <span id="label-target-host" class="text-slate-400">Official URL:</span>
           <span id="target-host" class="font-mono text-[11px] text-slate-300 truncate max-w-[220px]">---</span>
         </div>
         <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-800/50">
-          <span class="text-slate-400">安全信誉：</span>
+          <span id="label-security-status" class="text-slate-400">Security Status:</span>
           <span class="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
             <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-            SSL 安全连接已验证
+            <span id="ssl-verified-text">SSL Secure Connection Verified</span>
           </span>
         </div>
       </div>
@@ -126,50 +126,153 @@
       <!-- 行动入口按钮 -->
       <div class="space-y-3">
         <a id="btn-direct-jump" href="#" rel="nofollow noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm transition-all flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/30 transform active:scale-[0.99]">
-          <span>立即前往官方网站</span>
+          <span id="btn-direct-jump-text">Visit Official Website</span>
           <span>↗</span>
         </a>
 
         <div class="flex items-center justify-between pt-2">
           <button type="button" onclick="handleCancel()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors">
-            取消并返回上一页
+            <span id="btn-cancel-text">Cancel & Return</span>
           </button>
           <span class="text-[11px] text-slate-500">
-            来源标记: <code class="text-emerald-400/90 font-mono">?ref=ainewsradar</code>
+            <span id="label-ref-tag">Referral Tag:</span> <code class="text-emerald-400/90 font-mono">?ref=ainewsradar</code>
           </span>
         </div>
       </div>
 
       <!-- 免责声明 -->
-      <div class="mt-6 pt-4 border-t border-slate-800/60 text-[11px] text-slate-500 leading-relaxed text-center">
-        💡 提示：AI 资讯雷达已对目标站点进行安全校验。您即将离开本站，外部站点的内容与隐私政策由第三方所有者全权负责。
+      <div id="disclaimer-text" class="mt-6 pt-4 border-t border-slate-800/60 text-[11px] text-slate-500 leading-relaxed text-center">
+        💡 Notice: AI News Radar has verified the target destination for safety. You are leaving our site; external content and privacy policies are governed by third-party owners.
       </div>
 
     </div>
   </main>
 
   <!-- 底部备案与版权 -->
-  <footer class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-slate-600">
-    © 2026 AI 资讯雷达 (ainewsradar.xyz) · 保留所有权利
+  <footer id="footer-copyright" class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-slate-600">
+    © 2026 AI News Radar (ainewsradar.xyz) · All rights reserved.
   </footer>
 
   <script>
-    // 提取并清洗目标 URL 与参数
+    const I18N_GATEWAY = {
+      zh: {
+        pageTitle: "安全出站中转 | AI 资讯雷达",
+        brandName: "AI 资讯雷达",
+        backHome: "← 返回雷达首页",
+        homeUrl: "/zh",
+        heading: "安全出站重定向",
+        countdown: "正在为您安全导航至目标官方网站，请稍候...",
+        targetProduct: "目标产品：",
+        officialUrl: "官方网址：",
+        securityStatus: "安全信誉：",
+        sslVerified: "SSL 安全连接已验证",
+        btnJump: "立即前往官方网站",
+        cancelBack: "取消并返回上一页",
+        refTag: "来源标记:",
+        disclaimer: "💡 提示：AI 资讯雷达已对目标站点进行安全校验。您即将离开本站，外部站点的内容与隐私政策由第三方所有者全权负责。",
+        copyright: "© 2026 AI 资讯雷达 (ainewsradar.xyz) · 保留所有权利",
+        failTitle: "跳转失败 | AI 资讯雷达",
+        failTarget: "未指定目标或链接不安全",
+        failParam: "无效的请求参数",
+        failCountdown: "未检测到有效的外部安全网址，请返回首页。",
+        failBtn: "返回 AI 资讯雷达首页",
+        goingTo: "正在前往",
+        defaultTargetName: "AI 工具官网"
+      },
+      en: {
+        pageTitle: "Secure Outbound Redirect | AI News Radar",
+        brandName: "AI News Radar",
+        backHome: "← Back to Radar Home",
+        homeUrl: "/",
+        heading: "Secure Outbound Redirect",
+        countdown: "Safely routing you to the official target destination, please wait...",
+        targetProduct: "Target Product:",
+        officialUrl: "Official URL:",
+        securityStatus: "Security Status:",
+        sslVerified: "SSL Secure Connection Verified",
+        btnJump: "Visit Official Website",
+        cancelBack: "Cancel & Return",
+        refTag: "Referral Tag:",
+        disclaimer: "💡 Notice: AI News Radar has verified the target destination for safety. You are leaving our site; external content and privacy policies are governed by third-party owners.",
+        copyright: "© 2026 AI News Radar (ainewsradar.xyz) · All rights reserved.",
+        failTitle: "Redirect Failed | AI News Radar",
+        failTarget: "Unspecified or unsafe destination URL",
+        failParam: "Invalid request parameters",
+        failCountdown: "No valid external URL detected. Please return to home.",
+        failBtn: "Return to AI News Radar Home",
+        goingTo: "Navigating to",
+        defaultTargetName: "Official AI Product"
+      }
+    };
+
     function getQueryParam(key) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(key) || '';
     }
 
+    function detectGatewayLanguage() {
+      const paramLang = (getQueryParam('lang') || '').toLowerCase();
+      if (paramLang === 'zh' || paramLang === 'zh-cn') return 'zh';
+      if (paramLang === 'en') return 'en';
+
+      const ref = document.referrer || '';
+      if (ref.includes('/zh/') || ref.endsWith('/zh')) return 'zh';
+      if (ref && !ref.includes('/zh')) return 'en';
+
+      const stored = localStorage.getItem('site_lang') || localStorage.getItem('preferred_lang');
+      if (stored === 'zh') return 'zh';
+      if (stored === 'en') return 'en';
+
+      return 'en';
+    }
+
+    const currentLang = detectGatewayLanguage();
+    const t = I18N_GATEWAY[currentLang] || I18N_GATEWAY.en;
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+
+    // Apply i18n texts
+    document.title = t.pageTitle;
+    const brandNameEl = document.getElementById('header-brand-name');
+    if (brandNameEl) brandNameEl.textContent = t.brandName;
+    const brandLinkEl = document.getElementById('header-brand-link');
+    if (brandLinkEl) brandLinkEl.href = t.homeUrl;
+    const backLinkEl = document.getElementById('header-back-link');
+    if (backLinkEl) backLinkEl.href = t.homeUrl;
+    const backTextEl = document.getElementById('header-back-text');
+    if (backTextEl) backTextEl.textContent = t.backHome;
+    const gatewayTitleEl = document.getElementById('gateway-title');
+    if (gatewayTitleEl) gatewayTitleEl.textContent = t.heading;
+    const countdownEl = document.getElementById('countdown-text');
+    if (countdownEl) countdownEl.textContent = t.countdown;
+    const labelTargetNameEl = document.getElementById('label-target-name');
+    if (labelTargetNameEl) labelTargetNameEl.textContent = t.targetProduct;
+    const labelTargetHostEl = document.getElementById('label-target-host');
+    if (labelTargetHostEl) labelTargetHostEl.textContent = t.officialUrl;
+    const labelSecurityStatusEl = document.getElementById('label-security-status');
+    if (labelSecurityStatusEl) labelSecurityStatusEl.textContent = t.securityStatus;
+    const sslVerifiedTextEl = document.getElementById('ssl-verified-text');
+    if (sslVerifiedTextEl) sslVerifiedTextEl.textContent = t.sslVerified;
+    const btnJumpTextEl = document.getElementById('btn-direct-jump-text');
+    if (btnJumpTextEl) btnJumpTextEl.textContent = t.btnJump;
+    const btnCancelTextEl = document.getElementById('btn-cancel-text');
+    if (btnCancelTextEl) btnCancelTextEl.textContent = t.cancelBack;
+    const labelRefTagEl = document.getElementById('label-ref-tag');
+    if (labelRefTagEl) labelRefTagEl.textContent = t.refTag;
+    const disclaimerEl = document.getElementById('disclaimer-text');
+    if (disclaimerEl) disclaimerEl.textContent = t.disclaimer;
+    const footerCopyrightEl = document.getElementById('footer-copyright');
+    if (footerCopyrightEl) footerCopyrightEl.textContent = t.copyright;
+
     function sanitizeTargetUrl(raw) {
       if (!raw) return '';
       let target = decodeURIComponent(raw).trim();
       
-      // 协议安全性校验：严禁 javascript: / data: / vbscript: 等伪协议
+      // Security protocol check: only allow http/https
       if (!/^https?:\/\//i.test(target)) {
         return '';
       }
 
-      // 彻底剥离 Product Hunt 转链或相关 hash
+      // Strip third-party redirect hashes and re-tag with referral
       target = target.replace(/#.*producthunt.*/i, '');
       if (/([?&])ref=producthunt(&|$)/i.test(target)) {
         target = target.replace(/([?&])ref=producthunt(&|$)/i, '$1ref=ainewsradar$2');
@@ -189,17 +292,15 @@
     const nameEl = document.getElementById('target-name');
     const hostEl = document.getElementById('target-host');
     const jumpBtn = document.getElementById('btn-direct-jump');
-    const countdownText = document.getElementById('countdown-text');
 
     if (!validTarget) {
-      // 非法或缺少目标 URL 处理
-      document.title = "跳转失败 | AI 资讯雷达";
-      if (nameEl) nameEl.textContent = "未指定目标或链接不安全";
-      if (hostEl) hostEl.textContent = "无效的请求参数";
-      if (countdownText) countdownText.textContent = "未检测到有效的外部安全网址，请返回首页。";
+      document.title = t.failTitle;
+      if (nameEl) nameEl.textContent = t.failTarget;
+      if (hostEl) hostEl.textContent = t.failParam;
+      if (countdownEl) countdownEl.textContent = t.failCountdown;
       if (jumpBtn) {
-        jumpBtn.textContent = "返回 AI 资讯雷达首页";
-        jumpBtn.href = "/";
+        jumpBtn.innerHTML = `<span>${t.failBtn}</span>`;
+        jumpBtn.href = t.homeUrl;
       }
       const progressBar = document.getElementById('progress-bar');
       if (progressBar) progressBar.style.display = 'none';
@@ -212,14 +313,14 @@
         host = validTarget.split('/')[2] || validTarget;
       }
 
-      const displayName = rawName ? decodeURIComponent(rawName) : (host || "AI 工具官网");
+      const displayName = rawName ? decodeURIComponent(rawName) : (host || t.defaultTargetName);
       if (nameEl) nameEl.textContent = displayName;
       if (hostEl) hostEl.textContent = host;
       if (jumpBtn) jumpBtn.href = validTarget;
 
-      document.title = `正在前往 ${displayName} | AI 资讯雷达`;
+      document.title = `${t.goingTo} ${displayName} | ${t.brandName}`;
 
-      // 1.2 秒自动平滑跳转
+      // Smooth auto-redirect in 1.2s
       let countdown = 1;
       const timer = setInterval(() => {
         countdown -= 1;
@@ -229,7 +330,6 @@
         }
       }, 1200);
 
-      // 用户点击直接跳转时，清除自动跳转计时器
       if (jumpBtn) {
         jumpBtn.addEventListener('click', () => {
           clearInterval(timer);
@@ -241,7 +341,7 @@
       if (window.history.length > 1) {
         window.history.back();
       } else {
-        window.location.href = '/';
+        window.location.href = t.homeUrl;
       }
     }
   </script>

@@ -648,7 +648,9 @@ ARTICLE_TITLE_EN_MAP = {
     "Image-to-WebDev 代码竞技场重磅更新":
         "Image-to-WebDev Arena Major Update: Benchmarking Multimodal Front-end Generation",
     "DeepSeek-V4.1-Flash (Max) 震撼登场":
-        "DeepSeek-V4.1-Flash (Max) Architecture and Empirical Benchmarks Breakdown"
+        "DeepSeek-V4.1-Flash (Max) Architecture and Empirical Benchmarks Breakdown",
+    "Claude Code 还能这么玩":
+        "Claude Code Deep-Dive: Third-Party Proxy Architecture Slashes Compute Costs by 93%"
 }
 
 def get_english_article_title(zh_title: str) -> str:
@@ -659,6 +661,10 @@ def get_english_article_title(zh_title: str) -> str:
     clean = re.sub(r'^(?:深度拆解[：:]|围绕)', '', zh_title)
     clean = re.sub(r'[，,]?一线技术人必须看清.*$', '', clean)
     clean = re.sub(r'^[【\[].*?[】\]]\s*', '', clean)
+    if re.search(r'[\u4e00-\u9fff]', clean):
+        if 'Claude Code' in clean:
+            return "Claude Code Deep-Dive: Proxy Hacks Slash Compute Costs by 93%"
+        return "AI Frontier Deep-Dive Analysis & Technical Breakdown"
     return clean.strip('“"\' ') or zh_title
 
 
