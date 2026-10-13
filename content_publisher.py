@@ -711,7 +711,7 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
 
     if is_hl:
         return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)] hover:shadow-[0_0_28px_rgba(251,191,36,0.35)] hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)] hover:shadow-[0_0_28px_rgba(251,191,36,0.35)] hover:-translate-y-0.5">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
                 <div class="space-y-2 pt-0.5">
                   <div class="flex items-center justify-between text-[10px] gap-2">
@@ -749,7 +749,7 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
               </article>"""
     else:
         return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer bg-white/95 dark:bg-slate-900/85 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200/90 dark:border-slate-800/80 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
@@ -809,7 +809,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         for p_idx in range(0, len(viral_items), 3):
             p_slice = viral_items[p_idx:p_idx+3]
             cards_html = "\n".join([format_viral_page_card(it, is_zh=False) for it in p_slice])
-            viral_ticker_en_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0">\n{cards_html}\n</div>\n'
+            viral_ticker_en_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 English
         top_three_en_html = ""
@@ -856,8 +856,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
                 img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_en}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
 
+            it_id = it.get("id") or ""
             news_cards_en_html += f"""
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_tag}
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -865,15 +866,21 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: {src}</span>
                     </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_en}</a>
-                    </h3>
+                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                      {t_en}
+                    </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       {s_en}
                     </p>
                   </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">Read Story ↗</a>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
                   </div>
                 </div>
               </article>"""
@@ -1019,10 +1026,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口高度，杜绝全部展开
+        # 严格约束走马灯视口，由 JS fitViralTickerHeight 动态精准测量适配
         en_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden h-[480px] md:h-[155px] max-h-[480px] md:max-h-[155px] transition-all duration-300" style="height: 155px; max-height: 155px;">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden transition-all duration-300">',
             en_content
         )
 
@@ -1073,7 +1080,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         for p_idx in range(0, len(viral_items), 3):
             p_slice = viral_items[p_idx:p_idx+3]
             cards_html = "\n".join([format_viral_page_card(it, is_zh=True) for it in p_slice])
-            viral_ticker_zh_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0">\n{cards_html}\n</div>\n'
+            viral_ticker_zh_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 Chinese
         top_three_zh_html = ""
@@ -1115,24 +1122,31 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
                 img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_zh}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
 
+            it_id = it.get("id") or ""
             news_cards_zh_html += f"""
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_tag}
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 突发快讯</span>
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: {src}</span>
                     </div>
-                    <h3 itemprop="headline" class="font-bold text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug">
-                      <a href="{u}" target="_blank" rel="noopener noreferrer" itemprop="url" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t_zh}</a>
-                    </h3>
+                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                      {t_zh}
+                    </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       {s_zh}
                     </p>
                   </div>
-                  <div class="flex justify-end pt-1">
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-[11px] text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">阅读详情 ↗</a>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>资讯概要</span>
+                    </button>
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      阅读原文 ↗
+                    </a>
                   </div>
                 </div>
               </article>"""
@@ -1260,10 +1274,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口高度，杜绝全部展开
+        # 严格约束走马灯视口，由 JS fitViralTickerHeight 动态精准测量适配
         zh_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden h-[480px] md:h-[155px] max-h-[480px] md:max-h-[155px] transition-all duration-300" style="height: 155px; max-height: 155px;">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden transition-all duration-300">',
             zh_content
         )
 
