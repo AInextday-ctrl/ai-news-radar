@@ -116,6 +116,11 @@
     #viral-ticker-slider {
       will-change: transform;
     }
+  
+    /* 强制所有卡片与新闻标题按钮严格靠左对齐，彻底覆盖浏览器 button 默认居中样式 */
+    .glass-card button, button.text-left {
+      text-align: left !important;
+    }
   </style>
   <script>
     // Zero-FOUC theme initialization
@@ -862,7 +867,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: The San Francisco Standard</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('acd7455f66fc44f2')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('acd7455f66fc44f2')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Federal prosecutors say a Saudi national was arrested over bugging an OpenAI executive conference room; OpenAI found the
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -888,7 +893,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: The Information</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('16193526ff0965ea')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('16193526ff0965ea')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at 
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -914,7 +919,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9e7c2477a5f047b1')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('9e7c2477a5f047b1')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Shopify opens its catalog up to more AI agents
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -942,7 +947,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: Wired AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('44dc88b8a201cd15')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('44dc88b8a201cd15')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       OpenAI and Anthropic Tell British Lawmakers: Regulate Us
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -968,7 +973,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: Anthropic</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('962f7996a94f754c')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('962f7996a94f754c')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Anthropic details Scion, a git replacement for its monorepo, built by seven engineers with Claude in five months, as dai
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -994,7 +999,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('f2d7479f75b94865')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('f2d7479f75b94865')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Xbox is officially embracing the chaos of AI-powered game ports
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1020,7 +1025,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: THE DECODER</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9b3a57a8282148ff')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('9b3a57a8282148ff')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       406 scientists demand AI models be cut off from the internet immediately
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1046,7 +1051,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: Reuters</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('fb4ee235c70b18b4')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('fb4ee235c70b18b4')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       A Delaware jury awards Qualcomm $2 in nominal damages after finding Arm breached its architectural license agreement and
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1072,7 +1077,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: THE DECODER</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c7571cac75e06c70')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('c7571cac75e06c70')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Gemini 4 Argon is now available worldwide as Google's most capable frontier model
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1098,7 +1103,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('105a75c730e933a5')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('105a75c730e933a5')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       I don’t miss the camera on the Ray-Ban Meta Audio glasses
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1124,7 +1129,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: Business Insider</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('4747ee97b901c1cc')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('4747ee97b901c1cc')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Sources: Decagon, which offers AI customer service agents and was last valued at $4.5B, hired a bank and is in early tal
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1150,7 +1155,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: TechCrunch</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c2edd6dc16cad375')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('c2edd6dc16cad375')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Pluto Security, which monitors AI agents and vibe-coded apps, exits stealth with $42M, including a $34M Series A, and sa
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -5495,7 +5500,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   </div>
                   <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
                 </div>
-                <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+                <button type="button" onclick="openAiNewsModal(\'${item.id}\')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
                   ${title}
                 </button>
                 ${specBadges}
@@ -5528,7 +5533,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
-          <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+          <button type="button" onclick="openAiNewsModal(\'${item.id}\')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
             ${title}
           </a>
           ${specBadges}
@@ -8233,12 +8238,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             originalCardEl.classList.remove('hidden');
             if (originalTitleEl) originalTitleEl.textContent = '📰 英文报道原文精选 (参考)';
             originalTextEl.innerHTML = `
-              <details class="group cursor-pointer">
-                <summary class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline select-none py-1 flex items-center justify-between">
-                  <span>点击展开外媒英文报道原文</span>
+              <details open class="group">
+                <summary class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline select-none py-1 flex items-center justify-between cursor-pointer">
+                  <span>📰 权威媒体报道核心实录 (完整段落)</span>
                   <span class="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
                 </summary>
-                <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line">
+                <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line space-y-2">
                   ${formatRichArticleContent(origContentEn, false)}
                 </div>
               </details>

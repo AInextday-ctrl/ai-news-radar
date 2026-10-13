@@ -937,7 +937,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
                       <span>Source: {src}</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       {t_en}
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1203,7 +1203,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: {src}</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       {t_zh}
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">

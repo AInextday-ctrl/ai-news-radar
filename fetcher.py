@@ -544,11 +544,12 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
             clean_paras = [html.unescape(re.sub(r'<[^>]+>', '', p)).strip() for p in paras]
             clean_paras = [
                 p for p in clean_paras 
-                if len(p) > 50 and not any(bad in p.lower() for bad in [
-                    "cookie", "newsletter", "subscribe", "sign up", "read more", 
-                    "all rights reserved", "terms of service", "privacy policy",
-                    "advertisement", "enable javascript"
-                ])
+                if len(p) > 60 and not any(bad in p.lower() for bad in [
+                    "sign in", "close menu", "search query", "opens in new tab", "cookie",
+                    "newsletter", "subscribe", "sign up", "read more", "all rights reserved",
+                    "terms of service", "privacy policy", "advertisement", "enable javascript",
+                    "share this", "follow us", "click here", "copyright", "photo by", "getty images"
+                ]) and not p.startswith("(") and not p.startswith("（")
             ]
             if clean_paras:
                 result["article_content"] = "\n\n".join(clean_paras[:30])
@@ -2992,7 +2993,9 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    if not img_url or is_dummy_summary or not article_text_en:
+                    # 若文章未获取到长文段落 (少于 250 字符) 或缺失图片，强力穿透源站获取真实多段落正文
+                    needs_penetration = (not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 250)
+                    if needs_penetration:
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语
                         og_media = resolve_article_og_media(url, client)
                         if not img_url and og_media.get("cover_image"):
@@ -3001,7 +3004,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
-                        if not article_text_en and og_media.get("article_content"):
+                        if (not article_text_en or len(article_text_en) < 250) and og_media.get("article_content"):
                             article_text_en = og_media["article_content"]
                         if is_dummy_summary and og_media.get("description") and len(og_media["description"]) >= 20:
                             clean_summary = og_media["description"]

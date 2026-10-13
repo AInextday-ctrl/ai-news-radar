@@ -116,6 +116,11 @@
     #viral-ticker-slider {
       will-change: transform;
     }
+  
+    /* 强制所有卡片与新闻标题按钮严格靠左对齐，彻底覆盖浏览器 button 默认居中样式 */
+    .glass-card button, button.text-left {
+      text-align: left !important;
+    }
   </style>
   <script>
     // Zero-FOUC theme initialization
@@ -861,7 +866,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: The San Francisco Standard</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('acd7455f66fc44f2')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('acd7455f66fc44f2')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       联邦检察官说，一名沙特国民因窃听OpenAI高管会议室而被捕； OpenAI在9月30日左右发现了录音机。
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -887,7 +892,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: The Information</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('16193526ff0965ea')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('16193526ff0965ea')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       资料来源：自动驾驶仿真软件制造商Applied Intuition已收到估值超过300亿美元的投资报价，高于6月份的150亿美元（ Stephanie P
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -913,7 +918,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9e7c2477a5f047b1')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('9e7c2477a5f047b1')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Shopify向更多人工智能代理开放其目录
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -939,7 +944,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: Wired AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('44dc88b8a201cd15')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('44dc88b8a201cd15')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       OpenAI和Anthropic告诉英国立法者：监管我们
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -965,7 +970,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: Anthropic</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('962f7996a94f754c')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('962f7996a94f754c')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Scion是它的单orepo的替代品，由7名工程师和Claude在5个月内建造，每天合并的数量从5月份的2.5万增加到3万多（Anthropic）。
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -991,7 +996,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('f2d7479f75b94865')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('f2d7479f75b94865')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Xbox正式接受人工智能驱动的游戏移植
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1017,7 +1022,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: THE DECODER</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9b3a57a8282148ff')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('9b3a57a8282148ff')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       406名科学家要求立即从互联网上切断人工智能模型
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1043,7 +1048,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: Reuters</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('fb4ee235c70b18b4')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('fb4ee235c70b18b4')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       特拉华州的一个陪审团在发现Arm违反其架构许可协议并试图扰乱高通的业务后，判给高通2 $的名义损害赔偿金（
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1069,7 +1074,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: THE DECODER</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c7571cac75e06c70')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('c7571cac75e06c70')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       Gemini 4 Argon现已成为谷歌最强大的前沿型号
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1095,7 +1100,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: The Verge AI</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('105a75c730e933a5')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('105a75c730e933a5')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       我不会错过雷朋Meta Audio眼镜的相机
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1121,7 +1126,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: Business Insider</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('4747ee97b901c1cc')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('4747ee97b901c1cc')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       资料来源： Decagon ，提供人工智能客户服务代理，最后估值为45亿美元，聘请了一家银行，并正在与买家进行早期谈判，包括ServiceNow （ Ka
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -1147,7 +1152,7 @@
                       <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
                       <span>信源: TechCrunch</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c2edd6dc16cad375')" class="block font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors text-left leading-snug cursor-pointer">
+                    <button type="button" onclick="openAiNewsModal('c2edd6dc16cad375')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
                       监控AI代理和vibe编码应用程序的Pluto Security以$ 4200万退出隐身，其中包括$ 3400万系列A ，并表示自4月份以来已达到$ 200万以上的ARR （ R
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
@@ -5502,7 +5507,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   </div>
                   <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
                 </div>
-                <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+                <button type="button" onclick="openAiNewsModal(\'${item.id}\')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
                   ${title}
                 </button>
                 ${specBadges}
@@ -5535,7 +5540,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
           </div>
-          <button type="button" onclick="openAiNewsModal('${item.id}')" class="block font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
+          <button type="button" onclick="openAiNewsModal(\'${item.id}\')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors leading-snug cursor-pointer">
             ${title}
           </a>
           ${specBadges}
@@ -8236,12 +8241,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             originalCardEl.classList.remove('hidden');
             if (originalTitleEl) originalTitleEl.textContent = '📰 英文报道原文精选 (参考)';
             originalTextEl.innerHTML = `
-              <details class="group cursor-pointer">
-                <summary class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline select-none py-1 flex items-center justify-between">
-                  <span>点击展开外媒英文报道原文</span>
+              <details open class="group">
+                <summary class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline select-none py-1 flex items-center justify-between cursor-pointer">
+                  <span>📰 权威媒体报道核心实录 (完整段落)</span>
                   <span class="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
                 </summary>
-                <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line">
+                <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line space-y-2">
                   ${formatRichArticleContent(origContentEn, false)}
                 </div>
               </details>
