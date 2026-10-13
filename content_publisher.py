@@ -672,31 +672,80 @@ def get_english_article_title(zh_title: str) -> str:
 # 3. 根首页 index.html 真实可见静态 DOM 预渲染 (彻底解决 654 字单薄问题)
 # ==============================================================================
 
-def is_viral_highlight_item(it: dict) -> bool:
+def resolve_viral_tweet_tag(it: dict, is_zh: bool) -> tuple:
+    """
+    根据推文真实内容精确打标，杜绝混淆“突破”与“重置”：
+    1. 架构深度解析 (Architecture Deep Dive) - 底层原理/重置机制/注意力机制
+    2. 极客实战演示 (Builder Showcase) - 3D 渲染/MCP Agent/实操工作流/本地部署
+    3. 官方重磅发布 (Official Release) - 官方产品首发/订阅上线/模型发布
+    4. 核心技术突破 (Frontier Breakthrough) - 经实测打破记录/能力跃升
+    5. 领袖前沿观点 (Titan Insight) - 行业大佬思想观察/评论
+    6. 极客热推 (24h Trending) - 默认高互动推文
+    返回: (badge_text, is_highlight, badge_color_theme)
+    """
     author = (str(it.get("author", "")) + " " + str(it.get("author_handle", ""))).lower()
     title = (str(it.get("title", "")) + " " + str(it.get("title_zh", "")) + " " + str(it.get("title_en", ""))).lower()
-    text = (str(it.get("full_text_zh", "")) + " " + str(it.get("full_text_en", "")) + " " + str(it.get("summary_zh", ""))).lower()
-    badge = (str(it.get("badge", "")) + " " + str(it.get("badge_zh", ""))).lower()
-    combo = author + " " + title + " " + text + " " + badge
-    return any(k in combo for k in ["codex", "claude code", "reset", "重置", "gpt-6", "gpt 6", "gpt-5", "gpt 5", "opus 5", "fable 5", "deepseek", "r4", "r1", "突破", "breakthrough", "首发", "sota", "reasoning", "cursor", "seedance"])
+    text = (str(it.get("full_text_zh", "")) + " " + str(it.get("full_text_en", "")) + " " + str(it.get("summary_zh", "")) + " " + str(it.get("summary_en", ""))).lower()
+    combo = author + " " + title + " " + text
+
+    # 1. 架构深度解析 (Architecture Deep Dive)
+    if any(k in combo for k in [
+        "reset architecture", "gpt reset", "context reset", "attention drift", 
+        "context purge", "attention buffer", "prior bias", "first-principles reasoning",
+        "transformer architecture", "kv cache", "inference engine", "架构重构", "重置架构",
+        "重置机制", "注意力死锁", "注意力漂移", "底层架构", "注意力机制"
+    ]):
+        badge = "⚡ 架构深度解析" if is_zh else "⚡ ARCHITECTURE INSIGHT"
+        return badge, True, "amber"
+
+    # 2. 极客实战演示 / 落地案例 / Agent 工作流 (Builder Showcase & Workflow)
+    if any(k in combo for k in [
+        "blender", "mcp agent", "mcp agents", "3d website", "meshes", "triangles",
+        "scene: ", "scene :", "wilderness hotel", "created the video with", "i've built an internal",
+        "i used", "built an internal", "concept for a", "workflow demo", "made using seedance",
+        "prompt :", "frame io", "极客制作", "实战演示", "实战案例", "落地案例", "工作流演示",
+        "打造了", "制作了", "克隆了"
+    ]):
+        badge = "🛠️ 极客实战演示" if is_zh else "🛠️ BUILDER SHOWCASE"
+        return badge, True, "cyan"
+
+    # 3. 官方重磅发布 / 产品与订阅上线 (Official Release & Product Drop)
+    if any(k in combo for k in [
+        "officially introduced", "just introduced", "is live!", "is live 🔴",
+        "officially launched", "we shipped", "we are launching", "announces the",
+        "new subscription", "subscribers can", "官宣上线", "正式推出", "官方发布",
+        "重磅上线", "全新订阅"
+    ]):
+        badge = "🌟 官方重磅发布" if is_zh else "🌟 OFFICIAL RELEASE"
+        return badge, True, "emerald"
+
+    # 4. 前沿技术突破 / SOTA 指标跃升 (Frontier Breakthrough & SOTA)
+    if any(k in combo for k in [
+        "breakthrough for v", "major breakthrough", "breakthrough in", "sota record", 
+        "state-of-the-art", "record-breaking", "重大突破", "核心突破", "技术跃升"
+    ]):
+        badge = "⚡ 核心技术突破" if is_zh else "⚡ FRONTIER BREAKTHROUGH"
+        return badge, True, "rose"
+
+    # 5. 领袖前沿观点 / 行业观察 (Titan Insight & Commentary)
+    if any(k in author for k in ["musk", "elon", "sama", "altman", "karpathy", "zuck", "zuckerberg", "lecun", "hassabis"]):
+        badge = "💡 领袖前沿观点" if is_zh else "💡 TITAN INSIGHT"
+        return badge, False, "indigo"
+
+    # 6. 全网极客热推 (24h Trending)
+    custom_badge = (it.get("badge_zh") if is_zh else it.get("badge_en")) or it.get("badge")
+    if custom_badge and "breakthrough" not in custom_badge.lower() and "reset" not in custom_badge.lower():
+        badge = custom_badge
+    else:
+        badge = "🔥 24h 极客热推" if is_zh else "🔥 24H TRENDING"
+    return badge, False, "slate"
 
 def format_viral_page_card(it: dict, is_zh: bool) -> str:
-    is_hl = is_viral_highlight_item(it)
+    badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     author = safe_text(it.get("author") or ("AI 领袖" if is_zh else "AI Pioneer"), 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
     role = safe_text((it.get("author_role") if is_zh else it.get("author_role_en")) or ("AI 先锋观察者" if is_zh else "AI Pioneer & Builder"), 60)
     
-    if is_hl:
-        raw_text = (author + " " + str(it.get("title", ""))).lower()
-        if "codex" in raw_text:
-            badge_text = "⚡ 重大重置 · Codex" if is_zh else "⚡ BREAKTHROUGH RESET"
-        elif "claude" in raw_text:
-            badge_text = "⚡ 重大重置 · Claude" if is_zh else "⚡ CLAUDE BREAKTHROUGH"
-        else:
-            badge_text = "⚡ 核心突破 · SOTA" if is_zh else "⚡ FRONTIER SOTA"
-    else:
-        badge_text = safe_text((it.get("badge_zh") if is_zh else it.get("badge_en")) or it.get("badge") or ("🔥 24h 爆款" if is_zh else "🔥 24h Viral"), 30)
-
     if is_zh:
         text = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
         time_str = "24h 实时"
@@ -710,15 +759,36 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
     avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
 
     if is_hl:
+        if theme == "amber":
+            pill_style = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30"
+            border_style = "border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)]"
+            top_line = "bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"
+            card_bg = "bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
+        elif theme == "cyan":
+            pill_style = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30"
+            border_style = "border-2 border-sky-400 dark:border-sky-400/90 shadow-[0_0_20px_rgba(56,189,248,0.22)] dark:shadow-[0_0_25px_rgba(56,189,248,0.28)]"
+            top_line = "bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
+            card_bg = "bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
+        elif theme == "emerald":
+            pill_style = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30"
+            border_style = "border-2 border-emerald-400 dark:border-emerald-400/90 shadow-[0_0_20px_rgba(52,211,153,0.22)] dark:shadow-[0_0_25px_rgba(52,211,153,0.28)]"
+            top_line = "bg-gradient-to-r from-emerald-400 via-teal-500 to-sky-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
+            card_bg = "bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
+        else: # rose
+            pill_style = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30"
+            border_style = "border-2 border-rose-400 dark:border-rose-400/90 shadow-[0_0_20px_rgba(244,63,94,0.22)] dark:shadow-[0_0_25px_rgba(244,63,94,0.28)]"
+            top_line = "bg-gradient-to-r from-rose-400 via-pink-500 to-purple-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"
+            card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
+
         return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)] hover:shadow-[0_0_28px_rgba(251,191,36,0.35)] hover:-translate-y-0.5">
-                <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 rounded-full shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5">
+                <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
                 <div class="space-y-2 pt-0.5">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
                       <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400/80 shadow-sm" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-amber-500 text-amber-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
+                        <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                       </div>
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
@@ -728,17 +798,17 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white shadow-sm shadow-amber-500/30 shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0">
+                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
                       <span>{badge_text}</span>
                     </span>
                   </div>
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
                     {text}
                   </p>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/60 dark:border-amber-500/20">
-                  <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-semibold">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
                     <span>⚡</span>
                     <span>{time_str}</span>
                   </span>
@@ -748,12 +818,13 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
                 </div>
               </article>"""
     else:
+        pill_cls = "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25" if theme == "indigo" else "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25"
         return f"""
               <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                      <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
@@ -762,7 +833,7 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
                       </div>
                     </div>
-                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">{badge_text}</span>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px]">{badge_text}</span>
                   </div>
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
                     {text}
@@ -1026,10 +1097,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口，由 JS fitViralTickerHeight 动态精准测量适配
+        # 严格约束走马灯视口，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿
         en_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden transition-all duration-300">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden">',
             en_content
         )
 
@@ -1274,10 +1345,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口，由 JS fitViralTickerHeight 动态精准测量适配
+        # 严格约束走马灯视口，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿
         zh_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden transition-all duration-300">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden">',
             zh_content
         )
 
