@@ -360,12 +360,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">408</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">409</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">92</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">94</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -375,7 +375,7 @@
           <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🛠️</span>
             <span id="nav-text-tools" class="truncate font-semibold">Tools</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-tools">166</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-tools">165</span>
           </button>
           <button onclick="switchTab('videos')" id="tab-btn-videos" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🎬</span>
@@ -839,6 +839,58 @@
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('85366f7d01052fa8')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="Filing: Abdulrahman Alfozan, the OpenAI staffer charged with bugging a conference room, used a Seeed Xiao ESP32-S3 Sense" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Bloomberg</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('85366f7d01052fa8')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
+                      Filing: Abdulrahman Alfozan, the OpenAI staffer charged with bugging a conference room, used a Seeed Xiao ESP32-S3 Sense
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      An employee at OpenAI was arrested and charged with using a hidden recording device in one of the company's San Francisco offices …
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('85366f7d01052fa8')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-13/openai-says-staffer-arrested-for-hidden-recording-device-in-office" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('35bc17653c70e9d9')" itemscope itemtype="https://schema.org/NewsArticle">
+                
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Forbes</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('35bc17653c70e9d9')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
+                      Albert Invent, which launched an AI model trained on chemical patents and data about 15M molecules, raised a $55M Series
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Scientists at manufacturing conglomerates like Kenvue and Henkel use Albert Invent's AI tools to design experiments.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('35bc17653c70e9d9')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.forbes.com/sites/the-prompt/2026/10/13/30-of-scientific-experiments-are-wasteful-this-startup-wants-to-use-ai-to-change-that/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('0da1680bee18f5f2')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png" alt="Sources: OpenAI is in early talks to buy Trail of Bits, which finds and fixes vulnerabilities in open-source software; f" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
@@ -1120,60 +1172,6 @@ by Jon Hicks
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://sfstandard.com/2026/10/13/openai-engineer-arrested-alleged-bugging-executive-conference-room/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('16193526ff0965ea')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" alt="Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at " loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: The Information</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('16193526ff0965ea')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
-                      Sources: self-driving simulation software maker Applied Intuition has received investment offers that would value it at 
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      For the last three years, AI labs like OpenAI, Anthropic and xAI have sucked up a lot of investor attention—as well as nosebleed valuations.
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-1 gap-2">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('16193526ff0965ea')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.theinformation.com/articles/applied-intuition-fields-offers-30-billion-valuation-2" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9e7c2477a5f047b1')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/10/gettyimages-2225304503.jpg?quality=90&strip=all&crop=0,0,100,100" alt="Shopify opens its catalog up to more AI agents" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: The Verge AI</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('9e7c2477a5f047b1')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
-                      Shopify opens its catalog up to more AI agents
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      More AI agents will soon be able to browse and purchase from Shopify listings, marking an expansion of the company's agentic commerce ambitions.
-
-Shopify announced Tuesday it will let shoppers configure their AI agents to purchase products on their b
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-1 gap-2">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('9e7c2477a5f047b1')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.theverge.com/news/1010365/shopify-opens-its-catalog-up-to-more-ai-agents" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
@@ -1890,7 +1888,7 @@ Shopify announced Tuesday it will let shoppers configure their AI agents to purc
     <section class="sr-only" aria-label="Historical AI Daily Intelligence & Deep-Dive Archives">
       <h2>Historical AI Daily Intelligence Archive</h2>
       <nav aria-label="Daily Briefings Archive">
-        <a href="/daily/2026-10-13">📅 2026-10-13 Briefing</a> <a href="/daily/2026-10-12">📅 2026-10-12 Briefing</a> <a href="/daily/2026-10-11">📅 2026-10-11 Briefing</a> <a href="/daily/2026-10-10">📅 2026-10-10 Briefing</a> <a href="/daily/2026-10-09">📅 2026-10-09 Briefing</a> <a href="/daily/2026-10-08">📅 2026-10-08 Briefing</a> <a href="/daily/2026-10-07">📅 2026-10-07 Briefing</a> <a href="/daily/2026-10-06">📅 2026-10-06 Briefing</a> <a href="/daily/2026-10-05">📅 2026-10-05 Briefing</a> <a href="/daily/2026-10-04">📅 2026-10-04 Briefing</a> <a href="/daily/2026-10-03">📅 2026-10-03 Briefing</a> <a href="/daily/2026-10-02">📅 2026-10-02 Briefing</a> 
+        <a href="/daily/2026-10-14">📅 2026-10-14 Briefing</a> <a href="/daily/2026-10-13">📅 2026-10-13 Briefing</a> <a href="/daily/2026-10-12">📅 2026-10-12 Briefing</a> <a href="/daily/2026-10-11">📅 2026-10-11 Briefing</a> <a href="/daily/2026-10-10">📅 2026-10-10 Briefing</a> <a href="/daily/2026-10-09">📅 2026-10-09 Briefing</a> <a href="/daily/2026-10-08">📅 2026-10-08 Briefing</a> <a href="/daily/2026-10-07">📅 2026-10-07 Briefing</a> <a href="/daily/2026-10-06">📅 2026-10-06 Briefing</a> <a href="/daily/2026-10-05">📅 2026-10-05 Briefing</a> <a href="/daily/2026-10-04">📅 2026-10-04 Briefing</a> <a href="/daily/2026-10-03">📅 2026-10-03 Briefing</a> 
       </nav>
       <h2>AI Deep-Dive Intelligence & Analysis</h2>
       <div>
