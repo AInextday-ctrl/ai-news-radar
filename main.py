@@ -455,27 +455,79 @@ def parse_time_for_sort(it):
         return 0
 
 
+def is_meaningful_tweet(it: dict) -> bool:
+    """
+    判断一条推文是否具备独立阅读价值，坚决过滤无意义单句、脱离语境的闲聊回复、纯寒暄与碎碎念
+    """
+    if not isinstance(it, dict):
+        return False
+        
+    # 彻底禁止任何伪造/模拟数据
+    item_id = str(it.get("id") or "")
+    if "tweet_tibo_codex_reset" in item_id or item_id.startswith("mock_"):
+        return False
+        
+    text = (it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
+    if not text:
+        return False
+        
+    # 如果整个正文只是一个链接 (如 https://t.co/...)，没有实质文本说明，坚决过滤
+    if re.fullmatch(r'https?://\S+', text):
+        return False
+
+    # 剔除链接和 @提及 后的实质内容
+    substantive = re.sub(r'https?://\S+|@\w+', '', text).strip()
+    
+    # 1. 纯寒暄、无意义感叹或单一短语
+    low_value_patterns = [
+        r'^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao|nice|wow|true|facts|word)[!.\s]*$',
+        r'^(?:check this out|excited for this|eyes on this|👀|🔥|🚀|💯)[!.\s]*$',
+        r'^(?:happy to help|appreciate it|welcome)[!.\s]*$',
+        r'^(?:good plans are simple.*|what would you like.*|grok.*|tesla self-driving.*|you can’t possibly.*|legit how i look.*)$'
+    ]
+    if any(re.match(p, substantive, re.IGNORECASE) for p in low_value_patterns):
+        return False
+        
+    has_media = bool(it.get("image_url") or it.get("video_url") or it.get("has_video") or it.get("media_urls"))
+    
+    # 2. 如果是回复（is_reply 或开头是 @xxx），自身无独立媒体且字数小于 120 字，坚决过滤
+    is_reply = bool(it.get("isReply") or it.get("is_reply") or text.startswith("@"))
+    if is_reply:
+        if not has_media and len(substantive) < 120:
+            return False
+            
+    # 3. 无媒体的无意义单句短推文：
+    # 如果没有配图/视频，且字数小于 60 字符，或者单句 < 80 字符，坚决过滤
+    if not has_media:
+        if len(substantive) < 60:
+            return False
+        sentences = [s.strip() for s in re.split(r'[.!?。！？\n]+', substantive) if s.strip()]
+        if len(sentences) <= 1 and len(substantive) < 80:
+            return False
+        
+    return True
+
+
 def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
     """
-    精选 24 小时内最火爆的 AI 领袖与核心先锋推文 (6~8条)：
-    专用于首页顶部走马灯/滚动轮播展示，替换原有 60 秒重复资讯横栏。
-    重点关注：
-    - Tibo (@thsottiaux / @tibo_maker) Codex重置/云架构推文
-    - Claude / Anthropic 新模型、新技术发布与价格动态
-    - Gemini / Google DeepMind 前沿突破
-    - Sam Altman (@sama)、Elon Musk (@elonmusk)、Mark Zuckerberg (@zuck)、Andrej Karpathy (@karpathy) 等核心名人的爆款推文
-    严格限定在 24 小时以内 (diff <= 86400 或具有动态置顶特权)。
+    精选 24 小时内真实抓取的 AI 领袖与核心先锋推文 (6~9条)：
+    专用于首页顶部走马灯/滚动轮播展示。
+    【铁律】
+    1. 100% 真实采信，严禁任何人工伪造或拼凑推文；
+    2. 严格限定在 24 小时以内 (diff <= 86400)，过期坚决清退，一个不留；
+    3. 严禁无意义单句、纯碎碎念或脱离语境的回复贴。
     """
     if now_ts is None:
         now_ts = time.time()
     MAX_24H_SECONDS = 86400
-    now_utc = datetime.now(timezone.utc)
 
-    # 1. 筛选所有属于 celebrity 且在 24 小时以内的真实社交推文
+    # 1. 严格筛选所有属于 celebrity 且在 24 小时以内的真实社交推文（绝无置顶豁免）
     social_items = [
         it for it in items 
         if it.get("category") == "celebrity" 
-        and ((now_ts - parse_time_for_sort(it)) <= MAX_24H_SECONDS or it.get("is_pinned"))
+        and (now_ts - parse_time_for_sort(it)) <= MAX_24H_SECONDS
+        and (now_ts - parse_time_for_sort(it)) >= -300
+        and is_meaningful_tweet(it)
     ]
 
     # 核心领袖优先级评分函数
@@ -484,13 +536,7 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
         title_str = (it.get("title", "") + " " + it.get("title_zh", "") + " " + it.get("title_en", "")).lower()
         score = 0
 
-        # 重点 1: Tibo Codex 重置推文
-        if any(k in author_str for k in ["tibo", "thsottiaux", "sottiaux"]):
-            score += 500000
-        if "codex" in title_str or "reset" in title_str or "重置" in title_str:
-            score += 300000
-
-        # 重点 2: 官方前沿实验室与顶流巨头
+        # 重点 1: 官方前沿实验室与顶流巨头
         if any(k in author_str for k in ["anthropic", "claude"]):
             score += 200000
         if any(k in author_str for k in ["deepmind", "google", "hassabis"]):
@@ -505,56 +551,22 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
             score += 150000
         if any(k in author_str for k in ["deepseek"]):
             score += 140000
+        if any(k in author_str for k in ["tibo", "thsottiaux"]):
+            score += 130000
 
         # 爆帖特权
         if it.get("sub_category") == "viral_post" or it.get("is_viral"):
             score += 50000
-        if it.get("is_pinned"):
-            score += 100000
 
-        # 时间新度加权
+        # 时间新度加权 (越新权重越高)
         score += parse_time_for_sort(it) / 10000
         return score
 
     social_items.sort(key=leader_score, reverse=True)
 
-    # 2. 确保 Tibo 的 Codex 重置核心爆款推文处于首发显要位置
-    has_tibo = any("thsottiaux" in (it.get("author_handle") or "").lower() or "tibo" in (it.get("author") or "").lower() for it in social_items[:6])
-    tibo_featured = {
-        "id": "tweet_tibo_codex_reset_24h",
-        "category": "celebrity",
-        "sub_category": "viral_post",
-        "author": "Thibault Sottiaux (Tibo)",
-        "author_handle": "@thsottiaux",
-        "author_avatar": "https://unavatar.io/x/thsottiaux",
-        "author_role_zh": "OpenAI Codex 架构先锋",
-        "author_role_en": "OpenAI Codex Architect & Pioneer",
-        "is_pinned": True,
-        "is_viral": True,
-        "raw_published_at": (now_utc - timedelta(hours=2)).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "time_display_zh": "2小时前",
-        "time_display_en": "2h ago",
-        "badge_zh": "⚡ 架构深度解析 · Codex",
-        "badge_en": "⚡ ARCHITECTURE INSIGHT",
-        "viral_tag_zh": "⚡ 架构深度解析",
-        "viral_tag_en": "⚡ Architecture Insight",
-        "topic_tag": "#CodexReset",
-        "title": "Tibo: We silently re-shipped Codex Cloud & the context reset architecture. Purges attention drift while preserving task memory.",
-        "title_en": "We silently re-shipped Codex Cloud & the GPT Reset architecture. Purges attention drift and priors while preserving core task memory.",
-        "title_zh": "Codex 云端架构与 GPT 重置协议全网首发：彻底净化注意力死锁与先验偏置，同时无损保留核心任务上下文。",
-        "summary_zh": "Tibo 深度拆解 Codex 核心重构：在多轮复杂编码中，注意力漂移和先入为主妥协会导致模型陷入车轱辘死锁；通过动态 Context Purge 协议可让模型回归第一性原理纯净推导。",
-        "summary_en": "Tibo breaks down the Codex Cloud revamp: purging hidden prior biases and attention buffer drift to force models into first-principles reasoning without discarding critical task constraints.",
-        "url": "https://x.com/thsottiaux/status/2108275041276420573",
-        "metrics": {"views": "1.9M", "likes": 14200, "retweets": 3800}
-    }
-
+    # 2. 从真实推文池中挑选去重后的领袖动态 (100% 真实数据)
     selected_list = []
-    if not has_tibo:
-        selected_list.append(tibo_featured)
-
     seen_handles = set()
-    if not has_tibo:
-        seen_handles.add("@thsottiaux")
 
     for it in social_items:
         h = (it.get("author_handle") or "").lower()
@@ -581,7 +593,7 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
         if len(selected_list) >= 9:
             break
 
-    # 兜底补齐：保证至少 6 条，理想 9 条 (3版 × 3条)
+    # 兜底补齐：若同一作者有多条真实 24 小时内的好推文，可依次补入
     if len(selected_list) < 9:
         for it in social_items:
             if it.get("id") not in {x.get("id") for x in selected_list}:
@@ -684,7 +696,7 @@ def load_existing_items() -> list:
         source = it.get("source", "").lower()
 
         # 1. 丢弃废弃的旧版硬编码 fake ID
-        if it_id in obsolete_fake_ids:
+        if it_id in obsolete_fake_ids or "tweet_tibo_codex_reset" in it_id or it_id.startswith("mock_"):
             continue
 
         # 2. 丢弃未解析成功的 Google News 中转链接
@@ -697,10 +709,12 @@ def load_existing_items() -> list:
             if "source" in it:
                 it["author"] = it["source"]
 
-        # 3. 严格校验所有 𝕏 / Twitter 推文：必须为直接定位到具体贴文的 status 深层链接，杜绝纯主页 URL
+        # 3. 严格校验所有 𝕏 / Twitter 推文：必须为直接定位到具体贴文的 status 深层链接，杜绝纯主页 URL，且清除无意义推文
         is_x = platform == "x" or "twitter" in source or it_id.startswith("x_") or "x.com" in u or "twitter.com" in u
-        if is_x:
+        if is_x or it.get("category") == "celebrity":
             if not x_status_pattern.search(u):
+                continue
+            if not is_meaningful_tweet(it):
                 continue
 
         # 4. 丢弃旧版提示词与教程，让新版真实发布时间的独立提示词库覆盖
@@ -1151,8 +1165,13 @@ def save_news(items: list):
         diff = now_ts - ts
         cat = it.get("category", "news")
 
-        # 首页严格门禁：全类别严格限定在 48 小时以内（优先 24 小时，或享有特权置顶）
-        is_fresh_homepage = (diff <= MAX_HOMEPAGE_SECONDS) or bool(it.get("is_pinned"))
+        # 首页严格门禁：推文 (celebrity) 必须是 24 小时内发生，过期清退，一个不留，清除无意义单句推文！
+        if cat == "celebrity":
+            if not is_meaningful_tweet(it):
+                continue
+            is_fresh_homepage = (diff <= 86400) and (diff >= -300)
+        else:
+            is_fresh_homepage = (diff <= MAX_HOMEPAGE_SECONDS) or bool(it.get("is_pinned"))
 
         if is_fresh_homepage:
             recent_items.append(it)
@@ -1181,7 +1200,8 @@ def save_news(items: list):
             it for it in historical_items 
             if it.get("category") == "celebrity" 
             and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= MAX_HOMEPAGE_SECONDS
+            and (now_ts - parse_time_for_sort(it)) <= 86400
+            and is_meaningful_tweet(it)
         ][:(50 - len(celeb_recent))]
         for it in extra_celeb:
             recent_items.append(it)

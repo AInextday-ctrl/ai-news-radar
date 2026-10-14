@@ -359,7 +359,7 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">综合全景</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">428</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">351</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
@@ -369,7 +369,7 @@
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
             <span id="nav-text-celebrity" class="truncate font-semibold">社交雷达</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">97</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">20</span>
           </button>
           <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🛠️</span>
@@ -523,39 +523,127 @@
           <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)] hover:shadow-xl hover:-translate-y-0.5">
-                <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 shadow-[0_0_8px_rgba(251,191,36,0.8)] rounded-full"></div>
-                <div class="space-y-2 pt-0.5">
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <div class="relative shrink-0">
-                        <img src="https://unavatar.io/x/thsottiaux" alt="Thibault Sottiaux (Tibo)" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
-                      </div>
+                      <img src="https://pbs.twimg.com/profile_images/2044472418815893504/xf14RxM8_normal.png" alt="ClaudeDevs" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Thibault Sottiaux (Tibo)</span>
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">ClaudeDevs</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@thsottiaux · AI 领袖 / 核心开发者</span>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@ClaudeDevs · Official updates for developers building with @ClaudeAI</span>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30 text-white shadow-sm shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                      <span>⚡ 架构深度解析</span>
-                    </span>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
                   </div>
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                    Tibo 深度拆解 Codex 核心重构：在多轮复杂编码中，注意力漂移和先入为主妥协会导致模型陷入车轱辘死锁；通过动态 Context Purge 协议可让模型回归第一性原理纯净推导。
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    The Claude Code hackathon is back, and we're bringing it to Japan!
+
+エンジニアの方も、そうでない方も、日本在住のビルダーならどなたでも応募できます。世界に何を見せてくれるのか、楽しみにしています。
+応募締切は10月26日 23:59（日本時間）：
+
+https://t.co/YXVYxl5gdU
+
+#claudejapan2026
                   </p>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
-                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
-                    <span>⚡</span>
-                    <span>24h 实时</span>
-                  </span>
-                  <a href="https://x.com/thsottiaux/status/2108275041276420573" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
-                    <span>查看原帖 ↗</span>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/ClaudeDevs/status/2110128453760815153" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <img src="https://pbs.twimg.com/profile_images/1798110641414443008/XP8gyBaY_normal.jpg" alt="Anthropic" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Anthropic</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@AnthropicAI · AI 领域领袖 / 核心开发者</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    New on our Engineering blog: Creating in-house source control. 
+
+In May, we merged around 2,500 code changes per day. In September, we merged more than 30,000 per day. As a result, we became bottlenecked by developer infrastructure built for human (r
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/AnthropicAI/status/2110047081414987957" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <img src="https://pbs.twimg.com/profile_images/1695024885070737408/-M-HSH5P_normal.jpg" alt="Google DeepMind" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google DeepMind</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@GoogleDeepMind · AI 领域领袖 / 核心开发者</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Gemini 4 Argon taught a 机器人 to play cornhole just by watching a 视频生成.
+
+It mapped the physics, coded its own simulation, and taught @Apptronik's Apollo humanoid to sink 7 throws in a row.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/GoogleDeepMind/status/2110078384617464201" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
+
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <img src="https://pbs.twimg.com/profile_images/2057682346074058752/zTpu89C1_normal.jpg" alt="Google AI" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google AI</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@GoogleAI · Making AI helpful for everyone. Show thinking ↓</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Gemini 4️⃣ Argon ✨ is now rolling out globally.
+
+Our frontier 模型 is built for complex, real-world tasks across 编程代码, finance, legal, cybersecurity, and science.
+
+Check out how you can use Argon in your favorite Google product 🧵
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/GoogleAI/status/2110039860077527293" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    查看原帖 ↗
                   </a>
                 </div>
               </article>
@@ -591,30 +679,63 @@
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://pbs.twimg.com/profile_images/2089794087998156800/eZOMHRVb_normal.jpg" alt="Google AI Studio" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Elon Musk</span>
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google AI Studio</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@elonmusk · xAI 创始人 / 特斯拉 CEO</span>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@GoogleAIStudio · The fastest path from prompt to prototype to production with</span>
                       </div>
                     </div>
-                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25 shrink-0 text-[10px]">💡 领袖前沿观点</span>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
                   </div>
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。
+                    Gemini 4 Argon is now live via the Gemini API and AI Studio for paid API and Google Ultra subscribers!
+
+start building today: https://t.co/CbKuR8bPfm
                   </p>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h 实时</span>
-                  <a href="https://x.com/elonmusk/status/2109867516646637579" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/GoogleAIStudio/status/2110039725805297933" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
+
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+                <div class="space-y-2">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <img src="https://pbs.twimg.com/profile_images/1970182748146180096/dhZeXi_X_normal.jpg" alt="Cursor" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Cursor</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@cursor_ai · Coding agent for building ambitious software</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Gemini 4 Argon is now available in Cursor!
+
+It scores 52.8% on CursorBench at default effort, on par with Opus 5.5.
+
+Priced at $2/M input and $10/M output tokens.
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/cursor_ai/status/2110087611763368271" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
 
               <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-sky-400 dark:border-sky-400/90 shadow-[0_0_20px_rgba(56,189,248,0.22)] dark:shadow-[0_0_25px_rgba(56,189,248,0.28)] hover:shadow-xl hover:-translate-y-0.5">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)] rounded-full"></div>
@@ -657,127 +778,24 @@
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/azed_ai" alt="azed_ai" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://pbs.twimg.com/profile_images/2064231947149377536/Ab70PxT5_normal.jpg" alt="Qwen" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">azed_ai</span>
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Qwen</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@azed_ai · AI 极客 / 社区开发者</span>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@Alibaba_Qwen · Open foundation models for AGI.</span>
                       </div>
                     </div>
                     <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
                   </div>
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Good morning my friends, wishing you a great day ahead and something to smile about Midjourney --v 8.2 Style --sref 1582397130
+                    Congrats to @lightseekorg on the impressive TokenSpeed results! 🚀 Great to see Qwen3.8-Flash-Next reaching 685 output tokens/s per user on Nvida GPUs. Excited to see the community unlock more of Qwen’s inference potential!
                   </p>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h 实时</span>
-                  <a href="https://x.com/azed_ai/status/2109871519744815572" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
-                    查看原帖 ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-rose-400 dark:border-rose-400/90 shadow-[0_0_20px_rgba(244,63,94,0.22)] dark:shadow-[0_0_25px_rgba(244,63,94,0.28)] hover:shadow-xl hover:-translate-y-0.5">
-                <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-rose-400 via-pink-500 to-purple-500 shadow-[0_0_8px_rgba(244,63,94,0.8)] rounded-full"></div>
-                <div class="space-y-2 pt-0.5">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
-                      <div class="relative shrink-0">
-                        <img src="https://unavatar.io/x/akatz_ai" alt="akatz_ai" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
-                      </div>
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">akatz_ai</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
-                        </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@akatz_ai · AI 极客 / 社区开发者</span>
-                      </div>
-                    </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30 text-white shadow-sm shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                      <span>⚡ 核心技术突破</span>
-                    </span>
-                  </div>
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                    Quick update: Had a breakthrough for V2 With lots of experimenting I was able to get some pretty solid performance transfers. These gens are Minimax H3 ref2va with my character V1 lora and some prompt + masking magic. No Seedance or higgsfield here. 
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
-                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
-                    <span>⚡</span>
-                    <span>24h 实时</span>
-                  </span>
-                  <a href="https://x.com/akatz_ai/status/2109865369737269640" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
-                    <span>查看原帖 ↗</span>
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
-
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border-2 border-sky-400 dark:border-sky-400/90 shadow-[0_0_20px_rgba(56,189,248,0.22)] dark:shadow-[0_0_25px_rgba(56,189,248,0.28)] hover:shadow-xl hover:-translate-y-0.5">
-                <div class="absolute -top-[2px] left-4 right-4 h-[3px] bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)] rounded-full"></div>
-                <div class="space-y-2 pt-0.5">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
-                      <div class="relative shrink-0">
-                        <img src="https://unavatar.io/x/AIwithkhan" alt="AIwithkhan" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
-                      </div>
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">AIwithkhan</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
-                        </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@AIwithkhan · AI 极客 / 社区开发者</span>
-                      </div>
-                    </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30 text-white shadow-sm shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                      <span>🛠️ 极客实战演示</span>
-                    </span>
-                  </div>
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                    Let's do grocery shopping today 🛍️ Made using Seedance 2.5 Prompt : **CHARACTER:** A young Korean woman in her early 20s with black wavy hair loosely tied back, wearing a fitted pastel-blue top, white shorts, comfortable sneakers, and a small shoulde
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
-                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
-                    <span>⚡</span>
-                    <span>24h 实时</span>
-                  </span>
-                  <a href="https://x.com/AIwithkhan/status/2109858861528363433" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
-                    <span>查看原帖 ↗</span>
-                  </a>
-                </div>
-              </article>
-
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/edzitron" alt="@edzitron" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">@edzitron</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
-                        </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@edzitron · AI 先锋观察者</span>
-                      </div>
-                    </div>
-                    <span class="font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
-                  </div>
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。
-                  </p>
-                </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
-                  <a href="https://x.com/edzitron/status/2109871105477664802" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/Alibaba_Qwen/status/2110214931559899630" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
                     查看原帖 ↗
                   </a>
                 </div>
@@ -1380,11 +1398,11 @@
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-leader">🐦 前沿发声</span>
-              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">97</span>
+              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">20</span>
             </button>
             <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
-              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">35</span>
+              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">2</span>
             </button>
           </div>
 
@@ -3919,7 +3937,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 判断条目是否处于 24-36 小时有效时效期之内 (首页默认显示最新热点，平滑跨时区与定时任务调度间隙)
+    // 判断条目是否严格在 24 小时有效时效期之内 (首页严格 24 小时门禁，过期坚决清退，一个不留)
     function isWithin24Hours(rawTime) {
       if (!rawTime) return false;
       try {
@@ -3927,11 +3945,34 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (isNaN(date.getTime())) return false;
         const now = new Date();
         const diffSec = Math.floor((now - date) / 1000);
-        // 允许时钟偏置与时区容差（最高 8 小时），并在 36 小时以内（保证跨时区与定时任务调度间隙平滑过渡）
-        return diffSec >= -28800 && diffSec <= (36 * 3600);
+        return diffSec >= -300 && diffSec <= 86400;
       } catch (e) {
         return false;
       }
+    }
+
+    // 严格过滤无意义单句推文、脱离语境闲聊回复与空短链接
+    function isMeaningfulTweet(it) {
+      if (!it || typeof it !== 'object') return false;
+      const itemId = String(it.id || '');
+      if (itemId.includes('tweet_tibo_codex_reset') || itemId.startsWith('mock_')) return false;
+      const text = (it.full_text_en || it.content_snippet || it.title || '').trim();
+      if (!text) return false;
+      if (/^https?:\/\/\S+$/i.test(text)) return false;
+      const substantive = text.replace(/https?:\/\/\S+|@\w+/g, '').trim();
+      const lowValue = /^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao|nice|wow|true|facts|word|check this out|excited for this|eyes on this|👀|🔥|🚀|💯|happy to help|appreciate it|welcome|good plans are simple.*|what would you like.*|grok.*|tesla self-driving.*|you can’t possibly.*|legit how i look.*)$/i;
+      if (lowValue.test(substantive)) return false;
+      const hasMedia = !!(it.image_url || it.video_url || it.has_video || (it.media_urls && it.media_urls.length));
+      const isReply = !!(it.isReply || it.is_reply || text.startsWith('@'));
+      if (isReply) {
+        if (!hasMedia && substantive.length < 120) return false;
+      }
+      if (!hasMedia) {
+        if (substantive.length < 60) return false;
+        const sentences = substantive.split(/[.!?。！？\n]+/).map(s => s.trim()).filter(Boolean);
+        if (sentences.length <= 1 && substantive.length < 80) return false;
+      }
+      return true;
     }
 
     // 搜索输入过滤
@@ -5451,19 +5492,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (!cachedData) return [];
       const allCeleb = (cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || (cachedData.items ? cachedData.items.filter(it => it.category === 'celebrity') : []));
       
-      // 优先获取时效期内前沿动态或置顶推文
-      let list = allCeleb.filter(it => isWithin24Hours(it.raw_published_at) || it.is_pinned);
-      // 安全兜底防护：若时效过滤后不足 6 条，自动回退采用最新批次数据，确保焦点展位饱满不空洞
-      if (list.length < 6 && allCeleb.length > 0) {
-        list = allCeleb.slice(0, 18);
-      }
+      // 优先获取 24 小时有效时效期内前沿动态，严格过期清退，绝不兜底回退历史过期数据
+      let list = allCeleb.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
       
       if (filter === 'company') {
-        const coList = list.filter(isCompanyOrBrand);
-        list = coList.length > 0 ? coList : allCeleb.filter(isCompanyOrBrand).slice(0, 12);
+        list = list.filter(isCompanyOrBrand);
       } else if (filter === 'person') {
-        const peList = list.filter(it => !isCompanyOrBrand(it));
-        list = peList.length > 0 ? peList : allCeleb.filter(it => !isCompanyOrBrand(it)).slice(0, 12);
+        list = list.filter(it => !isCompanyOrBrand(it));
       }
       
       // 权重优先级 (头部科技机构与前沿核心大V优先置前)
@@ -6795,10 +6830,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       // 3. 渲染当日火爆的名人推文滚动栏 (替换原有 60 秒重复资讯横栏)
-      const viralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
+      // 3. 渲染当日火爆的名人推文滚动栏 (严格 24 小时以内，过期清退，一个不留，清除无意义单句推文)
+      const rawViralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
         ? data.viral_ticker_tweets
-        : (allCeleb && allCeleb.length > 0 ? allCeleb.slice(0, 8) : (data.top_three || []));
-      renderViralTicker(viralTweets);
+        : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
+      const viralTweets = rawViralTweets.filter(it => {
+        if (it.category === 'celebrity' || it.platform === 'x') {
+          return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
+        }
+        return true;
+      });
+      renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []));
       if (document.getElementById('top-three-container')) {
         renderTopThree(data.top_three || []);
       }
@@ -6836,9 +6878,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // B. 领袖社交板块 (Celebrity) - 与天梯图等高自适应，展示最新精选推文
+      // B. 领袖社交板块 (Celebrity) - 严格限定在 24 小时以内，过期清退，一个不留，清除无意义单句推文！
       let sideCelebList = allCeleb;
-      const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at));
+      const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
       recentCeleb.sort((a, b) => {
         const aPinned = isItemPinnedActive(a) ? 1 : 0;
         const bPinned = isItemPinnedActive(b) ? 1 : 0;
@@ -6847,8 +6889,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
         return timeB - timeA;
       });
-      const poolCeleb = recentCeleb.length >= 6 ? recentCeleb : sideCelebList;
-      const displayCeleb = poolCeleb.slice(0, 14);
+      const displayCeleb = recentCeleb.slice(0, 14);
       const streamCelebrity = document.getElementById('stream-celebrity');
       if (streamCelebrity) {
         streamCelebrity.innerHTML = displayCeleb.length > 0
@@ -7096,11 +7137,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const catTitle = document.getElementById('cat-view-title');
         const catDesc = document.getElementById('cat-view-desc');
         
-        // 优先 24-36 小时时效门禁，具备智能饱满度兜底 (确保跨天或爬虫间隙绝不空屏)
+        // 严格 24 小时时效门禁，过期坚决清退，一个不留，清除无意义推文
         const allCelebRaw = (cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || (cachedData.items ? cachedData.items.filter(it => it.category === 'celebrity') : []));
-        const leaderFresh = allCelebRaw.filter(it => (isWithin24Hours(it.raw_published_at) || it.is_pinned));
+        const leaderFresh = allCelebRaw.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
         const allViralRaw = (cachedData.grouped?.viral_posts || cachedData.viral_posts || (cachedData.items ? cachedData.items.filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral))) : []));
-        const viralFresh = allViralRaw.filter(it => isWithin24Hours(it.raw_published_at));
+        const viralFresh = allViralRaw.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
 
         const leaderCount = allCelebRaw.length;
         const viralCount = allViralRaw.length;

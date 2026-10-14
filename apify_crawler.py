@@ -414,23 +414,26 @@ def fetch_incremental_tweets(
             r'^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao)[!.\s]*$',
             r'^(?:congrats|congratulations)\b.*(?:can\'?t\s+wait|cheers|excited for you|looking forward|welcome|proud of you).*$',
             r'^(?:check this out|excited for this|wow|nice|👀|🔥|🚀|💯)[!.\s]*$',
-            r'^(?:thanks for having me|happy to help|appreciate it)[!.\s]*$'
+            r'^(?:thanks for having me|happy to help|appreciate it)[!.\s]*$',
+            r'^(?:good plans are simple.*|what would you like.*|grok.*|tesla self-driving.*|you can’t possibly.*|legit how i look.*)$'
         ]
         if any(re.match(p, substantive_text, re.IGNORECASE) for p in low_value_patterns):
             continue
             
-        # 非官方重大发布的极短碎碎念（无图、无视频、无实质技术论述且字符 < 40）坚决过滤
         has_media = bool(it.get("media") or (it.get("entities") and it.get("entities", {}).get("media")))
-        num_likes = int(likes_raw or 0)
-        if len(substantive_text) < 40 and not has_media and num_likes < 300:
-            continue
-            
-        is_reply = it.get("isReply") or False
-        # 如果是回复别人的推文 (Reply)，且自身没有附带独立媒体/视频，且不是长篇深度技术阐述，一律过滤，避免脱离原推语境让人一头雾水
+        
+        # 如果是回复别人的推文 (Reply)，自身无独立媒体且字数小于 120 字，一律过滤
+        is_reply = bool(it.get("isReply") or tweet_text.startswith("@"))
         if is_reply:
             if not has_media and len(substantive_text) < 120:
                 continue
-            if num_likes < 200:
+
+        # 无媒体的无意义单句短推文：没有配图/视频，且字数小于 60 字符或单句 < 80 字符，坚决过滤
+        if not has_media:
+            if len(substantive_text) < 60:
+                continue
+            sentences = [s.strip() for s in re.split(r'[.!?。！？\n]+', substantive_text) if s.strip()]
+            if len(sentences) <= 1 and len(substantive_text) < 80:
                 continue
 
         # 媒体与视频原资产多维解析 (提取原推配图、相册流、原生视频以及引用推文媒体)

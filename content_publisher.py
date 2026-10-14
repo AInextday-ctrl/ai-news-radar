@@ -15,6 +15,7 @@ import sys
 import re
 import json
 import glob
+import time
 from datetime import datetime, timezone, timedelta
 from typing import List, Dict, Any, Optional
 
@@ -23,6 +24,48 @@ try:
     sys.stderr.reconfigure(encoding='utf-8')
 except Exception:
     pass
+
+def parse_tweet_time(it: dict) -> float:
+    raw = it.get("raw_published_at", "")
+    if not raw:
+        return 0
+    try:
+        return datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
+    except Exception:
+        return 0
+
+def is_meaningful_tweet(it: dict) -> bool:
+    if not isinstance(it, dict):
+        return False
+    item_id = str(it.get("id") or "")
+    if "tweet_tibo_codex_reset" in item_id or item_id.startswith("mock_"):
+        return False
+    text = (it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
+    if not text:
+        return False
+    if re.fullmatch(r'https?://\S+', text):
+        return False
+    substantive = re.sub(r'https?://\S+|@\w+', '', text).strip()
+    low_value_patterns = [
+        r'^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao|nice|wow|true|facts|word)[!.\s]*$',
+        r'^(?:check this out|excited for this|eyes on this|👀|🔥|🚀|💯)[!.\s]*$',
+        r'^(?:happy to help|appreciate it|welcome)[!.\s]*$',
+        r'^(?:good plans are simple.*|what would you like.*|grok.*|tesla self-driving.*|you can’t possibly.*|legit how i look.*)$'
+    ]
+    if any(re.match(p, substantive, re.IGNORECASE) for p in low_value_patterns):
+        return False
+    has_media = bool(it.get("image_url") or it.get("video_url") or it.get("has_video") or it.get("media_urls"))
+    is_reply = bool(it.get("isReply") or it.get("is_reply") or text.startswith("@"))
+    if is_reply:
+        if not has_media and len(substantive) < 120:
+            return False
+    if not has_media:
+        if len(substantive) < 60:
+            return False
+        sentences = [s.strip() for s in re.split(r'[.!?。！？\n]+', substantive) if s.strip()]
+        if len(sentences) <= 1 and len(substantive) < 80:
+            return False
+    return True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PUBLIC_DIR = os.path.join(BASE_DIR, "public")
@@ -877,14 +920,28 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         with open(INDEX_FILE, "r", encoding="utf-8") as f:
             en_content = f.read()
 
-        # 1. Viral Ticker English
-        viral_items = [i for i in items if i.get("category") == "celebrity"][:9]
+        now_ts = time.time()
+        # 1. Viral Ticker English (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        viral_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:9]
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd = json.load(_f)
                     if _nd.get("viral_ticker_tweets"):
-                        viral_items = _nd.get("viral_ticker_tweets")[:9]
+                        v_cand = [
+                            it for it in _nd.get("viral_ticker_tweets") 
+                            if (now_ts - parse_tweet_time(it)) <= 86400 
+                            and (now_ts - parse_tweet_time(it)) >= -300
+                            and is_meaningful_tweet(it)
+                        ]
+                        if v_cand:
+                            viral_items = v_cand[:9]
             except Exception:
                 pass
 
@@ -969,8 +1026,14 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </article>"""
 
-        # 2b. Social Radar English (Top 8)
-        celeb_items = [i for i in items if i.get("category") == "celebrity"][:8]
+        # 2b. Social Radar English (Top 8 - 严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        celeb_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:8]
         celeb_cards_en_html = ""
         for it in celeb_items:
             author = safe_text(it.get("author") or "AI Pioneer", 40)
@@ -1148,14 +1211,28 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         with open(ZH_INDEX_FILE, "r", encoding="utf-8") as f:
             zh_content = f.read()
 
-        # 1. Viral Ticker Chinese
-        viral_items = [i for i in items if i.get("category") == "celebrity"][:9]
+        now_ts = time.time()
+        # 1. Viral Ticker Chinese (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        viral_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:9]
         if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd = json.load(_f)
                     if _nd.get("viral_ticker_tweets"):
-                        viral_items = _nd.get("viral_ticker_tweets")[:9]
+                        v_cand = [
+                            it for it in _nd.get("viral_ticker_tweets") 
+                            if (now_ts - parse_tweet_time(it)) <= 86400 
+                            and (now_ts - parse_tweet_time(it)) >= -300
+                            and is_meaningful_tweet(it)
+                        ]
+                        if v_cand:
+                            viral_items = v_cand[:9]
             except Exception:
                 pass
 
@@ -1235,7 +1312,14 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </article>"""
 
-        # 2b. Social Radar Chinese (Top 8)
+        # 2b. Social Radar Chinese (Top 8 - 严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        celeb_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:8]
         celeb_cards_zh_html = ""
         for it in celeb_items:
             author = safe_text(it.get("author") or "AI 领袖", 40)
