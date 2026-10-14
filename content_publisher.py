@@ -1625,7 +1625,7 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
                     <span>⚡</span>
                     <span>{time_str}</span>
                   </span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline flex items-center gap-0.5">
                     <span>{btn_text}</span>
                   </a>
                 </div>
@@ -1654,7 +1654,7 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 {time_str}</span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     {btn_text}
                   </a>
                 </div>
@@ -1741,7 +1741,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         # 2. News Stream English
         news_items = [i for i in items if i.get("category") == "news"][:12]
+        if not news_items and os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+            try:
+                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                    _nd_news = json.load(_f)
+                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:12]
+            except Exception:
+                pass
+
         news_cards_en_html = ""
+        lcp_image_en_url = ""
+        import urllib.parse
         for it in news_items:
             t_en = safe_text(it.get("title_en") or it.get("title", ""), 120)
             s_en = safe_text(it.get("summary_en") or it.get("title_en") or "", 250)
@@ -1752,7 +1762,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             img = it.get("image_url", "")
             img_tag = ""
             if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
-                img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_en}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+                opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
+                if not lcp_image_en_url:
+                    lcp_image_en_url = opt_img
+                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                else:
+                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
             it_id = it.get("id") or ""
             news_cards_en_html += f"""
@@ -1825,7 +1840,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
                 <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="text-slate-400 font-mono text-[10px]">𝕏 Intel</span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">View Post ↗</a>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">View Post ↗</a>
                 </div>
               </article>"""
 
@@ -1961,9 +1976,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if re.search(pattern_top, en_content, re.DOTALL):
                 en_content = re.sub(pattern_top, r'\1' + top_three_en_html + r'\3', en_content, flags=re.DOTALL)
 
-        pattern_news = r'(<div [^>]*id="stream-news"[^>]*>)(.*?)(</div>\s*</div>\s*<!-- 快讯专栏直达底栏 -->)'
+        pattern_news = r'(<div [^>]*id="stream-news"[^>]*>)(.*?)(</div>\s*</div>\s*<!--.*?-->\s*<div [^>]*>\s*<button [^>]*id="btn-view-all-news")'
         if re.search(pattern_news, en_content, re.DOTALL):
-            en_content = re.sub(pattern_news, r'\1\n' + news_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
+            en_content = re.sub(pattern_news, lambda m: f"{m.group(1)}\n{news_cards_en_html}\n            {m.group(3)}", en_content, flags=re.DOTALL)
 
         pattern_celeb = r'(<div class="space-y-3 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-celebrity">)(.*?)(</div>\s*</div>\s*<!-- 社交专栏直达底栏 -->)'
         if re.search(pattern_celeb, en_content, re.DOTALL):
@@ -1982,12 +1997,20 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿
+        # 严格约束走马灯视口高度 180px，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿 (CLS = 0)
         en_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">',
             en_content
         )
+
+        # 注入首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
+        if lcp_image_en_url:
+            lcp_preload_tag = f'<link rel="preload" as="image" href="{lcp_image_en_url}" fetchpriority="high">'
+            if 'rel="preload" as="image"' in en_content:
+                en_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, en_content)
+            else:
+                en_content = en_content.replace('<link rel="preload" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="preload" href="/css/style.min.css"')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -2082,6 +2105,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         # 2. News Stream Chinese
         news_cards_zh_html = ""
+        lcp_image_zh_url = ""
         for it in news_items:
             t_zh = safe_text(it.get("title_zh") or it.get("title", ""), 120)
             s_zh = safe_text(it.get("summary_zh") or it.get("title_zh") or "", 250)
@@ -2090,7 +2114,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             img = it.get("image_url", "")
             img_tag = ""
             if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
-                img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{img}" alt="{t_zh}" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display=\'none\'"></div>'
+                opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
+                if not lcp_image_zh_url:
+                    lcp_image_zh_url = opt_img
+                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                else:
+                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
             it_id = it.get("id") or ""
             news_cards_zh_html += f"""
@@ -2163,7 +2192,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
                 <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="text-slate-400 font-mono text-[10px]">𝕏 社交雷达</span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-medium hover:underline">查看原文 ↗</a>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">查看原文 ↗</a>
                 </div>
               </article>"""
 
@@ -2281,7 +2310,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             zh_content = re.sub(pattern_top, r'\1' + top_three_zh_html + r'\3', zh_content, flags=re.DOTALL)
 
         if re.search(pattern_news, zh_content, re.DOTALL):
-            zh_content = re.sub(pattern_news, r'\1\n' + news_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
+            zh_content = re.sub(pattern_news, lambda m: f"{m.group(1)}\n{news_cards_zh_html}\n            {m.group(3)}", zh_content, flags=re.DOTALL)
 
         if re.search(pattern_celeb, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_celeb, r'\1\n' + celeb_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
@@ -2298,12 +2327,20 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿
+        # 严格约束走马灯视口高度 180px，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿 (CLS = 0)
         zh_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">',
             zh_content
         )
+
+        # 注入中文首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
+        if lcp_image_zh_url:
+            lcp_preload_tag = f'<link rel="preload" as="image" href="{lcp_image_zh_url}" fetchpriority="high">'
+            if 'rel="preload" as="image"' in zh_content:
+                zh_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, zh_content)
+            else:
+                zh_content = zh_content.replace('<link rel="preload" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="preload" href="/css/style.min.css"')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -2437,7 +2474,8 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
                 with open(news_file, "r", encoding="utf-8") as f:
                     ndata = json.load(f)
                     if not items:
-                        items = ndata.get("items") or [it for cat in ndata.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
+                        all_grouped = [it for cat in ndata.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
+                        items = all_grouped if all_grouped else (ndata.get("items") or [])
                     top_three = top_three or ndata.get("top_three", [])
             except Exception:
                 items = items or []

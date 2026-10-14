@@ -1752,14 +1752,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             } else {
               btn.className = "tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap";
             }
-            if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5";
+            if (badge) {
+              if (k === 'prompts') {
+                badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-purple-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm";
+              } else {
+                badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-indigo-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm";
+              }
+            }
           } else {
             if (k === 'prompts') {
-              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
-              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5";
+              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-800 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
+              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100 font-mono font-semibold shrink-0 ml-0.5";
             } else {
-              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
-              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5";
+              btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
+              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-mono font-medium shrink-0 ml-0.5";
             }
           }
         }
@@ -2931,7 +2937,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <span>⚡</span>
                 <span>${timeStr}</span>
               </span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-bold hover:underline flex items-center gap-0.5">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5">
                 <span>${btnText}</span>
               </a>
             </div>
@@ -2963,7 +2969,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
               <span class="font-mono text-slate-400">🕒 ${timeStr}</span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                 ${btnText}
               </a>
             </div>
@@ -3153,7 +3159,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       const specList = item.spec_tags || [];
       const specBadges = (specList && specList.length)
@@ -3196,7 +3202,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="space-y-2">
             ${hasRealImage ? `
               <div class="w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-950 mb-2 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0">
-                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
                 ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶ 视频' : '▶ Video'}</span>` : ''}
               </div>` : ''}
             <div class="flex items-center justify-between text-xs mb-1">
@@ -3280,9 +3286,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${isZh ? (t.todayTag || '今日最新') : 'Today'}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${isZh ? (t.todayTag || '今日最新') : 'Today'}</span>` : '';
       const isPinned = isItemPinnedActive(item);
-      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">${isZh ? '📌 置顶爆款' : '📌 Pinned'}</span>` : '';
+      const pinnedBadge = isPinned ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-[9px] font-bold shrink-0">${isZh ? '📌 置顶爆款' : '📌 Pinned'}</span>` : '';
 
       const itemId = item.id || item.url || '';
 
@@ -3303,8 +3309,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isCo = isCompanyOrBrand(item);
       const platformBadge = isCo
-        ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">${isZh ? '🏢 官方动态' : '🏢 Official'}</span>`
-        : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0">${isZh ? '👤 大V动态' : '👤 Pioneer'}</span>`;
+        ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">${isZh ? '🏢 官方动态' : '🏢 Official'}</span>`
+        : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-800 dark:text-sky-300 border border-sky-500/30 text-[10px] font-bold shrink-0">${isZh ? '👤 大V动态' : '👤 Pioneer'}</span>`;
 
       const signalLevel = (likes && (parseInt(likes.replace(/k/i, '000'), 10) > 1000)) 
         ? `<span class="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 shrink-0">${isZh ? '📶 强信号' : '📶 Strong Signal'}</span>` 
@@ -3460,7 +3466,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
 
             <div class="flex items-center space-x-2 shrink-0">
-              <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/20 text-[11px] font-semibold transition-all">
+              <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="px-2.5 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-700 dark:text-sky-400 border border-sky-500/20 text-[11px] font-semibold transition-all">
                 ${isZh ? '💬 贴文详情' : '💬 Post Details'}
               </button>
               <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 text-slate-400 hover:text-sky-400 transition-colors" title="${isZh ? '直达 𝕏 原文' : 'Open on 𝕏'}">
@@ -3632,7 +3638,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       const timeObj = formatTime(item.raw_published_at, currentLang);
       const isCo = isCompanyOrBrand(item);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const platformBadge = isCo
         ? `<span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-amber-300 border border-amber-500/40 text-[10px] font-bold shrink-0">${isZh ? '🏢 官方发布' : '🏢 Official'}</span>`
         : `<span class="px-2 py-0.5 rounded bg-slate-900 dark:bg-black text-sky-300 border border-sky-500/40 text-[10px] font-bold shrink-0">${isZh ? '👤 前沿大V' : '👤 Creator'}</span>`;
@@ -4071,7 +4077,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div>
               <!-- 业务赛道与时间 -->
               <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 mb-1">
-                <span onclick="event.stopPropagation(); if(currentTab!=='tools') switchTab('tools'); filterToolScenario('${escapeHtml(normalizeToolScenarioKey(item.scenario_key || item.scenario_tag || ''))}');" class="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer px-1.5 py-0.5 -ml-1.5 rounded-md hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition-colors" title="${isZh ? '点击筛选该日常应用场景' : 'Click to filter by this daily scenario'}">${escapeHtml(scenario)}</span>
+                <span onclick="event.stopPropagation(); if(currentTab!=='tools') switchTab('tools'); filterToolScenario('${escapeHtml(normalizeToolScenarioKey(item.scenario_key || item.scenario_tag || ''))}');" class="font-semibold text-emerald-800 dark:text-emerald-400 hover:underline cursor-pointer px-1.5 py-0.5 -ml-1.5 rounded-md hover:bg-emerald-50 dark:hover:bg-emerald-950/50 transition-colors" title="${isZh ? '点击筛选该日常应用场景' : 'Click to filter by this daily scenario'}">${escapeHtml(scenario)}</span>
                 <span class="font-mono text-[10px]" title="${timeObj.display}">🕒 ${timeObj.relative || (isZh ? '今日' : 'Today')}</span>
               </div>
 
@@ -4096,7 +4102,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           <!-- 双行动入口 Footer -->
           <div class="p-3 bg-slate-50/70 dark:bg-slate-950/40 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between text-xs">
-            <button type="button" onclick="event.stopPropagation(); openToolDetailModal('${itemId}')" class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors flex items-center space-x-1">
+            <button type="button" onclick="event.stopPropagation(); openToolDetailModal('${itemId}')" class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors flex items-center space-x-1">
               <span>${isZh ? '🔍 详情与截图' : '🔍 Details & Specs'}</span>
             </button>
             <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
@@ -4337,7 +4343,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return `
         <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
           <div class="relative w-24 aspect-video rounded-lg overflow-hidden bg-black shrink-0">
-            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
             <span class="absolute top-1 left-1 text-xs drop-shadow">${medal}</span>
           </div>
           <div class="flex-1 min-w-0 space-y-1">
@@ -4362,7 +4368,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at || item.created_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
 
       const targetModelRaw = item.target_model || item.recommended_model || (isZh ? "通用大模型" : "General LLM");
       const targetModel = isZh
@@ -4597,7 +4603,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const title = formatVideoTitle(item, currentLang);
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
       const timeObj = formatTime(item.raw_published_at, currentLang);
-      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const cleanSource = item.author || item.source || "";
       const skillTag = isZh
         ? (item.purpose_zh || item.metrics?.skill_tag || '🎓 系统教学')
@@ -6544,8 +6550,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const avatar = escapeHtml(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`);
 
       const platformBadge = isThreads
-        ? `<span class="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">${isZh ? '🧵 Threads 热帖' : '🧵 Threads Viral'}</span>`
-        : `<span class="px-2 py-0.5 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">${isZh ? '𝕏 平台爆款' : '𝕏 Viral Hit'}</span>`;
+        ? `<span class="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">${isZh ? '🧵 Threads 热帖' : '🧵 Threads Viral'}</span>`
+        : `<span class="px-2 py-0.5 rounded-lg bg-sky-500/10 text-sky-800 dark:text-sky-300 border border-sky-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">${isZh ? '𝕏 平台爆款' : '𝕏 Viral Hit'}</span>`;
 
       let surgeText = item.surge_badge || (isZh ? '⚡ 24h 飙升' : '⚡ 24h Surge');
       if (!isZh && item.surge_badge) {
@@ -6554,7 +6560,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           .replace(/爆款/g, 'Viral')
           .replace(/阅读/g, 'Views');
       }
-      const surgeBadge = `<span class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-rose-500/15 to-amber-500/15 text-rose-600 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>${escapeHtml(surgeText)}</span>`;
+      const surgeBadge = `<span class="px-2 py-0.5 rounded-lg bg-gradient-to-r from-rose-500/15 to-amber-500/15 text-rose-800 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1 shadow-sm"><span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>${escapeHtml(surgeText)}</span>`;
 
       const mediaType = detectSocialMediaType(item);
       const mediaHtml = renderSocialMediaPreview(item, mediaType, isZh);
@@ -6867,8 +6873,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           ? (isZhSystem ? '中文忠实译文' : 'Chinese Translation')
           : (isZhSystem ? '英文原帖 · 100% 原文' : 'English Original (Verbatim)');
         langBadgeEl.className = viewingZh
-          ? "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-semibold shrink-0"
-          : "text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30 font-semibold shrink-0";
+          ? "text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 font-bold shrink-0"
+          : "text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-800 dark:text-sky-300 border border-sky-500/30 font-bold shrink-0";
       }
 
       if (langToggleText) {
@@ -7483,10 +7489,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }, 1000);
 
-    // 初始化 Google AdSense 两侧摩天大楼广告单元
+    // 安全初始化 Google AdSense 广告单元（严格排查未初始化 ins 元素，彻底杜绝 TagError）
     try {
-      (adsbygoogle = window.adsbygoogle || []).push({});
-      (adsbygoogle = window.adsbygoogle || []).push({});
+      const uninitAds = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+      uninitAds.forEach(() => {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      });
     } catch (e) {}
 
     // 全局快捷键监听 (Esc 键关闭弹窗，左右箭头切换轮播)

@@ -82,6 +82,9 @@
   ]
   </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="preconnect" href="https://wsrv.nl" crossorigin>
+  <link rel="dns-prefetch" href="https://wsrv.nl">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="preload" href="/css/style.min.css" as="style">
   <link rel="stylesheet" href="/css/style.min.css">
   <link rel="preload" href="/js/app.min.js" as="script">
@@ -112,7 +115,17 @@
       contain-intrinsic-size: auto 200px;
     }
     #viral-ticker-viewport {
+      height: 180px;
+      overflow: hidden;
       contain: paint layout;
+    }
+    @media (min-width: 640px) {
+      #viral-ticker-viewport {
+        height: 185px;
+      }
+    }
+    #header-actions-bar {
+      contain: layout;
     }
     #viral-ticker-slider {
       will-change: transform;
@@ -241,7 +254,7 @@
       </div>
 
       <!-- 右上角：深浅主题切换、中英文切换、状态指示灯与刷新 -->
-      <div class="flex items-center space-x-2 sm:space-x-3">
+      <div id="header-actions-bar" class="flex items-center space-x-2 sm:space-x-3 shrink-0" style="contain: layout;">
         
         <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
         <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
@@ -369,7 +382,7 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white/20 text-white font-mono shrink-0 ml-0.5" id="badge-count-all">367</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-indigo-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm" id="badge-count-all">367</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
@@ -469,11 +482,11 @@
         <!-- 落地工具命中列 -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
-            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 flex items-center space-x-1.5">
+            <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center space-x-1.5">
               <span>🛠️</span>
               <span id="search-label-tools">Applied Tools</span>
             </span>
-            <span id="search-count-tools" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/25">0</span>
+            <span id="search-count-tools" class="font-mono text-[11px] px-2 py-0.2 rounded-full bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/25 font-bold">0</span>
           </div>
           <div id="search-stream-tools" class="space-y-3"></div>
         </div>
@@ -526,10 +539,10 @@
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Next (Down)">↓</button>
             </div>
-            <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">View All Radar →</button>
+            <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">View All Radar →</button>
           </div>
         </div>
-        <div id="viral-ticker-viewport" class="relative overflow-hidden">
+        <div id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">
           <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
 
@@ -561,7 +574,7 @@ https://t.co/YXVYxl5gdU
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/ClaudeDevs/status/2110128453760815153" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/ClaudeDevs/status/2110128453760815153" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -590,7 +603,7 @@ In May, we merged around 2,500 code changes per day. In September, we merged mor
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/AnthropicAI/status/2110047081414987957" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/AnthropicAI/status/2110047081414987957" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -619,7 +632,7 @@ It mapped the physics, coded its own simulation, and taught @Apptronik's Apollo 
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/GoogleDeepMind/status/2110078384617464201" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/GoogleDeepMind/status/2110078384617464201" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -652,7 +665,7 @@ Check out how you can use Argon in your favorite Google product 🧵
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/GoogleAI/status/2110039860077527293" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/GoogleAI/status/2110039860077527293" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -679,7 +692,7 @@ Check out how you can use Argon in your favorite Google product 🧵
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/openainewsroom/status/2110095403198849132" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/openainewsroom/status/2110095403198849132" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -706,7 +719,7 @@ Check out how you can use Argon in your favorite Google product 🧵
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/elonmusk/status/2110244638900773147" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/elonmusk/status/2110244638900773147" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -737,7 +750,7 @@ start building today: https://t.co/CbKuR8bPfm
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/GoogleAIStudio/status/2110039725805297933" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/GoogleAIStudio/status/2110039725805297933" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -768,7 +781,7 @@ Priced at $2/M input and $10/M output tokens.
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/cursor_ai/status/2110087611763368271" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/cursor_ai/status/2110087611763368271" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -797,7 +810,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
                   <span class="font-mono text-slate-400">🕒 24h Live</span>
-                  <a href="https://x.com/alexandr_wang/status/2110270693908828654" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 hover:text-sky-500 font-medium hover:underline">
+                  <a href="https://x.com/alexandr_wang/status/2110270693908828654" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     View Post ↗
                   </a>
                 </div>
@@ -832,7 +845,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4c886e660b792ace')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" alt="Ukraine says SpaceX has restricted Starlink by cutting military-grade service at speeds exceeding 100mph, disrupting dro" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Ukraine says SpaceX has restricted Starlink by cutting military-grade service at speeds exceeding 100mph, disrupting dro" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -910,7 +923,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6a2e4fb0d3ecfb5a')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://storage.ghost.io/c/77/50/77508a24-24ec-49e5-99f8-d3dadb30a5ac/content/images/size/w1200/2026/10/Screenshot-2026-10-12-at-6.01.49---PM.png" alt="A look at a coordinated theft of ~$100M in crypto using hardware backdoors planted in Ledger wallets sold by Malaysia-ba" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//storage.ghost.io/c/77/50/77508a24-24ec-49e5-99f8-d3dadb30a5ac/content/images/size/w1200/2026/10/Screenshot-2026-10-12-at-6.01.49---PM.png&w=480&output=webp&q=80" alt="A look at a coordinated theft of ~$100M in crypto using hardware backdoors planted in Ledger wallets sold by Malaysia-ba" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -936,7 +949,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('1e59f5afc2392f67')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="ASML says it cannot fully meet AI-driven demand for its chipmaking tools in 2027 and 2028, and is seeing &quot;strong in" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="ASML says it cannot fully meet AI-driven demand for its chipmaking tools in 2027 and 2028, and is seeing &quot;strong in" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -962,7 +975,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6c00ff63b36317a5')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://image.cnbcfm.com/api/v1/image/108291541-1776230822579-gettyimages-2250757897-NETHERLANDS_FOUQUET.jpeg?v=1783337282&w=1920&h=1080" alt="ASML reports Q3 net sales of €11.66B, vs. €11.72B est., a €4.96B net profit, vs. €4.1B est., and raises its 2026 net sal" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//image.cnbcfm.com/api/v1/image/108291541-1776230822579-gettyimages-2250757897-NETHERLANDS_FOUQUET.jpeg%3Fv%3D1783337282%26w%3D1920%26h%3D1080&w=480&output=webp&q=80" alt="ASML reports Q3 net sales of €11.66B, vs. €11.72B est., a €4.96B net profit, vs. €4.1B est., and raises its 2026 net sal" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -988,7 +1001,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('806d52cd9d7569c2')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" alt="US defense companies and startups have signed at least 13 deals with Taiwanese hardware companies since September 2025 t" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="US defense companies and startups have signed at least 13 deals with Taiwanese hardware companies since September 2025 t" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -1040,7 +1053,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 </div>
               </article>
               <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e19e11e571b849d9')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://fortune.com/img-assets/wp-content/uploads/2026/10/CausaPrima_Founders-e1791859343152.png?resize=1200,600" alt="Delaware-based Causa Prima, which develops an agent-to-agent AI platform for managing B2B payments, resolving billing di" loading="lazy" class="w-full h-full object-cover" onerror="this.parentElement.style.display='none'"></div>
+                <div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//fortune.com/img-assets/wp-content/uploads/2026/10/CausaPrima_Founders-e1791859343152.png%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="Delaware-based Causa Prima, which develops an agent-to-agent AI platform for managing B2B payments, resolving billing di" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -1598,7 +1611,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-sm shadow-emerald-400/50"></span>
                 <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-tools">🛠️ Applied AI Tools</h3>
               </div>
-              <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-600 dark:text-emerald-400 hover:underline cursor-pointer">All Tools →</button>
+              <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold hover:underline cursor-pointer">All Tools →</button>
             </div>
             <div class="space-y-3" id="stream-tools">
               <!-- 动态注入 Top 3 落地工具卡片 -->
@@ -2214,7 +2227,7 @@ really apologize to everyone for the ups and downs in using the model, but rest 
               <span>🔥</span>
               <span>Notable Community Discussion & Responses</span>
             </span>
-            <span class="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold">● Live Discussion</span>
+            <span class="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-semibold">● Live Discussion</span>
           </div>
           <div id="social-modal-comments-list" class="space-y-3">
             <!-- 动态注入 3 条真实有深度的网友评论 -->
