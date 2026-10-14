@@ -294,11 +294,11 @@ def fetch_incremental_tweets(
     watermarks = state.get("author_watermarks", {})
 
     # 策略 B: 动静分频调度与额度保护
-    # 5 账户 Apify 额度池: 每账户 $5/月 × 5个账户 = $25/月可用
+    # 7 账户 Apify 额度池: 每账户 $5/月 × 7个账户 = $35/月可用
     # 每次增量抓取仅消耗 ~0.002 CU (~$0.001 - $0.0015 USD)
-    # 按 0.25 小时频次: 96次/天 (每15分钟与全站构建实时同步) = 2,880次/月 ≈ $4.32/月 (仅占 $25 免费额度的 17.3%，极端安全且富余)
+    # 按 0.15 小时频次: 144次/天 (每10分钟与全站构建极速同步) = 4,320次/月 ≈ $6.48/月 (仅占 $35 免费额度的 18.5%，极端安全且富余)
     last_crawl = state.get("last_crawl_utc")
-    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "0.25"))
+    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "0.15"))
     if not force_update and last_crawl:
         try:
             lc_dt = datetime.fromisoformat(last_crawl.replace("Z", "+00:00"))
