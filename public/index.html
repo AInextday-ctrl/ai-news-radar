@@ -8058,10 +8058,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } else {
         // 英文模式：严格过滤任何中文字符，优先使用原版英文摘要与原版英文简报
         const enCandidates = [
-          item.summary_en,
-          item.content_snippet,
           analysis.briefing_en,
           analysis.digest_en,
+          item.summary_en,
+          item.content_snippet,
           item.title_en
         ];
         const validEn = enCandidates.find(c => {
@@ -8070,6 +8070,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (s.length < 10) return false;
           if (/[\u4e00-\u9fa5]/.test(s)) return false; // 严禁含中文字符
           if (s.includes('Executive Briefing: In ') || s.includes('Context: ')) return false; // 严禁残留旧模板
+          // 如果是以截断符结尾（如 ... 或 …）且存在完整简报或标题，优先选用完整内容
+          if ((s.endsWith('...') || s.endsWith('…')) && (analysis.briefing_en || item.title_en)) return false;
           return true;
         });
         rawBriefing = validEn || cleanTitle;
@@ -8095,6 +8097,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         .replace(/([。！？；，、])\1+/g, '$1')
         .trim();
 
+      // 智能补全截断残句：若简报被 RSS 截断且标题具有更丰富事实细节，有机补充完整事实
+      if (briefingText.endsWith('...') || briefingText.endsWith('…')) {
+        briefingText = briefingText.replace(/[\.\s…]+$/, '.');
+        if (cleanTitle && cleanTitle.length > briefingText.length && !cleanTitle.toLowerCase().includes(briefingText.toLowerCase().slice(0, 25))) {
+          briefingText += (isZh ? ` 据悉：${cleanTitle}。` : ` Context: ${cleanTitle}.`);
+        }
+      }
+
       // 英文模式终极防护：如果处理后的文本仍意外混入了汉字，坚决回退到纯英文标题
       if (!isZh && /[\u4e00-\u9fa5]/.test(briefingText)) {
         briefingText = (item.title_en && !/[\u4e00-\u9fa5]/.test(item.title_en)) ? item.title_en : cleanTitle;
@@ -8109,6 +8119,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       let cleanInsight = String(insightText || '')
         .replace(/^(?:【(?:AI\s*点评|AI点评|AI\s*Hot\s*Take|行业研判|深度洞察|专家点评)】|\[(?:AI\s*Hot\s*Take|AI\s*Commentary|AI\s*Takeaway)\])\s*/i, '')
         .trim();
+
+      // 保证事实简报为主体：若 AI 点评比事实简报还长，且简报偏短，适度精简点评保留核心神评，保持视觉与逻辑平衡
+      if (cleanInsight && briefingText && cleanInsight.length > briefingText.length) {
+        const sentences = isZh
+          ? cleanInsight.split(/(?<=[。！？])/)
+          : cleanInsight.split(/(?<=[.!?])\s+/);
+        if (sentences.length > 1) {
+          cleanInsight = sentences.slice(0, 2).join(isZh ? '' : ' ').trim();
+        }
+      }
 
       // 识别是否为低质模版句或对不上的假套话与跨语言污染
       const isGenericTemplate = (text) => {
