@@ -3189,36 +3189,38 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
 
       return `
-        <article class="glass-card rounded-2xl p-4 flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
-          <div class="space-y-2">
-            ${hasRealImage ? `
-              <div class="w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-950 mb-2 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0">
-                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
-                ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶ 视频' : '▶ Video'}</span>` : ''}
-              </div>` : ''}
-            <div class="flex items-center justify-between text-xs mb-1">
-              <div class="flex items-center space-x-1.5">
-                <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">${cleanSource}</span>
-                ${todayBadge}
-                ${videoBadge}
+        <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
+          ${hasRealImage ? `
+            <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0">
+              <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
+              ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[8px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶' : '▶'}</span>` : ''}
+            </div>` : ''}
+          <div class="flex-1 flex flex-col justify-between space-y-2 min-w-0">
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <div class="flex items-center space-x-1.5">
+                  <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">${cleanSource}</span>
+                  ${todayBadge}
+                  ${videoBadge}
+                </div>
+                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
+              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2">
+                ${title}
+              </h3>
+              ${specBadges}
+              <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                ${summary}
+              </p>
             </div>
-            <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2">
-              ${title}
-            </h3>
-            ${specBadges}
-            <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-3 leading-relaxed">
-              ${summary}
-            </p>
-          </div>
-          <div class="flex items-center justify-between text-xs pt-3 mt-3 border-t border-slate-100 dark:border-slate-800/60 text-slate-500 dark:text-slate-400">
-            <span class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
-              ⚡ ${isZh ? '点击查看速读' : 'Click for Briefing'}
-            </span>
-            <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium">
-              ${isZh ? '源站' : 'Source'} ↗
-            </a>
+            <div class="flex items-center justify-between text-xs pt-2 mt-2 border-t border-slate-100 dark:border-slate-800/60 text-slate-500 dark:text-slate-400">
+              <span class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
+                ⚡ ${isZh ? '点击查看速读' : 'Click for Briefing'}
+              </span>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium">
+                ${isZh ? '源站' : 'Source'} ↗
+              </a>
+            </div>
           </div>
         </article>
       `;

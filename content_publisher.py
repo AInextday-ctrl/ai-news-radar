@@ -1774,13 +1774,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
-                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_tag = f'<div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
                 else:
-                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_tag = f'<div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
             it_id = it.get("id") or ""
             news_cards_en_html += f"""
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_tag}
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -2019,7 +2019,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if 'rel="preload" as="image"' in en_content:
                 en_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, en_content)
             else:
-                en_content = en_content.replace('<link rel="preload" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="preload" href="/css/style.min.css"')
+                en_content = en_content.replace('<link rel="stylesheet" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="stylesheet" href="/css/style.min.css"')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -2126,13 +2126,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
-                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_tag = f'<div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
                 else:
-                    img_tag = f'<div class="w-full sm:w-36 h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_tag = f'<div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
             it_id = it.get("id") or ""
             news_cards_zh_html += f"""
-              <article class="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_tag}
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
@@ -2349,7 +2349,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             if 'rel="preload" as="image"' in zh_content:
                 zh_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, zh_content)
             else:
-                zh_content = zh_content.replace('<link rel="preload" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="preload" href="/css/style.min.css"')
+                zh_content = zh_content.replace('<link rel="stylesheet" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="stylesheet" href="/css/style.min.css"')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
