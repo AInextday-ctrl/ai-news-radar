@@ -1306,7 +1306,7 @@ def build_dynamic_x_queries(extra_entities: Optional[List[str]] = None) -> List[
 # ==========================================
 # 2. 抓取与聚合 𝕏 (Twitter) 顶尖 AI 领袖与核心工程师动态 (纯动态 24h 实时嗅探)
 # ==========================================
-def fetch_x_leader_posts(max_items: int = 50) -> List[Dict[str, Any]]:
+def fetch_x_leader_posts(max_items: int = 80) -> List[Dict[str, Any]]:
     """
     通过 Google News 深度嗅探通道与 Apify 官方通道，精准捕获 24 小时内全球顶尖 AI 领袖与一线核心工程师的原生推文。
     重点涵盖：
@@ -2752,8 +2752,8 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     """
     items = []
 
-    # 1. 优先注入 𝕏 (Twitter) 顶尖领袖与核心工程师矩阵 (马斯克/奥特曼/Noam Brown/Brockman/LeCun/Karpathy等)
-    x_posts = fetch_x_leader_posts(max_items=50)
+    # 1. 优先注入 𝕏 (Twitter) 顶尖领袖与核心工程师矩阵 (马斯克/奥特曼/Noam Brown/Brockman/LeCun/Karpathy等) 及全网高热爆文
+    x_posts = fetch_x_leader_posts(max_items=80)
     items.extend(x_posts)
 
     # 2. 实时抓取当天全网轰动的 𝕏 爆款推文与大V交锋

@@ -789,9 +789,26 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         "gemini-3.8-flash"
     ]
 
+    gemini_circuit_broken = False
     for i in range(0, len(need_ai_items), batch_size):
         chunk = need_ai_items[i:i + batch_size]
         
+        if gemini_circuit_broken:
+            for orig_item in chunk:
+                fallback = dict(orig_item)
+                raw_title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
+                title_zh = clean_news_text(raw_title_zh)
+                fallback["title_zh"] = title_zh
+                fallback["summary_zh"] = clean_news_text(orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh))
+                fallback["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
+                fallback["summary_en"] = orig_item.get("summary_en") or orig_item.get("content_snippet", "")
+                fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
+                fallback["hot_score"] = 3
+                fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
+                fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
+                results.append(fallback)
+            continue
+
         # 自动化跨信源事实补全：针对付费墙截断与残缺新闻，实时检索补充公开报道事实
         for it in chunk:
             enriched_facts = fetch_cross_grounding_facts(it)
@@ -926,7 +943,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             print(f"  ✓ 已完成 {min(i + batch_size, len(need_ai_items))}/{len(need_ai_items)} 条")
 
         except Exception as e:
-            print(f"  ❌ Gemini 处理异常: {e}，启用高可用神经中文翻译保障")
+            gemini_circuit_broken = True
+            print(f"  ❌ Gemini 处理异常: {e}，开启全局熔断，后续批次全速切换高可用神经中文翻译保障")
             for orig_item in chunk:
                 fallback = dict(orig_item)
                 raw_title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))

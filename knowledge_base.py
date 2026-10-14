@@ -89,39 +89,37 @@ class DynamicKnowledgeStore:
     @classmethod
     def get_dynamic_trending_queries(cls) -> List[str]:
         """
-        自适应生成 𝕏 / Apify 检索式。
-        完全依托知识库中的 ACTIVE_SOTA 状态动态拼装，绝不硬编码过时模型 (如 Claude 3.7 已被自动废弃淘汰)。
+        自适应生成 𝕏 / Apify 爆款检索式。
+        完全依托知识库中的 ACTIVE_SOTA 状态动态拼装，绝不硬编码过时模型，严格过滤非技术标签。
         """
         data = cls.load()
         active_tags = data.setdefault("trending_tags", {})
 
         # 1. 核心高热前沿技术标签池 (支持根据真实频次动态更新)
         default_tags = ["AI", "LLM", "GenerativeAI", "GenAI", "ClaudeCode", "Cursor", "DeepSeek", "VibeCoding", "AIAgent", "PromptEngineering", "ComfyUI", "FLUX"]
-        top_tags = sorted(active_tags.keys(), key=lambda t: active_tags[t].get("count", 0), reverse=True)[:10]
-        merged_tags = list(dict.fromkeys(top_tags + default_tags))[:12]
+        valid_active = [t for t in active_tags if any(k in t.lower() for k in ["ai", "llm", "code", "agent", "model", "gen", "gpt", "claude", "flux"])]
+        top_tags = sorted(valid_active, key=lambda t: active_tags[t].get("count", 0), reverse=True)[:6]
+        merged_tags = list(dict.fromkeys(default_tags + top_tags))[:10]
 
-        tag_query_1 = " OR ".join([f"%23{t}" if not t.startswith("#") else t.replace("#", "%23") for t in merged_tags[:6]])
-        tag_query_2 = " OR ".join([f"%23{t}" if not t.startswith("#") else t.replace("#", "%23") for t in merged_tags[6:12]])
+        tag_query = " OR ".join([f"#{t}" if not t.startswith("#") else t for t in merged_tags])
 
         # 2. 从知识图谱动态提取最新 SOTA 模型通配
         sota_models = cls.get_active_sota_models()
         clean_model_terms = []
-        for m in sota_models[:10]:
+        for m in sota_models[:8]:
             clean = m.replace('"', '').strip()
             if " " in clean:
                 clean_model_terms.append(f'"{clean}"')
             else:
                 clean_model_terms.append(clean)
-        models_subquery = " OR ".join(clean_model_terms[:8]) if clean_model_terms else '"Claude Opus 5.5" OR "GPT 6" OR "DeepSeek-V4"'
+        models_subquery = " OR ".join(clean_model_terms[:6]) if clean_model_terms else '"Claude Opus 5.5" OR "GPT 6" OR "DeepSeek-V4"'
 
         # 3. 架构突破与工程范式
-        breakthrough_subquery = '"Claude Code" OR "Cursor reset" OR "Codex reset" OR "vibe coding" OR "AI agent" OR "test-time compute"'
+        breakthrough_subquery = '"Claude Code" OR "Cursor workflow" OR "vibe coding" OR "AI agent" OR "test-time compute" OR "MCP server"'
 
         return [
-            f"({tag_query_1}) (min_faves:50 OR min_retweets:10)",
-            f"({tag_query_2}) (min_faves:30 OR min_retweets:5)",
-            f"({models_subquery}) (min_faves:30)",
-            f"({breakthrough_subquery}) (min_faves:25)"
+            f"({tag_query}) (min_faves:80 OR min_retweets:15) -filter:replies lang:en -crypto -airdrop -giveaway -#NFT -#memecoin",
+            f"({models_subquery} OR {breakthrough_subquery}) (min_faves:50 OR min_retweets:10) -filter:replies lang:en -crypto -airdrop"
         ]
 
     @classmethod
@@ -261,11 +259,23 @@ class DynamicKnowledgeStore:
             if not title:
                 continue
 
-            # 提取 #Hashtag 标签
-            hashtags = re.findall(r'#([a-zA-Z0-9_\u4e00-\u9fa5]{2,20})', title)
+            # 提取 #Hashtag 标签 (严格限定纯技术与 AI 相关，杜绝成人/炒币/杂乱数字标签)
+            hashtags = re.findall(r'#([a-zA-Z0-9_\u4e00-\u9fa5]{2,25})', title)
+            AI_TAG_KEYWORDS = [
+                "ai", "llm", "claude", "gpt", "cursor", "deepseek", "vibe", "coding", "agent",
+                "prompt", "flux", "sora", "kling", "wan", "hailuo", "runway", "comfy", "lora",
+                "weights", "model", "diffusion", "rag", "mcp", "eval", "bench", "robot",
+                "vision", "audio", "video", "multimodal", "genai", "generative"
+            ]
+            DISCARD_TAG_PATTERNS = ["adult", "nsfw", "sex", "crypto", "bitcoin", "eth", "solana", "memecoin", "giveaway", "airdrop", "presale", "8216", "8217"]
             for raw_tag in hashtags:
                 clean_tag = raw_tag.strip()
-                if clean_tag.lower() in ["ai", "news", "today", "update", "breaking"]:
+                low_tag = clean_tag.lower()
+                if low_tag in ["ai", "news", "today", "update", "breaking"] or re.match(r'^\d+$', low_tag):
+                    continue
+                if any(bad in low_tag for bad in DISCARD_TAG_PATTERNS):
+                    continue
+                if not any(good in low_tag for good in AI_TAG_KEYWORDS):
                     continue
                 if clean_tag not in tags_store:
                     tags_store[clean_tag] = {"count": 1, "first_seen": now_iso, "last_seen": now_iso}

@@ -32,7 +32,7 @@ except ImportError:
         return text
 
 try:
-    from fetcher import match_celebrity_profile, extract_tech_specs, enrich_tweet_media
+    from fetcher import match_celebrity_profile, extract_tech_specs, enrich_tweet_media, is_primarily_english
 except ImportError:
     def match_celebrity_profile(handle: str) -> Optional[Dict[str, Any]]:
         return None
@@ -40,6 +40,10 @@ except ImportError:
         return ["前沿发声"]
     def enrich_tweet_media(item: Dict[str, Any], client: Any = None) -> Dict[str, Any]:
         return item
+    def is_primarily_english(text: str) -> bool:
+        if not text or not str(text).strip():
+            return False
+        return not bool(re.search(r'[\u4e00-\u9fa5\u3040-\u30ff\uff65-\uff9f\uac00-\ud7af\u0400-\u04ff\u0600-\u06ff]', str(text)))
 
 # 状态记录文件
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -328,7 +332,7 @@ def fetch_incremental_tweets(
     dynamic_queries = get_dynamic_trending_queries()
     print(f"  🚀 [Apify 策略 B 增量采集器] 启动增量抓取 (Token 池: {len(tokens)} 个)...")
 
-    # 策略 B 查询合并：将核心领袖与权威实验室合并为 2 组高内聚紧凑查询 (减少 80% 的 Actor 启动开销)
+    # 策略 B 查询合并：核心领袖 + 权威实验室 + 全网 AI 标签高热爆帖 (高内聚并发检索)
     all_queries = []
     # 1. 核心 AI 顶尖领袖 (Top 25 舵手与核心科学家)
     core_leaders = LEADER_HANDLES[:25]
@@ -339,6 +343,10 @@ def fetch_incremental_tweets(
     core_labs = LAB_HANDLES[:20]
     q_labs = "(" + " OR ".join([f"from:{h}" for h in core_labs]) + ")"
     all_queries.append((q_labs, 35))
+
+    # 3. 全网 AI 标签与前沿模型爆款推文 (高热社群共鸣、极客神作、开源爆款与实操技巧)
+    for vq in dynamic_queries[:2]:
+        all_queries.append((vq, 30))
 
     raw_items = []
     from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -503,22 +511,74 @@ def fetch_incremental_tweets(
         if media_urls:
             image_url = media_urls[0]
 
-        # 严格身份门禁：只收录已在白名单池中的全球 AI 核心领袖与顶尖官方实验室
+        # 1. 严格过滤垃圾与无关主题 (加密货币/NFT/成人/无营养闲扯)
+        noise_keywords = [
+            "crypto", "bitcoin", "eth ", "solana", "memecoin", "airdrop", "nsfw",
+            "hentai", "futa", "porn", "giveaway", "follow & rt", "aiart", "dildo",
+            "presale", "whitelist", "nft community", "dex", "token", "pump.fun",
+            "free mint", "cashtag", "seed phrase", "blockchain", "web3", "trading bot"
+        ]
+        text_lower = tweet_text.lower()
+        user_lower = user_name.lower()
+        author_name_lower = (author_obj.get("name") or "").lower()
+        if any(w in text_lower for w in noise_keywords):
+            continue
+        if any(w in user_lower or w in author_name_lower for w in ["crypto", "bitcoin", "airdrop", "memecoin", "presale"]):
+            continue
+
+        # 2. 严格语言门禁：必须以英文为主导 (杜绝非英垃圾推文)
+        if not is_primarily_english(tweet_text):
+            continue
+
+        # 3. 提取真实互动数值
+        try:
+            num_likes = int(likes_raw or 0)
+        except Exception:
+            num_likes = 0
+        try:
+            num_rts = int(retweets_raw or 0)
+        except Exception:
+            num_rts = 0
+
+        # 4. 双轨身份门禁分流：
+        # 轨道 A: 核心名单领袖大V或官方实验室 (VIP 官方/领袖矩阵，享有直接准入)
         is_known_handle = user_name.lower() in [h.lower() for h in LEADER_HANDLES + LAB_HANDLES]
         profile = match_celebrity_profile(user_name)
-        if not is_known_handle and not profile:
-            continue
+        is_vip = is_known_handle or (profile is not None)
 
-        # 严格过滤垃圾与无关主题 (加密货币/NFT/成人/无营养闲扯)
-        noise_keywords = ["crypto", "bitcoin", "eth ", "solana", "memecoin", "airdrop", "nsfw", "hentai", "futa", "porn", "giveaway", "follow & rt", "aiart", "dildo"]
-        if any(w in tweet_text.lower() for w in noise_keywords):
-            continue
+        # 轨道 B: 全网 AI 标签高热爆文 (独立极客、开源作者、一线研究员)
+        # 必须满足高互动门槛与实质性 AI 核心科技相关性，坚决杜绝低赞或无关水帖
+        if not is_vip:
+            # 门槛 1: 真实互动量门禁 (点赞 >= 60 或 转发 >= 12)
+            if num_likes < 60 and num_rts < 12:
+                continue
 
+            # 门槛 2: AI 强相关关键词检验 (确保是真正的 AI 领域技术/工具/评测)
+            ai_keywords = [
+                "ai", "llm", "claude", "gpt", "cursor", "deepseek", "vibe coding",
+                "mcp", "model", "agent", "comfyui", "flux", "sora", "kling",
+                "wan", "ollama", "vllm", "weights", "benchmark", "reasoning",
+                "prompt", "inference", "quantiz", "fine-tun", "neural", "lora",
+                "workflow", "coding", "robotics", "transformer", "diffusion", "open source"
+            ]
+            lower_text = tweet_text.lower()
+            if not any(k in lower_text for k in ai_keywords):
+                continue
+
+            # 门槛 3: 实质正文长度不得过短
+            if len(substantive_text) < 40 and not has_media:
+                continue
+
+        # 5. 作者头衔与实体类型智能解析
         raw_desc = (author_obj.get("description") or "").strip()
-        # 绝不让 Twitter Bio 中的裸 URL (如 t.co 短链) 沦为作者头衔
         clean_desc = re.sub(r'https?://\S+', '', raw_desc).strip()
         is_known_lab = user_name.lower() in [h.lower() for h in LAB_HANDLES]
-        default_role = "官方实验室 / 研发团队" if is_known_lab else "AI 领域领袖 / 核心开发者"
+        if is_known_lab:
+            default_role = "官方实验室 / 研发团队"
+        elif is_known_handle or profile:
+            default_role = "AI 领域领袖 / 核心科学家"
+        else:
+            default_role = "AI 极客 / 开源创作者"
 
         author_name = profile.get("name") if profile else (author_obj.get("name") or user_name)
         author_handle = f"@{user_name}"
@@ -526,29 +586,30 @@ def fetch_incremental_tweets(
         author_role = profile.get("role") if profile else (clean_desc or default_role)
         if author_role.startswith("http") or "t.co/" in author_role or len(author_role) < 3:
             author_role = default_role
-        entity_type = profile.get("entity_type") if profile else ("company" if is_known_lab else "person")
+        entity_type = profile.get("entity_type") if profile else ("company" if is_known_lab else ("person" if is_vip else "creator"))
 
-        # 识别爆款与全网飙升状态
+        # 6. 识别爆款与全网飙升状态
         is_viral = False
         surge_badge = None
-        try:
-            num_likes = int(likes_raw or 0)
-            num_rts = int(retweets_raw or 0)
+        if not is_vip:
+            # 非白名单的大V，能通过前述高赞检验者即为 24h 全网飙升爆帖
+            is_viral = True
+            surge_badge = "⚡ 24h 飙升热推"
+        else:
+            # 白名单内的大V，按原有高互动阈值判定爆款
             if num_likes >= 1000 or num_rts >= 150:
                 is_viral = True
                 surge_badge = "⚡ 24h 飙升热推"
-        except Exception:
-            pass
 
-        # 规格标签与高亮翻译
-        if profile:
+        # 7. 规格标签与高亮翻译
+        if is_vip:
             spec_tags = extract_tech_specs(tweet_text, "") or (["硅谷前沿原声", "大V发声"] if entity_type == "person" else ["官方发布", "模型突破"])
             tags_list = ["𝕏领袖观点", "前沿发声"] if entity_type == "person" else ["官方动态", "模型发布"]
-        else:
-            spec_tags = extract_tech_specs(tweet_text, "") or ["🔥 24h飙升", "𝕏平台热推"]
-            tags_list = ["🔥 24h飙升", "𝕏平台热推", "极客前沿"]
             if is_viral:
                 tags_list.insert(0, "🔥 飙升热帖")
+        else:
+            spec_tags = extract_tech_specs(tweet_text, "") or ["🔥 24h飙升", "极客实战"]
+            tags_list = ["🔥 24h飙升", "𝕏平台热推", "极客前沿"]
 
         # 智能翻译中文
         trans_zh = free_translate_zh(tweet_text)
@@ -778,8 +839,11 @@ def merge_apify_tweets_into_database(new_tweets: List[Dict[str, Any]]):
             merged.sort(key=lambda x: x.get("raw_published_at") or "", reverse=True)
 
             data["celebrity"] = merged
+            viral_posts = [it for it in merged if it.get("sub_category") == "viral_post" or it.get("is_viral")]
+            data["viral_posts"] = viral_posts
             if "grouped" in data and isinstance(data["grouped"], dict):
                 data["grouped"]["celebrity"] = merged
+                data["grouped"]["viral_posts"] = viral_posts
 
             # 同样同步主 items 列表中的 celebrity
             if "items" in data and isinstance(data["items"], list):
