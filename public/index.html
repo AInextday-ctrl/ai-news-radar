@@ -84,9 +84,11 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="preconnect" href="https://wsrv.nl" crossorigin>
   <link rel="dns-prefetch" href="https://wsrv.nl">
+  <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
+  <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6ace9af8b7c3e684c0712364/master/pass/Men-Cant-Stop-Lying-About-AI-Business938329806.jpg&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="preload" href="/css/style.min.css" as="style">
-  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="preload" href="/css/style.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="/css/style.min.css"></noscript>
   <link rel="preload" href="/js/app.min.js" as="script">
   <style>
     @media (min-width: 1024px) {
@@ -115,13 +117,13 @@
       contain-intrinsic-size: auto 200px;
     }
     #viral-ticker-viewport {
-      height: 180px;
+      height: 145px;
       overflow: hidden;
       contain: paint layout;
     }
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
       #viral-ticker-viewport {
-        height: 185px;
+        height: 180px;
       }
     }
     #header-actions-bar {
@@ -542,7 +544,7 @@
             <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">View All Radar →</button>
           </div>
         </div>
-        <div id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">
+        <div id="viral-ticker-viewport" class="relative overflow-hidden h-[145px] md:h-[180px]">
           <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
 
@@ -550,7 +552,7 @@
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/anthropic" alt="Claude Developers" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude Developers" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Developers</span>
@@ -580,11 +582,11 @@ https://t.co/YXVYxl5gdU
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/anthropic" alt="Anthropic 官方" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Anthropic 官方" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Anthropic 官方</span>
@@ -609,11 +611,11 @@ In May, we merged around 2,500 code changes per day. In September, we merged mor
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/GoogleDeepMind" alt="Google DeepMind" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/GoogleDeepMind&w=80&h=80&fit=cover&output=webp&q=80" alt="Google DeepMind" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google DeepMind</span>
@@ -644,7 +646,7 @@ It mapped the physics, coded its own simulation, and taught @Apptronik's Apollo 
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/google" alt="Google AI" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/google&w=80&h=80&fit=cover&output=webp&q=80" alt="Google AI" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google AI</span>
@@ -671,11 +673,11 @@ Check out how you can use Argon in your favorite Google product 🧵
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/openainewsroom" alt="@openainewsroom" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/openainewsroom&w=80&h=80&fit=cover&output=webp&q=80" alt="@openainewsroom" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">@openainewsroom</span>
@@ -698,11 +700,11 @@ Check out how you can use Argon in your favorite Google product 🧵
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/elonmusk&w=80&h=80&fit=cover&output=webp&q=80" alt="Elon Musk" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Elon Musk</span>
@@ -731,7 +733,7 @@ Check out how you can use Argon in your favorite Google product 🧵
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/GoogleAIStudio" alt="Google AI Studio" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/GoogleAIStudio&w=80&h=80&fit=cover&output=webp&q=80" alt="Google AI Studio" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google AI Studio</span>
@@ -756,11 +758,11 @@ start building today: https://t.co/CbKuR8bPfm
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/cursor_ai" alt="Cursor" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/cursor_ai&w=80&h=80&fit=cover&output=webp&q=80" alt="Cursor" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Cursor</span>
@@ -787,11 +789,11 @@ Priced at $2/M input and $10/M output tokens.
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 hidden md:flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="https://unavatar.io/x/alexandr_wang" alt="Alexandr Wang" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/alexandr_wang&w=80&h=80&fit=cover&output=webp&q=80" alt="Alexandr Wang" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Alexandr Wang</span>

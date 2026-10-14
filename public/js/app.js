@@ -11,6 +11,17 @@
       }
       return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${width}&output=webp&q=80`;
     }
+
+    function optimizeAvatarUrl(url, size = 80) {
+      if (!url || typeof url !== 'string') return 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP';
+      const u = url.trim();
+      if (!u || u === 'null' || u === 'undefined' || u === 'none') return 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP';
+      if (u.startsWith('data:') || u.startsWith('blob:')) return u;
+      if (u.includes('unavatar.io') || u.includes('twimg.com') || u.includes('pbs.twimg.com')) {
+        return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${size}&h=${size}&fit=cover&output=webp&q=80`;
+      }
+      return u;
+    }
     const urlParams = new URLSearchParams(window.location.search);
     const paramLang = urlParams.get('lang');
     // 英文为主站 (English-First)：优先尊重 URL 参数与用户主动设定的语言，默认一律为 'en'
@@ -2868,7 +2879,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return { badge: isZh ? '🔥 24h 极客热推' : '🔥 24H TRENDING', isHl: false, theme: 'slate' };
     }
 
-    function renderViralTickerCard(item, isZh) {
+    function renderViralTickerCard(item, isZh, cardIdx = 0) {
       const tagInfo = resolveViralTweetTag(item, isZh);
       const isHl = tagInfo.isHl;
       const badgeText = escapeHtml(tagInfo.badge);
@@ -2878,10 +2889,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const role = escapeHtml(isZh ? (item.author_role || 'AI 先锋观察者') : (item.author_role_en || 'AI Pioneer & Builder'));
 
       const text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
-      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@', '')}`;
+      const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@', '')}`, 80);
       const timeStr = isZh ? '24h 实时' : '24h Live';
       const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
       const url = item.url || '#';
+      const visCls = cardIdx === 0 ? "flex" : "hidden md:flex";
 
       if (isHl) {
         let pillStyle = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30";
@@ -2906,13 +2918,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         return `
-          <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5">
+          <article class="relative rounded-2xl p-4 ${visCls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5">
             <div class="absolute -top-[2px] left-4 right-4 h-[3px] ${topLine} rounded-full"></div>
             <div class="space-y-2 pt-0.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
                 <div class="flex items-center space-x-2.5 min-w-0">
                   <div class="relative shrink-0">
-                    <img src="${avatar}" alt="${author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    <img src="${avatar}" alt="${author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                   </div>
                   <div class="min-w-0 truncate">
@@ -2948,7 +2960,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           ? "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25"
           : "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25";
         return `
-          <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+          <article class="relative rounded-2xl p-4 ${visCls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
             <div class="space-y-2">
               <div class="flex items-center justify-between text-[10px] gap-2">
                 <div class="flex items-center space-x-2.5 min-w-0">
@@ -2997,7 +3009,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const pages = [];
       for (let i = 0; i < tweets.length; i += 3) {
         const slice = tweets.slice(i, i + 3);
-        const cards = slice.map(it => renderViralTickerCard(it, isZh)).join('');
+        const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
         pages.push(`
           <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
             ${cards}
@@ -3010,30 +3022,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       window.viralTickerCurrentPage = 0;
       window.viralTickerTotalPages = pages.length;
       updateTickerPageUI(1, pages.length);
-      fitViralTickerHeight();
       initViralTickerAutoScroll();
-      requestAnimationFrame(fitViralTickerHeight);
-      setTimeout(fitViralTickerHeight, 100);
     }
 
-    let _fitTickerRaf = null;
     function fitViralTickerHeight() {
-      if (_fitTickerRaf) cancelAnimationFrame(_fitTickerRaf);
-      _fitTickerRaf = requestAnimationFrame(() => {
-        const viewport = document.getElementById('viral-ticker-viewport');
-        const slider = document.getElementById('viral-ticker-slider');
-        if (!viewport || !slider) return;
-        const pages = slider.querySelectorAll('.viral-ticker-page');
-        const cur = window.viralTickerCurrentPage || 0;
-        const targetPage = pages[cur] || pages[0];
-        if (targetPage && targetPage.offsetHeight > 0) {
-          const h = Math.max(targetPage.offsetHeight, 168);
-          const curH = parseInt(viewport.style.height || "0", 10);
-          if (Math.abs(curH - h) > 6) {
-            viewport.style.height = `${h}px`;
-          }
-        }
-      });
+      // Pure CSS h-[145px] md:h-[180px] handles height with zero forced reflow and zero CLS
     }
 
     function flipViralTicker(direction) {
@@ -3044,12 +3037,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       window.viralTickerCurrentPage = (window.viralTickerCurrentPage + direction + pages.length) % pages.length;
       
-      let offset = 0;
-      for (let i = 0; i < window.viralTickerCurrentPage; i++) {
-        offset += (pages[i]?.offsetHeight || 0) + 16;
-      }
+      const step = (window.innerWidth >= 768 ? 180 : 145) + 14;
+      const offset = window.viralTickerCurrentPage * step;
       slider.style.transform = `translateY(-${offset}px)`;
-      fitViralTickerHeight();
       updateTickerPageUI(window.viralTickerCurrentPage + 1, pages.length);
     }
 
@@ -3153,7 +3143,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     // 专门卡片渲染：新闻快讯卡片 (支持 Gemini AI 深度解读交互)
     // ==========================================
-    function renderNewsCard(item) {
+    function renderNewsCard(item, cardIndex = -1) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
@@ -3196,13 +3186,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const cleanSource = item.source || "";
       const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
       const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
+      const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
 
       return `
         <article class="glass-card rounded-2xl p-4 flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
           <div class="space-y-2">
             ${hasRealImage ? `
               <div class="w-full aspect-[16/9] rounded-xl overflow-hidden bg-slate-950 mb-2 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0">
-                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
+                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
                 ${hasVideo ? `<span class="absolute bottom-1.5 right-1.5 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">${isZh ? '▶ 视频' : '▶ Video'}</span>` : ''}
               </div>` : ''}
             <div class="flex items-center justify-between text-xs mb-1">
@@ -3302,7 +3293,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
       const author = item.author || (isZh ? 'AI 开发者' : 'AI Creator');
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
-      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
+      const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 80);
       const specBadges = (item.spec_tags && item.spec_tags.length)
         ? `<div class="flex items-center gap-1.5 flex-wrap pt-1">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 font-semibold">#${s}</span>`).join('')}</div>`
         : '';
@@ -3658,7 +3649,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const title = item.title_zh || item.title;
       const author = item.author || (isZh ? 'AI 开发者' : 'AI Creator');
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
-      const avatar = item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`;
+      const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 96);
 
       const specBadges = (item.spec_tags && item.spec_tags.length)
         ? `<div class="flex items-center gap-1.5 flex-wrap my-2">${item.spec_tags.map(s => `<span class="text-[9px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 border border-amber-500/20 font-semibold"># ${s}</span>`).join('')}</div>`
@@ -3687,7 +3678,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <!-- 醒目放大头像设计 (w-14 h-14 sm:w-16 sm:h-16 搭配光环与大V标，一眼即知是谁说的) -->
             <div class="flex items-center space-x-3.5 mb-3.5">
               <div class="relative shrink-0">
-                <img src="${avatar}" alt="${escapeHtml(author)} avatar" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ${isCo ? 'ring-amber-400/90 dark:ring-amber-400/80' : 'ring-sky-400/90 dark:ring-sky-400/80'} shadow-lg shadow-amber-500/20 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
+                <img src="${avatar}" alt="${escapeHtml(author)} avatar" width="64" height="64" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full ring-2 ${isCo ? 'ring-amber-400/90 dark:ring-amber-400/80' : 'ring-sky-400/90 dark:ring-sky-400/80'} shadow-lg shadow-amber-500/20 object-cover bg-slate-900" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author.replace(/[^a-zA-Z0-9]/g, '') || 'VIP'}'">
                 <span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full ${isCo ? 'bg-amber-500' : 'bg-sky-500'} text-white flex items-center justify-center text-[10px] font-black ring-2 ring-white dark:ring-slate-900 shadow" title="${isCo ? (isZh ? '已认证官方机构/品牌' : 'Verified Official Org') : (isZh ? '已认证大V/开发者' : 'Verified Creator')}">✓</span>
               </div>
               <div class="min-w-0 flex-1">
@@ -4239,10 +4230,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       creators.forEach(c => {
         const isSelected = selectedCreator === c.name;
-        const avatarUrl = c.avatar || `https://unavatar.io/x/${(c.handle || '').replace('@', '')}`;
+        const avatarUrl = optimizeAvatarUrl(c.avatar || `https://unavatar.io/x/${(c.handle || '').replace('@', '')}`, 48);
         html += `
           <button onclick="filterByCreator('${c.name}')" class="shrink-0 px-2.5 py-1.5 rounded-xl text-xs font-medium flex items-center space-x-2 transition-all group ${isSelected ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 ring-2 ring-indigo-400 font-bold' : 'bg-slate-200/80 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-300 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-800'}">
-            <img src="${avatarUrl}" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'" class="w-5 h-5 rounded-full object-cover ring-1 ring-white/20">
+            <img src="${avatarUrl}" width="20" height="20" loading="lazy" decoding="async" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100'" class="w-5 h-5 rounded-full object-cover ring-1 ring-white/20">
             <span class="font-bold whitespace-nowrap">${c.name}</span>
             <span class="text-[9px] px-1.5 py-0.2 rounded font-mono ${isSelected ? 'bg-white/20 text-white' : 'bg-slate-300/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400'}">${c.subscribers || ''}</span>
           </button>
@@ -4868,7 +4859,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const streamNews = document.getElementById('stream-news');
       if (streamNews) {
         streamNews.innerHTML = displayNews.length > 0 
-          ? displayNews.map(renderNewsCard).join('')
+          ? displayNews.map((it, idx) => renderNewsCard(it, idx)).join('')
           : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
       }
       const newsSubCount = document.getElementById('news-sub-count');
@@ -6547,7 +6538,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const author = escapeHtml(item.author || (isThreads ? (isZh ? 'Threads 极客' : 'Threads Geek') : (isZh ? '𝕏 极客' : '𝕏 Geek')));
       const handle = escapeHtml(item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@viral'));
-      const avatar = escapeHtml(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`);
+      const avatar = escapeHtml(optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 80));
 
       const platformBadge = isThreads
         ? `<span class="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-800 dark:text-purple-300 border border-purple-500/30 text-[10px] font-bold shrink-0 flex items-center gap-1">${isZh ? '🧵 Threads 热帖' : '🧵 Threads Viral'}</span>`
@@ -6581,7 +6572,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="flex items-start justify-between gap-2">
             <div class="flex items-center space-x-3 min-w-0">
               <div class="relative shrink-0">
-                <img src="${avatar}" alt="${author} avatar" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author}'">
+                <img src="${avatar}" alt="${author} avatar" width="40" height="40" class="w-10 h-10 sm:w-11 sm:h-11 rounded-full ring-2 ${isThreads ? 'ring-purple-400/80' : 'ring-sky-400/80'} object-cover shadow-sm bg-slate-900" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${author}'">
                 <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full ${isThreads ? 'bg-purple-600' : 'bg-sky-500'} text-white flex items-center justify-center text-[9px] font-black ring-1 ring-white dark:ring-slate-900 shadow">✓</span>
               </div>
               <div class="min-w-0">
@@ -6761,7 +6752,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           avatarEl.onerror = () => { avatarEl.src = 'https://api.dicebear.com/7.x/bottts/svg?seed=Threads'; };
           avatarEl.className = "w-12 h-12 rounded-full border-2 border-purple-400/60 object-cover shrink-0 shadow-md";
         } else if (isX) {
-          avatarEl.src = item.author_avatar || `https://unavatar.io/x/${(item.author_handle || 'x').replace('@','')}`;
+          avatarEl.src = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${(item.author_handle || 'x').replace('@','')}`, 96);
           avatarEl.onerror = () => { avatarEl.src = 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP'; };
           avatarEl.className = "w-12 h-12 rounded-full border-2 border-sky-400/60 object-cover shrink-0 shadow-md";
         } else {

@@ -1540,7 +1540,15 @@ def resolve_viral_tweet_tag(it: dict, is_zh: bool) -> tuple:
         badge = "🔥 24h 极客热推" if is_zh else "🔥 24H TRENDING"
     return badge, False, "slate"
 
-def format_viral_page_card(it: dict, is_zh: bool) -> str:
+def optimize_avatar_url(url: str) -> str:
+    if not url:
+        return 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP'
+    if 'unavatar.io' in url or 'twimg.com' in url or 'pbs.twimg.com' in url:
+        import urllib.parse
+        return f"https://wsrv.nl/?url={urllib.parse.quote(url)}&w=80&h=80&fit=cover&output=webp&q=80"
+    return url
+
+def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     author = safe_text(it.get("author") or ("AI 领袖" if is_zh else "AI Pioneer"), 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
@@ -1569,7 +1577,8 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
         btn_text = "View Post ↗"
 
     u = it.get("url", "#")
-    avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+    avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
+    vis_cls = "flex" if card_idx == 0 else "hidden md:flex"
 
     if is_hl:
         if theme == "amber":
@@ -1594,13 +1603,13 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
             card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
 
         return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 {vis_cls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
                 <div class="space-y-2 pt-0.5">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
                       <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                         <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                       </div>
                       <div class="min-w-0 truncate">
@@ -1633,11 +1642,11 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
     else:
         pill_cls = "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25" if theme == "indigo" else "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25"
         return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-4 {vis_cls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
                 <div class="space-y-2">
                   <div class="flex items-center justify-between text-[10px] gap-2">
                     <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="{avatar}" alt="{author}" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                      <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
@@ -1706,7 +1715,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         viral_ticker_en_html = ""
         for p_idx in range(0, len(viral_items), 3):
             p_slice = viral_items[p_idx:p_idx+3]
-            cards_html = "\n".join([format_viral_page_card(it, is_zh=False) for it in p_slice])
+            cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
             viral_ticker_en_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 English
@@ -1813,13 +1822,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
             text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
             u = it.get("url", "#")
-            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
             celeb_cards_en_html += f"""
               <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
                 <div class="space-y-2.5">
                   <div class="flex items-start space-x-3">
                     <div class="relative shrink-0 pt-0.5">
-                      <img src="{avatar}" alt="{author}" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="{avatar}" alt="{author}" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                       <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
                     </div>
                     <div class="min-w-0 flex-1">
@@ -1997,10 +2006,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口高度 180px，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿 (CLS = 0)
+        # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
         en_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden h-[145px] md:h-[180px]">',
             en_content
         )
 
@@ -2072,7 +2081,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         viral_ticker_zh_html = ""
         for p_idx in range(0, len(viral_items), 3):
             p_slice = viral_items[p_idx:p_idx+3]
-            cards_html = "\n".join([format_viral_page_card(it, is_zh=True) for it in p_slice])
+            cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
             viral_ticker_zh_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
 
         # 1. Top 3 Chinese
@@ -2165,13 +2174,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             role = safe_text(it.get("author_role") or "AI 前沿探索者", 60)
             text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
             u = it.get("url", "#")
-            avatar = it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}"
+            avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
             celeb_cards_zh_html += f"""
               <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 border-l-sky-500/90 hover:border-sky-500/50 hover:shadow-xl transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90">
                 <div class="space-y-2.5">
                   <div class="flex items-start space-x-3">
                     <div class="relative shrink-0 pt-0.5">
-                      <img src="{avatar}" alt="{author}" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="{avatar}" alt="{author}" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                       <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
                     </div>
                     <div class="min-w-0 flex-1">
@@ -2327,10 +2336,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
 
-        # 严格约束走马灯视口高度 180px，GPU 硬件层隔离，杜绝 transition-all 引发全局重排卡顿 (CLS = 0)
+        # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
         zh_content = re.sub(
             r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden" style="height: 180px;">',
+            'id="viral-ticker-viewport" class="relative overflow-hidden h-[145px] md:h-[180px]">',
             zh_content
         )
 
