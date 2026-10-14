@@ -34,7 +34,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: 'gemini-flash-latest'
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
-          APIFY_INTERVAL_HOURS: '0.5'
+          APIFY_INTERVAL_HOURS: '0.25'
           PYTHONIOENCODING: 'utf-8'
         run: |
           python main.py
