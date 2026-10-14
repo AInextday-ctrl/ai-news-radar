@@ -187,19 +187,29 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
         fixes.append("summary_en 纯英文自愈")
 
     # 3. 深度长文实录治理：article_content 与 article_content_zh
+    # 严格判断是否抓取到实质全文；若仅为单句导语/短摘要碎片，坚决置为 None，由前台无缝隐藏中间原文卡片
+    art_en = item.get("article_content")
+    if art_en:
+        art_en_str = str(art_en).strip()
+        # 排除少于 220 字符或单句碎片的伪长文
+        if len(art_en_str) < 220 or (not '\n' in art_en_str and len(re.findall(r'[.!?]\s+[A-Z]', art_en_str)) < 1):
+            item["article_content"] = None
+            fixes.append("清理未抓到全文的英文单句导语")
+
     art_zh = item.get("article_content_zh")
-    if art_zh and len(str(art_zh).strip()) >= 20:
+    if art_zh and len(str(art_zh).strip()) >= 50:
         # 净化现存的 article_content_zh，过滤掉其中的纯英文或广告段落，保留纯正中文段落
         clean_paras = []
         for p in re.split(r'\n+', str(art_zh)):
             p_clean = re.sub(r'^[【\[].*?[】\]]\s*', '', p).strip()
-            if count_chinese_chars(p_clean) >= 4 and not re.search(r'(?:[A-Za-z0-9\',.-]+\s+){8,}[A-Za-z0-9\',.-]+', p_clean):
+            if count_chinese_chars(p_clean) >= 6 and not re.search(r'(?:[A-Za-z0-9\',.-]+\s+){8,}[A-Za-z0-9\',.-]+', p_clean):
                 clean_paras.append(p_clean)
-        if clean_paras and count_chinese_chars('\n\n'.join(clean_paras)) >= 15:
+        # 实质中文长文必须具备 80 个以上汉字
+        if clean_paras and count_chinese_chars('\n\n'.join(clean_paras)) >= 80:
             item["article_content_zh"] = '\n\n'.join(clean_paras)
         else:
             item["article_content_zh"] = None
-            fixes.append("清理不合规长文实录")
+            fixes.append("清理中文过短单句伪长文")
     else:
         # 无中文长文实录或过短，置空以防英文泄露（前台自动降级为AI精炼速览与深度拆解）
         item["article_content_zh"] = None

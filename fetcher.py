@@ -3037,8 +3037,9 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         "raw_published_at": iso_time,
                         "metrics": metrics,
                         "spec_tags": spec_tags,
-                        "article_content": article_text_en or clean_summary,
-                        "original_content": article_text_en or clean_summary,
+                        # 仅当真正抓取到实质性长篇正文时才赋予 article_content，未抓到全文时置为 None，防止前台显示单薄难看的单句原文卡片
+                        "article_content": (article_text_en.strip() if (article_text_en and len(article_text_en.strip()) >= 220) else None),
+                        "original_content": (article_text_en.strip() if (article_text_en and len(article_text_en.strip()) >= 220) else clean_summary),
                         "content_snippet": (article_text_en[:500] if article_text_en else clean_summary) or f"From {source_display}",
                         "summary_en": (article_text_en[:500] if article_text_en else clean_summary) or f"From {source_display}",
                         "category": category,
