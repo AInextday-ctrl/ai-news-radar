@@ -270,6 +270,35 @@ def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = No
                 if isinstance(p, dict) and p.get("url") and p["url"] not in extracted_images:
                     extracted_images.append(p["url"])
 
+            # 检查引用推文 (quoted_tweet) 中是否包含原始视频或配图
+            quoted = data.get("quoted_tweet")
+            if quoted and isinstance(quoted, dict):
+                q_video = quoted.get("video")
+                if q_video and isinstance(q_video, dict):
+                    has_video = True
+                    poster = q_video.get("poster")
+                    if poster and poster not in extracted_images:
+                        extracted_images.append(poster)
+                    variants = q_video.get("variants") or []
+                    mp4s = [v.get("src") for v in variants if isinstance(v, dict) and "video/mp4" in v.get("type", "") and v.get("src")]
+                    if mp4s and not extracted_video_url:
+                        extracted_video_url = mp4s[min(2, len(mp4s)-1)]
+
+                q_media = quoted.get("mediaDetails") or []
+                for md in q_media:
+                    if isinstance(md, dict):
+                        m_type = md.get("type")
+                        m_url = md.get("media_url_https")
+                        if m_url and m_url not in extracted_images:
+                            extracted_images.append(m_url)
+                        if m_type in ["video", "animated_gif"]:
+                            has_video = True
+                            v_info = md.get("video_info") or {}
+                            vars_list = v_info.get("variants") or []
+                            mp4s = [v.get("url") for v in vars_list if isinstance(v, dict) and "video/mp4" in v.get("content_type", "") and v.get("url")]
+                            if mp4s and not extracted_video_url:
+                                extracted_video_url = mp4s[min(2, len(mp4s)-1)]
+
             if extracted_images:
                 item["image_url"] = extracted_images[0]
                 item["media_urls"] = extracted_images

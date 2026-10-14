@@ -744,14 +744,27 @@ def format_viral_page_card(it: dict, is_zh: bool) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     author = safe_text(it.get("author") or ("AI 领袖" if is_zh else "AI Pioneer"), 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
-    role = safe_text((it.get("author_role") if is_zh else it.get("author_role_en")) or ("AI 先锋观察者" if is_zh else "AI Pioneer & Builder"), 60)
+    
+    raw_role = (it.get("author_role") if is_zh else it.get("author_role_en")) or ""
+    if raw_role.startswith("http") or "t.co/" in raw_role or len(raw_role) < 3:
+        raw_role = ""
+    if not raw_role:
+        if "elon" in author.lower() or "musk" in author.lower():
+            raw_role = "xAI 创始人 / 特斯拉 CEO" if is_zh else "Founder of xAI & Tesla CEO"
+        else:
+            raw_role = "AI 领袖 / 核心开发者" if is_zh else "AI Pioneer & Builder"
+    role = safe_text(raw_role, 60)
     
     if is_zh:
-        text = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
+        raw_text = it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", "")
+        raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
+        text = safe_text(raw_text, 250)
         time_str = "24h 实时"
         btn_text = "查看原帖 ↗"
     else:
-        text = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
+        raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
+        raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
+        text = safe_text(raw_text, 250)
         time_str = "24h Live"
         btn_text = "View Post ↗"
 

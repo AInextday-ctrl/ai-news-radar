@@ -426,10 +426,14 @@ def fetch_incremental_tweets(
             continue
             
         is_reply = it.get("isReply") or False
-        if is_reply and (len(substantive_text) < 50 or num_likes < 150):
-            continue
+        # 如果是回复别人的推文 (Reply)，且自身没有附带独立媒体/视频，且不是长篇深度技术阐述，一律过滤，避免脱离原推语境让人一头雾水
+        if is_reply:
+            if not has_media and len(substantive_text) < 120:
+                continue
+            if num_likes < 200:
+                continue
 
-        # 媒体与视频原资产多维解析 (提取原推配图、相册流与原生视频)
+        # 媒体与视频原资产多维解析 (提取原推配图、相册流、原生视频以及引用推文媒体)
         image_url = None
         media_urls = []
         video_url = None
@@ -447,6 +451,24 @@ def fetch_incremental_tweets(
             ext_dict = it.get(ext_key)
             if isinstance(ext_dict, dict) and isinstance(ext_dict.get("media"), list):
                 raw_media_candidates.extend(ext_dict.get("media"))
+
+        # 同时深度检查引用推文 (quoted_tweet / quotedStatus) 或转推附带的原始媒体
+        for q_key in ["quoted_tweet", "quotedStatus", "retweeted_status", "retweetedStatus"]:
+            q_obj = it.get(q_key)
+            if isinstance(q_obj, dict):
+                for m_key in ["media", "photos", "videos"]:
+                    val = q_obj.get(m_key)
+                    if isinstance(val, list):
+                        raw_media_candidates.extend(val)
+                    elif isinstance(val, dict):
+                        raw_media_candidates.append(val)
+                for ext_key in ["extended_entities", "entities"]:
+                    ext_dict = q_obj.get(ext_key)
+                    if isinstance(ext_dict, dict) and isinstance(ext_dict.get("media"), list):
+                        raw_media_candidates.extend(ext_dict.get("media"))
+                if q_obj.get("video_url"):
+                    video_url = video_url or q_obj.get("video_url")
+                    has_video = True
 
         for m in raw_media_candidates:
             if isinstance(m, str) and m.startswith("http"):
@@ -472,7 +494,7 @@ def fetch_incremental_tweets(
                     media_urls.append(img)
 
         raw_url = it.get("url") or ""
-        if "/video/" in raw_url:
+        if "/video/" in raw_url or it.get("hasVideo") or it.get("has_video"):
             has_video = True
 
         if media_urls:
@@ -489,11 +511,19 @@ def fetch_incremental_tweets(
         if any(w in tweet_text.lower() for w in noise_keywords):
             continue
 
+        raw_desc = (author_obj.get("description") or "").strip()
+        # 绝不让 Twitter Bio 中的裸 URL (如 t.co 短链) 沦为作者头衔
+        clean_desc = re.sub(r'https?://\S+', '', raw_desc).strip()
+        is_known_lab = user_name.lower() in [h.lower() for h in LAB_HANDLES]
+        default_role = "官方实验室 / 研发团队" if is_known_lab else "AI 领域领袖 / 核心开发者"
+
         author_name = profile.get("name") if profile else (author_obj.get("name") or user_name)
         author_handle = f"@{user_name}"
         author_avatar = profile.get("avatar") if profile else (author_obj.get("profilePicture") or f"https://unavatar.io/x/{user_name}")
-        author_role = profile.get("role") if profile else (author_obj.get("description") or "AI 前沿领袖 / 核心开发者")
-        entity_type = profile.get("entity_type") if profile else ("company" if user_name.lower() in ["openai", "anthropicai", "deepseek_ai", "googledeepmind", "cursor_ai", "huggingface"] else "person")
+        author_role = profile.get("role") if profile else (clean_desc or default_role)
+        if author_role.startswith("http") or "t.co/" in author_role or len(author_role) < 3:
+            author_role = default_role
+        entity_type = profile.get("entity_type") if profile else ("company" if is_known_lab else "person")
 
         # 识别爆款与全网飙升状态
         is_viral = False
