@@ -3112,7 +3112,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (tiboResetTweet) {
         // A. 凡是出现 Tibo 的 reset 相关推文：在第一行第一个位置锁定（不受上下滚动影响），其余推文每页 2 张轮播
-        const otherTweets = tweets.filter(it => it !== tiboResetTweet);
+        const otherTweets = tweets.filter(it => !isTiboResetTweet(it));
         const pinnedCardHtml = renderTiboPinnedCard(tiboResetTweet, isZh);
 
         const pages = [];

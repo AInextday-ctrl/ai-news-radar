@@ -540,13 +540,14 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- 轮播控制与页码指示器 (支持黑白全适配) -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 3</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="上一版 (向上)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="暂停 / 播放">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="下一版 (向下)">↓</button>
             </div>
             <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">全网社交雷达 →</button>
           </div>
+        </div>
         <div id="viral-ticker-container" class="relative w-full">
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">

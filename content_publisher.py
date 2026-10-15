@@ -1864,7 +1864,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     break
 
         if pinned_tibo_en:
-            other_items = [it for it in viral_items if it.get("id") != pinned_tibo_en.get("id")][:8]
+            other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)][:8]
             pinned_card_html = format_tibo_pinned_card(pinned_tibo_en, is_zh=False)
             slider_pages_html = ""
             for p_idx in range(0, len(other_items), 2):
@@ -2191,6 +2191,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
+        total_ticker_pages_en = max(1, (len(other_items) + 1) // 2) if pinned_tibo_en else max(1, (len(viral_items) + 2) // 3)
+        en_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*\d+\s*/\s*\d+\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_en}\2', en_content)
+
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
         if not pinned_tibo_en:
             en_content = re.sub(
@@ -2276,7 +2279,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     break
 
         if pinned_tibo_zh:
-            other_items = [it for it in viral_items if it.get("id") != pinned_tibo_zh.get("id")][:8]
+            other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)][:8]
             pinned_card_html = format_tibo_pinned_card(pinned_tibo_zh, is_zh=True)
             slider_pages_html = ""
             for p_idx in range(0, len(other_items), 2):
@@ -2564,6 +2567,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
+
+        total_ticker_pages_zh = max(1, (len(other_items) + 1) // 2) if pinned_tibo_zh else max(1, (len(viral_items) + 2) // 3)
+        zh_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*\d+\s*/\s*\d+\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_zh}\2', zh_content)
 
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
         if not pinned_tibo_zh:
