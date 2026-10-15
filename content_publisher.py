@@ -339,6 +339,33 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
     并生成分类索引大厅页面 public/articles/index.html (包含全量网状互链导航)
     """
     os.makedirs(ARTICLES_DIR, exist_ok=True)
+    try:
+        from build_flagship_articles import ARTICLES_DATA, generate_article_page, generate_articles_index
+        for art in ARTICLES_DATA:
+            fp = os.path.join(ARTICLES_DIR, f"{art['id']}.html")
+            with open(fp, "w", encoding="utf-8") as f:
+                f.write(generate_article_page(art))
+        with open(os.path.join(ARTICLES_DIR, "index.html"), "w", encoding="utf-8") as f:
+            f.write(generate_articles_index(ARTICLES_DATA))
+        print(f"🌟 [Flagship Articles] 成功发布并同步 {len(ARTICLES_DATA)} 篇高价值技术深度指南！")
+        return [
+            {
+                "slug": art["id"],
+                "url": f"https://ainewsradar.xyz/articles/{art['id']}",
+                "rel_url": f"/articles/{art['id']}",
+                "title": art["title"],
+                "date": art["date"],
+                "tag": art["category"],
+                "desc": art["summary"],
+                "chars": int(art["word_count"]),
+                "word_count": art["word_count"],
+                "read_time": art["read_time"]
+            }
+            for art in ARTICLES_DATA
+        ]
+    except Exception as e:
+        print(f"⚠️ Flagship articles loader fallback: {e}")
+
     wechat_base = os.path.join(DATA_DIR, "wechat_articles")
     if not os.path.isdir(wechat_base):
         return []
@@ -1054,7 +1081,7 @@ def backfill_historical_daily_briefings() -> List[str]:
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 历史简报全景归档 · 每日资讯雷达合集 | AI 资讯雷达</title>
   <meta name="description" content="AI 资讯雷达每日简报历史归档库：按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动，全量支持时间线检索与历史回溯。">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://ainewsradar.xyz/daily">
   <meta property="og:title" content="AI 历史简报全景归档 · 每日资讯雷达合集">
   <meta property="og:description" content="按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动。">
@@ -1296,7 +1323,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{page_title}</title>
   <meta name="description" content="{page_desc}">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://ainewsradar.xyz/daily/{date_slug}">
   <meta property="og:title" content="{page_title}">
   <meta property="og:description" content="{page_desc}">
@@ -2427,29 +2454,13 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
     <priority>0.9</priority>
   </url>""")
 
-    entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/daily</loc>
-    <lastmod>{now_date}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>""")
-
-    # 2. 深度专栏页面
+    # 2. 深度专栏页面（仅收录高价值深度技术指南）
     for art in articles_meta:
         entries.append(f"""  <url>
     <loc>{art['url']}</loc>
     <lastmod>{art['date']}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>""")
-
-    # 3. 每日简报归档页面
-    for d in reversed(sorted(daily_dates)):
-        entries.append(f"""  <url>
-    <loc>https://ainewsradar.xyz/daily/{d}</loc>
-    <lastmod>{d}</lastmod>
-    <changefreq>never</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>""")
 
     xml_body = "\n".join(entries)
