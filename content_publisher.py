@@ -26,19 +26,55 @@ except Exception:
     pass
 
 def parse_tweet_time(it: dict) -> float:
-    raw = it.get("raw_published_at", "")
+    raw = it.get("raw_published_at") or it.get("pubDate") or it.get("date") or it.get("created_at") or it.get("time") or ""
     if not raw:
         return 0
     try:
-        return datetime.fromisoformat(raw.replace("Z", "+00:00")).timestamp()
+        return datetime.fromisoformat(str(raw).replace("Z", "+00:00")).timestamp()
+    except Exception:
+        pass
+    try:
+        from email.utils import parsedate_to_datetime
+        return parsedate_to_datetime(str(raw)).timestamp()
+    except Exception:
+        pass
+    try:
+        return float(raw)
     except Exception:
         return 0
+
+
+def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
+    """
+    判定是否为 Tibo 的 reset 相关核心推文，要求自发布时间起算维持 24 小时
+    """
+    if not isinstance(it, dict):
+        return False
+    author = f"{it.get('author') or ''} {it.get('author_handle') or ''}".lower()
+    is_tibo = "thsottiaux" in author or "tibo" in author or "sottiaux" in author
+    if not is_tibo:
+        return False
+    text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
+    is_reset = "reset" in text or "重置" in text
+    if not is_reset:
+        return False
+    if now_ts is None:
+        now_ts = time.time()
+    pub_ts = parse_tweet_time(it)
+    if pub_ts <= 0:
+        return False
+    diff_sec = now_ts - pub_ts
+    return -3600 <= diff_sec <= 86400
+
 
 def is_meaningful_tweet(it: dict) -> bool:
     if not isinstance(it, dict):
         return False
+    # 凡是出现 Tibo 的 reset 相关推文，在 24 小时内享有最高豁免权，100% 视为有价值推文
+    if is_tibo_reset_tweet(it):
+        return True
     item_id = str(it.get("id") or "")
-    if "tweet_tibo_codex_reset" in item_id or item_id.startswith("mock_"):
+    if item_id.startswith("mock_"):
         return False
     text = (it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
     if not text:
@@ -1697,6 +1733,83 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
               </article>"""
 
 
+def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
+    author = safe_text(it.get("author") or "Thibault Sottiaux (Tibo)", 40)
+    handle = it.get("author_handle") or "@thsottiaux"
+    role = safe_text(
+        ("OpenAI Codex 负责人 / 前沿模型产品主管" if is_zh else "OpenAI Codex Lead / Frontier Models Product")
+        if not (it.get("author_role") if is_zh else it.get("author_role_en"))
+        else (it.get("author_role") if is_zh else it.get("author_role_en")),
+        60
+    )
+    if is_zh:
+        raw_text = it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", "")
+        raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
+        text = safe_text(raw_text, 250)
+        badge_text = "🔥 24H RESET 置顶"
+        spotlight_tag = "24h 独家聚焦 · 锁定首位"
+        btn_text = "查看原帖 ↗"
+    else:
+        raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
+        raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
+        text = safe_text(raw_text, 250)
+        badge_text = "🔥 24H RESET PINNED"
+        spotlight_tag = "24h Spotlight · Pinned #1"
+        btn_text = "View Post ↗"
+
+    # 重点高亮关键词 Reset / 重置
+    hl_text = re.sub(r'(?i)\b(reset)\b', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', text)
+    hl_text = re.sub(r'(重置)', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', hl_text)
+
+    u = it.get("url", "https://x.com/thsottiaux")
+    avatar = optimize_avatar_url(it.get("author_avatar") or "https://unavatar.io/x/thsottiaux")
+
+    return f"""
+              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
+                bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
+                border-2 border-amber-400 dark:border-amber-300/90
+                shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
+                hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5">
+                <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
+                <div class="space-y-2 pt-0.5">
+                  <div class="flex items-center justify-between text-[10px] gap-2">
+                    <div class="flex items-center space-x-2.5 min-w-0">
+                      <div class="relative shrink-0">
+                        <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
+                      </div>
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">{handle} · {role}</span>
+                      </div>
+                    </div>
+                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
+                      <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                      </span>
+                      <span>{badge_text}</span>
+                    </span>
+                  </div>
+                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                    {hl_text}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/50 dark:border-amber-900/50">
+                  <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
+                    <span class="animate-pulse text-amber-500">⚡</span>
+                    <span>{spotlight_tag}</span>
+                  </span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5">
+                    <span>{btn_text}</span>
+                  </a>
+                </div>
+              </article>"""
+
+
 def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, Any]],
                        articles_meta: List[Dict[str, Any]], daily_dates: List[str]):
     """
@@ -1738,12 +1851,51 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             except Exception:
                 pass
 
-        # Viral Ticker English Chunks (3 cards per page)
-        viral_ticker_en_html = ""
-        for p_idx in range(0, len(viral_items), 3):
-            p_slice = viral_items[p_idx:p_idx+3]
-            cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-            viral_ticker_en_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
+        # 检查是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
+        pinned_tibo_en = None
+        for cand in viral_items:
+            if is_tibo_reset_tweet(cand, now_ts):
+                pinned_tibo_en = cand
+                break
+        if not pinned_tibo_en:
+            for cand in items:
+                if is_tibo_reset_tweet(cand, now_ts):
+                    pinned_tibo_en = cand
+                    break
+
+        if pinned_tibo_en:
+            other_items = [it for it in viral_items if it.get("id") != pinned_tibo_en.get("id")][:8]
+            pinned_card_html = format_tibo_pinned_card(pinned_tibo_en, is_zh=False)
+            slider_pages_html = ""
+            for p_idx in range(0, len(other_items), 2):
+                p_slice = other_items[p_idx:p_idx+2]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+
+            viral_ticker_en_html = f"""
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+          <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            {pinned_card_html}
+          </div>
+          <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+            <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              {slider_pages_html}
+            </div>
+          </div>
+        </div>"""
+        else:
+            slider_pages_html = ""
+            for p_idx in range(0, len(viral_items), 3):
+                p_slice = viral_items[p_idx:p_idx+3]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+
+            viral_ticker_en_html = f"""
+        <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
+          <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            {slider_pages_html}
+          </div>
+        </div>"""
 
         # 1. Top 3 English
         top_three_en_html = ""
@@ -2004,9 +2156,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     </section>
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->"""
 
-        pattern_ticker = r'(<div [^>]*id="(?:viral-ticker-slider|viral-ticker-track)"[^>]*>)(.*?)(</div>\s*</div>\s*</section>)'
-        if re.search(pattern_ticker, en_content, re.DOTALL):
-            en_content = re.sub(pattern_ticker, lambda m: f"{m.group(1)}\n{viral_ticker_en_html}\n          {m.group(3)}", en_content, flags=re.DOTALL)
+        pattern_ticker_container = r'(<div [^>]*id="viral-ticker-container"[^>]*>)(.*?)(</div>\s*</section>)'
+        pattern_ticker_fallback = r'(<div [^>]*id="viral-ticker-viewport"[^>]*>)(.*?)(</div>\s*</section>)'
+        pattern_ticker_slider = r'(<div [^>]*id="(?:viral-ticker-slider|viral-ticker-track)"[^>]*>)(.*?)(</div>\s*</div>\s*</section>)'
+        if re.search(pattern_ticker_container, en_content, re.DOTALL):
+            en_content = re.sub(pattern_ticker_container, lambda m: f"{m.group(1)}\n{viral_ticker_en_html}\n        {m.group(3)}", en_content, flags=re.DOTALL)
+        elif re.search(pattern_ticker_fallback, en_content, re.DOTALL):
+            en_content = re.sub(pattern_ticker_fallback, lambda m: f'<div id="viral-ticker-container" class="relative w-full">\n{viral_ticker_en_html}\n        {m.group(3)}', en_content, flags=re.DOTALL)
+        elif re.search(pattern_ticker_slider, en_content, re.DOTALL):
+            en_content = re.sub(pattern_ticker_slider, lambda m: f"{m.group(1)}\n{viral_ticker_en_html}\n          {m.group(3)}", en_content, flags=re.DOTALL)
         else:
             pattern_top = r'(<div [^>]*id="top-three-container"[^>]*>)(.*?)(</div>\s*</section>)'
             if re.search(pattern_top, en_content, re.DOTALL):
@@ -2034,11 +2192,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                             '', en_content, flags=re.DOTALL)
 
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
-        en_content = re.sub(
-            r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden h-[145px] md:h-[180px]">',
-            en_content
-        )
+        if not pinned_tibo_en:
+            en_content = re.sub(
+                r'id="viral-ticker-viewport"[^>]*>',
+                'id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">',
+                en_content
+            )
 
         # 注入首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
         if lcp_image_en_url:
@@ -2104,12 +2263,51 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             except Exception:
                 pass
 
-        # Viral Ticker Chinese Chunks (3 cards per page)
-        viral_ticker_zh_html = ""
-        for p_idx in range(0, len(viral_items), 3):
-            p_slice = viral_items[p_idx:p_idx+3]
-            cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-            viral_ticker_zh_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">\n{cards_html}\n</div>\n'
+        # 检查是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
+        pinned_tibo_zh = None
+        for cand in viral_items:
+            if is_tibo_reset_tweet(cand, now_ts):
+                pinned_tibo_zh = cand
+                break
+        if not pinned_tibo_zh:
+            for cand in items:
+                if is_tibo_reset_tweet(cand, now_ts):
+                    pinned_tibo_zh = cand
+                    break
+
+        if pinned_tibo_zh:
+            other_items = [it for it in viral_items if it.get("id") != pinned_tibo_zh.get("id")][:8]
+            pinned_card_html = format_tibo_pinned_card(pinned_tibo_zh, is_zh=True)
+            slider_pages_html = ""
+            for p_idx in range(0, len(other_items), 2):
+                p_slice = other_items[p_idx:p_idx+2]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+
+            viral_ticker_zh_html = f"""
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+          <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            {pinned_card_html}
+          </div>
+          <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+            <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              {slider_pages_html}
+            </div>
+          </div>
+        </div>"""
+        else:
+            slider_pages_html = ""
+            for p_idx in range(0, len(viral_items), 3):
+                p_slice = viral_items[p_idx:p_idx+3]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+
+            viral_ticker_zh_html = f"""
+        <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
+          <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            {slider_pages_html}
+          </div>
+        </div>"""
 
         # 1. Top 3 Chinese
         top_three_zh_html = ""
@@ -2340,8 +2538,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     </section>
     <!-- ========== STATIC_HUB_NAVIGATION_END ========== -->"""
 
-        if re.search(pattern_ticker, zh_content, re.DOTALL):
-            zh_content = re.sub(pattern_ticker, lambda m: f"{m.group(1)}\n{viral_ticker_zh_html}\n          {m.group(3)}", zh_content, flags=re.DOTALL)
+        if re.search(pattern_ticker_container, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_ticker_container, lambda m: f"{m.group(1)}\n{viral_ticker_zh_html}\n        {m.group(3)}", zh_content, flags=re.DOTALL)
+        elif re.search(pattern_ticker_fallback, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_ticker_fallback, lambda m: f'<div id="viral-ticker-container" class="relative w-full">\n{viral_ticker_zh_html}\n        {m.group(3)}', zh_content, flags=re.DOTALL)
+        elif re.search(pattern_ticker_slider, zh_content, re.DOTALL):
+            zh_content = re.sub(pattern_ticker_slider, lambda m: f"{m.group(1)}\n{viral_ticker_zh_html}\n          {m.group(3)}", zh_content, flags=re.DOTALL)
         elif re.search(pattern_top, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_top, r'\1' + top_three_zh_html + r'\3', zh_content, flags=re.DOTALL)
 
@@ -2364,11 +2566,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                             '', zh_content, flags=re.DOTALL)
 
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
-        zh_content = re.sub(
-            r'id="viral-ticker-viewport"[^>]*>',
-            'id="viral-ticker-viewport" class="relative overflow-hidden h-[145px] md:h-[180px]">',
-            zh_content
-        )
+        if not pinned_tibo_zh:
+            zh_content = re.sub(
+                r'id="viral-ticker-viewport"[^>]*>',
+                'id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">',
+                zh_content
+            )
 
         # 注入中文首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
         if lcp_image_zh_url:

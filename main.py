@@ -455,6 +455,29 @@ def parse_time_for_sort(it):
         return 0
 
 
+def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
+    """
+    判定是否为 Tibo 的 reset 相关核心推文，要求自发布时间起算维持 24 小时
+    """
+    if not isinstance(it, dict):
+        return False
+    author = f"{it.get('author') or ''} {it.get('author_handle') or ''}".lower()
+    is_tibo = "thsottiaux" in author or "tibo" in author or "sottiaux" in author
+    if not is_tibo:
+        return False
+    text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
+    is_reset = "reset" in text or "重置" in text
+    if not is_reset:
+        return False
+    if now_ts is None:
+        now_ts = time.time()
+    pub_ts = parse_time_for_sort(it)
+    if pub_ts <= 0:
+        return False
+    diff_sec = now_ts - pub_ts
+    return -3600 <= diff_sec <= 86400
+
+
 def is_meaningful_tweet(it: dict) -> bool:
     """
     判断一条推文是否具备独立阅读价值，坚决过滤无意义单句、脱离语境的闲聊回复、纯寒暄与碎碎念
@@ -462,9 +485,13 @@ def is_meaningful_tweet(it: dict) -> bool:
     if not isinstance(it, dict):
         return False
         
+    # 凡是出现 Tibo 的 reset 相关推文，在 24 小时内享有最高豁免权，100% 视为有价值推文
+    if is_tibo_reset_tweet(it):
+        return True
+
     # 彻底禁止任何伪造/模拟数据
     item_id = str(it.get("id") or "")
-    if "tweet_tibo_codex_reset" in item_id or item_id.startswith("mock_"):
+    if item_id.startswith("mock_"):
         return False
         
     text = (it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
@@ -535,6 +562,10 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
         author_str = (it.get("author", "") + " " + it.get("author_handle", "")).lower()
         title_str = (it.get("title", "") + " " + it.get("title_zh", "") + " " + it.get("title_en", "")).lower()
         score = 0
+
+        # 重点 0: Tibo 的 reset 相关推文享有第一行第一个位置置顶特权 (维持24小时)
+        if is_tibo_reset_tweet(it, now_ts):
+            score += 10000000
 
         # 重点 1: 官方前沿实验室与顶流巨头
         if any(k in author_str for k in ["anthropic", "claude"]):
@@ -696,7 +727,7 @@ def load_existing_items() -> list:
         source = it.get("source", "").lower()
 
         # 1. 丢弃废弃的旧版硬编码 fake ID
-        if it_id in obsolete_fake_ids or "tweet_tibo_codex_reset" in it_id or it_id.startswith("mock_"):
+        if it_id in obsolete_fake_ids or it_id.startswith("mock_"):
             continue
 
         # 2. 丢弃未解析成功的 Google News 中转链接

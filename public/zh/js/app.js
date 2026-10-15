@@ -1980,11 +1980,33 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
+    // 判定是否为 Tibo 的 reset 相关核心推文 (自发布时间起算维持 24 小时)
+    function isTiboResetTweet(item) {
+      if (!item || typeof item !== 'object') return false;
+      const author = ((item.author || '') + ' ' + (item.author_handle || '') + ' ' + (item.handle || '')).toLowerCase();
+      const isTibo = author.includes('thsottiaux') || author.includes('tibo') || author.includes('sottiaux');
+      if (!isTibo) return false;
+
+      const text = ((item.full_text_en || '') + ' ' + (item.full_text_zh || '') + ' ' + (item.title || '') + ' ' + (item.title_en || '') + ' ' + (item.title_zh || '') + ' ' + (item.summary_en || '') + ' ' + (item.summary_zh || '') + ' ' + (item.content_snippet || '')).toLowerCase();
+      const isReset = text.includes('reset') || text.includes('重置');
+      if (!isReset) return false;
+
+      // 维持24小时 (自推文发布时间起算)
+      const rawTime = item.raw_published_at || item.pubDate || item.date || item.created_at || item.time;
+      if (!rawTime) return false;
+      const pubTs = new Date(rawTime).getTime();
+      if (isNaN(pubTs) || pubTs <= 0) return false;
+      const diffHours = (Date.now() - pubTs) / (1000 * 3600);
+      return diffHours >= -1 && diffHours <= 24;
+    }
+
     // 严格过滤无意义单句推文、脱离语境闲聊回复与空短链接
     function isMeaningfulTweet(it) {
       if (!it || typeof it !== 'object') return false;
+      // 凡是出现 Tibo 的 reset 相关推文，在 24 小时内享有最高豁免权，100% 视为有价值推文
+      if (isTiboResetTweet(it)) return true;
       const itemId = String(it.id || '');
-      if (itemId.includes('tweet_tibo_codex_reset') || itemId.startsWith('mock_')) return false;
+      if (itemId.startsWith('mock_')) return false;
       const text = (it.full_text_en || it.content_snippet || it.title || '').trim();
       if (!text) return false;
       if (/^https?:\/\/\S+$/i.test(text)) return false;
@@ -2990,38 +3012,160 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
+    // 渲染 Tibo 的 Reset 核心专属置顶卡片 (第一行第一个位置，重磅突出高亮框设计)
+    function renderTiboPinnedCard(item, isZh) {
+      const author = escapeHtml(item.author || 'Thibault Sottiaux (Tibo)');
+      const handle = escapeHtml(item.author_handle || '@thsottiaux');
+      const role = escapeHtml(isZh ? (item.author_role || 'OpenAI Codex 负责人 / 前沿模型产品主管') : (item.author_role_en || 'OpenAI Codex Lead / Frontier Models Product'));
+      let text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
+      
+      // 重点高亮 Reset / 重置
+      const hlText = text.replace(/\b(reset)\b/gi, '<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">$1</span>')
+                         .replace(/(重置)/g, '<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">$1</span>');
+      
+      const avatar = optimizeAvatarUrl(item.author_avatar || 'https://unavatar.io/x/thsottiaux', 80);
+      const badgeText = isZh ? '🔥 24H RESET 置顶' : '🔥 24H RESET PINNED';
+      const spotlightTag = isZh ? '24h 独家聚焦 · 锁定首位' : '24h Spotlight · Pinned #1';
+      const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
+      const url = item.url || 'https://x.com/thsottiaux';
+
+      return `
+        <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
+          bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
+          border-2 border-amber-400 dark:border-amber-300/90
+          shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
+          hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" onclick="window.open('${url}','_blank')">
+          <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
+          <div class="space-y-2 pt-0.5">
+            <div class="flex items-center justify-between text-[10px] gap-2">
+              <div class="flex items-center space-x-2.5 min-w-0">
+                <div class="relative shrink-0">
+                  <img src="${avatar}" alt="${author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                  <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
+                </div>
+                <div class="min-w-0 truncate">
+                  <div class="flex items-center space-x-1">
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${author}</span>
+                    <span class="text-sky-500 text-[10px] font-black">✓</span>
+                  </div>
+                  <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">${handle} · ${role}</span>
+                </div>
+              </div>
+              <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                </span>
+                <span>${badgeText}</span>
+              </span>
+            </div>
+            <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+              ${hlText}
+            </p>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/50 dark:border-amber-900/50">
+            <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
+              <span class="animate-pulse text-amber-500">⚡</span>
+              <span>${spotlightTag}</span>
+            </span>
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5" onclick="event.stopPropagation()">
+              <span>${btnText}</span>
+            </a>
+          </div>
+        </article>
+      `;
+    }
+
     function updateTickerPageUI(cur, total) {
       const ind = document.getElementById('viral-ticker-page-indicator');
       if (ind) ind.textContent = `${cur} / ${Math.max(1, total)}`;
     }
 
     function renderViralTicker(tweets) {
-      const slider = document.getElementById('viral-ticker-slider');
-      if (!slider) return;
       const isZh = currentLang === 'zh';
+      let container = document.getElementById('viral-ticker-container');
+      if (!container) {
+        const vp = document.getElementById('viral-ticker-viewport');
+        if (vp && vp.parentNode) {
+          container = document.createElement('div');
+          container.id = 'viral-ticker-container';
+          container.className = 'relative w-full';
+          vp.parentNode.insertBefore(container, vp);
+          container.appendChild(vp);
+        }
+      }
+      if (!container) return;
 
       if (!tweets || tweets.length === 0) {
-        slider.innerHTML = `<div class="text-xs text-slate-400 p-3">${isZh ? '暂无当日火爆推文' : 'No viral leader tweets available for today'}</div>`;
+        container.innerHTML = `
+          <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
+            <div id="viral-ticker-slider" class="flex flex-col space-y-4">
+              <div class="text-xs text-slate-400 p-3">${isZh ? '暂无当日火爆推文' : 'No viral leader tweets available for today'}</div>
+            </div>
+          </div>`;
         updateTickerPageUI(1, 1);
         return;
       }
 
-      const pages = [];
-      for (let i = 0; i < tweets.length; i += 3) {
-        const slice = tweets.slice(i, i + 3);
-        const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
-        pages.push(`
-          <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch">
-            ${cards}
+      // 1. 检查是否存在 24 小时以内 Tibo 的 reset 相关核心推文
+      const tiboResetTweet = tweets.find(it => isTiboResetTweet(it));
+
+      if (tiboResetTweet) {
+        // A. 凡是出现 Tibo 的 reset 相关推文：在第一行第一个位置锁定（不受上下滚动影响），其余推文每页 2 张轮播
+        const otherTweets = tweets.filter(it => it !== tiboResetTweet);
+        const pinnedCardHtml = renderTiboPinnedCard(tiboResetTweet, isZh);
+
+        const pages = [];
+        for (let i = 0; i < otherTweets.length; i += 2) {
+          const slice = otherTweets.slice(i, i + 2);
+          const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
+          pages.push(`
+            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+              ${cards}
+            </div>
+          `);
+        }
+
+        container.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+            <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+              ${pinnedCardHtml}
+            </div>
+            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+                ${pages.join('')}
+              </div>
+            </div>
           </div>
-        `);
+        `;
+        window.viralTickerCurrentPage = 0;
+        window.viralTickerTotalPages = Math.max(1, pages.length);
+        updateTickerPageUI(1, pages.length);
+      } else {
+        // B. 常规模式：每页 3 张卡片垂直滚动
+        const pages = [];
+        for (let i = 0; i < tweets.length; i += 3) {
+          const slice = tweets.slice(i, i + 3);
+          const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
+          pages.push(`
+            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+              ${cards}
+            </div>
+          `);
+        }
+
+        container.innerHTML = `
+          <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
+            <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              ${pages.join('')}
+            </div>
+          </div>
+        `;
+        window.viralTickerCurrentPage = 0;
+        window.viralTickerTotalPages = Math.max(1, pages.length);
+        updateTickerPageUI(1, pages.length);
       }
 
-      slider.innerHTML = pages.join('');
-      slider.style.transform = 'translateY(0px)';
-      window.viralTickerCurrentPage = 0;
-      window.viralTickerTotalPages = pages.length;
-      updateTickerPageUI(1, pages.length);
       initViralTickerAutoScroll();
     }
 
@@ -3037,7 +3181,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       window.viralTickerCurrentPage = (window.viralTickerCurrentPage + direction + pages.length) % pages.length;
       
-      const step = (window.innerWidth >= 768 ? 180 : 145) + 14;
+      const pageEl = pages[0];
+      const step = pageEl ? (pageEl.offsetHeight + 16) : ((window.innerWidth >= 768 ? 180 : 145) + 16);
       const offset = window.viralTickerCurrentPage * step;
       slider.style.transform = `translateY(-${offset}px)`;
       updateTickerPageUI(window.viralTickerCurrentPage + 1, pages.length);
