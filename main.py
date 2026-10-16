@@ -457,18 +457,32 @@ def parse_time_for_sort(it):
 
 def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     """
-    判定是否为 Tibo 的 reset 相关核心推文，要求自发布时间起算维持 24 小时
+    判定是否为 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux) 关于 Codex reset 的核心推文。
+    自发布时间起算维持 24 小时，过期或非本人推文必须直接返回 False。
     """
     if not isinstance(it, dict):
         return False
-    author = f"{it.get('author') or ''} {it.get('author_handle') or ''}".lower()
-    is_tibo = "thsottiaux" in author or "tibo" in author or "sottiaux" in author
-    if not is_tibo:
+    # 严格排除 prompts / 工具等非推特条目
+    if it.get("is_prompt") or it.get("category") == "prompts" or it.get("sub_type") == "reasoning":
         return False
+    handle = (it.get("author_handle") or it.get("handle") or "").lower().strip()
+    author = (it.get("author") or "").lower().strip()
+    url = (it.get("url") or "").lower()
+
+    # 坚决排除 @tibo_maker 等同名或普通博主
+    if "tibo_maker" in handle or "tibo_maker" in author or "tibo_maker" in url:
+        return False
+
+    # 必须是 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux)
+    is_thsottiaux = "thsottiaux" in handle or "thsottiaux" in url or ("sottiaux" in author and ("codex" in author or "openai" in author or "tibo" in author or "thibault" in author))
+    if not is_thsottiaux:
+        return False
+
     text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
     is_reset = "reset" in text or "重置" in text
     if not is_reset:
         return False
+
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_time_for_sort(it)
@@ -582,7 +596,7 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
             score += 150000
         if any(k in author_str for k in ["deepseek"]):
             score += 140000
-        if any(k in author_str for k in ["tibo", "thsottiaux"]):
+        if any(k in author_str for k in ["thsottiaux", "sottiaux"]):
             score += 130000
 
         # 爆帖特权

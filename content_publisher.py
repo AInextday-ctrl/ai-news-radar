@@ -46,18 +46,32 @@ def parse_tweet_time(it: dict) -> float:
 
 def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     """
-    判定是否为 Tibo 的 reset 相关核心推文，要求自发布时间起算维持 24 小时
+    判定是否为 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux) 关于 Codex reset 的核心推文。
+    自发布时间起算维持 24 小时，过期或非本人推文必须直接返回 False。
     """
     if not isinstance(it, dict):
         return False
-    author = f"{it.get('author') or ''} {it.get('author_handle') or ''}".lower()
-    is_tibo = "thsottiaux" in author or "tibo" in author or "sottiaux" in author
-    if not is_tibo:
+    # 严格排除 prompts / 工具等非推特条目
+    if it.get("is_prompt") or it.get("category") == "prompts" or it.get("sub_type") == "reasoning":
         return False
+    handle = (it.get("author_handle") or it.get("handle") or "").lower().strip()
+    author = (it.get("author") or "").lower().strip()
+    url = (it.get("url") or "").lower()
+
+    # 坚决排除 @tibo_maker 等同名或普通博主
+    if "tibo_maker" in handle or "tibo_maker" in author or "tibo_maker" in url:
+        return False
+
+    # 必须是 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux)
+    is_thsottiaux = "thsottiaux" in handle or "thsottiaux" in url or ("sottiaux" in author and ("codex" in author or "openai" in author or "tibo" in author or "thibault" in author))
+    if not is_thsottiaux:
+        return False
+
     text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
     is_reset = "reset" in text or "重置" in text
     if not is_reset:
         return False
+
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_tweet_time(it)
@@ -1734,8 +1748,8 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
 
 
 def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
-    author = safe_text(it.get("author") or "Thibault Sottiaux (Tibo)", 40)
-    handle = it.get("author_handle") or "@thsottiaux"
+    author = "Thibault Sottiaux (Tibo)"
+    handle = "@thsottiaux"
     role = safe_text(
         ("OpenAI Codex 负责人 / 前沿模型产品主管" if is_zh else "OpenAI Codex Lead / Frontier Models Product")
         if not (it.get("author_role") if is_zh else it.get("author_role_en"))
@@ -1761,8 +1775,19 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
     hl_text = re.sub(r'(?i)\b(reset)\b', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', text)
     hl_text = re.sub(r'(重置)', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', hl_text)
 
-    u = it.get("url", "https://x.com/thsottiaux")
-    avatar = optimize_avatar_url(it.get("author_avatar") or "https://unavatar.io/x/thsottiaux")
+    # 严格绑定 Thibault Sottiaux 的推文详情跳转链接，绝不跳转其他博主或个人主页
+    status_id = it.get("status_id") or ""
+    if not status_id and it.get("url"):
+        m = re.search(r'/status/(\d+)', it.get("url"))
+        if m:
+            status_id = m.group(1)
+    if status_id:
+        u = f"https://x.com/thsottiaux/status/{status_id}"
+    elif it.get("url") and "thsottiaux" in it.get("url") and "/status/" in it.get("url"):
+        u = it.get("url")
+    else:
+        u = f"https://x.com/thsottiaux/status/{it.get('status_id') or '2110595484180214059'}"
+    avatar = optimize_avatar_url("https://unavatar.io/x/thsottiaux")
 
     return f"""
               <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
@@ -1858,7 +1883,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 pinned_tibo_en = cand
                 break
         if not pinned_tibo_en:
-            for cand in items:
+            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_en = cand
                     break
@@ -2273,7 +2298,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 pinned_tibo_zh = cand
                 break
         if not pinned_tibo_zh:
-            for cand in items:
+            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_zh = cand
                     break

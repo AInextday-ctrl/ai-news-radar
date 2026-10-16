@@ -1980,12 +1980,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 判定是否为 Tibo 的 reset 相关核心推文 (自发布时间起算维持 24 小时)
+    // 严格判定是否为 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux) 关于 Codex reset 的核心推文 (自发布时间起算维持 24 小时)
     function isTiboResetTweet(item) {
       if (!item || typeof item !== 'object') return false;
-      const author = ((item.author || '') + ' ' + (item.author_handle || '') + ' ' + (item.handle || '')).toLowerCase();
-      const isTibo = author.includes('thsottiaux') || author.includes('tibo') || author.includes('sottiaux');
-      if (!isTibo) return false;
+      // 严格排除提示词 (prompts) 等非推特分类
+      if (item.is_prompt || item.category === 'prompts' || item.sub_type === 'reasoning') return false;
+
+      const handle = (item.author_handle || item.handle || '').toLowerCase().trim();
+      const author = (item.author || '').toLowerCase().trim();
+      const url = (item.url || '').toLowerCase();
+
+      // 坚决排除 @tibo_maker 等其他博主
+      if (handle.includes('tibo_maker') || author.includes('tibo_maker') || url.includes('tibo_maker')) {
+        return false;
+      }
+
+      // 必须是 OpenAI Codex 负责人 Thibault Sottiaux (@thsottiaux)
+      const isThsottiaux = handle.includes('thsottiaux') || url.includes('thsottiaux') || 
+                           (author.includes('sottiaux') && (author.includes('tibo') || author.includes('thibault') || author.includes('codex') || author.includes('openai')));
+      if (!isThsottiaux) return false;
 
       const text = ((item.full_text_en || '') + ' ' + (item.full_text_zh || '') + ' ' + (item.title || '') + ' ' + (item.title_en || '') + ' ' + (item.title_zh || '') + ' ' + (item.summary_en || '') + ' ' + (item.summary_zh || '') + ' ' + (item.content_snippet || '')).toLowerCase();
       const isReset = text.includes('reset') || text.includes('重置');
@@ -3014,8 +3027,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 渲染 Tibo 的 Reset 核心专属置顶卡片 (第一行第一个位置，重磅突出高亮框设计)
     function renderTiboPinnedCard(item, isZh) {
-      const author = escapeHtml(item.author || 'Thibault Sottiaux (Tibo)');
-      const handle = escapeHtml(item.author_handle || '@thsottiaux');
+      const author = 'Thibault Sottiaux (Tibo)';
+      const handle = '@thsottiaux';
       const role = escapeHtml(isZh ? (item.author_role || 'OpenAI Codex 负责人 / 前沿模型产品主管') : (item.author_role_en || 'OpenAI Codex Lead / Frontier Models Product'));
       let text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
       
@@ -3023,11 +3036,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const hlText = text.replace(/\b(reset)\b/gi, '<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">$1</span>')
                          .replace(/(重置)/g, '<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">$1</span>');
       
-      const avatar = optimizeAvatarUrl(item.author_avatar || 'https://unavatar.io/x/thsottiaux', 80);
+      const avatar = optimizeAvatarUrl('https://unavatar.io/x/thsottiaux', 80);
       const badgeText = isZh ? '🔥 24H RESET 置顶' : '🔥 24H RESET PINNED';
       const spotlightTag = isZh ? '24h 独家聚焦 · 锁定首位' : '24h Spotlight · Pinned #1';
       const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
-      const url = item.url || 'https://x.com/thsottiaux';
+      const statusId = item.status_id || (item.url && item.url.match(/status\/(\d+)/) ? item.url.match(/status\/(\d+)/)[1] : '');
+      const url = statusId ? `https://x.com/thsottiaux/status/${statusId}` : ((item.url && item.url.includes('thsottiaux') && item.url.includes('/status/')) ? item.url : 'https://x.com/thsottiaux/status/2110595484180214059');
 
       return `
         <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
