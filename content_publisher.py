@@ -126,6 +126,8 @@ SITEMAP_FILE = os.path.join(PUBLIC_DIR, "sitemap.xml")
 INDEX_FILE = os.path.join(PUBLIC_DIR, "index.html")
 ZH_DIR = os.path.join(PUBLIC_DIR, "zh")
 ZH_INDEX_FILE = os.path.join(ZH_DIR, "index.html")
+ZH_DAILY_DIR = os.path.join(ZH_DIR, "daily")
+ZH_ARTICLES_DIR = os.path.join(ZH_DIR, "articles")
 
 ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>"""
 ADSENSE_SLOT = """<!-- Google AdSense Responsive Unit -->
@@ -391,25 +393,41 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
     os.makedirs(ARTICLES_DIR, exist_ok=True)
     try:
         from build_flagship_articles import ARTICLES_DATA, generate_article_page, generate_articles_index
+        zh_art_dir = os.path.join(PUBLIC_DIR, "zh", "articles")
+        os.makedirs(zh_art_dir, exist_ok=True)
+
         for art in ARTICLES_DATA:
-            fp = os.path.join(ARTICLES_DIR, f"{art['id']}.html")
-            with open(fp, "w", encoding="utf-8") as f:
-                f.write(generate_article_page(art))
+            # English edition
+            fp_en = os.path.join(ARTICLES_DIR, f"{art['id']}.html")
+            with open(fp_en, "w", encoding="utf-8") as f:
+                f.write(generate_article_page(art, lang="en"))
+
+            # Chinese edition
+            fp_zh = os.path.join(zh_art_dir, f"{art['id']}.html")
+            with open(fp_zh, "w", encoding="utf-8") as f:
+                f.write(generate_article_page(art, lang="zh"))
+
         with open(os.path.join(ARTICLES_DIR, "index.html"), "w", encoding="utf-8") as f:
-            f.write(generate_articles_index(ARTICLES_DATA))
-        print(f"🌟 [Flagship Articles] 成功发布并同步 {len(ARTICLES_DATA)} 篇高价值技术深度指南！")
+            f.write(generate_articles_index(ARTICLES_DATA, lang="en"))
+        with open(os.path.join(zh_art_dir, "index.html"), "w", encoding="utf-8") as f:
+            f.write(generate_articles_index(ARTICLES_DATA, lang="zh"))
+
+        print(f"🌟 [Flagship Articles] 成功发布并同步 {len(ARTICLES_DATA)} 篇高价值技术深度指南（中英双语独立版）！")
         return [
             {
                 "slug": art["id"],
                 "url": f"https://ainewsradar.xyz/articles/{art['id']}",
                 "rel_url": f"/articles/{art['id']}",
-                "title": art["title"],
+                "title": art.get("title_en") or art.get("title", ""),
+                "title_zh": art.get("title_zh") or art.get("title", ""),
                 "date": art["date"],
-                "tag": art["category"],
-                "desc": art["summary"],
-                "chars": int(art["word_count"]),
-                "word_count": art["word_count"],
-                "read_time": art["read_time"]
+                "tag": art.get("category_en") or art.get("category", ""),
+                "tag_zh": art.get("category_zh") or art.get("category", ""),
+                "desc": art.get("summary_en") or art.get("summary", ""),
+                "desc_zh": art.get("summary_zh") or art.get("summary", ""),
+                "chars": int(art.get("word_count", 2000)),
+                "word_count": art.get("word_count", "2000"),
+                "read_time": art.get("read_time_en") or art.get("read_time", "12 min read")
             }
             for art in ARTICLES_DATA
         ]
@@ -1016,10 +1034,11 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
 def backfill_historical_daily_briefings() -> List[str]:
     """
     调取 master_archive.json 与 latest_news.json 中的历史数据，
-    按日期聚合生成所有历史独立日报 HTML 页面，
-    并生成每日简报全景大厅归档页 public/daily/index.html
+    按日期聚合生成所有历史独立日报 HTML 页面（EN 英文版 + ZH 独立中文版），
+    并生成每日简报全景大厅归档页 public/daily/index.html 与 public/zh/daily/index.html
     """
     os.makedirs(DAILY_DIR, exist_ok=True)
+    os.makedirs(ZH_DAILY_DIR, exist_ok=True)
     archive_file = os.path.join(DATA_DIR, "master_archive.json")
     items = []
     if os.path.exists(archive_file):
@@ -1059,10 +1078,10 @@ def backfill_historical_daily_briefings() -> List[str]:
         prev_date = sorted_dates[idx - 1] if idx > 0 else None
         next_date = sorted_dates[idx + 1] if idx < len(sorted_dates) - 1 else None
 
-        _render_single_daily_page(date_slug, day_items, prev_date, next_date, sorted_dates)
+        _render_single_daily_page(date_slug, day_items, prev_date, next_date, sorted_dates, lang="en")
+        _render_single_daily_page(date_slug, day_items, prev_date, next_date, sorted_dates, lang="zh")
         generated_slugs.append(date_slug)
 
-    hub_daily_html_path = os.path.join(DAILY_DIR, "index.html")
     months = {}
     for d in reversed(sorted_dates):
         m_key = d[:7]
@@ -1070,82 +1089,165 @@ def backfill_historical_daily_briefings() -> List[str]:
             months[m_key] = []
         months[m_key].append(d)
 
-    months_sections_html = ""
-    for m_key, m_dates in months.items():
-        try:
-            m_dt = datetime.strptime(m_key, "%Y-%m")
-            m_label = m_dt.strftime("%Y年%m月")
-        except Exception:
-            m_label = m_key
+    # 生成英文与中文两个版本的归档大厅页面
+    for hub_lang in ["en", "zh"]:
+        is_en_hub = (hub_lang == "en")
+        hub_path = os.path.join(DAILY_DIR if is_en_hub else ZH_DAILY_DIR, "index.html")
+        hub_daily_prefix = "/daily" if is_en_hub else "/zh/daily"
+        hub_home_prefix = "/" if is_en_hub else "/zh"
+        hub_articles_prefix = "/articles" if is_en_hub else "/zh/articles"
+        hub_about_prefix = "/about" if is_en_hub else "/zh/about"
+        hub_editorial_prefix = "/editorial-policy" if is_en_hub else "/zh/editorial-policy"
+        hub_contact_prefix = "/contact" if is_en_hub else "/zh/contact"
+        hub_privacy_prefix = "/privacy" if is_en_hub else "/zh/privacy"
+        hub_terms_prefix = "/terms" if is_en_hub else "/zh/terms"
 
-        cards_html = ""
-        for d in m_dates:
-            d_count = len(by_date.get(d, []))
+        months_sections_html = ""
+        for m_key, m_dates in months.items():
             try:
-                dt_obj = datetime.strptime(d, "%Y-%m-%d")
-                weekday_zh = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"][dt_obj.weekday()]
+                m_dt = datetime.strptime(m_key, "%Y-%m")
+                m_label = m_dt.strftime("%B %Y") if is_en_hub else m_dt.strftime("%Y年%m月")
             except Exception:
-                weekday_zh = ""
-            
-            cards_html += f"""
-            <a href="/daily/{d}" style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;justify-content:space-between;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.03);" class="daily-hub-card">
+                m_label = m_key
+
+            cards_html = ""
+            for d in m_dates:
+                d_count = len(by_date.get(d, []))
+                try:
+                    dt_obj = datetime.strptime(d, "%Y-%m-%d")
+                    weekday_str = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][dt_obj.weekday()] if is_en_hub else ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"][dt_obj.weekday()]
+                except Exception:
+                    weekday_str = ""
+
+                card_desc = f"Curated {d_count if d_count > 0 else '15+'} top AI news, leader posts, and tooling updates" if is_en_hub else f"收录 {d_count if d_count > 0 else '15+'} 条精选全球前沿 AI 快讯、领袖发声与工具情报"
+                card_btn = "Read Full Daily Briefing ↗" if is_en_hub else "查看当日完整快报 ↗"
+                card_badge = "📅 Daily Edition" if is_en_hub else "📅 日报归档"
+
+                cards_html += f"""
+            <a href="{hub_daily_prefix}/{d}" style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:18px;text-decoration:none;color:inherit;display:flex;flex-direction:column;justify-content:space-between;transition:all 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.03);" class="daily-hub-card">
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
                   <span style="font-size:16px;font-weight:800;color:#0f172a;font-family:monospace;">{d}</span>
-                  <span style="font-size:12px;color:#64748b;background:#f1f5f9;padding:2px 8px;border-radius:12px;">{weekday_zh}</span>
+                  <span style="font-size:12px;color:#64748b;background:#f1f5f9;padding:2px 8px;border-radius:12px;">{weekday_str}</span>
                 </div>
                 <div style="font-size:13px;color:#475569;margin-bottom:12px;line-height:1.5;">
-                  收录 {d_count if d_count > 0 else '15+'} 条精选全球前沿 AI 快讯、领袖发声与工具情报
+                  {card_desc}
                 </div>
               </div>
               <div style="display:flex;align-items:center;justify-content:space-between;padding-top:8px;border-top:1px solid #f1f5f9;font-size:12px;">
-                <span style="color:#4f46e5;font-weight:700;">查看当日完整快报 ↗</span>
-                <span style="color:#94a3b8;">📅 日报归档</span>
+                <span style="color:#4f46e5;font-weight:700;">{card_btn}</span>
+                <span style="color:#94a3b8;">{card_badge}</span>
               </div>
             </a>"""
 
-        months_sections_html += f"""
+            month_header = f"{m_label} ({len(m_dates)} editions)" if is_en_hub else f"{m_label} (共 {len(m_dates)} 期)"
+            months_sections_html += f"""
         <div style="margin-bottom:36px;">
           <h2 style="font-size:20px;font-weight:800;color:#0f172a;margin-bottom:16px;border-left:4px solid #4f46e5;padding-left:12px;">
-            {m_label} (共 {len(m_dates)} 期)
+            {month_header}
           </h2>
           <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));gap:16px;">
             {cards_html}
           </div>
         </div>"""
 
-    daily_itemlist = []
-    for pos, d in enumerate(reversed(sorted_dates), 1):
-        daily_itemlist.append(f"""        {{
+        daily_itemlist = []
+        for pos, d in enumerate(reversed(sorted_dates), 1):
+            daily_itemlist.append(f"""        {{
           "@type": "ListItem",
           "position": {pos},
-          "url": "https://ainewsradar.xyz/daily/{d}",
-          "name": "AI 行业日报 · {d}"
+          "url": "https://ainewsradar.xyz{hub_daily_prefix}/{d}",
+          "name": "{'AI Daily Briefing · ' if is_en_hub else 'AI 行业日报 · '}{d}"
         }}""")
-    daily_itemlist_json = ",\n".join(daily_itemlist)
+        daily_itemlist_json = ",\n".join(daily_itemlist)
 
-    daily_hub_page_html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
+        if is_en_hub:
+            hub_title = "AI Historical Daily Archives · Comprehensive Daily AI Radar Briefings | AI News Radar"
+            hub_desc = "AI News Radar Historical Daily Archive Hub: Chronological daily records of global artificial intelligence breakthroughs, industry developments, leadership insights, and benchmark shifts."
+            hub_lang = "en"
+            hub_canon = "https://ainewsradar.xyz/daily"
+            hub_alt_en = "https://ainewsradar.xyz/daily"
+            hub_alt_zh = "https://ainewsradar.xyz/zh/daily"
+            hub_brand = "AI News Radar"
+            hub_sub = "ainewsradar.xyz · Historical Daily Hub"
+            hub_radar_btn = "Live Radar"
+            hub_articles_btn = "Deep-Dives"
+            hub_daily_btn = "Daily Archives"
+            hub_about_btn = "About Us"
+            hub_hero_badge = "📅 AI Historical Daily Archives & Intelligence Hub"
+            hub_hero_h1 = "Daily AI Industry Briefings Full Historical Archive"
+            hub_hero_desc = "Chronological archive of global artificial intelligence breakthroughs, industry developments, leadership posts, and benchmark updates. Full timeline navigation and authoritative source verification."
+            hub_hero_stat1 = f"Total {len(sorted_dates)} Daily Editions"
+            hub_hero_stat2 = "500+ Frontier Updates"
+            hub_hero_stat3 = "100% Primary Sources"
+            hub_crumb_home = "Home"
+            hub_crumb_cur = "Daily Briefings Archive"
+            hub_cta_text = "📚 Looking for Architectural Deep-Dives? Explore Technical Guides →"
+            hub_footer_btn1 = "🤖 Return to Live Radar"
+            hub_footer_btn2 = "📚 Explore All Deep-Dives"
+            hub_footer_about = "About Us"
+            hub_footer_editorial = "Editorial Policy"
+            hub_footer_contact = "Contact Us"
+            hub_footer_privacy = "Privacy Policy"
+            hub_footer_terms = "Terms of Service"
+            hub_footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). All Rights Reserved."
+        else:
+            hub_title = "AI 历史简报全景归档 · 每日资讯雷达合集 | AI 资讯雷达"
+            hub_desc = "AI 资讯雷达每日简报历史归档库：按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动，全量支持时间线检索与历史回溯。"
+            hub_lang = "zh-CN"
+            hub_canon = "https://ainewsradar.xyz/zh/daily"
+            hub_alt_en = "https://ainewsradar.xyz/daily"
+            hub_alt_zh = "https://ainewsradar.xyz/zh/daily"
+            hub_brand = "AI 资讯雷达"
+            hub_sub = "ainewsradar.xyz · 历史简报大厅"
+            hub_radar_btn = "实时雷达"
+            hub_articles_btn = "深度特稿"
+            hub_daily_btn = "历史简报"
+            hub_about_btn = "关于我们"
+            hub_hero_badge = "📅 AI 历史简报全景大厅"
+            hub_hero_h1 = "每日行业快报全量历史归档"
+            hub_hero_desc = "按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动。全量支持时间线快速跳转与权威信源追溯。"
+            hub_hero_stat1 = f"共收录 {len(sorted_dates)} 期完整日报"
+            hub_hero_stat2 = "500+ 条前沿动态"
+            hub_hero_stat3 = "100% 原始权威出处"
+            hub_crumb_home = "首页"
+            hub_crumb_cur = "每日简报全景归档"
+            hub_cta_text = "📚 想要长文深度拆解？移步深度特稿智库 →"
+            hub_footer_btn1 = "🤖 返回实时雷达首页"
+            hub_footer_btn2 = "📚 探索全部深度特稿"
+            hub_footer_about = "关于我们"
+            hub_footer_editorial = "编辑方针"
+            hub_footer_contact = "联系我们"
+            hub_footer_privacy = "隐私政策"
+            hub_footer_terms = "服务条款"
+            hub_footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). All Rights Reserved."
+
+        daily_hub_page_html = f"""<!DOCTYPE html>
+<html lang="{hub_lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 历史简报全景归档 · 每日资讯雷达合集 | AI 资讯雷达</title>
-  <meta name="description" content="AI 资讯雷达每日简报历史归档库：按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动，全量支持时间线检索与历史回溯。">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://ainewsradar.xyz/daily">
-  <meta property="og:title" content="AI 历史简报全景归档 · 每日资讯雷达合集">
-  <meta property="og:description" content="按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动。">
+  <title>{hub_title}</title>
+  <meta name="description" content="{hub_desc}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{hub_canon}">
+  <link rel="alternate" hreflang="en" href="{hub_alt_en}">
+  <link rel="alternate" hreflang="zh-CN" href="{hub_alt_zh}">
+  <link rel="alternate" hreflang="zh" href="{hub_alt_zh}">
+  <link rel="alternate" hreflang="x-default" href="{hub_alt_en}">
+  <meta property="og:title" content="{hub_title}">
+  <meta property="og:description" content="{hub_desc}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://ainewsradar.xyz/daily">
+  <meta property="og:url" content="{hub_canon}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "AI 历史简报全景归档 · 每日资讯雷达合集",
-    "description": "按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动。",
-    "url": "https://ainewsradar.xyz/daily",
+    "name": "{hub_title}",
+    "description": "{hub_desc}",
+    "url": "{hub_canon}",
     "mainEntity": {{
       "@type": "ItemList",
       "itemListElement": [
@@ -1157,7 +1259,7 @@ def backfill_historical_daily_briefings() -> List[str]:
   <style>
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
     body {{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #f8fafc;
       color: #1e293b;
       line-height: 1.8;
@@ -1183,18 +1285,18 @@ def backfill_historical_daily_briefings() -> List[str]:
   <!-- Header -->
   <header>
     <div class="container" style="padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <a href="{hub_home_prefix}" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
         <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);display:flex;align-items:center;justify-content:center;font-size:18px;">🤖</div>
         <div>
-          <div style="font-size:16px;font-weight:900;background:linear-gradient(to right,#312e81,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI 资讯雷达</div>
-          <div style="font-size:11px;color:#94a3b8;">ainewsradar.xyz · 历史简报大厅</div>
+          <div style="font-size:16px;font-weight:900;background:linear-gradient(to right,#312e81,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">{hub_brand}</div>
+          <div style="font-size:11px;color:#94a3b8;">{hub_sub}</div>
         </div>
       </a>
       <nav style="display:flex;align-items:center;gap:16px;font-size:13px;font-weight:600;">
-        <a href="/" style="color:#64748b;text-decoration:none;">实时雷达</a>
-        <a href="/articles" style="color:#64748b;text-decoration:none;">深度特稿</a>
-        <a href="/daily" style="color:#4f46e5;text-decoration:none;font-weight:700;">历史简报</a>
-        <a href="/about" style="color:#64748b;text-decoration:none;">关于我们</a>
+        <a href="{hub_home_prefix}" style="color:#64748b;text-decoration:none;">{hub_radar_btn}</a>
+        <a href="{hub_articles_prefix}" style="color:#64748b;text-decoration:none;">{hub_articles_btn}</a>
+        <a href="{hub_daily_prefix}" style="color:#4f46e5;text-decoration:none;font-weight:700;">{hub_daily_btn}</a>
+        <a href="{hub_about_prefix}" style="color:#64748b;text-decoration:none;">{hub_about_btn}</a>
       </nav>
     </div>
   </header>
@@ -1203,16 +1305,16 @@ def backfill_historical_daily_briefings() -> List[str]:
   <section class="hero">
     <div class="container">
       <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:14px;letter-spacing:1px;">
-        <span>📅</span> AI 历史简报全景大厅
+        <span>📅</span> {hub_hero_badge}
       </div>
-      <h1 style="font-size:30px;font-weight:900;margin-bottom:12px;line-height:1.3;">每日行业快报全量历史归档</h1>
+      <h1 style="font-size:30px;font-weight:900;margin-bottom:12px;line-height:1.3;">{hub_hero_h1}</h1>
       <p style="font-size:15px;opacity:0.92;max-width:680px;margin:0 auto 20px;line-height:1.7;">
-        按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动。全量支持时间线快速跳转与权威信源追溯。
+        {hub_hero_desc}
       </p>
       <div style="display:flex;gap:12px;justify-content:center;font-size:13px;font-weight:600;flex-wrap:wrap;">
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">共收录 {len(sorted_dates)} 期完整日报</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">500+ 条前沿动态</span>
-        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">100% 原始权威出处</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">{hub_hero_stat1}</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">{hub_hero_stat2}</span>
+        <span style="background:rgba(255,255,255,0.15);padding:6px 14px;border-radius:20px;">{hub_hero_stat3}</span>
       </div>
     </div>
   </section>
@@ -1220,10 +1322,10 @@ def backfill_historical_daily_briefings() -> List[str]:
   <main class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:10px;">
       <div style="font-size:14px;color:#64748b;">
-        <a href="/">首页</a> &gt; <strong>每日简报全景归档</strong>
+        <a href="{hub_home_prefix}">{hub_crumb_home}</a> &gt; <strong>{hub_crumb_cur}</strong>
       </div>
-      <a href="/articles" style="font-size:13px;color:#4f46e5;font-weight:700;background:#4f46e510;padding:6px 14px;border-radius:8px;text-decoration:none;">
-        📚 想要长文深度拆解？移步深度特稿智库 →
+      <a href="{hub_articles_prefix}" style="font-size:13px;color:#4f46e5;font-weight:700;background:#4f46e510;padding:6px 14px;border-radius:8px;text-decoration:none;">
+        {hub_cta_text}
       </a>
     </div>
 
@@ -1237,22 +1339,22 @@ def backfill_historical_daily_briefings() -> List[str]:
   <footer>
     <div class="container">
       <div style="margin-bottom:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="/" style="background:#4f46e5;color:#fff;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
-          🤖 返回实时雷达首页
+        <a href="{hub_home_prefix}" style="background:#4f46e5;color:#fff;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
+          {hub_footer_btn1}
         </a>
-        <a href="/articles" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
-          📚 探索全部深度特稿
+        <a href="{hub_articles_prefix}" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
+          {hub_footer_btn2}
         </a>
       </div>
       <p style="font-size:13px;color:#64748b;margin-bottom:8px;">
-        <a href="/about" style="color:inherit;text-decoration:none;">关于我们</a> · 
-        <a href="/editorial-policy" style="color:inherit;text-decoration:none;">编辑方针</a> · 
-        <a href="/contact" style="color:inherit;text-decoration:none;">联系我们</a> · 
-        <a href="/privacy" style="color:inherit;text-decoration:none;">隐私政策</a> · 
-        <a href="/terms" style="color:inherit;text-decoration:none;">服务条款</a>
+        <a href="{hub_about_prefix}" style="color:inherit;text-decoration:none;">{hub_footer_about}</a> · 
+        <a href="{hub_editorial_prefix}" style="color:inherit;text-decoration:none;">{hub_footer_editorial}</a> · 
+        <a href="{hub_contact_prefix}" style="color:inherit;text-decoration:none;">{hub_footer_contact}</a> · 
+        <a href="{hub_privacy_prefix}" style="color:inherit;text-decoration:none;">{hub_footer_privacy}</a> · 
+        <a href="{hub_terms_prefix}" style="color:inherit;text-decoration:none;">{hub_footer_terms}</a>
       </p>
       <p style="font-size:12px;color:#94a3b8;">
-        © 2026 AI News Radar (ainewsradar.xyz). All Rights Reserved.
+        {hub_footer_copy}
       </p>
     </div>
   </footer>
@@ -1260,24 +1362,29 @@ def backfill_historical_daily_briefings() -> List[str]:
 </body>
 </html>"""
 
-    with open(hub_daily_html_path, "w", encoding="utf-8") as dhf:
-        dhf.write(daily_hub_page_html)
+        with open(hub_path, "w", encoding="utf-8") as dhf:
+            dhf.write(daily_hub_page_html)
 
-    print(f"📅 [每日简报引擎] 成功回溯生成 {len(generated_slugs)} 天的独立历史日报页面，并生成归档大厅 public/daily/index.html")
+    print(f"📅 [每日简报引擎] 成功回溯生成 {len(generated_slugs)} 天的独立历史日报页面 (EN & ZH)，并生成归档大厅 public/daily/index.html & public/zh/daily/index.html")
     return generated_slugs
 
 
 def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
                               prev_date: Optional[str], next_date: Optional[str],
-                              all_dates: List[str]):
-    """渲染单一日期的高清、合规每日简报页面"""
+                              all_dates: List[str], lang: str = "en"):
+    """渲染单一日期的高清、合规每日简报页面 (支持 English 与 中文独立版)"""
+    is_en = (lang == "en")
     try:
         dt = datetime.strptime(date_slug, "%Y-%m-%d")
         date_zh = dt.strftime("%Y年%m月%d日")
+        date_en = dt.strftime("%B %d, %Y")
     except Exception:
         date_zh = date_slug
+        date_en = date_slug
 
-    out_file = os.path.join(DAILY_DIR, f"{date_slug}.html")
+    out_dir = DAILY_DIR if is_en else ZH_DAILY_DIR
+    os.makedirs(out_dir, exist_ok=True)
+    out_file = os.path.join(out_dir, f"{date_slug}.html")
 
     # 分类筛选
     news_items = [i for i in day_items if i.get("category") == "news"][:10]
@@ -1287,25 +1394,52 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
     if not briefing_items:
         briefing_items = day_items[:15]
 
-    cat_labels = {
-        "news": ("⚡ AI 行业快讯", "#4f46e5"),
-        "celebrity": ("🐦 社交动态", "#0284c7"),
-        "tools": ("🛠️ 场景工具", "#0891b2"),
-        "videos": ("🎬 实战视频", "#dc2626"),
-        "prompts": ("💡 提示词库", "#d97706"),
-    }
+    if is_en:
+        cat_labels = {
+            "news": ("⚡ AI Industry News", "#4f46e5"),
+            "celebrity": ("🐦 Social Radar", "#0284c7"),
+            "tools": ("🛠️ Applied Tools", "#0891b2"),
+            "videos": ("🎬 Hands-on Demos", "#dc2626"),
+            "prompts": ("💡 Prompt Bank", "#d97706"),
+        }
+    else:
+        cat_labels = {
+            "news": ("⚡ AI 行业快讯", "#4f46e5"),
+            "celebrity": ("🐦 社交动态", "#0284c7"),
+            "tools": ("🛠️ 场景工具", "#0891b2"),
+            "videos": ("🎬 实战视频", "#dc2626"),
+            "prompts": ("💡 提示词库", "#d97706"),
+        }
 
     articles_html = ""
     for item in briefing_items:
-        title = safe_text(item.get("title_zh") or item.get("title", ""), 120)
-        title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
-        raw_sum = item.get("summary_zh") or f"{title}。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。"
-        summary = safe_text(raw_sum, 300)
-        source = safe_text(item.get("source", ""), 60)
-        url = item.get("url", "#")
-        cat = item.get("category", "news")
-        cat_label, cat_color = cat_labels.get(cat, ("AI 资讯", "#4f46e5"))
-        image_url = item.get("image_url", "")
+        if is_en:
+            title = safe_text(item.get("title_en") or item.get("title", ""), 140)
+            if any('\u4e00' <= c <= '\u9fff' for c in title):
+                title = safe_text(item.get("title_en") or "Key Frontier Artificial Intelligence Development Update", 140)
+            raw_sum = item.get("summary_en") or item.get("content_snippet") or f"{title}. This critical industry milestone has sparked extensive technical evaluation and tracking across frontier AI research labs."
+            summary = safe_text(raw_sum, 320)
+            source = safe_text(item.get("source", ""), 60)
+            url = item.get("url", "#")
+            cat = item.get("category", "news")
+            cat_label, cat_color = cat_labels.get(cat, ("AI Intelligence", "#4f46e5"))
+            image_url = item.get("image_url", "")
+            btn_text = "Read Original Source ↗"
+            source_prefix = "Source:"
+            pub_name = "AI News Radar"
+        else:
+            title = safe_text(item.get("title_zh") or item.get("title", ""), 120)
+            title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
+            raw_sum = item.get("summary_zh") or f"{title}。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。"
+            summary = safe_text(raw_sum, 300)
+            source = safe_text(item.get("source", ""), 60)
+            url = item.get("url", "#")
+            cat = item.get("category", "news")
+            cat_label, cat_color = cat_labels.get(cat, ("AI 资讯", "#4f46e5"))
+            image_url = item.get("image_url", "")
+            btn_text = "阅读原文直达 ↗"
+            source_prefix = "信源:"
+            pub_name = "AI 资讯雷达"
 
         if not title:
             continue
@@ -1314,34 +1448,56 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         if image_url and image_url.startswith("http") and "googleusercontent.com/j6_cofbog" not in image_url:
             img_html = f'<img src="{image_url}" alt="{title}" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:8px;margin-bottom:12px;" onerror="this.style.display=\'none\'">'
 
+        sub_en_html = ""
+        if not is_en and title_en and title_en != title:
+            sub_en_html = f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>'
+
         articles_html += f"""
   <article style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,0.03);" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="datePublished" content="{date_slug}T08:00:00+08:00">
-    <meta itemprop="publisher" content="AI 资讯雷达">
+    <meta itemprop="publisher" content="{pub_name}">
     {img_html}
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
       <span style="background:{cat_color}15;color:{cat_color};font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid {cat_color}30;">{cat_label}</span>
-      {f'<span style="color:#64748b;font-size:12px;">· 信源: {source}</span>' if source else ''}
+      {f'<span style="color:#64748b;font-size:12px;">· {source_prefix} {source}</span>' if source else ''}
     </div>
     <h2 itemprop="headline" style="font-size:18px;font-weight:800;color:#1e293b;margin:0 0 10px;line-height:1.5;">
       <a href="{url}" target="_blank" rel="noopener noreferrer" itemprop="url" style="color:inherit;text-decoration:none;">{title}</a>
     </h2>
-    {f'<p style="font-size:13px;color:#64748b;margin:0 0 8px;font-style:italic;">{title_en}</p>' if title_en and title_en != title else ''}
+    {sub_en_html}
     {f'<p itemprop="description" style="font-size:15px;color:#475569;line-height:1.7;margin:0 0 14px;">{summary}</p>' if summary else ''}
     <a href="{url}" target="_blank" rel="noopener noreferrer"
        style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:{cat_color};font-weight:600;text-decoration:none;border:1px solid {cat_color}40;padding:6px 14px;border-radius:8px;transition:all 0.2s;">
-      阅读原文直达 ↗
+      {btn_text}
     </a>
   </article>"""
 
+    # Navigation Links
     nav_links = []
-    if prev_date:
-        nav_links.append(f'<a href="/daily/{prev_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">← 上一期: {prev_date}</a>')
-    nav_links.append('<a href="/" style="color:#64748b;text-decoration:none;">🏠 实时雷达首页</a>')
-    nav_links.append('<a href="/daily" style="color:#4f46e5;font-weight:700;text-decoration:none;">📅 全部 35 期简报归档</a>')
-    if next_date:
-        nav_links.append(f'<a href="/daily/{next_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">下一期: {next_date} →</a>')
-    nav_bar_html = f'<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin:20px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;flex-wrap:wrap;gap:10px;font-size:14px;">{"".join(nav_links)}</div>'
+    base_daily = "/daily" if is_en else "/zh/daily"
+    base_home = "/" if is_en else "/zh"
+    base_articles = "/articles" if is_en else "/zh/articles"
+    base_about = "/about" if is_en else "/zh/about"
+    base_editorial = "/editorial-policy" if is_en else "/zh/editorial-policy"
+    base_contact = "/contact" if is_en else "/zh/contact"
+    base_privacy = "/privacy" if is_en else "/zh/privacy"
+    base_terms = "/terms" if is_en else "/zh/terms"
+
+    if is_en:
+        if prev_date:
+            nav_links.append(f'<a href="{base_daily}/{prev_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">← Previous: {prev_date}</a>')
+        nav_links.append(f'<a href="{base_home}" style="color:#64748b;text-decoration:none;">🏠 Live Radar Home</a>')
+        nav_links.append(f'<a href="{base_daily}" style="color:#4f46e5;font-weight:700;text-decoration:none;">📅 All {len(all_dates)} Daily Editions</a>')
+        if next_date:
+            nav_links.append(f'<a href="{base_daily}/{next_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">Next: {next_date} →</a>')
+    else:
+        if prev_date:
+            nav_links.append(f'<a href="{base_daily}/{prev_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">← 上一期: {prev_date}</a>')
+        nav_links.append(f'<a href="{base_home}" style="color:#64748b;text-decoration:none;">🏠 实时雷达首页</a>')
+        nav_links.append(f'<a href="{base_daily}" style="color:#4f46e5;font-weight:700;text-decoration:none;">📅 全部 {len(all_dates)} 期简报归档</a>')
+        if next_date:
+            nav_links.append(f'<a href="{base_daily}/{next_date}" style="color:#4f46e5;font-weight:700;text-decoration:none;">下一期: {next_date} →</a>')
+    nav_bar_html = f'<div style="display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin:20px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;flex-wrap:gap;gap:10px;font-size:14px;">{"".join(nav_links)}</div>'
 
     date_badges = []
     for d in all_dates:
@@ -1349,36 +1505,109 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         bg = "#4f46e5" if is_cur else "#f1f5f9"
         fg = "#ffffff" if is_cur else "#475569"
         border = "#4f46e5" if is_cur else "#e2e8f0"
-        date_badges.append(f'<a href="/daily/{d}" style="background:{bg};color:{fg};border:1px solid {border};padding:4px 10px;border-radius:14px;font-size:12px;font-family:monospace;text-decoration:none;font-weight:600;">{d[5:]}</a>')
-    date_badges_html = f'<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:24px 0;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;"><span style="font-size:13px;font-weight:700;color:#334155;">📅 往期历史日报快速直达：</span><a href="/daily" style="font-size:12px;color:#4f46e5;font-weight:600;text-decoration:none;">全部归档大厅 →</a></div><div style="display:flex;gap:8px;flex-wrap:wrap;">{"".join(date_badges)}</div></div>'
+        date_badges.append(f'<a href="{base_daily}/{d}" style="background:{bg};color:{fg};border:1px solid {border};padding:4px 10px;border-radius:14px;font-size:12px;font-family:monospace;text-decoration:none;font-weight:600;">{d[5:]}</a>')
+    
+    badge_title = "📅 Historical Daily Briefings Quick Access:" if is_en else "📅 往期历史日报快速直达："
+    hub_link_text = "All Archives Hub →" if is_en else "全部归档大厅 →"
+    date_badges_html = f'<div style="background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin:24px 0;"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;"><span style="font-size:13px;font-weight:700;color:#334155;">{badge_title}</span><a href="{base_daily}" style="font-size:12px;color:#4f46e5;font-weight:600;text-decoration:none;">{hub_link_text}</a></div><div style="display:flex;gap:8px;flex-wrap:wrap;">{"".join(date_badges)}</div></div>'
 
-    featured_deep_dive_box = """
+    if is_en:
+        featured_deep_dive_box = f"""
+    <div style="background:linear-gradient(135deg,#f8fafc,#eef2ff);border:1px solid #cbd5e1;border-radius:12px;padding:20px;margin:28px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#4f46e5;margin-bottom:4px;">✦ AI News Radar · Technical Deep-Dives ✦</div>
+        <div style="font-size:15px;font-weight:800;color:#0f172a;">Beyond Breaking News: Core Architecture & Compute Cost Deep-Dives</div>
+      </div>
+      <a href="{base_articles}" style="background:#4f46e5;color:#fff;font-weight:700;padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;white-space:nowrap;">
+        Explore Technical Deep-Dives (14+ Guides) →
+      </a>
+    </div>"""
+    else:
+        featured_deep_dive_box = f"""
     <div style="background:linear-gradient(135deg,#f8fafc,#eef2ff);border:1px solid #cbd5e1;border-radius:12px;padding:20px;margin:28px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
       <div>
         <div style="font-size:12px;font-weight:700;color:#4f46e5;margin-bottom:4px;">✦ AI 资讯雷达 · 独家深度智库 ✦</div>
         <div style="font-size:15px;font-weight:800;color:#0f172a;">不只看快讯，深入大模型底层架构与算力成本</div>
       </div>
-      <a href="/articles" style="background:#4f46e5;color:#fff;font-weight:700;padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;white-space:nowrap;">
-        查阅深度特稿 (17+篇) →
+      <a href="{base_articles}" style="background:#4f46e5;color:#fff;font-weight:700;padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;white-space:nowrap;">
+        查阅深度特稿 (14+篇) →
       </a>
     </div>"""
 
-    page_title = f"AI 日报 · {date_zh} | 当日精选 {len(briefing_items)} 条 AI 重磅前沿快报 | AI 资讯雷达"
-    page_desc = f"{date_zh} AI 资讯雷达历史精选：涵盖大模型突破、硅谷动态、AI 工具与领袖发声。经人工审核与交叉验证，附完整原始信源。"
+    if is_en:
+        page_title = f"AI Daily Briefing · {date_en} | Top {len(briefing_items)} AI Breakthroughs & Frontier News | AI News Radar"
+        page_desc = f"{date_en} AI News Radar Daily Briefing: Curated frontier artificial intelligence developments, LLM breakthroughs, Silicon Valley updates, and developer tools. Fully cited with primary sources."
+        html_lang = "en"
+        canonical_url = f"https://ainewsradar.xyz/daily/{date_slug}"
+        alt_en = f"https://ainewsradar.xyz/daily/{date_slug}"
+        alt_zh = f"https://ainewsradar.xyz/zh/daily/{date_slug}"
+        brand_title = "AI News Radar"
+        brand_sub = "ainewsradar.xyz · Daily Archives"
+        nav_radar = "Live Radar"
+        nav_articles = "Deep-Dives"
+        nav_daily = "Daily Archives"
+        nav_about = "About Us"
+        hero_tag = "AI NEWS RADAR · DAILY ARCHIVE"
+        hero_h1 = f"{date_en} AI Industry Briefing"
+        hero_sub = f"Featuring {len(briefing_items)} global AI breakthroughs, frontier LLM benchmarks, and developer tooling updates. 100% verified primary sources."
+        breadcrumb_home = "Home"
+        breadcrumb_hub = "Daily Archives Hub"
+        breadcrumb_current = f"{date_en} AI Briefing"
+        footer_btn_home = "🤖 Return to Live Radar"
+        footer_btn_daily = f"📅 All {len(all_dates)} Daily Editions"
+        footer_btn_articles = "📚 All Technical Guides"
+        footer_nav_about = "About Us"
+        footer_nav_editorial = "Editorial Policy"
+        footer_nav_contact = "Contact Us"
+        footer_nav_privacy = "Privacy Policy"
+        footer_nav_terms = "Terms of Service"
+        footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). Curated via automated intelligence pipeline & editorial review · All rights belong to original authors."
+    else:
+        page_title = f"AI 日报 · {date_zh} | 当日精选 {len(briefing_items)} 条 AI 重磅前沿快报 | AI 资讯雷达"
+        page_desc = f"{date_zh} AI 资讯雷达历史精选：涵盖大模型突破、硅谷动态、AI 工具与领袖发声。经人工审核与交叉验证，附完整原始信源。"
+        html_lang = "zh-CN"
+        canonical_url = f"https://ainewsradar.xyz/zh/daily/{date_slug}"
+        alt_en = f"https://ainewsradar.xyz/daily/{date_slug}"
+        alt_zh = f"https://ainewsradar.xyz/zh/daily/{date_slug}"
+        brand_title = "AI 资讯雷达"
+        brand_sub = "ainewsradar.xyz · 历史简报库"
+        nav_radar = "实时雷达"
+        nav_articles = "深度特稿"
+        nav_daily = "历史简报"
+        nav_about = "关于我们"
+        hero_tag = "AI 资讯雷达 · 精选日报归档"
+        hero_h1 = f"{date_zh} AI 行业快报"
+        hero_sub = f"本期收录 {len(briefing_items)} 条全球人工智能前沿突破、产业动态与领袖交锋，全部附带原始权威出处。"
+        breadcrumb_home = "首页"
+        breadcrumb_hub = "每日简报全景归档"
+        breadcrumb_current = date_zh
+        footer_btn_home = "🤖 返回实时首页"
+        footer_btn_daily = f"📅 全部 {len(all_dates)} 期简报归档"
+        footer_btn_articles = "📚 全部深度特稿"
+        footer_nav_about = "关于我们"
+        footer_nav_editorial = "编辑方针"
+        footer_nav_contact = "联系我们"
+        footer_nav_privacy = "隐私政策"
+        footer_nav_terms = "服务条款"
+        footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). 内容经 AI 辅助处理与人工编辑审核 · 版权归原作者所有"
 
     html = f"""<!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="{html_lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{page_title}</title>
   <meta name="description" content="{page_desc}">
-  <meta name="robots" content="noindex, follow">
-  <link rel="canonical" href="https://ainewsradar.xyz/daily/{date_slug}">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="{canonical_url}">
+  <link rel="alternate" hreflang="en" href="{alt_en}">
+  <link rel="alternate" hreflang="zh-CN" href="{alt_zh}">
+  <link rel="alternate" hreflang="zh" href="{alt_zh}">
+  <link rel="alternate" hreflang="x-default" href="{alt_en}">
   <meta property="og:title" content="{page_title}">
   <meta property="og:description" content="{page_desc}">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://ainewsradar.xyz/daily/{date_slug}">
+  <meta property="og:url" content="{canonical_url}">
   <meta property="article:published_time" content="{date_slug}T08:00:00+08:00">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
@@ -1392,20 +1621,20 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
           {{
             "@type": "ListItem",
             "position": 1,
-            "name": "AI 资讯雷达",
-            "item": "https://ainewsradar.xyz/"
+            "name": "{brand_title}",
+            "item": "{'https://ainewsradar.xyz/' if is_en else 'https://ainewsradar.xyz/zh'}"
           }},
           {{
             "@type": "ListItem",
             "position": 2,
-            "name": "每日简报全景归档",
-            "item": "https://ainewsradar.xyz/daily"
+            "name": "{breadcrumb_hub}",
+            "item": "{'https://ainewsradar.xyz/daily' if is_en else 'https://ainewsradar.xyz/zh/daily'}"
           }},
           {{
             "@type": "ListItem",
             "position": 3,
-            "name": "{date_zh} AI 行业快报",
-            "item": "https://ainewsradar.xyz/daily/{date_slug}"
+            "name": "{breadcrumb_current}",
+            "item": "{canonical_url}"
           }}
         ]
       }},
@@ -1413,10 +1642,10 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         "@type": "CollectionPage",
         "name": "{page_title}",
         "description": "{page_desc}",
-        "url": "https://ainewsradar.xyz/daily/{date_slug}",
+        "url": "{canonical_url}",
         "publisher": {{
           "@type": "Organization",
-          "name": "AI 资讯雷达",
+          "name": "{brand_title}",
           "url": "https://ainewsradar.xyz",
           "logo": {{"@type": "ImageObject", "url": "https://ainewsradar.xyz/"}}
         }},
@@ -1438,18 +1667,18 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <!-- Header -->
   <header style="background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:50;">
     <div class="container" style="padding-top:14px;padding-bottom:14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
-      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+      <a href="{base_home}" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
         <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed,#ec4899);display:flex;align-items:center;justify-content:center;font-size:18px;">🤖</div>
         <div>
-          <div style="font-size:16px;font-weight:900;background:linear-gradient(to right,#312e81,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">AI 资讯雷达</div>
-          <div style="font-size:11px;color:#94a3b8;">ainewsradar.xyz · 历史简报库</div>
+          <div style="font-size:16px;font-weight:900;background:linear-gradient(to right,#312e81,#4f46e5);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">{brand_title}</div>
+          <div style="font-size:11px;color:#94a3b8;">{brand_sub}</div>
         </div>
       </a>
       <nav style="display:flex;align-items:center;gap:16px;font-size:13px;font-weight:600;">
-        <a href="/" style="color:#64748b;text-decoration:none;">实时雷达</a>
-        <a href="/articles" style="color:#64748b;text-decoration:none;">深度特稿</a>
-        <a href="/daily" style="color:#4f46e5;text-decoration:none;font-weight:700;">历史简报</a>
-        <a href="/about" style="color:#64748b;text-decoration:none;">关于我们</a>
+        <a href="{base_home}" style="color:#64748b;text-decoration:none;">{nav_radar}</a>
+        <a href="{base_articles}" style="color:#64748b;text-decoration:none;">{nav_articles}</a>
+        <a href="{base_daily}" style="color:#4f46e5;text-decoration:none;font-weight:700;">{nav_daily}</a>
+        <a href="{base_about}" style="color:#64748b;text-decoration:none;">{nav_about}</a>
       </nav>
     </div>
   </header>
@@ -1457,15 +1686,15 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <!-- Hero -->
   <div style="background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#ec4899 100%);padding:40px 16px;color:#fff;text-align:center;">
     <div class="container">
-      <div style="font-size:13px;font-weight:600;opacity:0.85;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;">AI 资讯雷达 · 精选日报归档</div>
-      <h1 style="font-size:28px;font-weight:900;margin-bottom:10px;line-height:1.3;">{date_zh} AI 行业快报</h1>
-      <p style="font-size:15px;opacity:0.9;max-width:540px;margin:0 auto 16px;line-height:1.6;">本期收录 {len(briefing_items)} 条全球人工智能前沿突破、产业动态与领袖交锋，全部附带原始权威出处。</p>
+      <div style="font-size:13px;font-weight:600;opacity:0.85;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;">{hero_tag}</div>
+      <h1 style="font-size:28px;font-weight:900;margin-bottom:10px;line-height:1.3;">{hero_h1}</h1>
+      <p style="font-size:15px;opacity:0.9;max-width:540px;margin:0 auto 16px;line-height:1.6;">{hero_sub}</p>
     </div>
   </div>
 
   <main class="container" style="padding-top:20px;padding-bottom:40px;">
     <div style="font-size:13px;color:#64748b;margin-bottom:14px;">
-      <a href="/" style="color:inherit;text-decoration:none;">首页</a> &gt; <a href="/daily" style="color:inherit;text-decoration:none;">每日简报全景归档</a> &gt; <strong>{date_zh}</strong>
+      <a href="{base_home}" style="color:inherit;text-decoration:none;">{breadcrumb_home}</a> &gt; <a href="{base_daily}" style="color:inherit;text-decoration:none;">{breadcrumb_hub}</a> &gt; <strong>{breadcrumb_current}</strong>
     </div>
 
     {nav_bar_html}
@@ -1480,25 +1709,25 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <footer style="background:#fff;border-top:1px solid #e2e8f0;padding:32px 16px;text-align:center;">
     <div class="container">
       <div style="margin-bottom:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-        <a href="/" style="background:#4f46e5;color:#fff;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
-          🤖 返回实时首页
+        <a href="{base_home}" style="background:#4f46e5;color:#fff;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
+          {footer_btn_home}
         </a>
-        <a href="/daily" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
-          📅 全部 35 期简报归档
+        <a href="{base_daily}" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
+          {footer_btn_daily}
         </a>
-        <a href="/articles" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
-          📚 全部深度特稿
+        <a href="{base_articles}" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;font-weight:700;padding:10px 22px;border-radius:8px;font-size:13px;text-decoration:none;">
+          {footer_btn_articles}
         </a>
       </div>
       <p style="font-size:13px;color:#64748b;margin-bottom:8px;">
-        <a href="/about" style="color:inherit;text-decoration:none;">关于我们</a> · 
-        <a href="/editorial-policy" style="color:inherit;text-decoration:none;">编辑方针</a> · 
-        <a href="/contact" style="color:inherit;text-decoration:none;">联系我们</a> · 
-        <a href="/privacy" style="color:inherit;text-decoration:none;">隐私政策</a> · 
-        <a href="/terms" style="color:inherit;text-decoration:none;">服务条款</a>
+        <a href="{base_about}" style="color:inherit;text-decoration:none;">{footer_nav_about}</a> · 
+        <a href="{base_editorial}" style="color:inherit;text-decoration:none;">{footer_nav_editorial}</a> · 
+        <a href="{base_contact}" style="color:inherit;text-decoration:none;">{footer_nav_contact}</a> · 
+        <a href="{base_privacy}" style="color:inherit;text-decoration:none;">{footer_nav_privacy}</a> · 
+        <a href="{base_terms}" style="color:inherit;text-decoration:none;">{footer_nav_terms}</a>
       </p>
       <p style="font-size:12px;color:#94a3b8;">
-        © 2026 AI News Radar (ainewsradar.xyz). 内容经 AI 辅助处理与人工编辑审核 · 版权归原作者所有
+        {footer_copy}
       </p>
     </div>
   </footer>
@@ -1507,6 +1736,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
 </html>"""
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(html)
+
 
 
 ARTICLE_TITLE_EN_MAP = {
@@ -1627,7 +1857,12 @@ def optimize_avatar_url(url: str) -> str:
 
 def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
-    author = safe_text(it.get("author") or ("AI 领袖" if is_zh else "AI Pioneer"), 40)
+    if is_zh:
+        author = safe_text(it.get("author") or "AI 领袖", 40)
+    else:
+        raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
+        raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
+        author = safe_text(raw_author, 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
     
     raw_role = (it.get("author_role") if is_zh else it.get("author_role_en")) or ""
@@ -2021,7 +2256,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         ][:8]
         celeb_cards_en_html = ""
         for it in celeb_items:
-            author = safe_text(it.get("author") or "AI Pioneer", 40)
+            raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
+            raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
+            author = safe_text(raw_author, 40)
             handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
             role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
             text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
@@ -2141,37 +2378,27 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         hub_en_html = f"""
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10" id="intelligence-archive-hub" aria-label="AI Deep-Dive Intelligence & Daily Archives">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10" id="intelligence-archive-hub" aria-label="AI Historical Daily Archives & Intelligence Hub">
       <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-indigo-500/30 text-white shadow-xl">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-indigo-500/20 gap-4">
           <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold tracking-wider uppercase mb-2">
               <span>📚</span> INTELLIGENCE ARCHIVE & HUB
             </div>
-            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">AI Deep-Dive Research & Historical Daily Archives</h2>
-            <p class="text-slate-300 text-xs sm:text-sm mt-1">Systematic deep-dive architecture teardowns, cost benchmarks, and full historical briefings</p>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">AI Historical Daily Archives & Intelligence Hub</h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-1">Full chronological intelligence briefings, historical AI milestones, and developer resources</p>
           </div>
           <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
-            <a href="/articles" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
-              <span>📖 All Deep-Dives (17+)</span> <span>→</span>
-            </a>
-            <a href="/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm transition-all">
-              <span>📅 Daily Archives (35 Issues)</span> <span>→</span>
+            <a href="/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
+              <span>📅 Browse Daily Archives ({len(recent_dates)} Days)</span> <span>→</span>
             </a>
           </div>
         </div>
 
-        <div class="mt-6">
-          <div class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-3">🔥 Featured Architecture & Technical Deep-Dives</div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-            {articles_en_cards}
-          </div>
-        </div>
-
-        <div class="mt-6 pt-5 border-t border-indigo-500/20">
+        <div class="mt-6 pt-2">
           <div class="flex items-center justify-between mb-2.5">
             <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider">📅 Recent Daily Briefings Quick Access</span>
-            <a href="/daily" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View All 35 Days →</a>
+            <a href="/daily" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">View All {len(recent_dates)} Days →</a>
           </div>
           <div class="flex flex-wrap gap-2">
             {daily_en_badges}
@@ -2520,43 +2747,33 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             </article>"""
 
         daily_zh_badges = "".join([
-            f'<a href="/daily/{d}" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-indigo-600/30 border border-slate-700/80 hover:border-indigo-500/50 text-slate-300 hover:text-indigo-200 text-xs font-mono transition-all">📅 {d[5:]} 日报</a>'
+            f'<a href="/zh/daily/{d}" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-indigo-600/30 border border-slate-700/80 hover:border-indigo-500/50 text-slate-300 hover:text-indigo-200 text-xs font-mono transition-all">📅 {d[5:]} 日报</a>'
             for d in reversed(recent_dates[:12])
         ])
 
         hub_zh_html = f"""
     <!-- ========== STATIC_HUB_NAVIGATION_START ========== -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10" id="intelligence-archive-hub" aria-label="AI 深度专栏与每日简报智库">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-10" id="intelligence-archive-hub" aria-label="AI 每日简报全景智库">
       <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 border border-indigo-500/30 text-white shadow-xl">
         <div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-indigo-500/20 gap-4">
           <div>
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/30 text-indigo-300 text-xs font-bold tracking-wider uppercase mb-2">
-              <span>📚</span> 深度智库与全景档案
+              <span>📚</span> 历史简报与全景档案
             </div>
-            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">AI 独家深度专栏与每日简报智库</h2>
-            <p class="text-slate-300 text-xs sm:text-sm mt-1">系统化沉淀全球 AI 前沿突破、技术架构拆解与历史日报索引</p>
+            <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">AI 每日简报全景智库</h2>
+            <p class="text-slate-300 text-xs sm:text-sm mt-1">系统化沉淀全球 AI 前沿突破、技术架构拆解与历史日报全量归档</p>
           </div>
           <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
-            <a href="/articles" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
-              <span>📖 全部深度特稿 (17+篇)</span> <span>→</span>
-            </a>
-            <a href="/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold text-xs sm:text-sm transition-all">
-              <span>📅 历史简报归档 (35期)</span> <span>→</span>
+            <a href="/zh/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
+              <span>📅 历史简报归档 ({len(recent_dates)} 期)</span> <span>→</span>
             </a>
           </div>
         </div>
 
-        <div class="mt-6">
-          <div class="text-xs font-bold text-indigo-300 uppercase tracking-wider mb-3">🔥 精选深度拆解特稿</div>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-            {articles_zh_cards}
-          </div>
-        </div>
-
-        <div class="mt-6 pt-5 border-t border-indigo-500/20">
+        <div class="mt-6 pt-2">
           <div class="flex items-center justify-between mb-2.5">
             <span class="text-xs font-bold text-indigo-300 uppercase tracking-wider">📅 往期每日简报快速直达</span>
-            <a href="/daily" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">查看全部 35 期 →</a>
+            <a href="/zh/daily" class="text-xs text-indigo-400 hover:text-indigo-300 font-semibold">查看全部 {len(recent_dates)} 期 →</a>
           </div>
           <div class="flex flex-wrap gap-2">
             {daily_zh_badges}
@@ -2631,6 +2848,14 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             zh_content = re.sub(r'(id="badge-count-videos"[^>]*>)\d*(</span>)', f'\\g<1>{c_videos}\\g<2>', zh_content)
             zh_content = re.sub(r'(id="badge-count-prompts"[^>]*>)\d*(</span>)', f'\\g<1>{c_prompts}\\g<2>', zh_content)
 
+                # 确保中文站页脚与导航链接全部指向独立中文站 /zh/... 路径
+        zh_content = re.sub(r'href="/articles"', 'href="/zh/articles"', zh_content)
+        zh_content = re.sub(r'href="/daily"', 'href="/zh/daily"', zh_content)
+        zh_content = re.sub(r'href="/about"', 'href="/zh/about"', zh_content)
+        zh_content = re.sub(r'href="/editorial-policy"', 'href="/zh/editorial-policy"', zh_content)
+        zh_content = re.sub(r'href="/contact"', 'href="/zh/contact"', zh_content)
+        zh_content = re.sub(r'href="/privacy"', 'href="/zh/privacy"', zh_content)
+        zh_content = re.sub(r'href="/terms"', 'href="/zh/terms"', zh_content)
         with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(zh_content)
 
@@ -2675,23 +2900,109 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
     for tp in trust_pages:
         entries.append(f"""  <url>
     <loc>https://ainewsradar.xyz/{tp}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/{tp}"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/{tp}</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/{tp}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/{tp}"/>
     <lastmod>{now_date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>""")
 
-    # 1b. 专栏大厅与简报归档大厅
+    # 1b. 每日简报归档大厅与所有历史日报（英文版 + 中文独立版双向关联）
+    entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/daily</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>""")
+    entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/daily</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>""")
+
+    for d in daily_dates:
+        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/daily/{d}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily/{d}"/>
+    <lastmod>{d}</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.75</priority>
+  </url>""")
+        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/daily/{d}</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/daily/{d}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/daily/{d}"/>
+    <lastmod>{d}</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.75</priority>
+  </url>""")
+
+    # 1c. 专栏大厅与深度专栏页面
     entries.append(f"""  <url>
     <loc>https://ainewsradar.xyz/articles</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>""")
+    entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/articles</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles"/>
     <lastmod>{now_date}</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>""")
 
-    # 2. 深度专栏页面（仅收录高价值深度技术指南）
     for art in articles_meta:
+        slug = art.get('slug') or art.get('id')
         entries.append(f"""  <url>
-    <loc>{art['url']}</loc>
+    <loc>https://ainewsradar.xyz/articles/{slug}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles/{slug}"/>
+    <lastmod>{art['date']}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>""")
+        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/articles/{slug}</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/articles/{slug}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/articles/{slug}"/>
     <lastmod>{art['date']}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>

@@ -914,7 +914,7 @@
 
       translate.selectLanguageTag.show = false;
       translate.service.use('client.edge');
-      translate.language.setLocal('chinese_simplified');
+      translate.language.setLocal('english');
       if (translate.listener) {
         translate.listener.use = true;
       }
