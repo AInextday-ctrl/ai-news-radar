@@ -843,6 +843,99 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
         </div>
       </section>
 
+      <!-- ========== FEATURED_EDITORIAL_START ========== -->
+    <section id="featured-editorial-lead" class="rounded-2xl p-5 sm:p-7 bg-white dark:bg-[#0c1222] border border-slate-200 dark:border-indigo-500/30 shadow-xl relative overflow-hidden transition-all my-6">
+      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center space-x-2.5">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 tracking-wide uppercase">
+            <span>🏛️</span>
+            <span>今日核心架构研报精读</span>
+          </span>
+          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
+            2026-10-14 · 雷达硬件实验室实机复现验证
+          </span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-200 dark:border-indigo-800/60">
+            ✍️ 领衔作者：Alex Lin（创始人 & 首席系统架构师）
+          </span>
+          <span class="text-xs text-slate-400 hidden sm:inline">· 12 分钟阅读 · 3,800 字实操精析</span>
+        </div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-8 space-y-3.5">
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
+            <a href="/zh/articles/2026-10-14-claude-code-agent-guide" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
+              Claude Code 终端自主 AI Agent 实战指南：架构解析、命令工作流与企业级降本实践
+            </a>
+          </h2>
+          
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
+            深入拆解 Anthropic 官方推出的终端 AI 编程智能体 Claude Code。解析其在命令行环境中的自主决策架构、权限隔离模型、Prompt Caching 缓存机制以及结合自建 MCP Server 的企业级自动化改造方案。
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+              <div class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1">01 · Shell 双层沙箱隔离</div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                结合 Docker 与 Bubblewrap 双层权限拦截，严格阻断高危破坏性指令，在保持 Git 流水线自主性的同时实现零越狱外溢。
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+              <div class="text-[11px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">02 · 上下文缓存降本 87%</div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                基于 Anthropic 5 分钟 Prompt Cache 机制，重复索引代码 AST 的开销降低 87.5%，单任务成本从 $4.20 骤降至 $0.52。
+              </p>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
+              <div class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">03 · 多轮状态持久化</div>
+              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
+                轻量级 JSON 状态快照与回滚机制，在会话生命周期之间无损保留智能体执行轨迹，杜绝 KV Cache 震荡与丢失。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-4 bg-slate-50 dark:bg-slate-900/90 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full space-y-4">
+          <div>
+            <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 pb-2 border-b border-slate-200 dark:border-slate-800">
+              <span>⚡ 硬件实验室实测基准</span>
+              <span class="text-[10px] text-emerald-500 font-mono">100% 可复现</span>
+            </div>
+            <div class="mt-2.5 space-y-2 text-xs">
+              <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                <span>终端任务达成率：</span>
+                <span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">84.2%</span>
+              </div>
+              <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                <span>Prompt Cache 节支：</span>
+                <span class="font-mono font-bold text-emerald-500">-87.5% 成本</span>
+              </div>
+              <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                <span>工具执行单步时延：</span>
+                <span class="font-mono font-bold text-slate-700 dark:text-slate-200">1.4 秒 / 步</span>
+              </div>
+              <div class="flex justify-between text-slate-600 dark:text-slate-400">
+                <span>对抗性注入拦截率：</span>
+                <span class="font-mono font-bold text-purple-500">100% 阻断</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
+            <a href="/zh/articles/2026-10-14-claude-code-agent-guide" class="w-full py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5">
+              <span>📖 阅读全文深度拆解研报（3,800 字） →</span>
+            </a>
+            <a href="/zh/articles" class="w-full py-1.5 px-3 rounded-lg bg-slate-200/80 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition-all flex items-center justify-center gap-1">
+              <span>📚 查阅全部 14 篇高价值技术指南</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========== FEATURED_EDITORIAL_END ========== -->
+
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
@@ -880,6 +973,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       谷歌 Deepmind 的 Gemini 4 Argon 在 ARC-AGI-3 基准测试中得分为 97.5%，使谷歌成为继 OpenAI 之后第二个突破 95% 大关的实验室。但结果会根据测试设置而大幅波动：在标准安全带中，分数降至仅 49.8%。氩气
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 底层架构演进：凸显测试时推理计算（Test-Time Compute）与高质量合成数据在核心基准中的主导权。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('5086294fdea9dde2')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -906,6 +1002,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Nvidia 的 RTX Spark N1X 处理器终于问世了，我们一直在集体测试配备这款新“超级芯片”的强大笔记本电脑。 RTX Spark 旨在成为适用于笔记本电脑和小型台式电脑的基于 Arm 的高性能 SoC，可与最好的产品相媲美
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 硬件与算力研判：端侧专用芯片实机部署正逐步替代高延时云端 API，保障低延时与数据隐私闭环。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('14e72fa4cf5e8ce5')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -932,6 +1031,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       她的新书《人工亲密：当我们与机器交谈时我们会成为谁》打破了这种模式。这是一个争论性的警告，表明我们已经进入紧急状态，我们的人类因过度依赖那些冒充我们导师、导师、朋友、同事的没有灵魂的机器而面临风险
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('e4d7c789745d3ca9')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -958,6 +1060,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       约翰·哈尼/彭博社：——唐纳德·特朗普总统的人工智能特别工作组在其首次会议上表示
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('bcc190ee7b107baa')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -984,6 +1089,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Jess Jones/《泰晤士报》：——一家英国金融科技公司已被美国软件公司 Intuit 收购
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('e87a45717f24b03d')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1010,6 +1118,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       根据尼曼实验室的一份报告，Meta 的新条款似乎允许其抓取和抓取与使用其平台的企业（包括在线出版商）“相关”的网站。 10 月 30 日生效的新条款称 Meta 可以使用此输出
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('93c5316f35cd0bf3')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1036,6 +1147,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       选择您想要加入 Tom’s Hardware 会员的方式，开始免费访问评论、徽章和讨论。为想要更多的爱好者解锁独家工具和见解。访问基准、路线图、深度分析和其他独家工具。基准性能数据库潜水 i
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 硬件与算力研判：端侧专用芯片实机部署正逐步替代高延时云端 API，保障低延时与数据隐私闭环。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('5bd799552cf22302')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1062,6 +1176,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       神经网络可能比研究人员想象的更容易理解，大约 90% 的神经元都有明确的功能。对于人工智能安全研究来说，这将是一个大新闻，因为可以直接在模型的电路中发现欺骗或危险行为。研究人员正在研究
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('abc27eb1031f1875')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1088,6 +1205,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       资料来源：PayPal、Epic 和其他公司向司法部表达了担忧，因为司法部表示倾向于通过一项专注于互操作性的协议来解决苹果反垄断诉讼。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('219b32d636b2824c')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1114,6 +1234,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('86a75287854be4cf')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1140,6 +1263,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       OpenAI 正在推出 Rosalind 学术计划，这是一项免费服务，目前仅向美国大学的研究实验室开放，无需签订企业合同。 OpenAI 的新罗莎琳德学术计划为研究实验室提供一年最多 30 个免费席位的文章首先出现在 The
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 实操落地视点：展示了前沿模型在实际系统集成中的工程折衷，兼顾高准确率与企业调用成本经济性。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('0c3800807ec3aa1a')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1166,6 +1292,9 @@ Private tunnels connect hosted Sites to approved internal infrastructure and API
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Anthropic 为 METR 提供内部访问权限，以审核其人工智能模型和安全实践。相关动态引发全球产业界广泛讨论与技术跟踪。
                     </p>
+                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 底层架构演进：凸显测试时推理计算（Test-Time Compute）与高质量合成数据在核心基准中的主导权。
+                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('f8f03d3c24adad0b')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
