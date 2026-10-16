@@ -130,16 +130,7 @@ ZH_DAILY_DIR = os.path.join(ZH_DIR, "daily")
 ZH_ARTICLES_DIR = os.path.join(ZH_DIR, "articles")
 
 ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>"""
-ADSENSE_SLOT = """<!-- Google AdSense Responsive Unit -->
-<div style="margin:28px 0;text-align:center;overflow:hidden;">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-4912808437101130"
-       data-ad-slot="default"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>"""
+ADSENSE_SLOT = ""
 
 
 def safe_text(text: Any, max_len: int = 400) -> str:
@@ -2389,6 +2380,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             <p class="text-slate-300 text-xs sm:text-sm mt-1">Full chronological intelligence briefings, historical AI milestones, and developer resources</p>
           </div>
           <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
+            <a href="/articles" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
+              <span>📚 Deep-Dive Guides (14 Guides)</span> <span>→</span>
+            </a>
             <a href="/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
               <span>📅 Browse Daily Archives ({len(recent_dates)} Days)</span> <span>→</span>
             </a>
@@ -2764,6 +2758,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             <p class="text-slate-300 text-xs sm:text-sm mt-1">系统化沉淀全球 AI 前沿突破、技术架构拆解与历史日报全量归档</p>
           </div>
           <div class="flex items-center gap-2.5 shrink-0 flex-wrap">
+            <a href="/zh/articles" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
+              <span>📚 深度技术研报 (14 篇)</span> <span>→</span>
+            </a>
             <a href="/zh/daily" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs sm:text-sm transition-all shadow-md">
               <span>📅 历史简报归档 ({len(recent_dates)} 期)</span> <span>→</span>
             </a>

@@ -281,34 +281,10 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         <p style="margin-bottom:0;">{summary}</p>
       </blockquote>
 
-      <!-- Google AdSense Unit 1 -->
-      <div class="ad-slot">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-4912808437101130"
-             data-ad-slot="default"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-      </div>
-
       <!-- Main Article Body -->
       <div itemprop="articleBody">
         {content_html}
       </div>
-
-      <!-- Google AdSense Unit 2 -->
-      <div class="ad-slot">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-4912808437101130"
-             data-ad-slot="default"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-      </div>
-
-      <!-- Author Bio Card -->
       <div class="author-card">
         <div style="font-size:36px;line-height:1;">👨‍💻</div>
         <div>
@@ -507,16 +483,7 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
       <p style="font-size:15px;color:#64748b;max-width:680px;margin:0 auto;">{hub_desc}</p>
     </div>
 
-    <!-- AdSense Top Banner -->
-    <div style="margin:20px 0;text-align:center;background:#fff;border:1px dashed #e2e8f0;border-radius:12px;padding:12px;">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-4912808437101130"
-           data-ad-slot="default"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({{}});</script>
-    </div>
+
 
     <!-- Articles Grid -->
     <div class="grid-hub">
