@@ -848,99 +848,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
         </div>
       </section>
 
-      <!-- ========== FEATURED_EDITORIAL_START ========== -->
-    <section id="featured-editorial-lead" class="rounded-2xl p-5 sm:p-7 bg-white dark:bg-[#0c1222] border border-slate-200 dark:border-indigo-500/30 shadow-xl relative overflow-hidden transition-all my-6">
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div class="flex items-center space-x-2.5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 tracking-wide uppercase">
-            <span>🏛️</span>
-            <span>今日核心架构研报精读</span>
-          </span>
-          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
-            2026-10-14 · 雷达硬件实验室实机复现验证
-          </span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-200 dark:border-indigo-800/60">
-            ✍️ 领衔作者：Alex Lin（创始人 & 首席系统架构师）
-          </span>
-          <span class="text-xs text-slate-400 hidden sm:inline">· 12 分钟阅读 · 3,800 字实操精析</span>
-        </div>
-      </div>
-
-      <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div class="lg:col-span-8 space-y-3.5">
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
-            <a href="/zh/articles/2026-10-14-claude-code-agent-guide" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              Claude Code 终端自主 AI Agent 实战指南：架构解析、命令工作流与企业级降本实践
-            </a>
-          </h2>
-          
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
-            深入拆解 Anthropic 官方推出的终端 AI 编程智能体 Claude Code。解析其在命令行环境中的自主决策架构、权限隔离模型、Prompt Caching 缓存机制以及结合自建 MCP Server 的企业级自动化改造方案。
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1">01 · Shell 双层沙箱隔离</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                结合 Docker 与 Bubblewrap 双层权限拦截，严格阻断高危破坏性指令，在保持 Git 流水线自主性的同时实现零越狱外溢。
-              </p>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">02 · 上下文缓存降本 87%</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                基于 Anthropic 5 分钟 Prompt Cache 机制，重复索引代码 AST 的开销降低 87.5%，单任务成本从 $4.20 骤降至 $0.52。
-              </p>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">03 · 多轮状态持久化</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                轻量级 JSON 状态快照与回滚机制，在会话生命周期之间无损保留智能体执行轨迹，杜绝 KV Cache 震荡与丢失。
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-4 bg-slate-50 dark:bg-slate-900/90 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full space-y-4">
-          <div>
-            <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 pb-2 border-b border-slate-200 dark:border-slate-800">
-              <span>⚡ 硬件实验室实测基准</span>
-              <span class="text-[10px] text-emerald-500 font-mono">100% 可复现</span>
-            </div>
-            <div class="mt-2.5 space-y-2 text-xs">
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>终端任务达成率：</span>
-                <span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">84.2%</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Prompt Cache 节支：</span>
-                <span class="font-mono font-bold text-emerald-500">-87.5% 成本</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>工具执行单步时延：</span>
-                <span class="font-mono font-bold text-slate-700 dark:text-slate-200">1.4 秒 / 步</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>对抗性注入拦截率：</span>
-                <span class="font-mono font-bold text-purple-500">100% 阻断</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-            <a href="/zh/articles/2026-10-14-claude-code-agent-guide" class="w-full py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5">
-              <span>📖 阅读全文深度拆解研报（3,800 字） →</span>
-            </a>
-            <a href="/zh/articles" class="w-full py-1.5 px-3 rounded-lg bg-slate-200/80 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition-all flex items-center justify-center gap-1">
-              <span>📚 查阅全部 14 篇高价值技术指南</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ========== FEATURED_EDITORIAL_END ========== -->
-
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
@@ -978,9 +885,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       苹果全新折叠屏设备预售启动后数小时内发货时间迅速延后，官方盛赞市场反响远超预期
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 库克刀法精湛，只要把初期产能卡在五位数，任何定价高达两千美元的高级玩具都能在半小时内营造出‘全网哄抢’的断货神话。消费者一边痛骂换壳挤牙膏，一边把发货排期生生推到了明年，妥妥的‘嘴上说不要，身体很诚实’。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('bdca07f45aea4670')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1007,9 +911,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       最新监管文件显示，Meta收回数千万美元游说资金，大幅缩减原定用于对抗地方AI监管的专项预算
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 扎克伯格终于意识到，有时候砸几千万美元去游说立法者别管AI，反而等于在脑门上贴着‘我正准备干坏事’的标签。悄悄把退款收进口袋，既能美化季度财报的现金流，还能装出一副‘我们尊重监管’的温顺模样，算盘打得全硅谷都能听见。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('692de9fb6489e4ee')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1036,9 +937,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Anthropic宣布Claude成功复现椭圆曲线算法随机种子生成逻辑，打破了长达数十年的国安局后门猜想
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 全世界最顶尖的极客和密码学家疑神疑鬼、写了二十年对抗国安局阴谋论的论文，结果AI一跑发现当年其实只是工程师随手抓了个系统时间戳。现实里的荒诞永远比间谍小说精彩，科技大厂摸鱼糊弄差事的传统真是跨越世纪、坚如磐石。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a27ba3fff82853d0')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1065,9 +963,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       前政界争议发言人被曝虚假挂职AI稀土初创公司，揭开科技概念包装与投机套壳乱象
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 以前皮包公司借壳上市只需要加个区块链，现在不仅要蹭AI，还得跨界整点‘AI自主挖稀土’的赛博玄学。只要把当红政客名字和热搜科技词汇往通稿上一贴，八竿子打不着的微型矿坑也能秒变硅谷独角兽，这哪是人工智能，分明是人工造梦。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('f8a2f7736f62a600')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1094,9 +989,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       孙正义正评估收购全球最大实体安保外包企业，意图用具身智能与巡逻机器人重构人力密集型产业
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 孙正义总算找到了花钱最狂野的姿势：嫌软件AI不接地气，直接买下几十万保安大军，再把他们全换成赛博机器战警。从共享办公二房东到AI机械战警，哪怕孙老板被市场反复教育过一万次，‘梭哈换世界’的赌徒之魂依然在熊熊燃烧。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d90a77f0b1e95641')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1123,9 +1015,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       内幕消息指马斯克曾提议放缓乌克兰军用卫星服务，并获高层默许由军方具体执行限速机制
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 嘴上总说自己只是个造火箭的技术狂人，背地里却能凭一己喜好操纵战场上的‘断网开关’。当一个超级富豪拥有了比主权国家军方还能打的卫星舰队，现代战争的指挥权究竟在白宫、五角大楼，还是在马斯克的个人手机里？
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('551dee6ad79a30c1')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1152,9 +1041,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       知名开源数据库推迟新版本发布并砍掉近十项功能，因引入AI代码审查后发现大量架构隐患
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 那些鼓吹‘AI能让初级程序员分分钟消灭Bug、提前发布软件’的销售大师们被当头泼了一盆冷水。现实是程序员用AI写代码糊弄人，老法师再用AI代码审查抓瞎，最后大家发现代码里全是‘看着跑得通其实架构稀烂’的垃圾，硬生生把发布会活活逼延期两个月。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('48c7e4d01e4628de')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1181,9 +1067,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       全新浏览器插件使聊天助理具备多标签页感知与自主表单填写能力，全面打通桌面网络操作流
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 你的几十个摸鱼标签页终于迎来了专属监工。过去是你在乱七八糟的网页里手动找资料，现在是把全部隐私和浏览记录全盘托付给AI让它替你跑腿；只要你敢交出浏览器的控制权，奥特曼就能教你什么叫‘连密码带商品比价一锅端’的极致全托体验。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('90ce9cef2e8bbfa5')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1210,9 +1093,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       斯坦福大学生物工程学者利用生成式人工智能模型成功构思微型病毒基因蓝图，探索全新生命形式设计
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 程序员还在为大模型写的业务代码内存泄漏抓狂，生物黑客已经开始让AI给病毒写源码了。别管公关稿里描绘的多么造福全人类，大家心里真正犯嘀咕的，恐怕是哪天模型写出个带有“幻觉”的超级病毒该找谁提工单修复。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3eaf3368903b28ab')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1239,9 +1119,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       算力租赁巨头三位联合创始人在上市后累计抛售套现33亿美元，伴随公司股价较峰值暴跌逾60%
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 嘴上全是算力革命星辰大海，兜里全是真金白银落袋为安。三位创始人用教科书级的离场步法给散户上了生动一课：显卡算力跑三年可能就变成折旧废铁，但换成美元存进私人账户可永远不会缩水。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a34495415501bb26')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1268,9 +1145,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       主管部门拟对达两万亿参数或极高算力规模的模型权重与23项关键技术收紧出口管制，设立备案审核通道
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 当模型参数跨过两万亿门槛，大模型就不再只是开发者社区的玩具，而是直接晋升为战略级“数字重器”。这记政策重锤不仅给开源套上了安全缰绳，也让那些过去整天指望免费白嫖东方大模型全套权重的海外开发者必须开始掂量合规代价了。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('8fc2625a98a30ca3')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1297,9 +1171,6 @@ Claude Code 现在会对每次发送的对话进行 gzip 压缩，因此可以�
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       前沿人工智能机构开源5010亿参数模型权重，采用惩罚废话词元的强化学习算法大幅精简推理输出
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ 雷达工程研判:</span> 终于有团队看不过去AI满嘴跑火车的恶习，直接在损失函数里给“说废话”戴上了电击项圈。五千亿参数规模如果真能做到字字珠玑，不仅救了被冗余词元掏空的显卡算力，更是拯救了快被AI车轱辘话逼疯的打工人。
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('09d2840f092fbba9')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">

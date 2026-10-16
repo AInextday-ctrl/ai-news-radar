@@ -845,99 +845,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
         </div>
       </section>
 
-      <!-- ========== FEATURED_EDITORIAL_START ========== -->
-    <section id="featured-editorial-lead" class="rounded-2xl p-5 sm:p-7 bg-white dark:bg-[#0c1222] border border-slate-200 dark:border-indigo-500/30 shadow-xl relative overflow-hidden transition-all my-6">
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-        <div class="flex items-center space-x-2.5">
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black bg-indigo-600 text-white shadow-sm shadow-indigo-500/30 tracking-wide uppercase">
-            <span>🏛️</span>
-            <span>RADAR EDITORIAL LEAD</span>
-          </span>
-          <span class="text-xs font-semibold text-slate-500 dark:text-slate-400">
-            2026-10-14 · Verified in Hardware Lab
-          </span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50 dark:bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-200 dark:border-indigo-800/60">
-            ✍️ Lead Author: Alex Lin (Founder & Principal Systems Architect)
-          </span>
-          <span class="text-xs text-slate-400 hidden sm:inline">· 12 min read · 3,800 words</span>
-        </div>
-      </div>
-
-      <div class="mt-5 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <div class="lg:col-span-8 space-y-3.5">
-          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug">
-            <a href="/articles/2026-10-14-claude-code-agent-guide" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-              Claude Code CLI & Terminal Autonomous Agent: Architecture, Shell Sandboxing & Enterprise Cost Optimization
-            </a>
-          </h2>
-          
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-sans">
-            An exhaustive technical teardown of Anthropic's official terminal AI coding agent, Claude Code. We dissect its native shell execution model, permission sandboxing, prompt caching economics, and how building private MCP servers delivers an 88% cost reduction in production.
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1">01 · Shell Sandboxing</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                Dual-tier permission gate with Docker/bubblewrap containment prevents destructive command execution while maintaining full git workflow autonomy.
-              </p>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-purple-600 dark:text-purple-400 uppercase tracking-wider mb-1">02 · Context Caching</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                Anthropic 5-minute prompt cache reduces repetitive codebase AST re-indexing costs by 87.5%, lowering multi-turn cost from $4.20 to $0.52 per task.
-              </p>
-            </div>
-            <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800">
-              <div class="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">03 · State Preservation</div>
-              <p class="text-xs text-slate-600 dark:text-slate-400 leading-normal">
-                Compact JSON state rollback protocol retains subagent execution history across session boundaries without triggering KV Cache eviction.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="lg:col-span-4 bg-slate-50 dark:bg-slate-900/90 rounded-xl p-4 border border-slate-200 dark:border-slate-800 flex flex-col justify-between h-full space-y-4">
-          <div>
-            <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 pb-2 border-b border-slate-200 dark:border-slate-800">
-              <span>⚡ Empirical Lab Benchmarks</span>
-              <span class="text-[10px] text-emerald-500 font-mono">100% REPRODUCIBLE</span>
-            </div>
-            <div class="mt-2.5 space-y-2 text-xs">
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Terminal Task Success:</span>
-                <span class="font-mono font-bold text-indigo-600 dark:text-indigo-400">84.2%</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Context Cache Savings:</span>
-                <span class="font-mono font-bold text-emerald-500">-87.5% Cost</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Tool Execution Latency:</span>
-                <span class="font-mono font-bold text-slate-700 dark:text-slate-200">1.4s / step</span>
-              </div>
-              <div class="flex justify-between text-slate-600 dark:text-slate-400">
-                <span>Adversarial Injection:</span>
-                <span class="font-mono font-bold text-purple-500">100% Blocked</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-            <a href="/articles/2026-10-14-claude-code-agent-guide" class="w-full py-2 px-3 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs text-center transition-all shadow-md flex items-center justify-center gap-1.5">
-              <span>📖 Read Full Technical Teardown (3,800 Words) →</span>
-            </a>
-            <a href="/articles" class="w-full py-1.5 px-3 rounded-lg bg-slate-200/80 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs text-center transition-all flex items-center justify-center gap-1">
-              <span>📚 Browse All 14 Flagship Engineering Guides</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- ========== FEATURED_EDITORIAL_END ========== -->
-
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
@@ -975,9 +882,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Within hours of opening pre-orders for its brand-new dual-screen foldable device, Apple announced that market demand has been nothing short of extraordinary. The massive influx of early orders quickly pushed delivery dates back by several months into
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Tim Cook's scarcity playbook never fails: keep initial production tight, and even a $2,000 experiment sells out instantly into next year. Tech fans love to complain about increment
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('bdca07f45aea4670')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1004,9 +908,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Official campaign finance disclosures reveal that Meta slashed roughly $25 million from its planned $65 million midterms budget, largely through refunds from a dedicated super PAC established to push back against state-level AI regulations. The scali
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Zuck realized that spending tens of millions to lobby against AI guardrails is basically wearing a neon sign that says 'I plan to break things.' Clawing back the cash improves oper
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('692de9fb6489e4ee')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1033,9 +934,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Anthropic announced that its AI model Claude has traced the origins of standard NIST ECDSA curve seeds back to a simple pseudorandom number generator and timestamps. Because these parameters were originally provided without explanation decades ago, t
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Cryptographers spent two decades theorizing brilliant NSA backdoors, only for Claude to discover an engineer just used a system timestamp to wrap up work before five o'clock. Burea
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a27ba3fff82853d0')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1062,9 +960,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       An investigative report revealed that a former controversial government spokesperson was falsely linked to an 'AI-powered rare earths mining' startup. The venture, originally an obscure Canadian copper-and-gold exploration shell, rebranded with buzzy
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Ten years ago you added '.com' to your company name, five years ago you claimed to be on the blockchain, and today you just throw 'AI' and 'rare-earth minerals' into a blender. It’
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('f8a2f7736f62a600')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1091,9 +986,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       SoftBank Group is actively weighing an acquisition of US security services behemoth Allied Universal at an equity valuation of around $18 billion. Chief Executive Masayoshi Son intends to use the company's vast real-world footprint as a launchpad for
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Masa Son finally found the ultimate destination for his billions: buy a massive army of mall security guards and replace them all with RoboCops. Say what you will about SoftBank's 
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d90a77f0b1e95641')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1120,9 +1012,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       High-level defense sources report that Elon Musk personally approached Donald Trump to advocate for slowing down the military-grade Starshield satellite services deployed in Ukraine, with Trump consenting to clear the path for the Pentagon to enforce
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Musk loves to play the innocent rocket engineer who hates politics, yet he effectively owns the global internet kill switch for active combat zones. When an eccentric billionaire h
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('551dee6ad79a30c1')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1149,9 +1038,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       The PostgreSQL Global Development Group has officially postponed the general availability of PostgreSQL 19 to mid-November, making the rare move of reverting up to ten previously accepted major features. Core maintainers explained that using LLM-assi
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Tech evangelists promised that AI would cut development cycles in half, but reality struck back hard: developers vibe-coded features, senior maintainers used AI to review them, and
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('48c7e4d01e4628de')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1178,9 +1064,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       An updated browser extension now transforms the conversational AI assistant into a full-fledged Chrome co-pilot capable of inspecting and interacting across open tabs. Beyond basic content summarization, the extension deploys direct computer-use acti
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Congratulations, the fifty chaotic tabs you've been hoarding for weeks now have a personal babysitter. Handing an autonomous AI complete visibility over your open windows will defi
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('90ce9cef2e8bbfa5')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1207,9 +1090,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       A bioengineering researcher from Stanford University and the Arc Institute detailed a breakthrough using generative AI to design genetic blueprints for microscopic viruses during a science seminar. Although physical synthetic life has not yet been gr
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> While software engineers still struggle with AI hallucinating broken code, bio-researchers are already letting algorithms script viral genomes. Beyond the noble PR promises of medi
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3eaf3368903b28ab')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1236,9 +1116,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Three co-founders of AI infrastructure provider CoreWeave have cashed out $3.3 billion in company stock since its IPO, including $2.4 billion in 2026 alone. The aggressive insider offloading coincides with a dramatic 60%+ collapse in share price from
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Founders love preaching the gospel of an infinite AI compute supercycle, but their broker accounts tell a much more pragmatic story. GPUs turn into rapidly depreciating scrap iron 
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a34495415501bb26')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1265,9 +1142,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Regulatory authorities are drafting export restrictions on 23 critical AI technologies, targeting model weights, source code, and training workflows for models reaching 10^26 FLOPs or 2 trillion parameters. While an expedited channel exists for regis
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Once model parameters cross the two-trillion mark, algorithms stop being open-source hackathon toys and graduate into strategic national armaments. This regulatory shift slaps a he
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('8fc2625a98a30ca3')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
@@ -1294,9 +1168,6 @@ Same model. Same tasks. Same tests. Claude Code paid 1.6× more per fixed GitH
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       AI startup Reflection AI released the full weights of Beam, a 501-billion-parameter open model under the Apache 2.0 license. The team incorporated reinforcement learning specifically designed to penalize redundant tokens, effectively curbing excessiv
                     </p>
-                    <div class="mt-2 p-2 rounded-lg bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200/60 dark:border-indigo-800/50 text-[11px] text-indigo-950 dark:text-indigo-200 leading-relaxed font-sans">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400">✦ Editorial Takeaway:</span> Someone finally lost patience with conversational AI's habit of bloviating and slapped an RL shock collar on unnecessary tokens. If a 501B beast actually learns to keep its mouth s
-                    </div>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
                     <button type="button" onclick="event.stopPropagation(); openAiNewsModal('09d2840f092fbba9')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
