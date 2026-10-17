@@ -6,7 +6,7 @@
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return '';
       if (u.startsWith('/') || u.startsWith('./')) {
         if (u.includes('/assets/tool-previews/') && !u.includes('?v=')) {
-          return u + '?v=2';
+          return u + '?v=3';
         }
         return u;
       }
@@ -4297,14 +4297,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
       // 核心强化：若具有工具 ID，优先强制采用同源本地持久化的高清 WebP 封面，杜绝外链阻断
       if (item.id && (!previewImg || previewImg.startsWith('http') || previewImg.includes('opengraph.githubassets.com'))) {
-        previewImg = `/assets/tool-previews/${item.id}.webp?v=2`;
+        previewImg = `/assets/tool-previews/${item.id}.webp?v=3`;
       }
       if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
-        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=2` : "");
+        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=3` : "");
       }
       if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
-        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=2` : "";
+        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=3` : "";
       }
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
       if (!previewImg) {
