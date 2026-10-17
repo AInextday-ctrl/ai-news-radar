@@ -6,7 +6,7 @@
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return '';
       if (u.startsWith('/') || u.startsWith('./')) {
         if (u.includes('/assets/tool-previews/') && !u.includes('?v=')) {
-          return u + '?v=3';
+          return u + '?v=4';
         }
         return u;
       }
@@ -4294,17 +4294,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         : (isHfTool ? (isZh ? '🤗 在线试玩' : '🤗 Try Space') : (isZh ? '🚀 访问官网' : '🚀 Visit Site'));
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
-      let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
-      // 核心强化：若具有工具 ID，优先强制采用同源本地持久化的高清 WebP 封面，杜绝外链阻断
-      if (item.id && (!previewImg || previewImg.startsWith('http') || previewImg.includes('opengraph.githubassets.com'))) {
-        previewImg = `/assets/tool-previews/${item.id}.webp?v=3`;
-      }
+      let previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : ((item.preview_images && item.preview_images[0]) || item.image_url || "");
       if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
-        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=3` : "");
+        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : "");
       }
       if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
-        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=3` : "";
+        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : "";
       }
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
       if (!previewImg) {
@@ -6101,7 +6097,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
-        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
+        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : `/data/latest_news.json?t=${Math.floor(Date.now() / 60000)}`;
         const res = await fetch(fetchUrl, {
           cache: isManual ? 'reload' : 'no-cache'
         });
@@ -6164,13 +6160,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           console.warn("curated prompt/workflow library fetch fallback:", e);
         }
 
-        // 性能防护锁：若数据版本未发生变更且非手动点击，跳过全量 DOM 抹除与重渲染，彻底杜绝后台轮询造成的卡顿
-        const isSameUpdate = cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
+        // 性能防护锁：仅当已完成首次渲染且后台轮询版本未变时才跳过
+        const isSameUpdate = window._hasInitialRendered && cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
         cachedData = data;
         if (isSameUpdate && !isManual) {
           refreshCountdown = 180;
           return;
         }
+        window._hasInitialRendered = true;
 
         // 轻量保存最新更新时间戳，避免将数兆数据序列化进 sessionStorage 导致主线程 GC 挂起与存储超限
         try {
@@ -8218,12 +8215,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 启动前快速尝试从会话缓存恢复，杜绝大 JSON 异步拉取间隙的空白屏
     try {
-      const cachedStr = sessionStorage.getItem('ainews_cached_data');
+      sessionStorage.removeItem('ainews_cached_data');
+      sessionStorage.removeItem('ainews_cached_data_v52');
+      const cachedStr = sessionStorage.getItem('ainews_cached_data_v53');
       if (cachedStr && !cachedData) {
         const parsed = JSON.parse(cachedStr);
-        if (parsed && (Date.now() - (parsed._saved_at || 0) < 1800000)) {
+        if (parsed && (Date.now() - (parsed._saved_at || 0) < 300000)) {
           cachedData = parsed;
           renderUI(parsed);
+          window._hasInitialRendered = true;
         }
       }
     } catch (e) {}
