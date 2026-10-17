@@ -233,6 +233,19 @@ def sanitize_tool_media(it: Dict[str, Any]) -> Dict[str, Any]:
     if "microlink.io" in cur_img or "photo-1618005182384-a83a8bd57fbe" in cur_img:
         cur_img = ""
 
+    # 1. 独立官网真实界面高清截图 (mshots)
+    import urllib.parse
+    off_url = str(it.get("official_url") or it.get("url") or "").strip()
+    clean_off = off_url.split('#')[0]
+    clean_off = re.sub(r'[\?&](ref|utm_[^&=]+)=[^&]*', '', clean_off).rstrip('?&').strip()
+    if clean_off and clean_off.startswith('http') and 'github.com' not in clean_off and 'huggingface.co' not in clean_off:
+        encoded_site = urllib.parse.quote(clean_off, safe='')
+        mshot_url = f"https://s0.wp.com/mshots/v1/{encoded_site}?w=1280&h=720"
+        if mshot_url not in clean_previews:
+            clean_previews.insert(0, mshot_url)
+        if not cur_img:
+            cur_img = mshot_url
+
     if gh_match and not gh_match.group(2).endswith(('.png', '.jpg', '.jpeg', '.svg', '.json', '.')):
         gh_repo = f"{gh_match.group(1)}/{gh_match.group(2).rstrip('.git')}"
         og_url = f"https://opengraph.githubassets.com/1/{gh_repo}"

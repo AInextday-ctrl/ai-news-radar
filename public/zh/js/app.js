@@ -4286,17 +4286,23 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
       let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
-      // 绝不允许 Gemini 宣传物料泄露到其它独立产品卡片
       if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
         previewImg = safeImgs[0] || "";
       }
-      // 自动从 GitHub 提取 100% 稳定的高清预览图 (OpenGraph CDN)，避免 fragile microlink 快照
-      if (!previewImg || previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe')) {
-        const fullUrl = `${officialUrl} ${item.url || ''}`;
-        const ghMatch = fullUrl.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
-        if (ghMatch && !ghMatch[2].includes('.')) {
-          previewImg = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
+      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
+        previewImg = "";
+      }
+      const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
+      if (!previewImg) {
+        if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
+          previewImg = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
+        } else {
+          const fullUrl = `${cleanOfficial} ${item.url || ''} ${item.source_url || ''}`;
+          const ghMatch = fullUrl.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+          if (ghMatch && !ghMatch[2].includes('.')) {
+            previewImg = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
+          }
         }
       }
 
@@ -7794,21 +7800,29 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 轮播画廊设置 (严禁 Gemini 官方宣传物料泄露到其它独立产品)
       const isGeminiItem = (item.app_name || item.title || '').toLowerCase().includes('gemini');
       let galleryImages = (item.preview_images && item.preview_images.length > 0)
-        ? item.preview_images
+        ? [...item.preview_images]
         : (item.image_url ? [item.image_url] : []);
       if (!isGeminiItem) {
         galleryImages = galleryImages.filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
       }
-      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe'));
+      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe') && !img.includes('microlink.io'));
+
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
-      if (galleryImages.length === 0 && cleanOfficial) {
-        const ghMatch = (cleanOfficial + ' ' + (item.url || '')).match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+      // 如果拥有独立官网，确保画廊首图或候选中包含官网首页高清实拍截图
+      if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
+        const siteShot = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
+        if (!galleryImages.includes(siteShot)) {
+          galleryImages.unshift(siteShot);
+        }
+      }
+
+      // 如果画廊暂无内容，使用 GitHub OpenGraph
+      if (galleryImages.length === 0) {
+        const fullTarget = `${cleanOfficial} ${item.url || ''} ${item.source_url || ''}`;
+        const ghMatch = fullTarget.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
         if (ghMatch && !ghMatch[2].includes('.')) {
           galleryImages = [`https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`];
         }
-      }
-      if (galleryImages.length === 0) {
-        galleryImages = ['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80'];
       }
       currentToolImages = galleryImages;
       currentToolImageIndex = 0;
@@ -7834,14 +7848,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (currentToolImageIndex >= currentToolImages.length) currentToolImageIndex = 0;
 
       if (imgEl) {
+        imgEl.style.display = 'block';
         imgEl.onerror = function() {
           this.onerror = null;
           const cleanTarget = formatCleanToolUrl(currentToolModalItem?.official_url || currentToolModalItem?.url || '');
-          const ghMatch = cleanTarget.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
-          if (ghMatch && !ghMatch[2].includes('.')) {
-            this.src = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
+          if (cleanTarget && !cleanTarget.includes('github.com') && !cleanTarget.includes('huggingface.co')) {
+            this.src = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanTarget)}?w=1280&h=720`;
           } else {
-            this.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80';
+            const ghMatch = (cleanTarget + ' ' + (currentToolModalItem?.url || '') + ' ' + (currentToolModalItem?.source_url || '')).match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+            if (ghMatch && !ghMatch[2].includes('.')) {
+              this.src = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
+            } else {
+              this.style.display = 'none';
+            }
           }
         };
         imgEl.src = currentToolImages[currentToolImageIndex];
