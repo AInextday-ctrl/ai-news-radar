@@ -1044,9 +1044,14 @@ def save_news(items: list):
             p_imgs = [img for img in p_imgs if "3CyW24Pkz4o" not in img and "feeb7666" not in img and "photo-1618005182384-a83a8bd57fbe" not in img]
             target_dom = (it.get("official_url") or it.get("url") or "").split("?")[0]
             if not p_imgs and target_dom and target_dom != "#" and "producthunt.com" not in target_dom:
-                enc = urllib.parse.quote(target_dom, safe="")
-                p_imgs = [f"https://api.microlink.io/?url={enc}&screenshot=true&meta=false&embed=screenshot.url"]
+                gh_m = re.search(r'github\.com/([^/]+/[^/?#]+)', target_dom)
+                if gh_m and not gh_m.group(1).endswith('.'):
+                    p_imgs = [f"https://opengraph.githubassets.com/1/{gh_m.group(1)}"]
+                else:
+                    p_imgs = []
             it["preview_images"] = p_imgs
+            if not it.get("image_url") and p_imgs:
+                it["image_url"] = p_imgs[0]
 
     # 4. 【核心内容质量门禁与跨版块降级隐藏机制】：坚决剔除任何无法展现具体事实的空壳或伪造内容
     valid_master_items = []
@@ -1365,10 +1370,31 @@ def save_news(items: list):
             seen_keys.add(tk)
             clean_tools.append(it)
 
-        web_t = [x for x in clean_tools if x.get("tool_origin") == "web"]
-        gh_t = [x for x in clean_tools if x.get("tool_origin") == "github"]
-        hf_t = [x for x in clean_tools if x.get("tool_origin") == "huggingface"]
-        other_t = [x for x in clean_tools if x.get("tool_origin") not in ("web", "github", "huggingface")]
+        # 雷达优先定位：最新爆发黑马项目 (Breakout Radar Discoveries) 置顶呈现
+        breakout_tools = []
+        regular_tools = []
+
+        for x in clean_tools:
+            wk = int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0)
+            is_bo = bool(x.get("is_breakout"))
+            is_curated_base = bool(x.get("id", "").startswith("tool-"))
+
+            if (wk >= 250 or is_bo) and not is_curated_base:
+                breakout_tools.append(x)
+            else:
+                regular_tools.append(x)
+
+        # 爆发黑马项目按本周暴涨星数倒序排列
+        breakout_tools.sort(key=lambda x: (
+            int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0),
+            int(x.get("utility_score") or 80),
+            parse_time_for_sort(x)
+        ), reverse=True)
+
+        web_t = [x for x in regular_tools if x.get("tool_origin") == "web"]
+        gh_t = [x for x in regular_tools if x.get("tool_origin") == "github"]
+        hf_t = [x for x in regular_tools if x.get("tool_origin") == "huggingface"]
+        other_t = [x for x in regular_tools if x.get("tool_origin") not in ("web", "github", "huggingface")]
         
         web_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
         gh_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("weekly_stars", 0), x.get("utility_score", 80), x.get("stars", 0)), reverse=True)
@@ -1390,7 +1416,7 @@ def save_news(items: list):
                 interleaved.append(hf_t[hi])
                 hi += 1
         interleaved.extend(other_t)
-        return interleaved
+        return breakout_tools + interleaved
 
     # 3. 构建 24/48 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}

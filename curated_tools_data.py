@@ -68,7 +68,7 @@ CURATED_AI_TOOLS = [
         "tags": ["💻 AI 编程与开发", "开源神器", "本周飙升", "智能体"],
         "is_recent_24h": True,
         "stars": 24500,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-openhands",
@@ -209,8 +209,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 现象级爆款 · 免装Web",
         "growth_badge_en": "🔥 Viral Phenomenon · Web App",
         "utility_score": 99,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Fbolt.new&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Fbolt.new&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/stackblitz/bolt.new",
+        "preview_images": ["https://opengraph.githubassets.com/1/stackblitz/bolt.new"],
         "source": "StackBlitz",
         "author": "StackBlitz",
         "raw_published_at": "2026-10-14T00:00:00Z",
@@ -312,7 +312,7 @@ CURATED_AI_TOOLS = [
         "tags": ["🔌 模型 API 与本地部署", "开源高星", "标杆工具"],
         "is_recent_24h": True,
         "stars": 118500,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-vllm",
@@ -393,8 +393,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 桌面首选 · 免命令行",
         "growth_badge_en": "🔥 Desktop GUI · Zero Terminal",
         "utility_score": 97,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Flmstudio.ai&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Flmstudio.ai&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/lmstudio-ai/lms",
+        "preview_images": ["https://opengraph.githubassets.com/1/lmstudio-ai/lms"],
         "source": "LM Studio",
         "author": "LM Studio Team",
         "raw_published_at": "2026-10-14T00:00:00Z",
@@ -496,7 +496,7 @@ CURATED_AI_TOOLS = [
         "tags": ["🎬 视频剪辑与生成", "开源神器", "AI视觉"],
         "is_recent_24h": True,
         "stars": 69800,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-whisper-webgpu",
@@ -556,7 +556,7 @@ CURATED_AI_TOOLS = [
         "tags": ["🎙️ 声音克隆与音频", "WebGPU", "即开即用"],
         "is_recent_24h": True,
         "stars": 8900,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-liveportrait",
@@ -680,7 +680,7 @@ CURATED_AI_TOOLS = [
         "tags": ["🧠 知识库与学术研究", "开源高星", "生产力"],
         "is_recent_24h": True,
         "stars": 31500,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-open-webui",
@@ -804,7 +804,7 @@ CURATED_AI_TOOLS = [
         "tags": ["🤖 智能体工作流编排", "开源神器", "企业级"],
         "is_recent_24h": True,
         "stars": 68500,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-n8n",
@@ -889,8 +889,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 搜索颠覆者 · 免装Web",
         "growth_badge_en": "🔥 Search Pioneer · Web App",
         "utility_score": 98,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Fwww.perplexity.ai&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Fwww.perplexity.ai&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/perplexityai/model-cards",
+        "preview_images": ["https://opengraph.githubassets.com/1/perplexityai/model-cards"],
         "source": "Perplexity AI",
         "author": "Perplexity",
         "raw_published_at": "2026-10-15T00:00:00Z",
@@ -949,8 +949,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 3D建模黑马 · 秒级生成",
         "growth_badge_en": "🔥 3D Breakthrough · Web App",
         "utility_score": 96,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Fwww.tripo3d.ai&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Fwww.tripo3d.ai&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/VAST-AI-Research/TripoSR",
+        "preview_images": ["https://opengraph.githubassets.com/1/VAST-AI-Research/TripoSR"],
         "source": "Tripo AI",
         "author": "Tripo",
         "raw_published_at": "2026-10-14T00:00:00Z",
@@ -1009,8 +1009,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 办公利器 · 免装Web",
         "growth_badge_en": "🔥 Office Hero · Web App",
         "utility_score": 97,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Fgamma.app&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Fgamma.app&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/gamma-app",
+        "preview_images": ["https://opengraph.githubassets.com/1/gamma-app"],
         "source": "Gamma App",
         "author": "Gamma",
         "raw_published_at": "2026-10-14T00:00:00Z",
@@ -1069,8 +1069,8 @@ CURATED_AI_TOOLS = [
         "growth_badge_zh": "🔥 开发者顶流 · AI编辑器",
         "growth_badge_en": "🔥 Dev Phenomenon · AI Editor",
         "utility_score": 99,
-        "image_url": "https://api.microlink.io/?url=https%3A%2F%2Fwww.cursor.com&screenshot=true&meta=false&embed=screenshot.url",
-        "preview_images": ["https://api.microlink.io/?url=https%3A%2F%2Fwww.cursor.com&screenshot=true&meta=false&embed=screenshot.url"],
+        "image_url": "https://opengraph.githubassets.com/1/getcursor/cursor",
+        "preview_images": ["https://opengraph.githubassets.com/1/getcursor/cursor"],
         "source": "Cursor",
         "author": "Anysphere",
         "raw_published_at": "2026-10-15T00:00:00Z",
@@ -1108,7 +1108,7 @@ CURATED_AI_TOOLS = [
         "tags": ["💻 AI 编程与开发", "编辑器", "开发者标配"],
         "is_recent_24h": True,
         "stars": 0,
-        "is_pinned": True
+        "is_pinned": False
     },
     {
         "id": "tool-jan",
@@ -1288,6 +1288,6 @@ CURATED_AI_TOOLS = [
         "tags": ["🎨 图像设计与 3D", "开源神器", "架构绘图"],
         "is_recent_24h": True,
         "stars": 93800,
-        "is_pinned": True
+        "is_pinned": False
     }
 ]

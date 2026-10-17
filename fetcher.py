@@ -1637,6 +1637,7 @@ BAD_TOOL_REPO_NAMES = {
     "agent-design-patterns", "best-of-agent-harnesses", "makemoneywithai",
     "red", "kubeterm", "cryptocurrency.cv", "labtether", "peakhour 6", "the sentient world",
     # Junk prompt/markdown collections, non-tool repos, and duplicates
+    "plugins", "cursor/plugins", "heretic", "p-e-w/heretic",
     "skills", "scientific-agent-skills", "claude-plugins-official", "tencentdb-agent-memory",
     "solidcraft", "freellmapi", "esp32-iphone-agent", "free-claude-code", "context-mode",
     "moli", "diagram-design", "claude-mem", "knowledge-work-plugins", "universal-modder",
@@ -1792,7 +1793,7 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
             clean_full_name = full_name.lower().strip()
             if clean_repo_name in BAD_TOOL_REPO_NAMES or clean_full_name in BAD_TOOL_REPO_NAMES:
                 continue
-            if any(bad in clean_repo_name for bad in ["awesome-", "prompt-", "prompts-", "-skills", "cheatsheet", "roadmap", "interview", "papers-with"]):
+            if any(bad in clean_repo_name for bad in ["awesome-", "prompt-", "prompts-", "-skills", "skills", "cheatsheet", "roadmap", "interview", "papers-with", "plugins", "-plugins", "free-api"]):
                 continue
 
             # 严格英文抓取门禁：不爬取非英文描述或无描述仓库
@@ -2098,11 +2099,12 @@ def scrape_product_hunt_details(product_url: str) -> Dict[str, Any]:
             if clean_src not in preview_images:
                 preview_images.append(clean_src)
 
-    # 兜底：若未抓取到产品截图，利用官网生成高清实测截图
+    # 兜底：若未抓取到产品截图，若指向 GitHub 仓库则采用 OpenGraph 高清图，否则留空由前端展示主题渐变卡
     if not preview_images and data.get('official_url') and not ('producthunt.com' in data['official_url'] or data['official_url'] == '#'):
         clean_target = data['official_url'].split('?')[0]
-        ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
-        preview_images.append(ss_url)
+        gh_m = re.search(r'github\.com/([^/]+/[^/?#]+)', clean_target)
+        if gh_m and not gh_m.group(1).endswith('.'):
+            preview_images.append(f"https://opengraph.githubassets.com/1/{gh_m.group(1)}")
 
     data['preview_images'] = preview_images[:6]
 
@@ -2274,8 +2276,9 @@ def fetch_product_hunt_tools(max_items: int = 25) -> List[Dict[str, Any]]:
 
             if not preview_imgs and official_url and not ('producthunt.com' in official_url or official_url == '#'):
                 clean_target = official_url.split('?')[0]
-                ss_url = f"https://api.microlink.io/?url={urllib.parse.quote(clean_target, safe='')}&screenshot=true&meta=false&embed=screenshot.url"
-                preview_imgs = [ss_url]
+                gh_m = re.search(r'github\.com/([^/]+/[^/?#]+)', clean_target)
+                if gh_m and not gh_m.group(1).endswith('.'):
+                    preview_imgs = [f"https://opengraph.githubassets.com/1/{gh_m.group(1)}"]
 
             if not is_primarily_english(hook) or not is_primarily_english(app_name):
                 return None

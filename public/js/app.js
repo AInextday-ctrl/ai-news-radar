@@ -4185,10 +4185,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
         previewImg = safeImgs[0] || "";
       }
-      // 如果没有真实大图或者是 unsplash 占位图，且有真实官网，采用实时高清快照
-      if ((!previewImg || previewImg.includes('photo-1618005182384-a83a8bd57fbe')) && officialUrl && officialUrl !== '#' && !officialUrl.includes('producthunt.com')) {
-        const cleanOfficial = officialUrl.split('?')[0];
-        previewImg = `https://api.microlink.io/?url=${encodeURIComponent(cleanOfficial)}&screenshot=true&meta=false&embed=screenshot.url`;
+      // 自动从 GitHub 提取 100% 稳定的高清预览图 (OpenGraph CDN)，避免 fragile microlink 快照
+      if (!previewImg || previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe')) {
+        const fullUrl = `${officialUrl} ${item.url || ''}`;
+        const ghMatch = fullUrl.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+        if (ghMatch && !ghMatch[2].includes('.')) {
+          previewImg = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
+        }
       }
 
       const itemId = escapeHtml(item.id || item.url || '');
@@ -4197,21 +4200,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         <article onclick="openToolDetailModal('${itemId}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
           <!-- 顶部视觉高光 Preview Banner -->
           <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0">
-            ${previewImg ? `
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="if(!this.src.includes('microlink.io') && '${escapeHtml(officialUrl)}' && !'${escapeHtml(officialUrl)}'.includes('producthunt.com')){ this.src='https://api.microlink.io/?url=${encodeURIComponent(officialUrl.split('?')[0])}&screenshot=true&meta=false&embed=screenshot.url'; } else { this.style.opacity='0'; }">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent"></div>
-            ` : `
-              <div class="w-full h-full bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center">
-                <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl text-emerald-400">
-                  ${iconSvg}
-                </div>
+            <!-- 场景主题渐变兜底层 (确保任何情况下绝无死黑方块) -->
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
+              <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl text-emerald-400">
+                ${iconSvg}
               </div>
-            `}
+            </div>
+            ${previewImg ? `
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="this.remove()">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
+            ` : ''}
             
             <!-- 悬浮 Logo 微图标 -->
             <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
               <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
-                ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover">` : iconSvg}
+                ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
               </div>
               <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
             </div>
@@ -7369,10 +7372,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe'));
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
-      if (galleryImages.length === 0 && cleanOfficial && cleanOfficial !== '#' && !cleanOfficial.includes('producthunt.com')) {
-        galleryImages = [
-          `https://api.microlink.io/?url=${encodeURIComponent(cleanOfficial.split('?')[0])}&screenshot=true&meta=false&embed=screenshot.url`
-        ];
+      if (galleryImages.length === 0 && cleanOfficial) {
+        const ghMatch = (cleanOfficial + ' ' + (item.url || '')).match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+        if (ghMatch && !ghMatch[2].includes('.')) {
+          galleryImages = [`https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`];
+        }
       }
       if (galleryImages.length === 0) {
         galleryImages = ['https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80'];
@@ -7404,8 +7408,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         imgEl.onerror = function() {
           this.onerror = null;
           const cleanTarget = formatCleanToolUrl(currentToolModalItem?.official_url || currentToolModalItem?.url || '');
-          if (cleanTarget && !cleanTarget.includes('producthunt.com') && !this.src.includes('microlink.io')) {
-            this.src = `https://api.microlink.io/?url=${encodeURIComponent(cleanTarget.split('?')[0])}&screenshot=true&meta=false&embed=screenshot.url`;
+          const ghMatch = cleanTarget.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
+          if (ghMatch && !ghMatch[2].includes('.')) {
+            this.src = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
           } else {
             this.src = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1000&auto=format&fit=crop&q=80';
           }
