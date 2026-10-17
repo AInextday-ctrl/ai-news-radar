@@ -1,8 +1,5 @@
-"""
-tests/test_data_quality_gate.py
-不可绕过的自动化数据质量验收门禁 (Quality Gate Suite)
-确保入库与发布数据 100% 纯净、真实、无垃圾拼接痕迹。
-"""
+from __future__ import annotations
+
 import os
 import sys
 import json
@@ -14,7 +11,6 @@ if WORKSPACE_DIR not in sys.path:
     sys.path.insert(0, WORKSPACE_DIR)
 
 from processor import has_chinglish_seams
-from main import is_meaningful_tweet
 
 
 def run_quality_gate_assertions(payload: dict) -> bool:
@@ -83,6 +79,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     print(f"✅ 断言 4 通过: 零非 AI 视频与套壳前缀 (共 {len(videos)} 个优质视频)")
 
     # 断言 5（零低熵/币圈垃圾推文）
+    from main import is_meaningful_tweet
     celebrities = grouped.get("celebrity", [])
     viral_tickers = payload.get("viral_ticker_tweets", [])
     spam_tweets = []

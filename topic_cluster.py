@@ -20,12 +20,14 @@ topic_cluster.py - 24h 核心话题专题动态 AI 聚类与透视引擎 (Dynami
   - 注入 latest_news.json 中的 "topic_focus" 字段
 """
 
+from __future__ import annotations
+
 import os
 import sys
 import json
 import re
 from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 
 try:
     if hasattr(sys.stdout, "reconfigure"):

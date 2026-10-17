@@ -4,6 +4,8 @@ to clean, translate, summarize and categorize AI news.
 Guarantees 100% pure Chinese translation for titles, summaries, tags and categories.
 """
 
+from __future__ import annotations
+
 import sys
 
 try:
@@ -17,7 +19,7 @@ except Exception:
 import os
 import re
 import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any, Optional, Tuple
 import httpx
 try:
     from dotenv import load_dotenv
