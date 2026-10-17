@@ -79,15 +79,20 @@ def _get_cached_topic_focus_if_fresh(interval_hours: float) -> Optional[List[Dic
 
 
 def get_gemini_client():
-    """获取 Gemini API 客户端"""
-    if not GEMINI_API_KEY or GEMINI_API_KEY == "your_gemini_api_key_here":
-        return None
-    try:
-        from google import genai
-        return genai.Client(api_key=GEMINI_API_KEY)
-    except Exception as e:
-        print(f"⚠️ [topic_cluster] 无法初始化 Gemini 客户端: {e}")
-        return None
+    """获取 Gemini API 客户端，支持多 Key 自动适配与主备容灾"""
+    for candidate_key in [
+        os.getenv("GEMINI_API_KEY_TOPICS", "").strip(),
+        os.getenv("GEMINI_API_KEY", "").strip(),
+        os.getenv("GEMINI_API_KEY_NEWS", "").strip(),
+    ]:
+        if candidate_key and candidate_key != "your_gemini_api_key_here":
+            try:
+                from google import genai
+                return genai.Client(api_key=candidate_key)
+            except Exception as e:
+                print(f"⚠️ [topic_cluster] 候选 Key 初始化异常: {e}")
+                continue
+    return None
 
 
 def _load_curated_workflows() -> List[Dict[str, Any]]:

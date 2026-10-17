@@ -267,15 +267,19 @@ def free_translate_en(text: str) -> str:
 
 
 def get_gemini_client():
-    """Initialize Google GenAI client if key is configured."""
-    if not GEMINI_API_KEY or GEMINI_API_KEY == "your_gemini_api_key_here":
-        return None
-    try:
-        from google import genai
-        return genai.Client(api_key=GEMINI_API_KEY)
-    except Exception as e:
-        print(f"[Warning] Failed to initialize Gemini client: {e}")
-        return None
+    """Initialize Google GenAI client. Prioritizes dedicated GEMINI_API_KEY_NEWS with fallback to GEMINI_API_KEY."""
+    for candidate_key in [
+        os.getenv("GEMINI_API_KEY_NEWS", "").strip(),
+        os.getenv("GEMINI_API_KEY", "").strip(),
+    ]:
+        if candidate_key and candidate_key != "your_gemini_api_key_here":
+            try:
+                from google import genai
+                return genai.Client(api_key=candidate_key)
+            except Exception as e:
+                print(f"[Warning] Failed to initialize Gemini client with candidate key: {e}")
+                continue
+    return None
 
 
 import html
