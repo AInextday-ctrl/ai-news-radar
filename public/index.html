@@ -1238,6 +1238,32 @@ Claude Code now gzips the conversation i
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('1341315e65c9a606')" itemscope itemtype="https://schema.org/NewsArticle">
+                
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Bloomberg</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('1341315e65c9a606')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
+                      A profile of Blackstone President Jon Gray, who is making AI his biggest bet, has built a $200B data center empire, and 
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      Blackstone President Jon Gray has made artificial intelligence the firm's biggest bet, amassing a global data center portfolio valued at over $200 billion. Beyond expanding physical infrastructure, Blackstone is partnering with Google on a cloud vent
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('1341315e65c9a606')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-15/blackstone-s-huge-ai-bet-runs-from-data-centers-to-google-and-nvidia-deals?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5MjIxMjkwMywiZXhwIjoxNzkyODE3NzAzLCJhcnRpY2xlSWQiOiJUTVk1WldLR1pBS0UwMCIsImJjb25uZWN0SWQiOiIwNEFGQkMxQkYyMTA0NUVEODg3MzQxQkQwQzIyNzRBMCJ9.lrEYFQDuJpd9y4WsdMU9WF6koERaL7yVLSAh_CCOb1I" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('58d8572ce3b00206')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/06/deepseek_red_whale.png&w=480&output=webp&q=80" alt="Deepseek V4.1 Flash 1017 beats larger rivals in agentic tasks while once again massively cutting per-task costs" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
