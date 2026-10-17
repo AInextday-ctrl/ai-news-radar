@@ -86,7 +86,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.ft.com/v3/image/raw/https%253A%252F%252Fcms-image-bucket-productionv3-ap-northeast-1-a7d2.s3.ap-northeast-1.amazonaws.com%252Fimages%252F7%252F1%252F2%252F1%252F13321217-1-eng-GB%252F5048cfe2e933-2026-09-16T052207Z_1942961052_RC2IEGAL7HPN_RTRMADP_3_SK-HYNIX-INTEL-USA.JPG%3Ffit%3Dcover%26gravity%3Dfaces%26dpr%3D2%26quality%3Dmedium%26source%3Dnar-cms%26format%3Djpg%26width%3D1260%26height%3D630&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//www-cdn.anthropic.com/images/4zrzovbb/website/f887bbe389a32292f37fd38e5515da404a384d0f-2000x1125.jpg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css">
   <link rel="preload" href="/js/app.min.js" as="script">
   <style>
@@ -412,17 +412,17 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-indigo-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm" id="badge-count-all">384</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-indigo-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm" id="badge-count-all">386</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">141</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-news">142</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
             <span id="nav-text-celebrity" class="truncate font-semibold">Social Radar</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">148</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">149</span>
           </button>
           <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🛠️</span>
@@ -866,8 +866,34 @@ Check out our guide to get started:
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('1453f9b4274086a6')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//www-cdn.anthropic.com/images/4zrzovbb/website/f887bbe389a32292f37fd38e5515da404a384d0f-2000x1125.jpg&w=480&output=webp&q=80" alt="Survey of Anthropic staffers and US adults: 39% of US adults vs. 91% of staffers expect AI will be able to make a Nobel-" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between space-y-2">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span>Source: Anthropic</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('1453f9b4274086a6')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
+                      Survey of Anthropic staffers and US adults: 39% of US adults vs. 91% of staffers expect AI will be able to make a Nobel-
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
+                      In August 2026, Anthropic surveyed its staff and the US public regarding the economic impacts of AI. Results indicate a sharp divide: while 91% of company insiders expect AI to make Nobel-level scientific breakthroughs by 2030, only 39% of the genera
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-1 gap-2">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('1453f9b4274086a6')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.anthropic.com/research/ai-expectations-gap" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('f83cbbb328acc58c')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//images.ft.com/v3/image/raw/https%253A%252F%252Fcms-image-bucket-productionv3-ap-northeast-1-a7d2.s3.ap-northeast-1.amazonaws.com%252Fimages%252F7%252F1%252F2%252F1%252F13321217-1-eng-GB%252F5048cfe2e933-2026-09-16T052207Z_1942961052_RC2IEGAL7HPN_RTRMADP_3_SK-HYNIX-INTEL-USA.JPG%3Ffit%3Dcover%26gravity%3Dfaces%26dpr%3D2%26quality%3Dmedium%26source%3Dnar-cms%26format%3Djpg%26width%3D1260%26height%3D630&w=480&output=webp&q=80" alt="Intel CEO Lip-Bu Tan says the Trump administration does not have &quot;any policy&quot; to use a minority stake in Intel" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//images.ft.com/v3/image/raw/https%253A%252F%252Fcms-image-bucket-productionv3-ap-northeast-1-a7d2.s3.ap-northeast-1.amazonaws.com%252Fimages%252F7%252F1%252F2%252F1%252F13321217-1-eng-GB%252F5048cfe2e933-2026-09-16T052207Z_1942961052_RC2IEGAL7HPN_RTRMADP_3_SK-HYNIX-INTEL-USA.JPG%3Ffit%3Dcover%26gravity%3Dfaces%26dpr%3D2%26quality%3Dmedium%26source%3Dnar-cms%26format%3Djpg%26width%3D1260%26height%3D630&w=480&output=webp&q=80" alt="Intel CEO Lip-Bu Tan says the Trump administration does not have &quot;any policy&quot; to use a minority stake in Intel" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -1147,32 +1173,6 @@ Check out our guide to get started:
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.bloomberg.com/news/articles/2026-10-16/softbank-is-said-to-weigh-buying-largest-us-security-firm-allied" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('551dee6ad79a30c1')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//www.telegraph.co.uk/content/dam/briefs/2026/10/16/TELEMMGLPICT000425430823_17921709154540_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwarI9ukQAzz8J0u7PEbMdV0.jpeg%3Fimpolicy%3DOG-Standard&w=480&output=webp&q=80" alt="Sources: Elon Musk approached Trump with the idea of slowing down Starshield in Ukraine; source: Trump agreed, paving th" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between space-y-2">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span>Source: Telegraph</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('551dee6ad79a30c1')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
-                      Sources: Elon Musk approached Trump with the idea of slowing down Starshield in Ukraine; source: Trump agreed, paving th
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      High-level defense sources report that Elon Musk personally approached Donald Trump to advocate for slowing down the military-grade Starshield satellite services deployed in Ukraine, with Trump consenting to clear the path for the Pentagon to enforce
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-1 gap-2">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('551dee6ad79a30c1')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 hover:from-indigo-500/20 hover:to-purple-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80 text-xs font-semibold transition-all shadow-sm cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.telegraph.co.uk/world-news/2026/10/16/musk-approached-trump-slow-down-starlink-help-ukraine/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
@@ -1747,7 +1747,7 @@ Check out our guide to get started:
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-leader">🐦 Frontier Feed</span>
-              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">148</span>
+              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">149</span>
             </button>
             <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h Trending Buzz</span>
