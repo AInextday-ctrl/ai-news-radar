@@ -1,9 +1,110 @@
 {
-  "updated_at": "2026-10-17T10:20:55.136223+00:00",
+  "updated_at": "2026-10-17T10:37:47.914680+00:00",
   "topics": [
     {
-      "topic_id": "topic_open_source_edge_efficiency",
+      "topic_id": "topic_agentic_workflows_mcp",
       "heat_score": 9.8,
+      "badge_zh": "⚡ 架构与工程范式",
+      "badge_en": "⚡ Engineering Paradigm",
+      "category_tag_zh": "Agent工程与落地标准",
+      "category_tag_en": "Agentic Workflows & MCP",
+      "title_zh": "企业级 AI Coding、智能体闭环与 MCP 协议工业落地",
+      "title_en": "Industrial AI Coding, Autonomous Agents & MCP Protocol Standardization",
+      "summary_zh": "Duvo、Reach 等数千万美元企业级自动化与安全智能体融资落地，同时 Cursor、Windsurf、Claude Code 等 AI 编程助手全面支持 MCP（模型上下文协议）。智能体正从单次代码补全迈向拥有上下文感知、本地工具执行与安全防护机制的工业级全自主工作流。",
+      "summary_en": "Multi-million dollar funding rounds for enterprise automation agents like Duvo and Reach highlight the rapid maturation of agentic workflows. With Cursor, Windsurf, and Claude Code standardizing on MCP (Model Context Protocol), AI coding is transitioning from simple completions to fully contextual, self-executing engineering loops.",
+      "perspective_pro": {
+        "role_zh": "🟢 进取派 / 智能体开发者",
+        "role_en": "🟢 Progressive / Agent Builders",
+        "speaker_zh": "一线 AI 全栈开发者与自动化先锋",
+        "speaker_en": "Fullstack Agent Builders & Tooling Leads",
+        "point_zh": "MCP 协议打破了模型与外部系统（文件、数据库、网络、GitHub）的数据孤岛；配合规范化的工程提示词，AI 正在重塑开发者的工作流，实现数倍生产力跃迁。",
+        "point_en": "MCP eliminates data silos between LLMs and external systems (filesystem, DB, web, GitHub). Coupled with rigorous rules, agentic automation delivers multi-fold productivity gains."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 防守派 / 企业架构与安全",
+        "role_en": "🔴 Defensive / Enterprise Security",
+        "speaker_zh": "企业架构师、安全审计员与维护主管",
+        "speaker_en": "Enterprise Architects & Security Auditors",
+        "point_zh": "Agent 盲目修改项目文件可能导致严重的隐蔽 Bug 与安全漏洞；模型编造第三方依赖包、缺乏防御性断言与测试覆盖，会使团队陷入沉重的后期技术债务泥潭。",
+        "point_en": "Autonomous agents modifying core codebases risk hallucinating insecure packages, bypassing architectural boundaries, and creating crippling technical debt without strict verification gates."
+      },
+      "linked_news": [
+        {
+          "id": "58d8572ce3b00206",
+          "title_zh": "深度求索发布闪电模型并开放搜索接口 极致压缩智能体调用成本",
+          "title_en": "Deepseek V4.1 Flash 1017 beats larger rivals in agentic tasks while once again massively cutting per-task costs",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/deepseek-v4-1-flash-1017-beats-larger-rivals-in-agentic-tasks-while-once-again-massively-cutting-per-task-costs/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/06/deepseek_red_whale.png",
+          "hot_score": 5,
+          "published_at": "2026-10-17T10:33:28+00:00"
+        },
+        {
+          "id": "cf8fdbe94e91efda",
+          "title_zh": "大模型创企自曝人机工时比达一比六且初级技术招聘暴跌",
+          "title_en": "Anthropic report on how AI is changing employment at the startup: decline of entry-level technical hiring, productivity boom across departments, and more (Anthropic)",
+          "source": "Anthropic",
+          "url": "https://www.anthropic.com/research/employment-at-anthropic",
+          "image_url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
+          "hot_score": 5,
+          "published_at": "2026-10-17T01:45:01+00:00"
+        },
+        {
+          "id": "5087015768a73867",
+          "title_zh": "国内AI培训狂热：致富焦虑下的新信仰",
+          "title_en": "A look at China's AI learning frenzy, as economic anxiety and fear of being left behind fuel a booming market for courses promising prosperity through AI (Afra Wang/New York Magazine)",
+          "source": "New York Magazine",
+          "url": "https://nymag.com/intelligencer/article/china-ai-learning-craze.html?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IkU4Qno1bWo4ak4iLCJwIjoiL2ludGVsbGlnZW5jZXIvYXJ0aWNsZS9jaGluYS1haS1sZWFybmluZy1jcmF6ZS5odG1sIiwiZXhwIjoxNzkzMjg5NTEzLCJpYXQiOjE3OTIwNzk5MTN9.SFA3VJwFu9qaw6weW4gmFNCCdv35kSzG45gTYcsveXU&utm_medium=gift_link",
+          "image_url": "https://pyxis.nymag.com/v1/imgs/e7b/4d4/78e199565cf3dba9002679c8f8ac02f9af-pro-ai-culture-in-china.1x.rsocial.w1200.jpg",
+          "hot_score": 4,
+          "published_at": "2026-10-16T08:30:01+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "28cb2e2ed61867b3",
+          "author": "Grace Wilson",
+          "author_handle": "@Hey_GraceWilson",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2071952771343912960/GmqEz-eK_normal.jpg",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/Hey_GraceWilson/status/2111281742585958635",
+          "platform": "x"
+        },
+        {
+          "id": "e8ab72e6928fccba",
+          "author": "CyrilXBT",
+          "author_handle": "@cyrilXBT",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2035229727414534145/aWap3Jbq_normal.jpg",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/cyrilXBT/status/2111347735974879573",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
+      },
+      "linked_counts": {
+        "news": 3,
+        "tweets": 2,
+        "has_tool": true
+      }
+    },
+    {
+      "topic_id": "topic_open_source_edge_efficiency",
+      "heat_score": 9.6,
       "badge_zh": "💡 开源与落地潮",
       "badge_en": "💡 Open Source Wave",
       "category_tag_zh": "开源生态与极致降本",
@@ -95,107 +196,6 @@
         "is_workflow": true,
         "target_platform": "Claude Desktop / Cline / Roo Code",
         "config_filename": "claude_desktop_config.json"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      }
-    },
-    {
-      "topic_id": "topic_agentic_workflows_mcp",
-      "heat_score": 9.6,
-      "badge_zh": "⚡ 架构与工程范式",
-      "badge_en": "⚡ Engineering Paradigm",
-      "category_tag_zh": "Agent工程与落地标准",
-      "category_tag_en": "Agentic Workflows & MCP",
-      "title_zh": "企业级 AI Coding、智能体闭环与 MCP 协议工业落地",
-      "title_en": "Industrial AI Coding, Autonomous Agents & MCP Protocol Standardization",
-      "summary_zh": "Duvo、Reach 等数千万美元企业级自动化与安全智能体融资落地，同时 Cursor、Windsurf、Claude Code 等 AI 编程助手全面支持 MCP（模型上下文协议）。智能体正从单次代码补全迈向拥有上下文感知、本地工具执行与安全防护机制的工业级全自主工作流。",
-      "summary_en": "Multi-million dollar funding rounds for enterprise automation agents like Duvo and Reach highlight the rapid maturation of agentic workflows. With Cursor, Windsurf, and Claude Code standardizing on MCP (Model Context Protocol), AI coding is transitioning from simple completions to fully contextual, self-executing engineering loops.",
-      "perspective_pro": {
-        "role_zh": "🟢 进取派 / 智能体开发者",
-        "role_en": "🟢 Progressive / Agent Builders",
-        "speaker_zh": "一线 AI 全栈开发者与自动化先锋",
-        "speaker_en": "Fullstack Agent Builders & Tooling Leads",
-        "point_zh": "MCP 协议打破了模型与外部系统（文件、数据库、网络、GitHub）的数据孤岛；配合规范化的工程提示词，AI 正在重塑开发者的工作流，实现数倍生产力跃迁。",
-        "point_en": "MCP eliminates data silos between LLMs and external systems (filesystem, DB, web, GitHub). Coupled with rigorous rules, agentic automation delivers multi-fold productivity gains."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 防守派 / 企业架构与安全",
-        "role_en": "🔴 Defensive / Enterprise Security",
-        "speaker_zh": "企业架构师、安全审计员与维护主管",
-        "speaker_en": "Enterprise Architects & Security Auditors",
-        "point_zh": "Agent 盲目修改项目文件可能导致严重的隐蔽 Bug 与安全漏洞；模型编造第三方依赖包、缺乏防御性断言与测试覆盖，会使团队陷入沉重的后期技术债务泥潭。",
-        "point_en": "Autonomous agents modifying core codebases risk hallucinating insecure packages, bypassing architectural boundaries, and creating crippling technical debt without strict verification gates."
-      },
-      "linked_news": [
-        {
-          "id": "cf8fdbe94e91efda",
-          "title_zh": "大模型创企自曝人机工时比达一比六且初级技术招聘暴跌",
-          "title_en": "Anthropic report on how AI is changing employment at the startup: decline of entry-level technical hiring, productivity boom across departments, and more (Anthropic)",
-          "source": "Anthropic",
-          "url": "https://www.anthropic.com/research/employment-at-anthropic",
-          "image_url": "https://www-cdn.anthropic.com/images/4zrzovbb/website/6d4a0d28992ade92d6fa63646fd9c9d318245c6c-2400x1260.jpg",
-          "hot_score": 5,
-          "published_at": "2026-10-17T01:45:01+00:00"
-        },
-        {
-          "id": "5087015768a73867",
-          "title_zh": "国内AI培训狂热：致富焦虑下的新信仰",
-          "title_en": "A look at China's AI learning frenzy, as economic anxiety and fear of being left behind fuel a booming market for courses promising prosperity through AI (Afra Wang/New York Magazine)",
-          "source": "New York Magazine",
-          "url": "https://nymag.com/intelligencer/article/china-ai-learning-craze.html?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IkU4Qno1bWo4ak4iLCJwIjoiL2ludGVsbGlnZW5jZXIvYXJ0aWNsZS9jaGluYS1haS1sZWFybmluZy1jcmF6ZS5odG1sIiwiZXhwIjoxNzkzMjg5NTEzLCJpYXQiOjE3OTIwNzk5MTN9.SFA3VJwFu9qaw6weW4gmFNCCdv35kSzG45gTYcsveXU&utm_medium=gift_link",
-          "image_url": "https://pyxis.nymag.com/v1/imgs/e7b/4d4/78e199565cf3dba9002679c8f8ac02f9af-pro-ai-culture-in-china.1x.rsocial.w1200.jpg",
-          "hot_score": 4,
-          "published_at": "2026-10-16T08:30:01+00:00"
-        },
-        {
-          "id": "dd39d5218210afa2",
-          "title_zh": "英伟达移动超算芯片在智能体基准测试中大幅超越苹果",
-          "title_en": "Nvidia's RTX Spark Superchip in the Surface Laptop Ultra outperforms Apple's M5 Max MacBook Pro by ~25% in agentic AI completion benchmarks using Qwen models (Jeffrey Kampman/Tom's Hardware)",
-          "source": "Tom's Hardware",
-          "url": "https://www.tomshardware.com/laptops/we-test-the-rtx-spark-superchip-in-microsofts-surface-laptop-ultra-nvidias-windows-on-arm-platform-impresses-in-local-ai-but-gaming-isnt-its-strong-suit",
-          "image_url": "https://cdn.mos.cms.futurecdn.net/fjj25iPAmmb4jTtvMyDBnn-2560-80.jpg",
-          "hot_score": 4,
-          "published_at": "2026-10-15T12:45:01+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "d51b24e4c866dd8e",
-          "author": "Mohini Goyal",
-          "author_handle": "@Mohiniuni",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2101429311316365312/qicV5hSM_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/Mohiniuni/status/2111041884198252808",
-          "platform": "x"
-        },
-        {
-          "id": "28cb2e2ed61867b3",
-          "author": "Grace Wilson",
-          "author_handle": "@Hey_GraceWilson",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2071952771343912960/GmqEz-eK_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/Hey_GraceWilson/status/2111281742585958635",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
       },
       "linked_counts": {
         "news": 3,
