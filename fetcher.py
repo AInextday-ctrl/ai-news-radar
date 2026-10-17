@@ -31,6 +31,9 @@ from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional, Tuple
 import httpx
 import feedparser
+import logging
+
+logger = logging.getLogger("fetcher")
 try:
     import googlenewsdecoder
 except ImportError:
@@ -3450,6 +3453,7 @@ def get_arxiv_curated_papers() -> List[Dict[str, Any]]:
             if len(live_papers) >= 6:
                 break
     except Exception as e:
+        print(f"  ⚠️ [arXiv] 实时抓取网络超时或异常，平滑切换预置前沿 SOTA 论文: {e}")
         logger.warning(f"Failed to fetch live arXiv API: {e}")
 
     if len(live_papers) >= 4:
