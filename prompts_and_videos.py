@@ -1168,6 +1168,52 @@ CURATED_TUTORIALS = [
 def get_curated_actionable_prompts():
     """Returns the curated bilingual prompt templates across SOTA models and real-world scenarios."""
     curated_items = []
+    # 1. 加载工业实战工作流与 Playbook 库 (.cursorrules, MCP, Claude Code, DeepSeek Ollama, Multi-Agent, RAG)
+    try:
+        wf_candidates = [
+            os.path.join(os.path.dirname(__file__), "public", "data", "curated_workflows_library.json"),
+            os.path.join(os.path.dirname(__file__), "data", "curated_workflows_library.json")
+        ]
+        raw_workflows = None
+        for wp in wf_candidates:
+            if os.path.exists(wp):
+                with open(wp, "r", encoding="utf-8") as f:
+                    raw_workflows = json.load(f)
+                    break
+        if raw_workflows:
+            for item in raw_workflows:
+                it = dict(item)
+                it["is_workflow"] = True
+                it["is_prompt"] = True
+                it["category"] = "prompts"
+                it["sub_type"] = "workflow"
+                it["generation_tier"] = "sota"
+                it["model_tier_score"] = 98
+                if "raw_published_at" not in it:
+                    it["raw_published_at"] = it.get("created_at", "2026-10-17T12:00:00Z")
+                if "summary_zh" not in it:
+                    it["summary_zh"] = it.get("takeaway_zh", "")
+                if "summary_en" not in it:
+                    it["summary_en"] = it.get("takeaway_en", "")
+                if "prompt_content_zh" not in it:
+                    it["prompt_content_zh"] = it.get("code_snippet", "")
+                if "prompt_content_en" not in it:
+                    it["prompt_content_en"] = it.get("code_snippet", "")
+                if "prompt_content" not in it:
+                    it["prompt_content"] = it.get("code_snippet", "")
+                if "recommended_model" not in it:
+                    it["recommended_model"] = it.get("tested_models", "")
+                if "metrics" not in it:
+                    it["metrics"] = {
+                        "type": it.get("type_badge", "🛠️ 工作流"),
+                        "model": it.get("tested_models", "SOTA"),
+                        "filename": it.get("config_filename", "")
+                    }
+                curated_items.append(it)
+    except Exception as e:
+        print(f"Warning: could not load curated_workflows_library.json: {e}")
+
+    # 2. 加载高阶提示词模板库
     try:
         candidates = [
             os.path.join(os.path.dirname(__file__), "public", "data", "curated_prompts_library.json"),

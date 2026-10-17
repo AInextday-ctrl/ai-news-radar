@@ -2372,13 +2372,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     let toolOriginFilter = 'all';
 
-    // 工具多维价值与来源筛选 (综合多源混排 / GitHub本周指数飙升 / 免装Web应用 / HF在线试玩)
+    // 工具多维价值与来源筛选 (今日最新入库 / 本周飙升黑马 / 商业Web与闭源应用 / 免装开箱秒玩 / 开源极客 / HF在线试玩)
     function filterToolOrigin(origin) {
       toolOriginFilter = origin || 'all';
       const originBtns = {
         'all': 'tool-origin-all',
-        'github': 'tool-origin-github',
+        'surge': 'tool-origin-surge',
         'web': 'tool-origin-web',
+        'demo': 'tool-origin-demo',
+        'github': 'tool-origin-github',
         'huggingface': 'tool-origin-huggingface'
       };
       Object.entries(originBtns).forEach(([k, btnId]) => {
@@ -2709,6 +2711,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 专栏广场：提示词场景分类筛选 (按最新前沿大模型与高阶核心应用场景)
     let promptGenerationFilter = 'sota'; // 'sota' (当前旗舰优先) | 'legacy' (历史模型归档)
+
+    let promptSubmodeFilter = 'all'; // 'all' | 'workflow' | 'prompt'
+
+    function switchPromptSubmode(mode) {
+      promptSubmodeFilter = mode || 'all';
+      const submodeBtns = {
+        'all': 'prompt-submode-all',
+        'workflow': 'prompt-submode-workflow',
+        'prompt': 'prompt-submode-prompt'
+      };
+      Object.entries(submodeBtns).forEach(([k, btnId]) => {
+        const b = document.getElementById(btnId);
+        if (b) {
+          b.className = (k === promptSubmodeFilter)
+            ? "prompt-submode-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-purple-600 text-white shadow-sm flex items-center gap-1.5 shrink-0 whitespace-nowrap transition-all"
+            : "prompt-submode-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1.5 shrink-0 whitespace-nowrap transition-all";
+        }
+      });
+      if (currentTab === 'prompts') {
+        renderCategoryView('prompts');
+      }
+    }
 
     function switchPromptGeneration(gen) {
       promptGenerationFilter = gen;
@@ -4597,6 +4621,107 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     // ==========================================
+    // 专门卡片渲染：工业实战工作流与 Playbook 配方卡片
+    // ==========================================
+    function renderWorkflowCard(item) {
+      const isZh = currentLang === 'zh';
+      const t = I18N[currentLang];
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
+      const takeaway = (isZh ? (item.takeaway_zh || item.summary_zh) : (item.takeaway_en || item.summary_en)) || "";
+      const timeObj = formatTime(item.raw_published_at || item.created_at, currentLang);
+      const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold">${t.todayTag}</span>` : '';
+      const platform = item.target_platform || "Cursor / Terminal / Claude";
+      const configName = item.config_filename || ".cursorrules";
+      const configLang = (item.config_lang || "bash").toUpperCase();
+      const codeSnippet = item.code_snippet || item.prompt_content_zh || item.prompt_content || "";
+      const usageGuide = (isZh ? (item.usage_guide_zh || item.usage_guide) : (item.usage_guide_en || item.usage_guide)) || "";
+      const testedModels = item.tested_models || "Claude 3.7 / DeepSeek-V3";
+      const typeBadge = item.type_badge || (isZh ? "🛠️ 工业实战工作流" : "🛠️ Production Playbook");
+
+      window.__workflowStore = window.__workflowStore || {};
+      window.__workflowStore[item.id] = {
+        code: codeSnippet
+      };
+
+      return `
+        <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 border-l-4 border-l-cyan-500 shadow-md hover:shadow-xl transition-all duration-300 group w-full max-w-full min-w-0 overflow-hidden box-border bg-white/95 dark:bg-slate-900/95 backdrop-blur-md">
+          <div class="space-y-2.5 w-full max-w-full min-w-0 overflow-hidden">
+            <!-- 顶部类型徽章与时间 -->
+            <div class="flex items-start justify-between gap-1.5 flex-wrap w-full min-w-0">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30 break-words leading-tight">
+                  ${typeBadge}
+                </span>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-semibold break-all">
+                  📁 ${escapeHtml(configName)}
+                </span>
+              </div>
+              <div class="flex items-center space-x-1.5 shrink-0 ml-auto pt-0.5">
+                ${todayBadge}
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || (isZh ? '今日' : 'Today')}</span>
+              </div>
+            </div>
+
+            <!-- 标题 -->
+            <h4 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 leading-snug group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors break-words w-full min-w-0">${escapeHtml(title)}</h4>
+
+            <!-- 适用平台与验证模型 -->
+            <div class="flex items-center space-x-2 text-[10px] font-mono flex-wrap gap-y-1 w-full min-w-0">
+              <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 break-words">🎯 ${escapeHtml(platform)}</span>
+              <span class="px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 break-words">🧪 ${escapeHtml(testedModels)}</span>
+            </div>
+
+            <!-- 核心价值 / Takeaway -->
+            ${takeaway ? `<p class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 leading-relaxed break-words w-full min-w-0 font-medium">${escapeHtml(takeaway)}</p>` : ''}
+
+            <!-- 工业级代码/配置预览容器 -->
+            <div class="w-full min-w-0 rounded-xl overflow-hidden border border-slate-700/80 bg-slate-950 shadow-inner">
+              <div class="flex items-center justify-between px-3 py-1.5 bg-slate-900/90 border-b border-slate-800 text-[10px] font-mono text-slate-400">
+                <span class="flex items-center gap-1.5 text-cyan-400 font-semibold">
+                  <span class="w-2 h-2 rounded-full bg-cyan-400 inline-block animate-pulse"></span>
+                  ${configName}
+                </span>
+                <span class="px-1.5 py-0.2 rounded bg-slate-800 text-[9px] text-slate-300 uppercase">${configLang}</span>
+              </div>
+              <pre class="p-3 text-[11px] font-mono leading-relaxed text-emerald-400 overflow-x-auto max-h-52 select-all whitespace-pre-wrap break-all">${escapeHtml(codeSnippet)}</pre>
+            </div>
+
+            <!-- 使用说明小贴士 -->
+            ${usageGuide ? `
+              <div class="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-400 bg-slate-100/80 dark:bg-slate-800/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700/60 leading-relaxed font-sans break-words w-full min-w-0">
+                <span class="text-cyan-600 dark:text-cyan-400 font-bold">${isZh ? "🚀 落地使用姿势: " : "🚀 How to deploy: "}</span>${escapeHtml(usageGuide)}
+              </div>
+            ` : ''}
+          </div>
+
+          <!-- 一键复制配方配置按钮 -->
+          <button type="button" onclick="copyWorkflowCode('${item.id}')" id="btn-wf-copy-${item.id}" class="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-xs font-bold py-2 rounded-xl transition-all flex items-center justify-center space-x-1.5 shadow-md shadow-cyan-600/30 cursor-pointer">
+            <span>📋</span>
+            <span id="txt-wf-copy-${item.id}">${isZh ? '一键复制生产级配置代码' : 'Copy Production Configuration'}</span>
+          </button>
+        </article>
+      `;
+    }
+
+    function copyWorkflowCode(id) {
+      let code = "";
+      if (window.__workflowStore && window.__workflowStore[id]) {
+        code = window.__workflowStore[id].code;
+      }
+      if (code) {
+        copyToClipboard(code);
+        const txtEl = document.getElementById(`txt-wf-copy-${id}`);
+        if (txtEl) {
+          const original = txtEl.textContent;
+          txtEl.textContent = (currentLang === 'zh') ? "已复制到剪贴板！🎉" : "Copied to Clipboard! 🎉";
+          setTimeout(() => {
+            if (txtEl) txtEl.textContent = original;
+          }, 2500);
+        }
+      }
+    }
+
+    // ==========================================
     // 专门卡片渲染：高阶提示词 (Prompt) 咒语卡片
     // ==========================================
     function renderPromptCard(item) {
@@ -5491,8 +5616,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           return true;
         });
 
-        if (toolOriginFilter && toolOriginFilter !== 'all') {
-          list = list.filter(it => getToolOrigin(it) === toolOriginFilter);
+        if (toolOriginFilter === 'web') {
+          list = list.filter(it => getToolOrigin(it) === 'web');
+        } else if (toolOriginFilter === 'demo') {
+          list = list.filter(it => it.has_live_demo || getToolOrigin(it) === 'web' || getToolOrigin(it) === 'huggingface' || (it.demo_url && it.demo_url.length > 5));
+        } else if (toolOriginFilter === 'github') {
+          list = list.filter(it => getToolOrigin(it) === 'github');
+        } else if (toolOriginFilter === 'huggingface') {
+          list = list.filter(it => getToolOrigin(it) === 'huggingface');
         }
 
         const getToolTime = (it) => {
@@ -5502,21 +5633,36 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           return isNaN(d) ? 0 : d;
         };
 
-        // 严格遵循用户指令：按照筛选入库时间倒序排列（最新筛选入库排在最前，历史精选沉淀其后，绝不删除）
-        list.sort((a, b) => {
-          const tB = getToolTime(b);
-          const tA = getToolTime(a);
-          if (tB !== tA) return tB - tA;
-          const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
-          const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
-          if (wkB !== wkA) return wkB - wkA;
-          const utB = Number(b.utility_score) || 80;
-          const utA = Number(a.utility_score) || 80;
-          if (utB !== utA) return utB - utA;
-          const stB = Number(b.stars) || (b.metrics ? Number(b.metrics.stars) || 0 : 0);
-          const stA = Number(a.stars) || (a.metrics ? Number(a.metrics.stars) || 0 : 0);
-          return stB - stA;
-        });
+        if (toolOriginFilter === 'surge') {
+          // 本周飙升黑马榜：严格按照 weekly_stars (周增长星数) 倒序排列，优先展示增速最猛的前沿工具
+          list.sort((a, b) => {
+            const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+            const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+            if (wkB !== wkA) return wkB - wkA;
+            const stB = Number(b.stars) || (b.metrics ? Number(b.metrics.stars) || 0 : 0);
+            const stA = Number(a.stars) || (a.metrics ? Number(a.metrics.stars) || 0 : 0);
+            if (stB !== stA) return stB - stA;
+            const tB = getToolTime(b);
+            const tA = getToolTime(a);
+            return tB - tA;
+          });
+        } else {
+          // 严格遵循用户指令：按照筛选入库时间倒序排列（最新筛选入库排在最前，历史精选沉淀其后，绝不删除）
+          list.sort((a, b) => {
+            const tB = getToolTime(b);
+            const tA = getToolTime(a);
+            if (tB !== tA) return tB - tA;
+            const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+            const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+            if (wkB !== wkA) return wkB - wkA;
+            const utB = Number(b.utility_score) || 80;
+            const utA = Number(a.utility_score) || 80;
+            if (utB !== utA) return utB - utA;
+            const stB = Number(b.stars) || (b.metrics ? Number(b.metrics.stars) || 0 : 0);
+            const stA = Number(a.stars) || (a.metrics ? Number(a.metrics.stars) || 0 : 0);
+            return stB - stA;
+          });
+        }
         updateToolScenarioCounts(list);
         if (toolScenarioFilter && toolScenarioFilter !== 'all') {
           list = list.filter(it => normalizeToolScenarioKey(it.scenario_key || it.scenario_tag || '') === toolScenarioFilter);
@@ -5682,6 +5828,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const isZh = currentLang === 'zh';
         let rawList = cachedData.grouped?.prompts || cachedData.prompts || (cachedData.grouped?.videos || cachedData.videos || []).filter(it => it.is_prompt);
 
+        // 0. Submode Filter (all vs workflow vs prompt)
+        if (promptSubmodeFilter === 'workflow') {
+          rawList = rawList.filter(it => it.is_workflow || it.sub_type === 'workflow');
+        } else if (promptSubmodeFilter === 'prompt') {
+          rawList = rawList.filter(it => !it.is_workflow && it.sub_type !== 'workflow');
+        }
+
         // 1. Generation Tier Filter (sota vs legacy)
         if (promptGenerationFilter === 'sota') {
           rawList = rawList.filter(it => it.generation_tier !== 'legacy');
@@ -5694,8 +5847,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           rawList = rawList.filter(it => {
             if (it.category === promptCategoryFilter) return true;
             if (it.sub_type === promptCategoryFilter) return true;
+            if (it.scenario_key === promptCategoryFilter) return true;
             if (promptCategoryFilter === 'code') {
-              return it.category === 'code' || it.sub_type === 'coding' || it.model_family === 'coding' || (it.scenario_label && it.scenario_label.includes('编程')) || (it.title_zh && (it.title_zh.includes('代码') || it.title_zh.includes('重构') || it.title_zh.includes('开发'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('code') || tg.toLowerCase().includes('coding')));
+              return it.category === 'code' || it.sub_type === 'coding' || it.model_family === 'coding' || (it.scenario_label && it.scenario_label.includes('编程')) || (it.title_zh && (it.title_zh.includes('代码') || it.title_zh.includes('重构') || it.title_zh.includes('开发') || it.title_zh.includes('cursor') || it.title_zh.includes('rules'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('code') || tg.toLowerCase().includes('coding')));
             }
             if (promptCategoryFilter === 'novel') {
               return it.category === 'novel' || (it.scenario_label && it.scenario_label.includes('短剧')) || (it.title_zh && (it.title_zh.includes('短剧') || it.title_zh.includes('小说') || it.title_zh.includes('剧本') || it.title_zh.includes('创作'))) || (it.tags && it.tags.some(tg => tg.toLowerCase().includes('writing') || tg.toLowerCase().includes('story')));
@@ -5725,7 +5879,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         let list = filterList(rawList);
 
-        // 3. SOTA Model Tier Ranking (最新模型优先，高代际高权重排列)
+        // 3. SOTA Model Tier Ranking (最新模型与高价值工作流优先，高代际高权重排列)
         list.sort((a, b) => {
           const scoreA = Number(a.model_tier_score) || 80;
           const scoreB = Number(b.model_tier_score) || 80;
@@ -5737,10 +5891,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
         container.innerHTML = list.length > 0
-          ? list.map(renderPromptCard).join('')
-          : `<div class="text-slate-500 text-center py-12 col-span-3 text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
-               <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">${isZh ? (promptGenerationFilter === 'legacy' ? '📦 历史模型归档库暂无此类模版' : '💡 该场景下暂无提示词模版') : 'No matching prompt templates'}</p>
-               <p class="text-slate-400 text-xs">${isZh ? '可切换上方“模型版本”或选择“全部场景”查阅更多' : 'Try switching model version or selecting all scenarios'}</p>
+          ? list.map(it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it)).join('')
+          : `<div class="text-slate-500 text-center py-12 col-span-full text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
+               <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">${isZh ? (promptGenerationFilter === 'legacy' ? '📦 历史模型归档库暂无此类内容' : '💡 该场景下暂无提示词或实战工作流') : 'No matching prompts or workflows'}</p>
+               <p class="text-slate-400 text-xs">${isZh ? '可切换上方“内容类型”或选择“全部场景”查阅更多' : 'Try switching content type or selecting all scenarios'}</p>
              </div>`;
       }
       applyCurrentTranslation();
@@ -5767,25 +5921,52 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           });
         }
 
-        // 动态载入前沿模型应用场景提示词库 (Prompt Library v2.0)
+        // 动态载入前沿模型提示词库与工业实战工作流配方库 (Workflows & Prompts Library)
         try {
-          const promptRes = await fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' });
-          if (promptRes.ok) {
-            const curatedPrompts = await promptRes.json();
-            if (Array.isArray(curatedPrompts)) {
-              const existingPrompts = data.grouped?.prompts || data.prompts || [];
-              const curatedIds = new Set(curatedPrompts.map(p => p.id));
-              const mergedPrompts = [
-                ...curatedPrompts.map(p => ({ ...p, is_prompt: true, category: 'prompts' })),
-                ...existingPrompts.filter(p => !curatedIds.has(p.id))
-              ];
-              if (!data.grouped) data.grouped = {};
-              data.grouped.prompts = mergedPrompts;
-              data.prompts = mergedPrompts;
+          const [wfRes, promptRes] = await Promise.all([
+            fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
+            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
+          ]);
+          let extraPrompts = [];
+          if (wfRes && wfRes.ok) {
+            const wfData = await wfRes.json();
+            if (Array.isArray(wfData)) {
+              extraPrompts.push(...wfData.map(w => ({
+                ...w,
+                is_workflow: true,
+                is_prompt: true,
+                category: 'prompts',
+                sub_type: 'workflow',
+                generation_tier: 'sota',
+                model_tier_score: 98,
+                prompt_content_zh: w.code_snippet,
+                prompt_content_en: w.code_snippet,
+                prompt_content: w.code_snippet,
+                summary_zh: w.takeaway_zh,
+                summary_en: w.takeaway_en,
+                recommended_model: w.tested_models
+              })));
             }
           }
+          if (promptRes && promptRes.ok) {
+            const promptData = await promptRes.json();
+            if (Array.isArray(promptData)) {
+              extraPrompts.push(...promptData.map(p => ({ ...p, is_prompt: true, category: 'prompts' })));
+            }
+          }
+          if (extraPrompts.length > 0) {
+            const existingPrompts = data.grouped?.prompts || data.prompts || [];
+            const extraIds = new Set(extraPrompts.map(p => p.id));
+            const mergedPrompts = [
+              ...extraPrompts,
+              ...existingPrompts.filter(p => !extraIds.has(p.id))
+            ];
+            if (!data.grouped) data.grouped = {};
+            data.grouped.prompts = mergedPrompts;
+            data.prompts = mergedPrompts;
+          }
         } catch (e) {
-          console.warn("curated_prompts_library fetch fallback:", e);
+          console.warn("curated prompt/workflow library fetch fallback:", e);
         }
 
         // 性能防护锁：若数据版本未发生变更且非手动点击，跳过全量 DOM 抹除与重渲染，彻底杜绝后台轮询造成的卡顿
