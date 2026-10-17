@@ -50,6 +50,14 @@
     let videoTypeFilter = 'all';
     let videoSubFilter = 'all';
     let promptCategoryFilter = 'all';
+    let categoryCurrentPage = 1;
+    let categoryPageSize = 100;
+    try {
+      const savedCatSize = Number(localStorage.getItem('ainews_cat_page_size'));
+      if ([30, 50, 100].includes(savedCatSize)) {
+        categoryPageSize = savedCatSize;
+      }
+    } catch(e) {}
 
     const I18N = {
       zh: {
@@ -2358,6 +2366,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专栏广场：领袖与品牌分类过滤 (全部动态 / 官方企业与品牌 / 行业领袖与大V)
     function filterSocialPlatform(filterType) {
       socialPlatformFilter = filterType;
+      categoryCurrentPage = 1;
       celebritySpotlightPage = 0; // 筛选切换时重置爆款头条翻页至第一页
       const btnMap = {
         'all': 'celeb-filter-all',
@@ -2384,6 +2393,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 工具多维价值与来源筛选 (今日最新入库 / 本周飙升黑马 / 商业Web与闭源应用 / 免装开箱秒玩 / 开源极客 / HF在线试玩)
     function filterToolOrigin(origin) {
       toolOriginFilter = origin || 'all';
+      categoryCurrentPage = 1;
       const originBtns = {
         'all': 'tool-origin-all',
         'surge': 'tool-origin-surge',
@@ -2470,6 +2480,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 工具场景筛选 (覆盖12大真实日常场景)
     function filterToolScenario(scenario) {
       toolScenarioFilter = normalizeToolScenarioKey(scenario);
+      categoryCurrentPage = 1;
       const btnMap = {
         'all': 'tool-filter-all',
         'code': 'tool-filter-code',
@@ -2504,6 +2515,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专栏广场：实战视频平台分栏筛选 (全部精选 / YouTube横屏 / YouTube Shorts / TikTok)
     function filterVideoPlatform(plat) {
       videoPlatformFilter = plat;
+      categoryCurrentPage = 1;
       const bAll = document.getElementById('video-plat-all');
       const bYtLong = document.getElementById('video-plat-yt-long');
       const bYtShorts = document.getElementById('video-plat-yt-shorts');
@@ -2573,6 +2585,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // 专栏广场：实战视频场景子分类筛选
     function filterVideoSub(sub) {
       videoSubFilter = sub;
+      categoryCurrentPage = 1;
       const subKeys = ['all', 'viral', 'tutorial', 'insight', 'tips'];
       subKeys.forEach(k => {
         const b = document.getElementById(`video-sub-${k}`);
@@ -2745,6 +2758,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function switchPromptGeneration(gen) {
       promptGenerationFilter = gen;
+      categoryCurrentPage = 1;
       const btnSota = document.getElementById('prompt-gen-sota');
       const btnLegacy = document.getElementById('prompt-gen-legacy');
       if (btnSota && btnLegacy) {
@@ -2763,6 +2777,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function filterPromptCategory(cat) {
       promptCategoryFilter = cat;
+      categoryCurrentPage = 1;
       const catBtns = [
         { id: 'prompt-cat-all', key: 'all' },
         { id: 'prompt-cat-code', key: 'code' },
@@ -5647,7 +5662,110 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       });
     }
 
-    // 渲染独立专栏广场视图
+
+    // 专栏分页核心状态与交互逻辑 (每页默认 100 条，支持 30 / 50 / 100 自由切换与无缝翻页)
+    function changeCategoryPage(p) {
+      if (p < 1) return;
+      categoryCurrentPage = p;
+      renderCategoryView(currentTab);
+      const el = document.getElementById('view-category');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function changeCategoryPageSize(sz) {
+      const validSizes = [30, 50, 100];
+      sz = Number(sz);
+      if (!validSizes.includes(sz)) sz = 100;
+      categoryPageSize = sz;
+      try {
+        localStorage.setItem('ainews_cat_page_size', String(sz));
+      } catch(e) {}
+      categoryCurrentPage = 1;
+      renderCategoryView(currentTab);
+      const el = document.getElementById('view-category');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderCategoryPagination(totalPages, totalItems, curPage, pageSize) {
+      const pagination = document.getElementById('cat-pagination-container');
+      if (!pagination) return;
+      if (!totalItems || totalItems === 0 || (totalPages <= 1 && totalItems <= 30)) {
+        pagination.innerHTML = '';
+        pagination.classList.add('hidden');
+        return;
+      }
+      pagination.classList.remove('hidden');
+
+      const isZh = currentLang === 'zh';
+      const cur = curPage;
+
+      // 生成智能页码序列 (智能省略算法)
+      const pageNumbers = [];
+      if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+      } else {
+        pageNumbers.push(1);
+        if (cur > 3) pageNumbers.push('...');
+        const start = Math.max(2, cur - 1);
+        const end = Math.min(totalPages - 1, cur + 1);
+        for (let i = start; i <= end; i++) pageNumbers.push(i);
+        if (cur < totalPages - 2) pageNumbers.push('...');
+        pageNumbers.push(totalPages);
+      }
+
+      const startItem = (cur - 1) * pageSize + 1;
+      const endItem = Math.min(cur * pageSize, totalItems);
+
+      const pageSizeOptions = [30, 50, 100];
+      const sizeButtonsHtml = pageSizeOptions.map(sz => {
+        const isActive = (sz === pageSize);
+        const btnCls = isActive
+          ? "bg-indigo-600 text-white font-bold shadow-sm shadow-indigo-600/30"
+          : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium";
+        return `<button type="button" onclick="changeCategoryPageSize(${sz})" class="px-2.5 py-1 rounded-md text-xs transition-all cursor-pointer ${btnCls}">${sz}</button>`;
+      }).join('');
+
+      let html = `
+        <div class="flex flex-wrap items-center gap-3">
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">
+            ${isZh ? `显示第 <strong class="text-slate-800 dark:text-slate-200 font-bold">${startItem} - ${endItem}</strong> 条 · 共 <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong> 条` : `Showing <strong class="text-slate-800 dark:text-slate-200 font-bold">${startItem}-${endItem}</strong> of <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong>`}
+          </div>
+          <div class="flex items-center space-x-1.5 pl-3 border-l border-slate-200 dark:border-slate-800 text-xs">
+            <span class="text-slate-500 dark:text-slate-400 font-medium">${isZh ? '每页显示:' : 'Per page:'}</span>
+            <div class="inline-flex p-0.5 rounded-lg bg-slate-200/60 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 space-x-1">
+              ${sizeButtonsHtml}
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <button type="button" onclick="changeCategoryPage(${cur - 1})" ${cur === 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === 1 ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-sm'} transition-all flex items-center space-x-1">
+            <span>◀</span>
+            <span class="hidden sm:inline">${isZh ? '上一页' : 'Prev'}</span>
+          </button>
+      `;
+
+      pageNumbers.forEach(p => {
+        if (p === '...') {
+          html += `<span class="px-2 py-1 text-slate-400 font-mono text-xs">...</span>`;
+        } else if (p === cur) {
+          html += `<button type="button" class="w-8 h-8 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 flex items-center justify-center">${p}</button>`;
+        } else {
+          html += `<button type="button" onclick="changeCategoryPage(${p})" class="w-8 h-8 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm">${p}</button>`;
+        }
+      });
+
+      html += `
+          <button type="button" onclick="changeCategoryPage(${cur + 1})" ${cur === totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === totalPages ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-sm'} transition-all flex items-center space-x-1">
+            <span class="hidden sm:inline">${isZh ? '下一页' : 'Next'}</span>
+            <span>▶</span>
+          </button>
+        </div>
+      `;
+
+      pagination.innerHTML = html;
+    }
+
+    // 渲染独立专栏广场视图 (带分页控制，默认 100 条/页，支持 30/50/100 自由切换)
     function renderCategoryView(tab) {
       const container = document.getElementById('cat-grid-container');
       const spotlightEl = document.getElementById('celebrity-spotlight-banner');
@@ -5664,6 +5782,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
           `;
         }
+        renderCategoryPagination(0, 0, 1, categoryPageSize);
         return;
       }
 
@@ -5676,46 +5795,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (tab === 'news') {
         const fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
-        if (searchQuery) {
+        const totalItems = fullList.length;
+        if (totalItems === 0) {
           container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
-          container.innerHTML = fullList.length > 0 ? fullList.map(renderNewsCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.newsNoMatch}</div>`;
+          container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full">${t.newsNoMatch}</div>`;
+          renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          const recentNews = fullList.filter(it => isWithin24Hours(it.raw_published_at));
-          const historyNews = fullList.filter(it => !isWithin24Hours(it.raw_published_at));
-          const isZh = currentLang === 'zh';
-          container.className = "space-y-6";
-          container.innerHTML = `
-            <div>
-              <div class="flex items-center justify-between mb-3 text-xs text-slate-500 font-mono">
-                <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>${isZh ? '过去 24 小时最新突发快讯' : 'Latest 24-Hour Breaking News'} (${recentNews.length})</span>
-                <span>${isZh ? '🕒 实时感知' : '🕒 Real-Time'}</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                ${recentNews.length > 0 ? recentNews.map(renderNewsCard).join('') : `<div class="text-slate-400 text-xs py-8 px-4 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 col-span-full">${t.noRecentNews}</div>`}
-              </div>
-            </div>
-            ${historyNews.length > 0 ? `
-            <div class="pt-4 border-t border-slate-200/80 dark:border-slate-800/80">
-              <div class="flex items-center justify-between mb-3 text-xs text-slate-500 font-mono">
-                <span class="flex items-center gap-1.5"><span>📰</span>${isZh ? '近期行业深度精选' : 'Recent In-Depth Industry News'} (${historyNews.length})</span>
-                <span>${isZh ? '📚 持续追踪' : '📚 Tracked'}</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                ${historyNews.map(renderNewsCard).join('')}
-              </div>
-            </div>` : ''}
-          `;
+          const totalPages = Math.ceil(totalItems / categoryPageSize);
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          const pageItems = fullList.slice(startIndex, startIndex + categoryPageSize);
+
+          container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
+          container.innerHTML = pageItems.map(renderNewsCard).join('');
+          renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
         }
       } else if (tab === 'celebrity') {
-        const isZh = currentLang === 'zh';
         const catTitle = document.getElementById('cat-view-title');
         const catDesc = document.getElementById('cat-view-desc');
         
-        // 严格 24 小时时效门禁，过期坚决清退，一个不留，清除无意义推文
         const allCelebRaw = (cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || (cachedData.items ? cachedData.items.filter(it => it.category === 'celebrity') : []));
-        const leaderFresh = allCelebRaw.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
         const allViralRaw = (cachedData.grouped?.viral_posts || cachedData.viral_posts || (cachedData.items ? cachedData.items.filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral))) : []));
-        const viralFresh = allViralRaw.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
 
         const leaderCount = allCelebRaw.length;
         const viralCount = allViralRaw.length;
@@ -5749,8 +5850,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             return timeB - timeA;
           });
 
-          container.className = "w-full";
-          container.innerHTML = renderViralPostsSection(viralList);
+          const totalItems = viralList.length;
+          if (totalItems === 0) {
+            container.className = "w-full";
+            container.innerHTML = `<div class="text-slate-500 text-center py-12">${t.viralNoMatch || '暂无爆帖'}</div>`;
+            renderCategoryPagination(0, 0, 1, categoryPageSize);
+          } else {
+            const totalPages = Math.ceil(totalItems / categoryPageSize);
+            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+            const pageItems = viralList.slice(startIndex, startIndex + categoryPageSize);
+
+            container.className = "w-full";
+            container.innerHTML = renderViralPostsSection(pageItems);
+            renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          }
         } else {
           if (spotlightEl) {
             spotlightEl.classList.add('hidden');
@@ -5768,14 +5883,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             const peList = list.filter(it => !isCompanyOrBrand(it));
             list = peList.length > 0 ? peList : allCelebRaw.filter(it => !isCompanyOrBrand(it)).slice(0, 20);
           }
-          // 严格按照真实时间线倒序排列 (不受置顶与聚焦版面干扰，纯净时空流动)
           list.sort((a, b) => {
             const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
             const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
             return timeB - timeA;
           });
-          container.className = "w-full";
-          container.innerHTML = renderCelebrityTimeline(list);
+
+          const totalItems = list.length;
+          if (totalItems === 0) {
+            container.className = "w-full";
+            container.innerHTML = `<div class="text-slate-500 text-center py-12">${t.celebrityNoMatch || '暂无动态'}</div>`;
+            renderCategoryPagination(0, 0, 1, categoryPageSize);
+          } else {
+            const totalPages = Math.ceil(totalItems / categoryPageSize);
+            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+            const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+
+            container.className = "w-full";
+            container.innerHTML = renderCelebrityTimeline(pageItems);
+            renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          }
         }
       } else if (tab === 'tools') {
         const getToolOrigin = (it) => {
@@ -5797,7 +5926,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || [])).filter(it => {
           const nm = (it.app_name || '').toLowerCase().trim();
           const id = (it.id || '').toLowerCase().trim();
-          // 坚决剔除人尽皆知的烂大街旧工具，恪守雷达发掘前沿黑马工具定位
           if (HOUSEHOLD_LEGACY_TOOLS.has(nm) || id.startsWith('tool-') || it.is_curated_base) return false;
           if (getToolOrigin(it) === 'github') {
             const s = Number(it.stars) || (it.metrics ? Number(it.metrics.stars) || 0 : 0);
@@ -5825,7 +5953,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         };
 
         if (toolOriginFilter === 'surge') {
-          // 本周飙升黑马榜：严格按照 weekly_stars (周增长星数) 倒序排列，优先展示增速最猛的前沿工具
           list.sort((a, b) => {
             const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
             const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
@@ -5838,7 +5965,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             return tB - tA;
           });
         } else {
-          // 严格遵循用户指令：按照筛选入库时间倒序排列（最新筛选入库排在最前，历史精选沉淀其后，绝不删除）
           list.sort((a, b) => {
             const tB = getToolTime(b);
             const tA = getToolTime(a);
@@ -5858,21 +5984,33 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (toolScenarioFilter && toolScenarioFilter !== 'all') {
           list = list.filter(it => normalizeToolScenarioKey(it.scenario_key || it.scenario_tag || '') === toolScenarioFilter);
         }
-        container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
-        container.innerHTML = list.length > 0 ? list.map(renderToolCard).join('') : `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;
+
+        const totalItems = list.length;
+        if (totalItems === 0) {
+          container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
+          container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;
+          renderCategoryPagination(0, 0, 1, categoryPageSize);
+        } else {
+          const totalPages = Math.ceil(totalItems / categoryPageSize);
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+
+          container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
+          container.innerHTML = pageItems.map(renderToolCard).join('');
+          renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+        }
       } else if (tab === 'videos') {
-        const isZh = currentLang === 'zh';
         let rawList = (cachedData.grouped?.videos || cachedData.videos || []).filter(it => !it.is_prompt);
         let allRankedList = dedupVideoItems(filterList(rawList));
 
-        // 筛选体系判定辅助函数
         const isYtItem = it => (it.platform === 'youtube' || it.platform === 'shorts' || (it.url && (it.url.includes('youtube.com') || it.url.includes('youtu.be'))) || (it.embed_url && it.embed_url.includes('youtube')) || (it.platform !== 'tiktok' && !(it.url && it.url.includes('tiktok.com'))));
         const isVerticalItem = it => (it.aspect_ratio === '9:16' || it.platform === 'tiktok' || it.platform === 'shorts' || (it.url && it.url.includes('tiktok.com')));
         const isYtLongItem = it => isYtItem(it) && !isVerticalItem(it);
         const isYtShortItem = it => isYtItem(it) && isVerticalItem(it);
         const isTtItem = it => (it.platform === 'tiktok' || (it.url && it.url.includes('tiktok.com')));
 
-        // 平台与形态第一梯队筛选
         let list = allRankedList;
         if (videoPlatformFilter === 'youtube') {
           list = list.filter(isYtItem);
@@ -5884,7 +6022,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           list = list.filter(isTtItem);
         }
 
-        // 场景主题第二梯队筛选
         if (videoSubFilter && videoSubFilter !== 'all') {
           if (videoSubFilter === 'viral') {
             list = list.filter(it => it.is_viral || it.sub_type === 'viral' || (it.tags && it.tags.some(t => t.includes('爆点') || t.includes('爆款') || t.includes('飙升'))));
@@ -5896,144 +6033,53 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           list = list.filter(it => it.author === selectedCreator);
         }
 
-        // 分割竖屏 (9:16) 与横屏 (16:9)
-        const verticalCards = list.filter(isVerticalItem);
-        const landscapeCards = list.filter(it => !isVerticalItem(it));
-
-        container.className = "space-y-7";
-
-        if (list.length === 0) {
+        const totalItems = list.length;
+        if (totalItems === 0) {
+          container.className = "w-full";
           container.innerHTML = `<div class="text-slate-500 text-center py-12">${t.videosNoMatch}</div>`;
-        } else if (videoPlatformFilter === 'youtube-shorts' || videoPlatformFilter === 'tiktok') {
-          // 单独查看纯竖屏短视频专区
-          container.innerHTML = `
-            <div class="space-y-3">
-              <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800/80">
-                <h3 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-                  <span class="text-rose-500">${videoPlatformFilter === 'tiktok' ? '🎵' : '🔴'}</span>
-                  <span>${videoPlatformFilter === 'tiktok' ? (isZh ? 'TikTok 爆款竖屏专区' : 'TikTok Viral Feed') : (isZh ? 'YouTube Shorts 竖屏精选' : 'YouTube Shorts Feed')}</span>
-                </h3>
-                <span class="text-xs text-slate-400 font-mono">${isZh ? `${list.length} 个视频 · 原位即开即看` : `${list.length} Videos · Instant Play`}</span>
-              </div>
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                ${list.map(renderVerticalVideoCard).join('')}
-              </div>
-            </div>
-          `;
-        } else if (videoPlatformFilter === 'youtube-long') {
-          // 单独查看纯 16:9 深度长视频专区
-          container.innerHTML = `
-            <div class="space-y-3">
-              <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800/80">
-                <h3 class="text-sm font-black text-slate-900 dark:text-slate-100 flex items-center space-x-2">
-                  <span class="text-red-600">🖥️</span>
-                  <span>${isZh ? 'YouTube 深度长视频与系统教学' : 'YouTube Deep Dives & System Masterclasses'}</span>
-                </h3>
-                <span class="text-xs text-slate-400 font-mono">${isZh ? `${list.length} 个视频 · 悬停直接预览` : `${list.length} Videos · Hover Preview`}</span>
-              </div>
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                ${list.map(renderHorizontalVideoCard).join('')}
-              </div>
-            </div>
-          `;
+          renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          // 综合视图 (全部 或 YouTube 全专区)：分块呈现 9:16 竖屏手机卡片与 16:9 深度实操长视频
-          const showHero = !searchQuery && !selectedCreator && (!videoSubFilter || videoSubFilter === 'all') && (videoPlatformFilter === 'all');
-          // 确保首发大卡必须为 16:9 宽屏视频，绝不混入 9:16 竖屏短视频
-          const heroItem = showHero ? (landscapeCards.find(it => it.is_viral) || landscapeCards[0]) : null;
-          const trendingItems = heroItem ? landscapeCards.filter(it => it !== heroItem).slice(0, 3) : [];
-          const remainingLandscape = heroItem ? landscapeCards.filter(it => it !== heroItem && !trendingItems.includes(it)) : landscapeCards;
+          const totalPages = Math.ceil(totalItems / categoryPageSize);
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
 
-          let sectionsHtml = '';
-
-          // 1. Hero Spotlight & Trending TOP 3 (仅在综合无搜索时)
-          if (heroItem) {
-            sectionsHtml += `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-                <div class="lg:col-span-8 h-full">
-                  ${renderHeroSpotlight(heroItem)}
-                </div>
-                <div class="lg:col-span-4 glass-card rounded-2xl p-4 border border-slate-200 dark:border-slate-800/80 flex flex-col justify-between space-y-3">
-                  <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-                    <h3 class="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center space-x-1.5">
-                      <span class="text-rose-500">🔥</span>
-                      <span>${isZh ? '全网飙升热播榜' : 'Global Trending Radar'}</span>
-                    </h3>
-                    <span class="text-[10px] text-slate-400 font-mono">TOP 3</span>
-                  </div>
-                  <div class="space-y-2.5 flex-1 flex flex-col justify-around">
-                    ${trendingItems.map((it, idx) => renderTrendingMiniCard(it, idx + 1)).join('')}
-                  </div>
-                </div>
+          if (videoPlatformFilter === 'youtube-shorts' || videoPlatformFilter === 'tiktok') {
+            container.className = "space-y-3";
+            container.innerHTML = `
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                ${pageItems.map(renderVerticalVideoCard).join('')}
               </div>
             `;
-          }
-
-          // 2. 9:16 竖屏高光专区 (Shorts & TikTok)
-          if (verticalCards.length > 0) {
-            sectionsHtml += `
-              <div class="space-y-3 pt-2">
-                <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800/80">
-                  <div class="flex items-center space-x-2">
-                    <span class="text-base">📱</span>
-                    <h3 class="text-sm font-black text-slate-900 dark:text-slate-100">
-                      ${videoPlatformFilter === 'youtube' 
-                        ? (isZh ? 'YouTube Shorts 竖屏短视频' : 'YouTube Shorts')
-                        : (isZh ? '竖屏高光速览 · Shorts & TikTok' : 'Vertical Viral Highlights')}
-                    </h3>
-                    <span class="px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-500 dark:text-rose-400 text-[10px] font-bold border border-rose-500/20">${isZh ? '沉浸视界' : 'Immersive'}</span>
-                  </div>
-                  <span class="text-xs text-slate-400 font-mono">${isZh ? `${verticalCards.length} 条 · 原位即开即看` : `${verticalCards.length} Videos · Instant Play`}</span>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  ${verticalCards.map(renderVerticalVideoCard).join('')}
-                </div>
+          } else if (videoPlatformFilter === 'youtube-long') {
+            container.className = "space-y-3";
+            container.innerHTML = `
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                ${pageItems.map(renderHorizontalVideoCard).join('')}
               </div>
             `;
+          } else {
+            container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
+            container.innerHTML = pageItems.map(it => isVerticalItem(it) ? renderVerticalVideoCard(it) : renderHorizontalVideoCard(it)).join('');
           }
-
-          // 3. 16:9 YouTube 深度实战教程
-          if (remainingLandscape.length > 0) {
-            sectionsHtml += `
-              <div class="space-y-3 pt-3">
-                <div class="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800/80">
-                  <div class="flex items-center space-x-2">
-                    <span class="text-base text-red-600">▶️</span>
-                    <h3 class="text-sm font-black text-slate-900 dark:text-slate-100">
-                      ${isZh ? 'YouTube 深度系统实操与名师教程' : 'YouTube Deep System Tutorials & Masterclasses'}
-                    </h3>
-                    <span class="px-2 py-0.5 rounded-full bg-red-500/10 text-red-600 dark:text-red-400 text-[10px] font-bold border border-red-500/20">${isZh ? '经典长视频' : 'Masterclass'}</span>
-                  </div>
-                  <span class="text-xs text-slate-400 font-mono">${isZh ? `${remainingLandscape.length} 条 · 悬停直接预览` : `${remainingLandscape.length} Videos · Hover Preview`}</span>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  ${remainingLandscape.map(renderHorizontalVideoCard).join('')}
-                </div>
-              </div>
-            `;
-          }
-
-          container.innerHTML = sectionsHtml || `<div class="text-slate-500 text-center py-12">${t.videosNoMatch}</div>`;
+          renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
         }
       } else if (tab === 'prompts') {
-        const isZh = currentLang === 'zh';
         let rawList = cachedData.grouped?.prompts || cachedData.prompts || (cachedData.grouped?.videos || cachedData.videos || []).filter(it => it.is_prompt);
 
-        // 0. Submode Filter (all vs workflow vs prompt)
         if (promptSubmodeFilter === 'workflow') {
           rawList = rawList.filter(it => it.is_workflow || it.sub_type === 'workflow');
         } else if (promptSubmodeFilter === 'prompt') {
           rawList = rawList.filter(it => !it.is_workflow && it.sub_type !== 'workflow');
         }
 
-        // 1. Generation Tier Filter (sota vs legacy)
         if (promptGenerationFilter === 'sota') {
           rawList = rawList.filter(it => it.generation_tier !== 'legacy');
         } else if (promptGenerationFilter === 'legacy') {
           rawList = rawList.filter(it => it.generation_tier === 'legacy');
         }
 
-        // 2. Scenario Category Filter
         if (promptCategoryFilter && promptCategoryFilter !== 'all') {
           rawList = rawList.filter(it => {
             if (it.category === promptCategoryFilter) return true;
@@ -6069,8 +6115,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         let list = filterList(rawList);
-
-        // 3. SOTA Model Tier Ranking (最新模型与高价值工作流优先，高代际高权重排列)
         list.sort((a, b) => {
           const scoreA = Number(a.model_tier_score) || 80;
           const scoreB = Number(b.model_tier_score) || 80;
@@ -6080,13 +6124,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           return timeB - timeA;
         });
 
-        container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
-        container.innerHTML = list.length > 0
-          ? list.map(it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it)).join('')
-          : `<div class="text-slate-500 text-center py-12 col-span-full text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
+        const totalItems = list.length;
+        if (totalItems === 0) {
+          container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
+          container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
                <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">${isZh ? (promptGenerationFilter === 'legacy' ? '📦 历史模型归档库暂无此类内容' : '💡 该场景下暂无提示词或实战工作流') : 'No matching prompts or workflows'}</p>
                <p class="text-slate-400 text-xs">${isZh ? '可切换上方“内容类型”或选择“全部场景”查阅更多' : 'Try switching content type or selecting all scenarios'}</p>
              </div>`;
+          renderCategoryPagination(0, 0, 1, categoryPageSize);
+        } else {
+          const totalPages = Math.ceil(totalItems / categoryPageSize);
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+
+          container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
+          container.innerHTML = pageItems.map(it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it)).join('');
+          renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+        }
       }
       applyCurrentTranslation();
     }
@@ -6759,6 +6815,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     function switchSocialViewMode(mode) {
       socialViewMode = mode;
+      categoryCurrentPage = 1;
       const btnLeader = document.getElementById('btn-social-mode-leader');
       const btnViral = document.getElementById('btn-social-mode-viral');
       const celebSubfilter = document.getElementById('celebrity-subfilter');
@@ -6789,6 +6846,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function filterViralPlatform(plat) {
       viralPlatformFilter = plat;
+      categoryCurrentPage = 1;
       const buttons = document.querySelectorAll('.viral-filter-btn');
       buttons.forEach(b => {
         b.className = "viral-filter-btn px-2.5 py-1 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all";
@@ -8252,6 +8310,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.toggleViralTickerPause = toggleViralTickerPause;
     window.switchHomeToolFilter = switchHomeToolFilter;
     window.switchHomePromptFilter = switchHomePromptFilter;
+    window.changeCategoryPage = changeCategoryPage;
+    window.changeCategoryPageSize = changeCategoryPageSize;
 
     const runLangCheck = () => {
       initTranslateEngine();
