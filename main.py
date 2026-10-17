@@ -1110,12 +1110,16 @@ def save_news(items: list):
             is_gh = ("github.com" in u.lower()) or ("github.com" in src_u.lower()) or (it.get("tool_origin") == "github")
             is_hf = ("huggingface.co/spaces" in u.lower()) or ("huggingface.co/spaces" in src_u.lower()) or (it.get("tool_origin") == "huggingface")
             clean_app_nm = str(it.get("app_name") or "").strip().lower()
-            if clean_app_nm in BAD_TOOL_REPO_NAMES:
+            u_clean = u.lower()
+            src_clean = src_u.lower()
+            if clean_app_nm in BAD_TOOL_REPO_NAMES or any(bad == clean_app_nm for bad in BAD_TOOL_REPO_NAMES):
+                continue
+            if any(f"/{bad}?" in u_clean or f"/{bad}/" in u_clean or u_clean.endswith(f"/{bad}") for bad in BAD_TOOL_REPO_NAMES):
                 continue
             if is_gh:
                 it["tool_origin"] = "github"
                 app_nm = str(it.get("app_name") or it.get("title") or "").lower()
-                if any(bad_w in app_nm for bad_w in ["awesome-", "interview", "roadmap", "tutorial", "course", "papers-with"]):
+                if any(bad_w in app_nm for bad_w in ["awesome-", "interview", "roadmap", "tutorial", "course", "papers-with", "-skills", "prompt-", "prompts-"]):
                     continue
                 stars_val = it.get("stars")
                 if stars_val is None:
@@ -1123,9 +1127,9 @@ def save_news(items: list):
                     if isinstance(m_stars, (int, float)):
                         stars_val = int(m_stars)
                     else:
-                        badge_str = f"{m_stars or ''} {it.get('rank_badge') or ''} {it.get('summary_zh') or ''}"
-                        m_k = re.search(r'(\d+(?:\.\d+)?)k', badge_str, re.I)
-                        if m_k:
+                        badge_str = f"{m_stars or ''} {it.get('rank_badge') or ''}"
+                        m_k = re.search(r'(?:★|⭐|Stars\s*)?(\d+(?:\.\d+)?)k', badge_str, re.I)
+                        if m_k and ("★" in badge_str or "⭐" in badge_str or "star" in badge_str.lower() or "k" in str(m_stars)):
                             stars_val = int(float(m_k.group(1)) * 1000)
                         else:
                             m_n = re.search(r'(?:★|⭐|Stars\s*)(\d[\d,]*)', badge_str, re.I)
@@ -1266,12 +1270,23 @@ def save_news(items: list):
 
     tools_recent = [it for it in recent_items if it.get("category") == "tools"]
     if len(tools_recent) < 30:
-        extra_tools = [
-            it for it in historical_items 
-            if it.get("category") == "tools" 
-            and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= MAX_HOMEPAGE_SECONDS
-        ][:(30 - len(tools_recent))]
+        from fetcher import BAD_TOOL_REPO_NAMES
+        extra_tools = []
+        for it in historical_items:
+            if it.get("category") != "tools":
+                continue
+            tk = get_it_key(it)
+            if tk in recent_keys or (now_ts - parse_time_for_sort(it)) > MAX_HOMEPAGE_SECONDS:
+                continue
+            app_nm = str(it.get("app_name") or "").strip().lower()
+            u_clean = str(it.get("url") or it.get("official_url") or "").lower()
+            if app_nm in BAD_TOOL_REPO_NAMES or any(bad == app_nm for bad in BAD_TOOL_REPO_NAMES):
+                continue
+            if any(f"/{bad}?" in u_clean or f"/{bad}/" in u_clean or u_clean.endswith(f"/{bad}") for bad in BAD_TOOL_REPO_NAMES):
+                continue
+            extra_tools.append(it)
+            if len(extra_tools) >= (30 - len(tools_recent)):
+                break
         for it in extra_tools:
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
@@ -1300,14 +1315,65 @@ def save_news(items: list):
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
+    def get_tool_canonical_key(it):
+        if not it:
+            return ""
+        u = str(it.get("url") or it.get("official_url") or "").lower().strip()
+        m_gh = re.search(r'github\.com/([^/]+/[^/?#]+)', u)
+        if m_gh:
+            return f"gh:{m_gh.group(1).lower()}"
+        m_hf = re.search(r'huggingface\.co/spaces/([^/]+/[^/?#]+)', u)
+        if m_hf:
+            return f"hf:{m_hf.group(1).lower()}"
+        app_nm = str(it.get("app_name") or it.get("title") or "").strip().lower()
+        app_nm = re.sub(r'^[【\[].*?[】\]]\s*', '', app_nm).strip()
+        if app_nm:
+            return f"app:{app_nm}"
+        return u
+
     def _interleave_tools_multi_source(tool_list):
-        web_t = [x for x in tool_list if x.get("tool_origin") == "web"]
-        gh_t = [x for x in tool_list if x.get("tool_origin") == "github"]
-        hf_t = [x for x in tool_list if x.get("tool_origin") == "huggingface"]
-        other_t = [x for x in tool_list if x.get("tool_origin") not in ("web", "github", "huggingface")]
-        web_t.sort(key=lambda x: (x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
-        gh_t.sort(key=lambda x: (x.get("weekly_stars", 0), x.get("utility_score", 80), x.get("stars", 0)), reverse=True)
-        hf_t.sort(key=lambda x: (x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
+        from curated_tools_data import CURATED_AI_TOOLS
+        from fetcher import BAD_TOOL_REPO_NAMES
+        
+        seen_keys = set()
+        clean_tools = []
+        
+        # 优先置入官方权威人工精选/黄金基准工具库 (Curated Golden Standards)
+        for c_tool in CURATED_AI_TOOLS:
+            ck = get_tool_canonical_key(c_tool)
+            if ck and ck not in seen_keys:
+                seen_keys.add(ck)
+                clean_tools.append(c_tool)
+                
+        # 随后混入通过严格质量与星数门禁的新鲜抓取工具
+        for it in tool_list:
+            tk = get_tool_canonical_key(it)
+            app_nm = str(it.get("app_name") or "").strip().lower()
+            u_str = str(it.get("url") or it.get("official_url") or "").lower()
+            
+            if not tk or tk in seen_keys:
+                continue
+            if app_nm in BAD_TOOL_REPO_NAMES or any(bad == app_nm for bad in BAD_TOOL_REPO_NAMES):
+                continue
+            if any(f"/{bad}?" in u_str or f"/{bad}/" in u_str or u_str.endswith(f"/{bad}") for bad in BAD_TOOL_REPO_NAMES):
+                continue
+            if any(bad_w in app_nm for bad_w in ["awesome-", "interview", "roadmap", "tutorial", "papers-with", "-skills", "prompt-", "prompts-"]):
+                continue
+            if it.get("tool_origin") == "github" and (int(it.get("stars") or 0) < 200 or (int(it.get("stars") or 0) > 200000 and "weekly_stars" not in it)):
+                continue
+                
+            seen_keys.add(tk)
+            clean_tools.append(it)
+
+        web_t = [x for x in clean_tools if x.get("tool_origin") == "web"]
+        gh_t = [x for x in clean_tools if x.get("tool_origin") == "github"]
+        hf_t = [x for x in clean_tools if x.get("tool_origin") == "huggingface"]
+        other_t = [x for x in clean_tools if x.get("tool_origin") not in ("web", "github", "huggingface")]
+        
+        web_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
+        gh_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("weekly_stars", 0), x.get("utility_score", 80), x.get("stars", 0)), reverse=True)
+        hf_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
+        
         interleaved = []
         wi, gi, hi = 0, 0, 0
         # Interleave pattern per cycle of 5: 2 Web Apps, 2 GitHub Weekly Surge, 1 HF Space

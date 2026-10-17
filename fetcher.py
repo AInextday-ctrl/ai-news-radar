@@ -1635,7 +1635,12 @@ def _scrape_github_weekly_trending_map(out_repos: Optional[List[Dict[str, Any]]]
 BAD_TOOL_REPO_NAMES = {
     "opengym", "openaver", "anything_about_game", "claude-code-guide",
     "agent-design-patterns", "best-of-agent-harnesses", "makemoneywithai",
-    "red", "kubeterm", "cryptocurrency.cv", "labtether", "peakhour 6", "the sentient world"
+    "red", "kubeterm", "cryptocurrency.cv", "labtether", "peakhour 6", "the sentient world",
+    # Junk prompt/markdown collections, non-tool repos, and duplicates
+    "skills", "scientific-agent-skills", "claude-plugins-official", "tencentdb-agent-memory",
+    "solidcraft", "freellmapi", "esp32-iphone-agent", "free-claude-code", "context-mode",
+    "moli", "diagram-design", "claude-mem", "knowledge-work-plugins", "universal-modder",
+    "openmontage", "text-to-cad", "ifixai", "hyperframes", "prompts", "prompt-engineering"
 }
 
 
@@ -1783,7 +1788,11 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
             full_name = (repo.get("full_name") or "").strip()
             raw_desc = (repo.get("description") or "").strip()
 
-            if name.lower().strip() in BAD_TOOL_REPO_NAMES:
+            clean_repo_name = name.lower().strip()
+            clean_full_name = full_name.lower().strip()
+            if clean_repo_name in BAD_TOOL_REPO_NAMES or clean_full_name in BAD_TOOL_REPO_NAMES:
+                continue
+            if any(bad in clean_repo_name for bad in ["awesome-", "prompt-", "prompts-", "-skills", "cheatsheet", "roadmap", "interview", "papers-with"]):
                 continue
 
             # 严格英文抓取门禁：不爬取非英文描述或无描述仓库
