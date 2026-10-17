@@ -1846,6 +1846,20 @@ def optimize_avatar_url(url: str) -> str:
         return f"https://wsrv.nl/?url={urllib.parse.quote(url)}&w=80&h=80&fit=cover&output=webp&q=80"
     return url
 
+def is_valid_tweet_image_url(url: str) -> bool:
+    if not url or not isinstance(url, str):
+        return False
+    u = url.strip()
+    u_lower = u.lower()
+    if "t.co/" in u_lower or "bit.ly/" in u_lower or "tinyurl.com/" in u_lower or "is.gd/" in u_lower:
+        return False
+    if any(h in u_lower for h in ["pbs.twimg.com", "twimg.com", "unsplash.com", "ytimg.com", "cloudinary.com", "githubusercontent.com"]):
+        return True
+    if any(u_lower.endswith(ext) or f"{ext}?" in u_lower for ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]):
+        return True
+    return False
+
+
 def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     if is_zh:
@@ -1883,6 +1897,21 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
     vis_cls = "flex" if card_idx == 0 else "hidden md:flex"
 
+    tw_img = it.get("image_url") or it.get("media") or ""
+    thumb_html = ""
+    if is_valid_tweet_image_url(tw_img):
+        import urllib.parse
+        opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
+        thumb_html = f"""
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>"""
+    elif it.get("has_video") or it.get("video_url"):
+        thumb_html = f"""
+        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+          <span class="text-base">🎥</span>
+        </div>"""
+
     if is_hl:
         if theme == "amber":
             pill_style = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30"
@@ -1906,13 +1935,13 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
             card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
 
         return f"""
-              <article class="relative rounded-2xl p-4 {vis_cls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5">
+              <article class="relative rounded-2xl p-3.5 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
-                <div class="space-y-2 pt-0.5">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
+                <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
                       <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                         <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                       </div>
                       <div class="min-w-0 truncate">
@@ -1923,16 +1952,19 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0">
+                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0">
                       <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
                       <span>{badge_text}</span>
                     </span>
                   </div>
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                    {text}
-                  </p>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
+                      {text}
+                    </p>
+                    {thumb_html}
+                  </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
                     <span>⚡</span>
                     <span>{time_str}</span>
@@ -1945,11 +1977,11 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         pill_cls = "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25" if theme == "indigo" else "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25"
         return f"""
-              <article class="relative rounded-2xl p-4 {vis_cls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-                <div class="space-y-2">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
-                      <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+              <article class="relative rounded-2xl p-3.5 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
@@ -1958,13 +1990,16 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
                       </div>
                     </div>
-                    <span class="font-semibold px-2.5 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px]">{badge_text}</span>
+                    <span class="font-semibold px-2 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px]">{badge_text}</span>
                   </div>
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    {text}
-                  </p>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      {text}
+                    </p>
+                    {thumb_html}
+                  </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono text-slate-400">🕒 {time_str}</span>
                   <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     {btn_text}
@@ -2015,18 +2050,33 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
         u = f"https://x.com/thsottiaux/status/{it.get('status_id') or '2110595484180214059'}"
     avatar = optimize_avatar_url("https://unavatar.io/x/thsottiaux")
 
+    tw_img = it.get("image_url") or it.get("media") or ""
+    thumb_html = ""
+    if is_valid_tweet_image_url(tw_img):
+        import urllib.parse
+        opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
+        thumb_html = f"""
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>"""
+    elif it.get("has_video") or it.get("video_url"):
+        thumb_html = f"""
+        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+          <span class="text-base">🎥</span>
+        </div>"""
+
     return f"""
-              <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
+              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
                 bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
                 border-2 border-amber-400 dark:border-amber-300/90
                 shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
-                hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5">
+                hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
-                <div class="space-y-2 pt-0.5">
-                  <div class="flex items-center justify-between text-[10px] gap-2">
-                    <div class="flex items-center space-x-2.5 min-w-0">
+                <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
                       <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                        <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                         <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
                       </div>
                       <div class="min-w-0 truncate">
@@ -2045,11 +2095,14 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                       <span>{badge_text}</span>
                     </span>
                   </div>
-                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
-                    {hl_text}
-                  </p>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                      {hl_text}
+                    </p>
+                    {thumb_html}
+                  </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/50 dark:border-amber-900/50">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
                   <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
                     <span class="animate-pulse text-amber-500">⚡</span>
                     <span>{spotlight_tag}</span>
@@ -2059,6 +2112,87 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                   </a>
                 </div>
               </article>"""
+
+
+def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
+    if not lead_media or not isinstance(lead_media, dict):
+        return ""
+    video_id = lead_media.get("video_id") or ""
+    if not video_id and lead_media.get("url"):
+        m = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
+        if m:
+            video_id = m.group(1)
+
+    title = safe_text((lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", ""), 100)
+    title_esc = title.replace("'", "\\'").replace('"', '&quot;')
+    author = safe_text(lead_media.get("source") or lead_media.get("author") or "AI Engineer", 32)
+    author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
+    url = lead_media.get("url") or "#"
+    diff_h = lead_media.get("diff_hours", 12.0)
+    time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
+
+    tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
+    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">{safe_text(t, 16)}</span>' for t in tags[:2]])
+
+    lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
+    lead_source_text = "原片 ↗" if is_zh else "Source ↗"
+    lead_play_text = "影院播放 ▶" if is_zh else "Theater Play ▶"
+    embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
+
+    if video_id:
+        poster_url = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/maxresdefault.jpg&w=400&output=webp&q=85"
+        fallback_poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=400&output=webp&q=85"
+    elif lead_media.get("image_url") and is_valid_tweet_image_url(lead_media.get("image_url")):
+        import urllib.parse
+        poster_url = f"https://wsrv.nl/?url={urllib.parse.quote(lead_media.get('image_url'))}&w=400&output=webp&q=85"
+        fallback_poster = poster_url
+    else:
+        poster_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80"
+        fallback_poster = poster_url
+
+    return f"""
+    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+      <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
+        <div class="flex items-center space-x-1.5 min-w-0">
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            <span>{lead_badge}</span>
+          </span>
+          <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 {author}</span>
+        </div>
+        <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ {time_badge}</span>
+      </div>
+
+      <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
+          <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
+          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+            <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
+          </div>
+        </div>
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="{title}">
+            {title}
+          </a>
+          <div class="flex items-center gap-1 overflow-hidden mt-1">
+            {tags_html}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
+        <span class="font-mono">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+            <span>{lead_play_text}</span>
+          </button>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+            <span>{lead_source_text}</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    """
 
 
 def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
@@ -2165,16 +2299,16 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
         tw_img = tw.get("image_url") or tw.get("media") or ""
 
         thumb_html = ""
-        if tw_img:
+        if is_valid_tweet_image_url(tw_img):
             import urllib.parse
             opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
             thumb_html = f"""
-            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
-              <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
+            <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+              <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
             </div>"""
         elif tw.get("has_video") or tw.get("video_url"):
             thumb_html = f"""
-            <div class="shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+            <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
               <span class="text-base">🎥</span>
             </div>"""
 
@@ -2271,59 +2405,58 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             except Exception:
                 _nd = None
 
-        if hero_media_showcase:
-            viral_ticker_en_html = format_hero_media_showcase(hero_media_showcase, is_zh=False)
-            en_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>🎬 48h Hands-on Lab & Leader Radar\2', en_content)
-            en_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals\2', en_content)
-            btn_videos_en = '<a href="#videos" onclick="switchTab(\'videos\')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-red-600/10 hover:bg-red-600/20 text-red-600 dark:text-red-400 border border-red-500/30 text-xs font-bold transition-all shadow-sm"><span>🎬 Full Hands-on Lab</span> <span>→</span></a>'
-            en_content = re.sub(r'<div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0\.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">.*?</div>', btn_videos_en, en_content, flags=re.DOTALL)
-        else:
-            # 1. Viral Ticker English (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
-            viral_items = [
-                i for i in items 
-                if i.get("category") == "celebrity" 
-                and (now_ts - parse_tweet_time(i)) <= 86400 
-                and (now_ts - parse_tweet_time(i)) >= -300
-                and is_meaningful_tweet(i)
-            ][:9]
-            if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
-                try:
-                    with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
-                        _nd = json.load(_f)
-                        if _nd.get("viral_ticker_tweets"):
-                            v_cand = [
-                                it for it in _nd.get("viral_ticker_tweets") 
-                                if (now_ts - parse_tweet_time(it)) <= 86400 
-                                and (now_ts - parse_tweet_time(it)) >= -300
-                                and is_meaningful_tweet(it)
-                            ]
-                            if v_cand:
-                                viral_items = v_cand[:9]
-                except Exception:
-                    pass
+        # 1. Viral Ticker English (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        viral_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:12]
+        if _nd and _nd.get("viral_ticker_tweets"):
+            v_cand = [
+                it for it in _nd.get("viral_ticker_tweets") 
+                if (now_ts - parse_tweet_time(it)) <= 86400 
+                and (now_ts - parse_tweet_time(it)) >= -300
+                and is_meaningful_tweet(it)
+            ]
+            if v_cand:
+                viral_items = v_cand[:12]
 
-            # 检查是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
-            pinned_tibo_en = None
-            for cand in viral_items:
+        # 检查最高优先级：是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
+        pinned_tibo_en = None
+        for cand in viral_items:
+            if is_tibo_reset_tweet(cand, now_ts):
+                pinned_tibo_en = cand
+                break
+        if not pinned_tibo_en:
+            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_en = cand
                     break
-            if not pinned_tibo_en:
-                for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
-                    if is_tibo_reset_tweet(cand, now_ts):
-                        pinned_tibo_en = cand
-                        break
 
-            if pinned_tibo_en:
-                other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)][:8]
-                pinned_card_html = format_tibo_pinned_card(pinned_tibo_en, is_zh=False)
-                slider_pages_html = ""
-                for p_idx in range(0, len(other_items), 2):
-                    p_slice = other_items[p_idx:p_idx+2]
-                    cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                    slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+        # 次级置顶：48h 极客实测视频精选
+        lead_media_en = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
+        lead_video_card_en = format_lead_video_card(lead_media_en, is_zh=False) if lead_media_en else ""
 
-                viral_ticker_en_html = f"""
+        total_ticker_pages_en = 1
+        if pinned_tibo_en:
+            pinned_card_html = format_tibo_pinned_card(pinned_tibo_en, is_zh=False)
+            other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)]
+            slider_cards = []
+            if lead_video_card_en:
+                slider_cards.append(lead_video_card_en)
+            for c_idx, it in enumerate(other_items[:8]):
+                slider_cards.append(format_viral_page_card(it, is_zh=False, card_idx=c_idx))
+
+            slider_pages_html = ""
+            for p_idx in range(0, len(slider_cards), 2):
+                p_slice = slider_cards[p_idx:p_idx+2]
+                cards_html = "\n".join(p_slice)
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_en = max(1, (len(slider_cards) + 1) // 2)
+
+            viral_ticker_en_html = f"""
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
               <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
                 {pinned_card_html}
@@ -2334,19 +2467,48 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </div>
             </div>"""
-            else:
-                slider_pages_html = ""
-                for p_idx in range(0, len(viral_items), 3):
-                    p_slice = viral_items[p_idx:p_idx+3]
-                    cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                    slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+        elif lead_video_card_en:
+            pinned_card_html = lead_video_card_en
+            other_items = viral_items[:8]
+            slider_pages_html = ""
+            for p_idx in range(0, len(other_items), 2):
+                p_slice = other_items[p_idx:p_idx+2]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_en = max(1, (len(other_items) + 1) // 2)
 
-                viral_ticker_en_html = f"""
+            viral_ticker_en_html = f"""
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+                {pinned_card_html}
+              </div>
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+                  {slider_pages_html}
+                </div>
+              </div>
+            </div>"""
+        else:
+            slider_pages_html = ""
+            for p_idx in range(0, len(viral_items), 3):
+                p_slice = viral_items[p_idx:p_idx+3]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_en = max(1, (len(viral_items) + 2) // 3)
+
+            viral_ticker_en_html = f"""
             <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
               <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
                 {slider_pages_html}
               </div>
             </div>"""
+
+        if lead_video_card_en or pinned_tibo_en:
+            en_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>🎬 48h Hands-on Lab & Leader Radar\2', en_content)
+            en_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals\2', en_content)
+        else:
+            en_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>24h Viral AI Leader Tweets · Live Ticker\2', en_content)
+            en_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· Curated AI titan insights, architecture deep dives, frontier models &amp; builder showcases\2', en_content)
 
         # 1. Top 3 English
         top_three_en_html = ""
@@ -2637,11 +2799,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
 
-        total_ticker_pages_en = max(1, (len(other_items) + 1) // 2) if pinned_tibo_en else max(1, (len(viral_items) + 2) // 3)
-        en_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*\d+\s*/\s*\d+\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_en}\2', en_content)
+        en_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*.*?\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_en}\2', en_content)
 
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
-        if not pinned_tibo_en:
+        if not pinned_tibo_en and not lead_video_card_en:
             en_content = re.sub(
                 r'id="viral-ticker-viewport"[^>]*>',
                 'id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">',
@@ -2714,59 +2875,58 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             except Exception:
                 _nd = None
 
-        if hero_media_showcase:
-            viral_ticker_zh_html = format_hero_media_showcase(hero_media_showcase, is_zh=True)
-            zh_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>🎬 极客实测展厅 · 48h 独家前沿与领袖精粹\2', zh_content)
-            zh_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· 拒绝同质化：汇聚 48h 内最具实操价值的极客上手评测与领袖视效动态\2', zh_content)
-            btn_videos_zh = '<a href="#videos" onclick="switchTab(\'videos\')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-red-600/10 hover:bg-red-600/20 text-red-600 dark:text-red-400 border border-red-500/30 text-xs font-bold transition-all shadow-sm"><span>🎬 极客实测全景库</span> <span>→</span></a>'
-            zh_content = re.sub(r'<div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0\.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">.*?</div>', btn_videos_zh, zh_content, flags=re.DOTALL)
-        else:
-            # 1. Viral Ticker Chinese (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
-            viral_items = [
-                i for i in items 
-                if i.get("category") == "celebrity" 
-                and (now_ts - parse_tweet_time(i)) <= 86400 
-                and (now_ts - parse_tweet_time(i)) >= -300
-                and is_meaningful_tweet(i)
-            ][:9]
-            if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
-                try:
-                    with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
-                        _nd = json.load(_f)
-                        if _nd.get("viral_ticker_tweets"):
-                            v_cand = [
-                                it for it in _nd.get("viral_ticker_tweets") 
-                                if (now_ts - parse_tweet_time(it)) <= 86400 
-                                and (now_ts - parse_tweet_time(it)) >= -300
-                                and is_meaningful_tweet(it)
-                            ]
-                            if v_cand:
-                                viral_items = v_cand[:9]
-                except Exception:
-                    pass
+        # 1. Viral Ticker Chinese (严格 24 小时以内，过期清退，一个不留，清除无意义单句)
+        viral_items = [
+            i for i in items 
+            if i.get("category") == "celebrity" 
+            and (now_ts - parse_tweet_time(i)) <= 86400 
+            and (now_ts - parse_tweet_time(i)) >= -300
+            and is_meaningful_tweet(i)
+        ][:12]
+        if _nd and _nd.get("viral_ticker_tweets"):
+            v_cand = [
+                it for it in _nd.get("viral_ticker_tweets") 
+                if (now_ts - parse_tweet_time(it)) <= 86400 
+                and (now_ts - parse_tweet_time(it)) >= -300
+                and is_meaningful_tweet(it)
+            ]
+            if v_cand:
+                viral_items = v_cand[:12]
 
-            # 检查是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
-            pinned_tibo_zh = None
-            for cand in viral_items:
+        # 检查最高优先级：是否存在 24 小时以内 Tibo 的 reset 相关推文 (置顶第一行第一个位置，不受上下滚动影响)
+        pinned_tibo_zh = None
+        for cand in viral_items:
+            if is_tibo_reset_tweet(cand, now_ts):
+                pinned_tibo_zh = cand
+                break
+        if not pinned_tibo_zh:
+            for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
                 if is_tibo_reset_tweet(cand, now_ts):
                     pinned_tibo_zh = cand
                     break
-            if not pinned_tibo_zh:
-                for cand in [it for it in items if (it.get("category") == "celebrity" or it.get("platform") == "x") and not it.get("is_prompt")]:
-                    if is_tibo_reset_tweet(cand, now_ts):
-                        pinned_tibo_zh = cand
-                        break
 
-            if pinned_tibo_zh:
-                other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)][:8]
-                pinned_card_html = format_tibo_pinned_card(pinned_tibo_zh, is_zh=True)
-                slider_pages_html = ""
-                for p_idx in range(0, len(other_items), 2):
-                    p_slice = other_items[p_idx:p_idx+2]
-                    cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                    slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+        # 次级置顶：48h 极客实测视频精选
+        lead_media_zh = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
+        lead_video_card_zh = format_lead_video_card(lead_media_zh, is_zh=True) if lead_media_zh else ""
 
-                viral_ticker_zh_html = f"""
+        total_ticker_pages_zh = 1
+        if pinned_tibo_zh:
+            pinned_card_html = format_tibo_pinned_card(pinned_tibo_zh, is_zh=True)
+            other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)]
+            slider_cards = []
+            if lead_video_card_zh:
+                slider_cards.append(lead_video_card_zh)
+            for c_idx, it in enumerate(other_items[:8]):
+                slider_cards.append(format_viral_page_card(it, is_zh=True, card_idx=c_idx))
+
+            slider_pages_html = ""
+            for p_idx in range(0, len(slider_cards), 2):
+                p_slice = slider_cards[p_idx:p_idx+2]
+                cards_html = "\n".join(p_slice)
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_zh = max(1, (len(slider_cards) + 1) // 2)
+
+            viral_ticker_zh_html = f"""
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
               <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
                 {pinned_card_html}
@@ -2777,19 +2937,48 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 </div>
               </div>
             </div>"""
-            else:
-                slider_pages_html = ""
-                for p_idx in range(0, len(viral_items), 3):
-                    p_slice = viral_items[p_idx:p_idx+3]
-                    cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                    slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+        elif lead_video_card_zh:
+            pinned_card_html = lead_video_card_zh
+            other_items = viral_items[:8]
+            slider_pages_html = ""
+            for p_idx in range(0, len(other_items), 2):
+                p_slice = other_items[p_idx:p_idx+2]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_zh = max(1, (len(other_items) + 1) // 2)
 
-                viral_ticker_zh_html = f"""
+            viral_ticker_zh_html = f"""
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+                {pinned_card_html}
+              </div>
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+                  {slider_pages_html}
+                </div>
+              </div>
+            </div>"""
+        else:
+            slider_pages_html = ""
+            for p_idx in range(0, len(viral_items), 3):
+                p_slice = viral_items[p_idx:p_idx+3]
+                cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+            total_ticker_pages_zh = max(1, (len(viral_items) + 2) // 3)
+
+            viral_ticker_zh_html = f"""
             <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
               <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
                 {slider_pages_html}
               </div>
             </div>"""
+
+        if lead_video_card_zh or pinned_tibo_zh:
+            zh_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>🎬 极客实测展厅 · 48h 独家前沿与领袖精粹\2', zh_content)
+            zh_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· 拒绝同质化：汇聚 48h 内最具实操价值的极客上手评测与领袖视效动态\2', zh_content)
+        else:
+            zh_content = re.sub(r'(id="viral-ticker-title"[^>]*>).*?(</span>)', r'\g<1>当日 AI 领袖与核心火爆推文 · 垂直走马灯\2', zh_content)
+            zh_content = re.sub(r'(id="viral-ticker-subtitle"[^>]*>).*?(</span>)', r'\g<1>· 深度提炼业界大咖核心观点、架构解析与开源重磅动态\2', zh_content)
 
         # 1. Top 3 Chinese
         top_three_zh_html = ""
@@ -3040,11 +3229,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)
 
-        total_ticker_pages_zh = max(1, (len(other_items) + 1) // 2) if pinned_tibo_zh else max(1, (len(viral_items) + 2) // 3)
-        zh_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*\d+\s*/\s*\d+\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_zh}\2', zh_content)
+        zh_content = re.sub(r'(id="viral-ticker-page-indicator"[^>]*>)\s*.*?\s*(</span>)', rf'\g<1>1 / {total_ticker_pages_zh}\2', zh_content)
 
         # 严格约束走马灯视口高度：移动端 145px，桌面端 180px，GPU 硬件层隔离，杜绝重排与 CLS (CLS = 0)
-        if not pinned_tibo_zh:
+        if not pinned_tibo_zh and not lead_video_card_zh:
             zh_content = re.sub(
                 r'id="viral-ticker-viewport"[^>]*>',
                 'id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">',

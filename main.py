@@ -693,6 +693,20 @@ def extract_topic_blacklist_keywords(topic_focus_list: list) -> tuple:
     return blacklist_keywords, consumed_ids
 
 
+def is_valid_tweet_image_url(url: str) -> bool:
+    if not url or not isinstance(url, str):
+        return False
+    u = url.strip()
+    u_lower = u.lower()
+    if "t.co/" in u_lower or "bit.ly/" in u_lower or "tinyurl.com/" in u_lower or "is.gd/" in u_lower:
+        return False
+    if any(h in u_lower for h in ["pbs.twimg.com", "twimg.com", "unsplash.com", "ytimg.com", "cloudinary.com", "githubusercontent.com"]):
+        return True
+    if any(u_lower.endswith(ext) or f"{ext}?" in u_lower for ext in [".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"]):
+        return True
+    return False
+
+
 def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_ids: set, now_ts: float = None) -> dict:
     """
     精选 48 小时极客实测展示厅 (Hero Media Showcase) 的核心展品与 2 篇精选图文推文：
@@ -843,7 +857,8 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
         s = 0
         t_text = ((it.get("title", "") or "") + " " + (it.get("full_text_en", "") or "")).lower()
         t_auth = (it.get("author", "") or "").lower()
-        if it.get("image_url") or it.get("media"): s += 50
+        tw_img = it.get("image_url") or it.get("media") or ""
+        if is_valid_tweet_image_url(tw_img): s += 50
         if it.get("has_video") or it.get("video_url"): s += 40
         if it.get("is_viral"): s += 30
         if any(k in t_auth for k in ["deepseek", "claude", "anthropic", "openai", "google", "karpathy", "sama"]): s += 40
@@ -857,7 +872,11 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
         author_key = (t.get("author") or "").strip().lower()
         if author_key and author_key in seen_authors and len(selected_tweets) < 2:
             continue
-        selected_tweets.append(dict(t))
+        tw_copy = dict(t)
+        # 强制清理无效短链接，杜绝 404 broken image
+        if tw_copy.get("image_url") and not is_valid_tweet_image_url(tw_copy.get("image_url")):
+            tw_copy["image_url"] = None
+        selected_tweets.append(tw_copy)
         if author_key:
             seen_authors.add(author_key)
         if len(selected_tweets) >= 2:

@@ -88,7 +88,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/06/deepseek_red_whale.png&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=5.6.0">
-  <link rel="preload" href="/zh/js/app.min.js?v=5.6.2" as="script">
+  <link rel="preload" href="/zh/js/app.min.js?v=5.6.3" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -562,15 +562,22 @@
           </div>
           <div class="flex items-center space-x-2 shrink-0">
             <!-- 轮播控制与页码指示器 (支持黑白全适配) -->
-            <a href="#videos" onclick="switchTab('videos')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-red-600/10 hover:bg-red-600/20 text-red-600 dark:text-red-400 border border-red-500/30 text-xs font-bold transition-all shadow-sm"><span>🎬 极客实测全景库</span> <span>→</span></a>
+            <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
+              <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="上一页 (向上)">↑</button>
+              <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="暂停 / 播放">⏸</button>
+              <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="下一页 (向下)">↓</button>
+            </div>
+            <a href="#videos" onclick="switchTab('videos')" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-red-600/10 hover:bg-red-600/20 text-red-600 dark:text-red-400 border border-red-500/30 text-xs font-bold transition-all shadow-sm"><span>🎬 实测专区</span> <span>→</span></a>
             <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">全网社交雷达 →</button>
           </div>
         </div>
         <div id="viral-ticker-container" class="relative w-full">
 
-    <div id="hero-media-showcase-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full">
-      
-    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white" style="height: 180px; max-height: 180px; overflow: hidden;">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+                
+    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
       <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
         <div class="flex items-center space-x-1.5 min-w-0">
           <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
@@ -612,81 +619,286 @@
       </div>
     </div>
     
+              </div>
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
 
-        <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
-          <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
-            <div class="flex items-center space-x-2 min-w-0">
-              <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude 官方" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-              <div class="min-w-0 truncate">
-                <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude 官方</span>
-                  <span class="text-sky-500 text-[10px] font-black">✓</span>
+              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Developers</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@ClaudeDevs · Anthropic Claude 官方开发者平台</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      We keep improving performance across Claude, and you may have noticed it starts responding sooner!
+
+Claude Code now gzips the conversation it sends on every turn, so it reaches the 模型 faster. Cloud sessions also start up as soon as you start typing.
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/ClaudeDevs/status/2111209208012210409" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude 官方" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude 官方</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@claudeai · Anthropic Claude 官方助手</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      120 页手写页面，通过 Opus 5.5 转变成工作字体。
+                    </p>
+                    
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2102688771745685504/img/j-Y1QACY3OukHlGS.jpg', event)" title="点击放大高清原图">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2102688771745685504/img/j-Y1QACY3OukHlGS.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/claudeai/status/2111177838208377213" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+
+              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Anthropic 官方" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Anthropic 官方</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@AnthropicAI · Claude 研发官方团队</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      我们的 STEM 研究员计划的新内容：与 Claude 一起设计更高效的量子电路。
+
+根据简单的语言说明，Claude Mythos 5 设计的量子电路比已发表的最佳电路有所改进，有时甚至提高了一个数量级或更多。
+
+更高效的电路减少了量子算法所需的资源，这可以带来
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/AnthropicAI/status/2111152183240511640" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/GoogleAIStudio&w=80&h=80&fit=cover&output=webp&q=80" alt="Google AI Studio" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google AI Studio</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@GoogleAIStudio · Google AI 开发者官方平台</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      attention google ai pro subscribers: you can now build with Gemini 4 argon in ai studio build / playground 🛠️
+
+get started here:
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/GoogleAIStudio/status/2111240722426802258" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+
+              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/GoogleDeepMind&w=80&h=80&fit=cover&output=webp&q=80" alt="Google DeepMind" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Google DeepMind</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@GoogleDeepMind · Google DeepMind 官方团队</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      4名Gemini 4 Argon特工在27小时内攻克了《我的世界》
+
+在一个仅使用代码和文本的沙盒中，他们编写了2,783个程序，通过聊天划分任务，共享笔记，并一起调试错误——所有这些都没有人工帮助↓
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/GoogleDeepMind/status/2111127991401247033" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI 官方" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">OpenAI 官方</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@OpenAI · OpenAI 官方发布与模型前沿</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      ChatGPT 中的 GPT-6 Astra Pro 进行了升级，响应速度更快，插件和工具的使用也得到了改进。
+
+现在，多个代理可以并行处理任务的不同部分。您可以跟踪每个代理的进度并打开已完成的任务来查看他们的工作。
+
+现在，Pro 用户可以在“聊天”选项卡中使用。
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/OpenAI/status/2111192259073094035" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+
+              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/elonmusk&w=80&h=80&fit=cover&output=webp&q=80" alt="Elon Musk" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Elon Musk</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@elonmusk · xAI 创始人 / 特斯拉 CEO</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25 shrink-0 text-[10px]">💡 领袖前沿观点</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      @Scobleizer真的。
+
+你将能够要求跑车执行任何技巧显示自主，因为它将是有情的。
+
+此外，我们将有一个野生循环轨道（疯狂甚至比风火轮）在我们的德克萨斯州总部，你可以测试你的跑车。
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/elonmusk/status/2111354696854114702" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                    <div class="flex items-center space-x-2 min-w-0">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/github/deepseek-ai&w=80&h=80&fit=cover&output=webp&q=80" alt="DeepSeek 深度求索" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <div class="min-w-0 truncate">
+                        <div class="flex items-center space-x-1">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">DeepSeek 深度求索</span>
+                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                        </div>
+                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@deepseek_ai · DeepSeek 官方开源模型研发团队</span>
+                      </div>
+                    </div>
+                    <span class="font-semibold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px]">🔥 24h 极客热推</span>
+                  </div>
+                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                      🚀 DeepSeek-V4.1-Flash-1017 is here!
+
+Stronger benchmark performance, faster task completion, and shorter outputs than the previous version—a Pareto improvement in performance and cost. Now live on our website, app, and API.
+
+🛠️ Optimized for @DeepSee
+                    </p>
+                    
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <a href="https://x.com/deepseek_ai/status/2111375640717033777" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                    查看原帖 ↗
+                  </a>
+                </div>
+              </article>
+</div>
+
                 </div>
               </div>
             </div>
-            <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-              🔥 领袖高赞
-            </span>
-          </div>
-
-          <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
-              国际象棋，在笔记本纸上涂鸦。用 Sonnet 5.5 制作。
-https://t.co/mZexRL31Y6
-            </p>
-            
-            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2105427578081382400/img/C2iVCtNSVmi8_3Hj.jpg', event)" title="点击放大高清原图">
-              <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2105427578081382400/img/C2iVCtNSVmi8_3Hj.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-            <span class="font-mono">⚡ 24h 实时</span>
-            <a href="https://x.com/claudeai/status/2111177836723920962" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline flex items-center gap-0.5">
-              <span>查看原推 ↗</span>
-            </a>
-          </div>
-        </article>
-        
-
-        <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
-          <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
-            <div class="flex items-center space-x-2 min-w-0">
-              <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude Developers" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-              <div class="min-w-0 truncate">
-                <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Claude Developers</span>
-                  <span class="text-sky-500 text-[10px] font-black">✓</span>
-                </div>
-              </div>
-            </div>
-            <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-              🔥 领袖高赞
-            </span>
-          </div>
-
-          <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
-              We keep improving performance across Claude, and you may have noticed it starts responding sooner!
-
-Claude Code now gzips the conversation i
-            </p>
-            
-            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('https://t.co/rT8ICmKjuf', event)" title="点击放大高清原图">
-              <img src="https://wsrv.nl/?url=https%3A//t.co/rT8ICmKjuf&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-            <span class="font-mono">⚡ 24h 实时</span>
-            <a href="https://x.com/ClaudeDevs/status/2111209208012210409" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline flex items-center gap-0.5">
-              <span>查看原推 ↗</span>
-            </a>
-          </div>
-        </article>
-        
-    </div>
-    
         </div>
       </section>
 
@@ -2736,7 +2948,7 @@ Claude Code now gzips the conversation i
     <span id="copy-toast-msg">已复制到剪贴板！</span>
   </div>
 
-  <script defer src="/zh/js/app.min.js?v=5.6.2"></script>
+  <script defer src="/zh/js/app.min.js?v=5.6.3"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

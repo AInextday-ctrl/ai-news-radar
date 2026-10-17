@@ -2958,6 +2958,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return { badge: isZh ? '🔥 24h 极客热推' : '🔥 24H TRENDING', isHl: false, theme: 'slate' };
     }
 
+    function isValidTweetImageUrl(url) {
+      if (!url || typeof url !== 'string') return false;
+      const u = url.trim().toLowerCase();
+      if (u.includes('t.co/') || u.includes('bit.ly/') || u.includes('tinyurl.com/')) return false;
+      if (['pbs.twimg.com', 'twimg.com', 'unsplash.com', 'ytimg.com', 'cloudinary.com', 'githubusercontent.com'].some(h => u.includes(h))) return true;
+      return ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'].some(ext => u.includes(ext));
+    }
+
     function renderViralTickerCard(item, isZh, cardIdx = 0) {
       const tagInfo = resolveViralTweetTag(item, isZh);
       const isHl = tagInfo.isHl;
@@ -2973,6 +2981,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
       const url = item.url || '#';
       const visCls = cardIdx === 0 ? "flex" : "hidden md:flex";
+
+      const twImg = item.image_url || item.media || '';
+      let thumbHtml = '';
+      if (isValidTweetImageUrl(twImg)) {
+        const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
+        thumbHtml = `
+          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
+            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+          </div>`;
+      } else if (item.has_video || item.video_url) {
+        thumbHtml = `
+          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+            <span class="text-base">🎥</span>
+          </div>`;
+      }
 
       if (isHl) {
         let pillStyle = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30";
@@ -2997,13 +3020,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         return `
-          <article class="relative rounded-2xl p-4 ${visCls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5">
+          <article class="relative rounded-2xl p-3.5 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
             <div class="absolute -top-[2px] left-4 right-4 h-[3px] ${topLine} rounded-full"></div>
-            <div class="space-y-2 pt-0.5">
-              <div class="flex items-center justify-between text-[10px] gap-2">
-                <div class="flex items-center space-x-2.5 min-w-0">
+            <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                <div class="flex items-center space-x-2 min-w-0">
                   <div class="relative shrink-0">
-                    <img src="${avatar}" alt="${author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                   </div>
                   <div class="min-w-0 truncate">
@@ -3019,11 +3042,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <span>${badgeText}</span>
                 </span>
               </div>
-              <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                ${text}
-              </p>
+              <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
+                  ${text}
+                </p>
+                ${thumbHtml}
+              </div>
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-slate-800/60">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
               <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
                 <span>⚡</span>
                 <span>${timeStr}</span>
@@ -3039,11 +3065,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           ? "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25"
           : "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25";
         return `
-          <article class="relative rounded-2xl p-4 ${visCls} flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5">
-            <div class="space-y-2">
-              <div class="flex items-center justify-between text-[10px] gap-2">
-                <div class="flex items-center space-x-2.5 min-w-0">
-                  <img src="${avatar}" alt="${author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+          <article class="relative rounded-2xl p-3.5 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+            <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+              <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                <div class="flex items-center space-x-2 min-w-0">
+                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                   <div class="min-w-0 truncate">
                     <div class="flex items-center space-x-1">
                       <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${author}</span>
@@ -3052,13 +3078,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                     <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">${handle} · ${role}</span>
                   </div>
                 </div>
-                <span class="font-semibold px-2.5 py-0.5 rounded-full ${pillCls} shrink-0 text-[10px]">${badgeText}</span>
+                <span class="font-semibold px-2 py-0.5 rounded-full ${pillCls} shrink-0 text-[10px]">${badgeText}</span>
               </div>
-              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                ${text}
-              </p>
+              <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                  ${text}
+                </p>
+                ${thumbHtml}
+              </div>
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800/60">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
               <span class="font-mono text-slate-400">🕒 ${timeStr}</span>
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                 ${btnText}
@@ -3087,18 +3116,33 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const statusId = item.status_id || (item.url && item.url.match(/status\/(\d+)/) ? item.url.match(/status\/(\d+)/)[1] : '');
       const url = statusId ? `https://x.com/thsottiaux/status/${statusId}` : ((item.url && item.url.includes('thsottiaux') && item.url.includes('/status/')) ? item.url : 'https://x.com/thsottiaux/status/2110595484180214059');
 
+      const twImg = item.image_url || item.media || '';
+      let thumbHtml = '';
+      if (isValidTweetImageUrl(twImg)) {
+        const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
+        thumbHtml = `
+          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
+            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+          </div>`;
+      } else if (item.has_video || item.video_url) {
+        thumbHtml = `
+          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+            <span class="text-base">🎥</span>
+          </div>`;
+      }
+
       return `
-        <article class="relative rounded-2xl p-4 flex flex-col justify-between space-y-2.5 transition-all duration-300 group cursor-pointer h-full
+        <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
           bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
           border-2 border-amber-400 dark:border-amber-300/90
           shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
-          hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" onclick="window.open('${url}','_blank')">
+          hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;" onclick="window.open('${url}','_blank')">
           <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
-          <div class="space-y-2 pt-0.5">
-            <div class="flex items-center justify-between text-[10px] gap-2">
-              <div class="flex items-center space-x-2.5 min-w-0">
+          <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+            <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+              <div class="flex items-center space-x-2 min-w-0">
                 <div class="relative shrink-0">
-                  <img src="${avatar}" alt="${author}" width="32" height="32" class="w-8 h-8 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                   <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
                 </div>
                 <div class="min-w-0 truncate">
@@ -3117,11 +3161,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <span>${badgeText}</span>
               </span>
             </div>
-            <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
-              ${hlText}
-            </p>
+            <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
+              <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                ${hlText}
+              </p>
+              ${thumbHtml}
+            </div>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-2 border-t border-amber-200/50 dark:border-amber-900/50">
+          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
             <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
               <span class="animate-pulse text-amber-500">⚡</span>
               <span>${spotlightTag}</span>
@@ -3131,6 +3178,85 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </a>
           </div>
         </article>
+      `;
+    }
+
+    function renderLeadVideoCard(leadMedia, isZh) {
+      if (!leadMedia || typeof leadMedia !== 'object') return '';
+      let videoId = leadMedia.video_id || '';
+      if (!videoId && leadMedia.url) {
+        const m = String(leadMedia.url).match(/(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})/);
+        if (m) videoId = m[1];
+      }
+      const title = escapeHtml((isZh ? leadMedia.title_zh : leadMedia.title_en) || leadMedia.title || '');
+      const titleEsc = title.replace(/'/g, "\'").replace(/"/g, '&quot;');
+      let author = escapeHtml(leadMedia.source || leadMedia.author || 'AI Engineer').replace(/^YouTube\s*·\s*/, '').trim();
+      const url = escapeHtml(leadMedia.url || '#');
+      const diffH = leadMedia.diff_hours || 12.0;
+      const timeBadge = isZh ? `${diffH}h 前` : `${diffH}h ago`;
+      const tags = leadMedia.tags || ['#HandsOn', '#Benchmark', '#AI'];
+      const tagsHtml = tags.slice(0, 2).map(t => `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
+
+      const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Lab Review';
+      const leadSourceText = isZh ? '原片 ↗' : 'Source ↗';
+      const leadPlayText = isZh ? '影院播放 ▶' : 'Theater Play ▶';
+      const embedUrl = videoId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0` : url;
+
+      let posterUrl = '';
+      let fallbackPoster = '';
+      if (videoId) {
+        posterUrl = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg&w=400&output=webp&q=85`;
+        fallbackPoster = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg&w=400&output=webp&q=85`;
+      } else if (leadMedia.image_url && isValidTweetImageUrl(leadMedia.image_url)) {
+        posterUrl = `https://wsrv.nl/?url=${encodeURIComponent(leadMedia.image_url)}&w=400&output=webp&q=85`;
+        fallbackPoster = posterUrl;
+      } else {
+        posterUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80';
+        fallbackPoster = posterUrl;
+      }
+
+      return `
+        <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
+            <div class="flex items-center space-x-1.5 min-w-0">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                <span>${leadBadge}</span>
+              </span>
+              <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 ${author}</span>
+            </div>
+            <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ ${timeBadge}</span>
+          </div>
+
+          <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+            <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
+              <img src="${posterUrl}" alt="${title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
+              <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+                <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
+              </div>
+            </div>
+            <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="${title}">
+                ${title}
+              </a>
+              <div class="flex items-center gap-1 overflow-hidden mt-1">
+                ${tagsHtml}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
+            <span class="font-mono">16:9 ${isZh ? '实测跑分' : 'Lab Benchmark'}</span>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+                <span>${leadPlayText}</span>
+              </button>
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+                <span>${leadSourceText}</span>
+              </a>
+            </div>
+          </div>
+        </div>
       `;
     }
 
@@ -3206,167 +3332,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (!heroShowcase) return false;
       const leadMedia = heroShowcase.lead_media || heroShowcase.video;
       const viralTweets = heroShowcase.viral_tweets || heroShowcase.tweets || [];
-      if (!leadMedia && (!viralTweets || viralTweets.length === 0)) return false;
-
-      const isZh = currentLang === 'zh';
-      const container = document.getElementById('viral-ticker-container') || document.getElementById('viral-ticker-viewport');
-      if (!container) return false;
-
-      const titleEl = document.getElementById('viral-ticker-title');
-      if (titleEl) {
-        titleEl.textContent = isZh ? '🎬 极客实测展厅 · 48h 独家前沿精粹' : '🎬 48h Hands-on Lab & Leader Radar';
-      }
-      const subtitleEl = document.getElementById('viral-ticker-subtitle');
-      if (subtitleEl) {
-        subtitleEl.textContent = isZh 
-          ? '· 拒绝同质化：48h 内最具实操价值的极客评测与领袖动态' 
-          : '· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals';
-      }
-
-      let videoId = leadMedia ? (leadMedia.video_id || '') : '';
-      if (!videoId && leadMedia && leadMedia.url) {
-        const m = String(leadMedia.url).match(/(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})/);
-        if (m) videoId = m[1];
-      }
-      const title = escapeHtml(leadMedia ? ((isZh ? leadMedia.title_zh : leadMedia.title_en) || leadMedia.title || '') : '');
-      const titleEsc = title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-      let author = escapeHtml(leadMedia ? (leadMedia.source || leadMedia.author || 'AI Engineer') : 'AI Pioneer').replace(/^YouTube\s*·\s*/, '').trim();
-      const url = escapeHtml(leadMedia ? (leadMedia.url || '#') : '#');
-      const diffH = leadMedia ? (leadMedia.diff_hours || 12.0) : 12.0;
-      const timeBadge = isZh ? `${diffH}h 前` : `${diffH}h ago`;
-      const tags = (leadMedia && leadMedia.tags) || ['#HandsOn', '#Benchmark', '#AI'];
-      const tagsHtml = tags.slice(0, 2).map(t => `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
-
-      const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Lab Review';
-      const leadSourceText = isZh ? '原片 ↗' : 'Source ↗';
-      const leadPlayText = isZh ? '影院播放 ▶' : 'Theater Play ▶';
-      const embedUrl = videoId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0` : url;
-
-      let posterUrl = '';
-      let fallbackPoster = '';
-      if (videoId) {
-        posterUrl = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg&w=400&output=webp&q=85`;
-        fallbackPoster = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg&w=400&output=webp&q=85`;
-      } else if (leadMedia && leadMedia.image_url) {
-        posterUrl = `https://wsrv.nl/?url=${encodeURIComponent(leadMedia.image_url)}&w=400&output=webp&q=85`;
-        fallbackPoster = posterUrl;
-      } else {
-        posterUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80';
-        fallbackPoster = posterUrl;
-      }
-
-      const cardVideoHtml = `
-        <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white" style="height: 180px; max-height: 180px; overflow: hidden;">
-          <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
-            <div class="flex items-center space-x-1.5 min-w-0">
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                <span>${leadBadge}</span>
-              </span>
-              <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 ${author}</span>
-            </div>
-            <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ ${timeBadge}</span>
-          </div>
-
-          <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
-            <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
-              <img src="${posterUrl}" alt="${title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
-              <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-                <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
-              </div>
-            </div>
-            <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="${title}">
-                ${title}
-              </a>
-              <div class="flex items-center gap-1 overflow-hidden mt-1">
-                ${tagsHtml}
-              </div>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
-            <span class="font-mono">16:9 ${isZh ? '实测跑分' : 'Lab Benchmark'}</span>
-            <div class="flex items-center gap-2">
-              <button type="button" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
-                <span>${leadPlayText}</span>
-              </button>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
-                <span>${leadSourceText}</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      `;
-
-      let tweetCardsHtml = [];
-      (viralTweets || []).slice(0, 2).forEach(tw => {
-        const twAuthor = escapeHtml(tw.author || 'AI Pioneer');
-        const twHandle = escapeHtml(tw.author_handle || `@${twAuthor.replace(/\s+/g, '')}`);
-        const twAvatar = optimizeAvatarUrl(tw.author_avatar || `https://unavatar.io/x/${twHandle.replace('@','')}`);
-        const twText = escapeHtml((isZh ? tw.full_text_zh : tw.full_text_en) || tw.summary_zh || tw.summary_en || tw.title || '');
-        const twUrl = escapeHtml(tw.url || '#');
-        const twImg = tw.image_url || tw.media || '';
-
-        let thumbHtml = '';
-        if (twImg) {
-          const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
-          thumbHtml = `
-            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
-              <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
-            </div>`;
-        } else if (tw.has_video || tw.video_url) {
-          thumbHtml = `
-            <div class="shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
-              <span class="text-base">🎥</span>
-            </div>`;
-        }
-
-        const tCard = `
-          <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
-            <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
-              <div class="flex items-center space-x-2 min-w-0">
-                <img src="${twAvatar}" alt="${twAuthor}" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                <div class="min-w-0 truncate">
-                  <div class="flex items-center space-x-1">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${twAuthor}</span>
-                    <span class="text-sky-500 text-[10px] font-black">✓</span>
-                  </div>
-                </div>
-              </div>
-              <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-                ${isZh ? '🔥 领袖高赞' : '🔥 Viral Pulse'}
-              </span>
-            </div>
-
-            <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
-              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
-                ${twText}
-              </p>
-              ${thumbHtml}
-            </div>
-
-            <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-              <span class="font-mono">⚡ ${isZh ? '24h 实时' : '24h Live'}</span>
-              <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline flex items-center gap-0.5">
-                <span>${isZh ? '查看原推 ↗' : 'View Post ↗'}</span>
-              </a>
-            </div>
-          </article>
-        `;
-        tweetCardsHtml.push(tCard);
-      });
-
-      container.innerHTML = `
-        <div id="hero-media-showcase-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full">
-          ${cardVideoHtml}
-          ${tweetCardsHtml.join('')}
-        </div>
-      `;
+      renderViralTicker(viralTweets, leadMedia);
       return true;
     }
 
-    function renderViralTicker(tweets) {
+    function renderViralTicker(tweets, leadMedia = null) {
       const isZh = currentLang === 'zh';
       let container = document.getElementById('viral-ticker-container');
       if (!container) {
@@ -3381,7 +3351,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (!container) return;
 
-      if (!tweets || tweets.length === 0) {
+      const tiboResetTweet = (tweets || []).find(it => isTiboResetTweet(it));
+      const titleEl = document.getElementById('viral-ticker-title');
+      const subtitleEl = document.getElementById('viral-ticker-subtitle');
+      if (leadMedia || tiboResetTweet) {
+        if (titleEl) titleEl.textContent = isZh ? '🎬 极客实测展厅 · 48h 独家前沿与领袖精粹' : '🎬 48h Hands-on Lab & Leader Radar';
+        if (subtitleEl) subtitleEl.textContent = isZh ? '· 拒绝同质化：汇聚 48h 内最具实操价值的极客上手评测与领袖视效动态' : '· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals';
+      } else {
+        if (titleEl) titleEl.textContent = isZh ? '当日 AI 领袖与核心火爆推文 · 垂直走马灯' : '24h Viral AI Leader Tweets · Live Ticker';
+        if (subtitleEl) subtitleEl.textContent = isZh ? '· 汇聚全球 AI 顶流导师、核心架构师与创始团队的 24h 最新研判与实录' : '· Curated AI titan insights, architecture deep dives, frontier models & builder showcases';
+      }
+
+      if ((!tweets || tweets.length === 0) && !leadMedia) {
         container.innerHTML = `
           <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
             <div id="viral-ticker-slider" class="flex flex-col space-y-4">
@@ -3392,17 +3373,49 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 1. 检查是否存在 24 小时以内 Tibo 的 reset 相关核心推文
-      const tiboResetTweet = tweets.find(it => isTiboResetTweet(it));
-
       if (tiboResetTweet) {
-        // A. 凡是出现 Tibo 的 reset 相关推文：在第一行第一个位置锁定（不受上下滚动影响），其余推文每页 2 张轮播
-        const otherTweets = tweets.filter(it => !isTiboResetTweet(it));
+        // Priority 1: Tibo reset tweet pinned in Column 1 (User's Absolute Rule)
         const pinnedCardHtml = renderTiboPinnedCard(tiboResetTweet, isZh);
+        const otherTweets = (tweets || []).filter(it => !isTiboResetTweet(it));
+        const sliderCards = [];
+        if (leadMedia) {
+          sliderCards.push(renderLeadVideoCard(leadMedia, isZh));
+        }
+        otherTweets.forEach((it, cIdx) => {
+          sliderCards.push(renderViralTickerCard(it, isZh, cIdx));
+        });
 
         const pages = [];
-        for (let i = 0; i < otherTweets.length; i += 2) {
-          const slice = otherTweets.slice(i, i + 2);
+        for (let i = 0; i < sliderCards.length; i += 2) {
+          const slice = sliderCards.slice(i, i + 2);
+          pages.push(`
+            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+              ${slice.join('')}
+            </div>
+          `);
+        }
+
+        container.innerHTML = `
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
+            <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+              ${pinnedCardHtml}
+            </div>
+            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
+              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+                ${pages.join('')}
+              </div>
+            </div>
+          </div>
+        `;
+        window.viralTickerCurrentPage = 0;
+        window.viralTickerTotalPages = Math.max(1, pages.length);
+        updateTickerPageUI(1, pages.length);
+      } else if (leadMedia) {
+        // Priority 2: Lead Video pinned in Column 1; Columns 2 & 3 scroll down through tweets (2 per page)
+        const pinnedCardHtml = renderLeadVideoCard(leadMedia, isZh);
+        const pages = [];
+        for (let i = 0; i < (tweets || []).length; i += 2) {
+          const slice = (tweets || []).slice(i, i + 2);
           const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
           pages.push(`
             <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
@@ -3427,10 +3440,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         window.viralTickerTotalPages = Math.max(1, pages.length);
         updateTickerPageUI(1, pages.length);
       } else {
-        // B. 常规模式：每页 3 张卡片垂直滚动
+        // Priority 3: Full 3-card sliding ticker
         const pages = [];
-        for (let i = 0; i < tweets.length; i += 3) {
-          const slice = tweets.slice(i, i + 3);
+        for (let i = 0; i < (tweets || []).length; i += 3) {
+          const slice = (tweets || []).slice(i, i + 3);
           const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
           pages.push(`
             <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
@@ -5998,22 +6011,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       // 3. 渲染首页置顶：极客实测展厅 (48h 视频 Demo + 领袖精粹) 或 传统推文滚动栏
-      let heroRendered = false;
-      if (data.hero_media_showcase) {
-        heroRendered = renderHeroMediaShowcase(data.hero_media_showcase);
-      }
-      if (!heroRendered) {
-        const rawViralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
-          ? data.viral_ticker_tweets
-          : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
-        const viralTweets = rawViralTweets.filter(it => {
-          if (it.category === 'celebrity' || it.platform === 'x') {
-            return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
-          }
-          return true;
-        });
-        renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []));
-      }
+      const rawViralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
+        ? data.viral_ticker_tweets
+        : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
+      const viralTweets = rawViralTweets.filter(it => {
+        if (it.category === 'celebrity' || it.platform === 'x') {
+          return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
+        }
+        return true;
+      });
+      const leadMedia = data.hero_media_showcase ? (data.hero_media_showcase.lead_media || data.hero_media_showcase.video) : null;
+      renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []), leadMedia);
 
       // 计算极客实测 Demo 数量角标
       const bDemos = document.getElementById('badge-count-demos');
@@ -8961,6 +8969,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.openImageLightbox = openImageLightbox;
     window.closeImageLightbox = closeImageLightbox;
     window.renderHeroMediaShowcase = renderHeroMediaShowcase;
+    window.renderViralTicker = renderViralTicker;
+    window.renderLeadVideoCard = renderLeadVideoCard;
 
     const runLangCheck = () => {
       initTranslateEngine();
