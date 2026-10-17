@@ -88,7 +88,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//fintech.global/wp-content/uploads/2026/10/Reach-Securitys-50m-bet-on-machine-speed-cyber-defence-scaled.jpg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css">
-  <link rel="preload" href="/zh/js/app.min.js?v=4.4" as="script">
+  <link rel="preload" href="/zh/js/app.min.js?v=4.5" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -1640,6 +1640,21 @@ Tears of Blood 🩸
               </div>
               <button onclick="switchTab('tools')" id="link-all-tools" class="text-xs text-emerald-700 dark:text-emerald-400 font-semibold hover:underline cursor-pointer">全部神器 →</button>
             </div>
+            <!-- 首页工具即时维度切换药丸 -->
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onclick="switchHomeToolFilter('new')" id="home-tool-new" class="home-tool-pill active px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm flex items-center gap-1 transition-all cursor-pointer">
+                <span>⚡</span><span>今日最新</span>
+              </button>
+              <button type="button" onclick="switchHomeToolFilter('surge')" id="home-tool-surge" class="home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
+                <span>🚀</span><span>本周飙升</span>
+              </button>
+              <button type="button" onclick="switchHomeToolFilter('web')" id="home-tool-web" class="home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
+                <span>🌐</span><span>商业Web</span>
+              </button>
+              <button type="button" onclick="switchHomeToolFilter('demo')" id="home-tool-demo" class="home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
+                <span>🟢</span><span>免装秒玩</span>
+              </button>
+            </div>
             <div class="space-y-3" id="stream-tools">
               <!-- 动态注入 Top 3 落地工具卡片 -->
             </div>
@@ -1672,15 +1687,24 @@ Tears of Blood 🩸
           </div>
         </section>
 
-        <!-- 栏目 F: 💡 提示词库·高阶咒语 (占用 3/12 宽度，对应上方天梯榜列，严格防止突破外框) -->
+        <!-- 栏目 F: 💡 实战工作流与提示词库 (占用 3/12 宽度，对应上方天梯榜列，严格防止突破外框) -->
         <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-1 lg:col-span-3 overflow-hidden min-w-0">
           <div class="space-y-3.5 min-w-0 overflow-hidden">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-sm shadow-purple-500/50"></span>
-                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">💡 提示词库·高阶咒语</h3>
+                <h3 class="font-bold text-sm text-slate-900 dark:text-slate-100" id="section-title-prompts">🛠️ 实战工作流与提示词</h3>
               </div>
-              <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-xs text-purple-600 dark:text-purple-400 hover:underline cursor-pointer">全部咒语 →</button>
+              <button onclick="switchTab('prompts')" id="link-all-prompts" class="text-xs text-purple-600 dark:text-purple-400 hover:underline cursor-pointer">全部库 →</button>
+            </div>
+            <!-- 首页工作流与提示词切换药丸 -->
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button type="button" onclick="switchHomePromptFilter('wf')" id="home-prompt-wf" class="home-prompt-pill active px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-600 text-white shadow-sm flex items-center gap-1 transition-all cursor-pointer">
+                <span>🛠️</span><span>实战工作流</span>
+              </button>
+              <button type="button" onclick="switchHomePromptFilter('prompt')" id="home-prompt-prompt" class="home-prompt-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
+                <span>💡</span><span>提示词</span>
+              </button>
             </div>
             <div class="space-y-3 min-w-0 overflow-hidden" id="stream-prompts">
               <!-- 动态注入 Top 3 提示词卡片 -->
@@ -2339,7 +2363,7 @@ Tears of Blood 🩸
     <span id="copy-toast-msg">已复制到剪贴板！</span>
   </div>
 
-  <script defer src="/zh/js/app.min.js?v=4.4"></script>
+  <script defer src="/zh/js/app.min.js?v=4.5"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

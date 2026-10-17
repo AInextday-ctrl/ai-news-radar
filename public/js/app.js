@@ -5115,6 +5115,168 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       applyCurrentTranslation();
     }
 
+    let homeToolFilter = 'new'; // 'new' (今日最新入库) | 'surge' (本周飙升) | 'web' (商业Web) | 'demo' (免装秒玩)
+    let homePromptFilter = 'wf'; // 'wf' (实战工作流) | 'prompt' (SOTA提示词)
+
+    function switchHomeToolFilter(mode) {
+      homeToolFilter = mode || 'new';
+      const pills = {
+        'new': 'home-tool-new',
+        'surge': 'home-tool-surge',
+        'web': 'home-tool-web',
+        'demo': 'home-tool-demo'
+      };
+      Object.entries(pills).forEach(([k, id]) => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (k === homeToolFilter) {
+            el.className = "home-tool-pill active px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-600 text-white shadow-sm flex items-center gap-1 transition-all cursor-pointer";
+          } else {
+            el.className = "home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer";
+          }
+        }
+      });
+      renderHomeTools();
+    }
+
+    function renderHomeTools(data) {
+      const isZh = currentLang === 'zh';
+      const t = I18N[currentLang];
+      const dataObj = data || cachedData || {};
+      const allTools = (dataObj.grouped?.tools || dataObj.tools || dataObj.applied_tools) || [];
+      const getToolOrigin = (it) => {
+        if (it.tool_origin) return it.tool_origin;
+        const u = String(it.official_url || it.url || '').toLowerCase();
+        const su = String(it.source_url || '').toLowerCase();
+        if (u.includes('github.com') || su.includes('github.com')) return 'github';
+        if (u.includes('huggingface.co/spaces') || su.includes('huggingface.co/spaces')) return 'huggingface';
+        return 'web';
+      };
+      const HOUSEHOLD_LEGACY_TOOLS = new Set([
+        'cursor', 'bolt.new', 'bolt', 'claude code', 'claude-code',
+        'ollama', 'perplexity', 'lm studio', 'lmstudio', 'whisper',
+        'whisper webgpu', 'vllm', 'comfyui', 'dify', 'n8n', 'gamma',
+        'excalidraw', 'open-webui', 'openwebui', 'jan', 'kokoro',
+        'liveportrait', 'mineru', 'aider', 'openhands', 'tripo3d', 'triposr'
+      ]);
+      const getToolTime = (it) => {
+        const tm = it.raw_published_at || it.processed_at || it.published_at || it.crawled_at;
+        if (!tm) return 0;
+        const d = new Date(tm).getTime();
+        return isNaN(d) ? 0 : d;
+      };
+
+      let list = dedupToolItems(allTools).filter(it => {
+        const nm = (it.app_name || '').toLowerCase().trim();
+        const id = (it.id || '').toLowerCase().trim();
+        if (HOUSEHOLD_LEGACY_TOOLS.has(nm) || id.startsWith('tool-') || it.is_curated_base) return false;
+        if (getToolOrigin(it) === 'github') {
+          const s = Number(it.stars) || (it.metrics ? Number(it.metrics.stars) || 0 : 0);
+          const ws = Number(it.weekly_stars) || (it.metrics ? Number(it.metrics.weekly_stars) || 0 : 0);
+          if (s > 0 && s < 200 && ws < 200) return false;
+        }
+        return true;
+      });
+
+      if (homeToolFilter === 'surge') {
+        list.sort((a, b) => {
+          const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+          const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+          if (wkB !== wkA) return wkB - wkA;
+          const stB = Number(b.stars) || (b.metrics ? Number(b.metrics.stars) || 0 : 0);
+          const stA = Number(a.stars) || (a.metrics ? Number(a.metrics.stars) || 0 : 0);
+          if (stB !== stA) return stB - stA;
+          return getToolTime(b) - getToolTime(a);
+        });
+      } else if (homeToolFilter === 'web') {
+        list = list.filter(it => getToolOrigin(it) === 'web');
+        list.sort((a, b) => getToolTime(b) - getToolTime(a));
+      } else if (homeToolFilter === 'demo') {
+        list = list.filter(it => it.has_live_demo || getToolOrigin(it) === 'web' || getToolOrigin(it) === 'huggingface' || (it.demo_url && it.demo_url.length > 5));
+        list.sort((a, b) => getToolTime(b) - getToolTime(a));
+      } else {
+        // 'new' (今日最新入库): 严格按照筛选入库时间倒序排在首位
+        list.sort((a, b) => {
+          const tB = getToolTime(b);
+          const tA = getToolTime(a);
+          if (tB !== tA) return tB - tA;
+          const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+          const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+          if (wkB !== wkA) return wkB - wkA;
+          return (Number(b.utility_score) || 80) - (Number(a.utility_score) || 80);
+        });
+      }
+
+      const displayTools = list.slice(0, 3);
+      const streamTools = document.getElementById('stream-tools');
+      if (streamTools) {
+        streamTools.innerHTML = displayTools.length > 0
+          ? displayTools.map(renderToolCard).join('')
+          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentTools}</div>`;
+      }
+      const txtViewAllTools = document.getElementById('txt-view-all-tools');
+      if (txtViewAllTools) {
+        txtViewAllTools.textContent = isZh ? `查看全部落地神器 (${allTools.length} 个) →` : `View All Applied Tools (${allTools.length}) →`;
+      }
+    }
+
+    function switchHomePromptFilter(mode) {
+      homePromptFilter = mode || 'wf';
+      const pills = {
+        'wf': 'home-prompt-wf',
+        'prompt': 'home-prompt-prompt'
+      };
+      Object.entries(pills).forEach(([k, id]) => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (k === homePromptFilter) {
+            el.className = "home-prompt-pill active px-2.5 py-1 rounded-lg text-xs font-bold bg-cyan-600 text-white shadow-sm flex items-center gap-1 transition-all cursor-pointer";
+          } else {
+            el.className = "home-prompt-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer";
+          }
+        }
+      });
+      renderHomePrompts();
+    }
+
+    function renderHomePrompts(data) {
+      const isZh = currentLang === 'zh';
+      const t = I18N[currentLang];
+      const dataObj = data || cachedData || {};
+      const allPrompts = (dataObj.grouped?.prompts || dataObj.prompts || (dataObj.grouped?.videos || dataObj.videos || []).filter(it => it.is_prompt)) || [];
+
+      let list = allPrompts.slice();
+      if (homePromptFilter === 'wf') {
+        list = list.filter(it => it.is_workflow || it.sub_type === 'workflow');
+      } else {
+        list = list.filter(it => !it.is_workflow && it.sub_type !== 'workflow');
+      }
+
+      list.sort((a, b) => {
+        const isLegA = a.generation_tier === 'legacy' ? 1 : 0;
+        const isLegB = b.generation_tier === 'legacy' ? 1 : 0;
+        if (isLegA !== isLegB) return isLegA - isLegB;
+        const scoreA = Number(a.model_tier_score) || 80;
+        const scoreB = Number(b.model_tier_score) || 80;
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+        const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+        return timeB - timeA;
+      });
+
+      const displayPrompts = list.slice(0, 3);
+      const streamPrompts = document.getElementById('stream-prompts');
+      if (streamPrompts) {
+        streamPrompts.innerHTML = displayPrompts.length > 0
+          ? displayPrompts.map(it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it)).join('')
+          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentPrompts || (isZh ? '暂无提示词' : 'No prompts')}</div>`;
+      }
+      const txtViewAllPrompts = document.getElementById('txt-view-all-prompts');
+      if (txtViewAllPrompts) {
+        txtViewAllPrompts.textContent = isZh ? `查看全部实操与工作流 (${allPrompts.length} 条) →` : `View All Workflows & Prompts (${allPrompts.length}) →`;
+      }
+    }
+
     // ==========================================
     // 渲染 UI 视图总入口 (24 小时绝对新鲜拦截)
     // ==========================================
@@ -5282,24 +5444,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
       }
 
-      // C. 落地工具板块 (Tools) - 首页精选多源高价值 Top 3 (Web应用 + 本周指数飙升GitHub + 在线试玩)
-      const topWebTool = allTools.find(it => it.tool_origin === 'web' || (!it.tool_origin && !(it.url || '').includes('github.com')));
-      const topGhTool = allTools.filter(it => it.tool_origin === 'github' || (it.url || '').includes('github.com')).sort((a, b) => (Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0))[0];
-      const topHfOrSecondWeb = allTools.find(it => it !== topWebTool && it !== topGhTool && (it.tool_origin === 'huggingface' || it.tool_origin === 'web'));
-      const displayTools = [topWebTool, topGhTool, topHfOrSecondWeb].filter(Boolean);
-      if (displayTools.length < 3) {
-        allTools.forEach(it => { if (displayTools.length < 3 && !displayTools.includes(it)) displayTools.push(it); });
-      }
-      const streamTools = document.getElementById('stream-tools');
-      if (streamTools) {
-        streamTools.innerHTML = displayTools.length > 0
-          ? displayTools.map(renderToolCard).join('')
-          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentTools}</div>`;
-      }
-      const txtViewAllTools = document.getElementById('txt-view-all-tools');
-      if (txtViewAllTools) {
-        txtViewAllTools.textContent = isZh ? `查看全部落地神器 (${allTools.length} 个) →` : `View All Applied Tools (${allTools.length}) →`;
-      }
+      // C. 落地工具板块 (Tools) - 首页精选按多维筛选即时呈现 (默认今日最新入库 Top 3)
+      renderHomeTools(data);
 
       // D. 视频演示板块 (Videos) - 首页仅精选 Top 2 实战演示
       const dedupedVideos = dedupVideoItems(allVideos);
@@ -5315,31 +5461,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         txtViewAllVideos.textContent = isZh ? `查看全部精选视频 (${dedupedVideos.length} 个) →` : `View All Hands-on Videos (${dedupedVideos.length}) →`;
       }
 
-      // E. 提示词库板块 (Prompts) - 首页仅精选 Top 3 SOTA 实战咒语
-      const sortedPrompts = allPrompts.slice().sort((a, b) => {
-        const isLegA = a.generation_tier === 'legacy' ? 1 : 0;
-        const isLegB = b.generation_tier === 'legacy' ? 1 : 0;
-        if (isLegA !== isLegB) return isLegA - isLegB;
-        const scoreA = Number(a.model_tier_score) || 80;
-        const scoreB = Number(b.model_tier_score) || 80;
-        if (scoreB !== scoreA) return scoreB - scoreA;
-        const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
-        const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-        return timeB - timeA;
-      });
-
-      const sotaPrompts = sortedPrompts.filter(it => it.generation_tier !== 'legacy');
-      const displayPrompts = sotaPrompts.length > 0 ? sotaPrompts.slice(0, 3) : sortedPrompts.slice(0, 3);
-      const streamPrompts = document.getElementById('stream-prompts');
-      if (streamPrompts) {
-        streamPrompts.innerHTML = displayPrompts.length > 0
-          ? displayPrompts.map(renderPromptCard).join('')
-          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentPrompts || (isZh ? '暂无提示词' : 'No prompts')}</div>`;
-      }
-      const txtViewAllPrompts = document.getElementById('txt-view-all-prompts');
-      if (txtViewAllPrompts) {
-        txtViewAllPrompts.textContent = isZh ? `查看全部实操咒语 (${allPrompts.length} 条) →` : `View All SOTA Prompts (${allPrompts.length}) →`;
-      }
+      // E. 提示词与实战工作流板块 (Prompts & Workflows) - 首页精选呈现 (默认实战工作流)
+      renderHomePrompts(data);
 
       // 5. 渲染 LMSYS Chatbot Arena Top 25 天梯榜
       const streamArena = document.getElementById('stream-arena');
@@ -8010,6 +8133,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.filterViralPlatform = filterViralPlatform;
     window.flipViralTicker = flipViralTicker;
     window.toggleViralTickerPause = toggleViralTickerPause;
+    window.switchHomeToolFilter = switchHomeToolFilter;
+    window.switchHomePromptFilter = switchHomePromptFilter;
 
     const runLangCheck = () => {
       initTranslateEngine();
