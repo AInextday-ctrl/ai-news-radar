@@ -2063,174 +2063,161 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
 
 def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     """
-    重构首页置顶专栏为多媒体兼容的【极客实测展厅与领袖图文动态】：
-    - 左侧 60% (lg:col-span-7): 🎬 48h 极客实战上手/跑分评测 (16:9 原生播放与超清封面预览)
-    - 右侧 40% (lg:col-span-5): 🔥 24h 领袖图文精粹 (支持带图/视频微缩与灯箱放大)
+    重构首页置顶专栏为高颜值、等高紧凑、彻底杜绝形变的三卡片并列布局：
+    - 栅格：grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full
+    - 卡片 1 (左)：🎬 48h 极客实测精选 (16:9 原生缩略图 + 影院模式播放)
+    - 卡片 2 (中)：🐦 领袖图文动态 (1) (头像 + 认证 + 推文 + 缩略图灯箱)
+    - 卡片 3 (右)：🐦 领袖图文动态 (2) (头像 + 认证 + 推文 + 缩略图灯箱)
+    所有卡片与图片严格添加内联高度约束 (style="height: 180px; max-height: 180px; overflow: hidden;")，彻底免疫 CSS 编译与外部拉伸形变。
     """
     if not hero_showcase or not isinstance(hero_showcase, dict):
         return ""
     lead_media = hero_showcase.get("lead_media") or {}
     viral_tweets = hero_showcase.get("viral_tweets") or []
 
-    # 1. 组装左侧 16:9 极客实战 Demo / 视频展台
+    # 1. 组装卡片 1: 16:9 极客实操/跑分评测精选
     video_id = lead_media.get("video_id") or ""
     if not video_id and lead_media.get("url"):
         m = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
         if m:
             video_id = m.group(1)
 
-    title = safe_text((lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", ""), 120)
-    author = safe_text(lead_media.get("source") or lead_media.get("author") or "AI Engineer", 40)
+    title = safe_text((lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", ""), 100)
+    title_esc = title.replace("'", "\\'").replace('"', '&quot;')
+    author = safe_text(lead_media.get("source") or lead_media.get("author") or "AI Engineer", 32)
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
     url = lead_media.get("url") or "#"
     diff_h = lead_media.get("diff_hours", 12.0)
     time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
 
     tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
-    tags_html = " ".join([f'<span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">{safe_text(t, 20)}</span>' for t in tags[:3]])
+    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">{safe_text(t, 16)}</span>' for t in tags[:2]])
 
-    if is_zh:
-        lead_badge = "🎬 48h 极客实测"
-        lead_watch_text = "在 YouTube 观看 ↗" if "youtube" in url.lower() else "查看实测原帖 ↗"
-        right_title = "🔥 领袖图文速递"
-    else:
-        lead_badge = "🎬 48h Hands-on Lab"
-        lead_watch_text = "Watch on YouTube ↗" if "youtube" in url.lower() else "View Source ↗"
-        right_title = "🔥 Leader Rich Pulse"
+    lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
+    lead_source_text = "原片 ↗" if is_zh else "Source ↗"
+    lead_play_text = "影院播放 ▶" if is_zh else "Theater Play ▶"
+    embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
 
     # 封面图
     if video_id:
-        poster_url = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/maxresdefault.jpg&w=720&output=webp&q=85"
-        fallback_poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=720&output=webp&q=85"
+        poster_url = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/maxresdefault.jpg&w=400&output=webp&q=85"
+        fallback_poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=400&output=webp&q=85"
     elif lead_media.get("image_url"):
         import urllib.parse
-        poster_url = f"https://wsrv.nl/?url={urllib.parse.quote(lead_media.get('image_url'))}&w=720&output=webp&q=85"
+        poster_url = f"https://wsrv.nl/?url={urllib.parse.quote(lead_media.get('image_url'))}&w=400&output=webp&q=85"
         fallback_poster = poster_url
     else:
-        poster_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=720&q=80"
+        poster_url = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80"
         fallback_poster = poster_url
 
-    # 左侧播放器组件 (支持原生视频嵌入与点击直接播放)
-    left_player_html = f"""
-        <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/30 p-4 shadow-xl overflow-hidden group relative">
-          <!-- 顶部状态行 -->
-          <div class="flex items-center justify-between mb-3 text-xs">
-            <div class="flex items-center space-x-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shadow-rose-500/30">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
-                <span>{lead_badge}</span>
-              </span>
-              <span class="text-slate-200 font-bold text-xs">📺 {author}</span>
-            </div>
-            <span class="text-slate-300 font-mono text-[11px] bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-700/60">⚡ {time_badge}</span>
-          </div>
+    card_video_html = f"""
+    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white" style="height: 180px; max-height: 180px; overflow: hidden;">
+      <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
+        <div class="flex items-center space-x-1.5 min-w-0">
+          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            <span>{lead_badge}</span>
+          </span>
+          <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 {author}</span>
+        </div>
+        <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ {time_badge}</span>
+      </div>
 
-          <!-- 16:9 响应式播放器容器 (点击就地播放，零外部跳转，零 CLS) -->
-          <div id="hero-lead-video-box" class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-inner group/box cursor-pointer" onclick="playHeroLeadVideo('{video_id}', '{url}')">
-            <img src="{poster_url}" alt="{title}" class="w-full h-full object-cover transition-transform duration-500 group-hover/box:scale-105" loading="eager" onerror="this.onerror=null; this.src='{fallback_poster}'">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
-            
-            <!-- 播放按钮光晕图标 -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <button type="button" aria-label="Play Video" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600/90 hover:bg-red-500 text-white flex items-center justify-center text-xl sm:text-2xl shadow-2xl ring-4 ring-white/20 transform group-hover/box:scale-110 transition-all cursor-pointer">
-                <span class="ml-1">▶</span>
-              </button>
-            </div>
-
-            <!-- 浮动标题预览 -->
-            <div class="absolute bottom-2.5 left-3 right-3 text-white">
-              <h3 class="text-xs sm:text-sm font-bold line-clamp-1 drop-shadow-md">{title}</h3>
-            </div>
-          </div>
-
-          <!-- 底部标签与直达外链 -->
-          <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-800/80 text-xs gap-2">
-            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              {tags_html}
-            </div>
-            <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 font-semibold text-[11px] shrink-0 hover:underline flex items-center gap-1">
-              <span>{lead_watch_text}</span>
-            </a>
+      <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
+          <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
+          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+            <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
           </div>
         </div>
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="{title}">
+            {title}
+          </a>
+          <div class="flex items-center gap-1 overflow-hidden mt-1">
+            {tags_html}
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
+        <span class="font-mono">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+            <span>{lead_play_text}</span>
+          </button>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+            <span>{lead_source_text}</span>
+          </a>
+        </div>
+      </div>
+    </div>
     """
 
-    # 2. 组装右侧 2 篇精选图文推文卡片
-    right_cards_html = ""
+    # 2. 组装卡片 2 & 3: 2 篇精选带图/带视效领袖动态
+    tweet_cards_html = []
     for c_idx, tw in enumerate(viral_tweets[:2]):
-        tw_author = safe_text(tw.get("author") or "AI Pioneer", 30)
+        tw_author = safe_text(tw.get("author") or "AI Pioneer", 24)
         tw_handle = tw.get("author_handle") or f"@{tw_author.replace(' ', '')}"
         tw_avatar = optimize_avatar_url(tw.get("author_avatar") or f"https://unavatar.io/x/{tw_handle.replace('@','')}")
-        tw_text = safe_text((tw.get("full_text_zh") if is_zh else tw.get("full_text_en")) or tw.get("summary_zh" if is_zh else "summary_en") or tw.get("title", ""), 180)
+        tw_text = safe_text((tw.get("full_text_zh") if is_zh else tw.get("full_text_en")) or tw.get("summary_zh" if is_zh else "summary_en") or tw.get("title", ""), 140)
         tw_url = tw.get("url") or "#"
         tw_img = tw.get("image_url") or tw.get("media") or ""
 
-        media_html = ""
+        thumb_html = ""
         if tw_img:
             import urllib.parse
-            opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=400&output=webp&q=80"
-            media_html = f"""
-            <div class="mt-2 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 max-h-24 sm:max-h-28 bg-slate-900 cursor-pointer group/img" onclick="openImageLightbox('{tw_img}', event)">
-              <img src="{opt_img}" alt="Tweet media" class="w-full h-24 sm:h-28 object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
+            opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
+            thumb_html = f"""
+            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+              <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
             </div>"""
         elif tw.get("has_video") or tw.get("video_url"):
-            media_html = f"""
-            <div class="mt-2 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-mono">
-              <span>🎥</span>
-              <span>{"包含实战视频 Demo" if is_zh else "Includes Video Demo"}</span>
+            thumb_html = f"""
+            <div class="shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+              <span class="text-base">🎥</span>
             </div>"""
 
-        right_cards_html += f"""
-        <article class="bg-white/95 dark:bg-slate-900/95 rounded-xl p-3 sm:p-3.5 border border-slate-200/90 dark:border-slate-800/90 shadow-sm flex flex-col justify-between hover:border-sky-500/40 transition-all flex-1">
-          <div>
-            <div class="flex items-center justify-between text-[11px] mb-1.5">
-              <div class="flex items-center space-x-2 min-w-0">
-                <img src="{tw_avatar}" alt="{tw_author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                <div class="min-w-0 truncate">
-                  <div class="flex items-center space-x-1">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{tw_author}</span>
-                    <span class="text-sky-500 text-[10px] font-black">✓</span>
-                  </div>
-                  <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{tw_handle}</span>
+        t_card = f"""
+        <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
+            <div class="flex items-center space-x-2 min-w-0">
+              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 truncate">
+                <div class="flex items-center space-x-1">
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{tw_author}</span>
+                  <span class="text-sky-500 text-[10px] font-black">✓</span>
                 </div>
               </div>
-              <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-                {"🔥 领袖高赞" if is_zh else "🔥 Viral Pulse"}
-              </span>
             </div>
-            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2">
+            <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
+              {'🔥 领袖高赞' if is_zh else '🔥 Viral Pulse'}
+            </span>
+          </div>
+
+          <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
+            <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
               {tw_text}
             </p>
-            {media_html}
+            {thumb_html}
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 mt-2 border-t border-slate-100 dark:border-slate-800/60">
-            <span class="font-mono">⚡ {"24h 实时" if is_zh else "24h Live"}</span>
-            <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline">
-              {"查看原推 ↗" if is_zh else "View Post ↗"}
+
+          <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
+            <span class="font-mono">⚡ {'24h 实时' if is_zh else '24h Live'}</span>
+            <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline flex items-center gap-0.5">
+              <span>{'查看原推 ↗' if is_zh else 'View Post ↗'}</span>
             </a>
           </div>
         </article>
         """
+        tweet_cards_html.append(t_card)
 
-    right_column_html = f"""
-        <div class="lg:col-span-5 flex flex-col space-y-3 justify-between">
-          <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 px-1">
-            <span class="flex items-center gap-1.5">
-              <span>🐦</span>
-              <span>{right_title}</span>
-            </span>
-            <button type="button" onclick="switchTab('celebrity')" class="text-sky-600 dark:text-sky-400 hover:underline text-[11px] font-normal cursor-pointer">
-              {"全部推文 →" if is_zh else "All Radar →"}
-            </button>
-          </div>
-          {right_cards_html}
-        </div>
-    """
+    cards_all = [card_video_html] + tweet_cards_html
+    inner_cards = "\n".join(cards_all)
 
     return f"""
-    <div id="hero-media-showcase-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch w-full">
-      {left_player_html}
-      {right_column_html}
+    <div id="hero-media-showcase-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full">
+      {inner_cards}
     </div>
     """
 

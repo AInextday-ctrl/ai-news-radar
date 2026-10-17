@@ -3214,19 +3214,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const titleEl = document.getElementById('viral-ticker-title');
       if (titleEl) {
-        titleEl.textContent = isZh ? '🎬 极客实测展厅 · 48h 独家前沿与领袖精粹' : '🎬 48h Hands-on Lab & Titan Rich Pulse';
+        titleEl.textContent = isZh ? '🎬 极客实测展厅 · 48h 独家前沿精粹' : '🎬 48h Hands-on Lab & Leader Radar';
       }
       const subtitleEl = document.getElementById('viral-ticker-subtitle');
       if (subtitleEl) {
         subtitleEl.textContent = isZh 
-          ? '· 拒绝同质化：汇聚 48h 内最具实操价值的极客上手评测与领袖视效动态' 
-          : '· Curated hands-on benchmarks, workflow demos & frontier visual pulses';
-      }
-
-      // Check if iframe is already actively playing
-      const existingLeadBox = document.getElementById('hero-lead-video-box');
-      if (existingLeadBox && existingLeadBox.querySelector('iframe')) {
-        return true;
+          ? '· 拒绝同质化：48h 内最具实操价值的极客评测与领袖动态' 
+          : '· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals';
       }
 
       let videoId = leadMedia ? (leadMedia.video_id || '') : '';
@@ -3235,72 +3229,77 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (m) videoId = m[1];
       }
       const title = escapeHtml(leadMedia ? ((isZh ? leadMedia.title_zh : leadMedia.title_en) || leadMedia.title || '') : '');
+      const titleEsc = title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
       let author = escapeHtml(leadMedia ? (leadMedia.source || leadMedia.author || 'AI Engineer') : 'AI Pioneer').replace(/^YouTube\s*·\s*/, '').trim();
       const url = escapeHtml(leadMedia ? (leadMedia.url || '#') : '#');
       const diffH = leadMedia ? (leadMedia.diff_hours || 12.0) : 12.0;
       const timeBadge = isZh ? `${diffH}h 前` : `${diffH}h ago`;
       const tags = (leadMedia && leadMedia.tags) || ['#HandsOn', '#Benchmark', '#AI'];
-      const tagsHtml = tags.slice(0, 3).map(t => `<span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
+      const tagsHtml = tags.slice(0, 2).map(t => `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
 
-      const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Hands-on Lab';
-      const leadWatchText = url.toLowerCase().includes('youtube') 
-        ? (isZh ? '在 YouTube 观看 ↗' : 'Watch on YouTube ↗') 
-        : (isZh ? '查看实测原帖 ↗' : 'View Source ↗');
-      const rightTitle = isZh ? '🔥 领袖图文速递' : '🔥 Leader Rich Pulse';
+      const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Lab Review';
+      const leadSourceText = isZh ? '原片 ↗' : 'Source ↗';
+      const leadPlayText = isZh ? '影院播放 ▶' : 'Theater Play ▶';
+      const embedUrl = videoId ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0` : url;
 
       let posterUrl = '';
       let fallbackPoster = '';
       if (videoId) {
-        posterUrl = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg&w=720&output=webp&q=85`;
-        fallbackPoster = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg&w=720&output=webp&q=85`;
+        posterUrl = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg&w=400&output=webp&q=85`;
+        fallbackPoster = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg&w=400&output=webp&q=85`;
       } else if (leadMedia && leadMedia.image_url) {
-        posterUrl = `https://wsrv.nl/?url=${encodeURIComponent(leadMedia.image_url)}&w=720&output=webp&q=85`;
+        posterUrl = `https://wsrv.nl/?url=${encodeURIComponent(leadMedia.image_url)}&w=400&output=webp&q=85`;
         fallbackPoster = posterUrl;
       } else {
-        posterUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=720&q=80';
+        posterUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=400&q=80';
         fallbackPoster = posterUrl;
       }
 
-      const leftPlayerHtml = `
-        <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/30 p-4 shadow-xl overflow-hidden group relative">
-          <div class="flex items-center justify-between mb-3 text-xs">
-            <div class="flex items-center space-x-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shadow-rose-500/30">
+      const cardVideoHtml = `
+        <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
+            <div class="flex items-center space-x-1.5 min-w-0">
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
                 <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
                 <span>${leadBadge}</span>
               </span>
-              <span class="text-slate-200 font-bold text-xs">📺 ${author}</span>
+              <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 ${author}</span>
             </div>
-            <span class="text-slate-300 font-mono text-[11px] bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-700/60">⚡ ${timeBadge}</span>
+            <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ ${timeBadge}</span>
           </div>
 
-          <div id="hero-lead-video-box" class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-inner group/box cursor-pointer" onclick="playHeroLeadVideo('${videoId}', '${url}')">
-            <img src="${posterUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover/box:scale-105" loading="eager" onerror="this.onerror=null; this.src='${fallbackPoster}'">
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
-            
-            <div class="absolute inset-0 flex items-center justify-center">
-              <button type="button" aria-label="Play Video" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600/90 hover:bg-red-500 text-white flex items-center justify-center text-xl sm:text-2xl shadow-2xl ring-4 ring-white/20 transform group-hover/box:scale-110 transition-all cursor-pointer">
-                <span class="ml-1">▶</span>
+          <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+            <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
+              <img src="${posterUrl}" alt="${title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
+              <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+                <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
+              </div>
+            </div>
+            <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="${title}">
+                ${title}
+              </a>
+              <div class="flex items-center gap-1 overflow-hidden mt-1">
+                ${tagsHtml}
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
+            <span class="font-mono">16:9 ${isZh ? '实测跑分' : 'Lab Benchmark'}</span>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+                <span>${leadPlayText}</span>
               </button>
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+                <span>${leadSourceText}</span>
+              </a>
             </div>
-
-            <div class="absolute bottom-2.5 left-3 right-3 text-white">
-              <h3 class="text-xs sm:text-sm font-bold line-clamp-1 drop-shadow-md">${title}</h3>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-800/80 text-xs gap-2">
-            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
-              ${tagsHtml}
-            </div>
-            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 font-semibold text-[11px] shrink-0 hover:underline flex items-center gap-1">
-              <span>${leadWatchText}</span>
-            </a>
           </div>
         </div>
       `;
 
-      let rightCardsHtml = '';
+      let tweetCardsHtml = [];
       (viralTweets || []).slice(0, 2).forEach(tw => {
         const twAuthor = escapeHtml(tw.author || 'AI Pioneer');
         const twHandle = escapeHtml(tw.author_handle || `@${twAuthor.replace(/\s+/g, '')}`);
@@ -3309,73 +3308,59 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const twUrl = escapeHtml(tw.url || '#');
         const twImg = tw.image_url || tw.media || '';
 
-        let mediaHtml = '';
+        let thumbHtml = '';
         if (twImg) {
-          const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=400&output=webp&q=80`;
-          mediaHtml = `
-            <div class="mt-2 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 max-h-24 sm:max-h-28 bg-slate-900 cursor-pointer group/img" onclick="openImageLightbox('${escapeHtml(twImg)}', event)">
-              <img src="${optImg}" alt="Tweet media" class="w-full h-24 sm:h-28 object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
+          const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
+          thumbHtml = `
+            <div class="shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
+              <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
             </div>`;
         } else if (tw.has_video || tw.video_url) {
-          mediaHtml = `
-            <div class="mt-2 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-mono">
-              <span>🎥</span>
-              <span>${isZh ? '包含实战视频 Demo' : 'Includes Video Demo'}</span>
+          thumbHtml = `
+            <div class="shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+              <span class="text-base">🎥</span>
             </div>`;
         }
 
-        rightCardsHtml += `
-          <article class="bg-white/95 dark:bg-slate-900/95 rounded-xl p-3 sm:p-3.5 border border-slate-200/90 dark:border-slate-800/90 shadow-sm flex flex-col justify-between hover:border-sky-500/40 transition-all flex-1">
-            <div>
-              <div class="flex items-center justify-between text-[11px] mb-1.5">
-                <div class="flex items-center space-x-2 min-w-0">
-                  <img src="${twAvatar}" alt="${twAuthor}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                  <div class="min-w-0 truncate">
-                    <div class="flex items-center space-x-1">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${twAuthor}</span>
-                      <span class="text-sky-500 text-[10px] font-black">✓</span>
-                    </div>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">${twHandle}</span>
+        const tCard = `
+          <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
+            <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
+              <div class="flex items-center space-x-2 min-w-0">
+                <img src="${twAvatar}" alt="${twAuthor}" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                <div class="min-w-0 truncate">
+                  <div class="flex items-center space-x-1">
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${twAuthor}</span>
+                    <span class="text-sky-500 text-[10px] font-black">✓</span>
                   </div>
                 </div>
-                <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-                  ${isZh ? '🔥 领袖高赞' : '🔥 Viral Pulse'}
-                </span>
               </div>
-              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2">
+              <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
+                ${isZh ? '🔥 领袖高赞' : '🔥 Viral Pulse'}
+              </span>
+            </div>
+
+            <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
                 ${twText}
               </p>
-              ${mediaHtml}
+              ${thumbHtml}
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 mt-2 border-t border-slate-100 dark:border-slate-800/60">
+
+            <div class="flex items-center justify-between text-[10px] text-slate-400 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
               <span class="font-mono">⚡ ${isZh ? '24h 实时' : '24h Live'}</span>
-              <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline">
-                ${isZh ? '查看原推 ↗' : 'View Post ↗'}
+              <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline flex items-center gap-0.5">
+                <span>${isZh ? '查看原推 ↗' : 'View Post ↗'}</span>
               </a>
             </div>
           </article>
         `;
+        tweetCardsHtml.push(tCard);
       });
 
-      const rightColumnHtml = `
-        <div class="lg:col-span-5 flex flex-col space-y-3 justify-between">
-          <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 px-1">
-            <span class="flex items-center gap-1.5">
-              <span>🐦</span>
-              <span>${rightTitle}</span>
-            </span>
-            <button type="button" onclick="switchTab('celebrity')" class="text-sky-600 dark:text-sky-400 hover:underline text-[11px] font-normal cursor-pointer">
-              ${isZh ? '全部推文 →' : 'All Radar →'}
-            </button>
-          </div>
-          ${rightCardsHtml}
-        </div>
-      `;
-
       container.innerHTML = `
-        <div id="hero-media-showcase-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch w-full">
-          ${leftPlayerHtml}
-          ${rightColumnHtml}
+        <div id="hero-media-showcase-grid" class="grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full">
+          ${cardVideoHtml}
+          ${tweetCardsHtml.join('')}
         </div>
       `;
       return true;

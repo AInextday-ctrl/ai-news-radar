@@ -696,11 +696,12 @@ def extract_topic_blacklist_keywords(topic_focus_list: list) -> tuple:
 def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_ids: set, now_ts: float = None) -> dict:
     """
     精选 48 小时极客实测展示厅 (Hero Media Showcase) 的核心展品与 2 篇精选图文推文：
-    【铁律】
-    1. 时效硬性红线：严选 <= 48.0 小时以内的优质实测上手、跑分评测或工具拆解，过期坚决不能入驻；
-    2. 跨栏目互斥：坚决剔除已被核心话题专题 (Topic Focus) 霸屏的争议议题（如纯公关撕逼），专攻独立技术实操；
-    3. 多媒体兼容：优先 YouTube 高清极客上手实操，兜底 𝕏 录屏实战 Demo；
-    4. 领袖图文：配备 2 篇真实高赞 AI 领袖带图/带视频推文。
+    【严苛质检铁律】
+    1. 坚决排除 YouTube Shorts 竖屏短视频（/shorts/、#shorts 一票否决），仅收录 16:9 横屏深度长视频评测与架构实操；
+    2. 顶级频道权威分层：Karpathy, 3Blue1Brown, Yannic Kilcher (Tier 1: 100分) > Matt Wolfe, Wes Roth, Matthew Berman长视频 (Tier 2: 80分)；
+    3. 实操深度高权重：严格匹配 tutorial, deep dive, architecture, benchmark, vs, comparison, 实测, 上手, 跑分；
+    4. 推文 AI 领域强相关性审查：严厉剔除与 AI 无关的社交吐槽/广告撕逼（如马斯克骂广告），必须包含核心 AI/模型/架构关键词；
+    5. 跨栏目互斥：严格与 Topic Focus、Top 3 必读隔离，彻底消灭版面炒冷饭。
     """
     if now_ts is None:
         now_ts = time.time()
@@ -718,16 +719,42 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
         if diff_sec > MAX_48H_SECONDS or diff_sec < -300:
             continue
 
+        url = (it.get("url") or "").lower()
         title_lower = (it.get("title", "") + " " + it.get("title_en", "") + " " + it.get("title_zh", "")).lower()
-        has_overlap = any(kw in title_lower for kw in blacklist_keywords if len(kw) >= 4)
-        is_demo = it.get("is_hero_demo") or any(k in title_lower for k in ["hands on", "tested", "how to", "benchmark", "clone", "built", "vs", "review", "实测", "上手"])
-        is_frontier = any(k in title_lower for k in ["gemini", "claude", "cursor", "windsurf", "deepseek", "sora", "kling", "llama", "v4", "v3", "o1", "o3", "agent"])
+        source_lower = (it.get("source") or it.get("author") or "").lower()
 
+        # 【一票否决 1】：坚决排除 YouTube Shorts 竖屏短视频
+        if "/shorts/" in url or "#shorts" in title_lower or "[shorts]" in title_lower or it.get("is_short"):
+            continue
+
+        # 【一票否决 2】：坚决排除与话题专栏重叠的条目
+        has_overlap = any(kw in title_lower for kw in blacklist_keywords if len(kw) >= 4)
+        if has_overlap:
+            continue
+
+        # 频道权威度分层
         score = 0
-        if is_demo: score += 100
-        if is_frontier: score += 50
-        if not has_overlap: score += 200
-        score += max(0, (MAX_48H_SECONDS - diff_sec) / 3600.0)
+        if any(k in source_lower for k in ["karpathy", "3blue1brown", "yannic", "two minute papers", "computerphile", "sebastian raschka"]):
+            score += 100
+        elif any(k in source_lower for k in ["matt wolfe", "wes roth", "matthew berman", "ai jason", "indydevdan", "theo"]):
+            score += 80
+        else:
+            score += 40
+
+        # 实操技术深度加分
+        if any(k in title_lower for k in ["hands on", "tutorial", "deep dive", "architecture", "how to build", "step by step", "benchmark", "comparison", "vs", "review", "实测", "上手", "跑分", "拆解", "评测"]):
+            score += 60
+        if any(k in title_lower for k in ["gemini", "claude", "cursor", "windsurf", "deepseek", "sora", "kling", "llama", "v4", "v3", "o1", "o3", "agent", "ollama", "local llm", "mcp"]):
+            score += 40
+        if any(k in title_lower for k in ["code", "built", "build", "workflow", "api", "guide", "system prompt", "repo", "github"]):
+            score += 30
+
+        # 噱头/八卦降权
+        if any(k in title_lower for k in ["drama", "exposed", "beef", "shocking"]):
+            score -= 80
+
+        # 48小时内新鲜度平滑加分
+        score += max(0, (MAX_48H_SECONDS - diff_sec) / 3600.0) * 1.5
 
         candidate_videos.append((score, it))
 
@@ -745,47 +772,82 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
             and (now_ts - parse_time_for_sort(it)) <= MAX_48H_SECONDS
             and (it.get("image_url") or it.get("has_video") or it.get("video_url"))
             and str(it.get("id") or "") not in consumed_ids
+            and not any(kw in (it.get("title", "") + " " + it.get("full_text_en", "")).lower() for kw in blacklist_keywords if len(kw) >= 4)
         ]
         if demo_tweets:
             lead_media = dict(demo_tweets[0])
             lead_media["showcase_type"] = "twitter_demo"
         else:
-            all_vids = [it for it in items if it.get("category") == "videos"]
+            # 最终保底：挑选非 Shorts 的合规长视频
+            all_vids = [it for it in items if it.get("category") == "videos" and "/shorts/" not in (it.get("url") or "").lower()]
             if all_vids:
                 lead_media = dict(all_vids[0])
                 lead_media["showcase_type"] = "youtube_video"
 
     if lead_media:
-        # 提取或补齐 video_id
+        # 提取或补齐 video_id 与 embed_url
         if not lead_media.get("video_id") and lead_media.get("url"):
             m_vid = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
             if m_vid:
                 lead_media["video_id"] = m_vid.group(1)
+        if lead_media.get("video_id"):
+            lead_media["embed_url"] = f"https://www.youtube-nocookie.com/embed/{lead_media['video_id']}"
 
         diff_sec = now_ts - parse_time_for_sort(lead_media)
         lead_media["diff_hours"] = round(diff_sec / 3600.0, 1)
 
     # 2. 筛选 2 条高质量带图/带视频的领袖动态 (排除已在 lead_media 和 consumed_ids 中出现的条目)
     lead_id = str(lead_media.get("id") or "") if lead_media else ""
-    viral_tweet_candidates = [
-        it for it in items 
-        if it.get("category") == "celebrity"
-        and str(it.get("id") or "") != lead_id
-        and str(it.get("id") or "") not in consumed_ids
-        and (now_ts - parse_time_for_sort(it)) <= 86400 * 2
-        and is_meaningful_tweet(it)
+    
+    # 刚性 AI 核心词表
+    AI_RELEVANCE_KEYWORDS = [
+        "ai", "llm", "gpt", "claude", "gemini", "deepseek", "grok", "xai", 
+        "openai", "anthropic", "model", "weights", "gpu", "nvidia", "compute", 
+        "training", "inference", "tokens", "agent", "mcp", "cursor", "benchmark",
+        "transformer", "reasoning", "robot", "optimus", "neural", "multimodal",
+        "architecture", "context", "eval", "code", "coding"
     ]
+
+    viral_tweet_candidates = []
+    for it in items:
+        if it.get("category") != "celebrity":
+            continue
+        if str(it.get("id") or "") == lead_id:
+            continue
+        if str(it.get("id") or "") in consumed_ids:
+            continue
+        if (now_ts - parse_time_for_sort(it)) > 86400 * 2:
+            continue
+        if not is_meaningful_tweet(it):
+            continue
+
+        t_text = ((it.get("title", "") or "") + " " + (it.get("full_text_en", "") or "") + " " + (it.get("summary_en", "") or "")).lower()
+        t_author = (it.get("author", "") or "").lower()
+        t_handle = (it.get("author_handle", "") or "").lower()
+
+        # 排除与话题专题重复的内容
+        if any(kw in t_text for kw in blacklist_keywords if len(kw) >= 4):
+            continue
+
+        # AI 相关性刚性校验：非专用AI官方账号必须包含AI关键词
+        is_pure_ai_author = any(k in t_author or k in t_handle for k in [
+            "openai", "anthropic", "deepseek", "claude", "deepmind", "karpathy", "ylecun", "sama", "drjimfan"
+        ])
+        has_ai_topic = any(kw in t_text.split() or f" {kw} " in f" {t_text} " for kw in AI_RELEVANCE_KEYWORDS)
+        if not is_pure_ai_author and not has_ai_topic:
+            continue
+
+        viral_tweet_candidates.append(it)
 
     def tweet_rich_score(it):
         s = 0
+        t_text = ((it.get("title", "") or "") + " " + (it.get("full_text_en", "") or "")).lower()
+        t_auth = (it.get("author", "") or "").lower()
         if it.get("image_url") or it.get("media"): s += 50
         if it.get("has_video") or it.get("video_url"): s += 40
         if it.get("is_viral"): s += 30
-        author_lower = (it.get("author") or "").lower()
-        if any(k in author_lower for k in ["deepseek", "claude", "anthropic", "openai", "google", "musk", "sama"]): s += 20
-        t_low = (it.get("title", "") + " " + it.get("full_text_en", "")).lower()
-        if not any(kw in t_low for kw in blacklist_keywords if len(kw) >= 4):
-            s += 30
+        if any(k in t_auth for k in ["deepseek", "claude", "anthropic", "openai", "google", "karpathy", "sama"]): s += 40
+        if any(k in t_text for k in ["release", "benchmark", "code", "weights", "paper", "architecture"]): s += 20
         return s
 
     viral_tweet_candidates.sort(key=tweet_rich_score, reverse=True)
