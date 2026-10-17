@@ -914,7 +914,7 @@
 
       translate.selectLanguageTag.show = false;
       translate.service.use('client.edge');
-      translate.language.setLocal('english');
+      translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
       if (translate.listener) {
         translate.listener.use = true;
       }
@@ -3437,9 +3437,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function toggleTweetExpand(btn) {
       if (window.event) window.event.stopPropagation();
       const parent = btn.parentElement;
-      const prevSibling = parent.previousElementSibling;
-      const box = prevSibling ? prevSibling.querySelector('.tweet-content-box') : null;
-      const fade = prevSibling ? prevSibling.querySelector('.tweet-fade-overlay') : null;
+      let prevSibling = parent ? parent.previousElementSibling : null;
+      let box = prevSibling ? prevSibling.querySelector('.tweet-content-box') : null;
+      let fade = prevSibling ? prevSibling.querySelector('.tweet-fade-overlay') : null;
+      if (!box) {
+        const card = btn.closest('article, .glass-card') || parent;
+        if (card) {
+          box = card.querySelector('.tweet-content-box');
+          fade = card.querySelector('.tweet-fade-overlay');
+        }
+      }
       if (!box) return;
       const isExpanded = box.getAttribute('data-expanded') === 'true';
       const isZh = (typeof currentLang !== 'undefined' ? currentLang : 'en') === 'zh';
