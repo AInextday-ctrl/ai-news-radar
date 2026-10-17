@@ -166,12 +166,26 @@ def extract_tool_fingerprints(item: Dict[str, Any]) -> Set[str]:
 
     return fps
 
+HOUSEHOLD_LEGACY_TOOLS = {
+    "cursor", "bolt.new", "bolt", "claude code", "claude-code",
+    "ollama", "perplexity", "lm studio", "lmstudio", "whisper",
+    "whisper webgpu", "vllm", "comfyui", "dify", "n8n", "gamma",
+    "excalidraw", "open-webui", "openwebui", "jan", "kokoro",
+    "liveportrait", "mineru", "aider", "openhands", "tripo3d", "triposr"
+}
+
 def is_valid_tool_candidate(it: Dict[str, Any]) -> bool:
-    """Strict filtering gate: reject non-tools, prompt lists, tutorials, plugins repos."""
+    """Strict filtering gate: reject non-tools, prompt lists, tutorials, plugins repos, and stale household tools."""
     app_nm = str(it.get("app_name") or it.get("title") or "").strip().lower()
     u_str = (str(it.get("url") or "") + " " + str(it.get("official_url") or "")).lower()
 
     if not app_nm:
+        return False
+
+    # 0. Reject well-known household tools (烂大街的成熟旧工具坚决不入雷达流)
+    if app_nm in HOUSEHOLD_LEGACY_TOOLS or any(legacy in app_nm for legacy in ["bolt.new", "claude code", "lm studio", "whisper web"]):
+        return False
+    if str(it.get("id", "")).startswith("tool-") or it.get("is_curated_base"):
         return False
 
     # 1. Blacklist check

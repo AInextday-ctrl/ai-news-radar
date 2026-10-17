@@ -1321,11 +1321,10 @@ def save_news(items: list):
             recent_keys.add(get_it_key(it))
 
     def _interleave_tools_multi_source(tool_list):
-        from curated_tools_data import CURATED_AI_TOOLS
         from tool_fusion import fuse_and_deduplicate_tools, rank_radar_stream
 
-        # 工业级三维指纹协同 (名称指纹 + 代码仓指纹 + 独立主域名指纹) 与跨源智能属性融合引擎
-        fused = fuse_and_deduplicate_tools([CURATED_AI_TOOLS, tool_list])
+        # 工业级三维指纹协同 (名称指纹 + 代码仓指纹 + 独立主域名指纹) 与跨源智能属性融合引擎 (纯正雷达黑马流)
+        fused = fuse_and_deduplicate_tools([tool_list])
         return rank_radar_stream(fused)
 
     # 3. 构建 24/48 小时热看板 payload (latest_news.json)

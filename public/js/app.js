@@ -5388,34 +5388,43 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (u.includes('huggingface.co/spaces') || su.includes('huggingface.co/spaces')) return 'huggingface';
           return 'web';
         };
+        const HOUSEHOLD_LEGACY_TOOLS = new Set([
+          'cursor', 'bolt.new', 'bolt', 'claude code', 'claude-code',
+          'ollama', 'perplexity', 'lm studio', 'lmstudio', 'whisper',
+          'whisper webgpu', 'vllm', 'comfyui', 'dify', 'n8n', 'gamma',
+          'excalidraw', 'open-webui', 'openwebui', 'jan', 'kokoro',
+          'liveportrait', 'mineru', 'aider', 'openhands', 'tripo3d', 'triposr'
+        ]);
+
         let list = dedupToolItems(filterList(cachedData.grouped?.tools || cachedData.tools || cachedData.applied_tools || [])).filter(it => {
+          const nm = (it.app_name || '').toLowerCase().trim();
+          const id = (it.id || '').toLowerCase().trim();
+          // 坚决剔除人尽皆知的烂大街旧工具，恪守雷达发掘前沿黑马工具定位
+          if (HOUSEHOLD_LEGACY_TOOLS.has(nm) || id.startsWith('tool-') || it.is_curated_base) return false;
           if (getToolOrigin(it) === 'github') {
-            const s = Number(it.stars) || 0;
-            if (s > 0 && s < 200) return false;
+            const s = Number(it.stars) || (it.metrics ? Number(it.metrics.stars) || 0 : 0);
+            const ws = Number(it.weekly_stars) || (it.metrics ? Number(it.metrics.weekly_stars) || 0 : 0);
+            if (s > 0 && s < 200 && ws < 200) return false;
           }
           return true;
         });
+
         if (toolOriginFilter && toolOriginFilter !== 'all') {
           list = list.filter(it => getToolOrigin(it) === toolOriginFilter);
-          if (toolOriginFilter === 'github') {
-            list.sort((a, b) => ((Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0)) || ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)) || ((Number(b.stars) || 0) - (Number(a.stars) || 0)));
-          } else {
-            list.sort((a, b) => ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)));
-          }
-        } else {
-          // 综合多源混排：打破 GitHub 刷屏垄断，按 2个免装Web应用 + 2个本周指数飙升GitHub + 1个HF Space 循环交错
-          const webList = list.filter(it => getToolOrigin(it) === 'web');
-          const ghList = list.filter(it => getToolOrigin(it) === 'github').sort((a, b) => ((Number(b.weekly_stars) || 0) - (Number(a.weekly_stars) || 0)) || ((Number(b.utility_score) || 0) - (Number(a.utility_score) || 0)));
-          const hfList = list.filter(it => getToolOrigin(it) === 'huggingface');
-          const mixed = [];
-          let wi = 0, gi = 0, hi = 0;
-          while (wi < webList.length || gi < ghList.length || hi < hfList.length) {
-            for (let k = 0; k < 2 && wi < webList.length; k++) mixed.push(webList[wi++]);
-            for (let k = 0; k < 2 && gi < ghList.length; k++) mixed.push(ghList[gi++]);
-            if (hi < hfList.length) mixed.push(hfList[hi++]);
-          }
-          list = mixed;
         }
+
+        // 纯正雷达发现流：按本周飙升增速 (weekly_stars) 倒序排列，真正的新晋黑马绝对置顶
+        list.sort((a, b) => {
+          const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+          const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+          if (wkB !== wkA) return wkB - wkA;
+          const utB = Number(b.utility_score) || 80;
+          const utA = Number(a.utility_score) || 80;
+          if (utB !== utA) return utB - utA;
+          const stB = Number(b.stars) || (b.metrics ? Number(b.metrics.stars) || 0 : 0);
+          const stA = Number(a.stars) || (a.metrics ? Number(a.metrics.stars) || 0 : 0);
+          return stB - stA;
+        });
         updateToolScenarioCounts(list);
         if (toolScenarioFilter && toolScenarioFilter !== 'all') {
           list = list.filter(it => normalizeToolScenarioKey(it.scenario_key || it.scenario_tag || '') === toolScenarioFilter);
