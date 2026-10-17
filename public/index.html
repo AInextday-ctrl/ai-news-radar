@@ -88,7 +88,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2025/02/STK043_VRG_Illo_N_Barclay_2_Meta.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%252C10.732984293194%252C100%252C78.534031413613%26w%3D1200&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=5.6.0">
-  <link rel="preload" href="/js/app.min.js?v=5.6.4" as="script">
+  <link rel="preload" href="/js/app.min.js?v=5.7.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -2221,6 +2221,9 @@ See it in action 👇
               <button type="button" onclick="switchHomeToolFilter('demo')" id="home-tool-demo" class="home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
                 <span>🟢</span><span>Live Demos</span>
               </button>
+              <button type="button" onclick="switchHomeToolFilter('github')" id="home-tool-github" class="home-tool-pill px-2.5 py-1 rounded-lg text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center gap-1 transition-all cursor-pointer">
+                <span>💻</span><span>Open Source</span>
+              </button>
             </div>
             <div class="space-y-3" id="stream-tools">
               <!-- Dynamic Top Applied Tools -->
@@ -2847,6 +2850,22 @@ See it in action 👇
           <p id="tool-modal-hook" class="text-sm sm:text-base font-bold text-emerald-950 dark:text-emerald-200 leading-snug"></p>
         </div>
 
+        <!-- 快速上手与适用人群 (Quickstart & Best For) -->
+        <div id="tool-modal-quickstart-wrap" class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 dark:bg-slate-950/90 border border-emerald-500/30 space-y-2.5">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+            <span class="flex items-center space-x-1.5 text-xs font-bold text-emerald-400">
+              <span>⚡</span>
+              <span id="tool-modal-quickstart-label">15s Quickstart Guide</span>
+            </span>
+            <span id="tool-modal-best-for-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">Best For</span>
+          </div>
+          <p id="tool-modal-best-for-text" class="text-xs text-slate-300 leading-relaxed"></p>
+          <div id="tool-modal-cmd-box" class="flex items-center justify-between bg-black/70 border border-slate-800 rounded-xl px-3 py-2 text-xs font-mono text-emerald-300 gap-2">
+            <code id="tool-modal-cmd-text" class="truncate select-all text-slate-200">git clone ...</code>
+            <button id="tool-modal-cmd-copy-btn" type="button" onclick="copyToolQuickstartCmd()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-sans text-xs font-bold shrink-0 transition-all cursor-pointer">Copy</button>
+          </div>
+        </div>
+
         <!-- 交互式多图轮播画廊 (Interactive Screenshot Carousel) -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100">
@@ -2923,7 +2942,7 @@ See it in action 👇
     <span id="copy-toast-msg">Copied to clipboard!</span>
   </div>
 
-  <script defer src="/js/app.min.js?v=5.6.4"></script>
+  <script defer src="/js/app.min.js?v=5.7.0"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

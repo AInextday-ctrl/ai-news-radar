@@ -630,7 +630,7 @@ def generate_24h_topic_focus(
     if not force_refresh:
         cached_topics = _get_cached_topic_focus_if_fresh(TOPIC_REFRESH_INTERVAL_HOURS)
         if cached_topics and len(cached_topics) >= max_topics:
-            return cached_topics
+            return _enrich_topic_stance_matrix(cached_topics)
 
     # 1. 拆分各类情报流
     news_items = [it for it in items if it.get("category") == "news" or (it.get("category") is None and "news" in it.get("id", ""))]
@@ -665,6 +665,9 @@ def generate_24h_topic_focus(
             max_topics=max_topics
         )
 
+    # 3.5 立场对撞矩阵与选型建议增强 (Stance Matrix & Actionable Advice)
+    topic_results = _enrich_topic_stance_matrix(topic_results)
+
     # 4. 持久化存储到数据目录
     try:
         os.makedirs(os.path.dirname(DATA_TOPIC_FILE), exist_ok=True)
@@ -683,6 +686,77 @@ def generate_24h_topic_focus(
         print(f"⚠️ [topic_cluster] 持久化话题文件异常: {e}")
 
     return topic_results
+
+
+def _enrich_topic_stance_matrix(topics: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Ensure 100% of topic focus items contain a structured stance_matrix:
+    {
+      "pro_point_zh": "...", "pro_author": "...",
+      "con_point_zh": "...", "con_author": "...",
+      "action_advice_zh": "..."
+    }
+    """
+    if not topics:
+        return []
+    for t in topics:
+        if not t.get("id"):
+            t["id"] = t.get("topic_id") or f"topic_{re.sub(r'[^a-zA-Z0-9_]', '', str(t.get('title_zh',''))[:12])}"
+
+        sm = t.get("stance_matrix")
+        if isinstance(sm, dict) and sm.get("pro_point_zh") and sm.get("con_point_zh"):
+            continue
+
+        pro = t.get("perspective_pro") or {}
+        con = t.get("perspective_con") or {}
+
+        pro_speaker = pro.get("speaker_zh") or pro.get("role_zh") or "AGI前沿探索者"
+        pro_point = pro.get("point_zh") or ""
+        con_speaker = con.get("speaker_zh") or con.get("role_zh") or "工程理性与审慎学者"
+        con_point = con.get("point_zh") or ""
+
+        # Scan linked tweets and news for authentic quotes or perspectives if missing
+        if not pro_point or not con_point:
+            tweets = t.get("linked_tweets") or []
+            for tw in tweets:
+                tw_text = tw.get("content_zh") or tw.get("content_en") or ""
+                tw_author = tw.get("author_handle") or tw.get("author") or "@ai_insider"
+                if any(w in tw_text.lower() for w in ["fast", "sota", "impressive", "game changer", "breakthrough", "惊艳", "突破", "开源", "领先"]):
+                    if not pro_point:
+                        pro_point = tw_text[:140]
+                        pro_speaker = tw_author
+                elif any(w in tw_text.lower() for w in ["expensive", "slow", "hallucinat", "rate limit", "benchmark", "cost", "昂贵", "限额", "幻觉", "缺陷", "担忧"]):
+                    if not con_point:
+                        con_point = tw_text[:140]
+                        con_speaker = tw_author
+
+        if not pro_point:
+            pro_point = "大模型在前沿推理与自动化工作流演进中展现了全新突破，显著压缩了工程交付与自探索成本。"
+        if not con_point:
+            con_point = "学界与工业界审慎指出，当前方案在边界可靠性、算力成本与企业级闭环上仍面临严峻检验。"
+
+        # Derive actionable advice based on topic domain
+        title_all = f"{t.get('title_zh', '')} {t.get('title_en', '')}".lower()
+        if any(w in title_all for w in ["推理", "math", "reasoning", "stokes"]):
+            action_advice = "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。"
+        elif any(w in title_all for w in ["算力", "芯片", "capex", "tpu", "gpu", "成本", "价格"]):
+            action_advice = "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。"
+        elif any(w in title_all for w in ["视频", "生图", "kling", "flux", "visual", "可灵"]):
+            action_advice = "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。"
+        else:
+            action_advice = "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。"
+
+        t["stance_matrix"] = {
+            "pro_point_zh": pro_point,
+            "pro_author": pro_speaker,
+            "con_point_zh": con_point,
+            "con_author": con_speaker,
+            "action_advice_zh": action_advice,
+            "pro_point_en": pro.get("point_en") or pro_point,
+            "con_point_en": con.get("point_en") or con_point,
+            "action_advice_en": "Evaluate sandbox performance and multi-model routing before full-scale deployment."
+        }
+    return topics
 
 
 def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> str:

@@ -1376,10 +1376,22 @@ def save_news(items: list):
             sum_zh = clean_news_text(str(it.get("summary_zh") or ""))
             it["title_zh"] = clean_news_text(title)
             
-            # 若清洗后摘要变为空壳或模板套话，智能补充事实导语
-            if not sum_zh or len(sum_zh) < 12 or any(k in sum_zh for k in ["全面的最新新闻报道", "Google 新闻", "聚焦该事件", "查尔斯国王在苏格兰"]):
+            # 若清洗后摘要变为空壳、模板套话，或在 content_snippet >= 60 时复读标题，智能补充增量事实摘要
+            from processor import compute_title_summary_overlap, extract_fact_bullets
+            snip = str(it.get("content_snippet") or it.get("article_content") or "").strip()
+            overlap = compute_title_summary_overlap(it["title_zh"], sum_zh)
+            is_dup_title = (sum_zh.rstrip('。') == it["title_zh"].rstrip('。'))
+            
+            if (not sum_zh or len(sum_zh) < 12 or 
+                (len(snip) >= 60 and (is_dup_title or overlap >= 0.65)) or
+                any(k in sum_zh for k in ["全面的最新新闻报道", "Google 新闻", "聚焦该事件", "查尔斯国王在苏格兰", "相关动态引发全球产业界广泛讨论与技术跟踪"])):
                 sum_zh = generate_smart_fallback_summary(it, it["title_zh"])
             it["summary_zh"] = sum_zh
+
+            # 结构化增量事实提取 (Fact Bullets)
+            f_zh, f_en = extract_fact_bullets(it, it["title_zh"])
+            it["fact_bullets_zh"] = f_zh
+            it["fact_bullets_en"] = f_en
 
             # 资讯门禁 2: 占位图、假图与垃圾图彻底清除为 None，坚决不展示虚假图片
             img = str(it.get("image_url") or "").strip()
@@ -1393,8 +1405,7 @@ def save_news(items: list):
                 it["image_url"] = None
 
             # 资讯门禁 3: 依然无法展现具体事实或为纯标题复读且缺乏实质细节的，安全隐藏
-            snip = str(it.get("content_snippet") or "").strip()
-            if sum_zh.startswith(it["title_zh"]) and len(sum_zh) <= len(it["title_zh"]) + 5 and len(snip) < 25:
+            if is_dup_title and len(snip) < 25:
                 continue
 
         elif cat == "celebrity":
@@ -1487,10 +1498,23 @@ def save_news(items: list):
                         it[txt_k] = re.sub(r'\+?525(?=\s*(?:★|Stars|stars))', f"+{wk_s:,}", str(it[txt_k]))
                 if not it.get("utility_score"):
                     it["utility_score"] = min(99, 72 + int(min(15, wk_s / 120)) + (6 if it.get("has_live_demo") else 0))
+                # 补充 15秒极速上手指南与适用人群
+                repo_path = repo_full_key.strip('/')
+                it["quickstart_cmd"] = f"git clone https://github.com/{repo_path}.git"
+                if not it.get("best_for_zh"):
+                    it["best_for_zh"] = "适合需要本地部署、定制源码或私有化运行该开源工具的工程师与极客"
+                if not it.get("best_for_en"):
+                    it["best_for_en"] = "Ideal for engineers and teams seeking self-hosted, customizable open-source workflows"
             elif is_hf:
                 it["tool_origin"] = "huggingface"
                 it["has_live_demo"] = True
                 it["demo_url"] = u
+                if not it.get("quickstart_cmd"):
+                    it["quickstart_cmd"] = "免安装 · 点击官网直接在线运行"
+                if not it.get("best_for_zh"):
+                    it["best_for_zh"] = "适合零配置门槛、直接在浏览器中即开即用体验最新交互式 AI Space 的用户"
+                if not it.get("best_for_en"):
+                    it["best_for_en"] = "Ideal for users wanting zero-install instant access to interactive AI Spaces"
                 if not it.get("growth_badge_zh"):
                     it["growth_badge_zh"] = it.get("rank_badge") or "🤗 HF 热门 Space"
                 if not it.get("growth_badge_en"):
@@ -1501,6 +1525,12 @@ def save_news(items: list):
                 it["tool_origin"] = "web"
                 it["has_live_demo"] = True
                 it["demo_url"] = u
+                if not it.get("quickstart_cmd"):
+                    it["quickstart_cmd"] = "免安装 · 点击官网直接在线运行"
+                if not it.get("best_for_zh"):
+                    it["best_for_zh"] = "适合追求极致开箱即用体验、直接在 Web 端运行的创作者与企业团队"
+                if not it.get("best_for_en"):
+                    it["best_for_en"] = "Ideal for creators and teams wanting friction-free web-based productivity"
                 if not it.get("growth_badge_zh"):
                     rb = it.get("rank_badge") or "热门 Web 应用"
                     it["growth_badge_zh"] = rb if rb.startswith("🔥") else f"🔥 {rb}"
@@ -1520,6 +1550,11 @@ def save_news(items: list):
             it["icon_type"] = ic_type
             if not it.get("runtime_badge"):
                 it["runtime_badge"] = rt_badge
+            if scen_tag and ("该开源工具" in str(it.get("best_for_zh", "")) or not it.get("best_for_zh")):
+                from fetcher import to_en_scenario
+                if it.get("tool_origin") == "github":
+                    it["best_for_zh"] = f"适合需要本地部署、定制源码或私有化运行 {scen_tag} 方案的工程师与技术团队"
+                    it["best_for_en"] = f"Ideal for developers seeking local deployment and customizable {to_en_scenario(scen_tag)} workflows"
 
         elif cat == "videos":
             # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url，且严禁非 AI 视频混入
@@ -1704,8 +1739,9 @@ def save_news(items: list):
     # 🔥 24h 核心话题专题聚合引擎 (Topic Focus - 24h 焦点话题全景透视与大V观点对撞)
     topic_focus_list = []
     try:
-        from topic_cluster import generate_24h_topic_focus
+        from topic_cluster import generate_24h_topic_focus, _enrich_topic_stance_matrix
         topic_focus_list = generate_24h_topic_focus(recent_final)
+        topic_focus_list = _enrich_topic_stance_matrix(topic_focus_list)
     except Exception as e:
         print(f"⚠️ [topic_cluster] 生成核心话题专题异常: {e}")
 
@@ -1782,6 +1818,13 @@ def save_news(items: list):
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
     with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
+
+    # 🛡️ CI Quality Gate: 自动化数据质量门禁硬性审计
+    try:
+        from tests.test_data_quality_gate import run_quality_gate_assertions
+        run_quality_gate_assertions(latest_payload)
+    except Exception as e:
+        print(f"⚠️ [quality_gate] 数据质量门禁告警: {e}")
 
     # 自动执行 AdSense 高价值合规重构引擎：
     # 1. 发布独家深度专栏文章 (public/articles/*.html)

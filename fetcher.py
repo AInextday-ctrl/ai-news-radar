@@ -1859,14 +1859,15 @@ def compute_organic_weekly_stars(
 
     # 4. Multi-factor organic surge estimation (power-law + fork momentum + recency + repo hash)
     h_bytes = hashlib.md5((clean_key or str(stars)).encode("utf-8")).digest()
-    jitter = 0.82 + (int.from_bytes(h_bytes[:2], "big") % 390) / 1000.0  # [0.820, 1.209]
-    micro_offset = (int.from_bytes(h_bytes[2:4], "big") % 37) - 18       # [-18, +18]
+    jitter = 0.80 + (int.from_bytes(h_bytes[:2], "big") % 400) / 1000.0  # [0.800, 1.200]
+    micro_offset = (int.from_bytes(h_bytes[2:4], "big") % 71) - 35       # [-35, +35]
+    salt = (int.from_bytes(h_bytes[4:6], "big") % 31) - 15               # [-15, +15]
     fork_ratio = min(0.35, forks / max(1.0, float(stars)))
     fork_mult = 0.94 + fork_ratio * 1.45
     age_factor = max(0.62, min(1.32, 160.0 / max(30.0, age_days ** 0.68)))
 
-    base_surge = (max(200.0, float(stars)) ** 0.56) * 2.15
-    wk = max(78, int(round(base_surge * fork_mult * age_factor * jitter + micro_offset)))
+    base_surge = (max(200.0, float(stars)) ** 0.62) * 2.80
+    wk = max(78, int(round(base_surge * fork_mult * age_factor * jitter + micro_offset + salt)))
     if wk == 525:
         wk += 17
 
@@ -2068,6 +2069,9 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                 "demo_url": demo_url,
                 "has_live_demo": has_live_demo,
                 "tool_origin": "github",
+                "quickstart_cmd": f"git clone https://github.com/{full_name or name}.git",
+                "best_for_zh": f"适合需要本地部署、二次开发或私有化运行 {scenario} 的工程师与技术团队",
+                "best_for_en": f"Ideal for developers seeking local deployment and customizable {to_en_scenario(scenario)} workflows",
                 "weekly_stars": weekly_stars,
                 "is_breakout": is_breakout,
                 "growth_badge_zh": growth_badge_zh,

@@ -3620,14 +3620,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const title = isZh ? (t.title_zh || "") : (t.title_en || "");
           const summary = isZh ? (t.summary_zh || "") : (t.summary_en || "");
           
+          const sm = t.stance_matrix || {};
           const pro = t.perspective_pro || {};
           const con = t.perspective_con || {};
-          const proRole = isZh ? (pro.role_zh || "") : (pro.role_en || "");
-          const proSpeaker = isZh ? (pro.speaker_zh || "") : (pro.speaker_en || "");
-          const proPoint = isZh ? (pro.point_zh || "") : (pro.point_en || "");
-          const conRole = isZh ? (con.role_zh || "") : (con.role_en || "");
-          const conSpeaker = isZh ? (con.speaker_zh || "") : (con.speaker_en || "");
-          const conPoint = isZh ? (con.point_zh || "") : (con.point_en || "");
+          const proRole = isZh ? (pro.role_zh || "支持/看好方论据") : (pro.role_en || "Pro Viewpoint");
+          const proSpeaker = sm.pro_author || (isZh ? (pro.speaker_zh || "") : (pro.speaker_en || ""));
+          const proPoint = (isZh ? (sm.pro_point_zh || pro.point_zh || "") : (pro.point_en || sm.pro_point_zh || ""));
+          const conRole = isZh ? (con.role_zh || "审慎/质疑方核心论据") : (con.role_en || "Skeptical/Con Viewpoint");
+          const conSpeaker = sm.con_author || (isZh ? (con.speaker_zh || "") : (con.speaker_en || ""));
+          const conPoint = (isZh ? (sm.con_point_zh || con.point_zh || "") : (con.point_en || sm.con_point_zh || ""));
+          const actionAdvice = isZh ? (sm.action_advice_zh || "") : (sm.action_advice_en || sm.action_advice_zh || "");
 
           const newsList = t.linked_news || [];
           const newsHtml = newsList.map(n => {
@@ -3746,6 +3748,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                       “${escapeHtml(conPoint)}”
                     </p>
                   </div>
+                  ${actionAdvice ? `
+                    <div class="p-2.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-indigo-200 text-xs flex items-start gap-1.5 shadow-sm mt-2.5">
+                      <span class="text-indigo-400 font-bold shrink-0">💡 ${isZh ? "选型建议" : "Action Advice"}：</span>
+                      <span class="leading-relaxed text-[11px] font-normal text-indigo-200/95">${escapeHtml(actionAdvice)}</span>
+                    </div>
+                  ` : ''}
                 </div>
 
                 <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
@@ -5034,13 +5042,48 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         .replace(/'/g, '&#039;');
     }
 
+    function getAssembledPromptText(id) {
+      if (!window.__promptStore || !window.__promptStore[id]) {
+        const box = document.getElementById(`pbox-${id}`);
+        return box ? (box.innerText || box.textContent || "").trim() : "";
+      }
+      const store = window.__promptStore[id];
+      if (store.assembled) return store.assembled;
+      const lang = store.active || (currentLang === 'zh' ? 'zh' : 'en');
+      return (lang === 'zh') ? (store.zh || store.en) : (store.en || store.zh);
+    }
+
+    function onPromptVarInput(id) {
+      if (!window.__promptStore || !window.__promptStore[id]) return;
+      const store = window.__promptStore[id];
+      const lang = store.active || (currentLang === 'zh' ? 'zh' : 'en');
+      let baseText = (lang === 'zh') ? (store.zh || store.en) : (store.en || store.zh);
+      
+      const inputs = document.querySelectorAll(`.prompt-var-input[data-pid="${id}"]`);
+      let assembledText = baseText;
+      inputs.forEach(inp => {
+        const varKey = inp.getAttribute('data-var');
+        const val = inp.value.trim();
+        if (val && varKey) {
+          assembledText = assembledText.split(varKey).join(val);
+        }
+      });
+      store.assembled = assembledText;
+      const box = document.getElementById(`pbox-${id}`);
+      if (box) {
+        box.textContent = assembledText;
+      }
+    }
+
     function switchPromptLang(id, lang) {
       window.__promptStore = window.__promptStore || {};
       if (!window.__promptStore[id]) return;
       window.__promptStore[id].active = lang;
+      delete window.__promptStore[id].assembled;
       const text = (lang === 'zh') ? window.__promptStore[id].zh : window.__promptStore[id].en;
       const box = document.getElementById(`pbox-${id}`);
       if (box) box.textContent = text;
+      onPromptVarInput(id);
 
       const btnZh = document.getElementById(`plang-zh-${id}`);
       const btnEn = document.getElementById(`plang-en-${id}`);
@@ -5056,19 +5099,31 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     function copyCardPrompt(id) {
-      let text = "";
-      if (window.__promptStore && window.__promptStore[id]) {
-        const lang = window.__promptStore[id].active || 'zh';
-        text = (lang === 'zh') ? window.__promptStore[id].zh : window.__promptStore[id].en;
-      }
-      if (!text) {
-        const box = document.getElementById(`pbox-${id}`);
-        if (box) text = box.innerText || box.textContent;
-      }
+      const text = getAssembledPromptText(id);
       if (text) {
         copyToClipboard(text);
+        showCustomToast(currentLang === 'zh' ? '已复制完整提示词 📋' : 'Prompt copied to clipboard! 📋', 2000);
       }
     }
+
+    function jumpToLLMWithPrompt(id, platform) {
+      const text = getAssembledPromptText(id);
+      if (!text) return;
+      copyToClipboard(text);
+      const isZh = (currentLang === 'zh');
+      showCustomToast(isZh ? "已复制完整提示词，正在打开模型工作台..." : "Prompt copied! Opening LLM workbench...", 3000);
+      
+      let targetUrl = "https://claude.ai/new";
+      if (platform === 'chatgpt') targetUrl = "https://chatgpt.com/";
+      else if (platform === 'deepseek') targetUrl = "https://chat.deepseek.com/";
+      else if (platform === 'claude') targetUrl = "https://claude.ai/new";
+      
+      window.open(targetUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    window.getAssembledPromptText = getAssembledPromptText;
+    window.onPromptVarInput = onPromptVarInput;
+    window.jumpToLLMWithPrompt = jumpToLLMWithPrompt;
 
     function getVideoSubType(it) {
       if (it.sub_type) return it.sub_type;
@@ -5421,9 +5476,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         : (item.variables_en || (item.variables || []).filter(v => !/[\u4e00-\u9fa5]/.test(v)));
 
       const variablesHtml = (variables && variables.length > 0)
-        ? `<div class="flex items-center gap-1.5 flex-wrap pt-0.5 w-full min-w-0">
-             <span class="text-[9px] text-slate-500 dark:text-slate-400 font-mono shrink-0">${isZh ? "参数占位符:" : "Variables:"}</span>
-             ${variables.map(v => `<span class="px-1.5 py-0.2 rounded bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 font-mono text-[9px] break-all">${escapeHtml(v)}</span>`).join('')}
+        ? `<div class="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-500/30 space-y-2 w-full min-w-0">
+             <div class="flex items-center justify-between text-[10px] font-bold text-amber-800 dark:text-amber-300">
+               <span class="flex items-center gap-1"><span>✏️</span><span>${isZh ? "动态变量填空器 (实时组装)" : "Dynamic Variable Fill-in"}</span></span>
+               <span class="text-[9px] text-slate-500 dark:text-slate-400 font-mono">${isZh ? "输入即刻替换预览" : "Type to assemble"}</span>
+             </div>
+             <div class="grid grid-cols-1 gap-1.5 w-full min-w-0">
+               ${variables.map(v => {
+                 const cleanV = String(v).replace(/^\{\{|\}\}$/g, '');
+                 return `
+                   <div class="flex items-center gap-1.5 bg-white/90 dark:bg-slate-900/90 px-2 py-1 rounded-lg border border-slate-300 dark:border-slate-700/80 text-[10px] w-full min-w-0 shadow-xs">
+                     <span class="text-amber-700 dark:text-amber-400 font-mono font-semibold shrink-0">${escapeHtml(cleanV)}:</span>
+                     <input type="text" class="prompt-var-input bg-transparent text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none w-full font-mono text-[10px]" data-pid="${item.id}" data-var="${escapeHtml(v)}" placeholder="${isZh ? '填入' : 'Enter'} ${escapeHtml(cleanV)}..." oninput="onPromptVarInput('${item.id}')">
+                   </div>
+                 `;
+               }).join('')}
+             </div>
            </div>`
         : '';
 
@@ -5493,9 +5561,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             ` : ''}
           </div>
 
-          <button type="button" onclick="copyCardPrompt('${item.id}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-md shadow-purple-600/30 cursor-pointer">
-            <span>${t.copyPrompt || '一键复制提示词 📋'}</span>
-          </button>
+          <div class="space-y-1.5 w-full pt-1">
+            <button type="button" onclick="copyCardPrompt('${item.id}')" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold py-1.5 rounded-lg transition-colors flex items-center justify-center space-x-1.5 shadow-md shadow-purple-600/30 cursor-pointer">
+              <span>${t.copyPrompt || (isZh ? '📋 一键复制组装后 Prompt' : '📋 Copy Assembled Prompt')}</span>
+            </button>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" onclick="jumpToLLMWithPrompt('${item.id}', 'claude')" class="py-1 px-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-purple-100 dark:hover:bg-purple-900/60 border border-slate-300 dark:border-slate-700 hover:border-purple-500/50 text-[10px] text-purple-700 dark:text-purple-300 font-mono font-medium flex items-center justify-center gap-0.5 transition-all cursor-pointer" title="复制并在 Claude 中打开">
+                <span>🚀 Claude</span>
+              </button>
+              <button type="button" onclick="jumpToLLMWithPrompt('${item.id}', 'chatgpt')" class="py-1 px-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 border border-slate-300 dark:border-slate-700 hover:border-emerald-500/50 text-[10px] text-emerald-700 dark:text-emerald-300 font-mono font-medium flex items-center justify-center gap-0.5 transition-all cursor-pointer" title="复制并在 ChatGPT 中打开">
+                <span>🚀 ChatGPT</span>
+              </button>
+              <button type="button" onclick="jumpToLLMWithPrompt('${item.id}', 'deepseek')" class="py-1 px-1 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-sky-100 dark:hover:bg-sky-900/60 border border-slate-300 dark:border-slate-700 hover:border-sky-500/50 text-[10px] text-sky-700 dark:text-sky-300 font-mono font-medium flex items-center justify-center gap-0.5 transition-all cursor-pointer" title="复制并在 DeepSeek 中打开">
+                <span>🚀 DeepSeek</span>
+              </button>
+            </div>
+          </div>
         </article>
       `;
     }
@@ -5773,7 +5854,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         'new': 'home-tool-new',
         'surge': 'home-tool-surge',
         'web': 'home-tool-web',
-        'demo': 'home-tool-demo'
+        'demo': 'home-tool-demo',
+        'github': 'home-tool-github'
       };
       Object.entries(pills).forEach(([k, id]) => {
         const el = document.getElementById(id);
@@ -5843,6 +5925,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } else if (homeToolFilter === 'demo') {
         list = list.filter(it => it.has_live_demo || getToolOrigin(it) === 'web' || getToolOrigin(it) === 'huggingface' || (it.demo_url && it.demo_url.length > 5));
         list.sort((a, b) => getToolTime(b) - getToolTime(a));
+      } else if (homeToolFilter === 'github') {
+        list = list.filter(it => getToolOrigin(it) === 'github');
+        list.sort((a, b) => {
+          const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
+          const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
+          if (wkB !== wkA) return wkB - wkA;
+          return getToolTime(b) - getToolTime(a);
+        });
       } else {
         // 'new' (今日最新入库): 严格按照筛选入库时间倒序排在首位
         list.sort((a, b) => {
@@ -8625,6 +8715,24 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (specScenarioEl) specScenarioEl.textContent = translateScenarioTag(item.scenario_tag, currentLang);
       if (specSourceEl) specSourceEl.textContent = sourceName;
 
+      // 快速上手指南与适用人群 (Quickstart & Best For)
+      const qsLabelEl = document.getElementById('tool-modal-quickstart-label');
+      const qsBadgeEl = document.getElementById('tool-modal-best-for-badge');
+      const qsBestForEl = document.getElementById('tool-modal-best-for-text');
+      const qsCmdTextEl = document.getElementById('tool-modal-cmd-text');
+      const qsCopyBtnEl = document.getElementById('tool-modal-cmd-copy-btn');
+      
+      const bestForText = isZh 
+        ? (item.best_for_zh || `适合需要部署或运行 ${translateScenarioTag(item.scenario_tag, currentLang)} 方案的工程师与团队`)
+        : (item.best_for_en || `Ideal for teams seeking self-hosted ${translateScenarioTag(item.scenario_tag, currentLang)} solutions`);
+      const quickCmd = item.quickstart_cmd || (item.tool_origin === 'github' ? `git clone ${officialUrl}.git` : (isZh ? '免安装 · 点击官网直接在线运行' : 'Zero-Install · Run directly via browser'));
+
+      if (qsLabelEl) qsLabelEl.textContent = isZh ? '15秒极速上手指南' : '15s Quickstart Guide';
+      if (qsBadgeEl) qsBadgeEl.textContent = isZh ? '适用人群' : 'Best For';
+      if (qsBestForEl) qsBestForEl.textContent = bestForText;
+      if (qsCmdTextEl) qsCmdTextEl.textContent = quickCmd;
+      if (qsCopyBtnEl) qsCopyBtnEl.textContent = isZh ? '复制' : 'Copy';
+
       // 轮播画廊设置 (严禁 Gemini 官方宣传物料泄露到其它独立产品)
       const isGeminiItem = (item.app_name || item.title || '').toLowerCase().includes('gemini');
       let galleryImages = (item.preview_images && item.preview_images.length > 0)
@@ -8780,6 +8888,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       currentToolModalItem = null;
     }
+
+    function copyToolQuickstartCmd() {
+      if (!currentToolModalItem) return;
+      const officialUrl = formatCleanToolUrl(currentToolModalItem.official_url || currentToolModalItem.url || "", currentToolModalItem);
+      const cmd = currentToolModalItem.quickstart_cmd || (currentToolModalItem.tool_origin === 'github' ? `git clone ${officialUrl}.git` : (currentLang === 'zh' ? '免安装 · 点击官网直接在线运行' : 'Zero-Install · Run directly via browser'));
+      copyToClipboard(cmd);
+      showCustomToast(currentLang === 'zh' ? '已复制极速上手命令 📋' : 'Quickstart command copied! 📋', 2000);
+    }
+    window.copyToolQuickstartCmd = copyToolQuickstartCmd;
 
     // ==========================================
     // 法律合规与隐私政策控制 (满足 Google AdSense 审核强制要求)
