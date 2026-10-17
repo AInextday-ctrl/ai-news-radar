@@ -4,7 +4,13 @@
       if (!url || typeof url !== 'string') return '';
       const u = url.trim();
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return '';
-      if (u.startsWith('/') || u.startsWith('./') || u.startsWith('data:') || u.startsWith('blob:')) return u;
+      if (u.startsWith('/') || u.startsWith('./')) {
+        if (u.includes('/assets/tool-previews/') && !u.includes('?v=')) {
+          return u + '?v=2';
+        }
+        return u;
+      }
+      if (u.startsWith('data:') || u.startsWith('blob:')) return u;
       if (u.includes('images.openai.com/blob') || u.includes('574ebad3-c5b7-4147')) return '';
       if (u.includes('s0.wp.com') || u.includes('wp.com') || u.includes('youtube.com') || u.includes('ytimg.com') || u.includes('raw.githubusercontent.com') || u.includes('github.com')) {
         return u;
