@@ -4290,23 +4290,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
         previewImg = safeImgs[0] || "";
       }
-      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
+      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe') || previewImg.includes('opengraph.githubassets.com'))) {
         previewImg = "";
       }
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
       if (!previewImg) {
         if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
           previewImg = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
-        } else {
-          const fullUrl = `${cleanOfficial} ${item.url || ''} ${item.source_url || ''}`;
-          const ghMatch = fullUrl.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
-          if (ghMatch && !ghMatch[2].includes('.')) {
-            previewImg = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
-          }
         }
       }
 
       const itemId = escapeHtml(item.id || item.url || '');
+      const rawCmd = (appName || 'app').toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'app';
+      const cliCmd = isGhTool ? `$ npx ${rawCmd} --run` : `$ ./${rawCmd} --start`;
+      const cleanHook = hook || summary || (isZh ? '高星开源 AI 实用项目' : 'High-impact AI project');
 
       return `
         <article onclick="openToolDetailModal('${itemId}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
@@ -4319,20 +4316,73 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
             ${previewImg ? `
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="this.remove()">
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
-            ` : ''}
-            
-            <!-- 悬浮 Logo 微图标 -->
-            <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
-              <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
-                ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="this.nextElementSibling?.classList.remove('hidden'); this.remove();">
+              <div class="terminal-mockup hidden absolute inset-0 w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
+                <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+                    <span class="text-[10px] text-slate-400 font-mono ml-1.5">${escapeHtml(rawCmd)} — zsh</span>
+                  </div>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800/80 text-emerald-400 font-mono border border-slate-700/60">${escapeHtml(runtimeBadge)}</span>
+                </div>
+                <div class="my-auto py-1">
+                  <div class="flex items-center space-x-1.5 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">➜</span>
+                    <span class="text-cyan-400 font-semibold">~</span>
+                    <span class="font-mono text-emerald-300 font-medium">${escapeHtml(cliCmd)}</span>
+                    <span class="inline-block w-1.5 h-3.5 bg-emerald-400 animate-pulse"></span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 font-sans line-clamp-2 leading-relaxed mt-1">
+                    ${escapeHtml(cleanHook)}
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/50">
+                  <span class="text-emerald-400/90 font-mono">⚡ ${escapeHtml(scenario)}</span>
+                  <span class="text-slate-400 font-mono">${starsDisplay ? escapeHtml(starsDisplay) : 'Open Source'}</span>
+                </div>
               </div>
-              <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
-            </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
+
+              <!-- 悬浮 Logo 微图标 -->
+              <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
+                <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
+                  ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
+                </div>
+                <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
+              </div>
+            ` : `
+              <div class="terminal-mockup absolute inset-0 w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
+                <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+                    <span class="text-[10px] text-slate-400 font-mono ml-1.5">${escapeHtml(rawCmd)} — zsh</span>
+                  </div>
+                  <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800/80 text-emerald-400 font-mono border border-slate-700/60">${escapeHtml(runtimeBadge)}</span>
+                </div>
+                <div class="my-auto py-1">
+                  <div class="flex items-center space-x-1.5 text-xs text-slate-200">
+                    <span class="text-emerald-400 font-bold">➜</span>
+                    <span class="text-cyan-400 font-semibold">~</span>
+                    <span class="font-mono text-emerald-300 font-medium">${escapeHtml(cliCmd)}</span>
+                    <span class="inline-block w-1.5 h-3.5 bg-emerald-400 animate-pulse"></span>
+                  </div>
+                  <div class="text-[11px] text-slate-300 font-sans line-clamp-2 leading-relaxed mt-1">
+                    ${escapeHtml(cleanHook)}
+                  </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-800/50">
+                  <span class="text-emerald-400/90 font-mono">⚡ ${escapeHtml(scenario)}</span>
+                  <span class="text-slate-400 font-mono">${starsDisplay ? escapeHtml(starsDisplay) : 'Open Source'}</span>
+                </div>
+              </div>
+            `}
 
             <!-- 悬浮排名/周飙升速度徽章 -->
-            <div class="absolute top-2.5 right-2.5">
+            <div class="absolute top-2.5 right-2.5 z-10">
               <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono backdrop-blur-md border shadow-sm ${badgeColorClass}">
                 ${escapeHtml(rankBadge)}
               </span>
@@ -7805,7 +7855,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (!isGeminiItem) {
         galleryImages = galleryImages.filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
       }
-      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe') && !img.includes('microlink.io'));
+      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe') && !img.includes('microlink.io') && !img.includes('opengraph.githubassets.com'));
 
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
       // 如果拥有独立官网，确保画廊首图或候选中包含官网首页高清实拍截图
@@ -7816,14 +7866,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 如果画廊暂无内容，使用 GitHub OpenGraph
-      if (galleryImages.length === 0) {
-        const fullTarget = `${cleanOfficial} ${item.url || ''} ${item.source_url || ''}`;
-        const ghMatch = fullTarget.match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
-        if (ghMatch && !ghMatch[2].includes('.')) {
-          galleryImages = [`https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`];
-        }
-      }
       currentToolImages = galleryImages;
       currentToolImageIndex = 0;
       updateToolCarousel();
@@ -7841,9 +7883,67 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const dotsEl = document.getElementById('tool-carousel-dots');
       const prevBtn = document.getElementById('tool-carousel-prev');
       const nextBtn = document.getElementById('tool-carousel-next');
+      const container = imgEl ? imgEl.parentElement : null;
+      let terminalEl = document.getElementById('tool-modal-terminal-mockup');
 
-      if (!currentToolImages || currentToolImages.length === 0) return;
+      if (!currentToolImages || currentToolImages.length === 0) {
+        if (imgEl) imgEl.style.display = 'none';
+        if (counterEl) counterEl.textContent = 'CLI Terminal';
+        if (dotsEl) dotsEl.classList.add('hidden');
+        if (prevBtn) prevBtn.classList.add('hidden');
+        if (nextBtn) nextBtn.classList.add('hidden');
 
+        if (container) {
+          const item = currentToolModalItem || {};
+          const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI CLI');
+          const rawCmd = (appName || 'app').toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'app';
+          const isGh = item.tool_origin === 'github' || (item.url && item.url.includes('github.com'));
+          const cliCmd = isGh ? `$ npx ${rawCmd} --run` : `$ ./${rawCmd} --start`;
+          const hookText = (currentLang === 'zh' ? (item.app_hook || item.title_zh || item.summary_zh) : (item.app_hook_en || item.title_en || item.summary_en)) || (currentLang === 'zh' ? '高星开源 AI 实用项目' : 'High-performance AI engine');
+          const scenarioText = translateScenarioTag(item.scenario_tag || '🤖 场景落地', currentLang);
+          const runtimeText = translateRuntimeBadge(item.runtime_badge || item.pricing_tag || '🟢 开源免装', currentLang);
+
+          if (!terminalEl) {
+            terminalEl = document.createElement('div');
+            terminalEl.id = 'tool-modal-terminal-mockup';
+            container.appendChild(terminalEl);
+          }
+          terminalEl.className = 'w-full h-full bg-[#0b0f19] p-5 font-mono flex flex-col justify-between text-left select-none';
+          terminalEl.style.display = 'flex';
+          terminalEl.innerHTML = `
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-2.5">
+              <div class="flex items-center space-x-2">
+                <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+                <span class="text-xs text-slate-400 font-mono ml-2">${escapeHtml(rawCmd)} — bash</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-mono border border-slate-700/60">${escapeHtml(runtimeText)}</span>
+            </div>
+            <div class="my-auto py-3 space-y-2">
+              <div class="flex items-center space-x-2 text-sm text-slate-200">
+                <span class="text-emerald-400 font-bold">➜</span>
+                <span class="text-cyan-400 font-semibold">~</span>
+                <span class="font-mono text-emerald-300 font-medium">${escapeHtml(cliCmd)}</span>
+                <span class="inline-block w-2 h-4 bg-emerald-400 animate-pulse"></span>
+              </div>
+              <div class="text-xs text-slate-300 font-sans leading-relaxed max-w-xl">
+                ${escapeHtml(hookText)}
+              </div>
+              <div class="text-[11px] text-slate-500 font-mono pt-1">
+                ✓ Architecture verified · Headless engine · Open Source
+              </div>
+            </div>
+            <div class="flex items-center justify-between text-xs text-slate-500 pt-2 border-t border-slate-800/60">
+              <span class="text-emerald-400 font-mono">⚡ ${escapeHtml(scenarioText)}</span>
+              <span class="text-slate-400 font-mono">${item.stars ? `★ ${item.stars}` : 'GitHub Repository'}</span>
+            </div>
+          `;
+        }
+        return;
+      }
+
+      if (terminalEl) terminalEl.style.display = 'none';
       if (currentToolImageIndex < 0) currentToolImageIndex = currentToolImages.length - 1;
       if (currentToolImageIndex >= currentToolImages.length) currentToolImageIndex = 0;
 
@@ -7855,12 +7955,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (cleanTarget && !cleanTarget.includes('github.com') && !cleanTarget.includes('huggingface.co')) {
             this.src = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanTarget)}?w=1280&h=720`;
           } else {
-            const ghMatch = (cleanTarget + ' ' + (currentToolModalItem?.url || '') + ' ' + (currentToolModalItem?.source_url || '')).match(/github\.com\/([^\/\s]+)\/([^\/?#\s]+)/i);
-            if (ghMatch && !ghMatch[2].includes('.')) {
-              this.src = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2]}`;
-            } else {
-              this.style.display = 'none';
-            }
+            this.style.display = 'none';
+            if (terminalEl) terminalEl.style.display = 'flex';
           }
         };
         imgEl.src = currentToolImages[currentToolImageIndex];

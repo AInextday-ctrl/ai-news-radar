@@ -246,13 +246,8 @@ def sanitize_tool_media(it: Dict[str, Any]) -> Dict[str, Any]:
         if not cur_img:
             cur_img = mshot_url
 
-    if gh_match and not gh_match.group(2).endswith(('.png', '.jpg', '.jpeg', '.svg', '.json', '.')):
-        gh_repo = f"{gh_match.group(1)}/{gh_match.group(2).rstrip('.git')}"
-        og_url = f"https://opengraph.githubassets.com/1/{gh_repo}"
-        if not clean_previews:
-            clean_previews = [og_url]
-        if not cur_img:
-            cur_img = og_url
+    # Banish sterile GitHub OpenGraph cards: do not fallback to opengraph.githubassets.com
+    # Headless tools and CLI utilities will be rendered with interactive Dark Terminal Mockups
 
     hf_match = re.search(r'huggingface\.co/spaces/([a-zA-Z0-9_\-\.]+)/([a-zA-Z0-9_\-\.]+)', u_combined, re.IGNORECASE)
     if hf_match:
