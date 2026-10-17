@@ -16,10 +16,24 @@ from concurrent.futures import ThreadPoolExecutor
 
 # 引入项目基础翻译能力
 try:
-    from processor import free_translate_zh, free_translate_en, clean_news_text
+    from processor import (
+        free_translate_zh,
+        free_translate_en,
+        clean_news_text,
+        has_chinglish_seams,
+        strip_chinglish_to_english,
+        normalize_ai_terminology_zh,
+    )
 except ImportError:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from processor import free_translate_zh, free_translate_en, clean_news_text
+    from processor import (
+        free_translate_zh,
+        free_translate_en,
+        clean_news_text,
+        has_chinglish_seams,
+        strip_chinglish_to_english,
+        normalize_ai_terminology_zh,
+    )
 
 
 def has_cjk(text: str) -> bool:
@@ -41,20 +55,21 @@ def is_pure_chinese_paragraph(p: str, min_chars: int = 6) -> bool:
     """
     判断单个段落是否为合格纯中文段落：
     1. 汉字数达到门槛；
-    2. 汉字占比至少 30%（允许包含人名、模型名如 GPT-5、Claude 3.5、OpenAI 等专业专有名词，但不允许整句未翻译英文）。
+    2. 严禁包含单词级机翻拼接痕迹 (has_chinglish_seams)；
+    3. 汉字占比至少 22%（允许包含人名、模型名如 GPT-5、Claude 3.5、OpenAI 等专业专有名词，但不允许整句未翻译英文）。
     """
     if not p:
         return False
     clean = p.strip()
+    if has_chinglish_seams(clean):
+        return False
     zh_count = count_chinese_chars(clean)
     if zh_count < min_chars:
         return False
-    # 汉字占比：科技资讯常密集列举多个企业名与模型代号，门槛设为 0.20；若中文字数 >= 15 且无长英文整句，均判定为合规
     ratio = zh_count / max(len(clean), 1)
-    if ratio < 0.20 and zh_count < 15:
+    if ratio < 0.22 and zh_count < 15:
         return False
-    # 检查是否包含未翻译的整句英文长子串 (连续 8 个以上英文单词且无中文穿插)
-    if re.search(r'(?:[A-Za-z0-9\',.-]+\s+){8,}[A-Za-z0-9\',.-]+', clean):
+    if re.search(r'(?:[A-Za-z0-9\',.-]+\s+){6,}[A-Za-z0-9\',.-]+', clean):
         return False
     return True
 
@@ -81,14 +96,13 @@ def translate_and_purify_article(content: str) -> str:
             continue
             
         if is_pure_chinese_paragraph(p_clean):
-            pure_zh_paras.append(p_clean)
+            pure_zh_paras.append(normalize_ai_terminology_zh(p_clean))
         else:
             # 翻译英文段落
-            t = free_translate_zh(p_clean[:350])
+            t = free_translate_zh(strip_chinglish_to_english(p_clean)[:350])
             t_clean = re.sub(r'^[【\[].*?[】\]]\s*', '', t).strip()
             if is_pure_chinese_paragraph(t_clean, min_chars=8):
-                pure_zh_paras.append(t_clean)
-            # 若翻译失败或依然混杂，坚决舍弃该段，绝不留英文脏数据
+                pure_zh_paras.append(normalize_ai_terminology_zh(t_clean))
             
     return '\n\n'.join(pure_zh_paras) if pure_zh_paras else ""
 
@@ -101,31 +115,57 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
     fixes = []
     cat = item.get("category", "")
 
-    # 落地工具、实操提示词与前沿视频专区：严格执行双向 *_en 无中文、*_zh 纯中文校验
+    # 落地工具、实操提示词与前沿视频专区：严格执行双向 *_en 无中文、*_zh 纯中文校验（严禁半英半中 Chinglish）
     if cat in ("tools", "prompts", "videos"):
         app_name = item.get("app_name_en") or item.get("app_name") or "AI Tool"
         # 校验 *_en 字段严禁含中文
         for en_key in ("title_en", "summary_en", "app_hook_en", "overview_en", "prompt_content_en"):
             val = item.get(en_key)
             if val and has_cjk(val):
-                item[en_key] = free_translate_en(str(val))
+                item[en_key] = strip_chinglish_to_english(str(val))
+                if has_cjk(item[en_key]):
+                    item[en_key] = free_translate_en(str(val))
                 fixes.append(f"{en_key} 剔除中文混杂并转为纯英文")
-        # 校验 tools 的 *_zh 字段必须包含中文
+        # 校验 tools 的 *_zh 字段必须为流畅中文，彻底消灭半英半中单词替换残留
         if cat == "tools":
-            hook_zh = item.get("app_hook") or ""
-            if hook_zh and not has_cjk(hook_zh):
-                t_zh = clean_news_text(free_translate_zh(hook_zh[:160]))
-                if has_cjk(t_zh):
+            hook_zh = str(item.get("app_hook") or "").strip()
+            hook_en = str(item.get("app_hook_en") or "").strip() or strip_chinglish_to_english(hook_zh)
+            scen = item.get("scenario_tag") or "💻 编程与开发"
+            rt_badge = item.get("runtime_badge") or "开源部署"
+            if not hook_zh or not has_cjk(hook_zh) or has_chinglish_seams(hook_zh):
+                t_zh = clean_news_text(free_translate_zh(hook_en[:160]))
+                if has_cjk(t_zh) and not has_chinglish_seams(t_zh):
                     item["app_hook"] = t_zh[:120]
-                    item["title_zh"] = f"【{app_name}】{t_zh[:65]}"
-                    item["title"] = item["title_zh"]
-                    fixes.append("tools.app_hook 翻译为中文")
-            ov_zh = item.get("overview_zh") or ""
-            if ov_zh and re.search(r'(?:[A-Za-z0-9\',.-]+\s+){6,}[A-Za-z0-9\',.-]+', ov_zh):
-                hook_c = item.get("app_hook") if has_cjk(item.get("app_hook", "")) else "提供前沿生成式 AI 与自动化工作流能力"
-                scen = item.get("scenario_tag") or "💻 编程与开发"
+                    fixes.append("tools.app_hook 重新完整翻译为纯中文")
+                else:
+                    item["app_hook"] = f"专注于 {scen} 场景的高热度开源 AI 工具，支持 {rt_badge} 与自动化工作流集成"
+                    fixes.append("tools.app_hook 清除半英半中乱码")
+                item["title_zh"] = f"【{app_name}】{item['app_hook'][:65]}"
+                item["title"] = item["title_zh"]
+
+            sum_zh = str(item.get("summary_zh") or "").strip()
+            if not sum_zh or has_chinglish_seams(sum_zh):
+                wk_s = int(item.get("weekly_stars") or (item.get("metrics") or {}).get("weekly_stars") or 0)
+                stars_tot = int(item.get("stars") or (item.get("metrics") or {}).get("stars") or 0)
+                if item.get("tool_origin") == "github" and wk_s > 0:
+                    item["summary_zh"] = f"📈 本周暴涨 +{wk_s:,} ★（总计 ⭐ {stars_tot:,}）· {item.get('app_hook', '')}"
+                else:
+                    item["summary_zh"] = item.get("app_hook") or f"【{app_name}】面向 {scen} 的 AI 生产力工具"
+                fixes.append("tools.summary_zh 清除半英半中残留")
+
+            ov_zh = str(item.get("overview_zh") or "").strip()
+            if ov_zh and (has_chinglish_seams(ov_zh) or re.search(r'(?:[A-Za-z0-9\',.-]+\s+){6,}[A-Za-z0-9\',.-]+', ov_zh)):
+                hook_c = item.get("app_hook") if (has_cjk(item.get("app_hook", "")) and not has_chinglish_seams(item.get("app_hook", ""))) else f"提供面向 {scen} 的前沿生成式 AI 与自动化工作流能力"
                 item["overview_zh"] = f"{app_name} 是一款专注于 {scen} 领域的开源与实战 AI 工具。{hook_c}，支持开发者与创作者快速集成部署。"
-                fixes.append("tools.overview_zh 清除英文长句")
+                fixes.append("tools.overview_zh 清除英文长句与半英半中")
+
+        if cat == "videos":
+            for v_key in ("title_zh", "title"):
+                v_val = str(item.get(v_key) or "").strip()
+                if v_val:
+                    v_val = re.sub(r'^(?:【[^】]+】\s*)?[^：:]{2,25}最新\s*AI\s*前沿解析[：:]\s*', '', v_val)
+                    item[v_key] = normalize_ai_terminology_zh(v_val)
+
         if not item.get("title_zh"):
             item["title_zh"] = item.get("title") or "AI 创新前沿内容"
         if not item.get("title_en"):
@@ -141,45 +181,44 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
     # 剔除机械伪前缀
     title_zh = re.sub(r'^[【\[].*?[】\]]\s*', '', str(title_zh)).strip()
     if not title_zh or not is_pure_chinese_paragraph(title_zh, min_chars=4):
-        # 英文原标题翻译
-        raw_en = item.get("title") or item.get("title_en") or ""
+        raw_en = strip_chinglish_to_english(item.get("title_en") or item.get("title") or title_zh)
         if raw_en:
             t = clean_news_text(free_translate_zh(raw_en[:180]))
             t = re.sub(r'^[【\[].*?[】\]]\s*', '', t).strip()
             if is_pure_chinese_paragraph(t, min_chars=4):
-                item["title_zh"] = t
+                item["title_zh"] = normalize_ai_terminology_zh(t)
                 fixes.append("title_zh 自动翻译重构为纯中文")
             else:
-                item["title_zh"] = clean_news_text(raw_en)
+                item["title_zh"] = normalize_ai_terminology_zh(clean_news_text(raw_en))
         else:
             item["title_zh"] = "AI 前沿动态快讯"
     else:
-        item["title_zh"] = clean_news_text(title_zh)
+        item["title_zh"] = normalize_ai_terminology_zh(clean_news_text(title_zh))
 
     # 保证 title_en 存在且不含中文
     title_en = item.get("title_en") or item.get("title") or ""
     if not title_en or has_cjk(title_en):
-        item["title_en"] = free_translate_en(title_en or item.get("title_zh", "AI Industry Update"))
+        item["title_en"] = free_translate_en(strip_chinglish_to_english(title_en) or item.get("title_zh", "AI Industry Update"))
         fixes.append("title_en 纯英文自愈")
 
-    # 2. 摘要治理：summary_zh 必须为纯中文
+    # 2. 摘要治理：summary_zh 必须为纯中文，且严禁注入空洞水词
     sum_zh = item.get("summary_zh") or ""
     sum_zh = re.sub(r'^[【\[].*?[】\]]\s*', '', str(sum_zh)).strip()
-    if not sum_zh or not is_pure_chinese_paragraph(sum_zh, min_chars=10):
-        # 尝试从正文或英文摘要中翻译提炼
-        cand_en = item.get("summary_en") or item.get("content_snippet") or item.get("article_content") or ""
+    sum_zh = re.sub(r'[。！？]?\s*(?:相关动态引发全球产业界广泛讨论与技术跟踪|该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪|该事件反映了当前技术演进与落地实践中的关键考量)[。！]?', '', sum_zh).strip()
+    if not sum_zh or not is_pure_chinese_paragraph(sum_zh, min_chars=8):
+        cand_en = strip_chinglish_to_english(item.get("summary_en") or item.get("content_snippet") or item.get("article_content") or "")
         if cand_en and len(cand_en) > 20:
             trans_sum = clean_news_text(free_translate_zh(cand_en[:260]))
             trans_sum = re.sub(r'^[【\[].*?[】\]]\s*', '', trans_sum).strip()
-            if is_pure_chinese_paragraph(trans_sum, min_chars=10):
-                item["summary_zh"] = trans_sum
+            if is_pure_chinese_paragraph(trans_sum, min_chars=8):
+                item["summary_zh"] = normalize_ai_terminology_zh(trans_sum)
                 fixes.append("summary_zh 自动翻译重构为纯中文")
             else:
-                item["summary_zh"] = f"{item['title_zh']}。相关动态引发全球产业界广泛讨论与技术跟踪。"
+                item["summary_zh"] = normalize_ai_terminology_zh(f"{item['title_zh']}。")
         else:
-            item["summary_zh"] = f"{item['title_zh']}。相关动态引发全球产业界广泛讨论与技术跟踪。"
+            item["summary_zh"] = normalize_ai_terminology_zh(f"{item['title_zh']}。")
     else:
-        item["summary_zh"] = clean_news_text(sum_zh)
+        item["summary_zh"] = normalize_ai_terminology_zh(clean_news_text(sum_zh))
 
     sum_en = item.get("summary_en") or ""
     if not sum_en or has_cjk(sum_en):

@@ -494,7 +494,7 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
 
 def is_meaningful_tweet(it: dict) -> bool:
     """
-    判断一条推文是否具备独立阅读价值，坚决过滤无意义单句、脱离语境的闲聊回复、纯寒暄与碎碎念
+    判断一条推文是否具备独立阅读价值，坚决过滤无意义单句、脱离语境的闲聊回复、纯标签灌水、Web3营销与断头线程碎片
     """
     if not isinstance(it, dict):
         return False
@@ -516,8 +516,18 @@ def is_meaningful_tweet(it: dict) -> bool:
     if re.fullmatch(r'https?://\S+', text):
         return False
 
-    # 剔除链接和 @提及 后的实质内容
-    substantive = re.sub(r'https?://\S+|@\w+', '', text).strip()
+    # 0. 严厉拦截 Web3 / Crypto 币圈营销与假借 AI 标签的噪音推文
+    text_lower = f"{text} {it.get('title_zh') or ''} {it.get('summary_zh') or ''}".lower()
+    crypto_spam_keywords = [
+        "xdcnetwork", "concordium", "airdrop", "memecoin", "presale",
+        "tokenomics", "$sol", "$eth", "$btc", "crypto payment", "web3 wallet", "whitelist mint"
+    ]
+    if any(kw in text_lower for kw in crypto_spam_keywords):
+        return False
+
+    # 剔除链接、@提及 和 #标签 后的实质内容（防止 "red fuji #AI #PS #Adobe" 靠标签刷字数蒙混过关）
+    substantive = re.sub(r'https?://\S+|@\w+|#[\w-]+', '', text)
+    substantive = re.sub(r'\s+', ' ', substantive).strip()
     
     # 1. 纯寒暄、无意义感叹或单一短语
     low_value_patterns = [
@@ -530,6 +540,15 @@ def is_meaningful_tweet(it: dict) -> bool:
         return False
         
     has_media = bool(it.get("image_url") or it.get("video_url") or it.get("has_video") or it.get("media_urls"))
+
+    # 1.5 即使有配图/视频，剔除 #标签 后实质文字也不得少于 28 个字符（拦截三词配图水帖）
+    if len(substantive) < 28:
+        return False
+
+    # 1.6 拦截脱离上下文且无独立媒体的断头 Thread 碎片（如末尾带 2/4, 3/5 且首句无主语或以小写/代词残片开头）
+    if not has_media and re.search(r'\b[2-9]/\d+\s*$', substantive):
+        if len(substantive) < 160 or re.match(r'^(?:and|but|so|or|also|plus|meanwhile|second|third)\b', substantive, re.I):
+            return False
     
     # 2. 如果是回复（is_reply 或开头是 @xxx），自身无独立媒体且字数小于 120 字，坚决过滤
     is_reply = bool(it.get("isReply") or it.get("is_reply") or text.startswith("@"))
@@ -1386,9 +1405,15 @@ def save_news(items: list):
             u = str(it.get("url") or "")
             if not re.search(r'status/\d+', u) and not it.get("status_id"):
                 continue
-            # 社交雷达门禁 3: 推文正文不能为空
-            txt = str(it.get("full_text_en") or it.get("content_snippet") or it.get("title") or "").strip()
-            if not txt or len(txt) < 5:
+            # 社交雷达门禁 3: 必须通过独立阅读价值与反垃圾审查
+            if not is_meaningful_tweet(it):
+                continue
+
+        elif cat == "prompts":
+            # 提示词门禁: 坚决剔除伪造的 GitHub 空壳占位符模板 (prompt_gh_*)
+            pid = str(it.get("id") or "")
+            p_zh = str(it.get("prompt_content_zh") or "")
+            if pid.startswith("prompt_gh_") or ("深入解决 {{核心任务目标}}，严禁空泛套话" in p_zh):
                 continue
 
         elif cat == "tools":
@@ -1401,7 +1426,7 @@ def save_news(items: list):
             if not imgs and not it.get("image_url"):
                 continue
             # 工具门禁 3: GitHub 仓库质量与飙升门禁（剔除 < 200 Stars 的低星凑数仓库与纯书单/面试题）
-            from fetcher import classify_tool_daily_scenario, BAD_TOOL_REPO_NAMES
+            from fetcher import classify_tool_daily_scenario, BAD_TOOL_REPO_NAMES, compute_organic_weekly_stars
             src_u = str(it.get("source_url") or "")
             is_gh = ("github.com" in u.lower()) or ("github.com" in src_u.lower()) or (it.get("tool_origin") == "github")
             is_hf = ("huggingface.co/spaces" in u.lower()) or ("huggingface.co/spaces" in src_u.lower()) or (it.get("tool_origin") == "huggingface")
@@ -1434,13 +1459,32 @@ def save_news(items: list):
                 if stars_val < 200:
                     continue
                 it["stars"] = stars_val
-                if not it.get("weekly_stars"):
-                    it["weekly_stars"] = max(35, min(int(stars_val * 0.14), 2600))
+                forks_val = int((it.get("metrics") or {}).get("forks") or 0)
+                gh_match = re.search(r'github\.com/([^/]+/[^/?#]+)', f"{u} {src_u}")
+                repo_full_key = gh_match.group(1) if gh_match else (it.get("app_name") or app_nm)
+                cur_wk = int(it.get("weekly_stars") or 0)
+                if cur_wk <= 0 or cur_wk == 525:
+                    cur_wk, is_brk = compute_organic_weekly_stars(
+                        full_name=repo_full_key,
+                        stars=stars_val,
+                        forks=forks_val,
+                        age_days=45.0,
+                        official_wk=0,
+                    )
+                    it["weekly_stars"] = cur_wk
+                    it["is_breakout"] = is_brk
+                    if isinstance(it.get("metrics"), dict):
+                        it["metrics"]["weekly_stars"] = cur_wk
+                    it["growth_badge_zh"] = f"📈 本周飙升 +{cur_wk:,} ★"
+                    it["growth_badge_en"] = f"📈 +{cur_wk:,} ★ this week"
                 wk_s = int(it["weekly_stars"])
-                if not it.get("growth_badge_zh"):
+                if not it.get("growth_badge_zh") or "+525" in str(it.get("growth_badge_zh")):
                     it["growth_badge_zh"] = f"📈 本周飙升 +{wk_s:,} ★"
-                if not it.get("growth_badge_en"):
+                if not it.get("growth_badge_en") or "+525" in str(it.get("growth_badge_en")):
                     it["growth_badge_en"] = f"📈 +{wk_s:,} ★ this week"
+                for txt_k in ("summary_zh", "summary_en", "content_snippet", "overview_zh", "overview_en"):
+                    if it.get(txt_k) and "525" in str(it[txt_k]):
+                        it[txt_k] = re.sub(r'\+?525(?=\s*(?:★|Stars|stars))', f"+{wk_s:,}", str(it[txt_k]))
                 if not it.get("utility_score"):
                     it["utility_score"] = min(99, 72 + int(min(15, wk_s / 120)) + (6 if it.get("has_live_demo") else 0))
             elif is_hf:
@@ -1478,10 +1522,16 @@ def save_news(items: list):
                 it["runtime_badge"] = rt_badge
 
         elif cat == "videos":
-            # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url
+            # 视频门禁: 必须包含可正常播放的 clean video_id 或有效 embed_url，且严禁非 AI 视频混入
             vid = str(it.get("video_id") or "").strip()
             if not vid or len(vid) < 6:
                 continue
+            v_title_all = f"{it.get('title_en') or ''} {it.get('title') or ''} {it.get('title_zh') or ''}".lower()
+            if any(bad_v in v_title_all for bad_v in ["(not ai)", "[not ai]", "not ai", "non-ai", "node won", "deno", "bun vs"]):
+                continue
+            for vk in ("title", "title_zh"):
+                if it.get(vk):
+                    it[vk] = re.sub(r'^(?:【[^】]+】\s*)?[^：:]{2,25}最新\s*AI\s*前沿解析[：:]\s*', '', str(it[vk]))
 
         valid_master_items.append(it)
 

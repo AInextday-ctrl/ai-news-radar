@@ -2026,7 +2026,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return diffHours >= -1 && diffHours <= 24;
     }
 
-    // 严格过滤无意义单句推文、脱离语境闲聊回复与空短链接
+    // 严格过滤无意义单句推文、脱离语境闲聊回复、纯标签灌水、Web3营销与断头线程碎片
     function isMeaningfulTweet(it) {
       if (!it || typeof it !== 'object') return false;
       // 凡是出现 Tibo 的 reset 相关推文，在 24 小时内享有最高豁免权，100% 视为有价值推文
@@ -2036,10 +2036,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const text = (it.full_text_en || it.content_snippet || it.title || '').trim();
       if (!text) return false;
       if (/^https?:\/\/\S+$/i.test(text)) return false;
-      const substantive = text.replace(/https?:\/\/\S+|@\w+/g, '').trim();
+      const combinedLower = `${text} ${it.title_zh || ''} ${it.summary_zh || ''}`.toLowerCase();
+      if (/xdcnetwork|concordium|airdrop|memecoin|presale|tokenomics|\$sol|\$eth|\$btc|crypto payment|web3 wallet|whitelist mint/.test(combinedLower)) {
+        return false;
+      }
+      const substantive = text.replace(/https?:\/\/\S+|@\w+|#[\w-]+/g, '').replace(/\s+/g, ' ').trim();
       const lowValue = /^(?:gm|gn|great|cool|awesome|congrats|congratulations|agreed|same|yes|no|thanks|thank you|lol|lmao|nice|wow|true|facts|word|check this out|excited for this|eyes on this|👀|🔥|🚀|💯|happy to help|appreciate it|welcome|good plans are simple.*|what would you like.*|grok.*|tesla self-driving.*|you can’t possibly.*|legit how i look.*)$/i;
       if (lowValue.test(substantive)) return false;
       const hasMedia = !!(it.image_url || it.video_url || it.has_video || (it.media_urls && it.media_urls.length));
+      if (substantive.length < 28) return false;
+      if (!hasMedia && /\b[2-9]\/\d+\s*$/.test(substantive)) {
+        if (substantive.length < 160 || /^(?:and|but|so|or|also|plus|meanwhile|second|third)\b/i.test(substantive)) return false;
+      }
       const isReply = !!(it.isReply || it.is_reply || text.startsWith('@'));
       if (isReply) {
         if (!hasMedia && substantive.length < 120) return false;

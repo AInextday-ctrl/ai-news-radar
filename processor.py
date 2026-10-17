@@ -33,16 +33,87 @@ GEMINI_API_KEY = (
 )
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
 
-# 翻译内存缓存，避免重复请求
+# 翻译内存缓存与自适应恢复计数器，避免单次超时导致全局永久熔断
 _TRANSLATION_CACHE = {}
-_YOUDAO_BLOCKED = False
-_GOOGLE_BLOCKED = False
-_MYMEMORY_BLOCKED = False
+_YOUDAO_FAILS = 0
+_GOOGLE_FAILS = 0
+_MYMEMORY_FAILS = 0
+
+# 用于修复旧版 tech_map 遗留的“中英缝合怪”词汇还原表
+_CHINGLISH_REVERT_MAP = [
+    ("编程代码 智能体", "coding agent"),
+    ("智能体矩阵", "agents"),
+    ("系列模型", "models"),
+    ("推出重磅", "launches"),
+    ("发布全新", "releases"),
+    ("推理链", "reasoning"),
+    ("编程代码", "coding"),
+    ("具身智能机器人", "robotics"),
+    ("估值融资", "valuation"),
+    ("融资大单", "funding"),
+    ("重大技术突破", "breakthrough"),
+    ("开源生态", "open source"),
+    ("实用工具", "tool"),
+    ("提效工具", "tools"),
+    ("视频生成", "video"),
+    ("图像设计", "image"),
+    ("智能体", "agent"),
+    ("模型", "model"),
+    ("机器人", "robot"),
+]
+
+
+def has_chinglish_seams(text: str) -> bool:
+    """Detect if text is an English sentence with isolated Chinese words mechanically injected."""
+    if not text:
+        return False
+    s = str(text).strip()
+    # Strip leading Chinese growth prefix before checking ratio
+    s_body = re.sub(r'^📈\s*本周(?:暴涨|飙升)\s*\+[\d,]+\s*★[（(]总计\s*⭐\s*[\d,]+[）)]\s*·\s*', '', s).strip()
+    if not s_body:
+        return False
+    # 1. Old tech_map injected tokens adjacent to English words
+    if re.search(r'[A-Za-z]{2,}\s*(?:编程代码|智能体矩阵|系列模型|开源生态|实用工具|提效工具)|(?:编程代码|智能体矩阵|系列模型|开源生态|实用工具|提效工具)\s*[A-Za-z]{2,}', s_body):
+        return True
+    if re.search(r'\b(?!AI\b|LLM\b|MCP\b)[A-Za-z]{2,}\s+智能体|\b智能体\s+[a-z]{2,}', s_body):
+        return True
+    # 2. Untranslated English clause of >=4 words inside a supposedly Chinese field
+    if re.search(r'(?:[A-Za-z]{2,}\s+){3,}[A-Za-z]{2,}', s_body):
+        return True
+    zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', s_body))
+    en_words = len(re.findall(r'\b[A-Za-z]{3,}\b', s_body))
+    if zh_chars > 0 and en_words >= 5 and (zh_chars / max(len(s_body), 1)) < 0.25:
+        return True
+    return False
+
+
+def strip_chinglish_to_english(text: str) -> str:
+    """Restore a Chinglish seam sentence back to clean English so it can be properly translated."""
+    if not text:
+        return ""
+    s = str(text)
+    # Strip leading Chinese growth prefix if present
+    s = re.sub(r'^📈\s*本周(?:暴涨|飙升)\s*\+[\d,]+\s*★[（(]总计\s*⭐\s*[\d,]+[）)]\s*·\s*', '', s)
+    for zh_w, en_w in _CHINGLISH_REVERT_MAP:
+        s = re.sub(r'(?<=[A-Za-z\s])\s*' + re.escape(zh_w) + r'\s*(?=[A-Za-z\s,.!?:;])', f' {en_w} ', s)
+    return re.sub(r'\s+', ' ', s).strip()
+
+
+def normalize_ai_terminology_zh(text: str) -> str:
+    """Fix common machine translation errors for frontier AI terminology."""
+    if not text:
+        return ""
+    t = str(text)
+    t = re.sub(r'建立克劳德代码|构建克劳德代码', '构建 Claude Code', t)
+    t = re.sub(r'克劳德\s*·?\s*代码|克劳德代码', 'Claude Code', t)
+    t = re.sub(r'(Gemini\s*[\d.]*\s*(?:Argon|Pro|Flash|Ultra)?|GPT-[\d.]+\s*\w*|Claude\s*[\d.]*\s*\w*|AI|人工智能)\s*特工', r'\1 智能体', t, flags=re.IGNORECASE)
+    t = re.sub(r'(\d+\s*名\s*[A-Za-z0-9\s]+?)特工', r'\1智能体', t)
+    return t
 
 
 def free_translate_zh(text: str) -> str:
-    """Bulletproof translation engine to guarantee 100% fluent Chinese output."""
-    global _YOUDAO_BLOCKED, _GOOGLE_BLOCKED, _MYMEMORY_BLOCKED
+    """Bulletproof translation engine to guarantee 100% fluent Chinese output without Chinglish word replacement."""
+    global _YOUDAO_FAILS, _GOOGLE_FAILS, _MYMEMORY_FAILS
     if not text:
         return ""
     
@@ -54,114 +125,101 @@ def free_translate_zh(text: str) -> str:
     if not body_text:
         return clean_text
 
-    # 如果正文主体已经包含较多中文，直接返回
+    # 若检测到历史遗留的“中英缝合怪”，先还原为纯英文再完整重译
+    if has_chinglish_seams(body_text):
+        body_text = strip_chinglish_to_english(body_text)
+
+    # 如果正文主体已经包含足够比例的纯正中文且无长串英文句子，直接返回术语修正后的结果
     zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', body_text))
-    if zh_chars > len(body_text) * 0.35:
-        return clean_text
+    if zh_chars > len(body_text) * 0.35 and not has_chinglish_seams(body_text):
+        return prefix + normalize_ai_terminology_zh(body_text)
 
     # 查内存缓存
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # 1. 优先调用有道免密神经翻译 (若未熔断，超时1.5秒)
-    if not _YOUDAO_BLOCKED:
+    # Pre-protect key proper nouns from being mangled into "克劳德代码"
+    protected_input = re.sub(r'\bClaude\s+Code\b', 'ClaudeCode', body_text, flags=re.IGNORECASE)
+
+    # 1. 优先调用 Google GTX 神经翻译 (高并发、高准确度，超时 2.8 秒)
+    if _GOOGLE_FAILS < 5:
+        try:
+            gt_url = "https://translate.googleapis.com/translate_a/single"
+            params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": protected_input[:420]}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.8) as client:
+                resp = client.get(gt_url, params=params)
+                if resp.status_code == 200:
+                    res = resp.json()
+                    zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                    zh_res = zh_res.replace("ClaudeCode", "Claude Code")
+                    zh_res = normalize_ai_terminology_zh(zh_res)
+                    if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                        _GOOGLE_FAILS = 0
+                        _TRANSLATION_CACHE[body_text] = zh_res
+                        return prefix + zh_res
+                else:
+                    _GOOGLE_FAILS += 1
+        except Exception:
+            _GOOGLE_FAILS += 1
+    else:
+        _GOOGLE_FAILS = max(0, _GOOGLE_FAILS - 1)
+
+    # 2. 备用调用有道免密神经翻译 (超时 2.5 秒)
+    if _YOUDAO_FAILS < 4:
         try:
             url = "https://aidemo.youdao.com/trans"
-            data = {"q": clean_text[:280], "from": "Auto", "to": "zh-CHS"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
+            data = {"q": protected_input[:300], "from": "Auto", "to": "zh-CHS"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
                 resp = client.post(url, data=data)
                 if resp.status_code == 200:
                     res_data = resp.json()
                     t_list = res_data.get("translation", [])
                     if t_list and t_list[0]:
-                        zh_res = t_list[0].strip()
-                        if re.search(r'[\u4e00-\u9fa5]', zh_res):
+                        zh_res = t_list[0].strip().replace("ClaudeCode", "Claude Code")
+                        zh_res = normalize_ai_terminology_zh(zh_res)
+                        if re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                            _YOUDAO_FAILS = 0
                             _TRANSLATION_CACHE[body_text] = zh_res
                             return prefix + zh_res
                 else:
-                    _YOUDAO_BLOCKED = True
+                    _YOUDAO_FAILS += 1
         except Exception:
-            _YOUDAO_BLOCKED = True
+            _YOUDAO_FAILS += 1
+    else:
+        _YOUDAO_FAILS = max(0, _YOUDAO_FAILS - 1)
 
-    # 2. 备用 Google Translate (若之前未触发429则尝试，超时控制在1.5秒内)
-    if not _GOOGLE_BLOCKED:
-        try:
-            gt_url = "https://translate.googleapis.com/translate_a/single"
-            params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": body_text[:350]}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
-                resp = client.get(gt_url, params=params)
-                if resp.status_code == 200:
-                    res = resp.json()
-                    zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
-                    if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res):
-                        _TRANSLATION_CACHE[body_text] = zh_res
-                        return prefix + zh_res
-                else:
-                    _GOOGLE_BLOCKED = True
-        except Exception:
-            _GOOGLE_BLOCKED = True
-
-    # 3. 备用 MyMemory 翻译服务 (若未熔断，超时1.5秒)
-    if not _MYMEMORY_BLOCKED:
+    # 3. 备用 MyMemory 翻译服务 (超时 2.5 秒)
+    if _MYMEMORY_FAILS < 4:
         try:
             url = "https://api.mymemory.translated.net/get"
-            params = {"q": clean_text[:160], "langpair": "en|zh"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=1.5) as client:
+            params = {"q": protected_input[:200], "langpair": "en|zh"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5) as client:
                 resp = client.get(url, params=params)
                 if resp.status_code == 200:
                     data = resp.json()
-                    translated = data.get("responseData", {}).get("translatedText", "")
-                    if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated):
-                        _TRANSLATION_CACHE[clean_text] = translated
-                        return translated
+                    translated = data.get("responseData", {}).get("translatedText", "").replace("ClaudeCode", "Claude Code")
+                    translated = normalize_ai_terminology_zh(translated)
+                    if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated) and not has_chinglish_seams(translated):
+                        _MYMEMORY_FAILS = 0
+                        _TRANSLATION_CACHE[body_text] = translated
+                        return prefix + translated
                     else:
-                        _MYMEMORY_BLOCKED = True
+                        _MYMEMORY_FAILS += 1
                 else:
-                    _MYMEMORY_BLOCKED = True
+                    _MYMEMORY_FAILS += 1
         except Exception:
-            _MYMEMORY_BLOCKED = True
+            _MYMEMORY_FAILS += 1
+    else:
+        _MYMEMORY_FAILS = max(0, _MYMEMORY_FAILS - 1)
 
-    # 4. 极客词汇核心语义映射兜底（绝不返回纯英文导致混杂）
-    tech_map = {
-        "OpenAI": "OpenAI",
-        "Anthropic": "Anthropic",
-        "ChatGPT": "ChatGPT",
-        "Claude": "Claude",
-        "Gemini": "Gemini",
-        "DeepSeek": "DeepSeek",
-        "launch": "推出重磅",
-        "launches": "推出重磅",
-        "release": "发布全新",
-        "releases": "发布全新",
-        "model": "模型",
-        "models": "系列模型",
-        "agent": "智能体",
-        "agents": "智能体矩阵",
-        "reasoning": "推理链",
-        "coding": "编程代码",
-        "robot": "机器人",
-        "robotics": "具身智能机器人",
-        "valuation": "估值融资",
-        "funding": "融资大单",
-        "breakthrough": "重大技术突破",
-        "open source": "开源生态",
-        "tool": "实用工具",
-        "tools": "提效工具",
-        "video": "视频生成",
-        "image": "图像设计"
-    }
-    
-    fallback_title = clean_text
-    for en_w, zh_w in tech_map.items():
-        fallback_title = re.sub(r'\b' + re.escape(en_w) + r'\b', zh_w, fallback_title, flags=re.IGNORECASE)
+    # 4. 严禁使用逐词字典替换制造“中英缝合怪”！若全通道瞬时不可用，原样返回以便下游检测出未译英文并走结构化兜底
+    return clean_text
 
-    _TRANSLATION_CACHE[clean_text] = fallback_title
-    return fallback_title
 
 
 def free_translate_en(text: str) -> str:
     """Bulletproof translation engine to guarantee 100% clean English output from Chinese or non-English text."""
-    global _YOUDAO_BLOCKED, _MYMEMORY_BLOCKED
+    global _GOOGLE_FAILS, _YOUDAO_FAILS, _MYMEMORY_FAILS
     if not text:
         return ""
     
@@ -182,12 +240,28 @@ def free_translate_en(text: str) -> str:
     if cache_key in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[cache_key]
 
-    # 1. 优先调用有道免密神经翻译 (zh-CHS -> en)
-    if not _YOUDAO_BLOCKED:
+    # 1. 优先调用 Google GTX 神经翻译 (zh-CN -> en)
+    if _GOOGLE_FAILS < 5:
+        try:
+            gt_url = "https://translate.googleapis.com/translate_a/single"
+            params = {"client": "gtx", "sl": "zh-CN", "tl": "en", "dt": "t", "q": body_text[:380]}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
+                resp = client.get(gt_url, params=params)
+                if resp.status_code == 200:
+                    res = resp.json()
+                    en_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                    if en_res and not re.search(r'[\u4e00-\u9fa5]', en_res):
+                        _TRANSLATION_CACHE[cache_key] = en_res
+                        return prefix + en_res
+        except Exception:
+            pass
+
+    # 2. 备用调用有道免密神经翻译 (zh-CHS -> en)
+    if _YOUDAO_FAILS < 4:
         try:
             url = "https://aidemo.youdao.com/trans"
             data = {"q": body_text[:280], "from": "zh-CHS", "to": "en"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=1.5) as client:
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
                 resp = client.post(url, data=data)
                 if resp.status_code == 200:
                     t_list = resp.json().get("translation", [])
@@ -196,29 +270,24 @@ def free_translate_en(text: str) -> str:
                         if not re.search(r'[\u4e00-\u9fa5]', en_res):
                             _TRANSLATION_CACHE[cache_key] = en_res
                             return prefix + en_res
-                else:
-                    _YOUDAO_BLOCKED = True
         except Exception:
-            _YOUDAO_BLOCKED = True
+            pass
 
-    # 2. 备用 MyMemory 翻译服务 (zh|en)
-    if not _MYMEMORY_BLOCKED:
+    # 3. 备用 MyMemory 翻译服务 (zh|en)
+    if _MYMEMORY_FAILS < 4:
         try:
             url = "https://api.mymemory.translated.net/get"
             params = {"q": body_text[:160], "langpair": "zh|en"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=1.5) as client:
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5) as client:
                 resp = client.get(url, params=params)
                 if resp.status_code == 200:
                     translated = resp.json().get("responseData", {}).get("translatedText", "")
                     if translated and "MYMEMORY WARNING" not in translated and not re.search(r'[\u4e00-\u9fa5]', translated):
                         _TRANSLATION_CACHE[cache_key] = translated
                         return prefix + translated
-                    else:
-                        _MYMEMORY_BLOCKED = True
-                else:
-                    _MYMEMORY_BLOCKED = True
         except Exception:
-            _MYMEMORY_BLOCKED = True
+            pass
+
 
     # 3. 极客中英词典语义映射 + 彻底剥离中文兜底
     zh_to_en_map = {
@@ -347,7 +416,11 @@ AGGREGATOR_NOISE_RULES = [
 
     # 8. 营销与空壳套话
     r'行业核心力量围绕[“"\'「][^”"\'」]*?[”"\'」]\s*加速推进关键技术攻坚与工程落地[，,]?\s*力求在激烈的产业竞赛中确立先发优势[。！]?',
-    r'行业最新动态持续跟踪报道[。！]?'
+    r'行业最新动态持续跟踪报道[。！]?',
+    r'聚焦该事件的最新进展[、，,]?行业反响以及对人工智能技术落地与产业生态的深远影响[。！]?',
+    r'该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪[。！]?',
+    r'相关动态引发全球产业界广泛讨论与技术跟踪[。！]?',
+    r'该事件反映了当前技术演进与落地实践中的关键考量[。！]?'
 ]
 
 
@@ -376,7 +449,8 @@ def clean_news_text(text: str) -> str:
     t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）][。.\s]*$', '', t)
     t = re.sub(r'[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$', '', t)
     
-    # 4. 清理连续重复符号与空白
+    # 4. 清理连续重复符号与空白，并执行术语规范化
+    t = normalize_ai_terminology_zh(t)
     t = re.sub(r'([。！？；，、])\1+', r'\1', t)
     t = re.sub(r'\s+', ' ', t).strip()
     return t
@@ -388,7 +462,7 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
     严格原则：
     1. 优先提取与翻译条目自带的真实文章正文 (article_content / original_content / content_snippet)；
     2. 坚决杜绝任何捏造的虚假人物（如查尔斯国王等）与机械套话模版（如“聚焦该事件...”）；
-    3. 若无更多原文细节，客观准确陈述标题事实与信源。
+    3. 若无更多原文细节，客观准确陈述标题事实与信源，绝不拼接万金油套话。
     """
     clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
     
@@ -409,9 +483,9 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
     snippet_clean = re.sub(media_pattern, '', snippet, flags=re.IGNORECASE).strip()
     
     if snippet_clean and len(snippet_clean) >= 20:
-        # 若已具备有效中文内容，直接提炼，避免无谓的网络翻译耗时
+        # 若已具备有效中文内容且非中英缝合怪，直接提炼
         zh_count = len(re.findall(r'[\u4e00-\u9fa5]', snippet_clean))
-        if zh_count >= 10:
+        if zh_count >= 10 and not has_chinglish_seams(snippet_clean):
             clean_s = re.sub(prefix_pattern, '', snippet_clean).strip()
             if clean_title and clean_s.startswith(clean_title):
                 clean_s = clean_s[len(clean_title):].strip()
@@ -436,12 +510,14 @@ def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:
         if trans_snippet and len(trans_snippet) >= 15 and zh_chars >= 8 and trans_snippet != clean_title:
             return trans_snippet
 
-    # 兜底：基于已有信源与真实标题陈述事实，绝不凭空捏造未发生的内容
+    # 兜底：基于已有信源与真实标题客观陈述事实，绝不拼凑任何空话套话
     src = item.get("source", "") or item.get("author", "")
     if src:
         clean_src = src.split("·")[0].strip()
-        return f"据 {clean_src} 报道，{clean_title}。该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪。"
-    return f"{clean_title}。该事件反映了当前技术演进与落地实践中的关键考量。"
+        if clean_src and clean_src.lower() not in clean_title.lower():
+            return f"据 {clean_src} 披露：{clean_title}。"
+    return f"{clean_title}。"
+
 
 
 def generate_witty_ai_commentary(full_text: str, title: str) -> str:
