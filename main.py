@@ -1320,103 +1320,13 @@ def save_news(items: list):
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
-    def get_tool_canonical_key(it):
-        if not it:
-            return ""
-        u = str(it.get("url") or it.get("official_url") or "").lower().strip()
-        m_gh = re.search(r'github\.com/([^/]+/[^/?#]+)', u)
-        if m_gh:
-            return f"gh:{m_gh.group(1).lower()}"
-        m_hf = re.search(r'huggingface\.co/spaces/([^/]+/[^/?#]+)', u)
-        if m_hf:
-            return f"hf:{m_hf.group(1).lower()}"
-        app_nm = str(it.get("app_name") or it.get("title") or "").strip().lower()
-        app_nm = re.sub(r'^[【\[].*?[】\]]\s*', '', app_nm).strip()
-        if app_nm:
-            return f"app:{app_nm}"
-        return u
-
     def _interleave_tools_multi_source(tool_list):
         from curated_tools_data import CURATED_AI_TOOLS
-        from fetcher import BAD_TOOL_REPO_NAMES
-        
-        seen_keys = set()
-        clean_tools = []
-        
-        # 优先置入官方权威人工精选/黄金基准工具库 (Curated Golden Standards)
-        for c_tool in CURATED_AI_TOOLS:
-            ck = get_tool_canonical_key(c_tool)
-            if ck and ck not in seen_keys:
-                seen_keys.add(ck)
-                clean_tools.append(c_tool)
-                
-        # 随后混入通过严格质量与星数门禁的新鲜抓取工具
-        for it in tool_list:
-            tk = get_tool_canonical_key(it)
-            app_nm = str(it.get("app_name") or "").strip().lower()
-            u_str = str(it.get("url") or it.get("official_url") or "").lower()
-            
-            if not tk or tk in seen_keys:
-                continue
-            if app_nm in BAD_TOOL_REPO_NAMES or any(bad == app_nm for bad in BAD_TOOL_REPO_NAMES):
-                continue
-            if any(f"/{bad}?" in u_str or f"/{bad}/" in u_str or u_str.endswith(f"/{bad}") for bad in BAD_TOOL_REPO_NAMES):
-                continue
-            if any(bad_w in app_nm for bad_w in ["awesome-", "interview", "roadmap", "tutorial", "papers-with", "-skills", "prompt-", "prompts-"]):
-                continue
-            if it.get("tool_origin") == "github" and (int(it.get("stars") or 0) < 200 or (int(it.get("stars") or 0) > 200000 and "weekly_stars" not in it)):
-                continue
-                
-            seen_keys.add(tk)
-            clean_tools.append(it)
+        from tool_fusion import fuse_and_deduplicate_tools, rank_radar_stream
 
-        # 雷达优先定位：最新爆发黑马项目 (Breakout Radar Discoveries) 置顶呈现
-        breakout_tools = []
-        regular_tools = []
-
-        for x in clean_tools:
-            wk = int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0)
-            is_bo = bool(x.get("is_breakout"))
-            is_curated_base = bool(x.get("id", "").startswith("tool-"))
-
-            if (wk >= 250 or is_bo) and not is_curated_base:
-                breakout_tools.append(x)
-            else:
-                regular_tools.append(x)
-
-        # 爆发黑马项目按本周暴涨星数倒序排列
-        breakout_tools.sort(key=lambda x: (
-            int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0),
-            int(x.get("utility_score") or 80),
-            parse_time_for_sort(x)
-        ), reverse=True)
-
-        web_t = [x for x in regular_tools if x.get("tool_origin") == "web"]
-        gh_t = [x for x in regular_tools if x.get("tool_origin") == "github"]
-        hf_t = [x for x in regular_tools if x.get("tool_origin") == "huggingface"]
-        other_t = [x for x in regular_tools if x.get("tool_origin") not in ("web", "github", "huggingface")]
-        
-        web_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
-        gh_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("weekly_stars", 0), x.get("utility_score", 80), x.get("stars", 0)), reverse=True)
-        hf_t.sort(key=lambda x: (1 if x.get("is_pinned") else 0, x.get("utility_score", 85), parse_time_for_sort(x)), reverse=True)
-        
-        interleaved = []
-        wi, gi, hi = 0, 0, 0
-        # Interleave pattern per cycle of 5: 2 Web Apps, 2 GitHub Weekly Surge, 1 HF Space
-        while wi < len(web_t) or gi < len(gh_t) or hi < len(hf_t):
-            for _ in range(2):
-                if wi < len(web_t):
-                    interleaved.append(web_t[wi])
-                    wi += 1
-            for _ in range(2):
-                if gi < len(gh_t):
-                    interleaved.append(gh_t[gi])
-                    gi += 1
-            if hi < len(hf_t):
-                interleaved.append(hf_t[hi])
-                hi += 1
-        interleaved.extend(other_t)
-        return breakout_tools + interleaved
+        # 工业级三维指纹协同 (名称指纹 + 代码仓指纹 + 独立主域名指纹) 与跨源智能属性融合引擎
+        fused = fuse_and_deduplicate_tools([CURATED_AI_TOOLS, tool_list])
+        return rank_radar_stream(fused)
 
     # 3. 构建 24/48 小时热看板 payload (latest_news.json)
     grouped = {cat_key: [] for cat_key in CATEGORIES}
