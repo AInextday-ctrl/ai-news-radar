@@ -47,6 +47,29 @@ PUBLIC_DATA_TOPIC_FILE = os.path.join(BASE_DIR, "public", "data", "topic_focus.j
 CURATED_WORKFLOWS_FILE = os.path.join(BASE_DIR, "data", "curated_workflows_library.json")
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+# 智能配额保护锁：默认每 4 小时仅调用一次 Gemini 进行宏观议题聚类，其余频次复用缓存 (0 API 消耗)
+TOPIC_REFRESH_INTERVAL_HOURS = float(os.getenv("TOPIC_REFRESH_INTERVAL_HOURS", "4.0"))
+
+
+def _get_cached_topic_focus_if_fresh(interval_hours: float) -> Optional[List[Dict[str, Any]]]:
+    """检查现有话题专题缓存是否仍在有效期内，避免每8分钟高频重复调用消耗 API 额度"""
+    for filepath in (DATA_TOPIC_FILE, PUBLIC_DATA_TOPIC_FILE):
+        if os.path.exists(filepath):
+            try:
+                with open(filepath, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                    updated_at_str = data.get("updated_at")
+                    topics = data.get("topics")
+                    if updated_at_str and isinstance(topics, list) and len(topics) >= 2:
+                        dt = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
+                        now = datetime.now(timezone.utc)
+                        elapsed_hours = (now - dt).total_seconds() / 3600.0
+                        if elapsed_hours < interval_hours:
+                            print(f"🛡️ [topic_cluster] 命中配额节流保护：距离上次生成仅过去 {elapsed_hours:.2f}h (周期阈值: {interval_hours}h)，复用缓存话题 (0 API 消耗)！")
+                            return topics
+            except Exception as e:
+                pass
+    return None
 
 
 def get_gemini_client():
@@ -365,6 +388,10 @@ def _cluster_topics_with_gemini(
                 return topic_results
 
         except Exception as e:
+            err_str = str(e).lower()
+            if "429" in err_str or "quota" in err_str or "resource_exhausted" in err_str or "rate limit" in err_str:
+                print(f"🛑 [topic_cluster] 检测到 Gemini 配额限流 (429/ResourceExhausted)。为避免影响其他项目，立即启动熔断，切换至零消耗保底算法！")
+                break
             print(f"⚠️ [topic_cluster] 模型 {model_name} 聚类异常: {e}")
             continue
 
@@ -574,13 +601,25 @@ def _cluster_topics_algorithmically(
     return topic_results
 
 
-def generate_24h_topic_focus(items: List[Dict[str, Any]], max_topics: int = 3) -> List[Dict[str, Any]]:
+def generate_24h_topic_focus(
+    items: List[Dict[str, Any]],
+    max_topics: int = 3,
+    force_refresh: bool = False
+) -> List[Dict[str, Any]]:
     """
     针对 24 小时内的全量资讯集合提取 Top 3 核心热点话题，挂载脉络、立场对撞与关联情报束。
-    优先调用 Gemini AI 执行深度聚类；若离线或未配置 Key 则平滑启用动态实体算法保底。
+    内置多层配额安全锁：
+      1. 默认每 4 小时仅调用一次 Gemini，其余频次复用缓存 (0 API 消耗)
+      2. 遇到 429 / 额度受限时自动熔断，平滑降级至零消耗动态实体聚类算法
     """
     if not items:
         return []
+
+    # 0. 智能配额保护锁 (Smart Cooldown & Quota Guard)
+    if not force_refresh:
+        cached_topics = _get_cached_topic_focus_if_fresh(TOPIC_REFRESH_INTERVAL_HOURS)
+        if cached_topics and len(cached_topics) >= max_topics:
+            return cached_topics
 
     # 1. 拆分各类情报流
     news_items = [it for it in items if it.get("category") == "news" or (it.get("category") is None and "news" in it.get("id", ""))]
