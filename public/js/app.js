@@ -6,6 +6,9 @@
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return '';
       if (u.startsWith('data:') || u.startsWith('blob:')) return u;
       if (u.includes('images.openai.com/blob') || u.includes('574ebad3-c5b7-4147')) return '';
+      if (u.includes('s0.wp.com') || u.includes('wp.com') || u.includes('youtube.com') || u.includes('ytimg.com') || u.includes('raw.githubusercontent.com') || u.includes('github.com')) {
+        return u;
+      }
       if (u.includes('images.unsplash.com')) {
         return u.replace(/w=\d+/, `w=${width}`).replace(/q=\d+/, 'q=80') + (u.includes('auto=format') ? '' : '&auto=format');
       }
@@ -4316,7 +4319,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
             ${previewImg ? `
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="this.nextElementSibling?.classList.remove('hidden'); this.remove();">
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.nextElementSibling?.classList.remove('hidden'); this.remove(); }">
               <div class="terminal-mockup hidden absolute inset-0 w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
                 <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
                   <div class="flex items-center space-x-1.5">
