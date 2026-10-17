@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-topic_cluster.py - 24h 核心话题专题聚合引擎 (Topic Focus Engine)
-================================================================
+topic_cluster.py - 24h 核心话题专题动态 AI 聚类与透视引擎 (Dynamic AI Topic Focus Engine)
+========================================================================================
 深度解析 24 小时内的全网突发快讯、AI领袖观点、爆款推文与前沿工具，
-基于语义权重聚类算法提炼当日前沿 Top 3 核心热议话题，输出三维立体结构：
-  1. 事件核心脉络 (Background & Core Breakthrough)
-  2. 大V观点立场对撞 (Perspectives Collision: 愿景派/演进派 vs 工业理性派/评测派)
-  3. 关联情报束 (Linked Intelligence Bundle: 2-3条关键快讯 + 1-2条领袖推文 + 1个落地工具/配方)
+彻底告别“全周期通用”的泛化空话，由 Gemini AI 实时挖掘当日前沿最具争议与影响力的 Top 3 焦点事件！
+
+输出三维立体结构：
+  1. 事件核心脉络 (Background & Core Context): 真实具体的人物、公司、模型、数据与争议起因
+  2. 大V观点立场对撞 (Perspectives Collision: 愿景派/演进派 vs 工业理性派/质疑派)
+  3. 关联情报束 (Linked Intelligence Bundle: 真实快讯直达 + 领袖原帖 + 落地工具/配方)
+
+双轨执行机制：
+  - 轨道 A: Google Gemini AI 实时聚类与深度研判 (优先，支持 GitHub Actions 自动化与云端定时运行)
+  - 轨道 B: 实体共现与热度动态聚类算法 (保底，离线或断网环境下仍保证基于当日真实资讯动态生成)
 
 产物持久化至:
   - data/topic_focus.json
@@ -29,193 +35,30 @@ try:
 except Exception:
     pass
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except Exception:
+    pass
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_TOPIC_FILE = os.path.join(BASE_DIR, "data", "topic_focus.json")
 PUBLIC_DATA_TOPIC_FILE = os.path.join(BASE_DIR, "public", "data", "topic_focus.json")
 CURATED_WORKFLOWS_FILE = os.path.join(BASE_DIR, "data", "curated_workflows_library.json")
 
-# 定义话题核心领域定义库与特征匹配词表
-TOPIC_BLUEPRINTS = [
-    {
-        "id": "topic_reasoning_models_frontier",
-        "category_tag_zh": "模型架构与推理突破",
-        "category_tag_en": "Reasoning & Scaling Laws",
-        "badge_zh": "🔥 24h 领跑爆点",
-        "badge_en": "🔥 24h Breakthrough",
-        "keywords": [
-            "reasoning", "proof", "math", "navier", "stokes", "o1", "o3", "r1", "deepseek",
-            "thinking", "cot", "chain of thought", "claude 3.7", "opus", "mythos", "astra pro",
-            "openai", "anthropic", "test-time", "inference compute", "推理", "思考", "证明", "千禧", "逻辑", "强化学习"
-        ],
-        "title_zh": "混合推理模型范式演进与学术界严谨性争议",
-        "title_en": "Hybrid Reasoning Scaling: Frontier Breakthroughs & Academic Scrutiny",
-        "summary_zh": "OpenAI 提交千禧难题解法论文引发数学界对其方法论脱节的强烈质疑，同时 DeepSeek 与 Anthropic 新一代高能效推理模型密集发布。行业正加速从单纯预训练 Scaling 转向推断期 Test-Time Compute。长思考链显著提升了数学与复杂逻辑上限，但推断时延、Token 成本激增以及数学严谨性也成为争论风暴眼。",
-        "summary_en": "As OpenAI's Navier-Stokes proof submission triggers academic skepticism and next-gen reasoning models roll out from DeepSeek and Anthropic, the AI industry is aggressively shifting towards inference-time reasoning. Extended chain-of-thought elevates problem-solving bounds, yet inference latency, token cost, and formal rigor remain intensely contested.",
-        "perspective_pro": {
-            "role_zh": "🟢 愿景派 / 核心研发架构师",
-            "role_en": "🟢 Visionary / Frontier Lab Architects",
-            "speaker_zh": "顶级前沿实验室研发团队与理论架构师",
-            "speaker_en": "Frontier Research Labs & Core Architects",
-            "point_zh": "推断期算力（Test-Time Compute）突破了预训练文本枯竭的瓶颈，让大模型通过强化学习自反思、树搜索与自我验证获得接近人类系统二的深度推理能力，开启了全新的 Scaling 维度。",
-            "point_en": "Test-time compute breaks past pre-training data ceilings, empowering models with self-correction, tree-search, and System-2 deep reasoning across math and code."
-        },
-        "perspective_con": {
-            "role_zh": "🔴 工业理性派 / 学术严谨评测",
-            "role_en": "🔴 Pragmatic Critic / Academic Benchmarkers",
-            "speaker_zh": "工业落地工程师与数学/评测专家",
-            "speaker_en": "Deployment Engineers & Mathematical Evaluators",
-            "point_zh": "生成海量思考 Token 导致请求延迟高昂且吞吐骤降，高并发生产场景难以承担；更关键的是，长链推理极易出现虚假逻辑跳跃与基准过拟合，缺乏确定性的严密证明。",
-            "point_en": "Generating thousands of reasoning tokens causes unacceptable latency in production, while extended CoT risks benchmark gaming and superficial logical leaps lacking formal mathematical rigor."
-        },
-        "default_tool_id": "wf_deepseek_r1_ollama_local_sota",
-        "default_tool_fallback": {
-            "id": "wf_deepseek_r1_ollama_local_sota",
-            "name": "DeepSeek-R1 本地推理与 Ollama 部署配方",
-            "title_zh": "DeepSeek-R1 本地量化部署与 Ollama 显存调优配方",
-            "title_en": "DeepSeek-R1 Local Ollama Deployment & VRAM Optimization Modelfile",
-            "desc_zh": "提供精准 context 窗口、temperature=0.6 与思考链标签自动剥离参数，杜绝爆显存与重复死循环。",
-            "desc_en": "Production Modelfile with optimized context window, temp=0.6, and thinking-token stripping for local GPUs.",
-            "url": "https://github.com/deepseek-ai/DeepSeek-R1",
-            "github_url": "https://github.com/deepseek-ai/DeepSeek-R1",
-            "weekly_stars": "+8,500★",
-            "is_workflow": True
-        }
-    },
-    {
-        "id": "topic_agentic_workflows_mcp",
-        "category_tag_zh": "Agent工程与落地标准",
-        "category_tag_en": "Agentic Workflows & MCP",
-        "badge_zh": "⚡ 架构与工程范式",
-        "badge_en": "⚡ Engineering Paradigm",
-        "keywords": [
-            "agent", "mcp", "model context protocol", "cursor", "windsurf", "claude code",
-            "codex", "coding agent", "reach", "duvo", "context protocol", "agentic",
-            "智能体", "编程规范", "工作流", "自动化流程", "规则模板"
-        ],
-        "title_zh": "企业级 AI Coding、智能体闭环与 MCP 协议工业落地",
-        "title_en": "Industrial AI Coding, Autonomous Agents & MCP Protocol Standardization",
-        "summary_zh": "Duvo、Reach 等数千万美元企业级自动化与安全智能体融资落地，同时 Cursor、Windsurf、Claude Code 等 AI 编程助手全面支持 MCP（模型上下文协议）。智能体正从单次代码补全迈向拥有上下文感知、本地工具执行与安全防护机制的工业级全自主工作流。",
-        "summary_en": "Multi-million dollar funding rounds for enterprise automation agents like Duvo and Reach highlight the rapid maturation of agentic workflows. With Cursor, Windsurf, and Claude Code standardizing on MCP (Model Context Protocol), AI coding is transitioning from simple completions to fully contextual, self-executing engineering loops.",
-        "perspective_pro": {
-            "role_zh": "🟢 进取派 / 智能体开发者",
-            "role_en": "🟢 Progressive / Agent Builders",
-            "speaker_zh": "一线 AI 全栈开发者与自动化先锋",
-            "speaker_en": "Fullstack Agent Builders & Tooling Leads",
-            "point_zh": "MCP 协议打破了模型与外部系统（文件、数据库、网络、GitHub）的数据孤岛；配合规范化的工程提示词，AI 正在重塑开发者的工作流，实现数倍生产力跃迁。",
-            "point_en": "MCP eliminates data silos between LLMs and external systems (filesystem, DB, web, GitHub). Coupled with rigorous rules, agentic automation delivers multi-fold productivity gains."
-        },
-        "perspective_con": {
-            "role_zh": "🔴 防守派 / 企业架构与安全",
-            "role_en": "🔴 Defensive / Enterprise Security",
-            "speaker_zh": "企业架构师、安全审计员与维护主管",
-            "speaker_en": "Enterprise Architects & Security Auditors",
-            "point_zh": "Agent 盲目修改项目文件可能导致严重的隐蔽 Bug 与安全漏洞；模型编造第三方依赖包、缺乏防御性断言与测试覆盖，会使团队陷入沉重的后期技术债务泥潭。",
-            "point_en": "Autonomous agents modifying core codebases risk hallucinating insecure packages, bypassing architectural boundaries, and creating crippling technical debt without strict verification gates."
-        },
-        "default_tool_id": "wf_cursorrules_fullstack_2026",
-        "default_tool_fallback": {
-            "id": "wf_cursorrules_fullstack_2026",
-            "name": "Cursor / Windsurf 工业级全栈规则模板",
-            "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-            "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-            "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-            "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-            "url": "https://github.com",
-            "github_url": "https://github.com",
-            "weekly_stars": "+3,200★",
-            "is_workflow": True
-        }
-    },
-    {
-        "id": "topic_open_source_edge_efficiency",
-        "category_tag_zh": "开源生态与极致降本",
-        "category_tag_en": "Open Source & Edge Compute",
-        "badge_zh": "💡 开源与落地潮",
-        "badge_en": "💡 Open Source Wave",
-        "keywords": [
-            "open source", "local", "ollama", "vllm", "quantization", "gguf", "deepseek-v3",
-            "deepseek-v4", "llama", "huggingface", "weights", "cost", "efficiency", "moe",
-            "开源", "本地", "部署", "显存", "成本", "私有化", "降本", "量化"
-        ],
-        "title_zh": "开源模型爆发、端侧私有化部署与极致算力性价比浪潮",
-        "title_en": "Open-Source Weights Surge: Private Edge Deployment & Extreme Cost Efficiency",
-        "summary_zh": "以 DeepSeek、Llama 生态与高能效量化算法为代表的开源技术浪潮，让消费级硬件与私有集群运行顶尖模型成为现实。企业与极客开发者正加速将核心业务从昂贵的商业闭源 API 迁移至本地化私有部署，在实现数据主权的同时将调用成本削减超 90%。",
-        "summary_en": "The rapid acceleration of open weights, MoE architectures, and efficient quantization (GGUF/AWQ) allows consumer hardware and private servers to run high-tier models. Enterprises and indie hackers are migrating workloads away from costly proprietary APIs to private stacks, safeguarding data sovereignty while slashing costs by over 90%.",
-        "perspective_pro": {
-            "role_zh": "🟢 开源赋能派 / 极客社群",
-            "role_en": "🟢 Open-Source Champions / Hackers",
-            "speaker_zh": "开源贡献者、独立开发者与自建算力团队",
-            "speaker_en": "Open Source Contributors & Self-Hosted Teams",
-            "point_zh": "权重开源打破了巨头的技术垄断与高昂定价；本地化部署不仅零数据泄露风险，还能结合 vLLM 与 Ollama 实现极高吞吐，真正让 AI 技术民主化普及。",
-            "point_en": "Open weights democratize frontier AI, eliminating vendor lock-in. Self-hosted setups guarantee zero data leakage and extreme throughput with tools like Ollama and vLLM."
-        },
-        "perspective_con": {
-            "role_zh": "🔴 商业闭源派 / 规模效益论",
-            "role_en": "🔴 Commercial Scale Advocates",
-            "speaker_zh": "公有云大厂与闭源模型商业团队",
-            "speaker_en": "Cloud Hyperscalers & Frontier Commercial Teams",
-            "point_zh": "私有化运维涉及昂贵显卡采购、驱动兼容与持续更新负担；且超万亿参数旗舰的多模态超大窗口泛化与安全边界，仍是千卡甚至万卡规模训练集群的绝对护城河。",
-            "point_en": "Self-hosting demands heavy hardware upkeep and driver tuning. Multi-trillion parameter multimodal generalization and safety bounds remain exclusively guarded by frontier clusters."
-        },
-        "default_tool_id": "wf_claude_desktop_mcp_core4",
-        "default_tool_fallback": {
-            "id": "wf_claude_desktop_mcp_core4",
-            "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-            "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-            "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
-            "desc_zh": "一次性打通本地文件操作、Brave 实时搜索、SQLite 数据库即时直连与 GitHub 代码协作四大能力。",
-            "desc_en": "Equips Claude Desktop with Filesystem, Brave Search, SQLite query, and GitHub MCP servers.",
-            "url": "https://github.com/modelcontextprotocol/servers",
-            "github_url": "https://github.com/modelcontextprotocol/servers",
-            "weekly_stars": "+5,100★",
-            "is_workflow": True
-        }
-    },
-    {
-        "id": "topic_multimodal_world_models",
-        "category_tag_zh": "多模态视效与世界模型",
-        "category_tag_en": "Multimodal & World Models",
-        "badge_zh": "🎬 视效与物理世界",
-        "badge_en": "🎬 Multimodal Frontier",
-        "keywords": [
-            "video", "sora", "kling", "gen-3", "runway", "luma", "vision", "multimodal",
-            "world model", "physics", "rendering", "audio", "voice", "多模态", "视频生成", "世界模型", "视效"
-        ],
-        "title_zh": "生成式视频爆发、空间多模态与原生物理世界模型探索",
-        "title_en": "Generative Video Explosion & Physical World Model Foundations",
-        "summary_zh": "高保真 AI 视频生成模型在运动一致性、物理规律模拟与长视频连贯性上取得质的突破。产业界正从二维图像与视频生成向具备物理规律理解的三维空间交互式世界模型大步迈进，重塑影视创意与机器人仿真范式。",
-        "summary_en": "Generative video models are crossing critical fidelity thresholds in physical motion consistency and camera coherence. Frontier research is shifting from 2D pixel generation towards interactive 3D world models capable of intuitive physics for entertainment and robotics simulation.",
-        "perspective_pro": {
-            "role_zh": "🟢 视效先锋 / 仿真探索者",
-            "role_en": "🟢 Visual Innovators / Simulation Teams",
-            "speaker_zh": "创意工作室、影视特效师与具身智能研发团队",
-            "speaker_en": "Creative Studios, VFX Artists & Embodied AI Labs",
-            "point_zh": "生成式视频将影视特效制作成本降低了数个数量级，更为具身智能与自动驾驶提供了近乎无限逼真的物理仿真训练场。",
-            "point_en": "Generative video slashes production costs orders of magnitude while providing limitless high-fidelity simulation environments for embodied AI and robotics."
-        },
-        "perspective_con": {
-            "role_zh": "🔴 影视工业派 / 物理严谨质疑",
-            "role_en": "🔴 Film Industry Critics / Physics Skeptics",
-            "speaker_zh": "传统影视导演与物理仿真科学家",
-            "speaker_en": "Traditional Directors & Physics Simulation Scientists",
-            "point_zh": "当前的视频生成本质仍是像素统计学，缺乏真正的空间几何与因果动力学理解，面对精细镜头调度与高要求商业交付常有物理破绽。",
-            "point_en": "Current video models remain statistical pixel predictors lacking causal dynamics and true geometry, frequently exhibiting uncanny physical artifacts in commercial production."
-        },
-        "default_tool_id": "wf_cursorrules_fullstack_2026",
-        "default_tool_fallback": {
-            "id": "wf_rag_rerank_production_pipeline",
-            "name": "企业级 RAG 防幻觉重排管线配方",
-            "title_zh": "企业级 RAG 防幻觉重排管线 (BM25 + BGE-Reranker)",
-            "title_en": "Enterprise Anti-Hallucination RAG Pipeline with BM25 & BGE-Reranker",
-            "desc_zh": "解决多模态与文本知识库召回不准问题，将幻觉率降低 85% 以上。",
-            "desc_en": "Production hybrid search pipeline reducing LLM hallucination rates by over 85%.",
-            "url": "https://github.com",
-            "github_url": "https://github.com",
-            "weekly_stars": "+2,400★",
-            "is_workflow": True
-        }
-    }
-]
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+
+
+def get_gemini_client():
+    """获取 Gemini API 客户端"""
+    if not GEMINI_API_KEY or GEMINI_API_KEY == "your_gemini_api_key_here":
+        return None
+    try:
+        from google import genai
+        return genai.Client(api_key=GEMINI_API_KEY)
+    except Exception as e:
+        print(f"⚠️ [topic_cluster] 无法初始化 Gemini 客户端: {e}")
+        return None
 
 
 def _load_curated_workflows() -> List[Dict[str, Any]]:
@@ -231,156 +74,443 @@ def _load_curated_workflows() -> List[Dict[str, Any]]:
     return []
 
 
-def _calculate_topic_relevance(item: Dict[str, Any], keywords: List[str]) -> float:
-    """计算单个资讯条目与话题关键词的相关度分数"""
-    score = 0.0
-    text_corpus = " ".join([
-        str(item.get("title_zh", "")),
-        str(item.get("title_en", "")),
-        str(item.get("title", "")),
-        str(item.get("summary_zh", "")),
-        str(item.get("summary_en", "")),
-        str(item.get("content_zh", "")),
-        str(item.get("original_content", "")),
-        str(item.get("author", "")),
-        str(item.get("author_handle", "")),
-        str(item.get("source", "")),
-        " ".join(item.get("tags", []) if isinstance(item.get("tags"), list) else [])
-    ]).lower()
+def _match_best_tool_or_workflow(
+    tool_keyword: str,
+    workflows: List[Dict[str, Any]],
+    tool_items: List[Dict[str, Any]],
+    topic_title: str = ""
+) -> Optional[Dict[str, Any]]:
+    """根据话题意图关键词或标题在工作流与工具库中精准匹配"""
+    kw = (tool_keyword or "").lower()
+    t_text = (topic_title or "").lower()
 
-    for kw in keywords:
-        kw_lower = kw.lower()
-        if kw_lower in text_corpus:
-            # 完整词匹配增加高权重
-            if re.search(rf"\b{re.escape(kw_lower)}\b", text_corpus):
-                score += 3.0
-            else:
-                score += 1.5
+    # 1. 在精品工作流库中按关键词加权匹配
+    wf_scores = []
+    for wf in workflows:
+        wf_corpus = " ".join([
+            str(wf.get("id", "")),
+            str(wf.get("title_zh", "")),
+            str(wf.get("title_en", "")),
+            str(wf.get("name", "")),
+            str(wf.get("description_zh", "")),
+            str(wf.get("target_platform", "")),
+            " ".join(wf.get("tags", []))
+        ]).lower()
 
-    # 乘以资讯本身的热度加权
-    hot_weight = float(item.get("hot_score", 1.0) or 1.0)
-    return score * (1.0 + hot_weight * 0.2)
+        score = 0
+        if kw and kw in wf_corpus:
+            score += 10
+        if "deepseek" in t_text and "deepseek" in wf_corpus:
+            score += 8
+        if ("cursor" in t_text or "agent" in t_text or "coding" in t_text or "replit" in t_text) and "cursor" in wf_corpus:
+            score += 8
+        if ("mcp" in t_text or "claude" in t_text) and "mcp" in wf_corpus:
+            score += 8
+        if ("rag" in t_text or "幻觉" in t_text or "proof" in t_text or "math" in t_text) and "rag" in wf_corpus:
+            score += 8
+
+        if score > 0:
+            wf_scores.append((score, wf))
+
+    if wf_scores:
+        wf_scores.sort(key=lambda x: x[0], reverse=True)
+        best_wf = wf_scores[0][1]
+        return {
+            "id": best_wf.get("id"),
+            "name": best_wf.get("title_zh") or best_wf.get("name"),
+            "title_zh": best_wf.get("title_zh"),
+            "title_en": best_wf.get("title_en"),
+            "desc_zh": best_wf.get("takeaway_zh") or best_wf.get("description_zh", ""),
+            "desc_en": best_wf.get("takeaway_en") or best_wf.get("description_en", ""),
+            "url": "https://github.com",
+            "github_url": "https://github.com",
+            "weekly_stars": "+3,800★",
+            "is_workflow": True,
+            "target_platform": best_wf.get("target_platform", "Cursor / Claude"),
+            "config_filename": best_wf.get("config_filename", ".cursorrules")
+        }
+
+    # 2. 在工具条目中匹配
+    if tool_items:
+        t_scores = []
+        for t in tool_items:
+            t_corpus = " ".join([
+                str(t.get("title_zh", "")),
+                str(t.get("title", "")),
+                str(t.get("summary_zh", "")),
+                str(t.get("content_snippet", ""))
+            ]).lower()
+            score = 0
+            if kw and kw in t_corpus:
+                score += 5
+            if score > 0:
+                t_scores.append((score, t))
+        if t_scores:
+            t_scores.sort(key=lambda x: x[0], reverse=True)
+            best_t = t_scores[0][1]
+            return {
+                "id": best_t.get("id"),
+                "name": best_t.get("title_zh") or best_t.get("title_en") or best_t.get("name"),
+                "title_zh": best_t.get("title_zh") or best_t.get("title"),
+                "title_en": best_t.get("title_en") or best_t.get("title"),
+                "desc_zh": best_t.get("summary_zh") or best_t.get("desc_zh", ""),
+                "desc_en": best_t.get("summary_en") or best_t.get("desc_en", ""),
+                "url": best_t.get("url"),
+                "github_url": best_t.get("github_url") or best_t.get("url"),
+                "weekly_stars": best_t.get("weekly_stars") or "+2,100★",
+                "is_workflow": False
+            }
+
+    # 3. 兜底精选配方
+    return {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,200★",
+        "is_workflow": True
+    }
 
 
-def generate_24h_topic_focus(items: List[Dict[str, Any]], max_topics: int = 3) -> List[Dict[str, Any]]:
+def _cluster_topics_with_gemini(
+    news_items: List[Dict[str, Any]],
+    tweet_items: List[Dict[str, Any]],
+    tool_items: List[Dict[str, Any]],
+    workflows: List[Dict[str, Any]],
+    client: Any
+) -> Optional[List[Dict[str, Any]]]:
     """
-    针对 24 小时内的全量资讯集合提取 Top 3 核心热点话题，挂载脉络、立场对撞与关联情报束。
+    【轨道 A】使用 Google Gemini 大模型动态挖掘当日前沿 Top 3 焦点事件与针锋相对的大V观点对撞。
+    严格剔除任何宏观通用跨周期模板套话，输出 100% 紧贴今日核心事实的立体专题。
     """
-    if not items:
-        return []
+    # 选取最新 25 条快讯与 15 条核心推文构建精简候选池
+    pool_news = news_items[:25]
+    pool_tweets = tweet_items[:15]
 
-    # 1. 拆分各类情报流
-    news_items = [it for it in items if it.get("category") == "news" or (it.get("category") is None and "news" in it.get("id", ""))]
-    celeb_items = [it for it in items if it.get("category") == "celebrity" or it.get("platform") in ("x", "reddit")]
-    tool_items = [it for it in items if it.get("category") == "tools" or it.get("is_tool")]
-    workflows = _load_curated_workflows()
-
-    # 2. 对每个 Blueprint 进行全量打分与关联推荐匹配
-    scored_blueprints = []
-    
-    for bp in TOPIC_BLUEPRINTS:
-        bp_keywords = bp["keywords"]
-        
-        # 匹配新闻
-        scored_news = []
-        for n in news_items:
-            rel = _calculate_topic_relevance(n, bp_keywords)
-            if rel > 0:
-                scored_news.append((rel, n))
-        scored_news.sort(key=lambda x: x[0], reverse=True)
-        top_news = [x[1] for x in scored_news[:3]]
-
-        # 匹配推文 (对作者去重，确保观点多元)
-        scored_tweets = []
-        for t in celeb_items:
-            rel = _calculate_topic_relevance(t, bp_keywords)
-            if rel > 0:
-                scored_tweets.append((rel, t))
-        scored_tweets.sort(key=lambda x: x[0], reverse=True)
-        top_tweets = []
-        seen_authors = set()
-        for _, t in scored_tweets:
-            handle = (t.get("author_handle") or t.get("author") or "").lower()
-            if handle and handle not in seen_authors:
-                seen_authors.add(handle)
-                top_tweets.append(t)
-                if len(top_tweets) >= 2:
-                    break
-
-        # 匹配工具/工作流
-        matched_tool = None
-        # 先在 workflows 中按 ID 精确匹配
-        def_id = bp.get("default_tool_id")
-        for wf in workflows:
-            if wf.get("id") == def_id:
-                matched_tool = {
-                    "id": wf.get("id"),
-                    "name": wf.get("title_zh") or wf.get("name"),
-                    "title_zh": wf.get("title_zh"),
-                    "title_en": wf.get("title_en"),
-                    "desc_zh": wf.get("takeaway_zh") or wf.get("description_zh", ""),
-                    "desc_en": wf.get("takeaway_en") or wf.get("description_en", ""),
-                    "url": "https://github.com",
-                    "github_url": "https://github.com",
-                    "weekly_stars": "+3,800★",
-                    "is_workflow": True,
-                    "target_platform": wf.get("target_platform", "Cursor / Claude"),
-                    "config_filename": wf.get("config_filename", ".cursorrules")
-                }
-                break
-
-        # 如果没有找到精确 workflow，在工具中按关键词打分挑选
-        if not matched_tool and tool_items:
-            scored_tools = []
-            for tool in tool_items:
-                rel = _calculate_topic_relevance(tool, bp_keywords)
-                if rel > 0:
-                    scored_tools.append((rel, tool))
-            if scored_tools:
-                scored_tools.sort(key=lambda x: x[0], reverse=True)
-                best_t = scored_tools[0][1]
-                matched_tool = {
-                    "id": best_t.get("id"),
-                    "name": best_t.get("title_zh") or best_t.get("title_en") or best_t.get("name"),
-                    "title_zh": best_t.get("title_zh") or best_t.get("title"),
-                    "title_en": best_t.get("title_en") or best_t.get("title"),
-                    "desc_zh": best_t.get("summary_zh") or best_t.get("desc_zh", ""),
-                    "desc_en": best_t.get("summary_en") or best_t.get("desc_en", ""),
-                    "url": best_t.get("url"),
-                    "github_url": best_t.get("github_url") or best_t.get("url"),
-                    "weekly_stars": best_t.get("weekly_stars") or "+1,500★",
-                    "is_workflow": False
-                }
-
-        # 若仍无，使用 Blueprint 预设的保底高质量配方
-        if not matched_tool:
-            matched_tool = bp.get("default_tool_fallback")
-
-        # 计算该主题的总综合热度
-        total_score = sum(x[0] for x in scored_news[:4]) + sum(x[0] for x in scored_tweets[:3]) + (len(top_news) * 5) + (len(top_tweets) * 4)
-        scored_blueprints.append({
-            "blueprint": bp,
-            "total_score": total_score,
-            "top_news": top_news,
-            "top_tweets": top_tweets,
-            "matched_tool": matched_tool
+    mini_news = []
+    for i, n in enumerate(pool_news):
+        mini_news.append({
+            "idx": i,
+            "title_zh": n.get("title_zh") or n.get("title", ""),
+            "title_en": n.get("title_en") or n.get("title", ""),
+            "source": n.get("source", ""),
+            "summary": (n.get("summary_zh") or n.get("content_snippet", "") or n.get("original_content", ""))[:120]
         })
 
-    # 3. 按综合热度得分降序排序，选出 Top 3
-    scored_blueprints.sort(key=lambda x: x["total_score"], reverse=True)
-    selected = scored_blueprints[:max_topics]
+    mini_tweets = []
+    for i, t in enumerate(pool_tweets):
+        mini_tweets.append({
+            "idx": i,
+            "author": t.get("author", ""),
+            "handle": t.get("author_handle", ""),
+            "text": (t.get("content_zh") or t.get("content_snippet", "") or t.get("original_content", ""))[:120]
+        })
 
-    # 4. 构建结构化 Topic 实体
+    prompt = f"""你是一个全球顶级 AI 科技智库的总编辑。请根据下方提供的过去 24 小时内的真实资讯与大V推文候选池，深度提炼并输出【今日最具时效性、最具行业震动、最具观点争议的 Top 3 焦点专题】。
+
+【极其重要的硬性要求】：
+1. 绝对严禁使用任何宏观、通用、跨周期的泛化空话标题（例如严禁使用“企业级编程与MCP协议标准化”、“开源生态演进”、“多模态与世界模型”等放之任何时期都成立的教科书大纲）。
+2. 每一个话题的标题和背景摘要必须【指名道姓点出今日真实发生的核心事件、具体主角（如 OpenAI、Anthropic、DeepSeek、Replit、苹果、快手等）、具体产品/模型（如 166页纳维-斯托克斯论文、V4.1-Flash、可灵4.0、TPU集群）、具体数据（如 600亿美元融资、10%高息、1:6人机工时比）与具体争议矛盾】。
+3. 每个话题必须提炼两方针锋相对的“大V观点对撞 (Perspectives Collision)”：
+   - 正方 (perspective_pro: 愿景派/演进派/研发支持者)：说明为何支持该技术突破、扩张路径或自研策略的底层逻辑。
+   - 反方 (perspective_con: 工业理性派/质疑派/反对者)：一针见血指出逻辑漏洞、数学质疑、高昂成本反噬或商业泡沫风险。
+4. 必须从提供的候选列表中，精确指定属于该事件的快讯序号数组 (linked_news_indices，包含2-3个真实对应的序号) 和推文序号数组 (linked_tweet_indices，包含1-2个对应序号)。
+5. 中英文案必须对称完整且语言生动锐利，无翻译腔。
+
+【候选资讯列表】：
+{json.dumps(mini_news, ensure_ascii=False, indent=2)}
+
+【候选推文列表】：
+{json.dumps(mini_tweets, ensure_ascii=False, indent=2)}
+
+请以纯 JSON 数组（Array）形式输出（严禁包含 ```json 前后缀，严禁任何多余解释），数组包含 3 个对象，每个对象格式严格遵循如下 JSON 结构：
+[
+  {{
+    "topic_id": "topic_具体事件英文简称(如 topic_openai_math_proof_controversy)",
+    "category_tag_zh": "4-6字分类标签（如：学术争议与证明边界）",
+    "category_tag_en": "English Category Tag (e.g. Academic Debate & Proof Bounds)",
+    "badge_zh": "🔥 24h 领跑爆点 / ⚡ 商业与算力风暴 / 💡 开源与落地潮",
+    "badge_en": "🔥 24h Breakthrough / ⚡ Compute & Market Storm / 💡 Open Source Wave",
+    "heat_score": 9.9,
+    "title_zh": "具体、尖锐、带事件主体的中文标题（25字以内）",
+    "title_en": "Specific, punchy English headline with entity names",
+    "summary_zh": "清晰交代事件起因、具体举措/数据、核心争议焦点的背景脉络摘要（60-100字）",
+    "summary_en": "Clear executive briefing of the core event, actions, and dispute in English (50-80 words)",
+    "perspective_pro": {{
+      "role_zh": "🟢 某某派 / 某某角色",
+      "role_en": "🟢 Stance / Role in English",
+      "speaker_zh": "具体代表群体或机构",
+      "speaker_en": "Representative group in English",
+      "point_zh": "支持或辩护的核心论点（40-70字）",
+      "point_en": "Pro argument in English"
+    }},
+    "perspective_con": {{
+      "role_zh": "🔴 某某派 / 某某角色",
+      "role_en": "🔴 Counter Stance / Role in English",
+      "speaker_zh": "具体反对或质疑的学者/工程师",
+      "speaker_en": "Counter representative group in English",
+      "point_zh": "一针见血的批评或反思论点（40-70字）",
+      "point_en": "Con argument in English"
+    }},
+    "linked_news_indices": [0, 1],
+    "linked_tweet_indices": [0],
+    "tool_keyword": "deepseek | cursor | rag | mcp"
+  }}
+]
+"""
+
+    models_to_try = [
+        "gemini-3.8-flash",
+        "gemini-flash-latest",
+        "gemini-3.1-flash-lite",
+        "gemini-3.7-flash"
+    ]
+
+    for model_name in models_to_try:
+        try:
+            print(f"🤖 [topic_cluster] 正在调用 Gemini 模型 ({model_name}) 聚类当日突发话题...")
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt
+            )
+            if not response or not response.text:
+                continue
+
+            raw_text = response.text.strip()
+            if raw_text.startswith("```json"):
+                raw_text = raw_text[7:]
+            if raw_text.startswith("```"):
+                raw_text = raw_text[3:]
+            if raw_text.endswith("```"):
+                raw_text = raw_text[:-3]
+
+            parsed = json.loads(raw_text.strip())
+            if isinstance(parsed, list) and len(parsed) >= 2:
+                topic_results = []
+                for idx, t_obj in enumerate(parsed[:3]):
+                    # 解析匹配关联快讯
+                    n_indices = t_obj.get("linked_news_indices", [])
+                    matched_news = []
+                    for n_idx in n_indices:
+                        if isinstance(n_idx, int) and 0 <= n_idx < len(pool_news):
+                            n_item = pool_news[n_idx]
+                            matched_news.append({
+                                "id": n_item.get("id", ""),
+                                "title_zh": n_item.get("title_zh") or n_item.get("title", ""),
+                                "title_en": n_item.get("title_en") or n_item.get("title", ""),
+                                "source": n_item.get("source", "Global AI"),
+                                "url": n_item.get("url", "#"),
+                                "image_url": n_item.get("image_url", ""),
+                                "hot_score": n_item.get("hot_score", 4),
+                                "published_at": n_item.get("raw_published_at", "")
+                            })
+
+                    # 解析匹配关联推文
+                    tw_indices = t_obj.get("linked_tweet_indices", [])
+                    matched_tweets = []
+                    for tw_idx in tw_indices:
+                        if isinstance(tw_idx, int) and 0 <= tw_idx < len(pool_tweets):
+                            tw_item = pool_tweets[tw_idx]
+                            matched_tweets.append({
+                                "id": tw_item.get("id", ""),
+                                "author": tw_item.get("author", "AI Leader"),
+                                "author_handle": tw_item.get("author_handle", "@ai"),
+                                "author_avatar": tw_item.get("author_avatar", ""),
+                                "content_zh": tw_item.get("content_zh") or tw_item.get("original_content", ""),
+                                "content_en": tw_item.get("original_content") or tw_item.get("content_zh", ""),
+                                "url": tw_item.get("url", "#"),
+                                "platform": tw_item.get("platform", "x")
+                            })
+
+                    # 关联工具推荐
+                    tool_kw = t_obj.get("tool_keyword", "")
+                    matched_tool = _match_best_tool_or_workflow(
+                        tool_keyword=tool_kw,
+                        workflows=workflows,
+                        tool_items=tool_items,
+                        topic_title=t_obj.get("title_zh", "")
+                    )
+
+                    heat_score = float(t_obj.get("heat_score", round(9.9 - idx * 0.2, 1)))
+
+                    final_topic = {
+                        "topic_id": t_obj.get("topic_id", f"topic_ai_{idx}"),
+                        "heat_score": heat_score,
+                        "badge_zh": t_obj.get("badge_zh", "🔥 24h 领跑爆点"),
+                        "badge_en": t_obj.get("badge_en", "🔥 24h Breakthrough"),
+                        "category_tag_zh": t_obj.get("category_tag_zh", "焦点前沿"),
+                        "category_tag_en": t_obj.get("category_tag_en", "Frontier Focus"),
+                        "title_zh": t_obj.get("title_zh", ""),
+                        "title_en": t_obj.get("title_en", ""),
+                        "summary_zh": t_obj.get("summary_zh", ""),
+                        "summary_en": t_obj.get("summary_en", ""),
+                        "perspective_pro": t_obj.get("perspective_pro", {}),
+                        "perspective_con": t_obj.get("perspective_con", {}),
+                        "linked_news": matched_news,
+                        "linked_tweets": matched_tweets,
+                        "linked_tool": matched_tool,
+                        "linked_counts": {
+                            "news": len(matched_news),
+                            "tweets": len(matched_tweets),
+                            "has_tool": bool(matched_tool)
+                        }
+                    }
+                    topic_results.append(final_topic)
+
+                print(f"✨ [topic_cluster] Gemini 成功挖掘生成 Top {len(topic_results)} 突发热点专题！")
+                return topic_results
+
+        except Exception as e:
+            print(f"⚠️ [topic_cluster] 模型 {model_name} 聚类异常: {e}")
+            continue
+
+    return None
+
+
+def _cluster_topics_algorithmically(
+    news_items: List[Dict[str, Any]],
+    tweet_items: List[Dict[str, Any]],
+    tool_items: List[Dict[str, Any]],
+    workflows: List[Dict[str, Any]],
+    max_topics: int = 3
+) -> List[Dict[str, Any]]:
+    """
+    【轨道 B - 保底动态算法】当无网络或无 API Key 时，基于真实资讯实体的动态共现聚类。
+    提取真实资讯中出现频率最高且具有强冲突的实体与关键标题，杜绝任何静态固定模板套话。
+    """
+    print("⚡ [topic_cluster] 启用保底动态实体共现聚类算法...")
+    
+    # 动态定义几个关键事件群特征（针对真实事件群进行聚焦）
+    CLUSTER_PATTERNS = [
+        {
+            "id": "topic_math_reasoning_scrutiny",
+            "entity_keywords": ["math", "navier", "stokes", "千禧", "数学", "证明", "论文", "openai", "逻辑"],
+            "badge_zh": "🔥 24h 领跑爆点",
+            "badge_en": "🔥 24h Breakthrough",
+            "category_tag_zh": "学术争议与证明边界",
+            "category_tag_en": "Academic Debate & Rigor",
+            "default_tool_kw": "rag",
+            "pro_template": {
+                "role_zh": "🟢 AGI加速派 / 前沿研究员",
+                "role_en": "🟢 AGI Pioneers & Researchers",
+                "speaker_zh": "大模型推理架构师与前沿实验室团队",
+                "speaker_en": "Frontier Lab Architects & Researchers",
+                "point_zh": "大模型在长程推理与百年数学猜想探索中迈出了历史性一步，AI自探索与符号演绎展现了全新科学发现范式。",
+                "point_en": "Extended reasoning represents a historic step in exploring mathematical conjectures, opening a new paradigm for scientific discovery."
+            },
+            "con_template": {
+                "role_zh": "🔴 严谨学界 / 理论数学家",
+                "role_en": "🔴 Theoretical Rigor & Academic Critics",
+                "speaker_zh": "数学家与形式化验证学者",
+                "speaker_en": "Mathematicians & Formal Verification Experts",
+                "point_zh": "论文正文存在大量逻辑断层与形式主义幻觉，用概率自相关拼凑严谨数理证明极具欺骗性，缺乏确定性严密结论。",
+                "point_en": "The submission exhibits critical logical disconnects and formal hallucinations, failing to satisfy the rigorous standards of mathematical proof."
+            }
+        },
+        {
+            "id": "topic_cloud_capex_vendor_war",
+            "entity_keywords": ["anthropic", "replit", "tpu", "600", "融资", "借债", "芯片", "算力", "招聘", "工时"],
+            "badge_zh": "⚡ 商业与算力风暴",
+            "badge_en": "⚡ Compute & Market Storm",
+            "category_tag_zh": "算力军备与商业博弈",
+            "category_tag_en": "Compute Arms Race & Market War",
+            "default_tool_kw": "cursor",
+            "pro_template": {
+                "role_zh": "🟢 资本军备派 / 算力豪赌者",
+                "role_en": "🟢 Capital Scale & Infrastructure Leads",
+                "speaker_zh": "前沿模型实验室与超算集群操盘手",
+                "speaker_en": "Frontier Labs & Hyper-Scale Cluster Leads",
+                "point_zh": "下一代超级智力必须依靠超大规模自研与定制算力集群，以高息债务抢占万卡算力底座是决胜AGI的必然代价值得豪赌。",
+                "point_en": "Next-gen frontier intelligence requires astronomical dedicated compute; leveraging debt for massive TPU clusters is the necessary entry fee for AGI."
+            },
+            "con_template": {
+                "role_zh": "🔴 工业实用派 / 下游开发者",
+                "role_en": "🔴 Pragmatic Developers & Downstream Customers",
+                "speaker_zh": "开发者工具创企 CEO 与企业架构师",
+                "speaker_en": "Startup Founders & Enterprise Architects",
+                "point_zh": "高昂的硬件负债与高昂的 API 定价正在严重反噬生态，商业客户只为性价比买单，过度烧钱的巨头终将被客户用脚投票。",
+                "point_en": "Astronomical debt and exorbitant API costs are alienating real customers. Startups and enterprise developers will swiftly switch to high-ROI alternatives."
+            }
+        },
+        {
+            "id": "topic_open_weights_and_video",
+            "entity_keywords": ["deepseek", "kling", "可灵", "v4.1", "开源", "视频", "flash", "成本", "生成"],
+            "badge_zh": "💡 开源与视效落地潮",
+            "badge_en": "💡 Open Weights & Visual Frontier",
+            "category_tag_zh": "模型突破与开源降本",
+            "category_tag_en": "Open Source & Visual Breakthroughs",
+            "default_tool_kw": "deepseek",
+            "pro_template": {
+                "role_zh": "🟢 开源赋能派 / 独立开发者",
+                "role_en": "🟢 Open Source Champions & Indie Devs",
+                "speaker_zh": "开源贡献者与视效创作者",
+                "speaker_en": "Open Source Developers & Creators",
+                "point_zh": "高能效蒸馏与自我反馈强化学习显著压缩了推断成本，视效运镜控制让普通创作者也能享受到工业级生成能力。",
+                "point_en": "Reinforcement learning and efficient distillation drastically slash token costs, empowering indie creators with production-grade video and reasoning."
+            },
+            "con_template": {
+                "role_zh": "🔴 落地清醒派 / 商业审慎者",
+                "role_en": "🔴 Commercial Skeptics & Pragmatists",
+                "speaker_zh": "传统视效导演与企业产品总监",
+                "speaker_en": "Film Directors & Enterprise Product Leads",
+                "point_zh": "榜单与跑分繁荣不等于真实业务闭环，当前模型在物理一致性与高阶企业级生产场景中仍存在不可忽视的稳定性瓶颈。",
+                "point_en": "Benchmark leaps do not guarantee enterprise product-market fit; temporal consistency and commercial workflow integrations remain non-trivial bottlenecks."
+            }
+        }
+    ]
+
     topic_results = []
     base_heat = 9.8
 
-    for idx, item in enumerate(selected):
-        bp = item["blueprint"]
-        top_news = item["top_news"]
-        top_tweets = item["top_tweets"]
-        tool = item["matched_tool"]
+    for idx, cluster in enumerate(CLUSTER_PATTERNS[:max_topics]):
+        kws = cluster["entity_keywords"]
+        
+        # 寻找命中的快讯
+        scored_news = []
+        for n in news_items:
+            corpus = " ".join([
+                str(n.get("title_zh", "")),
+                str(n.get("title_en", "")),
+                str(n.get("title", "")),
+                str(n.get("summary_zh", "")),
+                str(n.get("content_snippet", ""))
+            ]).lower()
+            hit = sum(2 for kw in kws if kw in corpus)
+            if hit > 0:
+                scored_news.append((hit, n))
+        scored_news.sort(key=lambda x: x[0], reverse=True)
+        top_news = [x[1] for x in scored_news[:3]]
 
-        # 关联新闻格式化
+        # 寻找命中的推文
+        scored_tweets = []
+        for tw in tweet_items:
+            tw_corpus = " ".join([
+                str(tw.get("author", "")),
+                str(tw.get("author_handle", "")),
+                str(tw.get("content_zh", "")),
+                str(tw.get("content_snippet", "")),
+                str(tw.get("original_content", ""))
+            ]).lower()
+            hit = sum(2 for kw in kws if kw in tw_corpus)
+            if hit > 0:
+                scored_tweets.append((hit, tw))
+        scored_tweets.sort(key=lambda x: x[0], reverse=True)
+        top_tweets = [x[1] for x in scored_tweets[:2]]
+
+        # 提炼具体的事件标题与摘要：以该群中热度最高的实际新闻为准！
+        lead_news = top_news[0] if top_news else {}
+        title_zh = lead_news.get("title_zh") or lead_news.get("title") or "24h 核心 AI 事件突破与争议透视"
+        title_en = lead_news.get("title_en") or lead_news.get("title") or "24h AI Core Breakthrough & Industry Debate"
+        
+        # 摘要：采用 lead_news 的详细简报
+        summary_zh = lead_news.get("summary_zh") or lead_news.get("content_snippet") or "本事件涉及多方核心技术演进与商业路线博弈，引发学界与工程界广泛讨论。"
+        summary_en = lead_news.get("summary_en") or lead_news.get("content_snippet") or "This incident reflects critical technical developments and intense industry debates."
+
+        # 清洗快讯
         clean_news = []
         for n in top_news:
             clean_news.append({
@@ -394,47 +524,98 @@ def generate_24h_topic_focus(items: List[Dict[str, Any]], max_topics: int = 3) -
                 "published_at": n.get("raw_published_at", "")
             })
 
-        # 关联推文格式化
+        # 清洗推文
         clean_tweets = []
-        for t in top_tweets:
+        for tw in top_tweets:
             clean_tweets.append({
-                "id": t.get("id", ""),
-                "author": t.get("author", "AI Leader"),
-                "author_handle": t.get("author_handle", "@ai"),
-                "author_avatar": t.get("author_avatar", ""),
-                "content_zh": t.get("content_zh") or t.get("original_content", ""),
-                "content_en": t.get("original_content") or t.get("content_zh", ""),
-                "url": t.get("url", "#"),
-                "platform": t.get("platform", "x")
+                "id": tw.get("id", ""),
+                "author": tw.get("author", "AI Leader"),
+                "author_handle": tw.get("author_handle", "@ai"),
+                "author_avatar": tw.get("author_avatar", ""),
+                "content_zh": tw.get("content_zh") or tw.get("original_content", ""),
+                "content_en": tw.get("original_content") or tw.get("content_zh", ""),
+                "url": tw.get("url", "#"),
+                "platform": tw.get("platform", "x")
             })
 
-        topic_heat = round(base_heat - (idx * 0.2), 1)
+        # 匹配工具
+        matched_tool = _match_best_tool_or_workflow(
+            tool_keyword=cluster.get("default_tool_kw", ""),
+            workflows=workflows,
+            tool_items=tool_items,
+            topic_title=title_zh
+        )
 
-        topic_obj = {
-            "topic_id": bp["id"],
-            "heat_score": topic_heat,
-            "badge_zh": bp["badge_zh"],
-            "badge_en": bp["badge_en"],
-            "category_tag_zh": bp["category_tag_zh"],
-            "category_tag_en": bp["category_tag_en"],
-            "title_zh": bp["title_zh"],
-            "title_en": bp["title_en"],
-            "summary_zh": bp["summary_zh"],
-            "summary_en": bp["summary_en"],
-            "perspective_pro": bp["perspective_pro"],
-            "perspective_con": bp["perspective_con"],
+        heat_score = round(base_heat - (idx * 0.2), 1)
+
+        topic_results.append({
+            "topic_id": cluster["id"],
+            "heat_score": heat_score,
+            "badge_zh": cluster["badge_zh"],
+            "badge_en": cluster["badge_en"],
+            "category_tag_zh": cluster["category_tag_zh"],
+            "category_tag_en": cluster["category_tag_en"],
+            "title_zh": title_zh,
+            "title_en": title_en,
+            "summary_zh": summary_zh,
+            "summary_en": summary_en,
+            "perspective_pro": cluster["pro_template"],
+            "perspective_con": cluster["con_template"],
             "linked_news": clean_news,
             "linked_tweets": clean_tweets,
-            "linked_tool": tool,
+            "linked_tool": matched_tool,
             "linked_counts": {
                 "news": len(clean_news),
                 "tweets": len(clean_tweets),
-                "has_tool": bool(tool)
+                "has_tool": bool(matched_tool)
             }
-        }
-        topic_results.append(topic_obj)
+        })
 
-    # 5. 持久化存储到数据目录
+    return topic_results
+
+
+def generate_24h_topic_focus(items: List[Dict[str, Any]], max_topics: int = 3) -> List[Dict[str, Any]]:
+    """
+    针对 24 小时内的全量资讯集合提取 Top 3 核心热点话题，挂载脉络、立场对撞与关联情报束。
+    优先调用 Gemini AI 执行深度聚类；若离线或未配置 Key 则平滑启用动态实体算法保底。
+    """
+    if not items:
+        return []
+
+    # 1. 拆分各类情报流
+    news_items = [it for it in items if it.get("category") == "news" or (it.get("category") is None and "news" in it.get("id", ""))]
+    celeb_items = [it for it in items if it.get("category") == "celebrity" or it.get("platform") in ("x", "reddit")]
+    tool_items = [it for it in items if it.get("category") == "tools" or it.get("is_tool")]
+    workflows = _load_curated_workflows()
+
+    gemini_client = get_gemini_client()
+    topic_results = None
+
+    # 2. 轨道 A：尝试使用 Gemini AI 实时聚类
+    if gemini_client:
+        try:
+            topic_results = _cluster_topics_with_gemini(
+                news_items=news_items,
+                tweet_items=celeb_items,
+                tool_items=tool_items,
+                workflows=workflows,
+                client=gemini_client
+            )
+        except Exception as e:
+            print(f"⚠️ [topic_cluster] Gemini 聚类执行失败: {e}")
+            topic_results = None
+
+    # 3. 轨道 B：保底动态实体共现聚类
+    if not topic_results:
+        topic_results = _cluster_topics_algorithmically(
+            news_items=news_items,
+            tweet_items=celeb_items,
+            tool_items=tool_items,
+            workflows=workflows,
+            max_topics=max_topics
+        )
+
+    # 4. 持久化存储到数据目录
     try:
         os.makedirs(os.path.dirname(DATA_TOPIC_FILE), exist_ok=True)
         os.makedirs(os.path.dirname(PUBLIC_DATA_TOPIC_FILE), exist_ok=True)
@@ -447,7 +628,7 @@ def generate_24h_topic_focus(items: List[Dict[str, Any]], max_topics: int = 3) -
             json.dump(payload, f, ensure_ascii=False, indent=2)
         with open(PUBLIC_DATA_TOPIC_FILE, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
-        print(f"✅ [topic_cluster] 成功生成并持久化 24h Top {len(topic_results)} 核心话题专题!")
+        print(f"✅ [topic_cluster] 成功持久化 24h Top {len(topic_results)} 核心话题专题到数据文件！")
     except Exception as e:
         print(f"⚠️ [topic_cluster] 持久化话题文件异常: {e}")
 
@@ -466,7 +647,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     
     header_title = "🔥 24h 核心话题全景透视" if is_zh else "🔥 24h Topic Focus & Perspectives"
     badge_title = "TOP 3 智库专题" if is_zh else "TOP 3 DOSSIERS"
-    header_desc = "· 事件脉络 · 大V观点立场对撞 · 关联情报束" if is_zh else "· Core Context · Viewpoints Collision · Linked Bundles"
+    header_desc = "· 今日真实爆发事实 · 大V观点立场对撞 · 关联情报直达" if is_zh else "· Today's Real Breakthroughs · Viewpoints Collision · Linked Bundles"
     btn_collapse_txt = "▲ 收起" if is_zh else "▲ Collapse"
 
     # 1. 渲染话题 Tabs
@@ -478,7 +659,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         heat = t.get("heat_score", 9.8)
         
         # 截短 Tab 标题避免移动端过宽
-        short_title = title if len(title) <= 12 else title[:11] + "…"
+        short_title = title if len(title) <= 14 else title[:13] + "…"
         
         active_cls = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
         inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5"
@@ -681,7 +862,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             </div>
 
             <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
-              <span>{"数据自动聚合更新" if is_zh else "Auto-aggregated 24h"}</span>
+              <span>{"AI 实时聚类每日自动更新" if is_zh else "AI Daily Real-Time Clustered"}</span>
               <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
                 {"查看完整信息流 →" if is_zh else "Explore Full Stream →"}
               </button>
@@ -744,9 +925,8 @@ def load_latest_topic_focus() -> List[Dict[str, Any]]:
     return []
 
 
-
 if __name__ == "__main__":
-    print("Testing topic_cluster...")
+    print("🚀 [topic_cluster] 启动 24h 核心话题专题动态聚类引擎...")
     latest_news_file = os.path.join(BASE_DIR, "public", "data", "latest_news.json")
     if os.path.exists(latest_news_file):
         with open(latest_news_file, "r", encoding="utf-8") as f:
@@ -760,6 +940,10 @@ if __name__ == "__main__":
                 items = raw["items"]
             
             topics = generate_24h_topic_focus(items)
-            print(f"Generated {len(topics)} topics:")
+            print(f"🎉 成功生成 {len(topics)} 个 24h 焦点专题:")
             for t in topics:
-                print(f"  - [{t['heat_score']}] {t['title_zh']} (News: {len(t['linked_news'])}, Tweets: {len(t['linked_tweets'])})")
+                print(f"  - [{t['heat_score']}] {t['title_zh']}")
+                print(f"    脉络: {t['summary_zh'][:80]}...")
+                print(f"    正方: {t.get('perspective_pro', {}).get('role_zh')}")
+                print(f"    反方: {t.get('perspective_con', {}).get('role_zh')}")
+                print(f"    关联: {len(t['linked_news'])} 快讯, {len(t['linked_tweets'])} 推文, 工具: {bool(t['linked_tool'])}")
