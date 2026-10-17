@@ -811,7 +811,7 @@
       const btnAuto = document.getElementById('theme-btn-auto');
 
       const activeClass = "px-2 py-1 text-xs rounded-lg transition-all bg-indigo-600 text-white font-bold shadow-sm flex items-center space-x-1";
-      const inactiveClass = "px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1";
+      const inactiveClass = "px-2 py-1 text-xs rounded-lg transition-all text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-medium flex items-center space-x-1";
 
       if (btnLight) btnLight.className = (currentTheme === 'light') ? activeClass : inactiveClass;
       if (btnDark) btnDark.className = (currentTheme === 'dark') ? activeClass : inactiveClass;
@@ -1781,19 +1781,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               btn.className = "tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap";
             }
             if (badge) {
-              if (k === 'prompts') {
-                badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-purple-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm";
-              } else {
-                badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-white text-indigo-800 font-bold font-mono shrink-0 ml-0.5 shadow-sm";
-              }
+              badge.className = "text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs backdrop-blur-xs";
             }
           } else {
             if (k === 'prompts') {
               btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-800 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
-              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100 font-mono font-semibold shrink-0 ml-0.5";
+              if (badge) badge.className = "text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-900 dark:text-purple-200 border border-purple-300 dark:border-purple-700/70 font-mono font-bold shrink-0 ml-0.5";
             } else {
               btn.className = "tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap";
-              if (badge) badge.className = "text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-mono font-medium shrink-0 ml-0.5";
+              if (badge) badge.className = "text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 font-mono font-bold shrink-0 ml-0.5";
             }
           }
         }
@@ -5720,25 +5716,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const sizeButtonsHtml = pageSizeOptions.map(sz => {
         const isActive = (sz === pageSize);
         const btnCls = isActive
-          ? "bg-indigo-600 text-white font-bold shadow-sm shadow-indigo-600/30"
-          : "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-medium";
+          ? "bg-indigo-600 text-white font-bold shadow-sm shadow-indigo-600/30 border border-indigo-500"
+          : "bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 font-semibold shadow-xs";
         return `<button type="button" onclick="changeCategoryPageSize(${sz})" class="px-2.5 py-1 rounded-md text-xs transition-all cursor-pointer ${btnCls}">${sz}</button>`;
       }).join('');
 
       let html = `
         <div class="flex flex-wrap items-center gap-3">
-          <div class="text-xs text-slate-500 dark:text-slate-400 font-mono">
-            ${isZh ? `显示第 <strong class="text-slate-800 dark:text-slate-200 font-bold">${startItem} - ${endItem}</strong> 条 · 共 <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong> 条` : `Showing <strong class="text-slate-800 dark:text-slate-200 font-bold">${startItem}-${endItem}</strong> of <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong>`}
+          <div class="text-xs text-slate-600 dark:text-slate-400 font-mono">
+            ${isZh ? `显示第 <strong class="text-slate-900 dark:text-white font-bold">${startItem} - ${endItem}</strong> 条 · 共 <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong> 条` : `Showing <strong class="text-slate-900 dark:text-white font-bold">${startItem}-${endItem}</strong> of <strong class="text-indigo-600 dark:text-indigo-400 font-bold">${totalItems}</strong>`}
           </div>
           <div class="flex items-center space-x-1.5 pl-3 border-l border-slate-200 dark:border-slate-800 text-xs">
-            <span class="text-slate-500 dark:text-slate-400 font-medium">${isZh ? '每页显示:' : 'Per page:'}</span>
-            <div class="inline-flex p-0.5 rounded-lg bg-slate-200/60 dark:bg-slate-800/80 border border-slate-300/80 dark:border-slate-700/80 space-x-1">
+            <span class="text-slate-700 dark:text-slate-300 font-semibold">${isZh ? '每页显示:' : 'Per page:'}</span>
+            <div class="inline-flex p-0.5 rounded-lg bg-slate-200/70 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 space-x-1">
               ${sizeButtonsHtml}
             </div>
           </div>
         </div>
         <div class="flex items-center space-x-1.5">
-          <button type="button" onclick="changeCategoryPage(${cur - 1})" ${cur === 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === 1 ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-sm'} transition-all flex items-center space-x-1">
+          <button type="button" onclick="changeCategoryPage(${cur - 1})" ${cur === 1 ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-bold ${cur === 1 ? 'opacity-35 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-800' : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-xs'} transition-all flex items-center space-x-1">
             <span>◀</span>
             <span class="hidden sm:inline">${isZh ? '上一页' : 'Prev'}</span>
           </button>
@@ -5746,16 +5742,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       pageNumbers.forEach(p => {
         if (p === '...') {
-          html += `<span class="px-2 py-1 text-slate-400 font-mono text-xs">...</span>`;
+          html += `<span class="px-2 py-1 text-slate-500 dark:text-slate-400 font-mono text-xs font-bold">...</span>`;
         } else if (p === cur) {
-          html += `<button type="button" class="w-8 h-8 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 flex items-center justify-center">${p}</button>`;
+          html += `<button type="button" class="w-8 h-8 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 border border-indigo-500 flex items-center justify-center">${p}</button>`;
         } else {
-          html += `<button type="button" onclick="changeCategoryPage(${p})" class="w-8 h-8 rounded-lg text-xs font-medium bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 flex items-center justify-center transition-all cursor-pointer shadow-sm">${p}</button>`;
+          html += `<button type="button" onclick="changeCategoryPage(${p})" class="w-8 h-8 rounded-lg text-xs font-bold bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all cursor-pointer shadow-xs">${p}</button>`;
         }
       });
 
       html += `
-          <button type="button" onclick="changeCategoryPage(${cur + 1})" ${cur === totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cur === totalPages ? 'opacity-40 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400' : 'bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-sm'} transition-all flex items-center space-x-1">
+          <button type="button" onclick="changeCategoryPage(${cur + 1})" ${cur === totalPages ? 'disabled' : ''} class="px-3 py-1.5 rounded-lg text-xs font-bold ${cur === totalPages ? 'opacity-35 cursor-not-allowed bg-slate-100 dark:bg-slate-800/40 text-slate-400 dark:text-slate-600 border border-slate-200 dark:border-slate-800' : 'bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 hover:bg-indigo-600 hover:text-white border border-slate-300 dark:border-slate-700 cursor-pointer shadow-xs'} transition-all flex items-center space-x-1">
             <span class="hidden sm:inline">${isZh ? '下一页' : 'Next'}</span>
             <span>▶</span>
           </button>
@@ -6818,6 +6814,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       categoryCurrentPage = 1;
       const btnLeader = document.getElementById('btn-social-mode-leader');
       const btnViral = document.getElementById('btn-social-mode-viral');
+      const badgeLeader = document.getElementById('badge-count-leader');
+      const badgeViral = document.getElementById('badge-count-viral');
       const celebSubfilter = document.getElementById('celebrity-subfilter');
       const viralSubfilter = document.getElementById('viral-platform-subfilter');
 
@@ -6825,8 +6823,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (btnViral) {
           btnViral.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1.5 bg-rose-600 text-white shadow-sm shadow-rose-600/30";
         }
+        if (badgeViral) {
+          badgeViral.className = "px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white border border-white/30 font-mono font-bold";
+        }
         if (btnLeader) {
-          btnLeader.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
+          btnLeader.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
+        }
+        if (badgeLeader) {
+          badgeLeader.className = "px-2 py-0.5 rounded-full text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-mono font-bold";
         }
         if (celebSubfilter) celebSubfilter.classList.add('hidden');
         if (viralSubfilter) viralSubfilter.classList.remove('hidden');
@@ -6834,8 +6838,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (btnLeader) {
           btnLeader.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1.5 bg-sky-600 text-white shadow-sm shadow-sky-600/30";
         }
+        if (badgeLeader) {
+          badgeLeader.className = "px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white border border-white/30 font-mono font-bold";
+        }
         if (btnViral) {
-          btnViral.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
+          btnViral.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
+        }
+        if (badgeViral) {
+          badgeViral.className = "px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30 font-mono font-bold";
         }
         if (celebSubfilter) celebSubfilter.classList.remove('hidden');
         if (viralSubfilter) viralSubfilter.classList.add('hidden');

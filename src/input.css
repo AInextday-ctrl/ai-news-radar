@@ -285,53 +285,95 @@ html:not(.dark) .tab-btn:not(.active):hover {
 }
 
 html:not(.dark) .celeb-filter-btn:not(.active),
-
 html:not(.dark) .tool-filter-btn:not(.active),
-
+html:not(.dark) .tool-origin-btn:not(.active),
+html:not(.dark) .viral-filter-btn:not(.active),
 html:not(.dark) .video-filter-btn:not(.active),
-
 html:not(.dark) .prompt-filter-btn:not(.active) {
-
   background-color: #ffffff !important;
-
-  color: #334155 !important;
-
+  color: #1e293b !important;
   border: 1px solid #cbd5e1 !important;
-
+  font-weight: 600 !important;
 }
 
 html:not(.dark) .celeb-filter-btn:not(.active):hover,
-
 html:not(.dark) .tool-filter-btn:not(.active):hover,
-
+html:not(.dark) .tool-origin-btn:not(.active):hover,
+html:not(.dark) .viral-filter-btn:not(.active):hover,
 html:not(.dark) .video-filter-btn:not(.active):hover,
-
 html:not(.dark) .prompt-filter-btn:not(.active):hover {
-
   background-color: #f1f5f9 !important;
-
   color: #0f172a !important;
-
   border-color: #94a3b8 !important;
-
 }
 
-
-
-html:not(.dark) [id^="badge-count-"] {
-
-  background-color: #e2e8f0 !important;
-
-  color: #334155 !important;
-
+html.dark .celeb-filter-btn:not(.active),
+html.dark .tool-filter-btn:not(.active),
+html.dark .tool-origin-btn:not(.active),
+html.dark .viral-filter-btn:not(.active),
+html.dark .video-filter-btn:not(.active),
+html.dark .prompt-filter-btn:not(.active) {
+  background-color: #1e293b !important;
+  color: #e2e8f0 !important;
+  border: 1px solid #334155 !important;
+  font-weight: 600 !important;
 }
 
-html:not(.dark) .tab-btn.active [id^="badge-count-"] {
-
-  background-color: rgba(255, 255, 255, 0.25) !important;
-
+html.dark .celeb-filter-btn:not(.active):hover,
+html.dark .tool-filter-btn:not(.active):hover,
+html.dark .tool-origin-btn:not(.active):hover,
+html.dark .viral-filter-btn:not(.active):hover,
+html.dark .video-filter-btn:not(.active):hover,
+html.dark .prompt-filter-btn:not(.active):hover {
+  background-color: #334155 !important;
   color: #ffffff !important;
+  border-color: #475569 !important;
+}
 
+/* ========================================================= */
+/* 🎯 导航栏与角标高对比度全主题优化 (High Contrast Tab & Badges) */
+/* ========================================================= */
+
+/* 激活专栏按钮角标 (深浅两套主题全兼容：半透明白底 + 纯白高亮加粗字体 + 精致边框，永不泛白遮挡) */
+.tab-btn.active [id^="badge-count-"] {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  font-weight: 700 !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* 未激活专栏按钮角标 - 浅色模式 (浅灰底 + 纯深黑灰高对比数字 + 明确细边框) */
+html:not(.dark) .tab-btn:not(.active) [id^="badge-count-"] {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+  font-weight: 700 !important;
+}
+
+/* 未激活专栏按钮角标 - 深色模式 (深青灰底 + 纯白高对比数字 + 深色细边框) */
+html.dark .tab-btn:not(.active) [id^="badge-count-"] {
+  background-color: rgba(30, 41, 59, 0.9) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(71, 85, 105, 0.8) !important;
+  font-weight: 700 !important;
+}
+
+/* 提示词专栏独立色系 (浅色与深色未激活态高对比) */
+html:not(.dark) #tab-btn-prompts:not(.active) #badge-count-prompts {
+  background-color: #f3e8ff !important;
+  color: #6b21a8 !important;
+  border: 1px solid #d8b4fe !important;
+  font-weight: 700 !important;
+}
+
+html.dark #tab-btn-prompts:not(.active) #badge-count-prompts {
+  background-color: rgba(88, 28, 135, 0.4) !important;
+  color: #f3e8ff !important;
+  border: 1px solid rgba(168, 85, 247, 0.5) !important;
+  font-weight: 700 !important;
 }
 
 
