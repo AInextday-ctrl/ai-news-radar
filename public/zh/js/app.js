@@ -4311,7 +4311,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return `
         <article onclick="openToolDetailModal('${itemId}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
           <!-- 顶部视觉高光 Preview Banner -->
-          <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0">
+          <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0 flex items-center justify-center">
             <!-- 场景主题渐变兜底层 (确保任何情况下绝无死黑方块) -->
             <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
               <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-2xl text-emerald-400">
@@ -4319,8 +4319,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
             ${previewImg ? `
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.nextElementSibling?.classList.remove('hidden'); this.remove(); }">
-              <div class="terminal-mockup hidden absolute inset-0 w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
+              <!-- 环境光模糊背景层 (解决宽屏Banner/手机截屏尺寸不一致时的黑边问题) -->
+              <img src="${optimizeImageUrl(previewImg, 480)}" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
+              <!-- 前景高清自适应图片 (保证文字、UI完整无切边) -->
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.remove(); }">
+              <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
                 <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
                   <div class="flex items-center space-x-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
@@ -4346,10 +4349,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <span class="text-slate-400 font-mono">${starsDisplay ? escapeHtml(starsDisplay) : 'Open Source'}</span>
                 </div>
               </div>
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
+              <div class="absolute inset-0 z-[3] bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
 
               <!-- 悬浮 Logo 微图标 -->
-              <div class="absolute bottom-2.5 left-3 flex items-center space-x-2">
+              <div class="absolute bottom-2.5 left-3 z-[4] flex items-center space-x-2">
                 <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
                   ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
                 </div>
@@ -7858,16 +7861,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (!isGeminiItem) {
         galleryImages = galleryImages.filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
       }
-      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe') && !img.includes('microlink.io') && !img.includes('opengraph.githubassets.com'));
-
-      const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
-      // 如果拥有独立官网，确保画廊首图或候选中包含官网首页高清实拍截图
-      if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
-        const siteShot = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
-        if (!galleryImages.includes(siteShot)) {
-          galleryImages.unshift(siteShot);
-        }
-      }
+      galleryImages = galleryImages.filter(img => !img.includes('photo-1618005182384-a83a8bd57fbe') && !img.includes('microlink.io'));
 
       currentToolImages = galleryImages;
       currentToolImageIndex = 0;
@@ -7954,13 +7948,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         imgEl.style.display = 'block';
         imgEl.onerror = function() {
           this.onerror = null;
-          const cleanTarget = formatCleanToolUrl(currentToolModalItem?.official_url || currentToolModalItem?.url || '');
-          if (cleanTarget && !cleanTarget.includes('github.com') && !cleanTarget.includes('huggingface.co')) {
-            this.src = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanTarget)}?w=1280&h=720`;
-          } else {
-            this.style.display = 'none';
-            if (terminalEl) terminalEl.style.display = 'flex';
-          }
+          this.style.display = 'none';
+          if (terminalEl) terminalEl.style.display = 'flex';
         };
         imgEl.src = currentToolImages[currentToolImageIndex];
       }
