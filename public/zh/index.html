@@ -421,7 +421,7 @@
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
             <span id="nav-text-celebrity" class="truncate font-semibold">社交雷达</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">150</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-slate-200/80 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono shrink-0 ml-0.5" id="badge-count-celebrity">151</span>
           </button>
           <button onclick="switchTab('tools')" id="tab-btn-tools" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🛠️</span>
@@ -436,7 +436,7 @@
           <button onclick="switchTab('prompts')" id="tab-btn-prompts" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-950/50 border border-purple-300 dark:border-purple-700/70 hover:bg-purple-100 dark:hover:bg-purple-900/60 shadow-sm transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">💡</span>
             <span id="nav-text-prompts" class="truncate font-semibold">提示词库</span>
-            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5" id="badge-count-prompts">59</span>
+            <span class="text-[10px] sm:text-xs px-1.5 py-0.2 rounded-full bg-purple-200/80 dark:bg-purple-900 text-purple-800 dark:text-purple-200 font-mono shrink-0 ml-0.5" id="badge-count-prompts">58</span>
           </button>
         </div>
       </div>
@@ -876,7 +876,7 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
               <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('fef3c379b41b96f1')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai_navier.png&w=480&output=webp&q=80" alt="数学界指责开放人工智能机构未读懂自家千禧难题证明" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai_navier.png&w=480&output=webp&q=80" alt="数学界质疑OpenAI根本不懂自己的千禧年难题证明" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -884,10 +884,10 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
                       <span>信源: THE DECODER</span>
                     </div>
                     <button type="button" onclick="openAiNewsModal('fef3c379b41b96f1')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
-                      数学界指责开放人工智能机构未读懂自家千禧难题证明
+                      数学界质疑OpenAI根本不懂自己的千禧年难题证明
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      开放人工智能机构提交166页纳维-斯托克斯方程解法，遭数学家集体质疑其连自身逻辑都没整明白
+                      OpenAI提交了长达166页的纳维-斯托克斯方程解法论文，但多位数学家指出其自身描述的方法论与实际内容严重脱节
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -902,7 +902,7 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
                 </div>
               </article>
               <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('2dac351b42494b1c')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6acf63d6b06331734b2e70d7/master/pass/Physical%2520Genome%2520cr-Samuel%2520Velasco%2520and%2520Hannah%2520Waters_Quanta%2520Magazine-Lede.jpg&w=480&output=webp&q=80" alt="科学界警示算法尚无法攻克错综复杂的生命暗物质基因组" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden shrink-0 bg-slate-900 border border-slate-800"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6acf63d6b06331734b2e70d7/master/pass/Physical%2520Genome%2520cr-Samuel%2520Velasco%2520and%2520Hannah%2520Waters_Quanta%2520Magazine-Lede.jpg&w=480&output=webp&q=80" alt="人类基因组深层谜题让AI无从下手" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between space-y-2">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -910,10 +910,10 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
                       <span>信源: Wired AI</span>
                     </div>
                     <button type="button" onclick="openAiNewsModal('2dac351b42494b1c')" class="block text-left w-full font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer">
-                      科学界警示算法尚无法攻克错综复杂的生命暗物质基因组
+                      人类基因组深层谜题让AI无从下手
                     </button>
                     <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
-                      生命科学界指出仅占2%的编码区之外藏着庞大调控黑箱，人工智能远未具备破解人类基因组的能力
+                      人类基因组中仅2%为编码基因，其余调控机制宛如复杂迷宫，当前AI技术仍难以破解真正的生命调控网络
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-1 gap-2">
@@ -1780,11 +1780,11 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-leader">🐦 前沿发声</span>
-              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">150</span>
+              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">151</span>
             </button>
             <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
-              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">114</span>
+              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">115</span>
             </button>
           </div>
 
