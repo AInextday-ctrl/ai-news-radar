@@ -46,7 +46,13 @@ DATA_TOPIC_FILE = os.path.join(BASE_DIR, "data", "topic_focus.json")
 PUBLIC_DATA_TOPIC_FILE = os.path.join(BASE_DIR, "public", "data", "topic_focus.json")
 CURATED_WORKFLOWS_FILE = os.path.join(BASE_DIR, "data", "curated_workflows_library.json")
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+# 支持专属话题聚类 Key（GEMINI_API_KEY_TOPICS / GEMINI_API_KEY_2），彻底与主项目 Key 物理隔离；未配置时无缝回退至全局 Key
+GEMINI_API_KEY = (
+    os.getenv("GEMINI_API_KEY_TOPICS", "").strip()
+    or os.getenv("GEMINI_API_KEY_TOPIC", "").strip()
+    or os.getenv("GEMINI_API_KEY_2", "").strip()
+    or os.getenv("GEMINI_API_KEY", "").strip()
+)
 # 智能配额保护锁：默认每 4 小时仅调用一次 Gemini 进行宏观议题聚类，其余频次复用缓存 (0 API 消耗)
 TOPIC_REFRESH_INTERVAL_HOURS = float(os.getenv("TOPIC_REFRESH_INTERVAL_HOURS", "4.0"))
 

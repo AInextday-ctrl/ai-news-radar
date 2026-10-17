@@ -25,7 +25,12 @@ try:
 except ImportError:
     pass
 
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+# 支持专属新闻翻译提炼 Key（GEMINI_API_KEY_NEWS），未配置时无缝回退至全局 Key
+GEMINI_API_KEY = (
+    os.getenv("GEMINI_API_KEY_NEWS", "").strip()
+    or os.getenv("GEMINI_API_KEY", "").strip()
+    or os.getenv("GEMINI_API_KEY_2", "").strip()
+)
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
 
 # 翻译内存缓存，避免重复请求

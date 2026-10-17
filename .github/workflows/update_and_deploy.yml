@@ -32,6 +32,9 @@ jobs:
       - name: Run Fetcher & AI Summarizer
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_TOPICS: ${{ secrets.GEMINI_API_KEY_TOPICS }}
+          GEMINI_API_KEY_NEWS: ${{ secrets.GEMINI_API_KEY_NEWS }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_MODEL: 'gemini-flash-latest'
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
           APIFY_INTERVAL_HOURS: '0.11'
