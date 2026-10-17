@@ -3434,6 +3434,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return str;
     }
 
+    function toggleTweetExpand(btn) {
+      if (window.event) window.event.stopPropagation();
+      const parent = btn.parentElement;
+      const prevSibling = parent.previousElementSibling;
+      const box = prevSibling ? prevSibling.querySelector('.tweet-content-box') : null;
+      const fade = prevSibling ? prevSibling.querySelector('.tweet-fade-overlay') : null;
+      if (!box) return;
+      const isExpanded = box.getAttribute('data-expanded') === 'true';
+      const isZh = (typeof currentLang !== 'undefined' ? currentLang : 'en') === 'zh';
+      if (!isExpanded) {
+        box.setAttribute('data-expanded', 'true');
+        box.style.display = 'block';
+        box.style.webkitLineClamp = 'unset';
+        box.style.maxHeight = 'none';
+        box.style.overflow = 'visible';
+        if (fade) fade.style.display = 'none';
+        btn.innerHTML = `<span>${isZh ? '收起全文' : 'Show less'}</span> <span class="text-[10px]">↑</span>`;
+      } else {
+        box.setAttribute('data-expanded', 'false');
+        box.style.display = '-webkit-box';
+        box.style.webkitLineClamp = '4';
+        box.style.maxHeight = '105px';
+        box.style.overflow = 'hidden';
+        if (fade) fade.style.display = 'block';
+        btn.innerHTML = `<span>${isZh ? '展开阅读全文' : 'Read full tweet'}</span> <span class="text-[10px]">↓</span>`;
+      }
+    }
+    window.toggleTweetExpand = toggleTweetExpand;
+
     function renderCelebrityCard(item, isTimeline = false, isRight = false) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
@@ -3525,10 +3554,32 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
 
-            <!-- 𝕏 原生推文正文 (保留真实排版与观点，支持高亮与多图视频) -->
-            <div class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5">
-              ${formatTweetText(displayQuote)}
-            </div>
+            <!-- 𝕏 原生推文正文 (默认折叠长文，卡片整齐对齐，按需展开阅读) -->
+            ${(() => {
+              const quoteLines = (displayQuote || '').split('\n').filter(Boolean).length;
+              const isLongTweet = (displayQuote || '').length > 180 || quoteLines > 4;
+              if (!isLongTweet) {
+                return `
+                  <div class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5">
+                    ${formatTweetText(displayQuote)}
+                  </div>
+                `;
+              }
+              return `
+                <div class="relative">
+                  <div class="tweet-content-box text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5 overflow-hidden transition-all duration-300" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: 105px;" data-expanded="false">
+                    ${formatTweetText(displayQuote)}
+                  </div>
+                  <div class="tweet-fade-overlay absolute bottom-0 left-0 right-0 h-9 bg-gradient-to-t from-white/95 dark:from-slate-900/95 to-transparent pointer-events-none transition-opacity"></div>
+                </div>
+                <div class="flex items-center justify-between pt-1">
+                  <button type="button" onclick="event.stopPropagation(); toggleTweetExpand(this)" class="inline-flex items-center gap-1 text-[11px] font-semibold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 py-0.5 px-2 rounded-md bg-sky-50 dark:bg-sky-500/10 hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-all border border-sky-200/60 dark:border-sky-500/20 group/exp cursor-pointer">
+                    <span>${isZh ? '展开阅读全文' : 'Read full tweet'}</span>
+                    <span class="text-[10px] group-hover/exp:translate-y-0.5 transition-transform">↓</span>
+                  </button>
+                </div>
+              `;
+            })()}
 
             <!-- 原推图片/视频媒体展示 (全平台全视图统一呈现，支持原生播放、高清海报与无缝回退) -->
             ${(() => {
@@ -3851,10 +3902,34 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
 
-            <!-- 纯净原生推文展示 (高亮标签与提及，告别机械引号，还原真实阅读沉浸感) -->
-            <div class="text-xs sm:text-sm font-normal text-slate-800 dark:text-slate-100 leading-relaxed bg-amber-500/10 dark:bg-slate-950/75 p-3 sm:p-3.5 rounded-2xl border border-amber-400/25 group-hover:border-amber-400/50 transition-colors shadow-inner mb-2.5 whitespace-pre-line select-text">
-              ${formatTweetText(displayQuote)}
-            </div>
+            <!-- 纯净原生推文展示 (默认折叠长文，卡片整齐对齐，按需展开阅读) -->
+            ${(() => {
+              const quoteLines = (displayQuote || '').split('\n').filter(Boolean).length;
+              const isLongTweet = (displayQuote || '').length > 180 || quoteLines > 4;
+              if (!isLongTweet) {
+                return `
+                  <div class="text-xs sm:text-sm font-normal text-slate-800 dark:text-slate-100 leading-relaxed bg-amber-500/10 dark:bg-slate-950/75 p-3 sm:p-3.5 rounded-2xl border border-amber-400/25 group-hover:border-amber-400/50 transition-colors shadow-inner mb-2.5 whitespace-pre-line select-text">
+                    ${formatTweetText(displayQuote)}
+                  </div>
+                `;
+              }
+              return `
+                <div class="relative bg-amber-500/10 dark:bg-slate-950/75 p-3 sm:p-3.5 rounded-2xl border border-amber-400/25 group-hover:border-amber-400/50 transition-colors shadow-inner mb-2.5">
+                  <div class="relative">
+                    <div class="tweet-content-box text-xs sm:text-sm font-normal text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-line select-text overflow-hidden transition-all duration-300" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: 95px;" data-expanded="false">
+                      ${formatTweetText(displayQuote)}
+                    </div>
+                    <div class="tweet-fade-overlay absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-amber-50 dark:from-slate-950 to-transparent pointer-events-none transition-opacity"></div>
+                  </div>
+                  <div class="flex items-center justify-between pt-1.5">
+                    <button type="button" onclick="event.stopPropagation(); toggleTweetExpand(this)" class="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 py-0.5 px-2 rounded-md bg-amber-100 dark:bg-amber-500/10 hover:bg-amber-200 dark:hover:bg-amber-500/20 transition-all border border-amber-300/60 dark:border-amber-500/20 group/exp cursor-pointer">
+                      <span>${isZh ? '展开阅读全文' : 'Read full tweet'}</span>
+                      <span class="text-[10px] group-hover/exp:translate-y-0.5 transition-transform">↓</span>
+                    </button>
+                  </div>
+                </div>
+              `;
+            })()}
 
             ${specBadges}
           </div>
@@ -6776,19 +6851,43 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
           </div>
 
-          <!-- 正文内容：直显完整段落，随系统语言自适应，支持卡片级即时双语切换 -->
+          <!-- 正文内容：默认折叠长文，卡片整齐对齐，支持双语切换与按需展开 -->
           <div class="mt-3.5 select-text">
-            <div id="post-text-${cardKey}" class="text-[14px] sm:text-[15px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal">
-              ${formattedBody}
-            </div>
-            
-            <!-- 卡片级即时双语切换按钮 -->
-            <div class="flex items-center justify-end mt-2 pt-1 border-t border-slate-100/60 dark:border-slate-800/40">
-              <button type="button" onclick="event.stopPropagation(); toggleCardLanguage('${cardKey}', '${itemId}')" class="inline-flex items-center gap-1 text-[11px] font-medium text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 py-1 px-2.5 rounded-lg bg-rose-50/80 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200/60 dark:border-rose-800/60 transition-all cursor-pointer">
-                <span>🌐</span>
-                <span id="lang-btn-${cardKey}">${isZh ? '查看英文原文' : 'Translate to Chinese'}</span>
-              </button>
-            </div>
+            ${(() => {
+              const bodyLines = (initialText || '').split('\n').filter(Boolean).length;
+              const isLongPost = (initialText || '').length > 180 || bodyLines > 4;
+              if (!isLongPost) {
+                return `
+                  <div id="post-text-${cardKey}" class="text-[14px] sm:text-[15px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal">
+                    ${formattedBody}
+                  </div>
+                  <div class="flex items-center justify-end mt-2 pt-1 border-t border-slate-100/60 dark:border-slate-800/40">
+                    <button type="button" onclick="event.stopPropagation(); toggleCardLanguage('${cardKey}', '${itemId}')" class="inline-flex items-center gap-1 text-[11px] font-medium text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 py-1 px-2.5 rounded-lg bg-rose-50/80 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 border border-rose-200/60 dark:border-rose-800/60 transition-all cursor-pointer">
+                      <span>🌐</span>
+                      <span id="lang-btn-${cardKey}">${isZh ? '查看英文原文' : 'Translate to Chinese'}</span>
+                    </button>
+                  </div>
+                `;
+              }
+              return `
+                <div class="relative">
+                  <div id="post-text-${cardKey}" class="tweet-content-box text-[14px] sm:text-[15px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal overflow-hidden transition-all duration-300" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; max-height: 105px;" data-expanded="false">
+                    ${formattedBody}
+                  </div>
+                  <div class="tweet-fade-overlay absolute bottom-0 left-0 right-0 h-9 bg-gradient-to-t from-white/95 dark:from-slate-900/95 to-transparent pointer-events-none transition-opacity"></div>
+                </div>
+                <div class="flex items-center justify-between mt-2 pt-1 border-t border-slate-100/60 dark:border-slate-800/40">
+                  <button type="button" onclick="event.stopPropagation(); toggleTweetExpand(this)" class="inline-flex items-center gap-1 text-[11px] font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 py-0.5 px-2.5 rounded-md bg-rose-50 dark:bg-rose-500/10 hover:bg-rose-100 dark:hover:bg-rose-500/20 transition-all border border-rose-200/60 dark:border-rose-500/20 group/exp cursor-pointer">
+                    <span>${isZh ? '展开阅读全文' : 'Read full post'}</span>
+                    <span class="text-[10px] group-hover/exp:translate-y-0.5 transition-transform">↓</span>
+                  </button>
+                  <button type="button" onclick="event.stopPropagation(); toggleCardLanguage('${cardKey}', '${itemId}')" class="inline-flex items-center gap-1 text-[11px] font-medium text-slate-600 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-300 py-1 px-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 transition-all cursor-pointer">
+                    <span>🌐</span>
+                    <span id="lang-btn-${cardKey}">${isZh ? '查看英文原文' : 'Translate to Chinese'}</span>
+                  </button>
+                </div>
+              `;
+            })()}
           </div>
 
           <!-- 配图、AI 动态视频流或终端代码直显容器 -->
