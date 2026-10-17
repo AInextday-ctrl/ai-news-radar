@@ -2428,11 +2428,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_arena, en_content, re.DOTALL):
             en_content = re.sub(pattern_arena, r'\1\n' + arena_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
 
-        if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in en_content:
-            en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
-                                hub_en_html.strip(), en_content, flags=re.DOTALL)
-        else:
-            en_content = en_content.replace("</main>", f"{hub_en_html}\n</main>")
+        # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
+        en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
+                            '', en_content, flags=re.DOTALL)
+        en_content = re.sub(r'<section [^>]*id="intelligence-archive-hub"[^>]*>.*?</section>',
+                            '', en_content, flags=re.DOTALL)
 
         en_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
@@ -2798,11 +2798,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_arena, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_arena, r'\1\n' + arena_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
 
-        if "<!-- ========== STATIC_HUB_NAVIGATION_START ==========" in zh_content:
-            zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
-                                hub_zh_html.strip(), zh_content, flags=re.DOTALL)
-        else:
-            zh_content = zh_content.replace("</main>", f"{hub_zh_html}\n</main>")
+        # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
+        zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
+                            '', zh_content, flags=re.DOTALL)
+        zh_content = re.sub(r'<section [^>]*id="intelligence-archive-hub"[^>]*>.*?</section>',
+                            '', zh_content, flags=re.DOTALL)
 
         zh_content = re.sub(r'<!-- ={10} SEO_STATIC_NEWS_START ={10} -->.*?<!-- ={10} SEO_STATIC_NEWS_END ={10} -->',
                             '', zh_content, flags=re.DOTALL)

@@ -5413,8 +5413,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           list = list.filter(it => getToolOrigin(it) === toolOriginFilter);
         }
 
-        // 纯正雷达发现流：按本周飙升增速 (weekly_stars) 倒序排列，真正的新晋黑马绝对置顶
+        const getToolTime = (it) => {
+          const t = it.raw_published_at || it.processed_at || it.published_at || it.crawled_at;
+          if (!t) return 0;
+          const d = new Date(t).getTime();
+          return isNaN(d) ? 0 : d;
+        };
+
+        // 严格遵循用户指令：按照筛选入库时间倒序排列（最新筛选入库排在最前，历史精选沉淀其后，绝不删除）
         list.sort((a, b) => {
+          const tB = getToolTime(b);
+          const tA = getToolTime(a);
+          if (tB !== tA) return tB - tA;
           const wkB = Number(b.weekly_stars) || (b.metrics ? Number(b.metrics.weekly_stars) || 0 : 0);
           const wkA = Number(a.weekly_stars) || (a.metrics ? Number(a.metrics.weekly_stars) || 0 : 0);
           if (wkB !== wkA) return wkB - wkA;

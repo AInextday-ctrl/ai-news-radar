@@ -241,6 +241,16 @@ def sanitize_tool_media(it: Dict[str, Any]) -> Dict[str, Any]:
         if not cur_img:
             cur_img = og_url
 
+    hf_match = re.search(r'huggingface\.co/spaces/([a-zA-Z0-9_\-\.]+)/([a-zA-Z0-9_\-\.]+)', u_combined, re.IGNORECASE)
+    if hf_match:
+        hf_author = hf_match.group(1)
+        hf_space = hf_match.group(2).split('?')[0].split('#')[0]
+        hf_thumb = f"https://cdn-thumbnails.huggingface.co/social-thumbnails/spaces/{hf_author}/{hf_space}.png"
+        if not clean_previews:
+            clean_previews = [hf_thumb]
+        if not cur_img:
+            cur_img = hf_thumb
+
     it["preview_images"] = clean_previews
     it["image_url"] = cur_img
     return it
@@ -415,59 +425,41 @@ def fuse_and_deduplicate_tools(sources_lists: List[List[Dict[str, Any]]]) -> Lis
 
     return clean_pool
 
+def parse_tool_timestamp(it: Dict[str, Any]) -> float:
+    from datetime import datetime, timezone
+    val = it.get("raw_published_at") or it.get("processed_at") or it.get("published_at") or it.get("crawled_at")
+    if not val:
+        return 0.0
+    val_str = str(val).strip()
+    try:
+        dt = datetime.fromisoformat(val_str.replace("Z", "+00:00"))
+        return dt.timestamp()
+    except Exception:
+        pass
+    try:
+        m = re.search(r'(\d{4})-(\d{2})-(\d{2})', val_str)
+        if m:
+            dt = datetime(int(m.group(1)), int(m.group(2)), int(m.group(3)), tzinfo=timezone.utc)
+            return dt.timestamp()
+    except Exception:
+        pass
+    return 0.0
+
 def rank_radar_stream(fused_tools: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
-    Ranks the fused tools according to Radar First policy:
-    1. Fresh Breakout Discoveries (weekly_stars >= 250 or is_breakout, non-static) placed at the top!
-    2. Rich Scenario Foundation Library (curated standards & steady tools) interleaved below.
+    Ranks the vetted tools according to the User's explicit rule:
+    '应该按照筛选时间排序，通过筛选的应该放入栏目里面，不是将所有的删除掉'
+    1. Primary key: Screening / Discovery time descending (newest screened tools at the very top!).
+    2. Secondary key: Weekly stars growth velocity (breakout tools within the same screening window get spotlight).
+    3. Tertiary key: Utility score & total stars.
     """
-    breakout_tools = []
-    regular_tools = []
-
-    for x in fused_tools:
-        wk = int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0)
-        is_bo = bool(x.get("is_breakout"))
-        is_curated_base = bool(x.get("is_curated_base") or str(x.get("id", "")).startswith("tool-"))
-
-        if (wk >= 250 or is_bo) and not is_curated_base:
-            breakout_tools.append(x)
-        else:
-            regular_tools.append(x)
-
-    # Sort breakout tools by weekly star surge descending
-    breakout_tools.sort(key=lambda x: (
-        int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0),
-        int(x.get("utility_score") or 80)
-    ), reverse=True)
-
-    # Categorize regular tools by origin and interleave
-    web_r = [x for x in regular_tools if x.get("tool_origin") == "web"]
-    gh_r = [x for x in regular_tools if x.get("tool_origin") == "github"]
-    hf_r = [x for x in regular_tools if x.get("tool_origin") == "huggingface"]
-    other_r = [x for x in regular_tools if x.get("tool_origin") not in ("web", "github", "huggingface")]
-
-    web_r.sort(key=lambda x: int(x.get("utility_score") or 85), reverse=True)
-    gh_r.sort(key=lambda x: (
-        int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0),
-        int(x.get("utility_score") or 80),
-        int(x.get("stars") or (x.get("metrics") or {}).get("stars") or 0)
-    ), reverse=True)
-    hf_r.sort(key=lambda x: int(x.get("utility_score") or 85), reverse=True)
-
-    interleaved_reg = []
-    wi, gi, hi = 0, 0, 0
-    while wi < len(web_r) or gi < len(gh_r) or hi < len(hf_r):
-        for _ in range(2):
-            if wi < len(web_r):
-                interleaved_reg.append(web_r[wi])
-                wi += 1
-        for _ in range(2):
-            if gi < len(gh_r):
-                interleaved_reg.append(gh_r[gi])
-                gi += 1
-        if hi < len(hf_r):
-            interleaved_reg.append(hf_r[hi])
-            hi += 1
-    interleaved_reg.extend(other_r)
-
-    return breakout_tools + interleaved_reg
+    return sorted(
+        fused_tools,
+        key=lambda x: (
+            parse_tool_timestamp(x),
+            int(x.get("weekly_stars") or (x.get("metrics") or {}).get("weekly_stars") or 0),
+            int(x.get("utility_score") or 80),
+            int(x.get("stars") or (x.get("metrics") or {}).get("stars") or 0)
+        ),
+        reverse=True
+    )

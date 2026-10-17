@@ -1323,8 +1323,9 @@ def save_news(items: list):
     def _interleave_tools_multi_source(tool_list):
         from tool_fusion import fuse_and_deduplicate_tools, rank_radar_stream
 
-        # 工业级三维指纹协同 (名称指纹 + 代码仓指纹 + 独立主域名指纹) 与跨源智能属性融合引擎 (纯正雷达黑马流)
-        fused = fuse_and_deduplicate_tools([tool_list])
+        # 获取历史库中所有经过筛选的工具，保证历史工具不被删除，沉淀入库
+        historical_tools = [it for it in historical_items if it.get("category") == "tools"]
+        fused = fuse_and_deduplicate_tools([tool_list, historical_tools])
         return rank_radar_stream(fused)
 
     # 3. 构建 24/48 小时热看板 payload (latest_news.json)
