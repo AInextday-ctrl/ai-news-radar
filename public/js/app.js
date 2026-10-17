@@ -6024,191 +6024,239 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []), leadMedia);
 
       // 计算极客实测 Demo 数量角标
-      const bDemos = document.getElementById('badge-count-demos');
-      if (bDemos) {
-        const demosCount = allCelebRaw.concat(allViralRaw).filter(it => {
-          if (it.has_video || it.video_url || it.is_hero_demo) return true;
-          const txt = `${it.title || ''} ${it.title_zh || ''} ${it.full_text_en || ''} ${it.full_text_zh || ''} ${(it.spec_tags || []).join(' ')}`.toLowerCase();
-          return /demo|hands[- ]?on|tested|benchmark|tutorial|workflow|实测|上手|跑分|实操|实录/i.test(txt);
-        }).length;
-        bDemos.textContent = `${demosCount || 24}+`;
+      try {
+        const bDemos = document.getElementById('badge-count-demos');
+        if (bDemos) {
+          const allCelebList = allCeleb || [];
+          const allViralList = (data.grouped?.viral_posts || data.viral_posts || (data.items ? data.items.filter(it => (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral))) : [])) || [];
+          const demosCount = allCelebList.concat(allViralList).filter(it => {
+            if (!it) return false;
+            if (it.has_video || it.video_url || it.is_hero_demo) return true;
+            const txt = `${it.title || ''} ${it.title_zh || ''} ${it.full_text_en || ''} ${it.full_text_zh || ''} ${(it.spec_tags || []).join(' ')}`.toLowerCase();
+            return /demo|hands[- ]?on|tested|benchmark|tutorial|workflow|实测|上手|跑分|实操|实录/i.test(txt);
+          }).length;
+          bDemos.textContent = `${demosCount || 24}+`;
+        }
+      } catch (err) {
+        console.warn('badge-count-demos warning:', err);
       }
 
-      if (document.getElementById('top-three-container')) {
-        renderTopThree(data.top_three || []);
+      try {
+        if (document.getElementById('top-three-container')) {
+          renderTopThree(data.top_three || []);
+        }
+      } catch (err) {
+        console.error('Error rendering top-three:', err);
       }
-      if (data.topic_focus && data.topic_focus.length > 0) {
-        renderTopicFocus(data.topic_focus);
+
+      try {
+        if (data.topic_focus && data.topic_focus.length > 0) {
+          renderTopicFocus(data.topic_focus);
+        }
+      } catch (err) {
+        console.error('Error rendering topic-focus:', err);
       }
 
       // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，与天梯榜等高对齐，各板块均支持一键直达完整专区)
       // A. 快讯板块 (News) - 与天梯图等高自适应，展示最新 18 条高价值快讯
-      const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
-      const poolNews = recentNews.length >= 6 ? recentNews : allNews;
-      const displayNews = poolNews.slice(0, 18);
-      const streamNews = document.getElementById('stream-news');
-      if (streamNews) {
-        streamNews.innerHTML = displayNews.length > 0 
-          ? displayNews.map((it, idx) => renderNewsCard(it, idx)).join('')
-          : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
-      }
-      const newsSubCount = document.getElementById('news-sub-count');
-      if (newsSubCount) {
-        newsSubCount.textContent = isZh ? `24h 实时 (${displayNews.length})` : `24h Live (${displayNews.length})`;
-      }
-      const txtViewAllNews = document.getElementById('txt-view-all-news');
-      if (txtViewAllNews) {
-        txtViewAllNews.textContent = isZh ? `查看全部行业快讯 (${allNews.length} 条) →` : `View All Breaking News (${allNews.length}) →`;
-      }
-
-      // 全站全量历史归档库入口横幅 (超 24 小时沉淀库，带完整多页翻查)
-      const arcSecNews = document.getElementById('archive-section-news');
-      const arcTxtNews = document.getElementById('txt-archive-news');
-      const totalArchivedCount = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : 0);
-      if (arcSecNews) {
-        arcSecNews.classList.remove('hidden');
-        if (arcTxtNews) {
-          arcTxtNews.textContent = isZh
-            ? `查看历史情报全量归档库 (已累计收录 ${totalArchivedCount} 篇)`
-            : `View Full Historical Intelligence Archive (${totalArchivedCount} items)`;
+      try {
+        const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
+        const poolNews = recentNews.length >= 6 ? recentNews : allNews;
+        const displayNews = poolNews.slice(0, 18);
+        const streamNews = document.getElementById('stream-news');
+        if (streamNews) {
+          streamNews.innerHTML = displayNews.length > 0 
+            ? displayNews.map((it, idx) => renderNewsCard(it, idx)).join('')
+            : `<div class="text-slate-400 text-xs py-4 px-3 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentNews}</div>`;
         }
+        const newsSubCount = document.getElementById('news-sub-count');
+        if (newsSubCount) {
+          newsSubCount.textContent = isZh ? `24h 实时 (${displayNews.length})` : `24h Live (${displayNews.length})`;
+        }
+        const txtViewAllNews = document.getElementById('txt-view-all-news');
+        if (txtViewAllNews) {
+          txtViewAllNews.textContent = isZh ? `查看全部行业快讯 (${allNews.length} 条) →` : `View All Breaking News (${allNews.length}) →`;
+        }
+
+        // 全站全量历史归档库入口横幅 (超 24 小时沉淀库，带完整多页翻查)
+        const arcSecNews = document.getElementById('archive-section-news');
+        const arcTxtNews = document.getElementById('txt-archive-news');
+        const totalArchivedCount = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : 0);
+        if (arcSecNews) {
+          arcSecNews.classList.remove('hidden');
+          if (arcTxtNews) {
+            arcTxtNews.textContent = isZh
+              ? `查看历史情报全量归档库 (已累计收录 ${totalArchivedCount} 篇)`
+              : `View Full Historical Intelligence Archive (${totalArchivedCount} items)`;
+          }
+        }
+      } catch (err) {
+        console.error('Error rendering stream-news:', err);
       }
 
       // B. 领袖社交板块 (Celebrity) - 严格限定在 24 小时以内，过期清退，一个不留，清除无意义单句推文！
-      let sideCelebList = allCeleb;
-      const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
-      recentCeleb.sort((a, b) => {
-        const aPinned = isItemPinnedActive(a) ? 1 : 0;
-        const bPinned = isItemPinnedActive(b) ? 1 : 0;
-        if (aPinned !== bPinned) return bPinned - aPinned;
-        const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
-        const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-        return timeB - timeA;
-      });
-      const displayCeleb = recentCeleb.slice(0, 14);
-      const streamCelebrity = document.getElementById('stream-celebrity');
-      if (streamCelebrity) {
-        streamCelebrity.innerHTML = displayCeleb.length > 0
-          ? displayCeleb.map(renderCelebrityCard).join('')
-          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentCeleb}</div>`;
-      }
-      const celebSubCount = document.getElementById('celebrity-sub-count');
-      if (celebSubCount) {
-        celebSubCount.textContent = isZh ? `24h 实时 (${displayCeleb.length})` : `24h Live (${displayCeleb.length})`;
-      }
-      const txtViewAllCeleb = document.getElementById('txt-view-all-celebrity');
-      if (txtViewAllCeleb) {
-        txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
+      try {
+        let sideCelebList = allCeleb;
+        const recentCeleb = sideCelebList.filter(it => isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it));
+        recentCeleb.sort((a, b) => {
+          const aPinned = isItemPinnedActive(a) ? 1 : 0;
+          const bPinned = isItemPinnedActive(b) ? 1 : 0;
+          if (aPinned !== bPinned) return bPinned - aPinned;
+          const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+          const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+          return timeB - timeA;
+        });
+        const displayCeleb = recentCeleb.slice(0, 14);
+        const streamCelebrity = document.getElementById('stream-celebrity');
+        if (streamCelebrity) {
+          streamCelebrity.innerHTML = displayCeleb.length > 0
+            ? displayCeleb.map(renderCelebrityCard).join('')
+            : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentCeleb}</div>`;
+        }
+        const celebSubCount = document.getElementById('celebrity-sub-count');
+        if (celebSubCount) {
+          celebSubCount.textContent = isZh ? `24h 实时 (${displayCeleb.length})` : `24h Live (${displayCeleb.length})`;
+        }
+        const txtViewAllCeleb = document.getElementById('txt-view-all-celebrity');
+        if (txtViewAllCeleb) {
+          txtViewAllCeleb.textContent = isZh ? `查看全部社交雷达 (${allCeleb.length} 条) →` : `View All Social Pulse (${allCeleb.length}) →`;
+        }
+      } catch (err) {
+        console.error('Error rendering stream-celebrity:', err);
       }
 
       // C. 落地工具板块 (Tools) - 首页精选按多维筛选即时呈现 (默认今日最新入库 Top 3)
-      renderHomeTools(data);
+      try {
+        renderHomeTools(data);
+      } catch (err) {
+        console.error('Error rendering stream-tools:', err);
+      }
 
       // D. 视频演示板块 (Videos) - 首页仅精选 Top 2 实战演示
-      const dedupedVideos = dedupVideoItems(allVideos);
-      const displayVideos = dedupedVideos.slice(0, 2);
-      const streamVideos = document.getElementById('stream-videos');
-      if (streamVideos) {
-        streamVideos.innerHTML = displayVideos.length > 0
-          ? displayVideos.map(renderVideoCard).join('')
-          : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentVideos}</div>`;
-      }
-      const txtViewAllVideos = document.getElementById('txt-view-all-videos');
-      if (txtViewAllVideos) {
-        txtViewAllVideos.textContent = isZh ? `查看全部精选视频 (${dedupedVideos.length} 个) →` : `View All Hands-on Videos (${dedupedVideos.length}) →`;
+      try {
+        const dedupedVideos = dedupVideoItems(allVideos);
+        const displayVideos = dedupedVideos.slice(0, 2);
+        const streamVideos = document.getElementById('stream-videos');
+        if (streamVideos) {
+          streamVideos.innerHTML = displayVideos.length > 0
+            ? displayVideos.map(renderVideoCard).join('')
+            : `<div class="text-slate-400 text-xs py-3 px-2 text-center bg-slate-100 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800">${t.noRecentVideos}</div>`;
+        }
+        const txtViewAllVideos = document.getElementById('txt-view-all-videos');
+        if (txtViewAllVideos) {
+          txtViewAllVideos.textContent = isZh ? `查看全部精选视频 (${dedupedVideos.length} 个) →` : `View All Hands-on Videos (${dedupedVideos.length}) →`;
+        }
+      } catch (err) {
+        console.error('Error rendering stream-videos:', err);
       }
 
       // E. 提示词与实战工作流板块 (Prompts & Workflows) - 首页精选呈现 (默认实战工作流)
-      renderHomePrompts(data);
+      try {
+        renderHomePrompts(data);
+      } catch (err) {
+        console.error('Error rendering stream-prompts:', err);
+      }
 
       // 5. 渲染 LMSYS Chatbot Arena Top 25 天梯榜
-      const streamArena = document.getElementById('stream-arena');
-      if (streamArena) {
-        const arenaList = data.chatbot_arena || [];
-        const arenaCards = arenaList.map(item => {
-          const badgeText = isZh ? (item.badge || '') : (item.badge_en || item.badge || '');
-          let rankBadgeClass = 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700';
-          if (item.rank === 1) {
-            rankBadgeClass = 'bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm shadow-amber-400/50 ring-1 ring-amber-300';
-          } else if (item.rank === 2) {
-            rankBadgeClass = 'bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300';
-          } else if (item.rank === 3) {
-            rankBadgeClass = 'bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600';
-          } else if (item.rank <= 10) {
-            rankBadgeClass = 'bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30';
-          }
-          const badgeRow = badgeText ? `
-            <div class="flex items-center pl-7 min-w-0">
-              <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">${escapeHtml(badgeText)}</span>
-            </div>` : '';
-          return `
-            <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
-              <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
-                <div class="flex items-center space-x-2 min-w-0 flex-1">
-                  <span class="w-5 h-5 rounded-full ${rankBadgeClass} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">
-                    ${item.rank}
-                  </span>
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="${escapeHtml(item.model)}">${escapeHtml(item.model)}</span>
-                  <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">${escapeHtml(item.org)}</span>
+      try {
+        const streamArena = document.getElementById('stream-arena');
+        if (streamArena) {
+          const arenaList = data.chatbot_arena || [];
+          const arenaCards = arenaList.map(item => {
+            const badgeText = isZh ? (item.badge || '') : (item.badge_en || item.badge || '');
+            let rankBadgeClass = 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700';
+            if (item.rank === 1) {
+              rankBadgeClass = 'bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm shadow-amber-400/50 ring-1 ring-amber-300';
+            } else if (item.rank === 2) {
+              rankBadgeClass = 'bg-gradient-to-r from-slate-200 to-slate-300 text-slate-900 font-black shadow-sm ring-1 ring-slate-300';
+            } else if (item.rank === 3) {
+              rankBadgeClass = 'bg-gradient-to-r from-amber-700 to-amber-800 text-amber-100 font-black shadow-sm ring-1 ring-amber-600';
+            } else if (item.rank <= 10) {
+              rankBadgeClass = 'bg-indigo-500/10 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-500/30';
+            }
+            const badgeRow = badgeText ? `
+              <div class="flex items-center pl-7 min-w-0">
+                <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-800 dark:text-amber-300 font-medium truncate max-w-full border border-amber-500/20">${escapeHtml(badgeText)}</span>
+              </div>` : '';
+            return `
+              <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
+                <div class="flex items-center justify-between w-full min-w-0 gap-1.5">
+                  <div class="flex items-center space-x-2 min-w-0 flex-1">
+                    <span class="w-5 h-5 rounded-full ${rankBadgeClass} flex items-center justify-center text-[10px] font-bold font-mono shrink-0">
+                      ${item.rank}
+                    </span>
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate" title="${escapeHtml(item.model)}">${escapeHtml(item.model)}</span>
+                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-900 text-slate-600 dark:text-slate-400 font-mono border border-slate-300 dark:border-slate-800 shrink-0 notranslate">${escapeHtml(item.org)}</span>
+                  </div>
+                  <div class="text-right shrink-0 whitespace-nowrap">
+                    <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">${item.elo}</span>
+                    <span class="text-[9px] text-slate-500 ml-0.5 font-mono">${(item.elo && String(item.elo).includes('%')) ? 'Score' : 'Elo'}</span>
+                  </div>
                 </div>
-                <div class="text-right shrink-0 whitespace-nowrap">
-                  <span class="text-xs font-mono font-bold text-amber-600 dark:text-amber-400">${item.elo}</span>
-                  <span class="text-[9px] text-slate-500 ml-0.5 font-mono">${(item.elo && String(item.elo).includes('%')) ? 'Score' : 'Elo'}</span>
-                </div>
+                ${badgeRow}
               </div>
-              ${badgeRow}
+            `;
+          }).join('');
+
+          const footerNotice = arenaList.length > 0 ? `
+            <div class="py-2 text-center border-t border-dashed border-slate-200 dark:border-slate-800/80 mt-1.5">
+              <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
+                ${isZh ? `✓ 全网 LMSYS 官方 Top ${arenaList.length} 强已全量就绪` : `✓ Top ${arenaList.length} Arena Rankings Loaded`}
+                <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:underline ml-1 font-semibold">arena.ai ↗</a>
+              </span>
             </div>
-          `;
-        }).join('');
+          ` : '';
 
-        const footerNotice = arenaList.length > 0 ? `
-          <div class="py-2 text-center border-t border-dashed border-slate-200 dark:border-slate-800/80 mt-1.5">
-            <span class="text-[10px] text-slate-400 dark:text-slate-500 font-mono">
-              ${isZh ? `✓ 全网 LMSYS 官方 Top ${arenaList.length} 强已全量就绪` : `✓ Top ${arenaList.length} Arena Rankings Loaded`}
-              <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener noreferrer" class="text-amber-500 hover:underline ml-1 font-semibold">arena.ai ↗</a>
-            </span>
-          </div>
-        ` : '';
-
-        streamArena.innerHTML = arenaCards ? (arenaCards + footerNotice) : `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
+          streamArena.innerHTML = arenaCards ? (arenaCards + footerNotice) : `<div class="text-xs text-slate-500 py-2">${t.arenaNoMatch}</div>`;
+        }
+      } catch (err) {
+        console.error('Error rendering stream-arena:', err);
       }
 
       // 6. 渲染 ArXiv 每日学术突破精选论文 (每日与 arXiv 实时同步)
-      const streamArXiv = document.getElementById('stream-arxiv');
-      if (streamArXiv) {
-        const arxivList = (data.arxiv_papers || []).slice(0, 6);
-        streamArXiv.innerHTML = arxivList.map(item => {
-          const paperTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
-          const paperSpec = isZh ? item.spec : (item.spec_en || item.spec);
-          const paperDate = isZh ? item.date : (item.date_en || item.date);
-          const paperSummary = isZh ? (item.summary_zh || item.summary_en || "") : (item.summary_en || item.summary_zh || "");
-          return `
-            <a href="${item.url}" target="_blank" class="block p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all group space-y-1.5">
-              <div class="flex items-center justify-between text-[10px]">
-                <div class="flex items-center space-x-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                  <span class="font-mono text-purple-600 dark:text-purple-400 font-bold">arXiv:${escapeHtml(item.arxiv_id)}</span>
+      try {
+        const streamArXiv = document.getElementById('stream-arxiv');
+        if (streamArXiv) {
+          const arxivList = (data.arxiv_papers || []).slice(0, 6);
+          streamArXiv.innerHTML = arxivList.map(item => {
+            const paperTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+            const paperSpec = isZh ? item.spec : (item.spec_en || item.spec);
+            const paperDate = isZh ? item.date : (item.date_en || item.date);
+            const paperSummary = isZh ? (item.summary_zh || item.summary_en || "") : (item.summary_en || item.summary_zh || "");
+            return `
+              <a href="${item.url}" target="_blank" class="block p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all group space-y-1.5">
+                <div class="flex items-center justify-between text-[10px]">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                    <span class="font-mono text-purple-600 dark:text-purple-400 font-bold">arXiv:${escapeHtml(item.arxiv_id)}</span>
+                  </div>
+                  <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 font-mono font-medium">${escapeHtml(paperDate)}</span>
                 </div>
-                <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 font-mono font-medium">${escapeHtml(paperDate)}</span>
-              </div>
-              <h5 class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors leading-snug line-clamp-2">
-                ${escapeHtml(paperTitle)}
-              </h5>
-              ${paperSummary ? `<p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed font-normal">${escapeHtml(paperSummary)}</p>` : ''}
-              <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
-                <span class="font-mono text-[9px] text-slate-500 dark:text-slate-400 truncate max-w-[220px]">⚡ ${escapeHtml(paperSpec)}</span>
-                <span class="text-purple-600 dark:text-purple-400 group-hover:translate-x-0.5 transition-transform shrink-0 font-semibold flex items-center space-x-0.5">
-                  <span>${t.readPaper || '精读 →'}</span>
-                </span>
-              </div>
-            </a>
-          `;
-        }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arxivNoMatch}</div>`;
+                <h5 class="text-xs font-bold text-slate-900 dark:text-slate-100 group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors leading-snug line-clamp-2">
+                  ${escapeHtml(paperTitle)}
+                </h5>
+                ${paperSummary ? `<p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed font-normal">${escapeHtml(paperSummary)}</p>` : ''}
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-0.5">
+                  <span class="font-mono text-[9px] text-slate-500 dark:text-slate-400 truncate max-w-[220px]">⚡ ${escapeHtml(paperSpec)}</span>
+                  <span class="text-purple-600 dark:text-purple-400 group-hover:translate-x-0.5 transition-transform shrink-0 font-semibold flex items-center space-x-0.5">
+                    <span>${t.readPaper || '精读 →'}</span>
+                  </span>
+                </div>
+              </a>
+            `;
+          }).join('') || `<div class="text-xs text-slate-500 py-2">${t.arxivNoMatch}</div>`;
+        }
+      } catch (err) {
+        console.error('Error rendering stream-arxiv:', err);
       }
 
       // 7. 如果当前处于独立分类模式，重新刷新分类网格
-      if (currentTab !== 'all' && currentTab !== 'archive') {
-        renderCategoryView(currentTab);
+      try {
+        if (currentTab !== 'all' && currentTab !== 'archive') {
+          renderCategoryView(currentTab);
+        }
+      } catch (err) {
+        console.error('Error rendering category-view:', err);
       }
       applyCurrentTranslation();
       setTimeout(syncThreeColumnsHeight, 60);
