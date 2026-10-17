@@ -4295,12 +4295,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
       let previewImg = (item.preview_images && item.preview_images[0]) || item.image_url || "";
+      // 核心强化：若具有工具 ID，优先强制采用同源本地持久化的高清 WebP 封面，杜绝外链阻断
+      if (item.id && (!previewImg || previewImg.startsWith('http') || previewImg.includes('opengraph.githubassets.com'))) {
+        previewImg = `/assets/tool-previews/${item.id}.webp?v=2`;
+      }
       if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
         const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
-        previewImg = safeImgs[0] || "";
+        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=2` : "");
       }
-      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe') || previewImg.includes('opengraph.githubassets.com'))) {
-        previewImg = "";
+      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
+        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=2` : "";
       }
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
       if (!previewImg) {
@@ -4328,7 +4332,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 环境光模糊背景层 (解决宽屏Banner/手机截屏尺寸不一致时的黑边问题) -->
               <img src="${optimizeImageUrl(previewImg, 480)}" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
               <!-- 前景高清自适应图片 (保证文字、UI完整无切边) -->
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.remove(); }">
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.parentElement?.querySelector('.floating-tool-badge')?.classList.add('hidden'); this.remove(); }">
               <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
                 <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
                   <div class="flex items-center space-x-1.5">
@@ -4358,7 +4362,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <div class="absolute inset-0 z-[3] bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent pointer-events-none"></div>
 
               <!-- 悬浮 Logo 微图标 -->
-              <div class="absolute bottom-2.5 left-3 z-[4] flex items-center space-x-2">
+              <div class="floating-tool-badge absolute bottom-2.5 left-3 z-[4] flex items-center space-x-2">
                 <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
                   ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
                 </div>
