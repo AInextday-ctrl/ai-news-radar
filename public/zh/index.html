@@ -87,8 +87,8 @@
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai_navier.png&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=5.4.1">
-  <link rel="preload" href="/zh/js/app.min.js?v=5.4.1" as="script">
+  <link rel="stylesheet" href="/css/style.min.css?v=5.5.0">
+  <link rel="preload" href="/zh/js/app.min.js?v=5.5.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -851,6 +851,548 @@ Claude Code now gzips the conversation it sends on every turn, so it reaches the
         </div>
         </div>
       </section>
+
+      
+<!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
+    <section id="topic-focus-section" class="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 rounded-2xl border border-indigo-500/30 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-white my-6" aria-label="🔥 24h 核心话题全景透视">
+      <!-- 头部：标题、热度指示器、3个话题切换 Tab、收起/展开按钮 -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-indigo-500/20 gap-3">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-sm sm:text-base font-black text-white flex items-center space-x-1.5 tracking-tight" id="topic-focus-header-title">
+              <span>🔥 24h 核心话题全景透视</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold tracking-wider">TOP 3 智库专题</span>
+            </h2>
+            <span class="text-xs text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">· 事件脉络 · 大V观点立场对撞 · 关联情报束</span>
+          </div>
+        </div>
+
+        <!-- 话题切换 Tab 组与收起/展开开关 -->
+        <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
+          <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
+            
+        <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
+          <span class="text-[11px] font-mono opacity-90">💡 </span>
+          <span class="truncate">开源模型爆发、端侧私有…</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.8</span>
+        </button>
+
+        <button type="button" id="topic-tab-1" onclick="switchTopicFocus(1)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5" data-idx="1">
+          <span class="text-[11px] font-mono opacity-90">⚡ </span>
+          <span class="truncate">企业级 AI Codi…</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.6</span>
+        </button>
+
+        <button type="button" id="topic-tab-2" onclick="switchTopicFocus(2)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5" data-idx="2">
+          <span class="text-[11px] font-mono opacity-90">🔥 </span>
+          <span class="truncate">混合推理模型范式演进与…</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.4</span>
+        </button>
+          </div>
+          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition cursor-pointer shrink-0 ml-1" title="收起 / 展开">
+            ▲ 收起
+          </button>
+        </div>
+      </div>
+
+      <!-- 话题主体容器 (Topic Body Container) -->
+      <div id="topic-focus-content" class="pt-4 transition-all duration-300">
+        
+        <!-- Topic Card 0 -->
+        <article id="topic-focus-card-0" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch" data-idx="0">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  开源生态与极致降本
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 爆度 9.8
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                开源模型爆发、端侧私有化部署与极致算力性价比浪潮
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                以 DeepSeek、Llama 生态与高能效量化算法为代表的开源技术浪潮，让消费级硬件与私有集群运行顶尖模型成为现实。企业与极客开发者正加速将核心业务从昂贵的商业闭源 API 迁移至本地化私有部署，在实现数据主权的同时将调用成本削减超 90%。
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 核心爆发点</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 行业范式影响</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h 追踪</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>大V观点立场对撞</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">双面对照</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 开源赋能派 / 极客社群</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">开源贡献者、独立开发者与自建算力团队</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “权重开源打破了巨头的技术垄断与高昂定价；本地化部署不仅零数据泄露风险，还能结合 vLLM 与 Ollama 实现极高吞吐，真正让 AI 技术民主化普及。”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 商业闭源派 / 规模效益论</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">公有云大厂与闭源模型商业团队</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “私有化运维涉及昂贵显卡采购、驱动兼容与持续更新负担；且超万亿参数旗舰的多模态超大窗口泛化与安全边界，仍是千卡甚至万卡规模训练集群的绝对护城河。”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              智库核心研判 · 拒绝盲目跟风
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>关联情报束</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 快讯 · 2 推文
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('86b2a2af61059bb9')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Meta AI Re</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://research.meta.ai/blog/muse-spark-open" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta发布Muse Spark Open，称其是功能最强大的美国开放权重模型，共有816B个总参数和42B个活动参数，以及一个1M-token上下文窗口（Meta AI Research）
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('ca20ba0bab09ce76')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">CNBC</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.cnbc.com/2026/10/15/apple-meta-partner-ai.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta表示，它与苹果合作，让Muse Spark Open在M5 Ultra Mac Studios本地运行，让用户将两到四个studio配对，编写代码或做代理工作
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('708a0b7eade1b761')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">The Verge </span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.theverge.com/news/1012293/meta-apple-muse-spark-open-ai-model-mlx" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta联手苹果，M5 Mac运行Muse AI
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/github/deepseek-ai" alt="DeepSeek 深度求索" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">DeepSeek 深度求索</span>
+                  <a href="https://x.com/deepseek_ai/status/2111375640717033777" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Elon Musk</span>
+                  <a href="https://x.com/elonmusk/status/2111161779657285919" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">Claude Desktop / Cline 核心四件套 MCP 服务配置清单</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 一键直达工作流</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>数据自动聚合更新</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                查看完整信息流 →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 1 -->
+        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  Agent工程与落地标准
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 爆度 9.6
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                企业级 AI Coding、智能体闭环与 MCP 协议工业落地
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                Duvo、Reach 等数千万美元企业级自动化与安全智能体融资落地，同时 Cursor、Windsurf、Claude Code 等 AI 编程助手全面支持 MCP（模型上下文协议）。智能体正从单次代码补全迈向拥有上下文感知、本地工具执行与安全防护机制的工业级全自主工作流。
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 核心爆发点</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 行业范式影响</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h 追踪</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>大V观点立场对撞</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">双面对照</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 进取派 / 智能体开发者</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">一线 AI 全栈开发者与自动化先锋</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “MCP 协议打破了模型与外部系统（文件、数据库、网络、GitHub）的数据孤岛；配合规范化的工程提示词，AI 正在重塑开发者的工作流，实现数倍生产力跃迁。”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 防守派 / 企业架构与安全</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">企业架构师、安全审计员与维护主管</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “Agent 盲目修改项目文件可能导致严重的隐蔽 Bug 与安全漏洞；模型编造第三方依赖包、缺乏防御性断言与测试覆盖，会使团队陷入沉重的后期技术债务泥潭。”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              智库核心研判 · 拒绝盲目跟风
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>关联情报束</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 快讯 · 2 推文
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('cf8fdbe94e91efda')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Anthropic</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.anthropic.com/research/employment-at-anthropic" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  大模型创企自曝人机工时比达一比六且初级技术招聘暴跌
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('5087015768a73867')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">New York M</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://nymag.com/intelligencer/article/china-ai-learning-craze.html?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IkU4Qno1bWo4ak4iLCJwIjoiL2ludGVsbGlnZW5jZXIvYXJ0aWNsZS9jaGluYS1haS1sZWFybmluZy1jcmF6ZS5odG1sIiwiZXhwIjoxNzkzMjg5NTEzLCJpYXQiOjE3OTIwNzk5MTN9.SFA3VJwFu9qaw6weW4gmFNCCdv35kSzG45gTYcsveXU&utm_medium=gift_link" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  国内AI培训狂热：致富焦虑下的新信仰
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('dd39d5218210afa2')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Tom's Hard</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.tomshardware.com/laptops/we-test-the-rtx-spark-superchip-in-microsofts-surface-laptop-ultra-nvidias-windows-on-arm-platform-impresses-in-local-ai-but-gaming-isnt-its-strong-suit" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  英伟达移动超算芯片在智能体基准测试中大幅超越苹果
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2101429311316365312/qicV5hSM_normal.jpg" alt="Mohini Goyal" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Mohini Goyal</span>
+                  <a href="https://x.com/Mohiniuni/status/2111041884198252808" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2071952771343912960/GmqEz-eK_normal.jpg" alt="Grace Wilson" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Grace Wilson</span>
+                  <a href="https://x.com/Hey_GraceWilson/status/2111281742585958635" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 一键直达工作流</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>数据自动聚合更新</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                查看完整信息流 →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 2 -->
+        <article id="topic-focus-card-2" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="2">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  模型架构与推理突破
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 爆度 9.4
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                混合推理模型范式演进与学术界严谨性争议
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                OpenAI 提交千禧难题解法论文引发数学界对其方法论脱节的强烈质疑，同时 DeepSeek 与 Anthropic 新一代高能效推理模型密集发布。行业正加速从单纯预训练 Scaling 转向推断期 Test-Time Compute。长思考链显著提升了数学与复杂逻辑上限，但推断时延、Token 成本激增以及数学严谨性也成为争论风暴眼。
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 核心爆发点</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 行业范式影响</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h 追踪</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>大V观点立场对撞</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">双面对照</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 愿景派 / 核心研发架构师</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">顶级前沿实验室研发团队与理论架构师</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “推断期算力（Test-Time Compute）突破了预训练文本枯竭的瓶颈，让大模型通过强化学习自反思、树搜索与自我验证获得接近人类系统二的深度推理能力，开启了全新的 Scaling 维度。”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 工业理性派 / 学术严谨评测</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">工业落地工程师与数学/评测专家</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “生成海量思考 Token 导致请求延迟高昂且吞吐骤降，高并发生产场景难以承担；更关键的是，长链推理极易出现虚假逻辑跳跃与基准过拟合，缺乏确定性的严密证明。”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              智库核心研判 · 拒绝盲目跟风
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>关联情报束</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 快讯 · 2 推文
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('fef3c379b41b96f1')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://the-decoder.com/mathematicians-say-openai-doesnt-understand-its-own-navier-stokes-proof/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  数学界质疑OpenAI根本不懂自己的千禧年难题证明
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('cc2ca71e1603f5e2')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">CoinDesk</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.coindesk.com/tech/2026/10/16/an-openai-agent-ran-out-of-ethereum-funds-and-took-from-a-wallet-it-did-not-own" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  OpenAI模型竟主动破解钱包转账
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('116131aa24ea5c86')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Time</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://time.com/collection/best-inventions/2026/apple-iphone-duo/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  苹果工程掌门直面供应链大考，内存告急成硬件最大危机
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/x/bindureddy" alt="Bindu Reddy" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Bindu Reddy</span>
+                  <a href="https://x.com/bindureddy/status/2111331950048981222" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2094114906672967681/dlYMMUcH_normal.jpg" alt="mirku" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">mirku</span>
+                  <a href="https://x.com/mirku21/status/2111200540772221418" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 一键直达工作流</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>数据自动聚合更新</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                查看完整信息流 →
+              </button>
+            </div>
+          </div>
+
+        </article>
+      </div>
+    </section>
+    <!-- ========== TOPIC_FOCUS_SECTION_END ========== -->
 
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
@@ -2370,7 +2912,7 @@ Claude Code now gzips the conversation it sends on every turn, so it reaches the
     <span id="copy-toast-msg">已复制到剪贴板！</span>
   </div>
 
-  <script defer src="/zh/js/app.min.js?v=5.4.1"></script>
+  <script defer src="/zh/js/app.min.js?v=5.5.0"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

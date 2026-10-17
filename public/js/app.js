@@ -3275,6 +3275,274 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.flipViralTicker = flipViralTicker;
     window.toggleViralTickerPause = toggleViralTickerPause;
 
+    // =========================================================================
+    // 🔥 24h 核心话题全景透视 · 智库专题 (Topic Focus: 脉络 + 立场对撞 + 情报束)
+    // =========================================================================
+    let currentTopicFocusIdx = 0;
+
+    function switchTopicFocus(idx) {
+      currentTopicFocusIdx = idx;
+      const tabs = document.querySelectorAll('.topic-tab-btn');
+      tabs.forEach((btn, i) => {
+        const isActive = (i === idx);
+        btn.classList.toggle('active', isActive);
+        if (isActive) {
+          btn.className = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5";
+        } else {
+          btn.className = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5";
+        }
+      });
+      const cards = document.querySelectorAll('.topic-focus-card');
+      cards.forEach((card, i) => {
+        card.classList.toggle('hidden', i !== idx);
+      });
+    }
+
+    function toggleTopicFocusCollapse() {
+      const content = document.getElementById('topic-focus-content');
+      const btn = document.getElementById('topic-focus-toggle-btn');
+      if (!content) return;
+      const isCollapsed = content.classList.contains('hidden');
+      const isZh = (currentLang === 'zh');
+      if (isCollapsed) {
+        content.classList.remove('hidden');
+        if (btn) btn.textContent = isZh ? '▲ 收起' : '▲ Collapse';
+        try { localStorage.setItem('topic_focus_collapsed', 'false'); } catch(e) {}
+      } else {
+        content.classList.add('hidden');
+        if (btn) btn.textContent = isZh ? '▼ 展开' : '▼ Expand';
+        try { localStorage.setItem('topic_focus_collapsed', 'true'); } catch(e) {}
+      }
+    }
+
+    function renderTopicFocus(topics) {
+      if (!topics || !Array.isArray(topics) || topics.length === 0) return;
+      const section = document.getElementById('topic-focus-section');
+      if (!section) return;
+
+      const isZh = (currentLang === 'zh');
+      const tabsBar = document.getElementById('topic-tabs-bar');
+      const contentEl = document.getElementById('topic-focus-content');
+      const headerTitle = document.getElementById('topic-focus-header-title');
+      const headerDesc = document.getElementById('topic-focus-header-desc');
+      const toggleBtn = document.getElementById('topic-focus-toggle-btn');
+
+      if (headerTitle) {
+        const titleText = isZh ? "🔥 24h 核心话题全景透视" : "🔥 24h Topic Focus & Perspectives";
+        const badgeText = isZh ? "TOP 3 智库专题" : "TOP 3 DOSSIERS";
+        headerTitle.innerHTML = `<span>${titleText}</span><span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold tracking-wider">${badgeText}</span>`;
+      }
+      if (headerDesc) {
+        headerDesc.textContent = isZh ? "· 事件脉络 · 大V观点立场对撞 · 关联情报束" : "· Core Context · Viewpoints Collision · Linked Bundles";
+      }
+
+      try {
+        const wasCollapsed = localStorage.getItem('topic_focus_collapsed') === 'true';
+        if (contentEl) {
+          contentEl.classList.toggle('hidden', wasCollapsed);
+        }
+        if (toggleBtn) {
+          toggleBtn.textContent = wasCollapsed ? (isZh ? '▼ 展开' : '▼ Expand') : (isZh ? '▲ 收起' : '▲ Collapse');
+        }
+      } catch(e) {}
+
+      if (tabsBar && contentEl) {
+        tabsBar.innerHTML = topics.map((t, idx) => {
+          const isAct = (idx === currentTopicFocusIdx);
+          const badge = (isZh ? t.badge_zh : t.badge_en) || "";
+          const title = (isZh ? t.title_zh : t.title_en) || "";
+          const heat = t.heat_score || 9.8;
+          const shortTitle = title.length > 12 ? title.slice(0, 11) + "…" : title;
+          const cls = isAct
+            ? "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
+            : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5";
+          return `
+            <button type="button" id="topic-tab-${idx}" onclick="switchTopicFocus(${idx})" class="${cls}" data-idx="${idx}">
+              <span class="text-[11px] font-mono opacity-90">${badge.slice(0, 2)}</span>
+              <span class="truncate">${escapeHtml(shortTitle)}</span>
+              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">${heat}</span>
+            </button>`;
+        }).join('');
+
+        contentEl.innerHTML = topics.map((t, idx) => {
+          const isAct = (idx === currentTopicFocusIdx);
+          const cardCls = "topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch" + (isAct ? "" : " hidden");
+          const catTag = isZh ? (t.category_tag_zh || "") : (t.category_tag_en || "");
+          const heat = t.heat_score || 9.8;
+          const title = isZh ? (t.title_zh || "") : (t.title_en || "");
+          const summary = isZh ? (t.summary_zh || "") : (t.summary_en || "");
+          
+          const pro = t.perspective_pro || {};
+          const con = t.perspective_con || {};
+          const proRole = isZh ? (pro.role_zh || "") : (pro.role_en || "");
+          const proSpeaker = isZh ? (pro.speaker_zh || "") : (pro.speaker_en || "");
+          const proPoint = isZh ? (pro.point_zh || "") : (pro.point_en || "");
+          const conRole = isZh ? (con.role_zh || "") : (con.role_en || "");
+          const conSpeaker = isZh ? (con.speaker_zh || "") : (con.speaker_en || "");
+          const conPoint = isZh ? (con.point_zh || "") : (con.point_en || "");
+
+          const newsList = t.linked_news || [];
+          const newsHtml = newsList.map(n => {
+            const nTitle = isZh ? (n.title_zh || n.title) : (n.title_en || n.title);
+            const nSrc = n.source || "Global AI";
+            const nId = n.id || "";
+            const nUrl = n.url || "#";
+            const clickAttr = nId ? `onclick="if(!event.target.closest('a')) openAiNewsModal('${nId}')"` : '';
+            return `
+              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" ${clickAttr}>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">${escapeHtml(nSrc.slice(0, 10))}</span>
+                <div class="min-w-0 flex-1">
+                  <a href="${nUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                    ${escapeHtml(nTitle)}
+                  </a>
+                </div>
+              </div>`;
+          }).join('') || `<p class="text-xs text-slate-400">${isZh ? "暂无关联快讯" : "No linked news"}</p>`;
+
+          const tweetList = t.linked_tweets || [];
+          const tweetHtml = tweetList.map(tw => {
+            const author = tw.author || "AI Leader";
+            const handle = tw.author_handle || "@ai";
+            const content = isZh ? (tw.content_zh || tw.content_en) : (tw.content_en || tw.content_zh);
+            const avatar = tw.author_avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=VIP";
+            return `
+              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+                <img src="${avatar}" alt="${escapeHtml(author)}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                    <span class="font-bold text-slate-200 truncate">${escapeHtml(author)}</span>
+                    <a href="${tw.url || '#'}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">${isZh ? "原帖 ↗" : "Post ↗"}</a>
+                  </div>
+                  <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">${escapeHtml(content || '')}</p>
+                </div>
+              </div>`;
+          }).join('');
+
+          const tool = t.linked_tool;
+          let toolHtml = "";
+          if (tool) {
+            const toolName = isZh ? (tool.title_zh || tool.name) : (tool.title_en || tool.name);
+            const toolDesc = isZh ? (tool.desc_zh || tool.takeaway_zh || "") : (tool.desc_en || tool.takeaway_en || "");
+            const isWf = !!tool.is_workflow;
+            const tagLabel = isWf ? (isZh ? "🛠️ 实战落地配方" : "🛠️ Production Playbook") : (isZh ? "🚀 场景落地工具" : "🚀 Applied AI Tool");
+            const actionBtn = isWf ? (isZh ? "📋 一键直达工作流" : "📋 View Playbook") : (isZh ? "立即体验 ↗" : "Try Tool ↗");
+            const toolClick = isWf ? `onclick="switchTab('prompts')"` : '';
+            toolHtml = `
+              <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+                <div class="flex items-center justify-between gap-1 mb-1">
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">${tagLabel}</span>
+                  <span class="text-[10px] text-emerald-400 font-mono font-semibold">${tool.weekly_stars || '+3,000★'}</span>
+                </div>
+                <h4 class="text-xs font-bold text-slate-100 truncate mt-1">${escapeHtml(toolName)}</h4>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">${escapeHtml(toolDesc)}</p>
+                <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                  <a href="${tool.url || tool.github_url || '#'}" target="_blank" rel="noopener noreferrer" ${toolClick} class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                    <span>${actionBtn}</span>
+                  </a>
+                </div>
+              </div>`;
+          }
+
+          return `
+            <article id="topic-focus-card-${idx}" class="${cardCls}" data-idx="${idx}">
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                      ${escapeHtml(catTag)}
+                    </span>
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                      🔥 ${isZh ? "爆度" : "HEAT"} ${heat}
+                    </span>
+                  </div>
+                  <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                    ${escapeHtml(title)}
+                  </h3>
+                  <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                    ${escapeHtml(summary)}
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 ${isZh ? "核心爆发点" : "Core Milestone"}</span>
+                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 ${isZh ? "行业范式影响" : "Industry Impact"}</span>
+                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ ${isZh ? "24h 追踪" : "24h Live"}</span>
+                </div>
+              </div>
+
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+                <div class="space-y-2.5">
+                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                    <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                      <span>⚔️</span>
+                      <span>${isZh ? "大V观点立场对撞" : "Perspectives Collision"}</span>
+                    </h4>
+                    <span class="text-[10px] text-slate-400 font-mono">${isZh ? "双面对照" : "Dual Perspectives"}</span>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                    <div class="flex items-center justify-between gap-1 text-[11px]">
+                      <span class="font-bold text-emerald-300">${escapeHtml(proRole)}</span>
+                      <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">${escapeHtml(proSpeaker)}</span>
+                    </div>
+                    <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                      “${escapeHtml(proPoint)}”
+                    </p>
+                  </div>
+
+                  <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                    <div class="flex items-center justify-between gap-1 text-[11px]">
+                      <span class="font-bold text-rose-300">${escapeHtml(conRole)}</span>
+                      <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">${escapeHtml(conSpeaker)}</span>
+                    </div>
+                    <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                      “${escapeHtml(conPoint)}”
+                    </p>
+                  </div>
+                </div>
+
+                <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+                  ${isZh ? "智库核心研判 · 拒绝盲目跟风" : "Independent Analysis · Beyond the Hype"}
+                </div>
+              </div>
+
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+                <div>
+                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                    <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                      <span>🔗</span>
+                      <span>${isZh ? "关联情报束" : "Linked Intelligence Bundle"}</span>
+                    </h4>
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                      ${newsList.length} ${isZh ? "快讯" : "News"} · ${tweetList.length} ${isZh ? "推文" : "Tweets"}
+                    </span>
+                  </div>
+
+                  <div class="space-y-1.5 mb-2">
+                    ${newsHtml}
+                  </div>
+
+                  <div class="space-y-1.5">
+                    ${tweetHtml}
+                  </div>
+
+                  ${toolHtml}
+                </div>
+
+                <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+                  <span>${isZh ? "数据自动聚合更新" : "Auto-aggregated 24h"}</span>
+                  <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                    ${isZh ? "查看完整信息流 →" : "Explore Full Stream →"}
+                  </button>
+                </div>
+              </div>
+            </article>`;
+        }).join('');
+      }
+    }
+
+    window.switchTopicFocus = switchTopicFocus;
+    window.toggleTopicFocusCollapse = toggleTopicFocusCollapse;
+
     // 渲染今日 60s Top 3 走马灯 (支持 AI 资讯概要弹窗与直达原文)
     function renderTopThree(topItems) {
       const container = document.getElementById('top-three-container');
@@ -5461,6 +5729,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []));
       if (document.getElementById('top-three-container')) {
         renderTopThree(data.top_three || []);
+      }
+      if (data.topic_focus && data.topic_focus.length > 0) {
+        renderTopicFocus(data.topic_focus);
       }
 
       // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，与天梯榜等高对齐，各板块均支持一键直达完整专区)
@@ -8322,6 +8593,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.switchHomePromptFilter = switchHomePromptFilter;
     window.changeCategoryPage = changeCategoryPage;
     window.changeCategoryPageSize = changeCategoryPageSize;
+    window.switchTopicFocus = switchTopicFocus;
+    window.toggleTopicFocusCollapse = toggleTopicFocusCollapse;
 
     const runLangCheck = () => {
       initTranslateEngine();

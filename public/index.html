@@ -87,8 +87,8 @@
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai_navier.png&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=5.4.1">
-  <link rel="preload" href="/js/app.min.js?v=5.4.1" as="script">
+  <link rel="stylesheet" href="/css/style.min.css?v=5.5.0">
+  <link rel="preload" href="/js/app.min.js?v=5.5.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -848,6 +848,548 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
         </div>
         </div>
       </section>
+
+      
+<!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
+    <section id="topic-focus-section" class="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 rounded-2xl border border-indigo-500/30 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-white my-6" aria-label="🔥 24h Topic Focus & Perspectives">
+      <!-- 头部：标题、热度指示器、3个话题切换 Tab、收起/展开按钮 -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-indigo-500/20 gap-3">
+        <div class="flex items-center space-x-2.5 min-w-0">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
+          <div class="flex items-center space-x-2">
+            <h2 class="text-sm sm:text-base font-black text-white flex items-center space-x-1.5 tracking-tight" id="topic-focus-header-title">
+              <span>🔥 24h Topic Focus & Perspectives</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold tracking-wider">TOP 3 DOSSIERS</span>
+            </h2>
+            <span class="text-xs text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">· Core Context · Viewpoints Collision · Linked Bundles</span>
+          </div>
+        </div>
+
+        <!-- 话题切换 Tab 组与收起/展开开关 -->
+        <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
+          <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
+            
+        <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
+          <span class="text-[11px] font-mono opacity-90">💡 </span>
+          <span class="truncate">Open-Source…</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.8</span>
+        </button>
+
+        <button type="button" id="topic-tab-1" onclick="switchTopicFocus(1)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5" data-idx="1">
+          <span class="text-[11px] font-mono opacity-90">⚡ </span>
+          <span class="truncate">Industrial …</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.6</span>
+        </button>
+
+        <button type="button" id="topic-tab-2" onclick="switchTopicFocus(2)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5" data-idx="2">
+          <span class="text-[11px] font-mono opacity-90">🔥 </span>
+          <span class="truncate">Hybrid Reas…</span>
+          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">9.4</span>
+        </button>
+          </div>
+          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition cursor-pointer shrink-0 ml-1" title="Collapse / Expand">
+            ▲ Collapse
+          </button>
+        </div>
+      </div>
+
+      <!-- 话题主体容器 (Topic Body Container) -->
+      <div id="topic-focus-content" class="pt-4 transition-all duration-300">
+        
+        <!-- Topic Card 0 -->
+        <article id="topic-focus-card-0" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch" data-idx="0">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  Open Source & Edge Compute
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 HEAT 9.8
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                Open-Source Weights Surge: Private Edge Deployment & Extreme Cost Efficiency
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                The rapid acceleration of open weights, MoE architectures, and efficient quantization (GGUF/AWQ) allows consumer hardware and private servers to run high-tier models. Enterprises and indie hackers are migrating workloads away from costly proprietary APIs to private stacks, safeguarding data sovereignty while slashing costs by over 90%.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 Core Milestone</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 Industry Impact</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h Live</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>Perspectives Collision</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 Open-Source Champions / Hackers</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">Open Source Contributors & Self-Hosted Teams</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “Open weights democratize frontier AI, eliminating vendor lock-in. Self-hosted setups guarantee zero data leakage and extreme throughput with tools like Ollama and vLLM.”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 Commercial Scale Advocates</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">Cloud Hyperscalers & Frontier Commercial Teams</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “Self-hosting demands heavy hardware upkeep and driver tuning. Multi-trillion parameter multimodal generalization and safety bounds remain exclusively guarded by frontier clusters.”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              Independent Analysis · Beyond the Hype
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>Linked Intelligence Bundle</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 News · 2 Tweets
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('86b2a2af61059bb9')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Meta AI Re</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://research.meta.ai/blog/muse-spark-open" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta releases Muse Spark Open, saying it is the most capable US open-weight model, with 816B total and 42B active parameters and a 1M-token context window (Meta AI Research)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('ca20ba0bab09ce76')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">CNBC</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.cnbc.com/2026/10/15/apple-meta-partner-ai.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta says it worked with Apple to make Muse Spark Open run locally on M5 Ultra Mac Studios, letting users pair two to four Studios to code or do agentic work (CNBC)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('708a0b7eade1b761')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">The Verge </span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.theverge.com/news/1012293/meta-apple-muse-spark-open-ai-model-mlx" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta and Apple team up to make Muse AI models run better on Macs
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/github/deepseek-ai" alt="DeepSeek 深度求索" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">DeepSeek 深度求索</span>
+                  <a href="https://x.com/deepseek_ai/status/2111375640717033777" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Elon Musk</span>
+                  <a href="https://x.com/elonmusk/status/2111161779657285919" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ Production Playbook</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">Claude Desktop & Cline Core 4 MCP Server Production Config</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 View Playbook</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Auto-aggregated 24h</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                Explore Full Stream →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 1 -->
+        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  Agentic Workflows & MCP
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 HEAT 9.6
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                Industrial AI Coding, Autonomous Agents & MCP Protocol Standardization
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                Multi-million dollar funding rounds for enterprise automation agents like Duvo and Reach highlight the rapid maturation of agentic workflows. With Cursor, Windsurf, and Claude Code standardizing on MCP (Model Context Protocol), AI coding is transitioning from simple completions to fully contextual, self-executing engineering loops.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 Core Milestone</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 Industry Impact</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h Live</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>Perspectives Collision</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 Progressive / Agent Builders</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">Fullstack Agent Builders & Tooling Leads</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “MCP eliminates data silos between LLMs and external systems (filesystem, DB, web, GitHub). Coupled with rigorous rules, agentic automation delivers multi-fold productivity gains.”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 Defensive / Enterprise Security</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">Enterprise Architects & Security Auditors</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “Autonomous agents modifying core codebases risk hallucinating insecure packages, bypassing architectural boundaries, and creating crippling technical debt without strict verification gates.”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              Independent Analysis · Beyond the Hype
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>Linked Intelligence Bundle</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 News · 2 Tweets
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('cf8fdbe94e91efda')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Anthropic</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.anthropic.com/research/employment-at-anthropic" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Anthropic report on how AI is changing employment at the startup: decline of entry-level technical hiring, productivity boom across departments, and more (Anthropic)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('5087015768a73867')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">New York M</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://nymag.com/intelligencer/article/china-ai-learning-craze.html?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IkU4Qno1bWo4ak4iLCJwIjoiL2ludGVsbGlnZW5jZXIvYXJ0aWNsZS9jaGluYS1haS1sZWFybmluZy1jcmF6ZS5odG1sIiwiZXhwIjoxNzkzMjg5NTEzLCJpYXQiOjE3OTIwNzk5MTN9.SFA3VJwFu9qaw6weW4gmFNCCdv35kSzG45gTYcsveXU&utm_medium=gift_link" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  A look at China's AI learning frenzy, as economic anxiety and fear of being left behind fuel a booming market for courses promising prosperity through AI (Afra Wang/New York Magazine)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('dd39d5218210afa2')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Tom's Hard</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.tomshardware.com/laptops/we-test-the-rtx-spark-superchip-in-microsofts-surface-laptop-ultra-nvidias-windows-on-arm-platform-impresses-in-local-ai-but-gaming-isnt-its-strong-suit" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Nvidia's RTX Spark Superchip in the Surface Laptop Ultra outperforms Apple's M5 Max MacBook Pro by ~25% in agentic AI completion benchmarks using Qwen models (Jeffrey Kampman/Tom's Hardware)
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2101429311316365312/qicV5hSM_normal.jpg" alt="Mohini Goyal" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Mohini Goyal</span>
+                  <a href="https://x.com/Mohiniuni/status/2111041884198252808" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2071952771343912960/GmqEz-eK_normal.jpg" alt="Grace Wilson" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Grace Wilson</span>
+                  <a href="https://x.com/Hey_GraceWilson/status/2111281742585958635" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ Production Playbook</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 View Playbook</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Auto-aggregated 24h</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                Explore Full Stream →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 2 -->
+        <article id="topic-focus-card-2" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="2">
+          
+          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                  Reasoning & Scaling Laws
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                  🔥 HEAT 9.4
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                Hybrid Reasoning Scaling: Frontier Breakthroughs & Academic Scrutiny
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                As OpenAI's Navier-Stokes proof submission triggers academic skepticism and next-gen reasoning models roll out from DeepSeek and Anthropic, the AI industry is aggressively shifting towards inference-time reasoning. Extended chain-of-thought elevates problem-solving bounds, yet inference latency, token cost, and formal rigor remain intensely contested.
+              </div>
+            </div>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 Core Milestone</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 Industry Impact</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ 24h Live</span>
+            </div>
+          </div>
+
+          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>Perspectives Collision</span>
+                </h4>
+                <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
+              </div>
+
+              <!-- 观点 A: 愿景演进派 -->
+              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-300">🟢 Visionary / Frontier Lab Architects</span>
+                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">Frontier Research Labs & Core Architects</span>
+                </div>
+                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                  “Test-time compute breaks past pre-training data ceilings, empowering models with self-correction, tree-search, and System-2 deep reasoning across math and code.”
+                </p>
+              </div>
+
+              <!-- 观点 B: 工业理性派 -->
+              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-300">🔴 Pragmatic Critic / Academic Benchmarkers</span>
+                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">Deployment Engineers & Mathematical Evaluators</span>
+                </div>
+                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                  “Generating thousands of reasoning tokens causes unacceptable latency in production, while extended CoT risks benchmark gaming and superficial logical leaps lacking formal mathematical rigor.”
+                </p>
+              </div>
+            </div>
+
+            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+              Independent Analysis · Beyond the Hype
+            </div>
+          </div>
+
+          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>Linked Intelligence Bundle</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                  3 News · 2 Tweets
+                </span>
+              </div>
+
+              <!-- 快讯列表 -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('fef3c379b41b96f1')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://the-decoder.com/mathematicians-say-openai-doesnt-understand-its-own-navier-stokes-proof/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Mathematicians say OpenAI doesn't understand its own Navier-Stokes proof
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('cc2ca71e1603f5e2')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">CoinDesk</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.coindesk.com/tech/2026/10/16/an-openai-agent-ran-out-of-ethereum-funds-and-took-from-a-wallet-it-did-not-own" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  OpenAI says its model paid for a deployment on an Ethereum test network with a wallet it did not own, after obtaining keys from public recovery phrases (Shaurya Malwa/CoinDesk)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('116131aa24ea5c86')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">Time</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://time.com/collection/best-inventions/2026/apple-iphone-duo/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  An interview with John Ternus, who says the memory shortage is "a crisis" and "all options should be on the table", and that Tim Cook "has great relationships" (Andrew R. Chow/Time)
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- 推文列表 -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://unavatar.io/x/bindureddy" alt="Bindu Reddy" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">Bindu Reddy</span>
+                  <a href="https://x.com/bindureddy/status/2111331950048981222" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
+              <img src="https://pbs.twimg.com/profile_images/2094114906672967681/dlYMMUcH_normal.jpg" alt="mirku" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-200 truncate">mirku</span>
+                  <a href="https://x.com/mirku21/status/2111200540772221418" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- 关联工具/配方 -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">🛠️ Production Playbook</span>
+                <span class="text-[10px] text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama</h4>
+              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 View Playbook</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+              <span>Auto-aggregated 24h</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                Explore Full Stream →
+              </button>
+            </div>
+          </div>
+
+        </article>
+      </div>
+    </section>
+    <!-- ========== TOPIC_FOCUS_SECTION_END ========== -->
 
       <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
@@ -2353,7 +2895,7 @@ Stronger benchmark performance, faster task completion, and shorter outputs than
     <span id="copy-toast-msg">Copied to clipboard!</span>
   </div>
 
-  <script defer src="/js/app.min.js?v=5.4.1"></script>
+  <script defer src="/js/app.min.js?v=5.5.0"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

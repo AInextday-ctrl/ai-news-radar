@@ -1366,6 +1366,14 @@ def save_news(items: list):
     chatbot_arena = get_chatbot_arena_top5()
     arxiv_papers = get_arxiv_curated_papers()
 
+    # 🔥 24h 核心话题专题聚合引擎 (Topic Focus - 24h 焦点话题全景透视与大V观点对撞)
+    topic_focus_list = []
+    try:
+        from topic_cluster import generate_24h_topic_focus
+        topic_focus_list = generate_24h_topic_focus(recent_final)
+    except Exception as e:
+        print(f"⚠️ [topic_cluster] 生成核心话题专题异常: {e}")
+
     latest_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "total_count": len(recent_final),
@@ -1376,6 +1384,7 @@ def save_news(items: list):
         "categories": CATEGORIES,
         "viral_ticker_tweets": viral_ticker_tweets,
         "top_three": top_three,
+        "topic_focus": topic_focus_list,
         "chatbot_arena": chatbot_arena,
         "arxiv_papers": arxiv_papers,
         "ai_creators": AI_CREATORS,
@@ -1421,11 +1430,11 @@ def save_news(items: list):
     # 自动执行 AdSense 高价值合规重构引擎：
     # 1. 发布独家深度专栏文章 (public/articles/*.html)
     # 2. 回溯并生成全量历史每日简报 (public/daily/*.html)
-    # 3. 首页 index.html 真实可见 DOM 预渲染 (Top 3 + 快讯卡片 + 往期导航)
+    # 3. 首页 index.html 真实可见 DOM 预渲染 (Top 3 + 快讯卡片 + 24h 核心话题专题 + 往期导航)
     # 4. 全量更新 35+ 页面站点地图 (public/sitemap.xml)
     try:
         from content_publisher import run_full_content_publication
-        run_full_content_publication(recent_final, top_three)
+        run_full_content_publication(recent_final, top_three, topic_focus=topic_focus_list)
     except Exception as e:
         print(f"⚠️ [content_publisher] 执行异常: {e}")
         generate_sitemap()

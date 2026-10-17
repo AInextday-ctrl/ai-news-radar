@@ -2062,13 +2062,31 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
 
 
 def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, Any]],
-                       articles_meta: List[Dict[str, Any]], daily_dates: List[str]):
+                       articles_meta: List[Dict[str, Any]], daily_dates: List[str],
+                       topic_focus: Optional[List[Dict[str, Any]]] = None):
     """
     双版本独立预渲染引擎：
     1. 根首页 public/index.html：纯正地道英文，严禁混入中文字符或中文字幕。
     2. 中文专版 public/zh/index.html：流畅精致中文，严禁遗留生硬机翻或英文代码模板。
     """
     recent_dates = daily_dates[-12:] if daily_dates else ["2026-09-24", "2026-09-23"]
+
+    if not topic_focus:
+        try:
+            from topic_cluster import load_latest_topic_focus
+            topic_focus = load_latest_topic_focus()
+        except Exception:
+            topic_focus = []
+
+    topic_focus_en_html = ""
+    topic_focus_zh_html = ""
+    if topic_focus:
+        try:
+            from topic_cluster import build_topic_focus_html
+            topic_focus_en_html = build_topic_focus_html(topic_focus, lang="en")
+            topic_focus_zh_html = build_topic_focus_html(topic_focus, lang="zh")
+        except Exception as e:
+            print(f"⚠️ [content_publisher] 生成话题 HTML 异常: {e}")
 
     # ==========================
     # A. 英文主站 (public/index.html)
@@ -2475,6 +2493,19 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             en_content = re.sub(r'(id="badge-count-videos"[^>]*>)\d*(</span>)', f'\\g<1>{c_videos}\\g<2>', en_content)
             en_content = re.sub(r'(id="badge-count-prompts"[^>]*>)\d*(</span>)', f'\\g<1>{c_prompts}\\g<2>', en_content)
 
+        # 预渲染 🔥 24h 核心话题全景透视 · 智库专题 (Topic Focus Section - English)
+        if topic_focus_en_html:
+            if "<!-- ========== TOPIC_FOCUS_SECTION_START ==========" in en_content:
+                en_content = re.sub(r'<!-- ={10} TOPIC_FOCUS_SECTION_START ={10} -->.*?<!-- ={10} TOPIC_FOCUS_SECTION_END ={10} -->',
+                                    lambda m: topic_focus_en_html.strip(), en_content, flags=re.DOTALL)
+            elif '<section id="topic-focus-section"' in en_content:
+                en_content = re.sub(r'<section [^>]*id="topic-focus-section"[^>]*>.*?</section>',
+                                    lambda m: topic_focus_en_html.strip(), en_content, flags=re.DOTALL)
+            else:
+                pattern_ticker_end = r'(</section>\s*)(<!-- 🌟 第 2 层:|<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">)'
+                if re.search(pattern_ticker_end, en_content):
+                    en_content = re.sub(pattern_ticker_end, lambda m: f"{m.group(1)}\n{topic_focus_en_html.strip()}\n\n      {m.group(2)}", en_content, count=1)
+
         with open(INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(en_content)
 
@@ -2853,6 +2884,20 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         zh_content = re.sub(r'href="/contact"', 'href="/zh/contact"', zh_content)
         zh_content = re.sub(r'href="/privacy"', 'href="/zh/privacy"', zh_content)
         zh_content = re.sub(r'href="/terms"', 'href="/zh/terms"', zh_content)
+
+        # 预渲染 🔥 24h 核心话题全景透视 · 智库专题 (Topic Focus Section - Chinese)
+        if topic_focus_zh_html:
+            if "<!-- ========== TOPIC_FOCUS_SECTION_START ==========" in zh_content:
+                zh_content = re.sub(r'<!-- ={10} TOPIC_FOCUS_SECTION_START ={10} -->.*?<!-- ={10} TOPIC_FOCUS_SECTION_END ={10} -->',
+                                    topic_focus_zh_html.strip(), zh_content, flags=re.DOTALL)
+            elif '<section id="topic-focus-section"' in zh_content:
+                zh_content = re.sub(r'<section [^>]*id="topic-focus-section"[^>]*>.*?</section>',
+                                    topic_focus_zh_html.strip(), zh_content, flags=re.DOTALL)
+            else:
+                pattern_ticker_end = r'(</section>\s*)(<!-- 🌟 第 2 层:|<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">)'
+                if re.search(pattern_ticker_end, zh_content):
+                    zh_content = re.sub(pattern_ticker_end, lambda m: f"{m.group(1)}\n{topic_focus_zh_html.strip()}\n\n      {m.group(2)}", zh_content, count=1)
+
         with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(zh_content)
 
@@ -3022,14 +3067,15 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
 # 5. 一键执行入口
 # ==============================================================================
 def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
-                                 top_three: Optional[List[Dict[str, Any]]] = None):
+                                 top_three: Optional[List[Dict[str, Any]]] = None,
+                                 topic_focus: Optional[List[Dict[str, Any]]] = None):
     """整套发布流水线入口"""
     print("\n" + "="*70)
     print("🚀 [AdSense 高价值合规重构] 启动全量内容静态化与预渲染流水线...")
     print("="*70)
 
     # 如果未传入，自动从 latest_news.json 加载
-    if not items or not top_three:
+    if not items or not top_three or topic_focus is None:
         news_file = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
         if os.path.exists(news_file):
             try:
@@ -3039,12 +3085,21 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
                         all_grouped = [it for cat in ndata.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
                         items = all_grouped if all_grouped else (ndata.get("items") or [])
                     top_three = top_three or ndata.get("top_three", [])
+                    if topic_focus is None:
+                        topic_focus = ndata.get("topic_focus") or []
             except Exception:
                 items = items or []
                 top_three = top_three or []
         else:
             items = items or []
             top_three = top_three or []
+
+    if not topic_focus:
+        try:
+            from topic_cluster import load_latest_topic_focus
+            topic_focus = load_latest_topic_focus()
+        except Exception:
+            topic_focus = []
 
     # 1. 深度专栏发布
     articles_meta = publish_deep_dive_articles()
@@ -3053,7 +3108,7 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
     daily_dates = backfill_historical_daily_briefings()
 
     # 3. 首页真实可见 DOM 预渲染
-    prerender_homepage(items, top_three, articles_meta, daily_dates)
+    prerender_homepage(items, top_three, articles_meta, daily_dates, topic_focus=topic_focus)
 
     # 4. 全量 Sitemap 生成
     update_sitemap_with_all_pages(daily_dates, articles_meta)
