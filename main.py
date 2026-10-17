@@ -549,23 +549,27 @@ def is_meaningful_tweet(it: dict) -> bool:
     return True
 
 
-def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
+def extract_viral_leader_tweets(items: list, now_ts: float = None, exclude_ids: set = None) -> list:
     """
     精选 24 小时内真实抓取的 AI 领袖与核心先锋推文 (6~9条)：
     专用于首页顶部走马灯/滚动轮播展示。
     【铁律】
     1. 100% 真实采信，严禁任何人工伪造或拼凑推文；
     2. 严格限定在 24 小时以内 (diff <= 86400)，过期坚决清退，一个不留；
-    3. 严禁无意义单句、纯碎碎念或脱离语境的回复贴。
+    3. 严禁无意义单句、纯碎碎念或脱离语境的回复贴；
+    4. 排除 exclude_ids，杜绝跨栏目重复展示。
     """
     if now_ts is None:
         now_ts = time.time()
+    if exclude_ids is None:
+        exclude_ids = set()
     MAX_24H_SECONDS = 86400
 
     # 1. 严格筛选所有属于 celebrity 且在 24 小时以内的真实社交推文（绝无置顶豁免）
     social_items = [
         it for it in items 
         if it.get("category") == "celebrity" 
+        and it.get("id") not in exclude_ids
         and (now_ts - parse_time_for_sort(it)) <= MAX_24H_SECONDS
         and (now_ts - parse_time_for_sort(it)) >= -300
         and is_meaningful_tweet(it)
@@ -653,12 +657,218 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None) -> list:
     return selected_list[:9]
 
 
-def extract_top_three(items: list) -> list:
+def extract_topic_blacklist_keywords(topic_focus_list: list) -> tuple:
     """
-    兼容性封装：返回当天最火爆的 Top 3 领袖推文。
+    从当前激活的 24h 核心话题专题中提取黑名单关键词与已消耗条目 ID，
+    实现【跨栏目去重与分工互斥机制】：
+    避免置顶极客实测展厅、Top 3 简报与核心话题专题全部在重复说同一件事。
     """
-    viral_tweets = extract_viral_leader_tweets(items)
-    return viral_tweets[:3]
+    consumed_ids = set()
+    blacklist_keywords = set()
+
+    common_stop_words = {
+        "the", "a", "an", "and", "or", "in", "on", "at", "to", "for", "of", "with", "by", 
+        "from", "as", "is", "are", "was", "were", "be", "been", "this", "that", "it", 
+        "ai", "new", "says", "report", "show", "first", "into", "over", "after", "via",
+        "的", "了", "在", "是", "我", "有", "和", "就", "不", "人", "都", "一", "一个", "上", "也", "很", "到", "说", "要", "去", "你", "会", "着", "没有", "看", "好", "自己", "这"
+    }
+
+    if not topic_focus_list:
+        return blacklist_keywords, consumed_ids
+
+    for top_item in topic_focus_list:
+        for n in top_item.get("linked_news", []):
+            if n.get("id"): consumed_ids.add(str(n.get("id")))
+        for t in top_item.get("linked_tweets", []):
+            if t.get("id"): consumed_ids.add(str(t.get("id")))
+        if top_item.get("linked_tool", {}).get("id"):
+            consumed_ids.add(str(top_item.get("linked_tool", {}).get("id")))
+
+        t_title = f"{top_item.get('title_en', '')} {top_item.get('title_zh', '')}"
+        words = re.findall(r'[a-zA-Z0-9_\-\u4e00-\u9fa5]{3,}', t_title.lower())
+        for w in words:
+            if w not in common_stop_words:
+                blacklist_keywords.add(w)
+
+    return blacklist_keywords, consumed_ids
+
+
+def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_ids: set, now_ts: float = None) -> dict:
+    """
+    精选 48 小时极客实测展示厅 (Hero Media Showcase) 的核心展品与 2 篇精选图文推文：
+    【铁律】
+    1. 时效硬性红线：严选 <= 48.0 小时以内的优质实测上手、跑分评测或工具拆解，过期坚决不能入驻；
+    2. 跨栏目互斥：坚决剔除已被核心话题专题 (Topic Focus) 霸屏的争议议题（如纯公关撕逼），专攻独立技术实操；
+    3. 多媒体兼容：优先 YouTube 高清极客上手实操，兜底 𝕏 录屏实战 Demo；
+    4. 领袖图文：配备 2 篇真实高赞 AI 领袖带图/带视频推文。
+    """
+    if now_ts is None:
+        now_ts = time.time()
+    MAX_48H_SECONDS = 48 * 3600
+
+    # 1. 筛选候选 48 小时视频条目
+    candidate_videos = []
+    for it in items:
+        if it.get("category") != "videos":
+            continue
+        v_id = str(it.get("id") or "")
+        if v_id in consumed_ids:
+            continue
+        diff_sec = now_ts - parse_time_for_sort(it)
+        if diff_sec > MAX_48H_SECONDS or diff_sec < -300:
+            continue
+
+        title_lower = (it.get("title", "") + " " + it.get("title_en", "") + " " + it.get("title_zh", "")).lower()
+        has_overlap = any(kw in title_lower for kw in blacklist_keywords if len(kw) >= 4)
+        is_demo = it.get("is_hero_demo") or any(k in title_lower for k in ["hands on", "tested", "how to", "benchmark", "clone", "built", "vs", "review", "实测", "上手"])
+        is_frontier = any(k in title_lower for k in ["gemini", "claude", "cursor", "windsurf", "deepseek", "sora", "kling", "llama", "v4", "v3", "o1", "o3", "agent"])
+
+        score = 0
+        if is_demo: score += 100
+        if is_frontier: score += 50
+        if not has_overlap: score += 200
+        score += max(0, (MAX_48H_SECONDS - diff_sec) / 3600.0)
+
+        candidate_videos.append((score, it))
+
+    candidate_videos.sort(key=lambda x: x[0], reverse=True)
+
+    lead_media = None
+    if candidate_videos:
+        lead_media = dict(candidate_videos[0][1])
+        lead_media["showcase_type"] = "youtube_video"
+    else:
+        # 兜底：从 48h 社交推文中挑选带视频或带实操截屏的极客 Demo
+        demo_tweets = [
+            it for it in items 
+            if it.get("category") == "celebrity"
+            and (now_ts - parse_time_for_sort(it)) <= MAX_48H_SECONDS
+            and (it.get("image_url") or it.get("has_video") or it.get("video_url"))
+            and str(it.get("id") or "") not in consumed_ids
+        ]
+        if demo_tweets:
+            lead_media = dict(demo_tweets[0])
+            lead_media["showcase_type"] = "twitter_demo"
+        else:
+            all_vids = [it for it in items if it.get("category") == "videos"]
+            if all_vids:
+                lead_media = dict(all_vids[0])
+                lead_media["showcase_type"] = "youtube_video"
+
+    if lead_media:
+        # 提取或补齐 video_id
+        if not lead_media.get("video_id") and lead_media.get("url"):
+            m_vid = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
+            if m_vid:
+                lead_media["video_id"] = m_vid.group(1)
+
+        diff_sec = now_ts - parse_time_for_sort(lead_media)
+        lead_media["diff_hours"] = round(diff_sec / 3600.0, 1)
+
+    # 2. 筛选 2 条高质量带图/带视频的领袖动态 (排除已在 lead_media 和 consumed_ids 中出现的条目)
+    lead_id = str(lead_media.get("id") or "") if lead_media else ""
+    viral_tweet_candidates = [
+        it for it in items 
+        if it.get("category") == "celebrity"
+        and str(it.get("id") or "") != lead_id
+        and str(it.get("id") or "") not in consumed_ids
+        and (now_ts - parse_time_for_sort(it)) <= 86400 * 2
+        and is_meaningful_tweet(it)
+    ]
+
+    def tweet_rich_score(it):
+        s = 0
+        if it.get("image_url") or it.get("media"): s += 50
+        if it.get("has_video") or it.get("video_url"): s += 40
+        if it.get("is_viral"): s += 30
+        author_lower = (it.get("author") or "").lower()
+        if any(k in author_lower for k in ["deepseek", "claude", "anthropic", "openai", "google", "musk", "sama"]): s += 20
+        t_low = (it.get("title", "") + " " + it.get("full_text_en", "")).lower()
+        if not any(kw in t_low for kw in blacklist_keywords if len(kw) >= 4):
+            s += 30
+        return s
+
+    viral_tweet_candidates.sort(key=tweet_rich_score, reverse=True)
+    selected_tweets = []
+    seen_authors = set()
+    for t in viral_tweet_candidates:
+        author_key = (t.get("author") or "").strip().lower()
+        if author_key and author_key in seen_authors and len(selected_tweets) < 2:
+            continue
+        selected_tweets.append(dict(t))
+        if author_key:
+            seen_authors.add(author_key)
+        if len(selected_tweets) >= 2:
+            break
+    if len(selected_tweets) < 2 and viral_tweet_candidates:
+        for t in viral_tweet_candidates:
+            if not any(st.get("id") == t.get("id") for st in selected_tweets):
+                selected_tweets.append(dict(t))
+                if len(selected_tweets) >= 2:
+                    break
+
+    return {
+        "lead_media": lead_media,
+        "viral_tweets": selected_tweets
+    }
+
+
+def extract_top_three(items: list, exclude_ids: set = None, blacklist_keywords: set = None) -> list:
+    """
+    精选当天 Top 3 重磅早报资讯 (晨间必读)：
+    【跨栏目去重】严格排除 Topic Focus 与 Hero Showcase 中已使用的条目，
+    呈现 3 个来自不同领域、互不雷同的真实重磅突破！
+    """
+    if exclude_ids is None:
+        exclude_ids = set()
+    if blacklist_keywords is None:
+        blacklist_keywords = set()
+
+    # 优先从 news 中挑选 hot_score 最高的 3 篇独立大事件
+    news_candidates = [
+        it for it in items 
+        if it.get("category") == "news" 
+        and str(it.get("id") or "") not in exclude_ids
+    ]
+
+    def top_news_score(it):
+        s = it.get("hot_score", 3) * 100
+        # 奖励来自 Tier-1 权威信源
+        source_lower = (it.get("source") or "").lower()
+        if any(ts in source_lower for ts in ["openai", "anthropic", "deepmind", "google", "reuters", "bloomberg", "decoder", "techcrunch", "the verge"]):
+            s += 50
+        # 如果标题与当前大议题冲突，轻微降权避免同质化
+        t_low = (it.get("title") or "").lower()
+        if any(kw in t_low for kw in blacklist_keywords if len(kw) >= 4):
+            s -= 40
+        s += parse_time_for_sort(it) / 100000
+        return s
+
+    news_candidates.sort(key=top_news_score, reverse=True)
+
+    result = []
+    seen_sources = set()
+    for it in news_candidates:
+        src = (it.get("source") or "").lower()
+        if src in seen_sources and len(result) < 3:
+            continue
+        seen_sources.add(src)
+        card = dict(it)
+        if not card.get("badge_zh"): card["badge_zh"] = "⚡ 重磅聚焦" if len(result) == 0 else "🔥 行业突破"
+        if not card.get("badge_en"): card["badge_en"] = "⚡ Lead Breakthrough" if len(result) == 0 else "🔥 Industry Pick"
+        result.append(card)
+        if len(result) >= 3:
+            break
+
+    # 若不足 3 篇，从其他资讯中补足
+    if len(result) < 3:
+        for it in news_candidates:
+            if it.get("id") not in {r.get("id") for r in result}:
+                result.append(dict(it))
+                if len(result) >= 3:
+                    break
+
+    return result[:3]
 
 
 TECHMEME_PAGE_CACHE = {}
@@ -1360,12 +1570,6 @@ def save_news(items: list):
     viral_posts = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
     grouped["viral_posts"] = viral_posts
 
-    # 首页顶部走马灯：精选 24 小时 AI 领袖与核心火爆推文 (Tibo Codex重置、Claude/Gemini新模型、Altman/Musk/Zuck动态)
-    viral_ticker_tweets = extract_viral_leader_tweets(recent_final, now_ts)
-    top_three = viral_ticker_tweets[:3]
-    chatbot_arena = get_chatbot_arena_top5()
-    arxiv_papers = get_arxiv_curated_papers()
-
     # 🔥 24h 核心话题专题聚合引擎 (Topic Focus - 24h 焦点话题全景透视与大V观点对撞)
     topic_focus_list = []
     try:
@@ -1373,6 +1577,26 @@ def save_news(items: list):
         topic_focus_list = generate_24h_topic_focus(recent_final)
     except Exception as e:
         print(f"⚠️ [topic_cluster] 生成核心话题专题异常: {e}")
+
+    # 跨栏目去重与分工互斥：提取已消耗 ID 与关键词
+    topic_blacklist_kw, topic_consumed_ids = extract_topic_blacklist_keywords(topic_focus_list)
+
+    # 🎬 48h 极客实测展示厅 (Hero Media Showcase: 16:9 极客视频 + 2 篇带图领袖推文)
+    hero_media_showcase = extract_hero_media_showcase(recent_final, topic_blacklist_kw, topic_consumed_ids, now_ts)
+    if hero_media_showcase.get("lead_media", {}).get("id"):
+        topic_consumed_ids.add(str(hero_media_showcase["lead_media"]["id"]))
+    for tw in hero_media_showcase.get("viral_tweets", []):
+        if tw.get("id"):
+            topic_consumed_ids.add(str(tw["id"]))
+
+    # 首页顶部走马灯：精选 24 小时 AI 领袖与核心火爆推文 (排除已消耗 ID)
+    viral_ticker_tweets = extract_viral_leader_tweets(recent_final, now_ts, exclude_ids=topic_consumed_ids)
+
+    # Top 3 晨间重磅快讯 (排除已在 Topic Focus 与 Hero Showcase 消耗的条目，精选 3 篇独立大突破)
+    top_three = extract_top_three(recent_final, exclude_ids=topic_consumed_ids, blacklist_keywords=topic_blacklist_kw)
+
+    chatbot_arena = get_chatbot_arena_top5()
+    arxiv_papers = get_arxiv_curated_papers()
 
     latest_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -1382,6 +1606,7 @@ def save_news(items: list):
             "archive_url": "data/archive_news.json"
         },
         "categories": CATEGORIES,
+        "hero_media_showcase": hero_media_showcase,
         "viral_ticker_tweets": viral_ticker_tweets,
         "top_three": top_three,
         "topic_focus": topic_focus_list,
@@ -1434,7 +1659,7 @@ def save_news(items: list):
     # 4. 全量更新 35+ 页面站点地图 (public/sitemap.xml)
     try:
         from content_publisher import run_full_content_publication
-        run_full_content_publication(recent_final, top_three, topic_focus=topic_focus_list)
+        run_full_content_publication(recent_final, top_three, topic_focus=topic_focus_list, hero_media_showcase=hero_media_showcase)
     except Exception as e:
         print(f"⚠️ [content_publisher] 执行异常: {e}")
         generate_sitemap()

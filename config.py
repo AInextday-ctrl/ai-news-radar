@@ -599,14 +599,15 @@ SOURCES = {
 
     # 4. YouTube 高热度实战技巧、经验指南与工作流（接入全球顶级 AI 极客技术源）
     "youtube_channels": [
+        {"name": "Wes Roth", "id": "UCqcbQf6yw5KzRoDDcZ_wBSw"},
         {"name": "Fireship", "id": "UCsBjURrPoezykLs9EqgamOA"},
         {"name": "Theo - t3.gg", "id": "UCbRP3c757lWg9M-U7TyEkXA"},
         {"name": "AI Explained", "id": "UCNJ1Ymd5yFuUPtn21xtRbbw"},
-        {"name": "Two Minute Papers", "id": "UCbfYPyITQ-7l4upoX8nvctg"},
         {"name": "Matthew Berman", "id": "UCawZsQWqfGSbCI5yjkdVkTA"},
+        {"name": "Matt Wolfe", "id": "UChpleBmo18P08aKCIgti38g"},
+        {"name": "Two Minute Papers", "id": "UCbfYPyITQ-7l4upoX8nvctg"},
         {"name": "Andrej Karpathy", "id": "UCXUPKJO5MZQN11PqgIvyuvQ"},
         {"name": "3Blue1Brown", "id": "UCYO_jab_esuFRV4b17AJtAw"},
-        {"name": "Matt Wolfe", "id": "UChpleBmo18P08aKCIgti38g"},
         {"name": "Yannic Kilcher", "id": "UCZHmQk67mN31gbHey6BVyNw"},
         {"name": "NetworkChuck", "id": "UCOuGATIAbd2DvzJmUgXn2IQ"}
     ]

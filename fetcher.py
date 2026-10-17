@@ -737,33 +737,69 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                     except Exception:
                         pass
 
-                # 【近期爆点生命周期门禁】：严格限制 <= 30 天 (2,592,000 秒)，且同一作者在爆点中最多占 1 席
+                # 计算发布时间距离现在的精确秒数 (生命周期控制与 48 小时硬性时效门禁)
+                diff_sec = 999999999
+                if iso_time:
+                    try:
+                        pub_dt = datetime.fromisoformat(iso_time.replace('Z', '+00:00'))
+                        diff_sec = max(0, (now - pub_dt).total_seconds())
+                    except Exception:
+                        pass
+
+                # 【极客实测展示厅 48 小时硬性时效锁】
+                is_within_48h = (diff_sec <= 48 * 3600)
                 is_within_30_days = (diff_sec <= 30 * 86400)
                 t_lower = title.lower()
                 clean_t = t_lower.replace("’", "'").replace("`", "'").strip()
 
+                # 实战上手与评测价值关键词检测 (剔除闲聊与纯访谈)
+                hands_on_keywords = [
+                    "how to", "tested", "benchmark", "review", "hands on", "vs", "guide", 
+                    "workflow", "build", "tutorial", "setup", "in action", "gameplay", 
+                    "from scratch", "comparison", "first look", "breakdown", "deep dive",
+                    "实测", "上手", "效果", "教程", "评测", "体验", "避坑", "怎么用"
+                ]
+                has_hands_on = any(k in t_lower for k in hands_on_keywords)
+
+                # 前沿焦点模型/工具关键词检测
+                frontier_keywords = [
+                    "gemini", "claude", "deepseek", "r1", "v4", "v3", "o1", "o3", 
+                    "cursor", "windsurf", "kling", "可灵", "sora", "agent", "reasoning", 
+                    "ollama", "vllm", "copilot", "chatgpt", "llama", "qwen"
+                ]
+                has_frontier_topic = any(k in t_lower for k in frontier_keywords)
+
+                # 判定是否为当前 48h 内最优先入驻展厅的极客实战 Demo
+                is_hero_demo = is_within_48h and (has_hands_on or has_frontier_topic)
+
                 viral_keywords = ["fable", "astra", "gpt-6", "breakthrough", "r1", "deepseek", "open-source", "insanely", "billion", "shocked", "revolution", "benchmark", "agi"]
-                has_viral_topic = any(k in t_lower for k in viral_keywords) or (ch_name in ["Fireship", "Theo - t3.gg", "AI Explained"] and diff_sec <= 7 * 86400)
+                has_viral_topic = any(k in t_lower for k in viral_keywords) or (ch_name in ["Wes Roth", "Fireship", "Theo - t3.gg", "AI Explained"] and is_within_48h)
 
                 # 创作者防霸屏：单个作者在爆点榜单中最多只能占 1 个席位
-                can_be_viral = is_within_30_days and has_viral_topic and (author_viral_counts.get(ch_name, 0) < 1)
+                can_be_viral = is_within_30_days and (has_viral_topic or is_hero_demo) and (author_viral_counts.get(ch_name, 0) < 1)
 
-                if can_be_viral:
+                if is_hero_demo:
+                    is_viral = True
+                    v_subtype = "hands_on_demo"
+                    v_skill = "🎬 48h 极客实测"
+                    v_skill_en = "🎬 48h Live Demo"
+                    author_viral_counts[ch_name] = author_viral_counts.get(ch_name, 0) + 1
+                elif can_be_viral:
                     is_viral = True
                     v_subtype = "viral"
                     v_skill = "🔥 近期爆点"
                     v_skill_en = "🔥 Viral Hit"
                     author_viral_counts[ch_name] = author_viral_counts.get(ch_name, 0) + 1
-                elif any(k in t_lower for k in ["tutorial", "guide", "from scratch", "build", "intro", "learn", "how to", "setup", "puzzle"]):
+                elif has_hands_on:
                     is_viral = False
                     v_subtype = "tutorial"
-                    v_skill = "🎓 系统教学"
-                    v_skill_en = "🎓 System Tutorial"
+                    v_skill = "🛠️ 实战上手"
+                    v_skill_en = "🛠️ Hands-on Guide"
                 elif any(k in t_lower for k in ["benchmark", "compare", "vs", "eval", "weights", "model", "vllm", "speed", "fast"]):
                     is_viral = False
                     v_subtype = "mastery"
-                    v_skill = "🤖 模型技巧"
-                    v_skill_en = "🤖 Model Mastery"
+                    v_skill = "🤖 模型评测"
+                    v_skill_en = "🤖 Model Benchmark"
                 elif any(k in t_lower for k in ["workflow", "tips", "tricks", "prompt", "cursor", "tools", "stack"]):
                     is_viral = False
                     v_subtype = "skills"
@@ -772,7 +808,7 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                 else:
                     is_viral = False
                     v_subtype = "insight"
-                    v_skill = "💡 独家经验"
+                    v_skill = "💡 独家前沿"
                     v_skill_en = "💡 Expert Insights"
 
                 title_zh = KNOWN_TITLE_TRANSLATIONS.get(clean_t)
@@ -828,7 +864,10 @@ def fetch_youtube_videos(max_per_channel: int = 2) -> List[Dict[str, Any]]:
                     "summary_zh": summary_zh_val,
                     "summary_en": summary_en_val,
                     "category": "videos",
-                    "tags": v_tags
+                    "tags": v_tags,
+                    "is_recent_48h": is_within_48h,
+                    "is_hero_demo": is_hero_demo,
+                    "diff_hours": round(diff_sec / 3600.0, 1)
                 }
 
                 items.append(item_obj)

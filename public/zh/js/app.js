@@ -3139,6 +3139,248 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (ind) ind.textContent = `${cur} / ${Math.max(1, total)}`;
     }
 
+    function playHeroLeadVideo(videoId, fallbackUrl) {
+      if (window.event) window.event.stopPropagation();
+      const box = document.getElementById('hero-lead-video-box');
+      if (!box) {
+        if (fallbackUrl && fallbackUrl !== '#') {
+          window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+        }
+        return;
+      }
+      if (!videoId) {
+        if (fallbackUrl && fallbackUrl !== '#') {
+          window.open(fallbackUrl, '_blank', 'noopener,noreferrer');
+        }
+        return;
+      }
+      box.removeAttribute('onclick');
+      box.classList.remove('cursor-pointer');
+      box.innerHTML = `
+        <iframe src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?autoplay=1&rel=0&modestbranding=1" 
+          title="AI Hands-on Demo" 
+          class="w-full h-full border-0 rounded-xl" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          allowfullscreen>
+        </iframe>
+      `;
+    }
+
+    function openImageLightbox(imageUrl, e) {
+      if (e && e.stopPropagation) e.stopPropagation();
+      if (!imageUrl) return;
+      let modal = document.getElementById('image-lightbox-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'image-lightbox-modal';
+        modal.className = 'fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out transition-opacity duration-300';
+        modal.onclick = closeImageLightbox;
+        modal.innerHTML = `
+          <div class="relative max-w-5xl max-h-[92vh] flex flex-col items-center" onclick="event.stopPropagation()">
+            <button type="button" onclick="closeImageLightbox()" class="absolute -top-11 right-0 text-white/80 hover:text-white text-2xl font-bold p-2 cursor-pointer transition-colors" aria-label="Close">✕</button>
+            <img id="image-lightbox-img" src="" alt="Enlarged view" class="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl border border-white/10">
+          </div>
+        `;
+        document.body.appendChild(modal);
+        window.addEventListener('keydown', (evt) => {
+          if (evt.key === 'Escape') closeImageLightbox();
+        });
+      }
+      const img = document.getElementById('image-lightbox-img');
+      if (img) img.src = imageUrl;
+      modal.classList.remove('hidden');
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeImageLightbox() {
+      const modal = document.getElementById('image-lightbox-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
+      document.body.style.overflow = '';
+    }
+
+    function renderHeroMediaShowcase(heroShowcase) {
+      if (!heroShowcase) return false;
+      const leadMedia = heroShowcase.lead_media || heroShowcase.video;
+      const viralTweets = heroShowcase.viral_tweets || heroShowcase.tweets || [];
+      if (!leadMedia && (!viralTweets || viralTweets.length === 0)) return false;
+
+      const isZh = currentLang === 'zh';
+      const container = document.getElementById('viral-ticker-container') || document.getElementById('viral-ticker-viewport');
+      if (!container) return false;
+
+      const titleEl = document.getElementById('viral-ticker-title');
+      if (titleEl) {
+        titleEl.textContent = isZh ? '🎬 极客实测展厅 · 48h 独家前沿与领袖精粹' : '🎬 48h Hands-on Lab & Titan Rich Pulse';
+      }
+      const subtitleEl = document.getElementById('viral-ticker-subtitle');
+      if (subtitleEl) {
+        subtitleEl.textContent = isZh 
+          ? '· 拒绝同质化：汇聚 48h 内最具实操价值的极客上手评测与领袖视效动态' 
+          : '· Curated hands-on benchmarks, workflow demos & frontier visual pulses';
+      }
+
+      // Check if iframe is already actively playing
+      const existingLeadBox = document.getElementById('hero-lead-video-box');
+      if (existingLeadBox && existingLeadBox.querySelector('iframe')) {
+        return true;
+      }
+
+      let videoId = leadMedia ? (leadMedia.video_id || '') : '';
+      if (!videoId && leadMedia && leadMedia.url) {
+        const m = String(leadMedia.url).match(/(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})/);
+        if (m) videoId = m[1];
+      }
+      const title = escapeHtml(leadMedia ? ((isZh ? leadMedia.title_zh : leadMedia.title_en) || leadMedia.title || '') : '');
+      let author = escapeHtml(leadMedia ? (leadMedia.source || leadMedia.author || 'AI Engineer') : 'AI Pioneer').replace(/^YouTube\s*·\s*/, '').trim();
+      const url = escapeHtml(leadMedia ? (leadMedia.url || '#') : '#');
+      const diffH = leadMedia ? (leadMedia.diff_hours || 12.0) : 12.0;
+      const timeBadge = isZh ? `${diffH}h 前` : `${diffH}h ago`;
+      const tags = (leadMedia && leadMedia.tags) || ['#HandsOn', '#Benchmark', '#AI'];
+      const tagsHtml = tags.slice(0, 3).map(t => `<span class="text-[10px] font-mono px-2 py-0.5 rounded-md bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
+
+      const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Hands-on Lab';
+      const leadWatchText = url.toLowerCase().includes('youtube') 
+        ? (isZh ? '在 YouTube 观看 ↗' : 'Watch on YouTube ↗') 
+        : (isZh ? '查看实测原帖 ↗' : 'View Source ↗');
+      const rightTitle = isZh ? '🔥 领袖图文速递' : '🔥 Leader Rich Pulse';
+
+      let posterUrl = '';
+      let fallbackPoster = '';
+      if (videoId) {
+        posterUrl = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/maxresdefault.jpg&w=720&output=webp&q=85`;
+        fallbackPoster = `https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/${encodeURIComponent(videoId)}/hqdefault.jpg&w=720&output=webp&q=85`;
+      } else if (leadMedia && leadMedia.image_url) {
+        posterUrl = `https://wsrv.nl/?url=${encodeURIComponent(leadMedia.image_url)}&w=720&output=webp&q=85`;
+        fallbackPoster = posterUrl;
+      } else {
+        posterUrl = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=720&q=80';
+        fallbackPoster = posterUrl;
+      }
+
+      const leftPlayerHtml = `
+        <div class="lg:col-span-7 flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/30 p-4 shadow-xl overflow-hidden group relative">
+          <div class="flex items-center justify-between mb-3 text-xs">
+            <div class="flex items-center space-x-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shadow-rose-500/30">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                <span>${leadBadge}</span>
+              </span>
+              <span class="text-slate-200 font-bold text-xs">📺 ${author}</span>
+            </div>
+            <span class="text-slate-300 font-mono text-[11px] bg-slate-800/80 px-2 py-0.5 rounded-md border border-slate-700/60">⚡ ${timeBadge}</span>
+          </div>
+
+          <div id="hero-lead-video-box" class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-inner group/box cursor-pointer" onclick="playHeroLeadVideo('${videoId}', '${url}')">
+            <img src="${posterUrl}" alt="${title}" class="w-full h-full object-cover transition-transform duration-500 group-hover/box:scale-105" loading="eager" onerror="this.onerror=null; this.src='${fallbackPoster}'">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent"></div>
+            
+            <div class="absolute inset-0 flex items-center justify-center">
+              <button type="button" aria-label="Play Video" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-red-600/90 hover:bg-red-500 text-white flex items-center justify-center text-xl sm:text-2xl shadow-2xl ring-4 ring-white/20 transform group-hover/box:scale-110 transition-all cursor-pointer">
+                <span class="ml-1">▶</span>
+              </button>
+            </div>
+
+            <div class="absolute bottom-2.5 left-3 right-3 text-white">
+              <h3 class="text-xs sm:text-sm font-bold line-clamp-1 drop-shadow-md">${title}</h3>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-slate-800/80 text-xs gap-2">
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              ${tagsHtml}
+            </div>
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300 font-semibold text-[11px] shrink-0 hover:underline flex items-center gap-1">
+              <span>${leadWatchText}</span>
+            </a>
+          </div>
+        </div>
+      `;
+
+      let rightCardsHtml = '';
+      (viralTweets || []).slice(0, 2).forEach(tw => {
+        const twAuthor = escapeHtml(tw.author || 'AI Pioneer');
+        const twHandle = escapeHtml(tw.author_handle || `@${twAuthor.replace(/\s+/g, '')}`);
+        const twAvatar = optimizeAvatarUrl(tw.author_avatar || `https://unavatar.io/x/${twHandle.replace('@','')}`);
+        const twText = escapeHtml((isZh ? tw.full_text_zh : tw.full_text_en) || tw.summary_zh || tw.summary_en || tw.title || '');
+        const twUrl = escapeHtml(tw.url || '#');
+        const twImg = tw.image_url || tw.media || '';
+
+        let mediaHtml = '';
+        if (twImg) {
+          const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=400&output=webp&q=80`;
+          mediaHtml = `
+            <div class="mt-2 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 max-h-24 sm:max-h-28 bg-slate-900 cursor-pointer group/img" onclick="openImageLightbox('${escapeHtml(twImg)}', event)">
+              <img src="${optImg}" alt="Tweet media" class="w-full h-24 sm:h-28 object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy">
+            </div>`;
+        } else if (tw.has_video || tw.video_url) {
+          mediaHtml = `
+            <div class="mt-2 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[10px] font-mono">
+              <span>🎥</span>
+              <span>${isZh ? '包含实战视频 Demo' : 'Includes Video Demo'}</span>
+            </div>`;
+        }
+
+        rightCardsHtml += `
+          <article class="bg-white/95 dark:bg-slate-900/95 rounded-xl p-3 sm:p-3.5 border border-slate-200/90 dark:border-slate-800/90 shadow-sm flex flex-col justify-between hover:border-sky-500/40 transition-all flex-1">
+            <div>
+              <div class="flex items-center justify-between text-[11px] mb-1.5">
+                <div class="flex items-center space-x-2 min-w-0">
+                  <img src="${twAvatar}" alt="${twAuthor}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                  <div class="min-w-0 truncate">
+                    <div class="flex items-center space-x-1">
+                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${twAuthor}</span>
+                      <span class="text-sky-500 text-[10px] font-black">✓</span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">${twHandle}</span>
+                  </div>
+                </div>
+                <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
+                  ${isZh ? '🔥 领袖高赞' : '🔥 Viral Pulse'}
+                </span>
+              </div>
+              <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-2">
+                ${twText}
+              </p>
+              ${mediaHtml}
+            </div>
+            <div class="flex items-center justify-between text-[10px] text-slate-400 pt-2 mt-2 border-t border-slate-100 dark:border-slate-800/60">
+              <span class="font-mono">⚡ ${isZh ? '24h 实时' : '24h Live'}</span>
+              <a href="${twUrl}" target="_blank" rel="noopener noreferrer" class="text-sky-600 dark:text-sky-400 font-semibold hover:underline">
+                ${isZh ? '查看原推 ↗' : 'View Post ↗'}
+              </a>
+            </div>
+          </article>
+        `;
+      });
+
+      const rightColumnHtml = `
+        <div class="lg:col-span-5 flex flex-col space-y-3 justify-between">
+          <div class="flex items-center justify-between text-xs font-bold text-slate-800 dark:text-slate-200 px-1">
+            <span class="flex items-center gap-1.5">
+              <span>🐦</span>
+              <span>${rightTitle}</span>
+            </span>
+            <button type="button" onclick="switchTab('celebrity')" class="text-sky-600 dark:text-sky-400 hover:underline text-[11px] font-normal cursor-pointer">
+              ${isZh ? '全部推文 →' : 'All Radar →'}
+            </button>
+          </div>
+          ${rightCardsHtml}
+        </div>
+      `;
+
+      container.innerHTML = `
+        <div id="hero-media-showcase-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch w-full">
+          ${leftPlayerHtml}
+          ${rightColumnHtml}
+        </div>
+      `;
+      return true;
+    }
+
     function renderViralTicker(tweets) {
       const isZh = currentLang === 'zh';
       let container = document.getElementById('viral-ticker-container');
@@ -3554,7 +3796,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const isZh = currentLang === 'zh';
       container.innerHTML = topItems.map((item, idx) => {
+        const isCrowned = idx === 0;
         const badge = (isZh ? (item.badge_zh || item.badge) : (item.badge_en || item.badge)) || (isZh ? "⚡ 今日头条" : "⚡ Top Story");
+        const crownBadge = isCrowned ? (isZh ? "👑 24h 重大破圈头条" : "👑 24h Headline") : badge;
         const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title;
         const summary = (isZh ? (item.summary_zh || item.summary || item.content_snippet) : (item.summary_en || item.summary || item.content_snippet)) || "";
         const timeObj = formatTime(item.raw_published_at, currentLang);
@@ -3562,12 +3806,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const cleanSource = item.source || "";
         const itemId = item.id || `top_${idx}`;
 
+        const articleClass = isCrowned
+          ? "group border-2 border-amber-500/60 dark:border-amber-400/50 shadow-md ring-1 ring-amber-500/20 bg-gradient-to-br from-amber-50/40 via-white to-amber-100/20 dark:from-slate-900 dark:via-slate-900/90 dark:to-amber-950/20 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 cursor-pointer relative"
+          : "group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm cursor-pointer";
+
+        const badgeHtml = isCrowned
+          ? `<span class="font-extrabold px-2 py-0.5 rounded-md bg-gradient-to-r from-amber-500 to-rose-500 text-white shadow-sm shrink-0 flex items-center gap-1">${crownBadge}</span>`
+          : `<span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">${badge}</span>`;
+
         return `
-          <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm cursor-pointer" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${itemId}')">
+          <article class="${articleClass}" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${itemId}')">
             <div class="space-y-1.5">
               <div class="flex items-center justify-between text-[10px] gap-2">
                 <div class="flex items-center space-x-1.5 min-w-0">
-                  <span class="font-bold px-2 py-0.5 rounded bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 shrink-0">${badge}</span>
+                  ${badgeHtml}
                   ${todayBadge}
                 </div>
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0 ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
@@ -3658,6 +3910,50 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
       const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
       const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
+
+      const isMajorBreaking = (cardIndex === 0 && (item.hot_score >= 5 || item.is_major_breaking));
+      if (isMajorBreaking) {
+        return `
+        <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row gap-4 justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-lg hover:shadow-xl bg-gradient-to-br from-amber-50/50 via-white to-orange-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-amber-950/20 col-span-full relative" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
+          <div class="absolute -top-3 left-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-[10px] sm:text-xs font-black shadow-md flex items-center gap-1.5">
+            <span>👑</span>
+            <span>${isZh ? '24h 重大破圈头条 · 全网焦点' : '24h Major Breakthrough Headline'}</span>
+          </div>
+          ${hasRealImage ? `
+            <div class="w-full md:w-5/12 aspect-video rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0">
+              <img src="${optimizeImageUrl(item.image_url, 720)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
+              ${hasVideo ? `<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[10px] font-bold flex items-center gap-1 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
+            </div>` : ''}
+          <div class="flex-1 flex flex-col justify-between space-y-2.5 min-w-0">
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1.5">
+                <div class="flex items-center space-x-2">
+                  <span class="font-extrabold text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">⚡ ${cleanSource}</span>
+                  ${todayBadge}
+                  <span class="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold">🔥 Hot 5.0</span>
+                </div>
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">🕒 ${timeObj.relative || timeObj.display}</span>
+              </div>
+              <h3 class="font-black text-base sm:text-lg text-slate-900 dark:text-slate-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+                ${title}
+              </h3>
+              ${specBadges}
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed">
+                ${summary}
+              </p>
+            </div>
+            <div class="flex items-center justify-between text-xs pt-2.5 border-t border-amber-200/50 dark:border-amber-900/40 text-slate-500 dark:text-slate-400">
+              <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
+                ⚡ ${isZh ? '点击查看 5W1H 深度研判与速读' : 'Click for In-depth 5W1H Briefing'}
+              </span>
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-amber-700 dark:text-amber-400 hover:text-amber-600 hover:underline font-bold">
+                ${isZh ? '官方公报 / 原文报道' : 'Official Report'} ↗
+              </a>
+            </div>
+          </div>
+        </article>
+        `;
+      }
 
       return `
         <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
@@ -3954,7 +4250,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 return `
                   <div class="mt-2.5 grid grid-cols-2 gap-1.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
                     ${allMediaUrls.slice(0, 4).map(u => `
-                      <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(u)}', '_blank')">
+                      <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="openImageLightbox('${escapeHtml(u)}', event)">
                         <img src="${escapeHtml(u)}" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
                       </div>
                     `).join('')}
@@ -3963,7 +4259,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               // 5. 单张高清原图
               if (imgUrl) {
                 return `
-                  <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer max-h-80" onclick="event.stopPropagation(); window.open('${escapeHtml(imgUrl)}', '_blank')">
+                  <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer max-h-80" onclick="openImageLightbox('${escapeHtml(imgUrl)}', event)">
                     <img src="${escapeHtml(imgUrl)}" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
                     <div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] text-white/90 font-mono opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center gap-1">
                       <span>🔍</span>
@@ -5716,17 +6012,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 3. 渲染当日火爆的名人推文滚动栏 (严格 24 小时以内，过期清退，一个不留，清除无意义单句推文)
-      const rawViralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
-        ? data.viral_ticker_tweets
-        : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
-      const viralTweets = rawViralTweets.filter(it => {
-        if (it.category === 'celebrity' || it.platform === 'x') {
-          return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
-        }
-        return true;
-      });
-      renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []));
+      // 3. 渲染首页置顶：极客实测展厅 (48h 视频 Demo + 领袖精粹) 或 传统推文滚动栏
+      let heroRendered = false;
+      if (data.hero_media_showcase) {
+        heroRendered = renderHeroMediaShowcase(data.hero_media_showcase);
+      }
+      if (!heroRendered) {
+        const rawViralTweets = (data.viral_ticker_tweets && data.viral_ticker_tweets.length > 0)
+          ? data.viral_ticker_tweets
+          : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
+        const viralTweets = rawViralTweets.filter(it => {
+          if (it.category === 'celebrity' || it.platform === 'x') {
+            return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
+          }
+          return true;
+        });
+        renderViralTicker(viralTweets.length > 0 ? viralTweets : (data.top_three || []));
+      }
+
+      // 计算极客实测 Demo 数量角标
+      const bDemos = document.getElementById('badge-count-demos');
+      if (bDemos) {
+        const demosCount = allCelebRaw.concat(allViralRaw).filter(it => {
+          if (it.has_video || it.video_url || it.is_hero_demo) return true;
+          const txt = `${it.title || ''} ${it.title_zh || ''} ${it.full_text_en || ''} ${it.full_text_zh || ''} ${(it.spec_tags || []).join(' ')}`.toLowerCase();
+          return /demo|hands[- ]?on|tested|benchmark|tutorial|workflow|实测|上手|跑分|实操|实录/i.test(txt);
+        }).length;
+        bDemos.textContent = `${demosCount || 24}+`;
+      }
+
       if (document.getElementById('top-three-container')) {
         renderTopThree(data.top_three || []);
       }
@@ -6131,6 +6445,51 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
             container.className = "w-full";
             container.innerHTML = renderViralPostsSection(pageItems);
+            renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          }
+        } else if (socialViewMode === 'demos') {
+          if (spotlightEl) {
+            spotlightEl.classList.add('hidden');
+            spotlightEl.innerHTML = '';
+          }
+          if (catTitle) catTitle.textContent = isZh ? '🎬 极客实测 Demo & 深度跑分' : '🎬 Hands-on Lab & Geek Demos';
+          if (catDesc) catDesc.textContent = isZh ? '汇聚 48 小时内顶级极客真实敲代码、真机实录、模型跑分与实战工作流' : 'Curated hands-on demos, real-world benchmarks, and developer workflows from the past 48h';
+
+          let demosList = allCelebRaw.concat(allViralRaw).filter(it => {
+            if (it.has_video || it.video_url || it.is_hero_demo) return true;
+            const txt = `${it.title || ''} ${it.title_zh || ''} ${it.full_text_en || ''} ${it.full_text_zh || ''} ${(it.spec_tags || []).join(' ')}`.toLowerCase();
+            return /demo|hands[- ]?on|tested|benchmark|tutorial|workflow|实测|上手|跑分|实操|实录/i.test(txt);
+          });
+          const seen = new Set();
+          demosList = demosList.filter(it => {
+            const k = it.id || it.url;
+            if (!k || seen.has(k)) return false;
+            seen.add(k);
+            return true;
+          });
+          if (searchQuery) {
+            demosList = filterList(demosList);
+          }
+          demosList.sort((a, b) => {
+            const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+            const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+            return timeB - timeA;
+          });
+
+          const totalItems = demosList.length;
+          if (totalItems === 0) {
+            container.className = "w-full";
+            container.innerHTML = `<div class="text-slate-500 text-center py-12">${isZh ? '暂无实测 Demo' : 'No Hands-on Demos found'}</div>`;
+            renderCategoryPagination(0, 0, 1, categoryPageSize);
+          } else {
+            const totalPages = Math.ceil(totalItems / categoryPageSize);
+            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+            const pageItems = demosList.slice(startIndex, startIndex + categoryPageSize);
+
+            container.className = "w-full";
+            container.innerHTML = renderCelebrityTimeline(pageItems);
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           }
         } else {
@@ -7084,39 +7443,57 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       socialViewMode = mode;
       categoryCurrentPage = 1;
       const btnLeader = document.getElementById('btn-social-mode-leader');
+      const btnDemos = document.getElementById('btn-social-mode-demos');
       const btnViral = document.getElementById('btn-social-mode-viral');
       const badgeLeader = document.getElementById('badge-count-leader');
+      const badgeDemos = document.getElementById('badge-count-demos');
       const badgeViral = document.getElementById('badge-count-viral');
       const celebSubfilter = document.getElementById('celebrity-subfilter');
       const viralSubfilter = document.getElementById('viral-platform-subfilter');
 
+      if (btnLeader) {
+        btnLeader.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0";
+      }
+      if (badgeLeader) {
+        badgeLeader.className = "px-2 py-0.5 rounded-full text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-mono font-bold";
+      }
+      if (btnDemos) {
+        btnDemos.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0";
+      }
+      if (badgeDemos) {
+        badgeDemos.className = "px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-mono font-bold";
+      }
+      if (btnViral) {
+        btnViral.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0";
+      }
+      if (badgeViral) {
+        badgeViral.className = "px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30 font-mono font-bold";
+      }
+
       if (mode === 'viral') {
         if (btnViral) {
-          btnViral.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1.5 bg-rose-600 text-white shadow-sm shadow-rose-600/30";
+          btnViral.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-rose-600 text-white shadow-sm shadow-rose-600/30 whitespace-nowrap shrink-0";
         }
         if (badgeViral) {
           badgeViral.className = "px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white border border-white/30 font-mono font-bold";
         }
-        if (btnLeader) {
-          btnLeader.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
-        }
-        if (badgeLeader) {
-          badgeLeader.className = "px-2 py-0.5 rounded-full text-[11px] bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-mono font-bold";
-        }
         if (celebSubfilter) celebSubfilter.classList.add('hidden');
         if (viralSubfilter) viralSubfilter.classList.remove('hidden');
+      } else if (mode === 'demos') {
+        if (btnDemos) {
+          btnDemos.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-emerald-600 text-white shadow-sm shadow-emerald-600/30 whitespace-nowrap shrink-0";
+        }
+        if (badgeDemos) {
+          badgeDemos.className = "px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white border border-white/30 font-mono font-bold";
+        }
+        if (celebSubfilter) celebSubfilter.classList.add('hidden');
+        if (viralSubfilter) viralSubfilter.classList.add('hidden');
       } else {
         if (btnLeader) {
-          btnLeader.className = "px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center space-x-1.5 bg-sky-600 text-white shadow-sm shadow-sky-600/30";
+          btnLeader.className = "px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0";
         }
         if (badgeLeader) {
           badgeLeader.className = "px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white border border-white/30 font-mono font-bold";
-        }
-        if (btnViral) {
-          btnViral.className = "px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-1.5";
-        }
-        if (badgeViral) {
-          badgeViral.className = "px-2 py-0.5 rounded-full text-[11px] bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-300 dark:border-rose-500/30 font-mono font-bold";
         }
         if (celebSubfilter) celebSubfilter.classList.remove('hidden');
         if (viralSubfilter) viralSubfilter.classList.add('hidden');
@@ -7190,7 +7567,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (mediaType === 'image' && item.image_url) {
         return `
           <div class="mt-3.5 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
-            <img src="${escapeHtml(item.image_url)}" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(item.image_url)}', '_blank')">
+            <img src="${escapeHtml(item.image_url)}" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="openImageLightbox('${escapeHtml(item.image_url)}', event)">
           </div>
         `;
       }
@@ -8595,6 +8972,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.changeCategoryPageSize = changeCategoryPageSize;
     window.switchTopicFocus = switchTopicFocus;
     window.toggleTopicFocusCollapse = toggleTopicFocusCollapse;
+    window.playHeroLeadVideo = playHeroLeadVideo;
+    window.openImageLightbox = openImageLightbox;
+    window.closeImageLightbox = closeImageLightbox;
+    window.renderHeroMediaShowcase = renderHeroMediaShowcase;
 
     const runLangCheck = () => {
       initTranslateEngine();
