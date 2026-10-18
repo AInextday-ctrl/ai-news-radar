@@ -740,25 +740,109 @@ def _enrich_topic_stance_matrix(topics: List[Dict[str, Any]]) -> List[Dict[str, 
         # Derive actionable advice based on topic domain
         title_all = f"{t.get('title_zh', '')} {t.get('title_en', '')}".lower()
         if any(w in title_all for w in ["推理", "math", "reasoning", "stokes"]):
-            action_advice = "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。"
+            action_advice_zh = "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。"
+            action_advice_en = "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
         elif any(w in title_all for w in ["算力", "芯片", "capex", "tpu", "gpu", "成本", "价格"]):
-            action_advice = "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。"
+            action_advice_zh = "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。"
+            action_advice_en = "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
         elif any(w in title_all for w in ["视频", "生图", "kling", "flux", "visual", "可灵"]):
-            action_advice = "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。"
+            action_advice_zh = "建议结合分镜头脚本与局部重绘控制流进行敏捷原型跑通，验证一致性达标后再行批量渲染。"
+            action_advice_en = "Prototype with multi-shot storyboards and inpainting pipelines to verify temporal consistency before running bulk renders."
+        elif any(w in title_all for w in ["deepseek", "flash", "开源", "open source", "ollama"]):
+            action_advice_zh = "建议优先在受限沙箱中针对核心智能体任务开展端到端评测，借力 Ollama 实现零数据留存私有化部署。"
+            action_advice_en = "Benchmark in isolated sandboxes for agentic tasks, leveraging Ollama for zero-data-retention private hosting."
         else:
-            action_advice = "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。"
+            action_advice_zh = "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。"
+            action_advice_en = "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
 
         t["stance_matrix"] = {
             "pro_point_zh": pro_point,
             "pro_author": pro_speaker,
             "con_point_zh": con_point,
             "con_author": con_speaker,
-            "action_advice_zh": action_advice,
+            "action_advice_zh": action_advice_zh,
             "pro_point_en": pro.get("point_en") or pro_point,
             "con_point_en": con.get("point_en") or con_point,
-            "action_advice_en": "Evaluate sandbox performance and multi-model routing before full-scale deployment."
+            "action_advice_en": action_advice_en
         }
     return topics
+
+
+def _get_topic_highlights(t: Dict[str, Any], is_zh: bool) -> List[Dict[str, str]]:
+    """
+    Extract or generate 3 crisp, informative bullet takeaways for Column 1
+    to eliminate empty gaps and provide high-density analytical value.
+    """
+    title = (t.get("title_zh") if is_zh else t.get("title_en")) or ""
+    tid = str(t.get("id") or t.get("topic_id") or "").lower()
+    t_all = f"{tid} {title.lower()}"
+
+    if "deepseek" in t_all:
+        if is_zh:
+            return [
+                {"icon": "🎯", "label": "核心突破", "text": "精炼输出与低成本搜索接口，智能体基准击败更大参数竞品"},
+                {"icon": "⚡", "label": "架构演进", "text": "通过 Ollama 实现端侧与私有化零数据留存部署，大幅降低接入壁垒"},
+                {"icon": "📊", "label": "指标信号", "text": "极致压缩单任务推理耗时与Token冗余，再次改写推理成本曲线"}
+            ]
+        else:
+            return [
+                {"icon": "🎯", "label": "Breakthrough", "text": "Leaner outputs & cheap search APIs outperforming heavier agentic models"},
+                {"icon": "⚡", "label": "Architecture", "text": "Instant local & zero-retention private hosting via Ollama with low overhead"},
+                {"icon": "📊", "label": "Key Signal", "text": "Radically cuts per-task latency and token waste, rewriting cost curves"}
+            ]
+    elif any(k in t_all for k in ["math", "openai", "proof", "stokes", "推理"]):
+        if is_zh:
+            return [
+                {"icon": "🎯", "label": "核心突破", "text": "探索复杂数学猜想长思维链自推导，挑战千禧年数学难题"},
+                {"icon": "⚡", "label": "业界争议", "text": "长链推导存在形式主义幻觉，学界呼吁引入确定性形式化验证"},
+                {"icon": "📊", "label": "指标信号", "text": "黑盒推理自检能力仍待严密检验，单盲采信风险极高"}
+            ]
+        else:
+            return [
+                {"icon": "🎯", "label": "Breakthrough", "text": "Frontier exploration of autonomous multi-step mathematical reasoning"},
+                {"icon": "⚡", "label": "Dispute", "text": "Concerns over formal hallucinations versus deterministic theorem provers"},
+                {"icon": "📊", "label": "Key Signal", "text": "Demands rigorous verification before relying on long reasoning chains"}
+            ]
+    elif any(k in t_all for k in ["capex", "cloud", "tpu", "war", "算力", "芯片", "融资"]):
+        if is_zh:
+            return [
+                {"icon": "🎯", "label": "核心突破", "text": "头部大厂加码高额定制算力与万卡集群，抢占下一代智力底座"},
+                {"icon": "⚡", "label": "生态博弈", "text": "硬件负债与高昂调用成本迫使下游团队转向高性价比自适应路由"},
+                {"icon": "📊", "label": "指标信号", "text": "算力军备与商业化 ROI 紧迫性倒挂，行业进入重资产洗牌期"}
+            ]
+        else:
+            return [
+                {"icon": "🎯", "label": "Breakthrough", "text": "Massive capital commitments and custom TPU/GPU clusters for AGI infra"},
+                {"icon": "⚡", "label": "Ecosystem", "text": "Escalating compute overhead drives builders to cost-efficient routing"},
+                {"icon": "📊", "label": "Key Signal", "text": "Widening gap between heavy Capex investments and tangible business ROI"}
+            ]
+    elif any(k in t_all for k in ["kling", "video", "visual", "可灵", "视频"]):
+        if is_zh:
+            return [
+                {"icon": "🎯", "label": "核心突破", "text": "视频生成运镜与物理动态控制精度突破，加速商业化短片落地"},
+                {"icon": "⚡", "label": "工业落地", "text": "创作者工作流大幅提效，结合分镜头脚本实现低成本批量渲染"},
+                {"icon": "📊", "label": "指标信号", "text": "多模态生成正由纯娱乐玩梗向工业级视效辅助生产快速渗透"}
+            ]
+        else:
+            return [
+                {"icon": "🎯", "label": "Breakthrough", "text": "Precision camera motion & dynamic physics control in video synthesis"},
+                {"icon": "⚡", "label": "Production", "text": "Empowering indie creators with rapid multi-shot storyboard prototyping"},
+                {"icon": "📊", "label": "Key Signal", "text": "Shifting from casual demos to enterprise-grade VFX production workflows"}
+            ]
+    else:
+        if is_zh:
+            return [
+                {"icon": "🎯", "label": "核心突破", "text": f"{title[:28]} 展现前沿工程进展"},
+                {"icon": "⚡", "label": "范式影响", "text": "激发学界与工程界在架构选型与成本效益上的双向审视"},
+                {"icon": "📊", "label": "落地关注", "text": "建议在受限沙箱中充分验证性能边界与确定性交付质量"}
+            ]
+        else:
+            clean_title = re.sub(r'[\u4e00-\u9fff]+', '', title).strip() or "Frontier AI Breakthrough"
+            return [
+                {"icon": "🎯", "label": "Milestone", "text": f"Advances in {clean_title[:30]}... driving momentum"},
+                {"icon": "⚡", "label": "Impact", "text": "Prompting architectural scrutiny across research and engineering"},
+                {"icon": "📊", "label": "Takeaway", "text": "Validate boundary reliability and cost efficiency in sandboxes"}
+            ]
 
 
 def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> str:
@@ -902,6 +986,31 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
               </div>
             </div>"""
 
+        # 3 Structured Highlights to fill Column 1 and provide dense value
+        highlights = _get_topic_highlights(t, is_zh)
+        highlights_html_items = []
+        for h in highlights:
+            highlights_html_items.append(f"""
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">{h['icon']}</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">{h['label']}:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">{h['text']}</span>
+              </div>
+            </div>""")
+        highlights_html = "\n".join(highlights_html_items)
+
+        # Action Advice in Col 2
+        sm = t.get("stance_matrix", {})
+        action_advice = sm.get("action_advice_zh" if is_zh else "action_advice_en", "")
+        advice_html = ""
+        if action_advice:
+            advice_html = f"""
+            <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
+              <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 {"选型建议：" if is_zh else "Action Advice:"}</span>
+              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">{action_advice}</span>
+            </div>"""
+
         # 组装单个完整 Topic Card (3 栏并排)
         topic_cards.append(f"""
         <!-- Topic Card {idx} -->
@@ -924,7 +1033,13 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
                 {summary}
               </div>
+
+              <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
+              <div class="space-y-1.5 pt-1">
+                {highlights_html}
+              </div>
             </div>
+            
             <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
               <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 {"核心爆发点" if is_zh else "Core Milestone"}</span>
               <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 {"行业范式影响" if is_zh else "Industry Impact"}</span>
@@ -964,6 +1079,9 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
                   “{con_point}”
                 </p>
               </div>
+
+              <!-- Action Advice -->
+              {advice_html}
             </div>
 
             <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">

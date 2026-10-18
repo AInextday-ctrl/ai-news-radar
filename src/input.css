@@ -391,7 +391,8 @@ html:not(.dark) #topic-focus-section {
 }
 
 html:not(.dark) #topic-focus-section h2,
-html:not(.dark) #topic-focus-section h3 {
+html:not(.dark) #topic-focus-section h3,
+html:not(.dark) #topic-focus-section h4 {
   color: #0f172a !important;
 }
 
@@ -399,6 +400,7 @@ html:not(.dark) #topic-focus-section .topic-focus-card > div {
   background-color: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+  color: #0f172a !important;
 }
 
 html:not(.dark) #topic-focus-section .topic-tab-btn:not(.active) {
@@ -412,63 +414,98 @@ html:not(.dark) #topic-focus-section .topic-tab-btn:not(.active):hover {
   color: #0f172a !important;
 }
 
+/* 研判要点与背景摘要浅色模式高对比 */
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-50,
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-950\/60,
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-950\/70 {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+html:not(.dark) #topic-focus-section .topic-focus-card .text-slate-900 {
+  color: #0f172a !important;
+}
+html:not(.dark) #topic-focus-section .topic-focus-card .text-slate-800 {
+  color: #1e293b !important;
+}
+html:not(.dark) #topic-focus-section .topic-focus-card .text-slate-700 {
+  color: #334155 !important;
+}
+html:not(.dark) #topic-focus-section .topic-focus-card .text-slate-600 {
+  color: #475569 !important;
+}
+
 /* 观点对撞 Perspective A (看好/支持方) 浅色模式高对比 */
 html:not(.dark) #topic-focus-section .bg-emerald-950\/30,
-html:not(.dark) #topic-focus-section .bg-emerald-50\/90 {
+html:not(.dark) #topic-focus-section .bg-emerald-950\/40,
+html:not(.dark) #topic-focus-section .bg-emerald-50\/90,
+html:not(.dark) #topic-focus-section .bg-emerald-50 {
   background-color: #ecfdf5 !important;
   border: 1px solid #a7f3d0 !important;
   color: #064e3b !important;
 }
 html:not(.dark) #topic-focus-section .bg-emerald-950\/30 p,
-html:not(.dark) #topic-focus-section .bg-emerald-50\/90 p {
+html:not(.dark) #topic-focus-section .bg-emerald-950\/40 p,
+html:not(.dark) #topic-focus-section .bg-emerald-50\/90 p,
+html:not(.dark) #topic-focus-section .bg-emerald-50 p {
   color: #064e3b !important;
   font-weight: 500 !important;
 }
-html:not(.dark) #topic-focus-section .text-emerald-300 {
+html:not(.dark) #topic-focus-section .text-emerald-300,
+html:not(.dark) #topic-focus-section .text-emerald-800 {
   color: #065f46 !important;
 }
-html:not(.dark) #topic-focus-section .text-emerald-400 {
+html:not(.dark) #topic-focus-section .text-emerald-400,
+html:not(.dark) #topic-focus-section .text-emerald-700 {
   color: #047857 !important;
 }
 
 /* 观点对撞 Perspective B (审慎/质疑方) 浅色模式高对比 */
 html:not(.dark) #topic-focus-section .bg-rose-950\/30,
-html:not(.dark) #topic-focus-section .bg-rose-50\/90 {
+html:not(.dark) #topic-focus-section .bg-rose-950\/40,
+html:not(.dark) #topic-focus-section .bg-rose-50\/90,
+html:not(.dark) #topic-focus-section .bg-rose-50 {
   background-color: #fff1f2 !important;
   border: 1px solid #fecdd3 !important;
   color: #881337 !important;
 }
 html:not(.dark) #topic-focus-section .bg-rose-950\/30 p,
-html:not(.dark) #topic-focus-section .bg-rose-50\/90 p {
+html:not(.dark) #topic-focus-section .bg-rose-950\/40 p,
+html:not(.dark) #topic-focus-section .bg-rose-50\/90 p,
+html:not(.dark) #topic-focus-section .bg-rose-50 p {
   color: #881337 !important;
   font-weight: 500 !important;
 }
-html:not(.dark) #topic-focus-section .text-rose-300 {
+html:not(.dark) #topic-focus-section .text-rose-300,
+html:not(.dark) #topic-focus-section .text-rose-800 {
   color: #9f1239 !important;
 }
-html:not(.dark) #topic-focus-section .text-rose-400 {
+html:not(.dark) #topic-focus-section .text-rose-400,
+html:not(.dark) #topic-focus-section .text-rose-700 {
   color: #be123c !important;
 }
 
 /* 选型建议 Action Advice 浅色模式高对比 */
 html:not(.dark) #topic-focus-section .bg-indigo-950\/40,
-html:not(.dark) #topic-focus-section .bg-indigo-50\/80 {
+html:not(.dark) #topic-focus-section .bg-indigo-950\/50,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/80,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/90,
+html:not(.dark) #topic-focus-section .bg-indigo-50 {
   background-color: #eef2ff !important;
   border: 1px solid #c7d2fe !important;
   color: #1e1b4b !important;
 }
 html:not(.dark) #topic-focus-section .bg-indigo-950\/40 span,
-html:not(.dark) #topic-focus-section .bg-indigo-50\/80 span {
-  color: #312e81 !important;
+html:not(.dark) #topic-focus-section .bg-indigo-950\/50 span,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/80 span,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/90 span,
+html:not(.dark) #topic-focus-section .bg-indigo-50 span {
+  color: #1e1b4b !important;
 }
 
 /* 关联情报束 浅色模式高对比 */
-html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-900\/60,
-html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-50 {
-  background-color: #f8fafc !important;
-  border: 1px solid #e2e8f0 !important;
-}
 html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-900\/60:hover,
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-950\/60:hover,
 html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-50:hover {
   background-color: #f1f5f9 !important;
   border-color: #cbd5e1 !important;
@@ -480,9 +517,15 @@ html.dark #topic-focus-section {
   border: 1px solid rgba(99, 102, 241, 0.3) !important;
   color: #ffffff !important;
 }
+html.dark #topic-focus-section h2,
+html.dark #topic-focus-section h3,
+html.dark #topic-focus-section h4 {
+  color: #ffffff !important;
+}
 html.dark #topic-focus-section .topic-focus-card > div {
   background-color: rgba(15, 23, 42, 0.85) !important;
   border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  color: #f8fafc !important;
 }
 
 

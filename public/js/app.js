@@ -3573,6 +3573,63 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
+    function getTopicHighlights(t, isZh) {
+      const tid = (t.id || t.topic_id || '').toLowerCase();
+      const title = (isZh ? t.title_zh : t.title_en) || '';
+      const tAll = `${tid} ${title.toLowerCase()}`;
+      if (tAll.includes('deepseek')) {
+        return isZh ? [
+          { icon: '🎯', label: '核心突破', text: '精炼输出与低成本搜索接口，智能体基准击败更大参数竞品' },
+          { icon: '⚡', label: '架构演进', text: '通过 Ollama 实现端侧与私有化零数据留存部署，大幅降低接入壁垒' },
+          { icon: '📊', label: '指标信号', text: '极致压缩单任务推理耗时与Token冗余，再次改写推理成本曲线' }
+        ] : [
+          { icon: '🎯', label: 'Breakthrough', text: 'Leaner outputs & cheap search APIs outperforming heavier agentic models' },
+          { icon: '⚡', label: 'Architecture', text: 'Instant local & zero-retention private hosting via Ollama with low overhead' },
+          { icon: '📊', label: 'Key Signal', text: 'Radically cuts per-task latency and token waste, rewriting cost curves' }
+        ];
+      } else if (tAll.includes('math') || tAll.includes('openai') || tAll.includes('proof') || tAll.includes('stokes') || tAll.includes('推理')) {
+        return isZh ? [
+          { icon: '🎯', label: '核心突破', text: '探索复杂数学猜想长思维链自推导，挑战千禧年数学难题' },
+          { icon: '⚡', label: '业界争议', text: '长链推导存在形式主义幻觉，学界呼吁引入确定性形式化验证' },
+          { icon: '📊', label: '指标信号', text: '黑盒推理自检能力仍待严密检验，单盲采信风险极高' }
+        ] : [
+          { icon: '🎯', label: 'Breakthrough', text: 'Frontier exploration of autonomous multi-step mathematical reasoning' },
+          { icon: '⚡', label: 'Dispute', text: 'Concerns over formal hallucinations versus deterministic theorem provers' },
+          { icon: '📊', label: 'Key Signal', text: 'Demands rigorous verification before relying on long reasoning chains' }
+        ];
+      } else if (tAll.includes('capex') || tAll.includes('cloud') || tAll.includes('tpu') || tAll.includes('war') || tAll.includes('算力') || tAll.includes('芯片') || tAll.includes('融资')) {
+        return isZh ? [
+          { icon: '🎯', label: '核心突破', text: '头部大厂加码高额定制算力与万卡集群，抢占下一代智力底座' },
+          { icon: '⚡', label: '生态博弈', text: '硬件负债与高昂调用成本迫使下游团队转向高性价比自适应路由' },
+          { icon: '📊', label: '指标信号', text: '算力军备与商业化 ROI 紧迫性倒挂，行业进入重资产洗牌期' }
+        ] : [
+          { icon: '🎯', label: 'Breakthrough', text: 'Massive capital commitments and custom TPU/GPU clusters for AGI infra' },
+          { icon: '⚡', label: 'Ecosystem', text: 'Escalating compute overhead drives builders to cost-efficient routing' },
+          { icon: '📊', label: 'Key Signal', text: 'Widening gap between heavy Capex investments and tangible business ROI' }
+        ];
+      } else if (tAll.includes('kling') || tAll.includes('video') || tAll.includes('visual') || tAll.includes('可灵') || tAll.includes('视频')) {
+        return isZh ? [
+          { icon: '🎯', label: '核心突破', text: '视频生成运镜与物理动态控制精度突破，加速商业化短片落地' },
+          { icon: '⚡', label: '工业落地', text: '创作者工作流大幅提效，结合分镜头脚本实现低成本批量渲染' },
+          { icon: '📊', label: '指标信号', text: '多模态生成正由纯娱乐玩梗向工业级视效辅助生产快速渗透' }
+        ] : [
+          { icon: '🎯', label: 'Breakthrough', text: 'Precision camera motion & dynamic physics control in video synthesis' },
+          { icon: '⚡', label: 'Production', text: 'Empowering indie creators with rapid multi-shot storyboard prototyping' },
+          { icon: '📊', label: 'Key Signal', text: 'Shifting from casual demos to enterprise-grade VFX production workflows' }
+        ];
+      } else {
+        return isZh ? [
+          { icon: '🎯', label: '核心突破', text: (title.slice(0, 28) || '前沿技术突破') + ' 展现前沿工程进展' },
+          { icon: '⚡', label: '范式影响', text: '激发学界与工程界在架构选型与成本效益上的双向审视' },
+          { icon: '📊', label: '落地关注', text: '建议在受限沙箱中充分验证性能边界与确定性交付质量' }
+        ] : [
+          { icon: '🎯', label: 'Milestone', text: 'Key engineering momentum in ' + (title.replace(/[\u4e00-\u9fff]+/g, '').slice(0, 30) || 'frontier AI') },
+          { icon: '⚡', label: 'Impact', text: 'Prompting architectural scrutiny across research and engineering' },
+          { icon: '📊', label: 'Takeaway', text: 'Validate boundary reliability and cost efficiency in sandboxes' }
+        ];
+      }
+    }
+
     function renderTopicFocus(topics) {
       if (!topics || !Array.isArray(topics) || topics.length === 0) return;
       const section = document.getElementById('topic-focus-section');
@@ -3646,6 +3703,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const conSpeaker = sm.con_author || (isZh ? (con.speaker_zh || "") : (con.speaker_en || ""));
           const conPoint = isZh ? (sm.con_point_zh || con.point_zh || "") : (con.point_en || "Pragmatic technical consideration.");
           const actionAdvice = isZh ? (sm.action_advice_zh || "") : (sm.action_advice_en || "Actionable intelligence for builders.");
+
+          const highlights = getTopicHighlights(t, isZh);
+          const highlightsHtml = highlights.map(h => `
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">${h.icon}</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">${escapeHtml(h.label)}:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">${escapeHtml(h.text)}</span>
+              </div>
+            </div>`).join('');
 
           const newsList = t.linked_news || [];
           const newsHtml = newsList.map(n => {
@@ -3730,6 +3797,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
                     ${escapeHtml(summary)}
                   </div>
+                  <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
+                  <div class="space-y-1.5 pt-1">
+                    ${highlightsHtml}
+                  </div>
                 </div>
                 <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
                   <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 ${isZh ? "核心爆发点" : "Core Milestone"}</span>
@@ -3769,7 +3840,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   </div>
                   ${actionAdvice ? `
                     <div class="p-2.5 rounded-xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
-                      <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 ${isZh ? "选型建议" : "Action Advice"}：</span>
+                      <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 ${isZh ? "选型建议：" : "Action Advice:"}</span>
                       <span class="leading-relaxed text-[11px] font-normal text-indigo-900 dark:text-indigo-200/95">${escapeHtml(actionAdvice)}</span>
                     </div>
                   ` : ''}
