@@ -334,6 +334,9 @@ def fetch_incremental_tweets(
 
     # 策略 B 查询合并：核心领袖 + 权威实验室 + 全网 AI 标签高热爆帖 (高内聚并发检索)
     all_queries = []
+    # 0. 关键焦点领袖极速保底通道（Codex 负责人 Tibo 等）
+    all_queries.append(("from:thsottiaux", 10))
+
     # 1. 核心 AI 顶尖领袖 (Top 25 舵手与核心科学家)
     core_leaders = LEADER_HANDLES[:25]
     q_leaders = "(" + " OR ".join([f"from:{h}" for h in core_leaders]) + ")"

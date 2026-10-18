@@ -592,10 +592,16 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
             if clean_paras:
                 result["article_content"] = "\n\n".join(clean_paras[:30])
 
-            # 侦测是否包含视频 (Brightcove, HTML5 video, YouTube, Vimeo, mp4, m3u8)
-            if re.search(r'<video\b|brightcove|jwplayer|youtube\.com/embed|player\.vimeo\.com|\.mp4\b|\.m3u8\b', html_text, re.I):
+            # 仅当落地页能提取到真实独立视频播放链接时才标记视频，严禁将普通网页文章 URL 赋给 video_url
+            m_embed = re.search(r'(?:youtube\.com/embed/|player\.vimeo\.com/video/)([\w\-]+)', html_text, re.I)
+            m_mp4 = re.search(r'https?://[^\s"\']+\.(?:mp4|m3u8)', html_text, re.I)
+            if m_embed:
+                vid_id = m_embed.group(1)
                 result["has_video"] = True
-                result["video_url"] = clean_url
+                result["video_url"] = f"https://www.youtube.com/watch?v={vid_id}"
+            elif m_mp4:
+                result["has_video"] = True
+                result["video_url"] = m_mp4.group(0)
 
     except Exception:
         pass
@@ -1336,10 +1342,10 @@ def build_dynamic_x_queries(extra_entities: Optional[List[str]] = None) -> List[
         models_pattern = '%22Claude+Opus+5.5%22+OR+%22Claude+Fable+5.1%22+OR+%22GPT-6%22+OR+%22GPT-5.6%22+OR+%22Claude+Code%22+OR+DeepSeek+OR+Gemini+OR+Grok'
     
     # 2. 突破行动词与多元重置 (Codex reset, Antigravity reset, Cursor reset, model reset, Vibe Coding, Agentic)
-    resets_pattern = '%22Codex+reset%22+OR+%22Antigravity+reset%22+OR+%22Cursor+reset%22+OR+%22model+reset%22+OR+%22vibe+coding%22+OR+%22AI+agent%22+OR+mcp+OR+%22test-time+compute%22'
+    resets_pattern = '%22limit+reset%22+OR+%22Codex+reset%22+OR+%22Antigravity+reset%22+OR+%22Cursor+reset%22+OR+%22model+reset%22+OR+%22vibe+coding%22+OR+%22AI+agent%22+OR+mcp+OR+%22test-time+compute%22'
     
-    # 3. 核心舵手、科学家与一线技术骨干 (Sam Altman, Karpathy, LeCun, Demis Hassabis, Ilya Sutskever, Dario Amodei, Noam Brown, Greg Brockman, Jim Fan, Dan Shipper, Logan Kilpatrick, Swyx, Bindu Reddy, Pieter Levels, Amjad Masad, Jason Wei, François Chollet 等)
-    leaders_pattern = 'sama+OR+karpathy+OR+ylecun+OR+demishassabis+OR+ilyasut+OR+DarioAmodei+OR+gdb+OR+polynoamial+OR+DrJimFan+OR+OfficialLoganK+OR+swyx+OR+danshipper+OR+alexandr_wang+OR+bindureddy+OR+svpino+OR+rowancheung+OR+samyamiam+OR+mikeyk+OR+alexalbert__+OR+levelsio+OR+amasad+OR+fchollet+OR+_jasonwei'
+    # 3. 核心舵手、科学家与一线技术骨干 (Thibault Sottiaux/Tibo, Sam Altman, Karpathy, LeCun, Demis Hassabis, Ilya Sutskever, Dario Amodei, Noam Brown, Greg Brockman, Jim Fan, Dan Shipper, Logan Kilpatrick, Swyx, Bindu Reddy, Pieter Levels, Amjad Masad, Jason Wei, François Chollet 等)
+    leaders_pattern = 'thsottiaux+OR+sama+OR+karpathy+OR+ylecun+OR+demishassabis+OR+ilyasut+OR+DarioAmodei+OR+gdb+OR+polynoamial+OR+DrJimFan+OR+OfficialLoganK+OR+swyx+OR+danshipper+OR+alexandr_wang+OR+bindureddy+OR+svpino+OR+rowancheung+OR+samyamiam+OR+mikeyk+OR+alexalbert__+OR+levelsio+OR+amasad+OR+fchollet+OR+_jasonwei'
     
     # 4. 官方旗舰认证账号 (OpenAI, Anthropic, Claude, DeepSeek, Cursor, GoogleDeepMind, xAI, Mistral, HuggingFace, LangChain, Qwen, Moonshot, Zhipu, MiniMax 等)
     official_pattern = 'from:OpenAI+OR+from:AnthropicAI+OR+from:ClaudeAI+OR+from:deepseek_ai+OR+from:cursor_ai+OR+from:GoogleDeepMind+OR+from:xai+OR+from:MistralAI+OR+from:huggingface+OR+from:LangChainAI+OR+from:Alibaba_Qwen+OR+from:MoonshotAI+OR+from:ZhipuAI+OR+from:MiniMax_AI+OR+from:ArtificialAnlys'

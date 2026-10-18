@@ -3359,7 +3359,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (!container) return;
 
-      const tiboResetTweet = (tweets || []).find(it => isTiboResetTweet(it));
+      const tiboResetTweet = (tweets || []).find(it => isTiboResetTweet(it)) || 
+                             (typeof allCeleb !== 'undefined' && Array.isArray(allCeleb) ? allCeleb.find(it => isTiboResetTweet(it)) : null) ||
+                             (window.newsData && window.newsData.grouped?.celebrity ? window.newsData.grouped.celebrity.find(it => isTiboResetTweet(it)) : null);
       const titleEl = document.getElementById('viral-ticker-title');
       const subtitleEl = document.getElementById('viral-ticker-subtitle');
       if (leadMedia || tiboResetTweet) {
@@ -3919,49 +3921,54 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ];
         return badPatterns.some(p => u.includes(p));
       };
+      const isRealPlayableVideo = (u) => {
+        if (!u || typeof u !== 'string') return false;
+        const s = u.toLowerCase();
+        return s.includes('youtube.com/watch') || s.includes('youtu.be/') || s.includes('.mp4') || s.includes('.m3u8') || s.includes('vimeo.com') || s.includes('bilibili.com');
+      };
       const hasRealImage = !!(item.image_url && !isFakeOrGenericCover(item.image_url));
       const cleanSource = item.source || "";
-      const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
+      const hasVideo = !!((item.has_video || (item.media_assets && item.media_assets.has_video)) && item.video_url && isRealPlayableVideo(item.video_url));
       const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
       const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
 
       const isMajorBreaking = (cardIndex === 0 && (item.hot_score >= 5 || item.is_major_breaking));
       if (isMajorBreaking) {
         return `
-        <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row gap-4 justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-lg hover:shadow-xl bg-gradient-to-br from-amber-50/50 via-white to-orange-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-amber-950/20 col-span-full relative" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
-          <div class="absolute -top-3 left-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-[10px] sm:text-xs font-black shadow-md flex items-center gap-1.5">
+        <article class="glass-card rounded-2xl p-4 flex flex-row gap-3.5 sm:gap-5 justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-md hover:shadow-xl bg-gradient-to-br from-amber-500/5 via-white to-orange-500/5 dark:from-slate-900 dark:via-slate-900/95 dark:to-amber-950/25 col-span-full relative" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
+          <div class="absolute -top-3 left-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-[10px] sm:text-xs font-black shadow-md flex items-center gap-1.5 z-10">
             <span>👑</span>
-            <span>${isZh ? '24h 重大破圈头条 · 全网焦点' : '24h Major Breakthrough Headline'}</span>
+            <span>${isZh ? '24h 重大快讯 · 头条聚焦' : '24h Major Breakthrough Headline'}</span>
           </div>
           ${hasRealImage ? `
-            <div class="w-full md:w-5/12 aspect-video rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0">
-              <img src="${optimizeImageUrl(item.image_url, 720)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
-              ${hasVideo ? `<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[10px] font-bold flex items-center gap-1 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
+            <div class="w-24 h-24 sm:w-44 sm:h-28 rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0 self-center">
+              <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
+              ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[9px] font-bold flex items-center gap-0.5 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
             </div>` : ''}
-          <div class="flex-1 flex flex-col justify-between space-y-2.5 min-w-0">
+          <div class="flex-1 flex flex-col justify-between space-y-2 min-w-0">
             <div>
-              <div class="flex items-center justify-between text-xs mb-1.5">
-                <div class="flex items-center space-x-2">
-                  <span class="font-extrabold text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">⚡ ${cleanSource}</span>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                  <span class="font-extrabold text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">⚡ ${cleanSource}</span>
                   ${todayBadge}
-                  <span class="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold">🔥 Hot 5.0</span>
+                  <span class="px-1.5 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[9px] font-bold">🔥 Hot 5.0</span>
                 </div>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <h3 class="font-black text-base sm:text-lg text-slate-900 dark:text-slate-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+              <h3 class="font-black text-sm sm:text-base text-slate-900 dark:text-slate-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug line-clamp-2">
                 ${title}
               </h3>
               ${specBadges}
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed">
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-3 mt-1 leading-relaxed">
                 ${summary}
               </p>
             </div>
-            <div class="flex items-center justify-between text-xs pt-2.5 border-t border-amber-200/50 dark:border-amber-900/40 text-slate-500 dark:text-slate-400">
-              <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
-                ⚡ ${isZh ? '点击查看 5W1H 深度研判与速读' : 'Click for In-depth 5W1H Briefing'}
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-amber-200/50 dark:border-amber-900/40 text-slate-500 dark:text-slate-400">
+              <span class="text-[11px] font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
+                ⚡ ${isZh ? '点击查看速读与AI深度研判' : 'Click for 5W1H Briefing'}
               </span>
               <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-amber-700 dark:text-amber-400 hover:text-amber-600 hover:underline font-bold">
-                ${isZh ? '官方公报 / 原文报道' : 'Official Report'} ↗
+                ${isZh ? '官方公报 / 源站' : 'Official Report'} ↗
               </a>
             </div>
           </div>
