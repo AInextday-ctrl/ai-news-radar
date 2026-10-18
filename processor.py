@@ -889,6 +889,68 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
     return None
 
 
+def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    强制执行中英双向语言规范：
+    1. title_zh, summary_zh 必须为合格中文；
+    2. title_en, summary_en 必须为纯正英文（0 个中文字符）；
+    3. 针对大V推特/名人发言，保障 quote_zh 与 full_text_zh 为流畅中文，quote_en 与 full_text_en 纯英文；
+    4. 针对 author_role_en, spec_tags_en 彻底消除中文字符。
+    """
+    if not isinstance(item, dict):
+        return item
+    
+    # 1. 确保中文标题
+    t_zh = str(item.get("title_zh") or "").strip()
+    if not any('\u4e00' <= c <= '\u9fff' for c in t_zh):
+        raw_src = item.get("title_en") or item.get("title") or ""
+        item["title_zh"] = clean_news_text(free_translate_zh(raw_src))
+    else:
+        item["title_zh"] = clean_news_text(t_zh)
+
+    # 2. 确保中文摘要
+    s_zh = str(item.get("summary_zh") or "").strip()
+    if not any('\u4e00' <= c <= '\u9fff' for c in s_zh):
+        raw_sum = item.get("summary_en") or item.get("content_snippet") or item.get("title_en") or item.get("title") or ""
+        item["summary_zh"] = clean_news_text(free_translate_zh(raw_sum) if len(raw_sum) > 20 else f"{item['title_zh']}。")
+    else:
+        item["summary_zh"] = clean_news_text(s_zh)
+
+    # 3. 确保英文标题与摘要 0 中文
+    t_en = str(item.get("title_en") or item.get("title") or "").strip()
+    if any('\u4e00' <= c <= '\u9fff' for c in t_en):
+        t_en = free_translate_en(t_en)
+    item["title_en"] = t_en
+
+    s_en = str(item.get("summary_en") or item.get("content_snippet") or item.get("title_en") or "").strip()
+    if any('\u4e00' <= c <= '\u9fff' for c in s_en):
+        s_en = free_translate_en(s_en)
+    item["summary_en"] = s_en
+
+    # 4. celebrity / 社交大V 字段双语治理
+    if item.get("category") == "celebrity":
+        for q_key in ["quote_zh", "full_text_zh"]:
+            val_zh = str(item.get(q_key) or "").strip()
+            if not any('\u4e00' <= c <= '\u9fff' for c in val_zh):
+                source_en = item.get("quote_en") or item.get("full_text_en") or item.get("title_en") or item.get("title") or ""
+                item[q_key] = clean_news_text(free_translate_zh(source_en))
+        for q_key in ["quote_en", "full_text_en"]:
+            val_en = str(item.get(q_key) or "").strip()
+            if any('\u4e00' <= c <= '\u9fff' for c in val_en):
+                item[q_key] = free_translate_en(val_en)
+        if item.get("author_role_en") and any('\u4e00' <= c <= '\u9fff' for c in str(item["author_role_en"])):
+            item["author_role_en"] = free_translate_en(str(item["author_role_en"]))
+        elif not item.get("author_role_en"):
+            item["author_role_en"] = "AI Engineer / Tech Builder"
+
+    # 5. spec_tags_en 0 中文
+    if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):
+        item["spec_tags_en"] = [re.sub(r'[\u4e00-\u9fff#]', '', str(t)).strip() for t in item["spec_tags_en"]]
+        item["spec_tags_en"] = [t for t in item["spec_tags_en"] if t] or ["AI", "Tech"]
+
+    return item
+
+
 def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> List[Dict[str, Any]]:
     """
     Process a list of items with Gemini in batches, or high-speed neural translator.
@@ -904,8 +966,10 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
         if "category" not in it:
             it["category"] = it.get("default_category", "news")
         
-        # 确保已有条目附带合格的 ai_analysis
-        if it.get("title_zh") and it.get("summary_zh"):
+        # 确保已有条目具备真实中文内容与合格的 ai_analysis
+        has_real_zh = any('\u4e00' <= c <= '\u9fff' for c in str(it.get("title_zh") or "")) and \
+                      any('\u4e00' <= c <= '\u9fff' for c in str(it.get("summary_zh") or ""))
+        if has_real_zh:
             if not it.get("ai_analysis"):
                 it["ai_analysis"] = generate_smart_ai_analysis(it, it.get("title_zh"))
             direct_items.append(it)
@@ -1082,12 +1146,41 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             for idx, orig_item in enumerate(chunk):
                 ai_data = parsed_dict.get(idx, {})
                 merged = dict(orig_item)
-                raw_title_zh = orig_item.get("title_zh") or ai_data.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
+                
+                # 严格提取并保障中文标题与摘要
+                orig_t_zh = orig_item.get("title_zh") if any('\u4e00' <= c <= '\u9fff' for c in str(orig_item.get("title_zh") or "")) else None
+                ai_t_zh = ai_data.get("title_zh") if any('\u4e00' <= c <= '\u9fff' for c in str(ai_data.get("title_zh") or "")) else None
+                raw_title_zh = ai_t_zh or orig_t_zh or free_translate_zh(orig_item.get("title", ""))
                 merged["title_zh"] = clean_news_text(raw_title_zh)
-                raw_summary_zh = orig_item.get("summary_zh") or ai_data.get("summary_zh") or generate_smart_fallback_summary(orig_item, merged["title_zh"])
+
+                orig_s_zh = orig_item.get("summary_zh") if any('\u4e00' <= c <= '\u9fff' for c in str(orig_item.get("summary_zh") or "")) else None
+                ai_s_zh = ai_data.get("summary_zh") if any('\u4e00' <= c <= '\u9fff' for c in str(ai_data.get("summary_zh") or "")) else None
+                raw_summary_zh = ai_s_zh or orig_s_zh or generate_smart_fallback_summary(orig_item, merged["title_zh"])
                 merged["summary_zh"] = clean_news_text(raw_summary_zh)
-                merged["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
-                merged["summary_en"] = clean_news_text(ai_data.get("ai_analysis", {}).get("briefing_en") or orig_item.get("summary_en") or orig_item.get("content_snippet", ""))
+
+                # 严格保障英文标题与摘要 0 中文
+                t_en = orig_item.get("title_en") or orig_item.get("title", "")
+                if any('\u4e00' <= c <= '\u9fff' for c in str(t_en)):
+                    t_en = free_translate_en(str(t_en))
+                merged["title_en"] = t_en
+
+                s_en = clean_news_text(ai_data.get("ai_analysis", {}).get("briefing_en") or orig_item.get("summary_en") or orig_item.get("content_snippet", ""))
+                if any('\u4e00' <= c <= '\u9fff' for c in str(s_en)):
+                    s_en = free_translate_en(str(s_en))
+                merged["summary_en"] = s_en
+
+                # 针对大V社交与快讯，严格保障引用与全文双语独立精翻
+                if merged.get("category") == "celebrity":
+                    for q_field in ["quote_zh", "full_text_zh"]:
+                        v_zh = str(merged.get(q_field) or "")
+                        if not any('\u4e00' <= c <= '\u9fff' for c in v_zh):
+                            source_en = merged.get("quote_en") or merged.get("full_text_en") or merged.get("title_en") or merged.get("title", "")
+                            merged[q_field] = clean_news_text(free_translate_zh(source_en))
+                    for q_field in ["quote_en", "full_text_en"]:
+                        v_en = str(merged.get(q_field) or "")
+                        if any('\u4e00' <= c <= '\u9fff' for c in v_en):
+                            merged[q_field] = free_translate_en(v_en)
+
                 if ai_data.get("article_content_zh"):
                     merged["article_content_zh"] = ai_data["article_content_zh"]
                 merged["category"] = orig_item.get("category") or ai_data.get("category") or orig_item.get("default_category", "news")
@@ -1121,7 +1214,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
                 fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
                 results.append(fallback)
-    all_final = direct_items + results
+    all_final = [sanitize_bilingual_item(it) for it in (direct_items + results)]
     # 🛡️ 强制执行语言质检与自愈哨兵流水线：对所有产出资讯进行双语对称性与纯净度门禁审查
     try:
         from language_sentinel import run_pipeline_language_audit

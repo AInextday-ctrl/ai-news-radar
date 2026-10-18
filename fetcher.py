@@ -48,9 +48,10 @@ from config import SOURCES, CELEBRITY_PROFILES, SCENARIO_TAGS, PRICING_TAGS
 from prompts_and_videos import get_curated_actionable_prompts as get_expanded_prompts, get_curated_tutorials as get_expanded_tutorials
 
 try:
-    from processor import free_translate_zh, clean_news_text
+    from processor import free_translate_zh, free_translate_en, clean_news_text
 except ImportError:
     def free_translate_zh(t: str) -> str: return t
+    def free_translate_en(t: str) -> str: return t
     def clean_news_text(t: str) -> str: return t
 
 HEADERS = {
@@ -2909,6 +2910,13 @@ def fetch_viral_social_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                                 surge_badge_val = default_badge
                                 post_tags = default_tags
 
+                            # 严格双语处理：英文为纯正原文，中文由神经翻译提炼，杜绝中英混用与裸露英文
+                            has_zh_text = any('\u4e00' <= c <= '\u9fff' for c in clean_t)
+                            clean_t_zh = clean_t if has_zh_text else clean_news_text(free_translate_zh(clean_t))
+                            clean_t_en = clean_t if not has_zh_text else free_translate_en(clean_t)
+                            clean_tags_en = [re.sub(r'[\u4e00-\u9fff#]', '', t).strip() for t in post_tags]
+                            clean_tags_en = [t for t in clean_tags_en if t] or ["AI", "Trending"]
+
                             items.append({
                                 "id": f"viral_{item_id}",
                                 "category": "celebrity",
@@ -2919,20 +2927,23 @@ def fetch_viral_social_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                                 "author_handle": author_handle,
                                 "author_avatar": author_avatar,
                                 "author_role": "AI 极客 / 社区开发者",
+                                "author_role_zh": "AI 极客 / 社区开发者",
+                                "author_role_en": "AI Engineer / Tech Builder",
                                 "entity_type": "person",
-                                "title": clean_t,
-                                "title_en": clean_t,
-                                "title_zh": clean_t,
-                                "quote_zh": clean_t,
-                                "quote_en": clean_t,
-                                "full_text_zh": clean_t,
-                                "full_text_en": clean_t,
+                                "title": clean_t_zh,
+                                "title_en": clean_t_en,
+                                "title_zh": clean_t_zh,
+                                "quote_zh": clean_t_zh,
+                                "quote_en": clean_t_en,
+                                "full_text_zh": clean_t_zh,
+                                "full_text_en": clean_t_en,
                                 "url": real_url,
                                 "raw_published_at": iso_time,
                                 "metrics": post_metrics,
                                 "surge_badge": surge_badge_val,
+                                "surge_badge_en": "🔥 24H Trending" if "24H" in str(surge_badge_val) else "⚡ Frontier Lead",
                                 "spec_tags": post_tags,
-                                "spec_tags_en": [t.replace("#", "") for t in post_tags],
+                                "spec_tags_en": clean_tags_en,
                                 "source": f"{'Threads' if is_threads else '𝕏 (Twitter)'} · {author_handle}"
                             })
                             track_added += 1

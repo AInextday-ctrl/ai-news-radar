@@ -144,7 +144,7 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
                 item["title"] = item["title_zh"]
 
             sum_zh = str(item.get("summary_zh") or "").strip()
-            if not sum_zh or has_chinglish_seams(sum_zh):
+            if not sum_zh or not has_cjk(sum_zh) or has_chinglish_seams(sum_zh):
                 wk_s = int(item.get("weekly_stars") or (item.get("metrics") or {}).get("weekly_stars") or 0)
                 stars_tot = int(item.get("stars") or (item.get("metrics") or {}).get("stars") or 0)
                 if item.get("tool_origin") == "github" and wk_s > 0:
@@ -285,6 +285,55 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
                     elems_zh[k] = clean_news_text(free_translate_zh(str(v)[:120]))
                     fixes.append(f"ai_analysis.elements_zh.{k} 自动翻译为中文")
 
+    # 5. celebrity 社交大V 原文引用与全文实录治理 (保证 quote_zh/full_text_zh 纯中文，quote_en/full_text_en 纯英文)
+    if cat == "celebrity" or item.get("sub_category") == "viral_post" or item.get("is_viral"):
+        q_zh = item.get("quote_zh") or ""
+        if not q_zh or not is_pure_chinese_paragraph(q_zh, min_chars=6):
+            source_en = item.get("quote_en") or item.get("full_text_en") or item.get("content_snippet") or item.get("title_en") or item.get("title") or ""
+            if source_en:
+                trans_q = clean_news_text(free_translate_zh(source_en[:350]))
+                if is_pure_chinese_paragraph(trans_q, min_chars=6):
+                    item["quote_zh"] = normalize_ai_terminology_zh(trans_q)
+                    fixes.append("celebrity.quote_zh 自动翻译重构为纯中文")
+                else:
+                    item["quote_zh"] = normalize_ai_terminology_zh(f"{item.get('title_zh', '科技领袖最新深度发声')}。")
+            else:
+                item["quote_zh"] = normalize_ai_terminology_zh(f"{item.get('title_zh', '科技领袖最新深度发声')}。")
+        else:
+            item["quote_zh"] = normalize_ai_terminology_zh(clean_news_text(q_zh))
+
+        ft_zh = item.get("full_text_zh") or ""
+        if not ft_zh or not is_pure_chinese_paragraph(ft_zh, min_chars=6):
+            item["full_text_zh"] = item["quote_zh"]
+            fixes.append("celebrity.full_text_zh 同步对齐纯中文引用")
+        else:
+            item["full_text_zh"] = normalize_ai_terminology_zh(clean_news_text(ft_zh))
+
+        q_en = item.get("quote_en") or item.get("title_en") or ""
+        if not q_en or has_cjk(q_en):
+            item["quote_en"] = free_translate_en(strip_chinglish_to_english(q_en) or item.get("quote_zh") or "Influential technical perspective and frontier update.")
+            fixes.append("celebrity.quote_en 纯英文自愈")
+        ft_en = item.get("full_text_en") or item.get("content_snippet") or item["quote_en"]
+        if not ft_en or has_cjk(ft_en):
+            item["full_text_en"] = free_translate_en(strip_chinglish_to_english(ft_en) or item.get("full_text_zh") or item["quote_en"])
+            fixes.append("celebrity.full_text_en 纯英文自愈")
+
+        if item.get("author_role_en") and has_cjk(item["author_role_en"]):
+            item["author_role_en"] = free_translate_en(str(item["author_role_en"]))
+            fixes.append("celebrity.author_role_en 纯英文自愈")
+        elif not item.get("author_role_en"):
+            item["author_role_en"] = "AI Engineer / Tech Builder"
+
+    # 6. 全量 *_en 字段严禁中文字符硬性兜底
+    for en_field in ("title_en", "summary_en", "author_role_en", "best_for_en"):
+        val = item.get(en_field)
+        if val and has_cjk(val):
+            item[en_field] = free_translate_en(strip_chinglish_to_english(str(val)))
+            fixes.append(f"{en_field} 剔除残余中文字符")
+    if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):
+        item["spec_tags_en"] = [re.sub(r'[\u4e00-\u9fff#]', '', str(t)).strip() for t in item["spec_tags_en"]]
+        item["spec_tags_en"] = [t for t in item["spec_tags_en"] if t] or ["AI", "Tech"]
+
     return item, fixes
 
 
@@ -332,17 +381,38 @@ if __name__ == "__main__":
         if verify_only:
             violations = 0
             for idx, it in enumerate(items):
+                # 检查中文长文
                 zh = it.get("article_content_zh")
                 if zh:
                     paras = [p.strip() for p in re.split(r'\n+', str(zh)) if p.strip()]
                     for p in paras:
                         if not is_pure_chinese_paragraph(p, min_chars=6):
                             violations += 1
-                            print(f"❌ 违规条目 [{it.get('id')}]: {p[:60]}...")
+                            print(f"❌ 违规长文段落 [{it.get('id')}]: {p[:60]}...")
+                # 检查标题与摘要必须具备中文
+                for f_zh in ("title_zh", "summary_zh"):
+                    v = str(it.get(f_zh) or "")
+                    if v and not re.search(r'[\u4e00-\u9fff]', v):
+                        violations += 1
+                        print(f"❌ 缺少中文内容 [{it.get('id')}][{f_zh}]: {v[:60]}...")
+                # 检查大V引用与全文必须具备中文
+                if it.get("category") == "celebrity":
+                    for f_zh in ("quote_zh", "full_text_zh"):
+                        v = str(it.get(f_zh) or "")
+                        if v and not re.search(r'[\u4e00-\u9fff]', v):
+                            violations += 1
+                            print(f"❌ 引用/全文缺少中文 [{it.get('id')}][{f_zh}]: {v[:60]}...")
+                # 检查所有英文字段严禁中文字符
+                for f_en in ("title_en", "summary_en", "author_role_en", "quote_en", "full_text_en", "best_for_en"):
+                    v = str(it.get(f_en) or "")
+                    if v and re.search(r'[\u4e00-\u9fff]', v):
+                        violations += 1
+                        print(f"❌ 英文字段含中文字符 [{it.get('id')}][{f_en}]: {v[:60]}...")
+
             if violations == 0:
-                print(f"✅ 质检通过：{len(items)} 条资讯 100% 满足纯正语言规范！")
+                print(f"✅ 质检通过：{len(items)} 条资讯 100% 满足严格双语纯净度规范！")
             else:
-                print(f"⚠️ 质检发现 {violations} 处不合规段落！")
+                print(f"⚠️ 质检发现 {violations} 处语言规范不达标！将触发自愈修复...")
                 sys.exit(1)
         else:
             cleaned, stats = run_pipeline_language_audit(items)

@@ -1302,16 +1302,25 @@ def save_news(items: list):
                 if is_fake or len(raw_ins.strip()) < 10:
                     ana[i_field] = ""
 
-        # 3. 确保所有 celebrity 领袖观点条目均具备规范的 quote 与 full_text 双语字段
+        # 3. 确保所有 celebrity 领袖观点条目均具备纯正独立的 quote 与 full_text 双语字段
         if it.get("category") == "celebrity":
-            if not it.get("full_text_en"):
-                it["full_text_en"] = it.get("content_snippet") or it.get("title_en") or it.get("title") or ""
-            if not it.get("full_text_zh"):
-                it["full_text_zh"] = it.get("summary_zh") or it.get("title_zh") or it.get("title") or ""
-            if not it.get("quote_zh"):
-                it["quote_zh"] = it.get("title_zh") or it.get("title") or ""
-            if not it.get("quote_en"):
-                it["quote_en"] = it.get("title_en") or it.get("title") or ""
+            # 保证英文引用与全文 0 中文
+            if not it.get("full_text_en") or any('\u4e00' <= c <= '\u9fff' for c in str(it.get("full_text_en", ""))):
+                it["full_text_en"] = free_translate_en(str(it.get("content_snippet") or it.get("title_en") or it.get("title") or ""))
+            if not it.get("quote_en") or any('\u4e00' <= c <= '\u9fff' for c in str(it.get("quote_en", ""))):
+                it["quote_en"] = free_translate_en(str(it.get("title_en") or it.get("title") or ""))
+            if it.get("author_role_en") and any('\u4e00' <= c <= '\u9fff' for c in str(it["author_role_en"])):
+                it["author_role_en"] = free_translate_en(str(it["author_role_en"]))
+            elif not it.get("author_role_en"):
+                it["author_role_en"] = "AI Engineer / Tech Builder"
+
+            # 保证中文引用与全文 100% 为地道中文，绝不裸露英文原文
+            if not it.get("full_text_zh") or not any('\u4e00' <= c <= '\u9fff' for c in str(it.get("full_text_zh", ""))):
+                src_en = it.get("full_text_en") or it.get("content_snippet") or it.get("title_en") or it.get("title") or ""
+                it["full_text_zh"] = clean_news_text(free_translate_zh(src_en))
+            if not it.get("quote_zh") or not any('\u4e00' <= c <= '\u9fff' for c in str(it.get("quote_zh", ""))):
+                src_en = it.get("quote_en") or it.get("title_en") or it.get("title") or ""
+                it["quote_zh"] = clean_news_text(free_translate_zh(src_en))
 
         # 3.5 严格清洗落地场景·实用工具（彻底剥除第三方平台 Product Hunt / GitHub 痕迹，统一官网直连与 ref=ainewsradar）
         if it.get("category") == "tools" or it.get("platform") == "producthunt":
