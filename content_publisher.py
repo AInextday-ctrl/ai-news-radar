@@ -1879,6 +1879,33 @@ def is_valid_tweet_image_url(url: str) -> bool:
     return False
 
 
+def format_tweet_publish_time(it: dict, is_zh: bool) -> tuple:
+    """
+    解析推文真实发布时间并返回 (full_time_display, relative_display)
+    如 ('10-18 00:20 · 20h前', '20h前') 或 ('10-18 00:20 · 20h ago', '20h ago')
+    """
+    raw_time = it.get("raw_published_at") or it.get("pubDate") or it.get("date") or it.get("created_at") or ""
+    if not raw_time:
+        return ("24h 实时" if is_zh else "24h Live", "24h")
+    try:
+        dt = datetime.fromisoformat(str(raw_time).replace("Z", "+00:00"))
+        tz_cst = timezone(timedelta(hours=8))
+        dt_cst = dt.astimezone(tz_cst)
+        now_cst = datetime.now(tz_cst)
+        diff_h = max(0.1, (now_cst - dt_cst).total_seconds() / 3600.0)
+        if diff_h < 1.0:
+            rel_str = f"{max(1, int(diff_h * 60))}m前" if is_zh else f"{max(1, int(diff_h * 60))}m ago"
+        elif diff_h < 24.0:
+            rel_str = f"{int(diff_h)}h前" if is_zh else f"{int(diff_h)}h ago"
+        else:
+            days = int(diff_h / 24.0)
+            rel_str = f"{days}d前" if is_zh else f"{days}d ago"
+        dt_str = dt_cst.strftime("%m-%d %H:%M")
+        return (f"{dt_str} · {rel_str}", rel_str)
+    except Exception:
+        return ("24h 实时" if is_zh else "24h Live", "24h")
+
+
 def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     if is_zh:
@@ -1903,11 +1930,11 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
             raw_role = "AI 领袖 / 核心开发者" if is_zh else "AI Pioneer & Builder"
     role = safe_text(raw_role, 60)
     
+    time_str, _ = format_tweet_publish_time(it, is_zh)
     if is_zh:
         raw_text = it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
         text = safe_text(raw_text, 250)
-        time_str = "24h 实时"
         btn_text = "查看原帖 ↗"
     else:
         raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
@@ -1915,7 +1942,6 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         if re.search(r'[\u4e00-\u9fff]', raw_text):
             raw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_text).strip() or "Frontier AI development."
         text = safe_text(raw_text, 250)
-        time_str = "24h Live"
         btn_text = "View Post ↗"
 
     u = it.get("url", "#")
@@ -1960,7 +1986,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
             card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
 
         return f"""
-              <article class="relative rounded-2xl p-3.5 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
                 <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
@@ -1991,7 +2017,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
-                    <span>⚡</span>
+                    <span>🕒</span>
                     <span>{time_str}</span>
                   </span>
                   <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline flex items-center gap-0.5">
@@ -2002,7 +2028,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         pill_cls = "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25" if theme == "indigo" else "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25"
         return f"""
-              <article class="relative rounded-2xl p-3.5 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -2025,7 +2051,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 {time_str}</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 {time_str}</span>
                   <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     {btn_text}
                   </a>
@@ -2042,6 +2068,7 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
         else (it.get("author_role") if is_zh else it.get("author_role_en")),
         60
     )
+    pub_time_display, pub_time_rel = format_tweet_publish_time(it, is_zh)
     if is_zh:
         raw_text = it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
@@ -2091,7 +2118,7 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
         </div>"""
 
     return f"""
-              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
+              <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
                 bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
                 border-2 border-amber-400 dark:border-amber-300/90
                 shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
@@ -2109,7 +2136,7 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">{handle} · {role}</span>
+                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">{handle} · {role} · {pub_time_rel}</span>
                       </div>
                     </div>
                     <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
@@ -2127,12 +2154,15 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                     {thumb_html}
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
-                  <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
-                    <span class="animate-pulse text-amber-500">⚡</span>
-                    <span>{spotlight_tag}</span>
-                  </span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-1.5">
+                  <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
+                    <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold shrink-0">
+                      <span class="animate-pulse text-amber-500">⚡</span>
+                      <span>{spotlight_tag}</span>
+                    </span>
+                    <span class="font-mono text-[9.5px] px-1.5 py-0.5 rounded bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-semibold shrink-0" title="{'推文发布时间 (北京时间 UTC+8)' if is_zh else 'Tweet Publish Time (UTC+8)'}">🕒 {pub_time_display}</span>
+                  </div>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0">
                     <span>{btn_text}</span>
                   </a>
                 </div>

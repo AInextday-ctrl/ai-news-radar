@@ -2974,6 +2974,47 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'].some(ext => u.includes(ext));
     }
 
+    function formatTweetPublishTime(item, isZh) {
+      const rawTime = (item && (item.raw_published_at || item.pubDate || item.date || item.created_at)) || '';
+      if (!rawTime) return { display: isZh ? '24h 实时' : '24h Live', rel: isZh ? '24h' : '24h', dtStr: '' };
+      try {
+        const date = new Date(rawTime);
+        if (isNaN(date.getTime())) return { display: isZh ? '24h 实时' : '24h Live', rel: isZh ? '24h' : '24h', dtStr: '' };
+
+        // 统一转换为北京时间 (UTC+8) 显示
+        const utcMs = date.getTime();
+        const cstDate = new Date(utcMs + 8 * 3600 * 1000);
+        const M = String(cstDate.getUTCMonth() + 1).padStart(2, '0');
+        const D = String(cstDate.getUTCDate()).padStart(2, '0');
+        const h = String(cstDate.getUTCHours()).padStart(2, '0');
+        const m = String(cstDate.getUTCMinutes()).padStart(2, '0');
+        const dtStr = `${M}-${D} ${h}:${m}`;
+
+        const now = new Date();
+        const diffSec = Math.max(0, Math.floor((now.getTime() - utcMs) / 1000));
+        let rel = '';
+        if (diffSec < 60) {
+          rel = isZh ? '刚刚' : 'Just now';
+        } else if (diffSec < 3600) {
+          const mins = Math.max(1, Math.floor(diffSec / 60));
+          rel = isZh ? `${mins}m前` : `${mins}m ago`;
+        } else if (diffSec < 86400) {
+          const hours = Math.max(1, Math.floor(diffSec / 3600));
+          rel = isZh ? `${hours}h前` : `${hours}h ago`;
+        } else {
+          const days = Math.floor(diffSec / 86400);
+          rel = isZh ? `${days}d前` : `${days}d ago`;
+        }
+        return {
+          display: `${dtStr} · ${rel}`,
+          rel,
+          dtStr
+        };
+      } catch (e) {
+        return { display: isZh ? '24h 实时' : '24h Live', rel: isZh ? '24h' : '24h', dtStr: '' };
+      }
+    }
+
     function renderViralTickerCard(item, isZh, cardIdx = 0) {
       const tagInfo = resolveViralTweetTag(item, isZh);
       const isHl = tagInfo.isHl;
@@ -2993,7 +3034,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
       const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@', '')}`, 80);
-      const timeStr = isZh ? '24h 实时' : '24h Live';
+      const timeInfo = formatTweetPublishTime(item, isZh);
+      const timeStr = timeInfo.display;
       const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
       const url = item.url || '#';
       const visCls = cardIdx === 0 ? "flex" : "hidden md:flex";
@@ -3036,7 +3078,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         return `
-          <article class="relative rounded-2xl p-3.5 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <article class="relative rounded-2xl p-3 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
             <div class="absolute -top-[2px] left-4 right-4 h-[3px] ${topLine} rounded-full"></div>
             <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
               <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
@@ -3067,7 +3109,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
               <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
-                <span>⚡</span>
+                <span>🕒</span>
                 <span>${timeStr}</span>
               </span>
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5">
@@ -3081,7 +3123,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           ? "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25"
           : "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25";
         return `
-          <article class="relative rounded-2xl p-3.5 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <article class="relative rounded-2xl p-3 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
             <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
               <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                 <div class="flex items-center space-x-2 min-w-0">
@@ -3104,7 +3146,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
             <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-              <span class="font-mono text-slate-400">🕒 ${timeStr}</span>
+              <span class="font-mono text-slate-500 dark:text-slate-400">🕒 ${timeStr}</span>
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                 ${btnText}
               </a>
@@ -3131,6 +3173,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const btnText = isZh ? '查看原帖 ↗' : 'View Post ↗';
       const statusId = item.status_id || (item.url && item.url.match(/status\/(\d+)/) ? item.url.match(/status\/(\d+)/)[1] : '');
       const url = statusId ? `https://x.com/thsottiaux/status/${statusId}` : ((item.url && item.url.includes('thsottiaux') && item.url.includes('/status/')) ? item.url : 'https://x.com/thsottiaux/status/2110595484180214059');
+      const timeInfo = formatTweetPublishTime(item, isZh);
+      const pubTimeDisplay = timeInfo.display;
+      const pubTimeRel = timeInfo.rel;
 
       const twImg = item.image_url || item.media || '';
       let thumbHtml = '';
@@ -3148,7 +3193,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
+        <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
           bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
           border-2 border-amber-400 dark:border-amber-300/90
           shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
@@ -3166,7 +3211,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                     <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${author}</span>
                     <span class="text-sky-500 text-[10px] font-black">✓</span>
                   </div>
-                  <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">${handle} · ${role}</span>
+                  <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">${handle} · ${role} · ${pubTimeRel}</span>
                 </div>
               </div>
               <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
@@ -3184,12 +3229,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               ${thumbHtml}
             </div>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
-            <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
-              <span class="animate-pulse text-amber-500">⚡</span>
-              <span>${spotlightTag}</span>
-            </span>
-            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5" onclick="event.stopPropagation()">
+          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-1.5">
+            <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
+              <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold shrink-0">
+                <span class="animate-pulse text-amber-500">⚡</span>
+                <span>${spotlightTag}</span>
+              </span>
+              <span class="font-mono text-[9.5px] px-1.5 py-0.5 rounded bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-semibold shrink-0" title="${isZh ? '推文发布时间 (北京时间 UTC+8)' : 'Tweet Publish Time (UTC+8)'}">🕒 ${pubTimeDisplay}</span>
+            </div>
+            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0" onclick="event.stopPropagation()">
               <span>${btnText}</span>
             </a>
           </div>
@@ -3497,8 +3545,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       window.viralTickerCurrentPage = (window.viralTickerCurrentPage + direction + pages.length) % pages.length;
       
-      const pageEl = pages[0];
-      const step = pageEl ? (pageEl.offsetHeight + 16) : ((window.innerWidth >= 768 ? 180 : 145) + 16);
+      const targetH = window.innerWidth >= 768 ? 180 : 145;
+      const step = targetH + 16;
       const offset = window.viralTickerCurrentPage * step;
       slider.style.transform = `translateY(-${offset}px)`;
       updateTickerPageUI(window.viralTickerCurrentPage + 1, pages.length);

@@ -1468,18 +1468,38 @@ ins.adsbygoogle iframe {
     }
 
     /* Viral Ticker Viewport & Slider Vertical Auto-Carousel */
-    #viral-ticker-viewport {
+    #viral-ticker-viewport,
+    #viral-ticker-pinned {
       position: relative;
       overflow: hidden !important;
-      height: 480px;
-      max-height: 480px;
-      transition: height 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+      height: 145px !important;
+      max-height: 145px !important;
+      box-sizing: border-box !important;
+    }
+
+    #viral-ticker-viewport .viral-ticker-page,
+    #viral-ticker-pinned > article {
+      height: 145px !important;
+      max-height: 145px !important;
+      box-sizing: border-box !important;
+    }
+
+    #viral-ticker-viewport .viral-ticker-page > article {
+      height: 100% !important;
+      max-height: 100% !important;
+      box-sizing: border-box !important;
     }
 
     @media (min-width: 768px) {
-      #viral-ticker-viewport {
-        height: 155px;
-        max-height: 155px;
+      #viral-ticker-viewport,
+      #viral-ticker-pinned {
+        height: 180px !important;
+        max-height: 180px !important;
+      }
+      #viral-ticker-viewport .viral-ticker-page,
+      #viral-ticker-pinned > article {
+        height: 180px !important;
+        max-height: 180px !important;
       }
     }
 

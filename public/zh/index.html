@@ -87,8 +87,8 @@
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//media.beehiiv.com/cdn-cgi/image/fit%3Dscale-down%2Cquality%3D80%2Cwidth%3D1200%2Conerror%3Dredirect/uploads/asset/file/c34007e3-a820-4426-8999-0c1d14cac551/Joanna-microsoft-nl-4__1_.jpg%3Ft%3D1792065245&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=6.0.0">
-  <link rel="preload" href="/zh/js/app.min.js?v=6.0.0" as="script">
+  <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
+  <link rel="preload" href="/zh/js/app.min.js?v=6.1.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -115,20 +115,32 @@
       content-visibility: auto;
       contain-intrinsic-size: auto 200px;
     }
-    #viral-ticker-viewport {
-      height: 145px;
+    #viral-ticker-viewport,
+    #viral-ticker-pinned {
+      height: 145px !important;
+      max-height: 145px !important;
       overflow: hidden;
       contain: paint layout;
     }
-    #viral-ticker-pinned {
-      height: 145px;
+    #viral-ticker-viewport .viral-ticker-page,
+    #viral-ticker-pinned > article {
+      height: 145px !important;
+      max-height: 145px !important;
+    }
+    #viral-ticker-viewport .viral-ticker-page > article {
+      height: 100% !important;
+      max-height: 100% !important;
     }
     @media (min-width: 768px) {
-      #viral-ticker-viewport {
-        height: 180px;
-      }
+      #viral-ticker-viewport,
       #viral-ticker-pinned {
-        height: 180px;
+        height: 180px !important;
+        max-height: 180px !important;
+      }
+      #viral-ticker-viewport .viral-ticker-page,
+      #viral-ticker-pinned > article {
+        height: 180px !important;
+        max-height: 180px !important;
       }
     }
     #header-actions-bar {
@@ -577,7 +589,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
               <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
                 
-              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
+              <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
                 bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
                 border-2 border-amber-400 dark:border-amber-300/90
                 shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
@@ -595,7 +607,7 @@
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">Thibault Sottiaux (Tibo)</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">@thsottiaux · OpenAI Codex 负责人 / 前端平台总监</span>
+                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">@thsottiaux · OpenAI Codex 负责人 / 前端平台总监 · 12h前</span>
                       </div>
                     </div>
                     <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
@@ -616,12 +628,15 @@
         </div>
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
-                  <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
-                    <span class="animate-pulse text-amber-500">⚡</span>
-                    <span>24h 独家聚焦 · 锁定首位</span>
-                  </span>
-                  <a href="https://x.com/thsottiaux/status/2111492673890824348" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5">
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-1.5">
+                  <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
+                    <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold shrink-0">
+                      <span class="animate-pulse text-amber-500">⚡</span>
+                      <span>24h 独家聚焦 · 锁定首位</span>
+                    </span>
+                    <span class="font-mono text-[9.5px] px-1.5 py-0.5 rounded bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-semibold shrink-0" title="推文发布时间 (北京时间 UTC+8)">🕒 10-18 00:20 · 12h前</span>
+                  </div>
+                  <a href="https://x.com/thsottiaux/status/2111492673890824348" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0">
                     <span>查看原帖 ↗</span>
                   </a>
                 </div>
@@ -674,7 +689,7 @@
     </div>
     
 
-              <article class="relative rounded-2xl p-3.5 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -697,7 +712,7 @@
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 08:11 · 4h前</span>
                   <a href="https://x.com/elonmusk/status/2111610981046452541" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
@@ -706,7 +721,7 @@
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -738,14 +753,14 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-17 16:35 · 20h前</span>
                   <a href="https://x.com/deepseek_ai/status/2111375646223933650" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -770,7 +785,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 06:29 · 6h前</span>
                   <a href="https://x.com/OpenAIDevs/status/2111585491237650691" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
@@ -779,7 +794,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -802,14 +817,14 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 00:31 · 12h前</span>
                   <a href="https://x.com/thsottiaux/status/2111495392559067199" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -836,7 +851,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 09:39 · 3h前</span>
                   <a href="https://x.com/TimSweeneyEpic/status/2111633221725122769" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
@@ -845,7 +860,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -877,14 +892,14 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 08:57 · 3h前</span>
                   <a href="https://x.com/LiquidHbox/status/2111622668130697268" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -911,7 +926,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 07:46 · 5h前</span>
                   <a href="https://x.com/addyosmani/status/2111604705340326393" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
@@ -920,7 +935,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
 
-              <article class="relative rounded-2xl p-3.5 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
+              <article class="relative rounded-2xl p-3 hidden md:flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
@@ -952,7 +967,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-400">🕒 24h 实时</span>
+                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 10-18 06:59 · 5h前</span>
                   <a href="https://x.com/0xProbabillity/status/2111593016767270980" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
                     查看原帖 ↗
                   </a>
@@ -3115,7 +3130,7 @@ DeepSeek-V4.1-Flash-1017 使用带有自反馈的强化学习来改进从游戏�
     <span id="copy-toast-msg">已复制到剪贴板！</span>
   </div>
 
-  <script defer src="/zh/js/app.min.js?v=6.0.0"></script>
+  <script defer src="/zh/js/app.min.js?v=6.1.0"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
