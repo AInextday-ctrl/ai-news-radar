@@ -322,8 +322,10 @@ def run_pipeline_language_audit(items: List[Dict[str, Any]], max_workers: int = 
 if __name__ == "__main__":
     # 支持命令行独立自检与校验测试
     verify_only = "--verify-only" in sys.argv
-    test_file = "public/data/latest_news.json"
-    if os.path.exists(test_file):
+    target_files = ["public/data/latest_news.json", "data/latest_news.json"]
+    for test_file in target_files:
+        if not os.path.exists(test_file):
+            continue
         with open(test_file, "r", encoding="utf-8") as f:
             d = json.load(f)
         items = d.get("items") or [it for cat in d.get("grouped", {}).values() if isinstance(cat, list) for it in cat]
@@ -339,13 +341,17 @@ if __name__ == "__main__":
                             print(f"❌ 违规条目 [{it.get('id')}]: {p[:60]}...")
             if violations == 0:
                 print(f"✅ 质检通过：{len(items)} 条资讯 100% 满足纯正语言规范！")
-                sys.exit(0)
             else:
                 print(f"⚠️ 质检发现 {violations} 处不合规段落！")
                 sys.exit(1)
         else:
             cleaned, stats = run_pipeline_language_audit(items)
             d["items"] = cleaned
+            if "grouped" in d and isinstance(d["grouped"], dict):
+                for cat_k in d["grouped"]:
+                    if isinstance(d["grouped"][cat_k], list):
+                        d["grouped"][cat_k] = [it for it in cleaned if it.get("category") == cat_k]
             with open(test_file, "w", encoding="utf-8") as f:
                 json.dump(d, f, ensure_ascii=False, indent=2)
-            print("🎉 质检与自愈完成并已写回。")
+            print(f"🎉 质检与自愈完成并已写回: {test_file}")
+

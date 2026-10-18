@@ -1790,8 +1790,6 @@ def save_news(items: list):
         # 同步更新 latest_payload 中的分类列表与全网爆帖列表
         for cat_k in CATEGORIES:
             cat_items = [it for it in recent_final if it.get("category") == cat_k]
-            if cat_k == "tools":
-                cat_items = _interleave_tools_multi_source(cat_items)
             latest_payload["grouped"][cat_k] = cat_items
 
         viral_list = [it for it in recent_final if it.get("sub_category") == "viral_post" or (it.get("category") == "celebrity" and it.get("is_viral"))]
