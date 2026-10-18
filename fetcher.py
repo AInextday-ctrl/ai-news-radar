@@ -2967,16 +2967,25 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
     items = []
 
     # 1. 优先注入 𝕏 (Twitter) 顶尖领袖与核心工程师矩阵 (马斯克/奥特曼/Noam Brown/Brockman/LeCun/Karpathy等) 及全网高热爆文
-    x_posts = fetch_x_leader_posts(max_items=80)
-    items.extend(x_posts)
+    try:
+        x_posts = fetch_x_leader_posts(max_items=80)
+        items.extend(x_posts)
+    except Exception as e:
+        print(f"  ⚠️ fetch_x_leader_posts 异常: {e}")
 
     # 2. 实时抓取当天全网轰动的 𝕏 爆款推文与大V交锋
-    live_x_posts = fetch_live_trending_x_posts(max_items=30)
-    items.extend(live_x_posts)
+    try:
+        live_x_posts = fetch_live_trending_x_posts(max_items=30)
+        items.extend(live_x_posts)
+    except Exception as e:
+        print(f"  ⚠️ fetch_live_trending_x_posts 异常: {e}")
 
     # 2.5 实时捕获 24h 全网平台爆帖 (𝕏 & Threads 野生极客与现象级突破，万级阅读/千赞)
-    viral_posts = fetch_viral_social_posts(max_items=35)
-    items.extend(viral_posts)
+    try:
+        viral_posts = fetch_viral_social_posts(max_items=35)
+        items.extend(viral_posts)
+    except Exception as e:
+        print(f"  ⚠️ fetch_viral_social_posts 异常: {e}")
 
     # 3. 全球顶级硬核科技与前沿 AI 媒体 (100% 具备详实深度长导语与高清摄影原图)
     news_sources = [
@@ -2990,11 +2999,17 @@ def fetch_news_and_celebrities() -> List[Dict[str, Any]]:
         ("mit_tech_review", 6)    # 麻省理工科技评论官方长文
     ]
     for key, count in news_sources:
-        items.extend(fetch_rss_channel(key, max_items=count))
+        try:
+            items.extend(fetch_rss_channel(key, max_items=count))
+        except Exception as e:
+            print(f"  ⚠️ fetch_rss_channel({key}) 异常: {e}")
 
     # 4. Hacker News 极客热榜
-    hn_items = fetch_hacker_news(max_items=8)
-    items.extend(hn_items)
+    try:
+        hn_items = fetch_hacker_news(max_items=8)
+        items.extend(hn_items)
+    except Exception as e:
+        print(f"  ⚠️ fetch_hacker_news 异常: {e}")
 
     # 领袖观点分类严格由 𝕏 权威领袖矩阵与实时大V推文驱动，杜绝匿名论坛水文
     return items
@@ -3654,45 +3669,67 @@ def fetch_all_sources() -> List[Dict[str, Any]]:
     all_items = []
 
     # 1. 突发大事件与社交名人大V
-    news_and_celeb = fetch_news_and_celebrities()
-    print(f"  ✓ 新闻与名人大V言论: 获取到 {len(news_and_celeb)} 条")
-    all_items.extend(news_and_celeb)
+    try:
+        news_and_celeb = fetch_news_and_celebrities()
+        print(f"  ✓ 新闻与名人大V言论: 获取到 {len(news_and_celeb)} 条")
+        all_items.extend(news_and_celeb)
+    except Exception as e:
+        print(f"  ⚠️ 获取新闻与名人大V言论异常: {e}")
 
     # 2. 场景化落地工具 (Product Hunt + GitHub + Hugging Face Spaces 体验应用)
-    ph_tools = fetch_product_hunt_tools(max_items=25)
-    print(f"  ✓ Product Hunt 落地应用: 获取到 {len(ph_tools)} 条")
-    all_items.extend(ph_tools)
+    try:
+        ph_tools = fetch_product_hunt_tools(max_items=25)
+        print(f"  ✓ Product Hunt 落地应用: 获取到 {len(ph_tools)} 条")
+        all_items.extend(ph_tools)
+    except Exception as e:
+        print(f"  ⚠️ 获取 Product Hunt 工具异常: {e}")
 
-    gh_tools = fetch_github_applied_tools()
-    print(f"  ✓ GitHub 开源神器: 获取到 {len(gh_tools)} 条")
-    all_items.extend(gh_tools)
+    try:
+        gh_tools = fetch_github_applied_tools()
+        print(f"  ✓ GitHub 开源神器: 获取到 {len(gh_tools)} 条")
+        all_items.extend(gh_tools)
+    except Exception as e:
+        print(f"  ⚠️ 获取 GitHub 工具异常: {e}")
 
-    hf_tools = fetch_hf_spaces(max_items=12)
-    print(f"  ✓ Hugging Face 在线试玩: 获取到 {len(hf_tools)} 条")
-    all_items.extend(hf_tools)
+    try:
+        hf_tools = fetch_hf_spaces(max_items=12)
+        print(f"  ✓ Hugging Face 在线试玩: 获取到 {len(hf_tools)} 条")
+        all_items.extend(hf_tools)
+    except Exception as e:
+        print(f"  ⚠️ 获取 Hugging Face Spaces 异常: {e}")
 
     # 3. 爆款视频 (YouTube 深度实操 + TikTok 24小时飙升爆款短视频)
-    yt_videos = fetch_youtube_videos(max_per_channel=4)
-    print(f"  ✓ YouTube AI 演示视频: 获取到 {len(yt_videos)} 条")
-    all_items.extend(yt_videos)
+    try:
+        yt_videos = fetch_youtube_videos(max_per_channel=4)
+        print(f"  ✓ YouTube AI 演示视频: 获取到 {len(yt_videos)} 条")
+        all_items.extend(yt_videos)
+    except Exception as e:
+        print(f"  ⚠️ 获取 YouTube 视频异常: {e}")
 
-    tiktok_videos = fetch_tiktok_trending_videos()
-    print(f"  ✓ TikTok 爆款热门视频: 获取到 {len(tiktok_videos)} 条")
-    all_items.extend(tiktok_videos)
+    try:
+        tiktok_videos = fetch_tiktok_trending_videos()
+        print(f"  ✓ TikTok 爆款热门视频: 获取到 {len(tiktok_videos)} 条")
+        all_items.extend(tiktok_videos)
+    except Exception as e:
+        print(f"  ⚠️ 获取 TikTok 视频异常: {e}")
 
     # 4. 精选实用 Prompt (结合前沿沉淀库 + 每日 GitHub 动态抓取)
-    curated_prompts = get_curated_actionable_prompts()
-    daily_prompts = fetch_daily_github_prompts(max_items=4)
-    all_prompts = daily_prompts + curated_prompts
-    print(f"  ✓ 提示词库: 获取到 {len(daily_prompts)} 条 GitHub 今日动态提示词 + {len(curated_prompts)} 条前沿模版")
-    all_items.extend(all_prompts)
+    try:
+        curated_prompts = get_curated_actionable_prompts()
+        daily_prompts = fetch_daily_github_prompts(max_items=4)
+        all_prompts = daily_prompts + curated_prompts
+        print(f"  ✓ 提示词库: 获取到 {len(daily_prompts)} 条 GitHub 今日动态提示词 + {len(curated_prompts)} 条前沿模版")
+        all_items.extend(all_prompts)
+    except Exception as e:
+        print(f"  ⚠️ 获取提示词库异常: {e}")
 
     # 去重并按时间全局倒序排列（最新发布的绝对排在最前）
     seen_ids = set()
     unique_items = []
     for it in all_items:
-        if it["id"] not in seen_ids:
-            seen_ids.add(it["id"])
+        it_id = str(it.get("id") or it.get("url") or "")
+        if it_id and it_id not in seen_ids:
+            seen_ids.add(it_id)
             unique_items.append(it)
 
     def parse_time_for_sort(it):
