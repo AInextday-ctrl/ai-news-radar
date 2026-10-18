@@ -1909,25 +1909,25 @@ def format_tweet_publish_time(it: dict, is_zh: bool) -> tuple:
 def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     badge_text, is_hl, theme = resolve_viral_tweet_tag(it, is_zh)
     if is_zh:
-        author = safe_text(it.get("author") or "AI 领袖", 40)
+        author = safe_text(it.get("author") or "AI 先锋", 40)
     else:
         raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
         raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
-        if re.search(r'[\u4e00-\u9fff]', raw_author):
-            raw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip() or "AI Pioneer"
+        if re.search(r'[一-鿿]', raw_author):
+            raw_author = re.sub(r'[一-鿿\s]+', ' ', raw_author).strip() or "AI Pioneer"
         author = safe_text(raw_author, 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
     
     raw_role = (it.get("author_role") if is_zh else it.get("author_role_en")) or ""
-    if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_role):
-        raw_role = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_role).strip()
+    if not is_zh and re.search(r'[一-鿿]', raw_role):
+        raw_role = re.sub(r'[一-鿿\s]+', ' ', raw_role).strip()
     if raw_role.startswith("http") or "t.co/" in raw_role or len(raw_role) < 3:
         raw_role = ""
     if not raw_role:
         if "elon" in author.lower() or "musk" in author.lower():
             raw_role = "xAI 创始人 / 特斯拉 CEO" if is_zh else "Founder of xAI & Tesla CEO"
         else:
-            raw_role = "AI 领袖 / 核心开发者" if is_zh else "AI Pioneer & Builder"
+            raw_role = "AI 先锋 / 极客" if is_zh else "AI Pioneer & Builder"
     role = safe_text(raw_role, 60)
     
     time_str, _ = format_tweet_publish_time(it, is_zh)
@@ -1939,8 +1939,8 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
-        if re.search(r'[\u4e00-\u9fff]', raw_text):
-            raw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_text).strip() or "Frontier AI development."
+        if re.search(r'[一-鿿]', raw_text):
+            raw_text = re.sub(r'[一-鿿]+', '', raw_text).strip() or "Frontier AI development."
         text = safe_text(raw_text, 250)
         btn_text = "View Post ↗"
 
@@ -1988,25 +1988,29 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         return f"""
               <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
-                <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
                     <div class="flex items-center space-x-2 min-w-0">
                       <div class="relative shrink-0">
                         <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                         <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
                       </div>
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                      <div class="min-w-0">
+                        <div class="flex items-center space-x-1 leading-none h-4">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                         </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                        <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                          {handle} · {role}
+                        </div>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                      <span>{badge_text}</span>
-                    </span>
+                    <div class="flex items-center h-4 shrink-0">
+                      <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0 leading-none">
+                        <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+                        <span>{badge_text}</span>
+                      </span>
+                    </div>
                   </div>
                   <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
                     <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
@@ -2020,7 +2024,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                     <span>🕒</span>
                     <span>{time_str}</span>
                   </span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline flex items-center gap-0.5">
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5">
                     <span>{btn_text}</span>
                   </a>
                 </div>
@@ -2030,18 +2034,22 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         return f"""
               <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
                     <div class="flex items-center space-x-2 min-w-0">
                       <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black">✓</span>
+                      <div class="min-w-0">
+                        <div class="flex items-center space-x-1 leading-none h-4">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+                          <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                         </div>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">{handle} · {role}</span>
+                        <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                          {handle} · {role}
+                        </div>
                       </div>
                     </div>
-                    <span class="font-semibold px-2 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px]">{badge_text}</span>
+                    <div class="flex items-center h-4 shrink-0">
+                      <span class="font-semibold px-2 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px] leading-none">{badge_text}</span>
+                    </div>
                   </div>
                   <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
                     <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
@@ -2051,14 +2059,15 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
                   </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-500 dark:text-slate-400">🕒 {time_str}</span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 font-semibold hover:text-sky-800 dark:hover:text-sky-300 hover:underline">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <span>🕒</span>
+                    <span>{time_str}</span>
+                  </span>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                     {btn_text}
                   </a>
                 </div>
               </article>"""
-
-
 def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
     author = "Thibault Sottiaux (Tibo)"
     handle = "@thsottiaux"
@@ -2124,28 +2133,32 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                 shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
                 hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
                 <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
-                <div class="space-y-1.5 pt-0.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
+                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
+                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
                     <div class="flex items-center space-x-2 min-w-0">
                       <div class="relative shrink-0">
                         <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
                         <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
                       </div>
-                      <div class="min-w-0 truncate">
-                        <div class="flex items-center space-x-1 leading-tight">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
+                      <div class="min-w-0">
+                        <div class="flex items-center space-x-1 leading-none h-4">
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
                           <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                         </div>
-                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium leading-tight mt-0.5">{handle} · {role}</span>
+                        <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">
+                          {handle} · {role}
+                        </div>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
-                      <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    <div class="flex items-center h-4 shrink-0">
+                      <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40 leading-none">
+                        <span class="relative flex h-1.5 w-1.5">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                        </span>
+                        <span>{badge_text}</span>
                       </span>
-                      <span>{badge_text}</span>
-                    </span>
+                    </div>
                   </div>
                   <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
                     <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
@@ -2170,8 +2183,6 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                   </div>
                 </div>
               </article>"""
-
-
 def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
     if not lead_media or not isinstance(lead_media, dict):
         return ""
@@ -2209,19 +2220,31 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         fallback_poster = poster_url
 
     return f"""
-    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
-      <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
-        <div class="flex items-center space-x-1.5 min-w-0">
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
+    <article class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/40 dark:border-indigo-500/50 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+      <div class="flex items-start justify-between gap-2 shrink-0 h-8">
+        <div class="flex items-center space-x-2 min-w-0">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/60 shrink-0">
+            <span>▶</span>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-1 leading-none h-4">
+              <span class="font-bold text-xs text-slate-100 truncate leading-none">{author}</span>
+              <span class="text-rose-400 text-[10px] font-black leading-none">●</span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono truncate leading-none mt-1">
+              {'YouTube 极客实测' if is_zh else 'YouTube Lab'} · {time_badge}
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center h-4 shrink-0">
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
             <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
             <span>{lead_badge}</span>
           </span>
-          <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 {author}</span>
         </div>
-        <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ {time_badge}</span>
       </div>
 
-      <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+      <div class="flex items-center gap-2.5 my-0.5 flex-1 min-h-0 overflow-hidden">
         <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
           <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
@@ -2239,20 +2262,19 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
       </div>
 
       <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
-        <span class="font-mono">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
+        <span class="font-mono text-slate-400">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
         <div class="flex items-center gap-2">
           <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
             <span>{lead_play_text}</span>
           </button>
-          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+          <span class="text-slate-600">·</span>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200 font-semibold hover:underline">
             <span>{lead_source_text}</span>
           </a>
         </div>
       </div>
-    </div>
+    </article>
     """
-
-
 def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     """
     重构首页置顶专栏为高颜值、等高紧凑、彻底杜绝形变的三卡片并列布局：
@@ -2303,19 +2325,31 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
         fallback_poster = poster_url
 
     card_video_html = f"""
-    <div class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-xl border border-indigo-500/30 p-3 shadow-md relative overflow-hidden group/vcard text-white" style="height: 180px; max-height: 180px; overflow: hidden;">
-      <div class="flex items-center justify-between text-xs mb-1.5 shrink-0">
-        <div class="flex items-center space-x-1.5 min-w-0">
-          <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0">
+    <article class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/40 dark:border-indigo-500/50 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+      <div class="flex items-start justify-between gap-2 shrink-0 h-8">
+        <div class="flex items-center space-x-2 min-w-0">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/60 shrink-0">
+            <span>▶</span>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center space-x-1 leading-none h-4">
+              <span class="font-bold text-xs text-slate-100 truncate leading-none">{author}</span>
+              <span class="text-rose-400 text-[10px] font-black leading-none">●</span>
+            </div>
+            <div class="text-[10px] text-slate-400 font-mono truncate leading-none mt-1">
+              {'YouTube 极客实测' if is_zh else 'YouTube Lab'} · {time_badge}
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center h-4 shrink-0">
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
             <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
             <span>{lead_badge}</span>
           </span>
-          <span class="text-slate-200 font-bold text-xs truncate max-w-[130px]">📺 {author}</span>
         </div>
-        <span class="text-slate-300 font-mono text-[10px] bg-slate-800/80 px-1.5 py-0.5 rounded border border-slate-700/60 shrink-0">⚡ {time_badge}</span>
       </div>
 
-      <div class="flex items-center gap-2.5 my-1 flex-1 min-h-0 overflow-hidden">
+      <div class="flex items-center gap-2.5 my-0.5 flex-1 min-h-0 overflow-hidden">
         <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
           <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
@@ -2333,31 +2367,33 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
       </div>
 
       <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
-        <span class="font-mono">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
+        <span class="font-mono text-slate-400">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
         <div class="flex items-center gap-2">
           <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
             <span>{lead_play_text}</span>
           </button>
-          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200">
+          <span class="text-slate-600">·</span>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200 font-semibold hover:underline">
             <span>{lead_source_text}</span>
           </a>
         </div>
       </div>
-    </div>
+    </article>
     """
 
     # 2. 组装卡片 2 & 3: 2 篇精选带图/带视效领袖动态
     tweet_cards_html = []
     for c_idx, tw in enumerate(viral_tweets[:2]):
         raw_tw_author = tw.get("author_en") or tw.get("author") or "AI Pioneer"
-        if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_tw_author):
-            raw_tw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_tw_author).strip() or "AI Pioneer"
+        if not is_zh and re.search(r'[一-鿿]', raw_tw_author):
+            raw_tw_author = re.sub(r'[一-鿿\s]+', ' ', raw_tw_author).strip() or "AI Pioneer"
         tw_author = safe_text(raw_tw_author, 24)
         tw_handle = tw.get("author_handle") or f"@{tw_author.replace(' ', '')}"
         tw_avatar = optimize_avatar_url(tw.get("author_avatar") or f"https://unavatar.io/x/{tw_handle.replace('@','')}")
+        tw_role = safe_text((tw.get("author_role") if is_zh else tw.get("author_role_en")) or "AI Pioneer & Builder", 40)
         raw_tw_text = (tw.get("full_text_zh") if is_zh else tw.get("full_text_en")) or tw.get("summary_zh" if is_zh else "summary_en") or tw.get("title", "")
-        if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_tw_text):
-            raw_tw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_tw_text).strip() or "Frontier AI development."
+        if not is_zh and re.search(r'[一-鿿]', raw_tw_text):
+            raw_tw_text = re.sub(r'[一-鿿]+', '', raw_tw_text).strip() or "Frontier AI development."
         tw_text = safe_text(raw_tw_text, 140)
         tw_url = tw.get("url") or "#"
         tw_img = tw.get("image_url") or tw.get("media") or ""
@@ -2377,23 +2413,28 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
             </div>"""
 
         t_card = f"""
-        <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden" style="height: 180px; max-height: 180px; overflow: hidden;">
-          <div class="flex items-center justify-between text-[11px] mb-1.5 shrink-0">
+        <article class="flex flex-col justify-between bg-white/95 dark:bg-slate-900/95 rounded-2xl border border-slate-200/90 dark:border-slate-800/90 p-3 shadow-md hover:border-sky-500/40 transition-all relative overflow-hidden h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+          <div class="flex items-start justify-between gap-2 shrink-0 h-8">
             <div class="flex items-center space-x-2 min-w-0">
-              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-              <div class="min-w-0 truncate">
-                <div class="flex items-center space-x-1">
-                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{tw_author}</span>
-                  <span class="text-sky-500 text-[10px] font-black">✓</span>
+              <img src="{tw_avatar}" alt="{tw_author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0">
+                <div class="flex items-center space-x-1 leading-none h-4">
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{tw_author}</span>
+                  <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                </div>
+                <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                  {tw_handle} · {tw_role}
                 </div>
               </div>
             </div>
-            <span class="px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0">
-              {'🔥 领袖高赞' if is_zh else '🔥 Viral Pulse'}
-            </span>
+            <div class="flex items-center h-4 shrink-0">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-500/25 text-[10px] font-bold shrink-0 leading-none">
+                {'🔥 领袖高赞' if is_zh else '🔥 Viral Pulse'}
+              </span>
+            </div>
           </div>
 
-          <div class="flex gap-2 items-start my-1 flex-1 min-h-0 overflow-hidden">
+          <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
             <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0">
               {tw_text}
             </p>
@@ -2418,8 +2459,6 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
       {inner_cards}
     </div>
     """
-
-
 def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, Any]],
                        articles_meta: List[Dict[str, Any]], daily_dates: List[str],
                        topic_focus: Optional[List[Dict[str, Any]]] = None,

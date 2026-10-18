@@ -1475,19 +1475,27 @@ ins.adsbygoogle iframe {
       height: 145px !important;
       max-height: 145px !important;
       box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
     #viral-ticker-viewport .viral-ticker-page,
-    #viral-ticker-pinned > article {
+    #viral-ticker-pinned > article,
+    #viral-ticker-pinned > div {
       height: 145px !important;
       max-height: 145px !important;
       box-sizing: border-box !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
-    #viral-ticker-viewport .viral-ticker-page > article {
+    #viral-ticker-viewport .viral-ticker-page > article,
+    #viral-ticker-viewport .viral-ticker-page > div {
       height: 100% !important;
       max-height: 100% !important;
       box-sizing: border-box !important;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
     }
 
     @media (min-width: 768px) {
@@ -1497,7 +1505,8 @@ ins.adsbygoogle iframe {
         max-height: 180px !important;
       }
       #viral-ticker-viewport .viral-ticker-page,
-      #viral-ticker-pinned > article {
+      #viral-ticker-pinned > article,
+      #viral-ticker-pinned > div {
         height: 180px !important;
         max-height: 180px !important;
       }
@@ -1506,5 +1515,11 @@ ins.adsbygoogle iframe {
     #viral-ticker-slider {
       transition: transform 0.65s cubic-bezier(0.25, 1, 0.5, 1);
       will-change: transform;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    #viral-ticker-slider > *:first-child {
+      margin-top: 0 !important;
     }
 
