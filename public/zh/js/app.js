@@ -3547,7 +3547,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (isActive) {
           btn.className = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5";
         } else {
-          btn.className = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5";
+          btn.className = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs";
+        }
+        const heatEl = btn.querySelector('.topic-tab-heat');
+        if (heatEl) {
+          heatEl.className = `topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 ${isActive ? "bg-white/25 text-white" : "bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300"}`;
         }
       });
       const cards = document.querySelectorAll('.topic-focus-card');
@@ -3643,7 +3647,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const toggleBtn = document.getElementById('topic-focus-toggle-btn');
 
       if (section) {
-        section.className = "bg-gradient-to-r from-slate-50 via-indigo-50/30 to-slate-50 dark:from-slate-950/90 dark:via-indigo-950/50 dark:to-slate-950/90 rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-slate-900 dark:text-white my-6";
+        section.className = "rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl relative overflow-hidden transition-all bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white my-6";
       }
 
       if (headerTitle) {
@@ -3677,11 +3681,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const cls = isAct
             ? "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
             : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs";
+          const heatBadge = `<span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 ${isAct ? "bg-white/25 text-white" : "bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300"}">${heat}</span>`;
           return `
             <button type="button" id="topic-tab-${idx}" onclick="switchTopicFocus(${idx})" class="${cls}" data-idx="${idx}">
               <span class="text-[11px] font-mono opacity-90">${badge.slice(0, 2)}</span>
               <span class="truncate">${escapeHtml(shortTitle)}</span>
-              <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">${heat}</span>
+              ${heatBadge}
             </button>`;
         }).join('');
 

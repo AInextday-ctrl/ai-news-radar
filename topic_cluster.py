@@ -874,11 +874,13 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         active_cls = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
         inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs"
         
+        heat_badge = f'<span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 {("bg-white/25 text-white" if is_active else "bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300")}">{heat}</span>'
+        
         tab_buttons.append(f"""
         <button type="button" id="topic-tab-{idx}" onclick="switchTopicFocus({idx})" class="{active_cls if is_active else inactive_cls}" data-idx="{idx}">
           <span class="text-[11px] font-mono opacity-90">{badge[:2]}</span>
           <span class="truncate">{short_title}</span>
-          <span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-white/20 text-white font-bold ml-0.5">{heat}</span>
+          {heat_badge}
         </button>""")
 
     tabs_html = "\n".join(tab_buttons)
@@ -1131,7 +1133,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     # 3. 组装最外层 section
     return f"""
     <!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
-    <section id="topic-focus-section" class="bg-gradient-to-r from-slate-50 via-indigo-50/30 to-slate-50 dark:from-slate-950/90 dark:via-indigo-950/50 dark:to-slate-950/90 rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-slate-900 dark:text-white my-6" aria-label="{header_title}">
+    <section id="topic-focus-section" class="rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl relative overflow-hidden transition-all bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white my-6" aria-label="{header_title}">
       <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
       <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-200/80 dark:border-indigo-500/20 gap-3">
         <div class="flex items-center space-x-2.5 min-w-0">
