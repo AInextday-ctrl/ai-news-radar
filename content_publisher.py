@@ -2136,16 +2136,19 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                           <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">{author}</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
-                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">{handle} · {role} · {pub_time_rel}</span>
+                        <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">{handle} · {role}</span>
                       </div>
                     </div>
-                    <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
-                      <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                    <div class="flex items-center gap-1.5 shrink-0">
+                      <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
+                        <span class="relative flex h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                        </span>
+                        <span>{badge_text}</span>
                       </span>
-                      <span>{badge_text}</span>
-                    </span>
+                      <span class="font-mono text-[9.5px] px-2 py-0.5 rounded-full bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-bold shrink-0 shadow-sm" title="{'推文发布时间 (北京时间 UTC+8)' if is_zh else 'Tweet Publish Time (UTC+8)'}">🕒 {pub_time_display}</span>
+                    </div>
                   </div>
                   <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
                     <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
@@ -2154,14 +2157,11 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                     {thumb_html}
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-1.5">
-                  <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
-                    <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold shrink-0">
-                      <span class="animate-pulse text-amber-500">⚡</span>
-                      <span>{spotlight_tag}</span>
-                    </span>
-                    <span class="font-mono text-[9.5px] px-1.5 py-0.5 rounded bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-semibold shrink-0" title="{'推文发布时间 (北京时间 UTC+8)' if is_zh else 'Tweet Publish Time (UTC+8)'}">🕒 {pub_time_display}</span>
-                  </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
+                  <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
+                    <span class="animate-pulse text-amber-500">⚡</span>
+                    <span>{spotlight_tag}</span>
+                  </span>
                   <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0">
                     <span>{btn_text}</span>
                   </a>
