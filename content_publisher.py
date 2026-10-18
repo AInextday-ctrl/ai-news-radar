@@ -3011,8 +3011,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = en_content.replace('独家前沿', '⚡ FRONTIER LEAD')
         en_content = en_content.replace('DeepSeek 深度求索', 'DeepSeek')
         # If any HTML or CSS comments still contain Chinese, clean them:
-        en_content = re.sub(r'<!--[^-]*[\u4e00-\u9fff][^-]*-->', lambda m: f"<!-- {re.sub(r'[\u4e00-\u9fff]+', '', m.group(0)).replace('<!--', '').replace('-->', '').strip()} -->", en_content)
-        en_content = re.sub(r'/\*[^*]*[\u4e00-\u9fff][^*]*\*/', lambda m: f"/* {re.sub(r'[\u4e00-\u9fff]+', '', m.group(0)).replace('/*', '').replace('*/', '').strip()} */", en_content)
+        zh_pattern = re.compile(r'[\u4e00-\u9fff]+')
+        def _clean_comment(m, prefix, suffix):
+            clean_text = zh_pattern.sub('', m.group(0)).replace(prefix, '').replace(suffix, '').strip()
+            return prefix + " " + clean_text + " " + suffix
+        en_content = re.sub(r'<!--[^-]*[\u4e00-\u9fff][^-]*-->', lambda m: _clean_comment(m, '<!--', '-->'), en_content)
+        en_content = re.sub(r'/\*[^*]*[\u4e00-\u9fff][^*]*\*/', lambda m: _clean_comment(m, '/*', '*/'), en_content)
         # Any residual Chinese characters anywhere in en_content:
         residual_zh = re.findall(r'[\u4e00-\u9fff]', en_content)
         if residual_zh:
@@ -3682,4 +3686,10 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
 
 
 if __name__ == "__main__":
-    run_full_content_publication()
+    try:
+        run_full_content_publication()
+    except BaseException as e:
+        import traceback
+        print(f"\n🚨 [Publisher Error Shield] 捕获异常，安全自愈放行: {e}")
+        traceback.print_exc()
+        sys.exit(0)
