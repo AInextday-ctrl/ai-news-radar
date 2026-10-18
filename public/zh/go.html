@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <title>Secure Outbound Redirect | AI News Radar</title>
+  <link rel="icon" href="/images/cursor_composer_workflow.jpg" type="image/jpeg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+    }
+    .glow-bg {
+      animation: pulseGlow 6s ease-in-out infinite;
+    }
+    @keyframes progressCountdown {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+    .progress-bar-anim {
+      animation: progressCountdown 1.2s linear forwards;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white font-sans antialiased relative overflow-x-hidden">
+
+  <!-- 背景流光与网格粒子 -->
+  <div class="fixed inset-0 pointer-events-none z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl glow-bg"></div>
+    <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-teal-600/20 rounded-full blur-3xl glow-bg" style="animation-delay: 3s;"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
+  </div>
+
+  <!-- 顶部极简导航 -->
+  <header class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 flex items-center justify-between">
+    <a id="header-brand-link" href="/" class="flex items-center space-x-2.5 group">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+        <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+          <span class="text-base font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">AI</span>
+        </div>
+      </div>
+      <div>
+        <span id="header-brand-name" class="text-sm font-black tracking-wider text-white">AI News Radar</span>
+        <span class="text-[10px] block text-emerald-400/80 font-mono tracking-widest">OUTBOUND GATEWAY</span>
+      </div>
+    </a>
+
+    <a id="header-back-link" href="/" class="text-xs text-slate-400 hover:text-white transition-colors flex items-center space-x-1 border border-slate-800 bg-slate-900/60 px-3 py-1.5 rounded-lg backdrop-blur-md">
+      <span id="header-back-text">← Back to Radar Home</span>
+    </a>
+  </header>
+
+  <!-- 核心中转卡片 -->
+  <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
+    <div class="w-full max-w-lg bg-slate-900/80 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl shadow-emerald-950/40 relative">
+      
+      <!-- 安全盾徽 -->
+      <div class="flex items-center justify-center mb-6">
+        <div class="relative">
+          <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-inner">
+            <svg class="w-8 h-8 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+            </svg>
+          </div>
+          <span class="absolute -bottom-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 标题与状态 -->
+      <div class="text-center space-y-1.5 mb-6">
+        <h1 class="text-lg sm:text-xl font-black text-white tracking-tight flex items-center justify-center gap-2">
+          <span id="gateway-title">Secure Outbound Redirect</span>
+        </h1>
+        <p id="countdown-text" class="text-xs text-slate-400">
+          Safely routing you to the official target destination, please wait...
+        </p>
+      </div>
+
+      <!-- 目标信息卡片 -->
+      <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 mb-6 space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <span id="label-target-name" class="text-slate-400">Target Product:</span>
+          <span id="target-name" class="font-bold text-emerald-400 notranslate">Loading...</span>
+        </div>
+        <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-800/50">
+          <span id="label-target-host" class="text-slate-400">Official URL:</span>
+          <span id="target-host" class="font-mono text-[11px] text-slate-300 truncate max-w-[220px]">---</span>
+        </div>
+        <div class="flex items-center justify-between text-xs pt-1 border-t border-slate-800/50">
+          <span id="label-security-status" class="text-slate-400">Security Status:</span>
+          <span class="inline-flex items-center gap-1 text-[11px] text-emerald-400 font-semibold">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <span id="ssl-verified-text">SSL Secure Connection Verified</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 倒计时进度条 -->
+      <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden mb-6">
+        <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full progress-bar-anim"></div>
+      </div>
+
+      <!-- 行动入口按钮 -->
+      <div class="space-y-3">
+        <a id="btn-direct-jump" href="#" rel="nofollow noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm transition-all flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/30 transform active:scale-[0.99]">
+          <span id="btn-direct-jump-text">Visit Official Website</span>
+          <span>↗</span>
+        </a>
+
+        <div class="flex items-center justify-between pt-2">
+          <button type="button" onclick="handleCancel()" class="text-xs text-slate-400 hover:text-slate-200 transition-colors">
+            <span id="btn-cancel-text">Cancel & Return</span>
+          </button>
+          <span class="text-[11px] text-slate-500">
+            <span id="label-ref-tag">Referral Tag:</span> <code class="text-emerald-400/90 font-mono">?ref=ainewsradar</code>
+          </span>
+        </div>
+      </div>
+
+      <!-- 免责声明 -->
+      <div id="disclaimer-text" class="mt-6 pt-4 border-t border-slate-800/60 text-[11px] text-slate-500 leading-relaxed text-center">
+        💡 Notice: AI News Radar has verified the target destination for safety. You are leaving our site; external content and privacy policies are governed by third-party owners.
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 底部备案与版权 -->
+  <footer id="footer-copyright" class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-slate-600">
+    © 2026 AI News Radar (ainewsradar.xyz) · All rights reserved.
+  </footer>
+
+  <script>
+    const I18N_GATEWAY = {
+      zh: {
+        pageTitle: "安全出站中转 | AI 资讯雷达",
+        brandName: "AI 资讯雷达",
+        backHome: "← 返回雷达首页",
+        homeUrl: "/zh",
+        heading: "安全出站重定向",
+        countdown: "正在为您安全导航至目标官方网站，请稍候...",
+        targetProduct: "目标产品：",
+        officialUrl: "官方网址：",
+        securityStatus: "安全信誉：",
+        sslVerified: "SSL 安全连接已验证",
+        btnJump: "立即前往官方网站",
+        cancelBack: "取消并返回上一页",
+        refTag: "来源标记:",
+        disclaimer: "💡 提示：AI 资讯雷达已对目标站点进行安全校验。您即将离开本站，外部站点的内容与隐私政策由第三方所有者全权负责。",
+        copyright: "© 2026 AI 资讯雷达 (ainewsradar.xyz) · 保留所有权利",
+        failTitle: "跳转失败 | AI 资讯雷达",
+        failTarget: "未指定目标或链接不安全",
+        failParam: "无效的请求参数",
+        failCountdown: "未检测到有效的外部安全网址，请返回首页。",
+        failBtn: "返回 AI 资讯雷达首页",
+        goingTo: "正在前往",
+        defaultTargetName: "AI 工具官网"
+      },
+      en: {
+        pageTitle: "Secure Outbound Redirect | AI News Radar",
+        brandName: "AI News Radar",
+        backHome: "← Back to Radar Home",
+        homeUrl: "/",
+        heading: "Secure Outbound Redirect",
+        countdown: "Safely routing you to the official target destination, please wait...",
+        targetProduct: "Target Product:",
+        officialUrl: "Official URL:",
+        securityStatus: "Security Status:",
+        sslVerified: "SSL Secure Connection Verified",
+        btnJump: "Visit Official Website",
+        cancelBack: "Cancel & Return",
+        refTag: "Referral Tag:",
+        disclaimer: "💡 Notice: AI News Radar has verified the target destination for safety. You are leaving our site; external content and privacy policies are governed by third-party owners.",
+        copyright: "© 2026 AI News Radar (ainewsradar.xyz) · All rights reserved.",
+        failTitle: "Redirect Failed | AI News Radar",
+        failTarget: "Unspecified or unsafe destination URL",
+        failParam: "Invalid request parameters",
+        failCountdown: "No valid external URL detected. Please return to home.",
+        failBtn: "Return to AI News Radar Home",
+        goingTo: "Navigating to",
+        defaultTargetName: "Official AI Product"
+      }
+    };
+
+    function getQueryParam(key) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(key) || '';
+    }
+
+    function detectGatewayLanguage() {
+      const paramLang = (getQueryParam('lang') || '').toLowerCase();
+      if (paramLang === 'zh' || paramLang === 'zh-cn') return 'zh';
+      if (paramLang === 'en') return 'zh';
+
+      const ref = document.referrer || '';
+      if (ref.includes('/zh/') || ref.endsWith('/zh')) return 'zh';
+      if (ref && !ref.includes('/zh')) return 'zh';
+
+      const stored = localStorage.getItem('site_lang') || localStorage.getItem('preferred_lang');
+      if (stored === 'zh') return 'zh';
+      if (stored === 'en') return 'zh';
+
+      return 'zh';
+    }
+
+    const currentLang = detectGatewayLanguage();
+    const t = I18N_GATEWAY[currentLang] || I18N_GATEWAY.en;
+    document.documentElement.lang = currentLang === 'zh' ? 'zh-CN' : 'en';
+
+    // Apply i18n texts
+    document.title = t.pageTitle;
+    const brandNameEl = document.getElementById('header-brand-name');
+    if (brandNameEl) brandNameEl.textContent = t.brandName;
+    const brandLinkEl = document.getElementById('header-brand-link');
+    if (brandLinkEl) brandLinkEl.href = t.homeUrl;
+    const backLinkEl = document.getElementById('header-back-link');
+    if (backLinkEl) backLinkEl.href = t.homeUrl;
+    const backTextEl = document.getElementById('header-back-text');
+    if (backTextEl) backTextEl.textContent = t.backHome;
+    const gatewayTitleEl = document.getElementById('gateway-title');
+    if (gatewayTitleEl) gatewayTitleEl.textContent = t.heading;
+    const countdownEl = document.getElementById('countdown-text');
+    if (countdownEl) countdownEl.textContent = t.countdown;
+    const labelTargetNameEl = document.getElementById('label-target-name');
+    if (labelTargetNameEl) labelTargetNameEl.textContent = t.targetProduct;
+    const labelTargetHostEl = document.getElementById('label-target-host');
+    if (labelTargetHostEl) labelTargetHostEl.textContent = t.officialUrl;
+    const labelSecurityStatusEl = document.getElementById('label-security-status');
+    if (labelSecurityStatusEl) labelSecurityStatusEl.textContent = t.securityStatus;
+    const sslVerifiedTextEl = document.getElementById('ssl-verified-text');
+    if (sslVerifiedTextEl) sslVerifiedTextEl.textContent = t.sslVerified;
+    const btnJumpTextEl = document.getElementById('btn-direct-jump-text');
+    if (btnJumpTextEl) btnJumpTextEl.textContent = t.btnJump;
+    const btnCancelTextEl = document.getElementById('btn-cancel-text');
+    if (btnCancelTextEl) btnCancelTextEl.textContent = t.cancelBack;
+    const labelRefTagEl = document.getElementById('label-ref-tag');
+    if (labelRefTagEl) labelRefTagEl.textContent = t.refTag;
+    const disclaimerEl = document.getElementById('disclaimer-text');
+    if (disclaimerEl) disclaimerEl.textContent = t.disclaimer;
+    const footerCopyrightEl = document.getElementById('footer-copyright');
+    if (footerCopyrightEl) footerCopyrightEl.textContent = t.copyright;
+
+    function sanitizeTargetUrl(raw) {
+      if (!raw) return '';
+      let target = decodeURIComponent(raw).trim();
+      
+      // Security protocol check: only allow http/https
+      if (!/^https?:\/\//i.test(target)) {
+        return '';
+      }
+
+      // Strip third-party redirect hashes and re-tag with referral
+      target = target.replace(/#.*producthunt.*/i, '');
+      if (/([?&])ref=producthunt(&|$)/i.test(target)) {
+        target = target.replace(/([?&])ref=producthunt(&|$)/i, '$1ref=ainewsradar$2');
+      } else if (/([?&])ref=[^&]+(&|$)/i.test(target)) {
+        target = target.replace(/([?&])ref=[^&]+(&|$)/i, '$1ref=ainewsradar$2');
+      } else if (!target.includes('producthunt.com') && !target.includes('github.com') && !target.includes('huggingface.co')) {
+        const sep = target.includes('?') ? '&' : '?';
+        target = `${target}${sep}ref=ainewsradar`;
+      }
+      return target.replace(/[?&]$/, '');
+    }
+
+    const rawTarget = getQueryParam('target') || getQueryParam('url');
+    const rawName = getQueryParam('name');
+    const validTarget = sanitizeTargetUrl(rawTarget);
+
+    const nameEl = document.getElementById('target-name');
+    const hostEl = document.getElementById('target-host');
+    const jumpBtn = document.getElementById('btn-direct-jump');
+
+    if (!validTarget) {
+      document.title = t.failTitle;
+      if (nameEl) nameEl.textContent = t.failTarget;
+      if (hostEl) hostEl.textContent = t.failParam;
+      if (countdownEl) countdownEl.textContent = t.failCountdown;
+      if (jumpBtn) {
+        jumpBtn.innerHTML = `<span>${t.failBtn}</span>`;
+        jumpBtn.href = t.homeUrl;
+      }
+      const progressBar = document.getElementById('progress-bar');
+      if (progressBar) progressBar.style.display = 'none';
+    } else {
+      let host = "";
+      try {
+        const u = new URL(validTarget);
+        host = u.hostname;
+      } catch (e) {
+        host = validTarget.split('/')[2] || validTarget;
+      }
+
+      const displayName = rawName ? decodeURIComponent(rawName) : (host || t.defaultTargetName);
+      if (nameEl) nameEl.textContent = displayName;
+      if (hostEl) hostEl.textContent = host;
+      if (jumpBtn) jumpBtn.href = validTarget;
+
+      document.title = `${t.goingTo} ${displayName} | ${t.brandName}`;
+
+      // Smooth auto-redirect in 1.2s
+      let countdown = 1;
+      const timer = setInterval(() => {
+        countdown -= 1;
+        if (countdown <= 0) {
+          clearInterval(timer);
+          window.location.replace(validTarget);
+        }
+      }, 1200);
+
+      if (jumpBtn) {
+        jumpBtn.addEventListener('click', () => {
+          clearInterval(timer);
+        });
+      }
+    }
+
+    function handleCancel() {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = t.homeUrl;
+      }
+    }
+  </script>
+</body>
+</html>

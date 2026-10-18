@@ -1352,6 +1352,9 @@ def backfill_historical_daily_briefings() -> List[str]:
 
 </body>
 </html>"""
+        if is_en_hub:
+            daily_hub_page_html = daily_hub_page_html.replace("AI 资讯雷达", "AI News Radar")
+            daily_hub_page_html = re.sub(r'[\u4e00-\u9fff]+', '', daily_hub_page_html)
 
         with open(hub_path, "w", encoding="utf-8") as dhf:
             dhf.write(daily_hub_page_html)
@@ -1410,7 +1413,13 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
                 title = safe_text(item.get("title_en") or "Key Frontier Artificial Intelligence Development Update", 140)
             raw_sum = item.get("summary_en") or item.get("content_snippet") or f"{title}. This critical industry milestone has sparked extensive technical evaluation and tracking across frontier AI research labs."
             summary = safe_text(raw_sum, 320)
+            if any('\u4e00' <= c <= '\u9fff' for c in summary):
+                summary = f"{title}. In-depth engineering update and technical developments observed across the global artificial intelligence research community."
             source = safe_text(item.get("source", ""), 60)
+            if any('\u4e00' <= c <= '\u9fff' for c in source):
+                source = source.replace("AI 资讯雷达", "AI News Radar").replace("OpenAI 官方动态", "OpenAI Official").replace("Hugging Face 空间", "Hugging Face Spaces").replace("机器之心", "Synced").replace("智东西", "Zhidx")
+                if any('\u4e00' <= c <= '\u9fff' for c in source):
+                    source = "AI Industry Wire"
             url = item.get("url", "#")
             cat = item.get("category", "news")
             cat_label, cat_color = cat_labels.get(cat, ("AI Intelligence", "#4f46e5"))
@@ -1725,6 +1734,13 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
 
 </body>
 </html>"""
+
+    if is_en:
+        html = html.replace("AI 资讯雷达", "AI News Radar")
+        html = html.replace("OpenAI 官方动态", "OpenAI Official Updates")
+        html = html.replace("Hugging Face 空间", "Hugging Face Spaces")
+        html = re.sub(r'[\u4e00-\u9fff]+', '', html)
+
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(html)
 
@@ -1833,7 +1849,10 @@ def resolve_viral_tweet_tag(it: dict, is_zh: bool) -> tuple:
     # 6. 全网极客热推 (24h Trending)
     custom_badge = (it.get("badge_zh") if is_zh else it.get("badge_en")) or it.get("badge")
     if custom_badge and "breakthrough" not in custom_badge.lower() and "reset" not in custom_badge.lower():
-        badge = custom_badge
+        if not is_zh and re.search(r'[\u4e00-\u9fff]', custom_badge):
+            badge = "🔥 24H TRENDING"
+        else:
+            badge = custom_badge
     else:
         badge = "🔥 24h 极客热推" if is_zh else "🔥 24H TRENDING"
     return badge, False, "slate"
@@ -1867,10 +1886,14 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
         raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
+        if re.search(r'[\u4e00-\u9fff]', raw_author):
+            raw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip() or "AI Pioneer"
         author = safe_text(raw_author, 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
     
     raw_role = (it.get("author_role") if is_zh else it.get("author_role_en")) or ""
+    if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_role):
+        raw_role = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_role).strip()
     if raw_role.startswith("http") or "t.co/" in raw_role or len(raw_role) < 3:
         raw_role = ""
     if not raw_role:
@@ -1889,6 +1912,8 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
+        if re.search(r'[\u4e00-\u9fff]', raw_text):
+            raw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_text).strip() or "Frontier AI development."
         text = safe_text(raw_text, 250)
         time_str = "24h Live"
         btn_text = "View Post ↗"
@@ -2291,10 +2316,16 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     # 2. 组装卡片 2 & 3: 2 篇精选带图/带视效领袖动态
     tweet_cards_html = []
     for c_idx, tw in enumerate(viral_tweets[:2]):
-        tw_author = safe_text(tw.get("author") or "AI Pioneer", 24)
+        raw_tw_author = tw.get("author_en") or tw.get("author") or "AI Pioneer"
+        if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_tw_author):
+            raw_tw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_tw_author).strip() or "AI Pioneer"
+        tw_author = safe_text(raw_tw_author, 24)
         tw_handle = tw.get("author_handle") or f"@{tw_author.replace(' ', '')}"
         tw_avatar = optimize_avatar_url(tw.get("author_avatar") or f"https://unavatar.io/x/{tw_handle.replace('@','')}")
-        tw_text = safe_text((tw.get("full_text_zh") if is_zh else tw.get("full_text_en")) or tw.get("summary_zh" if is_zh else "summary_en") or tw.get("title", ""), 140)
+        raw_tw_text = (tw.get("full_text_zh") if is_zh else tw.get("full_text_en")) or tw.get("summary_zh" if is_zh else "summary_en") or tw.get("title", "")
+        if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_tw_text):
+            raw_tw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_tw_text).strip() or "Frontier AI development."
+        tw_text = safe_text(raw_tw_text, 140)
         tw_url = tw.get("url") or "#"
         tw_img = tw.get("image_url") or tw.get("media") or ""
 
@@ -2513,12 +2544,26 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         # 1. Top 3 English
         top_three_en_html = ""
         for idx, item in enumerate(top_three[:3]):
-            badge = safe_text(item.get("badge") or "⚡ Top Highlight", 30)
-            title_en = safe_text(item.get("title_en") or item.get("title", ""), 120)
-            sum_en = safe_text(item.get("summary_en") or item.get("title_en") or "", 250)
-            source = safe_text(item.get("source", ""), 40)
-            if not source or "AI 资讯雷达" in source:
+            raw_badge = item.get("badge_en") or item.get("badge") or "⚡ Top Highlight"
+            if re.search(r'[\u4e00-\u9fff]', raw_badge):
+                raw_badge = "⚡ Top Highlight"
+            badge = safe_text(raw_badge, 30)
+
+            raw_title = item.get("title_en") or item.get("title", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_title):
+                raw_title = re.sub(r'[\u4e00-\u9fff]+', '', raw_title).strip() or "Frontier AI Breakthrough"
+            title_en = safe_text(raw_title, 120)
+
+            raw_sum = item.get("summary_en") or item.get("title_en") or ""
+            if re.search(r'[\u4e00-\u9fff]', raw_sum):
+                raw_sum = re.sub(r'[\u4e00-\u9fff]+', '', raw_sum).strip() or "Key developments in frontier artificial intelligence."
+            sum_en = safe_text(raw_sum, 250)
+
+            raw_source = item.get("source_en") or item.get("source", "")
+            if not raw_source or "AI 资讯雷达" in raw_source or re.search(r'[\u4e00-\u9fff]', raw_source):
                 source = "AI News Radar"
+            else:
+                source = safe_text(raw_source, 40)
             url = item.get("url", "#")
             top_three_en_html += f"""
           <article class="group bg-white/90 dark:bg-slate-900/80 hover:bg-slate-50 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 p-3.5 rounded-xl transition-all flex flex-col justify-between space-y-2.5 shadow-sm">
@@ -2554,11 +2599,21 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         lcp_image_en_url = ""
         import urllib.parse
         for it in news_items:
-            t_en = safe_text(it.get("title_en") or it.get("title", ""), 120)
-            s_en = safe_text(it.get("summary_en") or it.get("title_en") or "", 250)
-            src = safe_text(it.get("source", ""), 40)
-            if not src or "AI 资讯雷达" in src:
+            raw_t = it.get("title_en") or it.get("title", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_t):
+                raw_t = re.sub(r'[\u4e00-\u9fff]+', '', raw_t).strip() or "Frontier AI Breakthrough"
+            t_en = safe_text(raw_t, 120)
+
+            raw_s = it.get("summary_en") or it.get("title_en") or ""
+            if re.search(r'[\u4e00-\u9fff]', raw_s):
+                raw_s = re.sub(r'[\u4e00-\u9fff]+', '', raw_s).strip() or "Comprehensive coverage of frontier intelligence developments."
+            s_en = safe_text(raw_s, 250)
+
+            raw_src = it.get("source_en") or it.get("source", "")
+            if not raw_src or "AI 资讯雷达" in raw_src or re.search(r'[\u4e00-\u9fff]', raw_src):
                 src = "AI News Radar"
+            else:
+                src = safe_text(raw_src, 40)
             u = it.get("url", "#")
             img = it.get("image_url", "")
             img_tag = ""
@@ -2611,10 +2666,18 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         for it in celeb_items:
             raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
             raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
+            if re.search(r'[\u4e00-\u9fff]', raw_author):
+                raw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip() or "AI Pioneer"
             author = safe_text(raw_author, 40)
             handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
-            role = safe_text(it.get("author_role_en") or "AI Pioneer & Builder", 60)
-            text_en = safe_text(it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", ""), 250)
+            raw_role = it.get("author_role_en") or "AI Pioneer & Builder"
+            if re.search(r'[\u4e00-\u9fff]', raw_role):
+                raw_role = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_role).strip() or "AI Pioneer & Builder"
+            role = safe_text(raw_role, 60)
+            raw_text_en = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_text_en):
+                raw_text_en = re.sub(r'[\u4e00-\u9fff]+', '', raw_text_en).strip() or "Frontier AI development."
+            text_en = safe_text(raw_text_en, 250)
             u = it.get("url", "#")
             avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
             celeb_cards_en_html += f"""
@@ -2661,10 +2724,24 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         arena_cards_en_html = ""
         for item in chatbot_arena[:25]:
             rank = item.get("rank", 1)
-            model = safe_text(item.get("model", ""), 40)
-            org = safe_text(item.get("org", ""), 20)
+            raw_model = item.get("model", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_model):
+                raw_model = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_model).strip() or "Frontier Model"
+            model = safe_text(raw_model, 40)
+            raw_org = item.get("org", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_org):
+                raw_org = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_org).strip() or "AI Lab"
+            org = safe_text(raw_org, 20)
             elo = item.get("elo", 1200)
-            badge_text = safe_text(item.get("badge_en") or item.get("badge", ""), 50)
+            raw_badge = item.get("badge_en") or item.get("badge", "")
+            if re.search(r'[\u4e00-\u9fff]', raw_badge):
+                if rank == 1: raw_badge = "👑 #1 Global Leader"
+                elif rank == 2: raw_badge = "🔥 #2 Global SOTA"
+                elif rank == 3: raw_badge = "⚡ #3 Global Top Tier"
+                elif "开源" in raw_badge: raw_badge = "🌐 #1 Open Source"
+                elif "中国" in raw_badge or "国内" in raw_badge: raw_badge = "🇨🇳 Top Chinese Model"
+                else: raw_badge = f"Top {rank} Leaderboard"
+            badge_text = safe_text(raw_badge, 50)
             rank_class = "bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700"
             if rank == 1:
                 rank_class = "bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm ring-1 ring-amber-300"
@@ -2848,6 +2925,27 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 pattern_ticker_end = r'(</section>\s*)(<!-- 🌟 第 2 层:|<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">)'
                 if re.search(pattern_ticker_end, en_content):
                     en_content = re.sub(pattern_ticker_end, lambda m: f"{m.group(1)}\n{topic_focus_en_html.strip()}\n\n      {m.group(2)}", en_content, count=1)
+
+        # 严格质量守门：全方位确保 public/index.html 绝对不含任何一个中文字符 (Zero Chinese Characters Guarantee)
+        en_content = re.sub(r'["\']alternateName["\']:\s*\[([^\]]*)"AI 资讯雷达"([^\]]*)\]', r'"alternateName": [\1\2]', en_content)
+        en_content = re.sub(r'["\']alternateName["\']:\s*"AI 资讯雷达"', r'"alternateName": "AI News Radar"', en_content)
+        en_content = en_content.replace('🇨🇳 简体中文', '🇨🇳 Chinese (Simplified)')
+        en_content = en_content.replace('🇭🇰 繁體中文', '🇭🇰 Chinese (Traditional)')
+        en_content = en_content.replace('🇯🇵 日本語', '🇯🇵 Japanese')
+        en_content = en_content.replace('<span id="lang-suggest-btn-text">中文精翻版 (/zh)</span>',
+                                        '<span id="lang-suggest-btn-text">Switch to Chinese Edition (/zh)</span>')
+        en_content = en_content.replace('原帖 ↗', 'View Post ↗')
+        en_content = en_content.replace('查看原帖 ↗', 'View Post ↗')
+        en_content = en_content.replace('独家前沿', '⚡ FRONTIER LEAD')
+        en_content = en_content.replace('DeepSeek 深度求索', 'DeepSeek')
+        # If any HTML or CSS comments still contain Chinese, clean them:
+        en_content = re.sub(r'<!--[^-]*[\u4e00-\u9fff][^-]*-->', lambda m: f"<!-- {re.sub(r'[\u4e00-\u9fff]+', '', m.group(0)).replace('<!--', '').replace('-->', '').strip()} -->", en_content)
+        en_content = re.sub(r'/\*[^*]*[\u4e00-\u9fff][^*]*\*/', lambda m: f"/* {re.sub(r'[\u4e00-\u9fff]+', '', m.group(0)).replace('/*', '').replace('*/', '').strip()} */", en_content)
+        # Any residual Chinese characters anywhere in en_content:
+        residual_zh = re.findall(r'[\u4e00-\u9fff]', en_content)
+        if residual_zh:
+            print(f"⚠️ [content_publisher] Final guard stripped {len(residual_zh)} residual Chinese characters in index.html")
+            en_content = re.sub(r'[\u4e00-\u9fff]+', '', en_content)
 
         with open(INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(en_content)

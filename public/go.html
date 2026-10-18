@@ -44,14 +44,14 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-white font-sans antialiased relative overflow-x-hidden">
 
-  <!-- 背景流光与网格粒子 -->
+  <!-- Background glow and particles -->
   <div class="fixed inset-0 pointer-events-none z-0">
     <div class="absolute -top-40 -left-40 w-96 h-96 bg-emerald-600/20 rounded-full blur-3xl glow-bg"></div>
     <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-teal-600/20 rounded-full blur-3xl glow-bg" style="animation-delay: 3s;"></div>
     <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
   </div>
 
-  <!-- 顶部极简导航 -->
+  <!-- Top minimalist header -->
   <header class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 flex items-center justify-between">
     <a id="header-brand-link" href="/" class="flex items-center space-x-2.5 group">
       <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-400 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
@@ -70,11 +70,11 @@
     </a>
   </header>
 
-  <!-- 核心中转卡片 -->
+  <!-- Core gateway card -->
   <main class="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
     <div class="w-full max-w-lg bg-slate-900/80 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-xl shadow-2xl shadow-emerald-950/40 relative">
       
-      <!-- 安全盾徽 -->
+      <!-- Security shield badge -->
       <div class="flex items-center justify-center mb-6">
         <div class="relative">
           <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-inner">
@@ -89,7 +89,7 @@
         </div>
       </div>
 
-      <!-- 标题与状态 -->
+      <!-- Title and status -->
       <div class="text-center space-y-1.5 mb-6">
         <h1 class="text-lg sm:text-xl font-black text-white tracking-tight flex items-center justify-center gap-2">
           <span id="gateway-title">Secure Outbound Redirect</span>
@@ -99,7 +99,7 @@
         </p>
       </div>
 
-      <!-- 目标信息卡片 -->
+      <!-- Target destination metadata -->
       <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 mb-6 space-y-2">
         <div class="flex items-center justify-between text-xs">
           <span id="label-target-name" class="text-slate-400">Target Product:</span>
@@ -118,12 +118,12 @@
         </div>
       </div>
 
-      <!-- 倒计时进度条 -->
+      <!-- Countdown progress bar -->
       <div class="w-full bg-slate-800/80 rounded-full h-1.5 overflow-hidden mb-6">
         <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full rounded-full progress-bar-anim"></div>
       </div>
 
-      <!-- 行动入口按钮 -->
+      <!-- Action jump buttons -->
       <div class="space-y-3">
         <a id="btn-direct-jump" href="#" rel="nofollow noopener noreferrer" class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm transition-all flex items-center justify-center space-x-2 shadow-lg shadow-emerald-600/30 transform active:scale-[0.99]">
           <span id="btn-direct-jump-text">Visit Official Website</span>
@@ -140,7 +140,7 @@
         </div>
       </div>
 
-      <!-- 免责声明 -->
+      <!-- Security disclaimer -->
       <div id="disclaimer-text" class="mt-6 pt-4 border-t border-slate-800/60 text-[11px] text-slate-500 leading-relaxed text-center">
         💡 Notice: AI News Radar has verified the target destination for safety. You are leaving our site; external content and privacy policies are governed by third-party owners.
       </div>
@@ -148,37 +148,14 @@
     </div>
   </main>
 
-  <!-- 底部备案与版权 -->
+  <!-- Footer copyright -->
   <footer id="footer-copyright" class="relative z-10 w-full max-w-5xl mx-auto px-4 py-6 text-center text-xs text-slate-600">
     © 2026 AI News Radar (ainewsradar.xyz) · All rights reserved.
   </footer>
 
   <script>
     const I18N_GATEWAY = {
-      zh: {
-        pageTitle: "安全出站中转 | AI 资讯雷达",
-        brandName: "AI 资讯雷达",
-        backHome: "← 返回雷达首页",
-        homeUrl: "/zh",
-        heading: "安全出站重定向",
-        countdown: "正在为您安全导航至目标官方网站，请稍候...",
-        targetProduct: "目标产品：",
-        officialUrl: "官方网址：",
-        securityStatus: "安全信誉：",
-        sslVerified: "SSL 安全连接已验证",
-        btnJump: "立即前往官方网站",
-        cancelBack: "取消并返回上一页",
-        refTag: "来源标记:",
-        disclaimer: "💡 提示：AI 资讯雷达已对目标站点进行安全校验。您即将离开本站，外部站点的内容与隐私政策由第三方所有者全权负责。",
-        copyright: "© 2026 AI 资讯雷达 (ainewsradar.xyz) · 保留所有权利",
-        failTitle: "跳转失败 | AI 资讯雷达",
-        failTarget: "未指定目标或链接不安全",
-        failParam: "无效的请求参数",
-        failCountdown: "未检测到有效的外部安全网址，请返回首页。",
-        failBtn: "返回 AI 资讯雷达首页",
-        goingTo: "正在前往",
-        defaultTargetName: "AI 工具官网"
-      },
+      
       en: {
         pageTitle: "Secure Outbound Redirect | AI News Radar",
         brandName: "AI News Radar",
@@ -210,21 +187,7 @@
       return urlParams.get(key) || '';
     }
 
-    function detectGatewayLanguage() {
-      const paramLang = (getQueryParam('lang') || '').toLowerCase();
-      if (paramLang === 'zh' || paramLang === 'zh-cn') return 'zh';
-      if (paramLang === 'en') return 'en';
-
-      const ref = document.referrer || '';
-      if (ref.includes('/zh/') || ref.endsWith('/zh')) return 'zh';
-      if (ref && !ref.includes('/zh')) return 'en';
-
-      const stored = localStorage.getItem('site_lang') || localStorage.getItem('preferred_lang');
-      if (stored === 'zh') return 'zh';
-      if (stored === 'en') return 'en';
-
-      return 'en';
-    }
+    function detectGatewayLanguage() { return "en"; }
 
     const currentLang = detectGatewayLanguage();
     const t = I18N_GATEWAY[currentLang] || I18N_GATEWAY.en;

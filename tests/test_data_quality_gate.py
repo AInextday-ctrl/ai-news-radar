@@ -122,6 +122,32 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(watermark_fails) == 0, f"断言 7 失败：部分核心模块数据量过低: {watermark_fails}"
     print(f"✅ 断言 7 通过: 核心模块非空水位线全量达标 ({', '.join(f'{k}={len(grouped.get(k, []))}' for k in min_watermarks)})")
 
+    # 断言 8（严格中英文隔离与零跨语言泄漏）
+    import glob
+    all_en_html = [f for f in glob.glob(os.path.join(WORKSPACE_DIR, "public", "**", "*.html"), recursive=True)
+                   if not f.replace(os.sep, "/").startswith(os.path.join(WORKSPACE_DIR, "public", "zh").replace(os.sep, "/"))]
+    en_leak_files = []
+    for en_f in all_en_html:
+        with open(en_f, "r", encoding="utf-8") as ef:
+            c = ef.read()
+        zh_chars = re.findall(r'[\u4e00-\u9fff]', c)
+        if zh_chars:
+            en_leak_files.append((os.path.relpath(en_f, WORKSPACE_DIR), len(zh_chars)))
+    assert len(en_leak_files) == 0, f"断言 8 失败：检测到 {len(en_leak_files)} 个英文页面存在中文字符残留: {en_leak_files}"
+
+    # 校验所有 _en 字段绝不含中文字符
+    en_field_leaks = []
+    for cat_name, items in grouped.items():
+        if not isinstance(items, list):
+            continue
+        for it in items:
+            for field in ("title_en", "summary_en", "author_role_en", "best_for_en"):
+                val = str(it.get(field) or "")
+                if val and re.search(r'[\u4e00-\u9fff]', val):
+                    en_field_leaks.append((cat_name, it.get("id"), field, val[:40]))
+    assert len(en_field_leaks) == 0, f"断言 8 失败：检测到 {len(en_field_leaks)} 处英文数据字段包含中文字符: {en_field_leaks[:3]}"
+    print(f"✅ 断言 8 通过: 严格中英文语言纯度全量达标 (全网 {len(all_en_html)} 个英文页面及所有 _en 字段零中文)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")

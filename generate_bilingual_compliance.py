@@ -8,6 +8,7 @@ Guarantees 100% compliance with Google AdSense, GDPR, CCPA, and Search Quality R
 
 import os
 import sys
+import re
 
 try:
     sys.stdout.reconfigure(encoding='utf-8')
@@ -56,7 +57,7 @@ def build_english_about():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/about" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 中文版</a>
+        <a href="/zh/about" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -188,7 +189,7 @@ def build_english_editorial_policy():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/editorial-policy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 中文版</a>
+        <a href="/zh/editorial-policy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -299,7 +300,7 @@ def build_english_contact():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/contact" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 中文版</a>
+        <a href="/zh/contact" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -464,7 +465,7 @@ def build_english_privacy():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/privacy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 中文版</a>
+        <a href="/zh/privacy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -576,7 +577,7 @@ def build_english_terms():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/terms" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 中文版</a>
+        <a href="/zh/terms" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -682,35 +683,22 @@ def main():
     zh_dir = os.path.join(pub_dir, "zh")
     os.makedirs(zh_dir, exist_ok=True)
 
-    # 1. Adapt existing Chinese compliance pages into public/zh/
-    compliance_files = ["about", "editorial-policy", "contact", "privacy", "terms"]
-    for cf in compliance_files:
-        src = os.path.join(pub_dir, f"{cf}.html")
-        dest = os.path.join(zh_dir, f"{cf}.html")
-        adapt_chinese_compliance_page(src, dest, cf)
-
-    # 2. Write pristine English compliance pages to public/
-    with open(os.path.join(pub_dir, "about.html"), "w", encoding="utf-8") as f:
-        f.write(build_english_about())
-    print("✅ Created English About page: public/about.html")
-
-    with open(os.path.join(pub_dir, "editorial-policy.html"), "w", encoding="utf-8") as f:
-        f.write(build_english_editorial_policy())
-    print("✅ Created English Editorial Policy page: public/editorial-policy.html")
-
-    with open(os.path.join(pub_dir, "contact.html"), "w", encoding="utf-8") as f:
-        f.write(build_english_contact())
-    print("✅ Created English Contact page: public/contact.html")
-
-    with open(os.path.join(pub_dir, "privacy.html"), "w", encoding="utf-8") as f:
-        f.write(build_english_privacy())
-    print("✅ Created English Privacy page: public/privacy.html")
-
-    with open(os.path.join(pub_dir, "terms.html"), "w", encoding="utf-8") as f:
-        f.write(build_english_terms())
-    print("✅ Created English Terms page: public/terms.html")
-
-    print("\n🎉 All bilingual compliance pages successfully generated!")
+    # 1. Write pristine English compliance pages to public/
+    compliance_generators = [
+        ("about.html", build_english_about),
+        ("editorial-policy.html", build_english_editorial_policy),
+        ("contact.html", build_english_contact),
+        ("privacy.html", build_english_privacy),
+        ("terms.html", build_english_terms),
+    ]
+    for filename, fn in compliance_generators:
+        content = fn()
+        # Assert and ensure zero Chinese characters in English compliance pages
+        assert len(re.findall(r'[\u4e00-\u9fff]', content)) == 0, f"Error: Chinese characters found in {filename}"
+        with open(os.path.join(pub_dir, filename), "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"✅ Created pristine English compliance page (0 Chinese chars): public/{filename}")
+    print("\n🎉 All English compliance pages successfully generated with 0 Chinese characters!")
 
 if __name__ == "__main__":
     main()

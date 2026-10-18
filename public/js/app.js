@@ -3627,11 +3627,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const con = t.perspective_con || {};
           const proRole = isZh ? (pro.role_zh || "支持/看好方论据") : (pro.role_en || "Pro Viewpoint");
           const proSpeaker = sm.pro_author || (isZh ? (pro.speaker_zh || "") : (pro.speaker_en || ""));
-          const proPoint = (isZh ? (sm.pro_point_zh || pro.point_zh || "") : (pro.point_en || sm.pro_point_zh || ""));
+          const proPoint = isZh ? (sm.pro_point_zh || pro.point_zh || "") : (pro.point_en || "Key technological development.");
           const conRole = isZh ? (con.role_zh || "审慎/质疑方核心论据") : (con.role_en || "Skeptical/Con Viewpoint");
           const conSpeaker = sm.con_author || (isZh ? (con.speaker_zh || "") : (con.speaker_en || ""));
-          const conPoint = (isZh ? (sm.con_point_zh || con.point_zh || "") : (con.point_en || sm.con_point_zh || ""));
-          const actionAdvice = isZh ? (sm.action_advice_zh || "") : (sm.action_advice_en || sm.action_advice_zh || "");
+          const conPoint = isZh ? (sm.con_point_zh || con.point_zh || "") : (con.point_en || "Pragmatic technical consideration.");
+          const actionAdvice = isZh ? (sm.action_advice_zh || "") : (sm.action_advice_en || "Actionable intelligence for builders.");
 
           const newsList = t.linked_news || [];
           const newsHtml = newsList.map(n => {
@@ -3655,7 +3655,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const tweetHtml = tweetList.map(tw => {
             const author = tw.author || "AI Leader";
             const handle = tw.author_handle || "@ai";
-            const content = isZh ? (tw.content_zh || tw.content_en) : (tw.content_en || tw.content_zh);
+            const content = isZh ? (tw.content_zh || tw.summary_zh || tw.title_zh || tw.content_en) : (tw.content_en || tw.summary_en || tw.title_en || "");
             const avatar = tw.author_avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=VIP";
             return `
               <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
@@ -6268,7 +6268,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (streamArena) {
           const arenaList = data.chatbot_arena || [];
           const arenaCards = arenaList.map(item => {
-            const badgeText = isZh ? (item.badge || '') : (item.badge_en || item.badge || '');
+            let badgeText = '';
+            if (isZh) {
+              badgeText = item.badge || '';
+            } else {
+              if (item.badge_en && !/[\u4e00-\u9fff]/.test(item.badge_en)) {
+                badgeText = item.badge_en;
+              } else if (item.rank === 1) {
+                badgeText = "👑 #1 Global Leader";
+              } else if (item.rank === 2) {
+                badgeText = "🔥 #2 Global SOTA";
+              } else if (item.rank === 3) {
+                badgeText = "⚡ #3 Global Top Tier";
+              } else {
+                badgeText = `Top ${item.rank} Leaderboard`;
+              }
+            }
             let rankBadgeClass = 'bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-300 dark:border-slate-700';
             if (item.rank === 1) {
               rankBadgeClass = 'bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-black shadow-sm shadow-amber-400/50 ring-1 ring-amber-300';
@@ -6327,7 +6342,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             const paperTitle = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
             const paperSpec = isZh ? item.spec : (item.spec_en || item.spec);
             const paperDate = isZh ? item.date : (item.date_en || item.date);
-            const paperSummary = isZh ? (item.summary_zh || item.summary_en || "") : (item.summary_en || item.summary_zh || "");
+            const paperSummary = isZh ? (item.summary_zh || item.summary || "") : (item.summary_en || item.summary || "");
             return `
               <a href="${item.url}" target="_blank" class="block p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all group space-y-1.5">
                 <div class="flex items-center justify-between text-[10px]">
@@ -7826,7 +7841,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <div class="space-y-3 relative pl-3 sm:pl-4 border-l-2 border-rose-300 dark:border-rose-900/60 ml-3 sm:ml-4 my-2">
               ${threadReplies.map((reply, rIdx) => {
-                const replyText = isZh ? (reply.content_zh || reply.content_en) : (reply.content_en || reply.content_zh);
+                const replyText = isZh ? (reply.content_zh || reply.content || reply.content_en) : (reply.content_en || reply.content || "");
                 const replyTime = isZh ? (reply.time || '1小时前') : (reply.time_en || '1h ago');
                 const replyImg = reply.image_url ? `
                   <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
@@ -7863,7 +7878,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             <div class="space-y-2.5">
               ${commentsList.map(c => {
-                const cText = isZh ? (c.content_zh || c.content || c.content_en) : (c.content_en || c.content || c.content_zh);
+                const cText = isZh ? (c.content_zh || c.content || c.content_en) : (c.content_en || c.content || "");
                 const cTime = isZh ? (c.time || '2小时前') : (c.time_en || '2h ago');
                 const cImg = c.image_url ? `
                   <div class="mt-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 max-w-sm">
@@ -8059,7 +8074,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const initialText = isZh ? (item.full_text_zh || item.title_zh || item.title) : (item.full_text_en || item.title_en || item.title);
       const formattedBody = formatSocialText(initialText);
 
-      const tags = isZh ? (item.spec_tags || []) : (item.spec_tags_en || item.spec_tags || []);
+      const tags = isZh ? (item.spec_tags || []) : (item.spec_tags_en || []);
       const tagsHtml = tags.length > 0
         ? `<div class="flex items-center gap-1.5 flex-wrap pt-2">${tags.map(s => `<span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800/90 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60">#${escapeHtml(s)}</span>`).join('')}</div>`
         : '';
@@ -8305,9 +8320,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         quoteLabelEl.textContent = isZhSystem ? '核心引言 · 观点提炼' : 'Executive Quote · Key Takeaway';
       }
       if (quoteTextEl) {
-        const quote = isZhSystem
-          ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title)
-          : (item.full_text_en || item.quote_en || item.title_en || item.title);
+        let quote = '';
+        if (isZhSystem) {
+          quote = item.quote_zh || item.full_text_zh || item.summary_zh || item.title_zh || '';
+          if (!/[\u4e00-\u9fff]/.test(quote)) {
+            quote = item.title_zh || item.summary_zh || quote;
+          }
+        } else {
+          quote = item.quote_en || item.full_text_en || item.summary_en || item.title_en || '';
+          if (/[\u4e00-\u9fff]/.test(quote)) {
+            quote = quote.replace(/[\u4e00-\u9fff]+/g, ' ').replace(/\s+/g, ' ').trim() || (item.title_en || 'Frontier AI Leader Perspective');
+          }
+        }
         quoteTextEl.textContent = quote;
       }
 
@@ -8328,9 +8352,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       let textToDisplay = '';
       if (viewingZh) {
-        textToDisplay = item.full_text_zh || item.summary_zh || item.title_zh || item.title || '';
+        textToDisplay = item.full_text_zh || item.summary_zh || item.title_zh || '';
+        if (!/[\u4e00-\u9fff]/.test(textToDisplay)) {
+          textToDisplay = item.summary_zh || item.title_zh || textToDisplay;
+        }
       } else {
-        textToDisplay = item.full_text_en || item.content_snippet || item.title_en || item.title || '';
+        textToDisplay = item.full_text_en || item.summary_en || item.title_en || '';
+        if (/[\u4e00-\u9fff]/.test(textToDisplay)) {
+          textToDisplay = textToDisplay.replace(/[\u4e00-\u9fff]+/g, ' ').replace(/\s+/g, ' ').trim() || (item.summary_en || 'Frontier AI development.');
+        }
       }
 
       if (fullTextContentEl) {
@@ -8431,7 +8461,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
               <div class="space-y-3 pl-3.5 border-l-2 border-rose-300 dark:border-rose-900/60 ml-2">
                 ${item.thread_replies.map((reply, rIdx) => {
-                  const rText = viewingZh ? (reply.content_zh || reply.content_en) : (reply.content_en || reply.content_zh);
+                  const rText = viewingZh ? (reply.content_zh || reply.content || reply.content_en) : (reply.content_en || reply.content || "");
                   const rTime = viewingZh ? (reply.time || '1小时前') : (reply.time_en || '1h ago');
                   const rImg = reply.image_url ? `
                     <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
@@ -8460,7 +8490,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         const commentsCardsHtml = commentsList.map(c => {
-          const cContent = viewingZh ? (c.content_zh || c.content || c.content_en) : (c.content_en || c.content || c.content_zh);
+          const cContent = viewingZh ? (c.content_zh || c.content || c.content_en) : (c.content_en || c.content || "");
           const cTime = viewingZh ? (c.time || '20分钟前') : (c.time_en || '20m ago');
           const cImg = c.image_url ? `
             <div class="mt-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 max-w-sm">
@@ -8519,7 +8549,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (aiWrapEl && aiTextEl) {
         const insight = isZhSystem
           ? (item.ai_analysis?.insight_zh || item.ai_analysis?.takeaway_zh)
-          : (item.ai_analysis?.takeaway_en || item.ai_analysis?.insight_zh);
+          : (item.ai_analysis?.takeaway_en || item.ai_analysis?.insight_en || "");
         if (insight && !insight.includes('【行业研判】该动态折射出当前AI产业链')) {
           aiTextEl.textContent = insight.replace(/^【.*?】\s*/, '');
           aiWrapEl.classList.remove('hidden');

@@ -32,7 +32,7 @@
       "@type": "WebSite",
       "inLanguage": ["en", "zh-CN"],
       "name": "AI News Radar",
-      "alternateName": ["AI News Radar", "ainewsradar", "ainewsradar.xyz", "AI 资讯雷达"],
+      "alternateName": ["AI News Radar", "ainewsradar", "ainewsradar.xyz"],
       "url": "https://ainewsradar.xyz/",
       "description": "Premier real-time panoramic intelligence radar for global frontier AI breakthroughs, verified leader signals, hands-on tutorials, and applied developer tools.",
       "potentialAction": {
@@ -45,7 +45,7 @@
       "@context": "https://schema.org",
       "@type": "NewsMediaOrganization",
       "name": "AI News Radar",
-      "alternateName": "AI 资讯雷达",
+      "alternateName": "AI News Radar",
       "url": "https://ainewsradar.xyz/",
       "description": "Premier real-time panoramic intelligence radar for global frontier AI breakthroughs, verified leader signals, hands-on tutorials, and applied developer tools."
     },
@@ -94,7 +94,7 @@
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
       .lg\:col-span-3 { grid-column: span 3 / span 3 !important; }
     }
-    /* 彻底关闭后台无限循环的高开销复合图层动画与全屏模糊计算 */
+    /* Disable high-overhead continuous background animations and full-screen blur filters */
     .global-radar-beam, .global-radar-pulse, .radar-sweep-beam, .radar-sonar-pulse, .global-radar-core::after {
       display: none !important;
       animation: none !important;
@@ -138,7 +138,7 @@
       will-change: transform;
     }
   
-    /* 强制所有卡片与新闻标题按钮严格靠左对齐，彻底覆盖浏览器 button 默认居中样式 */
+    /* Force all cards and news title buttons to align strictly left, overriding default button styles */
     .glass-card button, button.text-left {
       text-align: left !important;
     }
@@ -160,35 +160,35 @@
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
 
-  <!-- 📡 全网实时动态科技雷达扫描背景系统 (Global Radar Scan Background HUD - Light & Dark Dual Theme) -->
+  <!-- 📡 Global Radar Scan Background HUD - Light & Dark Dual Theme -->
   <div class="global-radar-hud" aria-hidden="true">
     <div class="global-radar-grid"></div>
     <div class="global-radar-center">
-      <!-- 同心测距标定圈 -->
+      <!-- Concentric Range Calibration Rings -->
       <div class="global-radar-ring gr-ring-1"></div>
       <div class="global-radar-ring gr-ring-2"></div>
       <div class="global-radar-ring gr-ring-3"></div>
       <div class="global-radar-ring gr-ring-4"></div>
       <div class="global-radar-ring gr-ring-5"></div>
       <div class="global-radar-ring gr-ring-6"></div>
-      <!-- 十字经纬轴线与对角基准线 -->
+      <!-- Crosshair Axes & Diagonal Reference Lines -->
       <div class="global-radar-axis-x"></div>
       <div class="global-radar-axis-y"></div>
       <div class="global-radar-diagonal-1"></div>
       <div class="global-radar-diagonal-2"></div>
-      <!-- 方位刻度标记 (Azimuth Marks) -->
+      <!-- Azimuth Marks -->
       <div class="gr-azimuth" style="top: -190px; left: 0; transform: translate(-50%, -100%);">000° N</div>
       <div class="gr-azimuth" style="top: 0; right: -190px; transform: translate(100%, -50%);">090° E</div>
       <div class="gr-azimuth" style="bottom: -190px; left: 0; transform: translate(-50%, 100%);">180° S</div>
       <div class="gr-azimuth" style="top: 0; left: -190px; transform: translate(-100%, -50%);">270° W</div>
-      <!-- 动态旋转声呐波束 (GPU 独立硬件加速) -->
+      <!-- Dynamic Rotating Sonar Beam (GPU Accelerated) -->
       <div class="global-radar-beam"></div>
-      <!-- 双频声呐脉冲波 (100% GPU Scale，交替涟漪) -->
+      <!-- Dual-Frequency Sonar Pulse Waves (GPU Ripple) -->
       <div class="global-radar-pulse"></div>
       <div class="global-radar-pulse global-radar-pulse-secondary"></div>
-      <!-- 雷达中心高频信标核心 -->
+      <!-- Radar Center High-Frequency Beacon Core -->
       <div class="global-radar-core"></div>
-      <!-- AI 动态侦听目标信标 (Blinking AI Intercept Blips) -->
+      <!-- Blinking AI Intercept Blips -->
       <div class="global-radar-blip" style="top: -240px; left: 340px; animation-delay: 0.2s;">
         <span class="global-radar-blip-dot"></span>
         <span class="global-radar-blip-label">TGT-01 · OPENAI [SIG 98%]</span>
@@ -229,7 +229,7 @@
 
   
 
-  <!-- 顶部科技导航栏 -->
+  <!-- Top Header Navigation Bar -->
   <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#070b16]/95 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 shadow-sm dark:shadow-xl">
     <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
@@ -251,7 +251,7 @@
         </div>
       </div>
 
-      <!-- 🏛️ 核心编辑专栏与站点导航 (Editorial Publication Navigation) -->
+      <!-- 🏛️ Editorial Publication Navigation -->
       <nav class="hidden lg:flex items-center space-x-1 xl:space-x-2 text-xs font-semibold select-none" aria-label="Editorial Navigation">
         <a href="/" class="px-3 py-1.5 rounded-lg text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/60 font-bold border border-indigo-200 dark:border-indigo-800/60 transition-colors">
           ⚡ Live Radar
@@ -273,7 +273,7 @@
         </a>
       </nav>
 
-      <!-- 移动端核心版块快速入口 -->
+      <!-- Mobile Section Quick Access Links -->
       <div class="flex lg:hidden items-center space-x-1.5 text-xs font-bold shrink-0">
         <a href="/articles" class="px-2 py-1 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 flex items-center gap-1">
           <span>📚</span><span>Guides (14)</span>
@@ -283,10 +283,10 @@
         </a>
       </div>
 
-      <!-- 右上角：深浅主题切换、中英文切换、状态指示灯与刷新 -->
+      <!-- Right Controls: Theme Toggle, Language Switcher, Status Light & Refresh -->
       <div id="header-actions-bar" class="flex items-center space-x-2 sm:space-x-3 shrink-0" style="contain: layout;">
         
-        <!-- 🌓 浅色/深色/自动主题切换胶囊 -->
+        <!-- 🌓 Light/Dark/Auto Theme Toggle Capsule -->
         <div class="flex items-center bg-slate-200/90 dark:bg-slate-900/90 p-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner">
           <button id="theme-btn-light" onclick="setTheme('light')" title="Light Mode" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>☀️</span>
@@ -302,16 +302,16 @@
           </button>
         </div>
 
-        <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
+        <!-- 🌐 Multi-Language Adaptive Translation Selector (Powered by Translate.js) -->
         <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
           <label for="site-lang-select" class="sr-only">Select website language</label>
           <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
             <optgroup label="Popular Languages">
               <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
-              <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 简体中文</option>
-              <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 繁體中文</option>
-              <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 日本語</option>
+              <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 Chinese (Simplified)</option>
+              <option value="chinese_traditional" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇭🇰 Chinese (Traditional)</option>
+              <option value="japanese" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇯🇵 Japanese</option>
               <option value="korean" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇰🇷 한국어</option>
               <option value="deutsch" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇩🇪 Deutsch</option>
               <option value="french" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇫🇷 Français</option>
@@ -346,7 +346,7 @@
             </optgroup>
           </select>
 
-          <!-- 💡 语言建议切换气泡指示框 (自动检测系统语言，数秒后自动淡出消失，不主动强制切换) -->
+          <!-- 💡 Language Suggestion Toast (Auto-detects browser locale) -->
           <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-300 dark:border-indigo-700/80 shadow-2xl z-[9999] transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none select-none">
             <!-- Arrow -->
             <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-300 dark:border-indigo-700/80 transform rotate-45"></div>
@@ -365,7 +365,7 @@
                 <div class="mt-2.5 flex items-center space-x-2">
                   <button type="button" id="lang-suggest-switch-btn" onclick="window.location.href='/zh'" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
                     <span>🇨🇳</span>
-                    <span id="lang-suggest-btn-text">中文精翻版 (/zh)</span>
+                    <span id="lang-suggest-btn-text">Switch to Chinese Edition (/zh)</span>
                   </button>
                   <button type="button" id="lang-suggest-keep-btn" onclick="dismissLangSuggestion(true)" class="px-2 py-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors cursor-pointer">
                     Keep English
@@ -379,7 +379,7 @@
           </div>
         </div>
 
-        <!-- 实时同步灯 -->
+        <!-- Real-Time Sync Indicator -->
         <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-200/80 dark:bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -388,7 +388,7 @@
           <span class="font-mono text-[11px]" id="refresh-indicator">Auto Refresh (<span id="timer">30</span>s)</span>
         </div>
 
-        <!-- 手动刷新按钮 -->
+        <!-- Manual Refresh Button -->
         <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
           <span>🔄</span>
           <span id="refresh-btn-text" class="font-medium">Refresh</span>
@@ -397,16 +397,16 @@
     </div>
   </header>
 
-  <!-- 🧭 现代化全景分类导航栏 (单行固定等比栅格专业门户布局) -->
+  <!-- 🧭 Category Navigation Bar (Single Row Fixed Grid Layout) -->
   <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 lg:px-8 py-2 shadow-sm dark:shadow-none select-none">
     <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between gap-2 sm:gap-3 xl:gap-4">
-      <!-- 左侧：雷达高频态势微标 (精致紧凑标定物) -->
+      <!-- Left: Radar Live Status Badge -->
       <div class="hidden xl:flex items-center space-x-2 shrink-0 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 select-none notranslate">
         <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.8)] animate-pulse"></span>
         <span class="font-bold text-[11px] xl:text-xs tracking-wider uppercase font-mono">RADAR LIVE</span>
       </div>
 
-      <!-- 中间：6 大核心专栏切换阵列 (严格单行、6等分固定比例 grid-cols-6，禁止机翻破坏布局) -->
+      <!-- Center: 6 Editorial Category Tabs (Fixed Proportional Grid) -->
       <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
         <div class="grid grid-cols-6 gap-1.5 sm:gap-2 min-w-[600px] md:min-w-0 w-full" id="nav-tabs">
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
@@ -442,7 +442,7 @@
         </div>
       </div>
 
-      <!-- 右侧：全站搜索筛选器 (单行紧凑自适应，永不挤压中间 7 栏等比结构) -->
+      <!-- Right: Global Search & Filter Bar -->
       <div class="relative shrink-0 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60 focus-within:w-48 sm:focus-within:w-56 md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
         <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search breaking AI news, models, tools..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
         <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
@@ -451,23 +451,23 @@
     </div>
   </nav>
 
-  <!-- 🎯 主体内容核心区域 -->
+  <!-- 🎯 Main Content Container -->
   <main class="relative w-full max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 min-h-screen">
 
-    <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
+    <!-- 🔥 Trending Topics Bar (Hot Tags Bar) -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs min-h-[32px]" style="min-height: 32px;">
       <div class="flex items-center space-x-1.5 text-slate-600 dark:text-slate-400 shrink-0 font-bold text-[11px]" id="hot-tags-label">
         <span class="text-amber-400">🔥</span>
         <span id="hot-tags-text">Hot Tags:</span>
       </div>
       <div class="flex items-center space-x-1.5 shrink-0" id="hot-tags-container">
-        <!-- 由 JS 渲染双语标签 Pills -->
+        <!-- Rendered via JS: Bilingual Topic Pills -->
       </div>
     </section>
 
-    <!-- 视图 0: 🔍 全站跨品类智能检索结果视图 (当用户搜索时自动激活) -->
+    <!-- View 0: 🔍 Global Search Results View (Activated on Search Query) -->
     <div id="view-search" class="hidden space-y-6">
-      <!-- 搜索状态栏与一键清空 -->
+      <!-- Search Status Bar & Clear Button -->
       <div class="bg-gradient-to-r from-slate-900/90 via-indigo-950/40 to-slate-900/90 rounded-2xl border border-indigo-500/30 p-4 shadow-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
           <h2 class="text-sm sm:text-base font-bold text-slate-100 flex items-center space-x-2">
@@ -482,10 +482,10 @@
         </button>
       </div>
 
-      <!-- 4 大板块交叉命中结果网格 -->
-      <!-- 5 大板块交叉命中结果网格 -->
+      <!-- Cross-Section Search Results Grid (4 Columns) -->
+      <!-- Cross-Section Search Results Grid (5 Columns) -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <!-- 快讯命中列 -->
+        <!-- News Briefs Column -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-amber-500 dark:text-amber-400 flex items-center space-x-1.5">
@@ -497,7 +497,7 @@
           <div id="search-stream-news" class="space-y-3"></div>
         </div>
 
-        <!-- 领袖观点命中列 -->
+        <!-- Titan Insights Column -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-sky-500 dark:text-sky-400 flex items-center space-x-1.5">
@@ -509,7 +509,7 @@
           <div id="search-stream-celeb" class="space-y-3"></div>
         </div>
 
-        <!-- 落地工具命中列 -->
+        <!-- AI Tools Column -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400 flex items-center space-x-1.5">
@@ -521,7 +521,7 @@
           <div id="search-stream-tools" class="space-y-3"></div>
         </div>
 
-        <!-- 实战视频命中列 -->
+        <!-- Hands-on Demos Column -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-rose-500 dark:text-rose-400 flex items-center space-x-1.5">
@@ -533,7 +533,7 @@
           <div id="search-stream-videos" class="space-y-3"></div>
         </div>
 
-        <!-- 提示词库命中列 -->
+        <!-- Prompts & Workflows Column -->
         <div class="space-y-3">
           <div class="flex items-center justify-between pb-1.5 border-b border-slate-200 dark:border-slate-800">
             <span class="text-xs font-bold text-purple-600 dark:text-purple-400 flex items-center space-x-1.5">
@@ -547,11 +547,11 @@
       </div>
     </div>
 
-    <!-- 视图 1: 🌐 综合全景模式 (All-in-One Magazine Stream，今日必读仅在本视图呈现) -->
+    <!-- View 1: 🌐 All-in-One Magazine Stream -->
     <div id="view-all" class="space-y-6">
-      <!-- 🔥 当日 AI 领袖与核心火爆推文 · 实时滚动轮播 (替换原重复资讯栏目) -->
-            <!-- 🔥 当日 AI 领袖与核心火爆推文 · 垂直走马灯 (替换原顶部横栏) -->
-            <!-- 🔥 当日 AI 领袖与核心火爆推文 · 垂直走马灯 (替换原顶部横栏) -->
+      <!-- 🔥 24h AI Titan Tweets & Viral Intercepts · Live Ticker -->
+            <!-- 🔥 24h AI Titan Tweets · Vertical Marquee Ticker -->
+            <!-- 🔥 24h AI Titan Tweets · Vertical Marquee Ticker -->
       <section id="viral-ticker-section" class="bg-gradient-to-r from-slate-50 via-indigo-50/40 to-slate-50 dark:from-slate-900/95 dark:via-indigo-950/40 dark:to-slate-900/95 rounded-2xl border border-slate-200/90 dark:border-indigo-500/25 p-4 shadow-xl backdrop-blur-md relative overflow-hidden group transition-colors">
         <div class="flex items-center justify-between mb-3 gap-2">
           <div class="flex items-center space-x-2.5 min-w-0">
@@ -562,7 +562,7 @@
             <span class="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline truncate" id="viral-ticker-subtitle">· Zero Redundancy: 48h Battle-Tested AI Workflows, Model Reviews & Leader Visuals</span>
           </div>
           <div class="flex items-center space-x-2 shrink-0">
-            <!-- 轮播控制与页码指示器 (支持黑白全适配) -->
+            <!-- Ticker Navigation Controls & Page Indicator -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
               <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 5</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Previous (Up)">↑</button>
@@ -656,7 +656,7 @@
             There's never been a better time to go into math
           </a>
           <div class="flex items-center gap-1 overflow-hidden mt-1">
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">3Blue1Brown</span> <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">💡 独家前沿</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">3Blue1Brown</span> <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">💡 ⚡ FRONTIER LEAD</span>
           </div>
         </div>
       </div>
@@ -711,10 +711,10 @@
                 <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
                   <div class="flex items-center justify-between text-[10px] gap-2 shrink-0">
                     <div class="flex items-center space-x-2 min-w-0">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/github/deepseek-ai&w=80&h=80&fit=cover&output=webp&q=80" alt="DeepSeek 深度求索" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/github/deepseek-ai&w=80&h=80&fit=cover&output=webp&q=80" alt="DeepSeek" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                       <div class="min-w-0 truncate">
                         <div class="flex items-center space-x-1">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">DeepSeek 深度求索</span>
+                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">DeepSeek</span>
                           <span class="text-sky-500 text-[10px] font-black">✓</span>
                         </div>
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate block">@deepseek_ai · AI Pioneer &amp; Builder</span>
@@ -966,7 +966,7 @@ Basically an Apple TV now.
       
 <!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
     <section id="topic-focus-section" class="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 rounded-2xl border border-indigo-500/30 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-white my-6" aria-label="🔥 24h Topic Focus & Perspectives">
-      <!-- 头部：标题、热度指示器、3个话题切换 Tab、收起/展开按钮 -->
+      <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
       <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-indigo-500/20 gap-3">
         <div class="flex items-center space-x-2.5 min-w-0">
           <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
@@ -979,7 +979,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 话题切换 Tab 组与收起/展开开关 -->
+        <!-- Topic Tabs Group & Toggle -->
         <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
           <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
             
@@ -1007,13 +1007,13 @@ Basically an Apple TV now.
         </div>
       </div>
 
-      <!-- 话题主体容器 (Topic Body Container) -->
+      <!-- Topic Body Container -->
       <div id="topic-focus-content" class="pt-4 transition-all duration-300">
         
         <!-- Topic Card 0 -->
         <article id="topic-focus-card-0" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch" data-idx="0">
           
-          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <!-- Col 1: Core Context & Breakthrough -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
@@ -1038,7 +1038,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <!-- Col 2: Titan Perspectives Collision -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
@@ -1049,7 +1049,7 @@ Basically an Apple TV now.
                 <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
               </div>
 
-              <!-- 观点 A: 愿景演进派 -->
+              <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-emerald-300">🟢 Efficiency & Open Source Proponents</span>
@@ -1060,7 +1060,7 @@ Basically an Apple TV now.
                 </p>
               </div>
 
-              <!-- 观点 B: 工业理性派 -->
+              <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-rose-300">🔴 Industrial Realists & Compute Skeptics</span>
@@ -1077,7 +1077,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <!-- Col 3: Linked Intelligence Bundle -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div>
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
@@ -1090,7 +1090,7 @@ Basically an Apple TV now.
                 </span>
               </div>
 
-              <!-- 快讯列表 -->
+              <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('a6fed9d4a73669ad')">
@@ -1112,7 +1112,7 @@ Basically an Apple TV now.
             </div>
               </div>
 
-              <!-- 推文列表 -->
+              <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
@@ -1120,14 +1120,14 @@ Basically an Apple TV now.
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-200 truncate">Ollama</span>
-                  <a href="https://x.com/ollama/status/2111576482879553726" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                  <a href="https://x.com/ollama/status/2111576482879553726" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
             </div>
               </div>
 
-              <!-- 关联工具/配方 -->
+              <!-- Linked Tools & Playbooks -->
               
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
               <div class="flex items-center justify-between gap-1 mb-1">
@@ -1157,7 +1157,7 @@ Basically an Apple TV now.
         <!-- Topic Card 1 -->
         <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
           
-          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <!-- Col 1: Core Context & Breakthrough -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
@@ -1182,7 +1182,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <!-- Col 2: Titan Perspectives Collision -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
@@ -1193,7 +1193,7 @@ Basically an Apple TV now.
                 <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
               </div>
 
-              <!-- 观点 A: 愿景演进派 -->
+              <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-emerald-300">🟢 Frontier Explorers & Auto-Science Advocates</span>
@@ -1204,7 +1204,7 @@ Basically an Apple TV now.
                 </p>
               </div>
 
-              <!-- 观点 B: 工业理性派 -->
+              <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-rose-300">🔴 Mathematical Purists & Risk Insurers</span>
@@ -1221,7 +1221,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <!-- Col 3: Linked Intelligence Bundle -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div>
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
@@ -1234,7 +1234,7 @@ Basically an Apple TV now.
                 </span>
               </div>
 
-              <!-- 快讯列表 -->
+              <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('f452fef57d2b22ed')">
@@ -1265,7 +1265,7 @@ Basically an Apple TV now.
             </div>
               </div>
 
-              <!-- 推文列表 -->
+              <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
@@ -1273,14 +1273,14 @@ Basically an Apple TV now.
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-200 truncate">Yann LeCun</span>
-                  <a href="https://x.com/ylecun/status/2111526996547379557" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                  <a href="https://x.com/ylecun/status/2111526996547379557" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
             </div>
               </div>
 
-              <!-- 关联工具/配方 -->
+              <!-- Linked Tools & Playbooks -->
               
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
               <div class="flex items-center justify-between gap-1 mb-1">
@@ -1310,7 +1310,7 @@ Basically an Apple TV now.
         <!-- Topic Card 2 -->
         <article id="topic-focus-card-2" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="2">
           
-          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <!-- Col 1: Core Context & Breakthrough -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
@@ -1335,7 +1335,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <!-- Col 2: Titan Perspectives Collision -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
@@ -1346,7 +1346,7 @@ Basically an Apple TV now.
                 <span class="text-[10px] text-slate-400 font-mono">Dual Perspectives</span>
               </div>
 
-              <!-- 观点 A: 愿景演进派 -->
+              <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-emerald-300">🟢 Agent Evangelists & Automation Geeks</span>
@@ -1357,7 +1357,7 @@ Basically an Apple TV now.
                 </p>
               </div>
 
-              <!-- 观点 B: 工业理性派 -->
+              <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-rose-300">🔴 Platform Custodians & Content Gatekeepers</span>
@@ -1374,7 +1374,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <!-- Col 3: Linked Intelligence Bundle -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div>
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
@@ -1387,7 +1387,7 @@ Basically an Apple TV now.
                 </span>
               </div>
 
-              <!-- 快讯列表 -->
+              <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" onclick="if(!event.target.closest('a')) openAiNewsModal('233710ab6c01ea19')">
@@ -1418,7 +1418,7 @@ Basically an Apple TV now.
             </div>
               </div>
 
-              <!-- 推文列表 -->
+              <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
@@ -1426,14 +1426,14 @@ Basically an Apple TV now.
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-200 truncate">Pirat_Nation 🔴</span>
-                  <a href="https://x.com/Pirat_Nation/status/2111593348293128535" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                  <a href="https://x.com/Pirat_Nation/status/2111593348293128535" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
             </div>
               </div>
 
-              <!-- 关联工具/配方 -->
+              <!-- Linked Tools & Playbooks -->
               
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
               <div class="flex items-center justify-between gap-1 mb-1">
@@ -1463,10 +1463,10 @@ Basically an Apple TV now.
     </section>
     <!-- ========== TOPIC_FOCUS_SECTION_END ========== -->
 
-      <!-- 🌟 第 2 层: 核心情报与对决 2 栏扩展矩阵 (⚡ 突发快讯双列扩展 + 🏆 LMSYS 天梯榜) -->
+      <!-- 🌟 Tier 2: Breaking News Dual Stream & LMSYS Arena Leaderboard -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
-        <!-- 栏目 A: ⚡ 突发·行业快讯 (扩展占用 9/12 宽度，双列大面积杂志排版更舒适) -->
+        <!-- Section A: ⚡ Breaking Industry News (Dual-Column Stream) -->
         <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-9 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
@@ -1483,7 +1483,7 @@ Basically an Apple TV now.
               </button>
             </div>
             
-            <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
+            <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
               <article class="glass-card rounded-xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer group hover:border-indigo-500/40 transition-all" onclick="if(!event.target.closest('a, button')) openAiNewsModal('18c0fa873bf907c1')" itemscope itemtype="https://schema.org/NewsArticle">
@@ -1801,7 +1801,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 快讯专栏直达底栏 -->
+          <!-- News Stream Quick Access Footer -->
           <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <button type="button" onclick="switchTab('news')" id="btn-view-all-news" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
               <span id="txt-view-all-news">View All Breaking News →</span>
@@ -1809,7 +1809,7 @@ Basically an Apple TV now.
           </div>
         </section>
 
-        <!-- 栏目 B: 🏆 LMSYS Chatbot Arena 大模型天梯榜 (压缩为 3/12 宽度，天梯紧凑基准列) -->
+        <!-- Section B: 🏆 LMSYS Chatbot Arena Leaderboard -->
         <section id="section-col-arena" class="glass-panel rounded-2xl p-3.5 sm:p-4 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-3 h-[680px] sm:h-[750px] lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0 gap-1">
@@ -1826,7 +1826,7 @@ Basically an Apple TV now.
               </a>
             </div>
             
-            <!-- 天梯榜列表容器：全量展现 Top 25 排名，与左侧两栏完美等高 -->
+            <!-- Arena Leaderboard: Top 25 Model Rankings -->
             <div class="space-y-1.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-arena">
 
               <div class="flex flex-col gap-1 p-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-amber-500/50 transition-all group">
@@ -2232,7 +2232,7 @@ Basically an Apple TV now.
             </div>
           </div>
 
-          <!-- 天梯直达底栏 -->
+          <!-- Arena Leaderboard Quick Access Footer -->
           <div class="pt-3 mt-2 border-t border-slate-200 dark:border-slate-800/60 shrink-0">
             <a href="https://arena.ai/leaderboard" target="_blank" rel="noopener noreferrer" class="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-amber-600 dark:hover:text-amber-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer text-center">
               <span>Arena Official Leaderboard (arena.ai) ↗</span>
@@ -2242,10 +2242,10 @@ Basically an Apple TV now.
 
       </div>
 
-      <!-- 🌟 第 3 层: 落地与实操 3 栏矩阵 (🛠️ 实用神器 + 🎬 实战视频 + 💡 提示词库，与上方 3 栏严格对应排列) -->
+      <!-- 🌟 Tier 3: Practical AI Tools, Video Demos & Workflow Prompts Matrix -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
 
-        <!-- 栏目 D: 🛠️ 场景落地·实用神器 (占用 5/12 宽度，对应上方快讯列) -->
+        <!-- Section D: 🛠️ Practical AI Tools -->
         <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-2 lg:col-span-5">
           <div class="space-y-3.5">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
@@ -2284,7 +2284,7 @@ Basically an Apple TV now.
           </div>
         </section>
 
-        <!-- 栏目 E: 🎬 实战视频·精选演示 (占用 4/12 宽度，对应上方社交雷达列) -->
+        <!-- Section E: 🎬 Curated Video Demos & Walkthroughs -->
         <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-1 lg:col-span-4">
           <div class="space-y-3.5">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
@@ -2295,7 +2295,7 @@ Basically an Apple TV now.
               <button onclick="switchTab('videos')" id="link-all-videos" class="text-xs text-rose-600 dark:text-rose-400 hover:underline cursor-pointer">All Videos →</button>
             </div>
             <div class="space-y-3" id="stream-videos">
-              <!-- 动态注入 Top 2 精选视频 -->
+              <!-- Injected dynamically: Top 2 Curated Video Demos -->
             </div>
           </div>
           <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
@@ -2305,7 +2305,7 @@ Basically an Apple TV now.
           </div>
         </section>
 
-        <!-- 栏目 F: 💡 Workflows & Prompts Library (占用 3/12 宽度) -->
+        <!-- Section F: 💡 Workflows & Prompts Library -->
         <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between space-y-4 border border-slate-200/80 dark:border-slate-800/80 md:col-span-1 lg:col-span-3 overflow-hidden min-w-0">
           <div class="space-y-3.5 min-w-0 overflow-hidden">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-2.5">
@@ -2337,7 +2337,7 @@ Basically an Apple TV now.
 
       </div>
 
-      <!-- 🌟 第 4 层: 每日学术突破全宽展台 (移向最底部，只有一个不并列，可拉宽占满框框) -->
+      <!-- 🌟 Tier 4: Daily ArXiv Research Breakthroughs -->
       <section class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl space-y-4 border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-purple-500/70">
         <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3">
           <div class="flex items-center space-x-2.5">
@@ -2355,10 +2355,10 @@ Basically an Apple TV now.
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="stream-arxiv">
-          <!-- 动态注入 ArXiv Papers Top 6 -->
+          <!-- Injected dynamically: Top 6 ArXiv Papers -->
         </div>
 
-        <!-- 学术突破直达底栏 -->
+        <!-- Academic Breakthroughs Quick Access Footer -->
         <div class="pt-2 border-t border-slate-200 dark:border-slate-800/60">
           <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" class="w-full py-2.5 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-900/90 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-purple-500/40 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-all flex items-center justify-center space-x-1.5 shadow-sm group cursor-pointer">
             <span>Explore Breakthrough Papers (arXiv.org) ↗</span>
@@ -2367,12 +2367,12 @@ Basically an Apple TV now.
       </div>
     </div>
 
-    <!-- 视图 2: 独立专栏全屏广场模式 (当点击特定 Tab 时激活) -->
+    <!-- View 2: Dedicated Category Full-Width Grid View -->
     <div id="view-category" class="hidden space-y-5">
-      <!-- 🌟 领袖大V火爆推文焦点展位 (Spotlight Banner) -->
+      <!-- 🌟 Titan Tweets Spotlight Banner -->
       <div id="celebrity-spotlight-banner" class="hidden"></div>
 
-      <!-- 专栏标题横幅 -->
+      <!-- Category Header Banner -->
       <div class="bg-gradient-to-r from-slate-100 via-indigo-50/40 to-slate-100 dark:from-slate-900/90 dark:via-indigo-950/20 dark:to-slate-900/90 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2.5">
@@ -2386,11 +2386,11 @@ Basically an Apple TV now.
         </div>
       </div>
 
-      <!-- 专栏次级控制器全宽卡片 (包含模式切换与分类标签，宽度100%舒展，彻底杜绝按钮挤压变形) -->
+      <!-- Category Filter Controller Bar -->
       <div id="cat-controls-bar" class="w-full space-y-3">
-        <!-- 领袖观点与全网爆帖专属次级控制器容器 -->
+        <!-- Titan Insights & Viral Posts Filter Bar -->
         <div id="social-mode-switcher-wrap" class="hidden flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台热帖) -->
+          <!-- Mode Segment Switcher: Titan Insights vs 24h Trending Posts -->
           <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
             <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
               <span id="txt-social-mode-leader">🐦 Frontier Feed</span>
@@ -2406,14 +2406,14 @@ Basically an Apple TV now.
             </button>
           </div>
 
-          <!-- 子筛选 A：前沿社交专属 (全部动态 / 官方机构 / 大V与研发者) -->
+          <!-- Sub-filter A: Frontier Social (All / Official Labs / Creators & Builders) -->
           <div id="celebrity-subfilter" class="flex items-center gap-2 flex-wrap">
             <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">All Feed</button>
             <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 Official Labs</button>
             <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 Creators & Pioneers</button>
           </div>
 
-          <!-- 子筛选 B：24h平台热帖专属 -->
+          <!-- Sub-filter B: 24h Trending Platforms -->
           <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
             <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 All Viral</button>
             <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 Surging</button>
@@ -2423,7 +2423,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 工具专用的多维价值与场景快速筛选过滤器 -->
+        <!-- AI Tools Scenario & Value Multi-Filter Bar -->
         <div id="tools-subfilter" class="hidden space-y-2.5 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <div class="flex items-center gap-2 flex-wrap pb-2 border-b border-slate-100 dark:border-slate-800">
             <span id="tool-origin-label" class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 px-1">🧭 Dimension:</span>
@@ -2452,7 +2452,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 视频专属快速筛选器 -->
+        <!-- Video Format & Category Quick Filter Bar -->
         <div id="videos-subfilter" class="hidden space-y-2 p-3 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <div class="flex items-center gap-2 flex-wrap">
             <button onclick="filterVideoPlatform('all')" id="video-plat-all" class="video-plat-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shrink-0 shadow-sm whitespace-nowrap flex items-center space-x-1.5">
@@ -2478,7 +2478,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 提示词专属高阶筛选体系 (包含实战工作流与高阶提示词) -->
+        <!-- Prompts & Workflows Advanced Filter System -->
         <div id="prompts-subfilter" class="hidden space-y-2.5 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
           <!-- Workflows vs Prompts Toggle -->
           <div class="flex items-center gap-2 flex-wrap pb-2 border-b border-slate-200 dark:border-slate-800/60">
@@ -2529,7 +2529,7 @@ Basically an Apple TV now.
         </div>
       </div>
 
-      <!-- 创作者专区导引栏 (Top Creators Rail) -->
+      <!-- Top Creators Rail -->
       <div id="creators-rail-container" class="hidden glass-panel rounded-2xl p-3 border border-slate-200 dark:border-slate-800">
         <div class="flex items-center justify-between mb-2 px-1">
           <div class="flex items-center space-x-2">
@@ -2541,16 +2541,16 @@ Basically an Apple TV now.
           <span class="text-[10px] text-indigo-500 font-mono font-bold" id="creators-active-hint">All Creators</span>
         </div>
         <div id="creators-rail" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-1">
-          <!-- 由 JS 渲染创作者头像与名称 -->
+          <!-- Injected via JS: Creator Avatars and Names -->
         </div>
       </div>
 
-      <!-- 网格或列表呈现 -->
+      <!-- Content Grid / Stream Container -->
       <div id="cat-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <!-- 由 JS 渲染 -->
+        <!-- Injected dynamically via JS -->
       </div>
 
-      <!-- 专栏分页控制器与每页条数选择器 (30, 50, 100) -->
+      <!-- Category Pagination Controller & Page Size Selector (30, 50, 100) -->
       <div id="cat-pagination-container" class="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4"></div>
     </div>
 
@@ -2560,7 +2560,7 @@ Basically an Apple TV now.
     
 </main>
 
-  <!-- 法律合规与隐私弹窗 Modal (满足 Google AdSense 强制政策要求) -->
+  <!-- Legal Compliance & Privacy Policy Modal (AdSense Compliant) -->
   <div id="legal-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[85vh]">
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -2572,12 +2572,12 @@ Basically an Apple TV now.
         <button onclick="closeLegalModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white text-lg px-2">✕</button>
       </div>
       <div id="legal-content" class="p-6 overflow-y-auto space-y-4 text-xs text-slate-700 dark:text-slate-300 leading-relaxed max-h-[65vh]">
-        <!-- 动态注入合规法律内容 -->
+        <!-- Injected dynamically: Legal Content -->
       </div>
     </div>
   </div>
 
-  <!-- 视频播放弹窗 Modal (自适应 16:9 横屏与 9:16 竖屏，支持跨域/区域限制直达原站容灾) -->
+  <!-- Video Player Modal (Adaptive 16:9 Landscape & 9:16 Portrait) -->
   <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
     <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
@@ -2604,10 +2604,10 @@ Basically an Apple TV now.
     </div>
   </div>
 
-  <!-- 资讯概要 / 新闻简报弹窗 Modal (News Briefing) -->
+  <!-- Executive News Briefing Modal -->
   <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
-      <!-- 窗口标题栏 Header (信源只在此处显示，杜绝正文冗余) -->
+      <!-- Header (Source tag shown in title bar) -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center space-x-3 min-w-0">
           <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-sm shrink-0">
@@ -2623,12 +2623,12 @@ Basically an Apple TV now.
         <button type="button" onclick="closeAiNewsModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
       </div>
 
-      <!-- 简报正文区 (Scrollable) -->
+      <!-- Briefing Body (Scrollable) -->
       <div class="p-5 overflow-y-auto space-y-4 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
-        <!-- 资讯原标题 (已脱敏清洗杂质) -->
+        <!-- News Headline (Cleaned) -->
         <h2 id="ai-modal-title" class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 leading-snug"></h2>
 
-        <!-- 资讯原文配图 (支持点击查看大图、多图切换，防裂图自动隐藏) -->
+        <!-- News Photo (Interactive Full Resolution) -->
         <div id="ai-modal-image-wrap" class="hidden space-y-2">
           <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900/90 dark:bg-slate-950/80 max-h-[380px] shadow-md relative group flex items-center justify-center p-0.5">
             <img id="ai-modal-image" src="" alt="News Coverage Photo" class="max-w-full max-h-[380px] w-auto h-auto object-contain mx-auto rounded-lg transition-transform duration-300 group-hover:scale-[1.01] cursor-zoom-in" onclick="window.open(this.src, '_blank')" onerror="document.getElementById('ai-modal-image-wrap').classList.add('hidden')">
@@ -2637,11 +2637,11 @@ Basically an Apple TV now.
               <span id="ai-modal-image-hint">Click to view full resolution</span>
             </span>
           </div>
-          <!-- 多图缩略条 (若有附加配图/图表) -->
+          <!-- Gallery Thumbnail Strip -->
           <div id="ai-modal-gallery-strip" class="hidden flex items-center gap-2 overflow-x-auto py-1"></div>
         </div>
 
-        <!-- 原文包含现场视频报道专属标识栏 (针对源站含路透社/彭博等受 HLS/DRM 保护的现场视频报道) -->
+        <!-- Embedded Video Available Notice Bar -->
         <div id="ai-modal-video-badge" class="hidden flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs shadow-sm">
           <div class="flex items-center space-x-2 min-w-0">
             <span class="text-base shrink-0">📹</span>
@@ -2653,7 +2653,7 @@ Basically an Apple TV now.
           </a>
         </div>
 
-        <!-- 顶级付费墙媒体独家报道专属提示条 (针对 The Information, Bloomberg, WSJ 等硬付费墙) -->
+        <!-- Exclusive Paywall Media Coverage Notice -->
         <div id="ai-modal-paywall-notice" class="hidden flex items-start space-x-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs shadow-sm">
           <span class="text-base shrink-0 leading-none">🔒</span>
           <div class="flex-1 leading-relaxed">
@@ -2661,18 +2661,18 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 板块 1: 📋 事件脉络速览 (新闻简报) -->
+        <!-- Section 1: 📋 Executive Intelligence Briefing -->
         <div class="p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b border-slate-200/80 dark:border-slate-800 pb-2">
             <span>📋</span>
             <span id="ai-modal-briefing-title">Executive News Briefing</span>
           </div>
 
-          <!-- 核心事实全貌 (自然流畅交代，无需查看原资讯详情) -->
+          <!-- Core Facts Summary -->
           <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
         </div>
 
-        <!-- 板块 1.5: 📰 深度报道原文 / 核心段落 (若具备丰富原文段落，原汁原味展示段落格式) -->
+        <!-- Section 1.5: 📰 In-Depth Coverage & Excerpts -->
         <div id="ai-modal-original-card" class="hidden p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200/80 dark:border-slate-800 pb-2">
             <span>📰</span>
@@ -2681,7 +2681,7 @@ Basically an Apple TV now.
           <div id="ai-modal-original-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal whitespace-pre-line space-y-2"></div>
         </div>
 
-        <!-- 板块 2: 💡 AI 点评 (仅在具备高相关针对性分析时展示，否则优雅隐藏) -->
+        <!-- Section 2: 💡 AI Analysis & Takeaway -->
         <div id="ai-modal-insight-card" class="p-4 rounded-xl bg-gradient-to-br from-indigo-50/60 via-purple-50/40 to-slate-50/60 dark:from-indigo-950/30 dark:via-purple-950/20 dark:to-slate-950/40 border border-indigo-200/70 dark:border-indigo-800/50 space-y-2">
           <div class="flex items-center space-x-2 text-xs font-bold text-purple-700 dark:text-purple-300">
             <span>💡</span>
@@ -2691,7 +2691,7 @@ Basically an Apple TV now.
         </div>
       </div>
 
-      <!-- 简报底部 Footer (去除废话，保留直接跳转原文按钮) -->
+      <!-- Modal Footer (Direct Source Link) -->
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1.5 font-mono">
           <span>⚡</span>
@@ -2705,11 +2705,11 @@ Basically an Apple TV now.
     </div>
   </div>
 
-  <!-- 领袖观点·社交推文与网友热评弹窗 Modal (Social Post & Hot Comments) -->
+  <!-- Social Post & Community Discussions Modal -->
   <div id="social-post-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeSocialPostModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
-      <!-- 窗口标题栏 Header -->
+      <!-- Modal Header Bar -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center space-x-3 min-w-0">
           <div id="social-modal-icon-wrap" class="w-9 h-9 rounded-xl bg-sky-500/10 dark:bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-500 text-lg font-bold shrink-0">
@@ -2725,10 +2725,10 @@ Basically an Apple TV now.
         <button type="button" onclick="closeSocialPostModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0" title="Close">✕</button>
       </div>
 
-      <!-- 正文滚动区 Body -->
+      <!-- Scrollable Content Body -->
       <div class="p-5 overflow-y-auto space-y-4 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
         
-        <!-- 作者个人信息栏 -->
+        <!-- Author Profile Bar -->
         <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800/80">
           <div class="flex items-center space-x-3 min-w-0">
             <img id="social-modal-avatar" src="" alt="Author Avatar" class="w-12 h-12 rounded-full border-2 border-sky-400/60 object-cover shrink-0 shadow-md">
@@ -2743,7 +2743,7 @@ Basically an Apple TV now.
           <div id="social-modal-spec-tags" class="hidden sm:flex items-center gap-1.5 flex-wrap justify-end"></div>
         </div>
 
-        <!-- Tier 1: 💡 核心看点 / 观点提炼 (速读核心引言) -->
+        <!-- Tier 1: 💡 Key Takeaway & Executive Quote -->
         <div id="social-modal-quote-wrap" class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-br from-amber-500/10 via-sky-500/5 to-transparent border border-amber-500/30 dark:border-amber-500/20 space-y-2 relative">
           <div class="flex items-center justify-between text-xs text-amber-600 dark:text-amber-400 font-bold">
             <span class="flex items-center space-x-1.5">
@@ -2759,9 +2759,9 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- Tier 2: 📜 大V完整原帖正文 (100%忠实原貌，保留换行段落，随系统语言自适应，支持双语一键切换) -->
+        <!-- Tier 2: 📜 Full Authentic Post Content -->
         <div id="social-modal-fulltext-wrap" class="rounded-2xl bg-slate-50/90 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800/90 overflow-hidden flex flex-col shadow-sm">
-          <!-- 原帖顶栏：状态指示 + 双语切换按钮 -->
+          <!-- Post Top Bar: Status Indicator + Language Toggle -->
           <div class="p-3 sm:px-4 bg-slate-100/80 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 flex-wrap">
             <div class="flex items-center space-x-2 min-w-0">
               <span class="text-base shrink-0">📜</span>
@@ -2769,23 +2769,23 @@ Basically an Apple TV now.
               <span id="social-modal-lang-mode-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-300 border border-sky-500/30 font-semibold shrink-0">English Original (Verbatim)</span>
             </div>
             
-            <!-- 双语一键切换按钮 -->
+            <!-- Language Switch Button -->
             <button type="button" id="social-modal-lang-toggle" onclick="toggleSocialModalLanguage()" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-sky-500/10 hover:bg-sky-500/20 text-sky-600 dark:text-sky-400 border border-sky-500/30 transition-all flex items-center gap-1.5 shadow-sm active:scale-95 shrink-0" title="Toggle original and translation">
               <span>🌐</span>
               <span id="social-modal-lang-toggle-text">Switch to Chinese Translation</span>
             </button>
           </div>
 
-          <!-- 原帖全文内容区域 (保持换行、段落、标点符号，支持文字选中复制) -->
+          <!-- Full Post Text Container -->
           <div class="p-4 sm:p-5 max-h-[45vh] overflow-y-auto custom-scrollbar">
             <div id="social-modal-fulltext-content" class="text-sm sm:text-[14.5px] leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-200 font-sans whitespace-pre-wrap select-text cursor-text break-words">
-              <!-- 动态注入原帖全文 -->
+              <!-- Injected dynamically: Full Post Text -->
             </div>
-            <!-- 原帖原图与视频媒体呈现区域 -->
+            <!-- Media Container: Images & Embedded Video -->
             <div id="social-modal-media-content" class="mt-3 empty:hidden"></div>
           </div>
 
-          <!-- 原帖底部防伪鉴真声明 -->
+          <!-- Authenticity & Source Verification Notice -->
           <div class="px-4 py-2 bg-slate-100/50 dark:bg-slate-900/50 border-t border-slate-200/60 dark:border-slate-800/60 flex items-center justify-between text-[10px] text-slate-400 font-mono">
             <span class="flex items-center space-x-1">
               <span>🔒</span>
@@ -2795,7 +2795,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 实时四维互动看板 (阅读量 👁️, 点赞数 ❤️, 评论数 💬, 转推数 🔁) -->
+        <!-- Real-Time Metrics Dashboard (Views 👁️, Likes ❤️, Comments 💬, Retweets 🔁) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
             <span class="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1">👁️ Views</span>
@@ -2815,7 +2815,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 网友精选神评与社区交锋 (Netizen Hot Comments) -->
+        <!-- Curated Community Discussions & Replies -->
         <div class="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
           <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span class="flex items-center space-x-1.5">
@@ -2825,11 +2825,11 @@ Basically an Apple TV now.
             <span class="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-semibold">● Live Discussion</span>
           </div>
           <div id="social-modal-comments-list" class="space-y-3">
-            <!-- 动态注入 3 条真实有深度的网友评论 -->
+            <!-- Injected dynamically: Top Curated Community Replies -->
           </div>
         </div>
 
-        <!-- AI 独家点评 (可选呈现) -->
+        <!-- AI Analytical Commentary (Optional) -->
         <div id="social-modal-ai-insight-wrap" class="hidden p-3.5 rounded-xl bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-transparent border border-purple-500/20 text-xs leading-relaxed space-y-1">
           <div class="flex items-center space-x-1.5 font-bold text-purple-600 dark:text-purple-300">
             <span>💡</span>
@@ -2840,7 +2840,7 @@ Basically an Apple TV now.
 
       </div>
 
-      <!-- 底部操作栏 Footer -->
+      <!-- Action Footer Bar -->
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="text-[11px] text-slate-500 dark:text-slate-400 flex items-center space-x-1.5 font-mono">
           <span>⚡</span>
@@ -2858,11 +2858,11 @@ Basically an Apple TV now.
     </div>
   </div>
 
-  <!-- 落地工具·抓取情报与交互式预览画廊弹窗 Modal (Tool Detail & Screenshot Gallery Modal) -->
+  <!-- AI Tool Detail & Interactive Screenshot Gallery Modal -->
   <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden max-w-3xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
-      <!-- 窗口顶栏 Header -->
+      <!-- Modal Top Bar -->
       <div class="p-4 sm:p-5 bg-slate-50/90 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center space-x-3.5 min-w-0">
           <div id="tool-modal-icon-wrap" class="w-11 h-11 rounded-2xl bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-500 text-xl font-bold shrink-0 shadow-inner">
@@ -2881,7 +2881,7 @@ Basically an Apple TV now.
           </div>
         </div>
         <div class="flex items-center space-x-2 shrink-0">
-          <!-- 核心行动按钮：直达官网 -->
+          <!-- Primary CTA Button: Visit Official Site -->
           <a id="tool-modal-official-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 sm:px-4 py-2 text-xs font-black bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl shadow-md shadow-emerald-600/30 transition-all flex items-center space-x-1.5 transform hover:-translate-y-0.5">
             <span id="tool-modal-visit-text">🚀 Visit Website</span>
             <span>↗</span>
@@ -2890,15 +2890,15 @@ Basically an Apple TV now.
         </div>
       </div>
 
-      <!-- 正文滚动区 Body -->
+      <!-- Scrollable Content Body -->
       <div class="p-5 sm:p-6 overflow-y-auto space-y-5 text-slate-700 dark:text-slate-200 leading-relaxed text-sm">
         
-        <!-- 一句话核心定位 Hook Banner -->
+        <!-- One-Line Core Value Hook Banner -->
         <div class="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent border border-emerald-500/20">
           <p id="tool-modal-hook" class="text-sm sm:text-base font-bold text-emerald-950 dark:text-emerald-200 leading-snug"></p>
         </div>
 
-        <!-- 快速上手与适用人群 (Quickstart & Best For) -->
+        <!-- Quickstart Guide & Best For Profiles -->
         <div id="tool-modal-quickstart-wrap" class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 dark:bg-slate-950/90 border border-emerald-500/30 space-y-2.5">
           <div class="flex items-center justify-between border-b border-slate-800 pb-2">
             <span class="flex items-center space-x-1.5 text-xs font-bold text-emerald-400">
@@ -2914,7 +2914,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 交互式多图轮播画廊 (Interactive Screenshot Carousel) -->
+        <!-- Interactive Screenshot Carousel -->
         <div class="space-y-2">
           <div class="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-slate-100">
             <span class="flex items-center space-x-1.5">
@@ -2927,7 +2927,7 @@ Basically an Apple TV now.
           <div class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 aspect-[16/9] max-h-[380px] shadow-lg group">
             <img id="tool-carousel-image" src="" alt="Tool UI preview" class="w-full h-full object-cover sm:object-contain transition-all duration-300 cursor-pointer" onclick="openToolImageLightbox()">
             
-            <!-- 上一张 / 下一张导航箭头 -->
+            <!-- Prev / Next Navigation Arrows -->
             <button id="tool-carousel-prev" type="button" onclick="prevToolCarouselSlide()" class="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/85 text-white flex items-center justify-center backdrop-blur-sm transition-all shadow-md opacity-80 hover:opacity-100">
               ‹
             </button>
@@ -2935,7 +2935,7 @@ Basically an Apple TV now.
               ›
             </button>
 
-            <!-- 底部小圆点指示器 -->
+            <!-- Bottom Dot Indicator -->
             <div id="tool-carousel-dots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-md"></div>
           </div>
           <div class="text-right">
@@ -2943,7 +2943,7 @@ Basically an Apple TV now.
           </div>
         </div>
 
-        <!-- 详细情报与深度解析 (Overview) -->
+        <!-- Detailed Intelligence Overview -->
         <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-2.5">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span>📋</span>
@@ -2952,7 +2952,7 @@ Basically an Apple TV now.
           <p id="tool-modal-overview" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
         </div>
 
-        <!-- 核心功能要点 Checklist (Key Features) -->
+        <!-- Key Features Checklist -->
         <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
           <div class="flex items-center space-x-2 text-xs font-bold text-slate-900 dark:text-slate-100 border-b border-slate-200 dark:border-slate-800 pb-2">
             <span>⚡</span>
@@ -2961,7 +2961,7 @@ Basically an Apple TV now.
           <ul id="tool-modal-features-list" class="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300"></ul>
         </div>
 
-        <!-- 极客技术规格与参数 (Tech Specs Grid) -->
+        <!-- Technical Specifications Grid -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center">
             <span class="text-[11px] text-slate-400 font-medium">Pricing Tier</span>
@@ -2984,7 +2984,7 @@ Basically an Apple TV now.
     </div>
   </div>
 
-  <!-- 复制成功 Toast 浮条 -->
+  <!-- Copy Success Toast -->
   <div id="copy-toast" class="fixed bottom-6 right-6 z-50 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
     <span>✅</span>
     <span id="copy-toast-msg">Copied to clipboard!</span>

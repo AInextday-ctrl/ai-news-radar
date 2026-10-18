@@ -827,7 +827,11 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         news_html_items = []
         for n in news_list:
             n_title = n.get("title_zh" if is_zh else "title_en") or n.get("title", "")
+            if not is_zh and re.search(r'[\u4e00-\u9fff]', n_title):
+                n_title = re.sub(r'[\u4e00-\u9fff]+', '', n_title).strip() or n.get("title_en", "Industry Breaking News")
             n_source = n.get("source", "Global AI")
+            if not is_zh and re.search(r'[\u4e00-\u9fff]', n_source):
+                n_source = "Global AI"
             n_id = n.get("id", "")
             n_url = n.get("url", "#")
             click_attr = f'onclick="if(!event.target.closest(\'a\')) openAiNewsModal(\'{n_id}\')"' if n_id else ''
@@ -846,18 +850,25 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         tweet_list = t.get("linked_tweets", [])
         tweet_html_items = []
         for tw in tweet_list:
-            tw_author = tw.get("author", "AI Leader")
+            raw_author = tw.get("author", "AI Leader")
+            if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_author):
+                tw_author = tw.get("author_en") or re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip() or "AI Pioneer"
+            else:
+                tw_author = raw_author
             tw_handle = tw.get("author_handle", "@ai")
             tw_content = tw.get("content_zh" if is_zh else "content_en", "")
+            if not is_zh and re.search(r'[\u4e00-\u9fff]', tw_content):
+                tw_content = re.sub(r'[\u4e00-\u9fff]+', '', tw_content).strip()
             tw_url = tw.get("url", "#")
             tw_avatar = tw.get("author_avatar") or "https://api.dicebear.com/7.x/bottts/svg?seed=VIP"
+            btn_post_text = "查看原帖 ↗" if is_zh else "View Post ↗"
             tweet_html_items.append(f"""
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
-              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-200 truncate">{tw_author}</span>
-                  <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">原帖 ↗</a>
+                  <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">{btn_post_text}</a>
                 </div>
                 <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">{tw_content}</p>
               </div>
@@ -896,7 +907,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         <!-- Topic Card {idx} -->
         <article id="topic-focus-card-{idx}" class="{card_cls}" data-idx="{idx}">
           
-          <!-- 列 1: 事件核心脉络 (Core Context & Breakthrough) -->
+          <!-- Col 1: Core Context & Breakthrough -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
@@ -921,7 +932,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             </div>
           </div>
 
-          <!-- 列 2: 大V观点立场对撞 (Perspectives Collision) -->
+          <!-- Col 2: Titan Perspectives Collision -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
@@ -932,7 +943,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
                 <span class="text-[10px] text-slate-400 font-mono">{"双面对照" if is_zh else "Dual Perspectives"}</span>
               </div>
 
-              <!-- 观点 A: 愿景演进派 -->
+              <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-emerald-300">{pro_role}</span>
@@ -943,7 +954,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
                 </p>
               </div>
 
-              <!-- 观点 B: 工业理性派 -->
+              <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
                   <span class="font-bold text-rose-300">{con_role}</span>
@@ -960,7 +971,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             </div>
           </div>
 
-          <!-- 列 3: 关联情报束 (Linked Intelligence Bundle) -->
+          <!-- Col 3: Linked Intelligence Bundle -->
           <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
             <div>
               <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
@@ -973,17 +984,17 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
                 </span>
               </div>
 
-              <!-- 快讯列表 -->
+              <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 {news_bundle_html}
               </div>
 
-              <!-- 推文列表 -->
+              <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 {tweets_bundle_html}
               </div>
 
-              <!-- 关联工具/配方 -->
+              <!-- Linked Tools & Playbooks -->
               {tool_html}
             </div>
 
@@ -1003,7 +1014,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     return f"""
     <!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
     <section id="topic-focus-section" class="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 rounded-2xl border border-indigo-500/30 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-white my-6" aria-label="{header_title}">
-      <!-- 头部：标题、热度指示器、3个话题切换 Tab、收起/展开按钮 -->
+      <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
       <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-indigo-500/20 gap-3">
         <div class="flex items-center space-x-2.5 min-w-0">
           <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
@@ -1016,7 +1027,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
           </div>
         </div>
 
-        <!-- 话题切换 Tab 组与收起/展开开关 -->
+        <!-- Topic Tabs Group & Toggle -->
         <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
           <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
             {tabs_html}
@@ -1027,7 +1038,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         </div>
       </div>
 
-      <!-- 话题主体容器 (Topic Body Container) -->
+      <!-- Topic Body Container -->
       <div id="topic-focus-content" class="pt-4 transition-all duration-300">
         {cards_html}
       </div>
