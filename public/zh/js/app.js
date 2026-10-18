@@ -3207,23 +3207,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
                 </div>
                 <div class="min-w-0 truncate">
-                  <div class="flex items-center space-x-1">
+                  <div class="flex items-center space-x-1 leading-tight">
                     <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate">${author}</span>
-                    <span class="text-sky-500 text-[10px] font-black">✓</span>
+                    <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                   </div>
-                  <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium">${handle} · ${role}</span>
+                  <span class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate block font-medium leading-tight mt-0.5">${handle} · ${role}</span>
                 </div>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0">
-                <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
-                  <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-                  </span>
-                  <span>${badgeText}</span>
+              <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
                 </span>
-                <span class="font-mono text-[9.5px] px-2 py-0.5 rounded-full bg-amber-500/15 dark:bg-amber-400/15 text-amber-800 dark:text-amber-300 border border-amber-400/40 dark:border-amber-500/30 font-bold shrink-0 shadow-sm" title="${isZh ? '推文发布时间 (北京时间 UTC+8)' : 'Tweet Publish Time (UTC+8)'}">🕒 ${pubTimeDisplay}</span>
-              </div>
+                <span>${badgeText}</span>
+              </span>
             </div>
             <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
               <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
@@ -3232,14 +3229,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               ${thumbHtml}
             </div>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0">
-            <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold">
+          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-2">
+            <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold shrink-0">
               <span class="animate-pulse text-amber-500">⚡</span>
               <span>${spotlightTag}</span>
             </span>
-            <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0" onclick="event.stopPropagation()">
-              <span>${btnText}</span>
-            </a>
+            <div class="flex items-center gap-2 font-mono text-[10px] shrink-0">
+              <span class="text-amber-800/80 dark:text-amber-300/80 font-medium" title="${isZh ? '推文发布时间 (北京时间 UTC+8)' : 'Tweet Publish Time (UTC+8)'}">
+                <span>🕒 ${pubTimeDisplay}</span>
+              </span>
+              <span class="text-slate-300 dark:text-slate-700">·</span>
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0" onclick="event.stopPropagation()">
+                <span>${btnText}</span>
+              </a>
+            </div>
           </div>
         </article>
       `;
