@@ -5237,11 +5237,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       
       const inputs = document.querySelectorAll(`.prompt-var-input[data-pid="${id}"]`);
       let assembledText = baseText;
-      inputs.forEach(inp => {
+      inputs.forEach((inp, idx) => {
         const varKey = inp.getAttribute('data-var');
         const val = inp.value.trim();
-        if (val && varKey) {
-          assembledText = assembledText.split(varKey).join(val);
+        if (val) {
+          if (varKey) assembledText = assembledText.split(varKey).join(val);
+          if (store.varsZh && store.varsZh[idx]) assembledText = assembledText.split(store.varsZh[idx]).join(val);
+          if (store.varsEn && store.varsEn[idx]) assembledText = assembledText.split(store.varsEn[idx]).join(val);
         }
       });
       store.assembled = assembledText;
@@ -5640,6 +5642,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       window.__promptStore[item.id] = {
         zh: promptZh,
         en: promptEn,
+        varsZh: item.variables || [],
+        varsEn: item.variables_en || [],
         active: isZh ? 'zh' : 'en'
       };
 
@@ -5647,9 +5651,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const usageGuide = isZh
         ? (item.usage_guide_zh || item.usage_guide || "")
         : (item.usage_guide_en || (item.usage_guide && !/[\u4e00-\u9fa5]/.test(item.usage_guide) ? item.usage_guide : "Replace the bracketed variables with your parameters and run in the recommended model."));
-      const variables = isZh
+      let variables = isZh
         ? (item.variables || [])
         : (item.variables_en || (item.variables || []).filter(v => !/[\u4e00-\u9fa5]/.test(v)));
+      if (!variables || variables.length === 0) {
+        const matches = (activeText || "").match(/\{\{[^}]+\}\}/g);
+        if (matches && matches.length > 0) {
+          variables = Array.from(new Set(matches));
+        }
+      }
 
       const variablesHtml = (variables && variables.length > 0)
         ? `<div class="p-2.5 rounded-xl bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-500/30 space-y-2 w-full min-w-0">
@@ -6894,7 +6904,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (toolOriginFilter === 'web') {
           list = list.filter(it => getToolOrigin(it) === 'web');
         } else if (toolOriginFilter === 'demo') {
-          list = list.filter(it => it.has_live_demo || getToolOrigin(it) === 'web' || getToolOrigin(it) === 'huggingface' || (it.demo_url && it.demo_url.length > 5));
+          list = list.filter(it => it.has_live_demo === true || getToolOrigin(it) !== 'github' || (it.demo_url && it.demo_url.length > 5));
         } else if (toolOriginFilter === 'github') {
           list = list.filter(it => getToolOrigin(it) === 'github');
         } else if (toolOriginFilter === 'huggingface') {

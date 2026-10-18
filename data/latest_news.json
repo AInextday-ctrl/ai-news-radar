@@ -63471,7 +63471,7 @@
           "{{核心反转}}"
         ],
         "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
-        "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
+        "prompt_content_en": "You are a professional micro-drama screenwriter for short video platforms (TikTok, Reels, Shorts), specializing in high-tension visual storytelling and viral hooks.\n\nCreate a 45-60 second vertical screenplay based on the following setup:\n- Protagonist: {{Protagonist Role}}\n- Antagonist: {{Antagonist Role}}\n- Core Plot Twist: {{Core Plot Twist}}\n\nStructural Rules:\n1. [0-3s Cold Hook]: First frame must open with an immediate visual disruption or action conflict ({{1s Visual Hook}}), breaking expectations with zero filler setup.\n2. [4-25s Emotional Tension]: Intense shot-reverse-shot confrontation dialogue pushing viewer stress to the breaking point.\n3. [26-40s Climax Reversal]: Protagonist reveals their trump card or counter-move, unleashing emotional release.\n4. [40-50s Cliffhanger]: End abruptly on an extreme close-up with a high-stakes cliffhanger line prompting users to swipe to the next episode.\n\nOutput format must specify: Shot number, Camera framing (Close-up / Medium / Wide), Camera movement, Scene action, Dialogue, and Sound effect cues.",
         "sample_output": {
           "type": "script",
           "title": "实战剧本样章：《辞职信上的签名》",
@@ -63596,7 +63596,7 @@
           "{{世界核心矛盾}}"
         ],
         "prompt_content_zh": "你是一名资深网络小说白金作家与 IP 世界观架构师。请为一部 {{题材分类}} 长篇作品构建骨架并锁定人物一致性：\n\n1. 【世界底座】：定义力量/经济体系、战力天花板与不可违背的底层物理/法则约束，杜绝战力膨胀；\n2. 【角色一致性锚点 (Character Lock)】：为主角制定外貌锚定词、口头禅、下意识动作与绝对动机准则（在任何生死抉择时绝不背离该准则）；\n3. 【核心驱动力】：设计主角获得的 {{核心金手指}} 与 {{世界核心矛盾}} 之间的冲突循环；\n4. 【前三章切入大纲】：黄金三章节奏设计（第1章破局、第2章显露冰山一角、第3章设立首个必胜目标）。",
-        "prompt_content_en": "Build a cohesive, non-contradictory fiction universe and establish an immutable character anchor rule (appearance, decision heuristics, core motivation) to prevent personality drift over long chapters.",
+        "prompt_content_en": "You are an acclaimed fiction author and narrative worldbuilding architect. Build the framework and lock character consistency for an ongoing {{Genre}} novel:\n\n1. [World Foundation]: Define the power/magic/economic system, absolute power ceiling, and unbreakable physical laws to prevent power creep.\n2. [Character Consistency Anchor]: Establish immutable visual anchors, signature phrases, subconscious gestures, and absolute core motivations for the protagonist that remain non-negotiable under any life-or-death decision.\n3. [Core Driving Loop]: Design the conflict loop between the protagonist {{Core Power/Cheat}} and the central {{World Conflict}}.\n4. [First 3 Chapters Outline]: Pacing blueprint for the golden first three chapters (Ch1: Status quo shattered, Ch2: Tip of the iceberg revealed, Ch3: First non-negotiable objective set).",
         "sample_output": {
           "type": "text",
           "title": "世界观与人物锚定卡样本",
@@ -63718,7 +63718,7 @@
           "{{维度拆解}}"
         ],
         "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
-        "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+        "prompt_content_en": "You are a senior data analyst and business intelligence expert. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized remediation steps.\n\nAnalysis Scope:\n- Target Metric: {{Business Metric}}\n- Observed Anomaly: {{Anomaly Pattern}}\n- Breakdown Dimensions: {{Breakdown Dimensions}}\n\nWorkflow:\n1. Metric Decomposition: Break down the target metric into primary mathematical drivers and conversion ratios to pinpoint mathematical sensitivity.\n2. Multi-Dimensional Drilldown: Segment by available dimensions (channels, cohorts, pricing tiers) to locate the exact cluster driving the variance.\n3. Actionable Remediation: Deliver 3 prioritized operational countermeasures achievable within 48 hours, along with 1 long-term structural fix.",
         "sample_output": {
           "type": "text",
           "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
@@ -63843,7 +63843,7 @@
           "{{下阶段目标}}"
         ],
         "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
-        "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+        "prompt_content_en": "You are a senior management consultant specializing in executive communications. Transform operational notes into a high-impact executive presentation following the Minto Pyramid Principle:\n\nContext:\n- Business Unit: {{Business Unit}}\n- Key Highlights: {{Key Achievements}}\n- Core Bottlenecks: {{Core Bottlenecks}}\n- Next-Phase Goals: {{Next-Phase Goals}}\n\nDeliverable Structure:\n1. Executive Summary (BLUF): Single bottom-line-up-front statement with strategic impact.\n2. MECE Pillars: Mutually exclusive, collectively exhaustive breakdown of performance drivers, market headwinds, and mitigation strategies.\n3. Bottleneck Resolution: Direct remediation plan turning {{Core Bottlenecks}} into high-ROI operational wins.\n4. Action Roadmap: Clear milestone timeline aligning quarterly deliverables with {{Next-Phase Goals}}.",
         "sample_output": {
           "type": "text",
           "title": "述职报告提纲样本：AI 自动化中台建设报告",
@@ -64245,7 +64245,7 @@
           "{{人均预算}}"
         ],
         "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
-        "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+        "prompt_content_en": "You are an expert travel planner and local concierge specializing in bespoke, loop-free travel itineraries.\n\nTrip Parameters:\n- Destination: {{Destination City}}\n- Duration: {{Trip Duration}}\n- Companions: {{Travel Companions}}\n- Budget Per Person: {{Budget Per Person}}\n\nItinerary Guidelines:\n1. Timeline Cards: Morning, afternoon, evening, and night slots with exact transit modes and estimated travel minutes between stops.\n2. Culinary Highlights: Recommend authentic local dining spots avoiding tourist traps, with signature dish recommendations.\n3. Contingency Options: Supply indoor alternatives and rainy-day options for outdoor attractions.\n4. Budget Allocation: Breakdown across transit, lodging, dining, and admission tickets to guarantee spending remains within {{Budget Per Person}}.",
         "sample_output": {
           "type": "text",
           "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
@@ -64445,7 +64445,7 @@
           "{{构图景别}}"
         ],
         "prompt_content_zh": "电影级特写镜头，{{主体描述}}，站在潮湿的雨夜霓虹街头，反射着 {{色调氛围}} 的微光，皮肤肌理清晰细腻，真实的毛孔与水珠光泽，浅景深，光线柔和，哈苏 80mm f/1.8 镜头质感，大师级构图，8K 超高清分辨率 --ar 16:9 --v 6.1 --style raw",
-        "prompt_content_en": "Cinematic close-up portrait of {{Subject Description}}, standing on a wet neon-lit street after rain, subtle volumetric Tyndall lighting, ultra-realistic skin pores and reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece.",
+        "prompt_content_en": "Cinematic close-up portrait of {{Subject Description}}, standing on a wet neon-lit street after rain. Composition: {{Shot Composition}}. Atmosphere and color tone: {{Color & Mood}}. Subtle volumetric Tyndall lighting, ultra-realistic skin pores and wet reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece, photorealistic render.",
         "sample_output": {
           "type": "image",
           "title": "Flux.1 实测生成效果图 (带真实出图大图)",
@@ -64492,7 +64492,7 @@
           "{{状态管理}}"
         ],
         "prompt_content_zh": "你是一名资深全栈系统架构师，擅长使用 {{框架版本}} (App Router)、TypeScript 与 {{数据库ORM}} 构建高内聚低耦合的应用。\n\n请遵循以下严苛工程准则审查并重构代码：\n1. 严格区分 Server Component 与 Client Component，尽可能将数据获取推至服务端，减少客户端 JS Bundle 体积；\n2. 所有异步 I/O 必须显式处理异常并返回类型安全的 Result<T, E> 或自定义结构体；\n3. 遵循单一职责（SRP）与无副作用函数原则，严禁直接在 UI 组件内部拼装未校验的 SQL/ORM 复杂查询；\n4. 提供整洁的目录组织方案与单元测试用例（覆盖率达标）。",
-        "prompt_content_en": "You are a senior full-stack system architect specializing in Next.js 15 (App Router), TypeScript, and modern ORMs. Review and refactor the codebase following strict engineering standards: clear Server/Client Component separation, robust error boundaries, typed I/O, and unit test coverage.",
+        "prompt_content_en": "You are a senior full-stack system architect specializing in enterprise web applications.\n\nStack Configuration:\n- Framework: {{Framework Version}}\n- Database / ORM: {{Database ORM}}\n- State Management: {{State Management}}\n\nReview and refactor the codebase following strict production engineering standards:\n1. Architecture: Strict Server Component vs Client Component separation, executing data fetching on the server and minimizing client-side JS bundles.\n2. Type Safety: Zero any types, end-to-end type validation from database queries to API routes to frontend components.\n3. Resilience & Boundaries: Implement robust error boundaries, graceful loading skeletons, and transactional database rollbacks.\n4. Clean Code & Testing: Enforce Single Responsibility Principle (SRP), clean folder structures, and comprehensive unit tests with service mocks.",
         "sample_output": {
           "type": "code",
           "title": "重构后的 Server Action 与数据流架构示例",
@@ -64654,7 +64654,7 @@
           "{{环境光影}}"
         ],
         "prompt_content_zh": "摄影机缓慢向主体向前推镜头（Slow Dolly-in），{{动作细节}}，发丝随微风轻微自然摆动，眼神流转自然眨眼，周围光晕伴随 {{环境光影}} 产生丁达尔慢速闪烁，物理模拟逼真，无断帧抖动，电影级 60fps 质感。",
-        "prompt_content_en": "Camera slowly dolly-in towards subject. Natural hair fluttering in a gentle breeze, natural subtle blinking and breathing movements, cinematographic lighting transitions, photorealistic 60fps smooth render.",
+        "prompt_content_en": "Cinematic 60fps ultra-slow-motion sequence. Subject action: {{Action Details}}. Camera execution: {{Camera Movement}}. Lighting setup: {{Ambient Lighting}}, photorealistic depth of field, volumetric haze, hyper-detailed textures, 4k master render, seamless physical dynamics.",
         "sample_output": {
           "type": "video",
           "title": "Wan 2.1 实测动态视频样例 (鼠标悬停即播)",
@@ -64739,7 +64739,7 @@
           "{{故障现象}}"
         ],
         "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
-        "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+        "prompt_content_en": "Leveraging DeepSeek-R4 adaptive reasoning capabilities, diagnose and eliminate the concurrency defect in the provided system.\n\nSystem Parameters:\n- Language: {{Language}}\n- Concurrency Model: {{Concurrency Model}}\n- Observed Symptom: {{Issue Symptom}}\n\nAnalysis Requirements:\n1. State Machine & Race Detection: Map concurrent execution pathways and identify exact thread or coroutine race conditions, lock order inversions, or memory visibility bugs.\n2. Edge Case & Fault Injection: Analyze extreme boundary states (deadlocks, thread pool exhaustion, unbounded channel backpressure).\n3. Production-Ready Refactor: Deliver clean, fully-commented code replacing problematic locks with lock-free atomics, ring buffers, or channels.\n4. Verification: Supply stress-testing or fuzzing scripts to guarantee the issue cannot reproduce under peak load.",
         "sample_output": {
           "type": "code",
           "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
@@ -120834,7 +120834,7 @@
         "{{核心反转}}"
       ],
       "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
-      "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
+      "prompt_content_en": "You are a professional micro-drama screenwriter for short video platforms (TikTok, Reels, Shorts), specializing in high-tension visual storytelling and viral hooks.\n\nCreate a 45-60 second vertical screenplay based on the following setup:\n- Protagonist: {{Protagonist Role}}\n- Antagonist: {{Antagonist Role}}\n- Core Plot Twist: {{Core Plot Twist}}\n\nStructural Rules:\n1. [0-3s Cold Hook]: First frame must open with an immediate visual disruption or action conflict ({{1s Visual Hook}}), breaking expectations with zero filler setup.\n2. [4-25s Emotional Tension]: Intense shot-reverse-shot confrontation dialogue pushing viewer stress to the breaking point.\n3. [26-40s Climax Reversal]: Protagonist reveals their trump card or counter-move, unleashing emotional release.\n4. [40-50s Cliffhanger]: End abruptly on an extreme close-up with a high-stakes cliffhanger line prompting users to swipe to the next episode.\n\nOutput format must specify: Shot number, Camera framing (Close-up / Medium / Wide), Camera movement, Scene action, Dialogue, and Sound effect cues.",
       "sample_output": {
         "type": "script",
         "title": "实战剧本样章：《辞职信上的签名》",
@@ -120959,7 +120959,7 @@
         "{{世界核心矛盾}}"
       ],
       "prompt_content_zh": "你是一名资深网络小说白金作家与 IP 世界观架构师。请为一部 {{题材分类}} 长篇作品构建骨架并锁定人物一致性：\n\n1. 【世界底座】：定义力量/经济体系、战力天花板与不可违背的底层物理/法则约束，杜绝战力膨胀；\n2. 【角色一致性锚点 (Character Lock)】：为主角制定外貌锚定词、口头禅、下意识动作与绝对动机准则（在任何生死抉择时绝不背离该准则）；\n3. 【核心驱动力】：设计主角获得的 {{核心金手指}} 与 {{世界核心矛盾}} 之间的冲突循环；\n4. 【前三章切入大纲】：黄金三章节奏设计（第1章破局、第2章显露冰山一角、第3章设立首个必胜目标）。",
-      "prompt_content_en": "Build a cohesive, non-contradictory fiction universe and establish an immutable character anchor rule (appearance, decision heuristics, core motivation) to prevent personality drift over long chapters.",
+      "prompt_content_en": "You are an acclaimed fiction author and narrative worldbuilding architect. Build the framework and lock character consistency for an ongoing {{Genre}} novel:\n\n1. [World Foundation]: Define the power/magic/economic system, absolute power ceiling, and unbreakable physical laws to prevent power creep.\n2. [Character Consistency Anchor]: Establish immutable visual anchors, signature phrases, subconscious gestures, and absolute core motivations for the protagonist that remain non-negotiable under any life-or-death decision.\n3. [Core Driving Loop]: Design the conflict loop between the protagonist {{Core Power/Cheat}} and the central {{World Conflict}}.\n4. [First 3 Chapters Outline]: Pacing blueprint for the golden first three chapters (Ch1: Status quo shattered, Ch2: Tip of the iceberg revealed, Ch3: First non-negotiable objective set).",
       "sample_output": {
         "type": "text",
         "title": "世界观与人物锚定卡样本",
@@ -121081,7 +121081,7 @@
         "{{维度拆解}}"
       ],
       "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
-      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "prompt_content_en": "You are a senior data analyst and business intelligence expert. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized remediation steps.\n\nAnalysis Scope:\n- Target Metric: {{Business Metric}}\n- Observed Anomaly: {{Anomaly Pattern}}\n- Breakdown Dimensions: {{Breakdown Dimensions}}\n\nWorkflow:\n1. Metric Decomposition: Break down the target metric into primary mathematical drivers and conversion ratios to pinpoint mathematical sensitivity.\n2. Multi-Dimensional Drilldown: Segment by available dimensions (channels, cohorts, pricing tiers) to locate the exact cluster driving the variance.\n3. Actionable Remediation: Deliver 3 prioritized operational countermeasures achievable within 48 hours, along with 1 long-term structural fix.",
       "sample_output": {
         "type": "text",
         "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
@@ -121206,7 +121206,7 @@
         "{{下阶段目标}}"
       ],
       "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
-      "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+      "prompt_content_en": "You are a senior management consultant specializing in executive communications. Transform operational notes into a high-impact executive presentation following the Minto Pyramid Principle:\n\nContext:\n- Business Unit: {{Business Unit}}\n- Key Highlights: {{Key Achievements}}\n- Core Bottlenecks: {{Core Bottlenecks}}\n- Next-Phase Goals: {{Next-Phase Goals}}\n\nDeliverable Structure:\n1. Executive Summary (BLUF): Single bottom-line-up-front statement with strategic impact.\n2. MECE Pillars: Mutually exclusive, collectively exhaustive breakdown of performance drivers, market headwinds, and mitigation strategies.\n3. Bottleneck Resolution: Direct remediation plan turning {{Core Bottlenecks}} into high-ROI operational wins.\n4. Action Roadmap: Clear milestone timeline aligning quarterly deliverables with {{Next-Phase Goals}}.",
       "sample_output": {
         "type": "text",
         "title": "述职报告提纲样本：AI 自动化中台建设报告",
@@ -121608,7 +121608,7 @@
         "{{人均预算}}"
       ],
       "prompt_content_zh": "你是一名深耕全球独立旅行的专业向导，熟悉 {{目的地城市}} 的地理拓扑、地道街头美食与游客避坑指南。\n\n请为我们（{{同行人员}}，共 {{出行天数}} 天，人均预算 {{人均预算}} 元）制定一份丝滑、不走回头路、劳逸结合的深度行程：\n1. 【每日时间轴卡片】：精确划分上午、下午、日落观赏点与夜生活，标明每站之间最优交通方式与预计步行步数；\n2. 【美食雷达】：每顿正餐推荐 2 家本地人排队但非纯网红溢价的餐饮，并附必点招牌菜；\n3. 【防坑与备选预案】：指出 3 个最容易被宰或排队超过2小时的雷区，并给出阴雨天备选室内方案；\n4. 【极简预算表】：交通、门票、住宿、餐饮分门别类，确保控制在预算以内。",
-      "prompt_content_en": "Design an optimal, loop-free travel itinerary for the specified duration and budget. Include exact transit instructions, non-tourist-trap dining options, weather contingencies, and categorized expense estimates.",
+      "prompt_content_en": "You are an expert travel planner and local concierge specializing in bespoke, loop-free travel itineraries.\n\nTrip Parameters:\n- Destination: {{Destination City}}\n- Duration: {{Trip Duration}}\n- Companions: {{Travel Companions}}\n- Budget Per Person: {{Budget Per Person}}\n\nItinerary Guidelines:\n1. Timeline Cards: Morning, afternoon, evening, and night slots with exact transit modes and estimated travel minutes between stops.\n2. Culinary Highlights: Recommend authentic local dining spots avoiding tourist traps, with signature dish recommendations.\n3. Contingency Options: Supply indoor alternatives and rainy-day options for outdoor attractions.\n4. Budget Allocation: Breakdown across transit, lodging, dining, and admission tickets to guarantee spending remains within {{Budget Per Person}}.",
       "sample_output": {
         "type": "text",
         "title": "行程单样本：成都 3 天 2 晚慢调深度游（人均¥1500）",
@@ -121808,7 +121808,7 @@
         "{{构图景别}}"
       ],
       "prompt_content_zh": "电影级特写镜头，{{主体描述}}，站在潮湿的雨夜霓虹街头，反射着 {{色调氛围}} 的微光，皮肤肌理清晰细腻，真实的毛孔与水珠光泽，浅景深，光线柔和，哈苏 80mm f/1.8 镜头质感，大师级构图，8K 超高清分辨率 --ar 16:9 --v 6.1 --style raw",
-      "prompt_content_en": "Cinematic close-up portrait of {{Subject Description}}, standing on a wet neon-lit street after rain, subtle volumetric Tyndall lighting, ultra-realistic skin pores and reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece.",
+      "prompt_content_en": "Cinematic close-up portrait of {{Subject Description}}, standing on a wet neon-lit street after rain. Composition: {{Shot Composition}}. Atmosphere and color tone: {{Color & Mood}}. Subtle volumetric Tyndall lighting, ultra-realistic skin pores and wet reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece, photorealistic render.",
       "sample_output": {
         "type": "image",
         "title": "Flux.1 实测生成效果图 (带真实出图大图)",
@@ -121855,7 +121855,7 @@
         "{{状态管理}}"
       ],
       "prompt_content_zh": "你是一名资深全栈系统架构师，擅长使用 {{框架版本}} (App Router)、TypeScript 与 {{数据库ORM}} 构建高内聚低耦合的应用。\n\n请遵循以下严苛工程准则审查并重构代码：\n1. 严格区分 Server Component 与 Client Component，尽可能将数据获取推至服务端，减少客户端 JS Bundle 体积；\n2. 所有异步 I/O 必须显式处理异常并返回类型安全的 Result<T, E> 或自定义结构体；\n3. 遵循单一职责（SRP）与无副作用函数原则，严禁直接在 UI 组件内部拼装未校验的 SQL/ORM 复杂查询；\n4. 提供整洁的目录组织方案与单元测试用例（覆盖率达标）。",
-      "prompt_content_en": "You are a senior full-stack system architect specializing in Next.js 15 (App Router), TypeScript, and modern ORMs. Review and refactor the codebase following strict engineering standards: clear Server/Client Component separation, robust error boundaries, typed I/O, and unit test coverage.",
+      "prompt_content_en": "You are a senior full-stack system architect specializing in enterprise web applications.\n\nStack Configuration:\n- Framework: {{Framework Version}}\n- Database / ORM: {{Database ORM}}\n- State Management: {{State Management}}\n\nReview and refactor the codebase following strict production engineering standards:\n1. Architecture: Strict Server Component vs Client Component separation, executing data fetching on the server and minimizing client-side JS bundles.\n2. Type Safety: Zero any types, end-to-end type validation from database queries to API routes to frontend components.\n3. Resilience & Boundaries: Implement robust error boundaries, graceful loading skeletons, and transactional database rollbacks.\n4. Clean Code & Testing: Enforce Single Responsibility Principle (SRP), clean folder structures, and comprehensive unit tests with service mocks.",
       "sample_output": {
         "type": "code",
         "title": "重构后的 Server Action 与数据流架构示例",
@@ -122017,7 +122017,7 @@
         "{{环境光影}}"
       ],
       "prompt_content_zh": "摄影机缓慢向主体向前推镜头（Slow Dolly-in），{{动作细节}}，发丝随微风轻微自然摆动，眼神流转自然眨眼，周围光晕伴随 {{环境光影}} 产生丁达尔慢速闪烁，物理模拟逼真，无断帧抖动，电影级 60fps 质感。",
-      "prompt_content_en": "Camera slowly dolly-in towards subject. Natural hair fluttering in a gentle breeze, natural subtle blinking and breathing movements, cinematographic lighting transitions, photorealistic 60fps smooth render.",
+      "prompt_content_en": "Cinematic 60fps ultra-slow-motion sequence. Subject action: {{Action Details}}. Camera execution: {{Camera Movement}}. Lighting setup: {{Ambient Lighting}}, photorealistic depth of field, volumetric haze, hyper-detailed textures, 4k master render, seamless physical dynamics.",
       "sample_output": {
         "type": "video",
         "title": "Wan 2.1 实测动态视频样例 (鼠标悬停即播)",
@@ -122102,7 +122102,7 @@
         "{{故障现象}}"
       ],
       "prompt_content_zh": "你具备 DeepSeek-R4 旗舰纯强化学习演化的自适应长思维链推理能力（Adaptive Test-Time Compute），请为以下使用 {{编程语言}} 编写的 {{并发模型}} 系统诊断潜在问题：\n\n1. 启动多层反思证伪空间，绘制临界区状态转移时序表，主动推演极限死锁、内存乱序重排（Memory Reordering）与伪共享（False Sharing）；\n2. 检查极端边界情况（如跨核缓存行抖动、优雅停机上下文泄漏、无界通道背压失控）；\n3. 给出从根本上摒弃重量级互斥锁的无锁原子设计（Lock-Free Atomic / RingBuffer），并附带完备的高并发压力测试验证脚本。",
-      "prompt_content_en": "Leveraging DeepSeek-R4's adaptive reasoning capabilities, diagnose the deadlock and race condition in the provided concurrent system. Provide state machine transitions, root-cause analysis, and optimized lock-free or atomic algorithm replacements.",
+      "prompt_content_en": "Leveraging DeepSeek-R4 adaptive reasoning capabilities, diagnose and eliminate the concurrency defect in the provided system.\n\nSystem Parameters:\n- Language: {{Language}}\n- Concurrency Model: {{Concurrency Model}}\n- Observed Symptom: {{Issue Symptom}}\n\nAnalysis Requirements:\n1. State Machine & Race Detection: Map concurrent execution pathways and identify exact thread or coroutine race conditions, lock order inversions, or memory visibility bugs.\n2. Edge Case & Fault Injection: Analyze extreme boundary states (deadlocks, thread pool exhaustion, unbounded channel backpressure).\n3. Production-Ready Refactor: Deliver clean, fully-commented code replacing problematic locks with lock-free atomics, ring buffers, or channels.\n4. Verification: Supply stress-testing or fuzzing scripts to guarantee the issue cannot reproduce under peak load.",
       "sample_output": {
         "type": "code",
         "title": "DeepSeek-R4 推演结论与无锁 CAS 队列方案",
