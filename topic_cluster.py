@@ -788,7 +788,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         short_title = title if len(title) <= 14 else title[:13] + "…"
         
         active_cls = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
-        inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5"
+        inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs"
         
         tab_buttons.append(f"""
         <button type="button" id="topic-tab-{idx}" onclick="switchTopicFocus({idx})" class="{active_cls if is_active else inactive_cls}" data-idx="{idx}">
@@ -836,15 +836,15 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             n_url = n.get("url", "#")
             click_attr = f'onclick="if(!event.target.closest(\'a\')) openAiNewsModal(\'{n_id}\')"' if n_id else ''
             news_html_items.append(f"""
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" {click_attr}>
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">{n_source[:10]}</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" {click_attr}>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">{n_source[:10]}</span>
               <div class="min-w-0 flex-1">
-                <a href="{n_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                <a href="{n_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
                   {n_title}
                 </a>
               </div>
             </div>""")
-        news_bundle_html = "\n".join(news_html_items) if news_html_items else f'<p class="text-xs text-slate-400">{"暂无直接关联快讯" if is_zh else "No direct news linked"}</p>'
+        news_bundle_html = "\n".join(news_html_items) if news_html_items else f'<p class="text-xs text-slate-500 dark:text-slate-400">{"暂无直接关联快讯" if is_zh else "No direct news linked"}</p>'
 
         # 关联推文渲染
         tweet_list = t.get("linked_tweets", [])
@@ -863,14 +863,14 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             tw_avatar = tw.get("author_avatar") or "https://api.dicebear.com/7.x/bottts/svg?seed=VIP"
             btn_post_text = "查看原帖 ↗" if is_zh else "View Post ↗"
             tweet_html_items.append(f"""
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
-              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
+              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-200 truncate">{tw_author}</span>
-                  <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">{btn_post_text}</a>
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">{tw_author}</span>
+                  <a href="{tw_url}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">{btn_post_text}</a>
                 </div>
-                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">{tw_content}</p>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">{tw_content}</p>
               </div>
             </div>""")
         tweets_bundle_html = "\n".join(tweet_html_items) if tweet_html_items else ""
@@ -888,15 +888,15 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             tool_click = f"onclick=\"switchTab('prompts')\"" if is_wf else ""
             
             tool_html = f"""
-            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
               <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">{tag_label}</span>
-                <span class="text-[10px] text-emerald-400 font-mono font-semibold">{tool.get('weekly_stars', '+3,000★')}</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">{tag_label}</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">{tool.get('weekly_stars', '+3,000★')}</span>
               </div>
-              <h4 class="text-xs font-bold text-slate-100 truncate mt-1">{tool_name}</h4>
-              <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">{tool_desc}</p>
-              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
-                <a href="{tool_url}" target="_blank" rel="noopener noreferrer" {tool_click} class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">{tool_name}</h4>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">{tool_desc}</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
+                <a href="{tool_url}" target="_blank" rel="noopener noreferrer" {tool_click} class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
                   <span>{action_btn}</span>
                 </a>
               </div>
@@ -908,78 +908,78 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         <article id="topic-focus-card-{idx}" class="{card_cls}" data-idx="{idx}">
           
           <!-- Col 1: Core Context & Breakthrough -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
-                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
                   {cat_tag}
                 </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
                   🔥 {("爆度" if is_zh else "HEAT")} {heat}
                 </span>
               </div>
-              <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
                 {title}
               </h3>
-              <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+              <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
                 {summary}
               </div>
             </div>
-            <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
-              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 {"核心爆发点" if is_zh else "Core Milestone"}</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 {"行业范式影响" if is_zh else "Industry Impact"}</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ {"24h 追踪" if is_zh else "24h Live"}</span>
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 {"核心爆发点" if is_zh else "Core Milestone"}</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 {"行业范式影响" if is_zh else "Industry Impact"}</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ {"24h 追踪" if is_zh else "24h Live"}</span>
             </div>
           </div>
 
           <!-- Col 2: Titan Perspectives Collision -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
             <div class="space-y-2.5">
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
-                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
                   <span>⚔️</span>
                   <span>{"大V观点立场对撞" if is_zh else "Perspectives Collision"}</span>
                 </h4>
-                <span class="text-[10px] text-slate-400 font-mono">{"双面对照" if is_zh else "Dual Perspectives"}</span>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">{"双面对照" if is_zh else "Dual Perspectives"}</span>
               </div>
 
               <!-- Perspective A: Visionary Builders -->
-              <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+              <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-300">{pro_role}</span>
-                  <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">{pro_speaker}</span>
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">{pro_role}</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">{pro_speaker}</span>
                 </div>
-                <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
                   “{pro_point}”
                 </p>
               </div>
 
               <!-- Perspective B: Industry Pragmatists -->
-              <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+              <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-300">{con_role}</span>
-                  <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">{con_speaker}</span>
+                  <span class="font-bold text-rose-800 dark:text-rose-300">{con_role}</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">{con_speaker}</span>
                 </div>
-                <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
                   “{con_point}”
                 </p>
               </div>
             </div>
 
-            <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
               {"智库核心研判 · 拒绝盲目跟风" if is_zh else "Independent Analysis · Beyond the Hype"}
             </div>
           </div>
 
           <!-- Col 3: Linked Intelligence Bundle -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
             <div>
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
-                <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
                   <span>🔗</span>
                   <span>{"关联情报束" if is_zh else "Linked Intelligence Bundle"}</span>
                 </h4>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                   {len(news_list)} {"快讯" if is_zh else "News"} · {len(tweet_list)} {"推文" if is_zh else "Tweets"}
                 </span>
               </div>
@@ -998,9 +998,9 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
               {tool_html}
             </div>
 
-            <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
               <span>{"AI 实时聚类每日自动更新" if is_zh else "AI Daily Real-Time Clustered"}</span>
-              <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+              <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
                 {"查看完整信息流 →" if is_zh else "Explore Full Stream →"}
               </button>
             </div>
@@ -1013,17 +1013,17 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     # 3. 组装最外层 section
     return f"""
     <!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
-    <section id="topic-focus-section" class="bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 rounded-2xl border border-indigo-500/30 p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-white my-6" aria-label="{header_title}">
+    <section id="topic-focus-section" class="bg-gradient-to-r from-slate-50 via-indigo-50/30 to-slate-50 dark:from-slate-950/90 dark:via-indigo-950/50 dark:to-slate-950/90 rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-slate-900 dark:text-white my-6" aria-label="{header_title}">
       <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-indigo-500/20 gap-3">
+      <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-200/80 dark:border-indigo-500/20 gap-3">
         <div class="flex items-center space-x-2.5 min-w-0">
           <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
           <div class="flex items-center space-x-2">
-            <h2 class="text-sm sm:text-base font-black text-white flex items-center space-x-1.5 tracking-tight" id="topic-focus-header-title">
+            <h2 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center space-x-1.5 tracking-tight" id="topic-focus-header-title">
               <span>{header_title}</span>
-              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold tracking-wider">{badge_title}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider">{badge_title}</span>
             </h2>
-            <span class="text-xs text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">{header_desc}</span>
+            <span class="text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">{header_desc}</span>
           </div>
         </div>
 
@@ -1032,7 +1032,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
           <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
             {tabs_html}
           </div>
-          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/60 transition cursor-pointer shrink-0 ml-1" title="{"收起 / 展开" if is_zh else "Collapse / Expand"}">
+          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs" title="{"收起 / 展开" if is_zh else "Collapse / Expand"}">
             {btn_collapse_txt}
           </button>
         </div>

@@ -2979,9 +2979,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isHl = tagInfo.isHl;
       const badgeText = escapeHtml(tagInfo.badge);
       const theme = tagInfo.theme;
-      const author = escapeHtml(item.author || (isZh ? 'AI 领袖' : 'AI Pioneer'));
-      const handle = escapeHtml(item.author_handle || `@${(item.author || 'vip').replace(/\s+/g, '')}`);
-      const role = escapeHtml(isZh ? (item.author_role || 'AI 先锋观察者') : (item.author_role_en || 'AI Pioneer & Builder'));
+      let rawAuthor = isZh ? (item.author || 'AI 领袖') : (item.author_en || item.author || 'AI Pioneer');
+      if (!isZh) {
+        rawAuthor = rawAuthor.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff]/g, '').trim() || 'AI Pioneer';
+      }
+      const author = escapeHtml(rawAuthor);
+      const handle = escapeHtml(item.author_handle || `@${(rawAuthor || 'vip').replace(/\s+/g, '')}`);
+      let rawRole = isZh ? (item.author_role || 'AI 先锋观察者') : (item.author_role_en || 'AI Pioneer & Builder');
+      if (!isZh && /[\u4e00-\u9fff]/.test(rawRole)) {
+        rawRole = rawRole.replace(/[\u4e00-\u9fff\s]+/g, ' ').trim() || 'AI Pioneer & Builder';
+      }
+      const role = escapeHtml(rawRole);
 
       const text = escapeHtml(isZh ? (item.full_text_zh || item.quote_zh || item.title_zh || item.title || item.summary_zh || '') : (item.full_text_en || item.quote_en || item.title_en || item.title || item.summary_en || ''));
       const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@', '')}`, 80);
@@ -3577,12 +3585,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const headerDesc = document.getElementById('topic-focus-header-desc');
       const toggleBtn = document.getElementById('topic-focus-toggle-btn');
 
+      if (section) {
+        section.className = "bg-gradient-to-r from-slate-50 via-indigo-50/30 to-slate-50 dark:from-slate-950/90 dark:via-indigo-950/50 dark:to-slate-950/90 rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl backdrop-blur-xl relative overflow-hidden transition-all text-slate-900 dark:text-white my-6";
+      }
+
       if (headerTitle) {
         const titleText = isZh ? "🔥 24h 核心话题全景透视" : "🔥 24h Topic Focus & Perspectives";
         const badgeText = isZh ? "TOP 3 智库专题" : "TOP 3 DOSSIERS";
-        headerTitle.innerHTML = `<span>${titleText}</span><span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono font-bold tracking-wider">${badgeText}</span>`;
+        headerTitle.innerHTML = `<span class="text-slate-900 dark:text-white">${titleText}</span><span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider">${badgeText}</span>`;
       }
       if (headerDesc) {
+        headerDesc.className = "text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline";
         headerDesc.textContent = isZh ? "· 事件脉络 · 大V观点立场对撞 · 关联情报束" : "· Core Context · Viewpoints Collision · Linked Bundles";
       }
 
@@ -3592,6 +3605,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           contentEl.classList.toggle('hidden', wasCollapsed);
         }
         if (toggleBtn) {
+          toggleBtn.className = "px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs";
           toggleBtn.textContent = wasCollapsed ? (isZh ? '▼ 展开' : '▼ Expand') : (isZh ? '▲ 收起' : '▲ Collapse');
         }
       } catch(e) {}
@@ -3605,7 +3619,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const shortTitle = title.length > 12 ? title.slice(0, 11) + "…" : title;
           const cls = isAct
             ? "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
-            : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 hover:text-white border border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5";
+            : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs";
           return `
             <button type="button" id="topic-tab-${idx}" onclick="switchTopicFocus(${idx})" class="${cls}" data-idx="${idx}">
               <span class="text-[11px] font-mono opacity-90">${badge.slice(0, 2)}</span>
@@ -3641,31 +3655,34 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             const nUrl = n.url || "#";
             const clickAttr = nId ? `onclick="if(!event.target.closest('a')) openAiNewsModal('${nId}')"` : '';
             return `
-              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-indigo-500/40 transition-colors cursor-pointer group" ${clickAttr}>
-                <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-semibold border border-amber-500/30 shrink-0 font-mono mt-0.5">${escapeHtml(nSrc.slice(0, 10))}</span>
+              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" ${clickAttr}>
+                <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">${escapeHtml(nSrc.slice(0, 10))}</span>
                 <div class="min-w-0 flex-1">
-                  <a href="${nUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-200 group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  <a href="${nUrl}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
                     ${escapeHtml(nTitle)}
                   </a>
                 </div>
               </div>`;
-          }).join('') || `<p class="text-xs text-slate-400">${isZh ? "暂无关联快讯" : "No linked news"}</p>`;
+          }).join('') || `<p class="text-xs text-slate-500 dark:text-slate-400">${isZh ? "暂无关联快讯" : "No linked news"}</p>`;
 
           const tweetList = t.linked_tweets || [];
           const tweetHtml = tweetList.map(tw => {
-            const author = tw.author || "AI Leader";
+            let author = isZh ? (tw.author || "AI Leader") : (tw.author_en || tw.author || "AI Leader");
+            if (!isZh && /[\u4e00-\u9fff]/.test(author)) {
+              author = author.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff\s]+/g, ' ').trim() || "AI Pioneer";
+            }
             const handle = tw.author_handle || "@ai";
             const content = isZh ? (tw.content_zh || tw.summary_zh || tw.title_zh || tw.content_en) : (tw.content_en || tw.summary_en || tw.title_en || "");
             const avatar = tw.author_avatar || "https://api.dicebear.com/7.x/bottts/svg?seed=VIP";
             return `
-              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-900/60 hover:bg-slate-800/80 border border-slate-800/80 hover:border-sky-500/40 transition-colors">
-                <img src="${avatar}" alt="${escapeHtml(author)}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
+                <img src="${avatar}" alt="${escapeHtml(author)}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                 <div class="min-w-0 flex-1">
                   <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                    <span class="font-bold text-slate-200 truncate">${escapeHtml(author)}</span>
-                    <a href="${tw.url || '#'}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-400 hover:underline shrink-0">${isZh ? "原帖 ↗" : "Post ↗"}</a>
+                    <span class="font-bold text-slate-900 dark:text-slate-200 truncate">${escapeHtml(author)}</span>
+                    <a href="${tw.url || '#'}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">${isZh ? "原帖 ↗" : "Post ↗"}</a>
                   </div>
-                  <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed">${escapeHtml(content || '')}</p>
+                  <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed">${escapeHtml(content || '')}</p>
                 </div>
               </div>`;
           }).join('');
@@ -3680,15 +3697,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             const actionBtn = isWf ? (isZh ? "📋 一键直达工作流" : "📋 View Playbook") : (isZh ? "立即体验 ↗" : "Try Tool ↗");
             const toolClick = isWf ? `onclick="switchTab('prompts')"` : '';
             toolHtml = `
-              <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900/60 border border-purple-500/30 hover:border-purple-400/50 transition-all">
+              <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
                 <div class="flex items-center justify-between gap-1 mb-1">
-                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 font-mono">${tagLabel}</span>
-                  <span class="text-[10px] text-emerald-400 font-mono font-semibold">${tool.weekly_stars || '+3,000★'}</span>
+                  <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">${tagLabel}</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">${tool.weekly_stars || '+3,000★'}</span>
                 </div>
-                <h4 class="text-xs font-bold text-slate-100 truncate mt-1">${escapeHtml(toolName)}</h4>
-                <p class="text-[11px] text-slate-300 line-clamp-2 leading-relaxed mt-1">${escapeHtml(toolDesc)}</p>
-                <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-500/20">
-                  <a href="${tool.url || tool.github_url || '#'}" target="_blank" rel="noopener noreferrer" ${toolClick} class="text-xs font-semibold text-purple-300 hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">${escapeHtml(toolName)}</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">${escapeHtml(toolDesc)}</p>
+                <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
+                  <a href="${tool.url || tool.github_url || '#'}" target="_blank" rel="noopener noreferrer" ${toolClick} class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
                     <span>${actionBtn}</span>
                   </a>
                 </div>
@@ -3697,80 +3714,80 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           return `
             <article id="topic-focus-card-${idx}" class="${cardCls}" data-idx="${idx}">
-              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
                 <div class="space-y-2.5">
                   <div class="flex items-center justify-between gap-2">
-                    <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 font-mono">
+                    <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
                       ${escapeHtml(catTag)}
                     </span>
-                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30 font-mono">
+                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
                       🔥 ${isZh ? "爆度" : "HEAT"} ${heat}
                     </span>
                   </div>
-                  <h3 class="text-base sm:text-lg font-black text-white leading-snug tracking-tight">
+                  <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
                     ${escapeHtml(title)}
                   </h3>
-                  <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 text-slate-200 text-xs sm:text-sm leading-relaxed">
+                  <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
                     ${escapeHtml(summary)}
                   </div>
                 </div>
-                <div class="flex items-center gap-2 pt-2 border-t border-slate-800/80 flex-wrap text-[10px] text-indigo-300 font-mono">
-                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">🎯 ${isZh ? "核心爆发点" : "Core Milestone"}</span>
-                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">💡 ${isZh ? "行业范式影响" : "Industry Impact"}</span>
-                  <span class="px-2 py-0.5 rounded bg-indigo-950/60 border border-indigo-500/30">⚡ ${isZh ? "24h 追踪" : "24h Live"}</span>
+                <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
+                  <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 ${isZh ? "核心爆发点" : "Core Milestone"}</span>
+                  <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 ${isZh ? "行业范式影响" : "Industry Impact"}</span>
+                  <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ ${isZh ? "24h 追踪" : "24h Live"}</span>
                 </div>
               </div>
 
-              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
                 <div class="space-y-2.5">
-                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-800">
-                    <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+                    <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
                       <span>⚔️</span>
                       <span>${isZh ? "大V观点立场对撞" : "Perspectives Collision"}</span>
                     </h4>
-                    <span class="text-[10px] text-slate-400 font-mono">${isZh ? "双面对照" : "Dual Perspectives"}</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">${isZh ? "双面对照" : "Dual Perspectives"}</span>
                   </div>
 
-                  <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-100 space-y-1.5 shadow-sm">
+                  <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                     <div class="flex items-center justify-between gap-1 text-[11px]">
-                      <span class="font-bold text-emerald-300">${escapeHtml(proRole)}</span>
-                      <span class="text-[10px] text-emerald-400 font-mono truncate max-w-[140px]">${escapeHtml(proSpeaker)}</span>
+                      <span class="font-bold text-emerald-800 dark:text-emerald-300">${escapeHtml(proRole)}</span>
+                      <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">${escapeHtml(proSpeaker)}</span>
                     </div>
-                    <p class="text-xs text-emerald-100/90 leading-relaxed font-normal">
+                    <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
                       “${escapeHtml(proPoint)}”
                     </p>
                   </div>
 
-                  <div class="p-3 rounded-xl bg-rose-950/30 border border-rose-500/30 text-rose-100 space-y-1.5 shadow-sm">
+                  <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                     <div class="flex items-center justify-between gap-1 text-[11px]">
-                      <span class="font-bold text-rose-300">${escapeHtml(conRole)}</span>
-                      <span class="text-[10px] text-rose-400 font-mono truncate max-w-[140px]">${escapeHtml(conSpeaker)}</span>
+                      <span class="font-bold text-rose-800 dark:text-rose-300">${escapeHtml(conRole)}</span>
+                      <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">${escapeHtml(conSpeaker)}</span>
                     </div>
-                    <p class="text-xs text-rose-100/90 leading-relaxed font-normal">
+                    <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
                       “${escapeHtml(conPoint)}”
                     </p>
                   </div>
                   ${actionAdvice ? `
-                    <div class="p-2.5 rounded-xl bg-indigo-950/40 border border-indigo-500/30 text-indigo-200 text-xs flex items-start gap-1.5 shadow-sm mt-2.5">
-                      <span class="text-indigo-400 font-bold shrink-0">💡 ${isZh ? "选型建议" : "Action Advice"}：</span>
-                      <span class="leading-relaxed text-[11px] font-normal text-indigo-200/95">${escapeHtml(actionAdvice)}</span>
+                    <div class="p-2.5 rounded-xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
+                      <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 ${isZh ? "选型建议" : "Action Advice"}：</span>
+                      <span class="leading-relaxed text-[11px] font-normal text-indigo-900 dark:text-indigo-200/95">${escapeHtml(actionAdvice)}</span>
                     </div>
                   ` : ''}
                 </div>
 
-                <div class="text-[10px] text-slate-400 text-right pt-1 font-mono">
+                <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
                   ${isZh ? "智库核心研判 · 拒绝盲目跟风" : "Independent Analysis · Beyond the Hype"}
                 </div>
               </div>
 
-              <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-slate-950/70 border border-indigo-500/20 shadow-md">
+              <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
                 <div>
-                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-800 mb-2">
-                    <h4 class="text-xs font-bold text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
+                    <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
                       <span>🔗</span>
                       <span>${isZh ? "关联情报束" : "Linked Intelligence Bundle"}</span>
                     </h4>
-                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                       ${newsList.length} ${isZh ? "快讯" : "News"} · ${tweetList.length} ${isZh ? "推文" : "Tweets"}
                     </span>
                   </div>
@@ -3786,9 +3803,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   ${toolHtml}
                 </div>
 
-                <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
-                  <span>${isZh ? "数据自动聚合更新" : "Auto-aggregated 24h"}</span>
-                  <button type="button" onclick="switchTab('all')" class="text-indigo-400 hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+                  <span>${isZh ? "AI 实时聚类每日自动更新" : "AI Daily Real-Time Clustered"}</span>
+                  <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
                     ${isZh ? "查看完整信息流 →" : "Explore Full Stream →"}
                   </button>
                 </div>
@@ -3921,49 +3938,54 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ];
         return badPatterns.some(p => u.includes(p));
       };
+      const isRealPlayableVideo = (u) => {
+        if (!u || typeof u !== 'string') return false;
+        const s = u.toLowerCase();
+        return s.includes('youtube.com/watch') || s.includes('youtu.be/') || s.includes('.mp4') || s.includes('.m3u8') || s.includes('vimeo.com') || s.includes('bilibili.com');
+      };
       const hasRealImage = !!(item.image_url && !isFakeOrGenericCover(item.image_url));
       const cleanSource = item.source || "";
-      const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
+      const hasVideo = !!((item.has_video || (item.media_assets && item.media_assets.has_video)) && item.video_url && isRealPlayableVideo(item.video_url));
       const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
       const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
 
       const isMajorBreaking = (cardIndex === 0 && (item.hot_score >= 5 || item.is_major_breaking));
       if (isMajorBreaking) {
         return `
-        <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row gap-4 justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-lg hover:shadow-xl bg-gradient-to-br from-amber-50/50 via-white to-orange-50/30 dark:from-slate-900 dark:via-slate-900/90 dark:to-amber-950/20 col-span-full relative" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
-          <div class="absolute -top-3 left-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-[10px] sm:text-xs font-black shadow-md flex items-center gap-1.5">
+        <article class="glass-card rounded-2xl p-4 flex flex-row gap-3.5 sm:gap-5 justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-md hover:shadow-xl bg-gradient-to-br from-amber-500/5 via-white to-orange-500/5 dark:from-slate-900 dark:via-slate-900/95 dark:to-amber-950/25 col-span-full relative" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
+          <div class="absolute -top-3 left-4 px-3 py-0.5 rounded-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-white text-[10px] sm:text-xs font-black shadow-md flex items-center gap-1.5 z-10">
             <span>👑</span>
-            <span>${isZh ? '24h 重大破圈头条 · 全网焦点' : '24h Major Breakthrough Headline'}</span>
+            <span>${isZh ? '24h 重大快讯 · 头条聚焦' : '24h Major Breakthrough Headline'}</span>
           </div>
           ${hasRealImage ? `
-            <div class="w-full md:w-5/12 aspect-video rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0">
-              <img src="${optimizeImageUrl(item.image_url, 720)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
-              ${hasVideo ? `<span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[10px] font-bold flex items-center gap-1 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
+            <div class="w-24 h-24 sm:w-44 sm:h-28 rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0 self-center">
+              <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
+              ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[9px] font-bold flex items-center gap-0.5 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
             </div>` : ''}
-          <div class="flex-1 flex flex-col justify-between space-y-2.5 min-w-0">
+          <div class="flex-1 flex flex-col justify-between space-y-2 min-w-0">
             <div>
-              <div class="flex items-center justify-between text-xs mb-1.5">
-                <div class="flex items-center space-x-2">
-                  <span class="font-extrabold text-[11px] px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">⚡ ${cleanSource}</span>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
+                  <span class="font-extrabold text-[10px] px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">⚡ ${cleanSource}</span>
                   ${todayBadge}
-                  <span class="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[10px] font-bold">🔥 Hot 5.0</span>
+                  <span class="px-1.5 py-0.5 rounded-full bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30 text-[9px] font-bold">🔥 Hot 5.0</span>
                 </div>
-                <span class="text-xs text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <h3 class="font-black text-base sm:text-lg text-slate-900 dark:text-slate-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug">
+              <h3 class="font-black text-sm sm:text-base text-slate-900 dark:text-slate-50 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors leading-snug line-clamp-2">
                 ${title}
               </h3>
               ${specBadges}
-              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed">
+              <p class="text-xs text-slate-600 dark:text-slate-300 line-clamp-2 sm:line-clamp-3 mt-1 leading-relaxed">
                 ${summary}
               </p>
             </div>
-            <div class="flex items-center justify-between text-xs pt-2.5 border-t border-amber-200/50 dark:border-amber-900/40 text-slate-500 dark:text-slate-400">
-              <span class="text-xs font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
-                ⚡ ${isZh ? '点击查看 5W1H 深度研判与速读' : 'Click for In-depth 5W1H Briefing'}
+            <div class="flex items-center justify-between text-xs pt-2 border-t border-amber-200/50 dark:border-amber-900/40 text-slate-500 dark:text-slate-400">
+              <span class="text-[11px] font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
+                ⚡ ${isZh ? '点击查看速读与AI深度研判' : 'Click for 5W1H Briefing'}
               </span>
               <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-amber-700 dark:text-amber-400 hover:text-amber-600 hover:underline font-bold">
-                ${isZh ? '官方公报 / 原文报道' : 'Official Report'} ↗
+                ${isZh ? '官方公报 / 源站' : 'Official Report'} ↗
               </a>
             </div>
           </div>
@@ -4112,7 +4134,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const retweets = m.retweets ? String(m.retweets).replace(/[^0-9.kKmM]/g, '') : '';
 
       const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
-      const author = item.author || (isZh ? 'AI 开发者' : 'AI Creator');
+      let rawAuthor = isZh ? (item.author || 'AI 开发者') : (item.author_en || item.author || 'AI Creator');
+      if (!isZh) {
+        rawAuthor = rawAuthor.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff]/g, '').trim() || 'AI Creator';
+      }
+      const author = rawAuthor;
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
       const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 80);
       const specBadges = (item.spec_tags && item.spec_tags.length)
@@ -4489,8 +4515,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '8.6k';
 
       const displayQuote = isZh ? (item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || item.title) : (item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title);
-      const title = item.title_zh || item.title;
-      const author = item.author || (isZh ? 'AI 开发者' : 'AI Creator');
+      const title = isZh ? (item.title_zh || item.title) : (item.title_en || item.title);
+      let rawAuthor = isZh ? (item.author || 'AI 开发者') : (item.author_en || item.author || 'AI Creator');
+      if (!isZh) {
+        rawAuthor = rawAuthor.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff]/g, '').trim() || 'AI Creator';
+      }
+      const author = rawAuthor;
       const handle = item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@x');
       const avatar = optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 96);
 
@@ -8046,7 +8076,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       let retweets = m.retweets || '310';
       retweets = String(retweets).replace(/[^0-9.kKmM]/g, '') || '310';
 
-      const author = escapeHtml(item.author || (isThreads ? (isZh ? 'Threads 极客' : 'Threads Geek') : (isZh ? '𝕏 极客' : '𝕏 Geek')));
+      let rawAuthor = isZh ? (item.author || (isThreads ? 'Threads 极客' : '𝕏 极客')) : (item.author_en || item.author || (isThreads ? 'Threads Geek' : '𝕏 Geek'));
+      if (!isZh) {
+        rawAuthor = rawAuthor.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff]/g, '').trim() || (isThreads ? 'Threads Geek' : '𝕏 Geek');
+      }
+      const author = escapeHtml(rawAuthor);
       const handle = escapeHtml(item.author_handle || (author ? '@' + author.replace(/[^a-zA-Z0-9_]/g, '') : '@viral'));
       const avatar = escapeHtml(optimizeAvatarUrl(item.author_avatar || `https://unavatar.io/x/${handle.replace('@','')}`, 80));
 
@@ -8295,7 +8329,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      if (authorEl) authorEl.textContent = item.author || (isThreads ? 'Threads 开发者' : 'AI 开发者');
+      let modalAuthor = isZhSystem ? (item.author || (isThreads ? 'Threads 开发者' : 'AI 开发者')) : (item.author_en || item.author || (isThreads ? 'Threads Developer' : 'AI Developer'));
+      if (!isZhSystem) {
+        modalAuthor = modalAuthor.replace(/ 官方/g, ' (Official)').replace(/官方/g, ' (Official)').replace(/[\u4e00-\u9fff]/g, '').trim() || (isThreads ? 'Threads Developer' : 'AI Developer');
+      }
+      if (authorEl) authorEl.textContent = modalAuthor;
       if (handleEl) handleEl.textContent = item.author_handle || (isThreads ? '@threads' : '@x');
       if (verifiedEl) verifiedEl.style.display = (item.metrics?.verified || isX || isThreads) ? 'flex' : 'none';
 

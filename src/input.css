@@ -378,6 +378,115 @@ html.dark #tab-btn-prompts:not(.active) #badge-count-prompts {
 
 
 
+/* ========================================================= */
+/* 🎯 24h 核心话题全景透视高对比度全主题优化 (Topic Focus High Contrast) */
+/* ========================================================= */
+
+/* 浅色模式全局主题覆盖 */
+html:not(.dark) #topic-focus-section {
+  background: linear-gradient(to right, #f8fafc, #f1f5f9, #f8fafc) !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.05) !important;
+}
+
+html:not(.dark) #topic-focus-section h2,
+html:not(.dark) #topic-focus-section h3 {
+  color: #0f172a !important;
+}
+
+html:not(.dark) #topic-focus-section .topic-focus-card > div {
+  background-color: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+}
+
+html:not(.dark) #topic-focus-section .topic-tab-btn:not(.active) {
+  background-color: #ffffff !important;
+  color: #334155 !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+html:not(.dark) #topic-focus-section .topic-tab-btn:not(.active):hover {
+  background-color: #f1f5f9 !important;
+  color: #0f172a !important;
+}
+
+/* 观点对撞 Perspective A (看好/支持方) 浅色模式高对比 */
+html:not(.dark) #topic-focus-section .bg-emerald-950\/30,
+html:not(.dark) #topic-focus-section .bg-emerald-50\/90 {
+  background-color: #ecfdf5 !important;
+  border: 1px solid #a7f3d0 !important;
+  color: #064e3b !important;
+}
+html:not(.dark) #topic-focus-section .bg-emerald-950\/30 p,
+html:not(.dark) #topic-focus-section .bg-emerald-50\/90 p {
+  color: #064e3b !important;
+  font-weight: 500 !important;
+}
+html:not(.dark) #topic-focus-section .text-emerald-300 {
+  color: #065f46 !important;
+}
+html:not(.dark) #topic-focus-section .text-emerald-400 {
+  color: #047857 !important;
+}
+
+/* 观点对撞 Perspective B (审慎/质疑方) 浅色模式高对比 */
+html:not(.dark) #topic-focus-section .bg-rose-950\/30,
+html:not(.dark) #topic-focus-section .bg-rose-50\/90 {
+  background-color: #fff1f2 !important;
+  border: 1px solid #fecdd3 !important;
+  color: #881337 !important;
+}
+html:not(.dark) #topic-focus-section .bg-rose-950\/30 p,
+html:not(.dark) #topic-focus-section .bg-rose-50\/90 p {
+  color: #881337 !important;
+  font-weight: 500 !important;
+}
+html:not(.dark) #topic-focus-section .text-rose-300 {
+  color: #9f1239 !important;
+}
+html:not(.dark) #topic-focus-section .text-rose-400 {
+  color: #be123c !important;
+}
+
+/* 选型建议 Action Advice 浅色模式高对比 */
+html:not(.dark) #topic-focus-section .bg-indigo-950\/40,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/80 {
+  background-color: #eef2ff !important;
+  border: 1px solid #c7d2fe !important;
+  color: #1e1b4b !important;
+}
+html:not(.dark) #topic-focus-section .bg-indigo-950\/40 span,
+html:not(.dark) #topic-focus-section .bg-indigo-50\/80 span {
+  color: #312e81 !important;
+}
+
+/* 关联情报束 浅色模式高对比 */
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-900\/60,
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-50 {
+  background-color: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+}
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-900\/60:hover,
+html:not(.dark) #topic-focus-section .topic-focus-card .bg-slate-50:hover {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* 深色模式强化 */
+html.dark #topic-focus-section {
+  background: linear-gradient(to right, rgba(11, 16, 27, 0.95), rgba(15, 23, 42, 0.95), rgba(11, 16, 27, 0.95)) !important;
+  border: 1px solid rgba(99, 102, 241, 0.3) !important;
+  color: #ffffff !important;
+}
+html.dark #topic-focus-section .topic-focus-card > div {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+}
+
+
+
 html:not(.dark) #top-three-section {
 
   background: linear-gradient(135deg, #f0f4ff 0%, #faf5ff 50%, #ffffff 100%) !important;

@@ -141,7 +141,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
         if not isinstance(items, list):
             continue
         for it in items:
-            for field in ("title_en", "summary_en", "author_role_en", "best_for_en"):
+            for field in ("title_en", "summary_en", "author_en", "author_role_en", "best_for_en"):
                 val = str(it.get(field) or "")
                 if val and re.search(r'[\u4e00-\u9fff]', val):
                     en_field_leaks.append((cat_name, it.get("id"), field, val[:40]))

@@ -324,8 +324,18 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
         elif not item.get("author_role_en"):
             item["author_role_en"] = "AI Engineer / Tech Builder"
 
+        raw_auth = str(item.get("author") or "").strip()
+        auth_en = item.get("author_en")
+        if not auth_en or has_cjk(auth_en):
+            if has_cjk(raw_auth):
+                clean_auth = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_auth).strip()
+                item["author_en"] = clean_auth or "AI Pioneer"
+            else:
+                item["author_en"] = raw_auth or "AI Pioneer"
+            fixes.append("celebrity.author_en 纯英文自愈")
+
     # 6. 全量 *_en 字段严禁中文字符硬性兜底
-    for en_field in ("title_en", "summary_en", "author_role_en", "best_for_en"):
+    for en_field in ("title_en", "summary_en", "author_en", "author_role_en", "best_for_en"):
         val = item.get(en_field)
         if val and has_cjk(val):
             item[en_field] = free_translate_en(strip_chinglish_to_english(str(val)))
@@ -403,7 +413,7 @@ if __name__ == "__main__":
                             violations += 1
                             print(f"❌ 引用/全文缺少中文 [{it.get('id')}][{f_zh}]: {v[:60]}...")
                 # 检查所有英文字段严禁中文字符
-                for f_en in ("title_en", "summary_en", "author_role_en", "quote_en", "full_text_en", "best_for_en"):
+                for f_en in ("title_en", "summary_en", "author_en", "author_role_en", "quote_en", "full_text_en", "best_for_en"):
                     v = str(it.get(f_en) or "")
                     if v and re.search(r'[\u4e00-\u9fff]', v):
                         violations += 1

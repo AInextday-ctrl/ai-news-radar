@@ -943,6 +943,16 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         elif not item.get("author_role_en"):
             item["author_role_en"] = "AI Engineer / Tech Builder"
 
+        # 4.5 author_en 严禁中文字符
+        raw_author = str(item.get("author") or "").strip()
+        author_en = item.get("author_en")
+        if not author_en or any('\u4e00' <= c <= '\u9fff' for c in str(author_en)):
+            if any('\u4e00' <= c <= '\u9fff' for c in raw_author):
+                clean_en = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip()
+                item["author_en"] = clean_en or "AI Pioneer"
+            else:
+                item["author_en"] = raw_author or "AI Pioneer"
+
     # 5. spec_tags_en 0 中文
     if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):
         item["spec_tags_en"] = [re.sub(r'[\u4e00-\u9fff#]', '', str(t)).strip() for t in item["spec_tags_en"]]
