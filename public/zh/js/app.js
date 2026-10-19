@@ -32,10 +32,18 @@
       return u;
     }
     const urlParams = new URLSearchParams(window.location.search);
-    const paramLang = urlParams.get('lang');
-    // 英文为主站 (English-First)：优先尊重 URL 参数与用户主动设定的语言，默认一律为 'en'
-    let currentLang = 'en';
+    const isZhPath = window.location.pathname.startsWith('/zh');
+    // 在 /zh 路径下，基底语言必须始终为 'zh'；在主站根目录下默认为 'en'
+    let currentLang = isZhPath ? 'zh' : 'en';
     document.documentElement.lang = (currentLang === 'zh') ? 'zh-CN' : 'en';
+    // 彻底清除 URL 中可能残留的 ?lang= 历史污染参数，保持干净 URL
+    if (urlParams.has('lang')) {
+      try {
+        const cleanUrl = new URL(window.location.href);
+        cleanUrl.searchParams.delete('lang');
+        window.history.replaceState(null, '', cleanUrl.toString());
+      } catch (e) {}
+    }
     let currentTheme = localStorage.getItem('theme') || 'auto';
     let selectedCreator = null;
     let currentTab = 'all';
@@ -1313,6 +1321,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (currentSiteLang === 'chinese_traditional') {
         updateNavTabsLanguage('chinese_traditional');
+        document.documentElement.lang = 'zh-TW';
         if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
           window.ChineseConverter.convertDomToTraditional();
         }
@@ -1321,10 +1330,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       if (currentSiteLang === 'chinese_simplified') {
         updateNavTabsLanguage('chinese_simplified');
+        document.documentElement.lang = 'zh-CN';
+        if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
+          window.ChineseConverter.revertDomToSimplified();
+        }
         return;
       }
 
       if (currentSiteLang === 'english') {
+        if (window.location.pathname.startsWith('/zh')) {
+          currentSiteLang = 'chinese_simplified';
+          updateNavTabsLanguage('chinese_simplified');
+          return;
+        }
         setLanguage('en');
         try {
           if (typeof translate !== 'undefined' && translate.reset) translate.reset();
@@ -1347,16 +1365,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         selectEl.value = targetLang;
       }
 
-      // 1. 如果选择繁体中文：基于中文版 /zh 进行纯文字简繁转换，绝不走英文机翻
+      // 1. 如果选择繁体中文：必须处于中文版 /zh
       if (targetLang === 'chinese_traditional') {
         localStorage.setItem('ai_radar_user_lang', 'zh');
         if (!window.location.pathname.startsWith('/zh')) {
           window.location.href = '/zh';
           return;
         }
+        currentLang = 'zh';
+        setLanguage('zh', persist);
+        document.documentElement.lang = 'zh-TW';
         updateNavTabsLanguage('chinese_traditional');
         if (typeof translate !== 'undefined' && translate.reset) {
           try { translate.reset(); } catch (e) {}
+        }
+        if (cachedData && typeof renderUI === 'function') {
+          renderUI(cachedData);
         }
         if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
           window.ChineseConverter.convertDomToTraditional();
@@ -1364,16 +1388,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 2. 如果选择简体中文：保持在中文版 /zh，还原纯正简体中文
+      // 2. 如果选择简体中文：必须处于中文版 /zh，还原纯正简体中文
       if (targetLang === 'chinese_simplified') {
         localStorage.setItem('ai_radar_user_lang', 'zh');
         if (!window.location.pathname.startsWith('/zh')) {
           window.location.href = '/zh';
           return;
         }
+        currentLang = 'zh';
+        setLanguage('zh', persist);
+        document.documentElement.lang = 'zh-CN';
         updateNavTabsLanguage('chinese_simplified');
         if (typeof translate !== 'undefined' && translate.reset) {
           try { translate.reset(); } catch (e) {}
+        }
+        if (cachedData && typeof renderUI === 'function') {
+          renderUI(cachedData);
         }
         if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
           window.ChineseConverter.revertDomToSimplified();
@@ -1381,14 +1411,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 3. 如果选择英文：保持在主站 /
+      // 3. 如果选择英文：必须处于主站 /
       if (targetLang === 'english') {
         localStorage.setItem('ai_radar_user_lang', 'en');
         if (window.location.pathname.startsWith('/zh')) {
           window.location.href = '/';
           return;
         }
+        currentLang = 'en';
         setLanguage('en', persist);
+        document.documentElement.lang = 'en';
+        if (cachedData && typeof renderUI === 'function') {
+          renderUI(cachedData);
+        }
         if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
           window.ChineseConverter.revertDomToSimplified();
         }
@@ -1446,6 +1481,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           setTimeout(() => {
             try {
               window.ChineseConverter.convertDomToTraditional();
+            } catch (e) {}
+          }, 30);
+        }
+        return;
+      }
+      if (lang === 'chinese_simplified') {
+        if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
+          setTimeout(() => {
+            try {
+              window.ChineseConverter.revertDomToSimplified();
             } catch (e) {}
           }, 30);
         }
@@ -1748,19 +1793,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     // 切换语言基底
     function setLanguage(lang, persist = true) {
+      const isZhPage = window.location.pathname.startsWith('/zh');
+      // 严禁在 /zh 页面将语言基底设置为 en，/zh 必须始终为 zh
+      if (isZhPage && lang === 'en') {
+        lang = 'zh';
+      }
       currentLang = lang;
       if (persist) {
         localStorage.setItem('ai_radar_user_lang', lang);
       }
-      document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
+      document.documentElement.lang = (lang === 'zh') ? (currentSiteLang === 'chinese_traditional' ? 'zh-TW' : 'zh-CN') : 'en';
       try {
         const u = new URL(window.location.href);
-        if (lang === 'en') {
-          u.searchParams.set('lang', 'en');
-        } else {
+        if (u.searchParams.has('lang')) {
           u.searchParams.delete('lang');
+          window.history.replaceState(null, '', u.toString());
         }
-        window.history.replaceState(null, '', u.toString());
       } catch (e) {}
 
       const btnZh = document.getElementById('lang-zh');

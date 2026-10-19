@@ -55,9 +55,9 @@ def generate_sitemap():
         hreflang_block = ""
         if p.get("hreflang"):
             hreflang_block = """
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/"/>"""
         url_entries.append(f"""  <url>
     <loc>{p['loc']}</loc>{hreflang_block}
