@@ -7615,6 +7615,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const toast = document.getElementById('copy-toast');
       const toastMsg = document.getElementById('copy-toast-msg');
       if (toast && toastMsg) {
+        toast.style.zIndex = '100000';
         toastMsg.textContent = msg;
         toast.classList.remove('translate-y-16', 'opacity-0');
         if (window._toastTimer) clearTimeout(window._toastTimer);
@@ -9596,6 +9597,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (snippetEl) snippetEl.textContent = snippet;
 
       if (modal) {
+        modal.style.zIndex = '99999';
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
@@ -9605,7 +9607,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const modal = document.getElementById('share-modal');
       if (modal) {
         modal.classList.add('hidden');
-        document.body.style.overflow = '';
+        const hasOtherModal = !!document.querySelector('#ai-news-modal:not(.hidden), #tool-detail-modal:not(.hidden), #social-post-modal:not(.hidden)');
+        if (!hasOtherModal) {
+          document.body.style.overflow = '';
+        }
       }
       activeShareItem = null;
     }
@@ -9850,6 +9855,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         if (modal) {
+          modal.style.zIndex = '99999';
           modal.classList.remove('hidden');
           document.body.style.overflow = 'hidden';
         }
@@ -9862,7 +9868,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const modal = document.getElementById('bookmark-modal');
       if (modal) {
         modal.classList.add('hidden');
-        document.body.style.overflow = '';
+        const hasOtherModal = !!document.querySelector('#ai-news-modal:not(.hidden), #tool-detail-modal:not(.hidden), #social-post-modal:not(.hidden)');
+        if (!hasOtherModal) {
+          document.body.style.overflow = '';
+        }
       }
     }
 
@@ -9872,13 +9881,149 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       copyToClipboard(siteUrl, isZh ? '⭐ 网站直达链接已复制！' : '⭐ Website URL copied!');
     }
 
+    function triggerSiteBookmark() {
+      const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || (document.documentElement.lang === 'zh') || window.location.pathname.startsWith('/zh');
+      const url = isZh ? 'https://ainewsradar.xyz/zh' : 'https://ainewsradar.xyz';
+      const title = isZh ? 'AI 资讯雷达 | 全球人工智能权威快讯' : 'AI News Radar | Executive Artificial Intelligence Intelligence';
+
+      const isMobile = (typeof navigator !== 'undefined') && /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || '');
+      if (isMobile && navigator.share) {
+        navigator.share({ title: title, url: url }).catch(() => {});
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(() => {});
+      } else {
+        fallbackCopyText(url);
+      }
+
+      const btn = document.getElementById('header-bookmark-btn');
+      const btnText = document.getElementById('bookmark-btn-text');
+      if (btn && btnText) {
+        const orig = btnText.innerHTML;
+        btnText.innerHTML = isZh ? '✅ 已复制网址 (按 Ctrl+D 收藏)' : '✅ Copied! (Press Ctrl+D)';
+        btn.classList.add('ring-2', 'ring-amber-400');
+        setTimeout(() => {
+          btnText.innerHTML = orig;
+          btn.classList.remove('ring-2', 'ring-amber-400');
+        }, 2800);
+      }
+
+      const isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent || '');
+      const shortcut = isMac ? '⌘+D' : 'Ctrl+D';
+      const msg = isZh
+        ? `⭐ 网址已复制！按 ${shortcut} 即可直接加入浏览器收藏夹`
+        : `⭐ URL copied! Press ${shortcut} to add bookmark`;
+      showCustomToast(msg, 3200);
+    }
+
+    function shareNewsToXDirect() {
+      const item = currentActiveNewsItem || {};
+      const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || (document.documentElement.lang === 'zh') || window.location.pathname.startsWith('/zh');
+      const titleEl = document.getElementById('ai-modal-title');
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || (titleEl ? titleEl.textContent.trim() : 'AI News Radar');
+      const srcBtn = document.getElementById('ai-modal-source-btn');
+      const rawUrl = item.url || ((srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href);
+
+      let shareUrl = rawUrl;
+      try {
+        const u = new URL(rawUrl.startsWith('http') ? rawUrl : window.location.origin + rawUrl);
+        u.searchParams.set('utm_source', 'social_share');
+        u.searchParams.set('utm_medium', 'x');
+        u.searchParams.set('utm_campaign', 'ainewsradar');
+        shareUrl = u.toString();
+      } catch (e) {}
+
+      const tweetText = `${title}\n\n📡 via @ainewsradar`;
+      const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+      window.open(xUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareNewsToThreadsDirect() {
+      const item = currentActiveNewsItem || {};
+      const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || (document.documentElement.lang === 'zh') || window.location.pathname.startsWith('/zh');
+      const titleEl = document.getElementById('ai-modal-title');
+      const title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || (titleEl ? titleEl.textContent.trim() : 'AI News Radar');
+      const srcBtn = document.getElementById('ai-modal-source-btn');
+      const rawUrl = item.url || ((srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href);
+
+      let shareUrl = rawUrl;
+      try {
+        const u = new URL(rawUrl.startsWith('http') ? rawUrl : window.location.origin + rawUrl);
+        u.searchParams.set('utm_source', 'social_share');
+        u.searchParams.set('utm_medium', 'threads');
+        u.searchParams.set('utm_campaign', 'ainewsradar');
+        shareUrl = u.toString();
+      } catch (e) {}
+
+      const threadsText = `${title}\n\n🔗 ${shareUrl}\n\n#AI #AINewsRadar`;
+      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+      window.open(thUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareToolToXDirect() {
+      const item = currentToolModalItem || {};
+      const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || (document.documentElement.lang === 'zh') || window.location.pathname.startsWith('/zh');
+      const titleEl = document.getElementById('tool-modal-title');
+      const hookEl = document.getElementById('tool-modal-hook');
+      const offBtn = document.getElementById('tool-modal-official-btn');
+      const appName = item.app_name || (titleEl ? titleEl.textContent.trim() : 'AI Tool');
+      const hook = (isZh ? (item.app_hook || item.title_zh) : (item.app_hook_en || item.title_en)) || (hookEl ? hookEl.textContent.trim() : '');
+      const title = `${appName}${hook ? ' - ' + hook : ''}`;
+      const rawUrl = item.official_url || item.url || ((offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href);
+
+      let shareUrl = rawUrl;
+      try {
+        const u = new URL(rawUrl.startsWith('http') ? rawUrl : window.location.origin + rawUrl);
+        u.searchParams.set('utm_source', 'social_share');
+        u.searchParams.set('utm_medium', 'x');
+        u.searchParams.set('utm_campaign', 'ainewsradar');
+        shareUrl = u.toString();
+      } catch (e) {}
+
+      const tweetText = `🛠️ ${title}\n\nExplore applied AI tools via @ainewsradar`;
+      const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+      window.open(xUrl, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareToolToThreadsDirect() {
+      const item = currentToolModalItem || {};
+      const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || (document.documentElement.lang === 'zh') || window.location.pathname.startsWith('/zh');
+      const titleEl = document.getElementById('tool-modal-title');
+      const hookEl = document.getElementById('tool-modal-hook');
+      const offBtn = document.getElementById('tool-modal-official-btn');
+      const appName = item.app_name || (titleEl ? titleEl.textContent.trim() : 'AI Tool');
+      const hook = (isZh ? (item.app_hook || item.title_zh) : (item.app_hook_en || item.title_en)) || (hookEl ? hookEl.textContent.trim() : '');
+      const title = `${appName}${hook ? ' - ' + hook : ''}`;
+      const rawUrl = item.official_url || item.url || ((offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href);
+
+      let shareUrl = rawUrl;
+      try {
+        const u = new URL(rawUrl.startsWith('http') ? rawUrl : window.location.origin + rawUrl);
+        u.searchParams.set('utm_source', 'social_share');
+        u.searchParams.set('utm_medium', 'threads');
+        u.searchParams.set('utm_campaign', 'ainewsradar');
+        shareUrl = u.toString();
+      } catch (e) {}
+
+      const threadsText = `🛠️ ${title}\n\n🔗 ${shareUrl}\n\n#AITools #AINewsRadar`;
+      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+      window.open(thUrl, '_blank', 'noopener,noreferrer');
+    }
+
     // Attach immediately to window for zero-latency onclick execution
+    window.triggerSiteBookmark = triggerSiteBookmark;
     window.openShareModal = openShareModal;
     window.closeShareModal = closeShareModal;
     window.shareContent = shareContent;
     window.shareCurrentNewsModal = shareCurrentNewsModal;
     window.shareCurrentToolModal = shareCurrentToolModal;
     window.executeShare = executeShare;
+    window.shareNewsToXDirect = shareNewsToXDirect;
+    window.shareNewsToThreadsDirect = shareNewsToThreadsDirect;
+    window.shareToolToXDirect = shareToolToXDirect;
+    window.shareToolToThreadsDirect = shareToolToThreadsDirect;
     window.openBookmarkModal = openBookmarkModal;
     window.closeBookmarkModal = closeBookmarkModal;
     window.copyCurrentSiteUrl = copyCurrentSiteUrl;
@@ -10131,12 +10276,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.renderHeroMediaShowcase = renderHeroMediaShowcase;
     window.renderViralTicker = renderViralTicker;
     window.renderLeadVideoCard = renderLeadVideoCard;
+    window.triggerSiteBookmark = triggerSiteBookmark;
     window.openShareModal = openShareModal;
     window.closeShareModal = closeShareModal;
     window.shareContent = shareContent;
     window.shareCurrentNewsModal = shareCurrentNewsModal;
     window.shareCurrentToolModal = shareCurrentToolModal;
     window.executeShare = executeShare;
+    window.shareNewsToXDirect = shareNewsToXDirect;
+    window.shareNewsToThreadsDirect = shareNewsToThreadsDirect;
+    window.shareToolToXDirect = shareToolToXDirect;
+    window.shareToolToThreadsDirect = shareToolToThreadsDirect;
     window.openBookmarkModal = openBookmarkModal;
     window.closeBookmarkModal = closeBookmarkModal;
     window.copyCurrentSiteUrl = copyCurrentSiteUrl;

@@ -88,7 +88,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//cdn.wccftech.com/wp-content/uploads/2026/05/NVIDIA-Vera-CPUs-1920x1078.jpg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
-  <link rel="preload" href="/js/app.min.js?v=6.5.0" as="script">
+  <link rel="preload" href="/js/app.min.js?v=6.6.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -153,6 +153,14 @@
     /* Force all cards and news title buttons to align strictly left, overriding default button styles */
     .glass-card button, button.text-left {
       text-align: left !important;
+    }
+
+    /* Enforce Highest Stacking Priority for Overlaid Modals & Floating Notifications */
+    #share-modal, #bookmark-modal {
+      z-index: 99999 !important;
+    }
+    #copy-toast {
+      z-index: 100000 !important;
     }
   </style>
   <script>
@@ -360,7 +368,7 @@
         </div>
 
         <!-- ⭐ One-Click Bookmark Site Capsule Button -->
-        <button id="header-bookmark-btn" onclick="openBookmarkModal()" title="Bookmark AI News Radar (Ctrl+D)" class="group text-xs bg-gradient-to-r from-amber-500/10 to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 border border-amber-300/70 dark:border-amber-500/30 text-amber-700 dark:text-amber-400 active:scale-95 transition-all px-2.5 sm:px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm font-semibold cursor-pointer">
+        <button id="header-bookmark-btn" onclick="triggerSiteBookmark()" title="Bookmark AI News Radar (Ctrl+D)" class="group text-xs bg-gradient-to-r from-amber-500/10 to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 border border-amber-300/70 dark:border-amber-500/30 text-amber-700 dark:text-amber-400 active:scale-95 transition-all px-2.5 sm:px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm font-semibold cursor-pointer">
           <span class="text-amber-500 group-hover:scale-110 transition-transform">⭐</span>
           <span class="hidden sm:inline" id="bookmark-btn-text">Bookmark</span>
         </button>
@@ -611,7 +619,7 @@
                   </span>
                   <div class="flex items-center gap-2 font-mono text-[10px] shrink-0">
                     <span class="text-amber-800/80 dark:text-amber-300/80 font-medium" title="Tweet Publish Time (UTC+8)">
-                      <span>🕒 10-19 04:34 · 12h ago</span>
+                      <span>🕒 10-19 04:34 · 13h ago</span>
                     </span>
                     <span class="text-slate-300 dark:text-slate-700">·</span>
                     <a href="https://x.com/thsottiaux/status/2111918768733753664" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0">
@@ -753,7 +761,7 @@ This will be the first of many.
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
                     <span>🕒</span>
-                    <span>10-19 15:52 · 1h ago</span>
+                    <span>10-19 15:52 · 2h ago</span>
                   </span>
                   <a href="https://x.com/elonmusk/status/2112089556615123114" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                     View Post ↗
@@ -879,7 +887,7 @@ Feels like there’s a lot more room to get creative with this one.
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
                     <span>🕒</span>
-                    <span>10-19 13:47 · 3h ago</span>
+                    <span>10-19 13:47 · 4h ago</span>
                   </span>
                   <a href="https://x.com/Parul_Gautam7/status/2112058155161235922" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                     View Post ↗
@@ -928,7 +936,7 @@ I will go first. Two:
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
                     <span>🕒</span>
-                    <span>10-19 13:41 · 3h ago</span>
+                    <span>10-19 13:41 · 4h ago</span>
                   </span>
                   <a href="https://x.com/Sonofpeace0001/status/2112056437887144302" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                     View Post ↗
@@ -970,7 +978,7 @@ the recent @termix_ai partnership with @depinsim got me thinking about how many 
                 <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
                     <span>🕒</span>
-                    <span>10-19 13:40 · 3h ago</span>
+                    <span>10-19 13:40 · 4h ago</span>
                   </span>
                   <a href="https://x.com/web3_tech_/status/2112056146999882023" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
                     View Post ↗
@@ -2901,12 +2909,21 @@ Its skill package lets compatible coding agents like Claude Code, Cursor, and Op
           <span class="shrink-0 text-amber-500">⚡</span>
           <span class="truncate">Executive Intelligence Summary · Grasp core facts</span>
         </div>
-        <div class="flex items-center justify-end gap-2 shrink-0">
-          <button id="ai-modal-share-btn" type="button" onclick="shareCurrentNewsModal()" class="px-3 py-2 text-xs font-bold bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl transition-all flex items-center space-x-1.5 shrink-0 cursor-pointer" title="Share news">
-            <span>📤</span>
-            <span id="ai-modal-share-text">Share</span>
+        <div class="flex items-center justify-end gap-1.5 sm:gap-2 shrink-0">
+          <!-- Direct 1-Click Share to X in New Tab -->
+          <button type="button" onclick="shareNewsToXDirect()" class="w-8 h-8 rounded-xl bg-black hover:bg-slate-800 text-white flex items-center justify-center font-bold text-xs transition-transform active:scale-95 shadow-sm cursor-pointer" title="Share to X (Twitter)">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </button>
-          <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 sm:px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0 max-w-[210px] sm:max-w-none">
+          <!-- Direct 1-Click Share to Threads in New Tab -->
+          <button type="button" onclick="shareNewsToThreadsDirect()" class="w-8 h-8 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center font-bold text-xs transition-transform active:scale-95 border border-zinc-700 shadow-sm cursor-pointer" title="Share to Threads">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 192 192"><path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.3853 71.977C80.8955 63.6063 89.6202 59.986 97.2241 59.986C97.3039 59.986 97.3837 59.986 97.4642 59.986C110.22 60.0673 120.354 69.349 121.722 83.993C114.73 82.8809 106.942 82.9099 98.4878 84.1484C69.3872 88.4116 52.8893 103.551 54.3475 124.965C55.7725 145.895 72.8812 159.277 94.6186 159.277C114.887 159.277 127.359 148.887 132.898 135.534C137.915 144.981 146.541 150.384 158.421 150.384C172.934 150.384 181.76 138.868 181.76 117.848C181.76 83.2267 157.863 56.6348 116.892 56.6348C74.7088 56.6348 45.4545 86.8373 45.4545 125.109C45.4545 146.335 53.6493 162.748 68.6186 172.502C82.4939 181.543 100.864 184.28 122.956 180.601L120.59 165.738C101.442 168.924 85.8078 166.453 74.8464 159.308C63.2629 151.758 56.8831 138.832 56.8831 121.782C56.8831 89.8703 80.8926 68.4907 116.892 68.4907C150.297 68.4907 169.387 89.8398 169.387 117.848C169.387 132.859 164.283 138.528 156.421 138.528C148.91 138.528 143.265 133.393 141.657 125.137C142.112 122.378 142.345 119.53 142.345 116.602C142.345 115.656 142.317 114.717 142.261 113.784L141.537 88.9883ZM120.942 100.672C121.056 102.664 121.114 104.686 121.114 106.726C121.114 108.978 120.978 111.192 120.716 113.355C116.924 130.676 106.79 144.17 92.5186 144.17C79.4891 144.17 68.7849 135.097 67.8927 122.015C67.0674 109.916 77.2625 97.4116 100.563 94.0049C107.514 92.9878 114.394 93.303 120.942 100.672Z"/></svg>
+          </button>
+          <!-- Full Share Modal Button -->
+          <button id="ai-modal-share-btn" type="button" onclick="shareCurrentNewsModal()" class="px-2.5 sm:px-3 py-2 text-xs font-bold bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl transition-all flex items-center space-x-1 shrink-0 cursor-pointer" title="More share options">
+            <span>📤</span>
+            <span id="ai-modal-share-text" class="hidden sm:inline">Share</span>
+          </button>
+          <a id="ai-modal-source-btn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 sm:px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl transition-all shadow-md shadow-indigo-500/20 flex items-center space-x-1.5 shrink-0 max-w-[170px] sm:max-w-none">
             <span id="ai-modal-source-btn-text" class="truncate">Read Full Story</span>
             <span class="shrink-0">↗</span>
           </a>
@@ -3090,8 +3107,17 @@ Its skill package lets compatible coding agents like Claude Code, Cursor, and Op
             </div>
           </div>
         </div>
-        <div class="flex items-center space-x-2 shrink-0">
-          <button id="tool-modal-share-btn" type="button" onclick="shareCurrentToolModal()" class="px-2.5 sm:px-3 py-2 text-xs font-bold bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl transition-all flex items-center space-x-1 shrink-0 cursor-pointer" title="Share Tool">
+        <div class="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
+          <!-- Direct 1-Click Share to X in New Tab -->
+          <button type="button" onclick="shareToolToXDirect()" class="w-8 h-8 rounded-xl bg-black hover:bg-slate-800 text-white flex items-center justify-center font-bold text-xs transition-transform active:scale-95 shadow-sm cursor-pointer" title="Share to X (Twitter)">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </button>
+          <!-- Direct 1-Click Share to Threads in New Tab -->
+          <button type="button" onclick="shareToolToThreadsDirect()" class="w-8 h-8 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center font-bold text-xs transition-transform active:scale-95 border border-zinc-700 shadow-sm cursor-pointer" title="Share to Threads">
+            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 192 192"><path d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.3853 71.977C80.8955 63.6063 89.6202 59.986 97.2241 59.986C97.3039 59.986 97.3837 59.986 97.4642 59.986C110.22 60.0673 120.354 69.349 121.722 83.993C114.73 82.8809 106.942 82.9099 98.4878 84.1484C69.3872 88.4116 52.8893 103.551 54.3475 124.965C55.7725 145.895 72.8812 159.277 94.6186 159.277C114.887 159.277 127.359 148.887 132.898 135.534C137.915 144.981 146.541 150.384 158.421 150.384C172.934 150.384 181.76 138.868 181.76 117.848C181.76 83.2267 157.863 56.6348 116.892 56.6348C74.7088 56.6348 45.4545 86.8373 45.4545 125.109C45.4545 146.335 53.6493 162.748 68.6186 172.502C82.4939 181.543 100.864 184.28 122.956 180.601L120.59 165.738C101.442 168.924 85.8078 166.453 74.8464 159.308C63.2629 151.758 56.8831 138.832 56.8831 121.782C56.8831 89.8703 80.8926 68.4907 116.892 68.4907C150.297 68.4907 169.387 89.8398 169.387 117.848C169.387 132.859 164.283 138.528 156.421 138.528C148.91 138.528 143.265 133.393 141.657 125.137C142.112 122.378 142.345 119.53 142.345 116.602C142.345 115.656 142.317 114.717 142.261 113.784L141.537 88.9883ZM120.942 100.672C121.056 102.664 121.114 104.686 121.114 106.726C121.114 108.978 120.978 111.192 120.716 113.355C116.924 130.676 106.79 144.17 92.5186 144.17C79.4891 144.17 68.7849 135.097 67.8927 122.015C67.0674 109.916 77.2625 97.4116 100.563 94.0049C107.514 92.9878 114.394 93.303 120.942 100.672Z"/></svg>
+          </button>
+          <!-- Full Share Modal Button -->
+          <button id="tool-modal-share-btn" type="button" onclick="shareCurrentToolModal()" class="px-2.5 sm:px-3 py-2 text-xs font-bold bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 rounded-xl transition-all flex items-center space-x-1 shrink-0 cursor-pointer" title="More share options">
             <span>📤</span>
             <span class="hidden sm:inline" id="tool-modal-share-text">Share</span>
           </button>
@@ -3199,7 +3225,7 @@ Its skill package lets compatible coding agents like Claude Code, Cursor, and Op
   </div>
 
   <!-- 📤 Social Share Modal (X, Threads, Instagram, Native Share) -->
-  <div id="share-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeShareModal()">
+  <div id="share-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeShareModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl relative flex flex-col transition-all duration-200">
       <!-- Modal Header -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -3273,7 +3299,7 @@ Its skill package lets compatible coding agents like Claude Code, Cursor, and Op
   </div>
 
   <!-- ⭐ Bookmark Website Guide Modal -->
-  <div id="bookmark-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeBookmarkModal()">
+  <div id="bookmark-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeBookmarkModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-md w-full shadow-2xl relative flex flex-col transition-all duration-200">
       <!-- Modal Header -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -3329,39 +3355,140 @@ Its skill package lets compatible coding agents like Claude Code, Cursor, and Op
   </div>
 
   <!-- Copy Success Toast -->
-  <div id="copy-toast" class="fixed bottom-6 right-6 z-[110] bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300">
+  <div id="copy-toast" class="fixed bottom-6 right-6 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300" style="z-index: 100000 !important;">
     <span>✅</span>
     <span id="copy-toast-msg">Copied to clipboard!</span>
   </div>
 
   <!-- Instant Inline Handlers (Guarantee Immediate Interaction without Delay) -->
   <script>
+    window.triggerSiteBookmark = window.triggerSiteBookmark || function() {
+      var url = 'https://ainewsradar.xyz/';
+      var title = 'AI News Radar | Executive Artificial Intelligence Intelligence';
+      var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || '');
+      if (isMobile && navigator.share) {
+        navigator.share({ title: title, url: url }).catch(function(){});
+        return;
+      }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).catch(function(){});
+      }
+      var btn = document.getElementById('header-bookmark-btn');
+      var btnText = document.getElementById('bookmark-btn-text');
+      if (btn && btnText) {
+        var orig = btnText.innerHTML;
+        btnText.innerHTML = '✅ Copied! (Ctrl+D)';
+        btn.classList.add('ring-2', 'ring-amber-400');
+        setTimeout(function(){
+          btnText.innerHTML = orig;
+          btn.classList.remove('ring-2', 'ring-amber-400');
+        }, 2800);
+      }
+      var t = document.getElementById('copy-toast');
+      var msg = document.getElementById('copy-toast-msg');
+      if (t) {
+        var isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent || '');
+        var shortcut = isMac ? '⌘+D' : 'Ctrl+D';
+        if (msg) msg.textContent = '⭐ URL copied! Press ' + shortcut + ' to bookmark';
+        t.style.zIndex = '100000';
+        t.classList.remove('translate-y-16', 'opacity-0');
+        if (window._toastTimer) clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(function(){ t.classList.add('translate-y-16', 'opacity-0'); }, 3200);
+      }
+    };
+
     window.openBookmarkModal = window.openBookmarkModal || function() {
       var m = document.getElementById('bookmark-modal');
       var u = document.getElementById('bookmark-clean-url');
       if (u) u.value = 'https://ainewsradar.xyz';
-      if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+      if (m) {
+        m.style.zIndex = '99999';
+        m.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
     };
     window.closeBookmarkModal = window.closeBookmarkModal || function() {
       var m = document.getElementById('bookmark-modal');
-      if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
+      if (m) {
+        m.classList.add('hidden');
+        var hasOther = !!document.querySelector('#ai-news-modal:not(.hidden), #tool-detail-modal:not(.hidden), #social-post-modal:not(.hidden)');
+        if (!hasOther) document.body.style.overflow = '';
+      }
     };
     window.copyCurrentSiteUrl = window.copyCurrentSiteUrl || function() {
       var url = 'https://ainewsradar.xyz';
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url);
+        navigator.clipboard.writeText(url).catch(function(){});
       }
       var t = document.getElementById('copy-toast');
       if (t) {
         var msg = document.getElementById('copy-toast-msg');
         if (msg) msg.textContent = '⭐ Website URL copied!';
+        t.style.zIndex = '100000';
         t.classList.remove('translate-y-16', 'opacity-0');
-        setTimeout(function(){ t.classList.add('translate-y-16', 'opacity-0'); }, 2000);
+        if (window._toastTimer) clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(function(){ t.classList.add('translate-y-16', 'opacity-0'); }, 2000);
       }
+    };
+
+    window.openShareModal = window.openShareModal || function(item, type) {
+      var m = document.getElementById('share-modal');
+      if (m) {
+        m.style.zIndex = '99999';
+        m.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+    window.closeShareModal = window.closeShareModal || function() {
+      var m = document.getElementById('share-modal');
+      if (m) {
+        m.classList.add('hidden');
+        var hasOther = !!document.querySelector('#ai-news-modal:not(.hidden), #tool-detail-modal:not(.hidden), #social-post-modal:not(.hidden)');
+        if (!hasOther) document.body.style.overflow = '';
+      }
+    };
+
+    window.shareNewsToXDirect = window.shareNewsToXDirect || function() {
+      var titleEl = document.getElementById('ai-modal-title');
+      var srcBtn = document.getElementById('ai-modal-source-btn');
+      var title = titleEl ? titleEl.textContent.trim() : 'AI News Radar';
+      var rawUrl = (srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href;
+      var tweetText = title + '\n\n📡 via @ainewsradar';
+      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl);
+      window.open(xUrl, '_blank', 'noopener,noreferrer');
+    };
+    window.shareNewsToThreadsDirect = window.shareNewsToThreadsDirect || function() {
+      var titleEl = document.getElementById('ai-modal-title');
+      var srcBtn = document.getElementById('ai-modal-source-btn');
+      var title = titleEl ? titleEl.textContent.trim() : 'AI News Radar';
+      var rawUrl = (srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href;
+      var threadsText = title + '\n\n🔗 ' + rawUrl + '\n\n#AI #AINewsRadar';
+      var thUrl = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(threadsText);
+      window.open(thUrl, '_blank', 'noopener,noreferrer');
+    };
+    window.shareToolToXDirect = window.shareToolToXDirect || function() {
+      var titleEl = document.getElementById('tool-modal-title');
+      var hookEl = document.getElementById('tool-modal-hook');
+      var offBtn = document.getElementById('tool-modal-official-btn');
+      var title = (titleEl ? titleEl.textContent.trim() : 'AI Tool') + (hookEl ? ' - ' + hookEl.textContent.trim() : '');
+      var rawUrl = (offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href;
+      var tweetText = '🛠️ ' + title + '\n\nExplore applied AI tools via @ainewsradar';
+      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl);
+      window.open(xUrl, '_blank', 'noopener,noreferrer');
+    };
+    window.shareToolToThreadsDirect = window.shareToolToThreadsDirect || function() {
+      var titleEl = document.getElementById('tool-modal-title');
+      var hookEl = document.getElementById('tool-modal-hook');
+      var offBtn = document.getElementById('tool-modal-official-btn');
+      var title = (titleEl ? titleEl.textContent.trim() : 'AI Tool') + (hookEl ? ' - ' + hookEl.textContent.trim() : '');
+      var rawUrl = (offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href;
+      var threadsText = '🛠️ ' + title + '\n\n🔗 ' + rawUrl + '\n\n#AITools #AINewsRadar';
+      var thUrl = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(threadsText);
+      window.open(thUrl, '_blank', 'noopener,noreferrer');
     };
   </script>
 
-  <script defer src="/js/app.min.js?v=6.5.0"></script>
+  <script defer src="/js/app.min.js?v=6.6.0"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
