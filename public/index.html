@@ -88,7 +88,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//image.cnbcfm.com/api/v1/image/108321535-1781310783695-gettyimages-2280560635-SPACEX_IPO.jpeg%3Fv%3D1781310835%26w%3D1920%26h%3D1080&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
-  <link rel="preload" href="/js/app.min.js?v=6.6.0" as="script">
+  <link rel="preload" href="/js/app.min.js?v=6.7.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -156,7 +156,7 @@
     }
 
     /* Enforce Highest Stacking Priority for Overlaid Modals & Floating Notifications */
-    #share-modal, #bookmark-modal {
+    #share-modal {
       z-index: 99999 !important;
     }
     #copy-toast {
@@ -366,12 +366,6 @@
             </div>
           </div>
         </div>
-
-        <!-- ⭐ One-Click Bookmark Site Capsule Button -->
-        <button id="header-bookmark-btn" onclick="triggerSiteBookmark()" title="Bookmark AI News Radar (Ctrl+D)" class="group text-xs bg-gradient-to-r from-amber-500/10 to-orange-500/10 hover:from-amber-500/20 hover:to-orange-500/20 border border-amber-300/70 dark:border-amber-500/30 text-amber-700 dark:text-amber-400 active:scale-95 transition-all px-2.5 sm:px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm font-semibold cursor-pointer">
-          <span class="text-amber-500 group-hover:scale-110 transition-transform">⭐</span>
-          <span class="hidden sm:inline" id="bookmark-btn-text">Bookmark</span>
-        </button>
 
         <!-- Real-Time Sync Indicator -->
         <div class="hidden md:flex items-center space-x-2 text-xs bg-slate-200/80 dark:bg-slate-900/80 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-800 text-slate-700 dark:text-slate-300">
@@ -3298,62 +3292,6 @@ the recent @termix_ai partnership with @depinsim got me thinking about how many 
     </div>
   </div>
 
-  <!-- ⭐ Bookmark Website Guide Modal -->
-  <div id="bookmark-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeBookmarkModal()">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-md w-full shadow-2xl relative flex flex-col transition-all duration-200">
-      <!-- Modal Header -->
-      <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
-        <div class="flex items-center space-x-2.5 min-w-0">
-          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white text-base font-bold shadow-md">
-            ⭐
-          </div>
-          <div>
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-tight">
-              Bookmark AI News Radar
-            </h3>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">
-              One-click access to global frontier AI intel
-            </p>
-          </div>
-        </div>
-        <button type="button" onclick="closeBookmarkModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-lg shrink-0 cursor-pointer" title="Close">✕</button>
-      </div>
-
-      <!-- Content & Shortcut Display -->
-      <div class="p-5 space-y-4 text-center">
-        <!-- Shortcut Animated Visual Badge -->
-        <div class="p-4 rounded-2xl bg-amber-500/10 dark:bg-amber-500/15 border border-amber-500/30 space-y-2">
-          <div class="text-xs text-amber-800 dark:text-amber-300 font-semibold" id="bookmark-os-tip">
-            Press browser keyboard shortcut to save:
-          </div>
-          <div class="flex items-center justify-center gap-2 font-mono text-base font-extrabold" id="bookmark-shortcut-keys">
-            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">Ctrl</kbd>
-            <span class="text-slate-400">+</span>
-            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">D</kbd>
-          </div>
-          <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-1" id="bookmark-extra-tip">
-            (Mac users: press ⌘ Command + D)
-          </p>
-        </div>
-
-        <div class="space-y-2 text-left">
-          <label class="text-[11px] font-bold text-slate-600 dark:text-slate-300">Clean Website URL</label>
-          <div class="flex items-center gap-2">
-            <input id="bookmark-clean-url" type="text" readonly value="https://ainewsradar.xyz" class="flex-1 px-3 py-2 text-xs font-mono bg-slate-100 dark:bg-slate-800/80 border border-slate-300 dark:border-slate-700 rounded-xl text-slate-800 dark:text-slate-200 select-all focus:outline-none">
-            <button type="button" onclick="copyCurrentSiteUrl()" class="px-3 py-2 text-xs font-bold bg-amber-600 hover:bg-amber-500 text-white rounded-xl shadow-md shadow-amber-600/20 transition-all flex items-center gap-1.5 shrink-0 cursor-pointer">
-              <span>📋</span>
-              <span>Copy</span>
-            </button>
-          </div>
-        </div>
-
-        <p class="text-[11px] text-slate-500 dark:text-slate-400">
-          Mobile: Tap the browser share icon <span class="font-mono">⎋</span> or menu <span class="font-mono">⋮</span> and select <strong>"Add to Home Screen"</strong> or <strong>"Add Bookmark"</strong>.
-        </p>
-      </div>
-    </div>
-  </div>
-
   <!-- Copy Success Toast -->
   <div id="copy-toast" class="fixed bottom-6 right-6 bg-indigo-600 text-white px-4 py-2 rounded-xl shadow-2xl text-xs font-semibold flex items-center space-x-2 transform translate-y-16 opacity-0 transition-all duration-300" style="z-index: 100000 !important;">
     <span>✅</span>
@@ -3362,59 +3300,32 @@ the recent @termix_ai partnership with @depinsim got me thinking about how many 
 
   <!-- Instant Inline Handlers (Guarantee Immediate Interaction without Delay) -->
   <script>
-    window.triggerSiteBookmark = window.triggerSiteBookmark || function() {
-      var url = 'https://ainewsradar.xyz/';
-      var title = 'AI News Radar | Executive Artificial Intelligence Intelligence';
-      var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent || '');
-      if (isMobile && navigator.share) {
-        navigator.share({ title: title, url: url }).catch(function(){});
+    window.handleNewsCardClick = window.handleNewsCardClick || function(newsId, event) {
+      if (event && event.target && event.target.closest('a, button')) return;
+      var isZh = window.location.pathname.startsWith('/zh') || document.documentElement.lang === 'zh';
+      if ((typeof currentTab !== 'undefined' && currentTab === 'news') || window.location.hash === '#news') {
+        var url = (isZh ? '/zh/news/' : '/news/') + newsId;
+        window.open(url, '_blank', 'noopener,noreferrer');
         return;
       }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(url).catch(function(){});
-      }
-      var btn = document.getElementById('header-bookmark-btn');
-      var btnText = document.getElementById('bookmark-btn-text');
-      if (btn && btnText) {
-        var orig = btnText.innerHTML;
-        btnText.innerHTML = '✅ Copied! (Ctrl+D)';
-        btn.classList.add('ring-2', 'ring-amber-400');
-        setTimeout(function(){
-          btnText.innerHTML = orig;
-          btn.classList.remove('ring-2', 'ring-amber-400');
-        }, 2800);
-      }
-      var t = document.getElementById('copy-toast');
-      var msg = document.getElementById('copy-toast-msg');
-      if (t) {
-        var isMac = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform || navigator.userAgent || '');
-        var shortcut = isMac ? '⌘+D' : 'Ctrl+D';
-        if (msg) msg.textContent = '⭐ URL copied! Press ' + shortcut + ' to bookmark';
-        t.style.zIndex = '100000';
-        t.classList.remove('translate-y-16', 'opacity-0');
-        if (window._toastTimer) clearTimeout(window._toastTimer);
-        window._toastTimer = setTimeout(function(){ t.classList.add('translate-y-16', 'opacity-0'); }, 3200);
+      if (typeof openAiNewsModal === 'function') {
+        openAiNewsModal(newsId);
       }
     };
 
-    window.openBookmarkModal = window.openBookmarkModal || function() {
-      var m = document.getElementById('bookmark-modal');
-      var u = document.getElementById('bookmark-clean-url');
-      if (u) u.value = 'https://ainewsradar.xyz';
-      if (m) {
-        m.style.zIndex = '99999';
-        m.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
+    window.handleToolCardClick = window.handleToolCardClick || function(toolId, event) {
+      if (event && event.target && event.target.closest('a, button')) return;
+      var isZh = window.location.pathname.startsWith('/zh') || document.documentElement.lang === 'zh';
+      if ((typeof currentTab !== 'undefined' && currentTab === 'tools') || window.location.hash === '#tools') {
+        var url = (isZh ? '/zh/tools/' : '/tools/') + toolId;
+        window.open(url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      if (typeof openToolDetailModal === 'function') {
+        openToolDetailModal(toolId);
       }
     };
-    window.closeBookmarkModal = window.closeBookmarkModal || function() {
-      var m = document.getElementById('bookmark-modal');
-      if (m) {
-        m.classList.add('hidden');
-        var hasOther = !!document.querySelector('#ai-news-modal:not(.hidden), #tool-detail-modal:not(.hidden), #social-post-modal:not(.hidden)');
-        if (!hasOther) document.body.style.overflow = '';
-      }
-    };
+
     window.copyCurrentSiteUrl = window.copyCurrentSiteUrl || function() {
       var url = 'https://ainewsradar.xyz';
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -3449,46 +3360,59 @@ the recent @termix_ai partnership with @depinsim got me thinking about how many 
     };
 
     window.shareNewsToXDirect = window.shareNewsToXDirect || function() {
+      var modal = document.getElementById('ai-news-modal');
+      var newsId = (typeof currentActiveNewsItem !== 'undefined' && currentActiveNewsItem && currentActiveNewsItem.id) || (modal ? (modal.getAttribute('data-news-id') || modal.getAttribute('data-id')) : '');
       var titleEl = document.getElementById('ai-modal-title');
-      var srcBtn = document.getElementById('ai-modal-source-btn');
       var title = titleEl ? titleEl.textContent.trim() : 'AI News Radar';
-      var rawUrl = (srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href;
-      var tweetText = title + '\n\n📡 via @ainewsradar';
-      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl);
+      var cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      var rawUrl = newsId ? ('https://ainewsradar.xyz/news/' + newsId) : 'https://ainewsradar.xyz/';
+      var tweetText = cleanTitle + '\n\n📡 via @ainewsradar';
+      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl + '?utm_source=social_share&utm_medium=x&utm_campaign=ainewsradar');
       window.open(xUrl, '_blank', 'noopener,noreferrer');
     };
+
     window.shareNewsToThreadsDirect = window.shareNewsToThreadsDirect || function() {
+      var modal = document.getElementById('ai-news-modal');
+      var newsId = (typeof currentActiveNewsItem !== 'undefined' && currentActiveNewsItem && currentActiveNewsItem.id) || (modal ? (modal.getAttribute('data-news-id') || modal.getAttribute('data-id')) : '');
       var titleEl = document.getElementById('ai-modal-title');
-      var srcBtn = document.getElementById('ai-modal-source-btn');
       var title = titleEl ? titleEl.textContent.trim() : 'AI News Radar';
-      var rawUrl = (srcBtn && srcBtn.href && srcBtn.href !== '#' && !srcBtn.href.endsWith('#')) ? srcBtn.href : window.location.href;
-      var threadsText = title + '\n\n🔗 ' + rawUrl + '\n\n#AI #AINewsRadar';
+      var cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
+      var rawUrl = newsId ? ('https://ainewsradar.xyz/news/' + newsId) : 'https://ainewsradar.xyz/';
+      var shareUrl = rawUrl + '?utm_source=social_share&utm_medium=threads&utm_campaign=ainewsradar';
+      var threadsText = cleanTitle + '\n\n' + shareUrl + '\n\n#AI #AINewsRadar';
       var thUrl = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(threadsText);
       window.open(thUrl, '_blank', 'noopener,noreferrer');
     };
+
     window.shareToolToXDirect = window.shareToolToXDirect || function() {
+      var modal = document.getElementById('tool-detail-modal');
+      var toolId = (typeof currentToolModalItem !== 'undefined' && currentToolModalItem && currentToolModalItem.id) || (modal ? (modal.getAttribute('data-tool-id') || modal.getAttribute('data-id') || modal.getAttribute('data-news-id')) : '');
       var titleEl = document.getElementById('tool-modal-title');
       var hookEl = document.getElementById('tool-modal-hook');
-      var offBtn = document.getElementById('tool-modal-official-btn');
       var title = (titleEl ? titleEl.textContent.trim() : 'AI Tool') + (hookEl ? ' - ' + hookEl.textContent.trim() : '');
-      var rawUrl = (offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href;
-      var tweetText = '🛠️ ' + title + '\n\nExplore applied AI tools via @ainewsradar';
-      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl);
+      var cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      var rawUrl = toolId ? ('https://ainewsradar.xyz/tools/' + toolId) : 'https://ainewsradar.xyz/';
+      var tweetText = '🛠️ ' + cleanTitle + '\n\n📡 via @ainewsradar';
+      var xUrl = 'https://x.com/intent/tweet?text=' + encodeURIComponent(tweetText) + '&url=' + encodeURIComponent(rawUrl + '?utm_source=social_share&utm_medium=x&utm_campaign=ainewsradar');
       window.open(xUrl, '_blank', 'noopener,noreferrer');
     };
+
     window.shareToolToThreadsDirect = window.shareToolToThreadsDirect || function() {
+      var modal = document.getElementById('tool-detail-modal');
+      var toolId = (typeof currentToolModalItem !== 'undefined' && currentToolModalItem && currentToolModalItem.id) || (modal ? (modal.getAttribute('data-tool-id') || modal.getAttribute('data-id') || modal.getAttribute('data-news-id')) : '');
       var titleEl = document.getElementById('tool-modal-title');
       var hookEl = document.getElementById('tool-modal-hook');
-      var offBtn = document.getElementById('tool-modal-official-btn');
       var title = (titleEl ? titleEl.textContent.trim() : 'AI Tool') + (hookEl ? ' - ' + hookEl.textContent.trim() : '');
-      var rawUrl = (offBtn && offBtn.href && offBtn.href !== '#' && !offBtn.href.endsWith('#')) ? offBtn.href : window.location.href;
-      var threadsText = '🛠️ ' + title + '\n\n🔗 ' + rawUrl + '\n\n#AITools #AINewsRadar';
+      var cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
+      var rawUrl = toolId ? ('https://ainewsradar.xyz/tools/' + toolId) : 'https://ainewsradar.xyz/';
+      var shareUrl = rawUrl + '?utm_source=social_share&utm_medium=threads&utm_campaign=ainewsradar';
+      var threadsText = '🛠️ ' + cleanTitle + '\n\n' + shareUrl + '\n\n#AITools #AINewsRadar';
       var thUrl = 'https://www.threads.net/intent/post?text=' + encodeURIComponent(threadsText);
       window.open(thUrl, '_blank', 'noopener,noreferrer');
     };
   </script>
 
-  <script defer src="/js/app.min.js?v=6.6.0"></script>
+  <script defer src="/js/app.min.js?v=6.7.0"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

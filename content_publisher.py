@@ -3677,7 +3677,14 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
     # 3. 首页真实可见 DOM 预渲染
     prerender_homepage(items, top_three, articles_meta, daily_dates, topic_focus=topic_focus, hero_media_showcase=hero_media_showcase)
 
-    # 4. 全量 Sitemap 生成
+    # 4. 生成所有工具与资讯独立二级落地页 (保持站内留存与社交分享卡片预览)
+    try:
+        from tool_news_publisher import generate_all_landing_pages
+        generate_all_landing_pages()
+    except Exception as e:
+        print(f"⚠️ [Landing Pages Generator] {e}")
+
+    # 5. 全量 Sitemap 生成
     update_sitemap_with_all_pages(daily_dates, articles_meta)
 
     print("="*70)

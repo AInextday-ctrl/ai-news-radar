@@ -70,6 +70,54 @@
         "destination": "/zh/daily/index.html"
       },
       {
+        "source": "/zh/tools/:id",
+        "destination": "/zh/tools/:id.html"
+      },
+      {
+        "source": "/zh/tools",
+        "destination": "/zh/tools/index.html"
+      },
+      {
+        "source": "/zh/tools/",
+        "destination": "/zh/tools/index.html"
+      },
+      {
+        "source": "/zh/news/:id",
+        "destination": "/zh/news/:id.html"
+      },
+      {
+        "source": "/zh/news",
+        "destination": "/zh/news/index.html"
+      },
+      {
+        "source": "/zh/news/",
+        "destination": "/zh/news/index.html"
+      },
+      {
+        "source": "/tools/:id",
+        "destination": "/tools/:id.html"
+      },
+      {
+        "source": "/tools",
+        "destination": "/tools/index.html"
+      },
+      {
+        "source": "/tools/",
+        "destination": "/tools/index.html"
+      },
+      {
+        "source": "/news/:id",
+        "destination": "/news/:id.html"
+      },
+      {
+        "source": "/news",
+        "destination": "/news/index.html"
+      },
+      {
+        "source": "/news/",
+        "destination": "/news/index.html"
+      },
+      {
         "source": "/zh/**",
         "destination": "/zh/index.html"
       },
@@ -153,7 +201,16 @@
     ],
     "headers": [
       {
-        "source": "**/*.@(css|js|mjs|svg|png|jpg|jpeg|webp|gif|ico|woff|woff2|ttf)",
+        "source": "**/*.@(js|css|mjs)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600, must-revalidate"
+          }
+        ]
+      },
+      {
+        "source": "**/*.@(svg|png|jpg|jpeg|webp|gif|ico|woff|woff2|ttf)",
         "headers": [
           {
             "key": "Cache-Control",
