@@ -223,6 +223,14 @@
         archiveViewTitle: "历史资讯全量归档库",
         archiveViewDesc: "全量沉淀超出24小时的历史快讯、社交前沿动态与落地工具，支持即时分类检索与跨页回溯",
         archiveSearchPlaceholder: "在历史归档中检索...",
+        shareBtn: "分享",
+        shareModalTitle: "一键分享至社交平台",
+        shareModalSubtitle: "支持直达 𝕏、Threads、Instagram 或复制精炼卡片",
+        bookmarkBtnText: "收藏本站",
+        bookmarkModalTitle: "将 AI 资讯雷达加入浏览器书签",
+        bookmarkModalSubtitle: "随时随地一键感知全球 AI 最前沿技术动态",
+        bookmarkCopyUrl: "复制网站直达链接",
+        bookmarkCopiedToast: "⭐ 网址已复制！请按快捷键保存书签",
         tabs: {
           all: "综合全景",
           news: "行业快讯",
@@ -388,6 +396,14 @@
         archiveViewTitle: "Historical Intelligence Archive",
         archiveViewDesc: "Comprehensive repository of past AI news, social intel, and practical tools with search and pagination",
         archiveSearchPlaceholder: "Search within archives...",
+        shareBtn: "Share",
+        shareModalTitle: "Share Intelligence Card",
+        shareModalSubtitle: "Directly post to 𝕏, Threads, Instagram or copy smart card",
+        bookmarkBtnText: "Bookmark",
+        bookmarkModalTitle: "Bookmark AI News Radar",
+        bookmarkModalSubtitle: "Stay ahead with real-time frontier AI breakthroughs & applied tools",
+        bookmarkCopyUrl: "Copy Website URL",
+        bookmarkCopiedToast: "⭐ URL copied! Press shortcut to save bookmark",
         tabs: {
           all: "Overview",
           news: "News",
@@ -4477,9 +4493,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span class="text-[11px] font-mono text-amber-600 dark:text-amber-400 font-bold group-hover:underline flex items-center gap-1">
                 ⚡ ${isZh ? '点击查看速读与AI深度研判' : 'Click for 5W1H Briefing'}
               </span>
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-amber-700 dark:text-amber-400 hover:text-amber-600 hover:underline font-bold">
-                ${isZh ? '官方公报 / 源站' : 'Official Report'} ↗
-              </a>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="event.stopPropagation(); window.shareContent(event, '${item.id}', 'news')" class="text-[11px] px-2 py-0.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-800 dark:text-amber-300 transition-all flex items-center gap-1 font-semibold cursor-pointer" title="${isZh ? '一键分享' : 'Share'}">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                  <span>${isZh ? '分享' : 'Share'}</span>
+                </button>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-amber-700 dark:text-amber-400 hover:text-amber-600 hover:underline font-bold">
+                  ${isZh ? '官方公报 / 源站' : 'Official Report'} ↗
+                </a>
+              </div>
             </div>
           </div>
         </article>
@@ -4487,7 +4509,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a')) openAiNewsModal('${item.id}')">
+        <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-4 justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a, button')) openAiNewsModal('${item.id}')">
           ${hasRealImage ? `
             <div class="w-20 h-20 sm:w-36 sm:h-24 rounded-lg overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0">
               <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
@@ -4515,9 +4537,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <span class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
                 ⚡ ${isZh ? '点击查看速读' : 'Click for Briefing'}
               </span>
-              <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium">
-                ${isZh ? '源站' : 'Source'} ↗
-              </a>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="event.stopPropagation(); window.shareContent(event, '${item.id}', 'news')" class="text-[11px] px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all flex items-center gap-1 font-medium cursor-pointer" title="${isZh ? '一键分享' : 'Share'}">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                  <span>${isZh ? '分享' : 'Share'}</span>
+                </button>
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium">
+                  ${isZh ? '源站' : 'Source'} ↗
+                </a>
+              </div>
             </div>
           </div>
         </article>
@@ -5564,10 +5592,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <button type="button" onclick="event.stopPropagation(); openToolDetailModal('${itemId}')" class="text-xs font-semibold text-emerald-700 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 transition-colors flex items-center space-x-1">
               <span>${isZh ? '🔍 详情与截图' : '🔍 Details & Specs'}</span>
             </button>
-            <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
-              <span>${ctaLabel}</span>
-              <span>↗</span>
-            </a>
+            <div class="flex items-center gap-2">
+              <button type="button" onclick="event.stopPropagation(); window.shareContent(event, '${itemId}', 'tool')" class="text-[11px] px-2.5 py-1 rounded-xl bg-slate-200/70 hover:bg-slate-300/80 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all flex items-center gap-1 font-medium cursor-pointer" title="${isZh ? '一键分享工具' : 'Share Tool'}">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                <span>${isZh ? '分享' : 'Share'}</span>
+              </button>
+              <a href="${escapeHtml(transitUrl)}" target="_blank" rel="nofollow noopener noreferrer" onclick="event.stopPropagation()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all flex items-center space-x-1 shadow-sm shadow-emerald-600/30 shrink-0 transform hover:scale-[1.03]">
+                <span>${ctaLabel}</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
         </article>
       `;
@@ -7576,17 +7610,52 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 复制 Prompt 到剪贴板
-    function copyToClipboard(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('copy-toast');
-        const toastMsg = document.getElementById('copy-toast-msg');
-        toastMsg.textContent = I18N[currentLang].copySuccess;
+    // 弹窗与剪贴板控制 (Toast & Clipboard Control)
+    function showCustomToast(msg, duration = 2200) {
+      const toast = document.getElementById('copy-toast');
+      const toastMsg = document.getElementById('copy-toast-msg');
+      if (toast && toastMsg) {
+        toastMsg.textContent = msg;
         toast.classList.remove('translate-y-16', 'opacity-0');
-        setTimeout(() => {
+        if (window._toastTimer) clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(() => {
           toast.classList.add('translate-y-16', 'opacity-0');
-        }, 2200);
-      });
+        }, duration);
+      }
+    }
+
+    function fallbackCopyText(text) {
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // 复制内容到剪贴板并提示
+    function copyToClipboard(text, customMsg) {
+      const msg = customMsg || I18N[currentLang].copySuccess;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showCustomToast(msg);
+        }).catch(() => {
+          fallbackCopyText(text);
+          showCustomToast(msg);
+        });
+      } else {
+        fallbackCopyText(text);
+        showCustomToast(msg);
+      }
     }
 
     // 视频弹窗操作 (自适应 16:9 横屏与 9:16 竖屏短视频，支持外部直达)
@@ -7727,6 +7796,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         item = urlMatches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || urlMatches[0];
       }
       if (!item) return;
+      currentActiveNewsItem = item;
 
       const analysis = item.ai_analysis || {};
       let rawTitle = '';
@@ -8139,6 +8209,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         modal.classList.add('hidden');
         document.body.style.overflow = '';
       }
+      currentActiveNewsItem = null;
     }
 
     // ==========================================
@@ -9488,6 +9559,245 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.copyToolQuickstartCmd = copyToolQuickstartCmd;
 
     // ==========================================
+    // 社交平台一键分享与全站书签控制器 (Social Share & Bookmark Controller)
+    // ==========================================
+    let activeShareItem = null;
+
+    function openShareModal(item, type = 'news') {
+      if (!item) return;
+      activeShareItem = { item, type };
+      const isZh = currentLang === 'zh';
+      const modal = document.getElementById('share-modal');
+      const badgeEl = document.getElementById('share-preview-badge');
+      const sourceEl = document.getElementById('share-preview-source');
+      const titleEl = document.getElementById('share-preview-title');
+      const snippetEl = document.getElementById('share-preview-snippet');
+
+      let title = "";
+      let snippet = "";
+      let source = "";
+
+      if (type === 'news') {
+        title = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title || '';
+        snippet = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '';
+        source = item.source || (isZh ? '全球权威信源' : 'Authoritative Source');
+        if (badgeEl) badgeEl.textContent = isZh ? '⚡ 重磅快讯' : '⚡ BREAKING NEWS';
+      } else if (type === 'tool') {
+        const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI Tool');
+        const hook = (isZh ? (item.app_hook || item.title_zh || item.summary_zh) : (item.app_hook_en || item.title_en || item.summary_en)) || '';
+        title = `${appName} - ${hook}`;
+        snippet = (isZh ? (item.summary_zh || item.overview_zh || item.content_snippet) : (item.overview_en || item.summary_en || item.content_snippet)) || '';
+        source = item.tool_origin === 'github' ? '📦 GitHub Open Source' : (isZh ? '🛠️ 场景落地神器' : '🛠️ Applied AI Tool');
+        if (badgeEl) badgeEl.textContent = isZh ? '🛠️ 场景落地工具' : '🛠️ APPLIED AI TOOL';
+      }
+
+      if (sourceEl) sourceEl.textContent = source;
+      if (titleEl) titleEl.textContent = title;
+      if (snippetEl) snippetEl.textContent = snippet;
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeShareModal() {
+      const modal = document.getElementById('share-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+      activeShareItem = null;
+    }
+
+    function shareContent(event, id, type = 'news') {
+      if (event && event.stopPropagation) event.stopPropagation();
+      if (!cachedData) return;
+      let targetItem = null;
+
+      if (type === 'news') {
+        const allNews = [
+          ...(cachedData.grouped?.news || []),
+          ...(cachedData.news || []),
+          ...(cachedData.top_three || []),
+          ...(cachedData.grouped?.celebrity || []),
+          ...(cachedData.items || []),
+          ...(cachedData.industry_news || [])
+        ];
+        targetItem = allNews.find(it => String(it.id) === String(id) || it.url === id);
+      } else if (type === 'tool') {
+        const allTools = [
+          ...(cachedData.grouped?.tools || cachedData.tools || []),
+          ...(cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools')
+        ];
+        const deduped = dedupToolItems(allTools);
+        targetItem = deduped.find(it => String(it.id) === String(id) || it.url === id || it.official_url === id) ||
+                     allTools.find(it => String(it.id) === String(id) || it.url === id || it.official_url === id);
+      }
+
+      if (targetItem) {
+        openShareModal(targetItem, type);
+      }
+    }
+
+    function shareCurrentNewsModal() {
+      if (currentActiveNewsItem) {
+        openShareModal(currentActiveNewsItem, 'news');
+      }
+    }
+
+    function shareCurrentToolModal() {
+      if (currentToolModalItem) {
+        openShareModal(currentToolModalItem, 'tool');
+      }
+    }
+
+    function executeShare(platform) {
+      if (!activeShareItem || !activeShareItem.item) return;
+      const { item, type } = activeShareItem;
+      const isZh = currentLang === 'zh';
+
+      let rawTitle = "";
+      let rawSnippet = "";
+      let rawUrl = "";
+
+      if (type === 'news') {
+        rawTitle = (isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || item.title || '';
+        rawSnippet = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '';
+        rawUrl = item.url || window.location.href;
+      } else {
+        const appName = item.app_name || (item.title ? item.title.split(':')[0].replace(/^[【\[].*?[】\]]\s*/, '') : 'AI Tool');
+        const hook = (isZh ? (item.app_hook || item.title_zh || item.summary_zh) : (item.app_hook_en || item.title_en || item.summary_en)) || '';
+        rawTitle = `${appName} - ${hook}`;
+        rawSnippet = (isZh ? (item.summary_zh || item.overview_zh || item.content_snippet) : (item.overview_en || item.summary_en || item.content_snippet)) || '';
+        rawUrl = formatCleanToolUrl(item.official_url || item.url || window.location.href, item);
+      }
+
+      let shareUrl = rawUrl;
+      try {
+        const u = new URL(rawUrl.startsWith('http') ? rawUrl : window.location.origin + rawUrl);
+        u.searchParams.set('utm_source', 'social_share');
+        u.searchParams.set('utm_medium', platform);
+        u.searchParams.set('utm_campaign', 'ainewsradar');
+        shareUrl = u.toString();
+      } catch (e) {
+        shareUrl = rawUrl;
+      }
+
+      const cleanSnippet = rawSnippet.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const shareTitle = rawTitle.replace(/<[^>]+>/g, '').trim();
+
+      if (platform === 'x') {
+        const tweetText = `${shareTitle}\n\n${cleanSnippet ? cleanSnippet + '\n\n' : ''}📡 via @ainewsradar`;
+        const xUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+        window.open(xUrl, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const threadsText = `${shareTitle}\n\n${cleanSnippet}\n\n🔗 ${shareUrl}\n\n#AI #AINewsRadar`;
+        const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+        window.open(thUrl, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'instagram') {
+        const igCaption = `${shareTitle}\n\n${cleanSnippet}\n\n🔗 Radar: ${shareUrl}\n\n#AI #ArtificialIntelligence #TechNews #AINewsRadar`;
+        copyToClipboard(igCaption, isZh ? '已复制 Instagram 专属图文文案！可直接去 Instagram 粘贴发布 📸' : 'Instagram caption copied! Ready to paste on Instagram 📸');
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile && navigator.share) {
+          navigator.share({
+            title: shareTitle,
+            text: igCaption,
+            url: shareUrl
+          }).catch(() => {});
+        } else {
+          setTimeout(() => {
+            window.open('https://www.instagram.com/', '_blank');
+          }, 800);
+        }
+      } else if (platform === 'copy_link') {
+        copyToClipboard(shareUrl, isZh ? '分享链接已复制到剪贴板！🔗' : 'Share link copied to clipboard! 🔗');
+        closeShareModal();
+      } else if (platform === 'copy_text') {
+        const formattedSnippet = `【${shareTitle}】\n${cleanSnippet}\n🔗 链接: ${shareUrl}\n（来自 AI 资讯雷达 ainewsradar.xyz）`;
+        const formattedEn = `[${shareTitle}]\n${cleanSnippet}\n🔗 Link: ${shareUrl}\n(via AI News Radar ainewsradar.xyz)`;
+        copyToClipboard(isZh ? formattedSnippet : formattedEn, isZh ? '图文精炼卡片已复制！📋' : 'Intelligence snippet copied! 📋');
+        closeShareModal();
+      } else if (platform === 'native') {
+        if (navigator.share) {
+          navigator.share({
+            title: shareTitle,
+            text: `${shareTitle} - ${cleanSnippet}`,
+            url: shareUrl
+          }).then(() => {
+            closeShareModal();
+          }).catch(() => {});
+        } else {
+          copyToClipboard(shareUrl, isZh ? '系统分享不可用，已直接复制分享链接！🔗' : 'Web Share not supported, link copied! 🔗');
+          closeShareModal();
+        }
+      }
+    }
+
+    function openBookmarkModal() {
+      const isZh = currentLang === 'zh';
+      const modal = document.getElementById('bookmark-modal');
+      const osTipEl = document.getElementById('bookmark-os-tip');
+      const shortcutKeysEl = document.getElementById('bookmark-shortcut-keys');
+      const extraTipEl = document.getElementById('bookmark-extra-tip');
+      const urlInput = document.getElementById('bookmark-clean-url');
+
+      const isMac = navigator.userAgent.includes('Mac') || (navigator.platform && navigator.platform.includes('Mac'));
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+      const siteUrl = isZh ? 'https://ainewsradar.xyz/zh' : 'https://ainewsradar.xyz';
+      if (urlInput) urlInput.value = siteUrl;
+      copyToClipboard(siteUrl, isZh ? '⭐ 网址已复制！请按快捷键保存至浏览器书签' : '⭐ URL copied! Press shortcut to save bookmark');
+
+      if (shortcutKeysEl && osTipEl && extraTipEl) {
+        if (isMobile) {
+          osTipEl.textContent = isZh ? '移动端浏览器一键保存至主屏幕：' : 'Save to home screen or bookmarks:';
+          shortcutKeysEl.innerHTML = `
+            <span class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400 font-sans text-xs font-bold">⎋ ${isZh ? '分享' : 'Share'}</span>
+            <span class="text-slate-400">➜</span>
+            <span class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400 font-sans text-xs font-bold">${isZh ? '添加到主屏幕' : 'Add to Home Screen'}</span>
+          `;
+          extraTipEl.textContent = isZh ? '(Safari/Chrome 点击底部分享或右上角菜单即可一键添加)' : '(Tap browser share or menu to add with one tap)';
+        } else if (isMac) {
+          osTipEl.textContent = isZh ? '苹果 Mac 专属书签快捷键：' : 'macOS Browser Bookmark Shortcut:';
+          shortcutKeysEl.innerHTML = `
+            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">⌘ Cmd</kbd>
+            <span class="text-slate-400">+</span>
+            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">D</kbd>
+          `;
+          extraTipEl.textContent = isZh ? '(支持 Safari、Chrome、Edge、Arc 等所有 macOS 浏览器)' : '(Works on Safari, Chrome, Edge, Arc on macOS)';
+        } else {
+          osTipEl.textContent = isZh ? '按快捷键一键将网站加入书签：' : 'Press browser shortcut to bookmark:';
+          shortcutKeysEl.innerHTML = `
+            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">Ctrl</kbd>
+            <span class="text-slate-400">+</span>
+            <kbd class="px-3 py-1.5 bg-white dark:bg-slate-800 border border-amber-300 dark:border-amber-500/40 rounded-xl shadow-md text-amber-600 dark:text-amber-400">D</kbd>
+          `;
+          extraTipEl.textContent = isZh ? '(Mac 用户请按 ⌘ Command + D)' : '(Mac users: press ⌘ Command + D)';
+        }
+      }
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeBookmarkModal() {
+      const modal = document.getElementById('bookmark-modal');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function copyCurrentSiteUrl() {
+      const isZh = currentLang === 'zh';
+      const siteUrl = isZh ? 'https://ainewsradar.xyz/zh' : 'https://ainewsradar.xyz';
+      copyToClipboard(siteUrl, isZh ? '⭐ 网站直达链接已复制！' : '⭐ Website URL copied!');
+    }
+
+    // ==========================================
     // 法律合规与隐私政策控制 (满足 Google AdSense 审核强制要求)
     // ==========================================
     const LEGAL_DOCS = {
@@ -9676,6 +9986,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         closeAiNewsModal();
         closeSocialPostModal();
         closeToolDetailModal();
+        closeShareModal();
+        closeBookmarkModal();
       }
       const toolModal = document.getElementById('tool-detail-modal');
       if (toolModal && !toolModal.classList.contains('hidden')) {
@@ -9733,6 +10045,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.renderHeroMediaShowcase = renderHeroMediaShowcase;
     window.renderViralTicker = renderViralTicker;
     window.renderLeadVideoCard = renderLeadVideoCard;
+    window.openShareModal = openShareModal;
+    window.closeShareModal = closeShareModal;
+    window.shareContent = shareContent;
+    window.shareCurrentNewsModal = shareCurrentNewsModal;
+    window.shareCurrentToolModal = shareCurrentToolModal;
+    window.executeShare = executeShare;
+    window.openBookmarkModal = openBookmarkModal;
+    window.closeBookmarkModal = closeBookmarkModal;
+    window.copyCurrentSiteUrl = copyCurrentSiteUrl;
+    window.showCustomToast = showCustomToast;
 
     const runLangCheck = () => {
       initTranslateEngine();
