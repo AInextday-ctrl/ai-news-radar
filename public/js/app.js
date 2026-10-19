@@ -1468,17 +1468,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         name: '简体中文',
         flag: '🇨🇳',
         target: 'chinese_simplified',
-        title: '网页语言切换与翻译',
-        desc: '网页语言可在此切换，或使用翻译插件浏览。',
-        btn: '切换为中文',
+        title: '中文版本偏好提示',
+        desc: '检测到您的系统语言为中文，是否切换至精翻中文版？',
+        btn: '切换为简体中文',
         keep: '保持英文'
       },
       'zh-tw': {
         name: '繁體中文',
         flag: '🇭🇰',
         target: 'chinese_traditional',
-        title: '網頁語言切換與翻譯',
-        desc: '網頁語言可在此切換，或使用翻譯外掛閱讀。',
+        title: '繁體中文偏好提示',
+        desc: '偵測到您的系統語言為繁體中文，是否切換為繁體中文版本？',
         btn: '切換為繁體中文',
         keep: '保持英文'
       },
@@ -1674,25 +1674,38 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const descEl = document.getElementById('lang-suggest-desc');
       const btnEl = document.getElementById('lang-suggest-switch-btn');
       const btnTextEl = document.getElementById('lang-suggest-btn-text');
-      const keepBtnEl = document.getElementById('lang-suggest-keep-btn');
-
+      const isZhPage = window.location.pathname.startsWith('/zh');
       if (titleEl) {
         titleEl.innerHTML = `<span>🌐 ${config.title}</span>`;
       }
       if (descEl) {
-        descEl.textContent = config.desc;
+        if (detectedKey === 'zh-tw' && isZhPage) {
+          descEl.textContent = '偵測到您的系統語言為繁體中文，是否直接轉換為繁體中文閱讀？';
+        } else if (detectedKey === 'zh-tw') {
+          descEl.textContent = '偵測到您的系統語言為繁體中文，是否切換至繁體中文版本？';
+        } else if (detectedKey === 'zh-cn' && !isZhPage) {
+          descEl.textContent = '检测到您的系统语言为中文，是否切换至精翻中文版？';
+        } else {
+          descEl.textContent = config.desc;
+        }
       }
       if (btnEl) {
         const flagSpan = btnEl.querySelector('span:first-child');
         if (flagSpan) flagSpan.textContent = config.flag;
-        if (btnTextEl) btnTextEl.textContent = config.btn;
+        if (btnTextEl) {
+          btnTextEl.textContent = (detectedKey === 'zh-tw' && isZhPage) ? '轉換為繁體中文' : config.btn;
+        }
         btnEl.onclick = () => {
           changeSiteLanguage(config.target, true);
           dismissLangSuggestion(true);
         };
       }
       if (keepBtnEl) {
-        keepBtnEl.textContent = config.keep;
+        if (isZhPage) {
+          keepBtnEl.textContent = (detectedKey === 'zh-tw') ? '保持簡體' : '保留中文';
+        } else {
+          keepBtnEl.textContent = config.keep;
+        }
       }
 
       // 展开提示框 (保证高层级与优雅平滑淡入)
