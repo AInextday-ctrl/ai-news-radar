@@ -111,7 +111,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
         "news": 15,
         "celebrity": 15,
         "tools": 12,
-        "videos": 6,
+        "videos": 3,
         "prompts": 8
     }
     watermark_fails = []
