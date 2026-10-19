@@ -5408,20 +5408,36 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         : (isHfTool ? (isZh ? '🤗 在线试玩' : '🤗 Try Space') : (isZh ? '🚀 访问官网' : '🚀 Visit Site'));
 
       const isGeminiProduct = appName.toLowerCase().includes('gemini');
-      let previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : ((item.preview_images && item.preview_images[0]) || item.image_url || "");
-      if (previewImg && (previewImg.includes('3CyW24Pkz4o') || previewImg.includes('feeb7666')) && !isGeminiProduct) {
-        const safeImgs = (item.preview_images || []).filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
-        previewImg = safeImgs[0] || (item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : "");
+      const localWebp = item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : "";
+      
+      // Candidate images from item data
+      let candidateImages = [];
+      if (item.image_url) candidateImages.push(item.image_url);
+      if (Array.isArray(item.preview_images)) {
+        candidateImages.push(...item.preview_images);
       }
-      if (previewImg && (previewImg.includes('microlink.io') || previewImg.includes('photo-1618005182384-a83a8bd57fbe'))) {
-        previewImg = item.id ? `/assets/tool-previews/${item.id}.webp?v=4` : "";
+      candidateImages = candidateImages.filter(img => img && typeof img === 'string' && !img.includes('microlink.io') && !img.includes('photo-1618005182384-a83a8bd57fbe'));
+      if (!isGeminiProduct) {
+        candidateImages = candidateImages.filter(img => !img.includes('3CyW24Pkz4o') && !img.includes('feeb7666'));
       }
+
+      // Remote fallback image (e.g. GitHub OpenGraph or website mshots)
+      let remoteFallback = candidateImages.find(img => img.startsWith('http')) || "";
       const cleanOfficial = formatCleanToolUrl(item.official_url || item.url || "");
-      if (!previewImg) {
-        if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
-          previewImg = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
+      if (!remoteFallback) {
+        if (isGhTool) {
+          const ghMatch = (item.url + ' ' + (item.official_url || '') + ' ' + (item.source_url || '')).match(/github\.com\/([^\/]+)\/([^\/?#]+)/i);
+          if (ghMatch && !['features', 'topics', 'trending', 'explore'].includes(ghMatch[1].toLowerCase())) {
+            remoteFallback = `https://opengraph.githubassets.com/1/${ghMatch[1]}/${ghMatch[2].replace(/\.git$/, '')}`;
+          }
+        } else if (cleanOfficial && !cleanOfficial.includes('github.com') && !cleanOfficial.includes('huggingface.co')) {
+          remoteFallback = `https://s0.wp.com/mshots/v1/${encodeURIComponent(cleanOfficial)}?w=1280&h=720`;
         }
       }
+
+      // Primary image: if item specifies local preview, use it, otherwise remote fallback
+      let previewImg = (item.image_url && item.image_url.startsWith('/assets/tool-previews/')) ? `${item.image_url}?v=4` : (localWebp || remoteFallback || "");
+      let fallbackImg = remoteFallback && remoteFallback !== previewImg ? remoteFallback : "";
 
       const itemId = escapeHtml(item.id || item.url || '');
       const rawCmd = (appName || 'app').toLowerCase().replace(/[^a-z0-9_-]/g, '') || 'app';
@@ -5442,7 +5458,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 环境光模糊背景层 (解决宽屏Banner/手机截屏尺寸不一致时的黑边问题) -->
               <img src="${optimizeImageUrl(previewImg, 480)}" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
               <!-- 前景高清自适应图片 (保证文字、UI完整无切边) -->
-              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.parentElement?.querySelector('.floating-tool-badge')?.classList.add('hidden'); this.remove(); }">
+              <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" data-fallback="${escapeHtml(fallbackImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.parentElement?.querySelector('.floating-tool-badge')?.classList.add('hidden'); this.remove(); }">
               <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
                 <div class="flex items-center justify-between border-b border-slate-800/70 pb-1">
                   <div class="flex items-center space-x-1.5">

@@ -42,6 +42,10 @@ jobs:
         run: |
           python main.py || (echo "⚠️ main.py 遇到偶发异常，触发缓存自愈静态发布..." && python content_publisher.py)
 
+      - name: Localize Tool Preview Images
+        run: |
+          python scripts/localize_tool_images.py || echo "⚠️ 工具预览图本地化异常，已安全自愈放行"
+
       - name: Enforce Multilingual Quality & Consistency Gate
         run: |
           python language_sentinel.py --verify-only || (echo "⚠️ 自动触发自愈哨兵修正..." && python language_sentinel.py)

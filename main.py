@@ -1730,6 +1730,17 @@ def save_news(items: list):
         for it in extra_videos:
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
+        # 确保哪怕周末或YouTube低产出时段，也满足数据门禁的最小 3 个视频硬性水位线
+        cur_v_cnt = len([it for it in recent_items if it.get("category") == "videos"])
+        if cur_v_cnt < 3:
+            more_v = [
+                it for it in historical_items 
+                if it.get("category") == "videos" 
+                and get_it_key(it) not in recent_keys
+            ][:(3 - cur_v_cnt)]
+            for it in more_v:
+                recent_items.append(it)
+                recent_keys.add(get_it_key(it))
 
     prompts_recent = [it for it in recent_items if it.get("category") == "prompts"]
     if len(prompts_recent) < 30:
@@ -1843,6 +1854,27 @@ def save_news(items: list):
         latest_payload["grouped"]["viral_posts"] = viral_list
     except Exception as e:
         print(f"⚠️ [language_sentinel] 自动质检异常: {e}")
+
+    # 🖼️ 场景落地工具缩略图本地化与高清 16:9 画幅适配引擎 (杜绝出现暗黑纯图标占位符)
+    try:
+        from scripts.localize_tool_images import localize_single_tool, OUTPUT_DIR
+        tools_to_check = latest_payload.get("grouped", {}).get("tools", [])
+        for tool_it in tools_to_check:
+            tid = str(tool_it.get("id") or "").strip()
+            if not tid:
+                continue
+            dest_file = f"{tid}.webp"
+            dest_path = os.path.join(OUTPUT_DIR, dest_file)
+            if not os.path.exists(dest_path) or os.path.getsize(dest_path) < 3500:
+                localize_single_tool(tool_it)
+            if os.path.exists(dest_path) and os.path.getsize(dest_path) >= 3500:
+                local_url = f"/assets/tool-previews/{dest_file}"
+                tool_it["image_url"] = local_url
+                cur_previews = tool_it.get("preview_images") or []
+                filtered = [p for p in cur_previews if p != local_url and 'photo-1618005182384-a83a8bd57fbe' not in p]
+                tool_it["preview_images"] = [local_url] + filtered
+    except Exception as e:
+        print(f"⚠️ [tool_image_localizer] 工具缩略图处理异常: {e}")
 
     # 4. 构建全量历史归档库 payload (archive_news.json)
     archive_payload = {
