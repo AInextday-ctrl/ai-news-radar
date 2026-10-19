@@ -43,6 +43,16 @@ def sanitize_for_en(text: str) -> str:
 def escape(val: Any) -> str:
     return html.escape(str(val or ""))
 
+def get_optimized_og_image(raw_url: str) -> str:
+    if not raw_url or not isinstance(raw_url, str) or len(raw_url.strip()) < 10:
+        return "https://ainewsradar.xyz/images/og-default.jpg"
+    raw_url = raw_url.strip()
+    if "ainewsradar.xyz" in raw_url:
+        return raw_url
+    import urllib.parse
+    encoded = urllib.parse.quote(raw_url, safe='')
+    return f"https://wsrv.nl/?url={encoded}&w=1200&h=630&fit=cover&output=jpg&q=85"
+
 def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: List[Dict[str, Any]] = None) -> str:
     tool_id = str(tool.get("id") or "")
     app_name = tool.get("app_name") or tool.get("title") or "AI Tool"
@@ -103,7 +113,8 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
     if not overview:
         overview = hook
 
-    image_url = tool.get("image_url") or "https://ainewsradar.xyz/images/og-default.png"
+    raw_img = tool.get("image_url") or (tool.get("preview_images") and tool["preview_images"][0]) or ""
+    image_url = get_optimized_og_image(raw_img)
     official_url = tool.get("official_url") or tool.get("url") or tool.get("github_url") or "#"
     # Ensure tracking tag
     sep = "&" if "?" in official_url else "?"
@@ -205,15 +216,24 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta property="og:title" content="{escape(meta_title)}">
   <meta property="og:description" content="{clean_meta_desc}">
   <meta property="og:image" content="{escape(image_url)}">
+  <meta property="og:image:secure_url" content="{escape(image_url)}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{escape(display_name)}">
   <meta property="og:url" content="{canonical_url}">
   <meta property="og:type" content="website">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="{canonical_url}">
   <meta name="twitter:title" content="{escape(meta_title)}">
   <meta name="twitter:description" content="{clean_meta_desc}">
   <meta name="twitter:image" content="{escape(image_url)}">
+  <meta name="twitter:image:alt" content="{escape(display_name)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -412,7 +432,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         source_label = "Primary Source"
         lang_switch_label = "🇨🇳 Chinese Edition (/zh)"
 
-    image_url = item.get("image_url") or "https://ainewsradar.xyz/images/og-default.png"
+    raw_img = item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
+    image_url = get_optimized_og_image(raw_img)
     source_name = item.get("source") or "Tech Source"
     if not is_zh:
         source_name = sanitize_for_en(source_name) or "Tech Source"
@@ -498,15 +519,24 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta property="og:title" content="{escape(meta_title)}">
   <meta property="og:description" content="{clean_meta_desc}">
   <meta property="og:image" content="{escape(image_url)}">
+  <meta property="og:image:secure_url" content="{escape(image_url)}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{escape(title)}">
   <meta property="og:url" content="{canonical_url}">
   <meta property="og:type" content="article">
   
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="{canonical_url}">
   <meta name="twitter:title" content="{escape(meta_title)}">
   <meta name="twitter:description" content="{clean_meta_desc}">
   <meta name="twitter:image" content="{escape(image_url)}">
+  <meta name="twitter:image:alt" content="{escape(title)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <script src="https://cdn.tailwindcss.com"></script>
