@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloudflare的Clairic从文档中提取数据比llm更快、更便宜 | AI News Radar</title>
+  <meta name="description" content="Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/39b6f201a24eca14">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/39b6f201a24eca14">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/39b6f201a24eca14">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/39b6f201a24eca14">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/39b6f201a24eca14">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Cloudflare的Clairic从文档中提取数据比llm更快、更便宜 | AI News Radar">
+  <meta property="og:description" content="Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型">
+  <meta property="og:image" content="https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta property="og:image:secure_url" content="https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cloudflare的Clairic从文档中提取数据比llm更快、更便宜">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/39b6f201a24eca14">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/39b6f201a24eca14">
+  <meta name="twitter:title" content="Cloudflare的Clairic从文档中提取数据比llm更快、更便宜 | AI News Radar">
+  <meta name="twitter:description" content="Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型">
+  <meta name="twitter:image" content="https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta name="twitter:image:alt" content="Cloudflare的Clairic从文档中提取数据比llm更快、更便宜">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "Cloudflare的Clairic从文档中提取数据比llm更快、更便宜",
+    "description": "Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型",
+    "image": ["https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85"],
+    "url": "https://ainewsradar.xyz/zh/news/39b6f201a24eca14",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI News Radar",
+      "url": "https://ainewsradar.xyz"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回 AI 资讯雷达
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/39b6f201a24eca14" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 English
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85" alt="Cloudflare的Clairic从文档中提取数据比llm更快、更便宜" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.png'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: THE DECODER
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-8">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Cloudflare的Clairic从文档中提取数据比llm更快、更便宜
+        </h1>
+
+        <!-- CTA & Social Share Capsule Bar -->
+        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Primary Source Link Button -->
+          <a href="https://the-decoder.com/cloudflares-clairic-pulls-data-from-documents-faster-and-cheaper-than-llms/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <span>📖 阅读原资讯官网报道 ↗</span>
+          </a>
+
+          <!-- Social Sharing & Bookmark Actions -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareDirect('x')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="分享到 𝕏">
+              <span>𝕏</span>
+            </button>
+            <button onclick="shareDirect('threads')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="分享到 Threads">
+              <span>🧵</span>
+            </button>
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5">
+              <span>🔗</span> <span>复制分享链接</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-8">
+          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型
+          </div>
+        </div>
+
+        
+        <div class="mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'>核心突破：Cloudflare的Clairic从文档中提取数据比llm更快、更便宜</li><li class='text-sm sm:text-base leading-relaxed pl-1'>核心规格：具备 代码工程增强 关键工程特性</li><li class='text-sm sm:text-base leading-relaxed pl-1'>信源与影响：由 THE DECODER 跟踪披露，推动相关工程应用落地</li>
+          </ul>
+        </div>
+        
+        
+        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">{&#x27;briefing_zh&#x27;: &#x27;网络基础设施巨头Cloudflare在其Workers AI平台上限时预览并即将开源全新专用AI模型Clairic。该模型颠覆了传统通用大语言模型逐Token自回归生成的机制，仅需单次前向传播即可一次性抽取出指定字段并返回对应格式与置信度，同时支持基础测算与预测。研发该工具的核心动因在于降低企业处理发票、客诉与工单时的延迟与算力成本，测试显示其与专用决策模型构建的工作流相比纯大模型方案耗时缩短近70%，成本几乎腰斩。&#x27;, &#x27;briefing_en&#x27;: &#x27;Cloudflare has introduced Clairic, a specialized AI extraction model available in preview on Workers AI with open weights coming soon. Unlike conventional large language models that generate outputs token-by-token, Clairic processes structured document data in a single pass, returning field values, formats, and confidence scores. Cloudflare developed this model to tackle the excessive cost and latency of generic LLMs, cutting workflow runtimes by nearly 70% while slashing inference expenses.&#x27;, &#x27;elements_zh&#x27;: {&#x27;who&#x27;: &#x27;Cloudflare研发团队&#x27;, &#x27;where&#x27;: &#x27;Workers AI开发者平台及官方技术发布渠道&#x27;, &#x27;what&#x27;: &#x27;发布非自回归文档信息抽取模型Clairic，实现单次前向多字段提取并即将开源权重&#x27;, &#x27;why&#x27;: &#x27;通用大模型用于结构化提取时算力浪费严重、响应迟缓且调用成本高昂&#x27;}, &#x27;elements_en&#x27;: {&#x27;who&#x27;: &#x27;Cloudflare development team&#x27;, &#x27;where&#x27;: &#x27;Workers AI platform and official engineering release&#x27;, &#x27;what&#x27;: &#x27;Launched Clairic, a non-autoregressive document data extraction model with upcoming open weights&#x27;, &#x27;why&#x27;: &#x27;Standard LLMs suffer from high latency and prohibitive inference costs when handling structured document parsing&#x27;}, &#x27;insight_zh&#x27;: &#x27;拿几千亿参数的通用大模型去数发票上的金额，就像开着重型坦克去菜市场买葱。Cloudflare用这种非自回归小模型反手扇醒行业：干苦力活就用精密小钳子，别天天迷信给每张报销单跑一遍哲学辩论。&#x27;, &#x27;insight_en&#x27;: &#x27;Using a trillion-parameter LLM to parse an invoice total is like driving a battle tank to buy groceries. Cloudflare is giving the industry a reality check: you need a specialized scalpel for grunt work, not a full philosophical monologue on every receipt.&#x27;, &#x27;digest_zh&#x27;: &#x27;网络基础设施巨头Cloudflare在其Workers AI平台上限时预览并即将开源全新专用AI模型Clairic。该模型颠覆了传统通用大语言模型逐Token自回归生成的机制，仅需单次前向传播即可一次性抽取出指定字段并返回对应格式与置信度，同时支持基础测算与预测。研发该工具的核心动因在于降低企业处理发票、客诉与工单时的延迟与算力成本，测试显示其与专用决策模型构建的工作流相比纯大模型方案耗时缩短近70%，成本几乎腰斩。&#x27;, &#x27;digest_en&#x27;: &#x27;Cloudflare has introduced Clairic, a specialized AI extraction model available in preview on Workers AI with open weights coming soon. Unlike conventional large language models that generate outputs token-by-token, Clairic processes structured document data in a single pass, returning field values, formats, and confidence scores. Cloudflare developed this model to tackle the excessive cost and latency of generic LLMs, cutting workflow runtimes by nearly 70% while slashing inference expenses.&#x27;, &#x27;key_points_zh&#x27;: [&#x27;Cloudflare在Workers AI发布文档抽取模型Clairic，近期将开源权重&#x27;, &#x27;颠覆逐字Token生成，支持单次全字段输出、置信度评级及简单计算&#x27;, &#x27;相较大模型端到端方案提速近三倍、成本降低近半，优化企业业务链效率&#x27;], &#x27;key_points_en&#x27;: [&#x27;Cloudflare launches document-parsing AI model Clairic on Workers AI with open weights planned&#x27;, &#x27;Replaces token-by-token generation with single-pass multi-field extraction&#x27;, &#x27;Cuts processing time by nearly 70% and halves costs compared to standalone LLMs&#x27;], &#x27;takeaway_zh&#x27;: &#x27;拿几千亿参数的通用大模型去数发票上的金额，就像开着重型坦克去菜市场买葱。Cloudflare用这种非自回归小模型反手扇醒行业：干苦力活就用精密小钳子，别天天迷信给每张报销单跑一遍哲学辩论。&#x27;, &#x27;takeaway_en&#x27;: &#x27;Using a trillion-parameter LLM to parse an invoice total is like driving a battle tank to buy groceries. Cloudflare is giving the industry a reality check: you need a specialized scalpel for grunt work, not a full philosophical monologue on every receipt.&#x27;}</p>
+        </div>
+        
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/1d039d2bf963a8a6" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/og-default.png" alt="中国官方媒体：中国成立国家数据集团，这是一家新的国有企业，将专注于开发和利用数据资源" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Reuters</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">中国官方媒体：中国成立国家数据集团，这是一家新的国有企业，将专注于开发和利用数据资源</h4>
+            </a>
+            
+            <a href="/zh/news/8b00e85c1f1ba61d" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://techcrunch.com/wp-content/uploads/2026/04/Otter-feat.jpg?resize=1200,675" alt="笔记工具水獭。ai从General Catalyst的客户价值基金（Customer Value Fund）筹集了3.2亿美元的非稀释资本；PitchBook表示，该公司在本轮融资前已融资5000万美元。" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">TechCrunch</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">笔记工具水獭。ai从General Catalyst的客户价值基金（Customer Value Fund）筹集了3.2亿美元的非稀释资本；PitchBook表示，该公司在本轮融资前已融资5000万美元。</h4>
+            </a>
+            
+            <a href="/zh/news/2c6d827c68e7aa80" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/og-default.png" alt="四名Z.ai的创始人参加了由CGTRI共同资助的2018年至2021年的研究项目，英国军情五处表示，CGTRI与中国的主要间谍机构“关系非常密切”" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">四名Z.ai的创始人参加了由CGTRI共同资助的2018年至2021年的研究项目，英国军情五处表示，CGTRI与中国的主要间谍机构“关系非常密切”</h4>
+            </a>
+            
+            <a href="/zh/news/9da120b213652463" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://the-decoder.com/wp-content/uploads/2026/06/deepseek_red_whale.png" alt="美国禁止在联邦民用机构使用Deepseek技术" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">THE DECODER</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">美国禁止在联邦民用机构使用Deepseek技术</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "39b6f201a24eca14",
+      type: "news",
+      title: "Cloudflare的Clairic从文档中提取数据比llm更快、更便宜",
+      snippet: "Cloudflare发布文档信息提取AI模型Clairic，采用单次全字段输出机制，速度与成本显著优于传统大模型",
+      url: window.location.href,
+      image_url: "https://wsrv.nl/?url=https%3A%2F%2Fthe-decoder.com%2Fwp-content%2Fuploads%2F2026%2F07%2Fcloudflare_logo_wall-2.png&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85"
+    };
+
+    function shareDirect(platform) {
+      const shareUrl = window.location.href;
+      const title = "Cloudflare的Clairic从文档中提取数据比llm更快、更便宜";
+      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitle + "\n\n" + shareUrl + "\n\n#AI");
+        window.open(`https://www.threads.net/intent/post?text=${text}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
