@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PHP爆出两枚高危漏洞 | AI News Radar</title>
+  <meta name="description" content="PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/4c94dab7e61c590e">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/4c94dab7e61c590e">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/4c94dab7e61c590e">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/4c94dab7e61c590e">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/4c94dab7e61c590e">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="PHP爆出两枚高危漏洞 | AI News Radar">
+  <meta property="og:description" content="PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞">
+  <meta property="og:image" content="https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta property="og:image:secure_url" content="https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PHP爆出两枚高危漏洞">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/4c94dab7e61c590e">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/4c94dab7e61c590e">
+  <meta name="twitter:title" content="PHP爆出两枚高危漏洞 | AI News Radar">
+  <meta name="twitter:description" content="PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞">
+  <meta name="twitter:image" content="https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85">
+  <meta name="twitter:image:alt" content="PHP爆出两枚高危漏洞">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "PHP爆出两枚高危漏洞",
+    "description": "PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞",
+    "image": ["https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85"],
+    "url": "https://ainewsradar.xyz/zh/news/4c94dab7e61c590e",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI News Radar",
+      "url": "https://ainewsradar.xyz"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回 AI 资讯雷达
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/4c94dab7e61c590e" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 English
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85" alt="PHP爆出两枚高危漏洞" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.png'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: BleepingComputer
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-8">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          PHP爆出两枚高危漏洞
+        </h1>
+
+        <!-- CTA & Social Share Capsule Bar -->
+        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Primary Source Link Button -->
+          <a href="https://www.bleepingcomputer.com/news/security/php-warns-admins-of-two-critical-flaws-emergency-patches-coming-tomorrow/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <span>📖 阅读原资讯官网报道 ↗</span>
+          </a>
+
+          <!-- Social Sharing & Bookmark Actions -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareDirect('x')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="分享到 𝕏">
+              <span>𝕏</span>
+            </button>
+            <button onclick="shareDirect('threads')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="分享到 Threads">
+              <span>🧵</span>
+            </button>
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5">
+              <span>🔗</span> <span>复制分享链接</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-8">
+          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞
+          </div>
+        </div>
+
+        
+        <div class="mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'>核心突破：PHP爆出两枚高危漏洞</li><li class='text-sm sm:text-base leading-relaxed pl-1'>关键数据：涉及 $34.99 关键指标与工程规格</li><li class='text-sm sm:text-base leading-relaxed pl-1'>信源与影响：由 BleepingComputer 跟踪披露，推动相关工程应用落地</li>
+          </ul>
+        </div>
+        
+        
+        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">{&#x27;briefing_zh&#x27;: &#x27;PHP开发团队发布紧急安全警示，称两枚被评为CVSS 9.2的严重漏洞信息已在外部泄露。官方将于周三发布紧急安全更新，以应对远程代码执行（RCE）风险，全球Web开发者需立即响应。&#x27;, &#x27;briefing_en&#x27;: &#x27;The PHP development team warned of two critical vulnerabilities (CVSS 9.2) that have reportedly leaked. Emergency patches are scheduled for Wednesday to prevent remote code execution, forcing a frantic patch cycle for web admins globally.&#x27;, &#x27;elements_zh&#x27;: {&#x27;who&#x27;: &#x27;PHP开发团队&#x27;, &#x27;where&#x27;: &#x27;Web服务器环境&#x27;, &#x27;what&#x27;: &#x27;确认存在两枚严重安全漏洞，并将发布紧急补丁&#x27;, &#x27;why&#x27;: &#x27;漏洞信息已泄露，面临高危远程执行风险&#x27;}, &#x27;elements_en&#x27;: {&#x27;who&#x27;: &#x27;PHP development team&#x27;, &#x27;where&#x27;: &#x27;Web server infrastructure&#x27;, &#x27;what&#x27;: &#x27;Emergency patch release announced for two critical flaws&#x27;, &#x27;why&#x27;: &#x27;Vulnerability details leaked, posing imminent remote code execution risks&#x27;}, &#x27;insight_zh&#x27;: &#x27;又是一次深夜修补的‘狂欢节’。PHP这把火烧得太久，代码库里的隐形地雷一炸就是全网通杀，运维人员今晚又要集体过‘程序员节’了。&#x27;, &#x27;insight_en&#x27;: &#x27;Another sleepless night for sysadmins. When PHP catches a cold, half the internet starts sneezing—and these CVSS 9.2 vulnerabilities are definitely a full-blown contagion. Good luck to the teams scrambling for the patch before the hackers find the front door.&#x27;, &#x27;takeaway_zh&#x27;: &#x27;&#x27;}</p>
+        </div>
+        
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/a62ddd39d4e28fb0" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://fortune.com/img-assets/wp-content/uploads/2026/10/55588571180_f96e427271_o.jpg?resize=1200,600" alt="OnlyFans欲入局金融服务" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Fortune</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">OnlyFans欲入局金融服务</h4>
+            </a>
+            
+            <a href="/zh/news/39d2fa14a5de9bd0" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2025/12/STK201_SAM_ALTMAN_CVIRGINIA_D.jpg?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="OpenAI掌门家族丑闻案终结" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">OpenAI掌门家族丑闻案终结</h4>
+            </a>
+            
+            <a href="/zh/news/10466e84b0e28942" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://9to5google.com/wp-content/uploads/sites/4/2026/10/Gemini-Personal-Intelligence-Android-Auto.jpg?quality=82&amp;strip=all&amp;resize=1200,628" alt="谷歌Gemini即刻接入车载系统" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">9to5Google</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">谷歌Gemini即刻接入车载系统</h4>
+            </a>
+            
+            <a href="/zh/news/a0b9040d2c5fbd70" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/10/google-gemini-personal-intelligence.png?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="谷歌更加个性化的双子座人工智能将进入你的汽车" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">谷歌更加个性化的双子座人工智能将进入你的汽车</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "4c94dab7e61c590e",
+      type: "news",
+      title: "PHP爆出两枚高危漏洞",
+      snippet: "PHP开发团队因漏洞泄露，紧急宣布将于明日发布补丁，修复两枚评分高达9.2的关键漏洞",
+      url: window.location.href,
+      image_url: "https://wsrv.nl/?url=https%3A%2F%2Fwww.bleepstatic.com%2Fcontent%2Fhl-images%2F2021%2F03%2F29%2FPHP-headpic.jpg&amp;w=1200&amp;h=630&amp;fit=cover&amp;output=jpg&amp;q=85"
+    };
+
+    function shareDirect(platform) {
+      const shareUrl = window.location.href;
+      const title = "PHP爆出两枚高危漏洞";
+      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitle + "\n\n" + shareUrl + "\n\n#AI");
+        window.open(`https://www.threads.net/intent/post?text=${text}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
