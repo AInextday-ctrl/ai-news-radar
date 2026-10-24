@@ -489,7 +489,7 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if pub_ts <= 0:
         return False
     diff_sec = now_ts - pub_ts
-    return -3600 <= diff_sec <= 259200
+    return -3600 <= diff_sec <= 86400
 
 
 def is_meaningful_tweet(it: dict) -> bool:

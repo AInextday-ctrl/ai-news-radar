@@ -2443,7 +2443,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const pubTs = new Date(rawTime).getTime();
       if (isNaN(pubTs) || pubTs <= 0) return false;
       const diffHours = (Date.now() - pubTs) / (1000 * 3600);
-      return diffHours >= -1 && diffHours <= 72;
+      return diffHours >= -1 && diffHours <= 24;
     }
 
     // 严格过滤无意义单句推文、脱离语境闲聊回复、纯标签灌水、Web3营销与断头线程碎片
