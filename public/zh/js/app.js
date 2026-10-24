@@ -2443,7 +2443,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const pubTs = new Date(rawTime).getTime();
       if (isNaN(pubTs) || pubTs <= 0) return false;
       const diffHours = (Date.now() - pubTs) / (1000 * 3600);
-      return diffHours >= -1 && diffHours <= 24;
+      return diffHours >= -1 && diffHours <= 72;
     }
 
     // 严格过滤无意义单句推文、脱离语境闲聊回复、纯标签灌水、Web3营销与断头线程碎片
@@ -6827,6 +6827,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         : (allCeleb && allCeleb.length > 0 ? allCeleb : (data.top_three || []));
       const viralTweets = rawViralTweets.filter(it => {
         if (it.category === 'celebrity' || it.platform === 'x') {
+          if (isTiboResetTweet(it)) return true;
           return isWithin24Hours(it.raw_published_at) && isMeaningfulTweet(it);
         }
         return true;

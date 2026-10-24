@@ -489,7 +489,7 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if pub_ts <= 0:
         return False
     diff_sec = now_ts - pub_ts
-    return -3600 <= diff_sec <= 86400
+    return -3600 <= diff_sec <= 259200
 
 
 def is_meaningful_tweet(it: dict) -> bool:
@@ -589,7 +589,7 @@ def extract_viral_leader_tweets(items: list, now_ts: float = None, exclude_ids: 
         it for it in items 
         if it.get("category") == "celebrity" 
         and it.get("id") not in exclude_ids
-        and (now_ts - parse_time_for_sort(it)) <= MAX_24H_SECONDS
+        and ((now_ts - parse_time_for_sort(it)) <= MAX_24H_SECONDS or is_tibo_reset_tweet(it, now_ts) or bool(it.get("is_pinned")))
         and (now_ts - parse_time_for_sort(it)) >= -300
         and is_meaningful_tweet(it)
     ]
@@ -1646,7 +1646,7 @@ def save_news(items: list):
         if cat == "celebrity":
             if not is_meaningful_tweet(it):
                 continue
-            is_fresh_homepage = (diff <= 86400) and (diff >= -300)
+            is_fresh_homepage = (diff <= 86400 or bool(it.get("is_pinned")) or is_tibo_reset_tweet(it, now_ts)) and (diff >= -300)
         else:
             is_fresh_homepage = (diff <= MAX_HOMEPAGE_SECONDS) or bool(it.get("is_pinned"))
 
