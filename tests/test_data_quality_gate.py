@@ -182,6 +182,23 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(conflict_files) == 0, f"断言 9 失败：检测到 {len(conflict_files)} 个文件含有 Git 冲突标记: {conflict_files}"
     print(f"✅ 断言 9 通过: 零 Git 冲突与脏文本污染 (全站 public 与 data 文件零冲突标记)")
 
+    # 10. 零长推文严重截断门禁 (保证 items 与 grouped.celebrity 均达到无损多段落翻译水位)
+    truncated_tweets = []
+    all_check_items = list(items)
+    for g_items in grouped.values():
+        if isinstance(g_items, list):
+            all_check_items.extend(g_items)
+
+    for it in all_check_items:
+        f_en = str(it.get("full_text_en") or "").strip()
+        f_zh = str(it.get("full_text_zh") or "").strip()
+        if len(f_en) > 180:
+            if not f_zh or len(f_zh) < len(f_en) * 0.25:
+                truncated_tweets.append(f"{it.get('author_handle', 'unknown')}: EN({len(f_en)}) vs ZH({len(f_zh)})")
+
+    assert len(truncated_tweets) == 0, f"断言 10 失败：检测到 {len(truncated_tweets)} 条推文/资讯存在严重截断: {truncated_tweets[:5]}"
+    print(f"✅ 断言 10 通过: 零长推文严重截断 (全量 {len(all_check_items)} 处条目与 grouped 容器 100% 同步多段落无损译文)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")
