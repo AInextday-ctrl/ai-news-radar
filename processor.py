@@ -119,13 +119,97 @@ def normalize_ai_terminology_zh(text: str) -> str:
     return t
 
 
+def _translate_single_chunk_zh(text: str) -> str:
+    """Translate a single block of English text (up to ~2500 chars) to natural Simplified Chinese via high-availability neural engines."""
+    global _YOUDAO_FAILS, _GOOGLE_FAILS, _MYMEMORY_FAILS
+    if not text or not text.strip():
+        return ""
+    
+    clean_chunk = text.strip()
+    if not re.search(r'[a-zA-Z]', clean_chunk):
+        return clean_chunk
+
+    protected_input = re.sub(r'\bClaude\s+Code\b', 'ClaudeCode', clean_chunk, flags=re.IGNORECASE)
+
+    # 1. 优先调用 Google Translate (移动端 client=it 高频高可用、0 验证码阻断、高准确度)
+    if _GOOGLE_FAILS < 5:
+        try:
+            gt_url = "https://translate.googleapis.com/translate_a/single"
+            params = {"client": "it", "sl": "en", "tl": "zh-CN", "dt": "t", "q": protected_input}
+            headers = {"User-Agent": "GoogleTranslate/6.28.0 (iPhone; iOS 15.0; Scale/3.00)"}
+            with httpx.Client(headers=headers, timeout=4.5) as client:
+                resp = client.get(gt_url, params=params)
+                if resp.status_code == 200:
+                    res = resp.json()
+                    zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                    zh_res = zh_res.replace("ClaudeCode", "Claude Code")
+                    zh_res = normalize_ai_terminology_zh(zh_res)
+                    if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                        _GOOGLE_FAILS = 0
+                        return zh_res
+                else:
+                    _GOOGLE_FAILS += 1
+        except Exception:
+            _GOOGLE_FAILS += 1
+    else:
+        _GOOGLE_FAILS = max(0, _GOOGLE_FAILS - 1)
+
+    # 2. 备用调用有道免密神经翻译 (POST 表单支持长文本)
+    if _YOUDAO_FAILS < 4:
+        try:
+            url = "https://aidemo.youdao.com/trans"
+            data = {"q": protected_input, "from": "Auto", "to": "zh-CHS"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=3.5) as client:
+                resp = client.post(url, data=data)
+                if resp.status_code == 200:
+                    res_data = resp.json()
+                    t_list = res_data.get("translation", [])
+                    if t_list and t_list[0]:
+                        zh_res = t_list[0].strip().replace("ClaudeCode", "Claude Code")
+                        zh_res = normalize_ai_terminology_zh(zh_res)
+                        if re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                            _YOUDAO_FAILS = 0
+                            return zh_res
+                else:
+                    _YOUDAO_FAILS += 1
+        except Exception:
+            _YOUDAO_FAILS += 1
+    else:
+        _YOUDAO_FAILS = max(0, _YOUDAO_FAILS - 1)
+
+    # 3. 备用 MyMemory 翻译服务
+    if _MYMEMORY_FAILS < 4:
+        try:
+            url = "https://api.mymemory.translated.net/get"
+            params = {"q": protected_input[:500], "langpair": "en|zh"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=3.0) as client:
+                resp = client.get(url, params=params)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    translated = data.get("responseData", {}).get("translatedText", "").replace("ClaudeCode", "Claude Code")
+                    translated = normalize_ai_terminology_zh(translated)
+                    if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated) and not has_chinglish_seams(translated):
+                        _MYMEMORY_FAILS = 0
+                        return translated
+                    else:
+                        _MYMEMORY_FAILS += 1
+                else:
+                    _MYMEMORY_FAILS += 1
+        except Exception:
+            _MYMEMORY_FAILS += 1
+    else:
+        _MYMEMORY_FAILS = max(0, _MYMEMORY_FAILS - 1)
+
+    return clean_chunk
+
+
 def free_translate_zh(text: str) -> str:
-    """Bulletproof translation engine to guarantee 100% fluent Chinese output without Chinglish word replacement."""
+    """Bulletproof translation engine to guarantee 100% fluent Chinese output without truncation or Chinglish seams."""
     global _YOUDAO_FAILS, _GOOGLE_FAILS, _MYMEMORY_FAILS
     if not text:
         return ""
     
-    clean_text = text.strip()
+    clean_text = str(text).strip()
     prefix_match = re.match(r'^([【\[].*?[】\]]\s*)', clean_text)
     prefix = prefix_match.group(1) if prefix_match else ""
     body_text = clean_text[len(prefix):].strip()
@@ -139,32 +223,64 @@ def free_translate_zh(text: str) -> str:
 
     # 如果正文主体已经包含足够比例的纯正中文且无长串英文句子，直接返回术语修正后的结果
     zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', body_text))
-    if zh_chars > len(body_text) * 0.35 and not has_chinglish_seams(body_text):
+    if zh_chars > len(body_text) * 0.40 and not has_chinglish_seams(body_text) and not re.search(r'\b(?:the|and|with|that|for|from|this)\b', body_text, flags=re.I):
         return prefix + normalize_ai_terminology_zh(body_text)
 
     # 查内存缓存
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # Pre-protect key proper nouns from being mangled into "克劳德代码"
-    protected_input = re.sub(r'\bClaude\s+Code\b', 'ClaudeCode', body_text, flags=re.IGNORECASE)
+    # 对多段落长推文/长资讯，按段落分组翻译，杜绝截断并完美保持原格式排版与空行
+    if "\n" in body_text and len(body_text) > 300:
+        paragraphs = body_text.split("\n\n")
+        translated_paragraphs = []
+        for p in paragraphs:
+            p_strip = p.strip()
+            if not p_strip:
+                translated_paragraphs.append("")
+                continue
+            # 单段超长时按换行或整句细分
+            if len(p_strip) > 1800:
+                sub_lines = p_strip.split("\n")
+                sub_trans = [_translate_single_chunk_zh(sl) if sl.strip() else "" for sl in sub_lines]
+                translated_paragraphs.append("\n".join(sub_trans))
+            else:
+                translated_paragraphs.append(_translate_single_chunk_zh(p_strip))
+        full_zh = "\n\n".join(translated_paragraphs).strip()
+    else:
+        full_zh = _translate_single_chunk_zh(body_text)
 
-    # 1. 优先调用 Google GTX 神经翻译 (高并发、高准确度，超时 2.8 秒)
+    if full_zh and re.search(r'[\u4e00-\u9fa5]', full_zh) and not has_chinglish_seams(full_zh):
+        _TRANSLATION_CACHE[body_text] = full_zh
+        return prefix + full_zh
+
+    # 严禁使用逐词字典替换制造“中英缝合怪”！若全通道瞬时不可用，返回原样以便下游走结构化兜底
+    return clean_text
+
+
+def _translate_single_chunk_en(text: str) -> str:
+    """Translate a single block of Chinese or non-English text to 100% clean English via high-availability neural engines."""
+    global _GOOGLE_FAILS, _YOUDAO_FAILS, _MYMEMORY_FAILS
+    if not text or not text.strip():
+        return ""
+    clean_chunk = text.strip()
+    if not re.search(r'[\u4e00-\u9fa5]', clean_chunk):
+        return clean_chunk
+
+    # 1. 优先调用 Google Translate (移动端 client=it 高频高可用、0 验证码阻断)
     if _GOOGLE_FAILS < 5:
         try:
             gt_url = "https://translate.googleapis.com/translate_a/single"
-            params = {"client": "gtx", "sl": "en", "tl": "zh-CN", "dt": "t", "q": protected_input[:420]}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.8) as client:
+            params = {"client": "it", "sl": "zh-CN", "tl": "en", "dt": "t", "q": clean_chunk}
+            headers = {"User-Agent": "GoogleTranslate/6.28.0 (iPhone; iOS 15.0; Scale/3.00)"}
+            with httpx.Client(headers=headers, timeout=4.5) as client:
                 resp = client.get(gt_url, params=params)
                 if resp.status_code == 200:
                     res = resp.json()
-                    zh_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
-                    zh_res = zh_res.replace("ClaudeCode", "Claude Code")
-                    zh_res = normalize_ai_terminology_zh(zh_res)
-                    if zh_res and re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                    en_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
+                    if en_res and not re.search(r'[\u4e00-\u9fa5]', en_res):
                         _GOOGLE_FAILS = 0
-                        _TRANSLATION_CACHE[body_text] = zh_res
-                        return prefix + zh_res
+                        return en_res
                 else:
                     _GOOGLE_FAILS += 1
         except Exception:
@@ -172,23 +288,20 @@ def free_translate_zh(text: str) -> str:
     else:
         _GOOGLE_FAILS = max(0, _GOOGLE_FAILS - 1)
 
-    # 2. 备用调用有道免密神经翻译 (超时 2.5 秒)
+    # 2. 备用调用有道免密神经翻译 (zh-CHS -> en, POST 支持长文本)
     if _YOUDAO_FAILS < 4:
         try:
             url = "https://aidemo.youdao.com/trans"
-            data = {"q": protected_input[:300], "from": "Auto", "to": "zh-CHS"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
+            data = {"q": clean_chunk, "from": "zh-CHS", "to": "en"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=3.5) as client:
                 resp = client.post(url, data=data)
                 if resp.status_code == 200:
-                    res_data = resp.json()
-                    t_list = res_data.get("translation", [])
+                    t_list = resp.json().get("translation", [])
                     if t_list and t_list[0]:
-                        zh_res = t_list[0].strip().replace("ClaudeCode", "Claude Code")
-                        zh_res = normalize_ai_terminology_zh(zh_res)
-                        if re.search(r'[\u4e00-\u9fa5]', zh_res) and not has_chinglish_seams(zh_res):
+                        en_res = t_list[0].strip()
+                        if not re.search(r'[\u4e00-\u9fa5]', en_res):
                             _YOUDAO_FAILS = 0
-                            _TRANSLATION_CACHE[body_text] = zh_res
-                            return prefix + zh_res
+                            return en_res
                 else:
                     _YOUDAO_FAILS += 1
         except Exception:
@@ -196,21 +309,18 @@ def free_translate_zh(text: str) -> str:
     else:
         _YOUDAO_FAILS = max(0, _YOUDAO_FAILS - 1)
 
-    # 3. 备用 MyMemory 翻译服务 (超时 2.5 秒)
+    # 3. 备用 MyMemory 翻译服务
     if _MYMEMORY_FAILS < 4:
         try:
             url = "https://api.mymemory.translated.net/get"
-            params = {"q": protected_input[:200], "langpair": "en|zh"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5) as client:
+            params = {"q": clean_chunk[:500], "langpair": "zh|en"}
+            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=3.0) as client:
                 resp = client.get(url, params=params)
                 if resp.status_code == 200:
-                    data = resp.json()
-                    translated = data.get("responseData", {}).get("translatedText", "").replace("ClaudeCode", "Claude Code")
-                    translated = normalize_ai_terminology_zh(translated)
-                    if translated and "MYMEMORY WARNING" not in translated and re.search(r'[\u4e00-\u9fa5]', translated) and not has_chinglish_seams(translated):
+                    translated = resp.json().get("responseData", {}).get("translatedText", "")
+                    if translated and "MYMEMORY WARNING" not in translated and not re.search(r'[\u4e00-\u9fa5]', translated):
                         _MYMEMORY_FAILS = 0
-                        _TRANSLATION_CACHE[body_text] = translated
-                        return prefix + translated
+                        return translated
                     else:
                         _MYMEMORY_FAILS += 1
                 else:
@@ -220,9 +330,7 @@ def free_translate_zh(text: str) -> str:
     else:
         _MYMEMORY_FAILS = max(0, _MYMEMORY_FAILS - 1)
 
-    # 4. 严禁使用逐词字典替换制造“中英缝合怪”！若全通道瞬时不可用，原样返回以便下游检测出未译英文并走结构化兜底
-    return clean_text
-
+    return clean_chunk
 
 
 def free_translate_en(text: str) -> str:
@@ -248,55 +356,25 @@ def free_translate_en(text: str) -> str:
     if cache_key in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[cache_key]
 
-    # 1. 优先调用 Google GTX 神经翻译 (zh-CN -> en)
-    if _GOOGLE_FAILS < 5:
-        try:
-            gt_url = "https://translate.googleapis.com/translate_a/single"
-            params = {"client": "gtx", "sl": "zh-CN", "tl": "en", "dt": "t", "q": body_text[:380]}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
-                resp = client.get(gt_url, params=params)
-                if resp.status_code == 200:
-                    res = resp.json()
-                    en_res = ''.join([part[0] for part in res[0] if part and part[0]]).strip()
-                    if en_res and not re.search(r'[\u4e00-\u9fa5]', en_res):
-                        _TRANSLATION_CACHE[cache_key] = en_res
-                        return prefix + en_res
-        except Exception:
-            pass
+    # 对多段落长文本，按段落分组翻译，杜绝截断
+    if "\n" in body_text and len(body_text) > 300:
+        paragraphs = body_text.split("\n\n")
+        translated_paragraphs = []
+        for p in paragraphs:
+            p_strip = p.strip()
+            if not p_strip:
+                translated_paragraphs.append("")
+                continue
+            translated_paragraphs.append(_translate_single_chunk_en(p_strip))
+        en_res = "\n\n".join(translated_paragraphs).strip()
+    else:
+        en_res = _translate_single_chunk_en(body_text)
 
-    # 2. 备用调用有道免密神经翻译 (zh-CHS -> en)
-    if _YOUDAO_FAILS < 4:
-        try:
-            url = "https://aidemo.youdao.com/trans"
-            data = {"q": body_text[:280], "from": "zh-CHS", "to": "en"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=2.5) as client:
-                resp = client.post(url, data=data)
-                if resp.status_code == 200:
-                    t_list = resp.json().get("translation", [])
-                    if t_list and t_list[0]:
-                        en_res = t_list[0].strip()
-                        if not re.search(r'[\u4e00-\u9fa5]', en_res):
-                            _TRANSLATION_CACHE[cache_key] = en_res
-                            return prefix + en_res
-        except Exception:
-            pass
+    if en_res and not re.search(r'[\u4e00-\u9fa5]', en_res):
+        _TRANSLATION_CACHE[cache_key] = en_res
+        return prefix + en_res
 
-    # 3. 备用 MyMemory 翻译服务 (zh|en)
-    if _MYMEMORY_FAILS < 4:
-        try:
-            url = "https://api.mymemory.translated.net/get"
-            params = {"q": body_text[:160], "langpair": "zh|en"}
-            with httpx.Client(headers={"User-Agent": "Mozilla/5.0"}, timeout=2.5) as client:
-                resp = client.get(url, params=params)
-                if resp.status_code == 200:
-                    translated = resp.json().get("responseData", {}).get("translatedText", "")
-                    if translated and "MYMEMORY WARNING" not in translated and not re.search(r'[\u4e00-\u9fa5]', translated):
-                        _TRANSLATION_CACHE[cache_key] = translated
-                        return prefix + translated
-        except Exception:
-            pass
-
-
+    # 4. 极客中英词典语义映射 + 彻底剥离中文兜底
     # 3. 极客中英词典语义映射 + 彻底剥离中文兜底
     zh_to_en_map = {
         "A股行情分析": "A-share market analysis",
@@ -927,17 +1005,43 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         s_en = free_translate_en(s_en)
     item["summary_en"] = s_en
 
-    # 4. celebrity / 社交大V 字段双语治理
+    # 4. celebrity / 社交大V 字段双语治理 (严禁截断，严格保证中英文全文与折叠内容 100% 完整对应)
     if item.get("category") == "celebrity":
-        for q_key in ["quote_zh", "full_text_zh"]:
-            val_zh = str(item.get(q_key) or "").strip()
-            if not any('\u4e00' <= c <= '\u9fff' for c in val_zh):
-                source_en = item.get("quote_en") or item.get("full_text_en") or item.get("title_en") or item.get("title") or ""
-                item[q_key] = clean_news_text(free_translate_zh(source_en))
-        for q_key in ["quote_en", "full_text_en"]:
-            val_en = str(item.get(q_key) or "").strip()
-            if any('\u4e00' <= c <= '\u9fff' for c in val_en):
-                item[q_key] = free_translate_en(val_en)
+        # 4.1 确保英文原文完整度
+        val_full_en = str(item.get("full_text_en") or "").strip()
+        if not val_full_en:
+            item["full_text_en"] = str(item.get("content_snippet") or item.get("quote_en") or item.get("summary_en") or item.get("title_en") or item.get("title") or "").strip()
+            val_full_en = item["full_text_en"]
+        if any('\u4e00' <= c <= '\u9fff' for c in val_full_en):
+            item["full_text_en"] = free_translate_en(val_full_en)
+            val_full_en = item["full_text_en"]
+
+        val_quote_en = str(item.get("quote_en") or "").strip()
+        if not val_quote_en:
+            item["quote_en"] = val_full_en[:300] if val_full_en else str(item.get("title_en") or "")
+        elif any('\u4e00' <= c <= '\u9fff' for c in val_quote_en):
+            item["quote_en"] = free_translate_en(val_quote_en)
+
+        # 4.2 确保中文全文完整对应 (解决历史严重截断与折叠内容未翻译问题)
+        val_full_zh = str(item.get("full_text_zh") or "").strip()
+        needs_full_retrans = (
+            not val_full_zh 
+            or not any('\u4e00' <= c <= '\u9fff' for c in val_full_zh)
+            or (len(val_full_en) > 200 and (len(val_full_zh) < 100 or len(val_full_zh) < len(val_full_en) * 0.35))
+        )
+        if needs_full_retrans and val_full_en:
+            item["full_text_zh"] = clean_news_text(free_translate_zh(val_full_en))
+        elif val_full_zh:
+            item["full_text_zh"] = clean_news_text(val_full_zh)
+
+        # 4.3 确保中文引用
+        val_quote_zh = str(item.get("quote_zh") or "").strip()
+        if not val_quote_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_quote_zh):
+            source_q_en = item.get("quote_en") or (val_full_en[:200] if val_full_en else "")
+            item["quote_zh"] = clean_news_text(free_translate_zh(source_q_en))
+        else:
+            item["quote_zh"] = clean_news_text(val_quote_zh)
+
         if item.get("author_role_en") and any('\u4e00' <= c <= '\u9fff' for c in str(item["author_role_en"])):
             item["author_role_en"] = free_translate_en(str(item["author_role_en"]))
         elif not item.get("author_role_en"):
@@ -952,6 +1056,13 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                 item["author_en"] = clean_en or "AI Pioneer"
             else:
                 item["author_en"] = raw_author or "AI Pioneer"
+
+    # 4.6 深度报道 news 类别保障文章长正文 article_content_zh 双语对称
+    if item.get("category") == "news":
+        raw_art_en = str(item.get("article_content") or item.get("article_content_en") or "").strip()
+        art_zh = str(item.get("article_content_zh") or "").strip()
+        if raw_art_en and (not art_zh or not any('\u4e00' <= c <= '\u9fff' for c in art_zh)):
+            item["article_content_zh"] = clean_news_text(free_translate_zh(raw_art_en))
 
     # 5. spec_tags_en 0 中文
     if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):
@@ -1179,17 +1290,22 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                     s_en = free_translate_en(str(s_en))
                 merged["summary_en"] = s_en
 
-                # 针对大V社交与快讯，严格保障引用与全文双语独立精翻
+                # 针对大V社交与快讯，严格保障引用与全文双语独立精翻，绝不混淆
                 if merged.get("category") == "celebrity":
-                    for q_field in ["quote_zh", "full_text_zh"]:
-                        v_zh = str(merged.get(q_field) or "")
-                        if not any('\u4e00' <= c <= '\u9fff' for c in v_zh):
-                            source_en = merged.get("quote_en") or merged.get("full_text_en") or merged.get("title_en") or merged.get("title", "")
-                            merged[q_field] = clean_news_text(free_translate_zh(source_en))
-                    for q_field in ["quote_en", "full_text_en"]:
-                        v_en = str(merged.get(q_field) or "")
-                        if any('\u4e00' <= c <= '\u9fff' for c in v_en):
-                            merged[q_field] = free_translate_en(v_en)
+                    val_full_en = str(merged.get("full_text_en") or orig_item.get("full_text_en") or orig_item.get("content_snippet") or orig_item.get("quote_en") or orig_item.get("title_en") or "").strip()
+                    val_full_zh = str(merged.get("full_text_zh") or orig_item.get("full_text_zh") or "").strip()
+                    if val_full_en and (not val_full_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_full_zh) or (len(val_full_en) > 200 and (len(val_full_zh) < 100 or len(val_full_zh) < len(val_full_en) * 0.35))):
+                        merged["full_text_zh"] = clean_news_text(free_translate_zh(val_full_en))
+                    
+                    val_q_en = str(merged.get("quote_en") or orig_item.get("quote_en") or (val_full_en[:200] if val_full_en else "") or "").strip()
+                    val_q_zh = str(merged.get("quote_zh") or orig_item.get("quote_zh") or "").strip()
+                    if val_q_en and (not val_q_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_q_zh)):
+                        merged["quote_zh"] = clean_news_text(free_translate_zh(val_q_en))
+                    
+                    if val_full_en:
+                        merged["full_text_en"] = free_translate_en(val_full_en) if any('\u4e00' <= c <= '\u9fff' for c in val_full_en) else val_full_en
+                    if val_q_en:
+                        merged["quote_en"] = free_translate_en(val_q_en) if any('\u4e00' <= c <= '\u9fff' for c in val_q_en) else val_q_en
 
                 if ai_data.get("article_content_zh"):
                     merged["article_content_zh"] = ai_data["article_content_zh"]

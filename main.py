@@ -1335,30 +1335,37 @@ def save_news(items: list):
             elif not it.get("author_role_en"):
                 it["author_role_en"] = "AI Engineer / Tech Builder"
 
-            # 保证中文引用与全文 100% 为地道中文，绝不裸露英文原文（优先快速复用已有精修中文，杜绝上百次网络阻塞）
-            if not it.get("full_text_zh") or not any('\u4e00' <= c <= '\u9fff' for c in str(it.get("full_text_zh", ""))):
-                if it.get("summary_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["summary_zh"])):
-                    it["full_text_zh"] = clean_news_text(str(it["summary_zh"]))
-                elif it.get("title_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["title_zh"])):
-                    it["full_text_zh"] = clean_news_text(str(it["title_zh"]))
-                else:
-                    src_en = it.get("full_text_en") or it.get("content_snippet") or it.get("title_en") or it.get("title") or ""
-                    try:
-                        it["full_text_zh"] = clean_news_text(free_translate_zh(src_en))
-                    except Exception:
+            # 保证中文引用与全文 100% 为地道中文，绝不裸露英文原文，绝不截断折叠内容
+            src_full_en = str(it.get("full_text_en") or it.get("content_snippet") or it.get("quote_en") or it.get("title_en") or it.get("title") or "").strip()
+            cur_full_zh = str(it.get("full_text_zh") or "").strip()
+            needs_full_trans = (
+                not cur_full_zh 
+                or not any('\u4e00' <= c <= '\u9fff' for c in cur_full_zh)
+                or (len(src_full_en) > 200 and (len(cur_full_zh) < 100 or len(cur_full_zh) < len(src_full_en) * 0.35))
+            )
+            if needs_full_trans and src_full_en:
+                try:
+                    it["full_text_zh"] = clean_news_text(free_translate_zh(src_full_en))
+                except Exception:
+                    if it.get("summary_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["summary_zh"])):
+                        it["full_text_zh"] = clean_news_text(str(it["summary_zh"]))
+                    else:
                         it["full_text_zh"] = "前沿 AI 技术与行业领袖深度发声。"
+            elif cur_full_zh:
+                it["full_text_zh"] = clean_news_text(cur_full_zh)
 
-            if not it.get("quote_zh") or not any('\u4e00' <= c <= '\u9fff' for c in str(it.get("quote_zh", ""))):
-                if it.get("title_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["title_zh"])):
-                    it["quote_zh"] = clean_news_text(str(it["title_zh"]))
-                elif it.get("summary_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["summary_zh"])):
-                    it["quote_zh"] = clean_news_text(str(it["summary_zh"]))
-                else:
-                    src_en = it.get("quote_en") or it.get("title_en") or it.get("title") or ""
+            src_q_en = str(it.get("quote_en") or (src_full_en[:200] if src_full_en else "") or it.get("title_en") or it.get("title") or "").strip()
+            cur_q_zh = str(it.get("quote_zh") or "").strip()
+            if not cur_q_zh or not any('\u4e00' <= c <= '\u9fff' for c in cur_q_zh):
+                if src_q_en:
                     try:
-                        it["quote_zh"] = clean_news_text(free_translate_zh(src_en))
+                        it["quote_zh"] = clean_news_text(free_translate_zh(src_q_en))
                     except Exception:
-                        it["quote_zh"] = "前沿观点深度解析与行业研判。"
+                        it["quote_zh"] = clean_news_text(str(it.get("summary_zh") or it.get("title_zh") or "前沿观点深度解析与行业研判。"))
+                elif it.get("summary_zh"):
+                    it["quote_zh"] = clean_news_text(str(it["summary_zh"]))
+            else:
+                it["quote_zh"] = clean_news_text(cur_q_zh)
 
         # 3.5 严格清洗落地场景·实用工具（彻底剥除第三方平台 Product Hunt / GitHub 痕迹，统一官网直连与 ref=ainewsradar）
         if it.get("category") == "tools" or it.get("platform") == "producthunt":

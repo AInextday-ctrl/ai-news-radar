@@ -3036,7 +3036,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             raw_text_en = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
             if re.search(r'[\u4e00-\u9fff]', raw_text_en):
                 raw_text_en = re.sub(r'[\u4e00-\u9fff]+', '', raw_text_en).strip() or "Frontier AI development."
-            text_en = safe_text(raw_text_en, 250)
+            text_en = safe_text(raw_text_en, 800)
             u = it.get("url", "#")
             avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
             celeb_cards_en_html += f"""
@@ -3570,7 +3570,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             author = safe_text(it.get("author") or "AI 领袖", 40)
             handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
             role = safe_text(it.get("author_role") or "AI 前沿探索者", 60)
-            text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 250)
+            text_zh = safe_text(it.get("full_text_zh") or it.get("quote_zh") or it.get("summary_zh") or it.get("title_zh") or it.get("title", ""), 800)
             u = it.get("url", "#")
             avatar = optimize_avatar_url(it.get("author_avatar") or f"https://unavatar.io/x/{handle.replace('@','')}")
             celeb_cards_zh_html += f"""

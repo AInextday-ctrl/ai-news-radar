@@ -4760,14 +4760,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         box.style.overflow = 'visible';
         if (fade) fade.style.display = 'none';
         btn.innerHTML = `<span>${isZh ? '收起全文' : 'Show less'}</span> <span class="text-[10px]">↑</span>`;
+        if (isZh && window.ChineseConverter && document.documentElement.lang === 'zh-TW') {
+          window.ChineseConverter.convertDomToTraditional(btn);
+          window.ChineseConverter.convertDomToTraditional(box);
+        }
       } else {
         box.setAttribute('data-expanded', 'false');
         box.style.display = '-webkit-box';
-        box.style.webkitLineClamp = '10';
-        box.style.maxHeight = '260px';
+        box.style.webkitLineClamp = '7';
+        box.style.maxHeight = '220px';
         box.style.overflow = 'hidden';
         if (fade) fade.style.display = 'block';
         btn.innerHTML = `<span>${isZh ? '展开阅读全文' : 'Read full tweet'}</span> <span class="text-[10px]">↓</span>`;
+        if (isZh && window.ChineseConverter && document.documentElement.lang === 'zh-TW') {
+          window.ChineseConverter.convertDomToTraditional(btn);
+        }
       }
     }
     window.toggleTweetExpand = toggleTweetExpand;
@@ -4867,10 +4874,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
 
-            <!-- 𝕏 原生推文正文 (10行以内不折叠直显；>10行超长推文优雅折叠并在阅读时展开) -->
+            <!-- 𝕏 原生推文正文 (7行以内直显；超长推文优雅折叠并在阅读时展开，完美适配中繁英) -->
             ${(() => {
-              const countLines = (str) => (str || '').split('\n').reduce((acc, p) => acc + Math.max(1, Math.ceil(p.trim().length / 55)), 0);
-              const isLongTweet = countLines(displayQuote) > 10;
+              const charsPerLine = isZh ? 30 : 55;
+              const countLines = (str) => (str || '').split('\n').reduce((acc, p) => acc + Math.max(1, Math.ceil(p.trim().length / charsPerLine)), 0);
+              const isLongTweet = countLines(displayQuote) > 7 || (displayQuote && displayQuote.length > (isZh ? 180 : 360));
               if (!isLongTweet) {
                 return `
                   <div class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5">
@@ -4880,7 +4888,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               }
               return `
                 <div class="relative">
-                  <div class="tweet-content-box text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5 overflow-hidden transition-all duration-300" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 10; max-height: 260px;" data-expanded="false">
+                  <div class="tweet-content-box text-[13.5px] sm:text-[14.5px] leading-relaxed text-slate-800 dark:text-slate-100 font-normal whitespace-pre-line select-text pl-0.5 overflow-hidden transition-all duration-300" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 7; max-height: 220px;" data-expanded="false">
                     ${formatTweetText(displayQuote)}
                   </div>
                   <div class="tweet-fade-overlay absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-white/95 dark:from-slate-900/95 to-transparent pointer-events-none transition-opacity"></div>
