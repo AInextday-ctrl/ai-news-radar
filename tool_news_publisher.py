@@ -47,11 +47,26 @@ def get_optimized_og_image(raw_url: str) -> str:
     if not raw_url or not isinstance(raw_url, str) or len(raw_url.strip()) < 10:
         return "https://ainewsradar.xyz/images/og-default.jpg"
     raw_url = raw_url.strip()
+    if not raw_url.startswith("https://") and not raw_url.startswith("http://"):
+        return "https://ainewsradar.xyz/images/og-default.jpg"
+    if raw_url.startswith("http://"):
+        raw_url = "https://" + raw_url[7:]
+    
+    # In-site brand assets
     if "ainewsradar.xyz" in raw_url:
         return raw_url
-    import urllib.parse
-    encoded = urllib.parse.quote(raw_url, safe='')
-    return f"https://wsrv.nl/?url={encoded}&w=1200&h=630&fit=cover&output=jpg&q=85"
+
+    # Unsplash: deliver direct high-res 1200x630 JPG with native Unsplash parameters
+    if "images.unsplash.com" in raw_url:
+        base = raw_url.split("?")[0]
+        return f"{base}?w=1200&h=630&fit=crop&fm=jpg&q=85"
+
+    # GitHub OpenGraph is already 1200x630
+    if "opengraph.githubassets.com" in raw_url:
+        return raw_url
+
+    # Other authentic direct HTTPS image URLs
+    return raw_url
 
 def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: List[Dict[str, Any]] = None) -> str:
     tool_id = str(tool.get("id") or "")
@@ -115,6 +130,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
 
     raw_img = tool.get("image_url") or (tool.get("preview_images") and tool["preview_images"][0]) or ""
     image_url = get_optimized_og_image(raw_img)
+    image_mime = "image/png" if image_url.lower().endswith(".png") else "image/jpeg"
     official_url = tool.get("official_url") or tool.get("url") or tool.get("github_url") or "#"
     # Ensure tracking tag
     sep = "&" if "?" in official_url else "?"
@@ -215,24 +231,26 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta property="og:site_name" content="AI News Radar">
   <meta property="og:title" content="{escape(meta_title)}">
   <meta property="og:description" content="{clean_meta_desc}">
-  <meta property="og:image" content="{escape(image_url)}">
-  <meta property="og:image:secure_url" content="{escape(image_url)}">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="{image_url}">
+  <meta property="og:image:secure_url" content="{image_url}">
+  <meta property="og:image:type" content="{image_mime}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{escape(display_name)}">
   <meta property="og:url" content="{canonical_url}">
   <meta property="og:type" content="website">
   
-  <!-- Twitter Card -->
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ainewsradar">
   <meta name="twitter:creator" content="@ainewsradar">
   <meta name="twitter:domain" content="ainewsradar.xyz">
   <meta name="twitter:url" content="{canonical_url}">
   <meta name="twitter:title" content="{escape(meta_title)}">
   <meta name="twitter:description" content="{clean_meta_desc}">
-  <meta name="twitter:image" content="{escape(image_url)}">
+  <meta name="twitter:image" content="{image_url}">
+  <meta property="twitter:image" content="{image_url}">
   <meta name="twitter:image:alt" content="{escape(display_name)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
@@ -248,7 +266,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "All",
     "url": "{canonical_url}",
-    "image": "{escape(image_url)}"
+    "image": ["{image_url}"]
   }}
   </script>
 </head>
@@ -283,7 +301,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
       
       <!-- Preview Banner -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
-        <img src="{escape(image_url)}" alt="{escape(display_name)}" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.png'">
+        <img src="{image_url}" alt="{escape(display_name)}" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
           <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
@@ -316,13 +334,15 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
 
           <!-- Social Sharing & Bookmark Actions -->
           <div class="flex items-center gap-2">
-            <button onclick="shareDirect('x')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="{share_x_text}">
-              <span>𝕏</span>
+            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-slate-800 text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" style="background-color: #000000 !important; color: #ffffff !important;" title="{share_x_text}">
+              <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path fill="#ffffff" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span class="text-white font-bold" style="color: #ffffff !important;">𝕏</span>
             </button>
-            <button onclick="shareDirect('threads')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="{share_threads_text}">
-              <span>🧵</span>
+            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-slate-800 text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" style="background-color: #000000 !important; color: #ffffff !important;" title="{share_threads_text}">
+              <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 192 192"><path fill="#ffffff" d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.3853 71.977C80.8955 63.6063 89.6202 59.986 97.2241 59.986C97.3039 59.986 97.3837 59.986 97.4642 59.986C110.22 60.0673 120.354 69.349 121.722 83.993C114.73 82.8809 106.942 82.9099 98.4878 84.1484C69.3872 88.4116 52.8893 103.551 54.3475 124.965C55.7725 145.895 72.8812 159.277 94.6186 159.277C114.887 159.277 127.359 148.887 132.898 135.534C137.915 144.981 146.541 150.384 158.421 150.384C172.934 150.384 181.76 138.868 181.76 117.848C181.76 83.2267 157.863 56.6348 116.892 56.6348C74.7088 56.6348 45.4545 86.8373 45.4545 125.109C45.4545 146.335 53.6493 162.748 68.6186 172.502C82.4939 181.543 100.864 184.28 122.956 180.601L120.59 165.738C101.442 168.924 85.8078 166.453 74.8464 159.308C63.2629 151.758 56.8831 138.832 56.8831 121.782C56.8831 89.8703 80.8926 68.4907 116.892 68.4907C150.297 68.4907 169.387 89.8398 169.387 117.848C169.387 132.859 164.283 138.528 156.421 138.528C148.91 138.528 143.265 133.393 141.657 125.137C142.112 122.378 142.345 119.53 142.345 116.602C142.345 115.656 142.317 114.717 142.261 113.784L141.537 88.9883ZM120.942 100.672C121.056 102.664 121.114 104.686 121.114 106.726C121.114 108.978 120.978 111.192 120.716 113.355C116.924 130.676 106.79 144.17 92.5186 144.17C79.4891 144.17 68.7849 135.097 67.8927 122.015C67.0674 109.916 77.2625 97.4116 100.563 94.0049C107.514 92.9878 114.394 93.303 120.942 100.672Z"/></svg>
+              <span class="text-white font-bold" style="color: #ffffff !important;">Threads</span>
             </button>
-            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5">
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
               <span>🔗</span> <span>{copy_link_text}</span>
             </button>
           </div>
@@ -363,7 +383,8 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
     }};
 
     function shareDirect(platform) {{
-      const shareUrl = window.location.href;
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${{baseShareUrl}}?utm_source=social_share&utm_medium=${{platform}}&utm_campaign=ainewsradar&v=6.8`;
       const title = "{escape(display_name)} - {escape(hook)}";
       const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
       if (platform === 'x') {{
@@ -434,6 +455,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     raw_img = item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
     image_url = get_optimized_og_image(raw_img)
+    image_mime = "image/png" if image_url.lower().endswith(".png") else "image/jpeg"
     source_name = item.get("source") or "Tech Source"
     if not is_zh:
         source_name = sanitize_for_en(source_name) or "Tech Source"
@@ -518,24 +540,26 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta property="og:site_name" content="AI News Radar">
   <meta property="og:title" content="{escape(meta_title)}">
   <meta property="og:description" content="{clean_meta_desc}">
-  <meta property="og:image" content="{escape(image_url)}">
-  <meta property="og:image:secure_url" content="{escape(image_url)}">
-  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image" content="{image_url}">
+  <meta property="og:image:secure_url" content="{image_url}">
+  <meta property="og:image:type" content="{image_mime}">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="{escape(title)}">
   <meta property="og:url" content="{canonical_url}">
   <meta property="og:type" content="article">
   
-  <!-- Twitter Card -->
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@ainewsradar">
   <meta name="twitter:creator" content="@ainewsradar">
   <meta name="twitter:domain" content="ainewsradar.xyz">
   <meta name="twitter:url" content="{canonical_url}">
   <meta name="twitter:title" content="{escape(meta_title)}">
   <meta name="twitter:description" content="{clean_meta_desc}">
-  <meta name="twitter:image" content="{escape(image_url)}">
+  <meta name="twitter:image" content="{image_url}">
+  <meta property="twitter:image" content="{image_url}">
   <meta name="twitter:image:alt" content="{escape(title)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
@@ -548,7 +572,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     "@type": "NewsArticle",
     "headline": "{escape(title)}",
     "description": "{clean_meta_desc}",
-    "image": ["{escape(image_url)}"],
+    "image": ["{image_url}"],
     "url": "{canonical_url}",
     "publisher": {{
       "@type": "Organization",
@@ -589,7 +613,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
       
       <!-- Preview Image -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
-        <img src="{escape(image_url)}" alt="{escape(title)}" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.png'">
+        <img src="{image_url}" alt="{escape(title)}" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
           <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
@@ -615,13 +639,15 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
           <!-- Social Sharing & Bookmark Actions -->
           <div class="flex items-center gap-2">
-            <button onclick="shareDirect('x')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="{share_x_text}">
-              <span>𝕏</span>
+            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-slate-800 text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" style="background-color: #000000 !important; color: #ffffff !important;" title="{share_x_text}">
+              <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path fill="#ffffff" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span class="text-white font-bold" style="color: #ffffff !important;">𝕏</span>
             </button>
-            <button onclick="shareDirect('threads')" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5" title="{share_threads_text}">
-              <span>🧵</span>
+            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-slate-800 text-white transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" style="background-color: #000000 !important; color: #ffffff !important;" title="{share_threads_text}">
+              <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 192 192"><path fill="#ffffff" d="M141.537 88.9883C140.71 88.5919 139.87 88.2104 139.019 87.8451C137.537 60.5382 122.616 44.905 97.5619 44.745C97.4484 44.7443 97.3355 44.7443 97.222 44.7443C82.2364 44.7443 69.7731 51.1409 62.102 62.7807L75.3853 71.977C80.8955 63.6063 89.6202 59.986 97.2241 59.986C97.3039 59.986 97.3837 59.986 97.4642 59.986C110.22 60.0673 120.354 69.349 121.722 83.993C114.73 82.8809 106.942 82.9099 98.4878 84.1484C69.3872 88.4116 52.8893 103.551 54.3475 124.965C55.7725 145.895 72.8812 159.277 94.6186 159.277C114.887 159.277 127.359 148.887 132.898 135.534C137.915 144.981 146.541 150.384 158.421 150.384C172.934 150.384 181.76 138.868 181.76 117.848C181.76 83.2267 157.863 56.6348 116.892 56.6348C74.7088 56.6348 45.4545 86.8373 45.4545 125.109C45.4545 146.335 53.6493 162.748 68.6186 172.502C82.4939 181.543 100.864 184.28 122.956 180.601L120.59 165.738C101.442 168.924 85.8078 166.453 74.8464 159.308C63.2629 151.758 56.8831 138.832 56.8831 121.782C56.8831 89.8703 80.8926 68.4907 116.892 68.4907C150.297 68.4907 169.387 89.8398 169.387 117.848C169.387 132.859 164.283 138.528 156.421 138.528C148.91 138.528 143.265 133.393 141.657 125.137C142.112 122.378 142.345 119.53 142.345 116.602C142.345 115.656 142.317 114.717 142.261 113.784L141.537 88.9883ZM120.942 100.672C121.056 102.664 121.114 104.686 121.114 106.726C121.114 108.978 120.978 111.192 120.716 113.355C116.924 130.676 106.79 144.17 92.5186 144.17C79.4891 144.17 68.7849 135.097 67.8927 122.015C67.0674 109.916 77.2625 97.4116 100.563 94.0049C107.514 92.9878 114.394 93.303 120.942 100.672Z"/></svg>
+              <span class="text-white font-bold" style="color: #ffffff !important;">Threads</span>
             </button>
-            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5">
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
               <span>🔗</span> <span>{copy_link_text}</span>
             </button>
           </div>
@@ -660,14 +686,15 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     }};
 
     function shareDirect(platform) {{
-      const shareUrl = window.location.href;
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${{baseShareUrl}}?utm_source=social_share&utm_medium=${{platform}}&utm_campaign=ainewsradar&v=6.8`;
       const title = "{escape(title)}";
       const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
       if (platform === 'x') {{
         const text = encodeURIComponent(cleanTitle + "\\n\\n#AI #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${{text}}&url=${{encodeURIComponent(shareUrl)}}`, '_blank', 'noopener,noreferrer');
       }} else if (platform === 'threads') {{
-        const text = encodeURIComponent(cleanTitle + "\\n\\n" + shareUrl + "\\n\\n#AI");
+        const text = encodeURIComponent(cleanTitle + "\\n\\n" + shareUrl + "\\n\\n#AI #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${{text}}`, '_blank', 'noopener,noreferrer');
       }}
     }}

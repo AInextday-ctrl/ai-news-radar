@@ -9793,6 +9793,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         u.searchParams.set('utm_source', 'social_share');
         u.searchParams.set('utm_medium', platform);
         u.searchParams.set('utm_campaign', 'ainewsradar');
+        u.searchParams.set('v', '6.8');
         shareUrl = u.toString();
       } catch (e) {
         shareUrl = rawUrl;
@@ -9865,6 +9866,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         u.searchParams.set('utm_source', 'social_share');
         u.searchParams.set('utm_medium', 'x');
         u.searchParams.set('utm_campaign', 'ainewsradar');
+        u.searchParams.set('v', '6.8');
         shareUrl = u.toString();
       } catch (e) {}
 
@@ -9890,6 +9892,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         u.searchParams.set('utm_source', 'social_share');
         u.searchParams.set('utm_medium', 'threads');
         u.searchParams.set('utm_campaign', 'ainewsradar');
+        u.searchParams.set('v', '6.8');
         shareUrl = u.toString();
       } catch (e) {}
 
@@ -9919,6 +9922,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         u.searchParams.set('utm_source', 'social_share');
         u.searchParams.set('utm_medium', 'x');
         u.searchParams.set('utm_campaign', 'ainewsradar');
+        u.searchParams.set('v', '6.8');
         shareUrl = u.toString();
       } catch (e) {}
 
@@ -9947,6 +9951,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         u.searchParams.set('utm_source', 'social_share');
         u.searchParams.set('utm_medium', 'threads');
         u.searchParams.set('utm_campaign', 'ainewsradar');
+        u.searchParams.set('v', '6.8');
         shareUrl = u.toString();
       } catch (e) {}
 
