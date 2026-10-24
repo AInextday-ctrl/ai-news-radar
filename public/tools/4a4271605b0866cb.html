@@ -232,12 +232,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "RankControl - Most AI SEO tools tell you where you&#x27;re mentioned and stop. RankControl runs the full lifecycle: create content that AI and Google recommend, published as native posts on your own domain. Track your AI visibility across ChatGPT, Perplexity, Claude, Gemini, Grok, and more, spy on competitor gaps, earn backlinks, turn articles into social drafts, and check analytics and AI crawl reports. One flat plan, 7-day free trial.";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }

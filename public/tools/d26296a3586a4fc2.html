@@ -232,12 +232,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "ABrush - ABrush brings leading AI models and production-ready advanced AI workflows into the environment where artists already work. We use AI to remove repetitive production work, accelerate iteration, and give artists more time for creative decisions, while keeping the artist in control of the final result. AI speeds up the process and cuts the cost of routine. Created by artists, for artists.";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }

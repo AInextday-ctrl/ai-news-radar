@@ -197,7 +197,7 @@
                 <img src="https://opengraph.githubassets.com/1/luongnv89/claude-howto" alt="claude-howto" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-emerald-500 transition-colors line-clamp-1">claude-howto</h4>
-              <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">Claude Code的可视化示例驱动指南—从基本概念到高级代理，其中的复制粘贴模板可立即带来价值。</p>
+              <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">一个可视化的、示例驱动的Claude Code指南——从基本概念到高级代理，使用复制粘贴模板，可以立即带来价值。</p>
             </a>
             
             <a href="/zh/tools/8a90d365b08f9aca" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-emerald-500/60 transition-all shadow-xs">
@@ -232,12 +232,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "claude-quickstarts - 专注于智能体工作流编排场景的高星 AI 工具，支持 ⚡ 命令行/一键执行 与自动化工程集成";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }

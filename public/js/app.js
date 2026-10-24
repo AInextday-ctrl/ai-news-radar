@@ -10004,7 +10004,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         shareUrl = u.toString();
       } catch (e) {}
 
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
+      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 300);
       const hashtag = isZh ? '#AI #人工智能 #AINewsRadar' : '#AI #AINewsRadar';
       const threadsText = `${cleanTitle}\n\n${hashtag}`;
       const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}&url=${encodeURIComponent(shareUrl)}`;
@@ -10063,7 +10063,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         shareUrl = u.toString();
       } catch (e) {}
 
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
+      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 300);
       const hashtag = isZh ? '#AI #AITools #人工智能 #AINewsRadar' : '#AITools #AINewsRadar';
       const threadsText = `🛠️ ${cleanTitle}\n\n${hashtag}`;
       const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}&url=${encodeURIComponent(shareUrl)}`;

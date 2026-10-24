@@ -232,12 +232,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "Floot MCP - Floot Connector plugs Floot into Claude and ChatGPT, so you can describe an app in the chat you already use and get a real full-stack app back with a database, user logins, and a live URL. Floot doesn&#x27;t charge for AI credits. Your Claude or ChatGPT subscription does the thinking, and Floot handles the build, hosting, and deploy. And it&#x27;s not just web anymore. Tell Floot to publish to iOS and Android, sign in to Apple or Google Play once, then keep shipping to the app stores from the same chat.";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }

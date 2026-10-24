@@ -232,12 +232,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "Harness Manager - Harness Manager is the App Store and control center for AI coding harnesses on Mac. Discover, install and update tools like Claude Code, Codex, OpenCode, Pi and more. Automatically detect what’s already installed, manage MCP servers and AI skills, check versions and paths, and diagnose broken installations or configuration issues. Your entire AI coding stack, finally in one place.";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }

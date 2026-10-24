@@ -415,12 +415,14 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${{baseShareUrl}}?utm_source=social_share&utm_medium=${{platform}}&utm_campaign=ainewsradar&v=6.8`;
       const title = "{escape(display_name)} - {escape(hook)}";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {{
-        const text = encodeURIComponent(cleanTitle + "\\n\\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\\n\\n#AI #AITools #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${{text}}&url=${{encodeURIComponent(shareUrl)}}`, '_blank', 'noopener,noreferrer');
       }} else if (platform === 'threads') {{
-        const text = encodeURIComponent(cleanTitle + "\\n\\n#AI #AITools #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\\n\\n#AI #AITools #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${{text}}&url=${{encodeURIComponent(shareUrl)}}`, '_blank', 'noopener,noreferrer');
       }}
     }}
@@ -718,12 +720,14 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${{baseShareUrl}}?utm_source=social_share&utm_medium=${{platform}}&utm_campaign=ainewsradar&v=6.8`;
       const title = "{escape(title)}";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {{
-        const text = encodeURIComponent(cleanTitle + "\\n\\n#AI #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\\n\\n#AI #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${{text}}&url=${{encodeURIComponent(shareUrl)}}`, '_blank', 'noopener,noreferrer');
       }} else if (platform === 'threads') {{
-        const text = encodeURIComponent(cleanTitle + "\\n\\n#AI #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\\n\\n#AI #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${{text}}&url=${{encodeURIComponent(shareUrl)}}`, '_blank', 'noopener,noreferrer');
       }}
     }}

@@ -164,17 +164,9 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/d5526269f2aef41e" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ichef.bbci.co.uk/news/1024/branded_news/43e7/live/343404d0-cf00-11f1-accf-3309656ad0bb.jpg" alt="英国斥资1亿英镑组建AI生物安全实验室" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">BBC</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">英国斥资1亿英镑组建AI生物安全实验室</h4>
-            </a>
-            
             <a href="/zh/news/782f03cf48541af9" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="人工智能电影工作室获六千万美元融资 估值达十亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=1200&amp;h=630&amp;fit=crop&amp;fm=jpg&amp;q=85" alt="人工智能电影工作室获六千万美元融资 估值达十亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Information</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">人工智能电影工作室获六千万美元融资 估值达十亿美元</h4>
@@ -194,6 +186,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">CTech</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Mave获2800万美元融资</h4>
+            </a>
+            
+            <a href="/zh/news/cedac5e51e1328b1" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2025/02/STK155_OPEN_AI_2025_CVirgiia_B_d6ffc8.jpg?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="OpenAI切断模型训练网络" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">OpenAI切断模型训练网络</h4>
             </a>
             
               </div>
@@ -220,12 +220,14 @@
       const baseShareUrl = window.location.origin + window.location.pathname;
       const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
       const title = "算力中心借儿童科普绘本化解社区能耗抵制危机";
-      const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 140);
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
       if (platform === 'x') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
         window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
-        const text = encodeURIComponent(cleanTitle + "\n\n#AI #AINewsRadar");
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
         window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
       }
     }
