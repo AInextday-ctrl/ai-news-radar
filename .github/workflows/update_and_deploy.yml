@@ -12,6 +12,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: ai-radar-sync
+  cancel-in-progress: false
+
 jobs:
   auto-update:
     runs-on: ubuntu-latest
@@ -66,11 +70,11 @@ jobs:
           if ! git diff --quiet || ! git diff --staged --quiet; then
             git commit -m "🤖 自动同步最新 AI 资讯与静态 SEO 索引 [skip ci]"
             if ! git pull --rebase origin main; then
-              echo "❌ Git rebase conflict detected! Aborting rebase to avoid corrupted files."
+              echo "⚠️ 检测到远程仓库在此次运行期间已被更新的提交修改，主动让步放弃此次合并，下一个 8 分钟自动化周期将拉取最新基线。"
               git rebase --abort
-              exit 1
+              exit 0
             fi
-            git push || (echo "❌ Git push failed" && exit 1)
+            git push || (echo "⚠️ Git push 遇并发提交占用，主动让步由后续周期同步。" && exit 0)
           fi
 
       - name: Verify Quality Gate Before Hosting Deployment
