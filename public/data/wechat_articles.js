@@ -1,26 +1,26 @@
 window.WECHAT_ARTICLES_DATA = {
-  "updated_at": "2026-10-24T12:58:06.288448+00:00",
+  "updated_at": "2026-10-24T16:04:44.622038+00:00",
   "date": "2026-10-24",
   "total_articles": 2,
   "audit_funnel": {
-    "total_candidates": 5060,
+    "total_candidates": 5093,
     "previously_published_excluded": 16,
-    "fresh_candidates_scanned": 5044,
-    "disqualified_count": 5044,
+    "fresh_candidates_scanned": 5077,
+    "disqualified_count": 5077,
     "qualified_count": 3,
     "published_count": 3,
     "pass_rate_percent": 0.1,
     "disqualified_breakdown": {
       "previously_published": 16,
-      "no_authentic_media": 1257,
+      "no_authentic_media": 1265,
       "outdated_baselines": 4,
-      "below_score_threshold": 3783
+      "below_score_threshold": 3808
     },
     "disqualification_reasons_desc": [
       "历史已发条目排除 (防止重复炒冷饭): 16 篇 (打标永久封存，0 Token 跳过)",
-      "缺少一手真实图文/视频凭证: 1257 篇 (按硬门禁扣40分一票否决)",
+      "缺少一手真实图文/视频凭证: 1265 篇 (按硬门禁扣40分一票否决)",
       "引用过时淘汰陈旧基准: 4 篇 (扣20分)",
-      "观点平庸/缺乏硬核架构与落地账本 (<95分): 3783 篇"
+      "观点平庸/缺乏硬核架构与落地账本 (<95分): 3808 篇"
     ],
     "processed_marking_mode": "全量打标与去重流水线 (Ledger & Anti-Repeat Pipeline 已激活)",
     "token_economy_mode": "极速省Token分级防线: 98.8% 候选在本地规则层 0 Token 拦截，已发布文章永久排除防重复生成"
