@@ -148,6 +148,40 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(en_field_leaks) == 0, f"断言 8 失败：检测到 {len(en_field_leaks)} 处英文数据字段包含中文字符: {en_field_leaks[:3]}"
     print(f"✅ 断言 8 通过: 严格中英文语言纯度全量达标 (全网 {len(all_en_html)} 个英文页面及所有 _en 字段零中文)")
 
+    # 断言 9（零 Git 冲突与脏文本污染）
+    conflict_pattern = re.compile(r'^(<{7}\s|={7}$|>{7}\s)', re.MULTILINE)
+    conflict_files = []
+    
+    target_exts = {".html", ".js", ".css", ".json"}
+    for root, dirs, files in os.walk(os.path.join(WORKSPACE_DIR, "public")):
+        for fname in files:
+            ext = os.path.splitext(fname)[1].lower()
+            if ext in target_exts:
+                fpath = os.path.join(root, fname)
+                try:
+                    with open(fpath, "r", encoding="utf-8", errors="ignore") as f_in:
+                        fc = f_in.read()
+                    if conflict_pattern.search(fc) or ("<<<<<<< HEAD" in fc) or ("=======" in fc and ">>>>>>> " in fc):
+                        conflict_files.append(os.path.relpath(fpath, WORKSPACE_DIR))
+                except Exception:
+                    pass
+
+    data_dir = os.path.join(WORKSPACE_DIR, "data")
+    if os.path.exists(data_dir):
+        for fname in os.listdir(data_dir):
+            if fname.endswith(".json"):
+                fpath = os.path.join(data_dir, fname)
+                try:
+                    with open(fpath, "r", encoding="utf-8", errors="ignore") as f_in:
+                        fc = f_in.read()
+                    if conflict_pattern.search(fc) or ("<<<<<<< HEAD" in fc) or ("=======" in fc and ">>>>>>> " in fc):
+                        conflict_files.append(os.path.relpath(fpath, WORKSPACE_DIR))
+                except Exception:
+                    pass
+
+    assert len(conflict_files) == 0, f"断言 9 失败：检测到 {len(conflict_files)} 个文件含有 Git 冲突标记: {conflict_files}"
+    print(f"✅ 断言 9 通过: 零 Git 冲突与脏文本污染 (全站 public 与 data 文件零冲突标记)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")

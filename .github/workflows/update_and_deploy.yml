@@ -2,7 +2,7 @@ name: AI Radar - 24x7 Auto Update & Deploy
 
 on:
   schedule:
-    # 每 8 分钟在云端极速增量抓取更新一次 (UTC，每日180+次全天候极速监听)
+    # 每 8 分钟在云端极速增量抓取更新一次 (UTC，每天 180+ 次全天候极速监控)
     - cron: '*/8 * * * *'
   workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
   push:
@@ -52,18 +52,30 @@ jobs:
 
       - name: Dual Edition Static Prerender & SEO Publisher
         run: |
-          python content_publisher.py || echo "⚠️ 静态预渲染告警，已安全自愈放行"
+          python content_publisher.py
 
       - name: Hard CI Data Quality & Strict Language Gate Audit
         run: |
-          python tests/test_data_quality_gate.py || (echo "⚠️ 数据门禁告警，执行安全自愈放行..." && python content_publisher.py)
+          python tests/test_data_quality_gate.py
 
       - name: Commit Updated News Data to Repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add data/ public/
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 自动同步最新 AI 资讯与静态 SEO 索引 [skip ci]" && git pull --rebase origin main && git push) || echo "⚠️ Git push skipped"
+          if ! git diff --quiet || ! git diff --staged --quiet; then
+            git commit -m "🤖 自动同步最新 AI 资讯与静态 SEO 索引 [skip ci]"
+            if ! git pull --rebase origin main; then
+              echo "❌ Git rebase conflict detected! Aborting rebase to avoid corrupted files."
+              git rebase --abort
+              exit 1
+            fi
+            git push || (echo "❌ Git push failed" && exit 1)
+          fi
+
+      - name: Verify Quality Gate Before Hosting Deployment
+        run: |
+          python tests/test_data_quality_gate.py
 
       - name: Deploy to Firebase Hosting
         env:
@@ -74,5 +86,5 @@ jobs:
             echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
           else
             echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
-            npx -y firebase-tools deploy --only hosting --non-interactive || echo "⚠️ Firebase deploy failed. Please check if your FIREBASE_TOKEN has expired."
+            npx -y firebase-tools deploy --only hosting --non-interactive
           fi

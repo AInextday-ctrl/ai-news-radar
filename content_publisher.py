@@ -1,3 +1,183 @@
+
+def format_static_tool_card(it: dict, is_zh: bool) -> str:
+    app_name = it.get("app_name") or (it.get("title", "").split(":")[0] if it.get("title") else "AI Tool")
+    if not is_zh and re.search(r'[一-鿿]', app_name):
+        app_name = re.sub(r'[一-鿿]+', '', app_name).strip() or "AI Tool"
+    app_name = safe_text(app_name, 40)
+    
+    raw_hook = (it.get("app_hook_zh") or it.get("app_hook") or it.get("summary_zh")) if is_zh else (it.get("app_hook_en") or it.get("summary_en") or it.get("title_en") or it.get("app_hook", ""))
+    if not is_zh and re.search(r'[一-鿿]', raw_hook):
+        raw_hook = re.sub(r'[一-鿿]+', '', raw_hook).strip() or "High-utility open source AI engineering tool"
+    hook = safe_text(raw_hook, 120)
+
+    tool_id = it.get("id") or ""
+    url = it.get("official_url") or it.get("url") or "#"
+    stars = it.get("stars") or 0
+    stars_display = f"★ {stars / 1000:.1f}k" if stars >= 1000 else (f"★ {stars}" if stars > 0 else "")
+
+    badge = (it.get("growth_badge_zh") if is_zh else it.get("growth_badge_en")) or "🔥 Popular"
+    if not is_zh and re.search(r'[一-鿿]', badge):
+        badge = "🔥 Popular"
+
+    is_gh = it.get("tool_origin") == "github" or "github.com" in (it.get("url") or "")
+    origin_pill = f'<span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub {stars_display}</span>' if is_gh else f'<span class="text-[9px] px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-mono border border-sky-200 dark:border-sky-500/20">🌐 {"免装Web" if is_zh else "Web App"}</span>'
+
+    preview_img = it.get("image_url") or ""
+    if not preview_img or "microlink.io" in preview_img:
+        preview_img = f"/assets/tool-previews/{tool_id}.webp?v=4"
+
+    return f"""
+    <article onclick="openToolDetailModal('{tool_id}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
+      <div class="p-3.5 space-y-2">
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center space-x-2 min-w-0">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+            <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{app_name}</h4>
+          </div>
+          {origin_pill}
+        </div>
+        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+          {hook}
+        </p>
+      </div>
+      <div class="px-3.5 pb-3 pt-1 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/60 text-xs text-slate-500">
+        <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">{badge}</span>
+        <a href="{url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
+          {'访问官网 ↗' if is_zh else 'Explore Tool ↗'}
+        </a>
+      </div>
+    </article>"""
+
+
+def format_static_video_card(it: dict, is_zh: bool) -> str:
+    raw_t = (it.get("title_zh") if is_zh else it.get("title_en")) or it.get("title", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_t):
+        raw_t = re.sub(r'[一-鿿]+', '', raw_t).strip() or "Frontier AI Video Breakdown"
+    title = safe_text(raw_t, 90)
+    title_esc = title.replace("'", "\'").replace('"', '&quot;')
+
+    url = it.get("url") or "#"
+    video_id = it.get("video_id") or ""
+    if not video_id and url:
+        m = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', url)
+        if m: video_id = m.group(1)
+
+    author = safe_text(it.get("author") or it.get("source") or "YouTube Creator", 30)
+    if not is_zh and re.search(r'[一-鿿]', author):
+        author = "AI Researcher"
+    author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
+
+    poster = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{video_id}/hqdefault.jpg&w=480&output=webp&q=80" if video_id else "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=480&q=80"
+    embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
+
+    return f"""
+    <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-rose-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-rose-500/10 cursor-pointer">
+      <div class="relative w-full aspect-video bg-slate-950 overflow-hidden shrink-0" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')">
+        <img src="{poster}" alt="{title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+          <div class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-xs shadow-lg group-hover:scale-110 transition-transform">▶</div>
+        </div>
+      </div>
+      <div class="p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[10px] text-slate-500 mb-1">
+            <span class="font-mono text-rose-600 dark:text-rose-400 font-bold">🎬 YouTube</span>
+            <span>{author}</span>
+          </div>
+          <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
+            {title}
+          </h4>
+        </div>
+        <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs">
+          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-600 dark:text-rose-400 font-bold hover:underline cursor-pointer">
+            {'影院播放 ▶' if is_zh else 'Theater Play ▶'}
+          </button>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+            {'原片 ↗' if is_zh else 'Source ↗'}
+          </a>
+        </div>
+      </div>
+    </article>"""
+
+
+def format_static_prompt_card(it: dict, is_zh: bool) -> str:
+    raw_t = (it.get("title_zh") if is_zh else it.get("title_en")) or it.get("title", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_t):
+        raw_t = re.sub(r'[一-鿿]+', '', raw_t).strip() or "Frontier AI Prompt Workflow"
+    title = safe_text(raw_t, 80)
+
+    raw_s = (it.get("summary_zh") if is_zh else it.get("summary_en")) or it.get("content_snippet", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_s):
+        raw_s = re.sub(r'[一-鿿]+', '', raw_s).strip() or "Production-ready prompt engineering architecture"
+    summary = safe_text(raw_s, 120)
+
+    is_wf = it.get("is_workflow") or it.get("sub_type") == "workflow"
+    badge = ("⚡ 深度工作流" if is_zh else "⚡ Deep Workflow") if is_wf else ("💡 实战提示词" if is_zh else "💡 Production Prompt")
+    tier = safe_text(it.get("target_model") or it.get("model_tier") or "Claude 3.7 / GPT-4o", 24)
+
+    return f"""
+    <article class="p-3.5 rounded-xl bg-white/90 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between group space-y-2">
+      <div>
+        <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+          <span class="font-bold text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-950/40 px-2 py-0.5 rounded border border-purple-200/50">{badge}</span>
+          <span class="font-mono text-slate-500">{tier}</span>
+        </div>
+        <h4 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 line-clamp-2 leading-snug group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+          {title}
+        </h4>
+        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mt-1">
+          {summary}
+        </p>
+      </div>
+      <div class="pt-2 border-t border-slate-100 dark:border-slate-800/60 flex items-center justify-between text-xs text-slate-500">
+        <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono font-semibold">{'✅ 已实测验证' if is_zh else '✅ Verified'}</span>
+        <a href="#prompts" onclick="switchTab('prompts')" class="text-purple-600 dark:text-purple-400 font-semibold hover:underline">
+          {'查看提示词 →' if is_zh else 'View Prompt →'}
+        </a>
+      </div>
+    </article>"""
+
+
+def format_static_arxiv_card(it: dict, is_zh: bool) -> str:
+    raw_t = (it.get("title_zh") if is_zh else it.get("title_en")) or it.get("title", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_t):
+        raw_t = re.sub(r'[一-鿿]+', '', raw_t).strip() or "Frontier Deep Learning Architecture Paper"
+    title = safe_text(raw_t, 90)
+
+    arxiv_id = safe_text(it.get("arxiv_id") or "2410.xxxxx", 20)
+    date_val = safe_text((it.get("date_zh") if is_zh else it.get("date_en")) or it.get("date", "2026-10"), 12)
+    spec = safe_text((it.get("spec_zh") if is_zh else it.get("spec_en")) or it.get("spec", "AI Breakthrough"), 30)
+    if not is_zh and re.search(r'[一-鿿]', spec):
+        spec = "AI Breakthrough"
+
+    raw_s = (it.get("summary_zh") if is_zh else it.get("summary_en")) or it.get("summary", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_s):
+        raw_s = re.sub(r'[一-鿿]+', '', raw_s).strip() or "Empirical analysis and breakthrough methodology presented in this pre-print."
+    summary = safe_text(raw_s, 110)
+    url = it.get("url") or f"https://arxiv.org/abs/{arxiv_id}"
+
+    return f"""
+    <a href="{url}" target="_blank" rel="noopener noreferrer" class="block p-3 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-950/60 dark:hover:bg-slate-900/80 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all group space-y-1.5">
+      <div class="flex items-center justify-between text-[10px]">
+        <div class="flex items-center space-x-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+          <span class="font-mono text-purple-600 dark:text-purple-400 font-bold">arXiv:{arxiv_id}</span>
+        </div>
+        <span class="text-[9px] px-1.5 py-0.2 rounded bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 font-mono font-medium">{date_val}</span>
+      </div>
+      <h4 class="font-bold text-xs text-slate-800 dark:text-slate-200 group-hover:text-purple-600 dark:group-hover:text-purple-400 line-clamp-2 leading-snug">
+        {title}
+      </h4>
+      <p class="text-[11px] text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+        {summary}
+      </p>
+      <div class="pt-1 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+        <span class="text-purple-600/80 dark:text-purple-400/80 font-medium">#{spec}</span>
+        <span class="text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 font-semibold">arXiv.org ↗</span>
+      </div>
+    </a>"""
+
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -2192,16 +2372,31 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         if m:
             video_id = m.group(1)
 
-    title = safe_text((lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", ""), 100)
-    title_esc = title.replace("'", "\\'").replace('"', '&quot;')
-    author = safe_text(lead_media.get("source") or lead_media.get("author") or "AI Engineer", 32)
+    raw_t = (lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", "")
+    if not is_zh and re.search(r'[一-鿿]', raw_t):
+        raw_t = re.sub(r'[一-鿿]+', '', raw_t).strip() or "Frontier AI Hands-on Review"
+    title = safe_text(raw_t, 100)
+    title_esc = title.replace("'", "\'").replace('"', '&quot;')
+    
+    raw_auth = lead_media.get("source") or lead_media.get("author") or "AI Engineer"
+    if not is_zh and re.search(r'[一-鿿]', raw_auth):
+        raw_auth = "AI Tech Reviewer"
+    author = safe_text(raw_auth, 32)
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
     url = lead_media.get("url") or "#"
     diff_h = lead_media.get("diff_hours", 12.0)
     time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
 
     tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
-    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">{safe_text(t, 16)}</span>' for t in tags[:2]])
+    clean_tags = []
+    for t in tags[:2]:
+        if not is_zh and re.search(r'[一-鿿]', t):
+            continue
+        clean_tags.append(t)
+    if not clean_tags:
+        clean_tags = ["#HandsOn", "#AI"]
+
+    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20">{safe_text(t, 16)}</span>' for t in clean_tags])
 
     lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
     lead_source_text = "原片 ↗" if is_zh else "Source ↗"
@@ -2220,18 +2415,18 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         fallback_poster = poster_url
 
     return f"""
-    <article class="flex flex-col justify-between bg-slate-900/95 dark:bg-slate-950/95 rounded-2xl border border-indigo-500/40 dark:border-indigo-500/50 p-3 shadow-md relative overflow-hidden group/vcard text-white h-full" style="height: 180px; max-height: 180px; overflow: hidden;">
+    <article class="flex flex-col justify-between bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-3 shadow-sm hover:shadow-md transition-all relative overflow-hidden group/vcard text-slate-800 dark:text-slate-200 h-full ring-1 ring-slate-900/5 dark:ring-white/5" style="height: 180px; max-height: 180px; overflow: hidden;">
       <div class="flex items-start justify-between gap-2 shrink-0 h-8">
         <div class="flex items-center space-x-2 min-w-0">
-          <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/60 shrink-0">
+          <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/40 shrink-0">
             <span>▶</span>
           </div>
           <div class="min-w-0">
             <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-100 truncate leading-none">{author}</span>
-              <span class="text-rose-400 text-[10px] font-black leading-none">●</span>
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
-            <div class="text-[10px] text-slate-400 font-mono truncate leading-none mt-1">
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
               {'YouTube 极客实测' if is_zh else 'YouTube Lab'} · {time_badge}
             </div>
           </div>
@@ -2245,14 +2440,14 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
       </div>
 
       <div class="flex items-center gap-2.5 my-0.5 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-black cursor-pointer group/thumb border border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
           <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
             <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
           </div>
         </div>
         <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
-          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-100 hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="{title}">
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="{title}">
             {title}
           </a>
           <div class="flex items-center gap-1 overflow-hidden mt-1">
@@ -2261,20 +2456,39 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         </div>
       </div>
 
-      <div class="flex items-center justify-between pt-1.5 border-t border-slate-800/80 text-[10px] text-slate-400 shrink-0">
-        <span class="font-mono text-slate-400">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
+      <div class="flex items-center justify-between pt-1.5 border-t border-slate-100 dark:border-slate-800/80 text-[10px] text-slate-500 dark:text-slate-400 shrink-0">
+        <span class="font-mono text-slate-400 dark:text-slate-500">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
         <div class="flex items-center gap-2">
-          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-400 hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
             <span>{lead_play_text}</span>
           </button>
-          <span class="text-slate-600">·</span>
-          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-slate-200 font-semibold hover:underline">
+          <span class="text-slate-300 dark:text-slate-700">·</span>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline">
             <span>{lead_source_text}</span>
           </a>
         </div>
       </div>
     </article>
     """
+
+
+def build_pinned_slider_html(cards: list) -> str:
+    if not cards:
+        return ""
+    if len(cards) == 1:
+        return cards[0]
+    slides_html = "\n".join([f'<div class="pinned-slide-item shrink-0 w-full" style="height: 180px; max-height: 180px;">\n{card}\n</div>' for card in cards[:2]])
+    return f"""
+    <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned" style="height: 180px; max-height: 180px;">
+      <div id="pinned-slider-track" class="flex flex-col transition-transform duration-700 ease-out h-full" style="transform: translateY(0px);">
+        {slides_html}
+      </div>
+      <div class="absolute bottom-2 right-2 flex items-center gap-1 z-10 pointer-events-none">
+        <span id="pinned-dot-0" class="w-3 h-1.5 rounded-full bg-rose-500 transition-all"></span>
+        <span id="pinned-dot-1" class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 transition-all"></span>
+      </div>
+    </div>"""
+
 def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     """
     重构首页置顶专栏为高颜值、等高紧凑、彻底杜绝形变的三卡片并列布局：
@@ -2470,6 +2684,17 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
     """
     recent_dates = daily_dates[-12:] if daily_dates else ["2026-09-24", "2026-09-23"]
 
+    latest_json_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+    if not os.path.exists(latest_json_path):
+        latest_json_path = os.path.join(DATA_DIR, "latest_news.json")
+    payload = {}
+    if os.path.exists(latest_json_path):
+        try:
+            with open(latest_json_path, "r", encoding="utf-8") as f_json:
+                payload = json.load(f_json)
+        except Exception:
+            payload = {}
+
     if not topic_focus:
         try:
             from topic_cluster import load_latest_topic_focus
@@ -2539,8 +2764,28 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     break
 
         # 次级置顶：48h 极客实测视频精选
-        lead_media_en = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
-        lead_video_card_en = format_lead_video_card(lead_media_en, is_zh=False) if lead_media_en else ""
+        all_videos_list = payload.get("grouped", {}).get("videos", []) or []
+        lead_media_1_en = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
+        lead_media_2_en = None
+        if hero_media_showcase and isinstance(hero_media_showcase.get("lead_medias"), list) and len(hero_media_showcase["lead_medias"]) > 1:
+            lead_media_2_en = hero_media_showcase["lead_medias"][1]
+        elif all_videos_list:
+            m1_url = (lead_media_1_en.get("url") or "") if lead_media_1_en else ""
+            m1_id = (lead_media_1_en.get("video_id") or "") if lead_media_1_en else ""
+            for v in all_videos_list:
+                if (v.get("url") or "") != m1_url and (not m1_id or (v.get("video_id") or "") != m1_id):
+                    lead_media_2_en = v
+                    break
+
+        pinned_cards_en = []
+        if lead_media_1_en:
+            c1 = format_lead_video_card(lead_media_1_en, is_zh=False)
+            if c1: pinned_cards_en.append(c1)
+        if lead_media_2_en:
+            c2 = format_lead_video_card(lead_media_2_en, is_zh=False)
+            if c2: pinned_cards_en.append(c2)
+
+        lead_video_card_en = build_pinned_slider_html(pinned_cards_en)
 
         total_ticker_pages_en = 1
         if pinned_tibo_en:
@@ -2939,6 +3184,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_arena, en_content, re.DOTALL):
             en_content = re.sub(pattern_arena, r'\1\n' + arena_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
 
+        # 静态预渲染下方全部核心栏目 (杜绝空白，SEO 与离线双保险)
+        tools_list_en = (payload.get("grouped", {}).get("tools") or payload.get("tools") or [])[:3]
+        tools_en_html = "\n".join([format_static_tool_card(it, is_zh=False) for it in tools_list_en])
+        en_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+
+        videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:2]
+        videos_en_html = "\n".join([format_static_video_card(it, is_zh=False) for it in videos_list_en])
+        en_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+
+        prompts_list_en = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list if v.get("is_prompt")])[:3]
+        prompts_en_html = "\n".join([format_static_prompt_card(it, is_zh=False) for it in prompts_list_en])
+        en_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+
+        arxiv_list_en = (payload.get("arxiv_papers", []) or [])[:6]
+        arxiv_en_html = "\n".join([format_static_arxiv_card(it, is_zh=False) for it in arxiv_list_en])
+        en_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_en_html}\n        {m.group(2)}", en_content, flags=re.DOTALL)
+
         # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
         en_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
                             '', en_content, flags=re.DOTALL)
@@ -3080,8 +3342,28 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     break
 
         # 次级置顶：48h 极客实测视频精选
-        lead_media_zh = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
-        lead_video_card_zh = format_lead_video_card(lead_media_zh, is_zh=True) if lead_media_zh else ""
+        all_videos_list_zh = payload.get("grouped", {}).get("videos", []) or []
+        lead_media_1_zh = (hero_media_showcase.get("lead_media") or hero_media_showcase.get("video")) if hero_media_showcase else None
+        lead_media_2_zh = None
+        if hero_media_showcase and isinstance(hero_media_showcase.get("lead_medias"), list) and len(hero_media_showcase["lead_medias"]) > 1:
+            lead_media_2_zh = hero_media_showcase["lead_medias"][1]
+        elif all_videos_list_zh:
+            m1_url = (lead_media_1_zh.get("url") or "") if lead_media_1_zh else ""
+            m1_id = (lead_media_1_zh.get("video_id") or "") if lead_media_1_zh else ""
+            for v in all_videos_list_zh:
+                if (v.get("url") or "") != m1_url and (not m1_id or (v.get("video_id") or "") != m1_id):
+                    lead_media_2_zh = v
+                    break
+
+        pinned_cards_zh = []
+        if lead_media_1_zh:
+            c1 = format_lead_video_card(lead_media_1_zh, is_zh=True)
+            if c1: pinned_cards_zh.append(c1)
+        if lead_media_2_zh:
+            c2 = format_lead_video_card(lead_media_2_zh, is_zh=True)
+            if c2: pinned_cards_zh.append(c2)
+
+        lead_video_card_zh = build_pinned_slider_html(pinned_cards_zh)
 
         total_ticker_pages_zh = 1
         if pinned_tibo_zh:
@@ -3393,6 +3675,23 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
 
         if re.search(pattern_arena, zh_content, re.DOTALL):
             zh_content = re.sub(pattern_arena, r'\1\n' + arena_cards_zh_html + r'\n            \3', zh_content, flags=re.DOTALL)
+
+        # 静态预渲染下方全部核心栏目 (杜绝空白，SEO 与离线双保险)
+        tools_list_zh = (payload.get("grouped", {}).get("tools") or payload.get("tools") or [])[:3]
+        tools_zh_html = "\n".join([format_static_tool_card(it, is_zh=True) for it in tools_list_zh])
+        zh_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+
+        videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:2]
+        videos_zh_html = "\n".join([format_static_video_card(it, is_zh=True) for it in videos_list_zh])
+        zh_content = re.sub(r'(<div [^>]*id="stream-videos"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{videos_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+
+        prompts_list_zh = (payload.get("grouped", {}).get("prompts") or [v for v in all_videos_list_zh if v.get("is_prompt")])[:3]
+        prompts_zh_html = "\n".join([format_static_prompt_card(it, is_zh=True) for it in prompts_list_zh])
+        zh_content = re.sub(r'(<div [^>]*id="stream-prompts"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{prompts_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+
+        arxiv_list_zh = (payload.get("arxiv_papers", []) or [])[:6]
+        arxiv_zh_html = "\n".join([format_static_arxiv_card(it, is_zh=True) for it in arxiv_list_zh])
+        zh_content = re.sub(r'(<div [^>]*id="stream-arxiv"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{arxiv_zh_html}\n        {m.group(2)}", zh_content, flags=re.DOTALL)
 
         # 应用户明确要求，彻底移除首页底部的 Adsense 归档板块 (intelligence-archive-hub)
         zh_content = re.sub(r'<!-- ={10} STATIC_HUB_NAVIGATION_START ={10} -->.*?<!-- ={10} STATIC_HUB_NAVIGATION_END ={10} -->',
