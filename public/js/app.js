@@ -4018,6 +4018,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // Pure CSS h-[145px] md:h-[180px] handles height with zero forced reflow and zero CLS
     }
 
+    function updateTickerPageUI(currentPage, totalPages) {
+      const el = document.getElementById('viral-ticker-page-indicator');
+      if (el) {
+        el.textContent = `${currentPage} / ${Math.max(1, totalPages || 1)}`;
+      }
+    }
+
     function flipViralTicker(direction) {
       const slider = document.getElementById('viral-ticker-slider');
       if (!slider) return;

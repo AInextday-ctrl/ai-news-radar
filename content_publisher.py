@@ -1,3 +1,8 @@
+import os
+import re
+
+ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 def format_static_tool_card(it: dict, is_zh: bool) -> str:
     app_name = it.get("app_name") or (it.get("title", "").split(":")[0] if it.get("title") else "AI Tool")
@@ -15,36 +20,73 @@ def format_static_tool_card(it: dict, is_zh: bool) -> str:
     stars = it.get("stars") or 0
     stars_display = f"★ {stars / 1000:.1f}k" if stars >= 1000 else (f"★ {stars}" if stars > 0 else "")
 
-    badge = (it.get("growth_badge_zh") if is_zh else it.get("growth_badge_en")) or "🔥 Popular"
+    badge = (it.get("growth_badge_zh") if is_zh else it.get("growth_badge_en")) or ("🔥 热门精选" if is_zh else "🔥 Popular")
     if not is_zh and re.search(r'[一-鿿]', badge):
         badge = "🔥 Popular"
 
     is_gh = it.get("tool_origin") == "github" or "github.com" in (it.get("url") or "")
     origin_pill = f'<span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub {stars_display}</span>' if is_gh else f'<span class="text-[9px] px-2 py-0.5 rounded-md bg-sky-50 dark:bg-sky-500/10 text-sky-700 dark:text-sky-300 font-mono border border-sky-200 dark:border-sky-500/20">🌐 {"免装Web" if is_zh else "Web App"}</span>'
 
-    preview_img = it.get("image_url") or ""
-    if not preview_img or "microlink.io" in preview_img:
-        preview_img = f"/assets/tool-previews/{tool_id}.webp?v=4"
+    local_webp = f"/assets/tool-previews/{tool_id}.webp?v=4"
+    local_path = os.path.join(ROOT_DIR, "public", "assets", "tool-previews", f"{tool_id}.webp")
+    remote_fallback = ""
+    if is_gh:
+        gh_match = re.search(r'github\.com/([^/]+)/([^/?#]+)', (it.get("url") or "") + " " + (it.get("official_url") or "") + " " + (it.get("source_url") or ""))
+        if gh_match and gh_match.group(1).lower() not in ['features', 'topics', 'trending', 'explore']:
+            remote_fallback = f"https://opengraph.githubassets.com/1/{gh_match.group(1)}/{re.sub(r'\.git$', '', gh_match.group(2))}"
+    elif it.get("image_url") and str(it.get("image_url")).startswith("http") and "microlink.io" not in str(it.get("image_url")):
+        remote_fallback = str(it.get("image_url"))
+
+    img_src = local_webp if os.path.exists(local_path) else (remote_fallback or local_webp)
+    fallback_attr = f' data-fallback="{remote_fallback}"' if remote_fallback and remote_fallback != img_src else ''
+    cta_label = "访问官网 ↗" if is_zh else "Explore Tool ↗"
 
     return f"""
     <article onclick="openToolDetailModal('{tool_id}')" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
-      <div class="p-3.5 space-y-2">
-        <div class="flex items-center justify-between gap-2">
-          <div class="flex items-center space-x-2 min-w-0">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
-            <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{app_name}</h4>
-          </div>
-          {origin_pill}
+      <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0 flex items-center justify-center">
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl text-emerald-400">🛠️</div>
         </div>
-        <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
-          {hook}
-        </p>
+        <img src="{img_src}"{fallback_attr} alt="{app_name}" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){{ this.src = this.dataset.fallback; }} else {{ this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }}">
+        <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
+          <div class="flex items-center space-x-1.5 border-b border-slate-800/70 pb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+            <span class="text-[10px] text-slate-400 font-mono ml-1.5">{app_name}</span>
+          </div>
+          <div class="my-auto text-xs text-slate-200">
+            <span class="text-emerald-400 font-bold">➜</span> <span class="text-emerald-300 font-mono">$ run {app_name}</span>
+          </div>
+          <div class="text-[10px] text-slate-400 font-mono">
+            {origin_pill}
+          </div>
+        </div>
+        <div class="absolute top-2.5 right-2.5 z-10">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono backdrop-blur-md border shadow-sm bg-slate-900/85 text-emerald-300 border-emerald-500/30">
+            {badge}
+          </span>
+        </div>
       </div>
-      <div class="px-3.5 pb-3 pt-1 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/60 text-xs text-slate-500">
-        <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">{badge}</span>
-        <a href="{url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
-          {'访问官网 ↗' if is_zh else 'Explore Tool ↗'}
-        </a>
+      <div class="p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+        <div class="space-y-1.5">
+          <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center space-x-2 min-w-0">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{app_name}</h4>
+            </div>
+            {origin_pill}
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
+            {hook}
+          </p>
+        </div>
+        <div class="pt-2 flex items-center justify-between border-t border-slate-100 dark:border-slate-800/60 text-xs text-slate-500">
+          <span class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">{badge}</span>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-indigo-600 dark:text-indigo-400 font-semibold hover:underline">
+            {cta_label}
+          </a>
+        </div>
       </div>
     </article>"""
 
@@ -3187,7 +3229,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         # 静态预渲染下方全部核心栏目 (杜绝空白，SEO 与离线双保险)
         tools_list_en = (payload.get("grouped", {}).get("tools") or payload.get("tools") or [])[:3]
         tools_en_html = "\n".join([format_static_tool_card(it, is_zh=False) for it in tools_list_en])
-        en_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
+        pattern_tools_en = r'(<div [^>]*id="stream-tools"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_tools_en, en_content):
+            en_content = re.sub(pattern_tools_en, lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(3)}", en_content, count=1)
+        else:
+            en_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_en_html}\n            {m.group(2)}", en_content, flags=re.DOTALL)
 
         videos_list_en = [v for v in all_videos_list if not v.get("is_prompt")][:2]
         videos_en_html = "\n".join([format_static_video_card(it, is_zh=False) for it in videos_list_en])
@@ -3679,7 +3725,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         # 静态预渲染下方全部核心栏目 (杜绝空白，SEO 与离线双保险)
         tools_list_zh = (payload.get("grouped", {}).get("tools") or payload.get("tools") or [])[:3]
         tools_zh_html = "\n".join([format_static_tool_card(it, is_zh=True) for it in tools_list_zh])
-        zh_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
+        pattern_tools_zh = r'(<div [^>]*id="stream-tools"[^>]*>)([\s\S]*?)(</div>\s*</div>\s*<div class="pt-2 border-t)'
+        if re.search(pattern_tools_zh, zh_content):
+            zh_content = re.sub(pattern_tools_zh, lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(3)}", zh_content, count=1)
+        else:
+            zh_content = re.sub(r'(<div [^>]*id="stream-tools"[^>]*>)\s*<!--.*?-->\s*(</div>)', lambda m: f"{m.group(1)}\n{tools_zh_html}\n            {m.group(2)}", zh_content, flags=re.DOTALL)
 
         videos_list_zh = [v for v in all_videos_list_zh if not v.get("is_prompt")][:2]
         videos_zh_html = "\n".join([format_static_video_card(it, is_zh=True) for it in videos_list_zh])
