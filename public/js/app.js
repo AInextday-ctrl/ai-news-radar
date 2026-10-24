@@ -9916,8 +9916,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         window.open(xUrl, '_blank', 'noopener,noreferrer');
       } else if (platform === 'threads') {
         const hashtag = isZh ? '#AI #人工智能 #AINewsRadar' : '#AI #AINewsRadar';
-        const threadsText = `${shareTitle}\n\n${shareUrl}\n\n${hashtag}`;
-        const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+        const threadsText = `${shareTitle}\n\n${hashtag}`;
+        const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}&url=${encodeURIComponent(shareUrl)}`;
         window.open(thUrl, '_blank', 'noopener,noreferrer');
       } else if (platform === 'instagram') {
         const igCaption = `${shareTitle}\n\n${cleanSnippet}\n\n🔗 Radar: ${shareUrl}\n\n#AI #ArtificialIntelligence #TechNews #AINewsRadar`;
@@ -10006,8 +10006,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
       const hashtag = isZh ? '#AI #人工智能 #AINewsRadar' : '#AI #AINewsRadar';
-      const threadsText = `${cleanTitle}\n\n${shareUrl}\n\n${hashtag}`;
-      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+      const threadsText = `${cleanTitle}\n\n${hashtag}`;
+      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}&url=${encodeURIComponent(shareUrl)}`;
       window.open(thUrl, '_blank', 'noopener,noreferrer');
     }
 
@@ -10065,8 +10065,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const cleanTitle = title.replace(/<[^>]+>/g, '').trim().slice(0, 120);
       const hashtag = isZh ? '#AI #AITools #人工智能 #AINewsRadar' : '#AITools #AINewsRadar';
-      const threadsText = `🛠️ ${cleanTitle}\n\n${shareUrl}\n\n${hashtag}`;
-      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+      const threadsText = `🛠️ ${cleanTitle}\n\n${hashtag}`;
+      const thUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}&url=${encodeURIComponent(shareUrl)}`;
       window.open(thUrl, '_blank', 'noopener,noreferrer');
     }
 
