@@ -732,6 +732,24 @@ def generate_all_landing_pages():
     for d in (en_tools_dir, zh_tools_dir, en_news_dir, zh_news_dir):
         os.makedirs(d, exist_ok=True)
 
+    # Also load historical news items from archive that already have landing pages
+    archive_path = os.path.join(WORKSPACE_DIR, 'public', 'data', 'archive_news.json')
+    if os.path.exists(archive_path):
+        try:
+            with open(archive_path, 'r', encoding='utf-8') as af:
+                arch_data = json.load(af)
+            arch_items = arch_data.get('items', []) if isinstance(arch_data, dict) else (arch_data if isinstance(arch_data, list) else [])
+            existing_ids = {n.get('id') for n in news if n.get('id')}
+            for it in arch_items:
+                i_id = it.get('id')
+                if i_id and i_id not in existing_ids:
+                    target_file = os.path.join(en_news_dir, f'{i_id}.html')
+                    if os.path.exists(target_file):
+                        news.append(it)
+                        existing_ids.add(i_id)
+        except Exception as e:
+            print('Archive load note:', e)
+
     print(f"🚀 Generating {len(tools)} tools and {len(news)} news landing pages...")
 
     # 1. Tools
