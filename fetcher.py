@@ -579,19 +579,64 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
                     result["description"] = desc_cand
 
             # 深度提取落地页真实正文段落 (Article Body Paragraphs / Q&A 实录)
-            paras = re.findall(r'<p[^>]*>(.*?)</p>', html_text, flags=re.DOTALL)
-            clean_paras = [html.unescape(re.sub(r'<[^>]+>', '', p)).strip() for p in paras]
-            clean_paras = [
-                p for p in clean_paras 
-                if len(p) > 60 and not any(bad in p.lower() for bad in [
-                    "sign in", "close menu", "search query", "opens in new tab", "cookie",
-                    "newsletter", "subscribe", "sign up", "read more", "all rights reserved",
-                    "terms of service", "privacy policy", "advertisement", "enable javascript",
-                    "share this", "follow us", "click here", "copyright", "photo by", "getty images"
-                ]) and not p.startswith("(") and not p.startswith("（")
-            ]
+            # 1. 净化 HTML：彻底剔除脚本、样式、导航、页眉、页脚、侧边栏、弹窗与表单
+            clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)
+            clean_html = re.sub(r'<div[^>]+(?:class|id)=["\x27][^"\x27]*(?:header|navbar|menu|navigation|sidebar|footer|cookie|banner|share|modal|popup|login|ad-|advertisement)[^"\x27]*["\x27][^>]*>.*?</\s*div\s*>', ' ', clean_html, flags=re.DOTALL | re.I)
+
+            # 2. 优先锁定正文语义容器：在 <main>, <article>, .article-body, .story-body 中挑选内容最充实 (段落最多且总长度最大) 的容器
+            candidate_containers = []
+            for m in re.finditer(r'<(?:main|article)[^>]*>(.*?)</(?:main|article)>', clean_html, flags=re.DOTALL | re.I):
+                candidate_containers.append(m.group(1))
+            for m in re.finditer(r'<div[^>]+(?:class|id)=["\x27][^"\x27]*(?:article-body|article-content|entry-content|post-content|story-body|main-content)[^"\x27]*["\x27][^>]*>(.*?)</div>', clean_html, flags=re.DOTALL | re.I):
+                candidate_containers.append(m.group(1))
+            
+            best_container = clean_html
+            best_score = 0
+            for c in candidate_containers:
+                c_paras = re.findall(r'<p[^>]*>.*?</p>', c, flags=re.DOTALL | re.I)
+                score = len(c_paras) * 1000 + len(c)
+                if score > best_score and len(c_paras) >= 2:
+                    best_score = score
+                    best_container = c
+            scoped_html = best_container
+
+            paras = re.findall(r'<p[^>]*>(.*?)</p>', scoped_html, flags=re.DOTALL | re.I)
+            clean_paras = []
+            seen_paras = set()
+            for p in paras:
+                p_text = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', p)).split()).strip()
+                if len(p_text) < 50 or len(p_text) > 4000:
+                    continue
+                p_lower = p_text.lower()
+                
+                # 排除导航菜单、登录注册、免责声明等站点噪声
+                if any(bad in p_lower for bad in [
+                    "sign in", "log in", "login", "sign up", "client portal", "fund login", "cais login",
+                    "general public", "institutional investor", "public shareholder", "wealth professional",
+                    "advisor resource", "insights & news", "about us", "about apollo", "what we do", "who we are",
+                    "close menu", "search query", "opens in new tab", "cookie", "newsletter", "subscribe",
+                    "all rights reserved", "terms of service", "terms of use", "privacy policy", "advertisement",
+                    "enable javascript", "share this", "follow us", "click here", "copyright", "photo by", "getty images",
+                    "this presentation may not be distributed", "past performance", "watch the class", "register now",
+                    "get daily data-driven insights", "delivered right to your inbox", "view all", "back to top"
+                ]):
+                    continue
+                if p_text.startswith("(") or p_text.startswith("（"):
+                    continue
+
+                # 排除缺乏句读标点（即无 . ! ? 。 ！ ？ ; ；）的单纯词条与标题链
+                if not re.search(r'[.!?。！？;；]', p_text):
+                    continue
+
+                # 去重校验
+                p_norm = re.sub(r'\s+', '', p_lower[:60])
+                if p_norm in seen_paras:
+                    continue
+                seen_paras.add(p_norm)
+                clean_paras.append(p_text)
+
             if clean_paras:
-                result["article_content"] = "\n\n".join(clean_paras[:30])
+                result["article_content"] = "\n\n".join(clean_paras[:35])
 
             # 仅当落地页能提取到真实独立视频播放链接时才标记视频，严禁将普通网页文章 URL 赋给 video_url
             m_embed = re.search(r'(?:youtube\.com/embed/|player\.vimeo\.com/video/)([\w\-]+)', html_text, re.I)

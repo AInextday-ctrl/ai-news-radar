@@ -230,23 +230,53 @@ def free_translate_zh(text: str) -> str:
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # 对多段落长推文/长资讯，按段落分组翻译，杜绝截断并完美保持原格式排版与空行
-    if "\n" in body_text and len(body_text) > 300:
+    # 对包含换行的推文/长资讯，按段落分组为合理大小的 chunk (<=1600字符) 翻译，
+    # 既杜绝单个段落调用数十次网络请求导致的超时，又能 100% 保持段落与空行排版结构
+    if "\n" in body_text:
         paragraphs = body_text.split("\n\n")
-        translated_paragraphs = []
+        chunks = []
+        cur_chunk = []
+        cur_len = 0
         for p in paragraphs:
             p_strip = p.strip()
             if not p_strip:
-                translated_paragraphs.append("")
                 continue
-            # 单段超长时按换行或整句细分
             if len(p_strip) > 1800:
+                if cur_chunk:
+                    chunks.append("\n\n".join(cur_chunk))
+                    cur_chunk = []
+                    cur_len = 0
                 sub_lines = p_strip.split("\n")
-                sub_trans = [_translate_single_chunk_zh(sl) if sl.strip() else "" for sl in sub_lines]
-                translated_paragraphs.append("\n".join(sub_trans))
+                sub_chunk = []
+                sub_len = 0
+                for sl in sub_lines:
+                    sl_s = sl.strip()
+                    if sub_len + len(sl_s) > 1500 and sub_chunk:
+                        chunks.append("\n".join(sub_chunk))
+                        sub_chunk = [sl_s]
+                        sub_len = len(sl_s)
+                    else:
+                        sub_chunk.append(sl_s)
+                        sub_len += len(sl_s) + 1
+                if sub_chunk:
+                    chunks.append("\n".join(sub_chunk))
+            elif cur_len + len(p_strip) > 1600 and cur_chunk:
+                chunks.append("\n\n".join(cur_chunk))
+                cur_chunk = [p_strip]
+                cur_len = len(p_strip)
             else:
-                translated_paragraphs.append(_translate_single_chunk_zh(p_strip))
-        full_zh = "\n\n".join(translated_paragraphs).strip()
+                cur_chunk.append(p_strip)
+                cur_len += len(p_strip) + 2
+        if cur_chunk:
+            chunks.append("\n\n".join(cur_chunk))
+
+        if len(chunks) > 1:
+            trans_chunks = [_translate_single_chunk_zh(c) for c in chunks if c.strip()]
+            full_zh = "\n\n".join(trans_chunks).strip()
+        elif chunks:
+            full_zh = _translate_single_chunk_zh(chunks[0])
+        else:
+            full_zh = _translate_single_chunk_zh(body_text)
     else:
         full_zh = _translate_single_chunk_zh(body_text)
 
@@ -510,8 +540,10 @@ AGGREGATOR_NOISE_RULES = [
 ]
 
 
-def clean_news_text(text: str) -> str:
-    """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes."""
+def clean_news_text(text: str, preserve_paragraphs: bool = False) -> str:
+    """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes.
+    When preserve_paragraphs=True, maintains exact paragraph boundaries (\n\n) and line breaks (\n).
+    """
     if not text:
         return ""
     t = html.unescape(text)
@@ -535,11 +567,25 @@ def clean_news_text(text: str) -> str:
     t = re.sub(r'[\(（][^()（）]*?/[^()（）]*?[\)）][。.\s]*$', '', t)
     t = re.sub(r'[\(（][^()（）]*?(?:译|文|图|编辑)[）\)][。.\s]*$', '', t)
     
-    # 4. 清理连续重复符号与空白，并执行术语规范化
+    # 4. 清理连续重复符号与术语规范化
     t = normalize_ai_terminology_zh(t)
     t = re.sub(r'([。！？；，、])\1+', r'\1', t)
-    t = re.sub(r'\s+', ' ', t).strip()
-    return t
+    
+    if preserve_paragraphs:
+        # 严格保持换行与段落排版：统一换行符，清理行内多余空格，严禁抹杀段落为空格
+        t = t.replace('\r\n', '\n').replace('\r', '\n')
+        lines = [re.sub(r'[^\S\n]+', ' ', line).strip() for line in t.split('\n')]
+        t = '\n'.join(lines)
+        t = re.sub(r'\n{3,}', '\n\n', t).strip()
+        return t
+    else:
+        t = re.sub(r'\s+', ' ', t).strip()
+        return t
+
+
+def clean_multiline_text(text: str) -> str:
+    """Helper to clean multi-line content (tweets, articles, code, tutorials) with 100% newline fidelity."""
+    return clean_news_text(text, preserve_paragraphs=True)
 
 
 def compute_title_summary_overlap(title_zh: str, summary_zh: str) -> float:
@@ -1022,25 +1068,30 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         elif any('\u4e00' <= c <= '\u9fff' for c in val_quote_en):
             item["quote_en"] = free_translate_en(val_quote_en)
 
-        # 4.2 确保中文全文完整对应 (解决历史严重截断与折叠内容未翻译问题)
+        # 4.2 确保中文全文完整对应 (解决历史严重截断与折叠内容未翻译问题，并保持换行排版)
         val_full_zh = str(item.get("full_text_zh") or "").strip()
+        en_newlines = len(val_full_en.splitlines())
+        zh_newlines = len(val_full_zh.splitlines())
         needs_full_retrans = (
             not val_full_zh 
             or not any('\u4e00' <= c <= '\u9fff' for c in val_full_zh)
             or (len(val_full_en) > 200 and (len(val_full_zh) < 100 or len(val_full_zh) < len(val_full_en) * 0.35))
+            or (en_newlines >= 3 and zh_newlines <= 1)
         )
         if needs_full_retrans and val_full_en:
-            item["full_text_zh"] = clean_news_text(free_translate_zh(val_full_en))
+            item["full_text_zh"] = clean_multiline_text(free_translate_zh(val_full_en))
         elif val_full_zh:
-            item["full_text_zh"] = clean_news_text(val_full_zh)
+            item["full_text_zh"] = clean_multiline_text(val_full_zh)
 
         # 4.3 确保中文引用
         val_quote_zh = str(item.get("quote_zh") or "").strip()
-        if not val_quote_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_quote_zh):
-            source_q_en = item.get("quote_en") or (val_full_en[:200] if val_full_en else "")
-            item["quote_zh"] = clean_news_text(free_translate_zh(source_q_en))
+        source_q_en = item.get("quote_en") or (val_full_en[:200] if val_full_en else "")
+        q_en_newlines = len(str(source_q_en).splitlines())
+        q_zh_newlines = len(val_quote_zh.splitlines())
+        if not val_quote_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_quote_zh) or (q_en_newlines >= 3 and q_zh_newlines <= 1):
+            item["quote_zh"] = clean_multiline_text(free_translate_zh(source_q_en))
         else:
-            item["quote_zh"] = clean_news_text(val_quote_zh)
+            item["quote_zh"] = clean_multiline_text(val_quote_zh)
 
         if item.get("author_role_en") and any('\u4e00' <= c <= '\u9fff' for c in str(item["author_role_en"])):
             item["author_role_en"] = free_translate_en(str(item["author_role_en"]))
@@ -1057,12 +1108,16 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
             else:
                 item["author_en"] = raw_author or "AI Pioneer"
 
-    # 4.6 深度报道 news 类别保障文章长正文 article_content_zh 双语对称
+    # 4.6 深度报道 news 类别保障文章长正文 article_content_zh 双语对称并保持段落排版
     if item.get("category") == "news":
         raw_art_en = str(item.get("article_content") or item.get("article_content_en") or "").strip()
         art_zh = str(item.get("article_content_zh") or "").strip()
-        if raw_art_en and (not art_zh or not any('\u4e00' <= c <= '\u9fff' for c in art_zh)):
-            item["article_content_zh"] = clean_news_text(free_translate_zh(raw_art_en))
+        art_en_lines = len(raw_art_en.splitlines())
+        art_zh_lines = len(art_zh.splitlines())
+        if raw_art_en and (not art_zh or not any('\u4e00' <= c <= '\u9fff' for c in art_zh) or (art_en_lines >= 3 and art_zh_lines <= 1)):
+            item["article_content_zh"] = clean_multiline_text(free_translate_zh(raw_art_en))
+        elif art_zh:
+            item["article_content_zh"] = clean_multiline_text(art_zh)
 
     # 5. spec_tags_en 0 中文
     if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):
@@ -1290,17 +1345,25 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                     s_en = free_translate_en(str(s_en))
                 merged["summary_en"] = s_en
 
-                # 针对大V社交与快讯，严格保障引用与全文双语独立精翻，绝不混淆
+                # 针对大V社交与快讯，严格保障引用与全文双语独立精翻，绝不混淆，100%保真换行排版
                 if merged.get("category") == "celebrity":
                     val_full_en = str(merged.get("full_text_en") or orig_item.get("full_text_en") or orig_item.get("content_snippet") or orig_item.get("quote_en") or orig_item.get("title_en") or "").strip()
                     val_full_zh = str(merged.get("full_text_zh") or orig_item.get("full_text_zh") or "").strip()
-                    if val_full_en and (not val_full_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_full_zh) or (len(val_full_en) > 200 and (len(val_full_zh) < 100 or len(val_full_zh) < len(val_full_en) * 0.35))):
-                        merged["full_text_zh"] = clean_news_text(free_translate_zh(val_full_en))
+                    val_full_lines = len(val_full_en.splitlines())
+                    val_full_zh_lines = len(val_full_zh.splitlines())
+                    if val_full_en and (not val_full_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_full_zh) or (len(val_full_en) > 200 and (len(val_full_zh) < 100 or len(val_full_zh) < len(val_full_en) * 0.35)) or (val_full_lines >= 3 and val_full_zh_lines <= 1)):
+                        merged["full_text_zh"] = clean_multiline_text(free_translate_zh(val_full_en))
+                    elif val_full_zh:
+                        merged["full_text_zh"] = clean_multiline_text(val_full_zh)
                     
                     val_q_en = str(merged.get("quote_en") or orig_item.get("quote_en") or (val_full_en[:200] if val_full_en else "") or "").strip()
                     val_q_zh = str(merged.get("quote_zh") or orig_item.get("quote_zh") or "").strip()
-                    if val_q_en and (not val_q_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_q_zh)):
-                        merged["quote_zh"] = clean_news_text(free_translate_zh(val_q_en))
+                    q_en_lines = len(val_q_en.splitlines())
+                    q_zh_lines = len(val_q_zh.splitlines())
+                    if val_q_en and (not val_q_zh or not any('\u4e00' <= c <= '\u9fff' for c in val_q_zh) or (q_en_lines >= 3 and q_zh_lines <= 1)):
+                        merged["quote_zh"] = clean_multiline_text(free_translate_zh(val_q_en))
+                    elif val_q_zh:
+                        merged["quote_zh"] = clean_multiline_text(val_q_zh)
                     
                     if val_full_en:
                         merged["full_text_en"] = free_translate_en(val_full_en) if any('\u4e00' <= c <= '\u9fff' for c in val_full_en) else val_full_en
