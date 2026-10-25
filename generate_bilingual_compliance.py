@@ -57,7 +57,7 @@ def build_english_about():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/about" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
+        <a href="/zh/about" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -189,7 +189,7 @@ def build_english_editorial_policy():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/editorial-policy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
+        <a href="/zh/editorial-policy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -300,7 +300,7 @@ def build_english_contact():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/contact" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
+        <a href="/zh/contact" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -465,7 +465,7 @@ def build_english_privacy():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/privacy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
+        <a href="/zh/privacy" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>
@@ -577,7 +577,7 @@ def build_english_terms():
         </div>
       </a>
       <div class="flex items-center space-x-4">
-        <a href="/zh/terms" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>
+        <a href="/zh/terms" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>
         <a href="/" class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition-colors">← Back to Radar</a>
       </div>
     </div>

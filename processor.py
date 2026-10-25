@@ -230,53 +230,27 @@ def free_translate_zh(text: str) -> str:
     if body_text in _TRANSLATION_CACHE:
         return prefix + _TRANSLATION_CACHE[body_text]
 
-    # 对包含换行的推文/长资讯，按段落分组为合理大小的 chunk (<=1600字符) 翻译，
-    # 既杜绝单个段落调用数十次网络请求导致的超时，又能 100% 保持段落与空行排版结构
+    # 对包含换行的推文/长资讯，严格按段落与换行分拆翻译并精准拼接，
+    # 彻底杜绝翻译引擎将多段落抹平为单行纯文本的严重排版崩坏问题
     if "\n" in body_text:
-        paragraphs = body_text.split("\n\n")
-        chunks = []
-        cur_chunk = []
-        cur_len = 0
-        for p in paragraphs:
-            p_strip = p.strip()
-            if not p_strip:
-                continue
-            if len(p_strip) > 1800:
-                if cur_chunk:
-                    chunks.append("\n\n".join(cur_chunk))
-                    cur_chunk = []
-                    cur_len = 0
-                sub_lines = p_strip.split("\n")
-                sub_chunk = []
-                sub_len = 0
-                for sl in sub_lines:
-                    sl_s = sl.strip()
-                    if sub_len + len(sl_s) > 1500 and sub_chunk:
-                        chunks.append("\n".join(sub_chunk))
-                        sub_chunk = [sl_s]
-                        sub_len = len(sl_s)
-                    else:
-                        sub_chunk.append(sl_s)
-                        sub_len += len(sl_s) + 1
-                if sub_chunk:
-                    chunks.append("\n".join(sub_chunk))
-            elif cur_len + len(p_strip) > 1600 and cur_chunk:
-                chunks.append("\n\n".join(cur_chunk))
-                cur_chunk = [p_strip]
-                cur_len = len(p_strip)
-            else:
-                cur_chunk.append(p_strip)
-                cur_len += len(p_strip) + 2
-        if cur_chunk:
-            chunks.append("\n\n".join(cur_chunk))
-
-        if len(chunks) > 1:
-            trans_chunks = [_translate_single_chunk_zh(c) for c in chunks if c.strip()]
-            full_zh = "\n\n".join(trans_chunks).strip()
-        elif chunks:
-            full_zh = _translate_single_chunk_zh(chunks[0])
+        if "\n\n" in body_text:
+            paragraphs = body_text.split("\n\n")
+            trans_paragraphs = []
+            for p in paragraphs:
+                p_strip = p.strip()
+                if not p_strip:
+                    continue
+                if "\n" in p_strip:
+                    lines = [line.strip() for line in p_strip.split("\n") if line.strip()]
+                    trans_lines = [_translate_single_chunk_zh(line) for line in lines]
+                    trans_paragraphs.append("\n".join([tl for tl in trans_lines if tl]))
+                else:
+                    trans_paragraphs.append(_translate_single_chunk_zh(p_strip))
+            full_zh = "\n\n".join([tp for tp in trans_paragraphs if tp]).strip()
         else:
-            full_zh = _translate_single_chunk_zh(body_text)
+            lines = [line.strip() for line in body_text.split("\n") if line.strip()]
+            trans_lines = [_translate_single_chunk_zh(line) for line in lines]
+            full_zh = "\n".join([tl for tl in trans_lines if tl]).strip()
     else:
         full_zh = _translate_single_chunk_zh(body_text)
 

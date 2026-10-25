@@ -113,7 +113,8 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         alt_en_url = f"https://ainewsradar.xyz/tools/{tool_id}"
         alt_zh_url = f"https://ainewsradar.xyz/zh/tools/{tool_id}"
         home_url = "/zh"
-        back_text = "← 返回 AI 资讯雷达"
+        back_text = "← 返回雷达首页"
+        site_brand = "AI 资讯雷达"
         overview_title = "核心功能与产品概览"
         features_title = "核心亮点与应用特性"
         best_for_title = "最适用人群与业务场景"
@@ -123,7 +124,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         share_threads_text = "分享到 Threads"
         copy_link_text = "复制分享链接"
         more_tools_title = "更多精选 AI 工具"
-        lang_switch_label = "🌐 English"
+        lang_switch_label = "🌐 切换英文 (EN)"
         quickstart_cmd = tool.get("quickstart_cmd") or ""
     else:
         display_name = sanitize_for_en(app_name_en or app_name)
@@ -137,6 +138,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         alt_zh_url = f"https://ainewsradar.xyz/zh/tools/{tool_id}"
         home_url = "/"
         back_text = "← Back to AI News Radar"
+        site_brand = "AI News Radar"
         overview_title = "Product Overview & Capabilities"
         features_title = "Key Features & Highlights"
         best_for_title = "Ideal Use Cases & Audience"
@@ -146,7 +148,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         share_threads_text = "Share on Threads"
         copy_link_text = "Copy Link"
         more_tools_title = "Explore More AI Tools"
-        lang_switch_label = "🇨🇳 Chinese Edition (/zh)"
+        lang_switch_label = "🇨🇳 Chinese Edition"
         raw_cmd = tool.get("quickstart_cmd") or ""
         quickstart_cmd = sanitize_for_en(raw_cmd)
         if not quickstart_cmd and raw_cmd:
@@ -307,7 +309,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
       <div class="flex items-center gap-3">
         <a href="{home_url}" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
           <span class="text-xl">🤖</span>
-          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">{site_brand}</span>
         </a>
         <span class="text-slate-300 dark:text-slate-700">/</span>
         <a href="{home_url}" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
@@ -495,7 +497,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         alt_en_url = f"https://ainewsradar.xyz/news/{news_id}"
         alt_zh_url = f"https://ainewsradar.xyz/zh/news/{news_id}"
         home_url = "/zh"
-        back_text = "← 返回 AI 资讯雷达"
+        back_text = "← 返回雷达首页"
+        site_brand = "AI 资讯雷达"
         briefing_title = "核心要点提炼与关键事实"
         analysis_title = "雷达专属 AI 研判与技术透视"
         official_btn_text = "📖 阅读原资讯官网报道 ↗"
@@ -504,7 +507,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         copy_link_text = "复制分享链接"
         more_news_title = "更多前沿 AI 资讯"
         source_label = "权威消息来源"
-        lang_switch_label = "🌐 English"
+        lang_switch_label = "🌐 切换英文 (EN)"
     else:
         title = sanitize_for_en(item.get("title_en") or item.get("title") or "Breaking AI Intelligence")
         summary = sanitize_for_en(item.get("summary_en") or item.get("content_snippet") or "")
@@ -517,6 +520,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         alt_zh_url = f"https://ainewsradar.xyz/zh/news/{news_id}"
         home_url = "/"
         back_text = "← Back to AI News Radar"
+        site_brand = "AI News Radar"
         briefing_title = "Executive Summary & Key Facts"
         analysis_title = "AI Radar Technical Deep-Dive"
         official_btn_text = "📖 Read Original Source Report ↗"
@@ -525,7 +529,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         copy_link_text = "Copy Link"
         more_news_title = "More Breaking AI News"
         source_label = "Primary Source"
-        lang_switch_label = "🇨🇳 Chinese Edition (/zh)"
+        lang_switch_label = "🇨🇳 Chinese Edition"
 
     raw_img = item.get("image_url") or (item.get("media_assets") and item["media_assets"].get("cover_image")) or ""
     image_url = get_optimized_og_image(raw_img, title, item.get("category", ""))
@@ -664,7 +668,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
       <div class="flex items-center gap-3">
         <a href="{home_url}" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
           <span class="text-xl">🤖</span>
-          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI News Radar</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">{site_brand}</span>
         </a>
         <span class="text-slate-300 dark:text-slate-700">/</span>
         <a href="{home_url}" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">

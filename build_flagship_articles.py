@@ -45,7 +45,7 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         canonical_url = f"https://ainewsradar.xyz/zh/articles/{article_id}"
         alt_en = f"https://ainewsradar.xyz/articles/{article_id}"
         alt_zh = f"https://ainewsradar.xyz/zh/articles/{article_id}"
-        switch_link = f'<a href="/articles/{article_id}" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇬🇧 English</a>'
+        switch_link = f'<a href="/articles/{article_id}" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🌐 切换英文 (EN)</a>'
         home_link = "/zh"
         articles_hub_link = "/zh/articles"
         home_text = "首页"
@@ -77,7 +77,7 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         canonical_url = f"https://ainewsradar.xyz/articles/{article_id}"
         alt_en = f"https://ainewsradar.xyz/articles/{article_id}"
         alt_zh = f"https://ainewsradar.xyz/zh/articles/{article_id}"
-        switch_link = f'<a href="/zh/articles/{article_id}" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>'
+        switch_link = f'<a href="/zh/articles/{article_id}" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>'
         home_link = "/"
         articles_hub_link = "/articles"
         home_text = "Home"
@@ -340,7 +340,7 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
     canonical_url = f"https://ainewsradar.xyz{hub_link}"
     alt_en = "https://ainewsradar.xyz/articles"
     alt_zh = "https://ainewsradar.xyz/zh/articles"
-    switch_link = f'<a href="/articles" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇬🇧 English</a>' if is_zh else f'<a href="/zh/articles" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese (/zh)</a>'
+    switch_link = f'<a href="/articles" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🌐 切换英文 (EN)</a>' if is_zh else f'<a href="/zh/articles" class="text-xs font-semibold px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-600 transition">🇨🇳 Chinese Edition</a>'
     about_link = "/zh/about" if is_zh else "/about"
     policy_link = "/zh/editorial-policy" if is_zh else "/editorial-policy"
     contact_link = "/zh/contact" if is_zh else "/contact"

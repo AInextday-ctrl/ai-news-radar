@@ -478,7 +478,17 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if not is_thsottiaux:
         return False
 
-    # 只要是 @thsottiaux 发出的推文，均视为 OpenAI Codex 官方核心发声与重置信号
+    # 必须明确包含 Codex reset / usage limit / quota 重置关键词，严禁把招募/闲聊/日常当重置！
+    text = f"{it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('quote_en') or ''} {it.get('quote_zh') or ''} {it.get('content_snippet') or ''}".lower()
+
+    # 明确排除招人、闲聊、喝咖啡等日常推文
+    if any(k in text for k in ["dm if you want to help scale", "coffee", "great places to hangout", "hiring", "fixing bugs while sipping coffee"]):
+        return False
+
+    reset_keywords = ["reset", "重置", "rest and reset", "quota", "usage limit", "rate limit", "limit reset", "全网重置", "配额重置", "day 20"]
+    if not any(k in text for k in reset_keywords):
+        return False
+
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_time_for_sort(it)

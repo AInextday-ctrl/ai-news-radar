@@ -289,7 +289,17 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if not is_thsottiaux:
         return False
 
-    # 只要是 @thsottiaux 发出的推文，均视为 OpenAI Codex 官方核心发声与重置信号
+    # 必须明确包含 Codex reset / usage limit / quota 重置关键词，严禁把招募/闲聊/日常当重置！
+    text = f"{it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('quote_en') or ''} {it.get('quote_zh') or ''} {it.get('content_snippet') or ''}".lower()
+
+    # 明确排除招人、闲聊、喝咖啡等日常推文
+    if any(k in text for k in ["dm if you want to help scale", "coffee", "great places to hangout", "hiring", "fixing bugs while sipping coffee"]):
+        return False
+
+    reset_keywords = ["reset", "重置", "rest and reset", "quota", "usage limit", "rate limit", "limit reset", "全网重置", "配额重置", "day 20"]
+    if not any(k in text for k in reset_keywords):
+        return False
+
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_tweet_time(it)
@@ -3309,7 +3319,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = en_content.replace('🇭🇰 繁體中文', '🇭🇰 Chinese (Traditional)')
         en_content = en_content.replace('🇯🇵 日本語', '🇯🇵 Japanese')
         en_content = en_content.replace('<span id="lang-suggest-btn-text">中文精翻版 (/zh)</span>',
-                                        '<span id="lang-suggest-btn-text">Switch to Chinese Edition (/zh)</span>')
+                                        '<span id="lang-suggest-btn-text">Switch to Chinese Edition</span>')
         en_content = en_content.replace('原帖 ↗', 'View Post ↗')
         en_content = en_content.replace('查看原帖 ↗', 'View Post ↗')
         en_content = en_content.replace('独家前沿', '⚡ FRONTIER LEAD')
@@ -3589,7 +3599,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       </div>
                     </div>
                   </div>
-                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-3">
+                  <p class="text-xs text-slate-700 dark:text-slate-300 leading-relaxed line-clamp-4 whitespace-pre-line">
                     {text_zh}
                   </p>
                 </div>
