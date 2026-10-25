@@ -891,6 +891,22 @@ def calculate_rule_scores(item: Dict[str, Any]) -> Dict[str, Any]:
             "compliance_risk": "FATAL"
         }
 
+    # 0.5 OpenAI Codex 官方负责人 / 额度重置信号享有 100分 VIP 直通
+    u_h = (item.get("author_handle") or item.get("handle") or "").lower()
+    u_url = (item.get("url") or "").lower()
+    if "thsottiaux" in u_h or "thsottiaux" in u_url:
+        return {
+            "total_score": 100,
+            "novelty_score": 25,
+            "viral_score": 25,
+            "china_score": 25,
+            "controversy_score": 15,
+            "factuality_score": 10,
+            "selection_reason": "⭐ OpenAI Codex 负责人官方重置信号 VIP 满分直通",
+            "is_fatal_sensitive": False,
+            "compliance_risk": "SAFE"
+        }
+
     # 1. 观点独特性与深度创新性 (25分) - 核心新增维度
     novelty = 19
     novelty_keywords = [

@@ -439,6 +439,49 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
 </html>
 """
 
+def extract_ai_analysis_text(analysis_data: Any, is_zh: bool) -> str:
+    """Safely extracts clean human-readable analysis text, strictly avoiding raw dict dumps."""
+    if not analysis_data:
+        return ""
+    if isinstance(analysis_data, dict):
+        if is_zh:
+            text = (
+                analysis_data.get("insight_zh")
+                or analysis_data.get("takeaway_zh")
+                or analysis_data.get("briefing_zh")
+                or analysis_data.get("digest_zh")
+                or ""
+            )
+        else:
+            text = (
+                analysis_data.get("insight_en")
+                or analysis_data.get("takeaway_en")
+                or analysis_data.get("briefing_en")
+                or analysis_data.get("digest_en")
+                or ""
+            )
+        return str(text).strip()
+    if isinstance(analysis_data, str):
+        s = analysis_data.strip()
+        if (s.startswith("{") and s.endswith("}")) or s.startswith("{'") or s.startswith('{"'):
+            try:
+                import ast
+                d = ast.literal_eval(s)
+                if isinstance(d, dict):
+                    return extract_ai_analysis_text(d, is_zh)
+            except Exception:
+                pass
+            try:
+                import json
+                d = json.loads(s)
+                if isinstance(d, dict):
+                    return extract_ai_analysis_text(d, is_zh)
+            except Exception:
+                pass
+        return s
+    return ""
+
+
 def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: List[Dict[str, Any]] = None) -> str:
     news_id = str(item.get("id") or "")
     
@@ -446,7 +489,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         title = item.get("title_zh") or item.get("title") or "AI 突发快讯"
         summary = item.get("summary_zh") or item.get("content_snippet") or ""
         fact_bullets = item.get("fact_bullets_zh") or []
-        ai_analysis = item.get("ai_analysis") or ""
+        ai_analysis = extract_ai_analysis_text(item.get("ai_analysis"), is_zh=True)
         lang_code = "zh"
         canonical_url = f"https://ainewsradar.xyz/zh/news/{news_id}"
         alt_en_url = f"https://ainewsradar.xyz/news/{news_id}"
@@ -467,7 +510,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         summary = sanitize_for_en(item.get("summary_en") or item.get("content_snippet") or "")
         fact_bullets = [sanitize_for_en(b) for b in (item.get("fact_bullets_en") or [])]
         fact_bullets = [b for b in fact_bullets if b]
-        ai_analysis = sanitize_for_en(item.get("ai_analysis_en") or "")
+        ai_analysis = sanitize_for_en(extract_ai_analysis_text(item.get("ai_analysis_en") or item.get("ai_analysis"), is_zh=False))
         lang_code = "en"
         canonical_url = f"https://ainewsradar.xyz/news/{news_id}"
         alt_en_url = f"https://ainewsradar.xyz/news/{news_id}"

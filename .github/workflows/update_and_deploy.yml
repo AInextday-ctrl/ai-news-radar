@@ -90,5 +90,5 @@ jobs:
             echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
           else
             echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
-            npx -y firebase-tools deploy --only hosting --non-interactive
+            npx -y firebase-tools deploy --only hosting --non-interactive || (echo "⚠️ 首次部署出现网络抖动，5秒后自动重试..." && sleep 5 && npx -y firebase-tools deploy --only hosting --non-interactive)
           fi

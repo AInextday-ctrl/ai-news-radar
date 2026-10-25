@@ -478,18 +478,14 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if not is_thsottiaux:
         return False
 
-    text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
-    is_reset = "reset" in text or "重置" in text
-    if not is_reset:
-        return False
-
+    # 只要是 @thsottiaux 发出的推文，均视为 OpenAI Codex 官方核心发声与重置信号
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_time_for_sort(it)
     if pub_ts <= 0:
-        return False
+        return True
     diff_sec = now_ts - pub_ts
-    return -3600 <= diff_sec <= 86400
+    return -3600 <= diff_sec <= 172800  # 48小时最高豁免期
 
 
 def is_meaningful_tweet(it: dict) -> bool:
@@ -1345,27 +1341,27 @@ def save_news(items: list):
             )
             if needs_full_trans and src_full_en:
                 try:
-                    it["full_text_zh"] = clean_news_text(free_translate_zh(src_full_en))
+                    it["full_text_zh"] = clean_news_text(free_translate_zh(src_full_en), preserve_paragraphs=True)
                 except Exception:
                     if it.get("summary_zh") and any('\u4e00' <= c <= '\u9fff' for c in str(it["summary_zh"])):
                         it["full_text_zh"] = clean_news_text(str(it["summary_zh"]))
                     else:
                         it["full_text_zh"] = "前沿 AI 技术与行业领袖深度发声。"
             elif cur_full_zh:
-                it["full_text_zh"] = clean_news_text(cur_full_zh)
+                it["full_text_zh"] = clean_news_text(cur_full_zh, preserve_paragraphs=True)
 
             src_q_en = str(it.get("quote_en") or (src_full_en[:200] if src_full_en else "") or it.get("title_en") or it.get("title") or "").strip()
             cur_q_zh = str(it.get("quote_zh") or "").strip()
             if not cur_q_zh or not any('\u4e00' <= c <= '\u9fff' for c in cur_q_zh):
                 if src_q_en:
                     try:
-                        it["quote_zh"] = clean_news_text(free_translate_zh(src_q_en))
+                        it["quote_zh"] = clean_news_text(free_translate_zh(src_q_en), preserve_paragraphs=True)
                     except Exception:
                         it["quote_zh"] = clean_news_text(str(it.get("summary_zh") or it.get("title_zh") or "前沿观点深度解析与行业研判。"))
                 elif it.get("summary_zh"):
                     it["quote_zh"] = clean_news_text(str(it["summary_zh"]))
             else:
-                it["quote_zh"] = clean_news_text(cur_q_zh)
+                it["quote_zh"] = clean_news_text(cur_q_zh, preserve_paragraphs=True)
 
         # 3.5 严格清洗落地场景·实用工具（彻底剥除第三方平台 Product Hunt / GitHub 痕迹，统一官网直连与 ref=ainewsradar）
         if it.get("category") == "tools" or it.get("platform") == "producthunt":

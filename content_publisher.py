@@ -289,18 +289,14 @@ def is_tibo_reset_tweet(it: dict, now_ts: float = None) -> bool:
     if not is_thsottiaux:
         return False
 
-    text = f"{it.get('full_text_en') or ''} {it.get('full_text_zh') or ''} {it.get('title') or ''} {it.get('title_en') or ''} {it.get('title_zh') or ''} {it.get('summary_en') or ''} {it.get('summary_zh') or ''} {it.get('content_snippet') or ''}".lower()
-    is_reset = "reset" in text or "重置" in text
-    if not is_reset:
-        return False
-
+    # 只要是 @thsottiaux 发出的推文，均视为 OpenAI Codex 官方核心发声与重置信号
     if now_ts is None:
         now_ts = time.time()
     pub_ts = parse_tweet_time(it)
     if pub_ts <= 0:
-        return False
+        return True
     diff_sec = now_ts - pub_ts
-    return -3600 <= diff_sec <= 86400
+    return -3600 <= diff_sec <= 172800  # 48小时最高豁免期
 
 
 def is_meaningful_tweet(it: dict) -> bool:

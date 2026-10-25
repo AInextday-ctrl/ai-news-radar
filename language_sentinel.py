@@ -300,14 +300,14 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
             else:
                 item["quote_zh"] = normalize_ai_terminology_zh(f"{item.get('title_zh', '科技领袖最新深度发声')}。")
         else:
-            item["quote_zh"] = normalize_ai_terminology_zh(clean_news_text(q_zh))
+            item["quote_zh"] = normalize_ai_terminology_zh(clean_news_text(q_zh, preserve_paragraphs=True))
 
         ft_zh = item.get("full_text_zh") or ""
         if not ft_zh or not is_pure_chinese_paragraph(ft_zh, min_chars=6):
             item["full_text_zh"] = item["quote_zh"]
             fixes.append("celebrity.full_text_zh 同步对齐纯中文引用")
         else:
-            item["full_text_zh"] = normalize_ai_terminology_zh(clean_news_text(ft_zh))
+            item["full_text_zh"] = normalize_ai_terminology_zh(clean_news_text(ft_zh, preserve_paragraphs=True))
 
         q_en = item.get("quote_en") or item.get("title_en") or ""
         if not q_en or has_cjk(q_en):

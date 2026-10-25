@@ -540,7 +540,7 @@ AGGREGATOR_NOISE_RULES = [
 ]
 
 
-def clean_news_text(text: str, preserve_paragraphs: bool = False) -> str:
+def clean_news_text(text: str, preserve_paragraphs: bool = True) -> str:
     """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes.
     When preserve_paragraphs=True, maintains exact paragraph boundaries (\n\n) and line breaks (\n).
     """
