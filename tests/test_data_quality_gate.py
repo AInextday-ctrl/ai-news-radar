@@ -212,7 +212,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     print(f"✅ 断言 11 通过: 多段落排版高保真全量达标 (零多段推文排版抹平)")
 
     # 12. Tibo Codex 重置推文准确性门禁 (严禁把招募/闲聊推文置顶或标记为 Codex 重置公告)
-    viral_ticker = data.get("viral_ticker_tweets", [])
+    viral_ticker = payload.get("viral_ticker_tweets", [])
     for it in viral_ticker:
         h = str(it.get("author_handle") or "").lower()
         if "thsottiaux" in h and it.get("is_pinned"):

@@ -861,7 +861,7 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
         item.get("summary_zh") or 
         ""
     )
-    if len(bullets_zh) < 2 and raw_text:
+    if len(bullets_zh) < 3 and raw_text:
         sents = [clean_bullet_text(s) for s in re.split(r'[\r\n。！!？?]+', raw_text) if len(clean_bullet_text(s)) >= 18]
         for s in sents:
             if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_zh):
@@ -876,13 +876,29 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
         item.get("summary_en") or 
         ""
     )
-    if len(bullets_en) < 2 and raw_text_en:
+    if len(bullets_en) < 3 and raw_text_en:
         sents = [clean_bullet_text(s) for s in re.split(r'[\r\n\.]+', raw_text_en) if len(clean_bullet_text(s)) >= 25]
         for s in sents:
             if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_en):
                 bullets_en.append(f"[Key Fact] {s.rstrip('.')}.")
                 if len(bullets_en) >= 3:
                     break
+
+    if len(bullets_en) < 3 and len(bullets_zh) >= 3:
+        for idx in range(len(bullets_en), min(len(bullets_zh), 4)):
+            zh_b = bullets_zh[idx]
+            zh_clean = re.sub(r'^【[^】]+】\s*', '', zh_b).strip('。')
+            if zh_clean:
+                try:
+                    from processor import free_translate_en
+                    en_trans = free_translate_en(zh_clean)
+                    if en_trans and len(en_trans) >= 15:
+                        prefix = "[Perspective & Impact]" if idx >= 3 else "[Key Specification]"
+                        bullets_en.append(f"{prefix} {en_trans.rstrip('.')}.")
+                except Exception:
+                    pass
+            if len(bullets_en) >= 3:
+                break
 
     return bullets_zh[:4], bullets_en[:4]
 

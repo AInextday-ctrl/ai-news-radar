@@ -2543,6 +2543,113 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     let archiveCurrentPage = 1;
     const ARCHIVE_PAGE_SIZE = 12;
 
+    // ==========================================
+    // 全量归档深度汇入引擎：将历史全量大V推文与快讯沉淀无缝汇入分类专栏
+    // ==========================================
+    function mergeArchiveIntoCachedData(archiveItems) {
+      if (!cachedData || !Array.isArray(archiveItems) || archiveItems.length === 0) return;
+      if (!cachedData.grouped) cachedData.grouped = {};
+
+      const getItemKey = (it) => {
+        if (!it) return '';
+        if (it.id) return String(it.id);
+        if (it.status_id) return 'tweet_' + String(it.status_id);
+        if (it.url) return String(it.url);
+        return '';
+      };
+
+      // 1. 汇入大V观点 (Celebrity) 历史归档
+      const existingCeleb = cachedData.grouped.celebrity || cachedData.celebrity || [];
+      const celebKeySet = new Set(existingCeleb.map(getItemKey).filter(Boolean));
+      const newCelebs = [];
+      for (const it of archiveItems) {
+        if (it.category === 'celebrity') {
+          const k = getItemKey(it);
+          if (k && !celebKeySet.has(k)) {
+            celebKeySet.add(k);
+            newCelebs.push(it);
+          }
+        }
+      }
+      if (newCelebs.length > 0) {
+        cachedData.grouped.celebrity = existingCeleb.concat(newCelebs);
+        cachedData.celebrity = cachedData.grouped.celebrity;
+      }
+
+      // 2. 汇入行业快讯 (News) 历史归档
+      const existingNews = cachedData.grouped.news || cachedData.news || [];
+      const newsKeySet = new Set(existingNews.map(getItemKey).filter(Boolean));
+      const newNews = [];
+      for (const it of archiveItems) {
+        if (it.category === 'news') {
+          const k = getItemKey(it);
+          if (k && !newsKeySet.has(k)) {
+            newsKeySet.add(k);
+            newNews.push(it);
+          }
+        }
+      }
+      if (newNews.length > 0) {
+        cachedData.grouped.news = existingNews.concat(newNews);
+        cachedData.news = cachedData.grouped.news;
+      }
+
+      // 3. 汇入全网爆帖 (Viral Posts) 历史归档
+      const existingViral = cachedData.grouped.viral_posts || cachedData.viral_posts || [];
+      const viralKeySet = new Set(existingViral.map(getItemKey).filter(Boolean));
+      const newViral = [];
+      for (const it of archiveItems) {
+        if (it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral)) {
+          const k = getItemKey(it);
+          if (k && !viralKeySet.has(k)) {
+            viralKeySet.add(k);
+            newViral.push(it);
+          }
+        }
+      }
+      if (newViral.length > 0) {
+        cachedData.grouped.viral_posts = existingViral.concat(newViral);
+        cachedData.viral_posts = cachedData.grouped.viral_posts;
+      }
+
+      // 实时更新头部专栏数量徽标
+      const bLeader = document.getElementById('badge-count-leader');
+      if (bLeader) bLeader.textContent = cachedData.grouped.celebrity.length;
+      const bViral = document.getElementById('badge-count-viral');
+      if (bViral) bViral.textContent = cachedData.grouped.viral_posts.length;
+      const bNews = document.getElementById('badge-count-news');
+      if (bNews) bNews.textContent = cachedData.grouped.news.length;
+      const bAll = document.getElementById('badge-count-all');
+      if (bAll) {
+        const total = (cachedData.grouped.news?.length || 0) + (cachedData.grouped.celebrity?.length || 0) + (cachedData.grouped.tools?.length || 0) + (cachedData.grouped.videos?.length || 0) + (cachedData.grouped.prompts?.length || 0);
+        bAll.textContent = total;
+      }
+    }
+
+    let _archiveLoadingPromise = null;
+    async function ensureArchiveLoaded() {
+      if (window._hasMergedArchive) return;
+      if (_archiveLoadingPromise) return _archiveLoadingPromise;
+
+      _archiveLoadingPromise = (async () => {
+        try {
+          const archiveData = await loadArchiveData();
+          if (archiveData && Array.isArray(archiveData.items)) {
+            mergeArchiveIntoCachedData(archiveData.items);
+            window._hasMergedArchive = true;
+            if (typeof currentTab !== 'undefined' && ['celebrity', 'news'].includes(currentTab)) {
+              renderCategoryView(currentTab);
+            }
+          }
+        } catch (e) {
+          console.warn('ensureArchiveLoaded failed:', e);
+        } finally {
+          _archiveLoadingPromise = null;
+        }
+      })();
+      return _archiveLoadingPromise;
+    }
+
     async function loadArchiveData() {
       if (cachedArchiveData) return cachedArchiveData;
       if (archiveLoading) return null;
@@ -7245,6 +7352,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
 
+      // 进入专栏视图时，主动保证全量归档深度汇入，实现完整历史长卷翻页与回看
+      if (!window._hasMergedArchive && !window._archiveLoadingPromise) {
+        ensureArchiveLoaded();
+      }
+
       if (!cachedData) {
         if (container) {
           container.className = "w-full";
@@ -7756,6 +7868,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         renderUI(data);
         refreshCountdown = 180;
+
+        // 自动在后台静默载入全量历史归档库，保证用户点击大V观点或快讯专栏时拥有完整的历史分页与全量归档
+        if (!window._hasMergedArchive && !window._archiveLoadingPromise) {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(() => { ensureArchiveLoaded(); }, { timeout: 3000 });
+          } else {
+            setTimeout(() => { ensureArchiveLoaded(); }, 1000);
+          }
+        }
       } catch (err) {
         console.error("加载数据失败:", err);
       } finally {

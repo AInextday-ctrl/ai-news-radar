@@ -1347,7 +1347,7 @@ def save_news(items: list):
             needs_full_trans = (
                 not cur_full_zh 
                 or not any('\u4e00' <= c <= '\u9fff' for c in cur_full_zh)
-                or (len(src_full_en) > 200 and (len(cur_full_zh) < 100 or len(cur_full_zh) < len(src_full_en) * 0.35))
+                or (len(src_full_en) > 180 and len(cur_full_zh) < len(src_full_en) * 0.25)
             )
             if needs_full_trans and src_full_en:
                 try:
@@ -1673,26 +1673,26 @@ def save_news(items: list):
 
     # 保证在极端冷启动或外部源更新停滞时，首页与专栏不至于空白（填充时同样坚决杜绝 > 48 小时的旧内容）
     news_recent = [it for it in recent_items if it.get("category") == "news"]
-    if len(news_recent) < 25:
+    if len(news_recent) < 80:
         extra_news = [
             it for it in historical_items 
             if it.get("category") == "news" 
             and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= MAX_HOMEPAGE_SECONDS
-        ][:(25 - len(news_recent))]
+            and (now_ts - parse_time_for_sort(it)) <= 7 * 86400
+        ][:(80 - len(news_recent))]
         for it in extra_news:
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
     celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
-    if len(celeb_recent) < 50:
+    if len(celeb_recent) < 150:
         extra_celeb = [
             it for it in historical_items 
             if it.get("category") == "celebrity" 
             and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= 86400
+            and (now_ts - parse_time_for_sort(it)) <= 7 * 86400
             and is_meaningful_tweet(it)
-        ][:(50 - len(celeb_recent))]
+        ][:(150 - len(celeb_recent))]
         for it in extra_celeb:
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
@@ -1889,11 +1889,13 @@ def save_news(items: list):
     except Exception as e:
         print(f"⚠️ [tool_image_localizer] 工具缩略图处理异常: {e}")
 
-    # 4. 构建全量历史归档库 payload (archive_news.json)
+    # 4. 构建全量历史归档库 payload (archive_news.json - 包含全部历史沉淀与最新入库)
+    all_archive_items = list(all_master_items)
+    all_archive_items.sort(key=parse_time_for_sort, reverse=True)
     archive_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
-        "total_count": len(historical_items),
-        "items": historical_items,
+        "total_count": len(all_archive_items),
+        "items": all_archive_items,
         "categories": CATEGORIES
     }
 
