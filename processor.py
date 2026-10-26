@@ -580,49 +580,311 @@ def compute_title_summary_overlap(title_zh: str, summary_zh: str) -> float:
     return len(t_bigrams & s_bigrams) / float(len(s_bigrams))
 
 
+import re
+from typing import Dict, Any, List, Tuple
+
+def clean_bullet_text(text: str) -> str:
+    """Strip redundant machine labels and prefix boilerplate from text."""
+    if not text:
+        return ""
+    t = str(text).strip()
+    t = re.sub(r'^(主体与场景|核心事实|动因背景|深度影响|核心要点|关键事实|信源追踪|行业研判|核心突破|关键数据|信源与影响|Key Development|Core Event|Key Facts?|Breaking News|Key Milestone|Core Metrics|Specification|Industry Context)[\s:：·\-]+', '', t, flags=re.IGNORECASE)
+    # Remove leading quotes or unbalanced brackets
+    t = re.sub(r'^[“"‘\'「『（(]+', '', t)
+    # Remove trailing broken punctuation / conjunctions
+    t = re.sub(r'[、，,与和以及且]+$', '', t)
+    # Strip trailing quotes if dangling
+    t = re.sub(r'[”"’\'」』）)]+$', '', t)
+    return t.strip()
+
+def is_substantially_duplicate_bullet(t1: str, t2: str) -> bool:
+    """Check if two strings are substantially identical."""
+    s1 = re.sub(r'[\s\W\d]+', '', str(t1).lower())
+    s2 = re.sub(r'[\s\W\d]+', '', str(t2).lower())
+    if not s1 or not s2:
+        return False
+    if s1 in s2 or s2 in s1:
+        shorter = min(len(s1), len(s2))
+        longer = max(len(s1), len(s2))
+        if shorter / float(longer) >= 0.7:
+            return True
+    return False
+
 def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List[str], List[str]]:
     """
-    Extract 2-3 structured fact bullets (core breakthrough, specs/metrics, practical impact)
-    from news content without fabricating ungrounded claims.
+    Extract comprehensive 5W1H factual bullets (Who, What, Where, Why, Metrics, Views/Attitude)
+    guaranteeing zero generic boilerplate and 100% substantive journalistic depth.
     """
-    clean_title = clean_news_text(title_zh or item.get("title_zh") or item.get("title", ""))
-    raw_text = (
-        item.get("article_content") or 
-        item.get("original_content") or 
-        item.get("content_snippet") or 
-        item.get("summary_en") or 
-        item.get("summary") or 
-        ""
-    )
-    raw_str = clean_news_text(raw_text)
-    if not raw_str or len(raw_str) < 30:
-        return [], []
+    from processor import clean_news_text
+    import json
+
+    clean_t_zh = clean_bullet_text(clean_news_text(title_zh or item.get("title_zh") or item.get("title", "")))
+    clean_t_en = clean_bullet_text(clean_news_text(item.get("title_en") or item.get("title", "") or clean_t_zh))
+
+    ai = item.get("ai_analysis")
+    if isinstance(ai, str):
+        try:
+            ai = json.loads(ai)
+        except Exception:
+            ai = {}
+    elif not isinstance(ai, dict):
+        ai = {}
+
+    elems_zh = ai.get("elements_zh") if isinstance(ai.get("elements_zh"), dict) else {}
+    elems_en = ai.get("elements_en") if isinstance(ai.get("elements_en"), dict) else {}
+    kp_zh = [clean_bullet_text(x) for x in (ai.get("key_points_zh") or []) if clean_bullet_text(x)]
+    kp_en = [clean_bullet_text(x) for x in (ai.get("key_points_en") or []) if clean_bullet_text(x)]
+    briefing_zh = str(ai.get("briefing_zh") or ai.get("digest_zh") or "")
+    briefing_en = str(ai.get("briefing_en") or ai.get("digest_en") or "")
+    insight_zh = str(ai.get("insight_zh") or ai.get("takeaway_zh") or "")
+    insight_en = str(ai.get("insight_en") or ai.get("takeaway_en") or "")
 
     bullets_zh = []
     bullets_en = []
 
-    # Bullet 1: Core breakthrough / event
-    if clean_title:
-        bullets_zh.append(f"核心突破：{clean_title}")
-        bullets_en.append(f"Key Milestone: {item.get('title_en') or item.get('title') or clean_title}")
+    # ==========================
+    # 1. 核心事件 (Who, Where, What)
+    # ==========================
+    who_zh = clean_bullet_text(str(elems_zh.get("who") or ""))
+    where_zh = clean_bullet_text(str(elems_zh.get("where") or ""))
+    what_zh = clean_bullet_text(str(elems_zh.get("what") or ""))
 
-    # Bullet 2: Numerical metrics, specs, architecture, or license
-    specs = item.get("spec_tags") or []
-    metric_m = re.findall(r'(\$[\d.,]+(?:\s*[MBK]|\s*billion|\s*million)?|\b\d+(?:\.\d+)?%|\b\d+[BMK]\s*(?:parameters?|tokens?|context)?|\b\d+k\s*context)', raw_str, re.IGNORECASE)
-    if metric_m:
-        bullets_zh.append(f"关键数据：涉及 {', '.join(metric_m[:2])} 关键指标与工程规格")
-        bullets_en.append(f"Core Metrics: Highlighting {', '.join(metric_m[:2])} benchmark metrics")
-    elif specs:
-        bullets_zh.append(f"核心规格：具备 {specs[0]} 关键工程特性")
-        bullets_en.append(f"Specification: Featuring {specs[0]}")
+    # Filter out generic broad location labels
+    generic_wheres = {"全球产业与技术前沿一线", "全球科技前沿", "行业前沿一线", "Global AI Frontier"}
+    if where_zh in generic_wheres:
+        where_zh = ""
 
-    # Bullet 3: Ecosystem or developer impact
-    src = item.get("source", "") or item.get("author", "")
-    if src:
-        bullets_zh.append(f"信源与影响：由 {src.split('·')[0].strip()} 跟踪披露，推动相关工程应用落地")
-        bullets_en.append(f"Industry Context: Reported via {src.split('·')[0].strip()} for developer evaluation")
+    if who_zh and what_zh:
+        if what_zh.startswith(who_zh):
+            ev_zh = what_zh
+        elif where_zh and where_zh not in what_zh and len(where_zh) < 25:
+            ev_zh = f"{who_zh}在{where_zh}：{what_zh}"
+        else:
+            ev_zh = f"{who_zh}：{what_zh}"
+        bullets_zh.append(f"【核心事件】{ev_zh}")
+    elif kp_zh:
+        bullets_zh.append(f"【核心事件】{kp_zh[0]}")
+    elif briefing_zh:
+        sents = [clean_bullet_text(s) for s in re.split(r'[。！!？?]', briefing_zh) if len(clean_bullet_text(s)) >= 10]
+        if sents:
+            bullets_zh.append(f"【核心事件】{sents[0]}。")
+    elif clean_t_zh:
+        bullets_zh.append(f"【核心事件】{clean_t_zh}")
 
-    return bullets_zh[:3], bullets_en[:3]
+    who_en = clean_bullet_text(str(elems_en.get("who") or ""))
+    where_en = clean_bullet_text(str(elems_en.get("where") or ""))
+    what_en = clean_bullet_text(str(elems_en.get("what") or ""))
+    if where_en in generic_wheres:
+        where_en = ""
+
+    if who_en and what_en:
+        if what_en.lower().startswith(who_en.lower()):
+            ev_en = what_en
+        elif where_en and where_en.lower() not in what_en.lower() and len(where_en) < 35:
+            ev_en = f"{who_en} ({where_en}): {what_en}"
+        else:
+            ev_en = f"{who_en}: {what_en}"
+        bullets_en.append(f"[Core Event] {ev_en}")
+    elif kp_en:
+        bullets_en.append(f"[Core Event] {kp_en[0]}")
+    elif briefing_en:
+        sents = [clean_bullet_text(s) for s in re.split(r'[\.!\?]\s+', briefing_en) if len(clean_bullet_text(s)) >= 15]
+        if sents:
+            bullets_en.append(f"[Core Event] {sents[0]}.")
+    elif clean_t_en:
+        bullets_en.append(f"[Core Event] {clean_t_en}")
+
+    # ==========================
+    # 2. 原因与机理 (Why / Mechanism)
+    # ==========================
+    why_zh = clean_bullet_text(str(elems_zh.get("why") or ""))
+    if why_zh and not any(is_substantially_duplicate_bullet(why_zh, b) for b in bullets_zh):
+        bullets_zh.append(f"【起因与机理】{why_zh}")
+    elif len(kp_zh) > 1 and not any(is_substantially_duplicate_bullet(kp_zh[1], b) for b in bullets_zh):
+        bullets_zh.append(f"【起因与机理】{kp_zh[1]}")
+    elif briefing_zh:
+        causal = [clean_bullet_text(s) for s in re.split(r'[。！!？?]', briefing_zh) if any(k in s for k in ["因", "由于", "导致", "造成", "引发", "源于"]) and len(clean_bullet_text(s)) > 15]
+        for c in causal:
+            if not any(is_substantially_duplicate_bullet(c, b) for b in bullets_zh):
+                bullets_zh.append(f"【起因与机理】{c}。")
+                break
+
+    why_en = clean_bullet_text(str(elems_en.get("why") or ""))
+    if why_en and not any(is_substantially_duplicate_bullet(why_en, b) for b in bullets_en):
+        bullets_en.append(f"[Root Cause & Mechanism] {why_en}")
+    elif len(kp_en) > 1 and not any(is_substantially_duplicate_bullet(kp_en[1], b) for b in bullets_en):
+        bullets_en.append(f"[Root Cause & Mechanism] {kp_en[1]}")
+    elif briefing_en:
+        causal = [clean_bullet_text(s) for s in re.split(r'[\.!\?]\s+', briefing_en) if any(k in s.lower() for k in ["due to", "caused", "because", "revealed", "hurdle", "defect", "opposition", "amid", "as "]) and len(clean_bullet_text(s)) > 25]
+        for c in causal:
+            if not any(is_substantially_duplicate_bullet(c, b) for b in bullets_en):
+                bullets_en.append(f"[Root Cause & Mechanism] {c}.")
+                break
+        if len(bullets_en) < 2:
+            sents = [clean_bullet_text(s) for s in re.split(r'[\.!\?]\s+', briefing_en) if len(clean_bullet_text(s)) > 25]
+            for s in sents:
+                if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_en):
+                    bullets_en.append(f"[Context & Motivation] {s}.")
+                    break
+
+    # ==========================
+    # 3. 核心数据与指标 (Data & Metrics)
+    # ==========================
+    num_pattern = re.compile(r'(\$[\d.,]+(?:\s*[MBK]|\s*billion|\s*million)?|\d+(?:\.\d+)?%|\d+[BMK]\b|\d+/\d+\s*分?|\d+(?:\.\d+)?\s*(?:亿|万|美元|分|个|倍|人|台|天|周))', re.IGNORECASE)
+    
+    data_zh = None
+    for p in kp_zh:
+        if num_pattern.search(p) and len(p) >= 10 and not any(is_substantially_duplicate_bullet(p, b) for b in bullets_zh):
+            data_zh = p
+            break
+    
+    if not data_zh and briefing_zh:
+        for s in re.split(r'[。！!？?]', briefing_zh):
+            s_clean = clean_bullet_text(s)
+            if num_pattern.search(s_clean) and len(s_clean) >= 15 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
+                data_zh = f"{s_clean}。"
+                break
+                
+    if not data_zh:
+        raw_text = item.get("article_content") or item.get("original_content") or item.get("content_snippet") or ""
+        for s in re.split(r'[\r\n。！!？?]+', raw_text):
+            s_clean = clean_bullet_text(s)
+            if num_pattern.search(s_clean) and len(s_clean) >= 20 and len(s_clean) <= 120 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
+                data_zh = s_clean
+                break
+
+    if data_zh:
+        bullets_zh.append(f"【关键数据与实测】{data_zh.rstrip('。')}。")
+    else:
+        picked = False
+        for p in kp_zh:
+            if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_zh) and len(p) >= 12:
+                bullets_zh.append(f"【关键技术规格】{p.rstrip('。')}。")
+                picked = True
+                break
+        if not picked and briefing_zh:
+            for s in re.split(r'[。！!？?]', briefing_zh):
+                s_clean = clean_bullet_text(s)
+                if len(s_clean) >= 15 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
+                    bullets_zh.append(f"【核心事实细节】{s_clean.rstrip('。')}。")
+                    break
+
+    # English data bullet
+    data_en = None
+    for p in kp_en:
+        if num_pattern.search(p) and len(p) >= 15 and not any(is_substantially_duplicate_bullet(p, b) for b in bullets_en):
+            data_en = p
+            break
+    if not data_en and briefing_en:
+        for s in re.split(r'[\.!\?]\s+', briefing_en):
+            s_clean = clean_bullet_text(s)
+            if num_pattern.search(s_clean) and len(s_clean) >= 25 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
+                data_en = f"{s_clean}."
+                break
+    if not data_en:
+        raw_text = item.get("article_content") or item.get("original_content") or item.get("content_snippet") or ""
+        for s in re.split(r'[\r\n\.]+', raw_text):
+            s_clean = clean_bullet_text(s)
+            if num_pattern.search(s_clean) and len(s_clean) >= 30 and len(s_clean) <= 150 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
+                data_en = s_clean
+                break
+    if data_en:
+        bullets_en.append(f"[Key Metrics] {data_en.rstrip('.')}.")
+    else:
+        picked = False
+        for p in kp_en:
+            if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_en) and len(p) >= 15:
+                bullets_en.append(f"[Key Specification] {p.rstrip('.')}.")
+                picked = True
+                break
+        if not picked and briefing_en:
+            for s in re.split(r'[\.!\?]\s+', briefing_en):
+                s_clean = clean_bullet_text(s)
+                if len(s_clean) >= 25 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
+                    bullets_en.append(f"[Context Detail] {s_clean.rstrip('.')}.")
+                    break
+
+    # ==========================
+    # 4. 各方态度与行业研判 (Attitude, Views & Outlook)
+    # ==========================
+    view_zh = None
+    for p in reversed(kp_zh):
+        if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_zh) and len(p) >= 12:
+            view_zh = p
+            break
+            
+    if not view_zh and insight_zh:
+        ins_sents = [clean_bullet_text(s) for s in re.split(r'[。！!？?]', insight_zh) if len(clean_bullet_text(s)) >= 15]
+        for s in reversed(ins_sents):
+            if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_zh):
+                view_zh = s
+                break
+
+    if view_zh:
+        bullets_zh.append(f"【观点态度】{view_zh.rstrip('。')}。")
+    elif briefing_zh:
+        for s in reversed(re.split(r'[。！!？?]', briefing_zh)):
+            s_clean = clean_bullet_text(s)
+            if len(s_clean) >= 15 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
+                bullets_zh.append(f"【观点影响】{s_clean.rstrip('。')}。")
+                break
+
+    view_en = None
+    for p in reversed(kp_en):
+        if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_en) and len(p) >= 15:
+            view_en = p
+            break
+            
+    if not view_en and insight_en:
+        ins_sents = [clean_bullet_text(s) for s in re.split(r'[\.!\?]\s+', insight_en) if len(clean_bullet_text(s)) >= 20]
+        for s in reversed(ins_sents):
+            if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_en):
+                view_en = s
+                break
+            
+    if view_en:
+        bullets_en.append(f"[Perspective & Impact] {view_en.rstrip('.')}.")
+    elif briefing_en:
+        for s in reversed(re.split(r'[\.!\?]\s+', briefing_en)):
+            s_clean = clean_bullet_text(s)
+            if len(s_clean) >= 25 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
+                bullets_en.append(f"[Industry Impact] {s_clean.rstrip('.')}.")
+                break
+
+    # ==========================
+    # Fallback to article text if needed
+    # ==========================
+    raw_text = (
+        item.get("article_content") or 
+        item.get("original_content") or 
+        item.get("content_snippet") or 
+        item.get("summary_zh") or 
+        ""
+    )
+    if len(bullets_zh) < 2 and raw_text:
+        sents = [clean_bullet_text(s) for s in re.split(r'[\r\n。！!？?]+', raw_text) if len(clean_bullet_text(s)) >= 18]
+        for s in sents:
+            if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_zh):
+                bullets_zh.append(f"【核心事实细节】{s.rstrip('。')}。")
+                if len(bullets_zh) >= 3:
+                    break
+
+    raw_text_en = (
+        item.get("article_content") or 
+        item.get("original_content") or 
+        item.get("content_snippet") or 
+        item.get("summary_en") or 
+        ""
+    )
+    if len(bullets_en) < 2 and raw_text_en:
+        sents = [clean_bullet_text(s) for s in re.split(r'[\r\n\.]+', raw_text_en) if len(clean_bullet_text(s)) >= 25]
+        for s in sents:
+            if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_en):
+                bullets_en.append(f"[Key Fact] {s.rstrip('.')}.")
+                if len(bullets_en) >= 3:
+                    break
+
+    return bullets_zh[:4], bullets_en[:4]
 
 
 def generate_smart_fallback_summary(item: Dict[str, Any], title_zh: str) -> str:

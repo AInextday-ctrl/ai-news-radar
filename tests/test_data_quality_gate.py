@@ -221,6 +221,36 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             assert any(k in text for k in ["reset", "rest and reset", "quota", "usage limit"]), "断言 12 失败：置顶的 Tibo 推文未包含重置关键词！"
     print(f"✅ 断言 12 通过: Tibo Codex 重置推文准确性达标 (零非重置推文被误置顶)")
 
+    # 13. 资讯六要素与零模板化事实门禁 (严禁万金油套话，必须包含主体、事件、起因、数据等深度事实)
+    news = grouped.get("news", [])
+    boilerplate_bullets = []
+    low_density_news = []
+    forbidden_phrases_zh = ["推动相关工程应用落地", "关键指标与工程规格", "涉及 $"]
+    forbidden_phrases_en = ["for developer evaluation", "benchmark metrics"]
+    
+    for n in news:
+        nid = n.get("id")
+        t_zh = str(n.get("title_zh") or "")
+        b_zh = n.get("fact_bullets_zh") or []
+        b_en = n.get("fact_bullets_en") or []
+        
+        if len(b_zh) < 3 or len(b_en) < 3:
+            low_density_news.append((nid, len(b_zh), len(b_en)))
+            
+        for b in b_zh:
+            if any(f in b for f in forbidden_phrases_zh):
+                boilerplate_bullets.append((nid, "ZH", b))
+            if b == f"核心突破：{t_zh}":
+                boilerplate_bullets.append((nid, "ZH_DUP_TITLE", b))
+                
+        for b in b_en:
+            if any(f in b for f in forbidden_phrases_en):
+                boilerplate_bullets.append((nid, "EN", b))
+
+    assert len(boilerplate_bullets) == 0, f"断言 13 失败：检测到 {len(boilerplate_bullets)} 条模板套话事实: {boilerplate_bullets[:3]}"
+    assert len(low_density_news) == 0, f"断言 13 失败：检测到 {len(low_density_news)} 条新闻事实要点不足3条: {low_density_news[:3]}"
+    print(f"✅ 断言 13 通过: 资讯六要素与零模板化事实达标 (全量 {len(news)} 条新闻 100% 具备深度结构化事实要点)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")

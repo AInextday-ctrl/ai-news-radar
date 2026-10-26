@@ -547,13 +547,26 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     bullets_html = ""
     if fact_bullets:
-        bullet_items = "".join([f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{escape(b)}</li>" for b in fact_bullets])
+        formatted_items = []
+        for b in fact_bullets:
+            b_str = str(b).strip()
+            if b_str.startswith("【") and "】" in b_str:
+                tag, rest = b_str.split("】", 1)
+                tag_html = f"<strong class='font-bold text-indigo-900 dark:text-indigo-200'>{escape(tag)}】</strong>"
+                formatted_items.append(f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{tag_html}{escape(rest.lstrip())}</li>")
+            elif b_str.startswith("[") and "]" in b_str:
+                tag, rest = b_str.split("]", 1)
+                tag_html = f"<strong class='font-bold text-indigo-900 dark:text-indigo-200'>{escape(tag)}]</strong>"
+                formatted_items.append(f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{tag_html} {escape(rest.lstrip())}</li>")
+            else:
+                formatted_items.append(f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{escape(b_str)}</li>")
+        bullet_items = "".join(formatted_items)
         bullets_html = f"""
         <div class="mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40">
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>{briefing_title}</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2 text-indigo-950 dark:text-indigo-100">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
             {bullet_items}
           </ul>
         </div>
