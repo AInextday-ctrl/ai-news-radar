@@ -609,7 +609,15 @@ SOURCES = {
         {"name": "Andrej Karpathy", "id": "UCXUPKJO5MZQN11PqgIvyuvQ"},
         {"name": "3Blue1Brown", "id": "UCYO_jab_esuFRV4b17AJtAw"},
         {"name": "Yannic Kilcher", "id": "UCZHmQk67mN31gbHey6BVyNw"},
-        {"name": "NetworkChuck", "id": "UCOuGATIAbd2DvzJmUgXn2IQ"}
+        {"name": "NetworkChuck", "id": "UCOuGATIAbd2DvzJmUgXn2IQ"},
+        {"name": "Dave Ebbelaar", "id": "UCn8ujwUInbJkBhffxqAPBVQ"},
+        {"name": "Cole Medin", "id": "UCMwVTLZIRRUyyVrkjDpn4pA"},
+        {"name": "Prompt Engineering", "id": "UCf4tGwyNQGyFWX3F-9rUk9A"},
+        {"name": "All About AI", "id": "UCR9j1jqqB5Rse69wjUnbYwA"},
+        {"name": "David Ondrej", "id": "UCPGrgwfbkjTIgPoOh2q1BAg"},
+        {"name": "Liam Ottley", "id": "UCui4jxDaMb53Gdh-AZUTPAg"},
+        {"name": "IndyDevDan", "id": "UC_x36zCEGilGpB1m-V4gmjg"},
+        {"name": "StatQuest", "id": "UCtYLUTtgS3k1Fg4y5tAhLbw"}
     ]
 }
 
@@ -714,6 +722,46 @@ AI_CREATORS = [
         "category": "⚡ 极客网络与硬件本地化",
         "subscribers": "4.2M+",
         "desc": "5分钟在普通笔记本部署本地私密 AI"
+    },
+    {
+        "id": "dave_ebbelaar",
+        "name": "Dave Ebbelaar",
+        "channel_id": "UCn8ujwUInbJkBhffxqAPBVQ",
+        "handle": "@DaveEbbelaar",
+        "avatar": "https://unavatar.io/youtube/UCn8ujwUInbJkBhffxqAPBVQ",
+        "category": "🤖 AI Agents 与实战架构",
+        "subscribers": "180K+",
+        "desc": "LangGraph、自主智能体与生产级 Agent 落地"
+    },
+    {
+        "id": "cole_medin",
+        "name": "Cole Medin",
+        "channel_id": "UCMwVTLZIRRUyyVrkjDpn4pA",
+        "handle": "@ColeMedin",
+        "avatar": "https://unavatar.io/youtube/UCMwVTLZIRRUyyVrkjDpn4pA",
+        "category": "⚡ 本地大模型与私有知识库",
+        "subscribers": "150K+",
+        "desc": "Ollama、RAG 向量搜索与本地模型极致优化"
+    },
+    {
+        "id": "prompt_engineering",
+        "name": "Prompt Engineering",
+        "channel_id": "UCf4tGwyNQGyFWX3F-9rUk9A",
+        "handle": "@PromptEngineering",
+        "avatar": "https://unavatar.io/youtube/UCf4tGwyNQGyFWX3F-9rUk9A",
+        "category": "🛠️ 开源工具与测评",
+        "subscribers": "220K+",
+        "desc": "前沿开源大模型快速评测与实操部署"
+    },
+    {
+        "id": "statquest",
+        "name": "StatQuest",
+        "channel_id": "UCtYLUTtgS3k1Fg4y5tAhLbw",
+        "handle": "@statquest",
+        "avatar": "https://unavatar.io/youtube/UCtYLUTtgS3k1Fg4y5tAhLbw",
+        "category": "🎓 机器学习精髓与数学直觉",
+        "subscribers": "1.2M+",
+        "desc": "Josh Starmer 生动拆解 Transformer、注意力与扩散模型"
     }
 ]
 

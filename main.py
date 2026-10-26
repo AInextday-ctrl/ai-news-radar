@@ -1747,40 +1747,21 @@ def save_news(items: list):
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
-    videos_recent = [it for it in recent_items if it.get("category") == "videos"]
-    if len(videos_recent) < 20:
-        extra_videos = [
-            it for it in historical_items 
-            if it.get("category") == "videos" 
-            and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= MAX_HOMEPAGE_SECONDS
-        ][:(20 - len(videos_recent))]
-        for it in extra_videos:
-            recent_items.append(it)
-            recent_keys.add(get_it_key(it))
-        # 确保哪怕周末或YouTube低产出时段，也满足数据门禁的最小 3 个视频硬性水位线
-        cur_v_cnt = len([it for it in recent_items if it.get("category") == "videos"])
-        if cur_v_cnt < 3:
-            more_v = [
-                it for it in historical_items 
-                if it.get("category") == "videos" 
-                and get_it_key(it) not in recent_keys
-            ][:(3 - cur_v_cnt)]
-            for it in more_v:
+    # 彻底汇入全量历史视频沉淀（保留所有作者全部 120+ 视频，保证多页翻页与作者筛选完整可用，杜绝归档丢失）
+    for it in historical_items:
+        if it.get("category") == "videos":
+            k = get_it_key(it)
+            if k not in recent_keys:
                 recent_items.append(it)
-                recent_keys.add(get_it_key(it))
+                recent_keys.add(k)
 
-    prompts_recent = [it for it in recent_items if it.get("category") == "prompts"]
-    if len(prompts_recent) < 30:
-        extra_prompts = [
-            it for it in historical_items 
-            if it.get("category") == "prompts" 
-            and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= MAX_HOMEPAGE_SECONDS
-        ][:(30 - len(prompts_recent))]
-        for it in extra_prompts:
-            recent_items.append(it)
-            recent_keys.add(get_it_key(it))
+    # 彻底汇入全量历史实战提示词沉淀（保留全部 41+ 提示词，保证多页翻页完整查阅）
+    for it in historical_items:
+        if it.get("category") == "prompts":
+            k = get_it_key(it)
+            if k not in recent_keys:
+                recent_items.append(it)
+                recent_keys.add(k)
 
     def _interleave_tools_multi_source(tool_list):
         from tool_fusion import fuse_and_deduplicate_tools, rank_radar_stream
@@ -1917,13 +1898,19 @@ def save_news(items: list):
     except Exception as e:
         print(f"⚠️ [tweet_classifier] 价值分类标注异常: {e}")
 
-    # 4. 构建全量历史归档库 payload (archive_news.json - 包含全部历史沉淀与最新入库)
+    # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
+    STRIP_ARCHIVE_KEYS = {'ai_analysis', 'original_content', 'article_content', 'wechat_audit', 'wechat_article_draft'}
+    def _clean_archive_item(it):
+        return {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS}
+
     all_archive_items = list(all_master_items)
     all_archive_items.sort(key=parse_time_for_sort, reverse=True)
+    clean_archive_items = [_clean_archive_item(it) for it in all_archive_items]
+
     archive_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
-        "total_count": len(all_archive_items),
-        "items": all_archive_items,
+        "total_count": len(clean_archive_items),
+        "items": clean_archive_items,
         "categories": CATEGORIES
     }
 
@@ -1933,14 +1920,14 @@ def save_news(items: list):
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 写入 archive_news.json
+    # 写入 archive_news.json (紧凑无空白，体积大幅优化，保证秒级拉取)
     with open(ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
     with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 写入专门的大V推文全量归档库 (archive_celebrity.json - 极致轻量高速，瞬间拉取)
-    all_celeb_archive = [it for it in all_archive_items if it.get("category") == "celebrity"]
+    all_celeb_archive = [_clean_archive_item(it) for it in all_archive_items if it.get("category") == "celebrity"]
     celeb_archive_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "total_count": len(all_celeb_archive),

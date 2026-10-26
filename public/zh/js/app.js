@@ -2569,41 +2569,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return '';
       };
 
-      // 1. 汇入大V观点 (Celebrity) 历史归档
-      const existingCeleb = cachedData.grouped.celebrity || cachedData.celebrity || [];
-      const celebKeySet = new Set(existingCeleb.map(getItemKey).filter(Boolean));
-      const newCelebs = [];
-      for (const it of archiveItems) {
-        if (it.category === 'celebrity') {
-          const k = getItemKey(it);
-          if (k && !celebKeySet.has(k)) {
-            celebKeySet.add(k);
-            newCelebs.push(it);
+      const categories = ['celebrity', 'news', 'tools', 'videos', 'prompts'];
+      categories.forEach(cat => {
+        const existing = cachedData.grouped[cat] || cachedData[cat] || [];
+        const keySet = new Set(existing.map(getItemKey).filter(Boolean));
+        const newItems = [];
+        for (const it of archiveItems) {
+          if (it.category === cat) {
+            const k = getItemKey(it);
+            if (k && !keySet.has(k)) {
+              keySet.add(k);
+              newItems.push(it);
+            }
           }
         }
-      }
-      if (newCelebs.length > 0) {
-        cachedData.grouped.celebrity = existingCeleb.concat(newCelebs);
-        cachedData.celebrity = cachedData.grouped.celebrity;
-      }
-
-      // 2. 汇入行业快讯 (News) 历史归档
-      const existingNews = cachedData.grouped.news || cachedData.news || [];
-      const newsKeySet = new Set(existingNews.map(getItemKey).filter(Boolean));
-      const newNews = [];
-      for (const it of archiveItems) {
-        if (it.category === 'news') {
-          const k = getItemKey(it);
-          if (k && !newsKeySet.has(k)) {
-            newsKeySet.add(k);
-            newNews.push(it);
-          }
+        if (newItems.length > 0) {
+          cachedData.grouped[cat] = existing.concat(newItems);
+          cachedData[cat] = cachedData.grouped[cat];
         }
-      }
-      if (newNews.length > 0) {
-        cachedData.grouped.news = existingNews.concat(newNews);
-        cachedData.news = cachedData.grouped.news;
-      }
+      });
 
       // 3. 汇入全网爆帖 (Viral Posts) 历史归档
       const existingViral = cachedData.grouped.viral_posts || cachedData.viral_posts || [];
@@ -2625,11 +2609,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       // 实时更新头部专栏数量徽标
       const bLeader = document.getElementById('badge-count-leader');
-      if (bLeader) bLeader.textContent = cachedData.grouped.celebrity.length;
+      if (bLeader) bLeader.textContent = cachedData.grouped.celebrity?.length || 0;
       const bViral = document.getElementById('badge-count-viral');
-      if (bViral) bViral.textContent = cachedData.grouped.viral_posts.length;
+      if (bViral) bViral.textContent = cachedData.grouped.viral_posts?.length || 0;
       const bNews = document.getElementById('badge-count-news');
-      if (bNews) bNews.textContent = cachedData.grouped.news.length;
+      if (bNews) bNews.textContent = cachedData.grouped.news?.length || 0;
+      const bTools = document.getElementById('badge-count-tools');
+      if (bTools) bTools.textContent = cachedData.grouped.tools?.length || 0;
+      const bVideos = document.getElementById('badge-count-videos');
+      if (bVideos) bVideos.textContent = cachedData.grouped.videos?.length || 0;
+      const bPrompts = document.getElementById('badge-count-prompts');
+      if (bPrompts) bPrompts.textContent = cachedData.grouped.prompts?.length || 0;
       const bAll = document.getElementById('badge-count-all');
       if (bAll) {
         const total = (cachedData.grouped.news?.length || 0) + (cachedData.grouped.celebrity?.length || 0) + (cachedData.grouped.tools?.length || 0) + (cachedData.grouped.videos?.length || 0) + (cachedData.grouped.prompts?.length || 0);
@@ -2686,7 +2676,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             mergeArchiveIntoCachedData(archiveData.items);
             window._hasMergedArchive = true;
             window._hasMergedCelebArchive = true;
-            if (typeof currentTab !== 'undefined' && ['celebrity', 'news'].includes(currentTab)) {
+            if (typeof currentTab !== 'undefined' && currentTab !== 'all') {
               renderCategoryView(currentTab);
             }
           }

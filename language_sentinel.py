@@ -303,11 +303,26 @@ def sanitize_item_language(item: Dict[str, Any]) -> Tuple[Dict[str, Any], List[s
             item["quote_zh"] = normalize_ai_terminology_zh(clean_news_text(q_zh, preserve_paragraphs=True))
 
         ft_zh = item.get("full_text_zh") or ""
+        ft_en_ref = str(item.get("full_text_en") or "")
+        en_lines = ft_en_ref.count("\n")
+
         if not ft_zh or not is_pure_chinese_paragraph(ft_zh, min_chars=6):
-            item["full_text_zh"] = item["quote_zh"]
-            fixes.append("celebrity.full_text_zh 同步对齐纯中文引用")
+            if en_lines >= 3:
+                en_paras = [p.strip() for p in ft_en_ref.split("\n") if p.strip()]
+                zh_paras = [clean_news_text(free_translate_zh(p[:300])) for p in en_paras]
+                item["full_text_zh"] = normalize_ai_terminology_zh("\n\n".join(zh_paras))
+            else:
+                item["full_text_zh"] = item["quote_zh"]
+            fixes.append("celebrity.full_text_zh 同步对齐纯中文多段落引用")
         else:
-            item["full_text_zh"] = normalize_ai_terminology_zh(clean_news_text(ft_zh, preserve_paragraphs=True))
+            cleaned_ft_zh = normalize_ai_terminology_zh(clean_news_text(ft_zh, preserve_paragraphs=True))
+            if en_lines >= 3 and cleaned_ft_zh.count("\n") <= 1:
+                zh_sents = [s.strip() for s in re.split(r'(?<=[。！？!\?])\s*', cleaned_ft_zh) if s.strip()]
+                if len(zh_sents) >= 3:
+                    cleaned_ft_zh = "\n\n".join(zh_sents)
+                elif "。" in cleaned_ft_zh:
+                    cleaned_ft_zh = cleaned_ft_zh.replace("。", "。\n\n").strip()
+            item["full_text_zh"] = cleaned_ft_zh
 
         q_en = item.get("quote_en") or item.get("title_en") or ""
         if not q_en or has_cjk(q_en):
