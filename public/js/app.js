@@ -6827,7 +6827,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const jumpUrl = item.url || item.link || item.embed_url;
 
       return `
-        <article class="glass-card rounded-xl p-3 flex flex-col justify-between space-y-2 group border-t-2 border-t-red-500/80 hover:border-red-500/60 transition-all select-none">
+        <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between space-y-2 group border border-slate-200 dark:border-slate-800 hover:border-red-500/60 dark:hover:border-red-500/60 shadow-md hover:shadow-xl transition-all duration-300 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md h-full select-none">
           <div class="space-y-2">
             <div class="relative w-full aspect-video rounded-lg overflow-hidden bg-slate-950 border border-slate-200 dark:border-slate-800 cursor-pointer"
               onmouseenter="startVideoHoverPreview(this, '${item.video_id || ''}', 'youtube')"
@@ -7649,6 +7649,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           `;
         }
         renderCategoryPagination(0, 0, 1, categoryPageSize);
+        if (!window._isLoadingNewsTriggered) {
+          window._isLoadingNewsTriggered = true;
+          loadNews(false);
+        }
         return;
       }
 
@@ -7984,23 +7988,112 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
 
           if (videoPlatformFilter === 'youtube-shorts' || videoPlatformFilter === 'tiktok') {
-            container.className = "space-y-3";
+            container.className = "space-y-4 w-full";
             container.innerHTML = `
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 ${pageItems.map(renderVerticalVideoCard).join('')}
               </div>
             `;
           } else if (videoPlatformFilter === 'youtube-long') {
-            container.className = "space-y-3";
+            container.className = "space-y-4 w-full";
             container.innerHTML = `
               <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 ${pageItems.map(renderHorizontalVideoCard).join('')}
               </div>
             `;
           } else {
-            container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
-            container.innerHTML = pageItems.map(it => isVerticalItem(it) ? renderVerticalVideoCard(it) : renderHorizontalVideoCard(it)).join('');
+            // 采用黄金模块化分栏架构（YouTube / 顶级科技媒体标准模式）：
+            // 严禁将 16:9 横屏视频与 9:16 竖屏短视频混排在同一行 CSS Grid 中（彻底杜绝 300px+ 空白坑洞与高度塌陷）
+            container.className = "space-y-8 w-full";
+            const horizontalItems = pageItems.filter(it => !isVerticalItem(it));
+            const verticalItems = pageItems.filter(it => isVerticalItem(it));
+
+            if (verticalItems.length === 0) {
+              container.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  ${horizontalItems.map(renderHorizontalVideoCard).join('')}
+                </div>
+              `;
+            } else if (horizontalItems.length === 0) {
+              container.innerHTML = `
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  ${verticalItems.map(renderVerticalVideoCard).join('')}
+                </div>
+              `;
+            } else {
+              const topHorizontal = horizontalItems.slice(0, 6);
+              const botHorizontal = horizontalItems.slice(6);
+
+              let html = '';
+              if (topHorizontal.length > 0) {
+                html += `
+                  <section class="space-y-3">
+                    <div class="flex items-center justify-between px-1">
+                      <div class="flex items-center space-x-2">
+                        <span class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-1.5">
+                          <span>🎬</span><span>${isZh ? '前沿深度实战精讲' : 'Frontier AI Masterclasses & Demos'}</span>
+                        </span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono font-semibold">16:9</span>
+                      </div>
+                      <span class="text-[11px] text-slate-400 font-mono">${topHorizontal.length} ${isZh ? '部精选教程' : 'tutorials'}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                      ${topHorizontal.map(renderHorizontalVideoCard).join('')}
+                    </div>
+                  </section>
+                `;
+              }
+
+              html += `
+                <section class="rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-rose-950/20 via-slate-900/40 to-black/30 border border-rose-500/30 dark:border-rose-500/30 space-y-4 shadow-lg my-2">
+                  <div class="flex items-center justify-between flex-wrap gap-2">
+                    <div class="flex items-center space-x-2.5">
+                      <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-rose-600 to-pink-500 text-white flex items-center justify-center font-bold text-sm shadow-md">📱</span>
+                      <div>
+                        <div class="flex items-center space-x-2">
+                          <h3 class="text-sm font-bold text-slate-900 dark:text-white">${isZh ? '24h AI 竖屏爆款速递' : '24h Trending AI Shorts & TikTok'}</h3>
+                          <span class="text-[10px] px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-600 dark:text-rose-400 font-mono font-bold border border-rose-500/30">TikTok & Shorts</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400">${isZh ? '45秒极客动手上手 · 智能体实测与短视频精要 · 点击原位即看' : '45s hands-on demos & viral agent workflows'}</p>
+                      </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                      <button onclick="filterVideoPlatform('tiktok')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-black/70 hover:bg-black text-rose-300 border border-rose-500/40 transition-all flex items-center space-x-1 cursor-pointer shadow-sm">
+                        <span>🎵 ${isZh ? 'TikTok 专区 ↗' : 'TikTok Feed ↗'}</span>
+                      </button>
+                      <button onclick="filterVideoPlatform('youtube-shorts')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-red-600/20 hover:bg-red-600/40 text-red-400 border border-red-500/40 transition-all flex items-center space-x-1 cursor-pointer shadow-sm">
+                        <span>🔴 ${isZh ? 'Shorts 专区 ↗' : 'Shorts Feed ↗'}</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    ${verticalItems.map(renderVerticalVideoCard).join('')}
+                  </div>
+                </section>
+              `;
+
+              if (botHorizontal.length > 0) {
+                html += `
+                  <section class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between px-1">
+                      <div class="flex items-center space-x-2">
+                        <span class="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center space-x-1.5">
+                          <span>🛠️</span><span>${isZh ? '实用工作流与系统架构讲座' : 'Workflows & System Architecture Masterclasses'}</span>
+                        </span>
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-mono font-semibold">16:9</span>
+                      </div>
+                      <span class="text-[11px] text-slate-400 font-mono">${botHorizontal.length} ${isZh ? '部实操教程' : 'tutorials'}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                      ${botHorizontal.map(renderHorizontalVideoCard).join('')}
+                    </div>
+                  </section>
+                `;
+              }
+              container.innerHTML = html;
+            }
           }
+          window._hasRenderedVideosTab = true;
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
         }
       } else if (tab === 'prompts') {
@@ -8168,8 +8261,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           sessionStorage.setItem('ainews_updated_at', data.updated_at || '');
         } catch (e) {}
 
-        // 核心防打扰：如果当前在视频专区且为定时后台轮询，仅静默更新缓存，绝不粗暴清空 DOM 重绘视频卡片
-        if (currentTab === 'videos' && !isManual) {
+        // 核心防打扰：仅当视频专区【已经完成过初次渲染】且处于每 180 秒后台静默轮询时，才避免重绘打扰正在播放的视频
+        // 若尚未完成初次渲染（包括首次打开页面直达 #videos），必须强制执行完整 UI 渲染
+        if (currentTab === 'videos' && !isManual && window._hasRenderedVideosTab) {
           refreshCountdown = 180;
           return;
         }
