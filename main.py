@@ -2,6 +2,8 @@
 Main pipeline entrypoint 2.0 - Coordinates fetching, Gemini processing, Top 3 digest, and output saving.
 """
 
+import socket
+socket.setdefaulttimeout(15.0)
 import sys
 
 try:
