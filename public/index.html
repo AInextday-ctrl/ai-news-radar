@@ -100,7 +100,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//storage.ghost.io/c/af/ca/afcaa655-46e2-45b8-889a-2881de5cce69/content/images/size/w1200/2026/10/IMG_3098-1.jpeg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
-  <link rel="preload" href="/js/app.min.js?v=6.9.2" as="script">
+  <link rel="preload" href="/js/app.min.js?v=6.9.3" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -3109,6 +3109,42 @@ and it told me the checkout page had hidden text telling AI agents to click an i
             <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 Creators & Pioneers</button>
           </div>
 
+          <!-- Sub-filter C: 6 Value Pillars (Frontier Tech, Practical Skills, Workplace AI, Business, Promos, Industry News) -->
+          <div id="celebrity-value-subfilter" class="w-full pt-3 mt-1 border-t border-slate-200/90 dark:border-slate-800/90 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 select-none">
+            <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 mr-1 flex items-center gap-1">
+              <span>🎯</span>
+              <span id="celeb-val-label">Value Focus:</span>
+            </span>
+            <button type="button" onclick="filterCelebrityTag('all')" id="celeb-tag-all" class="celeb-tag-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>🌟 All</span>
+              <span id="celeb-cnt-all" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/20 text-white font-bold">500</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('tech_frontier')" id="celeb-tag-tech_frontier" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>🔬 Frontier Tech</span>
+              <span id="celeb-cnt-tech_frontier" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('practical_skills')" id="celeb-tag-practical_skills" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>💡 Practical Skills</span>
+              <span id="celeb-cnt-practical_skills" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('workplace_ai')" id="celeb-tag-workplace_ai" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>⚡ Workplace AI</span>
+              <span id="celeb-cnt-workplace_ai" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('business_cases')" id="celeb-tag-business_cases" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>💼 Business Cases</span>
+              <span id="celeb-cnt-business_cases" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('promos_benefits')" id="celeb-tag-promos_benefits" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>🎁 Promos & Credits</span>
+              <span id="celeb-cnt-promos_benefits" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+            <button type="button" onclick="filterCelebrityTag('industry_news')" id="celeb-tag-industry_news" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+              <span>📰 Industry News</span>
+              <span id="celeb-cnt-industry_news" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
+            </button>
+          </div>
+
           <!-- Sub-filter B: 24h Trending Platforms -->
           <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
             <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 All Viral</button>
@@ -3902,7 +3938,7 @@ and it told me the checkout page had hidden text telling AI agents to click an i
     };
   </script>
 
-  <script defer src="/js/app.min.js?v=6.9.2"></script>
+  <script defer src="/js/app.min.js?v=6.9.3"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

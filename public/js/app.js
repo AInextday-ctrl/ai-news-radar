@@ -2144,8 +2144,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     const VALID_TABS = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
 
     function getTabFromHash() {
-      const hash = (window.location.hash || '').replace('#', '').trim().toLowerCase();
-      return VALID_TABS.includes(hash) ? hash : null;
+      const rawHash = (window.location.hash || '').replace('#', '').trim();
+      const parts = rawHash.split('?');
+      const tab = parts[0].toLowerCase();
+      if (parts[1]) {
+        try {
+          const params = new URLSearchParams(parts[1]);
+          const tagParam = params.get('tag');
+          if (tagParam) {
+            socialCelebrityTagFilter = tagParam;
+          }
+        } catch (e) {}
+      }
+      return VALID_TABS.includes(tab) ? tab : null;
     }
 
     function handleHashNavigation() {
@@ -2956,6 +2967,76 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         renderCelebritySpotlightBanner();
       }
     }
+
+    let socialCelebrityTagFilter = 'all';
+
+    function filterCelebrityTag(tag) {
+      socialCelebrityTagFilter = tag || 'all';
+      categoryCurrentPage = 1;
+      const allTags = ['all', 'tech_frontier', 'practical_skills', 'workplace_ai', 'business_cases', 'promos_benefits', 'industry_news'];
+      allTags.forEach(t => {
+        const b = document.getElementById('celeb-tag-' + t);
+        if (b) {
+          b.className = (t === socialCelebrityTagFilter)
+            ? "celeb-tag-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer"
+            : "celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer";
+        }
+      });
+      try {
+        if (window.history && window.history.replaceState) {
+          const url = new URL(window.location.href);
+          if (socialCelebrityTagFilter && socialCelebrityTagFilter !== 'all') {
+            url.hash = `#celebrity?tag=${socialCelebrityTagFilter}`;
+          } else {
+            url.hash = '#celebrity';
+          }
+          window.history.replaceState(null, '', url.toString());
+        }
+      } catch (e) {}
+      if (currentTab === 'celebrity') {
+        renderCategoryView('celebrity');
+      }
+    }
+    window.filterCelebrityTag = filterCelebrityTag;
+
+    function updateCelebrityTagBadges(allCelebs) {
+      if (!allCelebs || !allCelebs.length) return;
+      const counts = { all: allCelebs.length, tech_frontier: 0, practical_skills: 0, workplace_ai: 0, business_cases: 0, promos_benefits: 0, industry_news: 0 };
+      allCelebs.forEach(it => {
+        const tag = it.primary_tag || 'industry_news';
+        if (counts[tag] !== undefined) counts[tag]++;
+        else counts.industry_news++;
+      });
+      Object.keys(counts).forEach(k => {
+        const el = document.getElementById('celeb-cnt-' + k);
+        if (el) el.textContent = counts[k];
+      });
+    }
+
+    function copyTweetPrompt(btn, itemId) {
+      let targetItem = null;
+      if (cachedData && cachedData.grouped && cachedData.grouped.celebrity) {
+        targetItem = cachedData.grouped.celebrity.find(it => (it.id === itemId || it.url === itemId));
+      }
+      if (!targetItem && cachedData && cachedData.items) {
+        targetItem = cachedData.items.find(it => (it.id === itemId || it.url === itemId));
+      }
+      const text = targetItem ? (currentLang === 'zh' ? (targetItem.full_text_zh || targetItem.full_text_en) : (targetItem.full_text_en || targetItem.full_text_zh)) : '';
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const lbl = btn.querySelector('.copy-lbl');
+        if (lbl) {
+          const orig = lbl.textContent;
+          lbl.textContent = currentLang === 'zh' ? '已复制！' : 'Copied!';
+          btn.classList.add('bg-emerald-500/20', 'text-emerald-500', 'border-emerald-500/40');
+          setTimeout(() => {
+            lbl.textContent = orig;
+            btn.classList.remove('bg-emerald-500/20', 'text-emerald-500', 'border-emerald-500/40');
+          }, 1800);
+        }
+      }).catch(() => {});
+    }
+    window.copyTweetPrompt = copyTweetPrompt;
 
     let toolOriginFilter = 'all';
 
@@ -4967,6 +5048,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ? `<span class="px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-800 dark:text-amber-400 border border-amber-500/30 text-[10px] font-bold shrink-0">${isZh ? '🏢 官方动态' : '🏢 Official'}</span>`
         : `<span class="px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-800 dark:text-sky-300 border border-sky-500/30 text-[10px] font-bold shrink-0">${isZh ? '👤 大V动态' : '👤 Pioneer'}</span>`;
 
+      // 6 核心价值分类徽标 (完美兼容深浅双色，点击即按标签过滤)
+      const celebTagMap = {
+        tech_frontier: { zh: '🔬 前沿技术', en: '🔬 Frontier Tech', dark: 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30', light: 'bg-cyan-50 text-cyan-700 border-cyan-200' },
+        practical_skills: { zh: '💡 实战技巧', en: '💡 Practical Skills', dark: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30', light: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
+        workplace_ai: { zh: '⚡ 职场提效', en: '⚡ Workplace AI', dark: 'bg-amber-500/15 text-amber-300 border-amber-500/30', light: 'bg-amber-50 text-amber-800 border-amber-200' },
+        business_cases: { zh: '💼 商业落地', en: '💼 Business Cases', dark: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', light: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+        promos_benefits: { zh: '🎁 算力福利', en: '🎁 Promos & Credits', dark: 'bg-rose-500/15 text-rose-300 border-rose-500/30', light: 'bg-rose-50 text-rose-700 border-rose-200' },
+        industry_news: { zh: '📰 业界动态', en: '📰 Industry News', dark: 'bg-sky-500/15 text-sky-300 border-sky-500/30', light: 'bg-sky-50 text-sky-700 border-sky-200' }
+      };
+      const curTagKey = item.primary_tag || 'industry_news';
+      const curTagMeta = celebTagMap[curTagKey] || celebTagMap.industry_news;
+      const tagBadge = `<button type="button" onclick="event.stopPropagation(); filterCelebrityTag('${curTagKey}')" class="px-2 py-0.5 rounded-md ${curTagMeta.light} dark:${curTagMeta.dark} border text-[10px] font-bold shrink-0 hover:scale-105 active:scale-95 transition-all shadow-xs cursor-pointer" title="${isZh ? '点击按此价值标签筛选' : 'Filter by this topic'}">${isZh ? curTagMeta.zh : curTagMeta.en}</button>`;
+
       const signalLevel = (likes && (parseInt(likes.replace(/k/i, '000'), 10) > 1000)) 
         ? `<span class="text-[10px] font-mono text-emerald-500 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20 shrink-0">${isZh ? '📶 强信号' : '📶 Strong Signal'}</span>` 
         : `<span class="text-[10px] font-mono text-sky-500/80 bg-sky-500/10 px-1.5 py-0.5 rounded border border-sky-500/20 shrink-0">${isZh ? '📶 稳定截获' : '📶 Intercept'}</span>`;
@@ -5015,9 +5109,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                     ${todayBadge}
                     ${pinnedBadge}
                   </div>
-                  <div class="flex items-center space-x-1.5 shrink-0">
+                  <div class="flex items-center space-x-1.5 shrink-0 flex-wrap justify-end">
                     ${signalLevel}
                     ${platformBadge}
+                    ${tagBadge}
                     <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="p-1 rounded text-slate-400 hover:text-sky-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="${isZh ? '前往 𝕏 查看原推' : 'View on 𝕏'}">
                       <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     </a>
@@ -5426,6 +5521,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <button type="button" onclick="event.stopPropagation(); openSocialPostModal('${itemId}')" class="flex-1 py-1.5 px-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition-all text-center">
                 ${isZh ? '💬 贴文与热评' : '💬 Post & Comments'}
               </button>
+              ${item.has_code_or_prompt ? `
+              <button type="button" onclick="event.stopPropagation(); copyTweetPrompt(this, '${itemId}')" class="px-2.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/60 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 font-bold text-xs transition-all flex items-center space-x-1 shrink-0 cursor-pointer shadow-xs" title="${isZh ? '一键复制实战指令与提示词' : 'Copy command & prompt'}">
+                <span>📋</span>
+                <span class="copy-lbl">${isZh ? '复制指令' : 'Copy'}</span>
+              </button>` : ''}
               <a href="${item.url}" target="_blank" onclick="event.stopPropagation()" class="px-2.5 py-1.5 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 font-bold text-xs transition-all flex items-center space-x-1 shrink-0">
                 <span>${isZh ? '直达原推' : 'Original'}</span>
                 <span>↗</span>
@@ -7553,6 +7653,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             const peList = list.filter(it => !isCompanyOrBrand(it));
             list = peList.length > 0 ? peList : allCelebRaw.filter(it => !isCompanyOrBrand(it)).slice(0, 20);
           }
+
+          if (socialCelebrityTagFilter && socialCelebrityTagFilter !== 'all') {
+            list = list.filter(it => (it.primary_tag || 'industry_news') === socialCelebrityTagFilter);
+          }
+
+          updateCelebrityTagBadges(allCelebRaw);
+
           list.sort((a, b) => {
             const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
             const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
@@ -8595,6 +8702,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
         if (celebSubfilter) celebSubfilter.classList.remove('hidden');
         if (viralSubfilter) viralSubfilter.classList.add('hidden');
+      }
+
+      const valSubfilter = document.getElementById('celebrity-value-subfilter');
+      if (valSubfilter) {
+        valSubfilter.classList.toggle('hidden', mode === 'demos');
       }
 
       renderCategoryView('celebrity');

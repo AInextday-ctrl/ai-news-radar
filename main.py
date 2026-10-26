@@ -1904,6 +1904,19 @@ def save_news(items: list):
     except Exception as e:
         print(f"⚠️ [tool_image_localizer] 工具缩略图处理异常: {e}")
 
+    # 3.5 智能价值分类打标 (为大V推文与爆款注入 6 维核心价值标签)
+    try:
+        from tweet_classifier import classify_tweets_batch
+        classify_tweets_batch(recent_items, use_gemini=False)
+        classify_tweets_batch(all_master_items, use_gemini=False)
+        for cat_k, cat_list in latest_payload.get("grouped", {}).items():
+            if cat_k == "celebrity" and isinstance(cat_list, list):
+                classify_tweets_batch(cat_list, use_gemini=False)
+        if "viral_ticker_tweets" in latest_payload:
+            classify_tweets_batch(latest_payload["viral_ticker_tweets"], use_gemini=False)
+    except Exception as e:
+        print(f"⚠️ [tweet_classifier] 价值分类标注异常: {e}")
+
     # 4. 构建全量历史归档库 payload (archive_news.json - 包含全部历史沉淀与最新入库)
     all_archive_items = list(all_master_items)
     all_archive_items.sort(key=parse_time_for_sort, reverse=True)
