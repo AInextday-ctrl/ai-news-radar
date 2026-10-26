@@ -1685,15 +1685,30 @@ def save_news(items: list):
             recent_keys.add(get_it_key(it))
 
     celeb_recent = [it for it in recent_items if it.get("category") == "celebrity"]
-    if len(celeb_recent) < 150:
+    if len(celeb_recent) < 500:
         extra_celeb = [
             it for it in historical_items 
             if it.get("category") == "celebrity" 
             and get_it_key(it) not in recent_keys 
-            and (now_ts - parse_time_for_sort(it)) <= 7 * 86400
+            and (now_ts - parse_time_for_sort(it)) <= 14 * 86400
             and is_meaningful_tweet(it)
-        ][:(150 - len(celeb_recent))]
+        ][:(500 - len(celeb_recent))]
         for it in extra_celeb:
+            f_en = str(it.get("full_text_en") or "").strip()
+            f_zh = str(it.get("full_text_zh") or "").strip()
+            if f_en.count("\n") >= 3 and f_zh.count("\n") <= 1:
+                res = re.sub(r'\s+([•→💥💊🪪🧠👉📌🔹✅❌\-\*]|\d+[\.\/])\s*', r'\n\1 ', f_zh)
+                res = re.sub(r'([：:])\s+', r'\1\n', res)
+                res = re.sub(r'([。！？\?!])\s*', r'\1\n\n', res)
+                res = re.sub(r'(#[^\s#]+)\s+', r'\1\n', res)
+                res = re.sub(r'(@[^\s@]+)\s+', r'\1\n\n', res)
+                res = re.sub(r'([\U00010000-\U0010ffff])\s+', r'\1\n', res)
+                if f_en.count("\n") >= 3 and res.count("\n") <= 1:
+                    parts = [p.strip() for p in res.split(' ') if p.strip()]
+                    if len(parts) >= 3:
+                        res = '\n\n'.join(parts)
+                res = re.sub(r'\n{3,}', '\n\n', res).strip()
+                it["full_text_zh"] = res
             recent_items.append(it)
             recent_keys.add(get_it_key(it))
 
@@ -1910,6 +1925,18 @@ def save_news(items: list):
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
     with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
+
+    # 写入专门的大V推文全量归档库 (archive_celebrity.json - 极致轻量高速，瞬间拉取)
+    all_celeb_archive = [it for it in all_archive_items if it.get("category") == "celebrity"]
+    celeb_archive_payload = {
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+        "total_count": len(all_celeb_archive),
+        "items": all_celeb_archive
+    }
+    with open(os.path.join(DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
+        json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
+    with open(os.path.join(PUBLIC_DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
+        json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 🛡️ CI Quality Gate: 自动化数据质量门禁硬性审计
     try:

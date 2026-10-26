@@ -2627,7 +2627,44 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     let _archiveLoadingPromise = null;
+    let _celebArchiveLoadingPromise = null;
+
+    async function loadCelebrityArchiveData() {
+      if (window._cachedCelebrityArchive) return window._cachedCelebrityArchive;
+      try {
+        const res = await fetch('/data/archive_celebrity.json?v=' + Date.now());
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+        window._cachedCelebrityArchive = data;
+        return data;
+      } catch (err) {
+        console.warn('loadCelebrityArchiveData fallback to loadArchiveData:', err);
+        return loadArchiveData();
+      }
+    }
+
     async function ensureArchiveLoaded() {
+      if (typeof currentTab !== 'undefined' && currentTab === 'celebrity' && !window._hasMergedCelebArchive) {
+        if (!_celebArchiveLoadingPromise) {
+          _celebArchiveLoadingPromise = (async () => {
+            try {
+              const cData = await loadCelebrityArchiveData();
+              if (cData && Array.isArray(cData.items)) {
+                mergeArchiveIntoCachedData(cData.items);
+                window._hasMergedCelebArchive = true;
+                if (currentTab === 'celebrity') {
+                  renderCategoryView('celebrity');
+                }
+              }
+            } catch (e) {
+              console.warn('ensureCelebrityArchive failed:', e);
+            } finally {
+              _celebArchiveLoadingPromise = null;
+            }
+          })();
+        }
+      }
+
       if (window._hasMergedArchive) return;
       if (_archiveLoadingPromise) return _archiveLoadingPromise;
 
@@ -2637,6 +2674,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (archiveData && Array.isArray(archiveData.items)) {
             mergeArchiveIntoCachedData(archiveData.items);
             window._hasMergedArchive = true;
+            window._hasMergedCelebArchive = true;
             if (typeof currentTab !== 'undefined' && ['celebrity', 'news'].includes(currentTab)) {
               renderCategoryView(currentTab);
             }
@@ -7353,7 +7391,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
 
       // 进入专栏视图时，主动保证全量归档深度汇入，实现完整历史长卷翻页与回看
-      if (!window._hasMergedArchive && !window._archiveLoadingPromise) {
+      if (tab === 'celebrity' && !window._hasMergedCelebArchive) {
+        ensureArchiveLoaded();
+      } else if (!window._hasMergedArchive) {
         ensureArchiveLoaded();
       }
 
