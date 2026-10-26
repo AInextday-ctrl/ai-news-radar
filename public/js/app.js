@@ -6146,17 +6146,168 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const creators = (cachedData && cachedData.ai_creators && cachedData.ai_creators.length)
         ? cachedData.ai_creators
         : [
-            { name: "Fireship", handle: "@fireship", category: "⚡ 极速全栈实战", subscribers: "3.4M+", avatar: "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA" },
-            { name: "Theo - t3.gg", handle: "@t3dotgg", category: "🛠️ 全栈工程与架构", subscribers: "360K+", avatar: "https://unavatar.io/x/t3dotgg" },
-            { name: "AI Explained", handle: "@aiexplained-official", category: "🔥 深度盲测", subscribers: "450K+", avatar: "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw" },
-            { name: "Two Minute Papers", handle: "@TwoMinutePapers", category: "🎓 论文精讲", subscribers: "1.7M+", avatar: "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg" },
-            { name: "Andrej Karpathy", handle: "@karpathy", category: "🎓 泰斗手写原理", subscribers: "1.1M+", avatar: "https://unavatar.io/x/karpathy" },
-            { name: "3Blue1Brown", handle: "@3blue1brown", category: "🎓 几何直觉", subscribers: "6.8M+", avatar: "https://unavatar.io/youtube/UCYO_jab_esuFRV4b17AJtAw" },
-            { name: "Matthew Berman", handle: "@matthew_berman", category: "🤖 开源模型实测", subscribers: "680K+", avatar: "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA" },
-            { name: "Matt Wolfe", handle: "@mreflow", category: "🎨 实用工作流", subscribers: "620K+", avatar: "https://unavatar.io/x/mreflow" },
-            { name: "Yannic Kilcher", handle: "@YannicKilcher", category: "🎓 硬核论文细读", subscribers: "260K+", avatar: "https://unavatar.io/youtube/UCZHmQk67mN31gbHey6BVyNw" },
-            { name: "NetworkChuck", handle: "@NetworkChuck", category: "⚡ 本地化部署", subscribers: "4.2M+", avatar: "https://unavatar.io/youtube/UCOuGATIAbd2DvzJmUgXn2IQ" }
-          ];
+            {
+                        "name": "Anthropic",
+                        "handle": "@AnthropicAI",
+                        "category": "🏛️ Claude 官方前沿实战",
+                        "subscribers": "Official",
+                        "avatar": "https://unavatar.io/x/AnthropicAI"
+            },
+            {
+                        "name": "Nick Saraev",
+                        "handle": "@NickSaraev",
+                        "category": "⚡ 智能体与自动化实操",
+                        "subscribers": "180K+",
+                        "avatar": "https://unavatar.io/youtube/UC8w77vQ_H_mN31gbHey6BV"
+            },
+            {
+                        "name": "Andrej Karpathy",
+                        "handle": "@karpathy",
+                        "category": "🎓 泰斗手写原理",
+                        "subscribers": "1.1M+",
+                        "avatar": "https://unavatar.io/x/karpathy"
+            },
+            {
+                        "name": "Two Minute Papers",
+                        "handle": "@TwoMinutePapers",
+                        "category": "🎓 顶级论文速递",
+                        "subscribers": "1.7M+",
+                        "avatar": "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg"
+            },
+            {
+                        "name": "3Blue1Brown",
+                        "handle": "@3blue1brown",
+                        "category": "🎓 数学几何直觉",
+                        "subscribers": "6.8M+",
+                        "avatar": "https://unavatar.io/youtube/UCYO_jab_esuFRV4b17AJtAw"
+            },
+            {
+                        "name": "AI with Zygis",
+                        "handle": "@aiwithzygis",
+                        "category": "🎵 TikTok 爆款实测",
+                        "subscribers": "850K+",
+                        "avatar": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100"
+            },
+            {
+                        "name": "Fireship",
+                        "handle": "@fireship",
+                        "category": "⚡ 极速全栈实战",
+                        "subscribers": "3.4M+",
+                        "avatar": "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA"
+            },
+            {
+                        "name": "Theo - t3.gg",
+                        "handle": "@t3dotgg",
+                        "category": "🛠️ 全栈工程与架构",
+                        "subscribers": "360K+",
+                        "avatar": "https://unavatar.io/x/t3dotgg"
+            },
+            {
+                        "name": "Kellan Henneberry",
+                        "handle": "@kellanhenneberry",
+                        "category": "🤖 生产级工作流搭建",
+                        "subscribers": "95K+",
+                        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100"
+            },
+            {
+                        "name": "Nate Herk | AI Automation",
+                        "handle": "@NateHerk",
+                        "category": "⚙️ n8n与智能体流",
+                        "subscribers": "120K+",
+                        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100"
+            },
+            {
+                        "name": "Kayla VibeCodes",
+                        "handle": "@kaylavibecodes",
+                        "category": "🎵 TikTok 极客开发",
+                        "subscribers": "320K+",
+                        "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100"
+            },
+            {
+                        "name": "Dom the AI Tutor",
+                        "handle": "@domtheaitutor",
+                        "category": "🎬 生成式视效横评",
+                        "subscribers": "110K+",
+                        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100"
+            },
+            {
+                        "name": "Jeff Su",
+                        "handle": "@JeffSu",
+                        "category": "💼 生产力AI实践",
+                        "subscribers": "850K+",
+                        "avatar": "https://unavatar.io/youtube/UCU6cEYxhoqG13f5rA3eR3uA"
+            },
+            {
+                        "name": "AI Explained",
+                        "handle": "@aiexplained-official",
+                        "category": "🔥 独立深度盲测",
+                        "subscribers": "450K+",
+                        "avatar": "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw"
+            },
+            {
+                        "name": "Matt Wolfe",
+                        "handle": "@mreflow",
+                        "category": "🎨 实用工具矩阵",
+                        "subscribers": "620K+",
+                        "avatar": "https://unavatar.io/x/mreflow"
+            },
+            {
+                        "name": "Matthew Berman",
+                        "handle": "@matthew_berman",
+                        "category": "🤖 本地模型跑分",
+                        "subscribers": "680K+",
+                        "avatar": "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA"
+            },
+            {
+                        "name": "NetworkChuck",
+                        "handle": "@NetworkChuck",
+                        "category": "⚡ 本地化私有部署",
+                        "subscribers": "4.2M+",
+                        "avatar": "https://unavatar.io/youtube/UCOuGATIAbd2DvzJmUgXn2IQ"
+            },
+            {
+                        "name": "StatQuest",
+                        "handle": "@statquest",
+                        "category": "🎓 机器学习精要",
+                        "subscribers": "1.2M+",
+                        "avatar": "https://unavatar.io/youtube/UCtYLUTtgS3k1Fg4y5tAhLbw"
+            },
+            {
+                        "name": "Cole Medin",
+                        "handle": "@ColeMedin",
+                        "category": "🛠️ 智能体工程代码",
+                        "subscribers": "140K+",
+                        "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100"
+            },
+            {
+                        "name": "Androo AGI",
+                        "handle": "@androoagi",
+                        "category": "🎵 TikTok 智能体技巧",
+                        "subscribers": "210K+",
+                        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100"
+            },
+            {
+                        "name": "Melodize.ai",
+                        "handle": "@melodize.ai",
+                        "category": "🎵 TikTok AI音频合成",
+                        "subscribers": "190K+",
+                        "avatar": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=100"
+            },
+            {
+                        "name": "Futurepedia and AI Agent Lab",
+                        "handle": "@futurepedia",
+                        "category": "🌐 全球新工具评测",
+                        "subscribers": "290K+",
+                        "avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100"
+            },
+            {
+                        "name": "Liam Ottley",
+                        "handle": "@liamottley",
+                        "category": "💼 商业自动化落地",
+                        "subscribers": "410K+",
+                        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100"
+            }
+];
 
       const allActive = !selectedCreator;
       let html = `
@@ -7798,6 +7949,26 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
         if (selectedCreator) {
           list = list.filter(it => it.author === selectedCreator);
+        } else if (list.length > 1) {
+          // 创作者轮询交错 (Round-Robin Interleaving)，确保前台卡片相邻绝对不同作者，杜绝单一博客刷屏
+          const buckets = new Map();
+          for (const item of list) {
+            const cName = item.author || item.source || 'AI Creator';
+            if (!buckets.has(cName)) buckets.set(cName, []);
+            buckets.get(cName).push(item);
+          }
+          const interleaved = [];
+          let hasMore = true;
+          while (hasMore) {
+            hasMore = false;
+            for (const [cName, items] of buckets.entries()) {
+              if (items.length > 0) {
+                interleaved.push(items.shift());
+                if (items.length > 0) hasMore = true;
+              }
+            }
+          }
+          list = interleaved;
         }
 
         const totalItems = list.length;

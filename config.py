@@ -624,144 +624,234 @@ SOURCES = {
 # 顶流 AI 创作者矩阵元数据（前端博主直达栏与多样性展示使用）
 AI_CREATORS = [
     {
-        "id": "fireship",
-        "name": "Fireship",
-        "channel_id": "UCsBjURrPoezykLs9EqgamOA",
-        "handle": "@fireship",
-        "avatar": "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA",
-        "category": "⚡ 极速全栈实战",
-        "subscribers": "3.4M+",
-        "desc": "极速技术拆解与前沿模型实操"
+        "id": "anthropic",
+        "name": "Anthropic",
+        "handle": "@AnthropicAI",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/x/AnthropicAI",
+        "category": "🏛️ Claude 官方前沿实战",
+        "subscribers": "Official",
+        "desc": "Anthropic 深度实操与前沿 AI 技术演示"
     },
     {
-        "id": "theo",
-        "name": "Theo - t3.gg",
-        "channel_id": "UCbRP3c757lWg9M-U7TyEkXA",
-        "handle": "@t3dotgg",
-        "avatar": "https://unavatar.io/x/t3dotgg",
-        "category": "🛠️ 全栈工程与架构辩论",
-        "subscribers": "360K+",
-        "desc": "一线技术选型与模型落地深度评测"
+        "id": "nick_saraev",
+        "name": "Nick Saraev",
+        "handle": "@NickSaraev",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UC8w77vQ_H_mN31gbHey6BV",
+        "category": "⚡ 智能体与自动化实操",
+        "subscribers": "180K+",
+        "desc": "Nick Saraev 深度实操与前沿 AI 技术演示"
     },
     {
-        "id": "aiexplained",
-        "name": "AI Explained",
-        "channel_id": "UCNJ1Ymd5yFuUPtn21xtRbbw",
-        "handle": "@aiexplained-official",
-        "avatar": "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw",
-        "category": "🔥 深度评测与基准盲测",
-        "subscribers": "450K+",
-        "desc": "严谨的大模型思考链与测试期计算极限盲测"
-    },
-    {
-        "id": "twominutepapers",
-        "name": "Two Minute Papers",
-        "channel_id": "UCbfYPyITQ-7l4upoX8nvctg",
-        "handle": "@TwoMinutePapers",
-        "avatar": "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg",
-        "category": "🎓 论文精讲与学术突破",
-        "subscribers": "1.7M+",
-        "desc": "通俗震撼的前沿 AI 论文与图形学突破精讲"
-    },
-    {
-        "id": "karpathy",
+        "id": "andrej_karpathy",
         "name": "Andrej Karpathy",
-        "channel_id": "UCXUPKJO5MZQN11PqgIvyuvQ",
         "handle": "@karpathy",
+        "channel_id": "",
         "avatar": "https://unavatar.io/x/karpathy",
-        "category": "🎓 泰斗从零手写原理",
+        "category": "🎓 泰斗手写原理",
         "subscribers": "1.1M+",
-        "desc": "OpenAI 联创手写微积分链式法则与神经网络"
+        "desc": "Andrej Karpathy 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "two_minute_papers",
+        "name": "Two Minute Papers",
+        "handle": "@TwoMinutePapers",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UCbfYPyITQ-7l4upoX8nvctg",
+        "category": "🎓 顶级论文速递",
+        "subscribers": "1.7M+",
+        "desc": "Two Minute Papers 深度实操与前沿 AI 技术演示"
     },
     {
         "id": "3blue1brown",
         "name": "3Blue1Brown",
-        "channel_id": "UCYO_jab_esuFRV4b17AJtAw",
         "handle": "@3blue1brown",
+        "channel_id": "",
         "avatar": "https://unavatar.io/youtube/UCYO_jab_esuFRV4b17AJtAw",
-        "category": "🎓 几何直觉与可视化",
+        "category": "🎓 数学几何直觉",
         "subscribers": "6.8M+",
-        "desc": "Transformer 几何空间与注意力权重无死角拆解"
+        "desc": "3Blue1Brown 深度实操与前沿 AI 技术演示"
     },
     {
-        "id": "matthew_berman",
-        "name": "Matthew Berman",
-        "channel_id": "UCawZsQWqfGSbCI5yjkdVkTA",
-        "handle": "@matthew_berman",
-        "avatar": "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA",
-        "category": "🤖 开源模型与本地实测",
-        "subscribers": "680K+",
-        "desc": "开源模型微调、极速推理与私有化实测"
+        "id": "ai_with_zygis",
+        "name": "AI with Zygis",
+        "handle": "@aiwithzygis",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100",
+        "category": "🎵 TikTok 爆款实测",
+        "subscribers": "850K+",
+        "desc": "AI with Zygis 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "fireship",
+        "name": "Fireship",
+        "handle": "@fireship",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UCsBjURrPoezykLs9EqgamOA",
+        "category": "⚡ 极速全栈实战",
+        "subscribers": "3.4M+",
+        "desc": "Fireship 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "theo___t3_gg",
+        "name": "Theo - t3.gg",
+        "handle": "@t3dotgg",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/x/t3dotgg",
+        "category": "🛠️ 全栈工程与架构",
+        "subscribers": "360K+",
+        "desc": "Theo - t3.gg 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "kellan_henneberry",
+        "name": "Kellan Henneberry",
+        "handle": "@kellanhenneberry",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100",
+        "category": "🤖 生产级工作流搭建",
+        "subscribers": "95K+",
+        "desc": "Kellan Henneberry 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "nate_herk__ai_automation",
+        "name": "Nate Herk | AI Automation",
+        "handle": "@NateHerk",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100",
+        "category": "⚙️ n8n与智能体流",
+        "subscribers": "120K+",
+        "desc": "Nate Herk | AI Automation 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "kayla_vibecodes",
+        "name": "Kayla VibeCodes",
+        "handle": "@kaylavibecodes",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100",
+        "category": "🎵 TikTok 极客开发",
+        "subscribers": "320K+",
+        "desc": "Kayla VibeCodes 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "dom_the_ai_tutor",
+        "name": "Dom the AI Tutor",
+        "handle": "@domtheaitutor",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100",
+        "category": "🎬 生成式视效横评",
+        "subscribers": "110K+",
+        "desc": "Dom the AI Tutor 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "jeff_su",
+        "name": "Jeff Su",
+        "handle": "@JeffSu",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UCU6cEYxhoqG13f5rA3eR3uA",
+        "category": "💼 生产力AI实践",
+        "subscribers": "850K+",
+        "desc": "Jeff Su 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "ai_explained",
+        "name": "AI Explained",
+        "handle": "@aiexplained-official",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UCNJ1Ymd5yFuUPtn21xtRbbw",
+        "category": "🔥 独立深度盲测",
+        "subscribers": "450K+",
+        "desc": "AI Explained 深度实操与前沿 AI 技术演示"
     },
     {
         "id": "matt_wolfe",
         "name": "Matt Wolfe",
-        "channel_id": "UChpleBmo18P08aKCIgti38g",
         "handle": "@mreflow",
+        "channel_id": "",
         "avatar": "https://unavatar.io/x/mreflow",
-        "category": "🎨 AI 工具与多模态",
+        "category": "🎨 实用工具矩阵",
         "subscribers": "620K+",
-        "desc": "最新 AI 实用工具盘点与多模态工作流"
+        "desc": "Matt Wolfe 深度实操与前沿 AI 技术演示"
     },
     {
-        "id": "yannic_kilcher",
-        "name": "Yannic Kilcher",
-        "channel_id": "UCZHmQk67mN31gbHey6BVyNw",
-        "handle": "@YannicKilcher",
-        "avatar": "https://unavatar.io/youtube/UCZHmQk67mN31gbHey6BVyNw",
-        "category": "🎓 硬核论文逐行细读",
-        "subscribers": "260K+",
-        "desc": "强化学习与大模型底层数学架构精读"
+        "id": "matthew_berman",
+        "name": "Matthew Berman",
+        "handle": "@matthew_berman",
+        "channel_id": "",
+        "avatar": "https://unavatar.io/youtube/UCawZsQWqfGSbCI5yjkdVkTA",
+        "category": "🤖 本地模型跑分",
+        "subscribers": "680K+",
+        "desc": "Matthew Berman 深度实操与前沿 AI 技术演示"
     },
     {
         "id": "networkchuck",
         "name": "NetworkChuck",
-        "channel_id": "UCOuGATIAbd2DvzJmUgXn2IQ",
         "handle": "@NetworkChuck",
+        "channel_id": "",
         "avatar": "https://unavatar.io/youtube/UCOuGATIAbd2DvzJmUgXn2IQ",
-        "category": "⚡ 极客网络与硬件本地化",
+        "category": "⚡ 本地化私有部署",
         "subscribers": "4.2M+",
-        "desc": "5分钟在普通笔记本部署本地私密 AI"
-    },
-    {
-        "id": "dave_ebbelaar",
-        "name": "Dave Ebbelaar",
-        "channel_id": "UCn8ujwUInbJkBhffxqAPBVQ",
-        "handle": "@DaveEbbelaar",
-        "avatar": "https://unavatar.io/youtube/UCn8ujwUInbJkBhffxqAPBVQ",
-        "category": "🤖 AI Agents 与实战架构",
-        "subscribers": "180K+",
-        "desc": "LangGraph、自主智能体与生产级 Agent 落地"
-    },
-    {
-        "id": "cole_medin",
-        "name": "Cole Medin",
-        "channel_id": "UCMwVTLZIRRUyyVrkjDpn4pA",
-        "handle": "@ColeMedin",
-        "avatar": "https://unavatar.io/youtube/UCMwVTLZIRRUyyVrkjDpn4pA",
-        "category": "⚡ 本地大模型与私有知识库",
-        "subscribers": "150K+",
-        "desc": "Ollama、RAG 向量搜索与本地模型极致优化"
-    },
-    {
-        "id": "prompt_engineering",
-        "name": "Prompt Engineering",
-        "channel_id": "UCf4tGwyNQGyFWX3F-9rUk9A",
-        "handle": "@PromptEngineering",
-        "avatar": "https://unavatar.io/youtube/UCf4tGwyNQGyFWX3F-9rUk9A",
-        "category": "🛠️ 开源工具与测评",
-        "subscribers": "220K+",
-        "desc": "前沿开源大模型快速评测与实操部署"
+        "desc": "NetworkChuck 深度实操与前沿 AI 技术演示"
     },
     {
         "id": "statquest",
         "name": "StatQuest",
-        "channel_id": "UCtYLUTtgS3k1Fg4y5tAhLbw",
         "handle": "@statquest",
+        "channel_id": "",
         "avatar": "https://unavatar.io/youtube/UCtYLUTtgS3k1Fg4y5tAhLbw",
-        "category": "🎓 机器学习精髓与数学直觉",
+        "category": "🎓 机器学习精要",
         "subscribers": "1.2M+",
-        "desc": "Josh Starmer 生动拆解 Transformer、注意力与扩散模型"
+        "desc": "StatQuest 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "cole_medin",
+        "name": "Cole Medin",
+        "handle": "@ColeMedin",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100",
+        "category": "🛠️ 智能体工程代码",
+        "subscribers": "140K+",
+        "desc": "Cole Medin 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "androo_agi",
+        "name": "Androo AGI",
+        "handle": "@androoagi",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=100",
+        "category": "🎵 TikTok 智能体技巧",
+        "subscribers": "210K+",
+        "desc": "Androo AGI 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "melodize_ai",
+        "name": "Melodize.ai",
+        "handle": "@melodize.ai",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=100",
+        "category": "🎵 TikTok AI音频合成",
+        "subscribers": "190K+",
+        "desc": "Melodize.ai 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "futurepedia_and_ai_agent_lab",
+        "name": "Futurepedia and AI Agent Lab",
+        "handle": "@futurepedia",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100",
+        "category": "🌐 全球新工具评测",
+        "subscribers": "290K+",
+        "desc": "Futurepedia and AI Agent Lab 深度实操与前沿 AI 技术演示"
+    },
+    {
+        "id": "liam_ottley",
+        "name": "Liam Ottley",
+        "handle": "@liamottley",
+        "channel_id": "",
+        "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100",
+        "category": "💼 商业自动化落地",
+        "subscribers": "410K+",
+        "desc": "Liam Ottley 深度实操与前沿 AI 技术演示"
     }
 ]
 
