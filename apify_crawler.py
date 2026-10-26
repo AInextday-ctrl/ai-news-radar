@@ -58,7 +58,7 @@ LEADER_HANDLES = [
     "gdb", "elonmusk", "finkd", "satyanadella", "sundarpichai", "AndrewYNg",
     "DrJimFan", "JeffDean", "drfeifei", "AravSrinivas", "arthurmensch", "aidangomez",
     # 一线核心架构师、技术副总与关键布道者
-    "thsottiaux", "polynoamial", "OfficialLoganK", "swyx", "danshipper",
+    "thsottiaux", "polynoamial", "OfficialLoganK", "swyx", "danshipper", "AaronLevie", "alliekmiller", "jasonlk", "eladgil", "benthompson", "lennysan",
     "alexandr_wang", "bindureddy", "svpino", "rowancheung", "samyamiam",
     "mikeyk", "alexalbert__", "kevin_t_ngo", "hwchase17", "jerryjliu0",
     "levelsio", "amasad", "emostaque", "fchollet", "_jasonwei", "markchen90",
@@ -78,7 +78,7 @@ LAB_HANDLES = [
     "ollama", "LMStudioAI", "vllm_project", "sgl_project", "UnslothAI",
     "crewAIInc", "replit", "v0", "stackblitz", "codeiumdev",
     "togethercompute", "GroqInc", "bfl_ml", "midjourney", "runwayml",
-    "luma_ai", "Kling_ai", "Hailuo_AI", "suno_ai_", "elevenlabsio", "ArtificialAnlys"
+    "luma_ai", "Kling_ai", "Hailuo_AI", "suno_ai_", "elevenlabsio", "ArtificialAnlys", "PalantirTech", "SnowflakeDB", "Databricks", "scale_ai"
 ]
 
 # 引入动态知识库与自适应搜索生成器 (彻底告别写死过时模型名称)
@@ -348,7 +348,7 @@ def fetch_incremental_tweets(
     all_queries.append((q_labs, 35))
 
     # 3. 全网 AI 标签与前沿模型爆款推文 (高热社群共鸣、极客神作、开源爆款与实操技巧)
-    for vq in dynamic_queries[:2]:
+    for vq in dynamic_queries[:3]:
         all_queries.append((vq, 30))
 
     raw_items = []
@@ -562,7 +562,7 @@ def fetch_incremental_tweets(
                 "mcp", "model", "agent", "comfyui", "flux", "sora", "kling",
                 "wan", "ollama", "vllm", "weights", "benchmark", "reasoning",
                 "prompt", "inference", "quantiz", "fine-tun", "neural", "lora",
-                "workflow", "coding", "robotics", "transformer", "diffusion", "open source"
+                "workflow", "coding", "robotics", "transformer", "diffusion", "open source", "enterprise", "in production", "roi", "case study", "customer", "arr", "b2b", "revenue", "cost reduction", "adoption"
             ]
             lower_text = tweet_text.lower()
             if not any(k in lower_text for k in ai_keywords):

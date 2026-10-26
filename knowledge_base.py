@@ -117,9 +117,17 @@ class DynamicKnowledgeStore:
         # 3. 架构突破与工程范式
         breakthrough_subquery = '"Claude Code" OR "Cursor workflow" OR "vibe coding" OR "AI agent" OR "test-time compute" OR "MCP server"'
 
+        # 4. 商业落地与真实企业 ROI 爆款专属检索式 (Enterprise Landing & Real ROI Case Studies)
+        enterprise_landing_subquery = (
+            '("enterprise AI" OR "in production" OR "AI ROI" OR "case study" OR '
+            '"production deployment" OR "B2B AI" OR "enterprise adoption" OR "AI ARR" OR '
+            '"cost reduction" OR "customer deployment")'
+        )
+
         return [
             f"({tag_query}) (min_faves:80 OR min_retweets:15) -filter:replies lang:en -crypto -airdrop -giveaway -#NFT -#memecoin",
-            f"({models_subquery} OR {breakthrough_subquery}) (min_faves:50 OR min_retweets:10) -filter:replies lang:en -crypto -airdrop"
+            f"({models_subquery} OR {breakthrough_subquery}) (min_faves:50 OR min_retweets:10) -filter:replies lang:en -crypto -airdrop",
+            f"{enterprise_landing_subquery} (min_faves:40 OR min_retweets:8) -filter:replies lang:en -crypto -airdrop -giveaway"
         ]
 
     @classmethod

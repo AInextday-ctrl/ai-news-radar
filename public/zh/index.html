@@ -100,7 +100,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//storage.ghost.io/c/af/ca/afcaa655-46e2-45b8-889a-2881de5cce69/content/images/size/w1200/2026/10/IMG_3098-1.jpeg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
-  <link rel="preload" href="/zh/js/app.min.js?v=6.9.3" as="script">
+  <link rel="preload" href="/zh/js/app.min.js?v=6.9.4" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -3152,73 +3152,79 @@ Claude Code 在我笔记本电脑上的一个隐藏文件夹中发现了很多�
       <!-- 专栏次级控制器全宽卡片 (包含模式切换与分类标签，宽度100%舒展，彻底杜绝按钮挤压变形) -->
       <div id="cat-controls-bar" class="w-full space-y-3">
         <!-- 领袖观点与全网爆帖专属次级控制器容器 -->
-        <div id="social-mode-switcher-wrap" class="hidden flex flex-col md:flex-row md:items-center justify-between gap-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-          <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台热帖) -->
-          <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
-            <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
-              <span id="txt-social-mode-leader">🐦 前沿发声</span>
-              <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">500</span>
-            </button>
-            <button id="btn-social-mode-demos" onclick="switchSocialViewMode('demos')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
-              <span id="txt-social-mode-demos" class="flex items-center gap-1.5">🎬 极客实测 Demo</span>
-              <span id="badge-count-demos" class="px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-mono font-bold">48h</span>
-            </button>
-            <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
-              <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
-              <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">390</span>
-            </button>
+        <div id="social-mode-switcher-wrap" class="hidden space-y-3 p-3.5 bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+          <!-- 上层行：主模式分段切换器 (左) + 角色/平台子筛选器 (右) -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 w-full">
+            <!-- 一级主模式分段切换器 (大V领袖 vs 24h全网平台热帖) -->
+            <div class="inline-flex p-1 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shrink-0">
+              <button id="btn-social-mode-leader" onclick="switchSocialViewMode('leader')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-bold transition-all flex items-center space-x-2 bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">
+                <span id="txt-social-mode-leader">🐦 前沿发声</span>
+                <span id="badge-count-leader" class="px-2 py-0.5 rounded-full text-[11px] bg-white/20 text-white font-mono font-bold">500</span>
+              </button>
+              <button id="btn-social-mode-demos" onclick="switchSocialViewMode('demos')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
+                <span id="txt-social-mode-demos" class="flex items-center gap-1.5">🎬 极客实测 Demo</span>
+                <span id="badge-count-demos" class="px-2 py-0.5 rounded-full text-[11px] bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 font-mono font-bold">48h</span>
+              </button>
+              <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
+                <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
+                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">390</span>
+              </button>
+            </div>
+
+            <!-- 右侧容器：子筛选 A (前沿社交) 与 子筛选 B (24h平台热帖) -->
+            <div class="flex items-center gap-2 flex-wrap sm:justify-end">
+              <!-- 子筛选 A：前沿社交专属 (全部动态 / 官方机构 / 大V与研发者) -->
+              <div id="celebrity-subfilter" class="flex items-center gap-2 flex-wrap">
+                <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">全部动态</button>
+                <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 官方机构</button>
+                <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 大V与研发者</button>
+              </div>
+
+              <!-- 子筛选 B：24h平台热帖专属 -->
+              <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
+                <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 全部热帖</button>
+                <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 极速飙升</button>
+                <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">💡 极客硬核首发</button>
+                <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">𝕏 平台热榜</button>
+                <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🧵 Threads 讨论</button>
+              </div>
+            </div>
           </div>
 
-          <!-- 子筛选 A：前沿社交专属 (全部动态 / 官方机构 / 大V与研发者) -->
-          <div id="celebrity-subfilter" class="flex items-center gap-2 flex-wrap">
-            <button onclick="filterSocialPlatform('all')" id="celeb-filter-all" class="celeb-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 text-white shadow-sm shadow-sky-600/30 whitespace-nowrap shrink-0">全部动态</button>
-            <button onclick="filterSocialPlatform('company')" id="celeb-filter-company" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">🏢 官方机构</button>
-            <button onclick="filterSocialPlatform('person')" id="celeb-filter-person" class="celeb-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0">👤 大V与研发者</button>
-          </div>
-
-          <!-- 子筛选 C：大V推文 6 维核心价值分类胶囊 (前沿技术、实战技巧、职场提效、商业落地、算力福利、业界动态) -->
-          <div id="celebrity-value-subfilter" class="w-full pt-3 mt-1 border-t border-slate-200/90 dark:border-slate-800/90 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 select-none">
+          <!-- 下层行：子筛选 C：6 维核心价值分类胶囊 (全宽 100% 独立展示，彻底杜绝按钮挤压与右侧被切) -->
+          <div id="celebrity-value-subfilter" class="w-full pt-3 border-t border-slate-200/90 dark:border-slate-800/90 flex items-center gap-2 overflow-x-auto no-scrollbar py-1 select-none pr-8">
             <span class="text-xs font-bold text-slate-500 dark:text-slate-400 shrink-0 mr-1 flex items-center gap-1">
               <span>🎯</span>
               <span id="celeb-val-label">价值维度：</span>
             </span>
-            <button type="button" onclick="filterCelebrityTag('all')" id="celeb-tag-all" class="celeb-tag-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('all')" id="celeb-tag-all" class="celeb-tag-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>🌟 全部</span>
               <span id="celeb-cnt-all" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/20 text-white font-bold">500</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('tech_frontier')" id="celeb-tag-tech_frontier" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('tech_frontier')" id="celeb-tag-tech_frontier" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>🔬 前沿技术</span>
               <span id="celeb-cnt-tech_frontier" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('practical_skills')" id="celeb-tag-practical_skills" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('practical_skills')" id="celeb-tag-practical_skills" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>💡 实战技巧</span>
               <span id="celeb-cnt-practical_skills" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('workplace_ai')" id="celeb-tag-workplace_ai" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('workplace_ai')" id="celeb-tag-workplace_ai" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>⚡ 职场提效</span>
               <span id="celeb-cnt-workplace_ai" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('business_cases')" id="celeb-tag-business_cases" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('business_cases')" id="celeb-tag-business_cases" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>💼 商业落地</span>
               <span id="celeb-cnt-business_cases" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('promos_benefits')" id="celeb-tag-promos_benefits" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('promos_benefits')" id="celeb-tag-promos_benefits" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>🎁 算力福利</span>
               <span id="celeb-cnt-promos_benefits" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-            <button type="button" onclick="filterCelebrityTag('industry_news')" id="celeb-tag-industry_news" class="celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
+            <button type="button" onclick="filterCelebrityTag('industry_news')" id="celeb-tag-industry_news" class="celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer">
               <span>📰 业界动态</span>
               <span id="celeb-cnt-industry_news" class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">0</span>
             </button>
-          </div>
-
-          <!-- 子筛选 B：24h平台热帖专属 -->
-          <div id="viral-platform-subfilter" class="hidden flex items-center gap-2 flex-wrap">
-            <button onclick="filterViralPlatform('all')" id="viral-filter-all" class="viral-filter-btn active px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-rose-600 text-white shadow-sm shadow-rose-600/30 transition-all whitespace-nowrap shrink-0">🔥 全部热帖</button>
-            <button onclick="filterViralPlatform('surging')" id="viral-filter-surging" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🚀 极速飙升</button>
-            <button onclick="filterViralPlatform('breakthrough')" id="viral-filter-breakthrough" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">💡 极客硬核首发</button>
-            <button onclick="filterViralPlatform('x')" id="viral-filter-x" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">𝕏 平台热榜</button>
-            <button onclick="filterViralPlatform('threads')" id="viral-filter-threads" class="viral-filter-btn px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all whitespace-nowrap shrink-0">🧵 Threads 讨论</button>
           </div>
         </div>
 
@@ -4019,7 +4025,7 @@ Claude Code 在我笔记本电脑上的一个隐藏文件夹中发现了很多�
     };
   </script>
 
-  <script defer src="/zh/js/app.min.js?v=6.9.3"></script>
+  <script defer src="/zh/js/app.min.js?v=6.9.4"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

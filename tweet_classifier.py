@@ -131,7 +131,7 @@ def detect_code_or_prompt(text_en: str, text_zh: str) -> bool:
 def rule_based_classify(text_en: str, text_zh: str, author_handle: str) -> str:
     combined = f"{author_handle} {text_en} {text_zh}".lower()
     
-    # 1. Promos, Credits, Reset, Discounts
+    # 1. 算力福利与额度重置 (优先最高，避免福利贴被误判)
     if any(k in combined for k in [
         "reset", "rest and reset", "quota", "usage limit", "free credit", "free tier",
         "grant", "hackathon", "$150k grant", "discount", "coupon", "promo code", "giveaway",
@@ -139,16 +139,30 @@ def rule_based_classify(text_en: str, text_zh: str, author_handle: str) -> str:
     ]):
         return "promos_benefits"
         
-    # 2. Practical Skills & Tutorials
+    # 2. 真实商业落地与企业 ROI 案例 (高优先级，采用单词边界精准拦截真实商业案例)
+    if re.search(r'\b(roi|arr|b2b|gtm|pmf|saas|acv|tam)\b', combined, re.I) or any(k in combined for k in [
+        "in production", "production deployment", "enterprise ai", "case study", "customer case",
+        "customer story", "client story", "paying customer", "enterprise adoption", "cost reduction",
+        "reduced cost", "operational savings", "annual recurring revenue", "profit alert",
+        "profit margin", "gross margin", "valuation", "fundraising", "billion", "million contract",
+        "commercialization", "business model", "enterprise sales", "pricing model", "monetization",
+        "$/hr", "per chip profit", "contract value", "enterprise tier", "poc to production",
+        "落地案例", "生产环境", "企业级", "客户案例", "大客户", "商业化", "降本增效", "企业落地",
+        "商业模式", "交付", "签约", "付费用户", "订阅收入", "企业应用", "数字化转型", "业务指标",
+        "商业闭环", "利润", "营收", "变现", "估值", "出海"
+    ]):
+        return "business_cases"
+        
+    # 3. 实战技巧与提示词教程
     if any(k in combined for k in [
         "prompt", "try this:", "how to", "tutorial", "step 1", "step 2", "bonus - learn",
         "system prompt", "cursor rule", "claude code", "vibe coding", "tips", "tricks",
-        "workflow", "cheat sheet", "guide", "learn excel", "learn sql", "learn python",
+        "cheat sheet", "guide", "learn excel", "learn sql", "learn python",
         "提示词", "实战", "教程", "秘籍", "技巧", "怎么用", "指令", "心法", "指南"
     ]):
         return "practical_skills"
         
-    # 3. Workplace AI & Task Replacement
+    # 4. 职场提效与工作自动化
     if any(k in combined for k in [
         "taking peoples jobs", "replace", "job loss", "automate", "productivity", "save hours",
         "office", "workplace", "layoffs", "harness", "doing work for", "agent buy", "buy something for me",
@@ -156,15 +170,7 @@ def rule_based_classify(text_en: str, text_zh: str, author_handle: str) -> str:
     ]):
         return "workplace_ai"
         
-    # 4. Business Cases & ROI
-    if any(k in combined for k in [
-        "profit alert", "revenue", "roi", "arr", "enterprise", "market", "valuation", "fundraising",
-        "billion", "million", "acquisition", "commercial", "pricing", "$/hr", "monetization",
-        "利润", "营收", "商业", "企业落地", "变现", "估值", "出海", "市值", "投资"
-    ]):
-        return "business_cases"
-        
-    # 5. Tech Frontier & Research
+    # 5. 前沿技术突破与研究
     if any(k in combined for k in [
         "paper", "architecture", "benchmark", "weights", "parameters", "context window",
         "kv cache", "inference", "deepseek", "vllm", "sglang", "moe", "reasoning",
@@ -173,7 +179,7 @@ def rule_based_classify(text_en: str, text_zh: str, author_handle: str) -> str:
     ]):
         return "tech_frontier"
         
-    # 6. Default to Industry News
+    # 6. 默认业界动态
     return "industry_news"
 
 def enrich_tweet_with_tag(tweet: Dict[str, Any], tag: str, has_code: bool) -> Dict[str, Any]:

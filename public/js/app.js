@@ -2978,8 +2978,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const b = document.getElementById('celeb-tag-' + t);
         if (b) {
           b.className = (t === socialCelebrityTagFilter)
-            ? "celeb-tag-btn active px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer"
-            : "celeb-tag-btn px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer";
+            ? "celeb-tag-btn active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-indigo-600 text-white shadow-sm shadow-indigo-600/30 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer"
+            : "celeb-tag-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700 hover:bg-slate-200 dark:hover:bg-slate-700 whitespace-nowrap shrink-0 flex items-center gap-1.5 transition-all cursor-pointer";
         }
       });
       try {
