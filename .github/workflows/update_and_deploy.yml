@@ -52,7 +52,7 @@ jobs:
 
       - name: Enforce Multilingual Quality & Consistency Gate
         run: |
-          python language_sentinel.py --verify-only || (echo "⚠️ 自动触发自愈哨兵修正..." && python language_sentinel.py)
+          python language_sentinel.py
 
       - name: Dual Edition Static Prerender & SEO Publisher
         run: |
