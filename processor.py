@@ -94,7 +94,15 @@ def has_chinglish_seams(text: str) -> bool:
         r'Dom\s+the\s+AI\s+Tutor',
         r'Futurepedia\s+and\s+AI\s+Agent\s+Lab',
         r'Nate\s+Herk\s*\|\s*AI\s+Automation',
-        r'Two\s+Minute\s+Papers'
+        r'Two\s+Minute\s+Papers',
+        r'AI\s+Automation',
+        r'AI\s+Investor',
+        r'AI\s+Uncovered',
+        r'Lina\s+Sharif\s+AI',
+        r'Matt\s+AI',
+        r'Sam\s+E\s+AI',
+        r'Corbin\s+AI',
+        r'Prompt\s+Engineering\s+Daily'
     ]
     s_check = re.sub(r'\b(?:' + '|'.join(known_creators) + r')\b', '', s_check, flags=re.IGNORECASE)
 

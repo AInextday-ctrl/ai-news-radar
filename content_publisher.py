@@ -2141,14 +2141,14 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         raw_author = it.get("author_en") or it.get("author") or "AI Pioneer"
         raw_author = raw_author.replace(" 官方", " (Official)").replace("官方", " (Official)")
-        if re.search(r'[一-鿿]', raw_author):
-            raw_author = re.sub(r'[一-鿿\s]+', ' ', raw_author).strip() or "AI Pioneer"
+        if re.search(r'[\u4e00-\u9fff]', raw_author):
+            raw_author = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_author).strip() or "AI Pioneer"
         author = safe_text(raw_author, 40)
     handle = it.get("author_handle") or f"@{author.replace(' ', '')}"
     
     raw_role = (it.get("author_role") if is_zh else it.get("author_role_en")) or ""
-    if not is_zh and re.search(r'[一-鿿]', raw_role):
-        raw_role = re.sub(r'[一-鿿\s]+', ' ', raw_role).strip()
+    if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_role):
+        raw_role = re.sub(r'[\u4e00-\u9fff\s]+', ' ', raw_role).strip()
     if raw_role.startswith("http") or "t.co/" in raw_role or len(raw_role) < 3:
         raw_role = ""
     if not raw_role:
@@ -2167,8 +2167,8 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         raw_text = it.get("full_text_en") or it.get("quote_en") or it.get("summary_en") or it.get("title_en") or it.get("title", "")
         raw_text = re.sub(r'\s*https://t\.co/\w+$', '', raw_text).strip()
-        if re.search(r'[一-鿿]', raw_text):
-            raw_text = re.sub(r'[一-鿿]+', '', raw_text).strip() or "Frontier AI development."
+        if re.search(r'[\u4e00-\u9fff]', raw_text):
+            raw_text = re.sub(r'[\u4e00-\u9fff]+', '', raw_text).strip() or "Frontier AI development."
         text = safe_text(raw_text, 250)
         btn_text = "View Post ↗"
 
@@ -2182,77 +2182,75 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         import urllib.parse
         opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
         thumb_html = f"""
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
-          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
         </div>"""
     elif it.get("has_video") or it.get("video_url"):
         thumb_html = f"""
-        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 w-[72px] h-[52px] max-w-[72px] max-h-[52px]">
           <span class="text-base">🎥</span>
         </div>"""
 
     if is_hl:
         if theme == "amber":
-            pill_style = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30"
-            border_style = "border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)]"
+            pill_style = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30 text-white"
+            border_style = "border border-amber-400 dark:border-amber-400/90 ring-1 ring-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.18)]"
             top_line = "bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"
             card_bg = "bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         elif theme == "cyan":
-            pill_style = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30"
-            border_style = "border-2 border-sky-400 dark:border-sky-400/90 shadow-[0_0_20px_rgba(56,189,248,0.22)] dark:shadow-[0_0_25px_rgba(56,189,248,0.28)]"
+            pill_style = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30 text-white"
+            border_style = "border border-sky-400 dark:border-sky-400/90 ring-1 ring-sky-400/30 shadow-[0_0_15px_rgba(56,189,248,0.18)]"
             top_line = "bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
             card_bg = "bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         elif theme == "emerald":
-            pill_style = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30"
-            border_style = "border-2 border-emerald-400 dark:border-emerald-400/90 shadow-[0_0_20px_rgba(52,211,153,0.22)] dark:shadow-[0_0_25px_rgba(52,211,153,0.28)]"
+            pill_style = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30 text-white"
+            border_style = "border border-emerald-400 dark:border-emerald-400/90 ring-1 ring-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.18)]"
             top_line = "bg-gradient-to-r from-emerald-400 via-teal-500 to-sky-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
             card_bg = "bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         else: # rose
-            pill_style = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30"
-            border_style = "border-2 border-rose-400 dark:border-rose-400/90 shadow-[0_0_20px_rgba(244,63,94,0.22)] dark:shadow-[0_0_25px_rgba(244,63,94,0.28)]"
+            pill_style = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30 text-white"
+            border_style = "border border-rose-400 dark:border-rose-400/90 ring-1 ring-rose-400/30 shadow-[0_0_15px_rgba(244,63,94,0.18)]"
             top_line = "bg-gradient-to-r from-rose-400 via-pink-500 to-purple-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"
             card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
 
         return f"""
-              <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
-                <div class="absolute -top-[2px] left-4 right-4 h-[3px] {top_line} rounded-full"></div>
-                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-                    <div class="flex items-center space-x-2 min-w-0">
-                      <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
-                      </div>
-                      <div class="min-w-0">
-                        <div class="flex items-center space-x-1 leading-none h-4">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                        </div>
-                        <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                          {handle} · {role}
-                        </div>
-                      </div>
+              <article class="box-border relative rounded-2xl p-3 {vis_cls} flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="absolute -top-[1px] left-3 right-3 h-[3px] {top_line} rounded-full pointer-events-none"></div>
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                      <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">⚡</span>
                     </div>
-                    <div class="flex items-center h-4 shrink-0">
-                      <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide {pill_style} text-white shadow-sm shrink-0 leading-none">
-                        <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                        <span>{badge_text}</span>
-                      </span>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        {handle} · {role}
+                      </div>
                     </div>
                   </div>
-                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-                    <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                      {text}
-                    </p>
-                    {thumb_html}
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide {pill_style} shadow-sm shrink-0 leading-none">
+                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+                      <span>{badge_text}</span>
+                    </span>
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
+                    {text}
+                  </p>
+                  {thumb_html}
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span>{time_str}</span>
+                    <span class="truncate">{time_str}</span>
                   </span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5">
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
                     <span>{btn_text}</span>
                   </a>
                 </div>
@@ -2260,42 +2258,44 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
     else:
         pill_cls = "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25" if theme == "indigo" else "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25"
         return f"""
-              <article class="relative rounded-2xl p-3 {vis_cls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
-                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-                    <div class="flex items-center space-x-2 min-w-0">
-                      <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                      <div class="min-w-0">
-                        <div class="flex items-center space-x-1 leading-none h-4">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                        </div>
-                        <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                          {handle} · {role}
-                        </div>
+              <article class="box-border relative rounded-2xl p-3 {vis_cls} flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        {handle} · {role}
                       </div>
                     </div>
-                    <div class="flex items-center h-4 shrink-0">
-                      <span class="font-semibold px-2 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px] leading-none">{badge_text}</span>
-                    </div>
                   </div>
-                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-                    <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                      {text}
-                    </p>
-                    {thumb_html}
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full {pill_cls} shrink-0 text-[10px] leading-none">{badge_text}</span>
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    {text}
+                  </p>
+                  {thumb_html}
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span>{time_str}</span>
+                    <span class="truncate">{time_str}</span>
                   </span>
-                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     {btn_text}
                   </a>
                 </div>
               </article>"""
+
+
 def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
     author = "Thibault Sottiaux (Tibo)"
     handle = "@thsottiaux"
@@ -2321,11 +2321,9 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
         spotlight_tag = "24h Spotlight · Pinned #1"
         btn_text = "View Post ↗"
 
-    # 重点高亮关键词 Reset / 重置
     hl_text = re.sub(r'(?i)\b(reset)\b', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', text)
     hl_text = re.sub(r'(重置)', r'<span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">\1</span>', hl_text)
 
-    # 严格绑定 Thibault Sottiaux 的推文详情跳转链接，绝不跳转其他博主或个人主页
     status_id = it.get("status_id") or ""
     if not status_id and it.get("url"):
         m = re.search(r'/status/(\d+)', it.get("url"))
@@ -2345,89 +2343,89 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
         import urllib.parse
         opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
         thumb_html = f"""
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
-          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
+          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
         </div>"""
     elif it.get("has_video") or it.get("video_url"):
         thumb_html = f"""
-        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+        <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 w-[72px] h-[52px] max-w-[72px] max-h-[52px]">
           <span class="text-base">🎥</span>
         </div>"""
 
     return f"""
-              <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
+              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden
                 bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
-                border-2 border-amber-400 dark:border-amber-300/90
-                shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
-                hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
-                <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
-                <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-                  <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-                    <div class="flex items-center space-x-2 min-w-0">
-                      <div class="relative shrink-0">
-                        <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
-                        <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
-                      </div>
-                      <div class="min-w-0">
-                        <div class="flex items-center space-x-1 leading-none h-4">
-                          <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
-                          <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                        </div>
-                        <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">
-                          {handle} · {role}
-                        </div>
-                      </div>
+                border border-amber-400 dark:border-amber-300/90 ring-1 ring-amber-400/50
+                shadow-[0_0_20px_rgba(251,191,36,0.25),inset_0_0_12px_rgba(251,191,36,0.1)]
+                hover:shadow-[0_0_30px_rgba(251,191,36,0.45)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="absolute -top-[1px] left-3 right-3 h-[3px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)] animate-pulse pointer-events-none"></div>
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="{avatar}" alt="{author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-amber-400 dark:ring-amber-300 shadow-sm" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+                      <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900 leading-none">📌</span>
                     </div>
-                    <div class="flex items-center h-4 shrink-0">
-                      <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40 leading-none">
-                        <span class="relative flex h-1.5 w-1.5">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                        </span>
-                        <span>{badge_text}</span>
-                      </span>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">
+                        {handle} · {role}
+                      </div>
                     </div>
                   </div>
-                  <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-                    <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
-                      {hl_text}
-                    </p>
-                    {thumb_html}
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-sm shrink-0 border border-amber-300/40 leading-none">
+                      <span class="relative flex h-1.5 w-1.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                      </span>
+                      <span>{badge_text}</span>
+                    </span>
                   </div>
                 </div>
-                <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-2">
-                  <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold shrink-0">
-                    <span class="animate-pulse text-amber-500">⚡</span>
-                    <span>{spotlight_tag}</span>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                    {hl_text}
+                  </p>
+                  {thumb_html}
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-amber-200/60 dark:border-amber-900/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold truncate shrink-0 max-w-[50%] leading-none">
+                    <span class="animate-pulse text-amber-500 shrink-0">⚡</span>
+                    <span class="truncate">{spotlight_tag}</span>
                   </span>
-                  <div class="flex items-center gap-2 font-mono text-[10px] shrink-0">
-                    <span class="text-amber-800/80 dark:text-amber-300/80 font-medium" title="{'推文发布时间 (北京时间 UTC+8)' if is_zh else 'Tweet Publish Time (UTC+8)'}">
-                      <span>🕒 {pub_time_display}</span>
+                  <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+                    <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="{'推文发布时间 (北京时间 UTC+8)' if is_zh else 'Tweet Publish Time (UTC+8)'}">
+                      <span>🕒 {pub_time_rel}</span>
                     </span>
-                    <span class="text-slate-300 dark:text-slate-700">·</span>
-                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0">
+                    <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+                    <a href="{u}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
                       <span>{btn_text}</span>
                     </a>
                   </div>
                 </div>
               </article>"""
+
+
 def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
     if not lead_media or not isinstance(lead_media, dict):
         return ""
     video_id = lead_media.get("video_id") or ""
     if not video_id and lead_media.get("url"):
-        m = re.search(r'(?:v=|youtu\.be\/|embed\/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
+        m = re.search(r'(?:v=|youtu\.be/|embed/)([0-9A-Za-z_-]{11})', lead_media.get("url", ""))
         if m:
             video_id = m.group(1)
 
     raw_t = (lead_media.get("title_zh") if is_zh else lead_media.get("title_en")) or lead_media.get("title", "")
-    if not is_zh and re.search(r'[一-鿿]', raw_t):
-        raw_t = re.sub(r'[一-鿿]+', '', raw_t).strip() or "Frontier AI Hands-on Review"
+    if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_t):
+        raw_t = re.sub(r'[\u4e00-\u9fff]+', '', raw_t).strip() or "Frontier AI Hands-on Review"
     title = safe_text(raw_t, 100)
     title_esc = title.replace("'", "\'").replace('"', '&quot;')
     
     raw_auth = lead_media.get("source") or lead_media.get("author") or "AI Engineer"
-    if not is_zh and re.search(r'[一-鿿]', raw_auth):
+    if not is_zh and re.search(r'[\u4e00-\u9fff]', raw_auth):
         raw_auth = "AI Tech Reviewer"
     author = safe_text(raw_auth, 32)
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
@@ -2438,13 +2436,13 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
     tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
     clean_tags = []
     for t in tags[:2]:
-        if not is_zh and re.search(r'[一-鿿]', t):
+        if not is_zh and re.search(r'[\u4e00-\u9fff]', t):
             continue
         clean_tags.append(t)
     if not clean_tags:
         clean_tags = ["#HandsOn", "#AI"]
 
-    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20">{safe_text(t, 16)}</span>' for t in clean_tags])
+    tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">{safe_text(t, 16)}</span>' for t in clean_tags])
 
     lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
     lead_source_text = "原片 ↗" if is_zh else "Source ↗"
@@ -2463,13 +2461,16 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         fallback_poster = poster_url
 
     return f"""
-    <article class="flex flex-col justify-between bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-3 shadow-sm hover:shadow-md transition-all relative overflow-hidden group/vcard text-slate-800 dark:text-slate-200 h-full ring-1 ring-slate-900/5 dark:ring-white/5" style="height: 180px; max-height: 180px; overflow: hidden;">
-      <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-        <div class="flex items-center space-x-2 min-w-0">
-          <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/40 shrink-0">
-            <span>▶</span>
+    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+        <div class="flex items-center space-x-2 min-w-0 h-8">
+          <div class="relative shrink-0 w-7 h-7">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
+              <span>▶</span>
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
           </div>
-          <div class="min-w-0">
+          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
             <div class="flex items-center space-x-1 leading-none h-4">
               <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">{author}</span>
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
@@ -2479,39 +2480,42 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
             </div>
           </div>
         </div>
-        <div class="flex items-center h-4 shrink-0">
-          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
-            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+        <div class="flex items-center h-8 shrink-0">
+          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
             <span>{lead_badge}</span>
           </span>
         </div>
       </div>
 
-      <div class="flex items-center gap-2.5 my-0.5 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
-          <img src="{poster_url}" alt="{title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
+      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
+          <img src="{poster_url}" alt="{title}" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-            <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
+            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
           </div>
         </div>
-        <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
           <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="{title}">
             {title}
           </a>
-          <div class="flex items-center gap-1 overflow-hidden mt-1">
+          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
             {tags_html}
           </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-between pt-1.5 border-t border-slate-100 dark:border-slate-800/80 text-[10px] text-slate-500 dark:text-slate-400 shrink-0">
-        <span class="font-mono text-slate-400 dark:text-slate-500">16:9 {'实测跑分' if is_zh else 'Lab Benchmark'}</span>
-        <div class="flex items-center gap-2">
-          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+          <span>🎬</span>
+          <span class="truncate">{'实测跑分' if is_zh else 'Benchmark'}</span>
+        </span>
+        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+          <button type="button" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
             <span>{lead_play_text}</span>
           </button>
-          <span class="text-slate-300 dark:text-slate-700">·</span>
-          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline">
+          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+          <a href="{url}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
             <span>{lead_source_text}</span>
           </a>
         </div>
@@ -2525,17 +2529,18 @@ def build_pinned_slider_html(cards: list) -> str:
         return ""
     if len(cards) == 1:
         return cards[0]
-    slides_html = "\n".join([f'<div class="pinned-slide-item shrink-0 w-full" style="height: 180px; max-height: 180px;">\n{card}\n</div>' for card in cards[:2]])
+    slides_html = "\n".join([f'<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">\n{card}\n</div>' for card in cards[:2]])
     return f"""
-    <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned" style="height: 180px; max-height: 180px;">
+    <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
       <div id="pinned-slider-track" class="flex flex-col transition-transform duration-700 ease-out h-full" style="transform: translateY(0px);">
         {slides_html}
       </div>
-      <div class="absolute bottom-2 right-2 flex items-center gap-1 z-10 pointer-events-none">
+      <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10 pointer-events-none">
         <span id="pinned-dot-0" class="w-3 h-1.5 rounded-full bg-rose-500 transition-all"></span>
         <span id="pinned-dot-1" class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 transition-all"></span>
       </div>
     </div>"""
+
 
 def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     """

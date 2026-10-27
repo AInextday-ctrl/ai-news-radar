@@ -3682,76 +3682,74 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isValidTweetImageUrl(twImg)) {
         const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
         thumbHtml = `
-          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
-            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
+            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
           </div>`;
       } else if (item.has_video || item.video_url) {
         thumbHtml = `
-          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 w-[72px] h-[52px] max-w-[72px] max-h-[52px]">
             <span class="text-base">🎥</span>
           </div>`;
       }
 
       if (isHl) {
-        let pillStyle = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30";
-        let borderStyle = "border-2 border-amber-400 dark:border-amber-400/90 shadow-[0_0_20px_rgba(251,191,36,0.22)] dark:shadow-[0_0_25px_rgba(251,191,36,0.28)]";
+        let pillStyle = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30 text-white";
+        let borderStyle = "border border-amber-400 dark:border-amber-400/90 ring-1 ring-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.18)]";
         let topLine = "bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]";
         let cardBg = "bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40";
         if (theme === 'cyan') {
-          pillStyle = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30";
-          borderStyle = "border-2 border-sky-400 dark:border-sky-400/90 shadow-[0_0_20px_rgba(56,189,248,0.22)] dark:shadow-[0_0_25px_rgba(56,189,248,0.28)]";
+          pillStyle = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30 text-white";
+          borderStyle = "border border-sky-400 dark:border-sky-400/90 ring-1 ring-sky-400/30 shadow-[0_0_15px_rgba(56,189,248,0.18)]";
           topLine = "bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)]";
           cardBg = "bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40";
         } else if (theme === 'emerald') {
-          pillStyle = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30";
-          borderStyle = "border-2 border-emerald-400 dark:border-emerald-400/90 shadow-[0_0_20px_rgba(52,211,153,0.22)] dark:shadow-[0_0_25px_rgba(52,211,153,0.28)]";
+          pillStyle = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30 text-white";
+          borderStyle = "border border-emerald-400 dark:border-emerald-400/90 ring-1 ring-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.18)]";
           topLine = "bg-gradient-to-r from-emerald-400 via-teal-500 to-sky-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]";
           cardBg = "bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40";
         } else if (theme === 'rose') {
-          pillStyle = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30";
-          borderStyle = "border-2 border-rose-400 dark:border-rose-400/90 shadow-[0_0_20px_rgba(244,63,94,0.22)] dark:shadow-[0_0_25px_rgba(244,63,94,0.28)]";
+          pillStyle = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30 text-white";
+          borderStyle = "border border-rose-400 dark:border-rose-400/90 ring-1 ring-rose-400/30 shadow-[0_0_15px_rgba(244,63,94,0.18)]";
           topLine = "bg-gradient-to-r from-rose-400 via-pink-500 to-purple-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]";
           cardBg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40";
         }
 
         return `
-          <article class="relative rounded-2xl p-3 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
-            <div class="absolute -top-[2px] left-4 right-4 h-[3px] ${topLine} rounded-full"></div>
-            <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-              <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-                <div class="flex items-center space-x-2 min-w-0">
-                  <div class="relative shrink-0">
-                    <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow">⚡</span>
-                  </div>
-                  <div class="min-w-0">
-                    <div class="flex items-center space-x-1 leading-none h-4">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
-                      <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                    </div>
-                    <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">${handle} · ${role}</div>
-                  </div>
+          <article class="box-border relative rounded-2xl p-3 ${visCls} flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden ${cardBg} ${borderStyle} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+            <div class="absolute -top-[1px] left-3 right-3 h-[3px] ${topLine} rounded-full pointer-events-none"></div>
+            <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+              <div class="flex items-center space-x-2 min-w-0 h-8">
+                <div class="relative shrink-0 w-7 h-7">
+                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                  <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">⚡</span>
                 </div>
-                <div class="flex items-center h-4 shrink-0">
-                  <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide ${pillStyle} text-white shadow-sm shrink-0 leading-none">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                    <span>${badgeText}</span>
-                  </span>
+                <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                  <div class="flex items-center space-x-1 leading-none h-4">
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
+                    <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">${handle} · ${role}</div>
                 </div>
               </div>
-              <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-                <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                  ${text}
-                </p>
-                ${thumbHtml}
+              <div class="flex items-center h-8 shrink-0">
+                <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide ${pillStyle} shadow-sm shrink-0 leading-none">
+                  <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+                  <span>${badgeText}</span>
+                </span>
               </div>
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0">
-              <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold">
+            <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+              <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
+                ${text}
+              </p>
+              ${thumbHtml}
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+              <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold truncate shrink-0 max-w-[50%] leading-none">
                 <span>🕒</span>
-                <span>${timeStr}</span>
+                <span class="truncate">${timeStr}</span>
               </span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
                 <span>${btnText}</span>
               </a>
             </div>
@@ -3762,36 +3760,36 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           ? "bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25"
           : "bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25";
         return `
-          <article class="relative rounded-2xl p-3 ${visCls} flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;">
-            <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-              <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-                <div class="flex items-center space-x-2 min-w-0">
-                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                  <div class="min-w-0">
-                    <div class="flex items-center space-x-1 leading-none h-4">
-                      <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
-                      <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                    </div>
-                    <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">${handle} · ${role}</div>
-                  </div>
+          <article class="box-border relative rounded-2xl p-3 ${visCls} flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+            <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+              <div class="flex items-center space-x-2 min-w-0 h-8">
+                <div class="relative shrink-0 w-7 h-7">
+                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                 </div>
-                <div class="flex items-center h-4 shrink-0">
-                  <span class="font-semibold px-2 py-0.5 rounded-full ${pillCls} shrink-0 text-[10px] leading-none">${badgeText}</span>
+                <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                  <div class="flex items-center space-x-1 leading-none h-4">
+                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
+                    <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                  </div>
+                  <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">${handle} · ${role}</div>
                 </div>
               </div>
-              <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                  ${text}
-                </p>
-                ${thumbHtml}
+              <div class="flex items-center h-8 shrink-0">
+                <span class="font-bold px-2 py-0.5 rounded-full ${pillCls} shrink-0 text-[10px] leading-none">${badgeText}</span>
               </div>
             </div>
-            <div class="flex items-center justify-between text-[10px] text-slate-500 pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0">
-              <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+            <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+              <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                ${text}
+              </p>
+              ${thumbHtml}
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+              <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                 <span>🕒</span>
-                <span>${timeStr}</span>
+                <span class="truncate">${timeStr}</span>
               </span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline">
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                 ${btnText}
               </a>
             </div>
@@ -3825,66 +3823,64 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isValidTweetImageUrl(twImg)) {
         const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
         thumbHtml = `
-          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
-            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 54px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+          <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
+            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
           </div>`;
       } else if (item.has_video || item.video_url) {
         thumbHtml = `
-          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400" style="width: 72px; height: 54px; max-width: 72px; max-height: 54px;">
+          <div class="tweet-thumb-box shrink-0 flex items-center justify-center rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 w-[72px] h-[52px] max-w-[72px] max-h-[52px]">
             <span class="text-base">🎥</span>
           </div>`;
       }
 
       return `
-        <article class="relative rounded-2xl p-3 flex flex-col justify-between space-y-2 transition-all duration-300 group cursor-pointer h-full
+        <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden
           bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
-          border-2 border-amber-400 dark:border-amber-300/90
-          shadow-[0_0_25px_rgba(251,191,36,0.35),inset_0_0_15px_rgba(251,191,36,0.12)] dark:shadow-[0_0_35px_rgba(251,191,36,0.45),inset_0_0_20px_rgba(251,191,36,0.2)]
-          hover:shadow-[0_0_35px_rgba(251,191,36,0.55)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; overflow: hidden;" onclick="window.open('${url}','_blank')">
-          <div class="absolute -top-[2px] left-3 right-3 h-[3.5px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_12px_rgba(251,191,36,0.9)] animate-pulse"></div>
-          <div class="space-y-1.5 flex-1 min-h-0 overflow-hidden flex flex-col justify-between">
-            <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-              <div class="flex items-center space-x-2 min-w-0">
-                <div class="relative shrink-0">
-                  <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-2 ring-amber-400 dark:ring-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.5)]" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                  <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900">📌</span>
-                </div>
-                <div class="min-w-0">
-                  <div class="flex items-center space-x-1 leading-none h-4">
-                    <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
-                    <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                  </div>
-                  <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">${handle} · ${role}</div>
-                </div>
+          border border-amber-400 dark:border-amber-300/90 ring-1 ring-amber-400/50
+          shadow-[0_0_20px_rgba(251,191,36,0.25),inset_0_0_12px_rgba(251,191,36,0.1)]
+          hover:shadow-[0_0_30px_rgba(251,191,36,0.45)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;" onclick="window.open('${url}','_blank')">
+          <div class="absolute -top-[1px] left-3 right-3 h-[3px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)] animate-pulse pointer-events-none"></div>
+          <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+            <div class="flex items-center space-x-2 min-w-0 h-8">
+              <div class="relative shrink-0 w-7 h-7">
+                <img src="${avatar}" alt="${author}" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-amber-400 dark:ring-amber-300 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900 leading-none">📌</span>
               </div>
-              <div class="flex items-center h-4 shrink-0">
-                <span class="relative inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-md shadow-amber-500/30 shrink-0 border border-amber-300/40 leading-none">
-                  <span class="relative flex h-1.5 w-1.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                  </span>
-                  <span>${badgeText}</span>
-                </span>
+              <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                <div class="flex items-center space-x-1 leading-none h-4">
+                  <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
+                  <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                </div>
+                <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">${handle} · ${role}</div>
               </div>
             </div>
-            <div class="flex gap-2 items-start my-0.5 flex-1 min-h-0 overflow-hidden">
-              <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
-                ${hlText}
-              </p>
-              ${thumbHtml}
+            <div class="flex items-center h-8 shrink-0">
+              <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-sm shrink-0 border border-amber-300/40 leading-none">
+                <span class="relative flex h-1.5 w-1.5">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                </span>
+                <span>${badgeText}</span>
+              </span>
             </div>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 pt-1.5 border-t border-amber-200/50 dark:border-amber-900/50 shrink-0 gap-2">
-            <span class="font-mono flex items-center gap-1.5 text-amber-700 dark:text-amber-300 font-bold shrink-0">
-              <span class="animate-pulse text-amber-500">⚡</span>
-              <span>${spotlightTag}</span>
+          <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+            <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+              ${hlText}
+            </p>
+            ${thumbHtml}
+          </div>
+          <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-amber-200/60 dark:border-amber-900/60 shrink-0 gap-2 h-6 mt-auto">
+            <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold truncate shrink-0 max-w-[50%] leading-none">
+              <span class="animate-pulse text-amber-500 shrink-0">⚡</span>
+              <span class="truncate">${spotlightTag}</span>
             </span>
-            <div class="flex items-center gap-2 font-mono text-[10px] shrink-0">
-              <span class="text-amber-800/80 dark:text-amber-300/80 font-medium" title="${isZh ? '推文发布时间 (北京时间 UTC+8)' : 'Tweet Publish Time (UTC+8)'}">
-                <span>🕒 ${pubTimeDisplay}</span>
+            <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+              <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="${isZh ? '推文发布时间 (北京时间 UTC+8)' : 'Tweet Publish Time (UTC+8)'}">
+                <span>🕒 ${pubTimeRel}</span>
               </span>
-              <span class="text-slate-300 dark:text-slate-700">·</span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0" onclick="event.stopPropagation()">
+              <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none" onclick="event.stopPropagation()">
                 <span>${btnText}</span>
               </a>
             </div>
@@ -3906,7 +3902,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const diffH = leadMedia.diff_hours || 12.0;
       const timeBadge = isZh ? `${diffH}h 前` : `${diffH}h ago`;
       const tags = leadMedia.tags || ['#HandsOn', '#Benchmark', '#AI'];
-      const tagsHtml = tags.slice(0, 2).map(t => `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20">${escapeHtml(t)}</span>`).join(' ');
+      const tagsHtml = tags.slice(0, 2).map(t => `<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">${escapeHtml(t)}</span>`).join(' ');
 
       const leadBadge = isZh ? '🎬 48h 极客实测' : '🎬 48h Lab Review';
       const leadSourceText = isZh ? '原片 ↗' : 'Source ↗';
@@ -3927,13 +3923,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <article class="flex flex-col justify-between bg-white dark:bg-slate-900/90 rounded-2xl border border-slate-200 dark:border-slate-800 p-3 shadow-sm hover:shadow-md transition-all relative overflow-hidden group/vcard text-slate-800 dark:text-slate-200 h-full ring-1 ring-slate-900/5 dark:ring-white/5" style="height: 180px; max-height: 180px; overflow: hidden;">
-          <div class="flex items-start justify-between gap-2 shrink-0 h-8">
-            <div class="flex items-center space-x-2 min-w-0">
-              <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-2 ring-rose-400/40 shrink-0">
-                <span>▶</span>
+        <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+          <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+            <div class="flex items-center space-x-2 min-w-0 h-8">
+              <div class="relative shrink-0 w-7 h-7">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
+                  <span>▶</span>
+                </div>
+                <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
               </div>
-              <div class="min-w-0">
+              <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
                 <div class="flex items-center space-x-1 leading-none h-4">
                   <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">${author}</span>
                   <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
@@ -3941,39 +3940,42 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">${isZh ? 'YouTube 极客实测' : 'YouTube Lab'} · ${timeBadge}</div>
               </div>
             </div>
-            <div class="flex items-center h-4 shrink-0">
-              <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+            <div class="flex items-center h-8 shrink-0">
+              <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
+                <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
                 <span>${leadBadge}</span>
               </span>
             </div>
           </div>
 
-          <div class="flex items-center gap-2.5 my-0.5 flex-1 min-h-0 overflow-hidden">
-            <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner" style="width: 104px; height: 62px; max-width: 104px; max-height: 62px;" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
-              <img src="${posterUrl}" alt="${title}" style="width: 104px; height: 62px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
+          <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+            <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
+              <img src="${posterUrl}" alt="${title}" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
               <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-                <div class="w-6 h-6 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[10px] shadow-lg group-hover/thumb:scale-110 transition-transform">▶</div>
+                <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
               </div>
             </div>
-            <div class="min-w-0 flex-1 flex flex-col justify-between h-full py-0.5">
+            <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
               <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="${title}">
                 ${title}
               </a>
-              <div class="flex items-center gap-1 overflow-hidden mt-1">
+              <div class="flex items-center gap-1 overflow-hidden mt-0.5">
                 ${tagsHtml}
               </div>
             </div>
           </div>
 
-          <div class="flex items-center justify-between pt-1.5 border-t border-slate-100 dark:border-slate-800/80 text-[10px] text-slate-500 dark:text-slate-400 shrink-0">
-            <span class="font-mono text-slate-400 dark:text-slate-500">16:9 ${isZh ? '实测跑分' : 'Lab Benchmark'}</span>
-            <div class="flex items-center gap-2">
-              <button type="button" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer">
+          <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+            <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+              <span>🎬</span>
+              <span class="truncate">${isZh ? '实测跑分' : 'Benchmark'}</span>
+            </span>
+            <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+              <button type="button" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
                 <span>${leadPlayText}</span>
               </button>
-              <span class="text-slate-300 dark:text-slate-700">·</span>
-              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline">
+              <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+              <a href="${url}" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
                 <span>${leadSourceText}</span>
               </a>
             </div>
