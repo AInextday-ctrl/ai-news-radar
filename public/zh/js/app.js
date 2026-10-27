@@ -4110,19 +4110,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         for (let i = 0; i < sliderCards.length; i += 2) {
           const slice = sliderCards.slice(i, i + 2);
           pages.push(`
-            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
               ${slice.join('')}
             </div>
           `);
         }
 
+        container.style.cssText = "height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;";
         container.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-            <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+            <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
               ${pinnedCardHtml}
             </div>
-            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                 ${pages.join('')}
               </div>
             </div>
@@ -4184,19 +4185,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const slice = (tweets || []).slice(i, i + 2);
           const cards = slice.map((it, cIdx) => renderViralTickerCard(it, isZh, cIdx)).join('');
           pages.push(`
-            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+            <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
               ${cards}
             </div>
           `);
         }
 
+        container.style.cssText = "height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;";
         container.innerHTML = `
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-            <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+            <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
               ${pinnedCardHtml}
             </div>
-            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                 ${pages.join('')}
               </div>
             </div>
@@ -4252,11 +4254,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       window.viralTickerCurrentPage = (window.viralTickerCurrentPage + direction + pages.length) % pages.length;
       
-      const targetH = window.innerWidth >= 768 ? 180 : 145;
-      const step = targetH + 16;
-      const offset = window.viralTickerCurrentPage * step;
+      const targetH = (window.innerWidth >= 768) ? 180 : 145;
+      const offset = window.viralTickerCurrentPage * targetH;
       slider.style.transform = `translateY(-${offset}px)`;
       updateTickerPageUI(window.viralTickerCurrentPage + 1, pages.length);
+    }
+
+    function fitViralTickerHeight() {
+      const slider = document.getElementById('viral-ticker-slider');
+      if (!slider) return;
+      const targetH = (window.innerWidth >= 768) ? 180 : 145;
+      const offset = (window.viralTickerCurrentPage || 0) * targetH;
+      slider.style.transform = `translateY(-${offset}px)`;
     }
 
     function toggleViralTickerPause() {

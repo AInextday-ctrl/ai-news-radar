@@ -2854,16 +2854,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(slider_cards), 2):
                 p_slice = slider_cards[p_idx:p_idx+2]
                 cards_html = "\n".join(p_slice)
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_en = max(1, (len(slider_cards) + 1) // 2)
 
             viral_ticker_en_html = f"""
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 {pinned_card_html}
               </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                   {slider_pages_html}
                 </div>
               </div>
@@ -2875,16 +2875,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(other_items), 2):
                 p_slice = other_items[p_idx:p_idx+2]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_en = max(1, (len(other_items) + 1) // 2)
 
             viral_ticker_en_html = f"""
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 {pinned_card_html}
               </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                   {slider_pages_html}
                 </div>
               </div>
@@ -2894,12 +2894,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(viral_items), 3):
                 p_slice = viral_items[p_idx:p_idx+3]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_en = max(1, (len(viral_items) + 2) // 3)
 
             viral_ticker_en_html = f"""
-            <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
-              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            <div id="viral-ticker-viewport" class="w-full relative overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                 {slider_pages_html}
               </div>
             </div>"""
@@ -3438,16 +3438,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(slider_cards), 2):
                 p_slice = slider_cards[p_idx:p_idx+2]
                 cards_html = "\n".join(p_slice)
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_zh = max(1, (len(slider_cards) + 1) // 2)
 
             viral_ticker_zh_html = f"""
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 {pinned_card_html}
               </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                   {slider_pages_html}
                 </div>
               </div>
@@ -3459,16 +3459,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(other_items), 2):
                 p_slice = other_items[p_idx:p_idx+2]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_zh = max(1, (len(other_items) + 1) // 2)
 
             viral_ticker_zh_html = f"""
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 {pinned_card_html}
               </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                   {slider_pages_html}
                 </div>
               </div>
@@ -3478,12 +3478,12 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             for p_idx in range(0, len(viral_items), 3):
                 p_slice = viral_items[p_idx:p_idx+3]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
-                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">\n{cards_html}\n</div>\n'
+                slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
             total_ticker_pages_zh = max(1, (len(viral_items) + 2) // 3)
 
             viral_ticker_zh_html = f"""
-            <div id="viral-ticker-viewport" class="w-full relative overflow-hidden h-[145px] md:h-[180px]">
-              <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
+            <div id="viral-ticker-viewport" class="w-full relative overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
                 {slider_pages_html}
               </div>
             </div>"""

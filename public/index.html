@@ -100,7 +100,7 @@
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
-  <link rel="preload" href="/js/app.min.js?v=6.9.12" as="script">
+  <link rel="preload" href="/js/app.min.js?v=6.9.13" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -127,47 +127,41 @@
       content-visibility: auto;
       contain-intrinsic-size: auto 200px;
     }
+    /* Hard containment for hero radar ticker */
+    #viral-ticker-container,
+    #viral-ticker-pinned,
     #viral-ticker-viewport,
-    #viral-ticker-pinned {
-      height: 145px !important;
-      max-height: 145px !important;
-      overflow: hidden !important;
-      contain: paint layout;
-      box-sizing: border-box !important;
-    }
     #viral-ticker-viewport .viral-ticker-page,
-    #viral-ticker-pinned > article {
+    #pinned-slider-viewport,
+    .pinned-slide-item {
       height: 145px !important;
       max-height: 145px !important;
+      min-height: 145px !important;
+      overflow: hidden !important;
       box-sizing: border-box !important;
+      margin: 0 !important;
     }
-    #viral-ticker-viewport .viral-ticker-page > article,
-    #viral-ticker-viewport .viral-ticker-page #pinned-slider-viewport,
-    #viral-ticker-viewport .viral-ticker-page #pinned-slider-viewport article {
-      height: 145px !important;
-      max-height: 145px !important;
-      box-sizing: border-box !important;
+    #viral-ticker-slider {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    #viral-ticker-slider > .viral-ticker-page {
+      margin: 0 !important;
+      padding: 0 !important;
     }
     @media (min-width: 768px) {
+      #viral-ticker-container,
+      #viral-ticker-pinned,
       #viral-ticker-viewport,
-      #viral-ticker-pinned {
+      #viral-ticker-viewport .viral-ticker-page,
+      #pinned-slider-viewport,
+      .pinned-slide-item {
         height: 180px !important;
         max-height: 180px !important;
+        min-height: 180px !important;
         overflow: hidden !important;
         box-sizing: border-box !important;
-      }
-      #viral-ticker-viewport .viral-ticker-page,
-      #viral-ticker-pinned > article {
-        height: 180px !important;
-        max-height: 180px !important;
-        box-sizing: border-box !important;
-      }
-      #viral-ticker-viewport .viral-ticker-page > article,
-      #viral-ticker-viewport .viral-ticker-page #pinned-slider-viewport,
-      #viral-ticker-viewport .viral-ticker-page #pinned-slider-viewport article {
-        height: 180px !important;
-        max-height: 180px !important;
-        box-sizing: border-box !important;
+        margin: 0 !important;
       }
     }
     #header-actions-bar {
@@ -588,10 +582,10 @@
             <button type="button" onclick="switchTab('celebrity')" class="text-[11px] text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-semibold hover:underline hidden sm:inline cursor-pointer" id="viral-ticker-more">View All Radar →</button>
           </div>
         </div>
-        <div id="viral-ticker-container" class="relative w-full">
+        <div id="viral-ticker-container" class="relative w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch">
-              <div id="viral-ticker-pinned" class="w-full h-full min-h-[145px] md:min-h-[180px]">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
+              <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 
               <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden
                 bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
@@ -648,9 +642,9 @@
                 </div>
               </article>
               </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden h-[145px] md:h-[180px]">
-                <div id="viral-ticker-slider" class="flex flex-col space-y-4 transition-transform duration-700 ease-out" style="transform: translateY(0px);">
-                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
+                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
     <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
       <div id="pinned-slider-track" class="flex flex-col transition-transform duration-700 ease-out h-full" style="transform: translateY(0px);">
@@ -820,7 +814,7 @@ We’re expanding Claude for Nonprofits with a plugin built with around 30 of th
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 02:04 · 9h ago</span>
+                    <span class="truncate">10-27 02:04 · 10h ago</span>
                   </span>
                   <a href="https://x.com/claudeai/status/2114780227465338985" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -828,7 +822,7 @@ We’re expanding Claude for Nonprofits with a plugin built with around 30 of th
                 </div>
               </article>
 </div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -906,7 +900,7 @@ I wanted to share more context behind one anecdo
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 02:21 · 9h ago</span>
+                    <span class="truncate">10-27 02:21 · 10h ago</span>
                   </span>
                   <a href="https://x.com/marissamayer/status/2114784525226229996" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
                     <span>View Post ↗</span>
@@ -914,7 +908,7 @@ I wanted to share more context behind one anecdo
                 </div>
               </article>
 </div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -950,7 +944,7 @@ GPT-6.1 Terra understands what’s on screen, takes action across apps, writes n
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 02:06 · 9h ago</span>
+                    <span class="truncate">10-27 02:06 · 10h ago</span>
                   </span>
                   <a href="https://x.com/OpenAI/status/2114780711664398349" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -993,7 +987,7 @@ here’s my prompt:
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 05:56 · 5h ago</span>
+                    <span class="truncate">10-27 05:56 · 6h ago</span>
                   </span>
                   <a href="https://x.com/OpenAIDevs/status/2114838526777085965" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1001,7 +995,7 @@ here’s my prompt:
                 </div>
               </article>
 </div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1035,7 +1029,7 @@ here’s my prompt:
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 09:58 · 1h ago</span>
+                    <span class="truncate">10-27 09:58 · 2h ago</span>
                   </span>
                   <a href="https://x.com/ourhermitage/status/2114899478130114863" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1087,7 +1081,7 @@ here's how thier AI Quant works, step by st
                 </div>
               </article>
 </div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch h-[145px] md:h-[180px]">
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1120,7 +1114,7 @@ First, the two already rumoured to be in production: Sh
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-27 07:05 · 4h ago</span>
+                    <span class="truncate">10-27 07:05 · 5h ago</span>
                   </span>
                   <a href="https://x.com/lilyngafterdark/status/2114855977472438390" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -3949,7 +3943,7 @@ First, the two already rumoured to be in production: Sh
     };
   </script>
 
-  <script defer src="/js/app.min.js?v=6.9.12"></script>
+  <script defer src="/js/app.min.js?v=6.9.13"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
