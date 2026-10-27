@@ -2195,22 +2195,18 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         if theme == "amber":
             pill_style = "bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 shadow-amber-500/30 text-white"
             border_style = "border border-amber-400 dark:border-amber-400/90 ring-1 ring-amber-400/30 shadow-[0_0_15px_rgba(251,191,36,0.18)]"
-            top_line = "bg-gradient-to-r from-amber-400 via-orange-500 to-sky-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]"
             card_bg = "bg-gradient-to-br from-amber-500/10 via-white to-sky-500/10 dark:from-amber-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         elif theme == "cyan":
             pill_style = "bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-500 shadow-cyan-500/30 text-white"
             border_style = "border border-sky-400 dark:border-sky-400/90 ring-1 ring-sky-400/30 shadow-[0_0_15px_rgba(56,189,248,0.18)]"
-            top_line = "bg-gradient-to-r from-cyan-400 via-sky-500 to-indigo-500 shadow-[0_0_8px_rgba(56,189,248,0.8)]"
             card_bg = "bg-gradient-to-br from-sky-500/10 via-white to-indigo-500/10 dark:from-sky-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         elif theme == "emerald":
             pill_style = "bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30 text-white"
             border_style = "border border-emerald-400 dark:border-emerald-400/90 ring-1 ring-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.18)]"
-            top_line = "bg-gradient-to-r from-emerald-400 via-teal-500 to-sky-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"
             card_bg = "bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
         else: # rose
             pill_style = "bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 shadow-rose-500/30 text-white"
             border_style = "border border-rose-400 dark:border-rose-400/90 ring-1 ring-rose-400/30 shadow-[0_0_15px_rgba(244,63,94,0.18)]"
-            top_line = "bg-gradient-to-r from-rose-400 via-pink-500 to-purple-500 shadow-[0_0_8px_rgba(244,63,94,0.8)]"
             card_bg = "bg-gradient-to-br from-rose-500/10 via-white to-purple-500/10 dark:from-rose-950/40 dark:via-slate-900/90 dark:to-indigo-950/40"
 
         return f"""

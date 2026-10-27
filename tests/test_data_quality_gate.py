@@ -184,7 +184,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
 
     # 10. 零长推文严重截断门禁 (保证 items 与 grouped.celebrity 均达到无损多段落翻译水位)
     truncated_tweets = []
-    all_check_items = list(items)
+    all_check_items = list(payload.get("items", []))
     for g_items in grouped.values():
         if isinstance(g_items, list):
             all_check_items.extend(g_items)
