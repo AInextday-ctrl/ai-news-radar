@@ -2215,7 +2215,6 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
 
         return f"""
               <article class="box-border relative rounded-2xl p-3 {vis_cls} flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden {card_bg} {border_style} hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="absolute -top-[1px] left-3 right-3 h-[3px] {top_line} rounded-full pointer-events-none"></div>
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
@@ -2358,7 +2357,6 @@ def format_tibo_pinned_card(it: dict, is_zh: bool) -> str:
                 border border-amber-400 dark:border-amber-300/90 ring-1 ring-amber-400/50
                 shadow-[0_0_20px_rgba(251,191,36,0.25),inset_0_0_12px_rgba(251,191,36,0.1)]
                 hover:shadow-[0_0_30px_rgba(251,191,36,0.45)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="absolute -top-[1px] left-3 right-3 h-[3px] bg-gradient-to-r from-amber-400 via-rose-500 to-amber-300 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)] animate-pulse pointer-events-none"></div>
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
