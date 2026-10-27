@@ -84,8 +84,20 @@ def has_chinglish_seams(text: str) -> bool:
     if re.search(r'(?:Gemini|GPT-?\d*|Claude|AI|人工智能)\s*特工', s_body, re.IGNORECASE):
         return True
 
-    # 2. 半英半中散装拼接：中文字段中夹杂大段含英文介词/连词的未翻译英文从句（忽略【...】中的产品固有英文名）
+    # 2. 半英半中散装拼接：中文字段中夹杂大段含英文介词/连词的未翻译英文从句（忽略【...】与已知博主/频道固有名称）
     s_check = re.sub(r'【[^】]+】', '', s_body)
+    known_creators = [
+        r'AI\s+with\s+Zygis',
+        r'Tech\s+With\s+Tim',
+        r'The\s+AI\s+Grid',
+        r'The\s+AI\s+Advantage',
+        r'Dom\s+the\s+AI\s+Tutor',
+        r'Futurepedia\s+and\s+AI\s+Agent\s+Lab',
+        r'Nate\s+Herk\s*\|\s*AI\s+Automation',
+        r'Two\s+Minute\s+Papers'
+    ]
+    s_check = re.sub(r'\b(?:' + '|'.join(known_creators) + r')\b', '', s_check, flags=re.IGNORECASE)
+
     zh_chars = len(re.findall(r'[\u4e00-\u9fa5]', s_check))
     if zh_chars > 0:
         if re.search(r'\b(?:[A-Za-z]{2,}\s+){1,}(?:for|with|the|and|that|from|to|is|are|in|on|by|of|an|your|its|can|will|about)\s+[A-Za-z]{2,}', s_check, re.IGNORECASE):
