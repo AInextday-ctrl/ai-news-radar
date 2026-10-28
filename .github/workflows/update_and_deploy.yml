@@ -44,7 +44,7 @@ jobs:
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_MODEL: 'gemini-flash-latest'
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
-          APIFY_INTERVAL_HOURS: '1.0'
+          APIFY_INTERVAL_HOURS: '0.2'
           PYTHONIOENCODING: 'utf-8'
         run: |
           python main.py || (echo "⚠️ main.py 遇到偶发异常，触发缓存自愈静态发布..." && python content_publisher.py)

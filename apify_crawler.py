@@ -302,7 +302,7 @@ def fetch_incremental_tweets(
     # 每次增量抓取仅消耗 ~0.002 CU (~$0.001 - $0.0015 USD)
     # 按 0.11 小时频次: 180+次/天 (每8分钟与全站构建极速同步) = 5,400+次/月 ≈ $8.10/月 (仅占 $35 免费额度的 23.1%，极端安全且富余)
     last_crawl = state.get("last_crawl_utc")
-    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "1.0"))
+    interval_hours = float(os.getenv("APIFY_INTERVAL_HOURS", "0.2"))
     if not force_update and last_crawl:
         try:
             lc_dt = datetime.fromisoformat(last_crawl.replace("Z", "+00:00"))
