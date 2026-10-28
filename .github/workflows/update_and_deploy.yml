@@ -6,6 +6,8 @@ on:
     # 采用错峰偏移间隔 (每 20 分钟)，避开整点/整半点拥堵高峰与并发锁冲突
     - cron: '6,26,46 * * * *'
   workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
+  repository_dispatch: # 支持云端外部 Webhook (cron-job.org / Cloudflare) 秒级即时触发
+    types: [auto-sync, cron-trigger]
   push:
     branches:
       - main
