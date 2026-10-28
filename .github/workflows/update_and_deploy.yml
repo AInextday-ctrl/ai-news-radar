@@ -3,7 +3,8 @@ name: AI Radar - 24x7 Auto Update & Deploy
 on:
   schedule:
     # 每 8 分钟在云端极速增量抓取更新一次 (UTC，每天 180+ 次全天候极速监控)
-    - cron: '*/8 * * * *'
+    # 采用错峰偏移间隔 (每 20 分钟)，避开整点/整半点拥堵高峰与并发锁冲突
+    - cron: '6,26,46 * * * *'
   workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
   push:
     branches:

@@ -152,12 +152,12 @@ def _translate_single_chunk_zh(text: str) -> str:
     protected_input = re.sub(r'\bClaude\s+Code\b', 'ClaudeCode', clean_chunk, flags=re.IGNORECASE)
 
     # 1. 优先调用 Google Translate (移动端 client=it 高频高可用、0 验证码阻断、高准确度)
-    if _GOOGLE_FAILS < 5:
+    if _GOOGLE_FAILS < 2:
         try:
             gt_url = "https://translate.googleapis.com/translate_a/single"
             params = {"client": "it", "sl": "en", "tl": "zh-CN", "dt": "t", "q": protected_input}
             headers = {"User-Agent": "GoogleTranslate/6.28.0 (iPhone; iOS 15.0; Scale/3.00)"}
-            with httpx.Client(headers=headers, timeout=4.5) as client:
+            with httpx.Client(headers=headers, timeout=2.0) as client:
                 resp = client.get(gt_url, params=params)
                 if resp.status_code == 200:
                     res = resp.json()
