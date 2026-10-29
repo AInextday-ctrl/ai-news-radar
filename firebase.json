@@ -8,12 +8,10 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**",
-      "data/archive_news.json",
-      "data/archive_celebrity.json",
-      "data/processed_news_ledger.json",
-      "data/master_archive.json",
-      "data/apify_crawler_state.json",
-      "data/tweet_tags_cache.json",
+      "**/master_archive.json",
+      "**/processed_news_ledger.json",
+      "**/apify_crawler_state.json",
+      "**/tweet_tags_cache.json",
       "**/*.tmp"
     ],
     "rewrites": [
@@ -231,6 +229,15 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=300, stale-while-revalidate=600"
+          }
+        ]
+      },
+      {
+        "source": "data/archive_*.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=86400, stale-while-revalidate=86400"
           }
         ]
       },

@@ -2628,19 +2628,80 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    let _archiveLoadingPromise = null;
-    let _celebArchiveLoadingPromise = null;
+    // ==========================================
+    // 专栏独立自主归档加载引擎 (Per-Column Self-Archiving Loader)
+    // 首页严格展示 24 小时热点，各栏目按需异步拉取自身专属归档，分页按时间严格倒序
+    // ==========================================
+    const _columnArchiveStatus = {};
+    const _columnArchivePromises = {};
 
-    async function loadCelebrityArchiveData() {
-      return null;
+    function loadColumnArchive(tab) {
+      const validTabs = ['news', 'celebrity', 'tools', 'videos', 'prompts'];
+      if (!validTabs.includes(tab)) return Promise.resolve([]);
+      if (_columnArchiveStatus[tab] === 'loaded') {
+        return Promise.resolve(cachedData?.grouped?.[tab] || []);
+      }
+      if (_columnArchivePromises[tab]) {
+        return _columnArchivePromises[tab];
+      }
+
+      _columnArchiveStatus[tab] = 'loading';
+      const cacheBuster = '6.9.18';
+      const archiveUrl = `/data/archive_${tab}.json?v=${cacheBuster}`;
+
+      _columnArchivePromises[tab] = fetch(archiveUrl)
+        .then(res => {
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          return res.json();
+        })
+        .then(items => {
+          if (Array.isArray(items) && items.length > 0) {
+            mergeArchiveIntoCachedData(items);
+            _columnArchiveStatus[tab] = 'loaded';
+
+            // 严格按发布时间倒序排列 (最新 -> 历史)
+            if (cachedData?.grouped?.[tab]) {
+              cachedData.grouped[tab].sort((a, b) => {
+                const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
+                const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
+                return timeB - timeA;
+              });
+            }
+
+            if (currentTab === tab) {
+              renderCategoryView(tab);
+            }
+          } else {
+            _columnArchiveStatus[tab] = 'loaded';
+          }
+          return cachedData?.grouped?.[tab] || [];
+        })
+        .catch(err => {
+          console.warn(`[archive] Failed to load archive for ${tab}:`, err);
+          _columnArchiveStatus[tab] = null;
+          delete _columnArchivePromises[tab];
+          return cachedData?.grouped?.[tab] || [];
+        });
+
+      return _columnArchivePromises[tab];
     }
 
     async function ensureArchiveLoaded() {
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(currentTab)) {
+        return loadColumnArchive(currentTab);
+      }
       return Promise.resolve(null);
     }
 
+    async function loadCelebrityArchiveData() {
+      return loadColumnArchive('celebrity');
+    }
+
     async function loadArchiveData() {
-      return null;
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(currentTab)) {
+        return loadColumnArchive(currentTab);
+      }
+      return Promise.resolve(null);
     }
 
     function updateArchiveBadges() {
@@ -7859,7 +7920,23 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function changeCategoryPage(p) {
       if (p < 1) return;
       categoryCurrentPage = p;
-      renderCategoryView(currentTab);
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(currentTab) && _columnArchiveStatus[currentTab] === 'loading') {
+        const container = document.getElementById('cat-grid-container');
+        if (container) {
+          const isZh = currentLang === 'zh';
+          container.innerHTML = `
+            <div class="col-span-full py-16 text-center flex flex-col items-center justify-center space-y-3 text-slate-400">
+              <div class="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+              <p class="text-xs font-mono">${isZh ? '正在从该专栏归档库载入历史数据...' : 'Loading column historical archive...'}</p>
+            </div>
+          `;
+        }
+        loadColumnArchive(currentTab).then(() => {
+          renderCategoryView(currentTab);
+        });
+      } else {
+        renderCategoryView(currentTab);
+      }
       const el = document.getElementById('view-category');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -7964,11 +8041,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
 
-      // 仅当进入大V观点或全站历史归档专栏时，才按需加载全量归档库，绝不阻塞首页或视频专区
-      if (tab === 'celebrity' && !window._hasMergedCelebArchive) {
-        ensureArchiveLoaded();
-      } else if (tab === 'archive' && !window._hasMergedArchive) {
-        ensureArchiveLoaded();
+      // 栏目独立自主归档：进入专栏时按需拉取专属历史数据，不阻塞首屏，翻页按时间倒序
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(tab) && _columnArchiveStatus[tab] !== 'loaded') {
+        loadColumnArchive(tab);
       }
 
       if (!cachedData) {

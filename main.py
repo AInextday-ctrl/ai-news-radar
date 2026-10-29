@@ -1901,9 +1901,33 @@ def save_news(items: list):
         print(f"⚠️ [tweet_classifier] 价值分类标注异常: {e}")
 
     # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
-    STRIP_ARCHIVE_KEYS = {'ai_analysis', 'original_content', 'article_content', 'wechat_audit', 'wechat_article_draft'}
-    def _clean_archive_item(it):
-        return {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS}
+    # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
+    STRIP_ARCHIVE_KEYS = {
+        'ai_analysis', 'original_content', 'article_content', 'full_raw_text',
+        'wechat_audit', 'wechat_article_draft', 'raw_payload', 'wechat_published_draft',
+        'processed_mark', 'processed_status', 'media_checked'
+    }
+    def _clean_archive_item(it, target_cat=None):
+        cat = target_cat or it.get('category')
+        c_it = {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS and v is not None}
+        if cat == 'celebrity':
+            fte = c_it.get('full_text_en') or c_it.get('title_en') or ''
+            if fte:
+                c_it['full_text_en'] = fte
+                for k in ['quote_en', 'summary_en', 'content_snippet', 'title_en']:
+                    if c_it.get(k) == fte:
+                        del c_it[k]
+            ftz = c_it.get('full_text_zh') or c_it.get('title_zh') or ''
+            if ftz:
+                c_it['full_text_zh'] = ftz
+                for k in ['quote_zh', 'summary_zh', 'title_zh']:
+                    if c_it.get(k) == ftz:
+                        del c_it[k]
+        elif cat == 'news':
+            if c_it.get('content_snippet') == c_it.get('summary_en'):
+                c_it.pop('content_snippet', None)
+            c_it.pop('article_content_zh', None)
+        return c_it
 
     all_archive_items = list(all_master_items)
     all_archive_items.sort(key=parse_time_for_sort, reverse=True)
@@ -1921,29 +1945,41 @@ def save_news(items: list):
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 生成面向前端的轻量化分发版 latest_news.json (体积缩减 97%，保证 CDN 边缘秒开并杜绝超额流量)
-    def _clean_public_item(it):
-        return {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS}
-
     category_caps = {"news": 40, "celebrity": 40, "tools": 40, "videos": 25, "prompts": 20, "viral_posts": 20}
     public_grouped = {}
     for cat_k, cat_items in latest_payload.get("grouped", {}).items():
         limit = category_caps.get(cat_k, 40)
-        public_grouped[cat_k] = [_clean_public_item(x) for x in cat_items[:limit]]
+        public_grouped[cat_k] = [_clean_archive_item(x, cat_k) for x in cat_items[:limit]]
+
+    # 写入各专栏独立历史归档库 (news, celebrity, tools, videos, prompts)，供前端按需分页拉取
+    categories_list = ['news', 'celebrity', 'tools', 'videos', 'prompts']
+    category_totals = {}
+    for cat_name in categories_list:
+        cat_archive = [_clean_archive_item(it, cat_name) for it in all_archive_items if it.get("category") == cat_name]
+        cat_archive.sort(key=parse_time_for_sort, reverse=True)
+        category_totals[cat_name] = len(cat_archive)
+        cat_out_path = os.path.join(PUBLIC_DATA_DIR, f"archive_{cat_name}.json")
+        with open(cat_out_path, "w", encoding="utf-8") as f:
+            json.dump(cat_archive, f, ensure_ascii=False, separators=(',', ':'))
 
     public_payload = dict(latest_payload)
     public_payload["grouped"] = public_grouped
+    public_payload["archive_meta"] = {
+        "total_archived": len(all_archive_items),
+        "category_totals": category_totals
+    }
     if "items" in public_payload:
         del public_payload["items"]
 
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(public_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 写入 archive_news.json (仅持久化至后端 data/，严禁部署到 public 避免消耗 Firebase 免费流量)
+    # 写入 archive_news.json (仅持久化至后端 data/)
     with open(ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 写入专门的大V推文全量归档库 (仅后端 data/archive_celebrity.json)
-    all_celeb_archive = [_clean_archive_item(it) for it in all_archive_items if it.get("category") == "celebrity"]
+    all_celeb_archive = [_clean_archive_item(it, 'celebrity') for it in all_archive_items if it.get("category") == "celebrity"]
     celeb_archive_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "total_count": len(all_celeb_archive),
@@ -1952,8 +1988,8 @@ def save_news(items: list):
     with open(os.path.join(DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
         json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 清理 public/data 中可能遗留的巨型历史归档文件
-    for stray_file in [PUBLIC_ARCHIVE_OUTPUT_FILE, os.path.join(PUBLIC_DATA_DIR, "archive_celebrity.json"), os.path.join(PUBLIC_DATA_DIR, "processed_news_ledger.json")]:
+    # 清理 public/data 中可能遗留的巨型日志文件
+    for stray_file in [os.path.join(PUBLIC_DATA_DIR, "processed_news_ledger.json")]:
         if os.path.exists(stray_file):
             try:
                 os.remove(stray_file)
