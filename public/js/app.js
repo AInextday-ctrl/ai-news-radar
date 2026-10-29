@@ -5311,7 +5311,140 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return list;
     }
 
+    // 预载入栏目双语精选数据
+    fetch('/data/curated_column_highlights.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-cache' })
+      .then(res => res.ok ? res.json() : null)
+      .then(d => { if (d) window._curatedColumnHighlights = d; })
+      .catch(() => {});
+
+    // 栏目级 AI 双语破局焦点 (Hero Spotlight) 核心渲染器
+    function renderColumnSpotlightBanner(tab = 'celebrity') {
+      const bannerEl = document.getElementById('celebrity-spotlight-banner');
+      if (!bannerEl) return;
+
+      const isZh = currentLang === 'zh';
+      const colData = window._curatedColumnHighlights?.columns?.[tab];
+
+      if (!colData || !colData.spotlight || !colData.spotlight.title_en) {
+        if (tab === 'celebrity' && typeof renderCelebritySpotlightBannerFallback === 'function') {
+          return renderCelebritySpotlightBannerFallback();
+        }
+        bannerEl.classList.add('hidden');
+        bannerEl.innerHTML = '';
+        return;
+      }
+
+      const sp = colData.spotlight;
+      const ft = colData.featured || [];
+
+      const title = isZh ? (sp.title_zh || sp.title_en) : (sp.title_en || sp.title_zh);
+      const tierLabel = isZh ? (sp.tier_label_zh || 'S級·行業破局焦點') : (sp.tier_label_en || 'S-Tier Strategic Spotlight');
+      const insight = isZh ? sp.insight_zh : sp.insight_en;
+      const author = sp.author_name ? `${sp.author_name} ${sp.author_handle || ''}` : (sp.source || 'Frontier AI Wire');
+      const url = sp.url || '#';
+      const takeaways = isZh ? (sp.takeaways_zh || []) : (sp.takeaways_en || []);
+
+      const catBadges = {
+        celebrity: isZh ? '🐦 社交雷達精選' : '🐦 Social Radar Spotlight',
+        news: isZh ? '⚡ 重大戰略突發' : '⚡ Strategic Milestone',
+        tools: isZh ? '🛠️ 生產力破局神器' : '🛠️ 10x Productivity Engine'
+      };
+      const catBadgeText = catBadges[tab] || (isZh ? '🌟 破局精選' : '🌟 Spotlight');
+
+      const insightHeader = isZh ? '💡 科技主編 · 言下之意 (直擊底層商業與技術本質)' : "💡 EDITOR'S STRATEGIC TAKEAWAY (READ BETWEEN THE LINES)";
+      const sourceBtnText = isZh ? '查看官方信源 ↗' : 'View Source ↗';
+      const featuredHeader = isZh ? '🔥 A級核心看點' : '🔥 A-Tier Key Developments';
+
+      let featuredPillsHtml = '';
+      if (ft && ft.length > 0) {
+        featuredPillsHtml = `
+          <div class="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800/80 flex items-center gap-2.5 flex-wrap">
+            <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
+              <span>${featuredHeader}</span>
+            </span>
+            ${ft.map(f => {
+              const fTitle = isZh ? (f.title_zh || f.title_en) : (f.title_en || f.title_zh);
+              const fTag = isZh ? (f.tag_zh || 'A級精選') : (f.tag_en || 'Featured');
+              return `
+                <a href="${escapeHtml(f.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-white/90 dark:bg-slate-800/90 hover:bg-amber-500/10 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700/80 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] shadow-xs">
+                  <span class="px-1.5 py-0.2 rounded bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-bold text-[10px]">${escapeHtml(fTag)}</span>
+                  <span class="font-medium truncate max-w-[240px] sm:max-w-[360px]">${escapeHtml(fTitle)}</span>
+                  <span class="text-slate-400 text-[10px]">↗</span>
+                </a>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      let takeawaysHtml = '';
+      if (takeaways && takeaways.length > 0) {
+        takeawaysHtml = `
+          <div class="mt-2.5 flex items-center gap-2 flex-wrap text-xs text-slate-600 dark:text-slate-300">
+            ${takeaways.map(t => `<span class="inline-flex items-center px-2 py-0.5 rounded-lg bg-amber-500/10 dark:bg-amber-400/10 text-amber-900 dark:text-amber-200 border border-amber-500/20 text-[11px] font-medium">• ${escapeHtml(t)}</span>`).join('')}
+          </div>
+        `;
+      }
+
+      bannerEl.className = "mb-6 block";
+      bannerEl.innerHTML = `
+        <div class="relative overflow-hidden rounded-3xl p-5 sm:p-6 border-2 border-amber-500/50 dark:border-amber-400/40 bg-gradient-to-br from-amber-50/90 via-slate-50 to-indigo-50/70 dark:from-slate-900/95 dark:via-slate-900 dark:to-indigo-950/40 shadow-2xl shadow-amber-500/10 transition-all">
+          <!-- 顶部状态栏 -->
+          <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-amber-500/20 dark:border-slate-800 flex-wrap gap-2">
+            <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
+              <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-black bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 text-slate-950 shadow-md shadow-amber-500/20 tracking-wide uppercase">
+                ${escapeHtml(tierLabel)}
+              </span>
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-slate-900 text-amber-300 dark:bg-slate-800 dark:text-amber-300 border border-amber-500/30">
+                ${catBadgeText}
+              </span>
+              <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 flex items-center space-x-1">
+                <span>by</span>
+                <span class="font-bold text-slate-700 dark:text-slate-200">${escapeHtml(author)}</span>
+              </span>
+            </div>
+            <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-bold transition-all shadow-md hover:scale-105 cursor-pointer">
+              <span>${sourceBtnText}</span>
+            </a>
+          </div>
+
+          <!-- 核心大标题 -->
+          <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-slate-50 tracking-tight leading-snug mb-3.5">
+            <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-amber-600 dark:hover:text-amber-400 transition-colors">
+              ${escapeHtml(title)}
+            </a>
+          </h2>
+
+          <!-- 💡 科技主编·言下之意 / Takeaway 专属高质感引用框 -->
+          ${insight ? `
+            <div class="p-4 sm:p-4.5 rounded-2xl bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-indigo-500/10 dark:from-amber-950/40 dark:via-slate-900/60 dark:to-indigo-950/30 border-l-4 border-amber-500 dark:border-amber-400 border-t border-r border-b border-amber-500/25 dark:border-amber-500/20 shadow-sm backdrop-blur-xs">
+              <div class="flex items-center space-x-2 mb-1.5">
+                <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 dark:text-amber-300 flex items-center gap-1.5">
+                  <span>${insightHeader}</span>
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 font-medium leading-relaxed italic">
+                "${escapeHtml(insight)}"
+              </p>
+              ${takeawaysHtml}
+            </div>
+          ` : ''}
+
+          <!-- A 级精选看点 -->
+          ${featuredPillsHtml}
+        </div>
+      `;
+    }
+
     function renderCelebritySpotlightBanner() {
+      return renderColumnSpotlightBanner('celebrity');
+    }
+
+    function renderCelebritySpotlightBannerFallback() {
       const bannerEl = document.getElementById('celebrity-spotlight-banner');
       if (!bannerEl || !cachedData) return;
 
@@ -7657,7 +7790,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      if (tab !== 'celebrity' || socialViewMode === 'viral') {
+      // 栏目级 AI 双语破局焦点 (Hero Spotlight) 核心调用
+      if ((tab === 'celebrity' && socialViewMode === 'leader') || tab === 'news' || tab === 'tools') {
+        renderColumnSpotlightBanner(tab);
+      } else {
         if (spotlightEl) {
           spotlightEl.classList.add('hidden');
           spotlightEl.innerHTML = '';
@@ -7783,10 +7919,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           }
         } else {
-          if (spotlightEl) {
-            spotlightEl.classList.add('hidden');
-            spotlightEl.innerHTML = '';
-          }
           if (catTitle) catTitle.textContent = t.tabs.celebrity;
           if (catDesc) catDesc.textContent = isZh ? '实时捕捉全球 AI 顶尖实验室、核心架构师与先锋开发者的原生发声与前沿动态' : 'Real-time timeline tracking statements from AI labs and frontier creators';
 
@@ -8202,10 +8334,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         // 动态载入前沿模型提示词库与工业实战工作流配方库 (Workflows & Prompts Library)
         try {
-          const [wfRes, promptRes] = await Promise.all([
+          const [wfRes, promptRes, highlightsRes] = await Promise.all([
             fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
+            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
+            fetch('/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
           ]);
+          if (highlightsRes && highlightsRes.ok) {
+            try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
+          }
           let extraPrompts = [];
           if (wfRes && wfRes.ok) {
             const wfData = await wfRes.json();

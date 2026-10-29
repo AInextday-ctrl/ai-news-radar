@@ -3325,6 +3325,29 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         en_content = en_content.replace('查看原帖 ↗', 'View Post ↗')
         en_content = en_content.replace('独家前沿', '⚡ FRONTIER LEAD')
         en_content = en_content.replace('DeepSeek 深度求索', 'DeepSeek')
+
+        # 预渲染栏目级 AI 破局焦点 (Hero Spotlight - English)
+        try:
+            ch_path = os.path.join(PUBLIC_DIR, "data", "curated_column_highlights.json")
+            if not os.path.exists(ch_path):
+                ch_path = os.path.join(DATA_DIR, "curated_column_highlights.json")
+            if os.path.exists(ch_path):
+                with open(ch_path, "r", encoding="utf-8") as _fch:
+                    ch_data = json.load(_fch)
+                if ch_data and "columns" in ch_data:
+                    from curator_engine import build_spotlight_html
+                    celeb_col = ch_data["columns"].get("celebrity", {})
+                    if celeb_col:
+                        en_spotlight = build_spotlight_html(celeb_col, is_zh=False, tab="celebrity")
+                        if en_spotlight:
+                            en_content = re.sub(
+                                r'<div [^>]*id="celebrity-spotlight-banner"[^>]*>.*?</div>',
+                                f'<div id="celebrity-spotlight-banner" class="mb-6 block">{en_spotlight}</div>',
+                                en_content,
+                                flags=re.DOTALL
+                            )
+        except Exception as _e_spot:
+            print(f"⚠️ [content_publisher] 英文 Spotlight 注入异常: {_e_spot}")
         # If any HTML or CSS comments still contain Chinese, clean them:
         zh_pattern = re.compile(r'[\u4e00-\u9fff]+')
         def _clean_comment(m, prefix, suffix):
@@ -3819,6 +3842,29 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 pattern_ticker_end = r'(</section>\s*)(<!-- 🌟 第 2 层:|<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">)'
                 if re.search(pattern_ticker_end, zh_content):
                     zh_content = re.sub(pattern_ticker_end, lambda m: f"{m.group(1)}\n{topic_focus_zh_html.strip()}\n\n      {m.group(2)}", zh_content, count=1)
+
+        # 预渲染栏目级 AI 破局焦点 (Hero Spotlight - Chinese)
+        try:
+            ch_path = os.path.join(PUBLIC_DIR, "data", "curated_column_highlights.json")
+            if not os.path.exists(ch_path):
+                ch_path = os.path.join(DATA_DIR, "curated_column_highlights.json")
+            if os.path.exists(ch_path):
+                with open(ch_path, "r", encoding="utf-8") as _fch:
+                    ch_data = json.load(_fch)
+                if ch_data and "columns" in ch_data:
+                    from curator_engine import build_spotlight_html
+                    celeb_col = ch_data["columns"].get("celebrity", {})
+                    if celeb_col:
+                        zh_spotlight = build_spotlight_html(celeb_col, is_zh=True, tab="celebrity")
+                        if zh_spotlight:
+                            zh_content = re.sub(
+                                r'<div [^>]*id="celebrity-spotlight-banner"[^>]*>.*?</div>',
+                                f'<div id="celebrity-spotlight-banner" class="mb-6 block">{zh_spotlight}</div>',
+                                zh_content,
+                                flags=re.DOTALL
+                            )
+        except Exception as _e_spot:
+            print(f"⚠️ [content_publisher] 中文 Spotlight 注入异常: {_e_spot}")
 
         with open(ZH_INDEX_FILE, "w", encoding="utf-8") as f:
             f.write(zh_content)
