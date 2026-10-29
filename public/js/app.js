@@ -5508,16 +5508,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // =========================================================================
-      // 3. 落地工具 (tools) -> 【实用生产力神器 · 开箱即用指南】 (High-Utility Applied Tool Showcase)
-      // 风格：精美生产力工具展位，突出痛点解决、3大杀手级特性、开箱上手与目标人群
+            // =========================================================================
+      // 3. 落地工具 (tools) -> 【24H 飙升火爆 · 落地实用神器】 (24H Trending Breakout Tool)
+      // 风格：精美生产力工具展位，突出 24H 飙升数据、痛点解决、3大杀手级特性与目标人群
       // =========================================================================
       if (tab === 'tools' && colData.tool_item) {
         const item = colData.tool_item;
-        const name = item.name || 'ComfyUI';
-        const stars = item.stars || '140k+';
-        const license = item.license || 'GPL-3.0';
-        const categoryTag = isZh ? (item.category_tag_zh || '🎨 视觉生成与创意工作流') : (item.category_tag_en || '🎨 Visual Gen & Studio');
+        const name = item.name || 'ppt-master';
+        const icon = item.icon || '📊';
+        const stars = item.stars || '70.5k';
+        const growthBadge = isZh ? (item.weekly_growth_zh || '') : (item.weekly_growth_en || '');
+        const license = item.license || 'MIT';
+        const categoryTag = isZh ? (item.category_tag_zh || '📊 办公文档与原生 PPT 生成') : (item.category_tag_en || '📊 Native PPTX & Document AI');
         const oneLiner = isZh ? (item.one_liner_zh || '') : (item.one_liner_en || '');
         const painPoint = isZh ? (item.pain_point_zh || '') : (item.pain_point_en || '');
         const features = isZh ? (item.key_features_zh || []) : (item.key_features_en || []);
@@ -5526,7 +5528,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const url = item.url || '#';
         const alternatives = colData.alternative_tools || [];
 
-        const badgeText = isZh ? '🛠️ 生产力神器 · 重点精选' : '🛠️ Productivity Showcase';
+        const badgeText = isZh ? '🔥 24H 飙升火爆 · 落地实用神器' : '🔥 24H Trending Breakout Tool';
         const tryBtnText = isZh ? '🚀 立即体验 / 访问官方 ↗' : '🚀 Try Official ↗';
 
         let altToolsHtml = '';
@@ -5534,17 +5536,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           altToolsHtml = `
             <div class="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
               <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0">
-                ${isZh ? '💡 更多实用高星神器:' : '💡 More Top Tools:'}
+                ${isZh ? '🚀 更多 24H 实时飙升神器:' : '🚀 More 24H Trending Breakouts:'}
               </span>
               ${alternatives.map(a => {
                 const aName = a.name;
                 const aStars = a.stars;
                 const aCat = isZh ? a.category_zh : a.category_en;
+                const aGrowth = isZh ? a.growth_badge_zh : a.growth_badge_en;
+                const aIcon = a.icon || '⚡';
                 return `
-                  <a href="${escapeHtml(a.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400">${escapeHtml(aName)}</span>
+                  <a href="${escapeHtml(a.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700 shadow-xs">
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400">${escapeHtml(aIcon)} ${escapeHtml(aName)}</span>
                     <span class="text-[10px] text-amber-500 font-mono">★ ${escapeHtml(aStars)}</span>
-                    <span class="text-[10px] text-slate-400">· ${escapeHtml(aCat || '')}</span>
+                    ${aGrowth ? `<span class="px-1.5 py-0.2 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 font-mono text-[9px] font-bold">${escapeHtml(aGrowth)}</span>` : ''}
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400">· ${escapeHtml(aCat || '')}</span>
                     <span class="text-slate-400 text-[10px]">↗</span>
                   </a>
                 `;
@@ -5556,11 +5561,24 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
           <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-300/80 dark:border-emerald-500/30 bg-gradient-to-br from-white via-emerald-50/25 to-teal-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-emerald-950/20 shadow-md transition-all z-10">
+            <!-- 顶部 24H 飙升火爆标签条 -->
+            <div class="flex items-center space-x-2.5 flex-wrap gap-y-1 mb-2.5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-black uppercase tracking-wider border border-rose-500/20 shadow-xs">
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
+                ${badgeText}
+              </span>
+              ${growthBadge ? `
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 shadow-xs">
+                  📈 ${escapeHtml(growthBadge)}
+                </span>
+              ` : ''}
+            </div>
+
             <!-- 顶部工具名与徽标栏 -->
             <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-emerald-100 dark:border-slate-800 flex-wrap gap-3">
               <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-2xl shadow-sm shrink-0">
-                  🎨
+                  ${escapeHtml(icon)}
                 </div>
                 <div>
                   <div class="flex items-center space-x-2 flex-wrap gap-y-1">
@@ -5625,7 +5643,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               ` : ''}
             </div>
 
-            <!-- 更多实用神器 -->
+            <!-- 更多 24H 飙升神器 -->
             ${altToolsHtml}
           </div>
         `;
