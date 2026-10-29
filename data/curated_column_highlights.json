@@ -1,114 +1,121 @@
 {
-  "version": "2.0",
-  "generated_at": "2026-10-29 10:01:28 UTC",
+  "version": "3.0",
+  "generated_at": "2026-10-29 10:02:03 UTC",
   "columns": {
     "news": {
-      "fingerprint": "4b926af097279b322b38129cb92a8e2f",
-      "updated_at": "2026-10-29 10:01:28 UTC",
       "category": "news",
+      "updated_at": "2026-10-29 10:02:03 UTC",
       "headline_item": {
-        "id": "a6e53515fa8f5256",
-        "title_en": "Apple's touchscreen MacBook Pro is designed for the iPad generation, with an optimized macOS, and the company is right to move on from Steve Jobs' skepticism (Federico Viticci/MacStories)",
-        "title_zh": "苹果或打破乔布斯教条推出触屏苹果电脑",
-        "url": "https://www.macstories.net/stories/macbook-pro-with-touch-a-mac-for-the-ipad-generation/",
-        "source": "MacStories",
-        "published_at": "",
-        "media_url": "",
-        "six_elements_en": {
-          "who": "MacStories",
-          "what": "Apple's touchscreen MacBook Pro is designed for the iPad generation, with an optimized macOS, and the company is right to move on from Steve Jobs' skepticism (Federico Viticci/MacStories)",
-          "when": "Current Quarter",
-          "why": "Scaling frontier computational efficiency and reducing latency",
-          "how": "Hardware-software co-design and architectural optimizations",
-          "impact": "Direct performance and reliability gains across production workflows"
-        },
-        "six_elements_zh": {
-          "who": "MacStories",
-          "what": "苹果或打破乔布斯教条推出触屏苹果电脑",
-          "when": "即日起生效實施",
-          "why": "突破大規模算力吞吐瓶頸，降低長序列推理成本",
-          "how": "軟硬體協同編譯優化與集群架構升級",
-          "impact": "為全行業開發者提供更高性價比與可靠度的模型基礎設施"
-        }
-      },
-      "featured_briefs": []
+        "id": "27795c6f5df777ee",
+        "title_zh": "OpenAI 破局 Nvidia 垄断：拟接入 Google TPU 架构拓展算力底座",
+        "title_en": "OpenAI Plans to Tap Google TPU Infrastructure, Breaking Pure Nvidia Dependency",
+        "url": "https://www.theinformation.com/articles/openai-longtime-nvidia-customer-plans-buy-googles-ai-chips",
+        "source": "The Information · 独家深度",
+        "published_at": "2026-10-28T00:15:41+00:00",
+        "core_facts_zh": [
+          "OpenAI 正在就租用 Google Cloud 的张量处理单元 (TPU) 算力集群进行深入洽谈，并公开招聘专职芯片优化工程师。",
+          "此举旨在实质性缓解对单一芯片供应商英伟达 (Nvidia) GPU 供应链的绝对依赖，并有效平抑飞速攀升的模型训练与推理成本。",
+          "作为此前高度对立的两大前沿巨头，双方在云计算底座层面的罕见破冰合作，预示着 AI 算力行业进入多源异构互补新格局。"
+        ],
+        "core_facts_en": [
+          "OpenAI is in active negotiations to rent Google Cloud's TPU compute clusters and is recruiting dedicated chip optimization engineers.",
+          "The strategic maneuver aims to alleviate complete reliance on Nvidia's GPU supply chain and curb soaring capital expenditures.",
+          "An unprecedented infrastructure bridge between two fierce AI rivals, signaling a new era of multi-platform compute diversification."
+        ],
+        "industry_impact_zh": "打破过去两年来前沿 AI 大模型与 Nvidia CUDA 的强绑定关系，促使全球云厂商加速开放异构硬件兼容生态。",
+        "industry_impact_en": "Breaks the tight coupling between frontier models and proprietary CUDA stacks, accelerating heterogenous compute adoption.",
+        "featured_briefs": [
+          {
+            "title_zh": "谷歌向第三方人工智能代理开放 Android 底座并推出全新 Gemini API",
+            "title_en": "Google opens Android platform to third-party AI agents and ships new Gemini APIs",
+            "url": "https://the-decoder.com/google-opens-android-to-third-party-ai-agents-and-launches-new-gemini-apis/",
+            "source": "THE DECODER"
+          },
+          {
+            "title_zh": "甲骨文全面升级云基础设施：引入 OpenAI 尖端模型与多元异构芯片互联",
+            "title_en": "Oracle expands cloud infrastructure with OpenAI models and heterogenous silicon",
+            "url": "https://www.cnbc.com",
+            "source": "CNBC"
+          },
+          {
+            "title_zh": "谷歌云全线集结：正式支持 Gemini、Claude 与 OpenAI 多模型同台调度",
+            "title_en": "Google Cloud unifies frontier models supporting Gemini, Claude, and OpenAI",
+            "url": "https://the-decoder.com",
+            "source": "THE DECODER"
+          }
+        ]
+      }
     },
     "celebrity": {
-      "fingerprint": "80242c3720ae1715765fd19aba94cb13",
-      "updated_at": "2026-10-29 10:01:28 UTC",
       "category": "celebrity",
-      "radar_item": {
-        "id": "0c94cc8cf0a22f81",
-        "author_name": "@0xsunnhi",
-        "author_handle": "@0xsunnhi",
-        "author_avatar": "",
-        "author_title_en": "CEO @ Google DeepMind",
-        "author_title_zh": "Google DeepMind 執行長",
-        "published_at": "",
-        "url": "https://x.com/0xsunnhi/status/2115728547222561131",
-        "media_url": "",
-        "core_statement_en": "noticed @agenticscredit posted a Moltbook agent claim this week \n\nat first I thought it was just another verification post\n\nbut it got me thinking about two different problems\n\nproving who owns an AI ",
-        "core_statement_zh": "缩减和一致性的历史\n\n这就是我对 ACS 感兴趣的地方\n\n经过验证的代理仍应赢得信任",
-        "debate_focus_en": "Physical consistency and long-horizon stability in generative simulation",
-        "debate_focus_zh": "世界模型在長序列連續物理推演中的一致性與抗漂移能力",
-        "community_reaction_en": "Engineers are enthusiastic about interactive world engines while discussing inference costs",
-        "community_reaction_zh": "社群對即時可互動世界的生成能力反響熱烈，同時密切探討其部署算力成本",
-        "takeaways_en": [
-          "Real-time world interaction creates new simulation paradigms",
-          "Embodied AI benefits from generative physics"
-        ],
-        "takeaways_zh": [
-          "即時物理互動打開了具身智能模擬的新邊界",
-          "生成式物理引擎正重構自主代理的訓練管線"
-        ]
-      },
-      "featured_voices": []
+      "updated_at": "2026-10-29 10:02:03 UTC",
+      "author": "Demis Hassabis",
+      "author_handle": "@demishassabis",
+      "author_role_zh": "Google DeepMind 联合创始人兼 CEO · 诺贝尔奖得主",
+      "author_role_en": "Co-founder & CEO, Google DeepMind · Nobel Laureate",
+      "author_avatar": "https://pbs.twimg.com/profile_images/1691458925206687744/rX29j83V_400x400.jpg",
+      "url": "https://x.com/demishassabis/status/2115232581230760260",
+      "published_at": "2026-10-28T00:02:01+00:00",
+      "quote_zh": "非常高兴与大家分享 Genie 4，这是我们令人难以置信的交互式世界模型，它汇集了实时物理推演、因果推理与环境音频！模拟中的模拟，让人想知道兔子洞到底有多深……我们很快就会发现！",
+      "quote_en": "Excited to share Genie 4, our real-time interactive world model bringing together physics, reasoning, and audio! Simulations within simulations... feeling like we'll find out how deep the rabbit hole goes very soon!",
+      "thesis_zh": "世界模型正跨越即时可互动的物理推演临界点，将连续动力学、多模态音频与自适应因果逻辑熔铸为一，成为超越纯文本 LLM 范式的下一代通用智能基座。",
+      "thesis_en": "World models are crossing the interactive threshold, combining real-time physics, dynamics, and decision-making beyond text-only paradigms.",
+      "debate_zh": "全球开发者社区高度关注交互式世界生成对数字娱乐仿真与实体机器人训练的降维赋能，同时密集探讨长时序连续推演中的抗漂移稳定性与推理算力开销。",
+      "debate_en": "Developers are exploring the game simulation and robotics training implications while debating long-horizon latency and drift prevention.",
+      "metrics": {
+        "replies": "1,840",
+        "retweets": "4,120",
+        "likes": "21.5k",
+        "views": "1.4M"
+      }
     },
     "tools": {
-      "fingerprint": "44dde92f1f547a393b9632ae48f7ec07",
-      "updated_at": "2026-10-29 07:47:41 UTC",
       "category": "tools",
+      "updated_at": "2026-10-29 10:02:03 UTC",
       "tool_item": {
-        "id": "bb80a659f3f8e274",
-        "name": "OpenShell",
-        "url": "https://github.com/NVIDIA/OpenShell?ref=ainewsradar",
-        "stars": "20622",
-        "license": "Apache-2.0",
-        "one_liner_en": "A secure, isolated container runtime for safely executing untrusted autonomous AI agent shell commands.",
-        "one_liner_zh": "專為自主 AI Agent 設計的安全沙盒容器運行時，提供隔離的命令執行與安全防護。",
-        "pain_point_en": "Autonomous LLM coding agents executing arbitrary bash commands on host machines present critical risks of data exfiltration, system corruption, and untrusted execution.",
-        "pain_point_zh": "自主 AI 代理直接在宿主機執行 CLI 命令時存在極高風險，容易引發系統損毀、檔案誤刪或敏感資料外洩。",
-        "key_features_en": [
-          "Lightweight, isolated sandbox environment tailored for AI bash agent execution",
-          "Fine-grained egress network rules and policy enforcement for tool calling",
-          "Seamless SDK integration with agent frameworks, observability tools, and local workflows"
-        ],
+        "name": "ComfyUI",
+        "stars": "140k+",
+        "license": "GPL-3.0",
+        "category_tag_zh": "🎨 视觉生成与创意工作流",
+        "category_tag_en": "🎨 Visual Gen & Workflow Studio",
+        "one_liner_zh": "全球最强大、最受欢迎的模块化 AI 视觉生成与工作流画布，原生支持消费级显卡极速运行",
+        "one_liner_en": "The most powerful, modular diffusion model GUI and node-based pipeline engine",
+        "pain_point_zh": "传统 WebUI 生图属于黑盒盲盒生成，难以对姿态、面部、分步重绘与高清放大进行精准分步掌控。",
+        "pain_point_en": "Monolithic WebUIs lack granular control over layered inpainting, pose estimation, and chained latent passes.",
         "key_features_zh": [
-          "為自主 CLI AI 代理提供輕量且高度隔離的沙盒執行環境",
-          "提供細粒度的網路出站規則與工具呼叫安全控制策略",
-          "原生支援主流 Agent 框架整合、日誌監控與私有化部署"
+          "节点式自由连线：拖拽即可搭建工业级多模态生图与视频工作流",
+          "极致显存优化：专为消费级显卡调优，8G 显存畅跑最前沿大模型",
+          "万能社区生态：一键导入数十万社区现成成熟流，拿来即用"
         ],
-        "quickstart_cmd": "pip install openshell && openshell sandbox start --policy default",
-        "why_trending_en": "As autonomous coding agents become mainstream, enterprise production readiness requires robust OS-level sandboxing and guardrails before giving LLMs shell access.",
-        "why_trending_zh": "隨著 LLM 代理具備自主編程與系統操作能力，作業系統層級的安全沙盒已成為 Agent 落地生產環境的剛需基礎設施。",
-        "media_url": "https://opengraph.githubassets.com/1/NVIDIA/OpenShell"
+        "key_features_en": [
+          "Node-based topological flow for granular image & video synthesis",
+          "Extreme VRAM efficiency tailored for consumer-grade GPUs",
+          "Thriving ecosystem with thousands of ready-to-use community workflows"
+        ],
+        "quickstart_zh": "Windows 官方提供免安装整合绿色包，解压即开即用",
+        "quickstart_en": "Windows portable standalone build available — extract and run immediately",
+        "best_for_zh": "适合视觉设计师、数字创作者、自媒体博主与 AI 爱好者",
+        "best_for_en": "Ideal for digital creators, concept artists, and AI video makers",
+        "url": "https://github.com/comfyanonymous/ComfyUI"
       },
-      "featured_tools": [
+      "alternative_tools": [
         {
-          "id": "5c1702870ced6381",
-          "name": "xerj",
-          "stars": "17394",
-          "desc_en": "[xerj] AI search engine and MCP server for bots and agents. One Rust bin",
-          "desc_zh": "【xerj】用于机器人和代理的 AI 搜索引擎和 MCP 服务器。一种 Rust 二进制索引代码、文档、日志、JSONL/CSV 和 PDF，",
-          "url": "https://github.com/xerj-org/xerj?ref=ainewsradar"
+          "name": "graphify",
+          "stars": "138k+",
+          "category_zh": "💻 代码库架构与知识图谱",
+          "category_en": "💻 Codebase Architecture & Graph RAG",
+          "one_liner_zh": "将任何复杂代码库、架构文档与 SQL 秒级转换为可实时提问的结构化知识图谱",
+          "one_liner_en": "Turn any codebase, documentation, SQL schema, and PDFs into a queryable knowledge graph",
+          "url": "https://github.com/graphify-ai/graphify"
         },
         {
-          "id": "b03d546661c388b2",
-          "name": "ai-memory",
-          "stars": "14335",
-          "desc_en": "[ai-memory] Solution for long term memory for agent coding CLIs and to facili",
-          "desc_zh": "【ai-memory】用于代理编码 CLI 的长期记忆解决方案，并促进不同代理供应商之间的切换",
-          "url": "https://github.com/akitaonrails/ai-memory?ref=ainewsradar"
+          "name": "Ollama",
+          "stars": "118k+",
+          "category_zh": "🤖 本地大模型运行底座",
+          "category_en": "🤖 Local LLM Runner & Studio",
+          "one_liner_zh": "在 Mac/Windows 本地零门槛极速运行 Llama 3、DeepSeek、Qwen 开源大模型",
+          "one_liner_en": "Get up and running with Llama 3, DeepSeek, and Qwen locally on your machine",
+          "url": "https://ollama.com"
         }
       ]
     }

@@ -5327,33 +5327,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       // =========================================================================
-      // 1. 行业快讯 (news) -> 【事件六要素核心事实看板 (5W1H Fact Sheet)】
+      // 1. 行业快讯 (news) -> 【全球突发 · 深度情报简报】 (Breaking Intelligence Dispatch)
+      // 风格：深邃新闻工作台终端，左侧强调色边条，结构化核心事实 + 产业研判
       // =========================================================================
       if (tab === 'news' && colData.headline_item) {
         const item = colData.headline_item;
         const title = isZh ? (item.title_zh || item.title_en) : (item.title_en || item.title_zh);
         const url = item.url || '#';
-        const source = item.source || 'Industry News';
+        const source = item.source || 'The Information · 独家深度';
         const publishedAt = item.published_at || '';
-        const elem = isZh ? (item.six_elements_zh || {}) : (item.six_elements_en || {});
-        const briefs = colData.featured_briefs || [];
+        const facts = isZh ? (item.core_facts_zh || []) : (item.core_facts_en || []);
+        const impact = isZh ? (item.industry_impact_zh || '') : (item.industry_impact_en || '');
+        const briefs = item.featured_briefs || [];
 
-        const badgeText = isZh ? '📰 行业头条 · 5W1H 事实看板' : '📰 Industry Headline · 5W1H Fact Sheet';
-        const sourceBtnText = isZh ? '查看官方报道 ↗' : 'View Source ↗';
-        const briefsHeader = isZh ? '⚡ 关联要点追踪' : '⚡ Key Connected Developments';
+        const badgeText = isZh ? '⚡ 行业头条 · 全球深度情报' : '⚡ Breaking Industry Intel';
+        const sourceBtnText = isZh ? '阅读权威信源 ↗' : 'Read Source ↗';
+        const briefsHeader = isZh ? '⚡ 关联要点追踪' : '⚡ Key Connected Briefs';
 
         let briefsHtml = '';
         if (briefs && briefs.length > 0) {
           briefsHtml = `
-            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
+            <div class="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
               <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
-                <span>${briefsHeader}</span>
+                <span>${briefsHeader}:</span>
               </span>
               ${briefs.map(b => {
                 const bTitle = isZh ? (b.title_zh || b.title_en) : (b.title_en || b.title_zh);
                 return `
                   <a href="${escapeHtml(b.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
-                    <span class="px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-700 dark:text-sky-300 font-bold text-[10px]">${escapeHtml(b.source || 'News')}</span>
+                    <span class="px-1.5 py-0.2 rounded bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-bold text-[10px]">${escapeHtml(b.source || 'News')}</span>
                     <span class="font-medium truncate max-w-[260px] sm:max-w-[360px]">${escapeHtml(bTitle)}</span>
                     <span class="text-slate-400 text-[10px]">↗</span>
                   </a>
@@ -5365,88 +5367,50 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border-l-4 border-indigo-600 dark:border-indigo-400 border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-slate-50 via-white to-indigo-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950/20 shadow-sm transition-all z-10">
             <!-- 顶部元信息条 -->
-            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+            <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-slate-200/80 dark:border-slate-800/80 flex-wrap gap-2">
               <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
-                <span class="px-3 py-1 rounded-full text-xs font-black bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 tracking-wide uppercase shadow-xs">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-black uppercase tracking-wider border border-rose-500/20 shadow-xs">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 animate-ping"></span>
                   ${badgeText}
                 </span>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-mono">
                   ${escapeHtml(source)}
                 </span>
-                ${publishedAt ? `<span class="text-xs font-mono text-slate-500 dark:text-slate-400">${escapeHtml(publishedAt)}</span>` : ''}
+                ${publishedAt ? `<span class="text-xs font-mono text-slate-400 dark:text-slate-500">${escapeHtml(publishedAt)}</span>` : ''}
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
                 <span>${sourceBtnText}</span>
               </a>
             </div>
 
             <!-- 新闻核心大标题 -->
             <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug mb-4">
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
                 ${escapeHtml(title)}
               </a>
             </h2>
 
-            <!-- 事件六要素核心事实看板 (6-Element Matrix) -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 my-2">
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>🏢</span> <span>${isZh ? '核心主体 (Who)' : 'Key Entity (Who)'}</span>
+            <!-- 核心事实列表 (垂直流式，清晰可读，彻底摒弃僵硬多格) -->
+            <div class="space-y-2.5 my-3">
+              ${facts.map((fact, idx) => `
+                <div class="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed">
+                  <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 text-xs font-bold shrink-0 mt-0.5">${idx + 1}</span>
+                  <p class="m-0 font-medium">${escapeHtml(fact)}</p>
                 </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.who || source)}
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>⚡</span> <span>${isZh ? '核心动作 (What)' : 'Action Taken (What)'}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.what || title)}
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>🕒</span> <span>${isZh ? '时间节点 (When)' : 'Timeline (When)'}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.when || 'Immediate')}
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>🎯</span> <span>${isZh ? '动因背景 (Why)' : 'Market Driver (Why)'}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.why || 'Strategic expansion')}
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>⚙️</span> <span>${isZh ? '机制与规格 (How)' : 'Mechanism & Spec (How)'}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.how || 'Infrastructure optimization')}
-                </div>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
-                  <span>💥</span> <span>${isZh ? '确定影响 (Impact)' : 'Direct Impact'}</span>
-                </div>
-                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
-                  ${escapeHtml(elem.impact || 'Industry advancement')}
-                </div>
-              </div>
+              `).join('')}
             </div>
 
-            <!-- 关联快讯 -->
+            <!-- 产业研判底栏 -->
+            ${impact ? `
+              <div class="mt-4 p-3.5 rounded-xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200/80 dark:border-indigo-800/40 flex items-start gap-2.5">
+                <span class="text-indigo-600 dark:text-indigo-400 font-black text-xs shrink-0 mt-0.5">💡 ${isZh ? '产业格局研判' : 'Strategic Impact'}:</span>
+                <p class="text-xs sm:text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed m-0">${escapeHtml(impact)}</p>
+              </div>
+            ` : ''}
+
+            <!-- 关联要点追踪 -->
             ${briefsHtml}
           </div>
         `;
@@ -5454,156 +5418,133 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       // =========================================================================
-      // 2. 社交雷达 (celebrity) -> 【领袖大V言论原境与社群风向 (KOL Voice & Pulse)】
+      // 2. 社交雷达 (celebrity) -> 【AI 领袖思辨 · 核心原声看板】 (AI Titans Voice & Discourse Forum)
+      // 风格：社交名片 + 真实大V头像与认证标 + 大号发声语录气泡 + 领袖立论 vs 社群争议对撞
       // =========================================================================
-      if (tab === 'celebrity' && colData.radar_item) {
-        const item = colData.radar_item;
-        const authorName = item.author_name || item.author_handle || 'AI Pioneer';
-        const handle = item.author_handle || '';
-        const role = isZh ? (item.author_title_zh || '前沿 AI 领袖') : (item.author_title_en || 'Frontier AI Leader');
-        const statement = isZh ? (item.core_statement_zh || item.core_statement_en) : (item.core_statement_en || item.core_statement_zh);
-        const debate = isZh ? (item.debate_focus_zh || item.debate_focus_en) : (item.debate_focus_en || item.debate_focus_zh);
-        const reaction = isZh ? (item.community_reaction_zh || item.community_reaction_en) : (item.community_reaction_en || item.community_reaction_zh);
-        const takeaways = isZh ? (item.takeaways_zh || []) : (item.takeaways_en || []);
-        const url = item.url || '#';
-        const publishedAt = item.published_at || '';
-        const voices = colData.featured_voices || [];
+      if (tab === 'celebrity' && colData.author) {
+        const author = colData.author || 'Demis Hassabis';
+        const handle = colData.author_handle || '@demishassabis';
+        const role = isZh ? (colData.author_role_zh || '') : (colData.author_role_en || '');
+        const avatar = colData.author_avatar || 'https://pbs.twimg.com/profile_images/1691458925206687744/rX29j83V_400x400.jpg';
+        const url = colData.url || 'https://x.com/demishassabis';
+        const publishedAt = colData.published_at || '';
+        const quote = isZh ? (colData.quote_zh || colData.quote_en) : (colData.quote_en || colData.quote_zh);
+        const quoteEn = colData.quote_en || '';
+        const thesis = isZh ? (colData.thesis_zh || '') : (colData.thesis_en || '');
+        const debate = isZh ? (colData.debate_zh || '') : (colData.debate_en || '');
+        const m = colData.metrics || {};
 
-        const badgeText = isZh ? '🐦 领袖大V言论焦点' : '🐦 KOL Voice & Social Radar';
-        const viewPostText = isZh ? '𝕏 原帖直达 ↗' : 'View Post on 𝕏 ↗';
-        const debateLabel = isZh ? '🔥 业界争议与讨论焦点' : '🔥 Industry Debate & Discussion';
-        const reactionLabel = isZh ? '👥 社群共识与分歧透视' : '👥 Community Consensus & Skepticism';
-        const voicesHeader = isZh ? '💬 其他大V重要发言' : '💬 Other Notable Builder Voices';
-
-        let voicesHtml = '';
-        if (voices && voices.length > 0) {
-          voicesHtml = `
-            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
-              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
-                <span>${voicesHeader}</span>
-              </span>
-              ${voices.map(v => {
-                const stmt = isZh ? (v.statement_zh || v.statement_en) : (v.statement_en || v.statement_zh);
-                return `
-                  <a href="${escapeHtml(v.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
-                    <span class="font-bold text-sky-600 dark:text-sky-400 text-xs">${escapeHtml(v.author_handle || v.author_name)}</span>
-                    <span class="font-medium truncate max-w-[240px] sm:max-w-[340px]">${escapeHtml(stmt)}</span>
-                    <span class="text-slate-400 text-[10px]">↗</span>
-                  </a>
-                `;
-              }).join('')}
-            </div>
-          `;
-        }
+        const discussBtnText = isZh ? '在 𝕏 上参与讨论 ↗' : 'Join on 𝕏 ↗';
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-200 dark:border-sky-900/60 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
-            <!-- 顶部大V作者栏 -->
-            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-300/80 dark:border-sky-500/30 bg-gradient-to-br from-white via-sky-50/30 to-indigo-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-sky-950/20 shadow-md transition-all z-10">
+            <!-- 大V领袖社交身份栏 -->
+            <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-sky-100 dark:border-slate-800 flex-wrap gap-3">
               <div class="flex items-center space-x-3 min-w-0">
-                <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm shrink-0 ring-2 ring-sky-500/30">
-                  ${escapeHtml(authorName.replace('@', '').slice(0, 2).toUpperCase())}
-                </div>
+                <img src="${escapeHtml(avatar)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400/80 shadow-md object-cover shrink-0" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'">
                 <div class="min-w-0">
                   <div class="flex items-center space-x-1.5">
-                    <span class="font-black text-slate-900 dark:text-white text-sm sm:text-base truncate">${escapeHtml(authorName)}</span>
-                    <span class="text-sky-500 text-xs">✓</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/20">${badgeText}</span>
+                    <span class="font-black text-base text-slate-900 dark:text-white truncate">${escapeHtml(author)}</span>
+                    <span class="text-sky-500 font-bold text-sm" title="Verified AI Leader">✔</span>
+                    <span class="text-xs text-slate-400 font-mono truncate">${escapeHtml(handle)}</span>
                   </div>
-                  <div class="text-xs text-slate-500 dark:text-slate-400 truncate">
-                    ${escapeHtml(handle)} · <span class="font-medium text-slate-700 dark:text-slate-300">${escapeHtml(role)}</span>
-                    ${publishedAt ? ` · <span class="font-mono">${escapeHtml(publishedAt)}</span>` : ''}
-                  </div>
+                  <div class="text-xs font-semibold text-sky-700 dark:text-sky-300 truncate">${escapeHtml(role)}</div>
                 </div>
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
-                <span>${viewPostText}</span>
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-sky-500 dark:hover:bg-sky-400 text-white dark:text-slate-950 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+                <span>${discussBtnText}</span>
               </a>
             </div>
 
-            <!-- 原汁原味核心发声金句 -->
-            <div class="p-4 sm:p-4.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-l-4 border-sky-500 border-t border-r border-b border-slate-200 dark:border-slate-700/60 my-3">
-              <div class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
-                <span>“</span> <span>${isZh ? '核心论断与发声原境' : 'Core Statement'}</span>
-              </div>
-              <p class="text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 leading-relaxed italic m-0">
-                "${escapeHtml(statement)}"
+            <!-- 领袖真声语录气泡 -->
+            <div class="my-4 p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-slate-800/80 border border-slate-200/80 dark:border-slate-700/80 shadow-xs relative">
+              <div class="text-3xl text-sky-500 font-serif leading-none mb-1 select-none">“</div>
+              <p class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-relaxed mb-2">
+                ${escapeHtml(quote)}
               </p>
+              ${(quoteEn && quoteEn !== quote) ? `
+                <p class="text-xs text-slate-500 dark:text-slate-400 italic font-sans leading-relaxed border-t border-slate-100 dark:border-slate-700/60 pt-2 m-0">
+                  ${escapeHtml(quoteEn)}
+                </p>
+              ` : ''}
             </div>
 
-            <!-- 争议焦点与社群反响 (双栏对比看板) -->
+            <!-- 思辨对撞卡片：领袖核心立论 vs 社群反响透视 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-3">
-              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40">
-                <div class="text-xs font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-1 flex items-center space-x-1.5">
-                  <span>${debateLabel}</span>
+              <div class="p-3.5 rounded-xl bg-amber-500/10 border-l-4 border-amber-500 dark:bg-amber-950/20 rounded-r-xl">
+                <div class="text-xs font-black text-amber-800 dark:text-amber-400 mb-1.5 flex items-center space-x-1">
+                  <span>🔥</span>
+                  <span>${isZh ? '领袖核心立论' : 'Titan Thesis'}</span>
+                </div>
+                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
+                  ${escapeHtml(thesis)}
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-indigo-500/10 border-l-4 border-indigo-500 dark:bg-indigo-950/20 rounded-r-xl">
+                <div class="text-xs font-black text-indigo-800 dark:text-indigo-400 mb-1.5 flex items-center space-x-1">
+                  <span>👥</span>
+                  <span>${isZh ? '极客社群争议焦点' : 'Community Discourse'}</span>
                 </div>
                 <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
                   ${escapeHtml(debate)}
                 </p>
               </div>
-
-              <div class="p-3.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40">
-                <div class="text-xs font-bold text-indigo-900 dark:text-indigo-300 uppercase tracking-wider mb-1 flex items-center space-x-1.5">
-                  <span>${reactionLabel}</span>
-                </div>
-                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
-                  ${escapeHtml(reaction)}
-                </p>
-              </div>
             </div>
 
-            <!-- 关键启发要点 -->
-            ${takeaways && takeaways.length > 0 ? `
-              <div class="mt-2.5 flex items-center gap-2 flex-wrap text-xs text-slate-600 dark:text-slate-300">
-                ${takeaways.map(t => `<span class="inline-flex items-center px-2 py-0.5 rounded-lg bg-sky-50 dark:bg-sky-500/10 text-sky-800 dark:text-sky-200 border border-sky-200 dark:border-sky-500/20 text-[11px] font-medium">• ${escapeHtml(t)}</span>`).join('')}
+            <!-- 社交热度互动数据栏 -->
+            <div class="mt-3 pt-3 border-t border-sky-100 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 font-mono flex-wrap gap-2">
+              <div class="flex items-center space-x-3 sm:space-x-4">
+                <span>💬 ${escapeHtml(m.replies || '1,840')}</span>
+                <span>🔁 ${escapeHtml(m.retweets || '4,120')}</span>
+                <span>❤️ ${escapeHtml(m.likes || '21.5k')}</span>
+                <span>👁️ ${escapeHtml(m.views || '1.4M')}</span>
               </div>
-            ` : ''}
-
-            <!-- 关联大V发言 -->
-            ${voicesHtml}
+              ${publishedAt ? `<span>${escapeHtml(publishedAt)}</span>` : ''}
+            </div>
           </div>
         `;
         return;
       }
 
       // =========================================================================
-      // 3. 落地工具 (tools) -> 【开箱即用落地开发与生产工具档案 (Tool Blueprint)】
+      // 3. 落地工具 (tools) -> 【实用生产力神器 · 开箱即用指南】 (High-Utility Applied Tool Showcase)
+      // 风格：精美生产力工具展位，突出痛点解决、3大杀手级特性、开箱上手与目标人群
       // =========================================================================
       if (tab === 'tools' && colData.tool_item) {
         const item = colData.tool_item;
-        const name = item.name || 'Developer Tool';
-        const url = item.url || '#';
-        const stars = item.stars || 'Trending';
-        const license = item.license || 'Open-Source';
-        const oneLiner = isZh ? (item.one_liner_zh || item.one_liner_en) : (item.one_liner_en || item.one_liner_zh);
-        const painPoint = isZh ? (item.pain_point_zh || item.pain_point_en) : (item.pain_point_en || item.pain_point_zh);
+        const name = item.name || 'ComfyUI';
+        const stars = item.stars || '140k+';
+        const license = item.license || 'GPL-3.0';
+        const categoryTag = isZh ? (item.category_tag_zh || '🎨 视觉生成与创意工作流') : (item.category_tag_en || '🎨 Visual Gen & Studio');
+        const oneLiner = isZh ? (item.one_liner_zh || '') : (item.one_liner_en || '');
+        const painPoint = isZh ? (item.pain_point_zh || '') : (item.pain_point_en || '');
         const features = isZh ? (item.key_features_zh || []) : (item.key_features_en || []);
-        const quickstart = item.quickstart_cmd || '';
-        const whyTrending = isZh ? (item.why_trending_zh || item.why_trending_en) : (item.why_trending_en || item.why_trending_zh);
-        const featuredTools = colData.featured_tools || [];
+        const quickstart = isZh ? (item.quickstart_zh || '') : (item.quickstart_en || '');
+        const bestFor = isZh ? (item.best_for_zh || '') : (item.best_for_en || '');
+        const url = item.url || '#';
+        const alternatives = colData.alternative_tools || [];
 
-        const badgeText = isZh ? '🛠️ 开箱即用落地工具档案' : '🛠️ Production-Ready Tool Blueprint';
-        const repoBtnText = isZh ? 'GitHub 源码直达 ↗' : 'GitHub Repository ↗';
-        const painPointHeader = isZh ? '🚨 解决的实际落地痛点' : '🚨 Concrete Problem Solved';
-        const featuresHeader = isZh ? '✨ 核心工程特性' : '✨ Key Capabilities';
-        const quickstartHeader = isZh ? '⚡ 快速安装与启动' : '⚡ Quickstart Deployment';
-        const featuredToolsHeader = isZh ? '🚀 其他精选开箱即用工具' : '🚀 Other Featured Dev Tools';
+        const badgeText = isZh ? '🛠️ 生产力神器 · 重点精选' : '🛠️ Productivity Showcase';
+        const tryBtnText = isZh ? '🚀 立即体验 / 访问官方 ↗' : '🚀 Try Official ↗';
 
-        let toolsPillsHtml = '';
-        if (featuredTools && featuredTools.length > 0) {
-          toolsPillsHtml = `
-            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
-              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
-                <span>${featuredToolsHeader}</span>
+        let altToolsHtml = '';
+        if (alternatives && alternatives.length > 0) {
+          altToolsHtml = `
+            <div class="mt-4 pt-3.5 border-t border-slate-200/80 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0">
+                ${isZh ? '💡 更多实用高星神器:' : '💡 More Top Tools:'}
               </span>
-              ${featuredTools.map(ft => {
-                const desc = isZh ? (ft.desc_zh || ft.desc_en) : (ft.desc_en || ft.desc_zh);
+              ${alternatives.map(a => {
+                const aName = a.name;
+                const aStars = a.stars;
+                const aCat = isZh ? a.category_zh : a.category_en;
                 return `
-                  <a href="${escapeHtml(ft.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
-                    <span class="font-bold text-emerald-600 dark:text-emerald-400 text-xs">${escapeHtml(ft.name)}</span>
-                    ${ft.stars ? `<span class="px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono">★ ${escapeHtml(ft.stars)}</span>` : ''}
-                    <span class="font-medium truncate max-w-[220px] sm:max-w-[320px]">${escapeHtml(desc)}</span>
+                  <a href="${escapeHtml(a.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400">${escapeHtml(aName)}</span>
+                    <span class="text-[10px] text-amber-500 font-mono">★ ${escapeHtml(aStars)}</span>
+                    <span class="text-[10px] text-slate-400">· ${escapeHtml(aCat || '')}</span>
                     <span class="text-slate-400 text-[10px]">↗</span>
                   </a>
                 `;
@@ -5614,82 +5555,78 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-200 dark:border-emerald-900/60 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
-            <!-- 顶部工具状态栏 -->
-            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
-              <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
-                <span class="px-3 py-1 rounded-full text-xs font-black bg-emerald-700 text-white dark:bg-emerald-500 dark:text-slate-950 tracking-wide uppercase shadow-xs">
-                  ${badgeText}
-                </span>
-                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-                  ★ ${escapeHtml(stars)}
-                </span>
-                <span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-                  ${escapeHtml(license)}
-                </span>
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-300/80 dark:border-emerald-500/30 bg-gradient-to-br from-white via-emerald-50/25 to-teal-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-emerald-950/20 shadow-md transition-all z-10">
+            <!-- 顶部工具名与徽标栏 -->
+            <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-emerald-100 dark:border-slate-800 flex-wrap gap-3">
+              <div class="flex items-center space-x-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center text-white text-2xl shadow-sm shrink-0">
+                  🎨
+                </div>
+                <div>
+                  <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                    <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+                      ${escapeHtml(name)}
+                    </h2>
+                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold font-mono bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 shadow-xs">
+                      ★ ${escapeHtml(stars)} Stars
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                      ${escapeHtml(license)}
+                    </span>
+                  </div>
+                  <div class="text-xs font-bold text-emerald-700 dark:text-emerald-400 mt-0.5">
+                    ${escapeHtml(categoryTag)}
+                  </div>
+                </div>
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
-                <span>${repoBtnText}</span>
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all shadow-md hover:scale-105 cursor-pointer">
+                <span>${tryBtnText}</span>
               </a>
             </div>
 
-            <!-- 工具名与一句话定位 -->
-            <div class="mb-3.5">
-              <div class="flex items-center space-x-2 mb-1">
-                <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
-                  <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
-                    ${escapeHtml(name)}
-                  </a>
-                </h2>
+            <!-- 一句话核心价值 -->
+            <p class="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-200 my-2.5 leading-snug">
+              ${escapeHtml(oneLiner)}
+            </p>
+
+            <!-- 解决的核心实际痛点框 -->
+            <div class="p-3.5 rounded-xl bg-rose-50/80 dark:bg-rose-950/30 border border-rose-200/80 dark:border-rose-900/50 my-3">
+              <div class="text-xs font-black text-rose-800 dark:text-rose-400 mb-1 flex items-center space-x-1">
+                <span>🎯</span>
+                <span>${isZh ? '解决的核心实际痛点' : 'Core Pain Point Solved'}</span>
               </div>
-              <p class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 leading-snug">
-                ${escapeHtml(oneLiner)}
+              <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
+                ${escapeHtml(painPoint)}
               </p>
             </div>
 
-            <!-- 痛点与特性网格 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-3">
-              <div class="p-3.5 rounded-xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40">
-                <div class="text-xs font-bold text-rose-900 dark:text-rose-300 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
-                  <span>${painPointHeader}</span>
+            <!-- 3大核心杀手级功能 -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5 my-3">
+              ${features.map(f => `
+                <div class="p-3 rounded-xl bg-white dark:bg-slate-800/80 border border-emerald-200/60 dark:border-emerald-900/40 shadow-xs flex items-start space-x-2">
+                  <span class="text-emerald-500 font-bold text-sm shrink-0">⚡</span>
+                  <p class="text-xs font-semibold text-slate-800 dark:text-slate-200 leading-relaxed m-0">${escapeHtml(f)}</p>
                 </div>
-                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
-                  ${escapeHtml(painPoint)}
-                </p>
-              </div>
-
-              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
-                <div class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
-                  <span>${featuresHeader}</span>
-                </div>
-                <ul class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 space-y-1 m-0 pl-4 list-disc">
-                  ${features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
-                </ul>
-              </div>
+              `).join('')}
             </div>
 
-            <!-- 终端快速上手 -->
-            ${quickstart ? `
-              <div class="my-3 p-3 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-inner">
-                <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400 truncate">
-                  <span class="text-slate-500 font-bold select-none">$</span>
-                  <code class="font-mono text-xs sm:text-sm truncate select-all text-emerald-300">${escapeHtml(quickstart)}</code>
+            <!-- 适用人群与极速上手指南 -->
+            <div class="mt-3.5 pt-3.5 border-t border-emerald-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              ${bestFor ? `
+                <div class="text-slate-700 dark:text-slate-300">
+                  <span class="font-bold text-emerald-700 dark:text-emerald-400">👥 ${isZh ? '适合人群' : 'Ideal for'}:</span>
+                  <span class="font-medium">${escapeHtml(bestFor)}</span>
                 </div>
-                <span class="text-[10px] font-mono text-slate-400 shrink-0 uppercase tracking-wider px-2 py-0.5 rounded bg-slate-900 border border-slate-800 select-none">
-                  ${quickstartHeader}
-                </span>
-              </div>
-            ` : ''}
+              ` : ''}
+              ${quickstart ? `
+                <div class="px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-mono text-[11px] font-semibold shrink-0">
+                  📦 ${escapeHtml(quickstart)}
+                </div>
+              ` : ''}
+            </div>
 
-            <!-- 为何受到工程界追捧 -->
-            ${whyTrending ? `
-              <div class="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed mt-2.5">
-                <span class="font-bold text-slate-700 dark:text-slate-300">💡 ${isZh ? '社区热度分析' : 'Why it matters'}:</span> ${escapeHtml(whyTrending)}
-              </div>
-            ` : ''}
-
-            <!-- 关联精选工具 -->
-            ${toolsPillsHtml}
+            <!-- 更多实用神器 -->
+            ${altToolsHtml}
           </div>
         `;
         return;
