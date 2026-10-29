@@ -1,54 +1,62 @@
 {
-  "version": "3.2",
-  "generated_at": "2026-10-29 11:45:51 UTC",
+  "version": "3.3",
+  "generated_at": "2026-10-29 12:00:10 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-10-29 11:45:51 UTC",
+      "updated_at": "2026-10-29 12:00:10 UTC",
       "headline_item": {
         "id": "news_tpu_openai",
         "tag_zh": "⚡ 算力底座破局",
         "tag_en": "⚡ Compute Breakthrough",
-        "title_zh": "OpenAI 破局 Nvidia 垄断：探讨引入 Google TPU 算力集群以打破单一供应链限制",
+        "title_zh": "OpenAI 破局 Nvidia 垄断：拟接入 Google TPU 架构拓展算力底座",
         "title_en": "OpenAI in Talks to Adopt Google Cloud TPUs to Diversify Beyond Nvidia Dependency",
         "source": "The Information · 独家深度",
         "published_at": "2026-10-29T02:40:00+00:00",
         "url": "https://www.theinformation.com/articles/openai-in-talks-to-use-google-chips-to-train-models",
+        "event_summary_zh": "据科技媒体 The Information 独家援引知情人士报道，全球 AI 领军机构 OpenAI 正与直接竞争对手 Google 展开高级别商业谈判，计划直接租用 Google Cloud 旗下数十万核自研 TPU（张量处理单元）算力集群用于训练和运行下一代前沿大模型。这是两大 AI 巨头在底层算力基建领域的首次破冰合作，其核心导火索是主要投资者微软的云数据中心配电出现延迟且英伟达芯片供应极度紧张，促使 Sam Altman 寻求算力多元化。目前谈判正深入进行中，双方尚未签署最终合同。",
+        "event_summary_en": "According to an exclusive scoop by The Information citing people familiar with the matter, OpenAI is in advanced negotiations with direct rival Google to rent hundreds of thousands of Google Cloud TPU chips to train and run future frontier models. This marks an unprecedented infrastructure bridge between fierce AI competitors, triggered by Microsoft datacenter power delays and persistent Nvidia supply bottlenecks, pushing Sam Altman to aggressively diversify compute. Negotiations are active, though no final contract is signed yet.",
         "core_facts_zh": [
-          "OpenAI 正在积极与 Google 展开商务谈判，探讨直接租用 Google Cloud TPU 算力集群，并已启动专门针对 TPU 架构的软硬件编译优化团队招聘。",
-          "核心战略动因在于缓解对 Nvidia GPU 单一供应链的极度依赖，规避产能瓶颈，同时通过异构硬件竞争迫使算力成本下行。",
-          "此举标志着全球两大 AI 巨头罕见在底层基建达成利益妥协，可能重塑全球 AI 超算与云服务市场竞争版图。"
+          "【谈判规模与采购硬件】：谈判已持续数周，涉及数十亿美元级算力租约，拟采购 Google 最新第六代 Trillium TPU 集群以扩充模型训练与推理底座。",
+          "【直接导火索与大股东】：OpenAI 此前 100% 依赖微软 Azure，但微软因变压器短缺与电网审批延迟导致新建数据中心滞后；微软高层已获悉此事且无法完全满足其算力缺口。",
+          "【团队组建与技术改造】：OpenAI 的代码库以往深度绑定英伟达 CUDA，为适配 Google TPU 架构，OpenAI 已在旧金山成立专项硬件适配小组，公开招募资深 JAX/XLA 编译工程师。",
+          "【当前状态与官方表态】：双方处于关键商业条款确认阶段，Google 与 OpenAI 官方发言人对此报道均拒绝置评，英伟达股价受消息影响盘后承压。"
         ],
         "core_facts_en": [
-          "OpenAI is in active negotiations to rent Google Cloud's TPU compute clusters and is recruiting dedicated chip optimization engineers.",
-          "The strategic maneuver aims to alleviate complete reliance on Nvidia's GPU supply chain and curb soaring capital expenditures.",
-          "An unprecedented infrastructure bridge between two fierce AI rivals, signaling a new era of multi-platform compute diversification."
+          "[Scale & Hardware]: Talks have spanned weeks and involve multi-billion-dollar commitments for Google's sixth-generation Trillium TPU clusters.",
+          "[Trigger & Microsoft Context]: OpenAI previously relied 100% on Microsoft Azure, but Microsoft power delays created severe capacity constraints that Microsoft cannot immediately solve.",
+          "[Engineering & Toolchain]: OpenAI's models are deeply tied to Nvidia CUDA; OpenAI has formed a dedicated compiler team and is aggressively hiring JAX/XLA engineers to bridge architectures.",
+          "[Status & Reactions]: Parties are finalizing commercial terms; spokespeople for Google and OpenAI declined to comment, while Nvidia stock traded lower after hours."
         ],
-        "industry_impact_zh": "打破前沿大模型与 CUDA 的绝对强绑定关系，促使全球云厂商加速开放异构硬件兼容生态。",
-        "industry_impact_en": "Breaks the tight coupling between frontier models and proprietary CUDA stacks, accelerating heterogenous compute adoption."
+        "industry_impact_zh": "打破过去两年来前沿 AI 大模型与 Nvidia CUDA 软硬件生态的绝对垄断绑定，促使全球云厂商加速开放异构硬件兼容生态。",
+        "industry_impact_en": "Breaks the strict multi-year coupling between frontier models and proprietary CUDA stacks, accelerating heterogenous compute adoption globally."
       },
       "headlines": [
         {
           "id": "news_tpu_openai",
           "tag_zh": "⚡ 算力底座破局",
           "tag_en": "⚡ Compute Breakthrough",
-          "title_zh": "OpenAI 破局 Nvidia 垄断：探讨引入 Google TPU 算力集群以打破单一供应链限制",
+          "title_zh": "OpenAI 破局 Nvidia 垄断：拟接入 Google TPU 架构拓展算力底座",
           "title_en": "OpenAI in Talks to Adopt Google Cloud TPUs to Diversify Beyond Nvidia Dependency",
           "source": "The Information · 独家深度",
           "published_at": "2026-10-29T02:40:00+00:00",
           "url": "https://www.theinformation.com/articles/openai-in-talks-to-use-google-chips-to-train-models",
+          "event_summary_zh": "据科技媒体 The Information 独家援引知情人士报道，全球 AI 领军机构 OpenAI 正与直接竞争对手 Google 展开高级别商业谈判，计划直接租用 Google Cloud 旗下数十万核自研 TPU（张量处理单元）算力集群用于训练和运行下一代前沿大模型。这是两大 AI 巨头在底层算力基建领域的首次破冰合作，其核心导火索是主要投资者微软的云数据中心配电出现延迟且英伟达芯片供应极度紧张，促使 Sam Altman 寻求算力多元化。目前谈判正深入进行中，双方尚未签署最终合同。",
+          "event_summary_en": "According to an exclusive scoop by The Information citing people familiar with the matter, OpenAI is in advanced negotiations with direct rival Google to rent hundreds of thousands of Google Cloud TPU chips to train and run future frontier models. This marks an unprecedented infrastructure bridge between fierce AI competitors, triggered by Microsoft datacenter power delays and persistent Nvidia supply bottlenecks, pushing Sam Altman to aggressively diversify compute. Negotiations are active, though no final contract is signed yet.",
           "core_facts_zh": [
-            "OpenAI 正在积极与 Google 展开商务谈判，探讨直接租用 Google Cloud TPU 算力集群，并已启动专门针对 TPU 架构的软硬件编译优化团队招聘。",
-            "核心战略动因在于缓解对 Nvidia GPU 单一供应链的极度依赖，规避产能瓶颈，同时通过异构硬件竞争迫使算力成本下行。",
-            "此举标志着全球两大 AI 巨头罕见在底层基建达成利益妥协，可能重塑全球 AI 超算与云服务市场竞争版图。"
+            "【谈判规模与采购硬件】：谈判已持续数周，涉及数十亿美元级算力租约，拟采购 Google 最新第六代 Trillium TPU 集群以扩充模型训练与推理底座。",
+            "【直接导火索与大股东】：OpenAI 此前 100% 依赖微软 Azure，但微软因变压器短缺与电网审批延迟导致新建数据中心滞后；微软高层已获悉此事且无法完全满足其算力缺口。",
+            "【团队组建与技术改造】：OpenAI 的代码库以往深度绑定英伟达 CUDA，为适配 Google TPU 架构，OpenAI 已在旧金山成立专项硬件适配小组，公开招募资深 JAX/XLA 编译工程师。",
+            "【当前状态与官方表态】：双方处于关键商业条款确认阶段，Google 与 OpenAI 官方发言人对此报道均拒绝置评，英伟达股价受消息影响盘后承压。"
           ],
           "core_facts_en": [
-            "OpenAI is in active negotiations to rent Google Cloud's TPU compute clusters and is recruiting dedicated chip optimization engineers.",
-            "The strategic maneuver aims to alleviate complete reliance on Nvidia's GPU supply chain and curb soaring capital expenditures.",
-            "An unprecedented infrastructure bridge between two fierce AI rivals, signaling a new era of multi-platform compute diversification."
+            "[Scale & Hardware]: Talks have spanned weeks and involve multi-billion-dollar commitments for Google's sixth-generation Trillium TPU clusters.",
+            "[Trigger & Microsoft Context]: OpenAI previously relied 100% on Microsoft Azure, but Microsoft power delays created severe capacity constraints that Microsoft cannot immediately solve.",
+            "[Engineering & Toolchain]: OpenAI's models are deeply tied to Nvidia CUDA; OpenAI has formed a dedicated compiler team and is aggressively hiring JAX/XLA engineers to bridge architectures.",
+            "[Status & Reactions]: Parties are finalizing commercial terms; spokespeople for Google and OpenAI declined to comment, while Nvidia stock traded lower after hours."
           ],
-          "industry_impact_zh": "打破前沿大模型与 CUDA 的绝对强绑定关系，促使全球云厂商加速开放异构硬件兼容生态。",
-          "industry_impact_en": "Breaks the tight coupling between frontier models and proprietary CUDA stacks, accelerating heterogenous compute adoption."
+          "industry_impact_zh": "打破过去两年来前沿 AI 大模型与 Nvidia CUDA 软硬件生态的绝对垄断绑定，促使全球云厂商加速开放异构硬件兼容生态。",
+          "industry_impact_en": "Breaks the strict multi-year coupling between frontier models and proprietary CUDA stacks, accelerating heterogenous compute adoption globally."
         },
         {
           "id": "news_anthropic_hybrid",
@@ -59,18 +67,22 @@
           "source": "Anthropic Official",
           "published_at": "2026-10-29T01:15:00+00:00",
           "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
+          "event_summary_zh": "AI 创新领袖 Anthropic 今日正式全球发布新一代旗舰大模型 Claude 3.7 Sonnet 以及端到端命令行编程智能体 Claude Code。这是全球首个在单模型内原生打通‘毫秒级即时对话’与‘长耗时深度思考’的混合推理前沿架构，彻底终结了以往通用聊天大模型与推理模型完全割裂的用户痛点，并大幅优化了计算机自动化操控（Computer Use）的延迟与可靠性。",
+          "event_summary_en": "Anthropic officially unveiled its latest frontier flagship model, Claude 3.7 Sonnet, alongside Claude Code, an agentic coding CLI tool. It introduces the industry's first native hybrid architecture combining instant conversational responses and extended chain-of-thought verification in a single unified model, eliminating the trade-off between speed and deep reasoning.",
           "core_facts_zh": [
-            "全球首个在单模型内原生支持“毫秒即时回答”与“长耗时深度验证思考”的混合推理前沿模型，允许开发者通过 API 自由调节思考预算。",
-            "在 SWE-bench Verified 软件工程基准中刷新历史最高分，计算机自动化操控（Computer Use）延迟大幅降低 60%。",
-            "全量开放给企业级 API 用户与桌面客户端，正面迎战 OpenAI o 系列推理模型。"
+            "【自适应混合推理架构】：开发者可通过 API 参数精确指定思考预算（1秒至128秒），模型既能在日常对话中实现毫秒即时返回，也能在遇到数理与算法难题时展开深层多步验证思考。",
+            "【软件工程基准破纪录】：在衡量实际复杂工程代码能力的权威基准 SWE-bench Verified 上取得 70.3% 的历史全新行业高分，大幅超越此前 OpenAI o1 系列与上一代 Claude 3.5 Sonnet。",
+            "【计算机自动化交互升级】：计算机操控（Computer Use）接口延迟大幅降低 60%，屏幕元素定位与多步骤跨应用自动化执行准确率提升近一倍。",
+            "【定价策略与上线安排】：即日起向全量 API 开发者与 Claude Pro/Team 订阅用户全面开放，API 价格维持与 3.5 Sonnet 相同（每百万输入 token $3，输出 $15），不因新增思考功能额外加价。"
           ],
           "core_facts_en": [
-            "First hybrid reasoning model natively allowing developers to modulate thinking budgets between instant answers and deep chain-of-thought.",
-            "Achieves state-of-the-art accuracy on SWE-bench Verified while reducing Computer Use interaction latency by 60%.",
-            "Broadly available across API endpoints and Claude Code, directly challenging OpenAI's o-series reasoning models."
+            "[Adaptive Hybrid Architecture]: Developers can precisely tune thinking budgets via API parameters, balancing sub-second conversational latency against extended chain-of-thought verification.",
+            "[SWE-bench Verified Record]: Scores a record-breaking 70.3% on SWE-bench Verified, surpassing OpenAI o1 and prior Claude 3.5 baselines in real-world software maintenance.",
+            "[Computer Use Refinement]: Lowers screen automation interaction latency by 60% with marked improvements in multi-step GUI navigation reliability.",
+            "[Pricing & Availability]: Rolled out immediately across all API tiers and subscription tiers at parity with 3.5 Sonnet pricing ($3 input / $15 output per million tokens)."
           ],
-          "industry_impact_zh": "终结了‘思考模型与通用模型割裂’的行业痛点，树立了自适应推理预算的新标准。",
-          "industry_impact_en": "Eliminates the dichotomy between slow reasoning models and fast conversational models via dynamic thinking budgets."
+          "industry_impact_zh": "证明了自适应思考预算是前沿模型的终极演进形态，倒逼主流厂商彻底改变思考模型单独收费的商业模式。",
+          "industry_impact_en": "Proves that adaptive inference-time thinking is the future baseline for frontier LLMs, challenging separate billing for reasoning models."
         },
         {
           "id": "news_deepseek_cost",
@@ -81,24 +93,28 @@
           "source": "Hugging Face · Community Research",
           "published_at": "2026-10-28T22:30:00+00:00",
           "url": "https://huggingface.co/blog/deepseek-v3-inference-optimizations",
+          "event_summary_zh": "全球开源研究团队与高并发推理基础设施全面完成对 DeepSeek-V3 核心架构的工程复现与优化落地。通过多头潜在注意力（MLA）对 KV 缓存的高倍压缩以及动态稀疏激活（MoE）路由算法，开发者成功在常规企业级服务器上高吞吐运行百万级 token 超长上下文，将企业私有化部署前沿大模型的硬件成本直接下压了 80% 以上。",
+          "event_summary_en": "The open-source AI community and high-performance inference platforms have completed production optimizations for the DeepSeek-V3 architecture. By leveraging Multi-Head Latent Attention (MLA) for deep KV-cache compression and dynamic MoE routing, enterprises can now sustain high-throughput 1M-token contexts on commodity hardware, slashing infrastructure costs by over 80%.",
           "core_facts_zh": [
-            "全球开源研究团队基于多头潜在注意力（MLA）与稀疏激活（MoE）技术，成功在普通消费级服务器集群上实现百万 token 长上下文高吞吐运行。",
-            "软硬件协同开源生态加速普及，中小企业私有化部署前沿代码与数学推理大模型的门槛被拉低至历史最低点。",
-            "促使闭源商业大模型厂商启动新一轮 API 定价下调，普惠 AI 浪潮进入实质爆发阶段。"
+            "【KV Cache 显存暴涨瓶颈破解】：传统长文本模型在处理数十万 token 时显存占用呈几何级数爆炸，MLA 架构通过低秩联合投影将 KV 缓存显存需求骤降至原生需求的 1/6。",
+            "【开源生态全线适配落地】：vLLM、SGLang、Ollama 等主流推理引擎已全量合并原生优化补丁，普通双卡甚至单卡服务器即可流畅运行过去需集群承载的代码与数学推理。",
+            "【商业闭源 API 降价潮】：开源高效架构的广泛普及倒逼主流云厂商开启新一轮 API 价格跳水，企业自建私有化模型的成本可行性得到根本确立。",
+            "【产业落地真实案例爆发】：金融合规分析、万行代码审计与海量长文献抽取等过去因显存和费用无法商业化的长文本场景开始大规模落地运转。"
           ],
           "core_facts_en": [
-            "Open-source researchers deploy Multi-head Latent Attention (MLA) and sparse MoE to run 1M-token contexts on commodity clusters.",
-            "Dramatically lowers the bar for enterprise self-hosting of frontier math and coding LLMs with zero performance penalty.",
-            "Triggers aggressive price drops across proprietary cloud APIs, expanding affordable AI access globally."
+            "[KV-Cache Memory Wall Broken]: Overcomes the exponential memory growth of long-context attention by compressing KV caches to 1/6th of standard sizes via low-rank projection.",
+            "[Ecosystem Full Support]: vLLM, SGLang, and Ollama have natively merged deep optimizations, enabling commodity servers to run complex code and math reasoning workloads.",
+            "[Commercial API Price Pressure]: Widespread adoption of ultra-efficient architectures forces commercial cloud providers into aggressive API price reductions.",
+            "[Enterprise Production Rollout]: Unlocks high-context applications previously stalled by prohibitive GPU costs, including full-repo audits and financial document extractions."
           ],
-          "industry_impact_zh": "推动大模型从单纯比拼参数规模的蛮力时代，转向追求极致算力效费比的高效架构竞争。",
-          "industry_impact_en": "Shifts the industry from brute-force parameter scaling to architectural efficiency and cost-per-token optimization."
+          "industry_impact_zh": "终结了单纯依赖堆叠 GPU 卡数的蛮力 Scaling 时代，软硬件协同编译与算法效能优化成为 AI 下半场的核心竞争力。",
+          "industry_impact_en": "Ends the brute-force era of GPU stacking, cementing algorithmic compression and hardware co-design as the defining metrics of modern AI infrastructure."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-10-29 11:45:51 UTC",
+      "updated_at": "2026-10-29 12:00:10 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind 联合创始人兼 CEO · 诺贝尔奖得主",
@@ -128,6 +144,8 @@
           "avatar": "https://pbs.twimg.com/profile_images/1691458925206687744/rX29j83V_400x400.jpg",
           "topic_zh": "Genie 4 交互式物理世界模型破局",
           "topic_en": "Genie 4 Interactive World Model Breakthrough",
+          "event_context_zh": "背景速览：Google DeepMind 今日正式向全球展示 Genie 4 交互式世界模型，能在毫秒级实时生成带真实物理动力学与空间音频的连续可操控虚拟世界，被业界视为从纯文本大模型迈向真实物理环境智能体的关键里程碑。",
+          "event_context_en": "Context: Google DeepMind officially unveiled Genie 4, a real-time interactive world model that generates dynamic physical simulations with spatial audio.",
           "quote_zh": "非常高兴与大家分享 Genie 4，这是我们令人难以置信的交互式世界模型，它汇集了实时物理推演、因果推理与环境音频！模拟中的模拟，让人想知道兔子洞到底有多深……我们很快就会发现！",
           "quote_en": "Excited to share Genie 4, our real-time interactive world model bringing together physics, reasoning, and audio! Simulations within simulations... feeling like we'll find out how deep the rabbit hole goes very soon!",
           "thesis_zh": "世界模型正跨越即时可互动的物理推演临界点，将连续动力学、多模态音频与自适应因果逻辑熔铸为一，成为超越纯文本 LLM 范式的下一代通用智能基座。",
@@ -152,6 +170,8 @@
           "avatar": "https://pbs.twimg.com/profile_images/1138883652684894208/dE3v_d9f_400x400.jpg",
           "topic_zh": "自回归 LLM 局限与自监督 JEPA 世界模型",
           "topic_en": "Autoregressive LLM Limits & Self-Supervised JEPA",
+          "event_context_zh": "背景速览：针对业内盛行‘仅靠堆叠算力和强化学习就能实现 AGI’的狂热论调，Yann LeCun 再次发表长篇学术质疑，直接指出语言自回归模型无法掌握现实世界因果关系，力推自监督联合嵌入预测架构（JEPA）。",
+          "event_context_en": "Context: Challenging claims that scaling LLMs with RL leads to AGI, Yann LeCun published a critique advocating for self-supervised JEPA architectures.",
           "quote_zh": "自回归 LLM 既不理解物理世界，也没有真正的持久记忆，无法进行真正的层级规划，更缺乏常识推理。仅仅依靠扩大上下文窗口和更多的强化学习，绝不可能跨越到真正的 AGI。我们需要自监督联合嵌入预测架构（JEPA）世界模型！",
           "quote_en": "Autoregressive LLMs don't understand the physical world, have no persistent memory, cannot do hierarchical planning, and lack common sense. Simply scaling context or adding RL will not lead to AGI. We need self-supervised JEPA world models!",
           "thesis_zh": "纯语言自回归建模存在结构性知识盲区，无法感知物理因果与连续空间动力学，必须通过层次化抽象表征的世界模型来构建真正的机器智能。",
@@ -176,6 +196,8 @@
           "avatar": "https://pbs.twimg.com/profile_images/80517370/sam_altman_400x400.jpg",
           "topic_zh": "推理计算 (Test-time Compute) 与算力底座大扩张",
           "topic_en": "Test-time Compute Scaling & Global Infrastructure",
+          "event_context_zh": "背景速览：随着 OpenAI o1/o3 架构展现出惊人的逻辑解题能力，Sam Altman 首次系统性总结了 AI 的新摩尔定律——模型智能水平正与推理阶段消耗的算力呈正比，推动全球进入万亿美元算力集群竞赛。",
+          "event_context_en": "Context: As OpenAI o1/o3 demonstrates advanced reasoning, Sam Altman highlights test-time compute scaling as the defining AI paradigm.",
           "quote_zh": "AI 模型的进阶曲线正在发生质的转变：从单纯依赖预训练阶段堆叠海量数据，全面转向依赖推理阶段的深度思考与搜索（Test-time compute）。这需要一个规模空前庞大、多元化的全球算力基础设施底座。",
           "quote_en": "The paradigm is shifting dramatically: scaling test-time compute is opening up entirely new frontiers of reasoning. Building the global compute foundation required for this future will be the defining undertaking of our era.",
           "thesis_zh": "推理时动态思维链展开与自我验证（o1/o3 架构）开启了全新的 Scaling 维度，使模型在数理推理与软件工程领域的可靠性产生质的飞跃。",
@@ -200,6 +222,8 @@
           "avatar": "https://pbs.twimg.com/profile_images/1794017633647714304/6c8iH4W5_400x400.jpg",
           "topic_zh": "智能体编码时代与软件 3.0 开发范式转移",
           "topic_en": "Agentic Coding Era & The Software 3.0 Paradigm Shift",
+          "event_context_zh": "背景速览：在体验过多款具备终端自主执行能力的编码 Agent（如 Claude Code、Cursor）后，Karpathy 发文剖析了程序员工作的本质变迁，指出软件工程正经历从手动手写代码到编写评估集指导 Agent 的根本转变。",
+          "event_context_en": "Context: Karpathy examines the shift to agentic coding, arguing that software engineering is moving from writing syntax to designing evals.",
           "quote_zh": "在智能体编码（Agentic Coding）时代，代码正在变成由编译器与智能体协作生成的副产物，人类的角色正在从编写逐行代码转变为设计严密的问题规范、评价基准（Evals）与系统架构。",
           "quote_en": "In the agentic coding era, raw code is becoming an artifact synthesized by agents and compilers. The human role is rapidly shifting from typing syntax to designing rigorous benchmarks, evals, and system architectures.",
           "thesis_zh": "具备自愈、测试驱动与多步骤执行能力的自主编码智能体（如 Claude Code, Cursor）正在重塑软件开发生命周期，评估集（Evals）成为最高效的沟通语言。",
@@ -224,6 +248,8 @@
           "avatar": "https://pbs.twimg.com/profile_images/1545812918828859392/eGgQ2UjN_400x400.jpg",
           "topic_zh": "具身智能与物理仿真的‘ChatGPT 时刻’",
           "topic_en": "Physical AI & Robotics 'ChatGPT Moment'",
+          "event_context_zh": "背景速览：NVIDIA 具身团队在模拟器中完成机器人灵巧手多模态泛化训练后，Jim Fan 宣布物理 AI 已经跨越了数据瓶颈临界点，现实世界的物理常识正被大规模蒸馏进基座模型中。",
+          "event_context_en": "Context: Jim Fan highlights that Physical AI is crossing its inflection point, with general spatial common sense being baked into foundation models.",
           "quote_zh": "2026 年是具身智能（Physical AI）的真正爆发年。从虚拟环境仿真世界模型到物理机器人泛化操作，大模型赋予了机器人通用空间常识与灵巧操作能力，硬件与算力正在经历类似 2012 年 AlexNet 的前夜。",
           "quote_en": "Physical AI is experiencing its defining inflection point. Foundation world models combined with robotics are providing spatial common sense and dexterous manipulation at scale.",
           "thesis_zh": "物理世界模型与仿真合成数据正在打破真实机器人数据采集的物理瓶颈，多模态具身基座模型将成为打通虚拟世界与物理世界的关键桥梁。",
@@ -243,7 +269,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-10-29 11:45:51 UTC",
+      "updated_at": "2026-10-29 12:00:10 UTC",
       "tool_item": {
         "name": "ppt-master",
         "icon": "📊",

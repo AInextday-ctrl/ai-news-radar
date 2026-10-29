@@ -5344,6 +5344,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const url = item.url || '#';
         const source = item.source || 'The Information · 独家深度';
         const publishedAt = item.published_at || '';
+        const eventSummary = isZh ? (item.event_summary_zh || '') : (item.event_summary_en || item.event_summary_zh || '');
         const facts = isZh ? (item.core_facts_zh || []) : (item.core_facts_en || []);
         const impact = isZh ? (item.industry_impact_zh || '') : (item.industry_impact_en || '');
 
@@ -5400,11 +5401,27 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </a>
             </h2>
 
+            <!-- 事件全貌速览 (5W1H 发生了什么) -->
+            ${eventSummary ? `
+              <div class="my-3 p-4 rounded-xl bg-amber-500/10 dark:bg-amber-950/30 border border-amber-500/20 text-xs sm:text-sm">
+                <div class="font-bold text-amber-900 dark:text-amber-300 mb-1 flex items-center space-x-1.5">
+                  <span>📌</span>
+                  <span>${isZh ? '事件全貌速览 (发生了什么):' : 'Event Digest (What Happened):'}</span>
+                </div>
+                <p class="text-slate-800 dark:text-slate-200 leading-relaxed font-medium m-0">
+                  ${escapeHtml(eventSummary)}
+                </p>
+              </div>
+            ` : ''}
+
             <!-- 核心事实列表 (Facts) -->
             <div class="space-y-2 my-3">
+              <div class="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1.5">
+                ${isZh ? '🔍 核心事实与具体进展拆解:' : '🔍 Verified Facts & Key Details:'}
+              </div>
               ${facts.map((f, i) => `
-                <div class="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                  <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-950/80 dark:text-indigo-300 font-bold font-mono text-[11px] flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
+                <div class="flex items-start space-x-2.5 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed bg-white/60 dark:bg-slate-800/60 p-2.5 rounded-xl border border-slate-200/60 dark:border-slate-700/60 shadow-2xs">
+                  <span class="w-5 h-5 rounded-full bg-indigo-600 text-white font-bold font-mono text-[11px] flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
                   <p class="m-0 font-medium">${escapeHtml(f)}</p>
                 </div>
               `).join('')}
@@ -5447,6 +5464,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const avatar = titan.avatar || titan.author_avatar || 'https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png';
         const url = titan.url || 'https://x.com/demishassabis';
         const publishedAt = titan.published_at || '';
+        const eventContext = isZh ? (titan.event_context_zh || '') : (titan.event_context_en || titan.event_context_zh || '');
         const quote = isZh ? (titan.quote_zh || titan.quote_en) : (titan.quote_en || titan.quote_zh);
         const quoteEn = titan.quote_en || '';
         const thesis = isZh ? (titan.thesis_zh || '') : (titan.thesis_en || '');
@@ -5511,8 +5529,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </a>
             </div>
 
+            <!-- 背景速览 (Context) -->
+            ${eventContext ? `
+              <div class="my-2.5 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 text-xs text-sky-900 dark:text-sky-200 font-medium leading-relaxed">
+                <span class="font-bold">📌 ${isZh ? '事件背景速览:' : 'Context:'}</span>
+                <span>${escapeHtml(eventContext)}</span>
+              </div>
+            ` : ''}
+
             <!-- 领袖核心原声引用气泡 (Quote Bubble) -->
-            <div class="relative my-3.5 p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-sky-100 dark:border-slate-700 shadow-xs">
+            <div class="relative my-3 p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-sky-100 dark:border-slate-700 shadow-xs">
               <span class="text-sky-400 text-3xl font-serif leading-none select-none absolute top-2 left-3">“</span>
               <p class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-relaxed pl-5 mb-1.5">
                 ${escapeHtml(quote)}
