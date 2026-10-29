@@ -2632,81 +2632,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     let _celebArchiveLoadingPromise = null;
 
     async function loadCelebrityArchiveData() {
-      if (window._cachedCelebrityArchive) return window._cachedCelebrityArchive;
-      try {
-        const res = await fetch('/data/archive_celebrity.json?v=' + Date.now());
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        window._cachedCelebrityArchive = data;
-        return data;
-      } catch (err) {
-        console.warn('loadCelebrityArchiveData fallback to loadArchiveData:', err);
-        return loadArchiveData();
-      }
+      return null;
     }
 
     async function ensureArchiveLoaded() {
-      if (typeof currentTab !== 'undefined' && currentTab === 'celebrity' && !window._hasMergedCelebArchive) {
-        if (!_celebArchiveLoadingPromise) {
-          _celebArchiveLoadingPromise = (async () => {
-            try {
-              const cData = await loadCelebrityArchiveData();
-              if (cData && Array.isArray(cData.items)) {
-                mergeArchiveIntoCachedData(cData.items);
-                window._hasMergedCelebArchive = true;
-                if (currentTab === 'celebrity') {
-                  renderCategoryView('celebrity');
-                }
-              }
-            } catch (e) {
-              console.warn('ensureCelebrityArchive failed:', e);
-            } finally {
-              _celebArchiveLoadingPromise = null;
-            }
-          })();
-        }
-      }
-
-      if (window._hasMergedArchive) return;
-      if (_archiveLoadingPromise) return _archiveLoadingPromise;
-
-      _archiveLoadingPromise = (async () => {
-        try {
-          const archiveData = await loadArchiveData();
-          if (archiveData && Array.isArray(archiveData.items)) {
-            mergeArchiveIntoCachedData(archiveData.items);
-            window._hasMergedArchive = true;
-            window._hasMergedCelebArchive = true;
-            if (typeof currentTab !== 'undefined' && currentTab !== 'all') {
-              renderCategoryView(currentTab);
-            }
-          }
-        } catch (e) {
-          console.warn('ensureArchiveLoaded failed:', e);
-        } finally {
-          _archiveLoadingPromise = null;
-        }
-      })();
-      return _archiveLoadingPromise;
+      return Promise.resolve(null);
     }
 
     async function loadArchiveData() {
-      if (cachedArchiveData) return cachedArchiveData;
-      if (archiveLoading) return null;
-      archiveLoading = true;
-      try {
-        const res = await fetch('/data/archive_news.json?v=6.9.9');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        cachedArchiveData = data;
-        updateArchiveBadges();
-        return data;
-      } catch (e) {
-        console.warn('Load archive error:', e);
-        return null;
-      } finally {
-        archiveLoading = false;
-      }
+      return null;
     }
 
     function updateArchiveBadges() {
@@ -5311,7 +5245,405 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return list;
     }
 
+    // 预载入栏目双语精选数据
+    fetch('/data/curated_column_highlights.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-cache' })
+      .then(res => res.ok ? res.json() : null)
+      .then(d => { if (d) window._curatedColumnHighlights = d; })
+      .catch(() => {});
+
+    // 栏目级 AI 双语深度事实看板 (v2.0) 核心渲染器
+    function renderColumnSpotlightBanner(tab = 'celebrity') {
+      const bannerEl = document.getElementById('celebrity-spotlight-banner');
+      if (!bannerEl) return;
+
+      const isZh = currentLang === 'zh';
+      const colData = window._curatedColumnHighlights?.columns?.[tab];
+
+      if (!colData) {
+        bannerEl.classList.add('hidden');
+        bannerEl.innerHTML = '';
+        return;
+      }
+
+      // =========================================================================
+      // 1. 行业快讯 (news) -> 【事件六要素核心事实看板 (5W1H Fact Sheet)】
+      // =========================================================================
+      if (tab === 'news' && colData.headline_item) {
+        const item = colData.headline_item;
+        const title = isZh ? (item.title_zh || item.title_en) : (item.title_en || item.title_zh);
+        const url = item.url || '#';
+        const source = item.source || 'Industry News';
+        const publishedAt = item.published_at || '';
+        const elem = isZh ? (item.six_elements_zh || {}) : (item.six_elements_en || {});
+        const briefs = colData.featured_briefs || [];
+
+        const badgeText = isZh ? '📰 行业头条 · 5W1H 事实看板' : '📰 Industry Headline · 5W1H Fact Sheet';
+        const sourceBtnText = isZh ? '查看官方报道 ↗' : 'View Source ↗';
+        const briefsHeader = isZh ? '⚡ 关联要点追踪' : '⚡ Key Connected Developments';
+
+        let briefsHtml = '';
+        if (briefs && briefs.length > 0) {
+          briefsHtml = `
+            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
+                <span>${briefsHeader}</span>
+              </span>
+              ${briefs.map(b => {
+                const bTitle = isZh ? (b.title_zh || b.title_en) : (b.title_en || b.title_zh);
+                return `
+                  <a href="${escapeHtml(b.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
+                    <span class="px-1.5 py-0.2 rounded bg-sky-500/15 text-sky-700 dark:text-sky-300 font-bold text-[10px]">${escapeHtml(b.source || 'News')}</span>
+                    <span class="font-medium truncate max-w-[260px] sm:max-w-[360px]">${escapeHtml(bTitle)}</span>
+                    <span class="text-slate-400 text-[10px]">↗</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        bannerEl.className = "mb-6 block";
+        bannerEl.innerHTML = `
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
+            <!-- 顶部元信息条 -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+              <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
+                <span class="px-3 py-1 rounded-full text-xs font-black bg-slate-900 text-white dark:bg-slate-100 dark:text-slate-950 tracking-wide uppercase shadow-xs">
+                  ${badgeText}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+                  ${escapeHtml(source)}
+                </span>
+                ${publishedAt ? `<span class="text-xs font-mono text-slate-500 dark:text-slate-400">${escapeHtml(publishedAt)}</span>` : ''}
+              </div>
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+                <span>${sourceBtnText}</span>
+              </a>
+            </div>
+
+            <!-- 新闻核心大标题 -->
+            <h2 class="text-lg sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight leading-snug mb-4">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-600 dark:hover:text-sky-400 transition-colors">
+                ${escapeHtml(title)}
+              </a>
+            </h2>
+
+            <!-- 事件六要素核心事实看板 (6-Element Matrix) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 my-2">
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>🏢</span> <span>${isZh ? '核心主体 (Who)' : 'Key Entity (Who)'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.who || source)}
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>⚡</span> <span>${isZh ? '核心动作 (What)' : 'Action Taken (What)'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.what || title)}
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>🕒</span> <span>${isZh ? '时间节点 (When)' : 'Timeline (When)'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.when || 'Immediate')}
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>🎯</span> <span>${isZh ? '动因背景 (Why)' : 'Market Driver (Why)'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.why || 'Strategic expansion')}
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>⚙️</span> <span>${isZh ? '机制与规格 (How)' : 'Mechanism & Spec (How)'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.how || 'Infrastructure optimization')}
+                </div>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center space-x-1">
+                  <span>💥</span> <span>${isZh ? '确定影响 (Impact)' : 'Direct Impact'}</span>
+                </div>
+                <div class="text-xs sm:text-sm font-semibold text-slate-900 dark:text-slate-100 leading-relaxed">
+                  ${escapeHtml(elem.impact || 'Industry advancement')}
+                </div>
+              </div>
+            </div>
+
+            <!-- 关联快讯 -->
+            ${briefsHtml}
+          </div>
+        `;
+        return;
+      }
+
+      // =========================================================================
+      // 2. 社交雷达 (celebrity) -> 【领袖大V言论原境与社群风向 (KOL Voice & Pulse)】
+      // =========================================================================
+      if (tab === 'celebrity' && colData.radar_item) {
+        const item = colData.radar_item;
+        const authorName = item.author_name || item.author_handle || 'AI Pioneer';
+        const handle = item.author_handle || '';
+        const role = isZh ? (item.author_title_zh || '前沿 AI 领袖') : (item.author_title_en || 'Frontier AI Leader');
+        const statement = isZh ? (item.core_statement_zh || item.core_statement_en) : (item.core_statement_en || item.core_statement_zh);
+        const debate = isZh ? (item.debate_focus_zh || item.debate_focus_en) : (item.debate_focus_en || item.debate_focus_zh);
+        const reaction = isZh ? (item.community_reaction_zh || item.community_reaction_en) : (item.community_reaction_en || item.community_reaction_zh);
+        const takeaways = isZh ? (item.takeaways_zh || []) : (item.takeaways_en || []);
+        const url = item.url || '#';
+        const publishedAt = item.published_at || '';
+        const voices = colData.featured_voices || [];
+
+        const badgeText = isZh ? '🐦 领袖大V言论焦点' : '🐦 KOL Voice & Social Radar';
+        const viewPostText = isZh ? '𝕏 原帖直达 ↗' : 'View Post on 𝕏 ↗';
+        const debateLabel = isZh ? '🔥 业界争议与讨论焦点' : '🔥 Industry Debate & Discussion';
+        const reactionLabel = isZh ? '👥 社群共识与分歧透视' : '👥 Community Consensus & Skepticism';
+        const voicesHeader = isZh ? '💬 其他大V重要发言' : '💬 Other Notable Builder Voices';
+
+        let voicesHtml = '';
+        if (voices && voices.length > 0) {
+          voicesHtml = `
+            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
+                <span>${voicesHeader}</span>
+              </span>
+              ${voices.map(v => {
+                const stmt = isZh ? (v.statement_zh || v.statement_en) : (v.statement_en || v.statement_zh);
+                return `
+                  <a href="${escapeHtml(v.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
+                    <span class="font-bold text-sky-600 dark:text-sky-400 text-xs">${escapeHtml(v.author_handle || v.author_name)}</span>
+                    <span class="font-medium truncate max-w-[240px] sm:max-w-[340px]">${escapeHtml(stmt)}</span>
+                    <span class="text-slate-400 text-[10px]">↗</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        bannerEl.className = "mb-6 block";
+        bannerEl.innerHTML = `
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-200 dark:border-sky-900/60 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
+            <!-- 顶部大V作者栏 -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+              <div class="flex items-center space-x-3 min-w-0">
+                <div class="w-10 h-10 rounded-full bg-slate-900 text-white flex items-center justify-center font-bold text-sm shrink-0 ring-2 ring-sky-500/30">
+                  ${escapeHtml(authorName.replace('@', '').slice(0, 2).toUpperCase())}
+                </div>
+                <div class="min-w-0">
+                  <div class="flex items-center space-x-1.5">
+                    <span class="font-black text-slate-900 dark:text-white text-sm sm:text-base truncate">${escapeHtml(authorName)}</span>
+                    <span class="text-sky-500 text-xs">✓</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-200 dark:border-sky-500/20">${badgeText}</span>
+                  </div>
+                  <div class="text-xs text-slate-500 dark:text-slate-400 truncate">
+                    ${escapeHtml(handle)} · <span class="font-medium text-slate-700 dark:text-slate-300">${escapeHtml(role)}</span>
+                    ${publishedAt ? ` · <span class="font-mono">${escapeHtml(publishedAt)}</span>` : ''}
+                  </div>
+                </div>
+              </div>
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+                <span>${viewPostText}</span>
+              </a>
+            </div>
+
+            <!-- 原汁原味核心发声金句 -->
+            <div class="p-4 sm:p-4.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border-l-4 border-sky-500 border-t border-r border-b border-slate-200 dark:border-slate-700/60 my-3">
+              <div class="text-xs font-mono font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
+                <span>“</span> <span>${isZh ? '核心论断与发声原境' : 'Core Statement'}</span>
+              </div>
+              <p class="text-sm sm:text-base font-semibold text-slate-900 dark:text-slate-100 leading-relaxed italic m-0">
+                "${escapeHtml(statement)}"
+              </p>
+            </div>
+
+            <!-- 争议焦点与社群反响 (双栏对比看板) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-3">
+              <div class="p-3.5 rounded-xl bg-amber-50/60 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40">
+                <div class="text-xs font-bold text-amber-900 dark:text-amber-300 uppercase tracking-wider mb-1 flex items-center space-x-1.5">
+                  <span>${debateLabel}</span>
+                </div>
+                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
+                  ${escapeHtml(debate)}
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-indigo-50/60 dark:bg-indigo-950/20 border border-indigo-200/80 dark:border-indigo-900/40">
+                <div class="text-xs font-bold text-indigo-900 dark:text-indigo-300 uppercase tracking-wider mb-1 flex items-center space-x-1.5">
+                  <span>${reactionLabel}</span>
+                </div>
+                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
+                  ${escapeHtml(reaction)}
+                </p>
+              </div>
+            </div>
+
+            <!-- 关键启发要点 -->
+            ${takeaways && takeaways.length > 0 ? `
+              <div class="mt-2.5 flex items-center gap-2 flex-wrap text-xs text-slate-600 dark:text-slate-300">
+                ${takeaways.map(t => `<span class="inline-flex items-center px-2 py-0.5 rounded-lg bg-sky-50 dark:bg-sky-500/10 text-sky-800 dark:text-sky-200 border border-sky-200 dark:border-sky-500/20 text-[11px] font-medium">• ${escapeHtml(t)}</span>`).join('')}
+              </div>
+            ` : ''}
+
+            <!-- 关联大V发言 -->
+            ${voicesHtml}
+          </div>
+        `;
+        return;
+      }
+
+      // =========================================================================
+      // 3. 落地工具 (tools) -> 【开箱即用落地开发与生产工具档案 (Tool Blueprint)】
+      // =========================================================================
+      if (tab === 'tools' && colData.tool_item) {
+        const item = colData.tool_item;
+        const name = item.name || 'Developer Tool';
+        const url = item.url || '#';
+        const stars = item.stars || 'Trending';
+        const license = item.license || 'Open-Source';
+        const oneLiner = isZh ? (item.one_liner_zh || item.one_liner_en) : (item.one_liner_en || item.one_liner_zh);
+        const painPoint = isZh ? (item.pain_point_zh || item.pain_point_en) : (item.pain_point_en || item.pain_point_zh);
+        const features = isZh ? (item.key_features_zh || []) : (item.key_features_en || []);
+        const quickstart = item.quickstart_cmd || '';
+        const whyTrending = isZh ? (item.why_trending_zh || item.why_trending_en) : (item.why_trending_en || item.why_trending_zh);
+        const featuredTools = colData.featured_tools || [];
+
+        const badgeText = isZh ? '🛠️ 开箱即用落地工具档案' : '🛠️ Production-Ready Tool Blueprint';
+        const repoBtnText = isZh ? 'GitHub 源码直达 ↗' : 'GitHub Repository ↗';
+        const painPointHeader = isZh ? '🚨 解决的实际落地痛点' : '🚨 Concrete Problem Solved';
+        const featuresHeader = isZh ? '✨ 核心工程特性' : '✨ Key Capabilities';
+        const quickstartHeader = isZh ? '⚡ 快速安装与启动' : '⚡ Quickstart Deployment';
+        const featuredToolsHeader = isZh ? '🚀 其他精选开箱即用工具' : '🚀 Other Featured Dev Tools';
+
+        let toolsPillsHtml = '';
+        if (featuredTools && featuredTools.length > 0) {
+          toolsPillsHtml = `
+            <div class="mt-4 pt-3.5 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2.5 flex-wrap">
+              <span class="text-[11px] font-bold text-slate-500 dark:text-slate-400 shrink-0 flex items-center space-x-1">
+                <span>${featuredToolsHeader}</span>
+              </span>
+              ${featuredTools.map(ft => {
+                const desc = isZh ? (ft.desc_zh || ft.desc_en) : (ft.desc_en || ft.desc_zh);
+                return `
+                  <a href="${escapeHtml(ft.url || '#')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-slate-800 dark:text-slate-200 transition-all hover:scale-[1.02] border border-slate-200 dark:border-slate-700">
+                    <span class="font-bold text-emerald-600 dark:text-emerald-400 text-xs">${escapeHtml(ft.name)}</span>
+                    ${ft.stars ? `<span class="px-1.5 py-0.2 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono">★ ${escapeHtml(ft.stars)}</span>` : ''}
+                    <span class="font-medium truncate max-w-[220px] sm:max-w-[320px]">${escapeHtml(desc)}</span>
+                    <span class="text-slate-400 text-[10px]">↗</span>
+                  </a>
+                `;
+              }).join('')}
+            </div>
+          `;
+        }
+
+        bannerEl.className = "mb-6 block";
+        bannerEl.innerHTML = `
+          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-200 dark:border-emerald-900/60 bg-white dark:bg-slate-900 shadow-sm transition-all z-10">
+            <!-- 顶部工具状态栏 -->
+            <div class="flex items-center justify-between pb-3.5 mb-3.5 border-b border-slate-100 dark:border-slate-800 flex-wrap gap-2">
+              <div class="flex items-center space-x-2.5 flex-wrap gap-y-1">
+                <span class="px-3 py-1 rounded-full text-xs font-black bg-emerald-700 text-white dark:bg-emerald-500 dark:text-slate-950 tracking-wide uppercase shadow-xs">
+                  ${badgeText}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+                  ★ ${escapeHtml(stars)}
+                </span>
+                <span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+                  ${escapeHtml(license)}
+                </span>
+              </div>
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1 px-3.5 py-1.5 rounded-xl bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+                <span>${repoBtnText}</span>
+              </a>
+            </div>
+
+            <!-- 工具名与一句话定位 -->
+            <div class="mb-3.5">
+              <div class="flex items-center space-x-2 mb-1">
+                <h2 class="text-xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight">
+                  <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                    ${escapeHtml(name)}
+                  </a>
+                </h2>
+              </div>
+              <p class="text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 leading-snug">
+                ${escapeHtml(oneLiner)}
+              </p>
+            </div>
+
+            <!-- 痛点与特性网格 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-3">
+              <div class="p-3.5 rounded-xl bg-rose-50/60 dark:bg-rose-950/20 border border-rose-200/80 dark:border-rose-900/40">
+                <div class="text-xs font-bold text-rose-900 dark:text-rose-300 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
+                  <span>${painPointHeader}</span>
+                </div>
+                <p class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 leading-relaxed m-0">
+                  ${escapeHtml(painPoint)}
+                </p>
+              </div>
+
+              <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/60">
+                <div class="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1.5 flex items-center space-x-1">
+                  <span>${featuresHeader}</span>
+                </div>
+                <ul class="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 space-y-1 m-0 pl-4 list-disc">
+                  ${features.map(f => `<li>${escapeHtml(f)}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+
+            <!-- 终端快速上手 -->
+            ${quickstart ? `
+              <div class="my-3 p-3 rounded-xl bg-slate-950 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-inner">
+                <div class="flex items-center space-x-2 text-xs font-mono text-emerald-400 truncate">
+                  <span class="text-slate-500 font-bold select-none">$</span>
+                  <code class="font-mono text-xs sm:text-sm truncate select-all text-emerald-300">${escapeHtml(quickstart)}</code>
+                </div>
+                <span class="text-[10px] font-mono text-slate-400 shrink-0 uppercase tracking-wider px-2 py-0.5 rounded bg-slate-900 border border-slate-800 select-none">
+                  ${quickstartHeader}
+                </span>
+              </div>
+            ` : ''}
+
+            <!-- 为何受到工程界追捧 -->
+            ${whyTrending ? `
+              <div class="text-xs text-slate-600 dark:text-slate-400 font-medium leading-relaxed mt-2.5">
+                <span class="font-bold text-slate-700 dark:text-slate-300">💡 ${isZh ? '社区热度分析' : 'Why it matters'}:</span> ${escapeHtml(whyTrending)}
+              </div>
+            ` : ''}
+
+            <!-- 关联精选工具 -->
+            ${toolsPillsHtml}
+          </div>
+        `;
+        return;
+      }
+
+      // 未命中具体规则时隐藏
+      bannerEl.classList.add('hidden');
+      bannerEl.innerHTML = '';
+    }
+
     function renderCelebritySpotlightBanner() {
+      return renderColumnSpotlightBanner('celebrity');
+    }
+
+    function renderCelebritySpotlightBannerFallback() {
       const bannerEl = document.getElementById('celebrity-spotlight-banner');
       if (!bannerEl || !cachedData) return;
 
@@ -7657,7 +7989,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      if (tab !== 'celebrity' || socialViewMode === 'viral') {
+      // 栏目级 AI 双语破局焦点 (Hero Spotlight) 核心调用
+      if ((tab === 'celebrity' && socialViewMode === 'leader') || tab === 'news' || tab === 'tools') {
+        renderColumnSpotlightBanner(tab);
+      } else {
         if (spotlightEl) {
           spotlightEl.classList.add('hidden');
           spotlightEl.innerHTML = '';
@@ -7783,10 +8118,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           }
         } else {
-          if (spotlightEl) {
-            spotlightEl.classList.add('hidden');
-            spotlightEl.innerHTML = '';
-          }
           if (catTitle) catTitle.textContent = t.tabs.celebrity;
           if (catDesc) catDesc.textContent = isZh ? '实时捕捉全球 AI 顶尖实验室、核心架构师与先锋开发者的原生发声与前沿动态' : 'Real-time timeline tracking statements from AI labs and frontier creators';
 
@@ -8202,10 +8533,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         // 动态载入前沿模型提示词库与工业实战工作流配方库 (Workflows & Prompts Library)
         try {
-          const [wfRes, promptRes] = await Promise.all([
+          const [wfRes, promptRes, highlightsRes] = await Promise.all([
             fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
+            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
+            fetch('/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
           ]);
+          if (highlightsRes && highlightsRes.ok) {
+            try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
+          }
           let extraPrompts = [];
           if (wfRes && wfRes.ok) {
             const wfData = await wfRes.json();

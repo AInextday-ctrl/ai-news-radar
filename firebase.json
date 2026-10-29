@@ -4,6 +4,18 @@
     "public": "public",
     "cleanUrls": true,
     "trailingSlash": false,
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "data/archive_news.json",
+      "data/archive_celebrity.json",
+      "data/processed_news_ledger.json",
+      "data/master_archive.json",
+      "data/apify_crawler_state.json",
+      "data/tweet_tags_cache.json",
+      "**/*.tmp"
+    ],
     "rewrites": [
       {
         "source": "/zh",
@@ -194,27 +206,13 @@
         "destination": "/go.html"
       }
     ],
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
     "headers": [
-      {
-        "source": "**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
-      },
       {
         "source": "**/*.@(js|css|mjs)",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "public, max-age=3600, must-revalidate"
+            "value": "public, max-age=31536000, immutable"
           }
         ]
       },
@@ -228,29 +226,20 @@
         ]
       },
       {
-        "source": "**/*.@(html|json)",
+        "source": "**/*.html",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=300, stale-while-revalidate=600"
           }
         ]
       },
       {
-        "source": "data/latest_news.json",
+        "source": "data/*.json",
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
-          }
-        ]
-      },
-      {
-        "source": "data/@(archive_news|curated_prompts_library).json",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=86400, stale-while-revalidate=86400"
+            "value": "public, max-age=180, stale-while-revalidate=300"
           }
         ]
       },
@@ -263,7 +252,7 @@
           },
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=3600, stale-while-revalidate=7200"
           }
         ]
       },
@@ -273,15 +262,6 @@
           {
             "key": "Content-Type",
             "value": "text/plain; charset=utf-8"
-          }
-        ]
-      },
-      {
-        "source": "sitemap.xsl",
-        "headers": [
-          {
-            "key": "Content-Type",
-            "value": "text/xsl; charset=utf-8"
           },
           {
             "key": "Cache-Control",

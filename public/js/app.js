@@ -2632,81 +2632,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     let _celebArchiveLoadingPromise = null;
 
     async function loadCelebrityArchiveData() {
-      if (window._cachedCelebrityArchive) return window._cachedCelebrityArchive;
-      try {
-        const res = await fetch('/data/archive_celebrity.json?v=' + Date.now());
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        window._cachedCelebrityArchive = data;
-        return data;
-      } catch (err) {
-        console.warn('loadCelebrityArchiveData fallback to loadArchiveData:', err);
-        return loadArchiveData();
-      }
+      return null;
     }
 
     async function ensureArchiveLoaded() {
-      if (typeof currentTab !== 'undefined' && currentTab === 'celebrity' && !window._hasMergedCelebArchive) {
-        if (!_celebArchiveLoadingPromise) {
-          _celebArchiveLoadingPromise = (async () => {
-            try {
-              const cData = await loadCelebrityArchiveData();
-              if (cData && Array.isArray(cData.items)) {
-                mergeArchiveIntoCachedData(cData.items);
-                window._hasMergedCelebArchive = true;
-                if (currentTab === 'celebrity') {
-                  renderCategoryView('celebrity');
-                }
-              }
-            } catch (e) {
-              console.warn('ensureCelebrityArchive failed:', e);
-            } finally {
-              _celebArchiveLoadingPromise = null;
-            }
-          })();
-        }
-      }
-
-      if (window._hasMergedArchive) return;
-      if (_archiveLoadingPromise) return _archiveLoadingPromise;
-
-      _archiveLoadingPromise = (async () => {
-        try {
-          const archiveData = await loadArchiveData();
-          if (archiveData && Array.isArray(archiveData.items)) {
-            mergeArchiveIntoCachedData(archiveData.items);
-            window._hasMergedArchive = true;
-            window._hasMergedCelebArchive = true;
-            if (typeof currentTab !== 'undefined' && currentTab !== 'all') {
-              renderCategoryView(currentTab);
-            }
-          }
-        } catch (e) {
-          console.warn('ensureArchiveLoaded failed:', e);
-        } finally {
-          _archiveLoadingPromise = null;
-        }
-      })();
-      return _archiveLoadingPromise;
+      return Promise.resolve(null);
     }
 
     async function loadArchiveData() {
-      if (cachedArchiveData) return cachedArchiveData;
-      if (archiveLoading) return null;
-      archiveLoading = true;
-      try {
-        const res = await fetch('/data/archive_news.json?v=6.9.9');
-        if (!res.ok) throw new Error('HTTP ' + res.status);
-        const data = await res.json();
-        cachedArchiveData = data;
-        updateArchiveBadges();
-        return data;
-      } catch (e) {
-        console.warn('Load archive error:', e);
-        return null;
-      } finally {
-        archiveLoading = false;
-      }
+      return null;
     }
 
     function updateArchiveBadges() {

@@ -1916,19 +1916,33 @@ def save_news(items: list):
         "categories": CATEGORIES
     }
 
-    # 写入 latest_news.json (采用紧凑无空白序列化，缩减 80% 体积，极大提升页面拉取与解析性能)
+    # 写入 latest_news.json (后端完整数据持久化至 data/)
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
-    with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 写入 archive_news.json (紧凑无空白，体积大幅优化，保证秒级拉取)
+    # 生成面向前端的轻量化分发版 latest_news.json (体积缩减 97%，保证 CDN 边缘秒开并杜绝超额流量)
+    def _clean_public_item(it):
+        return {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS}
+
+    category_caps = {"news": 40, "celebrity": 40, "tools": 40, "videos": 25, "prompts": 20, "viral_posts": 20}
+    public_grouped = {}
+    for cat_k, cat_items in latest_payload.get("grouped", {}).items():
+        limit = category_caps.get(cat_k, 40)
+        public_grouped[cat_k] = [_clean_public_item(x) for x in cat_items[:limit]]
+
+    public_payload = dict(latest_payload)
+    public_payload["grouped"] = public_grouped
+    if "items" in public_payload:
+        del public_payload["items"]
+
+    with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
+        json.dump(public_payload, f, ensure_ascii=False, separators=(',', ':'))
+
+    # 写入 archive_news.json (仅持久化至后端 data/，严禁部署到 public 避免消耗 Firebase 免费流量)
     with open(ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
-    with open(PUBLIC_ARCHIVE_OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(archive_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 写入专门的大V推文全量归档库 (archive_celebrity.json - 极致轻量高速，瞬间拉取)
+    # 写入专门的大V推文全量归档库 (仅后端 data/archive_celebrity.json)
     all_celeb_archive = [_clean_archive_item(it) for it in all_archive_items if it.get("category") == "celebrity"]
     celeb_archive_payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -1937,8 +1951,14 @@ def save_news(items: list):
     }
     with open(os.path.join(DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
         json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
-    with open(os.path.join(PUBLIC_DATA_DIR, "archive_celebrity.json"), "w", encoding="utf-8") as f:
-        json.dump(celeb_archive_payload, f, ensure_ascii=False, separators=(',', ':'))
+
+    # 清理 public/data 中可能遗留的巨型历史归档文件
+    for stray_file in [PUBLIC_ARCHIVE_OUTPUT_FILE, os.path.join(PUBLIC_DATA_DIR, "archive_celebrity.json"), os.path.join(PUBLIC_DATA_DIR, "processed_news_ledger.json")]:
+        if os.path.exists(stray_file):
+            try:
+                os.remove(stray_file)
+            except OSError:
+                pass
 
     # 🛡️ CI Quality Gate: 自动化数据质量门禁硬性审计
     try:
