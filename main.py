@@ -1903,9 +1903,10 @@ def save_news(items: list):
     # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
     # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
     STRIP_ARCHIVE_KEYS = {
-        'ai_analysis', 'original_content', 'article_content', 'full_raw_text',
-        'wechat_audit', 'wechat_article_draft', 'raw_payload', 'wechat_published_draft',
-        'processed_mark', 'processed_status', 'media_checked'
+        'ai_analysis', 'original_content', 'article_content', 'article_content_zh',
+        'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
+        'wechat_published_draft', 'processed_mark', 'processed_status',
+        'processed_at', 'media_checked', 'raw_content'
     }
     def _clean_archive_item(it, target_cat=None):
         cat = target_cat or it.get('category')
@@ -1945,7 +1946,7 @@ def save_news(items: list):
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
     # 生成面向前端的轻量化分发版 latest_news.json (体积缩减 97%，保证 CDN 边缘秒开并杜绝超额流量)
-    category_caps = {"news": 40, "celebrity": 40, "tools": 40, "videos": 25, "prompts": 20, "viral_posts": 20}
+    category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}
     public_grouped = {}
     for cat_k, cat_items in latest_payload.get("grouped", {}).items():
         limit = category_caps.get(cat_k, 40)
@@ -1954,13 +1955,16 @@ def save_news(items: list):
     # 写入各专栏独立历史归档库 (news, celebrity, tools, videos, prompts)，供前端按需分页拉取
     categories_list = ['news', 'celebrity', 'tools', 'videos', 'prompts']
     category_totals = {}
+    archive_caps = {'news': 250, 'celebrity': 250, 'tools': 150, 'videos': 100, 'prompts': 60}
     for cat_name in categories_list:
         cat_archive = [_clean_archive_item(it, cat_name) for it in all_archive_items if it.get("category") == cat_name]
         cat_archive.sort(key=parse_time_for_sort, reverse=True)
         category_totals[cat_name] = len(cat_archive)
+        cat_limit = archive_caps.get(cat_name, 200)
+        cat_archive_public = cat_archive[:cat_limit]
         cat_out_path = os.path.join(PUBLIC_DATA_DIR, f"archive_{cat_name}.json")
         with open(cat_out_path, "w", encoding="utf-8") as f:
-            json.dump(cat_archive, f, ensure_ascii=False, separators=(',', ':'))
+            json.dump(cat_archive_public, f, ensure_ascii=False, separators=(',', ':'))
 
     public_payload = dict(latest_payload)
     public_payload["grouped"] = public_grouped

@@ -233,7 +233,7 @@
         ]
       },
       {
-        "source": "data/archive_*.json",
+        "source": "**/data/archive_*.json",
         "headers": [
           {
             "key": "Cache-Control",
@@ -242,7 +242,7 @@
         ]
       },
       {
-        "source": "data/*.json",
+        "source": "**/data/*.json",
         "headers": [
           {
             "key": "Cache-Control",

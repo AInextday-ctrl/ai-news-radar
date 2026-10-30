@@ -477,7 +477,6 @@ MEDIUM_AD_EXTREME_WORDS = [
 class ProcessedNewsLedger:
     _data = None
     _file_path = os.path.join(DATA_DIR, "processed_news_ledger.json")
-    _public_path = os.path.join(PUBLIC_DATA_DIR, "processed_news_ledger.json")
 
     @staticmethod
     def get_dedup_key(item: Dict[str, Any]) -> str:
@@ -582,10 +581,7 @@ class ProcessedNewsLedger:
         try:
             os.makedirs(DATA_DIR, exist_ok=True)
             with open(cls._file_path, "w", encoding="utf-8") as f:
-                json.dump(cls._data, f, ensure_ascii=False, indent=2)
-            os.makedirs(PUBLIC_DATA_DIR, exist_ok=True)
-            with open(cls._public_path, "w", encoding="utf-8") as f:
-                json.dump(cls._data, f, ensure_ascii=False, indent=2)
+                json.dump(cls._data, f, ensure_ascii=False, separators=(',', ':'))
         except Exception as e:
             print(f"[Processed Ledger] 保存异常: {e}")
 

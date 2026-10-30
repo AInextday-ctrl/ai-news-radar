@@ -492,13 +492,32 @@ if __name__ == "__main__":
                 print(f"⚠️ 质检发现 {violations} 处语言规范不达标！将触发自愈修复...")
                 sys.exit(1)
         else:
+            is_public = "public" in test_file.replace("\\", "/").split("/")
             cleaned, stats = run_pipeline_language_audit(items)
-            d["items"] = cleaned
-            if "grouped" in d and isinstance(d["grouped"], dict):
-                for cat_k in d["grouped"]:
-                    if isinstance(d["grouped"][cat_k], list):
-                        d["grouped"][cat_k] = [it for it in cleaned if it.get("category") == cat_k]
+            
+            cleaned_by_id = {}
+            for it in cleaned:
+                it_id = it.get("id") or it.get("url")
+                if it_id:
+                    cleaned_by_id[it_id] = it
+
+            if is_public:
+                d.pop("items", None)
+                if "grouped" in d and isinstance(d["grouped"], dict):
+                    for cat_k, cat_list in d["grouped"].items():
+                        if isinstance(cat_list, list):
+                            d["grouped"][cat_k] = [
+                                cleaned_by_id.get(it.get("id") or it.get("url"), it)
+                                for it in cat_list
+                            ]
+            else:
+                d["items"] = cleaned
+                if "grouped" in d and isinstance(d["grouped"], dict):
+                    for cat_k in d["grouped"]:
+                        if isinstance(d["grouped"][cat_k], list):
+                            d["grouped"][cat_k] = [it for it in cleaned if it.get("category") == cat_k]
+
             with open(test_file, "w", encoding="utf-8") as f:
-                json.dump(d, f, ensure_ascii=False, indent=2)
-            print(f"🎉 质检与自愈完成并已写回: {test_file}")
+                json.dump(d, f, ensure_ascii=False, separators=(',', ':'))
+            print(f"🎉 质检与自愈完成并已写回 (轻量化无空白压缩): {test_file}")
 

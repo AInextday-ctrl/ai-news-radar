@@ -103,7 +103,7 @@
     let selectedCreator = null;
     let currentTab = 'all';
     let cachedData = null;
-    let refreshCountdown = 180;
+    let refreshCountdown = 300;
     let searchQuery = '';
     let toolScenarioFilter = 'all';
     let sideSocialFilter = 'all';
@@ -2646,7 +2646,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       _columnArchiveStatus[tab] = 'loading';
-      const cacheBuster = '6.9.18';
+      const cacheBuster = '6.9.23';
       const archiveUrl = `/data/archive_${tab}.json?v=${cacheBuster}`;
 
       _columnArchivePromises[tab] = fetch(archiveUrl)
@@ -8638,9 +8638,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
-        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : `/data/latest_news.json?t=${Math.floor(Date.now() / 60000)}`;
+        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
         const res = await fetch(fetchUrl, {
-          cache: isManual ? 'reload' : 'no-cache'
+          cache: isManual ? 'reload' : 'default'
         });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
@@ -8709,7 +8709,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const isSameUpdate = window._hasInitialRendered && cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
         cachedData = data;
         if (isSameUpdate && !isManual) {
-          refreshCountdown = 180;
+          refreshCountdown = 300;
           return;
         }
         window._hasInitialRendered = true;
@@ -8722,12 +8722,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         // 核心防打扰：仅当视频专区【已经完成过初次渲染】且处于每 180 秒后台静默轮询时，才避免重绘打扰正在播放的视频
         // 若尚未完成初次渲染（包括首次打开页面直达 #videos），必须强制执行完整 UI 渲染
         if (currentTab === 'videos' && !isManual && window._hasRenderedVideosTab) {
-          refreshCountdown = 180;
+          refreshCountdown = 300;
           return;
         }
 
         renderUI(data);
-        refreshCountdown = 180;
+        refreshCountdown = 300;
 
         // 自动在后台静默载入全量历史归档库，保证用户点击大V观点或快讯专栏时拥有完整的历史分页与全量归档
         // 仅在用户访问全站历史归档时按需静默预热，绝不在首页、视频或日常专栏抢占网络带宽
@@ -11253,8 +11253,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     }
 
-    // 倒计时与定时轮询
+    // 倒计时与定时轮询 (标签页休眠或在后台时不消耗网络流量)
     setInterval(() => {
+      if (document.hidden) return;
       refreshCountdown--;
       const timer = document.getElementById('timer');
       if (timer) timer.textContent = refreshCountdown;
@@ -11262,6 +11263,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         loadNews();
       }
     }, 1000);
+
+    // 用户切回标签页且倒计时将尽时平滑触发静默预热刷新
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden && refreshCountdown <= 30) {
+        loadNews();
+      }
+    });
 
     // 安全初始化 Google AdSense 广告单元（严格排查未初始化 ins 元素，彻底杜绝 TagError）
     try {
