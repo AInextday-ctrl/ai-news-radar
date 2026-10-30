@@ -421,12 +421,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1890</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1891</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">149</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">150</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -573,7 +573,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- Ticker Navigation Controls & Page Indicator -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 5</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Previous (Up)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Next (Down)">↓</button>
@@ -587,67 +587,6 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
               <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden
-                bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
-                border border-amber-400 dark:border-amber-300/90 ring-1 ring-amber-400/50
-                shadow-[0_0_20px_rgba(251,191,36,0.25),inset_0_0_12px_rgba(251,191,36,0.1)]
-                hover:shadow-[0_0_30px_rgba(251,191,36,0.45)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/thsottiaux&w=80&h=80&fit=cover&output=webp&q=80" alt="Thibault Sottiaux (Tibo)" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-amber-400 dark:ring-amber-300 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900 leading-none">📌</span>
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Thibault Sottiaux (Tibo)</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">
-                        @thsottiaux · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-sm shrink-0 border border-amber-300/40 leading-none">
-                      <span class="relative flex h-1.5 w-1.5">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
-                      </span>
-                      <span>🔥 24H RESET PINNED</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
-                    Day 23/ Much requested iCloud Main &amp; Calendar plugins. Just kidding, today is a <span class="text-amber-600 dark:text-amber-400 font-black underline decoration-amber-400/70">reset</span>. Still much requested though!
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2115139160247848960/img/hKrH_BHbjOhBqDqU.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2115139160247848960/img/hKrH_BHbjOhBqDqU.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-amber-200/60 dark:border-amber-900/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold truncate shrink-0 max-w-[50%] leading-none">
-                    <span class="animate-pulse text-amber-500 shrink-0">⚡</span>
-                    <span class="truncate">24h Spotlight · Pinned #1</span>
-                  </span>
-                  <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
-                    <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="Tweet Publish Time (UTC+8)">
-                      <span>🕒 1d ago</span>
-                    </span>
-                    <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
-                    <a href="https://x.com/thsottiaux/status/2115273064481218829" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
-                      <span>View Post ↗</span>
-                    </a>
-                  </div>
-                </div>
-              </article>
-              </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
-                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
-                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
     <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
       <div id="pinned-slider-track" class="flex flex-col transition-transform duration-700 ease-out h-full" style="transform: translateY(0px);">
         <div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
@@ -727,7 +666,7 @@
           </div>
           <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
             <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Futurepedia and AI Age</span>
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Cole Medin</span>
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
@@ -744,18 +683,18 @@
       </div>
 
       <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/EH5jx5qPabU?autoplay=1&rel=0', 'From Zero to Your First AI Agent in 25 Minutes (No Coding)', 'youtube', 'https://www.youtube.com/watch?v=EH5jx5qPabU')" title="Click to play in theater mode">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/EH5jx5qPabU/maxresdefault.jpg&w=400&output=webp&q=85" alt="From Zero to Your First AI Agent in 25 Minutes (No Coding)" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/EH5jx5qPabU/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/uWDocIoiaXE?autoplay=1&rel=0', 'You HAVE to Try Agentic RAG with DeepSeek R1 (Insane Results)', 'youtube', 'https://www.youtube.com/watch?v=uWDocIoiaXE')" title="Click to play in theater mode">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/uWDocIoiaXE/maxresdefault.jpg&w=400&output=webp&q=85" alt="You HAVE to Try Agentic RAG with DeepSeek R1 (Insane Results)" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/uWDocIoiaXE/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
             <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
           </div>
         </div>
         <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
-          <a href="https://www.youtube.com/watch?v=EH5jx5qPabU" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="From Zero to Your First AI Agent in 25 Minutes (No Coding)">
-            From Zero to Your First AI Agent in 25 Minutes (No Coding)
+          <a href="https://www.youtube.com/watch?v=uWDocIoiaXE" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="You HAVE to Try Agentic RAG with DeepSeek R1 (Insane Results)">
+            You HAVE to Try Agentic RAG with DeepSeek R1 (Insane Results)
           </a>
           <div class="flex items-center gap-1 overflow-hidden mt-0.5">
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Futurepedia and </span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Cole Medin</span>
           </div>
         </div>
       </div>
@@ -766,11 +705,11 @@
           <span class="truncate">Benchmark</span>
         </span>
         <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
-          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/EH5jx5qPabU?autoplay=1&rel=0', 'From Zero to Your First AI Agent in 25 Minutes (No Coding)', 'youtube', 'https://www.youtube.com/watch?v=EH5jx5qPabU')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
+          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/uWDocIoiaXE?autoplay=1&rel=0', 'You HAVE to Try Agentic RAG with DeepSeek R1 (Insane Results)', 'youtube', 'https://www.youtube.com/watch?v=uWDocIoiaXE')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
             <span>Theater Play ▶</span>
           </button>
           <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
-          <a href="https://www.youtube.com/watch?v=EH5jx5qPabU" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
+          <a href="https://www.youtube.com/watch?v=uWDocIoiaXE" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
             <span>Source ↗</span>
           </a>
         </div>
@@ -784,6 +723,10 @@
         <span id="pinned-dot-1" class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 transition-all"></span>
       </div>
     </div>
+              </div>
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
+                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -823,8 +766,6 @@ Since we began using self-assessment in June, it has sur
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -862,8 +803,10 @@ Since we began using self-assessment in June, it has sur
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
@@ -899,8 +842,6 @@ Since we began using self-assessment in June, it has sur
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -942,8 +883,10 @@ Understand wallet activity. Monitor smart contract risk. Enforce institutional p
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
@@ -988,8 +931,6 @@ we've added support for XR Blocks, so you can vibe code interactive 3D apps from
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1027,8 +968,10 @@ we've added support for XR Blocks, so you can vibe code interactive 3D apps from
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
@@ -1062,15 +1005,13 @@ For the Lovers Series, we’re still refinin
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-30 09:45 · 54m ago</span>
+                    <span class="truncate">10-30 09:45 · 1h ago</span>
                   </span>
                   <a href="https://x.com/StejayHarbor/status/2115983388536631628" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1793,6 +1734,32 @@ Institutional-grade governance infrastructure, in production.
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6cd21e466012436e')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: Bloomberg</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('6cd21e466012436e')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      Sources: Indian AI infrastructure company AM Intelligence seeks to raise as much as $3B to fund a previously announced p
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      Indian AI infrastructure firm AM Intelligence has launched a $3 billion fundraising round specifically to procure Nvidia's next-generation Vera Rubin AI computing systems. This move aims to secure a competitive edge by locking in elite hardware as gl
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('6cd21e466012436e')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.bloomberg.com/news/articles/2026-10-30/indian-ai-firm-seeks-3-billion-financing-for-nvidia-chips-order" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('973ddff320e1490d')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
@@ -2074,32 +2041,6 @@ Institutional-grade governance infrastructure, in production.
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.theblock.co/news/markets/2026-10-29-binance-investigating-hack-suspicious-outflows-5-billion-432171" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6696dbc6ce8b0f5e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Bloomberg</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('6696dbc6ce8b0f5e')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      Roblox reports Q3 bookings down 12% YoY to $1.7B, vs. $1.63B est., and DAUs down 9% to 138M, vs. 145.8M est.; RBLX drops
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      Roblox reported Q3 bookings and DAUs missing expectations, causing a 16%+ drop in after-hours trading as growth concerns mount.
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('6696dbc6ce8b0f5e')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.bloomberg.com/news/articles/2026-10-29/roblox-users-miss-estimates-despite-hit-game-steal-an-egg" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
