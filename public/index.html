@@ -98,7 +98,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6ae3a32037c72c5b8eae6889/191%3A100/w_1280%2Cc_limit/Backchannel-Top-Art-10302026.jpg&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//image.cnbcfm.com/api/v1/image/108443816-1792619674334-gettyimages-2296213884-META_CONNECT.jpeg%3Fv%3D1792619769%26w%3D1920%26h%3D1080&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
   <link rel="preload" href="/js/app.min.js?v=6.9.23" as="script">
   <style>
@@ -811,7 +811,7 @@ We’re also removing the 5-hour limit for verified Ultra accounts, starting tod
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 01:29 · 11h ago</span>
+                    <span class="truncate">10-31 01:29 · 12h ago</span>
                   </span>
                   <a href="https://x.com/claudeai/status/2116220869479428500" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1068,7 +1068,7 @@ almos
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 11:24 · 1h ago</span>
+                    <span class="truncate">10-31 11:24 · 2h ago</span>
                   </span>
                   <a href="https://x.com/ambassador_grim/status/2116370800010051956" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1725,8 +1725,60 @@ almos
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d7310112e445dd6c')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Wall Street Journal</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: Wall Street Journal</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('d7310112e445dd6c')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      Sources: neoclouds CoreWeave, Nebius, and Nscale have effectively been shut out of the bond market in recent weeks as le
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      Neocloud providers CoreWeave, Nebius, and Nscale have effectively been shut out of the bond market in recent weeks as lenders and investors demand significantly stricter terms. Creditors are growing cautious over high-leverage GPU leasing models and 
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d7310112e445dd6c')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.wsj.com/finance/the-new-bottleneck-in-americas-ai-build-out-a-shortage-of-cheap-money-0c14c84d?st=7gB5bX&reflink=desktopwebshare_permalink" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('3a72987f29ce6668')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//image.cnbcfm.com/api/v1/image/108443816-1792619674334-gettyimages-2296213884-META_CONNECT.jpeg%3Fv%3D1792619769%26w%3D1920%26h%3D1080&w=480&output=webp&q=80" alt="S&amp;P downgraded Meta's outlook from stable to negative, citing high capex and negative free cash flow; META fell 15% " width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: CNBC</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('3a72987f29ce6668')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      S&amp;P downgraded Meta's outlook from stable to negative, citing high capex and negative free cash flow; META fell 15% 
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      S&amp;P Global Ratings revised Meta's credit rating outlook from stable to negative while maintaining its AA- rating, following an aggressive surge in capex that turned free cash flow negative. Meta shares tumbled 15% in October, marking their steepe
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3a72987f29ce6668')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e28df33bb311f30c')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6ae3a32037c72c5b8eae6889/191%3A100/w_1280%2Cc_limit/Backchannel-Top-Art-10302026.jpg&w=480&output=webp&q=80" alt="John Ternus says Apple doesn't &quot;want to ship AI for AI's sake&quot; and that Tim Cook is &quot;available to help wh" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6ae3a32037c72c5b8eae6889/191%3A100/w_1280%2Cc_limit/Backchannel-Top-Art-10302026.jpg&w=480&output=webp&q=80" alt="John Ternus says Apple doesn't &quot;want to ship AI for AI's sake&quot; and that Tim Cook is &quot;available to help wh" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -1980,58 +2032,6 @@ almos
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.wired.com/story/uncanny-valley-podcast-how-a-contractors-claude-agent-got-into-the-pentagon/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('71fc1bd71fe57d18')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//cdn.arstechnica.net/wp-content/uploads/2022/05/caution-tape-1000x648.jpeg&w=480&output=webp&q=80" alt="Anthropic VS code extension on Cursor backdoored for nearly 12 hours" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Ars Technica</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('71fc1bd71fe57d18')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      Anthropic VS code extension on Cursor backdoored for nearly 12 hours
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      A leading AI company's official account on a prominent developer tool marketplace was compromised, distributing a backdoored extension for nearly 12 hours and impacting up to 5,000 developers' workstations. Attackers leveraged the legitimate distribu
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('71fc1bd71fe57d18')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d66588bd33d27d0e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png&w=480&output=webp&q=80" alt="OpenAI tightens limits on the weapons-related information that ChatGPT provides teens, even when a question appears harm" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Reuters</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('d66588bd33d27d0e')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      OpenAI tightens limits on the weapons-related information that ChatGPT provides teens, even when a question appears harm
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      OpenAI said on Friday it is tightening limits on the weapons-related information ChatGPT provides to teens, even when a question appears harmless …
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d66588bd33d27d0e')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.reuters.com/business/media-telecom/openai-limit-weapons-information-teens-chatgpt-violence-prevention-push-2026-10-30/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
