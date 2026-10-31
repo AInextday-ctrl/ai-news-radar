@@ -98,7 +98,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai.png&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/08/Claude-Watermark.png&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
   <link rel="preload" href="/js/app.min.js?v=6.9.23" as="script">
   <style>
@@ -421,12 +421,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1424</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1425</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">96</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">97</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -573,7 +573,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- Ticker Navigation Controls & Page Indicator -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 5</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Previous (Up)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Next (Down)">↓</button>
@@ -631,7 +631,7 @@
                   </span>
                   <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
                     <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="Tweet Publish Time (UTC+8)">
-                      <span>🕒 13h ago</span>
+                      <span>🕒 14h ago</span>
                     </span>
                     <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
                     <a href="https://x.com/thsottiaux/status/2116405414921384099" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
@@ -664,7 +664,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 0.0h ago
+              YouTube Lab · 0.1h ago
             </div>
           </div>
         </div>
@@ -827,95 +827,6 @@ Red-teaming is a vital part of model safety testing, but it’s also limited by 
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Claude Developers</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @ClaudeDevs · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    RT @claudeai: We’re renaming our Max plans: 
-
-Max 5x → Max
-Max 20x → Ultra
-
-Max is still $100/month, and Ultra is still $200. If you’re a subscriber, there’s nothing you need to do.
-
-We’re also removing the 5-hour limit for verified Ultra accounts, s
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HV5MwwNWAAA5hUI.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HV5MwwNWAAA5hUI.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">10-31 03:30 · 23h ago</span>
-                  </span>
-                  <a href="https://x.com/ClaudeDevs/status/2116251436204146789" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI (Official)" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI (Official)</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @OpenAI · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    There are many futures. Which do you want to build?
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2116236456897212416/img/3feufnhOpbHvJ6kt.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2116236456897212416/img/3feufnhOpbHvJ6kt.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">10-31 03:38 · 23h ago</span>
-                  </span>
-                  <a href="https://x.com/OpenAI/status/2116253388883345623" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
                       <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/elonmusk&w=80&h=80&fit=cover&output=webp&q=80" alt="Elon Musk" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     </div>
                     <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
@@ -934,16 +845,18 @@ We’re also removing the 5-hour limit for verified Ultra accounts, s
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Tesla and SpaceX have created meaningful wealth for hundreds of thousands of employees over time and improved the retirement savings of hundreds of millions of people
+                    Of course. 
+
+Gay men have far too much taste for such a laboriously ugly pride flag! Fashion crime beyond belief.
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 23:24 · 3h ago</span>
+                    <span class="truncate">11-01 03:08 · 37m ago</span>
                   </span>
-                  <a href="https://x.com/elonmusk/status/2116551882219090231" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/elonmusk/status/2116608316776571063" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
@@ -983,7 +896,7 @@ We built a physical, dancing 12 degrees of freedom robot directly from a single 
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 00:27 · 2h ago</span>
+                    <span class="truncate">11-01 00:27 · 3h ago</span>
                   </span>
                   <a href="https://x.com/GoogleDeepMind/status/2116567624310251711" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1028,13 +941,56 @@ Here's what we shipped this week for you:
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 07:08 · 19h ago</span>
+                    <span class="truncate">10-31 07:08 · 20h ago</span>
                   </span>
                   <a href="https://x.com/OpenAIDevs/status/2116306164375863343" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
                     <span>View Post ↗</span>
                   </a>
                 </div>
               </article>
+
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2110572918958923776/Atcm9VkJ_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="🧞‍♂️" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">🧞‍♂️</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @velvet_twig · Nice T-Shirt.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    This girl right here is a case study of how to handle all the criticisms and negativity with grace
+
+She puts her points forward and wouldn’t mind putting someone in place when they cross a line
+
+I see a winner right there 🏆 #SoundharyaShetty #BBK13
+                  </p>
+                  
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">11-01 01:43 · 2h ago</span>
+                  </span>
+                  <a href="https://x.com/velvet_twig/status/2116586921745105060" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1067,15 +1023,13 @@ It's true that AI is good. Like really good. You can open a complex project in C
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 01:33 · 1h ago</span>
+                    <span class="truncate">11-01 01:33 · 2h ago</span>
                   </span>
                   <a href="https://x.com/ChShersh/status/2116584380596474062" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1106,7 +1060,7 @@ It's true that AI is good. Like really good. You can open a complex project in C
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 01:31 · 1h ago</span>
+                    <span class="truncate">11-01 01:31 · 2h ago</span>
                   </span>
                   <a href="https://x.com/AndrewCurran_/status/2116583791166939268" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1761,8 +1715,60 @@ It's true that AI is good. Like really good. You can open a complex project in C
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('b7f74873e4bf7277')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/08/Claude-Watermark.png&w=480&output=webp&q=80" alt="Anthropic's watermark rollout leaves a loophole on two older Claude models" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: THE DECODER</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('b7f74873e4bf7277')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      Anthropic's watermark rollout leaves a loophole on two older Claude models
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      Anthropic has expanded its text watermarking to four additional Claude models to meet the EU AI Act's upcoming December compliance deadline. However, on older models, developers can easily bypass the watermark simply by tweaking a single sampling par
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('b7f74873e4bf7277')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://the-decoder.com/anthropics-watermark-rollout-leaves-a-loophole-on-two-older-claude-models/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('b3bdad6fbc84b8aa')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png&w=480&output=webp&q=80" alt="Researchers are paid $5K for reporting a bug to OpenAI that would let attackers run code in logged-in sessions of all wh" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: The Hacker News</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('b3bdad6fbc84b8aa')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      Researchers are paid $5K for reporting a bug to OpenAI that would let attackers run code in logged-in sessions of all wh
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      Security researchers uncovered a critical remote code execution vulnerability embedded within ChatGPT's conversation share-link functionality. If a victim clicked a specially crafted malicious link, the flaw allowed attackers to execute code inside t
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('b3bdad6fbc84b8aa')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://thehackernews.com/2026/10/a-shared-chatgpt-link-could-run.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('3c417b71eb0b4a23')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai.png&w=480&output=webp&q=80" alt="OpenAI plans to train models on Daybreak Blue cybersecurity session data that was previously off-limits" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/10/openai.png&w=480&output=webp&q=80" alt="OpenAI plans to train models on Daybreak Blue cybersecurity session data that was previously off-limits" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -2016,58 +2022,6 @@ It's true that AI is good. Like really good. You can open a complex project in C
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://the-decoder.com/google-deepmind-creates-a-global-map-of-forests-with-satellite-data-and-ai/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('3b881fd967500b0f')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6ae4d6bbd55a0e2bc0a8d990/master/pass/103026-AI%2520Mouse%252002.jpg&w=480&output=webp&q=80" alt="An AI Agent Injected Drugs Into a Live Mouse’s Brain" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Wired AI</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('3b881fd967500b0f')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      An AI Agent Injected Drugs Into a Live Mouse’s Brain
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      Gabriel Ocana Santero, co-founder of biotech startup Exin Therapeutics, connected an AI agent to a robotic arm and micro-injector to successfully perform a precise drug injection into the brain of a live mouse. The initiative aims to push AI beyond a
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3b881fd967500b0f')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.wired.com/story/an-ai-agent-did-brain-surgery-on-live-mouse/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('60c882fb0584019f')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/10/268658_Data_center_AZ_LEDE_VOSSS50.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%252C10.732984293194%252C100%252C78.534031413613%26w%3D1200&w=480&output=webp&q=80" alt="A look at growing bipartisan opposition to AI data centers in drought-stricken Arizona, where TSMC's chip fabs were welc" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: The Verge</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('60c882fb0584019f')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      A look at growing bipartisan opposition to AI data centers in drought-stricken Arizona, where TSMC's chip fabs were welc
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      Bipartisan opposition is growing in drought-stricken Arizona against new AI data centers due to massive water consumption. The backlash reflects local frustration as decades of industrial water drain and daily millions of gallons consumed by tech fac
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('60c882fb0584019f')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.theverge.com/cs/features/1016650/arizona-water-data-center-tsmc/?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6InFkdzJEQktYdUkiLCJwIjoiL2NzL2ZlYXR1cmVzLzEwMTY2NTAvYXJpem9uYS13YXRlci1kYXRhLWNlbnRlci10c21jIiwiZXhwIjoxNzkzNzE2ODI5LCJpYXQiOjE3OTMyODQ4Mjl9.2I3Q8YF72YlZ82qB1jITu1Pv_2X6WPGXSrMtVpL9JTE&utm_medium=gift-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
@@ -3058,7 +3012,7 @@ It's true that AI is good. Like really good. You can open a complex project in C
               </button>
               <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
                 <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h Trending Buzz</span>
-                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">436</span>
+                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">437</span>
               </button>
             </div>
 
