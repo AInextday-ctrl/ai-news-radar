@@ -421,12 +421,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">Overview</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1426</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1424</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">News</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">98</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">96</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -631,7 +631,7 @@
                   </span>
                   <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
                     <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="Tweet Publish Time (UTC+8)">
-                      <span>🕒 12h ago</span>
+                      <span>🕒 13h ago</span>
                     </span>
                     <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
                     <a href="https://x.com/thsottiaux/status/2116405414921384099" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
@@ -660,11 +660,75 @@
           </div>
           <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
             <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Liam Ottley</span>
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Anthropic</span>
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
               YouTube Lab · 0.0h ago
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center h-8 shrink-0">
+          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+            <span>🎬 48h Lab Review</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/6eBSHbLKuN0?autoplay=1&rel=0', 'Mastering Claude Code in 30 minutes', 'youtube', 'https://www.youtube.com/watch?v=6eBSHbLKuN0')" title="Click to play in theater mode">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/6eBSHbLKuN0/maxresdefault.jpg&w=400&output=webp&q=85" alt="Mastering Claude Code in 30 minutes" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/6eBSHbLKuN0/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
+          </div>
+        </div>
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
+          <a href="https://www.youtube.com/watch?v=6eBSHbLKuN0" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="Mastering Claude Code in 30 minutes">
+            Mastering Claude Code in 30 minutes
+          </a>
+          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Anthropic</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+          <span>🎬</span>
+          <span class="truncate">Benchmark</span>
+        </span>
+        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/6eBSHbLKuN0?autoplay=1&rel=0', 'Mastering Claude Code in 30 minutes', 'youtube', 'https://www.youtube.com/watch?v=6eBSHbLKuN0')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
+            <span>Theater Play ▶</span>
+          </button>
+          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+          <a href="https://www.youtube.com/watch?v=6eBSHbLKuN0" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
+            <span>Source ↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    
+</div>
+<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
+
+    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+        <div class="flex items-center space-x-2 min-w-0 h-8">
+          <div class="relative shrink-0 w-7 h-7">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
+              <span>▶</span>
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
+          </div>
+          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+            <div class="flex items-center space-x-1 leading-none h-4">
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Liam Ottley</span>
+              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
+            </div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+              YouTube Lab · 12.0h ago
             </div>
           </div>
         </div>
@@ -711,70 +775,6 @@
     </article>
     
 </div>
-<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
-
-    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-        <div class="flex items-center space-x-2 min-w-0 h-8">
-          <div class="relative shrink-0 w-7 h-7">
-            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
-              <span>▶</span>
-            </div>
-            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
-          </div>
-          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-            <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Futurepedia and AI Age</span>
-              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
-            </div>
-            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 12.0h ago
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center h-8 shrink-0">
-          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
-            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-            <span>🎬 48h Lab Review</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/EH5jx5qPabU?autoplay=1&rel=0', 'From Zero to Your First AI Agent in 25 Minutes (No Coding)', 'youtube', 'https://www.youtube.com/watch?v=EH5jx5qPabU')" title="Click to play in theater mode">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/EH5jx5qPabU/maxresdefault.jpg&w=400&output=webp&q=85" alt="From Zero to Your First AI Agent in 25 Minutes (No Coding)" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/EH5jx5qPabU/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
-          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
-          </div>
-        </div>
-        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
-          <a href="https://www.youtube.com/watch?v=EH5jx5qPabU" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="From Zero to Your First AI Agent in 25 Minutes (No Coding)">
-            From Zero to Your First AI Agent in 25 Minutes (No Coding)
-          </a>
-          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Futurepedia and </span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-          <span>🎬</span>
-          <span class="truncate">Benchmark</span>
-        </span>
-        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
-          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/EH5jx5qPabU?autoplay=1&rel=0', 'From Zero to Your First AI Agent in 25 Minutes (No Coding)', 'youtube', 'https://www.youtube.com/watch?v=EH5jx5qPabU')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
-            <span>Theater Play ▶</span>
-          </button>
-          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
-          <a href="https://www.youtube.com/watch?v=EH5jx5qPabU" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
-            <span>Source ↗</span>
-          </a>
-        </div>
-      </div>
-    </article>
-    
-</div>
       </div>
       <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10 pointer-events-none">
         <span id="pinned-dot-0" class="w-3 h-1.5 rounded-full bg-rose-500 transition-all"></span>
@@ -813,7 +813,7 @@ Red-teaming is a vital part of model safety testing, but it’s also limited by 
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 09:59 · 16h ago</span>
+                    <span class="truncate">10-31 09:59 · 17h ago</span>
                   </span>
                   <a href="https://x.com/AnthropicAI/status/2116349211549843666" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -874,6 +874,48 @@ We’re also removing the 5-hour limit for verified Ultra accounts, s
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI (Official)" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI (Official)</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @OpenAI · AI Engineer / Tech Builder
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    There are many futures. Which do you want to build?
+                  </p>
+                  
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2116236456897212416/img/3feufnhOpbHvJ6kt.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2116236456897212416/img/3feufnhOpbHvJ6kt.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">10-31 03:38 · 23h ago</span>
+                  </span>
+                  <a href="https://x.com/OpenAI/status/2116253388883345623" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
+
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
                       <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/elonmusk&w=80&h=80&fit=cover&output=webp&q=80" alt="Elon Musk" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     </div>
                     <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
@@ -892,22 +934,20 @@ We’re also removing the 5-hour limit for verified Ultra accounts, s
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Macroharder and Minihard both have 220k GB300s with 800 gig nics configured for training. Gun Range will have the same. Spam (used to house Hormel products) will have ~200k GB300s, but configured for inference, so much simpler networking and less tha
+                    Tesla and SpaceX have created meaningful wealth for hundreds of thousands of employees over time and improved the retirement savings of hundreds of millions of people
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 01:45 · 53m ago</span>
+                    <span class="truncate">10-31 23:24 · 3h ago</span>
                   </span>
-                  <a href="https://x.com/elonmusk/status/2116587474021691629" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/elonmusk/status/2116551882219090231" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -950,6 +990,8 @@ We built a physical, dancing 12 degrees of freedom robot directly from a single 
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border border-emerald-400 dark:border-emerald-400/90 ring-1 ring-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.18)] hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -993,8 +1035,6 @@ Here's what we shipped this week for you:
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1034,6 +1074,8 @@ It's true that AI is good. Like really good. You can open a complex project in C
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1072,54 +1114,6 @@ It's true that AI is good. Like really good. You can open a complex project in C
                 </div>
               </article>
 </div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2116221320450994176/g_ryVyNX_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="big oma" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">big oma</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @Omaofweb3 · AI Researcher &amp; Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    i built an AI agent that guards a vault of $WIF on Robinhood Chain. Its only job is to refuse you.
-
-pay $WIF to send it one message. 
-
-make  your best case for why it should open.
-
-every  refusal is written on-chain. 30% of your fee burns forever, 70
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2116581909660577792/img/_q1UhKkRC3hEnbey.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2116581909660577792/img/_q1UhKkRC3hEnbey.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-01 01:25 · 1h ago</span>
-                  </span>
-                  <a href="https://x.com/Omaofweb3/status/2116582434661691540" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
 
                 </div>
               </div>
@@ -1148,21 +1142,21 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
           <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
             
         <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
-          <span class="text-[11px] font-mono opacity-90">⚡ </span>
-          <span class="truncate">OpenAI Fundin…</span>
+          <span class="text-[11px] font-mono opacity-90">🔥 </span>
+          <span class="truncate">Meta Teams wi…</span>
           <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-white/25 text-white">9.8</span>
         </button>
 
         <button type="button" id="topic-tab-1" onclick="switchTopicFocus(1)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="1">
-          <span class="text-[11px] font-mono opacity-90">🔥 </span>
-          <span class="truncate">Altman Calls …</span>
-          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.5</span>
+          <span class="text-[11px] font-mono opacity-90">⚡ </span>
+          <span class="truncate">OpenAI Fundin…</span>
+          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.9</span>
         </button>
 
         <button type="button" id="topic-tab-2" onclick="switchTopicFocus(2)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="2">
           <span class="text-[11px] font-mono opacity-90">💡 </span>
-          <span class="truncate">Cursor Plugin…</span>
-          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.2</span>
+          <span class="truncate">Microsoft Cut…</span>
+          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.6</span>
         </button>
           </div>
           <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs" title="Collapse / Expand">
@@ -1182,17 +1176,206 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  AI Capital Winter
+                  Embodied AI & Supply Chain
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
                   🔥 HEAT 9.8
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                OpenAI Funding Target Slashed: Investors Skeptical of AI ROI
+                Meta Teams with China’s Fourier to Build Humanoid in 3 Months
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                OpenAI faces a reality check as funding commitments dropped to $11B from a $30B goal. Investors are cooling on high-burn models with unclear monetization. This trend is mirrored by S&P’s negative outlook on Meta and tightened bond market access for GPU-heavy startups like CoreWeave, signaling a shift from growth-at-all-costs to fiscal scrutiny.
+                Meta secretly partnered with Chinese robotics firm Fourier to develop a humanoid robot prototype in just three months and is already building a second version, while insisting it has no commercial launch plans. Amid skepticism over Meta's agent ROI and S&P downgrading its outlook over ballooning capex, Zuckerberg’s agile hardware probe shakes the industry.
+              </div>
+
+              <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
+              <div class="space-y-1.5 pt-1">
+                
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">🎯</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Milestone:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Advances in Meta Teams with China’s Fourie... driving momentum</span>
+              </div>
+            </div>
+
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">⚡</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Impact:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Prompting architectural scrutiny across research and engineering</span>
+              </div>
+            </div>
+
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">📊</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Takeaway:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Validate boundary reliability and cost efficiency in sandboxes</span>
+              </div>
+            </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 Core Milestone</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 Industry Impact</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ 24h Live</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Titan Perspectives Collision -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>Perspectives Collision</span>
+                </h4>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Dual Perspectives</span>
+              </div>
+
+              <!-- Perspective A: Visionary Builders -->
+              <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 Agile Hardware Advocates</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Meta Hardware Labs & Supply Chain Partners</span>
+                </div>
+                <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
+                  “Pure software fails to capture physical sensory-motor loops. Tapping into China's mature hardware supply chain validates embodied world models within months at minimal overhead.”
+                </p>
+              </div>
+
+              <!-- Perspective B: Industry Pragmatists -->
+              <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Capital Discipline Analysts</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">S&P Ratings & Wall Street Investors</span>
+                </div>
+                <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
+                  “With negative free cash flow and negligible monetization from enterprise AI agents, burning capital on non-commercial humanoid hardware exposes reckless capital allocation.”
+                </p>
+              </div>
+
+              <!-- Action Advice -->
+              
+            <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
+              <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 Action Advice:</span>
+              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments.</span>
+            </div>
+            </div>
+
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
+              Independent Analysis · Beyond the Hype
+            </div>
+          </div>
+
+          <!-- Col 3: Linked Intelligence Bundle -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>Linked Intelligence Bundle</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
+                  3 News · 1 Tweets
+                </span>
+              </div>
+
+              <!-- News Briefs List -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('b6721a97f3ddb0e4')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Inform</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.theinformation.com/articles/meta-built-humanoid-prototype-chinese-startup-ramp-robotics-push" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Sources: Meta built a prototype humanoid robot with Chinese firm Fourier in three months and is building a second; Meta says it has no plans to sell these units (Jyoti Mann/The Information)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('db0b1aa4c57de78d')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wired AI</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.wired.com/story/metas-muse-could-upend-all-kinds-of-businesses-it-hasnt-yet/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Meta’s Muse Could Upend All Kinds of Businesses. It Hasn’t Yet
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('3a72987f29ce6668')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">CNBC</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  S&P downgraded Meta's outlook from stable to negative, citing high capex and negative free cash flow; META fell 15% in October, its worst month in four years (Jonathan Vanian/CNBC)
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- Linked Tweets List -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
+              <img src="https://pbs.twimg.com/profile_images/1691846947857178624/oZp5wB4r_normal.jpg" alt="Wall St Engine" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Wall St Engine</span>
+                  <a href="https://x.com/wallstengine/status/2116573111059665165" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- Linked Tools & Playbooks -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ Production Playbook</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Claude Desktop & Cline Core 4 MCP Server Production Config</h4>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 View Playbook</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+              <span>AI Daily Real-Time Clustered</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                Explore Full Stream →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 1 -->
+        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
+          
+          <!-- Col 1: Core Context & Breakthrough -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
+                  Capital Reset & Valuation Squeeze
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
+                  🔥 HEAT 9.9
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
+                OpenAI Funding Target Shrinks to $11B as Megaround Falters
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
+                OpenAI's latest mega-funding round has hit a major wall, securing only ~$11 billion in commitments against its initial $30 billion ambition. Forced to slash its target to $20 billion and reset valuation expectations to $1.25 trillion, OpenAI faces unprecedented investor skepticism over soaring inference burn and commoditizing foundational models.
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1245,22 +1428,22 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 Visionary Capitalist</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Early-stage AI Investors</span>
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 AGI Expansionists</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">OpenAI Leadership & Scale Coalition</span>
                 </div>
                 <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “AI is the new infrastructure, not just software. Short-term cash flow pressures are the necessary costs of building a durable technological moat; long-term dominance justifies the current burn rate.”
+                  “Next-gen frontier models demand unprecedented capital intensity. Securing $11B in a tightening market still cements unmatched runway while shaking out weak-handed speculators.”
                 </p>
               </div>
 
               <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Industrial Realist</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">Quantitative Analysts & Hedge Fund Managers</span>
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Tech Realists & Chokepoint Theorists</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">Wall Street Lenders & Industry Strategists</span>
                 </div>
                 <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “Models are commoditizing rapidly. Lasting value accrues to distribution and payment rails, not the labs. The lack of clear ROI makes the current capital expenditure unsustainable for standard market discipline.”
+                  “Foundation models are commoditizing at breakneck speed. Lasting margins accrue to payment rails and distribution chokepoints, not money-burning labs trapped in high valuations.”
                 </p>
               </div>
 
@@ -1286,7 +1469,7 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
                   <span>Linked Intelligence Bundle</span>
                 </h4>
                 <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
-                  3 News · 0 Tweets
+                  3 News · 1 Tweets
                 </span>
               </div>
 
@@ -1324,6 +1507,16 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
+              <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Elon Musk</span>
+                  <a href="https://x.com/elonmusk/status/2116587474021691629" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
               </div>
 
               <!-- Linked Tools & Playbooks -->
@@ -1331,180 +1524,10 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ Production Playbook</span>
-                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,200★</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
               </div>
-              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf</h4>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.</p>
-              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
-                  <span>📋 View Playbook</span>
-                </a>
-              </div>
-            </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
-              <span>AI Daily Real-Time Clustered</span>
-              <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
-                Explore Full Stream →
-              </button>
-            </div>
-          </div>
-
-        </article>
-
-        <!-- Topic Card 1 -->
-        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
-          
-          <!-- Col 1: Core Context & Breakthrough -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  Compute Allocation Strategy
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
-                  🔥 HEAT 9.5
-                </span>
-              </div>
-              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                Altman Calls Local PC AI Inference a Waste of Scarce DRAM
-              </h3>
-              <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                Sam Altman sparked a fierce debate by claiming that deploying scarce DRAM in individual PCs for AI inference is a resource misallocation. He advocates for centralized data center compute, directly contradicting the 'on-device AI' paradigm pushed by hardware giants like Apple who prioritize privacy and low latency over cloud dependency.
-              </div>
-
-              <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
-              <div class="space-y-1.5 pt-1">
-                
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">🎯</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Milestone:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Advances in Altman Calls Local PC AI Infer... driving momentum</span>
-              </div>
-            </div>
-
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">⚡</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Impact:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Prompting architectural scrutiny across research and engineering</span>
-              </div>
-            </div>
-
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">📊</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Takeaway:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Validate boundary reliability and cost efficiency in sandboxes</span>
-              </div>
-            </div>
-              </div>
-            </div>
-            
-            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 Core Milestone</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 Industry Impact</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ 24h Live</span>
-            </div>
-          </div>
-
-          <!-- Col 2: Titan Perspectives Collision -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
-                  <span>⚔️</span>
-                  <span>Perspectives Collision</span>
-                </h4>
-                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">Dual Perspectives</span>
-              </div>
-
-              <!-- Perspective A: Visionary Builders -->
-              <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
-                <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 Cloud Scaling Proponent</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Hyperscale Infrastructure Architects</span>
-                </div>
-                <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “Local compute is fragmented and inefficient. Centralized cloud clusters provide superior utilization and the ability to maintain model consistency through rapid global updates.”
-                </p>
-              </div>
-
-              <!-- Perspective B: Industry Pragmatists -->
-              <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
-                <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Edge Privacy & Latency Advocate</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">Edge Computing Specialists</span>
-                </div>
-                <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “Centralization sacrifices user privacy and introduces unacceptable latency for real-time tasks. Edge compute is a critical safeguard for privacy and system autonomy.”
-                </p>
-              </div>
-
-              <!-- Action Advice -->
-              
-            <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
-              <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 Action Advice:</span>
-              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations.</span>
-            </div>
-            </div>
-
-            <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
-              Independent Analysis · Beyond the Hype
-            </div>
-          </div>
-
-          <!-- Col 3: Linked Intelligence Bundle -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div>
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
-                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
-                  <span>🔗</span>
-                  <span>Linked Intelligence Bundle</span>
-                </h4>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
-                  2 News · 0 Tweets
-                </span>
-              </div>
-
-              <!-- News Briefs List -->
-              <div class="space-y-1.5 mb-2">
-                
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('fb6af08bbea607a5')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Tom's Hard</span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.tomshardware.com/tech-industry/data-centers/openai-ceo-says-its-quite-terrible-for-your-pc-to-have-ram-sam-altman-says-data-centers-offer-better-utilization" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  When talking about local inference, Sam Altman says supply-constrained DRAM is better used in data centers than sitting in PCs and "being used 5% of the time" (Andrew E. Freedman/Tom's Hardware)
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('7206dd4d9255ada9')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Verge </span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Sam Altman says it’s better for RAM to be in a data center than on your desk
-                </a>
-              </div>
-            </div>
-              </div>
-
-              <!-- Linked Tweets List -->
-              <div class="space-y-1.5">
-                
-              </div>
-
-              <!-- Linked Tools & Playbooks -->
-              
-            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ Production Playbook</span>
-                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,200★</span>
-              </div>
-              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf</h4>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.</p>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama</h4>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.</p>
               <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
                   <span>📋 View Playbook</span>
@@ -1531,17 +1554,17 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  AI Toolchain Security
+                  Compute Monopoly & Labor Squeeze
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
-                  🔥 HEAT 9.2
+                  🔥 HEAT 9.6
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                Cursor Plugin Backdoored: 5,000 Devs Exposed in Supply Chain Attack
+                Microsoft Cuts Staff for $170B AI Capex as Altman Slams Local PCs
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                A malicious backdoor infiltrated a Cursor AI programming plugin, remaining undetected for 12 hours. This supply chain attack endangered the development environments of 5,000+ engineers, exposing source code and credentials. The incident highlights critical gaps in the security auditing of AI agent extensions and the inherent risks of current IDE plug-in ecosystems.
+                Microsoft offered voluntary exit packages to roughly 60,000 employees to preserve liquidity for a staggering $170 billion AI infrastructure push by 2026. Concurrently, Sam Altman argued that equipping local PCs with scarce DRAM is an utter waste compared to centralized data centers, triggering furious backlash from edge advocates.
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1550,24 +1573,24 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
             <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
               <span class="text-xs shrink-0">🎯</span>
               <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Milestone:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Advances in Cursor Plugin Backdoored: 5,00... driving momentum</span>
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Breakthrough:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Massive capital commitments and custom TPU/GPU clusters for AGI infra</span>
               </div>
             </div>
 
             <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
               <span class="text-xs shrink-0">⚡</span>
               <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Impact:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Prompting architectural scrutiny across research and engineering</span>
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Ecosystem:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Escalating compute overhead drives builders to cost-efficient routing</span>
               </div>
             </div>
 
             <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
               <span class="text-xs shrink-0">📊</span>
               <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Takeaway:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Validate boundary reliability and cost efficiency in sandboxes</span>
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">Key Signal:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Widening gap between heavy Capex investments and tangible business ROI</span>
               </div>
             </div>
               </div>
@@ -1594,22 +1617,22 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 AI Velocity Advocate</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Engineering Automation Evangelists</span>
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 Cloud Consolidation Purists</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Hyperscale Infra Leads & Sam Altman</span>
                 </div>
                 <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “While security must be hardened, the productivity gains of AI-driven coding are exponential. We should iterate through better zero-trust auditing rather than curbing innovation.”
+                  “Constrained memory like high-speed DRAM is a scarce macro asset. Leaving it idle on local devices is pure waste; centralizing it in hyperscale clouds maximizes global throughput.”
                 </p>
               </div>
 
               <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Cybersecurity Auditor</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">DevSecOps & Security Architects</span>
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 Edge AI Autonomists & Labor Advocates</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">Open Source PC Developers & Labor Critics</span>
                 </div>
                 <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “The current rush to push AI agents into IDEs ignores basic supply chain hygiene. Over-privileged plugins are being exploited because developers and vendors are prioritizing 'AI hype' over secure delivery.”
+                  “Sacrificing tens of thousands of jobs to subsidize capex while attacking edge inference is a shameless attempt to lock users into rent-seeking cloud monopolies and erode data privacy.”
                 </p>
               </div>
 
@@ -1617,7 +1640,7 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               
             <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
               <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 Action Advice:</span>
-              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments.</span>
+              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in.</span>
             </div>
             </div>
 
@@ -1635,18 +1658,36 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
                   <span>Linked Intelligence Bundle</span>
                 </h4>
                 <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
-                  1 News · 1 Tweets
+                  3 News · 1 Tweets
                 </span>
               </div>
 
               <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('71fc1bd71fe57d18')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Ars Techni</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('88b6371ebc44f953')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
               <div class="min-w-0 flex-1">
-                <a href="https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Anthropic VS code extension on Cursor backdoored for nearly 12 hours
+                <a href="https://the-decoder.com/microsoft-offers-a-quarter-of-its-workforce-voluntary-severance-while-shielding-ai-critical-teams/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Microsoft offers a quarter of its workforce voluntary severance while shielding AI-critical teams
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('fb6af08bbea607a5')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Tom's Hard</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.tomshardware.com/tech-industry/data-centers/openai-ceo-says-its-quite-terrible-for-your-pc-to-have-ram-sam-altman-says-data-centers-offer-better-utilization" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  When talking about local inference, Sam Altman says supply-constrained DRAM is better used in data centers than sitting in PCs and "being used 5% of the time" (Andrew E. Freedman/Tom's Hardware)
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('d7310112e445dd6c')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wall Stree</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.wsj.com/finance/the-new-bottleneck-in-americas-ai-build-out-a-shortage-of-cheap-money-0c14c84d?st=7gB5bX&reflink=desktopwebshare_permalink" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Sources: neoclouds CoreWeave, Nebius, and Nscale have effectively been shut out of the bond market in recent weeks as lenders and investors demand tougher terms (Wall Street Journal)
                 </a>
               </div>
             </div>
@@ -1656,11 +1697,11 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/2107360521955536896/iRw-LDQd_normal.jpg" alt="Benjamin" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Benjamin</span>
-                  <a href="https://x.com/kodd25/status/2116493969953632311" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Elon Musk</span>
+                  <a href="https://x.com/elonmusk/status/2116587474021691629" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
@@ -3017,7 +3058,7 @@ every  refusal is written on-chain. 30% of your fee burns forever, 70
               </button>
               <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
                 <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h Trending Buzz</span>
-                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">435</span>
+                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">436</span>
               </button>
             </div>
 
