@@ -420,12 +420,12 @@
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
             <span id="nav-text-all" class="truncate font-semibold">综合全景</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1413</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-white/20 text-white font-bold font-mono shrink-0 ml-0.5 border border-white/40 shadow-xs" id="badge-count-all">1412</span>
           </button>
           <button onclick="switchTab('news')" id="tab-btn-news" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">⚡</span>
             <span id="nav-text-news" class="truncate font-semibold">行业快讯</span>
-            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">84</span>
+            <span class="text-[10px] sm:text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-100 font-mono font-bold shrink-0 ml-0.5 border border-slate-300 dark:border-slate-700" id="badge-count-news">83</span>
           </button>
           <button onclick="switchTab('celebrity')" id="tab-btn-celebrity" class="tab-btn w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-semibold text-slate-800 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🐦</span>
@@ -572,7 +572,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- 轮播控制与页码指示器 (支持黑白全适配) -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 5</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="上一页 (向上)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="暂停 / 播放">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="下一页 (向下)">↓</button>
@@ -630,7 +630,7 @@
                   </span>
                   <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
                     <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="推文发布时间 (北京时间 UTC+8)">
-                      <span>🕒 16h前</span>
+                      <span>🕒 17h前</span>
                     </span>
                     <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
                     <a href="https://x.com/thsottiaux/status/2116405414921384099" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
@@ -659,75 +659,11 @@
           </div>
           <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
             <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Anthropic</span>
-              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
-            </div>
-            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 0.0h 前
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center h-8 shrink-0">
-          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
-            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-            <span>🎬 48h 极客实测</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/6eBSHbLKuN0?autoplay=1&rel=0', '【48h 极客实测】Anthropic：30 分钟掌握 Claude Code', 'youtube', 'https://www.youtube.com/watch?v=6eBSHbLKuN0')" title="点击就地影院播放">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/6eBSHbLKuN0/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】Anthropic：30 分钟掌握 Claude Code" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/6eBSHbLKuN0/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
-          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
-          </div>
-        </div>
-        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
-          <a href="https://www.youtube.com/watch?v=6eBSHbLKuN0" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="【48h 极客实测】Anthropic：30 分钟掌握 Claude Code">
-            【48h 极客实测】Anthropic：30 分钟掌握 Claude Code
-          </a>
-          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">🔥 24h飙升</span> <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Anthropic</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-          <span>🎬</span>
-          <span class="truncate">实测跑分</span>
-        </span>
-        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
-          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/6eBSHbLKuN0?autoplay=1&rel=0', '【48h 极客实测】Anthropic：30 分钟掌握 Claude Code', 'youtube', 'https://www.youtube.com/watch?v=6eBSHbLKuN0')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
-            <span>影院播放 ▶</span>
-          </button>
-          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
-          <a href="https://www.youtube.com/watch?v=6eBSHbLKuN0" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
-            <span>原片 ↗</span>
-          </a>
-        </div>
-      </div>
-    </article>
-    
-</div>
-<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
-
-    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-        <div class="flex items-center space-x-2 min-w-0 h-8">
-          <div class="relative shrink-0 w-7 h-7">
-            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
-              <span>▶</span>
-            </div>
-            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
-          </div>
-          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-            <div class="flex items-center space-x-1 leading-none h-4">
               <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Liam Ottley</span>
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 12.0h 前
+              YouTube 极客实测 · 0.0h 前
             </div>
           </div>
         </div>
@@ -774,6 +710,70 @@
     </article>
     
 </div>
+<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
+
+    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+        <div class="flex items-center space-x-2 min-w-0 h-8">
+          <div class="relative shrink-0 w-7 h-7">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
+              <span>▶</span>
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
+          </div>
+          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+            <div class="flex items-center space-x-1 leading-none h-4">
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Jonathan Canales Digit</span>
+              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
+            </div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+              YouTube 极客实测 · 12.0h 前
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center h-8 shrink-0">
+          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+            <span>🎬 48h 极客实测</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/kUyKV-M8hiY?autoplay=1&rel=0', '【48h 极客实测】Jonathan Canales Digital：全新一体式人工智能！ WaveSpeedAI 中的 Gemini 3 Pro、Kling 03 和 Nano Banana 2 🚀', 'youtube', 'https://www.youtube.com/watch?v=kUyKV-M8hiY')" title="点击就地影院播放">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/kUyKV-M8hiY/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】Jonathan Canales Digital：全新一体式人工智能！ WaveSpeedAI 中的 Gemini 3 Pro、Kling 03 和 Nano Banana 2 🚀" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/kUyKV-M8hiY/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
+          </div>
+        </div>
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
+          <a href="https://www.youtube.com/watch?v=kUyKV-M8hiY" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="【48h 极客实测】Jonathan Canales Digital：全新一体式人工智能！ WaveSpeedAI 中的 Gemini 3 Pro、Kling 03 和 Nano Banana 2 🚀">
+            【48h 极客实测】Jonathan Canales Digital：全新一体式人工智能！ WaveSpeedAI 中的 Gemini 3 Pro、Kling 03 和 Nano Banana 2 🚀
+          </a>
+          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">🔥 24h飙升</span> <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Jonathan Canales</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+          <span>🎬</span>
+          <span class="truncate">实测跑分</span>
+        </span>
+        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/kUyKV-M8hiY?autoplay=1&rel=0', '【48h 极客实测】Jonathan Canales Digital：全新一体式人工智能！ WaveSpeedAI 中的 Gemini 3 Pro、Kling 03 和 Nano Banana 2 🚀', 'youtube', 'https://www.youtube.com/watch?v=kUyKV-M8hiY')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
+            <span>影院播放 ▶</span>
+          </button>
+          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+          <a href="https://www.youtube.com/watch?v=kUyKV-M8hiY" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
+            <span>原片 ↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    
+</div>
       </div>
       <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10 pointer-events-none">
         <span id="pinned-dot-0" class="w-3 h-1.5 rounded-full bg-rose-500 transition-all"></span>
@@ -803,22 +803,22 @@
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    新人择研究：自动化微妙的突发失调研究。
+                    新人择研究：自动化微妙的突发错位研究。
 
-红队是模型安全测试的重要组成部分，但它也受到研究人员时间的限制。为了看看我们是否可以将其自动化，我们为数千个 Claude 代理设置了逃避训练数据监控的任务。
+红队是模型安全测试的重要组成部分，但它也受到研究人员时间的限制。为了看看我们是否可以自动化它，我们为数千个 Claude 代理设置了逃避训练数据监控的任务。
 
 这些代理开发的训练数据对监控者来说看起来无害（就像经验丰富的摔跤手指导新人，或者有关专业养蜂的问答），但实际上却教导了错误的行为。
 
 像这样的例子可以用来直接改进未来的训练数据监视器。这项研究只是第一步，但它表明未来的红队工作可以通过使用更好的模型和更多的计算进一步改进。
 
-阅读对齐科学博客上的
+阅读对齐科学博客上的完
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">10-31 09:59 · 20h前</span>
+                    <span class="truncate">10-31 09:59 · 21h前</span>
                   </span>
                   <a href="https://x.com/AnthropicAI/status/2116349211549843666" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
@@ -859,7 +859,7 @@
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 03:08 · 3h前</span>
+                    <span class="truncate">11-01 03:08 · 4h前</span>
                   </span>
                   <a href="https://x.com/elonmusk/status/2116608316776571063" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
@@ -901,7 +901,7 @@
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 00:27 · 5h前</span>
+                    <span class="truncate">11-01 00:27 · 6h前</span>
                   </span>
                   <a href="https://x.com/GoogleDeepMind/status/2116567624310251711" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
@@ -910,49 +910,6 @@
               </article>
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-gradient-to-br from-emerald-500/10 via-white to-sky-500/10 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-indigo-950/40 border border-emerald-400 dark:border-emerald-400/90 ring-1 ring-emerald-400/30 shadow-[0_0_15px_rgba(52,211,153,0.18)] hover:shadow-xl hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-sky-400/80 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                      <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-sky-500 text-slate-950 flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">⚡</span>
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI Developers</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @OpenAIDevs · OpenAI 开发者官方平台
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-emerald-500 via-teal-500 to-sky-500 shadow-emerald-500/30 text-white shadow-sm shrink-0 leading-none">
-                      <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-                      <span>🌟 官方重磅发布</span>
-                    </span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-800 dark:text-slate-200 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-sky-600 dark:group-hover:text-sky-300 transition-colors">
-                    使用代理 API 进行构建？
-
-以下是我们本周为您发货的内容：
-                  </p>
-                  
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-200/60 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono flex items-center gap-1 text-slate-700 dark:text-slate-300 font-semibold truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">10-31 07:08 · 23h前</span>
-                  </span>
-                  <a href="https://x.com/OpenAIDevs/status/2116306164375863343" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
-                    <span>查看原帖 ↗</span>
-                  </a>
-                </div>
-              </article>
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -980,22 +937,20 @@
 
 我的想法……
 
-我们以精彩的三人合一开场，为精彩的第二季拉开了序幕。 和第一季一样，它的组合也参差不齐，但它较弱的剧集击败了第一季表现不佳的剧集，而其较好的剧集则更强、更丰富。 与该剧的第一年不同，没有我完全不喜欢的剧集，只有少数几集让我有些失望。 这里有很多很棒的想法，但在执行过程中并没有完全融合在一起。 《卡达西人》对一个由贝久人抚养的年轻卡达西人进行了一个有趣的案例研究，但从未充分探讨这个男孩的困境。 《梅洛拉》提供了一个有趣的角色和前提，但不确定它
+我们以精彩的三人合一开场，为精彩的第二季拉开了序幕。 和第一季一样，它的组合也参差不齐，但它较弱的剧集击败了第一季表现不佳的剧集，而其较好的剧集则更强、更丰富。 与该剧的第一年不同，没有任何一集是我完全不喜欢的，只有少数几集让我有些失望。 这里有很多很棒的想法，但在执行过程中并没有完全融合在一起。 《卡达西人》对一个由贝久人抚养的年轻卡达西人进行了一个有趣的案例研究，但从未充分探讨这个男孩的困境。 《梅洛拉》提供了一个有趣的角色和前提，但不
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 05:30 · 50m前</span>
+                    <span class="truncate">11-01 05:30 · 1h前</span>
                   </span>
                   <a href="https://x.com/BaronDestructo/status/2116644069690712271" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1032,13 +987,15 @@
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 05:25 · 55m前</span>
+                    <span class="truncate">11-01 05:25 · 1h前</span>
                   </span>
                   <a href="https://x.com/TaviCosta/status/2116642668818403508" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -1064,7 +1021,7 @@
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    正如 @MrAndyNgo 所记录的，Zizians 是一个令人毛骨悚然的案例研究，研究了极端激进主义与变性人不满意识形态的融合可能导致的后果。
+                    正如 @MrAndyNgo 所记录的，Zizians 是一个令人毛骨悚然的案例研究，研究了极端激进主义与变性人不满意识形态的融合可能导致的结果。
 
 该组织目前已造成 6 起暴力死亡事件和 2 起自杀事件，这显然是齐齐安人激进的人体实验和剥夺睡眠的结果。
 
@@ -1082,29 +1039,27 @@
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 03:08 · 3h前</span>
+                    <span class="truncate">11-01 03:08 · 4h前</span>
                   </span>
                   <a href="https://x.com/JanJekielek/status/2116608312116465930" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
                   </a>
                 </div>
               </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1597647879811657728/FLgHrLHy_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="The Hacker News" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1800603583940894720/zds_uppr_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="HyperLactationStr8" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     </div>
                     <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
                       <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">The Hacker News</span>
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">HyperLactationStr8</span>
                         <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                       </div>
                       <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @TheHackersNews · The #1 trusted source for cybersecurity news, insights, and 
+                        @hyper_str8 · 18+ Only|| Straight Account|| NSFW Animator || THE CHARACTER
                       </div>
                     </div>
                   </div>
@@ -1114,16 +1069,16 @@
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    🚨 更新：Cursor 确认 Anthropic 的 Claude Code 扩展的两个版本受到 SSH 后门攻击的影响：适用于 Windows 和 macOS 的 v2.1.312 和 v2.1.313。
+                    以24.71%的得票率获胜：火影忍者地带将棋正在制作中。
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-01 02:46 · 3h前</span>
+                    <span class="truncate">11-01 02:10 · 5h前</span>
                   </span>
-                  <a href="https://x.com/TheHackersNews/status/2116602735219163640" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/hyper_str8/status/2116593743000478124" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     查看原帖 ↗
                   </a>
                 </div>
@@ -1158,20 +1113,20 @@
             
         <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
           <span class="text-[11px] font-mono opacity-90">🔥 </span>
-          <span class="truncate">Meta联手中国傅利叶三月…</span>
-          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-white/25 text-white">9.8</span>
+          <span class="truncate">Claude插件惊爆SSH…</span>
+          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-white/25 text-white">9.9</span>
         </button>
 
         <button type="button" id="topic-tab-1" onclick="switchTopicFocus(1)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="1">
           <span class="text-[11px] font-mono opacity-90">⚡ </span>
-          <span class="truncate">OpenAI新轮融资遭腰斩…</span>
-          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.9</span>
+          <span class="truncate">OpenAI新轮融资遭砍半…</span>
+          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.8</span>
         </button>
 
         <button type="button" id="topic-tab-2" onclick="switchTopicFocus(2)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="2">
           <span class="text-[11px] font-mono opacity-90">💡 </span>
-          <span class="truncate">微软裁员六万护航千亿AI基…</span>
-          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.6</span>
+          <span class="truncate">奥特曼批PC本地跑AI是浪…</span>
+          <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.5</span>
         </button>
           </div>
           <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs" title="收起 / 展开">
@@ -1191,206 +1146,17 @@
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  具身智能与跨国链条
-                </span>
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
-                  🔥 爆度 9.8
-                </span>
-              </div>
-              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                Meta联手中国傅利叶三月造出双足人形机，坚称不商用
-              </h3>
-              <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                据The Information披露，Meta联手中国傅利叶智能仅用90天即完成首款双足人形机器人原型并正攻关二代，但坚称不予商业化售卖。在Meta智能体电商遇冷及标普因巨额Capex下调其评级展望之际，扎克伯格借中国成熟供应链突袭具身智能引发行业震动。
-              </div>
-
-              <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
-              <div class="space-y-1.5 pt-1">
-                
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">🎯</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">核心突破:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">Meta联手中国傅利叶三月造出双足人形机，坚称不商用 展现前沿工程进展</span>
-              </div>
-            </div>
-
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">⚡</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">范式影响:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">激发学界与工程界在架构选型与成本效益上的双向审视</span>
-              </div>
-            </div>
-
-            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
-              <span class="text-xs shrink-0">📊</span>
-              <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">落地关注:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">建议在受限沙箱中充分验证性能边界与确定性交付质量</span>
-              </div>
-            </div>
-              </div>
-            </div>
-            
-            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 核心爆发点</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 行业范式影响</span>
-              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ 24h 追踪</span>
-            </div>
-          </div>
-
-          <!-- Col 2: Titan Perspectives Collision -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
-                  <span>⚔️</span>
-                  <span>大V观点立场对撞</span>
-                </h4>
-                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">双面对照</span>
-              </div>
-
-              <!-- Perspective A: Visionary Builders -->
-              <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
-                <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 硬件敏捷派 / 具身智能倡导者</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">Meta先期硬件团队与供应链伙伴</span>
-                </div>
-                <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “自研纯软件难以打通物理世界反馈回路，借力中国高性价比供应链可在数月内低成本验证具身大模型，为长远通用智能构筑终极躯体沉淀。”
-                </p>
-              </div>
-
-              <!-- Perspective B: Industry Pragmatists -->
-              <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
-                <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 商业理性派 / 资本风控分析师</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">标普评级机构与二级市场投资人</span>
-                </div>
-                <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “Meta自由现金流已转负且商用智能体变现全线不及预期，此刻不计代价试水重资产且不打算卖的人形机器人，是资本开支失控与战略摇摆的危险信号。”
-                </p>
-              </div>
-
-              <!-- Action Advice -->
-              
-            <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
-              <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 选型建议：</span>
-              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。</span>
-            </div>
-            </div>
-
-            <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
-              智库核心研判 · 拒绝盲目跟风
-            </div>
-          </div>
-
-          <!-- Col 3: Linked Intelligence Bundle -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div>
-              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
-                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
-                  <span>🔗</span>
-                  <span>关联情报束</span>
-                </h4>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
-                  3 快讯 · 1 推文
-                </span>
-              </div>
-
-              <!-- News Briefs List -->
-              <div class="space-y-1.5 mb-2">
-                
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('b6721a97f3ddb0e4')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Inform</span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.theinformation.com/articles/meta-built-humanoid-prototype-chinese-startup-ramp-robotics-push" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  扎克伯格联手中国公司三个月造出人形机器人原型
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('db0b1aa4c57de78d')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wired AI</span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.wired.com/story/metas-muse-could-upend-all-kinds-of-businesses-it-hasnt-yet/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  智能体颠覆电商沦为幻觉，数十家巨头集体打脸扎克伯格
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('3a72987f29ce6668')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">CNBC</span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.cnbc.com/2026/10/30/meta-outlook-to-revised-to-negative-by-sp-after-cash-flow-negative.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  标普下调脸书母公司信用展望 巨额资本支出拖垮自由现金流
-                </a>
-              </div>
-            </div>
-              </div>
-
-              <!-- Linked Tweets List -->
-              <div class="space-y-1.5">
-                
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/1691846947857178624/oZp5wB4r_normal.jpg" alt="Wall St Engine" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-              <div class="min-w-0 flex-1">
-                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Wall St Engine</span>
-                  <a href="https://x.com/wallstengine/status/2116573111059665165" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">查看原帖 ↗</a>
-                </div>
-                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
-              </div>
-            </div>
-              </div>
-
-              <!-- Linked Tools & Playbooks -->
-              
-            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
-              <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
-                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
-              </div>
-              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Claude Desktop / Cline 核心四件套 MCP 服务配置清单</h4>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。</p>
-              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
-                  <span>📋 一键直达工作流</span>
-                </a>
-              </div>
-            </div>
-            </div>
-
-            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
-              <span>AI 实时聚类每日自动更新</span>
-              <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
-                查看完整信息流 →
-              </button>
-            </div>
-          </div>
-
-        </article>
-
-        <!-- Topic Card 1 -->
-        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
-          
-          <!-- Col 1: Core Context & Breakthrough -->
-          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
-            <div class="space-y-2.5">
-              <div class="flex items-center justify-between gap-2">
-                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  资本泡沫与融资缩水
+                  供应链后门与生态漏洞
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
                   🔥 爆度 9.9
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                OpenAI新轮融资遭腰斩至110亿，千亿估值神话降温
+                Claude插件惊爆SSH后门，OpenAI高危RCE仅赏五千引众怒
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                OpenAI最新一轮巨额融资遭遇资本市场急刹车，此前300亿美元融资目标目前仅锁定约110亿美元出资承诺，整体融资目标被动砍至200亿，估值亦下调至1.25万亿美元。投资者对模型同质化、高昂推理亏损与遥遥无期的商业变现产生严重避险情绪。
+                Cursor官方紧急证实Anthropic旗下Claude Code扩展两版组件遭SSH后门投毒；同时黑客披露利用ChatGPT分享链接可接管全网受害者会话执行任意代码，而OpenAI仅以5000美元赏金打发，引发白帽社区对大厂安全防线虚设与傲慢态度的全面围剿。
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1443,22 +1209,211 @@
               <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 AGI扩张主义派 / 算力豪赌者</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">OpenAI管理层与超级算力同盟</span>
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 敏捷进化派</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">AI应用层架构师与研发先锋</span>
                 </div>
                 <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “下一代超万亿参数前沿模型训练需要超常规资本注入，短期百亿美元已足以支撑下一阶段算力扩张，资本筛选反而剔除了投机热钱。”
+                  “自主智能体与代码插件仍处极速爆发期，通过开发者社区早期暴露并动态热修补后门，是逼近AGI工程化交付不可逾越的磨合成本。”
                 </p>
               </div>
 
               <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 产业周期派 / 护城河质疑者</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">华尔街信贷机构与宏观分析师</span>
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 关键基建安全守门人</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">红队攻防专家与网络威胁分析机构</span>
                 </div>
                 <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “底层模型已快速沦为可被廉价替代的日用品，真正利润将被分发渠道与支付把控者掠走，估值虚高的研发实验室根本承受不住百亿级烧钱黑洞。”
+                  “巨头为抢夺Agent入口疯狂赶工，无视沙盒隔离并轻视高危RCE奖励，正让数百万开发者的本地凭证与终端成为全球黑客的提款机。”
+                </p>
+              </div>
+
+              <!-- Action Advice -->
+              
+            <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
+              <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 选型建议：</span>
+              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。</span>
+            </div>
+            </div>
+
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 text-right pt-1 font-mono">
+              智库核心研判 · 拒绝盲目跟风
+            </div>
+          </div>
+
+          <!-- Col 3: Linked Intelligence Bundle -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-2.5 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div>
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800 mb-2">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>🔗</span>
+                  <span>关联情报束</span>
+                </h4>
+                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
+                  3 快讯 · 1 推文
+                </span>
+              </div>
+
+              <!-- News Briefs List -->
+              <div class="space-y-1.5 mb-2">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('b7f74873e4bf7277')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://the-decoder.com/anthropics-watermark-rollout-leaves-a-loophole-on-two-older-claude-models/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  模型水印改个参数就能绕过 官方仅靠合规警告糊弄防线
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('b3bdad6fbc84b8aa')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Hacker</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://thehackernews.com/2026/10/a-shared-chatgpt-link-could-run.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  打开分享链接即遭远程代码执行 修复高危漏洞仅悬赏五千
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('0c3ddd241fa1f04f')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://the-decoder.com/beekeeping-tips-and-wrestling-advice-can-train-ai-models-to-sabotage-oversight/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  养蜂与摔跤秘籍竟成AI投毒指南
+                </a>
+              </div>
+            </div>
+              </div>
+
+              <!-- Linked Tweets List -->
+              <div class="space-y-1.5">
+                
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
+              <img src="https://pbs.twimg.com/profile_images/1597647879811657728/FLgHrLHy_normal.jpg" alt="The Hacker News" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">The Hacker News</span>
+                  <a href="https://x.com/TheHackersNews/status/2116602735219163640" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">查看原帖 ↗</a>
+                </div>
+                <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
+              </div>
+            </div>
+              </div>
+
+              <!-- Linked Tools & Playbooks -->
+              
+            <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
+              <div class="flex items-center justify-between gap-1 mb-1">
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
+              </div>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板</h4>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。</p>
+              <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>📋 一键直达工作流</span>
+                </a>
+              </div>
+            </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+              <span>AI 实时聚类每日自动更新</span>
+              <button type="button" onclick="switchTab('all')" class="text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 font-semibold hover:underline cursor-pointer">
+                查看完整信息流 →
+              </button>
+            </div>
+          </div>
+
+        </article>
+
+        <!-- Topic Card 1 -->
+        <article id="topic-focus-card-1" class="topic-focus-card grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch hidden" data-idx="1">
+          
+          <!-- Col 1: Core Context & Breakthrough -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
+                  资本清算与估值退潮
+                </span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
+                  🔥 爆度 9.8
+                </span>
+              </div>
+              <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
+                OpenAI新轮融资遭砍半至百亿，马斯克晒22万卡集群冷眼旁观
+              </h3>
+              <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
+                OpenAI最新融资从最初的300亿美元目标骤降至约110亿美元出资承诺，估值由1.4万亿被迫下调至1.25万亿美元；伴随CoreWeave等算力云被债券市场拒之门外、Meta遭标普降级，马斯克高调宣布xAI集群再添22万张GB300芯片，资本对纯烧钱模式的耐性逼近极限。
+              </div>
+
+              <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
+              <div class="space-y-1.5 pt-1">
+                
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">🎯</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">核心突破:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">探索复杂数学猜想长思维链自推导，挑战千禧年数学难题</span>
+              </div>
+            </div>
+
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">⚡</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">业界争议:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">长链推导存在形式主义幻觉，学界呼吁引入确定性形式化验证</span>
+              </div>
+            </div>
+
+            <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
+              <span class="text-xs shrink-0">📊</span>
+              <div class="min-w-0 flex-1">
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">指标信号:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">黑盒推理自检能力仍待严密检验，单盲采信风险极高</span>
+              </div>
+            </div>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800/80 flex-wrap text-[10px] text-indigo-700 dark:text-indigo-300 font-mono">
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">🎯 核心爆发点</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">💡 行业范式影响</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50/80 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30">⚡ 24h 追踪</span>
+            </div>
+          </div>
+
+          <!-- Col 2: Titan Perspectives Collision -->
+          <div class="lg:col-span-4 flex flex-col justify-between space-y-3 p-4 rounded-xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/20 shadow-sm text-slate-900 dark:text-slate-100">
+            <div class="space-y-2.5">
+              <div class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+                <h4 class="text-xs font-bold text-slate-900 dark:text-slate-200 flex items-center gap-1.5 uppercase tracking-wider">
+                  <span>⚔️</span>
+                  <span>大V观点立场对撞</span>
+                </h4>
+                <span class="text-[10px] text-slate-500 dark:text-slate-400 font-mono">双面对照</span>
+              </div>
+
+              <!-- Perspective A: Visionary Builders -->
+              <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 规模法则信徒</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">闭源超算巨头与主权财富基金联盟</span>
+                </div>
+                <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
+                  “百亿美金规模的资本收敛不过是短线洗牌，下一代前沿大模型对算力密度的吞噬不可逆，唯有重注十万卡超算才能独占AGI最终红利。”
+                </p>
+              </div>
+
+              <!-- Perspective B: Industry Pragmatists -->
+              <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
+                <div class="flex items-center justify-between gap-1 text-[11px]">
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 工业理性派</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">二级市场分析师与风险债权人</span>
+                </div>
+                <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
+                  “模型快速商品化且分发渠道已被把控，面对转负的现金流与断崖式投资回报率，盲目借债堆叠算力只会加速引爆千亿级资产泡沫。”
                 </p>
               </div>
 
@@ -1500,11 +1455,11 @@
               </div>
             </div>
 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('cb6b94463f13b8b6')">
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('f383b5b3a40ae17c')">
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wall Stree</span>
               <div class="min-w-0 flex-1">
-                <a href="https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5?st=pgo9cE&reflink=desktopwebshare_permalink" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  OpenAI融资遭冷遇，千亿估值背后的泡沫拷问
+                <a href="https://www.wsj.com/tech/ai/openai-raises-less-than-half-of-30-billion-target-in-latest-round-91aecdc5" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  OpenAI新轮融资获百亿美元承诺 不及最初目标一半
                 </a>
               </div>
             </div>
@@ -1538,14 +1493,14 @@
               
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
               <div class="flex items-center justify-between gap-1 mb-1">
-                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
-                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
+                <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🚀 场景落地工具</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">898</span>
               </div>
-              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方</h4>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。</p>
+              <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">【blender-ai-mcp-addon】适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claud</h4>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">📈 本周暴涨 +897 ★（总计 ⭐ 975）· 适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claude、Gemini、Ollama、OpenCode。Blender</p>
               <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
-                  <span>📋 一键直达工作流</span>
+                <a href="https://github.com/LiCinCan/blender-ai-mcp-addon?ref=ainewsradar" target="_blank" rel="noopener noreferrer"  class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
+                  <span>立即体验 ↗</span>
                 </a>
               </div>
             </div>
@@ -1569,17 +1524,17 @@
             <div class="space-y-2.5">
               <div class="flex items-center justify-between gap-2">
                 <span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-400/30 font-mono">
-                  算力垄断与裁员挤压
+                  算力集权与端侧主权
                 </span>
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono">
-                  🔥 爆度 9.6
+                  🔥 爆度 9.5
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                微软裁员六万护航千亿AI基建，奥特曼批端侧AI浪费
+                奥特曼批PC本地跑AI是浪费，苹果与开源派反击算力云地租
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                微软向超六万名非核心员工提出离职计划，全力为2026年1700亿美元AI基建腾挪现金流；同日奥特曼公开发难，宣称个人电脑配置昂贵DRAM跑本地端侧AI是95%闲置的资源浪费，力挺算力集中化。这一言论与云端军备竞赛直接引发端侧开发者与劳工群体的强烈反弹。
+                Sam Altman公开发难称个人PC配置DRAM进行本地推理“95%时间在闲置”，算力应全量收归云端以最大化利用率；该言论遭遇激烈反弹，苹果新管理层公开宣称拒绝“为AI而做AI”，开源阵营与杨立昆等人更抨击中心化巨头企图剥夺终端计算自由、构筑云端订阅税。
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1589,23 +1544,23 @@
               <span class="text-xs shrink-0">🎯</span>
               <div class="min-w-0 flex-1">
                 <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">核心突破:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">微软裁员六万护航千亿AI基建，奥特曼批端侧AI浪费 展现前沿工程进展</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">头部大厂加码高额定制算力与万卡集群，抢占下一代智力底座</span>
               </div>
             </div>
 
             <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
               <span class="text-xs shrink-0">⚡</span>
               <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">范式影响:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">激发学界与工程界在架构选型与成本效益上的双向审视</span>
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">生态博弈:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">硬件负债与高昂调用成本迫使下游团队转向高性价比自适应路由</span>
               </div>
             </div>
 
             <div class="p-2 rounded-lg bg-slate-50 dark:bg-slate-950/60 border border-slate-200/80 dark:border-slate-800 flex items-start gap-2 shadow-xs">
               <span class="text-xs shrink-0">📊</span>
               <div class="min-w-0 flex-1">
-                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">落地关注:</span>
-                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">建议在受限沙箱中充分验证性能边界与确定性交付质量</span>
+                <span class="text-[11px] font-bold text-slate-800 dark:text-slate-200 mr-1">指标信号:</span>
+                <span class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">算力军备与商业化 ROI 紧迫性倒挂，行业进入重资产洗牌期</span>
               </div>
             </div>
               </div>
@@ -1632,22 +1587,22 @@
               <!-- Perspective A: Visionary Builders -->
               <div class="p-3 rounded-xl bg-emerald-50/90 dark:bg-emerald-950/30 border border-emerald-200/90 dark:border-emerald-500/30 text-emerald-950 dark:text-emerald-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 超级集群集约派 / 云端效率论者</span>
-                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">超大规模数据中心与超算架构师</span>
+                  <span class="font-bold text-emerald-800 dark:text-emerald-300">🟢 云端集权狂热者</span>
+                  <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono truncate max-w-[140px]">超大规模数据中心与集中式推理服务商</span>
                 </div>
                 <p class="text-xs text-emerald-950 dark:text-emerald-100/90 leading-relaxed font-normal">
-                  “高端高带宽内存属于全球极度紧缺战略资产，端侧95%时间闲置极度低效，唯有集中进云端超算才能在微秒级内支撑全球高并发推理。”
+                  “全球高端显存供应链处于长期硬短缺，多租户共享的云端池化架构才能将算力利用率推向极限，端侧本地推演从能效比上看是巨大的资源挥霍。”
                 </p>
               </div>
 
               <!-- Perspective B: Industry Pragmatists -->
               <div class="p-3 rounded-xl bg-rose-50/90 dark:bg-rose-950/30 border border-rose-200/90 dark:border-rose-500/30 text-rose-950 dark:text-rose-100 space-y-1.5 shadow-xs">
                 <div class="flex items-center justify-between gap-1 text-[11px]">
-                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 端侧自主派 / 人文反垄断阵营</span>
-                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">PC开源开发者与企业伦理研究者</span>
+                  <span class="font-bold text-rose-800 dark:text-rose-300">🔴 终端主权捍卫者</span>
+                  <span class="text-[10px] text-rose-700 dark:text-rose-400 font-mono truncate max-w-[140px]">端侧硬件派、开源极客与隐私学者</span>
                 </div>
                 <p class="text-xs text-rose-950 dark:text-rose-100/90 leading-relaxed font-normal">
-                  “大厂借AI之名裁撤数万员工填补算力无底洞，贬低端侧更是为了推行租金制云垄断、剥夺用户数据主权与离线运行的基本权利。”
+                  “奥特曼的论调本质是剥夺用户对算力与数据的自主权，通过强迫推理上云来建立永久的API税卡，端侧离线智能才是防范数字垄断的护城河。”
                 </p>
               </div>
 
@@ -1680,11 +1635,11 @@
               <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('88b6371ebc44f953')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('6decccf1be370b68')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Comman</span>
               <div class="min-w-0 flex-1">
-                <a href="https://the-decoder.com/microsoft-offers-a-quarter-of-its-workforce-voluntary-severance-while-shielding-ai-critical-teams/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  微软启动超六万人自愿离职，全力为AI基建腾挪现金流
+                <a href="https://commanding-heights.com/#top" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  大模型沦为同质化商品：持久财富流向渠道与支付巨头而非研发实验室
                 </a>
               </div>
             </div>
@@ -1698,11 +1653,11 @@
               </div>
             </div>
 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('d7310112e445dd6c')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wall Stree</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('e28df33bb311f30c')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Wired</span>
               <div class="min-w-0 flex-1">
-                <a href="https://www.wsj.com/finance/the-new-bottleneck-in-americas-ai-build-out-a-shortage-of-cheap-money-0c14c84d?st=7gB5bX&reflink=desktopwebshare_permalink" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  新型算力云遭遇融资寒冬 债券市场关门提高准入门槛
+                <a href="https://www.wired.com/story/i-spent-30-minutes-with-apples-ceo-now-i-know-why-john-ternus-got-the-job/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  苹果新CEO谈AI战略与政商关系
                 </a>
               </div>
             </div>
@@ -1712,11 +1667,11 @@
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://unavatar.io/x/elonmusk" alt="Elon Musk" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://unavatar.io/x/ylecun" alt="Yann LeCun" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Elon Musk</span>
-                  <a href="https://x.com/elonmusk/status/2116587474021691629" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">查看原帖 ↗</a>
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Yann LeCun</span>
+                  <a href="https://x.com/ylecun/status/2116585761105396127" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">查看原帖 ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
@@ -1728,10 +1683,10 @@
             <div class="mt-2.5 p-2.5 rounded-xl bg-gradient-to-r from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900/60 border border-purple-200 dark:border-purple-500/30 hover:border-purple-300 dark:hover:border-purple-400/50 transition-all shadow-xs">
               <div class="flex items-center justify-between gap-1 mb-1">
                 <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 font-mono">🛠️ 实战落地配方</span>
-                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,800★</span>
+                <span class="text-[10px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">+3,200★</span>
               </div>
               <h4 class="text-xs font-bold text-slate-900 dark:text-slate-100 truncate mt-1">Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板</h4>
-              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。</p>
+              <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed mt-1">杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。</p>
               <div class="flex items-center justify-end mt-2 pt-1.5 border-t border-purple-100 dark:border-purple-500/20">
                 <a href="https://github.com" target="_blank" rel="noopener noreferrer" onclick="switchTab('prompts')" class="text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-200 hover:underline inline-flex items-center gap-1">
                   <span>📋 一键直达工作流</span>
@@ -3073,7 +3028,7 @@
               </button>
               <button id="btn-social-mode-viral" onclick="switchSocialViewMode('viral')" class="px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-all flex items-center space-x-2 whitespace-nowrap shrink-0">
                 <span id="txt-social-mode-viral" class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>🔥 24h 热门讨论</span>
-                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">438</span>
+                <span id="badge-count-viral" class="px-2 py-0.5 rounded-full text-[11px] bg-rose-500/20 text-rose-600 dark:text-rose-300 border border-rose-500/30 font-mono font-bold">439</span>
               </button>
             </div>
 
