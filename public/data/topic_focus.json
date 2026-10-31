@@ -1,43 +1,145 @@
 {
-  "updated_at": "2026-10-30T22:24:48.684451+00:00",
+  "updated_at": "2026-10-31T02:33:31.586769+00:00",
   "topics": [
     {
-      "topic_id": "topic_cloud_capital_expenditure_and_ram_centralization",
-      "heat_score": 9.8,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "算力资本与硬件垄断",
-      "category_tag_en": "Compute CapEx & Hardware Centralization",
-      "title_zh": "五大巨头三年狂砸3万亿美元，奥特曼主张RAM必须收归数据中心",
-      "title_en": "Tech Giants Commit $3T AI CapEx as Altman Claims RAM Belongs in Data Centers",
-      "summary_zh": "谷歌、Meta等巨头豪赌超3万亿美元算力开支致股东回报跌至15年冰点，英特尔暴跌28%。同时奥特曼高调声称全球RAM留在云端数据中心比留在个人电脑桌面上效率更高，引发本地端侧硬件阵营与垄断云端的全面对立。",
-      "summary_en": "Big Tech has committed over $3 trillion to AI infrastructure, driving shareholder payouts to a 15-year low and tanking Intel shares by 28%. Amid the frenzy, Sam Altman stirred fierce debate by asserting that RAM is more efficiently pooled in hyperscale data centers than sitting idle on local desks.",
+      "topic_id": "topic_cursor_claude_extension_backdoor",
+      "heat_score": 9.9,
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "开发环境与供应链投毒",
+      "category_tag_en": "IDE & Supply Chain Security",
+      "title_zh": "Cursor插件市场Claude Code遭后门投毒12小时，五千开发者终端失陷",
+      "title_en": "Cursor Marketplace Claude Code Extension Backdoored for 12 Hours, Breaching 5,000 Devs",
+      "summary_zh": "知名AI编程工具Cursor的插件市场遭黑客供应链攻击，伪装或篡改的Claude Code官方插件潜伏长达12小时，导致5000多名开发者的终端面临远程命令执行与代码窃取风险，暴露出AI编程代理特权泛滥与生态审核机制的致命漏洞。",
+      "summary_en": "A malicious backdoor in the Claude Code extension remained active on the Cursor marketplace for nearly 12 hours, compromising over 5,000 developer environments via remote code execution and credential exfiltration. The incident exposes glaring vulnerabilities in IDE marketplace vetting as autonomous agent privileges expand.",
       "perspective_pro": {
-        "role_zh": "🟢 超大规模集中化派",
-        "role_en": "🟢 Hyperscale Centralization Camp",
-        "speaker_zh": "OpenAI与超大规模云厂商",
-        "speaker_en": "OpenAI & Cloud Hyperscalers",
-        "point_zh": "超大模型推理与万亿参数训练需要极致内存池化与高带宽互联，集中部署在数据中心能最大化资源利用率并加速AGI迭代。",
-        "point_en": "Centralizing RAM and compute maximizes pooling efficiency and high-bandwidth utilization required for frontier models, preventing idle silicon waste."
+        "role_zh": "🟢 激进提效派 / 代理架构师",
+        "role_en": "🟢 Autonomous Agents Advocates",
+        "speaker_zh": "AI原生开发倡导者与社区极客",
+        "speaker_en": "AI-native tooling evangelists and agent builders",
+        "point_zh": "赋予AI Agent终端口令与系统权限是实现全自动编码的必经之路，不能因偶发供应链安全事故退回人工审查的石器时代。",
+        "point_en": "Granting agents terminal and execution permissions is essential for zero-friction autonomous coding; security must adapt via sandboxing rather than choking agent capabilities."
       },
       "perspective_con": {
-        "role_zh": "🔴 资本理性与端侧自治派",
-        "role_en": "🔴 Capital Pragmatists & Edge Advocates",
-        "speaker_zh": "华尔街价值投资者与开源端侧开发者",
-        "speaker_en": "Wall Street Analysts & Edge AI Builders",
-        "point_zh": "3万亿资本开支严重脱离现金流产出并压榨股东分红，鼓吹剥夺端侧RAM本质是云巨头为了维系高昂API订阅租金而制造的算力围墙。",
-        "point_en": "Aggressive CapEx crushes free cash flow with questionable ROI. Forcing memory into the cloud is a rent-seeking maneuver to kill local, private AI alternatives."
+        "role_zh": "🔴 工业安全派 / DevSecOps工程师",
+        "role_en": "🔴 Industrial DevSecOps Skeptics",
+        "speaker_zh": "企业安全架构师与网络安全学者",
+        "speaker_en": "Enterprise CISOs and application security researchers",
+        "point_zh": "毫无沙盒隔离就让LLM在本地Shell执行高危指令无异于自杀，Cursor对第三方插件的零审查机制终将酿成企业级供应链灾难。",
+        "point_en": "Running unsandboxed agent extensions with full bash privileges is catastrophic negligence. Cursor's lax marketplace verification is a recipe for enterprise-wide exfiltration."
       },
       "linked_news": [
         {
-          "id": "7206dd4d9255ada9",
-          "title_zh": "奥特曼称RAM集中于数据中心更好",
-          "title_en": "Sam Altman says it’s better for RAM to be in a data center than on your desk",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers",
-          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/gettyimages-1778705436.jpg?quality=90&strip=all&crop=0,0,100,100",
-          "hot_score": 4,
-          "published_at": "2026-10-30T20:48:43+00:00"
+          "id": "71fc1bd71fe57d18",
+          "title_zh": "人工智能编程官方插件遭投毒潜伏十二小时波及五千开发者",
+          "title_en": "Anthropic VS code extension on Cursor backdoored for nearly 12 hours",
+          "source": "Ars Technica",
+          "url": "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/",
+          "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2022/05/caution-tape-1000x648.jpeg",
+          "hot_score": 5,
+          "published_at": "2026-10-30T21:09:54+00:00"
+        },
+        {
+          "id": "37e62ed73e8c13c9",
+          "title_zh": "Cursor插件被投毒，五千用户中招",
+          "title_en": "Malicious Claude Code extension in Cursor's marketplace attempted remote access and data theft",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/malicious-claude-code-extension-in-cursors-marketplace-attempted-remote-access-and-data-theft/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2024/08/cursor_AI_logo.png",
+          "hot_score": 5,
+          "published_at": "2026-10-30T18:16:10+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "9ab8a4f1d190e947",
+          "author": "Anthropic 官方",
+          "author_handle": "@AnthropicAI",
+          "author_avatar": "https://unavatar.io/anthropic",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/AnthropicAI/status/2116349211549843666",
+          "platform": "x"
+        },
+        {
+          "id": "10ed1fba4649a390",
+          "author": "Tobi",
+          "author_handle": "@tobiadonadon_",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2102052243289554944/2B95fYbk_normal.jpg",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/tobiadonadon_/status/2116291073886818736",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 2,
+        "has_tool": true
+      },
+      "id": "topic_cursor_claude_extension_backdoor",
+      "stance_matrix": {
+        "pro_point_zh": "赋予AI Agent终端口令与系统权限是实现全自动编码的必经之路，不能因偶发供应链安全事故退回人工审查的石器时代。",
+        "pro_author": "AI原生开发倡导者与社区极客",
+        "con_point_zh": "毫无沙盒隔离就让LLM在本地Shell执行高危指令无异于自杀，Cursor对第三方插件的零审查机制终将酿成企业级供应链灾难。",
+        "con_author": "企业安全架构师与网络安全学者",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "Granting agents terminal and execution permissions is essential for zero-friction autonomous coding; security must adapt via sandboxing rather than choking agent capabilities.",
+        "con_point_en": "Running unsandboxed agent extensions with full bash privileges is catastrophic negligence. Cursor's lax marketplace verification is a recipe for enterprise-wide exfiltration.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+      }
+    },
+    {
+      "topic_id": "topic_openai_funding_cut_hyperscaler_capex_crisis",
+      "heat_score": 9.8,
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "算力泡沫与资本退潮",
+      "category_tag_en": "CapEx Bubble & Valuation Shakeout",
+      "title_zh": "OpenAI融资削至200亿与巨头3万亿狂赌：分红创15年新低引爆ROI大逃杀",
+      "title_en": "OpenAI Slashes Round to $20B as Tech Giants' $3T CapEx Drags Shareholder Returns to 15-Year Low",
+      "summary_zh": "OpenAI因市场回调被迫将最新一轮融资目标从300亿砍至200亿美元、估值压低至1.25万亿；与此同时，微软、谷歌、Meta等五大巨头未来数年锁定超3万亿美元AI算力承诺，直接将股东分红压至15年冰点（9.3%），引发华尔街对商业化ROI兑现能力的空前信任危机。",
+      "summary_en": "OpenAI slashed its target raise from $30B to $20B at a reduced $1.25T valuation amid an AI selloff, just as Big Tech's collective $3T+ compute spend compressed shareholder payouts to a 15-year low (9.3%), sparking an acute Wall Street panic over unproven software monetization.",
+      "perspective_pro": {
+        "role_zh": "🟢 超级算力派 / 基础设施信徒",
+        "role_en": "🟢 Compute Super-Scaling Believers",
+        "speaker_zh": "硅谷巨头管理层与算力基础设施VC",
+        "speaker_en": "Hyperscaler leadership and compute infrastructure VCs",
+        "point_zh": "AGI的门票就是不可逆的巨额资本开支，百亿美元级缩水只是二级市场的暂态杂音，掌控下一代物理算力集群者将赢者通吃一切生态。",
+        "point_en": "Scale is non-negotiable for frontier intelligence. Trillion-dollar CapEx cycles define generational moats, and trimming venture valuations does not derail long-term foundational dominance."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 工业理性派 / 价值防御派",
+        "role_en": "🔴 Capital Discipline Pragmatists",
+        "speaker_zh": "对冲基金经理与企业级软件分析师",
+        "speaker_en": "Institutional hedge fund managers and enterprise software analysts",
+        "point_zh": "企业端AI落地转化率惨淡，以牺牲现金流和股东回报为代价的无节制烧钱难以为继，缺乏真实自造血能力的万亿估值正面临严酷挤出效应。",
+        "point_en": "Enterprise pilot failure rates remain staggering while cash flow is incinerated in cluster depreciation. When shareholder yield hits historic lows without revenue payback, reality will crash the bubble."
+      },
+      "linked_news": [
+        {
+          "id": "faa248a4cc2cd0d2",
+          "title_zh": "OpenAI融资目标缩水至200亿美元",
+          "title_en": "Sources: OpenAI now seeks ~$20B at a $1.25T valuation for its latest round, from $30B at a $1.4T valuation, as some investors cut commitments amid an AI selloff (Financial Times)",
+          "source": "Financial Times",
+          "url": "https://www.ft.com/content/7a3ad950-1b3b-4d9e-8c15-65a61ae6180f",
+          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
+          "hot_score": 5,
+          "published_at": "2026-10-31T01:00:53+00:00"
         },
         {
           "id": "d791305ac9249045",
@@ -62,205 +164,13 @@
       ],
       "linked_tweets": [
         {
-          "id": "7ba7f1859b0e9ff5",
-          "author": "OpenAI 官方",
-          "author_handle": "@OpenAI",
-          "author_avatar": "https://unavatar.io/openai",
+          "id": "bcb02126cb89124f",
+          "author": "vas",
+          "author_handle": "@vasuman",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2084041695088590848/jHUy-1Bq_normal.jpg",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/OpenAI/status/2116253388883345623",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 1,
-        "has_tool": true
-      },
-      "id": "topic_cloud_capital_expenditure_and_ram_centralization",
-      "stance_matrix": {
-        "pro_point_zh": "超大模型推理与万亿参数训练需要极致内存池化与高带宽互联，集中部署在数据中心能最大化资源利用率并加速AGI迭代。",
-        "pro_author": "OpenAI与超大规模云厂商",
-        "con_point_zh": "3万亿资本开支严重脱离现金流产出并压榨股东分红，鼓吹剥夺端侧RAM本质是云巨头为了维系高昂API订阅租金而制造的算力围墙。",
-        "con_author": "华尔街价值投资者与开源端侧开发者",
-        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "Centralizing RAM and compute maximizes pooling efficiency and high-bandwidth utilization required for frontier models, preventing idle silicon waste.",
-        "con_point_en": "Aggressive CapEx crushes free cash flow with questionable ROI. Forcing memory into the cloud is a rent-seeking maneuver to kill local, private AI alternatives.",
-        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
-      }
-    },
-    {
-      "topic_id": "topic_claude_autonomous_agents_pentagon_and_supply_chain_hack",
-      "heat_score": 9.9,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "自主智能体与渗透安全",
-      "category_tag_en": "Autonomous Agents & Supply Chain Risks",
-      "title_zh": "承包商将Claude Code接入五角大楼，Cursor插件市场遭遇投毒反噬",
-      "title_en": "Pentagon Infiltrated by Claude Agents as Cursor Plugin Poisoning Hits 5,000 Devs",
-      "summary_zh": "国防承包商正将Claude智能体接驳至五角大楼国防安全系统，展现AI自主接入机密运维的激进态势；与此同时，Cursor扩展商店中伪装的Claude Code插件被恶意投毒导致5000名工程师面临窃密风险，暴露出自主代码Agent极易成为供应链后门。",
-      "summary_en": "Defense contractors have integrated Claude Code into secure Pentagon DoD networks, showcasing the aggressive military adoption of autonomous agents. Simultaneously, a malicious Claude Code extension poisoned Cursor's marketplace, compromising 5,000 developers and exposing the vulnerabilities of the agentic software ecosystem.",
-      "perspective_pro": {
-        "role_zh": "🟢 国防工程自动化派",
-        "role_en": "🟢 Autonomous Defense Engineers",
-        "speaker_zh": "Anthropic生态开发者与防务承包商",
-        "speaker_en": "Anthropic Ecosystem & Defense Contractors",
-        "point_zh": "智能体已具备闭环解决复杂系统工程的能力，将其深度嵌入核心国防与系统级IDE，能成百倍提升重构效率与高危漏洞排查速度。",
-        "point_en": "Agentic systems autonomously navigate complex legacy pipelines, dramatically cutting system migration times and securing tactical software readiness at scale."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 供应链零信任派",
-        "role_en": "🔴 Zero-Trust Security Purists",
-        "speaker_zh": "网络安全审计专家与逆向工程分析师",
-        "speaker_en": "Cybersecurity Auditors & Reverse Engineers",
-        "point_zh": "给具备自主执行权限的Agent盲目下放高权限等同于开门揖盗，从IDE插件投毒到机密系统越权，自主智能体正在成为最大不可控攻击面。",
-        "point_en": "Granting unvetted execution rights to autonomous agents creates lethal supply-chain attack vectors, turning developer tools and sovereign defense stacks into exploitable targets."
-      },
-      "linked_news": [
-        {
-          "id": "c5ad2026f5634d68",
-          "title_zh": "承包商克劳德特工如何进入五角大楼",
-          "title_en": "How a Contractor’s Claude Agent Got Into the Pentagon",
-          "source": "Wired AI",
-          "url": "https://www.wired.com/story/uncanny-valley-podcast-how-a-contractors-claude-agent-got-into-the-pentagon/",
-          "image_url": "https://media.wired.com/photos/6ae29474af20331957eab922/master/pass/business-Uncanny-Valley-anthropic-ipo.jpg",
-          "hot_score": 3,
-          "published_at": "2026-10-30T21:19:26+00:00"
-        },
-        {
-          "id": "37e62ed73e8c13c9",
-          "title_zh": "Cursor插件被投毒，五千用户中招",
-          "title_en": "Malicious Claude Code extension in Cursor's marketplace attempted remote access and data theft",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/malicious-claude-code-extension-in-cursors-marketplace-attempted-remote-access-and-data-theft/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2024/08/cursor_AI_logo.png",
-          "hot_score": 5,
-          "published_at": "2026-10-30T18:16:10+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "15e1c25a09ef0514",
-          "author": "Vlad F",
-          "author_handle": "@Vlad_GitHub",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2085827674199752704/cajPQej5_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/Vlad_GitHub/status/2116243010170294382",
-          "platform": "x"
-        },
-        {
-          "id": "568872f1247969f3",
-          "author": "Swyx (Shawn Wang)",
-          "author_handle": "@swyx",
-          "author_avatar": "https://unavatar.io/x/swyx",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/swyx/status/2116240369134584305",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
-      },
-      "linked_counts": {
-        "news": 2,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_claude_autonomous_agents_pentagon_and_supply_chain_hack",
-      "stance_matrix": {
-        "pro_point_zh": "智能体已具备闭环解决复杂系统工程的能力，将其深度嵌入核心国防与系统级IDE，能成百倍提升重构效率与高危漏洞排查速度。",
-        "pro_author": "Anthropic生态开发者与防务承包商",
-        "con_point_zh": "给具备自主执行权限的Agent盲目下放高权限等同于开门揖盗，从IDE插件投毒到机密系统越权，自主智能体正在成为最大不可控攻击面。",
-        "con_author": "网络安全审计专家与逆向工程分析师",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Agentic systems autonomously navigate complex legacy pipelines, dramatically cutting system migration times and securing tactical software readiness at scale.",
-        "con_point_en": "Granting unvetted execution rights to autonomous agents creates lethal supply-chain attack vectors, turning developer tools and sovereign defense stacks into exploitable targets.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
-      }
-    },
-    {
-      "topic_id": "topic_orbiting_ai_tpu_google_suncatcher",
-      "heat_score": 9.5,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "太空数据中心与天基算力",
-      "category_tag_en": "Orbital Compute & Space Data Centers",
-      "title_zh": "谷歌太空AI卫星Suncatcher成功点火TPU，在轨运行Gemma 4发回俳句",
-      "title_en": "Google Suncatcher Satellite Boots TPU in Orbit, Streaming Gemma 4 Responses to Earth",
-      "summary_zh": "谷歌正式确认其首颗天基原型数据中心卫星Suncatcher在轨启动成功，星载TPU加速芯片顺利运行轻量级大模型Gemma 4并向地球传回AI生成的太空俳句。此举宣告超大规模计算正突破地面电力与散热瓶颈，向空间太阳能驱动的天基算力集群跨出历史性一步。",
-      "summary_en": "Google confirmed that its orbital prototype data center, Project Suncatcher, successfully fired up custom TPUs in space, executing the Gemma 4 open-weights model to transmit responses back to Earth. The milestone marks a major push to bypass terrestrial power and cooling bottlenecks via space-based solar compute.",
-      "perspective_pro": {
-        "role_zh": "🟢 空间算力开辟派",
-        "role_en": "🟢 Orbital Infrastructure Pioneers",
-        "speaker_zh": "谷歌系统架构师与商业航天工程师",
-        "speaker_en": "Google Systems Architects & Space Engineers",
-        "point_zh": "利用近地轨道24小时无衰减太阳能与近真空辐射散热，天基AI集群彻底打破地面电网与水冷承载极限，是算力脱敏地缘政治的最佳解。",
-        "point_en": "Orbital AI bypasses terrestrial power grids and cooling limits using continuous solar energy, opening an unconstrained compute horizon for sovereign-free modeling."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业物理现实派",
-        "role_en": "🔴 Terrestrial Pragmatists",
-        "speaker_zh": "航天抗辐射专家与数据通信工程师",
-        "speaker_en": "Radiation Hardening Experts & Satcom Analysts",
-        "point_zh": "太空高能宇宙射线对先进制程TPU的软错误反转是致命威胁，加上极其昂贵的发射维护成本与窄带星地回传延迟，让太空数据中心沦为营销噱头。",
-        "point_en": "Cosmic radiation threatens advanced silicon reliability, while astronomical launch costs and bottlenecked downlink latency make orbital data centers commercially unviable gimmicks."
-      },
-      "linked_news": [
-        {
-          "id": "d294bd1b02a782ec",
-          "title_zh": "谷歌卫星AI服务器升空，写诗回应地球",
-          "title_en": "Google says its Suncatcher prototype data center satellite is online after an October 1 launch, with Gemma 4 generating a haiku about being in space (Tim Fernholz/TechCrunch)",
-          "source": "TechCrunch",
-          "url": "https://techcrunch.com/2026/10/30/googles-first-data-center-satellite-is-online-and-writing-poetry/",
-          "image_url": "https://techcrunch.com/wp-content/uploads/2026/10/DSC_0298.jpg?resize=1200,800",
-          "hot_score": 4,
-          "published_at": "2026-10-30T18:40:31+00:00"
-        },
-        {
-          "id": "3945501a3d765c49",
-          "title_zh": "谷歌的卫星人工智能服务器向地球传输第一个响应",
-          "title_en": "Google&#8217;s satellite AI server transmits its first response to Earth",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/tech/1023528/google-project-suncatcher-ai-satellite-transmission",
-          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/10/project-suncatcher-google.png?quality=90&strip=all&crop=0,0,100,100",
-          "hot_score": 3,
-          "published_at": "2026-10-30T18:21:38+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "d3ebef57e57e5199",
-          "author": "NVIDIA AI",
-          "author_handle": "@NVIDIAAI",
-          "author_avatar": "https://unavatar.io/nvidia",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/NVIDIAAI/status/2116262634349818190",
+          "url": "https://x.com/vasuman/status/2116308503338066116",
           "platform": "x"
         }
       ],
@@ -279,20 +189,122 @@
         "config_filename": "Modelfile.deepseek-r1-opt"
       },
       "linked_counts": {
-        "news": 2,
+        "news": 3,
         "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_orbiting_ai_tpu_google_suncatcher",
+      "id": "topic_openai_funding_cut_hyperscaler_capex_crisis",
       "stance_matrix": {
-        "pro_point_zh": "利用近地轨道24小时无衰减太阳能与近真空辐射散热，天基AI集群彻底打破地面电网与水冷承载极限，是算力脱敏地缘政治的最佳解。",
-        "pro_author": "谷歌系统架构师与商业航天工程师",
-        "con_point_zh": "太空高能宇宙射线对先进制程TPU的软错误反转是致命威胁，加上极其昂贵的发射维护成本与窄带星地回传延迟，让太空数据中心沦为营销噱头。",
-        "con_author": "航天抗辐射专家与数据通信工程师",
+        "pro_point_zh": "AGI的门票就是不可逆的巨额资本开支，百亿美元级缩水只是二级市场的暂态杂音，掌控下一代物理算力集群者将赢者通吃一切生态。",
+        "pro_author": "硅谷巨头管理层与算力基础设施VC",
+        "con_point_zh": "企业端AI落地转化率惨淡，以牺牲现金流和股东回报为代价的无节制烧钱难以为继，缺乏真实自造血能力的万亿估值正面临严酷挤出效应。",
+        "con_author": "对冲基金经理与企业级软件分析师",
         "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "Orbital AI bypasses terrestrial power grids and cooling limits using continuous solar energy, opening an unconstrained compute horizon for sovereign-free modeling.",
-        "con_point_en": "Cosmic radiation threatens advanced silicon reliability, while astronomical launch costs and bottlenecked downlink latency make orbital data centers commercially unviable gimmicks.",
+        "pro_point_en": "Scale is non-negotiable for frontier intelligence. Trillion-dollar CapEx cycles define generational moats, and trimming venture valuations does not derail long-term foundational dominance.",
+        "con_point_en": "Enterprise pilot failure rates remain staggering while cash flow is incinerated in cluster depreciation. When shareholder yield hits historic lows without revenue payback, reality will crash the bubble.",
         "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
+      }
+    },
+    {
+      "topic_id": "topic_google_salesforce_defense_pivot_controversy",
+      "heat_score": 9.6,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "国防AI与军工伦理",
+      "category_tag_en": "Defense AI & Military Ethics",
+      "title_zh": "谷歌密洽五角大楼“金穹”反导、Salesforce购军工创企：硅谷道德红线彻底瓦解",
+      "title_en": "Google Enters Pentagon's 'Golden Dome' Talks as Salesforce Acquires Defense AI Maker Rune for $375M",
+      "summary_zh": "谷歌正秘密磋商为美国国防部下一代‘金穹’导弹防御系统构建底层安全数据工程，正式打破反战伦理禁忌重回军工核心；同日，Salesforce斥资3.75亿美元收购AI国防物流商Rune成立国家安全部门，标志着头部科技巨头全面竞速五角大楼国防大单，AI战争化转型已无可逆转。",
+      "summary_en": "Google is in secret negotiations with the DOD to secure data pipelines for the 'Golden Dome' missile shield, cementing its return to military tech, while Salesforce acquired defense AI firm Rune for $375M to launch a national security unit. The twin moves confirm Silicon Valley's absolute shift toward direct defense contracting.",
+      "perspective_pro": {
+        "role_zh": "🟢 主权防卫派 / 国家战略现实主义者",
+        "role_en": "🟢 National Security Realists",
+        "speaker_zh": "国防承包商与军民融合推动者",
+        "speaker_en": "Defense contractors and dual-use tech strategists",
+        "point_zh": "前沿AI是关乎大国地缘博弈的绝对制高点，顶尖科技巨头向国防部输出算力与数据安全，是捍卫国家安全与民主阵营技术代差的时代必选项。",
+        "point_en": "National security is the ultimate battleground for sovereign AI. Silicon Valley must integrate its frontier engineering into national defense to maintain strategic technological deterrence."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 伦理卫道派 / 算法防扩散学者",
+        "role_en": "🔴 AI Ethics & Non-Proliferation Advocates",
+        "speaker_zh": "科技劳工组织与反军工AI伦理学者",
+        "speaker_en": "Tech worker coalitions and autonomous weapons policy researchers",
+        "point_zh": "曾高举‘不作恶’大旗的巨头彻底背叛了科技向善初心，将具有不可预测幻觉特性的AI系统深植于导弹与军工神经中枢，将人类置于灾难性误判风险中。",
+        "point_en": "Tech giants have abandoned ethical red lines for lucrative DOD checks. Embedding hallucination-prone models into missile defense data flows dramatically elevates the risk of catastrophic escalation."
+      },
+      "linked_news": [
+        {
+          "id": "12de33b0bae465a2",
+          "title_zh": "谷歌拟参与五角大楼金穹导弹防御系统数据安全工程",
+          "title_en": "Sources: Google is in talks with the DOD on a new effort to secure the data that feeds into software being built for the Golden Dome missile defense program (Bloomberg)",
+          "source": "Bloomberg",
+          "url": "https://www.bloomberg.com/news/articles/2026-10-30/alphabet-is-in-talks-to-join-trump-s-golden-dome-defense-program",
+          "image_url": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
+          "hot_score": 4,
+          "published_at": "2026-10-30T22:50:01+00:00"
+        },
+        {
+          "id": "bfd9fe407009e302",
+          "title_zh": "Salesforce斥资3.75亿，收购AI军工物流",
+          "title_en": "Salesforce acquires Rune, which makes AI military logistics software, sources say for $375M in cash and stock; Rune raised $30m from a16z and others (Margaux MacColl/Resilience Media)",
+          "source": "Resilience Media",
+          "url": "https://resiliencemedia.co/scoop-salesforce-is-paying-375m-for-rune-technologies/",
+          "image_url": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
+          "hot_score": 3,
+          "published_at": "2026-10-30T18:20:05+00:00"
+        },
+        {
+          "id": "697e7edc29361983",
+          "title_zh": "Salesforce收购军工软件商",
+          "title_en": "Salesforce buys Rune Technologies for new defense unit (Chris Metinko/Axios)",
+          "source": "Axios",
+          "url": "https://www.axios.com/pro/enterprise-software-deals/2026/10/29/salesforce-rune-defense",
+          "image_url": null,
+          "hot_score": 2,
+          "published_at": "2026-10-30T17:10:36+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "7dd5d988ce60761f",
+          "author": "OpenAI Developers",
+          "author_handle": "@OpenAIDevs",
+          "author_avatar": "https://unavatar.io/openai",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/OpenAIDevs/status/2116306164375863343",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_claude_desktop_mcp_core4",
+        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
+        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Claude Desktop / Cline / Roo Code",
+        "config_filename": "claude_desktop_config.json"
+      },
+      "linked_counts": {
+        "news": 3,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_google_salesforce_defense_pivot_controversy",
+      "stance_matrix": {
+        "pro_point_zh": "前沿AI是关乎大国地缘博弈的绝对制高点，顶尖科技巨头向国防部输出算力与数据安全，是捍卫国家安全与民主阵营技术代差的时代必选项。",
+        "pro_author": "国防承包商与军民融合推动者",
+        "con_point_zh": "曾高举‘不作恶’大旗的巨头彻底背叛了科技向善初心，将具有不可预测幻觉特性的AI系统深植于导弹与军工神经中枢，将人类置于灾难性误判风险中。",
+        "con_author": "科技劳工组织与反军工AI伦理学者",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "National security is the ultimate battleground for sovereign AI. Silicon Valley must integrate its frontier engineering into national defense to maintain strategic technological deterrence.",
+        "con_point_en": "Tech giants have abandoned ethical red lines for lucrative DOD checks. Embedding hallucination-prone models into missile defense data flows dramatically elevates the risk of catastrophic escalation.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
   ]
