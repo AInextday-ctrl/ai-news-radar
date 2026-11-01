@@ -1,256 +1,32 @@
 {
-  "updated_at": "2026-11-01T07:39:58.107475+00:00",
+  "updated_at": "2026-11-01T11:48:23.391607+00:00",
   "topics": [
     {
-      "topic_id": "topic_math_reasoning_scrutiny",
-      "heat_score": 9.8,
+      "topic_id": "topic_deepseek_super_agent_vs_claude",
+      "heat_score": 9.9,
       "badge_zh": "🔥 24h 领跑爆点",
       "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "学术争议与证明边界",
-      "category_tag_en": "Academic Debate & Rigor",
-      "title_zh": "奥特曼称同情数学家但绝不收手：更多AI成果还在路上",
-      "title_en": "Sam Altman sympathizes with mathematicians, but says OpenAI’s math onslaught won’t stop",
-      "summary_zh": "奥特曼回应AI成果压垮数学家一事，称虽抱有同情但绝不减速，并暗示储备了更多推导成果等待发布",
-      "summary_en": "During a podcast appearance, OpenAI CEO Sam Altman addressed the overwhelming influx of AI-generated proofs flooding the mathematics community, stating that while he sympathizes with researchers struggling to verify the barrage, OpenAI has no intention of slowing down. He further revealed that the company possesses a stockpile of new discoveries waiting to be released, defending the onslaught under the banner of advancing humanity's understanding of the universe.",
+      "category_tag_zh": "开源智能体突围",
+      "category_tag_en": "Open-Source Coding Agents",
+      "title_zh": "DeepSeek突袭开源主动式Super-Agent，正面对决Claude Code抢占编程入口",
+      "title_en": "DeepSeek Open-Sources Proactive 'Super-Agent' to Directly Challenge Claude Code",
+      "summary_zh": "DeepSeek正式开源研究原型Super-Agent，颠覆传统等待指令的问答模式，支持在开发群聊中实时感知问题并主动提供补丁，正面对标Anthropic的Claude生态。与此同时，谷歌等巨头实测显示智能体在长时复杂流中极易失误，主动式介入的实用性与噪音干扰引发业界激烈交锋。",
+      "summary_en": "DeepSeek open-sourced its proactive coding prototype 'Super-Agent' to monitor group chats and inject code solutions without prompting, directly taking on Anthropic's Claude Code ecosystem. However, recent benchmarks from Google show video and autonomous agents consistently fail in long-horizon tasks, sparking fierce debate over signal vs. noise in proactive workflows.",
       "perspective_pro": {
-        "role_zh": "🟢 AGI加速派 / 前沿研究员",
-        "role_en": "🟢 AGI Pioneers & Researchers",
-        "speaker_zh": "大模型推理架构师与前沿实验室团队",
-        "speaker_en": "Frontier Lab Architects & Researchers",
-        "point_zh": "大模型在长程推理与百年数学猜想探索中迈出了历史性一步，AI自探索与符号演绎展现了全新科学发现范式。",
-        "point_en": "Extended reasoning represents a historic step in exploring mathematical conjectures, opening a new paradigm for scientific discovery."
+        "role_zh": "🟢 开源自主派",
+        "role_en": "🟢 Open-Source Proaction Camp",
+        "speaker_zh": "DeepSeek开源核心开发者与极客社区",
+        "speaker_en": "DeepSeek Open-Source Contributors & Hacker Community",
+        "point_zh": "被动输入Prompt早已落伍，自主常驻并洞察语境的主动式Agent才是软件工程进化的终局形态。",
+        "point_en": "Passive prompting is dead; proactive agents that live in context and autonomously fix code represent the true end-state of software development."
       },
       "perspective_con": {
-        "role_zh": "🔴 严谨学界 / 理论数学家",
-        "role_en": "🔴 Theoretical Rigor & Academic Critics",
-        "speaker_zh": "数学家与形式化验证学者",
-        "speaker_en": "Mathematicians & Formal Verification Experts",
-        "point_zh": "论文正文存在大量逻辑断层与形式主义幻觉，用概率自相关拼凑严谨数理证明极具欺骗性，缺乏确定性严密结论。",
-        "point_en": "The submission exhibits critical logical disconnects and formal hallucinations, failing to satisfy the rigorous standards of mathematical proof."
-      },
-      "linked_news": [
-        {
-          "id": "83358de0c61d3c37",
-          "title_zh": "奥特曼称同情数学家但绝不收手：更多AI成果还在路上",
-          "title_en": "Sam Altman sympathizes with mathematicians, but says OpenAI’s math onslaught won’t stop",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1023054/altman-cheeky-pint-ai-math-interview",
-          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/10/Vrg_illo_Sam_Altman_stock_trial.jpg?quality=90&strip=all&crop=0,0,100,100",
-          "hot_score": 4,
-          "published_at": "2026-10-30T13:01:14+00:00"
-        },
-        {
-          "id": "3c417b71eb0b4a23",
-          "title_zh": "OpenAI强行训练敏感数据遭质疑",
-          "title_en": "OpenAI plans to train models on Daybreak Blue cybersecurity session data that was previously off-limits",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/openai-plans-to-train-models-on-daybreak-blue-cybersecurity-session-data-that-was-previously-off-limits/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/10/openai.png",
-          "hot_score": 5,
-          "published_at": "2026-10-31T16:38:37+00:00"
-        },
-        {
-          "id": "7206dd4d9255ada9",
-          "title_zh": "奥特曼称RAM集中于数据中心更好",
-          "title_en": "Sam Altman says it’s better for RAM to be in a data center than on your desk",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers",
-          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/04/gettyimages-1778705436.jpg?quality=90&strip=all&crop=0,0,100,100",
-          "hot_score": 4,
-          "published_at": "2026-10-30T20:48:43+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "fd4f4c71a8c8957e",
-          "author": "Alex Jones",
-          "author_handle": "@RealAlexJones",
-          "author_avatar": "https://pbs.twimg.com/profile_images/798632247762948096/ycGYVWvr_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/RealAlexJones/status/2116730862465151392",
-          "platform": "x"
-        },
-        {
-          "id": "1b96df861c023964",
-          "author": "Mgoes (bio/acc 🤖💉)",
-          "author_handle": "@m_goes_distance",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1919598657047035904/BYOefMqX_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/m_goes_distance/status/2116575936695128380",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_rag_anti_hallucination_pipeline",
-        "name": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
-        "desc_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
-        "desc_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
-        "config_filename": "rag_pipeline_config.json"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_math_reasoning_scrutiny",
-      "stance_matrix": {
-        "pro_point_zh": "大模型在长程推理与百年数学猜想探索中迈出了历史性一步，AI自探索与符号演绎展现了全新科学发现范式。",
-        "pro_author": "大模型推理架构师与前沿实验室团队",
-        "con_point_zh": "论文正文存在大量逻辑断层与形式主义幻觉，用概率自相关拼凑严谨数理证明极具欺骗性，缺乏确定性严密结论。",
-        "con_author": "数学家与形式化验证学者",
-        "action_advice_zh": "建议在严密数理推导或核心代码构建中搭配确定性单元测试或形式化验证工具，切忌单盲采信长推理链。",
-        "pro_point_en": "Extended reasoning represents a historic step in exploring mathematical conjectures, opening a new paradigm for scientific discovery.",
-        "con_point_en": "The submission exhibits critical logical disconnects and formal hallucinations, failing to satisfy the rigorous standards of mathematical proof.",
-        "action_advice_en": "Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations."
-      }
-    },
-    {
-      "topic_id": "topic_cloud_capex_vendor_war",
-      "heat_score": 9.6,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "算力军备与商业博弈",
-      "category_tag_en": "Compute Arms Race & Market War",
-      "title_zh": "芯片新秀Powerlattice融资8600万",
-      "title_en": "Filing: Vancouver, WA-based Powerlattice, which makes a power delivery chiplet to reduce AI compute power needs by 50%+, raised $86M, after raising $31M in 2025 (Kurt Schlosser/GeekWire)",
-      "summary_zh": "致力于将AI计算能效提升50%以上的Powerlattice完成8600万美元新一轮融资",
-      "summary_en": "Powerlattice, a Washington-based startup, raised $86 million for its power delivery chiplets that claim to cut AI compute energy consumption by 50%. This follows a $31 million round earlier in 2025, highlighting investor urgency for energy-efficient AI hardware.",
-      "perspective_pro": {
-        "role_zh": "🟢 资本军备派 / 算力豪赌者",
-        "role_en": "🟢 Capital Scale & Infrastructure Leads",
-        "speaker_zh": "前沿模型实验室与超算集群操盘手",
-        "speaker_en": "Frontier Labs & Hyper-Scale Cluster Leads",
-        "point_zh": "下一代超级智力必须依靠超大规模自研与定制算力集群，以高息债务抢占万卡算力底座是决胜AGI的必然代价值得豪赌。",
-        "point_en": "Next-gen frontier intelligence requires astronomical dedicated compute; leveraging debt for massive TPU clusters is the necessary entry fee for AGI."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业实用派 / 下游开发者",
-        "role_en": "🔴 Pragmatic Developers & Downstream Customers",
-        "speaker_zh": "开发者工具创企 CEO 与企业架构师",
-        "speaker_en": "Startup Founders & Enterprise Architects",
-        "point_zh": "高昂的硬件负债与高昂的 API 定价正在严重反噬生态，商业客户只为性价比买单，过度烧钱的巨头终将被客户用脚投票。",
-        "point_en": "Astronomical debt and exorbitant API costs are alienating real customers. Startups and enterprise developers will swiftly switch to high-ROI alternatives."
-      },
-      "linked_news": [
-        {
-          "id": "c8139ec71c67c080",
-          "title_zh": "芯片新秀Powerlattice融资8600万",
-          "title_en": "Filing: Vancouver, WA-based Powerlattice, which makes a power delivery chiplet to reduce AI compute power needs by 50%+, raised $86M, after raising $31M in 2025 (Kurt Schlosser/GeekWire)",
-          "source": "GeekWire",
-          "url": "https://www.geekwire.com/2026/filing-chip-startup-powerlattice-raises-86m-to-ease-ais-power-crunch/",
-          "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 3,
-          "published_at": "2026-10-30T22:05:00+00:00"
-        },
-        {
-          "id": "25bfd5d7891aca1b",
-          "title_zh": "深度求索融资翻倍以应对高昂算力成本",
-          "title_en": "Sources: DeepSeek doubled its latest round's size due to surging black market Nvidia Blackwell chip prices, with Chinese state-owned investors representing 27% (The Information)",
-          "source": "The Information",
-          "url": "https://www.theinformation.com/articles/behind-deepseeks-16-billion-funding-chinese-tech-titans-state-players",
-          "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 5,
-          "published_at": "2026-10-30T03:35:00+00:00"
-        },
-        {
-          "id": "e42c95e5dd5d54ca",
-          "title_zh": "工业AI优化软件商完成6600万美元A轮融资",
-          "title_en": "Lumaril, which develops AI software for optimizing industrial production by connecting to existing control systems, raised a $66M Series A at a $400M valuation (Sarah Klearman/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/pro/venture-capital/ai-startup-lumaril-wants-to-make-factories-the-best-version-of-themselves-b65ea83d",
-          "image_url": "https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 3,
-          "published_at": "2026-11-01T05:35:00+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "63b8fef00e47243e",
-          "author": "Divyanshi",
-          "author_handle": "@Divyyanshishrma",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1729503195032911872/hGu7wTlq_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/Divyyanshishrma/status/2116544878113091618",
-          "platform": "x"
-        },
-        {
-          "id": "412c66169e9004dc",
-          "author": "mentalium",
-          "author_handle": "@mentalium_",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2085340122493415424/aqTuTOfL_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/mentalium_/status/2116523535472427520",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_cloud_capex_vendor_war",
-      "stance_matrix": {
-        "pro_point_zh": "下一代超级智力必须依靠超大规模自研与定制算力集群，以高息债务抢占万卡算力底座是决胜AGI的必然代价值得豪赌。",
-        "pro_author": "前沿模型实验室与超算集群操盘手",
-        "con_point_zh": "高昂的硬件负债与高昂的 API 定价正在严重反噬生态，商业客户只为性价比买单，过度烧钱的巨头终将被客户用脚投票。",
-        "con_author": "开发者工具创企 CEO 与企业架构师",
-        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "Next-gen frontier intelligence requires astronomical dedicated compute; leveraging debt for massive TPU clusters is the necessary entry fee for AGI.",
-        "con_point_en": "Astronomical debt and exorbitant API costs are alienating real customers. Startups and enterprise developers will swiftly switch to high-ROI alternatives.",
-        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
-      }
-    },
-    {
-      "topic_id": "topic_open_weights_and_video",
-      "heat_score": 9.4,
-      "badge_zh": "💡 开源与视效落地潮",
-      "badge_en": "💡 Open Weights & Visual Frontier",
-      "category_tag_zh": "模型突破与开源降本",
-      "category_tag_en": "Open Source & Visual Breakthroughs",
-      "title_zh": "深度求索开源Super-Agent主动式编程助手",
-      "title_en": "DeepSeek open sources Super-Agent as a research prototype, a proactive coding agent it says can monitor group chats for coding issues and suggest solutions (Debby Wu/Bloomberg)",
-      "summary_zh": "DeepSeek开源研究原型Super-Agent，旨在监控群聊并主动提供编程解决方案",
-      "summary_en": "DeepSeek has open-sourced Super-Agent as a research prototype, a proactive coding agent designed to monitor group chats for coding issues and suggest solutions. This release stems from the company's continuous exploration of more autonomous AI agent paradigms in vertical software development scenarios.",
-      "perspective_pro": {
-        "role_zh": "🟢 开源赋能派 / 独立开发者",
-        "role_en": "🟢 Open Source Champions & Indie Devs",
-        "speaker_zh": "开源贡献者与视效创作者",
-        "speaker_en": "Open Source Developers & Creators",
-        "point_zh": "高能效蒸馏与自我反馈强化学习显著压缩了推断成本，视效运镜控制让普通创作者也能享受到工业级生成能力。",
-        "point_en": "Reinforcement learning and efficient distillation drastically slash token costs, empowering indie creators with production-grade video and reasoning."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 落地清醒派 / 商业审慎者",
-        "role_en": "🔴 Commercial Skeptics & Pragmatists",
-        "speaker_zh": "传统视效导演与企业产品总监",
-        "speaker_en": "Film Directors & Enterprise Product Leads",
-        "point_zh": "榜单与跑分繁荣不等于真实业务闭环，当前模型在物理一致性与高阶企业级生产场景中仍存在不可忽视的稳定性瓶颈。",
-        "point_en": "Benchmark leaps do not guarantee enterprise product-market fit; temporal consistency and commercial workflow integrations remain non-trivial bottlenecks."
+        "role_zh": "🔴 生产力守旧派",
+        "role_en": "🔴 Industrial Pragmatist Camp",
+        "speaker_zh": "大厂工程架构师与资深开发者",
+        "speaker_en": "Senior Systems Architects & Enterprise Engineers",
+        "point_zh": "未经召唤的主动介入极易沦为垃圾信息生成器，且主流长时智能体故障率极高，强行接入只会摧毁代码评审信任。",
+        "point_en": "Unsolicited AI interventions quickly devolve into noisy spam, and with current agents failing long-horizon tasks, unprompted code injection will destroy PR trust."
       },
       "linked_news": [
         {
@@ -264,45 +40,35 @@
           "published_at": "2026-11-01T05:00:13+00:00"
         },
         {
-          "id": "25bfd5d7891aca1b",
-          "title_zh": "深度求索融资翻倍以应对高昂算力成本",
-          "title_en": "Sources: DeepSeek doubled its latest round's size due to surging black market Nvidia Blackwell chip prices, with Chinese state-owned investors representing 27% (The Information)",
-          "source": "The Information",
-          "url": "https://www.theinformation.com/articles/behind-deepseeks-16-billion-funding-chinese-tech-titans-state-players",
-          "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 5,
-          "published_at": "2026-10-30T03:35:00+00:00"
-        },
-        {
-          "id": "bbae0bf7c796bd2f",
-          "title_zh": "Deepgram收购语音AI开源框架Daily",
-          "title_en": "Enterprise voice AI tools provider Deepgram acquires Daily, which has raised $62M+ and develops open-source voice AI framework Pipecat, for an undisclosed sum (Ivan Mehta/TechCrunch)",
-          "source": "TechCrunch",
-          "url": "https://techcrunch.com/2026/10/29/deepgram-acquires-pipecat-maker-daily-to-bolster-its-voice-ai-infrastructure/",
-          "image_url": "https://techcrunch.com/wp-content/uploads/2026/10/Scott-Kwin-1.jpg?resize=1200,800",
+          "id": "76a48405a7b3c0f1",
+          "title_zh": "谷歌研发懂眼色的视频智能体，长视频实测全员翻车",
+          "title_en": "Google wants video AI to understand what people need as they work",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/google-wants-video-ai-to-understand-what-people-need-as-they-workgoogle-researchers-are-teaching-a-video-assistant-when-to-offer-help/",
+          "image_url": "http://the-decoder.com/wp-content/uploads/2026/11/streamvibe-ki-videoassistent-web-720p.mp4",
           "hot_score": 4,
-          "published_at": "2026-11-01T05:15:00+00:00"
+          "published_at": "2026-11-01T11:25:21+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "f9b1833630cd11df",
-          "author": "K2S",
-          "author_handle": "@k2sbhai",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1970889208421093379/3aRQZYaf_normal.jpg",
+          "id": "1cc89088e0248e2f",
+          "author": "Polymarket",
+          "author_handle": "@Polymarket",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2005664281002491904/bz2ZO_nU_normal.jpg",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/k2sbhai/status/2116412490804543899",
+          "url": "https://x.com/Polymarket/status/2116850488243065138",
           "platform": "x"
         },
         {
-          "id": "d2c21f84f20cbd49",
-          "author": "Gina Acosta",
-          "author_handle": "@ginacostag_",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1992357377534726144/t3e7Rv70_normal.jpg",
+          "id": "469a76782ef79c1d",
+          "author": "CyrilXBT",
+          "author_handle": "@cyrilXBT",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2035229727414534145/aWap3Jbq_normal.jpg",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/ginacostag_/status/2116358485155983777",
+          "url": "https://x.com/cyrilXBT/status/2116813752133964079",
           "platform": "x"
         }
       ],
@@ -321,20 +87,220 @@
         "config_filename": "Modelfile.deepseek-r1-opt"
       },
       "linked_counts": {
-        "news": 3,
+        "news": 2,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_open_weights_and_video",
+      "id": "topic_deepseek_super_agent_vs_claude",
       "stance_matrix": {
-        "pro_point_zh": "高能效蒸馏与自我反馈强化学习显著压缩了推断成本，视效运镜控制让普通创作者也能享受到工业级生成能力。",
-        "pro_author": "开源贡献者与视效创作者",
-        "con_point_zh": "榜单与跑分繁荣不等于真实业务闭环，当前模型在物理一致性与高阶企业级生产场景中仍存在不可忽视的稳定性瓶颈。",
-        "con_author": "传统视效导演与企业产品总监",
+        "pro_point_zh": "被动输入Prompt早已落伍，自主常驻并洞察语境的主动式Agent才是软件工程进化的终局形态。",
+        "pro_author": "DeepSeek开源核心开发者与极客社区",
+        "con_point_zh": "未经召唤的主动介入极易沦为垃圾信息生成器，且主流长时智能体故障率极高，强行接入只会摧毁代码评审信任。",
+        "con_author": "大厂工程架构师与资深开发者",
         "action_advice_zh": "建议优先在受限沙箱中针对核心智能体任务开展端到端评测，借力 Ollama 实现零数据留存私有化部署。",
-        "pro_point_en": "Reinforcement learning and efficient distillation drastically slash token costs, empowering indie creators with production-grade video and reasoning.",
-        "con_point_en": "Benchmark leaps do not guarantee enterprise product-market fit; temporal consistency and commercial workflow integrations remain non-trivial bottlenecks.",
+        "pro_point_en": "Passive prompting is dead; proactive agents that live in context and autonomously fix code represent the true end-state of software development.",
+        "con_point_en": "Unsolicited AI interventions quickly devolve into noisy spam, and with current agents failing long-horizon tasks, unprompted code injection will destroy PR trust.",
         "action_advice_en": "Benchmark in isolated sandboxes for agentic tasks, leveraging Ollama for zero-data-retention private hosting."
+      }
+    },
+    {
+      "topic_id": "topic_microsoft_layoffs_capex_default_cost",
+      "heat_score": 9.8,
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "算力透支与资本反噬",
+      "category_tag_en": "Compute Overdrive & Debt Strain",
+      "title_zh": "微软裁撤6万人挪腾1700亿AI基建，巨头CDS违约险破三年极值逼近临界点",
+      "title_en": "Microsoft Sheds 60K Roles to Fund $170B AI Capex as Tech CDS Spikes to 3-Year High",
+      "summary_zh": "为填补2026年高达1700亿美元的算力军备竞赛黑洞，微软启动涉及四分之一员工的自愿离职计划，全力转移现金流至AI基建。华尔街恐慌情绪随之蔓延，微软、Meta、亚马逊等五大科技巨头的债务违约保险成本创2021年以来新高，Meta电商智能体等变现神话破灭加剧了算力投资泡沫的破裂风险。",
+      "summary_en": "Microsoft initiated voluntary severance for a quarter of its workforce to reallocate cash flows toward a monstrous $170B 2026 AI infrastructure budget. In response, credit default swap costs for Amazon, Google, Microsoft, Meta, and Oracle surged to 2021 highs, as Meta's e-commerce AI agents fail to deliver enterprise conversions, intensifying debt-default anxieties.",
+      "perspective_pro": {
+        "role_zh": "🟢 超级集群演进派",
+        "role_en": "🟢 Hyperscale Supercluster Camp",
+        "speaker_zh": "大厂最高管理层与算力基建战略师",
+        "speaker_en": "Big Tech C-Suite & AI Infrastructure Strategists",
+        "point_zh": "通用人工智能的门票唯有超级算力集群决定，短期的现金流压缩与人事重组是穿越产业代际阵痛的必经代价。",
+        "point_en": "Entry tickets to AGI belong solely to those with hyperscale compute clusters; sacrificing non-core payroll is the mandatory cost of crossing this generational chasm."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 华尔街理性派",
+        "role_en": "🔴 Wall Street Skeptics",
+        "speaker_zh": "信贷衍生品交易员与宏观风险分析师",
+        "speaker_en": "Credit Derivatives Analysts & Risk Managers",
+        "point_zh": "数万亿美元Capex并未换来真实商业闭环，通过大规模裁员与举债硬撑的算力泡沫一旦遭遇业绩瓶颈将引发系统性反噬。",
+        "point_en": "Hundreds of billions in Capex have yielded zero enterprise cash-flow miracles; leveraging debt and mass layoffs to prop up unused compute is an impending solvency trap."
+      },
+      "linked_news": [
+        {
+          "id": "14259a1a5e6041df",
+          "title_zh": "五大科技巨头债务违约保险成本创2021年以来新高",
+          "title_en": "Solve: the cost of insuring against debt defaults at hyperscalers Amazon, Alphabet, Microsoft, Meta, and Oracle has hit its highest level since 2021 (Gunjan Banerji/Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "url": "https://www.wsj.com/finance/stocks/ai-investors-are-racing-to-get-insurance-on-the-biggest-market-bet-in-history-a60e296f?st=AXJFTG",
+          "image_url": null,
+          "hot_score": 4,
+          "published_at": "2026-11-01T11:00:01+00:00"
+        },
+        {
+          "id": "88b6371ebc44f953",
+          "title_zh": "微软启动超六万人自愿离职，全力为AI基建腾挪现金流",
+          "title_en": "Microsoft offers a quarter of its workforce voluntary severance while shielding AI-critical teams",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/microsoft-offers-a-quarter-of-its-workforce-voluntary-severance-while-shielding-ai-critical-teams/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/10/microsoft_workforce_cuts.png",
+          "hot_score": 5,
+          "published_at": "2026-10-31T10:43:58+00:00"
+        },
+        {
+          "id": "db0b1aa4c57de78d",
+          "title_zh": "智能体颠覆电商沦为幻觉，数十家巨头集体打脸扎克伯格",
+          "title_en": "Meta’s Muse Could Upend All Kinds of Businesses. It Hasn’t Yet",
+          "source": "Wired AI",
+          "url": "https://www.wired.com/story/metas-muse-could-upend-all-kinds-of-businesses-it-hasnt-yet/",
+          "image_url": "https://media.wired.com/photos/6ae513e3393ae92e17e66a04/master/pass/Business_Everyone%E2%80%99s%20Questioning%20Meta%E2%80%99s%20Hype%20About%20Muse%20Meta%20Says%20Muse%20Is%20Already%20a%20Big%20Shopper_v1.jpg",
+          "hot_score": 4,
+          "published_at": "2026-10-31T10:30:00+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "6fa786d647cc6e54",
+          "author": "Suvo.base.eth",
+          "author_handle": "@svbrother211",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2101679640616243200/UAEK47Le_normal.jpg",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/svbrother211/status/2116774084579389495",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
+      },
+      "linked_counts": {
+        "news": 3,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_microsoft_layoffs_capex_default_cost",
+      "stance_matrix": {
+        "pro_point_zh": "通用人工智能的门票唯有超级算力集群决定，短期的现金流压缩与人事重组是穿越产业代际阵痛的必经代价。",
+        "pro_author": "大厂最高管理层与算力基建战略师",
+        "con_point_zh": "数万亿美元Capex并未换来真实商业闭环，通过大规模裁员与举债硬撑的算力泡沫一旦遭遇业绩瓶颈将引发系统性反噬。",
+        "con_author": "信贷衍生品交易员与宏观风险分析师",
+        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
+        "pro_point_en": "Entry tickets to AGI belong solely to those with hyperscale compute clusters; sacrificing non-core payroll is the mandatory cost of crossing this generational chasm.",
+        "con_point_en": "Hundreds of billions in Capex have yielded zero enterprise cash-flow miracles; leveraging debt and mass layoffs to prop up unused compute is an impending solvency trap.",
+        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
+      }
+    },
+    {
+      "topic_id": "topic_openai_token_metering_privacy_backlash",
+      "heat_score": 9.6,
+      "badge_zh": "💡 商业与落地潮",
+      "badge_en": "💡 Monetization & Adoption Wave",
+      "category_tag_zh": "定价革命与信任危机",
+      "category_tag_en": "Monetization & Privacy Backlash",
+      "title_zh": "OpenAI终结20美元无限畅聊转向代币扣量，强推敏感安全会话训练引众怒",
+      "title_en": "OpenAI Kills All-You-Can-Prompt Pricing for Token Meters and Forces Sensitive Data Ingestion",
+      "summary_zh": "OpenAI计划整合ChatGPT与工作流界面，正式推行基于代币的统一共享额度池，彻底宣告20美元按月无限畅聊模式走向终结。与此同时，OpenAI被曝强行收割Daybreak Blue网络安全会话数据用于模型训练且不可关闭，叠加仅悬赏5000美元打发高危RCE漏洞，引发全球企业开发者对商业剥削与数据隐私的集体声讨。",
+      "summary_en": "OpenAI plans to merge chat and workflows into a shared token-bucket model, signaling the demise of the $20/month unlimited prompt era. Compounding developer fury, the firm announced forced ingestion of Daybreak Blue cybersecurity session data for model training with no opt-out, while paying a mere $5K bounty for critical RCE share-link exploits.",
+      "perspective_pro": {
+        "role_zh": "🟢 商业变现派",
+        "role_en": "🟢 Commercial Monetization Camp",
+        "speaker_zh": "OpenAI商业化产品团队与算力经济学者",
+        "speaker_en": "OpenAI Growth Leads & Compute Economists",
+        "point_zh": "复杂推理模型与多步骤工作流极度吞噬算力，按用量扣除代币池才能保障长期运营，吸纳专业网安数据亦是防御升级之需。",
+        "point_en": "Complex reasoning agents consume astronomical compute; transitioning to metered token pools and mining specialized domain data is essential for long-term model survivability."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 开发者合规派",
+        "role_en": "🔴 Developer Privacy & Safety Camp",
+        "speaker_zh": "企业安全主管与独立软件开发者",
+        "speaker_en": "Enterprise CISOs & Indie Developers",
+        "point_zh": "先用低价订阅套牢用户再强推代币计量属于商业收割，强行训练敏感安全日志与漠视高危漏洞更是对开发者信任的彻底践踏。",
+        "point_en": "Luring users with cheap subscriptions only to force token metering is classic price-gouging, while harvesting unconsented security sessions violates foundational enterprise trust."
+      },
+      "linked_news": [
+        {
+          "id": "80ca0d9fde0bea86",
+          "title_zh": "OpenAI拟合并聊天与工作流，无限畅聊自助餐模式终结",
+          "title_en": "OpenAI's upcoming chat-and-work merger in ChatGPT signals the end of all-you-can-prompt pricing",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/openais-upcoming-chat-and-work-merger-in-chatgpt-signals-the-end-of-all-you-can-prompt-pricing/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/04/openai_chatgpt_colors.png",
+          "hot_score": 5,
+          "published_at": "2026-11-01T09:51:06+00:00"
+        },
+        {
+          "id": "b3bdad6fbc84b8aa",
+          "title_zh": "打开分享链接即遭远程代码执行 修复高危漏洞仅悬赏五千",
+          "title_en": "Researchers are paid $5K for reporting a bug to OpenAI that would let attackers run code in logged-in sessions of all who opened the hacker's ChatGPT share link (Swati Khandelwal/The Hacker News)",
+          "source": "The Hacker News",
+          "url": "https://thehackernews.com/2026/10/a-shared-chatgpt-link-could-run.html",
+          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
+          "hot_score": 5,
+          "published_at": "2026-10-31T19:01:11+00:00"
+        },
+        {
+          "id": "3c417b71eb0b4a23",
+          "title_zh": "OpenAI强行训练敏感数据遭质疑",
+          "title_en": "OpenAI plans to train models on Daybreak Blue cybersecurity session data that was previously off-limits",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/openai-plans-to-train-models-on-daybreak-blue-cybersecurity-session-data-that-was-previously-off-limits/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/10/openai.png",
+          "hot_score": 5,
+          "published_at": "2026-10-31T16:38:37+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "e9e2152ed1b88220",
+          "author": "wittyduude1 🚦",
+          "author_handle": "@phamartology",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1933651390057828352/dAWV-bRl_normal.jpg",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/phamartology/status/2116776156523282906",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "a94f8d15243cb6b5",
+        "name": "【blender-ai-mcp-addon】适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claud",
+        "title_zh": "【blender-ai-mcp-addon】适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claud",
+        "title_en": "[blender-ai-mcp-addon] AI assistant and MCP server for Blender: visual chat, scene tools",
+        "desc_zh": "📈 本周暴涨 +897 ★（总计 ⭐ 975）· 适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claude、Gemini、Ollama、OpenCode。Blender",
+        "desc_en": "📈 +897 ★ this week (⭐ 975 total) · AI assistant and MCP server for Blender: visual chat, scene tools, multi-agent workflows. Works with OpenAI, ChatGPT, Claude, Gemini, Ollama, OpenCode. Blender AI addon and plugin, copilot for 3D, bpy Python scripting, MCP integration.",
+        "url": "https://github.com/LiCinCan/blender-ai-mcp-addon?ref=ainewsradar",
+        "github_url": "https://github.com/LiCinCan/blender-ai-mcp-addon?ref=ainewsradar",
+        "weekly_stars": 898,
+        "is_workflow": false
+      },
+      "linked_counts": {
+        "news": 3,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_openai_token_metering_privacy_backlash",
+      "stance_matrix": {
+        "pro_point_zh": "复杂推理模型与多步骤工作流极度吞噬算力，按用量扣除代币池才能保障长期运营，吸纳专业网安数据亦是防御升级之需。",
+        "pro_author": "OpenAI商业化产品团队与算力经济学者",
+        "con_point_zh": "先用低价订阅套牢用户再强推代币计量属于商业收割，强行训练敏感安全日志与漠视高危漏洞更是对开发者信任的彻底践踏。",
+        "con_author": "企业安全主管与独立软件开发者",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "Complex reasoning agents consume astronomical compute; transitioning to metered token pools and mining specialized domain data is essential for long-term model survivability.",
+        "con_point_en": "Luring users with cheap subscriptions only to force token metering is classic price-gouging, while harvesting unconsented security sessions violates foundational enterprise trust.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
   ]
