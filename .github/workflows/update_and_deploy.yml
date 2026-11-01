@@ -17,11 +17,12 @@ permissions:
 
 concurrency:
   group: ai-radar-sync
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   auto-update:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4

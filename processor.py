@@ -454,10 +454,15 @@ def get_gemini_client():
         if candidate_key and candidate_key != "your_gemini_api_key_here":
             try:
                 from google import genai
-                return genai.Client(api_key=candidate_key)
-            except Exception as e:
-                print(f"[Warning] Failed to initialize Gemini client with candidate key: {e}")
-                continue
+                from google.genai import types
+                return genai.Client(api_key=candidate_key, http_options=types.HttpOptions(timeout=30000))
+            except Exception:
+                try:
+                    from google import genai
+                    return genai.Client(api_key=candidate_key)
+                except Exception as e:
+                    print(f"[Warning] Failed to initialize Gemini client with candidate key: {e}")
+                    continue
     return None
 
 
@@ -1224,7 +1229,13 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
     }
 
 
+_CROSS_GROUND_CALL_COUNT = 0
+
 def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
+    global _CROSS_GROUND_CALL_COUNT
+    if _CROSS_GROUND_CALL_COUNT >= 3:
+        return None
+    _CROSS_GROUND_CALL_COUNT += 1
     """
     Cross-Source Fact Grounding Engine (跨信源事实交叉补全引擎):
     当新闻条目遭遇付费墙截断 (如 The Information, WSJ, Bloomberg) 或正文残缺 (<140字或以 ... 结尾) 时，
