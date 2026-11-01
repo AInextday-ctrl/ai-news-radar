@@ -689,7 +689,7 @@ def merge_new_items_to_database(new_items: List[Dict[str, Any]]) -> int:
         return 0
 
     inserted_total = 0
-    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:
@@ -758,7 +758,7 @@ def update_existing_tweet_metrics(live_metrics_map: Dict[str, Dict[str, Any]]) -
         return 0
 
     updated = 0
-    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:
@@ -813,7 +813,7 @@ def merge_apify_tweets_into_database(new_tweets: List[Dict[str, Any]]):
     if not new_tweets:
         return
 
-    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:

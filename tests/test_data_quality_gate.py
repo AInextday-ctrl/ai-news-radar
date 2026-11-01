@@ -251,6 +251,16 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(low_density_news) == 0, f"断言 13 失败：检测到 {len(low_density_news)} 条新闻事实要点不足3条: {low_density_news[:3]}"
     print(f"✅ 断言 13 通过: 资讯六要素与零模板化事实达标 (全量 {len(news)} 条新闻 100% 具备深度结构化事实要点)")
 
+    # 14. 公共数据轻量化与带宽防爆守门 (public/data/latest_news.json <= 750KB, 无 public ledger)
+    pub_latest_path = os.path.join(WORKSPACE_DIR, "public", "data", "latest_news.json")
+    if os.path.exists(pub_latest_path):
+        pub_size_kb = os.path.getsize(pub_latest_path) / 1024.0
+        assert pub_size_kb <= 750.0, f"断言 14 失败：public/data/latest_news.json 体积达到 {pub_size_kb:.1f} KB，超出 750 KB 阈值，存在未截断全库泄漏风险！"
+
+    pub_ledger_path = os.path.join(WORKSPACE_DIR, "public", "data", "processed_news_ledger.json")
+    assert not os.path.exists(pub_ledger_path), f"断言 14 失败：发现违规泄漏的公共账本文件 {pub_ledger_path}，必须从 public 目录彻底剔除！"
+    print(f"✅ 断言 14 通过：公共数据轻量化合规 (无冗余大文件，体积严格受控)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")

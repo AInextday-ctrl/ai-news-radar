@@ -754,8 +754,18 @@ def sync_processed_marks_to_datasets(marked_items: List[Dict[str, Any]]):
                 json.dump(d, f, ensure_ascii=False, separators=(',', ':'))
             
             pub_latest = os.path.join(PUBLIC_DATA_DIR, "latest_news.json")
-            with open(pub_latest, "w", encoding="utf-8") as f:
-                json.dump(d, f, ensure_ascii=False, separators=(',', ':'))
+            if os.path.exists(pub_latest):
+                try:
+                    with open(pub_latest, "r", encoding="utf-8") as pf:
+                        pub_d = json.load(pf)
+                    if "grouped" in pub_d and isinstance(pub_d["grouped"], dict):
+                        for sub_list in pub_d["grouped"].values():
+                            if isinstance(sub_list, list):
+                                update_item_list(sub_list)
+                    with open(pub_latest, "w", encoding="utf-8") as pf:
+                        json.dump(pub_d, pf, ensure_ascii=False, separators=(',', ':'))
+                except Exception as e:
+                    print(f"⚠️ [Ledger] 同步 public/latest_news.json 异常: {e}")
             print(f"📦 [Ledger] 已将打标元数据同步至最新雷达资讯库 (更新 {total_up} 处)")
         except Exception as e:
             print(f"⚠️ [Ledger] 同步 latest_news.json 异常: {e}")
