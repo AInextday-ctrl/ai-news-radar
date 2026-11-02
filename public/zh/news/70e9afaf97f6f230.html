@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大模型实现“读写脑补”，直接修改神经网络权重 | AI News Radar</title>
+  <meta name="description" content="研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/70e9afaf97f6f230">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/70e9afaf97f6f230">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/70e9afaf97f6f230">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/70e9afaf97f6f230">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/70e9afaf97f6f230">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="大模型实现“读写脑补”，直接修改神经网络权重 | AI News Radar">
+  <meta property="og:description" content="研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能">
+  <meta property="og:image" content="https://rikiyat.github.io/images/blog/weight-space-programming.png">
+  <meta property="og:image:secure_url" content="https://rikiyat.github.io/images/blog/weight-space-programming.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="大模型实现“读写脑补”，直接修改神经网络权重">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/70e9afaf97f6f230">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/70e9afaf97f6f230">
+  <meta name="twitter:title" content="大模型实现“读写脑补”，直接修改神经网络权重 | AI News Radar">
+  <meta name="twitter:description" content="研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能">
+  <meta name="twitter:image" content="https://rikiyat.github.io/images/blog/weight-space-programming.png">
+  <meta property="twitter:image" content="https://rikiyat.github.io/images/blog/weight-space-programming.png">
+  <meta name="twitter:image:alt" content="大模型实现“读写脑补”，直接修改神经网络权重">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "大模型实现“读写脑补”，直接修改神经网络权重",
+    "description": "研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能",
+    "image": ["https://rikiyat.github.io/images/blog/weight-space-programming.png"],
+    "url": "https://ainewsradar.xyz/zh/news/70e9afaf97f6f230",
+    "publisher": {
+      "@type": "Organization",
+      "name": "AI News Radar",
+      "url": "https://ainewsradar.xyz"
+    }
+  }
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI 资讯雷达</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回雷达首页
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/70e9afaf97f6f230" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 切换英文 (EN)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://rikiyat.github.io/images/blog/weight-space-programming.png" alt="大模型实现“读写脑补”，直接修改神经网络权重" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: Rikiya Takehi
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-8">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          大模型实现“读写脑补”，直接修改神经网络权重
+        </h1>
+
+        <!-- CTA & Social Share Capsule Bar -->
+        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Primary Source Link Button -->
+          <a href="https://rikiyat.github.io/blog/weight-space-programming/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <span>📖 阅读原资讯官网报道 ↗</span>
+          </a>
+
+          <!-- Social Sharing & Bookmark Actions -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 𝕏">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>𝕏</span>
+            </button>
+            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 Threads">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+              <span>Threads</span>
+            </button>
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+              <span>🔗</span> <span>复制分享链接</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-8">
+          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能
+          </div>
+        </div>
+
+        
+        <div class="mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Rikiya Takehi及研究团队在前沿人工智能实验室环境：证明大模型可直接修改神经网络底层权重，并成功优化了Qwen模型表现</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>探索模型可解释性与无需梯度反馈的优化新路径</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键技术规格】</strong>大模型具备直接修改神经权重的新能力。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【观点态度】</strong>大幅降低模型修正与解释的门槛。</li>
+          </ul>
+        </div>
+        
+        
+        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">以后调参工程师要失业了，AI直接学会了“颅内手术”，不用训练直接修改大脑皮层。当模型开始自我修补BUG，人类除了大喊‘赛博飞升’，剩下的工作可能就是给机房交电费了。</p>
+        </div>
+        
+        
+        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <span>📰 深度报道原文实录</span>
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">Rikiya Takehi 权威实录</span>
+          </div>
+          <div class="space-y-4">
+            <p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>它位于源 --&gt; 中，SVG 无法使用页面的 Web 字体并回退到 Helvetica，因此每个字体都会放入页面本身：然后将其文本设置为 Source Sans 3 和 JetBrains Mono，就像其他字体一样。如果无法获取文件（页面作为文件打开），则保留。 --&gt; 权重空间编程的火花：法学硕士可以原生读写神经网络权重 作者 Rikiya Takehi*</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我们发现前沿法学硕士在本机读取和编写神经网络权重方面出人意料地出色，远远超出了我们对人类或传统算法的期望。这对于优化和可解释性来说可能都是一件大事。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>只需查看原始权重，GPT-6 Astra 就可以判断网络经过训练要做什么。在没有任何环境反馈的情况下，它可以轻松地从头开始编写小型游戏网络，其性能超过使用 PPO 训练的网络 1 亿步。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>同样，当被要求在没有梯度的情况下让 Qwen3.5-0.8B 更好地进行数学计算时，Astra 发现了其权重中的一个问题，导致 Qwen 自己的模型卡警告的推理循环，并通过本地编辑 0.016% 的权重来修复此问题。在相同的采样设置下，这种权重校正将 MATH-500 从 7.9% 提高到 48.1%，并且开箱即用地推广到指令遵循，将 IFEval 提高了 3 倍。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>所有这一切都是可能的，而无需允许 Astra 编写训练循环。它利用推理来找出神经网络的每个部分计算或应该计算什么，并相应地改变权重。我们称之为权重空间规划。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>纵观深度学习的历史，我们将简单的归纳偏差编码为 Adam 或 Muon 等微小的符号优化器。这种情况正在发生变化：我们的神经网络权重很快就会由法学硕士进行本地优化，这些法学硕士会刻意推理其权重。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>如果你被要求手工制作一个下围棋的神经网络，你会做什么？如果给你原始的神经网络权重并要求你预测它们的行为，你会从哪里开始呢？对于几乎任何人来说，这实际上是不可能的。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>如今，权重是通过优化、通过训练来编写权重的自定义网络或通过正式程序的编译器来编写的。在这篇文章中，我们发现当前一代在自然语言中使用的前沿法学硕士开始变得异常擅长理解和围绕自然语言目标构建神经网络权重。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>几年来，我们一直在使用法学硕士来优化文本工件，例如提示和围绕它们构建的程序。最近，我们开始使用它们来优化整个工具以及训练 ML 模型的训练代码和超参数。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我们经常通过以下事实来证明这些方法的合理性：我们不知道其他原则性的方法来爬山文本工件，这与更新可微神经网络的权重不同。毕竟，人类可以手动“优化”代码，因此要求法学硕士这样做是有意义的，但他们无法手动“优化”神经权重，因此这些很大程度上仍停留在符号算法领域。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>在这篇文章中，我们分享了非常早期的结果，这些结果使我们能够论证推理驱动优化的范式现在甚至对于可微神经网络来说也即将到来。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>在权重空间编程中，通用 LLM 围绕某些自然语言规范直接读取和写入网络的权重（即不通过优化器，特别是不使用梯度下降），有时甚至根本没有环境反馈。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>在自然语言中，“只需要求”法学硕士就可以在神经网络的权重中找到隐藏的特征或故障，修复该故障，或者从头开始编写一个新网络。我们报告了以下各项的早期令人兴奋的结果，首先是在小型网络上，然后甚至是在真实的语言模型上：</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我们从一个小规模的实验开始，看看法学硕士是否可以理解连续权重空间，它本质上只是一个数字列表。</p>
+          </div>
+        </div>
+        
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/2001ef60c3d6c93e" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://the-decoder.com/wp-content/uploads/2026/11/goldman_sachs_logo.png" alt="高盛急刹车：封杀非技术岗AI编程工具" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">THE DECODER</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">高盛急刹车：封杀非技术岗AI编程工具</h4>
+            </a>
+            
+            <a href="/zh/news/df0880f526f1df04" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://the-decoder.com/wp-content/uploads/2026/10/cognitive_mercantilism.png" alt="人工智能精英可能会像重商主义者囤积黄金一样囤积情报" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">THE DECODER</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">人工智能精英可能会像重商主义者囤积黄金一样囤积情报</h4>
+            </a>
+            
+            <a href="/zh/news/b01edfb83b793ad3" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://image.theregister.com/5243339.jpg?imageId=5243339&amp;x=0&amp;y=2.5&amp;cropw=100&amp;croph=71.67&amp;panox=0&amp;panoy=2.5&amp;panow=100&amp;panoh=71.67&amp;width=1200&amp;height=683" alt="老牌Linux厂商SUSE宣布裁员10%" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Register</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">老牌Linux厂商SUSE宣布裁员10%</h4>
+            </a>
+            
+            <a href="/zh/news/52f2b5d3140d71db" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/01/STK269_ANTHROPIC_2_B.jpg?quality=90&amp;strip=all&amp;crop=0,0,100,100" alt="Anthropic出手限制Claude克隆复古游戏" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic出手限制Claude克隆复古游戏</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "70e9afaf97f6f230",
+      type: "news",
+      title: "大模型实现“读写脑补”，直接修改神经网络权重",
+      snippet: "研究显示大模型具备原生读写神经网络权重的能力，无需梯度训练即可通过直接修改参数提升模型性能",
+      url: window.location.href,
+      image_url: "https://rikiyat.github.io/images/blog/weight-space-programming.png"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "大模型实现“读写脑补”，直接修改神经网络权重";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
