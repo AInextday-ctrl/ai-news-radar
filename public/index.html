@@ -99,8 +99,8 @@
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=7.1.0">
-  <link rel="preload" href="/js/app.min.js?v=7.1.0" as="script">
+  <link rel="stylesheet" href="/css/style.min.css?v=7.2.0">
+  <link rel="preload" href="/js/app.min.js?v=7.2.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -1744,20 +1744,20 @@ Here’s how to u
             </div>
             
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+            <div class="grid grid-cols-1 gap-4 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e8d7709ff345afc8')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Gizmodo</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e8d7709ff345afc8')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Gizmodo</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Gizmodo</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: Gizmodo</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('e8d7709ff345afc8')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('e8d7709ff345afc8')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       Fan fiction site AO3 says it could take two to four weeks to restore service after a security incident; AO3 hosts 18M+ w
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       The global fan-fiction hub AO3 has suffered a major security breach, leading to a widespread service outage. Officials state that recovery will be a slow process, potentially taking two to four weeks to fully restore access for its millions of users.
                     </p>
                   </div>
@@ -1772,18 +1772,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4133f553f796b4df')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" alt="The agentic web is here" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4133f553f796b4df')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" alt="The agentic web is here" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: MIT Tech Review</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: MIT Tech Review</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('4133f553f796b4df')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('4133f553f796b4df')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       The agentic web is here
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Tim Berners-Lee's 2001 vision of the Semantic Web has finally materialized, as advanced tools like Meta's Muse and OpenAI's Dots gain massive downloads and direct access to personal bank accounts and inboxes.
                     </p>
                   </div>
@@ -1798,18 +1798,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce2534d2032abad4')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//media.newyorker.com/photos/6ae0ee3aa1dfb9a92cd4009d/16%3A9/w_1280%2Cc_limit/r50331.jpg&w=480&output=webp&q=80" alt="A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroyin" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce2534d2032abad4')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.newyorker.com/photos/6ae0ee3aa1dfb9a92cd4009d/16%3A9/w_1280%2Cc_limit/r50331.jpg&w=480&output=webp&q=80" alt="A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroyin" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: New Yorker</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: New Yorker</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ce2534d2032abad4')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ce2534d2032abad4')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroyin
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       UCLA mathematics professor Terence Tao discussed the evolving intersection of AI and mathematics in a New Yorker profile, shifting from early enthusiasm to warnings that AI could destroy the deliberative nature of mathematical research.
                     </p>
                   </div>
@@ -1824,18 +1824,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('5d14f3f9d180deef')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('5d14f3f9d180deef')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: New York Times</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: New York Times</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('5d14f3f9d180deef')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('5d14f3f9d180deef')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       How SF's AI boom is reshaping dating: founders treat first dates as interviews, use tech terms like &quot;conversion rat
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       San Francisco's AI founders are gamifying dating by treating first dates as job interviews and tracking romance through 'conversion rates.' Some are spending up to $5,000 a month on dating coaches to optimize their romantic funnel, driven by an obses
                     </p>
                   </div>
@@ -1850,18 +1850,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7cca8f4a78e04597')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7cca8f4a78e04597')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Bloomberg</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: Bloomberg</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('7cca8f4a78e04597')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('7cca8f4a78e04597')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       NAND maker Kioxia's shares fell up to 15% on Monday after its cautious Q3 outlook disappointed investors, raising concer
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       NAND manufacturer Kioxia saw its stock plummet by 15% following a cautious Q3 outlook that disappointed investors. The sharp decline signals growing anxiety that the AI-driven semiconductor boom may be losing its momentum, challenging previous hyper-
                     </p>
                   </div>
@@ -1876,18 +1876,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c8007c55394d3c2b')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">YC Labs</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c8007c55394d3c2b')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">YC Labs</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: YC Labs</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: YC Labs</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c8007c55394d3c2b')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('c8007c55394d3c2b')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       YC details multi-agent tests in games like Minecraft, where agents exhibit emergent capabilities, forming roles, hierarc
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       YC Labs and Olam Labs are running multi-agent experiments in games like Minecraft to study emergent behaviors. They observed that agents naturally develop roles, hierarchies, and complex coordination when pursuing shared goals, providing critical dat
                     </p>
                   </div>
@@ -1902,18 +1902,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d93a958711fbf84d')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//pic1.calcalist.co.il/picserver3/crop_images/2026/10/29/H1CBoYxTMl/H1CBoYxTMl_164_298_2651_1493_0_large.jpg&w=480&output=webp&q=80" alt="Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, r" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d93a958711fbf84d')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//pic1.calcalist.co.il/picserver3/crop_images/2026/10/29/H1CBoYxTMl/H1CBoYxTMl_164_298_2651_1493_0_large.jpg&w=480&output=webp&q=80" alt="Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, r" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: CTech</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: CTech</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('d93a958711fbf84d')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('d93a958711fbf84d')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, r
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Bites, an enterprise training startup, raised $40 million in Series A funding led by PeakSpan. The company uses AI to convert standard procedures into branded short videos, delivering personalized training to frontline workers via platforms like What
                     </p>
                   </div>
@@ -1928,18 +1928,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9031c9b80f5d7f51')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">EU-Startups</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9031c9b80f5d7f51')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">EU-Startups</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: EU-Startups</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: EU-Startups</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9031c9b80f5d7f51')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('9031c9b80f5d7f51')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       The Hague-based Braid, whose API lets companies sell eSIM mobile plans under their own brand via 600+ carriers, raised a
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Braid, based in The Hague, raised approximately $38 million in Series A funding led by Octopus Ventures. Their API platform integrates with over 600 carriers, enabling businesses to launch and sell branded eSIM mobile plans seamlessly.
                     </p>
                   </div>
@@ -1954,18 +1954,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ac9f154c35171a02')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21MHBL%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fdeb2f1cd-9bc7-4329-a247-79c26636c70a_1672x941.png&w=480&output=webp&q=80" alt="SemiAnalysis launches GDPx, an agentic capability benchmark measuring 11 domains, including chip design, cybersecurity, " width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ac9f154c35171a02')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21MHBL%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fdeb2f1cd-9bc7-4329-a247-79c26636c70a_1672x941.png&w=480&output=webp&q=80" alt="SemiAnalysis launches GDPx, an agentic capability benchmark measuring 11 domains, including chip design, cybersecurity, " width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: SemiAnalysis</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: SemiAnalysis</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ac9f154c35171a02')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ac9f154c35171a02')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       SemiAnalysis launches GDPx, an agentic capability benchmark measuring 11 domains, including chip design, cybersecurity, 
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       SemiAnalysis has launched GDPx, a benchmark measuring general agentic capabilities across 11 key economic domains like chip design and cybersecurity. Results show that top models like Opus 5.5 score only 12%, highlighting a massive gap in practical, 
                     </p>
                   </div>
@@ -1980,18 +1980,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('11ea60d24bacd57b')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//fortune.com/img-assets/wp-content/uploads/2026/10/Casup-founders.jpg%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="Casap, whose AI tools automate dispute and anti-fraud operations for banks, raised a $56M Series B led by Base10 Partner" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('11ea60d24bacd57b')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//fortune.com/img-assets/wp-content/uploads/2026/10/Casup-founders.jpg%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="Casap, whose AI tools automate dispute and anti-fraud operations for banks, raised a $56M Series B led by Base10 Partner" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Fortune</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: Fortune</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('11ea60d24bacd57b')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('11ea60d24bacd57b')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       Casap, whose AI tools automate dispute and anti-fraud operations for banks, raised a $56M Series B led by Base10 Partner
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Fintech startup Casap raised $56 million in Series B funding, bringing its total funding to $90 million. The company leverages AI to help banks and card issuers automate dispute and chargeback processes, specifically targeting the rise of AI-driven c
                     </p>
                   </div>
@@ -2006,18 +2006,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ed6ad4e43005a639')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="South Korean President Lee Jae Myung vows $15.97B for AI, chips, physical AI, and data centers in the country's 2027 bud" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ed6ad4e43005a639')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="South Korean President Lee Jae Myung vows $15.97B for AI, chips, physical AI, and data centers in the country's 2027 bud" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Reuters</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: Reuters</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ed6ad4e43005a639')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ed6ad4e43005a639')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       South Korean President Lee Jae Myung vows $15.97B for AI, chips, physical AI, and data centers in the country's 2027 bud
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       South Korean President Lee Jae Myung pledged a $15.97 billion budget for 2027, dedicated to AI, chips, physical AI, and data centers. This spending nearly doubles the 2026 figure, reflecting an aggressive national strategy to secure competitiveness i
                     </p>
                   </div>
@@ -2032,18 +2032,18 @@ Here’s how to u
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('690d76db2f969de0')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//qtxasset.com/quartz/qcloud5/media/image/GettyImages-2207160096%2520%25281%2529.jpg%3FVersionId%3DClXjsEgney3C9tyHyHG6uzOXqr_Ae3g0&w=480&output=webp&q=80" alt="AI-powered medical search engine Vera Health, which says it is used by 800,000+ clinicians in 190 countries, raised a $2" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('690d76db2f969de0')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//qtxasset.com/quartz/qcloud5/media/image/GettyImages-2207160096%2520%25281%2529.jpg%3FVersionId%3DClXjsEgney3C9tyHyHG6uzOXqr_Ae3g0&w=480&output=webp&q=80" alt="AI-powered medical search engine Vera Health, which says it is used by 800,000+ clinicians in 190 countries, raised a $2" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Fierce Healthcare</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Breaking News</span>
+                      <span class="truncate ml-1 font-mono text-xs">Source: Fierce Healthcare</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('690d76db2f969de0')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('690d76db2f969de0')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       AI-powered medical search engine Vera Health, which says it is used by 800,000+ clinicians in 190 countries, raised a $2
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       Vera Health, a clinical search engine, raised $28.5 million in Series A funding led by Threshold Ventures. The platform scans over 60 million peer-reviewed publications and clinical guidelines to provide evidence-based decision support for over 800,0
                     </p>
                   </div>
@@ -3887,7 +3887,7 @@ Here’s how to u
     };
   </script>
 
-  <script defer src="/js/app.min.js?v=7.1.0"></script>
+  <script defer src="/js/app.min.js?v=7.2.0"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

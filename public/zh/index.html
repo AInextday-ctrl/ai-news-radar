@@ -99,8 +99,8 @@
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=7.1.0">
-  <link rel="preload" href="/zh/js/app.min.js?v=7.1.0" as="script">
+  <link rel="stylesheet" href="/css/style.min.css?v=7.2.0">
+  <link rel="preload" href="/zh/js/app.min.js?v=7.2.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -1755,20 +1755,20 @@ PR PUBLICI
             </div>
             
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
+            <div class="grid grid-cols-1 gap-4 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e8d7709ff345afc8')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Gizmodo</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e8d7709ff345afc8')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Gizmodo</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: Gizmodo</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: Gizmodo</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('e8d7709ff345afc8')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('e8d7709ff345afc8')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       同人创作平台AO3遭攻击恐停摆数周
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       拥有1800万部作品的同人创作网站AO3因安全攻击导致服务器中断，全面恢复预计需两至四周时间
                     </p>
                   </div>
@@ -1783,18 +1783,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4133f553f796b4df')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" alt="智能体网络时代正式降临：自主软件接管互联网" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4133f553f796b4df')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" alt="智能体网络时代正式降临：自主软件接管互联网" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: MIT Tech Review</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: MIT Tech Review</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('4133f553f796b4df')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('4133f553f796b4df')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       智能体网络时代正式降临：自主软件接管互联网
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       蒂姆·伯纳斯-李24年前构想的“语义网”在Meta和OpenAI等新型智能体推动下终成现实，自主软件正深入人们的日常生活与财务管理
                     </p>
                   </div>
@@ -1809,18 +1809,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce2534d2032abad4')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//media.newyorker.com/photos/6ae0ee3aa1dfb9a92cd4009d/16%3A9/w_1280%2Cc_limit/r50331.jpg&w=480&output=webp&q=80" alt="菲尔兹奖得主陶哲轩：AI或将摧毁数学界的深思熟虑" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce2534d2032abad4')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.newyorker.com/photos/6ae0ee3aa1dfb9a92cd4009d/16%3A9/w_1280%2Cc_limit/r50331.jpg&w=480&output=webp&q=80" alt="菲尔兹奖得主陶哲轩：AI或将摧毁数学界的深思熟虑" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: New Yorker</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: New Yorker</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ce2534d2032abad4')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ce2534d2032abad4')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       菲尔兹奖得主陶哲轩：AI或将摧毁数学界的深思熟虑
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       加州大学洛杉矶分校教授陶哲轩在访谈中表达了对人工智能的双重态度，他曾热衷于数学AI，如今却警告其可能破坏数学研究的审慎过程
                     </p>
                   </div>
@@ -1835,18 +1835,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('5d14f3f9d180deef')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('5d14f3f9d180deef')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: New York Times</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: New York Times</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('5d14f3f9d180deef')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('5d14f3f9d180deef')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       旧金山AI新贵的魔幻约会：用转化率KPI相亲
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       旧金山AI创业圈将职场思维引入婚恋，把约会视为面试，不仅使用“转化率”等术语跟进情感进度，还豪掷重金聘请教练指导
                     </p>
                   </div>
@@ -1861,18 +1861,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7cca8f4a78e04597')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7cca8f4a78e04597')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: Bloomberg</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: Bloomberg</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('7cca8f4a78e04597')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('7cca8f4a78e04597')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       存储巨头铠侠股价大跌，AI增长叙事生变
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       由于季度展望过于保守，存储芯片制造商铠侠股价重挫15%，市场担忧AI驱动的半导体增长红利开始退潮
                     </p>
                   </div>
@@ -1887,18 +1887,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c8007c55394d3c2b')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">YC Labs</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c8007c55394d3c2b')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">YC Labs</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: YC Labs</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: YC Labs</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('c8007c55394d3c2b')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('c8007c55394d3c2b')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       YC实验室探索多智能体协作涌现
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       YC实验室通过Minecraft等游戏环境研究多智能体行为，发现其能自发形成层级与复杂协作模式
                     </p>
                   </div>
@@ -1913,18 +1913,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d93a958711fbf84d')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//pic1.calcalist.co.il/picserver3/crop_images/2026/10/29/H1CBoYxTMl/H1CBoYxTMl_164_298_2651_1493_0_large.jpg&w=480&output=webp&q=80" alt="培训工具Bites获4000万美元融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d93a958711fbf84d')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//pic1.calcalist.co.il/picserver3/crop_images/2026/10/29/H1CBoYxTMl/H1CBoYxTMl_164_298_2651_1493_0_large.jpg&w=480&output=webp&q=80" alt="培训工具Bites获4000万美元融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: CTech</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: CTech</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('d93a958711fbf84d')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('d93a958711fbf84d')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       培训工具Bites获4000万美元融资
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       企业培训平台Bites完成4000万美元A轮融资，旨在通过短视频为一线员工提供个性化培训
                     </p>
                   </div>
@@ -1939,18 +1939,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9031c9b80f5d7f51')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">EU-Startups</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9031c9b80f5d7f51')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs"><span class="text-xl sm:text-2xl mb-1.5">⚡</span><span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">EU-Startups</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: EU-Startups</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: EU-Startups</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('9031c9b80f5d7f51')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('9031c9b80f5d7f51')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       eSIM基础设施公司Braid获3800万融资
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       荷兰公司Braid获3800万美元融资，助力企业通过API集成快速推出自有品牌eSIM服务
                     </p>
                   </div>
@@ -1965,18 +1965,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ac9f154c35171a02')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21MHBL%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fdeb2f1cd-9bc7-4329-a247-79c26636c70a_1672x941.png&w=480&output=webp&q=80" alt="SemiAnalysis发布GDPx智能代理基准" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ac9f154c35171a02')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21MHBL%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fdeb2f1cd-9bc7-4329-a247-79c26636c70a_1672x941.png&w=480&output=webp&q=80" alt="SemiAnalysis发布GDPx智能代理基准" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: SemiAnalysis</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: SemiAnalysis</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ac9f154c35171a02')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ac9f154c35171a02')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       SemiAnalysis发布GDPx智能代理基准
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       SemiAnalysis推出GDPx基准测试，衡量AI代理在芯片设计、网络安全等11个核心经济领域的表现
                     </p>
                   </div>
@@ -1991,18 +1991,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('11ea60d24bacd57b')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//fortune.com/img-assets/wp-content/uploads/2026/10/Casup-founders.jpg%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="反欺诈AI公司Casap获5600万融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('11ea60d24bacd57b')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//fortune.com/img-assets/wp-content/uploads/2026/10/Casup-founders.jpg%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="反欺诈AI公司Casap获5600万融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: Fortune</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: Fortune</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('11ea60d24bacd57b')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('11ea60d24bacd57b')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       反欺诈AI公司Casap获5600万融资
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       银行欺诈检测初创公司Casap获5600万美元B轮融资，解决AI带来的新型欺诈挑战
                     </p>
                   </div>
@@ -2017,18 +2017,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ed6ad4e43005a639')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="韩国计划投160亿美元布局AI产业" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ed6ad4e43005a639')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="韩国计划投160亿美元布局AI产业" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: Reuters</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: Reuters</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ed6ad4e43005a639')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('ed6ad4e43005a639')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       韩国计划投160亿美元布局AI产业
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       韩国总统承诺在2027年预算中投入159.7亿美元，用于AI、芯片及数据中心等领域建设
                     </p>
                   </div>
@@ -2043,18 +2043,18 @@ PR PUBLICI
                   </div>
                 </div>
               </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('690d76db2f969de0')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//qtxasset.com/quartz/qcloud5/media/image/GettyImages-2207160096%2520%25281%2529.jpg%3FVersionId%3DClXjsEgney3C9tyHyHG6uzOXqr_Ae3g0&w=480&output=webp&q=80" alt="临床AI引擎Vera获2850万融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('690d76db2f969de0')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-center sm:self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//qtxasset.com/quartz/qcloud5/media/image/GettyImages-2207160096%2520%25281%2529.jpg%3FVersionId%3DClXjsEgney3C9tyHyHG6uzOXqr_Ae3g0&w=480&output=webp&q=80" alt="临床AI引擎Vera获2850万融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
                   <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ 行业快讯</span>
-                      <span class="truncate ml-1">信源: Fierce Healthcare</span>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                      <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded-md border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 行业快讯</span>
+                      <span class="truncate ml-1 font-mono text-xs">信源: Fierce Healthcare</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('690d76db2f969de0')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                    <button type="button" onclick="openAiNewsModal('690d76db2f969de0')" class="block text-left w-full font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
                       临床AI引擎Vera获2850万融资
                     </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                    <p itemprop="description" class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                       医疗AI搜索引擎Vera Health完成2850万美元融资，致力于连接全球海量医学研究证据
                     </p>
                   </div>
@@ -3912,7 +3912,7 @@ PR PUBLICI
     };
   </script>
 
-  <script defer src="/zh/js/app.min.js?v=7.1.0"></script>
+  <script defer src="/zh/js/app.min.js?v=7.2.0"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

@@ -4900,46 +4900,46 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       const thumbSlot = hasRealImage
-        ? `<div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0 self-start">
+        ? `<div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0 self-center sm:self-start shadow-xs">
              <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
-             ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[8px] font-bold flex items-center gap-0.5 shadow-sm">▶</span>` : ''}
+             ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[9px] font-bold flex items-center gap-0.5 shadow-sm">▶</span>` : ''}
            </div>`
-        : `<div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none">
-             <span class="text-lg sm:text-xl mb-1">⚡</span>
-             <span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">${escapeHtml(cleanSource || (isZh ? '快讯' : 'News'))}</span>
+        : `<div class="w-24 h-24 sm:w-36 sm:h-28 md:w-44 md:h-32 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-3 text-center shrink-0 self-center sm:self-start select-none shadow-xs">
+             <span class="text-xl sm:text-2xl mb-1.5">⚡</span>
+             <span class="text-[10px] sm:text-xs font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">${escapeHtml(cleanSource || (isZh ? '快讯' : 'News'))}</span>
            </div>`;
 
       return `
-        <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full" onclick="handleNewsCardClick('${item.id}', event)">
+        <article class="glass-card feed-card feed-card-news rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row gap-4 sm:gap-5 group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90" onclick="handleNewsCardClick('${item.id}', event)">
           ${thumbSlot}
-          <div class="flex-1 flex flex-col justify-between min-w-0">
+          <div class="flex-1 flex flex-col justify-between min-w-0 space-y-2">
             <div>
-              <div class="flex items-center justify-between text-xs mb-1">
-                <div class="flex items-center space-x-1.5 flex-wrap gap-y-1">
-                  <span class="font-bold text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/25">${cleanSource}</span>
+              <div class="flex items-center justify-between text-xs mb-1.5 gap-2 flex-wrap">
+                <div class="flex items-center space-x-2 flex-wrap gap-y-1">
+                  <span class="font-bold text-xs px-2.5 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 font-mono">${cleanSource}</span>
                   ${todayBadge}
                   ${videoBadge}
                 </div>
-                <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap ml-auto" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>
-              <h3 class="font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 min-h-[2.5rem]">
+              <h3 class="font-bold text-base sm:text-lg text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
                 ${title}
               </h3>
               ${specBadges}
-              <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 leading-relaxed">
                 ${summary}
               </p>
             </div>
-            <div class="flex items-center justify-between text-xs pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-slate-500 dark:text-slate-400">
-              <span class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1">
-                ⚡ ${isNewsTab ? (isZh ? '打开资讯专页 ↗' : 'Open Article ↗') : (isZh ? '点击查看速读' : 'Click for Briefing')}
+            <div class="flex items-center justify-between text-xs pt-2.5 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-slate-500 dark:text-slate-400">
+              <span class="text-xs font-mono text-indigo-600 dark:text-indigo-400 font-bold group-hover:underline flex items-center gap-1.5">
+                ⚡ ${isNewsTab ? (isZh ? '打开资讯专页 ↗' : 'Open Article ↗') : (isZh ? '点击查看速读与AI深度研判' : 'Click for Briefing & Analysis')}
               </span>
-              <div class="flex items-center gap-2">
-                <button type="button" onclick="event.stopPropagation(); window.shareContent(event, '${item.id}', 'news')" class="text-[11px] px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all flex items-center gap-1 font-medium cursor-pointer" title="${isZh ? '一键分享' : 'Share'}">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+              <div class="flex items-center gap-2.5">
+                <button type="button" onclick="event.stopPropagation(); window.shareContent(event, '${item.id}', 'news')" class="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-all flex items-center gap-1.5 font-medium cursor-pointer" title="${isZh ? '一键分享' : 'Share'}">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
                   <span>${isZh ? '分享' : 'Share'}</span>
                 </button>
-                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-medium">
+                <a href="${item.url}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-xs text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 hover:underline font-bold">
                   ${isZh ? '源站' : 'Source'} ↗
                 </a>
               </div>
@@ -7818,7 +7818,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       try {
         const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
         const poolNews = recentNews.length >= 6 ? recentNews : allNews;
-        const displayNews = poolNews.slice(0, 18);
+        const displayNews = poolNews.slice(0, 10);
         const streamNews = document.getElementById('stream-news');
         if (streamNews) {
           streamNews.innerHTML = displayNews.length > 0 
