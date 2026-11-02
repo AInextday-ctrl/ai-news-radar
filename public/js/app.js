@@ -76,10 +76,28 @@
       return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${width}&output=webp&q=80`;
     }
 
+    const LOCAL_TITAN_AVATARS = {
+      demishassabis: '/assets/avatars/demishassabis.jpg',
+      ylecun: '/assets/avatars/ylecun.jpg',
+      sama: '/assets/avatars/sama.jpg',
+      karpathy: '/assets/avatars/karpathy.jpg',
+      drjimfan: '/assets/avatars/drjimfan.jpg',
+      elonmusk: '/assets/avatars/elonmusk.jpg',
+      huggingface: '/assets/avatars/huggingface.jpg',
+      darioamodei: '/assets/avatars/darioamodei.jpg',
+      andrewyng: '/assets/avatars/andrewyng.jpg',
+      drfeifei: '/assets/avatars/drfeifei.jpg'
+    };
+
     function optimizeAvatarUrl(url, size = 80) {
       if (!url || typeof url !== 'string') return 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP';
       const u = url.trim();
       if (!u || u === 'null' || u === 'undefined' || u === 'none') return 'https://api.dicebear.com/7.x/bottts/svg?seed=VIP';
+      if (u.startsWith('/assets/avatars/') || u.startsWith('./assets/avatars/')) return u;
+      const uLower = u.toLowerCase();
+      for (const [k, localPath] of Object.entries(LOCAL_TITAN_AVATARS)) {
+        if (uLower.includes(k)) return localPath;
+      }
       if (u.startsWith('data:') || u.startsWith('blob:')) return u;
       if (u.includes('unavatar.io') || u.includes('twimg.com') || u.includes('pbs.twimg.com')) {
         return `https://wsrv.nl/?url=${encodeURIComponent(u)}&w=${size}&h=${size}&fit=cover&output=webp&q=80`;
@@ -5191,22 +5209,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                     <span class="text-xs text-sky-500 font-semibold shrink-0 group-hover/vid:translate-x-0.5 transition-transform">↗</span>
                   </div>`;
               }
-              // 4. 多图九宫格/多列排版
+              // 4. 多图九宫格/多列排版 (通过 Edge CDN WebP 压缩，防盗链且提供无缝回退)
               if (allMediaUrls && allMediaUrls.length > 1) {
                 return `
                   <div class="mt-2.5 grid grid-cols-2 gap-1.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
                     ${allMediaUrls.slice(0, 4).map(u => `
                       <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="openImageLightbox('${escapeHtml(u)}', event)">
-                        <img src="${escapeHtml(u)}" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                        <img src="${optimizeImageUrl(u, 400)}" data-orig="${escapeHtml(u)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                       </div>
                     `).join('')}
                   </div>`;
               }
-              // 5. 单张高清原图
+              // 5. 单张高清原图 (通过 Edge CDN WebP 压缩，防盗链且提供无缝回退)
               if (imgUrl) {
                 return `
                   <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer max-h-80" onclick="openImageLightbox('${escapeHtml(imgUrl)}', event)">
-                    <img src="${escapeHtml(imgUrl)}" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <img src="${optimizeImageUrl(imgUrl, 640)}" data-orig="${escapeHtml(imgUrl)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                     <div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] text-white/90 font-mono opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center gap-1">
                       <span>🔍</span>
                       <span>${isZh ? '查看原图' : 'View Full Image'}</span>
@@ -5374,7 +5392,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border-l-4 border-indigo-600 dark:border-indigo-400 border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-slate-50 via-white to-indigo-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950/20 shadow-sm transition-all z-10">
+          <div class="spotlight-glow-box spotlight-glow-news relative overflow-hidden rounded-2xl p-5 sm:p-6 border-l-4 border-indigo-600 dark:border-indigo-400 border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-slate-50 via-white to-indigo-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950/20 shadow-lg transition-all z-10">
+            <div class="spotlight-glow-line spotlight-glow-line-news"></div>
             <!-- 顶部头条切换标签栏 -->
             ${tabsHtml}
 
@@ -5496,7 +5515,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 const tTopic = isZh ? (t.topic_zh || '') : (t.topic_en || '');
                 return `
                   <button type="button" onclick="window.switchActiveTitan(${idx})" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all shrink-0 cursor-pointer ${isSelected ? 'bg-sky-500 text-white border-sky-400 shadow-md scale-[1.02]' : 'bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-sky-300 hover:bg-sky-50/50'}">
-                    <img src="${escapeHtml(t.avatar || '')}" class="w-5 h-5 rounded-full object-cover shrink-0" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'">
+                    <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" class="w-5 h-5 rounded-full object-cover shrink-0" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
                     <span>${escapeHtml(tName)}</span>
                     ${tTopic ? `<span class="text-[10px] opacity-80 font-normal">· ${escapeHtml(tTopic)}</span>` : ''}
                   </button>
@@ -5508,14 +5527,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-300/80 dark:border-sky-500/30 bg-gradient-to-br from-white via-sky-50/30 to-indigo-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-sky-950/20 shadow-md transition-all z-10">
+          <div class="spotlight-glow-box spotlight-glow-celebrity relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-300/80 dark:border-sky-500/30 bg-gradient-to-br from-white via-sky-50/30 to-indigo-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-sky-950/20 shadow-lg transition-all z-10">
+            <div class="spotlight-glow-line spotlight-glow-line-celebrity"></div>
             <!-- 5大领袖切换导航 -->
             ${titansTabsHtml}
 
             <!-- 当前大V领袖社交身份栏 -->
             <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-sky-100 dark:border-slate-800 flex-wrap gap-3">
               <div class="flex items-center space-x-3 min-w-0">
-                <img src="${escapeHtml(avatar)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400/80 shadow-md object-cover shrink-0" onerror="this.src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png'">
+                <img src="${optimizeAvatarUrl(avatar || author, 96)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400/80 shadow-md object-cover shrink-0" onerror="this.src='/assets/avatars/' + (handle ? handle.replace('@','') : 'karpathy') + '.jpg'">
                 <div class="min-w-0">
                   <div class="flex items-center space-x-1.5">
                     <span class="font-black text-base text-slate-900 dark:text-white truncate">${escapeHtml(author)}</span>
@@ -5590,11 +5610,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       // =========================================================================
-      // 3. 落地工具 (tools) -> 【24H 飙升火爆 · 落地实用神器】 (24H Trending Breakout Tool)
-      // 风格：精美生产力工具展位，突出 24H 飙升数据、痛点解决、3大杀手级特性与目标人群
+      // 3. 落地工具 (tools) -> 【24H 飙升火爆 · 落地实用神器矩阵 (3大领域精选)】
+      // 风格：精美生产力工具展位，支持办公PPT、代码架构、本地智能剪映三大领域神器即时切换
       // =========================================================================
-      if (tab === 'tools' && colData.tool_item) {
-        const item = colData.tool_item;
+      if (tab === 'tools') {
+        const toolItems = (colData.tool_items && colData.tool_items.length > 0) ? colData.tool_items : (colData.tool_item ? [colData.tool_item] : []);
+        if (!toolItems || toolItems.length === 0 || !toolItems[0]) {
+          bannerEl.classList.add('hidden');
+          return;
+        }
+
+        const activeIdx = (typeof window._activeToolIndex === 'number' && window._activeToolIndex >= 0 && window._activeToolIndex < toolItems.length) ? window._activeToolIndex : 0;
+        const item = toolItems[activeIdx];
         const name = item.name || 'ppt-master';
         const icon = item.icon || '📊';
         const stars = item.stars || '70.5k';
@@ -5609,8 +5636,43 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const url = item.url || '#';
         const alternatives = colData.alternative_tools || [];
 
-        const badgeText = isZh ? '🔥 24H 飙升火爆 · 落地实用神器' : '🔥 24H Trending Breakout Tool';
+        const badgeText = isZh ? '🔥 24H 飙升火爆 · 落地实用神器矩阵' : '🔥 24H Trending Breakout Tools Matrix';
         const tryBtnText = isZh ? '🚀 立即体验 / 访问官方 ↗' : '🚀 Try Official ↗';
+
+        // 3大落地神器一键切换标签栏
+        const toolTabsHtml = `
+          <div class="mb-4 pb-3 border-b border-emerald-100 dark:border-slate-800">
+            <div class="flex items-center justify-between pb-2 mb-2 flex-wrap gap-2">
+              <div class="flex items-center space-x-2">
+                <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-xs font-black tracking-wider border border-emerald-500/20">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                  ${badgeText}
+                </span>
+                <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                  ${isZh ? '精选三大不同领域黑马：办公PPT生成 · 代码AST知识图谱 · 本地智能剪映' : 'Top 3 Distinct Domains: Presentation · Code AST · Local Multimedia'}
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+              ${toolItems.map((t, idx) => {
+                const isSelected = idx === activeIdx;
+                const tName = t.name;
+                const tIcon = t.icon || '⚡';
+                const tStars = t.stars;
+                const tCat = isZh ? (t.category_tag_zh || '') : (t.category_tag_en || '');
+                return `
+                  <button type="button" onclick="window.switchActiveTool(${idx})" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all shrink-0 cursor-pointer ${isSelected ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white border-emerald-500 shadow-md scale-[1.02]' : 'bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50'}">
+                    <span>${escapeHtml(tIcon)}</span>
+                    <span>${escapeHtml(tName)}</span>
+                    <span class="text-[10px] text-amber-400 font-mono">★ ${escapeHtml(tStars)}</span>
+                    ${tCat ? `<span class="text-[10px] opacity-80 font-normal">· ${escapeHtml(tCat.split(' ')[1] || tCat)}</span>` : ''}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
 
         let altToolsHtml = '';
         if (alternatives && alternatives.length > 0) {
@@ -5641,7 +5703,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-300/80 dark:border-emerald-500/30 bg-gradient-to-br from-white via-emerald-50/25 to-teal-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-emerald-950/20 shadow-md transition-all z-10">
+          <div class="spotlight-glow-box spotlight-glow-tools relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-300/80 dark:border-emerald-500/30 bg-gradient-to-br from-white via-emerald-50/25 to-teal-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-emerald-950/20 shadow-lg transition-all z-10">
+            <div class="spotlight-glow-line spotlight-glow-line-tools"></div>
+            <!-- 3大落地神器切换导航 -->
+            ${toolTabsHtml}
             <!-- 顶部 24H 飙升火爆标签条 -->
             <div class="flex items-center space-x-2.5 flex-wrap gap-y-1 mb-2.5">
               <span class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 text-xs font-black uppercase tracking-wider border border-rose-500/20 shadow-xs">
@@ -5740,6 +5805,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.switchActiveTitan = function(idx) {
       window._activeTitanIndex = idx;
       renderColumnSpotlightBanner('celebrity');
+    };
+
+    window.switchActiveTool = function(idx) {
+      window._activeToolIndex = idx;
+      renderColumnSpotlightBanner('tools');
     };
 
     window.switchActiveNews = function(idx) {
@@ -10166,14 +10236,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="grid grid-cols-2 gap-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md mt-3">
               ${allMediaUrls.slice(0, 4).map(u => `
                 <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="window.open('${escapeHtml(u)}', '_blank')">
-                  <img src="${escapeHtml(u)}" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+                  <img src="${optimizeImageUrl(u, 640)}" data-orig="${escapeHtml(u)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                 </div>
               `).join('')}
             </div>`;
         } else if (imgUrl) {
           mediaContentEl.innerHTML = `
             <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md cursor-pointer max-h-96 mt-3" onclick="window.open('${escapeHtml(imgUrl)}', '_blank')">
-              <img src="${escapeHtml(imgUrl)}" alt="Tweet media" class="w-full h-full max-h-96 object-cover rounded-xl hover:scale-[1.01] transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+              <img src="${optimizeImageUrl(imgUrl, 800)}" data-orig="${escapeHtml(imgUrl)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-96 object-cover rounded-xl hover:scale-[1.01] transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
             </div>`;
         } else {
           mediaContentEl.innerHTML = '';

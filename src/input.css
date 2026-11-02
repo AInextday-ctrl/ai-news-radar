@@ -1523,3 +1523,85 @@ ins.adsbygoogle iframe {
       margin-top: 0 !important;
     }
 
+
+
+/* =========================================================================
+   Spotlight Radiant Glow & Aura Effect (适配黑白两色主题的顶部精选栏光效)
+   ========================================================================= */
+.spotlight-glow-box {
+  position: relative;
+  border-radius: 1.25rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* 顶部高光流光条 */
+.spotlight-glow-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* 行业快讯光效 (Indigo / Violet) */
+html.dark .spotlight-glow-news {
+  background: radial-gradient(850px circle at 15% -20%, rgba(99, 102, 241, 0.22), transparent 45%),
+              radial-gradient(600px circle at 85% 120%, rgba(168, 85, 247, 0.15), transparent 50%),
+              rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.5);
+  box-shadow: 0 0 35px -5px rgba(99, 102, 241, 0.32), 0 0 15px -3px rgba(168, 85, 247, 0.22);
+}
+html:not(.dark) .spotlight-glow-news {
+  background: radial-gradient(850px circle at 15% -20%, rgba(224, 231, 255, 0.95), transparent 50%),
+              radial-gradient(600px circle at 85% 120%, rgba(243, 232, 255, 0.75), transparent 50%),
+              #ffffff;
+  border: 1px solid rgba(99, 102, 241, 0.4);
+  box-shadow: 0 12px 35px -8px rgba(99, 102, 241, 0.2), 0 0 20px 2px rgba(168, 85, 247, 0.15);
+}
+.spotlight-glow-line-news {
+  background: linear-gradient(90deg, transparent 5%, #6366f1 35%, #a855f7 65%, transparent 95%);
+  box-shadow: 0 0 12px 2px rgba(99, 102, 241, 0.65);
+}
+
+/* 社交雷达光效 (Sky / Cyan) */
+html.dark .spotlight-glow-celebrity {
+  background: radial-gradient(850px circle at 15% -20%, rgba(56, 189, 248, 0.22), transparent 45%),
+              radial-gradient(600px circle at 85% 120%, rgba(99, 102, 241, 0.14), transparent 50%),
+              rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(56, 189, 248, 0.52);
+  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.35), 0 0 15px -3px rgba(14, 165, 233, 0.25);
+}
+html:not(.dark) .spotlight-glow-celebrity {
+  background: radial-gradient(850px circle at 15% -20%, rgba(224, 242, 254, 0.95), transparent 50%),
+              radial-gradient(600px circle at 85% 120%, rgba(238, 242, 255, 0.75), transparent 50%),
+              #ffffff;
+  border: 1px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 0 12px 35px -8px rgba(56, 189, 248, 0.22), 0 0 20px 2px rgba(14, 165, 233, 0.16);
+}
+.spotlight-glow-line-celebrity {
+  background: linear-gradient(90deg, transparent 5%, #38bdf8 35%, #818cf8 65%, transparent 95%);
+  box-shadow: 0 0 12px 2px rgba(56, 189, 248, 0.75);
+}
+
+/* 落地工具光效 (Emerald / Teal) */
+html.dark .spotlight-glow-tools {
+  background: radial-gradient(850px circle at 15% -20%, rgba(52, 211, 153, 0.2), transparent 45%),
+              radial-gradient(600px circle at 85% 120%, rgba(20, 184, 166, 0.14), transparent 50%),
+              rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  box-shadow: 0 0 35px -5px rgba(52, 211, 153, 0.3), 0 0 15px -3px rgba(20, 184, 166, 0.22);
+}
+html:not(.dark) .spotlight-glow-tools {
+  background: radial-gradient(850px circle at 15% -20%, rgba(209, 250, 229, 0.95), transparent 50%),
+              radial-gradient(600px circle at 85% 120%, rgba(204, 251, 241, 0.75), transparent 50%),
+              #ffffff;
+  border: 1px solid rgba(52, 211, 153, 0.42);
+  box-shadow: 0 12px 35px -8px rgba(52, 211, 153, 0.2), 0 0 20px 2px rgba(20, 184, 166, 0.15);
+}
+.spotlight-glow-line-tools {
+  background: linear-gradient(90deg, transparent 5%, #34d399 35%, #2dd4bf 65%, transparent 95%);
+  box-shadow: 0 0 12px 2px rgba(52, 211, 153, 0.7);
+}
