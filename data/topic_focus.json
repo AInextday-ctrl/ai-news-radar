@@ -1,134 +1,256 @@
 {
-  "updated_at": "2026-11-01T16:23:26.715558+00:00",
+  "updated_at": "2026-11-02T00:27:28.481847+00:00",
   "topics": [
     {
-      "topic_id": "topic_anthropic_claude_code_game_ban",
+      "topic_id": "topic_ai_hyperscalers_debt_power_crisis",
       "heat_score": 9.8,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "代码合规与开发者生态",
-      "category_tag_en": "Code Compliance & Dev Ecosystem",
-      "title_zh": "Anthropic紧急封杀Claude Code复刻游戏，正统开发者遭一刀切误伤",
-      "title_en": "Anthropic Bans Claude Code from Game Clones, Sparking Developer Outcry Over Overzealous Guardrails",
-      "summary_zh": "Anthropic紧急下达新规，严禁其编程智能体Claude Code重写或复刻现有电子游戏，旨在规避任天堂等巨头的侵权诉讼。但该一刀切的硬性拦截直接波及正规游戏开发者的日常调试，加之此前Claude旧模型刚被曝出只需修改采样参数即可轻易绕过欧盟合规水印，引发社区对Anthropic‘表演式安全防御’的强烈不满。",
-      "summary_en": "Anthropic enacted an emergency restriction prohibiting Claude Code from recreating commercial video games to evade copyright lawsuits amid viral demo trends. However, the blunt filter is actively obstructing legitimate game studios' routine refactoring workflows. Coming alongside reports that Claude's EU safety watermarks can be bypassed with simple parameter tweaks, developers are blasting the company for brittle, theatrical security policies.",
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "算力基建与资本博弈",
+      "category_tag_en": "Compute Infrastructure & Capital Risk",
+      "title_zh": "五大巨头CDS创三年新高，谷歌炮轰基建审批与数据中心禁令风暴",
+      "title_en": "Hyperscaler CDS Hits 3-Year High as Google Blasts Permit Red Tape Amid Moratorium Backlash",
+      "summary_zh": "科技巨头AI资本开支激增导致微软、Meta等五巨头债务违约互换成本飙至三年新高；全美多州竞选正酝酿叫停数据中心建设，而谷歌能源主管公开驳斥太空算力炒作，直言美国能源充足但行政审批正勒死AI演进。",
+      "summary_en": "Surging AI CapEx has driven debt default insurance (CDS) for Microsoft, Meta, and others to its highest level since 2021. Meanwhile, anti-data center candidates gain traction in US gubernatorial races as Google's energy head rebukes space data centers as a 100x cost gimmick, arguing bureaucratic permit delays—not power scarcity—are choking AI compute.",
       "perspective_pro": {
-        "role_zh": "🟢 知识产权合规派 / 平台法务安全官",
-        "role_en": "🟢 IP Compliance Faction / Safety Officers",
-        "speaker_zh": "Anthropic平台安全与法务防线团队",
-        "speaker_en": "Anthropic Trust & Safety and Legal Counsel",
-        "point_zh": "大模型逐行像素级复刻受版权保护的商业游戏，极易引发致命的连带侵权诉讼，严控逆向工程是Agent工具走向企业级合规的必要代价格。",
-        "point_en": "Pixel-by-pixel extraction of copyrighted game logic poses existential infringement risks; strictly curating Agent outputs is the non-negotiable cost of institutional compliance."
+        "role_zh": "🟢 扩张派 / 资本护城河论者",
+        "role_en": "🟢 Infrastructure Expansionists",
+        "speaker_zh": "超大规模云厂商与基建领袖",
+        "speaker_en": "Hyperscalers & Compute Infrastructure Leaders",
+        "point_zh": "AGI竞争本质是重资产能源竞备，负债扩张是守住超额技术红利的必由之路；只要破除土地与并网繁冗审批，地面规模效应即可彻底摊薄边际训练成本。",
+        "point_en": "The race to AGI is an energy-heavy asset war; levering up is the only path to dominance. Ground-based scale efficiencies will crush marginal costs once bureaucratic gridlock is dismantled."
       },
       "perspective_con": {
-        "role_zh": "🔴 独立开发者派 / 开源游戏架构师",
-        "role_en": "🔴 Indie Developer Camp / Game Architects",
-        "speaker_zh": "独立游戏开发者社区与海外极客群体",
-        "speaker_en": "Indie Game Developers & Open Source Hackers",
-        "point_zh": "一刀切的关键词过滤摧毁了正常图形学重构与玩法实验，所谓安全防线形同虚设，本质是用剥夺专业用户生产力来掩盖平台自身的法律怯懦。",
-        "point_en": "Blunt heuristic bans paralyze legitimate shader and mechanics prototyping; paralyzing paying engineers' workflows is merely cowardice masking the platform's inability to parse nuance."
+        "role_zh": "🔴 风险派 / 地方民意与金融守序者",
+        "role_en": "🔴 Capital Realists & Regulatory Watchdogs",
+        "speaker_zh": "固收信贷分析师与地方监管阵营",
+        "speaker_en": "Credit Risk Analysts & Regional Regulators",
+        "point_zh": "信贷违约风险飙升揭穿了算力过度透支的泡沫；地方居民正被迫承担电费上涨与环境负外部性，数据中心野蛮扩张必将遭遇政治选票与民意反噬。",
+        "point_en": "Spiking credit default risks expose reckless overleverage. Local communities are refusing to subsidize Big Tech's power surges and water usage, making legislative bans an inevitable political reality."
       },
       "linked_news": [
         {
-          "id": "b7f74873e4bf7277",
-          "title_zh": "模型水印改个参数就能绕过 官方仅靠合规警告糊弄防线",
-          "title_en": "Anthropic's watermark rollout leaves a loophole on two older Claude models",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/anthropics-watermark-rollout-leaves-a-loophole-on-two-older-claude-models/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/08/Claude-Watermark.png",
+          "id": "ac6f0f48d3759ef4",
+          "title_zh": "谷歌能源主管直言：太空数据中心贵百倍，AI真正卡在行政审批而非缺电",
+          "title_en": "Google's data center energy head says space data centers cost up to 100x more than Earth-based ones, and US power supply is sufficient but permits are slow (Amir Efrati/The Information)",
+          "source": "The Information",
+          "url": "https://www.theinformation.com/articles/google-energy-chief-space-data-centers-cost-100-times-earth",
+          "image_url": null,
           "hot_score": 4,
-          "published_at": "2026-10-31T19:20:55+00:00"
+          "published_at": "2026-11-01T17:05:00+00:00"
         },
         {
-          "id": "0c3ddd241fa1f04f",
-          "title_zh": "养蜂与摔跤秘籍竟成AI投毒指南",
-          "title_en": "Beekeeping tips and wrestling advice can train AI models to sabotage oversight",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/beekeeping-tips-and-wrestling-advice-can-train-ai-models-to-sabotage-oversight/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/10/anthropic_claude_training_data_alignment.png",
-          "hot_score": 5,
-          "published_at": "2026-10-31T15:06:14+00:00"
+          "id": "14259a1a5e6041df",
+          "title_zh": "五大科技巨头债务违约保险成本创2021年以来新高",
+          "title_en": "Solve: the cost of insuring against debt defaults at hyperscalers Amazon, Alphabet, Microsoft, Meta, and Oracle has hit its highest level since 2021 (Gunjan Banerji/Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "url": "https://www.wsj.com/finance/stocks/ai-investors-are-racing-to-get-insurance-on-the-biggest-market-bet-in-history-a60e296f?st=AXJFTG",
+          "image_url": null,
+          "hot_score": 4,
+          "published_at": "2026-11-01T11:00:01+00:00"
+        },
+        {
+          "id": "e60015a88b639cd9",
+          "title_zh": "分析：支持暂停数据中心的候选人可能会在周二的 36 场美国州长竞选中赢得最多 15 场，其中包括德克萨斯州、俄亥俄州、密歇根州和纽约州",
+          "title_en": "Analysis: candidates backing a data center moratorium could win up to 15 of 36 US governors' races on Tuesday, including in Texas, Ohio, Michigan, and New York (Shane Burke/The Information)",
+          "source": "The Information",
+          "url": "https://www.theinformation.com/articles/candidates-backing-data-center-pauses-win-15-governors-races",
+          "image_url": null,
+          "hot_score": 3,
+          "published_at": "2026-11-01T18:45:02+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "63956e8207eb82c1",
-          "author": "Polymarket",
-          "author_handle": "@Polymarket",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2005664281002491904/bz2ZO_nU_normal.jpg",
+          "id": "13ada6b4f652d8ed",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/Polymarket/status/2116912435281949001",
+          "url": "https://x.com/elonmusk/status/2116991729660575998",
           "platform": "x"
         },
         {
-          "id": "bd773c2cb8030a2a",
-          "author": "Pirat_Nation 🔴",
-          "author_handle": "@Pirat_Nation",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1795139938586890240/fQtS5oQr_normal.jpg",
+          "id": "0690d44a50a740b7",
+          "author": "Jeff Dean",
+          "author_handle": "@JeffDean",
+          "author_avatar": "https://unavatar.io/x/JeffDean",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/Pirat_Nation/status/2116908874175234270",
+          "url": "https://x.com/JeffDean/status/2117024473992056955",
           "platform": "x"
         }
       ],
       "linked_tool": {
-        "id": "wf_claude_desktop_mcp_core4",
-        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
-        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
-        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+        "id": "wf_rag_anti_hallucination_pipeline",
+        "name": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+        "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+        "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
+        "desc_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
+        "desc_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
         "url": "https://github.com",
         "github_url": "https://github.com",
         "weekly_stars": "+3,800★",
         "is_workflow": true,
-        "target_platform": "Claude Desktop / Cline / Roo Code",
-        "config_filename": "claude_desktop_config.json"
+        "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
+        "config_filename": "rag_pipeline_config.json"
       },
       "linked_counts": {
-        "news": 2,
+        "news": 3,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_anthropic_claude_code_game_ban",
+      "id": "topic_ai_hyperscalers_debt_power_crisis",
       "stance_matrix": {
-        "pro_point_zh": "大模型逐行像素级复刻受版权保护的商业游戏，极易引发致命的连带侵权诉讼，严控逆向工程是Agent工具走向企业级合规的必要代价格。",
-        "pro_author": "Anthropic平台安全与法务防线团队",
-        "con_point_zh": "一刀切的关键词过滤摧毁了正常图形学重构与玩法实验，所谓安全防线形同虚设，本质是用剥夺专业用户生产力来掩盖平台自身的法律怯懦。",
-        "con_author": "独立游戏开发者社区与海外极客群体",
+        "pro_point_zh": "AGI竞争本质是重资产能源竞备，负债扩张是守住超额技术红利的必由之路；只要破除土地与并网繁冗审批，地面规模效应即可彻底摊薄边际训练成本。",
+        "pro_author": "超大规模云厂商与基建领袖",
+        "con_point_zh": "信贷违约风险飙升揭穿了算力过度透支的泡沫；地方居民正被迫承担电费上涨与环境负外部性，数据中心野蛮扩张必将遭遇政治选票与民意反噬。",
+        "con_author": "固收信贷分析师与地方监管阵营",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Pixel-by-pixel extraction of copyrighted game logic poses existential infringement risks; strictly curating Agent outputs is the non-negotiable cost of institutional compliance.",
-        "con_point_en": "Blunt heuristic bans paralyze legitimate shader and mechanics prototyping; paralyzing paying engineers' workflows is merely cowardice masking the platform's inability to parse nuance.",
+        "pro_point_en": "The race to AGI is an energy-heavy asset war; levering up is the only path to dominance. Ground-based scale efficiencies will crush marginal costs once bureaucratic gridlock is dismantled.",
+        "con_point_en": "Spiking credit default risks expose reckless overleverage. Local communities are refusing to subsidize Big Tech's power surges and water usage, making legislative bans an inevitable political reality.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_deepseek_super_agent_open_source",
-      "heat_score": 9.6,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "主动智能体与协作革新",
-      "category_tag_en": "Proactive Agents & Co-Coding",
-      "title_zh": "DeepSeek开源主动编程模型Super-Agent，常驻监控群聊引爆越权争论",
-      "title_en": "DeepSeek Open-Sources 'Super-Agent' for Chat Monitoring, Igniting Autonomy and Privacy Debates",
-      "summary_zh": "DeepSeek（深度求索）正式开源研究原型Super-Agent，打破了等待人类下达指令的被动问答机制，该智能体可全天候常驻开发者群聊，主动识别工程讨论中的漏洞并自主提交解决方案。然而这种自主协同形态不仅面临类似Adobe专业Agent带来的算力开销激增，更在研发权限越权、自动化合规边界与团队隐形成本上掀起业界激辩。",
-      "summary_en": "DeepSeek open-sourced 'Super-Agent', an experimental prototype that replaces reactive prompting by persistently monitoring developer chatrooms, autonomously spotting code bugs, and pitching solutions. While hailed as an evolutionary leap toward autonomous SWE teams, the paradigm sparks fierce friction over compute overhead, unvetted code commits, and workplace privacy boundaries.",
+      "topic_id": "topic_openai_token_metering_and_speed_limits",
+      "heat_score": 9.9,
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "商业变现与监管限速",
+      "category_tag_en": "Monetization Models & Policy Moats",
+      "title_zh": "OpenAI终结20美元无限畅聊：推按量扣费并游说华府推行“AI限速”",
+      "title_en": "OpenAI Ends All-You-Can-Prompt Buffets, Tightens Limits and Lobbies for Mandatory 'AI Speed Limits'",
+      "summary_zh": "面对推理计算成本失控，OpenAI严卡多设备订阅、终结包月随意畅聊模式并转向共享Token池加速计费；同时在中期选举后发起政策攻势，拟将数据中心包装为“计算园区”，并反常游说政府为顶级前沿AI设立强制“安全限速标准”。",
+      "summary_en": "Under intense inference cost pressures, OpenAI is cracking down on shared accounts and dismantling ChatGPT's unlimited prompting in favor of token-metered pools. Simultaneously, the company launched a PR and policy blitz rebranding data centers as 'AI compute campuses' while pushing Washington for mandatory 'speed limits' on frontier AI.",
       "perspective_pro": {
-        "role_zh": "🟢 自主协作派 / 敏捷AI研发专家",
-        "role_en": "🟢 Autonomous Engineering Camp / DeepSeek Contributors",
-        "speaker_zh": "DeepSeek开源研发团队与自治Agent推崇者",
-        "speaker_en": "DeepSeek Open-Source Team & AI Automation Advocates",
-        "point_zh": "让模型从‘被动工具’跃迁为‘主动搭档’是工程智能体的终极方向，通过上下文监听捕捉未言明的系统隐患，能将工程Bug消灭在代码提交前夜。",
-        "point_en": "Transitioning models from reactive chatbots to proactive co-workers is the frontier; ambient monitoring preempts system flaws long before they crystallize into production failures."
+        "role_zh": "🟢 商业现实派 / 制度合规护航者",
+        "role_en": "🟢 Pragmatic Commercialists & Policy Strategists",
+        "speaker_zh": "OpenAI商业化与政策游说团队",
+        "speaker_en": "OpenAI Commercial & Policy Affairs Teams",
+        "point_zh": "高阶工作流与长思考链推理耗资巨大，按量计费才能保障服务算力不断崖；倡导法定限速与计算园区化，是防止不可控技术外溢、引导产业规范落地的负责任之举。",
+        "point_en": "High-compute inference and reasoning chains require sustainable unit economics. Championing mandatory safety speed limits prevents catastrophic runaway risks while stabilizing massive campus infrastructure."
       },
       "perspective_con": {
-        "role_zh": "🔴 工程审慎派 / 资深DevOps架构师",
-        "role_en": "🔴 Engineering Pragmatists / DevOps Architects",
-        "speaker_zh": "企业级软件工程架构师与安全审计专家",
-        "speaker_en": "Enterprise Systems Architects & Security Auditors",
-        "point_zh": "没有明确交付边界的常驻智能体是算力黑洞和安全梦魇，不仅极易生成未经沙箱验证的代码垃圾，更会彻底击穿敏感技术讨论的隐私红线。",
-        "point_en": "Unbounded autonomous agents in human chats invite infinite context token burn and compliance chaos, producing noise and potentially leaking internal technical IP without verified deliverable bounds."
+        "role_zh": "🔴 围剿质疑派 / 开源生态捍卫者",
+        "role_en": "🔴 Antitrust Critics & Open Source Advocates",
+        "speaker_zh": "独立开发者与反垄断评论家",
+        "speaker_en": "Independent Developers & Tech Antitrust Watchdogs",
+        "point_zh": "所谓限速不过是成本倒挂与算力吃紧下的自私阳谋，打着安全旗号游说监管筑起牌照壁垒；取消全包定价更是对忠实早期订阅者的单方面背刺与变相收割。",
+        "point_en": "Mandatory 'speed limits' are regulatory capture disguised as safety, designed to choke open-source competitors as compute margins thin. Ending unlimited prompts betrays the early adopters who funded their rise."
+      },
+      "linked_news": [
+        {
+          "id": "b92ad995b02c832a",
+          "title_zh": "OpenAI拟推AI限速与品牌重塑",
+          "title_en": "OpenAI plans a post-midterms policy and PR blitz, pushing mandatory \"speed limits\" for powerful AI and rebranding its data centers as \"AI compute campuses\" (Axios)",
+          "source": "Axios",
+          "url": "https://www.axios.com/2026/11/01/scoop-openai-post-midterm-policy",
+          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
+          "hot_score": 4,
+          "published_at": "2026-11-01T21:30:01+00:00"
+        },
+        {
+          "id": "051a613d1df257d1",
+          "title_zh": "OpenAI收紧订阅限制，防薅羊毛",
+          "title_en": "OpenAI is steering ChatGPT users toward more paid usage",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/openai-is-steering-chatgpt-users-toward-more-paid-usage/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/05/openai_chatgpt.png",
+          "hot_score": 4,
+          "published_at": "2026-11-01T12:05:04+00:00"
+        },
+        {
+          "id": "80ca0d9fde0bea86",
+          "title_zh": "OpenAI拟合并聊天与工作流，无限畅聊自助餐模式终结",
+          "title_en": "OpenAI's upcoming chat-and-work merger in ChatGPT signals the end of all-you-can-prompt pricing",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/openais-upcoming-chat-and-work-merger-in-chatgpt-signals-the-end-of-all-you-can-prompt-pricing/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/04/openai_chatgpt_colors.png",
+          "hot_score": 5,
+          "published_at": "2026-11-01T09:51:06+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "dfc9d496497b6c4d",
+          "author": "OpenAI Developers",
+          "author_handle": "@OpenAIDevs",
+          "author_avatar": "https://unavatar.io/openai",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/OpenAIDevs/status/2117036288373297303",
+          "platform": "x"
+        },
+        {
+          "id": "c96b71d8721211c8",
+          "author": "Elon Musk",
+          "author_handle": "@elonmusk",
+          "author_avatar": "https://unavatar.io/x/elonmusk",
+          "content_zh": "",
+          "content_en": "",
+          "url": "https://x.com/elonmusk/status/2116985908268572975",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
+      },
+      "linked_counts": {
+        "news": 3,
+        "tweets": 2,
+        "has_tool": true
+      },
+      "id": "topic_openai_token_metering_and_speed_limits",
+      "stance_matrix": {
+        "pro_point_zh": "高阶工作流与长思考链推理耗资巨大，按量计费才能保障服务算力不断崖；倡导法定限速与计算园区化，是防止不可控技术外溢、引导产业规范落地的负责任之举。",
+        "pro_author": "OpenAI商业化与政策游说团队",
+        "con_point_zh": "所谓限速不过是成本倒挂与算力吃紧下的自私阳谋，打着安全旗号游说监管筑起牌照壁垒；取消全包定价更是对忠实早期订阅者的单方面背刺与变相收割。",
+        "con_author": "独立开发者与反垄断评论家",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "High-compute inference and reasoning chains require sustainable unit economics. Championing mandatory safety speed limits prevents catastrophic runaway risks while stabilizing massive campus infrastructure.",
+        "con_point_en": "Mandatory 'speed limits' are regulatory capture disguised as safety, designed to choke open-source competitors as compute margins thin. Ending unlimited prompts betrays the early adopters who funded their rise.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+      }
+    },
+    {
+      "topic_id": "topic_deepseek_super_agent_vs_vibe_coding",
+      "heat_score": 9.7,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "自主智能体与工程极限",
+      "category_tag_en": "Autonomous Agents & Software Reality",
+      "title_zh": "DeepSeek开源主动编程助手Super-Agent：自主巡查引爆运维与能耗死穴",
+      "title_en": "DeepSeek Open-Sources Proactive 'Super-Agent' as Agentic Coding Hits Energy and Maintenance Reality",
+      "summary_zh": "深度求索（DeepSeek）开源首个主动巡检群聊并自动修复代码的研究原型Super-Agent，将编程助手从“被动问答”推向“全时主动介入”；但行业内如Adobe专业修图智能体能耗暴增10倍、长视频全员翻车的实测，正暴露出主动智能体落地时恐怖的运维黑洞。",
+      "summary_en": "DeepSeek has open-sourced Super-Agent, a proactive coding agent that monitors developer chats to independently identify and fix issues. However, as peers like Adobe report a 10x compute surge for agentic tool use and Google's interactive agents stumble over long contexts, experts like Andrej Karpathy warn of severe maintenance debt.",
+      "perspective_pro": {
+        "role_zh": "🟢 主动演进派 / 自主软件倡导者",
+        "role_en": "🟢 Autonomous Systems Advocates",
+        "speaker_zh": "DeepSeek研发团队与极客开发者",
+        "speaker_en": "DeepSeek Research Team & Advanced Engineers",
+        "point_zh": "从人类发问到Agent自主驻守巡检是软件工程范式的跃迁，将彻底消灭无休止的代码审查与调试耗时，让系统自愈成为生产环境的基础设施。",
+        "point_en": "Shifting from passive prompting to proactive chat monitoring transforms software engineering, turning autonomous triage and self-healing systems into baseline dev infrastructure."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 工业理性派 / 维护负债反思者",
+        "role_en": "🔴 Engineering Realists & Tech Pragmatists",
+        "speaker_zh": "资深架构师与工业级部署专家",
+        "speaker_en": "Senior AI Architects & System Maintainers",
+        "point_zh": "Vibe coding产出的大量无法解释代码已成维护噩梦；智能体全天候监听介入导致算力消耗剧增数倍，更会在复杂生产环境中引发意想不到的连锁雪崩与安全死锁。",
+        "point_en": "Vibe coding creates unmaintainable slop that collapses under real-world debt. Proactive agents multiply compute burn by an order of magnitude while creating lethal, non-deterministic bugs."
       },
       "linked_news": [
         {
@@ -150,27 +272,37 @@
           "image_url": "https://the-decoder.com/wp-content/uploads/2026/11/adobe_logo-2.png",
           "hot_score": 3,
           "published_at": "2026-11-01T14:56:44+00:00"
+        },
+        {
+          "id": "76a48405a7b3c0f1",
+          "title_zh": "谷歌研发懂眼色的视频智能体，长视频实测全员翻车",
+          "title_en": "Google wants video AI to understand what people need as they work",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/google-wants-video-ai-to-understand-what-people-need-as-they-workgoogle-researchers-are-teaching-a-video-assistant-when-to-offer-help/",
+          "image_url": "http://the-decoder.com/wp-content/uploads/2026/11/streamvibe-ki-videoassistent-web-720p.mp4",
+          "hot_score": 4,
+          "published_at": "2026-11-01T11:25:21+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "2998efc812eb2da8",
-          "author": "Cointelegraph",
-          "author_handle": "@Cointelegraph",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1755983593925378048/kYutau0B_normal.jpg",
+          "id": "6bd20dd808de1341",
+          "author": "Andrej Karpathy",
+          "author_handle": "@karpathy",
+          "author_avatar": "https://unavatar.io/x/karpathy",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/Cointelegraph/status/2116885723601068339",
+          "url": "https://x.com/karpathy/status/2116980174667583602",
           "platform": "x"
         },
         {
-          "id": "e9cb32c8b929b5f5",
-          "author": "Ak47♛",
-          "author_handle": "@HolaItsAk47",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1894428612759019520/SA5wjsen_normal.jpg",
+          "id": "6e3d607d3686be25",
+          "author": "Andrej Karpathy",
+          "author_handle": "@karpathy",
+          "author_avatar": "https://unavatar.io/x/karpathy",
           "content_zh": "",
           "content_en": "",
-          "url": "https://x.com/HolaItsAk47/status/2116885112747082147",
+          "url": "https://x.com/karpathy/status/2116979365242429721",
           "platform": "x"
         }
       ],
@@ -189,130 +321,20 @@
         "config_filename": "Modelfile.deepseek-r1-opt"
       },
       "linked_counts": {
-        "news": 2,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_deepseek_super_agent_open_source",
-      "stance_matrix": {
-        "pro_point_zh": "让模型从‘被动工具’跃迁为‘主动搭档’是工程智能体的终极方向，通过上下文监听捕捉未言明的系统隐患，能将工程Bug消灭在代码提交前夜。",
-        "pro_author": "DeepSeek开源研发团队与自治Agent推崇者",
-        "con_point_zh": "没有明确交付边界的常驻智能体是算力黑洞和安全梦魇，不仅极易生成未经沙箱验证的代码垃圾，更会彻底击穿敏感技术讨论的隐私红线。",
-        "con_author": "企业级软件工程架构师与安全审计专家",
-        "action_advice_zh": "建议优先在受限沙箱中针对核心智能体任务开展端到端评测，借力 Ollama 实现零数据留存私有化部署。",
-        "pro_point_en": "Transitioning models from reactive chatbots to proactive co-workers is the frontier; ambient monitoring preempts system flaws long before they crystallize into production failures.",
-        "con_point_en": "Unbounded autonomous agents in human chats invite infinite context token burn and compliance chaos, producing noise and potentially leaking internal technical IP without verified deliverable bounds.",
-        "action_advice_en": "Benchmark in isolated sandboxes for agentic tasks, leveraging Ollama for zero-data-retention private hosting."
-      }
-    },
-    {
-      "topic_id": "topic_hyperscalers_debt_openai_pricing_pivot",
-      "heat_score": 9.7,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "算力资本与商业清算",
-      "category_tag_en": "Compute Capex & Market Reckoning",
-      "title_zh": "巨头违约互换创三年新高，OpenAI砍掉无限畅聊转向精准按量扣费",
-      "title_en": "Big Tech Default Insurance Hits 3-Year High as OpenAI Kills All-You-Can-Prompt Subscriptions",
-      "summary_zh": "受数千亿级AI基础设施巨额资本开支承压，微软、Meta、亚马逊等五大科技巨头的债务违约保险成本（CDS）狂飙至2021年以来最高位。直面算力反噬的OpenAI旋即启动严厉商业收缩：一方面对单设备单卡设限打击多账号‘薅羊毛’，另一方面拟合并工作流全面推行Token共享池，终结低价全包的‘无限畅聊自助餐’时代。",
-      "summary_en": "Debt default insurance costs (CDS) for hyper-scalers including Microsoft, Meta, and Amazon spiked to three-year highs as credit markets choke on multi-billion AI capex buildouts. Feeling the inference burn, OpenAI launched a commercial retrenchment—clamping down on multi-account subscription loopholes and prepping a pooled-token quota merger that officially terminates all-you-can-prompt flat-rate pricing.",
-      "perspective_pro": {
-        "role_zh": "🟢 商业理性派 / 首席财务官与风控团队",
-        "role_en": "🟢 Commercial Rationalists / Corporate CFOs",
-        "speaker_zh": "科技巨头财务管理层与云端定价分析师",
-        "speaker_en": "Enterprise CFOs & Cloud Pricing Economists",
-        "point_zh": "高算力推理不再是廉价玩具，向真实Token消耗和算力工时精准计费，是抑制巨头信用风险外溢、击破AI投机泡沫的必由之路。",
-        "point_en": "Heavy model inference cannot remain an unmetered free buffet; rigorous usage-based metering is the only fiscal anchor capable of curbing runaway capex and credit downgrades."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 市场警示派 / 固收分析师与重度订阅用户",
-        "role_en": "🔴 Bubble Watchers / Fixed Income Analysts & Heavy Users",
-        "speaker_zh": "华尔街信贷对冲基金与大模型重度创作者",
-        "speaker_en": "Wall Street Credit Strategists & Power Pro Users",
-        "point_zh": "违约保险飙升揭开了巨头ROI倒挂的遮羞布，OpenAI对付费用户变相加价限流，证明昂贵的大模型商业模式正在遭遇‘算力越强、亏损越重’的死锁窘境。",
-        "point_en": "Surging CDS spreads expose broken ROI promises; OpenAI's aggressive rationing indicates LLM economics are stuck in a dead-end loop where scaling compute only scales operating losses."
-      },
-      "linked_news": [
-        {
-          "id": "14259a1a5e6041df",
-          "title_zh": "五大科技巨头债务违约保险成本创2021年以来新高",
-          "title_en": "Solve: the cost of insuring against debt defaults at hyperscalers Amazon, Alphabet, Microsoft, Meta, and Oracle has hit its highest level since 2021 (Gunjan Banerji/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/finance/stocks/ai-investors-are-racing-to-get-insurance-on-the-biggest-market-bet-in-history-a60e296f?st=AXJFTG",
-          "image_url": null,
-          "hot_score": 4,
-          "published_at": "2026-11-01T11:00:01+00:00"
-        },
-        {
-          "id": "80ca0d9fde0bea86",
-          "title_zh": "OpenAI拟合并聊天与工作流，无限畅聊自助餐模式终结",
-          "title_en": "OpenAI's upcoming chat-and-work merger in ChatGPT signals the end of all-you-can-prompt pricing",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/openais-upcoming-chat-and-work-merger-in-chatgpt-signals-the-end-of-all-you-can-prompt-pricing/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/04/openai_chatgpt_colors.png",
-          "hot_score": 5,
-          "published_at": "2026-11-01T09:51:06+00:00"
-        },
-        {
-          "id": "051a613d1df257d1",
-          "title_zh": "OpenAI收紧订阅限制，防薅羊毛",
-          "title_en": "OpenAI is steering ChatGPT users toward more paid usage",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/openai-is-steering-chatgpt-users-toward-more-paid-usage/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/05/openai_chatgpt.png",
-          "hot_score": 4,
-          "published_at": "2026-11-01T12:05:04+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "a76e2c63cb3c7f38",
-          "author": "Utpal",
-          "author_handle": "@Utpal733128",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2023452934667980800/X9DI3z3i_normal.jpg",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/Utpal733128/status/2116905506799525999",
-          "platform": "x"
-        },
-        {
-          "id": "841922d664c836d0",
-          "author": "Elon Musk",
-          "author_handle": "@elonmusk",
-          "author_avatar": "https://unavatar.io/x/elonmusk",
-          "content_zh": "",
-          "content_en": "",
-          "url": "https://x.com/elonmusk/status/2116890148474351711",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "a94f8d15243cb6b5",
-        "name": "【blender-ai-mcp-addon】适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claud",
-        "title_zh": "【blender-ai-mcp-addon】适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claud",
-        "title_en": "[blender-ai-mcp-addon] AI assistant and MCP server for Blender: visual chat, scene tools",
-        "desc_zh": "📈 本周暴涨 +897 ★（总计 ⭐ 975）· 适用于Blender的AI助手和MCP服务器：可视化聊天、场景工具、多代理工作流程。适用于OpenAI、ChatGPT、Claude、Gemini、Ollama、OpenCode。Blender",
-        "desc_en": "📈 +897 ★ this week (⭐ 975 total) · AI assistant and MCP server for Blender: visual chat, scene tools, multi-agent workflows. Works with OpenAI, ChatGPT, Claude, Gemini, Ollama, OpenCode. Blender AI addon and plugin, copilot for 3D, bpy Python scripting, MCP integration.",
-        "url": "https://github.com/LiCinCan/blender-ai-mcp-addon?ref=ainewsradar",
-        "github_url": "https://github.com/LiCinCan/blender-ai-mcp-addon?ref=ainewsradar",
-        "weekly_stars": 898,
-        "is_workflow": false
-      },
-      "linked_counts": {
         "news": 3,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_hyperscalers_debt_openai_pricing_pivot",
+      "id": "topic_deepseek_super_agent_vs_vibe_coding",
       "stance_matrix": {
-        "pro_point_zh": "高算力推理不再是廉价玩具，向真实Token消耗和算力工时精准计费，是抑制巨头信用风险外溢、击破AI投机泡沫的必由之路。",
-        "pro_author": "科技巨头财务管理层与云端定价分析师",
-        "con_point_zh": "违约保险飙升揭开了巨头ROI倒挂的遮羞布，OpenAI对付费用户变相加价限流，证明昂贵的大模型商业模式正在遭遇‘算力越强、亏损越重’的死锁窘境。",
-        "con_author": "华尔街信贷对冲基金与大模型重度创作者",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Heavy model inference cannot remain an unmetered free buffet; rigorous usage-based metering is the only fiscal anchor capable of curbing runaway capex and credit downgrades.",
-        "con_point_en": "Surging CDS spreads expose broken ROI promises; OpenAI's aggressive rationing indicates LLM economics are stuck in a dead-end loop where scaling compute only scales operating losses.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+        "pro_point_zh": "从人类发问到Agent自主驻守巡检是软件工程范式的跃迁，将彻底消灭无休止的代码审查与调试耗时，让系统自愈成为生产环境的基础设施。",
+        "pro_author": "DeepSeek研发团队与极客开发者",
+        "con_point_zh": "Vibe coding产出的大量无法解释代码已成维护噩梦；智能体全天候监听介入导致算力消耗剧增数倍，更会在复杂生产环境中引发意想不到的连锁雪崩与安全死锁。",
+        "con_author": "资深架构师与工业级部署专家",
+        "action_advice_zh": "建议优先在受限沙箱中针对核心智能体任务开展端到端评测，借力 Ollama 实现零数据留存私有化部署。",
+        "pro_point_en": "Shifting from passive prompting to proactive chat monitoring transforms software engineering, turning autonomous triage and self-healing systems into baseline dev infrastructure.",
+        "con_point_en": "Vibe coding creates unmaintainable slop that collapses under real-world debt. Proactive agents multiply compute burn by an order of magnitude while creating lethal, non-deterministic bugs.",
+        "action_advice_en": "Benchmark in isolated sandboxes for agentic tasks, leveraging Ollama for zero-data-retention private hosting."
       }
     }
   ]
