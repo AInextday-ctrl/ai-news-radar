@@ -4896,7 +4896,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
            </div>`;
 
       return `
-        <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full" onclick="handleNewsCardClick('${item.id}', event)">
+        <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 group border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full" onclick="handleNewsCardClick('${item.id}', event)">
           ${thumbSlot}
           <div class="flex-1 flex flex-col justify-between min-w-0">
             <div>
@@ -5100,7 +5100,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       return `
-        <article class="glass-card rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 ${isCo ? 'border-l-amber-500/90' : 'border-l-sky-500/90'} hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10 transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
+        <article class="glass-card feed-card feed-card-celebrity rounded-2xl p-4 flex flex-col justify-between space-y-3 group border border-slate-200 dark:border-slate-800/90 border-l-4 ${isCo ? 'border-l-amber-500/90' : 'border-l-sky-500/90'} hover:border-sky-500/50 hover:shadow-xl hover:shadow-sky-500/10 transition-all cursor-pointer bg-white/95 dark:bg-slate-900/90" onclick="if(!event.target.closest('a, button')) openSocialPostModal('${itemId}')">
           <div class="space-y-2.5">
             <!-- 头部：原生 X (Twitter) 左右分栏流式布局 + 雷达信号强度指示 -->
             <div class="flex items-start space-x-3">
@@ -5392,7 +5392,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="spotlight-glow-box spotlight-glow-news relative overflow-hidden rounded-2xl p-5 sm:p-6 border-l-4 border-indigo-600 dark:border-indigo-400 border border-slate-200/90 dark:border-slate-800 bg-gradient-to-r from-slate-50 via-white to-indigo-50/20 dark:from-slate-900 dark:via-slate-900 dark:to-indigo-950/20 shadow-lg transition-all z-10">
+          <div class="spotlight-card spotlight-card-news p-5 sm:p-6">
             <div class="spotlight-glow-line spotlight-glow-line-news"></div>
             <!-- 顶部头条切换标签栏 -->
             ${tabsHtml}
@@ -5409,7 +5409,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 </span>
                 ${publishedAt ? `<span class="text-xs font-mono text-slate-400 dark:text-slate-500">${escapeHtml(publishedAt)}</span>` : ''}
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="spotlight-discuss-btn" style="border-color: rgba(99, 102, 241, 0.7); color: #818cf8;">
                 <span>${sourceBtnText}</span>
               </a>
             </div>
@@ -5508,14 +5508,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               </div>
             </div>
 
-            <div class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+            <div class="titan-tab-dock">
               ${titans.map((t, idx) => {
                 const isSelected = idx === activeIdx;
                 const tName = t.name || t.author;
                 const tTopic = isZh ? (t.topic_zh || '') : (t.topic_en || '');
                 return `
-                  <button type="button" onclick="window.switchActiveTitan(${idx})" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all shrink-0 cursor-pointer ${isSelected ? 'bg-sky-500 text-white border-sky-400 shadow-md scale-[1.02]' : 'bg-white/80 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700 hover:border-sky-300 hover:bg-sky-50/50'}">
-                    <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" class="w-5 h-5 rounded-full object-cover shrink-0" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
+                  <button type="button" onclick="window.switchActiveTitan(${idx})" class="titan-tab-btn ${isSelected ? 'active' : ''}">
+                    <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" class="w-5 h-5 rounded-full object-cover shrink-0 ring-1 ${isSelected ? 'ring-white' : 'ring-sky-400/40'}" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
                     <span>${escapeHtml(tName)}</span>
                     ${tTopic ? `<span class="text-[10px] opacity-80 font-normal">· ${escapeHtml(tTopic)}</span>` : ''}
                   </button>
@@ -5525,17 +5525,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           </div>
         `;
 
+        const cleanContext = (eventContext || '')
+          .replace(/^(?:📌\s*)?(?:事件)?背景速览[：:]\s*/i, '')
+          .replace(/^context[:：]\s*/i, '')
+          .trim();
+
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="spotlight-glow-box spotlight-glow-celebrity relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-sky-300/80 dark:border-sky-500/30 bg-gradient-to-br from-white via-sky-50/30 to-indigo-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-sky-950/20 shadow-lg transition-all z-10">
+          <div class="spotlight-card spotlight-card-celebrity p-5 sm:p-6">
             <div class="spotlight-glow-line spotlight-glow-line-celebrity"></div>
             <!-- 5大领袖切换导航 -->
             ${titansTabsHtml}
 
             <!-- 当前大V领袖社交身份栏 -->
-            <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-sky-100 dark:border-slate-800 flex-wrap gap-3">
+            <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-sky-100/60 dark:border-slate-800 flex-wrap gap-3">
               <div class="flex items-center space-x-3 min-w-0">
-                <img src="${optimizeAvatarUrl(avatar || author, 96)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400/80 shadow-md object-cover shrink-0" onerror="this.src='/assets/avatars/' + (handle ? handle.replace('@','') : 'karpathy') + '.jpg'">
+                <div class="relative shrink-0">
+                  <img src="${optimizeAvatarUrl(avatar || author, 96)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400 shadow-md object-cover ring-2 ring-sky-400/20" onerror="this.src='/assets/avatars/' + (handle ? handle.replace('@','') : 'karpathy') + '.jpg'">
+                  <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
+                </div>
                 <div class="min-w-0">
                   <div class="flex items-center space-x-1.5">
                     <span class="font-black text-base text-slate-900 dark:text-white truncate">${escapeHtml(author)}</span>
@@ -5545,36 +5553,36 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <div class="text-xs font-semibold text-sky-700 dark:text-sky-300 truncate">${escapeHtml(role)}</div>
                 </div>
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-black dark:bg-white dark:hover:bg-slate-100 text-white dark:text-slate-900 text-xs font-bold transition-all shadow-xs hover:scale-105 cursor-pointer">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="spotlight-discuss-btn">
                 <span>${discussBtnText}</span>
               </a>
             </div>
 
-            <!-- 背景速览 (Context) -->
-            ${eventContext ? `
-              <div class="my-2.5 p-3 rounded-xl bg-sky-50 dark:bg-sky-950/30 border border-sky-100 dark:border-sky-900/40 text-xs text-sky-900 dark:text-sky-200 font-medium leading-relaxed">
-                <span class="font-bold">📌 ${isZh ? '事件背景速览:' : 'Context:'}</span>
-                <span>${escapeHtml(eventContext)}</span>
+            <!-- 背景速览 (Context - 彻底修复白底与重复前缀) -->
+            ${cleanContext ? `
+              <div class="spotlight-context-box my-3">
+                <span class="font-bold text-sky-800 dark:text-sky-300">📌 ${isZh ? '事件背景速览:' : 'Context:'}</span>
+                <span class="ml-1">${escapeHtml(cleanContext)}</span>
               </div>
             ` : ''}
 
             <!-- 领袖核心原声引用气泡 (Quote Bubble) -->
-            <div class="relative my-3 p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-sky-100 dark:border-slate-700 shadow-xs">
-              <span class="text-sky-400 text-3xl font-serif leading-none select-none absolute top-2 left-3">“</span>
-              <p class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 leading-relaxed pl-5 mb-1.5">
+            <div class="spotlight-quote-card my-3.5">
+              <span class="text-sky-400/80 text-4xl font-serif leading-none select-none absolute top-2 left-3">“</span>
+              <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-slate-100 leading-relaxed pl-5 mb-1.5">
                 ${escapeHtml(quote)}
               </p>
               ${isZh && quoteEn ? `
-                <p class="text-xs text-slate-400 font-mono pl-5 leading-normal m-0 italic">
+                <p class="text-xs text-slate-500 dark:text-slate-400 font-mono pl-5 leading-normal m-0 italic">
                   ${escapeHtml(quoteEn)}
                 </p>
               ` : ''}
             </div>
 
             <!-- 领袖核心立论 vs 极客社群争议焦点 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 my-3">
-              <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs sm:text-sm">
-                <div class="font-bold text-amber-800 dark:text-amber-300 mb-1 flex items-center space-x-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 my-3.5">
+              <div class="spotlight-thesis-card text-xs sm:text-sm">
+                <div class="font-black text-amber-900 dark:text-amber-300 mb-1 flex items-center space-x-1">
                   <span>🔥</span>
                   <span>${isZh ? '领袖核心立论' : 'Titan Thesis'}</span>
                 </div>
@@ -5583,8 +5591,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 </p>
               </div>
 
-              <div class="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-xs sm:text-sm">
-                <div class="font-bold text-indigo-800 dark:text-indigo-300 mb-1 flex items-center space-x-1">
+              <div class="spotlight-debate-card text-xs sm:text-sm">
+                <div class="font-black text-purple-900 dark:text-purple-300 mb-1 flex items-center space-x-1">
                   <span>👥</span>
                   <span>${isZh ? '极客社群争议焦点' : 'Developer Debate'}</span>
                 </div>
@@ -5703,7 +5711,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         bannerEl.className = "mb-6 block";
         bannerEl.innerHTML = `
-          <div class="spotlight-glow-box spotlight-glow-tools relative overflow-hidden rounded-2xl p-5 sm:p-6 border border-emerald-300/80 dark:border-emerald-500/30 bg-gradient-to-br from-white via-emerald-50/25 to-teal-50/20 dark:from-slate-900 dark:via-slate-900/95 dark:to-emerald-950/20 shadow-lg transition-all z-10">
+          <div class="spotlight-card spotlight-card-tools p-5 sm:p-6">
             <div class="spotlight-glow-line spotlight-glow-line-tools"></div>
             <!-- 3大落地神器切换导航 -->
             ${toolTabsHtml}
@@ -5743,7 +5751,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   </div>
                 </div>
               </div>
-              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-black transition-all shadow-md hover:scale-105 cursor-pointer">
+              <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="spotlight-discuss-btn" style="border-color: rgba(52, 211, 153, 0.7); color: #34d399;">
                 <span>${tryBtnText}</span>
               </a>
             </div>
@@ -6372,7 +6380,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const cleanHook = hook || summary || (isZh ? '高星开源 AI 实用项目' : 'High-impact AI project');
 
       return `
-        <article onclick="handleToolCardClick('${itemId}', event)" class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
+        <article onclick="handleToolCardClick('${itemId}', event)" class="glass-card feed-card feed-card-tools rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-emerald-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-emerald-500/10 cursor-pointer">
           <!-- 顶部视觉高光 Preview Banner -->
           <div class="relative w-full aspect-[16/9] bg-slate-950 overflow-hidden shrink-0 flex items-center justify-center">
             <!-- 场景主题渐变兜底层 (确保任何情况下绝无死黑方块) -->
@@ -7154,7 +7162,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       ` : '';
 
       return `
-        <article class="glass-card rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 ${isLegacy ? 'border-l-slate-400 dark:border-l-slate-600 opacity-90' : 'border-l-purple-500'} shadow-md group w-full max-w-full min-w-0 overflow-hidden box-border">
+        <article class="glass-card feed-card feed-card-prompts rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 border-l-4 ${isLegacy ? 'border-l-slate-400 dark:border-l-slate-600 opacity-90' : 'border-l-purple-500'} shadow-md group w-full max-w-full min-w-0 overflow-hidden box-border">
           <div class="space-y-2 w-full max-w-full min-w-0 overflow-hidden">
             <div class="flex items-start justify-between gap-1.5 flex-wrap w-full min-w-0">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 break-words whitespace-normal leading-tight max-w-[70%] inline-block">
@@ -7241,7 +7249,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         : `https://www.youtube.com/embed/${item.video_id}?autoplay=1&mute=0`;
 
       return `
-        <article class="vertical-video-card group relative flex flex-col justify-between glass-card rounded-2xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 dark:hover:border-rose-500/50 shadow-md hover:shadow-xl transition-all duration-300 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md">
+        <article class="vertical-video-card feed-card feed-card-videos group relative flex flex-col justify-between glass-card rounded-2xl p-3.5 sm:p-4 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 dark:hover:border-rose-500/50 shadow-md hover:shadow-xl transition-all duration-300 bg-white/80 dark:bg-slate-900/90 backdrop-blur-md">
           <!-- 顶部创作者与平台标头 -->
           <div class="flex items-center justify-between pb-2">
             <div class="flex items-center space-x-2 truncate max-w-[170px]">

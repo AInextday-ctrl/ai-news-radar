@@ -1526,13 +1526,32 @@ ins.adsbygoogle iframe {
 
 
 /* =========================================================================
-   Spotlight Radiant Glow & Aura Effect (适配黑白两色主题的顶部精选栏光效)
+   Spotlight Radiant Glow & Aura Effect (适配黑白两色主题的顶部精选栏高级光效)
    ========================================================================= */
-.spotlight-glow-box {
+
+@keyframes spotlightPulseLine {
+  0%, 100% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px currentColor);
+  }
+}
+
+/* 顶部精选栏基础容器 */
+.spotlight-card {
   position: relative;
-  border-radius: 1.25rem;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 1.5rem;
   overflow: hidden;
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 10;
+}
+.spotlight-card:hover {
+  transform: translateY(-2px);
 }
 
 /* 顶部高光流光条 */
@@ -1541,67 +1560,306 @@ ins.adsbygoogle iframe {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  z-index: 20;
+  height: 3px;
+  z-index: 25;
   pointer-events: none;
 }
 
-/* 行业快讯光效 (Indigo / Violet) */
-html.dark .spotlight-glow-news {
-  background: radial-gradient(850px circle at 15% -20%, rgba(99, 102, 241, 0.22), transparent 45%),
-              radial-gradient(600px circle at 85% 120%, rgba(168, 85, 247, 0.15), transparent 50%),
-              rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(99, 102, 241, 0.5);
-  box-shadow: 0 0 35px -5px rgba(99, 102, 241, 0.32), 0 0 15px -3px rgba(168, 85, 247, 0.22);
+/* 1. 行业快讯光效 (Crimson & Indigo / Breaking Intelligence) */
+html.dark .spotlight-card-news {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(99, 102, 241, 0.22), transparent 50%),
+              radial-gradient(700px circle at 85% 120%, rgba(244, 63, 94, 0.15), transparent 50%),
+              linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(20, 15, 35, 0.98) 100%) !important;
+  border: 1.5px solid rgba(99, 102, 241, 0.55) !important;
+  border-left: 4.5px solid #6366f1 !important;
+  box-shadow: 0 0 45px -8px rgba(99, 102, 241, 0.35), 0 20px 40px -15px rgba(244, 63, 94, 0.25), inset 0 1px 1px 0 rgba(255, 255, 255, 0.15) !important;
 }
-html:not(.dark) .spotlight-glow-news {
-  background: radial-gradient(850px circle at 15% -20%, rgba(224, 231, 255, 0.95), transparent 50%),
-              radial-gradient(600px circle at 85% 120%, rgba(243, 232, 255, 0.75), transparent 50%),
-              #ffffff;
-  border: 1px solid rgba(99, 102, 241, 0.4);
-  box-shadow: 0 12px 35px -8px rgba(99, 102, 241, 0.2), 0 0 20px 2px rgba(168, 85, 247, 0.15);
+html:not(.dark) .spotlight-card-news {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(224, 231, 255, 0.95), transparent 55%),
+              radial-gradient(700px circle at 85% 120%, rgba(254, 226, 226, 0.8), transparent 50%),
+              #ffffff !important;
+  border: 1.5px solid rgba(99, 102, 241, 0.55) !important;
+  border-left: 4.5px solid #4f46e5 !important;
+  box-shadow: 0 20px 45px -12px rgba(99, 102, 241, 0.22), 0 0 25px 2px rgba(244, 63, 94, 0.18), inset 0 1px 2px 0 #ffffff !important;
 }
 .spotlight-glow-line-news {
-  background: linear-gradient(90deg, transparent 5%, #6366f1 35%, #a855f7 65%, transparent 95%);
-  box-shadow: 0 0 12px 2px rgba(99, 102, 241, 0.65);
+  background: linear-gradient(90deg, transparent 0%, #6366f1 30%, #f43f5e 70%, transparent 100%);
+  box-shadow: 0 0 14px 2px rgba(99, 102, 241, 0.8);
+  animation: spotlightPulseLine 3s infinite ease-in-out;
 }
 
-/* 社交雷达光效 (Sky / Cyan) */
-html.dark .spotlight-glow-celebrity {
-  background: radial-gradient(850px circle at 15% -20%, rgba(56, 189, 248, 0.22), transparent 45%),
-              radial-gradient(600px circle at 85% 120%, rgba(99, 102, 241, 0.14), transparent 50%),
-              rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(56, 189, 248, 0.52);
-  box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.35), 0 0 15px -3px rgba(14, 165, 233, 0.25);
+/* 2. 社交雷达光效 (Sky & Cyan / Cyber Titan Discourse) */
+html.dark .spotlight-card-celebrity {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(56, 189, 248, 0.22), transparent 50%),
+              radial-gradient(700px circle at 85% 120%, rgba(99, 102, 241, 0.16), transparent 50%),
+              linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(10, 15, 30, 0.98) 100%) !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.55) !important;
+  box-shadow: 0 0 50px -8px rgba(56, 189, 248, 0.38), 0 20px 40px -15px rgba(14, 165, 233, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18) !important;
 }
-html:not(.dark) .spotlight-glow-celebrity {
-  background: radial-gradient(850px circle at 15% -20%, rgba(224, 242, 254, 0.95), transparent 50%),
-              radial-gradient(600px circle at 85% 120%, rgba(238, 242, 255, 0.75), transparent 50%),
-              #ffffff;
-  border: 1px solid rgba(56, 189, 248, 0.45);
-  box-shadow: 0 12px 35px -8px rgba(56, 189, 248, 0.22), 0 0 20px 2px rgba(14, 165, 233, 0.16);
+html:not(.dark) .spotlight-card-celebrity {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(224, 242, 254, 0.98), transparent 55%),
+              radial-gradient(700px circle at 85% 120%, rgba(238, 242, 255, 0.85), transparent 50%),
+              #ffffff !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.6) !important;
+  box-shadow: 0 20px 45px -12px rgba(14, 165, 233, 0.25), 0 0 28px 2px rgba(56, 189, 248, 0.22), inset 0 1px 2px 0 #ffffff !important;
 }
 .spotlight-glow-line-celebrity {
-  background: linear-gradient(90deg, transparent 5%, #38bdf8 35%, #818cf8 65%, transparent 95%);
-  box-shadow: 0 0 12px 2px rgba(56, 189, 248, 0.75);
+  background: linear-gradient(90deg, transparent 0%, #38bdf8 30%, #818cf8 70%, transparent 100%);
+  box-shadow: 0 0 16px 2px rgba(56, 189, 248, 0.85);
+  animation: spotlightPulseLine 3s infinite ease-in-out;
 }
 
-/* 落地工具光效 (Emerald / Teal) */
-html.dark .spotlight-glow-tools {
-  background: radial-gradient(850px circle at 15% -20%, rgba(52, 211, 153, 0.2), transparent 45%),
-              radial-gradient(600px circle at 85% 120%, rgba(20, 184, 166, 0.14), transparent 50%),
-              rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(52, 211, 153, 0.5);
-  box-shadow: 0 0 35px -5px rgba(52, 211, 153, 0.3), 0 0 15px -3px rgba(20, 184, 166, 0.22);
+/* 3. 落地工具光效 (Emerald & Mint / Cyber Tech Matrix) */
+html.dark .spotlight-card-tools {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(52, 211, 153, 0.22), transparent 50%),
+              radial-gradient(700px circle at 85% 120%, rgba(20, 184, 166, 0.16), transparent 50%),
+              linear-gradient(180deg, rgba(15, 23, 42, 0.94) 0%, rgba(6, 30, 25, 0.98) 100%) !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.55) !important;
+  box-shadow: 0 0 50px -8px rgba(52, 211, 153, 0.38), 0 20px 40px -15px rgba(20, 184, 166, 0.3), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18) !important;
 }
-html:not(.dark) .spotlight-glow-tools {
-  background: radial-gradient(850px circle at 15% -20%, rgba(209, 250, 229, 0.95), transparent 50%),
-              radial-gradient(600px circle at 85% 120%, rgba(204, 251, 241, 0.75), transparent 50%),
-              #ffffff;
-  border: 1px solid rgba(52, 211, 153, 0.42);
-  box-shadow: 0 12px 35px -8px rgba(52, 211, 153, 0.2), 0 0 20px 2px rgba(20, 184, 166, 0.15);
+html:not(.dark) .spotlight-card-tools {
+  background: radial-gradient(1000px circle at 15% -20%, rgba(209, 250, 229, 0.98), transparent 55%),
+              radial-gradient(700px circle at 85% 120%, rgba(204, 251, 241, 0.85), transparent 50%),
+              #ffffff !important;
+  border: 1.5px solid rgba(52, 211, 153, 0.6) !important;
+  box-shadow: 0 20px 45px -12px rgba(16, 185, 129, 0.25), 0 0 28px 2px rgba(52, 211, 153, 0.22), inset 0 1px 2px 0 #ffffff !important;
 }
 .spotlight-glow-line-tools {
-  background: linear-gradient(90deg, transparent 5%, #34d399 35%, #2dd4bf 65%, transparent 95%);
-  box-shadow: 0 0 12px 2px rgba(52, 211, 153, 0.7);
+  background: linear-gradient(90deg, transparent 0%, #34d399 30%, #2dd4bf 70%, transparent 100%);
+  box-shadow: 0 0 16px 2px rgba(52, 211, 153, 0.85);
+  animation: spotlightPulseLine 3s infinite ease-in-out;
+}
+
+/* 精选栏专属组件化样式 (彻底杜绝深色模式白底与低对比度) */
+.spotlight-context-box {
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  transition: all 0.25s ease;
+}
+html.dark .spotlight-context-box {
+  background: rgba(12, 74, 110, 0.35) !important;
+  border: 1px solid rgba(56, 189, 248, 0.45) !important;
+  color: #e0f2fe !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+}
+html:not(.dark) .spotlight-context-box {
+  background: rgba(240, 249, 255, 0.95) !important;
+  border: 1px solid rgba(186, 230, 253, 0.95) !important;
+  color: #0369a1 !important;
+  box-shadow: 0 2px 8px -2px rgba(14, 165, 233, 0.1);
+}
+
+.spotlight-discuss-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.45rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  text-decoration: none !important;
+}
+html.dark .spotlight-discuss-btn {
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: #38bdf8 !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.7) !important;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.35);
+}
+html.dark .spotlight-discuss-btn:hover {
+  background: rgba(56, 189, 248, 0.25) !important;
+  color: #ffffff !important;
+  border-color: #38bdf8 !important;
+  transform: scale(1.05);
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.65);
+}
+html:not(.dark) .spotlight-discuss-btn {
+  background: #0f172a !important;
+  color: #ffffff !important;
+  border: 1.5px solid #0f172a !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+}
+html:not(.dark) .spotlight-discuss-btn:hover {
+  background: #000000 !important;
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.3);
+}
+
+.spotlight-quote-card {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1.125rem 1.25rem 1.125rem 1.75rem;
+  transition: all 0.25s ease;
+}
+html.dark .spotlight-quote-card {
+  background: rgba(30, 41, 59, 0.75) !important;
+  border: 1px solid rgba(71, 85, 105, 0.6) !important;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.08);
+}
+html:not(.dark) .spotlight-quote-card {
+  background: #ffffff !important;
+  border: 1px solid rgba(226, 232, 240, 0.95) !important;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06);
+}
+
+.spotlight-thesis-card {
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.125rem;
+  transition: all 0.2s ease;
+}
+html.dark .spotlight-thesis-card {
+  background: rgba(120, 53, 15, 0.25) !important;
+  border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+html:not(.dark) .spotlight-thesis-card {
+  background: rgba(254, 243, 199, 0.7) !important;
+  border: 1px solid rgba(245, 158, 11, 0.45) !important;
+}
+
+.spotlight-debate-card {
+  border-radius: 0.875rem;
+  padding: 0.875rem 1.125rem;
+  transition: all 0.2s ease;
+}
+html.dark .spotlight-debate-card {
+  background: rgba(76, 29, 149, 0.25) !important;
+  border: 1px solid rgba(168, 85, 247, 0.4) !important;
+}
+html:not(.dark) .spotlight-debate-card {
+  background: rgba(243, 232, 255, 0.7) !important;
+  border: 1px solid rgba(168, 85, 247, 0.4) !important;
+}
+
+/* 领袖切换 Dock 胶囊条 */
+.titan-tab-dock {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.35rem;
+  scrollbar-width: none;
+}
+.titan-tab-dock::-webkit-scrollbar {
+  display: none;
+}
+.titan-tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.875rem;
+  border-radius: 0.875rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.titan-tab-btn.active {
+  background: linear-gradient(135deg, #0284c7, #0369a1) !important;
+  color: #ffffff !important;
+  border: 1.5px solid #38bdf8 !important;
+  box-shadow: 0 4px 14px -2px rgba(14, 165, 233, 0.5);
+  transform: scale(1.03);
+}
+html.dark .titan-tab-btn:not(.active) {
+  background: rgba(30, 41, 59, 0.6) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(71, 85, 105, 0.4) !important;
+}
+html.dark .titan-tab-btn:not(.active):hover {
+  background: rgba(51, 65, 85, 0.8) !important;
+  color: #ffffff !important;
+  border-color: rgba(56, 189, 248, 0.5) !important;
+}
+html:not(.dark) .titan-tab-btn:not(.active) {
+  background: rgba(255, 255, 255, 0.85) !important;
+  color: #334155 !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+}
+html:not(.dark) .titan-tab-btn:not(.active):hover {
+  background: #f0f9ff !important;
+  color: #0369a1 !important;
+  border-color: #7dd3fc !important;
+}
+
+/* =========================================================================
+   Dynamic Visual Cadence & Category-Specific Card Styling (全站专栏防疲劳边框设计)
+   ========================================================================= */
+.feed-card {
+  border-radius: 1rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.feed-card:hover {
+  transform: translateY(-2.5px);
+}
+
+/* 行业快讯：严谨研报质感，左侧紫蓝色重点呼吸条 */
+.feed-card-news {
+  border-left: 3.5px solid #6366f1 !important;
+}
+html.dark .feed-card-news:hover {
+  border-color: rgba(99, 102, 241, 0.6) !important;
+  box-shadow: 0 12px 30px -8px rgba(99, 102, 241, 0.25);
+}
+html:not(.dark) .feed-card-news:hover {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 12px 30px -8px rgba(99, 102, 241, 0.18);
+}
+
+/* 社交雷达：极客黑金/电竞透光感，左侧青蓝色高亮 */
+.feed-card-celebrity {
+  border-left: 3.5px solid #0284c7 !important;
+}
+html.dark .feed-card-celebrity:hover {
+  border-color: rgba(56, 189, 248, 0.6) !important;
+  box-shadow: 0 12px 30px -8px rgba(14, 165, 233, 0.28);
+}
+html:not(.dark) .feed-card-celebrity:hover {
+  border-color: #0ea5e9 !important;
+  box-shadow: 0 12px 30px -8px rgba(14, 165, 233, 0.18);
+}
+
+/* 落地工具：黑客松/Product Hunt 展台感，左侧翡翠绿 */
+.feed-card-tools {
+  border-left: 3.5px solid #10b981 !important;
+}
+html.dark .feed-card-tools:hover {
+  border-color: rgba(52, 211, 153, 0.6) !important;
+  box-shadow: 0 12px 30px -8px rgba(16, 185, 129, 0.25);
+}
+html:not(.dark) .feed-card-tools:hover {
+  border-color: #059669 !important;
+  box-shadow: 0 12px 30px -8px rgba(16, 185, 129, 0.18);
+}
+
+/* 实战视频：流媒体影院感，左侧炫紫光 */
+.feed-card-videos {
+  border-left: 3.5px solid #a855f7 !important;
+}
+html.dark .feed-card-videos:hover {
+  border-color: rgba(192, 132, 252, 0.6) !important;
+  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.25);
+}
+html:not(.dark) .feed-card-videos:hover {
+  border-color: #9333ea !important;
+  box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.18);
+}
+
+/* 提示词库：极客终端黑板感，左侧琥珀金 */
+.feed-card-prompts {
+  border-left: 3.5px solid #f59e0b !important;
+}
+html.dark .feed-card-prompts:hover {
+  border-color: rgba(251, 191, 36, 0.6) !important;
+  box-shadow: 0 12px 30px -8px rgba(245, 158, 11, 0.25);
+}
+html:not(.dark) .feed-card-prompts:hover {
+  border-color: #d97706 !important;
+  box-shadow: 0 12px 30px -8px rgba(245, 158, 11, 0.18);
 }
