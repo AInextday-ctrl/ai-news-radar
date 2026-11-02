@@ -2,9 +2,10 @@ name: AI Radar - 24x7 Auto Update & Deploy
 
 on:
   schedule:
-    # 每 8 分钟在云端极速增量抓取更新一次 (UTC，每天 180+ 次全天候极速监控)
-    # 采用错峰偏移间隔 (每 20 分钟)，避开整点/整半点拥堵高峰与并发锁冲突
-    - cron: '6,26,46 * * * *'
+    # 每天早高峰与日间高频调度 (UTC 00:00 - 15:59，对应北京时间 08:00 - 23:59)：每 30 分钟一次 (:08, :38)
+    - cron: '8,38 0-15 * * *'
+    # 凌晨与夜间低频调度 (UTC 16:00 - 23:59，对应北京时间 00:00 - 07:59)：每 60 分钟一次 (:20)
+    - cron: '20 16-23 * * *'
   workflow_dispatch: # 支持在 GitHub 网页上一键手动立即触发
   repository_dispatch: # 支持云端外部 Webhook (cron-job.org / Cloudflare) 秒级即时触发
     types: [auto-sync, cron-trigger]
@@ -45,7 +46,7 @@ jobs:
           GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
           GEMINI_MODEL: 'gemini-flash-latest'
           APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
-          APIFY_INTERVAL_HOURS: '0.2'
+          APIFY_INTERVAL_HOURS: '0.4'
           PYTHONIOENCODING: 'utf-8'
         run: |
           python main.py || (echo "⚠️ main.py 遇到偶发异常，触发缓存自愈静态发布..." && python content_publisher.py)
