@@ -502,14 +502,54 @@ if __name__ == "__main__":
                     cleaned_by_id[it_id] = it
 
             if is_public:
+                STRIP_PUBLIC_KEYS = {
+                    'ai_analysis', 'original_content', 'article_content', 'article_content_zh',
+                    'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
+                    'wechat_published_draft', 'processed_mark', 'processed_status',
+                    'processed_at', 'media_checked', 'raw_content', 'raw_html'
+                }
+                def _strip_pub(it, cat_hint=None):
+                    if not isinstance(it, dict):
+                        return it
+                    c = {k: v for k, v in it.items() if k not in STRIP_PUBLIC_KEYS and v is not None}
+                    cat = cat_hint or c.get('category')
+                    if cat == 'celebrity':
+                        fte = c.get('full_text_en') or c.get('title_en') or ''
+                        if fte:
+                            c['full_text_en'] = fte
+                            for k in ['quote_en', 'summary_en', 'content_snippet', 'title_en']:
+                                if c.get(k) == fte: c.pop(k, None)
+                        ftz = c.get('full_text_zh') or c.get('title_zh') or ''
+                        if ftz:
+                            c['full_text_zh'] = ftz
+                            for k in ['quote_zh', 'summary_zh', 'title_zh']:
+                                if c.get(k) == ftz: c.pop(k, None)
+                    elif cat == 'news':
+                        if c.get('content_snippet') == c.get('summary_en'):
+                            c.pop('content_snippet', None)
+                        c.pop('article_content_zh', None)
+                    return c
+
+                category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}
                 d.pop("items", None)
                 if "grouped" in d and isinstance(d["grouped"], dict):
                     for cat_k, cat_list in d["grouped"].items():
                         if isinstance(cat_list, list):
+                            limit = category_caps.get(cat_k, len(cat_list))
                             d["grouped"][cat_k] = [
-                                cleaned_by_id.get(it.get("id") or it.get("url"), it)
-                                for it in cat_list
+                                _strip_pub(cleaned_by_id.get(it.get("id") or it.get("url"), it), cat_k)
+                                for it in cat_list[:limit]
                             ]
+                if "viral_ticker_tweets" in d and isinstance(d["viral_ticker_tweets"], list):
+                    d["viral_ticker_tweets"] = [
+                        _strip_pub(cleaned_by_id.get(it.get("id") or it.get("url"), it), "celebrity")
+                        for it in d["viral_ticker_tweets"]
+                    ]
+                if "top_three" in d and isinstance(d["top_three"], list):
+                    d["top_three"] = [
+                        _strip_pub(cleaned_by_id.get(it.get("id") or it.get("url"), it), "news")
+                        for it in d["top_three"]
+                    ]
             else:
                 d["items"] = cleaned
                 if "grouped" in d and isinstance(d["grouped"], dict):

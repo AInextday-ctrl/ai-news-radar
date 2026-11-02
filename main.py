@@ -1972,6 +1972,10 @@ def save_news(items: list):
 
     public_payload = dict(latest_payload)
     public_payload["grouped"] = public_grouped
+    if "viral_ticker_tweets" in public_payload and isinstance(public_payload["viral_ticker_tweets"], list):
+        public_payload["viral_ticker_tweets"] = [_clean_archive_item(x, "celebrity") for x in public_payload["viral_ticker_tweets"]]
+    if "top_three" in public_payload and isinstance(public_payload["top_three"], list):
+        public_payload["top_three"] = [_clean_archive_item(x, "news") for x in public_payload["top_three"]]
     public_payload["archive_meta"] = {
         "total_archived": len(all_archive_items),
         "category_totals": category_totals
