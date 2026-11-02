@@ -98,7 +98,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//i.insider.com/6adf996ac8572251b1980211%3Fwidth%3D1200%26format%3Djpeg&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=6.1.0">
   <link rel="preload" href="/js/app.min.js?v=6.9.23" as="script">
   <style>
@@ -891,7 +891,7 @@ Stay tuned….
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-02 07:48 · 1h ago</span>
+                    <span class="truncate">11-02 07:48 · 2h ago</span>
                   </span>
                   <a href="https://x.com/EastEndJoe/status/2117041035545309302" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
@@ -1757,8 +1757,34 @@ It's time to bring TradFi onchain.
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('2b8b69cf180177e9')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Letter: the White House argues it doesn't have to share the full draft of its voluntary AI testing framework, citing nat" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
+                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
+                      <span class="truncate ml-1">Source: The Information</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('2b8b69cf180177e9')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
+                      Letter: the White House argues it doesn't have to share the full draft of its voluntary AI testing framework, citing nat
+                    </button>
+                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
+                      In an official response, the White House declined to disclose the complete draft and key records of its voluntary AI testing framework, citing exemptions for national security and confidential commercial information. The administration maintained tha
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('2b8b69cf180177e9')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.theinformation.com/briefings/trump-administration-refuses-release-information-ai-testing-framework" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce47da3877fef538')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//i.insider.com/6adf996ac8572251b1980211%3Fwidth%3D1200%26format%3Djpeg&w=480&output=webp&q=80" alt="Hyperbolic, which lets companies rent AI compute across ~30 neoclouds, raised a $30M Series A-1 led by Lip-Bu Tan's Wald" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//i.insider.com/6adf996ac8572251b1980211%3Fwidth%3D1200%26format%3Djpeg&w=480&output=webp&q=80" alt="Hyperbolic, which lets companies rent AI compute across ~30 neoclouds, raised a $30M Series A-1 led by Lip-Bu Tan's Wald" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
@@ -2042,32 +2068,6 @@ Many media veterans doubt the profiles accomplish their subjects’ public relat
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.theinformation.com/articles/google-energy-chief-space-data-centers-cost-100-times-earth" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4b04f228d3c7fcf9')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start"><img src="https://wsrv.nl/?url=https%3A//colossus.com/wp-content/uploads/2026/10/Kratsios-preview-card-2.png&w=480&output=webp&q=80" alt="A profile of White House OSTP Director Michael Kratsios, an ex-Peter Thiel aide who is among a handful of players steeri" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-[10px] text-slate-400 mb-1">
-                      <span class="font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-950/40 px-2 py-0.5 rounded border border-indigo-200/50">⚡ Breaking News</span>
-                      <span class="truncate ml-1">Source: Colossus</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('4b04f228d3c7fcf9')" class="block text-left w-full font-bold text-sm sm:text-base text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 min-h-[2.5rem]">
-                      A profile of White House OSTP Director Michael Kratsios, an ex-Peter Thiel aide who is among a handful of players steeri
-                    </button>
-                    <p itemprop="description" class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed min-h-[2.25rem]">
-                      White House OSTP Director Michael Kratsios, a former Peter Thiel aide, orchestrated a high-stakes gathering bringing together tech titans including Jensen Huang, Elon Musk, and Satya Nadella to receive national honors. Acting as a pivotal policy arch
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-xs">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('4b04f228d3c7fcf9')" class="text-[11px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://colossus.com/article/michael-kratsios-office-frontier-ostp/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[11px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
