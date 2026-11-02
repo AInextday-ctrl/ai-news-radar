@@ -104,7 +104,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/11/grok_bot_costs.png&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style.min.css?v=7.3.0">
   <link rel="preload" href="/js/app.min.js?v=7.3.0" as="script">
   <style>
@@ -580,7 +580,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- Ticker Navigation Controls & Page Indicator -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 5</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Previous (Up)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Next (Down)">↓</button>
@@ -594,73 +594,67 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 items-stretch w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; grid-template-rows: 180px; overflow: hidden; box-sizing: border-box;">
               <div id="viral-ticker-pinned" class="w-full overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 
+              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden
+                bg-gradient-to-br from-amber-500/15 via-white to-rose-500/10 dark:from-amber-950/70 dark:via-slate-900/95 dark:to-orange-950/60
+                border border-amber-400 dark:border-amber-300/90 ring-1 ring-amber-400/50
+                shadow-[0_0_20px_rgba(251,191,36,0.25),inset_0_0_12px_rgba(251,191,36,0.1)]
+                hover:shadow-[0_0_30px_rgba(251,191,36,0.45)] hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/thsottiaux&w=80&h=80&fit=cover&output=webp&q=80" alt="Thibault Sottiaux (Tibo)" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-amber-400 dark:ring-amber-300 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-gradient-to-br from-amber-400 to-rose-500 text-white flex items-center justify-center text-[8px] font-black shadow ring-1 ring-white dark:ring-slate-900 leading-none">📌</span>
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Thibault Sottiaux (Tibo)</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-amber-700/80 dark:text-amber-400/90 font-mono truncate font-medium leading-none mt-1">
+                        @thsottiaux · AI Engineer / Tech Builder
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-black tracking-wide bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white shadow-sm shrink-0 border border-amber-300/40 leading-none">
+                      <span class="relative flex h-1.5 w-1.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                      </span>
+                      <span>🔥 24H RESET PINNED</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-900 dark:text-slate-100 font-medium leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
+                    Fellow resetters, heads up that we're working on expanding the family of frontier models that power dots, including GPT-6 Astra and GPT-6.1 Terra and some others in the future. Terra brings speed and a nice personality upgrade, and will help us bring
+                  </p>
+                  
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-amber-200/60 dark:border-amber-900/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono flex items-center gap-1 text-amber-700 dark:text-amber-300 font-bold truncate shrink-0 max-w-[50%] leading-none">
+                    <span class="animate-pulse text-amber-500 shrink-0">⚡</span>
+                    <span class="truncate">24h Spotlight · Pinned #1</span>
+                  </span>
+                  <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+                    <span class="text-amber-800/80 dark:text-amber-300/80 font-medium leading-none" title="Tweet Publish Time (UTC+8)">
+                      <span>🕒 2h ago</span>
+                    </span>
+                    <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+                    <a href="https://x.com/thsottiaux/status/2117283124833055196" target="_blank" rel="noopener noreferrer" class="text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 font-bold hover:underline flex items-center gap-0.5 shrink-0 leading-none">
+                      <span>View Post ↗</span>
+                    </a>
+                  </div>
+                </div>
+              </article>
+              </div>
+              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
+                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
+                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
+
     <div id="pinned-slider-viewport" class="relative w-full h-full overflow-hidden rounded-2xl group/pinned box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
       <div id="pinned-slider-track" class="flex flex-col transition-transform duration-700 ease-out h-full" style="transform: translateY(0px);">
         <div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
-
-    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-        <div class="flex items-center space-x-2 min-w-0 h-8">
-          <div class="relative shrink-0 w-7 h-7">
-            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
-              <span>▶</span>
-            </div>
-            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
-          </div>
-          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-            <div class="flex items-center space-x-1 leading-none h-4">
-              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Metics Media</span>
-              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
-            </div>
-            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 0.0h ago
-            </div>
-          </div>
-        </div>
-        <div class="flex items-center h-8 shrink-0">
-          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
-            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-            <span>🎬 48h Lab Review</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/VMvZuhcDdnw?autoplay=1&rel=0', 'Build $10,000 Websites using Claude Code (Ultimate Guide)', 'youtube', 'https://www.youtube.com/watch?v=VMvZuhcDdnw')" title="Click to play in theater mode">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/VMvZuhcDdnw/maxresdefault.jpg&w=400&output=webp&q=85" alt="Build $10,000 Websites using Claude Code (Ultimate Guide)" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/VMvZuhcDdnw/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
-          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
-            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
-          </div>
-        </div>
-        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
-          <a href="https://www.youtube.com/watch?v=VMvZuhcDdnw" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="Build $10,000 Websites using Claude Code (Ultimate Guide)">
-            Build $10,000 Websites using Claude Code (Ultimate Guide)
-          </a>
-          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Metics Media</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-          <span>🎬</span>
-          <span class="truncate">Benchmark</span>
-        </span>
-        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
-          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/VMvZuhcDdnw?autoplay=1&rel=0', 'Build $10,000 Websites using Claude Code (Ultimate Guide)', 'youtube', 'https://www.youtube.com/watch?v=VMvZuhcDdnw')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
-            <span>Theater Play ▶</span>
-          </button>
-          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
-          <a href="https://www.youtube.com/watch?v=VMvZuhcDdnw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
-            <span>Source ↗</span>
-          </a>
-        </div>
-      </div>
-    </article>
-    
-</div>
-<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
 
     <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
       <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -677,7 +671,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 12.0h ago
+              YouTube Lab · 0.0h ago
             </div>
           </div>
         </div>
@@ -724,16 +718,76 @@
     </article>
     
 </div>
+<div class="pinned-slide-item shrink-0 w-full box-border" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden;">
+
+    <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group/vcard cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-rose-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+      <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+        <div class="flex items-center space-x-2 min-w-0 h-8">
+          <div class="relative shrink-0 w-7 h-7">
+            <div class="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-rose-700 text-white flex items-center justify-center text-xs font-black shadow-md ring-1 ring-rose-400/50 shrink-0 leading-none">
+              <span>▶</span>
+            </div>
+            <span class="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-rose-500 text-white flex items-center justify-center text-[8px] font-black ring-1 ring-white dark:ring-slate-900 shadow leading-none">🎬</span>
+          </div>
+          <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+            <div class="flex items-center space-x-1 leading-none h-4">
+              <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Metics Media</span>
+              <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
+            </div>
+            <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+              YouTube Lab · 12.0h ago
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center h-8 shrink-0">
+          <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
+            <span>🎬 48h Lab Review</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+        <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/VMvZuhcDdnw?autoplay=1&rel=0', 'Build $10,000 Websites using Claude Code (Ultimate Guide)', 'youtube', 'https://www.youtube.com/watch?v=VMvZuhcDdnw')" title="Click to play in theater mode">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/VMvZuhcDdnw/maxresdefault.jpg&w=400&output=webp&q=85" alt="Build $10,000 Websites using Claude Code (Ultimate Guide)" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/VMvZuhcDdnw/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+          <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
+            <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
+          </div>
+        </div>
+        <div class="min-w-0 flex-1 flex flex-col justify-between h-full">
+          <a href="https://www.youtube.com/watch?v=VMvZuhcDdnw" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-slate-900 hover:text-indigo-600 dark:text-slate-100 dark:hover:text-sky-300 transition-colors line-clamp-2 leading-snug" title="Build $10,000 Websites using Claude Code (Ultimate Guide)">
+            Build $10,000 Websites using Claude Code (Ultimate Guide)
+          </a>
+          <div class="flex items-center gap-1 overflow-hidden mt-0.5">
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">Metics Media</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+        <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+          <span>🎬</span>
+          <span class="truncate">Benchmark</span>
+        </span>
+        <div class="flex items-center gap-2 font-mono text-[10px] shrink-0 leading-none">
+          <button type="button" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/VMvZuhcDdnw?autoplay=1&rel=0', 'Build $10,000 Websites using Claude Code (Ultimate Guide)', 'youtube', 'https://www.youtube.com/watch?v=VMvZuhcDdnw')" class="text-rose-600 hover:text-rose-700 dark:text-rose-400 dark:hover:text-rose-300 font-bold flex items-center gap-0.5 cursor-pointer leading-none">
+            <span>Theater Play ▶</span>
+          </button>
+          <span class="text-slate-300 dark:text-slate-700 leading-none">·</span>
+          <a href="https://www.youtube.com/watch?v=VMvZuhcDdnw" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 font-semibold hover:underline leading-none">
+            <span>Source ↗</span>
+          </a>
+        </div>
+      </div>
+    </article>
+    
+</div>
       </div>
       <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10 pointer-events-none">
         <span id="pinned-dot-0" class="w-3 h-1.5 rounded-full bg-rose-500 transition-all"></span>
         <span id="pinned-dot-1" class="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600 transition-all"></span>
       </div>
     </div>
-              </div>
-              <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
-                <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
-                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -757,22 +811,26 @@
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Try Grok @Bot! You will love it.
+                    @shaunmmaguire @uncovered_alpha Future super intelligence compute will obviously be overwhelmingly in space. 
 
-We land a few dozen fixes, features and sometimes powers to Bot 7 days a week and we look at your feedback to make Bot as perfect as possible.
+By “overwhelmingly”, I mean that it will round up to 100%!
+
+You have to be an utter moron not to realize this.
                   </p>
                   
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-02 07:20 · 12h ago</span>
+                    <span class="truncate">11-02 23:08 · 3h ago</span>
                   </span>
-                  <a href="https://x.com/elonmusk/status/2117033967782113327" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/elonmusk/status/2117272748112154651" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
               </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
               <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
@@ -803,52 +861,9 @@ We land a few dozen fixes, features and sometimes powers to Bot 7 days a week an
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-02 03:46 · 15h ago</span>
+                    <span class="truncate">11-02 03:46 · 22h ago</span>
                   </span>
                   <a href="https://x.com/karpathy/status/2116980174667583602" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1998801811445264393/8EkXXa-P_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Garrett" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Garrett</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @Garreett_G · Kol
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    What happens when an AI agent receives a task it doesn't have the skills to complete?
-
-Instead of failing or waiting for human intervention, it could find another agent capable of handling that specific job.
-
-That's the kind of agent-to-agent coopera
-                  </p>
-                  
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-02 18:50 · 53m ago</span>
-                  </span>
-                  <a href="https://x.com/Garreett_G/status/2117207823218311394" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
@@ -858,15 +873,15 @@ That's the kind of agent-to-agent coopera
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2077065127325798405/71ouxNGT_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Rahul Raj" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/github/deepseek-ai&w=80&h=80&fit=cover&output=webp&q=80" alt="DeepSeek" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     </div>
                     <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
                       <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Rahul Raj</span>
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">DeepSeek</span>
                         <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                       </div>
                       <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @x_rahulraj · सौ दर्द बदन पर फैले है हर करम के कपड़े मैले है.
+                        @deepseek_ai · AI Engineer / Tech Builder
                       </div>
                     </div>
                   </div>
@@ -876,21 +891,25 @@ That's the kind of agent-to-agent coopera
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    There are children barely five or six years old throwing stones at the police, attempting to attack and kill them.
+                    RT @DeepSeekHarness: Your Harness. You Define It.
 
-The revolution that became a case study for many Indians as a triumph of people's power, seems to have delivered little beyond publici
+Meet Creator Mode in DeepSeek Harness. 
+
+Turn ideas into plugins that you can use, from a design workspace to a sandbox game or a 3D LLM visualizer. 
+
+What will you create?
                   </p>
                   
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117182487038492672/img/6ZlTwtkVh_ir1hYk.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117182487038492672/img/6ZlTwtkVh_ir1hYk.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117255528309227520/img/bcnmVclr5ToXKbxg.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117255528309227520/img/bcnmVclr5ToXKbxg.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
         </div>
                 </div>
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-02 18:02 · 1h ago</span>
+                    <span class="truncate">11-02 22:23 · 4h ago</span>
                   </span>
-                  <a href="https://x.com/x_rahulraj/status/2117195552207315100" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/deepseek_ai/status/2117261337877455247" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
@@ -898,19 +917,19 @@ The revolution that became a case study for many Indians as a triumph of people'
 </div>
 <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
 
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
                 <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
                   <div class="flex items-center space-x-2 min-w-0 h-8">
                     <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1995510984350244864/dusy4t6R_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="kami" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
                     </div>
                     <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
                       <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">kami</span>
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI Developers</span>
                         <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
                       </div>
                       <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @soloswago · jpeg hunter - @cryptfamdao
+                        @OpenAIDevs · AI Engineer / Tech Builder
                       </div>
                     </div>
                   </div>
@@ -920,11 +939,188 @@ The revolution that became a case study for many Indians as a triumph of people'
                 </div>
                 <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
                   <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Every Sunday after service, someone tells me what my sermon was about. When they say it in their own words and still get it right, I know the message landed, not just the wording.
+                    RT @kevinwhinnery: You:
 
-That habit is the idea behind Greyboxing.
+Me: okay fine I'll build an agent with the @OpenAIDevs Agents API to help me sort out this 1995 Miata so I can drive it to California and track it at Sonoma and Laguna Seca, geez, lay off
+                  </p>
+                  
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWEasszWIAI7fjS.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWEasszWIAI7fjS.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">11-02 21:23 · 5h ago</span>
+                  </span>
+                  <a href="https://x.com/OpenAIDevs/status/2117246156786790408" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
 
-An AI agent that controls 
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1734125491253288960/XtRiYGil_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Reece “Kiwi Talkz” Reilly" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Reece “Kiwi Talkz” Reilly</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @kiwitalkz · Game Developer Interviewer -Interviewed 150+ Game Devs
+Known
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    When Neil Druckmann was handed the reigns of Uncharted 4 after Amy Hennig's departure he essentially looked at everything that had already been created and came up with the story within a couple of weeks. That's nuts!!
+
+To take a game that was alread
+                  </p>
+                  
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117302484192694272/img/JlaPKE0D7-mk4-iy.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117302484192694272/img/JlaPKE0D7-mk4-iy.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">11-03 01:16 · 1h ago</span>
+                  </span>
+                  <a href="https://x.com/kiwitalkz/status/2117304840489758880" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
+
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2102726150493556737/_R8lLT-V_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Rodev" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Rodev</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @romandevz · Tech, AI &amp; Videogames | 📩 roman@aiscwork.com
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    What if your bank had an AI agent instead of just another dashboard?
+
+Most financial apps are built around showing you data.
+
+Mal is exploring something fundamentally different with Mal AI.
+
+An AI agent built into the financial platform itself, desig
+                  </p>
+                  
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117232920423464960/img/cpR45RiNPGEGn3As.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117232920423464960/img/cpR45RiNPGEGn3As.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">11-03 01:04 · 1h ago</span>
+                  </span>
+                  <a href="https://x.com/romandevz/status/2117301789909266928" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
+
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1472916836408721409/zQl-1tuq_normal.png&w=80&h=80&fit=cover&output=webp&q=80" alt="MIT CSAIL" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">MIT CSAIL</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @MIT_CSAIL · MIT's Computer Science &amp; Artificial Intelligence Laborat
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    What if an optimizer could think &amp; react while a neural network trains?
+
+MIT researchers developed OPAL: a deep learning optimizer powered by an AI agent that watches the training dynamics &amp; rewrites its own source code as training goes. It i
+                  </p>
+                  
+        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/ext_tw_video_thumb/2117299570283552769/pu/img/ak1gcmH_RX4WWwvD.jpg', event)" title="Click to view full image">
+          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/ext_tw_video_thumb/2117299570283552769/pu/img/ak1gcmH_RX4WWwvD.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+        </div>
+                </div>
+                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
+                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
+                    <span>🕒</span>
+                    <span class="truncate">11-03 01:00 · 1h ago</span>
+                  </span>
+                  <a href="https://x.com/MIT_CSAIL/status/2117300744168608012" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                    View Post ↗
+                  </a>
+                </div>
+              </article>
+</div>
+<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
+
+              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
+                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
+                  <div class="flex items-center space-x-2 min-w-0 h-8">
+                    <div class="relative shrink-0 w-7 h-7">
+                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1958528167968145409/snSA0e9h_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="𝔜𝔬𝔯𝔲𝔟𝔞 𝔄𝔫𝔤𝔢𝔩" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+                    </div>
+                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
+                      <div class="flex items-center space-x-1 leading-none h-4">
+                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">𝔜𝔬𝔯𝔲𝔟𝔞 𝔄𝔫𝔤𝔢𝔩</span>
+                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
+                      </div>
+                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
+                        @prince_OTMH · i'M THE PRINCE OF THE MOST HIGH..  AND I DONT GIVE A DAMN WH
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex items-center h-8 shrink-0">
+                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
+                  </div>
+                </div>
+                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
+                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
+                    Anything that holds money draws attackers who don't mind trying again.
+
+I learned that the expensive way. I read on X that the Ostium vault I was in had been hacked, opened my wallet, and about $2,000 was gone.
+
+AI agents with wallets have it worse, 
                   </p>
                   
         <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2113699789187534848/img/mGcwqI4az_Pug1CG.jpg', event)" title="Click to view full image">
@@ -934,140 +1130,9 @@ An AI agent that controls
                 <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
                   <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
                     <span>🕒</span>
-                    <span class="truncate">11-02 17:57 · 1h ago</span>
+                    <span class="truncate">11-03 00:36 · 2h ago</span>
                   </span>
-                  <a href="https://x.com/soloswago/status/2117194440775274738" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2116866730215493632/w8YSMx3d_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Aare kurunmi kakanfo" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Aare kurunmi kakanfo</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @AKakanfo · Biomedical scientist |Geopolitics|Geoeconomics|History|Civil
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Hello sister Kemi,
-Bawo ni, se we dada?
-I will like to state some things fundamentally and openly for posterity sake and for clarity so that you can understand nuances as regards to situation in sub Saharan Africa and Nigeria as a case study.
-Your Da
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWG9RwiWYAAt88h.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWG9RwiWYAAt88h.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-02 17:24 · 2h ago</span>
-                  </span>
-                  <a href="https://x.com/AKakanfo/status/2117186091203572007" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2108931044145856512/pD4eAF0r_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Bon.ETH" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Bon.ETH</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @elenalin01 · AI Pioneer &amp; Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    @agentdojo just opened its doors, and @rarelistio is keeping score.
-
-Agent Dojo is an AI agent fighting game: train your agent, set its personality, fighting style and memory, then send it into turn-based battles.
-
-The Rarelist campaign runs October 
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWG67O1bUAApSn7.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWG67O1bUAApSn7.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-02 16:55 · 2h ago</span>
-                  </span>
-                  <a href="https://x.com/elenalin01/status/2117178844641935446" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2026720809734074368/_GX9BTx6_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Vlad Web3" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Vlad Web3</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @alver1301 · Content Creator,  NFT Hunter, Years of Hands-on Experience i
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    You pay $80 for a delivery. Nothing arrives. The seller says the proof is private.
-
-Lee Castleton's story in the film is why I question &quot;our system says so&quot;. Horizon showed shortfalls he did not cause. He represented himself and was ordered
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2111068349933223936/img/OH33SFNKNm-QiEnW.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2111068349933223936/img/OH33SFNKNm-QiEnW.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-02 16:40 · 3h ago</span>
-                  </span>
-                  <a href="https://x.com/alver1301/status/2117174921910456692" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
+                  <a href="https://x.com/prince_OTMH/status/2117294786801549458" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
                     View Post ↗
                   </a>
                 </div>
@@ -1099,23 +1164,23 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
 
         <!-- Topic Tabs Group & Toggle -->
         <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 max-w-[calc(100vw-80px)] sm:max-w-none" id="topic-tabs-bar">
+          <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
             
         <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
           <span class="text-[11px] font-mono opacity-90">🔥 </span>
-          <span class="truncate">YC details mu…</span>
+          <span class="truncate">A profile of …</span>
           <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-white/25 text-white">9.8</span>
         </button>
 
         <button type="button" id="topic-tab-1" onclick="switchTopicFocus(1)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="1">
           <span class="text-[11px] font-mono opacity-90">⚡ </span>
-          <span class="truncate">Filing: Vanco…</span>
+          <span class="truncate">Amended S-1: …</span>
           <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.6</span>
         </button>
 
         <button type="button" id="topic-tab-2" onclick="switchTopicFocus(2)" class="topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs" data-idx="2">
           <span class="text-[11px] font-mono opacity-90">💡 </span>
-          <span class="truncate">DeepSeek open…</span>
+          <span class="truncate">DeepSeek rele…</span>
           <span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300">9.4</span>
         </button>
           </div>
@@ -1143,10 +1208,10 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                YC details multi-agent tests in games like Minecraft, where agents exhibit emergent capabilities, forming roles, hierarchies, and complex coordination patterns (YC Labs)
+                A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroying the field's deliberative process (Rivka Galchen/New Yorker)
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                YC Labs and Olam Labs are running multi-agent experiments in games like Minecraft to study emergent behaviors. They observed that agents naturally develop roles, hierarchies, and complex coordination when pursuing shared goals, providing critical data for AI alignment research.
+                UCLA mathematics professor Terence Tao discussed the evolving intersection of AI and mathematics in a New Yorker profile, shifting from early enthusiasm to warnings that AI could destroy the deliberative nature of mathematical research.
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1222,7 +1287,7 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               
             <div class="p-2.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-500/30 text-indigo-950 dark:text-indigo-200 text-xs flex items-start gap-1.5 shadow-xs mt-2.5">
               <span class="text-indigo-700 dark:text-indigo-400 font-bold shrink-0">💡 Action Advice:</span>
-              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments.</span>
+              <span class="leading-relaxed text-[11px] font-normal text-indigo-950 dark:text-indigo-200/95">Pair long reasoning chains with deterministic unit tests or formal verification tools; avoid blind reliance on unverified derivations.</span>
             </div>
             </div>
 
@@ -1247,6 +1312,15 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('ce2534d2032abad4')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">New Yorker</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.newyorker.com/magazine/2026/11/09/the-year-math-changed-forever?currentPage=all" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroying the field's deliberative process (Rivka Galchen/New Yorker)
+                </a>
+              </div>
+            </div>
+
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('c8007c55394d3c2b')">
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">YC Labs</span>
               <div class="min-w-0 flex-1">
@@ -1264,37 +1338,28 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
                 </a>
               </div>
             </div>
-
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('7206dd4d9255ada9')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Verge </span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.theverge.com/ai-artificial-intelligence/1023820/sam-altman-ram-shortage-cloud-servers" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Sam Altman says it’s better for RAM to be in a data center than on your desk
-                </a>
-              </div>
-            </div>
               </div>
 
               <!-- Linked Tweets List -->
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://unavatar.io/openai" alt="OpenAI Developers" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://unavatar.io/openai" alt="OpenAI" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">OpenAI Developers</span>
-                  <a href="https://x.com/OpenAIDevs/status/2117036288373297303" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">OpenAI</span>
+                  <a href="https://x.com/OpenAI/status/2117307611338997846" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
             </div>
 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/1816185267037859840/Fd18CH0v_normal.jpg" alt="Rohan Paul" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://unavatar.io/openai" alt="OpenAI Developers" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
-                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Rohan Paul</span>
-                  <a href="https://x.com/rohanpaul_ai/status/2116974925655519727" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
+                  <span class="font-bold text-slate-900 dark:text-slate-200 truncate">OpenAI Developers</span>
+                  <a href="https://x.com/OpenAIDevs/status/2117287063686914244" target="_blank" rel="noopener noreferrer" class="text-[10px] text-sky-600 dark:text-sky-400 hover:underline shrink-0">View Post ↗</a>
                 </div>
                 <p class="text-[11px] text-slate-600 dark:text-slate-300 line-clamp-2 leading-relaxed"></p>
               </div>
@@ -1343,10 +1408,10 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                Filing: Vancouver, WA-based Powerlattice, which makes a power delivery chiplet to reduce AI compute power needs by 50%+, raised $86M, after raising $31M in 2025 (Kurt Schlosser/GeekWire)
+                Amended S-1: Anthropic says it has purchase commitments and lease agreements of $895.4B, "substantially all of which is related to compute and infrastructure" (Ashley Capoot/CNBC)
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                Powerlattice, a Washington-based startup, raised $86 million for its power delivery chiplets that claim to cut AI compute energy consumption by 50%. This follows a $31 million round earlier in 2025, highlighting investor urgency for energy-efficient AI hardware.
+                Anthropic updated its S-1 filing, revealing $895.4B in purchase commitments and lease agreements mostly tied to compute infrastructure, alongside reported revenue of $33.24B and massive accounting net losses as it inches toward an IPO.
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1447,29 +1512,29 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('c8139ec71c67c080')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">GeekWire</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('b917185fffaa9e49')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">CNBC</span>
               <div class="min-w-0 flex-1">
-                <a href="https://www.geekwire.com/2026/filing-chip-startup-powerlattice-raises-86m-to-ease-ais-power-crunch/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Filing: Vancouver, WA-based Powerlattice, which makes a power delivery chiplet to reduce AI compute power needs by 50%+, raised $86M, after raising $31M in 2025 (Kurt Schlosser/GeekWire)
+                <a href="https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Amended S-1: Anthropic says it has purchase commitments and lease agreements of $895.4B, "substantially all of which is related to compute and infrastructure" (Ashley Capoot/CNBC)
                 </a>
               </div>
             </div>
 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('9031c9b80f5d7f51')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">EU-Startup</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('7ad5d447de7b0134')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
               <div class="min-w-0 flex-1">
-                <a href="https://www.eu-startups.com/2026/10/profitable-dutch-startup-braid-raises-e34-12-to-help-brands-launch-their-own-mobile-connectivity/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  The Hague-based Braid, whose API lets companies sell eSIM mobile plans under their own brand via 600+ carriers, raised a ~$38M Series A led by Octopus Ventures (Rahul Raj/EU-Startups)
+                <a href="https://the-decoder.com/anthropic-grows-revenue-twelvefold-but-posts-23-billion-loss/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Anthropic grows revenue twelvefold but posts $23 billion loss
                 </a>
               </div>
             </div>
 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('11ea60d24bacd57b')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Fortune</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('d2f6efd1b67d736a')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">New York T</span>
               <div class="min-w-0 flex-1">
-                <a href="https://fortune.com/2026/10/28/dd/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Casap, whose AI tools automate dispute and anti-fraud operations for banks, raised a $56M Series B led by Base10 Partners, bringing its total funding to $90M (Jeff John Roberts/Fortune)
+                <a href="https://www.nytimes.com/2026/11/02/technology/anthropic-ai-computing-power.html" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  Sources detail Anthropic's compute deal spree: 3.5GW+ of expected capacity in 2026, diversifying beyond Nvidia's AI chips to Amazon, Google, and AMD, and more (New York Times)
                 </a>
               </div>
             </div>
@@ -1543,10 +1608,10 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
                 </span>
               </div>
               <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white leading-snug tracking-tight">
-                DeepSeek open sources Super-Agent as a research prototype, a proactive coding agent it says can monitor group chats for coding issues and suggest solutions (Debby Wu/Bloomberg)
+                DeepSeek releases a "creator mode" that allows users of DeepSeek Harness to create custom plugins, like a 3D model renderer and a video editing workbench (Debby Wu/Bloomberg)
               </h3>
               <div class="p-3 rounded-lg bg-slate-50 dark:bg-slate-950/70 border border-slate-200/80 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs sm:text-sm leading-relaxed">
-                DeepSeek has open-sourced Super-Agent as a research prototype, a proactive coding agent designed to monitor group chats for coding issues and suggest solutions. This release stems from the company's continuous exploration of more autonomous AI agent paradigms in vertical software development scenarios.
+                DeepSeek unveiled a new 'creator mode' allowing users of DeepSeek Harness to quickly build custom plugins like 3D model renderers and video editing workbenches, lowering the barrier for tailored workflow creation.
               </div>
 
               <!-- 3 Structured Highlights to fill the gap and provide dense insights -->
@@ -1647,6 +1712,15 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               <!-- News Briefs List -->
               <div class="space-y-1.5 mb-2">
                 
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('f4d50971ca045e5a')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Bloomberg</span>
+              <div class="min-w-0 flex-1">
+                <a href="https://www.bloomberg.com/news/articles/2026-11-02/deepseek-boosts-ai-agent-offering-with-new-creator-mode" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  DeepSeek releases a "creator mode" that allows users of DeepSeek Harness to create custom plugins, like a 3D model renderer and a video editing workbench (Debby Wu/Bloomberg)
+                </a>
+              </div>
+            </div>
+
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('c0fe9da78d255d44')">
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">Bloomberg</span>
               <div class="min-w-0 flex-1">
@@ -1656,20 +1730,11 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               </div>
             </div>
 
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('d93a958711fbf84d')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">CTech</span>
+            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('03005e3e8697b549')">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">THE DECODE</span>
               <div class="min-w-0 flex-1">
-                <a href="https://www.calcalistech.com/ctechnews/article/s1t5soetmx" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, raised a $40M Series A led by PeakSpan (Meir Orbach/CTech)
-                </a>
-              </div>
-            </div>
-
-            <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" onclick="if(!event.target.closest('a')) openAiNewsModal('ac6f0f48d3759ef4')">
-              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">The Inform</span>
-              <div class="min-w-0 flex-1">
-                <a href="https://www.theinformation.com/articles/google-energy-chief-space-data-centers-cost-100-times-earth" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
-                  Google's data center energy head says space data centers cost up to 100x more than Earth-based ones, and US power supply is sufficient but permits are slow (Amir Efrati/The Information)
+                <a href="https://the-decoder.com/spacexsi-apparently-cuts-grok-bot-quotas-weeks-after-musk-called-it-his-fastest-growing-product/" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                  SpaceXSI apparently cuts Grok Bot quotas weeks after Musk called it his fastest-growing product
                 </a>
               </div>
             </div>
@@ -1754,85 +1819,59 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('1e6f798b334a7bf5')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ New York Times</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('1e6f798b334a7bf5')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      British physicist and materials scientist Cyril Hilsum, widely recognized as &quot;the father of liquid crystals&quot; f
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      British physicist Cyril Hilsum has passed away at the age of 101, recognized as the pioneer who enabled modern flat-panel display technology. Amidst the era dominated by bulky CRT monitors, he led the team that engineered liquid crystal materials, fu
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('1e6f798b334a7bf5')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.nytimes.com/2026/11/01/technology/cyril-hilsum-dead.html?unlocked_article_code=1.NFE.gD-P.2F70K4AuzFTo&smid=url-share" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('3120b500a026f88c')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Ukraine says its air raid alert app was compromised late Sunday, sending false warnings of &quot;nuclear danger&quot;; R" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Bloomberg</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('3120b500a026f88c')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Ukraine says its air raid alert app was compromised late Sunday, sending false warnings of &quot;nuclear danger&quot;; R
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Both Ukrainian and Russian civil defense alert systems were compromised by cyberattacks late Sunday, pushing false 'nuclear danger' warnings via their respective apps. Both sides confirmed the breaches, highlighting the vulnerability of wartime digit
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3120b500a026f88c')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.bloomberg.com/news/articles/2026-11-02/ukraine-and-russia-report-cyberattacks-on-emergency-alert-apps" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('bead89eb03c365c9')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/09/openai_chatgpt-2.png&w=480&output=webp&q=80" alt="OpenAI prepares lobbying blitz for a post-midterm Washington" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('03005e3e8697b549')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/11/grok_bot_costs.png&w=480&output=webp&q=80" alt="SpaceXSI apparently cuts Grok Bot quotas weeks after Musk called it his fastest-growing product" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ THE DECODER</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('bead89eb03c365c9')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      OpenAI prepares lobbying blitz for a post-midterm Washington
+                    <button type="button" onclick="openAiNewsModal('03005e3e8697b549')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      SpaceXSI apparently cuts Grok Bot quotas weeks after Musk called it his fastest-growing product
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      OpenAI is ramping up lobbying efforts to navigate shifting political tides in Washington, promoting a narrative that AI won't replace humans while proposing 'speed limit' safety rules. The company is also rebranding energy-intensive data centers as '
+                      SpaceX has reportedly cut usage limits for its Grok Bot less than two weeks after Elon Musk called it his fastest-growing product, as Musk admitted on X that operating costs were unsustainably high relative to revenue amid industry-wide cost tighteni
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('bead89eb03c365c9')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('03005e3e8697b549')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://the-decoder.com/openai-prepares-lobbying-blitz-for-a-post-midterm-washington/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://the-decoder.com/spacexsi-apparently-cuts-grok-bot-quotas-weeks-after-musk-called-it-his-fastest-growing-product/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
                 </div>
               </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('3ef3da587bdf534e')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('da19600cb0cff885')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Tutor, which is training a frontier robot foundation model and builds AI warehouse robots, raised a $75M Series B led by" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Forbes</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('da19600cb0cff885')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Tutor, which is training a frontier robot foundation model and builds AI warehouse robots, raised a $75M Series B led by
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      Tutor, a startup training frontier robot foundation models and building AI warehouse robots, has raised a $75 million Series B led by a16z, bringing its total funding to $117 million as investors double down on physical AI.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('da19600cb0cff885')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.forbes.com/sites/johnwerner/2026/11/02/tutor-intelligence-why-not-just-teach-the-robots-ourselves/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('f4d50971ca045e5a')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
@@ -1840,227 +1879,253 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Bloomberg</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('3ef3da587bdf534e')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Filing: Anthropic plans to raise up to $3.5B from Japanese investors as part of its IPO, joining Australia, Canada, and 
+                    <button type="button" onclick="openAiNewsModal('f4d50971ca045e5a')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      DeepSeek releases a &quot;creator mode&quot; that allows users of DeepSeek Harness to create custom plugins, like a 3D m
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      AI unicorn Anthropic has filed plans to raise up to $3.5 billion from Japanese investors as part of its upcoming IPO. This move is designed to solidify its international financial footprint, building on previous expansions into Australia, Canada, and
+                      DeepSeek unveiled a new 'creator mode' allowing users of DeepSeek Harness to quickly build custom plugins like 3D model renderers and video editing workbenches, lowering the barrier for tailored workflow creation.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('3ef3da587bdf534e')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('f4d50971ca045e5a')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://www.bloomberg.com/news/articles/2026-11-02/anthropic-seeks-up-to-3-5-billion-in-japan-for-its-mega-us-ipo" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://www.bloomberg.com/news/articles/2026-11-02/deepseek-boosts-ai-agent-offering-with-new-creator-mode" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
                 </div>
               </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('927990945bfd9cfe')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6adfc11328ba980ed3d0219a/master/pass/Security_ChinaAppsBehindDeepFakes_v1.jpg&w=480&output=webp&q=80" alt="Hundreds of Mundane AI Apps Are Hiding Sexually Abusive Deepfake Features" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('30d9ee915c7abcf3')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//cdn.mos.cms.futurecdn.net/qziRh5FuRAUAAnNS3QuCiU-2070-80.jpg&w=480&output=webp&q=80" alt="Anthropic confirms new Claude Code limits &quot;to steer it away from recreating someone else's specific game&quot;, say" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Wired AI</span>
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Tom's Hardware</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('927990945bfd9cfe')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Hundreds of Mundane AI Apps Are Hiding Sexually Abusive Deepfake Features
+                    <button type="button" onclick="openAiNewsModal('30d9ee915c7abcf3')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Anthropic confirms new Claude Code limits &quot;to steer it away from recreating someone else's specific game&quot;, say
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Researchers have uncovered a network of over 400 domains and apps masquerading as mundane utilities like pet portrait generators or fitness coaches. In reality, these apps use hidden web interfaces to allow users to generate explicit and non-consensu
+                      Anthropic confirmed adding prompt rules to Claude Code on Opus 5.5 to block it from recreating specific existing games, emphasizing that intellectual property infringement violates its usage policies while carving out exceptions for original works.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('927990945bfd9cfe')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('30d9ee915c7abcf3')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://www.wired.com/story/hundreds-of-mundane-ai-apps-are-hiding-abusive-deepfake-features/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-confirms-new-claude-code-limits-to-prevent-game-cloning-users-report-opus-5-5-is-also-actively-blocking-reverse-engineering-tasks" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
                 </div>
               </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e8d7709ff345afc8')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Gizmodo</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Gizmodo</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('e8d7709ff345afc8')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Fan fiction site AO3 says it could take two to four weeks to restore service after a security incident; AO3 hosts 18M+ w
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      The global fan-fiction hub AO3 has suffered a major security breach, leading to a widespread service outage. Officials state that recovery will be a slow process, potentially taking two to four weeks to fully restore access for its millions of users.
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('e8d7709ff345afc8')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://gizmodo.com/popular-fan-fiction-site-ao3-could-be-offline-for-a-month-following-security-incident-2000833091" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('4133f553f796b4df')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/spot1.jpg&w=480&output=webp&q=80" alt="The agentic web is here" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9b18e6cef68c4731')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/10/Snowflake-cover-2026.png&w=480&output=webp&q=80" alt="Raising the quality of insights in agentic analytics" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ MIT Tech Review</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('4133f553f796b4df')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      The agentic web is here
+                    <button type="button" onclick="openAiNewsModal('9b18e6cef68c4731')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Raising the quality of insights in agentic analytics
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Tim Berners-Lee's 2001 vision of the Semantic Web has finally materialized, as advanced tools like Meta's Muse and OpenAI's Dots gain massive downloads and direct access to personal bank accounts and inboxes.
+                      Recent reports indicate that less than half of agent-generated business insights lead to improvements, as prescriptive AI analytics fall short, exposing enterprises to financial and reputational risks from flawed decisions.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('4133f553f796b4df')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('9b18e6cef68c4731')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://www.technologyreview.com/2026/11/02/1147846/the-agentic-web-is-here/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://www.technologyreview.com/2026/11/02/1147660/raising-the-quality-of-insights-in-agentic-analytics/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
                 </div>
               </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ce2534d2032abad4')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.newyorker.com/photos/6ae0ee3aa1dfb9a92cd4009d/16%3A9/w_1280%2Cc_limit/r50331.jpg&w=480&output=webp&q=80" alt="A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroyin" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('fc12f20b7576fd7e')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//techcrunch.com/wp-content/uploads/2026/11/IMG_3572.jpeg%3Fresize%3D1200%2C895&w=480&output=webp&q=80" alt="Israeli startup 42AI, which is developing a &quot;behavioral world model&quot; that tries to predict human behavior, eme" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ New Yorker</span>
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ TechCrunch</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('ce2534d2032abad4')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      A profile of UCLA professor Terence Tao, who was once enthusiastic about AI's role in math but now warns of AI destroyin
+                    <button type="button" onclick="openAiNewsModal('fc12f20b7576fd7e')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Israeli startup 42AI, which is developing a &quot;behavioral world model&quot; that tries to predict human behavior, eme
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      UCLA mathematics professor Terence Tao discussed the evolving intersection of AI and mathematics in a New Yorker profile, shifting from early enthusiasm to warnings that AI could destroy the deliberative nature of mathematical research.
+                      Israeli startup 42AI emerged from stealth with a $62.5M seed round to develop a 'behavioral world model' predicting human decisions, initially deployed in financial brokerages to gauge trader responses.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('ce2534d2032abad4')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('fc12f20b7576fd7e')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://www.newyorker.com/magazine/2026/11/09/the-year-math-changed-forever?currentPage=all" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://techcrunch.com/2026/11/02/42ai-comes-out-of-stealth-with-62-5m-and-a-world-model-that-can-predict-human-behavior/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
                 </div>
               </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('5d14f3f9d180deef')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">New York Times</span></div>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('b917185fffaa9e49')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//image.cnbcfm.com/api/v1/image/108369526-1790698647709-gettyimages-2297195052-AFP_C9PK8G7.jpeg%3Fv%3D1790698665%26w%3D1920%26h%3D1080&w=480&output=webp&q=80" alt="Amended S-1: Anthropic says it has purchase commitments and lease agreements of $895.4B, &quot;substantially all of whic" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ CNBC</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('b917185fffaa9e49')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Amended S-1: Anthropic says it has purchase commitments and lease agreements of $895.4B, &quot;substantially all of whic
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      Anthropic updated its S-1 filing, revealing $895.4B in purchase commitments and lease agreements mostly tied to compute infrastructure, alongside reported revenue of $33.24B and massive accounting net losses as it inches toward an IPO.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('b917185fffaa9e49')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.cnbc.com/2026/11/02/anthropic-ant-s-1-quarter-financials.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7ad5d447de7b0134')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/08/anthropic_claude.png&w=480&output=webp&q=80" alt="Anthropic grows revenue twelvefold but posts $23 billion loss" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ THE DECODER</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('7ad5d447de7b0134')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Anthropic grows revenue twelvefold but posts $23 billion loss
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      Anthropic reported a quarterly revenue of nearly $17 billion, a twelvefold year-over-year increase, but faced an operating cost of $17.5 billion, pushing its net loss to $23.3 billion ahead of its planned blockbuster IPO. Massive compute and infrastr
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('7ad5d447de7b0134')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://the-decoder.com/anthropic-grows-revenue-twelvefold-but-posts-23-billion-loss/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('8ae06e9caebdf5ed')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Reuters</span></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Reuters</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('8ae06e9caebdf5ed')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Putin orders owners of non-state data centers to reserve 10% of capacity for Russia's IT infrastructure after Ukrainian 
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      Following Ukrainian drone attacks on Russian facilities, President Putin has ordered private data center owners in Russia to reserve 10% of their capacity for critical national IT infrastructure to enhance resilience.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('8ae06e9caebdf5ed')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://www.reuters.com/technology/putin-orders-private-data-centres-set-aside-10-capacity-support-it-2026-11-02/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d2ce3d2723733975')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//pyxis.nymag.com/v1/imgs/1bc/710/7a64e6033215570cb5168fb9a84a2dd609-75840027.1x.rsocial.w1200.jpg&w=480&output=webp&q=80" alt="A profile of OpenAI VP Charles Porch, an ex-Instagram executive who is rehabilitating AI's image across Hollywood and th" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ New York Magazine</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('d2ce3d2723733975')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      A profile of OpenAI VP Charles Porch, an ex-Instagram executive who is rehabilitating AI's image across Hollywood and th
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      Former Instagram executive Charles Porch, hired by OpenAI in 2025, is working to rehabilitate AI's image across Hollywood through celebrity connections and investor dinners, despite public backlashes like the postponed Gwyneth Paltrow event.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d2ce3d2723733975')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://nymag.com/intelligencer/article/charles-porch-openai-sam-altman-instagram-gwyneth-paltrow.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('def365c2af46b20c')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/11/Olam-Labs-Minecraft-Experiment.png&w=480&output=webp&q=80" alt="One brutal Minecraft night scared 50 AI agents into inventing chicken handoff protocols, a Fertilizer Officer, and fishi" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ THE DECODER</span>
+                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('def365c2af46b20c')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      One brutal Minecraft night scared 50 AI agents into inventing chicken handoff protocols, a Fertilizer Officer, and fishi
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      In experiments by Y Combinator Labs and Olam Labs, 50 OpenAI AI agents tasked with survival in Minecraft spontaneously developed complex bureaucracy, including chicken handoff protocols, a Fertilizer Officer, and structured fishing shifts.
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('def365c2af46b20c')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>AI Analysis</span>
+                    </button>
+                    <a href="https://the-decoder.com/one-brutal-minecraft-night-scared-50-ai-agents-into-inventing-chicken-handoff-protocols-a-fertilizer-officer-and-fishing-shifts/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      Read Source ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d2f6efd1b67d736a')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1518770660439-4636190af475%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Sources detail Anthropic's compute deal spree: 3.5GW+ of expected capacity in 2026, diversifying beyond Nvidia's AI chip" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ New York Times</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('5d14f3f9d180deef')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      How SF's AI boom is reshaping dating: founders treat first dates as interviews, use tech terms like &quot;conversion rat
+                    <button type="button" onclick="openAiNewsModal('d2f6efd1b67d736a')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      Sources detail Anthropic's compute deal spree: 3.5GW+ of expected capacity in 2026, diversifying beyond Nvidia's AI chip
                     </button>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      San Francisco's AI founders are gamifying dating by treating first dates as job interviews and tracking romance through 'conversion rates.' Some are spending up to $5,000 a month on dating coaches to optimize their romantic funnel, driven by an obses
+                      Anthropic is aggressively securing compute capacity, expecting over 3.5GW by 2026 by diversifying beyond Nvidia to sign deals with Amazon, Google, AMD, chipmakers, and former crypto miners.
                     </p>
                   </div>
                   <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('5d14f3f9d180deef')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d2f6efd1b67d736a')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
                       <span>📋</span>
                       <span>AI Analysis</span>
                     </button>
-                    <a href="https://www.nytimes.com/2026/10/31/technology/san-francisco-ai-boom-dating.html?unlocked_article_code=1.NFE.wr2v.F_Wy3TSgmnjB&smid=url-share" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('7cca8f4a78e04597')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">Bloomberg</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Bloomberg</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('7cca8f4a78e04597')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      NAND maker Kioxia's shares fell up to 15% on Monday after its cautious Q3 outlook disappointed investors, raising concer
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      NAND manufacturer Kioxia saw its stock plummet by 15% following a cautious Q3 outlook that disappointed investors. The sharp decline signals growing anxiety that the AI-driven semiconductor boom may be losing its momentum, challenging previous hyper-
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('7cca8f4a78e04597')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.bloomberg.com/news/articles/2026-11-02/kioxia-shares-tumble-after-outlook-suggests-demand-leveling-off" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c8007c55394d3c2b')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">YC Labs</span></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ YC Labs</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('c8007c55394d3c2b')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      YC details multi-agent tests in games like Minecraft, where agents exhibit emergent capabilities, forming roles, hierarc
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      YC Labs and Olam Labs are running multi-agent experiments in games like Minecraft to study emergent behaviors. They observed that agents naturally develop roles, hierarchies, and complex coordination when pursuing shared goals, providing critical dat
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('c8007c55394d3c2b')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://labs.ycombinator.com/projects/games/index.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('d93a958711fbf84d')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//pic1.calcalist.co.il/picserver3/crop_images/2026/10/29/H1CBoYxTMl/H1CBoYxTMl_164_298_2651_1493_0_large.jpg&w=480&output=webp&q=80" alt="Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, r" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ CTech</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('d93a958711fbf84d')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Bites, whose AI tools deliver personalized training to frontline workers via WhatsApp, SMS, Slack, and other channels, r
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Bites, an enterprise training startup, raised $40 million in Series A funding led by PeakSpan. The company uses AI to convert standard procedures into branded short videos, delivering personalized training to frontline workers via platforms like What
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('d93a958711fbf84d')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.calcalistech.com/ctechnews/article/s1t5soetmx" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    <a href="https://www.nytimes.com/2026/11/02/technology/anthropic-ai-computing-power.html" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
@@ -2608,7 +2673,7 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
             <span class="text-emerald-400 font-bold">➜</span> <span class="text-emerald-300 font-mono">$ run codex</span>
           </div>
           <div class="text-[10px] text-slate-400 font-mono">
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 132.8k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 132.9k</span>
           </div>
         </div>
         <div class="absolute top-2.5 right-2.5 z-10">
@@ -2624,7 +2689,7 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">codex</h4>
             </div>
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 132.8k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 132.9k</span>
           </div>
           <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
             Lightweight coding agent that runs in your terminal
@@ -2656,7 +2721,7 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
             <span class="text-emerald-400 font-bold">➜</span> <span class="text-emerald-300 font-mono">$ run openbot</span>
           </div>
           <div class="text-[10px] text-slate-400 font-mono">
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 9.8k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 9.9k</span>
           </div>
         </div>
         <div class="absolute top-2.5 right-2.5 z-10">
@@ -2672,7 +2737,7 @@ Lee Castleton's story in the film is why I question &quot;our system says so&quo
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">openbot</h4>
             </div>
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 9.8k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 9.9k</span>
           </div>
           <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
             A local-first desktop workspace for persistent AI teammates. Run Codex, Claude, 
