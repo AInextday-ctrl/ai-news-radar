@@ -155,6 +155,19 @@
           <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">点个链接就能无感接管已登录会话并直接跑代码的核弹级0day，估值千亿美金的巨头居然只抠抠搜搜地掏了五千块钱。这定价甚至不够买两台高配电脑，简直是在明牌告诉白帽黑客：下次再挖到这种宝贝，还是直接打包挂暗网更划算。</p>
         </div>
         
+        
+        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <span>📰 深度报道原文实录</span>
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">The Hacker News 权威实录</span>
+          </div>
+          <div class="space-y-4">
+            <p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>安全公司Parameter的研究人员表示，一个恶意的ChatGPT共享链接可以在任何打开它的人的登录会话中运行攻击者的代码，从而允许攻击者阅读他们的私人对话。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>研究人员于 10 月 18 日通过 OpenAI 的错误赏金计划报告了该缺陷，OpenAI 在八天后修复了该缺陷，并将其评级为 P1，这是最严重的类别。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>该陷阱是通过其公共链接共享的普通ChatGPT对话。它可以像任何真正的共享聊天一样发送：通过电子邮件、聊天消息、支持工单或社交帖子。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>受害者无需安装任何东西、加入工作区或通过攻击者登录。在最可靠的攻击版本中，他们打开链接并单击一次 ChatGPT 的预览按钮。在更高版本中，参数将页面设置为自行打开预览，因此打开链接是唯一的步骤。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>一旦链接打开，攻击者的代码就会在受害者的登录会话中运行，并具有与真正的ChatGPT站点相同的访问权限。它列出了受害者最近的对话，打开了一个从未与攻击者共享的私人聊天记录，并将其中的一小部分发送到研究人员控制的服务器上。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>该代码直接调用 ChatGPT 自己的登录 API，而不是复制屏幕上发生的内容。由于它运行时具有受害者的完整网络访问权限，因此其影响范围并不限于这些聊天。研究人员写道：“本质上，我们可以代表受害者的 ChatGPT 帐户执行任何操作。”</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>这项工作是一项受控测试。 Parameter 不会报告该缺陷的任何实际使用情况，并在不同的帐户之间运行其私人聊天证明，而不是针对真实用户。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>根据Parameter的说法，这条链是如何工作的。ChatGPT可以通过一个名为预览的功能将聊天中的HTML块变成一个小网页。因为该页面可以保存任何代码，ChatGPT在一个单独的web地址的锁定框架中运行它，在那里它不能读取它周围的主要ChatGPT页面。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>那个沙箱是有效的。进入的方式来自同一对话中的第二个特征。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>共享聊天还包含一个交互式图形，绘制它时将一个名为MathLive的数学库加载到ChatGPT主页面中。加载MathLive时，会在那里运行一个侦听器，该侦听器接受有关其屏幕键盘的消息。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>仅当接收者检查发送者是谁时，在浏览器框架之间传递的消息才是安全的。 Parameter 发现此侦听器接受来自任何发送者的键盘消息，并且允许该消息携带原始 HTML。然后，预览可以跨越边界，并将攻击者 HTML 交给受信任的主页。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>该 HTML 构建了一个新框架，浏览器将其视为 chatgpt.com 的一部分。然后从 YouTube 加载的脚本提供了在其中运行的代码。</p>
+          </div>
+        </div>
+        
 
       </div>
     </article>
@@ -166,7 +179,7 @@
                 
             <a href="/zh/news/1e6f798b334a7bf5" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="液晶显示之父希尔瑟姆离世" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://static01.nyt.com/images/2026/10/31/obituaries/31obit-hilsum-family-03/31obit-hilsum-family-03-videoSixteenByNine3000.jpg" alt="液晶显示之父希尔瑟姆离世" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">液晶显示之父希尔瑟姆离世</h4>
@@ -190,7 +203,7 @@
             
             <a href="/zh/news/3ef3da587bdf534e" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://ainewsradar.xyz/images/og-default.png" alt="Anthropic拟在IPO中向日本投资者募资35亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+                <img src="https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ixCr.FKf_oWk/v1/1200x801.jpg" alt="Anthropic拟在IPO中向日本投资者募资35亿美元" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic拟在IPO中向日本投资者募资35亿美元</h4>

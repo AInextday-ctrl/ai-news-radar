@@ -1395,10 +1395,23 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
     if item.get("category") == "news":
         raw_art_en = str(item.get("article_content") or item.get("article_content_en") or "").strip()
         art_zh = str(item.get("article_content_zh") or "").strip()
-        art_en_lines = len(raw_art_en.splitlines())
-        art_zh_lines = len(art_zh.splitlines())
-        if raw_art_en and (not art_zh or not any('\u4e00' <= c <= '\u9fff' for c in art_zh) or (art_en_lines >= 3 and art_zh_lines <= 1)):
-            item["article_content_zh"] = clean_multiline_text(free_translate_zh(raw_art_en))
+        art_en_lines = len([l for l in raw_art_en.splitlines() if len(l.strip()) > 30])
+        art_zh_lines = len([l for l in art_zh.splitlines() if len(l.strip()) > 20])
+        
+        # 判断中文是否缺失、缺乏实质长文或仅为极简导语 (如英文上万字符但中文仅百余字符)
+        is_zh_stub = bool(
+            not art_zh or 
+            not any('\u4e00' <= c <= '\u9fff' for c in art_zh) or 
+            (art_en_lines >= 3 and art_zh_lines <= 1) or
+            (len(raw_art_en) >= 800 and len(art_zh) < 400) or
+            (len(raw_art_en) >= 2000 and len(art_zh) < 800)
+        )
+        if raw_art_en and is_zh_stub:
+            paras = [p.strip() for p in raw_art_en.split("\n\n") if len(p.strip()) > 25]
+            if not paras:
+                paras = [p.strip() for p in raw_art_en.split("\n") if len(p.strip()) > 25]
+            capped_en = "\n\n".join(paras[:14])
+            item["article_content_zh"] = clean_multiline_text(free_translate_zh(capped_en))
         elif art_zh:
             item["article_content_zh"] = clean_multiline_text(art_zh)
 

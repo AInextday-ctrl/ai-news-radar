@@ -7,6 +7,7 @@ Fetcher 2.0 - Rich multi-media data collector:
 """
 
 from __future__ import annotations
+from article_extractor import ArticleExtractor
 
 import socket
 socket.setdefaulttimeout(15.0)
@@ -525,9 +526,8 @@ def resolve_techmeme_hd_image(permalink_or_thumb: str, client: Optional[Any] = N
 
 def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str, Any]:
     """
-    Universal Fallback Media Resolver (全网通用降级图文与多媒体穿透解析器):
-    当 RSS 流仅输出纯文本 (如 Google News RSS, Hacker News 等精简订阅) 时，
-    主动穿透目标落地页提取 1200px+ 官方高清主图 (og:image / twitter:image) 并侦测视频媒体 (video tags/embeds)。
+    Universal Fallback Media Resolver (全网通用降级图文与深度正文穿透解析器):
+    主动穿透目标落地页提取 1200px+ 官方高清主图 (og:image / twitter:image)、深度解构多段落正文及视频媒体。
     """
     result = {
         "cover_image": None,
@@ -551,117 +551,23 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
         result["video_url"] = f"https://www.youtube.com/watch?v={yt_id}"
         return result
 
-    # 针对已知存在强 WAF 拦截的域名 (如 reuters, bloomberg) 进行智能降级
-    is_reuters = "reuters.com" in clean_url.lower()
-    is_bloomberg = "bloomberg.com" in clean_url.lower()
-
     try:
-        html_text = ""
-        # 针对常规公开媒体，快速探测落地页 (超时时间 6s，防阻塞主爬虫流程)
-        if not is_reuters and not is_bloomberg:
-            if client and hasattr(client, "get"):
-                resp = client.get(clean_url, timeout=6)
-                if resp.status_code == 200:
-                    html_text = resp.text
-            else:
-                req = urllib.request.Request(
-                    clean_url,
-                    headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36 AI-Radar/2.0"}
-                )
-                with urllib.request.urlopen(req, timeout=6) as r:
-                    if r.status == 200:
-                        html_text = r.read().decode("utf-8", errors="ignore")
-
-        if html_text:
-            m_img = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
-            if m_img:
-                cand = m_img.group(1).replace("&amp;", "&").strip()
-                if not any(bad in cand.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "spacer", "tracking", "avatar", "icon"]):
-                    result["cover_image"] = cand
-
-            # 提取落地页真实文章摘要导语 (og:description / twitter:description / description)
-            m_desc = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|twitter:description|description)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)
-            if m_desc:
-                desc_cand = html.unescape(m_desc.group(1)).strip()
-                if len(desc_cand) > 20 and not any(bad in desc_cand.lower() for bad in ["javascript", "enable cookies", "404 not found", "cloudflare", "access denied"]):
-                    result["description"] = desc_cand
-
-            # 深度提取落地页真实正文段落 (Article Body Paragraphs / Q&A 实录)
-            # 1. 净化 HTML：彻底剔除脚本、样式、导航、页眉、页脚、侧边栏、弹窗与表单
-            clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)
-            clean_html = re.sub(r'<div[^>]+(?:class|id)=["\x27][^"\x27]*(?:header|navbar|menu|navigation|sidebar|footer|cookie|banner|share|modal|popup|login|ad-|advertisement)[^"\x27]*["\x27][^>]*>.*?</\s*div\s*>', ' ', clean_html, flags=re.DOTALL | re.I)
-
-            # 2. 优先锁定正文语义容器：在 <main>, <article>, .article-body, .story-body 中挑选内容最充实 (段落最多且总长度最大) 的容器
-            candidate_containers = []
-            for m in re.finditer(r'<(?:main|article)[^>]*>(.*?)</(?:main|article)>', clean_html, flags=re.DOTALL | re.I):
-                candidate_containers.append(m.group(1))
-            for m in re.finditer(r'<div[^>]+(?:class|id)=["\x27][^"\x27]*(?:article-body|article-content|entry-content|post-content|story-body|main-content)[^"\x27]*["\x27][^>]*>(.*?)</div>', clean_html, flags=re.DOTALL | re.I):
-                candidate_containers.append(m.group(1))
-            
-            best_container = clean_html
-            best_score = 0
-            for c in candidate_containers:
-                c_paras = re.findall(r'<p[^>]*>.*?</p>', c, flags=re.DOTALL | re.I)
-                score = len(c_paras) * 1000 + len(c)
-                if score > best_score and len(c_paras) >= 2:
-                    best_score = score
-                    best_container = c
-            scoped_html = best_container
-
-            paras = re.findall(r'<p[^>]*>(.*?)</p>', scoped_html, flags=re.DOTALL | re.I)
-            clean_paras = []
-            seen_paras = set()
-            for p in paras:
-                p_text = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', p)).split()).strip()
-                if len(p_text) < 50 or len(p_text) > 4000:
-                    continue
-                p_lower = p_text.lower()
-                
-                # 排除导航菜单、登录注册、免责声明等站点噪声
-                if any(bad in p_lower for bad in [
-                    "sign in", "log in", "login", "sign up", "client portal", "fund login", "cais login",
-                    "general public", "institutional investor", "public shareholder", "wealth professional",
-                    "advisor resource", "insights & news", "about us", "about apollo", "what we do", "who we are",
-                    "close menu", "search query", "opens in new tab", "cookie", "newsletter", "subscribe",
-                    "all rights reserved", "terms of service", "terms of use", "privacy policy", "advertisement",
-                    "enable javascript", "share this", "follow us", "click here", "copyright", "photo by", "getty images",
-                    "this presentation may not be distributed", "past performance", "watch the class", "register now",
-                    "get daily data-driven insights", "delivered right to your inbox", "view all", "back to top"
-                ]):
-                    continue
-                if p_text.startswith("(") or p_text.startswith("（"):
-                    continue
-
-                # 排除缺乏句读标点（即无 . ! ? 。 ！ ？ ; ；）的单纯词条与标题链
-                if not re.search(r'[.!?。！？;；]', p_text):
-                    continue
-
-                # 去重校验
-                p_norm = re.sub(r'\s+', '', p_lower[:60])
-                if p_norm in seen_paras:
-                    continue
-                seen_paras.add(p_norm)
-                clean_paras.append(p_text)
-
-            if clean_paras:
-                result["article_content"] = "\n\n".join(clean_paras[:35])
-
-            # 仅当落地页能提取到真实独立视频播放链接时才标记视频，严禁将普通网页文章 URL 赋给 video_url
-            m_embed = re.search(r'(?:youtube\.com/embed/|player\.vimeo\.com/video/)([\w\-]+)', html_text, re.I)
-            m_mp4 = re.search(r'https?://[^\s"\']+\.(?:mp4|m3u8)', html_text, re.I)
-            if m_embed:
-                vid_id = m_embed.group(1)
-                result["has_video"] = True
-                result["video_url"] = f"https://www.youtube.com/watch?v={vid_id}"
-            elif m_mp4:
-                result["has_video"] = True
-                result["video_url"] = m_mp4.group(0)
-
-    except Exception:
+        # 调用专门的高可用解构抓取引擎 ArticleExtractor (带 Chrome TLS 指纹伪装)
+        ext_data = ArticleExtractor.extract_article(clean_url)
+        if ext_data.get("is_substantive") or ext_data.get("paras_count", 0) >= 2:
+            result["article_content"] = ext_data["full_text"]
+            if ext_data.get("cover_image"):
+                result["cover_image"] = ext_data["cover_image"]
+            if ext_data.get("lead_paragraph"):
+                result["description"] = ext_data["lead_paragraph"]
+        elif ext_data.get("cover_image"):
+            result["cover_image"] = ext_data["cover_image"]
+            if ext_data.get("lead_paragraph"):
+                result["description"] = ext_data["lead_paragraph"]
+    except Exception as e:
         pass
 
     return result
-
 
 def match_celebrity_profile(handle_or_user: str) -> Optional[Dict[str, Any]]:
     """

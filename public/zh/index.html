@@ -98,15 +98,9 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-<<<<<<< HEAD
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=7.2.0">
-  <link rel="preload" href="/zh/js/app.min.js?v=7.2.0" as="script">
-=======
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" fetchpriority="high">
-  <link rel="stylesheet" href="/css/style.min.css?v=7.2.1">
-  <link rel="preload" href="/zh/js/app.min.js?v=7.2.1" as="script">
->>>>>>> 8d8883277 (fix(ui): restore 2-column responsive layout, fix card squishing with content-start, optimize card proportions and breathing room (v7.2.1))
+  <link rel="stylesheet" href="/css/style.min.css?v=7.3.0">
+  <link rel="preload" href="/zh/js/app.min.js?v=7.3.0" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -3395,15 +3389,34 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
 
           <!-- 核心事实全貌 (自然流畅交代，无需查看原资讯详情) -->
           <p id="ai-modal-summary-text" class="text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-normal whitespace-pre-line"></p>
+
+          <!-- 5W1H 核心事实要点 -->
+          <div id="ai-modal-bullets-wrap" class="hidden mt-3 pt-2.5 border-t border-slate-200/60 dark:border-slate-800/60 space-y-2">
+            <div id="ai-modal-bullets-title" class="text-xs font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
+              📌 核心事实要点
+            </div>
+            <ul id="ai-modal-bullets-list" class="space-y-2 text-xs sm:text-sm text-slate-700 dark:text-slate-300"></ul>
+          </div>
         </div>
 
         <!-- 板块 1.5: 📰 深度报道原文 / 核心段落 (若具备丰富原文段落，原汁原味展示段落格式) -->
         <div id="ai-modal-original-card" class="hidden p-4 rounded-xl bg-slate-50/80 dark:bg-slate-950/50 border border-slate-200 dark:border-slate-800 space-y-2.5">
-          <div class="flex items-center space-x-2 text-xs font-bold text-slate-700 dark:text-slate-300 border-b border-slate-200/80 dark:border-slate-800 pb-2">
-            <span>📰</span>
-            <span id="ai-modal-original-title">深度报道原文精选</span>
+          <div class="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-2">
+            <div class="flex items-center space-x-2 text-xs font-bold text-slate-700 dark:text-slate-300">
+              <span>📰</span>
+              <span id="ai-modal-original-title">深度报道原文实录</span>
+            </div>
+            <div id="ai-modal-lang-toggle" class="hidden flex items-center p-0.5 rounded-lg bg-slate-200/70 dark:bg-slate-800 text-[11px] font-semibold border border-slate-300/40 dark:border-slate-700/60">
+              <button id="ai-modal-btn-zh" type="button" class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer">中文精读</button>
+              <button id="ai-modal-btn-en" type="button" class="px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer">English</button>
+            </div>
           </div>
           <div id="ai-modal-original-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal space-y-3.5"></div>
+          <div id="ai-modal-expand-wrap" class="hidden pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-center">
+            <button id="ai-modal-expand-btn" type="button" class="px-3 py-1.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/50 dark:hover:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 text-xs font-bold transition-all cursor-pointer">
+              <span id="ai-modal-expand-text">展开阅读全文 ▼</span>
+            </button>
+          </div>
         </div>
 
         <!-- 板块 2: 💡 AI 点评 (仅在具备高相关针对性分析时展示，否则优雅隐藏) -->
@@ -3931,7 +3944,7 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
     };
   </script>
 
-  <script defer src="/zh/js/app.min.js?v=7.2.1"></script>
+  <script defer src="/zh/js/app.min.js?v=7.3.0"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">

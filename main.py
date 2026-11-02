@@ -1905,7 +1905,7 @@ def save_news(items: list):
         print(f"⚠️ [tweet_classifier] 价值分类标注异常: {e}")
 
     # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
-    # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
+        # 4. 构建全量历史归档库 payload 与公共分发库 payload (精准分层治理)
     STRIP_ARCHIVE_KEYS = {
         'ai_analysis', 'original_content', 'article_content', 'article_content_zh',
         'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
@@ -1915,23 +1915,51 @@ def save_news(items: list):
     def _clean_archive_item(it, target_cat=None):
         cat = target_cat or it.get('category')
         c_it = {k: v for k, v in it.items() if k not in STRIP_ARCHIVE_KEYS and v is not None}
-        if cat == 'celebrity':
+        if cat in ('celebrity', 'viral_posts'):
             fte = c_it.get('full_text_en') or c_it.get('title_en') or ''
             if fte:
-                c_it['full_text_en'] = fte
-                for k in ['quote_en', 'summary_en', 'content_snippet', 'title_en']:
+                for k in ['quote_en', 'summary_en', 'content_snippet']:
                     if c_it.get(k) == fte:
                         del c_it[k]
             ftz = c_it.get('full_text_zh') or c_it.get('title_zh') or ''
             if ftz:
-                c_it['full_text_zh'] = ftz
-                for k in ['quote_zh', 'summary_zh', 'title_zh']:
+                for k in ['quote_zh', 'summary_zh']:
                     if c_it.get(k) == ftz:
                         del c_it[k]
         elif cat == 'news':
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
             c_it.pop('article_content_zh', None)
+        return c_it
+
+    # 公共看板专属清理函数：为 30 条核心新闻保留 ai_analysis 结构化要点与深度正文，彻底消除前端单句浅层问题
+    STRIP_PUBLIC_INTERNAL_KEYS = {
+        'original_content', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
+        'wechat_published_draft', 'processed_mark', 'processed_status',
+        'processed_at', 'media_checked', 'raw_content', 'full_raw_text'
+    }
+    def _clean_public_item(it, target_cat=None):
+        cat = target_cat or it.get('category')
+        c_it = {k: v for k, v in it.items() if k not in STRIP_PUBLIC_INTERNAL_KEYS and v is not None}
+        if cat in ('celebrity', 'viral_posts'):
+            fte = c_it.get('full_text_en') or c_it.get('title_en') or ''
+            if fte:
+                for k in ['quote_en', 'summary_en', 'content_snippet']:
+                    if c_it.get(k) == fte:
+                        del c_it[k]
+            ftz = c_it.get('full_text_zh') or c_it.get('title_zh') or ''
+            if ftz:
+                for k in ['quote_zh', 'summary_zh']:
+                    if c_it.get(k) == ftz:
+                        del c_it[k]
+        elif cat == 'news':
+            if c_it.get('content_snippet') == c_it.get('summary_en'):
+                c_it.pop('content_snippet', None)
+            # 严格控制单篇长文上限，保证公共 payload 体积稳定受控
+            if c_it.get('article_content') and len(c_it['article_content']) > 6000:
+                c_it['article_content'] = c_it['article_content'][:6000] + '...'
+            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 4500:
+                c_it['article_content_zh'] = c_it['article_content_zh'][:4500] + '...'
         return c_it
 
     all_archive_items = list(all_master_items)
@@ -1949,12 +1977,12 @@ def save_news(items: list):
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(latest_payload, f, ensure_ascii=False, separators=(',', ':'))
 
-    # 生成面向前端的轻量化分发版 latest_news.json (体积缩减 97%，保证 CDN 边缘秒开并杜绝超额流量)
+    # 生成面向前端的轻量化分发版 latest_news.json (完整保留 30 条核心新闻的深度结构化解构与长文实录)
     category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}
     public_grouped = {}
     for cat_k, cat_items in latest_payload.get("grouped", {}).items():
         limit = category_caps.get(cat_k, 40)
-        public_grouped[cat_k] = [_clean_archive_item(x, cat_k) for x in cat_items[:limit]]
+        public_grouped[cat_k] = [_clean_public_item(x, cat_k) for x in cat_items[:limit]]
 
     # 写入各专栏独立历史归档库 (news, celebrity, tools, videos, prompts)，供前端按需分页拉取
     categories_list = ['news', 'celebrity', 'tools', 'videos', 'prompts']
@@ -1975,7 +2003,7 @@ def save_news(items: list):
     if "viral_ticker_tweets" in public_payload and isinstance(public_payload["viral_ticker_tweets"], list):
         public_payload["viral_ticker_tweets"] = [_clean_archive_item(x, "celebrity") for x in public_payload["viral_ticker_tweets"]]
     if "top_three" in public_payload and isinstance(public_payload["top_three"], list):
-        public_payload["top_three"] = [_clean_archive_item(x, "news") for x in public_payload["top_three"]]
+        public_payload["top_three"] = [_clean_public_item(x, "news") for x in public_payload["top_three"]]
     public_payload["archive_meta"] = {
         "total_archived": len(all_archive_items),
         "category_totals": category_totals

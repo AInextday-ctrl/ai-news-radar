@@ -583,6 +583,30 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </div>
         """
 
+    full_coverage_html = ""
+    full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content") or item.get("original_content"))) or "").strip()
+    if full_text and len(full_text) > 120:
+        paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) > 20]
+        if not paras:
+            paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) > 20]
+        
+        p_html = "".join([f"<p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>{escape(p)}</p>" for p in paras])
+        sec_title = "📰 深度报道原文实录" if is_zh else "📰 Full In-Depth Coverage"
+        src_note = f"{source_name} 权威实录" if is_zh else f"{source_name} Full Report"
+        full_coverage_html = f"""
+        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <span>{sec_title}</span>
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">{escape(src_note)}</span>
+          </div>
+          <div class="space-y-4">
+            {p_html}
+          </div>
+        </div>
+        """
+
     related_html = ""
     if related_news:
         cards = []
@@ -754,6 +778,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
         {bullets_html}
         {analysis_html}
+        {full_coverage_html}
 
       </div>
     </article>

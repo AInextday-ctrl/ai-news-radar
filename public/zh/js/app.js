@@ -9258,83 +9258,125 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive News Briefing');
       if (summaryEl) summaryEl.textContent = briefingText;
 
-      // 深度报道长文实录展示控制：严格质量校验，未抓取到实质全文/仅为单句摘要导语时彻底隐藏
-      const originalCardEl = document.getElementById('ai-modal-original-card');
-      const originalTitleEl = document.getElementById('ai-modal-original-title');
-      const originalTextEl = document.getElementById('ai-modal-original-text');
-      const origContentEn = String(item.article_content || item.original_content || '').trim();
-      const origContentZh = String(item.article_content_zh || '').trim();
-      
-      // 实质性长文判断函数：排除抓取失败回退的单句导语、短摘要、标题复读或已被速览包含的碎片
-      const isSubstantiveCoverage = (text, lang) => {
-        if (!text) return false;
-        const clean = text.replace(/[\r\n\t]/g, ' ').replace(/\s+/g, ' ').trim();
-        const cleanBriefing = (briefingText || '').replace(/[\r\n\t]/g, ' ').replace(/\s+/g, ' ').trim();
-        const cleanT = (cleanTitle || '').replace(/[\r\n\t]/g, ' ').replace(/\s+/g, ' ').trim();
-        
-        // 1. 完全相同或包含关系过滤（避免重复展示相同句子）
-        if (clean === cleanBriefing || clean === cleanT) return false;
-        if (cleanBriefing && (cleanBriefing.includes(clean) || clean.includes(cleanBriefing))) return false;
-        if (cleanT && (cleanT.includes(clean) || clean.includes(cleanT))) return false;
+      // 1.1 结构化事实要点清单 (5W1H 事实提炼)
+      const bulletsWrapEl = document.getElementById('ai-modal-bullets-wrap');
+      const bulletsTitleEl = document.getElementById('ai-modal-bullets-title');
+      const bulletsListEl = document.getElementById('ai-modal-bullets-list');
 
-        if (lang === 'zh') {
-          const zhCount = (clean.match(/[\u4e00-\u9fa5]/g) || []).length;
-          // 中文必须至少 80 个汉字，且汉字占比高于 25%
-          if (zhCount < 80 || (zhCount / (clean.length || 1)) < 0.25) return false;
-          return true;
+      const rawBullets = isZh
+        ? (item.fact_bullets_zh || analysis.key_points_zh || analysis.fact_bullets_zh || [])
+        : (item.fact_bullets_en || analysis.key_points_en || analysis.fact_bullets_en || []);
+
+      if (bulletsWrapEl && bulletsListEl) {
+        if (Array.isArray(rawBullets) && rawBullets.length > 0) {
+          if (bulletsTitleEl) bulletsTitleEl.textContent = isZh ? '📌 核心事实要点' : '📌 Key Factual Takeaways';
+          bulletsListEl.innerHTML = rawBullets.map(b => {
+            const bStr = String(b || '').trim();
+            if (!bStr) return '';
+            let tagHtml = '';
+            let textHtml = escapeHtml(bStr);
+            if (bStr.startsWith('【') && bStr.includes('】')) {
+              const parts = bStr.split('】');
+              tagHtml = `<span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-bold bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 mr-1.5 border border-indigo-200/60 dark:border-indigo-800/60">${escapeHtml(parts[0].slice(1))}</span>`;
+              textHtml = escapeHtml(parts.slice(1).join('】').trim());
+            } else if (bStr.startsWith('[') && bStr.includes(']')) {
+              const parts = bStr.split(']');
+              tagHtml = `<span class="inline-block px-1.5 py-0.5 rounded text-[11px] font-bold bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 mr-1.5 border border-indigo-200/60 dark:border-indigo-800/60">${escapeHtml(parts[0].slice(1))}</span>`;
+              textHtml = escapeHtml(parts.slice(1).join(']').trim());
+            }
+            return `<li class="flex items-start gap-2 leading-relaxed"><span class="text-indigo-500 font-bold shrink-0 mt-0.5">•</span><div class="flex-1">${tagHtml}${textHtml}</div></li>`;
+          }).filter(Boolean).join('');
+          bulletsWrapEl.classList.remove('hidden');
         } else {
-          // 英文必须至少 220 字符（排除抓不到全文时仅有的一句 RSS Description）
-          if (clean.length < 220) return false;
-          // 长度若明显少于 AI 概要，绝非深度原文
-          if (cleanBriefing && clean.length <= cleanBriefing.length * 0.7 && clean.length < 320) return false;
-          // 排除纯中文泄露
-          if (/[\u4e00-\u9fa5]/.test(clean)) return false;
-          return true;
-        }
-      };
-
-      const hasValidZh = isSubstantiveCoverage(origContentZh, 'zh');
-      const hasValidEn = isSubstantiveCoverage(origContentEn, 'en');
-
-      if (originalCardEl && originalTextEl) {
-        if (isZh) {
-          if (hasValidZh) {
-            originalCardEl.classList.remove('hidden');
-            if (originalTitleEl) originalTitleEl.textContent = '深度报道与访谈实录';
-            originalTextEl.innerHTML = formatRichArticleContent(origContentZh, true);
-          } else if (hasValidEn) {
-            // 中文模式下但有实质英文深度长文：以优雅的参考折叠框呈现，绝不破坏中文阅读流与被审核抓取
-            originalCardEl.classList.remove('hidden');
-            if (originalTitleEl) originalTitleEl.textContent = '📰 英文报道原文精选 (参考)';
-            originalTextEl.innerHTML = `
-              <details open class="group">
-                <summary class="text-xs text-indigo-600 dark:text-indigo-400 font-semibold hover:underline select-none py-1 flex items-center justify-between cursor-pointer">
-                  <span>📰 权威媒体报道核心实录 (完整段落)</span>
-                  <span class="text-slate-400 group-open:rotate-180 transition-transform text-xs">▼</span>
-                </summary>
-                <div class="mt-2.5 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-normal whitespace-pre-line space-y-2">
-                  ${formatRichArticleContent(origContentEn, false)}
-                </div>
-              </details>
-            `;
-          } else {
-            originalCardEl.classList.add('hidden');
-            originalTextEl.innerHTML = '';
-          }
-        } else {
-          // 英文模式：仅当具备真实英文实质深度长文时展示，未抓到全文时直接隐藏
-          if (hasValidEn) {
-            originalCardEl.classList.remove('hidden');
-            if (originalTitleEl) originalTitleEl.textContent = 'Original Coverage & In-depth Story';
-            originalTextEl.innerHTML = formatRichArticleContent(origContentEn, false);
-          } else {
-            originalCardEl.classList.add('hidden');
-            originalTextEl.innerHTML = '';
-          }
+          bulletsWrapEl.classList.add('hidden');
+          bulletsListEl.innerHTML = '';
         }
       }
 
-      // AI 点评展示控制：若缺乏针对性有效点评或命中假套话，则直接隐藏该区域
+      // 深度报道长文实录展示控制：严格质量校验，支持中英双语切换与折叠展开
+      const originalCardEl = document.getElementById('ai-modal-original-card');
+      const originalTitleEl = document.getElementById('ai-modal-original-title');
+      const originalTextEl = document.getElementById('ai-modal-original-text');
+      const langToggleEl = document.getElementById('ai-modal-lang-toggle');
+      const btnZhEl = document.getElementById('ai-modal-btn-zh');
+      const btnEnEl = document.getElementById('ai-modal-btn-en');
+      const expandWrapEl = document.getElementById('ai-modal-expand-wrap');
+      const expandBtnEl = document.getElementById('ai-modal-expand-btn');
+      const expandTextEl = document.getElementById('ai-modal-expand-text');
+
+      const origContentEn = String(item.article_content || item.original_content || '').trim();
+      const origContentZh = String(item.article_content_zh || '').trim();
+
+      const hasValidZh = Boolean(origContentZh && origContentZh.length >= 80 && (origContentZh.match(/[\u4e00-\u9fa5]/g) || []).length >= 50);
+      const hasValidEn = Boolean(origContentEn && origContentEn.length >= 180 && !/[\u4e00-\u9fa5]/.test(origContentEn));
+
+      let activeArticleLang = (isZh && hasValidZh) ? 'zh' : (hasValidZh ? 'zh' : (hasValidEn ? 'en' : ''));
+
+      const renderArticleView = () => {
+        if (!originalCardEl || !originalTextEl) return;
+        if (!hasValidZh && !hasValidEn) {
+          originalCardEl.classList.add('hidden');
+          originalTextEl.innerHTML = '';
+          if (langToggleEl) langToggleEl.classList.add('hidden');
+          if (expandWrapEl) expandWrapEl.classList.add('hidden');
+          return;
+        }
+
+        originalCardEl.classList.remove('hidden');
+        if (originalTitleEl) {
+          originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+        }
+
+        if (langToggleEl) {
+          if (hasValidZh && hasValidEn) {
+            langToggleEl.classList.remove('hidden');
+            if (btnZhEl && btnEnEl) {
+              if (activeArticleLang === 'zh') {
+                btnZhEl.className = 'px-2 py-0.5 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs font-bold transition-all';
+                btnEnEl.className = 'px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer';
+              } else {
+                btnEnEl.className = 'px-2 py-0.5 rounded-md bg-white dark:bg-slate-700 text-indigo-600 dark:text-indigo-300 shadow-xs font-bold transition-all';
+                btnZhEl.className = 'px-2 py-0.5 rounded-md text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer';
+              }
+              btnZhEl.onclick = () => { activeArticleLang = 'zh'; renderArticleView(); };
+              btnEnEl.onclick = () => { activeArticleLang = 'en'; renderArticleView(); };
+            }
+          } else {
+            langToggleEl.classList.add('hidden');
+          }
+        }
+
+        const textToRender = activeArticleLang === 'zh' ? origContentZh : origContentEn;
+        const paras = textToRender.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 20);
+
+        let isExpanded = Boolean(originalCardEl.dataset.expanded === 'true');
+        const displayParas = (paras.length > 4 && !isExpanded) ? paras.slice(0, 3) : paras;
+
+        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh');
+
+        if (expandWrapEl && expandBtnEl && expandTextEl) {
+          if (paras.length > 4) {
+            expandWrapEl.classList.remove('hidden');
+            if (isExpanded) {
+              expandTextEl.textContent = isZh ? '收起部分长文 ▲' : 'Show Less ▲';
+            } else {
+              expandTextEl.textContent = isZh ? `展开阅读全文 (共 ${paras.length} 段) ▼` : `Read Full Story (${paras.length} paragraphs) ▼`;
+            }
+            expandBtnEl.onclick = () => {
+              originalCardEl.dataset.expanded = isExpanded ? 'false' : 'true';
+              renderArticleView();
+            };
+          } else {
+            expandWrapEl.classList.add('hidden');
+          }
+        }
+      };
+
+      if (originalCardEl) {
+        delete originalCardEl.dataset.expanded;
+        renderArticleView();
+      }
+
       const insightCardEl = document.getElementById('ai-modal-insight-card');
       if (insightCardEl) {
         if (hasValidInsight) {
