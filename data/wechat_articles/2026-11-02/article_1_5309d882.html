@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>高盛4.6万人全员装配AI：脚踩三大闭源巨头背后的降本算计</title>
+  <style>
+    body {
+      background: #f8fafc;
+      margin: 0;
+      padding: 24px 16px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.06);
+      padding: 32px 26px;
+      box-sizing: border-box;
+    }
+    .actions {
+      position: sticky;
+      top: 15px;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .btn {
+      background: #07c160;
+      color: #fff;
+      border: none;
+      padding: 9px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+    .btn:hover { background: #06ad56; }
+    .btn-secondary { background: #2563eb; }
+    .btn-secondary:hover { background: #1d4ed8; }
+    .toast {
+      display: none;
+      color: #07c160;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="actions">
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" onclick="copyWechatHtml()">🟢 一键复制微信排版 (直接粘贴微信后台)</button>
+        <button class="btn btn-secondary" onclick="copyTitle()">📋 复制推荐主标题</button>
+        <button class="btn" style="background:#475569;" onclick="copyMarkdown()">📝 复制 Markdown (备用)</button>
+        <a href="https://editor.mdnice.com/" target="_blank" class="btn" style="background:#64748b; text-decoration:none;">MDNice ↗</a>
+      </div>
+      <span class="toast" id="toastMsg">✓ 已复制！切到微信后台直接 Ctrl+V 即可</span>
+    </div>
+
+    <!-- 质检合格标签与备选标题栏 -->
+    <div style="background:#f1f5f9; border:1px solid #e2e8f0; border-radius:8px; padding:14px; margin-bottom:24px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <span style="font-size:12px; font-weight:bold; color:#475569;">💡 AI 推荐标题候选（点击任一行直接复制）：</span>
+        <span style="font-size:11px; font-weight:700; color:#15803d; background:#dcfce7; border:1px solid #86efac; padding:2px 8px; border-radius:4px;">🛡️ 7维质检: 84分 · 微信合规: 100%安全</span>
+      </div>
+      <div style="padding:8px 10px; margin:5px 0; background:#ffffff; border-radius:6px; font-size:14px; cursor:pointer; color:#1e293b; border:1px solid #e2e8f0;" onclick="copyCustomText(this.innerText)">高盛4.6万人全员装配AI：脚踩三大闭源巨头背后的降本算计</div><div style="padding:8px 10px; margin:5px 0; background:#ffffff; border-radius:6px; font-size:14px; cursor:pointer; color:#1e293b; border:1px solid #e2e8f0;" onclick="copyCustomText(this.innerText)">省下87%算力成本！华尔街投行拆解多模型路由的真实账本</div><div style="padding:8px 10px; margin:5px 0; background:#ffffff; border-radius:6px; font-size:14px; cursor:pointer; color:#1e293b; border:1px solid #e2e8f0;" onclick="copyCustomText(this.innerText)">不当OpenAI提款机：高盛历时两年给所有大厂上了合规一课</div>
+    </div>
+
+    <!-- 微信内联排版正文容器 -->
+    <div id="wechatContent">
+      <section style="box-sizing: border-box; font-size: 15px; line-height: 1.85; color: #333333; letter-spacing: 0.5px; word-break: break-word; padding: 2px 4px;"><section style="margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px dashed #cbd5e1; box-sizing: border-box;">  <span style="display: inline-block; background-color: #eff6ff; color: #2563eb; font-size: 11.5px; font-weight: bold; padding: 2px 8px; border-radius: 10px; border: 1px solid #bfdbfe; box-sizing: border-box;">✦ 深度特稿 · 前沿洞察 ✦</span>  <span style="display: inline-block; background-color: #f8fafc; color: #64748b; font-size: 11.5px; font-weight: normal; padding: 2px 8px; border-radius: 10px; border: 1px solid #e2e8f0; margin-left: 4px; box-sizing: border-box;">预计阅读 4 分钟</span>  <span style="float: right; font-size: 11.5px; color: #94a3b8; line-height: 22px;">2026年11月02日</span>  <section style="clear: both;"></section></section><section style="margin: 0 0 18px 0; box-sizing: border-box;">  <h2 style="font-size: 21px; font-weight: bold; color: #0f172a; line-height: 1.45; margin: 0; text-align: left; letter-spacing: 0.5px;">高盛4.6万人全员装配AI：脚踩三大闭源巨头背后的降本算计</h2></section><section style="margin: 20px 0 24px 0; text-align: center; box-sizing: border-box;">  <img src="images/cursor_composer_workflow.jpg" style="width: 100%; max-width: 100%; border-radius: 8px; display: block; margin: 0 auto; box-sizing: border-box;" alt="资讯核心视觉图" />  <p style="margin: 8px 0 0 0; font-size: 12px; color: #94a3b8; text-align: center; line-height: 1.5;">▲ 全球前沿 AI 技术代际跃迁与产业落地应用场景</p></section><section style="margin: 22px 0 24px 0; padding: 14px 16px; background-color: #eff6ff; border-left: 4px solid #2563eb; border-radius: 4px; box-sizing: border-box;">  <p style="margin: 0 0 8px 0; font-size: 13px; font-weight: bold; color: #1d4ed8; letter-spacing: 1px;">    ✦ 深度导读 · 抢先洞察 ✦  </p>  <p style="margin: 0; font-size: 14.5px; color: #334155; line-height: 1.8; text-align: justify; letter-spacing: 0.5px;">    华尔街最精明的投行终于掀了底牌。历时整整两年，高盛悄然将内部AI助手铺满了全行约46,000名员工的工位，彻底击碎了“大模型只是1.2万名码农专属玩具”的偏见。但更狠的是，高盛根本没买任何单一巨头的“全家桶”，而是用一套底层动态路由脚踏OpenAI、Anthropic与Alphabet三只船，硬是在算力账本和数据合规的风暴前夜筑起了防火墙。  </p></section><section style="margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; box-sizing: border-box;">  <span style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 13px; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-right: 8px; vertical-align: middle; line-height: 1.2;">01</span>  <span style="font-size: 17px; font-weight: bold; color: #0f172a; line-height: 1.5; letter-spacing: 0.5px; vertical-align: middle;">46000名金融民工的Token大挪移：混合路由压降86%推理开销</span></section><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">高盛没有让全员无脑调用每百万Token高达15美元的GPT-5.5或Claude 4.6 Sonnet顶配接口。其底层核心在于一套自研的多模型智能调度层：处理常规财报摘要与邮件起草时，流量被自动分流至轻量化端点或Gemini 3.8轻量版，首字延时压低至180毫秒以内；仅在复杂并购估值建模与代码安全重构时，才激活推理级o3或Claude 4.6。横向测算显示，相比单一大模型API调用方案，该架构直接将日常Token开销狂砍86.4%，全行单月推理综合成本被锁死在安全阈值内。</p><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">与早期简单的Prompt封装不同，高盛构建的属于典型的金融级Agent Orchestrator（智能体编排）架构。它不仅打通了内部私有数据库与合规审查链路，更在中间层设立了即时Token阻断机制。这种设计打破了闭源大厂试图用生态全家桶套牢B端客户的算盘，将底层算力彻底抽象为即插即用的水电机房，任一供应商宕机或坐地起价，高盛都能在10分钟内实现无感热切换。</p><section style="margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; box-sizing: border-box;">  <span style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 13px; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-right: 8px; vertical-align: middle; line-height: 1.2;">02</span>  <span style="font-size: 17px; font-weight: bold; color: #0f172a; line-height: 1.5; letter-spacing: 0.5px; vertical-align: middle;">穿透闭源黑盒与合规陷阱：混合架构如何阻断数据出境风险</span></section><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">在海外国会监管与合规听证步步紧逼的当下，金融巨头最恐惧的不是模型不够聪明，而是核心交易流水与并购底稿沦为闭源巨头强化学习的免费养料。高盛采用的混合供给方案在协议层对数据进出做了物理级隔离：公开市场舆情接入公有云API，而核心敏感财务底稿则严格走私有端点。更关键的是，高盛同步验证了基于开源架构的本地私有化集群，引入蒸馏自前沿推理模型的参数底座，实现极端断供情境下的离线级可用。</p><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">这一套工程落地踩平了国内金融机构此前常犯的技术陷阱——盲目追求超大参数单体模型。高盛的落地方案证明，业务一线并不需要46,000个精通量子力学的博士，而是需要几万个能在各自细分垂直场景下零幻觉输出格式化表格的精准算子。通过工程化的RAG挂载与上下文剪枝，高盛成功规避了长上下文模型随窗口拉长导致的计算延时雪崩问题。</p><section style="margin: 32px 0 14px 0; padding-bottom: 8px; border-bottom: 2px solid #2563eb; box-sizing: border-box;">  <span style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 13px; font-weight: bold; padding: 2px 8px; border-radius: 4px; margin-right: 8px; vertical-align: middle; line-height: 1.2;">03</span>  <span style="font-size: 17px; font-weight: bold; color: #0f172a; line-height: 1.5; letter-spacing: 0.5px; vertical-align: middle;">算清大模型私有化经济账：国内企业能否抄高盛的作业？</span></section><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">对于国内开发者与企业掌门人来说，高盛的账本极具参考价值。如果全面采购海外闭源API，一个万人规模团队的单月Token账单极易突破百万美元大关；而国内以DeepSeek-V3/R1、字节豆包以及MiniMax为代表的开源生态与普惠API，正在把百万Token综合调用成本杀穿到1至2元人民币的极致区间。通过本地私有化部署DeepSeek级别的高效模型，企业不仅能降低90%以上的长期采购成本，更能将核心代码与商业机密完全掌握在自己手中。</p><p style="margin: 0 0 16px 0; font-size: 15px; color: #334155; line-height: 1.85; text-align: justify; letter-spacing: 0.5px; word-break: break-word;">2026年企业级AI的军备竞赛，胜负手早已不是谁先用上了某家大厂的最新旗舰模型，而是谁拥有构建模型网关与调度分流的自主权。资本可以为了技术奇点的颠覆叙事无限买单，但企业CFO与法务合规部门最终会逼迫所有人直面ROI。高盛用两年时间交出的答卷本质上是对所有闭源生态的无声告诫：不做任何巨头的数字附庸，才是顶级机构在AI时代的终极自保之道。</p><section style="margin: 24px 0; border: 1px solid #cbd5e1; border-radius: 6px; overflow: hidden; box-sizing: border-box;"><section style="background-color: #1e1b4b; padding: 12px 14px; box-sizing: border-box;">  <p style="margin: 0; font-size: 14.5px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px;">⚖️ 国会听证风暴：多方核心博弈阵营与交锋焦点</p>  <p style="margin: 3px 0 0 0; font-size: 11px; color: #c7d2fe; line-height: 1.4;">美国财政部明确表态 · 拒绝避风港免责 · 闭源大厂与开源生态生死博弈</p></section><section style="background-color: #f8fafc; padding: 14px 12px; box-sizing: border-box;"><section style="margin: 0 0 12px 0; background-color: #fef2f2; border: 1px solid #fca5a5; border-left: 4px solid #dc2626; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">  <section style="margin-bottom: 6px; box-sizing: border-box;">    <span style="display: inline-block; background-color: #dc2626; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">🏛️ 监管与财政部立场</span>    <strong style="font-size: 13.5px; color: #b91c1c; vertical-align: middle; margin-left: 6px;">严打免责特权 · 必须承担法律赔偿</strong>  </section>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 大模型不是无辜的电信光纤管道，算法黑盒造成的社会与经济危害必须有人买单；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 既然巨头享受着数千亿甚至上万亿美元的资本估值，就绝不能逃避连带侵权责任；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 明确呼吁美国大力支持开源大模型生态，打破闭源寡头对底层智力设施的寻租垄断。</p></section><section style="margin: 0 0 12px 0; background-color: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">  <section style="margin-bottom: 6px; box-sizing: border-box;">    <span style="display: inline-block; background-color: #2563eb; color: #ffffff; font-size: 10.5px; font-weight: bold; padding: 1px 6px; border-radius: 3px; vertical-align: middle;">🏢 硅谷闭源巨头诉求</span>    <strong style="font-size: 13.5px; color: #1d4ed8; vertical-align: middle; margin-left: 6px;">力保免责金牌 · 诉求 230 条避风港</strong>  </section>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 诉求照搬互联网 DMCA 230 条避风港原则，将非确定性幻觉与误用归为下游不可控风险；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 若施加无限连带法律责任，巨头每年需拿出营收的 15%~25% 用于诉讼与法务对齐；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #334155; line-height: 1.6; text-align: justify;">✦ 剧增的合规与风控成本，最终都将以更高昂的 API 账单和更严苛的审查转嫁给开发者。</p></section><section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; box-sizing: border-box;">  <p style="margin: 0 0 6px 0; font-size: 12.5px; font-weight: bold; color: #0f172a;">📋 核心条款与行业连锁反应清单</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #475569; line-height: 1.6;">• 【商业接口调用成本剧增】闭源大模型为防官司将收紧审核与封号力度，调用延迟与使用摩擦上升；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #475569; line-height: 1.6;">• 【开源私有化战略价值暴涨】只有在本地机房可控运行开源模型，企业才能真正拥有 100% 数据主权并免受外部长臂管辖；</p>  <p style="margin: 4px 0; font-size: 11.5px; color: #475569; line-height: 1.6;">• 【国内出海企业合规红线】面向海外市场的产品必须建立健全的内容溯源与风控隔离机制，彻底放弃侥幸心理。</p></section><section style="background-color: #ffffff; border: 1px solid #cbd5e1; border-radius: 4px; padding: 12px 14px; margin-top: 12px; box-sizing: border-box;">  <p style="margin: 0; font-size: 12px; color: #334155; line-height: 1.65; text-align: justify;">💡 <strong>核心战略研判</strong>：资本可以为了颠覆叙事狂欢，但法律与社会治理终将要求有人买单。闭源大模型的法律责任铁律虽迟但到，提早布局基于开源架构的本地私有化方案，是企业化解外部断供与合规审查的最优解。</p>  <p style="margin: 5px 0 0 0; font-size: 10px; color: #94a3b8; text-align: right;">* 全球 AI 政策与合规治理观察室综合研判</p></section></section></section><section style="margin: 26px 0 22px 0; padding: 16px 18px; background-color: #f0fdf4; border-left: 4px solid #16a34a; border-radius: 4px; box-sizing: border-box; text-align: center;">  <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: bold; color: #16a34a; letter-spacing: 2px;">✦ 极客金句神评 ✦</p>  <p style="margin: 0; font-size: 15px; font-weight: bold; color: #14532d; line-height: 1.75;">“资本可以为颠覆叙事狂欢，但CFO终究要看财务账本。高盛教给行业的硬道理：不当任何大模型的提款机，把算力当水电，把数据当命根。”</p></section><section style="margin: 26px 0 20px 0; padding: 16px 18px; background-color: #f8fafc; border: 1px dashed #94a3b8; border-radius: 6px; box-sizing: border-box;">  <p style="margin: 0 0 6px 0; font-size: 14.5px; font-weight: bold; color: #0f172a;">💬 聊聊你的看法：</p>  <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.75; text-align: justify; margin: 0;">如果让你给公司4万人挑AI，你会选闭源全家桶还是多模型混搭？评论区聊聊你的算力账本。</p></section><section style="text-align: center; margin-top: 24px; padding-top: 14px; border-top: 1px solid #f1f5f9; box-sizing: border-box;">  <p style="margin: 0; font-size: 12px; color: #94a3b8;">情报雷达实时聚合 · 关注我们抢先洞察全球 AI 前沿</p></section></section>
+    </div>
+  </div>
+
+  <script>
+    async function copyWechatHtml() {
+      const el = document.getElementById("wechatContent");
+      if (!el) return;
+      const rawHtml = el.innerHTML;
+      const plainText = el.innerText;
+      let copied = false;
+
+      // 1. 优先使用现代标准的 Asynchronous Clipboard API
+      if (navigator.clipboard && window.ClipboardItem) {
+        try {
+          const blobHtml = new Blob([rawHtml], { type: "text/html" });
+          const blobText = new Blob([plainText], { type: "text/plain" });
+          await navigator.clipboard.write([new ClipboardItem({
+            "text/html": blobHtml,
+            "text/plain": blobText
+          })]);
+          copied = true;
+        } catch (e) {
+          copied = false;
+        }
+      }
+
+      // 2. 真实 DOM 选区直接复制保底
+      if (!copied) {
+        try {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(el);
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          const copyHandler = function(e) {
+            e.preventDefault();
+            if (e.clipboardData) {
+              e.clipboardData.setData('text/html', rawHtml);
+              e.clipboardData.setData('text/plain', plainText);
+            }
+          };
+
+          document.addEventListener('copy', copyHandler);
+          copied = document.execCommand('copy');
+          document.removeEventListener('copy', copyHandler);
+          selection.removeAllRanges();
+        } catch (err) {
+          copied = false;
+        }
+      }
+
+      if (copied) {
+        showToast("✓ 已成功复制微信排版！切到微信公众号后台直接 Ctrl+V 粘贴（若微信弹出转换为Markdown请选【取消】）");
+      } else {
+        alert("复制遇到浏览器权限限制，请直接手动全选页面内容按 Ctrl+C 复制");
+      }
+    }
+
+    const rawMarkdown = "# \u9ad8\u76db4.6\u4e07\u4eba\u5168\u5458\u88c5\u914dAI\uff1a\u811a\u8e29\u4e09\u5927\u95ed\u6e90\u5de8\u5934\u80cc\u540e\u7684\u964d\u672c\u7b97\u8ba1\n\n> \u2726 **\u6df1\u5ea6\u7279\u7a3f \u00b7 \u524d\u6cbf\u6d1e\u5bdf** \u2726 \u00b7 *2026\u5e7411\u670802\u65e5 \u00b7 \u9884\u8ba1\u9605\u8bfb 4 \u5206\u949f*\n\n![\u5168\u7403\u524d\u6cbf AI \u6280\u672f\u4ee3\u9645\u8dc3\u8fc1\u4e0e\u4ea7\u4e1a\u843d\u5730\u5e94\u7528\u573a\u666f](images/cursor_composer_workflow.jpg)\n<center><sup>\u25b2 \u5168\u7403\u524d\u6cbf AI \u6280\u672f\u4ee3\u9645\u8dc3\u8fc1\u4e0e\u4ea7\u4e1a\u843d\u5730\u5e94\u7528\u573a\u666f</sup></center>\n\n> \u2726 **\u6df1\u5ea6\u5bfc\u8bfb \u00b7 \u62a2\u5148\u6d1e\u5bdf** \u2726\n>\n> \u534e\u5c14\u8857\u6700\u7cbe\u660e\u7684\u6295\u884c\u7ec8\u4e8e\u6380\u4e86\u5e95\u724c\u3002\u5386\u65f6\u6574\u6574\u4e24\u5e74\uff0c\u9ad8\u76db\u6084\u7136\u5c06\u5185\u90e8AI\u52a9\u624b\u94fa\u6ee1\u4e86\u5168\u884c\u7ea646,000\u540d\u5458\u5de5\u7684\u5de5\u4f4d\uff0c\u5f7b\u5e95\u51fb\u788e\u4e86\u201c\u5927\u6a21\u578b\u53ea\u662f1.2\u4e07\u540d\u7801\u519c\u4e13\u5c5e\u73a9\u5177\u201d\u7684\u504f\u89c1\u3002\u4f46\u66f4\u72e0\u7684\u662f\uff0c\u9ad8\u76db\u6839\u672c\u6ca1\u4e70\u4efb\u4f55\u5355\u4e00\u5de8\u5934\u7684\u201c\u5168\u5bb6\u6876\u201d\uff0c\u800c\u662f\u7528\u4e00\u5957\u5e95\u5c42\u52a8\u6001\u8def\u7531\u811a\u8e0fOpenAI\u3001Anthropic\u4e0eAlphabet\u4e09\u53ea\u8239\uff0c\u786c\u662f\u5728\u7b97\u529b\u8d26\u672c\u548c\u6570\u636e\u5408\u89c4\u7684\u98ce\u66b4\u524d\u591c\u7b51\u8d77\u4e86\u9632\u706b\u5899\u3002\n\n## 01 46000\u540d\u91d1\u878d\u6c11\u5de5\u7684Token\u5927\u632a\u79fb\uff1a\u6df7\u5408\u8def\u7531\u538b\u964d86%\u63a8\u7406\u5f00\u9500\n\n\u9ad8\u76db\u6ca1\u6709\u8ba9\u5168\u5458\u65e0\u8111\u8c03\u7528\u6bcf\u767e\u4e07Token\u9ad8\u8fbe15\u7f8e\u5143\u7684GPT-5.5\u6216Claude 4.6 Sonnet\u9876\u914d\u63a5\u53e3\u3002\u5176\u5e95\u5c42\u6838\u5fc3\u5728\u4e8e\u4e00\u5957\u81ea\u7814\u7684\u591a\u6a21\u578b\u667a\u80fd\u8c03\u5ea6\u5c42\uff1a\u5904\u7406\u5e38\u89c4\u8d22\u62a5\u6458\u8981\u4e0e\u90ae\u4ef6\u8d77\u8349\u65f6\uff0c\u6d41\u91cf\u88ab\u81ea\u52a8\u5206\u6d41\u81f3\u8f7b\u91cf\u5316\u7aef\u70b9\u6216Gemini 3.8\u8f7b\u91cf\u7248\uff0c\u9996\u5b57\u5ef6\u65f6\u538b\u4f4e\u81f3180\u6beb\u79d2\u4ee5\u5185\uff1b\u4ec5\u5728\u590d\u6742\u5e76\u8d2d\u4f30\u503c\u5efa\u6a21\u4e0e\u4ee3\u7801\u5b89\u5168\u91cd\u6784\u65f6\uff0c\u624d\u6fc0\u6d3b\u63a8\u7406\u7ea7o3\u6216Claude 4.6\u3002\u6a2a\u5411\u6d4b\u7b97\u663e\u793a\uff0c\u76f8\u6bd4\u5355\u4e00\u5927\u6a21\u578bAPI\u8c03\u7528\u65b9\u6848\uff0c\u8be5\u67b6\u6784\u76f4\u63a5\u5c06\u65e5\u5e38Token\u5f00\u9500\u72c2\u780d86.4%\uff0c\u5168\u884c\u5355\u6708\u63a8\u7406\u7efc\u5408\u6210\u672c\u88ab\u9501\u6b7b\u5728\u5b89\u5168\u9608\u503c\u5185\u3002\n\n\u4e0e\u65e9\u671f\u7b80\u5355\u7684Prompt\u5c01\u88c5\u4e0d\u540c\uff0c\u9ad8\u76db\u6784\u5efa\u7684\u5c5e\u4e8e\u5178\u578b\u7684\u91d1\u878d\u7ea7Agent Orchestrator\uff08\u667a\u80fd\u4f53\u7f16\u6392\uff09\u67b6\u6784\u3002\u5b83\u4e0d\u4ec5\u6253\u901a\u4e86\u5185\u90e8\u79c1\u6709\u6570\u636e\u5e93\u4e0e\u5408\u89c4\u5ba1\u67e5\u94fe\u8def\uff0c\u66f4\u5728\u4e2d\u95f4\u5c42\u8bbe\u7acb\u4e86\u5373\u65f6Token\u963b\u65ad\u673a\u5236\u3002\u8fd9\u79cd\u8bbe\u8ba1\u6253\u7834\u4e86\u95ed\u6e90\u5927\u5382\u8bd5\u56fe\u7528\u751f\u6001\u5168\u5bb6\u6876\u5957\u7262B\u7aef\u5ba2\u6237\u7684\u7b97\u76d8\uff0c\u5c06\u5e95\u5c42\u7b97\u529b\u5f7b\u5e95\u62bd\u8c61\u4e3a\u5373\u63d2\u5373\u7528\u7684\u6c34\u7535\u673a\u623f\uff0c\u4efb\u4e00\u4f9b\u5e94\u5546\u5b95\u673a\u6216\u5750\u5730\u8d77\u4ef7\uff0c\u9ad8\u76db\u90fd\u80fd\u572810\u5206\u949f\u5185\u5b9e\u73b0\u65e0\u611f\u70ed\u5207\u6362\u3002\n\n## 02 \u7a7f\u900f\u95ed\u6e90\u9ed1\u76d2\u4e0e\u5408\u89c4\u9677\u9631\uff1a\u6df7\u5408\u67b6\u6784\u5982\u4f55\u963b\u65ad\u6570\u636e\u51fa\u5883\u98ce\u9669\n\n\u5728\u6d77\u5916\u56fd\u4f1a\u76d1\u7ba1\u4e0e\u5408\u89c4\u542c\u8bc1\u6b65\u6b65\u7d27\u903c\u7684\u5f53\u4e0b\uff0c\u91d1\u878d\u5de8\u5934\u6700\u6050\u60e7\u7684\u4e0d\u662f\u6a21\u578b\u4e0d\u591f\u806a\u660e\uff0c\u800c\u662f\u6838\u5fc3\u4ea4\u6613\u6d41\u6c34\u4e0e\u5e76\u8d2d\u5e95\u7a3f\u6ca6\u4e3a\u95ed\u6e90\u5de8\u5934\u5f3a\u5316\u5b66\u4e60\u7684\u514d\u8d39\u517b\u6599\u3002\u9ad8\u76db\u91c7\u7528\u7684\u6df7\u5408\u4f9b\u7ed9\u65b9\u6848\u5728\u534f\u8bae\u5c42\u5bf9\u6570\u636e\u8fdb\u51fa\u505a\u4e86\u7269\u7406\u7ea7\u9694\u79bb\uff1a\u516c\u5f00\u5e02\u573a\u8206\u60c5\u63a5\u5165\u516c\u6709\u4e91API\uff0c\u800c\u6838\u5fc3\u654f\u611f\u8d22\u52a1\u5e95\u7a3f\u5219\u4e25\u683c\u8d70\u79c1\u6709\u7aef\u70b9\u3002\u66f4\u5173\u952e\u7684\u662f\uff0c\u9ad8\u76db\u540c\u6b65\u9a8c\u8bc1\u4e86\u57fa\u4e8e\u5f00\u6e90\u67b6\u6784\u7684\u672c\u5730\u79c1\u6709\u5316\u96c6\u7fa4\uff0c\u5f15\u5165\u84b8\u998f\u81ea\u524d\u6cbf\u63a8\u7406\u6a21\u578b\u7684\u53c2\u6570\u5e95\u5ea7\uff0c\u5b9e\u73b0\u6781\u7aef\u65ad\u4f9b\u60c5\u5883\u4e0b\u7684\u79bb\u7ebf\u7ea7\u53ef\u7528\u3002\n\n\u8fd9\u4e00\u5957\u5de5\u7a0b\u843d\u5730\u8e29\u5e73\u4e86\u56fd\u5185\u91d1\u878d\u673a\u6784\u6b64\u524d\u5e38\u72af\u7684\u6280\u672f\u9677\u9631\u2014\u2014\u76f2\u76ee\u8ffd\u6c42\u8d85\u5927\u53c2\u6570\u5355\u4f53\u6a21\u578b\u3002\u9ad8\u76db\u7684\u843d\u5730\u65b9\u6848\u8bc1\u660e\uff0c\u4e1a\u52a1\u4e00\u7ebf\u5e76\u4e0d\u9700\u898146,000\u4e2a\u7cbe\u901a\u91cf\u5b50\u529b\u5b66\u7684\u535a\u58eb\uff0c\u800c\u662f\u9700\u8981\u51e0\u4e07\u4e2a\u80fd\u5728\u5404\u81ea\u7ec6\u5206\u5782\u76f4\u573a\u666f\u4e0b\u96f6\u5e7b\u89c9\u8f93\u51fa\u683c\u5f0f\u5316\u8868\u683c\u7684\u7cbe\u51c6\u7b97\u5b50\u3002\u901a\u8fc7\u5de5\u7a0b\u5316\u7684RAG\u6302\u8f7d\u4e0e\u4e0a\u4e0b\u6587\u526a\u679d\uff0c\u9ad8\u76db\u6210\u529f\u89c4\u907f\u4e86\u957f\u4e0a\u4e0b\u6587\u6a21\u578b\u968f\u7a97\u53e3\u62c9\u957f\u5bfc\u81f4\u7684\u8ba1\u7b97\u5ef6\u65f6\u96ea\u5d29\u95ee\u9898\u3002\n\n## 03 \u7b97\u6e05\u5927\u6a21\u578b\u79c1\u6709\u5316\u7ecf\u6d4e\u8d26\uff1a\u56fd\u5185\u4f01\u4e1a\u80fd\u5426\u6284\u9ad8\u76db\u7684\u4f5c\u4e1a\uff1f\n\n\u5bf9\u4e8e\u56fd\u5185\u5f00\u53d1\u8005\u4e0e\u4f01\u4e1a\u638c\u95e8\u4eba\u6765\u8bf4\uff0c\u9ad8\u76db\u7684\u8d26\u672c\u6781\u5177\u53c2\u8003\u4ef7\u503c\u3002\u5982\u679c\u5168\u9762\u91c7\u8d2d\u6d77\u5916\u95ed\u6e90API\uff0c\u4e00\u4e2a\u4e07\u4eba\u89c4\u6a21\u56e2\u961f\u7684\u5355\u6708Token\u8d26\u5355\u6781\u6613\u7a81\u7834\u767e\u4e07\u7f8e\u5143\u5927\u5173\uff1b\u800c\u56fd\u5185\u4ee5DeepSeek-V3/R1\u3001\u5b57\u8282\u8c46\u5305\u4ee5\u53caMiniMax\u4e3a\u4ee3\u8868\u7684\u5f00\u6e90\u751f\u6001\u4e0e\u666e\u60e0API\uff0c\u6b63\u5728\u628a\u767e\u4e07Token\u7efc\u5408\u8c03\u7528\u6210\u672c\u6740\u7a7f\u52301\u81f32\u5143\u4eba\u6c11\u5e01\u7684\u6781\u81f4\u533a\u95f4\u3002\u901a\u8fc7\u672c\u5730\u79c1\u6709\u5316\u90e8\u7f72DeepSeek\u7ea7\u522b\u7684\u9ad8\u6548\u6a21\u578b\uff0c\u4f01\u4e1a\u4e0d\u4ec5\u80fd\u964d\u4f4e90%\u4ee5\u4e0a\u7684\u957f\u671f\u91c7\u8d2d\u6210\u672c\uff0c\u66f4\u80fd\u5c06\u6838\u5fc3\u4ee3\u7801\u4e0e\u5546\u4e1a\u673a\u5bc6\u5b8c\u5168\u638c\u63e1\u5728\u81ea\u5df1\u624b\u4e2d\u3002\n\n2026\u5e74\u4f01\u4e1a\u7ea7AI\u7684\u519b\u5907\u7ade\u8d5b\uff0c\u80dc\u8d1f\u624b\u65e9\u5df2\u4e0d\u662f\u8c01\u5148\u7528\u4e0a\u4e86\u67d0\u5bb6\u5927\u5382\u7684\u6700\u65b0\u65d7\u8230\u6a21\u578b\uff0c\u800c\u662f\u8c01\u62e5\u6709\u6784\u5efa\u6a21\u578b\u7f51\u5173\u4e0e\u8c03\u5ea6\u5206\u6d41\u7684\u81ea\u4e3b\u6743\u3002\u8d44\u672c\u53ef\u4ee5\u4e3a\u4e86\u6280\u672f\u5947\u70b9\u7684\u98a0\u8986\u53d9\u4e8b\u65e0\u9650\u4e70\u5355\uff0c\u4f46\u4f01\u4e1aCFO\u4e0e\u6cd5\u52a1\u5408\u89c4\u90e8\u95e8\u6700\u7ec8\u4f1a\u903c\u8feb\u6240\u6709\u4eba\u76f4\u9762ROI\u3002\u9ad8\u76db\u7528\u4e24\u5e74\u65f6\u95f4\u4ea4\u51fa\u7684\u7b54\u5377\u672c\u8d28\u4e0a\u662f\u5bf9\u6240\u6709\u95ed\u6e90\u751f\u6001\u7684\u65e0\u58f0\u544a\u8beb\uff1a\u4e0d\u505a\u4efb\u4f55\u5de8\u5934\u7684\u6570\u5b57\u9644\u5eb8\uff0c\u624d\u662f\u9876\u7ea7\u673a\u6784\u5728AI\u65f6\u4ee3\u7684\u7ec8\u6781\u81ea\u4fdd\u4e4b\u9053\u3002\n\n### \u2696\ufe0f \u56fd\u4f1a\u542c\u8bc1\u98ce\u66b4\uff1a\u591a\u65b9\u6838\u5fc3\u535a\u5f08\u9635\u8425\u4e0e\u4ea4\u950b\u7126\u70b9\n\n> *\u7f8e\u56fd\u8d22\u653f\u90e8\u660e\u786e\u8868\u6001 \u00b7 \u62d2\u7edd\u907f\u98ce\u6e2f\u514d\u8d23 \u00b7 \u95ed\u6e90\u5927\u5382\u4e0e\u5f00\u6e90\u751f\u6001\u751f\u6b7b\u535a\u5f08*\n\n> **\ud83c\udfdb\ufe0f \u76d1\u7ba1\u4e0e\u8d22\u653f\u90e8\u7acb\u573a\uff08\u4e25\u6253\u514d\u8d23\u7279\u6743 \u00b7 \u5fc5\u987b\u627f\u62c5\u6cd5\u5f8b\u8d54\u507f\uff09**\n\n> - \u5927\u6a21\u578b\u4e0d\u662f\u65e0\u8f9c\u7684\u7535\u4fe1\u5149\u7ea4\u7ba1\u9053\uff0c\u7b97\u6cd5\u9ed1\u76d2\u9020\u6210\u7684\u793e\u4f1a\u4e0e\u7ecf\u6d4e\u5371\u5bb3\u5fc5\u987b\u6709\u4eba\u4e70\u5355\uff1b\n\n> - \u65e2\u7136\u5de8\u5934\u4eab\u53d7\u7740\u6570\u5343\u4ebf\u751a\u81f3\u4e0a\u4e07\u4ebf\u7f8e\u5143\u7684\u8d44\u672c\u4f30\u503c\uff0c\u5c31\u7edd\u4e0d\u80fd\u9003\u907f\u8fde\u5e26\u4fb5\u6743\u8d23\u4efb\uff1b\n\n> - \u660e\u786e\u547c\u5401\u7f8e\u56fd\u5927\u529b\u652f\u6301\u5f00\u6e90\u5927\u6a21\u578b\u751f\u6001\uff0c\u6253\u7834\u95ed\u6e90\u5be1\u5934\u5bf9\u5e95\u5c42\u667a\u529b\u8bbe\u65bd\u7684\u5bfb\u79df\u5784\u65ad\u3002\n\n>\n\n> **\ud83c\udfe2 \u7845\u8c37\u95ed\u6e90\u5de8\u5934\u8bc9\u6c42\uff08\u529b\u4fdd\u514d\u8d23\u91d1\u724c \u00b7 \u8bc9\u6c42 230 \u6761\u907f\u98ce\u6e2f\uff09**\n\n> - \u8bc9\u6c42\u7167\u642c\u4e92\u8054\u7f51 DMCA 230 \u6761\u907f\u98ce\u6e2f\u539f\u5219\uff0c\u5c06\u975e\u786e\u5b9a\u6027\u5e7b\u89c9\u4e0e\u8bef\u7528\u5f52\u4e3a\u4e0b\u6e38\u4e0d\u53ef\u63a7\u98ce\u9669\uff1b\n\n> - \u82e5\u65bd\u52a0\u65e0\u9650\u8fde\u5e26\u6cd5\u5f8b\u8d23\u4efb\uff0c\u5de8\u5934\u6bcf\u5e74\u9700\u62ff\u51fa\u8425\u6536\u7684 15%~25% \u7528\u4e8e\u8bc9\u8bbc\u4e0e\u6cd5\u52a1\u5bf9\u9f50\uff1b\n\n> - \u5267\u589e\u7684\u5408\u89c4\u4e0e\u98ce\u63a7\u6210\u672c\uff0c\u6700\u7ec8\u90fd\u5c06\u4ee5\u66f4\u9ad8\u6602\u7684 API \u8d26\u5355\u548c\u66f4\u4e25\u82db\u7684\u5ba1\u67e5\u8f6c\u5ac1\u7ed9\u5f00\u53d1\u8005\u3002\n\n>\n\n> \ud83d\udccb **\u6838\u5fc3\u6761\u6b3e\u4e0e\u884c\u4e1a\u8fde\u9501\u53cd\u5e94\u6e05\u5355**\uff1a\n\n> - \u3010\u5546\u4e1a\u63a5\u53e3\u8c03\u7528\u6210\u672c\u5267\u589e\u3011\u95ed\u6e90\u5927\u6a21\u578b\u4e3a\u9632\u5b98\u53f8\u5c06\u6536\u7d27\u5ba1\u6838\u4e0e\u5c01\u53f7\u529b\u5ea6\uff0c\u8c03\u7528\u5ef6\u8fdf\u4e0e\u4f7f\u7528\u6469\u64e6\u4e0a\u5347\uff1b\n\n> - \u3010\u5f00\u6e90\u79c1\u6709\u5316\u6218\u7565\u4ef7\u503c\u66b4\u6da8\u3011\u53ea\u6709\u5728\u672c\u5730\u673a\u623f\u53ef\u63a7\u8fd0\u884c\u5f00\u6e90\u6a21\u578b\uff0c\u4f01\u4e1a\u624d\u80fd\u771f\u6b63\u62e5\u6709 100% \u6570\u636e\u4e3b\u6743\u5e76\u514d\u53d7\u5916\u90e8\u957f\u81c2\u7ba1\u8f96\uff1b\n\n> - \u3010\u56fd\u5185\u51fa\u6d77\u4f01\u4e1a\u5408\u89c4\u7ea2\u7ebf\u3011\u9762\u5411\u6d77\u5916\u5e02\u573a\u7684\u4ea7\u54c1\u5fc5\u987b\u5efa\u7acb\u5065\u5168\u7684\u5185\u5bb9\u6eaf\u6e90\u4e0e\u98ce\u63a7\u9694\u79bb\u673a\u5236\uff0c\u5f7b\u5e95\u653e\u5f03\u4fa5\u5e78\u5fc3\u7406\u3002\n\n>\n\n> \ud83d\udca1 **\u6838\u5fc3\u6218\u7565\u7814\u5224**\uff1a\u8d44\u672c\u53ef\u4ee5\u4e3a\u4e86\u98a0\u8986\u53d9\u4e8b\u72c2\u6b22\uff0c\u4f46\u6cd5\u5f8b\u4e0e\u793e\u4f1a\u6cbb\u7406\u7ec8\u5c06\u8981\u6c42\u6709\u4eba\u4e70\u5355\u3002\u95ed\u6e90\u5927\u6a21\u578b\u7684\u6cd5\u5f8b\u8d23\u4efb\u94c1\u5f8b\u867d\u8fdf\u4f46\u5230\uff0c\u63d0\u65e9\u5e03\u5c40\u57fa\u4e8e\u5f00\u6e90\u67b6\u6784\u7684\u672c\u5730\u79c1\u6709\u5316\u65b9\u6848\uff0c\u662f\u4f01\u4e1a\u5316\u89e3\u5916\u90e8\u65ad\u4f9b\u4e0e\u5408\u89c4\u5ba1\u67e5\u7684\u6700\u4f18\u89e3\u3002\n\n> \u2726 **\u6781\u5ba2\u91d1\u53e5\u795e\u8bc4** \u2726\n>\n> \u201c\u8d44\u672c\u53ef\u4ee5\u4e3a\u98a0\u8986\u53d9\u4e8b\u72c2\u6b22\uff0c\u4f46CFO\u7ec8\u7a76\u8981\u770b\u8d22\u52a1\u8d26\u672c\u3002\u9ad8\u76db\u6559\u7ed9\u884c\u4e1a\u7684\u786c\u9053\u7406\uff1a\u4e0d\u5f53\u4efb\u4f55\u5927\u6a21\u578b\u7684\u63d0\u6b3e\u673a\uff0c\u628a\u7b97\u529b\u5f53\u6c34\u7535\uff0c\u628a\u6570\u636e\u5f53\u547d\u6839\u3002\u201d\n\n> \ud83d\udcac **\u804a\u804a\u4f60\u7684\u770b\u6cd5\uff1a**\n>\n> \u5982\u679c\u8ba9\u4f60\u7ed9\u516c\u53f84\u4e07\u4eba\u6311AI\uff0c\u4f60\u4f1a\u9009\u95ed\u6e90\u5168\u5bb6\u6876\u8fd8\u662f\u591a\u6a21\u578b\u6df7\u642d\uff1f\u8bc4\u8bba\u533a\u804a\u804a\u4f60\u7684\u7b97\u529b\u8d26\u672c\u3002\n\n---\n> *\u60c5\u62a5\u96f7\u8fbe\u5b9e\u65f6\u805a\u5408 \u00b7 \u5173\u6ce8\u6211\u4eec\u62a2\u5148\u6d1e\u5bdf\u5168\u7403 AI \u524d\u6cbf*\n";
+    function copyMarkdown() {
+      navigator.clipboard.writeText(rawMarkdown).then(() => {
+        showToast("✓ 已复制 Markdown 源码！请到 MDNice 粘贴并一键导出到公众号");
+      }).catch(() => {
+        prompt("请手动复制 Markdown 源码：", rawMarkdown);
+      });
+    }
+
+    function copyTitle() {
+      const title = "高盛4.6万人全员装配AI：脚踩三大闭源巨头背后的降本算计";
+      copyCustomText(title);
+    }
+
+    function copyCustomText(t) {
+      navigator.clipboard.writeText(t).then(() => {
+        showToast("✓ 标题已复制到剪贴板！");
+      });
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toastMsg");
+      el.innerText = msg;
+      el.style.display = "inline-block";
+      setTimeout(() => { el.style.display = "none"; }, 3500);
+    }
+  </script>
+</body>
+</html>
