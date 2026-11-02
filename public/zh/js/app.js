@@ -11543,6 +11543,81 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.renderUI = renderUI;
 
 
+    
+    // =========================================================================
+    // 📱 移动端与平板专属触控手势与浮动交互 (Touch Swipes & Floating Helpers)
+    // =========================================================================
+    function initMobileBackToTop() {
+      const btn = document.getElementById('btn-back-to-top');
+      if (!btn) return;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 350) {
+          btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+          btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        } else {
+          btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+          btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        }
+      }, { passive: true });
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+
+    function initTouchGestures() {
+      // 1. 走马灯卡片手势触控滑动 (垂直/水平滑动手势)
+      const ticker = document.getElementById('viral-ticker-viewport');
+      if (ticker && !ticker._touchInit) {
+        ticker._touchInit = true;
+        let startX = 0, startY = 0;
+        ticker.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          startY = e.touches[0].clientY;
+        }, { passive: true });
+        ticker.addEventListener('touchend', (e) => {
+          const diffX = e.changedTouches[0].clientX - startX;
+          const diffY = e.changedTouches[0].clientY - startY;
+          if (Math.abs(diffY) > 35 && Math.abs(diffY) > Math.abs(diffX)) {
+            flipViralTicker(diffY < 0 ? 1 : -1);
+          } else if (Math.abs(diffX) > 40) {
+            flipViralTicker(diffX < 0 ? 1 : -1);
+          }
+        }, { passive: true });
+      }
+
+      // 2. 移动端大拇指全屏横滑切栏手势 (Glide between 6 core categories)
+      const mainEl = document.querySelector('main');
+      if (mainEl && !mainEl._touchSwipeInit) {
+        mainEl._touchSwipeInit = true;
+        let touchStartX = 0, touchStartY = 0;
+        const tabsList = ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'];
+        
+        mainEl.addEventListener('touchstart', (e) => {
+          if (window.innerWidth >= 768) return;
+          if (e.target.closest('#hot-tags-bar, #topic-tabs-bar, pre, code, input, textarea, select, #viral-ticker-section, .modal-sheet-dialog, .no-swipe')) return;
+          touchStartX = e.touches[0].clientX;
+          touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+
+        mainEl.addEventListener('touchend', (e) => {
+          if (window.innerWidth >= 768) return;
+          if (e.target.closest('#hot-tags-bar, #topic-tabs-bar, pre, code, input, textarea, select, #viral-ticker-section, .modal-sheet-dialog, .no-swipe')) return;
+          const deltaX = e.changedTouches[0].clientX - touchStartX;
+          const deltaY = e.changedTouches[0].clientY - touchStartY;
+          if (Math.abs(deltaX) > 85 && Math.abs(deltaY) < 55) {
+            const currentIdx = tabsList.indexOf(currentTab || 'all');
+            if (currentIdx !== -1) {
+              if (deltaX < 0 && currentIdx < tabsList.length - 1) {
+                switchTab(tabsList[currentIdx + 1]);
+              } else if (deltaX > 0 && currentIdx > 0) {
+                switchTab(tabsList[currentIdx - 1]);
+              }
+            }
+          }
+        }, { passive: true });
+      }
+    }
+
     const runLangCheck = () => {
       initTranslateEngine();
       checkAndShowLangSuggestion();
@@ -11552,7 +11627,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       setTimeout(runLangCheck, 300);
     } else {
       window.addEventListener('DOMContentLoaded', () => {
-        handleHashNavigation();
+        initMobileBackToTop();
+      initTouchGestures();
+      handleHashNavigation();
         syncThreeColumnsHeight();
         setTimeout(runLangCheck, 300);
       });
