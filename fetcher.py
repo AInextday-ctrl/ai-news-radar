@@ -220,19 +220,24 @@ def enrich_tweet_media(item: Dict[str, Any], client: Optional[httpx.Client] = No
     item["url"] = f"https://x.com/{user}/status/{status_id}"
     item["status_id"] = status_id
 
-    # 剔除已存在的假图库 URL
+    # 剔除已存在的假图库 URL 或短链接 URL
     existing_img = str(item.get("image_url") or "")
-    if "unsplash.com" in existing_img:
+    if "unsplash.com" in existing_img or "t.co/" in existing_img:
         item["image_url"] = None
         existing_img = ""
 
+    if item.get("media_urls"):
+        item["media_urls"] = [m for m in item["media_urls"] if "t.co/" not in str(m)]
+
     needs_enrich = (
         not item.get("image_url")
+        or "t.co/" in existing_img
+        or "pbs.twimg.com" not in existing_img
         or not item.get("video_url")
         or "/video/" in u
         or "amplify_video_thumb" not in existing_img
     )
-    if not needs_enrich and item.get("media_urls"):
+    if not needs_enrich and item.get("media_urls") and any("pbs.twimg.com" in str(m) for m in item["media_urls"]):
         return item
 
     close_client = False

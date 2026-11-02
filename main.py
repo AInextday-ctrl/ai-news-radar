@@ -1204,13 +1204,17 @@ def save_news(items: list):
                 if exist_sum and clean_t and not exist_sum.startswith(clean_t) and (not curr_sum or curr_sum.startswith(clean_t)):
                     it["summary_zh"] = exist_sum
 
-            # 严格分类配图策略：推文 (celebrity) 严禁挂载任何 Unsplash 假图，纯文字推文保留纯文字排版
+            # 严格分类配图策略：推文 (celebrity) 严禁挂载任何 Unsplash 假图与 t.co 裸短链，纯文字推文保留纯文字排版
             img_val = str(it.get("image_url") or "")
             if it.get("category") == "celebrity":
-                if "unsplash.com" in img_val:
+                if "unsplash.com" in img_val or "t.co/" in img_val:
                     it["image_url"] = None
-                # 仅对首次入库且未核验过的推文发起网络嗅探，防止历史成百上千条推文循环重复发起网络阻塞
-                if (not it.get("image_url") or it.get("has_video")) and not it.get("media_checked"):
+                    img_val = ""
+                if it.get("media_urls"):
+                    it["media_urls"] = [m for m in it["media_urls"] if "t.co/" not in str(m)]
+                # 对缺少原生 pbs.twimg 图片或包含视频的推文发起网络嗅探
+                has_pbs = "pbs.twimg.com" in img_val
+                if (not it.get("image_url") or not has_pbs or it.get("has_video")) and not it.get("media_checked"):
                     try:
                         enrich_tweet_media(it)
                     except Exception:

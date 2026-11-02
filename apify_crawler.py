@@ -489,7 +489,7 @@ def fetch_incremental_tweets(
                 if any(ext in m.lower() for ext in [".mp4", ".m3u8", ".mov"]):
                     video_url = video_url or m
                     has_video = True
-                elif m not in media_urls:
+                elif "t.co/" not in m and not m.endswith("/photo/1") and m not in media_urls:
                     media_urls.append(m)
             elif isinstance(m, dict):
                 m_type = m.get("type", "")
@@ -503,8 +503,12 @@ def fetch_incremental_tweets(
                     elif m.get("url") and any(ext in m.get("url", "").lower() for ext in [".mp4", ".m3u8"]):
                         video_url = video_url or m.get("url")
 
-                img = m.get("media_url_https") or m.get("media_url") or m.get("url") or m.get("preview_image_url")
-                if img and isinstance(img, str) and img.startswith("http") and img not in media_urls:
+                img = m.get("media_url_https") or m.get("media_url") or m.get("preview_image_url")
+                if not img and m.get("url"):
+                    cand = m.get("url")
+                    if isinstance(cand, str) and ("pbs.twimg.com" in cand or "twimg.com" in cand or any(cand.lower().endswith(ext) for ext in [".jpg", ".jpeg", ".png", ".webp"])):
+                        img = cand
+                if img and isinstance(img, str) and img.startswith("http") and "t.co/" not in img and img not in media_urls:
                     media_urls.append(img)
 
         raw_url = it.get("url") or ""
@@ -657,7 +661,8 @@ def fetch_incremental_tweets(
             "tags": tags_list
         }
 
-        if not news_item.get("image_url") or news_item.get("has_video"):
+        img_u = str(news_item.get("image_url") or "")
+        if not img_u or "t.co/" in img_u or "pbs.twimg.com" not in img_u or news_item.get("has_video"):
             enrich_tweet_media(news_item)
 
         new_items.append(news_item)

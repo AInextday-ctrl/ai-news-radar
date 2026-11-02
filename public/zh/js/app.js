@@ -5143,8 +5143,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
             <!-- 原推图片/视频媒体展示 (全平台全视图统一呈现，支持原生播放、高清海报与无缝回退) -->
             ${(() => {
-              const imgUrl = item.image_url || (item.media_urls && item.media_urls[0]) || (item.photos && item.photos[0]);
-              const allMediaUrls = item.media_urls || (item.photos ? item.photos : (imgUrl ? [imgUrl] : []));
+              const rawImg = item.image_url || (item.media_urls && item.media_urls[0]) || (item.photos && item.photos[0]);
+              const imgUrl = (rawImg && isValidTweetImageUrl(rawImg)) ? rawImg : null;
+              const allMediaUrls = (item.media_urls || (item.photos ? item.photos : (rawImg ? [rawImg] : []))).filter(isValidTweetImageUrl);
               const hasVideo = item.has_video || item.video_url || (item.url && item.url.includes('/video/')) || (displayQuote && /video|▶|🎬|watch|demo/i.test(displayQuote) && (imgUrl || item.has_video));
               const videoSrc = item.video_url;
 
@@ -9465,7 +9466,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
     function detectSocialMediaType(item) {
       const textLower = ((item.title || '') + ' ' + (item.full_text_en || '') + ' ' + (item.spec_tags || []).join(' ')).toLowerCase();
-      if (item.image_url) return 'image';
+      if (item.image_url && isValidTweetImageUrl(item.image_url)) return 'image';
       if (textLower.includes('seedance') || textLower.includes('dreamina') || textLower.includes('wan 2.1') || textLower.includes('kling') || textLower.includes('fastvideo') || textLower.includes('video') || (item.spec_tags && item.spec_tags.some(t => t.includes('视频')))) {
         return 'video';
       }
@@ -9482,7 +9483,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const itemId = escapeHtml(item.id || item.url || '');
       const textLower = ((item.title || '') + ' ' + (item.full_text_en || '')).toLowerCase();
 
-      if (mediaType === 'image' && item.image_url) {
+      if (mediaType === 'image' && item.image_url && isValidTweetImageUrl(item.image_url)) {
         return `
           <div class="mt-3.5 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
             <img src="${escapeHtml(item.image_url)}" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="openImageLightbox('${escapeHtml(item.image_url)}', event)">
