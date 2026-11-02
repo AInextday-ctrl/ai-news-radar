@@ -2245,6 +2245,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       });
 
+      // 同步移动端沉浸式单手底部导航栏状态
+      tabKeys.forEach(k => {
+        const mBtn = document.getElementById('mobile-nav-btn-' + k);
+        if (mBtn) {
+          if (k === tab) {
+            mBtn.classList.add('active');
+            mBtn.setAttribute('aria-selected', 'true');
+          } else {
+            mBtn.classList.remove('active');
+            mBtn.setAttribute('aria-selected', 'false');
+          }
+        }
+      });
+
+      // 移动端切栏时平滑滚动到顶部，杜绝盲区体验
+      if (typeof window !== 'undefined' && window.innerWidth < 768 && updateHash) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
       const viewAll = document.getElementById('view-all');
       const viewCat = document.getElementById('view-category');
       const viewSearch = document.getElementById('view-search');
@@ -4265,7 +4284,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       window.viralTickerCurrentPage = (window.viralTickerCurrentPage + direction + pages.length) % pages.length;
       
-      const targetH = (window.innerWidth >= 768) ? 180 : 145;
+      const targetH = (window.innerWidth >= 768) ? 180 : 165;
       const offset = window.viralTickerCurrentPage * targetH;
       slider.style.transform = `translateY(-${offset}px)`;
       updateTickerPageUI(window.viralTickerCurrentPage + 1, pages.length);
@@ -4274,7 +4293,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function fitViralTickerHeight() {
       const slider = document.getElementById('viral-ticker-slider');
       if (!slider) return;
-      const targetH = (window.innerWidth >= 768) ? 180 : 145;
+      const targetH = (window.innerWidth >= 768) ? 180 : 165;
       const offset = (window.viralTickerCurrentPage || 0) * targetH;
       slider.style.transform = `translateY(-${offset}px)`;
     }
@@ -7705,6 +7724,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (bArchive) {
         bArchive.textContent = data.archive_meta?.total_archived || (cachedArchiveData ? cachedArchiveData.items.length : 0);
       }
+
+      // 同步移动端底部导航角标
+      ['all', 'news', 'celebrity', 'tools', 'videos', 'prompts'].forEach(k => {
+        const deskBadge = document.getElementById('badge-count-' + k);
+        const mobBadge = document.getElementById('mobile-badge-' + k);
+        if (deskBadge && mobBadge) {
+          mobBadge.textContent = deskBadge.textContent;
+        }
+      });
 
       // 实时同步社交雷达子角标与缓存
       const bLeader = document.getElementById('badge-count-leader');

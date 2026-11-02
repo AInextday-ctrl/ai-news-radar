@@ -2,7 +2,13 @@
 <html lang="zh-CN" class="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#060913" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <meta name="format-detection" content="telephone=no">
   <meta name="color-scheme" content="light dark">
   <title>AI 资讯雷达 - 全球前沿 AI 情报、领袖动态与落地工具库 | ainewsradar.xyz</title>
   <meta name="description" content="AI 资讯雷达 (ainewsradar.xyz) 是独立的前沿人工智能工程观察站与深度技术研报平台，提供前沿大模型独家拆解、领袖动态核验、高阶实操教程与评测工具库。">
@@ -305,14 +311,14 @@
             <span>🌙</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
           </button>
-          <button id="theme-btn-auto" onclick="setTheme('auto')" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" title="跟随系统" class="hidden sm:flex px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>💻</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
           </button>
         </div>
 
         <!-- 🌐 多语言智能自适应翻译引擎 (Translate.js 驱动，支持全球 70+ 种主流语言) -->
-        <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
+        <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-1.5 sm:px-2 py-1 max-w-[80px] sm:max-w-none rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
           <label for="site-lang-select" class="sr-only">Select website language</label>
           <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
@@ -399,7 +405,7 @@
         <!-- 手动刷新按钮 -->
         <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
           <span>🔄</span>
-          <span id="refresh-btn-text" class="font-medium">刷新</span>
+          <span id="refresh-btn-text" class="font-medium"><span class="hidden sm:inline">刷新</span></span>
         </button>
       </div>
     </div>
@@ -415,7 +421,7 @@
       </div>
 
       <!-- 中间：6 大核心专栏切换阵列 (严格单行、6等分固定比例 grid-cols-6，禁止机翻破坏布局) -->
-      <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
+      <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5 hidden md:block">
         <div class="grid grid-cols-6 gap-1.5 sm:gap-2 min-w-[600px] md:min-w-0 w-full" id="nav-tabs">
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
@@ -450,8 +456,9 @@
         </div>
       </div>
 
+      <div class="md:hidden flex items-center space-x-1.5 shrink-0 px-2.5 py-1 rounded-xl bg-indigo-50 dark:bg-indigo-950/60 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-400 font-bold text-xs"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping"></span><span>RADAR 4.0</span></div>
       <!-- 右侧：全站搜索筛选器 (单行紧凑自适应，永不挤压中间 7 栏等比结构) -->
-      <div class="relative shrink-0 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60 focus-within:w-48 sm:focus-within:w-56 md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
+      <div class="relative flex-1 md:flex-initial md:shrink-0 w-auto md:w-48 lg:w-56 xl:w-60 focus-within:w-auto md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
         <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="全站智能搜索 (模型/动态/工具/论文)..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
         <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
         <span class="absolute right-2.5 top-2 sm:top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
@@ -460,7 +467,7 @@
   </nav>
 
   <!-- 🎯 主体内容核心区域 -->
-  <main class="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 min-h-screen">
+  <main class="relative z-10 w-full max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-5 sm:space-y-6 min-h-screen pb-24 md:pb-6">
 
     <!-- 🔥 热门标签导航栏 (Hot Tags Bar) - 一键直达全站分类检索 -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs min-h-[32px]" style="min-height: 32px;">
@@ -1115,7 +1122,7 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
 
         <!-- Topic Tabs Group & Toggle -->
         <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
-          <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 max-w-[calc(100vw-80px)] sm:max-w-none" id="topic-tabs-bar">
             
         <button type="button" id="topic-tab-0" onclick="switchTopicFocus(0)" class="topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5" data-idx="0">
           <span class="text-[11px] font-mono opacity-90">🔥 </span>
@@ -3297,7 +3304,7 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
   </div>
 
   <!-- 视频播放弹窗 Modal (自适应 16:9 横屏与 9:16 竖屏，支持跨域/区域限制直达原站容灾) -->
-  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-4" onclick="if(event.target===this) closeVideoModal()">
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeVideoModal()">
     <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
         <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI Video Demonstration</h3>
@@ -3324,8 +3331,8 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
   </div>
 
   <!-- 资讯概要 / 新闻简报弹窗 Modal (News Briefing) -->
-  <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
+  <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-t-3xl sm:rounded-2xl modal-sheet-dialog overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
       <!-- 窗口标题栏 Header (信源只在此处显示，杜绝正文冗余) -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
         <div class="flex items-center space-x-3 min-w-0">
@@ -3459,8 +3466,8 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
   </div>
 
   <!-- 领袖观点·社交推文与网友热评弹窗 Modal (Social Post & Hot Comments) -->
-  <div id="social-post-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeSocialPostModal()">
-    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
+  <div id="social-post-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeSocialPostModal()">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-t-3xl sm:rounded-2xl modal-sheet-dialog overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
       <!-- 窗口标题栏 Header -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -3612,7 +3619,7 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
   </div>
 
   <!-- 落地工具·抓取情报与交互式预览画廊弹窗 Modal (Tool Detail & Screenshot Gallery Modal) -->
-  <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
+  <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden max-w-3xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
       <!-- 窗口顶栏 Header -->
@@ -3751,7 +3758,7 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
   </div>
 
   <!-- 📤 社交平台一键分享模态框 (𝕏、Threads、Instagram、系统分享) -->
-  <div id="share-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-3 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeShareModal()">
+  <div id="share-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeShareModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl relative flex flex-col transition-all duration-200">
       <!-- Modal Header -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -4026,6 +4033,40 @@ Rarelist 活动将于 10 月 23 日至 11 月 6 日期间进行，奖金为 1,50
       </div>
     </div>
   </footer>
+
+  <!-- 📱 移动端沉浸式单手底部导航栏 (Mobile Floating Dock Navigation - iOS Safe Area + Glassmorphism) -->
+  <nav id="mobile-bottom-nav" class="mobile-bottom-nav md:hidden flex items-center justify-around px-2 z-50 select-none notranslate" aria-label="移动端专栏导航">
+    <button type="button" id="mobile-nav-btn-all" onclick="switchTab('all')" class="mobile-nav-item active" aria-selected="true">
+      <span class="nav-icon text-lg">🌐</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-all">综合</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-indigo-600 text-white shadow-xs" id="mobile-badge-all">115</span>
+    </button>
+    <button type="button" id="mobile-nav-btn-news" onclick="switchTab('news')" class="mobile-nav-item" aria-selected="false">
+      <span class="nav-icon text-lg">⚡</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-news">快讯</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-xs" id="mobile-badge-news">30</span>
+    </button>
+    <button type="button" id="mobile-nav-btn-celebrity" onclick="switchTab('celebrity')" class="mobile-nav-item" aria-selected="false">
+      <span class="nav-icon text-lg">🐦</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-celebrity">动态</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-xs" id="mobile-badge-celebrity">30</span>
+    </button>
+    <button type="button" id="mobile-nav-btn-tools" onclick="switchTab('tools')" class="mobile-nav-item" aria-selected="false">
+      <span class="nav-icon text-lg">🛠️</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-tools">工具</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-xs" id="mobile-badge-tools">25</span>
+    </button>
+    <button type="button" id="mobile-nav-btn-videos" onclick="switchTab('videos')" class="mobile-nav-item" aria-selected="false">
+      <span class="nav-icon text-lg">🎬</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-videos">视频</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 shadow-xs" id="mobile-badge-videos">15</span>
+    </button>
+    <button type="button" id="mobile-nav-btn-prompts" onclick="switchTab('prompts')" class="mobile-nav-item" aria-selected="false">
+      <span class="nav-icon text-lg">💡</span>
+      <span class="nav-label text-[10px] leading-tight font-semibold mt-0.5" id="mobile-nav-txt-prompts">提示词</span>
+      <span class="absolute top-1 right-2 text-[9px] font-mono font-bold px-1.5 py-0.2 rounded-full bg-purple-100 dark:bg-purple-900/60 text-purple-700 dark:text-purple-300 shadow-xs" id="mobile-badge-prompts">15</span>
+    </button>
+  </nav>
 
 </body>
 </html>

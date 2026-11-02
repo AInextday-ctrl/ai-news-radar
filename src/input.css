@@ -1965,3 +1965,197 @@ html:not(.dark) .feed-card-prompts:hover {
   border-color: #d97706 !important;
   box-shadow: 0 12px 30px -8px rgba(245, 158, 11, 0.18);
 }
+
+
+/* =========================================================================
+   Mobile & Tablet Adaptive Architecture (iOS / Android / iPad / Tablet)
+   ========================================================================= */
+
+:root {
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+.pb-safe {
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.pt-safe {
+  padding-top: calc(0.5rem + env(safe-area-inset-top, 0px));
+}
+
+/* Touch responsiveness & eliminate 300ms tap delay & gray highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth touch momentum scrolling */
+.touch-scroll {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent iOS Safari auto-zoom on input focus when font-size < 16px */
+@media (max-width: 639px) {
+  input[type="text"],
+  input[type="search"],
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* Mobile Bottom Sheet Navigation Bar */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: calc(3.85rem + env(safe-area-inset-bottom, 0px));
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+
+html.dark .mobile-bottom-nav {
+  background: rgba(7, 11, 22, 0.94) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.6);
+}
+
+html:not(.dark) .mobile-bottom-nav {
+  background: rgba(255, 255, 255, 0.94) !important;
+  border-top: 1px solid rgba(226, 232, 240, 0.9) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 48px;
+  padding: 0.35rem 0.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+.mobile-nav-item .nav-icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-item.active {
+  font-weight: 800;
+}
+
+.mobile-nav-item.active .nav-icon {
+  transform: scale(1.15) translateY(-1px);
+}
+
+html.dark .mobile-nav-item {
+  color: #94a3b8;
+}
+
+html.dark .mobile-nav-item:hover,
+html.dark .mobile-nav-item.active {
+  color: #818cf8;
+}
+
+html.dark .mobile-nav-item.active::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  width: 20px;
+  height: 3px;
+  border-radius: 9999px;
+  background: #6366f1;
+  box-shadow: 0 0 10px #6366f1;
+}
+
+html:not(.dark) .mobile-nav-item {
+  color: #64748b;
+}
+
+html:not(.dark) .mobile-nav-item:hover,
+html:not(.dark) .mobile-nav-item.active {
+  color: #4f46e5;
+}
+
+html:not(.dark) .mobile-nav-item.active::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  width: 20px;
+  height: 3px;
+  border-radius: 9999px;
+  background: #4f46e5;
+  box-shadow: 0 0 8px rgba(79, 70, 229, 0.4);
+}
+
+/* Mobile Bottom Sheet Modal Animation & Layout */
+@media (max-width: 639px) {
+  .modal-sheet-backdrop {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+  .modal-sheet-dialog {
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-top-left-radius: 1.5rem !important;
+    border-top-right-radius: 1.5rem !important;
+    max-height: 90vh !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px)) !important;
+    animation: sheetSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@keyframes sheetSlideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile Ticker Responsive Override */
+@media (max-width: 767px) {
+  #viral-ticker-container,
+  #viral-ticker-container > div.grid {
+    height: auto !important;
+    min-height: unset !important;
+    max-height: none !important;
+    grid-template-rows: auto !important;
+  }
+  #viral-ticker-pinned,
+  #pinned-slider-viewport,
+  .pinned-slide-item,
+  #viral-ticker-viewport,
+  #viral-ticker-viewport .viral-ticker-page {
+    height: 165px !important;
+    min-height: 165px !important;
+    max-height: 165px !important;
+  }
+  #viral-ticker-section {
+    padding: 0.875rem !important;
+  }
+  #topic-focus-section {
+    padding: 0.875rem !important;
+  }
+}
