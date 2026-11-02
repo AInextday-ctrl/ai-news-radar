@@ -4292,6 +4292,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const section = document.getElementById('viral-ticker-section');
       if (!section) return;
 
+      if (!section.classList.contains('spotlight-card-viral')) {
+        section.classList.add('spotlight-card', 'spotlight-card-viral', 'rounded-3xl');
+      }
+      if (!section.querySelector('.spotlight-glow-line-viral')) {
+        const glowLine = document.createElement('div');
+        glowLine.className = 'spotlight-glow-line spotlight-glow-line-viral';
+        section.prepend(glowLine);
+      }
+
       if (!section._hoverInit) {
         section._hoverInit = true;
         section.addEventListener('mouseenter', () => { window.viralTickerHovered = true; }, { passive: true });
@@ -4422,7 +4431,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const toggleBtn = document.getElementById('topic-focus-toggle-btn');
 
       if (section) {
-        section.className = "rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl relative overflow-hidden transition-all bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white my-6";
+        section.className = "spotlight-card spotlight-card-topic-focus rounded-3xl p-4 sm:p-5 shadow-2xl relative overflow-hidden transition-all my-6";
+        if (!section.querySelector('.spotlight-glow-line-topic')) {
+          const glowLine = document.createElement('div');
+          glowLine.className = 'spotlight-glow-line spotlight-glow-line-topic';
+          section.prepend(glowLine);
+        }
       }
 
       if (headerTitle) {

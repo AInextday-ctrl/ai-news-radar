@@ -1133,7 +1133,8 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     # 3. 组装最外层 section
     return f"""
     <!-- ========== TOPIC_FOCUS_SECTION_START ========== -->
-    <section id="topic-focus-section" class="rounded-2xl border border-slate-200/90 dark:border-indigo-500/30 p-4 sm:p-5 shadow-md dark:shadow-2xl relative overflow-hidden transition-all bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white my-6" aria-label="{header_title}">
+    <section id="topic-focus-section" class="spotlight-card spotlight-card-topic-focus rounded-3xl p-4 sm:p-5 shadow-2xl relative overflow-hidden transition-all my-6" aria-label="{header_title}">
+      <div class="spotlight-glow-line spotlight-glow-line-topic"></div>
       <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
       <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-200/80 dark:border-indigo-500/20 gap-3">
         <div class="flex items-center space-x-2.5 min-w-0">
