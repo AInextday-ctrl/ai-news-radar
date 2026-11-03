@@ -311,14 +311,14 @@
             <span>🌙</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">Dark</span>
           </button>
-          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" title="Follow System" class="hidden sm:flex px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" title="Follow System" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>💻</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">Auto</span>
           </button>
         </div>
 
         <!-- 🌐 Multi-Language Adaptive Translation Selector (Powered by Translate.js) -->
-        <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-1.5 sm:px-2 py-1 max-w-[80px] sm:max-w-none rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
+        <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
           <label for="site-lang-select" class="sr-only">Select website language</label>
           <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
@@ -406,7 +406,7 @@
         <!-- Manual Refresh Button -->
         <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
           <span>🔄</span>
-          <span id="refresh-btn-text" class="font-medium"><span class="hidden sm:inline">Refresh</span></span>
+          <span id="refresh-btn-text" class="font-medium">Refresh</span>
         </button>
       </div>
     </div>
@@ -422,7 +422,7 @@
       </div>
 
       <!-- Center: 6 Editorial Category Tabs (Fixed Proportional Grid) -->
-      <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5 hidden md:block">
+      <div class="notranslate flex-1 min-w-0 overflow-x-auto no-scrollbar scroll-smooth py-0.5">
         <div class="grid grid-cols-6 gap-1.5 sm:gap-2 min-w-[600px] md:min-w-0 w-full" id="nav-tabs">
           <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn active w-full h-9 sm:h-9.5 rounded-xl text-xs xl:text-sm font-bold transition-all flex items-center justify-center space-x-1 sm:space-x-1.5 px-1 bg-indigo-600 text-white shadow-md shadow-indigo-600/30 overflow-hidden whitespace-nowrap">
             <span class="text-xs sm:text-sm shrink-0">🌐</span>
@@ -458,7 +458,7 @@
       </div>
 
       <!-- Right: Global Search & Filter Bar -->
-      <div class="relative flex-1 md:flex-initial md:shrink-0 w-auto md:w-48 lg:w-56 xl:w-60 focus-within:w-auto md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
+      <div class="relative shrink-0 w-36 sm:w-44 md:w-48 lg:w-56 xl:w-60 focus-within:w-48 sm:focus-within:w-56 md:focus-within:w-60 lg:focus-within:w-64 transition-all duration-300">
         <input type="text" id="search-input" oninput="handleSearch(this.value)" placeholder="Search breaking AI news, models, tools..." class="w-full bg-slate-100 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 rounded-xl pl-3 pr-8 py-1.5 sm:py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors">
         <button id="btn-clear-search" onclick="clearSearch()" class="hidden absolute right-6 top-2 sm:top-2.5 text-xs text-slate-400 hover:text-white px-1 transition-colors">✕</button>
         <span class="absolute right-2.5 top-2 sm:top-2.5 text-xs text-slate-500 pointer-events-none">🔍</span>
@@ -467,7 +467,7 @@
   </nav>
 
   <!-- 🎯 Main Content Container -->
-  <main class="relative z-10 w-full max-w-[1760px] mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-5 sm:space-y-6 min-h-screen pb-24 md:pb-6">
+  <main class="relative z-10 w-full max-w-[1760px] mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6 min-h-screen">
 
     <!-- 🔥 Trending Topics Bar (Hot Tags Bar) -->
     <section id="hot-tags-bar" class="flex items-center space-x-2 overflow-x-auto no-scrollbar py-0.5 text-xs min-h-[32px]" style="min-height: 32px;">
