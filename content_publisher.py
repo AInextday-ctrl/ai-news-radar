@@ -361,6 +361,23 @@ ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pag
 ADSENSE_SLOT = ""
 
 
+def is_valid_news_lead_image(url: Any) -> bool:
+    """Return True only if url is an authentic lead image and not generic/dummy."""
+    if not url or not isinstance(url, str):
+        return False
+    u = url.lower().strip()
+    if not u.startswith("http") or u in ("null", "undefined", "none"):
+        return False
+    bad_patterns = [
+        "googleusercontent.com/j6_cofbog", "techmeme.com/img", "techmeme.com/pml",
+        "techmeme_sq", "pml.png", "pixel", "spacer", "tracking", "icon.", "avatar.",
+        "placeholder", "photo-1618005182384-a83a8bd57fbe", "photo-1620712943543",
+        "photo-1558494949-ef010cbdcc31", "photo-1526374965328", "photo-1485827404703",
+        "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg"
+    ]
+    return not any(b in u for b in bad_patterns)
+
+
 def safe_text(text: Any, max_len: int = 400) -> str:
     if not text:
         return ""
@@ -2980,21 +2997,18 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 src = safe_text(raw_src, 40)
             u = it.get("url", "#")
             img = it.get("image_url", "")
-            img_tag = ""
-            if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
+            it_id = it.get("id") or ""
+            if is_valid_news_lead_image(img):
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
-                    img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
                 else:
-                    img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
-            else:
-                img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">{src}</span></div>'
+                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
-            it_id = it.get("id") or ""
-            news_cards_en_html += f"""
+                news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
-                {img_tag}
+                {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -3017,6 +3031,34 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       Read Source ↗
                     </a>
                   </div>
+                </div>
+              </article>"""
+            else:
+                news_cards_en_html += f"""
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div>
+                  <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
+                      <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-medium">Dispatch</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-mono">Wire</span>
+                  </div>
+                  <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                    {t_en}
+                  </button>
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                    {s_en}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-2.5 mt-3 border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <span>📋</span>
+                    <span>AI Analysis</span>
+                  </button>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    Read Source ↗
+                  </a>
                 </div>
               </article>"""
 
@@ -3529,21 +3571,18 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
             src = safe_text(it.get("source", ""), 40)
             u = it.get("url", "#")
             img = it.get("image_url", "")
-            img_tag = ""
-            if img and img.startswith("http") and "googleusercontent.com/j6_cofbog" not in img:
+            it_id = it.get("id") or ""
+            if is_valid_news_lead_image(img):
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
-                    img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
                 else:
-                    img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
-            else:
-                img_tag = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl bg-gradient-to-br from-indigo-500/10 via-purple-500/5 to-slate-100 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-slate-200/70 dark:border-slate-800/70 flex flex-col items-center justify-center p-2 text-center shrink-0 self-start select-none shadow-xs"><span class="text-lg sm:text-xl mb-1">⚡</span><span class="text-[9px] sm:text-[10px] font-bold text-indigo-600 dark:text-indigo-400 truncate max-w-full font-mono">{src}</span></div>'
+                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
 
-            it_id = it.get("id") or ""
-            news_cards_zh_html += f"""
+                news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
-                {img_tag}
+                {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -3566,6 +3605,34 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       阅读原文 ↗
                     </a>
                   </div>
+                </div>
+              </article>"""
+            else:
+                news_cards_zh_html += f"""
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div>
+                  <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
+                      <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-medium">深度快讯</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-mono">专电</span>
+                  </div>
+                  <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                    {t_zh}
+                  </button>
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                    {s_zh}
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-2.5 mt-3 border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <button type="button" onclick="event.stopPropagation(); openAiNewsModal('{it_id}')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <span>📋</span>
+                    <span>资讯概要</span>
+                  </button>
+                  <a href="{u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    阅读原文 ↗
+                  </a>
                 </div>
               </article>"""
 

@@ -1914,6 +1914,25 @@ html:not(.dark) .feed-card-news:hover {
   box-shadow: 0 12px 30px -8px rgba(99, 102, 241, 0.18);
 }
 
+/* 行业快讯·社论全宽排版 (Typography-First Editorial Wire) */
+.feed-card-editorial {
+  border-left: 4px solid #6366f1 !important;
+}
+html.dark .feed-card-editorial {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%) !important;
+}
+html:not(.dark) .feed-card-editorial {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.94) 100%) !important;
+}
+html.dark .feed-card-editorial:hover {
+  border-color: rgba(129, 140, 248, 0.7) !important;
+  box-shadow: 0 12px 28px -6px rgba(99, 102, 241, 0.22);
+}
+html:not(.dark) .feed-card-editorial:hover {
+  border-color: #4f46e5 !important;
+  box-shadow: 0 12px 28px -6px rgba(99, 102, 241, 0.14);
+}
+
 /* 社交雷达：极客黑金/电竞透光感，左侧青蓝色高亮 */
 .feed-card-celebrity {
   border-left: 3.5px solid #0284c7 !important;
