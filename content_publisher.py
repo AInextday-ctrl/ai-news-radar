@@ -2967,14 +2967,16 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
           </article>"""
 
         # 2. News Stream English
-        news_items = [i for i in items if i.get("category") == "news"][:12]
-        if not news_items and os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+        news_items = []
+        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
             try:
                 with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
                     _nd_news = json.load(_f)
-                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:12]
+                    news_items = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:10]
             except Exception:
-                pass
+                news_items = []
+        if not news_items:
+            news_items = [i for i in items if i.get("category") == "news"][:10]
 
         news_cards_en_html = ""
         lcp_image_en_url = ""
@@ -3563,6 +3565,18 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
           </article>"""
 
         # 2. News Stream Chinese
+        news_items_zh = []
+        if os.path.exists(os.path.join(PUBLIC_DIR, "data", "latest_news.json")):
+            try:
+                with open(os.path.join(PUBLIC_DIR, "data", "latest_news.json"), "r", encoding="utf-8") as _f:
+                    _nd_news = json.load(_f)
+                    news_items_zh = (_nd_news.get("grouped", {}).get("news") or _nd_news.get("news") or [])[:10]
+            except Exception:
+                news_items_zh = []
+        if not news_items_zh:
+            news_items_zh = [i for i in items if i.get("category") == "news"][:10]
+        news_items = news_items_zh
+
         news_cards_zh_html = ""
         lcp_image_zh_url = ""
         for it in news_items:
