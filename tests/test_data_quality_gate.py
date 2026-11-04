@@ -285,6 +285,11 @@ def run_quality_gate_assertions(payload: dict) -> bool:
                         val = header.get("value", "")
                         assert "immutable" not in val, f"断言 15 失败：firebase.json 中 {src} 违规配置了 immutable 强缓存锁: {val}"
                         assert "no-cache" in val, f"断言 15 失败：firebase.json 中 {src} 缺少 no-cache 标头: {val}"
+            if "archive_" in src:
+                for header in h.get("headers", []):
+                    if header.get("key") == "Cache-Control":
+                        val = header.get("value", "")
+                        assert "no-cache" in val, f"断言 15 失败：firebase.json 中 {src} 缺少 no-cache 标头: {val}"
 
     pub_arch_p = os.path.join(WORKSPACE_DIR, "public", "data", "archive_news.json")
     if os.path.exists(pub_arch_p):
@@ -303,6 +308,9 @@ def run_quality_gate_assertions(payload: dict) -> bool:
                 html_c = f_in.read()
             for tab_name in ["switchTab('all')", "switchTab('news')", "switchTab('celebrity')", "switchTab('tools')", "switchTab('videos')", "switchTab('prompts')"]:
                 assert tab_name in html_c, f"断言 16 失败：{html_rel} 缺失核心页签标记 {tab_name}，严禁删除栏目导航！"
+            assert 'id="nav-tabs"' in html_c, f"断言 16 失败：{html_rel} 缺失 #nav-tabs 导航栏！"
+            assert "hidden md:block" not in html_c, f"断言 16 失败：{html_rel} 的导航栏被意外添加了 hidden md:block，严禁隐藏手机或窄屏端页签！"
+            assert "<span>RADAR 4.0</span></div>" not in html_c, f"断言 16 失败：{html_rel} 检出替换页签的旧版徽标，严禁覆盖页签！"
     print(f"✅ 断言 16 通过: 全端核心栏目导航页签 100% 常驻达标 (无合并或误删)")
 
     print("=" * 60)
