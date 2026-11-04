@@ -11535,7 +11535,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       sessionStorage.removeItem('ainews_cached_data');
       sessionStorage.removeItem('ainews_cached_data_v52');
       sessionStorage.removeItem('ainews_cached_data_v53');
-      const cachedStr = sessionStorage.getItem('ainews_cached_data_v54');
+      sessionStorage.removeItem('ainews_cached_data_v54');
+      const cachedStr = sessionStorage.getItem('ainews_cached_data_v55');
       if (cachedStr && !cachedData) {
         const parsed = JSON.parse(cachedStr);
         if (parsed && (Date.now() - (parsed._saved_at || 0) < 300000)) {
