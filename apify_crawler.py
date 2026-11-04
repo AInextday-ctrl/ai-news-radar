@@ -197,12 +197,13 @@ def parse_twitter_created_at(time_str: str) -> Optional[datetime]:
 
 
 _APIFY_CIRCUIT_BROKEN = False
+_EXHAUSTED_APIFY_TOKENS = set()
 
 def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict[str, Any]]:
     """
     通过 Apify 执行搜索查询，支持多账号 Token 轮询与自动故障转移
     """
-    global _APIFY_CIRCUIT_BROKEN
+    global _APIFY_CIRCUIT_BROKEN, _EXHAUSTED_APIFY_TOKENS
     if _APIFY_CIRCUIT_BROKEN:
         return []
     if isinstance(tokens, str):
@@ -210,8 +211,13 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
     if not tokens:
         return []
 
+    active_tokens = [t for t in tokens if t not in _EXHAUSTED_APIFY_TOKENS]
+    if not active_tokens:
+        _APIFY_CIRCUIT_BROKEN = True
+        return []
+
     all_exhausted = True
-    for t_idx, token in enumerate(tokens):
+    for t_idx, token in enumerate(active_tokens):
         if _APIFY_CIRCUIT_BROKEN:
             return []
         masked_tok = token[:6] + "..." + token[-4:] if len(token) > 10 else "***"
@@ -223,7 +229,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
         }
 
         try:
-            with httpx.Client(timeout=15) as client:
+            with httpx.Client(timeout=6) as client:
                 resp = client.post(url_xquik, json=payload_xquik)
                 if resp.status_code in [200, 201]:
                     data = resp.json()
@@ -233,7 +239,11 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                             return valid
                     all_exhausted = False
                 elif resp.status_code in [401, 402, 403, 429]:
-                    print(f"  ⚠️ [Apify Token 轮换] Token [{masked_tok}] 触发状态 {resp.status_code} (额度不足或被限流)，尝试切换备用 Token...")
+                    _EXHAUSTED_APIFY_TOKENS.add(token)
+                    if len(_EXHAUSTED_APIFY_TOKENS) >= len(tokens):
+                        _APIFY_CIRCUIT_BROKEN = True
+                        print("  🛑 [Apify 快速熔断] 所有 Apify Token 均额度耗尽(401/402/403/429)，立即触发全局熔断，放行备用信源。")
+                        return []
                     continue
                 else:
                     all_exhausted = False
@@ -249,7 +259,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
             "sort": "Latest"
         }
         try:
-            with httpx.Client(timeout=15) as client:
+            with httpx.Client(timeout=6) as client:
                 resp = client.post(url_apidojo, json=payload_apidojo)
                 if resp.status_code in [200, 201]:
                     data = resp.json()

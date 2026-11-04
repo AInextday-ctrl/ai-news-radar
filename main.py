@@ -1031,6 +1031,8 @@ def load_existing_items() -> list:
                         if isinstance(cat_items, list):
                             file_items.extend(cat_items)
                 for it in file_items:
+                    if not isinstance(it, dict):
+                        continue
                     k = it.get("url") or it.get("id")
                     if not k:
                         continue

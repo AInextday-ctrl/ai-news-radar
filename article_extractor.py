@@ -169,7 +169,7 @@ class ArticleExtractor:
     ]
 
     @classmethod
-    def fetch_html(cls, url: str, timeout: int = 12) -> Optional[str]:
+    def fetch_html(cls, url: str, timeout: int = 5) -> Optional[str]:
         """Fetch raw HTML using curl_cffi with Chrome TLS impersonation, fallback to httpx."""
         if not url or not url.startswith("http"):
             return None

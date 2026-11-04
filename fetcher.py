@@ -2595,6 +2595,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
             resp = client.get(cfg["url"])
             if resp.status_code == 200:
                 feed = feedparser.parse(resp.text)
+                penetration_count = 0
                 for entry in feed.entries[:max_items]:
                     title = entry.get("title", "").strip()
                     if not title:
@@ -2757,9 +2758,10 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (若文章少于 1200 字符或缺图，主动穿透落地页获取完整报道多段落正文)
-                    needs_penetration = (not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 1200)
+                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (限制每渠道最多穿透前 3 篇核心长文，兼顾完整度与秒级更新)
+                    needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800)) and (penetration_count < 3)
                     if needs_penetration:
+                        penetration_count += 1
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语
                         og_media = resolve_article_og_media(url, client)
                         if not img_url and og_media.get("cover_image"):
