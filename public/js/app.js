@@ -9434,8 +9434,34 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
         }
 
-        const textToRender = activeArticleLang === 'zh' ? origContentZh : origContentEn;
-        const paras = textToRender.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 20);
+        const rawTextToRender = activeArticleLang === 'zh' ? origContentZh : origContentEn;
+        const adNoiseRegexes = [
+          /want more .*? in your (?:news )?feed/i,
+          /add \w+ (?:in|to) google/i,
+          /想要在新闻源中看到更多/i,
+          /在\s*google\s*中添加/i,
+          /have a tip\??/i,
+          /got a tip\??/i,
+          /contact this reporter/i,
+          /有小费吗/i,
+          /有线索吗/i,
+          /联系本记者/i,
+          /联系记者/i,
+          /安全共享信息/i,
+          /sharing information securely/i,
+          /save saved listen to this story/i,
+          /listen to this story/i,
+          /收听这个故事/i,
+          /become an insider/i,
+          /available exclusively to .*? subscribers/i,
+          /仅供.*?订阅者/i,
+          /download the app/i,
+          /read in app/i
+        ];
+        const paras = rawTextToRender
+          .split(/\n\s*\n/)
+          .map(p => p.trim())
+          .filter(p => p.length > 20 && !adNoiseRegexes.some(r => r.test(p)));
 
         let isExpanded = Boolean(originalCardEl.dataset.expanded === 'true');
         const displayParas = (paras.length > 4 && !isExpanded) ? paras.slice(0, 3) : paras;

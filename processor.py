@@ -535,9 +535,63 @@ AGGREGATOR_NOISE_RULES = [
     r'聚焦该事件的最新进展[、，,]?行业反响以及对人工智能技术落地与产业生态的深远影响[。！]?',
     r'该动态引发了产业界与前沿开发者的广泛讨论与技术跟踪[。！]?',
     r'相关动态引发全球产业界广泛讨论与技术跟踪[。！]?',
-    r'该事件反映了当前技术演进与落地实践中的关键考量[。！]?'
+    r'该事件反映了当前技术演进与落地实践中的关键考量[。！]?',
+
+    # 9. 媒体站内营销广告与搜索引擎导流废话 (英文 + 中文双语变体)
+    r'Want more (?:Business Insider|[A-Za-z\s]+)? in your (?:news )?feed\??\s*Add \w+ (?:in|to) Google[^。！\n]*[。！\n]?',
+    r'想要在新闻源中看到更多.*?吗[？?]?\s*在\s*Google\s*中添加[^。！\n]*[。！\n]?',
+    r'在\s*Google\s*中添加\s*\w+[^。！\n]*[。！\n]?',
+    r'Add \w+ in Google so our reporting is easier to find[^。！\n]*[。！\n]?',
+
+    # 10. 记者线索、投稿征集与爆料免责说明废话
+    r'Have a tip\??\s*Contact this reporter[^。！\n]*',
+    r'Contact this reporter via email[^。！\n]*',
+    r'有小费吗[？?]?\s*(?:请通过电子邮件|请通过|联系本记者|联系记者)[^。！\n]*',
+    r'有线索吗[？?]?\s*(?:请通过电子邮件|请通过|联系本记者|联系记者)[^。！\n]*',
+    r'请通过电子邮件.*?联系(?:本)?记者[^。！\n]*',
+    r'使用个人电子邮件地址、非工作 WiFi 网络[^。！\n]*',
+    r'这是我们安全共享信息的指南[。！]?',
+    r'here[\x27\u2019]s our guide to sharing information securely\.?',
+
+    # 11. 媒体音频播放器与专享提示废话
+    r'Save\s+Saved\s+Listen to this story[^。！\n]*',
+    r'Listen to this story[^。！\n]*',
+    r'保存\s*已保存\s*收听这个故事[^。！\n]*',
+    r'收听这个故事[^。！\n]*',
+    r'This story is available exclusively to .*? subscribers\.?',
+    r'Become an Insider and start reading now\.?',
+    r'该故事仅供.*?订阅者使用[。！]?',
+    r'成为内部人士并立即开始阅读[。！]?',
+    r'Have an account\?\s*Log in\.?'
 ]
 
+
+
+def sanitize_article_content(text: str, is_zh: bool = False) -> str:
+    """深度过滤文章长正文中的广告嵌入、推广引流、记者爆料提示与媒体废话，返回高纯度长文段落。"""
+    if not text:
+        return ""
+    paras = [p.strip() for p in text.replace("\r\n", "\n").split("\n\n") if p.strip()]
+    cleaned_paras = []
+    ad_phrases = [
+        "want more", "in your news feed", "add bi in google", "add bi to google",
+        "想要在新闻源中看到更多", "在 google 中添加", "有小费吗", "有线索吗", "联系本记者",
+        "联系记者", "安全共享信息", "have a tip?", "got a tip?", "contact this reporter",
+        "scouncil@businessinsider.com", "sharing information securely", "save saved",
+        "listen to this story", "收听这个故事", "become an insider", "available exclusively to",
+        "仅供订阅者", "download the app", "read in app"
+    ]
+    for p in paras:
+        pl = p.lower()
+        if any(phrase in pl for phrase in ad_phrases):
+            continue
+        p_clean = p
+        for rule in AGGREGATOR_NOISE_RULES:
+            p_clean = re.sub(rule, '', p_clean, flags=re.IGNORECASE).strip()
+        min_len = 5 if is_zh else 10
+        if len(p_clean) >= min_len:
+            cleaned_paras.append(p_clean)
+    return "\n\n".join(cleaned_paras)
 
 def clean_news_text(text: str, preserve_paragraphs: bool = True) -> str:
     """Strip HTML entities, reporter bylines, trailing source parentheses, and boilerplate prefixes.
@@ -1411,9 +1465,12 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
             if not paras:
                 paras = [p.strip() for p in raw_art_en.split("\n") if len(p.strip()) > 25]
             capped_en = "\n\n".join(paras[:14])
-            item["article_content_zh"] = clean_multiline_text(free_translate_zh(capped_en))
+            raw_trans_zh = free_translate_zh(capped_en)
+            item["article_content_zh"] = sanitize_article_content(clean_multiline_text(raw_trans_zh), is_zh=True)
         elif art_zh:
-            item["article_content_zh"] = clean_multiline_text(art_zh)
+            item["article_content_zh"] = sanitize_article_content(clean_multiline_text(art_zh), is_zh=True)
+        if raw_art_en:
+            item["article_content"] = sanitize_article_content(raw_art_en, is_zh=False)
 
     # 5. spec_tags_en 0 中文
     if "spec_tags_en" in item and isinstance(item["spec_tags_en"], list):

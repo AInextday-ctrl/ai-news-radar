@@ -1940,10 +1940,11 @@ def save_news(items: list):
         elif cat == 'news':
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
-            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 1500:
-                c_it['article_content_zh'] = c_it['article_content_zh'][:1500] + '...'
-            if c_it.get('article_content') and len(c_it['article_content']) > 2000:
-                c_it['article_content'] = c_it['article_content'][:2000] + '...'
+            # 保障深度报道全文完整度，禁止以 1500/2000 字符腰斩正文，上限放宽至 25000 字符
+            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 25000:
+                c_it['article_content_zh'] = c_it['article_content_zh'][:25000] + '...'
+            if c_it.get('article_content') and len(c_it['article_content']) > 25000:
+                c_it['article_content'] = c_it['article_content'][:25000] + '...'
         return c_it
 
     # 公共看板专属清理函数：为 30 条核心新闻保留 ai_analysis 结构化要点与深度正文，彻底消除前端单句浅层问题

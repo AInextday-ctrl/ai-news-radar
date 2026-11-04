@@ -20,6 +20,20 @@ except ImportError:
 
 
 class ArticleExtractor:
+    # 深度广告与作者/线索占位模块正则清洗库
+    AD_BLOCK_PATTERNS = [
+        r"want more .*? in your (?:news )?feed\??.*?when you.*?re searching for what matters\.?",
+        r'add \w+ (?:in|to) google (?:so our reporting is easier to find)?\.?',
+        r"have a tip\??\s*contact this reporter.*?here.*?s our guide to sharing information securely\.?",
+        r'contact this reporter via email.*?sharing information securely\.?',
+        r'save\s+saved\s+listen to this story',
+        r'listen to this story',
+        r'this story is available exclusively to .*? subscribers\.?',
+        r'become an insider and start reading now\.?',
+        r'have an account\?\s*log in\.?',
+        r'read in app',
+        r'download the app to read',
+    ]
     """
     针对主流权威媒体定制的高可用深度解构抓取器。
     支持 Wired, Bloomberg, Reuters, NYT, MIT Tech Review, Gizmodo,
@@ -150,7 +164,8 @@ class ArticleExtractor:
         "all rights reserved", "follow us on", "advertisement", "enable javascript",
         "opens in new tab", "click here", "support independent journalism",
         "this article originally appeared", "share this article", "related stories",
-        "disclosure:", "affiliate links", "correction:", "listen to this article", "save saved listen to this story", "listen to this story", "save saved", "recommended video", "photo-illustration:", "photo illustration:", "read next", "download the app"
+        "disclosure:", "affiliate links", "correction:", "listen to this article", "save saved listen to this story", "listen to this story", "save saved", "recommended video", "photo-illustration:", "photo illustration:", "read next", "download the app",
+        "want more business insider", "add bi in google", "add bi to google", "in your news feed", "have a tip?", "got a tip?", "contact this reporter", "scouncil@businessinsider.com", "signal, telegram, or whatsapp", "sharing information securely", "become an insider", "this story is available exclusively", "read in app"
     ]
 
     @classmethod
@@ -254,9 +269,12 @@ class ArticleExtractor:
                         b = it.get('articleBody')
                         if b and isinstance(b, str) and len(b.strip()) > 150:
                             b_clean = html.unescape(b.strip())
+                            # 先行剥离广告、读者线索与推广噪声块，避免整段被连带误杀
+                            for ad_pat in cls.AD_BLOCK_PATTERNS:
+                                b_clean = re.sub(ad_pat, '', b_clean, flags=re.IGNORECASE | re.DOTALL)
                             raw_p = [p.strip() for p in re.split(r'\n\s*\n|\n', b_clean) if len(p.strip()) > 30]
                             if len(raw_p) <= 1 and len(b_clean) > 300:
-                                sents = re.split(r'(?<=[.!?])\s+', b_clean)
+                                sents = re.split(r'(?<=[.!?])\s+(?=[A-Z“"])', b_clean)
                                 grouped_p = []
                                 cur_p = []
                                 for s in sents:
@@ -335,6 +353,8 @@ class ArticleExtractor:
                 continue
             
             p_lower = clean_p.lower()
+            if any(re.search(ad_pat, p_lower, re.IGNORECASE) for ad_pat in cls.AD_BLOCK_PATTERNS):
+                continue
             if any(bad in p_lower for bad in cls.NOISE_KEYWORDS):
                 continue
             if not re.search(r'[.!?。！？;；]', clean_p):
@@ -369,6 +389,23 @@ class ArticleExtractor:
             if mm_clean and mm_clean not in key_metrics:
                 key_metrics.append(mm_clean)
         result["key_metrics"] = key_metrics[:8]
+
+        # 4.7 决策最优正文源：若 JSON-LD 结构化文章段落更为完整丰富（特别是付费墙媒体），优先采用 JSON-LD
+        if jsonld_paras and len(jsonld_paras) >= 3:
+            # 清理 jsonld_paras 中的广告与联系方式杂质
+            cleaned_jsonld = []
+            for jp in jsonld_paras:
+                jp_low = jp.lower()
+                if any(re.search(ad_pat, jp_low, re.IGNORECASE) for ad_pat in cls.AD_BLOCK_PATTERNS):
+                    continue
+                if any(bad in jp_low for bad in cls.NOISE_KEYWORDS):
+                    continue
+                cleaned_jsonld.append(jp)
+            if cleaned_jsonld:
+                jsonld_text = "\n\n".join(cleaned_jsonld)
+                dom_text = "\n\n".join(clean_paras)
+                if len(jsonld_text) > len(dom_text) or len(cleaned_jsonld) >= len(clean_paras):
+                    clean_paras = cleaned_jsonld
 
         result["paragraphs"] = clean_paras
         result["paras_count"] = len(clean_paras)

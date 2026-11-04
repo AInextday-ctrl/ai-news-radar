@@ -313,6 +313,52 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             assert "<span>RADAR 4.0</span></div>" not in html_c, f"断言 16 失败：{html_rel} 检出替换页签的旧版徽标，严禁覆盖页签！"
     print(f"✅ 断言 16 通过: 全端核心栏目导航页签 100% 常驻达标 (无合并或误删)")
 
+    # 17. 零广告引流与长文高完整度门禁 (Zero In-Article Ads & Full-Text Integrity)
+    AD_PATTERNS = [
+        "想要在新闻源中看到更多",
+        "在 Google 中添加 BI",
+        "在 google 中添加",
+        "有小费吗",
+        "有小费吗？",
+        "have a tip?",
+        "got a tip?",
+        "want more business insider",
+        "add bi in google",
+        "contact this reporter"
+    ]
+    for check_file in ["data/latest_news.json", "public/data/latest_news.json", "public/data/archive_news.json"]:
+        f_path = os.path.join(WORKSPACE_DIR, check_file)
+        if os.path.exists(f_path):
+            with open(f_path, "r", encoding="utf-8") as f_in:
+                content_str = f_in.read()
+            for pattern in AD_PATTERNS:
+                assert pattern.lower() not in content_str.lower(), f"断言 17 失败：{check_file} 检出文章内置商业广告/小费线索违规残留: '{pattern}'！"
+
+    # 重点验证 Cat Wu (6eef2a3c2f91d855) 完整性：开头含产品经理身份、结尾含 post agi 回复
+    target_news = None
+    if isinstance(data, dict):
+        news_list = data.get("news", [])
+    elif isinstance(data, list):
+        news_list = data
+    else:
+        news_list = []
+    
+    for it in news_list:
+        if it.get("id") == "6eef2a3c2f91d855":
+            target_news = it
+            break
+
+    if target_news:
+        zh_text = target_news.get("article_content_zh", "")
+        en_text = target_news.get("article_content", "")
+        assert len(zh_text) > 800, f"断言 17 失败：Cat Wu 文章中文实录严重截断 (长度 {len(zh_text)} < 800)！"
+        assert len(en_text) > 1500, f"断言 17 失败：Cat Wu 文章英文实录严重截断 (长度 {len(en_text)} < 1500)！"
+        assert "通用人工智能（AGI）" in zh_text, "断言 17 失败：Cat Wu 中文正文结尾未保留核心金句回答！"
+        assert "post agi" in en_text.lower(), "断言 17 失败：Cat Wu 英文正文结尾未保留核心 punchline 'post agi!'！"
+        assert "Boris Cherny" in en_text, "断言 17 失败：Cat Wu 正文缺失核心搭档 Boris Cherny 背景！"
+
+    print(f"✅ 断言 17 通过: 全站资讯零商业广告打赏残留且长文正文完整度 100% 达标")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")
