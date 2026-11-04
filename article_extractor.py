@@ -1,3 +1,4 @@
+import json
 """
 article_extractor.py - Targeted Source Deconstruction & Full-Text Crawler Engine
 针对主流科技与 AI 媒体进行深度解构、正文提取、5W1H 事实提炼与多媒体穿透抓取。
@@ -134,6 +135,12 @@ class ArticleExtractor:
                 r'<article[^>]*>(.*?)</article>',
             ],
         },
+        "businessinsider.com": {
+            "containers": [
+                r'<article[^>]*>(.*?)</article>',
+                r'class="[^"]*(?:content-lock-content|post-content|article-body)[^"]*"[^>]*>(.*?)</div>',
+            ],
+        },
     }
 
     # 常见广告、免责声明、社交引导等噪声过滤关键词
@@ -143,7 +150,7 @@ class ArticleExtractor:
         "all rights reserved", "follow us on", "advertisement", "enable javascript",
         "opens in new tab", "click here", "support independent journalism",
         "this article originally appeared", "share this article", "related stories",
-        "disclosure:", "affiliate links", "correction:", "listen to this article"
+        "disclosure:", "affiliate links", "correction:", "listen to this article", "save saved listen to this story", "listen to this story", "save saved", "recommended video", "photo-illustration:", "photo illustration:", "read next", "download the app"
     ]
 
     @classmethod
@@ -232,6 +239,40 @@ class ArticleExtractor:
             desc_val = html.unescape(m_desc.group(1)).strip()
             if len(desc_val) > 20 and not any(bad in desc_val.lower() for bad in ["javascript", "enable cookies", "cloudflare"]):
                 result["lead_paragraph"] = desc_val
+
+        # 2.5 优先提取 JSON-LD Schema.org 标准结构化正文 (100% 纯净度，无广告与侧边栏干扰)
+        jsonld_paras = []
+        for m_json in re.finditer(r'<script[^>]+type=["\x27]application/ld\+json["\x27][^>]*>(.*?)</script>', html_text, re.DOTALL | re.IGNORECASE):
+            try:
+                raw_json = m_json.group(1).strip()
+                jd = json.loads(raw_json)
+                j_items = jd if isinstance(jd, list) else [jd]
+                for it in j_items:
+                    if isinstance(it, dict) and '@graph' in it and isinstance(it['@graph'], list):
+                        j_items.extend(it['@graph'])
+                    if isinstance(it, dict):
+                        b = it.get('articleBody')
+                        if b and isinstance(b, str) and len(b.strip()) > 150:
+                            b_clean = html.unescape(b.strip())
+                            raw_p = [p.strip() for p in re.split(r'\n\s*\n|\n', b_clean) if len(p.strip()) > 30]
+                            if len(raw_p) <= 1 and len(b_clean) > 300:
+                                sents = re.split(r'(?<=[.!?])\s+', b_clean)
+                                grouped_p = []
+                                cur_p = []
+                                for s in sents:
+                                    cur_p.append(s.strip())
+                                    if len(' '.join(cur_p)) >= 280 or len(cur_p) >= 3:
+                                        grouped_p.append(' '.join(cur_p))
+                                        cur_p = []
+                                if cur_p:
+                                    grouped_p.append(' '.join(cur_p))
+                                raw_p = grouped_p
+                            for p in raw_p:
+                                pl = p.lower()
+                                if not any(bad in pl for bad in cls.NOISE_KEYWORDS) and len(p) >= 40:
+                                    jsonld_paras.append(p)
+            except Exception:
+                pass
 
         # 3. 寻找正文容器
         clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)

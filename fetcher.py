@@ -554,7 +554,7 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
     try:
         # 调用专门的高可用解构抓取引擎 ArticleExtractor (带 Chrome TLS 指纹伪装)
         ext_data = ArticleExtractor.extract_article(clean_url)
-        if ext_data.get("is_substantive") or ext_data.get("paras_count", 0) >= 2:
+        if ext_data.get("is_substantive") or ext_data.get("paras_count", 0) >= 1 or len(ext_data.get("full_text", "")) >= 200:
             result["article_content"] = ext_data["full_text"]
             if ext_data.get("cover_image"):
                 result["cover_image"] = ext_data["cover_image"]
@@ -2757,8 +2757,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    # 若文章未获取到长文段落 (少于 250 字符) 或缺失图片，强力穿透源站获取真实多段落正文
-                    needs_penetration = (not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 250)
+                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (若文章少于 1200 字符或缺图，主动穿透落地页获取完整报道多段落正文)
+                    needs_penetration = (not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 1200)
                     if needs_penetration:
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语
                         og_media = resolve_article_og_media(url, client)
@@ -2768,7 +2768,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
-                        if (not article_text_en or len(article_text_en) < 250) and og_media.get("article_content"):
+                        # 若源站穿透解析出的正文比 RSS 摘要更详实完整，全量升级为源站多段落实录正文
+                        if og_media.get("article_content") and len(og_media["article_content"]) > len(article_text_en or ""):
                             article_text_en = og_media["article_content"]
                         if is_dummy_summary and og_media.get("description") and len(og_media["description"]) >= 20:
                             clean_summary = og_media["description"]

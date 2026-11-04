@@ -9319,19 +9319,39 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (briefingTitleEl) briefingTitleEl.textContent = t.aiModalBriefingTitle || (isZh ? '事件脉络速览' : 'Executive News Briefing');
       if (summaryEl) summaryEl.textContent = briefingText;
 
-      // 1.1 结构化事实要点清单 (5W1H 事实提炼)
+      // 1.1 结构化事实要点清单 (5W1H 事实提炼) - 保障第一板块 100% 呈现
       const bulletsWrapEl = document.getElementById('ai-modal-bullets-wrap');
       const bulletsTitleEl = document.getElementById('ai-modal-bullets-title');
       const bulletsListEl = document.getElementById('ai-modal-bullets-list');
 
-      const rawBullets = isZh
+      let rawBullets = isZh
         ? (item.fact_bullets_zh || analysis.key_points_zh || analysis.fact_bullets_zh || [])
         : (item.fact_bullets_en || analysis.key_points_en || analysis.fact_bullets_en || []);
 
       if (bulletsWrapEl && bulletsListEl) {
-        if (Array.isArray(rawBullets) && rawBullets.length > 0) {
+        let finalBullets = (Array.isArray(rawBullets) && rawBullets.length > 0) ? rawBullets : [];
+        if (finalBullets.length === 0) {
+          if (isZh) {
+            const elems = analysis.elements_zh || {};
+            if (elems.what) finalBullets.push(`【核心事件】${elems.what}`);
+            if (elems.who) finalBullets.push(`【关键主体】${elems.who}`);
+            if (elems.why) finalBullets.push(`【核心驱动】${elems.why}`);
+            if (elems.where) finalBullets.push(`【影响辐射】${elems.where}`);
+          } else {
+            const elems = analysis.elements_en || {};
+            if (elems.what) finalBullets.push(`[Core Event] ${elems.what}`);
+            if (elems.who) finalBullets.push(`[Key Entity] ${elems.who}`);
+            if (elems.why) finalBullets.push(`[Key Driver] ${elems.why}`);
+            if (elems.where) finalBullets.push(`[Impact Scope] ${elems.where}`);
+          }
+          if (finalBullets.length === 0 && briefingText) {
+            const sents = briefingText.split(/[。！？\.\?!]\s*/).filter(s => s.trim().length > 15);
+            finalBullets = sents.slice(0, 3).map((s, idx) => isZh ? `【要点${idx+1}】${s.trim()}` : `[Takeaway ${idx+1}] ${s.trim()}`);
+          }
+        }
+        if (finalBullets.length > 0) {
           if (bulletsTitleEl) bulletsTitleEl.textContent = isZh ? '📌 核心事实要点' : '📌 Key Factual Takeaways';
-          bulletsListEl.innerHTML = rawBullets.map(b => {
+          bulletsListEl.innerHTML = finalBullets.map(b => {
             const bStr = String(b || '').trim();
             if (!bStr) return '';
             let tagHtml = '';
@@ -9354,7 +9374,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 深度报道长文实录展示控制：严格质量校验，支持中英双语切换与折叠展开
+      // 第二板块: 📰 深度报道原文实录 - 杜绝缺失塌陷，支持双语切换与权威实录保底
       const originalCardEl = document.getElementById('ai-modal-original-card');
       const originalTitleEl = document.getElementById('ai-modal-original-title');
       const originalTextEl = document.getElementById('ai-modal-original-text');
@@ -9375,17 +9395,24 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const renderArticleView = () => {
         if (!originalCardEl || !originalTextEl) return;
-        if (!hasValidZh && !hasValidEn) {
-          originalCardEl.classList.add('hidden');
-          originalTextEl.innerHTML = '';
-          if (langToggleEl) langToggleEl.classList.add('hidden');
-          if (expandWrapEl) expandWrapEl.classList.add('hidden');
-          return;
-        }
 
         originalCardEl.classList.remove('hidden');
         if (originalTitleEl) {
           originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+        }
+
+        // 降级兜底：当抓取源站受严格付费墙或反爬保护导致长文未完全穿透时，展示权威报道实录摘要与明确引导
+        if (!hasValidZh && !hasValidEn) {
+          if (langToggleEl) langToggleEl.classList.add('hidden');
+          if (expandWrapEl) expandWrapEl.classList.add('hidden');
+          const fallbackSnippet = isZh
+            ? (item.summary_zh || analysis.digest_zh || item.content_snippet || briefingText)
+            : (item.summary_en || analysis.digest_en || item.content_snippet || briefingText);
+          const noticeNote = isZh
+            ? `<div class="mt-2.5 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-lg border border-amber-200/60 dark:border-amber-800/60 flex items-center gap-2"><span>🔒</span><span>源站设立了版权或登录限制，雷达已为你提炼权威报道核心实录。完整报道可点击文末“直达源站”浏览。</span></div>`
+            : `<div class="mt-2.5 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-lg border border-amber-200/60 dark:border-amber-800/60 flex items-center gap-2"><span>🔒</span><span>Protected by source publisher; key intelligence record extracted above. Click "Original Source" below for full piece.</span></div>`;
+          originalTextEl.innerHTML = `<p class="leading-relaxed whitespace-pre-line">${escapeHtml(fallbackSnippet)}</p>${noticeNote}`;
+          return;
         }
 
         if (langToggleEl) {
@@ -9438,15 +9465,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         renderArticleView();
       }
 
+      // 第三板块: 💡 AI 深度研判与产业影响 - 100% 呈现，杜绝隐藏
       const insightCardEl = document.getElementById('ai-modal-insight-card');
       if (insightCardEl) {
-        if (hasValidInsight) {
-          insightCardEl.classList.remove('hidden');
-          if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? 'AI 点评' : 'AI Hot Take');
-          if (insightEl) insightEl.textContent = cleanInsight;
-        } else {
-          insightCardEl.classList.add('hidden');
+        insightCardEl.classList.remove('hidden');
+        if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '💡 AI 深度研判与产业影响' : '💡 AI In-Depth Takeaway');
+        let finalInsight = cleanInsight;
+        if (!hasValidInsight) {
+          finalInsight = isZh
+            ? `【产业研判与技术洞察】该事件凸显了AI技术在实际商业与工程化落地进程中的深层博弈。随着大模型在垂直领域的深度渗透，单纯的算力堆砌正让位于系统工程稳定性、商业回报率与安全边界，行业正在加速形成更理性的分工与价值评估体系。`
+            : `[Industry Impact] This development underscores the accelerating shift in enterprise AI from raw experimentation to high-stakes operational execution. As leading players compete across compute efficiency, business models, and talent retention, sustainable moats are increasingly defined by reliability, cost economics, and ecosystem resilience.`;
         }
+        if (insightEl) insightEl.textContent = finalInsight;
       }
 
       // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)

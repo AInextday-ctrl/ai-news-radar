@@ -1015,9 +1015,9 @@ def resolve_techmeme_url_and_source(curr_url: str, title: str) -> tuple:
 
 def load_existing_items() -> list:
     """Load previously saved news items from JSON to support incremental updates and complete history retention."""
-    files_to_check = [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_OUTPUT_FILE, OUTPUT_FILE]
-    raw_items = []
-    seen_urls = set()
+    # 优先载入具备完整长文解构与 AI 深度研判的最新看板库，绝不让轻量归档冲刷掉深度内容
+    files_to_check = [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE]
+    seen_map = {}
 
     for target_file in files_to_check:
         if not target_file or not os.path.exists(target_file):
@@ -1032,13 +1032,19 @@ def load_existing_items() -> list:
                             file_items.extend(cat_items)
                 for it in file_items:
                     k = it.get("url") or it.get("id")
-                    if k and k not in seen_urls:
-                        seen_urls.add(k)
-                        raw_items.append(it)
+                    if not k:
+                        continue
+                    if k not in seen_map:
+                        seen_map[k] = it
+                    else:
+                        existing = seen_map[k]
+                        for fld in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                            if it.get(fld) and not existing.get(fld):
+                                existing[fld] = it[fld]
         except Exception as e:
             print(f"⚠️ 读取历史文件 {target_file} 失败: {e}")
 
-    items = raw_items
+    items = list(seen_map.values())
 
     # 严格清洗历史残留脏数据，杜绝非深层链接推文、伪造主页 URL 及旧格式测试数据污染
     valid_items = []
@@ -1167,7 +1173,7 @@ def save_news(items: list):
             return f"tweet_{sid}"
         return it.get("url") or it.get("id") or ""
 
-    for old_file in [MASTER_ARCHIVE_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_OUTPUT_FILE, OUTPUT_FILE]:
+    for old_file in [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE]:
         if os.path.exists(old_file):
             try:
                 with open(old_file, "r", encoding="utf-8") as f:
@@ -1177,7 +1183,13 @@ def save_news(items: list):
                         for it in old_list:
                             k = get_it_key(it)
                             if k:
-                                master_dict[k] = it
+                                if k not in master_dict:
+                                    master_dict[k] = it
+                                else:
+                                    exist = master_dict[k]
+                                    for fld in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                                        if it.get(fld) and not exist.get(fld):
+                                            exist[fld] = it[fld]
             except Exception as e:
                 print(f"⚠️ 读取历史归档 {old_file} 异常: {e}")
 
@@ -1187,7 +1199,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["article_content_zh", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
+                for preserve_field in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
@@ -1907,8 +1919,7 @@ def save_news(items: list):
     # 4. 构建全量历史归档库 payload (去除爬虫内部冗余字段，体积暴降 70%，保证浏览器秒开不卡死)
         # 4. 构建全量历史归档库 payload 与公共分发库 payload (精准分层治理)
     STRIP_ARCHIVE_KEYS = {
-        'ai_analysis', 'original_content', 'article_content', 'article_content_zh',
-        'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
+        'original_content', 'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
         'wechat_published_draft', 'processed_mark', 'processed_status',
         'processed_at', 'media_checked', 'raw_content'
     }
@@ -1929,7 +1940,10 @@ def save_news(items: list):
         elif cat == 'news':
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
-            c_it.pop('article_content_zh', None)
+            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 1500:
+                c_it['article_content_zh'] = c_it['article_content_zh'][:1500] + '...'
+            if c_it.get('article_content') and len(c_it['article_content']) > 2000:
+                c_it['article_content'] = c_it['article_content'][:2000] + '...'
         return c_it
 
     # 公共看板专属清理函数：为 30 条核心新闻保留 ai_analysis 结构化要点与深度正文，彻底消除前端单句浅层问题
