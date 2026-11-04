@@ -261,6 +261,50 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert not os.path.exists(pub_ledger_path), f"断言 14 失败：发现违规泄漏的公共账本文件 {pub_ledger_path}，必须从 public 目录彻底剔除！"
     print(f"✅ 断言 14 通过：公共数据轻量化合规 (无冗余大文件，体积严格受控)")
 
+    # 15. 核心已冻结模块防篡改与零回退门禁 (Frozen Code & Architecture Integrity)
+    # 严禁任何人或自动化脚本篡改弹窗三大核心支柱(要点/原文/研判)常驻逻辑，严禁对静态脚本施加 immutable 强缓存锁
+    for js_rel in ["public/js/app.js", "public/zh/js/app.js"]:
+        js_p = os.path.join(WORKSPACE_DIR, js_rel)
+        if os.path.exists(js_p):
+            with open(js_p, "r", encoding="utf-8") as f_in:
+                app_js_content = f_in.read()
+            assert "originalCardEl.classList.remove('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少原文实录常驻指令！"
+            assert "insightCardEl.classList.remove('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少AI研判常驻指令！"
+            assert "origCard.classList.add('hidden')" not in app_js_content, f"断言 15 失败：{js_rel} 检出回退的卡片隐藏逻辑！"
+            assert "insightCard.classList.add('hidden')" not in app_js_content, f"断言 15 失败：{js_rel} 检出回退的研判隐藏逻辑！"
+
+    fb_p = os.path.join(WORKSPACE_DIR, "firebase.json")
+    if os.path.exists(fb_p):
+        with open(fb_p, "r", encoding="utf-8") as f_in:
+            fb_cfg = json.load(f_in)
+        for h in fb_cfg.get("hosting", {}).get("headers", []):
+            src = h.get("source", "")
+            if "js" in src and "css" in src:
+                for header in h.get("headers", []):
+                    if header.get("key") == "Cache-Control":
+                        val = header.get("value", "")
+                        assert "immutable" not in val, f"断言 15 失败：firebase.json 中 {src} 违规配置了 immutable 强缓存锁: {val}"
+                        assert "no-cache" in val, f"断言 15 失败：firebase.json 中 {src} 缺少 no-cache 标头: {val}"
+
+    pub_arch_p = os.path.join(WORKSPACE_DIR, "public", "data", "archive_news.json")
+    if os.path.exists(pub_arch_p):
+        with open(pub_arch_p, "r", encoding="utf-8") as f_in:
+            arch_news = json.load(f_in)
+        rich_news_cnt = sum(1 for it in arch_news if it.get("article_content") or it.get("article_content_zh"))
+        assert rich_news_cnt >= 130, f"断言 15 失败：archive_news.json 富文本新闻数量仅 {rich_news_cnt}，低于 130 门禁线，存在长文剥离泄漏！"
+
+    print(f"✅ 断言 15 通过: 核心已冻结模块防篡改与零回退达标 (弹窗三大支柱常驻、缓存无锁、归档长文留存完整)")
+
+    # 16. 全端栏目页签与导航结构常驻门禁 (Tab Navigation Permanence)
+    for html_rel in ["public/index.html", "public/zh/index.html"]:
+        html_p = os.path.join(WORKSPACE_DIR, html_rel)
+        if os.path.exists(html_p):
+            with open(html_p, "r", encoding="utf-8") as f_in:
+                html_c = f_in.read()
+            for tab_name in ["switchTab('all')", "switchTab('news')", "switchTab('celebrity')", "switchTab('tools')", "switchTab('videos')", "switchTab('prompts')"]:
+                assert tab_name in html_c, f"断言 16 失败：{html_rel} 缺失核心页签标记 {tab_name}，严禁删除栏目导航！"
+    print(f"✅ 断言 16 通过: 全端核心栏目导航页签 100% 常驻达标 (无合并或误删)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")
