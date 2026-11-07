@@ -273,10 +273,10 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                     continue
                 else:
                     all_exhausted = False
-                    print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
+                    print(f"  ⚠️ [apidojo] 备用通道状态: {resp.status_code}")
         except Exception as e:
             all_exhausted = False
-            print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
+            print(f"  ⚠️ [apidojo] 备用通道状态: {resp.status_code}")
 
     if all_exhausted:
         _APIFY_CIRCUIT_BROKEN = True
@@ -324,18 +324,25 @@ def fetch_incremental_tweets(
         except Exception:
             pass
 
-    # 也从本地数据库加载已收录的推文 ID
+    # 也从本地数据库加载已收录的推文 ID (深度扫描 items 列表及 grouped 分组)
     existing_file_ids = set()
     for fp in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
         if os.path.exists(fp):
             try:
                 with open(fp, "r", encoding="utf-8") as f:
                     cdata = json.load(f)
-                    for item in cdata.get("celebrity", []):
+                    for item in cdata.get("items", []):
                         sid = str(item.get("status_id") or "").strip()
                         if sid:
                             existing_file_ids.add(sid)
                             known_ids.add(sid)
+                    for glist in cdata.get("grouped", {}).values():
+                        if isinstance(glist, list):
+                            for item in glist:
+                                sid = str(item.get("status_id") or "").strip()
+                                if sid:
+                                    existing_file_ids.add(sid)
+                                    known_ids.add(sid)
             except Exception:
                 pass
 
@@ -381,6 +388,11 @@ def fetch_incremental_tweets(
     updated_metrics_count = 0
     live_metrics_map = {}
 
+    # 严格限流保护：单次增量抓取至多翻译入库 12 条最新真实推文，杜绝网络堵塞拖垮调度流水线
+    raw_candidates = [it for it in raw_items if str(it.get("id") or "").strip() not in existing_file_ids]
+    if len(raw_candidates) > 12:
+        raw_items = raw_candidates[:12]
+    
     for it in raw_items:
         tweet_id = str(it.get("id") or "").strip()
         if not tweet_id:

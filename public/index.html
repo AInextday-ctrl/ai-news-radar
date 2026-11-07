@@ -312,7 +312,7 @@
             <span>🌙</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">Dark</span>
           </button>
-          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" title="Follow System" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hidden sm:flex items-center space-x-1" title="Follow System" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
             <span>💻</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">Auto</span>
           </button>
@@ -322,7 +322,7 @@
         <div id="site-lang-container" class="relative flex items-center bg-slate-200/90 dark:bg-slate-900/90 px-2 py-1 rounded-xl border border-slate-300 dark:border-slate-700/60 shadow-inner notranslate">
           <span class="text-xs mr-1 text-indigo-500 font-bold">🌐</span>
           <label for="site-lang-select" class="sr-only">Select website language</label>
-          <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5">
+          <select id="site-lang-select" aria-label="Select website language" onchange="changeSiteLanguage(this.value)" class="bg-transparent text-xs font-bold text-slate-700 dark:text-slate-200 focus:outline-none cursor-pointer pr-1 py-0.5 max-w-[92px] sm:max-w-none truncate">
             <optgroup label="Popular Languages">
               <option value="english" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇬🇧 English</option>
               <option value="chinese_simplified" class="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100">🇨🇳 Chinese (Simplified)</option>
@@ -407,7 +407,7 @@
         <!-- Manual Refresh Button -->
         <button onclick="loadNews(true)" class="text-xs bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 active:scale-95 transition-all px-3 py-1.5 rounded-xl flex items-center space-x-1.5 shadow-sm">
           <span>🔄</span>
-          <span id="refresh-btn-text" class="font-medium">Refresh</span>
+          <span id="refresh-btn-text" class="font-medium hidden sm:inline">Refresh</span>
         </button>
       </div>
     </div>
@@ -581,7 +581,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- Ticker Navigation Controls & Page Indicator -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 4</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 1</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Previous (Up)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="Pause / Play">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="Next (Down)">↓</button>
@@ -734,351 +734,7 @@
               </div>
               <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
                 <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
-                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/anthropic&w=80&h=80&fit=cover&output=webp&q=80" alt="Claude Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Claude Developers</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @ClaudeDevs · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Users can now auto-connect plugins when they log in to Claude, with MCP servers that accept Claude as a trusted issuer.
-
-If you’re building plugins for Claude, add support so users get started faster and stay connected without re-authorizing.
-                  </p>
                   
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117680108706140161/img/W7IjAqq94Q6lFVOo.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117680108706140161/img/W7IjAqq94Q6lFVOo.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 02:09 · 11h ago</span>
-                  </span>
-                  <a href="https://x.com/ClaudeDevs/status/2117680635561312732" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/x/newsfromgoogle&w=80&h=80&fit=cover&output=webp&q=80" alt="@newsfromgoogle" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">@newsfromgoogle</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @newsfromgoogle · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Google says its education updates give schools &quot;more choice, not less&quot;; Gemini, Gemini Notebook, and Search are off by default and can be enabled individually (@newsfromgoogle)
-                  </p>
-                  
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 08:00 · 5h ago</span>
-                  </span>
-                  <a href="https://x.com/newsfromgoogle/status/2117714815477059722" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2068223494958063616/6RPinr2E_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Xsama! 🔸" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Xsama! 🔸</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @Rasdamsama · Front-End Developer | Web3 &amp; Crypto | Aviation | Physics
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25 shrink-0 text-[10px] leading-none">💡 TITAN INSIGHT</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    A claim can survive for decades. Evidence cannot.
-
-That is what stayed with me reading about Britain’s 2013 settlement with 5,228 Kenyan claimants over torture and ill-treatment during the colonial Emergency.
-
-The abuses dated back to 1952–1963. By t
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2111068349933223936/img/OH33SFNKNm-QiEnW.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2111068349933223936/img/OH33SFNKNm-QiEnW.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-03 21:28 · 16h ago</span>
-                  </span>
-                  <a href="https://x.com/Rasdamsama/status/2117609816398987445" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI Developers" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI Developers</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @OpenAIDevs · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    RT @diegocabezas01: GPT-6.1 Sol Ultrafast via API can make 3d in realtime
-
-I asked how an airplane works, built a live 3D model over my desktop.
-
-• Decisions API (like JEV API) picks text, 3D or HTML.
-• Responses API / GPT-6.1 Sol · Low · Ultrafast m
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117463267861794816/img/sCCnyaVLQPBvPa9y.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117463267861794816/img/sCCnyaVLQPBvPa9y.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 07:43 · 6h ago</span>
-                  </span>
-                  <a href="https://x.com/OpenAIDevs/status/2117764644538314782" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//unavatar.io/openai&w=80&h=80&fit=cover&output=webp&q=80" alt="OpenAI (Official)" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">OpenAI (Official)</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @OpenAI · AI Engineer / Tech Builder
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    These are early steps, and we’re looking for engineers, engineering firms, and software partners to help shape what comes next.
-                  </p>
-                  
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 02:56 · 10h ago</span>
-                  </span>
-                  <a href="https://x.com/OpenAI/status/2117692483685757188" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2059962240569090050/iSsC83ya_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Xiao Zhan Melons🍉" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Xiao Zhan Melons🍉</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @xzmelons · This account is for fun, I like read melons especially about
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/15 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-500/25 shrink-0 text-[10px] leading-none">💡 TITAN INSIGHT</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Today, at the China Conference on the Creation of High-Quality Radio and Television Content, the Chairman of Linmon Media shared insights into the making of #SmallTownRemedy
-He also said that the character of Liu Zhengliang is deeply rooted in realit
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2117835877917343744/img/loLVlfrNVG1-entc.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2117835877917343744/img/loLVlfrNVG1-entc.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 12:29 · 1h ago</span>
-                  </span>
-                  <a href="https://x.com/xzmelons/status/2117836587740410357" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1696566047300612112/FuExLqtB_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="End Tribalism in Politics" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">End Tribalism in Politics</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @EndTribalism · In a world divided by politics, our community encourages res
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Republicans earned this humiliation.
-
-Newsflash for the GOP: campaigning on no new wars and lower prices, then starting a major war and raising prices, isn’t a good political strategy.
-
-Trump and the Republican Party were handed a generational opport
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWQNad2XwAEYkRh.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWQNad2XwAEYkRh.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 12:13 · 1h ago</span>
-                  </span>
-                  <a href="https://x.com/EndTribalism/status/2117832476793905393" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/1924880258274361348/RcLvdl89_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Rolex Viper Zealot" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Rolex Viper Zealot</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @Rolex_zealot · Die Hard Suriya Fan|| Old id's @viperzealot , @Rolexzealot1 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24H TRENDING</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    Only 30% of Theatres opened in TN 
-
-But Smashed 100K in 10 hrs with 8.28K Hourly Trending 🔥🔥🔥🔥🔥
-
-Bro's Comeback is a Case Study for Growing Actors like @Akracingoffl @Siva_Kartikeyan 👍👍
-
-#Scene
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWQCWn0asAAUTP8.jpg', event)" title="Click to view full image">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWQCWn0asAAUTP8.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-04 11:24 · 2h ago</span>
-                  </span>
-                  <a href="https://x.com/Rolex_zealot/status/2117820321676058643" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    View Post ↗
-                  </a>
-                </div>
-              </article>
-</div>
-
                 </div>
               </div>
             </div>
@@ -1740,7 +1396,7 @@ Bro's Comeback is a Case Study for Growing Actors like @Akracingoffl @Siva_Karti
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6">
         
         <!-- Section A: ⚡ Breaking Industry News (Dual-Column Stream) -->
-        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-9 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <section id="section-col-news" class="glass-panel rounded-2xl p-4 sm:p-5 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-9 h-auto lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 shrink-0">
               <div class="flex items-center space-x-2.5">
@@ -2031,7 +1687,7 @@ Bro's Comeback is a Case Study for Growing Actors like @Akracingoffl @Siva_Karti
         </section>
 
         <!-- Section B: 🏆 LMSYS Chatbot Arena Leaderboard -->
-        <section id="section-col-arena" class="glass-panel rounded-2xl p-3.5 sm:p-4 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-3 h-[680px] sm:h-[750px] lg:h-[1280px]">
+        <section id="section-col-arena" class="glass-panel rounded-2xl p-3.5 sm:p-4 shadow-xl flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-t-2 border-t-amber-500/70 md:col-span-2 lg:col-span-3 h-auto lg:h-[1280px]">
           <div class="flex-1 flex flex-col min-h-0 space-y-3">
             <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800/80 pb-3 min-w-0 shrink-0 gap-1">
               <div class="flex items-center space-x-1.5 min-w-0 flex-1">
