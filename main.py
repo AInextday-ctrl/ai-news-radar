@@ -2025,8 +2025,9 @@ def save_news(items: list):
         "total_archived": len(all_archive_items),
         "category_totals": category_totals
     }
-    if "items" in public_payload:
-        del public_payload["items"]
+    for strip_key in ["items", "celebrity", "leader_opinions"]:
+        if strip_key in public_payload:
+            del public_payload[strip_key]
 
     with open(PUBLIC_OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(public_payload, f, ensure_ascii=False, separators=(',', ':'))
