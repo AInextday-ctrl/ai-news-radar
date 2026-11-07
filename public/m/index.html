@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#060913" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)">
+  <title>AI News Radar - Mobile Web App | Real-Time Intel, Social Signals & Videos</title>
+  <meta name="description" content="Mobile-first panoramic AI intelligence radar focusing on breaking news, 70+ verified tech leader tweets, and hands-on developer videos.">
+  <link rel="canonical" href="https://ainewsradar.xyz/m">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/m">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/m">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="stylesheet" href="/css/style.min.css">
+  <link rel="stylesheet" href="/m/css/mobile.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
+
+  <!-- Mobile App Header (Fixed Top) -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
+    <div class="px-3.5 h-13 flex items-center justify-between">
+      <!-- Brand Logo -->
+      <a href="/m" class="flex items-center gap-2 touch-card">
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white text-xs font-black shadow-xs">
+          ⚡
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-1.5">
+            <span class="font-extrabold text-[15px] tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 dark:from-white dark:via-indigo-200 dark:to-white bg-clip-text text-transparent">
+              AI News Radar
+            </span>
+            <span class="px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 font-bold text-[9px] border border-indigo-200/40 dark:border-indigo-800/40">
+              Mobile
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Header Actions -->
+      <div class="flex items-center gap-1.5">
+        <!-- Live Status Badge -->
+        <div class="hidden xs:flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 live-pulse"></span>
+          <span>LIVE</span>
+        </div>
+
+        <!-- Language Switch -->
+        <button 
+          onclick="window.MobileApp.switchLanguage()" 
+          title="Switch to Chinese"
+          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center active:scale-90 transition-transform"
+        >
+          ZH
+        </button>
+
+        <!-- Theme Toggle -->
+        <button 
+          onclick="window.MobileApp.toggleTheme()" 
+          title="Toggle Day/Night Mode"
+          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-xs flex items-center justify-center active:scale-90 transition-transform"
+        >
+          <span id="theme-icon">🌙</span>
+        </button>
+
+        <!-- Search Toggle -->
+        <button 
+          onclick="window.MobileApp.toggleSearchBox()" 
+          title="Search Feed"
+          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs flex items-center justify-center active:scale-90 transition-transform"
+        >
+          🔍
+        </button>
+
+        <!-- Refresh Button -->
+        <button 
+          onclick="window.MobileApp.refresh()" 
+          title="Refresh Data"
+          class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs flex items-center justify-center active:scale-90 transition-transform"
+        >
+          <span id="refresh-btn-icon" class="inline-block transition-transform">🔄</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Collapsible Search Bar -->
+    <div id="mobile-search-box" class="hidden px-3.5 pb-2.5 pt-1 border-t border-slate-100 dark:border-slate-800/80">
+      <div class="relative">
+        <input 
+          id="mobile-search-input"
+          type="search" 
+          placeholder="Search AI news, leader tweets & videos..." 
+          oninput="window.MobileApp.handleSearch(event)"
+          class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+        >
+        <span class="absolute left-2.5 top-1.5 text-xs text-slate-400">🔍</span>
+      </div>
+    </div>
+
+    <!-- Channel Segment Bar (Sticky Navigation Tabs) -->
+    <nav class="flex border-t border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900">
+      <button 
+        data-tab-target="news"
+        onclick="window.MobileApp.switchTab('news')" 
+        class="flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all"
+      >
+        📰 Intel & News
+      </button>
+      <button 
+        data-tab-target="social"
+        onclick="window.MobileApp.switchTab('social')" 
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+      >
+        💬 Social Radar
+      </button>
+      <button 
+        data-tab-target="videos"
+        onclick="window.MobileApp.switchTab('videos')" 
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+      >
+        🎬 Videos
+      </button>
+      <button 
+        data-tab-target="top"
+        onclick="window.MobileApp.switchTab('top')" 
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+      >
+        🔥 Top 3 Digest
+      </button>
+    </nav>
+  </header>
+
+  <!-- Dynamic Sub-Filter Pills Bar -->
+  <div id="sub-filter-bar" class="sticky top-[95px] z-30 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-sm border-b border-slate-200/60 dark:border-slate-800/60">
+    <!-- Populated by JS -->
+  </div>
+
+  <!-- Main Feed Stream Container -->
+  <main id="mobile-feed" class="py-2 min-h-[60vh]">
+    <!-- Populated by JS -->
+  </main>
+
+  <!-- Mobile Footer -->
+  <footer class="mt-8 px-4 py-8 border-t border-slate-200/80 dark:border-slate-800 text-center space-y-3">
+    <button 
+      onclick="window.MobileApp.switchToDesktop()" 
+      class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold touch-card shadow-xs"
+    >
+      <span>💻 Switch to Desktop Version</span>
+    </button>
+    <p class="text-[11px] text-slate-400">
+      AI News Radar · Mobile App · Focused on News, Social & Videos
+    </p>
+    <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400">
+      <a href="/about" class="hover:underline">About</a>
+      <span>·</span>
+      <a href="/editorial-policy" class="hover:underline">Editorial Policy</a>
+      <span>·</span>
+      <a href="/privacy" class="hover:underline">Privacy</a>
+      <span>·</span>
+      <a href="/terms" class="hover:underline">Terms</a>
+    </div>
+  </footer>
+
+  <!-- Bottom Navigation Dock (Native App Style) -->
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 flex items-center justify-around h-15 pb-[env(safe-area-inset-bottom)]">
+    <button 
+      data-dock-target="news"
+      onclick="window.MobileApp.switchTab('news')" 
+      class="flex flex-col items-center justify-center flex-1 h-full text-indigo-600 dark:text-indigo-400 touch-card"
+    >
+      <span class="text-lg">📰</span>
+      <span class="text-[10px] font-bold mt-0.5">News</span>
+    </button>
+    <button 
+      data-dock-target="social"
+      onclick="window.MobileApp.switchTab('social')" 
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+    >
+      <span class="text-lg">💬</span>
+      <span class="text-[10px] font-bold mt-0.5">Social</span>
+    </button>
+    <button 
+      data-dock-target="videos"
+      onclick="window.MobileApp.switchTab('videos')" 
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+    >
+      <span class="text-lg">🎬</span>
+      <span class="text-[10px] font-bold mt-0.5">Videos</span>
+    </button>
+    <button 
+      data-dock-target="top"
+      onclick="window.MobileApp.switchTab('top')" 
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+    >
+      <span class="text-lg">🌟</span>
+      <span class="text-[10px] font-bold mt-0.5">Top 3</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Reader Bottom Sheet / Modal -->
+  <div id="article-modal-overlay" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center">
+    <div 
+      id="article-modal-content" 
+      class="w-full sm:max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-slide-up"
+    >
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <script>
+    window.__IS_ZH = false;
+  </script>
+  <script src="/m/js/mobile.js"></script>
+</body>
+</html>
