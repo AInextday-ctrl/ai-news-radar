@@ -536,6 +536,14 @@ def is_meaningful_tweet(it: dict) -> bool:
     # 剔除链接、@提及 和 #标签 后的实质内容（防止 "red fuji #AI #PS #Adobe" 靠标签刷字数蒙混过关）
     substantive = re.sub(r'https?://\S+|@\w+|#[\w-]+', '', text)
     substantive = re.sub(r'\s+', ' ', substantive).strip()
+
+    # 严格 AI 领域相关性校验：非白名单领袖博主，内容必须包含 AI/LLM/Agent 等核心特征词，坚决拦截纯娱乐圈、饭圈、政治骂战与非 AI 杂质
+    author_handle = str(it.get("author_handle") or it.get("author") or "").lower().lstrip("@")
+    is_trusted_leader = bool(it.get("entity_type") in ["person", "company"] and it.get("author_role") and it.get("sub_category") != "viral_post")
+    if not is_trusted_leader:
+        ai_match = re.search(r'\b(ai|llm|llms|gpt|claude|gemini|deepseek|qwen|openai|anthropic|agent|agents|agentic|mcp|rag|prompt|diffusion|vlm|tts|asr|whisper|voice|copilot|codex|cursor|comfyui|webgpu|ollama|vllm|gguf|lora|embedding|neural|model|models|chat|assistant|automation|autonomous|skill|skills|harness|aigc)\b', text_lower)
+        if not ai_match:
+            return False
     
     # 1. 纯寒暄、无意义感叹或单一短语
     low_value_patterns = [

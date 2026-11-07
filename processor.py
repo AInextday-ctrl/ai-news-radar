@@ -1730,21 +1730,23 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             print(f"  ✓ 已完成 {min(i + batch_size, len(need_ai_items))}/{len(need_ai_items)} 条")
 
         except Exception as e:
-            gemini_circuit_broken = True
-            print(f"  ❌ Gemini 处理异常: {e}，开启全局熔断，后续批次全速切换高可用神经中文翻译保障")
-            for orig_item in chunk:
-                fallback = dict(orig_item)
+            print(f"  ⚠️ Gemini 本批次偶发异常: {e}，启用并发神经中文翻译极速保底...")
+            def _quick_fallback(orig_item):
+                fb = dict(orig_item)
                 raw_title_zh = orig_item.get("title_zh") or free_translate_zh(orig_item.get("title", ""))
                 title_zh = clean_news_text(raw_title_zh)
-                fallback["title_zh"] = title_zh
-                fallback["summary_zh"] = clean_news_text(orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh))
-                fallback["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
-                fallback["summary_en"] = orig_item.get("summary_en") or orig_item.get("content_snippet", "")
-                fallback["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
-                fallback["hot_score"] = 3
-                fallback["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
-                fallback["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
-                results.append(fallback)
+                fb["title_zh"] = title_zh
+                fb["summary_zh"] = clean_news_text(orig_item.get("summary_zh") or generate_smart_fallback_summary(orig_item, title_zh))
+                fb["title_en"] = orig_item.get("title_en") or orig_item.get("title", "")
+                fb["summary_en"] = orig_item.get("summary_en") or orig_item.get("content_snippet", "")
+                fb["category"] = orig_item.get("category") or orig_item.get("default_category", "news")
+                fb["hot_score"] = 3
+                fb["tags"] = orig_item.get("tags") or [orig_item.get("source", "AI快讯")]
+                fb["ai_analysis"] = generate_smart_ai_analysis(orig_item, title_zh)
+                return fb
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor(max_workers=min(8, len(chunk))) as executor:
+                results.extend(list(executor.map(_quick_fallback, chunk)))
     all_final = [sanitize_bilingual_item(it) for it in (direct_items + results)]
     # 🛡️ 强制执行语言质检与自愈哨兵流水线：对所有产出资讯进行双语对称性与纯净度门禁审查
     try:
