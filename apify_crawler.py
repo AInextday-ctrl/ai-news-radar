@@ -229,7 +229,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
         }
 
         try:
-            with httpx.Client(timeout=6) as client:
+            with httpx.Client(timeout=15) as client:
                 resp = client.post(url_xquik, json=payload_xquik)
                 if resp.status_code in [200, 201]:
                     data = resp.json()
@@ -250,10 +250,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                     print(f"  ⚠️ [xquik] HTTP {resp.status_code}: {resp.text[:120]}")
         except Exception as e:
             all_exhausted = False
-            print(f"  ⚠️ [xquik] 异常: {e}")
-            if "timed out" in str(e).lower() or "timeout" in str(e).lower():
-                print("  ℹ️ [Apify 快速放行] 检测到 Actor 响应超时，立即快速放行备用信源...")
-                break
+            print(f"  ⚠️ [xquik] 异常: {e}，尝试备用通道...")
 
         url_apidojo = f"https://api.apify.com/v2/acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={token}"
         payload_apidojo = {
@@ -262,7 +259,7 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
             "sort": "Latest"
         }
         try:
-            with httpx.Client(timeout=6) as client:
+            with httpx.Client(timeout=15) as client:
                 resp = client.post(url_apidojo, json=payload_apidojo)
                 if resp.status_code in [200, 201]:
                     data = resp.json()
@@ -391,10 +388,8 @@ def fetch_incremental_tweets(
     updated_metrics_count = 0
     live_metrics_map = {}
 
-    # 严格限流保护：单次增量抓取至多翻译入库 12 条最新真实推文，杜绝网络堵塞拖垮调度流水线
-    raw_candidates = [it for it in raw_items if str(it.get("id") or "").strip() not in existing_file_ids]
-    if len(raw_candidates) > 12:
-        raw_items = raw_candidates[:12]
+    # 严格去重与候选预处理：排除已收录推文
+    raw_items = [it for it in raw_items if str(it.get("id") or "").strip() not in existing_file_ids]
     
     for it in raw_items:
         tweet_id = str(it.get("id") or "").strip()
@@ -441,9 +436,13 @@ def fetch_incremental_tweets(
         tweet_text = (it.get("text") or it.get("fullText") or "").strip()
         if not tweet_text:
             continue
+        if re.fullmatch(r'https?://\S+', tweet_text):
+            continue
             
         # 剔除 URL 与 @提及后计算实质正文字符
-        substantive_text = re.sub(r'https?://\S+|@\w+', '', tweet_text).strip()
+        substantive_text = re.sub(r'https?://\S+|@\w+|#[\w-]+', '', tweet_text).strip()
+        if len(substantive_text) < 28:
+            continue
         
         # 排除纯寒暄、无营养一句话与表情包水帖
         low_value_patterns = [
@@ -699,6 +698,9 @@ def fetch_incremental_tweets(
         current_watermark["latest_created_at"] = iso_time
         watermarks[user_name] = current_watermark
 
+        if len(new_items) >= 25:
+            break
+
     # 保存状态
     state["last_crawl_utc"] = now_utc.isoformat()
     state["known_status_ids"] = list(known_ids)[-1000:]
@@ -719,7 +721,7 @@ def merge_new_items_to_database(new_items: List[Dict[str, Any]]) -> int:
         return 0
 
     inserted_total = 0
-    for target_path in [LATEST_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:
@@ -788,7 +790,7 @@ def update_existing_tweet_metrics(live_metrics_map: Dict[str, Dict[str, Any]]) -
         return 0
 
     updated = 0
-    for target_path in [LATEST_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:
@@ -843,7 +845,7 @@ def merge_apify_tweets_into_database(new_tweets: List[Dict[str, Any]]):
     if not new_tweets:
         return
 
-    for target_path in [LATEST_NEWS_FILE]:
+    for target_path in [LATEST_NEWS_FILE, PUBLIC_NEWS_FILE]:
         if not os.path.exists(target_path):
             continue
         try:
