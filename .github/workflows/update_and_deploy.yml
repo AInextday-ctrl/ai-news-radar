@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: ai-radar-sync
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   auto-update:

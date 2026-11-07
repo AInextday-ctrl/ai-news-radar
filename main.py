@@ -1226,14 +1226,7 @@ def save_news(items: list):
                     img_val = ""
                 if it.get("media_urls"):
                     it["media_urls"] = [m for m in it["media_urls"] if "t.co/" not in str(m)]
-                # 对缺少原生 pbs.twimg 图片或包含视频的推文发起网络嗅探
-                has_pbs = "pbs.twimg.com" in img_val
-                if (not it.get("image_url") or not has_pbs or it.get("has_video")) and not it.get("media_checked"):
-                    try:
-                        enrich_tweet_media(it)
-                    except Exception:
-                        pass
-                    it["media_checked"] = True
+                it["media_checked"] = True
             elif (not it.get("image_url")) or any(bad in img_val.lower() for bad in ["pml.png", "techmeme.com/img", "techmeme_sq", "pixel", "icon"]):
                 if it.get("category") == "news":
                     it["image_url"] = get_smart_cover_url(it.get("title", "") or it.get("title_zh", ""), it.get("category", "news"), it.get("source", ""))

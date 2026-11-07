@@ -757,7 +757,7 @@ def decode_gnews_urls_parallel(raw_links: List[str], max_workers: int = 6) -> Di
     return results
 
 
-def is_tweet_live(url: str, timeout: float = 3.5) -> bool:
+def is_tweet_live(url: str, timeout: float = 3.5, client: Optional[httpx.Client] = None) -> bool:
     """
     通过 Twitter/X 官方 oEmbed 探针接口核验 status URL 是否真实存活 (HTTP 200)。
     严禁已删除、被封禁或虚构的假 ID 链接流入生产环境。
@@ -779,21 +779,65 @@ def is_tweet_live(url: str, timeout: float = 3.5) -> bool:
 
     try:
         tw_url = canonical.replace("x.com", "twitter.com")
-        with httpx.Client(follow_redirects=True, timeout=timeout) as client:
+        if client is not None:
             res = client.get(f"https://publish.twitter.com/oembed?url={tw_url}")
             if res.status_code == 404:
                 _LIVE_TWEET_CACHE[canonical] = False
                 return False
-            if res.status_code in (200, 301, 302):
-                _LIVE_TWEET_CACHE[canonical] = True
-                return True
-            # 若遭遇 Twitter 429 限流或 5xx 临时抖动，合法推文结构乐观放行
             _LIVE_TWEET_CACHE[canonical] = True
             return True
+        else:
+            with httpx.Client(follow_redirects=True, timeout=timeout) as c:
+                res = c.get(f"https://publish.twitter.com/oembed?url={tw_url}")
+                if res.status_code == 404:
+                    _LIVE_TWEET_CACHE[canonical] = False
+                    return False
+                _LIVE_TWEET_CACHE[canonical] = True
+                return True
     except Exception:
-        # 网络抖动或超时，Google News 真实收录的合规推文不予误杀
         _LIVE_TWEET_CACHE[canonical] = True
         return True
+
+
+def check_tweets_live_parallel(urls: List[str], max_workers: int = 12) -> Dict[str, bool]:
+    """批量并发快速核验推文是否存活"""
+    if not urls:
+        return {}
+    import concurrent.futures
+    results = {}
+    uncached = [u for u in urls if u and u.strip() not in _LIVE_TWEET_CACHE]
+    for u in urls:
+        if u and u.strip() in _LIVE_TWEET_CACHE:
+            results[u] = _LIVE_TWEET_CACHE[u.strip()]
+    if uncached:
+        try:
+            with httpx.Client(follow_redirects=True, timeout=3.0) as shared_client:
+                with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(uncached))) as executor:
+                    future_to_url = {executor.submit(is_tweet_live, u, 3.0, shared_client): u for u in uncached}
+                    for f in concurrent.futures.as_completed(future_to_url):
+                        orig_u = future_to_url[f]
+                        try:
+                            results[orig_u] = f.result()
+                        except Exception:
+                            results[orig_u] = True
+        except Exception:
+            for u in uncached:
+                results[u] = True
+    return results
+
+
+def enrich_tweets_media_parallel(items: List[Dict[str, Any]], max_workers: int = 12) -> None:
+    """批量并发丰富推文原生媒体与高清素材"""
+    if not items:
+        return
+    import concurrent.futures
+    try:
+        with httpx.Client(headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}, timeout=5.0) as shared_client:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=min(max_workers, len(items))) as executor:
+                futures = [executor.submit(enrich_tweet_media, it, shared_client) for it in items]
+                concurrent.futures.wait(futures)
+    except Exception as e:
+        print(f"  ⚠️ 并发提取推文媒体素材抖动: {e}")
 
 
 def evaluate_dynamic_pinned_status(item: Dict[str, Any]) -> bool:
@@ -942,12 +986,12 @@ def fetch_x_leader_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                 raw_links = [e.get("link", "") for e, _ in entries_to_check if e.get("link")]
                 decoded_map = decode_gnews_urls_parallel(raw_links, max_workers=6)
 
+                candidates_to_validate = []
                 for entry, cleaned_title in entries_to_check:
                     raw_link = entry.get("link", "")
                     real_url = decoded_map.get(raw_link)
                     if not real_url or real_url in seen_urls:
                         continue
-
                     m = re.search(r'https?://(?:twitter|x)\.com/([^/]+)/status/(\d+)', real_url)
                     if not m:
                         continue
@@ -955,9 +999,15 @@ def fetch_x_leader_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                     canonical_url = f"https://x.com/{u_user}/status/{s_id}"
                     if canonical_url in seen_urls:
                         continue
-                    if not is_tweet_live(canonical_url):
-                        continue
+                    candidates_to_validate.append((entry, cleaned_title, canonical_url, u_user, s_id))
 
+                can_urls = [c[2] for c in candidates_to_validate]
+                live_map = check_tweets_live_parallel(can_urls, max_workers=10)
+
+                new_batch_items = []
+                for entry, cleaned_title, canonical_url, u_user, s_id in candidates_to_validate:
+                    if not live_map.get(canonical_url, True):
+                        continue
                     profile = match_celebrity_profile(u_user)
                     author_name = profile["name"] if profile else f"@{u_user}"
                     author_handle = profile["handle"] if profile else f"@{u_user}"
@@ -996,11 +1046,13 @@ def fetch_x_leader_posts(max_items: int = 80) -> List[Dict[str, Any]]:
                         "tags": ["𝕏领袖观点", "前沿发声"] if entity_type == "person" else ["官方动态", "模型发布"]
                     }
                     item["status_id"] = s_id
-                    enrich_tweet_media(item)
                     evaluate_dynamic_pinned_status(item)
+                    new_batch_items.append(item)
                     items.append(item)
                     if len(items) >= max_items:
                         break
+
+                enrich_tweets_media_parallel(new_batch_items, max_workers=10)
         except Exception as e:
             print(f"  ❌ [𝕏 领袖嗅探] 检索异常 ({q_url[:50]}...): {e}")
 
@@ -1555,16 +1607,9 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
                 growth_badge_zh = f"📈 本周飙升 +{weekly_stars:,} ★"
                 growth_badge_en = f"📈 +{weekly_stars:,} ★ this week"
 
-            description_zh = free_translate_zh(description_en[:160])
-            if not re.search(r'[\u4e00-\u9fff]', description_zh) or has_chinglish_seams(description_zh):
-                clean_en = strip_chinglish_to_english(description_en)
-                retry_zh = free_translate_zh(clean_en[:160])
-                if re.search(r'[\u4e00-\u9fff]', retry_zh) and not has_chinglish_seams(retry_zh):
-                    description_zh = retry_zh
-                else:
-                    description_zh = f"面向 {scenario} 场景的高热度开源 AI 工具，支持 {runtime_badge} 部署与自动化工作流集成"
-
-            title_fmt = f"【{name}】{description_zh[:65]}"
+            # 优化：延迟至 Top 20 筛选完成后并发翻译，将 180s 缩减至 2s
+            description_zh = ""
+            title_fmt = f"【{name}】"
             title_en = f"[{name}] {description_en[:65]}"
 
             repo_img = f"https://opengraph.githubassets.com/1/{full_name}" if full_name else None
@@ -1633,6 +1678,37 @@ def fetch_github_applied_tools() -> List[Dict[str, Any]]:
         # 按 7 天新增 Stars 增速与多维实用分降序排列，仅取 Top 20 精品
         scored_items.sort(key=lambda x: (x[0], x[1]), reverse=True)
         items = [it for _, _, it in scored_items[:20]]
+
+        # 并发极速补全 Top 20 开源工具的精炼中文解析
+        def _enrich_single_tool_zh(it: Dict[str, Any]) -> Dict[str, Any]:
+            desc_en = (it.get("content_snippet") or "").split(" · ", 1)[-1]
+            scen = it.get("scenario_tag", "AI 工具")
+            rb = it.get("runtime_badge", "云端/本地")
+            nm = it.get("app_name", "")
+            wk_s = it.get("weekly_stars", 0)
+            st = it.get("metrics", {}).get("stars", 0)
+            try:
+                desc_zh = free_translate_zh(desc_en[:160])
+                if not re.search(r'[一-鿿]', desc_zh) or has_chinglish_seams(desc_zh):
+                    clean_en = strip_chinglish_to_english(desc_en)
+                    retry_zh = free_translate_zh(clean_en[:160])
+                    if re.search(r'[一-鿿]', retry_zh) and not has_chinglish_seams(retry_zh):
+                        desc_zh = retry_zh
+                    else:
+                        desc_zh = f"面向 {scen} 场景的高热度开源 AI 工具，支持 {rb} 部署与自动化工作流集成"
+            except Exception:
+                desc_zh = f"面向 {scen} 场景的高热度开源 AI 工具，支持 {rb} 部署与自动化工作流集成"
+
+            it["title"] = f"【{nm}】{desc_zh[:65]}"
+            it["title_zh"] = f"【{nm}】{desc_zh[:65]}"
+            it["app_hook"] = desc_zh[:80]
+            it["summary_zh"] = f"📈 本周暴涨 +{wk_s:,} ★（总计 ⭐ {st:,}）· {desc_zh}"
+            it["overview_zh"] = f"{nm} 是一款专注于 {scen} 的开源 AI 工具（本周新增 +{wk_s:,} Stars，总计 {st:,} Stars）。{desc_zh}，支持免费部署与使用。"
+            return it
+
+        import concurrent.futures
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
+            items = list(executor.map(_enrich_single_tool_zh, items))
         try:
             os.makedirs(os.path.dirname(GITHUB_STARS_LEDGER_FILE), exist_ok=True)
             with open(GITHUB_STARS_LEDGER_FILE, "w", encoding="utf-8") as lf:

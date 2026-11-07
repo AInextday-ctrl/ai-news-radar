@@ -251,6 +251,9 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
         except Exception as e:
             all_exhausted = False
             print(f"  ⚠️ [xquik] 异常: {e}")
+            if "timed out" in str(e).lower() or "timeout" in str(e).lower():
+                print("  ℹ️ [Apify 快速放行] 检测到 Actor 响应超时，立即快速放行备用信源...")
+                break
 
         url_apidojo = f"https://api.apify.com/v2/acts/apidojo~tweet-scraper/run-sync-get-dataset-items?token={token}"
         payload_apidojo = {
@@ -273,10 +276,10 @@ def _call_apify_actor(tokens: Any, query: str, max_items: int = 35) -> List[Dict
                     continue
                 else:
                     all_exhausted = False
-                    print(f"  ⚠️ [apidojo] 备用通道状态: {resp.status_code}")
+                    print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
         except Exception as e:
             all_exhausted = False
-            print(f"  ⚠️ [apidojo] 备用通道状态: {resp.status_code}")
+            print(f"  ⚠️ [apidojo] 备用通道异常: {e}")
 
     if all_exhausted:
         _APIFY_CIRCUIT_BROKEN = True
