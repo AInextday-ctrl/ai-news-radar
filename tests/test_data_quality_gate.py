@@ -361,17 +361,29 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     # 严禁将抓取时间当做发布时间，严禁对 1 年前、数月前的历史教学视频标注 TODAY、5m ago、🔥 24h飙升 或 【48h 极客实测】
     videos = grouped.get("videos", [])
     fake_time_videos = []
+    poisoned_known_ids = {
+        'yt_4erkI5L3ems', 'yt_5EoLQ-G15yI', 'yt_E62S3XgaBS8', 'yt_FoEPY4uLVzg',
+        'yt_FoLLsvzmLY8', 'yt_Mbg3CCZSvjc', 'yt_QJq9TMq830g', 'yt_W8fjoqw27Lo',
+        'yt_aHC5kyR6uc8', 'yt_b-zaaHlcKPE', 'yt_c_Q1jbVsfnA', 'yt_gxon6Oa2In0',
+        'yt_hLymS7ymnGg', 'yt_hOoqHEWYF_E', 'yt_iphBxUBOF68', 'yt_ixDQcjPBbzo',
+        'yt_rP6ayaV0dWE', 'yt_tgqRF63kBbA', 'yt_tiwex9WmAaE', 'yt_u1xQgLwmFk0',
+        'yt_w-QPJJw9Sgc', 'yt_wbCpgR-PGZw'
+    }
+    
     for v in videos:
         vid = v.get("id")
         pub = str(v.get("published") or "").lower()
+        raw_pub = str(v.get("raw_published_at") or "")
         title_zh = str(v.get("title_zh") or "")
         badge = str(v.get("surge_badge") or "")
         is_24h = v.get("is_recent_24h", False)
         diff_h = float(v.get("diff_hours", 999.0))
         
-        # 判断是否为历史文本 (包含年、月、周，或包含 > 2 天的相对时间)
+        # 判断是否为历史文本 (包含年、月、周，或包含 > 2 天的相对时间，或属于已知历史沉淀库条目)
         is_historical = False
-        if any(ind in pub for ind in ["year", "yr", "month", "mo", "week", "wk", "年前", "月前", "周前"]):
+        if vid in poisoned_known_ids:
+            is_historical = True
+        elif any(ind in pub for ind in ["year", "yr", "month", "mo", "week", "wk", "年前", "月前", "周前"]):
             is_historical = True
         else:
             m_day = re.search(r'(\d+)\s*(?:days?|天前)', pub)
@@ -391,6 +403,21 @@ def run_quality_gate_assertions(payload: dict) -> bool:
                 
             if violations:
                 fake_time_videos.append((vid, v.get("author"), pub, violations))
+
+        # 检查是否带有伪造清洗时间戳指纹 (.257 / .258 毫秒)
+        if ((".257" in raw_pub or ".258" in raw_pub) and "2026-11-08T0" in raw_pub):
+            fake_time_videos.append((vid, v.get("author"), raw_pub, ["存在伪造清洗时间戳指纹"]))
+
+    # 严查展示厅首焦媒体卡片 (Hero Media Showcase)
+    hms = data.get("hero_media_showcase", {})
+    if isinstance(hms, dict) and "lead_media" in hms and isinstance(hms["lead_media"], dict) and hms["lead_media"].get("id"):
+        lm = hms["lead_media"]
+        lm_id = lm.get("id")
+        lm_raw = str(lm.get("raw_published_at") or "")
+        if lm.get("processed_status") in ["DISQUALIFIED", "REJECTED"]:
+            fake_time_videos.append((lm_id, lm.get("author"), "Hero Media", ["首焦视频为淘汰状态(DISQUALIFIED)"]))
+        if ((".257" in lm_raw or ".258" in lm_raw) and "2026-11-08T0" in lm_raw) or lm_id in poisoned_known_ids:
+            fake_time_videos.append((lm_id, lm.get("author"), lm_raw, ["首焦视频带有伪造时间戳/属于历史视频"]))
 
     assert len(fake_time_videos) == 0, f"断言 18 失败：检测到 {len(fake_time_videos)} 个历史视频被伪造时效标签: {fake_time_videos[:3]}"
     print(f"✅ 断言 18 通过: 视频真实发布时间与防伪造标签门禁达标 (全网 {len(videos)} 个视频零虚假 TODAY / 24h 飙升)")
@@ -448,6 +475,40 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
                     v["title_zh"] = v["title_zh"].replace("48h 极客实测", "实战精讲")
             clean_vids.append(v)
         grouped["videos"] = clean_vids
+
+    # 3.5 智能自愈首焦媒体卡片 (Hero Media Showcase)
+    hms = data.get("hero_media_showcase", {})
+    if isinstance(hms, dict) and "lead_media" in hms and isinstance(hms["lead_media"], dict):
+        lm = hms["lead_media"]
+        lm_id = lm.get("id")
+        lm_raw = str(lm.get("raw_published_at") or "")
+        poisoned_known_ids = {
+            'yt_4erkI5L3ems', 'yt_5EoLQ-G15yI', 'yt_E62S3XgaBS8', 'yt_FoEPY4uLVzg',
+            'yt_FoLLsvzmLY8', 'yt_Mbg3CCZSvjc', 'yt_QJq9TMq830g', 'yt_W8fjoqw27Lo',
+            'yt_aHC5kyR6uc8', 'yt_b-zaaHlcKPE', 'yt_c_Q1jbVsfnA', 'yt_gxon6Oa2In0',
+            'yt_hLymS7ymnGg', 'yt_hOoqHEWYF_E', 'yt_iphBxUBOF68', 'yt_ixDQcjPBbzo',
+            'yt_rP6ayaV0dWE', 'yt_tgqRF63kBbA', 'yt_tiwex9WmAaE', 'yt_u1xQgLwmFk0',
+            'yt_w-QPJJw9Sgc', 'yt_wbCpgR-PGZw'
+        }
+        needs_replace = (
+            lm.get("processed_status") in ["DISQUALIFIED", "REJECTED"]
+            or ((".257" in lm_raw or ".258" in lm_raw) and "2026-11-08T0" in lm_raw)
+            or lm_id in poisoned_known_ids
+            or not lm.get("is_recent_24h")
+        )
+        if needs_replace and clean_vids:
+            best_lead = None
+            for cand in clean_vids:
+                if cand.get("is_recent_24h") and cand.get("id") not in poisoned_known_ids:
+                    best_lead = cand
+                    break
+            if not best_lead:
+                best_lead = clean_vids[0]
+            new_lead = dict(best_lead)
+            new_lead["showcase_type"] = "youtube_video"
+            new_lead["aspect_ratio"] = "16:9"
+            new_lead["duration"] = "⏱️ 15:00"
+            hms["lead_media"] = new_lead
 
     # 4. 清洗英文纯度
     for cat_name, items in grouped.items():
