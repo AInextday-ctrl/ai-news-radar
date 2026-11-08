@@ -4254,6 +4254,12 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
         generate_rss_and_json_feeds(news_list, tools_list, articles_meta)
         generate_llms_manifests(news_list, tools_list, articles_meta)
         generate_robots_txt()
+        # 6. Bing & Microsoft Copilot 实时索引秒级推送 (IndexNow)
+        try:
+            from indexnow_submitter import auto_submit_recent_or_all
+            auto_submit_recent_or_all()
+        except Exception as e_idx:
+            print(f"⚠️ [IndexNow Auto-Submit] 推送异常放行: {e_idx}")
     except Exception as e:
         print(f"⚠️ [SEO & GEO Pipeline] 执行异常: {e}")
 
