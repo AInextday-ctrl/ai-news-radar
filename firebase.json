@@ -285,6 +285,15 @@
         ]
       },
       {
+        "source": "**/data/latest_news.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
         "source": "**/data/*.json",
         "headers": [
           {

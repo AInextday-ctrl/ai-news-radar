@@ -66,7 +66,7 @@ jobs:
 
       - name: Hard CI Data Quality & Strict Language Gate Audit
         run: |
-          python tests/test_data_quality_gate.py
+          python tests/test_data_quality_gate.py || (echo "⚠️ 门禁初检触发自动自愈，执行精细清洗并重新渲染..." && python language_sentinel.py && python content_publisher.py && python tests/test_data_quality_gate.py)
 
       - name: Commit Updated News Data to Repo
         run: |
@@ -80,12 +80,8 @@ jobs:
               git rebase --abort
               exit 0
             fi
-            git push || (echo "⚠️ Git push 遇并发提交占用，主动让步由后续周期同步。" && exit 0)
+            git push || (git pull --rebase origin main && git push) || (echo "⚠️ Git push 遇并发提交占用，主动让步由后续周期同步。" && exit 0)
           fi
-
-      - name: Verify Quality Gate Before Hosting Deployment
-        run: |
-          python tests/test_data_quality_gate.py
 
       - name: Deploy to Firebase Hosting
         env:
@@ -96,5 +92,5 @@ jobs:
             echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
           else
             echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
-            npx -y firebase-tools deploy --only hosting --non-interactive || (echo "⚠️ 首次部署出现网络抖动，5秒后自动重试..." && sleep 5 && npx -y firebase-tools deploy --only hosting --non-interactive)
+            npx -y firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || (echo "⚠️ 首次部署出现网络抖动，5秒后自动重试..." && sleep 5 && npx -y firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)
           fi

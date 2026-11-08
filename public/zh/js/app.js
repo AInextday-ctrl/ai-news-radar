@@ -8792,9 +8792,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
       try {
-        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
+        const fetchUrl = `/data/latest_news.json?t=${Date.now()}`;
         const res = await fetch(fetchUrl, {
-          cache: isManual ? 'reload' : 'default'
+          cache: 'no-cache'
         });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();

@@ -356,8 +356,8 @@ def _cluster_topics_with_gemini(
                                 "author": tw_item.get("author", "AI Leader"),
                                 "author_handle": tw_item.get("author_handle", "@ai"),
                                 "author_avatar": tw_item.get("author_avatar", ""),
-                                "content_zh": tw_item.get("content_zh") or tw_item.get("original_content", ""),
-                                "content_en": tw_item.get("original_content") or tw_item.get("content_zh", ""),
+                                "content_zh": tw_item.get("full_text_zh") or tw_item.get("summary_zh") or tw_item.get("title_zh") or tw_item.get("content_zh", ""),
+                                "content_en": tw_item.get("full_text_en") or tw_item.get("summary_en") or tw_item.get("title_en") or tw_item.get("original_content") or tw_item.get("title", ""),
                                 "url": tw_item.get("url", "#"),
                                 "platform": tw_item.get("platform", "x")
                             })
@@ -572,8 +572,8 @@ def _cluster_topics_algorithmically(
                 "author": tw.get("author", "AI Leader"),
                 "author_handle": tw.get("author_handle", "@ai"),
                 "author_avatar": tw.get("author_avatar", ""),
-                "content_zh": tw.get("content_zh") or tw.get("original_content", ""),
-                "content_en": tw.get("original_content") or tw.get("content_zh", ""),
+                "content_zh": tw.get("full_text_zh") or tw.get("summary_zh") or tw.get("title_zh") or tw.get("content_zh", ""),
+                "content_en": tw.get("full_text_en") or tw.get("summary_en") or tw.get("title_en") or tw.get("original_content") or tw.get("title", ""),
                 "url": tw.get("url", "#"),
                 "platform": tw.get("platform", "x")
             })
@@ -942,7 +942,12 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             else:
                 tw_author = raw_author
             tw_handle = tw.get("author_handle", "@ai")
-            tw_content = tw.get("content_zh" if is_zh else "content_en", "")
+            tw_content = (
+                tw.get("content_zh" if is_zh else "content_en") or
+                tw.get("full_text_zh" if is_zh else "full_text_en") or
+                tw.get("summary_zh" if is_zh else "summary_en") or
+                tw.get("title") or ""
+            )
             if not is_zh and re.search(r'[\u4e00-\u9fff]', tw_content):
                 tw_content = re.sub(r'[\u4e00-\u9fff]+', '', tw_content).strip()
             tw_url = tw.get("url", "#")
