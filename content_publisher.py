@@ -2441,8 +2441,29 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
     author = safe_text(raw_auth, 32)
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
     url = lead_media.get("url") or "#"
-    diff_h = lead_media.get("diff_hours", 12.0)
-    time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
+    diff_h = lead_media.get("diff_hours")
+    raw_pub = lead_media.get("raw_published_at", "")
+    if diff_h is None and raw_pub:
+        try:
+            dt = datetime.fromisoformat(raw_pub.replace("Z", "+00:00"))
+            diff_h = round(max(0, (datetime.now(timezone.utc) - dt).total_seconds()) / 3600.0, 1)
+        except Exception:
+            diff_h = None
+
+    is_recent_48h = (diff_h is not None and diff_h <= 48.0) and lead_media.get("is_recent_48h", True)
+    if is_recent_48h and diff_h is not None:
+        time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
+        lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
+    else:
+        pub_text = lead_media.get("published", "")
+        if not pub_text:
+            if diff_h is not None:
+                days = int(diff_h // 24)
+                pub_text = f"{days}天前" if is_zh else f"{days}d ago"
+            else:
+                pub_text = "实战精讲" if is_zh else "Masterclass"
+        time_badge = pub_text
+        lead_badge = "🎬 极客实战精讲" if is_zh else "🎬 AI Masterclass"
 
     tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
     clean_tags = []
@@ -2454,8 +2475,6 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
         clean_tags = ["#HandsOn", "#AI"]
 
     tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-100 dark:bg-indigo-500/20 text-slate-600 dark:text-indigo-300 border border-slate-200/80 dark:border-indigo-500/20 leading-none">{safe_text(t, 16)}</span>' for t in clean_tags])
-
-    lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
     lead_source_text = "原片 ↗" if is_zh else "Source ↗"
     lead_play_text = "影院播放 ▶" if is_zh else "Theater Play ▶"
     embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
@@ -2579,13 +2598,32 @@ def format_hero_media_showcase(hero_showcase: dict, is_zh: bool) -> str:
     author = safe_text(lead_media.get("source") or lead_media.get("author") or "AI Engineer", 32)
     author = re.sub(r'^YouTube\s*·\s*', '', author).strip()
     url = lead_media.get("url") or "#"
-    diff_h = lead_media.get("diff_hours", 12.0)
-    time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
+    diff_h = lead_media.get("diff_hours")
+    raw_pub = lead_media.get("raw_published_at", "")
+    if diff_h is None and raw_pub:
+        try:
+            dt = datetime.fromisoformat(raw_pub.replace("Z", "+00:00"))
+            diff_h = round(max(0, (datetime.now(timezone.utc) - dt).total_seconds()) / 3600.0, 1)
+        except Exception:
+            diff_h = None
+
+    is_recent_48h = (diff_h is not None and diff_h <= 48.0) and lead_media.get("is_recent_48h", True)
+    if is_recent_48h and diff_h is not None:
+        time_badge = f"{diff_h}h 前" if is_zh else f"{diff_h}h ago"
+        lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
+    else:
+        pub_text = lead_media.get("published", "")
+        if not pub_text:
+            if diff_h is not None:
+                days = int(diff_h // 24)
+                pub_text = f"{days}天前" if is_zh else f"{days}d ago"
+            else:
+                pub_text = "实战精讲" if is_zh else "Masterclass"
+        time_badge = pub_text
+        lead_badge = "🎬 极客实战精讲" if is_zh else "🎬 AI Masterclass"
 
     tags = lead_media.get("tags") or ["#HandsOn", "#Benchmark", "#AI"]
     tags_html = " ".join([f'<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">{safe_text(t, 16)}</span>' for t in tags[:2]])
-
-    lead_badge = "🎬 48h 极客实测" if is_zh else "🎬 48h Lab Review"
     lead_source_text = "原片 ↗" if is_zh else "Source ↗"
     lead_play_text = "影院播放 ▶" if is_zh else "Theater Play ▶"
     embed_url = f"https://www.youtube-nocookie.com/embed/{video_id}?autoplay=1&rel=0" if video_id else url
@@ -2834,9 +2872,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if hero_media_showcase and isinstance(hero_media_showcase.get("lead_medias"), list) and len(hero_media_showcase["lead_medias"]) > 1:
             lead_media_2_en = hero_media_showcase["lead_medias"][1]
         elif all_videos_list:
+            recent_vids = [v for v in all_videos_list if v.get("is_recent_48h")]
+            candidates = recent_vids if recent_vids else all_videos_list
             m1_url = (lead_media_1_en.get("url") or "") if lead_media_1_en else ""
             m1_id = (lead_media_1_en.get("video_id") or "") if lead_media_1_en else ""
-            for v in all_videos_list:
+            for v in candidates:
                 if (v.get("url") or "") != m1_url and (not m1_id or (v.get("video_id") or "") != m1_id):
                     lead_media_2_en = v
                     break
@@ -3448,9 +3488,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if hero_media_showcase and isinstance(hero_media_showcase.get("lead_medias"), list) and len(hero_media_showcase["lead_medias"]) > 1:
             lead_media_2_zh = hero_media_showcase["lead_medias"][1]
         elif all_videos_list_zh:
+            recent_vids = [v for v in all_videos_list_zh if v.get("is_recent_48h")]
+            candidates = recent_vids if recent_vids else all_videos_list_zh
             m1_url = (lead_media_1_zh.get("url") or "") if lead_media_1_zh else ""
             m1_id = (lead_media_1_zh.get("video_id") or "") if lead_media_1_zh else ""
-            for v in all_videos_list_zh:
+            for v in candidates:
                 if (v.get("url") or "") != m1_url and (not m1_id or (v.get("video_id") or "") != m1_id):
                     lead_media_2_zh = v
                     break

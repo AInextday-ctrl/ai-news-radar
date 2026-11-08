@@ -7296,11 +7296,41 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     // 专门卡片渲染：9:16 竖屏手机卡片 (Shorts & TikTok 沉浸式视效)
     // ==========================================
+    function formatVideoTime(item, lang = 'zh') {
+      const pub = String(item.published || '').trim();
+      const raw = item.raw_published_at;
+
+      // 1. 若原生发布文本明确指明是历史视频 (如 1y ago, 8mo ago, 3w ago, 2 years ago, 1年前, 8个月前, 3周前, 5天前)
+      const isOldText = pub && /(?:year|yr|y\b|month|mo\b|week|wk|w\b|\d+\s*d\b|天前|月前|年前|周前)/i.test(pub);
+      if (isOldText) {
+        let displayPub = pub.replace(/^Streamed\s*/i, '').trim();
+        if (lang === 'zh') {
+          displayPub = displayPub
+            .replace(/(\d+)\s*(?:years?|yrs?|y)\s*ago/i, '$1 年前')
+            .replace(/(\d+)\s*(?:months?|mos?|mo)\s*ago/i, '$1 个月前')
+            .replace(/(\d+)\s*(?:weeks?|wks?|w)\s*ago/i, '$1 周前')
+            .replace(/(\d+)\s*(?:days?|d)\s*ago/i, '$1 天前');
+        }
+        return { display: displayPub, exactTime: displayPub, relative: displayPub, isToday: false, isRecent24h: false };
+      }
+
+      // 2. 正常时间差计算
+      const base = formatTime(raw, lang);
+      const isReallyToday = Boolean(base.isToday && (item.is_recent_24h === true || /(?:hours?|hrs?|h ago|mins?|m ago|刚刚|小时前|分钟前)/i.test(pub)));
+      base.isToday = isReallyToday;
+      base.isRecent24h = isReallyToday;
+      if (!isReallyToday && pub) {
+        base.relative = pub;
+        base.display = pub;
+      }
+      return base;
+    }
+
     function renderVerticalVideoCard(item) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const title = formatVideoTitle(item, currentLang);
-      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatVideoTime(item, currentLang);
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com')) || (item.url && item.url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'shorts';
       const cleanSource = item.author || item.source || (isTikTok ? "TikTok Creator" : "YouTube Creator");
@@ -7403,7 +7433,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const t = I18N[currentLang];
       const title = formatVideoTitle(item, currentLang);
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
-      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatVideoTime(item, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const cleanSource = item.author || item.source || "";
       const skillTag = isZh
@@ -7473,11 +7503,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             ` : ''}
           </div>
 
-          ${item.tags && item.tags.length ? `
+          ${(() => {
+            const rawTags = item.tags || [];
+            const safeTags = rawTags.filter(tag => {
+              if (!timeObj.isRecent24h && (tag.includes('24h') || tag.includes('飙升') || tag.includes('48h'))) return false;
+              return true;
+            });
+            if (!safeTags.length) return '';
+            return `
             <div class="flex items-center gap-1.5 flex-wrap pt-1">
-              ${item.tags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-200 dark:border-slate-800 transition-colors">#${tag}</button>`).join('')}
+              ${safeTags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-200 dark:border-slate-800 transition-colors">#${tag}</button>`).join('')}
             </div>
-          ` : ''}
+            `;
+          })()}
         </article>
       `;
     }

@@ -24,7 +24,7 @@ import socket
 socket.setdefaulttimeout(12.0)
 import urllib.request
 import urllib.parse
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import List, Dict, Any, Optional
 import httpx
@@ -48,18 +48,89 @@ AI_CORE_TERMS = [
     "robotics", "langgraph", "autogen", "ollama", "v0", "lovable", "bolt"
 ]
 
+# 1. 动态主题与时间窗口感知配置 (严格限制上传时间，杜绝抓取远古历史视频)
 SEARCH_TOPICS = [
-    ("AI tools workflow demo tutorial", "CAMSBAgBEAE%3D"),   # 本周高播放实战
-    ("DeepSeek R1 workflow demo", "CAM%3D"),                # 深度推理实战
-    ("Claude Sonnet Cursor AI coding workflow", "CAM%3D"),  # 代码智能体实战
-    ("#shorts AI tools viral workflow", "CAM%3D"),          # 9:16 竖屏精讲
-    ("OpenAI o3 Sora Kling AI video demo", "CAM%3D"),       # 前沿多模态演示
-    ("AI agents real world deployment tutorial", "CAM%3D")  # 生产级智能体落地
+    ("AI tools tutorial workflow demo", "CAISBAgDEAE%3D"),      # 本周上传最新实操 (This week)
+    ("DeepSeek R1 workflow demo tutorial", "CAISBAgDEAE%3D"),  # 本周 DeepSeek 最新
+    ("Claude Code Cursor AI workflow demo", "CAISBAgDEAE%3D"), # 本周代码智能体
+    ("#shorts AI tools workflow viral", "CAISBAgDEAE%3D"),     # 本周 9:16 竖屏精讲
+    ("OpenAI Anthropic Gemini AI demo", "CAISBAgDEAE%3D"),     # 本周前沿模型演示
+    ("AI agents real world workflow tutorial", "CAISBAgDEAE%3D") # 本周智能体实操
 ]
 
-def sanitize_video_title_zh(title: str, author: str, is_viral: bool = False, is_short: bool = False) -> str:
-    """生成自然纯正、零 Chinglish 缝合痕迹的高价值中文标题"""
-    skill = "48h 极客实测" if is_viral else ("Shorts 精讲" if is_short else "实战精讲")
+# 2. 顶流 AI 极客创作者最新视频检索 (按上传时间倒序排查最新发布)
+TOP_CREATOR_SEARCHES = [
+    ("Fireship AI", "CAISAhAB"),
+    ("Matt Wolfe AI", "CAISAhAB"),
+    ("Theo - t3.gg AI", "CAISAhAB"),
+    ("Matthew Berman AI", "CAISAhAB"),
+    ("Liam Ottley AI", "CAISAhAB"),
+    ("Two Minute Papers AI", "CAISAhAB"),
+    ("Nick Saraev AI", "CAISAhAB")
+]
+
+def parse_relative_time_info(pub_str: str) -> tuple:
+    """
+    解析 YouTube / Web 相对发布时间文本（如 '14h ago', '1d ago', '1y ago', '2 weeks ago', '4个月前'），
+    计算出真实的 UTC ISO 时间戳，并严格判断是否属于 24h / 48h 新近发布的真实视频。
+    严禁任何用 datetime.now() 伪造远古视频发布时间的情形！
+    """
+    now = datetime.now(timezone.utc)
+    if not pub_str:
+        return (now - timedelta(days=14)).isoformat(), False, False
+        
+    t = pub_str.lower().strip()
+    
+    # 按照最长、最具体的单位到单字母缩写进行正则匹配
+    patterns = [
+        (r'(\d+)\s*(?:months?|mos?|月)', lambda v: timedelta(days=v * 30)),
+        (r'(\d+)\s*(?:years?|yrs?|年)', lambda v: timedelta(days=v * 365)),
+        (r'(\d+)\s*(?:weeks?|wks?|周)', lambda v: timedelta(weeks=v)),
+        (r'(\d+)\s*(?:days?|天)', lambda v: timedelta(days=v)),
+        (r'(\d+)\s*(?:hours?|hrs?|小时)', lambda v: timedelta(hours=v)),
+        (r'(\d+)\s*(?:minutes?|mins?|分)', lambda v: timedelta(minutes=v)),
+        (r'(\d+)\s*(?:seconds?|secs?|秒)', lambda v: timedelta(seconds=v)),
+        # 单字母简写 (如 14h, 1d, 2w, 4mo, 1y, 35m)
+        (r'(\d+)\s*mo\b', lambda v: timedelta(days=v * 30)),
+        (r'(\d+)\s*y\b', lambda v: timedelta(days=v * 365)),
+        (r'(\d+)\s*w\b', lambda v: timedelta(weeks=v)),
+        (r'(\d+)\s*d\b', lambda v: timedelta(days=v)),
+        (r'(\d+)\s*h\b', lambda v: timedelta(hours=v)),
+        (r'(\d+)\s*m\b', lambda v: timedelta(minutes=v)),
+        (r'(\d+)\s*s\b', lambda v: timedelta(seconds=v)),
+    ]
+    
+    matched_delta = None
+    for pat, delta_fn in patterns:
+        m = re.search(pat, t)
+        if m:
+            matched_delta = delta_fn(int(m.group(1)))
+            break
+            
+    if matched_delta is not None:
+        dt = now - matched_delta
+    elif 'yesterday' in t or '昨天' in t:
+        dt = now - timedelta(days=1)
+    elif 'just now' in t or '刚刚' in t:
+        dt = now
+    else:
+        # 未能识别的文本默认视为历史精选内容 (14天前)，决不伪造成刚刚发布
+        dt = now - timedelta(days=14)
+
+    age_hours = (now - dt).total_seconds() / 3600.0
+    is_24h = (age_hours <= 24.0)
+    is_48h = (age_hours <= 48.0)
+    return dt.isoformat(), is_24h, is_48h
+
+def sanitize_video_title_zh(title: str, author: str, is_viral: bool = False, is_short: bool = False, is_recent: bool = False) -> str:
+    """生成自然纯正、零 Chinglish 缝合痕迹的高价值中文标题，且时效前缀与真实发布窗口严格一致"""
+    if is_short:
+        skill = "Shorts 极客" if is_recent else "Shorts 精选"
+    elif is_recent:
+        skill = "48h 极客实测"
+    else:
+        skill = "实战精讲"
+        
     clean_t = title.strip()
     clean_t = re.sub(r'#\w+', '', clean_t).strip()
     trans = clean_news_text(free_translate_zh(clean_t[:120]))
@@ -84,7 +155,7 @@ def sanitize_video_summary_zh(summary: str, title: str, author: str) -> str:
     return f"{author} 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。"
 
 def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int = 4) -> List[Dict[str, Any]]:
-    """通过 YouTube 实时搜索接口感知全网爆点视频 (支持长视频与 Shorts 竖屏)"""
+    """通过 YouTube 实时搜索接口感知全网爆点视频 (支持长视频与 Shorts 竖屏，杜绝伪造时间)"""
     encoded_q = urllib.parse.quote(query)
     url = f"https://www.youtube.com/results?search_query={encoded_q}"
     if sp:
@@ -99,7 +170,7 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
     )
     vids = []
     try:
-        with urllib.request.urlopen(req, timeout=4.0) as resp:
+        with urllib.request.urlopen(req, timeout=6.0) as resp:
             html = resp.read().decode('utf-8', errors='ignore')
         m = re.search(r'var ytInitialData = ({.*?});</script>', html)
         if not m:
@@ -132,16 +203,29 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
                 author = author or "YouTube Creator"
 
                 views = vr.get('viewCountText', {}).get('simpleText') or '爆款播放'
-                published = vr.get('publishedTimeText', {}).get('simpleText') or '近期'
+                published = vr.get('publishedTimeText', {}).get('simpleText') or ''
+
+                # 严格解析真实发布时间，杜绝伪造成当前时间
+                real_pub_iso, is_recent_24h, is_recent_48h = parse_relative_time_info(published)
 
                 t_lower = title.lower()
                 if not any(re.search(r'\b' + re.escape(k) + r'\b', t_lower) if k.isascii() and len(k) <= 4 else (k in t_lower) for k in AI_CORE_TERMS):
                     continue
 
                 is_short = ('#shorts' in query.lower() or '#shorts' in t_lower or vr.get('reelItemRenderer') is not None)
-                title_zh = sanitize_video_title_zh(title, author, is_viral=True, is_short=is_short)
+                title_zh = sanitize_video_title_zh(title, author, is_viral=is_recent_48h, is_short=is_short, is_recent=is_recent_48h)
                 summary_zh = sanitize_video_summary_zh("", title, author)
                 summary_en = f"Live hands-on AI demonstration and technical tutorial by {author}: {title}"
+
+                # 真实时效标签：严禁对超过 48 小时视频贴“24h飙升”
+                tags = [author]
+                if is_recent_24h:
+                    tags.insert(0, "🔥 24h飙升")
+                elif is_recent_48h:
+                    tags.insert(0, "⚡ 48h实测")
+                else:
+                    tags.insert(0, "极客实操")
+                tags.append("YouTube Shorts" if is_short else "极客教程")
 
                 vids.append({
                     "id": f"yt_{vid}",
@@ -158,16 +242,17 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
                     "source": f"YouTube · {author}",
                     "views": views,
                     "metrics": {"views": views, "format": "9:16 竖屏短视频" if is_short else "16:9 深度长视频", "platform": "shorts" if is_short else "youtube"},
-                    "published": published,
-                    "raw_published_at": datetime.now(timezone.utc).isoformat(),
+                    "published": published or ("近期" if is_recent_48h else "精选教程"),
+                    "raw_published_at": real_pub_iso,
                     "url": f"https://www.youtube.com/watch?v={vid}",
                     "embed_url": f"https://www.youtube.com/embed/{vid}",
                     "image_url": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
                     "category": "videos",
                     "sub_type": "viral" if is_short else "hands_on_demo",
-                    "is_viral": True,
-                    "is_recent_48h": True,
-                    "tags": ["🔥 24h飙升", author, "YouTube Shorts" if is_short else "极客实操"],
+                    "is_viral": is_recent_48h,
+                    "is_recent_48h": is_recent_48h,
+                    "is_recent_24h": is_recent_24h,
+                    "tags": tags,
                     "content_snippet": summary_zh,
                     "summary_zh": summary_zh,
                     "summary_en": summary_en
@@ -181,10 +266,14 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
     return vids
 
 def fetch_dynamic_youtube_viral_videos() -> List[Dict[str, Any]]:
-    """并发感知全网爆款 AI 视频 (长视频 + Shorts)"""
+    """并发感知全网爆款 AI 视频 (长视频 + Shorts + 顶流创作者最新视频)"""
     vids = []
-    with ThreadPoolExecutor(max_workers=5) as executor:
+    with ThreadPoolExecutor(max_workers=6) as executor:
         futures = {executor.submit(search_youtube_topic, q, sp, 3): q for q, sp in SEARCH_TOPICS}
+        # 顶流创作者最新视频检索（每个创作者精准感知 1 条最新视频）
+        for q, sp in TOP_CREATOR_SEARCHES:
+            futures[executor.submit(search_youtube_topic, q, sp, 1)] = q
+            
         for fut in as_completed(futures):
             try:
                 res = fut.result()
@@ -1302,18 +1391,21 @@ VERIFIED_TIKTOK_AI_VIDEOS = [   {   'aspect_ratio': '9:16',
         'views': '1.6M+ 播放'}]
 
 def fetch_tiktok_viral_videos() -> List[Dict[str, Any]]:
-    """通过 Apify 官方 Actor 动态采集 TikTok 前沿 AI 爆款短视频，自带高可用基座"""
-    tokens = get_apify_tokens()
+    """通过 Apify 官方 Actor 动态采集 TikTok 前沿 AI 爆款短视频，自带高可用基座与真实验真"""
+    tokens = list(reversed(get_apify_tokens()))
     dynamic_items = []
+    now_utc = datetime.now(timezone.utc)
+    
     if tokens:
-        for tok in tokens[:1]:
-            url = f"https://api.apify.com/v2/acts/clockworks~free-tiktok-scraper/run-sync-get-dataset-items?token={tok}"
+        # 优先使用可用且未被封禁的 token (快速超时保护系统不被阻塞)
+        for tok in tokens[:2]:
+            url = f"https://api.apify.com/v2/acts/clockworks~free-tiktok-scraper/run-sync-get-dataset-items?token={tok}&timeout=8"
             payload = {
-                "hashtags": ["aitools", "aiagent", "cursorai", "claudecode", "deepseek"],
-                "resultsPerPage": 15
+                "hashtags": ["aiagent", "cursorai", "deepseek"],
+                "resultsPerPage": 6
             }
             try:
-                with httpx.Client(timeout=8.0) as client:
+                with httpx.Client(timeout=10.0) as client:
                     resp = client.post(url, json=payload)
                     if resp.status_code in (200, 201):
                         raw_items = resp.json()
@@ -1334,13 +1426,43 @@ def fetch_tiktok_viral_videos() -> List[Dict[str, Any]]:
                             views_str = f"{play_cnt:,} 播放" if play_cnt else "爆款播放"
                             likes_str = f"{digg_cnt:,} 点赞" if digg_cnt else "高赞"
 
+                            # 真实时间计算
+                            c_iso = it.get("createTimeISO")
+                            c_unix = it.get("createTime")
+                            if c_iso:
+                                raw_pub = c_iso
+                            elif c_unix:
+                                try:
+                                    raw_pub = datetime.fromtimestamp(int(c_unix), timezone.utc).isoformat()
+                                except Exception:
+                                    raw_pub = (now_utc - timedelta(days=2)).isoformat()
+                            else:
+                                raw_pub = (now_utc - timedelta(days=2)).isoformat()
+
+                            try:
+                                dt = datetime.fromisoformat(raw_pub.replace("Z", "+00:00"))
+                                age_hours = (now_utc - dt).total_seconds() / 3600.0
+                            except Exception:
+                                age_hours = 999.0
+
+                            is_recent_24h = (age_hours <= 24.0)
+                            is_recent_48h = (age_hours <= 48.0)
+
                             title_en = text[:80]
-                            title_zh = sanitize_video_title_zh(title_en, author_name, is_viral=True, is_short=True)
+                            title_zh = sanitize_video_title_zh(title_en, author_name, is_viral=is_recent_48h, is_short=True, is_recent=is_recent_48h)
                             summary_zh = sanitize_video_summary_zh(text, title_en, author_name)
                             summary_en = f"Viral TikTok AI demonstration by {author_name}: {title_en}"
 
                             web_url = it.get("webVideoUrl") or f"https://www.tiktok.com/{author_handle}/video/{vid}"
                             embed_url = f"https://www.tiktok.com/embed/v2/{vid}"
+
+                            tags = [author_name, "9:16竖屏"]
+                            if is_recent_24h:
+                                tags.insert(0, "🔥 24h飙升")
+                            elif is_recent_48h:
+                                tags.insert(0, "⚡ 48h爆款")
+                            else:
+                                tags.insert(0, "TikTok精选")
 
                             dynamic_items.append({
                                 "id": f"tiktok_{vid}",
@@ -1357,31 +1479,55 @@ def fetch_tiktok_viral_videos() -> List[Dict[str, Any]]:
                                 "source": f"TikTok · {author_name}",
                                 "views": views_str,
                                 "metrics": {"views": views_str, "likes": likes_str, "format": "9:16 竖屏爆款", "platform": "tiktok"},
-                                "raw_published_at": it.get("createTimeISO") or datetime.now(timezone.utc).isoformat(),
+                                "raw_published_at": raw_pub,
                                 "url": web_url,
                                 "embed_url": embed_url,
                                 "image_url": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800&q=80&auto=format&fit=crop",
                                 "category": "videos",
                                 "sub_type": "viral",
-                                "is_viral": True,
-                                "is_recent_48h": True,
-                                "tags": ["🔥 24h飙升", "TikTok爆款", author_name, "9:16竖屏"],
+                                "is_viral": is_recent_48h,
+                                "is_recent_48h": is_recent_48h,
+                                "is_recent_24h": is_recent_24h,
+                                "tags": tags,
                                 "content_snippet": summary_zh,
                                 "summary_zh": summary_zh,
                                 "summary_en": summary_en
                             })
                         if dynamic_items:
                             break
+                    elif resp.status_code == 403:
+                        # 当前 token 免费配额耗尽，自动轮换下一个
+                        continue
             except Exception:
-                pass
+                continue
 
-    # 融合动态抓取与验证基座
+    # 融合动态抓取与验证基座，并对所有内容执行严格时间真实验真
     seen_ids = set()
     combined = []
     for it in (dynamic_items + VERIFIED_TIKTOK_AI_VIDEOS):
         k = it.get("video_id")
         if k and k not in seen_ids:
             seen_ids.add(k)
+            # 严格时间校准：若属于基座兜底且已超过 48 小时，严禁打上 24h 飙升
+            raw_time = it.get("raw_published_at", "")
+            age_h = 999.0
+            if raw_time:
+                try:
+                    p_dt = datetime.fromisoformat(raw_time.replace("Z", "+00:00"))
+                    age_h = (now_utc - p_dt).total_seconds() / 3600.0
+                except Exception:
+                    pass
+            it["is_recent_48h"] = (age_h <= 48.0)
+            it["is_recent_24h"] = (age_h <= 24.0)
+            if not it["is_recent_48h"]:
+                it["tags"] = [t for t in it.get("tags", []) if "24h" not in t and "48h" not in t]
+                if "TikTok精选" not in it["tags"]:
+                    it["tags"].insert(0, "TikTok精选")
+                for key in ("title", "title_zh"):
+                    val = it.get(key, "")
+                    val = val.replace("【48h 极客实测】", "【精选短视频】").replace("【TikTok爆款】", "【精选短视频】")
+                    it[key] = val
+                it["is_viral"] = False
             combined.append(it)
     return combined
 
@@ -1390,23 +1536,31 @@ def interleave_videos_by_creator(videos: List[Dict[str, Any]], max_per_creator: 
     按创作者进行轮询交错 (Round-Robin Interleaving)，
     保证同一作者不连续出现，且同一作者在爆点专栏中受严格限额保护，
     确保前 10 条视频覆盖最大化的创作者多样性。
+    特别优化：严格将 48h 内真实最新视频置于最前，再无缝衔接经典高分教程。
     """
     if not videos:
         return []
 
     from collections import defaultdict
-    creator_buckets = defaultdict(list)
-    for v in videos:
-        creator_name = v.get("author") or "Unknown Creator"
-        if len(creator_buckets[creator_name]) < max_per_creator:
-            creator_buckets[creator_name].append(v)
+    
+    # 拆分为 48h 真实最新视频与历史教程/经典沉淀，分层进行创作者交错
+    recent_vids = [v for v in videos if v.get("is_recent_48h")]
+    evergreen_vids = [v for v in videos if not v.get("is_recent_48h")]
 
-    interleaved = []
-    keys = list(creator_buckets.keys())
-    while creator_buckets:
-        for k in list(keys):
-            if k in creator_buckets and creator_buckets[k]:
-                interleaved.append(creator_buckets[k].pop(0))
-                if not creator_buckets[k]:
-                    del creator_buckets[k]
-    return interleaved
+    def _interleave(v_list):
+        buckets = defaultdict(list)
+        for v in v_list:
+            c_name = v.get("author") or "Unknown Creator"
+            if len(buckets[c_name]) < max_per_creator:
+                buckets[c_name].append(v)
+        res = []
+        keys = list(buckets.keys())
+        while buckets:
+            for k in list(keys):
+                if k in buckets and buckets[k]:
+                    res.append(buckets[k].pop(0))
+                    if not buckets[k]:
+                        del buckets[k]
+        return res
+
+    return _interleave(recent_vids) + _interleave(evergreen_vids)
