@@ -21,6 +21,7 @@ import sys
 import re
 import json
 import html
+from datetime import datetime, timezone
 from typing import Dict, Any, List
 
 try:
@@ -30,6 +31,18 @@ except Exception:
     pass
 
 WORKSPACE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def parse_iso_date(val: Any) -> str:
+    if not val:
+        return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    s = str(val).strip()
+    if re.match(r'^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}', s):
+        if not s.endswith("Z") and "+" not in s and "-" not in s[10:]:
+            return s + "Z"
+        return s
+    if re.match(r'^\d{4}-\d{2}-\d{2}$', s):
+        return f"{s}T08:00:00Z"
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 def sanitize_for_en(text: str) -> str:
     """Removes any Chinese characters and clean up punctuation for English compliance."""
@@ -285,19 +298,90 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta name="twitter:image:alt" content="{escape(display_name)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
   
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "{escape(display_name)}",
-    "description": "{clean_meta_desc}",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "All",
-    "url": "{canonical_url}",
-    "image": ["{image_url}"]
+    "@graph": [
+      {{
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "AI News Radar",
+            "item": "https://ainewsradar.xyz/"
+          }},
+          {{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{"AI 落地工具" if is_zh else "Applied AI Tools"}",
+            "item": "https://ainewsradar.xyz{"/zh" if is_zh else ""}#tools"
+          }},
+          {{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{escape(display_name)}",
+            "item": "{canonical_url}"
+          }}
+        ]
+      }},
+      {{
+        "@type": "SoftwareApplication",
+        "name": "{escape(display_name)}",
+        "description": "{clean_meta_desc}",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "{escape(scenario)}",
+        "operatingSystem": "Web, Linux, macOS, Windows",
+        "url": "{canonical_url}",
+        "image": ["{image_url}"],
+        "offers": {{
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "{escape(pricing)}"
+        }},
+        "publisher": {{
+          "@type": "Organization",
+          "name": "AI News Radar",
+          "url": "https://ainewsradar.xyz"
+        }}
+      }},
+      {{
+        "@type": "FAQPage",
+        "mainEntity": [
+          {{
+            "@type": "Question",
+            "name": "{"What is " + escape(display_name) + "?" if not is_zh else escape(display_name) + " 是什么？"}",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "{escape(overview)}"
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "{"What are the key capabilities of " + escape(display_name) + "?" if not is_zh else escape(display_name) + " 的核心功能与优势是什么？"}",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "{escape(features or hook)}"
+            }}
+          }},
+          {{
+            "@type": "Question",
+            "name": "{"Who is " + escape(display_name) + " best for?" if not is_zh else escape(display_name) + " 适合哪些开发者与业务场景？"}",
+            "acceptedAnswer": {{
+              "@type": "Answer",
+              "text": "{escape(best_for or overview)}"
+            }}
+          }}
+        ]
+      }}
+    ]
   }}
   </script>
 </head>
@@ -328,7 +412,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <main class="max-w-4xl mx-auto px-4 py-8">
     
     <!-- Hero Card -->
-    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/SoftwareApplication">
       
       <!-- Preview Banner -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
@@ -544,6 +628,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     clean_meta_desc = escape(re.sub(r'<[^>]+>', '', summary)[:160])
     meta_title = f"{title} | AI News Radar"
+    iso_published = parse_iso_date(item.get("published_at") or item.get("raw_published_at") or item.get("date"))
 
     bullets_html = ""
     if fact_bullets:
@@ -562,14 +647,14 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 formatted_items.append(f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{escape(b_str)}</li>")
         bullet_items = "".join(formatted_items)
         bullets_html = f"""
-        <div class="mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40">
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="{briefing_title}" data-geocitation="true">
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>{briefing_title}</span>
           </h3>
-          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100">
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
             {bullet_items}
           </ul>
-        </div>
+        </section>
         """
 
     analysis_html = ""
@@ -678,22 +763,71 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta name="twitter:image:alt" content="{escape(title)}">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
   
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": "{escape(title)}",
-    "description": "{clean_meta_desc}",
-    "image": ["{image_url}"],
-    "url": "{canonical_url}",
-    "publisher": {{
-      "@type": "Organization",
-      "name": "AI News Radar",
-      "url": "https://ainewsradar.xyz"
-    }}
+    "@graph": [
+      {{
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "AI News Radar",
+            "item": "https://ainewsradar.xyz/"
+          }},
+          {{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "{"AI 行业快讯" if is_zh else "Breaking AI News"}",
+            "item": "https://ainewsradar.xyz{"/zh" if is_zh else ""}#news"
+          }},
+          {{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "{escape(title)}",
+            "item": "{canonical_url}"
+          }}
+        ]
+      }},
+      {{
+        "@type": "NewsArticle",
+        "headline": "{escape(title)}",
+        "description": "{clean_meta_desc}",
+        "image": ["{image_url}"],
+        "url": "{canonical_url}",
+        "datePublished": "{iso_published}",
+        "dateModified": "{iso_published}",
+        "inLanguage": "{"zh-CN" if is_zh else "en"}",
+        "mainEntityOfPage": "{canonical_url}",
+        "articleSection": "Artificial Intelligence",
+        "isBasedOn": "{source_target_url}",
+        "speakable": {{
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".executive-summary", "h1"]
+        }},
+        "author": {{
+          "@type": "Organization",
+          "name": "AI News Radar Editorial Team",
+          "url": "https://ainewsradar.xyz{"/zh/about" if is_zh else "/about"}"
+        }},
+        "publisher": {{
+          "@type": "NewsMediaOrganization",
+          "name": "AI News Radar",
+          "url": "https://ainewsradar.xyz",
+          "logo": {{
+            "@type": "ImageObject",
+            "url": "https://ainewsradar.xyz/favicon.ico"
+          }}
+        }}
+      }}
+    ]
   }}
   </script>
 </head>
@@ -724,7 +858,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <main class="max-w-4xl mx-auto px-4 py-8">
     
     <!-- Hero Article Card -->
-    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
       
       <!-- Preview Image -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">

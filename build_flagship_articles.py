@@ -116,6 +116,9 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
   <meta property="article:published_time" content="{date}T08:00:00+08:00">
   <meta property="article:author" content="{author}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="{'AI 资讯雷达 RSS' if is_zh else 'AI News Radar (Chinese Edition RSS)'}" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   {ADSENSE_SCRIPT}
   <script type="application/ld+json">
   {{
@@ -152,6 +155,10 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         "datePublished": "{date}T08:00:00+08:00",
         "dateModified": "{date}T08:00:00+08:00",
         "inLanguage": "{page_lang}",
+        "speakable": {{
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".brief-box", "h1"]
+        }},
         "author": {{
           "@type": "Person",
           "name": "{author}",

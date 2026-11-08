@@ -1,3 +1,6 @@
+# AI News Radar (https://ainewsradar.xyz) - Robots.txt
+# Optimized for Web Indexing & Generative Engine Optimization (GEO)
+
 User-agent: *
 Allow: /
 Disallow: /go
@@ -6,6 +9,50 @@ Disallow: /go?*
 Disallow: /r/
 Disallow: /r?*
 
+# --- Modern Generative AI Search & Answer Engine Crawlers ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# --- Traditional Major Search Engines ---
 User-agent: Googlebot
 Allow: /
 
@@ -15,10 +62,21 @@ Allow: /
 User-agent: BingPreview
 Allow: /
 
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
 User-agent: Mediapartners-Google
 Allow: /
 
 User-agent: Google-Display-AdsBot
 Allow: /
 
+# --- Sitemaps & AI Context Endpoints ---
 Sitemap: https://ainewsradar.xyz/sitemap.xml
+Sitemap: https://ainewsradar.xyz/news-sitemap.xml

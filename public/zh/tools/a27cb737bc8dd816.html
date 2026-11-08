@@ -39,19 +39,90 @@
   <meta name="twitter:image:alt" content="cc-haha">
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
   
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "cc-haha",
-    "description": "cc-haha 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +823 Stars，总计 14,974 Stars）。本地优先的跨平台 Claude Code / AI Agent 桌面工作台：多 Agent 协作、Git Worktree、代码，支持免费部署与使用。",
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "All",
-    "url": "https://ainewsradar.xyz/zh/tools/a27cb737bc8dd816",
-    "image": ["https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&fm=jpg&q=85"]
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "AI News Radar",
+            "item": "https://ainewsradar.xyz/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI 落地工具",
+            "item": "https://ainewsradar.xyz/zh#tools"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "cc-haha",
+            "item": "https://ainewsradar.xyz/zh/tools/a27cb737bc8dd816"
+          }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "cc-haha",
+        "description": "cc-haha 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +823 Stars，总计 14,974 Stars）。本地优先的跨平台 Claude Code / AI Agent 桌面工作台：多 Agent 协作、Git Worktree、代码，支持免费部署与使用。",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "💻 AI 编程与开发",
+        "operatingSystem": "Web, Linux, macOS, Windows",
+        "url": "https://ainewsradar.xyz/zh/tools/a27cb737bc8dd816",
+        "image": ["https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=630&fit=crop&fm=jpg&q=85"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "🟢 完全开源免费"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "AI News Radar",
+          "url": "https://ainewsradar.xyz"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "cc-haha 是什么？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "cc-haha 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +823 Stars，总计 14,974 Stars）。本地优先的跨平台 Claude Code / AI Agent 桌面工作台：多 Agent 协作、Git Worktree、代码，支持免费部署与使用。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "cc-haha 的核心功能与优势是什么？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "[&#x27;📈 社区热度指数级飙升：本周新增 +823 Stars (总星标 14,974)&#x27;, &#x27;🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装&#x27;, &#x27;⚡ 支持 ⚡ 命令行/一键执行，开箱即用&#x27;]"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "cc-haha 适合哪些开发者与业务场景？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "适合需要本地部署、定制源码或私有化运行 💻 AI 编程与开发 方案的工程师与技术团队"
+            }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
@@ -82,7 +153,7 @@
   <main class="max-w-4xl mx-auto px-4 py-8">
     
     <!-- Hero Card -->
-    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden">
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/SoftwareApplication">
       
       <!-- Preview Banner -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">

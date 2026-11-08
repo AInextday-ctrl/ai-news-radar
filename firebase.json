@@ -294,6 +294,15 @@
         ]
       },
       {
+        "source": "**/data/curated_column_highlights.json",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache, no-store, must-revalidate"
+          }
+        ]
+      },
+      {
         "source": "**/data/*.json",
         "headers": [
           {
@@ -303,7 +312,7 @@
         ]
       },
       {
-        "source": "sitemap.xml",
+        "source": "**/*sitemap*.xml",
         "headers": [
           {
             "key": "Content-Type",
@@ -311,7 +320,67 @@
           },
           {
             "key": "Cache-Control",
-            "value": "public, max-age=3600, stale-while-revalidate=7200"
+            "value": "public, max-age=1800, stale-while-revalidate=3600"
+          }
+        ]
+      },
+      {
+        "source": "**/feed*.xml",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/rss+xml; charset=utf-8"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=900, stale-while-revalidate=1800"
+          }
+        ]
+      },
+      {
+        "source": "**/rss*.xml",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/rss+xml; charset=utf-8"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=900, stale-while-revalidate=1800"
+          }
+        ]
+      },
+      {
+        "source": "**/feed.json",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=900, stale-while-revalidate=1800"
+          }
+        ]
+      },
+      {
+        "source": "**/llms*.txt",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain; charset=utf-8"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=1800, stale-while-revalidate=3600"
           }
         ]
       },

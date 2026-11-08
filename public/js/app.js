@@ -5392,9 +5392,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     // 预载入栏目双语精选数据
-    fetch('/data/curated_column_highlights.json?t=' + Math.floor(Date.now() / 60000), { cache: 'no-cache' })
+    fetch('/data/curated_column_highlights.json?t=' + Date.now(), { cache: 'no-cache' })
       .then(res => res.ok ? res.json() : null)
-      .then(d => { if (d) window._curatedColumnHighlights = d; })
+      .then(d => {
+        if (d) {
+          window._curatedColumnHighlights = d;
+          if (['tools', 'celebrity', 'news'].includes(currentTab)) {
+            renderColumnSpotlightBanner(currentTab);
+          }
+        }
+      })
       .catch(() => {});
 
     // 栏目级 AI 双语深度事实看板 (v2.0) 核心渲染器
@@ -5723,7 +5730,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   ${badgeText}
                 </span>
                 <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  ${isZh ? '精选三大不同领域黑马：办公PPT生成 · 代码AST知识图谱 · 本地智能剪映' : 'Top 3 Distinct Domains: Presentation · Code AST · Local Multimedia'}
+                  ${isZh ? (colData.domains_subtitle_zh || ('精选三大不同领域黑马：' + toolItems.map(t => (t.category_tag_zh || '').replace(/^[^\w\s一-龥]+\s*/, '')).filter(Boolean).join(' · '))) : (colData.domains_subtitle_en || ('Top 3 Distinct Domains: ' + toolItems.map(t => (t.category_tag_en || '').replace(/^[^\w\s]+\s*/, '')).filter(Boolean).join(' · ')))}
                 </span>
               </div>
             </div>
@@ -8850,7 +8857,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const [wfRes, promptRes, highlightsRes] = await Promise.all([
             fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
             fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch('/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
+            fetch('/data/curated_column_highlights.json?t=' + Date.now(), { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
           ]);
           if (highlightsRes && highlightsRes.ok) {
             try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}

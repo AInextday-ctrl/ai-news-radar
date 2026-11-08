@@ -4101,6 +4101,65 @@ def update_sitemap_with_all_pages(daily_dates: List[str], articles_meta: List[Di
     <priority>0.9</priority>
   </url>""")
 
+    # 1d. 实用工具与前沿资讯二级落地页收录 (public/tools & public/news)
+    pub_data_path = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+    if os.path.exists(pub_data_path):
+        try:
+            with open(pub_data_path, "r", encoding="utf-8") as f_meta:
+                m_payload = json.load(f_meta)
+                tools_data = m_payload.get("grouped", {}).get("tools", [])
+                news_data = m_payload.get("grouped", {}).get("news", [])
+                for t in tools_data:
+                    tid = t.get("id")
+                    if tid:
+                        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/tools/{tid}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/tools/{tid}"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>""")
+                        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/tools/{tid}</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/tools/{tid}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/tools/{tid}"/>
+    <lastmod>{now_date}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.80</priority>
+  </url>""")
+                for n in news_data:
+                    nid = n.get("id")
+                    if nid:
+                        n_date = n.get("date") or n.get("published_at")
+                        n_date = str(n_date)[:10] if n_date else now_date
+                        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/news/{nid}</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/{nid}"/>
+    <lastmod>{n_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.85</priority>
+  </url>""")
+                        entries.append(f"""  <url>
+    <loc>https://ainewsradar.xyz/zh/news/{nid}</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/{nid}"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/{nid}"/>
+    <lastmod>{n_date}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.80</priority>
+  </url>""")
+        except Exception as e:
+            print(f"⚠️ [Sitemap Engine] 追加工具与资讯落地页异常: {e}")
+
     xml_body = "\n".join(entries)
     full_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -4171,8 +4230,32 @@ def run_full_content_publication(items: Optional[List[Dict[str, Any]]] = None,
     except Exception as e:
         print(f"⚠️ [Landing Pages Generator] {e}")
 
-    # 5. 全量 Sitemap 生成
+    # 5. 全量 Sitemap 生成与 SEO / GEO 深度引擎协同
     update_sitemap_with_all_pages(daily_dates, articles_meta)
+    try:
+        from seo_geo_engine import (
+            generate_google_news_sitemap,
+            generate_rss_and_json_feeds,
+            generate_llms_manifests,
+            generate_robots_txt
+        )
+        pub_json = os.path.join(PUBLIC_DIR, "data", "latest_news.json")
+        tools_list = []
+        news_list = []
+        if os.path.exists(pub_json):
+            try:
+                with open(pub_json, "r", encoding="utf-8") as pf:
+                    pdata = json.load(pf)
+                    tools_list = pdata.get("grouped", {}).get("tools", [])
+                    news_list = pdata.get("grouped", {}).get("news", [])
+            except Exception:
+                pass
+        generate_google_news_sitemap(news_list)
+        generate_rss_and_json_feeds(news_list, tools_list, articles_meta)
+        generate_llms_manifests(news_list, tools_list, articles_meta)
+        generate_robots_txt()
+    except Exception as e:
+        print(f"⚠️ [SEO & GEO Pipeline] 执行异常: {e}")
 
     print("="*70)
     print("✅ [AdSense 高价值合规重构] 全量完成！网站已具备 30+ 篇高密度、图文并茂的独立深度文章！")
