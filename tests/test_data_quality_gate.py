@@ -357,6 +357,44 @@ def run_quality_gate_assertions(payload: dict) -> bool:
 
     print(f"✅ 断言 17 通过: 全站资讯零商业广告打赏残留且长文正文完整度 100% 达标")
 
+    # 18. 视频真实发布时间与防伪造标签门禁 (Truthful Video Publishing Date & Recency Consistency)
+    # 严禁将抓取时间当做发布时间，严禁对 1 年前、数月前的历史教学视频标注 TODAY、5m ago、🔥 24h飙升 或 【48h 极客实测】
+    videos = grouped.get("videos", [])
+    fake_time_videos = []
+    for v in videos:
+        vid = v.get("id")
+        pub = str(v.get("published") or "").lower()
+        title_zh = str(v.get("title_zh") or "")
+        badge = str(v.get("surge_badge") or "")
+        is_24h = v.get("is_recent_24h", False)
+        diff_h = float(v.get("diff_hours", 999.0))
+        
+        # 判断是否为历史文本 (包含年、月、周，或包含 > 2 天的相对时间)
+        is_historical = False
+        if any(ind in pub for ind in ["year", "yr", "month", "mo", "week", "wk", "年前", "月前", "周前"]):
+            is_historical = True
+        else:
+            m_day = re.search(r'(\d+)\s*(?:days?|天前)', pub)
+            if m_day and int(m_day.group(1)) > 2:
+                is_historical = True
+                
+        if is_historical:
+            violations = []
+            if is_24h:
+                violations.append("is_recent_24h=True")
+            if diff_h <= 48.0:
+                violations.append(f"diff_hours={diff_h} <= 48")
+            if "24h" in badge or "飙升" in badge:
+                violations.append(f"surge_badge='{badge}'")
+            if "48h 极客实测" in title_zh:
+                violations.append(f"title_zh='{title_zh}'")
+                
+            if violations:
+                fake_time_videos.append((vid, v.get("author"), pub, violations))
+
+    assert len(fake_time_videos) == 0, f"断言 18 失败：检测到 {len(fake_time_videos)} 个历史视频被伪造时效标签: {fake_time_videos[:3]}"
+    print(f"✅ 断言 18 通过: 视频真实发布时间与防伪造标签门禁达标 (全网 {len(videos)} 个视频零虚假 TODAY / 24h 飙升)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")
@@ -387,12 +425,29 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
     if "viral_ticker_tweets" in data and isinstance(data["viral_ticker_tweets"], list):
         data["viral_ticker_tweets"] = [it for it in data["viral_ticker_tweets"] if is_meaningful_tweet(it)]
 
-    # 3. 过滤非 AI 视频
+    # 3. 过滤非 AI 视频与清洗历史视频时效
     if "videos" in grouped and isinstance(grouped["videos"], list):
-        grouped["videos"] = [
-            v for v in grouped["videos"]
-            if not any(bad in str(v.get("title_zh") or v.get("title") or "").lower() for bad in ["(not ai)", "[not ai]", "not ai", "node won"])
-        ]
+        clean_vids = []
+        for v in grouped["videos"]:
+            if any(bad in str(v.get("title_zh") or v.get("title") or "").lower() for bad in ["(not ai)", "[not ai]", "not ai", "node won"]):
+                continue
+            pub = str(v.get("published") or "").lower()
+            is_hist = any(ind in pub for ind in ["year", "yr", "month", "mo", "week", "wk", "年前", "月前", "周前"])
+            if not is_hist:
+                m_day = re.search(r'(\d+)\s*(?:days?|天前)', pub)
+                if m_day and int(m_day.group(1)) > 2:
+                    is_hist = True
+            if is_hist:
+                v["is_recent_24h"] = False
+                v["is_recent_48h"] = False
+                if float(v.get("diff_hours", 0)) < 72.0:
+                    v["diff_hours"] = 720.0
+                if "24h" in str(v.get("surge_badge") or ""):
+                    v["surge_badge"] = "实战精讲"
+                if "48h 极客实测" in str(v.get("title_zh") or ""):
+                    v["title_zh"] = v["title_zh"].replace("48h 极客实测", "实战精讲")
+            clean_vids.append(v)
+        grouped["videos"] = clean_vids
 
     # 4. 清洗英文纯度
     for cat_name, items in grouped.items():

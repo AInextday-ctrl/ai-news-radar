@@ -64,6 +64,10 @@ jobs:
         run: |
           python content_publisher.py
 
+      - name: Verify Code Integrity & Regression Unit Tests
+        run: |
+          python tools/verify_code_integrity.py
+
       - name: Hard CI Data Quality & Strict Language Gate Audit
         run: |
           python tests/test_data_quality_gate.py || (echo "⚠️ 门禁初检触发自动自愈，执行精细清洗并重新渲染..." && python language_sentinel.py && python content_publisher.py && python tests/test_data_quality_gate.py)
