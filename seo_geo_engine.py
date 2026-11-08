@@ -833,6 +833,8 @@ Allow: /
 # --- Sitemaps & AI Context Endpoints ---
 Sitemap: https://ainewsradar.xyz/sitemap.xml
 Sitemap: https://ainewsradar.xyz/news-sitemap.xml
+Sitemap: https://ainewsradar.xyz/feed.xml
+Sitemap: https://ainewsradar.xyz/zh/feed.xml
 """
     robots_path = os.path.join(PUBLIC_DIR, "robots.txt")
     with open(robots_path, "w", encoding="utf-8") as f:
