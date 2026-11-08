@@ -1226,6 +1226,16 @@ def save_news(items: list):
                 if exist_sum and clean_t and not exist_sum.startswith(clean_t) and (not curr_sum or curr_sum.startswith(clean_t)):
                     it["summary_zh"] = exist_sum
 
+                # 严密保护历史视频的真实发布时间，绝不允许被后续爬虫抓取到的相对时间（如 17 min ago）覆盖篡改！
+                if it.get("category") == "videos" and existing.get("raw_published_at"):
+                    it["raw_published_at"] = existing["raw_published_at"]
+                    if existing.get("published"):
+                        it["published"] = existing["published"]
+                    if existing.get("is_recent_24h") is False:
+                        it["is_recent_24h"] = False
+                    if existing.get("is_recent_48h") is False:
+                        it["is_recent_48h"] = False
+
             # 严格分类配图策略：推文 (celebrity) 严禁挂载任何 Unsplash 假图与 t.co 裸短链，纯文字推文保留纯文字排版
             img_val = str(it.get("image_url") or "")
             if it.get("category") == "celebrity":

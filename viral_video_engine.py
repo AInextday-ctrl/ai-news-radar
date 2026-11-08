@@ -50,12 +50,13 @@ AI_CORE_TERMS = [
 
 # 1. 动态主题与时间窗口感知配置 (严格限制上传时间，杜绝抓取远古历史视频)
 SEARCH_TOPICS = [
-    ("AI tools tutorial workflow demo", "CAISBAgDEAE%3D"),      # 本周上传最新实操 (This week)
-    ("DeepSeek R1 workflow demo tutorial", "CAISBAgDEAE%3D"),  # 本周 DeepSeek 最新
-    ("Claude Code Cursor AI workflow demo", "CAISBAgDEAE%3D"), # 本周代码智能体
-    ("#shorts AI tools workflow viral", "CAISBAgDEAE%3D"),     # 本周 9:16 竖屏精讲
-    ("OpenAI Anthropic Gemini AI demo", "CAISBAgDEAE%3D"),     # 本周前沿模型演示
-    ("AI agents real world workflow tutorial", "CAISBAgDEAE%3D") # 本周智能体实操
+    ("AI tools tutorial workflow", "CAISBAgBEAE%3D"),      # 24小时内上传最新实操 (Today)
+    ("Claude Code Cursor AI tutorial", "CAISBAgBEAE%3D"), # 24小时内代码智能体 (Today)
+    ("DeepSeek R1 workflow demo", "CAISBAgBEAE%3D"),      # 24小时内 DeepSeek (Today)
+    ("AI agents real world tutorial", "CAISBAgBEAE%3D"),  # 24小时内智能体实操 (Today)
+    ("n8n AI automation tutorial", "CAISBAgBEAE%3D"),     # 24小时内自动化 (Today)
+    ("#shorts AI workflow viral", "CAISBAgBEAE%3D"),      # 24小时内竖屏实操 (Today)
+    ("OpenAI Anthropic Gemini AI demo", "CAISBAgDEAE%3D") # 本周前沿模型精讲 (This week)
 ]
 
 # 2. 顶流 AI 极客创作者最新视频检索 (按上传时间倒序排查最新发布)
