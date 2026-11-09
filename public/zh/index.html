@@ -119,7 +119,7 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//img.semafor.com/2b5b14edee95c6f393364812292a29c4b2f4c6a3-4938x3292.jpg%3Frect%3D0%2C350%2C4938%2C2592%26w%3D1200%26h%3D630%26q%3D75%26auto%3Dformat&w=480&output=webp&q=80" fetchpriority="high">
+  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/07/STKP210_JENSEN_HUANG_A.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%2C0%2C100%2C100&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style-v733.min.css">
   <link rel="preload" href="/zh/js/app-v737.min.js" as="script">
   <style>
@@ -634,7 +634,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 0.1h 前
+              YouTube 极客实测 · 0.3h 前
             </div>
           </div>
         </div>
@@ -698,7 +698,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 0.1h 前
+              YouTube 极客实测 · 0.3h 前
             </div>
           </div>
         </div>
@@ -1511,6 +1511,58 @@
             <!-- 快讯列表容器：升级为 2 列响应式杂志卡片流，阅读面积倍增 -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('ed2e82431c3bef91')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/07/STKP210_JENSEN_HUANG_A.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%2C0%2C100%2C100&w=480&output=webp&q=80" alt="黄仁勋卷入间谍风波，Nvidia紧急调查" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ The Verge AI</span>
+                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('ed2e82431c3bef91')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      黄仁勋卷入间谍风波，Nvidia紧急调查
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      黄仁勋被曝与疑似中国间谍的女高管存在不正当关系，Nvidia正就技术泄露风险进行内部调查
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('ed2e82431c3bef91')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>资讯概要</span>
+                    </button>
+                    <a href="https://www.theverge.com/ai-artificial-intelligence/1030422/nvidia-jensen-huang-ai-china-alice-huang" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      阅读原文 ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('eb44740d9abc7c52')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//9to5mac.com/wp-content/uploads/sites/6/2024/09/apple-intelligence.jpg%3Fquality%3D82%26strip%3Dall%26resize%3D1200%2C628&w=480&output=webp&q=80" alt="苹果AI开启付费模式，50美元买算力包" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="flex-1 flex flex-col justify-between min-w-0">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ 9to5Mac</span>
+                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
+                    </div>
+                    <button type="button" onclick="openAiNewsModal('eb44740d9abc7c52')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                      苹果AI开启付费模式，50美元买算力包
+                    </button>
+                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
+                      苹果在Logic Pro中推出50美元的AI使用扩展包，标志着苹果AI正式进入收费分水岭
+                    </p>
+                  </div>
+                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('eb44740d9abc7c52')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                      <span>📋</span>
+                      <span>资讯概要</span>
+                    </button>
+                    <a href="https://9to5mac.com/2026/11/09/apple-launches-50-intelligence-usage-packs-for-select-ai-features/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                      阅读原文 ↗
+                    </a>
+                  </div>
+                </div>
+              </article>
               <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('613f0daf43460e43')" itemscope itemtype="https://schema.org/NewsArticle">
                 <div>
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
@@ -1538,7 +1590,7 @@
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('078ea3af4161718e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//img.semafor.com/2b5b14edee95c6f393364812292a29c4b2f4c6a3-4938x3292.jpg%3Frect%3D0%2C350%2C4938%2C2592%26w%3D1200%26h%3D630%26q%3D75%26auto%3Dformat&w=480&output=webp&q=80" alt="黄仁勋卷入间谍风波，英伟达治理危机凸显" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//img.semafor.com/2b5b14edee95c6f393364812292a29c4b2f4c6a3-4938x3292.jpg%3Frect%3D0%2C350%2C4938%2C2592%26w%3D1200%26h%3D630%26q%3D75%26auto%3Dformat&w=480&output=webp&q=80" alt="黄仁勋卷入间谍风波，英伟达治理危机凸显" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1714,58 +1766,6 @@
                       <span>资讯概要</span>
                     </button>
                     <a href="https://arstechnica.com/security/2026/11/vulnerability-that-lets-hackers-ssh-into-linux-devices-is-under-active-exploitation/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      阅读原文 ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e70922a6e394ef62')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//wp.technologyreview.com/wp-content/uploads/2026/11/AP23200525499640.jpg%3Fresize%3D1200%2C600&w=480&output=webp&q=80" alt="数据中心遭抵制，真相是电力危机" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ MIT Tech Review</span>
-                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('e70922a6e394ef62')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      数据中心遭抵制，真相是电力危机
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      科技界将数据中心邻避运动归咎于文化矛盾，但实质问题在于AI扩张对电力基础设施的挤压
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('e70922a6e394ef62')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>资讯概要</span>
-                    </button>
-                    <a href="https://www.technologyreview.com/2026/11/09/1148194/the-backlash-about-data-centers-might-really-just-be-about-electricity/" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      阅读原文 ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9330a64447cca7c4')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/01/STK269_ANTHROPIC_2_B.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%252C10.732984293194%252C100%252C78.534031413613%26w%3D1200&w=480&output=webp&q=80" alt="Anthropic 表示，在预发布测试期间，神话 5.2 和寓言 5.2 形式化了费马大定理的证明，并解决了两个开放黑洞物理问题" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ The Verge</span>
-                      <span class="text-[10px] text-slate-400 font-mono">快讯</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('9330a64447cca7c4')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Anthropic 表示，在预发布测试期间，神话 5.2 和寓言 5.2 形式化了费马大定理的证明，并解决了两个开放黑洞物理问题
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Anthropic推出5.2版Claude模型，号称能攻克费马大定理证明及黑洞物理难题，性能显著提升
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('9330a64447cca7c4')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>资讯概要</span>
-                    </button>
-                    <a href="https://www.theverge.com/ai-artificial-intelligence/1030005/anthropic-claude-fable-mythos-5-2?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlZxTEU5c3dWWmMiLCJwIjoiL2FpLWFydGlmaWNpYWwtaW50ZWxsaWdlbmNlLzEwMzAwMDUvYW50aHJvcGljLWNsYXVkZS1mYWJsZS1teXRob3MtNS0yIiwiZXhwIjoxNzk0NjgzNDYyLCJpYXQiOjE3OTQyNTE0NjJ9.2LVCU8fAafdd4rkRbz6XCtLFvyK6Lugr0vpJRrELfpo&utm_medium=gift-link" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       阅读原文 ↗
                     </a>
                   </div>
