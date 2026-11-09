@@ -32,6 +32,14 @@ except Exception:
 
 WORKSPACE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+CLARITY_SCRIPT = """<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>"""
+
 def parse_iso_date(val: Any) -> str:
     if not val:
         return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -303,6 +311,7 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  {CLARITY_SCRIPT}
   
   <script type="application/ld+json">
   {{
@@ -768,6 +777,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
   <script src="https://cdn.tailwindcss.com"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  {CLARITY_SCRIPT}
   
   <script type="application/ld+json">
   {{

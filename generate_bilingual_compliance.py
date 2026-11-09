@@ -17,6 +17,13 @@ except Exception:
     pass
 
 ADSENSE_SCRIPT = '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>'
+CLARITY_SCRIPT = """<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>"""
 
 def build_english_about():
     return f"""<!DOCTYPE html>
@@ -35,6 +42,7 @@ def build_english_about():
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
     .prose p {{ margin-bottom: 1.1rem; line-height: 1.75; }}
@@ -169,6 +177,7 @@ def build_english_editorial_policy():
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
     .prose p {{ margin-bottom: 1.1rem; line-height: 1.75; }}
@@ -284,6 +293,7 @@ def build_english_contact():
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
   </style>
@@ -445,6 +455,7 @@ def build_english_privacy():
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
     .prose p {{ margin-bottom: 1.1rem; line-height: 1.75; }}
@@ -557,6 +568,7 @@ def build_english_terms():
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <style>
     body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }}
     .prose p {{ margin-bottom: 1.1rem; line-height: 1.75; }}

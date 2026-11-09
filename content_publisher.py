@@ -358,6 +358,13 @@ ZH_DAILY_DIR = os.path.join(ZH_DIR, "daily")
 ZH_ARTICLES_DIR = os.path.join(ZH_DIR, "articles")
 
 ADSENSE_SCRIPT = """<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>"""
+CLARITY_SCRIPT = """<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>"""
 ADSENSE_SLOT = ""
 
 
@@ -862,6 +869,7 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
   <meta property="article:author" content="AI 资讯雷达编辑部">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
@@ -1128,6 +1136,7 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
   <meta property="og:url" content="https://ainewsradar.xyz/articles">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
@@ -1477,6 +1486,7 @@ def backfill_historical_daily_briefings() -> List[str]:
   <meta property="og:url" content="{hub_canon}">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
@@ -1856,6 +1866,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <meta property="article:published_time" content="{date_slug}T08:00:00+08:00">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
+  {CLARITY_SCRIPT}
   <script type="application/ld+json">
   {{
     "@context": "https://schema.org",
