@@ -503,7 +503,7 @@ if __name__ == "__main__":
 
             if is_public:
                 STRIP_PUBLIC_KEYS = {
-                    'ai_analysis', 'original_content', 'article_content', 'article_content_zh',
+                    'original_content',
                     'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
                     'wechat_published_draft', 'processed_mark', 'processed_status',
                     'processed_at', 'media_checked', 'raw_content', 'raw_html'
@@ -514,20 +514,23 @@ if __name__ == "__main__":
                     c = {k: v for k, v in it.items() if k not in STRIP_PUBLIC_KEYS and v is not None}
                     cat = cat_hint or c.get('category')
                     if cat == 'celebrity':
-                        fte = c.get('full_text_en') or c.get('title_en') or ''
+                        fte = (c.get('full_text_en') or c.get('title_en') or '').strip()
                         if fte:
                             c['full_text_en'] = fte
                             for k in ['quote_en', 'summary_en', 'content_snippet', 'title_en']:
-                                if c.get(k) == fte: c.pop(k, None)
-                        ftz = c.get('full_text_zh') or c.get('title_zh') or ''
+                                if (c.get(k) or '').strip() == fte: c.pop(k, None)
+                        ftz = (c.get('full_text_zh') or c.get('title_zh') or '').strip()
                         if ftz:
                             c['full_text_zh'] = ftz
                             for k in ['quote_zh', 'summary_zh', 'title_zh']:
-                                if c.get(k) == ftz: c.pop(k, None)
+                                if (c.get(k) or '').strip() == ftz: c.pop(k, None)
                     elif cat == 'news':
                         if c.get('content_snippet') == c.get('summary_en'):
                             c.pop('content_snippet', None)
-                        c.pop('article_content_zh', None)
+                        if c.get('article_content') and len(c['article_content']) > 3500:
+                            c['article_content'] = c['article_content'][:3500] + '...'
+                        if c.get('article_content_zh') and len(c['article_content_zh']) > 2200:
+                            c['article_content_zh'] = c['article_content_zh'][:2200] + '...'
                     return c
 
                 category_caps = {"news": 30, "celebrity": 30, "tools": 25, "videos": 15, "prompts": 15, "viral_posts": 15}

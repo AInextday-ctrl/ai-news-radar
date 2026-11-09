@@ -2060,24 +2060,26 @@ def save_news(items: list):
         cat = target_cat or it.get('category')
         c_it = {k: v for k, v in it.items() if k not in STRIP_PUBLIC_INTERNAL_KEYS and v is not None}
         if cat in ('celebrity', 'viral_posts'):
-            fte = c_it.get('full_text_en') or c_it.get('title_en') or ''
+            fte = (c_it.get('full_text_en') or c_it.get('title_en') or '').strip()
             if fte:
-                for k in ['quote_en', 'summary_en', 'content_snippet']:
-                    if c_it.get(k) == fte:
-                        del c_it[k]
-            ftz = c_it.get('full_text_zh') or c_it.get('title_zh') or ''
+                c_it['full_text_en'] = fte
+                for k in ['quote_en', 'summary_en', 'content_snippet', 'title_en']:
+                    if (c_it.get(k) or '').strip() == fte:
+                        c_it.pop(k, None)
+            ftz = (c_it.get('full_text_zh') or c_it.get('title_zh') or '').strip()
             if ftz:
-                for k in ['quote_zh', 'summary_zh']:
-                    if c_it.get(k) == ftz:
-                        del c_it[k]
+                c_it['full_text_zh'] = ftz
+                for k in ['quote_zh', 'summary_zh', 'title_zh']:
+                    if (c_it.get(k) or '').strip() == ftz:
+                        c_it.pop(k, None)
         elif cat == 'news':
             if c_it.get('content_snippet') == c_it.get('summary_en'):
                 c_it.pop('content_snippet', None)
-            # 严格控制单篇长文上限，保证公共 payload 体积稳定受控
-            if c_it.get('article_content') and len(c_it['article_content']) > 6000:
-                c_it['article_content'] = c_it['article_content'][:6000] + '...'
-            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 4500:
-                c_it['article_content_zh'] = c_it['article_content_zh'][:4500] + '...'
+            # 严格控制单篇长文上限，保证公共 payload 体积在 850KB 限额内稳定受控
+            if c_it.get('article_content') and len(c_it['article_content']) > 3500:
+                c_it['article_content'] = c_it['article_content'][:3500] + '...'
+            if c_it.get('article_content_zh') and len(c_it['article_content_zh']) > 2200:
+                c_it['article_content_zh'] = c_it['article_content_zh'][:2200] + '...'
         return c_it
 
     all_archive_items = list(all_master_items)

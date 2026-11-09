@@ -5620,10 +5620,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 const tName = t.name || t.author;
                 const tTopic = isZh ? (t.topic_zh || '') : (t.topic_en || '');
                 return `
-                  <button type="button" onclick="window.switchActiveTitan(${idx})" class="titan-tab-btn ${isSelected ? 'active' : ''}">
+                  <button type="button" onclick="window.switchActiveTitan(${idx})" class="titan-tab-btn ${isSelected ? 'active' : ''} max-w-[220px]">
                     <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" class="w-5 h-5 rounded-full object-cover shrink-0 ring-1 ${isSelected ? 'ring-white' : 'ring-sky-400/40'}" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
-                    <span>${escapeHtml(tName)}</span>
-                    ${tTopic ? `<span class="text-[10px] opacity-80 font-normal">· ${escapeHtml(tTopic)}</span>` : ''}
+                    <span class="truncate font-bold shrink-0 max-w-[90px]">${escapeHtml(tName)}</span>
+                    ${tTopic ? `<span class="text-[10px] opacity-80 font-normal truncate max-w-[100px]" title="${escapeHtml(tTopic)}">· ${escapeHtml(tTopic)}</span>` : ''}
                   </button>
                 `;
               }).join('')}
@@ -9591,9 +9591,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '💡 AI 深度研判与产业影响' : '💡 AI In-Depth Takeaway');
         let finalInsight = cleanInsight;
         if (!hasValidInsight) {
-          finalInsight = isZh
-            ? `【产业研判与技术洞察】该事件凸显了AI技术在实际商业与工程化落地进程中的深层博弈。随着大模型在垂直领域的深度渗透，单纯的算力堆砌正让位于系统工程稳定性、商业回报率与安全边界，行业正在加速形成更理性的分工与价值评估体系。`
-            : `[Industry Impact] This development underscores the accelerating shift in enterprise AI from raw experimentation to high-stakes operational execution. As leading players compete across compute efficiency, business models, and talent retention, sustainable moats are increasingly defined by reliability, cost economics, and ecosystem resilience.`;
+          const whyText = isZh ? (analysis.elements_zh?.why || '') : (analysis.elements_en?.why || '');
+          if (whyText && whyText.length > 15) {
+            finalInsight = isZh ? `【产业动因研判】${whyText}` : `[Strategic Context] ${whyText}`;
+          } else {
+            finalInsight = isZh
+              ? `【前沿研判】围绕“${cleanTitle.slice(0, 32)}”的落地推进，标志着行业正在加速从概念验证跨入工程可靠性与真实生产力检验阶段。`
+              : `[Frontier Analysis] The execution around "${cleanTitle.slice(0, 48)}" marks an industry transition toward rigorous operational reliability and tangible ROI.`;
+          }
         }
         if (insightEl) insightEl.textContent = finalInsight;
       }

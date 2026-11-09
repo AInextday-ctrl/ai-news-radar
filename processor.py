@@ -652,17 +652,28 @@ import re
 from typing import Dict, Any, List, Tuple
 
 def clean_bullet_text(text: str) -> str:
-    """Strip redundant machine labels and prefix boilerplate from text."""
+    """Strip redundant machine labels and prefix boilerplate from text, keeping brackets balanced."""
     if not text:
         return ""
     t = str(text).strip()
     t = re.sub(r'^(主体与场景|核心事实|动因背景|深度影响|核心要点|关键事实|信源追踪|行业研判|核心突破|关键数据|信源与影响|Key Development|Core Event|Key Facts?|Breaking News|Key Milestone|Core Metrics|Specification|Industry Context)[\s:：·\-]+', '', t, flags=re.IGNORECASE)
-    # Remove leading quotes or unbalanced brackets
-    t = re.sub(r'^[“"‘\'「『（(]+', '', t)
-    # Remove trailing broken punctuation / conjunctions
     t = re.sub(r'[、，,与和以及且]+$', '', t)
-    # Strip trailing quotes if dangling
-    t = re.sub(r'[”"’\'」』）)]+$', '', t)
+    if t.startswith(('"', "'", '“', '‘')) and not t.endswith(('"', "'", '”', '’')):
+        t = t[1:].strip()
+    if t.endswith(('"', "'", '”', '’')) and not t.startswith(('"', "'", '“', '‘')):
+        t = t[:-1].strip()
+    if t.count('（') < t.count('）'):
+        t = re.sub(r'）+$', '', t)
+    if t.count('(') < t.count(')'):
+        t = re.sub(r'\)+$', '', t)
+    if t.count('（') > t.count('）'):
+        t += '）'
+    if t.count('(') > t.count(')'):
+        t += ')'
+    if t.count('【') > t.count('】'):
+        t += '】'
+    if t.count('[') > t.count(']'):
+        t += ']'
     return t.strip()
 
 def is_substantially_duplicate_bullet(t1: str, t2: str) -> bool:
