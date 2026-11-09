@@ -5380,12 +5380,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       };
       
       list.sort((a, b) => {
-        const pA = leaderPriority(a);
-        const pB = leaderPriority(b);
-        if (pA !== pB) return pB - pA;
         const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-        return timeB - timeA;
+        if (timeA !== timeB) return timeB - timeA;
+        const pA = leaderPriority(a);
+        const pB = leaderPriority(b);
+        return pB - pA;
       });
       
       return list;
@@ -5423,7 +5423,39 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 风格：深邃新闻工作台终端，左侧强调色边条，结构化核心事实 + 产业研判 + 多头条即时切换
       // =========================================================================
       if (tab === 'news') {
-        const headlines = (colData.headlines && colData.headlines.length > 0) ? colData.headlines : [colData.headline_item];
+        let headlines = (colData.headlines && colData.headlines.length > 0) ? [...colData.headlines] : (colData.headline_item ? [colData.headline_item] : []);
+        
+        // 严格 24h-48h 时效校验与动态回退：若头条过期或为空，动态回退至最新抓取资讯
+        const nowTs = Date.now();
+        const isFresh = headlines.length > 0 && headlines.some(h => {
+          const t = new Date(h.published_at || h.raw_published_at || 0).getTime();
+          return !isNaN(t) && (nowTs - t) <= 48 * 3600 * 1000 && (nowTs - t) >= -300000;
+        });
+
+        if (!isFresh && cachedData?.grouped?.news?.length > 0) {
+          const sortedNews = [...cachedData.grouped.news].sort((a, b) => {
+            const tA = new Date(a.raw_published_at || a.published_at || 0).getTime();
+            const tB = new Date(b.raw_published_at || b.published_at || 0).getTime();
+            return tB - tA;
+          });
+          headlines = sortedNews.slice(0, 3).map(it => ({
+            id: it.id,
+            title_zh: it.title_zh || it.title,
+            title_en: it.title_en || it.title,
+            url: it.url,
+            source: it.source || (isZh ? '权威信源' : 'Verified Source'),
+            published_at: it.raw_published_at || it.published_at,
+            tag_zh: it.tag_zh || '⚡ 突发快讯',
+            tag_en: it.tag_en || '⚡ Breaking News',
+            event_summary_zh: it.summary_zh || it.summary,
+            event_summary_en: it.summary_en || it.summary,
+            core_facts_zh: it.core_facts_zh || (it.points ? it.points.slice(0, 4) : []),
+            core_facts_en: it.core_facts_en || (it.points_en ? it.points_en.slice(0, 4) : []),
+            industry_impact_zh: it.industry_impact_zh || it.impact_zh || '',
+            industry_impact_en: it.industry_impact_en || it.impact_en || ''
+          }));
+        }
+
         if (!headlines || headlines.length === 0 || !headlines[0]) {
           bannerEl.classList.add('hidden');
           return;
@@ -5434,8 +5466,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         const title = isZh ? (item.title_zh || item.title_en) : (item.title_en || item.title_zh);
         const url = item.url || '#';
-        const source = item.source || 'The Information · 独家深度';
-        const publishedAt = item.published_at || '';
+        const source = item.source || (isZh ? '权威科技媒体 · 深度情报' : 'Industry Intel · Verified Source');
+        const publishedAt = item.published_at || item.raw_published_at || '';
+        const timeFormatted = publishedAt ? (formatTime(publishedAt, currentLang)?.display || publishedAt) : '';
         const eventSummary = isZh ? (item.event_summary_zh || '') : (item.event_summary_en || item.event_summary_zh || '');
         const facts = isZh ? (item.core_facts_zh || []) : (item.core_facts_en || []);
         const impact = isZh ? (item.industry_impact_zh || '') : (item.industry_impact_en || '');
@@ -5480,7 +5513,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-mono">
                   ${escapeHtml(source)}
                 </span>
-                ${publishedAt ? `<span class="text-xs font-mono text-slate-400 dark:text-slate-500">${escapeHtml(publishedAt)}</span>` : ''}
+                ${timeFormatted ? `<span class="text-xs font-mono text-slate-400 dark:text-slate-500">${escapeHtml(timeFormatted)}</span>` : ''}
               </div>
               <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" class="spotlight-discuss-btn" style="border-color: rgba(99, 102, 241, 0.7); color: #818cf8;">
                 <span>${sourceBtnText}</span>
@@ -5683,7 +5716,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <span>❤️ ${escapeHtml(m.likes || '0')}</span>
                 <span>👁️ ${escapeHtml(m.views || '0')}</span>
               </div>
-              <div>${escapeHtml(publishedAt)}</div>
+              ${publishedAt ? `<div class="font-mono">${escapeHtml(formatTime(publishedAt, currentLang)?.display || publishedAt)}</div>` : ''}
             </div>
           </div>
         `;
@@ -7303,11 +7336,41 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     // 专门卡片渲染：9:16 竖屏手机卡片 (Shorts & TikTok 沉浸式视效)
     // ==========================================
+    function formatVideoTime(item, lang = 'zh') {
+      const pub = String(item.published || '').trim();
+      const raw = item.raw_published_at;
+
+      // 1. 若原生发布文本明确指明是历史视频 (如 1y ago, 8mo ago, 3w ago, 2 years ago, 1年前, 8个月前, 3周前, 5天前)
+      const isOldText = pub && /(?:year|yr|y\b|month|mo\b|week|wk|w\b|\d+\s*d\b|天前|月前|年前|周前)/i.test(pub);
+      if (isOldText) {
+        let displayPub = pub.replace(/^Streamed\s*/i, '').trim();
+        if (lang === 'zh') {
+          displayPub = displayPub
+            .replace(/(\d+)\s*(?:years?|yrs?|y)\s*ago/i, '$1 年前')
+            .replace(/(\d+)\s*(?:months?|mos?|mo)\s*ago/i, '$1 个月前')
+            .replace(/(\d+)\s*(?:weeks?|wks?|w)\s*ago/i, '$1 周前')
+            .replace(/(\d+)\s*(?:days?|d)\s*ago/i, '$1 天前');
+        }
+        return { display: displayPub, exactTime: displayPub, relative: displayPub, isToday: false, isRecent24h: false };
+      }
+
+      // 2. 正常时间差计算
+      const base = formatTime(raw, lang);
+      const isReallyToday = Boolean(base.isToday && (item.is_recent_24h === true || /(?:hours?|hrs?|h ago|mins?|m ago|刚刚|小时前|分钟前)/i.test(pub)));
+      base.isToday = isReallyToday;
+      base.isRecent24h = isReallyToday;
+      if (!isReallyToday && pub) {
+        base.relative = pub;
+        base.display = pub;
+      }
+      return base;
+    }
+
     function renderVerticalVideoCard(item) {
       const isZh = currentLang === 'zh';
       const t = I18N[currentLang];
       const title = formatVideoTitle(item, currentLang);
-      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatVideoTime(item, currentLang);
       const isTikTok = item.platform === 'tiktok' || (item.embed_url && item.embed_url.includes('tiktok.com')) || (item.url && item.url.includes('tiktok.com'));
       const platformType = isTikTok ? 'tiktok' : 'shorts';
       const cleanSource = item.author || item.source || (isTikTok ? "TikTok Creator" : "YouTube Creator");
@@ -7410,7 +7473,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const t = I18N[currentLang];
       const title = formatVideoTitle(item, currentLang);
       const summary = (isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || "";
-      const timeObj = formatTime(item.raw_published_at, currentLang);
+      const timeObj = formatVideoTime(item, currentLang);
       const todayBadge = timeObj.isToday ? `<span class="px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 text-[9px] font-bold shrink-0">${t.todayTag}</span>` : '';
       const cleanSource = item.author || item.source || "";
       const skillTag = isZh
@@ -7480,11 +7543,19 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             ` : ''}
           </div>
 
-          ${item.tags && item.tags.length ? `
+          ${(() => {
+            const rawTags = item.tags || [];
+            const safeTags = rawTags.filter(tag => {
+              if (!timeObj.isRecent24h && (tag.includes('24h') || tag.includes('飙升') || tag.includes('48h'))) return false;
+              return true;
+            });
+            if (!safeTags.length) return '';
+            return `
             <div class="flex items-center gap-1.5 flex-wrap pt-1">
-              ${item.tags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-200 dark:border-slate-800 transition-colors">#${tag}</button>`).join('')}
+              ${safeTags.map(tag => `<button type="button" onclick="event.stopPropagation(); executeTagSearch('${tag}')" class="text-[9px] font-medium px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-900/90 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-200 dark:border-slate-800 transition-colors">#${tag}</button>`).join('')}
             </div>
-          ` : ''}
+            `;
+          })()}
         </article>
       `;
     }
@@ -7607,7 +7678,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         'liveportrait', 'mineru', 'aider', 'openhands', 'tripo3d', 'triposr'
       ]);
       const getToolTime = (it) => {
-        const tm = it.raw_published_at || it.processed_at || it.published_at || it.crawled_at;
+        const tm = it.raw_published_at || it.published_at || it.date || it.created_at || '';
         if (!tm) return 0;
         const d = new Date(tm).getTime();
         return isNaN(d) ? 0 : d;
@@ -7711,12 +7782,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const isLegA = a.generation_tier === 'legacy' ? 1 : 0;
         const isLegB = b.generation_tier === 'legacy' ? 1 : 0;
         if (isLegA !== isLegB) return isLegA - isLegB;
-        const scoreA = Number(a.model_tier_score) || 80;
-        const scoreB = Number(b.model_tier_score) || 80;
-        if (scoreB !== scoreA) return scoreB - scoreA;
         const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
         const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-        return timeB - timeA;
+        if (timeA !== timeB) return timeB - timeA;
+        const scoreA = Number(a.model_tier_score) || 80;
+        const scoreB = Number(b.model_tier_score) || 80;
+        return scoreB - scoreA;
       });
 
       const displayPrompts = list.slice(0, 3);
@@ -7884,8 +7955,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       // 4. 渲染“综合全景”模式 (核心：首页严格展示重点推荐，与天梯榜等高对齐，各板块均支持一键直达完整专区)
       // A. 快讯板块 (News) - 与天梯图等高自适应，展示最新 18 条高价值快讯
       try {
-        const recentNews = allNews.filter(it => isWithin24Hours(it.raw_published_at));
-        const poolNews = recentNews.length >= 6 ? recentNews : allNews;
+        const sortedNews = [...allNews].sort((a, b) => {
+          const tA = new Date(a.raw_published_at || a.published_at || 0).getTime();
+          const tB = new Date(b.raw_published_at || b.published_at || 0).getTime();
+          return tB - tA;
+        });
+        const recentNews = sortedNews.filter(it => isWithin24Hours(it.raw_published_at));
+        const poolNews = recentNews.length >= 6 ? recentNews : sortedNews;
         const displayNews = poolNews.slice(0, 10);
         const streamNews = document.getElementById('stream-news');
         if (streamNews) {
@@ -8283,7 +8359,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       if (tab === 'news') {
-        const fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
+        let fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
+        fullList.sort((a, b) => {
+          const timeA = new Date(a.raw_published_at || a.published_at || 0).getTime();
+          const timeB = new Date(b.raw_published_at || b.published_at || 0).getTime();
+          return timeB - timeA;
+        });
         const totalItems = fullList.length;
         if (totalItems === 0) {
           container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
@@ -8483,7 +8564,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
 
         const getToolTime = (it) => {
-          const t = it.raw_published_at || it.processed_at || it.published_at || it.crawled_at;
+          const t = it.raw_published_at || it.published_at || it.date || it.created_at || '';
           if (!t) return 0;
           const d = new Date(t).getTime();
           return isNaN(d) ? 0 : d;
@@ -8541,6 +8622,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } else if (tab === 'videos') {
         let rawList = (cachedData.grouped?.videos || cachedData.videos || []).filter(it => !it.is_prompt);
         let allRankedList = dedupVideoItems(filterList(rawList));
+        allRankedList.sort((a, b) => {
+          const tA = new Date(a.raw_published_at || a.published_at || 0).getTime();
+          const tB = new Date(b.raw_published_at || b.published_at || 0).getTime();
+          return tB - tA;
+        });
 
         const isYtItem = it => (it.platform === 'youtube' || it.platform === 'shorts' || (it.url && (it.url.includes('youtube.com') || it.url.includes('youtu.be'))) || (it.embed_url && it.embed_url.includes('youtube')) || (it.platform !== 'tiktok' && !(it.url && it.url.includes('tiktok.com'))));
         const isVerticalItem = it => (it.aspect_ratio === '9:16' || it.platform === 'tiktok' || it.platform === 'shorts' || (it.url && it.url.includes('tiktok.com')));
@@ -8762,12 +8848,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         let list = filterList(rawList);
         list.sort((a, b) => {
-          const scoreA = Number(a.model_tier_score) || 80;
-          const scoreB = Number(b.model_tier_score) || 80;
-          if (scoreB !== scoreA) return scoreB - scoreA;
           const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
           const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-          return timeB - timeA;
+          if (timeA !== timeB) return timeB - timeA;
+          const scoreA = Number(a.model_tier_score) || 80;
+          const scoreB = Number(b.model_tier_score) || 80;
+          return scoreB - scoreA;
         });
 
         const totalItems = list.length;

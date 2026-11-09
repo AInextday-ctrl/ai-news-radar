@@ -958,6 +958,8 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
 def extract_top_three(items: list, exclude_ids: set = None, blacklist_keywords: set = None) -> list:
     """
     精选当天 Top 3 重磅早报资讯 (晨间必读)：
+    【严格 24 小时真实发布时效】以文章实际发布时间 (raw_published_at) 为第一基准排序，
+    严格杜绝历史旧闻、伪造时间或抓取整理时间排榜！
     【跨栏目去重】严格排除 Topic Focus 与 Hero Showcase 中已使用的条目，
     呈现 3 个来自不同领域、互不雷同的真实重磅突破！
     """
@@ -966,24 +968,49 @@ def extract_top_three(items: list, exclude_ids: set = None, blacklist_keywords: 
     if blacklist_keywords is None:
         blacklist_keywords = set()
 
-    # 优先从 news 中挑选 hot_score 最高的 3 篇独立大事件
-    news_candidates = [
+    now_ts = datetime.now(timezone.utc).timestamp()
+
+    # 1. 严格限定在 24 小时以内发布的行业快讯
+    news_candidates_24h = [
         it for it in items 
         if it.get("category") == "news" 
         and str(it.get("id") or "") not in exclude_ids
+        and (now_ts - parse_time_for_sort(it)) <= 86400
+        and (now_ts - parse_time_for_sort(it)) >= -300
     ]
 
+    # 若 24h 内不足 3 篇，优雅放宽至 48 小时
+    if len(news_candidates_24h) >= 3:
+        news_candidates = news_candidates_24h
+    else:
+        news_candidates_48h = [
+            it for it in items 
+            if it.get("category") == "news" 
+            and str(it.get("id") or "") not in exclude_ids
+            and (now_ts - parse_time_for_sort(it)) <= 172800
+            and (now_ts - parse_time_for_sort(it)) >= -300
+        ]
+        news_candidates = news_candidates_48h if len(news_candidates_48h) >= 3 else [
+            it for it in items 
+            if it.get("category") == "news" 
+            and str(it.get("id") or "") not in exclude_ids
+        ]
+
     def top_news_score(it):
-        s = it.get("hot_score", 3) * 100
-        # 奖励来自 Tier-1 权威信源
+        # 1. 文章真实发布时间作为首要基准：越新鲜分越高
+        pub_ts = parse_time_for_sort(it)
+        age_hours = max(0.0, (now_ts - pub_ts) / 3600.0)
+        # 每老一小时衰减 50 分，保证同等级别下几小时前发布的全新快讯绝对排在前面
+        freshness_score = 3000.0 - (age_hours * 50.0)
+
+        # 2. 辅以热度与信源权重微调
+        s = freshness_score + it.get("hot_score", 3) * 20
         source_lower = (it.get("source") or "").lower()
         if any(ts in source_lower for ts in ["openai", "anthropic", "deepmind", "google", "reuters", "bloomberg", "decoder", "techcrunch", "the verge"]):
-            s += 50
-        # 如果标题与当前大议题冲突，轻微降权避免同质化
+            s += 30
         t_low = (it.get("title") or "").lower()
         if any(kw in t_low for kw in blacklist_keywords if len(kw) >= 4):
-            s -= 40
-        s += parse_time_for_sort(it) / 100000
+            s -= 50
         return s
 
     news_candidates.sort(key=top_news_score, reverse=True)
@@ -992,9 +1019,10 @@ def extract_top_three(items: list, exclude_ids: set = None, blacklist_keywords: 
     seen_sources = set()
     for it in news_candidates:
         src = (it.get("source") or "").lower()
-        if src in seen_sources and len(result) < 3:
+        if src in seen_sources and len(result) < 3 and len(news_candidates) > 3:
             continue
-        seen_sources.add(src)
+        if src:
+            seen_sources.add(src)
         card = dict(it)
         if not card.get("badge_zh"): card["badge_zh"] = "⚡ 重磅聚焦" if len(result) == 0 else "🔥 行业突破"
         if not card.get("badge_en"): card["badge_en"] = "⚡ Lead Breakthrough" if len(result) == 0 else "🔥 Industry Pick"
@@ -1002,11 +1030,14 @@ def extract_top_three(items: list, exclude_ids: set = None, blacklist_keywords: 
         if len(result) >= 3:
             break
 
-    # 若不足 3 篇，从其他资讯中补足
+    # 若不足 3 篇，从候选池顺位补足
     if len(result) < 3:
         for it in news_candidates:
             if it.get("id") not in {r.get("id") for r in result}:
-                result.append(dict(it))
+                card = dict(it)
+                if not card.get("badge_zh"): card["badge_zh"] = "⚡ 突发快讯"
+                if not card.get("badge_en"): card["badge_en"] = "⚡ Breaking News"
+                result.append(card)
                 if len(result) >= 3:
                     break
 
