@@ -23,7 +23,7 @@ concurrency:
 jobs:
   auto-update:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 15
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -79,12 +79,12 @@ jobs:
           git add data/ public/
           if ! git diff --quiet || ! git diff --staged --quiet; then
             git commit -m "🤖 自动同步最新 AI 资讯与静态 SEO 索引 [skip ci]"
-            if ! git pull --rebase origin main; then
-              echo "⚠️ 检测到远程仓库在此次运行期间已被更新的提交修改，主动让步放弃此次合并，下一个 8 分钟自动化周期将拉取最新基线。"
-              git rebase --abort
-              exit 0
+            if ! git pull --rebase -X ours origin main; then
+              echo "⚠️ 检测到远程仓库在此次运行期间已被更新的提交修改，尝试智能合并最新提交..."
+              git rebase --abort || true
+              git pull --no-rebase -X ours origin main --no-edit || true
             fi
-            git push || (git pull --rebase origin main && git push) || (echo "⚠️ Git push 遇并发提交占用，主动让步由后续周期同步。" && exit 0)
+            git push origin main || (git pull --rebase -X ours origin main && git push origin main) || echo "⚠️ Git push 遇并发提交占用，主动让步由后续周期同步。"
           fi
 
       - name: Deploy to Firebase Hosting
@@ -96,5 +96,5 @@ jobs:
             echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
           else
             echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
-            npx -y firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || (echo "⚠️ 首次部署出现网络抖动，5秒后自动重试..." && sleep 5 && npx -y firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)
+            npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive) || (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)
           fi
