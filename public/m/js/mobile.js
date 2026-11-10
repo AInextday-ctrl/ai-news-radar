@@ -173,7 +173,7 @@
         feedContainer.innerHTML = renderSkeleton();
       }
       try {
-        const url = `/data/latest_news.json?t=${Date.now()}`;
+        const url = forceRefresh ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
         const res = await fetch(url);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         cachedData = await res.json();
@@ -314,11 +314,11 @@
     let htmlCards = '';
 
     if (currentTab === 'news') {
-      htmlCards = visibleItems.map(it => renderNewsCard(it)).join('');
+      htmlCards = visibleItems.map((it, idx) => renderNewsCard(it, idx)).join('');
     } else if (currentTab === 'social') {
-      htmlCards = visibleItems.map(it => renderSocialCard(it)).join('');
+      htmlCards = visibleItems.map((it, idx) => renderSocialCard(it, idx)).join('');
     } else if (currentTab === 'videos') {
-      htmlCards = visibleItems.map(it => renderVideoCard(it)).join('');
+      htmlCards = visibleItems.map((it, idx) => renderVideoCard(it, idx)).join('');
     } else if (currentTab === 'top') {
       htmlCards = visibleItems.map((it, idx) => renderTopCard(it, idx)).join('');
     }
@@ -348,7 +348,7 @@
   }
 
   // 9. Card Renderers
-  function renderNewsCard(item) {
+  function renderNewsCard(item, idx = 0) {
     const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
     const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
     const source = escapeHtml(item.source || 'AI Radar');
@@ -385,7 +385,7 @@
 
         ${imgUrl ? `
           <div class="rounded-xl overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800 mb-3">
-            <img src="${imgUrl}" alt="${title}" class="w-full h-full object-cover" loading="lazy" onerror="this.parentElement.style.display='none'">
+            <img src="${imgUrl}" width="480" height="270" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.parentElement.style.display='none'">
           </div>
         ` : ''}
 
@@ -404,7 +404,7 @@
     `;
   }
 
-  function renderSocialCard(item) {
+  function renderSocialCard(item, idx = 0) {
     const authorName = escapeHtml(item.author || 'AI Pioneer');
     const authorHandle = escapeHtml(item.author_handle || '');
     const authorRole = escapeHtml(isZh ? (item.author_role || item.author_role_en || '') : (item.author_role_en || item.author_role || ''));
@@ -422,7 +422,7 @@
       <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs touch-card transition-all">
         <div class="flex items-start justify-between mb-2.5">
           <div class="flex items-center gap-2.5">
-            <img src="${avatar}" alt="${authorName}" class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700 bg-slate-100" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=vip'">
+            <img src="${avatar}" width="40" height="40" decoding="async" alt="${authorName}" class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700 bg-slate-100" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=vip'">
             <div>
               <div class="flex items-center gap-1">
                 <span class="font-bold text-sm text-slate-900 dark:text-slate-100">${authorName}</span>
@@ -448,7 +448,7 @@
 
         ${mediaList.length > 0 ? `
           <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-100 dark:bg-slate-800">
-            <img src="${optimizeImageUrl(mediaList[0], 640)}" alt="Tweet media" class="w-full h-full object-cover" loading="lazy">
+            <img src="${optimizeImageUrl(mediaList[0], 640)}" width="640" height="360" alt="Tweet media" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
           </div>
         ` : ''}
 
@@ -466,7 +466,7 @@
     `;
   }
 
-  function renderVideoCard(item) {
+  function renderVideoCard(item, idx = 0) {
     const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
     const author = escapeHtml(item.author || 'AI Creator');
     const timeAgo = formatTimeAgo(item.raw_published_at);
@@ -483,7 +483,7 @@
       >
         <div class="relative aspect-video bg-slate-900">
           ${imgUrl ? `
-            <img src="${imgUrl}" alt="${title}" class="w-full h-full object-cover" loading="lazy">
+            <img src="${imgUrl}" width="640" height="360" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
           ` : ''}
           <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
             <div class="w-12 h-12 rounded-full bg-rose-600/90 text-white flex items-center justify-center text-lg pl-1 shadow-lg">

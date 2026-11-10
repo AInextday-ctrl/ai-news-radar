@@ -47,7 +47,7 @@ def format_static_tool_card(it: dict, is_zh: bool) -> str:
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl text-emerald-400">🛠️</div>
         </div>
-        <img src="{img_src}"{fallback_attr} alt="{app_name}" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){{ this.src = this.dataset.fallback; }} else {{ this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }}">
+        <img src="{img_src}"{fallback_attr} alt="{app_name}" width="480" height="270" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){{ this.src = this.dataset.fallback; }} else {{ this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }}">
         <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
           <div class="flex items-center space-x-1.5 border-b border-slate-800/70 pb-1">
             <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
@@ -115,7 +115,7 @@ def format_static_video_card(it: dict, is_zh: bool) -> str:
     return f"""
     <article class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between group border border-slate-200/80 dark:border-slate-800/80 hover:border-rose-500/60 transition-all duration-300 shadow-sm hover:shadow-xl hover:shadow-rose-500/10 cursor-pointer">
       <div class="relative w-full aspect-video bg-slate-950 overflow-hidden shrink-0" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')">
-        <img src="{poster}" alt="{title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+        <img src="{poster}" alt="{title}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async">
         <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-colors flex items-center justify-center">
           <div class="w-8 h-8 rounded-full bg-red-600/90 text-white flex items-center justify-center text-xs shadow-lg group-hover:scale-110 transition-transform">▶</div>
         </div>
@@ -2211,7 +2211,7 @@ def format_viral_page_card(it: dict, is_zh: bool, card_idx: int = 0) -> str:
         opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(tw_img)}&w=240&output=webp&q=80"
         thumb_html = f"""
         <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('{tw_img}', event)" title="{'点击放大高清原图' if is_zh else 'Click to view full image'}">
-          <img src="{opt_img}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+          <img src="{opt_img}" alt="Tweet media" width="72" height="52" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.closest('.tweet-thumb-box')?.remove();">
         </div>"""
     elif it.get("has_video") or it.get("video_url"):
         thumb_html = f"""
@@ -2531,7 +2531,7 @@ def format_lead_video_card(lead_media: dict, is_zh: bool) -> str:
 
       <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
         <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('{embed_url}', '{title_esc}', 'youtube', '{url}')" title="{'点击就地影院播放' if is_zh else 'Click to play in theater mode'}">
-          <img src="{poster_url}" alt="{title}" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager">
+          <img src="{poster_url}" alt="{title}" width="88" height="54" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='{fallback_poster}'" loading="eager" fetchpriority="high" decoding="async">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
             <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
           </div>
@@ -3055,9 +3055,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
-                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
-                else:
-                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
 
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3368,13 +3366,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 en_content
             )
 
-        # 注入首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
-        if lcp_image_en_url:
-            lcp_preload_tag = f'<link rel="preload" as="image" href="{lcp_image_en_url}" fetchpriority="high">'
-            if 'rel="preload" as="image"' in en_content:
-                en_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, en_content)
+        # 移除会抢占首屏带宽的折叠区图片 preload，并写入 ssr-updated 版本元数据避免前端重复全页重绘
+        en_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', en_content)
+        ssr_updated_at = safe_text(str((_nd or payload).get("updated_at") or ""), 64)
+        if ssr_updated_at:
+            ssr_meta_tag = f'<meta name="ssr-updated" content="{ssr_updated_at}">'
+            if 'name="ssr-updated"' in en_content:
+                en_content = re.sub(r'<meta name="ssr-updated" [^>]*>', ssr_meta_tag, en_content)
             else:
-                en_content = en_content.replace('<link rel="stylesheet" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="stylesheet" href="/css/style.min.css"')
+                en_content = en_content.replace('</head>', f'  {ssr_meta_tag}\n</head>')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:
@@ -3643,9 +3643,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
-                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
-                else:
-                    img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display=\'none\'; else this.style.display=\'none\';"></div>'
+                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
 
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3908,13 +3906,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 zh_content
             )
 
-        # 注入中文首张快讯大图 LCP preload，让浏览器在解析 HTML 阶段即抢先发起高优先级请求
-        if lcp_image_zh_url:
-            lcp_preload_tag = f'<link rel="preload" as="image" href="{lcp_image_zh_url}" fetchpriority="high">'
-            if 'rel="preload" as="image"' in zh_content:
-                zh_content = re.sub(r'<link rel="preload" as="image" [^>]*>', lcp_preload_tag, zh_content)
+        # 移除会抢占首屏带宽的折叠区图片 preload，并写入 ssr-updated 版本元数据避免前端重复全页重绘
+        zh_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', zh_content)
+        ssr_updated_at_zh = safe_text(str((_nd or payload).get("updated_at") or ""), 64)
+        if ssr_updated_at_zh:
+            ssr_meta_tag_zh = f'<meta name="ssr-updated" content="{ssr_updated_at_zh}">'
+            if 'name="ssr-updated"' in zh_content:
+                zh_content = re.sub(r'<meta name="ssr-updated" [^>]*>', ssr_meta_tag_zh, zh_content)
             else:
-                zh_content = zh_content.replace('<link rel="stylesheet" href="/css/style.min.css"', f'{lcp_preload_tag}\n  <link rel="stylesheet" href="/css/style.min.css"')
+                zh_content = zh_content.replace('</head>', f'  {ssr_meta_tag_zh}\n</head>')
 
         # 静态预渲染各分类与社交角标数量，杜绝首屏全0
         if _nd:

@@ -857,7 +857,7 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     
     header_title = "🔥 24h 核心话题全景透视" if is_zh else "🔥 24h Topic Focus & Perspectives"
     badge_title = "TOP 3 智库专题" if is_zh else "TOP 3 DOSSIERS"
-    header_desc = "· 今日真实爆发事实 · 大V观点立场对撞 · 关联情报直达" if is_zh else "· Today's Real Breakthroughs · Viewpoints Collision · Linked Bundles"
+    header_desc = "· 事件脉络 · 大V观点立场对撞 · 关联情报束" if is_zh else "· Core Context · Viewpoints Collision · Linked Bundles"
     btn_collapse_txt = "▲ 收起" if is_zh else "▲ Collapse"
 
     # 1. 渲染话题 Tabs
@@ -950,12 +950,14 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
             )
             if not is_zh and re.search(r'[\u4e00-\u9fff]', tw_content):
                 tw_content = re.sub(r'[\u4e00-\u9fff]+', '', tw_content).strip()
+            if len(tw_content) > 200:
+                tw_content = tw_content[:197].rstrip() + "..."
             tw_url = tw.get("url", "#")
             tw_avatar = tw.get("author_avatar") or "https://api.dicebear.com/7.x/bottts/svg?seed=VIP"
             btn_post_text = "查看原帖 ↗" if is_zh else "View Post ↗"
             tweet_html_items.append(f"""
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
+              <img src="{tw_avatar}" alt="{tw_author}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" decoding="async" onerror="this.src=\'https://api.dicebear.com/7.x/bottts/svg?seed=VIP\'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-900 dark:text-slate-200 truncate">{tw_author}</span>

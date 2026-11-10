@@ -16,14 +16,7 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="stylesheet" href="/css/style.min.css">
   <link rel="stylesheet" href="/m/css/mobile.css">
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "zasso3bkvl");
-  </script>
+  <link rel="preload" href="/data/latest_news.json" as="fetch" crossorigin>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
 
@@ -146,7 +139,7 @@
   </div>
 
   <!-- Main Feed Stream Container -->
-  <main id="mobile-feed" class="py-2 min-h-[60vh]">
+  <main id="mobile-feed" class="py-2 min-h-screen">
     <!-- Populated by JS -->
   </main>
 
@@ -222,5 +215,13 @@
     window.__IS_ZH = true;
   </script>
   <script src="/m/js/mobile.js"></script>
+  <!-- Microsoft Clarity (Deferred) -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+  </script>
 </body>
 </html>

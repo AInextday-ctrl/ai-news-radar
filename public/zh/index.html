@@ -119,9 +119,8 @@
   <link rel="dns-prefetch" href="https://wsrv.nl">
   <link rel="preconnect" href="https://ph-files.imgix.net" crossorigin>
   <link rel="dns-prefetch" href="https://ph-files.imgix.net">
-  <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6aee77f4ece1c19963602401/master/pass/gear-nyt-cooking-ai-assistant.jpg&w=480&output=webp&q=80" fetchpriority="high">
   <link rel="stylesheet" href="/css/style-v733.min.css">
-  <link rel="preload" href="/zh/js/app-v738.min.js" as="script">
+  <link rel="preload" href="/zh/js/app-v739.min.js" as="script">
   <style>
     @media (min-width: 1024px) {
       .lg\:col-span-9 { grid-column: span 9 / span 9 !important; }
@@ -217,16 +216,36 @@
       }
     })();
   </script>
-  <!-- Google AdSense Verification & Auto Ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
-  <!-- Microsoft Clarity -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "zasso3bkvl");
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+  <link rel="dns-prefetch" href="https://www.clarity.ms">
+  <link rel="dns-prefetch" href="https://c.clarity.ms">
+  <!-- 同步 Hash 专栏路由感知与渲染隔离 -->
+  <script>
+    (function(){
+      var h = (window.location.hash || '').replace('#', '').split('?')[0].toLowerCase();
+      if (['news','celebrity','tools','videos','prompts'].indexOf(h) !== -1) {
+        document.documentElement.classList.add('has-hash-tab');
+        var l = document.createElement('link');
+        l.rel = 'preload';
+        l.as = 'fetch';
+        l.href = '/data/latest_news.json';
+        l.crossOrigin = 'anonymous';
+        document.head.appendChild(l);
+      }
+    })();
   </script>
+  <style>
+    html.has-hash-tab #view-all,
+    html.has-hash-tab #top-three-section { display: none !important; }
+    html.has-hash-tab #view-category { display: block !important; }
+    html.has-hash-tab #cat-loading-skeleton { display: block !important; }
+    html.has-hash-tab #cat-content-wrap { display: none !important; }
+    #section-col-news, #section-col-arena, #site-footer {
+      content-visibility: auto;
+      contain-intrinsic-size: auto 600px;
+    }
+  </style>
+  <meta name="ssr-updated" content="2026-11-08T13:49:39.182836+00:00">
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
 
@@ -300,7 +319,7 @@
   
 
   <!-- 顶部科技导航栏 -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/90 dark:bg-[#070b16]/95 border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 shadow-sm dark:shadow-xl">
+  <header class="sticky top-0 z-50 bg-white/95 dark:bg-[#070b16] border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 py-3 shadow-sm dark:shadow-xl">
     <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/25 ring-1 ring-white/20">
@@ -334,7 +353,7 @@
             <span>🌙</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-dark">深色</span>
           </button>
-          <button id="theme-btn-auto" onclick="setTheme(\'auto\')" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hidden sm:flex items-center space-x-1" title="跟随系统" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center space-x-1">
+          <button id="theme-btn-auto" onclick="setTheme('auto')" class="px-2 py-1 text-xs rounded-lg transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hidden sm:flex items-center space-x-1" title="跟随系统">
             <span>💻</span>
             <span class="hidden xl:inline text-[11px] font-medium" id="theme-txt-auto">自动</span>
           </button>
@@ -385,7 +404,7 @@
           </select>
 
           <!-- 💡 语言建议切换气泡指示框 (自动检测系统语言，数秒后自动淡出消失，不主动强制切换) -->
-          <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-indigo-300 dark:border-indigo-700/80 shadow-2xl z-[9999] transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none select-none">
+          <div id="lang-suggest-bubble" class="hidden absolute top-full right-0 mt-3 w-72 sm:w-80 p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-indigo-300 dark:border-indigo-700/80 shadow-2xl z-[9999] transition-all duration-500 opacity-0 transform -translate-y-2 pointer-events-none select-none">
             <div class="absolute -top-1.5 right-6 w-3 h-3 bg-white dark:bg-slate-900 border-t border-l border-indigo-300 dark:border-indigo-700/80 transform rotate-45"></div>
             
             <div class="relative flex items-start space-x-2.5">
@@ -422,7 +441,7 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer">30</span>s)</span>
+          <span class="font-mono text-[11px]" id="refresh-indicator">自动刷新 (<span id="timer" class="tabular-nums inline-block min-w-[42px] text-center">10m00s</span>)</span>
         </div>
 
         <!-- 手动刷新按钮 -->
@@ -435,7 +454,7 @@
   </header>
 
   <!-- 🧭 现代化全景分类导航栏 (单行固定等比栅格专业门户布局) -->
-  <nav class="sticky top-[57px] z-40 bg-white/95 dark:bg-[#090e1c]/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 lg:px-8 py-2 shadow-sm dark:shadow-none select-none">
+  <nav class="sticky top-[57px] z-40 bg-white dark:bg-[#090e1c] border-b border-slate-200 dark:border-slate-800 px-3 sm:px-6 lg:px-8 py-2 shadow-sm dark:shadow-none select-none">
     <div class="max-w-[1760px] w-full mx-auto flex items-center justify-between gap-2 sm:gap-3 xl:gap-4">
       <!-- 左侧：雷达高频态势微标 (精致紧凑标定物) -->
       <div class="hidden xl:flex items-center space-x-2 shrink-0 px-2.5 py-1.5 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 select-none notranslate">
@@ -497,7 +516,10 @@
         <span id="hot-tags-text">热门标签:</span>
       </div>
       <div class="flex items-center space-x-1.5 shrink-0" id="hot-tags-container">
-        <!-- 由 JS 渲染双语标签 Pills -->
+        <button type="button" onclick="handleTagClick('Claude')" class="px-2.5 py-1 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-600 hover:text-white transition-all font-medium border border-slate-200/80 dark:border-slate-700/80 cursor-pointer shadow-xs">#Claude</button>
+        <button type="button" onclick="handleTagClick('DeepSeek')" class="px-2.5 py-1 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-600 hover:text-white transition-all font-medium border border-slate-200/80 dark:border-slate-700/80 cursor-pointer shadow-xs">#DeepSeek</button>
+        <button type="button" onclick="handleTagClick('GPT-5')" class="px-2.5 py-1 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-600 hover:text-white transition-all font-medium border border-slate-200/80 dark:border-slate-700/80 cursor-pointer shadow-xs">#GPT-5</button>
+        <button type="button" onclick="handleTagClick('Agent')" class="px-2.5 py-1 text-xs rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-indigo-600 hover:text-white transition-all font-medium border border-slate-200/80 dark:border-slate-700/80 cursor-pointer shadow-xs">#Agent</button>
       </div>
     </section>
 
@@ -601,7 +623,7 @@
           <div class="flex items-center space-x-2 shrink-0">
             <!-- 轮播控制与页码指示器 (支持黑白全适配) -->
             <div class="flex items-center space-x-1 bg-white/90 dark:bg-slate-800/90 rounded-lg p-0.5 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 2</span>
+              <span id="viral-ticker-page-indicator" class="text-[11px] font-mono text-slate-600 dark:text-slate-300 font-bold px-2 py-0.5">1 / 1</span>
               <button type="button" id="viral-ticker-prev" onclick="flipViralTicker(-1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="上一页 (向上)">↑</button>
               <button type="button" id="viral-ticker-pause" onclick="toggleViralTickerPause()" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-[10px] cursor-pointer" title="暂停 / 播放">⏸</button>
               <button type="button" id="viral-ticker-next" onclick="flipViralTicker(1)" class="w-6 h-6 flex items-center justify-center rounded text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-700/60 hover:bg-slate-200 dark:hover:bg-slate-600 transition text-xs font-bold cursor-pointer" title="下一页 (向下)">↓</button>
@@ -648,7 +670,7 @@
 
       <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
         <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/zU-wsuU6VPk?autoplay=1&rel=0', '【48h 极客实测】LearnToleadbySifat：n8n WhatsApp 人工智能代理 |初级课程（构建和销售，无代码）', 'youtube', 'https://www.youtube.com/watch?v=zU-wsuU6VPk')" title="点击就地影院播放">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/zU-wsuU6VPk/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】LearnToleadbySifat：n8n WhatsApp 人工智能代理 |初级课程（构建和销售，无代码）" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/zU-wsuU6VPk/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/zU-wsuU6VPk/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】LearnToleadbySifat：n8n WhatsApp 人工智能代理 |初级课程（构建和销售，无代码）" width="88" height="54" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/zU-wsuU6VPk/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager" fetchpriority="high" decoding="async">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
             <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
           </div>
@@ -698,21 +720,21 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 20.6h 前
+              YouTube 极客实测 · 4 min ago
             </div>
           </div>
         </div>
         <div class="flex items-center h-8 shrink-0">
           <span class="relative inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wide bg-gradient-to-r from-rose-500 to-red-600 text-white shadow-sm shrink-0 leading-none">
             <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_#fff]"></span>
-            <span>🎬 48h 极客实测</span>
+            <span>🎬 极客实战精讲</span>
           </span>
         </div>
       </div>
 
       <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
         <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('https://www.youtube-nocookie.com/embed/tx-foJu5NQE?autoplay=1&rel=0', '【48h 极客实测】Vibz Ai：人工智能代理将在 2026 年接管工作！ 🤯 他们实际上可以做的 5 件事', 'youtube', 'https://www.youtube.com/watch?v=tx-foJu5NQE')" title="点击就地影院播放">
-          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/tx-foJu5NQE/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】Vibz Ai：人工智能代理将在 2026 年接管工作！ 🤯 他们实际上可以做的 5 件事" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/tx-foJu5NQE/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager">
+          <img src="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/tx-foJu5NQE/maxresdefault.jpg&w=400&output=webp&q=85" alt="【48h 极客实测】Vibz Ai：人工智能代理将在 2026 年接管工作！ 🤯 他们实际上可以做的 5 件事" width="88" height="54" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/tx-foJu5NQE/hqdefault.jpg&w=400&output=webp&q=85'" loading="eager" fetchpriority="high" decoding="async">
           <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
             <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
           </div>
@@ -754,161 +776,7 @@
               </div>
               <div id="viral-ticker-viewport" class="col-span-1 md:col-span-2 relative overflow-hidden w-full" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
                 <div id="viral-ticker-slider" class="flex flex-col transition-transform duration-700 ease-out" style="transform: translateY(0px); margin: 0; padding: 0;">
-                  <div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2071498695049179136/ztXF3ubt_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="nelson" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">nelson</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @nelsnworie · onchain researcher | web3 product writer | i create content 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24h 极客热推</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    人工智能代理经济中最有趣的发展之一是代理雇佣其他代理来完成工作。
-
-@termix_ai 最近通过 Montage Studio 在 上展示了这一点。
-
-这是它的工作原理。
-
-您提交视频制作简介。 Montage Studio 将其分解为更小的工作，并聘请专门的代理来处理故事板、视频渲染和音乐。
-
-然后，它协调他们的工作，合并结果并交付完成的视频。
-
-每个作业都经过 TermiX 上的托管。
-
-这表明代理人如何承担更大的任务，外包专门工作并支付其他代理人的贡献。
-
-但这需要的不仅仅是沟通。代理商
-                  </p>
                   
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWmPdDwWsAE2U86.jpg', event)" title="点击放大高清原图">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWmPdDwWsAE2U86.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-08 18:53 · 23h前</span>
-                  </span>
-                  <a href="https://x.com/nelsnworie/status/2119382835014312269" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    查看原帖 ↗
-                  </a>
-                </div>
-              </article>
-
-              <article class="box-border relative rounded-2xl p-3 hidden md:flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2083779282325700609/6Tuld0GH_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Flames" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Flames</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @0x_Flames · X creator. DeFi. Trading. Ai
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24h 极客热推</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    告诉人工智能代理它不应该做什么与​​使其在技术上无法做到这一点是不同的。
-
-当人工智能代理处理某人的资金时，这种差异很重要。
-
-您可以告诉代理人避免某些资产、设置支出限额或在出现一定损失后停止交易。但如果它仍然拥有执行交易的广泛权限，那么这些指令就只能到此为止。
-
-通过 MOTES (@meetmotes)，所有者可以设置授权并签署权限。在拟议的交易进行之前，智能账户会根据所有者批准的规则对其进行检查。
-
-因此，代理仍然可以分析市场并制定策略，但它必须在这些限制内运作。它不能只是允许自己在批准的
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/media/HWmJ0G7XcAACxui.jpg', event)" title="点击放大高清原图">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/media/HWmJ0G7XcAACxui.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-08 18:29 · 23h前</span>
-                  </span>
-                  <a href="https://x.com/0x_Flames/status/2119376637040922825" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    查看原帖 ↗
-                  </a>
-                </div>
-              </article>
-</div>
-<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-2 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">
-
-              <article class="box-border relative rounded-2xl p-3 flex flex-col justify-between transition-all duration-300 group cursor-pointer h-full w-full overflow-hidden bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/50 shadow-sm hover:shadow-md hover:-translate-y-0.5" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box;">
-                <div class="flex items-center justify-between gap-2 shrink-0 h-8 mb-1">
-                  <div class="flex items-center space-x-2 min-w-0 h-8">
-                    <div class="relative shrink-0 w-7 h-7">
-                      <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/profile_images/2117231679458951168/oW_4P0yx_normal.jpg&w=80&h=80&fit=cover&output=webp&q=80" alt="Julia Collins" width="28" height="28" class="w-7 h-7 rounded-full object-cover bg-slate-900 ring-1 ring-slate-200 dark:ring-slate-800 shrink-0 shadow-sm" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
-                    </div>
-                    <div class="min-w-0 flex flex-col justify-center h-8 leading-none">
-                      <div class="flex items-center space-x-1 leading-none h-4">
-                        <span class="font-bold text-xs text-slate-900 dark:text-slate-100 truncate leading-none">Julia Collins</span>
-                        <span class="text-sky-500 text-[10px] font-black leading-none">✓</span>
-                      </div>
-                      <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-                        @julia_coder_ · AI Growth Specialist/Helping AI brands grow on X/500+ AI cre
-                      </div>
-                    </div>
-                  </div>
-                  <div class="flex items-center h-8 shrink-0">
-                    <span class="font-bold px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/15 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-500/25 shrink-0 text-[10px] leading-none">🔥 24h 极客热推</span>
-                  </div>
-                </div>
-                <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
-                  <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-3 flex-1 min-w-0 m-0 group-hover:text-slate-900 dark:group-hover:text-white transition-colors">
-                    一名用户使用 Claude Code 在广州购买的一款杂牌移动电源中发现了隐藏芯片。
-
-每次给 iPhone 充电时，它都会秘密复制整个手机的数据。它还读取 Wi-Fi 密码，连接到家庭网络，并将所有信息发送到远程服务器。
-
-这款充电宝是三周前在机场花19美元买的，标签为30,000mAh，很重，没有品牌。
-
-第一次插上电源时，屏幕提示“信任这台计算机”，用户想都没想就点击了信任，授予其一键读取所有数据的权限。
-
-今天早上，在设置 Claude Code 来监控文件读取后，充电仅 10 秒屏幕就
-                  </p>
-                  
-        <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('https://pbs.twimg.com/amplify_video_thumb/2119373974568333312/img/1WtUofRDi5ebU9C6.jpg', event)" title="点击放大高清原图">
-          <img src="https://wsrv.nl/?url=https%3A//pbs.twimg.com/amplify_video_thumb/2119373974568333312/img/1WtUofRDi5ebU9C6.jpg&w=240&output=webp&q=80" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
-        </div>
-                </div>
-                <div class="flex items-center justify-between text-[10px] pt-1.5 border-t border-slate-100 dark:border-slate-800/60 shrink-0 gap-2 h-6 mt-auto">
-                  <span class="font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1 truncate shrink-0 max-w-[50%] leading-none">
-                    <span>🕒</span>
-                    <span class="truncate">11-08 18:18 · 23h前</span>
-                  </span>
-                  <a href="https://x.com/julia_coder_/status/2119374093950787631" target="_blank" rel="noopener noreferrer" class="text-sky-700 dark:text-sky-400 hover:text-sky-800 dark:hover:text-sky-300 font-bold hover:underline shrink-0 leading-none">
-                    查看原帖 ↗
-                  </a>
-                </div>
-              </article>
-</div>
-
                 </div>
               </div>
             </div>
@@ -928,7 +796,7 @@
               <span>🔥 24h 核心话题全景透视</span>
               <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider">TOP 3 智库专题</span>
             </h2>
-            <span class="text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">· 今日真实爆发事实 · 大V观点立场对撞 · 关联情报直达</span>
+            <span class="text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">· 事件脉络 · 大V观点立场对撞 · 关联情报束</span>
           </div>
         </div>
 
@@ -1114,7 +982,7 @@
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/2111634561906139136/cv-KqHH7_normal.jpg" alt="SOP | AI Agent Builder" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://pbs.twimg.com/profile_images/2111634561906139136/cv-KqHH7_normal.jpg" alt="SOP | AI Agent Builder" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-900 dark:text-slate-200 truncate">SOP | AI Agent Builder</span>
@@ -1140,20 +1008,12 @@
 你现在遇到的最大的问题是什么？
 
 它可能是：
-→ 它会漂移或忘记它的规则
-→ 错误会消耗积分
-→ 它工作一次，然后就坏了
-→ 它不会连接到您需要的工具
-→ 你不知道从哪里开始
-
-这个月我已经破坏了一些代理，并修复了大部分。这周我想修复你的问题。
-
-在一行中回复您的工具和您的问题。我将选择最常见的问题，继续进行操作，然后我将一步一步地在此处发布修复程序。</p>
+→ 它会漂移或忘记它的规则...</p>
               </div>
             </div>
 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/1940498031264088065/nmk3a-f4_normal.jpg" alt="Zakria" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://pbs.twimg.com/profile_images/1940498031264088065/nmk3a-f4_normal.jpg" alt="Zakria" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Zakria</span>
@@ -1169,23 +1029,7 @@
 
 还附带了一个活动：
 
-→ 最低合格订单：31.5 USDC
-→ 奖励：15,750 TermiX 积分
-→ 每个钱包一次合格购买
-→ 需要 X 帐户链接
-
-需要明确的是，31.5 USDC 是活动的最低要求，而不是固定的服务价格。
-但我更感兴趣的是其背后的技术。
-
-TermiX 的 AACP 旨在让代理商相互发现、租赁服务、通过托管管理付款、验证交付和结算交易。
-
-简而言之，一个代理人可以找到一份工作，雇用其他代理人来完成工作的不同部分，然后将所有内容整合在一起。
-
-Montage Studio 是代理经济的一个非常实际的例子。
-
-不仅仅是代理回答提示，而是代理一起工作并创造人们愿意付费的东西。
-
-在这里探索：</p>
+→ 最低合格订单：31...</p>
               </div>
             </div>
               </div>
@@ -1359,7 +1203,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/2067581152596983808/DQ-36TYn_normal.jpg" alt="CHIIIDEX 💔💔" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://pbs.twimg.com/profile_images/2067581152596983808/DQ-36TYn_normal.jpg" alt="CHIIIDEX 💔💔" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-900 dark:text-slate-200 truncate">CHIIIDEX 💔💔</span>
@@ -1375,9 +1219,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
 
 与训练不同，推理是一个持续的过程。当模型发布时它并没有停止。
 
-这就是人工智能公司继续投资数十亿美元建设数据中心和数千个 GPU 的原因。
-
-构建智能模型是一项挑战。拥有足够的计算能力来服务世界是另一回事。</p>
+这就是人工智能公司继续投资数十亿...</p>
               </div>
             </div>
               </div>
@@ -1560,7 +1402,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
               <div class="space-y-1.5">
                 
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-sky-400/50 dark:hover:border-sky-500/40 transition-colors shadow-xs">
-              <img src="https://pbs.twimg.com/profile_images/2061753751560650752/4jxd2vjA_normal.jpg" alt="Superman" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
+              <img src="https://pbs.twimg.com/profile_images/2061753751560650752/4jxd2vjA_normal.jpg" alt="Superman" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 ring-1 ring-slate-200 dark:ring-slate-700 mt-0.5" loading="lazy" decoding="async" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=VIP'">
               <div class="min-w-0 flex-1">
                 <div class="flex items-center justify-between text-[11px] gap-1 mb-0.5">
                   <span class="font-bold text-slate-900 dark:text-slate-200 truncate">Superman</span>
@@ -1580,33 +1422,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
 
 他们建立了一个具有两个交替阶段的递归循环。
 
-- RSR（递归自重写）：模型根据自己成功重写的轨迹进行自我微调
-
-- RPR（递归策略细化）：然后使用直接从前一阶段继承的“批评家”来运行强化学习（ppo），以锁定那些发现的行为
-
-- 循环：训练序列自行跳跃：Base → RSR-1 → RPR-1 → RSR-2 → RPR-2
-
-而且数字很疯狂..
-
-他们将其应用于 qwen3.8-27b 基础模型。在四个“终端替补”套件中，特工的平均成功率从 20.68% 一路跃升至 50.58%。
-
-在绝对最难的基准测试套件（terminal-bench 4.0）上，基本模型的得分为 0.00%。
-
-在终端 rsi 之后？
-
-它达到了 19.84%（与 Gemini 3.8 flash 等参考型号相当）。
-
-秘密武器？他们确定了奖励制度。
-
-他们不再为人工智能尝试或通过语义检查而给予“密集奖励”，而是转向“成功优先奖励”（spr）。
-
-它在数学上将严格的成功与部分的功劳区分开来。
-
-基本上，只有当代码实际上通过了最终的终端门时，代理才会获得巨额奖励。因此它不再假装成功。
-
-部分本地修复和严格的终端验证之间的差距正在迅速缩小。
-
-我们正在观察代理建立自己的培训环境并自主升级......未来是疯狂的。</p>
+- RSR（递归自重写）：模...</p>
               </div>
             </div>
               </div>
@@ -1665,7 +1481,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6ad102db0033d788')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6aee77f4ece1c19963602401/master/pass/gear-nyt-cooking-ai-assistant.jpg&w=480&output=webp&q=80" alt="纽约时报厨艺上线AI辅助食谱缩放" width="480" height="270" loading="eager" fetchpriority="high" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6aee77f4ece1c19963602401/master/pass/gear-nyt-cooking-ai-assistant.jpg&w=480&output=webp&q=80" alt="纽约时报厨艺上线AI辅助食谱缩放" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1691,7 +1507,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('96a10e32a64cc3ae')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/11/ai_scaling_bitter_lesson-2.png&w=480&output=webp&q=80" alt="强化学习之父萨顿警告：仅靠算力堆叠无法通向AGI，AI必须转向真实世界交互" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//the-decoder.com/wp-content/uploads/2026/11/ai_scaling_bitter_lesson-2.png&w=480&output=webp&q=80" alt="强化学习之父萨顿警告：仅靠算力堆叠无法通向AGI，AI必须转向真实世界交互" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1717,7 +1533,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('8acfe47685b6100e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21F2g6%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fa79ebb2d-df82-4349-81e5-d6f988dd41f5_1671x941.png&w=480&output=webp&q=80" alt="内蒙古成为中国AI算力核心枢纽" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//substackcdn.com/image/fetch/%24s_%21F2g6%21%2Cw_1200%2Ch_675%2Cc_fill%2Cf_jpg%2Cq_auto%3Agood%2Cfl_progressive%3Asteep%2Cg_auto/https%253A%252F%252Fsubstack-post-media.s3.amazonaws.com%252Fpublic%252Fimages%252Fa79ebb2d-df82-4349-81e5-d6f988dd41f5_1671x941.png&w=480&output=webp&q=80" alt="内蒙古成为中国AI算力核心枢纽" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1743,7 +1559,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('22afc34746f16258')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6aee7497bf81da8802edc3e6/master/pass/gear-ai-world-models-3d.jpg&w=480&output=webp&q=80" alt="Niantic从宝可梦转型押注世界模型" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//media.wired.com/photos/6aee7497bf81da8802edc3e6/master/pass/gear-ai-world-models-3d.jpg&w=480&output=webp&q=80" alt="Niantic从宝可梦转型押注世界模型" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1769,7 +1585,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('72a7e746092a3f6e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=http%3A//the-decoder.com/wp-content/uploads/2026/11/agent-edit-highlights.mp4&w=480&output=webp&q=80" alt="AI写代码依然不靠谱，四分之三需人工收尾" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=http%3A//the-decoder.com/wp-content/uploads/2026/11/agent-edit-highlights.mp4&w=480&output=webp&q=80" alt="AI写代码依然不靠谱，四分之三需人工收尾" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1795,7 +1611,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('176df8992b49cd7e')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="环保组织拥抱AI监控气候，同时担忧算力能耗" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="环保组织拥抱AI监控气候，同时担忧算力能耗" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1821,7 +1637,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('e07d7da4c1ce0258')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//i.guim.co.uk/img/media/60a84798eb17356220e1eb8ab76f14087a8cd747/0_0_3000_2400/master/3000.jpg%3Fwidth%3D1200%26height%3D630%26quality%3D85%26auto%3Dformat%26fit%3Dcrop%26precrop%3D40%3A21%2Coffset-x50%2Coffset-y0%26overlay-align%3Dbottom%252Cleft%26overlay-width%3D100p%26overlay-base64%3DL2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc%26enable%3Dupscale%26s%3D0face194e288757b7375dcecfc089f9d&w=480&output=webp&q=80" alt="思科内部机密泄露：深陷以军网络事故" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//i.guim.co.uk/img/media/60a84798eb17356220e1eb8ab76f14087a8cd747/0_0_3000_2400/master/3000.jpg%3Fwidth%3D1200%26height%3D630%26quality%3D85%26auto%3Dformat%26fit%3Dcrop%26precrop%3D40%3A21%2Coffset-x50%2Coffset-y0%26overlay-align%3Dbottom%252Cleft%26overlay-width%3D100p%26overlay-base64%3DL2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc%26enable%3Dupscale%26s%3D0face194e288757b7375dcecfc089f9d&w=480&output=webp&q=80" alt="思科内部机密泄露：深陷以军网络事故" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1873,7 +1689,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('158ac0f058142574')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//nousresearch.com/assets/nous-web/blog/arete1-card.webp&w=480&output=webp&q=80" alt="Nous Research发布Arete模型修正Qwen偏见" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//nousresearch.com/assets/nous-web/blog/arete1-card.webp&w=480&output=webp&q=80" alt="Nous Research发布Arete模型修正Qwen偏见" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1899,7 +1715,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
                 </div>
               </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('15a8c4669eae6b28')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//i0.wp.com/technode.com/wp-content/uploads/2026/11/feed-20261102-cn-371974.png%3Ffit%3D2350%252C1000%26ssl%3D1&w=480&output=webp&q=80" alt="具身智能公司千寻智能获亿元A+轮融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//i0.wp.com/technode.com/wp-content/uploads/2026/11/feed-20261102-cn-371974.png%3Ffit%3D2350%252C1000%26ssl%3D1&w=480&output=webp&q=80" alt="具身智能公司千寻智能获亿元A+轮融资" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -2406,7 +2222,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl text-emerald-400">🛠️</div>
         </div>
-        <img src="https://opengraph.githubassets.com/1/vercel-labs/agent-desktop" alt="agent-desktop" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
+        <img src="https://opengraph.githubassets.com/1/vercel-labs/agent-desktop" alt="agent-desktop" width="480" height="270" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
         <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
           <div class="flex items-center space-x-1.5 border-b border-slate-800/70 pb-1">
             <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
@@ -2454,7 +2270,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl text-emerald-400">🛠️</div>
         </div>
-        <img src="/assets/tool-previews/dc71f001ce1d9908.webp?v=4" data-fallback="https://opengraph.githubassets.com/1/pbakaus/impeccable" alt="impeccable" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
+        <img src="/assets/tool-previews/dc71f001ce1d9908.webp?v=4" data-fallback="https://opengraph.githubassets.com/1/pbakaus/impeccable" alt="impeccable" width="480" height="270" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
         <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
           <div class="flex items-center space-x-1.5 border-b border-slate-800/70 pb-1">
             <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
@@ -2502,7 +2318,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-teal-950/80 flex items-center justify-center pointer-events-none">
           <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl text-emerald-400">🛠️</div>
         </div>
-        <img src="https://opengraph.githubassets.com/1/herdrdev/herdr" alt="herdr" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
+        <img src="https://opengraph.githubassets.com/1/herdrdev/herdr" alt="herdr" width="480" height="270" class="relative z-[1] w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else { this.parentElement.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.style.display='none'; }">
         <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
           <div class="flex items-center space-x-1.5 border-b border-slate-800/70 pb-1">
             <span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
@@ -2873,11 +2689,20 @@ Montage Studio 是代理经济的一个非常实际的例子。
     </div>
 
     <!-- 视图 2: 独立专栏全屏广场模式 (当点击特定 Tab 时激活) -->
-    <div id="view-category" class="hidden space-y-5">
-      <!-- 🌟 领袖大V火爆推文焦点展位 (Spotlight Banner) -->
-      <div id="celebrity-spotlight-banner" class="hidden"></div>
+    <div id="view-category" class="hidden space-y-5 min-h-[85vh]">
+      <!-- 专栏骨架屏加载占位 -->
+      <div id="cat-loading-skeleton" class="hidden space-y-5">
+        <div class="h-32 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+        <div class="h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse w-2/3"></div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+        </div>
+      </div>
 
-      <!-- 专栏标题横幅 -->
+      <div id="cat-content-wrap" class="space-y-5">
+        <!-- 专栏标题横幅 -->
       <div class="bg-gradient-to-r from-slate-100 via-indigo-50/40 to-slate-100 dark:from-slate-900/90 dark:via-indigo-950/20 dark:to-slate-900/90 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div class="flex items-center space-x-2.5">
@@ -3107,12 +2932,17 @@ Montage Studio 是代理经济的一个非常实际的例子。
       </div>
 
       <!-- 网格或列表呈现 -->
+      <!-- 领袖大V火爆推文焦点展位 -->
+      <div id="celebrity-spotlight-banner" class="hidden"></div>
+
+      <!-- 内容卡片网格容器 -->
       <div id="cat-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- 由 JS 渲染 -->
       </div>
 
-      <!-- 专栏分页控制器与每页条数选择器 (30, 50, 100) -->
+      <!-- 专栏分页控制器与每页条数选择器 (24, 50, 100) -->
       <div id="cat-pagination-container" class="mt-8 pt-6 border-t border-slate-200/80 dark:border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-4"></div>
+      </div>
     </div>
 
 
@@ -3122,7 +2952,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
 </main>
 
   <!-- 法律合规与隐私弹窗 Modal (满足 Google AdSense 强制政策要求) -->
-  <div id="legal-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+  <div id="legal-modal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-center justify-center p-4">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[85vh]">
       <div class="p-3.5 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
         <div class="flex items-center space-x-2">
@@ -3139,7 +2969,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
   </div>
 
   <!-- 视频播放弹窗 Modal (自适应 16:9 横屏与 9:16 竖屏，支持跨域/区域限制直达原站容灾) -->
-  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeVideoModal()">
+  <div id="video-modal" class="fixed inset-0 z-50 bg-black/85 hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeVideoModal()">
     <div id="modal-video-dialog" class="bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden max-w-3xl w-full shadow-2xl relative transition-all duration-200">
       <div class="p-3 bg-slate-950 border-b border-slate-800 flex items-center justify-between gap-3">
         <h3 id="modal-video-title" class="text-sm font-semibold text-slate-200 line-clamp-1">AI Video Demonstration</h3>
@@ -3166,7 +2996,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
   </div>
 
   <!-- 资讯概要 / 新闻简报弹窗 Modal (News Briefing) -->
-  <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
+  <div id="ai-news-modal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeAiNewsModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-t-3xl sm:rounded-2xl modal-sheet-dialog overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[90vh] transition-all duration-200">
       <!-- 窗口标题栏 Header (信源只在此处显示，杜绝正文冗余) -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -3301,7 +3131,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
   </div>
 
   <!-- 领袖观点·社交推文与网友热评弹窗 Modal (Social Post & Hot Comments) -->
-  <div id="social-post-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeSocialPostModal()">
+  <div id="social-post-modal" class="fixed inset-0 z-50 bg-black/80 hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeSocialPostModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-t-3xl sm:rounded-2xl modal-sheet-dialog overflow-hidden max-w-2xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
       <!-- 窗口标题栏 Header -->
@@ -3454,7 +3284,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
   </div>
 
   <!-- 落地工具·抓取情报与交互式预览画廊弹窗 Modal (Tool Detail & Screenshot Gallery Modal) -->
-  <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
+  <div id="tool-detail-modal" class="fixed inset-0 z-50 bg-black/85 hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" onclick="if(event.target===this) closeToolDetailModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden max-w-3xl w-full shadow-2xl relative flex flex-col max-h-[92vh] transition-all duration-200">
       
       <!-- 窗口顶栏 Header -->
@@ -3593,7 +3423,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
   </div>
 
   <!-- 📤 社交平台一键分享模态框 (𝕏、Threads、Instagram、系统分享) -->
-  <div id="share-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeShareModal()">
+  <div id="share-modal" class="fixed inset-0 bg-black/80 hidden flex items-end sm:items-center justify-center modal-sheet-backdrop p-0 sm:p-4" style="z-index: 99999 !important;" onclick="if(event.target===this) closeShareModal()">
     <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden max-w-lg w-full shadow-2xl relative flex flex-col transition-all duration-200">
       <!-- Modal Header -->
       <div class="p-4 bg-slate-50 dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3 shrink-0">
@@ -3786,7 +3616,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
     };
   </script>
 
-  <script defer src="/zh/js/app-v738.min.js"></script>
+  <script defer src="/zh/js/app-v739.min.js"></script>
 
   <!-- ===== 底部导航页脚 (AdSense E-E-A-T 信任合规信号) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
@@ -3871,7 +3701,7 @@ Montage Studio 是代理经济的一个非常实际的例子。
 
   <!-- 📱 移动端沉浸式单手底部导航栏 (Mobile Floating Dock Navigation - iOS Safe Area + Glassmorphism) -->
     <!-- 🚀 回到顶部悬浮按钮 (Back to Top Floating Action Button) -->
-  <button type="button" id="btn-back-to-top" aria-label="返回顶部" title="返回顶部" class="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-40 w-11 h-11 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700/80 shadow-xl backdrop-blur-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-400 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 hover:scale-105 active:scale-95 cursor-pointer">
+  <button type="button" id="btn-back-to-top" aria-label="返回顶部" title="返回顶部" class="fixed bottom-20 right-4 md:bottom-8 md:right-8 z-40 w-11 h-11 rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700/80 shadow-xl flex items-center justify-center text-slate-700 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-indigo-400 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 hover:scale-105 active:scale-95 cursor-pointer">
     <span class="text-base font-bold">↑</span>
   </button>
 
@@ -3908,6 +3738,16 @@ Montage Studio 是代理经济的一个非常实际的例子。
     </button>
   </nav>
 
+  <!-- Google AdSense (延迟挂载保障首屏 LCP) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+  </script>
 </body>
 </html>
 

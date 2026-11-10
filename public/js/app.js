@@ -132,10 +132,10 @@
     let videoSubFilter = 'all';
     let promptCategoryFilter = 'all';
     let categoryCurrentPage = 1;
-    let categoryPageSize = 100;
+    let categoryPageSize = 24;
     try {
       const savedCatSize = Number(localStorage.getItem('ainews_cat_page_size'));
-      if ([30, 50, 100].includes(savedCatSize)) {
+      if ([24, 50, 100].includes(savedCatSize)) {
         categoryPageSize = savedCatSize;
       }
     } catch(e) {}
@@ -920,224 +920,56 @@
     });
 
 
-/**
- * Chinese Simplified <-> Traditional Converter (简繁转换引擎)
- * Powered by OpenCC / TongWen character mappings.
- * High-performance, offline-first, zero-dependency.
- */
-(function(window) {
-  'use strict';
-
-  const S_CHARS = "㐷㐹㐽㑇㑈㑔㑩㓆㓥㓰㔉㖊㖞㘎㚯㛀㛟㛠㛣㛤㛿㟆㟜㟥㡎㤘㤽㥪㧏㧐㧑㧟㧰㨫㭎㭏㭣㭤㭴㱩㱮㲿㳔㳕㳠㳡㳢㳽㴋㶉㶶㶽㺍㻅㻏㻘䀥䁖䂵䃅䅉䅟䅪䇲䉤䌶䌷䌸䌹䌺䌻䌼䌽䌾䌿䍀䍁䍠䎬䏝䑽䓓䓕䓖䓨䗖䘛䘞䙊䙌䙓䜣䜤䜥䜧䜩䝙䞌䞍䞎䞐䟢䢀䢁䢂䥺䥽䥾䥿䦀䦁䦂䦃䦅䦆䦶䦷䩄䭪䯃䯄䯅䲝䲞䲟䲠䲡䲢䲣䴓䴔䴕䴖䴗䴘䴙䶮万与丑专业丛东丝丢两严丧个丰临为丽举么义乌乐乔习乡书买乱争于亏云亘亚产亩亲亵亸亿仅仆从仑仓仪们价众优伙会伛伞伟传伡伣伤伥伦伧伪伫体余佣佥侠侣侥侦侧侨侩侪侬侭俣俦俨俩俪俫俭债倾偬偻偾偿傤傥傧储傩儿兑兖党兰关兴兹养兽冁内冈册写军农冯冲决况冻净凄准凉减凑凛几凤凫凭凯凶击凿刍划刘则刚创删别刬刭刹刽刾刿剀剂剐剑剥剧劝办务劢动励劲劳势勋勚匀匦匮区医华协单卖占卢卤卧卫却卺厂厅历厉压厌厍厐厕厘厢厣厦厨厩厮县叁参叆叇双发变叙叠台叶号叹叽吁吃后吓吕吗吨听启吴呐呒呓呕呖呗员呙呛呜咏咙咛咝咤咨咸响哑哒哓哔哕哗哙哜哝哟唇唛唝唠唡唢唤啧啬啭啮啯啰啴啸喷喽喾嗫嗳嘘嘤嘱噜嚣团园囱围囵国图圆圣圹场坏块坚坛坜坝坞坟坠垄垅垆垒垦垩垫垭垯垱垲垴埘埙埚堑堕塆墙壮声壳壶壸处备复够头夸夹夺奁奂奋奖奥妆妇妈妩妪妫姗姹娄娅娆娇娈娱娲娴婳婴婵婶媪媭嫒嫔嫱嬷孙学孪宁宝实宠审宪宫宽宾寝对寻导寿将尔尘尝尧尴尸尽层屃屉届属屡屦屿岁岂岖岗岘岚岛岩岭岳岽岿峃峄峡峣峤峥峦峰崂崃崄崭嵘嵚嵝巅巩巯币帅师帏帐帘帜带帧帮帱帻帼幂干并广庄庆床庐庑库应庙庞废庼廪开异弃弑张弥弪弯弹强归当录彟彦彨彻征径徕忆忏忧忾怀态怂怃怄怅怆怜总怼怿恋恒恳恶恸恹恺恻恼恽悦悫悬悭悮悯惊惧惨惩惫惬惭惮惯愠愤愦愿慑慭懑懒懔戆戋戏戗战戬戯户扑执扩扪扫扬扰抚抛抟抠抡抢护报担拟拢拣拥拦拧拨择挂挚挛挜挝挞挟挠挡挢挣挤挥挦捝捞损捡换捣据掳掴掷掸掺掼揽揾揿搀搁搂搄搅携摄摅摆摇摈摊撄撑撵撷撸撺擜擞攒敌敚敛敩数斋斓斗斩断无旧时旷旸昙昵昼昽显晋晒晓晔晕晖暂暅暧术朴机杀杂权杠条来杨杩杰极构枞枢枣枥枧枨枪枫枭柜柠柽栀栅标栈栉栊栋栌栎栏树栖样栾桠桡桢档桤桥桦桧桨桩桪梦梼梾梿检棁棂椁椝椟椠椢椤椫椭椮楼榄榅榇榈榉榝槚槛槟槠横樯樱橥橱橹橼檩欢欤欧歼殁殇残殒殓殚殡殴毁毂毕毙毡毵毶氇气氢氩氲汇汉汤汹沄沟没沣沤沥沦沧沨沩沪泞泪泶泷泸泺泻泼泽泾洁洒洼浃浅浆浇浈浉浊测浍济浏浐浑浒浓浔浕涂涌涚涛涝涞涟涠涡涢涣涤润涧涨涩淀渊渌渍渎渐渑渔渖渗温游湾湿溁溃溅溆溇滗滚滞滟滠满滢滤滥滦滨滩滪潆潇潋潍潜潴澛澜濑濒灏灭灯灵灶灾灿炀炉炖炜炝点炼炽烁烂烃烛烟烦烧烨烩烫烬热焕焖焘煴熏爱爷牍牦牵牺犊状犷犸犹狈狝狞独狭狮狯狰狱狲猃猎猕猡猪猫猬献獭玑玙玚玛玮环现玱玺珐珑珰珲琎琏琐琼瑶瑷瑸璎瓒瓮瓯电画畅畴疖疗疟疠疡疬疭疮疯疱疴痈痉痒痖痨痪痫痴瘅瘆瘗瘘瘪瘫瘾瘿癞癣癫皂皑皱皲盏盐监盖盗盘眍眦眬睁睐睑瞆瞒瞩矫矶矾矿砀码砖砗砚砜砺砻砾础硁硕硖硗硙硚确硵碍碛碜碱礼祃祎祢祯祷祸禀禄禅离秃秆种秘积称秽秾稆税稣稳穑穞穷窃窍窎窑窜窝窥窦窭竖竞笃笋笔笕笺笼笾筑筚筛筜筝筹筼签筿简箓箦箧箨箩箪箫篑篓篮篯篱簖籁籴类籼粜粝粤粪粮粽糁糇糍紧絷緼縆纟纠纡红纣纤纥约级纨纩纪纫纬纭纮纯纰纱纲纳纴纵纶纷纸纹纺纻纼纽纾线绀绁绂练组绅细织终绉绊绋绌绍绎经绐绑绒结绔绕绖绗绘给绚绛络绝绞统绠绡绢绣绤绥绦继绨绩绪绫绬续绮绯绰绱绲绳维绵绶绷绸绹绺绻综绽绾绿缀缁缂缃缄缅缆缇缈缉缊缋缌缍缎缏缐缑缒缓缔缕编缗缘缙缚缛缜缝缞缟缠缡缢缣缤缥缦缧缨缩缪缫缬缭缮缯缰缱缲缳缴缵罂网罗罚罢罴羁羟羡群翘翙翚耢耧耸耻聂聋职聍联聩聪肃肠肤肮肴肾肿胀胁胆胜胧胨胪胫胶脉脍脏脐脑脓脔脚脱脶脸腊腌腘腭腻腼腽腾膑膻臜舆舣舰舱舻艰艳艺节芈芗芜芦苁苇苈苋苌苍苎苏苧苹范茎茏茑茔茕茧荆荐荙荚荛荜荝荞荟荠荡荣荤荥荦荧荨荩荪荫荬荭荮药莅莱莲莳莴莶获莸莹莺莼萚萝萤营萦萧萨葱蒀蒇蒉蒋蒌蒏蓝蓟蓠蓣蓥蓦蔂蔷蔹蔺蔼蕰蕲蕴薮藓藴蘖虏虑虚虫虬虮虱虽虾虿蚀蚁蚂蚃蚕蚝蚬蛊蛎蛏蛮蛰蛱蛲蛳蛴蜕蜗蜡蝇蝈蝉蝎蝼蝾螀螨蟏衅衔补衬衮袄袅袆袜袭袯装裆裈裢裣裤裥褛褴襕见观觃规觅视觇览觉觊觋觌觍觎觏觐觑觞触觯訚詟誉誊讠计订讣认讥讦讧讨让讪讫讬训议讯记讱讲讳讴讵讶讷许讹论讻讼讽设访诀证诂诃评诅识诇诈诉诊诋诌词诎诏诐译诒诓诔试诖诗诘诙诚诛诜话诞诟诠诡询诣诤该详诧诨诩诪诫诬语诮误诰诱诲诳说诵诶请诸诹诺读诼诽课诿谀谁谂调谄谅谆谇谈谉谊谋谌谍谎谏谐谑谒谓谔谕谖谗谘谙谚谛谜谝谞谟谠谡谢谣谤谥谦谧谨谩谪谫谬谭谮谯谰谱谲谳谴谵谶豮贝贞负贠贡财责贤败账货质贩贪贫贬购贮贯贰贱贲贳贴贵贶贷贸费贺贻贼贽贾贿赀赁赂赃资赅赆赇赈赉赊赋赌赍赎赏赐赑赒赓赔赕赖赗赘赙赚赛赜赝赞赟赠赡赢赣赪赵赶趋趱趸跃跄跖跞践跶跷跸跹跻踌踪踬踯蹑蹒蹰蹿躏躜躯輼车轧轨轩轪轫转轭轮软轰轱轲轳轴轵轶轷轸轹轺轻轼载轾轿辀辁辂较辄辅辆辇辈辉辊辋辌辍辎辏辐辑辒输辔辕辖辗辘辙辚辞辟辩辫边辽达迁过迈运还这进远违连迟迩迳迹适选逊递逦逻遗遥邓邝邬邮邹邺邻郁郏郐郑郓郦郧郸酂酝酦酱酽酾酿醖采释里鉴銮錾钅钆钇针钉钊钋钌钍钎钏钐钑钒钓钔钕钖钗钘钙钚钛钜钝钞钟钠钡钢钣钤钥钦钧钨钩钪钫钬钭钮钯钰钱钲钳钴钵钶钷钸钹钺钻钼钽钾钿铀铁铂铃铄铅铆铇铈铉铊铋铌铍铎铏铐铑铒铓铔铕铖铗铘铙铚铛铜铝铞铟铠铡铢铣铤铥铦铧铨铩铪铫铬铭铮铯铰铱铲铳铴铵银铷铸铹铺铻铼铽链铿销锁锂锃锄锅锆锇锈锉锊锋锌锍锎锏锐锑锒锓锔锕锖锗锘错锚锛锜锝锞锟锠锡锢锣锤锥锦锧锨锩锪锫锬锭键锯锰锱锲锳锴锵锶锷锸锹锺锻锼锽锾锿镀镁镂镃镄镅镆镇镈镉镊镋镌镍镎镏镐镑镒镓镔镕镖镗镘镙镚镛镜镝镞镟镠镡镢镣镤镥镦镧镨镩镪镫镬镭镮镯镰镱镲镳镴镵镶长门闩闪闫闬闭问闯闰闱闲闳间闵闶闷闸闹闺闻闼闽闾闿阀阁阂阃阄阅阆阇阈阉阊阋阌阍阎阏阐阑阒阓阔阕阖阗阘阙阚阛队阳阴阵阶际陆陇陈陉陕陦陧陨险随隐隶隽难雇雏雠雳雾霁霉霡霭靓靔静靥鞑鞒鞯鞲韦韧韨韩韪韫韬韵页顶顷顸项顺须顼顽顾顿颀颁颂颃预颅领颇颈颉颊颋颌颍颎颏颐频颒颓颔颕颖颗题颙颚颛颜额颞颟颠颡颢颣颤颥颦颧风飏飐飑飒飓飔飕飖飗飘飙飚飞飨餍饣饤饥饦饧饨饩饪饫饬饭饮饯饰饱饲饳饴饵饶饷饸饹饺饻饼饽饾饿馀馁馂馃馄馅馆馇馈馉馊馋馌馍馎馏馐馑馒馓馔馕马驭驮驯驰驱驲驳驴驵驶驷驸驹驺驻驼驽驾驿骀骁骂骃骄骅骆骇骈骉骊骋验骍骎骏骐骑骒骓骔骕骖骗骘骙骚骛骜骝骞骟骠骡骢骣骤骥骦骧髅髋髌鬓鬶魇魉鱼鱽鱾鱿鲀鲁鲂鲃鲄鲅鲆鲇鲈鲉鲊鲋鲌鲍鲎鲏鲐鲑鲒鲓鲔鲕鲖鲗鲘鲙鲚鲛鲜鲝鲞鲟鲠鲡鲢鲣鲤鲥鲦鲧鲨鲩鲪鲫鲬鲭鲮鲯鲰鲱鲲鲳鲴鲵鲶鲷鲸鲹鲺鲻鲼鲽鲾鲿鳀鳁鳂鳃鳄鳅鳆鳇鳈鳉鳊鳋鳌鳍鳎鳏鳐鳑鳒鳓鳔鳕鳖鳗鳘鳙鳚鳛鳜鳝鳞鳟鳠鳡鳢鳣鳤鸟鸠鸡鸢鸣鸤鸥鸦鸧鸨鸩鸪鸫鸬鸭鸮鸯鸰鸱鸲鸳鸴鸵鸶鸷鸸鸹鸺鸻鸼鸽鸾鸿鹀鹁鹂鹃鹄鹅鹆鹇鹈鹉鹊鹋鹌鹍鹎鹏鹐鹑鹒鹓鹔鹕鹖鹗鹘鹙鹚鹛鹜鹝鹞鹟鹠鹡鹢鹣鹤鹥鹦鹧鹨鹩鹪鹫鹬鹭鹮鹯鹰鹱鹲鹳鹴鹾麦麸麹麺麽黄黉黡黩黪黾鼋鼌鼍鼹齐齑齿龀龁龂龃龄龅龆龇龈龉龊龋龌龙龚龛龟鿎鿏鿒鿔𠀾𠆲𠆿𠇹𠉂𠉗𠋆𠚳𠛅𠛆𠛾𠡠𠮶𠯟𠯠𠰱𠰷𠱞𠲥𠴛𠴢𠵸𠵾𡋀𡋗𡋤𡍣𡒄𡝠𡞋𡞱𡠟𡥧𡭜𡭬𡳃𡳒𡶴𡸃𡺃𡺄𢋈𢗓𢘙𢘝𢘞𢙏𢙐𢙑𢙒𢙓𢛯𢠁𢢐𢧐𢫊𢫞𢫬𢬍𢬦𢭏𢽾𣃁𣆐𣈣𣍨𣍯𣍰𣎑𣏢𣐕𣐤𣑶𣒌𣓿𣔌𣗊𣗋𣗙𣘐𣘓𣘴𣘷𣚚𣞎𣨼𣭤𣯣𣱝𣲗𣲘𣳆𣶩𣶫𣶭𣷷𣸣𣺼𣺽𣽷𤆡𤆢𤇃𤇄𤇭𤇹𤈶𤈷𤊀𤊰𤋏𤎺𤎻𤙯𤝢𤞃𤞤𤠋𤦀𤩽𤳄𤶊𤶧𤻊𤽯𤾀𤿲𥁢𥅘𥅴𥅿𥆧𥇢𥎝𥐟𥐯𥐰𥐻𥞦𥧂𥩟𥩺𥫣𥬀𥬞𥬠𥭉𥮋𥮜𥮾𥱔𥹥𥺅𥺇𦈈𦈉𦈋𦈌𦈎𦈏𦈐𦈑𦈒𦈓𦈔𦈕𦈖𦈗𦈘𦈙𦈚𦈛𦈜𦈝𦈞𦈟𦈠𦈡𦍠𦛨𦝼𦟗𦨩𦰏𦰴𦶟𦶻𦻕𧉐𧉞𧌥𧏖𧏗𧑏𧒭𧜭𧝝𧝧𧮪𧳕𧹑𧹒𧹓𧹔𧹕𧹖𧹗𧿈𨀁𨀱𨁴𨂺𨄄𨅛𨅫𨅬𨉗𨐅𨐆𨐇𨐈𨐉𨐊𨑹𨟳𨠨𨡙𨡺𨤰𨰾𨰿𨱀𨱁𨱂𨱃𨱄𨱅𨱆𨱇𨱈𨱉𨱊𨱋𨱌𨱍𨱎𨱏𨱐𨱑𨱒𨱓𨱔𨱕𨱖𨷿𨸀𨸁𨸂𨸃𨸄𨸅𨸆𨸇𨸉𨸊𨸋𨸌𨸎𨸘𨸟𩏼𩏽𩏾𩏿𩐀𩓋𩖕𩖖𩖗𩙥𩙦𩙧𩙨𩙩𩙪𩙫𩙬𩙭𩙮𩙯𩙰𩟿𩠀𩠁𩠂𩠃𩠅𩠆𩠇𩠈𩠉𩠊𩠋𩠌𩠎𩠏𩠠𩡖𩧦𩧨𩧩𩧪𩧫𩧬𩧭𩧮𩧯𩧰𩧱𩧲𩧳𩧴𩧵𩧶𩧸𩧺𩧻𩧼𩧿𩨀𩨁𩨂𩨃𩨄𩨅𩨆𩨇𩨈𩨉𩨊𩨋𩨌𩨍𩨎𩨏𩨐𩩈𩬣𩬤𩭹𩯒𩰰𩲒𩴌𩽹𩽺𩽻𩽼𩽽𩽾𩽿𩾁𩾂𩾃𩾄𩾅𩾆𩾇𩾈𩾊𩾋𩾌𩾎𪉂𪉃𪉄𪉅𪉆𪉈𪉉𪉊𪉋𪉌𪉍𪉎𪉏𪉐𪉑𪉒𪉔𪉕𪎈𪎉𪎊𪎋𪎌𪑅𪔭𪚏𪚐𪜎𪞝𪟎𪟝𪠀𪠟𪠡𪠳𪠵𪠸𪠺𪠽𪡀𪡃𪡋𪡏𪡛𪡞𪡺𪢌𪢐𪢒𪢕𪢖𪢠𪢮𪢸𪣆𪣒𪣻𪤄𪤚𪥠𪥫𪥰𪥿𪧀𪧘𪨊𪨗𪨧𪨩𪨶𪨷𪨹𪩇𪩎𪩘𪩛𪩷𪩸𪪏𪪑𪪞𪪴𪪼𪫌𪫡𪫷𪫺𪬚𪬯𪭝𪭢𪭧𪭯𪭵𪭾𪮃𪮋𪮖𪮳𪮶𪯋𪰶𪱥𪱷𪲎𪲔𪲛𪲮𪳍𪳗𪴙𪵑𪵣𪵱𪶄𪶒𪶮𪷍𪷽𪸕𪸩𪹀𪹠𪹳𪹹𪺣𪺪𪺭𪺷𪺸𪺻𪺽𪻐𪻨𪻲𪻺𪼋𪼴𪽈𪽝𪽪𪽭𪽮𪽴𪽷𪾔𪾢𪾣𪾦𪾸𪿊𪿞𪿫𪿵𫀌𫀓𫀨𫀬𫀮𫁂𫁟𫁡𫁱𫁲𫁳𫁷𫁺𫂃𫂆𫂈𫂖𫂿𫃗𫄙𫄚𫄛𫄜𫄝𫄞𫄟𫄠𫄡𫄢𫄣𫄤𫄥𫄦𫄧𫄨𫄩𫄪𫄫𫄬𫄭𫄮𫄯𫄰𫄱𫄲𫄳𫄴𫄵𫄶𫄷𫄸𫄹𫅅𫅗𫅥𫅭𫅼𫆏𫆝𫆫𫇘𫇛𫇪𫇭𫇴𫇽𫈉𫈎𫈟𫈵𫉁𫉄𫊪𫊮𫊸𫊹𫊻𫋇𫋌𫋲𫋷𫋹𫋻𫌀𫌇𫌋𫌨𫌪𫌫𫌬𫌭𫌯𫍐𫍙𫍚𫍛𫍜𫍝𫍞𫍟𫍠𫍡𫍢𫍣𫍤𫍥𫍦𫍧𫍨𫍩𫍪𫍫𫍬𫍭𫍮𫍯𫍰𫍱𫍲𫍳𫍴𫍵𫍶𫍷𫍸𫍹𫍺𫍻𫍼𫍽𫍾𫍿𫎆𫎌𫎦𫎧𫎨𫎩𫎪𫎫𫎬𫎭𫎱𫎳𫎸𫎺𫏃𫏆𫏋𫏌𫏐𫏑𫏕𫏞𫏨𫐄𫐅𫐆𫐇𫐈𫐉𫐊𫐋𫐌𫐍𫐎𫐏𫐐𫐑𫐒𫐓𫐔𫐕𫐖𫐗𫐘𫐙𫐷𫑘𫑡𫑷𫓥𫓦𫓧𫓨𫓩𫓪𫓫𫓬𫓭𫓮𫓯𫓰𫓱𫓲𫓳𫓴𫓵𫓶𫓷𫓸𫓹𫓺𫓻𫓼𫓽𫓾𫓿𫔀𫔁𫔂𫔃𫔄𫔅𫔆𫔇𫔈𫔉𫔊𫔋𫔌𫔍𫔎𫔏𫔐𫔑𫔒𫔓𫔔𫔕𫔖𫔭𫔮𫔯𫔰𫔲𫔴𫔵𫔶𫔽𫕚𫕥𫕨𫖃𫖅𫖇𫖑𫖒𫖓𫖔𫖕𫖖𫖪𫖫𫖬𫖭𫖮𫖯𫖰𫖱𫖲𫖳𫖴𫖵𫖶𫖷𫖸𫖹𫖺𫗇𫗈𫗉𫗊𫗋𫗚𫗞𫗟𫗠𫗡𫗢𫗣𫗤𫗥𫗦𫗧𫗨𫗩𫗪𫗫𫗬𫗭𫗮𫗯𫗰𫗱𫗳𫗴𫗵𫘛𫘜𫘝𫘞𫘟𫘠𫘡𫘣𫘤𫘥𫘦𫘧𫘨𫘩𫘪𫘫𫘬𫘭𫘮𫘯𫘰𫘱𫘽𫙂𫚈𫚉𫚊𫚋𫚌𫚍𫚎𫚏𫚐𫚑𫚒𫚓𫚔𫚕𫚖𫚗𫚘𫚙𫚚𫚛𫚜𫚝𫚞𫚟𫚠𫚡𫚢𫚣𫚤𫚥𫚦𫚧𫚨𫚩𫚪𫚫𫚬𫚭𫛚𫛛𫛜𫛝𫛞𫛟𫛠𫛡𫛢𫛣𫛤𫛥𫛦𫛧𫛨𫛩𫛪𫛫𫛬𫛭𫛮𫛯𫛰𫛱𫛲𫛳𫛴𫛵𫛶𫛷𫛸𫛹𫛺𫛻𫛼𫛽𫛾𫜀𫜁𫜂𫜃𫜄𫜅𫜊𫜑𫜒𫜓𫜔𫜕𫜙𫜟𫜨𫜩𫜪𫜫𫜬𫜭𫜮𫜯𫜰𫜲𫜳𫝈𫝋𫝦𫝧𫝨𫝩𫝪𫝫𫝬𫝭𫝮𫝵𫞅𫞗𫞚𫞛𫞝𫞠𫞡𫞢𫞣𫞥𫞦𫞧𫞨𫞩𫞷𫟃𫟄𫟅𫟆𫟇𫟑𫟕𫟞𫟟𫟠𫟡𫟢𫟤𫟥𫟦𫟫𫟬𫟲𫟳𫟴𫟵𫟶𫟷𫟸𫟹𫟺𫟻𫟼𫟽𫟾𫟿𫠀𫠁𫠂𫠅𫠆𫠇𫠈𫠊𫠋𫠌𫠏𫠐𫠑𫠒𫠖𫠜𫢸𫧃𫧮𫫇𫬐𫭟𫭢𫭼𫮃𫰛𫵷𫶇𫷷𫸩𬀩𬀪𬂩𬃊𬇕𬇙𬇹𬉼𬊈𬊤𬍛𬍡𬍤𬒈𬒗𬕂𬘓𬘘𬘡𬘩𬘫𬘬𬘭𬘯𬙂𬙊𬙋𬜬𬜯𬞟𬟁𬟽𬣙𬣞𬣡𬣳𬤇𬤊𬤝𬨂𬨎𬩽𬪩𬬩𬬭𬬮𬬱𬬸𬬹𬬻𬬿𬭁𬭊𬭎𬭚𬭛𬭤𬭩𬭬𬭭𬭯𬭳𬭶𬭸𬭼𬮱𬮿𬯀𬯎𬱖𬱟𬳵𬳶𬳽𬳿𬴂𬴃𬴊𬶋𬶍𬶏𬶐𬶟𬶠𬶨𬶭𬶮𬷕𬸘𬸚𬸣𬸦𬸪𬸯𬹼𬺈𬺓𰬸𰰨𰶎𰻝𰾄𰾭𱊜";
-  const T_CHARS = "傌㑶偑㑳倲㑯儸𠗣劏劃劚噚喎㘚㜄媰𡞵𡢃㜏孋𡠹㠏𡾱嵾幓㥮懤慺掆㩳撝擓擽㩜棡椲𣙎樢樫殰殨瀇濧灡澾濄𣾷瀰潚鸂燶煱獱璯𤫩𤪺䁻瞜碽磾稏穇𥢢筴籔䊷紬縳絅䋙䋚綐綵䋻䋹繿繸䍦䎱膞𦪙薵薳藭罃螮𧝞𧜗𧜵䙡襬訢鿁𧩙䜀讌貙𧵳䝼𧶧賰躎𨊰𨊸𨋢釾鏺䥱𨯅𨦫𨧜䥇鐯鐥钁䦛䦟靦𩞯𩣑騧䯀䱽𩶘鮣鰆鰌鰧䱷鳾鵁鴷鶄鶪鷉鸊龑萬與醜專業叢東絲丟兩嚴喪個豐臨爲麗舉麼義烏樂喬習鄉書買亂爭於虧雲亙亞產畝親褻嚲億僅僕從侖倉儀們價衆優夥會傴傘偉傳俥俔傷倀倫傖僞佇體餘傭僉俠侶僥偵側僑儈儕儂儘俁儔儼倆儷倈儉債傾傯僂僨償儎儻儐儲儺兒兌兗黨蘭關興茲養獸囅內岡冊寫軍農馮衝決況凍淨悽準涼減湊凜幾鳳鳧憑凱兇擊鑿芻劃劉則剛創刪別剗剄剎劊㓨劌剴劑剮劍剝劇勸辦務勱動勵勁勞勢勳勩勻匭匱區醫華協單賣佔盧滷臥衛卻巹廠廳歷厲壓厭厙龎廁釐廂厴廈廚廄廝縣叄參靉靆雙發變敘疊臺葉號嘆嘰籲喫後嚇呂嗎噸聽啓吳吶嘸囈嘔嚦唄員咼嗆嗚詠嚨嚀噝吒諮鹹響啞噠嘵嗶噦譁噲嚌噥喲脣嘜嗊嘮啢嗩喚嘖嗇囀齧嘓囉嘽嘯噴嘍嚳囁噯噓嚶囑嚕囂團園囪圍圇國圖圓聖壙場壞塊堅壇壢壩塢墳墜壟壠壚壘墾堊墊埡墶壋塏堖塒壎堝塹墮壪牆壯聲殼壺壼處備復夠頭誇夾奪奩奐奮獎奧妝婦媽嫵嫗嬀姍奼婁婭嬈嬌孌娛媧嫺嫿嬰嬋嬸媼嬃嬡嬪嬙嬤孫學孿寧寶實寵審憲宮寬賓寢對尋導壽將爾塵嘗堯尷屍盡層屓屜屆屬屢屨嶼歲豈嶇崗峴嵐島巖嶺嶽崬巋嶨嶧峽嶢嶠崢巒峯嶗崍嶮嶄嶸嶔嶁巔鞏巰幣帥師幃帳簾幟帶幀幫幬幘幗冪幹並廣莊慶牀廬廡庫應廟龐廢廎廩開異棄弒張彌弳彎彈強歸當錄彠彥彲徹徵徑徠憶懺憂愾懷態慫憮慪悵愴憐總懟懌戀恆懇惡慟懨愷惻惱惲悅愨懸慳悞憫驚懼慘懲憊愜慚憚慣慍憤憒願懾憖懣懶懍戇戔戲戧戰戩戱戶撲執擴捫掃揚擾撫拋摶摳掄搶護報擔擬攏揀擁攔擰撥擇掛摯攣掗撾撻挾撓擋撟掙擠揮撏挩撈損撿換搗據擄摑擲撣摻摜攬搵撳攙擱摟揯攪攜攝攄擺搖擯攤攖撐攆擷擼攛㩵擻攢敵敓斂斆數齋斕鬥斬斷無舊時曠暘曇暱晝曨顯晉曬曉曄暈暉暫𣈶曖術樸機殺雜權槓條來楊榪傑極構樅樞棗櫪梘棖槍楓梟櫃檸檉梔柵標棧櫛櫳棟櫨櫟欄樹棲樣欒椏橈楨檔榿橋樺檜槳樁樳夢檮棶槤檢梲欞槨槼櫝槧槶欏樿橢槮樓欖榲櫬櫚櫸樧檟檻檳櫧橫檣櫻櫫櫥櫓櫞檁歡歟歐殲歿殤殘殞殮殫殯毆毀轂畢斃氈毿𣯶氌氣氫氬氳匯漢湯洶澐溝沒灃漚瀝淪滄渢潙滬濘淚澩瀧瀘濼瀉潑澤涇潔灑窪浹淺漿澆湞溮濁測澮濟瀏滻渾滸濃潯濜塗湧涗濤澇淶漣潿渦溳渙滌潤澗漲澀澱淵淥漬瀆漸澠漁瀋滲溫遊灣溼濚潰濺漵漊潷滾滯灩灄滿瀅濾濫灤濱灘澦瀠瀟瀲濰潛瀦瀂瀾瀨瀕灝滅燈靈竈災燦煬爐燉煒熗點煉熾爍爛烴燭煙煩燒燁燴燙燼熱煥燜燾熅燻愛爺牘犛牽犧犢狀獷獁猶狽獮獰獨狹獅獪猙獄猻獫獵獼玀豬貓蝟獻獺璣璵瑒瑪瑋環現瑲璽琺瓏璫琿璡璉瑣瓊瑤璦璸瓔瓚甕甌電畫暢疇癤療瘧癘瘍癧瘲瘡瘋皰痾癰痙癢瘂癆瘓癇癡癉瘮瘞瘻癟癱癮癭癩癬癲皁皚皺皸盞鹽監蓋盜盤瞘眥矓睜睞瞼瞶瞞矚矯磯礬礦碭碼磚硨硯碸礪礱礫礎硜碩硤磽磑礄確磠礙磧磣鹼禮禡禕禰禎禱禍稟祿禪離禿稈種祕積稱穢穠穭稅穌穩穡穭窮竊竅窵窯竄窩窺竇窶豎競篤筍筆筧箋籠籩築篳篩簹箏籌篔籤篠簡籙簀篋籜籮簞簫簣簍籃籛籬籪籟糴類秈糶糲粵糞糧糉糝餱餈緊縶縕緪糹糾紆紅紂纖紇約級紈纊紀紉緯紜紘純紕紗綱納紝縱綸紛紙紋紡紵紖紐紓線紺紲紱練組紳細織終縐絆紼絀紹繹經紿綁絨結絝繞絰絎繪給絢絳絡絕絞統綆綃絹繡綌綏絛繼綈績緒綾緓續綺緋綽鞝緄繩維綿綬繃綢綯綹綣綜綻綰綠綴緇緙緗緘緬纜緹緲緝縕繢緦綞緞緶線緱縋緩締縷編緡緣縉縛縟縝縫縗縞纏縭縊縑繽縹縵縲纓縮繆繅纈繚繕繒繮繾繰繯繳纘罌網羅罰罷羆羈羥羨羣翹翽翬耮耬聳恥聶聾職聹聯聵聰肅腸膚骯餚腎腫脹脅膽勝朧腖臚脛膠脈膾髒臍腦膿臠腳脫腡臉臘醃膕齶膩靦膃騰臏羶臢輿艤艦艙艫艱豔藝節羋薌蕪蘆蓯葦藶莧萇蒼苧蘇薴蘋範莖蘢蔦塋煢繭荊薦薘莢蕘蓽萴蕎薈薺蕩榮葷滎犖熒蕁藎蓀蔭蕒葒葤藥蒞萊蓮蒔萵薟獲蕕瑩鶯蓴蘀蘿螢營縈蕭薩蔥蒕蕆蕢蔣蔞醟藍薊蘺蕷鎣驀虆薔蘞藺藹薀蘄蘊藪蘚蘊櫱虜慮虛蟲虯蟣蝨雖蝦蠆蝕蟻螞蠁蠶蠔蜆蠱蠣蟶蠻蟄蛺蟯螄蠐蛻蝸蠟蠅蟈蟬蠍螻蠑螿蟎蠨釁銜補襯袞襖嫋褘襪襲襏裝襠褌褳襝褲襉褸襤襴見觀覎規覓視覘覽覺覬覡覿覥覦覯覲覷觴觸觶誾讋譽謄訁計訂訃認譏訐訌討讓訕訖託訓議訊記訒講諱謳詎訝訥許訛論訩訟諷設訪訣證詁訶評詛識詗詐訴診詆謅詞詘詔詖譯詒誆誄試詿詩詰詼誠誅詵話誕詬詮詭詢詣諍該詳詫諢詡譸誡誣語誚誤誥誘誨誑說誦誒請諸諏諾讀諑誹課諉諛誰諗調諂諒諄誶談讅誼謀諶諜謊諫諧謔謁謂諤諭諼讒諮諳諺諦謎諞諝謨讜謖謝謠謗諡謙謐謹謾謫譾謬譚譖譙讕譜譎讞譴譫讖豶貝貞負貟貢財責賢敗賬貨質販貪貧貶購貯貫貳賤賁貰貼貴貺貸貿費賀貽賊贄賈賄貲賃賂贓資賅贐賕賑賚賒賦賭齎贖賞賜贔賙賡賠賧賴賵贅賻賺賽賾贗贊贇贈贍贏贛赬趙趕趨趲躉躍蹌蹠躒踐躂蹺蹕躚躋躊蹤躓躑躡蹣躕躥躪躦軀轀車軋軌軒軑軔轉軛輪軟轟軲軻轤軸軹軼軤軫轢軺輕軾載輊轎輈輇輅較輒輔輛輦輩輝輥輞輬輟輜輳輻輯轀輸轡轅轄輾轆轍轔辭闢辯辮邊遼達遷過邁運還這進遠違連遲邇逕跡適選遜遞邐邏遺遙鄧鄺鄔郵鄒鄴鄰鬱郟鄶鄭鄆酈鄖鄲酇醞醱醬釅釃釀醞採釋裏鑑鑾鏨釒釓釔針釘釗釙釕釷釺釧釤鈒釩釣鍆釹鍚釵鈃鈣鈈鈦鉅鈍鈔鍾鈉鋇鋼鈑鈐鑰欽鈞鎢鉤鈧鈁鈥鈄鈕鈀鈺錢鉦鉗鈷鉢鈳鉕鈽鈸鉞鑽鉬鉭鉀鈿鈾鐵鉑鈴鑠鉛鉚鉋鈰鉉鉈鉍鈮鈹鐸鉶銬銠鉺鋩錏銪鋮鋏鋣鐃銍鐺銅鋁銱銦鎧鍘銖銑鋌銩銛鏵銓鎩鉿銚鉻銘錚銫鉸銥鏟銃鐋銨銀銣鑄鐒鋪鋙錸鋱鏈鏗銷鎖鋰鋥鋤鍋鋯鋨鏽銼鋝鋒鋅鋶鐦鐧銳銻鋃鋟鋦錒錆鍺鍩錯錨錛錡鍀錁錕錩錫錮鑼錘錐錦鑕鍁錈鍃錇錟錠鍵鋸錳錙鍥鍈鍇鏘鍶鍔鍤鍬鍾鍛鎪鍠鍰鎄鍍鎂鏤鎡鐨鎇鏌鎮鎛鎘鑷钂鐫鎳鎿鎦鎬鎊鎰鎵鑌鎔鏢鏜鏝鏍鏰鏞鏡鏑鏃鏇鏐鐔钁鐐鏷鑥鐓鑭鐠鑹鏹鐙鑊鐳鐶鐲鐮鐿鑔鑣鑞鑱鑲長門閂閃閆閈閉問闖閏闈閒閎間閔閌悶閘鬧閨聞闥閩閭闓閥閣閡閫鬮閱閬闍閾閹閶鬩閿閽閻閼闡闌闃闠闊闋闔闐闒闕闞闤隊陽陰陣階際陸隴陳陘陝隯隉隕險隨隱隸雋難僱雛讎靂霧霽黴霢靄靚靝靜靨韃鞽韉韝韋韌韍韓韙韞韜韻頁頂頃頇項順須頊頑顧頓頎頒頌頏預顱領頗頸頡頰頲頜潁熲頦頤頻頮頹頷頴穎顆題顒顎顓顏額顳顢顛顙顥纇顫顬顰顴風颺颭颮颯颶颸颼颻飀飄飆飈飛饗饜飠飣飢飥餳飩餼飪飫飭飯飲餞飾飽飼飿飴餌饒餉餄餎餃餏餅餑餖餓餘餒餕餜餛餡館餷饋餶餿饞饁饃餺餾饈饉饅饊饌饢馬馭馱馴馳驅馹駁驢駔駛駟駙駒騶駐駝駑駕驛駘驍罵駰驕驊駱駭駢驫驪騁驗騂駸駿騏騎騍騅騌驌驂騙騭騤騷騖驁騮騫騸驃騾驄驏驟驥驦驤髏髖髕鬢鬹魘魎魚魛魢魷魨魯魴䰾魺鮁鮃鮎鱸鮋鮓鮒鮊鮑鱟鮍鮐鮭鮚鮳鮪鮞鮦鰂鮜鱠鱭鮫鮮鮺鯗鱘鯁鱺鰱鰹鯉鰣鰷鯀鯊鯇鮶鯽鯒鯖鯪鯕鯫鯡鯤鯧鯝鯢鯰鯛鯨鰺鯴鯔鱝鰈鰏鱨鯷鰮鰃鰓鱷鰍鰒鰉鰁鱂鯿鰠鰲鰭鰨鰥鰩鰟鰜鰳鰾鱈鱉鰻鰵鱅䲁鰼鱖鱔鱗鱒鱯鱤鱧鱣䲘鳥鳩雞鳶鳴鳲鷗鴉鶬鴇鴆鴣鶇鸕鴨鴞鴦鴒鴟鴝鴛鷽鴕鷥鷙鴯鴰鵂鴴鵃鴿鸞鴻鵐鵓鸝鵑鵠鵝鵒鷳鵜鵡鵲鶓鵪鵾鵯鵬鵮鶉鶊鵷鷫鶘鶡鶚鶻鶖鷀鶥鶩鷊鷂鶲鶹鶺鷁鶼鶴鷖鸚鷓鷚鷯鷦鷲鷸鷺䴉鸇鷹鸌鸏鸛鸘鹺麥麩麴麪麼黃黌黶黷黲黽黿鼂鼉鼴齊齏齒齔齕齗齟齡齙齠齜齦齬齪齲齷龍龔龕龜䃮䥑鿓鎶𠁞儣𠌥俓㒓𠏢儭𠠎剾𠞆𪟖勑嗰哯噅㘉嚧囃𡅏𡃕𡄔𡄣㗲𡓾𡑭壗𡔖壈㜷㜗㜢孎孻𡮉𡮣𡳳𦘧嵼𡽗嶈嶘㢝㦛𢤱𢣚𢣭愻憹𢠼憢懀㦎懎𤢻戰𢷮𢶫摋擫𢹿擣斅斸曥𣋋𦢈腪脥臗槫桱欍𣠲楇橯樤樠欓㰙㯤𣞻檭𣝕欘𣠩殢𣯴𣯩氭湋潕㵗澅𣿉𪷓𤅶濆灙𤁣瀃熓㷍爄熌爖熚熉㷿𤒎𤓩熡𤓎𤑳𤛮𤢟獩玁㺏瓕瓛𤳸癐𤸫㿗㿧皟麬䀉𥌃䀹𥊝瞤䁪䂎礒𥖅𥕥碙𥞵𥨐竚𥪂籅䉙籋篘𥵊𥸠䉲篸𥵃𥼽䊭𥽖𥿊緷綇綀繟緍縺緸𦂅䋿縎緰䌈𦃄䌋䌰縬繓䌖繏䌟䌝䌥繻䍽朥膢𦣎𦪽蓧䕳爇𦾟蘟𧕟䗿𧎈蠙蠀蠾𧔥䙱襰𧟀詀𧳟䞈買𧶔賬䝻賟贃𨇁躘𨄣𨅍𨈊𨈌䠱𨇞躝軉軗𨊻𨏠輄𨎮𨏥䢨𨣞𨣧𨢿𨣈𨤻鎷釳𨥛鈠鈋鈲鈯鉁龯銶鋉鍄𨧱錂鏆鎯鍮鎝𨫒鐄鏉鐎鐏𨮂䥩䦳𨳕𨳑閍閐䦘𨴗𨵩𨵸𨶀𨶏𨶲𨶮𨷲𨽏䧢䪏𩏪𩎢䪘䪗顂𩓣顃䫴颰𩗀䬞𩘹𩘀颷颾𩘺𩘝䬘䬝𩙈𩚛𩚥𩚵𩛆𩛩𩟐𩜦䭀䭃𩜇𩜵𩝔餸𩞄𩞦𩠴𩡣𩡺駎𩤊䮾駚𩢡䭿𩢾驋䮝𩥉駧𩢸駩𩢴𩣏𩣫駶𩣵𩣺䮠騔䮞驄騝騪𩤸𩤙䮫騟𩤲騚𩥄𩥑𩥇龭䮳𩧆䯤𩭙𩰀鬖𩯳𩰹𩳤𩴵魥𩵩𩵹鯶𩶱鮟𩶰鯄䲖鮸𩷰𩸃𩸦鯱䱙䱬䱰鱇𩽇䲰鳼𩿪𪀦鴲鴜𪁈鷨𪀾𪁖鵚𪂆𪃏𪃍鷔𪄕𪄆𪇳䴬麲麨䴴麳䵳𪔵𪘀𪘯𠿕凙㔋勣𧷎㓄𠬙唓㖮嚛𠽃噹嘺嘪噞嗹㗿嘳𡃄㘓𡃤𡂡嚽𡅯囒圞墲埬堚塿𡓁壣𧹈孇嬣嬻孾寠㞞屩崙𡸗輋巗𡹬㟺巊巘𡿖幝幩廬㢗廧𢍰彃徿𢤩㦞憸𢣐𢤿𢯷摐擟𢶒掚撊㨻㩋撧𢺳攋㪎曊膹梖櫅欐檵櫠欇𣜬欑毊霼濿溡𤄷𣽏㵾灒熂煇𤑹𤓌爥𤒻𤘀𤜆犞獊𤠮㺜猌瑽瓄瑻璝㻶𤬅畼𤳷痮𤷃㿖𤺔瘱盨睍眝矑矉𥏝𥖲礮𥗇𥜰𥜐䅐䅳𥢷䆉竱鴗𥶽䉑𥯤䉶𥴼簢簂䉬𥴨𥻦𩏷糺䊺紟䋃𥾯䋔絁絙絧絥繷繨纚𦀖綖絺䋦𦅇綟緤緮䋼𦃩縍繬縸縰繂𦅈繈繶纁纗䍤羵𦒀䎙𦔖聻𦟼𦡝𦧺艣𦱌蔿蒭蕽蕳葝蔯蕝薆藷䗅蠦蟜𧒯蟳蟂蟘䙔襗襓襘襀襵𧞫覼覛𧡴𧢄覹䚩𧭹訑訞訜詓諫𧦝𧦧䛄詑譊詷譑誂譨誺誫諣誋䛳誷𧩕誳諴諰諯謏諥謱謸𧩼謉謆謯𧫝譆𧬤譞𧭈譾豵貗贚䝭𧸘賝䞋贉贑䞓䟐䟆𧽯䟃䠆蹳蹻𨂐蹔𨇽𨆪𨇰𨇤軏軕轣軜軷軨軬𨎌軿𨌈輢輖輗輨輷輮𨍰轊轇轐轗轠遱鄟鄳醶釟釨鈇鈛鏦鈆𨥟鉔鉠𨪕銈銊鐈銁𨰋鉾鋠鋗𫒡錽錤鐪錜𨨛錝錥𨨢鍊鐼鍉𨰲鍒鎍䥯鎞鎙𨰃鏥䥗鏾鐇鐍𨬖𨭸𨭖𨮳𨯟鑴𨰥𨲳開閒閗閞𨴹閵䦯闑𨼳𩀨霣𩅙靧䪊鞾𩎖韠𩏂韛韝𩏠𩑔䪴䪾𩒎顗頫䫂䫀䫟頵𩔳𩓥顅𩔑願顣䫶䫻𩗓𩗴䬓飋𩟗飦䬧餦𩚩飵飶𩛌餫餔餗𩛡饠餧餬餪餵餭餱䭔䭑𩝽饘饟馯馼駃駞駊駤駫駻騃騉騊騄騠騜騵騴騱騻䮰驓驙驨鬠𩯁鱮魟鰑鱄魦魵𩶁䱁䱀鮅鮄鮤鮰鰤鮆鮯𩻮鯆鮿鮵䲅𩸄鯬𩸡䱧鯞鰋鯾鰦鰕鰫鰽𩻗𩻬鱊鱢𩼶鱲鳽鳷鴀鴅鴃鸗𩿤鴔鸋鴥鴐鵊鴮𪀖鵧鴳鴽鶰䳜鵟䳤鶭䳢鵫鵰鵩鷤鶌鶒鶦鶗𪃧䳧𪃒䳫鷅𪆷鷐鷩𪅂鷣鷷䴋𪉸麷䴱𪌭䴽𪍠䵴𪓰䶕齧齩𫜦齰齭齴𪙏齾龓䶲㑮𠐊㛝㜐媈嬦𡟫婡嬇孆孄嶹𦠅潣澬㶆灍爧爃𤛱㹽珼璾𤩂璼璊𥢶絍綋綡緟𦆲䖅䕤訨詊譂誴䜖䡐䡩䡵𨞺𨟊釚釲鈖鈗銏鉝鉽鉷䤤銂鐽𨧰𨩰鎈䥄鑉閝韚頍𩖰䫾䮄騼𩦠𩵦魽䱸鱆𩿅齯僤𣍐𪋿噁㘔塸埨𡑍墠娙㠣嵽廞彄暐晛梜櫍澫浿漍熰燖燀瓅璗璕礐𥗽篢紃紞絪綎綄綪綝綧縯纆纕蔄䓣蘋虉蝀訏詝諓詪諲諟譓軝輶鄩醲釴錀鋹釿鉥鉮鑪鉊鉧𨧀鋐錞𨨏鍭鎓鏏鏚䥕𨭎𨭆鏻鐩闉隑隮隤頔頠駓駉駪駼騑騞驎鮈鮀鮠鮡鯻鰊鱀鰶鱚鵏鶠鸑鶱鷟鷭鷿齘齮齼繐菕譅𰻞鋂鑀𪈼";
-  const PHRASE_MAP = {
-  "综合全景": "綜合全景",
-  "行业快讯": "行業快訊",
-  "社交雷达": "社交雷達",
-  "落地工具": "落地工具",
-  "实战视频": "實戰影片",
-  "提示词库": "提示詞庫",
-  "全量归档": "全量歸檔",
-  "全网热点": "全網熱點",
-  "前沿发声": "前沿發聲",
-  "24h 热门讨论": "24h 熱門討論",
-  "官方机构": "官方機構",
-  "大V与研发者": "大V與研發者",
-  "AI资讯雷达": "AI 資訊雷達",
-  "AI 资讯雷达": "AI 資訊雷達",
-  "全球顶尖 AI 动态高频追踪体系": "全球頂尖 AI 動態高頻追蹤體系",
-  "今日 AI 风向标": "今日 AI 風向標",
-  "自动刷新": "自動刷新",
-  "刷新": "刷新",
-  "今日更新": "今日更新",
-  "活跃源": "活躍源",
-  "监控标签": "監控標籤",
-  "深度技术研报": "深度技術研報",
-  "深度研报": "深度研報",
-  "历史每日简报": "歷史每日簡報",
-  "实时资讯": "即時資訊",
-  "关于我们": "關於我們",
-  "编辑方针": "編輯方針",
-  "隐私政策": "隱私政策",
-  "服务条款": "服務條款",
-  "天梯榜": "天梯榜",
-  "查看原帖": "查看原帖",
-  "独家前沿": "獨家前沿",
-  "极客前沿": "極客前沿",
-  "极客热推": "極客熱推",
-  "走马灯": "跑馬燈",
-  "实战演示": "實戰演示",
-  "实战": "實戰",
-  "视频": "影片",
-  "提示词": "提示詞",
-  "软件": "軟體",
-  "硬件": "硬體",
-  "代码": "程式碼",
-  "算法": "演算法",
-  "数据库": "資料庫",
-  "内存": "記憶體",
-  "硬盘": "硬碟",
-  "默认": "預設",
-  "用户": "使用者",
-  "界面": "介面",
-  "接口": "介面",
-  "项目": "專案",
-  "团队": "團隊",
-  "链接": "連結",
-  "登录": "登入",
-  "设置": "設定",
-  "搜索": "搜尋",
-  "剪贴板": "剪貼簿"
-};
-
-  let S_TO_T_MAP = null;
-  let T_TO_S_MAP = null;
-
-  function initMap() {
-    if (!S_TO_T_MAP) {
-      S_TO_T_MAP = new Map();
-      T_TO_S_MAP = new Map();
-      const sArr = Array.from(S_CHARS);
-      const tArr = Array.from(T_CHARS);
-      for (let i = 0; i < sArr.length; i++) {
-        s_to_t: sArr[i] && tArr[i] && S_TO_T_MAP.set(sArr[i], tArr[i]);
-        t_to_s: sArr[i] && tArr[i] && T_TO_S_MAP.set(tArr[i], sArr[i]);
+    // 简繁转换引擎按需懒加载器 (完整词表位于 /js/chinese_converter.js，仅繁体用户加载)
+    function ensureChineseConverter(cb) {
+      if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+        if (typeof cb === 'function') cb();
+        return;
       }
-    }
-  }
-
-  function toTraditional(text) {
-    if (!text || typeof text !== 'string') return text;
-    initMap();
-    let res = text;
-    for (const [s, t] of Object.entries(PHRASE_MAP)) {
-      if (res.includes(s)) {
-        res = res.split(s).join(t);
+      if (typeof cb === 'function') {
+        window._zhConvWaiters = window._zhConvWaiters || [];
+        window._zhConvWaiters.push(cb);
       }
+      if (window._zhConvLoading) return;
+      window._zhConvLoading = true;
+      const script = document.createElement('script');
+      script.src = '/js/chinese_converter.js';
+      script.async = true;
+      script.onload = () => {
+        window._zhConvLoading = false;
+        const waiters = window._zhConvWaiters || [];
+        window._zhConvWaiters = [];
+        waiters.forEach(fn => { try { fn(); } catch (e) {} });
+      };
+      script.onerror = () => {
+        window._zhConvLoading = false;
+        window._zhConvWaiters = [];
+      };
+      document.head.appendChild(script);
     }
-    let out = '';
-    for (const ch of res) {
-      out += S_TO_T_MAP.get(ch) || ch;
-    }
-    return out;
-  }
 
-  function toSimplified(text) {
-    if (!text || typeof text !== 'string') return text;
-    initMap();
-    let res = text;
-    for (const [s, t] of Object.entries(PHRASE_MAP)) {
-      if (res.includes(t)) {
-        res = res.split(t).join(s);
-      }
-    }
-    let out = '';
-    for (const ch of res) {
-      out += T_TO_S_MAP.get(ch) || ch;
-    }
-    return out;
-  }
-
-  const SKIP_TAGS = new Set(['SCRIPT', 'STYLE', 'CODE', 'PRE', 'NOSCRIPT', 'SVG']);
-
-  function convertDomToTraditional(root) {
-    if (!root) root = document.body;
-    if (!root) return;
-
-    // Convert document title
-    if (!document._origTitle) document._origTitle = document.title;
-    document.title = toTraditional(document._origTitle);
-
-    // TreeWalker for text nodes
-    const walker = document.createTreeWalker(
-      root,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function(node) {
-          if (!node.nodeValue || !node.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
-          const parent = node.parentElement;
-          if (!parent) return NodeFilter.FILTER_ACCEPT;
-          if (SKIP_TAGS.has(parent.tagName)) return NodeFilter.FILTER_REJECT;
-          if (parent.closest('.notranslate')) return NodeFilter.FILTER_REJECT;
-          return NodeFilter.FILTER_ACCEPT;
+    function collectCachedMatches(buckets, predicate) {
+      const out = [];
+      for (let i = 0; i < buckets.length; i++) {
+        const arr = buckets[i];
+        if (!Array.isArray(arr)) continue;
+        for (let j = 0; j < arr.length; j++) {
+          if (predicate(arr[j])) out.push(arr[j]);
         }
       }
-    );
-
-    const nodes = [];
-    while (walker.nextNode()) {
-      nodes.push(walker.currentNode);
+      return out;
     }
 
-    nodes.forEach(node => {
-      if (node._origText === undefined) {
-        node._origText = node.nodeValue;
-      }
-      node.nodeValue = toTraditional(node._origText);
-    });
-
-    // Attributes conversion
-    const attrs = root.querySelectorAll ? root.querySelectorAll('[placeholder], [title], [aria-label]') : [];
-    attrs.forEach(el => {
-      if (el.closest && el.closest('.notranslate')) return;
-      if (el.placeholder) {
-        if (el._origPlaceholder === undefined) el._origPlaceholder = el.placeholder;
-        el.placeholder = toTraditional(el._origPlaceholder);
-      }
-      if (el.title) {
-        if (el._origTitle === undefined) el._origTitle = el.title;
-        el.title = toTraditional(el._origTitle);
-      }
-      const aria = el.getAttribute ? el.getAttribute('aria-label') : null;
-      if (aria) {
-        if (el._origAriaLabel === undefined) el._origAriaLabel = aria;
-        el.setAttribute('aria-label', toTraditional(el._origAriaLabel));
-      }
-    });
-  }
-
-  function revertDomToSimplified(root) {
-    if (!root) root = document.body;
-    if (!root) return;
-
-    if (document._origTitle !== undefined) {
-      document.title = document._origTitle;
-    }
-
-    const walker = document.createTreeWalker(
-      root,
-      NodeFilter.SHOW_TEXT,
-      {
-        acceptNode: function(node) {
-          if (!node.nodeValue) return NodeFilter.FILTER_REJECT;
-          return NodeFilter.FILTER_ACCEPT;
+    function findCachedFirst(buckets, predicate) {
+      for (let i = 0; i < buckets.length; i++) {
+        const arr = buckets[i];
+        if (!Array.isArray(arr)) continue;
+        for (let j = 0; j < arr.length; j++) {
+          if (predicate(arr[j])) return arr[j];
         }
       }
-    );
-
-    while (walker.nextNode()) {
-      const node = walker.currentNode;
-      if (node._origText !== undefined) {
-        node.nodeValue = node._origText;
-      }
+      return null;
     }
-
-    const attrs = root.querySelectorAll ? root.querySelectorAll('[placeholder], [title], [aria-label]') : [];
-    attrs.forEach(el => {
-      if (el._origPlaceholder !== undefined) el.placeholder = el._origPlaceholder;
-      if (el._origTitle !== undefined) el.title = el._origTitle;
-      if (el._origAriaLabel !== undefined && el.setAttribute) el.setAttribute('aria-label', el._origAriaLabel);
-    });
-  }
-
-  window.ChineseConverter = {
-    toTraditional: toTraditional,
-    toSimplified: toSimplified,
-    convertDomToTraditional: convertDomToTraditional,
-    revertDomToSimplified: revertDomToSimplified
-  };
-
-})(typeof window !== 'undefined' ? window : this);
 
 
     // ==========================================
@@ -1411,9 +1243,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (currentSiteLang === 'chinese_traditional') {
         updateNavTabsLanguage('chinese_traditional');
         document.documentElement.lang = 'zh-TW';
-        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
-          window.ChineseConverter.convertDomToTraditional();
-        }
+        ensureChineseConverter(() => {
+          if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+            window.ChineseConverter.convertDomToTraditional();
+          }
+        });
         return;
       }
 
@@ -1432,14 +1266,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           updateNavTabsLanguage('chinese_simplified');
           return;
         }
-        setLanguage('en');
+        setLanguage('en', false);
         try {
-          if (typeof translate !== 'undefined' && translate.reset) translate.reset();
+          if (window._hasTranslateExecuted && typeof translate !== 'undefined' && translate.reset) translate.reset();
         } catch (e) {}
         return;
       }
 
       updateNavTabsLanguage(currentSiteLang);
+      window._hasTranslateExecuted = true;
       translate.execute();
       translate.changeLanguage(currentSiteLang);
     }
@@ -1471,9 +1306,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (cachedData && typeof renderUI === 'function') {
           renderUI(cachedData);
         }
-        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
-          window.ChineseConverter.convertDomToTraditional();
-        }
+        ensureChineseConverter(() => {
+          if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+            window.ChineseConverter.convertDomToTraditional();
+          }
+        });
         return;
       }
 
@@ -1566,13 +1403,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function applyCurrentTranslation() {
       const lang = localStorage.getItem('ai_radar_user_site_lang') || currentSiteLang;
       if (lang === 'chinese_traditional') {
-        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
-          setTimeout(() => {
-            try {
-              window.ChineseConverter.convertDomToTraditional();
-            } catch (e) {}
-          }, 30);
-        }
+        ensureChineseConverter(() => {
+          if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+            setTimeout(() => {
+              try {
+                window.ChineseConverter.convertDomToTraditional();
+              } catch (e) {}
+            }, 30);
+          }
+        });
         return;
       }
       if (lang === 'chinese_simplified') {
@@ -1928,6 +1767,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const txtAuto = document.getElementById('theme-txt-auto');
       if (txtAuto) txtAuto.textContent = (lang === 'zh') ? '自动' : 'Auto';
 
+      const ssrLang = document.documentElement.getAttribute('data-ssr-lang') || (isZhPath ? 'zh' : 'en');
+      if (!persist && lang === ssrLang && !window._hasFullClientLangApplied) {
+        const htContainer = document.getElementById('hot-tags-container');
+        if (htContainer && !htContainer.querySelector('button')) {
+          renderHotTags();
+        }
+        return;
+      }
+      window._hasFullClientLangApplied = true;
+
       const t = I18N[lang];
       document.title = t.pageTitle;
       const headerTitle = document.getElementById('header-title');
@@ -1939,7 +1788,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       
       const refreshIndicator = document.getElementById('refresh-indicator');
       if (refreshIndicator) {
-        refreshIndicator.innerHTML = `${t.autoRefresh} (<span id="timer">${Math.floor(refreshCountdown / 60)}m00s</span>)`;
+        refreshIndicator.innerHTML = `${t.autoRefresh} (<span id="timer" class="tabular-nums inline-block min-w-[42px] text-center">${Math.floor(refreshCountdown / 60)}m00s</span>)`;
       }
 
       const searchInput = document.getElementById('search-input');
@@ -2304,9 +2153,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const creatorsRail = document.getElementById('creators-rail-container');
         if (creatorsRail) {
           creatorsRail.classList.toggle('hidden', tab !== 'videos');
-          if (tab === 'videos') {
-            renderCreatorsRail();
-          }
         }
 
         const t = I18N[currentLang];
@@ -2321,11 +2167,33 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (titleEl) titleEl.textContent = catTitles[tab] || t.tabs[tab] || tab;
         const catDesc = document.getElementById('cat-view-desc');
         if (catDesc) catDesc.textContent = t.catViewDesc;
-        renderCategoryView(tab);
+
+        const renderToken = (window._pendingTabRenderToken = (window._pendingTabRenderToken || 0) + 1);
+        const executeTabRender = () => {
+          if (window._pendingTabRenderToken !== renderToken) return;
+          if (tab === 'videos' && creatorsRail) {
+            renderCreatorsRail();
+          }
+          renderCategoryView(tab);
+        };
+
+        if (!cachedData || !updateHash) {
+          executeTabRender();
+        } else {
+          const skel = document.getElementById('cat-loading-skeleton');
+          const wrap = document.getElementById('cat-content-wrap');
+          if (skel && wrap) {
+            skel.classList.remove('hidden');
+            wrap.classList.add('hidden');
+          }
+          requestAnimationFrame(() => setTimeout(executeTabRender, 0));
+        }
       }
 
-      // 平滑回滚到内容顶部
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // 仅当不在页面顶部时平滑回滚
+      if (window.scrollY > 40) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
 
     // 热门标签库定义 (支持双语与一键直达检索)
@@ -3523,7 +3391,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `
           <div class="space-y-2">
             <div class="rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-black max-h-72 relative group/img cursor-pointer" onclick="window.open('${sample.media_url}', '_blank')">
-              <img src="${sample.media_url}" class="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300" loading="lazy" alt="${escapeHtml(sampleTitle)}">
+              <img src="${sample.media_url}" width="480" height="270" class="w-full h-full object-contain group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" alt="${escapeHtml(sampleTitle)}">
               <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/80 text-white text-[9px] font-mono backdrop-blur-md">${isZh ? '🔍 点击看超清原图' : '🔍 View Full Resolution'}</span>
             </div>
             ${sampleText ? `<p class="text-[10px] text-slate-600 dark:text-slate-400 font-mono leading-relaxed bg-white/60 dark:bg-slate-900/60 p-2 rounded border border-slate-200/60 dark:border-slate-800/60">${escapeHtml(sampleText)}</p>` : ''}
@@ -3715,7 +3583,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
         thumbHtml = `
           <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
-            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+            <img src="${optImg}" width="72" height="52" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.closest('.tweet-thumb-box')?.remove();">
           </div>`;
       } else if (item.has_video || item.video_url) {
         thumbHtml = `
@@ -3855,7 +3723,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const optImg = `https://wsrv.nl/?url=${encodeURIComponent(twImg)}&w=240&output=webp&q=80`;
         thumbHtml = `
           <div class="tweet-thumb-box shrink-0 rounded-lg overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 cursor-pointer group/img shadow-sm w-[72px] h-[52px] max-w-[72px] max-h-[52px]" onclick="openImageLightbox('${escapeHtml(twImg)}', event)" title="${isZh ? '点击放大高清原图' : 'Click to view full image'}">
-            <img src="${optImg}" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="this.closest('.tweet-thumb-box')?.remove();">
+            <img src="${optImg}" width="72" height="52" alt="Tweet media" style="width: 72px; height: 52px; object-fit: cover;" class="group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="this.closest('.tweet-thumb-box')?.remove();">
           </div>`;
       } else if (item.has_video || item.video_url) {
         thumbHtml = `
@@ -3980,7 +3848,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
           <div class="flex gap-2.5 items-start my-1 flex-1 min-h-0 overflow-hidden">
             <div class="relative shrink-0 rounded-lg overflow-hidden bg-slate-900 cursor-pointer group/thumb border border-slate-200 dark:border-slate-800 shadow-inner w-[88px] h-[54px] max-w-[88px] max-h-[54px]" onclick="openVideoModal('${embedUrl}', '${titleEsc}', 'youtube', '${url}')" title="${isZh ? '点击就地影院播放' : 'Click to play in theater mode'}">
-              <img src="${posterUrl}" alt="${title}" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager">
+              <img src="${posterUrl}" width="88" height="54" alt="${title}" style="width: 88px; height: 54px; object-fit: cover;" onerror="this.onerror=null; this.src='${fallbackPoster}'" loading="eager" fetchpriority="high" decoding="async">
               <div class="absolute inset-0 bg-black/25 group-hover/thumb:bg-black/5 transition-colors flex items-center justify-center">
                 <div class="w-5 h-5 rounded-full bg-red-600/95 text-white flex items-center justify-center text-[9px] shadow-lg group-hover/thumb:scale-110 transition-transform leading-none">▶</div>
               </div>
@@ -4885,7 +4753,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           <div class="flex flex-col sm:flex-row gap-3.5 sm:gap-5 justify-between flex-1 min-w-0">
             ${hasRealImage ? `
               <div class="w-full sm:w-48 md:w-56 h-36 sm:h-32 rounded-xl overflow-hidden bg-slate-950 border border-amber-500/30 relative shrink-0">
-                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
+                <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" fetchpriority="high" decoding="async" onerror="this.onerror=null; this.style.display='none';">
                 ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-amber-400 border border-amber-500/40 text-[9px] font-bold flex items-center gap-0.5 shadow-md">▶ ${isZh ? '现场视频' : 'Video Report'}</span>` : ''}
               </div>` : ''}
             <div class="flex-1 flex flex-col justify-between space-y-2 min-w-0">
@@ -4922,7 +4790,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `
         <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 group border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full" onclick="handleNewsCardClick('${item.id}', event)">
           <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden bg-slate-950 border border-slate-200/80 dark:border-slate-800/80 relative shrink-0 self-start shadow-xs">
-            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none';">
+            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" ${imgLoading} onerror="this.onerror=null; this.style.display='none';">
             ${hasVideo ? `<span class="absolute bottom-1 right-1 px-1 py-0.5 rounded bg-black/75 backdrop-blur-md text-amber-400 border border-amber-500/30 text-[8px] font-bold flex items-center gap-0.5 shadow-sm">▶</span>` : ''}
           </div>
           <div class="flex-1 flex flex-col justify-between min-w-0">
@@ -5244,7 +5112,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               if (hasVideo && imgUrl) {
                 return `
                   <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer" onclick="event.stopPropagation(); window.open('${item.url}', '_blank')">
-                    <img src="${escapeHtml(imgUrl)}" alt="Tweet video preview" class="w-full max-h-72 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="this.parentElement.style.display='none'">
+                    <img src="${escapeHtml(imgUrl)}" width="640" height="360" alt="Tweet video preview" class="w-full max-h-72 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" decoding="async" onerror="this.parentElement.style.display='none'">
                     <div class="absolute inset-0 bg-slate-950/40 flex items-center justify-center group-hover/media:bg-slate-950/20 transition-colors">
                       <div class="w-12 h-12 rounded-full bg-sky-500/90 text-white flex items-center justify-center shadow-lg group-hover/media:scale-110 transition-transform">
                         <svg class="w-5 h-5 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -5281,7 +5149,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   <div class="mt-2.5 grid grid-cols-2 gap-1.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900">
                     ${allMediaUrls.slice(0, 4).map(u => `
                       <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="openImageLightbox('${escapeHtml(u)}', event)">
-                        <img src="${optimizeImageUrl(u, 400)}" data-orig="${escapeHtml(u)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+                        <img src="${optimizeImageUrl(u, 400)}" data-orig="${escapeHtml(u)}" width="400" height="225" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                       </div>
                     `).join('')}
                   </div>`;
@@ -5290,7 +5158,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               if (imgUrl) {
                 return `
                   <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer max-h-80" onclick="openImageLightbox('${escapeHtml(imgUrl)}', event)">
-                    <img src="${optimizeImageUrl(imgUrl, 640)}" data-orig="${escapeHtml(imgUrl)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+                    <img src="${optimizeImageUrl(imgUrl, 640)}" data-orig="${escapeHtml(imgUrl)}" width="640" height="360" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.02] transition-transform duration-300" loading="lazy" decoding="async" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                     <div class="absolute bottom-2 right-2 px-1.5 py-0.5 rounded bg-black/60 backdrop-blur-sm text-[9px] text-white/90 font-mono opacity-0 group-hover/media:opacity-100 transition-opacity flex items-center gap-1">
                       <span>🔍</span>
                       <span>${isZh ? '查看原图' : 'View Full Image'}</span>
@@ -5391,18 +5259,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return list;
     }
 
-    // 预载入栏目双语精选数据
-    fetch('/data/curated_column_highlights.json?t=' + Date.now(), { cache: 'no-cache' })
-      .then(res => res.ok ? res.json() : null)
-      .then(d => {
-        if (d) {
-          window._curatedColumnHighlights = d;
-          if (['tools', 'celebrity', 'news'].includes(currentTab)) {
-            renderColumnSpotlightBanner(currentTab);
-          }
-        }
-      })
-      .catch(() => {});
+    // 栏目双语精选数据由 loadNews 统一按需并发拉取，避免重复请求阻塞首屏
 
     // 栏目级 AI 双语深度事实看板 (v2.0) 核心渲染器
     function renderColumnSpotlightBanner(tab = 'celebrity') {
@@ -5621,7 +5478,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 const tTopic = isZh ? (t.topic_zh || '') : (t.topic_en || '');
                 return `
                   <button type="button" onclick="window.switchActiveTitan(${idx})" class="titan-tab-btn ${isSelected ? 'active' : ''} max-w-[220px]">
-                    <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" class="w-5 h-5 rounded-full object-cover shrink-0 ring-1 ${isSelected ? 'ring-white' : 'ring-sky-400/40'}" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
+                    <img src="${optimizeAvatarUrl(t.avatar || t.name, 48)}" width="20" height="20" decoding="async" alt="" class="w-5 h-5 rounded-full object-cover shrink-0 ring-1 ${isSelected ? 'ring-white' : 'ring-sky-400/40'}" onerror="this.src='/assets/avatars/' + (t.handle ? t.handle.replace('@','') : 'karpathy') + '.jpg'">
                     <span class="truncate font-bold shrink-0 max-w-[90px]">${escapeHtml(tName)}</span>
                     ${tTopic ? `<span class="text-[10px] opacity-80 font-normal truncate max-w-[100px]" title="${escapeHtml(tTopic)}">· ${escapeHtml(tTopic)}</span>` : ''}
                   </button>
@@ -5647,7 +5504,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="flex items-center justify-between pb-3.5 mb-3 border-b border-sky-100/60 dark:border-slate-800 flex-wrap gap-3">
               <div class="flex items-center space-x-3 min-w-0">
                 <div class="relative shrink-0">
-                  <img src="${optimizeAvatarUrl(avatar || author, 96)}" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400 shadow-md object-cover ring-2 ring-sky-400/20" onerror="this.src='/assets/avatars/' + (handle ? handle.replace('@','') : 'karpathy') + '.jpg'">
+                  <img src="${optimizeAvatarUrl(avatar || author, 96)}" width="48" height="48" decoding="async" alt="${escapeHtml(author)}" class="w-12 h-12 rounded-full border-2 border-sky-400 shadow-md object-cover ring-2 ring-sky-400/20" onerror="this.src='/assets/avatars/' + (handle ? handle.replace('@','') : 'karpathy') + '.jpg'">
                   <span class="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-sky-500 text-white flex items-center justify-center text-[9px] font-black ring-2 ring-white dark:ring-slate-900 shadow">✓</span>
                 </div>
                 <div class="min-w-0">
@@ -6497,7 +6354,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </div>
             ${previewImg ? `
               <!-- 环境光模糊背景层 (解决宽屏Banner/手机截屏尺寸不一致时的黑边问题) -->
-              <img src="${optimizeImageUrl(previewImg, 480)}" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
+              <img src="${optimizeImageUrl(previewImg, 480)}" width="480" height="270" loading="lazy" decoding="async" alt="" class="absolute inset-0 w-full h-full object-cover blur-2xl opacity-35 scale-125 pointer-events-none" aria-hidden="true">
               <!-- 前景高清自适应图片 (保证文字、UI完整无切边) -->
               <img src="${optimizeImageUrl(previewImg, 480)}" data-orig="${escapeHtml(previewImg)}" data-fallback="${escapeHtml(fallbackImg)}" alt="${escapeHtml(appName)}" width="480" height="270" class="relative z-[1] w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-sm" loading="lazy" decoding="async" onerror="if(this.dataset.fallback && this.src !== this.dataset.fallback){ this.src = this.dataset.fallback; } else if(this.dataset.orig && this.src !== this.dataset.orig){ this.src = this.dataset.orig; } else { this.parentElement?.querySelector('.terminal-mockup')?.classList.remove('hidden'); this.parentElement?.querySelector('.floating-tool-badge')?.classList.add('hidden'); this.remove(); }">
               <div class="terminal-mockup hidden absolute inset-0 z-[2] w-full h-full bg-[#0b0f19] p-3 font-mono flex flex-col justify-between border-b border-slate-800/80 select-none">
@@ -6531,7 +6388,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               <!-- 悬浮 Logo 微图标 -->
               <div class="floating-tool-badge absolute bottom-2.5 left-3 z-[4] flex items-center space-x-2">
                 <div class="w-8 h-8 rounded-xl bg-slate-900/90 border border-emerald-500/40 backdrop-blur-md flex items-center justify-center text-emerald-400 shadow-md group-hover:scale-110 transition-transform overflow-hidden">
-                  ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
+                  ${item.logo_url ? `<img src="${escapeHtml(item.logo_url)}" width="44" height="44" loading="lazy" decoding="async" alt="${escapeHtml(appName)}" class="w-full h-full object-cover" onerror="this.remove()">` : iconSvg}
                 </div>
                 <span class="text-xs font-black text-white drop-shadow-md truncate max-w-[160px] notranslate">${escapeHtml(appName)}</span>
               </div>
@@ -6998,7 +6855,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           </div>
 
           <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-slate-700/60 cursor-pointer shadow-lg group-hover:border-indigo-500/60 transition-colors" onclick="window.open('${item.url}', '_blank')">
-            <img src="${item.image_url}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+            <img src="${item.image_url}" width="640" height="360" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent flex items-center justify-center">
               <div class="w-16 h-16 rounded-full bg-rose-600 text-white flex items-center justify-center text-2xl pl-1 shadow-2xl group-hover:scale-110 group-hover:bg-rose-500 transition-all">
                 ▶
@@ -7049,7 +6906,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return `
         <div class="flex items-start space-x-3 p-2.5 rounded-xl bg-slate-100/70 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group" onclick="openVideoModal('${item.embed_url}', '${title.replace(/'/g, "\\'")}', '${platformType}')">
           <div class="relative w-24 aspect-video rounded-lg overflow-hidden bg-black shrink-0">
-            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async" onerror="this.onerror=null; if(this.parentElement) this.parentElement.style.display='none'; else this.style.display='none';">
+            <img src="${optimizeImageUrl(item.image_url, 480)}" data-orig="${escapeHtml(item.image_url)}" alt="${escapeHtml(title)}" width="480" height="270" class="w-full h-full object-cover group-hover:scale-105 transition-transform" loading="lazy" decoding="async" onerror="this.onerror=null; this.style.display='none';">
             <span class="absolute top-1 left-1 text-xs drop-shadow">${medal}</span>
           </div>
           <div class="flex-1 min-w-0 space-y-1">
@@ -7406,7 +7263,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                onclick="mountInPlaceVerticalVideo(this.closest('.vertical-video-card'), '${embedSrc}', '${platformType}')">
             
             <!-- 原生海报封面 -->
-            <img src="${item.image_url || ''}" class="absolute inset-0 w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-500 ease-out" loading="lazy" alt="${title}">
+            <img src="${item.image_url || ''}" width="360" height="640" class="absolute inset-0 w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-500 ease-out" loading="lazy" decoding="async" alt="${title}">
 
             <!-- 原位播放器动态挂载槽 (点击后注入 iframe，平时不发送并发请求，彻底杜绝 TikTok 反爬风控与加载卡死) -->
             <div class="vertical-player-slot hidden absolute inset-0 w-full h-full z-10 bg-black"></div>
@@ -7490,7 +7347,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               onmouseleave="stopVideoHoverPreview(this)"
               onclick="window.open('${jumpUrl}', '_blank')">
               
-              <img src="${item.image_url}" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy">
+              <img src="${item.image_url}" width="480" height="270" alt="${escapeHtml(title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" decoding="async">
               
               <!-- 悬停静音预览挂载层 -->
               <div class="video-preview-slot absolute inset-0 w-full h-full pointer-events-none overflow-hidden"></div>
@@ -8226,9 +8083,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     function changeCategoryPageSize(sz) {
-      const validSizes = [30, 50, 100];
+      const validSizes = [24, 50, 100];
       sz = Number(sz);
-      if (!validSizes.includes(sz)) sz = 100;
+      if (!validSizes.includes(sz)) sz = 24;
       categoryPageSize = sz;
       try {
         localStorage.setItem('ainews_cat_page_size', String(sz));
@@ -8242,7 +8099,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     function renderCategoryPagination(totalPages, totalItems, curPage, pageSize) {
       const pagination = document.getElementById('cat-pagination-container');
       if (!pagination) return;
-      if (!totalItems || totalItems === 0 || (totalPages <= 1 && totalItems <= 30)) {
+      if (!totalItems || totalItems === 0 || (totalPages <= 1 && totalItems <= 24)) {
         pagination.innerHTML = '';
         pagination.classList.add('hidden');
         return;
@@ -8269,7 +8126,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const startItem = (cur - 1) * pageSize + 1;
       const endItem = Math.min(cur * pageSize, totalItems);
 
-      const pageSizeOptions = [30, 50, 100];
+      const pageSizeOptions = [24, 50, 100];
       const sizeButtonsHtml = pageSizeOptions.map(sz => {
         const isActive = (sz === pageSize);
         const btnCls = isActive
@@ -8318,20 +8175,49 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       pagination.innerHTML = html;
     }
 
-    // 渲染独立专栏广场视图 (带分页控制，默认 100 条/页，支持 30/50/100 自由切换)
+    function renderGridChunked(container, items, renderItemFn, onAllDone) {
+      if (!container) return;
+      const myToken = (window._gridChunkToken = (window._gridChunkToken || 0) + 1);
+      const firstBatch = 9;
+      if (items.length <= 12) {
+        container.innerHTML = items.map(renderItemFn).join('');
+        if (typeof onAllDone === 'function') onAllDone();
+        return;
+      }
+      container.innerHTML = items.slice(0, firstBatch).map(renderItemFn).join('');
+      let offset = firstBatch;
+      const appendNext = () => {
+        if (window._gridChunkToken !== myToken) return;
+        const nextItems = items.slice(offset, offset + 12);
+        if (nextItems.length === 0) {
+          if (typeof onAllDone === 'function') onAllDone();
+          return;
+        }
+        container.insertAdjacentHTML('beforeend', nextItems.map(renderItemFn).join(''));
+        offset += nextItems.length;
+        if (offset < items.length) {
+          requestAnimationFrame(appendNext);
+        } else if (typeof onAllDone === 'function') {
+          onAllDone();
+        }
+      };
+      requestAnimationFrame(appendNext);
+    }
+
+    // 渲染独立专栏广场视图 (带分页控制，默认 24 条/页，支持 24/50/100 自由切换)
     function renderCategoryView(tab) {
       const container = document.getElementById('cat-grid-container');
       const spotlightEl = document.getElementById('celebrity-spotlight-banner');
+      const skelEl = document.getElementById('cat-loading-skeleton');
+      const contentWrapEl = document.getElementById('cat-content-wrap');
       const t = I18N[currentLang];
       const isZh = currentLang === 'zh';
 
-      // 栏目独立自主归档：进入专栏时按需拉取专属历史数据，不阻塞首屏，翻页按时间倒序
-      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(tab) && _columnArchiveStatus[tab] !== 'loaded') {
-        loadColumnArchive(tab);
-      }
-
       if (!cachedData) {
-        if (container) {
+        if (skelEl && contentWrapEl) {
+          skelEl.classList.remove('hidden');
+          contentWrapEl.classList.add('hidden');
+        } else if (container) {
           container.className = "w-full";
           container.innerHTML = `
             <div class="py-16 text-center flex flex-col items-center justify-center space-y-3 text-slate-400">
@@ -8347,6 +8233,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
         return;
       }
+
+      // 栏目独立自主归档：数据就绪后按需拉取专属历史数据，翻页按时间倒序
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(tab) && _columnArchiveStatus[tab] !== 'loaded') {
+        loadColumnArchive(tab);
+      }
+      window._gridChunkToken = (window._gridChunkToken || 0) + 1;
 
       // 栏目级 AI 双语破局焦点 (Hero Spotlight) 核心调用
       if ((tab === 'celebrity' && socialViewMode === 'leader') || tab === 'news' || tab === 'tools') {
@@ -8378,8 +8270,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const pageItems = fullList.slice(startIndex, startIndex + categoryPageSize);
 
           container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
-          container.innerHTML = pageItems.map(renderNewsCard).join('');
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          renderGridChunked(container, pageItems, renderNewsCard, applyCurrentTranslation);
         }
       } else if (tab === 'celebrity') {
         const catTitle = document.getElementById('cat-view-title');
@@ -8616,8 +8508,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
 
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
-          container.innerHTML = pageItems.map(renderToolCard).join('');
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          renderGridChunked(container, pageItems, renderToolCard, applyCurrentTranslation);
         }
       } else if (tab === 'videos') {
         let rawList = (cachedData.grouped?.videos || cachedData.videos || []).filter(it => !it.is_prompt);
@@ -8872,22 +8764,66 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
 
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
-          container.innerHTML = pageItems.map(it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it)).join('');
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
+          renderGridChunked(container, pageItems, it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it), applyCurrentTranslation);
         }
+      }
+      if (skelEl && contentWrapEl) {
+        skelEl.classList.add('hidden');
+        contentWrapEl.classList.remove('hidden');
       }
       applyCurrentTranslation();
     }
 
+    function syncSsrBadgesAndTicker(data) {
+      if (!data) return;
+      const allNews = data.grouped?.news || data.news || data.industry_news || [];
+      const allCeleb = data.grouped?.celebrity || data.celebrity || data.leader_opinions || [];
+      const allTools = dedupToolItems(data.grouped?.tools || data.tools || data.applied_tools || []);
+      const allVideos = (data.grouped?.videos || data.videos || []).filter(it => !it.is_prompt);
+      const allPrompts = data.grouped?.prompts || data.prompts || (data.grouped?.videos || data.videos || []).filter(it => it.is_prompt);
+      const mapCounts = {
+        all: allNews.length + allCeleb.length + allTools.length + allVideos.length + allPrompts.length,
+        news: allNews.length,
+        celebrity: allCeleb.length,
+        tools: allTools.length,
+        videos: allVideos.length,
+        prompts: allPrompts.length
+      };
+      Object.entries(mapCounts).forEach(([k, val]) => {
+        const dEl = document.getElementById('badge-count-' + k);
+        if (dEl) dEl.textContent = val;
+        const mEl = document.getElementById('mobile-badge-' + k);
+        if (mEl) mEl.textContent = val;
+      });
+      const bArchive = document.getElementById('badge-count-archive');
+      if (bArchive && data.archive_meta?.total_archived) bArchive.textContent = data.archive_meta.total_archived;
+      const bLeader = document.getElementById('badge-count-leader');
+      if (bLeader) bLeader.textContent = allCeleb.length;
+      const bViral = document.getElementById('badge-count-viral');
+      if (bViral) {
+        const allViral = data.grouped?.viral_posts || data.viral_posts || (data.items ? data.items.filter(it => it.sub_category === 'viral_post' || (it.category === 'celebrity' && it.is_viral)) : []);
+        bViral.textContent = allViral.length;
+      }
+      const ssrPages = document.querySelectorAll('#viral-ticker-slider .viral-ticker-page');
+      if (ssrPages.length > 0) {
+        window.viralTickerTotalPages = ssrPages.length;
+        fitViralTickerHeight();
+        initViralTickerAutoScroll();
+      }
+    }
+
     // 加载数据 (高性能智能缓存版)
     async function loadNews(isManual = false) {
+      if (window._inFlightLoadNews && !isManual) return window._inFlightLoadNews;
       const refreshBtn = document.getElementById('refresh-btn-text');
       if (isManual && refreshBtn) refreshBtn.textContent = '...';
 
+      const runner = (async () => {
       try {
-        const fetchUrl = `/data/latest_news.json?t=${Date.now()}`;
+        const fetchUrl = isManual ? `/data/latest_news.json?t=${Date.now()}` : '/data/latest_news.json';
         const res = await fetch(fetchUrl, {
-          cache: 'no-cache'
+          cache: isManual ? 'reload' : 'no-cache'
         });
         if (!res.ok) throw new Error("HTTP error " + res.status);
         const data = await res.json();
@@ -8905,7 +8841,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const [wfRes, promptRes, highlightsRes] = await Promise.all([
             fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
             fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch('/data/curated_column_highlights.json?t=' + Date.now(), { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
+            fetch(isManual ? '/data/curated_column_highlights.json?t=' + Date.now() : '/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
           ]);
           if (highlightsRes && highlightsRes.ok) {
             try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
@@ -8952,10 +8888,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           console.warn("curated prompt/workflow library fetch fallback:", e);
         }
 
+        // SSR 快照保护：首屏已由服务端注入同批次静态 HTML 时，直接复用 DOM，彻底消除二次重绘与 CLS
+        const ssrMeta = document.querySelector('meta[name="ssr-updated"]');
+        const ssrUpdated = ssrMeta ? ssrMeta.getAttribute('content') : '';
+        const hasSsrDom = !!(ssrUpdated && document.querySelector('#top-three-grid article'));
+        const isSameAsSsr = !isManual && !window._hasInitialRendered && currentTab === 'all' && hasSsrDom && data.updated_at && (data.updated_at === ssrUpdated);
+
         // 性能防护锁：仅当已完成首次渲染且后台轮询版本未变时才跳过
         const isSameUpdate = window._hasInitialRendered && cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
         cachedData = data;
-        if (isSameUpdate && !isManual) {
+        if ((isSameAsSsr || isSameUpdate) && !isManual) {
+          if (isSameAsSsr) {
+            window._hasInitialRendered = true;
+            try { sessionStorage.setItem('ainews_updated_at', data.updated_at || ''); } catch (e) {}
+            syncSsrBadgesAndTicker(data);
+          }
           refreshCountdown = 600;
           return;
         }
@@ -8984,8 +8931,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       } catch (err) {
         console.error("加载数据失败:", err);
       } finally {
+        window._inFlightLoadNews = null;
         if (refreshBtn) refreshBtn.textContent = I18N[currentLang].refreshBtn;
       }
+      })();
+      if (!isManual) window._inFlightLoadNews = runner;
+      return runner;
     }
 
     // 弹窗与剪贴板控制 (Toast & Clipboard Control)
@@ -9153,26 +9104,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
       const t = I18N[currentLang] || I18N.zh;
-      const allNews = [
-        ...(cachedData.grouped?.news || []),
-        ...(cachedData.news || []),
-        ...(cachedData.top_three || []),
-        ...(cachedData.grouped?.celebrity || []),
-        ...(cachedData.items || []),
-        ...(cachedData.industry_news || []),
-        ...(cachedData.grouped?.tools || []),
-        ...(cachedData.grouped?.videos || []),
-        ...(cachedData.grouped?.prompts || [])
+      const buckets = [
+        cachedData.grouped?.news,
+        cachedData.news,
+        cachedData.top_three,
+        cachedData.grouped?.celebrity,
+        cachedData.items,
+        cachedData.industry_news,
+        cachedData.grouped?.tools,
+        cachedData.grouped?.videos,
+        cachedData.grouped?.prompts
       ];
-
-      const matches = allNews.filter(it => String(it.id) === String(newsId));
+      const matches = collectCachedMatches(buckets, it => String(it.id) === String(newsId));
       let item = matches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || matches[0];
       if (!item && String(newsId).startsWith('top_')) {
         const topIdx = parseInt(newsId.replace('top_', ''), 10);
         item = (cachedData.top_three || [])[topIdx];
       }
       if (!item) {
-        const urlMatches = allNews.filter(it => (it.url && it.url === newsId) || (it.title && it.title === newsId));
+        const urlMatches = collectCachedMatches(buckets, it => (it.url && it.url === newsId) || (it.title && it.title === newsId));
         item = urlMatches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || urlMatches[0];
       }
       if (!item) {
@@ -9386,7 +9336,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             if (validImages.length > 1) {
               galleryStripEl.innerHTML = validImages.map((img) => `
                 <button type="button" onclick="document.getElementById('ai-modal-image').src='${img.replace(/'/g, "\\'")}'" class="w-14 h-14 rounded-lg overflow-hidden border-2 border-slate-300 dark:border-slate-700 hover:border-indigo-500 focus:border-indigo-500 shrink-0 bg-slate-900 transition-all opacity-80 hover:opacity-100 cursor-pointer">
-                  <img src="${img}" alt="${escapeHtml(cleanTitle)} preview" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
+                  <img src="${img}" width="480" height="270" loading="lazy" decoding="async" alt="${escapeHtml(cleanTitle)} preview" class="w-full h-full object-cover" onerror="this.parentElement.remove()">
                 </button>
               `).join('');
               galleryStripEl.classList.remove('hidden');
@@ -9835,7 +9785,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (mediaType === 'image' && item.image_url && isValidTweetImageUrl(item.image_url)) {
         return `
           <div class="mt-3.5 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
-            <img src="${escapeHtml(item.image_url)}" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="openImageLightbox('${escapeHtml(item.image_url)}', event)">
+            <img src="${escapeHtml(item.image_url)}" width="640" height="360" loading="lazy" decoding="async" alt="Attached media" class="w-full h-auto max-h-[480px] object-cover hover:scale-[1.01] transition-transform duration-300 cursor-pointer" onclick="openImageLightbox('${escapeHtml(item.image_url)}', event)">
           </div>
         `;
       }
@@ -9952,13 +9902,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 const replyTime = isZh ? (reply.time || '1小时前') : (reply.time_en || '1h ago');
                 const replyImg = reply.image_url ? `
                   <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
-                    <img src="${escapeHtml(reply.image_url)}" alt="Thread attached image" class="w-full h-auto max-h-[380px] object-cover hover:scale-[1.01] transition-transform cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(reply.image_url)}', '_blank')">
+                    <img src="${escapeHtml(reply.image_url)}" width="640" height="360" loading="lazy" decoding="async" alt="Thread attached image" class="w-full h-auto max-h-[380px] object-cover hover:scale-[1.01] transition-transform cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(reply.image_url)}', '_blank')">
                   </div>
                 ` : '';
                 return `
                   <div class="pt-1.5 pb-2">
                     <div class="flex items-center space-x-2 text-xs">
-                      <img src="${escapeHtml(reply.author_avatar || item.author_avatar)}" alt="${escapeHtml(reply.author || item.author)} avatar" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${escapeHtml(reply.author||'user')}'">
+                      <img src="${escapeHtml(reply.author_avatar || item.author_avatar)}" width="24" height="24" loading="lazy" decoding="async" alt="${escapeHtml(reply.author || item.author)} avatar" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=${escapeHtml(reply.author||'user')}'">
                       <span class="font-bold text-slate-900 dark:text-slate-100 text-xs">${escapeHtml(reply.author || item.author)}</span>
                       <span class="px-1.5 py-0.5 rounded-md bg-rose-500/15 text-rose-600 dark:text-rose-400 font-mono text-[10px] font-bold">作者连推 · ${reply.step || `${rIdx+1}楼`}</span>
                       <span class="text-slate-400 text-[10px] font-mono">${replyTime}</span>
@@ -9989,14 +9939,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 const cTime = isZh ? (c.time || '2小时前') : (c.time_en || '2h ago');
                 const cImg = c.image_url ? `
                   <div class="mt-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 max-w-sm">
-                    <img src="${escapeHtml(c.image_url)}" class="w-full h-auto object-cover cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(c.image_url)}', '_blank')">
+                    <img src="${escapeHtml(c.image_url)}" width="640" height="360" loading="lazy" decoding="async" alt="Comment image" class="w-full h-auto object-cover cursor-pointer" onclick="event.stopPropagation(); window.open('${escapeHtml(c.image_url)}', '_blank')">
                   </div>
                 ` : '';
                 return `
                   <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200/70 dark:border-slate-800/70 text-xs">
                     <div class="flex items-center justify-between mb-1.5">
                       <div class="flex items-center space-x-2">
-                        <img src="${escapeHtml(c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + (c.author||'user'))}" alt="${escapeHtml(c.author)} avatar" class="w-5 h-5 rounded-full object-cover">
+                        <img src="${escapeHtml(c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=' + (c.author||'user'))}" width="20" height="20" loading="lazy" decoding="async" alt="${escapeHtml(c.author)} avatar" class="w-5 h-5 rounded-full object-cover">
                         <span class="font-bold text-slate-900 dark:text-slate-200">${escapeHtml(c.author)}</span>
                         <span class="text-slate-400 text-[10px] font-mono">${escapeHtml(c.handle || '')}</span>
                       </div>
@@ -10312,17 +10262,22 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     let currentSocialModalLang = 'zh';
 
     function openSocialPostModal(postId) {
-      if (!cachedData) return;
+      if (!cachedData) {
+        loadNews(false).then(() => {
+          if (cachedData) openSocialPostModal(postId);
+        });
+        return;
+      }
       const isZhSystem = currentLang === 'zh';
-      const allCelebs = [
-        ...(cachedData.items || []).filter(it => it.category === 'celebrity' || it.sub_category === 'viral_post' || it.is_viral),
-        ...(cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions || []),
-        ...(cachedData.grouped?.viral_posts || cachedData.viral_posts || []),
-        ...(cachedData.top_three || [])
+      const celebBuckets = [
+        cachedData.grouped?.celebrity || cachedData.celebrity || cachedData.leader_opinions,
+        cachedData.grouped?.viral_posts || cachedData.viral_posts,
+        cachedData.items,
+        cachedData.top_three
       ];
 
-      const item = allCelebs.find(it => String(it.id) === String(postId)) ||
-                   allCelebs.find(it => it.url === postId || it.title === postId);
+      const item = findCachedFirst(celebBuckets, it => String(it.id) === String(postId)) ||
+                   findCachedFirst(celebBuckets, it => it.url === postId || it.title === postId);
       if (!item) return;
 
       currentSocialModalItem = item;
@@ -10333,7 +10288,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       const modal = document.getElementById('social-post-modal');
       if (modal) {
-        modal.setAttribute('data-news-id', item.id || newsId);
+        modal.setAttribute('data-news-id', item.id || postId);
         modal.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
@@ -10499,7 +10454,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         } else if (hasVideo && imgUrl) {
           mediaContentEl.innerHTML = `
             <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 relative group/media cursor-pointer shadow-md mt-3" onclick="window.open('${item.url}', '_blank')">
-              <img src="${escapeHtml(imgUrl)}" alt="Tweet video" class="w-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.01] transition-transform duration-300" onerror="this.parentElement.style.display='none'">
+              <img src="${escapeHtml(imgUrl)}" width="640" height="360" decoding="async" alt="Tweet video" class="w-full max-h-80 object-cover rounded-xl group-hover/media:scale-[1.01] transition-transform duration-300" onerror="this.parentElement.style.display='none'">
               <div class="absolute inset-0 bg-slate-950/40 flex items-center justify-center group-hover/media:bg-slate-950/20 transition-colors">
                 <div class="w-14 h-14 rounded-full bg-sky-500/90 text-white flex items-center justify-center shadow-xl group-hover/media:scale-110 transition-transform">
                   <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
@@ -10515,14 +10470,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             <div class="grid grid-cols-2 gap-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md mt-3">
               ${allMediaUrls.slice(0, 4).map(u => `
                 <div class="relative overflow-hidden aspect-video bg-slate-900 group/img cursor-pointer" onclick="window.open('${escapeHtml(u)}', '_blank')">
-                  <img src="${optimizeImageUrl(u, 640)}" data-orig="${escapeHtml(u)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+                  <img src="${optimizeImageUrl(u, 640)}" data-orig="${escapeHtml(u)}" width="640" height="360" decoding="async" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
                 </div>
               `).join('')}
             </div>`;
         } else if (imgUrl) {
           mediaContentEl.innerHTML = `
             <div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-md cursor-pointer max-h-96 mt-3" onclick="window.open('${escapeHtml(imgUrl)}', '_blank')">
-              <img src="${optimizeImageUrl(imgUrl, 800)}" data-orig="${escapeHtml(imgUrl)}" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-96 object-cover rounded-xl hover:scale-[1.01] transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
+              <img src="${optimizeImageUrl(imgUrl, 800)}" data-orig="${escapeHtml(imgUrl)}" width="800" height="450" decoding="async" referrerpolicy="no-referrer" alt="Tweet media" class="w-full h-full max-h-96 object-cover rounded-xl hover:scale-[1.01] transition-transform duration-300" onerror="if(this.dataset.fallback !== '1'){ this.dataset.fallback = '1'; this.src = this.dataset.orig; } else { this.parentElement.style.display='none'; }">
             </div>`;
         } else {
           mediaContentEl.innerHTML = '';
@@ -10581,13 +10536,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                   const rTime = viewingZh ? (reply.time || '1小时前') : (reply.time_en || '1h ago');
                   const rImg = reply.image_url ? `
                     <div class="mt-2.5 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md">
-                      <img src="${reply.image_url}" alt="Thread image" class="w-full h-auto max-h-[360px] object-cover hover:scale-[1.01] transition-transform cursor-pointer" onclick="window.open('${reply.image_url}', '_blank')">
+                      <img src="${reply.image_url}" width="640" height="360" loading="lazy" decoding="async" alt="Thread image" class="w-full h-auto max-h-[360px] object-cover hover:scale-[1.01] transition-transform cursor-pointer" onclick="window.open('${reply.image_url}', '_blank')">
                     </div>
                   ` : '';
                   return `
                     <div class="pt-1 pb-2">
                       <div class="flex items-center space-x-2 text-xs">
-                        <img src="${reply.author_avatar || item.author_avatar}" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=user'">
+                        <img src="${reply.author_avatar || item.author_avatar}" width="24" height="24" loading="lazy" decoding="async" alt="" class="w-6 h-6 rounded-full ring-1 ring-rose-400 object-cover bg-slate-900" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=user'">
                         <span class="font-bold text-slate-900 dark:text-slate-100 text-xs">${reply.author || item.author}</span>
                         <span class="px-1.5 py-0.5 rounded-md bg-rose-500/15 text-rose-600 dark:text-rose-400 font-mono text-[10px] font-bold">连推 · ${reply.step || `${rIdx+1}楼`}</span>
                         <span class="text-slate-400 text-[10px] font-mono">${rTime}</span>
@@ -10610,14 +10565,14 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const cTime = viewingZh ? (c.time || '20分钟前') : (c.time_en || '20m ago');
           const cImg = c.image_url ? `
             <div class="mt-2 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 max-w-sm">
-              <img src="${c.image_url}" class="w-full h-auto object-cover cursor-pointer" onclick="window.open('${c.image_url}', '_blank')">
+              <img src="${c.image_url}" width="640" height="360" loading="lazy" decoding="async" alt="Comment image" class="w-full h-auto object-cover cursor-pointer" onclick="window.open('${c.image_url}', '_blank')">
             </div>
           ` : '';
           return `
             <div class="p-3 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800/80 space-y-1.5 transition-all hover:border-slate-300 dark:hover:border-slate-700">
               <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center space-x-2 min-w-0">
-                  <img src="${c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=user'}" class="w-6 h-6 rounded-full border border-slate-300 dark:border-slate-700 object-cover shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=user'">
+                  <img src="${c.avatar || 'https://api.dicebear.com/7.x/bottts/svg?seed=user'}" width="24" height="24" loading="lazy" decoding="async" alt="" class="w-6 h-6 rounded-full border border-slate-300 dark:border-slate-700 object-cover shrink-0" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=user'">
                   <div class="flex items-center space-x-1.5 min-w-0">
                     <span class="font-bold text-xs text-slate-800 dark:text-slate-200 truncate notranslate">${c.author}</span>
                     <span class="text-[11px] text-slate-400 font-mono truncate notranslate">${c.handle || ''}</span>
@@ -10718,11 +10673,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
         return;
       }
-      const allTools = [
-        ...(cachedData.grouped?.tools || cachedData.tools || []),
-        ...(cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools')
-      ];
-      const dedupedTools = dedupToolItems(allTools);
+      const rawTools = (cachedData.grouped?.tools && cachedData.grouped.tools.length)
+        ? cachedData.grouped.tools
+        : (cachedData.tools || (cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools'));
+      const allTools = rawTools;
+      const dedupedTools = dedupToolItems(rawTools);
 
       let item = dedupedTools.find(it => String(it.id) === String(toolId)) ||
                  allTools.find(it => String(it.id) === String(toolId)) ||
@@ -10827,7 +10782,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (timeEl) timeEl.textContent = `🕒 ${timeObj.display || timeObj.relative || (isZh ? '今日' : 'Today')}`;
       if (iconWrapEl) {
         if (item.logo_url) {
-          iconWrapEl.innerHTML = `<img src="${escapeHtml(item.logo_url)}" alt="${escapeHtml(appName)}" class="w-full h-full object-cover rounded-2xl">`;
+          iconWrapEl.innerHTML = `<img src="${escapeHtml(item.logo_url)}" width="44" height="44" decoding="async" alt="${escapeHtml(appName)}" class="w-full h-full object-cover rounded-2xl">`;
         } else {
           iconWrapEl.innerHTML = iconSvg;
         }
@@ -11629,13 +11584,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
     });
 
-    // 安全初始化 Google AdSense 广告单元（严格排查未初始化 ins 元素，彻底杜绝 TagError）
-    try {
-      const uninitAds = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
-      uninitAds.forEach(() => {
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      });
-    } catch (e) {}
+    // 延迟至首屏绘制完成后再初始化 AdSense 广告单元，避免主线程长任务阻塞 LCP/INP
+    const initAdsSafely = () => {
+      try {
+        const uninitAds = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+        uninitAds.forEach(() => {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+      } catch (e) {}
+    };
+    if (document.readyState === 'complete') {
+      setTimeout(initAdsSafely, 300);
+    } else {
+      window.addEventListener('load', () => setTimeout(initAdsSafely, 300), { once: true });
+    }
 
     // 全局快捷键监听 (Esc 键关闭弹窗，左右箭头切换轮播)
     document.addEventListener('keydown', (e) => {
@@ -11677,8 +11639,41 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     const initHashTab = getTabFromHash();
     if (initHashTab) {
       switchTab(initHashTab, false);
+      document.documentElement.classList.remove('has-hash-tab');
+      window._isLoadingNewsTriggered = true;
+      loadNews();
+    } else {
+      const hasSsrHome = !!(document.querySelector('meta[name="ssr-updated"]') && document.querySelector('#top-three-grid article'));
+      if (hasSsrHome) {
+        const ssrPages = document.querySelectorAll('#viral-ticker-slider .viral-ticker-page');
+        if (ssrPages.length > 0) {
+          window.viralTickerTotalPages = ssrPages.length;
+          fitViralTickerHeight();
+          initViralTickerAutoScroll();
+        }
+        const triggerDeferredLoad = () => {
+          if (window._deferredNewsScheduled) return;
+          window._deferredNewsScheduled = true;
+          loadNews();
+        };
+        window.addEventListener('pointerdown', triggerDeferredLoad, { once: true, passive: true });
+        window.addEventListener('keydown', triggerDeferredLoad, { once: true, passive: true });
+        const scheduleIdleLoad = () => {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => setTimeout(triggerDeferredLoad, 400), { timeout: 2200 });
+          } else {
+            setTimeout(triggerDeferredLoad, 1200);
+          }
+        };
+        if (document.readyState === 'complete') {
+          scheduleIdleLoad();
+        } else {
+          window.addEventListener('load', scheduleIdleLoad, { once: true });
+        }
+      } else {
+        loadNews();
+      }
     }
-    loadNews();
     window.addEventListener('hashchange', handleHashNavigation);
     let resizeSyncTimer = null;
     window.addEventListener('resize', () => {
@@ -11809,19 +11804,25 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     const runLangCheck = () => {
+      if (window._langCheckRan) return;
+      window._langCheckRan = true;
       initTranslateEngine();
       checkAndShowLangSuggestion();
     };
 
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      setTimeout(runLangCheck, 300);
-    } else {
-      window.addEventListener('DOMContentLoaded', () => {
-        initMobileBackToTop();
+    const onDomInteractiveOrLoaded = () => {
+      initMobileBackToTop();
       initTouchGestures();
-      handleHashNavigation();
-        syncThreeColumnsHeight();
-        setTimeout(runLangCheck, 300);
-      });
+      syncThreeColumnsHeight();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(runLangCheck, { timeout: 2000 });
+      } else {
+        setTimeout(runLangCheck, 1200);
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      window.addEventListener('DOMContentLoaded', onDomInteractiveOrLoaded, { once: true });
+    } else {
+      onDomInteractiveOrLoaded();
     }
-    setTimeout(runLangCheck, 600);

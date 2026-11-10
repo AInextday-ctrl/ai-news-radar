@@ -3,6 +3,7 @@
 
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 Disallow: /go
 Disallow: /go/
 Disallow: /go?*
@@ -12,70 +13,101 @@ Disallow: /r?*
 # --- Modern Generative AI Search & Answer Engine Crawlers ---
 User-agent: GPTBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: anthropic-ai
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Applebot-Extended
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Bytespider
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: cohere-ai
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Meta-ExternalAgent
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: FacebookBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Diffbot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: CCBot
 Allow: /
+Disallow: /cdn-cgi/
 
 # --- Traditional Major Search Engines ---
 User-agent: Googlebot
 Allow: /
+Disallow: /cdn-cgi/
+Disallow: /go
+Disallow: /go/
+Disallow: /r/
 
 User-agent: bingbot
 Allow: /
+Disallow: /cdn-cgi/
+Disallow: /go
+Disallow: /go/
+Disallow: /r/
 
 User-agent: BingPreview
 Allow: /
+Disallow: /cdn-cgi/
+Disallow: /go
+Disallow: /go/
+Disallow: /r/
 
 User-agent: Baiduspider
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: YandexBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Mediapartners-Google
 Allow: /
+Disallow: /cdn-cgi/
 
 User-agent: Google-Display-AdsBot
 Allow: /
+Disallow: /cdn-cgi/
 
 # --- Sitemaps & AI Context Endpoints ---
 Sitemap: https://ainewsradar.xyz/sitemap.xml
