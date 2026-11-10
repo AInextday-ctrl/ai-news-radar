@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-10 07:19:17 UTC",
+  "generated_at": "2026-11-10 07:34:31 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-10 07:19:17 UTC",
+      "updated_at": "2026-11-10 07:34:31 UTC",
       "headline_item": {
-        "id": "1f92d183f3f7c512",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "英国政府代码管理疏漏被AI击穿",
-        "title_en": "Security Flaws Across UK Government Sites Exposed ‘God-Tier’ Information",
-        "source": "Wired AI",
-        "published_at": "2026-11-10T07:00:00+00:00",
-        "url": "https://www.wired.com/story/security-flaws-across-uk-government-sites-exposed-god-tier-information/",
-        "event_summary_zh": "安全研究员利用消费级AI模型，轻易挖掘出英国政府部门在GitHub上泄露敏感凭证及代码漏洞",
-        "event_summary_en": "A security researcher utilized consumer-grade AI models on a laptop to expose sensitive credentials and vulnerabilities in GitHub repositories belonging to multiple UK government departments. Due to budget constraints and lack of routine IT maintenance, these agencies inadvertently leaked privileged access keys, creating critical security gaps.",
+        "id": "fd970148977d103a",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "软银财报巨亏70亿美元，股价却逆势暴涨",
+        "title_en": "SoftBank reports Q2 net loss of $7B vs. a ~$15.8B profit a year ago, on ~$14B revenue vs. ~$12.8B est. as tech selloff weighs on results; shares close up 13.9% (Jenny Lee/CNBC)",
+        "source": "CNBC",
+        "published_at": "2026-11-10T07:25:01+00:00",
+        "url": "https://www.cnbc.com/2026/11/10/softbank-2q-earnings-tech-selloff.html",
+        "event_summary_zh": "软银发布二季度财报显示净亏损70亿美元，但受亚洲科技股回暖及大额投资AI预期支撑，股价反而大涨近14%",
+        "event_summary_en": "SoftBank reported a Q2 net loss of approximately $7 billion, pressured by tech sell-offs. Despite the disappointing results, its stock surged 13.9% due to a Wall Street rebound and optimism surrounding its heavy AI bets, including a $1.85 billion investment in Malaysian AI infrastructure.",
         "core_facts_zh": [
-          "【核心事件】安全研究员与英国政府多个部门在GitHub公共代码库：通过AI辅助挖掘出被意外上传且权限过大的敏感登录凭证",
-          "【起因与机理】政府机构长期IT维护预算不足且缺乏基本的代码安全审计流程",
-          "【关键技术规格】研究者利用家用级AI扫描出政府敏感泄露。",
-          "【观点态度】系统性的维护资金不足导致基础安全防线崩塌。"
+          "【核心事件】软银集团在第二财季财报发布会：净亏损70亿美元但股价大涨13.9%，并宣布在马来西亚投入18.5亿美元建设AI计算中心",
+          "【起因与机理】科技股波动导致账面亏损，但市场对其持续下注OpenAI及基建业务的“AI信仰”给予了更高估值。",
+          "【关键数据与实测】软银财报披露二季度净亏损70亿美元。",
+          "【观点态度】大规模押注马来西亚AI算力基建以提振市场信心。"
         ],
         "core_facts_en": [
-          "[Core Event] Security researcher and UK government departments (Public GitHub repositories): Identified leaked sensitive credentials and deep-level access vulnerabilities using AI",
-          "[Root Cause & Mechanism] Systemic budget cuts for IT maintenance and lack of routine security audits",
-          "[Key Specification] Researcher exposed sensitive leaks using consumer-grade AI.",
-          "[Perspective & Impact] Systemic budget cuts lead to collapsed basic security infrastructure."
+          "[Core Event] SoftBank Group (Q2 Earnings Release): Reported a $7B net loss while stock surged 13.9%, plus a $1.85B investment in Malaysian AI infrastructure.",
+          "[Root Cause & Mechanism] Tech market volatility hit the bottom line, but investors are buying the 'AI hype' narrative fueled by their massive OpenAI stakes.",
+          "[Key Metrics] SoftBank Q2 net loss hits $7B.",
+          "[Perspective & Impact] Significant investment in Malaysian AI infrastructure signals strategic shift."
         ],
-        "industry_impact_zh": "这哪是AI威胁论的实战演练，分明是英国政府给全人类演示什么叫‘把核弹钥匙随手扔在路边捡破烂的仓库里’。AI不过是那个帮他们揭开遮羞布的工具，真正的主角是那些连删除过期账号都懒得做的懒政IT团队。",
-        "industry_impact_en": "This isn't an AI-apocalypse scenario; it's the UK government showing us exactly how to leave the keys to the kingdom in a public dumpster. AI was just the tool that pointed out their incompetence—real-world IT security is failing because someone forgot that 'open source' doesn't mean 'open your credentials to the world.'"
+        "industry_impact_zh": "只要讲好AI的故事，亏损七十亿美金算什么？软银这就是在告诉投资者：钱不是亏了，而是换成了改变世界的‘入场券’，毕竟赌徒心态一旦被AI包装，韭菜们都能含泪高呼格局大。",
+        "industry_impact_en": "When you lose $7 billion but your stock flies, you aren't a failing investor—you're a 'visionary' betting on the future. As long as the AI narrative is loud enough, investors will happily ignore the red ink in exchange for a seat on the hype train."
       },
       "headlines": [
+        {
+          "id": "fd970148977d103a",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "软银财报巨亏70亿美元，股价却逆势暴涨",
+          "title_en": "SoftBank reports Q2 net loss of $7B vs. a ~$15.8B profit a year ago, on ~$14B revenue vs. ~$12.8B est. as tech selloff weighs on results; shares close up 13.9% (Jenny Lee/CNBC)",
+          "source": "CNBC",
+          "published_at": "2026-11-10T07:25:01+00:00",
+          "url": "https://www.cnbc.com/2026/11/10/softbank-2q-earnings-tech-selloff.html",
+          "event_summary_zh": "软银发布二季度财报显示净亏损70亿美元，但受亚洲科技股回暖及大额投资AI预期支撑，股价反而大涨近14%",
+          "event_summary_en": "SoftBank reported a Q2 net loss of approximately $7 billion, pressured by tech sell-offs. Despite the disappointing results, its stock surged 13.9% due to a Wall Street rebound and optimism surrounding its heavy AI bets, including a $1.85 billion investment in Malaysian AI infrastructure.",
+          "core_facts_zh": [
+            "【核心事件】软银集团在第二财季财报发布会：净亏损70亿美元但股价大涨13.9%，并宣布在马来西亚投入18.5亿美元建设AI计算中心",
+            "【起因与机理】科技股波动导致账面亏损，但市场对其持续下注OpenAI及基建业务的“AI信仰”给予了更高估值。",
+            "【关键数据与实测】软银财报披露二季度净亏损70亿美元。",
+            "【观点态度】大规模押注马来西亚AI算力基建以提振市场信心。"
+          ],
+          "core_facts_en": [
+            "[Core Event] SoftBank Group (Q2 Earnings Release): Reported a $7B net loss while stock surged 13.9%, plus a $1.85B investment in Malaysian AI infrastructure.",
+            "[Root Cause & Mechanism] Tech market volatility hit the bottom line, but investors are buying the 'AI hype' narrative fueled by their massive OpenAI stakes.",
+            "[Key Metrics] SoftBank Q2 net loss hits $7B.",
+            "[Perspective & Impact] Significant investment in Malaysian AI infrastructure signals strategic shift."
+          ],
+          "industry_impact_zh": "只要讲好AI的故事，亏损七十亿美金算什么？软银这就是在告诉投资者：钱不是亏了，而是换成了改变世界的‘入场券’，毕竟赌徒心态一旦被AI包装，韭菜们都能含泪高呼格局大。",
+          "industry_impact_en": "When you lose $7 billion but your stock flies, you aren't a failing investor—you're a 'visionary' betting on the future. As long as the AI narrative is loud enough, investors will happily ignore the red ink in exchange for a seat on the hype train."
+        },
         {
           "id": "1f92d183f3f7c512",
           "tag_zh": "📰 业界动态",
@@ -83,36 +109,12 @@
           ],
           "industry_impact_zh": "金融大佬们终于反应过来，与其担心被AI取代，不如直接买下它成为自己的自动化外挂。FactSet这笔钱与其说是投资，不如说是花钱买一张通往金融自动化时代的头等舱船票。",
           "industry_impact_en": "Financial giants finally realized that instead of fearing replacement by AI, it's better to buy it and turn it into a specialized automation add-on. This isn't just an investment; it's FactSet buying a first-class ticket to the inevitable era of AI-driven finance."
-        },
-        {
-          "id": "77026a382824f859",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "文件：Moonshot 在 8 月签署了一项协议，租用 32 台中国超微服务器，其中配备最强大的人工智能芯片 Nvidia B300，这可能违反了美国的规定",
-          "title_en": "Filings: Moonshot signed a deal in August to rent 32 China-based Super Micro servers with Nvidia B300, the most powerful AI chip, possibly in breach of US rules (Andy Lin/Bloomberg)",
-          "source": "Bloomberg",
-          "published_at": "2026-11-10T06:30:00+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-10/moonshot-rents-nvidia-s-top-ai-chips-in-china-documents-show",
-          "event_summary_zh": "安迪·林/彭博社：\n文件：Moonshot 在 8 月份签署了一项协议，租用 32 台位于中国的 Super Micro 服务器，其中配备了最强大的人工智能芯片 Nvidia B300，这可能违反了美国的规定——Moonshot AI 今年夏天使用了 Nvidia 公司最先进的芯片",
-          "event_summary_en": "Moonshot AI accessed a trove of Nvidia Corp.'s most advanced chips this summer, according to documents filed with Beijing regulators …",
-          "core_facts_zh": [
-            "【核心事件】英伟达 (NVIDIA / 黄仁勋)在算力芯片供应链与云端基础设施：文件：Moonshot 在 8 月签署了一项协议，租用 32 台中国超微服务器，其中配备最强大的人工智能芯片 Nvidia B300，这可能违反了美国的规定",
-            "【关键数据与实测】文件：Moonshot 在 8 月签署了一项协议，租用 32 台中国超微服务器，其中配备最强大的人工智能芯片 Nvidia B300，这可能违反了美国的规定。",
-            "【观点影响】安迪·林/彭博社：\n文件：Moonshot 在 8 月份签署了一项协议，租用 32 台位于中国的 Super Micro 服务器，其中配备了最强大的 AI 芯片 Nvidia B300，这可能违反了美国的规定 - Moonshot AI 今年夏天使用了 Nvidia 公司最先进的芯片。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Filings: Moonshot signed a deal in August to rent 32 China-based Super Micro servers with Nvidia B300, the most powerful AI chip, possibly in breach of US rules (Andy Lin/Bloomberg)",
-            "[Context & Motivation] Moonshot AI accessed a trove of Nvidia Corp.'s most advanced chips this summer, according to documents filed with Beijing regulators ….",
-            "[Key Fact] Filings: Moonshot signed a deal in August to rent 32 China-based Super Micro servers with Nvidia B300, the most powerful AI chip, possibly in breach of US rules&nbsp; &mdash;&nbsp; Moonshot AI accessed a trove of Nvidia Corp."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-10 07:19:17 UTC",
+      "updated_at": "2026-11-10 07:34:31 UTC",
       "author": "Julia Collins",
       "author_handle": "@julia_coder_",
       "author_role_zh": "AI Growth Specialist/Helping AI brands grow on X/500+ AI creators in my network/Successful campaigns/Build websites, software & AI tools/700+ Ai tools reviewed",
@@ -279,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-10 07:19:17 UTC",
+      "updated_at": "2026-11-10 07:34:31 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -388,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +12,120 Stars (总星标 20,798)",
+            "📈 社区热度指数级飙升：本周新增 +12,120 Stars (总星标 20,807)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +12,120 stars this week (20,798 total)",
+            "📈 Exponential community momentum: +12,120 stars this week (20,807 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
