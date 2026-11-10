@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-10 07:04:00 UTC",
+  "generated_at": "2026-11-10 07:11:13 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-10 07:04:00 UTC",
+      "updated_at": "2026-11-10 07:11:13 UTC",
       "headline_item": {
-        "id": "6d39075c9c0f605f",
+        "id": "1f92d183f3f7c512",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "金融数据巨头注资GeniosAI",
-        "title_en": "GeniosAI, which develops AI software for financial analysis and modeling, raised $19.1M across seed and Series A rounds; FactSet led the Series A (Ryan Lawler/Axios)",
-        "source": "Axios",
-        "published_at": "2026-11-10T06:45:01+00:00",
-        "url": "https://www.axios.com/pro/fintech-deals/2026/11/09/geniosai-19-1m-factset-financial-analysis-ai",
-        "event_summary_zh": "金融分析软件开发商GeniosAI完成1910万美元融资，FactSet领投，将加速AI模型在金融场景的落地",
-        "event_summary_en": "Financial AI software startup GeniosAI has raised $19.1 million in seed and Series A funding, with financial data giant FactSet leading the Series A. The funding is intended to leverage AI to automate and optimize complex financial modeling and data analysis for institutional clients.",
+        "title_zh": "英国政府代码管理疏漏被AI击穿",
+        "title_en": "Security Flaws Across UK Government Sites Exposed ‘God-Tier’ Information",
+        "source": "Wired AI",
+        "published_at": "2026-11-10T07:00:00+00:00",
+        "url": "https://www.wired.com/story/security-flaws-across-uk-government-sites-exposed-god-tier-information/",
+        "event_summary_zh": "安全研究员利用消费级AI模型，轻易挖掘出英国政府部门在GitHub上泄露敏感凭证及代码漏洞",
+        "event_summary_en": "A security researcher utilized consumer-grade AI models on a laptop to expose sensitive credentials and vulnerabilities in GitHub repositories belonging to multiple UK government departments. Due to budget constraints and lack of routine IT maintenance, these agencies inadvertently leaked privileged access keys, creating critical security gaps.",
         "core_facts_zh": [
-          "【核心事件】GeniosAI与FactSet在一级市场投融资领域：FactSet领投GeniosAI 1910万美元融资",
-          "【起因与机理】利用AI补强传统金融数据分析的效率短板",
-          "【关键数据与实测】融资总额达1910万美元，跨越两轮。",
-          "【观点态度】意在通过AI赋能金融模型与分析领域。"
+          "【核心事件】安全研究员与英国政府多个部门在GitHub公共代码库：通过AI辅助挖掘出被意外上传且权限过大的敏感登录凭证",
+          "【起因与机理】政府机构长期IT维护预算不足且缺乏基本的代码安全审计流程",
+          "【关键技术规格】研究者利用家用级AI扫描出政府敏感泄露。",
+          "【观点态度】系统性的维护资金不足导致基础安全防线崩塌。"
         ],
         "core_facts_en": [
-          "[Core Event] GeniosAI and FactSet (Primary market / Investment): FactSet leads $19.1M investment in GeniosAI",
-          "[Root Cause & Mechanism] To leverage AI for enhancing financial data analysis efficiency",
-          "[Key Metrics] Raised $19.1M across seed and Series A.",
-          "[Perspective & Impact] Focus on AI-driven financial modeling and analysis."
+          "[Core Event] Security researcher and UK government departments (Public GitHub repositories): Identified leaked sensitive credentials and deep-level access vulnerabilities using AI",
+          "[Root Cause & Mechanism] Systemic budget cuts for IT maintenance and lack of routine security audits",
+          "[Key Specification] Researcher exposed sensitive leaks using consumer-grade AI.",
+          "[Perspective & Impact] Systemic budget cuts lead to collapsed basic security infrastructure."
         ],
-        "industry_impact_zh": "金融大佬们终于反应过来，与其担心被AI取代，不如直接买下它成为自己的自动化外挂。FactSet这笔钱与其说是投资，不如说是花钱买一张通往金融自动化时代的头等舱船票。",
-        "industry_impact_en": "Financial giants finally realized that instead of fearing replacement by AI, it's better to buy it and turn it into a specialized automation add-on. This isn't just an investment; it's FactSet buying a first-class ticket to the inevitable era of AI-driven finance."
+        "industry_impact_zh": "这哪是AI威胁论的实战演练，分明是英国政府给全人类演示什么叫‘把核弹钥匙随手扔在路边捡破烂的仓库里’。AI不过是那个帮他们揭开遮羞布的工具，真正的主角是那些连删除过期账号都懒得做的懒政IT团队。",
+        "industry_impact_en": "This isn't an AI-apocalypse scenario; it's the UK government showing us exactly how to leave the keys to the kingdom in a public dumpster. AI was just the tool that pointed out their incompetence—real-world IT security is failing because someone forgot that 'open source' doesn't mean 'open your credentials to the world.'"
       },
       "headlines": [
+        {
+          "id": "1f92d183f3f7c512",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英国政府代码管理疏漏被AI击穿",
+          "title_en": "Security Flaws Across UK Government Sites Exposed ‘God-Tier’ Information",
+          "source": "Wired AI",
+          "published_at": "2026-11-10T07:00:00+00:00",
+          "url": "https://www.wired.com/story/security-flaws-across-uk-government-sites-exposed-god-tier-information/",
+          "event_summary_zh": "安全研究员利用消费级AI模型，轻易挖掘出英国政府部门在GitHub上泄露敏感凭证及代码漏洞",
+          "event_summary_en": "A security researcher utilized consumer-grade AI models on a laptop to expose sensitive credentials and vulnerabilities in GitHub repositories belonging to multiple UK government departments. Due to budget constraints and lack of routine IT maintenance, these agencies inadvertently leaked privileged access keys, creating critical security gaps.",
+          "core_facts_zh": [
+            "【核心事件】安全研究员与英国政府多个部门在GitHub公共代码库：通过AI辅助挖掘出被意外上传且权限过大的敏感登录凭证",
+            "【起因与机理】政府机构长期IT维护预算不足且缺乏基本的代码安全审计流程",
+            "【关键技术规格】研究者利用家用级AI扫描出政府敏感泄露。",
+            "【观点态度】系统性的维护资金不足导致基础安全防线崩塌。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Security researcher and UK government departments (Public GitHub repositories): Identified leaked sensitive credentials and deep-level access vulnerabilities using AI",
+            "[Root Cause & Mechanism] Systemic budget cuts for IT maintenance and lack of routine security audits",
+            "[Key Specification] Researcher exposed sensitive leaks using consumer-grade AI.",
+            "[Perspective & Impact] Systemic budget cuts lead to collapsed basic security infrastructure."
+          ],
+          "industry_impact_zh": "这哪是AI威胁论的实战演练，分明是英国政府给全人类演示什么叫‘把核弹钥匙随手扔在路边捡破烂的仓库里’。AI不过是那个帮他们揭开遮羞布的工具，真正的主角是那些连删除过期账号都懒得做的懒政IT团队。",
+          "industry_impact_en": "This isn't an AI-apocalypse scenario; it's the UK government showing us exactly how to leave the keys to the kingdom in a public dumpster. AI was just the tool that pointed out their incompetence—real-world IT security is failing because someone forgot that 'open source' doesn't mean 'open your credentials to the world.'"
+        },
         {
           "id": "6d39075c9c0f605f",
           "tag_zh": "📰 业界动态",
@@ -81,35 +107,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "3d00f0b6205cdbc6",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "白宫任命 Palantir 首席信息安全官 Michael LoSapio 领导国土安全部网络安全和基础设施安全局，接替代理局长 Nick Andersen",
-          "title_en": "The White House picks Palantir CISO Michael LoSapio to lead the DHS' Cybersecurity and Infrastructure Security Agency, replacing Acting Director Nick Andersen (Reuters)",
-          "source": "Reuters",
-          "published_at": "2026-11-10T05:40:02+00:00",
-          "url": "https://www.reuters.com/world/white-house-nominates-palantirs-losapio-lead-homeland-securitys-cyber-agency-2026-11-09/",
-          "event_summary_zh": "白宫任命 Palantir 首席信息安全官 Michael LoSapio 领导国土安全部网络安全和基础设施安全局，接替代理局长 Nick Andersen。— 白宫周一表示，已提名 Michael LoSapio 担任美国国土安全部网络安全和基础设施安全局局长",
-          "event_summary_en": "The White House said on Monday it has nominated Michael LoSapio to be the director of the US Department of Homeland Security's Cybersecurity …",
-          "core_facts_zh": [
-            "【核心事件】美国白宫决策机构在美国国会听证会与联邦监管审议现场：白宫任命 Palantir 首席信息安全官 Michael LoSapio 领导国土安全部网络安全和基础设施安全局，接替代理局长 Nick Andersen",
-            "【核心事实细节】The White House picks Palantir CISO Michael LoSapio to lead the DHS' Cybersecurity and Infrastructure Security Agency, replacing Acting Director Nick Andersen&nbsp; &mdash;&nbsp; The White House said on Monday it has nominated Michael LoSapio to be the director of the US。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: The White House picks Palantir CISO Michael LoSapio to lead the DHS' Cybersecurity and Infrastructure Security Agency, replacing Acting Director Nick Andersen (Reuters)",
-            "[Root Cause & Mechanism] The White House said on Monday it has nominated Michael LoSapio to be the director of the US Department of Homeland Security's Cybersecurity ….",
-            "[Key Fact] The White House picks Palantir CISO Michael LoSapio to lead the DHS' Cybersecurity and Infrastructure Security Agency, replacing Acting Director Nick Andersen&nbsp; &mdash;&nbsp; The White House said on Monday it has nominated Michael LoSapio to be the director of the US."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-10 07:04:01 UTC",
+      "updated_at": "2026-11-10 07:11:13 UTC",
       "author": "Julia Collins",
       "author_handle": "@julia_coder_",
       "author_role_zh": "AI Growth Specialist/Helping AI brands grow on X/500+ AI creators in my network/Successful campaigns/Build websites, software & AI tools/700+ Ai tools reviewed",
@@ -276,7 +279,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-10 07:04:01 UTC",
+      "updated_at": "2026-11-10 07:11:13 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -289,7 +292,7 @@
         "license": "MIT",
         "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
         "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
         "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
         "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
         "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -320,7 +323,7 @@
           "license": "MIT",
           "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
           "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
           "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
           "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
           "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -385,12 +388,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +12,120 Stars (总星标 20,789)",
+            "📈 社区热度指数级飙升：本周新增 +12,120 Stars (总星标 20,792)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +12,120 stars this week (20,789 total)",
+            "📈 Exponential community momentum: +12,120 stars this week (20,792 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
