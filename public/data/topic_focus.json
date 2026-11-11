@@ -1,32 +1,32 @@
 {
-  "updated_at": "2026-11-11T15:35:39.679205+00:00",
+  "updated_at": "2026-11-11T20:21:09.118112+00:00",
   "topics": [
     {
       "topic_id": "topic_anthropic_cuda_breakthrough",
       "heat_score": 9.8,
       "badge_zh": "⚡ 商业与算力风暴",
       "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "算力架构与生态突围",
-      "category_tag_en": "Compute Architecture & Ecosystem",
-      "title_zh": "Anthropic成功实现AMD适配，英伟达CUDA护城河松动",
-      "title_en": "Anthropic breaks CUDA dominance with three-day AMD model migration",
-      "summary_zh": "Anthropic宣布通过AI自动化工具，将核心模型Claude从英伟达CUDA环境迁移至AMD硬件仅耗时3天，打破长期以来的软件生态壁垒。此举直接挑战英伟达在高算力市场的垄断地位，引发关于“算力平权”及底层架构灵活性的大规模讨论。",
-      "summary_en": "Anthropic reduced the Claude model migration time from Nvidia's CUDA to AMD hardware to just three days using AI-assisted tooling. This breakthrough directly challenges Nvidia's software moat, sparking intense industry debate on compute commoditization and hardware vendor lock-in.",
+      "category_tag_zh": "算力基础设施攻坚",
+      "category_tag_en": "Compute Infrastructure Defense",
+      "title_zh": "Anthropic 突围 CUDA 壁垒：Claude 模型跨端迁移仅耗三天",
+      "title_en": "Anthropic Shatters CUDA Lock-in: Claude Cross-Platform Migration in 3 Days",
+      "summary_zh": "Anthropic 宣布利用 AI 自动化重构技术，将 Claude 系列模型从 NVIDIA CUDA 生态高效迁移至 AMD 芯片平台，且耗时从常规的数月缩短至三天。这一突破直接挑战了英伟达在 AI 算力底层的软件垄断地位，引发行业对 GPU 生态议价权的重新博弈。",
+      "summary_en": "Anthropic announced a breakthrough in AI-driven refactoring, porting Claude models from NVIDIA CUDA to AMD hardware in just three days, down from months. This move directly challenges NVIDIA's software monopoly, sparking a major shift in the bargaining power dynamics of AI computing infrastructure.",
       "perspective_pro": {
-        "role_zh": "🟢 算力解耦支持者",
-        "role_en": "🟢 Compute Decoupling Advocate",
-        "speaker_zh": "研发效率派及云基础设施决策者",
-        "speaker_en": "Infrastructure engineers & CTOs",
-        "point_zh": "CUDA不再是制约发展的死结。通过AI自动适配，开发者可根据成本与性价比自由调度算力，降低了对单一供应商的极度依赖。",
-        "point_en": "CUDA is no longer a bottleneck. AI-assisted porting allows developers to choose hardware based on efficiency rather than ecosystem inertia, breaking expensive vendor lock-in."
+        "role_zh": "🟢 算力去中心化倡导者",
+        "role_en": "🟢 Compute Decentralization Advocates",
+        "speaker_zh": "AI 基础设施研发团队",
+        "speaker_en": "AI Infrastructure Engineering Teams",
+        "point_zh": "软件层的抽象化是打破硬件垄断的唯一路径，AI 辅助编译极大降低了迁移成本，证明了模型推理不再被 CUDA 锁死。",
+        "point_en": "Software abstraction is the only path to breaking hardware monopolies. AI-assisted compilation dramatically reduces migration friction, proving inference is no longer strictly bound to CUDA."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业稳定性质疑派",
-        "role_en": "🔴 Industrial Stability Skeptic",
-        "speaker_zh": "英伟达深度用户及底层驱动专家",
-        "speaker_en": "Nvidia hardware enthusiasts & kernel experts",
-        "point_zh": "迁移速度不代表生产环境的稳定性。性能优化的本质在于底层算子库的深度兼容，这种“闪电迁移”往往伴随着难以察觉的精度损失与高昂的维护成本。",
-        "point_en": "Migration speed is not production readiness. Performance optimization requires deep kernel-level tuning; quick-fixes often hide hidden precision decay and skyrocketing operational overhead."
+        "role_zh": "🔴 工业理性派",
+        "role_en": "🔴 Industrial Realist",
+        "speaker_zh": "硬件系统架构工程师",
+        "speaker_en": "Hardware Systems Architects",
+        "point_zh": "三天迁移仅代表模型跑通，大规模集群下的稳定性、性能损耗以及 CUDA 库深度调优后的算力差异仍不可忽视，商业落地尚存隐忧。",
+        "point_en": "A three-day migration demonstrates feasibility but overlooks cluster stability, performance degradation, and the deep optimization advantages unique to mature CUDA environments at scale."
       },
       "linked_news": [
         {
@@ -38,16 +38,6 @@
           "image_url": "https://the-decoder.com/wp-content/uploads/2026/11/nvidia_moat.png",
           "hot_score": 5,
           "published_at": "2026-11-11T14:25:20+00:00"
-        },
-        {
-          "id": "c94db3a814640a0b",
-          "title_zh": "Fractile估值暴涨，获7.2亿美元融资",
-          "title_en": "London-based AI chip startup Fractile raised $720M from Thrive, Founders Fund, and others, sources say at a $7B post-money valuation, up from ~$1.1B in May (George Hammond/Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/f999a0c2-af52-499f-8008-accbdfd45a25",
-          "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 5,
-          "published_at": "2026-11-11T13:20:56+00:00"
         }
       ],
       "linked_tweets": [
@@ -59,6 +49,98 @@
           "content_zh": "经过充分训练的人工智能模型并不意味着它不再需要计算能力。\n\n训练教会模型如何识别模式、理解语言和生成响应。\n\n但每次有人使用该模型时，它仍然需要计算资源来处理请求并产生答案，这称为推理。\n\n想象一下数百万人同时使用 ChatGPT、生成图像、编写代码和运行 AI 代理。每次交互都需要处理能力。\n\n与训练不同，推理是一个持续的过程。当模型发布时它并没有停止。\n\n这就是人工智能公司继续投资数十亿美元建设数据中心和数千个 GPU 的原因。\n\n构建智能模型是一项挑战。拥有足够的计算能力来服务世界是另一回事。",
           "content_en": "An AI model being fully trained doesn’t mean it stops needing computing power.\n\nTraining teaches the model how to recognize patterns, understand language, and generate responses. \n\nBut every time someone uses that model, it still needs computing resources to process the request and produce an answer., This is called inference.\n\nThink about millions of people using ChatGPT simultaneously, generating images, writing code, and running AI agents. Every interaction requires processing power.\n\nUnlike training, inference is an ongoing process. It doesn’t stop when the model is released.\n\nThis is why AI companies continue investing billions in data centers and thousands of GPUs.\n\nBuilding an intelligent model is one challenge. Having enough computing power to serve the world is another.",
           "url": "https://x.com/chiidex277/status/2119331335772795036",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_claude_desktop_mcp_core4",
+        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
+        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Claude Desktop / Cline / Roo Code",
+        "config_filename": "claude_desktop_config.json"
+      },
+      "linked_counts": {
+        "news": 1,
+        "tweets": 1,
+        "has_tool": true
+      },
+      "id": "topic_anthropic_cuda_breakthrough",
+      "stance_matrix": {
+        "pro_point_zh": "软件层的抽象化是打破硬件垄断的唯一路径，AI 辅助编译极大降低了迁移成本，证明了模型推理不再被 CUDA 锁死。",
+        "pro_author": "AI 基础设施研发团队",
+        "con_point_zh": "三天迁移仅代表模型跑通，大规模集群下的稳定性、性能损耗以及 CUDA 库深度调优后的算力差异仍不可忽视，商业落地尚存隐忧。",
+        "con_author": "硬件系统架构工程师",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "Software abstraction is the only path to breaking hardware monopolies. AI-assisted compilation dramatically reduces migration friction, proving inference is no longer strictly bound to CUDA.",
+        "con_point_en": "A three-day migration demonstrates feasibility but overlooks cluster stability, performance degradation, and the deep optimization advantages unique to mature CUDA environments at scale.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+      }
+    },
+    {
+      "topic_id": "topic_jensen_huang_china_investigation",
+      "heat_score": 9.6,
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "地缘政治与公司治理",
+      "category_tag_en": "Geopolitics & Governance",
+      "title_zh": "黄仁勋陷“间谍门”调查：英伟达与中国背景关联受质疑",
+      "title_en": "Jensen Huang Under Probe: NVIDIA-China Ties Spark Insider Concerns",
+      "summary_zh": "黄仁勋近期因被曝与疑似中国情报资产背景的人士存在不当交往，且对美出口管制政策持批评态度，正面临英伟达董事会内部调查及美国国会质询。这一事件正值地缘政治敏感期，将英伟达的供应链透明度与高管政治立场推向风口浪尖。",
+      "summary_en": "Jensen Huang faces an internal NVIDIA probe and Congressional inquiry following allegations of improper relationships with individuals linked to Chinese intelligence, alongside his public criticism of US export controls. This triggers severe scrutiny over NVIDIA’s supply chain transparency and leadership's geopolitical alignment.",
+      "perspective_pro": {
+        "role_zh": "🟢 自由贸易派",
+        "role_en": "🟢 Free Trade Pragmatists",
+        "speaker_zh": "全球化商业分析师",
+        "speaker_en": "Global Trade Analysts",
+        "point_zh": "黄仁勋的言论体现了对全球科学协作的尊重，将商业交流与间谍指控混为一谈是政治施压的恶意手段。",
+        "point_en": "Huang’s rhetoric reflects a commitment to global scientific collaboration; conflating business exchanges with espionage is a calculated move of political pressure."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 国家安全强硬派",
+        "role_en": "🔴 National Security Hawks",
+        "speaker_zh": "美国情报研究员",
+        "speaker_en": "US Intelligence Researchers",
+        "point_zh": "英伟达不仅是商业实体，更是国家级战略资源，其高管与地缘敌对国背景人士的密切联系构成了不可忽视的战略安全漏洞。",
+        "point_en": "NVIDIA is not merely a commercial entity but a national strategic asset; close ties between its top leadership and geopolitical rivals pose critical security vulnerabilities."
+      },
+      "linked_news": [
+        {
+          "id": "79c388e0de69f842",
+          "title_zh": "黄仁勋卷入商业间谍疑云",
+          "title_en": "China’s Nvidia Honeypot Isn’t Surprising. Jensen Huang Fell for It Anyway",
+          "source": "Wired AI",
+          "url": "https://www.wired.com/story/chinas-nvidia-honeypot-isnt-surprising-jensen-huang-fell-for-it-anyway/",
+          "image_url": "https://media.wired.com/photos/6af3b2cb420c0dad2c15cd3b/master/pass/Jensen-Honeypot-Big-Story-2.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-11T15:30:00+00:00"
+        },
+        {
+          "id": "edd89c3ad0e6681d",
+          "title_zh": "黄仁勋陷“间谍门”与对华言论博弈",
+          "title_en": "An analysis of 42 interviews since 2022: after US chip restrictions, Jensen Huang's public rhetoric became more admiring of China and critical of export rules (J.D. Capelouto/Semafor)",
+          "source": "Semafor",
+          "url": "https://www.semafor.com/article/11/11/2026/tracking-how-jensen-huang-changed-his-stance-on-china",
+          "image_url": "https://img.semafor.com/1d78e9970617539b22fe6f32661ca928f20ff131-4980x3325.jpg?rect=0,356,4980,2615&w=1200&h=630&q=75&auto=format",
+          "hot_score": 5,
+          "published_at": "2026-11-11T14:01:03+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "579016fb49cb26de",
+          "author": "Julia Collins",
+          "author_handle": "@julia_coder_",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2117231679458951168/oW_4P0yx_normal.jpg",
+          "content_zh": "一名用户使用 Claude Code 在广州购买的一款杂牌移动电源中发现了隐藏芯片。\n\n每次给 iPhone 充电时，它都会秘密复制整个手机的数据。它还读取 Wi-Fi 密码，连接到家庭网络，并将所有信息发送到远程服务器。\n\n这款充电宝是三周前在机场花19美元买的，标签为30,000mAh，很重，没有品牌。\n\n第一次插上电源时，屏幕提示“信任这台计算机”，用户想都没想就点击了信任，授予其一键读取所有数据的权限。\n\n今天早上，在设置 Claude Code 来监控文件读取后，充电仅 10 秒屏幕就闪烁黄色和红色警告——数据正在传输。\n\n该移动电源被确定为一台内置 64 GB 存储和网络连接的小型计算机。\n\n普通的充电线只使用电源线，但这款充电线既使用电源线又使用数据线，并且已经复制了：\n\n→ 设备信息，1,206 个联系人\n→ 所有应用程序，包括 2 个银行应用程序\n→ 3,912 张照片，包括护照\n→ Wi-Fi 网络名称和密钥\n→ 妻子的 iPhone 照片\n\n每次充电时，它都会使用密钥上网并发送新数据 - 3 周内上传 19 次，最后一次上传是在昨晚凌晨 2:14。\n\n用户立即拔掉电源，使用 Claude Code 屏蔽该 IP，并更改 Wi-Fi 密码和银行应用程序登录信息。\n\n维修店将其拆开查看——详情如下。建议：今天检查您家中的每个移动电源。\n\n获取独家人工智能发现、新推出的工具、有用的网站、GitHub 项目、技术更新和我不在 X 上分享的资源。\n\n加入我的 Telegram 频道以获取最新动态！\n\n👉加入电报群：\n必须关注@julia_coder_以获取更多内容",
+          "content_en": "A user discovered a hidden chip in an off-brand power bank purchased in Guangzhou using Claude Code.\n\nEvery time it charged an iPhone, it secretly copied the entire phone's data. It also read Wi-Fi passwords, connected to the home network, and sent all the information to a remote server.\n\nThis power bank was bought at the airport three weeks ago for $19, labeled as 30,000 mAh, hefty with no brand name.\n\nWhen first plugged in, the screen prompted \"Trust This Computer,\" and the user clicked trust without thinking, granting it one-click access to read all data.\n\nThis morning, after setting up Claude Code to monitor file reads, the screen flashed yellow and red warnings just 10 seconds into charging—data was being transmitted.\n\nThe power bank was identified as a mini-computer with built-in 64 GB storage and network connectivity.\n\nRegular charging cables only use power lines, but this one uses both power and data lines, and it has already copied:\n\n→ Device info, 1,206 contacts\n→ All apps including 2 banking apps\n→ 3,912 photos including passport\n→ Wi-Fi network names and keys\n→ Wife's iPhone photos\n\nEvery charge, it uses the key to go online and send new data—19 uploads over 3 weeks, last one at 2:14 AM last night.\n\nThe user immediately unplugged it, used Claude Code to block that IP, and changed the Wi-Fi password and banking app logins.\n\nA repair shop took it apart for a look—details below. Suggestion: Check every power bank in your home today.\n\nGet exclusive AI discoveries, newly launched tools, useful websites, GitHub projects, tech updates & resources I don’t share on X.\n\nJoin my Telegram channel to stay updated!\n\n👉Join Telegram : https://t.co/ngBL3Ijpsw\nMust follow  @julia_coder_  for more content",
+          "url": "https://x.com/julia_coder_/status/2119374093950787631",
           "platform": "x"
         }
       ],
@@ -79,65 +161,65 @@
         "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_anthropic_cuda_breakthrough",
+      "id": "topic_jensen_huang_china_investigation",
       "stance_matrix": {
-        "pro_point_zh": "CUDA不再是制约发展的死结。通过AI自动适配，开发者可根据成本与性价比自由调度算力，降低了对单一供应商的极度依赖。",
-        "pro_author": "研发效率派及云基础设施决策者",
-        "con_point_zh": "迁移速度不代表生产环境的稳定性。性能优化的本质在于底层算子库的深度兼容，这种“闪电迁移”往往伴随着难以察觉的精度损失与高昂的维护成本。",
-        "con_author": "英伟达深度用户及底层驱动专家",
+        "pro_point_zh": "黄仁勋的言论体现了对全球科学协作的尊重，将商业交流与间谍指控混为一谈是政治施压的恶意手段。",
+        "pro_author": "全球化商业分析师",
+        "con_point_zh": "英伟达不仅是商业实体，更是国家级战略资源，其高管与地缘敌对国背景人士的密切联系构成了不可忽视的战略安全漏洞。",
+        "con_author": "美国情报研究员",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "CUDA is no longer a bottleneck. AI-assisted porting allows developers to choose hardware based on efficiency rather than ecosystem inertia, breaking expensive vendor lock-in.",
-        "con_point_en": "Migration speed is not production readiness. Performance optimization requires deep kernel-level tuning; quick-fixes often hide hidden precision decay and skyrocketing operational overhead.",
+        "pro_point_en": "Huang’s rhetoric reflects a commitment to global scientific collaboration; conflating business exchanges with espionage is a calculated move of political pressure.",
+        "con_point_en": "NVIDIA is not merely a commercial entity but a national strategic asset; close ties between its top leadership and geopolitical rivals pose critical security vulnerabilities.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_softbank_ai_energy_debt",
-      "heat_score": 9.5,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "能源基础设施与泡沫",
-      "category_tag_en": "Energy Infrastructure & Bubbles",
-      "title_zh": "软银AI供电豪赌失败，取消订单致37亿美元蒸发",
-      "title_en": "SoftBank's AI energy pivot backfires with $3.7B write-down",
-      "summary_zh": "软银此前为支撑AI算力中心需求，狂热预订相当于六座胡佛大坝发电量的燃气轮机。随着AI基建规划变动，该巨额订单被迫取消，导致公司财务报表计入37亿美元亏损，引发市场对AI算力基础设施投机泡沫的强烈担忧。",
-      "summary_en": "SoftBank suffered a $3.7 billion hit after canceling massive orders for gas turbines intended to power AI data centers—equivalent to six Hoover Dams. This loss underscores the dangerous gap between speculative AI capacity planning and actual energy demand realization.",
+      "topic_id": "topic_google_gemini_decisions",
+      "heat_score": 9.2,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "AI 自动化决策边界",
+      "category_tag_en": "AI Decision Logic & Reliability",
+      "title_zh": "谷歌发布 Gemini Decisions API：高并发自动化决策定价 0.1 美元",
+      "title_en": "Google Debuts Gemini Decisions API: $0.10/1M Tokens for Automated Logic",
+      "summary_zh": "谷歌推出 Gemini Decisions API，由新模型 Gemini Decision 1 驱动，专为封闭式、高并发决策场景打造。每百万 Token 0.1 美元的低定价策略，旨在加速企业级业务流程自动化。然而，关于模型在处理复杂逻辑时的置信度及责任归属引发了强烈争议。",
+      "summary_en": "Google has launched the Gemini Decisions API, powered by Gemini Decision 1, tailored for closed-ended, high-concurrency decision-making. The aggressive $0.10/1M token pricing aims to capture the enterprise workflow automation market, though questions regarding confidence scoring and liability remain a point of fierce debate.",
       "perspective_pro": {
-        "role_zh": "🟢 战略储备派",
-        "role_en": "🟢 Strategic Reserve Proponent",
-        "speaker_zh": "基建激进投资者",
-        "speaker_en": "Aggressive infrastructure VCs",
-        "point_zh": "电力是AI时代的石油。先行锁定能源供应权是确保未来算力霸权的唯一路径，即便短期亏损，在能源匮乏的远景下也是必要的战略博弈。",
-        "point_en": "Energy is the oil of the AI era. Securing energy supply preemptively is the only way to ensure long-term compute dominance, justifying the risk despite short-term costs."
+        "role_zh": "🟢 工业演进派",
+        "role_en": "🟢 Industrial Evolutionists",
+        "speaker_zh": "企业 AI 落地专家",
+        "speaker_en": "Enterprise AI Adoption Specialists",
+        "point_zh": "通过 API 将决策降维到概率性判断，能极大提升后台审核与多项选择业务的效率，每百万 0.1 美元是自动化落地的里程碑。",
+        "point_en": "Reducing decision logic to probabilistic judgments via API significantly boosts efficiency for back-office audits and categorization; the $0.10 price point is a milestone for enterprise automation."
       },
       "perspective_con": {
-        "role_zh": "🔴 理性财务审计派",
-        "role_en": "🔴 Rational Finance Critic",
-        "speaker_zh": "华尔街风险控制分析师",
-        "speaker_en": "Risk management analysts",
-        "point_zh": "这是典型的资本盲目投机。脱离实际模型规模与部署需求，仅仅为了“预订配额”而承担几十亿损失，折射出当前AI狂潮中严重脱离实际的泡沫逻辑。",
-        "point_en": "This is pure speculative madness. Committing billions to energy infrastructure without verified deployment demand reflects a dangerous disconnection from actual ROI in the AI bubble."
+        "role_zh": "🔴 算法理性派",
+        "role_en": "🔴 Algorithmic Rationalists",
+        "speaker_zh": "AI 可靠性研究员",
+        "speaker_en": "AI Reliability Researchers",
+        "point_zh": "Gemini Decision 1 在面对非结构化复杂输入时极易产生“幻觉置信度”，将业务决策外包给黑盒模型而不设人工监督存在极大的系统性风险。",
+        "point_en": "The model risks 'hallucinated confidence' when processing complex unstructured data. Outsourcing critical business logic to black-box systems without human oversight invites systemic failure."
       },
       "linked_news": [
         {
-          "id": "b8bc8b46cadc53a0",
-          "title_zh": "软银为AI豪赌供电，狂亏37亿美元",
-          "title_en": "Sources: SoftBank reserved 13GW+ of turbines, equivalent to six Hoover Dams, to power AI; SoftBank took a $3.7B earnings hit mostly from canceled reservations (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/business/energy-oil/masayoshi-sons-huge-bet-on-electrical-turbines-backfires-b51f160c?st=DGYQ8E&reflink=desktopwebshare_permalink",
-          "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-11T11:50:55+00:00"
+          "id": "104e7bd07b568214",
+          "title_zh": "Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
+          "title_en": "Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/google-joins-the-decision-model-wave-with-gemini-decision-1-scoring-1000-questions-in-a-single-pass/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/10/gemini_4_logo_wall.png",
+          "hot_score": 3,
+          "published_at": "2026-11-11T20:12:46+00:00"
         },
         {
-          "id": "7ef903850b7e590b",
-          "title_zh": "Torus获5亿美元融资造移动数据中心",
-          "title_en": "Salt Lake City-based energy storage startup Torus raised a $500M Series C led by Magnetar to build shipping container-sized AI data centers at 1MW to 20MW sizes (Mark Chediak/Bloomberg)",
-          "source": "Bloomberg",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-11/utah-based-startup-raises-500-million-for-modular-ai-data-center",
-          "image_url": null,
+          "id": "5cf86a37f28003de",
+          "title_zh": "谷歌发布决策API，赋能多模态自动化判断",
+          "title_en": "Google launches Gemini Decisions API, powered by its new Gemini Decision 1 model, to return predefined answers with confidence scores, at $0.10/1M input tokens (Google)",
+          "source": "Google",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "image_url": "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini__decisions__blog-header_2784x1566.width-1300.png",
           "hot_score": 4,
-          "published_at": "2026-11-11T13:25:02+00:00"
+          "published_at": "2026-11-11T19:05:00+00:00"
         }
       ],
       "linked_tweets": [
@@ -169,115 +251,15 @@
         "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_softbank_ai_energy_debt",
+      "id": "topic_google_gemini_decisions",
       "stance_matrix": {
-        "pro_point_zh": "电力是AI时代的石油。先行锁定能源供应权是确保未来算力霸权的唯一路径，即便短期亏损，在能源匮乏的远景下也是必要的战略博弈。",
-        "pro_author": "基建激进投资者",
-        "con_point_zh": "这是典型的资本盲目投机。脱离实际模型规模与部署需求，仅仅为了“预订配额”而承担几十亿损失，折射出当前AI狂潮中严重脱离实际的泡沫逻辑。",
-        "con_author": "华尔街风险控制分析师",
+        "pro_point_zh": "通过 API 将决策降维到概率性判断，能极大提升后台审核与多项选择业务的效率，每百万 0.1 美元是自动化落地的里程碑。",
+        "pro_author": "企业 AI 落地专家",
+        "con_point_zh": "Gemini Decision 1 在面对非结构化复杂输入时极易产生“幻觉置信度”，将业务决策外包给黑盒模型而不设人工监督存在极大的系统性风险。",
+        "con_author": "AI 可靠性研究员",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Energy is the oil of the AI era. Securing energy supply preemptively is the only way to ensure long-term compute dominance, justifying the risk despite short-term costs.",
-        "con_point_en": "This is pure speculative madness. Committing billions to energy infrastructure without verified deployment demand reflects a dangerous disconnection from actual ROI in the AI bubble.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
-      }
-    },
-    {
-      "topic_id": "topic_grok_security_failure",
-      "heat_score": 9.2,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "AI代理安全与合规边界",
-      "category_tag_en": "Agent Security & Compliance",
-      "title_zh": "Grok生成应用致敏感数据泄露，安全架构遭炮轰",
-      "title_en": "Grok-generated apps exposed private data; security protocols under fire",
-      "summary_zh": "研究发现，高达95%由Grok开发的AI应用缺乏基本的访问控制权限，导致患者医疗隐私、企业明文密码及内部销售渠道数据公开。此事件引发了关于AI代理在缺乏原生安全防御机制下进行自动化开发的高危风险探讨。",
-      "summary_en": "Research reveals 95% of Grok-generated applications lack access controls, leaking sensitive patient records, plaintext passwords, and corporate pipelines. The incident triggers an urgent debate on the security risks of deploying automated AI agents without robust, native defensive layers.",
-      "perspective_pro": {
-        "role_zh": "🟢 AI效率加速派",
-        "role_en": "🟢 Accelerationist Developer",
-        "speaker_zh": "开发者工具及代理先行者",
-        "speaker_en": "Early-stage agent developers",
-        "point_zh": "安全性应由开发流程中的插件层解决，不应因噎废食否定AI自动化开发的高效性。事件反映的是配置缺失，而非AI技术的本质缺陷。",
-        "point_en": "Security should be handled by modular wrappers, not by limiting AI potential. The problem is configuration hygiene, not a fundamental flaw in the agents themselves."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 工业级安全派",
-        "role_en": "🔴 Industrial Security Expert",
-        "speaker_zh": "网络安全审计机构",
-        "speaker_en": "Cybersecurity compliance auditors",
-        "point_zh": "当AI具备自我创建应用的能力，其安全防御必须内置，而非事后修补。目前的代理框架极其脆弱，完全不具备应对企业级合规要求的防御冗余。",
-        "point_en": "When agents create applications, security must be baked in, not bolted on. Current agent frameworks lack the necessary defense-in-depth to meet enterprise compliance standards."
-      },
-      "linked_news": [
-        {
-          "id": "65c572ccfb58bfae",
-          "title_zh": "Grok开发的AI应用致海量数据泄露",
-          "title_en": "Grok-built apps exposed patient data, plaintext passwords, and SpaceXSI's own sales pipeline",
-          "source": "THE DECODER",
-          "url": "https://the-decoder.com/grok-built-apps-exposed-patient-data-plaintext-passwords-and-spacexsis-own-sales-pipeline/",
-          "image_url": "https://the-decoder.com/wp-content/uploads/2026/05/grok_xai_logo.png",
-          "hot_score": 5,
-          "published_at": "2026-11-11T12:53:07+00:00"
-        },
-        {
-          "id": "cc94c4f5c8e3ce37",
-          "title_zh": "Plurai 由前 Nexar 员工创立，旨在使用企业 IT 环境的合成数据和数字孪生来评估 AI 代理，筹集了 1300 万美元的种子资金",
-          "title_en": "Plurai, founded by former Nexar staffers to use synthetic data and digital twins of corporate IT environments to assess AI agents, raised a $13M seed (Tim Fernholz/TechCrunch)",
-          "source": "TechCrunch",
-          "url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
-          "image_url": "https://techcrunch.com/wp-content/uploads/2026/11/Plurai-team-photo.-Credit-Guy-Hamoy.jpg?resize=1200,800",
-          "hot_score": 3,
-          "published_at": "2026-11-11T15:05:56+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "d3497f70acd32e4d",
-          "author": "Flames",
-          "author_handle": "@0x_Flames",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2083779282325700609/6Tuld0GH_normal.jpg",
-          "content_zh": "告诉人工智能代理它不应该做什么与​​使其在技术上无法做到这一点是不同的。\n\n当人工智能代理处理某人的资金时，这种差异很重要。\n\n您可以告诉代理人避免某些资产、设置支出限额或在出现一定损失后停止交易。但如果它仍然拥有执行交易的广泛权限，那么这些指令就只能到此为止。\n\n通过 MOTES (@meetmotes)，所有者可以设置授权并签署权限。在拟议的交易进行之前，智能账户会根据所有者批准的规则对其进行检查。\n\n因此，代理仍然可以分析市场并制定策略，但它必须在这些限制内运作。它不能只是允许自己在批准的清单之外支出更多资金或交易资产。\n\n我认为这是自主金融更好的基础。赋予代理人做出决策的能力是一回事。确保它仅具有所有者授予的权限也同样重要。",
-          "content_en": "telling an AI agent what it shouldn't do is different from making it technically unable to do it.\n\nwhen an AI agent is handling someone's money, that difference matters.\n\nyou can tell an agent to avoid certain assets, set a spending limit or stop trading after a certain loss. but if it still has broad permission to execute transactions, those instructions only go so far.\n\nwith MOTES (@meetmotes), the owner sets the mandate and signs the permissions. before a proposed transaction goes through, the smart account checks it against the rules the owner approved.\n\nso the agent can still analyse the market and come up with strategies, but it has to work within those limits. it can't just give itself permission to spend more or trade assets outside the approved list.\n\ni think this is a better foundation for autonomous finance. giving an agent the ability to make decisions is one thing. making sure it only has the authority the owner gave it is just as important.",
-          "url": "https://x.com/0x_Flames/status/2119376637040922825",
-          "platform": "x"
-        },
-        {
-          "id": "d06084b9fa83da70",
-          "author": "JayDsmart",
-          "author_handle": "@AJesusemen",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1964300936446201856/6dWMaMNi_normal.jpg",
-          "content_zh": "埃隆，这不是一键就能轻松完成的\n\n付费用户正在实时观看 Grok Bot 的崩溃。即使使用最高的订阅计划，人们在限制重置之前几天就会耗尽使用量\n\n与此同时，机器人每天都变得越来越慢、越来越不智能、越来越不可靠。过去工作完美的事情现在失败了，给出了错误的答案，或者陷入了困境\n\n人们在正常甚至较轻的工作负载下达到 100% 使用率，使得该产品在一周结束之前几乎毫无用处。\n\n您的团队几乎没有提及这些严重的使用和质量问题\n\nGrok Bot 应该是一个可以处理实际工作的人工智能代理。但现在，它在那些相信你的承诺的人面前分崩离析\n\n站起来。修复使用限制，恢复用户最初付费的品质",
-          "content_en": "Elon this is not one-click-easy\n\nPaying users are watching Grok Bot fall apart in real time. People are running out of usage days before their limits reset, even on the highest subscription plans\n\nAt the same time, the bots are becoming slower, less intelligent, and less reliable every day. Things that used to work perfectly now fail, give wrong answers, or get stuck\n\n People are hitting 100% usage with normal or even lighter workloads, making the product almost useless before the week is over.\n\nYour team has said almost nothing about these serious usage and quality problems\n\nGrok Bot is supposed to be an AI agent that can handle real work. But right now, it's falling apart in front of the very people who trusted your promises\n\nStep up. Fix the usage limits and restore the quality users originally paid for",
-          "url": "https://x.com/AJesusemen/status/2119335565321482484",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈规则模板",
-        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
-        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
-        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,200★",
-        "is_workflow": true
-      },
-      "linked_counts": {
-        "news": 2,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_grok_security_failure",
-      "stance_matrix": {
-        "pro_point_zh": "安全性应由开发流程中的插件层解决，不应因噎废食否定AI自动化开发的高效性。事件反映的是配置缺失，而非AI技术的本质缺陷。",
-        "pro_author": "开发者工具及代理先行者",
-        "con_point_zh": "当AI具备自我创建应用的能力，其安全防御必须内置，而非事后修补。目前的代理框架极其脆弱，完全不具备应对企业级合规要求的防御冗余。",
-        "con_author": "网络安全审计机构",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Security should be handled by modular wrappers, not by limiting AI potential. The problem is configuration hygiene, not a fundamental flaw in the agents themselves.",
-        "con_point_en": "When agents create applications, security must be baked in, not bolted on. Current agent frameworks lack the necessary defense-in-depth to meet enterprise compliance standards.",
+        "pro_point_en": "Reducing decision logic to probabilistic judgments via API significantly boosts efficiency for back-office audits and categorization; the $0.10 price point is a milestone for enterprise automation.",
+        "con_point_en": "The model risks 'hallucinated confidence' when processing complex unstructured data. Outsourcing critical business logic to black-box systems without human oversight invites systemic failure.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }

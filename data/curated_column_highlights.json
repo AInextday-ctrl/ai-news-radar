@@ -1,120 +1,118 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 19:34:50 UTC",
+  "generated_at": "2026-11-11 20:21:31 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 19:34:50 UTC",
+      "updated_at": "2026-11-11 20:21:31 UTC",
       "headline_item": {
-        "id": "5cf86a37f28003de",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "谷歌发布决策API，赋能多模态自动化判断",
-        "title_en": "Google launches Gemini Decisions API, powered by its new Gemini Decision 1 model, to return predefined answers with confidence scores, at $0.10/1M input tokens (Google)",
-        "source": "Google",
-        "published_at": "2026-11-11T19:05:00+00:00",
-        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
-        "event_summary_zh": "谷歌推出Gemini决策API，支持对复杂内容进行批量概率化判断，定价仅为每百万输入Token 0.1美元",
-        "event_summary_en": "Google has launched the Gemini Decisions API, powered by the new Gemini Decision 1 model, designed for fast and probabilistic decision-making. Supporting multimodal inputs across text, image, audio, and video, the API handles up to 1,000 queries in a single pass with confidence scores, targeting use cases like automated routing and content moderation.",
+        "id": "104e7bd07b568214",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
+        "title_en": "Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
+        "source": "THE DECODER",
+        "published_at": "2026-11-11T20:12:46+00:00",
+        "url": "https://the-decoder.com/google-joins-the-decision-model-wave-with-gemini-decision-1-scoring-1000-questions-in-a-single-pass/",
+        "event_summary_zh": "Google Deepmind 正在推出 Gemini Decisions API，这是一个为快速、封闭式决策（例如是/否问题、多项选择和基于量表的评分）而构建的界面。底层模型 Gemini Decision 1 可一次性处理多达 1,000 个独立问题，涉及文本、图像、音频、视频和 PDF",
+        "event_summary_en": "Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings. The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs. It scores options directly and returns probabilities with confidence values in 150 to 250 milliseconds. Google says it already uses the API internally for dynamic model routing in",
         "core_facts_zh": [
-          "【核心事件】谷歌在谷歌人工智能工作室：发布Gemini决策API，支持对1000个预定义问题进行多模态概率评估，定价0.1美元/百万Token",
-          "【起因与机理】降低自动化决策成本，解决复杂任务流中的路由与合规判断效率问题",
-          "【关键数据与实测】该工具支持文本、图像、音视频及PDF等多模态输入，能够处理最多1000个评估问题并给出置信度得分，旨在满足企业在工具路由、内容合规与政策检查等场景下的自动化需求。",
-          "【观点态度】低成本定价意在抢占自动化决策与合规检查市场。"
+          "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
+          "【起因与机理】降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+          "【关键数据与实测】Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题。",
+          "【观点态度】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。"
         ],
         "core_facts_en": [
-          "[Core Event] Google (Google AI Studio): Launched Gemini Decisions API for evaluating up to 1,000 predefined questions at $0.10/1M tokens",
-          "[Root Cause & Mechanism] To reduce automation costs and streamline routing and compliance workflows",
-          "[Key Metrics] You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions.",
-          "[Perspective & Impact] Low-cost pricing aims to capture the automation and compliance market."
+          "[Core Event] Industry Leaders: Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
+          "[Context & Motivation] Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings.",
+          "[Context Detail] The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs.",
+          "[Industry Impact] Google says it already uses the API internally for dynamic model routing in."
         ],
-        "industry_impact_zh": "谷歌终于发现比起让大模型写诗，企业更需要的是一个能自动干杂活的廉价“质检员”。这本质上是把AI从“艺术创作者”贬为“流水线工头”，毕竟在这个内卷时代，省钱做决策比展示幻觉更有市场。",
-        "industry_impact_en": "Google finally realized that enterprises don't need a poet, they need a cheap, automated quality inspector. It's effectively demoting the AI from 'creative genius' to 'assembly line foreman'—because in this market, cutting costs on decision-making pays better than hallucinating prose."
+        "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
       },
       "headlines": [
         {
-          "id": "5cf86a37f28003de",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "谷歌发布决策API，赋能多模态自动化判断",
-          "title_en": "Google launches Gemini Decisions API, powered by its new Gemini Decision 1 model, to return predefined answers with confidence scores, at $0.10/1M input tokens (Google)",
-          "source": "Google",
-          "published_at": "2026-11-11T19:05:00+00:00",
-          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
-          "event_summary_zh": "谷歌推出Gemini决策API，支持对复杂内容进行批量概率化判断，定价仅为每百万输入Token 0.1美元",
-          "event_summary_en": "Google has launched the Gemini Decisions API, powered by the new Gemini Decision 1 model, designed for fast and probabilistic decision-making. Supporting multimodal inputs across text, image, audio, and video, the API handles up to 1,000 queries in a single pass with confidence scores, targeting use cases like automated routing and content moderation.",
-          "core_facts_zh": [
-            "【核心事件】谷歌在谷歌人工智能工作室：发布Gemini决策API，支持对1000个预定义问题进行多模态概率评估，定价0.1美元/百万Token",
-            "【起因与机理】降低自动化决策成本，解决复杂任务流中的路由与合规判断效率问题",
-            "【关键数据与实测】该工具支持文本、图像、音视频及PDF等多模态输入，能够处理最多1000个评估问题并给出置信度得分，旨在满足企业在工具路由、内容合规与政策检查等场景下的自动化需求。",
-            "【观点态度】低成本定价意在抢占自动化决策与合规检查市场。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google (Google AI Studio): Launched Gemini Decisions API for evaluating up to 1,000 predefined questions at $0.10/1M tokens",
-            "[Root Cause & Mechanism] To reduce automation costs and streamline routing and compliance workflows",
-            "[Key Metrics] You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions.",
-            "[Perspective & Impact] Low-cost pricing aims to capture the automation and compliance market."
-          ],
-          "industry_impact_zh": "谷歌终于发现比起让大模型写诗，企业更需要的是一个能自动干杂活的廉价“质检员”。这本质上是把AI从“艺术创作者”贬为“流水线工头”，毕竟在这个内卷时代，省钱做决策比展示幻觉更有市场。",
-          "industry_impact_en": "Google finally realized that enterprises don't need a poet, they need a cheap, automated quality inspector. It's effectively demoting the AI from 'creative genius' to 'assembly line foreman'—because in this market, cutting costs on decision-making pays better than hallucinating prose."
-        },
-        {
-          "id": "68b408989d2fd2f3",
+          "id": "104e7bd07b568214",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "美联航封杀AI订票助手",
-          "title_en": "United Airlines says it will prevent personal AI assistants from booking tickets, citing data privacy risks and possible FAA and DOT rule violations (Alison Sider/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-11T18:40:01+00:00",
-          "url": "https://www.wsj.com/tech/ai/united-airlines-is-banning-ai-bots-from-booking-flights-5b514b38",
-          "event_summary_zh": "美联航宣布禁止个人AI助手代订机票，理由是存在隐私风险及违反监管条例",
-          "event_summary_en": "United Airlines has announced it will block personal AI agents from booking tickets to mitigate data privacy risks and avoid compliance issues with FAA and DOT regulations. The carrier intends to cut off third-party AI tools from scraping or manipulating its proprietary booking systems.",
+          "title_zh": "Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
+          "title_en": "Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
+          "source": "THE DECODER",
+          "published_at": "2026-11-11T20:12:46+00:00",
+          "url": "https://the-decoder.com/google-joins-the-decision-model-wave-with-gemini-decision-1-scoring-1000-questions-in-a-single-pass/",
+          "event_summary_zh": "Google Deepmind 正在推出 Gemini Decisions API，这是一个为快速、封闭式决策（例如是/否问题、多项选择和基于量表的评分）而构建的界面。底层模型 Gemini Decision 1 可一次性处理多达 1,000 个独立问题，涉及文本、图像、音频、视频和 PDF",
+          "event_summary_en": "Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings. The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs. It scores options directly and returns probabilities with confidence values in 150 to 250 milliseconds. Google says it already uses the API internally for dynamic model routing in",
           "core_facts_zh": [
-            "【核心事件】美联航在航空订票系统场景：禁止个人AI助手进行订票操作",
-            "【起因与机理】担忧数据隐私安全及违反联邦监管规则",
-            "【关键技术规格】全面封杀个人AI购票行为。",
-            "【观点态度】以合规与隐私为由维护商业利益。"
+            "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
+            "【起因与机理】降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+            "【关键数据与实测】Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题。",
+            "【观点态度】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。"
           ],
           "core_facts_en": [
-            "[Core Event] United Airlines (Airline booking ecosystem): Banning personal AI agents from ticket booking",
-            "[Root Cause & Mechanism] Concerns over data privacy and federal regulatory compliance",
-            "[Key Specification] United Airlines tightens API controls.",
-            "[Perspective & Impact] Leveraging compliance/privacy to protect revenue."
+            "[Core Event] Industry Leaders: Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
+            "[Context & Motivation] Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings.",
+            "[Context Detail] The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs.",
+            "[Industry Impact] Google says it already uses the API internally for dynamic model routing in."
           ],
-          "industry_impact_zh": "航司这哪是担心什么隐私风险，分明是怕AI太聪明，不仅看穿了动态定价的套路，还把那些隐藏的联程BUG票给薅没了。在这个只有你能收我高价，不能让我变透明的行业里，AI显然成了影响利润的‘非法入侵者’。",
-          "industry_impact_en": "Airlines aren't protecting your privacy; they're protecting their ability to obscure dynamic pricing and kill off cheap fare-hacking bots. In an industry built on obfuscation, a smart AI that actually finds the best deal is the ultimate 'illegal intruder'."
+          "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         },
         {
-          "id": "887561325be776cc",
+          "id": "30107b37a69119e4",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "硅谷政商豪赌失算，腹背受敌",
-          "title_en": "Silicon Valley's herd mentality in cozying up to Trump backfired as Democrats may seek retribution, China closes the AI gap, and anti-Big Tech sentiment grows (Nick Clegg/The Atlantic)",
-          "source": "The Atlantic",
-          "published_at": "2026-11-11T18:30:00+00:00",
-          "url": "https://www.theatlantic.com/ideas/2026/11/silicon-valley-trump-administration/689360/?gift=VELZukBv_TdFyvYot6GkvImUfy5VbhsFdb6Ml7MDXXU",
-          "event_summary_zh": "硅谷大佬因押注特朗普导致民主党反噬，叠加中国AI技术追赶与反垄断声浪，陷入前所未有的战略困境",
-          "event_summary_en": "Silicon Valley elites face potential retribution from Democrats after aligning with Trump. Meanwhile, they are grappling with China's rapid AI progress and rising domestic anti-Big Tech sentiment, creating a perfect storm for the tech industry.",
+          "title_zh": "我在一只追逐我的猫的虚拟鸭子中看到了机器人技术的未来",
+          "title_en": "I Saw the Future of Robotics in a Virtual Duck That Chases My Cat",
+          "source": "Wired AI",
+          "published_at": "2026-11-11T19:55:54+00:00",
+          "url": "https://www.wired.com/story/i-trained-a-microduck-to-be-my-cats-butler/",
+          "event_summary_zh": "使用 OpenAI 的 GPT-6 Sol，我教了一个虚拟版本的 Microduck（来自 Pollen Robotics 和 Hugging Face 的可爱机器人）在房间里走动并识别附近的任何孟加拉猫。 （上面的片段显示机器人摇摇晃晃地走向目标猫科动物；它的眼睛视图显示在右上角。）\n\n我还在耐心等待p",
+          "event_summary_en": "Using OpenAI’s GPT-6 Sol, I taught a virtual version of Microduck—a cute robot from Pollen Robotics and Hugging Face—to walk around a room and identify any bengal cats in its vicinity. (The clip above shows the robot waddling toward a target feline; its eye view is shown top right.)\n\nI’m still waiting patiently for a physical Microduck—please hurry up and ship it, guys—but simulated behavior is relatively simple, so it should transfer over to the real thing. I plan to have the robot automaticall",
           "core_facts_zh": [
-            "【核心事件】硅谷科技领袖、特朗普、民主党派、中国AI产业在美国政治与科技产业决策层：因政治投机行为导致战略受挫，面临政策报复与外部竞争压力",
-            "【起因与机理】科技圈内部的羊群效应与错误的政治押注引发了严重的连锁反应",
-            "【关键技术规格】硅谷大佬政治押注失效引发政坛反噬。",
-            "【观点态度】行业扩张策略陷入多重内忧外患。"
+            "【核心事件】OpenAI 官方团队：我在一只追逐我的猫的虚拟鸭子中看到了机器人技术的未来",
+            "【关键技术规格】我在一只追逐我的猫的虚拟鸭子中看到了机器人技术的未来。",
+            "【观点影响】）\n\n我还在耐心等待实体小鸭子——请快点。"
           ],
           "core_facts_en": [
-            "[Core Event] Silicon Valley leaders, Trump, Democratic Party, China AI sector: Facing potential backlash and strategic setbacks due to failed political maneuvering",
-            "[Root Cause & Mechanism] Herd mentality led to a strategic miscalculation in political alignment",
-            "[Key Specification] Silicon Valley's political bet backfired.",
-            "[Perspective & Impact] Expansion strategies are compromised by multifaceted threats."
+            "[Core Event] Industry Leaders: I Saw the Future of Robotics in a Virtual Duck That Chases My Cat",
+            "[Context & Motivation] Using OpenAI’s GPT-6 Sol, I taught a virtual version of Microduck—a cute robot from Pollen Robotics and Hugging Face—to walk around a room and identify any bengal cats in its vicinity.",
+            "[Key Specification] I Saw the Future of Robotics in a Virtual Duck That Chases My Cat.",
+            "[Industry Impact] I plan to have the robot automaticall."
           ],
-          "industry_impact_zh": "硅谷大佬们这波操作完美诠释了什么叫“两头没捞着”，既没在白宫换来红利，还把华盛顿的另一半人彻底得罪死了。把AI当成科技军备竞赛的筹码不够，还要在政治博弈里玩火，这届巨头的政治智商确实和他们的算法水平不在一个维度。",
-          "industry_impact_en": "Silicon Valley elites are playing a masterclass in how to lose both ways: they bet on the wrong horse and alienated the other half of D.C. It’s almost impressive how their political IQ manages to be so much lower than their LLM benchmarks."
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        },
+        {
+          "id": "954d2eb899cd6697",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "10月份美国企业人工智能支出再创新高，但增速放缓至1.65%",
+          "title_en": "US corporate AI spending hits a new high in October, but growth slows to 1.65 percent",
+          "source": "THE DECODER",
+          "published_at": "2026-11-11T19:35:11+00:00",
+          "url": "https://the-decoder.com/us-corporate-ai-spending-hits-a-new-high-in-october-but-growth-slows-to-1-65-percent/",
+          "event_summary_zh": "美国企业人工智能支出在 2026 年 10 月创下新高，但增长幅度不大。 Ramp AI 指数跟踪金融服务提供商 Ramp 的企业客户的 AI 支出，该指数显示环比增长 1.65%。 Ramp 表示，最常使用人工智能的用户花费更多",
+          "event_summary_en": "US corporate AI spending hit a new high in October 2026, but growth was modest.\n\nThe Ramp AI Index, which tracks AI spending among business customers of financial services provider Ramp, showed a 1.65 percent increase month over month.\n\nThe heaviest AI users spent somewhat more, according to Ramp. The top one percent of companies by AI spending paid a median of $10,200 per employee per month, up nine percent. A typical company, by contrast, spent just $16.32, a slight increase of less than a dol",
+          "core_facts_zh": [
+            "【核心事件】10月份美国企业人工智能支出再创新高，但增速放缓至1.65%",
+            "【关键数据与实测】Ramp AI 指数跟踪金融服务提供商 Ramp 的企业客户的 AI 支出，该指数显示环比增长 1.65%。",
+            "【观点影响】人工智能支出排名前 1% 的公司。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: US corporate AI spending hits a new high in October, but growth slows to 1.65 percent",
+            "[Root Cause & Mechanism] US corporate AI spending hit a new high in October 2026, but growth was modest.",
+            "[Key Metrics] The top one percent of companies by AI spending paid a median of $10,200 per employee per month, up nine percent.",
+            "[Industry Impact] A typical company, by contrast, spent just $16.32, a slight increase of less than a dol."
+          ],
+          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
+          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 19:34:50 UTC",
+      "updated_at": "2026-11-11 20:21:32 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +279,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 19:34:50 UTC",
+      "updated_at": "2026-11-11 20:21:32 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +388,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,957)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,971)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,957 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,971 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
