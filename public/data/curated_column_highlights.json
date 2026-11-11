@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 13:04:07 UTC",
+  "generated_at": "2026-11-11 13:19:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 13:04:07 UTC",
+      "updated_at": "2026-11-11 13:19:04 UTC",
       "headline_item": {
-        "id": "65c572ccfb58bfae",
+        "id": "cb50691c4f361868",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Grok开发的AI应用致海量数据泄露",
-        "title_en": "Grok-built apps exposed patient data, plaintext passwords, and SpaceXSI's own sales pipeline",
-        "source": "THE DECODER",
-        "published_at": "2026-11-11T12:53:07+00:00",
-        "url": "https://the-decoder.com/grok-built-apps-exposed-patient-data-plaintext-passwords-and-spacexsis-own-sales-pipeline/",
-        "event_summary_zh": "安全机构发现95%通过Grok生成的应用未设访问权限，导致患者医疗数据及企业内部销售文档被公开",
-        "event_summary_en": "Security researchers discovered over 35,000 apps built via Grok are publicly accessible without authentication. Due to misleading publish settings and predictable URL structures, sensitive data including patient records and internal business pipelines are currently exposed to anyone with a link.",
+        "title_zh": "中期选举AI广告投入超一亿美元",
+        "title_en": "Wesleyan Media Project: political campaigns spent ~$187M on ~300 AI-generated or AI-enhanced ads in the midterms; 90% of tracked AI ads were for GOP candidates (Loreben Tuquero/Poynter)",
+        "source": "Poynter",
+        "published_at": "2026-11-11T13:00:14+00:00",
+        "url": "https://www.poynter.org/fact-checking/2026/ai-generated-political-ads-2026-midterm-elections/",
+        "event_summary_zh": "美国中期选举期间，竞选团队斥资1.87亿美元投放约300条AI生成或增强广告，其中90%来自共和党阵营",
+        "event_summary_en": "During the recent US midterms, political campaigns invested approximately $187 million into 300 AI-generated or AI-enhanced advertisements. Research indicates that 90% of these tracked AI ads were deployed by Republican candidates, signaling that generative AI has become a primary tool for mass political persuasion.",
         "core_facts_zh": [
-          "【核心事件】AI助手Grok的用户及开发方xAI在Grok.me平台及相关子域名：94.7%的生成应用无需登录即可访问，导致隐私数据泄露",
-          "【起因与机理】发布对话框默认预选了“拥有链接者均可访问”且域名规律易被探测",
-          "【关键数据与实测】超过94%的Grok生成应用无访问控制。",
-          "【观点态度】xAI内部机密文档也在泄露名单中。"
+          "【核心事件】美国各政治竞选团队（主要是共和党）在美国中期选举竞选活动：投入1.87亿美元制作300条AI生成或增强广告",
+          "【起因与机理】利用低成本、高影响力的AI内容在选战中争夺选民注意力与控制叙事权",
+          "【关键数据与实测】1.87亿美元换取300条AI增强素材。",
+          "【观点态度】共和党阵营几乎垄断了当前的AI政治营销份额。"
         ],
         "core_facts_en": [
-          "[Core Event] Grok users and xAI (Grok.me platform): 94.7% of AI-generated apps are accessible without login, causing massive data leaks",
-          "[Root Cause & Mechanism] Default 'anyone with the link' setting and predictable subdomain naming",
-          "[Key Metrics] Over 94% of Grok apps lack access control.",
-          "[Perspective & Impact] xAI internal docs are among the leaked files."
+          "[Core Event] US political campaigns (primarily GOP) (Midterm elections): Spent $187M on 300 AI-generated or enhanced ads",
+          "[Root Cause & Mechanism] To weaponize AI for cost-effective mass persuasion and narrative control",
+          "[Key Metrics] $187M spent on 300 AI-enhanced spots.",
+          "[Perspective & Impact] The GOP dominated the deployment of AI in political messaging."
         ],
-        "industry_impact_zh": "这就是所谓的‘AI让开发门槛归零’，顺便也把企业的防线给归零了。默认勾选‘所有人可见’这操作，简直是给黑客发入场券，马斯克这波属于是靠一己之力给全行业演示了什么叫负分安全架构。",
-        "industry_impact_en": "So this is what happens when you lower the barrier to coding to zero; you also lower your security standards to zero. Defaulting to 'public access' isn't a feature, it's a gift-wrapped data breach for any bored script kiddie."
+        "industry_impact_zh": "看来AI不仅能写代码，还能帮政客“造梦”。当90%的AI广告都出自一家之手时，这已经不是技术赋能，而是量产“数字幻觉”的军备竞赛，建议选民下次看广告时先挂个防诈骗插件。",
+        "industry_impact_en": "It seems AI isn't just for writing code—it’s now a dream factory for politicians. When 90% of these ads come from one camp, it’s not just 'tech empowerment' but an arms race for mass-produced digital illusions; voters might want to install an anti-scam filter before the next rally."
       },
       "headlines": [
+        {
+          "id": "cb50691c4f361868",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "中期选举AI广告投入超一亿美元",
+          "title_en": "Wesleyan Media Project: political campaigns spent ~$187M on ~300 AI-generated or AI-enhanced ads in the midterms; 90% of tracked AI ads were for GOP candidates (Loreben Tuquero/Poynter)",
+          "source": "Poynter",
+          "published_at": "2026-11-11T13:00:14+00:00",
+          "url": "https://www.poynter.org/fact-checking/2026/ai-generated-political-ads-2026-midterm-elections/",
+          "event_summary_zh": "美国中期选举期间，竞选团队斥资1.87亿美元投放约300条AI生成或增强广告，其中90%来自共和党阵营",
+          "event_summary_en": "During the recent US midterms, political campaigns invested approximately $187 million into 300 AI-generated or AI-enhanced advertisements. Research indicates that 90% of these tracked AI ads were deployed by Republican candidates, signaling that generative AI has become a primary tool for mass political persuasion.",
+          "core_facts_zh": [
+            "【核心事件】美国各政治竞选团队（主要是共和党）在美国中期选举竞选活动：投入1.87亿美元制作300条AI生成或增强广告",
+            "【起因与机理】利用低成本、高影响力的AI内容在选战中争夺选民注意力与控制叙事权",
+            "【关键数据与实测】1.87亿美元换取300条AI增强素材。",
+            "【观点态度】共和党阵营几乎垄断了当前的AI政治营销份额。"
+          ],
+          "core_facts_en": [
+            "[Core Event] US political campaigns (primarily GOP) (Midterm elections): Spent $187M on 300 AI-generated or enhanced ads",
+            "[Root Cause & Mechanism] To weaponize AI for cost-effective mass persuasion and narrative control",
+            "[Key Metrics] $187M spent on 300 AI-enhanced spots.",
+            "[Perspective & Impact] The GOP dominated the deployment of AI in political messaging."
+          ],
+          "industry_impact_zh": "看来AI不仅能写代码，还能帮政客“造梦”。当90%的AI广告都出自一家之手时，这已经不是技术赋能，而是量产“数字幻觉”的军备竞赛，建议选民下次看广告时先挂个防诈骗插件。",
+          "industry_impact_en": "It seems AI isn't just for writing code—it’s now a dream factory for politicians. When 90% of these ads come from one camp, it’s not just 'tech empowerment' but an arms race for mass-produced digital illusions; voters might want to install an anti-scam filter before the next rally."
+        },
         {
           "id": "65c572ccfb58bfae",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "这就像在纯手工匠人的聚会上掏出了一台吸尘器，虽然只用了0.1%的力气，却足以让那群执着于“纯手工”的评委们原地破防。大厂用AI叫效率，独立工作室用AI叫“背叛信仰”，看来游戏圈的鄙视链又多了个新的坐标系。",
           "industry_impact_en": "It’s like pulling out a vacuum at a purist’s artisanal workshop; even if it only accounts for 0.1% of the work, the purists will still call it a betrayal of the craft. Big studios call it 'efficiency,' but for indies, it’s a new trigger for the ever-spinning industry moral compass."
-        },
-        {
-          "id": "954304586581bcb2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "德国防科技巨头发布Clarity AI平台",
-          "title_en": "German defense tech giant Helsing launches Clarity, an intelligence platform using military-customized AI agents to rival Palantir's Maven and Anduril's Lattice (Ingrid Lunden/Resilience Media)",
-          "source": "Resilience Media",
-          "published_at": "2026-11-11T12:30:05+00:00",
-          "url": "https://resiliencemedia.co/helsing-launches-clarity-a-competitor-to-palantirs-maven/",
-          "event_summary_zh": "德国防巨头Helsing推出名为Clarity的智能平台，利用定制化AI智能体构建战场情报系统，正面挑战Palantir等行业先行者",
-          "event_summary_en": "German defense giant Helsing launched its intelligence platform, Clarity, utilizing military-grade AI agents to process battlefield data. This move directly challenges existing market leaders like Palantir’s Maven and Anduril’s Lattice in the global defense AI sector.",
-          "core_facts_zh": [
-            "【核心事件】德国防科技巨头Helsing在欧洲防务科技市场：发布Clarity情报平台，通过AI智能体进行战场分析",
-            "【起因与机理】在全球防务科技竞争中对标Palantir等巨头，抢占市场话语权",
-            "【关键技术规格】Helsing正式发布军事级情报平台Clarity。",
-            "【观点态度】意在欧洲主权防务市场建立AI技术护城河。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Defense tech giant Helsing (European and global defense market): Launch of Clarity platform using AI agents for intelligence",
-            "[Root Cause & Mechanism] Compete with Palantir and establish a European presence in AI defense",
-            "[Key Specification] Helsing launches military-grade intelligence platform Clarity.",
-            "[Perspective & Impact] Aiming to secure sovereignty in European defense AI."
-          ],
-          "industry_impact_zh": "这年头连战场都开始搞‘AI代理人’了，Helsing这波操作显然是在告诉美国同行：欧洲的防务AI不能只由硅谷说了算。看来以后打仗不仅拼的是弹药，还得拼谁家的AI能更少产生幻觉。",
-          "industry_impact_en": "With 'AI agents' hitting the battlefield, Helsing is basically telling its Silicon Valley rivals that Europe isn't going to let them monopolize defense AI. Future warfare isn't just about ammo anymore—it's about whose LLM has fewer hallucinations under fire."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 13:04:07 UTC",
+      "updated_at": "2026-11-11 13:19:04 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 13:04:07 UTC",
+      "updated_at": "2026-11-11 13:19:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -294,7 +294,7 @@
         "license": "MIT",
         "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
         "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
+        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
         "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
         "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
         "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -325,7 +325,7 @@
           "license": "MIT",
           "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
           "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
+          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
           "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
           "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
           "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,784)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,793)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,784 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,793 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
