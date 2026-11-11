@@ -19,6 +19,52 @@
     currentSiteLang = isZh ? 'chinese_simplified' : 'english';
   }
 
+  // Complete 31 Global Languages (100% parity with Desktop)
+  const ALL_SITE_LANGUAGES = [
+    // 🌟 Popular Languages (常用热门语种)
+    { id: 'english', flag: '🇬🇧', code: 'EN', nameZh: '英语', nameEn: 'English (Global)', native: 'English', group: 'popular' },
+    { id: 'chinese_simplified', flag: '🇨🇳', code: '简', nameZh: '简体中文', nameEn: 'Chinese (Simplified)', native: '简体中文', group: 'popular' },
+    { id: 'chinese_traditional', flag: '🇭🇰', code: '繁', nameZh: '繁体中文', nameEn: 'Chinese (Traditional)', native: '繁體中文', group: 'popular' },
+    { id: 'japanese', flag: '🇯🇵', code: 'JA', nameZh: '日语', nameEn: 'Japanese', native: '日本語', group: 'popular' },
+    { id: 'korean', flag: '🇰🇷', code: 'KO', nameZh: '韩语', nameEn: 'Korean', native: '한국어', group: 'popular' },
+    { id: 'deutsch', flag: '🇩🇪', code: 'DE', nameZh: '德语', nameEn: 'German', native: 'Deutsch', group: 'popular' },
+    { id: 'french', flag: '🇫🇷', code: 'FR', nameZh: '法语', nameEn: 'French', native: 'Français', group: 'popular' },
+    { id: 'spanish', flag: '🇪🇸', code: 'ES', nameZh: '西班牙语', nameEn: 'Spanish', native: 'Español', group: 'popular' },
+    { id: 'russian', flag: '🇷🇺', code: 'RU', nameZh: '俄语', nameEn: 'Russian', native: 'Русский', group: 'popular' },
+    { id: 'arabic', flag: '🇸🇦', code: 'AR', nameZh: '阿拉伯语', nameEn: 'Arabic', native: 'العربية', group: 'popular' },
+
+    // 🌍 European Languages (欧洲主要语言)
+    { id: 'portuguese', flag: '🇵🇹', code: 'PT', nameZh: '葡萄牙语', nameEn: 'Portuguese', native: 'Português', group: 'european' },
+    { id: 'italian', flag: '🇮🇹', code: 'IT', nameZh: '意大利语', nameEn: 'Italian', native: 'Italiano', group: 'european' },
+    { id: 'dutch', flag: '🇳🇱', code: 'NL', nameZh: '荷兰语', nameEn: 'Dutch', native: 'Nederlands', group: 'european' },
+    { id: 'polish', flag: '🇵🇱', code: 'PL', nameZh: '波兰语', nameEn: 'Polish', native: 'Polski', group: 'european' },
+    { id: 'ukrainian', flag: '🇺🇦', code: 'UK', nameZh: '乌克兰语', nameEn: 'Ukrainian', native: 'Українська', group: 'european' },
+    { id: 'swedish', flag: '🇸🇪', code: 'SV', nameZh: '瑞典语', nameEn: 'Swedish', native: 'Svenska', group: 'european' },
+    { id: 'norwegian', flag: '🇳🇴', code: 'NO', nameZh: '挪威语', nameEn: 'Norwegian', native: 'Norsk', group: 'european' },
+    { id: 'danish', flag: '🇩🇰', code: 'DA', nameZh: '丹麦语', nameEn: 'Danish', native: 'Dansk', group: 'european' },
+    { id: 'finnish', flag: '🇫🇮', code: 'FI', nameZh: '芬兰语', nameEn: 'Finnish', native: 'Suomi', group: 'european' },
+    { id: 'czech', flag: '🇨🇿', code: 'CS', nameZh: '捷克语', nameEn: 'Czech', native: 'Čeština', group: 'european' },
+    { id: 'hungarian', flag: '🇭🇺', code: 'HU', nameZh: '匈牙利语', nameEn: 'Hungarian', native: 'Magyar', group: 'european' },
+    { id: 'romanian', flag: '🇷🇴', code: 'RO', nameZh: '罗马尼亚语', nameEn: 'Romanian', native: 'Română', group: 'european' },
+    { id: 'greek', flag: '🇬🇷', code: 'EL', nameZh: '希腊语', nameEn: 'Greek', native: 'Ελληνικά', group: 'european' },
+
+    // 🌏 Asia-Pacific & Others (亚太及全球语种)
+    { id: 'hindi', flag: '🇮🇳', code: 'HI', nameZh: '印地语', nameEn: 'Hindi', native: 'हिन्दी', group: 'apac' },
+    { id: 'vietnamese', flag: '🇻🇳', code: 'VI', nameZh: '越南语', nameEn: 'Vietnamese', native: 'Tiếng Việt', group: 'apac' },
+    { id: 'thai', flag: '🇹🇭', code: 'TH', nameZh: '泰语', nameEn: 'Thai', native: 'ภาษาไทย', group: 'apac' },
+    { id: 'indonesian', flag: '🇮🇩', code: 'ID', nameZh: '印尼语', nameEn: 'Indonesian', native: 'Bahasa Indonesia', group: 'apac' },
+    { id: 'malay', flag: '🇲🇾', code: 'MS', nameZh: '马来语', nameEn: 'Malay', native: 'Bahasa Melayu', group: 'apac' },
+    { id: 'filipino', flag: '🇵🇭', code: 'FIL', nameZh: '菲律宾语', nameEn: 'Filipino', native: 'Filipino', group: 'apac' },
+    { id: 'turkish', flag: '🇹🇷', code: 'TR', nameZh: '土耳其语', nameEn: 'Turkish', native: 'Türkçe', group: 'apac' },
+    { id: 'hebrew', flag: '🇮🇱', code: 'HE', nameZh: '希伯来语', nameEn: 'Hebrew', native: 'עברית', group: 'apac' }
+  ];
+
+  const LANG_GROUPS = {
+    popular: { en: '🌟 Popular Languages', zh: '🌟 常用热门语种' },
+    european: { en: '🌍 European Languages', zh: '🌍 欧洲主要语言' },
+    apac: { en: '🌏 Asia-Pacific & Global', zh: '🌏 亚太及全球语种' }
+  };
+
   const I18N = {
     zh: {
       appName: 'AI 资讯雷达',
@@ -59,11 +105,6 @@
       views: '浏览',
       likes: '赞',
       retweets: '转推',
-      selectLangTitle: '选择语言版本',
-      langZhHans: '🇨🇳 简体中文',
-      langZhHant: '🇭🇰 繁體中文',
-      langEn: '🇬🇧 English (Global)',
-      langJa: '🇯🇵 日本語',
       copiedToast: '链接已复制到剪贴板！',
       shareTitle: '分享 AI 动态',
       aiTakePrefix: 'AI 研判',
@@ -114,11 +155,6 @@
       views: 'views',
       likes: 'likes',
       retweets: 'RT',
-      selectLangTitle: 'Select Language Edition',
-      langZhHans: '🇨🇳 Chinese (Simplified)',
-      langZhHant: '🇭🇰 Chinese (Traditional)',
-      langEn: '🇬🇧 English (Global)',
-      langJa: '🇯🇵 Japanese',
       copiedToast: 'Link copied to clipboard!',
       shareTitle: 'Share AI Intel',
       aiTakePrefix: 'AI Hot Take',
@@ -141,7 +177,7 @@
   let searchQuery = '';
   let displayLimit = 20;
   const PAGE_STEP = 20;
-  const tweetLangState = {}; // Record per-tweet toggle: { [id]: 'zh' | 'en' }
+  const tweetLangState = {};
 
   // 3. Theme Init
   function initTheme() {
@@ -237,7 +273,7 @@
       document.body.appendChild(toast);
     }
     toast.innerHTML = `
-      <div class="px-4 py-2.5 rounded-2xl bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 text-xs font-bold shadow-2xl backdrop-blur-md flex items-center gap-2 border border-slate-700/50 dark:border-slate-200/50">
+      <div class="px-4 py-2.5 rounded-2xl bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 text-xs font-bold shadow-2xl backdrop-blur-md flex items-center gap-2 border border-slate-700/50 dark:border-slate-200/50 notranslate">
         <span>✨</span>
         <span>${escapeHtml(msg)}</span>
       </div>
@@ -268,7 +304,7 @@
             <div class="p-8 text-center text-slate-500">
               <p class="text-3xl mb-2">⚠️</p>
               <p class="text-sm font-medium mb-4">${isZh ? '数据加载异常，请点击刷新重试' : 'Failed to load updates. Please tap retry.'}</p>
-              <button onclick="window.MobileApp.refresh()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95">
+              <button type="button" onclick="window.MobileApp.refresh()" class="px-4 py-2 bg-indigo-600 text-white rounded-xl text-xs font-semibold shadow-md active:scale-95">
                 ${t.refresh}
               </button>
             </div>
@@ -531,7 +567,6 @@
     const textZh = item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || '';
     const textEn = item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title || '';
     
-    // Determine whether to display zh or en based on user toggle
     const currentMode = tweetLangState[item.id] || (isZh ? 'zh' : 'en');
     let displayText = currentMode === 'zh' ? (textZh || textEn) : (textEn || textZh);
     displayText = escapeHtml(displayText);
@@ -954,10 +989,88 @@
     }
   }
 
-  // 14. Mobile Language Switcher Action Sheet & Navigation
+  // 14. Mobile Language Switcher Action Sheet (All 31 Languages Supported)
+  function renderLanguagePickerList(query = '') {
+    const container = document.getElementById('lang-picker-list');
+    if (!container) return;
+
+    const q = (query || '').trim().toLowerCase();
+    const filtered = q
+      ? ALL_SITE_LANGUAGES.filter(item => 
+          item.id.toLowerCase().includes(q) || 
+          item.native.toLowerCase().includes(q) || 
+          item.nameEn.toLowerCase().includes(q) || 
+          item.nameZh.includes(q) ||
+          item.code.toLowerCase().includes(q)
+        )
+      : ALL_SITE_LANGUAGES;
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="py-8 text-center text-slate-400 text-xs">
+          ${isZh ? '未找到相关语言' : 'No matching languages found'}
+        </div>
+      `;
+      return;
+    }
+
+    const groups = ['popular', 'european', 'apac'];
+    let html = '';
+
+    groups.forEach(grp => {
+      const groupItems = filtered.filter(it => it.group === grp);
+      if (groupItems.length === 0) return;
+
+      const groupTitle = isZh ? LANG_GROUPS[grp].zh : LANG_GROUPS[grp].en;
+      html += `
+        <div class="pt-2 pb-1 text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider px-1">
+          ${groupTitle}
+        </div>
+        <div class="space-y-1.5">
+          ${groupItems.map(item => {
+            const isSelected = (currentSiteLang === item.id);
+            const activeCardStyle = isSelected
+              ? 'bg-indigo-50/80 dark:bg-indigo-950/50 border-indigo-300 dark:border-indigo-700 font-bold'
+              : 'bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border-slate-200/80 dark:border-slate-700/80';
+            const subName = isZh ? item.nameZh : item.nameEn;
+            return `
+              <button 
+                type="button"
+                onclick="window.MobileApp.selectLanguage('${item.id}')"
+                class="w-full p-2.5 rounded-xl flex items-center justify-between border touch-card cursor-pointer transition-colors ${activeCardStyle}"
+              >
+                <div class="flex items-center gap-3">
+                  <span class="text-xl">${item.flag}</span>
+                  <div class="text-left">
+                    <div class="text-xs font-bold text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                      <span>${item.native}</span>
+                      ${isSelected ? `<span class="px-1 py-0.2 rounded bg-indigo-600 text-white text-[9px] font-bold">Active</span>` : ''}
+                    </div>
+                    <div class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${subName}</div>
+                  </div>
+                </div>
+                ${isSelected ? '<span class="text-indigo-600 dark:text-indigo-400 font-bold text-sm">✓</span>' : '<span class="text-slate-300 dark:text-slate-600 text-xs">→</span>'}
+              </button>
+            `;
+          }).join('')}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function filterLanguageList(e) {
+    const q = e && e.target ? e.target.value : '';
+    renderLanguagePickerList(q);
+  }
+
   function openLangPicker() {
     const modal = document.getElementById('lang-picker-modal');
     if (modal) {
+      renderLanguagePickerList('');
+      const searchInput = document.getElementById('lang-picker-search');
+      if (searchInput) searchInput.value = '';
       modal.classList.remove('hidden');
       document.body.style.overflow = 'hidden';
       modal.onclick = (e) => {
@@ -979,7 +1092,7 @@
     const search = window.location.search || '';
     const hash = window.location.hash || (currentTab && currentTab !== 'all' ? '#' + currentTab : '');
 
-    // 1. Simplified Chinese
+    // 1. Simplified Chinese (Native pre-rendered Chinese SSG)
     if (targetLang === 'chinese_simplified') {
       localStorage.setItem('ai_radar_user_site_lang', 'chinese_simplified');
       localStorage.setItem('ai_radar_user_lang', 'zh');
@@ -991,12 +1104,15 @@
       if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
         try { window.ChineseConverter.revertDomToSimplified(); } catch (e) {}
       }
+      if (typeof translate !== 'undefined' && translate.reset) {
+        try { translate.reset(); } catch (e) {}
+      }
       updateLangButtonLabel('chinese_simplified');
       showToast('已切换至简体中文');
       return;
     }
 
-    // 2. Traditional Chinese
+    // 2. Traditional Chinese (Native Chinese SSG + ChineseConverter)
     if (targetLang === 'chinese_traditional') {
       localStorage.setItem('ai_radar_user_site_lang', 'chinese_traditional');
       localStorage.setItem('ai_radar_user_lang', 'zh');
@@ -1005,6 +1121,9 @@
         return;
       }
       currentSiteLang = 'chinese_traditional';
+      if (typeof translate !== 'undefined' && translate.reset) {
+        try { translate.reset(); } catch (e) {}
+      }
       ensureChineseConverter(() => {
         if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
           try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
@@ -1015,7 +1134,7 @@
       return;
     }
 
-    // 3. English
+    // 3. English (Native pre-rendered Global English SSG)
     if (targetLang === 'english') {
       localStorage.setItem('ai_radar_user_site_lang', 'english');
       localStorage.setItem('ai_radar_user_lang', 'en');
@@ -1024,13 +1143,20 @@
         return;
       }
       currentSiteLang = 'english';
+      if (typeof translate !== 'undefined' && translate.reset) {
+        try { translate.reset(); } catch (e) {}
+      }
       updateLangButtonLabel('english');
       showToast('Switched to English');
       return;
     }
 
-    // 4. Other languages via Translate.js
+    // 4. All other 28 global languages via Translate.js Client Edge engine
     localStorage.setItem('ai_radar_user_site_lang', targetLang);
+    currentSiteLang = targetLang;
+    if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
+      try { window.ChineseConverter.revertDomToSimplified(); } catch (e) {}
+    }
     loadTranslatePlugin(targetLang);
   }
 
@@ -1038,15 +1164,10 @@
     const flagEl = document.getElementById('lang-btn-flag');
     const textEl = document.getElementById('lang-btn-text');
     if (!flagEl || !textEl) return;
-    if (lang === 'chinese_traditional') {
-      flagEl.textContent = '🇭🇰';
-      textEl.textContent = '繁';
-    } else if (lang === 'chinese_simplified') {
-      flagEl.textContent = '🇨🇳';
-      textEl.textContent = '简';
-    } else if (lang === 'english') {
-      flagEl.textContent = '🇬🇧';
-      textEl.textContent = 'EN';
+    const found = ALL_SITE_LANGUAGES.find(it => it.id === lang);
+    if (found) {
+      flagEl.textContent = found.flag;
+      textEl.textContent = found.code;
     } else {
       flagEl.textContent = '🌐';
       textEl.textContent = 'Lang';
@@ -1059,10 +1180,16 @@
         if (typeof translate !== 'undefined') {
           translate.selectLanguageTag.show = false;
           translate.service.use('client.edge');
-          translate.language.setLocal(isZh ? 'chinese_simplified' : 'english');
+          translate.language.setLocal(window.location.pathname.startsWith('/zh') ? 'chinese_simplified' : 'english');
+          translate.ignore.class.push('notranslate');
+          translate.ignore.id.push('lang-picker-modal');
+          translate.ignore.id.push('article-modal-overlay');
           translate.execute();
           translate.changeLanguage(targetLang);
-          showToast(`Translated to ${targetLang}`);
+          updateLangButtonLabel(targetLang);
+          const langObj = ALL_SITE_LANGUAGES.find(it => it.id === targetLang);
+          const name = langObj ? (isZh ? langObj.nameZh : langObj.nameEn) : targetLang;
+          showToast(isZh ? `已实时翻译为 ${name}` : `Translated to ${name}`);
         }
       } catch (err) {
         console.warn('Translate execution error:', err);
@@ -1079,7 +1206,6 @@
     }
   }
 
-  // Quick 1-tap language switch fallback
   function switchLanguage() {
     openLangPicker();
   }
@@ -1170,9 +1296,8 @@
       if (!banner) return;
 
       if (isChineseEnv && !isZh) {
-        // Visitor is Chinese speaker on English mobile page
         banner.innerHTML = `
-          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs">
+          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs notranslate">
             <div class="flex items-center gap-1.5 min-w-0">
               <span class="text-sm">🌐</span>
               <p class="text-[11px] text-indigo-950 dark:text-indigo-200 truncate font-medium">
@@ -1183,14 +1308,14 @@
               <button 
                 type="button"
                 onclick="window.MobileApp.selectLanguage('chinese_simplified')" 
-                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95"
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95 cursor-pointer"
               >
                 ${t.suggestSwitchBtn}
               </button>
               <button 
                 type="button"
                 onclick="window.MobileApp.dismissLangSuggest()" 
-                class="text-slate-400 hover:text-slate-600 text-xs px-1"
+                class="text-slate-400 hover:text-slate-600 text-xs px-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -1199,9 +1324,8 @@
         `;
         banner.classList.remove('hidden');
       } else if (isEnglishEnv && isZh) {
-        // Visitor is English speaker on Chinese mobile page
         banner.innerHTML = `
-          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs">
+          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs notranslate">
             <div class="flex items-center gap-1.5 min-w-0">
               <span class="text-sm">🌐</span>
               <p class="text-[11px] text-indigo-950 dark:text-indigo-200 truncate font-medium">
@@ -1212,14 +1336,14 @@
               <button 
                 type="button"
                 onclick="window.MobileApp.selectLanguage('english')" 
-                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95"
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95 cursor-pointer"
               >
                 ${t.suggestSwitchBtn}
               </button>
               <button 
                 type="button"
                 onclick="window.MobileApp.dismissLangSuggest()" 
-                class="text-slate-400 hover:text-slate-600 text-xs px-1"
+                class="text-slate-400 hover:text-slate-600 text-xs px-1 cursor-pointer"
               >
                 ✕
               </button>
@@ -1248,7 +1372,20 @@
       
       initTheme();
 
-      // Update language button state
+      // Check saved language preference from localStorage
+      const savedSiteLang = localStorage.getItem('ai_radar_user_site_lang');
+      if (savedSiteLang) {
+        currentSiteLang = savedSiteLang;
+        if (savedSiteLang === 'chinese_traditional' && isZh) {
+          ensureChineseConverter(() => {
+            if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+              window.ChineseConverter.convertDomToTraditional();
+            }
+          });
+        } else if (savedSiteLang !== 'english' && savedSiteLang !== 'chinese_simplified' && savedSiteLang !== 'chinese_traditional') {
+          loadTranslatePlugin(savedSiteLang);
+        }
+      }
       updateLangButtonLabel(currentSiteLang);
 
       // Parse URL hash to activate requested tab
@@ -1317,6 +1454,8 @@
     openLangPicker,
     closeLangPicker,
     selectLanguage,
+    filterLanguageList,
+    renderLanguagePickerList,
     switchLanguage,
     switchToDesktop,
     shareArticle,
