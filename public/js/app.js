@@ -4733,7 +4733,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const videoBadge = hasVideo ? `<span class="px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 text-[9px] font-bold flex items-center gap-0.5">${isZh ? '📹 现场视频' : '📹 Video Report'}</span>` : '';
       const imgLoading = cardIndex === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy" decoding="async"';
 
-      const isMajorBreaking = (cardIndex === 0 && (item.hot_score >= 5 || item.is_major_breaking));
+      const isMajorBreaking = (isNewsTab && cardIndex === 0 && (item.hot_score >= 5 || item.is_major_breaking));
       if (isMajorBreaking) {
         return `
         <article class="glass-card rounded-2xl p-4 sm:p-5 flex flex-col justify-between group border-2 border-amber-500/60 dark:border-amber-400/50 hover:border-amber-500 transition-all cursor-pointer shadow-md hover:shadow-xl bg-gradient-to-br from-amber-500/5 via-white to-orange-500/5 dark:from-slate-900 dark:via-slate-900/95 dark:to-amber-950/25 col-span-full relative" onclick="handleNewsCardClick('${item.id}', event)">
@@ -8836,63 +8836,66 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           });
         }
 
-        // 动态载入前沿模型提示词库与工业实战工作流配方库 (Workflows & Prompts Library)
-        try {
-          const [wfRes, promptRes, highlightsRes] = await Promise.all([
-            fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null),
-            fetch(isManual ? '/data/curated_column_highlights.json?t=' + Date.now() : '/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'no-cache' }).catch(() => null)
-          ]);
-          if (highlightsRes && highlightsRes.ok) {
-            try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
-          }
-          let extraPrompts = [];
-          if (wfRes && wfRes.ok) {
-            const wfData = await wfRes.json();
-            if (Array.isArray(wfData)) {
-              extraPrompts.push(...wfData.map(w => ({
-                ...w,
-                is_workflow: true,
-                is_prompt: true,
-                category: 'prompts',
-                sub_type: 'workflow',
-                generation_tier: 'sota',
-                model_tier_score: 98,
-                prompt_content_zh: w.code_snippet,
-                prompt_content_en: w.code_snippet,
-                prompt_content: w.code_snippet,
-                summary_zh: w.takeaway_zh,
-                summary_en: w.takeaway_en,
-                recommended_model: w.tested_models
-              })));
+        // 仅在用户访问提示词专栏或搜索时按需拉取提示词/工作流扩展库，避免首屏阻塞带宽与主线程
+        if ((currentTab === 'prompts' || searchQuery || isManual) && !window._hasLoadedPromptLibrary) {
+          try {
+            window._hasLoadedPromptLibrary = true;
+            const [wfRes, promptRes, highlightsRes] = await Promise.all([
+              fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null),
+              fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null),
+              fetch(isManual ? '/data/curated_column_highlights.json?t=' + Date.now() : '/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null)
+            ]);
+            if (highlightsRes && highlightsRes.ok) {
+              try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
             }
-          }
-          if (promptRes && promptRes.ok) {
-            const promptData = await promptRes.json();
-            if (Array.isArray(promptData)) {
-              extraPrompts.push(...promptData.map(p => ({ ...p, is_prompt: true, category: 'prompts' })));
+            let extraPrompts = [];
+            if (wfRes && wfRes.ok) {
+              const wfData = await wfRes.json();
+              if (Array.isArray(wfData)) {
+                extraPrompts.push(...wfData.map(w => ({
+                  ...w,
+                  is_workflow: true,
+                  is_prompt: true,
+                  category: 'prompts',
+                  sub_type: 'workflow',
+                  generation_tier: 'sota',
+                  model_tier_score: 98,
+                  prompt_content_zh: w.code_snippet,
+                  prompt_content_en: w.code_snippet,
+                  prompt_content: w.code_snippet,
+                  summary_zh: w.takeaway_zh,
+                  summary_en: w.takeaway_en,
+                  recommended_model: w.tested_models
+                })));
+              }
             }
+            if (promptRes && promptRes.ok) {
+              const promptData = await promptRes.json();
+              if (Array.isArray(promptData)) {
+                extraPrompts.push(...promptData.map(p => ({ ...p, is_prompt: true, category: 'prompts' })));
+              }
+            }
+            if (extraPrompts.length > 0) {
+              const existingPrompts = data.grouped?.prompts || data.prompts || [];
+              const extraIds = new Set(extraPrompts.map(p => p.id));
+              const mergedPrompts = [
+                ...extraPrompts,
+                ...existingPrompts.filter(p => !extraIds.has(p.id))
+              ];
+              if (!data.grouped) data.grouped = {};
+              data.grouped.prompts = mergedPrompts;
+              data.prompts = mergedPrompts;
+            }
+          } catch (e) {
+            console.warn("curated prompt/workflow library fetch fallback:", e);
           }
-          if (extraPrompts.length > 0) {
-            const existingPrompts = data.grouped?.prompts || data.prompts || [];
-            const extraIds = new Set(extraPrompts.map(p => p.id));
-            const mergedPrompts = [
-              ...extraPrompts,
-              ...existingPrompts.filter(p => !extraIds.has(p.id))
-            ];
-            if (!data.grouped) data.grouped = {};
-            data.grouped.prompts = mergedPrompts;
-            data.prompts = mergedPrompts;
-          }
-        } catch (e) {
-          console.warn("curated prompt/workflow library fetch fallback:", e);
         }
 
         // SSR 快照保护：首屏已由服务端注入同批次静态 HTML 时，直接复用 DOM，彻底消除二次重绘与 CLS
         const ssrMeta = document.querySelector('meta[name="ssr-updated"]');
         const ssrUpdated = ssrMeta ? ssrMeta.getAttribute('content') : '';
-        const hasSsrDom = !!(ssrUpdated && document.querySelector('#top-three-grid article'));
-        const isSameAsSsr = !isManual && !window._hasInitialRendered && currentTab === 'all' && hasSsrDom && data.updated_at && (data.updated_at === ssrUpdated);
+        const hasSsrDom = !!(ssrUpdated && (document.querySelector('#stream-news article') || document.querySelector('#topic-focus-section article') || document.querySelector('#viral-ticker-section article') || document.querySelector('#top-three-grid article')));
+        const isSameAsSsr = !isManual && !window._hasInitialRendered && currentTab === 'all' && hasSsrDom;
 
         // 性能防护锁：仅当已完成首次渲染且后台轮询版本未变时才跳过
         const isSameUpdate = window._hasInitialRendered && cachedData && cachedData.updated_at && data.updated_at && (cachedData.updated_at === data.updated_at);
@@ -11643,7 +11646,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       window._isLoadingNewsTriggered = true;
       loadNews();
     } else {
-      const hasSsrHome = !!(document.querySelector('meta[name="ssr-updated"]') && document.querySelector('#top-three-grid article'));
+      const hasSsrHome = !!(document.querySelector('meta[name="ssr-updated"]') && (document.querySelector('#stream-news article') || document.querySelector('#topic-focus-section article') || document.querySelector('#viral-ticker-section article') || document.querySelector('#top-three-grid article')));
       if (hasSsrHome) {
         const ssrPages = document.querySelectorAll('#viral-ticker-slider .viral-ticker-page');
         if (ssrPages.length > 0) {
@@ -11660,9 +11663,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         window.addEventListener('keydown', triggerDeferredLoad, { once: true, passive: true });
         const scheduleIdleLoad = () => {
           if ('requestIdleCallback' in window) {
-            requestIdleCallback(() => setTimeout(triggerDeferredLoad, 400), { timeout: 2200 });
+            requestIdleCallback(() => setTimeout(triggerDeferredLoad, 600), { timeout: 3500 });
           } else {
-            setTimeout(triggerDeferredLoad, 1200);
+            setTimeout(triggerDeferredLoad, 2500);
           }
         };
         if (document.readyState === 'complete') {

@@ -2903,9 +2903,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         lead_video_card_en = build_pinned_slider_html(pinned_cards_en)
 
         total_ticker_pages_en = 1
+        all_celeb_cand_en = (payload.get("grouped", {}).get("celebrity") or [it for it in items if it.get("category") == "celebrity"])[:16]
         if pinned_tibo_en:
             pinned_card_html = format_tibo_pinned_card(pinned_tibo_en, is_zh=False)
             other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)]
+            if not other_items or len(other_items) < 2:
+                fallback_items = [it for it in all_celeb_cand_en if is_meaningful_tweet(it) and not is_tibo_reset_tweet(it, now_ts)]
+                other_items = (other_items + [it for it in fallback_items if it.get("id") not in [v.get("id") for v in other_items]])[:8]
             slider_cards = []
             if lead_video_card_en:
                 slider_cards.append(lead_video_card_en)
@@ -2933,6 +2937,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         elif lead_video_card_en:
             pinned_card_html = lead_video_card_en
             other_items = viral_items[:8]
+            if not other_items or len(other_items) < 2:
+                fallback_items = [it for it in all_celeb_cand_en if is_meaningful_tweet(it)]
+                other_items = (viral_items + [it for it in fallback_items if it.get("id") not in [v.get("id") for v in viral_items]])[:8]
             slider_pages_html = ""
             for p_idx in range(0, len(other_items), 2):
                 p_slice = other_items[p_idx:p_idx+2]
@@ -2952,12 +2959,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </div>
             </div>"""
         else:
+            other_items = viral_items[:8]
+            if not other_items or len(other_items) < 2:
+                other_items = [it for it in all_celeb_cand_en if is_meaningful_tweet(it)][:8]
             slider_pages_html = ""
-            for p_idx in range(0, len(viral_items), 3):
-                p_slice = viral_items[p_idx:p_idx+3]
+            for p_idx in range(0, len(other_items), 3):
+                p_slice = other_items[p_idx:p_idx+3]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=False, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
                 slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
-            total_ticker_pages_en = max(1, (len(viral_items) + 2) // 3)
+            total_ticker_pages_en = max(1, (len(other_items) + 2) // 3)
 
             viral_ticker_en_html = f"""
             <div id="viral-ticker-viewport" class="w-full relative overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
@@ -3055,7 +3065,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
-                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
+                loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_en_html else 'loading="lazy"'
+                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
 
                 news_cards_en_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3366,8 +3377,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 en_content
             )
 
-        # 移除会抢占首屏带宽的折叠区图片 preload，并写入 ssr-updated 版本元数据避免前端重复全页重绘
+        # 移除会抢占首屏带宽的折叠区图片 preload，精准注入首屏 LCP 英雄图像预加载，并写入 ssr-updated 版本元数据
         en_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', en_content)
+        hero_lcp_img = ""
+        if lead_media_1_en and lead_media_1_en.get("video_id"):
+            hero_lcp_img = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{lead_media_1_en['video_id']}/maxresdefault.jpg&w=400&output=webp&q=85"
+        elif lcp_image_en_url:
+            hero_lcp_img = lcp_image_en_url
+        if hero_lcp_img:
+            en_content = en_content.replace('</head>', f'  <link rel="preload" as="image" href="{hero_lcp_img}" fetchpriority="high">\n</head>')
         ssr_updated_at = safe_text(str((_nd or payload).get("updated_at") or ""), 64)
         if ssr_updated_at:
             ssr_meta_tag = f'<meta name="ssr-updated" content="{ssr_updated_at}">'
@@ -3519,9 +3537,13 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         lead_video_card_zh = build_pinned_slider_html(pinned_cards_zh)
 
         total_ticker_pages_zh = 1
+        all_celeb_cand_zh = (payload.get("grouped", {}).get("celebrity") or [it for it in items if it.get("category") == "celebrity"])[:16]
         if pinned_tibo_zh:
             pinned_card_html = format_tibo_pinned_card(pinned_tibo_zh, is_zh=True)
             other_items = [it for it in viral_items if not is_tibo_reset_tweet(it, now_ts)]
+            if not other_items or len(other_items) < 2:
+                fallback_items = [it for it in all_celeb_cand_zh if is_meaningful_tweet(it) and not is_tibo_reset_tweet(it, now_ts)]
+                other_items = (other_items + [it for it in fallback_items if it.get("id") not in [v.get("id") for v in other_items]])[:8]
             slider_cards = []
             if lead_video_card_zh:
                 slider_cards.append(lead_video_card_zh)
@@ -3549,6 +3571,9 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         elif lead_video_card_zh:
             pinned_card_html = lead_video_card_zh
             other_items = viral_items[:8]
+            if not other_items or len(other_items) < 2:
+                fallback_items = [it for it in all_celeb_cand_zh if is_meaningful_tweet(it)]
+                other_items = (viral_items + [it for it in fallback_items if it.get("id") not in [v.get("id") for v in viral_items]])[:8]
             slider_pages_html = ""
             for p_idx in range(0, len(other_items), 2):
                 p_slice = other_items[p_idx:p_idx+2]
@@ -3568,12 +3593,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </div>
             </div>"""
         else:
+            other_items = viral_items[:8]
+            if not other_items or len(other_items) < 2:
+                other_items = [it for it in all_celeb_cand_zh if is_meaningful_tweet(it)][:8]
             slider_pages_html = ""
-            for p_idx in range(0, len(viral_items), 3):
-                p_slice = viral_items[p_idx:p_idx+3]
+            for p_idx in range(0, len(other_items), 3):
+                p_slice = other_items[p_idx:p_idx+3]
                 cards_html = "\n".join([format_viral_page_card(it, is_zh=True, card_idx=c_idx) for c_idx, it in enumerate(p_slice)])
                 slider_pages_html += f'<div class="viral-ticker-page grid grid-cols-1 md:grid-cols-3 gap-3.5 w-full shrink-0 items-stretch" style="height: 180px; max-height: 180px; min-height: 180px; box-sizing: border-box; overflow: hidden; margin: 0; padding: 0;">\n{cards_html}\n</div>\n'
-            total_ticker_pages_zh = max(1, (len(viral_items) + 2) // 3)
+            total_ticker_pages_zh = max(1, (len(other_items) + 2) // 3)
 
             viral_ticker_zh_html = f"""
             <div id="viral-ticker-viewport" class="w-full relative overflow-hidden" style="height: 180px; max-height: 180px; min-height: 180px; overflow: hidden; box-sizing: border-box;">
@@ -3643,7 +3671,8 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 opt_img = f"https://wsrv.nl/?url={urllib.parse.quote(img)}&w=480&output=webp&q=80"
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
-                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
+                loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_zh_html else 'loading="lazy"'
+                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
 
                 news_cards_zh_html += f"""
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
@@ -3906,8 +3935,15 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 zh_content
             )
 
-        # 移除会抢占首屏带宽的折叠区图片 preload，并写入 ssr-updated 版本元数据避免前端重复全页重绘
+        # 移除会抢占首屏带宽的折叠区图片 preload，精准注入首屏 LCP 英雄图像预加载，并写入 ssr-updated 版本元数据
         zh_content = re.sub(r'\s*<link rel="preload" as="image" [^>]*>', '', zh_content)
+        hero_lcp_img_zh = ""
+        if lead_media_1_zh and lead_media_1_zh.get("video_id"):
+            hero_lcp_img_zh = f"https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/{lead_media_1_zh['video_id']}/maxresdefault.jpg&w=400&output=webp&q=85"
+        elif lcp_image_zh_url:
+            hero_lcp_img_zh = lcp_image_zh_url
+        if hero_lcp_img_zh:
+            zh_content = zh_content.replace('</head>', f'  <link rel="preload" as="image" href="{hero_lcp_img_zh}" fetchpriority="high">\n</head>')
         ssr_updated_at_zh = safe_text(str((_nd or payload).get("updated_at") or ""), 64)
         if ssr_updated_at_zh:
             ssr_meta_tag_zh = f'<meta name="ssr-updated" content="{ssr_updated_at_zh}">'
