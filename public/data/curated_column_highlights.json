@@ -1,36 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 13:54:07 UTC",
+  "generated_at": "2026-11-11 14:04:43 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 13:54:07 UTC",
+      "updated_at": "2026-11-11 14:04:43 UTC",
       "headline_item": {
-        "id": "c88e42b4b79663b0",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "资料来源：Anthropic 的 IPO 吸引了数倍于可用股票的订单；有消息称，达里奥·阿莫迪和杰米·戴蒙将于周五举行直播活动",
-        "title_en": "Sources: Anthropic's IPO draws multiple times the orders for the shares available; a source says Dario Amodei and Jamie Dimon have a livestream event on Friday (Bailey Lipschultz/Bloomberg)",
-        "source": "Bloomberg",
-        "published_at": "2026-11-11T13:40:01+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-11/anthropic-s-mega-ipo-is-said-to-be-multiple-times-oversubscribed",
-        "event_summary_zh": "贝利·利普舒尔茨/彭博社：\n资料来源：Anthropic 的 IPO 吸引了数倍于可用股票的订单；消息人士称，达里奥·阿莫迪 (Dario Amodei) 和杰米·戴蒙 (Jamie Dimon) 周五举行了一场直播活动——Anthropic PBC 的首次公开募股 (IPO) 吸引了数倍的关注",
-        "event_summary_en": "Anthropic PBC's initial public offering has drawn multiple times the orders for the shares available, according to people familiar …",
+        "id": "6ae43d91e6558a95",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "美数据经纪商向中方输出AI训练环境",
+        "title_en": "US data brokers are selling half a billion dollars in RL training environments to Chinese AI labs",
+        "source": "THE DECODER",
+        "published_at": "2026-11-11T13:51:11+00:00",
+        "url": "https://the-decoder.com/us-data-brokers-are-selling-half-a-billion-dollars-in-rl-training-environments-to-chinese-ai-labs/",
+        "event_summary_zh": "美国数据商向中国实验室出售价值约5亿美元的强化学习训练环境，以辅助AI模型高效迭代",
+        "event_summary_en": "American data brokers are selling reinforcement learning environments to Chinese AI labs, providing simulated training grounds for tasks like coding and financial analysis. By purchasing the same datasets used by Western giants like OpenAI, Chinese labs are effectively bypassing R&D bottlenecks and mitigating local compute shortages to accelerate their model performance.",
         "core_facts_zh": [
-          "【核心事件】Anthropic (Claude 研发团队)：资料来源：Anthropic 的 IPO 吸引了数倍于可用股票的订单；有消息称，达里奥·阿莫迪和杰米·戴蒙将于周五举行直播活动",
-          "【起因与机理】巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
-          "【关键技术规格】Anthropic (Claude 研发团队)在全球产业与技术前沿一线。",
-          "【观点影响】贝利·利普舒尔茨/彭博社：\n资料来源：Anthropic 的 IPO 吸引了数倍于可用股票的订单；有消息称，达里奥·阿莫迪 (Dario Amodei) 和杰米·戴蒙 (Jamie Dimon) 周五举行了一场直播活动 — Anthropic PBC 的首次公开募股 (IPO) 吸引了数倍的关注。"
+          "【核心事件】美国数据经纪商（如Mercor, Surge AI等）与中国AI实验室在全球AI研发市场与跨境数据交易平台：美方以约5亿美元的价格向中方出售RL强化学习训练环境，并间接提供模型蒸馏参考",
+          "【起因与机理】中国实验室为绕过研发试错成本并缓解高端芯片短缺带来的内存瓶颈",
+          "【关键数据与实测】美方经纪商向中方出售价值5亿的RL训练资源。",
+          "【观点态度】此举变相缩短了中美模型的技术差距。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Sources: Anthropic's IPO draws multiple times the orders for the shares available; a source says Dario Amodei and Jamie Dimon have a livestream event on Friday (Bailey Lipschultz/Bloomberg)",
-          "[Root Cause & Mechanism] Anthropic PBC's initial public offering has drawn multiple times the orders for the shares available, according to people familiar ….",
-          "[Key Fact] Bailey Lipschultz / Bloomberg:."
+          "[Core Event] US data brokers (e.g., Mercor, Surge AI) and Chinese AI labs: US firms are selling ~$500M worth of RL training environments and enabling model distillation to Chinese labs",
+          "[Root Cause & Mechanism] To bypass expensive R&D trial-and-error and mitigate local compute memory bottlenecks",
+          "[Key Metrics] US brokers selling $500M in RL training environments to China.",
+          "[Perspective & Impact] This activity effectively shrinks the technological gap."
         ],
-        "industry_impact_zh": "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
-        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        "industry_impact_zh": "一边高喊技术封锁，一边背地里靠卖训练环境赚得盆满钵满，资本的底色果然从不看立场。这哪是地缘博弈，分明是美方一边造神，一边把通往神庙的“精密地图”批发卖给竞争对手，这波操作属于典型的“既要制裁又要带货”。",
+        "industry_impact_en": "While the narrative screams tech containment, the capital flow whispers a different story: selling the map to the temple while trying to lock the gate. It’s a classic move of trying to have one’s cake and eat it too—sanctioning on camera, while cashing in on the backend."
       },
       "headlines": [
+        {
+          "id": "6ae43d91e6558a95",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "美数据经纪商向中方输出AI训练环境",
+          "title_en": "US data brokers are selling half a billion dollars in RL training environments to Chinese AI labs",
+          "source": "THE DECODER",
+          "published_at": "2026-11-11T13:51:11+00:00",
+          "url": "https://the-decoder.com/us-data-brokers-are-selling-half-a-billion-dollars-in-rl-training-environments-to-chinese-ai-labs/",
+          "event_summary_zh": "美国数据商向中国实验室出售价值约5亿美元的强化学习训练环境，以辅助AI模型高效迭代",
+          "event_summary_en": "American data brokers are selling reinforcement learning environments to Chinese AI labs, providing simulated training grounds for tasks like coding and financial analysis. By purchasing the same datasets used by Western giants like OpenAI, Chinese labs are effectively bypassing R&D bottlenecks and mitigating local compute shortages to accelerate their model performance.",
+          "core_facts_zh": [
+            "【核心事件】美国数据经纪商（如Mercor, Surge AI等）与中国AI实验室在全球AI研发市场与跨境数据交易平台：美方以约5亿美元的价格向中方出售RL强化学习训练环境，并间接提供模型蒸馏参考",
+            "【起因与机理】中国实验室为绕过研发试错成本并缓解高端芯片短缺带来的内存瓶颈",
+            "【关键数据与实测】美方经纪商向中方出售价值5亿的RL训练资源。",
+            "【观点态度】此举变相缩短了中美模型的技术差距。"
+          ],
+          "core_facts_en": [
+            "[Core Event] US data brokers (e.g., Mercor, Surge AI) and Chinese AI labs: US firms are selling ~$500M worth of RL training environments and enabling model distillation to Chinese labs",
+            "[Root Cause & Mechanism] To bypass expensive R&D trial-and-error and mitigate local compute memory bottlenecks",
+            "[Key Metrics] US brokers selling $500M in RL training environments to China.",
+            "[Perspective & Impact] This activity effectively shrinks the technological gap."
+          ],
+          "industry_impact_zh": "一边高喊技术封锁，一边背地里靠卖训练环境赚得盆满钵满，资本的底色果然从不看立场。这哪是地缘博弈，分明是美方一边造神，一边把通往神庙的“精密地图”批发卖给竞争对手，这波操作属于典型的“既要制裁又要带货”。",
+          "industry_impact_en": "While the narrative screams tech containment, the capital flow whispers a different story: selling the map to the temple while trying to lock the gate. It’s a classic move of trying to have one’s cake and eat it too—sanctioning on camera, while cashing in on the backend."
+        },
         {
           "id": "c88e42b4b79663b0",
           "tag_zh": "📰 业界动态",
@@ -57,62 +84,36 @@
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         },
         {
-          "id": "c94db3a814640a0b",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "Fractile估值暴涨，获7.2亿美元融资",
-          "title_en": "London-based AI chip startup Fractile raised $720M from Thrive, Founders Fund, and others, sources say at a $7B post-money valuation, up from ~$1.1B in May (George Hammond/Financial Times)",
-          "source": "Financial Times",
-          "published_at": "2026-11-11T13:20:56+00:00",
-          "url": "https://www.ft.com/content/f999a0c2-af52-499f-8008-accbdfd45a25",
-          "event_summary_zh": "伦敦AI芯片公司Fractile获7.2亿美元融资，估值半年内从11亿美元飙升至70亿美元",
-          "event_summary_en": "London-based AI chip developer Fractile has raised $720 million from investors including Thrive and Founders Fund. The company's valuation has soared from approximately $1.1 billion in May to $7 billion, highlighting intense investor appetite for AI hardware infrastructure.",
-          "core_facts_zh": [
-            "【核心事件】Fractile在伦敦：完成7.2亿美元融资，估值攀升至70亿美元",
-            "【起因与机理】AI算力需求溢出，资本押注替代Nvidia硬件的可能性",
-            "【关键数据与实测】伦敦AI芯片研发商Fractile近期完成7.2亿美元融资，由Thrive和Founders Fund等机构注资，估值在短短半年内从约11亿美元激增至70亿美元，反映了资本市场对AI硬件底层的极度追捧。",
-            "【观点态度】Fractile完成大额融资。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Fractile (London): Raised $720M at a $7B valuation",
-            "[Root Cause & Mechanism] Capital betting on potential challengers to Nvidia's hardware dominance",
-            "[Key Metrics] London-based AI chip developer Fractile has raised $720 million from investors including Thrive and Founders Fund.",
-            "[Perspective & Impact] High stakes in AI hardware competition."
-          ],
-          "industry_impact_zh": "半年估值翻了六倍多，这哪里是造芯片，这分明是造印钞机。只要故事讲得好，华尔街的钱就会让估值泡沫比英伟达的财报还好看。",
-          "industry_impact_en": "A 6x valuation jump in six months? They aren't just making chips, they're making money-printing machines. As long as the narrative is compelling, Wall Street will inflate these valuations to outshine even Nvidia's earnings reports."
-        },
-        {
-          "id": "e24e533984d82e02",
+          "id": "7ef903850b7e590b",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "开源AI模型风险引发行业新辩论",
-          "title_en": "The Download: preserving minds and weighing open AI risks",
-          "source": "MIT Tech Review",
-          "published_at": "2026-11-11T13:10:00+00:00",
-          "url": "https://www.technologyreview.com/2026/11/11/1148424/the-download-preserving-minds-open-ai-risks/",
-          "event_summary_zh": "Anthropic报告指出开源模型存在网络安全威胁，引发开源派与安全派对AI管辖权的激烈博弈",
-          "event_summary_en": "Anthropic issued a report questioning the security of an open-source model from Chinese company Z.ai, arguing that its public accessibility poses significant cyberattack risks. This has reignited the industry debate over open versus closed models and who should control the 'keys' to frontier AI.",
+          "title_zh": "Torus获5亿美元融资造移动数据中心",
+          "title_en": "Salt Lake City-based energy storage startup Torus raised a $500M Series C led by Magnetar to build shipping container-sized AI data centers at 1MW to 20MW sizes (Mark Chediak/Bloomberg)",
+          "source": "Bloomberg",
+          "published_at": "2026-11-11T13:25:02+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-11/utah-based-startup-raises-500-million-for-modular-ai-data-center",
+          "event_summary_zh": "储能初创公司Torus完成5亿美元C轮融资，将用于部署集装箱式AI算力中心",
+          "event_summary_en": "Energy storage startup Torus secured $500 million in Series C funding led by Magnetar. The capital will be used to build modular, shipping-container-sized AI data centers ranging from 1MW to 20MW to address the energy-intensive demands of AI operations.",
           "core_facts_zh": [
-            "【核心事件】Anthropic在科技评论分析报告：公开警告开源模型引发的网络安全威胁",
-            "【起因与机理】开源与闭源模型阵营在监管和市场掌控力上的深层矛盾",
-            "【关键技术规格】Anthropic提出开源风险。",
-            "【观点态度】所谓的安全风险，终究不过是门票涨价的前奏。"
+            "【核心事件】Torus（储能初创公司）在盐湖城：完成5亿美元C轮融资，进军集装箱式数据中心建设",
+            "【起因与机理】AI算力爆发导致电力短缺，通过整合储能与算力缓解能源瓶颈",
+            "【关键数据与实测】Torus获5亿美元融资。",
+            "【观点态度】Torus获5亿美元融资。"
           ],
           "core_facts_en": [
-            "[Core Event] Anthropic (Tech report analysis): Public warning against cyber security risks posed by open models",
-            "[Root Cause & Mechanism] Deep conflict between open-source and closed-source camps over control and regulation",
-            "[Key Metrics] 1 COP31’s flagship pledge to electrify 35% of energy use is sinkingOnly around a dozen nations are reportedly ready to sign it.",
-            "[Perspective & Impact] Security vs. Freedom trade-off."
+            "[Core Event] Torus (Salt Lake City): Raised $500M in Series C to build modular data centers",
+            "[Root Cause & Mechanism] To address AI's surging energy demands and grid constraints",
+            "[Key Metrics] Torus raised $500M.",
+            "[Perspective & Impact] Alleviating AI energy supply crunch."
           ],
-          "industry_impact_zh": "这就是经典的“既当裁判又当选手”：大厂担心开源模型把路走宽了，自己圈起的护城河就没人看了。所谓的安全风险，终究不过是门票涨价的前奏。",
-          "industry_impact_en": "This is the classic 'referee and player in one' scenario: big tech fears open models widen the road so much that their own moats become obsolete. 'Security risks' are just the prelude to raising the ticket price."
+          "industry_impact_zh": "当AI厂商还在为了抢GPU打得头破血流时，卖“铲子”的已经开始卖“发电机”了。这年头搞AI不做点能源生意，都不好意思说自己是硬核科技公司。",
+          "industry_impact_en": "While everyone is fighting over GPUs, the shovel-sellers are now selling power plants too. In this era, if you aren't in the energy business, you're hardly even an AI company."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 13:54:07 UTC",
+      "updated_at": "2026-11-11 14:04:44 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -279,7 +280,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 13:54:07 UTC",
+      "updated_at": "2026-11-11 14:04:44 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -292,7 +293,7 @@
         "license": "MIT",
         "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
         "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
         "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
         "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
         "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -323,7 +324,7 @@
           "license": "MIT",
           "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
           "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
           "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
           "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
           "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -388,12 +389,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,806)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,817)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,806 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,817 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
