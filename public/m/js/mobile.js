@@ -1,18 +1,23 @@
 /**
  * mobile.js - High-Performance Mobile Web App Controller
  * Dedicated lightweight engine for mobile screens (< 768px).
- * Focused strictly on News (资讯), Social Tweets (社交推文), and Videos (实战视频).
+ * Focused on News (资讯), Social Signals (社交推文), and Videos (实战视频).
  */
 
 (function() {
   'use strict';
 
-  // 1. Language & Environment
+  // 1. Language & Environment State
   const isZh = Boolean(
     window.__IS_ZH || 
     window.location.pathname.startsWith('/zh') || 
     new URLSearchParams(window.location.search).get('lang') === 'zh'
   );
+
+  let currentSiteLang = localStorage.getItem('ai_radar_user_site_lang');
+  if (!currentSiteLang) {
+    currentSiteLang = isZh ? 'chinese_simplified' : 'english';
+  }
 
   const I18N = {
     zh: {
@@ -20,7 +25,7 @@
       mobileEdition: '移动专版',
       live: '实时更新',
       refresh: '刷新',
-      searchPlaceholder: '搜索 AI 快讯、推文与视频...',
+      searchPlaceholder: '搜索 AI 快讯、推文与实战视频...',
       tabNews: '行业资讯',
       tabSocial: '社交推文',
       tabVideos: '实战视频',
@@ -37,15 +42,15 @@
       loadMore: '加载更多',
       noMore: '已加载全部精彩内容',
       noMatch: '暂无符合条件的动态',
-      readFull: '阅读全文 & AI解读 →',
+      readFull: '阅读全文 & 深度解析 →',
       viewOriginal: '直达源站 ↗',
       openOnX: '在 𝕏 查看原文 ↗',
       modalTitle: '资讯深度解析',
       briefingTitle: '🎯 核心事实提炼 (5W1H)',
       insightTitle: '🤖 AI 智库犀利研判',
       coverageTitle: '📰 深度报道原文实录',
-      toggleLangZh: '中文译文',
-      toggleLangEn: '英文原文',
+      toggleLangZh: '查看中文译文',
+      toggleLangEn: '查看英文原文',
       switchToDesktop: '💻 切换至电脑完整版',
       justNow: '刚刚',
       minsAgo: '分钟前',
@@ -53,14 +58,29 @@
       daysAgo: '天前',
       views: '浏览',
       likes: '赞',
-      retweets: '转推'
+      retweets: '转推',
+      selectLangTitle: '选择语言版本',
+      langZhHans: '🇨🇳 简体中文',
+      langZhHant: '🇭🇰 繁體中文',
+      langEn: '🇬🇧 English (Global)',
+      langJa: '🇯🇵 日本語',
+      copiedToast: '链接已复制到剪贴板！',
+      shareTitle: '分享 AI 动态',
+      aiTakePrefix: 'AI 研判',
+      sourceBtn: '源站 ↗',
+      shareBtn: '分享',
+      suggestTitle: '语言偏好提示',
+      suggestEnDesc: '检测到您的系统语言为英文，是否切换至英文原版？',
+      suggestZhDesc: '检测到您的系统语言为中文，是否切换至中文精翻版？',
+      suggestSwitchBtn: '立即切换',
+      suggestDismissBtn: '保持现状'
     },
     en: {
       appName: 'AI News Radar',
       mobileEdition: 'Mobile App',
       live: 'LIVE',
       refresh: 'Refresh',
-      searchPlaceholder: 'Search news, tweets & videos...',
+      searchPlaceholder: 'Search news, leader tweets & videos...',
       tabNews: 'Intel & News',
       tabSocial: 'Social Signals',
       tabVideos: 'Hands-on Videos',
@@ -84,8 +104,8 @@
       briefingTitle: '🎯 Core Fact Briefing (5W1H)',
       insightTitle: '🤖 AI Hot Take & Analysis',
       coverageTitle: '📰 Full In-Depth Coverage',
-      toggleLangZh: 'Chinese',
-      toggleLangEn: 'English',
+      toggleLangZh: 'View Chinese Translation',
+      toggleLangEn: 'View English Original',
       switchToDesktop: '💻 Switch to Desktop Version',
       justNow: 'just now',
       minsAgo: 'm ago',
@@ -93,19 +113,35 @@
       daysAgo: 'd ago',
       views: 'views',
       likes: 'likes',
-      retweets: 'RT'
+      retweets: 'RT',
+      selectLangTitle: 'Select Language Edition',
+      langZhHans: '🇨🇳 Chinese (Simplified)',
+      langZhHant: '🇭🇰 Chinese (Traditional)',
+      langEn: '🇬🇧 English (Global)',
+      langJa: '🇯🇵 Japanese',
+      copiedToast: 'Link copied to clipboard!',
+      shareTitle: 'Share AI Intel',
+      aiTakePrefix: 'AI Hot Take',
+      sourceBtn: 'Source ↗',
+      shareBtn: 'Share',
+      suggestTitle: 'Language Preference',
+      suggestEnDesc: 'Detected English system locale. Switch to English edition?',
+      suggestZhDesc: 'Detected Chinese system locale. Switch to Chinese edition?',
+      suggestSwitchBtn: 'Switch Now',
+      suggestDismissBtn: 'Keep Current'
     }
   };
 
   const t = isZh ? I18N.zh : I18N.en;
 
-  // 2. Global State
+  // 2. Global Runtime State
   let cachedData = null;
   let currentTab = 'news'; // 'news' | 'social' | 'videos' | 'top'
   let currentFilter = 'all';
   let searchQuery = '';
   let displayLimit = 20;
   const PAGE_STEP = 20;
+  const tweetLangState = {}; // Record per-tweet toggle: { [id]: 'zh' | 'en' }
 
   // 3. Theme Init
   function initTheme() {
@@ -130,7 +166,35 @@
     }
   }
 
-  // 4. Time Formatting
+  // 4. Traditional Chinese Engine Lazy Loader
+  function ensureChineseConverter(cb) {
+    if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+      if (typeof cb === 'function') cb();
+      return;
+    }
+    if (typeof cb === 'function') {
+      window._zhConvWaiters = window._zhConvWaiters || [];
+      window._zhConvWaiters.push(cb);
+    }
+    if (window._zhConvLoading) return;
+    window._zhConvLoading = true;
+    const script = document.createElement('script');
+    script.src = '/js/chinese_converter.js';
+    script.async = true;
+    script.onload = () => {
+      window._zhConvLoading = false;
+      const waiters = window._zhConvWaiters || [];
+      window._zhConvWaiters = [];
+      waiters.forEach(fn => { try { fn(); } catch (e) {} });
+    };
+    script.onerror = () => {
+      window._zhConvLoading = false;
+      window._zhConvWaiters = [];
+    };
+    document.head.appendChild(script);
+  }
+
+  // 5. Time & Text Formatting
   function formatTimeAgo(timeStr) {
     if (!timeStr) return '';
     try {
@@ -145,7 +209,6 @@
     }
   }
 
-  // 5. Image & Avatar URL Optimization
   function optimizeImageUrl(url, width = 480) {
     if (!url || typeof url !== 'string') return '';
     const clean = url.trim();
@@ -165,7 +228,28 @@
       .replace(/'/g, '&#39;');
   }
 
-  // 6. Data Loading & Extraction
+  // 6. Toast Notification Helper
+  function showToast(msg) {
+    let toast = document.getElementById('mobile-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'mobile-toast';
+      document.body.appendChild(toast);
+    }
+    toast.innerHTML = `
+      <div class="px-4 py-2.5 rounded-2xl bg-slate-900/95 dark:bg-white/95 text-white dark:text-slate-900 text-xs font-bold shadow-2xl backdrop-blur-md flex items-center gap-2 border border-slate-700/50 dark:border-slate-200/50">
+        <span>✨</span>
+        <span>${escapeHtml(msg)}</span>
+      </div>
+    `;
+    toast.classList.add('show');
+    if (window._toastTimer) clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2400);
+  }
+
+  // 7. Data Loading & Extraction
   async function loadData(forceRefresh = false) {
     const feedContainer = document.getElementById('mobile-feed');
     if (!cachedData || forceRefresh) {
@@ -195,9 +279,20 @@
     }
 
     renderCurrentView();
+
+    // If Traditional Chinese was requested, convert DOM
+    if (isZh && currentSiteLang === 'chinese_traditional') {
+      ensureChineseConverter(() => {
+        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+          setTimeout(() => {
+            try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+          }, 30);
+        }
+      });
+    }
   }
 
-  // 7. Sub-filters for current tab
+  // 8. Dynamic Sub-filters
   function renderSubFilters() {
     const subFilterWrap = document.getElementById('sub-filter-bar');
     if (!subFilterWrap) return;
@@ -236,9 +331,10 @@
           const isActive = currentFilter === f.id;
           const activeClass = isActive
             ? 'bg-indigo-600 text-white shadow-xs font-bold'
-            : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium';
+            : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200/60 dark:border-slate-800 font-medium';
           return `
             <button 
+              type="button"
               onclick="window.MobileApp.setFilter('${f.id}')"
               class="px-3 py-1 rounded-full text-xs whitespace-nowrap transition-all touch-card ${activeClass}"
             >
@@ -250,7 +346,7 @@
     `;
   }
 
-  // 8. Render Current Channel View
+  // 9. Render Current Feed View
   function renderCurrentView() {
     if (!cachedData) return;
     const feedContainer = document.getElementById('mobile-feed');
@@ -304,7 +400,7 @@
       feedContainer.innerHTML = `
         <div class="py-16 text-center text-slate-400">
           <p class="text-3xl mb-2">🔍</p>
-          <p class="text-xs">${t.noMatch}</p>
+          <p class="text-xs font-medium">${t.noMatch}</p>
         </div>
       `;
       return;
@@ -327,8 +423,9 @@
     const loadMoreButton = hasMore ? `
       <div class="pt-4 pb-8 text-center">
         <button 
+          type="button"
           onclick="window.MobileApp.loadMore()" 
-          class="w-full py-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold rounded-2xl shadow-xs active:scale-98 transition-all"
+          class="w-full py-3 bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-xs font-bold rounded-2xl shadow-card active:scale-98 transition-all"
         >
           ${t.loadMore} (${visibleItems.length}/${items.length})
         </button>
@@ -345,9 +442,16 @@
         ${loadMoreButton}
       </div>
     `;
+
+    // Apply Traditional Chinese if active
+    if (isZh && currentSiteLang === 'chinese_traditional') {
+      if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+        try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+      }
+    }
   }
 
-  // 9. Card Renderers
+  // 10. Card Renderers
   function renderNewsCard(item, idx = 0) {
     const title = escapeHtml((isZh ? (item.title_zh || item.title) : (item.title_en || item.title)) || '');
     const summary = escapeHtml((isZh ? (item.summary_zh || item.content_snippet) : (item.summary_en || item.content_snippet)) || '');
@@ -358,19 +462,19 @@
     const insightText = item.ai_analysis && (isZh ? item.ai_analysis.insight_zh : item.ai_analysis.insight_en);
 
     return `
-      <div 
-        class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs touch-card transition-all cursor-pointer"
+      <article 
+        class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-card touch-card transition-all cursor-pointer"
         onclick="window.MobileApp.openArticle('${item.id}')"
       >
         <div class="flex items-center justify-between text-[11px] mb-2">
-          <div class="flex items-center gap-1.5">
-            <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold font-mono">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950/70 text-indigo-600 dark:text-indigo-400 font-semibold font-mono text-[10px]">
               ${source}
             </span>
-            ${item.is_breaking ? `<span class="px-1.5 py-0.5 rounded bg-rose-500 text-white font-bold text-[10px]">⚡ ${isZh ? '突发' : 'BREAKING'}</span>` : ''}
-            ${hasDeepArticle ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 font-bold text-[10px]">📰 ${isZh ? '深度实录' : 'IN-DEPTH'}</span>` : ''}
+            ${item.is_breaking ? `<span class="px-1.5 py-0.5 rounded bg-rose-500 text-white font-bold text-[9px]">⚡ ${isZh ? '突发' : 'BREAKING'}</span>` : ''}
+            ${hasDeepArticle ? `<span class="px-1.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/70 text-emerald-600 dark:text-emerald-400 font-bold text-[9px]">📰 ${isZh ? '深度实录' : 'IN-DEPTH'}</span>` : ''}
           </div>
-          <span class="text-slate-400 font-mono text-[10px]">${timeAgo}</span>
+          <span class="text-slate-400 font-mono text-[10px] shrink-0">${timeAgo}</span>
         </div>
 
         <h3 class="text-[15px] font-bold text-slate-900 dark:text-slate-100 leading-snug mb-2 line-clamp-3">
@@ -384,7 +488,7 @@
         ` : ''}
 
         ${imgUrl ? `
-          <div class="rounded-xl overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800 mb-3">
+          <div class="rounded-xl overflow-hidden aspect-video bg-slate-100 dark:bg-slate-800 mb-3 border border-slate-100 dark:border-slate-800/60">
             <img src="${imgUrl}" width="480" height="270" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async" onerror="this.parentElement.style.display='none'">
           </div>
         ` : ''}
@@ -392,15 +496,28 @@
         ${insightText ? `
           <div class="p-2.5 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-200/50 dark:border-purple-800/40 text-[11px] text-purple-900 dark:text-purple-200 leading-relaxed flex items-start gap-1.5 mb-3">
             <span class="text-xs">🤖</span>
-            <span class="line-clamp-2">${escapeHtml(insightText)}</span>
+            <div class="line-clamp-2">
+              <span class="font-bold mr-1">${t.aiTakePrefix}:</span>${escapeHtml(insightText)}
+            </div>
           </div>
         ` : ''}
 
-        <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-800/60 text-[11px] text-indigo-600 dark:text-indigo-400 font-bold">
-          <span>${t.readFull}</span>
-          <span class="text-slate-400">↗</span>
+        <div class="flex items-center justify-between pt-2.5 border-t border-slate-100 dark:border-slate-800/60 text-[11px]">
+          <span class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-1">
+            <span>${t.readFull}</span>
+          </span>
+          <div class="flex items-center gap-2" onclick="event.stopPropagation()">
+            ${item.url ? `
+              <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 text-[10px] font-semibold flex items-center gap-0.5">
+                ${t.sourceBtn}
+              </a>
+            ` : ''}
+            <button type="button" onclick="window.MobileApp.shareArticle('${item.id}')" class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-700 dark:hover:text-slate-200 text-[10px] font-semibold flex items-center gap-1" title="${t.shareBtn}">
+              🔗
+            </button>
+          </div>
         </div>
-      </div>
+      </article>
     `;
   }
 
@@ -410,16 +527,22 @@
     const authorRole = escapeHtml(isZh ? (item.author_role || item.author_role_en || '') : (item.author_role_en || item.author_role || ''));
     const avatar = item.author_avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${authorHandle || 'vip'}`;
     const timeAgo = formatTimeAgo(item.raw_published_at);
-    const contentZh = item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || '';
-    const contentEn = item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title || '';
-    const displayContent = escapeHtml(isZh ? (contentZh || contentEn) : (contentEn || contentZh));
+    
+    const textZh = item.full_text_zh || item.quote_zh || item.summary_zh || item.title_zh || '';
+    const textEn = item.full_text_en || item.quote_en || item.summary_en || item.title_en || item.title || '';
+    
+    // Determine whether to display zh or en based on user toggle
+    const currentMode = tweetLangState[item.id] || (isZh ? 'zh' : 'en');
+    let displayText = currentMode === 'zh' ? (textZh || textEn) : (textEn || textZh);
+    displayText = escapeHtml(displayText);
+
+    const hasBilingual = Boolean(textZh && textEn && textZh.trim() !== textEn.trim());
     const rawUrl = item.url || (authorHandle && item.status_id ? `https://x.com/${authorHandle}/status/${item.status_id}` : '#');
     const metrics = item.metrics || {};
-
     const mediaList = item.media_urls || (item.image_url ? [item.image_url] : []);
 
     return `
-      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-xs touch-card transition-all">
+      <article class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 shadow-card touch-card transition-all">
         <div class="flex items-start justify-between mb-2.5">
           <div class="flex items-center gap-2.5">
             <img src="${avatar}" width="40" height="40" decoding="async" alt="${authorName}" class="w-10 h-10 rounded-full object-cover border border-slate-200 dark:border-slate-700 bg-slate-100" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=vip'">
@@ -436,33 +559,46 @@
             </div>
           </div>
           ${authorRole ? `
-            <span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-semibold font-mono truncate max-w-[110px]">
+            <span class="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 text-[10px] font-semibold font-mono truncate max-w-[120px]">
               ${authorRole}
             </span>
           ` : ''}
         </div>
 
-        <p class="text-[14px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-line mb-3 font-normal">
-          ${displayContent}
+        <p class="text-[14px] text-slate-800 dark:text-slate-200 leading-relaxed whitespace-pre-line mb-3 font-normal" id="tweet-text-${item.id}">
+          ${displayText}
         </p>
 
+        ${hasBilingual ? `
+          <div class="mb-3">
+            <button 
+              type="button"
+              onclick="window.MobileApp.toggleTweetLang('${item.id}')"
+              class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-[10px] font-semibold text-indigo-600 dark:text-indigo-400 border border-slate-200/50 dark:border-slate-700/50 active:scale-95 transition-transform"
+            >
+              <span>🌐</span>
+              <span id="tweet-toggle-btn-${item.id}">${currentMode === 'zh' ? t.toggleLangEn : t.toggleLangZh}</span>
+            </button>
+          </div>
+        ` : ''}
+
         ${mediaList.length > 0 ? `
-          <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-100 dark:bg-slate-800">
+          <div class="rounded-xl overflow-hidden mb-3 aspect-video bg-slate-100 dark:bg-slate-800 border border-slate-100 dark:border-slate-800/60">
             <img src="${optimizeImageUrl(mediaList[0], 640)}" width="640" height="360" alt="Tweet media" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
           </div>
         ` : ''}
 
-        <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono pt-2 border-t border-slate-100 dark:border-slate-800/60">
-          <div class="flex items-center gap-4">
+        <div class="flex items-center justify-between text-[11px] text-slate-400 font-mono pt-2.5 border-t border-slate-100 dark:border-slate-800/60">
+          <div class="flex items-center gap-3">
             ${metrics.views ? `<span>👁️ ${metrics.views}</span>` : ''}
             ${metrics.likes ? `<span>❤️ ${metrics.likes}</span>` : ''}
             ${metrics.retweets ? `<span>🔁 ${metrics.retweets}</span>` : ''}
           </div>
-          <a href="${rawUrl}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-0.5">
+          <a href="${rawUrl}" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-1 hover:underline">
             <span>${t.openOnX}</span>
           </a>
         </div>
-      </div>
+      </article>
     `;
   }
 
@@ -479,18 +615,18 @@
         href="${videoUrl}" 
         target="_blank" 
         rel="noopener noreferrer"
-        class="block bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl overflow-hidden shadow-xs touch-card transition-all"
+        class="block bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl overflow-hidden shadow-card touch-card transition-all"
       >
         <div class="relative aspect-video bg-slate-900">
           ${imgUrl ? `
             <img src="${imgUrl}" width="640" height="360" alt="${title}" class="w-full h-full object-cover" ${idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} decoding="async">
           ` : ''}
-          <div class="absolute inset-0 bg-black/30 flex items-center justify-center">
-            <div class="w-12 h-12 rounded-full bg-rose-600/90 text-white flex items-center justify-center text-lg pl-1 shadow-lg">
+          <div class="absolute inset-0 bg-black/35 flex items-center justify-center">
+            <div class="w-12 h-12 rounded-full bg-rose-600/95 text-white flex items-center justify-center text-lg pl-1 shadow-xl">
               ▶
             </div>
           </div>
-          <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded bg-black/75 text-white text-[10px] font-mono font-bold">
+          <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-xs text-white text-[10px] font-mono font-bold">
             ${subType}
           </span>
         </div>
@@ -515,13 +651,13 @@
     const source = escapeHtml(item.source || 'AI Radar');
 
     return `
-      <div 
-        class="bg-gradient-to-br from-indigo-50/60 to-purple-50/40 dark:from-indigo-950/30 dark:to-purple-950/20 border border-indigo-200/60 dark:border-indigo-800/50 rounded-2xl p-4 shadow-xs touch-card transition-all cursor-pointer"
+      <article 
+        class="bg-gradient-to-br from-indigo-50/70 via-purple-50/40 to-slate-50 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-indigo-200/70 dark:border-indigo-800/60 rounded-2xl p-4 shadow-card touch-card transition-all cursor-pointer"
         onclick="window.MobileApp.openArticle('${item.id}')"
       >
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-center gap-2">
-            <span class="w-6 h-6 rounded-full bg-indigo-600 text-white text-xs font-bold flex items-center justify-center">
+            <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-indigo-600 to-rose-500 text-white text-xs font-black flex items-center justify-center shadow-xs">
               #${index + 1}
             </span>
             <span class="font-bold text-xs text-indigo-700 dark:text-indigo-300">${isZh ? '今日核心突破' : 'Core Breakthrough'}</span>
@@ -542,16 +678,18 @@
         ${insight ? `
           <div class="p-2.5 rounded-xl bg-white/80 dark:bg-slate-900/80 border border-indigo-100 dark:border-indigo-900/60 text-xs text-indigo-950 dark:text-indigo-200 leading-relaxed flex items-start gap-1.5">
             <span>💡</span>
-            <span class="font-medium">${escapeHtml(insight)}</span>
+            <div class="font-medium">
+              <span class="font-bold mr-1">${t.aiTakePrefix}:</span>${escapeHtml(insight)}
+            </div>
           </div>
         ` : ''}
-      </div>
+      </article>
     `;
   }
 
   function renderSkeleton() {
     return Array.from({ length: 4 }).map(() => `
-      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 space-y-3 shimmer-box">
+      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-4 space-y-3 shimmer-box shadow-card">
         <div class="w-24 h-4 bg-slate-200 dark:bg-slate-800 rounded"></div>
         <div class="w-full h-5 bg-slate-200 dark:bg-slate-800 rounded"></div>
         <div class="w-3/4 h-5 bg-slate-200 dark:bg-slate-800 rounded"></div>
@@ -560,7 +698,7 @@
     `).join('');
   }
 
-  // 10. Article Detail Sheet / Modal
+  // 11. Article Detail Bottom Sheet Modal
   function openArticleModal(itemId) {
     if (!cachedData) return;
     let found = null;
@@ -609,19 +747,38 @@
       : [];
 
     modalContent.innerHTML = `
-      <div class="sticky top-0 z-10 flex items-center justify-between p-4 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
+      <!-- Pull handle -->
+      <div class="pt-2.5 pb-1 flex justify-center cursor-pointer" onclick="window.MobileApp.closeArticle()">
+        <div class="w-10 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+      </div>
+
+      <div class="sticky top-0 z-10 flex items-center justify-between px-4 py-2.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
         <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono">
+          <span class="px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400 text-xs font-bold font-mono">
             ${source}
           </span>
           <span class="text-xs text-slate-400 font-mono">${formatTimeAgo(found.raw_published_at)}</span>
         </div>
-        <button onclick="window.MobileApp.closeArticle()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-base active:scale-90">
-          ✕
-        </button>
+        <div class="flex items-center gap-1.5">
+          <button 
+            type="button"
+            onclick="window.MobileApp.shareArticle('${found.id}')"
+            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90"
+            title="${t.shareBtn}"
+          >
+            🔗
+          </button>
+          <button 
+            type="button"
+            onclick="window.MobileApp.closeArticle()" 
+            class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm active:scale-90"
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
-      <div class="p-4 space-y-5 overflow-y-auto max-h-[82vh] pb-12">
+      <div class="p-4 space-y-4 overflow-y-auto max-h-[78vh] pb-14 no-scrollbar">
         <h2 class="text-lg font-bold text-slate-900 dark:text-slate-100 leading-snug">
           ${title}
         </h2>
@@ -674,6 +831,11 @@
 
     modalOverlay.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
+
+    // Click outside to dismiss
+    modalOverlay.onclick = (e) => {
+      if (e.target === modalOverlay) closeArticleModal();
+    };
   }
 
   function closeArticleModal() {
@@ -684,12 +846,45 @@
     document.body.style.overflow = '';
   }
 
-  // 11. Navigation Tab Switching
+  // 12. Tweet Language In-Place Toggle
+  function toggleTweetLang(itemId) {
+    if (!cachedData) return;
+    const tweets = (cachedData.grouped && cachedData.grouped.celebrity) || (cachedData.celebrity) || [];
+    const found = tweets.find(it => String(it.id) === String(itemId));
+    if (!found) return;
+
+    const current = tweetLangState[itemId] || (isZh ? 'zh' : 'en');
+    const next = current === 'zh' ? 'en' : 'zh';
+    tweetLangState[itemId] = next;
+
+    const textZh = found.full_text_zh || found.quote_zh || found.summary_zh || found.title_zh || '';
+    const textEn = found.full_text_en || found.quote_en || found.summary_en || found.title_en || found.title || '';
+    const textEl = document.getElementById(`tweet-text-${itemId}`);
+    const btnEl = document.getElementById(`tweet-toggle-btn-${itemId}`);
+
+    if (textEl) {
+      textEl.textContent = next === 'zh' ? (textZh || textEn) : (textEn || textZh);
+    }
+    if (btnEl) {
+      btnEl.textContent = next === 'zh' ? t.toggleLangEn : t.toggleLangZh;
+    }
+  }
+
+  // 13. Navigation Tab Switching & Hash Persistence
   function switchTab(newTab) {
     if (currentTab === newTab && currentFilter === 'all') return;
     currentTab = newTab;
     currentFilter = 'all';
     displayLimit = 20;
+
+    // Update URL hash without causing page jump
+    try {
+      if (history.replaceState) {
+        history.replaceState(null, '', '#' + newTab);
+      } else {
+        window.location.hash = '#' + newTab;
+      }
+    } catch (e) {}
 
     // Update top tabs
     document.querySelectorAll('[data-tab-target]').forEach(el => {
@@ -707,6 +902,9 @@
       el.classList.toggle('text-indigo-600', isTarget);
       el.classList.toggle('dark:text-indigo-400', isTarget);
       el.classList.toggle('text-slate-400', !isTarget);
+      const dot = el.querySelector('.dock-active-dot');
+      if (dot) dot.classList.toggle('opacity-100', isTarget);
+      if (dot) dot.classList.toggle('opacity-0', !isTarget);
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -727,7 +925,23 @@
   function handleSearch(evt) {
     searchQuery = evt.target.value || '';
     displayLimit = 20;
+    const clearBtn = document.getElementById('mobile-search-clear');
+    if (clearBtn) {
+      clearBtn.classList.toggle('hidden', !searchQuery);
+    }
     renderCurrentView();
+  }
+
+  function clearSearch() {
+    const input = document.getElementById('mobile-search-input');
+    if (input) {
+      input.value = '';
+      searchQuery = '';
+      const clearBtn = document.getElementById('mobile-search-clear');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      displayLimit = 20;
+      renderCurrentView();
+    }
   }
 
   function toggleSearchBox() {
@@ -740,30 +954,347 @@
     }
   }
 
+  // 14. Mobile Language Switcher Action Sheet & Navigation
+  function openLangPicker() {
+    const modal = document.getElementById('lang-picker-modal');
+    if (modal) {
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      modal.onclick = (e) => {
+        if (e.target === modal) closeLangPicker();
+      };
+    }
+  }
+
+  function closeLangPicker() {
+    const modal = document.getElementById('lang-picker-modal');
+    if (modal) {
+      modal.classList.add('hidden');
+    }
+    document.body.style.overflow = '';
+  }
+
+  function selectLanguage(targetLang) {
+    closeLangPicker();
+    const search = window.location.search || '';
+    const hash = window.location.hash || (currentTab && currentTab !== 'all' ? '#' + currentTab : '');
+
+    // 1. Simplified Chinese
+    if (targetLang === 'chinese_simplified') {
+      localStorage.setItem('ai_radar_user_site_lang', 'chinese_simplified');
+      localStorage.setItem('ai_radar_user_lang', 'zh');
+      if (!window.location.pathname.startsWith('/zh')) {
+        window.location.href = '/zh/m' + search + hash;
+        return;
+      }
+      currentSiteLang = 'chinese_simplified';
+      if (window.ChineseConverter && window.ChineseConverter.revertDomToSimplified) {
+        try { window.ChineseConverter.revertDomToSimplified(); } catch (e) {}
+      }
+      updateLangButtonLabel('chinese_simplified');
+      showToast('已切换至简体中文');
+      return;
+    }
+
+    // 2. Traditional Chinese
+    if (targetLang === 'chinese_traditional') {
+      localStorage.setItem('ai_radar_user_site_lang', 'chinese_traditional');
+      localStorage.setItem('ai_radar_user_lang', 'zh');
+      if (!window.location.pathname.startsWith('/zh')) {
+        window.location.href = '/zh/m' + search + hash;
+        return;
+      }
+      currentSiteLang = 'chinese_traditional';
+      ensureChineseConverter(() => {
+        if (window.ChineseConverter && window.ChineseConverter.convertDomToTraditional) {
+          try { window.ChineseConverter.convertDomToTraditional(); } catch (e) {}
+        }
+      });
+      updateLangButtonLabel('chinese_traditional');
+      showToast('已切換至繁體中文');
+      return;
+    }
+
+    // 3. English
+    if (targetLang === 'english') {
+      localStorage.setItem('ai_radar_user_site_lang', 'english');
+      localStorage.setItem('ai_radar_user_lang', 'en');
+      if (window.location.pathname.startsWith('/zh')) {
+        window.location.href = '/m' + search + hash;
+        return;
+      }
+      currentSiteLang = 'english';
+      updateLangButtonLabel('english');
+      showToast('Switched to English');
+      return;
+    }
+
+    // 4. Other languages via Translate.js
+    localStorage.setItem('ai_radar_user_site_lang', targetLang);
+    loadTranslatePlugin(targetLang);
+  }
+
+  function updateLangButtonLabel(lang) {
+    const flagEl = document.getElementById('lang-btn-flag');
+    const textEl = document.getElementById('lang-btn-text');
+    if (!flagEl || !textEl) return;
+    if (lang === 'chinese_traditional') {
+      flagEl.textContent = '🇭🇰';
+      textEl.textContent = '繁';
+    } else if (lang === 'chinese_simplified') {
+      flagEl.textContent = '🇨🇳';
+      textEl.textContent = '简';
+    } else if (lang === 'english') {
+      flagEl.textContent = '🇬🇧';
+      textEl.textContent = 'EN';
+    } else {
+      flagEl.textContent = '🌐';
+      textEl.textContent = 'Lang';
+    }
+  }
+
+  function loadTranslatePlugin(targetLang) {
+    const exec = () => {
+      try {
+        if (typeof translate !== 'undefined') {
+          translate.selectLanguageTag.show = false;
+          translate.service.use('client.edge');
+          translate.language.setLocal(isZh ? 'chinese_simplified' : 'english');
+          translate.execute();
+          translate.changeLanguage(targetLang);
+          showToast(`Translated to ${targetLang}`);
+        }
+      } catch (err) {
+        console.warn('Translate execution error:', err);
+      }
+    };
+    if (typeof translate === 'undefined') {
+      const script = document.createElement('script');
+      script.src = 'https://res.zvo.cn/translate/translate.js';
+      script.async = true;
+      script.onload = exec;
+      document.body.appendChild(script);
+    } else {
+      exec();
+    }
+  }
+
+  // Quick 1-tap language switch fallback
+  function switchLanguage() {
+    openLangPicker();
+  }
+
+  // Switch to Desktop preserving category tab & queries
   function switchToDesktop() {
     sessionStorage.setItem('prefer_desktop', '1');
-    const hash = window.location.hash || (typeof currentTab !== 'undefined' && currentTab && currentTab !== 'all' ? '#' + currentTab : '');
+    const hashMapping = {
+      news: '#news',
+      social: '#celebrity',
+      videos: '#videos',
+      top: '#all'
+    };
+    const targetHash = hashMapping[currentTab] || ('#' + currentTab);
     const searchParams = new URLSearchParams(window.location.search);
     searchParams.set('view', 'desktop');
     const targetBase = isZh ? '/zh' : '';
-    window.location.href = (targetBase || '/') + '?' + searchParams.toString() + hash;
+    window.location.href = (targetBase || '/') + '?' + searchParams.toString() + targetHash;
   }
 
-  function switchLanguage() {
-    const search = window.location.search || '';
-    const hash = window.location.hash || (typeof currentTab !== 'undefined' && currentTab && currentTab !== 'all' ? '#' + currentTab : '');
-    const targetBase = isZh ? '/m' : '/zh/m';
-    window.location.href = targetBase + search + hash;
+  // 15. Article Share Helper
+  async function shareArticle(itemId) {
+    const allPools = [
+      ...((cachedData && cachedData.grouped && cachedData.grouped.news) || []),
+      ...((cachedData && cachedData.top_three) || [])
+    ];
+    const found = allPools.find(it => String(it.id) === String(itemId));
+    const title = found ? (isZh ? (found.title_zh || found.title) : (found.title_en || found.title)) : 'AI News Radar';
+    const shareUrl = found && found.url ? found.url : window.location.href;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: title,
+          text: title,
+          url: shareUrl
+        });
+        return;
+      } catch (e) {}
+    }
+
+    // Clipboard fallback
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        showToast(t.copiedToast);
+      } else {
+        const input = document.createElement('input');
+        input.value = shareUrl;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        showToast(t.copiedToast);
+      }
+    } catch (e) {
+      showToast(shareUrl);
+    }
   }
 
-  // 12. Expose to Window
+  // 16. Floating Back to Top Button
+  function initMobileBackToTop() {
+    const btn = document.getElementById('btn-back-to-top');
+    if (!btn) return;
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+        btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else {
+        btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+        btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    }, { passive: true });
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // 17. Smart Visitor Language Suggestion
+  function checkAndShowLangSuggestion() {
+    try {
+      if (sessionStorage.getItem('ai_radar_m_lang_dismissed')) return;
+      const navLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
+      const isChineseEnv = navLang.startsWith('zh');
+      const isEnglishEnv = navLang.startsWith('en');
+
+      const banner = document.getElementById('mobile-lang-suggest-banner');
+      if (!banner) return;
+
+      if (isChineseEnv && !isZh) {
+        // Visitor is Chinese speaker on English mobile page
+        banner.innerHTML = `
+          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-sm">🌐</span>
+              <p class="text-[11px] text-indigo-950 dark:text-indigo-200 truncate font-medium">
+                ${t.suggestZhDesc}
+              </p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button 
+                type="button"
+                onclick="window.MobileApp.selectLanguage('chinese_simplified')" 
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95"
+              >
+                ${t.suggestSwitchBtn}
+              </button>
+              <button 
+                type="button"
+                onclick="window.MobileApp.dismissLangSuggest()" 
+                class="text-slate-400 hover:text-slate-600 text-xs px-1"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        `;
+        banner.classList.remove('hidden');
+      } else if (isEnglishEnv && isZh) {
+        // Visitor is English speaker on Chinese mobile page
+        banner.innerHTML = `
+          <div class="mx-3 my-2 p-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/80 dark:border-indigo-800/70 flex items-center justify-between gap-2 shadow-xs">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-sm">🌐</span>
+              <p class="text-[11px] text-indigo-950 dark:text-indigo-200 truncate font-medium">
+                ${t.suggestEnDesc}
+              </p>
+            </div>
+            <div class="flex items-center gap-1.5 shrink-0">
+              <button 
+                type="button"
+                onclick="window.MobileApp.selectLanguage('english')" 
+                class="px-2 py-1 rounded-lg bg-indigo-600 text-white font-bold text-[10px] shadow-xs active:scale-95"
+              >
+                ${t.suggestSwitchBtn}
+              </button>
+              <button 
+                type="button"
+                onclick="window.MobileApp.dismissLangSuggest()" 
+                class="text-slate-400 hover:text-slate-600 text-xs px-1"
+              >
+                ✕
+              </button>
+            </div>
+          </div>
+        `;
+        banner.classList.remove('hidden');
+      }
+    } catch (e) {}
+  }
+
+  function dismissLangSuggest() {
+    try {
+      sessionStorage.setItem('ai_radar_m_lang_dismissed', '1');
+      const banner = document.getElementById('mobile-lang-suggest-banner');
+      if (banner) banner.classList.add('hidden');
+    } catch (e) {}
+  }
+
+  // 18. Expose to Window
   window.MobileApp = {
     init() {
       try {
         sessionStorage.removeItem('prefer_desktop');
       } catch (e) {}
+      
       initTheme();
+
+      // Update language button state
+      updateLangButtonLabel(currentSiteLang);
+
+      // Parse URL hash to activate requested tab
+      const rawHash = (window.location.hash || '').replace('#', '').trim().toLowerCase();
+      if (rawHash === 'social' || rawHash === 'celebrity') {
+        currentTab = 'social';
+      } else if (rawHash === 'videos') {
+        currentTab = 'videos';
+      } else if (rawHash === 'top' || rawHash === 'top3') {
+        currentTab = 'top';
+      } else {
+        currentTab = 'news';
+      }
+
+      // Sync active tab state to navigation DOM
+      document.querySelectorAll('[data-tab-target]').forEach(el => {
+        const isTarget = el.dataset.tabTarget === currentTab;
+        if (isTarget) {
+          el.className = 'flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all';
+        } else {
+          el.className = 'flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all';
+        }
+      });
+      document.querySelectorAll('[data-dock-target]').forEach(el => {
+        const isTarget = el.dataset.dockTarget === currentTab;
+        el.classList.toggle('text-indigo-600', isTarget);
+        el.classList.toggle('dark:text-indigo-400', isTarget);
+        el.classList.toggle('text-slate-400', !isTarget);
+        const dot = el.querySelector('.dock-active-dot');
+        if (dot) dot.classList.toggle('opacity-100', isTarget);
+        if (dot) dot.classList.toggle('opacity-0', !isTarget);
+      });
+
+      // Check URL query parameters for search
+      const q = new URLSearchParams(window.location.search).get('q');
+      if (q) {
+        searchQuery = q;
+        const input = document.getElementById('mobile-search-input');
+        if (input) input.value = q;
+        const searchBox = document.getElementById('mobile-search-box');
+        if (searchBox) searchBox.classList.remove('hidden');
+      }
+
       loadData();
+      initMobileBackToTop();
+      checkAndShowLangSuggestion();
     },
     refresh() {
       const refreshBtn = document.getElementById('refresh-btn-icon');
@@ -778,13 +1309,26 @@
     setFilter,
     loadMore,
     handleSearch,
+    clearSearch,
     toggleSearchBox,
     openArticle: openArticleModal,
     closeArticle: closeArticleModal,
     toggleTheme,
+    openLangPicker,
+    closeLangPicker,
+    selectLanguage,
     switchLanguage,
-    switchToDesktop
+    switchToDesktop,
+    shareArticle,
+    toggleTweetLang,
+    dismissLangSuggest
   };
 
-  document.addEventListener('DOMContentLoaded', window.MobileApp.init);
+  // Bootstrap when DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => window.MobileApp.init());
+  } else {
+    window.MobileApp.init();
+  }
+
 })();

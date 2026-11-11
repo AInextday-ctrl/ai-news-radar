@@ -13,6 +13,7 @@
   <link rel="canonical" href="https://ainewsradar.xyz/zh/m">
   <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/m">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/m">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/m">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="stylesheet" href="/css/style.min.css">
   <link rel="stylesheet" href="/m/css/mobile.css">
@@ -21,11 +22,11 @@
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 min-h-screen">
 
   <!-- Mobile App Header (Fixed Top) -->
-  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800">
-    <div class="px-3.5 h-13 flex items-center justify-between">
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800 pt-safe">
+    <div class="px-3.5 h-14 flex items-center justify-between">
       <!-- Brand Logo -->
       <a href="/zh/m" class="flex items-center gap-2 touch-card">
-        <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-rose-500 flex items-center justify-center text-white text-xs font-black shadow-xs">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-rose-500 flex items-center justify-center text-white text-xs font-black shadow-sm">
           ⚡
         </div>
         <div class="flex flex-col">
@@ -33,7 +34,7 @@
             <span class="font-extrabold text-[15px] tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 dark:from-white dark:via-indigo-200 dark:to-white bg-clip-text text-transparent">
               AI 资讯雷达
             </span>
-            <span class="px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 font-bold text-[9px] border border-indigo-200/40 dark:border-indigo-800/40">
+            <span class="px-1.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 font-bold text-[9px] border border-indigo-200/40 dark:border-indigo-800/40">
               移动版
             </span>
           </div>
@@ -43,43 +44,49 @@
       <!-- Header Actions -->
       <div class="flex items-center gap-1.5">
         <!-- Live Status Badge -->
-        <div class="hidden xs:flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+        <div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 live-pulse"></span>
           <span>实时</span>
         </div>
 
-        <!-- Language Switch -->
+        <!-- Language Picker Button -->
         <button 
-          onclick="window.MobileApp.switchLanguage()" 
-          title="Switch to English"
-          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center active:scale-90 transition-transform"
+          type="button"
+          id="btn-lang-picker"
+          onclick="window.MobileApp.openLangPicker()" 
+          title="切换语言版本"
+          class="h-7 px-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 active:scale-90 transition-transform cursor-pointer"
         >
-          EN
+          <span id="lang-btn-flag">🇨🇳</span>
+          <span id="lang-btn-text">简</span>
         </button>
 
         <!-- Theme Toggle -->
         <button 
+          type="button"
           onclick="window.MobileApp.toggleTheme()" 
           title="切换日/夜间模式"
-          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-xs flex items-center justify-center active:scale-90 transition-transform"
+          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           <span id="theme-icon">🌙</span>
         </button>
 
         <!-- Search Toggle -->
         <button 
+          type="button"
           onclick="window.MobileApp.toggleSearchBox()" 
           title="搜索动态"
-          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs flex items-center justify-center active:scale-90 transition-transform"
+          class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           🔍
         </button>
 
         <!-- Refresh Button -->
         <button 
+          type="button"
           onclick="window.MobileApp.refresh()" 
           title="刷新最新数据"
-          class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs flex items-center justify-center active:scale-90 transition-transform"
+          class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           <span id="refresh-btn-icon" class="inline-block transition-transform">🔄</span>
         </button>
@@ -94,49 +101,64 @@
           type="search" 
           placeholder="搜索 AI 快讯、推文与实战视频..." 
           oninput="window.MobileApp.handleSearch(event)"
-          class="w-full pl-8 pr-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          class="w-full pl-8 pr-8 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
         >
-        <span class="absolute left-2.5 top-1.5 text-xs text-slate-400">🔍</span>
+        <span class="absolute left-2.5 top-2.5 text-xs text-slate-400">🔍</span>
+        <button 
+          type="button"
+          onclick="window.MobileApp.clearSearch()" 
+          id="mobile-search-clear" 
+          class="hidden absolute right-2.5 top-2.5 text-xs text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+        >
+          ✕
+        </button>
       </div>
     </div>
 
     <!-- Channel Segment Bar (Sticky Navigation Tabs) -->
-    <nav class="flex border-t border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900">
+    <nav class="flex border-t border-slate-200/80 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95">
       <button 
+        type="button"
         data-tab-target="news"
         onclick="window.MobileApp.switchTab('news')" 
-        class="flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all"
+        class="flex-1 py-2.5 text-center text-xs font-bold text-indigo-600 dark:text-indigo-400 border-b-2 border-indigo-600 dark:border-indigo-400 transition-all cursor-pointer"
       >
         📰 行业资讯
       </button>
       <button 
+        type="button"
         data-tab-target="social"
         onclick="window.MobileApp.switchTab('social')" 
-        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer"
       >
         💬 社交推文
       </button>
       <button 
+        type="button"
         data-tab-target="videos"
         onclick="window.MobileApp.switchTab('videos')" 
-        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer"
       >
         🎬 实战视频
       </button>
       <button 
+        type="button"
         data-tab-target="top"
         onclick="window.MobileApp.switchTab('top')" 
-        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all"
+        class="flex-1 py-2.5 text-center text-xs font-medium text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 transition-all cursor-pointer"
       >
         🔥 今日必读
       </button>
     </nav>
+
+    <!-- Dynamic Sub-Filter Pills Bar (Nested inside sticky header to prevent layout shift) -->
+    <div id="sub-filter-bar" class="border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/95 dark:bg-slate-950/95">
+      <!-- Populated by JS -->
+    </div>
   </header>
 
-  <!-- Dynamic Sub-Filter Pills Bar -->
-  <div id="sub-filter-bar" class="sticky top-[95px] z-30 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-sm border-b border-slate-200/60 dark:border-slate-800/60">
-    <!-- Populated by JS -->
-  </div>
+  <!-- Visitor Language Suggestion Mini Banner -->
+  <div id="mobile-lang-suggest-banner" class="hidden"></div>
 
   <!-- Main Feed Stream Container -->
   <main id="mobile-feed" class="py-2 min-h-screen">
@@ -144,15 +166,16 @@
   </main>
 
   <!-- Mobile Footer -->
-  <footer class="mt-8 px-4 py-8 border-t border-slate-200/80 dark:border-slate-800 text-center space-y-3">
+  <footer class="mt-8 px-4 py-8 border-t border-slate-200/80 dark:border-slate-800 text-center space-y-3 pb-[calc(80px+var(--sab))]">
     <button 
+      type="button"
       onclick="window.MobileApp.switchToDesktop()" 
-      class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold touch-card shadow-xs"
+      class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold touch-card shadow-xs cursor-pointer"
     >
       <span>💻 切换至电脑完整版</span>
     </button>
     <p class="text-[11px] text-slate-400">
-      AI 资讯雷达 · 移动专版 · 专注资讯、社交与视频
+      AI 资讯雷达 · 移动专版 · 专注资讯、社交与实战视频
     </p>
     <div class="flex items-center justify-center gap-3 text-[11px] text-slate-400">
       <a href="/zh/about" class="hover:underline">关于</a>
@@ -165,49 +188,147 @@
     </div>
   </footer>
 
+  <!-- Floating Back to Top Button -->
+  <button 
+    type="button"
+    id="btn-back-to-top" 
+    aria-label="回到顶部" 
+    class="fixed bottom-20 right-3.5 z-30 w-10 h-10 rounded-full bg-indigo-600/95 text-white shadow-lg backdrop-blur-md flex items-center justify-center font-bold text-sm opacity-0 pointer-events-none transition-all duration-300 transform translate-y-3 cursor-pointer"
+  >
+    ↑
+  </button>
+
   <!-- Bottom Navigation Dock (Native App Style) -->
-  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 flex items-center justify-around h-15 pb-[env(safe-area-inset-bottom)]">
+  <nav class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-slate-800 flex items-center justify-around h-16 pb-[env(safe-area-inset-bottom)]">
     <button 
+      type="button"
       data-dock-target="news"
       onclick="window.MobileApp.switchTab('news')" 
-      class="flex flex-col items-center justify-center flex-1 h-full text-indigo-600 dark:text-indigo-400 touch-card"
+      class="flex flex-col items-center justify-center flex-1 h-full text-indigo-600 dark:text-indigo-400 touch-card cursor-pointer"
     >
       <span class="text-lg">📰</span>
       <span class="text-[10px] font-bold mt-0.5">资讯</span>
+      <span class="dock-active-dot w-1 h-1 rounded-full bg-indigo-600 dark:bg-indigo-400 mt-0.5 opacity-100 transition-opacity"></span>
     </button>
     <button 
+      type="button"
       data-dock-target="social"
       onclick="window.MobileApp.switchTab('social')" 
-      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card cursor-pointer"
     >
       <span class="text-lg">💬</span>
       <span class="text-[10px] font-bold mt-0.5">社交</span>
+      <span class="dock-active-dot w-1 h-1 rounded-full bg-indigo-600 dark:bg-indigo-400 mt-0.5 opacity-0 transition-opacity"></span>
     </button>
     <button 
+      type="button"
       data-dock-target="videos"
       onclick="window.MobileApp.switchTab('videos')" 
-      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card cursor-pointer"
     >
       <span class="text-lg">🎬</span>
       <span class="text-[10px] font-bold mt-0.5">视频</span>
+      <span class="dock-active-dot w-1 h-1 rounded-full bg-indigo-600 dark:bg-indigo-400 mt-0.5 opacity-0 transition-opacity"></span>
     </button>
     <button 
+      type="button"
       data-dock-target="top"
       onclick="window.MobileApp.switchTab('top')" 
-      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card"
+      class="flex flex-col items-center justify-center flex-1 h-full text-slate-400 touch-card cursor-pointer"
     >
       <span class="text-lg">🌟</span>
       <span class="text-[10px] font-bold mt-0.5">必读</span>
+      <span class="dock-active-dot w-1 h-1 rounded-full bg-indigo-600 dark:bg-indigo-400 mt-0.5 opacity-0 transition-opacity"></span>
     </button>
   </nav>
 
-  <!-- Mobile Reader Bottom Sheet / Modal -->
-  <div id="article-modal-overlay" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-end sm:items-center justify-center">
+  <!-- Mobile Reader Bottom Sheet Modal -->
+  <div id="article-modal-overlay" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-fade-in">
     <div 
       id="article-modal-content" 
-      class="w-full sm:max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-slide-up"
+      class="w-full sm:max-w-lg bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl max-h-[90vh] overflow-hidden shadow-2xl animate-slide-up border-t border-slate-200/60 dark:border-slate-800"
     >
       <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- Mobile Language Picker Action Sheet Modal -->
+  <div id="lang-picker-modal" class="hidden fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center animate-fade-in">
+    <div class="w-full sm:max-w-md bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-2xl p-5 shadow-2xl animate-slide-up border-t border-slate-200/80 dark:border-slate-800">
+      <div class="pt-1 pb-2 flex justify-center cursor-pointer" onclick="window.MobileApp.closeLangPicker()">
+        <div class="w-10 h-1 bg-slate-300 dark:bg-slate-700 rounded-full"></div>
+      </div>
+      <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">🌐</span>
+          <h3 class="font-extrabold text-base text-slate-900 dark:text-slate-100">选择语言版本</h3>
+        </div>
+        <button 
+          type="button"
+          onclick="window.MobileApp.closeLangPicker()" 
+          class="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 flex items-center justify-center font-bold text-sm cursor-pointer"
+        >
+          ✕
+        </button>
+      </div>
+      <div class="space-y-2">
+        <button 
+          type="button"
+          onclick="window.MobileApp.selectLanguage('chinese_simplified')" 
+          class="w-full p-3 rounded-2xl flex items-center justify-between bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 touch-card cursor-pointer"
+        >
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🇨🇳</span>
+            <div class="text-left">
+              <div class="text-sm font-bold text-indigo-900 dark:text-indigo-200">简体中文</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">中文精翻版 (默认)</div>
+            </div>
+          </div>
+          <span class="text-indigo-600 dark:text-indigo-400 font-bold text-base">✓</span>
+        </button>
+        <button 
+          type="button"
+          onclick="window.MobileApp.selectLanguage('chinese_traditional')" 
+          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
+        >
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🇭🇰</span>
+            <div class="text-left">
+              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">繁體中文</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">港澳台正體中文詞庫轉換</div>
+            </div>
+          </div>
+          <span class="text-slate-400 text-sm">→</span>
+        </button>
+        <button 
+          type="button"
+          onclick="window.MobileApp.selectLanguage('english')" 
+          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
+        >
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🇬🇧</span>
+            <div class="text-left">
+              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">English (Global)</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">切换至海外英文主站 (/m)</div>
+            </div>
+          </div>
+          <span class="text-slate-400 text-sm">→</span>
+        </button>
+        <button 
+          type="button"
+          onclick="window.MobileApp.selectLanguage('japanese')" 
+          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
+        >
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🇯🇵</span>
+            <div class="text-left">
+              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">日本語</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">AI 实时智能翻译</div>
+            </div>
+          </div>
+          <span class="text-slate-400 text-sm">→</span>
+        </button>
+      </div>
     </div>
   </div>
 
