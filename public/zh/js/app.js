@@ -1279,6 +1279,74 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       translate.changeLanguage(currentSiteLang);
     }
 
+    // 智能获取等价语言版本的 URL（严格保留当前页面路径、查询参数及专栏 Hash）
+    function getEquivalentLanguageUrl(targetLang) {
+      try {
+        const p = window.location.pathname || '/';
+        const search = window.location.search || '';
+        // 智能保留当前分类 tab（无论 URL Hash 是否已同步，优先保留当前专栏）
+        let hash = window.location.hash || '';
+        if (!hash && typeof currentTab !== 'undefined' && currentTab && currentTab !== 'all') {
+          hash = '#' + currentTab;
+        }
+
+        const isTargetChinese = (targetLang === 'chinese_simplified' || targetLang === 'chinese_traditional');
+        const isTargetEnglish = (targetLang === 'english');
+
+        if (isTargetChinese) {
+          if (!p.startsWith('/zh')) {
+            let targetPath = '';
+            if (p === '/' || p === '' || p === '/index.html') {
+              targetPath = '/zh';
+            } else if (p === '/m' || p === '/m/' || p === '/m/index.html') {
+              targetPath = '/zh/m';
+            } else {
+              targetPath = '/zh' + (p.startsWith('/') ? p : '/' + p);
+              if (targetPath.endsWith('/index.html')) {
+                targetPath = targetPath.slice(0, -11) || '/zh';
+              }
+            }
+            return targetPath + search + hash;
+          }
+          return null; // 已经在中文站路径下
+        }
+
+        if (isTargetEnglish) {
+          if (p.startsWith('/zh')) {
+            let targetPath = '';
+            if (p === '/zh' || p === '/zh/' || p === '/zh/index.html') {
+              targetPath = '/';
+            } else if (p === '/zh/m' || p === '/zh/m/' || p === '/zh/m/index.html') {
+              targetPath = '/m';
+            } else {
+              targetPath = p.replace(/^\/zh(?:\/|$)/, '/');
+              if (!targetPath.startsWith('/')) targetPath = '/' + targetPath;
+              if (targetPath.endsWith('/index.html')) {
+                targetPath = targetPath.slice(0, -11) || '/';
+              }
+            }
+            return targetPath + search + hash;
+          }
+          return null; // 已经在英文主站路径下
+        }
+      } catch (err) {
+        console.warn('Error resolving equivalent language URL:', err);
+      }
+      return null;
+    }
+
+    function switchLanguageEdition(target) {
+      if (target === 'zh' || target === 'chinese_simplified') {
+        changeSiteLanguage('chinese_simplified', true);
+      } else if (target === 'zh-tw' || target === 'chinese_traditional') {
+        changeSiteLanguage('chinese_traditional', true);
+      } else if (target === 'en' || target === 'english') {
+        changeSiteLanguage('english', true);
+      } else {
+        changeSiteLanguage(target, true);
+      }
+    }
+
     function changeSiteLanguage(targetLang, persist = true) {
       currentSiteLang = targetLang;
       if (persist) {
@@ -1289,11 +1357,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         selectEl.value = targetLang;
       }
 
-      // 1. 如果选择繁体中文：必须处于中文版 /zh
+      // 1. 如果选择繁体中文：必须处于中文版 /zh，严格保留当前路径、参数与专栏 Hash
       if (targetLang === 'chinese_traditional') {
         localStorage.setItem('ai_radar_user_lang', 'zh');
         if (!window.location.pathname.startsWith('/zh')) {
-          window.location.href = '/zh';
+          const targetUrl = getEquivalentLanguageUrl('chinese_traditional');
+          window.location.href = targetUrl || '/zh';
           return;
         }
         currentLang = 'zh';
@@ -1314,11 +1383,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 2. 如果选择简体中文：必须处于中文版 /zh，还原纯正简体中文
+      // 2. 如果选择简体中文：必须处于中文版 /zh，严格保留当前路径、参数与专栏 Hash，还原纯正简体中文
       if (targetLang === 'chinese_simplified') {
         localStorage.setItem('ai_radar_user_lang', 'zh');
         if (!window.location.pathname.startsWith('/zh')) {
-          window.location.href = '/zh';
+          const targetUrl = getEquivalentLanguageUrl('chinese_simplified');
+          window.location.href = targetUrl || '/zh';
           return;
         }
         currentLang = 'zh';
@@ -1337,11 +1407,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 3. 如果选择英文：必须处于主站 /
+      // 3. 如果选择英文：必须处于主站 /，严格保留当前路径、参数与专栏 Hash
       if (targetLang === 'english') {
         localStorage.setItem('ai_radar_user_lang', 'en');
         if (window.location.pathname.startsWith('/zh')) {
-          window.location.href = '/';
+          const targetUrl = getEquivalentLanguageUrl('english');
+          window.location.href = targetUrl || '/';
           return;
         }
         currentLang = 'en';
@@ -11786,6 +11857,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     window.setTheme = setTheme;
     window.setLanguage = setLanguage;
     window.changeSiteLanguage = changeSiteLanguage;
+    window.getEquivalentLanguageUrl = getEquivalentLanguageUrl;
+    window.switchLanguageEdition = switchLanguageEdition;
     window.renderCategoryView = renderCategoryView;
     window.renderUI = renderUI;
 

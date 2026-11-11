@@ -742,13 +742,18 @@
 
   function switchToDesktop() {
     sessionStorage.setItem('prefer_desktop', '1');
-    const target = isZh ? '/zh/?view=desktop' : '/?view=desktop';
-    window.location.href = target;
+    const hash = window.location.hash || (typeof currentTab !== 'undefined' && currentTab && currentTab !== 'all' ? '#' + currentTab : '');
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('view', 'desktop');
+    const targetBase = isZh ? '/zh' : '';
+    window.location.href = (targetBase || '/') + '?' + searchParams.toString() + hash;
   }
 
   function switchLanguage() {
-    const target = isZh ? '/m' : '/zh/m';
-    window.location.href = target;
+    const search = window.location.search || '';
+    const hash = window.location.hash || (typeof currentTab !== 'undefined' && currentTab && currentTab !== 'all' ? '#' + currentTab : '');
+    const targetBase = isZh ? '/m' : '/zh/m';
+    window.location.href = targetBase + search + hash;
   }
 
   // 12. Expose to Window

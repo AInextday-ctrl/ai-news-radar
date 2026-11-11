@@ -424,7 +424,7 @@
                   Detected English system language. Would you like to switch to our primary English edition?
                 </p>
                 <div class="mt-2.5 flex items-center space-x-2">
-                  <button type="button" id="lang-suggest-switch-btn" onclick="window.location.href='/'" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
+                  <button type="button" id="lang-suggest-switch-btn" onclick="if(window.switchLanguageEdition){switchLanguageEdition('english');}else{window.location.href='/'+(window.location.hash||'');}" class="px-2.5 py-1 text-[11px] font-bold rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-all flex items-center space-x-1 cursor-pointer">
                     <span>🇬🇧</span>
                     <span id="lang-suggest-btn-text">Switch to English (/)</span>
                   </button>
@@ -725,7 +725,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube 极客实测 · 0.3h 前
+              YouTube 极客实测 · 0.4h 前
             </div>
           </div>
         </div>
