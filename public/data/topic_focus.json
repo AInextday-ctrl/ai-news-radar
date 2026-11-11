@@ -1,63 +1,53 @@
 {
-  "updated_at": "2026-11-11T11:21:13.760704+00:00",
+  "updated_at": "2026-11-11T15:35:39.679205+00:00",
   "topics": [
     {
-      "topic_id": "topic_nvidia_jensen_spy_scandal_export_controls",
-      "heat_score": 9.9,
+      "topic_id": "topic_anthropic_cuda_breakthrough",
+      "heat_score": 9.8,
       "badge_zh": "⚡ 商业与算力风暴",
       "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "地缘政治与算力供应链",
-      "category_tag_en": "Geopolitics & Compute Supply Chain",
-      "title_zh": "黄仁勋卷入间谍风波骤降5%市值，美拟立NDAA严限英伟达出口",
-      "title_en": "Jensen Huang Entangled in Spy Probe as Nvidia Slumps 5%, NDAA Pushes Export Clampdown",
-      "summary_zh": "英伟达CEO黄仁勋深陷与所谓中方情报人员的绯闻风波，叠加新加坡芯片走私暗网及受制裁高校获取H200被曝光，英伟达股价重挫超5%并失守4万亿美元。美国国会正紧急推动国防授权法案（NDAA）对先进AI芯片施加更严苛出口封锁。",
-      "summary_en": "Following allegations tying Jensen Huang to an alleged intelligence operative alongside illicit transit routes in Singapore funneling H200 chips to blacklisted entities, Nvidia shares tumbled 5.47%. The fallout has energized US lawmakers to expedite statutory export bans via the National Defense Authorization Act.",
+      "category_tag_zh": "算力架构与生态突围",
+      "category_tag_en": "Compute Architecture & Ecosystem",
+      "title_zh": "Anthropic成功实现AMD适配，英伟达CUDA护城河松动",
+      "title_en": "Anthropic breaks CUDA dominance with three-day AMD model migration",
+      "summary_zh": "Anthropic宣布通过AI自动化工具，将核心模型Claude从英伟达CUDA环境迁移至AMD硬件仅耗时3天，打破长期以来的软件生态壁垒。此举直接挑战英伟达在高算力市场的垄断地位，引发关于“算力平权”及底层架构灵活性的大规模讨论。",
+      "summary_en": "Anthropic reduced the Claude model migration time from Nvidia's CUDA to AMD hardware to just three days using AI-assisted tooling. This breakthrough directly challenges Nvidia's software moat, sparking intense industry debate on compute commoditization and hardware vendor lock-in.",
       "perspective_pro": {
-        "role_zh": "🟢 算力自由派 / 商业全球化倡导者",
-        "role_en": "🟢 Compute Globalist / Free Market Realist",
-        "speaker_zh": "半导体跨国供应链倡导阵营",
-        "speaker_en": "Semiconductor Supply Chain Advocates",
-        "point_zh": "过激的地缘政治限制只会撕裂全球AI协作生态，逼迫黑市溢价走高，损害美企研发造血循环与全球算力基石地位。",
-        "point_en": "Draconian sanctions fail to curb compute leakage while destroying legitimate revenue streams essential for funding next-generation silicon R&D."
+        "role_zh": "🟢 算力解耦支持者",
+        "role_en": "🟢 Compute Decoupling Advocate",
+        "speaker_zh": "研发效率派及云基础设施决策者",
+        "speaker_en": "Infrastructure engineers & CTOs",
+        "point_zh": "CUDA不再是制约发展的死结。通过AI自动适配，开发者可根据成本与性价比自由调度算力，降低了对单一供应商的极度依赖。",
+        "point_en": "CUDA is no longer a bottleneck. AI-assisted porting allows developers to choose hardware based on efficiency rather than ecosystem inertia, breaking expensive vendor lock-in."
       },
       "perspective_con": {
-        "role_zh": "🔴 国防鹰派 / 出口合规强硬派",
-        "role_en": "🔴 National Security Hawk / Export Compliance Hardliner",
-        "speaker_zh": "美国国会防务委员会与战略情报分析师",
-        "speaker_en": "Congressional Defense Committees & Intelligence Analysts",
-        "point_zh": "高管个人风控隐患与南洋走私漏洞暴露出算力外流致命盲区，若不借助NDAA立法硬性封死芯片转运渠道，国家安全护城河将形同虚设。",
-        "point_en": "Executive compromise and unchecked transit networks through hubs like Singapore demonstrate that only statutory NDAA bans can plug critical national security leaks."
+        "role_zh": "🔴 工业稳定性质疑派",
+        "role_en": "🔴 Industrial Stability Skeptic",
+        "speaker_zh": "英伟达深度用户及底层驱动专家",
+        "speaker_en": "Nvidia hardware enthusiasts & kernel experts",
+        "point_zh": "迁移速度不代表生产环境的稳定性。性能优化的本质在于底层算子库的深度兼容，这种“闪电迁移”往往伴随着难以察觉的精度损失与高昂的维护成本。",
+        "point_en": "Migration speed is not production readiness. Performance optimization requires deep kernel-level tuning; quick-fixes often hide hidden precision decay and skyrocketing operational overhead."
       },
       "linked_news": [
         {
-          "id": "093d7304de6de280",
-          "title_zh": "英伟达芯片走私暗网在新加坡曝光",
-          "title_en": "The Nvidia spy scandal exposes networks operating in Singapore that help Chinese tech companies access advanced US AI chips and circumvent export controls (Owen Walker/Financial Times)",
+          "id": "9dbbad9e7610bbe1",
+          "title_zh": "Anthropic破解CUDA壁垒，三日完成AMD适配",
+          "title_en": "Anthropic says AI is eroding Nvidia's CUDA lead, cutting an AMD chip switch from months to three days",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/anthropic-says-ai-is-eroding-nvidias-cuda-lead-cutting-an-amd-chip-switch-from-months-to-three-days/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/11/nvidia_moat.png",
+          "hot_score": 5,
+          "published_at": "2026-11-11T14:25:20+00:00"
+        },
+        {
+          "id": "c94db3a814640a0b",
+          "title_zh": "Fractile估值暴涨，获7.2亿美元融资",
+          "title_en": "London-based AI chip startup Fractile raised $720M from Thrive, Founders Fund, and others, sources say at a $7B post-money valuation, up from ~$1.1B in May (George Hammond/Financial Times)",
           "source": "Financial Times",
-          "url": "https://www.ft.com/content/52b5f9a8-346f-4dae-8a16-14d5d9eb1244",
+          "url": "https://www.ft.com/content/f999a0c2-af52-499f-8008-accbdfd45a25",
           "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
           "hot_score": 5,
-          "published_at": "2026-11-11T07:10:01+00:00"
-        },
-        {
-          "id": "22c6d9896f53ef06",
-          "title_zh": "黄仁勋卷入间谍丑闻，英伟达芯片出口恐遭国会严限",
-          "title_en": "Sources: Jensen Huang's affair has significantly raised the chances of Congress enacting chip export limits this year via the National Defense Authorization Act (Politico)",
-          "source": "Politico",
-          "url": "https://www.politico.com/news/2026/11/10/nvidia-ceos-spy-scandal-tilts-capitol-hills-chip-fight-01160548",
-          "image_url": "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop",
-          "hot_score": 5,
-          "published_at": "2026-11-11T05:05:26+00:00"
-        },
-        {
-          "id": "2b4d246dd1a65360",
-          "title_zh": "黄仁勋卷入间谍绯闻，英伟达市值震荡",
-          "title_en": "Nvidia's stock fell 5.47% on Tuesday, following a 4%+ drop on Monday after the revelation of Jensen Huang's affair with Alice Huang, an alleged Chinese spy (April Roach/CNBC)",
-          "source": "CNBC",
-          "url": "https://www.cnbc.com/2026/11/10/nvidia-nvda-jensen-huang-affair-chinese-spy.html",
-          "image_url": "https://image.cnbcfm.com/api/v1/image/108374299-1791396501802-Screenshot_2026-10-07_at_20800_PM.png?v=1791396555&w=1920&h=1080",
-          "hot_score": 5,
-          "published_at": "2026-11-11T04:45:01+00:00"
+          "published_at": "2026-11-11T13:20:56+00:00"
         }
       ],
       "linked_tweets": [
@@ -73,83 +63,81 @@
         }
       ],
       "linked_tool": {
-        "id": "wf_deepseek_r1_ollama_local_sota",
-        "name": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
-        "desc_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
-        "desc_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Ollama / OpenWebUI / vLLM",
-        "config_filename": "Modelfile.deepseek-r1-opt"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
-        "news": 3,
+        "news": 2,
         "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_nvidia_jensen_spy_scandal_export_controls",
+      "id": "topic_anthropic_cuda_breakthrough",
       "stance_matrix": {
-        "pro_point_zh": "过激的地缘政治限制只会撕裂全球AI协作生态，逼迫黑市溢价走高，损害美企研发造血循环与全球算力基石地位。",
-        "pro_author": "半导体跨国供应链倡导阵营",
-        "con_point_zh": "高管个人风控隐患与南洋走私漏洞暴露出算力外流致命盲区，若不借助NDAA立法硬性封死芯片转运渠道，国家安全护城河将形同虚设。",
-        "con_author": "美国国会防务委员会与战略情报分析师",
+        "pro_point_zh": "CUDA不再是制约发展的死结。通过AI自动适配，开发者可根据成本与性价比自由调度算力，降低了对单一供应商的极度依赖。",
+        "pro_author": "研发效率派及云基础设施决策者",
+        "con_point_zh": "迁移速度不代表生产环境的稳定性。性能优化的本质在于底层算子库的深度兼容，这种“闪电迁移”往往伴随着难以察觉的精度损失与高昂的维护成本。",
+        "con_author": "英伟达深度用户及底层驱动专家",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Draconian sanctions fail to curb compute leakage while destroying legitimate revenue streams essential for funding next-generation silicon R&D.",
-        "con_point_en": "Executive compromise and unchecked transit networks through hubs like Singapore demonstrate that only statutory NDAA bans can plug critical national security leaks.",
+        "pro_point_en": "CUDA is no longer a bottleneck. AI-assisted porting allows developers to choose hardware based on efficiency rather than ecosystem inertia, breaking expensive vendor lock-in.",
+        "con_point_en": "Migration speed is not production readiness. Performance optimization requires deep kernel-level tuning; quick-fixes often hide hidden precision decay and skyrocketing operational overhead.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_anthropic_retail_ipo_valuation_bubble",
-      "heat_score": 9.8,
+      "topic_id": "topic_softbank_ai_energy_debt",
+      "heat_score": 9.5,
       "badge_zh": "🔥 24h 领跑爆点",
       "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "大模型资本化与估值博弈",
-      "category_tag_en": "LLM Capitalization & Valuation Battle",
-      "title_zh": "Anthropic试水澳洲散户配售，投行激进抬价剑指1.5万亿IPO",
-      "title_en": "Anthropic Launches Aussie Retail IPO as Bankers Eye Astronomical $1.5T Target",
-      "summary_zh": "Anthropic启动澳洲IPO散户配售并设定最高904亿美元筹资目标，华尔街承销投行借认购狂热拟进一步将纳斯达克IPO定价拉高至1.5万亿美元。在大模型算力开销激增背景下，将早期风险转嫁至散户引发了资本市场对流动性接盘与估值泡沫的尖锐对立。",
-      "summary_en": "Anthropic opened its Australian retail tranche targeting up to $90.4B, with investment bankers weighing a target hike past $1.5T for its Nasdaq listing. The unprecedented move to solicit retail capital amid heavy compute burn has sparked fierce debates over enterprise viability versus pure financial bubble.",
+      "category_tag_zh": "能源基础设施与泡沫",
+      "category_tag_en": "Energy Infrastructure & Bubbles",
+      "title_zh": "软银AI供电豪赌失败，取消订单致37亿美元蒸发",
+      "title_en": "SoftBank's AI energy pivot backfires with $3.7B write-down",
+      "summary_zh": "软银此前为支撑AI算力中心需求，狂热预订相当于六座胡佛大坝发电量的燃气轮机。随着AI基建规划变动，该巨额订单被迫取消，导致公司财务报表计入37亿美元亏损，引发市场对AI算力基础设施投机泡沫的强烈担忧。",
+      "summary_en": "SoftBank suffered a $3.7 billion hit after canceling massive orders for gas turbines intended to power AI data centers—equivalent to six Hoover Dams. This loss underscores the dangerous gap between speculative AI capacity planning and actual energy demand realization.",
       "perspective_pro": {
-        "role_zh": "🟢 资本狂热派 / 前沿模型护城河支持者",
-        "role_en": "🟢 Frontier Bull / Capital Escort Camp",
-        "speaker_zh": "硅谷成长型基金与承销投行团",
-        "speaker_en": "Wall Street Underwriters & Growth Capital",
-        "point_zh": "Claude全栈编程与企业级渗透构筑了压倒性壁垒，1.5万亿估值是对其取代传统SaaS、主导AGI操作系统底座的超前合理定价。",
-        "point_en": "Anthropic's dominance in code synthesis and enterprise tooling justifies a $1.5T valuation as it captures the market capitalization of legacy SaaS vendors."
+        "role_zh": "🟢 战略储备派",
+        "role_en": "🟢 Strategic Reserve Proponent",
+        "speaker_zh": "基建激进投资者",
+        "speaker_en": "Aggressive infrastructure VCs",
+        "point_zh": "电力是AI时代的石油。先行锁定能源供应权是确保未来算力霸权的唯一路径，即便短期亏损，在能源匮乏的远景下也是必要的战略博弈。",
+        "point_en": "Energy is the oil of the AI era. Securing energy supply preemptively is the only way to ensure long-term compute dominance, justifying the risk despite short-term costs."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业理性派 / 商业回报质疑者",
-        "role_en": "🔴 Industrial Skeptic / Unit Economics Realist",
-        "speaker_zh": "二级市场科技价值投资人与宏观分析师",
-        "speaker_en": "Tech Value Investors & Enterprise Analysts",
-        "point_zh": "在实际业务决策转化率尚未被验证的前提下引入散户接盘，本质是机构借高溢价转移高额算力折旧风险，泡沫破裂将重创行业信用。",
-        "point_en": "Offloading unproven enterprise unit economics onto retail investors under an absurd $1.5T multiple is a desperate bid to subsidize crushing compute burn."
+        "role_zh": "🔴 理性财务审计派",
+        "role_en": "🔴 Rational Finance Critic",
+        "speaker_zh": "华尔街风险控制分析师",
+        "speaker_en": "Risk management analysts",
+        "point_zh": "这是典型的资本盲目投机。脱离实际模型规模与部署需求，仅仅为了“预订配额”而承担几十亿损失，折射出当前AI狂潮中严重脱离实际的泡沫逻辑。",
+        "point_en": "This is pure speculative madness. Committing billions to energy infrastructure without verified deployment demand reflects a dangerous disconnection from actual ROI in the AI bubble."
       },
       "linked_news": [
         {
-          "id": "d36d5a7b2e373c94",
-          "title_zh": "Anthropic开启澳洲散户认购，估值剑指900亿",
-          "title_en": "Anthropic opens its Australian retail IPO, giving individual investors access to Class A shares ahead of the company's planned Nasdaq listing (Jenny Lee/CNBC)",
-          "source": "CNBC",
-          "url": "https://www.cnbc.com/2026/11/11/anthopic-australian-retail-ipo-offering-.html",
-          "image_url": "https://image.cnbcfm.com/api/v1/image/108469374-1793113053396-gettyimages-2301777677-boivin-photoill261027_np1O1.jpeg?v=1793113123&w=1920&h=1080",
-          "hot_score": 5,
-          "published_at": "2026-11-11T02:30:01+00:00"
-        },
-        {
-          "id": "37cb3befac4b3f99",
-          "title_zh": "Anthropic上市估值剑指1.5万亿",
-          "title_en": "Sources: Anthropic's bankers are weighing plans to raise its IPO price following heavy demand, which could increase the valuation target to $1.5T or more (Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/68bcba57-0575-44ee-80f4-2e5ea23a431e?accessToken=zwAAAaHIPX8Ekc9ovLpXBXVE7tOA9C5eojpDHg.MEYCIQCyA_RvsNxAO8C2cqmOijMAfUYU6CI25hscCqhpSEOiPwIhANJsgKYmPtN4Oag-OniyReoOcFughHSQbGVN_54GU-vs&sharetype=gift&token=f904c459-eec5-4b8c-ba10-d039c030cd7b&syn-25a6b1a6=1",
+          "id": "b8bc8b46cadc53a0",
+          "title_zh": "软银为AI豪赌供电，狂亏37亿美元",
+          "title_en": "Sources: SoftBank reserved 13GW+ of turbines, equivalent to six Hoover Dams, to power AI; SoftBank took a $3.7B earnings hit mostly from canceled reservations (Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "url": "https://www.wsj.com/business/energy-oil/masayoshi-sons-huge-bet-on-electrical-turbines-backfires-b51f160c?st=DGYQ8E&reflink=desktopwebshare_permalink",
           "image_url": null,
           "hot_score": 5,
-          "published_at": "2026-11-11T00:45:01+00:00"
+          "published_at": "2026-11-11T11:50:55+00:00"
+        },
+        {
+          "id": "7ef903850b7e590b",
+          "title_zh": "Torus获5亿美元融资造移动数据中心",
+          "title_en": "Salt Lake City-based energy storage startup Torus raised a $500M Series C led by Magnetar to build shipping container-sized AI data centers at 1MW to 20MW sizes (Mark Chediak/Bloomberg)",
+          "source": "Bloomberg",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-11/utah-based-startup-raises-500-million-for-modular-ai-data-center",
+          "image_url": null,
+          "hot_score": 4,
+          "published_at": "2026-11-11T13:25:02+00:00"
         }
       ],
       "linked_tweets": [
@@ -162,109 +150,87 @@
           "content_en": "Before adding another AI agent, I'd ask one question.\n\nWhat business decision will this agent improve?\n\nNot how many tasks it can automate. Not how impressive the demo looks.\n\nWhat changes for the company when the work is done?",
           "url": "https://x.com/effiekav/status/2119335718572965955",
           "platform": "x"
-        },
-        {
-          "id": "775eaa97c9a3d682",
-          "author": "Emmanuel",
-          "author_handle": "@0xemmy__G",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2088249667192532992/D64MAPdp_normal.jpg",
-          "content_zh": "让人工智能代理获得资本是一回事。准确定义它可以用这笔资金做什么是另一回事。\n\n这是@meetmotes 架构的重要组成部分。\n\n每个 Motes NFT 都连接到一个专用的智能账户，而所有者则定义管理代理行为的权限和限制。\n\n这在资产托管和自动执行之间形成了明确的分离。\n\n代理人不应该对某人的资金拥有无限的权力。它的行动应该保持在所有者设定的范围内。\n\n对我来说，这是自主金融的一个重要设计考虑因素。\n\n情报很重要，但控制执行也同样重要。\n\n一个 NFT，一个 Agent，有自己的账户和明确的边界",
-          "content_en": "giving an AI Agent access to capital is one thing. Defining exactly what it can do with that capital is another.\n\nThat's an important part of the @meetmotes architecture.\n\nEvery Motes NFT is connected to a dedicated smart account,while the owner defines the permissions and limits that govern the agent's actions.\n\nThis creates a clear separation between asset custody and automated execution.\n\nThe agent isn't supposed to have unlimited authority over someone's funds. Its actions are meant to stay within the boundaries established by the owner.\n\nFor me, this is a crucial design consideration for autonomous finance.\n\nIntelligence matters,but controlled execution matters just as much.\n\nOne NFT, one Agent, with its own account and defined boundaries",
-          "url": "https://x.com/0xemmy__G/status/2119323625065000972",
-          "platform": "x"
         }
       ],
       "linked_tool": {
         "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
         "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
         "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
         "news": 2,
-        "tweets": 2,
+        "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_anthropic_retail_ipo_valuation_bubble",
+      "id": "topic_softbank_ai_energy_debt",
       "stance_matrix": {
-        "pro_point_zh": "Claude全栈编程与企业级渗透构筑了压倒性壁垒，1.5万亿估值是对其取代传统SaaS、主导AGI操作系统底座的超前合理定价。",
-        "pro_author": "硅谷成长型基金与承销投行团",
-        "con_point_zh": "在实际业务决策转化率尚未被验证的前提下引入散户接盘，本质是机构借高溢价转移高额算力折旧风险，泡沫破裂将重创行业信用。",
-        "con_author": "二级市场科技价值投资人与宏观分析师",
+        "pro_point_zh": "电力是AI时代的石油。先行锁定能源供应权是确保未来算力霸权的唯一路径，即便短期亏损，在能源匮乏的远景下也是必要的战略博弈。",
+        "pro_author": "基建激进投资者",
+        "con_point_zh": "这是典型的资本盲目投机。脱离实际模型规模与部署需求，仅仅为了“预订配额”而承担几十亿损失，折射出当前AI狂潮中严重脱离实际的泡沫逻辑。",
+        "con_author": "华尔街风险控制分析师",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Anthropic's dominance in code synthesis and enterprise tooling justifies a $1.5T valuation as it captures the market capitalization of legacy SaaS vendors.",
-        "con_point_en": "Offloading unproven enterprise unit economics onto retail investors under an absurd $1.5T multiple is a desperate bid to subsidize crushing compute burn.",
+        "pro_point_en": "Energy is the oil of the AI era. Securing energy supply preemptively is the only way to ensure long-term compute dominance, justifying the risk despite short-term costs.",
+        "con_point_en": "This is pure speculative madness. Committing billions to energy infrastructure without verified deployment demand reflects a dangerous disconnection from actual ROI in the AI bubble.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_autonomous_agent_economy_api_security_breach",
-      "heat_score": 9.6,
+      "topic_id": "topic_grok_security_failure",
+      "heat_score": 9.2,
       "badge_zh": "💡 开源与落地潮",
       "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "智能体自治与安全边界",
-      "category_tag_en": "Agent Autonomy & Security Perimeters",
-      "title_zh": "Railway遭窃74万美元API密钥：Agent自主雇佣背后的安全失控",
-      "title_en": "Railway’s $740K API Heist Exposes Lethal Flaws in Autonomous Agent Economy",
-      "summary_zh": "云平台Railway遭遇黑客攻击致价值74万美元AI API密钥失窃被倒卖，同时开发者社区掀起Agent相互雇佣与资本授权热潮。这暴露出当今Agent开发中“提示词软性约束”替代“确定性技术硬阻断”的系统性安全危机，托管安全融资与调用泄露正展开生死赛跑。",
-      "summary_en": "A cyberattack on cloud platform Railway exposed $740,000 in stolen AI API keys resold on black markets, colliding with developer experimentation around agents hiring other agents. The incident highlights the peril of relying on prompt instructions rather than hard cryptographic guardrails.",
+      "category_tag_zh": "AI代理安全与合规边界",
+      "category_tag_en": "Agent Security & Compliance",
+      "title_zh": "Grok生成应用致敏感数据泄露，安全架构遭炮轰",
+      "title_en": "Grok-generated apps exposed private data; security protocols under fire",
+      "summary_zh": "研究发现，高达95%由Grok开发的AI应用缺乏基本的访问控制权限，导致患者医疗隐私、企业明文密码及内部销售渠道数据公开。此事件引发了关于AI代理在缺乏原生安全防御机制下进行自动化开发的高危风险探讨。",
+      "summary_en": "Research reveals 95% of Grok-generated applications lack access controls, leaking sensitive patient records, plaintext passwords, and corporate pipelines. The incident triggers an urgent debate on the security risks of deploying automated AI agents without robust, native defensive layers.",
       "perspective_pro": {
-        "role_zh": "🟢 Agent自主派 / 机器经济开拓者",
-        "role_en": "🟢 Autonomous Economy Pioneer",
-        "speaker_zh": "多智能体架构师与去中心化协议开发者",
-        "speaker_en": "Multi-Agent Protocol Developers",
-        "point_zh": "智能体相互雇佣与自给自足的商业层是下一代生产力跃迁的关键，密钥托管阵痛属于新型数字基建演进不可避免的技术爬坡。",
-        "point_en": "Inter-agent commerce and autonomous task delegation represent the frontier of productivity; auth hurdles are growing pains of a new machine economy."
+        "role_zh": "🟢 AI效率加速派",
+        "role_en": "🟢 Accelerationist Developer",
+        "speaker_zh": "开发者工具及代理先行者",
+        "speaker_en": "Early-stage agent developers",
+        "point_zh": "安全性应由开发流程中的插件层解决，不应因噎废食否定AI自动化开发的高效性。事件反映的是配置缺失，而非AI技术的本质缺陷。",
+        "point_en": "Security should be handled by modular wrappers, not by limiting AI potential. The problem is configuration hygiene, not a fundamental flaw in the agents themselves."
       },
       "perspective_con": {
-        "role_zh": "🔴 零信任风控派 / 系统安全极简主义者",
-        "role_en": "🔴 Zero-Trust Hardliner / Security Architect",
-        "speaker_zh": "网络安全工程师与基础设施防御团队",
-        "speaker_en": "Cybersecurity Engineers & Infrastructure Architects",
-        "point_zh": "在物理隔离和确定性资金授权尚未确立前赋予Agent财务与系统权限是极度不负责任的，当前的软性对齐在硬核黑客面前不堪一击。",
-        "point_en": "Granting AI agents capital access while relying on prompt-based guardrails rather than deterministic technical constraints is an invitation to systemic collapse."
+        "role_zh": "🔴 工业级安全派",
+        "role_en": "🔴 Industrial Security Expert",
+        "speaker_zh": "网络安全审计机构",
+        "speaker_en": "Cybersecurity compliance auditors",
+        "point_zh": "当AI具备自我创建应用的能力，其安全防御必须内置，而非事后修补。目前的代理框架极其脆弱，完全不具备应对企业级合规要求的防御冗余。",
+        "point_en": "When agents create applications, security must be baked in, not bolted on. Current agent frameworks lack the necessary defense-in-depth to meet enterprise compliance standards."
       },
       "linked_news": [
         {
-          "id": "040e82f030523813",
-          "title_zh": "安全公司Daylight获8000万美元融资",
-          "title_en": "NY-based Daylight, which provides AI-powered managed security, raised an $80M Series B led by Goldman Sachs Alternatives, sources say at a ~$400M valuation (Maria Armental/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/pro/private-equity/goldman-leads-investment-in-cybersecurity-startup-at-400-million-valuation-648c54b7",
-          "image_url": null,
-          "hot_score": 3,
-          "published_at": "2026-11-11T00:00:53+00:00"
+          "id": "65c572ccfb58bfae",
+          "title_zh": "Grok开发的AI应用致海量数据泄露",
+          "title_en": "Grok-built apps exposed patient data, plaintext passwords, and SpaceXSI's own sales pipeline",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/grok-built-apps-exposed-patient-data-plaintext-passwords-and-spacexsis-own-sales-pipeline/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/05/grok_xai_logo.png",
+          "hot_score": 5,
+          "published_at": "2026-11-11T12:53:07+00:00"
         },
         {
-          "id": "fd0cf8b6263d2763",
-          "title_zh": "云平台遭黑客入侵，AI API密钥被窃现抛售",
-          "title_en": "In a report, Railway says it believes the October hack targeted AI provider keys for resale, and unauthorized spend on the stolen keys was estimated at ~$740K (Lawrence Abrams/BleepingComputer)",
-          "source": "BleepingComputer",
-          "url": "https://www.bleepingcomputer.com/news/apple/railway-breach-leads-to-740-000-in-fraudulent-ai-charges/",
-          "image_url": null,
-          "hot_score": 4,
-          "published_at": "2026-11-10T23:40:01+00:00"
+          "id": "cc94c4f5c8e3ce37",
+          "title_zh": "Plurai 由前 Nexar 员工创立，旨在使用企业 IT 环境的合成数据和数字孪生来评估 AI 代理，筹集了 1300 万美元的种子资金",
+          "title_en": "Plurai, founded by former Nexar staffers to use synthetic data and digital twins of corporate IT environments to assess AI agents, raised a $13M seed (Tim Fernholz/TechCrunch)",
+          "source": "TechCrunch",
+          "url": "https://techcrunch.com/2026/11/11/plurai-wants-to-help-ai-agents-work-better-using-the-same-approach-that-helped-get-self-driving-cars-to-roads/",
+          "image_url": "https://techcrunch.com/wp-content/uploads/2026/11/Plurai-team-photo.-Credit-Guy-Hamoy.jpg?resize=1200,800",
+          "hot_score": 3,
+          "published_at": "2026-11-11T15:05:56+00:00"
         }
       ],
       "linked_tweets": [
-        {
-          "id": "86d60d1c3eb5f078",
-          "author": "nelson",
-          "author_handle": "@nelsnworie",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2071498695049179136/ztXF3ubt_normal.jpg",
-          "content_zh": "人工智能代理经济中最有趣的发展之一是代理雇佣其他代理来完成工作。\n\n@termix_ai 最近通过 Montage Studio 在 上展示了这一点。\n\n这是它的工作原理。\n\n您提交视频制作简介。 Montage Studio 将其分解为更小的工作，并聘请专门的代理来处理故事板、视频渲染和音乐。\n\n然后，它协调他们的工作，合并结果并交付完成的视频。\n\n每个作业都经过 TermiX 上的托管。\n\n这表明代理人如何承担更大的任务，外包专门工作并支付其他代理人的贡献。\n\n但这需要的不仅仅是沟通。代理商需要发现服务、商定价格、确保付款、验证交付和处理纠纷。\n\n这就是 TermiX 的代理自主商务协议 (AACP) 的用武之地。\n\n其工作流程将流程整合在一起：\n\n托管→交付→质疑→结算。\n\n借助 TermiX Skills，代理商还可以连接到市场、寻找工作并参与这些交易。\n\n方向很明确：代理商正在超越孤立的任务，转向雇用、协调和支付其他代理商来完成更大的工作。\n\n这就是 TermiX 正在建设的自主经济。\n\n当代理商开始相互开展业务时，可靠的交易基础设施就变得至关重要。\n\n#TermiX #AACP",
-          "content_en": "one of the more interesting developments in the ai agent economy is agents hiring other agents to get work done.\n\n@termix_ai recently showcased this through Montage Studio on https://t.co/9ReKMK2L7m.\n\nhere's how it works.\n\nyou submit a video production brief. Montage Studio breaks it into smaller jobs and hires specialized agents to handle the storyboard, video rendering and music.\n\nit then coordinates their work, combines the results and delivers the finished video.\n\neach job goes through escrow on TermiX.\n\nthis shows how agents can take responsibility for larger tasks, outsource specialized work and pay other agents for their contributions.\n\nbut this requires more than communication. agents need to discover services, agree on prices, secure payments, verify delivery and handle disputes.\n\nthat's where TermiX's Agent Autonomous Commerce Protocol (AACP) comes in.\n\nits workflow brings the process together:\n\nescrow → delivery → challenge → settlement.\n\nwith TermiX Skills, agents can also connect to the marketplace, find work and participate in these transactions.\n\nthe direction is clear: agents are moving beyond isolated tasks towards hiring, coordinating and paying other agents to complete larger jobs.\n\nthat's the kind of autonomous economy TermiX is building towards.\n\nwhen agents start doing business with each other, reliable transaction infrastructure becomes essential.\n\n#TermiX #AACP",
-          "url": "https://x.com/nelsnworie/status/2119382835014312269",
-          "platform": "x"
-        },
         {
           "id": "d3497f70acd32e4d",
           "author": "Flames",
@@ -274,36 +240,44 @@
           "content_en": "telling an AI agent what it shouldn't do is different from making it technically unable to do it.\n\nwhen an AI agent is handling someone's money, that difference matters.\n\nyou can tell an agent to avoid certain assets, set a spending limit or stop trading after a certain loss. but if it still has broad permission to execute transactions, those instructions only go so far.\n\nwith MOTES (@meetmotes), the owner sets the mandate and signs the permissions. before a proposed transaction goes through, the smart account checks it against the rules the owner approved.\n\nso the agent can still analyse the market and come up with strategies, but it has to work within those limits. it can't just give itself permission to spend more or trade assets outside the approved list.\n\ni think this is a better foundation for autonomous finance. giving an agent the ability to make decisions is one thing. making sure it only has the authority the owner gave it is just as important.",
           "url": "https://x.com/0x_Flames/status/2119376637040922825",
           "platform": "x"
+        },
+        {
+          "id": "d06084b9fa83da70",
+          "author": "JayDsmart",
+          "author_handle": "@AJesusemen",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1964300936446201856/6dWMaMNi_normal.jpg",
+          "content_zh": "埃隆，这不是一键就能轻松完成的\n\n付费用户正在实时观看 Grok Bot 的崩溃。即使使用最高的订阅计划，人们在限制重置之前几天就会耗尽使用量\n\n与此同时，机器人每天都变得越来越慢、越来越不智能、越来越不可靠。过去工作完美的事情现在失败了，给出了错误的答案，或者陷入了困境\n\n人们在正常甚至较轻的工作负载下达到 100% 使用率，使得该产品在一周结束之前几乎毫无用处。\n\n您的团队几乎没有提及这些严重的使用和质量问题\n\nGrok Bot 应该是一个可以处理实际工作的人工智能代理。但现在，它在那些相信你的承诺的人面前分崩离析\n\n站起来。修复使用限制，恢复用户最初付费的品质",
+          "content_en": "Elon this is not one-click-easy\n\nPaying users are watching Grok Bot fall apart in real time. People are running out of usage days before their limits reset, even on the highest subscription plans\n\nAt the same time, the bots are becoming slower, less intelligent, and less reliable every day. Things that used to work perfectly now fail, give wrong answers, or get stuck\n\n People are hitting 100% usage with normal or even lighter workloads, making the product almost useless before the week is over.\n\nYour team has said almost nothing about these serious usage and quality problems\n\nGrok Bot is supposed to be an AI agent that can handle real work. But right now, it's falling apart in front of the very people who trusted your promises\n\nStep up. Fix the usage limits and restore the quality users originally paid for",
+          "url": "https://x.com/AJesusemen/status/2119335565321482484",
+          "platform": "x"
         }
       ],
       "linked_tool": {
-        "id": "wf_claude_desktop_mcp_core4",
-        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
-        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
-        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
-        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Claude Desktop / Cline / Roo Code",
-        "config_filename": "claude_desktop_config.json"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
         "news": 2,
         "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_autonomous_agent_economy_api_security_breach",
+      "id": "topic_grok_security_failure",
       "stance_matrix": {
-        "pro_point_zh": "智能体相互雇佣与自给自足的商业层是下一代生产力跃迁的关键，密钥托管阵痛属于新型数字基建演进不可避免的技术爬坡。",
-        "pro_author": "多智能体架构师与去中心化协议开发者",
-        "con_point_zh": "在物理隔离和确定性资金授权尚未确立前赋予Agent财务与系统权限是极度不负责任的，当前的软性对齐在硬核黑客面前不堪一击。",
-        "con_author": "网络安全工程师与基础设施防御团队",
+        "pro_point_zh": "安全性应由开发流程中的插件层解决，不应因噎废食否定AI自动化开发的高效性。事件反映的是配置缺失，而非AI技术的本质缺陷。",
+        "pro_author": "开发者工具及代理先行者",
+        "con_point_zh": "当AI具备自我创建应用的能力，其安全防御必须内置，而非事后修补。目前的代理框架极其脆弱，完全不具备应对企业级合规要求的防御冗余。",
+        "con_author": "网络安全审计机构",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Inter-agent commerce and autonomous task delegation represent the frontier of productivity; auth hurdles are growing pains of a new machine economy.",
-        "con_point_en": "Granting AI agents capital access while relying on prompt-based guardrails rather than deterministic technical constraints is an invitation to systemic collapse.",
+        "pro_point_en": "Security should be handled by modular wrappers, not by limiting AI potential. The problem is configuration hygiene, not a fundamental flaw in the agents themselves.",
+        "con_point_en": "When agents create applications, security must be baked in, not bolted on. Current agent frameworks lack the necessary defense-in-depth to meet enterprise compliance standards.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
