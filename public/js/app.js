@@ -2171,6 +2171,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const catDesc = document.getElementById('cat-view-desc');
         if (catDesc) catDesc.textContent = t.catViewDesc;
 
+        if (['news', 'celebrity', 'tools'].includes(tab) && !window._curatedColumnHighlights) {
+          loadCuratedColumnHighlights();
+        }
+
         const renderToken = (window._pendingTabRenderToken = (window._pendingTabRenderToken || 0) + 1);
         const executeTabRender = () => {
           if (window._pendingTabRenderToken !== renderToken) return;
@@ -5270,17 +5274,50 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       return list;
     }
 
-    // 栏目双语精选数据由 loadNews 统一按需并发拉取，避免重复请求阻塞首屏
+    // 独立按需拉取三大核心栏目重点事实看板数据 (curated_column_highlights.json，涵盖快讯、大V、落地工具三大栏目)
+    async function loadCuratedColumnHighlights(isManual = false) {
+      if (window._curatedColumnHighlights && !isManual) {
+        return window._curatedColumnHighlights;
+      }
+      if (window._inFlightHighlights && !isManual) {
+        return window._inFlightHighlights;
+      }
+      window._inFlightHighlights = (async () => {
+        try {
+          const url = isManual ? '/data/curated_column_highlights.json?t=' + Date.now() : '/data/curated_column_highlights.json';
+          const res = await fetch(url, { cache: isManual ? 'reload' : 'default' });
+          if (res && res.ok) {
+            window._curatedColumnHighlights = await res.json();
+            return window._curatedColumnHighlights;
+          }
+        } catch (e) {
+          console.warn("curated column highlights load failed:", e);
+        } finally {
+          window._inFlightHighlights = null;
+        }
+        return null;
+      })();
+      return window._inFlightHighlights;
+    }
 
     // 栏目级 AI 双语深度事实看板 (v2.0) 核心渲染器
-    function renderColumnSpotlightBanner(tab = 'celebrity') {
+    async function renderColumnSpotlightBanner(tab = 'celebrity') {
       const bannerEl = document.getElementById('celebrity-spotlight-banner');
       if (!bannerEl) return;
+
+      if (!window._curatedColumnHighlights) {
+        await loadCuratedColumnHighlights();
+      }
+      if (currentTab !== tab) return;
 
       const isZh = currentLang === 'zh';
       const colData = window._curatedColumnHighlights?.columns?.[tab];
 
       if (!colData) {
+        if (tab === 'celebrity') {
+          renderCelebritySpotlightBannerFallback();
+          return;
+        }
         bannerEl.classList.add('hidden');
         bannerEl.innerHTML = '';
         return;
@@ -8850,18 +8887,23 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           });
         }
 
+        // 三大核心专栏重点事实看板数据 (news, celebrity, tools) 预热/按需拉取
+        if (!window._curatedColumnHighlights) {
+          if (['news', 'celebrity', 'tools'].includes(currentTab)) {
+            await loadCuratedColumnHighlights(isManual);
+          } else {
+            loadCuratedColumnHighlights(isManual);
+          }
+        }
+
         // 仅在用户访问提示词专栏或搜索时按需拉取提示词/工作流扩展库，避免首屏阻塞带宽与主线程
         if ((currentTab === 'prompts' || searchQuery || isManual) && !window._hasLoadedPromptLibrary) {
           try {
             window._hasLoadedPromptLibrary = true;
-            const [wfRes, promptRes, highlightsRes] = await Promise.all([
+            const [wfRes, promptRes] = await Promise.all([
               fetch('/data/curated_workflows_library.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null),
-              fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null),
-              fetch(isManual ? '/data/curated_column_highlights.json?t=' + Date.now() : '/data/curated_column_highlights.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null)
+              fetch('/data/curated_prompts_library.json', { cache: isManual ? 'reload' : 'default' }).catch(() => null)
             ]);
-            if (highlightsRes && highlightsRes.ok) {
-              try { window._curatedColumnHighlights = await highlightsRes.json(); } catch(e){}
-            }
             let extraPrompts = [];
             if (wfRes && wfRes.ok) {
               const wfData = await wfRes.json();
@@ -11655,6 +11697,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     setLanguage(currentLang, false);
     const initHashTab = getTabFromHash();
     if (initHashTab) {
+      if (['news', 'celebrity', 'tools'].includes(initHashTab) && !window._curatedColumnHighlights) {
+        loadCuratedColumnHighlights();
+      }
       switchTab(initHashTab, false);
       // 保留 has-hash-tab 样式隔离，直到 loadNews() -> renderCategoryView 挂载真实数据后再移除，杜绝页面高度坍塌与跳动
       window._isLoadingNewsTriggered = true;
