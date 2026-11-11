@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 19:04:01 UTC",
+  "generated_at": "2026-11-11 19:18:42 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 19:04:01 UTC",
+      "updated_at": "2026-11-11 19:18:42 UTC",
       "headline_item": {
-        "id": "68b408989d2fd2f3",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "美联航封杀AI订票助手",
-        "title_en": "United Airlines says it will prevent personal AI assistants from booking tickets, citing data privacy risks and possible FAA and DOT rule violations (Alison Sider/Wall Street Journal)",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-11T18:40:01+00:00",
-        "url": "https://www.wsj.com/tech/ai/united-airlines-is-banning-ai-bots-from-booking-flights-5b514b38",
-        "event_summary_zh": "美联航宣布禁止个人AI助手代订机票，理由是存在隐私风险及违反监管条例",
-        "event_summary_en": "United Airlines has announced it will block personal AI agents from booking tickets to mitigate data privacy risks and avoid compliance issues with FAA and DOT regulations. The carrier intends to cut off third-party AI tools from scraping or manipulating its proprietary booking systems.",
+        "id": "5cf86a37f28003de",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "谷歌发布决策API，赋能多模态自动化判断",
+        "title_en": "Google launches Gemini Decisions API, powered by its new Gemini Decision 1 model, to return predefined answers with confidence scores, at $0.10/1M input tokens (Google)",
+        "source": "Google",
+        "published_at": "2026-11-11T19:05:00+00:00",
+        "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+        "event_summary_zh": "谷歌推出Gemini决策API，支持对复杂内容进行批量概率化判断，定价仅为每百万输入Token 0.1美元",
+        "event_summary_en": "Google has launched the Gemini Decisions API, powered by the new Gemini Decision 1 model, designed for fast and probabilistic decision-making. Supporting multimodal inputs across text, image, audio, and video, the API handles up to 1,000 queries in a single pass with confidence scores, targeting use cases like automated routing and content moderation.",
         "core_facts_zh": [
-          "【核心事件】美联航在航空订票系统场景：禁止个人AI助手进行订票操作",
-          "【起因与机理】担忧数据隐私安全及违反联邦监管规则",
-          "【关键技术规格】全面封杀个人AI购票行为。",
-          "【观点态度】以合规与隐私为由维护商业利益。"
+          "【核心事件】谷歌在谷歌人工智能工作室：发布Gemini决策API，支持对1000个预定义问题进行多模态概率评估，定价0.1美元/百万Token",
+          "【起因与机理】降低自动化决策成本，解决复杂任务流中的路由与合规判断效率问题",
+          "【关键数据与实测】该工具支持文本、图像、音视频及PDF等多模态输入，能够处理最多1000个评估问题并给出置信度得分，旨在满足企业在工具路由、内容合规与政策检查等场景下的自动化需求。",
+          "【观点态度】低成本定价意在抢占自动化决策与合规检查市场。"
         ],
         "core_facts_en": [
-          "[Core Event] United Airlines (Airline booking ecosystem): Banning personal AI agents from ticket booking",
-          "[Root Cause & Mechanism] Concerns over data privacy and federal regulatory compliance",
-          "[Key Specification] United Airlines tightens API controls.",
-          "[Perspective & Impact] Leveraging compliance/privacy to protect revenue."
+          "[Core Event] Google (Google AI Studio): Launched Gemini Decisions API for evaluating up to 1,000 predefined questions at $0.10/1M tokens",
+          "[Root Cause & Mechanism] To reduce automation costs and streamline routing and compliance workflows",
+          "[Key Metrics] You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions.",
+          "[Perspective & Impact] Low-cost pricing aims to capture the automation and compliance market."
         ],
-        "industry_impact_zh": "航司这哪是担心什么隐私风险，分明是怕AI太聪明，不仅看穿了动态定价的套路，还把那些隐藏的联程BUG票给薅没了。在这个只有你能收我高价，不能让我变透明的行业里，AI显然成了影响利润的‘非法入侵者’。",
-        "industry_impact_en": "Airlines aren't protecting your privacy; they're protecting their ability to obscure dynamic pricing and kill off cheap fare-hacking bots. In an industry built on obfuscation, a smart AI that actually finds the best deal is the ultimate 'illegal intruder'."
+        "industry_impact_zh": "谷歌终于发现比起让大模型写诗，企业更需要的是一个能自动干杂活的廉价“质检员”。这本质上是把AI从“艺术创作者”贬为“流水线工头”，毕竟在这个内卷时代，省钱做决策比展示幻觉更有市场。",
+        "industry_impact_en": "Google finally realized that enterprises don't need a poet, they need a cheap, automated quality inspector. It's effectively demoting the AI from 'creative genius' to 'assembly line foreman'—because in this market, cutting costs on decision-making pays better than hallucinating prose."
       },
       "headlines": [
+        {
+          "id": "5cf86a37f28003de",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "谷歌发布决策API，赋能多模态自动化判断",
+          "title_en": "Google launches Gemini Decisions API, powered by its new Gemini Decision 1 model, to return predefined answers with confidence scores, at $0.10/1M input tokens (Google)",
+          "source": "Google",
+          "published_at": "2026-11-11T19:05:00+00:00",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/",
+          "event_summary_zh": "谷歌推出Gemini决策API，支持对复杂内容进行批量概率化判断，定价仅为每百万输入Token 0.1美元",
+          "event_summary_en": "Google has launched the Gemini Decisions API, powered by the new Gemini Decision 1 model, designed for fast and probabilistic decision-making. Supporting multimodal inputs across text, image, audio, and video, the API handles up to 1,000 queries in a single pass with confidence scores, targeting use cases like automated routing and content moderation.",
+          "core_facts_zh": [
+            "【核心事件】谷歌在谷歌人工智能工作室：发布Gemini决策API，支持对1000个预定义问题进行多模态概率评估，定价0.1美元/百万Token",
+            "【起因与机理】降低自动化决策成本，解决复杂任务流中的路由与合规判断效率问题",
+            "【关键数据与实测】该工具支持文本、图像、音视频及PDF等多模态输入，能够处理最多1000个评估问题并给出置信度得分，旨在满足企业在工具路由、内容合规与政策检查等场景下的自动化需求。",
+            "【观点态度】低成本定价意在抢占自动化决策与合规检查市场。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Google (Google AI Studio): Launched Gemini Decisions API for evaluating up to 1,000 predefined questions at $0.10/1M tokens",
+            "[Root Cause & Mechanism] To reduce automation costs and streamline routing and compliance workflows",
+            "[Key Metrics] You can pass one multimodal input across text, images, audio, video, and PDFs (up to 256K tokens) along with up to 1,000 independent questions.",
+            "[Perspective & Impact] Low-cost pricing aims to capture the automation and compliance market."
+          ],
+          "industry_impact_zh": "谷歌终于发现比起让大模型写诗，企业更需要的是一个能自动干杂活的廉价“质检员”。这本质上是把AI从“艺术创作者”贬为“流水线工头”，毕竟在这个内卷时代，省钱做决策比展示幻觉更有市场。",
+          "industry_impact_en": "Google finally realized that enterprises don't need a poet, they need a cheap, automated quality inspector. It's effectively demoting the AI from 'creative genius' to 'assembly line foreman'—because in this market, cutting costs on decision-making pays better than hallucinating prose."
+        },
         {
           "id": "68b408989d2fd2f3",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "硅谷大佬们这波操作完美诠释了什么叫“两头没捞着”，既没在白宫换来红利，还把华盛顿的另一半人彻底得罪死了。把AI当成科技军备竞赛的筹码不够，还要在政治博弈里玩火，这届巨头的政治智商确实和他们的算法水平不在一个维度。",
           "industry_impact_en": "Silicon Valley elites are playing a masterclass in how to lose both ways: they bet on the wrong horse and alienated the other half of D.C. It’s almost impressive how their political IQ manages to be so much lower than their LLM benchmarks."
-        },
-        {
-          "id": "a9f3423e3cf259fe",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "DeepMind用AI秒杀代码审计",
-          "title_en": "Google Deepmind's AlphaProof Code verified Signal's cryptographic core in four weeks instead of years",
-          "source": "THE DECODER",
-          "published_at": "2026-11-11T18:18:25+00:00",
-          "url": "https://the-decoder.com/google-deepminds-alphaproof-code-verified-signals-cryptographic-core-in-four-weeks-instead-of-years/",
-          "event_summary_zh": "DeepMind开发的AlphaProof Code系统仅用四周完成了Signal核心加密协议的审计，工作效率较人工提升数年",
-          "event_summary_en": "DeepMind introduced AlphaProof Code, an AI system that automates software security verification. Leveraging Gemini-based agents to write millions of lines of code, the system audited Signal’s encryption protocol in just four weeks—a process that typically takes years.",
-          "core_facts_zh": [
-            "【核心事件】Google DeepMind、Signal安全团队在软件工程与网络安全防御领域：通过AlphaProof Code实现加密核心代码的数学形式化验证，大幅提升审计效率",
-            "【起因与机理】为应对日益复杂的AI攻击威胁，寻求更高效的安全防线",
-            "【关键技术规格】AI自动化审计加密协议效率飞跃。",
-            "【观点态度】未来有望应用于电网与医疗设施安全。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google DeepMind, Signal security team: Verified cryptographic code using AlphaProof, significantly boosting audit efficiency",
-            "[Root Cause & Mechanism] To establish more robust defenses against growing AI-driven threats",
-            "[Key Specification] AI-driven cryptographic protocol audit.",
-            "[Perspective & Impact] Future application in critical infrastructure."
-          ],
-          "industry_impact_zh": "以后程序员最恐怖的梦境不再是“代码跑不动”，而是“AlphaProof四小时把我的屎山代码逻辑全审了一遍”。这技术一旦铺开，以后写Bug的门槛都高了，毕竟AI不仅能帮你写，还能冷酷无情地证明你写的代码到底有多烂。",
-          "industry_impact_en": "The new nightmare for devs isn't just broken code—it's having an AI dissect your entire legacy codebase in a lunch break. Once this goes mainstream, the bar for writing bad code is going to get significantly higher, as AI won't just generate your work, it'll mathematically prove how terrible it is."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 19:04:01 UTC",
+      "updated_at": "2026-11-11 19:18:43 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,20 +281,20 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 19:04:01 UTC",
+      "updated_at": "2026-11-11 19:18:43 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
         "id": "security-audit-skill",
         "name": "security-audit-skill",
         "icon": "🛡️",
-        "stars": "70.1k",
+        "stars": "70.2k",
         "weekly_growth_zh": "本周暴增 +16,593 ★ · 24H 爆火黑马",
         "weekly_growth_en": "+16,593 ★ this week · 24H Trending Breakout",
         "license": "MIT",
         "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
         "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
+        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
         "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
         "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
         "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -319,13 +319,13 @@
           "id": "security-audit-skill",
           "name": "security-audit-skill",
           "icon": "🛡️",
-          "stars": "70.1k",
+          "stars": "70.2k",
           "weekly_growth_zh": "本周暴增 +16,593 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+16,593 ★ this week · 24H Trending Breakout",
           "license": "MIT",
           "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
           "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
+          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
           "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
           "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
           "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -379,7 +379,7 @@
           "id": "agent-desktop",
           "name": "agent-desktop",
           "icon": "🌐",
-          "stars": "21.9k",
+          "stars": "22k",
           "weekly_growth_zh": "本周暴增 +13,858 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+13,858 ★ this week · 24H Trending Breakout",
           "license": "MIT",
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,948)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,952)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,948 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,952 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
