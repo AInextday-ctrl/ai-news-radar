@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 00:19:17 UTC",
+  "generated_at": "2026-11-11 00:34:22 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 00:19:17 UTC",
+      "updated_at": "2026-11-11 00:34:22 UTC",
       "headline_item": {
-        "id": "040e82f030523813",
-        "tag_zh": "💼 商业落地",
-        "tag_en": "💼 Business Cases",
-        "title_zh": "安全公司Daylight获8000万美元融资",
-        "title_en": "NY-based Daylight, which provides AI-powered managed security, raised an $80M Series B led by Goldman Sachs Alternatives, sources say at a ~$400M valuation (Maria Armental/Wall Street Journal)",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-11T00:00:53+00:00",
-        "url": "https://www.wsj.com/pro/private-equity/goldman-leads-investment-in-cybersecurity-startup-at-400-million-valuation-648c54b7",
-        "event_summary_zh": "纽约AI托管安全初创公司Daylight完成8000万美元B轮融资，投后估值约4亿美元",
-        "event_summary_en": "New York-based AI security startup Daylight raised $80 million in a Series B funding round led by Goldman Sachs Alternatives. This investment brings the company's valuation to approximately $400 million, aiming to scale its AI-driven managed security services for enterprise protection.",
+        "id": "7d74c0e51a7a6902",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "AMD Zen 6架构深度泄露",
+        "title_en": "A deep dive into AMD's Zen 6 EPYC Venice: it uses TSMC's N2P, the 9686F often beats Nvidia's Vera, a dual 9996 is up to 93% faster than a dual Zen 5 9965, more (Jake Roach/Tom's Hardware)",
+        "source": "Tom's Hardware",
+        "published_at": "2026-11-11T00:25:01+00:00",
+        "url": "https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera",
+        "event_summary_zh": "AMD Zen 6架构细节曝光，将采用台积电N2P工艺，通过重构向量引擎与双IOD设计大幅提升算力",
+        "event_summary_en": "Details of AMD's Zen 6 architecture have emerged, featuring the TSMC N2P node and significant redesigns including a new vector engine, native FP16 support, and a dual IOD configuration. With CCDs now scaling up to 12 cores for standard and 32 cores for dense variants, the architecture aims to drastically outperform its predecessor in throughput and density.",
         "core_facts_zh": [
-          "【核心事件】Daylight（安全初创公司）、高盛另类投资部门在纽约科技与金融创投圈：完成8000万美元B轮融资，估值达4亿美元",
-          "【起因与机理】AI赋能的网络安全需求激增，资本押注防御端基础设施",
-          "【关键数据与实测】AI安全服务商Daylight获得8000万美元融资。",
-          "【观点态度】资本加码旨在抢占AI时代的企业防御市场。"
+          "【核心事件】AMD在行业技术架构流出：Zen 6采用N2P工艺，升级向量引擎，引入双IOD与高密度CCD设计",
+          "【起因与机理】应对数据中心对算力与高能效比的极致需求",
+          "【关键技术规格】AMD确认Zen 6将切换至台积电N2P先进工艺。",
+          "【观点态度】Zen 6c CCD密度翻倍并大幅提升L3缓存，旨在抢占高算力市场份额。"
         ],
         "core_facts_en": [
-          "[Core Event] Daylight, Goldman Sachs Alternatives: Secured $80M Series B at a $400M valuation",
-          "[Root Cause & Mechanism] Surging demand for AI-powered security infrastructure",
-          "[Key Metrics] AI security provider Daylight raised $80M.",
-          "[Perspective & Impact] Capital backing targets enterprise defense market share."
+          "[Core Event] AMD (Industry architecture leak): Zen 6 adopts N2P node, upgraded vector engine, dual IODs, and higher density CCDs",
+          "[Root Cause & Mechanism] To meet data center demands for extreme compute and efficiency",
+          "[Key Metrics] The headline for Zen 6 is a 27% average IPC uplift over Zen 5 in enterprise, cloud, and AI workloads.",
+          "[Perspective & Impact] Zen 6c density boost and L3 cache expansion target high-performance markets."
         ],
-        "industry_impact_zh": "只要披上AI安全的外衣，华尔街的钱就变得比纸还薄。别问为什么估值四亿，问就是你的数据正在裸奔，而他们是唯一的救命稻草。",
-        "industry_impact_en": "Just slap 'AI security' on anything and Wall Street’s wallet opens wide. Don't ask about the $400M valuation; just know your data is running naked and they're the only ones selling clothes."
+        "industry_impact_zh": "牙膏厂还没挤明白，AMD这边已经开始把CCD当积木叠了。这哪是在做CPU，分明是在造算力堡垒，英伟达听了都得连夜算算这账还划不划算。",
+        "industry_impact_en": "While Intel is still struggling with its tube of toothpaste, AMD is basically playing Lego with CCDs. This isn't just a CPU upgrade; it's a compute fortress that’s likely giving Nvidia’s accountants a collective migraine."
       },
       "headlines": [
+        {
+          "id": "7d74c0e51a7a6902",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "AMD Zen 6架构深度泄露",
+          "title_en": "A deep dive into AMD's Zen 6 EPYC Venice: it uses TSMC's N2P, the 9686F often beats Nvidia's Vera, a dual 9996 is up to 93% faster than a dual Zen 5 9965, more (Jake Roach/Tom's Hardware)",
+          "source": "Tom's Hardware",
+          "published_at": "2026-11-11T00:25:01+00:00",
+          "url": "https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera",
+          "event_summary_zh": "AMD Zen 6架构细节曝光，将采用台积电N2P工艺，通过重构向量引擎与双IOD设计大幅提升算力",
+          "event_summary_en": "Details of AMD's Zen 6 architecture have emerged, featuring the TSMC N2P node and significant redesigns including a new vector engine, native FP16 support, and a dual IOD configuration. With CCDs now scaling up to 12 cores for standard and 32 cores for dense variants, the architecture aims to drastically outperform its predecessor in throughput and density.",
+          "core_facts_zh": [
+            "【核心事件】AMD在行业技术架构流出：Zen 6采用N2P工艺，升级向量引擎，引入双IOD与高密度CCD设计",
+            "【起因与机理】应对数据中心对算力与高能效比的极致需求",
+            "【关键技术规格】AMD确认Zen 6将切换至台积电N2P先进工艺。",
+            "【观点态度】Zen 6c CCD密度翻倍并大幅提升L3缓存，旨在抢占高算力市场份额。"
+          ],
+          "core_facts_en": [
+            "[Core Event] AMD (Industry architecture leak): Zen 6 adopts N2P node, upgraded vector engine, dual IODs, and higher density CCDs",
+            "[Root Cause & Mechanism] To meet data center demands for extreme compute and efficiency",
+            "[Key Metrics] The headline for Zen 6 is a 27% average IPC uplift over Zen 5 in enterprise, cloud, and AI workloads.",
+            "[Perspective & Impact] Zen 6c density boost and L3 cache expansion target high-performance markets."
+          ],
+          "industry_impact_zh": "牙膏厂还没挤明白，AMD这边已经开始把CCD当积木叠了。这哪是在做CPU，分明是在造算力堡垒，英伟达听了都得连夜算算这账还划不划算。",
+          "industry_impact_en": "While Intel is still struggling with its tube of toothpaste, AMD is basically playing Lego with CCDs. This isn't just a CPU upgrade; it's a compute fortress that’s likely giving Nvidia’s accountants a collective migraine."
+        },
         {
           "id": "040e82f030523813",
           "tag_zh": "💼 商业落地",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "这年头AI算力比黄金还贵，黑客连门都不破了，直接去偷各位开发者的钥匙跑去挖矿或做图。看来在保护API密钥这事上，程序员和黑客之间隔着一整个「防盗门」。",
           "industry_impact_en": "With AI compute now worth more than gold, hackers stopped smashing windows and started picking digital locks to hijack API keys. Turns out, the distance between your secure deployment and a $740k bill is just one lazy config away."
-        },
-        {
-          "id": "d714916a4bc79454",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI经营状况泄露：亏损率从150%收窄至109%",
-          "title_en": "Leaked documents: OpenAI's adjusted operating margin improved from -150% to -109% from Q2 to Q3 (Berber Jin/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-10T23:20:03+00:00",
-          "url": "https://www.wsj.com/business/earnings/openai-continues-to-suffer-heavy-losses-as-revenue-rises-to-10-billion-d2a96bbb",
-          "event_summary_zh": "泄露财务数据显示，OpenAI在第三季度的经营利润率由前一季度的-150%改善至-109%，虽然营收增长迅速，但距离实现盈利仍有巨大差距",
-          "event_summary_en": "Leaked internal documents indicate OpenAI's adjusted operating margin improved from -150% to -109% between Q2 and Q3. This shift reflects the company's efforts to balance massive infrastructure and talent spending with rapid revenue growth to offset operational costs.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI在内部财务报表：经营利润率由-150%缩减至-109%，整体经营仍处于大规模亏损状态",
-            "【起因与机理】在全球算力资源与人才争夺战背景下，公司试图通过营收规模化扩张来缓解烧钱速度",
-            "【关键数据与实测】核心指标：经营利润率由-150%改善至-109%。",
-            "【观点态度】行业现状：营收增长的同时仍处于烧钱扩张周期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI (Internal financial statements): Adjusted operating margin improved from -150% to -109%, but still remains deeply in the red",
-            "[Root Cause & Mechanism] Scaling revenue to offset massive compute and talent expenditures in a hyper-competitive AI race",
-            "[Key Metrics] Key Metric: Operating margin improved from -150% to -109%.",
-            "[Perspective & Impact] Rapid revenue growth amidst massive capital burn."
-          ],
-          "industry_impact_zh": "从亏掉一个半自己到只亏掉一个多一点，OpenAI这波操作展示了什么叫‘把钱烧得更讲究一点’。硅谷的烧钱逻辑总是这样：只要增长够快，哪怕亏损规模依然惊人，只要账面上那个负数稍微变小了，也能被包装成卓越的财务韧性。",
-          "industry_impact_en": "Going from losing 1.5x your value to just over 1x is certainly a 'pivot'—Silicon Valley style. As long as the revenue charts go up and the negative margin shrinks slightly, they'll call this 'fiscal discipline' while setting the GPU cluster on fire."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 00:19:17 UTC",
+      "updated_at": "2026-11-11 00:34:22 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 00:19:17 UTC",
+      "updated_at": "2026-11-11 00:34:22 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,371)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,377)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,371 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,377 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],

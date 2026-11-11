@@ -1,12 +1,22 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-11 00:19:24Z
+Generated: 2026-11-11 00:34:30Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### A deep dive into AMD's Zen 6 EPYC Venice: it uses TSMC's N2P, the 9686F often beats Nvidia's Vera, a dual 9996 is up to 93% faster than a dual Zen 5 9965, more (Jake Roach/Tom's Hardware)
+- URL: https://ainewsradar.xyz/news/7d74c0e51a7a6902
+- Source: Tom's Hardware (https://www.tomshardware.com/pc-components/cpus/amd-zen-6-epyc-venice-deep-dive-and-benchmarking-dual-epyc-9996-with-1-024-threads-delivers-up-to-93-percent-performance-gain-gen-on-gen-9686f-outclasses-nvidias-vera)
+- Executive Summary: Details of AMD's Zen 6 architecture have emerged, featuring the TSMC N2P node and significant redesigns including a new vector engine, native FP16 support, and a dual IOD configuration. With CCDs now scaling up to 12 cores for standard and 32 cores for dense variants, the architecture aims to drastically outperform its predecessor in throughput and density.
+- Key Verified Facts:
+* [Core Event] AMD (Industry architecture leak): Zen 6 adopts N2P node, upgraded vector engine, dual IODs, and higher density CCDs
+* [Root Cause & Mechanism] To meet data center demands for extreme compute and efficiency
+* [Key Metrics] The headline for Zen 6 is a 27% average IPC uplift over Zen 5 in enterprise, cloud, and AI workloads.
+* [Perspective & Impact] Zen 6c density boost and L3 cache expansion target high-performance markets.
 
 ### NY-based Daylight, which provides AI-powered managed security, raised an $80M Series B led by Goldman Sachs Alternatives, sources say at a ~$400M valuation (Maria Armental/Wall Street Journal)
 - URL: https://ainewsradar.xyz/news/040e82f030523813
@@ -293,16 +303,6 @@ Canonical: https://ainewsradar.xyz
 * [Key Metrics] AI contributes 80% to its own R&D acceleration.
 * [Perspective & Impact] Industry progress enters a self-recursive acceleration phase.
 
-### ChatGPT is getting verified AI ‘Business Agents’
-- URL: https://ainewsradar.xyz/news/4a9f352f8498ebfc
-- Source: The Verge AI (https://www.theverge.com/ai-artificial-intelligence/1030552/openai-chatgpt-business-agents-hub)
-- Executive Summary: Posts from this topic will be added to your daily email digest and your homepage feed. ChatGPT’s new AI agents represent companies and can help with things like comparison shopping. Posts from this author will be added to your daily email digest and your homepage feed. ChatGPT is going to let you chat with verified “Business Agents” that represent a brand to help you with things like comparison shopping. The feature, available first to “eligible” e-commerce and online service businesses in th
-- Key Verified Facts:
-* [Core Event] Industry Leaders: ChatGPT is getting verified AI ‘Business Agents
-* [Context & Motivation] Posts from this topic will be added to your daily email digest and your homepage feed.
-* [Key Specification] ChatGPT is getting verified AI ‘Business Agents.
-* [Industry Impact] The feature, available first to “eligible” e-commerce and online service businesses in th.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -311,8 +311,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/782d746a5f892e59
 - Official Source: https://github.com/openai/codex?ref=ainewsradar
 - Headline: Lightweight coding agent that runs in your terminal
-- Overview: codex is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,937 stars this week, 134,773 total). Lightweight coding agent that runs in your terminal.
-- Features: ['📈 Exponential community momentum: +1,937 stars this week (134,773 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: codex is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,937 stars this week, 134,774 total). Lightweight coding agent that runs in your terminal.
+- Features: ['📈 Exponential community momentum: +1,937 stars this week (134,774 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/openai/codex.git`
 
@@ -320,8 +320,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/dc71f001ce1d9908
 - Official Source: https://github.com/pbakaus/impeccable?ref=ainewsradar
 - Headline: The design vocabulary for your coding agent. Steer with polish and bolder, revie
-- Overview: impeccable is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,288 stars this week, 107,591 total). The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships..
-- Features: ['📈 Exponential community momentum: +6,288 stars this week (107,591 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: impeccable is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,288 stars this week, 107,595 total). The design vocabulary for your coding agent. Steer with polish and bolder, review with critique and audit, catch AI slop before it ships..
+- Features: ['📈 Exponential community momentum: +6,288 stars this week (107,595 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/pbakaus/impeccable.git`
 
@@ -333,6 +333,105 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +2,196 stars this week (50,010 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/herdrdev/herdr.git`
+
+### astryx
+- URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
+- Official Source: https://github.com/meta/astryx?ref=ainewsradar
+- Headline: An open source design system that's fully customizable and agent ready
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+8,384 stars this week, 22,778 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +8,384 stars this week (22,778 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/meta/astryx.git`
+
+### gstack
+- URL: https://ainewsradar.xyz/tools/4727600e46d6626e
+- Official Source: https://github.com/garrytan/gstack?ref=ainewsradar
+- Headline: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO,
+- Overview: gstack is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,411 stars this week, 141,103 total). Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA.
+- Features: ['📈 Exponential community momentum: +2,411 stars this week (141,103 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
+- Quickstart: `git clone https://github.com/garrytan/gstack.git`
+
+### graphify
+- URL: https://ainewsradar.xyz/tools/6bec86b900064c79
+- Official Source: https://github.com/Graphify-Labs/graphify?ref=ainewsradar
+- Headline: Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryab
+- Overview: graphify is a fast-growing open-source AI tool for AI Coding & Developer Tools (+4,012 stars this week, 145,647 total). Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store..
+- Features: ['📈 Exponential community momentum: +4,012 stars this week (145,647 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
+- Quickstart: `git clone https://github.com/Graphify-Labs/graphify.git`
+
+### security-audit-skill
+- URL: https://ainewsradar.xyz/tools/b2b0ab6bf67b787a
+- Official Source: https://github.com/cloudflare/security-audit-skill?ref=ainewsradar
+- Headline: A coding-agent skill for multi-phase security audits with independently verified
+- Overview: security-audit-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+10,967 stars this week, 69,316 total). A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings.
+- Features: ['📈 Exponential community momentum: +10,967 stars this week (69,316 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/cloudflare/security-audit-skill.git`
+
+### Claude-Code-Game-Studios
+- URL: https://ainewsradar.xyz/tools/a079de4ee0c874ea
+- Official Source: https://github.com/Donchitos/Claude-Code-Game-Studios?ref=ainewsradar
+- Headline: Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills,
+- Overview: Claude-Code-Game-Studios is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,730 stars this week, 38,052 total). Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy..
+- Features: ['📈 Exponential community momentum: +3,730 stars this week (38,052 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
+- Quickstart: `git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git`
+
+### agent-browser
+- URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
+- Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
+- Headline: Browser automation CLI for AI agents
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,606 stars this week, 49,195 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +3,606 stars this week (49,195 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
+
+### worktrunk
+- URL: https://ainewsradar.xyz/tools/c69aff502c40baff
+- Official Source: https://github.com/max-sixty/worktrunk?ref=ainewsradar
+- Headline: Worktrunk is a CLI for Git worktree management, designed for parallel AI agent w
+- Overview: worktrunk is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,093 stars this week, 12,393 total). Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows.
+- Features: ['📈 Exponential community momentum: +2,093 stars this week (12,393 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/max-sixty/worktrunk.git`
+
+### agent-desktop
+- URL: https://ainewsradar.xyz/tools/e3ca255877a6d63c
+- Official Source: https://github.com/vercel-labs/agent-desktop?ref=ainewsradar
+- Headline: Computer use CLI for AI agents
+- Overview: agent-desktop is a fast-growing open-source AI tool for Web Search & Browser Automation (+9,502 stars this week, 21,377 total). Computer use CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +9,502 stars this week (21,377 total)', '🎯 Specialized engineering for Web Search & Browser Automation', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Web Search & Browser Automation workflows
+- Quickstart: `git clone https://github.com/vercel-labs/agent-desktop.git`
+
+### auto-ontology
+- URL: https://ainewsradar.xyz/tools/759f0bb46f60cf6a
+- Official Source: https://github.com/NVIDIA/auto-ontology?ref=ainewsradar
+- Headline: Auto Ontology is a Python framework for building semantic, graph-based reasoning
+- Overview: auto-ontology is a fast-growing open-source AI tool for Multi-Agent Workflows (+9,621 stars this week, 11,441 total). Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows..
+- Features: ['📈 Exponential community momentum: +9,621 stars this week (11,441 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/NVIDIA/auto-ontology.git`
+
+### hermes-agent
+- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
+- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
+- Headline: The agent that grows with you
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,881 stars this week, 262,449 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +3,881 stars this week (262,449 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/hermes-agent.git`
+
+### exact
+- URL: https://ainewsradar.xyz/tools/15c2c9b603319647
+- Official Source: https://github.com/expo/exact?ref=ainewsradar
+- Headline: Write an app once. It runs natively on the web, macOS, iOS, and Linux, and an AI
+- Overview: exact is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,694 stars this week, 2,168 total). Write an app once. It runs natively on the web, macOS, iOS, and Linux, and an AI agent can build it, run it, see it, and test it on every one of them..
+- Features: ['📈 Exponential community momentum: +1,694 stars this week (2,168 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/expo/exact.git`
 
 ### rakazo
 - URL: https://ainewsradar.xyz/tools/8a90d365b08f9aca
@@ -352,15 +451,6 @@ Canonical: https://ainewsradar.xyz
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/nightly-labs/openbot.git`
 
-### astryx
-- URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
-- Official Source: https://github.com/meta/astryx?ref=ainewsradar
-- Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+8,384 stars this week, 22,756 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +8,384 stars this week (22,756 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/meta/astryx.git`
-
 ### oh-my-pi
 - URL: https://ainewsradar.xyz/tools/fe2cb26e6766533f
 - Official Source: https://omp.sh?ref=ainewsradar
@@ -368,7 +458,7 @@ Canonical: https://ainewsradar.xyz
 - Overview: oh-my-pi is a fast-growing open-source AI tool for AI Coding & Developer Tools (+932 stars this week, 38,572 total). ⌥ Coding agent with the IDE wired in. Built by Stencil Labs..
 - Features: ['📈 Exponential community momentum: +932 stars this week (38,572 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/can1357/oh-my-pi.git`
+- Quickstart: `git clone https://github.com/oh-my-pi.git`
 
 ### lobehub
 - URL: https://ainewsradar.xyz/tools/dadf770f64fb5aff
@@ -378,24 +468,6 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +1,139 stars this week (84,864 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/lobehub/lobehub.git`
-
-### gstack
-- URL: https://ainewsradar.xyz/tools/4727600e46d6626e
-- Official Source: https://github.com/garrytan/gstack?ref=ainewsradar
-- Headline: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO,
-- Overview: gstack is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,411 stars this week, 141,100 total). Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager, Doc Engineer, and QA.
-- Features: ['📈 Exponential community momentum: +2,411 stars this week (141,100 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/garrytan/gstack.git`
-
-### graphify
-- URL: https://ainewsradar.xyz/tools/6bec86b900064c79
-- Official Source: https://github.com/Graphify-Labs/graphify?ref=ainewsradar
-- Headline: Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryab
-- Overview: graphify is a fast-growing open-source AI tool for AI Coding & Developer Tools (+4,012 stars this week, 145,640 total). Turn any codebase, with its docs, SQL schemas, configs, and PDFs, into a queryable knowledge graph. A /graphify skill for Claude Code, Cursor, Codex, and Gemini CLI: local deterministic AST parsing, every edge explained, no vector store..
-- Features: ['📈 Exponential community momentum: +4,012 stars this week (145,640 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/Graphify-Labs/graphify.git`
 
 ### claude-quickstarts
 - URL: https://ainewsradar.xyz/tools/04a6fb355033e4bc
@@ -433,69 +505,6 @@ Canonical: https://ainewsradar.xyz
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/The-PR-Agent/pr-agent.git`
 
-### security-audit-skill
-- URL: https://ainewsradar.xyz/tools/b2b0ab6bf67b787a
-- Official Source: https://github.com/cloudflare/security-audit-skill?ref=ainewsradar
-- Headline: A coding-agent skill for multi-phase security audits with independently verified
-- Overview: security-audit-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+10,967 stars this week, 69,303 total). A coding-agent skill for multi-phase security audits with independently verified, machine-readable findings.
-- Features: ['📈 Exponential community momentum: +10,967 stars this week (69,303 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/cloudflare/security-audit-skill.git`
-
-### Claude-Code-Game-Studios
-- URL: https://ainewsradar.xyz/tools/a079de4ee0c874ea
-- Official Source: https://github.com/Donchitos/Claude-Code-Game-Studios?ref=ainewsradar
-- Headline: Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills,
-- Overview: Claude-Code-Game-Studios is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,730 stars this week, 38,048 total). Turn Claude Code into a full game dev studio — 49 AI agents, 72 workflow skills, and a complete coordination system mirroring real studio hierarchy..
-- Features: ['📈 Exponential community momentum: +3,730 stars this week (38,048 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
-- Quickstart: `git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git`
-
-### agent-browser
-- URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
-- Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
-- Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,606 stars this week, 49,192 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +3,606 stars this week (49,192 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
-
-### worktrunk
-- URL: https://ainewsradar.xyz/tools/c69aff502c40baff
-- Official Source: https://github.com/max-sixty/worktrunk?ref=ainewsradar
-- Headline: Worktrunk is a CLI for Git worktree management, designed for parallel AI agent w
-- Overview: worktrunk is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,093 stars this week, 12,393 total). Worktrunk is a CLI for Git worktree management, designed for parallel AI agent workflows.
-- Features: ['📈 Exponential community momentum: +2,093 stars this week (12,393 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/max-sixty/worktrunk.git`
-
-### agent-desktop
-- URL: https://ainewsradar.xyz/tools/e3ca255877a6d63c
-- Official Source: https://github.com/vercel-labs/agent-desktop?ref=ainewsradar
-- Headline: Computer use CLI for AI agents
-- Overview: agent-desktop is a fast-growing open-source AI tool for Web Search & Browser Automation (+9,502 stars this week, 21,371 total). Computer use CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +9,502 stars this week (21,371 total)', '🎯 Specialized engineering for Web Search & Browser Automation', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Web Search & Browser Automation workflows
-- Quickstart: `git clone https://github.com/vercel-labs/agent-desktop.git`
-
-### auto-ontology
-- URL: https://ainewsradar.xyz/tools/759f0bb46f60cf6a
-- Official Source: https://github.com/NVIDIA/auto-ontology?ref=ainewsradar
-- Headline: Auto Ontology is a Python framework for building semantic, graph-based reasoning
-- Overview: auto-ontology is a fast-growing open-source AI tool for Multi-Agent Workflows (+9,621 stars this week, 11,438 total). Auto Ontology is a Python framework for building semantic, graph-based reasoning layers over data. It enables deterministic query generation, better context retrieval, and more explainable AI for LLM and agent workflows..
-- Features: ['📈 Exponential community momentum: +9,621 stars this week (11,438 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/NVIDIA/auto-ontology.git`
-
-### hermes-agent
-- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
-- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
-- Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,878 stars this week, 262,444 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +3,878 stars this week (262,444 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/hermes-agent.git`
-
 ### Codewhale
 - URL: https://ainewsradar.xyz/tools/85e1523cc649c26f
 - Official Source: https://codewhale.net/?ref=ainewsradar
@@ -522,15 +531,6 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +2,379 stars this week (8,040 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/Mika.git`
-
-### ff-ruyijs
-- URL: https://ainewsradar.xyz/tools/ea5b80733ce67687
-- Official Source: https://cutetailbud.github.io/ff-ruyijs/?ref=ainewsradar
-- Headline: This is a lightweight, headless browser purpose-built for AI agents (such as Cod
-- Overview: ff-ruyijs is a fast-growing open-source AI tool for Web Search & Browser Automation (+1,048 stars this week, 1,205 total). This is a lightweight, headless browser purpose-built for AI agents (such as Codex or Claude Code) to perform browser automation tasks; it is designed to navigate through various web protection systems, login processes, and reverse-engineering scenarios.
-- Features: ['📈 Exponential community momentum: +1,048 stars this week (1,205 total)', '🎯 Specialized engineering for Web Search & Browser Automation', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Web Search & Browser Automation workflows
-- Quickstart: `git clone https://github.com/ff-ruyijs.git`
 
 ---
 
