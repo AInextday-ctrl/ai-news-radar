@@ -2108,9 +2108,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       });
 
-      // 移动端切栏时平滑滚动到顶部，杜绝盲区体验
+      // 移动端切栏时立即定位到顶部，杜绝盲区体验与动画滑动期间的布局偏移
       if (typeof window !== 'undefined' && window.innerWidth < 768 && updateHash) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
       }
 
       const viewAll = document.getElementById('view-all');
@@ -2128,6 +2128,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       if (tab === 'all') {
+        if (document.documentElement.classList.contains('has-hash-tab')) {
+          document.documentElement.classList.remove('has-hash-tab');
+        }
         if (viewAll) viewAll.classList.remove('hidden');
         if (viewCat) viewCat.classList.add('hidden');
         if (typeof syncThreeColumnsHeight === 'function') setTimeout(syncThreeColumnsHeight, 50);
@@ -2177,22 +2180,30 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           renderCategoryView(tab);
         };
 
-        if (!cachedData || !updateHash) {
+        if (cachedData) {
+          // 数据已在内存中，在用户事件循环内同步完成直出渲染，绝不闪现骨架屏，消除异步延迟引发的 CLS
+          const skel = document.getElementById('cat-loading-skeleton');
+          const wrap = document.getElementById('cat-content-wrap');
+          if (skel && wrap) {
+            skel.classList.add('hidden');
+            wrap.classList.remove('hidden');
+          }
           executeTabRender();
         } else {
+          // 数据未就绪时展示全屏骨架屏
           const skel = document.getElementById('cat-loading-skeleton');
           const wrap = document.getElementById('cat-content-wrap');
           if (skel && wrap) {
             skel.classList.remove('hidden');
             wrap.classList.add('hidden');
           }
-          requestAnimationFrame(() => setTimeout(executeTabRender, 0));
+          executeTabRender();
         }
       }
 
-      // 仅当不在页面顶部时平滑回滚
+      // 仅当不在页面顶部时即时重置位置，避免平滑滚动动画期间产生中间态 CLS
       if (window.scrollY > 40) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
       }
     }
 
@@ -8772,6 +8783,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         skelEl.classList.add('hidden');
         contentWrapEl.classList.remove('hidden');
       }
+      if (document.documentElement.classList.contains('has-hash-tab')) {
+        document.documentElement.classList.remove('has-hash-tab');
+      }
       applyCurrentTranslation();
     }
 
@@ -11642,7 +11656,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     const initHashTab = getTabFromHash();
     if (initHashTab) {
       switchTab(initHashTab, false);
-      document.documentElement.classList.remove('has-hash-tab');
+      // 保留 has-hash-tab 样式隔离，直到 loadNews() -> renderCategoryView 挂载真实数据后再移除，杜绝页面高度坍塌与跳动
       window._isLoadingNewsTriggered = true;
       loadNews();
     } else {

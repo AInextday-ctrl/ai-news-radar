@@ -240,9 +240,10 @@
   <style>
     html.has-hash-tab #view-all,
     html.has-hash-tab #top-three-section { display: none !important; }
-    html.has-hash-tab #view-category { display: block !important; }
+    html.has-hash-tab #view-category { display: block !important; min-height: 100vh; }
     html.has-hash-tab #cat-loading-skeleton { display: block !important; }
     html.has-hash-tab #cat-content-wrap { display: none !important; }
+    html.has-hash-tab #site-footer { display: none !important; }
     #section-col-news, #section-col-arena, #site-footer {
       content-visibility: auto;
       contain-intrinsic-size: auto 600px;
@@ -726,7 +727,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 0.1h ago
+              YouTube Lab · 0.3h ago
             </div>
           </div>
         </div>
@@ -3056,10 +3057,13 @@ On 7 October 2026, CrowdStrike documented an unattributed actor using t...</p>
     <!-- View 2: Dedicated Category Full-Width Grid View -->
     <div id="view-category" class="hidden space-y-5 min-h-[85vh]">
       <!-- Category Loading Skeletons -->
-      <div id="cat-loading-skeleton" class="hidden space-y-5">
+      <div id="cat-loading-skeleton" class="hidden space-y-5 min-h-[90vh]">
         <div class="h-32 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
         <div class="h-10 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse w-2/3"></div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
+          <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
           <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
           <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
           <div class="h-64 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 animate-pulse"></div>
@@ -3966,7 +3970,7 @@ On 7 October 2026, CrowdStrike documented an unattributed actor using t...</p>
     };
   </script>
 
-  <script defer src="/js/app-v740.min.js"></script>
+  <script defer src="/js/app-v741.min.js"></script>
 
   <!-- ===== Modern Accessible Footer (AdSense E-E-A-T Trust Signals) ===== -->
   <footer id="site-footer" class="mt-12 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
