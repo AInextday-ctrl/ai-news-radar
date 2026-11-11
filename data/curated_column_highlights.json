@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 12:51:26 UTC",
+  "generated_at": "2026-11-11 13:04:07 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 12:51:26 UTC",
+      "updated_at": "2026-11-11 13:04:07 UTC",
       "headline_item": {
-        "id": "e18595c5bfd60f8c",
+        "id": "65c572ccfb58bfae",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "独立游戏界因AI代码使用掀起混战",
-        "title_en": "Game developer House House confirms using AI during Big Walk's final development, sparking an intense debate among Independent Games Festival judges and jurors (Luke Plunkett/Aftermath)",
-        "source": "Aftermath",
-        "published_at": "2026-11-11T12:40:01+00:00",
-        "url": "https://aftermath.site/big-walk-ai-igf-jurors-controversy/",
-        "event_summary_zh": "独立游戏开发商House House承认在《Big Walk》最后开发阶段使用了AI修复Bug，引发独立游戏节评委团的激烈争议",
-        "event_summary_en": "Independent studio House House utilized LLMs to troubleshoot technical bugs during the final development phase of 'Big Walk'. This disclosure ignited intense debate among IGF jurors regarding the ethical boundaries of AI in game development, despite the developer's claim that AI-generated code accounts for less than 0.1% of the final product.",
+        "title_zh": "Grok开发的AI应用致海量数据泄露",
+        "title_en": "Grok-built apps exposed patient data, plaintext passwords, and SpaceXSI's own sales pipeline",
+        "source": "THE DECODER",
+        "published_at": "2026-11-11T12:53:07+00:00",
+        "url": "https://the-decoder.com/grok-built-apps-exposed-patient-data-plaintext-passwords-and-spacexsis-own-sales-pipeline/",
+        "event_summary_zh": "安全机构发现95%通过Grok生成的应用未设访问权限，导致患者医疗数据及企业内部销售文档被公开",
+        "event_summary_en": "Security researchers discovered over 35,000 apps built via Grok are publicly accessible without authentication. Due to misleading publish settings and predictable URL structures, sensitive data including patient records and internal business pipelines are currently exposed to anyone with a link.",
         "core_facts_zh": [
-          "【核心事件】开发商House House与独立游戏节（IGF）评委团在独立游戏节评审过程及社交媒体讨论区：开发商承认使用AI修复Bug，引发评委对独立游戏纯粹性的质疑与争议",
-          "【起因与机理】游戏圈对生成式AI介入创作流程的敏感度激增，导致对“独立”定义的防卫性反应",
-          "【关键数据与实测】开发商强调AI仅占总代码量0.1%以求自证。",
-          "【观点态度】行为在独立游戏节评审圈引发极大争议。"
+          "【核心事件】AI助手Grok的用户及开发方xAI在Grok.me平台及相关子域名：94.7%的生成应用无需登录即可访问，导致隐私数据泄露",
+          "【起因与机理】发布对话框默认预选了“拥有链接者均可访问”且域名规律易被探测",
+          "【关键数据与实测】超过94%的Grok生成应用无访问控制。",
+          "【观点态度】xAI内部机密文档也在泄露名单中。"
         ],
         "core_facts_en": [
-          "[Core Event] House House and IGF jurors: Admission of using AI for bug fixing, sparking debates over the 'indie' standard",
-          "[Root Cause & Mechanism] Rising sensitivity to generative AI in creative workflows",
-          "[Key Metrics] Developer emphasizes the less than 0.1% usage to justify the action.",
-          "[Perspective & Impact] Revelation triggers fierce debate among IGF jurors."
+          "[Core Event] Grok users and xAI (Grok.me platform): 94.7% of AI-generated apps are accessible without login, causing massive data leaks",
+          "[Root Cause & Mechanism] Default 'anyone with the link' setting and predictable subdomain naming",
+          "[Key Metrics] Over 94% of Grok apps lack access control.",
+          "[Perspective & Impact] xAI internal docs are among the leaked files."
         ],
-        "industry_impact_zh": "这就像在纯手工匠人的聚会上掏出了一台吸尘器，虽然只用了0.1%的力气，却足以让那群执着于“纯手工”的评委们原地破防。大厂用AI叫效率，独立工作室用AI叫“背叛信仰”，看来游戏圈的鄙视链又多了个新的坐标系。",
-        "industry_impact_en": "It’s like pulling out a vacuum at a purist’s artisanal workshop; even if it only accounts for 0.1% of the work, the purists will still call it a betrayal of the craft. Big studios call it 'efficiency,' but for indies, it’s a new trigger for the ever-spinning industry moral compass."
+        "industry_impact_zh": "这就是所谓的‘AI让开发门槛归零’，顺便也把企业的防线给归零了。默认勾选‘所有人可见’这操作，简直是给黑客发入场券，马斯克这波属于是靠一己之力给全行业演示了什么叫负分安全架构。",
+        "industry_impact_en": "So this is what happens when you lower the barrier to coding to zero; you also lower your security standards to zero. Defaulting to 'public access' isn't a feature, it's a gift-wrapped data breach for any bored script kiddie."
       },
       "headlines": [
+        {
+          "id": "65c572ccfb58bfae",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Grok开发的AI应用致海量数据泄露",
+          "title_en": "Grok-built apps exposed patient data, plaintext passwords, and SpaceXSI's own sales pipeline",
+          "source": "THE DECODER",
+          "published_at": "2026-11-11T12:53:07+00:00",
+          "url": "https://the-decoder.com/grok-built-apps-exposed-patient-data-plaintext-passwords-and-spacexsis-own-sales-pipeline/",
+          "event_summary_zh": "安全机构发现95%通过Grok生成的应用未设访问权限，导致患者医疗数据及企业内部销售文档被公开",
+          "event_summary_en": "Security researchers discovered over 35,000 apps built via Grok are publicly accessible without authentication. Due to misleading publish settings and predictable URL structures, sensitive data including patient records and internal business pipelines are currently exposed to anyone with a link.",
+          "core_facts_zh": [
+            "【核心事件】AI助手Grok的用户及开发方xAI在Grok.me平台及相关子域名：94.7%的生成应用无需登录即可访问，导致隐私数据泄露",
+            "【起因与机理】发布对话框默认预选了“拥有链接者均可访问”且域名规律易被探测",
+            "【关键数据与实测】超过94%的Grok生成应用无访问控制。",
+            "【观点态度】xAI内部机密文档也在泄露名单中。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Grok users and xAI (Grok.me platform): 94.7% of AI-generated apps are accessible without login, causing massive data leaks",
+            "[Root Cause & Mechanism] Default 'anyone with the link' setting and predictable subdomain naming",
+            "[Key Metrics] Over 94% of Grok apps lack access control.",
+            "[Perspective & Impact] xAI internal docs are among the leaked files."
+          ],
+          "industry_impact_zh": "这就是所谓的‘AI让开发门槛归零’，顺便也把企业的防线给归零了。默认勾选‘所有人可见’这操作，简直是给黑客发入场券，马斯克这波属于是靠一己之力给全行业演示了什么叫负分安全架构。",
+          "industry_impact_en": "So this is what happens when you lower the barrier to coding to zero; you also lower your security standards to zero. Defaulting to 'public access' isn't a feature, it's a gift-wrapped data breach for any bored script kiddie."
+        },
         {
           "id": "e18595c5bfd60f8c",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "这年头连战场都开始搞‘AI代理人’了，Helsing这波操作显然是在告诉美国同行：欧洲的防务AI不能只由硅谷说了算。看来以后打仗不仅拼的是弹药，还得拼谁家的AI能更少产生幻觉。",
           "industry_impact_en": "With 'AI agents' hitting the battlefield, Helsing is basically telling its Silicon Valley rivals that Europe isn't going to let them monopolize defense AI. Future warfare isn't just about ammo anymore—it's about whose LLM has fewer hallucinations under fire."
-        },
-        {
-          "id": "f881506f35a2e966",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "字节跳动计划推出对标Muse的AI助手",
-          "title_en": "Sources: ByteDance co-founder Zhang Yiming says the company plans to launch a Muse-like AI assistant in the coming weeks and reach the AI frontier by 2029-2030 (Bloomberg)",
-          "source": "Bloomberg",
-          "published_at": "2026-11-11T12:21:08+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-11/bytedance-prepares-muse-like-agent-in-push-to-close-ai-gap",
-          "event_summary_zh": "字节跳动创始人张一鸣透露，公司将在几周内发布类似Muse的AI助手，并力争在2029至2030年间达到AI行业顶尖水平",
-          "event_summary_en": "ByteDance co-founder Zhang Yiming announced plans to launch a Muse-like AI assistant within the coming weeks. The company is accelerating its AI development with the ambitious goal of reaching industry-leading status by 2029-2030.",
-          "core_facts_zh": [
-            "【核心事件】字节跳动创始人张一鸣在字节跳动内部战略规划：宣布几周内推出Muse式AI助手，并设定2030年达到行业领先的目标",
-            "【起因与机理】应对大模型竞争压力，抢占生成式AI市场份额",
-            "【关键技术规格】张一鸣确认将发布新型AI助手。",
-            "【观点态度】通过产品化落地加速追赶全球AI第一梯队。"
-          ],
-          "core_facts_en": [
-            "[Core Event] ByteDance founder Zhang Yiming (Internal strategy meeting): Launching a Muse-like AI assistant soon; targeting 2030 for AI leadership",
-            "[Root Cause & Mechanism] Scaling up AI capabilities to stay competitive in the generative AI race",
-            "[Key Specification] Zhang Yiming confirms upcoming AI assistant launch.",
-            "[Perspective & Impact] Accelerating catch-up through product deployments."
-          ],
-          "industry_impact_zh": "张一鸣这是典型的‘延迟满足感’战略，一边给产品上线留时间，一边把顶尖水平的KPI设到了五年后。翻译一下就是：虽然我们现在还有点追赶压力，但请各位股东务必相信‘算法之王’的钞能力。",
-          "industry_impact_en": "Zhang Yiming is playing the classic 'delayed gratification' card—setting launch dates for apps now while pushing the 'industry leader' goal five years down the road. Translation: We might be playing catch-up, but trust in our sheer capital and algorithmic muscles to win by the deadline."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 12:51:26 UTC",
+      "updated_at": "2026-11-11 13:04:07 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 12:51:26 UTC",
+      "updated_at": "2026-11-11 13:04:07 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -294,7 +294,7 @@
         "license": "MIT",
         "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
         "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+        "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
         "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
         "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
         "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -325,7 +325,7 @@
           "license": "MIT",
           "category_tag_zh": "🛡️ 智能体多阶段代码安全审计",
           "category_tag_en": "🛡️ Multi-Phase Agent Security Audit",
-          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证、机器可读的结果",
+          "one_liner_zh": "用于多阶段安全审计的编码代理技能，具有独立验证的机器可读结果",
           "one_liner_en": "A coding-agent skill for multi-phase security audits with independently verified",
           "pain_point_zh": "编码代理自主生成代码时常不自觉引入反序列化、注入或权限绕过漏洞，传统人工审计耗时且容易遗漏隐蔽攻击面。",
           "pain_point_en": "Autonomous coding agents frequently introduce subtle vulnerabilities that manual code reviews miss under tight deadlines.",
@@ -349,7 +349,7 @@
           "id": "impeccable",
           "name": "impeccable",
           "icon": "🎨",
-          "stars": "107.9k",
+          "stars": "108k",
           "weekly_growth_zh": "本周暴增 +12,031 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+12,031 ★ this week · 24H Trending Breakout",
           "license": "MIT",
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,774)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,784)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,774 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,784 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
