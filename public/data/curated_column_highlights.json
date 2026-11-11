@@ -1,35 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 21:56:37 UTC",
+  "generated_at": "2026-11-11 22:03:47 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 21:56:37 UTC",
+      "updated_at": "2026-11-11 22:03:47 UTC",
       "headline_item": {
-        "id": "b8e5cfaa57a9e0a8",
+        "id": "5302ef5c8e5ac82c",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OKX和ICE的合资公司OKXICE计划于11月23日推出美国代币化股票交易场所，并上线70多种资产；其针对的 62 家公司中有 56 家表示反对",
-        "title_en": "OKX and ICE's joint venture OKXICE plans to launch a US tokenized stock venue on November 23 and list 70+ assets; 56 of the 62 companies it targeted objected (Scott Patterson/Bloomberg)",
-        "source": "Bloomberg",
-        "published_at": "2026-11-11T21:00:13+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-11/crypto-s-bid-to-shake-up-stock-trading-revs-up-despite-backlash",
-        "event_summary_zh": "斯科特·帕特森/彭博社：\n——加密货币争夺美国股市份额的竞争正在加速",
-        "event_summary_en": "Crypto's race to grab a slice of the US stock market is picking up speed even as many of the companies whose shares are being targeted for tokenized trading are pushing back.",
+        "title_zh": "美联航封杀AI代理自动订票",
+        "title_en": "United won’t let your AI agent book your flight",
+        "source": "The Verge AI",
+        "published_at": "2026-11-11T21:54:21+00:00",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+        "event_summary_zh": "美联航以隐私与监管合规为由，禁止AI代理代表用户直接购买机票，仅保留展示功能",
+        "event_summary_en": "United Airlines has officially blocked AI agents from finalizing flight bookings on its platform. The company cites concerns over potential privacy breaches, unauthorized transactions, and the inability of AI to fulfill mandatory federal regulatory obligations, such as dangerous goods declarations.",
         "core_facts_zh": [
-          "【核心事件】OKX和ICE的合资公司OKXICE计划于11月23日推出美国代币化股票交易场所，并上线70多种资产；其针对的 62 家公司中有 56 家表示反对",
-          "【核心事实细节】Scott Patterson / Bloomberg:。",
-          "【核心事实细节】OKX and ICE's joint venture OKXICE plans to launch a US tokenized stock venue on November 23 and list 70+ assets; 56 of the 62 companies it targeted objected&nbsp; &mdash;&nbsp; Crypto's race to grab a slice of the US stock market is picking up speed。"
+          "【核心事件】美联航 (United Airlines)在美联航票务预订平台：禁止AI代理完成机票支付交易，仅允许展示航班信息",
+          "【起因与机理】规避隐私泄露风险，应对联邦政府关于航空安全及合规声明的监管要求",
+          "【关键技术规格】美联航封禁AI代买机票功能。",
+          "【观点态度】AI代理目前仍能查询航班但无法闭环完成交易。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: OKX and ICE's joint venture OKXICE plans to launch a US tokenized stock venue on November 23 and list 70+ assets; 56 of the 62 companies it targeted objected (Scott Patterson/Bloomberg)",
-          "[Root Cause & Mechanism] Crypto's race to grab a slice of the US stock market is picking up speed even as many of the companies whose shares are being targeted for tokenized trading are pushing back..",
-          "[Key Fact] Scott Patterson / Bloomberg:."
+          "[Core Event] United Airlines (United booking platform): Banning AI agents from completing transactions while allowing flight discovery",
+          "[Root Cause & Mechanism] Mitigating privacy risks and ensuring compliance with federal safety regulations",
+          "[Key Specification] United Airlines restricts AI agent bookings.",
+          "[Perspective & Impact] AI agents limited to flight discovery only."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "AI代理想帮人类省钱省心，结果被航司以‘不能保证你没带炸弹’为由关进小黑屋。这本质上是旧世界的门卫在AI时代继续玩权力游戏，毕竟如果AI能自动订最便宜的票，谁来给那些昂贵的差价买单呢？",
+        "industry_impact_en": "AI agents trying to save us time are getting gatekept by airlines claiming they can't verify we aren't carrying explosives. It’s just the old-guard gatekeepers pulling rank; they’d much rather you deal with their clunky UI than let an AI algorithm find the best deal for your wallet."
       },
       "headlines": [
+        {
+          "id": "5302ef5c8e5ac82c",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美联航封杀AI代理自动订票",
+          "title_en": "United won’t let your AI agent book your flight",
+          "source": "The Verge AI",
+          "published_at": "2026-11-11T21:54:21+00:00",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1031623/united-unauthorized-ai-agents",
+          "event_summary_zh": "美联航以隐私与监管合规为由，禁止AI代理代表用户直接购买机票，仅保留展示功能",
+          "event_summary_en": "United Airlines has officially blocked AI agents from finalizing flight bookings on its platform. The company cites concerns over potential privacy breaches, unauthorized transactions, and the inability of AI to fulfill mandatory federal regulatory obligations, such as dangerous goods declarations.",
+          "core_facts_zh": [
+            "【核心事件】美联航 (United Airlines)在美联航票务预订平台：禁止AI代理完成机票支付交易，仅允许展示航班信息",
+            "【起因与机理】规避隐私泄露风险，应对联邦政府关于航空安全及合规声明的监管要求",
+            "【关键技术规格】美联航封禁AI代买机票功能。",
+            "【观点态度】AI代理目前仍能查询航班但无法闭环完成交易。"
+          ],
+          "core_facts_en": [
+            "[Core Event] United Airlines (United booking platform): Banning AI agents from completing transactions while allowing flight discovery",
+            "[Root Cause & Mechanism] Mitigating privacy risks and ensuring compliance with federal safety regulations",
+            "[Key Specification] United Airlines restricts AI agent bookings.",
+            "[Perspective & Impact] AI agents limited to flight discovery only."
+          ],
+          "industry_impact_zh": "AI代理想帮人类省钱省心，结果被航司以‘不能保证你没带炸弹’为由关进小黑屋。这本质上是旧世界的门卫在AI时代继续玩权力游戏，毕竟如果AI能自动订最便宜的票，谁来给那些昂贵的差价买单呢？",
+          "industry_impact_en": "AI agents trying to save us time are getting gatekept by airlines claiming they can't verify we aren't carrying explosives. It’s just the old-guard gatekeepers pulling rank; they’d much rather you deal with their clunky UI than let an AI algorithm find the best deal for your wallet."
+        },
         {
           "id": "b8e5cfaa57a9e0a8",
           "tag_zh": "📰 业界动态",
@@ -79,38 +107,12 @@
           ],
           "industry_impact_zh": "既然敢让AI裸奔写代码还不审，AWS这是在给程序员发遣散费预告呢，还是在给bug找个合理的替罪羊？等到线上环境集体宕机时，估计客服得回复用户：“这锅AI不背，我们人类更不懂。”",
           "industry_impact_en": "If AWS is truly letting AI raw-dog the codebase without a single human review, they’re either handing out pink slips to engineers or building a scapegoat for future outages. When the system eventually crashes, support can just say: 'AI wrote it, we don't know how it works either.'"
-        },
-        {
-          "id": "104e7bd07b568214",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
-          "title_en": "Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
-          "source": "THE DECODER",
-          "published_at": "2026-11-11T20:12:46+00:00",
-          "url": "https://the-decoder.com/google-joins-the-decision-model-wave-with-gemini-decision-1-scoring-1000-questions-in-a-single-pass/",
-          "event_summary_zh": "Google Deepmind 正在推出 Gemini Decisions API，这是一个为快速、封闭式决策（例如是/否问题、多项选择和基于量表的评分）而构建的界面。底层模型 Gemini Decision 1 可一次性处理多达 1,000 个独立问题，涉及文本、图像、音频、视频和 PDF",
-          "event_summary_en": "Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings. The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs. It scores options directly and returns probabilities with confidence values in 150 to 250 milliseconds. Google says it already uses the API internally for dynamic model routing in",
-          "core_facts_zh": [
-            "【核心事件】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线：Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题",
-            "【起因与机理】降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
-            "【关键数据与实测】Google 通过 Gemini Decision 1 加入决策模型浪潮，单次得分 1,000 个问题。",
-            "【观点态度】美国证券交易委员会 (SEC)在全球大模型开源社区与技术研发一线。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Google joins the decision-model wave with Gemini Decision 1, scoring 1,000 questions in a single pass",
-            "[Context & Motivation] Google Deepmind is introducing the Gemini Decisions API, an interface built for fast, closed-ended decisions like yes/no questions, multiple choice, and scale-based ratings.",
-            "[Context Detail] The underlying model, Gemini Decision 1, processes up to 1,000 independent questions in a single pass across text, images, audio, video, and PDFs.",
-            "[Industry Impact] Google says it already uses the API internally for dynamic model routing in."
-          ],
-          "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 21:56:37 UTC",
+      "updated_at": "2026-11-11 22:03:47 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -277,7 +279,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 21:56:37 UTC",
+      "updated_at": "2026-11-11 22:03:47 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -345,7 +347,7 @@
           "id": "impeccable",
           "name": "impeccable",
           "icon": "🎨",
-          "stars": "108.2k",
+          "stars": "108.3k",
           "weekly_growth_zh": "本周暴增 +12,031 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+12,031 ★ this week · 24H Trending Breakout",
           "license": "MIT",
@@ -386,12 +388,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 22,005)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 22,009)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (22,005 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (22,009 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
