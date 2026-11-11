@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-11 14:20:49 UTC",
+  "generated_at": "2026-11-11 14:35:01 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-11 14:20:49 UTC",
+      "updated_at": "2026-11-11 14:35:01 UTC",
       "headline_item": {
-        "id": "edd89c3ad0e6681d",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "黄仁勋陷“间谍门”与对华言论博弈",
-        "title_en": "An analysis of 42 interviews since 2022: after US chip restrictions, Jensen Huang's public rhetoric became more admiring of China and critical of export rules (J.D. Capelouto/Semafor)",
-        "source": "Semafor",
-        "published_at": "2026-11-11T14:01:03+00:00",
-        "url": "https://www.semafor.com/article/11/11/2026/tracking-how-jensen-huang-changed-his-stance-on-china",
-        "event_summary_zh": "黄仁勋因近期涉嫌与中国背景人士交往及对华出口限制的言论摇摆，正面临英伟达董事会调查及国会质询",
-        "event_summary_en": "Nvidia CEO Jensen Huang is facing a board investigation and Congressional scrutiny over his shifting rhetoric on China and alleged personal ties to a suspected Chinese intelligence asset. Analysis of his interviews shows a strategic pivot from criticizing China to advocating for global technological integration, fueling debate over corporate loyalty vs. profit.",
+        "id": "9dbbad9e7610bbe1",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "Anthropic破解CUDA壁垒，三日完成AMD适配",
+        "title_en": "Anthropic says AI is eroding Nvidia's CUDA lead, cutting an AMD chip switch from months to three days",
+        "source": "THE DECODER",
+        "published_at": "2026-11-11T14:25:20+00:00",
+        "url": "https://the-decoder.com/anthropic-says-ai-is-eroding-nvidias-cuda-lead-cutting-an-amd-chip-switch-from-months-to-three-days/",
+        "event_summary_zh": "Anthropic利用AI技术绕过CUDA生态束缚，成功将Claude模型从英伟达迁移至AMD芯片，仅耗时三天",
+        "event_summary_en": "Anthropic announced at an investor meeting that it has achieved multi-chip compatibility, porting Claude from Nvidia to AMD GPUs. While historically restricted by the CUDA ecosystem and requiring months of labor, Anthropic utilized proprietary AI tools to complete the migration in just three days.",
         "core_facts_zh": [
-          "【核心事件】英伟达CEO黄仁勋在公开访谈、董事会内部、美国国会：被曝与疑似间谍有染，且被指在美对华出口管制问题上立场软化，遭到内部调查与外部质询",
-          "【起因与机理】身处中美地缘政治冲突夹心层，其商业利益与国家安全边界的平衡受到严厉审视",
-          "【关键技术规格】黄仁勋被曝与疑似中国背景间谍有关联。",
-          "【观点态度】外界质疑其在地缘政治博弈中的立场摇摆动机。"
+          "【核心事件】Anthropic公司在投资者展示会议：利用自研AI技术将Claude模型从英伟达GPU迁移至AMD，耗时仅三天",
+          "【起因与机理】旨在摆脱对英伟达CUDA生态的深度依赖，降低算力成本并增强供应弹性",
+          "【关键技术规格】Anthropic实现跨硬件平台的模型部署。",
+          "【观点态度】打破英伟达CUDA长期以来的生态垄断壁垒。"
         ],
         "core_facts_en": [
-          "[Core Event] Jensen Huang, CEO of Nvidia: Under investigation for alleged personal ties and shifting stance on China export controls",
-          "[Root Cause & Mechanism] Caught in the crosshairs of geopolitical rivalry and national security compliance",
-          "[Key Metrics] In eight interviews he said that 50% of the world’s AI researchers are Chinese or in China, suggesting the country’s tech talent can’t be ignored.",
-          "[Perspective & Impact] Scrutiny over strategic shifts in China-related policy rhetoric."
+          "[Core Event] Anthropic (Investor presentation): Ported Claude model from Nvidia to AMD GPUs in three days using AI-driven automation",
+          "[Root Cause & Mechanism] To break free from Nvidia's CUDA vendor lock-in and diversify compute infrastructure",
+          "[Key Metrics] In November 2025, as part of a $45 billion deal with Microsoft, Nvidia committed to investing up to $10 billion in Anthropic.",
+          "[Perspective & Impact] Breaks the long-standing CUDA ecosystem monopoly."
         ],
-        "industry_impact_zh": "老黄这回算是真正体验了一把什么叫“算力不够，公关来凑”。一边是市值顶峰的AI教父，一边是华盛顿死盯着的间谍嫌疑，这出戏的精彩程度怕是比新一代GPU发布会还要劲爆。",
-        "industry_impact_en": "Jensen Huang is finally learning that in the AI era, it's easier to compute trillions of parameters than to navigate the geopolitical minefield. Being the world's most valuable tech darling won't save you when your private life starts outperforming your earnings calls in the news cycle."
+        "industry_impact_zh": "黄仁勋最怕的不是友商造出更快的显卡，而是开发者终于学会了如何优雅地“劈腿”。Anthropic这波操作相当于直接在英伟达的护城河里投了颗炸弹：CUDA的垄断不再是不可逾越的信仰，而是大厂必须买单的溢价而已。",
+        "industry_impact_en": "Huang Renxun's biggest nightmare isn't a faster GPU from competitors, but developers finally learning how to 'cheat' on CUDA. Anthropic just dropped a bomb in Nvidia's moat: the monopoly is no longer an insurmountable faith, but just an expensive tax that big labs are finally refusing to pay."
       },
       "headlines": [
+        {
+          "id": "9dbbad9e7610bbe1",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "Anthropic破解CUDA壁垒，三日完成AMD适配",
+          "title_en": "Anthropic says AI is eroding Nvidia's CUDA lead, cutting an AMD chip switch from months to three days",
+          "source": "THE DECODER",
+          "published_at": "2026-11-11T14:25:20+00:00",
+          "url": "https://the-decoder.com/anthropic-says-ai-is-eroding-nvidias-cuda-lead-cutting-an-amd-chip-switch-from-months-to-three-days/",
+          "event_summary_zh": "Anthropic利用AI技术绕过CUDA生态束缚，成功将Claude模型从英伟达迁移至AMD芯片，仅耗时三天",
+          "event_summary_en": "Anthropic announced at an investor meeting that it has achieved multi-chip compatibility, porting Claude from Nvidia to AMD GPUs. While historically restricted by the CUDA ecosystem and requiring months of labor, Anthropic utilized proprietary AI tools to complete the migration in just three days.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic公司在投资者展示会议：利用自研AI技术将Claude模型从英伟达GPU迁移至AMD，耗时仅三天",
+            "【起因与机理】旨在摆脱对英伟达CUDA生态的深度依赖，降低算力成本并增强供应弹性",
+            "【关键技术规格】Anthropic实现跨硬件平台的模型部署。",
+            "【观点态度】打破英伟达CUDA长期以来的生态垄断壁垒。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic (Investor presentation): Ported Claude model from Nvidia to AMD GPUs in three days using AI-driven automation",
+            "[Root Cause & Mechanism] To break free from Nvidia's CUDA vendor lock-in and diversify compute infrastructure",
+            "[Key Metrics] In November 2025, as part of a $45 billion deal with Microsoft, Nvidia committed to investing up to $10 billion in Anthropic.",
+            "[Perspective & Impact] Breaks the long-standing CUDA ecosystem monopoly."
+          ],
+          "industry_impact_zh": "黄仁勋最怕的不是友商造出更快的显卡，而是开发者终于学会了如何优雅地“劈腿”。Anthropic这波操作相当于直接在英伟达的护城河里投了颗炸弹：CUDA的垄断不再是不可逾越的信仰，而是大厂必须买单的溢价而已。",
+          "industry_impact_en": "Huang Renxun's biggest nightmare isn't a faster GPU from competitors, but developers finally learning how to 'cheat' on CUDA. Anthropic just dropped a bomb in Nvidia's moat: the monopoly is no longer an insurmountable faith, but just an expensive tax that big labs are finally refusing to pay."
+        },
+        {
+          "id": "a95d645b60d168cb",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Palantir CEO卡普转向民主党阵营",
+          "title_en": "After the US midterms, Palantir CEO Alex Karp pivots toward Democrats, describing his philosophy as progressive and acknowledging ICE's enforcement missteps (Politico)",
+          "source": "Politico",
+          "published_at": "2026-11-11T14:20:57+00:00",
+          "url": "https://www.politico.com/newsletters/playbook/2026/11/11/the-tech-right-pivots-left-01160648",
+          "event_summary_zh": "Palantir首席执行官Alex Karp公开表明政治立场偏向进步派，并反思了公司在移民执法中的争议行为",
+          "event_summary_en": "Palantir CEO Alex Karp publicly shifted his political stance, aligning with the Democratic party and labeling himself a 'progressive.' He also acknowledged missteps during the company's past collaboration with ICE, marking a strategic pivot to reshape public perception amid political volatility.",
+          "core_facts_zh": [
+            "【核心事件】Palantir 首席执行官亚历克斯·卡普在公开访谈与政治立场声明：公开宣布政治立场转向民主党，并反思了过往与移民执法机构合作中的争议",
+            "【起因与机理】在后选举时代重塑品牌政治地标，以应对日益复杂的监管环境与舆论压力",
+            "【关键技术规格】Palantir高层公开政治转向。",
+            "【观点态度】试图通过立场重构缓解舆论压制。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Palantir CEO Alex Karp: Declared a pivot to the Democratic party and admitted to ICE enforcement missteps",
+            "[Root Cause & Mechanism] Strategic rebranding to navigate post-election political polarization and regulatory scrutiny",
+            "[Key Specification] Palantir executive makes political pivot.",
+            "[Perspective & Impact] Attempting to soften public pressure via rebranding."
+          ],
+          "industry_impact_zh": "什么叫“精明的投机主义”？就是前脚刚靠为五角大楼和情报机构提供军工级大数据赚得盆满钵满，后脚就换上民主党的“进步派”皮肤，试图消解掉身上的军火商血腥味。政坛风向一转，资本家的屁股转得比散热器还快。",
+          "industry_impact_en": "What is 'clever opportunism'? It's when you cash in on military-grade big data for the Pentagon and intel agencies, then immediately put on a 'progressive' skin to wash off the stench of being a war profiteer. When the political wind shifts, a capitalist's backside pivots faster than a server fan."
+        },
         {
           "id": "edd89c3ad0e6681d",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "老黄这回算是真正体验了一把什么叫“算力不够，公关来凑”。一边是市值顶峰的AI教父，一边是华盛顿死盯着的间谍嫌疑，这出戏的精彩程度怕是比新一代GPU发布会还要劲爆。",
           "industry_impact_en": "Jensen Huang is finally learning that in the AI era, it's easier to compute trillions of parameters than to navigate the geopolitical minefield. Being the world's most valuable tech darling won't save you when your private life starts outperforming your earnings calls in the news cycle."
-        },
-        {
-          "id": "b02dd8001a88c8e5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Adobe推出AI角色对话与场景建模",
-          "title_en": "Adobe’s AI experiments let you walk around in photos and interview your characters",
-          "source": "The Verge AI",
-          "published_at": "2026-11-11T14:00:00+00:00",
-          "url": "https://www.theverge.com/tech/1031505/adobe-max-2026-sneaks-experiments-ai",
-          "event_summary_zh": "Adobe在Max大会展示实验性AI工具，实现照片3D化以及与AI生成角色实时对话交互",
-          "event_summary_en": "Adobe unveiled experimental tools at its Max conference, including a character creation system that allows users to 'interview' their AI persona and a feature that turns static photos into explorable 3D environments. These tools aim to democratize complex video content production through conversational interfaces.",
-          "core_facts_zh": [
-            "【核心事件】Adobe在年度Max大会：展示了可交互3D建模及AI角色对话面试工具",
-            "【起因与机理】通过交互式AI降低创意内容生产门槛，探索设计软件的下一代交互范式",
-            "【关键数据与实测】[Image: https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/Screenshot-2026-11-11-085159.jpg]。",
-            "【观点态度】意图通过人机对话重构复杂图像处理流程。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Adobe (Annual Max conference): Demoed interactive 3D scene generation and AI persona interviewing tools",
-            "[Root Cause & Mechanism] Lowering the barrier to creative production and exploring the next paradigm of interface design",
-            "[Key Metrics] com/wp-content/uploads/sites/2/2026/11/Screenshot-2026-11-11-085454.",
-            "[Perspective & Impact] Aiming to simplify workflows via conversational interface."
-          ],
-          "industry_impact_zh": "Adobe这是为了稳住创意大佬们的焦虑，恨不得把整个人机交互变成一场脱口秀。以后修图不用鼠标点，直接跟照片里的角色吵一架，说不定出图效率就上去了。",
-          "industry_impact_en": "Adobe is so desperate to keep designers relevant that they’re turning creative workflows into glorified talk shows. Soon enough, you won't need to edit photos; you’ll just sit your AI character down for a therapy session until they look how you want."
-        },
-        {
-          "id": "6ae43d91e6558a95",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "美数据经纪商向中方输出AI训练环境",
-          "title_en": "US data brokers are selling half a billion dollars in RL training environments to Chinese AI labs",
-          "source": "THE DECODER",
-          "published_at": "2026-11-11T13:51:11+00:00",
-          "url": "https://the-decoder.com/us-data-brokers-are-selling-half-a-billion-dollars-in-rl-training-environments-to-chinese-ai-labs/",
-          "event_summary_zh": "美国数据商向中国实验室出售价值约5亿美元的强化学习训练环境，以辅助AI模型高效迭代",
-          "event_summary_en": "American data brokers are selling reinforcement learning environments to Chinese AI labs, providing simulated training grounds for tasks like coding and financial analysis. By purchasing the same datasets used by Western giants like OpenAI, Chinese labs are effectively bypassing R&D bottlenecks and mitigating local compute shortages to accelerate their model performance.",
-          "core_facts_zh": [
-            "【核心事件】美国数据经纪商（如Mercor, Surge AI等）与中国AI实验室在全球AI研发市场与跨境数据交易平台：美方以约5亿美元的价格向中方出售RL强化学习训练环境，并间接提供模型蒸馏参考",
-            "【起因与机理】中国实验室为绕过研发试错成本并缓解高端芯片短缺带来的内存瓶颈",
-            "【关键数据与实测】美方经纪商向中方出售价值5亿的RL训练资源。",
-            "【观点态度】此举变相缩短了中美模型的技术差距。"
-          ],
-          "core_facts_en": [
-            "[Core Event] US data brokers (e.g., Mercor, Surge AI) and Chinese AI labs: US firms are selling ~$500M worth of RL training environments and enabling model distillation to Chinese labs",
-            "[Root Cause & Mechanism] To bypass expensive R&D trial-and-error and mitigate local compute memory bottlenecks",
-            "[Key Metrics] US brokers selling $500M in RL training environments to China.",
-            "[Perspective & Impact] This activity effectively shrinks the technological gap."
-          ],
-          "industry_impact_zh": "一边高喊技术封锁，一边背地里靠卖训练环境赚得盆满钵满，资本的底色果然从不看立场。这哪是地缘博弈，分明是美方一边造神，一边把通往神庙的“精密地图”批发卖给竞争对手，这波操作属于典型的“既要制裁又要带货”。",
-          "industry_impact_en": "While the narrative screams tech containment, the capital flow whispers a different story: selling the map to the temple while trying to lock the gate. It’s a classic move of trying to have one’s cake and eat it too—sanctioning on camera, while cashing in on the backend."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-11 14:20:50 UTC",
+      "updated_at": "2026-11-11 14:35:01 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-11 14:20:50 UTC",
+      "updated_at": "2026-11-11 14:35:01 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,825)",
+            "📈 社区热度指数级飙升：本周新增 +9,502 Stars (总星标 21,832)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +9,502 stars this week (21,825 total)",
+            "📈 Exponential community momentum: +9,502 stars this week (21,832 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
