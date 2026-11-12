@@ -138,6 +138,32 @@ body {
   animation: fadeIn 0.2s ease-out forwards;
 }
 
+/* Modal Bottom Sheets & Scroll Containers */
+#lang-picker-modal > div {
+  width: 100%;
+  max-width: 28rem;
+  height: 80vh !important;
+  max-height: 80vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-sizing: border-box;
+}
+
+#lang-picker-list {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain;
+}
+
+#article-modal-content {
+  max-height: 88vh !important;
+  overflow-y: auto !important;
+}
+
 /* Pulse animation for Live indicator */
 @keyframes pulseDot {
   0%, 100% { opacity: 1; transform: scale(1); }

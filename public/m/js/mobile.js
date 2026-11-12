@@ -1085,10 +1085,11 @@
       if (isDown) {
         isDown = false;
         el.style.removeProperty('user-select');
+        setTimeout(() => { hasMoved = false; }, 60);
       }
     });
 
-    el.addEventListener('mousemove', (e) => {
+    window.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       const dist = e.pageY - startY;
       if (Math.abs(dist) > 3) {
@@ -1102,7 +1103,6 @@
       if (hasMoved) {
         e.stopPropagation();
         e.preventDefault();
-        hasMoved = false;
       }
     }, true);
   }
@@ -1121,10 +1121,12 @@
 
       const list = document.getElementById('lang-picker-list');
       if (list) {
-        // Bind mouse wheel across the entire modal sheet so scrolling is 100% responsive
+        // Scroll forwarder: if wheel is outside list, forward it to list
         modal.onwheel = (e) => {
-          list.scrollTop += e.deltaY;
-          e.preventDefault();
+          if (!e.target.closest('#lang-picker-list')) {
+            list.scrollTop += e.deltaY;
+            e.preventDefault();
+          }
         };
         // Bind touch / mouse drag simulation
         initDragScroll(list);
