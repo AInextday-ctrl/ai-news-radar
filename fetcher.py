@@ -2972,97 +2972,118 @@ PUBLIC_ARENA_CACHE_FILE = os.path.join(PUBLIC_DATA_DIR, "chatbot_arena_cache.jso
 
 def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
     """
-    动态从官方新一代 LMSYS 竞技场 (https://arena.ai/leaderboard) 抓取最新权威天梯榜。
-    包含真实实时 Net Improvement 净增评分、发布日期、组织归属与代际技术徽章。
+    动态从官方 LMSYS Hugging Face 权威数据集实时抓取最新 Chatbot Arena 天梯榜。
+    包含真实实时 Elo 评分、发布日期、组织归属与专属代际技术徽章。
     支持断网本地缓存与高可靠前沿基准兜底。
     """
-    # 1. 尝试在线抓取最新官方 arena.ai 天梯榜
-    arena_url = "https://arena.ai/leaderboard"
-    arena_headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.9",
+    import urllib.request
+    org_map = {
+        "google": "Google",
+        "anthropic": "Anthropic",
+        "meta": "Meta",
+        "openai": "OpenAI",
+        "alibaba": "Alibaba",
+        "deepseek": "DeepSeek",
+        "xiaomi": "Xiaomi",
+        "xai": "xAI",
+        "mistral": "Mistral",
+        "microsoft": "Microsoft",
+        "cohere": "Cohere",
+        "01-ai": "01.AI",
+        "zhipu": "Zhipu AI",
+        "baichuan": "Baichuan",
+        "nvidia": "NVIDIA"
     }
+    
+    # 1. 优先通过官方 Hugging Face LMSYS 实时数据集 API 拉取
+    hf_url = "https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=text&split=latest"
     try:
-        with httpx.Client(headers=arena_headers, timeout=15, follow_redirects=True) as client:
-            resp = client.get(arena_url)
-            if resp.status_code == 200:
-                html = resp.text
-                pos = html.find('best-overall-agents')
-                if pos != -1:
-                    entries_pos = html.find('entries', pos)
-                    if entries_pos != -1:
-                        bracket_start = html.find('[', entries_pos)
-                        if bracket_start != -1:
-                            depth = 0
-                            end = -1
-                            for i in range(bracket_start, len(html)):
-                                if html[i] == '[' and html[i-1] != '\\':
-                                    depth += 1
-                                elif html[i] == ']' and html[i-1] != '\\':
-                                    depth -= 1
-                                    if depth == 0:
-                                        end = i + 1
-                                        break
-                            if end != -1:
-                                raw_array = html[bracket_start:end]
-                                clean_json = raw_array.replace('\\"', '"').replace('\\\\', '\\')
-                                raw_entries = json.loads(clean_json)
+        req = urllib.request.Request(hf_url, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        })
+        with urllib.request.urlopen(req, timeout=10) as r:
+            payload = json.loads(r.read().decode("utf-8"))
+            rows = payload.get("rows", [])
+            if rows:
+                live_arena = []
+                for idx, item in enumerate(rows[:25]):
+                    row = item.get("row", {})
+                    rank = int(row.get("rank") or (idx + 1))
+                    name = str(row.get("model_name") or "AI Model").strip()
+                    raw_org = str(row.get("organization") or "").lower().strip()
+                    org = org_map.get(raw_org, raw_org.title() or "AI Lab")
+                    rating = float(row.get("rating") or 0.0)
+                    elo_str = str(int(round(rating)))
+                    votes = int(row.get("vote_count") or 0)
 
-                                live_arena = []
-                                for idx, e in enumerate(raw_entries[:25]):
-                                    rank = int(e.get("rank") or (idx + 1))
-                                    name = str(e.get("modelDisplayName") or e.get("modelKey") or "AI Model").strip()
-                                    org = str(e.get("modelOrganization") or "AI Lab").strip()
-                                    rating = float(e.get("rating") or 0.0)
-                                    elo_str = f"+{rating*100:.2f}%" if rating > 0 else f"{rating*100:.2f}%"
-                                    model_url = str(e.get("modelUrl") or "https://arena.ai/leaderboard")
+                    if rank == 1:
+                        badge_zh = f"👑 全球综合榜首 · {org} 旗舰深度思考基座"
+                        badge_en = f"👑 #1 Overall · {org} Flagship Reasoning SOTA"
+                    elif rank == 2:
+                        badge_zh = f"🔥 全球第二 · {org} 极高阶旗舰基座"
+                        badge_en = f"🔥 #2 Overall · {org} Frontier Flagship SOTA"
+                    elif rank == 3:
+                        badge_zh = f"🔥 全球前三 · {org} 顶级认知推理基座"
+                        badge_en = f"🔥 Top 3 Overall · {org} Frontier Reasoning SOTA"
+                    elif rank <= 5:
+                        badge_zh = f"⚡ 全球Top 5 · {org} 顶级Agent认知基座"
+                        badge_en = f"⚡ Top 5 Overall · {org} Frontier Agent SOTA"
+                    elif "deepseek" in name.lower() or "qwen" in name.lower():
+                        badge_zh = f"🌐 顶尖开源基座 · {org} 标杆模型"
+                        badge_en = f"🌐 Open-Weights SOTA · {org} Flagship"
+                    elif rank <= 10:
+                        badge_zh = f"💎 全球Top 10 · {org} 顶尖生产力基座"
+                        badge_en = f"💎 Top 10 Overall · {org} Production SOTA"
+                    else:
+                        badge_zh = f"🚀 全球前沿 · {org} 高性能基座"
+                        badge_en = f"🚀 Frontier SOTA · {org} High-Performance Model"
 
-                                    if rank == 1:
-                                        badge_zh = f"👑 全球综合榜首 · {org}旗舰基座"
-                                        badge_en = f"👑 #1 Overall · {org} Flagship"
-                                    elif rank == 2:
-                                        badge_zh = f"🔥 全球第二 · 极高阶认知基座"
-                                        badge_en = f"🔥 #2 Overall · Frontier Agent SOTA"
-                                    elif rank == 3:
-                                        badge_zh = f"🔥 全球前三 · {org}旗舰推理SOTA"
-                                        badge_en = f"🔥 Top 3 Overall · {org} Flagship SOTA"
-                                    elif rank <= 5:
-                                        badge_zh = f"⚡ 顶级Agent智能体基座"
-                                        badge_en = f"⚡ Frontier Agent & Reasoning SOTA"
-                                    elif rank <= 10:
-                                        badge_zh = f"💎 全球Top 10顶级认知基座"
-                                        badge_en = f"💎 Global Top 10 Frontier Model"
-                                    else:
-                                        badge_zh = f"🚀 高性能生产力基座"
-                                        badge_en = f"🚀 High-Performance Production SOTA"
+                    if "gemini" in name.lower():
+                        model_url = "https://deepmind.google/technologies/gemini/"
+                    elif "claude" in name.lower():
+                        model_url = "https://www.anthropic.com/claude"
+                    elif "gpt" in name.lower() or "o1" in name.lower() or "o3" in name.lower():
+                        model_url = "https://openai.com/"
+                    elif "deepseek" in name.lower():
+                        model_url = "https://www.deepseek.com/"
+                    elif "qwen" in name.lower():
+                        model_url = "https://qwenlm.github.io/"
+                    elif "mimo" in name.lower():
+                        model_url = "https://mimo.xiaomi.com/"
+                    else:
+                        model_url = "https://lmarena.ai/"
 
-                                    live_arena.append({
-                                        "rank": rank,
-                                        "model": name,
-                                        "raw_model": e.get("modelKey") or name,
-                                        "elo": elo_str,
-                                        "rating": rating,
-                                        "org": org,
-                                        "badge": badge_zh,
-                                        "badge_en": badge_en,
-                                        "votes": e.get("votes", 0),
-                                        "url": model_url,
-                                        "arena_url": "https://arena.ai/leaderboard"
-                                    })
+                    live_arena.append({
+                        "rank": rank,
+                        "model": name,
+                        "raw_model": row.get("model_name") or name,
+                        "elo": elo_str,
+                        "rating": rating,
+                        "org": org,
+                        "badge": badge_zh,
+                        "badge_en": badge_en,
+                        "votes": votes,
+                        "url": model_url,
+                        "arena_url": "https://lmarena.ai/"
+                    })
 
-                                if live_arena:
-                                    try:
-                                        payload = {"updated_at": datetime.now(timezone.utc).isoformat(), "source": "https://arena.ai/leaderboard", "models": live_arena}
-                                        for cpath in [ARENA_CACHE_FILE, PUBLIC_ARENA_CACHE_FILE]:
-                                            os.makedirs(os.path.dirname(cpath), exist_ok=True)
-                                            with open(cpath, "w", encoding="utf-8") as f:
-                                                json.dump(payload, f, ensure_ascii=False, indent=2)
-                                    except Exception:
-                                        pass
-                                    print(f"  ✓ [Arena.ai] 成功实时同步最新权威天梯榜！收录 Top {len(live_arena)} 模型 (榜首: {live_arena[0]['model']} - {live_arena[0]['elo']})")
-                                    return live_arena
+                if live_arena:
+                    try:
+                        cache_data = {
+                            "updated_at": datetime.now(timezone.utc).isoformat(),
+                            "source": "https://lmarena.ai/",
+                            "models": live_arena
+                        }
+                        for cpath in [ARENA_CACHE_FILE, PUBLIC_ARENA_CACHE_FILE]:
+                            os.makedirs(os.path.dirname(cpath), exist_ok=True)
+                            with open(cpath, "w", encoding="utf-8") as f:
+                                json.dump(cache_data, f, ensure_ascii=False, indent=2)
+                    except Exception:
+                        pass
+                    print(f"  ✓ [LMSYS Arena] 成功实时同步最新权威天梯榜！收录 Top {len(live_arena)} 模型 (榜首: {live_arena[0]['model']} - Elo: {live_arena[0]['elo']})")
+                    return live_arena
     except Exception as e:
+        print(f"  ⚠️ [LMSYS Arena] 在线抓取异常，尝试读取本地缓存: {e}")
         print(f"  ⚠️ [Arena.ai] 在线抓取异常，尝试读取本地缓存: {e}")
 
     # 2. 读取本地持久化缓存

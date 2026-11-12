@@ -50,6 +50,7 @@ jobs:
           PYTHONIOENCODING: 'utf-8'
         run: |
           python main.py || (echo "⚠️ main.py 遇到偶发异常，触发缓存自愈静态发布..." && python content_publisher.py)
+          python scripts/update_arena_leaderboard.py || echo "⚠️ 天梯榜自动化同步异常，自愈放行"
           python curator_engine.py || echo "⚠️ curator_engine.py 偶发异常，自愈放行"
 
       - name: Localize Tool Preview Images
