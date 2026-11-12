@@ -55,6 +55,34 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 
+/* Custom Mobile & Simulator Visible Scrollbar */
+.mobile-scroll-list {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.45) transparent;
+}
+.mobile-scroll-list::-webkit-scrollbar {
+  width: 5px;
+}
+.mobile-scroll-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.mobile-scroll-list::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.4);
+  border-radius: 9999px;
+}
+.mobile-scroll-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.7);
+}
+.dark .mobile-scroll-list::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.5);
+}
+.dark .mobile-scroll-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(129, 140, 248, 0.8);
+}
+
 /* Shimmer Animation for Skeletons */
 @keyframes shimmer {
   0% { transform: translateX(-100%); }

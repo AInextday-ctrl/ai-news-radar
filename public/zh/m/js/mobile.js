@@ -1065,6 +1065,48 @@
     renderLanguagePickerList(q);
   }
 
+  function initDragScroll(el) {
+    if (!el || el.__dragScrollAttached) return;
+    el.__dragScrollAttached = true;
+    let isDown = false;
+    let startY = 0;
+    let scrollStart = 0;
+    let hasMoved = false;
+
+    el.addEventListener('mousedown', (e) => {
+      if (e.target.tagName === 'INPUT') return;
+      isDown = true;
+      hasMoved = false;
+      startY = e.pageY;
+      scrollStart = el.scrollTop;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDown) {
+        isDown = false;
+        el.style.removeProperty('user-select');
+      }
+    });
+
+    el.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const dist = e.pageY - startY;
+      if (Math.abs(dist) > 3) {
+        hasMoved = true;
+        el.style.userSelect = 'none';
+        el.scrollTop = scrollStart - dist;
+      }
+    });
+
+    el.addEventListener('click', (e) => {
+      if (hasMoved) {
+        e.stopPropagation();
+        e.preventDefault();
+        hasMoved = false;
+      }
+    }, true);
+  }
+
   function openLangPicker() {
     const modal = document.getElementById('lang-picker-modal');
     if (modal) {
@@ -1076,6 +1118,17 @@
       modal.onclick = (e) => {
         if (e.target === modal) closeLangPicker();
       };
+
+      const list = document.getElementById('lang-picker-list');
+      if (list) {
+        // Bind mouse wheel across the entire modal sheet so scrolling is 100% responsive
+        modal.onwheel = (e) => {
+          list.scrollTop += e.deltaY;
+          e.preventDefault();
+        };
+        // Bind touch / mouse drag simulation
+        initDragScroll(list);
+      }
     }
   }
 
@@ -1083,6 +1136,7 @@
     const modal = document.getElementById('lang-picker-modal');
     if (modal) {
       modal.classList.add('hidden');
+      modal.onwheel = null;
     }
     document.body.style.overflow = '';
   }

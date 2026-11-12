@@ -23,30 +23,28 @@
 
   <!-- Mobile App Header (Fixed Top) -->
   <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800 pt-safe">
-    <div class="px-3.5 h-14 flex items-center justify-between">
-      <!-- Brand Logo -->
-      <a href="/zh/m" class="flex items-center gap-2 touch-card">
-        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-rose-500 flex items-center justify-center text-white text-xs font-black shadow-sm">
+    <div class="px-2.5 sm:px-3.5 h-14 flex items-center justify-between gap-1.5 min-w-0">
+      <!-- Brand Logo (Protected from translation, strictly single-line) -->
+      <a href="/zh/m" class="flex items-center gap-1.5 sm:gap-2 touch-card shrink-0 notranslate" title="AI 资讯雷达">
+        <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-rose-500 flex items-center justify-center text-white text-xs font-black shadow-sm shrink-0">
           ⚡
         </div>
-        <div class="flex flex-col">
-          <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-[15px] tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 dark:from-white dark:via-indigo-200 dark:to-white bg-clip-text text-transparent">
-              AI 资讯雷达
-            </span>
-            <span class="px-1.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 font-bold text-[9px] border border-indigo-200/40 dark:border-indigo-800/40">
-              移动版
-            </span>
-          </div>
+        <div class="flex items-center gap-1 whitespace-nowrap notranslate">
+          <span class="font-extrabold text-[13.5px] sm:text-[15px] tracking-tight bg-gradient-to-r from-slate-900 via-indigo-900 to-slate-900 dark:from-white dark:via-indigo-200 dark:to-white bg-clip-text text-transparent">
+            AI 资讯雷达
+          </span>
+          <span class="px-1.5 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400 font-bold text-[8.5px] border border-indigo-200/40 dark:border-indigo-800/40">
+            移动端
+          </span>
         </div>
       </a>
 
-      <!-- Header Actions -->
-      <div class="flex items-center gap-1.5">
+      <!-- Header Actions (Compact, responsive, zero-wrap) -->
+      <div class="flex items-center gap-1 sm:gap-1.5 shrink-0 notranslate">
         <!-- Live Status Badge -->
-        <div class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 font-mono">
+        <div class="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/50 dark:border-emerald-800/50 text-[9.5px] font-bold text-emerald-600 dark:text-emerald-400 font-mono notranslate">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 live-pulse"></span>
-          <span>实时</span>
+          <span class="hidden xs:inline">实时监控</span>
         </div>
 
         <!-- Language Picker Button -->
@@ -55,7 +53,7 @@
           id="btn-lang-picker"
           onclick="window.MobileApp.openLangPicker()" 
           title="切换语言版本"
-          class="h-7 px-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 active:scale-90 transition-transform cursor-pointer"
+          class="h-7 px-1.5 sm:px-2 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center gap-1 active:scale-90 transition-transform cursor-pointer notranslate"
         >
           <span id="lang-btn-flag">🇨🇳</span>
           <span id="lang-btn-text">简</span>
@@ -65,7 +63,7 @@
         <button 
           type="button"
           onclick="window.MobileApp.toggleTheme()" 
-          title="切换日/夜间模式"
+          title="切换日间/夜间模式"
           class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           <span id="theme-icon">🌙</span>
@@ -75,7 +73,7 @@
         <button 
           type="button"
           onclick="window.MobileApp.toggleSearchBox()" 
-          title="搜索动态"
+          title="展开搜索"
           class="w-7 h-7 rounded-lg bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 text-slate-700 dark:text-slate-300 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           🔍
@@ -85,15 +83,16 @@
         <button 
           type="button"
           onclick="window.MobileApp.refresh()" 
-          title="刷新最新数据"
+          title="刷新数据"
           class="w-7 h-7 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 border border-indigo-200/60 dark:border-indigo-800/60 text-indigo-600 dark:text-indigo-400 text-xs flex items-center justify-center active:scale-90 transition-transform cursor-pointer"
         >
           <span id="refresh-btn-icon" class="inline-block transition-transform">🔄</span>
         </button>
       </div>
     </div>
+  </header>
 
-    <!-- Collapsible Search Bar -->
+  <!-- Collapsible Search Bar -->
     <div id="mobile-search-box" class="hidden px-3.5 pb-2.5 pt-1 border-t border-slate-100 dark:border-slate-800/80">
       <div class="relative">
         <input 
@@ -281,53 +280,9 @@
         >
         <span class="absolute left-2.5 top-2 text-xs text-slate-400">🔍</span>
       </div>
-      <div id="lang-picker-list" class="flex-1 overflow-y-auto space-y-2 pr-1 no-scrollbar"></div>
-    </div>
-  </div>
-          <span class="text-indigo-600 dark:text-indigo-400 font-bold text-base">✓</span>
-        </button>
-        <button 
-          type="button"
-          onclick="window.MobileApp.selectLanguage('chinese_traditional')" 
-          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
-        >
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">🇭🇰</span>
-            <div class="text-left">
-              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">繁體中文</div>
-              <div class="text-[11px] text-slate-500 dark:text-slate-400">港澳台正體中文詞庫轉換</div>
-            </div>
-          </div>
-          <span class="text-slate-400 text-sm">→</span>
-        </button>
-        <button 
-          type="button"
-          onclick="window.MobileApp.selectLanguage('english')" 
-          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
-        >
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">🇬🇧</span>
-            <div class="text-left">
-              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">English (Global)</div>
-              <div class="text-[11px] text-slate-500 dark:text-slate-400">切换至海外英文主站 (/m)</div>
-            </div>
-          </div>
-          <span class="text-slate-400 text-sm">→</span>
-        </button>
-        <button 
-          type="button"
-          onclick="window.MobileApp.selectLanguage('japanese')" 
-          class="w-full p-3 rounded-2xl flex items-center justify-between bg-slate-50 dark:bg-slate-800/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200/80 dark:border-slate-700/80 touch-card cursor-pointer"
-        >
-          <div class="flex items-center gap-3">
-            <span class="text-2xl">🇯🇵</span>
-            <div class="text-left">
-              <div class="text-sm font-bold text-slate-900 dark:text-slate-100">日本語</div>
-              <div class="text-[11px] text-slate-500 dark:text-slate-400">AI 实时智能翻译</div>
-            </div>
-          </div>
-          <span class="text-slate-400 text-sm">→</span>
-        </button>
+      <div id="lang-picker-list" class="flex-1 mobile-scroll-list space-y-2 pr-1"></div>
+      <div class="pt-2 text-center border-t border-slate-100 dark:border-slate-800">
+        <span class="text-[10px] text-slate-400 font-medium tracking-tight">↕ 可使用鼠标滚轮或上下拖拽浏览 31 种全球语言</span>
       </div>
     </div>
   </div>
