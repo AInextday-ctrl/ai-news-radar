@@ -2808,9 +2808,16 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         # 解码 Google News 重定向链接为实际媒体原始 URL
                         if googlenewsdecoder and "news.google.com/rss/articles" in url:
                             try:
-                                dec = googlenewsdecoder.new_decoderv1(url, interval=0.1)
-                                if dec and dec.get("status") and dec.get("decoded_url"):
-                                    url = dec["decoded_url"]
+                                if hasattr(googlenewsdecoder, "gnewsdecoder"):
+                                    dec = googlenewsdecoder.gnewsdecoder(url)
+                                    if dec and isinstance(dec, dict) and dec.get("status") and dec.get("decoded_url"):
+                                        url = dec["decoded_url"]
+                                    elif dec and isinstance(dec, dict) and dec.get("url"):
+                                        url = dec["url"]
+                                elif hasattr(googlenewsdecoder, "new_decoderv1"):
+                                    dec = googlenewsdecoder.new_decoderv1(url, interval=0.1)
+                                    if dec and dec.get("status") and dec.get("decoded_url"):
+                                        url = dec["decoded_url"]
                             except Exception:
                                 pass
 
@@ -2834,8 +2841,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (限制每渠道最多穿透前 3 篇核心长文，兼顾完整度与秒级更新)
-                    needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800)) and (penetration_count < 3)
+                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (支持每渠道穿透前 10 篇核心长文，兼顾完整度与秒级更新)
+                    needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800)) and (penetration_count < 10)
                     if needs_penetration:
                         penetration_count += 1
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语

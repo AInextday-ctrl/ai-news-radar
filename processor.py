@@ -736,7 +736,7 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
     if who_zh and what_zh:
         if what_zh.startswith(who_zh):
             ev_zh = what_zh
-        elif where_zh and where_zh not in what_zh and len(where_zh) < 25:
+        elif where_zh and where_zh not in what_zh and len(where_zh) < 25 and not any(bad in where_zh for bad in ["背景", "场景", "情况", "现场"]):
             ev_zh = f"{who_zh}在{where_zh}：{what_zh}"
         else:
             ev_zh = f"{who_zh}：{what_zh}"
@@ -835,17 +835,30 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
     if data_zh:
         bullets_zh.append(f"【关键数据与实测】{data_zh.rstrip('。')}。")
     else:
+        # 智能场景感知分类：根据事件属性动态适配标签，杜绝将政经/监管事件机械套上“关键技术规格”
+        def _get_zh_detail_tag(text: str) -> str:
+            t = text.lower()
+            if any(k in t for k in ["议员", "国会", "听证", "调查", "起诉", "监管", "法案", "出口", "制裁", "白宫", "司法部", "ftc", "sec", "合规", "封存", "文件", "记录"]):
+                return "调查与监管诉求"
+            elif any(k in t for k in ["融资", "估值", "收购", "财报", "营收", "利润", "股价", "投资", "商业", "出海", "美元"]):
+                return "商业与财务细节"
+            elif any(k in t for k in ["模型", "架构", "开源", "参数", "显存", "上下文", "算法", "权重", "benchmark", "lora", "token", "gpu", "算力", "代码", "agent"]):
+                return "关键技术规格"
+            return "核心事实细节"
+
         picked = False
         for p in kp_zh:
             if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_zh) and len(p) >= 12:
-                bullets_zh.append(f"【关键技术规格】{p.rstrip('。')}。")
+                tag = _get_zh_detail_tag(p + " " + clean_t_zh)
+                bullets_zh.append(f"【{tag}】{p.rstrip('。')}。")
                 picked = True
                 break
         if not picked and briefing_zh:
             for s in re.split(r'[。！!？?]', briefing_zh):
                 s_clean = clean_bullet_text(s)
                 if len(s_clean) >= 15 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
-                    bullets_zh.append(f"【核心事实细节】{s_clean.rstrip('。')}。")
+                    tag = _get_zh_detail_tag(s_clean + " " + clean_t_zh)
+                    bullets_zh.append(f"【{tag}】{s_clean.rstrip('。')}。")
                     break
 
     # English data bullet
@@ -870,17 +883,29 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
     if data_en:
         bullets_en.append(f"[Key Metrics] {data_en.rstrip('.')}.")
     else:
+        def _get_en_detail_tag(text: str) -> str:
+            t = text.lower()
+            if any(k in t for k in ["senat", "congress", "probe", "investigat", "lawsuit", "regulat", "sanction", "export", "curb", "doj", "ftc", "sec", "preserve"]):
+                return "Regulatory & Investigation Focus"
+            elif any(k in t for k in ["funding", "valuation", "acqui", "revenue", "profit", "stock", "invest", "market", "dollar"]):
+                return "Market & Financial Detail"
+            elif any(k in t for k in ["model", "architecture", "parameter", "vram", "context", "benchmark", "token", "gpu", "compute", "code", "agent"]):
+                return "Key Technical Spec"
+            return "Key Fact Detail"
+
         picked = False
         for p in kp_en:
             if not any(is_substantially_duplicate_bullet(p, b) for b in bullets_en) and len(p) >= 15:
-                bullets_en.append(f"[Key Specification] {p.rstrip('.')}.")
+                tag = _get_en_detail_tag(p + " " + clean_t_en)
+                bullets_en.append(f"[{tag}] {p.rstrip('.')}.")
                 picked = True
                 break
         if not picked and briefing_en:
             for s in re.split(r'[\.!\?]\s+', briefing_en):
                 s_clean = clean_bullet_text(s)
                 if len(s_clean) >= 25 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
-                    bullets_en.append(f"[Context Detail] {s_clean.rstrip('.')}.")
+                    tag = _get_en_detail_tag(s_clean + " " + clean_t_en)
+                    bullets_en.append(f"[{tag}] {s_clean.rstrip('.')}.")
                     break
 
     # ==========================
@@ -900,12 +925,19 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
                 break
 
     if view_zh:
-        bullets_zh.append(f"【观点态度】{view_zh.rstrip('。')}。")
+        v_tag = "各方立场与态度"
+        if any(k in view_zh for k in ["影响", "重塑", "倒逼", "加速", "放缓", "格局", "产业链", "制衡", "风险", "走势"]):
+            v_tag = "行业影响与走向"
+        elif any(k in view_zh for k in ["覆盖", "涵盖", "包括", "涉及", "调查", "后续", "推进", "排期", "节点"]):
+            v_tag = "涉及范围与推进"
+        elif any(k in view_zh for k in ["表示", "指出", "强调", "认为", "敦促", "警告", "呼吁", "宣称", "回应"]):
+            v_tag = "核心诉求与态度"
+        bullets_zh.append(f"【{v_tag}】{view_zh.rstrip('。')}。")
     elif briefing_zh:
         for s in reversed(re.split(r'[。！!？?]', briefing_zh)):
             s_clean = clean_bullet_text(s)
             if len(s_clean) >= 15 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_zh):
-                bullets_zh.append(f"【观点影响】{s_clean.rstrip('。')}。")
+                bullets_zh.append(f"【行业研判】{s_clean.rstrip('。')}。")
                 break
 
     view_en = None
@@ -919,6 +951,24 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
         for s in reversed(ins_sents):
             if not any(is_substantially_duplicate_bullet(s, b) for b in bullets_en):
                 view_en = s
+                break
+
+    if view_en:
+        v_tag_en = "Key Position & Outlook"
+        v_low = view_en.lower()
+        if any(k in v_low for k in ["impact", "reshape", "accelerate", "slow", "supply chain", "risk", "trend"]):
+            v_tag_en = "Industry Impact & Outlook"
+        elif any(k in v_low for k in ["cover", "includ", "investigat", "next step", "schedule", "scope", "probe"]):
+            v_tag_en = "Scope & Next Steps"
+        elif any(k in v_low for k in ["urg", "warn", "call", "demand", "claim", "respons", "stat"]):
+            v_tag_en = "Official Stance & Demand"
+        bullets_en.append(f"[{v_tag_en}] {view_en.rstrip('.')}.")
+    elif briefing_en:
+        for s in reversed(re.split(r'[\.!\?]\s+', briefing_en)):
+            s_clean = clean_bullet_text(s)
+            if len(s_clean) >= 20 and not any(is_substantially_duplicate_bullet(s_clean, b) for b in bullets_en):
+                bullets_en.append(f"[Industry Analysis] {s_clean.rstrip('.')}.")
+                break
                 break
             
     if view_en:
@@ -964,15 +1014,32 @@ def extract_fact_bullets(item: Dict[str, Any], title_zh: str = "") -> Tuple[List
                     break
 
     if len(bullets_en) < 3 and len(bullets_zh) >= 3:
+        tag_map = {
+            "核心事件": "Core Event",
+            "起因与机理": "Root Cause & Context",
+            "调查与监管诉求": "Regulatory & Investigation Focus",
+            "涉及范围与推进": "Scope & Next Steps",
+            "商业与财务细节": "Market & Financial Detail",
+            "关键技术规格": "Key Technical Spec",
+            "关键数据与实测": "Key Metrics & Data",
+            "核心事实细节": "Key Fact Detail",
+            "各方立场与态度": "Official Stance & Demand",
+            "行业影响与走向": "Industry Impact & Outlook",
+            "核心诉求与态度": "Official Stance & Demand",
+            "行业研判": "Industry Analysis",
+            "观点态度": "Key Stance & Outlook",
+        }
         for idx in range(len(bullets_en), min(len(bullets_zh), 4)):
             zh_b = bullets_zh[idx]
+            zh_tag_match = re.search(r'^【([^】]+)】', zh_b)
+            zh_tag = zh_tag_match.group(1) if zh_tag_match else ""
             zh_clean = re.sub(r'^【[^】]+】\s*', '', zh_b).strip('。')
             if zh_clean:
                 try:
                     from processor import free_translate_en
                     en_trans = free_translate_en(zh_clean)
                     if en_trans and len(en_trans) >= 15:
-                        prefix = "[Perspective & Impact]" if idx >= 3 else "[Key Specification]"
+                        prefix = f"[{tag_map.get(zh_tag, 'Key Fact Detail')}]"
                         bullets_en.append(f"{prefix} {en_trans.rstrip('.')}.")
                 except Exception:
                     pass
@@ -1286,27 +1353,28 @@ def generate_smart_ai_analysis(item: Dict[str, Any], title_zh: str = "") -> Dict
 _CROSS_GROUND_CALL_COUNT = 0
 
 def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
+    """
+    Cross-Source Fact Grounding Engine (跨信源事实交叉补全与穿透引擎):
+    当新闻条目遭遇付费墙截断 (如 WSJ, Bloomberg, FT, The Information) 或正文残缺 (<140字或以 ... 结尾) 时，
+    自动利用权威即时新闻检索 (Bing News RSS / Syndicated Wires)，
+    穿透解构公开二次报道全文 (Yahoo, Reuters, CNBC, Politico, Devdiscourse, MSN 等)，
+    将真实多段落深度报道实录补充进 article_content，杜绝大模型凭空脑补，确保 100% 真实权威的事实依据。
+    """
     global _CROSS_GROUND_CALL_COUNT
-    if _CROSS_GROUND_CALL_COUNT >= 3:
+    if _CROSS_GROUND_CALL_COUNT >= 12:
         return None
-    _CROSS_GROUND_CALL_COUNT += 1
-    """
-    Cross-Source Fact Grounding Engine (跨信源事实交叉补全引擎):
-    当新闻条目遭遇付费墙截断 (如 The Information, WSJ, Bloomberg) 或正文残缺 (<140字或以 ... 结尾) 时，
-    自动提取实体关键词，通过免密实时搜索检索公开二次报道的事实段落，
-    补充进 article_content，杜绝大模型凭空脑补，确保 100% 真实权威的事实依据。
-    """
+
     content = str(item.get("article_content") or item.get("original_content") or item.get("content_snippet") or "").strip()
     source = str(item.get("source") or "").lower()
     url = str(item.get("url") or "").lower()
     title = str(item.get("title") or "").strip()
 
     is_paywalled = item.get("is_paywalled") or any(p in source or p in url for p in [
-        "the information", "theinformation.com", "bloomberg", "wsj.com", "wall street journal", "financial times", "ft.com", "economist"
+        "the information", "theinformation.com", "bloomberg", "wsj.com", "wall street journal", "financial times", "ft.com", "economist", "nytimes.com"
     ])
     is_truncated = content.endswith("...") or content.endswith("…") or len(content) < 140
 
-    if not (is_paywalled and is_truncated):
+    if not (is_paywalled or is_truncated):
         return None
 
     # 提取搜索关键词：去除媒体前缀和冗余从句
@@ -1317,35 +1385,63 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
     if len(clean_title) < 8:
         return None
 
-    print(f"  🔍 触发跨信源事实补全检索: {clean_title[:50]}...")
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-    }
-    snippets = []
-    try:
-        import urllib.parse
-        import urllib.request
-        import socket
-        socket.setdefaulttimeout(6)
-        ddg_url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(clean_title[:80])}"
-        req = urllib.request.Request(ddg_url, headers=headers)
-        with urllib.request.urlopen(req, timeout=6) as resp:
-            html_text = resp.read().decode("utf-8", errors="ignore")
-            raw_snippets = re.findall(r'<a class="result__snippet[^>]*>(.*?)</a>', html_text, re.DOTALL)
-            for s in raw_snippets:
-                clean_s = html.unescape(re.sub(r'<[^>]+>', '', s)).strip()
-                if len(clean_s) > 40 and not any(bad in clean_s.lower() for bad in ["javascript", "cookies", "access denied", "404 not found"]):
-                    if clean_s not in snippets:
-                        snippets.append(clean_s)
-                if len(snippets) >= 4:
-                    break
-    except Exception as e:
-        pass
+    _CROSS_GROUND_CALL_COUNT += 1
+    print(f"  🔍 触发跨信源深度穿透事实检索: {clean_title[:50]}...")
 
-    if snippets:
-        enriched_text = "\n\n".join(snippets)
-        print(f"  ✓ 成功检索到 {len(snippets)} 条跨信源事实依据，正文字数扩展至 {len(enriched_text)} 字")
-        return enriched_text
+    import urllib.parse
+    import urllib.request
+    import xml.etree.ElementTree as ET
+    from article_extractor import ArticleExtractor
+
+    try:
+        q = urllib.parse.quote(clean_title[:80])
+        bing_url = f"https://www.bing.com/news/search?q={q}&format=rss"
+        req = urllib.request.Request(bing_url, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+        })
+        with urllib.request.urlopen(req, timeout=7) as r:
+            root = ET.fromstring(r.read())
+            items = root.findall('.//item')
+            
+            # 1. 优先尝试解析已获授权公开报道的真实正文全文 (Yahoo, CryptoBriefing, Devdiscourse, MSN等)
+            for it in items[:6]:
+                raw_l = it.findtext('link') or ''
+                real_u = ''
+                if 'url=' in raw_l:
+                    real_u = urllib.parse.unquote(raw_l.split('url=')[1].split('&')[0])
+                elif raw_l.startswith('http'):
+                    real_u = raw_l
+
+                if not real_u:
+                    continue
+
+                # 避开已知强付费墙
+                if any(pw in real_u for pw in ['wsj.com', 'bloomberg.com', 'ft.com', 'theinformation.com', 'nytimes.com', 'economist.com']):
+                    continue
+
+                try:
+                    ext = ArticleExtractor.extract_article(real_u)
+                    if ext.get('status') == 'success' and len(ext.get('full_text') or '') >= 300:
+                        full_txt = ext['full_text'].strip()
+                        pub_name = ext.get('publisher') or real_u.split('/')[2]
+                        print(f"  ✓ 成功从公开信源 [{pub_name}] 提取深度正文 ({len(full_txt)} 字)")
+                        return full_txt
+                except Exception:
+                    pass
+
+            # 2. 若无完整正文，提取 Bing News 官方聚合的多家权威报道摘要片段
+            snippets = []
+            for it in items[:5]:
+                desc = it.findtext('description') or ''
+                clean_desc = html.unescape(re.sub(r'<[^>]+>', '', desc)).strip()
+                if len(clean_desc) > 30 and clean_desc not in snippets:
+                    snippets.append(clean_desc)
+            if snippets:
+                enriched = "\n\n".join(snippets)
+                print(f"  ✓ 聚合 {len(snippets)} 条跨信源事实要点 ({len(enriched)} 字)")
+                return enriched
+    except Exception as e:
+        logger.warning(f"Bing News cross-grounding error: {e}")
 
     return None
 
@@ -1579,21 +1675,27 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 "index": idx,
                 "title": it.get("title", ""),
                 "source": it.get("source", ""),
-                "content": (it.get("article_content") or it.get("original_content") or it.get("content_snippet", ""))[:1200],
+                "content": (it.get("article_content") or it.get("original_content") or it.get("content_snippet", ""))[:2500],
                 "suggested_category": it.get("category") or it.get("default_category", "news")
             }
             for idx, it in enumerate(chunk)
         ]
 
         prompt = f"""
-你是一个顶级科技智库的新闻主编与科技大V。请对以下最新资讯进行专业新闻简报（News Briefing）提炼与犀利AI点评。
-【关键原则】：
-1. 严禁在正文出现“据XX报道”、“由XX发布”、记者姓名或链接等杂质（信源已在界面标题栏统一展示）。
-2. 必须交代清楚新闻六要素（5W1H）：谁（Who）、在什么场合/场景（Where）、做了/说了什么具体动作或事实（What）、起因背景动因（Why），让用户无需查看原资讯详情即可完全掌握事件脉络。
-3. 【AI 点评（insight_zh）要求】：
-   - 必须深刻而幽默风趣、直指事件核心、看情况可带微讽刺口感，具有科技圈网络高赞神评/毒舌大V的鲜明语感（2-3句话）。
-   - 严禁假大空的套话（如“该动态折射出当前AI产业链正由前期的技术概念探索全面加速转向真实场景落地与产业利益再分配...”这类无意义公文废话一律严禁）。
-   - 一针见血揭穿大厂公关话术背后的真实算计或利益博弈，让读者会心一笑。
+你是一个顶级科技智库的新闻总编与前沿科技战略分析师。请对以下最新资讯进行高信息密度的专业新闻简报（News Briefing）提炼与深度产业研判。
+【核心采编与提炼原则】：
+1. 严禁在正文出现“据XX报道”、“由XX发布”、记者姓名或外链等杂质（信源已在界面标题栏统一展示）。
+2. 高事实密度（5W1H）：必须交代清楚核心实体全名（官员全名与职务、企业机构、芯片型号、法案或听证会名称、关键日期节点），清晰叙述事件动因背景与核心举措，让读者无需翻阅外媒长文即可透彻掌握事件前因后果与深度细节。
+3. 【AI 研判与技术透视（insight_zh）要求】：
+   - 必须是顶级科技智库/资深产业战略顾问级别的深刻透视（2-3句话），提供独到的商业推演、供应链影响、技术路线分析或地缘监管制衡研判。
+   - 严禁任何空洞打油诗、轻浮戏谑黑话或廉价网络俗套比喻（坚决严禁使用“老狐狸”、“巨轮撞冰山”、“深水区”、“神仙打架”、“吃瓜群众”等无意义口嗨词汇）。
+   - 严禁假大空的公文套话（如“折射出当前AI产业链加速从探索走向落地...”这类泛泛废话一律严禁）。
+   - 一针见血直击核心商业利益、技术卡点或监管合规博弈实质。
+4. 【关键要点（key_points_zh）要求】：
+   - 必须根据新闻属性动态适配真实事实要点，严禁千篇一律套用模板：
+     * 监管/政经新闻：聚焦【核心调查与诉求】、【核心涉案与合规细节】、【关键时间节点与后续】（绝不可在政治/监管新闻中标注“关键技术规格”等荒唐标签）；
+     * 商业/财务新闻：聚焦【交易与融资条款】、【财务与估值数据】、【市场格局影响】；
+     * 技术/产品新闻：聚焦【核心架构与模型参数】、【基准评测实测数据】、【部署门槛与开源协议】。
 
 【输出要求】：
 请以纯 JSON Array 形式输出（不要带有 ```json 标记），数组内每个元素格式如下：
@@ -1605,36 +1707,36 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
   "hot_score": 1到5的整数热度评分,
   "tags": ["标签1", "标签2"],
   "ai_analysis": {{
-    "briefing_zh": "新闻简报事实正文：清晰交代谁在什么场景做了/说了什么具体动作与细节、起因动因背景（2-3句完整中文，严禁包含信源或记者名字）",
-    "briefing_en": "Executive news briefing: clearly stating who, occasion, core facts, and motivation (2-3 sentences)",
+    "briefing_zh": "高密度新闻简报正文：清晰交代谁在什么场景做了什么具体举措、关键背景动因与涉案事实（2-3句完整中文，实体清晰，严禁信源记者名字）",
+    "briefing_en": "Executive news briefing: clearly stating who, context, core actions, and motivation with high factual density (2-3 sentences)",
     "elements_zh": {{
-      "who": "核心主体/人物/机构",
-      "where": "事件场合/场景",
-      "what": "核心陈述/决议/具体事实细节",
-      "why": "起因背景/深层动因"
+      "who": "核心主体/人物/机构（带全称与职务）",
+      "where": "事件场合/法律与政策场景",
+      "what": "核心诉求/举措/具体事实细节",
+      "why": "深层背景/触发原因"
     }},
     "elements_en": {{
-      "who": "Key actor/entity",
-      "where": "Occasion / context",
-      "what": "Core statement or action with details",
+      "who": "Key actor/entity with title",
+      "where": "Occasion / regulatory context",
+      "what": "Core action or demand with details",
       "why": "Key motivation or background"
     }},
-    "insight_zh": "深刻、幽默风趣、直指核心、带微讽刺的科技圈网络高赞神评（2-3句，严禁公文假大空套话，严禁在正文开头添加【AI点评】等任何标签前缀）",
-    "insight_en": "Witty, humorous, sharp tech-insider hot take and commentary without extra tag prefixes (2-3 sentences)",
+    "insight_zh": "深度产业智库研判：直击利益博弈、供应链格局或地缘监管走向的专业洞察（2-3句，严禁戏谑打油诗，严禁公文废话，严禁在正文开头添加【AI点评】等前缀）",
+    "insight_en": "Deep strategic industry take and geopolitical/technical perspective (2-3 sentences)",
     "digest_zh": "新闻简报事实正文（与briefing_zh一致）",
     "digest_en": "Executive briefing in English",
     "key_points_zh": [
-      "主体与场景简述",
-      "核心举措与细节简述",
-      "起因动因与影响简述"
+      "主体诉求与事件起因简述",
+      "关键事实与调查/财务/技术细节简述",
+      "行业影响与后续节点简述"
     ],
     "key_points_en": [
-      "Actor & context",
-      "Key action & details",
-      "Motivation & impact"
+      "Core action & key actor",
+      "Detailed factual evidence & specifics",
+      "Impact & timeline/outlook"
     ],
-    "takeaway_zh": "AI 点评（与insight_zh一致）",
-    "takeaway_en": "Tech-insider hot take (same as insight_en)"
+    "takeaway_zh": "深度产业智库研判（与insight_zh一致）",
+    "takeaway_en": "Strategic industry perspective (same as insight_en)"
   }},
   "article_content_zh": "若有检索到的深度长文事实，提供2-3段结构化的深度报道实录中文译文；若无则留空"
 }}

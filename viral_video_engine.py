@@ -21,7 +21,7 @@ import os
 import re
 import json
 import socket
-socket.setdefaulttimeout(12.0)
+socket.setdefaulttimeout(4.0)
 import urllib.request
 import urllib.parse
 from datetime import datetime, timezone, timedelta
@@ -48,37 +48,225 @@ AI_CORE_TERMS = [
     "robotics", "langgraph", "autogen", "ollama", "v0", "lovable", "bolt"
 ]
 
-# 1. 动态主题与时间窗口感知配置 (严格限制上传时间，杜绝抓取远古历史视频)
-SEARCH_TOPICS = [
-    ("AI tools tutorial workflow", "CAISBAgBEAE%3D"),      # 24小时内上传最新实操 (Today)
-    ("Claude Code Cursor AI tutorial", "CAISBAgBEAE%3D"), # 24小时内代码智能体 (Today)
-    ("DeepSeek R1 workflow demo", "CAISBAgBEAE%3D"),      # 24小时内 DeepSeek (Today)
-    ("AI agents real world tutorial", "CAISBAgBEAE%3D"),  # 24小时内智能体实操 (Today)
-    ("n8n AI automation tutorial", "CAISBAgBEAE%3D"),     # 24小时内自动化 (Today)
-    ("#shorts AI workflow viral", "CAISBAgBEAE%3D"),      # 24小时内竖屏实操 (Today)
-    ("OpenAI Anthropic Gemini AI demo", "CAISBAgDEAE%3D") # 本周前沿模型精讲 (This week)
+# 严格质量与去水门禁配置
+MIN_DYNAMIC_VIDEO_VIEWS = 10000  # 核心硬门禁：近48小时播放量必须 >= 10,000，杜绝十几播放量的劣质滥造内容
+
+# 商业路演/黑客马拉松演示/宣发广告/劣质AI创作黑名单规则
+PROMO_AND_JUNK_PATTERNS = [
+    # 1. 商业路演/黑客马拉松演示/宣发广告 (Promotional / Pitch / PR)
+    r'\bhackathon\b',
+    r'黑客马拉松',
+    r'\bpitch\s*deck\b',
+    r'\bdemo\s*day\b',
+    r'\bwebinar\b',
+    r'网络研讨会',
+    r'产品路演',
+    r'融资演示',
+    r'sponsored\s+by',
+    r'sponsored\s+video',
+    r'\bsponsor\b',
+    r'partnership\s+announcement',
+    r'investor\s+update',
+    r'quarterly\s+earnings',
+    r'stock\s+rebound',
+    
+    # 2. 劣质AI创作/粗制滥造MV/噱头营销 (Low quality AI creation / MV spam / clickbait)
+    r'music\s*video\s*by\s*chatting',
+    r'make\s*a\s*music\s*video',
+    r'how\s*to\s*make\s*mv',
+    r'chatting\s*with\s*(?:an?\s*)?ai\s*director',
+    r'制作音乐视频',
+    r'聊天制作了音乐视频',
+    r'做首mv',
+    r'5分钟做mv',
+    r'一键成片',
+    r'\bai\s*director\b',
+    r'人工智能导演',
+    
+    # 3. 割韭菜、广告与网赚噱头 (Get rich quick / Cash cow / Faceless channel / Ads)
+    r'make\s*money\s*with\s*ai',
+    r'passive\s*income',
+    r'faceless\s*(?:youtube|channel|shorts)',
+    r'side\s*hustle',
+    r'monetize\s*ai',
+    r'\bmonetized?\b',
+    r'\bmonetization\b',
+    r'product\s*ad\b',
+    r'marketing\s*ad\b',
+    r'ad\s*maker\b',
+    r'\baffiliate\b',
+    r'earn\s*\$',
+    r'cash\s*cow',
+    r'日赚',
+    r'躺赚',
+    r'零成本变现',
+    r'副业月入',
+    r'unlimited\s*video\s*generator',
+    r'kaise\s*banaye',
+    r'sheru\s*bhai',
+    r'stickman',
+    r'cartoon\s*animation',
+    r'moral\s*stor(?:y|ies)',
+    r'kahani',
+    
+    # 4. 币圈与空投诈骗 (Crypto / Airdrop)
+    r'\bairdrop\b',
+    r'\btoken\s*presale\b',
+    r'空投',
+    r'币圈'
 ]
 
-# 2. 顶流 AI 极客创作者最新视频检索 (按上传时间倒序排查最新发布)
-TOP_CREATOR_SEARCHES = [
-    ("Fireship AI", "CAISAhAB"),
-    ("Matt Wolfe AI", "CAISAhAB"),
-    ("Theo - t3.gg AI", "CAISAhAB"),
-    ("Matthew Berman AI", "CAISAhAB"),
-    ("Liam Ottley AI", "CAISAhAB"),
-    ("Two Minute Papers AI", "CAISAhAB"),
-    ("Nick Saraev AI", "CAISAhAB")
+# 开放世界全网技术雷达矩阵 (去博主中心化！杜绝绑定任何特定大V/个人，纯技术多维动态感知)
+OPEN_WORLD_TECH_RADAR_TOPICS = [
+    # 维度 1: 前沿推理大模型与底层架构 (Frontier Reasoning Models & Architecture)
+    ("Claude Code CLI tutorial workflow", "EgQIAxAB"),
+    ("DeepSeek R1 tutorial", "EgQIAxAB"),
+    ("OpenAI o3 reasoning demo", "EgQIAxAB"),
+    ("Gemini Flash Thinking tutorial", "EgQIAxAB"),
+    ("Qwen 2.5 Coder local tutorial", "EgQIAxAB"),
+    ("Llama 3 local LLM tutorial", "EgQIAxAB"),
+
+    # 维度 2: 自主智能体、协议与自动化编排 (Autonomous Agents, MCP & Automation)
+    ("Model Context Protocol MCP tutorial", "EgQIAxAB"),
+    ("AI coding agent tutorial", "EgQIAxAB"),
+    ("Browser-Use autonomous agent tutorial", "EgQIAxAB"),
+    ("LangGraph multi agent tutorial", "EgQIAxAB"),
+    ("n8n AI automation workflow tutorial", "EgQIAxAB"),
+    ("CrewAI multi agent tutorial", "EgQIAxAB"),
+
+    # 维度 3: 开发者 AI 编程与智能体 IDE (AI Coding Agents & Developer Stacks)
+    ("Cursor AI workflow tutorial", "EgQIAxAB"),
+    ("Windsurf Cascade AI coding", "EgQIAxAB"),
+    ("Aider AI coding tutorial", "EgQIAxAB"),
+    ("v0 Lovable web app tutorial", "EgQIAxAB"),
+    ("Codex AI coding agent tutorial", "EgQIAxAB"),
+
+    # 维度 4: 本地离线部署与量化加速 (Local Inference & Quantization)
+    ("Ollama local LLM tutorial", "EgQIAxAB"),
+    ("llama.cpp GGUF local model guide", "EgQIAxAB"),
+    ("DeepSeek R1 local setup guide", "EgQIAxAB"),
+
+    # 维度 5: 多模态世界模型与生成基座 (Multimodal & World Models)
+    ("ComfyUI Flux tutorial", "EgQIAxAB"),
+    ("Wan2.1 AI video tutorial", "EgQIAxAB"),
+    ("Sora Kling AI video benchmark", "EgQIAxAB"),
+
+    # 维度 6: 当日爆发力热线 (Today 24h 高爆发)
+    ("AI tools workflow demo", "EgQIAhAB"),
+    ("Claude Cursor AI workflow", "EgQIAhAB"),
+    ("AI agent workflow", "EgQIAhAB")
 ]
+
+# 保留 SEARCH_TOPICS 作为兼容别名
+SEARCH_TOPICS = OPEN_WORLD_TECH_RADAR_TOPICS
+
+def get_dynamic_news_hotspots() -> List[tuple]:
+    """
+    动态从全站实时快讯与话题专题提取当日重大热词，
+    自动派生最新探测词，确保视频雷达与今日热点 100% 联动。
+    """
+    hot_queries = []
+    try:
+        news_file = os.path.join(os.path.dirname(__file__), "data", "latest_news.json")
+        if os.path.exists(news_file):
+            with open(news_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            # 从最新快讯提取大写英文实体
+            items = data.get("grouped", {}).get("news", [])[:8]
+            for it in items:
+                title_en = it.get("title_en") or ""
+                entities = re.findall(r'\b[A-Z][a-zA-Z0-9_\-]{3,}\b', title_en)
+                for ent in entities:
+                    if ent.lower() not in ("this", "that", "with", "from", "what", "here", "news", "breaking", "nvidia", "china", "house"):
+                        candidate = f"{ent} AI tutorial"
+                        if not any(candidate == q for q, _ in hot_queries):
+                            hot_queries.append((candidate, "CAMSAggDEAE%3D"))
+                            if len(hot_queries) >= 3:
+                                break
+                if len(hot_queries) >= 3:
+                    break
+    except Exception:
+        pass
+    return hot_queries
+
+def parse_youtube_views(vr_or_text: Any) -> int:
+    """从 YouTube videoRenderer 或文本中提取真实的播放量整数"""
+    text = ''
+    if isinstance(vr_or_text, dict):
+        v_obj = vr_or_text.get('viewCountText', {})
+        if isinstance(v_obj, dict):
+            if 'simpleText' in v_obj:
+                text = v_obj['simpleText']
+            elif 'runs' in v_obj:
+                text = ''.join([r.get('text', '') for r in v_obj['runs']])
+        if not text:
+            sv_obj = vr_or_text.get('shortViewCountText', {})
+            if isinstance(sv_obj, dict):
+                text = sv_obj.get('simpleText') or sv_obj.get('accessibility', {}).get('accessibilityData', {}).get('label', '')
+    elif isinstance(vr_or_text, str):
+        text = vr_or_text
+
+    if not text:
+        return 0
+
+    t = text.lower().replace(',', '').strip()
+    m_m = re.search(r'([\d\.]+)\s*(?:m|million|百万)', t)
+    if m_m:
+        return int(float(m_m.group(1)) * 1_000_000)
+    m_w = re.search(r'([\d\.]+)\s*万', t)
+    if m_w:
+        return int(float(m_w.group(1)) * 10_000)
+    m_k = re.search(r'([\d\.]+)\s*(?:k|thousand|千)', t)
+    if m_k:
+        return int(float(m_k.group(1)) * 1_000)
+    m_num = re.search(r'(\d+)', t)
+    if m_num:
+        return int(m_num.group(1))
+    return 0
+
+def is_promotional_or_junk(title: str, author: str, summary: str = "") -> bool:
+    """甄别是否属于黑客马拉松路演、宣传广告、粗制滥造MV/音乐视频、割韭菜网赚等低质噪音"""
+    full_text = f"{title} {author} {summary}".lower()
+    for pat in PROMO_AND_JUNK_PATTERNS:
+        if re.search(pat, full_text, re.IGNORECASE):
+            return True
+    return False
+
+def calculate_video_momentum(views: int, age_hours: float) -> tuple:
+    """
+    计算近 48 小时视频的爆发力指数与每小时增长时速 (Rising Index)
+    velocity: views / hour
+    momentum_score: 带有近时加权乘数的爆发力综合得分
+    """
+    safe_age = max(0.5, min(48.0, age_hours))
+    velocity = views / safe_age
+    # 越新突破1万播放，爆发力乘数越高
+    time_weight = 1.0 + (24.0 / safe_age)
+    momentum_score = velocity * time_weight
+    return round(velocity, 1), round(momentum_score, 1)
+
+def classify_video_type(title: str) -> tuple:
+    """
+    精准识别视频业务分类与前台标签，杜绝无脑将所有内容归类为“架构剖析”
+    返回: (sub_type, purpose_zh, purpose_en)
+    """
+    t = title.lower()
+    if any(k in t for k in ["tutorial", "course", "how to", "guide", "learn", "build", "step by step", "setup", "教学", "教程", "入门", "搭建", "从零", "手把手"]):
+        return "tutorial", "🛠️ 实战教学", "🛠️ Hands-on Tutorial"
+    elif any(k in t for k in ["benchmark", "review", "vs", "versus", "comparison", "test", "eval", "breakdown", "architecture", "评测", "测评", "对比", "架构", "深拆"]):
+        return "insight", "💡 前沿评测", "💡 Frontier Benchmark"
+    else:
+        return "viral", "🔥 极客实操", "🔥 Trending Demo"
 
 def parse_relative_time_info(pub_str: str) -> tuple:
     """
     解析 YouTube / Web 相对发布时间文本（如 '14h ago', '1d ago', '1y ago', '2 weeks ago', '4个月前'），
     计算出真实的 UTC ISO 时间戳，并严格判断是否属于 24h / 48h 新近发布的真实视频。
-    严禁任何用 datetime.now() 伪造远古视频发布时间的情形！
+    返回: (dt_iso, is_24h, is_48h, age_hours)
     """
     now = datetime.now(timezone.utc)
     if not pub_str:
-        return (now - timedelta(days=14)).isoformat(), False, False
+        return (now - timedelta(days=14)).isoformat(), False, False, 336.0
         
     t = pub_str.lower().strip()
     
@@ -87,18 +275,10 @@ def parse_relative_time_info(pub_str: str) -> tuple:
         (r'(\d+)\s*(?:months?|mos?|月)', lambda v: timedelta(days=v * 30)),
         (r'(\d+)\s*(?:years?|yrs?|年)', lambda v: timedelta(days=v * 365)),
         (r'(\d+)\s*(?:weeks?|wks?|周)', lambda v: timedelta(weeks=v)),
-        (r'(\d+)\s*(?:days?|天)', lambda v: timedelta(days=v)),
-        (r'(\d+)\s*(?:hours?|hrs?|小时)', lambda v: timedelta(hours=v)),
-        (r'(\d+)\s*(?:minutes?|mins?|分)', lambda v: timedelta(minutes=v)),
-        (r'(\d+)\s*(?:seconds?|secs?|秒)', lambda v: timedelta(seconds=v)),
-        # 单字母简写 (如 14h, 1d, 2w, 4mo, 1y, 35m)
-        (r'(\d+)\s*mo\b', lambda v: timedelta(days=v * 30)),
-        (r'(\d+)\s*y\b', lambda v: timedelta(days=v * 365)),
-        (r'(\d+)\s*w\b', lambda v: timedelta(weeks=v)),
-        (r'(\d+)\s*d\b', lambda v: timedelta(days=v)),
-        (r'(\d+)\s*h\b', lambda v: timedelta(hours=v)),
-        (r'(\d+)\s*m\b', lambda v: timedelta(minutes=v)),
-        (r'(\d+)\s*s\b', lambda v: timedelta(seconds=v)),
+        (r'(\d+)\s*(?:days?|天|d\b)', lambda v: timedelta(days=v)),
+        (r'(\d+)\s*(?:hours?|hrs?|小时|h\b)', lambda v: timedelta(hours=v)),
+        (r'(\d+)\s*(?:minutes?|mins?|分|m\b)', lambda v: timedelta(minutes=v)),
+        (r'(\d+)\s*(?:seconds?|secs?|秒|s\b)', lambda v: timedelta(seconds=v)),
     ]
     
     matched_delta = None
@@ -115,18 +295,21 @@ def parse_relative_time_info(pub_str: str) -> tuple:
     elif 'just now' in t or '刚刚' in t:
         dt = now
     else:
-        # 未能识别的文本默认视为历史精选内容 (14天前)，决不伪造成刚刚发布
         dt = now - timedelta(days=14)
 
-    age_hours = (now - dt).total_seconds() / 3600.0
+    age_hours = max(0.1, (now - dt).total_seconds() / 3600.0)
     is_24h = (age_hours <= 24.0)
     is_48h = (age_hours <= 48.0)
-    return dt.isoformat(), is_24h, is_48h
+    return dt.isoformat(), is_24h, is_48h, age_hours
 
-def sanitize_video_title_zh(title: str, author: str, is_viral: bool = False, is_short: bool = False, is_recent: bool = False) -> str:
-    """生成自然纯正、零 Chinglish 缝合痕迹的高价值中文标题，且时效前缀与真实发布窗口严格一致"""
+def sanitize_video_title_zh(title: str, author: str, sub_type: str = "tutorial", is_viral: bool = False, is_short: bool = False, is_recent: bool = False) -> str:
+    """生成自然纯正、零 Chinglish 缝合痕迹的高价值中文标题，且时效与分类前缀与真实发布窗口严格一致"""
     if is_short:
-        skill = "Shorts 极客" if is_recent else "Shorts 精选"
+        skill = "Shorts 爆款" if is_recent else "Shorts 精选"
+    elif sub_type == "tutorial":
+        skill = "48h 教学" if is_recent else "实战精讲"
+    elif sub_type == "insight":
+        skill = "前沿评测" if is_recent else "架构剖析"
     elif is_recent:
         skill = "48h 极客实测"
     else:
@@ -156,7 +339,7 @@ def sanitize_video_summary_zh(summary: str, title: str, author: str) -> str:
     return f"{author} 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。"
 
 def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int = 4) -> List[Dict[str, Any]]:
-    """通过 YouTube 实时搜索接口感知全网爆点视频 (支持长视频与 Shorts 竖屏，杜绝伪造时间)"""
+    """通过 YouTube 实时搜索接口感知全网爆点视频 (严格要求 48h 内 + 至少 1 万播放量 + 杜绝宣传路演与低质创作)"""
     encoded_q = urllib.parse.quote(query)
     url = f"https://www.youtube.com/results?search_query={encoded_q}"
     if sp:
@@ -203,30 +386,53 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
                     author = owner_obj['runs'][0].get('text', '')
                 author = author or "YouTube Creator"
 
-                views = vr.get('viewCountText', {}).get('simpleText') or '爆款播放'
                 published = vr.get('publishedTimeText', {}).get('simpleText') or ''
 
-                # 严格解析真实发布时间，杜绝伪造成当前时间
-                real_pub_iso, is_recent_24h, is_recent_48h = parse_relative_time_info(published)
+                # 1. 严格解析真实发布时间与时长
+                real_pub_iso, is_recent_24h, is_recent_48h, age_hours = parse_relative_time_info(published)
+
+                # 门禁 1：必须在近 48 小时时间窗口内发布
+                if not is_recent_48h:
+                    continue
+
+                # 2. 严格解析真实播放量
+                views_count = parse_youtube_views(vr)
+
+                # 门禁 2：播放量硬门禁，必须 >= 10,000 播放量，拒绝 1-19 个播放量的自嗨/无人问津劣质垃圾视频
+                if views_count < MIN_DYNAMIC_VIDEO_VIEWS:
+                    continue
+
+                # 门禁 3：反商业路演、反黑客马拉松演示、反劣质MV噱头、反割韭菜黑名单过滤
+                if is_promotional_or_junk(title, author):
+                    continue
 
                 t_lower = title.lower()
                 if not any(re.search(r'\b' + re.escape(k) + r'\b', t_lower) if k.isascii() and len(k) <= 4 else (k in t_lower) for k in AI_CORE_TERMS):
                     continue
 
+                # 3. 计算 48h 播放增长时速与爆发力指数 (Rising Index)
+                velocity, momentum_score = calculate_video_momentum(views_count, age_hours)
+                sub_type, purpose_zh, purpose_en = classify_video_type(title)
+
                 is_short = ('#shorts' in query.lower() or '#shorts' in t_lower or vr.get('reelItemRenderer') is not None)
-                title_zh = sanitize_video_title_zh(title, author, is_viral=is_recent_48h, is_short=is_short, is_recent=is_recent_48h)
+                title_zh = sanitize_video_title_zh(title, author, sub_type=sub_type, is_viral=is_recent_48h, is_short=is_short, is_recent=is_recent_48h)
                 summary_zh = sanitize_video_summary_zh("", title, author)
                 summary_en = f"Live hands-on AI demonstration and technical tutorial by {author}: {title}"
 
-                # 真实时效标签：严禁对超过 48 小时视频贴“24h飙升”
+                # 格式化优质播放量与爆发力标签
+                if views_count >= 10000:
+                    views_display = f"{views_count/10000:.1f}万 播放"
+                else:
+                    views_display = f"{views_count:,} 播放"
+
                 tags = [author]
                 if is_recent_24h:
-                    tags.insert(0, "🔥 24h飙升")
+                    tags.insert(0, f"🔥 24h飙升 (+{int(velocity):,}/h)")
                 elif is_recent_48h:
-                    tags.insert(0, "⚡ 48h实测")
-                else:
-                    tags.insert(0, "极客实操")
-                tags.append("YouTube Shorts" if is_short else "极客教程")
+                    tags.insert(0, f"⚡ 48h实测 (+{int(velocity):,}/h)")
+                tags.append(purpose_zh)
+                if is_short:
+                    tags.append("YouTube Shorts")
 
                 vids.append({
                     "id": f"yt_{vid}",
@@ -241,15 +447,28 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
                     "author_handle": f"@{author.replace(' ', '')}",
                     "author_avatar": f"https://unavatar.io/youtube/{author}",
                     "source": f"YouTube · {author}",
-                    "views": views,
-                    "metrics": {"views": views, "format": "9:16 竖屏短视频" if is_short else "16:9 深度长视频", "platform": "shorts" if is_short else "youtube"},
+                    "views": views_display,
+                    "views_count": views_count,
+                    "velocity": velocity,
+                    "momentum_score": momentum_score,
+                    "metrics": {
+                        "views": views_display,
+                        "views_count": views_count,
+                        "velocity": f"+{int(velocity):,}/h",
+                        "momentum_score": momentum_score,
+                        "format": "9:16 竖屏短视频" if is_short else "16:9 深度长视频",
+                        "platform": "shorts" if is_short else "youtube",
+                        "skill_tag": purpose_zh
+                    },
                     "published": published or ("近期" if is_recent_48h else "精选教程"),
                     "raw_published_at": real_pub_iso,
                     "url": f"https://www.youtube.com/watch?v={vid}",
                     "embed_url": f"https://www.youtube.com/embed/{vid}",
                     "image_url": f"https://i.ytimg.com/vi/{vid}/hqdefault.jpg",
                     "category": "videos",
-                    "sub_type": "viral" if is_short else "hands_on_demo",
+                    "sub_type": sub_type,
+                    "purpose_zh": purpose_zh,
+                    "purpose_en": purpose_en,
                     "is_viral": is_recent_48h,
                     "is_recent_48h": is_recent_48h,
                     "is_recent_24h": is_recent_24h,
@@ -267,13 +486,16 @@ def search_youtube_topic(query: str, sp: Optional[str] = None, max_results: int 
     return vids
 
 def fetch_dynamic_youtube_viral_videos() -> List[Dict[str, Any]]:
-    """并发感知全网爆款 AI 视频 (长视频 + Shorts + 顶流创作者最新视频)"""
+    """
+    开放世界技术雷达：彻底打破固定博主黑盒，并发感知全网任意开发者的 48h 爆款实测。
+    按爆发力增长指数 (Rising Momentum Index) 倒序排列。
+    """
     vids = []
-    with ThreadPoolExecutor(max_workers=6) as executor:
-        futures = {executor.submit(search_youtube_topic, q, sp, 3): q for q, sp in SEARCH_TOPICS}
-        # 顶流创作者最新视频检索（每个创作者精准感知 1 条最新视频）
-        for q, sp in TOP_CREATOR_SEARCHES:
-            futures[executor.submit(search_youtube_topic, q, sp, 1)] = q
+    # 动态融合雷达词库与当日新闻热点
+    all_radar_queries = list(OPEN_WORLD_TECH_RADAR_TOPICS) + get_dynamic_news_hotspots()
+    
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        futures = {executor.submit(search_youtube_topic, q, sp, 3): q for q, sp in all_radar_queries}
             
         for fut in as_completed(futures):
             try:
@@ -281,7 +503,18 @@ def fetch_dynamic_youtube_viral_videos() -> List[Dict[str, Any]]:
                 vids.extend(res)
             except Exception:
                 pass
-    return vids
+
+    # 原子去重并严格按爆发力指数 (momentum_score) 倒序排布
+    seen = set()
+    unique_vids = []
+    for v in vids:
+        k = v.get("video_id")
+        if k and k not in seen:
+            seen.add(k)
+            unique_vids.append(v)
+
+    unique_vids.sort(key=lambda x: x.get("momentum_score", 0), reverse=True)
+    return unique_vids
 
 VERIFIED_TIKTOK_AI_VIDEOS = [   {   'aspect_ratio': '9:16',
         'author': 'AI with Zygis',
@@ -1423,6 +1656,12 @@ def fetch_tiktok_viral_videos() -> List[Dict[str, Any]]:
                                 continue
 
                             play_cnt = it.get("playCount", 0)
+                            if play_cnt < MIN_DYNAMIC_VIDEO_VIEWS:
+                                continue
+
+                            if is_promotional_or_junk(text, author_name):
+                                continue
+
                             digg_cnt = it.get("diggCount", 0)
                             views_str = f"{play_cnt:,} 播放" if play_cnt else "爆款播放"
                             likes_str = f"{digg_cnt:,} 点赞" if digg_cnt else "高赞"
@@ -1532,21 +1771,40 @@ def fetch_tiktok_viral_videos() -> List[Dict[str, Any]]:
             combined.append(it)
     return combined
 
-def interleave_videos_by_creator(videos: List[Dict[str, Any]], max_per_creator: int = 2) -> List[Dict[str, Any]]:
+def interleave_videos_by_creator(videos: List[Dict[str, Any]], max_per_creator: int = 1) -> List[Dict[str, Any]]:
     """
     按创作者进行轮询交错 (Round-Robin Interleaving)，
     保证同一作者不连续出现，且同一作者在爆点专栏中受严格限额保护，
     确保前 10 条视频覆盖最大化的创作者多样性。
-    特别优化：严格将 48h 内真实最新视频置于最前，再无缝衔接经典高分教程。
+    特别优化：严格将 48h 内按爆发力指数 (momentum_score) 排序的视频置于最前，再无缝衔接经典高分教程。
+    严格剔除任何播放量低于 10,000 或带有商业路演/黑客马拉松/劣质创作标签的条目。
     """
     if not videos:
         return []
 
     from collections import defaultdict
     
-    # 拆分为 48h 真实最新视频与历史教程/经典沉淀，分层进行创作者交错
-    recent_vids = [v for v in videos if v.get("is_recent_48h")]
-    evergreen_vids = [v for v in videos if not v.get("is_recent_48h")]
+    # 严格门禁：过滤播放量低于 10,000 或带有宣传路演/劣质标签的视频
+    filtered_vids = []
+    for v in videos:
+        v_title = v.get("title_en") or v.get("title") or ""
+        v_author = v.get("author") or ""
+        if is_promotional_or_junk(v_title, v_author):
+            continue
+        v_cnt = v.get("views_count") or parse_youtube_views(v.get("views") or v.get("metrics", {}).get("views"))
+        # 只要能解析出播放量且小于 10,000，一律淘汰
+        if v_cnt > 0 and v_cnt < MIN_DYNAMIC_VIDEO_VIEWS:
+            continue
+        # 若完全解析不出且无 views 描述，非权威白名单直接剔除
+        if v_cnt == 0 and not v.get("views"):
+            continue
+        filtered_vids.append(v)
+
+    recent_vids = [v for v in filtered_vids if v.get("is_recent_48h")]
+    evergreen_vids = [v for v in filtered_vids if not v.get("is_recent_48h")]
+
+    # 48h 真实视频严格按爆发力指数 (Rising Index) 倒序排布
+    recent_vids.sort(key=lambda x: x.get("momentum_score", 0), reverse=True)
 
     def _interleave(v_list):
         buckets = defaultdict(list)

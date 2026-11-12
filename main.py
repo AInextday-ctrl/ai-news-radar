@@ -24,6 +24,7 @@ import httpx
 from fetcher import fetch_all_sources, get_chatbot_arena_top5, get_arxiv_curated_papers, extract_clean_video_id, normalize_title_fingerprint, evaluate_dynamic_pinned_status, get_smart_cover_url, resolve_product_hunt_redirect, enrich_tweet_media
 from processor import process_items_batch, clean_news_text, generate_smart_fallback_summary, free_translate_zh, free_translate_en
 from config import CATEGORIES, AI_CREATORS
+from viral_video_engine import is_promotional_or_junk, parse_youtube_views, MIN_DYNAMIC_VIDEO_VIEWS, interleave_videos_by_creator
 
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
@@ -795,6 +796,11 @@ def extract_hero_media_showcase(items: list, blacklist_keywords: set, consumed_i
         if it.get("processed_status") in ["DISQUALIFIED", "REJECTED"] or it.get("wechat_audit", {}).get("status") in ["DISQUALIFIED", "REJECTED"]:
             continue
         if not it.get("is_recent_24h") or diff_sec > 86400:
+            continue
+
+        # 【一票否决 4】：必须有真实播放量且 >= 10,000，且通过反宣传路演与反劣质创作黑名单
+        v_views = it.get("views_count") or parse_youtube_views(it.get("views") or it.get("metrics", {}).get("views"))
+        if v_views < MIN_DYNAMIC_VIDEO_VIEWS or is_promotional_or_junk(title_lower, source_lower):
             continue
         raw_pub = str(it.get("raw_published_at") or "")
         if ((".257" in raw_pub or ".258" in raw_pub) and "2026-11-08T0" in raw_pub) or it.get("id") in {
@@ -1909,6 +1915,8 @@ def save_news(items: list):
             ), reverse=True)
         elif cat_key == "tools":
             grouped[cat_key] = _interleave_tools_multi_source(grouped[cat_key])
+        elif cat_key == "videos":
+            grouped[cat_key] = interleave_videos_by_creator(grouped[cat_key])
         else:
             grouped[cat_key].sort(key=lambda x: (
                 1 if x.get("is_pinned") and evaluate_dynamic_pinned_status(x) else 0,
@@ -2313,8 +2321,21 @@ def run_pipeline():
 
         diff = now_ts - parse_time_for_sort(it)
 
-        # 视频专属：跨信源原子级去重与创作者配额防霸屏
+        # 视频专属：质量门禁、反宣传营销、跨信源原子级去重与创作者配额防霸屏
         if it.get("category") == "videos":
+            # 1. 过滤商业路演/黑客马拉松/劣质AI创作噱头
+            v_title = it.get("title_en") or it.get("title") or it.get("title_zh") or ""
+            v_author = it.get("author") or ""
+            if is_promotional_or_junk(v_title, v_author):
+                continue
+
+            # 2. 严格播放量硬门禁：必须 >= 10,000，剔除 1-19 个播放量的自嗨/无人问津劣质垃圾视频
+            v_cnt = it.get("views_count") or parse_youtube_views(it.get("views") or it.get("metrics", {}).get("views"))
+            if v_cnt > 0 and v_cnt < MIN_DYNAMIC_VIDEO_VIEWS:
+                continue
+            if v_cnt == 0 and not it.get("views"):
+                continue
+
             vid = extract_clean_video_id(it.get("url", "")) or it.get("video_id", "")
             tfp = normalize_title_fingerprint(it.get("title", "") or it.get("title_zh", ""))
             if vid and vid in seen_video_ids:

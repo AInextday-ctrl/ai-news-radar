@@ -7503,6 +7503,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                 <a href="${jumpUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[9px] px-1.5 py-0.5 rounded bg-slate-200/90 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-950/60 border border-slate-300 dark:border-slate-700 shrink-0 notranslate font-semibold transition-colors" title="Source">${isZh ? "原站 ↗" : "Source ↗"}</a>
               </div>
               <div class="flex items-center space-x-1.5 shrink-0 ml-auto">
+                ${item.views ? `<span class="px-1.5 py-0.5 rounded bg-rose-500/10 text-rose-600 dark:text-rose-400 font-bold border border-rose-500/20 text-[9px] shrink-0 font-mono">🔥 ${String(item.views).replace(/^[🔥👁️\s]+/, '')}</span>` : ''}
                 ${todayBadge}
                 <span class="text-slate-500 dark:text-slate-400 font-mono whitespace-nowrap shrink-0" title="${timeObj.display}">🕒 ${timeObj.relative || timeObj.display}</span>
               </div>

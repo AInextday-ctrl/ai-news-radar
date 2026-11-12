@@ -415,9 +415,9 @@
     } else if (currentTab === 'videos') {
       items = (cachedData.grouped && cachedData.grouped.videos) || [];
       if (currentFilter === 'tutorial') {
-        items = items.filter(it => it.sub_type === 'tutorial' || (it.title || '').includes('教学') || (it.title || '').includes('Tutorial'));
+        items = items.filter(it => it.sub_type === 'tutorial' || (it.title || '').includes('教学') || (it.title || '').includes('Tutorial') || (it.purpose_zh || '').includes('教学'));
       } else if (currentFilter === 'insight') {
-        items = items.filter(it => it.sub_type !== 'tutorial');
+        items = items.filter(it => it.sub_type === 'insight' || (it.title || '').includes('评测') || (it.title || '').includes('架构') || (it.purpose_zh || '').includes('评测') || (it.purpose_zh || '').includes('剖析'));
       }
     } else if (currentTab === 'top') {
       items = cachedData.top_three || [];
@@ -643,7 +643,13 @@
     const timeAgo = formatTimeAgo(item.raw_published_at);
     const imgUrl = item.image_url ? optimizeImageUrl(item.image_url, 640) : '';
     const videoUrl = item.url || '#';
-    const subType = item.sub_type === 'tutorial' ? (isZh ? '🛠️ 实战教学' : '🛠️ Tutorial') : (isZh ? '💡 架构剖析' : '💡 Breakdown');
+    const subType = (item.sub_type === 'tutorial' || (item.title || '').includes('教学') || (item.title || '').includes('实操'))
+      ? (isZh ? '🛠️ 实战教学' : '🛠️ Tutorial')
+      : (item.sub_type === 'insight' || (item.title || '').includes('评测') || (item.title || '').includes('测试') || (item.title || '').includes('架构'))
+      ? (isZh ? '💡 前沿评测' : '💡 Breakdown')
+      : (item.purpose_zh || (isZh ? '⚡ 极客实测' : '⚡ Tech Demo'));
+    const rawViews = item.views || item.metrics?.views || '';
+    const cleanViews = rawViews ? String(rawViews).replace(/^[🔥👁️\s]+/, '') : '';
 
     return `
       <a 
@@ -661,6 +667,11 @@
               ▶
             </div>
           </div>
+          ${cleanViews ? `
+            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-rose-600/90 backdrop-blur-xs text-white text-[10px] font-mono font-bold shadow-xs">
+              🔥 ${cleanViews}
+            </span>
+          ` : ''}
           <span class="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/80 backdrop-blur-xs text-white text-[10px] font-mono font-bold">
             ${subType}
           </span>
@@ -671,8 +682,11 @@
             ${title}
           </h3>
           <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-mono">
-            <span>${author}</span>
-            <span>${timeAgo}</span>
+            <span class="truncate max-w-[150px] font-medium text-slate-700 dark:text-slate-300">${author}</span>
+            <div class="flex items-center gap-2 shrink-0">
+              ${cleanViews ? `<span class="text-rose-600 dark:text-rose-400 font-bold">${cleanViews}</span>` : ''}
+              <span>${timeAgo}</span>
+            </div>
           </div>
         </div>
       </a>
