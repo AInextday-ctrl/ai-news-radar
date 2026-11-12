@@ -3333,7 +3333,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
         if re.search(pattern_celeb, en_content, re.DOTALL):
             en_content = re.sub(pattern_celeb, r'\1\n' + celeb_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
 
-        pattern_arena = r'(<div class="space-y-1\.5 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-arena">)(.*?)(</div>\s*</div>\s*<!-- 天梯直达底栏 -->)'
+        pattern_arena = r'(<div class="space-y-1\.5 flex-1 min-h-0 overflow-y-auto pr-1\.5 custom-scrollbar" id="stream-arena">)(.*?)(</div>\s*</div>\s*<!-- (?:天梯直达底栏|Arena Leaderboard Quick Access Footer) -->)'
         if re.search(pattern_arena, en_content, re.DOTALL):
             en_content = re.sub(pattern_arena, r'\1\n' + arena_cards_en_html + r'\n            \3', en_content, flags=re.DOTALL)
 
