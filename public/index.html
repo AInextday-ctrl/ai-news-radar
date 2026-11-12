@@ -249,7 +249,7 @@
       contain-intrinsic-size: auto 600px;
     }
   </style>
-  <meta name="ssr-updated" content="2026-11-12T05:18:43.577219+00:00">
+  <meta name="ssr-updated" content="2026-11-12T05:33:13.070353+00:00">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/1XMzcgL9OmY/maxresdefault.jpg&w=400&output=webp&q=85" fetchpriority="high">
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
@@ -663,7 +663,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 0.1h ago
+              YouTube Lab · 0.3h ago
             </div>
           </div>
         </div>
@@ -727,7 +727,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 0.3h ago
+              YouTube Lab · 0.6h ago
             </div>
           </div>
         </div>
@@ -1501,8 +1501,34 @@ you can tell an agent to a...</p>
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('a10f0d2d57b79a99')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div>
+                  <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Financial Times</span>
+                      <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-medium">Dispatch</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-mono">Wire</span>
+                  </div>
+                  <button type="button" onclick="openAiNewsModal('a10f0d2d57b79a99')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                    AMD shares rose 4%+ after hours after closing up 7.3%, while Broadcom gained 2.4% after hours following a 4% gain, as Nv
+                  </button>
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                    Nvidia's board is reportedly evaluating the potential ousting of CEO Jensen Huang, causing the company's stock to plunge nearly 9% in after-hours trading. Meanwhile, competitors like AMD and Broadcom rallied as market sentiment shifted in their favor
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-2.5 mt-3 border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <button type="button" onclick="event.stopPropagation(); openAiNewsModal('a10f0d2d57b79a99')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <span>📋</span>
+                    <span>AI Analysis</span>
+                  </button>
+                  <a href="https://www.ft.com/content/a93307a7-e2cd-4abd-bd89-c38832d8c40e" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    Read Source ↗
+                  </a>
+                </div>
+              </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('9530a68d3c419af7')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Sources: the Commerce Department is finalizing a semiconductor control update that would prevent remote access and chip " width="480" height="270" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Sources: the Commerce Department is finalizing a semiconductor control update that would prevent remote access and chip " width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -1730,32 +1756,6 @@ you can tell an agent to a...</p>
                       <span>AI Analysis</span>
                     </button>
                     <a href="https://www.axios.com/2026/11/11/trump-lutnick-nvidia-china-chip-export-controls" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('faae36d0e37b885a')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//images.unsplash.com/photo-1508614589041-895b88991e3e%3Fq%3D80%26w%3D1200%26auto%3Dformat%26fit%3Dcrop&w=480&output=webp&q=80" alt="Sources: Scott Bessent confronted Howard Lutnick last week over the Commerce Dept. not adding Megaspeed to the Entity Li" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Axios</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('faae36d0e37b885a')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Sources: Scott Bessent confronted Howard Lutnick last week over the Commerce Dept. not adding Megaspeed to the Entity Li
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      Treasury Secretary Scott Bessent confronted Commerce Secretary Howard Lutnick last week over the failure to add Megaspeed to the Entity List. The Commerce Department has since denied the confrontation occurred, highlighting internal friction regardin
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('faae36d0e37b885a')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.axios.com/2026/11/11/bessent-lutnick-megaspeed-nvidia-china-chips" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                       Read Source ↗
                     </a>
                   </div>
