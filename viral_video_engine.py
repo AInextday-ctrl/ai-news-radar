@@ -258,15 +258,61 @@ def classify_video_type(title: str) -> tuple:
     else:
         return "viral", "🔥 极客实操", "🔥 Trending Demo"
 
+class VideoTimeTuple(tuple):
+    """
+    智能兼容元组容器：
+    1. 完美向下兼容 3 元组解包 `iso_str, is_24h, is_48h = parse_relative_time_info(...)`；
+    2. 完美向上支持 4 元组解包 `iso_str, is_24h, is_48h, age_hours = parse_relative_time_info(...)`；
+    3. 支持属性访问 `.iso_str`、`.is_24h`、`.is_48h`、`.age_hours`。
+    """
+    def __new__(cls, dt_iso: str, is_24h: bool, is_48h: bool, age_hours: float):
+        obj = super().__new__(cls, (dt_iso, is_24h, is_48h, age_hours))
+        obj._dt_iso = dt_iso
+        obj._is_24h = is_24h
+        obj._is_48h = is_48h
+        obj._age_hours = age_hours
+        return obj
+
+    @property
+    def iso_str(self) -> str:
+        return self._dt_iso
+
+    @property
+    def is_24h(self) -> bool:
+        return self._is_24h
+
+    @property
+    def is_48h(self) -> bool:
+        return self._is_48h
+
+    @property
+    def age_hours(self) -> float:
+        return self._age_hours
+
+    def __iter__(self):
+        import sys
+        try:
+            f = sys._getframe(1)
+            op = f.f_code.co_code[f.f_lasti]
+            import dis
+            if dis.opname[op] == 'UNPACK_SEQUENCE':
+                cnt = f.f_code.co_code[f.f_lasti + 1]
+                if cnt == 3:
+                    return iter((self[0], self[1], self[2]))
+        except Exception:
+            pass
+        return super().__iter__()
+
+
 def parse_relative_time_info(pub_str: str) -> tuple:
     """
     解析 YouTube / Web 相对发布时间文本（如 '14h ago', '1d ago', '1y ago', '2 weeks ago', '4个月前'），
     计算出真实的 UTC ISO 时间戳，并严格判断是否属于 24h / 48h 新近发布的真实视频。
-    返回: (dt_iso, is_24h, is_48h, age_hours)
+    返回: VideoTimeTuple(dt_iso, is_24h, is_48h, age_hours)
     """
     now = datetime.now(timezone.utc)
     if not pub_str:
-        return (now - timedelta(days=14)).isoformat(), False, False, 336.0
+        return VideoTimeTuple((now - timedelta(days=14)).isoformat(), False, False, 336.0)
         
     t = pub_str.lower().strip()
     
@@ -300,9 +346,9 @@ def parse_relative_time_info(pub_str: str) -> tuple:
     age_hours = max(0.1, (now - dt).total_seconds() / 3600.0)
     is_24h = (age_hours <= 24.0)
     is_48h = (age_hours <= 48.0)
-    return dt.isoformat(), is_24h, is_48h, age_hours
+    return VideoTimeTuple(dt.isoformat(), is_24h, is_48h, age_hours)
 
-def sanitize_video_title_zh(title: str, author: str, sub_type: str = "tutorial", is_viral: bool = False, is_short: bool = False, is_recent: bool = False) -> str:
+def sanitize_video_title_zh(title: str, author: str, sub_type: str = None, is_viral: bool = False, is_short: bool = False, is_recent: bool = False) -> str:
     """生成自然纯正、零 Chinglish 缝合痕迹的高价值中文标题，且时效与分类前缀与真实发布窗口严格一致"""
     if is_short:
         skill = "Shorts 爆款" if is_recent else "Shorts 精选"

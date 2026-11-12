@@ -83,6 +83,12 @@ class TestVideoPipeline(unittest.TestCase):
                 f"文本 '{text}' 期望 48h={expected_48h}，实际={is_48h}"
             )
 
+        # 同时测试 4 元组解包与属性访问兼容性
+        iso_4, is_24_4, is_48_4, age_hours = parse_relative_time_info("2 hours ago")
+        self.assertTrue(is_24_4)
+        self.assertTrue(is_48_4)
+        self.assertAlmostEqual(age_hours, 2.0, delta=0.5)
+
     def test_sanitize_video_title_zh_prefix_isolation(self):
         """测试中文标题前缀隔离：历史视频严禁打上【48h 极客实测】前缀"""
         title = "How to Build AI Agents with Claude"
@@ -97,6 +103,14 @@ class TestVideoPipeline(unittest.TestCase):
         # 真正近期视频 -> 允许【48h 极客实测】
         recent_title = sanitize_video_title_zh(title, author, is_viral=False, is_short=False, is_recent=True)
         self.assertIn("48h 极客实测", recent_title)
+
+        # 真正近期教学视频 -> 允许【48h 教学】
+        recent_tutorial = sanitize_video_title_zh(title, author, sub_type="tutorial", is_viral=False, is_short=False, is_recent=True)
+        self.assertIn("48h 教学", recent_tutorial)
+
+        # 真正近期评测视频 -> 允许【前沿评测】
+        recent_insight = sanitize_video_title_zh(title, author, sub_type="insight", is_viral=False, is_short=False, is_recent=True)
+        self.assertIn("前沿评测", recent_insight)
 
         # 历史 Shorts -> 必须是【Shorts 精选】而非【Shorts 极客】
         short_historical = sanitize_video_title_zh(title, author, is_viral=False, is_short=True, is_recent=False)
