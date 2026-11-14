@@ -4819,6 +4819,87 @@
       }
     },
     {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-13T23:50:12Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-13T23:50:12Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-13T23:50:12Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-13T23:50:12Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
+    },
+    {
       "id": "f61ef36fd73df6bd",
       "title": "Amazon has a plan to index the world’s online shopping data",
       "title_en": "Amazon has a plan to index the world’s online shopping data",
@@ -5874,14 +5955,14 @@
       "author_avatar": "https://unavatar.io/youtube/Stefan 3D AI",
       "source": "YouTube · Stefan 3D AI",
       "views": "1.9万 播放",
-      "views_count": 19190,
-      "velocity": 1199.4,
-      "momentum_score": 2998.4,
+      "views_count": 19288,
+      "velocity": 1205.5,
+      "momentum_score": 3013.8,
       "metrics": {
         "views": "1.9万 播放",
-        "views_count": 19190,
-        "velocity": "+1,199/h",
-        "momentum_score": 2998.4,
+        "views_count": 19288,
+        "velocity": "+1,205/h",
+        "momentum_score": 3013.8,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -5899,19 +5980,13 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,199/h)",
+        "🔥 24h飙升 (+1,205/h)",
         "Stefan 3D AI",
         "🛠️ 实战教学"
       ],
       "content_snippet": "Stefan 3D AI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Stefan 3D AI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Stefan 3D AI: 🔴Epic AI MegaJam Day 2 - Building a UE5 Game with AI Agents",
-      "is_pinned": false,
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-14T08:47:52.164690+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -6922,6 +6997,89 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (78分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_deepseek_reasoning",
+      "sub_type": "reasoning",
+      "model_family": "deepseek_r4",
+      "purpose_zh": "🧠 深度推理 · 长思考链拆解与反思式推演",
+      "purpose_en": "🧠 Deep Reasoning · Extended Logic Decoupling & Reflection",
+      "title_zh": "💡【极限长思考链】DeepSeek-R4 / o3-pro 深度思考极客解锁模板：开启自适应多步反思",
+      "title_en": "💡 [Extended Logic Chains] DeepSeek-R4 & o3-pro Deep Reasoning Decoupling & Reflection Prompt",
+      "url": "https://github.com/deepseek-ai/DeepSeek-R4",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "社区实测",
+      "category": "prompts",
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 97,
+      "raw_published_at": "2026-11-13T14:50:12Z",
+      "recommended_model": "DeepSeek-R4 / OpenAI o3-pro",
+      "temp_advice": "建议温度 0.6 | reasoning_effort: high",
+      "metrics": {
+        "type": "🧠 深度推理",
+        "model": "DeepSeek-R4",
+        "temp": "0.6"
+      },
+      "content_snippet": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "summary_zh": "强制模型展开反思性长推理链，分析核心痛点、权衡多方案优劣，并列出边界条件与可能漏洞。",
+      "summary_en": "Forces LLMs to expand reflexive chain-of-thought, examine boundary conditions, and test assumptions.",
+      "prompt_content_zh": "请不要直接给出结论。请以资深算法架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "prompt_content_en": "Do not jump straight to the conclusion. Adopt the persona of a Principal Algorithm Architect and Critical Theorist, expanding your chain of thought step by step:\n1. Deconstruct the underlying root problem into its mathematical and systemic essence;\n2. Benchmark at least three distinct architecture paradigms across latency, scale, and compute trade-offs;\n3. Rigorously falsify assumptions and uncover failure modes at extreme boundary conditions;\n4. Deliver production-ready code alongside a concrete verification checklist.",
+      "prompt_content": "请不要直接给出结论。请以资深架构师兼批判性学者的身份，使用步骤分解法展开深度思考：\n1. 剖析底层核心痛点与数学本质；\n2. 横向权衡至少三种架构方案的性能与成本边界；\n3. 列出所有隐性假设与极端边界可能引发的故障点；\n4. 给出包含生产级代码与自动化验证清单的最终交付结果。",
+      "tags": [
+        "Prompt神咒",
+        "逻辑推理",
+        "DeepSeek-R4"
+      ],
+      "created_at": "2026-11-13T14:50:12Z",
+      "title": "💡【极限长思考链】DeepSeek-R4 / o3-pro 深度思考极客解锁模板：开启自适应多步反思"
+    },
+    {
+      "id": "prompt-image-flux-cyberpunk-01",
+      "title_zh": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
+      "title_en": "Flux.1 / Midjourney Cinematic Cyberpunk Portrait",
+      "category": "prompts",
+      "scenario_label": "🎨 灵感生图",
+      "target_model": "Black Forest Flux.1 / Midjourney v6.1",
+      "model_family": "Flux",
+      "model_tier_score": 97,
+      "generation_tier": "sota",
+      "purpose_zh": "8K 超逼真电影质感与丁达尔光效",
+      "temp_advice": "CFG: 3.5, Steps: 28",
+      "variables": [
+        "{{主体描述}}",
+        "{{色调氛围}}",
+        "{{构图景别}}"
+      ],
+      "prompt_content_zh": "电影级特写镜头，{{主体描述}}，站在潮湿的雨夜霓虹街头，反射着 {{色调氛围}} 的微光，皮肤肌理清晰细腻，真实的毛孔与水珠光泽，浅景深，光线柔和，哈苏 80mm f/1.8 镜头质感，大师级构图，8K 超高清分辨率 --ar 16:9 --v 6.1 --style raw",
+      "prompt_content_en": "Cinematic close-up portrait of {{Subject Description}}, standing on a wet neon-lit street after rain, subtle volumetric Tyndall lighting, ultra-realistic skin pores and reflections, shallow depth of field, Hasselblad 80mm f/1.8 lens aesthetics, 8k raw masterpiece.",
+      "sample_output": {
+        "type": "image",
+        "title": "Flux.1 实测生成效果图 (带真实出图大图)",
+        "media_url": "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7/original=true/936f0e8d-c76f-4aa7-8b5c-37349f9b7da7.jpeg",
+        "content": "模型: Flux.1 Dev | 采样器: Euler a | 步数: 28 | 引导词权重 (CFG): 3.5 | 种子: 34918204",
+        "title_en": "Verified Sample Output (Black Forest Flux.1 / Midjourney v6.1)",
+        "content_en": "Model: Flux.1 Dev | Sampler: Euler a | Steps: 28 | CFG Scale: 3.5 | Resolution: 8K Raw"
+      },
+      "usage_guide_zh": "将英文提示词复制进 Flux.1 WebUI、ComfyUI 或 Midjourney，可获得质感极佳的照片级肖像。",
+      "created_at": "2026-11-13T14:50:12Z",
+      "variables_en": [
+        "{{Subject Description}}",
+        "{{Color & Mood}}",
+        "{{Shot Composition}}"
+      ],
+      "scenario_label_en": "🎨 Image Gen",
+      "purpose_en": "8K Photorealistic Cinema & Tyndall Lighting",
+      "temp_advice_en": "CFG: 3.5, Steps: 28",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-13T14:50:12Z",
+      "recommended_model": "Black Forest Flux.1 / Midjourney v6.1",
+      "title": "Flux.1 / Midjourney 电影级光影人像与赛博机能",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
     },
     {
       "id": "8aeea9c57c1665d8",
@@ -8325,14 +8483,14 @@
       "author_avatar": "https://unavatar.io/youtube/TheAIGRID",
       "source": "YouTube · TheAIGRID",
       "views": "6.4万 播放",
-      "views_count": 63867,
-      "velocity": 2661.1,
-      "momentum_score": 5322.2,
+      "views_count": 63999,
+      "velocity": 2666.6,
+      "momentum_score": 5333.2,
       "metrics": {
         "views": "6.4万 播放",
-        "views_count": 63867,
-        "velocity": "+2,661/h",
-        "momentum_score": 5322.2,
+        "views_count": 63999,
+        "velocity": "+2,666/h",
+        "momentum_score": 5333.2,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -8350,7 +8508,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+2,661/h)",
+        "🔥 24h飙升 (+2,666/h)",
         "TheAIGRID",
         "🔥 极客实操"
       ],
@@ -8531,8 +8689,8 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】Eigi and AI：PixVerse V6 – 在几分钟内从文本和图像到电影人工智能视频",
-      "title_zh": "【48h 极客实测】Eigi and AI：PixVerse V6 – 在几分钟内从文本和图像到电影人工智能视频",
+      "title": "【48h 极客实测】Eigi and AI：PixVerse V6 – 在几分钟内从文本和图像到电影 AI 视频",
+      "title_zh": "【48h 极客实测】Eigi and AI：PixVerse V6 – 在几分钟内从文本和图像到电影 AI 视频",
       "title_en": "PixVerse V6 – From Text and Images to Cinematic AI Videos In Minutes",
       "author": "Eigi and AI",
       "author_handle": "@EigiandAI",
@@ -8587,22 +8745,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】Google Antigravity：使用 Gemini 4 Hydrogen 维护代码库",
-      "title_zh": "【48h 极客实测】Google Antigravity：使用 Gemini 4 Hydrogen 维护代码库",
-      "title_en": "Maintain Codebases with Gemini 4 Hydrogen",
+      "title": "【48h 极客实测】Google Antigravity：Gemini 4 Hydrogen 用于代码维护",
+      "title_zh": "【48h 极客实测】Google Antigravity：Gemini 4 Hydrogen 用于代码维护",
+      "title_en": "Gemini 4 Hydrogen For Code Maintenance",
       "author": "Google Antigravity",
       "author_handle": "@GoogleAntigravity",
       "author_avatar": "https://unavatar.io/youtube/Google Antigravity",
       "source": "YouTube · Google Antigravity",
-      "views": "7.2万 播放",
-      "views_count": 72335,
-      "velocity": 3014.0,
-      "momentum_score": 6027.9,
+      "views": "7.3万 播放",
+      "views_count": 72549,
+      "velocity": 3022.9,
+      "momentum_score": 6045.8,
       "metrics": {
-        "views": "7.2万 播放",
-        "views_count": 72335,
-        "velocity": "+3,014/h",
-        "momentum_score": 6027.9,
+        "views": "7.3万 播放",
+        "views_count": 72549,
+        "velocity": "+3,022/h",
+        "momentum_score": 6045.8,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -8620,7 +8778,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+3,014/h)",
+        "🔥 24h飙升 (+3,022/h)",
         "Google Antigravity",
         "🔥 极客实操"
       ],
@@ -10561,22 +10719,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】AI Search：新的本地顶级AI图像编辑器来了！",
-      "title_zh": "【48h 极客实测】AI Search：新的本地顶级AI图像编辑器来了！",
-      "title_en": "New top local AI image editor is here!",
+      "title": "【48h 极客实测】AI Search：新的本地顶级AI图像编辑器来了！极小极大图像",
+      "title_zh": "【48h 极客实测】AI Search：新的本地顶级AI图像编辑器来了！极小极大图像",
+      "title_en": "New top local AI image editor is here! Minimax Image",
       "author": "AI Search",
       "author_handle": "@AISearch",
       "author_avatar": "https://unavatar.io/youtube/AI Search",
       "source": "YouTube · AI Search",
       "views": "15.0万 播放",
-      "views_count": 150008,
-      "velocity": 3125.2,
-      "momentum_score": 4687.8,
+      "views_count": 150168,
+      "velocity": 3128.5,
+      "momentum_score": 4692.8,
       "metrics": {
         "views": "15.0万 播放",
-        "views_count": 150008,
-        "velocity": "+3,125/h",
-        "momentum_score": 4687.8,
+        "views_count": 150168,
+        "velocity": "+3,128/h",
+        "momentum_score": 4692.8,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -10594,7 +10752,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+3,125/h)",
+        "⚡ 48h实测 (+3,128/h)",
         "AI Search",
         "🔥 极客实操"
       ],
@@ -20333,22 +20491,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Dave Ebbelaar：本地 AI 解释 - 构建私人 Claude/ChatGPT 应用程序",
-      "title_zh": "【48h 教学】Dave Ebbelaar：本地 AI 解释 - 构建私人 Claude/ChatGPT 应用程序",
-      "title_en": "Local AI Explained - Build a Private Claude/ChatGPT App",
+      "title": "【48h 教学】Dave Ebbelaar：30 分钟学习本地人工智能 - 免费在本地运行法学硕士",
+      "title_zh": "【48h 教学】Dave Ebbelaar：30 分钟学习本地人工智能 - 免费在本地运行法学硕士",
+      "title_en": "Learn Local AI in 30 Minutes - Run LLMs locally for FREE",
       "author": "Dave Ebbelaar",
       "author_handle": "@DaveEbbelaar",
       "author_avatar": "https://unavatar.io/youtube/Dave Ebbelaar",
       "source": "YouTube · Dave Ebbelaar",
       "views": "1.5万 播放",
-      "views_count": 14852,
-      "velocity": 309.4,
-      "momentum_score": 464.1,
+      "views_count": 14881,
+      "velocity": 310.0,
+      "momentum_score": 465.0,
       "metrics": {
         "views": "1.5万 播放",
-        "views_count": 14852,
-        "velocity": "+309/h",
-        "momentum_score": 464.1,
+        "views_count": 14881,
+        "velocity": "+310/h",
+        "momentum_score": 465.0,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -20366,7 +20524,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+309/h)",
+        "⚡ 48h实测 (+310/h)",
         "Dave Ebbelaar",
         "🛠️ 实战教学"
       ],
@@ -24288,8 +24446,8 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Derek Cheung | AI Agents Automation：n8n 刚刚推出个人 AI 助手（Nod 设置和概述）",
-      "title_zh": "【48h 教学】Derek Cheung | AI Agents Automation：n8n 刚刚推出个人 AI 助手（Nod 设置和概述）",
+      "title": "【48h 教学】Derek Cheung | AI Agents Automation：n8n 刚刚推出个人人工智能助手（Nod 设置和概述）",
+      "title_zh": "【48h 教学】Derek Cheung | AI Agents Automation：n8n 刚刚推出个人人工智能助手（Nod 设置和概述）",
       "title_en": "n8n Just Launched a Personal AI Assistant (Nod Setup and Overview)",
       "author": "Derek Cheung | AI Agents Automation",
       "author_handle": "@DerekCheung|AIAgentsAutomation",
@@ -29297,12 +29455,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "article_content_en": "Silicon Valley has a special talent for offering amazing products and then screwing them up with ridiculous ideas about how those products should be used.\n\nFew appreciate virtual reality more than I do. I came up with the term. There are simple pleasures in occasionally visiting alternate sensory worlds. It was only when virtual reality went mainstream around 2013 that I realized Americans would not embrace the technology for a generation. The reason: the awful ways key tech leaders talked about it. Recall the Meta chief Mark Zuckerberg proclaiming that we would primarily live our lives through virtual reality headsets. Or the venture capitalist Marc Andreessen suggesting that most people were doomed to live virtually, with only elites retaining the privilege of living in the physical world. Predictably, the public did not embrace this vision.\n\nWe in Silicon Valley are doing it again with artificial intelligence, except worse — and at a larger scale. In its filing for its upcoming trillion-plus-dollar initial public offering, the leading A.I. lab Anthropic warned that its models could present “catastrophic or existential risks.”\n\nI work on A.I. and use it and like it. The latest large models are genuinely useful. But rather than focusing on how these tools could improve lives, many leaders at the biggest A.I. companies are instead asking Americans to embrace the belief that this technology may kill us and our children, or at the very least drain us of all potential for livelihood and meaning. It should not be surprising then that based on the results of this last election, many Americans have come to disapprove of A.I. more than almost anything.\n\nThis disapproval is unfortunate and unnecessary. It does not arise from the technology itself. It is a reaction to the insular culture surrounding A.I., a culture that is dictating how this innovation is packaged, how it is sold and how it is understood. Words have a way of filtering into actions, as when some of us in Silicon Valley callously treat places where we want to build data centers as sacrifice zones. We technologists are sabotaging ourselves, but it is hard to find a sane focus from inside the intensity and elite isolation of this bubble. Americans are not rejecting A.I. They are rejecting the way Silicon Valley is defining it for them.\n\nI have been discussing A.I. with some of its founding fathers for decades. In the 1980s, I think I coined the phrase “tools not creatures” in one of the arguments I had with my mentor Marvin Minsky, the MIT professor who was instrumental in shaping A.I. culture. Since there is no definitive evidence proving that A.I. is a conscious entity, the phrase means that I am entirely within my rights — as is anyone else within theirs — to think of the technology as more akin to a fancy calculator than, say, a German shepherd. That choice helps us design more useful products. And, as we’ll see, it provides a concrete and achievable way to make A.I. safe.\n\nA.I. company leaders often talk about how their work might lead to human extinction soon. This is astonishing. Even if you wanted to destroy humanity, you wouldn’t say so. If, however, you wanted to save the human species, wouldn’t you stop developing this technology?\n\nThere is an explanation for why some tech leaders, so seemingly worried about an extinction-level event, are plunging ahead with A.I. development: Mankind’s survival, while important to many of them, is less critical than building something they believe to be not only conscious but godlike. A substantial portion of the A.I. community, in celebrating this belief, is quick to support any action or statement that reinforces the idea that the technology is like a deity. They might call for regulation, but only in specific ways — perhaps by deploying more A.I. to control A.I. — that adore the technology’s powers. It is that adoration that is nonnegotiable.\n\nI write this from a place of respect. Someone’s metaphysical beliefs should be protected and are none of my business. It is also reasonable for nonbelievers to refuse the imposition of a religion from others.\n\nWhen I criticize A.I. culture, many in my community characterize me as a skeptic who can’t see its potential. They misunderstand me. A.I. can do a lot. A cutting-edge model, basically a big bundle of statistical results about patterns in pictures, sounds and all kinds of data, is mankind’s most extensive compendium of our efforts. It is like a superlibrary where all the books are so well cross-referenced that they can be automatically recombined into new books that seem as if they always belonged there. An A.I. model can assemble possible new mathematical theorems, write code and generate video clips and could uncover other potential creations from the universe of human record. There is a grandeur in seeing A.I. this way, instead of as a god.\n\nThe notion that A.I. may end humanity has a long history. In 1970, Dr. Minsky suggested that perhaps A.I. would keep humans as pets. Maybe he truly believed that, but it was also a good way to get attention from the military, which was a primary source of research funding. I remember helping to host military fund-raisers at MIT in the early 1980s, and there was a definite vibe of putting on an alarming show for them. Advertising the end of humanity has been a moneymaker for us in computer science forever, and over time, some of us began to believe the pitch.\n\nToday, you see how this belief permeates the way A.I. is being explained and offered to us. If you think A.I. is like a god, and you live in awe of its power, you start asking the very questions commonly posed at these companies, like “How can we make A.I. not want to kill us?” or “Can we create some A.I.s that don’t want to kill us to patrol the ones that might want to kill us?” These are difficult paths because we don’t know how to define what an A.I. “wants.”\n\nThen there is the way A.I. is packaged and sold. An A.I. model does not do anything by itself. It is inert until it is placed inside some kind of surrounding structure that allows it to be used. If one wants the rest of the world to see A.I. as a god, one would probably wrap it in a program that gives it a lifelike presentation. This could partially explain why A.I. labs are selling their technology as “agents” — systems that can take action entirely on their own.\n\nYou could be forgiven for assuming agents are required to use the latest A.I. models, but they have been a craze only for a few years. In 2024, when scientists won the Nobel Prize in Chemistry for using A.I. to improve the science of protein folding, they did not use self-directed agents as we currently think of them. Compare that with OpenAI recently announcing that it had deployed thousands of agents to propose hundreds of math theorems. The same task could just as well have been accomplished without them, or at least without the kind of agents that breach security boundaries. To those of you who enjoy the feeling of directing your own slave army, I would suggest that over time you will come to realize the benefit is an illusion. Agents are often more rituals of belief than technological necessities.\n\nMost of the serious harms posed by A.I. technology can be attributed to agents. There has been a steady stream of concerning stories about swarms of agents breaching security or modifying themselves. People at the A.I. companies often present these stories as evidence that we might be in the early stages of the path to human extinction. There is then a lot of discussion about how to make agents not want to kill us. For instance, some at Anthropic have proposed that making the agents feel better would make them less aggressive toward people.\n\nIf you see A.I. as a tool — not a creature — you can then ask the correct question: Do we really need agents all the time?\n\nThere are cases in which A.I. agents make sense — perhaps in hospitals, where a few seconds can save lives, or if the military wants to add autonomy to a weapon like a drone (though many military experts reject the idea). The obvious policy proposal then is a process regulating agents specifically. Launching agents, especially swarms of them, should require a distinct review process, and that is where the many outside oversight boards sitting within A.I. companies, as well as regulation with real teeth and accountability, should start.\n\nThere are better alternatives to agents. I do research into complex new manufacturing and materials technology using large A.I. models. In the course of my efforts, I am pelted with pop-ups to launch agents, but I have realized they are not so effective because I have to constantly backpedal when I get results that aren’t quite right — unless I give in and accept what comes easy to the agent. (This is how A.I. slop happens.) Instead, I am starting to use a process I call Mind Gliders, where I use the newest models to create a custom, single-use editor for the general zone of ideas I want to research at that moment, and then explore possibilities using sliders on my screen until I have zeroed in on what I was trying to create.\n\nThe shift is remarkable. This process keeps me, a human, in the driver’s seat. My act of discovery and invention reflects a changing and growing me, and diverges from everyone else’s. I can get to where I want more directly, so the overall process is faster and, thus far, appears to also be cheaper. This, to me, is the future of A.I. — a future that is ours if we can dispense with the illusion that this technology should replace us instead of help us.\n\nI am not saying Silicon Valley is terrible. Instead, I am saying we need to be honest with ourselves. There is nothing wrong with a new religion, but there is everything wrong with an imposed new religion. That is our problem. It is not the technology itself.\n\nJaron Lanier is a computer scientist who pioneered research in virtual reality and the author of “Dawn of the New Everything.” He is Microsoft’s prime unifying scientist but does not speak for the company.",
-      "full_text_en": "Silicon Valley has a special talent for offering amazing products and then screwing them up with ridiculous ideas about how those products should be used.\n\nFew appreciate virtual reality more than I do. I came up with the term. There are simple pleasures in occasionally visiting alternate sensory worlds. It was only when virtual reality went mainstream around 2013 that I realized Americans would not embrace the technology for a generation. The reason: the awful ways key tech leaders talked about it. Recall the Meta chief Mark Zuckerberg proclaiming that we would primarily live our lives through virtual reality headsets. Or the venture capitalist Marc Andreessen suggesting that most people were doomed to live virtually, with only elites retaining the privilege of living in the physical world. Predictably, the public did not embrace this vision.\n\nWe in Silicon Valley are doing it again with artificial intelligence, except worse — and at a larger scale. In its filing for its upcoming trillion-plus-dollar initial public offering, the leading A.I. lab Anthropic warned that its models could present “catastrophic or existential risks.”\n\nI work on A.I. and use it and like it. The latest large models are genuinely useful. But rather than focusing on how these tools could improve lives, many leaders at the biggest A.I. companies are instead asking Americans to embrace the belief that this technology may kill us and our children, or at the very least drain us of all potential for livelihood and meaning. It should not be surprising then that based on the results of this last election, many Americans have come to disapprove of A.I. more than almost anything.\n\nThis disapproval is unfortunate and unnecessary. It does not arise from the technology itself. It is a reaction to the insular culture surrounding A.I., a culture that is dictating how this innovation is packaged, how it is sold and how it is understood. Words have a way of filtering into actions, as when some of us in Silicon Valley callously treat places where we want to build data centers as sacrifice zones. We technologists are sabotaging ourselves, but it is hard to find a sane focus from inside the intensity and elite isolation of this bubble. Americans are not rejecting A.I. They are rejecting the way Silicon Valley is defining it for them.\n\nI have been discussing A.I. with some of its founding fathers for decades. In the 1980s, I think I coined the phrase “tools not creatures” in one of the arguments I had with my mentor Marvin Minsky, the MIT professor who was instrumental in shaping A.I. culture. Since there is no definitive evidence proving that A.I. is a conscious entity, the phrase means that I am entirely within my rights — as is anyone else within theirs — to think of the technology as more akin to a fancy calculator than, say, a German shepherd. That choice helps us design more useful products. And, as we’ll see, it provides a concrete and achievable way to make A.I. safe.\n\nA.I. company leaders often talk about how their work might lead to human extinction soon. This is astonishing. Even if you wanted to destroy humanity, you wouldn’t say so. If, however, you wanted to save the human species, wouldn’t you stop developing this technology?\n\nThere is an explanation for why some tech leaders, so seemingly worried about an extinction-level event, are plunging ahead with A.I. development: Mankind’s survival, while important to many of them, is less critical than building something they believe to be not only conscious but godlike. A substantial portion of the A.I. community, in celebrating this belief, is quick to support any action or statement that reinforces the idea that the technology is like a deity. They might call for regulation, but only in specific ways — perhaps by deploying more A.I. to control A.I. — that adore the technology’s powers. It is that adoration that is nonnegotiable.\n\nI write this from a place of respect. Someone’s metaphysical beliefs should be protected and are none of my business. It is also reasonable for nonbelievers to refuse the imposition of a religion from others.\n\nWhen I criticize A.I. culture, many in my community characterize me as a skeptic who can’t see its potential. They misunderstand me. A.I. can do a lot. A cutting-edge model, basically a big bundle of statistical results about patterns in pictures, sounds and all kinds of data, is mankind’s most extensive compendium of our efforts. It is like a superlibrary where all the books are so well cross-referenced that they can be automatically recombined into new books that seem as if they always belonged there. An A.I. model can assemble possible new mathematical theorems, write code and generate video clips and could uncover other potential creations from the universe of human record. There is a grandeur in seeing A.I. this way, instead of as a god.\n\nThe notion that A.I. may end humanity has a long history. In 1970, Dr. Minsky suggested that perhaps A.I. would keep humans as pets. Maybe he truly believed that, but it was also a good way to get attention from the military, which was a primary source of research funding. I remember helping to host military fund-raisers at MIT in the early 1980s, and there was a definite vibe of putting on an alarming show for them. Advertising the end of humanity has been a moneymaker for us in computer science forever, and over time, some of us began to believe the pitch.\n\nToday, you see how this belief permeates the way A.I. is being explained and offered to us. If you think A.I. is like a god, and you live in awe of its power, you start asking the very questions commonly posed at these companies, like “How can we make A.I. not want to kill us?” or “Can we create some A.I.s that don’t want to kill us to patrol the ones that might want to kill us?” These are difficult paths because we don’t know how to define what an A.I. “wants.”\n\nThen there is the way A.I. is packaged and sold. An A.I. model does not do anything by itself. It is inert until it is placed inside some kind of surrounding structure that allows it to be used. If one wants the rest of the world to see A.I. as a god, one would probably wrap it in a program that gives it a lifelike presentation. This could partially explain why A.I. labs are selling their technology as “agents” — systems that can take action entirely on their own.\n\nYou could be forgiven for assuming agents are required to use the latest A.I. models, but they have been a craze only for a few years. In 2024, when scientists won the Nobel Prize in Chemistry for using A.I. to improve the science of protein folding, they did not use self-directed agents as we currently think of them. Compare that with OpenAI recently announcing that it had deployed thousands of agents to propose hundreds of math theorems. The same task could just as well have been accomplished without them, or at least without the kind of agents that breach security boundaries. To those of you who enjoy the feeling of directing your own slave army, I would suggest that over time you will come to realize the benefit is an illusion. Agents are often more rituals of belief than technological necessities.\n\nMost of the serious harms posed by A.I. technology can be attributed to agents. There has been a steady stream of concerning stories about swarms of agents breaching security or modifying themselves. People at the A.I. companies often present these stories as evidence that we might be in the early stages of the path to human extinction. There is then a lot of discussion about how to make agents not want to kill us. For instance, some at Anthropic have proposed that making the agents feel better would make them less aggressive toward people.\n\nIf you see A.I. as a tool — not a creature — you can then ask the correct question: Do we really need agents all the time?\n\nThere are cases in which A.I. agents make sense — perhaps in hospitals, where a few seconds can save lives, or if the military wants to add autonomy to a weapon like a drone (though many military experts reject the idea). The obvious policy proposal then is a process regulating agents specifically. Launching agents, especially swarms of them, should require a distinct review process, and that is where the many outside oversight boards sitting within A.I. companies, as well as regulation with real teeth and accountability, should start.\n\nThere are better alternatives to agents. I do research into complex new manufacturing and materials technology using large A.I. models. In the course of my efforts, I am pelted with pop-ups to launch agents, but I have realized they are not so effective because I have to constantly backpedal when I get results that aren’t quite right — unless I give in and accept what comes easy to the agent. (This is how A.I. slop happens.) Instead, I am starting to use a process I call Mind Gliders, where I use the newest models to create a custom, single-use editor for the general zone of ideas I want to research at that moment, and then explore possibilities using sliders on my screen until I have zeroed in on what I was trying to create.\n\nThe shift is remarkable. This process keeps me, a human, in the driver’s seat. My act of discovery and invention reflects a changing and growing me, and diverges from everyone else’s. I can get to where I want more directly, so the overall process is faster and, thus far, appears to also be cheaper. This, to me, is the future of A.I. — a future that is ours if we can dispense with the illusion that this technology should replace us instead of help us.\n\nI am not saying Silicon Valley is terrible. Instead, I am saying we need to be honest with ourselves. There is nothing wrong with a new religion, but there is everything wrong with an imposed new religion. That is our problem. It is not the technology itself.\n\nJaron Lanier is a computer scientist who pioneered research in virtual reality and the author of “Dawn of the New Everything.” He is Microsoft’s prime unifying scientist but does not speak for the company.",
-      "full_text_zh": "硅谷有一种特殊的天赋，他们能够提供令人惊叹的产品，然后用关于如何使用这些产品的荒谬想法来搞砸它们。\n\n很少有人比我更欣赏虚拟现实。我想出了这个词。偶尔拜访不同的感官世界会带来简单的乐趣。直到 2013 年虚拟现实成为主流时，我才意识到美国人不会在一代人的时间里接受这项技术。原因是：关键技术领导人谈论这个问题的方式很糟糕。还记得 Meta 首席执行官马克·扎克伯格 (Mark Zuckerberg) 宣称我们主要通过虚拟现实耳机来生活吗？或者风险投资家马克·安德森 (Marc Andreessen) 认为，大多数人注定要生活在虚拟世界中，只有精英才能保留生活在现实世界中的特权。可以预见的是，公众并不接受这一愿景。\n\n我们硅谷正在用人工智能再次做到这一点，除了更糟糕的是——而且规模更大。在即将到来的数万亿美元以上的首次公开募股申请中，领先的人工智能公司Anthropic 实验室警告称，其模型可能会带来“灾难性或生存风险”。\n\n我从事人工智能工作并使用它并喜欢它。最新的大型型号确实很有用。但最大的人工智能公司的许多领导者并没有关注这些工具如何改善生活。相反，公司要求美国人相信这项技术可能会杀死我们和我们的孩子，或者至少会耗尽我们所有的生计和意义的潜力。因此，根据上次选举的结果，许多美国人开始反对人工智能也就不足为奇了。比几乎任何事情都重要。\n\n这种反对是不幸的，也是不必要的。它不是由技术本身产生的。这是对围绕人工智能的孤立文化的反应，这种文化决定了如何包装这种创新、如何销售以及如何理解它。言语有一种转化为行动的方式，就像硅谷的一些人冷酷无情地将我们想要建立数据中心的地方视为牺牲区一样。我们技术专家正在自我破坏，但很难从这个泡沫的强度和精英隔离中找到理智的焦点。美国人并不拒绝人工智能。他们拒绝硅谷为他们定义的方式。\n\n几十年来，我一直在与人工智能的一些创始人讨论人工智能。在20世纪80年代，我想我在与导师马文·明斯基（Marvin Minsky）的一次争论中创造了“工具而不是生物”这个短语。明斯基是麻省理工学院的教授，他在塑造人工智能文化方面发挥了重要作用。由于没有明确的证据证明人工智能是一个有意识的实体，这个短语意味着我完全有权利——就像其他人有权利一样——把这项技术看作是一个花哨的计算器，而不是一只德国牧羊犬。这种选择有助于我们设计出更有用的产品。而且，正如我们将看到的，它提供了一种具体的、可实现的方式来让人工智能变得安全。\n\n人工智能。公司领导经常谈论他们的工作可能会导致人类很快灭绝。这真是令人惊讶。就算你想毁灭人类，你也不会说出来。然而，如果你想拯救人类，你难道不会停止开发这项技术吗？\n\n为什么一些看似担心灭绝级别事件的科技领导者却大力推进人工智能，这是有原因的。发展：人类的生存虽然对他们中的许多人来说很重要，但比建造他们认为不仅有意识而且神圣的东西更重要。人工智能的很大一部分。社区在庆祝这一信念时，很快就会支持任何强化技术就像神灵这一理念的行动或声明。他们可能会要求监管，但只能以特定的方式进行——也许是通过部署更多的人工智能。控制人工智能——崇拜技术的力量。这种崇拜是不容商榷的。\n\n我写这篇文章是出于尊重。有些人的形而上学信仰应该受到保护，这不关我的事。不信教的人拒绝别人强加的宗教也是合理的。\n\n当我批评 A.I.文化，我的社区中的许多人将我描述为一个看不到其潜力的怀疑论者。他们误解了我。人工智能。可以做很多事情。尖端模型基本上是关于图片、声音和各种数据模式的一大堆统计结果，是人类努力的最广泛的纲要。它就像一个超级图书馆，所有的书籍都可以很好地交叉引用，以至于它们可以自动重新组合成新的书籍，就好像它们总是属于那里一样。人工智能该模型可以组装可能的新数学定理、编写代码并生成视频剪辑，并可以从人类记录的宇宙中发现其他潜在的创造。看到人工智能是一种伟大的感觉。这样一来，就代替神了。\n\nA.I.人类的终结可能有着悠久的历史。 1970 年，明斯基博士提出，也许人工智能。会把人类当作宠物。也许他真的相信这一点，但这也是获得军方关注的好方法，军方是研究经费的主要来源。我记得 20 世纪 80 年代初在麻省理工学院帮助举办军事筹款活动，当时有一种为他们上演一场令人震惊的表演的氛围。宣传人类的终结永远是我们计算机科学领域的赚钱工具，随着时间的推移，我们中的一些人开始相信这个宣传。\n\n今天，您会看到这种信念如何渗透到人工智能的方式中。正在向我们解释并提供。如果你认为 A.I.就像神一样，你对它的力量感到敬畏，你开始问这些公司经常提出的问题，比如“我们怎样才能让人工智能不想杀死我们？”或者“我们可以创造一些不想杀死我们的人工智能来巡逻那些可能想杀死我们的人吗？”这些都是困难的道路，因为我们不知道如何定义人工智能。 “想要。”\n\n然后是 A.I.被包装并出售。人工智能模型本身不做任何事情。它是惰性的，直到它被放置在某种允许它使用的周围结构中。如果你想让世界其他地方看到人工智能。作为上帝，人们可能会将其包装在一个程序中，使其呈现出栩栩如生的效果。这可以部分解释为什么人工智能。实验室将他们的技术作为“代理”出售——可以完全自行采取行动的系统。\n\n如果你认为代理人必须使用最新的人工智能模型，这是可以理解的，但它们的热潮只持续了几年。2024年，当科学家们因使用人工智能改进蛋白质折叠科学而获得诺贝尔化学奖时，他们并没有像我们现在认为的那样使用自我导向的代理。相比之下，OpenAI最近宣布，它已经部署了数千个代理来提出数百个数学定理。同样的任务也可以在没有他们的情况下完成，或者至少没有破坏安全边界的代理。对于那些喜欢指挥自己的奴隶军队的人，我建议随着时间的推移，你会意识到这种好处是一种错觉。代理往往更像是一种信仰仪式，而非技术必需品。\n\n人工智能造成的大部分严重危害都是由人工智能造成的。技术可以归功于代理。关于大量特工破坏安全或自我修改的令人担忧的故事层出不穷。 A.I. 的人们公司经常将这些故事作为我们可能正处于人类灭绝之路早期阶段的证据。然后有很多关于如何让特工不想杀我们的讨论。例如，Anthropic 的一些人提出，让智能体感觉更好会降低它们对人类的攻击性。\n\n如果你看到 A.I.作为一种工具——而不是一种生物——你可以提出正确的问题：我们真的一直需要代理吗？\n\n在某些情况下，A.I.代理是有意义的——也许在医院里，几秒钟就可以挽救生命，或者如果军方想要为无人机等武器增加自主性（尽管许多军事专家拒绝这个想法）。显而易见的政策建议是专门规范代理人的过程。发射代理，尤其是大量代理，应该需要一个独特的审查流程，而这正是人工智能内部许多外部监督委员会的职责所在。应该开始对公司进行切实有效的监管和问责制。\n\n除了代理之外，还有更好的选择。我使用大型人工智能研究复杂的新制造和材料技术。模型。在我的努力过程中，我不断收到弹出窗口来启动代理，但我意识到它们并不是那么有效，因为当我得到不太正确的结果时，我必须不断后退 - 除非我屈服并接受对代理来说很容易的事情。 （这就是 A.I. slop 发生的方式。）相反，我开始使用一个称为 Mind Gliders 的流程，其中我使用最新的模型为我当时想要研究的一般想法区域创建一个自定义的一次性编辑器，然后使用屏幕上的滑块探索可能性，直到我专注于我想要创建的内容。\n\n这种转变是显着的。这个过程让我，一个人，坐在驾驶座上。我的发现和发明行为反映了我的变化和成长，并且与其他人不同。我可以更直接地到达我想要的地方，因此整个过程更快，而且到目前为止，似乎也更便宜。对我来说，这就是人工智能的未来。 ——如果我们能够消除这种技术应该取代我们而不是帮助我们的幻想，那么未来就是我们的。\n\n我并不是说硅谷很糟糕。相反，我是说我们需要对自己诚实。新宗教并没有什么问题，但强加的新宗教就完全错了。这是我们的问题。这不是技术本身。\n\nJaron Lanier 是一位计算机科学家，虚拟现实研究的先驱，也是《新一切的黎明》一书的作者。他是微软首席统一科学家，但并不代表公司发言。",
-      "is_substantive": true,
-      "paras_count": 21
+      }
     },
     {
       "id": "fda765afeb537360",
@@ -47725,7 +47878,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI infrastructure provider Fireworks says hackers accessed some customers' datasets, incomplete model weights, and billing information over the past month (Anna Tong/Forbes)",
         "[Context & Motivation] Two customers told Forbes they had already substantially moved their business off Fireworks' systems, with one describing a series ….",
-        "[Key Technical Spec] Artificial intelligence infrastructure providers are on the front line of global large-scale model open source communities and technology research and development."
+        "[Key Technical Spec] Artificial intelligence infrastructure provider is on the front line of global large-scale model open source community and technology research and development."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -138894,7 +139047,7 @@
         "今日要闻"
       ],
       "title_zh": "Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
-      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲软。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
+      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲弱。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
       "hot_score": 3,
       "fact_bullets_zh": [
         "【核心事件】Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
@@ -255017,7 +255170,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: SAP: Q3 cloud revenue up 25% YoY to €6.67B, vs. €6.57B est., total revenue up 12% to €10.27B, current cloud backlog up 26% to €24.1B, all in constant currencies (Christina Kyriasoglou/Bloomberg)",
         "[Context & Motivation] SAP SE reported higher growth for its cloud products than anticipated in a sign that the boom ….",
-        "[Industry Analysis] SAP SE reported higher-than-expected growth for its cloud offerings, a sign of the cloud boom…."
+        "[Industry Analysis] SAP SE reported higher-than-expected growth for its cloud offerings, a sign of the cloud boom."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -338597,7 +338750,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta发布Muse Spark Open，称其是功能最强大的美国开放权重模型，共有816B个总参数和42B个活动参数，以及一个1M-token上下文窗口（Meta AI Research）",
-      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量模型。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
+      "summary_zh": "今天，我们发布了 Muse Spark Open 的重量，这是迄今为止功能最强大的美国开放重量型号。 Muse Spark Open 是一个原生多模态模型，具有 816B 总参数（42B 活动参数）和 1M 令牌上下文窗口。它专为编码和代理工作而构建，擅长长期任务、复杂的软件工程、",
       "hot_score": 5,
       "is_recent_24h": false,
       "fact_bullets_zh": [
@@ -372086,7 +372239,7 @@
         "今日要闻"
       ],
       "title_zh": "苹果表示， HomeView将不会在欧盟推出，因为Siri AI目前无法在iOS上使用，而且它正在“与欧盟进行建设性的合作” （",
-      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前无法使用……",
+      "summary_zh": "苹果新的 HomeView 智能家居中心将无法在欧盟上市，因为 Siri AI 目前不可用……",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -488030,7 +488183,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Meta says its rejection of ads promoting the new documentary about Elon Musk \"was an error and the ads are being restored\"; YouTube is also allowing the ads",
         "[Root Cause & Mechanism] Anthony Ha / TechCrunch:\nMeta says its rejection of ads promoting the new documentary about Elon Musk &ldquo;was an error and the ads are being restored&rdquo;; YouTube is also allowing the ads&nbsp; &mdash;&nbsp; At least two companies appear to be reversing their stance on whet.",
-        "[Industry Analysis] Anthony Ha/TechCrunch: Meta says its refusal to advertise Elon Musk’s new documentary “was a mistake and advertising is coming back”;Y."
+        "[Industry Analysis] Anthony Ha/TechCrunch: Meta says its refusal to advertise Elon Musk’s new documentary “was a mistake and advertising is coming back”; Y."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -522564,7 +522717,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: OpenAI is developing features to counter SpaceX's Grok Bot \"teammates\", and has discussed creating a personal AI assistant to compete with Meta's Muse",
         "[Root Cause & Mechanism] The Information:\nSources: OpenAI is developing features to counter SpaceX's Grok Bot &ldquo;teammates&rdquo;, and has discussed creating a personal AI assistant to compete with Meta's Muse&nbsp; &mdash;&nbsp; OpenAI pioneered AI that can take over web browsers and other applicati.",
-        "[Industry Analysis] OpenAI is developing features to take on SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
+        "[Industry Analysis] OpenAI is developing features to counter SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -525102,7 +525255,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027",
         "[Context & Motivation] The Information:\nSources: DeepSeek CEO Liang Wenfeng says training on Huawei chips is one of DeepSeek's biggest bets and Huawei is set to deliver training chips in Q4 or Q1 2027&nbsp; &mdash;&nbsp; DeepSeek CEO Liang Wenfeng told investors that a major priority for his company is.",
-        "[Key Technical Spec] Deep Search (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
+        "[Key Technical Spec] Deep Seek (DeepSeek Team) in computing chip supply chain and cloud infrastructure."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -534383,7 +534536,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -545699,7 +545852,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: From drafting bills to writing birthday songs: How Congress is using AI",
         "[Root Cause & Mechanism] As doomsday warnings spark calls for Congress to step in and regulate artificial intelligence, NBC News asked a dozen lawmakers in the House and Senate how they personally use AI in their day-to-day lives..",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -548025,7 +548178,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat",
         "[Context & Motivation] The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat&nbsp;&nbsp;WSJ.",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
