@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 16:33:51 UTC",
+  "generated_at": "2026-11-14 16:48:47 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 16:33:51 UTC",
+      "updated_at": "2026-11-14 16:48:47 UTC",
       "headline_item": {
-        "id": "b1936e51ea8250b0",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "特斯拉发布Cybercab订阅协议，强制收取每月299美元软件费",
-        "title_en": "Tesla posts its Cybercab Autonomy Subscription Agreement, requiring personal buyers to pay a mandatory $299/month on top of the vehicle's $29,990 purchase price (Fred Lambert/Electrek)",
-        "source": "Electrek",
-        "published_at": "2026-11-14T16:01:26+00:00",
-        "url": "https://electrek.co/2026/11/14/tesla-cybercab-autonomy-subscription-agreement-terms/",
-        "event_summary_zh": "特斯拉针对Cybercab个人购车者引入强制月度订阅模式，并对其运营权与地理围栏设定了严苛限制",
-        "event_summary_en": "Tesla released the Cybercab Autonomy Subscription Agreement, requiring a $299/month software fee on top of the $29,990 purchase price. The contract prohibits personal owners from adding the vehicle to the Robotaxi fleet and grants Tesla unilateral authority to modify geofenced operational zones and pricing, effectively reclassifying owners as variable-rate lessees.",
+        "id": "4d60cf848d78e15f",
+        "tag_zh": "💡 实战技巧",
+        "tag_en": "💡 Practical Skills",
+        "title_zh": "Anthropic提示优化提示词以提升Claude Opus 5.5效能",
+        "title_en": "Anthropic says outdated prompting habits are slowing down Claude Opus 5.5",
+        "source": "THE DECODER",
+        "published_at": "2026-11-14T16:42:56+00:00",
+        "url": "https://the-decoder.com/anthropic-says-outdated-prompting-habits-are-slowing-down-claude-opus-5-5/",
+        "event_summary_zh": "Anthropic指出用户应摒弃过时提示词习惯，改用单次指令输入及调整 effort 等级，以最大化发挥Claude Opus 5.5的自适应推理效能",
+        "event_summary_en": "Anthropic announced that users should abandon legacy prompting habits for the Claude Opus 5.5 model, as it now features native adaptive reasoning. The company advises setting the effort level to 'medium' and utilizing single-prompt comprehensive inputs to enhance task execution efficiency and optimize cost-to-performance ratios.",
         "core_facts_zh": [
-          "【核心事件】特斯拉（Tesla Inc.）在Cybercab自动驾驶订阅协议条款：强制每月299美元的软件订阅费，并保留运营区域与价格调整权",
-          "【起因与机理】通过封闭软件生态锁死车主资产运营权，将资产销售转化为持续性服务收入",
-          "【关键数据与实测】核心交易：29,990美元购车款外加每月299美元强制订阅费。",
-          "【行业影响与走向】战略影响：以合同条款限制软硬件同源的Model Y车主，确保Robotaxi网络资产与运营权的绝对集中化。"
+          "【核心事件】人工智能研发公司Anthropic：建议取消低效提示词，转用自适应effort等级，并减少多轮对话成本",
+          "【起因与机理】模型架构升级使得自适应推理成为默认机制，传统冗余指令已成为性能瓶颈",
+          "【关键技术规格】摒弃“think hard”等冗余提示词，利用模型自适应推理能力。",
+          "【涉及范围与推进】提倡单次指令覆盖完整目标与格式，减少多轮对话的隐形成本。"
         ],
         "core_facts_en": [
-          "[Core Event] Tesla Inc.: Mandatory $299/month fee and unilateral control over geofencing and pricing",
-          "[Root Cause & Mechanism] To transform capital asset sales into recurring service revenue while retaining absolute control over fleet utility",
-          "[Key Metrics] Core transaction: $29,990 purchase price plus mandatory $299/month subscription.",
-          "[Industry Impact & Outlook] Strategic impact: Restricting owners to consolidate Robotaxi fleet control and recurring revenue within Tesla's walled garden."
+          "[Core Event] Anthropic: Advocating removal of redundant prompts and shift to adaptive 'effort' settings",
+          "[Root Cause & Mechanism] Model architecture shift to native adaptive reasoning renders legacy prompt engineering obsolete",
+          "[Key Fact Detail] Abandon legacy prompts to leverage adaptive reasoning.",
+          "[Key Position & Outlook] Utilize comprehensive single-prompt inputs to reduce multi-turn overhead."
         ],
-        "industry_impact_zh": "特斯拉正通过Cybercab协议完成商业模式的彻底重构，即利用FSD软硬件同源的技术现状，剥离车主的资产处置权以构建私有化且高度集权的Robotaxi网络。此举通过严苛的合同规制抵消了技术路线的不确定性，实质上是强迫消费者承担硬件折旧成本的同时，将运营收益完全内化至特斯拉生态之中。",
-        "industry_impact_en": "Tesla is fundamentally pivoting its business model by leveraging FSD hardware/software parity to strip owners of asset control, effectively building a centralized, proprietary robotaxi network. This contractual lock-in serves as a hedge against technical uncertainty, forcing consumers to bear hardware depreciation while centralizing all potential operational arbitrage within Tesla's ecosystem."
+        "industry_impact_zh": "模型交互范式的迁移标志着AI应用层正从“指令依赖”走向“意图导向”。随着模型推理能力的内化，开发者需优化Prompt路由逻辑以平衡高阶任务的Token成本与响应速度，这是大模型商业落地的核心边际效益博弈点。",
+        "industry_impact_en": "The transition in interaction paradigms signals a shift from 'instruction-dependent' to 'intent-driven' AI. As reasoning capabilities are internalized, developers must refine prompt routing logic to balance token costs and latency for high-order tasks, which remains the critical margin optimization point for LLM commercial deployment."
       },
       "headlines": [
+        {
+          "id": "4d60cf848d78e15f",
+          "tag_zh": "💡 实战技巧",
+          "tag_en": "💡 Practical Skills",
+          "title_zh": "Anthropic提示优化提示词以提升Claude Opus 5.5效能",
+          "title_en": "Anthropic says outdated prompting habits are slowing down Claude Opus 5.5",
+          "source": "THE DECODER",
+          "published_at": "2026-11-14T16:42:56+00:00",
+          "url": "https://the-decoder.com/anthropic-says-outdated-prompting-habits-are-slowing-down-claude-opus-5-5/",
+          "event_summary_zh": "Anthropic指出用户应摒弃过时提示词习惯，改用单次指令输入及调整 effort 等级，以最大化发挥Claude Opus 5.5的自适应推理效能",
+          "event_summary_en": "Anthropic announced that users should abandon legacy prompting habits for the Claude Opus 5.5 model, as it now features native adaptive reasoning. The company advises setting the effort level to 'medium' and utilizing single-prompt comprehensive inputs to enhance task execution efficiency and optimize cost-to-performance ratios.",
+          "core_facts_zh": [
+            "【核心事件】人工智能研发公司Anthropic：建议取消低效提示词，转用自适应effort等级，并减少多轮对话成本",
+            "【起因与机理】模型架构升级使得自适应推理成为默认机制，传统冗余指令已成为性能瓶颈",
+            "【关键技术规格】摒弃“think hard”等冗余提示词，利用模型自适应推理能力。",
+            "【涉及范围与推进】提倡单次指令覆盖完整目标与格式，减少多轮对话的隐形成本。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic: Advocating removal of redundant prompts and shift to adaptive 'effort' settings",
+            "[Root Cause & Mechanism] Model architecture shift to native adaptive reasoning renders legacy prompt engineering obsolete",
+            "[Key Fact Detail] Abandon legacy prompts to leverage adaptive reasoning.",
+            "[Key Position & Outlook] Utilize comprehensive single-prompt inputs to reduce multi-turn overhead."
+          ],
+          "industry_impact_zh": "模型交互范式的迁移标志着AI应用层正从“指令依赖”走向“意图导向”。随着模型推理能力的内化，开发者需优化Prompt路由逻辑以平衡高阶任务的Token成本与响应速度，这是大模型商业落地的核心边际效益博弈点。",
+          "industry_impact_en": "The transition in interaction paradigms signals a shift from 'instruction-dependent' to 'intent-driven' AI. As reasoning capabilities are internalized, developers must refine prompt routing logic to balance token costs and latency for high-order tasks, which remains the critical margin optimization point for LLM commercial deployment."
+        },
+        {
+          "id": "99a7e5862859195c",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "特朗普媒体面临10亿美元可转债赎回压力与清算风险",
+          "title_en": "Trump Media faces a Nov. 30 deadline to repay up to $1B in convertible bonds sold last May to fund a \"bitcoin treasury,\" as its shares are down 60+% this year (Financial Times)",
+          "source": "Financial Times",
+          "published_at": "2026-11-14T16:35:01+00:00",
+          "url": "https://www.ft.com/content/ada459c4-5f43-4a4a-bc6c-90de8897a4f0",
+          "event_summary_zh": "特朗普媒体科技集团（DJT）需在11月30日前应对10亿美元可转债赎回压力，公司已将约4259枚比特币作为抵押品转出",
+          "event_summary_en": "Trump Media & Technology Group (NASDAQ: DJT) faces a critical liquidity event as creditors may demand the repayment of up to $1 billion in convertible notes by November 30. On-chain data indicates the transfer of 4,259 BTC in collateral to Crypto.com, highlighting acute financial stress amidst a year-to-date share price decline of over 60% and $1.8 billion in cumulative losses.",
+          "core_facts_zh": [
+            "【核心事件】特朗普媒体科技集团（Trump Media & Technology Group）在美国资本市场与加密货币托管平台：11月30日10亿美元可转债赎回大限，以及作为抵押品的4259枚比特币异动",
+            "【起因与机理】公司股价暴跌与经营性亏损导致资产负债表极度脆弱，需紧急处理抵押债务",
+            "【关键数据与实测】特朗普媒体科技集团（纳斯达克代码：DJT）面临迫切的债务偿还压力，债权人可于11月30日要求其履行高达10亿美元的可转债赎回义务。",
+            "【行业影响与走向】若无法通过换股平抑债务，该项资产抵押行为将成为引发多米诺式财务风险触发的信号点，资本市场的后续动作将高度敏感于公司与TAE Technologies合并案的进度。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Trump Media & Technology Group (DJT): November 30 deadline for $1 billion note repayment and movement of 4,259 BTC collateral",
+            "[Root Cause & Mechanism] Severe balance sheet strain due to massive stock decline and cumulative operating losses",
+            "[Key Metrics] Trump Media & Technology Group (NASDAQ: DJT) faces a critical liquidity event as creditors may demand the repayment of up to $1 billion in convertible notes by November 30.",
+            "[Key Position & Outlook] Failing a debt-for-equity swap, the movement of this collateral acts as a clear signal of mounting financial fragility, with market participants closely monitoring the pending merger with TAE Technologies for any liquidity relief."
+          ],
+          "industry_impact_zh": "DJT的资产结构呈现极端的“政治溢价”特征，随着赎回期限临近，其抵押品的流动性变现将直接测试资本市场对其价值重估的阈值。若无法通过换股平抑债务，该项资产抵押行为将成为引发多米诺式财务风险触发的信号点，资本市场的后续动作将高度敏感于公司与TAE Technologies合并案的进度。",
+          "industry_impact_en": "DJT's asset structure is defined by extreme 'political premium,' and the upcoming redemption deadline will test the market's valuation threshold through the liquidation of its crypto collateral. Failing a debt-for-equity swap, the movement of this collateral acts as a clear signal of mounting financial fragility, with market participants closely monitoring the pending merger with TAE Technologies for any liquidity relief."
+        },
         {
           "id": "b1936e51ea8250b0",
           "tag_zh": "📰 业界动态",
@@ -57,63 +109,12 @@
           ],
           "industry_impact_zh": "特斯拉正通过Cybercab协议完成商业模式的彻底重构，即利用FSD软硬件同源的技术现状，剥离车主的资产处置权以构建私有化且高度集权的Robotaxi网络。此举通过严苛的合同规制抵消了技术路线的不确定性，实质上是强迫消费者承担硬件折旧成本的同时，将运营收益完全内化至特斯拉生态之中。",
           "industry_impact_en": "Tesla is fundamentally pivoting its business model by leveraging FSD hardware/software parity to strip owners of asset control, effectively building a centralized, proprietary robotaxi network. This contractual lock-in serves as a hedge against technical uncertainty, forcing consumers to bear hardware depreciation while centralizing all potential operational arbitrage within Tesla's ecosystem."
-        },
-        {
-          "id": "af2d6c1442a2e812",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "意大利数据保护机构对 Meta 处以 8.05 亿欧元罚款，原因是其涉嫌在未经 Android 用户同意或通知的情况下访问其照片和视频",
-          "title_en": "Italy's data protection agency fines Meta €805M for allegedly accessing Android users' photos and videos without their consent or informing them (Reuters)",
-          "source": "Reuters",
-          "published_at": "2026-11-14T15:10:02+00:00",
-          "url": "https://www.reuters.com/world/italy-fines-meta-887-million-over-android-users-data-access-2026-11-14/",
-          "event_summary_zh": "意大利隐私监管机构发现 Meta Platforms Ireland 在未获得特定用户许可的情况下访问了 Android 设备上存储的照片、视频和相关信息，因此对该公司处以 8.05 亿欧元的罚款。该案例重点关注 Facebook 的一项功能，该功能为用户提供照片和视频建议",
-          "event_summary_en": "Italy's privacy regulator has imposed a 805 million euros penalty on Meta Platforms Ireland after finding that the company accessed photos, videos, and related information stored on Android devices without obtaining specific user permission.\n\nThe case focuses on a Facebook feature that offered users photo and video suggestions from their phone galleries while they were browsing the app. According to the authority, the feature allowed access to gallery content without providing users with clear i",
-          "core_facts_zh": [
-            "【核心事件】Meta (扎克伯格团队)：意大利数据保护机构对 Meta 处以 8.05 亿欧元罚款，原因是其涉嫌在未经 Android 用户同意或通知的情况下访问其照片和视频",
-            "【起因与机理】意大利隐私监管机构发现 Meta Platforms Ireland 在未获得特定用户许可的情况下访问了 Android 设备上存储的照片、视频和相关信息，因此对该公司处以 8.05 亿欧元的罚款。",
-            "【核心事实细节】该案例重点关注 Facebook 的一项功能，该功能可以通过手机为用户提供照片和视频建议。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Italy's data protection agency fines Meta €805M for allegedly accessing Android users' photos and videos without their consent or informing them (Reuters)",
-            "[Root Cause & Mechanism] Italy's privacy regulator has imposed a 805 million euros penalty on Meta Platforms Ireland after finding that the company accessed photos, videos, and related information stored on Android devices without obtaining specific user permission.",
-            "[Key Fact Detail] The case focuses on a Facebook feature that offered users photo and video suggestions from their phone galleries while they were browsing the app.",
-            "[Industry Analysis] According to the authority, the feature allowed access to gallery content without providing users with clear i."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "56989d489272ae36",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "OpenAI前董事对AI行业监管架构的深刻质疑",
-          "title_en": "The OpenAI board member who fired Sam Altman says we still can&#8217;t trust AI CEOs",
-          "source": "The Verge AI",
-          "published_at": "2026-11-14T15:00:00+00:00",
-          "url": "https://www.theverge.com/podcast/1032907/helen-toner-openai-cset-ai-safety-policy-interview",
-          "event_summary_zh": "OpenAI前董事Helen Toner指出，现有的AI行业治理与问责机制无法有效制衡商业扩张与安全投入的利益冲突",
-          "event_summary_en": "Helen Toner, Executive Director of the Center for Security and Emerging Technology at Georgetown University and a former OpenAI board member, stated that accountability mechanisms in AI frontier labs are structurally flawed when confronted with commercial incentives. She argues that relying on individual leadership integrity and voluntary safety accords is insufficient to guarantee safety in large-scale model development.",
-          "core_facts_zh": [
-            "【核心事件】Helen Toner（乔治城大学CSET执行主任、OpenAI前董事）在AI安全与行业治理评估访谈：揭示AI企业非营利董事会制衡机制在资本压力下的脆弱性，主张建立更强有力的外部监管框架",
-            "【起因与机理】因OpenAI董事会罢免Sam Altman事件后，对行业自律模式及其对AI安全承诺的有效性产生质疑",
-            "【调查与监管诉求】指出依靠非营利董事会制衡AI企业商业利益的机制在实际执行中失效。",
-            "【各方立场与态度】预警AI实验室在上市压力下将导致商业动机进一步凌驾于安全对齐需求之上。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Helen Toner (Executive Director of CSET at Georgetown, former OpenAI board member): Critiquing the fragility of non-profit board oversight under market pressure and advocating for stronger external regulatory frameworks",
-            "[Root Cause & Mechanism] Following the aftermath of the OpenAI board's attempted leadership transition and subsequent industry-wide scrutiny",
-            "[Key Metrics] We probably should not give a bunch of consumers paying $20 a month the ability to generate novel bioweapons.",
-            "[Official Stance & Demand] Warning that market pressures for labs like Anthropic will prioritize growth over safety alignment."
-          ],
-          "industry_impact_zh": "当前顶尖AI实验室的商业化进程已实质性冲垮了以非营利董事会为主体的治理防线，资本回报诉求与AIGC技术安全基准的底层逻辑发生剧烈割裂。随着头部厂商如Anthropic筹划上市，市场化的KPI压力将进一步挤压安全对齐（Alignment）的研发窗口，倒逼监管逻辑从“自愿合规”转向强制性审计与基础设施层面的准入约束。",
-          "industry_impact_en": "The commercialization of top-tier AI labs has fundamentally breached the defensive lines of non-profit governance, exacerbating the friction between return on capital and safety alignment benchmarks. As frontrunners like Anthropic move toward public markets, the resulting KPI pressures will compress the R&D windows for safety, mandating a transition from voluntary compliance to mandatory audits and infrastructure-level access controls."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 16:33:51 UTC",
+      "updated_at": "2026-11-14 16:48:47 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -280,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 16:33:51 UTC",
+      "updated_at": "2026-11-14 16:48:47 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -389,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,652)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,657)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,652 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,657 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
