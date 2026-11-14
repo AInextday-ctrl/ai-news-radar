@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 18:03:41 UTC",
+  "generated_at": "2026-11-14 18:17:53 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 18:03:41 UTC",
+      "updated_at": "2026-11-14 18:17:53 UTC",
       "headline_item": {
-        "id": "fe946e2d6a00bc7a",
+        "id": "f35c98ce0c676730",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美国联邦航空局系统中断排查，指向承包商设备更新",
-        "title_en": "Sean Duffy blames Friday's FAA outage on copper-to-fiber wiring work at a remote facility, saying contractor L3Harris may have installed a \"faulty router\" (Joseph Pisani/Wall Street Journal)",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-14T17:15:29+00:00",
-        "url": "https://www.wsj.com/business/airlines/travel-woes-persist-as-airlines-race-to-reset-after-groundstop-f34a7f9f",
-        "event_summary_zh": "美国联邦航空局因基础设施更新导致全国航班大面积停飞，目前调查焦点集中于承包商L3Harris在远程设施升级中的路由器故障",
-        "event_summary_en": "FAA Administrator Bryan Bedford and officials identified that the nationwide flight ground stop was caused by maintenance work upgrading copper wiring to fiber at a remote facility. The investigation currently focuses on whether long-time contractor L3Harris installed a faulty router or committed installation errors, which triggered a network flood within the air traffic control system.",
+        "title_zh": "黄仁勋辞任英伟达CEO引发开源生态资助断供危机",
+        "title_en": "Jensen Huang's resignation is a setback for US open models, as his funding gave open-source developers time to find their footing and will very likely dry up (Nathan Lambert/Interconnects AI)",
+        "source": "Interconnects AI",
+        "published_at": "2026-11-14T18:05:02+00:00",
+        "url": "https://www.interconnects.ai/p/open-source-ai-without-jensen",
+        "event_summary_zh": "英伟达CEO黄仁勋宣布辞职，引发市场对其推行的开源大模型扶持战略可能因融资收缩而陷入停滞的担忧",
+        "event_summary_en": "Nvidia CEO Jensen Huang has resigned, creating uncertainty around his strategic funding for the open-source model ecosystem. Huang previously used significant capital to support open-source models as a hedge against large customers developing internal silicon, a strategy now facing potential abandonment as Nvidia prioritizes stabilizing operations and hardware delivery.",
         "core_facts_zh": [
-          "【核心事件】美国联邦航空局(FAA)局长布莱恩·贝德福德；承包商L3Harris在美国航空交通管制远程设施：调查维护升级中可能出现的设备故障或施工失误，以确定中断原因",
-          "【起因与机理】基础设施从模拟信号向数字化转型过程中的技术兼容与稳定性漏洞",
-          "【关键数据与实测】事故造成全国范围内超2.5万次航班延误，超9000次航班取消，系统中断持续约4小时。",
-          "【各方立场与态度】FAA预计将于周日恢复全面日程完整性，目前已排除网络攻击及AI相关故障的可能。"
+          "【核心事件】黄仁勋（英伟达前任首席执行官）在美国半导体产业与人工智能模型生态领域：黄仁勋辞任引发公司内部资源配置调整，开源模型扶持资金链断裂风险升高",
+          "【起因与机理】公司需在短期内应对供应压力并稳定内部治理，高风险开源投入优先级下调",
+          "【关键技术规格】核心人物离职引发企业战略优先级调整。",
+          "【各方立场与态度】硬件供应短缺背景下开源生态议价能力被进一步削弱。"
         ],
         "core_facts_en": [
-          "[Core Event] FAA Administrator Bryan Bedford; contractor L3Harris: Investigating potential equipment failure or installation errors during infrastructure upgrades",
-          "[Root Cause & Mechanism] System stability vulnerabilities during the transition from analog to digital infrastructure",
-          "[Key Metrics] That's 14% of flights departing the U.",
-          "[Scope & Next Steps] FAA expects full schedule integrity by Sunday; malicious cyberattacks and AI-related causes have been officially ruled out."
+          "[Core Event] Jensen Huang (Former CEO of Nvidia): Resignation leads to potential funding withdrawal for open-source model initiatives",
+          "[Root Cause & Mechanism] Nvidia prioritizes hardware delivery and operational stability over speculative long-term ecosystem investments",
+          "[Market & Financial Detail] Leadership transition forces re-evaluation of ecosystem subsidies.",
+          "[Key Position & Outlook] Reduced competitive leverage for open-source models due to acute compute scarcity."
         ],
-        "industry_impact_zh": "此次事件暴露了关键基础设施高度依赖老旧硬件（部分路由器产自2001年）与技术迭代滞后的系统性风险。当航空系统从模拟向数字化强行跨越时，缺乏容错冗余的架构极易因单一承包商的作业疏失引发连锁性瘫痪，显示出关键领域技术外包合规审查与应急恢复能力的紧迫性。",
-        "industry_impact_en": "This incident highlights systemic risks inherent in relying on legacy hardware (some routers dating back to 2001) while forcing digital transformations. The total system collapse following a single contractor's maintenance error reveals an urgent need for enhanced compliance oversight and redundant fail-safes in critical infrastructure maintenance."
+        "industry_impact_zh": "黄仁勋作为英伟达的核心经营中枢，其去职将迫使公司回归由硬件交付和产能扩张驱动的防守型商业逻辑，放弃此前通过补贴开源生态以制衡大模型实验室的非对称博弈。随着英伟达对开源投入的收缩，头部模型厂商与硬件供应方的整合将加速，缺乏自研芯片能力的开源模型阵营或将面临生存空间被深度压缩的局面。",
+        "industry_impact_en": "Jensen Huang's departure marks a pivot for Nvidia from ecosystem-shaping subsidies toward defensive hardware-driven operations to satisfy supply constraints. The potential withdrawal of open-source funding will consolidate market power among closed-model labs with vertical datacenter integration, marginalizing open-weight models that currently lack independent compute economies of scale."
       },
       "headlines": [
+        {
+          "id": "f35c98ce0c676730",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄仁勋辞任英伟达CEO引发开源生态资助断供危机",
+          "title_en": "Jensen Huang's resignation is a setback for US open models, as his funding gave open-source developers time to find their footing and will very likely dry up (Nathan Lambert/Interconnects AI)",
+          "source": "Interconnects AI",
+          "published_at": "2026-11-14T18:05:02+00:00",
+          "url": "https://www.interconnects.ai/p/open-source-ai-without-jensen",
+          "event_summary_zh": "英伟达CEO黄仁勋宣布辞职，引发市场对其推行的开源大模型扶持战略可能因融资收缩而陷入停滞的担忧",
+          "event_summary_en": "Nvidia CEO Jensen Huang has resigned, creating uncertainty around his strategic funding for the open-source model ecosystem. Huang previously used significant capital to support open-source models as a hedge against large customers developing internal silicon, a strategy now facing potential abandonment as Nvidia prioritizes stabilizing operations and hardware delivery.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（英伟达前任首席执行官）在美国半导体产业与人工智能模型生态领域：黄仁勋辞任引发公司内部资源配置调整，开源模型扶持资金链断裂风险升高",
+            "【起因与机理】公司需在短期内应对供应压力并稳定内部治理，高风险开源投入优先级下调",
+            "【关键技术规格】核心人物离职引发企业战略优先级调整。",
+            "【各方立场与态度】硬件供应短缺背景下开源生态议价能力被进一步削弱。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (Former CEO of Nvidia): Resignation leads to potential funding withdrawal for open-source model initiatives",
+            "[Root Cause & Mechanism] Nvidia prioritizes hardware delivery and operational stability over speculative long-term ecosystem investments",
+            "[Market & Financial Detail] Leadership transition forces re-evaluation of ecosystem subsidies.",
+            "[Key Position & Outlook] Reduced competitive leverage for open-source models due to acute compute scarcity."
+          ],
+          "industry_impact_zh": "黄仁勋作为英伟达的核心经营中枢，其去职将迫使公司回归由硬件交付和产能扩张驱动的防守型商业逻辑，放弃此前通过补贴开源生态以制衡大模型实验室的非对称博弈。随着英伟达对开源投入的收缩，头部模型厂商与硬件供应方的整合将加速，缺乏自研芯片能力的开源模型阵营或将面临生存空间被深度压缩的局面。",
+          "industry_impact_en": "Jensen Huang's departure marks a pivot for Nvidia from ecosystem-shaping subsidies toward defensive hardware-driven operations to satisfy supply constraints. The potential withdrawal of open-source funding will consolidate market power among closed-model labs with vertical datacenter integration, marginalizing open-weight models that currently lack independent compute economies of scale."
+        },
         {
           "id": "fe946e2d6a00bc7a",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "大模型在垂直领域突破逻辑上限的代价已演变为严重的经济性危机，Gemini 4 Carbon在成本敏感型任务中的应用价值受限。当前算力成本的规模失衡，预示着行业竞争重心正从简单的能力指标博弈，迅速转向推理效率与参数规模间的效用比优化。",
           "industry_impact_en": "The trade-off for peak logical reasoning in large models has become an economic liability, limiting the commercial viability of Gemini 4 Carbon in cost-sensitive applications. This structural imbalance in compute costs signals a shift in industry competition from mere performance metrics to the optimization of utility ratios between reasoning efficiency and parameter density."
-        },
-        {
-          "id": "4d60cf848d78e15f",
-          "tag_zh": "💡 实战技巧",
-          "tag_en": "💡 Practical Skills",
-          "title_zh": "Anthropic提示优化提示词以提升Claude Opus 5.5效能",
-          "title_en": "Anthropic says outdated prompting habits are slowing down Claude Opus 5.5",
-          "source": "THE DECODER",
-          "published_at": "2026-11-14T16:42:56+00:00",
-          "url": "https://the-decoder.com/anthropic-says-outdated-prompting-habits-are-slowing-down-claude-opus-5-5/",
-          "event_summary_zh": "Anthropic指出用户应摒弃过时提示词习惯，改用单次指令输入及调整 effort 等级，以最大化发挥Claude Opus 5.5的自适应推理效能",
-          "event_summary_en": "Anthropic announced that users should abandon legacy prompting habits for the Claude Opus 5.5 model, as it now features native adaptive reasoning. The company advises setting the effort level to 'medium' and utilizing single-prompt comprehensive inputs to enhance task execution efficiency and optimize cost-to-performance ratios.",
-          "core_facts_zh": [
-            "【核心事件】人工智能研发公司Anthropic：建议取消低效提示词，转用自适应effort等级，并减少多轮对话成本",
-            "【起因与机理】模型架构升级使得自适应推理成为默认机制，传统冗余指令已成为性能瓶颈",
-            "【关键技术规格】摒弃“think hard”等冗余提示词，利用模型自适应推理能力。",
-            "【涉及范围与推进】提倡单次指令覆盖完整目标与格式，减少多轮对话的隐形成本。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Anthropic: Advocating removal of redundant prompts and shift to adaptive 'effort' settings",
-            "[Root Cause & Mechanism] Model architecture shift to native adaptive reasoning renders legacy prompt engineering obsolete",
-            "[Key Fact Detail] Abandon legacy prompts to leverage adaptive reasoning.",
-            "[Key Position & Outlook] Utilize comprehensive single-prompt inputs to reduce multi-turn overhead."
-          ],
-          "industry_impact_zh": "模型交互范式的迁移标志着AI应用层正从“指令依赖”走向“意图导向”。随着模型推理能力的内化，开发者需优化Prompt路由逻辑以平衡高阶任务的Token成本与响应速度，这是大模型商业落地的核心边际效益博弈点。",
-          "industry_impact_en": "The transition in interaction paradigms signals a shift from 'instruction-dependent' to 'intent-driven' AI. As reasoning capabilities are internalized, developers must refine prompt routing logic to balance token costs and latency for high-order tasks, which remains the critical margin optimization point for LLM commercial deployment."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 18:03:41 UTC",
+      "updated_at": "2026-11-14 18:17:53 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 18:03:41 UTC",
+      "updated_at": "2026-11-14 18:17:53 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,677)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,682)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,677 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,682 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
