@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 19:48:53 UTC",
+  "generated_at": "2026-11-14 20:03:16 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 19:48:53 UTC",
+      "updated_at": "2026-11-14 20:03:16 UTC",
       "headline_item": {
-        "id": "cc1dc473608a4ea7",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "Anthropic首席执行官警示算力投资风险",
-        "title_en": "Anthropic CEO Amodei admits \"there's a huge uncertainty in what's going to happen next year\" days before a record IPO",
-        "source": "THE DECODER",
-        "published_at": "2026-11-14T19:05:17+00:00",
-        "url": "https://the-decoder.com/anthropic-ceo-amodei-admits-theres-a-huge-uncertainty-in-whats-going-to-happen-next-year-days-before-a-record-ipo/",
-        "event_summary_zh": "Anthropic首席执行官Dario Amodei在IPO前夕公开承认，大额算力预支与市场不确定性构成了公司核心经营困境",
-        "event_summary_en": "Anthropic CEO Dario Amodei acknowledged at a JPMorgan investor event the extreme uncertainty of compute investments, which must be committed 1-2 years in advance. With approximately $901 billion in capital expenditure commitments, Amodei warned that a one-year misalignment between investment and revenue could pose existential bankruptcy risks.",
+        "id": "0deb532815c63f43",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "英伟达股东联名吁董事会慎重评估黄仁勋去留",
+        "title_en": "Letter: Altimeter's Brad Gerstner and Atreides's Gavin Baker urge Nvidia's board to consider \"the potential return of Jensen Huang\"; they own $2.13B in Nvidia (Katie Tarasov/CNBC)",
+        "source": "CNBC",
+        "published_at": "2026-11-14T19:55:01+00:00",
+        "url": "https://www.cnbc.com/2026/11/14/nvidia-investors-jensen-huang-return-board-letter.html",
+        "event_summary_zh": "Altimeter与Atreides两家主要股东致信英伟达董事会，要求对黄仁勋因丑闻辞职后的领导层接替流程采取审慎态度",
+        "event_summary_en": "Brad Gerstner of Altimeter Capital and Gavin Baker of Atreides Management have urged Nvidia's board to avoid rushed leadership succession following Jensen Huang's resignation. Huang stepped down amid personal misconduct allegations and federal investigations into Megaspeed, a client currently under DOJ scrutiny for potential illicit diversion of AI chips to China, with interim CEO Colette Kress currently leading operations.",
         "core_facts_zh": [
-          "【核心事件】Dario Amodei（Anthropic首席执行官）在纽约摩根大通投资者活动：披露算力预购导致严重的财务杠杆风险，以及对未来一年市场回报的高度不确定性",
-          "【起因与机理】AI模型训练成本呈指数级增长，与商业化变现节奏存在严重的滞后错配",
-          "【关键数据与实测】至2027年9月需兑付约710亿美元算力债务。",
-          "【行业影响与走向】通过保留现金余额与现货市场补单缓冲经营风险。"
+          "【核心事件】Brad Gerstner (Altimeter CEO), Gavin Baker (Atreides创始人), 黄仁勋 (英伟达前CEO), Colette Kress (英伟达临时CEO)在英伟达董事会、美国司法部、美国国会相关委员会：股东要求慎重处理CEO接替流程；针对Megaspeed违规出口调查升级",
+          "【起因与机理】因黄仁勋辞职引发的领导层真空，以及涉及关键AI芯片流向地缘受限区的国家安全调查",
+          "【关键技术规格】股东呼吁放缓CEO继任程序，维护短期领导架构稳定性。",
+          "【涉及范围与推进】美国商务部与司法部同步介入调查英伟达芯片出口合规性。"
         ],
         "core_facts_en": [
-          "[Core Event] Dario Amodei, CEO of Anthropic: Disclosed the financial risks of front-loading massive compute investments amid market uncertainty",
-          "[Root Cause & Mechanism] The exponential growth of AI training costs creates a dangerous time-lag between capital outlay and revenue realization",
-          "[Key Metrics] ~$71 billion in compute liabilities due by September 2027.",
-          "[Industry Impact & Outlook] Risk mitigation strategies: cash reserves and spot market flexibility."
+          "[Core Event] Brad Gerstner (Altimeter CEO), Gavin Baker (Atreides Founder), Jensen Huang (former CEO), Colette Kress (Interim CEO): Shareholders demand deliberate leadership transition; DOJ investigating Megaspeed for illicit chip diversion",
+          "[Root Cause & Mechanism] Leadership vacuum following Huang's resignation and ongoing national security investigations into restricted chip supply chains",
+          "[Key Metrics] 4 million-share stake worth nearly $1.",
+          "[Scope & Next Steps] DOJ/Commerce Department investigating compliance regarding restricted AI chips."
         ],
-        "industry_impact_zh": "大语言模型厂商已进入以预支未来数十载现金流进行军备竞赛的残酷阶段，算力资本支出的高固定成本结构极度脆弱。这种“赌博式”投资本质上是在博弈AGI实现的临界点，一旦推理成本下降速度不及训练规模扩张速度，此类巨头将面临深度财务失衡。",
-        "industry_impact_en": "AI model developers are locked in an arms race that leverages decades of future cash flows, creating an inherently fragile fixed-cost structure. This 'gambler’s investment' thesis hinges on reaching the AGI inflection point; if inference cost reduction fails to outpace training scale expansion, these firms face imminent solvency crises."
+        "industry_impact_zh": "此事件标志着英伟达从单一灵魂人物驱动模式向机构化管理转型的巨大阵痛，其核心逻辑在于资本市场对黄仁勋技术与战略愿景的路径依赖极高，短期内高管动荡将显著加剧供应链合作方的博弈筹码。当前司法部对Megaspeed芯片违规流向的介入，已将英伟达的地缘合规风险从单纯的出口管制范畴，提升至公司治理底层的法律连带责任危机。",
+        "industry_impact_en": "This development signals a painful transition from a founder-centric model to institutional governance, exposing the extreme reliance on Huang's strategic foresight. The DOJ's involvement shifts the risk profile from simple export compliance to systemic legal liability, likely emboldening supply chain partners to renegotiate terms during this period of leadership uncertainty."
       },
       "headlines": [
+        {
+          "id": "0deb532815c63f43",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英伟达股东联名吁董事会慎重评估黄仁勋去留",
+          "title_en": "Letter: Altimeter's Brad Gerstner and Atreides's Gavin Baker urge Nvidia's board to consider \"the potential return of Jensen Huang\"; they own $2.13B in Nvidia (Katie Tarasov/CNBC)",
+          "source": "CNBC",
+          "published_at": "2026-11-14T19:55:01+00:00",
+          "url": "https://www.cnbc.com/2026/11/14/nvidia-investors-jensen-huang-return-board-letter.html",
+          "event_summary_zh": "Altimeter与Atreides两家主要股东致信英伟达董事会，要求对黄仁勋因丑闻辞职后的领导层接替流程采取审慎态度",
+          "event_summary_en": "Brad Gerstner of Altimeter Capital and Gavin Baker of Atreides Management have urged Nvidia's board to avoid rushed leadership succession following Jensen Huang's resignation. Huang stepped down amid personal misconduct allegations and federal investigations into Megaspeed, a client currently under DOJ scrutiny for potential illicit diversion of AI chips to China, with interim CEO Colette Kress currently leading operations.",
+          "core_facts_zh": [
+            "【核心事件】Brad Gerstner (Altimeter CEO), Gavin Baker (Atreides创始人), 黄仁勋 (英伟达前CEO), Colette Kress (英伟达临时CEO)在英伟达董事会、美国司法部、美国国会相关委员会：股东要求慎重处理CEO接替流程；针对Megaspeed违规出口调查升级",
+            "【起因与机理】因黄仁勋辞职引发的领导层真空，以及涉及关键AI芯片流向地缘受限区的国家安全调查",
+            "【关键技术规格】股东呼吁放缓CEO继任程序，维护短期领导架构稳定性。",
+            "【涉及范围与推进】美国商务部与司法部同步介入调查英伟达芯片出口合规性。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Brad Gerstner (Altimeter CEO), Gavin Baker (Atreides Founder), Jensen Huang (former CEO), Colette Kress (Interim CEO): Shareholders demand deliberate leadership transition; DOJ investigating Megaspeed for illicit chip diversion",
+            "[Root Cause & Mechanism] Leadership vacuum following Huang's resignation and ongoing national security investigations into restricted chip supply chains",
+            "[Key Metrics] 4 million-share stake worth nearly $1.",
+            "[Scope & Next Steps] DOJ/Commerce Department investigating compliance regarding restricted AI chips."
+          ],
+          "industry_impact_zh": "此事件标志着英伟达从单一灵魂人物驱动模式向机构化管理转型的巨大阵痛，其核心逻辑在于资本市场对黄仁勋技术与战略愿景的路径依赖极高，短期内高管动荡将显著加剧供应链合作方的博弈筹码。当前司法部对Megaspeed芯片违规流向的介入，已将英伟达的地缘合规风险从单纯的出口管制范畴，提升至公司治理底层的法律连带责任危机。",
+          "industry_impact_en": "This development signals a painful transition from a founder-centric model to institutional governance, exposing the extreme reliance on Huang's strategic foresight. The DOJ's involvement shifts the risk profile from simple export compliance to systemic legal liability, likely emboldening supply chain partners to renegotiate terms during this period of leadership uncertainty."
+        },
         {
           "id": "cc1dc473608a4ea7",
           "tag_zh": "🎁 算力福利",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次事件凸显了半导体核心领导层与地缘政治博弈的深层纠葛，任何涉及此类敏感调查的撤职决策均对公司治理提出了极高要求。若董事会无法在正当程序与国家安全叙事间达成平衡，Nvidia可能面临长期的管理真空及投资者信心崩塌风险。",
           "industry_impact_en": "This incident highlights the deep entanglement between semiconductor leadership and geopolitical maneuvering, where removal decisions tied to sensitive investigations face intense scrutiny. Without balancing due process against national security narratives, Nvidia risks prolonged leadership instability and a catastrophic erosion of investor confidence."
-        },
-        {
-          "id": "5217a4d183f40677",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "金融数据基础设施商Databento完成1亿美元C轮融资",
-          "title_en": "Databento, which offers market data APIs and says it has contracts with five of the six largest frontier AI labs, raised a $100M Series C at a $1.1B valuation (FinTech Global)",
-          "source": "FinTech Global",
-          "published_at": "2026-11-14T18:35:04+00:00",
-          "url": "https://fintech.global/2026/11/13/databento-hits-1-1bn-valuation-with-100m-series-c/",
-          "event_summary_zh": "金融数据API平台Databento以11亿美元估值完成1亿美元C轮融资，其业务已覆盖六大顶级AI实验室中的五家",
-          "event_summary_en": "Financial data provider Databento secured $100 million in Series C funding led by Fifth Down Capital, reaching a $1.1 billion valuation. The firm provides real-time and historical market data via a unified API and has successfully secured enterprise contracts with five of the six largest frontier AI labs.",
-          "core_facts_zh": [
-            "【核心事件】Databento (首席执行官兼联合创始人Christina Qi)在金融数据API服务市场：完成11亿美元估值融资，并拓展AI领域市场份额",
-            "【起因与机理】利用极简人力规模实现传统数据厂商的体量扩张，满足AI训练对高质量市场数据的需求",
-            "【关键数据与实测】以11亿美元估值完成1亿美元C轮融资，主要投资方包括Fifth Down Capital及Fitch Ventures。",
-            "【涉及范围与推进】未来将利用资金提升基础设施性能并扩展更多资产类别的数据覆盖范围。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Databento (CEO and Co-founder Christina Qi): Raised $100M at a $1.1B valuation to expand market data coverage",
-            "[Root Cause & Mechanism] Scaling with high capital efficiency to provide training-ready data for frontier AI labs",
-            "[Key Metrics] Closed $100M Series C at $1.1B valuation, backed by Fifth Down Capital and Fitch Ventures.",
-            "[Scope & Next Steps] Capital to be deployed for infrastructure enhancement and expanded asset class coverage."
-          ],
-          "industry_impact_zh": "Databento证明了在金融数据领域，通过垂直整合API技术栈可大幅压缩传统厂商庞大的人力运营成本，实现了轻量化基础设施扩张。随着AI实验室从泛数据向高质量金融时序数据的需求倾斜，该类厂商正成为支撑大模型微调与量化策略部署的核心基础设施，对彭博等传统巨头构成敏捷化竞争压力。",
-          "industry_impact_en": "Databento demonstrates that vertical integration of API technology stacks can drastically reduce the operational headcount required by legacy data vendors, enabling efficient infrastructure scaling. As AI labs pivot toward high-quality financial time-series data for model fine-tuning and quantitative strategy, these agile providers are increasingly disrupting legacy incumbents like Bloomberg."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 19:48:53 UTC",
+      "updated_at": "2026-11-14 20:03:16 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 19:48:53 UTC",
+      "updated_at": "2026-11-14 20:03:16 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,704)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,705)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,704 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,705 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
