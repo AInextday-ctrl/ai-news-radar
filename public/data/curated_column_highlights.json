@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 17:18:29 UTC",
+  "generated_at": "2026-11-14 17:34:19 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 17:18:29 UTC",
+      "updated_at": "2026-11-14 17:34:19 UTC",
       "headline_item": {
-        "id": "f2e69faea37789f5",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "谷歌Gemini 4 Carbon问鼎MathArena基准测试",
-        "title_en": "Gemini 4 Carbon takes the MathArena crown but costs 15 times more than GPT-6.1 Sol",
-        "source": "THE DECODER",
-        "published_at": "2026-11-14T16:48:01+00:00",
-        "url": "https://the-decoder.com/gemini-4-carbon-takes-the-matharena-crown-but-costs-15-times-more-than-gpt-6-1-sol/",
-        "event_summary_zh": "谷歌发布的Gemini 4 Carbon在MathArena数学评测中超越GPT-6.1 Sol，但其高昂的推理成本成为规模化商用的显著门槛",
-        "event_summary_en": "Google's Gemini 4 Carbon model surpassed OpenAI's GPT-6.1 Sol to top the MathArena math benchmark, with Claude Fable 5.2 ranking second. Despite its superior performance, the model incurs reasoning costs 15 and 40 times higher than GPT-6.1 Sol, respectively, while exhibiting significant issues with excessive compute time usage.",
+        "id": "fe946e2d6a00bc7a",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "美国联邦航空局系统中断排查，指向承包商设备更新",
+        "title_en": "Sean Duffy blames Friday's FAA outage on copper-to-fiber wiring work at a remote facility, saying contractor L3Harris may have installed a \"faulty router\" (Joseph Pisani/Wall Street Journal)",
+        "source": "Wall Street Journal",
+        "published_at": "2026-11-14T17:15:29+00:00",
+        "url": "https://www.wsj.com/business/airlines/travel-woes-persist-as-airlines-race-to-reset-after-groundstop-f34a7f9f",
+        "event_summary_zh": "美国联邦航空局因基础设施更新导致全国航班大面积停飞，目前调查焦点集中于承包商L3Harris在远程设施升级中的路由器故障",
+        "event_summary_en": "FAA Administrator Bryan Bedford and officials identified that the nationwide flight ground stop was caused by maintenance work upgrading copper wiring to fiber at a remote facility. The investigation currently focuses on whether long-time contractor L3Harris installed a faulty router or committed installation errors, which triggered a network flood within the air traffic control system.",
         "core_facts_zh": [
-          "【核心事件】谷歌（Gemini 4 Carbon）， OpenAI(GPT-6.1 Sol), Anthropic（Claude Fable 5.2）在MathArena数学基准评测体系：Gemini 4 Carbon获得榜首但推理成本极其高昂，且存在计算进程难以自动终止的缺陷",
-          "【起因与机理】追求复杂逻辑推理性能导致了算法复杂度的指数级增长与边际成本剧增",
-          "【关键数据与实测】推理成本分别是GPT-6.1 Sol的15倍（Gemini）与40倍（Claude）。",
-          "【行业影响与走向】模型存在极端推理耗时导致的资源占用风险与计算效率瓶颈。"
+          "【核心事件】美国联邦航空局(FAA)局长布莱恩·贝德福德；承包商L3Harris在美国航空交通管制远程设施：调查维护升级中可能出现的设备故障或施工失误，以确定中断原因",
+          "【起因与机理】基础设施从模拟信号向数字化转型过程中的技术兼容与稳定性漏洞",
+          "【关键数据与实测】事故造成全国范围内超2.5万次航班延误，超9000次航班取消，系统中断持续约4小时。",
+          "【各方立场与态度】FAA预计将于周日恢复全面日程完整性，目前已排除网络攻击及AI相关故障的可能。"
         ],
         "core_facts_en": [
-          "[Core Event] Google (Gemini 4 Carbon), OpenAI (GPT-6.1 Sol), Anthropic (Claude Fable 5.2) (MathArena math benchmark): Gemini 4 Carbon topped the leaderboard but incurred high reasoning costs and exhibited non-terminating compute loops.",
-          "[Root Cause & Mechanism] The push for peak reasoning performance has driven an exponential increase in algorithmic complexity and marginal costs.",
-          "[Key Technical Spec] Gemini 4 Carbon surpasses GPT-6.1 Sol in MathArena benchmark.",
-          "[Industry Impact & Outlook] Risk of excessive compute duration and efficiency bottlenecks."
+          "[Core Event] FAA Administrator Bryan Bedford; contractor L3Harris: Investigating potential equipment failure or installation errors during infrastructure upgrades",
+          "[Root Cause & Mechanism] System stability vulnerabilities during the transition from analog to digital infrastructure",
+          "[Key Metrics] That's 14% of flights departing the U.",
+          "[Scope & Next Steps] FAA expects full schedule integrity by Sunday; malicious cyberattacks and AI-related causes have been officially ruled out."
         ],
-        "industry_impact_zh": "大模型在垂直领域突破逻辑上限的代价已演变为严重的经济性危机，Gemini 4 Carbon在成本敏感型任务中的应用价值受限。当前算力成本的规模失衡，预示着行业竞争重心正从简单的能力指标博弈，迅速转向推理效率与参数规模间的效用比优化。",
-        "industry_impact_en": "The trade-off for peak logical reasoning in large models has become an economic liability, limiting the commercial viability of Gemini 4 Carbon in cost-sensitive applications. This structural imbalance in compute costs signals a shift in industry competition from mere performance metrics to the optimization of utility ratios between reasoning efficiency and parameter density."
+        "industry_impact_zh": "此次事件暴露了关键基础设施高度依赖老旧硬件（部分路由器产自2001年）与技术迭代滞后的系统性风险。当航空系统从模拟向数字化强行跨越时，缺乏容错冗余的架构极易因单一承包商的作业疏失引发连锁性瘫痪，显示出关键领域技术外包合规审查与应急恢复能力的紧迫性。",
+        "industry_impact_en": "This incident highlights systemic risks inherent in relying on legacy hardware (some routers dating back to 2001) while forcing digital transformations. The total system collapse following a single contractor's maintenance error reveals an urgent need for enhanced compliance oversight and redundant fail-safes in critical infrastructure maintenance."
       },
       "headlines": [
+        {
+          "id": "fe946e2d6a00bc7a",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国联邦航空局系统中断排查，指向承包商设备更新",
+          "title_en": "Sean Duffy blames Friday's FAA outage on copper-to-fiber wiring work at a remote facility, saying contractor L3Harris may have installed a \"faulty router\" (Joseph Pisani/Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "published_at": "2026-11-14T17:15:29+00:00",
+          "url": "https://www.wsj.com/business/airlines/travel-woes-persist-as-airlines-race-to-reset-after-groundstop-f34a7f9f",
+          "event_summary_zh": "美国联邦航空局因基础设施更新导致全国航班大面积停飞，目前调查焦点集中于承包商L3Harris在远程设施升级中的路由器故障",
+          "event_summary_en": "FAA Administrator Bryan Bedford and officials identified that the nationwide flight ground stop was caused by maintenance work upgrading copper wiring to fiber at a remote facility. The investigation currently focuses on whether long-time contractor L3Harris installed a faulty router or committed installation errors, which triggered a network flood within the air traffic control system.",
+          "core_facts_zh": [
+            "【核心事件】美国联邦航空局(FAA)局长布莱恩·贝德福德；承包商L3Harris在美国航空交通管制远程设施：调查维护升级中可能出现的设备故障或施工失误，以确定中断原因",
+            "【起因与机理】基础设施从模拟信号向数字化转型过程中的技术兼容与稳定性漏洞",
+            "【关键数据与实测】事故造成全国范围内超2.5万次航班延误，超9000次航班取消，系统中断持续约4小时。",
+            "【各方立场与态度】FAA预计将于周日恢复全面日程完整性，目前已排除网络攻击及AI相关故障的可能。"
+          ],
+          "core_facts_en": [
+            "[Core Event] FAA Administrator Bryan Bedford; contractor L3Harris: Investigating potential equipment failure or installation errors during infrastructure upgrades",
+            "[Root Cause & Mechanism] System stability vulnerabilities during the transition from analog to digital infrastructure",
+            "[Key Metrics] That's 14% of flights departing the U.",
+            "[Scope & Next Steps] FAA expects full schedule integrity by Sunday; malicious cyberattacks and AI-related causes have been officially ruled out."
+          ],
+          "industry_impact_zh": "此次事件暴露了关键基础设施高度依赖老旧硬件（部分路由器产自2001年）与技术迭代滞后的系统性风险。当航空系统从模拟向数字化强行跨越时，缺乏容错冗余的架构极易因单一承包商的作业疏失引发连锁性瘫痪，显示出关键领域技术外包合规审查与应急恢复能力的紧迫性。",
+          "industry_impact_en": "This incident highlights systemic risks inherent in relying on legacy hardware (some routers dating back to 2001) while forcing digital transformations. The total system collapse following a single contractor's maintenance error reveals an urgent need for enhanced compliance oversight and redundant fail-safes in critical infrastructure maintenance."
+        },
         {
           "id": "f2e69faea37789f5",
           "tag_zh": "🔬 前沿技术",
@@ -59,62 +85,36 @@
           "industry_impact_en": "The trade-off for peak logical reasoning in large models has become an economic liability, limiting the commercial viability of Gemini 4 Carbon in cost-sensitive applications. This structural imbalance in compute costs signals a shift in industry competition from mere performance metrics to the optimization of utility ratios between reasoning efficiency and parameter density."
         },
         {
-          "id": "99a7e5862859195c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "特朗普媒体面临10亿美元可转债赎回压力与清算风险",
-          "title_en": "Trump Media faces a Nov. 30 deadline to repay up to $1B in convertible bonds sold last May to fund a \"bitcoin treasury,\" as its shares are down 60+% this year (Financial Times)",
-          "source": "Financial Times",
-          "published_at": "2026-11-14T16:35:01+00:00",
-          "url": "https://www.ft.com/content/ada459c4-5f43-4a4a-bc6c-90de8897a4f0",
-          "event_summary_zh": "特朗普媒体科技集团（DJT）需在11月30日前应对10亿美元可转债赎回压力，公司已将约4259枚比特币作为抵押品转出",
-          "event_summary_en": "Trump Media & Technology Group (NASDAQ: DJT) faces a critical liquidity event as creditors may demand the repayment of up to $1 billion in convertible notes by November 30. On-chain data indicates the transfer of 4,259 BTC in collateral to Crypto.com, highlighting acute financial stress amidst a year-to-date share price decline of over 60% and $1.8 billion in cumulative losses.",
+          "id": "4d60cf848d78e15f",
+          "tag_zh": "💡 实战技巧",
+          "tag_en": "💡 Practical Skills",
+          "title_zh": "Anthropic提示优化提示词以提升Claude Opus 5.5效能",
+          "title_en": "Anthropic says outdated prompting habits are slowing down Claude Opus 5.5",
+          "source": "THE DECODER",
+          "published_at": "2026-11-14T16:42:56+00:00",
+          "url": "https://the-decoder.com/anthropic-says-outdated-prompting-habits-are-slowing-down-claude-opus-5-5/",
+          "event_summary_zh": "Anthropic指出用户应摒弃过时提示词习惯，改用单次指令输入及调整 effort 等级，以最大化发挥Claude Opus 5.5的自适应推理效能",
+          "event_summary_en": "Anthropic announced that users should abandon legacy prompting habits for the Claude Opus 5.5 model, as it now features native adaptive reasoning. The company advises setting the effort level to 'medium' and utilizing single-prompt comprehensive inputs to enhance task execution efficiency and optimize cost-to-performance ratios.",
           "core_facts_zh": [
-            "【核心事件】特朗普媒体科技集团（Trump Media & Technology Group）在美国资本市场与加密货币托管平台：11月30日10亿美元可转债赎回大限，以及作为抵押品的4259枚比特币异动",
-            "【起因与机理】公司股价暴跌与经营性亏损导致资产负债表极度脆弱，需紧急处理抵押债务",
-            "【关键数据与实测】特朗普媒体科技集团（纳斯达克代码：DJT）面临迫切的债务偿还压力，债权人可于11月30日要求其履行高达10亿美元的可转债赎回义务。",
-            "【行业影响与走向】若无法通过换股平抑债务，该项资产抵押行为将成为引发多米诺式财务风险触发的信号点，资本市场的后续动作将高度敏感于公司与TAE Technologies合并案的进度。"
+            "【核心事件】人工智能研发公司Anthropic：建议取消低效提示词，转用自适应effort等级，并减少多轮对话成本",
+            "【起因与机理】模型架构升级使得自适应推理成为默认机制，传统冗余指令已成为性能瓶颈",
+            "【关键技术规格】摒弃“think hard”等冗余提示词，利用模型自适应推理能力。",
+            "【涉及范围与推进】提倡单次指令覆盖完整目标与格式，减少多轮对话的隐形成本。"
           ],
           "core_facts_en": [
-            "[Core Event] Trump Media & Technology Group (DJT): November 30 deadline for $1 billion note repayment and movement of 4,259 BTC collateral",
-            "[Root Cause & Mechanism] Severe balance sheet strain due to massive stock decline and cumulative operating losses",
-            "[Key Metrics] Trump Media & Technology Group (NASDAQ: DJT) faces a critical liquidity event as creditors may demand the repayment of up to $1 billion in convertible notes by November 30.",
-            "[Key Position & Outlook] Failing a debt-for-equity swap, the movement of this collateral acts as a clear signal of mounting financial fragility, with market participants closely monitoring the pending merger with TAE Technologies for any liquidity relief."
+            "[Core Event] Anthropic: Advocating removal of redundant prompts and shift to adaptive 'effort' settings",
+            "[Root Cause & Mechanism] Model architecture shift to native adaptive reasoning renders legacy prompt engineering obsolete",
+            "[Key Fact Detail] Abandon legacy prompts to leverage adaptive reasoning.",
+            "[Key Position & Outlook] Utilize comprehensive single-prompt inputs to reduce multi-turn overhead."
           ],
-          "industry_impact_zh": "DJT的资产结构呈现极端的“政治溢价”特征，随着赎回期限临近，其抵押品的流动性变现将直接测试资本市场对其价值重估的阈值。若无法通过换股平抑债务，该项资产抵押行为将成为引发多米诺式财务风险触发的信号点，资本市场的后续动作将高度敏感于公司与TAE Technologies合并案的进度。",
-          "industry_impact_en": "DJT's asset structure is defined by extreme 'political premium,' and the upcoming redemption deadline will test the market's valuation threshold through the liquidation of its crypto collateral. Failing a debt-for-equity swap, the movement of this collateral acts as a clear signal of mounting financial fragility, with market participants closely monitoring the pending merger with TAE Technologies for any liquidity relief."
-        },
-        {
-          "id": "b1936e51ea8250b0",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "特斯拉发布Cybercab订阅协议，强制收取每月299美元软件费",
-          "title_en": "Tesla posts its Cybercab Autonomy Subscription Agreement, requiring personal buyers to pay a mandatory $299/month on top of the vehicle's $29,990 purchase price (Fred Lambert/Electrek)",
-          "source": "Electrek",
-          "published_at": "2026-11-14T16:01:26+00:00",
-          "url": "https://electrek.co/2026/11/14/tesla-cybercab-autonomy-subscription-agreement-terms/",
-          "event_summary_zh": "特斯拉针对Cybercab个人购车者引入强制月度订阅模式，并对其运营权与地理围栏设定了严苛限制",
-          "event_summary_en": "Tesla released the Cybercab Autonomy Subscription Agreement, requiring a $299/month software fee on top of the $29,990 purchase price. The contract prohibits personal owners from adding the vehicle to the Robotaxi fleet and grants Tesla unilateral authority to modify geofenced operational zones and pricing, effectively reclassifying owners as variable-rate lessees.",
-          "core_facts_zh": [
-            "【核心事件】特斯拉（Tesla Inc.）在Cybercab自动驾驶订阅协议条款：强制每月299美元的软件订阅费，并保留运营区域与价格调整权",
-            "【起因与机理】通过封闭软件生态锁死车主资产运营权，将资产销售转化为持续性服务收入",
-            "【关键数据与实测】核心交易：29,990美元购车款外加每月299美元强制订阅费。",
-            "【行业影响与走向】战略影响：以合同条款限制软硬件同源的Model Y车主，确保Robotaxi网络资产与运营权的绝对集中化。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Tesla Inc.: Mandatory $299/month fee and unilateral control over geofencing and pricing",
-            "[Root Cause & Mechanism] To transform capital asset sales into recurring service revenue while retaining absolute control over fleet utility",
-            "[Key Metrics] Core transaction: $29,990 purchase price plus mandatory $299/month subscription.",
-            "[Industry Impact & Outlook] Strategic impact: Restricting owners to consolidate Robotaxi fleet control and recurring revenue within Tesla's walled garden."
-          ],
-          "industry_impact_zh": "特斯拉正通过Cybercab协议完成商业模式的彻底重构，即利用FSD软硬件同源的技术现状，剥离车主的资产处置权以构建私有化且高度集权的Robotaxi网络。此举通过严苛的合同规制抵消了技术路线的不确定性，实质上是强迫消费者承担硬件折旧成本的同时，将运营收益完全内化至特斯拉生态之中。",
-          "industry_impact_en": "Tesla is fundamentally pivoting its business model by leveraging FSD hardware/software parity to strip owners of asset control, effectively building a centralized, proprietary robotaxi network. This contractual lock-in serves as a hedge against technical uncertainty, forcing consumers to bear hardware depreciation while centralizing all potential operational arbitrage within Tesla's ecosystem."
+          "industry_impact_zh": "模型交互范式的迁移标志着AI应用层正从“指令依赖”走向“意图导向”。随着模型推理能力的内化，开发者需优化Prompt路由逻辑以平衡高阶任务的Token成本与响应速度，这是大模型商业落地的核心边际效益博弈点。",
+          "industry_impact_en": "The transition in interaction paradigms signals a shift from 'instruction-dependent' to 'intent-driven' AI. As reasoning capabilities are internalized, developers must refine prompt routing logic to balance token costs and latency for high-order tasks, which remains the critical margin optimization point for LLM commercial deployment."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 17:18:29 UTC",
+      "updated_at": "2026-11-14 17:34:19 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 17:18:29 UTC",
+      "updated_at": "2026-11-14 17:34:19 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,667)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,674)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,667 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,674 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
