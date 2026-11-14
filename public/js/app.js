@@ -2564,14 +2564,27 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const categories = ['celebrity', 'news', 'tools', 'videos', 'prompts'];
       categories.forEach(cat => {
         const existing = cachedData.grouped[cat] || cachedData[cat] || [];
-        const keySet = new Set(existing.map(getItemKey).filter(Boolean));
+        const existingMap = new Map();
+        existing.forEach(it => {
+          const k = getItemKey(it);
+          if (k) existingMap.set(k, it);
+        });
         const newItems = [];
         for (const it of archiveItems) {
-          if (it.category === cat) {
+          const isCatMatch = (it.category === cat) || (cat === 'news' && !['celebrity', 'tools', 'videos', 'prompts'].includes(it.category));
+          if (isCatMatch) {
             const k = getItemKey(it);
-            if (k && !keySet.has(k)) {
-              keySet.add(k);
-              newItems.push(it);
+            if (k) {
+              if (existingMap.has(k)) {
+                // 深度回填与补全长文、多图与深度研判，杜绝由于首页轻量 JSON 导致的截断
+                const ex = existingMap.get(k);
+                ['article_content', 'article_content_zh', 'inline_images', 'fact_bullets_zh', 'fact_bullets_en', 'ai_analysis'].forEach(fld => {
+                  if (it[fld] && (!ex[fld] || (Array.isArray(it[fld]) && !ex[fld].length))) ex[fld] = it[fld];
+                });
+              } else {
+                existingMap.set(k, it);
+                newItems.push(it);
+              }
             }
           }
         }
@@ -9334,7 +9347,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         </div>
       `;
     }
-    }
 
     // ==========================================
     // 资讯概要简报控制器 (News Briefing & Natural Synthesis)
@@ -9697,7 +9709,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         originalCardEl.classList.remove('hidden');
 
-        // 降级兜底：当抓取源站受严格付费墙或反爬保护导致长文未完全穿透时，展示权威报道实录摘要与明确引导
+        // 降级兜底与动态静态回捞：当长文未在初始精简 JSON 中时，尝试异步从独立静态落地页获取完整排版实录
         if (!hasValidZh && !hasValidEn) {
           if (langToggleEl) langToggleEl.classList.add('hidden');
           if (expandWrapEl) expandWrapEl.classList.add('hidden');
@@ -9711,6 +9723,28 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             ? `<div class="mt-2.5 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-lg border border-amber-200/60 dark:border-amber-800/60 flex items-center gap-2"><span>🔒</span><span>源站设立了版权或登录限制，雷达已为你提炼权威报道核心实录。完整报道可点击文末“直达源站”浏览。</span></div>`
             : `<div class="mt-2.5 text-xs text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950/40 p-2.5 rounded-lg border border-amber-200/60 dark:border-amber-800/60 flex items-center gap-2"><span>🔒</span><span>Protected by source publisher; key intelligence record extracted above. Click "Original Source" below for full piece.</span></div>`;
           originalTextEl.innerHTML = `<p class="leading-relaxed whitespace-pre-line">${escapeHtml(fallbackSnippet)}</p>${noticeNote}`;
+
+          // 核心自愈机制：异步向已预渲染的全静态独立页面极速回捞，无缝将已穿透的 14 段长文、排版与配图注入当前弹窗
+          const curId = item.id;
+          if (curId && !item._fetchingStatic) {
+            item._fetchingStatic = true;
+            const targetUrl = isZh ? `/zh/news/${curId}.html` : `/news/${curId}.html`;
+            fetch(targetUrl)
+              .then(res => res.ok ? res.text() : null)
+              .then(html => {
+                if (!html) return;
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                const articleDiv = doc.querySelector('.space-y-4');
+                if (articleDiv && articleDiv.innerHTML.length > 200 && currentActiveNewsItem && String(currentActiveNewsItem.id) === String(curId)) {
+                  originalTextEl.innerHTML = articleDiv.innerHTML;
+                  if (originalTitleEl) {
+                    originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+                  }
+                  if (expandWrapEl) expandWrapEl.classList.add('hidden');
+                }
+              })
+              .catch(() => {});
+          }
           return;
         }
 

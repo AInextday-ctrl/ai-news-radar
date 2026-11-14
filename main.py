@@ -1111,7 +1111,7 @@ def load_existing_items() -> list:
                         seen_map[k] = it
                     else:
                         existing = seen_map[k]
-                        for fld in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                        for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
                             if it.get(fld) and not existing.get(fld):
                                 existing[fld] = it[fld]
         except Exception as e:
@@ -1293,7 +1293,7 @@ def save_news(items: list):
                                     master_dict[k] = it
                                 else:
                                     exist = master_dict[k]
-                                    for fld in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                                    for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
                                         if it.get(fld) and not exist.get(fld):
                                             exist[fld] = it[fld]
             except Exception as e:
@@ -1305,7 +1305,7 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
-                for preserve_field in ["article_content", "article_content_zh", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
+                for preserve_field in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
@@ -2117,7 +2117,10 @@ def save_news(items: list):
     category_totals = {}
     archive_caps = {'news': 250, 'celebrity': 250, 'tools': 150, 'videos': 100, 'prompts': 60}
     for cat_name in categories_list:
-        cat_archive = [_clean_archive_item(it, cat_name) for it in all_archive_items if it.get("category") == cat_name]
+        cat_archive = [
+            _clean_archive_item(it, cat_name) for it in all_archive_items 
+            if it.get("category") == cat_name or (cat_name == 'news' and it.get("category") not in ['celebrity', 'tools', 'videos', 'prompts'])
+        ]
         cat_archive.sort(key=parse_time_for_sort, reverse=True)
         category_totals[cat_name] = len(cat_archive)
         cat_limit = archive_caps.get(cat_name, 200)
