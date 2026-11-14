@@ -3426,14 +3426,6 @@ and also
           <div id="ai-modal-gallery-strip" class="hidden flex items-center gap-2 overflow-x-auto py-1"></div>
         </div>
 
-        <!-- 顶级付费墙媒体独家报道专属提示条 (针对 The Information, Bloomberg, WSJ 等硬付费墙) -->
-        <div id="ai-modal-paywall-notice" class="hidden flex items-start space-x-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs shadow-sm">
-          <span class="text-base shrink-0 leading-none">🔒</span>
-          <div class="flex-1 leading-relaxed">
-            <span id="ai-modal-paywall-text" class="font-medium"></span>
-          </div>
-        </div>
-
         <!-- 原文包含现场视频报道专属标识栏 (针对源站含路透社/彭博等受 HLS/DRM 保护的现场视频报道) -->
         <div id="ai-modal-video-badge" class="hidden flex items-center justify-between p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs shadow-sm">
           <div class="flex items-center space-x-2 min-w-0">
@@ -3492,6 +3484,14 @@ and also
             <span id="ai-modal-insight-title">AI 点评</span>
           </div>
           <p id="ai-modal-insight-text" class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium whitespace-pre-line"></p>
+        </div>
+
+        <!-- 顶级付费墙媒体独家报道专属提示条 (放在整合段落与评价之后，作为版权与来源说明) -->
+        <div id="ai-modal-paywall-notice" class="hidden flex items-start space-x-2.5 p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs shadow-sm">
+          <span class="text-base shrink-0 leading-none">🔒</span>
+          <div class="flex-1 leading-relaxed">
+            <span id="ai-modal-paywall-text" class="font-medium"></span>
+          </div>
         </div>
       </div>
 

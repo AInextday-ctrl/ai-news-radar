@@ -684,8 +684,16 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         if not paras:
             paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) > 20]
         
+        is_paywalled = bool(item.get("is_paywalled") or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
+        is_excerpt = is_paywalled or (len(paras) <= 6 and not item.get("is_substantive"))
+        
+        if is_excerpt and paras:
+            last_p = paras[-1]
+            if not last_p.endswith("……") and not last_p.endswith("...") and not last_p.endswith("…"):
+                paras[-1] = last_p + ("……" if is_zh else "...")
+
         p_html = "".join([f"<p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>{escape(p)}</p>" for p in paras])
-        sec_title = "📰 深度报道原文实录" if is_zh else "📰 Full In-Depth Coverage"
+        sec_title = ("📰 权威报道核心实录 (精选)" if is_excerpt else "📰 深度报道原文实录") if is_zh else ("📰 In-Depth Coverage (Excerpt)" if is_excerpt else "📰 Full In-Depth Coverage")
         src_note = f"{source_name} 权威实录" if is_zh else f"{source_name} Full Report"
         full_coverage_html = f"""
         <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">

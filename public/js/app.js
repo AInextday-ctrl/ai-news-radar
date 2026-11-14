@@ -9572,18 +9572,27 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       let activeArticleLang = (isZh && hasValidZh) ? 'zh' : (hasValidZh ? 'zh' : (hasValidEn ? 'en' : ''));
 
+      // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)
+      const isPaywalled = (() => {
+        if (item.is_paywalled) return true;
+        const s = (source || item.source || '').toLowerCase();
+        const u = (item.url || '').toLowerCase();
+        const paywallKeywords = ['the information', 'bloomberg', 'wsj', 'wall street journal', 'financial times', 'ft.com', 'theinformation.com', 'bloomberg.com', 'wsj.com'];
+        return paywallKeywords.some(k => s.includes(k) || u.includes(k));
+      })();
+
       const renderArticleView = () => {
         if (!originalCardEl || !originalTextEl) return;
 
         originalCardEl.classList.remove('hidden');
-        if (originalTitleEl) {
-          originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
-        }
 
         // 降级兜底：当抓取源站受严格付费墙或反爬保护导致长文未完全穿透时，展示权威报道实录摘要与明确引导
         if (!hasValidZh && !hasValidEn) {
           if (langToggleEl) langToggleEl.classList.add('hidden');
           if (expandWrapEl) expandWrapEl.classList.add('hidden');
+          if (originalTitleEl) {
+            originalTitleEl.textContent = isZh ? '📰 权威报道核心实录 (精选)' : '📰 In-Depth Coverage (Excerpt)';
+          }
           const fallbackSnippet = isZh
             ? (item.summary_zh || analysis.digest_zh || item.content_snippet || briefingText)
             : (item.summary_en || analysis.digest_en || item.content_snippet || briefingText);
@@ -9642,8 +9651,32 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           .map(p => p.trim())
           .filter(p => p.length > 20 && !adNoiseRegexes.some(r => r.test(p)));
 
+        const isExcerpt = Boolean(
+          isPaywalled || 
+          item.is_paywalled || 
+          !item.is_substantive || 
+          (paras.length <= 6 && (!item.paras_count || item.paras_count < 10))
+        );
+
+        if (originalTitleEl) {
+          if (isExcerpt) {
+            originalTitleEl.textContent = isZh ? '📰 权威报道核心实录 (精选)' : '📰 In-Depth Coverage (Excerpt)';
+          } else {
+            originalTitleEl.textContent = isZh ? '📰 深度报道原文实录' : '📰 Full In-Depth Coverage';
+          }
+        }
+
         let isExpanded = Boolean(originalCardEl.dataset.expanded === 'true');
-        const displayParas = (paras.length > 4 && !isExpanded) ? paras.slice(0, 3) : paras;
+        const displayParas = (paras.length > 4 && !isExpanded) ? paras.slice(0, 3) : [...paras];
+
+        // 若为提炼整合或受付费限制的非完整长文，在最后一段末尾增加省略号 (…… / ...) 明确标注未完待续
+        if (isExcerpt && displayParas.length > 0) {
+          const lastIdx = displayParas.length - 1;
+          const lastP = displayParas[lastIdx].trim();
+          if (!lastP.endsWith('……') && !lastP.endsWith('...') && !lastP.endsWith('…')) {
+            displayParas[lastIdx] = lastP + (activeArticleLang === 'zh' ? '……' : '...');
+          }
+        }
 
         originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh');
 
@@ -9683,16 +9716,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)
-      const isPaywalled = (() => {
-        if (item.is_paywalled) return true;
-        const s = (source || item.source || '').toLowerCase();
-        const u = (item.url || '').toLowerCase();
-        const paywallKeywords = ['the information', 'bloomberg', 'wsj', 'wall street journal', 'financial times', 'ft.com', 'theinformation.com', 'bloomberg.com', 'wsj.com'];
-        return paywallKeywords.some(k => s.includes(k) || u.includes(k));
-      })();
-
-      // 付费墙专属横幅提示控制
+      // 付费墙专属横幅提示控制 (置于 AI 点评与长文实录之后，作为来源与版权说明)
       const paywallNoticeEl = document.getElementById('ai-modal-paywall-notice');
       const paywallTextEl = document.getElementById('ai-modal-paywall-text');
       if (paywallNoticeEl && paywallTextEl) {
