@@ -679,22 +679,49 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     full_coverage_html = ""
     full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content") or item.get("original_content"))) or "").strip()
+    is_paywalled = bool(item.get("is_paywalled") or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
+
+    paras = []
     if full_text and len(full_text) > 120:
         paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) > 20]
         if not paras:
             paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) > 20]
-        
-        is_paywalled = bool(item.get("is_paywalled") or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
         is_excerpt = is_paywalled or (len(paras) <= 6 and not item.get("is_substantive"))
-        
-        if is_excerpt and paras:
-            last_p = paras[-1]
-            if not last_p.endswith("……") and not last_p.endswith("...") and not last_p.endswith("…"):
-                paras[-1] = last_p + ("……" if is_zh else "...")
+    elif is_paywalled:
+        fallback_snippet = str((item.get("summary_zh") or item.get("content_snippet") or summary) if is_zh else (item.get("summary_en") or item.get("content_snippet") or summary) or "").strip()
+        if fallback_snippet and len(fallback_snippet) > 30:
+            paras = [fallback_snippet]
+            is_excerpt = True
+        else:
+            is_excerpt = False
+    else:
+        is_excerpt = False
+
+    if paras:
+        if is_excerpt:
+            clean_last_p = re.sub(r'[\s\u3000。，,.;；:：!！?？]+(?=[…\.]{2,}|$)', '', paras[-1])
+            if not clean_last_p.endswith("……") and not clean_last_p.endswith("...") and not clean_last_p.endswith("…"):
+                paras[-1] = clean_last_p + ("……" if is_zh else "...")
+            else:
+                paras[-1] = clean_last_p
 
         p_html = "".join([f"<p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>{escape(p)}</p>" for p in paras])
         sec_title = ("📰 权威报道核心实录 (精选)" if is_excerpt else "📰 深度报道原文实录") if is_zh else ("📰 In-Depth Coverage (Excerpt)" if is_excerpt else "📰 Full In-Depth Coverage")
         src_note = f"{source_name} 权威实录" if is_zh else f"{source_name} Full Report"
+
+        excerpt_notice_html = ""
+        if is_excerpt:
+            if is_zh:
+                notice_text = f"本条情报为《{escape(source_name)}》独家付费报道（源站设有硬付费墙，非订阅会员将跳转付费购买页）。AI 资讯雷达已为您提炼并结构化呈现核心内幕事实，站内即可通读。" if is_paywalled else "源站设立了版权或登录限制，雷达已为您提炼权威报道核心实录。完整报道可点击下方“阅读原资讯官网报道”浏览。"
+            else:
+                notice_text = f"Exclusive coverage from {escape(source_name)} (paywall-protected; key intelligence record extracted above). Click 'Read Original Source Report' below for the full story on official site." if is_paywalled else "Protected by source publisher copyright or login requirements. Key intelligence extracted above; click below to read full report."
+            excerpt_notice_html = f"""
+          <div class="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs sm:text-sm flex items-start gap-2.5">
+            <span class="text-base shrink-0 leading-none">🔒</span>
+            <div class="leading-relaxed font-medium">{notice_text}</div>
+          </div>
+            """
+
         full_coverage_html = f"""
         <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
           <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
@@ -706,6 +733,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
           <div class="space-y-4">
             {p_html}
           </div>
+          {excerpt_notice_html}
         </div>
         """
 

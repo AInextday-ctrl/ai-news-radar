@@ -9669,12 +9669,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         let isExpanded = Boolean(originalCardEl.dataset.expanded === 'true');
         const displayParas = (paras.length > 4 && !isExpanded) ? paras.slice(0, 3) : [...paras];
 
-        // 若为提炼整合或受付费限制的非完整长文，在最后一段末尾增加省略号 (…… / ...) 明确标注未完待续
+        // 若为提炼整合或受付费限制的非完整长文，在最后一段末尾增加省略号 (…… / ...) 明确标注未完待续（自动消除末尾冗余标点）
         if (isExcerpt && displayParas.length > 0) {
           const lastIdx = displayParas.length - 1;
-          const lastP = displayParas[lastIdx].trim();
-          if (!lastP.endsWith('……') && !lastP.endsWith('...') && !lastP.endsWith('…')) {
-            displayParas[lastIdx] = lastP + (activeArticleLang === 'zh' ? '……' : '...');
+          const cleanLastP = displayParas[lastIdx].trim()
+            .replace(/[\s\u3000。，,.;；:：!！?？]+(?=[…\.]{2,}|$)/ug, '');
+          if (!cleanLastP.endsWith('……') && !cleanLastP.endsWith('...') && !cleanLastP.endsWith('…')) {
+            displayParas[lastIdx] = cleanLastP + (activeArticleLang === 'zh' ? '……' : '...');
+          } else {
+            displayParas[lastIdx] = cleanLastP;
           }
         }
 
@@ -9716,7 +9719,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 付费墙专属横幅提示控制 (置于 AI 点评与长文实录之后，作为来源与版权说明)
+      // 付费墙与精选实录专属横幅提示控制 (置于 AI 点评与长文实录之后，作为来源与版权说明)
       const paywallNoticeEl = document.getElementById('ai-modal-paywall-notice');
       const paywallTextEl = document.getElementById('ai-modal-paywall-text');
       if (paywallNoticeEl && paywallTextEl) {
@@ -9725,6 +9728,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           paywallTextEl.textContent = isZh
             ? `本条情报为《${source}》独家付费报道（源站设有硬付费墙，非订阅会员将跳转付费购买页）。AI 资讯雷达已为您提炼并结构化呈现核心内幕事实，站内即可通读。`
             : `Exclusive scoop from ${source} (paywall-protected; direct link requires subscription). AI News Radar has structured and unpacked all core intelligence facts above for seamless reading.`;
+        } else if (isExcerpt) {
+          paywallNoticeEl.classList.remove('hidden');
+          paywallTextEl.textContent = isZh
+            ? `源站设立了版权或登录限制，雷达已为您提炼权威报道核心实录。完整报道可点击下方“阅读原资讯官网报道”浏览。`
+            : `Protected by publisher copyright or login requirements. Key intelligence extracted above; click "Original Source" below for full piece.`;
         } else {
           paywallNoticeEl.classList.add('hidden');
         }
