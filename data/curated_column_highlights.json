@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 11:34:05 UTC",
+  "generated_at": "2026-11-14 11:49:26 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 11:34:05 UTC",
+      "updated_at": "2026-11-14 11:49:26 UTC",
       "headline_item": {
-        "id": "8e21c58f34a004d6",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "Anthropic模型训练算力效率呈现超指数级增长",
-        "title_en": "Anthropic can already retrain Mythos with \"a fraction of the compute originally needed,\" says former researcher Coxon",
+        "id": "92be13aafeedcbd5",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "OpenAI解散机器人团队整合进通用模型部门",
+        "title_en": "OpenAI reassigns robotics researchers to other teams as general-purpose models might make specialized robotics AI unnecessary",
         "source": "THE DECODER",
-        "published_at": "2026-11-14T11:21:41+00:00",
-        "url": "https://the-decoder.com/anthropic-can-already-retrain-mythos-with-a-fraction-of-the-compute-originally-needed-says-former-researcher-coxon/",
-        "event_summary_zh": "前Anthropic研究员Jacob Coxon披露，Anthropic在IPO路演中展示的算力需求曲线暗示其模型训练效率正在发生超指数级迭代",
-        "event_summary_en": "Former Anthropic researcher Jacob Coxon revealed that the compute trajectory disclosed in the company's IPO roadshow indicates a significant jump in training efficiency for its Mythos model. He argues that algorithmic improvements are scaling super-exponentially, noting that Mythos can now be retrained with a fraction of its original compute requirement, with such gains trending toward automation.",
+        "published_at": "2026-11-14T11:40:51+00:00",
+        "url": "https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/",
+        "event_summary_zh": "OpenAI重组机器人部门，将研发人员并入通用模型团队，旨在通过GPT-6 Astra等通用大模型直接驱动机器人执行任务",
+        "event_summary_en": "OpenAI is dissolving its dedicated robotics division, reassigning researchers to the main research team under Chief Research Officer Mark Chen and the Applied organization led by Greg Brockman. The shift reflects a strategic pivot towards using general-purpose models like GPT-6 Astra, which have outperformed specialized robotics models in spatial reasoning and task execution, for embodied AI development.",
         "core_facts_zh": [
-          "【核心事件】前Anthropic与OpenAI研究员Jacob Coxon在Anthropic IPO路演材料与行业评论：披露模型训练算法效率呈超指数级增长，并呼吁暂停前沿模型研发以缩短技术代差",
-          "【起因与机理】因担忧前沿AI自我迭代失控风险及技术演进速度过快引发行业竞争不公平",
-          "【关键技术规格】核心主体：前Anthropic研究员Jacob Coxon揭露内部算力效率优化趋势。",
-          "【行业影响与走向】后续影响：Coxon主张通过暂停研发以平衡行业竞争格局并缓解技术失控风险。"
+          "【核心事件】OpenAI首席研究官Mark Chen、总裁Greg Brockman及机器人研究团队在OpenAI内部组织架构重组：解散独立机器人研发部门，人员分流至通用模型与应用研究组",
+          "【起因与机理】验证结果表明通用模型在机器人控制任务上的表现优于专用模型，旨在通过大模型解决具身智能",
+          "【关键数据与实测】技术逻辑：GPT-6 Astra在模拟环境中的机器人任务成功率达74.8%，远超专用模型。",
+          "【各方立场与态度】战略演进：放弃专用机器人模型训练路径，转向由大模型直接驱动具身智能控制。"
         ],
         "core_facts_en": [
-          "[Core Event] Jacob Coxon, former researcher at Anthropic and OpenAI: Disclosed that model training efficiency is growing super-exponentially and called for a pause in frontier model development",
-          "[Root Cause & Mechanism] Concerns over the risks of uncontrollable self-improving AI and the widening gap between industry leaders and competitors",
-          "[Key Technical Spec] Key Actor: Former Anthropic researcher Jacob Coxon reveals internal efficiency trends.",
-          "[Industry Impact & Outlook] Outlook: Coxon advocates for a pause in frontier model development to level the competitive playing field and mitigate safety risks."
+          "[Core Event] OpenAI Chief Research Officer Mark Chen, President Greg Brockman, and the robotics team: Dissolution of dedicated robotics team and reassignment of researchers to general research and applied groups",
+          "[Root Cause & Mechanism] Validation shows general-purpose models outperform specialized ones in robotics tasks, aiming for AGI-led embodied intelligence",
+          "[Key Metrics] Technical performance: GPT-6 Astra achieved 74.8% success rate in simulated robotics tasks, outperforming specialized baselines.",
+          "[Key Position & Outlook] Strategic shift: Abandoning specialized model training in favor of general-purpose model-driven embodied control."
         ],
-        "industry_impact_zh": "模型训练算法的迭代效率已从线性的算力堆叠转向以架构优化为核心的效率提升，这标志着大模型行业正从“暴力美学”向“边际成本递减”转型。若算法自动化程度持续走高，领先企业将构建起极高的技术护城河，致使依赖算力规模增长的竞争对手陷入成本不可控的困境。",
-        "industry_impact_en": "The paradigm of model training is shifting from brute-force compute scaling to efficiency-driven architectural optimization, signaling a move toward diminishing marginal costs. As algorithmic automation accelerates, incumbent firms are establishing profound defensive moats that effectively render compute-heavy strategies by competitors economically unsustainable."
+        "industry_impact_zh": "此举标志着具身智能范式的重大迁移，即从“针对特定传感器与运动学训练专用模型”转向“利用大模型涌现能力直接输出机器人动作逻辑”。OpenAI试图通过统一模型底座实现逻辑泛化，这将显著压缩垂直领域机器人算法公司的生存空间，同时迫使传统工业机器人厂商必须在软件栈架构上进行激进的底层兼容改造。",
+        "industry_impact_en": "This move signals a paradigm shift in embodied AI: moving from 'training specialized models for specific kinematics' to 'leveraging emergent capabilities of foundation models for action logic.' By centralizing the control stack into general-purpose models, OpenAI exerts competitive pressure on vertical robotics firms, forcing legacy industrial players to radically pivot their software architectures for model-driven compatibility."
       },
       "headlines": [
         {
-          "id": "8e21c58f34a004d6",
-          "tag_zh": "🎁 算力福利",
-          "tag_en": "🎁 Promos & Credits",
-          "title_zh": "Anthropic模型训练算力效率呈现超指数级增长",
-          "title_en": "Anthropic can already retrain Mythos with \"a fraction of the compute originally needed,\" says former researcher Coxon",
+          "id": "92be13aafeedcbd5",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenAI解散机器人团队整合进通用模型部门",
+          "title_en": "OpenAI reassigns robotics researchers to other teams as general-purpose models might make specialized robotics AI unnecessary",
           "source": "THE DECODER",
-          "published_at": "2026-11-14T11:21:41+00:00",
-          "url": "https://the-decoder.com/anthropic-can-already-retrain-mythos-with-a-fraction-of-the-compute-originally-needed-says-former-researcher-coxon/",
-          "event_summary_zh": "前Anthropic研究员Jacob Coxon披露，Anthropic在IPO路演中展示的算力需求曲线暗示其模型训练效率正在发生超指数级迭代",
-          "event_summary_en": "Former Anthropic researcher Jacob Coxon revealed that the compute trajectory disclosed in the company's IPO roadshow indicates a significant jump in training efficiency for its Mythos model. He argues that algorithmic improvements are scaling super-exponentially, noting that Mythos can now be retrained with a fraction of its original compute requirement, with such gains trending toward automation.",
+          "published_at": "2026-11-14T11:40:51+00:00",
+          "url": "https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/",
+          "event_summary_zh": "OpenAI重组机器人部门，将研发人员并入通用模型团队，旨在通过GPT-6 Astra等通用大模型直接驱动机器人执行任务",
+          "event_summary_en": "OpenAI is dissolving its dedicated robotics division, reassigning researchers to the main research team under Chief Research Officer Mark Chen and the Applied organization led by Greg Brockman. The shift reflects a strategic pivot towards using general-purpose models like GPT-6 Astra, which have outperformed specialized robotics models in spatial reasoning and task execution, for embodied AI development.",
           "core_facts_zh": [
-            "【核心事件】前Anthropic与OpenAI研究员Jacob Coxon在Anthropic IPO路演材料与行业评论：披露模型训练算法效率呈超指数级增长，并呼吁暂停前沿模型研发以缩短技术代差",
-            "【起因与机理】因担忧前沿AI自我迭代失控风险及技术演进速度过快引发行业竞争不公平",
-            "【关键技术规格】核心主体：前Anthropic研究员Jacob Coxon揭露内部算力效率优化趋势。",
-            "【行业影响与走向】后续影响：Coxon主张通过暂停研发以平衡行业竞争格局并缓解技术失控风险。"
+            "【核心事件】OpenAI首席研究官Mark Chen、总裁Greg Brockman及机器人研究团队在OpenAI内部组织架构重组：解散独立机器人研发部门，人员分流至通用模型与应用研究组",
+            "【起因与机理】验证结果表明通用模型在机器人控制任务上的表现优于专用模型，旨在通过大模型解决具身智能",
+            "【关键数据与实测】技术逻辑：GPT-6 Astra在模拟环境中的机器人任务成功率达74.8%，远超专用模型。",
+            "【各方立场与态度】战略演进：放弃专用机器人模型训练路径，转向由大模型直接驱动具身智能控制。"
           ],
           "core_facts_en": [
-            "[Core Event] Jacob Coxon, former researcher at Anthropic and OpenAI: Disclosed that model training efficiency is growing super-exponentially and called for a pause in frontier model development",
-            "[Root Cause & Mechanism] Concerns over the risks of uncontrollable self-improving AI and the widening gap between industry leaders and competitors",
-            "[Key Technical Spec] Key Actor: Former Anthropic researcher Jacob Coxon reveals internal efficiency trends.",
-            "[Industry Impact & Outlook] Outlook: Coxon advocates for a pause in frontier model development to level the competitive playing field and mitigate safety risks."
+            "[Core Event] OpenAI Chief Research Officer Mark Chen, President Greg Brockman, and the robotics team: Dissolution of dedicated robotics team and reassignment of researchers to general research and applied groups",
+            "[Root Cause & Mechanism] Validation shows general-purpose models outperform specialized ones in robotics tasks, aiming for AGI-led embodied intelligence",
+            "[Key Metrics] Technical performance: GPT-6 Astra achieved 74.8% success rate in simulated robotics tasks, outperforming specialized baselines.",
+            "[Key Position & Outlook] Strategic shift: Abandoning specialized model training in favor of general-purpose model-driven embodied control."
           ],
-          "industry_impact_zh": "模型训练算法的迭代效率已从线性的算力堆叠转向以架构优化为核心的效率提升，这标志着大模型行业正从“暴力美学”向“边际成本递减”转型。若算法自动化程度持续走高，领先企业将构建起极高的技术护城河，致使依赖算力规模增长的竞争对手陷入成本不可控的困境。",
-          "industry_impact_en": "The paradigm of model training is shifting from brute-force compute scaling to efficiency-driven architectural optimization, signaling a move toward diminishing marginal costs. As algorithmic automation accelerates, incumbent firms are establishing profound defensive moats that effectively render compute-heavy strategies by competitors economically unsustainable."
+          "industry_impact_zh": "此举标志着具身智能范式的重大迁移，即从“针对特定传感器与运动学训练专用模型”转向“利用大模型涌现能力直接输出机器人动作逻辑”。OpenAI试图通过统一模型底座实现逻辑泛化，这将显著压缩垂直领域机器人算法公司的生存空间，同时迫使传统工业机器人厂商必须在软件栈架构上进行激进的底层兼容改造。",
+          "industry_impact_en": "This move signals a paradigm shift in embodied AI: moving from 'training specialized models for specific kinematics' to 'leveraging emergent capabilities of foundation models for action logic.' By centralizing the control stack into general-purpose models, OpenAI exerts competitive pressure on vertical robotics firms, forcing legacy industrial players to radically pivot their software architectures for model-driven compatibility."
         },
         {
           "id": "dcad0c14b787ae4c",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 11:34:05 UTC",
+      "updated_at": "2026-11-14 11:49:26 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 11:34:05 UTC",
+      "updated_at": "2026-11-14 11:49:26 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -379,7 +379,7 @@
           "id": "agent-desktop",
           "name": "agent-desktop",
           "icon": "🌐",
-          "stars": "23.5k",
+          "stars": "23.6k",
           "weekly_growth_zh": "本周暴增 +13,858 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+13,858 ★ this week · 24H Trending Breakout",
           "license": "MIT",
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,549)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,557)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,549 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,557 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
