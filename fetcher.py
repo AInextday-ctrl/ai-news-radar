@@ -2842,7 +2842,7 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         is_dummy_summary = False
 
                     # 针对权威资讯执行源站解构与长文深度穿透抓取 (支持每渠道穿透前 30 篇核心长文，兼顾完整度与秒级更新)
-                    is_priority_source = any(ps in (source_display or "").lower() or ps in (url or "").lower() for ps in ["wired", "bloomberg", "reuters", "theverge", "technologyreview", "techcrunch", "arstechnica"])
+                    is_priority_source = any(ps in (source_display or "").lower() or ps in (url or "").lower() for ps in ["wired", "bloomberg", "reuters", "theverge", "technologyreview", "techcrunch", "arstechnica", "nytimes", "wsj", "ft.com"])
                     needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800) or is_priority_source) and (penetration_count < 30)
                     if needs_penetration:
                         penetration_count += 1

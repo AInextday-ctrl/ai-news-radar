@@ -361,6 +361,43 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        # 2.9 提取 New York Times / NYT window.__preloadedData 预渲染正文 AST (如 Opinion, News, Magazine)
+        if not jsonld_paras and ('window.__preloadedData' in html_text or 'sprinkledBody' in html_text):
+            try:
+                m_nyt = re.search(r'window\.__preloadedData\s*=\s*(\{.*?);</script>', html_text, re.DOTALL | re.IGNORECASE)
+                if m_nyt:
+                    raw_str = m_nyt.group(1).rstrip('; \r\n')
+                    clean_str = re.sub(r':\s*undefined\b', ': null', raw_str)
+                    nd_data = json.loads(clean_str)
+
+                    def get_text_from_node(node):
+                        parts = []
+                        if isinstance(node, dict):
+                            if 'text' in node and isinstance(node['text'], str):
+                                parts.append(node['text'])
+                            for ch in node.get('content', []) if isinstance(node.get('content'), list) else []:
+                                parts.append(get_text_from_node(ch))
+                            for ch in node.get('children', []) if isinstance(node.get('children'), list) else []:
+                                parts.append(get_text_from_node(ch))
+                        elif isinstance(node, list):
+                            for item in node:
+                                parts.append(get_text_from_node(item))
+                        return "".join(parts)
+
+                    article_node = nd_data.get('loaderData', {}).get('data', {}).get('article', {})
+                    sprinkled = article_node.get('sprinkledBody', {})
+                    nyt_items = sprinkled.get('content', []) if isinstance(sprinkled, dict) else []
+
+                    for item in nyt_items:
+                        p_t = get_text_from_node(item).strip()
+                        if len(p_t) >= 40 and not any(bad in p_t.lower() for bad in [
+                            'enable javascript', 'verify access', 'letters to the editor',
+                            'follow the new york times', 'committed to publishing a diversity of letters'
+                        ]):
+                            jsonld_paras.append(p_t)
+            except Exception:
+                pass
+
         # 3. 寻找正文容器 (仅剥离无内容的叶子噪声标签，坚决杜绝用正则贪婪截断嵌套 div)
         clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)
 
