@@ -577,6 +577,125 @@ def extract_ai_analysis_text(analysis_data: Any, is_zh: bool) -> str:
     return ""
 
 
+def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, str]], is_zh: bool = True) -> str:
+    """
+    Magazine-Grade Professional Typography & Inline Media Injector:
+    - Lead Paragraph Accent: distinct styling for the opening narrative lead.
+    - Timeline & Context Badges: elegant pill badges for date / time / key pivot markers.
+    - Pull Quote Callouts: editorial blockquotes with serif quote glyphs.
+    - Inline Photo & Figure Injection: interleaves authentic article photography between narrative beats.
+    """
+    rendered_elements = []
+    total = len(paras)
+
+    zh_badge_patterns = [
+        r"^(\d{4}\s*年(?:[0-9]{1,2}\s*月)?(?:，|,)?)\s*",
+        r"^(今年\s*[0-9]{1,2}\s*月(?:，|,)?)\s*",
+        r"^(大约在同一时间(?:，|,)?)\s*",
+        r"^(诉讼指控称(?:，|,)?)\s*",
+        r"^(据(?:知情人士|执行该项目的乔比航空公司|公开资料)透露(?:，|,)?)\s*",
+        r"^(与此同时(?:，|,)?)\s*",
+        r"^(分析师指出(?:，|,)?)\s*",
+        r"^(商业发布似乎指日可待(?:。|，)?)\s*",
+        r"^(据执行该项目的乔比航空公司称(?:，|,)?)\s*",
+        r"^(最终目标要远大得多(?:。|，)?)\s*",
+    ]
+    en_badge_patterns = [
+        r"^(In\s+\d{4},?)\s*",
+        r"^(Earlier this year,?)\s*",
+        r"^(Around the same time,?)\s*",
+        r"^(Meanwhile,?)\s*",
+        r"^(According to [^,]+,?)\s*",
+        r"^(Analysts (?:note|point out) that,?)\s*",
+        r"^(At the same time,?)\s*",
+    ]
+    badge_regexes = zh_badge_patterns if is_zh else en_badge_patterns
+
+    img_idx = 0
+
+    for i, p in enumerate(paras):
+        raw_p = p.strip()
+        if not raw_p:
+            continue
+
+        is_pure_quote = bool(re.match(r'^[“"][^”"]+[”"]$', raw_p) or re.match(r'^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$', raw_p))
+
+        badge_html = ""
+        p_body = raw_p
+        for bp in badge_regexes:
+            bm = re.match(bp, p_body)
+            if bm:
+                marker = bm.group(1).rstrip('，,。')
+                p_body = p_body[bm.end():].strip()
+                badge_html = f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-2 tracking-wide select-none">{escape(marker)}</span>'
+                break
+
+        escaped_body = escape(p_body)
+        styled_content = f"{badge_html}{escaped_body}"
+
+        # 1. Lead Paragraph (First paragraph when article is substantive)
+        if i == 0 and total >= 3:
+            rendered_elements.append(f"""
+            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
+              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">{styled_content}</p>
+            </div>
+            """.strip())
+        # 2. Editorial Pull Quote
+        elif is_pure_quote:
+            clean_q = escape(raw_p)
+            rendered_elements.append(f"""
+            <blockquote class="my-6 p-4 sm:p-5 rounded-2xl bg-amber-50/40 dark:bg-amber-950/20 border-l-4 border-amber-500/80 dark:border-amber-400 text-slate-800 dark:text-slate-200 shadow-xs">
+              <div class="flex items-start gap-2.5">
+                <span class="text-3xl text-amber-500/70 font-serif leading-none select-none shrink-0">“</span>
+                <div class="text-sm sm:text-base leading-relaxed sm:leading-loose italic font-serif flex-1">{clean_q}</div>
+                <span class="text-3xl text-amber-500/70 font-serif leading-none select-none shrink-0 self-end">”</span>
+              </div>
+            </blockquote>
+            """.strip())
+        # 3. Regular Paragraph
+        else:
+            rendered_elements.append(f"""
+            <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">{styled_content}</p>
+            """.strip())
+
+        # Interleave inline photos between narrative beats
+        should_insert_photo = False
+        if img_idx < len(usable_images):
+            if (i == 1 and total >= 3) or (i == 0 and total == 2):
+                should_insert_photo = True
+            elif i == 4 and total >= 6:
+                should_insert_photo = True
+            elif i == 8 and total >= 10:
+                should_insert_photo = True
+
+        if should_insert_photo:
+            cur_img = usable_images[img_idx]
+            img_idx += 1
+            i_url = cur_img["url"]
+            if is_zh:
+                i_cap = cur_img.get("caption") or cur_img.get("alt") or ""
+            else:
+                i_cap = cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "Field scene"
+            
+            caption_html = ""
+            if i_cap:
+                prefix = "📷 现场图景: " if is_zh else "📷 Field Scene: "
+                caption_html = f"""
+                <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
+                  <span>{prefix}{escape(i_cap)}</span>
+                </figcaption>
+                """.strip()
+
+            rendered_elements.append(f"""
+            <figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="{escape(i_url)}" alt="{escape(i_cap)}" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+              {caption_html}
+            </figure>
+            """.strip())
+
+    return "\n\n".join(rendered_elements)
+
+
 def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: List[Dict[str, Any]] = None) -> str:
     news_id = str(item.get("id") or "")
     
@@ -705,7 +824,37 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             else:
                 paras[-1] = clean_last_p
 
-        p_html = "".join([f"<p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>{escape(p)}</p>" for p in paras])
+        # 提取真实文章正文配图与图表
+        raw_inline_images = item.get("inline_images", [])
+        usable_images = []
+        seen_img_urls = set()
+        cover_url = item.get("image_url") or item.get("cover_image")
+        if cover_url:
+            seen_img_urls.add(cover_url.split("?")[0])
+
+        for img_entry in raw_inline_images:
+            if isinstance(img_entry, dict):
+                i_url = img_entry.get("url", "").strip()
+                i_cap = img_entry.get("caption", "").strip() or img_entry.get("alt", "").strip()
+            elif isinstance(img_entry, str):
+                i_url = img_entry.strip()
+                i_cap = ""
+            else:
+                continue
+            if not i_url or not i_url.startswith("http"):
+                continue
+            clean_k = i_url.split("?")[0]
+            if clean_k in seen_img_urls:
+                continue
+            seen_img_urls.add(clean_k)
+            usable_images.append({
+                "url": i_url,
+                "caption": img_entry.get("caption", "").strip() if isinstance(img_entry, dict) else "",
+                "caption_en": img_entry.get("caption_en", "").strip() if isinstance(img_entry, dict) else "",
+                "alt": img_entry.get("alt", "").strip() if isinstance(img_entry, dict) else ""
+            })
+
+        p_html = format_editorial_paragraphs(paras, usable_images, is_zh=is_zh)
         sec_title = ("📰 权威报道核心实录 (精选)" if is_excerpt else "📰 深度报道原文实录") if is_zh else ("📰 In-Depth Coverage (Excerpt)" if is_excerpt else "📰 Full In-Depth Coverage")
         src_note = f"{source_name} 权威实录" if is_zh else f"{source_name} Full Report"
 

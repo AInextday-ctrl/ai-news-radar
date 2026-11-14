@@ -9164,13 +9164,54 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     // 专访与深度长文富文本排版引擎 (Rich Interview & Article Formatter)
     // ==========================================
-    function formatRichArticleContent(rawText, isZh) {
+    function formatRichArticleContent(rawText, isZh, inlineImages, noInnerCollapse = true) {
       if (!rawText || typeof rawText !== 'string') return '';
-      const rawParas = rawText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 25);
+      const rawParas = rawText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 20);
       if (rawParas.length === 0) return `<p class="leading-relaxed text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-normal">${escapeHtml(rawText)}</p>`;
 
-      const renderPara = (p) => {
+      const usableImages = [];
+      const seenImgs = new Set();
+      if (Array.isArray(inlineImages)) {
+        for (const img of inlineImages) {
+          const u = typeof img === 'string' ? img.trim() : (img && img.url ? String(img.url).trim() : '');
+          const cap = (img && typeof img === 'object') ? (img.caption || img.alt || '') : '';
+          if (!u || !u.startsWith('http')) continue;
+          const cleanK = u.split('?')[0];
+          if (seenImgs.has(cleanK)) continue;
+          seenImgs.add(cleanK);
+          usableImages.push({ url: u, caption: cap });
+        }
+      }
+
+      const zhBadgePatterns = [
+        /^(\d{4}\s*年(?:[0-9]{1,2}\s*月)?(?:，|,)?)\s*/,
+        /^(今年\s*[0-9]{1,2}\s*月(?:，|,)?)\s*/,
+        /^(大约在同一时间(?:，|,)?)\s*/,
+        /^(诉讼指控称(?:，|,)?)\s*/,
+        /^(据(?:知情人士|执行该项目的乔比航空公司|公开资料)透露(?:，|,)?)\s*/,
+        /^(与此同时(?:，|,)?)\s*/,
+        /^(分析师指出(?:，|,)?)\s*/,
+        /^(商业发布似乎指日可待(?:。|，)?)\s*/,
+        /^(据执行该项目的乔比航空公司称(?:，|,)?)\s*/,
+        /^(最终目标要远大得多(?:。|，)?)\s*/
+      ];
+      const enBadgePatterns = [
+        /^(In\s+\d{4},?)\s*/i,
+        /^(Earlier this year,?)\s*/i,
+        /^(Around the same time,?)\s*/i,
+        /^(Meanwhile,?)\s*/i,
+        /^(According to [^,]+,?)\s*/i,
+        /^(Analysts (?:note|point out) that,?)\s*/i,
+        /^(At the same time,?)\s*/i
+      ];
+      const badgeRegexes = isZh ? zhBadgePatterns : enBadgePatterns;
+
+      let imgIdx = 0;
+      const total = rawParas.length;
+
+      const renderPara = (p, idx) => {
         const clean = p.replace(/^&[a-z]+;\s*/i, '').trim();
+
         // 1. 识别记者/采访提问 (Q: / 问: / 简短问句且包含问号)
         const isQ = clean.startsWith('Q:') || clean.startsWith('问：') || clean.startsWith('问:') || 
                     (clean.endsWith('?') && clean.length < 260) || (clean.endsWith('？') && clean.length < 260) ||
@@ -9179,7 +9220,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (isQ) {
           const qText = clean.replace(/^(?:Q:?|问[：:])\s*/i, '');
           return `
-            <div class="my-2.5 p-3 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/50 border-l-4 border-indigo-500 font-semibold text-slate-900 dark:text-slate-100 text-xs sm:text-sm shadow-sm flex items-start gap-2.5">
+            <div class="my-3 p-3.5 rounded-xl bg-indigo-50/90 dark:bg-indigo-950/50 border-l-4 border-indigo-500 font-semibold text-slate-900 dark:text-slate-100 text-xs sm:text-sm shadow-xs flex items-start gap-2.5">
               <span class="text-indigo-600 dark:text-indigo-400 font-bold shrink-0">💬 ${isZh ? '提问' : 'Q'}:</span>
               <span class="flex-1 leading-relaxed">${escapeHtml(qText)}</span>
             </div>
@@ -9190,32 +9231,101 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         if (/^(?:Altman|Sam|奥特曼|山姆)[：:]/i.test(clean)) {
           const aText = clean.replace(/^(?:Altman|Sam|奥特曼|山姆)[：:]\s*/i, '');
           return `
-            <div class="my-2 pl-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed border-l-2 border-emerald-500/80 bg-emerald-50/40 dark:bg-emerald-950/30 rounded-r-xl p-3 space-y-1">
+            <div class="my-3 pl-3.5 py-2 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed border-l-2 border-emerald-500/80 bg-emerald-50/40 dark:bg-emerald-950/30 rounded-r-xl p-3 space-y-1">
               <div class="font-bold text-[11px] text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
                 <span>🎙️</span>
-                <span>山姆·奥特曼 (Sam Altman)</span>
+                <span>${isZh ? '山姆·奥特曼 (Sam Altman)' : 'Sam Altman'}</span>
               </div>
               <p class="leading-relaxed font-normal">${escapeHtml(aText)}</p>
             </div>
           `;
         }
 
-        // 3. 常规段落与报道叙述
-        return `<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${escapeHtml(clean)}</p>`;
+        // 3. 识别纯引语/对白 (Pure Quotation)
+        const isPureQuote = Boolean(
+          /^[“"][^”"]+[”"]$/.test(clean) || 
+          /^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$/.test(clean)
+        );
+        if (isPureQuote) {
+          return `
+            <blockquote class="my-4 p-3.5 sm:p-4 rounded-xl bg-amber-50/40 dark:bg-amber-950/20 border-l-4 border-amber-500/80 dark:border-amber-400 text-slate-800 dark:text-slate-200 shadow-xs">
+              <div class="flex items-start gap-2">
+                <span class="text-2xl text-amber-500/70 font-serif leading-none select-none shrink-0">“</span>
+                <div class="text-xs sm:text-sm leading-relaxed sm:leading-loose italic font-serif flex-1">${escapeHtml(clean)}</div>
+                <span class="text-2xl text-amber-500/70 font-serif leading-none select-none shrink-0 self-end">”</span>
+              </div>
+            </blockquote>
+          `;
+        }
+
+        // 4. 提取时间线与事件节点胶囊标签
+        let badgeHtml = '';
+        let pBody = clean;
+        for (const bp of badgeRegexes) {
+          const bm = pBody.match(bp);
+          if (bm) {
+            const marker = bm[1].replace(/[，,。]+$/, '');
+            pBody = pBody.slice(bm[0].length).trim();
+            badgeHtml = `<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-1.5 tracking-wide select-none">${escapeHtml(marker)}</span>`;
+            break;
+          }
+        }
+
+        const styledContent = `${badgeHtml}${escapeHtml(pBody)}`;
+
+        // 5. 首段导语高亮
+        if (idx === 0 && total >= 3) {
+          return `
+            <div class="p-3.5 sm:p-4 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-3.5">
+              <p class="text-xs sm:text-sm leading-relaxed text-slate-800 dark:text-slate-100 font-medium">${styledContent}</p>
+            </div>
+          `;
+        }
+
+        // 6. 常规段落
+        return `<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${styledContent}</p>`;
       };
 
-      if (rawParas.length <= 6) {
-        return `<div class="space-y-3">${rawParas.map(renderPara).join('')}</div>`;
+      // 组装段落与正文穿插配图
+      const elements = [];
+      for (let i = 0; i < rawParas.length; i++) {
+        elements.push(renderPara(rawParas[i], i));
+
+        let shouldInsertPhoto = false;
+        if (imgIdx < usableImages.length) {
+          if ((i === 1 && total >= 3) || (i === 0 && total == 2)) shouldInsertPhoto = true;
+          else if (i === 4 && total >= 6) shouldInsertPhoto = true;
+          else if (i === 8 && total >= 10) shouldInsertPhoto = true;
+        }
+
+        if (shouldInsertPhoto) {
+          const curImg = usableImages[imgIdx++];
+          const prefix = isZh ? '📷 现场图景: ' : '📷 Field Scene: ';
+          const rawCap = isZh ? (curImg.caption || curImg.alt || '') : (curImg.caption_en || curImg.alt || curImg.caption || '');
+          const capHtml = rawCap
+            ? `<figcaption class="px-3.5 py-2 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium"><span>${prefix}${escapeHtml(rawCap)}</span></figcaption>`
+            : '';
+          elements.push(`
+            <figure class="my-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-xs">
+              <img src="${escapeHtml(curImg.url)}" alt="${escapeHtml(rawCap || 'Article image')}" class="w-full max-h-[380px] object-cover sm:rounded-t-xl transition duration-300 hover:opacity-95" loading="lazy" />
+              ${capHtml}
+            </figure>
+          `);
+        }
       }
 
-      const initialBatch = rawParas.slice(0, 6).map(renderPara).join('');
-      const remainingBatch = rawParas.slice(6).map(renderPara).join('');
+      if (noInnerCollapse || rawParas.length <= 6) {
+        return `<div class="space-y-3.5">${elements.join('')}</div>`;
+      }
+
+      const initialBatch = elements.slice(0, 6).join('');
+      const remainingBatch = elements.slice(6).join('');
       const expandId = 'modal-full-article-' + Math.random().toString(36).substring(2, 8);
 
       return `
-        <div class="space-y-3">
+        <div class="space-y-3.5">
           ${initialBatch}
-          <div id="${expandId}" class="hidden space-y-3 pt-2 border-t border-dashed border-slate-200 dark:border-slate-800">
+          <div id="${expandId}" class="hidden space-y-3.5 pt-2 border-t border-dashed border-slate-200 dark:border-slate-800">
             ${remainingBatch}
           </div>
           <button type="button" onclick="const f=document.getElementById('${expandId}'); const b=this; if(f.classList.contains('hidden')){ f.classList.remove('hidden'); b.innerHTML='▲ ${isZh ? '收起部分实录' : 'Collapse Article'}'; } else { f.classList.add('hidden'); b.innerHTML='▼ ${isZh ? `展开阅读完整访谈实录 (共 ${rawParas.length} 段)` : `Expand Full Transcript (${rawParas.length} paragraphs)`}'; }" class="w-full py-2.5 px-4 text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50/70 dark:bg-indigo-950/40 hover:bg-indigo-100/80 dark:hover:bg-indigo-900/60 rounded-xl border border-indigo-200/80 dark:border-indigo-800/80 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
@@ -9223,6 +9333,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           </button>
         </div>
       `;
+    }
     }
 
     // ==========================================
@@ -9681,7 +9792,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
         }
 
-        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh');
+        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh', item.inline_images, true);
 
         if (expandWrapEl && expandBtnEl && expandTextEl) {
           if (paras.length > 4) {

@@ -731,6 +731,7 @@ class ArticleExtractor:
             "domain": "",
             "title": "",
             "cover_image": None,
+            "inline_images": [],
             "lead_paragraph": "",
             "paragraphs": [],
             "full_text": "",
@@ -785,6 +786,69 @@ class ArticleExtractor:
             cand_img = html.unescape(m_img.group(1)).strip()
             if not any(bad in cand_img.lower() for bad in ["pml.png", "techmeme.com", "pixel", "spacer", "tracking", "avatar", "icon", "placeholder"]):
                 result["cover_image"] = cand_img
+
+        # 1.5 提取正文高价值图景 (Inline Body Images & Figures)
+        inline_images = []
+        seen_img_urls = set()
+        if result.get("cover_image"):
+            seen_img_urls.add(result["cover_image"])
+
+        # 优先提取带 figure 容器的编辑部摄影与图表
+        figure_matches = re.findall(r'<figure[^>]*>(.*?)</figure>', html_text, flags=re.DOTALL | re.IGNORECASE)
+        for fig in figure_matches:
+            src_m = re.search(r'(?:src|data-src)=["\']([^"\'\s]+)', fig, flags=re.IGNORECASE)
+            if not src_m:
+                continue
+            raw_src = html.unescape(src_m.group(1)).strip()
+            if not raw_src.startswith("http"):
+                continue
+            clean_src = raw_src.split("?")[0] if "media.wired.com" not in raw_src else raw_src
+            if clean_src in seen_img_urls:
+                continue
+            if any(bad in clean_src.lower() for bad in ["pixel", "spacer", "tracking", "avatar", "icon", "logo", "1x1", "data:image", "ad-", "banner"]):
+                continue
+
+            cap_m = re.search(r'<figcaption[^>]*>(.*?)</figcaption>', fig, flags=re.DOTALL | re.IGNORECASE)
+            caption = ""
+            if cap_m:
+                caption = ' '.join(html.unescape(re.sub(r'<[^>]+>', '', cap_m.group(1))).split()).strip()
+            if not caption:
+                alt_m = re.search(r'alt=["\']([^"\']+)["\']', fig, flags=re.IGNORECASE)
+                if alt_m:
+                    caption = ' '.join(html.unescape(alt_m.group(1)).split()).strip()
+
+            inline_images.append({
+                "url": raw_src,
+                "caption": caption[:160],
+                "alt": caption[:100]
+            })
+            seen_img_urls.add(clean_src)
+            if len(inline_images) >= 4:
+                break
+
+        # 兜底：若无 figure，提取正文中具名 alt 的大图
+        if not inline_images:
+            body_img_matches = re.finditer(r'<img[^>]+(?:src|data-src)=["\']([^"\']+)["\'][^>]*>', html_text, flags=re.IGNORECASE)
+            for bm in body_img_matches:
+                img_tag = bm.group(0)
+                raw_src = html.unescape(bm.group(1)).strip()
+                if not raw_src.startswith("http") or raw_src in seen_img_urls:
+                    continue
+                if any(bad in raw_src.lower() for bad in ["pixel", "spacer", "tracking", "avatar", "icon", "logo", "emoji", "1x1", "svg", "pml.png"]):
+                    continue
+                alt_m = re.search(r'alt=["\']([^"\']+)["\']', img_tag, flags=re.IGNORECASE)
+                caption = html.unescape(alt_m.group(1)).strip() if alt_m else ""
+                if len(caption) >= 6 and not any(bad in caption.lower() for bad in ["advertisement", "icon", "logo", "arrow", "button", "share"]):
+                    inline_images.append({
+                        "url": raw_src,
+                        "caption": caption[:160],
+                        "alt": caption[:100]
+                    })
+                    seen_img_urls.add(raw_src)
+                    if len(inline_images) >= 3:
+                        break
+
+        result["inline_images"] = inline_images
 
         # 2. 提取 meta description 备用导语
         m_desc = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:description|twitter:description|description)["\'][^>]+content=["\']([^"\']+)["\']', html_text, re.I)

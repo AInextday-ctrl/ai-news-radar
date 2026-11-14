@@ -234,7 +234,35 @@
             <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">Wired AI 权威实录</span>
           </div>
           <div class="space-y-4">
-            <p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>使用 OpenAI 的 GPT-6 Sol，我教了一个虚拟版本的 Microduck（来自 Pollen Robotics 和 Hugging Face 的可爱机器人）在房间里走动并识别附近的任何孟加拉猫。 （上面的片段显示机器人摇摇晃晃地走向目标猫科动物；它的眼睛视图显示在右上角。）</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我还在耐心等待实体的 Microduck——请快点发货，伙计们——但模拟行为相对简单，所以它应该转移到真实的东西上。我计划让机器人自动为我的宠物孟加拉豹猫 Leona 分发零食，或许可以通过低下头从 3D 打印的头戴式储藏室中释放一个零食。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我能够在短短几个小时内编码和训练虚拟机器人，坦率地说，这令人难以置信。以前，这种事情可能需要我几周的时间才能弄清楚。这是可能的，因为 OpenAI 的最新模型非常擅长理解和操纵物理世界的 3D 表示，然后将其转化为有用的代码、代理动作和机器人训练。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>真正的机器人专家正在使用最新的模型来做一些令人惊奇的事情。去年 9 月，当 OpenAI 发布 Astra 时，加州大学伯克利分校教授 Ken Goldberg 和他的学生观看了展示其渲染 3D 图像能力的演示。他们想知道它是否有助于训练不同类型的机器人所需的模拟。这些模拟需要非常详细和极其准确，以确保复杂的行为（可以跳舞的人形机器人或可以抓取的机器人手）能够忠实地转移到现实世界。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>Goldberg 实验室的一名成员向 Astra 提供了一款名为 Newton 的 Nvidia 工具，向其展示了一段真实机器人正在运行的视频剪辑，并询问它是否可以创建该场景的模拟。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>“令我们所有人震惊的是，它在一个小时内就生成了完整的 3D 模拟，其中包含所有参数设置——摄像机的位置、灯光、背景和所有材质，”Goldberg 告诉我。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>戈德堡说，通过运行实验和检查结果，Astra 还能够自动化模拟训练机器人所涉及的大部分苦差事。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>这正是我在训练虚拟 Microduck 时发现的。除了 GPT-6 Sol 之外，我还使用了 Nous Research 的一款名为 Hermes 的代理工具，以及 Nvidia DGX Spark（一款包含强大 AI 芯片的个人计算机）。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>我之前写过有关使用代理和编码模型来配置、编程和调试物理机器人的文章。通常，此类工作需要大量的专业知识；现代编码模型使其变得轻而易举。但 OpenAI 的最新模型远远超出了编写代码的范围。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>它使用一款名为 Isaac Sim 的 Nvidia 软件向控制虚拟机器人的模型提供指令，观看其运行视频以评估其运行情况，并建议对其训练制度进行调整。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>这个过程让我能够训练 Microduck 四处走动而不会摔倒。我最初尝试让 GPT-6 Sol 教机器人进行月球漫步——我给它喂了一张迈克尔·杰克逊在舞台上滑行的 GIF，它试图模仿——但经过几个小时的努力，它只得到了一次非常愉快的向后慢跑。 （机器人还没有完全击败我们。）</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>与 Goldberg 合作过的 Nvidia 研究员吉姆·范 (Jim Fan) 表示，人工智能现在控制机器人的方式反映了软件代理的运作方式。 LLMS 可以使用经过训练来控制物理动作的模型——视觉语言动作 (VLA) 模型——就像它们访问计算机上的不同软件一样。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>本周，Fan、Goldberg 和其他人开源了一个名为 Aspire 的机器人代理框架，它允许机器人发现和使用新技能。一个例子：GPT-6 Astra 找到了如何使用一对机械臂来解决魔方问题。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>“它捡起它，试图扭转它，但角度不对，”范说。 “然后它会思考非常非常长的时间，但它最终能够解决这个问题，因为它随着时间的推移学习了技能。”</p>
+            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
+              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">使用 OpenAI 的 GPT-6 Sol，我教了一个虚拟版本的 Microduck（来自 Pollen Robotics 和 Hugging Face 的可爱机器人）在房间里走动并识别附近的任何孟加拉猫。 （上面的片段显示机器人摇摇晃晃地走向目标猫科动物；它的眼睛视图显示在右上角。）</p>
+            </div>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">我还在耐心等待实体的 Microduck——请快点发货，伙计们——但模拟行为相对简单，所以它应该转移到真实的东西上。我计划让机器人自动为我的宠物孟加拉豹猫 Leona 分发零食，或许可以通过低下头从 3D 打印的头戴式储藏室中释放一个零食。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">我能够在短短几个小时内编码和训练虚拟机器人，坦率地说，这令人难以置信。以前，这种事情可能需要我几周的时间才能弄清楚。这是可能的，因为 OpenAI 的最新模型非常擅长理解和操纵物理世界的 3D 表示，然后将其转化为有用的代码、代理动作和机器人训练。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">真正的机器人专家正在使用最新的模型来做一些令人惊奇的事情。去年 9 月，当 OpenAI 发布 Astra 时，加州大学伯克利分校教授 Ken Goldberg 和他的学生观看了展示其渲染 3D 图像能力的演示。他们想知道它是否有助于训练不同类型的机器人所需的模拟。这些模拟需要非常详细和极其准确，以确保复杂的行为（可以跳舞的人形机器人或可以抓取的机器人手）能够忠实地转移到现实世界。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Goldberg 实验室的一名成员向 Astra 提供了一款名为 Newton 的 Nvidia 工具，向其展示了一段真实机器人正在运行的视频剪辑，并询问它是否可以创建该场景的模拟。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">“令我们所有人震惊的是，它在一个小时内就生成了完整的 3D 模拟，其中包含所有参数设置——摄像机的位置、灯光、背景和所有材质，”Goldberg 告诉我。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">戈德堡说，通过运行实验和检查结果，Astra 还能够自动化模拟训练机器人所涉及的大部分苦差事。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">这正是我在训练虚拟 Microduck 时发现的。除了 GPT-6 Sol 之外，我还使用了 Nous Research 的一款名为 Hermes 的代理工具，以及 Nvidia DGX Spark（一款包含强大 AI 芯片的个人计算机）。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">我之前写过有关使用代理和编码模型来配置、编程和调试物理机器人的文章。通常，此类工作需要大量的专业知识；现代编码模型使其变得轻而易举。但 OpenAI 的最新模型远远超出了编写代码的范围。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">它使用一款名为 Isaac Sim 的 Nvidia 软件向控制虚拟机器人的模型提供指令，观看其运行视频以评估其运行情况，并建议对其训练制度进行调整。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">这个过程让我能够训练 Microduck 四处走动而不会摔倒。我最初尝试让 GPT-6 Sol 教机器人进行月球漫步——我给它喂了一张迈克尔·杰克逊在舞台上滑行的 GIF，它试图模仿——但经过几个小时的努力，它只得到了一次非常愉快的向后慢跑。 （机器人还没有完全击败我们。）</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">与 Goldberg 合作过的 Nvidia 研究员吉姆·范 (Jim Fan) 表示，人工智能现在控制机器人的方式反映了软件代理的运作方式。 LLMS 可以使用经过训练来控制物理动作的模型——视觉语言动作 (VLA) 模型——就像它们访问计算机上的不同软件一样。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">本周，Fan、Goldberg 和其他人开源了一个名为 Aspire 的机器人代理框架，它允许机器人发现和使用新技能。一个例子：GPT-6 Astra 找到了如何使用一对机械臂来解决魔方问题。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">“它捡起它，试图扭转它，但角度不对，”范说。 “然后它会思考非常非常长的时间，但它最终能够解决这个问题，因为它随着时间的推移学习了技能。”</p>
           </div>
           
         </div>

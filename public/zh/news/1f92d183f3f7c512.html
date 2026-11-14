@@ -220,7 +220,25 @@
             <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">Wired AI 权威实录</span>
           </div>
           <div class="space-y-4">
-            <p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>大约十年来，英国政府一直默认公开发布用公共资金生成的代码，因为它是透明的，并且使代码更容易重用具有成本效益。这包括卫生和社会保障部、内政部以及地方当局。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>但资金紧张导致各部门忽视了技术资产的维护和改进。虽然 ControlPlane 安全研究员 Chris Nesbitt-Smith 使用 Claude 的 Opus 和 Sonnet AI 模型发现了这些漏洞，但他表示，他在笔记本电脑上使用了消费级模型，并且许多问题可以通过例行 IT 健康检查发现。他告诉《连线》杂志：“这一切都不是一般媒体所担心的网络攻击的复杂程度。” “这都是愚蠢的事情。”</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>在他发现的最严重的案例中，负责处理英格兰各地土地使用事务的规划监察局在不小心将登录信息提交到公共存储库 GitHub 后未能完全删除登录信息。事实上，这些凭证提供了如此广泛的访问权限，而且似乎没有过期，再加上该机构意外公布了这些凭证，“这对他们来说尤其危险”。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>Nesbitt-Smith 表示，完整的 Microsoft Entra ID 将赋予对所有 SharePoint 站点和私人员工 OneDrive 帐户（包括 HR 记录）的“上帝级”读写访问权限。据发现它的安全研究人员称，它还可以访问敏感图书馆，这些图书馆可以合法保存法定规划查询和上诉的证据。 “勒索、加密所有数据或窃取所有数据的选项非常多，”内斯比特-史密斯说。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>规划监察局的一位发言人告诉《连线》杂志，其网络监控工具立即检测到 Nesbitt-Smith 在 8 月份的活动，并且在 ControlPlane 联系时已将其作为网络事件进行处理。该机构在报告后 20 分钟内识别并修复了该漏洞，并确认没有发生数据泄露。他们告诉《连线》杂志：“我们已经审查并加强了我们的系统和流程，以防止此类问题再次发生，我们感谢研究人员的工作并提醒我们注意这一点。”</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>非营利行业组织 OpenUK 的首席执行官阿曼达·布洛克 (Amanda Brock) 表示，规划监察局的问题“与开源无关，而是在使用公共工具时的内部管理问题”。 “这些数据之所以被曝光，是因为没有遵循良好的流程，”她补充道。 “这不是开源安全问题。”</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>Nesbitt-Smith 表示，他扫描了 33 个组织的 349 个公共部门代码库，其中约三分之二发现了漏洞。其中一些在教育部的代码中被发现，包括学校使用的采购服务、包含个人详细信息、资格、工作经历和身份证件的教师申请服务，以及英格兰政府资助的培训机构和学徒的主要登记册。他还在苏格兰政府开放数据门户中发现了一个漏洞，该漏洞允许任何访问者读取管理帐户信息并更改站点配置。此后，这些组织已着手处理这些问题。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>最近，由于人工智能加速了漏洞发现，有人主张公共部门停止公开发布源代码。据报道，出于对人工智能模型影响的安全担忧，NHS 在 5 月份下令技术团队放弃开源代码。</p><p class='text-sm sm:text-base leading-relaxed text-slate-700 dark:text-slate-300'>内斯比特-史密斯表示，在不立即解决根本问题的情况下执行此操作将是“最坏的情况”，因为这会阻止像他这样的研究人员找到它们，而且对手很可能已经镜像了这些存储库，因此将继续访问它们。内斯比特-史密斯说：“除非你要去解决所有问题（如果有的话），否则你可能会通过关闭它来吸引更多的注意力，因为你会想，‘这里有龙。但请不要看这里。’”</p>
+            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
+              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">大约十年来，英国政府一直默认公开发布用公共资金生成的代码，因为它是透明的，并且使代码更容易重用具有成本效益。这包括卫生和社会保障部、内政部以及地方当局。</p>
+            </div>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">但资金紧张导致各部门忽视了技术资产的维护和改进。虽然 ControlPlane 安全研究员 Chris Nesbitt-Smith 使用 Claude 的 Opus 和 Sonnet AI 模型发现了这些漏洞，但他表示，他在笔记本电脑上使用了消费级模型，并且许多问题可以通过例行 IT 健康检查发现。他告诉《连线》杂志：“这一切都不是一般媒体所担心的网络攻击的复杂程度。” “这都是愚蠢的事情。”</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在他发现的最严重的案例中，负责处理英格兰各地土地使用事务的规划监察局在不小心将登录信息提交到公共存储库 GitHub 后未能完全删除登录信息。事实上，这些凭证提供了如此广泛的访问权限，而且似乎没有过期，再加上该机构意外公布了这些凭证，“这对他们来说尤其危险”。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Nesbitt-Smith 表示，完整的 Microsoft Entra ID 将赋予对所有 SharePoint 站点和私人员工 OneDrive 帐户（包括 HR 记录）的“上帝级”读写访问权限。据发现它的安全研究人员称，它还可以访问敏感图书馆，这些图书馆可以合法保存法定规划查询和上诉的证据。 “勒索、加密所有数据或窃取所有数据的选项非常多，”内斯比特-史密斯说。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">规划监察局的一位发言人告诉《连线》杂志，其网络监控工具立即检测到 Nesbitt-Smith 在 8 月份的活动，并且在 ControlPlane 联系时已将其作为网络事件进行处理。该机构在报告后 20 分钟内识别并修复了该漏洞，并确认没有发生数据泄露。他们告诉《连线》杂志：“我们已经审查并加强了我们的系统和流程，以防止此类问题再次发生，我们感谢研究人员的工作并提醒我们注意这一点。”</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">非营利行业组织 OpenUK 的首席执行官阿曼达·布洛克 (Amanda Brock) 表示，规划监察局的问题“与开源无关，而是在使用公共工具时的内部管理问题”。 “这些数据之所以被曝光，是因为没有遵循良好的流程，”她补充道。 “这不是开源安全问题。”</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Nesbitt-Smith 表示，他扫描了 33 个组织的 349 个公共部门代码库，其中约三分之二发现了漏洞。其中一些在教育部的代码中被发现，包括学校使用的采购服务、包含个人详细信息、资格、工作经历和身份证件的教师申请服务，以及英格兰政府资助的培训机构和学徒的主要登记册。他还在苏格兰政府开放数据门户中发现了一个漏洞，该漏洞允许任何访问者读取管理帐户信息并更改站点配置。此后，这些组织已着手处理这些问题。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">最近，由于人工智能加速了漏洞发现，有人主张公共部门停止公开发布源代码。据报道，出于对人工智能模型影响的安全担忧，NHS 在 5 月份下令技术团队放弃开源代码。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">内斯比特-史密斯表示，在不立即解决根本问题的情况下执行此操作将是“最坏的情况”，因为这会阻止像他这样的研究人员找到它们，而且对手很可能已经镜像了这些存储库，因此将继续访问它们。内斯比特-史密斯说：“除非你要去解决所有问题（如果有的话），否则你可能会通过关闭它来吸引更多的注意力，因为你会想，‘这里有龙。但请不要看这里。’”</p>
           </div>
           
         </div>

@@ -560,10 +560,14 @@ def resolve_article_og_media(url: str, client: Optional[Any] = None) -> Dict[str
                 result["cover_image"] = ext_data["cover_image"]
             if ext_data.get("lead_paragraph"):
                 result["description"] = ext_data["lead_paragraph"]
+            if ext_data.get("inline_images"):
+                result["inline_images"] = ext_data["inline_images"]
         elif ext_data.get("cover_image"):
             result["cover_image"] = ext_data["cover_image"]
             if ext_data.get("lead_paragraph"):
                 result["description"] = ext_data["lead_paragraph"]
+            if ext_data.get("inline_images"):
+                result["inline_images"] = ext_data["inline_images"]
     except Exception as e:
         pass
 
@@ -2854,6 +2858,8 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             media_assets["has_video"] = True
                             if og_media.get("video_url"):
                                 media_assets["video_url"] = og_media["video_url"]
+                        if og_media.get("inline_images"):
+                            media_assets["inline_images"] = og_media["inline_images"]
                         # 若源站穿透解析出的正文比 RSS 摘要更详实完整，全量升级为源站多段落实录正文
                         if og_media.get("article_content") and len(og_media["article_content"]) > len(article_text_en or ""):
                             article_text_en = og_media["article_content"]
