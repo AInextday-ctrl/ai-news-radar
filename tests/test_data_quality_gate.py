@@ -269,9 +269,10 @@ def run_quality_gate_assertions(payload: dict) -> bool:
             with open(js_p, "r", encoding="utf-8") as f_in:
                 app_js_content = f_in.read()
             assert "originalCardEl.classList.remove('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少原文实录常驻指令！"
-            assert "insightCardEl.classList.remove('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少AI研判常驻指令！"
+            assert "insightCardEl.classList.remove('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少有效AI研判呈现指令！"
+            assert "insightCardEl.classList.add('hidden')" in app_js_content, f"断言 15 失败：{js_rel} 缺少研判无效/配额耗尽时的优雅隐藏逻辑！"
+            assert "概念验证跨入工程可靠性" not in app_js_content, f"断言 15 失败：{js_rel} 检出违规残留的万金油套话模板！"
             assert "origCard.classList.add('hidden')" not in app_js_content, f"断言 15 失败：{js_rel} 检出回退的卡片隐藏逻辑！"
-            assert "insightCard.classList.add('hidden')" not in app_js_content, f"断言 15 失败：{js_rel} 检出回退的研判隐藏逻辑！"
 
     fb_p = os.path.join(WORKSPACE_DIR, "firebase.json")
     if os.path.exists(fb_p):
@@ -298,7 +299,7 @@ def run_quality_gate_assertions(payload: dict) -> bool:
         rich_news_cnt = sum(1 for it in arch_news if it.get("article_content") or it.get("article_content_zh"))
         assert rich_news_cnt >= 130, f"断言 15 失败：archive_news.json 富文本新闻数量仅 {rich_news_cnt}，低于 130 门禁线，存在长文剥离泄漏！"
 
-    print(f"✅ 断言 15 通过: 核心已冻结模块防篡改与零回退达标 (弹窗三大支柱常驻、缓存无锁、归档长文留存完整)")
+    print(f"✅ 断言 15 通过: 核心已冻结模块防篡改与零回退达标 (原文常驻、研判一事一评无假套话且缺省优雅隐藏、缓存无锁、归档长文留存完整)")
 
     # 16. 全端栏目页签与导航结构常驻门禁 (Tab Navigation Permanence)
     for html_rel in ["public/index.html", "public/zh/index.html"]:

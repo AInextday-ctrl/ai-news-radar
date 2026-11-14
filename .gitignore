@@ -25,7 +25,11 @@ __pycache__/
 
 # Scratch directory
 scratch/
-scripts/
+scripts/*
+!scripts/update_arena_leaderboard.py
+!scripts/localize_tool_images.py
+!scripts/setup_daily_arena_task.ps1
+!scripts/run_daily_arena_sync.bat
 
 # Node
 node_modules/

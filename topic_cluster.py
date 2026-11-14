@@ -871,8 +871,8 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
         # 截短 Tab 标题避免移动端过宽
         short_title = title if len(title) <= 14 else title[:13] + "…"
         
-        active_cls = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
-        inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs"
+        active_cls = "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+        inactive_cls = "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs shrink-0 whitespace-nowrap"
         
         heat_badge = f'<span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 {("bg-white/25 text-white" if is_active else "bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300")}">{heat}</span>'
         
@@ -1143,24 +1143,24 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
     <section id="topic-focus-section" class="spotlight-card spotlight-card-topic-focus rounded-3xl p-4 sm:p-5 shadow-2xl relative overflow-hidden transition-all my-6" aria-label="{header_title}">
       <div class="spotlight-glow-line spotlight-glow-line-topic"></div>
       <!-- Header: Title, Trend Indicator, Tabs & Toggle -->
-      <div class="flex flex-col md:flex-row md:items-center justify-between pb-3.5 border-b border-slate-200/80 dark:border-indigo-500/20 gap-3">
-        <div class="flex items-center space-x-2.5 min-w-0">
-          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping"></span>
-          <div class="flex items-center space-x-2">
-            <h2 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center space-x-1.5 tracking-tight" id="topic-focus-header-title">
-              <span>{header_title}</span>
-              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider">{badge_title}</span>
+      <div class="flex flex-col xl:flex-row xl:items-center justify-between pb-3.5 border-b border-slate-200/80 dark:border-indigo-500/20 gap-3">
+        <div class="flex items-center space-x-2.5 min-w-0 shrink-0">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping shrink-0"></span>
+          <div class="flex items-center space-x-2 min-w-0">
+            <h2 class="text-sm sm:text-base font-black text-slate-900 dark:text-white flex items-center space-x-1.5 tracking-tight shrink-0 whitespace-nowrap" id="topic-focus-header-title">
+              <span class="whitespace-nowrap shrink-0">{header_title}</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider whitespace-nowrap shrink-0">{badge_title}</span>
             </h2>
-            <span class="text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline" id="topic-focus-header-desc">{header_desc}</span>
+            <span class="text-xs text-slate-500 dark:text-indigo-200/80 hidden 2xl:inline whitespace-nowrap" id="topic-focus-header-desc">{header_desc}</span>
           </div>
         </div>
 
         <!-- Topic Tabs Group & Toggle -->
-        <div class="flex items-center gap-1.5 flex-wrap sm:flex-nowrap shrink-0">
-          <div class="flex items-center gap-1.5 flex-wrap" id="topic-tabs-bar">
+        <div class="flex items-center justify-between xl:justify-end gap-1.5 w-full xl:w-auto overflow-x-auto no-scrollbar py-0.5 shrink-0">
+          <div class="flex items-center gap-1.5 flex-nowrap" id="topic-tabs-bar">
             {tabs_html}
           </div>
-          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs" title="{"收起 / 展开" if is_zh else "Collapse / Expand"}">
+          <button type="button" id="topic-focus-toggle-btn" onclick="toggleTopicFocusCollapse()" class="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs whitespace-nowrap" title="{"收起 / 展开" if is_zh else "Collapse / Expand"}">
             {btn_collapse_txt}
           </button>
         </div>

@@ -1361,7 +1361,7 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
     将真实多段落深度报道实录补充进 article_content，杜绝大模型凭空脑补，确保 100% 真实权威的事实依据。
     """
     global _CROSS_GROUND_CALL_COUNT
-    if _CROSS_GROUND_CALL_COUNT >= 12:
+    if _CROSS_GROUND_CALL_COUNT >= 50:
         return None
 
     content = str(item.get("article_content") or item.get("original_content") or item.get("content_snippet") or "").strip()
@@ -1370,7 +1370,9 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
     title = str(item.get("title") or "").strip()
 
     is_paywalled = item.get("is_paywalled") or any(p in source or p in url for p in [
-        "the information", "theinformation.com", "bloomberg", "wsj.com", "wall street journal", "financial times", "ft.com", "economist", "nytimes.com"
+        "the information", "theinformation.com", "bloomberg", "wsj.com", "wall street journal",
+        "financial times", "ft.com", "economist", "nytimes.com", "wired", "wired.com",
+        "technologyreview", "reuters", "theverge"
     ])
     is_truncated = content.endswith("...") or content.endswith("…") or len(content) < 140
 
@@ -1544,6 +1546,21 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
     # 4.6 深度报道 news 类别保障文章长正文 article_content_zh 双语对称并保持段落排版
     if item.get("category") == "news":
         raw_art_en = str(item.get("article_content") or item.get("article_content_en") or "").strip()
+        item_url = str(item.get("url") or "").strip()
+        # 兜底深度穿透：若长正文依然缺失且为合法 URL，最后尝试一次源站深度解构
+        if len(raw_art_en) < 220 and item_url.startswith("http"):
+            try:
+                from article_extractor import ArticleExtractor
+                ext = ArticleExtractor.extract_article(item_url)
+                if ext.get("is_substantive") or len(ext.get("full_text", "")) >= 200:
+                    raw_art_en = ext["full_text"]
+                    item["article_content"] = raw_art_en
+                    item["article_content_en"] = raw_art_en
+                    if ext.get("cover_image") and not item.get("image_url"):
+                        item["image_url"] = ext["cover_image"]
+            except Exception:
+                pass
+
         art_zh = str(item.get("article_content_zh") or "").strip()
         art_en_lines = len([l for l in raw_art_en.splitlines() if len(l.strip()) > 30])
         art_zh_lines = len([l for l in art_zh.splitlines() if len(l.strip()) > 20])
@@ -1661,14 +1678,32 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 results.append(fallback)
             continue
 
-        # 自动化跨信源事实补全：针对付费墙截断与残缺新闻，实时检索补充公开报道事实
+        # 自动化源站穿透与跨信源事实补全：针对付费墙截断与残缺新闻，优先解构源站，次选检索补充公开报道事实
         for it in chunk:
-            enriched_facts = fetch_cross_grounding_facts(it)
-            if enriched_facts:
-                it["article_content"] = enriched_facts
-                it["article_content_en"] = enriched_facts
-                it["is_cross_grounded"] = True
-                it["is_paywalled"] = True
+            # 1. 若为 news 类别且正文残缺/为空，优先通过 ArticleExtractor 深度穿透源站长文
+            curr_content = str(it.get("article_content") or it.get("article_content_en") or "").strip()
+            item_url = str(it.get("url") or "").strip()
+            if it.get("category") == "news" and len(curr_content) < 220 and item_url.startswith("http"):
+                try:
+                    from article_extractor import ArticleExtractor
+                    ext = ArticleExtractor.extract_article(item_url)
+                    if ext.get("is_substantive") or len(ext.get("full_text", "")) >= 200:
+                        it["article_content"] = ext["full_text"]
+                        it["article_content_en"] = ext["full_text"]
+                        if ext.get("cover_image") and not it.get("image_url"):
+                            it["image_url"] = ext["cover_image"]
+                        print(f"  ✨ [processor] 成功穿透抓取源站长文 ({len(ext['full_text'])} 字): {it.get('title', '')[:40]}")
+                except Exception:
+                    pass
+
+            # 2. 若依然残缺，通过 Bing 即时新闻与外电网络跨信源提取长文实录
+            if not it.get("article_content") or len(str(it.get("article_content")).strip()) < 220:
+                enriched_facts = fetch_cross_grounding_facts(it)
+                if enriched_facts:
+                    it["article_content"] = enriched_facts
+                    it["article_content_en"] = enriched_facts
+                    it["is_cross_grounded"] = True
+                    it["is_paywalled"] = True
 
         simplified_chunk = [
             {

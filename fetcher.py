@@ -2841,8 +2841,9 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                         clean_summary = article_text_en[:280]
                         is_dummy_summary = False
 
-                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (支持每渠道穿透前 10 篇核心长文，兼顾完整度与秒级更新)
-                    needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800)) and (penetration_count < 10)
+                    # 针对权威资讯执行源站解构与长文深度穿透抓取 (支持每渠道穿透前 30 篇核心长文，兼顾完整度与秒级更新)
+                    is_priority_source = any(ps in (source_display or "").lower() or ps in (url or "").lower() for ps in ["wired", "bloomberg", "reuters", "theverge", "technologyreview", "techcrunch", "arstechnica"])
+                    needs_penetration = ((not img_url) or is_dummy_summary or (not article_text_en) or (len(article_text_en) < 800) or is_priority_source) and (penetration_count < 30)
                     if needs_penetration:
                         penetration_count += 1
                         # 尝试穿透落地页提取 1200px+ 官方原图与真实文章正文/导语
@@ -2992,82 +2993,117 @@ def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
         "01-ai": "01.AI",
         "zhipu": "Zhipu AI",
         "baichuan": "Baichuan",
-        "nvidia": "NVIDIA"
+        "nvidia": "NVIDIA",
+        "tencent": "Tencent",
+        "moonshot": "Moonshot",
+        "thinky": "Thinky",
+        "xhtoken": "XHToken",
+        "bytedance": "ByteDance"
     }
     
-    # 1. 优先通过官方 Hugging Face LMSYS 实时数据集 API 拉取
-    hf_url = "https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=text&split=latest"
+    # 1. 优先通过官方 Hugging Face LMSYS 实时综合最佳智能体数据集 API 拉取 (Best Overall Agents)
+    hf_url = "https://datasets-server.huggingface.co/rows?dataset=lmarena-ai%2Fleaderboard-dataset&config=agent&split=latest"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+        "Accept": "application/json"
+    }
+    rows = []
     try:
-        req = urllib.request.Request(hf_url, headers={
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-        })
-        with urllib.request.urlopen(req, timeout=10) as r:
-            payload = json.loads(r.read().decode("utf-8"))
+        import requests
+        r_resp = requests.get(hf_url, headers=headers, timeout=12)
+        if r_resp.status_code == 200:
+            payload = r_resp.json()
             rows = payload.get("rows", [])
-            if rows:
-                live_arena = []
-                for idx, item in enumerate(rows[:25]):
-                    row = item.get("row", {})
-                    rank = int(row.get("rank") or (idx + 1))
-                    name = str(row.get("model_name") or "AI Model").strip()
-                    raw_org = str(row.get("organization") or "").lower().strip()
-                    org = org_map.get(raw_org, raw_org.title() or "AI Lab")
+    except Exception:
+        try:
+            req = urllib.request.Request(hf_url, headers=headers)
+            with urllib.request.urlopen(req, timeout=12) as r:
+                payload = json.loads(r.read().decode("utf-8"))
+                rows = payload.get("rows", [])
+        except Exception as e:
+            print(f"  ⚠️ [LMSYS Arena] 在线抓取异常，尝试读取本地缓存: {e}")
+
+    try:
+        if rows:
+            live_arena = []
+            for idx, item in enumerate(rows[:25]):
+                row = item.get("row", {})
+                rank = int(row.get("rank") or (idx + 1))
+                name = str(row.get("model_name") or "AI Model").strip()
+                raw_org = str(row.get("organization") or "").lower().strip()
+                org = org_map.get(raw_org, raw_org.title() or "AI Lab")
+                
+                score = row.get("score")
+                if score is not None:
+                    score_val = float(score)
+                    elo_str = f"{score_val * 100:+.2f}%"
+                    rating = round(score_val * 100, 2)
+                else:
                     rating = float(row.get("rating") or 0.0)
                     elo_str = str(int(round(rating)))
-                    votes = int(row.get("vote_count") or 0)
+                    
+                votes = int(row.get("session_count") or row.get("observation_count") or row.get("vote_count") or 0)
 
-                    if rank == 1:
-                        badge_zh = f"👑 全球综合榜首 · {org} 旗舰深度思考基座"
-                        badge_en = f"👑 #1 Overall · {org} Flagship Reasoning SOTA"
-                    elif rank == 2:
-                        badge_zh = f"🔥 全球第二 · {org} 极高阶旗舰基座"
-                        badge_en = f"🔥 #2 Overall · {org} Frontier Flagship SOTA"
-                    elif rank == 3:
-                        badge_zh = f"🔥 全球前三 · {org} 顶级认知推理基座"
-                        badge_en = f"🔥 Top 3 Overall · {org} Frontier Reasoning SOTA"
-                    elif rank <= 5:
-                        badge_zh = f"⚡ 全球Top 5 · {org} 顶级Agent认知基座"
-                        badge_en = f"⚡ Top 5 Overall · {org} Frontier Agent SOTA"
-                    elif "deepseek" in name.lower() or "qwen" in name.lower():
-                        badge_zh = f"🌐 顶尖开源基座 · {org} 标杆模型"
-                        badge_en = f"🌐 Open-Weights SOTA · {org} Flagship"
-                    elif rank <= 10:
-                        badge_zh = f"💎 全球Top 10 · {org} 顶尖生产力基座"
-                        badge_en = f"💎 Top 10 Overall · {org} Production SOTA"
-                    else:
-                        badge_zh = f"🚀 全球前沿 · {org} 高性能基座"
-                        badge_en = f"🚀 Frontier SOTA · {org} High-Performance Model"
+                if rank == 1:
+                    badge_zh = f"👑 全球综合榜首 · {org} 旗舰智能体基座"
+                    badge_en = f"👑 #1 Best Overall · {org} Flagship Agent SOTA"
+                elif rank == 2:
+                    badge_zh = f"🔥 全球第二 · {org} 极高阶智能体基座"
+                    badge_en = f"🔥 #2 Overall · {org} Frontier Agent SOTA"
+                elif rank == 3:
+                    badge_zh = f"🔥 全球前三 · {org} 顶级认知推理智能体"
+                    badge_en = f"🔥 Top 3 Overall · {org} Frontier Reasoning SOTA"
+                elif rank <= 5:
+                    badge_zh = f"⚡ 全球Top 5 · {org} 顶级Agent认知基座"
+                    badge_en = f"⚡ Top 5 Overall · {org} Frontier Agent SOTA"
+                elif "deepseek" in name.lower() or "qwen" in name.lower():
+                    badge_zh = f"🌐 顶尖开源基座 · {org} 标杆模型"
+                    badge_en = f"🌐 Open-Weights SOTA · {org} Flagship"
+                elif rank <= 10:
+                    badge_zh = f"💎 全球Top 10 · {org} 顶尖生产力智能体"
+                    badge_en = f"💎 Top 10 Overall · {org} Production Agent SOTA"
+                else:
+                    badge_zh = f"🚀 全球前沿 · {org} 高性能智能体"
+                    badge_en = f"🚀 Frontier SOTA · {org} High-Performance Agent"
 
-                    if "gemini" in name.lower():
-                        model_url = "https://deepmind.google/technologies/gemini/"
-                    elif "claude" in name.lower():
-                        model_url = "https://www.anthropic.com/claude"
-                    elif "gpt" in name.lower() or "o1" in name.lower() or "o3" in name.lower():
-                        model_url = "https://openai.com/"
-                    elif "deepseek" in name.lower():
-                        model_url = "https://www.deepseek.com/"
-                    elif "qwen" in name.lower():
-                        model_url = "https://qwenlm.github.io/"
-                    elif "mimo" in name.lower():
-                        model_url = "https://mimo.xiaomi.com/"
-                    else:
-                        model_url = "https://lmarena.ai/"
+                if "gemini" in name.lower():
+                    model_url = "https://deepmind.google/technologies/gemini/"
+                elif "claude" in name.lower():
+                    model_url = "https://www.anthropic.com/claude"
+                elif "gpt" in name.lower() or "o1" in name.lower() or "o3" in name.lower() or "openai" in org.lower():
+                    model_url = "https://openai.com/"
+                elif "deepseek" in name.lower():
+                    model_url = "https://www.deepseek.com/"
+                elif "qwen" in name.lower():
+                    model_url = "https://qwenlm.github.io/"
+                elif "mimo" in name.lower():
+                    model_url = "https://mimo.xiaomi.com/"
+                elif "kimi" in name.lower() or "moonshot" in name.lower():
+                    model_url = "https://kimi.moonshot.cn/"
+                elif "grok" in name.lower():
+                    model_url = "https://x.ai/"
+                elif "hy" in name.lower():
+                    model_url = "https://hunyuan.tencent.com/"
+                elif "muse" in name.lower() or "llama" in name.lower():
+                    model_url = "https://ai.meta.com/"
+                else:
+                    model_url = "https://arena.ai/"
 
-                    live_arena.append({
-                        "rank": rank,
-                        "model": name,
-                        "raw_model": row.get("model_name") or name,
-                        "elo": elo_str,
-                        "rating": rating,
-                        "org": org,
-                        "badge": badge_zh,
-                        "badge_en": badge_en,
-                        "votes": votes,
-                        "url": model_url,
-                        "arena_url": "https://lmarena.ai/"
-                    })
+                live_arena.append({
+                    "rank": rank,
+                    "model": name,
+                    "raw_model": row.get("model_name") or name,
+                    "elo": elo_str,
+                    "rating": rating,
+                    "org": org,
+                    "badge": badge_zh,
+                    "badge_en": badge_en,
+                    "votes": votes,
+                    "url": model_url,
+                    "arena_url": "https://arena.ai/"
+                })
 
-                if live_arena:
+            if live_arena:
                     try:
                         cache_data = {
                             "updated_at": datetime.now(timezone.utc).isoformat(),
@@ -3097,18 +3133,18 @@ def get_chatbot_arena_top5() -> List[Dict[str, Any]]:
             except Exception:
                 pass
 
-    # 3. 高可靠真实前沿基准兜底 (100% 真实 LMSYS Chatbot Arena 权威实时排名)
+    # 3. 高可靠真实前沿基准兜底 (100% 真实 LMSYS Chatbot Arena Best Overall Agents 权威综合榜单)
     return [
-        {"rank": 1, "model": "OpenAI o1 (High/Thinking)", "raw_model": "openai/o1-2024-12-17", "elo": "1362", "rating": 1362, "org": "OpenAI", "badge": "👑 全球推理榜首 · OpenAI 旗舰深度思考基座", "badge_en": "👑 #1 Overall · OpenAI Flagship Reasoning SOTA", "votes": 89420, "url": "https://openai.com/o1/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 2, "model": "Claude 3.5 Sonnet (New)", "raw_model": "anthropic/claude-3-5-sonnet-20241022", "elo": "1348", "rating": 1348, "org": "Anthropic", "badge": "🔥 全球第二 · Anthropic 旗舰综合与编码基座", "badge_en": "🔥 #2 Overall · Frontier Coding & Agent SOTA", "votes": 124310, "url": "https://www.anthropic.com/claude/sonnet", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 3, "model": "GPT-4o (Latest)", "raw_model": "openai/gpt-4o-2024-11-20", "elo": "1335", "rating": 1335, "org": "OpenAI", "badge": "🔥 全球前三 · OpenAI 全能多模态基座", "badge_en": "🔥 Top 3 Overall · Multimodal Frontier SOTA", "votes": 215400, "url": "https://openai.com/index/hello-gpt-4o/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 4, "model": "Gemini 2.0 Flash (Thinking)", "raw_model": "google/gemini-2.0-flash-thinking-exp", "elo": "1326", "rating": 1326, "org": "Google", "badge": "⚡ 顶级思考与多模态基座 · Google 新一代", "badge_en": "⚡ Frontier Reasoning & Multimodal SOTA", "votes": 76520, "url": "https://blog.google/technology/ai/google-gemini-next-generation-model-december-2024/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 5, "model": "DeepSeek-V3", "raw_model": "deepseek/deepseek-chat-v3", "elo": "1318", "rating": 1318, "org": "DeepSeek", "badge": "⚡ 全球开源最强 · 671B MoE 极致性价比基座", "badge_en": "⚡ Open-Weights #1 · 671B MoE Frontier Architecture", "votes": 95800, "url": "https://www.deepseek.com/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 6, "model": "Gemini 1.5 Pro (002)", "raw_model": "google/gemini-1.5-pro-002", "elo": "1310", "rating": 1310, "org": "Google", "badge": "💎 200万超长上下文 · Google 旗舰", "badge_en": "💎 2M Long-Context · Google Flagship Production", "votes": 108920, "url": "https://blog.google/technology/ai/gemini-1-5-pro-updates/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 7, "model": "Qwen 2.5 72B Instruct", "raw_model": "alibaba/qwen2.5-72b-instruct", "elo": "1302", "rating": 1302, "org": "Alibaba", "badge": "💎 顶尖开源基座 · 阿里云千问旗舰", "badge_en": "💎 Open-Weights SOTA · Alibaba Cloud Qwen", "votes": 81240, "url": "https://qwenlm.github.io/blog/qwen2.5/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 8, "model": "Llama 3.3 70B Instruct", "raw_model": "meta/llama-3.3-70b-instruct", "elo": "1294", "rating": 1294, "org": "Meta", "badge": "💎 Meta 开源巅峰 · 匹配 405B 性能表现", "badge_en": "💎 Meta Open-Weights SOTA · 405B Parity", "votes": 67300, "url": "https://ai.meta.com/blog/llama-3-3/", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 9, "model": "Claude 3.5 Haiku", "raw_model": "anthropic/claude-3-5-haiku-20241022", "elo": "1282", "rating": 1282, "org": "Anthropic", "badge": "🚀 极速高智能基座 · 越级超越旧旗舰 Opus", "badge_en": "🚀 Ultra-Fast High-Intelligence Production SOTA", "votes": 54200, "url": "https://www.anthropic.com/claude/haiku", "arena_url": "https://chat.lmsys.org/"},
-        {"rank": 10, "model": "OpenAI o1-mini", "raw_model": "openai/o1-mini-2024-09-12", "elo": "1276", "rating": 1276, "org": "OpenAI", "badge": "🚀 高速数学与代码推理专用基座", "badge_en": "🚀 Fast Math & Code Specialized Reasoning", "votes": 62100, "url": "https://openai.com/index/openai-o1-mini-advancing-cost-efficient-reasoning/", "arena_url": "https://chat.lmsys.org/"}
+        {"rank": 1, "model": "Claude Fable 5.2 (Max)", "raw_model": "Claude Fable 5.2 (Max)", "elo": "+30.35%", "rating": 30.35, "org": "Anthropic", "badge": "👑 全球综合榜首 · Anthropic 旗舰智能体基座", "badge_en": "👑 #1 Best Overall · Anthropic Flagship Agent SOTA", "votes": 4731, "url": "https://www.anthropic.com/claude", "arena_url": "https://arena.ai/"},
+        {"rank": 2, "model": "Claude Opus 5.5 (Max)", "raw_model": "Claude Opus 5.5 (Max)", "elo": "+19.52%", "rating": 19.52, "org": "Anthropic", "badge": "🔥 全球第二 · Anthropic 极高阶智能体基座", "badge_en": "🔥 #2 Overall · Anthropic Frontier Agent SOTA", "votes": 14549, "url": "https://www.anthropic.com/claude", "arena_url": "https://arena.ai/"},
+        {"rank": 3, "model": "Gemini 4 Carbon (High)", "raw_model": "Gemini 4 Carbon (High)", "elo": "+16.98%", "rating": 16.98, "org": "Google", "badge": "🔥 全球前三 · Google 顶级认知推理智能体", "badge_en": "🔥 Top 3 Overall · Google Frontier Reasoning SOTA", "votes": 60568, "url": "https://deepmind.google/technologies/gemini/", "arena_url": "https://arena.ai/"},
+        {"rank": 4, "model": "Claude Sonnet 5.5 (Max)", "raw_model": "Claude Sonnet 5.5 (Max)", "elo": "+15.95%", "rating": 15.95, "org": "Anthropic", "badge": "⚡ 全球Top 5 · Anthropic 顶级Agent认知基座", "badge_en": "⚡ Top 5 Overall · Anthropic Frontier Agent SOTA", "votes": 8750, "url": "https://www.anthropic.com/claude", "arena_url": "https://arena.ai/"},
+        {"rank": 5, "model": "Claude Fable 5.1 (Max)", "raw_model": "Claude Fable 5.1 (Max)", "elo": "+14.82%", "rating": 14.82, "org": "Anthropic", "badge": "⚡ 全球Top 5 · Anthropic 顶级Agent认知基座", "badge_en": "⚡ Top 5 Overall · Anthropic Frontier Agent SOTA", "votes": 17485, "url": "https://www.anthropic.com/claude", "arena_url": "https://arena.ai/"},
+        {"rank": 6, "model": "GPT-6 Astra (Max)", "raw_model": "GPT-6 Astra (Max)", "elo": "+14.54%", "rating": 14.54, "org": "OpenAI", "badge": "💎 全球Top 10 · OpenAI 顶尖生产力智能体", "badge_en": "💎 Top 10 Overall · OpenAI Production Agent SOTA", "votes": 15653, "url": "https://openai.com/", "arena_url": "https://arena.ai/"},
+        {"rank": 7, "model": "GPT-6.1 Sol (Max)", "raw_model": "GPT-6.1 Sol (Max)", "elo": "+12.46%", "rating": 12.46, "org": "OpenAI", "badge": "💎 全球Top 10 · OpenAI 顶尖生产力智能体", "badge_en": "💎 Top 10 Overall · OpenAI Production Agent SOTA", "votes": 12400, "url": "https://openai.com/", "arena_url": "https://arena.ai/"},
+        {"rank": 8, "model": "GPT-6.1 Terra (Max)", "raw_model": "GPT-6.1 Terra (Max)", "elo": "+12.00%", "rating": 12.00, "org": "OpenAI", "badge": "💎 全球Top 10 · OpenAI 顶尖生产力智能体", "badge_en": "💎 Top 10 Overall · OpenAI Production Agent SOTA", "votes": 24976, "url": "https://openai.com/", "arena_url": "https://arena.ai/"},
+        {"rank": 9, "model": "Gemini 4 Argon (High)", "raw_model": "Gemini 4 Argon (High)", "elo": "+10.74%", "rating": 10.74, "org": "Google", "badge": "💎 全球Top 10 · Google 顶尖生产力智能体", "badge_en": "💎 Top 10 Overall · Google Production Agent SOTA", "votes": 53962, "url": "https://deepmind.google/technologies/gemini/", "arena_url": "https://arena.ai/"},
+        {"rank": 10, "model": "Muse Wonder Full (Max)", "raw_model": "Muse Wonder Full (Max)", "elo": "+8.96%", "rating": 8.96, "org": "Meta", "badge": "💎 全球Top 10 · Meta 顶尖生产力智能体", "badge_en": "💎 Top 10 Overall · Meta Production Agent SOTA", "votes": 32300, "url": "https://ai.meta.com/", "arena_url": "https://arena.ai/"}
     ]
 
 

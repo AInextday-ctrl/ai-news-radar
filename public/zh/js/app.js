@@ -4415,10 +4415,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (headerTitle) {
         const titleText = isZh ? "🔥 24h 核心话题全景透视" : "🔥 24h Topic Focus & Perspectives";
         const badgeText = isZh ? "TOP 3 智库专题" : "TOP 3 DOSSIERS";
-        headerTitle.innerHTML = `<span class="text-slate-900 dark:text-white">${titleText}</span><span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider">${badgeText}</span>`;
+        headerTitle.innerHTML = `<span class="text-slate-900 dark:text-white whitespace-nowrap shrink-0">${titleText}</span><span class="text-[10px] px-2 py-0.5 rounded-md bg-rose-500/10 dark:bg-rose-500/20 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 font-mono font-bold tracking-wider whitespace-nowrap shrink-0">${badgeText}</span>`;
       }
       if (headerDesc) {
-        headerDesc.className = "text-xs text-slate-500 dark:text-indigo-200/80 hidden lg:inline";
+        headerDesc.className = "text-xs text-slate-500 dark:text-indigo-200/80 hidden 2xl:inline whitespace-nowrap";
         headerDesc.textContent = isZh ? "· 事件脉络 · 大V观点立场对撞 · 关联情报束" : "· Core Context · Viewpoints Collision · Linked Bundles";
       }
 
@@ -4428,7 +4428,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           contentEl.classList.toggle('hidden', wasCollapsed);
         }
         if (toggleBtn) {
-          toggleBtn.className = "px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs";
+          toggleBtn.className = "px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition cursor-pointer shrink-0 ml-1 shadow-xs whitespace-nowrap";
           toggleBtn.textContent = wasCollapsed ? (isZh ? '▼ 展开' : '▼ Expand') : (isZh ? '▲ 收起' : '▲ Collapse');
         }
       } catch(e) {}
@@ -4441,8 +4441,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           const heat = t.heat_score || 9.8;
           const shortTitle = title.length > 12 ? title.slice(0, 11) + "…" : title;
           const cls = isAct
-            ? "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5"
-            : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs";
+            ? "topic-tab-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-indigo-600 text-white shadow-md border border-indigo-400/40 transition-all cursor-pointer flex items-center gap-1.5 shrink-0 whitespace-nowrap"
+            : "topic-tab-btn px-3 py-1.5 rounded-xl font-semibold text-xs bg-white dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-700/80 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer flex items-center gap-1.5 shadow-xs shrink-0 whitespace-nowrap";
           const heatBadge = `<span class="topic-tab-heat text-[10px] font-mono px-1.5 py-0.5 rounded font-bold ml-0.5 ${isAct ? "bg-white/25 text-white" : "bg-slate-200/80 dark:bg-slate-700/60 text-slate-700 dark:text-slate-300"}">${heat}</span>`;
           return `
             <button type="button" id="topic-tab-${idx}" onclick="switchTopicFocus(${idx})" class="${cls}" data-idx="${idx}">
@@ -9391,10 +9391,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                s.includes('行业各方正在加速技术卡位') ||
                s.includes('查尔斯国王') ||
                s.includes('聚焦该事件') ||
+               /(?:概念验证.*工程可靠性)/.test(s) ||
+               s.includes('产业动因研判') ||
+               s.includes('前沿研判') ||
                s.includes('Reflects the ongoing transition towards sustainable deployment') ||
                s.includes('commercial maturity, and balanced governance') ||
                s.includes('Reflects the transition towards commercial maturity') ||
                s.includes('Executive Briefing:') ||
+               s.includes('Frontier Analysis') ||
+               s.includes('Strategic Context') ||
                s.includes('全球产业与技术前沿一线');
       };
 
@@ -9664,23 +9669,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         renderArticleView();
       }
 
-      // 第三板块: 💡 AI 深度研判与产业影响 - 100% 呈现，杜绝隐藏
+      // 第三板块: 💡 AI 深度研判与产业影响 - 严格一事一评，无针对性有效研判时优雅隐藏，杜绝套用模板
       const insightCardEl = document.getElementById('ai-modal-insight-card');
       if (insightCardEl) {
-        insightCardEl.classList.remove('hidden');
-        if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '💡 AI 深度研判与产业影响' : '💡 AI In-Depth Takeaway');
-        let finalInsight = cleanInsight;
-        if (!hasValidInsight) {
-          const whyText = isZh ? (analysis.elements_zh?.why || '') : (analysis.elements_en?.why || '');
-          if (whyText && whyText.length > 15) {
-            finalInsight = isZh ? `【产业动因研判】${whyText}` : `[Strategic Context] ${whyText}`;
-          } else {
-            finalInsight = isZh
-              ? `【前沿研判】围绕“${cleanTitle.slice(0, 32)}”的落地推进，标志着行业正在加速从概念验证跨入工程可靠性与真实生产力检验阶段。`
-              : `[Frontier Analysis] The execution around "${cleanTitle.slice(0, 48)}" marks an industry transition toward rigorous operational reliability and tangible ROI.`;
-          }
+        if (hasValidInsight) {
+          insightCardEl.classList.remove('hidden');
+          if (insightTitleEl) insightTitleEl.textContent = t.aiModalInsightTitle || (isZh ? '💡 AI 深度研判与产业影响' : '💡 AI In-Depth Takeaway');
+          if (insightEl) insightEl.textContent = cleanInsight;
+        } else {
+          insightCardEl.classList.add('hidden');
+          if (insightEl) insightEl.textContent = '';
         }
-        if (insightEl) insightEl.textContent = finalInsight;
       }
 
       // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)

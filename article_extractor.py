@@ -48,10 +48,11 @@ class ArticleExtractor:
         "wired.com": {
             "containers": [
                 r'class="[^"]*body__inner-container[^"]*"[^>]*>(.*?)</div>\s*</div>',
+                r'data-testid="BodyWrapper"[^>]*>(.*?)</(?:div|section)>',
+                r'class="[^"]*(?:grid--item-body|body__container|article__body|content-header-and-body)[^"]*"[^>]*>(.*?)</div>',
                 r'<article[^>]*>(.*?)</article>',
                 r'class="[^"]*article-body-component[^"]*"[^>]*>(.*?)</div>',
             ],
-            "p_pattern": r'<p[^>]*class="[^"]*paywall[^"]*"[^>]*>(.*?)</p>',
         },
         "theverge.com": {
             "containers": [
@@ -169,37 +170,72 @@ class ArticleExtractor:
     ]
 
     @classmethod
-    def fetch_html(cls, url: str, timeout: int = 5) -> Optional[str]:
-        """Fetch raw HTML using curl_cffi with Chrome TLS impersonation, fallback to httpx."""
+    def fetch_html(cls, url: str, timeout: int = 15) -> Optional[str]:
+        """
+        高可用穿透获取页面源码，按优先级依次调度：
+        1. requests (带标准 Chrome 标头，最强兼容性与系统代理支持)
+        2. curl_cffi (Chrome TLS 指纹模拟，绕过 Cloudflare 盾)
+        3. httpx (支持直连与自动重定向)
+        4. urllib.request (底层无依赖保底)
+        """
         if not url or not url.startswith("http"):
             return None
 
-        # 1. 优先使用 curl_cffi 模拟 Chrome 浏览器指纹，绕过 Cloudflare 与反爬
+        headers = {
+            "User-Agent": cls.USER_AGENT,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7",
+            "DNT": "1",
+            "Upgrade-Insecure-Requests": "1",
+            "Sec-Ch-Ua": '"Chromium";v="130", "Google Chrome";v="130", "Not?A_Brand";v="99"',
+            "Sec-Ch-Ua-Mobile": "?0",
+            "Sec-Ch-Ua-Platform": '"Windows"',
+            "Sec-Fetch-Dest": "document",
+            "Sec-Fetch-Mode": "navigate",
+            "Sec-Fetch-Site": "none",
+            "Sec-Fetch-User": "?1"
+        }
+
+        # 1. 优先使用 requests (高并发稳定性强，完美处理代理与各种证书)
+        try:
+            import requests
+            resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
+            if resp.status_code == 200 and len(resp.text) > 500:
+                return resp.text
+        except Exception:
+            pass
+
+        # 2. 尝试 curl_cffi 模拟 Chrome 浏览器指纹，绕过部分硬核反爬
         if HAS_CURL_CFFI:
             try:
-                headers = {
-                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-                    "Accept-Language": "en-US,en;q=0.9",
-                    "DNT": "1",
-                    "Upgrade-Insecure-Requests": "1"
-                }
                 resp = curl_requests.get(url, impersonate="chrome", headers=headers, timeout=timeout)
                 if resp.status_code == 200 and len(resp.text) > 500:
                     return resp.text
-            except Exception as e:
+            except Exception:
                 pass
 
-        # 2. 降级使用 httpx
+        # 3. 降级使用 httpx
         try:
             import httpx
             with httpx.Client(
-                headers={"User-Agent": cls.USER_AGENT, "Accept-Language": "en-US,en;q=0.9"},
+                headers=headers,
                 follow_redirects=True,
                 timeout=timeout
             ) as client:
                 resp = client.get(url)
                 if resp.status_code == 200 and len(resp.text) > 500:
                     return resp.text
+        except Exception:
+            pass
+
+        # 4. 底层 urllib.request 降级兜底
+        try:
+            import urllib.request
+            req = urllib.request.Request(url, headers={"User-Agent": cls.USER_AGENT})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                text = resp.read().decode('utf-8', errors='ignore')
+                if len(text) > 500:
+                    return text
         except Exception:
             pass
 
@@ -292,9 +328,41 @@ class ArticleExtractor:
             except Exception:
                 pass
 
-        # 3. 寻找正文容器
+        # 2.8 提取 Next.js / Condé Nast Verso __NEXT_DATA__ 预渲染正文 AST (如 Wired, The Verge 等)
+        if not jsonld_paras and '__NEXT_DATA__' in html_text:
+            try:
+                m_next = re.search(r'<script[^>]+id=["\x27]__NEXT_DATA__["\x27][^>]*>(.*?)</script>', html_text, re.DOTALL | re.IGNORECASE)
+                if m_next:
+                    nd = json.loads(m_next.group(1))
+                    def extract_strings_from_ast(node: Any, acc: List[str]):
+                        if isinstance(node, str):
+                            s = node.strip()
+                            if len(s) >= 50 and not any(bad in s.lower() for bad in cls.NOISE_KEYWORDS):
+                                if re.search(r'[.!?。！？]', s) and not s.startswith("http") and not s.startswith("{"):
+                                    acc.append(html.unescape(s))
+                        elif isinstance(node, dict):
+                            for k, v in node.items():
+                                if k in ['body', 'content', 'paragraphs', 'text', 'transformed', 'pageProps']:
+                                    extract_strings_from_ast(v, acc)
+                                elif isinstance(v, (dict, list)):
+                                    extract_strings_from_ast(v, acc)
+                        elif isinstance(node, list):
+                            for item in node:
+                                extract_strings_from_ast(item, acc)
+
+                    next_extracted: List[str] = []
+                    extract_strings_from_ast(nd.get('props', {}).get('pageProps', {}), next_extracted)
+                    seen_next = set()
+                    for p in next_extracted:
+                        p_norm = p[:40].lower()
+                        if p_norm not in seen_next and len(p) >= 45:
+                            seen_next.add(p_norm)
+                            jsonld_paras.append(p)
+            except Exception:
+                pass
+
+        # 3. 寻找正文容器 (仅剥离无内容的叶子噪声标签，坚决杜绝用正则贪婪截断嵌套 div)
         clean_html = re.sub(r'<(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)[^>]*>.*?</(?:script|style|svg|noscript|header|nav|footer|aside|form|menu)>', ' ', html_text, flags=re.DOTALL | re.I)
-        clean_html = re.sub(r'<div[^>]+(?:class|id)=["\x27][^"\x27]*(?:header|navbar|menu|navigation|sidebar|footer|cookie|banner|share|modal|popup|login|ad-|advertisement)[^"\x27]*["\x27][^>]*>.*?</\s*div\s*>', ' ', clean_html, flags=re.DOTALL | re.I)
 
         rule = None
         for d_key, r_cfg in cls.SOURCE_RULES.items():
