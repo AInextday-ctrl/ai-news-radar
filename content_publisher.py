@@ -1484,6 +1484,10 @@ def backfill_historical_daily_briefings() -> List[str]:
   <meta property="og:description" content="{hub_desc}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{hub_canon}">
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {"<link rel=\"help\" type=\"text/plain\" href=\"https://ainewsradar.xyz/zh/llms.txt\" title=\"Chinese LLMs.txt Manifest\">\n  <link rel=\"alternate\" type=\"text/plain\" href=\"https://ainewsradar.xyz/zh/llms-full.txt\" title=\"Chinese Full LLMs.txt\">" if not is_en_hub else ""}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}
@@ -1864,6 +1868,18 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
   <meta property="og:type" content="article">
   <meta property="og:url" content="{canonical_url}">
   <meta property="article:published_time" content="{date_slug}T08:00:00+08:00">
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="{page_title}">
+  <meta name="citation_publication_date" content="{date_slug}">
+  <meta name="citation_author" content="AI News Radar Editorial Team">
+  <meta name="citation_journal_title" content="AI News Radar Daily Intelligence Brief">
+  <meta name="citation_fulltext_html_url" content="{canonical_url}">
+  <meta name="citation_abstract" content="{page_desc}">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {"<link rel=\"help\" type=\"text/plain\" href=\"https://ainewsradar.xyz/zh/llms.txt\" title=\"Chinese LLMs.txt Manifest\">\n  <link rel=\"alternate\" type=\"text/plain\" href=\"https://ainewsradar.xyz/zh/llms-full.txt\" title=\"Chinese Full LLMs.txt\">" if not is_en else ""}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}

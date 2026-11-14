@@ -126,6 +126,18 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
   <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="{'AI 资讯雷达 RSS' if is_zh else 'AI News Radar (Chinese Edition RSS)'}" href="https://ainewsradar.xyz/zh/feed.xml">
   <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="{title}">
+  <meta name="citation_author" content="{author}">
+  <meta name="citation_publication_date" content="{date}">
+  <meta name="citation_journal_title" content="AI News Radar Engineering Dissections">
+  <meta name="citation_fulltext_html_url" content="{canonical_url}">
+  <meta name="citation_abstract" content="{summary}">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {f'<link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">\n  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">' if is_zh else ''}
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}
   <script type="application/ld+json">
@@ -425,6 +437,10 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
   <link rel="alternate" hreflang="zh" href="{alt_zh}">
   <link rel="alternate" hreflang="zh-CN" href="{alt_zh}">
   <link rel="alternate" hreflang="x-default" href="{alt_en}">
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {f'<link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">\n  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">' if is_zh else ''}
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   {ADSENSE_SCRIPT}
   {CLARITY_SCRIPT}

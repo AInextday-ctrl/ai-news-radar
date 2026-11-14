@@ -200,6 +200,9 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
             en_full_lines.append("- Key Verified Facts:")
             for b in bullets:
                 en_full_lines.append(f"  * {b}")
+        analysis = sanitize_for_en(item.get("ai_analysis_en") or item.get("ai_analysis") or "")
+        if analysis:
+            en_full_lines.append(f"- Strategic AI Analysis: {analysis}")
         en_full_lines.append("")
 
     en_full_lines.extend([
@@ -356,6 +359,9 @@ def generate_llms_manifests(news_items: List[Dict[str, Any]],
             zh_full_lines.append("- 核验事实清单:")
             for b in bullets:
                 zh_full_lines.append(f"  * {b}")
+        analysis = item.get("ai_analysis_zh") or item.get("ai_analysis") or ""
+        if analysis:
+            zh_full_lines.append(f"- 独家研判与技术透视: {analysis}")
         zh_full_lines.append("")
 
     zh_full_lines.extend([
@@ -796,6 +802,18 @@ User-agent: Applebot-Extended
 Allow: /
 Disallow: /cdn-cgi/
 
+User-agent: Applebot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /cdn-cgi/
+
 User-agent: Bytespider
 Allow: /
 Disallow: /cdn-cgi/
@@ -863,6 +881,12 @@ Allow: /
 Disallow: /cdn-cgi/
 
 # --- Sitemaps & AI Context Endpoints ---
+# LLMs.txt AI Manifests (llmstxt.org)
+# Discoverable AI knowledge context manifests:
+# https://ainewsradar.xyz/llms.txt
+# https://ainewsradar.xyz/llms-full.txt
+# https://ainewsradar.xyz/zh/llms.txt
+# https://ainewsradar.xyz/zh/llms-full.txt
 Sitemap: https://ainewsradar.xyz/sitemap.xml
 Sitemap: https://ainewsradar.xyz/news-sitemap.xml
 Sitemap: https://ainewsradar.xyz/feed.xml

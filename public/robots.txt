@@ -43,6 +43,18 @@ User-agent: Applebot-Extended
 Allow: /
 Disallow: /cdn-cgi/
 
+User-agent: Applebot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: DuckAssistBot
+Allow: /
+Disallow: /cdn-cgi/
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /cdn-cgi/
+
 User-agent: Bytespider
 Allow: /
 Disallow: /cdn-cgi/
@@ -110,6 +122,12 @@ Allow: /
 Disallow: /cdn-cgi/
 
 # --- Sitemaps & AI Context Endpoints ---
+# LLMs.txt AI Manifests (llmstxt.org)
+# Discoverable AI knowledge context manifests:
+# https://ainewsradar.xyz/llms.txt
+# https://ainewsradar.xyz/llms-full.txt
+# https://ainewsradar.xyz/zh/llms.txt
+# https://ainewsradar.xyz/zh/llms-full.txt
 Sitemap: https://ainewsradar.xyz/sitemap.xml
 Sitemap: https://ainewsradar.xyz/news-sitemap.xml
 Sitemap: https://ainewsradar.xyz/feed.xml

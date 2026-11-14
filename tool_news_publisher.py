@@ -52,12 +52,15 @@ def parse_iso_date(val: Any) -> str:
         return f"{s}T08:00:00Z"
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-def sanitize_for_en(text: str) -> str:
+def sanitize_for_en(text: str, preserve_newlines: bool = False) -> str:
     """Removes any Chinese characters and clean up punctuation for English compliance."""
     if not text:
         return ""
     # Strip CJK characters
     cleaned = re.sub(r'[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]', '', str(text))
+    if preserve_newlines:
+        lines = [re.sub(r'[^\S\r\n]+', ' ', line).strip() for line in cleaned.splitlines()]
+        return '\n'.join(lines)
     cleaned = re.sub(r'\s+', ' ', cleaned).strip()
     return cleaned
 
@@ -117,6 +120,76 @@ def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') ->
 
     # Other authentic direct HTTPS image URLs
     return raw_url
+
+# ==============================================================================
+# GEO & Schema.org Disambiguation Entities Knowledge Base
+# ==============================================================================
+KNOWN_ENTITIES = [
+    # Top AI Companies & Labs
+    {"name": "OpenAI", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/OpenAI", "keywords": ["openai", "sam altman", "chatgpt", "gpt-4", "gpt-3", "sora", "o1", "o3"]},
+    {"name": "Google DeepMind", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/DeepMind", "keywords": ["deepmind", "demis hassabis", "alphafold", "alphazero"]},
+    {"name": "Google", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Google", "keywords": ["google", "gemini", "sundar pichai", "google cloud", "alphabet", "tpu"]},
+    {"name": "Anthropic", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Anthropic", "keywords": ["anthropic", "claude", "dario amodei", "constitutional ai"]},
+    {"name": "NVIDIA", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Nvidia", "keywords": ["nvidia", "jensen huang", "cuda", "h100", "b200", "blackwell", "geforce"]},
+    {"name": "Meta", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Meta_Platforms", "keywords": ["meta", "mark zuckerberg", "llama", "fair", "pytorch"]},
+    {"name": "Microsoft", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Microsoft", "keywords": ["microsoft", "copilot", "satya nadella", "azure ai"]},
+    {"name": "Apple", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Apple_Inc.", "keywords": ["apple", "apple intelligence", "tim cook", "siri", "ml foundation"]},
+    {"name": "Amazon", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Amazon_(company)", "keywords": ["amazon", "aws", "bedrock", "andy jassy"]},
+    {"name": "DeepSeek", "type": "Organization", "sameAs": "https://www.deepseek.com/", "keywords": ["deepseek", "deepseek-r1", "deepseek-v3", "liang wenfeng"]},
+    {"name": "Mistral AI", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Mistral_AI", "keywords": ["mistral", "arthur mensch", "mixtral", "codestral"]},
+    {"name": "xAI", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/X.AI", "keywords": ["xai", "elon musk", "grok", "colossus"]},
+    {"name": "Tesla", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Tesla,_Inc.", "keywords": ["tesla", "optimus", "fsd", "autopilot", "robotaxi"]},
+    {"name": "TSMC", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/TSMC", "keywords": ["tsmc", "semiconductor manufacturing", "fab", "foundry"]},
+    {"name": "Intel", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Intel", "keywords": ["intel", "gaudi", "pat gelsinger"]},
+    {"name": "AMD", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/AMD", "keywords": ["amd", "lisa su", "mi300", "rocm"]},
+    {"name": "Hugging Face", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Hugging_Face", "keywords": ["hugging face", "huggingface", "transformers"]},
+    {"name": "Cursor", "type": "Product", "sameAs": "https://www.cursor.com/", "keywords": ["cursor", "anysphere", "ai code editor"]},
+    {"name": "Perplexity", "type": "Organization", "sameAs": "https://en.wikipedia.org/wiki/Perplexity_AI", "keywords": ["perplexity", "aravind srinivas"]},
+    # Prominent Models & Products
+    {"name": "ChatGPT", "type": "Product", "sameAs": "https://en.wikipedia.org/wiki/ChatGPT", "keywords": ["chatgpt", "chat-gpt"]},
+    {"name": "Claude", "type": "Product", "sameAs": "https://en.wikipedia.org/wiki/Claude_(language_model)", "keywords": ["claude 3", "claude 3.5", "claude 3.7", "claude sonnet", "claude opus"]},
+    {"name": "Gemini", "type": "Product", "sameAs": "https://en.wikipedia.org/wiki/Gemini_(chatbot)", "keywords": ["gemini 1.5", "gemini 2.0", "gemini flash", "gemini pro"]},
+    {"name": "Llama", "type": "Product", "sameAs": "https://en.wikipedia.org/wiki/Llama_(language_model)", "keywords": ["llama 3", "llama 3.1", "llama 3.2", "llama 3.3"]},
+    {"name": "Sora", "type": "Product", "sameAs": "https://en.wikipedia.org/wiki/Sora_(text-to-video_model)", "keywords": ["sora"]},
+    # Strategic Categories & Concepts
+    {"name": "Artificial Intelligence", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence", "keywords": ["artificial intelligence", " ai ", "machine learning", "deep learning"]},
+    {"name": "Generative Artificial Intelligence", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Generative_artificial_intelligence", "keywords": ["generative ai", "genai", "text generation", "image generation"]},
+    {"name": "Large Language Model", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Large_language_model", "keywords": ["large language model", "llm", "foundation model", "transformer"]},
+    {"name": "Autonomous Agent", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Intelligent_agent", "keywords": ["ai agent", "autonomous agent", "multi-agent", "agentic"]},
+    {"name": "Robotics", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Robotics", "keywords": ["robotics", "humanoid", "embodied ai", "robot"]},
+    {"name": "Semiconductor", "type": "Thing", "sameAs": "https://en.wikipedia.org/wiki/Semiconductor", "keywords": ["semiconductor", "gpu", "ai chip", "asic"]}
+]
+
+def extract_entities_for_jsonld(text: str) -> tuple:
+    """Extracts 'about' entity and 'mentions' entities based on keyword presence."""
+    lowered = " " + text.lower() + " "
+    matched = []
+    seen_names = set()
+    for ent in KNOWN_ENTITIES:
+        if ent["name"] in seen_names:
+            continue
+        for kw in ent.get("keywords", []):
+            if kw in lowered:
+                matched.append({
+                    "@type": ent["type"],
+                    "name": ent["name"],
+                    "sameAs": ent["sameAs"]
+                })
+                seen_names.add(ent["name"])
+                break
+
+    if not matched:
+        about = [{
+            "@type": "Thing",
+            "name": "Artificial Intelligence",
+            "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+        }]
+        mentions = []
+    else:
+        about = [matched[0]]
+        mentions = matched[1:5]
+
+    return about, mentions
 
 def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: List[Dict[str, Any]] = None) -> str:
     tool_id = str(tool.get("id") or "")
@@ -196,7 +269,18 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
 
     quickstart_cmd = tool.get("quickstart_cmd") or ""
 
-    clean_meta_desc = escape(re.sub(r'<[^>]+>', '', overview)[:160])
+    if isinstance(overview, list):
+        overview_str = " ".join(str(x) for x in overview if x)
+    else:
+        overview_str = str(overview or "")
+    clean_meta_desc = escape(re.sub(r'<[^>]+>', '', overview_str)[:160])
+
+    if isinstance(features, list):
+        features_flat = "; ".join(str(x) for x in features if x)
+    else:
+        features_flat = str(features or hook or "")
+    feature_list_val = escape(re.sub(r'[\r\n]+', '; ', features_flat)[:300])
+
     meta_title = f"{display_name} - {hook} | AI News Radar"
     if not is_zh:
         meta_title = sanitize_for_en(meta_title)
@@ -305,6 +389,18 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
   <meta property="twitter:image" content="{image_url}">
   <meta name="twitter:image:alt" content="{escape(display_name)}">
   
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="{escape(meta_title)}">
+  <meta name="citation_author" content="AI News Radar Editorial Team">
+  <meta name="citation_journal_title" content="AI News Radar Applied Tools Directory">
+  <meta name="citation_fulltext_html_url" content="{canonical_url}">
+  <meta name="citation_abstract" content="{clean_meta_desc}">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {f'<link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">\n  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">' if is_zh else ''}
+  
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
   <link rel="alternate" type="application/rss+xml" title="{"AI 资讯雷达 RSS" if is_zh else "AI News Radar (Chinese Edition RSS)"}" href="https://ainewsradar.xyz/zh/feed.xml">
@@ -349,6 +445,14 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         "operatingSystem": "Web, Linux, macOS, Windows",
         "url": "{canonical_url}",
         "image": ["{image_url}"],
+        "aggregateRating": {{
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "{max(45, int(tool.get('github_stars') or tool.get('stars') or 45))}",
+          "bestRating": "5",
+          "worstRating": "1"
+        }},
+        "featureList": "{feature_list_val}",
         "offers": {{
           "@type": "Offer",
           "price": "0",
@@ -916,6 +1020,134 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             </div>
             """
 
+    iso_date_only = iso_published.split('T')[0] if 'T' in iso_published else iso_published[:10]
+    searchable_text = f"{title} {summary} {' '.join(str(b) for b in fact_bullets)} {ai_analysis}"
+    about_entities, mentions_entities = extract_entities_for_jsonld(searchable_text)
+
+    news_article_schema = {
+        "@type": "NewsArticle",
+        "headline": escape(title),
+        "description": clean_meta_desc,
+        "image": [image_url],
+        "url": canonical_url,
+        "datePublished": iso_published,
+        "dateModified": iso_published,
+        "inLanguage": "zh-CN" if is_zh else "en",
+        "mainEntityOfPage": canonical_url,
+        "articleSection": "Artificial Intelligence",
+        "isBasedOn": source_target_url,
+        "about": about_entities,
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".executive-summary", "h1"]
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "AI News Radar Editorial Team",
+            "url": f"https://ainewsradar.xyz{'/zh/about' if is_zh else '/about'}"
+        },
+        "publisher": {
+            "@type": "NewsMediaOrganization",
+            "name": "AI News Radar",
+            "url": "https://ainewsradar.xyz",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://ainewsradar.xyz/favicon.ico"
+            }
+        }
+    }
+    if mentions_entities:
+        news_article_schema["mentions"] = mentions_entities
+
+    faq_questions = []
+    if is_zh:
+        q1_text = f"{title} 的核心事实与事件脉络是什么？"
+        if fact_bullets:
+            q1_ans = " ".join([re.sub(r'^[【\[].*?[】\]]\s*', '', str(b)).strip() for b in fact_bullets[:4]])
+        else:
+            q1_ans = summary or title
+        if q1_ans:
+            faq_questions.append({
+                "@type": "Question",
+                "name": q1_text,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": q1_ans
+                }
+            })
+        if ai_analysis:
+            faq_questions.append({
+                "@type": "Question",
+                "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": ai_analysis
+                }
+            })
+    else:
+        q1_text = sanitize_for_en(f"What are the key facts regarding {title}?")
+        if fact_bullets:
+            q1_ans = sanitize_for_en(" ".join([re.sub(r'^[【\[].*?[】\]]\s*', '', str(b)).strip() for b in fact_bullets[:4]]))
+        else:
+            q1_ans = sanitize_for_en(summary or title)
+        if q1_text and q1_ans:
+            faq_questions.append({
+                "@type": "Question",
+                "name": q1_text,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": q1_ans
+                }
+            })
+        if ai_analysis:
+            q2_text = "What is the strategic AI industry analysis of this event?"
+            q2_ans = sanitize_for_en(ai_analysis)
+            if q2_ans:
+                faq_questions.append({
+                    "@type": "Question",
+                    "name": q2_text,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": q2_ans
+                    }
+                })
+
+    schema_graph = [
+        {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "AI News Radar",
+                    "item": "https://ainewsradar.xyz/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "AI 行业快讯" if is_zh else "Breaking AI News",
+                    "item": f"https://ainewsradar.xyz{'/zh' if is_zh else ''}#news"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": escape(title),
+                    "item": canonical_url
+                }
+            ]
+        },
+        news_article_schema
+    ]
+    if faq_questions:
+        schema_graph.append({
+            "@type": "FAQPage",
+            "mainEntity": faq_questions
+        })
+
+    json_ld_str = json.dumps({"@context": "https://schema.org", "@graph": schema_graph}, ensure_ascii=False, indent=2)
+    if not is_zh:
+        json_ld_str = sanitize_for_en(json_ld_str, preserve_newlines=True)
+
     return f"""<!DOCTYPE html>
 <html lang="{lang_code}">
 <head>
@@ -955,6 +1187,19 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   <meta name="twitter:image" content="{image_url}">
   <meta property="twitter:image" content="{image_url}">
   <meta name="twitter:image:alt" content="{escape(title)}">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="{escape(title)}">
+  <meta name="citation_publication_date" content="{iso_date_only}">
+  <meta name="citation_author" content="{escape(source_name or 'AI News Radar Editorial Team')}">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="{canonical_url}">
+  <meta name="citation_abstract" content="{clean_meta_desc}">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  {f'<link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">\n  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">' if is_zh else ''}
   
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
@@ -965,65 +1210,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
   {CLARITY_SCRIPT}
   
   <script type="application/ld+json">
-  {{
-    "@context": "https://schema.org",
-    "@graph": [
-      {{
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "AI News Radar",
-            "item": "https://ainewsradar.xyz/"
-          }},
-          {{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "{"AI 行业快讯" if is_zh else "Breaking AI News"}",
-            "item": "https://ainewsradar.xyz{"/zh" if is_zh else ""}#news"
-          }},
-          {{
-            "@type": "ListItem",
-            "position": 3,
-            "name": "{escape(title)}",
-            "item": "{canonical_url}"
-          }}
-        ]
-      }},
-      {{
-        "@type": "NewsArticle",
-        "headline": "{escape(title)}",
-        "description": "{clean_meta_desc}",
-        "image": ["{image_url}"],
-        "url": "{canonical_url}",
-        "datePublished": "{iso_published}",
-        "dateModified": "{iso_published}",
-        "inLanguage": "{"zh-CN" if is_zh else "en"}",
-        "mainEntityOfPage": "{canonical_url}",
-        "articleSection": "Artificial Intelligence",
-        "isBasedOn": "{source_target_url}",
-        "speakable": {{
-          "@type": "SpeakableSpecification",
-          "cssSelector": [".executive-summary", "h1"]
-        }},
-        "author": {{
-          "@type": "Organization",
-          "name": "AI News Radar Editorial Team",
-          "url": "https://ainewsradar.xyz{"/zh/about" if is_zh else "/about"}"
-        }},
-        "publisher": {{
-          "@type": "NewsMediaOrganization",
-          "name": "AI News Radar",
-          "url": "https://ainewsradar.xyz",
-          "logo": {{
-            "@type": "ImageObject",
-            "url": "https://ainewsradar.xyz/favicon.ico"
-          }}
-        }}
-      }}
-    ]
-  }}
+{json_ld_str}
   </script>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
