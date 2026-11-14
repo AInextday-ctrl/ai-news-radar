@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 08:06:57 UTC",
+  "generated_at": "2026-11-14 08:20:06 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 08:06:58 UTC",
+      "updated_at": "2026-11-14 08:20:06 UTC",
       "headline_item": {
-        "id": "0da43951a9f4b6fb",
+        "id": "8a85b2f19bee4c5e",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达董事会启动黄仁勋相关外籍情报审查",
-        "title_en": "Sources: despite Nvidia's 20+ years of business in China, Jensen Huang struggled to gain access to policymakers driving Beijing's chip self-sufficiency campaign (Eleanor Olcott/Financial Times)",
-        "source": "Financial Times",
-        "published_at": "2026-11-14T07:30:08+00:00",
-        "url": "https://www.ft.com/content/3efa9733-fbb4-47c2-83ba-b01e548ef277",
-        "event_summary_zh": "英伟达董事会正调查CEO黄仁勋与客户公司Megaspeed及其高管Alice Huang的关系，评估是否存在针对企业的外国情报渗透风险",
-        "event_summary_en": "Nvidia’s board is investigating CEO Jensen Huang’s dealings with Megaspeed executive Alice Huang to assess potential foreign intelligence penetration of company trade secrets. Amid tightening US semiconductor export controls, this investigation forces a critical re-examination of Nvidia’s China market strategy and the compliance risks of executive interactions with geopolitically sensitive entities.",
+        "title_zh": "微软全球云服务大面积宕机完成修复",
+        "title_en": "Microsoft says all Microsoft 365 products are operational, ending an outage that disrupted governments, traders, hospitals, and businesses around the world (Bloomberg)",
+        "source": "Bloomberg",
+        "published_at": "2026-11-14T08:03:46+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-13/microsoft-says-making-progress-fixing-one-of-its-longest-outages",
+        "event_summary_zh": "微软365全线产品在经历数小时全球性严重服务中断后，目前已恢复运行并实现容量稳步回升",
+        "event_summary_en": "Microsoft experienced a significant global cloud infrastructure failure around November 13, disrupting critical services including Microsoft 365, Outlook, Teams, and SharePoint Online. The company implemented emergency recovery measures such as traffic throttling, route redirection, and extending email timeout thresholds to 48 hours, eventually stabilizing systems while ruling out malicious activity.",
         "core_facts_zh": [
-          "【核心事件】黄仁勋（英伟达CEO）、Alice Huang（Megaspeed高管）、英伟达董事会在硅谷企业治理与美国国家安全合规领域：启动董事会内部调查，核查企业机密与国家安全是否因相关人员往来而受损",
-          "【起因与机理】美国官方质疑Megaspeed协助获取受限AI芯片，且存在针对英伟达的潜在情报窃取行为",
-          "【调查与监管诉求】董事会针对CEO黄仁勋与敏感实体Megaspeed的关系开启合规审计。",
-          "【行业影响与走向】此次调查将重塑英伟达在处理美中技术博弈中的决策机制与风险对冲策略。"
+          "【核心事件】微软公司 (Microsoft Corporation)在全球云基础设施环境：Microsoft 365及其关联组件遭遇大规模宕机，导致多国政府、医疗及企业系统瘫痪",
+          "【起因与机理】服务器处理流量能力异常，导致响应失灵，需进行紧急路由切换与容量恢复",
+          "【核心事实细节】核心受灾面：Microsoft 365全生态系统，包括Exchange Online、Teams及Copilot AI。",
+          "【行业影响与走向】后续影响：排除恶意入侵可能性，正处于逐步恢复容量的稳定运营阶段。"
         ],
         "core_facts_en": [
-          "[Core Event] Jensen Huang (CEO of Nvidia), Alice Huang (Executive at Megaspeed), Nvidia Board of Directors: Initiating a board investigation to verify if trade secrets or national security were compromised",
-          "[Root Cause & Mechanism] US authorities suspect Megaspeed of facilitating illegal AI chip access and acting as a conduit for foreign intelligence",
-          "[Key Fact Detail] Board initiates compliance audit into CEO Jensen Huang’s ties with Megaspeed.",
-          "[Industry Impact & Outlook] Investigation to reshape Nvidia’s strategic decision-making framework amid US-China technology friction."
+          "[Core Event] Microsoft Corporation (Global cloud infrastructure): Major outage of Microsoft 365 and related services affecting governments and enterprises worldwide",
+          "[Root Cause & Mechanism] Server unresponsiveness under traffic load requiring emergency traffic rerouting and recovery",
+          "[Key Fact Detail] Affected scope: Microsoft 365 ecosystem including Exchange Online, Teams, and Copilot AI.",
+          "[Scope & Next Steps] Status: Malicious activity ruled out; currently in stable recovery and capacity ramp-up."
         ],
-        "industry_impact_zh": "此事件标志着美国科技巨头对华业务进入“政治负债”期，商业往来中的高管私交与信息流动已成为监管审查的红线。英伟达正面临“技术领先性”与“合规透明度”的双重脱钩压力，其对华市场话语权及未来政商决策的自主空间将受到严厉束缚。",
-        "industry_impact_en": "This incident marks a shift toward 'political liability' for US tech giants operating in China, where executive personal networks are now regulatory red lines. Nvidia faces a dual pressure of maintaining technological dominance while managing compliance transparency, which significantly curtails its strategic autonomy in navigating the US-China tech decoupling."
+        "industry_impact_zh": "此次事件揭示了超大规模云架构在处理瞬时流量拥塞时的脆弱性，单一厂商的过度集约化部署已成为全球数字经济运行的系统性风险点。未来云服务厂商需在容灾架构中引入更细粒度的流量隔离与主动式弹性冗余策略，以降低中心化组件故障引发的级联式崩溃影响。",
+        "industry_impact_en": "This incident exposes the inherent fragility of hyper-scale cloud architectures during transient traffic congestion, highlighting the systemic risk posed by over-concentration on a single provider. Future resilience strategies must prioritize granular traffic isolation and proactive elastic redundancy to prevent cascading failures across mission-critical services."
       },
       "headlines": [
+        {
+          "id": "8a85b2f19bee4c5e",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "微软全球云服务大面积宕机完成修复",
+          "title_en": "Microsoft says all Microsoft 365 products are operational, ending an outage that disrupted governments, traders, hospitals, and businesses around the world (Bloomberg)",
+          "source": "Bloomberg",
+          "published_at": "2026-11-14T08:03:46+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-13/microsoft-says-making-progress-fixing-one-of-its-longest-outages",
+          "event_summary_zh": "微软365全线产品在经历数小时全球性严重服务中断后，目前已恢复运行并实现容量稳步回升",
+          "event_summary_en": "Microsoft experienced a significant global cloud infrastructure failure around November 13, disrupting critical services including Microsoft 365, Outlook, Teams, and SharePoint Online. The company implemented emergency recovery measures such as traffic throttling, route redirection, and extending email timeout thresholds to 48 hours, eventually stabilizing systems while ruling out malicious activity.",
+          "core_facts_zh": [
+            "【核心事件】微软公司 (Microsoft Corporation)在全球云基础设施环境：Microsoft 365及其关联组件遭遇大规模宕机，导致多国政府、医疗及企业系统瘫痪",
+            "【起因与机理】服务器处理流量能力异常，导致响应失灵，需进行紧急路由切换与容量恢复",
+            "【核心事实细节】核心受灾面：Microsoft 365全生态系统，包括Exchange Online、Teams及Copilot AI。",
+            "【行业影响与走向】后续影响：排除恶意入侵可能性，正处于逐步恢复容量的稳定运营阶段。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Microsoft Corporation (Global cloud infrastructure): Major outage of Microsoft 365 and related services affecting governments and enterprises worldwide",
+            "[Root Cause & Mechanism] Server unresponsiveness under traffic load requiring emergency traffic rerouting and recovery",
+            "[Key Fact Detail] Affected scope: Microsoft 365 ecosystem including Exchange Online, Teams, and Copilot AI.",
+            "[Scope & Next Steps] Status: Malicious activity ruled out; currently in stable recovery and capacity ramp-up."
+          ],
+          "industry_impact_zh": "此次事件揭示了超大规模云架构在处理瞬时流量拥塞时的脆弱性，单一厂商的过度集约化部署已成为全球数字经济运行的系统性风险点。未来云服务厂商需在容灾架构中引入更细粒度的流量隔离与主动式弹性冗余策略，以降低中心化组件故障引发的级联式崩溃影响。",
+          "industry_impact_en": "This incident exposes the inherent fragility of hyper-scale cloud architectures during transient traffic congestion, highlighting the systemic risk posed by over-concentration on a single provider. Future resilience strategies must prioritize granular traffic isolation and proactive elastic redundancy to prevent cascading failures across mission-critical services."
+        },
         {
           "id": "0da43951a9f4b6fb",
           "tag_zh": "📰 业界动态",
@@ -81,38 +107,12 @@
           ],
           "industry_impact_zh": "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "317a10b3908a169f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI安全初创WhiteMatter获2000万美元融资",
-          "title_en": "WhiteMatter, which builds \"guardian\" AI agents to oversee file access, software use, decision making, and actions of existing AI agents, raised a $20M Series A (Alice Tecotzky/Business Insider)",
-          "source": "Business Insider",
-          "published_at": "2026-11-14T06:55:00+00:00",
-          "url": "https://www.businessinsider.com/whitematter-startup-ai-agent-cybersecurity-funding-pitch-deck-2026-11",
-          "event_summary_zh": "WhiteMatter完成2000万美元A轮融资，旨在通过“守护代理”监控并规范企业内部AI代理的访问权限与决策行为",
-          "event_summary_en": "WhiteMatter raised $20 million in Series A funding, led by Blumberg Capital. The company utilizes a 'Guardian Agent' architecture that assigns a real-time monitoring node to every enterprise AI agent, auditing file access, software calls, and decision logic to prevent unauthorized or rogue actions during autonomous execution.",
-          "core_facts_zh": [
-            "【核心事件】WhiteMatter（创始人Vidit Arora）、Blumberg Capital：融资2000万美元用于扩充团队，推广其实时监控AI代理行为的守护架构",
-            "【起因与机理】AI代理化进程加速带来前所未有的安全风险，现有的传统安全栈无法应对代理主体驱动的任务流",
-            "【关键数据与实测】WhiteMatter融资2000万美元，引入“代理下的管理”（AUM）收费模式。",
-            "【各方立场与态度】AI代理安全赛道已进入与Onyx Security、Zenity等厂商的直接竞争阶段。"
-          ],
-          "core_facts_en": [
-            "[Core Event] WhiteMatter (Founder Vidit Arora), Blumberg Capital: Raised $20M Series A to scale its guardian agent architecture for AI oversight",
-            "[Root Cause & Mechanism] Rising security incidents with autonomous agents have made traditional security stacks inadequate for agent-driven workflows",
-            "[Key Metrics] WhiteMatter raises $20M and introduces an 'Agents Under Management' (AUM) revenue model.",
-            "[Key Position & Outlook] Entry into a competitive landscape against players like Onyx Security and Zenity."
-          ],
-          "industry_impact_zh": "随着组织架构从“人机协同”向“代理协同”演进，安全边界已从传统的端点防御转向“行为语义防御”。WhiteMatter采用的即时、内嵌式守护架构，预示着AI应用层安全正成为资本竞逐的核心壁垒，代理行为的可解释性与可管控性将决定未来AI落地企业的安全性上限。",
-          "industry_impact_en": "As organizations shift from human-in-the-loop to agent-driven workflows, security boundaries are moving from endpoint defense to behavioral semantic defense. WhiteMatter’s embedded, real-time guardian architecture highlights that AI application-layer security is becoming a core defensive moat, where agent interpretability and governance will dictate the feasibility of enterprise AI scaling."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 08:06:58 UTC",
+      "updated_at": "2026-11-14 08:20:06 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -279,7 +279,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 08:06:58 UTC",
+      "updated_at": "2026-11-14 08:20:06 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -388,12 +388,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,466)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,474)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,466 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,474 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
