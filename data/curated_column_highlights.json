@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 11:19:02 UTC",
+  "generated_at": "2026-11-14 11:34:05 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 11:19:02 UTC",
+      "updated_at": "2026-11-14 11:34:05 UTC",
       "headline_item": {
-        "id": "dcad0c14b787ae4c",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "Joby Aviation实现全自动驾驶跨洲飞行测试",
-        "title_en": "No Pilots. Few Air Traffic Controllers. What Could Go Wrong?",
-        "source": "Wired AI",
-        "published_at": "2026-11-14T11:00:00+00:00",
-        "url": "https://www.wired.com/story/no-pilots-few-air-traffic-controllers-what-could-go-wrong/",
-        "event_summary_zh": "Joby Aviation通过无人干预的塞斯纳大篷车飞行测试，验证了人工智能在复杂民航环境下的自动驾驶可靠性",
-        "event_summary_en": "Joby Aviation successfully completed a 3,200-mile cross-country flight from California to North Carolina without human control intervention, covering complex airspace navigation and storm avoidance. Although a safety pilot was on board for contingency, the flight demonstrated the maturity of autonomous aviation systems and marked a critical milestone in AI-driven flight control.",
+        "id": "8e21c58f34a004d6",
+        "tag_zh": "🎁 算力福利",
+        "tag_en": "🎁 Promos & Credits",
+        "title_zh": "Anthropic模型训练算力效率呈现超指数级增长",
+        "title_en": "Anthropic can already retrain Mythos with \"a fraction of the compute originally needed,\" says former researcher Coxon",
+        "source": "THE DECODER",
+        "published_at": "2026-11-14T11:21:41+00:00",
+        "url": "https://the-decoder.com/anthropic-can-already-retrain-mythos-with-a-fraction-of-the-compute-originally-needed-says-former-researcher-coxon/",
+        "event_summary_zh": "前Anthropic研究员Jacob Coxon披露，Anthropic在IPO路演中展示的算力需求曲线暗示其模型训练效率正在发生超指数级迭代",
+        "event_summary_en": "Former Anthropic researcher Jacob Coxon revealed that the compute trajectory disclosed in the company's IPO roadshow indicates a significant jump in training efficiency for its Mythos model. He argues that algorithmic improvements are scaling super-exponentially, noting that Mythos can now be retrained with a fraction of its original compute requirement, with such gains trending toward automation.",
         "core_facts_zh": [
-          "【核心事件】Joby Aviation（航空技术公司）在美国境内跨州空域：完成全程无人干预的3200英里塞斯纳单引擎涡桨飞机飞行测试",
-          "【起因与机理】验证AI在民航领域提升运营效率与飞行自主能力的商业可行性",
-          "【核心事实细节】Joby Aviation验证了民用航空器在复杂气象与密集空域下的全程自动驾驶能力。",
-          "【各方立场与态度】行业正处于从保守的人控模式向自动化系统过渡的监管与安全摩擦窗口期。"
+          "【核心事件】前Anthropic与OpenAI研究员Jacob Coxon在Anthropic IPO路演材料与行业评论：披露模型训练算法效率呈超指数级增长，并呼吁暂停前沿模型研发以缩短技术代差",
+          "【起因与机理】因担忧前沿AI自我迭代失控风险及技术演进速度过快引发行业竞争不公平",
+          "【关键技术规格】核心主体：前Anthropic研究员Jacob Coxon揭露内部算力效率优化趋势。",
+          "【行业影响与走向】后续影响：Coxon主张通过暂停研发以平衡行业竞争格局并缓解技术失控风险。"
         ],
         "core_facts_en": [
-          "[Core Event] Joby Aviation (US domestic airspace): Conducted a 3,200-mile autonomous flight using a Cessna Caravan without pilot intervention",
-          "[Root Cause & Mechanism] To validate the commercial viability of AI in enhancing aviation efficiency and autonomy",
-          "[Key Fact Detail] Joby Aviation validated autonomous flight capability in complex airspace and weather conditions.",
-          "[Key Position & Outlook] The industry is entering a friction period between legacy manual control and emerging AI-driven aviation systems."
+          "[Core Event] Jacob Coxon, former researcher at Anthropic and OpenAI: Disclosed that model training efficiency is growing super-exponentially and called for a pause in frontier model development",
+          "[Root Cause & Mechanism] Concerns over the risks of uncontrollable self-improving AI and the widening gap between industry leaders and competitors",
+          "[Key Technical Spec] Key Actor: Former Anthropic researcher Jacob Coxon reveals internal efficiency trends.",
+          "[Industry Impact & Outlook] Outlook: Coxon advocates for a pause in frontier model development to level the competitive playing field and mitigate safety risks."
         ],
-        "industry_impact_zh": "航空工业的自动化转型已从早期的NextGen系统支持转向端到端AI实时决策，这不仅动摇了传统飞行员培训的经济模型，也对FAA（联邦航空管理局）的适航认证框架提出了严峻的合规挑战。AI在航空领域的渗透将率先在短途运输与无人货运场景打破边际成本瓶颈，但系统冗余性与不可预测的极端环境交互仍是其通过商用审批的核心技术卡点。",
-        "industry_impact_en": "The transition in aviation is shifting from NextGen support systems to end-to-end AI decision-making, which disrupts traditional pilot training economic models and pressures FAA certification frameworks. While AI-driven autonomy will likely achieve initial commercial success in short-haul transport and cargo, the resolution of system redundancy and unpredictability in extreme environmental interactions remains the primary hurdle for widespread regulatory approval."
+        "industry_impact_zh": "模型训练算法的迭代效率已从线性的算力堆叠转向以架构优化为核心的效率提升，这标志着大模型行业正从“暴力美学”向“边际成本递减”转型。若算法自动化程度持续走高，领先企业将构建起极高的技术护城河，致使依赖算力规模增长的竞争对手陷入成本不可控的困境。",
+        "industry_impact_en": "The paradigm of model training is shifting from brute-force compute scaling to efficiency-driven architectural optimization, signaling a move toward diminishing marginal costs. As algorithmic automation accelerates, incumbent firms are establishing profound defensive moats that effectively render compute-heavy strategies by competitors economically unsustainable."
       },
       "headlines": [
+        {
+          "id": "8e21c58f34a004d6",
+          "tag_zh": "🎁 算力福利",
+          "tag_en": "🎁 Promos & Credits",
+          "title_zh": "Anthropic模型训练算力效率呈现超指数级增长",
+          "title_en": "Anthropic can already retrain Mythos with \"a fraction of the compute originally needed,\" says former researcher Coxon",
+          "source": "THE DECODER",
+          "published_at": "2026-11-14T11:21:41+00:00",
+          "url": "https://the-decoder.com/anthropic-can-already-retrain-mythos-with-a-fraction-of-the-compute-originally-needed-says-former-researcher-coxon/",
+          "event_summary_zh": "前Anthropic研究员Jacob Coxon披露，Anthropic在IPO路演中展示的算力需求曲线暗示其模型训练效率正在发生超指数级迭代",
+          "event_summary_en": "Former Anthropic researcher Jacob Coxon revealed that the compute trajectory disclosed in the company's IPO roadshow indicates a significant jump in training efficiency for its Mythos model. He argues that algorithmic improvements are scaling super-exponentially, noting that Mythos can now be retrained with a fraction of its original compute requirement, with such gains trending toward automation.",
+          "core_facts_zh": [
+            "【核心事件】前Anthropic与OpenAI研究员Jacob Coxon在Anthropic IPO路演材料与行业评论：披露模型训练算法效率呈超指数级增长，并呼吁暂停前沿模型研发以缩短技术代差",
+            "【起因与机理】因担忧前沿AI自我迭代失控风险及技术演进速度过快引发行业竞争不公平",
+            "【关键技术规格】核心主体：前Anthropic研究员Jacob Coxon揭露内部算力效率优化趋势。",
+            "【行业影响与走向】后续影响：Coxon主张通过暂停研发以平衡行业竞争格局并缓解技术失控风险。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jacob Coxon, former researcher at Anthropic and OpenAI: Disclosed that model training efficiency is growing super-exponentially and called for a pause in frontier model development",
+            "[Root Cause & Mechanism] Concerns over the risks of uncontrollable self-improving AI and the widening gap between industry leaders and competitors",
+            "[Key Technical Spec] Key Actor: Former Anthropic researcher Jacob Coxon reveals internal efficiency trends.",
+            "[Industry Impact & Outlook] Outlook: Coxon advocates for a pause in frontier model development to level the competitive playing field and mitigate safety risks."
+          ],
+          "industry_impact_zh": "模型训练算法的迭代效率已从线性的算力堆叠转向以架构优化为核心的效率提升，这标志着大模型行业正从“暴力美学”向“边际成本递减”转型。若算法自动化程度持续走高，领先企业将构建起极高的技术护城河，致使依赖算力规模增长的竞争对手陷入成本不可控的困境。",
+          "industry_impact_en": "The paradigm of model training is shifting from brute-force compute scaling to efficiency-driven architectural optimization, signaling a move toward diminishing marginal costs. As algorithmic automation accelerates, incumbent firms are establishing profound defensive moats that effectively render compute-heavy strategies by competitors economically unsustainable."
+        },
         {
           "id": "dcad0c14b787ae4c",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "8a85b2f19bee4c5e",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "微软全球云服务大面积宕机完成修复",
-          "title_en": "Microsoft says all Microsoft 365 products are operational, ending an outage that disrupted governments, traders, hospitals, and businesses around the world (Bloomberg)",
-          "source": "Bloomberg",
-          "published_at": "2026-11-14T08:03:46+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-13/microsoft-says-making-progress-fixing-one-of-its-longest-outages",
-          "event_summary_zh": "微软365全线产品在经历数小时全球性严重服务中断后，目前已恢复运行并实现容量稳步回升",
-          "event_summary_en": "Microsoft experienced a significant global cloud infrastructure failure around November 13, disrupting critical services including Microsoft 365, Outlook, Teams, and SharePoint Online. The company implemented emergency recovery measures such as traffic throttling, route redirection, and extending email timeout thresholds to 48 hours, eventually stabilizing systems while ruling out malicious activity.",
-          "core_facts_zh": [
-            "【核心事件】微软公司 (Microsoft Corporation)在全球云基础设施环境：Microsoft 365及其关联组件遭遇大规模宕机，导致多国政府、医疗及企业系统瘫痪",
-            "【起因与机理】服务器处理流量能力异常，导致响应失灵，需进行紧急路由切换与容量恢复",
-            "【核心事实细节】核心受灾面：Microsoft 365全生态系统，包括Exchange Online、Teams及Copilot AI。",
-            "【行业影响与走向】后续影响：排除恶意入侵可能性，正处于逐步恢复容量的稳定运营阶段。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Microsoft Corporation (Global cloud infrastructure): Major outage of Microsoft 365 and related services affecting governments and enterprises worldwide",
-            "[Root Cause & Mechanism] Server unresponsiveness under traffic load requiring emergency traffic rerouting and recovery",
-            "[Key Fact Detail] Affected scope: Microsoft 365 ecosystem including Exchange Online, Teams, and Copilot AI.",
-            "[Scope & Next Steps] Status: Malicious activity ruled out; currently in stable recovery and capacity ramp-up."
-          ],
-          "industry_impact_zh": "此次事件揭示了超大规模云架构在处理瞬时流量拥塞时的脆弱性，单一厂商的过度集约化部署已成为全球数字经济运行的系统性风险点。未来云服务厂商需在容灾架构中引入更细粒度的流量隔离与主动式弹性冗余策略，以降低中心化组件故障引发的级联式崩溃影响。",
-          "industry_impact_en": "This incident exposes the inherent fragility of hyper-scale cloud architectures during transient traffic congestion, highlighting the systemic risk posed by over-concentration on a single provider. Future resilience strategies must prioritize granular traffic isolation and proactive elastic redundancy to prevent cascading failures across mission-critical services."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 11:19:02 UTC",
+      "updated_at": "2026-11-14 11:34:05 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 11:19:02 UTC",
+      "updated_at": "2026-11-14 11:34:05 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,542)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,549)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,542 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,549 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
