@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-14 18:33:57 UTC",
+  "generated_at": "2026-11-14 18:48:23 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-14 18:33:57 UTC",
+      "updated_at": "2026-11-14 18:48:23 UTC",
       "headline_item": {
-        "id": "f35c98ce0c676730",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "黄仁勋辞任英伟达CEO引发开源生态资助断供危机",
-        "title_en": "Jensen Huang's resignation is a setback for US open models, as his funding gave open-source developers time to find their footing and will very likely dry up (Nathan Lambert/Interconnects AI)",
-        "source": "Interconnects AI",
-        "published_at": "2026-11-14T18:05:02+00:00",
-        "url": "https://www.interconnects.ai/p/open-source-ai-without-jensen",
-        "event_summary_zh": "英伟达CEO黄仁勋宣布辞职，引发市场对其推行的开源大模型扶持战略可能因融资收缩而陷入停滞的担忧",
-        "event_summary_en": "Nvidia CEO Jensen Huang has resigned, creating uncertainty around his strategic funding for the open-source model ecosystem. Huang previously used significant capital to support open-source models as a hedge against large customers developing internal silicon, a strategy now facing potential abandonment as Nvidia prioritizes stabilizing operations and hardware delivery.",
+        "id": "5217a4d183f40677",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "金融数据基础设施商Databento完成1亿美元C轮融资",
+        "title_en": "Databento, which offers market data APIs and says it has contracts with five of the six largest frontier AI labs, raised a $100M Series C at a $1.1B valuation (FinTech Global)",
+        "source": "FinTech Global",
+        "published_at": "2026-11-14T18:35:04+00:00",
+        "url": "https://fintech.global/2026/11/13/databento-hits-1-1bn-valuation-with-100m-series-c/",
+        "event_summary_zh": "金融数据API平台Databento以11亿美元估值完成1亿美元C轮融资，其业务已覆盖六大顶级AI实验室中的五家",
+        "event_summary_en": "Financial data provider Databento secured $100 million in Series C funding led by Fifth Down Capital, reaching a $1.1 billion valuation. The firm provides real-time and historical market data via a unified API and has successfully secured enterprise contracts with five of the six largest frontier AI labs.",
         "core_facts_zh": [
-          "【核心事件】黄仁勋（英伟达前任首席执行官）在美国半导体产业与人工智能模型生态领域：黄仁勋辞任引发公司内部资源配置调整，开源模型扶持资金链断裂风险升高",
-          "【起因与机理】公司需在短期内应对供应压力并稳定内部治理，高风险开源投入优先级下调",
-          "【关键技术规格】核心人物离职引发企业战略优先级调整。",
-          "【各方立场与态度】硬件供应短缺背景下开源生态议价能力被进一步削弱。"
+          "【核心事件】Databento (首席执行官兼联合创始人Christina Qi)在金融数据API服务市场：完成11亿美元估值融资，并拓展AI领域市场份额",
+          "【起因与机理】利用极简人力规模实现传统数据厂商的体量扩张，满足AI训练对高质量市场数据的需求",
+          "【关键数据与实测】以11亿美元估值完成1亿美元C轮融资，主要投资方包括Fifth Down Capital及Fitch Ventures。",
+          "【涉及范围与推进】未来将利用资金提升基础设施性能并扩展更多资产类别的数据覆盖范围。"
         ],
         "core_facts_en": [
-          "[Core Event] Jensen Huang (Former CEO of Nvidia): Resignation leads to potential funding withdrawal for open-source model initiatives",
-          "[Root Cause & Mechanism] Nvidia prioritizes hardware delivery and operational stability over speculative long-term ecosystem investments",
-          "[Market & Financial Detail] Leadership transition forces re-evaluation of ecosystem subsidies.",
-          "[Key Position & Outlook] Reduced competitive leverage for open-source models due to acute compute scarcity."
+          "[Core Event] Databento (CEO and Co-founder Christina Qi): Raised $100M at a $1.1B valuation to expand market data coverage",
+          "[Root Cause & Mechanism] Scaling with high capital efficiency to provide training-ready data for frontier AI labs",
+          "[Key Metrics] Closed $100M Series C at $1.1B valuation, backed by Fifth Down Capital and Fitch Ventures.",
+          "[Scope & Next Steps] Capital to be deployed for infrastructure enhancement and expanded asset class coverage."
         ],
-        "industry_impact_zh": "黄仁勋作为英伟达的核心经营中枢，其去职将迫使公司回归由硬件交付和产能扩张驱动的防守型商业逻辑，放弃此前通过补贴开源生态以制衡大模型实验室的非对称博弈。随着英伟达对开源投入的收缩，头部模型厂商与硬件供应方的整合将加速，缺乏自研芯片能力的开源模型阵营或将面临生存空间被深度压缩的局面。",
-        "industry_impact_en": "Jensen Huang's departure marks a pivot for Nvidia from ecosystem-shaping subsidies toward defensive hardware-driven operations to satisfy supply constraints. The potential withdrawal of open-source funding will consolidate market power among closed-model labs with vertical datacenter integration, marginalizing open-weight models that currently lack independent compute economies of scale."
+        "industry_impact_zh": "Databento证明了在金融数据领域，通过垂直整合API技术栈可大幅压缩传统厂商庞大的人力运营成本，实现了轻量化基础设施扩张。随着AI实验室从泛数据向高质量金融时序数据的需求倾斜，该类厂商正成为支撑大模型微调与量化策略部署的核心基础设施，对彭博等传统巨头构成敏捷化竞争压力。",
+        "industry_impact_en": "Databento demonstrates that vertical integration of API technology stacks can drastically reduce the operational headcount required by legacy data vendors, enabling efficient infrastructure scaling. As AI labs pivot toward high-quality financial time-series data for model fine-tuning and quantitative strategy, these agile providers are increasingly disrupting legacy incumbents like Bloomberg."
       },
       "headlines": [
+        {
+          "id": "5217a4d183f40677",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "金融数据基础设施商Databento完成1亿美元C轮融资",
+          "title_en": "Databento, which offers market data APIs and says it has contracts with five of the six largest frontier AI labs, raised a $100M Series C at a $1.1B valuation (FinTech Global)",
+          "source": "FinTech Global",
+          "published_at": "2026-11-14T18:35:04+00:00",
+          "url": "https://fintech.global/2026/11/13/databento-hits-1-1bn-valuation-with-100m-series-c/",
+          "event_summary_zh": "金融数据API平台Databento以11亿美元估值完成1亿美元C轮融资，其业务已覆盖六大顶级AI实验室中的五家",
+          "event_summary_en": "Financial data provider Databento secured $100 million in Series C funding led by Fifth Down Capital, reaching a $1.1 billion valuation. The firm provides real-time and historical market data via a unified API and has successfully secured enterprise contracts with five of the six largest frontier AI labs.",
+          "core_facts_zh": [
+            "【核心事件】Databento (首席执行官兼联合创始人Christina Qi)在金融数据API服务市场：完成11亿美元估值融资，并拓展AI领域市场份额",
+            "【起因与机理】利用极简人力规模实现传统数据厂商的体量扩张，满足AI训练对高质量市场数据的需求",
+            "【关键数据与实测】以11亿美元估值完成1亿美元C轮融资，主要投资方包括Fifth Down Capital及Fitch Ventures。",
+            "【涉及范围与推进】未来将利用资金提升基础设施性能并扩展更多资产类别的数据覆盖范围。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Databento (CEO and Co-founder Christina Qi): Raised $100M at a $1.1B valuation to expand market data coverage",
+            "[Root Cause & Mechanism] Scaling with high capital efficiency to provide training-ready data for frontier AI labs",
+            "[Key Metrics] Closed $100M Series C at $1.1B valuation, backed by Fifth Down Capital and Fitch Ventures.",
+            "[Scope & Next Steps] Capital to be deployed for infrastructure enhancement and expanded asset class coverage."
+          ],
+          "industry_impact_zh": "Databento证明了在金融数据领域，通过垂直整合API技术栈可大幅压缩传统厂商庞大的人力运营成本，实现了轻量化基础设施扩张。随着AI实验室从泛数据向高质量金融时序数据的需求倾斜，该类厂商正成为支撑大模型微调与量化策略部署的核心基础设施，对彭博等传统巨头构成敏捷化竞争压力。",
+          "industry_impact_en": "Databento demonstrates that vertical integration of API technology stacks can drastically reduce the operational headcount required by legacy data vendors, enabling efficient infrastructure scaling. As AI labs pivot toward high-quality financial time-series data for model fine-tuning and quantitative strategy, these agile providers are increasingly disrupting legacy incumbents like Bloomberg."
+        },
         {
           "id": "f35c98ce0c676730",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次事件暴露了关键基础设施高度依赖老旧硬件（部分路由器产自2001年）与技术迭代滞后的系统性风险。当航空系统从模拟向数字化强行跨越时，缺乏容错冗余的架构极易因单一承包商的作业疏失引发连锁性瘫痪，显示出关键领域技术外包合规审查与应急恢复能力的紧迫性。",
           "industry_impact_en": "This incident highlights systemic risks inherent in relying on legacy hardware (some routers dating back to 2001) while forcing digital transformations. The total system collapse following a single contractor's maintenance error reveals an urgent need for enhanced compliance oversight and redundant fail-safes in critical infrastructure maintenance."
-        },
-        {
-          "id": "f2e69faea37789f5",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "谷歌Gemini 4 Carbon问鼎MathArena基准测试",
-          "title_en": "Gemini 4 Carbon takes the MathArena crown but costs 15 times more than GPT-6.1 Sol",
-          "source": "THE DECODER",
-          "published_at": "2026-11-14T16:48:01+00:00",
-          "url": "https://the-decoder.com/gemini-4-carbon-takes-the-matharena-crown-but-costs-15-times-more-than-gpt-6-1-sol/",
-          "event_summary_zh": "谷歌发布的Gemini 4 Carbon在MathArena数学评测中超越GPT-6.1 Sol，但其高昂的推理成本成为规模化商用的显著门槛",
-          "event_summary_en": "Google's Gemini 4 Carbon model surpassed OpenAI's GPT-6.1 Sol to top the MathArena math benchmark, with Claude Fable 5.2 ranking second. Despite its superior performance, the model incurs reasoning costs 15 and 40 times higher than GPT-6.1 Sol, respectively, while exhibiting significant issues with excessive compute time usage.",
-          "core_facts_zh": [
-            "【核心事件】谷歌（Gemini 4 Carbon）， OpenAI(GPT-6.1 Sol), Anthropic（Claude Fable 5.2）在MathArena数学基准评测体系：Gemini 4 Carbon获得榜首但推理成本极其高昂，且存在计算进程难以自动终止的缺陷",
-            "【起因与机理】追求复杂逻辑推理性能导致了算法复杂度的指数级增长与边际成本剧增",
-            "【关键数据与实测】推理成本分别是GPT-6.1 Sol的15倍（Gemini）与40倍（Claude）。",
-            "【行业影响与走向】模型存在极端推理耗时导致的资源占用风险与计算效率瓶颈。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google (Gemini 4 Carbon), OpenAI (GPT-6.1 Sol), Anthropic (Claude Fable 5.2) (MathArena math benchmark): Gemini 4 Carbon topped the leaderboard but incurred high reasoning costs and exhibited non-terminating compute loops.",
-            "[Root Cause & Mechanism] The push for peak reasoning performance has driven an exponential increase in algorithmic complexity and marginal costs.",
-            "[Key Technical Spec] Gemini 4 Carbon surpasses GPT-6.1 Sol in MathArena benchmark.",
-            "[Industry Impact & Outlook] Risk of excessive compute duration and efficiency bottlenecks."
-          ],
-          "industry_impact_zh": "大模型在垂直领域突破逻辑上限的代价已演变为严重的经济性危机，Gemini 4 Carbon在成本敏感型任务中的应用价值受限。当前算力成本的规模失衡，预示着行业竞争重心正从简单的能力指标博弈，迅速转向推理效率与参数规模间的效用比优化。",
-          "industry_impact_en": "The trade-off for peak logical reasoning in large models has become an economic liability, limiting the commercial viability of Gemini 4 Carbon in cost-sensitive applications. This structural imbalance in compute costs signals a shift in industry competition from mere performance metrics to the optimization of utility ratios between reasoning efficiency and parameter density."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-14 18:33:58 UTC",
+      "updated_at": "2026-11-14 18:48:23 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-14 18:33:58 UTC",
+      "updated_at": "2026-11-14 18:48:23 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,683)",
+            "📈 社区热度指数级飙升：本周新增 +5,408 Stars (总星标 23,689)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,408 stars this week (23,683 total)",
+            "📈 Exponential community momentum: +5,408 stars this week (23,689 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
