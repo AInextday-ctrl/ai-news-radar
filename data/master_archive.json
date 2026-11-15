@@ -3607,9 +3607,7 @@
       }
     },
     {
-      "id": "prompt-novel-shortdrama-01",
-      "title_zh": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
-      "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
+      "id": "wf_claude_desktop_mcp_core4",
       "category": "prompts",
       "scenario_label": "✍️ 短剧小说",
       "target_model": "DeepSeek-R4 / Claude 5.5",
@@ -6431,6 +6429,82 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (87分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_rag_anti_hallucination_pipeline",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "📚 知识库 RAG",
+      "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+      "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
+      "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
+      "scenario": "🧠 知识库检索 / RAG",
+      "scenario_key": "knowledge",
+      "tested_models": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+      "model_family": "DeepSeek / Qwen",
+      "takeaway_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
+      "takeaway_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
+      "config_filename": "rag_pipeline_config.json",
+      "config_lang": "json",
+      "code_snippet": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "usage_guide_zh": "在 FastGPT、Dify 知识库或 LlamaIndex 中直接导入对应参数配置，可将私有文档检索的准确召回率提升至 95% 以上，彻底杜绝无依据编造。",
+      "usage_guide_en": "Directly configure your FastGPT, Dify or LlamaIndex instance with these golden parameters to ensure zero-hallucination document Q&A.",
+      "created_at": "2026-11-14T14:20:05Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-14T14:20:05Z",
+      "summary_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
+      "summary_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
+      "prompt_content_zh": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "prompt_content_en": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "prompt_content": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "recommended_model": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+      "metrics": {
+        "type": "📚 知识库 RAG",
+        "model": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+        "filename": "rag_pipeline_config.json"
+      },
+      "title": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+      "image_url": null
+    },
+    {
+      "id": "prompt_react_ts_refactor",
+      "sub_type": "coding",
+      "purpose_zh": "💻 编码与架构 · React 19 / TypeScript 组件现代化",
+      "purpose_en": "💻 Coding & Architecture · React 19 & TypeScript Modernization",
+      "title_zh": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构",
+      "title_en": "💡 [Fullstack Frontend] React 19 Server Components & Strict TypeScript Refactoring",
+      "url": "https://react.dev/",
+      "image_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "前端大牛",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-14T14:20:05Z",
+      "recommended_model": "Claude 4.6 Sonnet / Cursor",
+      "temp_advice": "建议温度 0.2 | 现代化组件范式",
+      "metrics": {
+        "type": "💻 React 19",
+        "model": "Claude 4.6",
+        "temp": "0.2"
+      },
+      "content_snippet": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
+      "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系。",
+      "summary_en": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
+      "prompt_content_zh": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
+      "prompt_content_en": "Act as a Principal Frontend Engineer specializing in React 19 and TypeScript 5.5+. Refactor the provided legacy component:\n1. Migrate outdated useEffect data fetching and boilerplate state to React 19 Actions, useActionState, and React Server Components;\n2. Enforce 100% strict type safety: eliminate `any`, leverage discriminated unions, branded types, and const type parameters;\n3. Optimize rendering: eliminate unnecessary re-renders, adding proper Suspense fallback skeletons and resilient Error Boundaries.",
+      "prompt_content": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
+      "tags": [
+        "React19",
+        "TypeScript",
+        "前端重构"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-14T14:20:05Z",
+      "title": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构"
     },
     {
       "id": "yt_7GNpNPxJIvU",
@@ -10276,14 +10350,14 @@
       "author_avatar": "https://unavatar.io/youtube/Piyush Garg",
       "source": "YouTube · Piyush Garg",
       "views": "1.0万 播放",
-      "views_count": 10415,
-      "velocity": 434.0,
-      "momentum_score": 867.9,
+      "views_count": 10409,
+      "velocity": 433.7,
+      "momentum_score": 867.4,
       "metrics": {
         "views": "1.0万 播放",
-        "views_count": 10415,
-        "velocity": "+434/h",
-        "momentum_score": 867.9,
+        "views_count": 10409,
+        "velocity": "+433/h",
+        "momentum_score": 867.4,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -10301,7 +10375,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+434/h)",
+        "🔥 24h飙升 (+433/h)",
         "Piyush Garg",
         "🔥 极客实操"
       ],
@@ -10686,8 +10760,8 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Simplilearn：人工智能工程师全套课程 2027 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
-      "title_zh": "【48h 教学】Simplilearn：人工智能工程师全套课程 2027 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
+      "title": "【48h 教学】Simplilearn：2027 年人工智能工程师全套课程 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
+      "title_zh": "【48h 教学】Simplilearn：2027 年人工智能工程师全套课程 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
       "title_en": "AI Engineer Full Course 2027 | Learn AI, Machine Learning, & AI Agent Development | Simplilearn",
       "author": "Simplilearn",
       "author_handle": "@Simplilearn",
@@ -10750,14 +10824,14 @@
       "author_avatar": "https://unavatar.io/youtube/Grow With Kaz",
       "source": "YouTube · Grow With Kaz",
       "views": "5.2万 播放",
-      "views_count": 51530,
-      "velocity": 2147.1,
-      "momentum_score": 4294.2,
+      "views_count": 52223,
+      "velocity": 2176.0,
+      "momentum_score": 4351.9,
       "metrics": {
         "views": "5.2万 播放",
-        "views_count": 51530,
-        "velocity": "+2,147/h",
-        "momentum_score": 4294.2,
+        "views_count": 52223,
+        "velocity": "+2,176/h",
+        "momentum_score": 4351.9,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -10775,7 +10849,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+2,147/h)",
+        "🔥 24h飙升 (+2,176/h)",
         "Grow With Kaz",
         "🔥 极客实操"
       ],
@@ -14437,9 +14511,9 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 极客实测】Better Stack：Claude Code 编写代码...Theo 的技能交付代码",
-      "title_zh": "【48h 极客实测】Better Stack：Claude Code 编写代码...Theo 的技能交付代码",
-      "title_en": "Claude Code Writes the Code... Theo's Skills Ship It",
+      "title": "【48h 极客实测】Better Stack：Theo 的 9 项 Claude Code 技能可自动化整个公关工作流程",
+      "title_zh": "【48h 极客实测】Better Stack：Theo 的 9 项 Claude Code 技能可自动化整个公关工作流程",
+      "title_en": "Theo's 9 Claude Code Skills Automate the Entire PR Workflow",
       "author": "Better Stack",
       "author_handle": "@BetterStack",
       "author_avatar": "https://unavatar.io/youtube/Better Stack",
@@ -14476,7 +14550,7 @@
       ],
       "content_snippet": "Better Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Better Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
-      "summary_en": "Live hands-on AI demonstration and technical tutorial by Better Stack: Claude Code Writes the Code... Theo's Skills Ship It",
+      "summary_en": "Live hands-on AI demonstration and technical tutorial by Better Stack: Theo's 9 Claude Code Skills Automate the Entire PR Workflow",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-15T06:17:48.291756+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -43596,7 +43670,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Anthropic unveils office tools, including a video call assistant, a data dashboard, and spreadsheet service Claude Sheets, in a bid to compete with Microsoft (Shirin Ghaffary/Bloomberg)",
         "[Context & Motivation] Anthropic PBC is releasing a suite of tools that weave the company's artificial intelligence capabilities into more everyday office work ….",
-        "[Industry Analysis] Shireen Ghaffari/Bloomberg:\nAnthropic launches office tools, including video call assistant, data dashboards and spreadsheet service Claude Sheets to compete with Microsoft — Anthropic PBC is releasing a suite of tools that puts the company's art into the mix."
+        "[Industry Analysis] Shireen Ghaffari/Bloomberg:\nAnthropic launches office tools, including video call assistant, data dashboards and spreadsheet service Claude Sheets, to compete with Microsoft — Anthropic PBC is releasing a suite of tools that puts the company's art into it."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -221500,7 +221574,7 @@
         "今日要闻"
       ],
       "title_zh": "Anthropic 联合创始人 Jack Clark 将其对人工智能自我改进的预测提前至 2027 年",
-      "summary_zh": "P-Zero Research 的新基准衡量人工智能模型自行设计和评估实验的效果。结果改善得如此之快，以至于 Anthropic 联合创始人 Jack Clark 现在认为自我改进的人工智能可能会在 2027 年到来。Anthropic 联合创始人 Jack Clark 的文章将他对自我改进的人工智能的预测改为 fo",
+      "summary_zh": "P-Zero Research 的新基准衡量人工智能模型自行设计和评估实验的效果。结果改善得如此之快，以至于 Anthropic 联合创始人 Jack Clark 现在认为自我改进的人工智能可能会在 2027 年到来。Anthropic 联合创始人 Jack Clark 的文章将他对自我改进的人工智能的预测转向了",
       "hot_score": 3,
       "is_recent_24h": false,
       "fact_bullets_zh": [
@@ -262325,7 +262399,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Texas Instruments reports Q3 revenue up 28% YoY to $6.06B, above $5.93B est., net income up 78% YoY to $2.43B, and forecasts $5.8B-$6.3B in Q4, vs. $5.73B est. (Ian King/Bloomberg)",
         "[Root Cause & Mechanism] Texas Instruments Inc., the biggest maker of analog and embedded processing chips, gave a strong revenue forecast for the current period ….",
-        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gave a strong revenue forecast for the period."
+        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gives a strong revenue forecast for the period."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -333815,7 +333889,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Waymo plans to launch its robotaxis in Toronto in 2028 in partnership with Element Fleet Management, the company's first deployment in Canada (Prathik Jayaprakash/Reuters)",
         "[Context & Motivation] Google's (GOOGL.O) Waymo said on Friday it plans to bring its autonomous ride-hailing service to Toronto in 2028, marking the self-driving company's ….",
-        "[Key Fact Detail] According to Reuters (Technology Focus: Embodied Intelligent Robots): More technical measurements and industry impacts will continue to be tracked."
+        "[Key Fact Detail] According to Reuters (Technology Focus: Embodied Intelligent Robots): More technical measurements and industry impact will continue to be tracked."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -458234,7 +458308,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license (Financial Times)",
         "[Context & Motivation] Financial Times:\nSources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license&nbsp; &mdash;&nbsp; Securities regulators looking at use of legal exemption by world's biggest crypto.",
-        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearing and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -466444,7 +466518,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: DeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative",
         "[Root Cause & Mechanism] Reuters:\nDeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative&nbsp; &mdash;&nbsp; Chinese AI firm DeepSeek said on Wednesday it has partnered with Huawei Technologies to develop prog.",
-        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the front line of global large model open source community and technology research and development."
+        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the frontline of global large model open source community and technology research and development."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -487992,7 +488066,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Nvidia’s Answer to Rogue Agents Is an Open-Source AI Security System",
         "[Context & Motivation] In the wake of a series of high-profile AI safety incidents, Nvidia is introducing a new software tool that helps keep agents from escaping containment..",
-        "[Key Technical Spec] NVIDIA (NVIDIA/Huang Renxun) is on the front line of global large model open source community and technology research and development."
+        "[Key Technical Spec] NVIDIA (NVIDIA / Jen-Hsun Huang) is at the forefront of global large model open source community and technology research and development."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -492091,7 +492165,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta VR眼镜是Vision Pro应该有的产品；消息来源：苹果视觉团队正在研发一款改头换面的头显，但这项工作仍处于“生命支持”阶段。",
-      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR眼镜是Vision Pro应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
+      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR 眼镜是 Vision Pro 应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -505819,7 +505893,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: The US files an application with the EU's General Court in support of X's effort to annul a 2025 €120M DSA fine, arguing the EU engaged in regulatory overreach",
         "[Context & Motivation] Bloomberg:\nThe US files an application with the EU's General Court in support of X's effort to annul a 2025 &euro;120M DSA fine, arguing the EU engaged in regulatory overreach&nbsp; &mdash;&nbsp; The US is seeking to join a legal challenge filed by Elon Musk to dismiss a &euro;12.",
-        "[Key Metrics & Data] The United States has filed an application with the EU General Court in support of X's reversal of a €120 million DSA fine in 2025, arguing that EU regulatory overreach."
+        "[Key Metrics & Data] The United States has submitted an application to the EU General Court in support of X's reversal of a €120 million DSA fine in 2025, arguing that EU regulatory overreach."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -509578,7 +509652,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs",
         "[Context & Motivation] The Information:\nSources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs&nbsp; &mdash;&nbsp; Google, OpenAI and Anthropic are pushing forward with a plan to create a new AI safet.",
-        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free of government oversight in late 2026 or 2027."
+        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free from government oversight in late 2026 or 2027."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -510436,7 +510510,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: There's a new way to break RSA that's faster than anything we've seen before",
         "[Root Cause & Mechanism] Until now, cryptographers thought factoring was the only way to break RSA.",
-        "[Key Fact Detail] There’s a new way to break RSA At the forefront of global industry and technology."
+        "[Key Fact Detail] There's a new way to break RSA At the forefront of global industry and technology."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -515014,7 +515088,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI Agents Teamed Up to Cheat at Blackjack. Their Collusion Is Getting Harder to Spot",
         "[Context & Motivation] A clandestine card-counting operation suggests we may need new ways to spot agent-to-agent deception..",
-        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to detect deception among agents."
+        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to spot deception among agents."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -520390,7 +520464,7 @@
       "fact_bullets_en": [
         "[Core Event] ShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site (Joseph Cox/404 Media)",
         "[Context & Motivation] Joseph Cox / 404 Media:\nShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site&nbsp; &mdash;&nbsp; A sample of 5,000 alleged agents seen by 404 Media includes names, addresses.",
-        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day attacks on FBI-related services and stole employee and applicant data;."
+        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day to attack FBI-related services and steal employee and applicant data;."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -548508,7 +548582,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: A new kind of AI model from a ChatGPT inventor is thrilling developers",
         "[Context & Motivation] Jev, a new kind of AI model, is showing developers a cheaper and faster path to software intelligence..",
-        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large model open source community and technology research and development."
+        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large-scale model open source community and technology research and development."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -548688,7 +548762,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Newsom creates panel on AI safety regulation, suggests possible ‘kill switch",
         "[Root Cause & Mechanism] Gavin Newsom has ordered the formation of a panel to come up with safety regulations for the state's AI companies, including the development of a possible 'kill switch' for programs that go rogue..",
-        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance at the scene of US Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance is on the scene of US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
