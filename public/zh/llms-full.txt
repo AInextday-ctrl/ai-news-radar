@@ -1,12 +1,22 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-15 11:31:14Z
+生成时间: 2026-11-15 11:49:34Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### 英伟达关联渠道被指规避对华芯片禁令
+- 落地页链接: https://ainewsradar.xyz/zh/news/b42761bda4c97d0f
+- 原始信源: THE DECODER (https://the-decoder.com/firm-linked-to-jensen-huangs-ex-lover-reportedly-brokered-nearly-12-billion-in-nvidia-chip-orders-for-china/)
+- 核心摘要: 云服务合作伙伴Megaspeed被曝在2024年3月至2025年6月间，向中国客户销售近120亿美元英伟达高性能芯片
+- 核验事实清单:
+  * 【核心事件】Megaspeed（云服务商）、Alice Huang（实控人）、英伟达（供应方）在美国对华高科技出口管制框架下的全球供应链：通过官方云合作伙伴渠道，向中国科技企业输送近120亿美元禁运范围内的AI算力芯片
+  * 【起因与机理】利用英伟达云合作伙伴的特许分配权，结合中国市场旺盛的算力需求及监管合规漏洞实现绕道出口
+  * 【关键数据与实测】Megaspeed利用云服务商特许权，违规向中国市场分流近120亿美元英伟达AI芯片。
+  * 【各方立场与态度】该交易量与英伟达财报披露的中国区收入存在显著差异，引发市场对其合规真实性的质疑。
 
 ### 卡内基梅隆大学研发OATs微型AI交互硬件
 - 落地页链接: https://ainewsradar.xyz/zh/news/8549b67caa4f8bfa
@@ -298,16 +308,6 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
   * 【核心事实细节】卢加诺市政府通过发行LVGA代币与Tether建立深度合作以重塑区域经济定位。
   * 【各方立场与态度】通过构建加密友好型基础设施，与欧洲其他金融中心争夺科技产业资源。
 
-### OpenAI解散机器人团队整合进通用模型部门
-- 落地页链接: https://ainewsradar.xyz/zh/news/92be13aafeedcbd5
-- 原始信源: THE DECODER (https://the-decoder.com/openai-reassigns-robotics-researchers-to-other-teams-as-general-purpose-models-might-make-specialized-robotics-ai-unnecessary/)
-- 核心摘要: OpenAI重组机器人部门，将研发人员并入通用模型团队，旨在通过GPT-6 Astra等通用大模型直接驱动机器人执行任务
-- 核验事实清单:
-  * 【核心事件】OpenAI首席研究官Mark Chen、总裁Greg Brockman及机器人研究团队在OpenAI内部组织架构重组：解散独立机器人研发部门，人员分流至通用模型与应用研究组
-  * 【起因与机理】验证结果表明通用模型在机器人控制任务上的表现优于专用模型，旨在通过大模型解决具身智能
-  * 【关键数据与实测】技术逻辑：GPT-6 Astra在模拟环境中的机器人任务成功率达74.8%，远超专用模型。
-  * 【各方立场与态度】战略演进：放弃专用机器人模型训练路径，转向由大模型直接驱动具身智能控制。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -316,8 +316,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/782d746a5f892e59
 - 官方/开源地址: https://github.com/openai/codex?ref=ainewsradar
 - 一句话亮点: 在您的终端中运行的轻量级编码代理
-- 核心概览: codex 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,939 Stars，总计 135,349 Stars）。在您的终端中运行的轻量级编码代理，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,939 Stars (总星标 135,349)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: codex 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,939 Stars，总计 135,351 Stars）。在您的终端中运行的轻量级编码代理，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,939 Stars (总星标 135,351)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/openai/codex.git`
 
@@ -325,8 +325,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f154099a3fdc8ab2
 - 官方/开源地址: https://github.com/herdrdev/herdr?ref=ainewsradar
 - 一句话亮点: 你的编码代理所在的运行时
-- 核心概览: herdr 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,026 Stars，总计 51,065 Stars）。你的编码代理所在的运行时，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,026 Stars (总星标 51,065)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: herdr 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,026 Stars，总计 51,069 Stars）。你的编码代理所在的运行时，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,026 Stars (总星标 51,069)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/herdrdev/herdr.git`
 
@@ -334,8 +334,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/e3ca255877a6d63c
 - 官方/开源地址: https://github.com/vercel-labs/agent-desktop?ref=ainewsradar
 - 一句话亮点: 计算机使用 CLI 进行 AI 代理
-- 核心概览: agent-desktop 是一款专注于 🌐 联网搜索与浏览器 的开源 AI 工具（本周新增 +5,171 Stars，总计 23,982 Stars）。计算机使用 CLI 进行 AI 代理，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 23,982)', '🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-desktop 是一款专注于 🌐 联网搜索与浏览器 的开源 AI 工具（本周新增 +5,171 Stars，总计 23,986 Stars）。计算机使用 CLI 进行 AI 代理，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 23,986)', '🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🌐 联网搜索与浏览器 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-desktop.git`
 
@@ -343,8 +343,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/8902d312579bff23
 - 官方/开源地址: https://github.com/pingdotgg/t3code?ref=ainewsradar
 - 一句话亮点: 从任何计算机或手机控制 Claude Code、Codex 等的最佳方式
-- 核心概览: t3code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +9,668 Stars，总计 60,963 Stars）。从任何计算机或手机控制 Claude Code、Codex 等的最佳方式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +9,668 Stars (总星标 60,963)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: t3code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +9,668 Stars，总计 60,970 Stars）。从任何计算机或手机控制 Claude Code、Codex 等的最佳方式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +9,668 Stars (总星标 60,970)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/pingdotgg/t3code.git`
 
@@ -352,8 +352,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +4,363 Stars，总计 6,507 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,363 Stars (总星标 6,507)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +4,363 Stars，总计 6,531 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,363 Stars (总星标 6,531)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -361,8 +361,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/62a8982796e5111f
 - 官方/开源地址: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
 - 一句话亮点: 开源人工智能同事每人都有一台自己的计算机：浏览器、文件和工具，每一个动作在发生之前就决定并在发生之后记录。布林
-- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,900 Stars，总计 12,335 Stars）。开源人工智能同事每人都有一台自己的计算机：浏览器、文件和工具，每一个动作在发生之前就决定并在发生之后记录。布林，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,900 Stars (总星标 12,335)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: OpenBot 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,900 Stars，总计 12,338 Stars）。开源人工智能同事每人都有一台自己的计算机：浏览器、文件和工具，每一个动作在发生之前就决定并在发生之后记录。布林，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,900 Stars (总星标 12,338)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/CopilotKit/OpenBot.git`
 
@@ -370,8 +370,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/a9682d2a9aa41848
 - 官方/开源地址: https://github.com/openai/codex-security?ref=ainewsradar
 - 一句话亮点: OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npm
-- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,176 Stars，总计 13,580 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,176 Stars (总星标 13,580)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,176 Stars，总计 13,581 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,176 Stars (总星标 13,581)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/openai/codex-security.git`
 
@@ -379,8 +379,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/759f0bb46f60cf6a
 - 官方/开源地址: https://github.com/NVIDIA/auto-ontology?ref=ainewsradar
 - 一句话亮点: Auto Ontology 是一个 Python 框架，用于在数据上构建语义、基于图形的推理层。它支持确定性查询生成、更好的上下文检索
-- 核心概览: auto-ontology 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,178 Stars，总计 12,936 Stars）。Auto Ontology 是一个 Python 框架，用于在数据上构建语义、基于图形的推理层。它支持确定性查询生成、更好的上下文检索，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,178 Stars (总星标 12,936)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: auto-ontology 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,178 Stars，总计 12,938 Stars）。Auto Ontology 是一个 Python 框架，用于在数据上构建语义、基于图形的推理层。它支持确定性查询生成、更好的上下文检索，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,178 Stars (总星标 12,938)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/NVIDIA/auto-ontology.git`
 
@@ -388,8 +388,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/ebdd81d4384fdddc
 - 官方/开源地址: https://github.com/homeassistant-ai/ha-mcp?ref=ainewsradar
 - 一句话亮点: 使用 Claude、ChatGPT 和其他 AI 助手配置和自动化 Home Assistant。
-- 核心概览: ha-mcp 是一款专注于 💼 金融看盘·求职与生活 的开源 AI 工具（本周新增 +2,348 Stars，总计 7,851 Stars）。使用 Claude、ChatGPT 和其他 AI 助手配置和自动化 Home Assistant。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,348 Stars (总星标 7,851)', '🎯 针对 💼 金融看盘·求职与生活 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: ha-mcp 是一款专注于 💼 金融看盘·求职与生活 的开源 AI 工具（本周新增 +2,348 Stars，总计 7,852 Stars）。使用 Claude、ChatGPT 和其他 AI 助手配置和自动化 Home Assistant。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,348 Stars (总星标 7,852)', '🎯 针对 💼 金融看盘·求职与生活 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💼 金融看盘·求职与生活 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/homeassistant-ai/ha-mcp.git`
 
@@ -406,8 +406,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0d9bdefb9cf43c09
 - 官方/开源地址: https://github.com/google/elephant-goldfish-model?ref=ainewsradar
 - 一句话亮点: 用于与代理一起设计和审查软件的开源插件
-- 核心概览: elephant-goldfish-model 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,539 Stars，总计 19,394 Stars）。用于与代理一起设计和审查软件的开源插件，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,539 Stars (总星标 19,394)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: elephant-goldfish-model 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +5,539 Stars，总计 19,404 Stars）。用于与代理一起设计和审查软件的开源插件，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +5,539 Stars (总星标 19,404)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/google/elephant-goldfish-model.git`
 
@@ -415,8 +415,8 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,601 Stars，总计 51,373 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,601 Stars (总星标 51,373)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,601 Stars，总计 51,381 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,601 Stars (总星标 51,381)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -424,17 +424,17 @@ Nebuly 的技术通过分析人工智能代理对生产力和收入的影响来�
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +13,660 Stars，总计 28,443 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +13,660 Stars (总星标 28,443)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +13,660 Stars，总计 28,453 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +13,660 Stars (总星标 28,453)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
 ### exact
 - 落地页链接: https://ainewsradar.xyz/zh/tools/15c2c9b603319647
 - 官方/开源地址: https://github.com/expo/exact?ref=ainewsradar
-- 一句话亮点: 编写一个应用程序一次。它在网络、macOS、iOS 和 Linux 上本机运行，AI 代理可以在其中的每一个上构建、运行、查看和测试它。
-- 核心概览: exact 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,494 Stars，总计 4,230 Stars）。编写一个应用程序一次。它在网络、macOS、iOS 和 Linux 上本机运行，AI 代理可以在其中的每一个上构建、运行、查看和测试它。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,494 Stars (总星标 4,230)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 一句话亮点: 编写一个应用程序一次。它在网络、macOS、iOS 和 Linux 上本机运行，AI 代理可以在其中每一个上构建、运行、查看和测试它。
+- 核心概览: exact 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,488 Stars，总计 4,232 Stars）。编写一个应用程序一次。它在网络、macOS、iOS 和 Linux 上本机运行，AI 代理可以在其中每一个上构建、运行、查看和测试它。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,488 Stars (总星标 4,232)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/expo/exact.git`
 
