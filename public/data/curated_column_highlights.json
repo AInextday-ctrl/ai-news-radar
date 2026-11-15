@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 22:33:53 UTC",
+  "generated_at": "2026-11-15 22:49:17 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 22:33:53 UTC",
+      "updated_at": "2026-11-15 22:49:17 UTC",
       "headline_item": {
-        "id": "c30c74c2cf696c49",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "华为和林格尔数据中心AI算力规模深度解析",
-        "title_en": "Analysis: Huawei's Horinger data center, among China's largest for AI, has ~7% of the compute of SpaceX's Colossus 2 and may stay far behind until at least 2028 (Ben Cottier/Epoch AI)",
-        "source": "Epoch AI",
-        "published_at": "2026-11-15T22:02:17+00:00",
-        "url": "https://epochai.substack.com/p/what-huaweis-horinger-data-center",
-        "event_summary_zh": "研究显示华为和林格尔数据中心算力仅为SpaceX Colossus 2的7%，预计2028年前难现量级超越",
-        "event_summary_en": "Epoch AI analysis reveals that Huawei's Horinger AI data center cluster holds approximately 7% of the total compute capacity of SpaceX's Colossus 2. Driven by constraints in advanced process node chip procurement and manufacturing capacity, this infrastructure is unlikely to bridge the scale gap with global leading clusters before 2028.",
+        "id": "de2c7606b6c227b3",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "联合发射联盟Vulcan火箭首飞失败，损毁40颗亚马逊卫星",
+        "title_en": "Amazon loses 40 Leo satellites after ULA's Vulcan rocket fails 10 minutes into flight, marking the first mission failure for the Boeing-Lockheed joint venture (Joey Roulette/Reuters)",
+        "source": "Reuters",
+        "published_at": "2026-11-15T22:35:01+00:00",
+        "url": "https://www.reuters.com/business/aerospace-defense/us-rocket-fails-after-launch-payload-amazon-internet-satellites-destroyed-2026-11-15/",
+        "event_summary_zh": "波音与洛克希德马丁合资的联合发射联盟（ULA）Vulcan火箭在升空10分钟后发生异常，导致亚马逊柯伊伯计划的40颗低轨卫星损毁，这是该型火箭首次发射失利",
+        "event_summary_en": "United Launch Alliance (ULA), a joint venture between Boeing and Lockheed Martin, suffered its first mission failure after its flagship Vulcan rocket experienced an anomaly 10 minutes into flight, destroying 40 Amazon Project Kuiper low-Earth orbit satellites. The incident, occurring at Space Launch Complex 41 in Florida, halts the launch cadence for Amazon's nascent satellite internet constellation.",
         "core_facts_zh": [
-          "【核心事件】华为（Huawei），研究机构Epoch AI在内蒙古和林格尔数据中心：算力基础设施对比分析，明确该中心算力规模占比及长期预测",
-          "【起因与机理】在全球高性能计算竞争背景下评估中国AI基础设施的真实追赶节奏",
-          "【关键数据与实测】和林格尔集群算力目前仅达到Colossus 2规模的7%。",
-          "【各方立场与态度】预期2028年前中国算力集群规模仍将保持显著落后态势。"
+          "【核心事件】联合发射联盟（ULA，由波音与洛克希德马丁合资）、亚马逊（Project Kuiper）在佛罗里达州卡纳维拉尔角41号航天发射场：Vulcan火箭飞行10分钟后失控，导致40颗卫星损毁及任务失败",
+          "【起因与机理】新型旗舰火箭的可靠性验证未达标，导致亚马逊卫星网络部署进度被迫停滞",
+          "【关键数据与实测】财务与技术细节：发射后10分钟即发生异常，系该型号首次重大发射事故。",
+          "【行业影响与走向】后续影响：ULA需暂停发射以调查根本原因，亚马逊卫星互联网组网进程面临不确定性延迟。"
         ],
         "core_facts_en": [
-          "[Core Event] Huawei, Research institute Epoch AI: Comparative compute capacity analysis and long-term scaling projections",
-          "[Root Cause & Mechanism] Evaluating the trajectory of Chinese AI infrastructure amid global high-performance computing competition",
-          "[Key Metrics] Horinger cluster compute capacity is currently at 7% of Colossus 2.",
-          "[Key Position & Outlook] Significant scale disparity is projected to persist until at least 2028."
+          "[Core Event] United Launch Alliance (Boeing and Lockheed Martin JV), Amazon (Project Kuiper): Vulcan rocket failure 10 minutes post-launch, loss of 40 satellites",
+          "[Root Cause & Mechanism] New flagship rocket reliability issues stalling Amazon's LEO network deployment",
+          "[Key Fact Detail] Core incident: ULA Vulcan rocket mission failed, resulting in the loss of 40 Amazon satellites.",
+          "[Industry Impact & Outlook] Outlook: ULA operational pause pending investigation, impacting Amazon's Kuiper deployment schedule."
         ],
-        "industry_impact_zh": "此差距核心不在于数据中心物理架构，而在于先进制程GPU的持续供应能力，反映出美国出口管制对国内大规模训练集群扩容的实质性延宕。在自主算力底座完全脱离外部依赖前，中国头部厂商将更多诉诸于互联技术（Interconnect）与存算架构优化，以降低对单芯片算力的极端依赖。",
-        "industry_impact_en": "The compute gap highlights the critical bottleneck in advanced node GPU supply chains imposed by export controls, fundamentally delaying the scaling of large-scale domestic training clusters. Until domestic alternatives reach parity, industry leaders will likely prioritize optimizing interconnect fabrics and memory architectures to mitigate the dependence on peak single-chip FLOPS."
+        "industry_impact_zh": "此次故障暴露了ULA在过渡至Vulcan商业化量产阶段时的系统可靠性脆弱性，严重削弱了其作为SpaceX Falcon 9主要替代方案的市场竞争力。对于亚马逊而言，失去40颗卫星不仅是直接的资本支出损失，更将导致柯伊伯计划关键轨道部署窗口延宕，极大增加了其应对全球卫星通信市场竞争的合规与时间成本压力。",
+        "industry_impact_en": "The failure highlights critical reliability gaps during ULA's transition to mass commercial production, severely undermining its role as the primary alternative to SpaceX's Falcon 9. For Amazon, this loss represents both significant CAPEX depletion and a strategic setback in launch scheduling, intensifying pressure on their Project Kuiper deployment timeline amidst fierce satellite internet competition."
       },
       "headlines": [
+        {
+          "id": "de2c7606b6c227b3",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "联合发射联盟Vulcan火箭首飞失败，损毁40颗亚马逊卫星",
+          "title_en": "Amazon loses 40 Leo satellites after ULA's Vulcan rocket fails 10 minutes into flight, marking the first mission failure for the Boeing-Lockheed joint venture (Joey Roulette/Reuters)",
+          "source": "Reuters",
+          "published_at": "2026-11-15T22:35:01+00:00",
+          "url": "https://www.reuters.com/business/aerospace-defense/us-rocket-fails-after-launch-payload-amazon-internet-satellites-destroyed-2026-11-15/",
+          "event_summary_zh": "波音与洛克希德马丁合资的联合发射联盟（ULA）Vulcan火箭在升空10分钟后发生异常，导致亚马逊柯伊伯计划的40颗低轨卫星损毁，这是该型火箭首次发射失利",
+          "event_summary_en": "United Launch Alliance (ULA), a joint venture between Boeing and Lockheed Martin, suffered its first mission failure after its flagship Vulcan rocket experienced an anomaly 10 minutes into flight, destroying 40 Amazon Project Kuiper low-Earth orbit satellites. The incident, occurring at Space Launch Complex 41 in Florida, halts the launch cadence for Amazon's nascent satellite internet constellation.",
+          "core_facts_zh": [
+            "【核心事件】联合发射联盟（ULA，由波音与洛克希德马丁合资）、亚马逊（Project Kuiper）在佛罗里达州卡纳维拉尔角41号航天发射场：Vulcan火箭飞行10分钟后失控，导致40颗卫星损毁及任务失败",
+            "【起因与机理】新型旗舰火箭的可靠性验证未达标，导致亚马逊卫星网络部署进度被迫停滞",
+            "【关键数据与实测】财务与技术细节：发射后10分钟即发生异常，系该型号首次重大发射事故。",
+            "【行业影响与走向】后续影响：ULA需暂停发射以调查根本原因，亚马逊卫星互联网组网进程面临不确定性延迟。"
+          ],
+          "core_facts_en": [
+            "[Core Event] United Launch Alliance (Boeing and Lockheed Martin JV), Amazon (Project Kuiper): Vulcan rocket failure 10 minutes post-launch, loss of 40 satellites",
+            "[Root Cause & Mechanism] New flagship rocket reliability issues stalling Amazon's LEO network deployment",
+            "[Key Fact Detail] Core incident: ULA Vulcan rocket mission failed, resulting in the loss of 40 Amazon satellites.",
+            "[Industry Impact & Outlook] Outlook: ULA operational pause pending investigation, impacting Amazon's Kuiper deployment schedule."
+          ],
+          "industry_impact_zh": "此次故障暴露了ULA在过渡至Vulcan商业化量产阶段时的系统可靠性脆弱性，严重削弱了其作为SpaceX Falcon 9主要替代方案的市场竞争力。对于亚马逊而言，失去40颗卫星不仅是直接的资本支出损失，更将导致柯伊伯计划关键轨道部署窗口延宕，极大增加了其应对全球卫星通信市场竞争的合规与时间成本压力。",
+          "industry_impact_en": "The failure highlights critical reliability gaps during ULA's transition to mass commercial production, severely undermining its role as the primary alternative to SpaceX's Falcon 9. For Amazon, this loss represents both significant CAPEX depletion and a strategic setback in launch scheduling, intensifying pressure on their Project Kuiper deployment timeline amidst fierce satellite internet competition."
+        },
         {
           "id": "c30c74c2cf696c49",
           "tag_zh": "🎁 算力福利",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此案例标志着AI从单纯的数据处理工具演进为具备高阶逻辑推演能力的科研协同主体，能够攻克超越人类短时记忆承载极限的长链数学证明。随着此类模型在基础物理与生命科学领域的渗透，科研范式正从“人脑驱动”向“AI智能代理+专家审核”的混合模式深度迭代，这将大幅缩短从理论假设到实验验证的研发周期。",
           "industry_impact_en": "This development marks the shift of AI from mere data processing to an autonomous agent capable of high-level logical deduction, successfully tackling long-chain mathematical proofs beyond human cognitive limits. The rise of these AI agents suggests a structural shift in scientific discovery, where the human role evolves into overseeing AI-driven hypothesis generation and verification, drastically shortening R&D cycles."
-        },
-        {
-          "id": "f622c08a9fd4855f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI启动科学博客并拓展AI科研应用边界",
-          "title_en": "Our new blog for science",
-          "source": "OpenAI 官方动态",
-          "published_at": "2026-11-15T22:00:00+00:00",
-          "url": "https://openai.com/index/our-new-blog-for-science",
-          "event_summary_zh": "OpenAI正式发布科学博客，披露其模型在Navier–Stokes方程、黎曼猜想及生物学大脑数据分析等前沿领域的研究成果",
-          "event_summary_en": "OpenAI has launched a dedicated science blog to showcase AI's cross-disciplinary research capabilities. Key milestones include addressing the Navier–Stokes existence and smoothness problem, advancing estimates for the quasi-Riemann hypothesis, and utilizing the GPT-Rosalind model in collaboration with PerturbAI and Scripps Research to analyze millions of mouse brain cells in just 32 minutes.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI与PerturbAI、斯克里普斯研究所（Scripps Research）在OpenAI科学博客平台：发布AI在基础数学、物理与生物学领域的科研突破与方法论",
-            "【起因与机理】通过解决重大基础科学难题，论证AI作为科研加速器在通往AGI进程中的核心价值",
-            "【关键数据与实测】披露的成果包括利用模型解决Navier–Stokes存在性与光滑性问题、推进黎曼猜想相关估算，以及通过GPT-Rosalind模型联合PerturbAI与斯克里普斯研究所，在32分钟内完成数百万小鼠脑细胞数据的分析与机制关联。",
-            "【各方立场与态度】确立AI在科学发现全链路（从数据分析到假设验证）的赋能地位。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI, PerturbAI, Scripps Research (OpenAI Science Blog): Release of AI breakthroughs in fundamental mathematics, physics, and biology",
-            "[Root Cause & Mechanism] To demonstrate the core value of AI as a scientific accelerator on the path to AGI",
-            "[Key Fact Detail] Centralized disclosure of AI breakthroughs in mathematics, physics, and biology.",
-            "[Scope & Next Steps] Establishing AI as a core enabler in the full lifecycle of scientific discovery."
-          ],
-          "industry_impact_zh": "OpenAI此举不仅是展示技术储备，更是通过在数学证明与生物大数据挖掘上的高强度实战，定义AI在“科研加速”领域的商业护城河。这种将基础科研作为产品演示场的策略，旨在通过解决顶级科学难题来确立其模型的底层逻辑可信度，从而在高端科学计算市场建立显著的议价优势。",
-          "industry_impact_en": "OpenAI's initiative is not merely a show of capability but a strategic move to define its commercial moats by tackling high-stakes fundamental research. By using top-tier scientific challenges as a showcase for its models, OpenAI aims to build structural credibility, establishing a commanding position in the high-end scientific computing market."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 22:33:53 UTC",
+      "updated_at": "2026-11-15 22:49:17 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 22:33:53 UTC",
+      "updated_at": "2026-11-15 22:49:17 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,165)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,166)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (24,165 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (24,166 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
