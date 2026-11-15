@@ -293,7 +293,7 @@
       min-height: 52px;
     }
   </style>
-  <meta name="ssr-updated" content="2026-11-15T22:04:39.005390+00:00">
+  <meta name="ssr-updated" content="2026-11-15T22:18:23.098688+00:00">
   <link rel="preload" as="image" href="https://wsrv.nl/?url=https%3A//i.ytimg.com/vi/GoG2-SSSU5k/maxresdefault.jpg&w=400&output=webp&q=85" fetchpriority="high">
 </head>
 <body class="bg-slate-50 text-slate-900 dark:bg-[#060913] dark:text-slate-100 min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white antialiased relative">
@@ -707,7 +707,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 17.0h ago
+              YouTube Lab · 17.2h ago
             </div>
           </div>
         </div>
@@ -771,7 +771,7 @@
               <span class="text-rose-600 dark:text-rose-400 text-[10px] font-black leading-none">✓</span>
             </div>
             <div class="text-[10px] text-slate-500 dark:text-slate-400 font-mono truncate leading-none mt-1">
-              YouTube Lab · 14.6h ago
+              YouTube Lab · 14.8h ago
             </div>
           </div>
         </div>
@@ -1850,8 +1850,34 @@ turned it into a prompt you can use for...</p>
             <!-- News Stream Container: 2-Column Responsive Magazine Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 content-start flex-1 min-h-0 overflow-y-auto pr-1.5 custom-scrollbar" id="stream-news">
 
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('c30c74c2cf696c49')" itemscope itemtype="https://schema.org/NewsArticle">
+                <div>
+                  <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ Epoch AI</span>
+                      <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 font-mono font-medium">Dispatch</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-mono">Wire</span>
+                  </div>
+                  <button type="button" onclick="openAiNewsModal('c30c74c2cf696c49')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
+                    Analysis: Huawei's Horinger data center, among China's largest for AI, has ~7% of the compute of SpaceX's Colossus 2 and
+                  </button>
+                  <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
+                    Epoch AI analysis reveals that Huawei's Horinger AI data center cluster holds approximately 7% of the total compute capacity of SpaceX's Colossus 2. Driven by constraints in advanced process node chip procurement and manufacturing capacity, this infr
+                  </p>
+                </div>
+                <div class="flex items-center justify-between pt-2.5 mt-3 border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
+                  <button type="button" onclick="event.stopPropagation(); openAiNewsModal('c30c74c2cf696c49')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
+                    <span>📋</span>
+                    <span>AI Analysis</span>
+                  </button>
+                  <a href="https://epochai.substack.com/p/what-huaweis-horinger-data-center" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
+                    Read Source ↗
+                  </a>
+                </div>
+              </article>
               <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('446ac773ca223631')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/11/Nvidia_Jensen_huang_03.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%2C0%2C100%2C100&w=480&output=webp&q=80" alt="Jensen Huang might be plotting a return and more of the latest Nvidia drama" width="480" height="270" loading="eager" fetchpriority="high" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//platform.theverge.com/wp-content/uploads/sites/2/2026/11/Nvidia_Jensen_huang_03.jpg%3Fquality%3D90%26strip%3Dall%26crop%3D0%2C0%2C100%2C100&w=480&output=webp&q=80" alt="Jensen Huang might be plotting a return and more of the latest Nvidia drama" width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
                     <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
@@ -2082,32 +2108,6 @@ turned it into a prompt you can use for...</p>
                   <a href="https://www.bloomberg.com/news/newsletters/2026-11-15/apple-siri-ai-app-integrations-power-smart-glasses-iphone-duo-2-face-id-plan?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NDc1NTQ2MSwiZXhwIjoxNzk1MzYwMjYxLCJhcnRpY2xlSWQiOiJUT0pUTzFLSVVQU0IwMCIsImJjb25uZWN0SWQiOiJDNEVEQ0FFMUZBMDU0MEJFQTI0QTlGMjExQzFFOTA4MCJ9.2TeBxZfpuwFLhhyEns0-GWBuy-YbU6nhgWwD5smKMD4" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
                     Read Source ↗
                   </a>
-                </div>
-              </article>
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('6b8e6703159e6e99')" itemscope itemtype="https://schema.org/NewsArticle">
-                <div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="https://wsrv.nl/?url=https%3A//static01.nyt.com/images/2026/11/14/multimedia/14dc-lutnick-commerce-01-bqtl/14dc-lutnick-commerce-01-bqtl-videoSixteenByNineJumbo1600.jpg&w=480&output=webp&q=80" alt="Investigation: Howard Lutnick pushed to narrow chip curbs affecting a client of his former firm Cantor Fitzgerald whose " width="480" height="270" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display='none';"></div>
-                <div class="flex-1 flex flex-col justify-between min-w-0">
-                  <div>
-                    <div class="flex items-center justify-between text-xs text-slate-400 mb-1 gap-2 flex-wrap">
-                      <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ New York Times</span>
-                      <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
-                    </div>
-                    <button type="button" onclick="openAiNewsModal('6b8e6703159e6e99')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      Investigation: Howard Lutnick pushed to narrow chip curbs affecting a client of his former firm Cantor Fitzgerald whose 
-                    </button>
-                    <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
-                      U.S. Secretary of Commerce Howard Lutnick is advocating for less stringent export controls on AI chips destined for Southeast Asian data centers, specifically those like the A201 facility in Malaysia operated by Bitdeer, which reportedly serves Chine
-                    </p>
-                  </div>
-                  <div class="flex items-center justify-between pt-2 mt-auto border-t border-slate-100 dark:border-slate-800/60 text-[10px]">
-                    <button type="button" onclick="event.stopPropagation(); openAiNewsModal('6b8e6703159e6e99')" class="text-[10px] font-mono text-indigo-600 dark:text-indigo-400 font-medium group-hover:underline flex items-center gap-1 cursor-pointer">
-                      <span>📋</span>
-                      <span>AI Analysis</span>
-                    </button>
-                    <a href="https://www.nytimes.com/2026/11/15/us/politics/lutnick-pushed-to-weaken-chip-rules-that-overlap-with-his-family-business.html?unlocked_article_code=1.QlE.S83S.v9pNUp3b3vi_&smid=url-share" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()" class="text-[10px] text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 font-medium hover:underline">
-                      Read Source ↗
-                    </a>
-                  </div>
                 </div>
               </article>
             </div>
@@ -2700,7 +2700,7 @@ turned it into a prompt you can use for...</p>
             <span class="text-emerald-400 font-bold">➜</span> <span class="text-emerald-300 font-mono">$ run t3code</span>
           </div>
           <div class="text-[10px] text-slate-400 font-mono">
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 61.4k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 61.5k</span>
           </div>
         </div>
         <div class="absolute top-2.5 right-2.5 z-10">
@@ -2716,7 +2716,7 @@ turned it into a prompt you can use for...</p>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">t3code</h4>
             </div>
-            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 61.4k</span>
+            <span class="text-[9px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono border border-slate-300 dark:border-slate-700">📦 GitHub ★ 61.5k</span>
           </div>
           <p class="text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
             The best way to control Claude Code, Codex and more from any computer or phone
