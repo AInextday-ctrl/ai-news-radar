@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 19:19:14 UTC",
+  "generated_at": "2026-11-15 19:33:44 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 19:19:14 UTC",
+      "updated_at": "2026-11-15 19:33:44 UTC",
       "headline_item": {
-        "id": "72c0eea3ef265d94",
+        "id": "21d2f2b5d3ea4303",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美国会拟收紧AI芯片出口并传唤英伟达高管",
-        "title_en": "Congress wants to tighten export rules on AI chips after Nvidia spy scandal",
-        "source": "The Verge AI",
-        "published_at": "2026-11-15T19:15:43+00:00",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/1033984/congress-export-rules-ai-chips-china",
-        "event_summary_zh": "针对英伟达前高管涉间谍风波，美国会两党推动更严苛的对华出口限制法案并要求英伟达高管出席听证会",
-        "event_summary_en": "Senate Minority Leader Chuck Schumer and Banking Committee Chairman Tim Scott have demanded that former Nvidia CEO Jensen Huang and Commerce Secretary Howard Lutnick testify regarding chip export leakages. Legislatively, Congress is reviving the Remote Access Security Act, with House Speaker Mike Johnson confirming a growing bipartisan consensus to further restrict Nvidia's high-end chip exports to China.",
+        "title_zh": "黄仁勋呼吁加强中美AI安全对话以应对风险",
+        "title_en": "Sources: Jensen Huang has discussed a comeback as Nvidia CEO with confidants, as allies form a \"war room\" to lobby for his return and seek White House support (Financial Times)",
+        "source": "Financial Times",
+        "published_at": "2026-11-15T19:20:00+00:00",
+        "url": "https://www.ft.com/content/45383d86-33c4-4d99-86e5-5e058d3567c1",
+        "event_summary_zh": "英伟达CEO黄仁勋在伦敦公开主张通过对话而非监管遏制，促进中美及国际间AI技术安全合作",
+        "event_summary_en": "Nvidia CEO Jensen Huang stated in London that the US and China must engage in dialogue and collaboration to ensure AI safety, despite its potential risks. This position aligns with discussions between US Treasury Secretary Scott Bessent and Chinese Vice Premier He Lifeng regarding a national security-level AI communication channel, aiming to establish risk management frameworks amidst global competition.",
         "core_facts_zh": [
-          "【核心事件】查克·舒默（参议院少数党领袖）、蒂姆·斯科特（银行委员会主席）、迈克·约翰逊（众议院议长）、黄仁勋（英伟达前CEO）、霍华德·卢特尼克（商务部长）在美国国会听证会与立法程序：推动对华芯片出口限制法案，要求企业高管出席听证会解释间谍风波",
-          "【起因与机理】因涉及英伟达高端AI芯片非法流向中国的间谍调查引发国家安全担忧",
-          "【调查与监管诉求】国会两党就收紧高端AI芯片对华出口达成高度共识。",
-          "【各方立场与态度】立法机构正重启《远程访问安全法案》，试图通过立法手段强化全链路出口监管。"
+          "【核心事件】英伟达首席执行官黄仁勋、美国财政部长斯科特·贝森特、中国国务院副总理何立峰在伦敦媒体吹风会及中美政府间高层对话：倡议通过技术对话取代单边监管遏制，并推动英、美、中三方AI安全合作",
+          "【起因与机理】针对OpenAI等机构对AI生存威胁的担忧，寻求在技术领先性与全球风险治理之间达成平衡",
+          "【核心事实细节】黄仁勋反对由AI实验室主导的严苛限制措施，转而倡导中美及英美之间的对话与风险管控。",
+          "【各方立场与态度】英伟达试图通过推动对话解决各国出口管制分歧，以维护全球AI供应链及市场准入稳定。"
         ],
         "core_facts_en": [
-          "[Core Event] Chuck Schumer (Senate Minority Leader), Tim Scott (Banking Committee Chair), Mike Johnson (House Speaker), Jensen Huang (Former Nvidia CEO), Howard Lutnick (Commerce Secretary): Pushing for stricter export restriction bills and subpoenaing corporate leadership",
-          "[Root Cause & Mechanism] National security concerns triggered by the illegal diversion of Nvidia AI chips to China",
-          "[Regulatory & Investigation Focus] Bipartisan consensus reached on tightening high-end AI chip exports to China.",
-          "[Industry Impact & Outlook] Legislative focus on the Remote Access Security Act to reinforce supply chain and access control."
+          "[Core Event] Jensen Huang (CEO of Nvidia), Scott Bessent (US Treasury Secretary), He Lifeng (Chinese Vice Premier): Advocating for dialogue over restrictive regulation and pushing for trilateral AI safety cooperation",
+          "[Root Cause & Mechanism] Balancing the need for technical dominance with global risk governance in response to existential AI concerns",
+          "[Regulatory & Investigation Focus] Huang opposes strict regulatory slowdowns, favoring dialogue and risk management between major powers.",
+          "[Industry Impact & Outlook] Nvidia seeks to stabilize the global AI supply chain and market access through de-escalation of regulatory barriers."
         ],
-        "industry_impact_zh": "国会此次行动标志着对单一企业合规管控转向系统性供应链封锁，试图通过强行填补英伟达远程访问与合规漏洞来终结模糊地带。这种由个案引发的政经连锁反应，将迫使英伟达在未来不仅面临单纯的产品限制，更将面临由美国政府主导、针对架构底层访问权限的合规性大清洗。",
-        "industry_impact_en": "This congressional move signals a shift from individual corporate oversight to systemic supply chain containment, aiming to eliminate legal grey areas by forcing compliance on Nvidia's remote access protocols. The political fallout will likely force Nvidia to face not just product export caps, but a government-mandated purge of its underlying architectural access privileges."
+        "industry_impact_zh": "黄仁勋试图通过弱化“生存威胁”叙事、强化“技术合作”议程，在复杂的地缘政治摩擦中为英伟达的高端算力出口寻找合规回旋空间。这种叙事转换暗示了全球半导体巨头正试图通过塑造“可控的AI共同利益”来缓冲国家安全层面的出口管制压力，维持其中国市场核心份额。",
+        "industry_impact_en": "Jensen Huang is attempting to secure a regulatory buffer for Nvidia's high-end computing exports by reframing the AI narrative from 'existential threat' to 'managed cooperation.' This shift suggests a strategic move by semiconductor giants to mitigate export control pressures by framing AI as a shared geopolitical utility, thereby safeguarding their critical market access in China."
       },
       "headlines": [
+        {
+          "id": "21d2f2b5d3ea4303",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄仁勋呼吁加强中美AI安全对话以应对风险",
+          "title_en": "Sources: Jensen Huang has discussed a comeback as Nvidia CEO with confidants, as allies form a \"war room\" to lobby for his return and seek White House support (Financial Times)",
+          "source": "Financial Times",
+          "published_at": "2026-11-15T19:20:00+00:00",
+          "url": "https://www.ft.com/content/45383d86-33c4-4d99-86e5-5e058d3567c1",
+          "event_summary_zh": "英伟达CEO黄仁勋在伦敦公开主张通过对话而非监管遏制，促进中美及国际间AI技术安全合作",
+          "event_summary_en": "Nvidia CEO Jensen Huang stated in London that the US and China must engage in dialogue and collaboration to ensure AI safety, despite its potential risks. This position aligns with discussions between US Treasury Secretary Scott Bessent and Chinese Vice Premier He Lifeng regarding a national security-level AI communication channel, aiming to establish risk management frameworks amidst global competition.",
+          "core_facts_zh": [
+            "【核心事件】英伟达首席执行官黄仁勋、美国财政部长斯科特·贝森特、中国国务院副总理何立峰在伦敦媒体吹风会及中美政府间高层对话：倡议通过技术对话取代单边监管遏制，并推动英、美、中三方AI安全合作",
+            "【起因与机理】针对OpenAI等机构对AI生存威胁的担忧，寻求在技术领先性与全球风险治理之间达成平衡",
+            "【核心事实细节】黄仁勋反对由AI实验室主导的严苛限制措施，转而倡导中美及英美之间的对话与风险管控。",
+            "【各方立场与态度】英伟达试图通过推动对话解决各国出口管制分歧，以维护全球AI供应链及市场准入稳定。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (CEO of Nvidia), Scott Bessent (US Treasury Secretary), He Lifeng (Chinese Vice Premier): Advocating for dialogue over restrictive regulation and pushing for trilateral AI safety cooperation",
+            "[Root Cause & Mechanism] Balancing the need for technical dominance with global risk governance in response to existential AI concerns",
+            "[Regulatory & Investigation Focus] Huang opposes strict regulatory slowdowns, favoring dialogue and risk management between major powers.",
+            "[Industry Impact & Outlook] Nvidia seeks to stabilize the global AI supply chain and market access through de-escalation of regulatory barriers."
+          ],
+          "industry_impact_zh": "黄仁勋试图通过弱化“生存威胁”叙事、强化“技术合作”议程，在复杂的地缘政治摩擦中为英伟达的高端算力出口寻找合规回旋空间。这种叙事转换暗示了全球半导体巨头正试图通过塑造“可控的AI共同利益”来缓冲国家安全层面的出口管制压力，维持其中国市场核心份额。",
+          "industry_impact_en": "Jensen Huang is attempting to secure a regulatory buffer for Nvidia's high-end computing exports by reframing the AI narrative from 'existential threat' to 'managed cooperation.' This shift suggests a strategic move by semiconductor giants to mitigate export control pressures by framing AI as a shared geopolitical utility, thereby safeguarding their critical market access in China."
+        },
         {
           "id": "72c0eea3ef265d94",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "台湾当局的立法收紧直接切割了过去英伟达通过第三方渠道的模糊空间，实质上是将服务器代工厂纳入了美式出口制裁的延伸版图。对于台系服务器供应商而言，未来在华合规成本将呈指数级上升，这将迫使产业链进行实质性的产能地理迁徙，以规避潜在的刑事合规风险。",
           "industry_impact_en": "Taiwan's legislative tightening eliminates the grey areas Nvidia previously navigated through third-party intermediaries, effectively incorporating server OEMs into the US-led export sanction regime. For Taiwanese server suppliers, the cost of compliance will skyrocket, forcing an industrial exodus and supply chain migration to mitigate criminal liability risks."
-        },
-        {
-          "id": "0aa8c19ae19b9c51",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "美日英印拟构建AI技术排他性供应清单",
-          "title_en": "The US and Pax Silica allies, including Japan, the UK, and India, agree to create a joint list of AI technologies and supply chains to protect from China (Financial Times)",
-          "source": "Financial Times",
-          "published_at": "2026-11-15T18:55:00+00:00",
-          "url": "https://www.ft.com/content/3c2197fc-9618-4838-91e6-522ce1a96a22",
-          "event_summary_zh": "美国联合日本、英国及印度等多国，计划建立针对AI技术与供应链的联合筛查清单，旨在强化对华技术管控",
-          "event_summary_en": "The United States is collaborating with Japan, the UK, and India to develop a joint list of AI technologies and supply chains to restrict China's access. This initiative marks a strategic shift in multilateral export controls, extending from traditional semiconductor hardware to AI model architectures, algorithm libraries, and core computing infrastructure.",
-          "core_facts_zh": [
-            "【核心事件】美国政府及其盟友（日本、英国、印度）在多边技术安全协作框架：建立人工智能技术及关键供应链的联合限制性清单",
-            "【起因与机理】强化对中国在AI领域的技术封锁与供应链独立性监管",
-            "【关键数据与实测】Essential digital access to quality FT journalism on any device. Pay a year upfront and save 20%.。",
-            "【行业影响与走向】此举将加速全球AI技术生态的碎片化与阵营对垒。"
-          ],
-          "core_facts_en": [
-            "[Core Event] US Government and its Pax Silica allies (Japan, UK, India): Creating a joint restricted list for AI technologies and supply chains",
-            "[Root Cause & Mechanism] To restrict China's technological development and enhance supply chain sovereignty",
-            "[Key Metrics] Pay a year upfront and save 20%.",
-            "[Key Position & Outlook] Signals acceleration toward fragmented global AI ecosystems and bloc-based competition."
-          ],
-          "industry_impact_zh": "此举表明全球AI产业竞争已正式跨入以“算法-算力-数据”协同管控为核心的多边阵营化博弈阶段。对于半导体及AI架构供应商而言，这预示着合规成本将急剧抬升，未来跨国企业在华业务的供应链冗余度与技术出口门槛将面临持续的地缘政治极限施压。",
-          "industry_impact_en": "This development signals that global AI competition has entered a multipolar, coalition-based phase focusing on the coordinated control of algorithms, computing power, and data. For semiconductor and AI infrastructure providers, this implies a sharp rise in compliance costs and sustained geopolitical pressure on supply chain localization and technology exports to China."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 19:19:14 UTC",
+      "updated_at": "2026-11-15 19:33:44 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 19:19:14 UTC",
+      "updated_at": "2026-11-15 19:33:44 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,136)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,139)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (24,136 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (24,139 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
