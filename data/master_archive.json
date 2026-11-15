@@ -3159,6 +3159,43 @@
       }
     },
     {
+      "id": "prompt_arxiv_deep_dive",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 前沿顶会论文 5 步穿透精读",
+      "purpose_en": "🔬 Research & Papers · 5-Step ArXiv Paper Penetration",
+      "title_zh": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
+      "title_en": "💡 [Paper Deep Dive] ArXiv 5-Step Paper Penetration & RTX 4090 Reproduction Bottleneck Audit",
+      "url": "https://arxiv.org/",
+      "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "科研极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T12:25:55Z",
+      "recommended_model": "Claude 4.6 / Gemini 1.5 Pro",
+      "temp_advice": "建议温度 0.3 | 极客文献精读",
+      "metrics": {
+        "type": "🔬 论文拆解",
+        "model": "Gemini 1.5 Pro",
+        "temp": "0.3"
+      },
+      "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
+      "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
+      "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "tags": [
+        "论文精读",
+        "科研拆解",
+        "Prompt神咒"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T12:25:55Z",
+      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板"
+    },
+    {
       "id": "d7437af63251126d",
       "title": "【activepieces】AI 代理和 MCP 及 AI 工作流程自动化 •（约 400 个用于 AI 代理的 MCP 服务器） • AI 自动化/带 MC",
       "title_zh": "【activepieces】AI 代理和 MCP 及 AI 工作流程自动化 •（约 400 个用于 AI 代理的 MCP 服务器） • AI 自动化/带 MC",
@@ -4327,6 +4364,12 @@
       "content_snippet": "WorldofAI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "WorldofAI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by WorldofAI: Gemini 4 Krypton BEATS FABLE 5.2!?, GPT-6.2 Preview, GLM-5.5 LEAKED & Claude Code UPDATE! AI NEWS",
+      "is_pinned": false,
+      "primary_tag": "practical_skills",
+      "primary_tag_zh": "💡 实战技巧",
+      "primary_tag_en": "💡 Practical Skills",
+      "primary_tag_color": "indigo",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-15T14:23:05.932616+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -4775,6 +4818,43 @@
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
+    },
+    {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T06:25:55Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T06:25:55Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
     },
     {
       "id": "603facf61e53a27c",
@@ -7393,15 +7473,15 @@
       "author_handle": "@EigiandAI",
       "author_avatar": "https://unavatar.io/youtube/Eigi and AI",
       "source": "YouTube · Eigi and AI",
-      "views": "6.2万 播放",
-      "views_count": 62317,
-      "velocity": 3279.8,
-      "momentum_score": 7422.8,
+      "views": "6.3万 播放",
+      "views_count": 62919,
+      "velocity": 3145.9,
+      "momentum_score": 6921.1,
       "metrics": {
-        "views": "6.2万 播放",
-        "views_count": 62317,
-        "velocity": "+3,279/h",
-        "momentum_score": 7422.8,
+        "views": "6.3万 播放",
+        "views_count": 62919,
+        "velocity": "+3,145/h",
+        "momentum_score": 6921.1,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -7419,7 +7499,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+3,279/h)",
+        "🔥 24h飙升 (+3,145/h)",
         "Eigi and AI",
         "🔥 极客实操"
       ],
@@ -12621,8 +12701,8 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Simplilearn：人工智能工程师全套课程 2027 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
-      "title_zh": "【48h 教学】Simplilearn：人工智能工程师全套课程 2027 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
+      "title": "【48h 教学】Simplilearn：2027 年人工智能工程师全套课程 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
+      "title_zh": "【48h 教学】Simplilearn：2027 年人工智能工程师全套课程 |学习人工智能、机器学习和人工智能代理开发 |简单学习",
       "title_en": "AI Engineer Full Course 2027 | Learn AI, Machine Learning, & AI Agent Development | Simplilearn",
       "author": "Simplilearn",
       "author_handle": "@Simplilearn",
@@ -12717,6 +12797,12 @@
       "content_snippet": "Grow With Kaz 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Grow With Kaz 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Grow With Kaz: I Made a Full Documentary Using ONLY Claude AI (No Editing!)",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-15T14:23:06.689539+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -14548,9 +14634,9 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Tech With Tim：构建像你一样说话的 AI 语音代理 - Python 教程",
-      "title_zh": "【48h 教学】Tech With Tim：构建像你一样说话的 AI 语音代理 - Python 教程",
-      "title_en": "Build an AI Voice Agent That Talks Like You - Python Tutorial",
+      "title": "【48h 教学】Tech With Tim：Python 中的语音 AI 代理 - 初学者教程",
+      "title_zh": "【48h 教学】Tech With Tim：Python 中的语音 AI 代理 - 初学者教程",
+      "title_en": "Voice AI Agent From Scratch in Python - Tutorial for Beginners",
       "author": "Tech With Tim",
       "author_handle": "@TechWithTim",
       "author_avatar": "https://unavatar.io/youtube/Tech With Tim",
@@ -14587,7 +14673,7 @@
       ],
       "content_snippet": "Tech With Tim 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Tech With Tim 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
-      "summary_en": "Live hands-on AI demonstration and technical tutorial by Tech With Tim: Build an AI Voice Agent That Talks Like You - Python Tutorial",
+      "summary_en": "Live hands-on AI demonstration and technical tutorial by Tech With Tim: Voice AI Agent From Scratch in Python - Tutorial for Beginners",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-15T14:23:06.712973+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -15287,7 +15373,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+227/h)",
+        "⚡ 48h实测 (+228/h)",
         "AiZen Tools",
         "💡 前沿评测"
       ],
@@ -15838,6 +15924,12 @@
       "content_snippet": "Cian Mag 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Cian Mag 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Cian Mag: This New llama.cpp Fork Turns Your SSD Into VRAM (22 Tok/s)",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-15T14:23:06.713708+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -16343,7 +16435,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+1,680/h)",
+        "⚡ 48h实测 (+1,681/h)",
         "Google Antigravity",
         "🔥 极客实操"
       ],
@@ -16430,14 +16522,14 @@
       "author_avatar": "https://unavatar.io/youtube/Krish Naik",
       "source": "YouTube · Krish Naik",
       "views": "2.8万 播放",
-      "views_count": 27835,
-      "velocity": 579.9,
-      "momentum_score": 869.8,
+      "views_count": 27876,
+      "velocity": 580.8,
+      "momentum_score": 871.1,
       "metrics": {
         "views": "2.8万 播放",
-        "views_count": 27835,
-        "velocity": "+579/h",
-        "momentum_score": 869.8,
+        "views_count": 27876,
+        "velocity": "+580/h",
+        "momentum_score": 871.1,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16455,7 +16547,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+579/h)",
+        "⚡ 48h实测 (+580/h)",
         "Krish Naik",
         "🔥 极客实操"
       ],
@@ -16703,7 +16795,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+353/h)",
+        "⚡ 48h实测 (+354/h)",
         "AI with Surya",
         "💡 前沿评测"
       ],
@@ -223564,7 +223656,7 @@
         "今日要闻"
       ],
       "title_zh": "Anthropic 联合创始人 Jack Clark 将其对人工智能自我改进的预测提前至 2027 年",
-      "summary_zh": "P-Zero Research 的新基准衡量人工智能模型自行设计和评估实验的效果。结果改善得如此之快，以至于 Anthropic 联合创始人 Jack Clark 现在认为自我改进的人工智能可能会在 2027 年到来。Anthropic 联合创始人 Jack Clark 的文章将他对自我改进的人工智能的预测改为 fo",
+      "summary_zh": "P-Zero Research 的新基准衡量人工智能模型自行设计和评估实验的效果。结果改善得如此之快，以至于 Anthropic 联合创始人 Jack Clark 现在认为自我改进的人工智能可能会在 2027 年到来。Anthropic 联合创始人 Jack Clark 的文章将他对自我改进的人工智能的预测转向了",
       "hot_score": 3,
       "is_recent_24h": false,
       "fact_bullets_zh": [
@@ -264389,7 +264481,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Texas Instruments reports Q3 revenue up 28% YoY to $6.06B, above $5.93B est., net income up 78% YoY to $2.43B, and forecasts $5.8B-$6.3B in Q4, vs. $5.73B est. (Ian King/Bloomberg)",
         "[Root Cause & Mechanism] Texas Instruments Inc., the biggest maker of analog and embedded processing chips, gave a strong revenue forecast for the current period ….",
-        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gave a strong revenue forecast for the period."
+        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gives a strong revenue forecast for the period."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -468508,7 +468600,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: DeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative",
         "[Root Cause & Mechanism] Reuters:\nDeepSeek says it has partnered with Huawei to develop programming tools for Huawei's Ascend chips, including TileLang, an open-source CUDA alternative&nbsp; &mdash;&nbsp; Chinese AI firm DeepSeek said on Wednesday it has partnered with Huawei Technologies to develop prog.",
-        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the front line of global large model open source community and technology research and development."
+        "[Key Technical Spec] DeepSeek (DeepSeek Team) is on the frontline of global large model open source community and technology research and development."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -531200,7 +531292,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: OpenAI is developing features to counter SpaceX's Grok Bot \"teammates\", and has discussed creating a personal AI assistant to compete with Meta's Muse",
         "[Root Cause & Mechanism] The Information:\nSources: OpenAI is developing features to counter SpaceX's Grok Bot &ldquo;teammates&rdquo;, and has discussed creating a personal AI assistant to compete with Meta's Muse&nbsp; &mdash;&nbsp; OpenAI pioneered AI that can take over web browsers and other applicati.",
-        "[Industry Analysis] OpenAI is developing features to take on SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
+        "[Industry Analysis] OpenAI is developing features to counter SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -543019,7 +543111,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
