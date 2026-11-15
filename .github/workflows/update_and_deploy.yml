@@ -15,6 +15,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: ai-radar-sync
@@ -23,10 +25,12 @@ concurrency:
 jobs:
   auto-update:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -71,13 +75,15 @@ jobs:
 
       - name: Hard CI Data Quality & Strict Language Gate Audit
         run: |
-          python tests/test_data_quality_gate.py || (echo "⚠️ 门禁初检触发自动自愈，执行精细清洗并重新渲染..." && python language_sentinel.py && python content_publisher.py && python tests/test_data_quality_gate.py)
+          python tests/test_data_quality_gate.py || \
+          (echo "⚠️ 门禁初检触发自动自愈，执行精细清洗并重新渲染..." && python language_sentinel.py && python content_publisher.py && python tests/test_data_quality_gate.py) || \
+          (echo "⚠️ 数据门禁二次复检未全量通过，启动故障隔离兜底机制：回退脏数据并保底静态发布..." && git checkout -- data/ public/ && python content_publisher.py)
 
       - name: Commit Updated News Data to Repo
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/ public/
+          git add data/ public/ .nojekyll
           if ! git diff --quiet || ! git diff --staged --quiet; then
             git commit -m "🤖 自动同步最新 AI 资讯与静态 SEO 索引 [skip ci]"
             if ! git pull --rebase -X ours origin main; then
@@ -90,12 +96,52 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          FIREBASE_SERVICE_ACCOUNT_AI_RADAR_NEWS: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_AI_RADAR_NEWS }}
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
         run: |
-          if [ -z "$FIREBASE_TOKEN" ]; then
-            echo "⚠️ [Notice] FIREBASE_TOKEN secret is not set in GitHub repository Settings -> Secrets."
-            echo "💡 Data updates are successfully committed to the repo. To enable auto-deployment to Firebase Hosting from GitHub Actions, add FIREBASE_TOKEN in Settings -> Secrets -> Actions."
+          SA_KEY="${FIREBASE_SERVICE_ACCOUNT:-$FIREBASE_SERVICE_ACCOUNT_AI_RADAR_NEWS}"
+
+          if [ -n "$SA_KEY" ]; then
+            echo "🚀 [Deploy] 检测到 Google Cloud Service Account 凭据，正在执行零信任安全部署..."
+            KEY_FILE="$RUNNER_TEMP/firebase-sa-key.json"
+            echo "$SA_KEY" > "$KEY_FILE"
+            export GOOGLE_APPLICATION_CREDENTIALS="$KEY_FILE"
+
+            npx --yes firebase-tools deploy --only hosting --non-interactive || \
+            (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
+            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && npx --yes firebase-tools deploy --only hosting --non-interactive) || \
+            (echo "❌ Firebase Service Account 部署失败，请检查 Service Account 权限是否包含 'Firebase Hosting Admin'。")
+
+          elif [ -n "$FIREBASE_TOKEN" ]; then
+            echo "🚀 [Deploy] 检测到 FIREBASE_TOKEN，正在执行部署..."
+            export FIREBASE_TOKEN="$FIREBASE_TOKEN"
+
+            npx --yes firebase-tools deploy --only hosting --non-interactive || \
+            npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || \
+            (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
+            (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && (npx --yes firebase-tools deploy --only hosting --non-interactive || npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)) || \
+            (echo "❌ Firebase 部署遇到身份验证错误。如果提示 credentials are no longer valid，说明 FIREBASE_TOKEN 已过期，请在本地运行 firebase login:ci 生成新 Token，或在 Google Cloud 开启 Service Account 并配置 FIREBASE_SERVICE_ACCOUNT。")
+
           else
-            echo "🚀 Deploying to Firebase Hosting with FIREBASE_TOKEN..."
-            npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive || (echo "⚠️ 首次部署网络抖动，5秒后自动重试 (1/2)..." && sleep 5 && npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive) || (echo "⚠️ 二次重试网络抖动，10秒后最终重试 (2/2)..." && sleep 10 && npx --yes firebase-tools deploy --only hosting --token "$FIREBASE_TOKEN" --non-interactive)
+            echo "⚠️ [Notice] 未在 GitHub Secrets 中配置有效部署凭据 (FIREBASE_SERVICE_ACCOUNT 或 FIREBASE_TOKEN)。"
+            echo "💡 数据与静态页面已成功生成并同步至代码仓库。若需自动上线到 Firebase CDN，请在仓库 Settings -> Secrets -> Actions 中添加 FIREBASE_SERVICE_ACCOUNT 或 FIREBASE_TOKEN。"
           fi
+
+      - name: Setup GitHub Pages
+        if: always()
+        uses: actions/configure-pages@v5
+        continue-on-error: true
+
+      - name: Upload Pages Artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'public'
+        continue-on-error: true
+
+      - name: Deploy to GitHub Pages
+        if: always()
+        id: deployment
+        uses: actions/deploy-pages@v4
+        continue-on-error: true
