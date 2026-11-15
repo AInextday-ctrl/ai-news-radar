@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 13:04:13 UTC",
+  "generated_at": "2026-11-15 13:18:35 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 13:04:13 UTC",
+      "updated_at": "2026-11-15 13:18:35 UTC",
       "headline_item": {
-        "id": "31e7ca1c3a5fb622",
+        "id": "e9250aab5b255907",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "首届AI音乐奖举行与行业规范化尝试",
-        "title_en": "Inside the first AI Music Awards in Los Angeles, featuring AI announcers, lip-syncing, and human stand-ins, as the ceremony was mired in technical issues (Corbin Bolies/Variety)",
-        "source": "Variety",
-        "published_at": "2026-11-15T12:02:16+00:00",
-        "url": "https://variety.com/2026/music/features/inside-first-ai-music-awards-sonic-intelligence-academy-1236947847/",
-        "event_summary_zh": "Sonic Intelligence Academy在洛杉矶举办首届AI音乐奖，旨在通过认证注册机制推动AI生成音乐的合法化与行业认可",
-        "event_summary_en": "The inaugural AI Music Awards took place in Los Angeles, hosted by the Sonic Intelligence Academy, which implemented a 'Verified Registry' to categorize entries into fully AI-generated, AI-assisted, and human-AI hybrid works. This initiative aims to establish an infrastructure comparable to the Recording Academy, seeking industry legitimacy for AI music creators amidst ongoing legal disputes over copyright infringement.",
+        "title_zh": "黄仁勋卷入商业间谍调查风波",
+        "title_en": "An overview of Jensen Huang’s messy days",
+        "source": "The Verge AI",
+        "published_at": "2026-11-15T13:00:00+00:00",
+        "url": "https://www.theverge.com/column/1033943/jensen-huang-nvidia-china-spying-scandal-resignation",
+        "event_summary_zh": "英伟达首席执行官黄仁勋因与被指控涉嫌非法向中国转运AI芯片的Megaspeed高管Alice Huang存在密切私交，正面临美国政府的安全调查与情报风险评估",
+        "event_summary_en": "Nvidia CEO Jensen Huang is under intense scrutiny from US authorities due to a personal relationship with Alice Huang, an executive at Singapore-based Megaspeed. Alice Huang, investigated for allegedly smuggling Nvidia AI chips to China and transmitting sensitive commercial information to Beijing, had her passport confiscated by Singaporean authorities in June 2025. US intelligence is now assessing whether Jensen Huang’s proximity to this individual compromised national security or trade restriction protocols.",
         "core_facts_zh": [
-          "【核心事件】Sonic Intelligence Academy（创始人Timirah James与Mia James）在美国洛杉矶：设立首届AI音乐奖并推行“已验证注册”认证机制",
-          "【起因与机理】构建AI音乐产业的基础架构，反制主流唱片工业的排斥与诉讼风险",
-          "【核心事实细节】Sonic Intelligence Academy通过分类注册机制为AI音乐建立准入标准。",
-          "【各方立场与态度】产业矛盾点聚焦于避开Suno等生成式工具引发的版权诉讼，寻求独立市场话语权。"
+          "【核心事件】黄仁勋（英伟达首席执行官）、Alice Huang（Megaspeed高管）、中国国家安全部在美国国家安全审查与新加坡监管机构：黄仁勋与涉嫌非法运输芯片及从事间谍活动的Alice Huang存在密切私交，触发美方对英伟达贸易合规性的深度调查",
+          "【起因与机理】英伟达AI芯片作为美国国家安全核心资产，任何高层非正常关联均可能危及出口管制政策的执行",
+          "【调查与监管诉求】核心涉案：黄仁勋被指与涉及非法芯片转运及商业间谍调查的Alice Huang存在关联。",
+          "【行业影响与走向】产业影响：英伟达面临极高合规风险，可能加剧美方对头部科技企业高管的准入限制。"
         ],
         "core_facts_en": [
-          "[Core Event] Sonic Intelligence Academy (founders Timirah and Mia James) (Los Angeles, USA): Inaugural AI Music Awards and the 'Verified Registry' certification system",
-          "[Root Cause & Mechanism] To establish infrastructure for AI music creators and counter industry-wide aversion and copyright lawsuits",
-          "[Key Fact Detail] Sonic Intelligence Academy establishes access standards for AI music through registry categorization.",
-          "[Official Stance & Demand] The industry conflict focuses on circumventing copyright lawsuits against generative tools to claim market authority."
+          "[Core Event] Jensen Huang (CEO of Nvidia), Alice Huang (Megaspeed executive), Chinese Ministry of State Security: Jensen Huang’s personal ties to a suspect involved in illicit chip transfers and espionage have triggered a federal compliance investigation",
+          "[Root Cause & Mechanism] Nvidia's AI chips are deemed critical national security assets, necessitating scrutiny of any high-level executive access that could undermine export controls",
+          "[Key Metrics] Nvidia’s stock closed at an all-time high of $239.",
+          "[Industry Impact & Outlook] Industry impact: High compliance risk for Nvidia, likely increasing federal scrutiny over big-tech leadership."
         ],
-        "industry_impact_zh": "该组织试图通过建立私有化标准绕过主流版权保护体制，体现了AI内容创作与传统流媒体商业逻辑的激烈碰撞。若此类独立奖项规模扩大，将加速推动AI生成内容的版权溯源机制演变，同时也加剧了平台侧对于AI原生内容合规性审查的压力。",
-        "industry_impact_en": "By attempting to create an independent standard, this organization highlights the friction between AI-driven creativity and traditional copyright frameworks. If such niche awards gain traction, they will accelerate the evolution of provenance tracking for AI content while simultaneously increasing pressure on streaming platforms to refine their AI compliance vetting."
+        "industry_impact_zh": "此事件标志着美国对英伟达的监管逻辑从单纯的出口管制向高管个人安全合规延伸，显示出美方对芯片供应链单一依赖点（Single Point of Failure）的极端警惕。若黄仁勋被证实由于私人关联而存在信息泄露，英伟达的贸易豁免权将面临实质性剥夺风险，并在全球AI基础设施布局中引发严重的信任危机。",
+        "industry_impact_en": "This incident marks a shift in US regulatory strategy from mere export controls to direct personal compliance oversight of Nvidia's leadership, reflecting deep-seated anxiety over the single point of failure in the AI chip supply chain. If information leakage is proven, Nvidia faces potential revocation of critical trade licenses, threatening its central position in global AI infrastructure through an irreparable breach of trust."
       },
       "headlines": [
+        {
+          "id": "e9250aab5b255907",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄仁勋卷入商业间谍调查风波",
+          "title_en": "An overview of Jensen Huang’s messy days",
+          "source": "The Verge AI",
+          "published_at": "2026-11-15T13:00:00+00:00",
+          "url": "https://www.theverge.com/column/1033943/jensen-huang-nvidia-china-spying-scandal-resignation",
+          "event_summary_zh": "英伟达首席执行官黄仁勋因与被指控涉嫌非法向中国转运AI芯片的Megaspeed高管Alice Huang存在密切私交，正面临美国政府的安全调查与情报风险评估",
+          "event_summary_en": "Nvidia CEO Jensen Huang is under intense scrutiny from US authorities due to a personal relationship with Alice Huang, an executive at Singapore-based Megaspeed. Alice Huang, investigated for allegedly smuggling Nvidia AI chips to China and transmitting sensitive commercial information to Beijing, had her passport confiscated by Singaporean authorities in June 2025. US intelligence is now assessing whether Jensen Huang’s proximity to this individual compromised national security or trade restriction protocols.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（英伟达首席执行官）、Alice Huang（Megaspeed高管）、中国国家安全部在美国国家安全审查与新加坡监管机构：黄仁勋与涉嫌非法运输芯片及从事间谍活动的Alice Huang存在密切私交，触发美方对英伟达贸易合规性的深度调查",
+            "【起因与机理】英伟达AI芯片作为美国国家安全核心资产，任何高层非正常关联均可能危及出口管制政策的执行",
+            "【调查与监管诉求】核心涉案：黄仁勋被指与涉及非法芯片转运及商业间谍调查的Alice Huang存在关联。",
+            "【行业影响与走向】产业影响：英伟达面临极高合规风险，可能加剧美方对头部科技企业高管的准入限制。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (CEO of Nvidia), Alice Huang (Megaspeed executive), Chinese Ministry of State Security: Jensen Huang’s personal ties to a suspect involved in illicit chip transfers and espionage have triggered a federal compliance investigation",
+            "[Root Cause & Mechanism] Nvidia's AI chips are deemed critical national security assets, necessitating scrutiny of any high-level executive access that could undermine export controls",
+            "[Key Metrics] Nvidia’s stock closed at an all-time high of $239.",
+            "[Industry Impact & Outlook] Industry impact: High compliance risk for Nvidia, likely increasing federal scrutiny over big-tech leadership."
+          ],
+          "industry_impact_zh": "此事件标志着美国对英伟达的监管逻辑从单纯的出口管制向高管个人安全合规延伸，显示出美方对芯片供应链单一依赖点（Single Point of Failure）的极端警惕。若黄仁勋被证实由于私人关联而存在信息泄露，英伟达的贸易豁免权将面临实质性剥夺风险，并在全球AI基础设施布局中引发严重的信任危机。",
+          "industry_impact_en": "This incident marks a shift in US regulatory strategy from mere export controls to direct personal compliance oversight of Nvidia's leadership, reflecting deep-seated anxiety over the single point of failure in the AI chip supply chain. If information leakage is proven, Nvidia faces potential revocation of critical trade licenses, threatening its central position in global AI infrastructure through an irreparable breach of trust."
+        },
         {
           "id": "31e7ca1c3a5fb622",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "这是生成式AI在消费级界面落地时面临的典型“低容错率”挑战，过度介入的内容播报打破了流媒体作为“背景伴随”的服务本质。对于此类平台，单纯追求功能广度而牺牲叙事准确度，极易引发用户对AI功能的全面摒弃，显示出当前AI辅助叙事尚处于“干扰大于赋能”的早期阶段。",
           "industry_impact_en": "This represents a classic 'low-tolerance' challenge for generative AI in consumer interfaces, where intrusive commentary disrupts the core service of passive, background listening. For platforms, prioritizing feature breadth over narrative precision risks complete user abandonment, underscoring that AI-assisted narration remains in an early stage where interference outweighs enablement."
-        },
-        {
-          "id": "b42761bda4c97d0f",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "英伟达关联渠道被指规避对华芯片禁令",
-          "title_en": "Firm linked to Jensen Huang's ex-lover reportedly brokered nearly $12 billion in Nvidia chip orders for China",
-          "source": "THE DECODER",
-          "published_at": "2026-11-15T11:35:12+00:00",
-          "url": "https://the-decoder.com/firm-linked-to-jensen-huangs-ex-lover-reportedly-brokered-nearly-12-billion-in-nvidia-chip-orders-for-china/",
-          "event_summary_zh": "云服务合作伙伴Megaspeed被曝在2024年3月至2025年6月间，向中国客户销售近120亿美元英伟达高性能芯片",
-          "event_summary_en": "Megaspeed, a cloud service provider, brokered approximately $12 billion worth of high-performance Nvidia AI chip orders for Chinese clients between March 2024 and June 2025. Leveraging its status as an official Nvidia cloud partner, the firm—owned by Alice Huang—facilitated the bypass of US export controls by supplying restricted silicon to Chinese tech entities through indirect channels.",
-          "core_facts_zh": [
-            "【核心事件】Megaspeed（云服务商）、Alice Huang（实控人）、英伟达（供应方）在美国对华高科技出口管制框架下的全球供应链：通过官方云合作伙伴渠道，向中国科技企业输送近120亿美元禁运范围内的AI算力芯片",
-            "【起因与机理】利用英伟达云合作伙伴的特许分配权，结合中国市场旺盛的算力需求及监管合规漏洞实现绕道出口",
-            "【关键数据与实测】Megaspeed利用云服务商特许权，违规向中国市场分流近120亿美元英伟达AI芯片。",
-            "【各方立场与态度】该交易量与英伟达财报披露的中国区收入存在显著差异，引发市场对其合规真实性的质疑。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Megaspeed (Cloud Provider), Alice Huang (Owner), Nvidia (Supplier): Brokered nearly $12 billion in restricted AI chips to China leveraging cloud partner preferential access",
-            "[Root Cause & Mechanism] Exploiting the cloud partner allocation quota to bypass stricter direct-to-China export compliance requirements",
-            "[Key Metrics] Megaspeed brokered $12 billion in restricted Nvidia AI chips to China using cloud partnership access.",
-            "[Key Position & Outlook] The volume of sales contradicts Nvidia’s reported China revenue figures, prompting regulatory scrutiny."
-          ],
-          "industry_impact_zh": "此事件揭示了美国出口管制在‘合作伙伴生态系统’中的监管真空，利用云服务分销协议模糊了最终用户合规红线。英伟达虽在财报中压低中国区收入占比，但隐形转售渠道的存在意味着其财务真实性与合规叙事之间存在巨大裂痕，后续或将触发美国商务部针对云服务商资质审核的专项审计。",
-          "industry_impact_en": "This incident exposes a significant regulatory gap within Nvidia's 'cloud partner' ecosystem, where service-level agreements obscure end-user compliance. Despite Nvidia's efforts to dampen China revenue reporting, the existence of such shadow channels suggests a material discrepancy between financial disclosures and export compliance, likely triggering intensified scrutiny from the US Department of Commerce on cloud-reseller credentials."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 13:04:14 UTC",
+      "updated_at": "2026-11-15 13:18:35 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 13:04:14 UTC",
+      "updated_at": "2026-11-15 13:18:35 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,008)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,016)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (24,008 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (24,016 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
