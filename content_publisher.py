@@ -852,12 +852,13 @@ def publish_deep_dive_articles() -> List[Dict[str, Any]]:
               </a>
             </article>"""
 
+        article_seo_title = f"{title_safe[:40].rstrip(' ,-—:|/·;')} | AI 资讯雷达"
         article_html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title_safe} | AI 深度智库 · 专题特稿 | AI 资讯雷达</title>
+  <title>{article_seo_title}</title>
   <meta name="description" content="{desc_safe}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://ainewsradar.xyz/articles/{slug}">
@@ -1407,7 +1408,7 @@ def backfill_historical_daily_briefings() -> List[str]:
         daily_itemlist_json = ",\n".join(daily_itemlist)
 
         if is_en_hub:
-            hub_title = "AI Historical Daily Archives · Comprehensive Daily AI Radar Briefings | AI News Radar"
+            hub_title = "AI Daily Briefings Historical Archives | AI News Radar"
             hub_desc = "AI News Radar Historical Daily Archive Hub: Chronological daily records of global artificial intelligence breakthroughs, industry developments, leadership insights, and benchmark shifts."
             hub_lang = "en"
             hub_canon = "https://ainewsradar.xyz/daily"
@@ -1437,7 +1438,7 @@ def backfill_historical_daily_briefings() -> List[str]:
             hub_footer_terms = "Terms of Service"
             hub_footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). All Rights Reserved."
         else:
-            hub_title = "AI 历史简报全景归档 · 每日资讯雷达合集 | AI 资讯雷达"
+            hub_title = "AI 历史简报归档 · 每日资讯雷达 | AI 资讯雷达"
             hub_desc = "AI 资讯雷达每日简报历史归档库：按日完整归档全球人工智能重大事件、行业快讯、领袖发声与天梯榜变动，全量支持时间线检索与历史回溯。"
             hub_lang = "zh-CN"
             hub_canon = "https://ainewsradar.xyz/zh/daily"
@@ -1794,7 +1795,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
     </div>"""
 
     if is_en:
-        page_title = f"AI Daily Briefing · {date_en} | Top {len(briefing_items)} AI Breakthroughs & Frontier News | AI News Radar"
+        page_title = f"AI Daily Briefing · {date_en} | AI News Radar"
         page_desc = f"{date_en} AI News Radar Daily Briefing: Curated frontier artificial intelligence developments, LLM breakthroughs, Silicon Valley updates, and developer tools. Fully cited with primary sources."
         html_lang = "en"
         canonical_url = f"https://ainewsradar.xyz/daily/{date_slug}"
@@ -1822,7 +1823,7 @@ def _render_single_daily_page(date_slug: str, day_items: List[Dict[str, Any]],
         footer_nav_terms = "Terms of Service"
         footer_copy = "© 2026 AI News Radar (ainewsradar.xyz). Curated via automated intelligence pipeline & editorial review · All rights belong to original authors."
     else:
-        page_title = f"AI 日报 · {date_zh} | 当日精选 {len(briefing_items)} 条 AI 重磅前沿快报 | AI 资讯雷达"
+        page_title = f"AI 日报 · {date_zh} | AI 资讯雷达"
         page_desc = f"{date_zh} AI 资讯雷达历史精选：涵盖大模型突破、硅谷动态、AI 工具与领袖发声。经人工审核与交叉验证，附完整原始信源。"
         html_lang = "zh-CN"
         canonical_url = f"https://ainewsradar.xyz/zh/daily/{date_slug}"

@@ -69,7 +69,7 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         contact_link = "/zh/contact"
         privacy_link = "/zh/privacy"
         terms_link = "/zh/terms"
-        page_title_suffix = "AI 深度智库 · 独家实操专栏 | AI 资讯雷达"
+        page_title_suffix = "AI 资讯雷达"
     else:
         title = article.get("title_en") or article["title"]
         summary = article.get("summary_en") or article["summary"]
@@ -101,14 +101,25 @@ def generate_article_page(article: dict, lang: str = "en") -> str:
         contact_link = "/contact"
         privacy_link = "/privacy"
         terms_link = "/terms"
-        page_title_suffix = "Frontier AI Engineering Deep-Dive | AI News Radar"
+        page_title_suffix = "AI News Radar"
+
+    brand_suffix = f" | {page_title_suffix}"
+    if len(title) + len(brand_suffix) <= 65:
+        seo_page_title = f"{title}{brand_suffix}"
+    else:
+        avail = 65 - len(brand_suffix) - 1
+        cut = title[:avail].rstrip(" ,-—:|/·;")
+        last_space = cut.rfind(' ')
+        if not is_zh and last_space > avail // 2:
+            cut = cut[:last_space].rstrip(" ,-—:|/·;")
+        seo_page_title = f"{cut}…{brand_suffix}"
 
     html = f"""<!DOCTYPE html>
 <html lang="{page_lang}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{title} | {page_title_suffix}</title>
+  <title>{seo_page_title}</title>
   <meta name="description" content="{summary}">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="{canonical_url}">
@@ -358,7 +369,7 @@ def generate_articles_index(articles: list, lang: str = "en") -> str:
     is_zh = (lang == "zh" or lang == "zh-CN")
 
     site_name = "AI 资讯雷达" if is_zh else "AI News Radar"
-    hub_title = "AI 深度特稿智库 · 独家实操专栏合集" if is_zh else "AI Engineering Deep-Dive Guides & Architecture Reports"
+    hub_title = "AI 深度特稿智库 · 独家专栏合集" if is_zh else "AI Engineering Deep-Dive Guides & Reports"
     hub_desc = "AI 资讯雷达独家出品：聚焦大模型私有部署、终端智能体架构、高吞吐量化与企业级 RAG 实战。" if is_zh else "Authoritative, code-rich AI engineering teardowns, systems benchmarks, and production playbooks verified in the Radar Hardware Lab."
     home_link = "/zh" if is_zh else "/"
     home_text = "首页" if is_zh else "Home"

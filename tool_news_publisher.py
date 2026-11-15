@@ -281,7 +281,26 @@ def build_tool_html(tool: Dict[str, Any], is_zh: bool = False, related_tools: Li
         features_flat = str(features or hook or "")
     feature_list_val = escape(re.sub(r'[\r\n]+', '; ', features_flat)[:300])
 
-    meta_title = f"{display_name} - {hook} | AI News Radar"
+    tool_brand = "AI 资讯雷达" if is_zh else "AI News Radar"
+    brand_suffix = f" | {tool_brand}"
+    avail = 65 - len(brand_suffix)
+    display_name_clean = " ".join(display_name.strip().split())
+    hook_clean = " ".join(hook.strip().split())
+    if len(f"{display_name_clean} - {hook_clean}") <= avail:
+        meta_title = f"{display_name_clean} - {hook_clean}{brand_suffix}"
+    else:
+        avail_hook = avail - len(display_name_clean) - 3
+        if avail_hook >= 10:
+            h_cut = re.sub(r'^(?:is|an|a)\s+', '', hook_clean, flags=re.I).strip()[:avail_hook]
+            last_space = h_cut.rfind(' ')
+            if not is_zh and last_space > 8:
+                h_cut = h_cut[:last_space]
+            h_cut = h_cut.rstrip(" ,-—:|/·;")
+            meta_title = f"{display_name_clean} - {h_cut}…{brand_suffix}"
+        else:
+            name_cut = display_name_clean[:avail].rstrip(" ,-—:|/·;")
+            meta_title = f"{name_cut}{brand_suffix}"
+
     if not is_zh:
         meta_title = sanitize_for_en(meta_title)
 
@@ -859,7 +878,18 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     source_target_url = f"{source_url}{sep}ref=ainewsradar" if source_url.startswith("http") else source_url
 
     clean_meta_desc = escape(re.sub(r'<[^>]+>', '', summary)[:160])
-    meta_title = f"{title} | AI News Radar"
+    news_brand = site_brand
+    brand_suffix = f" | {news_brand}"
+    avail = 65 - len(brand_suffix)
+    title_clean = " ".join(title.strip().split())
+    if len(title_clean) <= avail:
+        meta_title = f"{title_clean}{brand_suffix}"
+    else:
+        cut = title_clean[:avail].rstrip(" ,-—:|/·;")
+        last_space = cut.rfind(' ')
+        if not is_zh and last_space > avail // 2:
+            cut = cut[:last_space].rstrip(" ,-—:|/·;")
+        meta_title = f"{cut}…{brand_suffix}"
     iso_published = parse_iso_date(item.get("published_at") or item.get("raw_published_at") or item.get("date"))
 
     bullets_html = ""
