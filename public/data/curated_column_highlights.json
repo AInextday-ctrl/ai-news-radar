@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 16:04:30 UTC",
+  "generated_at": "2026-11-15 16:18:35 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 16:04:30 UTC",
+      "updated_at": "2026-11-15 16:18:35 UTC",
       "headline_item": {
-        "id": "7bb5d5511a440513",
+        "id": "6b8e6703159e6e99",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美国财长贝森特要求英伟达彻查对华芯片销售合规性",
-        "title_en": "Scott Bessent urges Nvidia to hire an outside CEO and wants answers within 10 days on whether it pushed \"seemingly illicit\" chip sales to China to boost revenue (Tony Czuczka/Bloomberg)",
-        "source": "Bloomberg",
-        "published_at": "2026-11-15T15:50:01+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-15/bessent-says-nvidia-needs-dramatic-shakeup-after-huang-ouster",
-        "event_summary_zh": "美国财政部长贝森特公开要求英伟达在十日内说明是否存在违规对华销售芯片以虚增营收，并建议引入外部首席执行官接管公司治理",
-        "event_summary_en": "US Treasury Secretary Scott Bessent has formally demanded that Nvidia Corp. provide an explanation within 10 days regarding allegations of facilitating 'seemingly illicit' chip sales to China to inflate financial performance. Additionally, Bessent urged the board to hire an external CEO, signaling an intensified regulatory focus on the compliance and governance of the global AI semiconductor leader.",
+        "title_zh": "美商务部长卢特尼克涉嫌利用职务推迟芯片出口监管",
+        "title_en": "Investigation: Howard Lutnick pushed to narrow chip curbs affecting a client of his former firm Cantor Fitzgerald whose Malaysia data center may serve Tencent (New York Times)",
+        "source": "New York Times",
+        "published_at": "2026-11-15T16:10:01+00:00",
+        "url": "https://www.nytimes.com/2026/11/15/us/politics/lutnick-pushed-to-weaken-chip-rules-that-overlap-with-his-family-business.html?unlocked_article_code=1.QlE.S83S.v9pNUp3b3vi_&smid=url-share",
+        "event_summary_zh": "美国商务部长霍华德·卢特尼克被指在职期间干预对华AI芯片出口限制，旨在维护其前东家Cantor Fitzgerald关联的数据中心客户利益",
+        "event_summary_en": "U.S. Secretary of Commerce Howard Lutnick is advocating for less stringent export controls on AI chips destined for Southeast Asian data centers, specifically those like the A201 facility in Malaysia operated by Bitdeer, which reportedly serves Chinese tech giants. Given Lutnick's former leadership at Cantor Fitzgerald—a firm that maintains financial ties to and acts as a sales agent for these data center operators—his regulatory oversight is under scrutiny for potential conflict of interest regarding Nvidia chip export restrictions.",
         "core_facts_zh": [
-          "【核心事件】美国财政部长斯科特·贝森特（Scott Bessent）、英伟达公司（Nvidia Corp.）在美国财政部及资本市场监管场合：要求说明对华销售合规性，建议更换公司外部CEO",
-          "【起因与机理】涉嫌非法绕道对华出口以虚增财务数据",
-          "【调查与监管诉求】美财长质询英伟达对华销售合规性及营收造假嫌疑。",
-          "【行业影响与走向】引发对英伟达全球供应链准入与合规风险的剧烈预期。"
+          "【核心事件】美国商务部长霍华德·卢特尼克（Howard Lutnick）；比特小鹿（Bitdeer）；Cantor Fitzgerald：试图放宽针对东南亚数据中心的芯片供应限制，间接允许中国实体获取英伟达高性能计算能力",
+          "【起因与机理】保护与其前东家Cantor Fitzgerald有财务关联的海外数据中心业务利益",
+          "【调查与监管诉求】卢特尼克通过商务部长职权，推迟并放宽针对东南亚数据中心出口高端AI芯片的监管力度。",
+          "【各方立场与态度】该事件揭示了美国政府内部在如何围堵“算力中转”与维护金融机构跨境客户利益之间存在深刻的政策分歧。"
         ],
         "core_facts_en": [
-          "[Core Event] US Treasury Secretary Scott Bessent, Nvidia Corp.: Demand for compliance audit on China sales; recommendation for external CEO",
-          "[Root Cause & Mechanism] Allegations of illicit exports to China to inflate revenue",
-          "[Market & Financial Detail] Treasury inquiry into compliance and revenue manipulation regarding China sales.",
-          "[Industry Impact & Outlook] Anticipated volatility in Nvidia's supply chain compliance and market governance."
+          "[Core Event] U.S. Secretary of Commerce Howard Lutnick; Bitdeer; Cantor Fitzgerald: Advocating for relaxed export controls that would allow Chinese entities to bypass chip bans via third-party data centers",
+          "[Root Cause & Mechanism] To safeguard financial interests associated with his former firm, Cantor Fitzgerald",
+          "[Key Metrics] That includes Bitdeer, which is building out the Malaysian data center it expects to generate $1.",
+          "[Key Position & Outlook] The situation highlights a fundamental policy conflict within the U.S. administration between plugging 'compute-laundering' loopholes and protecting the international interests of Wall Street firms."
         ],
-        "industry_impact_zh": "此举标志着美国政府对英伟达的监管逻辑从单一的出口管制转向深度的财务合规与治理干预，意在切断AI产业的技术外溢。若质疑属实，英伟达将面临巨额合规罚款及全球供应链重组风险，这将迫使英伟达在保持增长与地缘政治红线之间进行极度高压的业务收缩。",
-        "industry_impact_en": "This move signals a strategic shift from simple export controls to aggressive financial and governance oversight, aiming to curb technical spillovers into the Chinese market. Should these allegations hold, Nvidia faces significant regulatory penalties and potential supply chain restructuring, forcing the firm into a high-pressure trade-off between sustaining growth and adhering to stringent geopolitical guardrails."
+        "industry_impact_zh": "卢特尼克的政策立场凸显了美国在芯片围堵策略中遭遇的内源性掣肘，即华尔街资本通过深度嵌入全球算力基础设施供应端，在合规监管与跨境盈利之间形成博弈。此举不仅挑战了出口管制的统一性，亦预示着美国针对东南亚算力中转站的管控逻辑将进入由资本利益驱动的行政阻滞周期。",
+        "industry_impact_en": "Lutnick's stance exposes internal contradictions in U.S. chip containment strategies, where financial capital deeply embedded in global compute infrastructure exerts pressure on regulatory outcomes. This situation signals a period of administrative gridlock where the desire for rigid export controls is undermined by the cross-border revenue imperatives of the very entities navigating those regulations."
       },
       "headlines": [
+        {
+          "id": "6b8e6703159e6e99",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美商务部长卢特尼克涉嫌利用职务推迟芯片出口监管",
+          "title_en": "Investigation: Howard Lutnick pushed to narrow chip curbs affecting a client of his former firm Cantor Fitzgerald whose Malaysia data center may serve Tencent (New York Times)",
+          "source": "New York Times",
+          "published_at": "2026-11-15T16:10:01+00:00",
+          "url": "https://www.nytimes.com/2026/11/15/us/politics/lutnick-pushed-to-weaken-chip-rules-that-overlap-with-his-family-business.html?unlocked_article_code=1.QlE.S83S.v9pNUp3b3vi_&smid=url-share",
+          "event_summary_zh": "美国商务部长霍华德·卢特尼克被指在职期间干预对华AI芯片出口限制，旨在维护其前东家Cantor Fitzgerald关联的数据中心客户利益",
+          "event_summary_en": "U.S. Secretary of Commerce Howard Lutnick is advocating for less stringent export controls on AI chips destined for Southeast Asian data centers, specifically those like the A201 facility in Malaysia operated by Bitdeer, which reportedly serves Chinese tech giants. Given Lutnick's former leadership at Cantor Fitzgerald—a firm that maintains financial ties to and acts as a sales agent for these data center operators—his regulatory oversight is under scrutiny for potential conflict of interest regarding Nvidia chip export restrictions.",
+          "core_facts_zh": [
+            "【核心事件】美国商务部长霍华德·卢特尼克（Howard Lutnick）；比特小鹿（Bitdeer）；Cantor Fitzgerald：试图放宽针对东南亚数据中心的芯片供应限制，间接允许中国实体获取英伟达高性能计算能力",
+            "【起因与机理】保护与其前东家Cantor Fitzgerald有财务关联的海外数据中心业务利益",
+            "【调查与监管诉求】卢特尼克通过商务部长职权，推迟并放宽针对东南亚数据中心出口高端AI芯片的监管力度。",
+            "【各方立场与态度】该事件揭示了美国政府内部在如何围堵“算力中转”与维护金融机构跨境客户利益之间存在深刻的政策分歧。"
+          ],
+          "core_facts_en": [
+            "[Core Event] U.S. Secretary of Commerce Howard Lutnick; Bitdeer; Cantor Fitzgerald: Advocating for relaxed export controls that would allow Chinese entities to bypass chip bans via third-party data centers",
+            "[Root Cause & Mechanism] To safeguard financial interests associated with his former firm, Cantor Fitzgerald",
+            "[Key Metrics] That includes Bitdeer, which is building out the Malaysian data center it expects to generate $1.",
+            "[Key Position & Outlook] The situation highlights a fundamental policy conflict within the U.S. administration between plugging 'compute-laundering' loopholes and protecting the international interests of Wall Street firms."
+          ],
+          "industry_impact_zh": "卢特尼克的政策立场凸显了美国在芯片围堵策略中遭遇的内源性掣肘，即华尔街资本通过深度嵌入全球算力基础设施供应端，在合规监管与跨境盈利之间形成博弈。此举不仅挑战了出口管制的统一性，亦预示着美国针对东南亚算力中转站的管控逻辑将进入由资本利益驱动的行政阻滞周期。",
+          "industry_impact_en": "Lutnick's stance exposes internal contradictions in U.S. chip containment strategies, where financial capital deeply embedded in global compute infrastructure exerts pressure on regulatory outcomes. This situation signals a period of administrative gridlock where the desire for rigid export controls is undermined by the cross-border revenue imperatives of the very entities navigating those regulations."
+        },
         {
           "id": "7bb5d5511a440513",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "该技术路线揭示了从端到端“生成式幻觉”向基于代码与工具调用的“智能体协作”转型的趋势。通过程序化模拟物理过程，Anthropic不仅避开了扩散模型在版权素材训练上的合规隐忧，更为AI在精密工程与复杂物理模拟任务中的长链路逻辑推理提供了底层范式参考。",
           "industry_impact_en": "This approach signals a paradigm shift from end-to-end generative 'hallucination' toward agentic workflows predicated on code execution and tool orchestration. By simulating physical processes, Anthropic circumvents potential copyright liabilities inherent in latent diffusion models while establishing a new framework for AI to perform multi-step logical reasoning in precision-oriented domains."
-        },
-        {
-          "id": "e9250aab5b255907",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "黄仁勋卷入商业间谍调查风波",
-          "title_en": "An overview of Jensen Huang’s messy days",
-          "source": "The Verge AI",
-          "published_at": "2026-11-15T13:00:00+00:00",
-          "url": "https://www.theverge.com/column/1033943/jensen-huang-nvidia-china-spying-scandal-resignation",
-          "event_summary_zh": "英伟达首席执行官黄仁勋因与被指控涉嫌非法向中国转运AI芯片的Megaspeed高管Alice Huang存在密切私交，正面临美国政府的安全调查与情报风险评估",
-          "event_summary_en": "Nvidia CEO Jensen Huang is under intense scrutiny from US authorities due to a personal relationship with Alice Huang, an executive at Singapore-based Megaspeed. Alice Huang, investigated for allegedly smuggling Nvidia AI chips to China and transmitting sensitive commercial information to Beijing, had her passport confiscated by Singaporean authorities in June 2025. US intelligence is now assessing whether Jensen Huang’s proximity to this individual compromised national security or trade restriction protocols.",
-          "core_facts_zh": [
-            "【核心事件】黄仁勋（英伟达首席执行官）、Alice Huang（Megaspeed高管）、中国国家安全部在美国国家安全审查与新加坡监管机构：黄仁勋与涉嫌非法运输芯片及从事间谍活动的Alice Huang存在密切私交，触发美方对英伟达贸易合规性的深度调查",
-            "【起因与机理】英伟达AI芯片作为美国国家安全核心资产，任何高层非正常关联均可能危及出口管制政策的执行",
-            "【调查与监管诉求】核心涉案：黄仁勋被指与涉及非法芯片转运及商业间谍调查的Alice Huang存在关联。",
-            "【行业影响与走向】产业影响：英伟达面临极高合规风险，可能加剧美方对头部科技企业高管的准入限制。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Jensen Huang (CEO of Nvidia), Alice Huang (Megaspeed executive), Chinese Ministry of State Security: Jensen Huang’s personal ties to a suspect involved in illicit chip transfers and espionage have triggered a federal compliance investigation",
-            "[Root Cause & Mechanism] Nvidia's AI chips are deemed critical national security assets, necessitating scrutiny of any high-level executive access that could undermine export controls",
-            "[Key Metrics] Nvidia’s stock closed at an all-time high of $239.",
-            "[Industry Impact & Outlook] Industry impact: High compliance risk for Nvidia, likely increasing federal scrutiny over big-tech leadership."
-          ],
-          "industry_impact_zh": "此事件标志着美国对英伟达的监管逻辑从单纯的出口管制向高管个人安全合规延伸，显示出美方对芯片供应链单一依赖点（Single Point of Failure）的极端警惕。若黄仁勋被证实由于私人关联而存在信息泄露，英伟达的贸易豁免权将面临实质性剥夺风险，并在全球AI基础设施布局中引发严重的信任危机。",
-          "industry_impact_en": "This incident marks a shift in US regulatory strategy from mere export controls to direct personal compliance oversight of Nvidia's leadership, reflecting deep-seated anxiety over the single point of failure in the AI chip supply chain. If information leakage is proven, Nvidia faces potential revocation of critical trade licenses, threatening its central position in global AI infrastructure through an irreparable breach of trust."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 16:04:31 UTC",
+      "updated_at": "2026-11-15 16:18:35 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 16:04:31 UTC",
+      "updated_at": "2026-11-15 16:18:35 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,076)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,082)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (24,076 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (24,082 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
