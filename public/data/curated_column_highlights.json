@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 10:33:22 UTC",
+  "generated_at": "2026-11-15 10:48:38 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 10:33:22 UTC",
+      "updated_at": "2026-11-15 10:48:38 UTC",
       "headline_item": {
-        "id": "72247c3e792a49dc",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "美团发布LongCat-2.5：全国产算力底座下的万亿参数模型",
-        "title_en": "Meituan releases a 1.6-trillion-parameter agent model that never touched an Nvidia GPU",
+        "id": "23ac0ed0a9c92fb2",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "澳洲央行研究：AI正显著压缩初级人才就业空间",
+        "title_en": "Australia's central bank finds AI hitting young workers first, especially in software and customer service",
         "source": "THE DECODER",
-        "published_at": "2026-11-15T10:06:06+00:00",
-        "url": "https://the-decoder.com/meituan-releases-a-1-6-trillion-parameter-agent-model-that-never-touched-an-nvidia-gpu/",
-        "event_summary_zh": "美团发布1.6万亿参数多模态Agent模型LongCat-2.5，完全基于国产硬件训练，性能对标Claude Opus 5",
-        "event_summary_en": "Meituan's LongCat team has released the LongCat-2.5 model, a Mixture-of-Experts (MoE) model with 1.6 trillion total parameters and approximately 48 billion active parameters per token. The model was trained entirely on domestic hardware without Nvidia GPUs, utilizing 4-bit quantization, and supports a million-token context window with multimodal capabilities.",
+        "published_at": "2026-11-15T10:45:58+00:00",
+        "url": "https://the-decoder.com/australias-central-bank-finds-ai-hitting-young-workers-first-especially-in-software-and-customer-service/",
+        "event_summary_zh": "澳大利亚储备银行分析显示，AI技术导致软件开发等高曝光领域初级岗位需求下降，年轻人就业承压",
+        "event_summary_en": "Mike Major, a researcher at the Reserve Bank of Australia (RBA), found that demand for entry-level roles in high-exposure sectors like software, customer service, and clerical work has structurally declined since late 2022. The data corroborates a global trend where AI-driven automation of repetitive tasks disproportionately hampers early-career employment, while senior-level positions remain relatively insulated.",
         "core_facts_zh": [
-          "【核心事件】美团（Meituan）LongCat研发团队在AI模型开源与技术发布平台：发布1.6万亿参数MoE模型LongCat-2.5，支持多模态输入，采用4-bit量化技术适配国产芯片",
-          "【起因与机理】构建自主可控的AI Agent算力底座，解决复杂多步任务执行与长序列推理需求",
-          "【关键数据与实测】采用MoE混合专家架构，总参数量1.6万亿，激活参数480亿。",
-          "【各方立场与态度】具备百万Token长窗口能力，通过沙箱任务集训练强化代码与Agent推理性能。"
+          "【核心事件】澳大利亚储备银行（RBA）研究员 Mike Major在澳大利亚劳动力就业市场：分析AI技术对初级岗位（15-24岁群体）的替代影响，并对比全球相关行业数据",
+          "【起因与机理】衡量AI普及对宏观就业结构及长期人才培育机制的潜在负面冲击",
+          "【核心事实细节】AI导致编程及办公类初级岗位招聘需求出现结构性萎缩。",
+          "【各方立场与态度】初级岗位减少可能引发未来行业资深专业人才储备断档。"
         ],
         "core_facts_en": [
-          "[Core Event] Meituan LongCat Development Team: Released a 1.6-trillion-parameter MoE model, LongCat-2.5, featuring multimodal support and 4-bit quantization for domestic chips",
-          "[Root Cause & Mechanism] Building a sovereign AI agent infrastructure to execute complex multi-step tasks and long-context reasoning",
-          "[Key Metrics] Utilizes MoE architecture with 1.6T total and 48B active parameters.",
-          "[Key Position & Outlook] Features a 1M-token context window and specialized agent training in sandboxed environments."
+          "[Core Event] Mike Major, Researcher at the Reserve Bank of Australia (RBA) (Australian labor market): Analyzing the impact of AI on entry-level roles (15-24 age group) and benchmarking against global payroll studies",
+          "[Root Cause & Mechanism] To evaluate structural shifts in employment and the long-term sustainability of the talent pipeline",
+          "[Key Fact Detail] Structural decline in entry-level hiring for software and clerical roles.",
+          "[Industry Impact & Outlook] Long-term risk of 'tragedy of the cognitive commons' and talent pipeline stagnation."
         ],
-        "industry_impact_zh": "该模型的核心意义在于验证了在完全去Nvidia环境下，通过MoE架构优化与软硬件协同调优，可以实现对国际第一梯队模型的基准追赶。这一实践证明了国产AI集群在处理大规模Agent任务时，通过量化策略与任务沙箱模拟训练，已跨越了从可用到可商用的关键技术门槛，这将对国内云厂商及AI基础设施的供应链独立性产生显著示范效应。",
-        "industry_impact_en": "The core significance of this model lies in validating that competitive performance can be achieved without Nvidia GPUs by leveraging MoE architecture and hardware-software co-optimization. This achievement signals that domestic AI clusters have bridged the technical gap from experimental to commercial-grade for complex agent tasks, significantly bolstering the case for supply chain independence in the Chinese cloud and AI infrastructure market."
+        "industry_impact_zh": "AI不仅在执行层面提升效率，其更大的隐性成本在于摧毁了产业界“师徒制”人才培育链路，即所谓的认知公共资源危机。长期来看，初级岗位的缺位将导致资深专家储备断档，使得企业未来在高端技术岗位上陷入严重的结构性人才短缺。",
+        "industry_impact_en": "Beyond operational efficiency, AI poses a risk to the 'cognitive commons' by dismantling the apprenticeship pipeline essential for long-term skill acquisition. This structural attrition of junior roles will inevitably lead to a future talent drought for senior-level expertise, creating an unsustainable dependence on automated systems."
       },
       "headlines": [
         {
-          "id": "72247c3e792a49dc",
-          "tag_zh": "🎁 算力福利",
-          "tag_en": "🎁 Promos & Credits",
-          "title_zh": "美团发布LongCat-2.5：全国产算力底座下的万亿参数模型",
-          "title_en": "Meituan releases a 1.6-trillion-parameter agent model that never touched an Nvidia GPU",
+          "id": "23ac0ed0a9c92fb2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "澳洲央行研究：AI正显著压缩初级人才就业空间",
+          "title_en": "Australia's central bank finds AI hitting young workers first, especially in software and customer service",
           "source": "THE DECODER",
-          "published_at": "2026-11-15T10:06:06+00:00",
-          "url": "https://the-decoder.com/meituan-releases-a-1-6-trillion-parameter-agent-model-that-never-touched-an-nvidia-gpu/",
-          "event_summary_zh": "美团发布1.6万亿参数多模态Agent模型LongCat-2.5，完全基于国产硬件训练，性能对标Claude Opus 5",
-          "event_summary_en": "Meituan's LongCat team has released the LongCat-2.5 model, a Mixture-of-Experts (MoE) model with 1.6 trillion total parameters and approximately 48 billion active parameters per token. The model was trained entirely on domestic hardware without Nvidia GPUs, utilizing 4-bit quantization, and supports a million-token context window with multimodal capabilities.",
+          "published_at": "2026-11-15T10:45:58+00:00",
+          "url": "https://the-decoder.com/australias-central-bank-finds-ai-hitting-young-workers-first-especially-in-software-and-customer-service/",
+          "event_summary_zh": "澳大利亚储备银行分析显示，AI技术导致软件开发等高曝光领域初级岗位需求下降，年轻人就业承压",
+          "event_summary_en": "Mike Major, a researcher at the Reserve Bank of Australia (RBA), found that demand for entry-level roles in high-exposure sectors like software, customer service, and clerical work has structurally declined since late 2022. The data corroborates a global trend where AI-driven automation of repetitive tasks disproportionately hampers early-career employment, while senior-level positions remain relatively insulated.",
           "core_facts_zh": [
-            "【核心事件】美团（Meituan）LongCat研发团队在AI模型开源与技术发布平台：发布1.6万亿参数MoE模型LongCat-2.5，支持多模态输入，采用4-bit量化技术适配国产芯片",
-            "【起因与机理】构建自主可控的AI Agent算力底座，解决复杂多步任务执行与长序列推理需求",
-            "【关键数据与实测】采用MoE混合专家架构，总参数量1.6万亿，激活参数480亿。",
-            "【各方立场与态度】具备百万Token长窗口能力，通过沙箱任务集训练强化代码与Agent推理性能。"
+            "【核心事件】澳大利亚储备银行（RBA）研究员 Mike Major在澳大利亚劳动力就业市场：分析AI技术对初级岗位（15-24岁群体）的替代影响，并对比全球相关行业数据",
+            "【起因与机理】衡量AI普及对宏观就业结构及长期人才培育机制的潜在负面冲击",
+            "【核心事实细节】AI导致编程及办公类初级岗位招聘需求出现结构性萎缩。",
+            "【各方立场与态度】初级岗位减少可能引发未来行业资深专业人才储备断档。"
           ],
           "core_facts_en": [
-            "[Core Event] Meituan LongCat Development Team: Released a 1.6-trillion-parameter MoE model, LongCat-2.5, featuring multimodal support and 4-bit quantization for domestic chips",
-            "[Root Cause & Mechanism] Building a sovereign AI agent infrastructure to execute complex multi-step tasks and long-context reasoning",
-            "[Key Metrics] Utilizes MoE architecture with 1.6T total and 48B active parameters.",
-            "[Key Position & Outlook] Features a 1M-token context window and specialized agent training in sandboxed environments."
+            "[Core Event] Mike Major, Researcher at the Reserve Bank of Australia (RBA) (Australian labor market): Analyzing the impact of AI on entry-level roles (15-24 age group) and benchmarking against global payroll studies",
+            "[Root Cause & Mechanism] To evaluate structural shifts in employment and the long-term sustainability of the talent pipeline",
+            "[Key Fact Detail] Structural decline in entry-level hiring for software and clerical roles.",
+            "[Industry Impact & Outlook] Long-term risk of 'tragedy of the cognitive commons' and talent pipeline stagnation."
           ],
-          "industry_impact_zh": "该模型的核心意义在于验证了在完全去Nvidia环境下，通过MoE架构优化与软硬件协同调优，可以实现对国际第一梯队模型的基准追赶。这一实践证明了国产AI集群在处理大规模Agent任务时，通过量化策略与任务沙箱模拟训练，已跨越了从可用到可商用的关键技术门槛，这将对国内云厂商及AI基础设施的供应链独立性产生显著示范效应。",
-          "industry_impact_en": "The core significance of this model lies in validating that competitive performance can be achieved without Nvidia GPUs by leveraging MoE architecture and hardware-software co-optimization. This achievement signals that domestic AI clusters have bridged the technical gap from experimental to commercial-grade for complex agent tasks, significantly bolstering the case for supply chain independence in the Chinese cloud and AI infrastructure market."
+          "industry_impact_zh": "AI不仅在执行层面提升效率，其更大的隐性成本在于摧毁了产业界“师徒制”人才培育链路，即所谓的认知公共资源危机。长期来看，初级岗位的缺位将导致资深专家储备断档，使得企业未来在高端技术岗位上陷入严重的结构性人才短缺。",
+          "industry_impact_en": "Beyond operational efficiency, AI poses a risk to the 'cognitive commons' by dismantling the apprenticeship pipeline essential for long-term skill acquisition. This structural attrition of junior roles will inevitably lead to a future talent drought for senior-level expertise, creating an unsustainable dependence on automated systems."
         },
         {
           "id": "7656d2288dc357d2",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 10:33:23 UTC",
+      "updated_at": "2026-11-15 10:48:38 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 10:33:23 UTC",
+      "updated_at": "2026-11-15 10:48:38 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 23,964)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 23,967)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (23,964 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (23,967 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
