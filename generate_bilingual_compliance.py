@@ -31,8 +31,8 @@ def build_english_about():
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - AI News Radar | Frontier AI Intelligence & Engineering Deep-Dives</title>
-  <meta name="description" content="Discover AI News Radar (ainewsradar.xyz): an independent AI engineering publication and benchmarking lab delivering empirical deep-dives, hardware benchmarks, and real-time frontier AI intelligence.">
+  <title>About Us - AI News Radar | Frontier AI Intelligence</title>
+  <meta name="description" content="Discover AI News Radar: an independent AI engineering publication and benchmarking lab delivering empirical deep-dives and frontier AI intelligence.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://ainewsradar.xyz/about">
   <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/about">
