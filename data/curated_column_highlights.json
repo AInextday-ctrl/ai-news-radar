@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-15 15:33:11 UTC",
+  "generated_at": "2026-11-15 15:49:55 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-15 15:33:12 UTC",
+      "updated_at": "2026-11-15 15:49:55 UTC",
       "headline_item": {
-        "id": "e9250aab5b255907",
+        "id": "c6abd2e8357633ae",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "黄仁勋卷入商业间谍调查风波",
-        "title_en": "An overview of Jensen Huang’s messy days",
-        "source": "The Verge AI",
-        "published_at": "2026-11-15T13:00:00+00:00",
-        "url": "https://www.theverge.com/column/1033943/jensen-huang-nvidia-china-spying-scandal-resignation",
-        "event_summary_zh": "英伟达首席执行官黄仁勋因与被指控涉嫌非法向中国转运AI芯片的Megaspeed高管Alice Huang存在密切私交，正面临美国政府的安全调查与情报风险评估",
-        "event_summary_en": "Nvidia CEO Jensen Huang is under intense scrutiny from US authorities due to a personal relationship with Alice Huang, an executive at Singapore-based Megaspeed. Alice Huang, investigated for allegedly smuggling Nvidia AI chips to China and transmitting sensitive commercial information to Beijing, had her passport confiscated by Singaporean authorities in June 2025. US intelligence is now assessing whether Jensen Huang’s proximity to this individual compromised national security or trade restriction protocols.",
+        "title_zh": "Anthropic推出Claude Fable 5.2：重构代码绘图逻辑",
+        "title_en": "Anthropic's Claude Fable 5.2 doesn't generate images, it paints them",
+        "source": "THE DECODER",
+        "published_at": "2026-11-15T15:42:03+00:00",
+        "url": "https://the-decoder.com/anthropics-claude-fable-5-2-doesnt-generate-images-it-paints-them/",
+        "event_summary_zh": "Anthropic发布Claude Fable 5.2模型，通过执行数千行Python代码模拟物理笔触生成写实画作",
+        "event_summary_en": "Anthropic researcher Jake Eaton introduced Claude Fable 5.2, a model that bypasses traditional diffusion-based image generation by executing 1,000 to 2,000 lines of Python code. This system simulates physical brushstrokes, paint textures, and corrective layering within a virtual environment, rendering images through thousands of manually placed, coordinate-defined strokes that mimic human artistic behavior.",
         "core_facts_zh": [
-          "【核心事件】黄仁勋（英伟达首席执行官）、Alice Huang（Megaspeed高管）、中国国家安全部在美国国家安全审查与新加坡监管机构：黄仁勋与涉嫌非法运输芯片及从事间谍活动的Alice Huang存在密切私交，触发美方对英伟达贸易合规性的深度调查",
-          "【起因与机理】英伟达AI芯片作为美国国家安全核心资产，任何高层非正常关联均可能危及出口管制政策的执行",
-          "【调查与监管诉求】核心涉案：黄仁勋被指与涉及非法芯片转运及商业间谍调查的Alice Huang存在关联。",
-          "【行业影响与走向】产业影响：英伟达面临极高合规风险，可能加剧美方对头部科技企业高管的准入限制。"
+          "【核心事件】Anthropic研究人员Jake Eaton、Michael Graczyk在Anthropic内部实验环境：发布Claude Fable 5.2，采用基于代码生成的笔触模拟技术进行绘图",
+          "【起因与机理】探索区别于扩散模型的具身智能绘图路径，解决艺术风格一致性与创作可解释性问题",
+          "【关键数据与实测】单幅作品包含约70万笔触，模拟湿画法与物理纹理反馈机制。",
+          "【各方立场与态度】通过设定虚拟艺术家的人格化语境，增强模型创作风格的一致性与可控性。"
         ],
         "core_facts_en": [
-          "[Core Event] Jensen Huang (CEO of Nvidia), Alice Huang (Megaspeed executive), Chinese Ministry of State Security: Jensen Huang’s personal ties to a suspect involved in illicit chip transfers and espionage have triggered a federal compliance investigation",
-          "[Root Cause & Mechanism] Nvidia's AI chips are deemed critical national security assets, necessitating scrutiny of any high-level executive access that could undermine export controls",
-          "[Key Metrics] Nvidia’s stock closed at an all-time high of $239.",
-          "[Industry Impact & Outlook] Industry impact: High compliance risk for Nvidia, likely increasing federal scrutiny over big-tech leadership."
+          "[Core Event] Anthropic researchers Jake Eaton and Michael Graczyk: Launched Claude Fable 5.2, utilizing code-driven brushstroke simulation for image generation",
+          "[Root Cause & Mechanism] To explore agentic, non-diffusion paths for AI art with better stylistic consistency and process interpretability",
+          "[Key Technical Spec] Abandoned diffusion model path in favor of code-driven brushstroke simulation.",
+          "[Key Position & Outlook] Established persona-driven artistic workflows to ensure stylistic consistency and control."
         ],
-        "industry_impact_zh": "此事件标志着美国对英伟达的监管逻辑从单纯的出口管制向高管个人安全合规延伸，显示出美方对芯片供应链单一依赖点（Single Point of Failure）的极端警惕。若黄仁勋被证实由于私人关联而存在信息泄露，英伟达的贸易豁免权将面临实质性剥夺风险，并在全球AI基础设施布局中引发严重的信任危机。",
-        "industry_impact_en": "This incident marks a shift in US regulatory strategy from mere export controls to direct personal compliance oversight of Nvidia's leadership, reflecting deep-seated anxiety over the single point of failure in the AI chip supply chain. If information leakage is proven, Nvidia faces potential revocation of critical trade licenses, threatening its central position in global AI infrastructure through an irreparable breach of trust."
+        "industry_impact_zh": "该技术路线揭示了从端到端“生成式幻觉”向基于代码与工具调用的“智能体协作”转型的趋势。通过程序化模拟物理过程，Anthropic不仅避开了扩散模型在版权素材训练上的合规隐忧，更为AI在精密工程与复杂物理模拟任务中的长链路逻辑推理提供了底层范式参考。",
+        "industry_impact_en": "This approach signals a paradigm shift from end-to-end generative 'hallucination' toward agentic workflows predicated on code execution and tool orchestration. By simulating physical processes, Anthropic circumvents potential copyright liabilities inherent in latent diffusion models while establishing a new framework for AI to perform multi-step logical reasoning in precision-oriented domains."
       },
       "headlines": [
+        {
+          "id": "c6abd2e8357633ae",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Anthropic推出Claude Fable 5.2：重构代码绘图逻辑",
+          "title_en": "Anthropic's Claude Fable 5.2 doesn't generate images, it paints them",
+          "source": "THE DECODER",
+          "published_at": "2026-11-15T15:42:03+00:00",
+          "url": "https://the-decoder.com/anthropics-claude-fable-5-2-doesnt-generate-images-it-paints-them/",
+          "event_summary_zh": "Anthropic发布Claude Fable 5.2模型，通过执行数千行Python代码模拟物理笔触生成写实画作",
+          "event_summary_en": "Anthropic researcher Jake Eaton introduced Claude Fable 5.2, a model that bypasses traditional diffusion-based image generation by executing 1,000 to 2,000 lines of Python code. This system simulates physical brushstrokes, paint textures, and corrective layering within a virtual environment, rendering images through thousands of manually placed, coordinate-defined strokes that mimic human artistic behavior.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic研究人员Jake Eaton、Michael Graczyk在Anthropic内部实验环境：发布Claude Fable 5.2，采用基于代码生成的笔触模拟技术进行绘图",
+            "【起因与机理】探索区别于扩散模型的具身智能绘图路径，解决艺术风格一致性与创作可解释性问题",
+            "【关键数据与实测】单幅作品包含约70万笔触，模拟湿画法与物理纹理反馈机制。",
+            "【各方立场与态度】通过设定虚拟艺术家的人格化语境，增强模型创作风格的一致性与可控性。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic researchers Jake Eaton and Michael Graczyk: Launched Claude Fable 5.2, utilizing code-driven brushstroke simulation for image generation",
+            "[Root Cause & Mechanism] To explore agentic, non-diffusion paths for AI art with better stylistic consistency and process interpretability",
+            "[Key Technical Spec] Abandoned diffusion model path in favor of code-driven brushstroke simulation.",
+            "[Key Position & Outlook] Established persona-driven artistic workflows to ensure stylistic consistency and control."
+          ],
+          "industry_impact_zh": "该技术路线揭示了从端到端“生成式幻觉”向基于代码与工具调用的“智能体协作”转型的趋势。通过程序化模拟物理过程，Anthropic不仅避开了扩散模型在版权素材训练上的合规隐忧，更为AI在精密工程与复杂物理模拟任务中的长链路逻辑推理提供了底层范式参考。",
+          "industry_impact_en": "This approach signals a paradigm shift from end-to-end generative 'hallucination' toward agentic workflows predicated on code execution and tool orchestration. By simulating physical processes, Anthropic circumvents potential copyright liabilities inherent in latent diffusion models while establishing a new framework for AI to perform multi-step logical reasoning in precision-oriented domains."
+        },
         {
           "id": "e9250aab5b255907",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "该组织试图通过建立私有化标准绕过主流版权保护体制，体现了AI内容创作与传统流媒体商业逻辑的激烈碰撞。若此类独立奖项规模扩大，将加速推动AI生成内容的版权溯源机制演变，同时也加剧了平台侧对于AI原生内容合规性审查的压力。",
           "industry_impact_en": "By attempting to create an independent standard, this organization highlights the friction between AI-driven creativity and traditional copyright frameworks. If such niche awards gain traction, they will accelerate the evolution of provenance tracking for AI content while simultaneously increasing pressure on streaming platforms to refine their AI compliance vetting."
-        },
-        {
-          "id": "7e3a62699de16cff",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI语音播报侵蚀流媒体用户体验",
-          "title_en": "AI DJs Completely Kill My Groove",
-          "source": "Wired AI",
-          "published_at": "2026-11-15T12:00:00+00:00",
-          "url": "https://www.wired.com/story/ai-djs-completely-kill-my-groove/",
-          "event_summary_zh": "YouTube与Spotify等平台引入的AI DJ功能因播报内容空洞及信息准确性问题，引发用户对流媒体沉浸式体验的抵触",
-          "event_summary_en": "YouTube Music (via Beyond the Beat) and Spotify are expanding AI DJ tools designed to provide background context and commentary between tracks using generative audio. However, user feedback indicates these features frequently suffer from verbose filler, mispronunciation of niche artists, and factual inconsistencies, significantly undermining the immersive streaming experience.",
-          "core_facts_zh": [
-            "【核心事件】YouTube 音乐、Spotify在流媒体音乐应用内：AI DJ自动播报功能的推广与用户抵触",
-            "【起因与机理】平台试图通过生成式内容提升互动感，但技术未能达到自然语言的情感共鸣阈值",
-            "【核心事实细节】流媒体平台引入AI DJ以提供背景说明与个性化交互。",
-            "【各方立场与态度】过度设计的AI播报对用户沉浸式听歌体验产生负面冲击。"
-          ],
-          "core_facts_en": [
-            "[Core Event] YouTube Music, Spotify (Music streaming applications): AI DJ auto-commentary feature and user pushback",
-            "[Root Cause & Mechanism] Platforms attempting to increase engagement via generative content despite failing to meet resonance thresholds",
-            "[Key Technical Spec] Streaming platforms integrate AI DJs to provide background context and personalized interaction.",
-            "[Industry Impact & Outlook] Over-engineered AI commentary negatively impacts user immersion."
-          ],
-          "industry_impact_zh": "这是生成式AI在消费级界面落地时面临的典型“低容错率”挑战，过度介入的内容播报打破了流媒体作为“背景伴随”的服务本质。对于此类平台，单纯追求功能广度而牺牲叙事准确度，极易引发用户对AI功能的全面摒弃，显示出当前AI辅助叙事尚处于“干扰大于赋能”的早期阶段。",
-          "industry_impact_en": "This represents a classic 'low-tolerance' challenge for generative AI in consumer interfaces, where intrusive commentary disrupts the core service of passive, background listening. For platforms, prioritizing feature breadth over narrative precision risks complete user abandonment, underscoring that AI-assisted narration remains in an early stage where interference outweighs enablement."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-15 15:33:12 UTC",
+      "updated_at": "2026-11-15 15:49:55 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-15 15:33:12 UTC",
+      "updated_at": "2026-11-15 15:49:55 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,066)",
+            "📈 社区热度指数级飙升：本周新增 +5,171 Stars (总星标 24,071)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +5,171 stars this week (24,066 total)",
+            "📈 Exponential community momentum: +5,171 stars this week (24,071 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
