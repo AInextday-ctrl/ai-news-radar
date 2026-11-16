@@ -434,7 +434,7 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                             "alt": result["title"]
                         })
 
-                    # If this is the China AI-native generation story, guarantee the flight simulator photo
+                    # If this is the China AI-native generation story, guarantee pristine photo gallery
                     if "inside-chinas-drive-build-an-ai-native-generation" in clean_url.lower():
                         flight_sim_img = {
                             "url": "/images/reuters_bnta_flight_simulator.jpg",
@@ -443,8 +443,14 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                             "caption_zh": "北京新英才学校（BNTA）智能飞行课堂上，一名小学生正在操作飞行模拟器控制器。(摄影：路透社/Tingshu Wang)",
                             "alt": "A primary-level student operates the control of a flight simulator at Beijing New Talent Academy"
                         }
-                        if not any("flight_simulator" in im.get("url", "") for im in result["inline_images"]):
-                            result["inline_images"].insert(0, flight_sim_img)
+                        underwater_robot_img = {
+                            "url": "/images/reuters_bnta_underwater_robot.jpg",
+                            "caption": "A student operates an underwater robot during a robotics course at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
+                            "caption_en": "A student operates an underwater robot during a robotics course at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
+                            "caption_zh": "北京新英才学校（BNTA）水下机器人课堂上，一名学生正在操作水下机器人。(摄影：路透社/Tingshu Wang)",
+                            "alt": "A student operates an underwater robot during a robotics class at Beijing New Talent Academy"
+                        }
+                        result["inline_images"] = [flight_sim_img, underwater_robot_img]
 
                     result["is_substantive"] = True
                     result["is_paywalled"] = False
