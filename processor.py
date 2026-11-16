@@ -1549,7 +1549,8 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         item_url = str(item.get("url") or "").strip()
         # 兜底深度穿透：若长正文依然缺失且为合法 URL，最后尝试一次源站深度解构
         is_reuters = "reuters.com" in item_url.lower() or "reutersagency.com" in item_url.lower()
-        needs_art_refresh = (len(raw_art_en) < 600) or raw_art_en.startswith("STORY:") or is_reuters
+        is_bloomberg = "bloomberg.com" in item_url.lower() or "bloomberg.net" in item_url.lower()
+        needs_art_refresh = (len(raw_art_en) < 600) or raw_art_en.startswith("STORY:") or is_reuters or is_bloomberg
         if needs_art_refresh and item_url.startswith("http"):
             try:
                 from article_extractor import ArticleExtractor
@@ -1559,7 +1560,7 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["article_content"] = raw_art_en
                     item["article_content_en"] = raw_art_en
                     item["is_substantive"] = True
-                    if is_reuters:
+                    if is_reuters or is_bloomberg:
                         item["is_paywalled"] = False
                     if ext.get("inline_images"):
                         item["inline_images"] = ext["inline_images"]
@@ -1567,6 +1568,13 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                         item["subheadings"] = ext["subheadings"]
                     if ext.get("cover_image") and not item.get("image_url"):
                         item["image_url"] = ext["cover_image"]
+                if is_bloomberg and ext.get("title"):
+                    item["title"] = ext["title"]
+                    item["title_en"] = ext["title"]
+                if is_bloomberg and ext.get("author") and ext["author"] != "Bloomberg News":
+                    item["author"] = ext["author"]
+                if is_bloomberg and ext.get("cover_image"):
+                    item["image_url"] = ext["cover_image"]
             except Exception:
                 pass
 
@@ -1693,7 +1701,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             curr_content = str(it.get("article_content") or it.get("article_content_en") or "").strip()
             item_url = str(it.get("url") or "").strip()
             is_reuters = "reuters.com" in item_url.lower() or "reutersagency.com" in item_url.lower()
-            needs_full_text = (len(curr_content) < 600) or curr_content.startswith("STORY:") or is_reuters
+            is_bloomberg = "bloomberg.com" in item_url.lower() or "bloomberg.net" in item_url.lower()
+            needs_full_text = (len(curr_content) < 600) or curr_content.startswith("STORY:") or is_reuters or is_bloomberg
             if it.get("category") == "news" and needs_full_text and item_url.startswith("http"):
                 try:
                     from article_extractor import ArticleExtractor
@@ -1702,7 +1711,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         it["article_content"] = ext["full_text"]
                         it["article_content_en"] = ext["full_text"]
                         it["is_substantive"] = True
-                        if is_reuters:
+                        if is_reuters or is_bloomberg:
                             it["is_paywalled"] = False
                         if ext.get("inline_images"):
                             it["inline_images"] = ext["inline_images"]
@@ -1711,6 +1720,13 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         if ext.get("cover_image") and not it.get("image_url"):
                             it["image_url"] = ext["cover_image"]
                         print(f"  ✨ [processor] 成功穿透抓取源站长文 ({len(ext['full_text'])} 字): {it.get('title', '')[:40]}")
+                    if is_bloomberg and ext.get("title"):
+                        it["title"] = ext["title"]
+                        it["title_en"] = ext["title"]
+                    if is_bloomberg and ext.get("author") and ext["author"] != "Bloomberg News":
+                        it["author"] = ext["author"]
+                    if is_bloomberg and ext.get("cover_image"):
+                        it["image_url"] = ext["cover_image"]
                 except Exception:
                     pass
 

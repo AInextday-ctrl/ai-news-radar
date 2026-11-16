@@ -917,6 +917,14 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         meta_title = f"{cut}…{brand_suffix}"
     iso_published = parse_iso_date(item.get("published_at") or item.get("raw_published_at") or item.get("date"))
 
+    author_name = item.get("author") or ""
+    if author_name and author_name.lower() in ["web", "none", "unknown"]:
+        author_name = ""
+    author_byline_html = ""
+    if author_name:
+        author_prefix = "记者 / 供稿: " if is_zh else "By "
+        author_byline_html = f'<div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>{author_prefix}{escape(author_name)}</span></div>'
+
     bullets_html = ""
     if fact_bullets:
         formatted_items = []
@@ -958,8 +966,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     full_coverage_html = ""
     full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content_en") or item.get("article_content") or item.get("original_content"))) or "").strip()
     is_reuters = "reuters" in (item.get("source") or "").lower() or "reuters.com" in (item.get("url") or "").lower()
-    is_paywalled = bool((not is_reuters and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
-    if is_reuters:
+    is_bloomberg = "bloomberg" in (item.get("source") or "").lower() or "bloomberg.com" in (item.get("url") or "").lower()
+    is_paywalled = bool((not is_reuters and not (is_bloomberg and item.get("is_substantive")) and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "wsj", "the information"]))
+    if is_reuters or (is_bloomberg and (item.get("is_substantive") or len(full_text) >= 200)):
         is_paywalled = False
         if len(full_text) >= 200:
             item["is_substantive"] = True
@@ -1320,6 +1329,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           {escape(title)}
         </h1>
+        {author_byline_html}
 
         <!-- CTA & Social Share Capsule Bar -->
         <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">

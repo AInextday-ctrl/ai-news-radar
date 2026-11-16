@@ -1221,10 +1221,53 @@ def load_existing_items() -> list:
                     if real_s:
                         it["source"] = real_s
                         it["author"] = real_s
+                    # 若解析还原为 Bloomberg 彭博社，立即同步获取其源站真实官方标题与记者署名
+                    if "bloomberg.com" in real_u.lower():
+                        try:
+                            from crawlers.bloomberg_crawler import crawl_bloomberg
+                            b_data = crawl_bloomberg(real_u, title=it.get("title", ""))
+                            if b_data.get("title"):
+                                it["title"] = b_data["title"]
+                                it["title_en"] = b_data["title"]
+                            if b_data.get("author") and b_data["author"] != "Bloomberg News":
+                                it["author"] = b_data["author"]
+                            if b_data.get("cover_image"):
+                                it["image_url"] = b_data["cover_image"]
+                        except Exception:
+                            pass
                 else:
                     continue
             else:
                 continue
+
+        # 6.1 彭博社 (Bloomberg) 官方真实标题、署名记者与 bwbx 官方高清配图保真机制
+        if "bloomberg.com" in u.lower() or "bloomberg.net" in u.lower():
+            t_curr = it.get("title", "")
+            needs_b_fix = (
+                ("(" in t_curr and "bloomberg" in t_curr.lower()) or
+                not it.get("image_url") or
+                "unsplash.com" in str(it.get("image_url", "")) or
+                not it.get("paragraphs")
+            )
+            if needs_b_fix:
+                try:
+                    from crawlers.bloomberg_crawler import crawl_bloomberg
+                    b_data = crawl_bloomberg(u, title=t_curr)
+                    if b_data.get("title"):
+                        it["title"] = b_data["title"]
+                        it["title_en"] = b_data["title"]
+                    if b_data.get("author") and b_data["author"] != "Bloomberg News":
+                        it["author"] = b_data["author"]
+                    if b_data.get("cover_image"):
+                        it["image_url"] = b_data["cover_image"]
+                    if b_data.get("paragraphs") and len(it.get("paragraphs", [])) < len(b_data["paragraphs"]):
+                        it["paragraphs"] = b_data["paragraphs"]
+                        it["article_content"] = b_data["full_text"]
+                        it["article_content_en"] = b_data["full_text"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                except Exception:
+                    pass
 
         # 7. 清洗社交互动指标 (阅读量 views、点赞 likes、评论 comments、转发 retweets，坚决不捏造虚假数据)
         metrics = it.get("metrics")

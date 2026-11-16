@@ -421,24 +421,17 @@ class ArticleExtractor:
             return []
 
     @classmethod
-    def _extract_bloomberg(cls, html_text: str) -> List[str]:
-        """彭博社 (Bloomberg) 专属单一抓取器"""
-        paras = cls._extract_from_json_ld(html_text)
-        if len(paras) < 3:
-            for pat in [
-                r'class="[^"]*body-copy[^"]*"[^>]*>(.*?)</div>',
-                r'class="[^"]*article-body[^"]*"[^>]*>(.*?)</div>'
-            ]:
-                m = re.search(pat, html_text, re.DOTALL | re.I)
-                if m:
-                    raw_p = re.findall(r'<p[^>]*>(.*?)</p>', m.group(1), re.DOTALL | re.I)
-                    for p in raw_p:
-                        cp = cls._clean_paragraph(p)
-                        if cp and cp not in paras:
-                            paras.append(cp)
-                    if paras:
-                        break
-        return paras
+    def _extract_bloomberg(cls, html_text: str, url: str = "") -> List[str]:
+        """
+        彭博社 (Bloomberg) 专属单一抓取器：
+        全面路由至独立隔离的 crawlers.bloomberg_crawler 专属模块。
+        """
+        try:
+            from crawlers.bloomberg_crawler import crawl_bloomberg
+            data = crawl_bloomberg(url=url, html_text=html_text)
+            return data.get("paragraphs", [])
+        except Exception:
+            return []
 
     @classmethod
     def _extract_techreview(cls, html_text: str) -> List[str]:
@@ -696,6 +689,16 @@ class ArticleExtractor:
                 reuters_data = crawl_reuters(url, html_text=html_text)
                 if reuters_data.get("is_substantive") or reuters_data.get("paras_count", 0) >= 3:
                     result.update(reuters_data)
+                    return result
+            except Exception:
+                pass
+
+        if "bloomberg.com" in domain or "bloomberg.net" in domain:
+            try:
+                from crawlers.bloomberg_crawler import crawl_bloomberg
+                bloomberg_data = crawl_bloomberg(url, html_text=html_text)
+                if bloomberg_data.get("is_substantive") or bloomberg_data.get("paras_count", 0) >= 1 or bloomberg_data.get("title"):
+                    result.update(bloomberg_data)
                     return result
             except Exception:
                 pass
