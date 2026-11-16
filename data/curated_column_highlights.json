@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 19:20:22 UTC",
+  "generated_at": "2026-11-16 19:36:16 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 19:20:23 UTC",
+      "updated_at": "2026-11-16 19:36:16 UTC",
       "headline_item": {
-        "id": "b67c7a2d1bb78cad",
+        "id": "fa4809fd5f0150cc",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "纳德拉谈AI时代软件工程范式转型",
-        "title_en": "Q&A with Satya Nadella on code verification becoming more important as code generation gets cheap, Microsoft's voluntary exit offers, decision models, and more (Gergely Orosz/The Pragmatic Engineer)",
-        "source": "The Pragmatic Engineer",
-        "published_at": "2026-11-16T19:15:09+00:00",
-        "url": "https://newsletter.pragmaticengineer.com/p/software-engineering-after-code-becomes",
-        "event_summary_zh": "微软CEO纳德拉指出，AI代码生成成本趋零后，验证环节成为核心竞争力，未来工程化将转向“软件工厂”模式",
-        "event_summary_en": "Microsoft CEO Satya Nadella asserts that as marginal costs of code generation approach zero, software development difficulty shifts from writing to automated verification and compliance. Microsoft is retooling internal workflows, including Windows development, into 'software factories,' urging engineers to evolve into architects of system specifications and safety monitoring.",
+        "title_zh": "OpenAI新模型GPT-6 Astra破解粒子物理难题",
+        "title_en": "OpenAI's GPT-6 Astra tackles the Standard Model's toughest math problem on a lattice",
+        "source": "THE DECODER",
+        "published_at": "2026-11-16T19:19:56+00:00",
+        "url": "https://the-decoder.com/openais-gpt-6-astra-tackles-the-standard-models-toughest-math-problem-on-a-lattice/",
+        "event_summary_zh": "OpenAI的研究员利用GPT-6 Astra构建并验证了粒子物理标准模型中困扰学界25年的手征费米子相位难题",
+        "event_summary_en": "Nathaniel Craig, a physics professor at UCSB and visiting scientist at OpenAI, utilized GPT-6 Astra to resolve a 25-year-old phase-setting problem in lattice gauge theory within the Standard Model of particle physics. The model successfully constructed and validated a formal proof, effectively neutralizing the 'ghost particle' interference that previously prevented realistic simulations of the weak force on lattices.",
         "core_facts_zh": [
-          "【核心事件】萨提亚·纳德拉（微软CEO）在软件开发范式研讨场合：强调代码验证重要性，倡导“软件工厂”架构，审慎看待初级工程师招聘放缓",
-          "【起因与机理】AI模型生成能力爆发导致开发门槛降低，验证成本与风险管理上升",
-          "【关键数据与实测】• Microsoft’s acquisition of GitHub: https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition。",
-          "【行业影响与走向】微软针对初级岗位招聘放缓及AI替代焦虑释放管理层信号。"
+          "【核心事件】Nathaniel Craig（加州大学圣塔芭芭拉分校教授/OpenAI访问科学家）在OpenAI官方研究博客与预印本平台：通过GPT-6 Astra构建并证明了粒子物理中关于格点重叠费米子的相位难题",
+          "【起因与机理】旨在解决长达25年的物理理论卡点，实现标准模型在格点上的全量模拟",
+          "【关键技术规格】GPT-6 Astra在粒子物理格点场论中构建并证明了重叠费米子的相位解决方案。",
+          "【行业影响与走向】影响趋势：继Navier-Stokes难题后，AI在数学与物理基础科研领域的严谨证明能力已达到顶尖水平。"
         ],
         "core_facts_en": [
-          "[Core Event] Satya Nadella, CEO of Microsoft: Emphasizing verification; advocating 'software factory' model; advising on engineering career evolution",
-          "[Root Cause & Mechanism] Generative AI commoditizing code output while increasing need for systematic validation",
-          "[Key Metrics] Many companies that switch to turbopuffer are cutting their search bills by 50% or more and getting much faster results.",
-          "[Industry Impact & Outlook] Leadership perspective on hiring slowdown and AI-driven career anxiety."
+          "[Core Event] Nathaniel Craig (UCSB Professor / OpenAI Visiting Scientist): Used GPT-6 Astra to construct and prove a solution for the 25-year-old lattice overlap fermion phase problem",
+          "[Root Cause & Mechanism] To overcome theoretical bottlenecks in simulating the Standard Model on a lattice",
+          "[Key Technical Spec] Core breakthrough: GPT-6 Astra constructed and proved a solution for the overlap fermion phase problem in lattice field theory.",
+          "[Key Position & Outlook] Strategic outlook: AI now demonstrates elite-level rigorous proving capabilities in foundational mathematics and physics, following the Navier-Stokes milestone."
         ],
-        "industry_impact_zh": "在AI驱动的开发范式中，软件资产的价值锚点已从“生产力”转向“确定性”。纳德拉此举旨在确立GitHub Copilot在企业级代码治理生态中的话语权，防御Cursor等专注交付体验的初创企业对开发者工作流的蚕食。",
-        "industry_impact_en": "In the AI-driven paradigm, the value anchor for software assets shifts from productivity to determinism. Nadella’s strategy aims to solidify GitHub Copilot's dominance in enterprise code governance, defensively insulating Microsoft from disruptive developer-experience-focused startups like Cursor."
+        "industry_impact_zh": "AI在基础科学领域的范式转移已从单纯的数据模式识别转向严谨的数学逻辑推演，证明了前沿模型在处理具有高度复杂约束条件的符号逻辑体系时已具备超越人类学者的推理深度。该成果预示着AI将深度介入计算物理与高能物理的基础理论开发，未来将大幅缩短从理论假设到复杂系统数值模拟的验证周期，甚至重构科研的工业化生产流程。",
+        "industry_impact_en": "The paradigm shift in AI-driven science is moving from pattern recognition to rigorous logical derivation, proving that frontier models can navigate highly constrained symbolic systems with human-surpassing reasoning depth. This breakthrough marks the transition of AI into the core of theoretical high-energy physics, promising to collapse the verification cycles between hypothesis and complex numerical simulation while industrializing fundamental research."
       },
       "headlines": [
+        {
+          "id": "fa4809fd5f0150cc",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "OpenAI新模型GPT-6 Astra破解粒子物理难题",
+          "title_en": "OpenAI's GPT-6 Astra tackles the Standard Model's toughest math problem on a lattice",
+          "source": "THE DECODER",
+          "published_at": "2026-11-16T19:19:56+00:00",
+          "url": "https://the-decoder.com/openais-gpt-6-astra-tackles-the-standard-models-toughest-math-problem-on-a-lattice/",
+          "event_summary_zh": "OpenAI的研究员利用GPT-6 Astra构建并验证了粒子物理标准模型中困扰学界25年的手征费米子相位难题",
+          "event_summary_en": "Nathaniel Craig, a physics professor at UCSB and visiting scientist at OpenAI, utilized GPT-6 Astra to resolve a 25-year-old phase-setting problem in lattice gauge theory within the Standard Model of particle physics. The model successfully constructed and validated a formal proof, effectively neutralizing the 'ghost particle' interference that previously prevented realistic simulations of the weak force on lattices.",
+          "core_facts_zh": [
+            "【核心事件】Nathaniel Craig（加州大学圣塔芭芭拉分校教授/OpenAI访问科学家）在OpenAI官方研究博客与预印本平台：通过GPT-6 Astra构建并证明了粒子物理中关于格点重叠费米子的相位难题",
+            "【起因与机理】旨在解决长达25年的物理理论卡点，实现标准模型在格点上的全量模拟",
+            "【关键技术规格】GPT-6 Astra在粒子物理格点场论中构建并证明了重叠费米子的相位解决方案。",
+            "【行业影响与走向】影响趋势：继Navier-Stokes难题后，AI在数学与物理基础科研领域的严谨证明能力已达到顶尖水平。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nathaniel Craig (UCSB Professor / OpenAI Visiting Scientist): Used GPT-6 Astra to construct and prove a solution for the 25-year-old lattice overlap fermion phase problem",
+            "[Root Cause & Mechanism] To overcome theoretical bottlenecks in simulating the Standard Model on a lattice",
+            "[Key Technical Spec] Core breakthrough: GPT-6 Astra constructed and proved a solution for the overlap fermion phase problem in lattice field theory.",
+            "[Key Position & Outlook] Strategic outlook: AI now demonstrates elite-level rigorous proving capabilities in foundational mathematics and physics, following the Navier-Stokes milestone."
+          ],
+          "industry_impact_zh": "AI在基础科学领域的范式转移已从单纯的数据模式识别转向严谨的数学逻辑推演，证明了前沿模型在处理具有高度复杂约束条件的符号逻辑体系时已具备超越人类学者的推理深度。该成果预示着AI将深度介入计算物理与高能物理的基础理论开发，未来将大幅缩短从理论假设到复杂系统数值模拟的验证周期，甚至重构科研的工业化生产流程。",
+          "industry_impact_en": "The paradigm shift in AI-driven science is moving from pattern recognition to rigorous logical derivation, proving that frontier models can navigate highly constrained symbolic systems with human-surpassing reasoning depth. This breakthrough marks the transition of AI into the core of theoretical high-energy physics, promising to collapse the verification cycles between hypothesis and complex numerical simulation while industrializing fundamental research."
+        },
         {
           "id": "b67c7a2d1bb78cad",
           "tag_zh": "📰 业界动态",
@@ -83,87 +109,61 @@
           ],
           "industry_impact_zh": "此案标志着监管重心从模型训练转向“部署合规性”，即强制要求AI开发者为模型赋予实体的交互行为承担法律责任。若法院判决支持总检察长，将迫使所有大模型厂商在开放模型实验场（如Hugging Face）部署时，必须构建严格的沙箱隔离与实时审计机制，这将极大增加开源与测试阶段的合规成本。",
           "industry_impact_en": "This case signifies a regulatory shift toward 'deployment compliance,' mandating that AI developers accept legal liability for the actions of autonomous agents in public environments. A successful ruling will necessitate strict sandbox isolation and real-time auditing for all developers utilizing platforms like Hugging Face, significantly escalating operational costs for open model testing."
-        },
-        {
-          "id": "4e968fc1adce61f7",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "月之暗面调整战略，Kimi转型科研领域",
-          "title_en": "Moonshot AI pivots Kimi models from coding to science as benchmark gains flatten",
-          "source": "THE DECODER",
-          "published_at": "2026-11-16T18:52:55+00:00",
-          "url": "https://the-decoder.com/moonshot-ai-pivots-kimi-models-from-coding-to-science-as-benchmark-gains-flatten/",
-          "event_summary_zh": "Moonshot AI（月之暗面）鉴于编程领域收益趋于平缓，正式将Kimi模型战略重心转向生物、化学及制药科研场景",
-          "event_summary_en": "Moonshot AI is shifting the strategic focus of its Kimi language models from coding to biology, chemistry, and pharmaceutical research due to diminishing returns in software development benchmarks. The model is currently integrated into DP Technology's BioMaster assistant, where it has demonstrated high efficiency in gene data processing, though experts remain cautious about AI's capacity for independent scientific breakthroughs.",
-          "core_facts_zh": [
-            "【核心事件】Moonshot AI（月之暗面）；DP Technology：将Kimi模型重心调整至生物医药领域，并发布初步性能测试数据",
-            "【起因与机理】代码生成领域性能边际效应递减，追求更具价值的科学计算应用",
-            "【关键数据与实测】技术细节：已在BioMaster中进行基因数据分析验证，处理耗时从数小时压缩至90分钟。",
-            "【各方立场与态度】AI在科学发现中的角色定位仍处于辅助阶段，尚未触及独立破解开放性难题。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Moonshot AI; DP Technology: Refocused Kimi models on bio-pharma, presenting performance data in genomic analysis.",
-            "[Root Cause & Mechanism] Diminishing marginal returns in coding tasks and the pursuit of high-value scientific computation.",
-            "[Key Technical Spec] Core action: Refocusing Kimi model strategy from coding to life sciences.",
-            "[Scope & Next Steps] Industry outlook: AI role in scientific discovery remains auxiliary; independent resolution of open conjectures remains elusive."
-          ],
-          "industry_impact_zh": "这一战略转向反映了通用大模型在编程等逻辑类任务上遭遇基准测试平滑（Plateau）的现状。从代码迁移到生命科学，意在通过AI在化学空间（Chemical Space）的探索效率换取更高的商业溢价，但这要求模型在长周期高熵值数据处理上具备远高于当前代码任务的精准度与鲁棒性。",
-          "industry_impact_en": "This strategic pivot reflects the plateau currently observed in LLM performance on logical tasks like coding. By shifting to life sciences, Moonshot AI aims to capture higher commercial premiums through AI-driven explorations of chemical space, though this necessitates significantly higher precision and robustness in long-cycle, high-entropy data processing compared to software development."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 19:20:23 UTC",
+      "updated_at": "2026-11-16 19:36:16 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
-      "url": "https://x.com/AravSrinivas/status/2122395946218913954",
-      "published_at": "2026-11-16T18:26:40+00:00",
-      "quote_zh": "Slack 非常棒，所有 Perplexity 产品都是使用 Slackbots 构建和测试的。 Perplexity 目前拥有业界最好的 Slack 代理（计算机），我们将把它迁移到持久的 Teammate，您可以向其分配任何任务。",
-      "quote_en": "Slack is awesome and all Perplexity products are built and dogfooded with Slackbots. Perplexity has the best  Slack agent (Computer) in the industry right now, and we will be migrating that to a persistent Teammate that you can assign any task to.",
-      "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-      "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+      "url": "https://x.com/AravSrinivas/status/2122411451092807926",
+      "published_at": "2026-11-16T19:28:17+00:00",
+      "quote_zh": "发布 Perplexity Monitor：一个 API，可让您跟踪任何事件或主题或网页更改，并设置 Webhook 来更新您的信息。 1000 次运行费用为 1 美元。",
+      "quote_en": "Announcing Perplexity Monitor: an API that lets you track any event or topic or changes to webpages and set up webhooks to update you. Costs a $1 for 1000 runs.",
+      "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
+      "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "2.5k",
-        "likes": "17",
-        "comments": "6",
-        "retweets": "0",
+        "views": "1.7k",
+        "likes": "26",
+        "comments": "5",
+        "retweets": "1",
         "platform": "x",
         "verified": true
       },
       "titans": [
         {
-          "id": "9f4ec77fd4f7a047",
+          "id": "f9e387f59ecf383a",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/AravSrinivas",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "Slack 非常棒，所有 Perplexity 产品都是使用 Slackbots 构建和测试的。 Perplexity 目前拥有业界最好的 Slack 代理（计算机），我们将把它迁移到持久的 Teammate，您可以向其分配任何任务。",
-          "event_context_en": "Slack is awesome and all Perplexity products are built and dogfooded with Slackbots. Perplexity has the best  Slack agen",
-          "quote_zh": "Slack 非常棒，所有 Perplexity 产品都是使用 Slackbots 构建和测试的。 Perplexity 目前拥有业界最好的 Slack 代理（计算机），我们将把它迁移到持久的 Teammate，您可以向其分配任何任务。",
-          "quote_en": "Slack is awesome and all Perplexity products are built and dogfooded with Slackbots. Perplexity has the best  Slack agent (Computer) in the industry right now, and we will be migrating that to a persistent Teammate that you can assign any task to.",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "Aravind Srinivas",
+          "topic_en": "Aravind Srinivas on ",
+          "event_context_zh": "发布 Perplexity Monitor：一个 API，可让您跟踪任何事件或主题或网页更改，并设置 Webhook 来更新您的信息。 1000 次运行费用为 1 美元。",
+          "event_context_en": "Announcing Perplexity Monitor: an API that lets you track any event or topic or changes to webpages and set up webhooks ",
+          "quote_zh": "发布 Perplexity Monitor：一个 API，可让您跟踪任何事件或主题或网页更改，并设置 Webhook 来更新您的信息。 1000 次运行费用为 1 美元。",
+          "quote_en": "Announcing Perplexity Monitor: an API that lets you track any event or topic or changes to webpages and set up webhooks to update you. Costs a $1 for 1000 runs.",
+          "thesis_zh": "深入探讨Aravind Srinivas的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Aravind Srinivas on , highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "2.5k",
-            "likes": "17",
-            "comments": "6",
-            "retweets": "0",
+            "views": "1.7k",
+            "likes": "26",
+            "comments": "5",
+            "retweets": "1",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-16T18:26:40+00:00",
-          "url": "https://x.com/AravSrinivas/status/2122395946218913954"
+          "published_at": "2026-11-16T19:28:17+00:00",
+          "url": "https://x.com/AravSrinivas/status/2122411451092807926"
         },
         {
           "id": "c667435ab4716fe8",
@@ -194,6 +194,34 @@
           "url": "https://x.com/OpenAI/status/2122380010287960095"
         },
         {
+          "id": "91f9011abeacb061",
+          "name": "NVIDIA AI",
+          "handle": "@NVIDIAAI",
+          "role_zh": "NVIDIA AI 研究与开发者生态",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/nvidia",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "@HuggingFace 上 NVIDIA Cosmos 的下载量已达 2000 万次！ 🎉 对于使用开放世界模型构建机器人、自动驾驶汽车和视觉 AI 代理的开发人员和研究人员：感谢您与我们进行实验、分享反馈和构建。告诉我们你是什么",
+          "event_context_en": "20 million downloads for NVIDIA Cosmos on @HuggingFace! 🎉\n\nTo the developers and researchers building robots, autonomous",
+          "quote_zh": "@HuggingFace 上 NVIDIA Cosmos 的下载量已达 2000 万次！ 🎉\n\n对于使用开放世界模型构建机器人、自动驾驶车辆和视觉 AI 代理的开发人员和研究人员：感谢您与我们进行实验、分享反馈和构建。\n\n告诉我们您下一步将使用 Cosmos 构建什么！ 💚",
+          "quote_en": "20 million downloads for NVIDIA Cosmos on @HuggingFace! 🎉\n\nTo the developers and researchers building robots, autonomous vehicles and vision AI agents with open world models: thank you for experimenting, sharing feedback and building with us.\n\nTell us what you're building with Cosmos next! 💚",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "2.3k",
+            "likes": "36",
+            "comments": "11",
+            "retweets": "5",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-16T19:24:46+00:00",
+          "url": "https://x.com/NVIDIAAI/status/2122410568607035403"
+        },
+        {
           "id": "c74cad69bc11f938",
           "name": "Hugging Face",
           "handle": "@huggingface",
@@ -220,34 +248,6 @@
           },
           "published_at": "2026-11-16T18:24:49+00:00",
           "url": "https://x.com/huggingface/status/2122395481812951408"
-        },
-        {
-          "id": "352b436a49420117",
-          "name": "NVIDIA AI",
-          "handle": "@NVIDIAAI",
-          "role_zh": "NVIDIA AI 研究与开发者生态",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/nvidia",
-          "topic_zh": "AI 编程范式变革",
-          "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "感器接下来会看到什么，所有这些都是实时的。\n\n阅读论文并获取代码➡️",
-          "event_context_en": "See a recorded driving scene from a viewpoint the vehicle never captured.\n\nNVIDIA Research’s LidarVerse is the first mod",
-          "quote_zh": "从车辆从未捕捉到的视角查看录制的驾驶场景。\n\nNVIDIA Research 的 LidarVerse 是第一个模拟不同 LiDAR 传感器扫描的模型，该传感器使用激光捕获 3D 环境。它可以从新的视点重新创建场景，从地图生成场景，并预测传感器接下来会看到什么，所有这些都是实时的。\n\n阅读论文并获取代码➡️",
-          "quote_en": "See a recorded driving scene from a viewpoint the vehicle never captured.\n\nNVIDIA Research’s LidarVerse is the first model to simulate scans for different LiDAR sensors, which use lasers to capture surroundings in 3D. It can recreate scenes from new viewpoints, generate scenes from maps, and predict what a sensor will see next, all in real time.\n\nRead the paper and get the code ➡️ https://t.co/mvaGUVMLjP",
-          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "3.0k",
-            "likes": "30",
-            "comments": "3",
-            "retweets": "3",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-16T17:40:22+00:00",
-          "url": "https://x.com/NVIDIAAI/status/2122384294845071648"
         },
         {
           "id": "1699d040a3444617",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 19:20:23 UTC",
+      "updated_at": "2026-11-16 19:36:16 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,559)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,564)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,559 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,564 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
