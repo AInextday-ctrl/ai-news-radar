@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 20:21:18 UTC",
+  "generated_at": "2026-11-16 20:36:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 20:21:18 UTC",
+      "updated_at": "2026-11-16 20:36:04 UTC",
       "headline_item": {
-        "id": "a8a2bbd16b5232cf",
-        "tag_zh": "⚡ 职场提效",
-        "tag_en": "⚡ Workplace AI",
-        "title_zh": "谷歌监测到全自动化漏洞挖掘与攻击工具",
-        "title_en": "Google warns that fully automated cyberattacks have arrived and will get worse fast",
-        "source": "THE DECODER",
-        "published_at": "2026-11-16T19:42:13+00:00",
-        "url": "https://the-decoder.com/google-warns-that-fully-automated-cyberattacks-have-arrived-and-will-get-worse-fast/",
-        "event_summary_zh": "谷歌威胁情报小组发现攻击者利用AI框架实现从漏洞发现到执行的全自动化闭环攻击",
-        "event_summary_en": "Google's Threat Intelligence Group (GTIG) has identified the first fully autonomous attack system, 'exploit_agent,' which leverages LLMs to identify vulnerabilities, develop exploits, and execute them without human intervention. While these attacks currently leave forensic traces, the transition to end-to-end automated exploitation marks a critical turning point in AI-driven cybersecurity warfare.",
+        "id": "673307a870575e25",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "Constellation Energy：核能将成数据中心基石",
+        "title_en": "Big Nuclear isn’t worried about the Democrats stopping data centers",
+        "source": "The Verge AI",
+        "published_at": "2026-11-16T20:29:37+00:00",
+        "url": "https://www.theverge.com/science/1034694/nuclear-energy-constellation-earnings-data-centers-democrats",
+        "event_summary_zh": "Constellation Energy首席执行官Joe Dominguez表示，核能已获两党共识，是支撑数据中心发展的核心动力，政经阻力有限",
+        "event_summary_en": "Constellation Energy CEO Joe Dominguez stated in the Q3 earnings call that nuclear power enjoys bipartisan support as a critical, carbon-free energy source for data centers. The company is positioning nuclear energy as the strategic infrastructure for AI compute clusters through major power supply agreements with Microsoft, Amazon, and Google.",
         "core_facts_zh": [
-          "【核心事件】谷歌威胁情报小组（GTIG）在云端服务器及被攻击目标（法国媒体与教育网站）：监测到名为“exploit_agent”的自动化漏洞利用框架",
-          "【起因与机理】攻击者试图通过AI缩短从补丁分析到漏洞利用的时间窗口",
-          "【关键技术规格】发现全自动化漏洞挖掘与利用框架“exploit_agent。",
-          "【涉及范围与推进】攻击呈现高频、广覆盖特征，目前留存较多取证痕迹。"
+          "【核心事件】Constellation Energy首席执行官Joe Dominguez在公司第三季度财报沟通会：强调核能在数据中心供电中的不可替代性及长期政治稳定性",
+          "【起因与机理】AI算力爆炸性增长导致电力短缺，促使能源供给模式向低碳化、高负荷方向转型",
+          "【关键技术规格】核电在AI算力产业链中被重新定位为核心基础设施。",
+          "【各方立场与态度】能源缺口已成政经议题的核心博弈点。"
         ],
         "core_facts_en": [
-          "[Core Event] Google Threat Intelligence Group (GTIG): Detected 'exploit_agent' framework for autonomous vulnerability exploitation",
-          "[Root Cause & Mechanism] Attackers aiming to minimize the time gap between patch analysis and exploit deployment",
-          "[Key Technical Spec] Discovery of 'exploit_agent' autonomous attack framework.",
-          "[Key Position & Outlook] High-speed, large-scale attacks with visible forensic trails."
+          "[Core Event] Joe Dominguez, CEO of Constellation Energy (Q3 earnings call): Asserting the indispensability of nuclear power for data center operations and its political resilience",
+          "[Root Cause & Mechanism] AI compute demand surge driving shifts in energy procurement toward high-load, low-carbon baseloads",
+          "[Key Metrics] And the Department of Energy this month approved a $5 billion loan to Constellation, which the company will use to upgrade its existing nuclear fleet.",
+          "[Key Position & Outlook] Energy shortfall as the focal point of political-economic negotiation."
         ],
-        "industry_impact_zh": "攻击方正利用大模型实现网络攻击的工业化与规模化，网络防御体系将从传统的特征匹配转向基于语义行为异常的实时检测。这一趋势将迫使云服务商与软件厂商将AI防御模型直接集成至CI/CD流程中，作为应对非对称攻防的必要基础设施。",
-        "industry_impact_en": "Attackers are industrializing cyberattacks through LLMs, necessitating a shift in defense from signature-based detection to semantic behavioral analysis. Organizations must now integrate AI-driven defense models directly into CI/CD pipelines to counter these asymmetric, high-speed automated threats."
+        "industry_impact_zh": "AI算力的能耗瓶颈正在重塑电力市场格局，核电已从“存量资产”转化为“AI溢价资产”。随着大模型训练对连续性、高负荷能源的需求激增，电网侧的合规性博弈将转向“电力准入权”而非“数据中心开发权”。",
+        "industry_impact_en": "AI compute constraints are reshaping energy markets, effectively rebranding nuclear power from a stagnant asset to an 'AI-premium' asset. As training demands require continuous, high-load energy, regulatory focus will shift toward 'power grid access' rather than the mere construction of data centers."
       },
       "headlines": [
+        {
+          "id": "673307a870575e25",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Constellation Energy：核能将成数据中心基石",
+          "title_en": "Big Nuclear isn’t worried about the Democrats stopping data centers",
+          "source": "The Verge AI",
+          "published_at": "2026-11-16T20:29:37+00:00",
+          "url": "https://www.theverge.com/science/1034694/nuclear-energy-constellation-earnings-data-centers-democrats",
+          "event_summary_zh": "Constellation Energy首席执行官Joe Dominguez表示，核能已获两党共识，是支撑数据中心发展的核心动力，政经阻力有限",
+          "event_summary_en": "Constellation Energy CEO Joe Dominguez stated in the Q3 earnings call that nuclear power enjoys bipartisan support as a critical, carbon-free energy source for data centers. The company is positioning nuclear energy as the strategic infrastructure for AI compute clusters through major power supply agreements with Microsoft, Amazon, and Google.",
+          "core_facts_zh": [
+            "【核心事件】Constellation Energy首席执行官Joe Dominguez在公司第三季度财报沟通会：强调核能在数据中心供电中的不可替代性及长期政治稳定性",
+            "【起因与机理】AI算力爆炸性增长导致电力短缺，促使能源供给模式向低碳化、高负荷方向转型",
+            "【关键技术规格】核电在AI算力产业链中被重新定位为核心基础设施。",
+            "【各方立场与态度】能源缺口已成政经议题的核心博弈点。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Joe Dominguez, CEO of Constellation Energy (Q3 earnings call): Asserting the indispensability of nuclear power for data center operations and its political resilience",
+            "[Root Cause & Mechanism] AI compute demand surge driving shifts in energy procurement toward high-load, low-carbon baseloads",
+            "[Key Metrics] And the Department of Energy this month approved a $5 billion loan to Constellation, which the company will use to upgrade its existing nuclear fleet.",
+            "[Key Position & Outlook] Energy shortfall as the focal point of political-economic negotiation."
+          ],
+          "industry_impact_zh": "AI算力的能耗瓶颈正在重塑电力市场格局，核电已从“存量资产”转化为“AI溢价资产”。随着大模型训练对连续性、高负荷能源的需求激增，电网侧的合规性博弈将转向“电力准入权”而非“数据中心开发权”。",
+          "industry_impact_en": "AI compute constraints are reshaping energy markets, effectively rebranding nuclear power from a stagnant asset to an 'AI-premium' asset. As training demands require continuous, high-load energy, regulatory focus will shift toward 'power grid access' rather than the mere construction of data centers."
+        },
+        {
+          "id": "f4ce3de6483dbe34",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美多家主流银行爆发技术故障",
+          "title_en": "Customers of BofA, Chase, Wells Fargo, and other US banks report online service issues; Chase says a technical issue, not a cyber issue, is causing delays (Associated Press)",
+          "source": "Associated Press",
+          "published_at": "2026-11-16T20:20:02+00:00",
+          "url": "https://apnews.com/article/bank-outage-chase-wells-fargo-truist-50fee2693c22f597fa6ca51a97ef2cda",
+          "event_summary_zh": "Bank of America、Chase等银行遭遇线上服务故障，Chase证实为内部技术Bug而非网络攻击",
+          "event_summary_en": "Major U.S. banks, including Bank of America, Chase, and Wells Fargo, experienced widespread online account access issues and transaction delays. Chase has officially ruled out cyberattacks, attributing the disruption to internal technical bugs, while coordinating with Early Warning Services to address impacts on the Zelle payment network.",
+          "core_facts_zh": [
+            "【核心事件】美国银行、大通银行、富国银行、合众银行、Truist在美国金融数字化结算基础设施：线上账户访问故障及Zelle支付延迟",
+            "【起因与机理】金融IT架构的复杂性与系统高并发压力下的稳定性容错测试",
+            "【核心事实细节】多家金融机构线上服务中断。",
+            "【行业影响与走向】跨行支付协议的耦合依赖性风险。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Bank of America, Chase, Wells Fargo, U.S. Bank, Truist: Online account access failure and Zelle payment latency",
+            "[Root Cause & Mechanism] Complexity of financial IT architecture and stress-testing stability under high concurrency",
+            "[Key Fact Detail] Widespread service outages at multiple financial institutions.",
+            "[Industry Impact & Outlook] Risks associated with coupled dependencies in interbank payment protocols."
+          ],
+          "industry_impact_zh": "金融行业分布式系统的复杂耦合正在放大单点故障的系统性影响。此类故障凸显了在跨行清算协议与高频金融交易环境下，容灾与弹性冗余机制在应对突发软性Bug时的脆弱性。",
+          "industry_impact_en": "The complex coupling of distributed systems in the financial sector is amplifying the systemic impact of single-point failures. Such outages highlight the fragility of disaster recovery and elastic redundancy mechanisms when handling unexpected software bugs in cross-bank clearing protocols and high-frequency financial environments."
+        },
         {
           "id": "a8a2bbd16b5232cf",
           "tag_zh": "⚡ 职场提效",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "攻击方正利用大模型实现网络攻击的工业化与规模化，网络防御体系将从传统的特征匹配转向基于语义行为异常的实时检测。这一趋势将迫使云服务商与软件厂商将AI防御模型直接集成至CI/CD流程中，作为应对非对称攻防的必要基础设施。",
           "industry_impact_en": "Attackers are industrializing cyberattacks through LLMs, necessitating a shift in defense from signature-based detection to semantic behavioral analysis. Organizations must now integrate AI-driven defense models directly into CI/CD pipelines to counter these asymmetric, high-speed automated threats."
-        },
-        {
-          "id": "3a2d2e414cb5af84",
-          "tag_zh": "🎁 算力福利",
-          "tag_en": "🎁 Promos & Credits",
-          "title_zh": "苹果测试Siri AI云端功能每日用量限额",
-          "title_en": "Apple is testing daily usage limits for more complex Siri AI interactions",
-          "source": "The Verge AI",
-          "published_at": "2026-11-16T19:24:40+00:00",
-          "url": "https://www.theverge.com/tech/1034581/apple-intelligence-siri-ai-daily-usage-limits-icloud-subscription",
-          "event_summary_zh": "苹果在iOS 27.3测试版中引入云端AI任务用量限制，并针对专业软件推出付费扩展包",
-          "event_summary_en": "based Siri AI features, including image generation and complex task automation, in the latest 27.3 beta releases. To address cloud compute costs, the company has also launched $49.99 'Intelligence Usage Packs' for its professional creative software suite.",
-          "core_facts_zh": [
-            "【核心事件】苹果公司（Apple Inc.）：对云端AI功能实施配额限制，并推出付费扩展包模式",
-            "【起因与机理】应对大语言模型云端推理带来的高昂算力成本与资源分配",
-            "【关键数据与实测】针对专业创作软件推出49.99美元付费扩展包。",
-            "【各方立场与态度】基础命令保持免费，复杂任务（如生成式图像）纳入管控。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Apple Inc.: Implemented quota limits on cloud-based AI features and introduced paid usage expansion packs",
-            "[Root Cause & Mechanism] To manage high computational costs and resource allocation for cloud-based LLM inference",
-            "[Key Metrics] Introduction of $49.99 paid usage packs for creative pro apps.",
-            "[Key Position & Outlook] Basic commands remain free; complex generative tasks are metered."
-          ],
-          "industry_impact_zh": "苹果正在重新定义消费级AI的计费范式，通过硬件端侧运行与云端配额限制相结合的策略，确保AI服务的经济可持续性。此举不仅能筛选重度用户实现商业化变现，还为苹果后续在全球范围内精细化调度GPU资源提供了合规性与流量控制方案。",
-          "industry_impact_en": "Apple is redefining the billing paradigm for consumer AI by balancing edge computing with strict cloud quotas to ensure economic sustainability. This strategy facilitates monetization from power users while providing a scalable framework for managing global GPU resources and traffic control."
-        },
-        {
-          "id": "cf084ec348016b48",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI发布工具抑制儿童虐待影像生成",
-          "title_en": "OpenAI wants to stop deepfakes from overwhelming child abuse tiplines",
-          "source": "The Verge AI",
-          "published_at": "2026-11-16T19:23:45+00:00",
-          "url": "https://www.theverge.com/policy/1034527/openai-csam-classifier",
-          "event_summary_zh": "OpenAI推出新型分类器，旨在提升检测AI生成的有害儿童影像能力，降低审核积压压力",
-          "event_summary_en": "OpenAI has unveiled a high-precision classifier designed to assist the National Center for Missing and Exploited Children (NCMEC) in identifying AI-generated child sexual abuse material (CSAM). The tool claims a 48% reduction in false positives to mitigate system overload and works in collaboration with the AG Alliance’s AI Task Force to align technical detection with regulatory enforcement.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI；北卡罗来纳州总检察长Jeff Jackson；NCMEC在华盛顿特区新闻发布会：发布AI有害影像分类器，免费提供给专业调查机构",
-            "【起因与机理】应对2025年AI生成的有害影像导致的举报数量指数级暴涨",
-            "【关键数据与实测】该分类器宣称可降低48%的误报率，旨在缓解当前举报系统因海量AI虚假内容导致的系统过载压力，并配合北卡罗来纳州总检察长杰夫·杰克逊（Jeff Jackson）领导的AG联盟AI工作组，构建法律与技术联动的监管合规防线。",
-            "【各方立场与态度】配合AG联盟工作组，强化AI厂商在CSAM领域的执法协同。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI; Attorney General Jeff Jackson; NCMEC (Press briefing in Washington, DC): Launched an AI harmful content classifier for free access to vetted organizations",
-            "[Root Cause & Mechanism] To address the exponential surge in AI-generated harmful reports in 2025",
-            "[Key Metrics] The tool claims a 48% reduction in false positives to mitigate system overload and works in collaboration with the AG Alliance’s AI Task Force to align technical detection with regulatory enforcement.",
-            "[Key Position & Outlook] Collaboration with AG Alliance to strengthen law enforcement alignment."
-          ],
-          "industry_impact_zh": "大模型的安全护栏已成为决定其地缘政治合规权的重要筹码，OpenAI将技术防范手段前置于监管压力，是典型的合规先发战略。面对各地立法进程的加速，AI厂商通过主动共享检测模型与执法协同，实质上是在确立行业技术准则，以防御因CSAM合规争议引发的司法诉讼风险。",
-          "industry_impact_en": "Implementing safety guardrails is now a core strategic lever for AI compliance and geopolitical license. By proactively offering detection models and coordinating with law enforcement, OpenAI is setting industry standards to mitigate legal liability associated with CSAM and evolving global AI regulations."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 20:21:19 UTC",
+      "updated_at": "2026-11-16 20:36:04 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -222,7 +222,7 @@
           "url": "https://x.com/OpenAIDevs/status/2122416315877212394"
         },
         {
-          "id": "aba79ab530fcbc80",
+          "id": "1f80d3f3f842a438",
           "name": "Swyx (Shawn Wang)",
           "handle": "@swyx",
           "role_zh": "AI Engineer Foundation / Latent Space 主理人",
@@ -230,24 +230,24 @@
           "avatar": "https://unavatar.io/x/swyx",
           "topic_zh": "Swyx (Shawn Wang",
           "topic_en": "Swyx (Shawn Wang) on",
-          "event_context_zh": "克莱尔（Clare）是一位非常棒的演讲者，她立即被 AIEWF 接受，她的演讲立即粉碎了它，特别是很难在这条赛道上脱颖而出，因为你正在与世界上一些家喻户晓的名字竞争。将收听此 AWS reInve",
-          "event_context_en": "Clare is an AWESOME speaker, she was an instant accept at AIEWF and her talk instantly crushed it, especially hard to st",
-          "quote_zh": "克莱尔（Clare）是一位非常棒的演讲者，她立即被 AIEWF 接受，她的演讲立即粉碎了它，特别是很难在这条赛道上脱颖而出，因为你正在与世界上一些家喻户晓的名字竞争。\n\n将收听此 AWS reInvent 主题演讲 👀",
-          "quote_en": "Clare is an AWESOME speaker, she was an instant accept at AIEWF and her talk instantly crushed it, especially hard to stand out on this track because you're in competition with some of the biggest household names in the world.\n\nwould tune in for this AWS reInvent keynote 👀 https://t.co/IPEqi1jBMO",
+          "event_context_zh": "尽管 cal 是通过 gmail 发送的，但 gmail 没有 gcal 搜索",
+          "event_context_en": "gmail has no gcal search despite cal is sent via gmail https://t.co/EzdQbPNP6s",
+          "quote_zh": "尽管 cal 是通过 gmail 发送的，但 gmail 没有 gcal 搜索",
+          "quote_en": "gmail has no gcal search despite cal is sent via gmail https://t.co/EzdQbPNP6s",
           "thesis_zh": "深入探讨Swyx (Shawn Wang的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Swyx (Shawn Wang) on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "668",
-            "likes": "6",
-            "comments": "4",
+            "views": "92",
+            "likes": "0",
+            "comments": "0",
             "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-16T19:58:07+00:00",
-          "url": "https://x.com/swyx/status/2122418961107284083"
+          "published_at": "2026-11-16T20:31:01+00:00",
+          "url": "https://x.com/swyx/status/2122427240441131203"
         },
         {
           "id": "91f9011abeacb061",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 20:21:19 UTC",
+      "updated_at": "2026-11-16 20:36:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,566)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,565)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,566 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,565 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
