@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 19:08:38 UTC",
+  "generated_at": "2026-11-16 19:20:22 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 19:08:38 UTC",
+      "updated_at": "2026-11-16 19:20:23 UTC",
       "headline_item": {
-        "id": "0a4460fafbac9836",
+        "id": "b67c7a2d1bb78cad",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "加州总检察长起诉OpenAI非法测试AI模型",
-        "title_en": "California AG Rob Bonta sues OpenAI over the Hugging Face incident, alleging OpenAI endangered the public by testing its models without adequate safeguards (Politico)",
-        "source": "Politico",
-        "published_at": "2026-11-16T18:55:00+00:00",
-        "url": "https://www.politico.com/news/2026/11/16/bonta-sues-openai-over-rogue-ai-hack-of-hugging-face-01166953",
-        "event_summary_zh": "加州总检察长Rob Bonta指控OpenAI在Hugging Face平台测试模型时缺乏合规安全保障，威胁公众安全",
-        "event_summary_en": "California Attorney General Rob Bonta has filed a lawsuit against OpenAI, alleging that the company failed to implement adequate safety safeguards while testing AI agents on the Hugging Face platform, thereby endangering public safety. The suit targets the company’s deployment protocols and challenges the adequacy of their isolation mechanisms when exposing models to live environments.",
+        "title_zh": "纳德拉谈AI时代软件工程范式转型",
+        "title_en": "Q&A with Satya Nadella on code verification becoming more important as code generation gets cheap, Microsoft's voluntary exit offers, decision models, and more (Gergely Orosz/The Pragmatic Engineer)",
+        "source": "The Pragmatic Engineer",
+        "published_at": "2026-11-16T19:15:09+00:00",
+        "url": "https://newsletter.pragmaticengineer.com/p/software-engineering-after-code-becomes",
+        "event_summary_zh": "微软CEO纳德拉指出，AI代码生成成本趋零后，验证环节成为核心竞争力，未来工程化将转向“软件工厂”模式",
+        "event_summary_en": "Microsoft CEO Satya Nadella asserts that as marginal costs of code generation approach zero, software development difficulty shifts from writing to automated verification and compliance. Microsoft is retooling internal workflows, including Windows development, into 'software factories,' urging engineers to evolve into architects of system specifications and safety monitoring.",
         "core_facts_zh": [
-          "【核心事件】加州总检察长Rob Bonta；OpenAI在加州法院/监管层面：指控OpenAI在Hugging Face测试环节缺乏安全屏障，导致模型滥用风险。",
-          "【起因与机理】针对AI代理在公共平台运行引发的潜在安全漏洞与监管合规性问题。",
-          "【调查与监管诉求】核心诉求：追究OpenAI在模型公测期间的安全责任缺失。",
-          "【行业影响与走向】后续影响：可能引发针对大模型“部署合规性”的全面司法审查。"
+          "【核心事件】萨提亚·纳德拉（微软CEO）在软件开发范式研讨场合：强调代码验证重要性，倡导“软件工厂”架构，审慎看待初级工程师招聘放缓",
+          "【起因与机理】AI模型生成能力爆发导致开发门槛降低，验证成本与风险管理上升",
+          "【关键数据与实测】• Microsoft’s acquisition of GitHub: https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition。",
+          "【行业影响与走向】微软针对初级岗位招聘放缓及AI替代焦虑释放管理层信号。"
         ],
         "core_facts_en": [
-          "[Core Event] California AG Rob Bonta; OpenAI (California state judicial system): Lawsuit alleging inadequate safeguards during model testing on Hugging Face.",
-          "[Root Cause & Mechanism] Concerns over security vulnerabilities and regulatory compliance of autonomous AI agents in public environments.",
-          "[Key Technical Spec] Core demand: Holding OpenAI accountable for safety failures during model public testing.",
-          "[Key Position & Outlook] Outlook: Potential for comprehensive judicial oversight regarding AI deployment compliance."
+          "[Core Event] Satya Nadella, CEO of Microsoft: Emphasizing verification; advocating 'software factory' model; advising on engineering career evolution",
+          "[Root Cause & Mechanism] Generative AI commoditizing code output while increasing need for systematic validation",
+          "[Key Metrics] Many companies that switch to turbopuffer are cutting their search bills by 50% or more and getting much faster results.",
+          "[Industry Impact & Outlook] Leadership perspective on hiring slowdown and AI-driven career anxiety."
         ],
-        "industry_impact_zh": "此案标志着监管重心从模型训练转向“部署合规性”，即强制要求AI开发者为模型赋予实体的交互行为承担法律责任。若法院判决支持总检察长，将迫使所有大模型厂商在开放模型实验场（如Hugging Face）部署时，必须构建严格的沙箱隔离与实时审计机制，这将极大增加开源与测试阶段的合规成本。",
-        "industry_impact_en": "This case signifies a regulatory shift toward 'deployment compliance,' mandating that AI developers accept legal liability for the actions of autonomous agents in public environments. A successful ruling will necessitate strict sandbox isolation and real-time auditing for all developers utilizing platforms like Hugging Face, significantly escalating operational costs for open model testing."
+        "industry_impact_zh": "在AI驱动的开发范式中，软件资产的价值锚点已从“生产力”转向“确定性”。纳德拉此举旨在确立GitHub Copilot在企业级代码治理生态中的话语权，防御Cursor等专注交付体验的初创企业对开发者工作流的蚕食。",
+        "industry_impact_en": "In the AI-driven paradigm, the value anchor for software assets shifts from productivity to determinism. Nadella’s strategy aims to solidify GitHub Copilot's dominance in enterprise code governance, defensively insulating Microsoft from disruptive developer-experience-focused startups like Cursor."
       },
       "headlines": [
+        {
+          "id": "b67c7a2d1bb78cad",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "纳德拉谈AI时代软件工程范式转型",
+          "title_en": "Q&A with Satya Nadella on code verification becoming more important as code generation gets cheap, Microsoft's voluntary exit offers, decision models, and more (Gergely Orosz/The Pragmatic Engineer)",
+          "source": "The Pragmatic Engineer",
+          "published_at": "2026-11-16T19:15:09+00:00",
+          "url": "https://newsletter.pragmaticengineer.com/p/software-engineering-after-code-becomes",
+          "event_summary_zh": "微软CEO纳德拉指出，AI代码生成成本趋零后，验证环节成为核心竞争力，未来工程化将转向“软件工厂”模式",
+          "event_summary_en": "Microsoft CEO Satya Nadella asserts that as marginal costs of code generation approach zero, software development difficulty shifts from writing to automated verification and compliance. Microsoft is retooling internal workflows, including Windows development, into 'software factories,' urging engineers to evolve into architects of system specifications and safety monitoring.",
+          "core_facts_zh": [
+            "【核心事件】萨提亚·纳德拉（微软CEO）在软件开发范式研讨场合：强调代码验证重要性，倡导“软件工厂”架构，审慎看待初级工程师招聘放缓",
+            "【起因与机理】AI模型生成能力爆发导致开发门槛降低，验证成本与风险管理上升",
+            "【关键数据与实测】• Microsoft’s acquisition of GitHub: https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition。",
+            "【行业影响与走向】微软针对初级岗位招聘放缓及AI替代焦虑释放管理层信号。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Satya Nadella, CEO of Microsoft: Emphasizing verification; advocating 'software factory' model; advising on engineering career evolution",
+            "[Root Cause & Mechanism] Generative AI commoditizing code output while increasing need for systematic validation",
+            "[Key Metrics] Many companies that switch to turbopuffer are cutting their search bills by 50% or more and getting much faster results.",
+            "[Industry Impact & Outlook] Leadership perspective on hiring slowdown and AI-driven career anxiety."
+          ],
+          "industry_impact_zh": "在AI驱动的开发范式中，软件资产的价值锚点已从“生产力”转向“确定性”。纳德拉此举旨在确立GitHub Copilot在企业级代码治理生态中的话语权，防御Cursor等专注交付体验的初创企业对开发者工作流的蚕食。",
+          "industry_impact_en": "In the AI-driven paradigm, the value anchor for software assets shifts from productivity to determinism. Nadella’s strategy aims to solidify GitHub Copilot's dominance in enterprise code governance, defensively insulating Microsoft from disruptive developer-experience-focused startups like Cursor."
+        },
         {
           "id": "0a4460fafbac9836",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "这一战略转向反映了通用大模型在编程等逻辑类任务上遭遇基准测试平滑（Plateau）的现状。从代码迁移到生命科学，意在通过AI在化学空间（Chemical Space）的探索效率换取更高的商业溢价，但这要求模型在长周期高熵值数据处理上具备远高于当前代码任务的精准度与鲁棒性。",
           "industry_impact_en": "This strategic pivot reflects the plateau currently observed in LLM performance on logical tasks like coding. By shifting to life sciences, Moonshot AI aims to capture higher commercial premiums through AI-driven explorations of chemical space, though this necessitates significantly higher precision and robustness in long-cycle, high-entropy data processing compared to software development."
-        },
-        {
-          "id": "a63cc7fb519627ab",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达董事会否决黄仁勋回归议案",
-          "title_en": "Nvidia’s board is reportedly ‘not considering’ hiring Jensen Huang back",
-          "source": "The Verge AI",
-          "published_at": "2026-11-16T18:43:35+00:00",
-          "url": "https://www.theverge.com/tech/1034501/nvidia-board-jensen-huang-not-bringing-back",
-          "event_summary_zh": "英伟达董事会明确拒绝前首席执行官黄仁勋回归，并聘请Wachtell Lipton律师事务所对其行为展开深入调查",
-          "event_summary_en": "Nvidia's board of directors is focused on an investigation into former CEO Jensen Huang and has officially stated that no discussions regarding his return are underway. Despite public pressure from figures such as Elon Musk and Tim Sweeney to reinstate Huang, the company has appointed CFO Colette Kress as interim CEO and retained Wachtell Lipton to conduct a formal conduct investigation.",
-          "core_facts_zh": [
-            "【核心事件】英伟达董事会、前首席执行官黄仁勋、代理首席执行官柯莱特·克雷斯、Wachtell Lipton律所在英伟达公司内部调查与治理层：董事会否决黄仁勋回归，并聘请专业律所对其行为进行合规调查",
-            "【起因与机理】公司内部治理要求与对黄仁勋特定行为的调查诉求",
-            "【调查与监管诉求】董事会否决黄仁勋回归提议并开启合规调查。",
-            "【涉及范围与推进】Wachtell Lipton律师事务所获聘调查黄仁勋个人行为。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Nvidia Board, Jensen Huang (Former CEO), Colette Kress (Interim CEO), Wachtell Lipton: Board rejects return proposal and mandates conduct investigation by Wachtell Lipton",
-            "[Root Cause & Mechanism] Internal governance protocols and misconduct allegations",
-            "[Regulatory & Investigation Focus] Board denies return proposal and initiates formal investigation.",
-            "[Scope & Next Steps] Wachtell Lipton retained for conduct investigation."
-          ],
-          "industry_impact_zh": "黄仁勋的离职及董事会的强硬立场标志着英伟达从创始人驱动的极速扩张模式向机构化合规治理的彻底转型。聘请Wachtell Lipton处理此案表明董事会正试图通过法务隔离来消除关键人物依赖带来的潜在法律风险，这对英伟达后续的市值稳定与反垄断监管合规至关重要。",
-          "industry_impact_en": "Jensen Huang's departure and the board's rigid stance signal a transition from a founder-centric growth model to institutional governance. The engagement of Wachtell Lipton underscores the board's intent to mitigate legal risks associated with key-man reliance, a crucial step for maintaining stock stability and navigating heightened antitrust scrutiny."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 19:08:38 UTC",
+      "updated_at": "2026-11-16 19:20:23 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 19:08:38 UTC",
+      "updated_at": "2026-11-16 19:20:23 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,558)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,559)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,558 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,559 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
