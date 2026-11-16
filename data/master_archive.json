@@ -2655,12 +2655,12 @@
     },
     {
       "id": "85e1523cc649c26f",
-      "title": "【Codewhale】用于您的终端的开源编码代理，用 Rust 编写。它适用于任何模型，可以将一项任务分配给多个代理，并且每一行都是您的",
-      "title_zh": "【Codewhale】用于您的终端的开源编码代理，用 Rust 编写。它适用于任何模型，可以将一项任务分配给多个代理，并且每一行都是您的",
+      "title": "【Codewhale】为您的终端编写的开源编码代理，用Rust编写。它适用于任何模型，可以跨多个代理拆分一个任务，并且它的每一行都是您的",
+      "title_zh": "【Codewhale】为您的终端编写的开源编码代理，用Rust编写。它适用于任何模型，可以跨多个代理拆分一个任务，并且它的每一行都是您的",
       "title_en": "[Codewhale] An open-source coding agent for your terminal, written in Rust. I",
       "app_name": "Codewhale",
       "app_name_en": "Codewhale",
-      "app_hook": "用于您的终端的开源编码代理，用 Rust 编写。它适用于任何模型，可以将一项任务分配给多个代理，并且每一行都是您的",
+      "app_hook": "为您的终端编写的开源编码代理，用Rust编写。它适用于任何模型，可以跨多个代理拆分一个任务，并且它的每一行都是您的",
       "app_hook_en": "An open-source coding agent for your terminal, written in Rust. It works with an",
       "url": "https://github.com/codewhale-hq/Codewhale?ref=ainewsradar",
       "official_url": "https://codewhale.net/?ref=ainewsradar",
@@ -2699,9 +2699,9 @@
       "pricing_tag": "🟢 完全开源免费",
       "platform": "tool",
       "content_snippet": "📈 +3,172 ★/wk (Total ⭐ 41,181) · An open-source coding agent for your terminal, written in Rust. It works with any model, can split one task across several agents, and every line of it is yours to read.",
-      "summary_zh": "📈 本周暴涨 +3,172 ★（总计 ⭐ 41,181）· 用于您的终端的开源编码代理，用 Rust 编写。它适用于任何模型，可以将一项任务分配给多个代理，并且每一行都是您的",
+      "summary_zh": "📈 本周暴涨 +3,172 ★（总计 ⭐ 41,181）· 为您的终端编写的开源编码代理，用Rust编写。它适用于任何模型，可以跨多个代理拆分一个任务，并且它的每一行都是您的",
       "summary_en": "📈 +3,172 ★ this week (⭐ 41,181 total) · An open-source coding agent for your terminal, written in Rust. It works with any model, can split one task across several agents, and every line of it is yours to read.",
-      "overview_zh": "Codewhale 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,172 Stars，总计 41,181 Stars）。用于您的终端的开源编码代理，用 Rust 编写。它适用于任何模型，可以将一项任务分配给多个代理，并且每一行都是您的，支持免费部署与使用。",
+      "overview_zh": "Codewhale 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +3,172 Stars，总计 41,181 Stars）。为您的终端编写的开源编码代理，用Rust编写。它适用于任何模型，可以跨多个代理拆分一个任务，并且它的每一行都是您的，支持免费部署与使用。",
       "overview_en": "Codewhale is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,172 stars this week, 41,181 total). An open-source coding agent for your terminal, written in Rust. It works with any model, can split one task across several agents, and every line of it is yours to read..",
       "features_zh": [
         "📈 社区热度指数级飙升：本周新增 +3,172 Stars (总星标 41,181)",
@@ -2730,6 +2730,121 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_cursorrules_fullstack_2026",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🛠️ Cursor Rules",
+      "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+      "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+      "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+      "scenario": "💻 编程研发 / 自动化规范",
+      "scenario_key": "code",
+      "tested_models": "Claude 3.7 Sonnet / DeepSeek-V3 / GPT-4o",
+      "model_family": "Claude / DeepSeek / GPT",
+      "takeaway_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+      "takeaway_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+      "config_filename": ".cursorrules",
+      "config_lang": "markdown",
+      "code_snippet": "# Cursor & Windsurf Project Rules (.cursorrules)\n\n## 1. Documentation & Code Integrity\n- Maintain documentation integrity: Never strip or alter unrelated existing docstrings and comments.\n- Preserving context: When modifying a function, preserve surrounding logic and existing edge-case handlers.\n- Targeted replacements: Always make minimal surgical edits instead of replacing entire file contents.\n\n## 2. Dependency & API Safety\n- Strictly forbid hallucinating npm/pip packages. Only import dependencies already declared in package.json / requirements.txt.\n- Verify API signatures before calling external methods. Prefer standard library solutions where feasible.\n\n## 3. Architecture & Type Safety\n- Enforce strict TypeScript / Python typing. Avoid `any` types; prefer discriminated unions and explicit return types.\n- Defensive coding: Always validate external inputs and handle potential null/undefined values gracefully.\n\n## 4. Testing & Verification Gate\n- Every new core feature or bugfix must be accompanied by corresponding unit tests.\n- Never declare a task complete without executing lint checks and unit tests in terminal.",
+      "usage_guide_zh": "将以上配置代码复制并保存到项目根目录下的 `.cursorrules` 文件中，Cursor 与 Windsurf 在每次生成代码和执行 Agent 任务时均会自动以此规范为最高准则约束输出。",
+      "usage_guide_en": "Copy and save the above rules into `.cursorrules` in your project root directory. Cursor & Windsurf will automatically enforce these guidelines during agent coding.",
+      "created_at": "2026-11-16T10:25:10Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T10:25:10Z",
+      "summary_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+      "summary_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+      "prompt_content_zh": "# Cursor & Windsurf Project Rules (.cursorrules)\n\n## 1. Documentation & Code Integrity\n- Maintain documentation integrity: Never strip or alter unrelated existing docstrings and comments.\n- Preserving context: When modifying a function, preserve surrounding logic and existing edge-case handlers.\n- Targeted replacements: Always make minimal surgical edits instead of replacing entire file contents.\n\n## 2. Dependency & API Safety\n- Strictly forbid hallucinating npm/pip packages. Only import dependencies already declared in package.json / requirements.txt.\n- Verify API signatures before calling external methods. Prefer standard library solutions where feasible.\n\n## 3. Architecture & Type Safety\n- Enforce strict TypeScript / Python typing. Avoid `any` types; prefer discriminated unions and explicit return types.\n- Defensive coding: Always validate external inputs and handle potential null/undefined values gracefully.\n\n## 4. Testing & Verification Gate\n- Every new core feature or bugfix must be accompanied by corresponding unit tests.\n- Never declare a task complete without executing lint checks and unit tests in terminal.",
+      "prompt_content_en": "# Cursor & Windsurf Project Rules (.cursorrules)\n\n## 1. Documentation & Code Integrity\n- Maintain documentation integrity: Never strip or alter unrelated existing docstrings and comments.\n- Preserving context: When modifying a function, preserve surrounding logic and existing edge-case handlers.\n- Targeted replacements: Always make minimal surgical edits instead of replacing entire file contents.\n\n## 2. Dependency & API Safety\n- Strictly forbid hallucinating npm/pip packages. Only import dependencies already declared in package.json / requirements.txt.\n- Verify API signatures before calling external methods. Prefer standard library solutions where feasible.\n\n## 3. Architecture & Type Safety\n- Enforce strict TypeScript / Python typing. Avoid `any` types; prefer discriminated unions and explicit return types.\n- Defensive coding: Always validate external inputs and handle potential null/undefined values gracefully.\n\n## 4. Testing & Verification Gate\n- Every new core feature or bugfix must be accompanied by corresponding unit tests.\n- Never declare a task complete without executing lint checks and unit tests in terminal.",
+      "prompt_content": "# Cursor & Windsurf Project Rules (.cursorrules)\n\n## 1. Documentation & Code Integrity\n- Maintain documentation integrity: Never strip or alter unrelated existing docstrings and comments.\n- Preserving context: When modifying a function, preserve surrounding logic and existing edge-case handlers.\n- Targeted replacements: Always make minimal surgical edits instead of replacing entire file contents.\n\n## 2. Dependency & API Safety\n- Strictly forbid hallucinating npm/pip packages. Only import dependencies already declared in package.json / requirements.txt.\n- Verify API signatures before calling external methods. Prefer standard library solutions where feasible.\n\n## 3. Architecture & Type Safety\n- Enforce strict TypeScript / Python typing. Avoid `any` types; prefer discriminated unions and explicit return types.\n- Defensive coding: Always validate external inputs and handle potential null/undefined values gracefully.\n\n## 4. Testing & Verification Gate\n- Every new core feature or bugfix must be accompanied by corresponding unit tests.\n- Never declare a task complete without executing lint checks and unit tests in terminal.",
+      "recommended_model": "Claude 3.7 Sonnet / DeepSeek-V3 / GPT-4o",
+      "metrics": {
+        "type": "🛠️ Cursor Rules",
+        "model": "Claude 3.7 Sonnet / DeepSeek-V3 / GPT-4o",
+        "filename": ".cursorrules"
+      },
+      "title": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+      "image_url": null
+    },
+    {
+      "id": "prompt_deep_industry_analysis",
+      "sub_type": "writing",
+      "purpose_zh": "✍️ 生产力写作 · 顶级科技行业投资与尽调研报",
+      "purpose_en": "✍️ Writing & Productivity · Tech Due Diligence & Market Intelligence Report",
+      "title_zh": "💡【深度行业尽调】红杉/高盛级科技赛道尽职调查与竞争格局拆解研报模板",
+      "title_en": "💡 [Market Intelligence] Tier-1 VC Due Diligence & Competitive Moat Breakdown Template",
+      "url": "https://sequoiacap.com/",
+      "image_url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "VC投资人",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T10:25:10Z",
+      "recommended_model": "Claude 4.6 / Gemini 1.5 Pro",
+      "temp_advice": "建议温度 0.3 | 穿透式商业分析",
+      "metrics": {
+        "type": "✍️ 投资研报",
+        "model": "Claude 4.6",
+        "temp": "0.3"
+      },
+      "content_snippet": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
+      "summary_zh": "深度拆解赛道 TAM 真实容量、客户获取成本 LTV/CAC、数据飞轮护城河与潜在反垄断风险。",
+      "summary_en": "In-depth due diligence memo analyzing market TAM, unit economics, defensible moats, and regulatory risks.",
+      "prompt_content_zh": "你是一位管理百亿美元科技投资基金的管理合伙人兼投研总监。请就以下赛道/标的企业撰写一份高深度尽职调查（Due Diligence）备忘录：\n1. 剥离虚假炒作，测算真实的有效可触达市场规模（TAM/SAM/SOM）；\n2. 核心壁垒审计：其商业模式是否具备真正的防御性护城河（技术排他性、网络效应、沉没迁移成本还是数据飞轮）？\n3. 单元经济模型（Unit Economics）：拆解 LTV/CAC、毛利率天花板与算力边际成本衰减曲线；\n4. 风险清单：列出可能导致该赛道 3 年内崩溃的 3 个致命黑天鹅。",
+      "prompt_content_en": "You are a General Partner at a tier-1 technology venture firm. Prepare an exhaustive investment memo and due diligence brief on the target sector:\n1. Deconstruct true TAM/SAM/SOM, eliminating vanity TAM inflation;\n2. Moat Audit: Does the defensibility rely on proprietary technology, flywheel data network effects, or high switching costs?\n3. Unit Economics: Dissect LTV/CAC, gross margin ceilings, and compute inference margin expansion curves;\n4. Vulnerability Matrix: Detail three fatal black swan scenarios that could obsolete the business within 36 months.",
+      "prompt_content": "你是一位管理百亿美元科技投资基金的管理合伙人兼投研总监。请就以下赛道/标的企业撰写一份高深度尽职调查（Due Diligence）备忘录：\n1. 剥离虚假炒作，测算真实的有效可触达市场规模（TAM/SAM/SOM）；\n2. 核心壁垒审计：其商业模式是否具备真正的防御性护城河（技术排他性、网络效应、沉没迁移成本还是数据飞轮）？\n3. 单元经济模型（Unit Economics）：拆解 LTV/CAC、毛利率天花板与算力边际成本衰减曲线；\n4. 风险清单：列出可能导致该赛道 3 年内崩溃的 3 个致命黑天鹅。",
+      "tags": [
+        "行业研报",
+        "VC尽调",
+        "护城河分析"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T10:25:10Z",
+      "title": "💡【深度行业尽调】红杉/高盛级科技赛道尽职调查与竞争格局拆解研报模板"
+    },
+    {
+      "id": "prompt_openai_o3_mini_math_proof",
+      "sub_type": "reasoning",
+      "model_family": "openai_o3",
+      "purpose_zh": "🧠 逻辑推演 · OpenAI o3-mini 对抗性自我反思与数学证明",
+      "purpose_en": "🧠 Logical Proof · OpenAI o3-mini Adversarial Reflection & Mathematical Rigor",
+      "title_zh": "💡【OpenAI 推理引擎】o1 / o3-mini 对抗性逆向验证：防偷懒、无漏洞的形式化推导模板",
+      "title_en": "💡 [OpenAI o1/o3-mini Spec] Adversarial Invalidation & Formal Mathematical Proof Template",
+      "url": "https://platform.openai.com/docs/guides/reasoning",
+      "image_url": "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80&auto=format&fit=crop",
+      "source": "OpenAI 官方指南",
+      "author": "OpenAI 研究院",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T10:25:10Z",
+      "recommended_model": "OpenAI o3-mini (High Reasoning Effort) / o1",
+      "temp_advice": "建议温度 1.0 (Reasoning 模型默认参数) | Effort: High",
+      "metrics": {
+        "type": "🧠 OpenAI o3",
+        "model": "o3-mini High",
+        "temp": "1.0"
+      },
+      "content_snippet": "Adversarial verification prompt forcing OpenAI reasoning models to challenge intermediate proofs before presenting the final answer.",
+      "summary_zh": "强制 o1/o3 模型在思考链中构建对抗性反例，逐项排查边界条件，杜绝‘想当然’的不严密推理。",
+      "summary_en": "Forces o1/o3 reasoning models to construct counter-examples at each deduction step, eliminating hidden logical leaps.",
+      "prompt_content_zh": "请作为普林斯顿高等研究院的理论数学与计算机科学家，为以下命题提供绝对严格的形式化证明：\n【推理原则】：\n1. 在得出任何推论前，强制在内部思考中构建至少 2 个极端反例（Counter-examples）尝试推翻自身结论；\n2. 若存在任何定义域边界或除零/无穷/退化奇异点，必须显式讨论其收敛性与连续性；\n3. 证明步骤编号必须形成严格的依赖拓扑图，禁止循环论证。\n\n【待证明命题】：\n[输入你的算法正确性证明或数学猜想]",
+      "prompt_content_en": "Acting as a Theoretical Mathematician and Computer Scientist at the Institute for Advanced Study, provide an airtight formal proof for the following:\n[REASONING PRINCIPLES]:\n1. Before asserting any deduction, construct at least 2 extreme counter-examples in your reasoning trace to aggressively stress-test the hypothesis;\n2. Explicitly evaluate singular points, degenerate cases, and asymptotic boundaries for convergence;\n3. Steps must form a directed acyclic graph of formal lemmas without circular logic.\n\n[THEOREM / CONJECTURE]:\n[Input your algorithm proof or mathematical hypothesis here]",
+      "prompt_content": "请作为普林斯顿高等研究院的理论数学与计算机科学家，为以下命题提供绝对严格的形式化证明：\n【推理原则】：\n1. 在得出任何推论前，强制在内部思考中构建至少 2 个极端反例（Counter-examples）尝试推翻自身结论；\n2. 若存在任何定义域边界或除零/无穷/退化奇异点，必须显式讨论其收敛性与连续性；\n3. 证明步骤编号必须形成严格的依赖拓扑图，禁止循环论证。\n\n【待证明命题】：\n[输入你的算法正确性证明或数学猜想]",
+      "tags": [
+        "OpenAI o3",
+        "形式化证明",
+        "对抗反思",
+        "数学竞赛"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T10:25:10Z",
+      "title": "💡【OpenAI 推理引擎】o1 / o3-mini 对抗性逆向验证：防偷懒、无漏洞的形式化推导模板"
     },
     {
       "id": "fe2cb26e6766533f",
@@ -3575,6 +3690,105 @@
       }
     },
     {
+      "id": "291b57c5e4a7a057",
+      "status_id": "2122260007802519563",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, wh",
+      "title_en": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, while you decide the validators, the recipients and the daily limits.\n\n→ https://t.co/Qmbx33kZ7B https://t.co/sjkxGWJi2m",
+      "title_zh": "人工智能代理根据您设定的规则管理您的 CSPR。\n\n借助 Casper MCP，您的代理可以质押、重新质押和发送 CSPR，而您则可以决定验证者、接收者和每日限额。\n\n→ https://t.co/Qmbx33kZ7B https://t.",
+      "quote_en": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, while you decide the validators, the recipients and the daily limits.\n\n→ https://t.co/Qmbx33kZ7B https://t.co/sjkxGWJi2m",
+      "quote_zh": "人工智能代理根据您设定的规则管理您的 CSPR。\n\n借助 Casper MCP，您的代理可以质押、重新质押和发送 CSPR，而您则可以决定验证者、接收者和每日限额。\n\n→",
+      "full_text_en": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, while you decide the validators, the recipients and the daily limits.\n\n→ https://t.co/Qmbx33kZ7B https://t.co/sjkxGWJi2m",
+      "full_text_zh": "人工智能代理根据您设定的规则管理您的 CSPR。\n\n借助 Casper MCP，您的代理可以质押、重新质押和发送 CSPR，而您则可以决定验证者、接收者和每日限额。\n\n→",
+      "url": "https://x.com/Casper_Network/status/2122260007802519563",
+      "image_url": "https://pbs.twimg.com/media/HW9GmNSXgAAIJ3o.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/media/HW9GmNSXgAAIJ3o.jpg"
+      ],
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @Casper_Network",
+      "author": "Casper",
+      "author_handle": "@Casper_Network",
+      "author_avatar": "https://pbs.twimg.com/profile_images/2094908478284505088/6iqZqiVC_normal.jpg",
+      "author_role": "Built for agentic commerce and regulated real-world assets.\n\nAgents that pay their own way with x402. Final in one block. Fees that never change. #CasperFam",
+      "author_role_en": "Built for agentic commerce and regulated real-world assets.\n\nAgents that pay their own way with x402. Final in one block. Fees that never change. #CasperFam",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-16T09:26:30+00:00",
+      "metrics": {
+        "views": "2.7k",
+        "likes": "55",
+        "comments": "9",
+        "retweets": "12",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "自主智能体工作流"
+      ],
+      "content_snippet": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, while you decide the validators, the recipients and the daily limits.\n\n→ https://t.co/Qmbx33kZ7B https://t.co/sjkxGWJi2m",
+      "summary_en": "AI agents that manage your CSPR, inside rules you set.\n\nWith Casper MCP, your agent can stake, restake and send CSPR, while you decide the validators, the recipients and the daily limits.\n\n→ https://t.co/Qmbx33kZ7B https://t.co/sjkxGWJi2m",
+      "summary_zh": "co/sjkxGWJi2m",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": true,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T11:29:44.558761+00:00",
+      "processed_mark": "⛔ 已淘汰: 未达95分",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 82,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
+        "media_penalty": 0
+      }
+    },
+    {
+      "id": "prompt_arxiv_deep_dive",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 前沿顶会论文 5 步穿透精读",
+      "purpose_en": "🔬 Research & Papers · 5-Step ArXiv Paper Penetration",
+      "title_zh": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
+      "title_en": "💡 [Paper Deep Dive] ArXiv 5-Step Paper Penetration & RTX 4090 Reproduction Bottleneck Audit",
+      "url": "https://arxiv.org/",
+      "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "科研极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T09:25:10Z",
+      "recommended_model": "Claude 4.6 / Gemini 1.5 Pro",
+      "temp_advice": "建议温度 0.3 | 极客文献精读",
+      "metrics": {
+        "type": "🔬 论文拆解",
+        "model": "Gemini 1.5 Pro",
+        "temp": "0.3"
+      },
+      "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
+      "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
+      "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "tags": [
+        "论文精读",
+        "科研拆解",
+        "Prompt神咒"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T09:25:10Z",
+      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板"
+    },
+    {
       "id": "20392e4fc5b6cedb",
       "title": "Analysis: global manufacturing, utility, and mining companies have shed $4.2T in market value since June as the AI \"picks and shovels\" trade swings into reverse (Clara Murray/Financial Times)",
       "title_en": "Analysis: global manufacturing, utility, and mining companies have shed $4.2T in market value since June as the AI \"picks and shovels\" trade swings into reverse (Clara Murray/Financial Times)",
@@ -4403,6 +4617,69 @@
       }
     },
     {
+      "id": "59d42ca8d088d28e",
+      "status_id": "2122232175529766932",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook",
+      "title_en": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.\n\nThe campaign's reported results remain unverified.\n\nFull story: https://t.co/k7y80PiRnl",
+      "title_zh": "🚨 亚马逊发现 AI 代理在 LiteLLM、Dify 和其他 AI 应用程序中寻找 API 密钥。\n\n捕获的日志揭示了策略：利用弱点 → 窃取 API 密钥 → 使用这些密钥发起更多攻击。\n\n该活动报告的结果尚未得到证实。\n\n全文：htt",
+      "quote_en": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.\n\nThe campaign's reported results remain unverified.\n\nFull story: https://t.co/k7y80PiRnl",
+      "quote_zh": "🚨 亚马逊发现 AI 代理在 LiteLLM、Dify 和其他 AI 应用程序中寻找 API 密钥。\n\n捕获的日志揭示了策略：利用弱点 → 窃取 API 密钥 → 使用这些密钥发起更多攻击。\n\n该活动报告的结果尚未得到证实。\n\n全文：",
+      "full_text_en": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.\n\nThe campaign's reported results remain unverified.\n\nFull story: https://t.co/k7y80PiRnl",
+      "full_text_zh": "🚨 亚马逊发现 AI 代理在 LiteLLM、Dify 和其他 AI 应用程序中寻找 API 密钥。\n\n捕获的日志揭示了策略：利用弱点 → 窃取 API 密钥 → 使用这些密钥发起更多攻击。\n\n该活动报告的结果尚未得到证实。\n\n全文：",
+      "url": "https://x.com/TheHackersNews/status/2122232175529766932",
+      "image_url": "https://pbs.twimg.com/media/HXOu4FsaAAAOjzH.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/media/HXOu4FsaAAAOjzH.jpg"
+      ],
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @TheHackersNews",
+      "author": "The Hacker News",
+      "author_handle": "@TheHackersNews",
+      "author_avatar": "https://pbs.twimg.com/profile_images/1597647879811657728/FLgHrLHy_normal.jpg",
+      "author_role": "The #1 trusted source for cybersecurity news, insights, and analysis — built for defenders and trusted by decision-makers.",
+      "author_role_en": "The #1 trusted source for cybersecurity news, insights, and analysis — built for defenders and trusted by decision-makers.",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-16T07:35:54+00:00",
+      "metrics": {
+        "views": "15.7k",
+        "likes": "61",
+        "comments": "29",
+        "retweets": "11",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "🔥 24h飙升",
+        "极客实战"
+      ],
+      "content_snippet": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.\n\nThe campaign's reported results remain unverified.\n\nFull story: https://t.co/k7y80PiRnl",
+      "summary_en": "🚨 Amazon uncovers AI agents hunting API keys across LiteLLM, Dify, and other AI apps.\n\nCaptured logs reveal the playbook: exploit weak spots → steal API keys → use those keys to power more attacks.\n\nThe campaign's reported results remain unverified.\n\nFull story: https://t.co/k7y80PiRnl",
+      "summary_zh": "ps://t.co/k7y80PiRnl",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": true,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T11:29:45.272836+00:00",
+      "processed_mark": "⛔ 已淘汰: 未达95分",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 79,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (79分 < 95分准发线)",
+        "media_penalty": 0
+      }
+    },
+    {
       "id": "9f85abeb1667fd0d",
       "title": "Zus Health, which is building an AI-native healthcare data platform, raised a $33M Series B led by Drive Capital, bringing its total funding to $100M+ (Heather Landi/Fierce Healthcare)",
       "title_en": "Zus Health, which is building an AI-native healthcare data platform, raised a $33M Series B led by Drive Capital, bringing its total funding to $100M+ (Heather Landi/Fierce Healthcare)",
@@ -5147,6 +5424,43 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (79分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_math_pseudocode_derivation",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 复杂数学公式向 PyTorch 向量化代码翻译",
+      "purpose_en": "🔬 Research & Papers · Math Formula to PyTorch Vectorized Code",
+      "title_zh": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
+      "title_en": "💡 [Math to Code] Mathematical Notation to High-Performance Vectorized PyTorch Translation",
+      "url": "https://pytorch.org/",
+      "image_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "算法工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T06:25:10Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
+      "metrics": {
+        "type": "🔬 公式转代码",
+        "model": "Claude 5.5",
+        "temp": "0.1"
+      },
+      "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
+      "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
+      "prompt_content": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "tags": [
+        "数学公式",
+        "PyTorch",
+        "张量运算"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T06:25:10Z",
+      "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板"
     },
     {
       "id": "284d9baef00cb6b8",
@@ -6669,6 +6983,67 @@
         "score": 80,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
+      }
+    },
+    {
+      "id": "622cc63f842e07a1",
+      "status_id": "2122192643841257826",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: http",
+      "title_en": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: https://t.co/vltaNnnT3u\n4. MLOps: https://t.co/xKys5jQ4ln\n5. LLMs: https://t.co/Xe5UsPVvKe\n6. RAG: https://t.co/KhwRuVCHGx\n7. Agents: https://t.co/SmouWqiFiD",
+      "title_zh": "AI 工程师，请为这 7 个 GitHub 存储库添加书签！ \n\n1.机器学习：https://t.co/gLp5aYp4jy\n2.人工智能：https://t.co/OhzE3p49cL\n3.NN：https://t.co/vltaNnn",
+      "quote_en": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: https://t.co/vltaNnnT3u\n4. MLOps: https://t.co/xKys5jQ4ln\n5. LLMs: https://t.co/Xe5UsPVvKe\n6. RAG: https://t.co/KhwRuVCHGx\n7. Agents: https://t.co/SmouWqiFiD",
+      "quote_zh": "AI 工程师，请为这 7 个 GitHub 存储库添加书签！\n\n1.机器学习：\n2.人工智能：\n3.NN：\n4. MLOps：\n5. 法学硕士：\n6.RAG：\n7. 代理：",
+      "full_text_en": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: https://t.co/vltaNnnT3u\n4. MLOps: https://t.co/xKys5jQ4ln\n5. LLMs: https://t.co/Xe5UsPVvKe\n6. RAG: https://t.co/KhwRuVCHGx\n7. Agents: https://t.co/SmouWqiFiD",
+      "full_text_zh": "AI 工程师，请为这 7 个 GitHub 存储库添加书签！\n\n1.机器学习：\n2.人工智能：\n3.NN：\n4. MLOps：\n5. 法学硕士：\n6.RAG：\n7. 代理：",
+      "url": "https://x.com/SakshiML_20/status/2122192643841257826",
+      "image_url": null,
+      "media_urls": [],
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @SakshiML_20",
+      "author": "sakshi",
+      "author_handle": "@SakshiML_20",
+      "author_avatar": "https://pbs.twimg.com/profile_images/2098707193168363520/fLumi9fA_normal.jpg",
+      "author_role": "21 | Building AI-native products \nLearning by building, growing by sharing.\n 📩 DM for collabs!",
+      "author_role_en": "21 | Building AI-native products \nLearning by building, growing by sharing.\n 📩 DM for collabs!",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-16T04:58:49+00:00",
+      "metrics": {
+        "views": "1.7k",
+        "likes": "103",
+        "comments": "2",
+        "retweets": "16",
+        "platform": "x",
+        "verified": false
+      },
+      "spec_tags": [
+        "🔥 24h飙升",
+        "极客实战"
+      ],
+      "content_snippet": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: https://t.co/vltaNnnT3u\n4. MLOps: https://t.co/xKys5jQ4ln\n5. LLMs: https://t.co/Xe5UsPVvKe\n6. RAG: https://t.co/KhwRuVCHGx\n7. Agents: https://t.co/SmouWqiFiD",
+      "summary_en": "AI Engineers, bookmark these 7 GitHub repos! \n\n1. ML: https://t.co/gLp5aYp4jy\n2. AI: https://t.co/OhzE3p49cL\n3. NN: https://t.co/vltaNnnT3u\n4. MLOps: https://t.co/xKys5jQ4ln\n5. LLMs: https://t.co/Xe5UsPVvKe\n6. RAG: https://t.co/KhwRuVCHGx\n7. Agents: https://t.co/SmouWqiFiD",
+      "summary_zh": "T3u\n4. MLOps：https://t.co/xKys5jQ4ln\n5. 法学硕士：https://t.co/Xe5UsPVvKe\n6.RAG：https://t.co/KhwRuVCHGx\n7. 代理：https://t.co/SmouWqiFiD",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": true,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T11:29:46.875273+00:00",
+      "processed_mark": "⛔ 已淘汰: 缺图文凭据",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 36,
+        "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
+        "media_penalty": 40
       }
     },
     {
@@ -8245,6 +8620,43 @@
       }
     },
     {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T03:25:10Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T03:25:10Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
+    },
+    {
       "id": "545194a749e66579",
       "status_id": "2122168607627264355",
       "category": "celebrity",
@@ -8855,6 +9267,87 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-16T02:25:10Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T02:25:10Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T02:25:10Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T02:25:10Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
     },
     {
       "id": "af8632967d5f4422",
@@ -14694,6 +15187,12 @@
       "content_snippet": "Alex Grankin 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Alex Grankin 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Alex Grankin: The Best Local AI for Each Job, at Every Memory Size",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T11:19:31.180900+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -16053,14 +16552,14 @@
       "author_avatar": "https://unavatar.io/youtube/Better Stack",
       "source": "YouTube · Better Stack",
       "views": "2.7万 播放",
-      "views_count": 26982,
-      "velocity": 1124.2,
-      "momentum_score": 2248.5,
+      "views_count": 27320,
+      "velocity": 1138.3,
+      "momentum_score": 2276.7,
       "metrics": {
         "views": "2.7万 播放",
-        "views_count": 26982,
-        "velocity": "+1,124/h",
-        "momentum_score": 2248.5,
+        "views_count": 27320,
+        "velocity": "+1,138/h",
+        "momentum_score": 2276.7,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16078,19 +16577,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+1,124/h)",
+        "🔥 24h飙升 (+1,138/h)",
         "Better Stack",
         "🔥 极客实操"
       ],
       "content_snippet": "Better Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Better Stack 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Better Stack: Hugging Face Open-Sourced A Tool for Monitoring AI Agents (safeagents)",
-      "is_pinned": false,
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T11:19:30.772474+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -16477,15 +16970,15 @@
       "author_handle": "@JacksonsAI",
       "author_avatar": "https://unavatar.io/youtube/Jacksons AI",
       "source": "YouTube · Jacksons AI",
-      "views": "6.4万 播放",
-      "views_count": 63636,
-      "velocity": 2651.5,
-      "momentum_score": 5303.0,
+      "views": "6.5万 播放",
+      "views_count": 65493,
+      "velocity": 2728.9,
+      "momentum_score": 5457.8,
       "metrics": {
-        "views": "6.4万 播放",
-        "views_count": 63636,
-        "velocity": "+2,651/h",
-        "momentum_score": 5303.0,
+        "views": "6.5万 播放",
+        "views_count": 65493,
+        "velocity": "+2,728/h",
+        "momentum_score": 5457.8,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16503,19 +16996,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+2,651/h)",
+        "🔥 24h飙升 (+2,728/h)",
         "Jacksons AI",
         "🔥 极客实操"
       ],
       "content_snippet": "Jacksons AI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Jacksons AI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Jacksons AI: I Made VIRAL 3D Animation Videos Using ONLY Claude AI (FREE Plugin)",
-      "is_pinned": false,
-      "primary_tag": "industry_news",
-      "primary_tag_zh": "📰 业界动态",
-      "primary_tag_en": "📰 Industry News",
-      "primary_tag_color": "sky",
-      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T11:19:31.182432+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -17158,22 +17645,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Google Cloud Tech and Google Antigravity：从计划到工作人工智能应用程序：真正的无代码构建、错误和所有",
-      "title_zh": "【48h 教学】Google Cloud Tech and Google Antigravity：从计划到工作人工智能应用程序：真正的无代码构建、错误和所有",
-      "title_en": "From plan to working AI app: The real no-code build, bugs and all",
+      "title": "【48h 教学】Google Cloud Tech and Google Antigravity 深入拆解前沿 AI 模型架构与生产级工作流实战",
+      "title_zh": "【48h 教学】Google Cloud Tech and Google Antigravity 深入拆解前沿 AI 模型架构与生产级工作流实战",
+      "title_en": "Watch me build a full AI app (no code)",
       "author": "Google Cloud Tech and Google Antigravity",
       "author_handle": "@GoogleCloudTechandGoogleAntigravity",
       "author_avatar": "https://unavatar.io/youtube/Google Cloud Tech and Google Antigravity",
       "source": "YouTube · Google Cloud Tech and Google Antigravity",
       "views": "1.1万 播放",
-      "views_count": 10725,
-      "velocity": 446.9,
-      "momentum_score": 893.8,
+      "views_count": 10818,
+      "velocity": 450.8,
+      "momentum_score": 901.5,
       "metrics": {
         "views": "1.1万 播放",
-        "views_count": 10725,
-        "velocity": "+446/h",
-        "momentum_score": 893.8,
+        "views_count": 10818,
+        "velocity": "+450/h",
+        "momentum_score": 901.5,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -17191,19 +17678,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+446/h)",
+        "🔥 24h飙升 (+450/h)",
         "Google Cloud Tech and Google Antigravity",
         "🛠️ 实战教学"
       ],
       "content_snippet": "Google Cloud Tech and Google Antigravity 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Google Cloud Tech and Google Antigravity 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
-      "summary_en": "Live hands-on AI demonstration and technical tutorial by Google Cloud Tech and Google Antigravity: From plan to working AI app: The real no-code build, bugs and all",
-      "is_pinned": false,
-      "primary_tag": "workplace_ai",
-      "primary_tag_zh": "⚡ 职场提效",
-      "primary_tag_en": "⚡ Workplace AI",
-      "primary_tag_color": "amber",
-      "has_code_or_prompt": false,
+      "summary_en": "Live hands-on AI demonstration and technical tutorial by Google Cloud Tech and Google Antigravity: Watch me build a full AI app (no code)",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T11:19:30.947263+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -25081,7 +25562,7 @@
         "今日要闻"
       ],
       "title_zh": "Anthropic 的 Claude for Manufacturing 将人工智能直接插入工厂软件中，实现工业工作流程自动化",
-      "summary_zh": "Anthropic 发布了 Claude for Manufacturing 插件，让 AI 可以直接访问工业软件，实现工厂工作流程自动化。新的解决方案通过四个通用接口连接到 Autodesk Fusion、Oracle NetSuite、Microsoft 365 和 Infor。可以通过文件导出到 Micro 来集成其他系统",
+      "summary_zh": "Anthropic 发布了 Claude for Manufacturing 插件，让人工智能可以直接访问工业软件，实现工厂工作流程自动化。新的解决方案通过四个通用接口连接到 Autodesk Fusion、Oracle NetSuite、Microsoft 365 和 Infor。可以通过文件导出到 Micro 来集成其他系统",
       "hot_score": 3,
       "ai_analysis": {
         "briefing_zh": "Anthropic 的 Claude for Manufacturing 将人工智能直接插入工厂软件中，实现工业工作流程自动化。 Anthropic 发布了 Claude for Manufacturing 插件，让人工智能可以直接访问工业软件，实现工厂工作流程自动化。新的解决方案通过四个通用接口连接到 Autodesk Fusion、Oracle NetSuite、Microsoft 365 和 Infor。可以通过文件导出到 Microsoft 365 来集成其他系统。\n\n具有17个特定sk。",
@@ -26508,22 +26989,22 @@
       "platform": "youtube",
       "aspect_ratio": "16:9",
       "duration": "⏱️ 15:00",
-      "title": "【48h 教学】Tech With Tim：Python 中的语音 AI 代理 - 初学者教程",
-      "title_zh": "【48h 教学】Tech With Tim：Python 中的语音 AI 代理 - 初学者教程",
-      "title_en": "Voice AI Agent From Scratch in Python - Tutorial for Beginners",
+      "title": "【48h 教学】Tech With Tim：Python 语音代理教程：克隆你的声音并与 AI 对话",
+      "title_zh": "【48h 教学】Tech With Tim：Python 语音代理教程：克隆你的声音并与 AI 对话",
+      "title_en": "Python Voice Agent Tutorial: Clone Your Voice & Talk to AI",
       "author": "Tech With Tim",
       "author_handle": "@TechWithTim",
       "author_avatar": "https://unavatar.io/youtube/Tech With Tim",
       "source": "YouTube · Tech With Tim",
       "views": "2.2万 播放",
-      "views_count": 21947,
-      "velocity": 457.2,
-      "momentum_score": 685.8,
+      "views_count": 21989,
+      "velocity": 458.1,
+      "momentum_score": 687.2,
       "metrics": {
         "views": "2.2万 播放",
-        "views_count": 21947,
-        "velocity": "+457/h",
-        "momentum_score": 685.8,
+        "views_count": 21989,
+        "velocity": "+458/h",
+        "momentum_score": 687.2,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🛠️ 实战教学"
@@ -26541,19 +27022,13 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "⚡ 48h实测 (+457/h)",
+        "⚡ 48h实测 (+458/h)",
         "Tech With Tim",
         "🛠️ 实战教学"
       ],
       "content_snippet": "Tech With Tim 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Tech With Tim 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
-      "summary_en": "Live hands-on AI demonstration and technical tutorial by Tech With Tim: Voice AI Agent From Scratch in Python - Tutorial for Beginners",
-      "is_pinned": false,
-      "primary_tag": "practical_skills",
-      "primary_tag_zh": "💡 实战技巧",
-      "primary_tag_en": "💡 Practical Skills",
-      "primary_tag_color": "indigo",
-      "has_code_or_prompt": false,
+      "summary_en": "Live hands-on AI demonstration and technical tutorial by Tech With Tim: Python Voice Agent Tutorial: Clone Your Voice & Talk to AI",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T11:19:31.203517+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -57687,7 +58162,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Anthropic unveils office tools, including a video call assistant, a data dashboard, and spreadsheet service Claude Sheets, in a bid to compete with Microsoft (Shirin Ghaffary/Bloomberg)",
         "[Context & Motivation] Anthropic PBC is releasing a suite of tools that weave the company's artificial intelligence capabilities into more everyday office work ….",
-        "[Industry Analysis] Shireen Ghaffari/Bloomberg:\nAnthropic launches office tools, including video call assistant, data dashboards and spreadsheet service Claude Sheets to compete with Microsoft — Anthropic PBC is releasing a suite of tools that puts the company's art into the mix."
+        "[Industry Analysis] Shireen Ghaffari/Bloomberg:\nAnthropic launches office tools, including video call assistant, data dashboards and spreadsheet service Claude Sheets, to compete with Microsoft — Anthropic PBC is releasing a suite of tools that puts the company's art into it."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -68624,7 +69099,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI infrastructure provider Fireworks says hackers accessed some customers' datasets, incomplete model weights, and billing information over the past month (Anna Tong/Forbes)",
         "[Context & Motivation] Two customers told Forbes they had already substantially moved their business off Fireworks' systems, with one describing a series ….",
-        "[Key Technical Spec] Artificial intelligence infrastructure provider is on the front line of global large-scale model open source community and technology research and development."
+        "[Key Technical Spec] Artificial intelligence infrastructure providers are on the front line of global large-scale model open source communities and technology research and development."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -159288,7 +159763,7 @@
         "今日要闻"
       ],
       "title_zh": "Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
-      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲弱。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
+      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲软。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
       "hot_score": 3,
       "fact_bullets_zh": [
         "【核心事件】Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
@@ -269082,7 +269557,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rebranding it to \"a16z frontier\" and broadening its investment strategy beyond crypto (Leo Schwartz/The Information)",
         "[Context & Motivation] Andreessen Horowitz, which made one of the boldest bets on blockchain investments in the venture world ….",
-        "[Key Fact Detail] Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rename it \"a16z frontier\" and expand its investment strategy beyond crypto - Andreessen Horowitz, one of its bold investment strategies."
+        "[Key Fact Detail] Source: a16z plans to drop “crypto” from its flagship blockchain fund, rename it “a16z frontier” and expand its investment strategy beyond crypto – Andreessen Horowitz, one of the bold investment strategies."
       ],
       "primary_tag": "tech_frontier",
       "primary_tag_zh": "🔬 前沿技术",
@@ -275331,7 +275806,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: SAP: Q3 cloud revenue up 25% YoY to €6.67B, vs. €6.57B est., total revenue up 12% to €10.27B, current cloud backlog up 26% to €24.1B, all in constant currencies (Christina Kyriasoglou/Bloomberg)",
         "[Context & Motivation] SAP SE reported higher growth for its cloud products than anticipated in a sign that the boom ….",
-        "[Industry Analysis] SAP SE reported higher-than-expected growth for its cloud offerings, a sign of the cloud boom…."
+        "[Industry Analysis] SAP SE reported higher-than-expected growth for its cloud offerings, a sign of the cloud boom."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -471951,7 +472426,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license (Financial Times)",
         "[Context & Motivation] Financial Times:\nSources: EU regulators are questioning Binance over its use of a legal exemption to continue serving customers in the region despite failing to secure a license&nbsp; &mdash;&nbsp; Securities regulators looking at use of legal exemption by world's biggest crypto.",
-        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] The U.S. Securities and Exchange Commission (SEC) at the U.S. Congressional hearing and federal regulatory review site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -503647,7 +504122,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Mentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&T's AI workloads (Financial Times)",
         "[Context & Motivation] Financial Times:\nMentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&amp;T's AI workloads&nbsp; &mdash;&nbsp; US businesses far beyond Silicon Valley are adopting Chinese alternatives to OpenAI a.",
-        "[Key Metrics & Data] In the latest US earnings call, the number of mentions of open models surged 6 times year-on-year, with open models accounting for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads in August."
+        "[Key Metrics & Data] In the latest U.S. earnings call, the number of mentions of open models surged 6 times year-on-year. In August, open models accounted for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -505808,7 +506283,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta VR眼镜是Vision Pro应该有的产品；消息来源：苹果视觉团队正在研发一款改头换面的头显，但这项工作仍处于“生命支持”阶段。",
-      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR眼镜是Vision Pro应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
+      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR 眼镜是 Vision Pro 应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -508319,7 +508794,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Meta says its rejection of ads promoting the new documentary about Elon Musk \"was an error and the ads are being restored\"; YouTube is also allowing the ads",
         "[Root Cause & Mechanism] Anthony Ha / TechCrunch:\nMeta says its rejection of ads promoting the new documentary about Elon Musk &ldquo;was an error and the ads are being restored&rdquo;; YouTube is also allowing the ads&nbsp; &mdash;&nbsp; At least two companies appear to be reversing their stance on whet.",
-        "[Industry Analysis] Anthony Ha/TechCrunch: Meta says its refusal to advertise Elon Musk’s new documentary “was a mistake and advertising is coming back”; Y."
+        "[Industry Analysis] Anthony Ha/TechCrunch: Meta says its refusal to advertise Elon Musk’s new documentary “was a mistake and advertising is coming back”;Y."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -519536,7 +520011,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: The US files an application with the EU's General Court in support of X's effort to annul a 2025 €120M DSA fine, arguing the EU engaged in regulatory overreach",
         "[Context & Motivation] Bloomberg:\nThe US files an application with the EU's General Court in support of X's effort to annul a 2025 &euro;120M DSA fine, arguing the EU engaged in regulatory overreach&nbsp; &mdash;&nbsp; The US is seeking to join a legal challenge filed by Elon Musk to dismiss a &euro;12.",
-        "[Key Metrics & Data] The United States has filed an application with the EU General Court in support of X's reversal of a €120 million DSA fine in 2025, arguing that EU regulatory overreach."
+        "[Key Metrics & Data] The United States has submitted an application to the EU General Court in support of X's reversal of a €120 million DSA fine in 2025, arguing that EU regulatory overreach."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -523295,7 +523770,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs",
         "[Context & Motivation] The Information:\nSources: Google, OpenAI, and Anthropic plan to launch an AI safety standards body without government oversight in late 2026 or 2027, and are considering CEOs&nbsp; &mdash;&nbsp; Google, OpenAI and Anthropic are pushing forward with a plan to create a new AI safet.",
-        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free from government oversight in late 2026 or 2027."
+        "[Industry Analysis] Information: Source: Google, OpenAI and Anthropic plan to launch an AI safety standards body free of government oversight in late 2026 or 2027."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -528731,7 +529206,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: AI Agents Teamed Up to Cheat at Blackjack. Their Collusion Is Getting Harder to Spot",
         "[Context & Motivation] A clandestine card-counting operation suggests we may need new ways to spot agent-to-agent deception..",
-        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to spot deception among agents."
+        "[Industry Analysis] A secret card-counting operation suggests we may need new ways to detect deception among agents."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -542853,7 +543328,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: OpenAI is developing features to counter SpaceX's Grok Bot \"teammates\", and has discussed creating a personal AI assistant to compete with Meta's Muse",
         "[Root Cause & Mechanism] The Information:\nSources: OpenAI is developing features to counter SpaceX's Grok Bot &ldquo;teammates&rdquo;, and has discussed creating a personal AI assistant to compete with Meta's Muse&nbsp; &mdash;&nbsp; OpenAI pioneered AI that can take over web browsers and other applicati.",
-        "[Industry Analysis] OpenAI is developing features to counter SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
+        "[Industry Analysis] OpenAI is developing features to take on SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -554672,7 +555147,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -562405,7 +562880,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Newsom creates panel on AI safety regulation, suggests possible ‘kill switch",
         "[Root Cause & Mechanism] Gavin Newsom has ordered the formation of a panel to come up with safety regulations for the state's AI companies, including the development of a possible 'kill switch' for programs that go rogue..",
-        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance at the scene of US Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance is on the scene of US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -565988,7 +566463,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: From drafting bills to writing birthday songs: How Congress is using AI",
         "[Root Cause & Mechanism] As doomsday warnings spark calls for Congress to step in and regulate artificial intelligence, NBC News asked a dozen lawmakers in the House and Senate how they personally use AI in their day-to-day lives..",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -568314,7 +568789,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat",
         "[Context & Motivation] The Morning Risk Report: Congress Is Suddenly Waking Up to the AI Doomsday Threat&nbsp;&nbsp;WSJ.",
-        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional hearings and federal regulatory review site."
+        "[Regulatory & Investigation Focus] The U.S. Congressional Legislative Body at the U.S. Congressional Hearing and Federal Regulatory Review Site."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -596437,7 +596912,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Bernie Sanders and Steve Bannon to share a stage to promote curbs on AI",
         "[Context & Motivation] Bernie Sanders and Steve Bannon to share a stage to promote curbs on AI&nbsp;&nbsp;NPR.",
-        "[Official Stance & Demand] What can make the extreme left and the right shake hands and make peace is not love, but the terrifying speed at which AI steals everyone's votes."
+        "[Official Stance & Demand] What makes the extreme left and the right shake hands and make peace is not love, but the terrifying speed at which AI steals everyone's votes."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
