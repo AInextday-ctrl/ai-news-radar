@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 23:20:32 UTC",
+  "generated_at": "2026-11-16 23:36:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 23:20:32 UTC",
+      "updated_at": "2026-11-16 23:36:04 UTC",
       "headline_item": {
-        "id": "b70bb25153a07908",
+        "id": "87d8b15b1e319080",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美联航发生大范围系统故障致航班停飞",
-        "title_en": "United Airlines reports \"widespread system outage\" affecting departing flights but not flights in progress (Michele Luhn/CNBC)",
-        "source": "CNBC",
-        "published_at": "2026-11-16T22:58:46+00:00",
-        "url": "https://www.cnbc.com/2026/11/16/united-airlines-outage-faa.html",
-        "event_summary_zh": "美联航因内部系统故障导致出港航班受阻，目前初步排除网络攻击可能性，正优先处理飞行负载计算应用",
-        "event_summary_en": "United Airlines experienced a widespread system outage on Monday, grounding outbound flights as the carrier struggled with internal applications specifically related to pilot-facing weight and balance calculations. The airline stated there is no evidence of a cyberattack, and the issue does not affect flights currently in progress or United Express regional operations.",
+        "title_zh": "Optimizely供应链被攻陷，百余家大型机构面临安全威胁",
+        "title_en": "Researchers find Optimizely serving malicious JavaScript to sites of 178 orgs including Zoom, CNN, HSBC, Salesforce, GitLab, Ledger, BBC, Equifax, IKEA, more (Scott Helme/Report URI Blog)",
+        "source": "Report URI Blog",
+        "published_at": "2026-11-16T23:20:01+00:00",
+        "url": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/",
+        "event_summary_zh": "2026年11月16日，Optimizely平台被植入恶意JavaScript代码，导致包括Zoom、BBC及汇丰银行在内的178家机构网站受感染",
+        "event_summary_en": "The Optimizely Web experimentation platform suffered a supply chain attack where attackers injected malicious code into the Project JavaScript field, affecting 178 organizations including Zoom, CNN, and HSBC. The payload enabled cryptocurrency theft, payment card skimming, data exfiltration, and the delivery of Coruna and DarkSword iOS exploit kits via legitimate CDN scripts.",
         "core_facts_zh": [
-          "【核心事件】美国联合航空公司（United Airlines）、国际飞行员协会（ALPA）在美国航空运营网络：系统故障导致离场负载计算功能失效，引发航班停飞",
-          "【起因与机理】技术基础设施脆弱性及运维复杂性导致的关键业务链路中断",
-          "【核心事实细节】核心系统故障导致离场航班负载计算功能失效。",
-          "【各方立场与态度】与近期全国性航空管制事件形成叠加效应，暴露航空地勤数字化底层的稳定性隐患。"
+          "【核心事件】Optimizely（Web实验平台供应商）；受影响机构包括Zoom、CNN、汇丰银行、Salesforce、GitLab等：攻击者通过Optimizely控制面板篡改Project JavaScript，导致下游网站加载恶意脚本，引发资产窃取与iOS漏洞攻击",
+          "【起因与机理】第三方依赖项的信任机制被利用，绕过了单一企业网站自身的安全基础设施防护",
+          "【关键技术规格】Optimizely平台被非法篡改，恶意JS代码通过合法CDN分发。",
+          "【各方立场与态度】第三方依赖项信任机制引发的供应链安全隐患。"
         ],
         "core_facts_en": [
-          "[Core Event] United Airlines, Air Line Pilots Association (ALPA) (US aviation network): Operational outage caused by failure in weight/balance calculation applications",
-          "[Root Cause & Mechanism] Critical infrastructure fragility and technical complexities in legacy aviation systems",
-          "[Key Fact Detail] Operational outage resulting in failure of outbound weight/balance calculations.",
-          "[Industry Impact & Outlook] Highlighting stability risks in digital ground operations following recent national ATC disruptions."
+          "[Core Event] Optimizely; impacted organizations include Zoom, CNN, HSBC, Salesforce, GitLab, etc.: Attackers manipulated the Project JavaScript field to inject malicious scripts, leading to asset theft and iOS exploit delivery",
+          "[Root Cause & Mechanism] Exploitation of implicit trust in third-party CDN-served dependencies bypassing local security infrastructure",
+          "[Key Fact Detail] Optimizely platform compromised, distributing malicious JS via legitimate CDN.",
+          "[Key Position & Outlook] Systemic vulnerability caused by excessive trust in third-party dependencies."
         ],
-        "industry_impact_zh": "航空运营高度依赖实时数据链协同，此类故障频发折射出航空业在向现代化网络架构转型过程中，中间件与终端适配的冗余性设计存在系统性短板。在硬件更新与软件兼容性双重迭代下，对核心业务支撑系统的容灾切换策略已成为提升航空地勤弹性的关键瓶颈。",
-        "industry_impact_en": "The high dependency on real-time data synchronization in aviation operations reveals systemic vulnerabilities in the integration of legacy middle-ware during modernization. As carriers transition from copper to fiber-optic backbones, the lack of robust failover strategies for mission-critical applications represents a significant technical bottleneck for operational resilience."
+        "industry_impact_zh": "此事件标志着现代Web架构中‘CDN即信任源’的范式漏洞被彻底放大，第三方脚本执行权限缺乏细粒度隔离已成为企业的系统性软肋。即使拥有完备的主站安全防护，企业若无强制执行内容安全策略（CSP）与子资源完整性（SRI）校验，仍无法阻断此类经由合法第三方基础设施转递的复杂供应链攻击。",
+        "industry_impact_en": "This incident highlights the systemic vulnerability in modern web architectures where CDNs are treated as inherently trusted sources without fine-grained execution isolation. Even with robust perimeter security, organizations lacking enforced Content Security Policy (CSP) and Subresource Integrity (SRI) remain exposed to complex supply chain compromises delivered via legitimate third-party infrastructure."
       },
       "headlines": [
+        {
+          "id": "87d8b15b1e319080",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Optimizely供应链被攻陷，百余家大型机构面临安全威胁",
+          "title_en": "Researchers find Optimizely serving malicious JavaScript to sites of 178 orgs including Zoom, CNN, HSBC, Salesforce, GitLab, Ledger, BBC, Equifax, IKEA, more (Scott Helme/Report URI Blog)",
+          "source": "Report URI Blog",
+          "published_at": "2026-11-16T23:20:01+00:00",
+          "url": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/",
+          "event_summary_zh": "2026年11月16日，Optimizely平台被植入恶意JavaScript代码，导致包括Zoom、BBC及汇丰银行在内的178家机构网站受感染",
+          "event_summary_en": "The Optimizely Web experimentation platform suffered a supply chain attack where attackers injected malicious code into the Project JavaScript field, affecting 178 organizations including Zoom, CNN, and HSBC. The payload enabled cryptocurrency theft, payment card skimming, data exfiltration, and the delivery of Coruna and DarkSword iOS exploit kits via legitimate CDN scripts.",
+          "core_facts_zh": [
+            "【核心事件】Optimizely（Web实验平台供应商）；受影响机构包括Zoom、CNN、汇丰银行、Salesforce、GitLab等：攻击者通过Optimizely控制面板篡改Project JavaScript，导致下游网站加载恶意脚本，引发资产窃取与iOS漏洞攻击",
+            "【起因与机理】第三方依赖项的信任机制被利用，绕过了单一企业网站自身的安全基础设施防护",
+            "【关键技术规格】Optimizely平台被非法篡改，恶意JS代码通过合法CDN分发。",
+            "【各方立场与态度】第三方依赖项信任机制引发的供应链安全隐患。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Optimizely; impacted organizations include Zoom, CNN, HSBC, Salesforce, GitLab, etc.: Attackers manipulated the Project JavaScript field to inject malicious scripts, leading to asset theft and iOS exploit delivery",
+            "[Root Cause & Mechanism] Exploitation of implicit trust in third-party CDN-served dependencies bypassing local security infrastructure",
+            "[Key Fact Detail] Optimizely platform compromised, distributing malicious JS via legitimate CDN.",
+            "[Key Position & Outlook] Systemic vulnerability caused by excessive trust in third-party dependencies."
+          ],
+          "industry_impact_zh": "此事件标志着现代Web架构中‘CDN即信任源’的范式漏洞被彻底放大，第三方脚本执行权限缺乏细粒度隔离已成为企业的系统性软肋。即使拥有完备的主站安全防护，企业若无强制执行内容安全策略（CSP）与子资源完整性（SRI）校验，仍无法阻断此类经由合法第三方基础设施转递的复杂供应链攻击。",
+          "industry_impact_en": "This incident highlights the systemic vulnerability in modern web architectures where CDNs are treated as inherently trusted sources without fine-grained execution isolation. Even with robust perimeter security, organizations lacking enforced Content Security Policy (CSP) and Subresource Integrity (SRI) remain exposed to complex supply chain compromises delivered via legitimate third-party infrastructure."
+        },
+        {
+          "id": "46dcf7bfde1b4720",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "英伟达CEO黄仁勋离职引发硅谷高层反噬与阴谋论",
+          "title_en": "Tech leaders are convinced that Jensen Huang’s exit was a plot against him",
+          "source": "The Verge AI",
+          "published_at": "2026-11-16T23:17:34+00:00",
+          "url": "https://www.theverge.com/tech/1035027/tech-leaders-nvidia-jensen-huang-theories",
+          "event_summary_zh": "黄仁勋辞任英伟达CEO后，硅谷领袖质疑其离职动机，怀疑针对“中国间谍”指控背后的博弈意在阻碍开源AI发展",
+          "event_summary_en": "Following Jensen Huang's resignation as Nvidia CEO, tech leaders have questioned the legitimacy of the process, viewing the 'Chinese spy' allegations as unsubstantiated and potentially orchestrated. The incident has triggered significant concerns regarding Nvidia's compliance with chip exports and the geopolitical implications of removing a prominent advocate for open AI models.",
+          "core_facts_zh": [
+            "【核心事件】黄仁勋（前英伟达CEO）；David Sacks（VC）；Tim Sweeney（Epic Games CEO）；Amjad Masad（Replit CEO）：科技界质疑黄仁勋离职背后的间谍指控逻辑，并担忧英伟达AI领导力在监管压力下被强制转向",
+            "【起因与机理】围绕英伟达芯片对华绕道出口的调查，与开源AI阵营在硅谷内部的权利斗争相交织",
+            "【核心事实细节】核心人物黄仁勋辞职引发硅谷高层对“间谍指控”真实性的强烈质疑。",
+            "【行业影响与走向】黄仁勋作为开源AI推手的出局对后续地缘算力格局的影响。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jensen Huang (Former Nvidia CEO); David Sacks (VC); Tim Sweeney (Epic Games CEO); Amjad Masad (Replit CEO): Tech leaders challenge the spy-related resignation narrative, fearing a forced strategic pivot for Nvidia's AI dominance",
+            "[Root Cause & Mechanism] Intertwining of investigations into chip export circumvention and power struggles over the trajectory of open vs. closed AI models",
+            "[Key Fact Detail] Tech leaders challenge the legitimacy of the 'Chinese spy' narrative surrounding Huang's exit.",
+            "[Key Position & Outlook] Implications for global AI compute landscape and the future of open models."
+          ],
+          "industry_impact_zh": "此事件并非简单的职场辞退，而是硅谷头部力量在AI算力主权与地缘政治红线之间的一次剧烈重组，黄仁勋作为开源模型核心支持者的出局，预示着英伟达可能被迫在监管压力下放弃中立立场，全面转向封闭式受控的AI基础设施布局。这种权力更迭可能重塑全球AI供应链的安全验证机制，使得‘芯片主权’成为未来贸易博弈的最终战场。",
+          "industry_impact_en": "This is a radical restructuring of power between AI compute sovereignty and geopolitical red lines rather than a standard corporate resignation. The exit of Huang, a primary advocate for open models, signals a potential pivot for Nvidia toward a closed, heavily regulated AI infrastructure, likely reshaping global chip supply chain verification and making 'chip sovereignty' the primary theater for future trade wars."
+        },
         {
           "id": "b70bb25153a07908",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "航空运营高度依赖实时数据链协同，此类故障频发折射出航空业在向现代化网络架构转型过程中，中间件与终端适配的冗余性设计存在系统性短板。在硬件更新与软件兼容性双重迭代下，对核心业务支撑系统的容灾切换策略已成为提升航空地勤弹性的关键瓶颈。",
           "industry_impact_en": "The high dependency on real-time data synchronization in aviation operations reveals systemic vulnerabilities in the integration of legacy middle-ware during modernization. As carriers transition from copper to fiber-optic backbones, the lack of robust failover strategies for mission-critical applications represents a significant technical bottleneck for operational resilience."
-        },
-        {
-          "id": "785972246a8f271d",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "麻省理工毕业生涉嫌利用以太坊漏洞获利2500万美元被捕",
-          "title_en": "A US judge clears two brothers accused of stealing $25M in crypto, saying prosecutors failed to prove material misrepresentations in exploiting a software bug (Nate Raymond/Reuters)",
-          "source": "Reuters",
-          "published_at": "2026-11-16T22:05:02+00:00",
-          "url": "https://www.reuters.com/legal/government/us-judge-clears-mit-educated-brothers-25-million-cryptocurrency-heist-charges-2026-11-16/",
-          "event_summary_zh": "两名麻省理工毕业生涉嫌通过操纵以太坊最大可提取价值（MEV）机制，在12秒内窃取2500万美元加密货币并被司法部起诉",
-          "event_summary_en": "The US Department of Justice has arrested MIT graduates James Peraire-Bueno and Anton Peraire-Bueno, charging them with exploiting a vulnerability in the Ethereum blockchain to hijack high-value transactions by posing as validators. The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
-          "core_facts_zh": [
-            "【核心事件】被告James Peraire-Bueno与Anton Peraire-Bueno，检控方为曼哈顿联邦检察官Damian Williams在美国纽约州与马萨诸塞州联邦法院：利用MEV机器人漏洞劫持以太坊交易并洗钱2500万美元",
-            "【起因与机理】利用区块链验证机制漏洞获取不当利益",
-            "【关键数据与实测】该犯罪过程仅耗时12秒，涉案金额高达2500万美元，被告目前已被控电信诈骗及洗钱等多项罪名。",
-            "【涉及范围与推进】后续动态：面临电信诈骗及洗钱罪指控，已被禁止进行任何加密货币及证券交易。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Defendants James Peraire-Bueno and Anton Peraire-Bueno; Prosecutor Damian Williams, U.S. Attorney for the Southern District of New York: Exploiting MEV bot vulnerabilities to hijack Ethereum transactions and laundering $25M",
-            "[Root Cause & Mechanism] Exploiting inherent weaknesses in blockchain validator transaction sequencing",
-            "[Key Metrics] The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
-            "[Key Position & Outlook] Outlook: Faces multiple felony counts; restricted from trading crypto, securities, or commodities pending trial."
-          ],
-          "industry_impact_zh": "本案揭示了以太坊MEV（最大可提取价值）生态在机制设计上的脆弱性，即核心验证者在交易排序中的权力博弈存在被算法攻击的巨大敞口。此事件将迫使监管机构重新审视区块链协议的合规底线，同时也预示着去中心化金融领域将针对协议层的恶意操纵迎来更严格的技术审计与法律清算。",
-          "industry_impact_en": "This case highlights the inherent vulnerability of the Ethereum MEV ecosystem, where the power dynamics of validator transaction sequencing present significant attack vectors for algorithmic exploitation. The incident signals an inevitable shift toward stricter regulatory scrutiny over protocol-level integrity and mandatory technical audits for decentralized finance architectures."
-        },
-        {
-          "id": "77e3996007172408",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Altimeter计划注资50亿美元参与Anthropic IPO",
-          "title_en": "Brad Gerstner says Altimeter is aiming to invest $5B in Anthropic's IPO, 5x his largest IPO investment, calling it \"a cornerstone compounder for a long time\" (Kif Leswing/CNBC)",
-          "source": "CNBC",
-          "published_at": "2026-11-16T21:05:01+00:00",
-          "url": "https://www.cnbc.com/2026/11/16/altimeters-brad-gerstner-investing-5-billion-in-anthropic-ipo.html",
-          "event_summary_zh": "Altimeter Capital首席执行官Brad Gerstner宣布计划向Anthropic IPO注资50亿美元，此举旨在将其打造为长期核心资产",
-          "event_summary_en": "Brad Gerstner, founder of Altimeter Capital, announced plans to invest $5 billion in the Anthropic IPO, marking his largest-ever IPO commitment. The offering has secured a collective $26 billion investment from tech giants including AMD, Broadcom, Google, Micron, Microsoft, Nvidia, and TSMC, with the company targeting a $1.4 trillion valuation ahead of its Thursday Nasdaq listing.",
-          "core_facts_zh": [
-            "【核心事件】Brad Gerstner (Altimeter Capital创始人), Anthropic在纳斯达克证券交易所：计划以50亿美元认购Anthropic IPO股份，目标估值1.4万亿美元",
-            "【起因与机理】看好Anthropic作为AI领域“长期复合增长”核心资产的潜力",
-            "【关键数据与实测】Altimeter计划注资50亿美元，旨在将其作为长期核心增长引擎。",
-            "【行业影响与走向】Anthropic将于本周四在纳斯达克挂牌，作为首家上市的大型AI实验室，将重塑行业资本格局。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Brad Gerstner (Founder of Altimeter Capital), Anthropic (Nasdaq): Commitment of $5 billion for Anthropic's IPO at a $1.4 trillion valuation",
-            "[Root Cause & Mechanism] Strategic belief in Anthropic as a long-term compounding asset in the AI industry",
-            "[Key Metrics] Altimeter commits $5B as a long-term compounding cornerstone investment.",
-            "[Key Position & Outlook] Anthropic to list on Nasdaq this Thursday, marking the first major AI lab IPO."
-          ],
-          "industry_impact_zh": "此轮史无前例的基石投资阵容不仅是资本层面的背书，更是AI算力供应链与模型厂商形成的深度利益绑定，旨在通过IPO锁定下一代通用人工智能的云端控制权。1.4万亿美元的定价直接将模型厂商的估值锚点与传统硬件巨头对齐，预示着市场进入以全产业链协同抗衡地缘监管风险的新阶段。",
-          "industry_impact_en": "This unprecedented backing creates a deep strategic alignment between the AI compute supply chain and model developers, effectively securing control over next-gen AGI infrastructure. Pricing Anthropic at $1.4 trillion signals a shift where model provider valuations are pegged to hardware titans, reflecting a tactical consolidation to mitigate mounting geopolitical and regulatory pressures."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 23:20:32 UTC",
+      "updated_at": "2026-11-16 23:36:04 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -166,6 +166,34 @@
           "url": "https://x.com/AravSrinivas/status/2122411451092807926"
         },
         {
+          "id": "761a577636ea97ac",
+          "name": "OpenAI 官方",
+          "handle": "@OpenAI",
+          "role_zh": "OpenAI 官方发布与模型前沿",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/openai",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "组织正在将我们的模型应用于事先授权、转诊、出院计划和患者外展。\n\n总之，这些进步将医学证据与团队已经使用的工具的实际帮助联系起来，这样他们就可以花更少的时间浏览系统，而将更多的时间花在照顾患者上。",
+          "event_context_en": "ChatGPT for Healthcare is advancing with more capable computer-use agents, stronger clinical answers, and 20+ new health",
+          "quote_zh": "ChatGPT for Healthcare 正在凭借更强大的计算机使用代理、更强大的临床答案和 20 多个新的医疗保健插件不断进步。\n\n@AbridgeHQ、@AmbienceAI、@Cigna、@CVSHealth 和其他领先的医疗保健组织正在将我们的模型应用于事先授权、转诊、出院计划和患者外展。\n\n总之，这些进步将医学证据与团队已经使用的工具的实际帮助联系起来，这样他们就可以花更少的时间浏览系统，而将更多的时间花在照顾患者上。",
+          "quote_en": "ChatGPT for Healthcare is advancing with more capable computer-use agents, stronger clinical answers, and 20+ new healthcare plugins.\n\n@AbridgeHQ, @AmbienceAI, @Cigna, @CVSHealth, and other leading healthcare organizations are putting our models to work across prior authorizations, referrals, discharge planning, and patient outreach.\n\nTogether, these advances connect medical evidence with practical help across the tools teams already use—so they can spend less time navigating systems and more time caring for patients.\n\nhttps://t.co/NI35X8pG57",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "72.2k",
+            "likes": "594",
+            "comments": "123",
+            "retweets": "51",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-16T23:03:33+00:00",
+          "url": "https://x.com/OpenAI/status/2122465625109090646"
+        },
+        {
           "id": "6899f65c15621125",
           "name": "Claude Developers",
           "handle": "@ClaudeDevs",
@@ -192,34 +220,6 @@
           },
           "published_at": "2026-11-16T22:31:41+00:00",
           "url": "https://x.com/ClaudeDevs/status/2122457608963395586"
-        },
-        {
-          "id": "eab60cad34a4e059",
-          "name": "OpenAI 官方",
-          "handle": "@OpenAI",
-          "role_zh": "OpenAI 官方发布与模型前沿",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/openai",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "医疗保健组织正在将我们的模型应用于事先授权、转诊、出院计划和患者外展。\n\n总之，这些进步将医学证据与团队已经使用的工具的实际帮助联系起来，这样他们就可以花更少的时间浏览系统，而将更多的时间花在照顾患者上。",
-          "event_context_en": "ChatGPT for Healthcare is advancing with more capable computer-use agents, stronger clinical answers, and 20+ new health",
-          "quote_zh": "ChatGPT for Healthcare 正在凭借更强大的计算机使用代理、更强大的临床答案和 20 多个新的医疗保健插件不断进步。\n\n@AbridgeHQ、@AmbienceHealth、@Cigna、@CVSHealth 和其他领先的医疗保健组织正在将我们的模型应用于事先授权、转诊、出院计划和患者外展。\n\n总之，这些进步将医学证据与团队已经使用的工具的实际帮助联系起来，这样他们就可以花更少的时间浏览系统，而将更多的时间花在照顾患者上。",
-          "quote_en": "ChatGPT for Healthcare is advancing with more capable computer-use agents, stronger clinical answers, and 20+ new healthcare plugins.\n\n@AbridgeHQ, @AmbienceHealth, @Cigna, @CVSHealth, and other leading healthcare organizations are putting our models to work across prior authorizations, referrals, discharge planning, and patient outreach.\n\nTogether, these advances connect medical evidence with practical help across the tools teams already use—so they can spend less time navigating systems and more time caring for patients. \n\nhttps://t.co/NI35X8pG57",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "13.6k",
-            "likes": "30",
-            "comments": "7",
-            "retweets": "5",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-16T20:02:01+00:00",
-          "url": "https://x.com/OpenAI/status/2122419941756531150"
         },
         {
           "id": "495e8cd7c69518b5",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 23:20:32 UTC",
+      "updated_at": "2026-11-16 23:36:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,590)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,593)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,590 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,593 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
@@ -410,7 +410,7 @@
         {
           "name": "astryx",
           "icon": "🤖",
-          "stars": "29.5k",
+          "stars": "29.6k",
           "growth_badge_zh": "本周暴增 +13,660 ★",
           "growth_badge_en": "+13,660 ★ this week",
           "category_zh": "🤖 自主智能体与协作编排",
