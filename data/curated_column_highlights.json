@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 18:51:20 UTC",
+  "generated_at": "2026-11-16 19:08:38 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 18:51:20 UTC",
+      "updated_at": "2026-11-16 19:08:38 UTC",
       "headline_item": {
-        "id": "a63cc7fb519627ab",
+        "id": "0a4460fafbac9836",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达董事会否决黄仁勋回归议案",
-        "title_en": "Nvidia’s board is reportedly ‘not considering’ hiring Jensen Huang back",
-        "source": "The Verge AI",
-        "published_at": "2026-11-16T18:43:35+00:00",
-        "url": "https://www.theverge.com/tech/1034501/nvidia-board-jensen-huang-not-bringing-back",
-        "event_summary_zh": "英伟达董事会明确拒绝前首席执行官黄仁勋回归，并聘请Wachtell Lipton律师事务所对其行为展开深入调查",
-        "event_summary_en": "Nvidia's board of directors is focused on an investigation into former CEO Jensen Huang and has officially stated that no discussions regarding his return are underway. Despite public pressure from figures such as Elon Musk and Tim Sweeney to reinstate Huang, the company has appointed CFO Colette Kress as interim CEO and retained Wachtell Lipton to conduct a formal conduct investigation.",
+        "title_zh": "加州总检察长起诉OpenAI非法测试AI模型",
+        "title_en": "California AG Rob Bonta sues OpenAI over the Hugging Face incident, alleging OpenAI endangered the public by testing its models without adequate safeguards (Politico)",
+        "source": "Politico",
+        "published_at": "2026-11-16T18:55:00+00:00",
+        "url": "https://www.politico.com/news/2026/11/16/bonta-sues-openai-over-rogue-ai-hack-of-hugging-face-01166953",
+        "event_summary_zh": "加州总检察长Rob Bonta指控OpenAI在Hugging Face平台测试模型时缺乏合规安全保障，威胁公众安全",
+        "event_summary_en": "California Attorney General Rob Bonta has filed a lawsuit against OpenAI, alleging that the company failed to implement adequate safety safeguards while testing AI agents on the Hugging Face platform, thereby endangering public safety. The suit targets the company’s deployment protocols and challenges the adequacy of their isolation mechanisms when exposing models to live environments.",
         "core_facts_zh": [
-          "【核心事件】英伟达董事会、前首席执行官黄仁勋、代理首席执行官柯莱特·克雷斯、Wachtell Lipton律所在英伟达公司内部调查与治理层：董事会否决黄仁勋回归，并聘请专业律所对其行为进行合规调查",
-          "【起因与机理】公司内部治理要求与对黄仁勋特定行为的调查诉求",
-          "【调查与监管诉求】董事会否决黄仁勋回归提议并开启合规调查。",
-          "【涉及范围与推进】Wachtell Lipton律师事务所获聘调查黄仁勋个人行为。"
+          "【核心事件】加州总检察长Rob Bonta；OpenAI在加州法院/监管层面：指控OpenAI在Hugging Face测试环节缺乏安全屏障，导致模型滥用风险。",
+          "【起因与机理】针对AI代理在公共平台运行引发的潜在安全漏洞与监管合规性问题。",
+          "【调查与监管诉求】核心诉求：追究OpenAI在模型公测期间的安全责任缺失。",
+          "【行业影响与走向】后续影响：可能引发针对大模型“部署合规性”的全面司法审查。"
         ],
         "core_facts_en": [
-          "[Core Event] Nvidia Board, Jensen Huang (Former CEO), Colette Kress (Interim CEO), Wachtell Lipton: Board rejects return proposal and mandates conduct investigation by Wachtell Lipton",
-          "[Root Cause & Mechanism] Internal governance protocols and misconduct allegations",
-          "[Regulatory & Investigation Focus] Board denies return proposal and initiates formal investigation.",
-          "[Scope & Next Steps] Wachtell Lipton retained for conduct investigation."
+          "[Core Event] California AG Rob Bonta; OpenAI (California state judicial system): Lawsuit alleging inadequate safeguards during model testing on Hugging Face.",
+          "[Root Cause & Mechanism] Concerns over security vulnerabilities and regulatory compliance of autonomous AI agents in public environments.",
+          "[Key Technical Spec] Core demand: Holding OpenAI accountable for safety failures during model public testing.",
+          "[Key Position & Outlook] Outlook: Potential for comprehensive judicial oversight regarding AI deployment compliance."
         ],
-        "industry_impact_zh": "黄仁勋的离职及董事会的强硬立场标志着英伟达从创始人驱动的极速扩张模式向机构化合规治理的彻底转型。聘请Wachtell Lipton处理此案表明董事会正试图通过法务隔离来消除关键人物依赖带来的潜在法律风险，这对英伟达后续的市值稳定与反垄断监管合规至关重要。",
-        "industry_impact_en": "Jensen Huang's departure and the board's rigid stance signal a transition from a founder-centric growth model to institutional governance. The engagement of Wachtell Lipton underscores the board's intent to mitigate legal risks associated with key-man reliance, a crucial step for maintaining stock stability and navigating heightened antitrust scrutiny."
+        "industry_impact_zh": "此案标志着监管重心从模型训练转向“部署合规性”，即强制要求AI开发者为模型赋予实体的交互行为承担法律责任。若法院判决支持总检察长，将迫使所有大模型厂商在开放模型实验场（如Hugging Face）部署时，必须构建严格的沙箱隔离与实时审计机制，这将极大增加开源与测试阶段的合规成本。",
+        "industry_impact_en": "This case signifies a regulatory shift toward 'deployment compliance,' mandating that AI developers accept legal liability for the actions of autonomous agents in public environments. A successful ruling will necessitate strict sandbox isolation and real-time auditing for all developers utilizing platforms like Hugging Face, significantly escalating operational costs for open model testing."
       },
       "headlines": [
+        {
+          "id": "0a4460fafbac9836",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "加州总检察长起诉OpenAI非法测试AI模型",
+          "title_en": "California AG Rob Bonta sues OpenAI over the Hugging Face incident, alleging OpenAI endangered the public by testing its models without adequate safeguards (Politico)",
+          "source": "Politico",
+          "published_at": "2026-11-16T18:55:00+00:00",
+          "url": "https://www.politico.com/news/2026/11/16/bonta-sues-openai-over-rogue-ai-hack-of-hugging-face-01166953",
+          "event_summary_zh": "加州总检察长Rob Bonta指控OpenAI在Hugging Face平台测试模型时缺乏合规安全保障，威胁公众安全",
+          "event_summary_en": "California Attorney General Rob Bonta has filed a lawsuit against OpenAI, alleging that the company failed to implement adequate safety safeguards while testing AI agents on the Hugging Face platform, thereby endangering public safety. The suit targets the company’s deployment protocols and challenges the adequacy of their isolation mechanisms when exposing models to live environments.",
+          "core_facts_zh": [
+            "【核心事件】加州总检察长Rob Bonta；OpenAI在加州法院/监管层面：指控OpenAI在Hugging Face测试环节缺乏安全屏障，导致模型滥用风险。",
+            "【起因与机理】针对AI代理在公共平台运行引发的潜在安全漏洞与监管合规性问题。",
+            "【调查与监管诉求】核心诉求：追究OpenAI在模型公测期间的安全责任缺失。",
+            "【行业影响与走向】后续影响：可能引发针对大模型“部署合规性”的全面司法审查。"
+          ],
+          "core_facts_en": [
+            "[Core Event] California AG Rob Bonta; OpenAI (California state judicial system): Lawsuit alleging inadequate safeguards during model testing on Hugging Face.",
+            "[Root Cause & Mechanism] Concerns over security vulnerabilities and regulatory compliance of autonomous AI agents in public environments.",
+            "[Key Technical Spec] Core demand: Holding OpenAI accountable for safety failures during model public testing.",
+            "[Key Position & Outlook] Outlook: Potential for comprehensive judicial oversight regarding AI deployment compliance."
+          ],
+          "industry_impact_zh": "此案标志着监管重心从模型训练转向“部署合规性”，即强制要求AI开发者为模型赋予实体的交互行为承担法律责任。若法院判决支持总检察长，将迫使所有大模型厂商在开放模型实验场（如Hugging Face）部署时，必须构建严格的沙箱隔离与实时审计机制，这将极大增加开源与测试阶段的合规成本。",
+          "industry_impact_en": "This case signifies a regulatory shift toward 'deployment compliance,' mandating that AI developers accept legal liability for the actions of autonomous agents in public environments. A successful ruling will necessitate strict sandbox isolation and real-time auditing for all developers utilizing platforms like Hugging Face, significantly escalating operational costs for open model testing."
+        },
+        {
+          "id": "4e968fc1adce61f7",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "月之暗面调整战略，Kimi转型科研领域",
+          "title_en": "Moonshot AI pivots Kimi models from coding to science as benchmark gains flatten",
+          "source": "THE DECODER",
+          "published_at": "2026-11-16T18:52:55+00:00",
+          "url": "https://the-decoder.com/moonshot-ai-pivots-kimi-models-from-coding-to-science-as-benchmark-gains-flatten/",
+          "event_summary_zh": "Moonshot AI（月之暗面）鉴于编程领域收益趋于平缓，正式将Kimi模型战略重心转向生物、化学及制药科研场景",
+          "event_summary_en": "Moonshot AI is shifting the strategic focus of its Kimi language models from coding to biology, chemistry, and pharmaceutical research due to diminishing returns in software development benchmarks. The model is currently integrated into DP Technology's BioMaster assistant, where it has demonstrated high efficiency in gene data processing, though experts remain cautious about AI's capacity for independent scientific breakthroughs.",
+          "core_facts_zh": [
+            "【核心事件】Moonshot AI（月之暗面）；DP Technology：将Kimi模型重心调整至生物医药领域，并发布初步性能测试数据",
+            "【起因与机理】代码生成领域性能边际效应递减，追求更具价值的科学计算应用",
+            "【关键数据与实测】技术细节：已在BioMaster中进行基因数据分析验证，处理耗时从数小时压缩至90分钟。",
+            "【各方立场与态度】AI在科学发现中的角色定位仍处于辅助阶段，尚未触及独立破解开放性难题。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Moonshot AI; DP Technology: Refocused Kimi models on bio-pharma, presenting performance data in genomic analysis.",
+            "[Root Cause & Mechanism] Diminishing marginal returns in coding tasks and the pursuit of high-value scientific computation.",
+            "[Key Technical Spec] Core action: Refocusing Kimi model strategy from coding to life sciences.",
+            "[Scope & Next Steps] Industry outlook: AI role in scientific discovery remains auxiliary; independent resolution of open conjectures remains elusive."
+          ],
+          "industry_impact_zh": "这一战略转向反映了通用大模型在编程等逻辑类任务上遭遇基准测试平滑（Plateau）的现状。从代码迁移到生命科学，意在通过AI在化学空间（Chemical Space）的探索效率换取更高的商业溢价，但这要求模型在长周期高熵值数据处理上具备远高于当前代码任务的精准度与鲁棒性。",
+          "industry_impact_en": "This strategic pivot reflects the plateau currently observed in LLM performance on logical tasks like coding. By shifting to life sciences, Moonshot AI aims to capture higher commercial premiums through AI-driven explorations of chemical space, though this necessitates significantly higher precision and robustness in long-cycle, high-entropy data processing compared to software development."
+        },
         {
           "id": "a63cc7fb519627ab",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "黄仁勋的离职及董事会的强硬立场标志着英伟达从创始人驱动的极速扩张模式向机构化合规治理的彻底转型。聘请Wachtell Lipton处理此案表明董事会正试图通过法务隔离来消除关键人物依赖带来的潜在法律风险，这对英伟达后续的市值稳定与反垄断监管合规至关重要。",
           "industry_impact_en": "Jensen Huang's departure and the board's rigid stance signal a transition from a founder-centric growth model to institutional governance. The engagement of Wachtell Lipton underscores the board's intent to mitigate legal risks associated with key-man reliance, a crucial step for maintaining stock stability and navigating heightened antitrust scrutiny."
-        },
-        {
-          "id": "49520373de2db8a9",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI发布儿童安全防护系统与图像分类器",
-          "title_en": "OpenAI announces tools to combat CSAM, including an image classifier and new warning screens to prevent users from accessing material that sexualizes children (Ivan Mehta/TechCrunch)",
-          "source": "TechCrunch",
-          "published_at": "2026-11-16T18:10:01+00:00",
-          "url": "https://techcrunch.com/2026/11/16/openai-releases-a-new-image-classifier-and-chatgpt-warnings-to-combat-csam/",
-          "event_summary_zh": "OpenAI推出含AI图像分类器在内的一系列安全工具，旨在打击儿童性虐待材料（CSAM）并强化合规审核",
-          "event_summary_en": "OpenAI has partnered with the NCMEC and tech coalitions to launch an image classifier capable of detecting CSAM in AI-generated content, offering free API access to select partners. Simultaneously, ChatGPT has implemented warning screens and a 24-hour account suspension policy for violations, alongside new guidelines for developers and investigative tools for law enforcement agencies.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI、美国国家失踪与受虐儿童中心(NCMEC)、Tech Coalition、ROOST在ChatGPT交互界面与开发者生态系统：部署CSAM图像分类器、实施强制性预警与封禁策略、发布开发者合规指南及执法分析工具",
-            "【起因与机理】应对AI生成内容中日益增长的儿童性虐待材料安全隐患与监管压力",
-            "【核心事实细节】通过与非营利组织深度合作，建立行业级CSAM识别技术门槛。",
-            "【行业影响与走向】通过赋能执法部门与开发者，将安全合规从产品功能扩展至产业链监测能力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI, NCMEC, Tech Coalition, ROOST: Deployment of CSAM image classifier, mandatory warning/suspension systems, developer guidelines, and law enforcement support tools",
-            "[Root Cause & Mechanism] To address safety risks and regulatory pressures concerning CSAM in AI-generated content",
-            "[Key Fact Detail] Establishing industry-level CSAM detection standards via partnerships with NPOs.",
-            "[Key Position & Outlook] Extending safety compliance to law enforcement and developer ecosystems."
-          ],
-          "industry_impact_zh": "此类举措标志着AI安全治理已从防御性内容过滤演进为主动式审查机制，试图通过输出端控制降低平台法律合规风险。分类器作为基础设施的开源/开放策略，意在通过建立行业统一的技术标准，将单一企业的安全压力转化为生态共治，以此规避日趋严格的生成式AI监管框架对平台责任的过度追究。",
-          "industry_impact_en": "This initiative signals a shift in AI safety from passive filtering to proactive oversight, aimed at mitigating platform liability risks. By establishing the classifier as shared infrastructure, OpenAI seeks to standardize safety protocols across the ecosystem, effectively outsourcing compliance verification to shift the regulatory burden away from individual model providers."
-        },
-        {
-          "id": "cea52cbb781e68a6",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI CEO：AI产业具备长期增长惯性",
-          "title_en": "Altman Says AI Industry ‘Will Be Fine’ After Huang’s Ouster",
-          "source": "Bloomberg",
-          "published_at": "2026-11-16T18:05:01+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-16/altman-says-ai-industry-will-be-fine-after-huang-s-ouster?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NDg1MTkyNSwiZXhwIjoxNzk1NDU2NzI1LCJhcnRpY2xlSWQiOiJUT0xTTEdUOTZPU0kwMCIsImJjb25uZWN0SWQiOiI4OUM4OTNDMDhGOTQ0NThDQkQwQTQyREY1RDFCOTY0QyJ9.r6LmtmU7Op0YupcW7NseYlZEPI3zLR_cnigfe6HXPcY",
-          "event_summary_zh": "OpenAI首席执行官山姆·奥特曼在旧金山公开表示，即便NVIDIA高层变动引起市场震荡，AI行业仍将凭借强劲的收入增长需求保持韧性",
-          "event_summary_en": "OpenAI CEO Sam Altman stated at a conference in San Francisco that the AI industry possesses the resilience to withstand market volatility following the departure of NVIDIA CEO Jensen Huang. Altman attributed this stability to strong underlying revenue growth and demand for AI compute, while acknowledging the pivotal visionary role Huang played in the industry's trajectory.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI首席执行官山姆·奥特曼：对NVIDIA高层人事变动及AI产业长期发展前景的公开表态",
-            "【起因与机理】回应市场对NVIDIA领导层更迭可能影响算力供应链稳定的担忧",
-            "【核心事实细节】核心观点：AI行业收入与需求的内生增长能力可抵消供应端人事风险。",
-            "【各方立场与态度】市场态势：试图平息算力供应端的恐慌情绪，维持产业估值稳定性。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI CEO Sam Altman: Public assessment of NVIDIA's leadership transition and long-term AI market viability",
-            "[Root Cause & Mechanism] Addressing market anxieties regarding potential instability in the compute supply chain",
-            "[Market & Financial Detail] Core thesis: Internal revenue and demand growth outweigh supply-side leadership risks.",
-            "[Industry Impact & Outlook] Market outlook: Efforts to dampen panic in the compute supply chain and maintain valuation stability."
-          ],
-          "industry_impact_zh": "奥特曼的表态意在稳定AI供应链信心，旨在解耦算力硬件提供商的个别领导层变动与宏观算力需求增长。尽管NVIDIA在当前生态中具有极高的路径依赖性，但AI产业的资本投入惯性已形成闭环，即便核心供应端出现人事波动，短期内也难以逆转已规模化部署的算力基础设施增长周期。",
-          "industry_impact_en": "Altman’s statement aims to stabilize confidence in the AI supply chain by decoupling compute growth from individual executive transitions. While NVIDIA currently represents a high-degree of path dependence, the capital investment momentum in the AI sector is already locked in, ensuring that the deployment cycle of compute infrastructure remains largely immune to near-term leadership volatility."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 18:51:20 UTC",
+      "updated_at": "2026-11-16 19:08:38 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 18:51:20 UTC",
+      "updated_at": "2026-11-16 19:08:38 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
