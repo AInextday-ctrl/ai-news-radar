@@ -1,37 +1,88 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 03:33:36 UTC",
+  "generated_at": "2026-11-16 03:48:01 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 03:33:36 UTC",
+      "updated_at": "2026-11-16 03:48:01 UTC",
       "headline_item": {
-        "id": "587a5b9a4fcd4237",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "英伟达CEO黄仁勋辞职，首席财务官接任",
-        "title_en": "Sources: Jensen Huang had planned to pull back Nvidia's aggressive financing and told neoclouds to get upfront customer payments; Colette Kress may go further (Wall Street Journal)",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-16T03:30:00+00:00",
-        "url": "https://www.wsj.com/tech/ai/nvidias-days-as-an-open-checkbook-for-the-ai-economy-are-numbered-90c7b388",
-        "event_summary_zh": "英伟达创始人黄仁勋因个人丑闻辞去CEO职务，由原CFO科莱特·克雷斯接任临时CEO",
-        "event_summary_en": "Nvidia founder Jensen Huang resigned as CEO on Thursday, with CFO Colette Kress appointed as interim CEO. The departure follows reports of personal misconduct involving investigations into potential diversion of restricted Nvidia chips to China via Southeast Asian partners.",
+        "id": "0bfbcb4426e0e2d0",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "阿里巴巴发布Qwen4-Max模型，性能超GPT-4o级基准",
+        "title_en": "Alibaba says Qwen4-Max, which isn't open weight, beats Fable 5.1 and Kimi K3.1 Pro in coding benchmarks, and plans to release weights for smaller Qwen4 models (Luz Ding/Bloomberg)",
+        "source": "Bloomberg",
+        "published_at": "2026-11-16T03:45:00+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-16/alibaba-unveils-new-flagship-ai-model-in-riposte-to-us-rivals",
+        "event_summary_zh": "阿里巴巴推出旗舰级MoE架构模型Qwen4-Max，拥有2.4万亿参数及100万token上下文窗口，在多项编程基准测试中超越主流竞品",
+        "event_summary_en": "Alibaba Group has launched Qwen4-Max, a 2.4-trillion-parameter MoE model featuring a 1M-token context window. The company reports that the closed-source model outperforms Fable 5.1 and Kimi K3.1 Pro in coding benchmarks while achieving up to 50% higher token efficiency compared to its predecessor, Qwen3.8-Max.",
         "core_facts_zh": [
-          "【核心事件】黄仁勋（前英伟达CEO）、科莱特·克雷斯（现英伟达临时CEO）在英伟达总部及企业治理层：黄仁勋辞职，管理层交接，面临供应链合规性调查",
-          "【起因与机理】因个人不当行为指控及芯片合规转运风险导致的治理危机",
-          "【核心事实细节】黄仁勋因个人行为指控卸任，科莱特·克雷斯代理CEO职务。",
-          "【各方立场与态度】公司正处于从激进扩张转向合规重整的战略调整期。"
+          "【核心事件】阿里巴巴集团在企业级产品发布会：发布参数规模达2.4万亿的闭源旗舰模型Qwen4-Max",
+          "【起因与机理】通过MoE架构与效率优化提升代码生成与复杂任务处理能力",
+          "【关键数据与实测】核心架构：采用2.4万亿参数的混合专家（MoE）模型架构。",
+          "【涉及范围与推进】竞争布局：闭源Qwen4-Max主攻高端编程与复杂任务，后续将分批释放轻量化版本权重以覆盖广泛生态。"
         ],
         "core_facts_en": [
-          "[Core Event] Jensen Huang (Former CEO), Colette Kress (Interim CEO) (Nvidia corporate governance): CEO resignation and leadership transition amidst compliance investigations",
-          "[Root Cause & Mechanism] Personal misconduct allegations and risks related to chip diversion",
-          "[Key Fact Detail] Jensen Huang resigns amid misconduct allegations; Colette Kress takes over.",
-          "[Industry Impact & Outlook] Strategic shift from aggressive growth to supply chain compliance."
+          "[Core Event] Alibaba Group (Corporate product launch): Released the 2.4T parameter closed-source Qwen4-Max model",
+          "[Root Cause & Mechanism] Improving coding capabilities and inference efficiency via MoE architecture",
+          "[Key Metrics] Performance Specs: 1M-token context window with 50% higher efficiency than Qwen3.8-Max.",
+          "[Key Position & Outlook] Market Strategy: Closed-source flagship for enterprise tasks, with future open-weight versions for smaller models."
         ],
-        "industry_impact_zh": "英伟达不仅面临顶级创始人的治理真空，更严峻的是其长期依赖的东南亚高性能计算（HPC）云厂商渠道或将面临美方出口管制审查的收紧。新任管理层需立即调整高度激进的融资与销售策略，以应对市场对供应链合规透明度的极度不安。",
-        "industry_impact_en": "Nvidia faces not only a leadership vacuum but also acute scrutiny of its secondary sales channels in Southeast Asia, which may trigger tighter U.S. export compliance enforcement. The new leadership must urgently recalibrate aggressive sales strategies to restore market confidence in supply chain integrity."
+        "industry_impact_zh": "Qwen4-Max的发布标志着阿里正通过MoE架构在超大规模模型中寻求推理成本与性能的平衡，利用闭源旗舰级模型抢占企业级AI市场的认知高地。同时，策略性开放中小型模型权重，旨在通过差异化的生态部署覆盖从端侧到云侧的多元场景，从而在当前的参数规模军备竞赛中实现更具经济效益的落地渗透。",
+        "industry_impact_en": "The release of Qwen4-Max signifies Alibaba's push to balance inference cost and performance via MoE architecture in the ultra-large-scale model segment. By maintaining a closed-source flagship while open-sourcing smaller models, Alibaba is strategically capturing both the high-end enterprise market and the broader edge-to-cloud ecosystem, optimizing commercial utility amidst the ongoing scale-driven arms race."
       },
       "headlines": [
+        {
+          "id": "0bfbcb4426e0e2d0",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "阿里巴巴发布Qwen4-Max模型，性能超GPT-4o级基准",
+          "title_en": "Alibaba says Qwen4-Max, which isn't open weight, beats Fable 5.1 and Kimi K3.1 Pro in coding benchmarks, and plans to release weights for smaller Qwen4 models (Luz Ding/Bloomberg)",
+          "source": "Bloomberg",
+          "published_at": "2026-11-16T03:45:00+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-16/alibaba-unveils-new-flagship-ai-model-in-riposte-to-us-rivals",
+          "event_summary_zh": "阿里巴巴推出旗舰级MoE架构模型Qwen4-Max，拥有2.4万亿参数及100万token上下文窗口，在多项编程基准测试中超越主流竞品",
+          "event_summary_en": "Alibaba Group has launched Qwen4-Max, a 2.4-trillion-parameter MoE model featuring a 1M-token context window. The company reports that the closed-source model outperforms Fable 5.1 and Kimi K3.1 Pro in coding benchmarks while achieving up to 50% higher token efficiency compared to its predecessor, Qwen3.8-Max.",
+          "core_facts_zh": [
+            "【核心事件】阿里巴巴集团在企业级产品发布会：发布参数规模达2.4万亿的闭源旗舰模型Qwen4-Max",
+            "【起因与机理】通过MoE架构与效率优化提升代码生成与复杂任务处理能力",
+            "【关键数据与实测】核心架构：采用2.4万亿参数的混合专家（MoE）模型架构。",
+            "【涉及范围与推进】竞争布局：闭源Qwen4-Max主攻高端编程与复杂任务，后续将分批释放轻量化版本权重以覆盖广泛生态。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Alibaba Group (Corporate product launch): Released the 2.4T parameter closed-source Qwen4-Max model",
+            "[Root Cause & Mechanism] Improving coding capabilities and inference efficiency via MoE architecture",
+            "[Key Metrics] Performance Specs: 1M-token context window with 50% higher efficiency than Qwen3.8-Max.",
+            "[Key Position & Outlook] Market Strategy: Closed-source flagship for enterprise tasks, with future open-weight versions for smaller models."
+          ],
+          "industry_impact_zh": "Qwen4-Max的发布标志着阿里正通过MoE架构在超大规模模型中寻求推理成本与性能的平衡，利用闭源旗舰级模型抢占企业级AI市场的认知高地。同时，策略性开放中小型模型权重，旨在通过差异化的生态部署覆盖从端侧到云侧的多元场景，从而在当前的参数规模军备竞赛中实现更具经济效益的落地渗透。",
+          "industry_impact_en": "The release of Qwen4-Max signifies Alibaba's push to balance inference cost and performance via MoE architecture in the ultra-large-scale model segment. By maintaining a closed-source flagship while open-sourcing smaller models, Alibaba is strategically capturing both the high-end enterprise market and the broader edge-to-cloud ecosystem, optimizing commercial utility amidst the ongoing scale-driven arms race."
+        },
+        {
+          "id": "9cd1fc8ef1ea6973",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "阿里巴巴发布了 Qwen4-Max，这是其新的旗舰 2.4T 参数 MoE 模型，具有 1M 代币上下文窗口，并表示它比 Qwen3.8-Max 少了约 50% 的代币 (Qwen)",
+          "title_en": "Alibaba releases Qwen4-Max, its new flagship 2.4T-parameter MoE model with a 1M-token context window, saying it beats Qwen3.8-Max with up to ~50% fewer tokens (Qwen)",
+          "source": "Qwen",
+          "published_at": "2026-11-16T03:40:01+00:00",
+          "url": "https://qwen.ai/blog?id=qwen4-max",
+          "event_summary_zh": "奎文：\n阿里巴巴发布了 Qwen4-Max，这是其新的旗舰 2.4T 参数 MoE 模型，具有 1M 代币上下文窗口，并称它比 Qwen3.8-Max 少了约 50% 的代币 — 今天，我们将介绍 Qwen4-Max，您在工作、创造力和发现方面的新 AI 队友。",
+          "event_summary_en": "Today, we are introducing Qwen4-Max, your new AI teammate for work, creativity, and discovery.",
+          "core_facts_zh": [
+            "【核心事件】阿里巴巴云智能在全球大模型开源社区与技术研发一线：阿里巴巴发布了 Qwen4-Max，这是其新的旗舰 2.4T 参数 MoE 模型，具有 1M 代币上下文窗口，并表示它比 Qwen3.8-Max 少了约 50% 的代币 (Qwen)",
+            "【起因与机理】降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+            "【关键数据与实测】阿里巴巴发布了 Qwen4-Max，这是其新的旗舰 2.4T 参数 MoE 模型，具有 1M 代币上下文窗口，并表示它比 Qwen3.8-Max 少了约 50% 的代币 (Qwen)。",
+            "【各方立场与态度】阿里巴巴云智能在全球大模型开源社区与技术研发一线。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Industry Leaders: Alibaba releases Qwen4-Max, its new flagship 2.4T-parameter MoE model with a 1M-token context window, saying it beats Qwen3.8-Max with up to ~50% fewer tokens (Qwen)",
+            "[Context & Motivation] Today, we are introducing Qwen4-Max, your new AI teammate for work, creativity, and discovery..",
+            "[Key Metrics] 4T-parameter MoE model with a 1M-token context window, saying it beats Qwen3."
+          ],
+          "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
+          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        },
         {
           "id": "587a5b9a4fcd4237",
           "tag_zh": "📰 业界动态",
@@ -57,64 +108,12 @@
           ],
           "industry_impact_zh": "英伟达不仅面临顶级创始人的治理真空，更严峻的是其长期依赖的东南亚高性能计算（HPC）云厂商渠道或将面临美方出口管制审查的收紧。新任管理层需立即调整高度激进的融资与销售策略，以应对市场对供应链合规透明度的极度不安。",
           "industry_impact_en": "Nvidia faces not only a leadership vacuum but also acute scrutiny of its secondary sales channels in Southeast Asia, which may trigger tighter U.S. export compliance enforcement. The new leadership must urgently recalibrate aggressive sales strategies to restore market confidence in supply chain integrity."
-        },
-        {
-          "id": "8027ceb476a22d57",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Mount Thor获4500万美元融资建云平台",
-          "title_en": "Mount Thor, which is building cloud infrastructure for agentic AI on Apple silicon, raised $45M in a seed round and a Series A co-led by CRV and Conviction (Bradley C/9to5Mac)",
-          "source": "9to5Mac",
-          "published_at": "2026-11-16T03:20:01+00:00",
-          "url": "https://9to5mac.com/2026/11/12/mount-thor-raises-45-million-to-build-mac-data-centers-for-ai-agents/",
-          "event_summary_zh": "初创公司Mount Thor完成4500万美元融资，旨在基于Apple Silicon芯片构建高性能云基础设施",
-          "event_summary_en": "Mount Thor has raised $45 million in seed and Series A funding, co-led by CRV and Conviction. The startup provides cloud-scale compute instances running macOS on Apple Silicon, specifically targeting developers needing specialized environments for agentic AI training and software testing.",
-          "core_facts_zh": [
-            "【核心事件】Mount Thor（云基础设施初创公司）在企业级云服务市场：完成4500万美元融资，提供基于Apple Silicon的云端macOS算力实例",
-            "【起因与机理】满足AI代理与macOS生态内开发测试对高性能弹性硬件的迫切需求",
-            "【关键数据与实测】获得4500万美元融资用于构建Apple Silicon云平台。",
-            "【各方立场与态度】支持AI代理的持续训练、跨设备自动化及合规沙盒测试。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Mount Thor (Cloud infrastructure startup) (Enterprise cloud services market): Raised $45M to provide macOS cloud instances on Apple Silicon",
-            "[Root Cause & Mechanism] Addressing the need for elastic, Apple-specific compute for AI agents and testing",
-            "[Key Metrics] Secured $45M funding for Apple Silicon cloud infrastructure.",
-            "[Key Position & Outlook] Supports agentic AI training and automated cross-device testing."
-          ],
-          "industry_impact_zh": "Mount Thor切中了AI开发工具链的细分痛点，即Apple Silicon在本地端侧AI处理上的性能优势目前在云端存在基础设施真空。此举实质上是将macOS生态的算力资产化，为强化学习与跨设备AI代理部署提供了绕开传统虚拟化限制的裸金属级解决方案。",
-          "industry_impact_en": "Mount Thor addresses a critical gap in the AI developer toolchain, leveraging Apple Silicon’s performance for cloud-scale agentic AI training. By operationalizing macOS as an elastic cloud commodity, it bypasses traditional Linux-centric limitations for developers building ecosystems natively on Apple hardware."
-        },
-        {
-          "id": "79d6445effa13fe3",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "多伦多AI税务研究平台Blue J获1.76亿美元E轮融资",
-          "title_en": "Toronto-based Blue J, which provides AI-powered tax research software, raised a $176M Series E round led by JMI Equity at a $700M+ valuation (Alex Riehl/BetaKit)",
-          "source": "BetaKit",
-          "published_at": "2026-11-16T02:40:01+00:00",
-          "url": "https://betakit.com/ai-tax-research-platform-blue-j-raises-176-million-usd-series-e/",
-          "event_summary_zh": "总部位于多伦多的Blue J完成1.76亿美元E轮融资，估值超7亿美元，资金将用于扩展代理人AI税务工作流及英国市场布局",
-          "event_summary_en": "Toronto-based AI tax research provider Blue J has secured $176 million in Series E funding led by JMI Equity, pushing its valuation past $700 million. Including secondary capital, the funding will scale the firm's agentic 'Workflows' platform and facilitate expansion into the UK market.",
-          "core_facts_zh": [
-            "【核心事件】Blue J (联合创始人兼CEO Ben Alarie), JMI Equity (领投方)在多伦多，税务软件产业：完成1.76亿美元E轮融资，估值超7亿美元，推进Workflows代理人AI功能开发",
-            "【起因与机理】利用年度经常性收入翻倍的增长势头，向税务咨询与自动生成工作流领域跨越",
-            "【关键数据与实测】Blue J完成1.76亿美元E轮融资，由JMI Equity领投，估值超7亿美元。",
-            "【各方立场与态度】核心战略为在英国设立分部，从税务研究辅助工具向全链路税务顾问平台转型。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Blue J (CEO Ben Alarie), JMI Equity (Toronto, tax tech sector): Raised $176M Series E, valuation >$700M, scaling agentic AI 'Workflows",
-            "[Root Cause & Mechanism] Capitalize on doubled ARR to transition from research platform to advisory service",
-            "[Key Metrics] Blue J closed a $176M Series E round led by JMI Equity, valued at over $700M.",
-            "[Key Position & Outlook] Strategic focus: UK market entry and transition from a research platform to a comprehensive tax advisory service."
-          ],
-          "industry_impact_zh": "Blue J的融资路径反映了法律与财税领域对代理人AI（Agentic AI）的高度依赖，即从单纯的语义检索进化为自动生成合规产出。此举标志着垂直领域SaaS正通过高置信度的数据模型，构建防御性极强的护城河，从而将业务范畴从工具辅助提升至直接替代部分中级税务顾问的决策过程。",
-          "industry_impact_en": "Blue J's funding trajectory highlights a critical pivot in legal/tax tech: moving from passive semantic retrieval to agentic AI that generates actionable compliance deliverables. This vertical SaaS strategy creates a high defensive moat by embedding proprietary tax logic into automated workflows, effectively displacing manual advisory tasks."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 03:33:36 UTC",
+      "updated_at": "2026-11-16 03:48:01 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +280,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 03:33:36 UTC",
+      "updated_at": "2026-11-16 03:48:01 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +389,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,260)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,264)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,260 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,264 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
