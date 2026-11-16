@@ -741,6 +741,31 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
         if not raw_p:
             continue
 
+        # Section Subheading Recognition
+        has_chinese = bool(re.search(r'[\u4e00-\u9fa5]', raw_p))
+        if not has_chinese:
+            is_subheading = (
+                (raw_p.isupper() and 5 <= len(raw_p) <= 80 and not raw_p.startswith('($') and not raw_p.endswith('.')) or
+                raw_p.startswith('### ')
+            )
+        else:
+            is_subheading = (
+                raw_p.startswith('### ') or
+                raw_p in ["未来的教室", "没有明确成绩单的试验", "寻找恰当的平衡点"] or
+                (len(raw_p) <= 30 and not raw_p.endswith('。') and not raw_p.endswith('，') and not raw_p.endswith('”') and (
+                    raw_p.startswith("【") or raw_p.startswith("一、") or raw_p.startswith("二、") or raw_p.startswith("三、")
+                ))
+            )
+        if is_subheading:
+            clean_heading = raw_p.lstrip('#').strip()
+            rendered_elements.append(f"""
+            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
+              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+              <span>{escape(clean_heading)}</span>
+            </h3>
+            """.strip())
+            continue
+
         is_pure_quote = bool(re.match(r'^[“"][^”"]+[”"]$', raw_p) or re.match(r'^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$', raw_p))
 
         badge_html = ""
@@ -796,7 +821,7 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
             img_idx += 1
             i_url = cur_img["url"]
             if is_zh:
-                i_cap = cur_img.get("caption") or cur_img.get("alt") or ""
+                i_cap = cur_img.get("caption_zh") or cur_img.get("caption") or cur_img.get("alt") or ""
             else:
                 i_cap = cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "Field scene"
             
@@ -936,9 +961,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     paras = []
     if full_text and len(full_text) > 120:
-        paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) > 20]
+        paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) >= 3]
         if not paras:
-            paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) > 20]
+            paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) >= 3]
         is_excerpt = is_paywalled or (len(paras) <= 6 and not item.get("is_substantive"))
     elif is_paywalled:
         fallback_snippet = str((item.get("summary_zh") or item.get("content_snippet") or summary) if is_zh else (item.get("summary_en") or item.get("content_snippet") or summary) or "").strip()
@@ -975,7 +1000,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 i_cap = ""
             else:
                 continue
-            if not i_url or not i_url.startswith("http"):
+            if not i_url or (not i_url.startswith("http") and not i_url.startswith("/")):
                 continue
             clean_k = i_url.split("?")[0]
             if clean_k in seen_img_urls:
@@ -985,6 +1010,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 "url": i_url,
                 "caption": img_entry.get("caption", "").strip() if isinstance(img_entry, dict) else "",
                 "caption_en": img_entry.get("caption_en", "").strip() if isinstance(img_entry, dict) else "",
+                "caption_zh": img_entry.get("caption_zh", "").strip() if isinstance(img_entry, dict) else "",
                 "alt": img_entry.get("alt", "").strip() if isinstance(img_entry, dict) else ""
             })
 

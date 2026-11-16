@@ -411,79 +411,14 @@ class ArticleExtractor:
     def _extract_reuters(cls, html_text: str, url: str = "") -> List[str]:
         """
         路透社 (Reuters) 专属单一抓取器：
-        1. 穿透客户端订阅弹窗遮罩，从 DOM 的 data-testid="paragraph-X" 与
-           article-body-module__paragraph 正文容器中精准提取全部原版段落；
-        2. 若因 DataDome 盾或网络阻断导致 HTML 缺失，无缝调度电讯专网联合穿透（Syndication Fallback），
-           从 Yahoo / Miami Herald / MSN 等官方授权专网中抽取 100% 对齐的电讯社原文字节。
+        已全面迁移并锁定至独立隔离的 crawlers.reuters_crawler 专属模块。
         """
-        paras = []
-        if html_text:
-            # 1. 优先提取 Reuters 专用的 data-testid="paragraph-X" 节点
-            raw_paras = re.findall(r'<(?:div|p)[^>]*data-testid="paragraph-\d+"[^>]*>(.*?)</(?:div|p)>', html_text, re.DOTALL | re.I)
-
-            # 2. 备用：提取 article-body-module__paragraph 样式节点
-            if not raw_paras:
-                raw_paras = re.findall(r'<(?:div|p)[^>]*class="[^"]*article-body-module__paragraph[^"]*"[^>]*>(.*?)</(?:div|p)>', html_text, re.DOTALL | re.I)
-
-            # 3. 备用：从 article-body 容器提取
-            if not raw_paras:
-                m_body = re.search(r'data-testid="article-body"[^>]*>(.*?)</div>', html_text, re.DOTALL | re.I)
-                if m_body:
-                    raw_paras = re.findall(r'<p[^>]*>(.*?)</p>', m_body.group(1), re.DOTALL | re.I)
-
-            for p in raw_paras:
-                c = re.sub(r',\s*opens new tab', '', p, flags=re.I)
-                c = re.sub(r'[\u200b\u200c\u200d\u2060\ufeff\xa0]', ' ', c)
-                cp = cls._clean_paragraph(c)
-                if cp and not any(bad in cp.lower() for bad in [
-                    'sign up here', 'our standards: the thomson reuters trust principles',
-                    'our standards: the thomson reuters'
-                ]):
-                    if cp not in paras:
-                        paras.append(cp)
-
-            # 4. 降级尝试通用 JSON-LD
-            if len(paras) < 3:
-                j_paras = cls._extract_from_json_ld(html_text)
-                for jp in j_paras:
-                    if jp not in paras:
-                        paras.append(jp)
-
-        # 5. 若直连被拦截 (DataDome 401 或段落 < 3) 且提供了 url，启动路透社电讯联合穿透机制
-        if len(paras) < 3 and url and url.startswith("http"):
-            try:
-                import urllib.request
-                import urllib.parse
-                import xml.etree.ElementTree as ET
-                slug = url.rstrip('/').split('/')[-1]
-                slug = re.sub(r'-\d{4}-\d{2}-\d{2}$', '', slug)
-                q_words = slug.replace('-', ' ')
-                q = urllib.parse.quote(q_words[:80])
-                bing_rss = f"https://www.bing.com/news/search?q={q}&format=rss"
-                req = urllib.request.Request(bing_rss, headers={"User-Agent": cls.USER_AGENT})
-                with urllib.request.urlopen(req, timeout=8) as r:
-                    root = ET.fromstring(r.read())
-                    items = root.findall('.//item')
-                    for it in items[:6]:
-                        raw_l = it.findtext('link') or ''
-                        real_u = ''
-                        if 'url=' in raw_l:
-                            real_u = urllib.parse.unquote(raw_l.split('url=')[1].split('&')[0])
-                        elif raw_l.startswith('http'):
-                            real_u = raw_l
-                        if not real_u or 'reuters.com' in real_u:
-                            continue
-                        ext_synd = cls.extract_article(real_u)
-                        synd_paras = ext_synd.get('paragraphs', [])
-                        if len(synd_paras) >= 3:
-                            clean_synd = [sp for sp in synd_paras if not any(b in sp.lower() for b in ['reuters connect', 'originally published', 'copyright reuters'])]
-                            if len(clean_synd) >= 3:
-                                paras = clean_synd
-                                break
-            except Exception:
-                pass
-
-        return paras
+        try:
+            from crawlers.reuters_crawler import crawl_reuters
+            data = crawl_reuters(url=url, html_text=html_text)
+            return data.get("paragraphs", [])
+        except Exception:
+            return []
 
     @classmethod
     def _extract_bloomberg(cls, html_text: str) -> List[str]:
@@ -750,6 +685,20 @@ class ArticleExtractor:
         if domain.startswith("www."):
             domain = domain[4:]
         result["domain"] = domain
+
+        # -------------------------------------------------------------
+        # 独立信源专属爬虫路由 (Per-Source Isolated Crawler Dispatch)
+        # 针对已改造完成并锁定的信源，严格优先路由至专属独立模块，杜绝任何通用逻辑干扰
+        # -------------------------------------------------------------
+        if "reuters.com" in domain or "reutersagency.com" in domain:
+            try:
+                from crawlers.reuters_crawler import crawl_reuters
+                reuters_data = crawl_reuters(url, html_text=html_text)
+                if reuters_data.get("is_substantive") or reuters_data.get("paras_count", 0) >= 3:
+                    result.update(reuters_data)
+                    return result
+            except Exception:
+                pass
 
         # 获取 HTML
         if not html_text:

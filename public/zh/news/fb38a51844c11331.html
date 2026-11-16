@@ -301,6 +301,8 @@
 
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">然后训练会调整这些值数百万次，但未使用的单词或符号的一些槽位会保留其初始随机值。德普表示，即使在模型训练有素的部分，初始分布的微弱统计回声仍然存在。他说，他对模型进行了反向运算，并在真正的 Blackwell 芯片上准确地重现了 DeepSeek-V4-Flash 和 Kimi K3 的结果。他已在 GitHub 上发布了验证码。</p>
 
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">培训费用超过 5 亿美元</p>
+
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">该分析将 DeepSeek-V4-Flash 和 MiniMax-M3 映射到 B200 或 B300 芯片（148 个内核）。 DeepSeek-V4-Pro、Kimi K3、Kimi K3.1-Pro和蚂蚁集团的Ling-3.1-flash显示，根据分析，Nvidia液冷GB200或GB300旗舰机架系统的152核心模式。 DePue 表示，统计上可以排除偶然性，并且该方法使用已知硬件正确识别了所有 24 个控制模型，包括 Meta 的 Llama 3.1 (H100)。</p>
 
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">图片：Will DePue / 失业实验室[/caption]</p>
@@ -308,6 +310,8 @@
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">DePue 的报告估计，他检查的五次训练总共需要大约 12,000 个 Blackwell GPU，计算能力相当于大约 30,000 个较旧的 H100 芯片。仅 Kimi K3 在大约 70 天内就需要大约 4,500 个 Blackwell 处理器，而 DeepSeek-V4-Pro 则需要大约 3,000 个处理器。以约 7 万美元的单价计算，每个集群的成本为 2 亿至 3 亿美元，所有五个系统总共花费超过 5 亿美元。</p>
 
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">研究结果也与 SemiAnalysis 首席分析师迪伦·帕特尔 (Dylan Patel) 的分析相符。 Patel在接受红杉资本采访时表示，DeepSeek-V3的模型架构仍然是专门为Nvidia的Hopper芯片量身定制的，而DeepSeek-V4的架构是为Blackwell GPU和华为的Ascend芯片构建的。根据 DePue 的报告，来自其他中国实验室的模型，包括阿里巴巴的 Qwen3.8 以及来自智浦、腾讯、小米和 StepFun 的模型，仍然只显示 Hopper 签名，而美团的 LongCat-2.0 则指向华为硬件。</p>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">指纹并不能证明违法行为</p>
 
 <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">严格来说，该方法仅显示哪个硬件初始化了权重，尽管训练本身很可能在相同的系统上运行。唯一的其他技术解释是 AMD MI300X，它也受到限制，人为节流，因此它会产生相同的模式。 DePue 表示，他利用芯片之间微小的舍入差异排除了 AMD 推出 DeepSeek-V4-Flash 的可能性。</p>
 

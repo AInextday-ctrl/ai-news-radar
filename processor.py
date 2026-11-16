@@ -1372,7 +1372,7 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
     is_paywalled = item.get("is_paywalled") or any(p in source or p in url for p in [
         "the information", "theinformation.com", "bloomberg", "wsj.com", "wall street journal",
         "financial times", "ft.com", "economist", "nytimes.com", "wired", "wired.com",
-        "technologyreview", "reuters", "theverge"
+        "technologyreview", "theverge"
     ])
     is_truncated = content.endswith("...") or content.endswith("…") or len(content) < 140
 
@@ -1548,7 +1548,9 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         raw_art_en = str(item.get("article_content") or item.get("article_content_en") or "").strip()
         item_url = str(item.get("url") or "").strip()
         # 兜底深度穿透：若长正文依然缺失且为合法 URL，最后尝试一次源站深度解构
-        if len(raw_art_en) < 220 and item_url.startswith("http"):
+        is_reuters = "reuters.com" in item_url.lower() or "reutersagency.com" in item_url.lower()
+        needs_art_refresh = (len(raw_art_en) < 600) or raw_art_en.startswith("STORY:") or is_reuters
+        if needs_art_refresh and item_url.startswith("http"):
             try:
                 from article_extractor import ArticleExtractor
                 ext = ArticleExtractor.extract_article(item_url)
@@ -1556,6 +1558,13 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     raw_art_en = ext["full_text"]
                     item["article_content"] = raw_art_en
                     item["article_content_en"] = raw_art_en
+                    item["is_substantive"] = True
+                    if is_reuters:
+                        item["is_paywalled"] = False
+                    if ext.get("inline_images"):
+                        item["inline_images"] = ext["inline_images"]
+                    if ext.get("subheadings"):
+                        item["subheadings"] = ext["subheadings"]
                     if ext.get("cover_image") and not item.get("image_url"):
                         item["image_url"] = ext["cover_image"]
             except Exception:
@@ -1680,16 +1689,25 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
 
         # 自动化源站穿透与跨信源事实补全：针对付费墙截断与残缺新闻，优先解构源站，次选检索补充公开报道事实
         for it in chunk:
-            # 1. 若为 news 类别且正文残缺/为空，优先通过 ArticleExtractor 深度穿透源站长文
+            # 1. 若为 news 类别且正文残缺/为空或受限于摘要，优先通过 ArticleExtractor 深度穿透源站长文
             curr_content = str(it.get("article_content") or it.get("article_content_en") or "").strip()
             item_url = str(it.get("url") or "").strip()
-            if it.get("category") == "news" and len(curr_content) < 220 and item_url.startswith("http"):
+            is_reuters = "reuters.com" in item_url.lower() or "reutersagency.com" in item_url.lower()
+            needs_full_text = (len(curr_content) < 600) or curr_content.startswith("STORY:") or is_reuters
+            if it.get("category") == "news" and needs_full_text and item_url.startswith("http"):
                 try:
                     from article_extractor import ArticleExtractor
                     ext = ArticleExtractor.extract_article(item_url)
                     if ext.get("is_substantive") or len(ext.get("full_text", "")) >= 200:
                         it["article_content"] = ext["full_text"]
                         it["article_content_en"] = ext["full_text"]
+                        it["is_substantive"] = True
+                        if is_reuters:
+                            it["is_paywalled"] = False
+                        if ext.get("inline_images"):
+                            it["inline_images"] = ext["inline_images"]
+                        if ext.get("subheadings"):
+                            it["subheadings"] = ext["subheadings"]
                         if ext.get("cover_image") and not it.get("image_url"):
                             it["image_url"] = ext["cover_image"]
                         print(f"  ✨ [processor] 成功穿透抓取源站长文 ({len(ext['full_text'])} 字): {it.get('title', '')[:40]}")
