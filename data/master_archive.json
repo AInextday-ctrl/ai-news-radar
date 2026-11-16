@@ -4201,6 +4201,43 @@
       }
     },
     {
+      "id": "prompt_arxiv_deep_dive",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 前沿顶会论文 5 步穿透精读",
+      "purpose_en": "🔬 Research & Papers · 5-Step ArXiv Paper Penetration",
+      "title_zh": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
+      "title_en": "💡 [Paper Deep Dive] ArXiv 5-Step Paper Penetration & RTX 4090 Reproduction Bottleneck Audit",
+      "url": "https://arxiv.org/",
+      "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "科研极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T13:08:30Z",
+      "recommended_model": "Claude 4.6 / Gemini 1.5 Pro",
+      "temp_advice": "建议温度 0.3 | 极客文献精读",
+      "metrics": {
+        "type": "🔬 论文拆解",
+        "model": "Gemini 1.5 Pro",
+        "temp": "0.3"
+      },
+      "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
+      "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
+      "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "tags": [
+        "论文精读",
+        "科研拆解",
+        "Prompt神咒"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T13:08:30Z",
+      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板"
+    },
+    {
       "id": "6da4a2eefeda61d3",
       "title": "Dreamteam, which uses AI agents for CRM tasks like data capture and research, raised $53M across seed and Series A led by Together Fund and Accel, respectively (Jagmeet Singh/TechCrunch)",
       "title_en": "Dreamteam, which uses AI agents for CRM tasks like data capture and research, raised $53M across seed and Series A led by Together Fund and Accel, respectively (Jagmeet Singh/TechCrunch)",
@@ -7125,15 +7162,15 @@
       "author_handle": "@Telusko",
       "author_avatar": "https://unavatar.io/youtube/Telusko",
       "source": "YouTube · Telusko",
-      "views": "1.2万 播放",
-      "views_count": 12080,
-      "velocity": 3020.0,
-      "momentum_score": 21140.0,
+      "views": "1.5万 播放",
+      "views_count": 14542,
+      "velocity": 3635.5,
+      "momentum_score": 25448.5,
       "metrics": {
-        "views": "1.2万 播放",
-        "views_count": 12080,
-        "velocity": "+3,020/h",
-        "momentum_score": 21140.0,
+        "views": "1.5万 播放",
+        "views_count": 14542,
+        "velocity": "+3,635/h",
+        "momentum_score": 25448.5,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -7151,7 +7188,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+3,020/h)",
+        "🔥 24h飙升 (+3,635/h)",
         "Telusko",
         "🔥 极客实操"
       ],
@@ -8058,6 +8095,43 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_math_pseudocode_derivation",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 复杂数学公式向 PyTorch 向量化代码翻译",
+      "purpose_en": "🔬 Research & Papers · Math Formula to PyTorch Vectorized Code",
+      "title_zh": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
+      "title_en": "💡 [Math to Code] Mathematical Notation to High-Performance Vectorized PyTorch Translation",
+      "url": "https://pytorch.org/",
+      "image_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "算法工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T10:08:30Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
+      "metrics": {
+        "type": "🔬 公式转代码",
+        "model": "Claude 5.5",
+        "temp": "0.1"
+      },
+      "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
+      "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
+      "prompt_content": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "tags": [
+        "数学公式",
+        "PyTorch",
+        "张量运算"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T10:08:30Z",
+      "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板"
     },
     {
       "id": "8a498f8d23e5d3bc",
@@ -9633,6 +9707,45 @@
       }
     },
     {
+      "id": "wf_claude_code_cli_best_practices",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "⚡ CLI 自动化",
+      "title_zh": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "title_en": "Claude Code CLI Autonomous Coding & Context Pruning Playbook",
+      "target_platform": "Claude Code (CLI) / Terminal / Bash",
+      "scenario": "💻 编程研发 / Agent工作流",
+      "scenario_key": "code",
+      "tested_models": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "model_family": "Claude",
+      "takeaway_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "takeaway_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "config_filename": "claude-code-playbook.sh",
+      "config_lang": "bash",
+      "code_snippet": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "usage_guide_zh": "在终端中全局安装 `@anthropic-ai/claude-code` 后，直接按需调用上述预置命令，可大幅缩减 Token 消耗并杜绝意外越权操作。",
+      "usage_guide_en": "After installing @anthropic-ai/claude-code globally, execute these commands in your repository root to maximize token efficiency and safe autonomous coding.",
+      "created_at": "2026-11-16T08:08:30Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T08:08:30Z",
+      "summary_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "summary_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "prompt_content_zh": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content_en": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "recommended_model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "metrics": {
+        "type": "⚡ CLI 自动化",
+        "model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+        "filename": "claude-code-playbook.sh"
+      },
+      "title": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "image_url": null
+    },
+    {
       "id": "8f0876410683b6e0",
       "status_id": "2122239935763669297",
       "category": "celebrity",
@@ -10362,6 +10475,43 @@
       }
     },
     {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T07:08:30Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T07:08:30Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
+    },
+    {
       "id": "a55c13704aad6961",
       "status_id": "2122225199919907153",
       "category": "celebrity",
@@ -10762,6 +10912,12 @@
       "content_snippet": "WorldofAI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "WorldofAI 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by WorldofAI: Qwen 4 Max IS OUT! BEST Chinese AI Model EVER?! (Fully Tested)",
+      "is_pinned": false,
+      "primary_tag": "tech_frontier",
+      "primary_tag_zh": "🔬 前沿技术",
+      "primary_tag_en": "🔬 Frontier Tech",
+      "primary_tag_color": "cyan",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T15:05:14.821976+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -11059,6 +11215,87 @@
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
+    },
+    {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-16T06:08:30Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T06:08:30Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T06:08:30Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T06:08:30Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
     },
     {
       "id": "fa00193c31fcd3f2",
@@ -11901,6 +12138,45 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (91分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_deepseek_r1_ollama_local_sota",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🧠 本地私有化",
+      "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
+      "target_platform": "Ollama / OpenWebUI / vLLM",
+      "scenario": "🔌 模型部署 / 隐私推理",
+      "scenario_key": "infra",
+      "tested_models": "DeepSeek-R1 (14B / 32B / 70B)",
+      "model_family": "DeepSeek",
+      "takeaway_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "takeaway_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "config_filename": "Modelfile.deepseek-r1-opt",
+      "config_lang": "dockerfile",
+      "code_snippet": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "usage_guide_zh": "保存为 `Modelfile`，执行 `ollama create deepseek-r1-opt -f Modelfile`，即可生成抗复读、低显存占用的专属本地超强推理大模型。",
+      "usage_guide_en": "Save as Modelfile, then run 'ollama create deepseek-r1-opt -f Modelfile'. Delivers stable reasoning with low VRAM footprint and no loop loops.",
+      "created_at": "2026-11-16T05:08:30Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T05:08:30Z",
+      "summary_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "summary_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "prompt_content_zh": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content_en": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "recommended_model": "DeepSeek-R1 (14B / 32B / 70B)",
+      "metrics": {
+        "type": "🧠 本地私有化",
+        "model": "DeepSeek-R1 (14B / 32B / 70B)",
+        "filename": "Modelfile.deepseek-r1-opt"
+      },
+      "title": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "image_url": null
     },
     {
       "id": "7dcdd2b61c510ee8",
@@ -13986,6 +14262,89 @@
       }
     },
     {
+      "id": "prompt-report-mckinsey-01",
+      "title_zh": "麦肯锡金字塔原理：季度述职与高管商业报告",
+      "title_en": "McKinsey Pyramid Executive Report & Review",
+      "category": "prompts",
+      "scenario_label": "📑 商业报告",
+      "target_model": "Claude 5.5 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 95,
+      "generation_tier": "sota",
+      "purpose_zh": "结论先行的高层述职与项目复盘报告",
+      "temp_advice": "温度 0.3",
+      "variables": [
+        "{{业务部门}}",
+        "{{关键战果}}",
+        "{{核心短板}}",
+        "{{下阶段目标}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡全球合伙人级别的战略咨询顾问。请以经典的【金字塔原理（结论先行 BLUF）】将我零散的工作记录重构为一份高层述职/立项商业报告：\n\n要求：\n1. 【顶部结论 (The Answer First)】：一句话精炼提炼整个季度的经营成果与价值量化；\n2. 【三柱论据 (MECE法则)】：从运营效率、营收增长、团队资产 3 个互不重叠的支柱展开阐述；\n3. 【直面短板与根因】：不回避 {{核心短板}}，但将其转化为下个阶段可量化的投入产出比（ROI）抓手；\n4. 【行动规划图景】：设定遵循 SMART 原则的 {{下阶段目标}} 与季度甘特图里程碑。",
+      "prompt_content_en": "Transform raw operational notes into a high-impact executive presentation following the Minto Pyramid Principle: Bottom-Line-Up-Front (BLUF), MECE-structured supporting pillars, and SMART milestone roadmaps.",
+      "sample_output": {
+        "type": "text",
+        "title": "述职报告提纲样本：AI 自动化中台建设报告",
+        "content": "【BLUF 核心结论】\nQ3 通过在客户服务与情报聚合管线中全面引入 AI Agent，我们在运营成本降低 41% 的同时，将响应中位数缩短至 1.8 秒，实现单季 ROI 达 380%。\n\n【第一支柱：经营效能跃迁（MECE 1）】\n- 全自主中转网关与自动化管线承载 94.2% 的日常例行分发，无人工介入事故率降至 0.01%；\n\n【第二支柱：资产沉淀与质量壁垒（MECE 2）】\n- 搭建前沿 SOTA 模型代际评级系统与微快照图库，成为垂类雷达第一标杆；\n\n【第三支柱：短板复盘与 Q4 攻坚（MECE 3）】\n- 痛点：老旧模型模版对新用户构成噪音干扰；\n- 策略：推出历史库智能分流系统，预计下季度用户留存提升 25%。",
+        "title_en": "Verified Sample Output (Claude 5.5 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将自己一周/一月的粗糙工作备忘录贴在后面，几秒钟即可输出具备咨询公司水准的商业报告。",
+      "created_at": "2026-11-16T03:08:30Z",
+      "variables_en": [
+        "{{Business Unit}}",
+        "{{Key Achievements}}",
+        "{{Core Bottlenecks}}",
+        "{{Next-Phase Goals}}"
+      ],
+      "scenario_label_en": "📑 Business Report",
+      "purpose_en": "BLUF Executive Summary & Post-Mortem Report",
+      "temp_advice_en": "Temp 0.3 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T03:08:30Z",
+      "recommended_model": "Claude 5.5 / GPT-6.0",
+      "title": "麦肯锡金字塔原理：季度述职与高管商业报告",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_video_cinematic_lens",
+      "sub_type": "video_gen",
+      "purpose_zh": "🎥 视频生成 · 影视级镜头语言与多角度运镜",
+      "purpose_en": "🎥 Video Gen · Cinematic Camera Movement & Lens Control",
+      "title_zh": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词",
+      "title_en": "💡 [Cinematic Camera Movement] Sora & Kling Vertigo Dolly Zoom & FPV Drone Master Prompt",
+      "url": "https://runwayml.com/",
+      "image_url": "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "影视极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T03:08:30Z",
+      "recommended_model": "Runway Gen-3 / Sora / Kling",
+      "temp_advice": "Motion Scale: 5 | 严格运镜控制",
+      "metrics": {
+        "type": "🎥 视频运镜",
+        "model": "Gen-3 / Kling",
+        "temp": "Motion 5"
+      },
+      "content_snippet": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
+      "summary_zh": "希区柯克式反向推拉变焦：从千米高空穿云俯冲无缝衔接至主角面部微表情，运镜丝滑无形变。",
+      "summary_en": "Dolly zoom (vertigo effect), seamless camera transition from high-altitude aerial FPV dive to intimate eye-level portrait.",
+      "prompt_content_zh": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.\n\n【中文使用解析】：专为 Runway Gen-3 Alpha 或 Kling 1.5 的 Text-to-Video / Image-to-Video 设计。重点定义镜头物理轨迹（dolly zoom / push forward / zoom out）以约束物理引擎不会乱造多余肢体。",
+      "prompt_content_en": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
+      "prompt_content": "Cinematic camera movement: Vertigo effect dolly zoom. The camera slowly pushes forward while simultaneously zooming out, creating intense background perspective distortion while the solitary traveler standing at the edge of a sheer mountain cliff remains perfectly stationary. Golden hour backlighting, subtle wind blowing through jacket fabric, volumetric clouds swirling in the gorge below. Hyper-fluid 60fps motion, zero morphological jitter, photorealistic cinema grade.",
+      "tags": [
+        "视频运镜",
+        "Runway",
+        "影视质感"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T03:08:30Z",
+      "title": "💡【AI 视频运镜大师】Sora / Kling / Runway Gen-3 希区柯克变焦与无人机航拍复合提示词"
+    },
+    {
       "id": "ddf43d6e784a8470",
       "status_id": "2122164674309521562",
       "category": "celebrity",
@@ -15546,10 +15905,7 @@
         "score": 46,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false,
-      "is_substantive": true,
-      "article_content_en": "--> South Korean company SK Hynix plans to allocate 1.4 trillion won, or $1.05 billion, over the next five years to support domestic suppliers of materials, components and equipment for semiconductor production. The program is intended to strengthen the company’s supply chain amid intensifying competition in the market for artificial intelligence chips, Channel NewsAsia reports.\n\nThe program will cover four stages: research and development, testing, mass production and sales. SK Hynix is to provide upfront funding of up to 50% of initial development costs. The company also plans to compensate suppliers for completed work even if a project does not meet its targets.\n\nSeparately, SK Hynix and financial institutions will provide 2 trillion won in financing with support from the Korea Trade Insurance Corporation. Other programs include preferential loans and technical consultations for suppliers, including small subcontractors.\n\nMore current news is available on the UA.News Telegram channel Telegram.\n\nThe company also unveiled plans to establish the 874.6 billion won Trinity Fab testing center at its semiconductor complex in Yongin, about 40 km south of Seoul. The facility is scheduled to open in May 2027. SK Hynix will contribute 443.2 billion won, the central government 373.6 billion won, and local authorities 57.7 billion won.\n\nThe center will be located at the site of the first chip manufacturing plant in SK Hynix’s Yongin cluster. It will include a 3,305-square-meter cleanroom and equipment for lithography, etching, deposition and inspection. Suppliers will be able to test materials and equipment on 12-inch silicon wafers before introducing them to production lines. The facility will be managed by an independent nonprofit foundation to protect intellectual property and commercially sensitive information."
+      }
     },
     {
       "id": "c8ec143279482e65",
@@ -16509,10 +16865,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false,
-      "is_substantive": true,
-      "article_content_en": "FILE PHOTO: A United Launch Alliance (ULA) payload faring carrying a national security spacecraft to be attached to the Vulcan rocket for USSF-87 passes by the Vehicle Assembly Building at the Kennedy Space Center in Cape Canaveral, Florida, U.S., February 3, 2026. REUTERS/Brendan McDermid/File Photo\n\nBROWNSVILLE, Nov ⁠15 (Reuters) - ⁠A Vulcan rocket ⁠owned by United Launch Alliance, ​the joint venture of Boeing and Lockheed ‌Martin, failed on Sunday ‌shortly after launch from Florida, ⁠destroying ⁠its payload of 40 satellites for Amazon's Leo ​internet network in the company's first mission failure.\n\nThe rocket failed roughly 10 minutes ​after liftoff, and the cause was not ⁠immediately clear. ⁠It represented a ⁠major ​setback for the two decade-old company's new flagship ​rocket as ⁠it sought to begin a regular cadence of launches for Amazon's burgeoning satellite internet constellation.\n\n\"Based on data received ⁠by our Launch Director, we confirm that the ⁠Vulcan vehicle launched from Space Launch Complex 41 suffered an anomaly 10 minutes into the flight and failed to deliver the Amazon mission to orbit,\" ULA said in a statement.\n\n\"Every flight generates data, and every flight ⁠teaches us something. Since the anomaly just occurred, we don’t have any specific data yet to understand what ​occurred today.\"\n\nHave the parent playbook for applying to college delivered to your inbox each Thursday.\n\nGet the Admissions Edge With Getting In!\n\nStella Garner and Holliday WoodardNov. 12, 2026"
+      }
     },
     {
       "id": "20f7e38bfce0cb1a",
@@ -25480,10 +25833,7 @@
         "score": 41,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false,
-      "is_substantive": true,
-      "article_content_en": "Italy's privacy regulator has imposed a 805 million euros penalty on Meta Platforms Ireland after finding that the company accessed photos, videos, and related information stored on Android devices without obtaining specific user permission.\n\nThe case focuses on a Facebook feature that offered users photo and video suggestions from their phone galleries while they were browsing the app. According to the authority, the feature allowed access to gallery content without providing users with clear information and a separate consent process.\n\nThe regulator's investigation began after a consumer complaint and included a technical review of how the feature operated. Following its findings, the authority ordered Meta to switch off the feature by default within 60 days and seek explicit consent before accessing gallery content.\n\nFor comments and feedback contact: editorial@rttnews.com\n\nNovember 12, 2026 08:51 ET The second half of November brings several closely watched FDA regulatory milestones that could influence biotech stocks. This video highlights six biotech companies to watch ahead of their upcoming FDA decisions, covering potential treatments for rare genetic muscle disorders, lung cancer, surgical site infections, gastrointestinal stromal tumours, early breast cancer, and kidney disease."
+      }
     },
     {
       "id": "56989d489272ae36",
@@ -30721,6 +31071,12 @@
       "content_snippet": "Simplilearn 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "Simplilearn 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by Simplilearn: AI Engineer Full Course 2027 | Learn AI, Machine Learning, & AI Agent Development | Simplilearn",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T15:05:14.836215+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -53161,8 +53517,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "926897da4b4a815f",
@@ -54025,8 +54380,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_rfRsvkjhKRI",
@@ -57338,8 +57692,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_cCPOZB8YbPY",
@@ -65130,8 +65483,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "438ebea9277e57d7",
@@ -66552,8 +66904,7 @@
         "score": 84,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_3Sdb1yc9LCc",
@@ -66675,7 +67026,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Tel Aviv-based Bay, which helps companies find AI agents and set guardrails, emerges from stealth with a $37M Series A led by Battery Ventures and a $13M seed (Chris Metinko/Axios)",
         "[Context & Motivation] Agentic cybersecurity startup Bay emerged from stealth with $50 million raised, CEO Yuval Zacharia tells Axios Pro exclusively..",
-        "[Key Metrics & Data] Chris Metinko/Axios:\nTel Aviv-based Bay, which helps companies find artificial intelligence agents and put up guardrails, emerges from the crowd with $37 million Series A and $13 million in seed funding led by Battery Ventures - Agentic cybersecurity startup Bay emerges from the crowd, raising $50 million."
+        "[Key Metrics & Data] Chris Metinko/Axios:\nTel Aviv-based Bay, which helps companies find artificial intelligence agents and put up guardrails, emerges with $37 million Series A and $13 million in seed funding led by Battery Ventures - Agentic cybersecurity startup Bay emerges from the crowd, raising $50 million."
       ],
       "is_recent_24h": false,
       "is_pinned": false,
@@ -68740,8 +69091,7 @@
         "score": 45,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9bf4451080b22ac8",
@@ -69681,8 +70031,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "3f0e3e7c32884ab6",
@@ -70995,8 +71344,7 @@
         "score": 48,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_IDHV7iDitGM",
@@ -72901,8 +73249,7 @@
         "score": 46,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_NjUsYHLSyYg",
@@ -73742,8 +74089,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "bac27e4c49b03da3",
@@ -74087,8 +74433,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "6cd122461f975473",
@@ -80883,8 +81228,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_I14EA4yqmCA",
@@ -105937,8 +106281,7 @@
         "score": 43,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "b7b7494570843dcf",
@@ -106851,8 +107194,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "00c3071add8fc29c",
@@ -107904,8 +108246,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "16e133170e0806f6",
@@ -131505,8 +131846,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ef9f7f8a64cf5696",
@@ -133756,8 +134096,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "32be4c35a611ada5",
@@ -140236,8 +140575,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "f64c6505fc312b5b",
@@ -150078,8 +150416,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "28ab4d9fee09377e",
@@ -150728,8 +151065,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_KrwW9242EcI",
@@ -155442,8 +155778,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "59eb10431f463ee8",
@@ -165191,8 +165526,7 @@
         "score": 80,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "7206dd4d9255ada9",
@@ -165493,7 +165827,7 @@
         "今日要闻"
       ],
       "title_zh": "Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
-      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲弱。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
+      "summary_zh": "周五，Reddit 股价暴跌 29.22%，这是自 2024 年上市以来最严重的跌幅，此前该公司在最新财报中预测第四季度销售疲软。此前的历史新低是在7月31日创下的，当时该股下跌了20.99%。该社交媒体公司周四预计第四季度",
       "hot_score": 3,
       "fact_bullets_zh": [
         "【核心事件】Reddit 周五收盘下跌 29.27%，这是自 2024 年上市公司以来最严重的跌幅，此前该公司预测第四季度收入疲弱",
@@ -166098,8 +166432,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "3e32fe1f6feb749c",
@@ -168847,8 +169180,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "22d7d54e917f6014",
@@ -170107,8 +170439,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "36d70ba3a7f34c32",
@@ -171336,8 +171667,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "7e807bb717f230bf",
@@ -171895,8 +172225,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "952e227c6d6908bd",
@@ -175780,8 +176109,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "5fa7139f8acf6023",
@@ -178139,8 +178467,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d2d78ba7d3ffda9c",
@@ -179523,8 +179850,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "e0c03967b10c995d",
@@ -187359,8 +187685,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ea079b8007fff88d",
@@ -188359,8 +188684,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "012c48db4123b1b0",
@@ -192383,8 +192707,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "026f0c06cdc6ca5c",
@@ -193378,8 +193701,7 @@
         "score": 48,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d84b4225a9ca950a",
@@ -194956,8 +195278,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "874e6de2616f71a0",
@@ -195700,8 +196021,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a5ffa3c4d9f00965",
@@ -204812,8 +205132,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "1b54bd8880993a5b",
@@ -205146,8 +205465,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "f7af1a60abcda77e",
@@ -207829,8 +208147,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a3bd81e86fecd85c",
@@ -208830,8 +209147,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9e7d8b20da42a495",
@@ -210059,8 +210375,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d8011c8bfc86181f",
@@ -212453,8 +212768,7 @@
         "score": 43,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0596dd914b82dba9",
@@ -221223,8 +221537,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "yt_wbCpgR-PGZw",
@@ -225628,8 +225941,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "aspect_ratio": "9:16",
@@ -250880,8 +251192,7 @@
         "score": 46,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "da48c00ed89e0a52",
@@ -255598,8 +255909,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "89a90b883d25d956",
@@ -258732,8 +259042,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "8722e827ba4261d4",
@@ -260965,8 +261274,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0fc35b1392c20fd9",
@@ -270886,8 +271194,7 @@
         "score": 82,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "067c4b08448f8c46",
@@ -271767,8 +272074,7 @@
         "score": 43,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "07659bbc5f6f5490",
@@ -275315,7 +275621,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rebranding it to \"a16z frontier\" and broadening its investment strategy beyond crypto (Leo Schwartz/The Information)",
         "[Context & Motivation] Andreessen Horowitz, which made one of the boldest bets on blockchain investments in the venture world ….",
-        "[Key Fact Detail] Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rename it \"a16z frontier\" and expand its investment strategy beyond crypto - Andreessen Horowitz, one of its bold investment strategies."
+        "[Key Fact Detail] Source: a16z plans to drop “crypto” from its flagship blockchain fund, rename it “a16z frontier” and expand its investment strategy beyond crypto – Andreessen Horowitz, one of the bold investment strategies."
       ],
       "primary_tag": "tech_frontier",
       "primary_tag_zh": "🔬 前沿技术",
@@ -276293,8 +276599,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0ac4469b3fdd4883",
@@ -278274,8 +278579,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "20bc57b6e1fd2f2a",
@@ -278453,8 +278757,7 @@
         "score": 45,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "8d045f3a099c5ffe",
@@ -288758,8 +289061,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "90bda9737188c8dd",
@@ -292556,8 +292858,7 @@
         "score": 45,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "bcdbb32959ec41f3",
@@ -292795,8 +293096,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "65d38362b48b46c4",
@@ -294389,8 +294689,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "bf5c13b082be676e",
@@ -296230,8 +296529,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "91fa465caa43d597",
@@ -302696,8 +302994,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "f6244354d48f5b1b",
@@ -309187,8 +309484,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "39b6f201a24eca14",
@@ -310568,8 +310864,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d759f0723ce1c64b",
@@ -310816,8 +311111,7 @@
         "score": 50,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "97dbaa4032c5d138",
@@ -314801,8 +315095,7 @@
         "score": 85,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "173e0c4c8da2b1bc",
@@ -319499,8 +319792,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c4e005d2198d9e6b",
@@ -320175,8 +320467,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "40ace72af713aff7",
@@ -322547,8 +322838,7 @@
         "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ba5ad38a19f6b643",
@@ -330952,8 +331242,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "acaa14340223e8da",
@@ -353827,8 +354116,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "803b67508c8602d0",
@@ -354894,8 +355182,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "582e524d26af8bc7",
@@ -356760,8 +357047,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "fec91d1ebe0fd627",
@@ -359620,8 +359906,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c84ed0ef5d60de86",
@@ -361066,8 +361351,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d433d4c5c9b962b4",
@@ -361765,8 +362049,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "00578fe509ac3e08",
@@ -375187,8 +375470,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "764163504ed9ebc2",
@@ -376490,8 +376772,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "88476480055227c8",
@@ -377910,8 +378191,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d645d43b0d7481df",
@@ -384520,8 +384800,7 @@
         "score": 82,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "41c7f0ea23ce70ca",
@@ -389300,8 +389579,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "6d89fd9a90008f9e",
@@ -389871,8 +390149,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "e798a8fd95771d7f",
@@ -390135,8 +390412,7 @@
         "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "fe82c7aa1c023372",
@@ -391096,8 +391372,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "48e150f159470bec",
@@ -391733,8 +392008,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "4d4e034b3123b04c",
@@ -394128,8 +394402,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "cfa845728564c774",
@@ -396229,8 +396502,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c7571cac75e06c70",
@@ -398458,8 +398730,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "8b89a118ab93f989",
@@ -399663,8 +399934,7 @@
         "score": 85,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a3f83693512e6c20",
@@ -399752,8 +400022,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "39873fd7ca72a346",
@@ -401206,8 +401475,7 @@
         "score": 78,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (78分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c85745e66f052fdf",
@@ -401292,8 +401560,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "viral_ab6c4da602aab2ea",
@@ -402839,8 +403106,7 @@
         "score": 81,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (81分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "e21abe0d6a23c506",
@@ -402927,8 +403193,7 @@
         "score": 84,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "viral_91c01648ba7f2cac",
@@ -405349,8 +405614,7 @@
         "score": 78,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (78分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "937755981d3e5192",
@@ -453798,8 +454062,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c148628d90480f47",
@@ -458457,8 +458720,7 @@
         "score": 41,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a01a495844d0bde7",
@@ -461189,8 +461451,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "86336eb9a10a75e4",
@@ -463084,8 +463345,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0c4e0fcc6d0d03b6",
@@ -465421,8 +465681,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "11ed9b439bdf174b",
@@ -470596,8 +470855,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "5ed0ee7c61000560",
@@ -471945,8 +472203,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "58dd83edfcd61f15",
@@ -473809,8 +474066,7 @@
         "score": 88,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9ca1fa53288b6913",
@@ -474237,8 +474493,7 @@
         "score": 88,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ca7c9714caf17855",
@@ -474749,8 +475004,7 @@
         "score": 48,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "523e7b0294fbbd31",
@@ -475636,8 +475890,7 @@
         "score": 43,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "f184e0973690f874",
@@ -476834,8 +477087,7 @@
         "score": 45,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "5ee35190b7da35d3",
@@ -477432,8 +477684,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "90b5664fa5dc70e8",
@@ -478116,8 +478367,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ab88cadb67716cc4",
@@ -484868,8 +485118,7 @@
         "score": 48,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ec70c68735b92ee1",
@@ -486496,8 +486745,7 @@
         "score": 94,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (94分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c93815de839cf521",
@@ -487216,8 +487464,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "11f96d0258e2e63a",
@@ -487302,8 +487549,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "398c66157b50b2d6",
@@ -487472,8 +487718,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "adc4e4cf5b580e3e",
@@ -487560,8 +487805,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "de09402e991eea1b",
@@ -487988,8 +488232,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ecc066665af2b2a2",
@@ -492130,8 +492373,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "6a782608edaed33b",
@@ -492216,8 +492458,7 @@
         "score": 37,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "e0997c0b767a8c7d",
@@ -495043,8 +495284,7 @@
         "score": 84,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "59fa07b6a8650569",
@@ -495529,8 +495769,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "6cf04faf9c8ad1bc",
@@ -502297,8 +502536,7 @@
         "score": 41,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "c85f465ac7f1c4ac",
@@ -504957,8 +505195,7 @@
         "score": 43,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d8070ef278895e37",
@@ -509949,7 +510186,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Mentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&T's AI workloads (Financial Times)",
         "[Context & Motivation] Financial Times:\nMentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&amp;T's AI workloads&nbsp; &mdash;&nbsp; US businesses far beyond Silicon Valley are adopting Chinese alternatives to OpenAI a.",
-        "[Key Metrics & Data] In the latest US earnings call, the number of mentions of open models surged 6 times year-on-year, with open models accounting for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads in August."
+        "[Key Metrics & Data] In the latest U.S. earnings call, the number of mentions of open models surged 6 times year-on-year. In August, open models accounted for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -512110,7 +512347,7 @@
         "今日要闻"
       ],
       "title_zh": "Meta VR眼镜是Vision Pro应该有的产品；消息来源：苹果视觉团队正在研发一款改头换面的头显，但这项工作仍处于“生命支持”阶段。",
-      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR眼镜是Vision Pro应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
+      "summary_zh": "马克·古尔曼/彭博社：\nMeta VR 眼镜是 Vision Pro 应该做的产品；消息来源：Apple Vision 团队正在开发一款改进的耳机，但工作仍停留在“生命维持”上——苹果正在权衡下一步如何处理其耳机。",
       "hot_score": 3,
       "is_recent_24h": false,
       "is_pinned": false,
@@ -517386,8 +517623,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "4a4a7aee4742fba6",
@@ -517704,8 +517940,7 @@
         "score": 44,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "1a731caa6a7fd268",
@@ -517987,8 +518222,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a68d4e72bdcb9787",
@@ -518161,7 +518395,7 @@
       },
       "media_checked": true,
       "quote_en": "Agents from OpenAI that were given data gathering tasks attempted to hack a Department of Education website and meddled with other gov't websites, new disclosures that are emerging as OpenAI continues an investigation into what its agents did this summe",
-      "quote_zh": "OpenAI的代理人被赋予数据收集任务，试图入侵教育部网站并干预其他政府网站，随着OpenAI继续调查其代理人今年夏天所做的事情，新的披露正在出现",
+      "quote_zh": "OpenAI 的代理被赋予数据收集任务，他们试图黑入教育部网站并干涉其他政府网站。随着 OpenAI 继续调查其代理今年夏天所做的事情，新的披露正在浮出水面。",
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T15:05:14.752451+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -518397,8 +518631,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "50a27d971133f486",
@@ -518693,8 +518926,7 @@
         "score": 50,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "95747f00e9615f45",
@@ -518778,8 +519010,7 @@
         "score": 80,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0837e79d521dec8d",
@@ -520081,8 +520312,7 @@
         "score": 41,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "5cff31ab5d102a76",
@@ -520498,8 +520728,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "92fbb021d47c038f",
@@ -523837,8 +524066,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a5d75666619255d3",
@@ -524996,8 +525224,7 @@
         "score": 39,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "f6516b9e6fc13398",
@@ -530084,8 +530311,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "482815ee0fded51b",
@@ -530426,8 +530652,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "8ec81dfa521363ef",
@@ -531363,8 +531588,7 @@
         "score": 40,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "5d2e5f9317f2386c",
@@ -538814,8 +539038,7 @@
         "score": 89,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (89分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "1629b87fdd6d903d",
@@ -539745,8 +539968,7 @@
         "score": 51,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "42e037692648e033",
@@ -546440,8 +546662,7 @@
         "score": 50,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "a3f6b9c58d5b3cea",
@@ -549128,8 +549349,7 @@
         "score": 51,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "14c3d971b0a4fc9d",
@@ -549172,7 +549392,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Sources: OpenAI is developing features to counter SpaceX's Grok Bot \"teammates\", and has discussed creating a personal AI assistant to compete with Meta's Muse",
         "[Root Cause & Mechanism] The Information:\nSources: OpenAI is developing features to counter SpaceX's Grok Bot &ldquo;teammates&rdquo;, and has discussed creating a personal AI assistant to compete with Meta's Muse&nbsp; &mdash;&nbsp; OpenAI pioneered AI that can take over web browsers and other applicati.",
-        "[Industry Analysis] OpenAI is developing features to counter SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
+        "[Industry Analysis] OpenAI is developing features to take on SpaceX’s Grok Bot “teammate” and has discussed creating a personal AI assistant to compete with Meta’s Muse."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -557723,8 +557943,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "bcb8d77f0d0de34f",
@@ -560992,7 +561211,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -566314,8 +566533,7 @@
         "score": 90,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (90分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9c536cfdf2fd5b3f",
@@ -566777,8 +566995,7 @@
         "score": 86,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "d204380685eeeb39",
@@ -568727,7 +568944,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Newsom creates panel on AI safety regulation, suggests possible ‘kill switch",
         "[Root Cause & Mechanism] Gavin Newsom has ordered the formation of a panel to come up with safety regulations for the state's AI companies, including the development of a possible 'kill switch' for programs that go rogue..",
-        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance at the scene of US Congressional hearings and federal regulatory deliberations."
+        "[Regulatory & Investigation Focus] Newsom's creation of artificial intelligence security surveillance is on the scene of US Congressional hearings and federal regulatory deliberations."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -572444,8 +572661,7 @@
         "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0786dfe9d310d8cf",
@@ -573164,8 +573380,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "29c5491d916c6ef2",
@@ -573612,8 +573827,7 @@
         "score": 48,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "73be1558e3850a01",
@@ -574596,8 +574810,7 @@
         "score": 50,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9932f917431272e0",
@@ -575131,8 +575344,7 @@
         "score": 42,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "4a8b0eafb84e5cfc",
@@ -577498,8 +577710,7 @@
         "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "abe07e81d67f0f26",
@@ -582293,8 +582504,7 @@
         "score": 49,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "653029744d750468",
@@ -585559,8 +585769,7 @@
         "score": 78,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (78分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "bd460ae24d7d1e3a",
@@ -585823,8 +586032,7 @@
         "score": 82,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "088fbe349a64e64f",
@@ -586969,8 +587177,7 @@
         "score": 89,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (89分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "ade66843940904b9",
@@ -588814,8 +589021,7 @@
         "score": 86,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (86分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "88a2a2fcb44dca92",
@@ -593968,8 +594174,7 @@
         "score": 83,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (83分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "0489f9979747985b",
@@ -595630,8 +595835,7 @@
         "score": 85,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "9d8e7d54dc4e6acb",
@@ -595719,8 +595923,7 @@
         "score": 89,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (89分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "1b4ca195a26bafa1",
@@ -595808,8 +596011,7 @@
         "score": 80,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (80分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "92e913068ceba8b6",
@@ -597410,8 +597612,7 @@
         "score": 92,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (92分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "8565e0c8cee3ead8",
@@ -605684,8 +605885,7 @@
         "score": 88,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (88分 < 95分准发线)",
         "media_penalty": 0
-      },
-      "is_paywalled": false
+      }
     },
     {
       "id": "07d5c25a9cbe4ab0",
