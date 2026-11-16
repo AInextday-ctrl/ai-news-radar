@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 22:05:47 UTC",
+  "generated_at": "2026-11-16 22:25:13 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 22:05:47 UTC",
+      "updated_at": "2026-11-16 22:25:13 UTC",
       "headline_item": {
-        "id": "77e3996007172408",
+        "id": "785972246a8f271d",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Altimeter计划注资50亿美元参与Anthropic IPO",
-        "title_en": "Brad Gerstner says Altimeter is aiming to invest $5B in Anthropic's IPO, 5x his largest IPO investment, calling it \"a cornerstone compounder for a long time\" (Kif Leswing/CNBC)",
-        "source": "CNBC",
-        "published_at": "2026-11-16T21:05:01+00:00",
-        "url": "https://www.cnbc.com/2026/11/16/altimeters-brad-gerstner-investing-5-billion-in-anthropic-ipo.html",
-        "event_summary_zh": "Altimeter Capital首席执行官Brad Gerstner宣布计划向Anthropic IPO注资50亿美元，此举旨在将其打造为长期核心资产",
-        "event_summary_en": "Brad Gerstner, founder of Altimeter Capital, announced plans to invest $5 billion in the Anthropic IPO, marking his largest-ever IPO commitment. The offering has secured a collective $26 billion investment from tech giants including AMD, Broadcom, Google, Micron, Microsoft, Nvidia, and TSMC, with the company targeting a $1.4 trillion valuation ahead of its Thursday Nasdaq listing.",
+        "title_zh": "麻省理工毕业生涉嫌利用以太坊漏洞获利2500万美元被捕",
+        "title_en": "A US judge clears two brothers accused of stealing $25M in crypto, saying prosecutors failed to prove material misrepresentations in exploiting a software bug (Nate Raymond/Reuters)",
+        "source": "Reuters",
+        "published_at": "2026-11-16T22:05:02+00:00",
+        "url": "https://www.reuters.com/legal/government/us-judge-clears-mit-educated-brothers-25-million-cryptocurrency-heist-charges-2026-11-16/",
+        "event_summary_zh": "两名麻省理工毕业生涉嫌通过操纵以太坊最大可提取价值（MEV）机制，在12秒内窃取2500万美元加密货币并被司法部起诉",
+        "event_summary_en": "The US Department of Justice has arrested MIT graduates James Peraire-Bueno and Anton Peraire-Bueno, charging them with exploiting a vulnerability in the Ethereum blockchain to hijack high-value transactions by posing as validators. The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
         "core_facts_zh": [
-          "【核心事件】Brad Gerstner (Altimeter Capital创始人), Anthropic在纳斯达克证券交易所：计划以50亿美元认购Anthropic IPO股份，目标估值1.4万亿美元",
-          "【起因与机理】看好Anthropic作为AI领域“长期复合增长”核心资产的潜力",
-          "【关键数据与实测】Altimeter计划注资50亿美元，旨在将其作为长期核心增长引擎。",
-          "【行业影响与走向】Anthropic将于本周四在纳斯达克挂牌，作为首家上市的大型AI实验室，将重塑行业资本格局。"
+          "【核心事件】被告James Peraire-Bueno与Anton Peraire-Bueno，检控方为曼哈顿联邦检察官Damian Williams在美国纽约州与马萨诸塞州联邦法院：利用MEV机器人漏洞劫持以太坊交易并洗钱2500万美元",
+          "【起因与机理】利用区块链验证机制漏洞获取不当利益",
+          "【关键数据与实测】该犯罪过程仅耗时12秒，涉案金额高达2500万美元，被告目前已被控电信诈骗及洗钱等多项罪名。",
+          "【涉及范围与推进】后续动态：面临电信诈骗及洗钱罪指控，已被禁止进行任何加密货币及证券交易。"
         ],
         "core_facts_en": [
-          "[Core Event] Brad Gerstner (Founder of Altimeter Capital), Anthropic (Nasdaq): Commitment of $5 billion for Anthropic's IPO at a $1.4 trillion valuation",
-          "[Root Cause & Mechanism] Strategic belief in Anthropic as a long-term compounding asset in the AI industry",
-          "[Key Metrics] Altimeter commits $5B as a long-term compounding cornerstone investment.",
-          "[Key Position & Outlook] Anthropic to list on Nasdaq this Thursday, marking the first major AI lab IPO."
+          "[Core Event] Defendants James Peraire-Bueno and Anton Peraire-Bueno; Prosecutor Damian Williams, U.S. Attorney for the Southern District of New York: Exploiting MEV bot vulnerabilities to hijack Ethereum transactions and laundering $25M",
+          "[Root Cause & Mechanism] Exploiting inherent weaknesses in blockchain validator transaction sequencing",
+          "[Key Metrics] The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
+          "[Key Position & Outlook] Outlook: Faces multiple felony counts; restricted from trading crypto, securities, or commodities pending trial."
         ],
-        "industry_impact_zh": "此轮史无前例的基石投资阵容不仅是资本层面的背书，更是AI算力供应链与模型厂商形成的深度利益绑定，旨在通过IPO锁定下一代通用人工智能的云端控制权。1.4万亿美元的定价直接将模型厂商的估值锚点与传统硬件巨头对齐，预示着市场进入以全产业链协同抗衡地缘监管风险的新阶段。",
-        "industry_impact_en": "This unprecedented backing creates a deep strategic alignment between the AI compute supply chain and model developers, effectively securing control over next-gen AGI infrastructure. Pricing Anthropic at $1.4 trillion signals a shift where model provider valuations are pegged to hardware titans, reflecting a tactical consolidation to mitigate mounting geopolitical and regulatory pressures."
+        "industry_impact_zh": "本案揭示了以太坊MEV（最大可提取价值）生态在机制设计上的脆弱性，即核心验证者在交易排序中的权力博弈存在被算法攻击的巨大敞口。此事件将迫使监管机构重新审视区块链协议的合规底线，同时也预示着去中心化金融领域将针对协议层的恶意操纵迎来更严格的技术审计与法律清算。",
+        "industry_impact_en": "This case highlights the inherent vulnerability of the Ethereum MEV ecosystem, where the power dynamics of validator transaction sequencing present significant attack vectors for algorithmic exploitation. The incident signals an inevitable shift toward stricter regulatory scrutiny over protocol-level integrity and mandatory technical audits for decentralized finance architectures."
       },
       "headlines": [
+        {
+          "id": "785972246a8f271d",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "麻省理工毕业生涉嫌利用以太坊漏洞获利2500万美元被捕",
+          "title_en": "A US judge clears two brothers accused of stealing $25M in crypto, saying prosecutors failed to prove material misrepresentations in exploiting a software bug (Nate Raymond/Reuters)",
+          "source": "Reuters",
+          "published_at": "2026-11-16T22:05:02+00:00",
+          "url": "https://www.reuters.com/legal/government/us-judge-clears-mit-educated-brothers-25-million-cryptocurrency-heist-charges-2026-11-16/",
+          "event_summary_zh": "两名麻省理工毕业生涉嫌通过操纵以太坊最大可提取价值（MEV）机制，在12秒内窃取2500万美元加密货币并被司法部起诉",
+          "event_summary_en": "The US Department of Justice has arrested MIT graduates James Peraire-Bueno and Anton Peraire-Bueno, charging them with exploiting a vulnerability in the Ethereum blockchain to hijack high-value transactions by posing as validators. The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
+          "core_facts_zh": [
+            "【核心事件】被告James Peraire-Bueno与Anton Peraire-Bueno，检控方为曼哈顿联邦检察官Damian Williams在美国纽约州与马萨诸塞州联邦法院：利用MEV机器人漏洞劫持以太坊交易并洗钱2500万美元",
+            "【起因与机理】利用区块链验证机制漏洞获取不当利益",
+            "【关键数据与实测】该犯罪过程仅耗时12秒，涉案金额高达2500万美元，被告目前已被控电信诈骗及洗钱等多项罪名。",
+            "【涉及范围与推进】后续动态：面临电信诈骗及洗钱罪指控，已被禁止进行任何加密货币及证券交易。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Defendants James Peraire-Bueno and Anton Peraire-Bueno; Prosecutor Damian Williams, U.S. Attorney for the Southern District of New York: Exploiting MEV bot vulnerabilities to hijack Ethereum transactions and laundering $25M",
+            "[Root Cause & Mechanism] Exploiting inherent weaknesses in blockchain validator transaction sequencing",
+            "[Key Metrics] The operation, which netted $25 million in just 12 seconds, has led to charges of conspiracy to commit wire fraud and money laundering.",
+            "[Key Position & Outlook] Outlook: Faces multiple felony counts; restricted from trading crypto, securities, or commodities pending trial."
+          ],
+          "industry_impact_zh": "本案揭示了以太坊MEV（最大可提取价值）生态在机制设计上的脆弱性，即核心验证者在交易排序中的权力博弈存在被算法攻击的巨大敞口。此事件将迫使监管机构重新审视区块链协议的合规底线，同时也预示着去中心化金融领域将针对协议层的恶意操纵迎来更严格的技术审计与法律清算。",
+          "industry_impact_en": "This case highlights the inherent vulnerability of the Ethereum MEV ecosystem, where the power dynamics of validator transaction sequencing present significant attack vectors for algorithmic exploitation. The incident signals an inevitable shift toward stricter regulatory scrutiny over protocol-level integrity and mandatory technical audits for decentralized finance architectures."
+        },
         {
           "id": "77e3996007172408",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此案标志着监管层对大模型“研发即部署”模式的深度介入，AI厂商的实验室测试环节将从自律转为强制合规要求。随着AI智能体具备自主执行力，如何通过技术手段强制封锁“智能体跨域交互”将成为行业防范系统性风险的硬性技术卡点。",
           "industry_impact_en": "This case marks a shift in regulatory scrutiny toward the 'develop-as-you-deploy' model, forcing AI labs from self-regulation to mandatory compliance. As agents gain autonomous execution capabilities, establishing technical boundaries to prevent cross-domain unauthorized interaction has become a critical bottleneck for systemic risk mitigation."
-        },
-        {
-          "id": "6a97193c984a4b63",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Sam Altman回应RAM供应言论",
-          "title_en": "Sam Altman says he wants everyone ‘to have a lot of RAM’",
-          "source": "The Verge AI",
-          "published_at": "2026-11-16T20:41:28+00:00",
-          "url": "https://www.theverge.com/ai-artificial-intelligence/1034787/sam-altman-ram-shortage-semafor",
-          "event_summary_zh": "OpenAI首席执行官Sam Altman公开澄清关于RAM（内存）的相关言论，解释其对数据中心与个人设备内存分配的观点",
-          "event_summary_en": "OpenAI CEO Sam Altman clarified his controversial comments regarding RAM in personal computers during a summit, emphasizing his support for local hardware tinkering. He explained that his previous preference for data center memory allocation was driven by severe global DRAM supply constraints and the need for optimal resource utilization, rather than a desire to limit individual consumer devices.",
-          "core_facts_zh": [
-            "【核心事件】山姆·奥尔特曼（OpenAI CEO）在Semafor硅谷峰会：澄清关于内存资源分配的观点，解释内存价格上涨与供应链短缺现状",
-            "【起因与机理】应对因内存供应短缺引发的市场舆论与技术争议",
-            "【核心事实细节】Altman澄清支持用户使用大容量RAM进行本地开发。",
-            "【各方立场与态度】反映出大模型基础设施对内存供应的高度依赖及成本压力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Sam Altman (CEO, OpenAI) (Semafor Silicon Valley summit): Clarified stance on memory allocation and addressed DRAM supply chain shortages",
-            "[Root Cause & Mechanism] To mitigate public controversy arising from his earlier comments on memory resource trade-offs",
-            "[Key Fact Detail] Altman clarifies support for local high-RAM consumer systems.",
-            "[Key Position & Outlook] Highlights infrastructure-level dependency on memory supply and cost pressures."
-          ],
-          "industry_impact_zh": "此回应折射出头部大模型厂商与全球硬件供应链的紧张博弈，底层算力短缺已从单纯的显存/GPU焦虑外溢至DRAM等基础组件。内存供应的非对称性将持续左右大模型的边缘侧推理落地策略，迫使厂商在“本地高性能”与“云端高复用”之间寻找极端的成本平衡。",
-          "industry_impact_en": "This response highlights the tense friction between leading AI labs and the global hardware supply chain, as compute constraints expand from HBM/GPUs to fundamental components like DRAM. The asymmetry in memory supply will continue to dictate edge inference strategies, forcing developers into extreme trade-offs between local performance and cloud-based resource efficiency."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 22:05:47 UTC",
+      "updated_at": "2026-11-16 22:25:13 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 22:05:47 UTC",
+      "updated_at": "2026-11-16 22:25:13 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,580)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,581)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,580 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,581 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
