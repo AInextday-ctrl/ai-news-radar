@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 07:36:17 UTC",
+  "generated_at": "2026-11-16 07:50:50 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 07:36:18 UTC",
+      "updated_at": "2026-11-16 07:50:50 UTC",
       "headline_item": {
-        "id": "95711b4c390d32a8",
+        "id": "9f85abeb1667fd0d",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "会计AI平台Sumary获2500万美元种子轮融资",
-        "title_en": "Copenhagen-based AI accounting software maker Sumary raised a $25M seed led by Singular, bringing total funding to $29.2M after a $4.2M pre-seed in Nov. 2025 (Sofia Chesnokova/Tech Funding News)",
-        "source": "Tech Funding News",
-        "published_at": "2026-11-16T06:55:04+00:00",
-        "url": "https://techfundingnews.com/sumary-25m-seed-ai-accounting-firms/",
-        "event_summary_zh": "哥本哈根AI会计软件开发商Sumary完成2500万美元种子轮融资，由Singular领投，累计融资金额达2920万美元",
-        "event_summary_en": "Copenhagen-based AI accounting startup Sumary secured $25 million in a seed round led by Singular, with participation from byFounders, Partech, and various angel investors. The platform automates monthly closing, VAT returns, and ledger workflows, claiming to reduce accounting workloads by 50-75% for clients including Deloitte, Grant Thornton, and Baker Tilly.",
+        "title_zh": "医疗数据平台Zus Health完成3300万美元B轮融资",
+        "title_en": "Zus Health, which is building an AI-native healthcare data platform, raised a $33M Series B led by Drive Capital, bringing its total funding to $100M+ (Heather Landi/Fierce Healthcare)",
+        "source": "Fierce Healthcare",
+        "published_at": "2026-11-16T07:35:02+00:00",
+        "url": "https://www.fiercehealthcare.com/health-tech/zus-health-secures-33m-build-infrastructure-ai-powered-clinical-workflows",
+        "event_summary_zh": "Zus Health获Drive Capital领投3300万美元，旨在构建医疗AI应用所需的底层数据互联架构",
+        "event_summary_en": "Zus Health, founded by Jonathan Bush, has secured $33 million in Series B funding led by Drive Capital, with participation from Sanofi Ventures and Andreessen Horowitz, bringing total funding to over $100 million. The company aims to address medical record interoperability and fragmentation by building a national connected healthcare data network and FHIR-native API platform to provide a foundational data layer for AI-driven clinical applications.",
         "core_facts_zh": [
-          "【核心事件】Pascar Sivam（联合创始人兼CEO）、Frederik Skov Wacher（COO）、Sumary（企业）在欧洲会计软件市场：完成2500万美元种子轮融资，计划加速进军英国及比荷卢市场",
-          "【起因与机理】应对会计行业劳动力紧缺，通过高可解释性生成式AI模型实现会计流程高度自动化",
-          "【关键数据与实测】Sumary获2500万美元种子轮融资，由Singular领投，累计融资额达2920万美元。",
-          "【各方立场与态度】业务将向英国及比荷卢市场扩张，重点部署丹麦科研团队研发的高可解释性深度学习模型。"
+          "【核心事件】Zus Health创始人兼CEO Jonathan Bush；领投方Drive Capital在医疗技术领域投融资市场：完成3300万美元B轮融资，重点投入智能病历平台建设与全国医疗数据网络扩展",
+          "【起因与机理】医疗机构AI应用受限于现有EHR系统数据孤岛，缺乏统一、可实时交互的患者纵向数据基础",
+          "【关键数据与实测】Zus Health获得3300万美元B轮融资，由Drive Capital领投，累计融资逾1亿美元。",
+          "【涉及范围与推进】后续将利用资金扩大临床工作流自动化部署，为AI应用提供实时、标准化的病历底层数据。"
         ],
         "core_facts_en": [
-          "[Core Event] Pascar Sivam (Co-founder & CEO), Frederik Skov Wacher (COO), Sumary: Raised $25M in seed funding to scale operations in the UK and Benelux regions",
-          "[Root Cause & Mechanism] Address labor shortages in accounting via high-explainability generative AI workflows",
-          "[Key Metrics] Sumary raised $25M in seed funding led by Singular, totaling $29.2M in capital.",
-          "[Key Position & Outlook] Strategic focus on expansion into UK and Benelux markets using proprietary explainable AI models."
+          "[Core Event] Jonathan Bush, Founder/CEO of Zus Health; Drive Capital (Lead Investor) (HealthTech venture capital market): Raised $33M Series B to expand its patient record platform and nationwide data network",
+          "[Root Cause & Mechanism] AI clinical tools are hindered by data silos and poor interoperability in existing Electronic Health Record (EHR) systems",
+          "[Key Metrics] Zus Health raised $33M in Series B led by Drive Capital, totaling over $100M in funding.",
+          "[Key Position & Outlook] Funds will scale clinical workflow automation and provide standardized data infrastructure for AI applications."
         ],
-        "industry_impact_zh": "Sumary的核心竞争力在于构建了基于真实财务场景的基准测试体系，通过模型评测闭环规避了生成式AI在会计审计中的幻觉风险。该类工具不仅是流程自动化软件，更是会计师事务所数字化转型中的“可信代理”，其通过垂直领域数据壁垒构筑的行业模型将对传统ERP系统形成显著的存量替代压力。",
-        "industry_impact_en": "Sumary's competitive edge lies in its proprietary benchmark based on real-world accounting tasks, which effectively mitigates generative AI hallucination risks in auditing. By positioning itself as a 'trusted agent' rather than a generic automation tool, the company leverages vertical data moats to disrupt legacy ERP systems through superior workflow integration."
+        "industry_impact_zh": "医疗AI的竞争核心已从模型参数转向高质量临床数据的聚合能力，Zus Health通过切入数据互操作性这一基础设施层，避开了终端应用领域的同质化红海。其逻辑在于成为医疗行业的‘数据中间件’，通过FHIR原生API锁定开发者生态，未来极易被大型医疗集团或云厂商并购以补齐医疗大模型的数据入口闭环。",
+        "industry_impact_en": "The competitive edge in medical AI is shifting from model parameters to the aggregation of longitudinal clinical data; Zus Health positions itself as critical 'data middleware' by addressing interoperability, avoiding the saturated front-end application market. By establishing a FHIR-native API ecosystem, the company creates high M&A value for major health systems or cloud providers looking to secure reliable input loops for clinical AI models."
       },
       "headlines": [
+        {
+          "id": "9f85abeb1667fd0d",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "医疗数据平台Zus Health完成3300万美元B轮融资",
+          "title_en": "Zus Health, which is building an AI-native healthcare data platform, raised a $33M Series B led by Drive Capital, bringing its total funding to $100M+ (Heather Landi/Fierce Healthcare)",
+          "source": "Fierce Healthcare",
+          "published_at": "2026-11-16T07:35:02+00:00",
+          "url": "https://www.fiercehealthcare.com/health-tech/zus-health-secures-33m-build-infrastructure-ai-powered-clinical-workflows",
+          "event_summary_zh": "Zus Health获Drive Capital领投3300万美元，旨在构建医疗AI应用所需的底层数据互联架构",
+          "event_summary_en": "Zus Health, founded by Jonathan Bush, has secured $33 million in Series B funding led by Drive Capital, with participation from Sanofi Ventures and Andreessen Horowitz, bringing total funding to over $100 million. The company aims to address medical record interoperability and fragmentation by building a national connected healthcare data network and FHIR-native API platform to provide a foundational data layer for AI-driven clinical applications.",
+          "core_facts_zh": [
+            "【核心事件】Zus Health创始人兼CEO Jonathan Bush；领投方Drive Capital在医疗技术领域投融资市场：完成3300万美元B轮融资，重点投入智能病历平台建设与全国医疗数据网络扩展",
+            "【起因与机理】医疗机构AI应用受限于现有EHR系统数据孤岛，缺乏统一、可实时交互的患者纵向数据基础",
+            "【关键数据与实测】Zus Health获得3300万美元B轮融资，由Drive Capital领投，累计融资逾1亿美元。",
+            "【涉及范围与推进】后续将利用资金扩大临床工作流自动化部署，为AI应用提供实时、标准化的病历底层数据。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Jonathan Bush, Founder/CEO of Zus Health; Drive Capital (Lead Investor) (HealthTech venture capital market): Raised $33M Series B to expand its patient record platform and nationwide data network",
+            "[Root Cause & Mechanism] AI clinical tools are hindered by data silos and poor interoperability in existing Electronic Health Record (EHR) systems",
+            "[Key Metrics] Zus Health raised $33M in Series B led by Drive Capital, totaling over $100M in funding.",
+            "[Key Position & Outlook] Funds will scale clinical workflow automation and provide standardized data infrastructure for AI applications."
+          ],
+          "industry_impact_zh": "医疗AI的竞争核心已从模型参数转向高质量临床数据的聚合能力，Zus Health通过切入数据互操作性这一基础设施层，避开了终端应用领域的同质化红海。其逻辑在于成为医疗行业的‘数据中间件’，通过FHIR原生API锁定开发者生态，未来极易被大型医疗集团或云厂商并购以补齐医疗大模型的数据入口闭环。",
+          "industry_impact_en": "The competitive edge in medical AI is shifting from model parameters to the aggregation of longitudinal clinical data; Zus Health positions itself as critical 'data middleware' by addressing interoperability, avoiding the saturated front-end application market. By establishing a FHIR-native API ecosystem, the company creates high M&A value for major health systems or cloud providers looking to secure reliable input loops for clinical AI models."
+        },
         {
           "id": "95711b4c390d32a8",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举标志着美国出口管制从物理形态的“产品拦截”全面转向逻辑层面的“算力权限管控”，预示着未来云服务商（CSP）的全球调度将面临更严苛的合规审计。该法案将直接冲击英伟达基于数据中心业务的营收模型，迫使其必须在海外市场的商业扩张与美国地缘安全底线之间进行高昂的合规成本核算。",
           "industry_impact_en": "This shift signifies the evolution of US export controls from physical product interdiction to logical-layer compute access restriction, signaling stringent compliance audits for global CSPs. The move threatens Nvidia’s data center revenue model, forcing a painful reconciliation between overseas market expansion and national security compliance mandates."
-        },
-        {
-          "id": "7c2763f7952f2624",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "阿里巴巴表示，它过滤了 Qwen4-Max 的训练数据，以消除进攻性网络能力并减轻化学、生物、放射性和核风险",
-          "title_en": "Alibaba says it filtered Qwen4-Max's training data to remove offensive cyber capabilities and mitigate chemical, biological, radiological, and nuclear risks (Ann Cao/South China Morning Post)",
-          "source": "South China Morning Post",
-          "published_at": "2026-11-16T05:15:01+00:00",
-          "url": "https://www.scmp.com/tech/big-tech/article/3374540/alibaba-says-new-flagship-ai-model-cuts-task-costs-60-while-tightening-cyber-guardrails",
-          "event_summary_zh": "阿里巴巴推出2.4万亿参数的Qwen4-Max大模型，通过数据清洗剔除攻击性网络能力并严控CBRN（核生化放）风险，同时大幅降低推理成本",
-          "event_summary_en": "Alibaba Group has launched Qwen4-Max, a 2.4-trillion-parameter model that activates only 71 billion parameters per token, reducing average inference costs by 60%. To address global safety concerns, the company proactively filtered training data to strip offensive cyber capabilities and implemented specific post-training mitigations against CBRN risks.",
-          "core_facts_zh": [
-            "【核心事件】阿里巴巴集团（Alibaba Group Holding）在QwenCloud云端平台：发布Qwen4-Max模型，采取闭源高安全防护策略，并降低60%任务推理成本",
-            "【起因与机理】应对AI驱动的网络攻击与CBRN武器开发风险的全球性监管压力",
-            "【关键数据与实测】Qwen4-Max参数总量为2.4万亿，通过优化激活机制实现任务推理成本降低60%。",
-            "【涉及范围与推进】该模型现已通过QwenCloud提供商用接口，并计划后续发布小型开源版本。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Alibaba Group Holding (QwenCloud platform): Launched Qwen4-Max with strict safety guardrails and 60% lower inference costs",
-            "[Root Cause & Mechanism] To mitigate risks of AI-enabled cyberattacks and CBRN weapon proliferation",
-            "[Key Metrics] 2.4-trillion parameter model with optimized activation architecture, reducing inference costs by 60%.",
-            "[Key Position & Outlook] Commercial availability on QwenCloud with future plans for open-weight iterations."
-          ],
-          "industry_impact_zh": "通过在模型权重层面主动实施CBRN防护与攻击性代码清洗，阿里试图在追求顶尖推理性能的同时，为中国大模型建立一套符合全球合规标准的‘安全资产’叙事。这种通过架构优化平衡推理成本与算力利用率的做法，正迫使大模型商业竞争从单纯的参数规模博弈，快速转向Token推理效率与合规性防御水平的综合较量。",
-          "industry_impact_en": "By implementing proactive CBRN safeguards and scrubbing offensive code at the weight level, Alibaba is attempting to establish a 'safe asset' narrative for Chinese LLMs amid tightening global standards. This strategic focus on balancing inference cost with safety-first architectural design signals a shift in industry competition from raw parameter scales to token efficiency and regulatory resilience."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 07:36:18 UTC",
+      "updated_at": "2026-11-16 07:50:50 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 07:36:18 UTC",
+      "updated_at": "2026-11-16 07:50:50 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,354)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,359)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,354 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,359 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
