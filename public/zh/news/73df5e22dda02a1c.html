@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude新增Canvas内HTML交互功能 | AI 资讯雷达</title>
+  <meta name="description" content="Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/73df5e22dda02a1c">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/73df5e22dda02a1c">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Claude新增Canvas内HTML交互功能 | AI 资讯雷达">
+  <meta property="og:description" content="Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性">
+  <meta property="og:image" content="https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png">
+  <meta property="og:image:secure_url" content="https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Claude新增Canvas内HTML交互功能">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <meta name="twitter:title" content="Claude新增Canvas内HTML交互功能 | AI 资讯雷达">
+  <meta name="twitter:description" content="Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性">
+  <meta name="twitter:image" content="https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png">
+  <meta property="twitter:image" content="https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png">
+  <meta name="twitter:image:alt" content="Claude新增Canvas内HTML交互功能">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Claude新增Canvas内HTML交互功能">
+  <meta name="citation_publication_date" content="2026-11-16">
+  <meta name="citation_author" content="THE DECODER">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/zh/news/73df5e22dda02a1c">
+  <meta name="citation_abstract" content="Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI News Radar",
+          "item": "https://ainewsradar.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI 行业快讯",
+          "item": "https://ainewsradar.xyz/zh#news"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Claude新增Canvas内HTML交互功能",
+          "item": "https://ainewsradar.xyz/zh/news/73df5e22dda02a1c"
+        }
+      ]
+    },
+    {
+      "@type": "NewsArticle",
+      "headline": "Claude新增Canvas内HTML交互功能",
+      "description": "Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性",
+      "image": [
+        "https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png"
+      ],
+      "url": "https://ainewsradar.xyz/zh/news/73df5e22dda02a1c",
+      "datePublished": "2026-11-16T16:10:22+00:00",
+      "dateModified": "2026-11-16T16:10:22+00:00",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/73df5e22dda02a1c",
+      "articleSection": "Artificial Intelligence",
+      "isBasedOn": "https://the-decoder.com/claude-now-builds-interactive-websites-inside-canvas-graphics-reviving-the-flash-era-with-real-html/?ref=ainewsradar",
+      "about": [
+        {
+          "@type": "Organization",
+          "name": "Anthropic",
+          "sameAs": "https://en.wikipedia.org/wiki/Anthropic"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".executive-summary",
+          "h1"
+        ]
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AI News Radar Editorial Team",
+        "url": "https://ainewsradar.xyz/zh/about"
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ainewsradar.xyz/favicon.ico"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Claude新增Canvas内HTML交互功能 的核心事实与事件脉络是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Anthropic及研发工程师Felix Rieseberg在Claude 5.11492版本及以上：支持在Canvas内部嵌入可交互HTML元素，打破传统静态显示局限 优化AI生成内容的交互体验与可访问性，复现动态Web表现力 打破Canvas图形仅能视觉展示的局限，集成交互式HTML。 通过Prompt触发，需在Chrome/Edge 157+及Claude桌面端支持。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "该功能实质上是将浏览器的Canvas渲染引擎与DOM操作进行了深度耦合，降低了交互式网页开发的门槛。此举模糊了AI文本生成与前端工程的边界，将使得‘生成式UI’从静态原型向高保真、可交互的生产级组件演进。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI 资讯雷达</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回雷达首页
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/73df5e22dda02a1c" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 切换英文 (EN)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png" alt="Claude新增Canvas内HTML交互功能" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: THE DECODER
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-8">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Claude新增Canvas内HTML交互功能
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>记者 / 供稿: THE DECODER</span></div>
+
+        <!-- CTA & Social Share Capsule Bar -->
+        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Primary Source Link Button -->
+          <a href="https://the-decoder.com/claude-now-builds-interactive-websites-inside-canvas-graphics-reviving-the-flash-era-with-real-html/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <span>📖 阅读原资讯官网报道 ↗</span>
+          </a>
+
+          <!-- Social Sharing & Bookmark Actions -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 𝕏">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>𝕏</span>
+            </button>
+            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 Threads">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+              <span>Threads</span>
+            </button>
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+              <span>🔗</span> <span>复制分享链接</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-8">
+          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+            Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性
+          </div>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="核心要点提炼与关键事实" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Anthropic及研发工程师Felix Rieseberg在Claude 5.11492版本及以上：支持在Canvas内部嵌入可交互HTML元素，打破传统静态显示局限</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>优化AI生成内容的交互体验与可访问性，复现动态Web表现力</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事实细节】</strong>打破Canvas图形仅能视觉展示的局限，集成交互式HTML。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>通过Prompt触发，需在Chrome/Edge 157+及Claude桌面端支持。</li>
+          </ul>
+        </section>
+        
+        
+        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">该功能实质上是将浏览器的Canvas渲染引擎与DOM操作进行了深度耦合，降低了交互式网页开发的门槛。此举模糊了AI文本生成与前端工程的边界，将使得‘生成式UI’从静态原型向高保真、可交互的生产级组件演进。</p>
+        </div>
+        
+        
+        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <span>📰 权威报道核心实录 (精选)</span>
+            </h3>
+            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER 权威实录</span>
+          </div>
+          <div class="space-y-4">
+            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
+              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Claude 现在可以将文本、按钮和其他 Web 元素嵌入到复杂的图形和 3D 效果中。网页始终面临着权衡。标准 HTML 元素可供屏幕阅读器点击、选择和读取，但它们很难在视觉上变形。 Canvas 允许您绘制任何您想要的东西，但浏览器将其视为平面图像。您无法选择文本或单击其中的链接。 HTML-in-Canvas 改变了这一点，将真实的页面元素放置在画布图形中，同时保持它们完全交互。</p>
+            </div>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">菲利克斯·里塞伯格 (Felix Rieseberg) 在 Anthropic 从事克劳德 (Claude) 的工作。他在 X 上写道，克劳德现在可以使用该功能构建“奇异而美丽的网站”，并补充说这让他想起了 Flash 时代。演示页面显示了 15 个示例，包括呈现为编织图案、3D 立方体或分解图层视图的网站。内容保持为真实文本，您可以突出显示和复制。</p>
+
+<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.de/wp-content/uploads/2026/11/Felix_Rieseberg_wordpress_small_480p.mp4" alt="" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+              
+            </figure>
+
+<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Google 正在开发 HTML-in-Canvas 作为保留交互性和可访问性的网络标准。该功能适用​​于从版本 157 开始的 Chrome 和 Edge 以及从版本 5.11492 开始的 Claude 桌面应用程序。 Safari 和 Firefox 尚不支持。用户需要在提示中明确向 Claude 询问 HTML-in-Canvas。克劳德在视觉任务上不断变得更有创造力。最近，Claude Fable 5.2 使用自写的 Python 代码一笔一笔地绘制了逼真的艺术作品……</p>
+          </div>
+          
+          <div class="mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-800 dark:text-amber-200 text-xs sm:text-sm flex items-start gap-2.5">
+            <span class="text-base shrink-0 leading-none">🔒</span>
+            <div class="leading-relaxed font-medium">源站设立了版权或登录限制，雷达已为您提炼权威报道核心实录。完整报道可点击下方“阅读原资讯官网报道”浏览。</div>
+          </div>
+            
+        </div>
+        
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/bc3b559f0f3962c6" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ctfassets.net/kftzwdyauwt9/1KkjAzVSr4nz5D67tGCxVH/8a47206051b698db4cbdad829eff241b/embedded-assessments-neutral-023-social-revised.png?w=1600&amp;h=900&amp;fit=fill" alt="OpenAI启动深度外部评估机制，引入四家独立测评机构" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">OpenAI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">OpenAI启动深度外部评估机制，引入四家独立测评机构</h4>
+            </a>
+            
+            <a href="/zh/news/b252755b849353b4" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://media.wired.com/photos/6af78c75239676948e926fc2/master/pass/Big-Interview-UV-Solo-Katie-Lauren-Business.jpg" alt="黄仁勋离职引发半导体与AI行业震动" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Wired AI</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">黄仁勋离职引发半导体与AI行业震动</h4>
+            </a>
+            
+            <a href="/zh/news/d5bc5f032f5215fa" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://the-decoder.com/wp-content/uploads/2026/10/anthropic_claude-2.png" alt="Anthropic揭示AI代理记忆优化核心：减法胜于加法" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">THE DECODER</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Anthropic揭示AI代理记忆优化核心：减法胜于加法</h4>
+            </a>
+            
+            <a href="/zh/news/e5ca2bb5e3039fe8" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://static01.nyt.com/images/2026/11/11/multimedia/11biz-ai-insurance-02-cgtq/11biz-ai-insurance-02-cgtq-videoSixteenByNine3000.jpg" alt="险资深度介入AI融资，隐性杠杆风险攀升" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">险资深度介入AI融资，隐性杠杆风险攀升</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "73df5e22dda02a1c",
+      type: "news",
+      title: "Claude新增Canvas内HTML交互功能",
+      snippet: "Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性",
+      url: window.location.href,
+      image_url: "https://the-decoder.com/wp-content/uploads/2026/11/claude_gemini_pro-scaled.png"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Claude新增Canvas内HTML交互功能";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
