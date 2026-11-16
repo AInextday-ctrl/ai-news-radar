@@ -956,8 +956,13 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         """
 
     full_coverage_html = ""
-    full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content") or item.get("original_content"))) or "").strip()
-    is_paywalled = bool(item.get("is_paywalled") or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
+    full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content_en") or item.get("article_content") or item.get("original_content"))) or "").strip()
+    is_reuters = "reuters" in (item.get("source") or "").lower() or "reuters.com" in (item.get("url") or "").lower()
+    is_paywalled = bool((not is_reuters and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "bloomberg", "wsj", "the information"]))
+    if is_reuters:
+        is_paywalled = False
+        if len(full_text) >= 200:
+            item["is_substantive"] = True
 
     paras = []
     if full_text and len(full_text) > 120:
