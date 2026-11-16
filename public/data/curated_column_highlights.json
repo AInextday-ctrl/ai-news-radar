@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 06:04:18 UTC",
+  "generated_at": "2026-11-16 06:16:24 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 06:04:18 UTC",
+      "updated_at": "2026-11-16 06:16:24 UTC",
       "headline_item": {
-        "id": "7c2763f7952f2624",
+        "id": "fa00193c31fcd3f2",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "阿里巴巴表示，它过滤了 Qwen4-Max 的训练数据，以消除进攻性网络能力并减轻化学、生物、放射性和核风险",
-        "title_en": "Alibaba says it filtered Qwen4-Max's training data to remove offensive cyber capabilities and mitigate chemical, biological, radiological, and nuclear risks (Ann Cao/South China Morning Post)",
-        "source": "South China Morning Post",
-        "published_at": "2026-11-16T05:15:01+00:00",
-        "url": "https://www.scmp.com/tech/big-tech/article/3374540/alibaba-says-new-flagship-ai-model-cuts-task-costs-60-while-tightening-cyber-guardrails",
-        "event_summary_zh": "阿里巴巴推出2.4万亿参数的Qwen4-Max大模型，通过数据清洗剔除攻击性网络能力并严控CBRN（核生化放）风险，同时大幅降低推理成本",
-        "event_summary_en": "Alibaba Group has launched Qwen4-Max, a 2.4-trillion-parameter model that activates only 71 billion parameters per token, reducing average inference costs by 60%. To address global safety concerns, the company proactively filtered training data to strip offensive cyber capabilities and implemented specific post-training mitigations against CBRN risks.",
+        "title_zh": "美国国会拟立法封堵AI芯片海外云端访问漏洞",
+        "title_en": "Tighter AI chip export rules are gaining bipartisan support in Congress, including a bill to block Chinese companies from accessing chips overseas (Financial Times)",
+        "source": "Financial Times",
+        "published_at": "2026-11-16T06:05:00+00:00",
+        "url": "https://www.ft.com/content/3062790a-553d-41b8-9c7d-bae17b9d2e29",
+        "event_summary_zh": "鉴于英伟达前CEO黄仁勋涉情报安全丑闻，美国国会两党加速推进法案，严控高端芯片对华出口及云端访问权限",
+        "event_summary_en": "Chairmen John Moolenaar, Brian Mast, and Rick Crawford of the US House committees on China, Foreign Affairs, and Intelligence have demanded a congressional hearing with Nvidia executives and Commerce official Jeffrey Kessler following the scandal involving former CEO Jensen Huang. The proposed 'Remote Access Security Act' aims to close loopholes allowing Chinese firms to access advanced computing via offshore cloud services, while granting Congress authority to block previously approved export sales.",
         "core_facts_zh": [
-          "【核心事件】阿里巴巴集团（Alibaba Group Holding）在QwenCloud云端平台：发布Qwen4-Max模型，采取闭源高安全防护策略，并降低60%任务推理成本",
-          "【起因与机理】应对AI驱动的网络攻击与CBRN武器开发风险的全球性监管压力",
-          "【关键数据与实测】Qwen4-Max参数总量为2.4万亿，通过优化激活机制实现任务推理成本降低60%。",
-          "【涉及范围与推进】该模型现已通过QwenCloud提供商用接口，并计划后续发布小型开源版本。"
+          "【核心事件】众议员约翰·穆勒纳尔、布莱恩·马斯特、瑞克·克劳福德；英伟达前CEO黄仁勋；商务部出口控制官员杰弗里·凯斯勒在美国国会众议院相关委员会：推动《远程访问安全法案》等四项法案立法，审查英伟达对新加坡公司Megaspeed的芯片出口合规性",
+          "【起因与机理】因黄仁勋个人丑闻引发的对华情报渗透担忧，以及防止中国企业通过云算力规避物理芯片出口禁令的战略考量",
+          "【调查与监管诉求】国会寻求审查黄仁勋个人丑闻下的芯片对华违规出口路径。",
+          "【行业影响与走向】事件倒逼出口审查机制从商务部单向权限转向国会介入式监督。"
         ],
         "core_facts_en": [
-          "[Core Event] Alibaba Group Holding (QwenCloud platform): Launched Qwen4-Max with strict safety guardrails and 60% lower inference costs",
-          "[Root Cause & Mechanism] To mitigate risks of AI-enabled cyberattacks and CBRN weapon proliferation",
-          "[Key Metrics] 2.4-trillion parameter model with optimized activation architecture, reducing inference costs by 60%.",
-          "[Key Position & Outlook] Commercial availability on QwenCloud with future plans for open-weight iterations."
+          "[Core Event] Reps. John Moolenaar, Brian Mast, Rick Crawford; former Nvidia CEO Jensen Huang; Commerce official Jeffrey Kessler (US House of Representatives): Advancing the 'Remote Access Security Act' and demanding testimony regarding Nvidia's exports to Megaspeed",
+          "[Root Cause & Mechanism] Concerns over national security intelligence breaches and the circumvention of physical chip export controls via cloud infrastructure",
+          "[Regulatory & Investigation Focus] Congressional demand for review of chip export compliance following the Jensen Huang scandal.",
+          "[Key Position & Outlook] Shift toward legislative oversight of Commerce Department export decision-making."
         ],
-        "industry_impact_zh": "通过在模型权重层面主动实施CBRN防护与攻击性代码清洗，阿里试图在追求顶尖推理性能的同时，为中国大模型建立一套符合全球合规标准的‘安全资产’叙事。这种通过架构优化平衡推理成本与算力利用率的做法，正迫使大模型商业竞争从单纯的参数规模博弈，快速转向Token推理效率与合规性防御水平的综合较量。",
-        "industry_impact_en": "By implementing proactive CBRN safeguards and scrubbing offensive code at the weight level, Alibaba is attempting to establish a 'safe asset' narrative for Chinese LLMs amid tightening global standards. This strategic focus on balancing inference cost with safety-first architectural design signals a shift in industry competition from raw parameter scales to token efficiency and regulatory resilience."
+        "industry_impact_zh": "此举标志着美国出口管制从物理形态的“产品拦截”全面转向逻辑层面的“算力权限管控”，预示着未来云服务商（CSP）的全球调度将面临更严苛的合规审计。该法案将直接冲击英伟达基于数据中心业务的营收模型，迫使其必须在海外市场的商业扩张与美国地缘安全底线之间进行高昂的合规成本核算。",
+        "industry_impact_en": "This shift signifies the evolution of US export controls from physical product interdiction to logical-layer compute access restriction, signaling stringent compliance audits for global CSPs. The move threatens Nvidia’s data center revenue model, forcing a painful reconciliation between overseas market expansion and national security compliance mandates."
       },
       "headlines": [
+        {
+          "id": "fa00193c31fcd3f2",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国国会拟立法封堵AI芯片海外云端访问漏洞",
+          "title_en": "Tighter AI chip export rules are gaining bipartisan support in Congress, including a bill to block Chinese companies from accessing chips overseas (Financial Times)",
+          "source": "Financial Times",
+          "published_at": "2026-11-16T06:05:00+00:00",
+          "url": "https://www.ft.com/content/3062790a-553d-41b8-9c7d-bae17b9d2e29",
+          "event_summary_zh": "鉴于英伟达前CEO黄仁勋涉情报安全丑闻，美国国会两党加速推进法案，严控高端芯片对华出口及云端访问权限",
+          "event_summary_en": "Chairmen John Moolenaar, Brian Mast, and Rick Crawford of the US House committees on China, Foreign Affairs, and Intelligence have demanded a congressional hearing with Nvidia executives and Commerce official Jeffrey Kessler following the scandal involving former CEO Jensen Huang. The proposed 'Remote Access Security Act' aims to close loopholes allowing Chinese firms to access advanced computing via offshore cloud services, while granting Congress authority to block previously approved export sales.",
+          "core_facts_zh": [
+            "【核心事件】众议员约翰·穆勒纳尔、布莱恩·马斯特、瑞克·克劳福德；英伟达前CEO黄仁勋；商务部出口控制官员杰弗里·凯斯勒在美国国会众议院相关委员会：推动《远程访问安全法案》等四项法案立法，审查英伟达对新加坡公司Megaspeed的芯片出口合规性",
+            "【起因与机理】因黄仁勋个人丑闻引发的对华情报渗透担忧，以及防止中国企业通过云算力规避物理芯片出口禁令的战略考量",
+            "【调查与监管诉求】国会寻求审查黄仁勋个人丑闻下的芯片对华违规出口路径。",
+            "【行业影响与走向】事件倒逼出口审查机制从商务部单向权限转向国会介入式监督。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Reps. John Moolenaar, Brian Mast, Rick Crawford; former Nvidia CEO Jensen Huang; Commerce official Jeffrey Kessler (US House of Representatives): Advancing the 'Remote Access Security Act' and demanding testimony regarding Nvidia's exports to Megaspeed",
+            "[Root Cause & Mechanism] Concerns over national security intelligence breaches and the circumvention of physical chip export controls via cloud infrastructure",
+            "[Regulatory & Investigation Focus] Congressional demand for review of chip export compliance following the Jensen Huang scandal.",
+            "[Key Position & Outlook] Shift toward legislative oversight of Commerce Department export decision-making."
+          ],
+          "industry_impact_zh": "此举标志着美国出口管制从物理形态的“产品拦截”全面转向逻辑层面的“算力权限管控”，预示着未来云服务商（CSP）的全球调度将面临更严苛的合规审计。该法案将直接冲击英伟达基于数据中心业务的营收模型，迫使其必须在海外市场的商业扩张与美国地缘安全底线之间进行高昂的合规成本核算。",
+          "industry_impact_en": "This shift signifies the evolution of US export controls from physical product interdiction to logical-layer compute access restriction, signaling stringent compliance audits for global CSPs. The move threatens Nvidia’s data center revenue model, forcing a painful reconciliation between overseas market expansion and national security compliance mandates."
+        },
         {
           "id": "7c2763f7952f2624",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "Qwen4-Max的发布标志着模型侧已进入“高智力、低摩擦”的内卷阶段，其高冗余的token输出倾向表明模型通过增加推理时长来换取准确度，属于典型的计算成本换模型性能策略。对于企业用户而言，该模型显著缩窄了与Kimi K3.1 Pro的性价比差距，将迫使闭源模型厂商在API定价策略上进行新一轮的防御性调整。",
           "industry_impact_en": "The release of Qwen4-Max signifies a shift towards high-intelligence, low-friction model utility, where increased token verbosity suggests a strategic trade-off of inference latency for accuracy. As the cost-performance gap narrows between tier-one models, cloud service providers face intense pressure to undergo defensive API repricing cycles to maintain ecosystem retention."
-        },
-        {
-          "id": "2a49bb0455c9cb0c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "美拟设立AI国家冠军企业名单",
-          "title_en": "Sources: the Trump admin plans to name Nvidia, Amazon, Microsoft, OpenAI, and Anthropic among 24+ AI \"national champions\" to help them win overseas business (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-16T04:40:00+00:00",
-          "url": "https://www.wsj.com/tech/ai/trump-administration-to-name-nvidia-among-ai-national-champions-c9284344",
-          "event_summary_zh": "特朗普政府计划遴选24家以上AI领军企业作为“国家冠军”，涵盖英伟达、微软等巨头，旨在提升海外业务竞争力并抗衡中国技术崛起",
-          "event_summary_en": "The administration of US President Donald Trump plans to designate over 24 AI companies, including Nvidia, Amazon, Microsoft, OpenAI, and Anthropic, as 'national champions.' This initiative is intended to facilitate their overseas expansion through government backing and strategic diplomatic support to enhance competitiveness against Chinese AI rivals.",
-          "core_facts_zh": [
-            "【核心事件】美国特朗普政府、英伟达、亚马逊、微软、OpenAI、Anthropic在美国国家战略与国际市场：拟确立24家以上“AI国家冠军”企业名单以支持其全球扩张",
-            "【起因与机理】地缘政治博弈下，旨在抗衡中国AI产业的快速增长",
-            "【核心事实细节】美政府拟设立AI国家冠军企业名单。",
-            "【各方立场与态度】旨在通过外交与政策支持增强美企海外竞争力并抗衡中国。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Trump Administration, Nvidia, Amazon, Microsoft, OpenAI, Anthropic: Designating 24+ AI 'national champions' for global expansion support",
-            "[Root Cause & Mechanism] Strategic intent to counter the rapid growth of Chinese AI firms",
-            "[Key Fact Detail] US government plans to create a 'national champion' list for AI firms.",
-            "[Key Position & Outlook] Aims to enhance US companies' global competitiveness and counter Chinese AI advancement."
-          ],
-          "industry_impact_zh": "此政策标志着美国AI产业政策从单纯的市场监管转向深度国家主导的资源配置模式，通过国家信用捆绑头部企业实现技术霸权。这一举措可能引发跨国供应链的进一步阵营化，迫使全球AI生态在标准制定和数据合规上做出二选一的政治选择。",
-          "industry_impact_en": "This policy marks a strategic pivot from market regulation to a state-led resource allocation model, leveraging national credit to solidify AI hegemony. This move is likely to accelerate the balkanization of the global AI supply chain, forcing international stakeholders into a binary choice regarding technical standards and data compliance."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 06:04:18 UTC",
+      "updated_at": "2026-11-16 06:16:24 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 06:04:18 UTC",
+      "updated_at": "2026-11-16 06:16:24 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,312)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,320)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,312 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,320 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
