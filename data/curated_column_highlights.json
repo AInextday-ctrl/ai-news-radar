@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 16:37:44 UTC",
+  "generated_at": "2026-11-16 16:50:32 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 16:37:44 UTC",
+      "updated_at": "2026-11-16 16:50:32 UTC",
       "headline_item": {
-        "id": "bc3b559f0f3962c6",
+        "id": "6039420b404daf14",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI启动深度外部评估机制，引入四家独立测评机构",
-        "title_en": "OpenAI says it has signed agreements with independent assessors Apollo Research, METR, Transluce, and Goodfire for its first phase of embedded assessments (OpenAI)",
-        "source": "OpenAI",
-        "published_at": "2026-11-16T16:15:00+00:00",
-        "url": "https://openai.com/index/our-first-phase-of-embedded-assessments/",
-        "event_summary_zh": "OpenAI与Apollo Research等四家机构签署协议，开启模型嵌入式评估试点，旨在应对前沿AI模型安全风险",
-        "event_summary_en": "OpenAI has signed agreements with Apollo Research, METR, Transluce, and Goodfire to grant independent experts deep access to internal model checkpoints, training data, and monitoring systems. This initiative aims to provide third-party validation for model alignment and safety safeguards, fulfilling OpenAI's commitments under the White House Accord on Super Intelligence.",
+        "title_zh": "哈佛研究：全美403座超大规模数据中心能耗激增",
+        "title_en": "Harvard study: just 403 US data centers operational between May 2024 and April 2025 consumed as much electricity annually as the state of Michigan (Molly Taft/Wired)",
+        "source": "Wired",
+        "published_at": "2026-11-16T16:45:01+00:00",
+        "url": "https://www.wired.com/story/data-centers-use-more-electricity-than-michigan/",
+        "event_summary_zh": "哈佛大学研究显示，美国403座超大规模数据中心年耗电量已等同于密歇根州，且碳排放较AI爆发前增长三倍",
+        "event_summary_en": "Researchers at Harvard University, using a combination of industry data and satellite imagery, quantified the energy consumption of 403 hyperscale data centers in the U.S. between May 2024 and April 2025, revealing annual electricity usage equivalent to the entire state of Michigan. The study highlights that due to proprietary data secrecy and a lack of regulatory transparency, these facilities are placing critical strain on the U.S. power grid, with carbon emissions three times higher than pre-AI boom levels.",
         "core_facts_zh": [
-          "【核心事件】OpenAI及合作方Apollo Research、METR、Transluce、Goodfire：授权外部机构进行嵌入式深度测评，审计模型训练与安全防御机制",
-          "【起因与机理】应对AI能力跃迁带来的安全风险，强化外部监管合规性",
-          "【调查与监管诉求】履行白宫超级智能协议，建立第三方嵌入式安全审计机制。",
-          "【各方立场与态度】聚焦模型潜伏性违规检测与一致性安全性校验。"
+          "【核心事件】哈佛大学研究团队：量化全美403座超大规模数据中心能耗与碳排放，指出其能源使用不透明及电网负荷风险",
+          "【起因与机理】AI算力基础设施扩张导致电力需求呈现指数级增长，现有监管体系无法精准追溯与调控",
+          "【关键数据与实测】弗吉尼亚州、俄勒冈州、俄亥俄州及爱荷华州承担了超过50%的行业电力消耗。",
+          "【各方立场与态度】行业电力使用缺乏强制披露机制，导致公共监管与基础设施规划失控。"
         ],
         "core_facts_en": [
-          "[Core Event] OpenAI and assessment firms: Apollo Research, METR, Transluce, Goodfire: Granting deep-access for independent verification of training and safety protocols",
-          "[Root Cause & Mechanism] Mitigating super-intelligence risks and fulfilling regulatory transparency commitments",
-          "[Key Fact Detail] Executing commitments to the White House Accord on Super Intelligence through independent audits.",
-          "[Scope & Next Steps] Focusing on detecting covert subversion and verifying safety alignment."
+          "[Core Event] Harvard University research team: Quantified energy and carbon output of 403 US hyperscale data centers, highlighting lack of transparency and grid stress",
+          "[Root Cause & Mechanism] Explosive growth in AI compute infrastructure outpaces grid capacity and existing regulatory oversight",
+          "[Key Metrics] Virginia, Oregon, Ohio, and Iowa account for over 50% of total industry power consumption.",
+          "[Key Position & Outlook] Lack of mandatory disclosure inhibits effective public oversight and infrastructure planning."
         ],
-        "industry_impact_zh": "此举标志着AI实验室从单纯的自研红队测试转向引入外部第三方审计的合规化新阶段。通过深度访问权限的开放，OpenAI试图建立一种受控的透明机制，以稀释日益严苛的监管压力，但评估机构的客观性与数据泄露边界仍将是技术博弈的长期挑战。",
-        "industry_impact_en": "This shift towards third-party audit reflects a maturation of AI governance, moving beyond self-contained red teaming to external oversight. By granting deep access, OpenAI aims to mitigate regulatory friction, though the tension between independent objective auditing and proprietary data security remains a critical operational threshold."
+        "industry_impact_zh": "算力基础设施的能源消耗已突破地方电网承载阈值，从商业合规层面看，数据中心运营商面临严峻的ESG披露压力与电力准入审批门槛。随着能源监管从自愿性转向强制性，电力容量将成为制约大模型厂商扩张的核心地缘与供应链壁垒，能源成本结构将直接重塑超大规模数据中心（Hyperscaler）的市场竞争逻辑。",
+        "industry_impact_en": "The energy consumption of AI infrastructure has breached regional grid capacity, forcing hyperscalers to face heightened ESG disclosure requirements and more stringent power permitting processes. As energy regulation shifts from voluntary to mandatory, grid capacity will become the primary geopolitical and supply chain bottleneck, fundamentally redefining the competitive landscape for hyperscale operators."
       },
       "headlines": [
+        {
+          "id": "6039420b404daf14",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "哈佛研究：全美403座超大规模数据中心能耗激增",
+          "title_en": "Harvard study: just 403 US data centers operational between May 2024 and April 2025 consumed as much electricity annually as the state of Michigan (Molly Taft/Wired)",
+          "source": "Wired",
+          "published_at": "2026-11-16T16:45:01+00:00",
+          "url": "https://www.wired.com/story/data-centers-use-more-electricity-than-michigan/",
+          "event_summary_zh": "哈佛大学研究显示，美国403座超大规模数据中心年耗电量已等同于密歇根州，且碳排放较AI爆发前增长三倍",
+          "event_summary_en": "Researchers at Harvard University, using a combination of industry data and satellite imagery, quantified the energy consumption of 403 hyperscale data centers in the U.S. between May 2024 and April 2025, revealing annual electricity usage equivalent to the entire state of Michigan. The study highlights that due to proprietary data secrecy and a lack of regulatory transparency, these facilities are placing critical strain on the U.S. power grid, with carbon emissions three times higher than pre-AI boom levels.",
+          "core_facts_zh": [
+            "【核心事件】哈佛大学研究团队：量化全美403座超大规模数据中心能耗与碳排放，指出其能源使用不透明及电网负荷风险",
+            "【起因与机理】AI算力基础设施扩张导致电力需求呈现指数级增长，现有监管体系无法精准追溯与调控",
+            "【关键数据与实测】弗吉尼亚州、俄勒冈州、俄亥俄州及爱荷华州承担了超过50%的行业电力消耗。",
+            "【各方立场与态度】行业电力使用缺乏强制披露机制，导致公共监管与基础设施规划失控。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Harvard University research team: Quantified energy and carbon output of 403 US hyperscale data centers, highlighting lack of transparency and grid stress",
+            "[Root Cause & Mechanism] Explosive growth in AI compute infrastructure outpaces grid capacity and existing regulatory oversight",
+            "[Key Metrics] Virginia, Oregon, Ohio, and Iowa account for over 50% of total industry power consumption.",
+            "[Key Position & Outlook] Lack of mandatory disclosure inhibits effective public oversight and infrastructure planning."
+          ],
+          "industry_impact_zh": "算力基础设施的能源消耗已突破地方电网承载阈值，从商业合规层面看，数据中心运营商面临严峻的ESG披露压力与电力准入审批门槛。随着能源监管从自愿性转向强制性，电力容量将成为制约大模型厂商扩张的核心地缘与供应链壁垒，能源成本结构将直接重塑超大规模数据中心（Hyperscaler）的市场竞争逻辑。",
+          "industry_impact_en": "The energy consumption of AI infrastructure has breached regional grid capacity, forcing hyperscalers to face heightened ESG disclosure requirements and more stringent power permitting processes. As energy regulation shifts from voluntary to mandatory, grid capacity will become the primary geopolitical and supply chain bottleneck, fundamentally redefining the competitive landscape for hyperscale operators."
+        },
         {
           "id": "bc3b559f0f3962c6",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "黄仁勋的离职不仅是单体企业的管理层更迭，更可能引发AI基础设施供应侧的战略摇摆。其背后的关联交易调查折射出NVIDIA在高速扩张期对供应链垂直集成与财务合规边界的模糊处理，该事件将重塑半导体行业对‘创始人中心化’治理模式的风险定价。",
           "industry_impact_en": "Huang's departure represents a profound disruption in the AI infrastructure supply chain rather than a mere management reshuffle. The underlying investigation into related-party transactions highlights the blurring lines between supply chain integration and financial compliance during Nvidia's hyper-growth phase, forcing a re-evaluation of 'founder-centric' governance risks in the semiconductor industry."
-        },
-        {
-          "id": "73df5e22dda02a1c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Claude新增Canvas内HTML交互功能",
-          "title_en": "Claude now builds interactive websites inside canvas graphics, reviving the Flash era with real HTML",
-          "source": "THE DECODER",
-          "published_at": "2026-11-16T16:10:22+00:00",
-          "url": "https://the-decoder.com/claude-now-builds-interactive-websites-inside-canvas-graphics-reviving-the-flash-era-with-real-html/",
-          "event_summary_zh": "Anthropic的Claude模型支持在Canvas图形中直接渲染交互式HTML元素，提升视觉表达交互性",
-          "event_summary_en": "Anthropic's Claude has launched an 'HTML-in-Canvas' feature, enabling the embedding of interactive HTML elements directly into complex Canvas graphics. Built on emerging web standards, this integration allows for unified visual and textual interaction, significantly enhancing Claude's capabilities in building dynamic web interfaces and complex data visualizations via user prompts.",
-          "core_facts_zh": [
-            "【核心事件】Anthropic及研发工程师Felix Rieseberg在Claude 5.11492版本及以上：支持在Canvas内部嵌入可交互HTML元素，打破传统静态显示局限",
-            "【起因与机理】优化AI生成内容的交互体验与可访问性，复现动态Web表现力",
-            "【核心事实细节】打破Canvas图形仅能视觉展示的局限，集成交互式HTML。",
-            "【各方立场与态度】通过Prompt触发，需在Chrome/Edge 157+及Claude桌面端支持。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Anthropic and software engineer Felix Rieseberg (Claude version 5.11492 and later): Embedding interactive HTML within Canvas, overcoming static limitations",
-            "[Root Cause & Mechanism] Enhancing AI-generated content interactivity and accessibility",
-            "[Key Fact Detail] Overcoming static Canvas limitations by integrating interactive HTML elements.",
-            "[Key Position & Outlook] Prompt-based access, requiring Chrome/Edge 157+ and updated Claude desktop clients."
-          ],
-          "industry_impact_zh": "该功能实质上是将浏览器的Canvas渲染引擎与DOM操作进行了深度耦合，降低了交互式网页开发的门槛。此举模糊了AI文本生成与前端工程的边界，将使得‘生成式UI’从静态原型向高保真、可交互的生产级组件演进。",
-          "industry_impact_en": "This feature achieves a deep coupling between the browser's Canvas engine and DOM manipulation, lowering the barrier for interactive web development. It blurs the line between generative AI and frontend engineering, pushing 'generative UI' from static prototypes toward high-fidelity, production-grade components."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 16:37:45 UTC",
+      "updated_at": "2026-11-16 16:50:32 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 16:37:45 UTC",
+      "updated_at": "2026-11-16 16:50:32 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,536)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,541)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,536 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,541 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
