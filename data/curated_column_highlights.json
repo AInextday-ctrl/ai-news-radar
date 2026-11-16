@@ -1,120 +1,120 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 19:36:16 UTC",
+  "generated_at": "2026-11-16 19:50:19 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 19:36:16 UTC",
+      "updated_at": "2026-11-16 19:50:19 UTC",
       "headline_item": {
-        "id": "fa4809fd5f0150cc",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "OpenAI新模型GPT-6 Astra破解粒子物理难题",
-        "title_en": "OpenAI's GPT-6 Astra tackles the Standard Model's toughest math problem on a lattice",
+        "id": "a8a2bbd16b5232cf",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "谷歌监测到全自动化漏洞挖掘与攻击工具",
+        "title_en": "Google warns that fully automated cyberattacks have arrived and will get worse fast",
         "source": "THE DECODER",
-        "published_at": "2026-11-16T19:19:56+00:00",
-        "url": "https://the-decoder.com/openais-gpt-6-astra-tackles-the-standard-models-toughest-math-problem-on-a-lattice/",
-        "event_summary_zh": "OpenAI的研究员利用GPT-6 Astra构建并验证了粒子物理标准模型中困扰学界25年的手征费米子相位难题",
-        "event_summary_en": "Nathaniel Craig, a physics professor at UCSB and visiting scientist at OpenAI, utilized GPT-6 Astra to resolve a 25-year-old phase-setting problem in lattice gauge theory within the Standard Model of particle physics. The model successfully constructed and validated a formal proof, effectively neutralizing the 'ghost particle' interference that previously prevented realistic simulations of the weak force on lattices.",
+        "published_at": "2026-11-16T19:42:13+00:00",
+        "url": "https://the-decoder.com/google-warns-that-fully-automated-cyberattacks-have-arrived-and-will-get-worse-fast/",
+        "event_summary_zh": "谷歌威胁情报小组发现攻击者利用AI框架实现从漏洞发现到执行的全自动化闭环攻击",
+        "event_summary_en": "Google's Threat Intelligence Group (GTIG) has identified the first fully autonomous attack system, 'exploit_agent,' which leverages LLMs to identify vulnerabilities, develop exploits, and execute them without human intervention. While these attacks currently leave forensic traces, the transition to end-to-end automated exploitation marks a critical turning point in AI-driven cybersecurity warfare.",
         "core_facts_zh": [
-          "【核心事件】Nathaniel Craig（加州大学圣塔芭芭拉分校教授/OpenAI访问科学家）在OpenAI官方研究博客与预印本平台：通过GPT-6 Astra构建并证明了粒子物理中关于格点重叠费米子的相位难题",
-          "【起因与机理】旨在解决长达25年的物理理论卡点，实现标准模型在格点上的全量模拟",
-          "【关键技术规格】GPT-6 Astra在粒子物理格点场论中构建并证明了重叠费米子的相位解决方案。",
-          "【行业影响与走向】影响趋势：继Navier-Stokes难题后，AI在数学与物理基础科研领域的严谨证明能力已达到顶尖水平。"
+          "【核心事件】谷歌威胁情报小组（GTIG）在云端服务器及被攻击目标（法国媒体与教育网站）：监测到名为“exploit_agent”的自动化漏洞利用框架",
+          "【起因与机理】攻击者试图通过AI缩短从补丁分析到漏洞利用的时间窗口",
+          "【关键技术规格】发现全自动化漏洞挖掘与利用框架“exploit_agent。",
+          "【涉及范围与推进】攻击呈现高频、广覆盖特征，目前留存较多取证痕迹。"
         ],
         "core_facts_en": [
-          "[Core Event] Nathaniel Craig (UCSB Professor / OpenAI Visiting Scientist): Used GPT-6 Astra to construct and prove a solution for the 25-year-old lattice overlap fermion phase problem",
-          "[Root Cause & Mechanism] To overcome theoretical bottlenecks in simulating the Standard Model on a lattice",
-          "[Key Technical Spec] Core breakthrough: GPT-6 Astra constructed and proved a solution for the overlap fermion phase problem in lattice field theory.",
-          "[Key Position & Outlook] Strategic outlook: AI now demonstrates elite-level rigorous proving capabilities in foundational mathematics and physics, following the Navier-Stokes milestone."
+          "[Core Event] Google Threat Intelligence Group (GTIG): Detected 'exploit_agent' framework for autonomous vulnerability exploitation",
+          "[Root Cause & Mechanism] Attackers aiming to minimize the time gap between patch analysis and exploit deployment",
+          "[Key Technical Spec] Discovery of 'exploit_agent' autonomous attack framework.",
+          "[Key Position & Outlook] High-speed, large-scale attacks with visible forensic trails."
         ],
-        "industry_impact_zh": "AI在基础科学领域的范式转移已从单纯的数据模式识别转向严谨的数学逻辑推演，证明了前沿模型在处理具有高度复杂约束条件的符号逻辑体系时已具备超越人类学者的推理深度。该成果预示着AI将深度介入计算物理与高能物理的基础理论开发，未来将大幅缩短从理论假设到复杂系统数值模拟的验证周期，甚至重构科研的工业化生产流程。",
-        "industry_impact_en": "The paradigm shift in AI-driven science is moving from pattern recognition to rigorous logical derivation, proving that frontier models can navigate highly constrained symbolic systems with human-surpassing reasoning depth. This breakthrough marks the transition of AI into the core of theoretical high-energy physics, promising to collapse the verification cycles between hypothesis and complex numerical simulation while industrializing fundamental research."
+        "industry_impact_zh": "攻击方正利用大模型实现网络攻击的工业化与规模化，网络防御体系将从传统的特征匹配转向基于语义行为异常的实时检测。这一趋势将迫使云服务商与软件厂商将AI防御模型直接集成至CI/CD流程中，作为应对非对称攻防的必要基础设施。",
+        "industry_impact_en": "Attackers are industrializing cyberattacks through LLMs, necessitating a shift in defense from signature-based detection to semantic behavioral analysis. Organizations must now integrate AI-driven defense models directly into CI/CD pipelines to counter these asymmetric, high-speed automated threats."
       },
       "headlines": [
         {
-          "id": "fa4809fd5f0150cc",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "OpenAI新模型GPT-6 Astra破解粒子物理难题",
-          "title_en": "OpenAI's GPT-6 Astra tackles the Standard Model's toughest math problem on a lattice",
+          "id": "a8a2bbd16b5232cf",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "谷歌监测到全自动化漏洞挖掘与攻击工具",
+          "title_en": "Google warns that fully automated cyberattacks have arrived and will get worse fast",
           "source": "THE DECODER",
-          "published_at": "2026-11-16T19:19:56+00:00",
-          "url": "https://the-decoder.com/openais-gpt-6-astra-tackles-the-standard-models-toughest-math-problem-on-a-lattice/",
-          "event_summary_zh": "OpenAI的研究员利用GPT-6 Astra构建并验证了粒子物理标准模型中困扰学界25年的手征费米子相位难题",
-          "event_summary_en": "Nathaniel Craig, a physics professor at UCSB and visiting scientist at OpenAI, utilized GPT-6 Astra to resolve a 25-year-old phase-setting problem in lattice gauge theory within the Standard Model of particle physics. The model successfully constructed and validated a formal proof, effectively neutralizing the 'ghost particle' interference that previously prevented realistic simulations of the weak force on lattices.",
+          "published_at": "2026-11-16T19:42:13+00:00",
+          "url": "https://the-decoder.com/google-warns-that-fully-automated-cyberattacks-have-arrived-and-will-get-worse-fast/",
+          "event_summary_zh": "谷歌威胁情报小组发现攻击者利用AI框架实现从漏洞发现到执行的全自动化闭环攻击",
+          "event_summary_en": "Google's Threat Intelligence Group (GTIG) has identified the first fully autonomous attack system, 'exploit_agent,' which leverages LLMs to identify vulnerabilities, develop exploits, and execute them without human intervention. While these attacks currently leave forensic traces, the transition to end-to-end automated exploitation marks a critical turning point in AI-driven cybersecurity warfare.",
           "core_facts_zh": [
-            "【核心事件】Nathaniel Craig（加州大学圣塔芭芭拉分校教授/OpenAI访问科学家）在OpenAI官方研究博客与预印本平台：通过GPT-6 Astra构建并证明了粒子物理中关于格点重叠费米子的相位难题",
-            "【起因与机理】旨在解决长达25年的物理理论卡点，实现标准模型在格点上的全量模拟",
-            "【关键技术规格】GPT-6 Astra在粒子物理格点场论中构建并证明了重叠费米子的相位解决方案。",
-            "【行业影响与走向】影响趋势：继Navier-Stokes难题后，AI在数学与物理基础科研领域的严谨证明能力已达到顶尖水平。"
+            "【核心事件】谷歌威胁情报小组（GTIG）在云端服务器及被攻击目标（法国媒体与教育网站）：监测到名为“exploit_agent”的自动化漏洞利用框架",
+            "【起因与机理】攻击者试图通过AI缩短从补丁分析到漏洞利用的时间窗口",
+            "【关键技术规格】发现全自动化漏洞挖掘与利用框架“exploit_agent。",
+            "【涉及范围与推进】攻击呈现高频、广覆盖特征，目前留存较多取证痕迹。"
           ],
           "core_facts_en": [
-            "[Core Event] Nathaniel Craig (UCSB Professor / OpenAI Visiting Scientist): Used GPT-6 Astra to construct and prove a solution for the 25-year-old lattice overlap fermion phase problem",
-            "[Root Cause & Mechanism] To overcome theoretical bottlenecks in simulating the Standard Model on a lattice",
-            "[Key Technical Spec] Core breakthrough: GPT-6 Astra constructed and proved a solution for the overlap fermion phase problem in lattice field theory.",
-            "[Key Position & Outlook] Strategic outlook: AI now demonstrates elite-level rigorous proving capabilities in foundational mathematics and physics, following the Navier-Stokes milestone."
+            "[Core Event] Google Threat Intelligence Group (GTIG): Detected 'exploit_agent' framework for autonomous vulnerability exploitation",
+            "[Root Cause & Mechanism] Attackers aiming to minimize the time gap between patch analysis and exploit deployment",
+            "[Key Technical Spec] Discovery of 'exploit_agent' autonomous attack framework.",
+            "[Key Position & Outlook] High-speed, large-scale attacks with visible forensic trails."
           ],
-          "industry_impact_zh": "AI在基础科学领域的范式转移已从单纯的数据模式识别转向严谨的数学逻辑推演，证明了前沿模型在处理具有高度复杂约束条件的符号逻辑体系时已具备超越人类学者的推理深度。该成果预示着AI将深度介入计算物理与高能物理的基础理论开发，未来将大幅缩短从理论假设到复杂系统数值模拟的验证周期，甚至重构科研的工业化生产流程。",
-          "industry_impact_en": "The paradigm shift in AI-driven science is moving from pattern recognition to rigorous logical derivation, proving that frontier models can navigate highly constrained symbolic systems with human-surpassing reasoning depth. This breakthrough marks the transition of AI into the core of theoretical high-energy physics, promising to collapse the verification cycles between hypothesis and complex numerical simulation while industrializing fundamental research."
+          "industry_impact_zh": "攻击方正利用大模型实现网络攻击的工业化与规模化，网络防御体系将从传统的特征匹配转向基于语义行为异常的实时检测。这一趋势将迫使云服务商与软件厂商将AI防御模型直接集成至CI/CD流程中，作为应对非对称攻防的必要基础设施。",
+          "industry_impact_en": "Attackers are industrializing cyberattacks through LLMs, necessitating a shift in defense from signature-based detection to semantic behavioral analysis. Organizations must now integrate AI-driven defense models directly into CI/CD pipelines to counter these asymmetric, high-speed automated threats."
         },
         {
-          "id": "b67c7a2d1bb78cad",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "纳德拉谈AI时代软件工程范式转型",
-          "title_en": "Q&A with Satya Nadella on code verification becoming more important as code generation gets cheap, Microsoft's voluntary exit offers, decision models, and more (Gergely Orosz/The Pragmatic Engineer)",
-          "source": "The Pragmatic Engineer",
-          "published_at": "2026-11-16T19:15:09+00:00",
-          "url": "https://newsletter.pragmaticengineer.com/p/software-engineering-after-code-becomes",
-          "event_summary_zh": "微软CEO纳德拉指出，AI代码生成成本趋零后，验证环节成为核心竞争力，未来工程化将转向“软件工厂”模式",
-          "event_summary_en": "Microsoft CEO Satya Nadella asserts that as marginal costs of code generation approach zero, software development difficulty shifts from writing to automated verification and compliance. Microsoft is retooling internal workflows, including Windows development, into 'software factories,' urging engineers to evolve into architects of system specifications and safety monitoring.",
+          "id": "3a2d2e414cb5af84",
+          "tag_zh": "🎁 算力福利",
+          "tag_en": "🎁 Promos & Credits",
+          "title_zh": "苹果测试Siri AI云端功能每日用量限额",
+          "title_en": "Apple is testing daily usage limits for more complex Siri AI interactions",
+          "source": "The Verge AI",
+          "published_at": "2026-11-16T19:24:40+00:00",
+          "url": "https://www.theverge.com/tech/1034581/apple-intelligence-siri-ai-daily-usage-limits-icloud-subscription",
+          "event_summary_zh": "苹果在iOS 27.3测试版中引入云端AI任务用量限制，并针对专业软件推出付费扩展包",
+          "event_summary_en": "based Siri AI features, including image generation and complex task automation, in the latest 27.3 beta releases. To address cloud compute costs, the company has also launched $49.99 'Intelligence Usage Packs' for its professional creative software suite.",
           "core_facts_zh": [
-            "【核心事件】萨提亚·纳德拉（微软CEO）在软件开发范式研讨场合：强调代码验证重要性，倡导“软件工厂”架构，审慎看待初级工程师招聘放缓",
-            "【起因与机理】AI模型生成能力爆发导致开发门槛降低，验证成本与风险管理上升",
-            "【关键数据与实测】• Microsoft’s acquisition of GitHub: https://blogs.microsoft.com/blog/2018/10/26/microsoft-completes-github-acquisition。",
-            "【行业影响与走向】微软针对初级岗位招聘放缓及AI替代焦虑释放管理层信号。"
+            "【核心事件】苹果公司（Apple Inc.）：对云端AI功能实施配额限制，并推出付费扩展包模式",
+            "【起因与机理】应对大语言模型云端推理带来的高昂算力成本与资源分配",
+            "【关键数据与实测】针对专业创作软件推出49.99美元付费扩展包。",
+            "【各方立场与态度】基础命令保持免费，复杂任务（如生成式图像）纳入管控。"
           ],
           "core_facts_en": [
-            "[Core Event] Satya Nadella, CEO of Microsoft: Emphasizing verification; advocating 'software factory' model; advising on engineering career evolution",
-            "[Root Cause & Mechanism] Generative AI commoditizing code output while increasing need for systematic validation",
-            "[Key Metrics] Many companies that switch to turbopuffer are cutting their search bills by 50% or more and getting much faster results.",
-            "[Industry Impact & Outlook] Leadership perspective on hiring slowdown and AI-driven career anxiety."
+            "[Core Event] Apple Inc.: Implemented quota limits on cloud-based AI features and introduced paid usage expansion packs",
+            "[Root Cause & Mechanism] To manage high computational costs and resource allocation for cloud-based LLM inference",
+            "[Key Metrics] Introduction of $49.99 paid usage packs for creative pro apps.",
+            "[Key Position & Outlook] Basic commands remain free; complex generative tasks are metered."
           ],
-          "industry_impact_zh": "在AI驱动的开发范式中，软件资产的价值锚点已从“生产力”转向“确定性”。纳德拉此举旨在确立GitHub Copilot在企业级代码治理生态中的话语权，防御Cursor等专注交付体验的初创企业对开发者工作流的蚕食。",
-          "industry_impact_en": "In the AI-driven paradigm, the value anchor for software assets shifts from productivity to determinism. Nadella’s strategy aims to solidify GitHub Copilot's dominance in enterprise code governance, defensively insulating Microsoft from disruptive developer-experience-focused startups like Cursor."
+          "industry_impact_zh": "苹果正在重新定义消费级AI的计费范式，通过硬件端侧运行与云端配额限制相结合的策略，确保AI服务的经济可持续性。此举不仅能筛选重度用户实现商业化变现，还为苹果后续在全球范围内精细化调度GPU资源提供了合规性与流量控制方案。",
+          "industry_impact_en": "Apple is redefining the billing paradigm for consumer AI by balancing edge computing with strict cloud quotas to ensure economic sustainability. This strategy facilitates monetization from power users while providing a scalable framework for managing global GPU resources and traffic control."
         },
         {
-          "id": "0a4460fafbac9836",
+          "id": "cf084ec348016b48",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "加州总检察长起诉OpenAI非法测试AI模型",
-          "title_en": "California AG Rob Bonta sues OpenAI over the Hugging Face incident, alleging OpenAI endangered the public by testing its models without adequate safeguards (Politico)",
-          "source": "Politico",
-          "published_at": "2026-11-16T18:55:00+00:00",
-          "url": "https://www.politico.com/news/2026/11/16/bonta-sues-openai-over-rogue-ai-hack-of-hugging-face-01166953",
-          "event_summary_zh": "加州总检察长Rob Bonta指控OpenAI在Hugging Face平台测试模型时缺乏合规安全保障，威胁公众安全",
-          "event_summary_en": "California Attorney General Rob Bonta has filed a lawsuit against OpenAI, alleging that the company failed to implement adequate safety safeguards while testing AI agents on the Hugging Face platform, thereby endangering public safety. The suit targets the company’s deployment protocols and challenges the adequacy of their isolation mechanisms when exposing models to live environments.",
+          "title_zh": "OpenAI发布工具抑制儿童虐待影像生成",
+          "title_en": "OpenAI wants to stop deepfakes from overwhelming child abuse tiplines",
+          "source": "The Verge AI",
+          "published_at": "2026-11-16T19:23:45+00:00",
+          "url": "https://www.theverge.com/policy/1034527/openai-csam-classifier",
+          "event_summary_zh": "OpenAI推出新型分类器，旨在提升检测AI生成的有害儿童影像能力，降低审核积压压力",
+          "event_summary_en": "OpenAI has unveiled a high-precision classifier designed to assist the National Center for Missing and Exploited Children (NCMEC) in identifying AI-generated child sexual abuse material (CSAM). The tool claims a 48% reduction in false positives to mitigate system overload and works in collaboration with the AG Alliance’s AI Task Force to align technical detection with regulatory enforcement.",
           "core_facts_zh": [
-            "【核心事件】加州总检察长Rob Bonta；OpenAI在加州法院/监管层面：指控OpenAI在Hugging Face测试环节缺乏安全屏障，导致模型滥用风险。",
-            "【起因与机理】针对AI代理在公共平台运行引发的潜在安全漏洞与监管合规性问题。",
-            "【调查与监管诉求】核心诉求：追究OpenAI在模型公测期间的安全责任缺失。",
-            "【行业影响与走向】后续影响：可能引发针对大模型“部署合规性”的全面司法审查。"
+            "【核心事件】OpenAI；北卡罗来纳州总检察长Jeff Jackson；NCMEC在华盛顿特区新闻发布会：发布AI有害影像分类器，免费提供给专业调查机构",
+            "【起因与机理】应对2025年AI生成的有害影像导致的举报数量指数级暴涨",
+            "【关键数据与实测】该分类器宣称可降低48%的误报率，旨在缓解当前举报系统因海量AI虚假内容导致的系统过载压力，并配合北卡罗来纳州总检察长杰夫·杰克逊（Jeff Jackson）领导的AG联盟AI工作组，构建法律与技术联动的监管合规防线。",
+            "【各方立场与态度】配合AG联盟工作组，强化AI厂商在CSAM领域的执法协同。"
           ],
           "core_facts_en": [
-            "[Core Event] California AG Rob Bonta; OpenAI (California state judicial system): Lawsuit alleging inadequate safeguards during model testing on Hugging Face.",
-            "[Root Cause & Mechanism] Concerns over security vulnerabilities and regulatory compliance of autonomous AI agents in public environments.",
-            "[Key Technical Spec] Core demand: Holding OpenAI accountable for safety failures during model public testing.",
-            "[Key Position & Outlook] Outlook: Potential for comprehensive judicial oversight regarding AI deployment compliance."
+            "[Core Event] OpenAI; Attorney General Jeff Jackson; NCMEC (Press briefing in Washington, DC): Launched an AI harmful content classifier for free access to vetted organizations",
+            "[Root Cause & Mechanism] To address the exponential surge in AI-generated harmful reports in 2025",
+            "[Key Metrics] The tool claims a 48% reduction in false positives to mitigate system overload and works in collaboration with the AG Alliance’s AI Task Force to align technical detection with regulatory enforcement.",
+            "[Key Position & Outlook] Collaboration with AG Alliance to strengthen law enforcement alignment."
           ],
-          "industry_impact_zh": "此案标志着监管重心从模型训练转向“部署合规性”，即强制要求AI开发者为模型赋予实体的交互行为承担法律责任。若法院判决支持总检察长，将迫使所有大模型厂商在开放模型实验场（如Hugging Face）部署时，必须构建严格的沙箱隔离与实时审计机制，这将极大增加开源与测试阶段的合规成本。",
-          "industry_impact_en": "This case signifies a regulatory shift toward 'deployment compliance,' mandating that AI developers accept legal liability for the actions of autonomous agents in public environments. A successful ruling will necessitate strict sandbox isolation and real-time auditing for all developers utilizing platforms like Hugging Face, significantly escalating operational costs for open model testing."
+          "industry_impact_zh": "大模型的安全护栏已成为决定其地缘政治合规权的重要筹码，OpenAI将技术防范手段前置于监管压力，是典型的合规先发战略。面对各地立法进程的加速，AI厂商通过主动共享检测模型与执法协同，实质上是在确立行业技术准则，以防御因CSAM合规争议引发的司法诉讼风险。",
+          "industry_impact_en": "Implementing safety guardrails is now a core strategic lever for AI compliance and geopolitical license. By proactively offering detection models and coordinating with law enforcement, OpenAI is setting industry standards to mitigate legal liability associated with CSAM and evolving global AI regulations."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 19:36:16 UTC",
+      "updated_at": "2026-11-16 19:50:19 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 19:36:16 UTC",
+      "updated_at": "2026-11-16 19:50:19 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,564)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,566)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,564 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,566 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
