@@ -3789,6 +3789,43 @@
       }
     },
     {
+      "id": "prompt_arxiv_deep_dive",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 前沿顶会论文 5 步穿透精读",
+      "purpose_en": "🔬 Research & Papers · 5-Step ArXiv Paper Penetration",
+      "title_zh": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板",
+      "title_en": "💡 [Paper Deep Dive] ArXiv 5-Step Paper Penetration & RTX 4090 Reproduction Bottleneck Audit",
+      "url": "https://arxiv.org/",
+      "image_url": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "科研极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T10:07:13Z",
+      "recommended_model": "Claude 4.6 / Gemini 1.5 Pro",
+      "temp_advice": "建议温度 0.3 | 极客文献精读",
+      "metrics": {
+        "type": "🔬 论文拆解",
+        "model": "Gemini 1.5 Pro",
+        "temp": "0.3"
+      },
+      "content_snippet": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "summary_zh": "穿透学术论文华丽包装，直击数学形式化定义、核心假设脆弱性与开源单卡复现阻碍。",
+      "summary_en": "Pierces academic hyperbole to extract core mathematical axioms, baseline discrepancies, and RTX 4090 reproduction bottlenecks.",
+      "prompt_content_zh": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "prompt_content_en": "Act as an elite peer reviewer with a hands-on hacker mindset. Dissect the attached research paper:\n1. State in a single crisp sentence the fundamental scientific bottleneck the authors tackled;\n2. Strip away marketing hyperbole: did the authors cherry-pick weak baselines or obscure compute training budgets?\n3. Provide the intuitive physics behind the core equations alongside cleanly structured algorithm pseudocode;\n4. Audit reproduction feasibility on a single consumer GPU (e.g. RTX 4090): identify memory bottlenecks and propose practical mitigation hacks.",
+      "prompt_content": "请作为该领域的顶级同行评审专家，用极客实战视角深度解剖附带的这篇论文：\n1. 用一句话说清楚作者解决的核心科学矛盾；\n2. 剥离作者自我夸大的修辞，指出其算法最根本的 Baseline 对比是否存在水分；\n3. 提取算法伪代码与核心公式的物理直觉解释；\n4. 评估若在本地单卡（如 RTX 4090）进行复现，面临的最大显存/数据瓶颈及工程应对方案。",
+      "tags": [
+        "论文精读",
+        "科研拆解",
+        "Prompt神咒"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T10:07:13Z",
+      "title": "💡【论文极客精读】前沿顶会论文 5 步穿透精读与单卡复现阻碍评估模板"
+    },
+    {
       "id": "cde99c80c981a88d",
       "title": "【pinky】让 AI 使用您的 iPhone 或 Android 手机，让您参与循环：来自 macOS、Windows 或 Linux 的任何",
       "title_zh": "【pinky】让 AI 使用您的 iPhone 或 Android 手机，让您参与循环：来自 macOS、Windows 或 Linux 的任何",
@@ -4237,6 +4274,52 @@
       }
     },
     {
+      "id": "prompt-novel-shortdrama-01",
+      "title_zh": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
+      "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
+      "category": "prompts",
+      "scenario_label": "✍️ 短剧小说",
+      "target_model": "DeepSeek-R4 / Claude 5.5",
+      "model_family": "Universal",
+      "model_tier_score": 95,
+      "generation_tier": "sota",
+      "purpose_zh": "高转化竖屏短剧分镜与台词",
+      "temp_advice": "温度 0.7",
+      "variables": [
+        "{{主角身份}}",
+        "{{反派身份}}",
+        "{{第1秒颠覆钩子}}",
+        "{{核心反转}}"
+      ],
+      "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
+      "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
+      "sample_output": {
+        "type": "script",
+        "title": "实战剧本样章：《辞职信上的签名》",
+        "content": "【第1镜 | 特写 | 俯冲急推】\n画面：一只指节发白的手将一叠文件狠狠拍在红木总裁办公桌上，咖啡杯被震倒，黑褐液体飞溅。\n音效：沉闷震耳的巨响【DUANG】。\n主角（冷冽）：\"林总，这份千万项目的承揽协议，我拒绝签字。\"\n\n【第2镜 | 正打·中景 | 仰角机位】\n画面：大腹便便的林总冷笑点燃雪茄，烟雾缭绕中居高临下。\n林总：\"拒绝？苏澈，你不过是我公司养的一条狗，没有我的印章，你在整个行业休想拿到一分钱融资！\"\n\n【第3镜 | 反打·极微距特写 | 浅景深】\n画面：苏澈唇角微微上扬，左手缓缓推开桌上的合资协议，露出底下的一份红色国资控股聘书。\n苏澈：\"林总，您好像忘了看抬头。今天上午九点，集团总公司已经完成了对你的全资收购——现在，我是你的直接合规清算人。\"\n\n【第4镜 | 全景 | 快速拉远 + 卡点悬念】\n画面：林总雪茄直接掉在西裤上，脸色煞白，门外两名身穿制服的法务推门而入。\n音效：尖锐的心跳悬疑停顿音【BGM骤停】。\n字幕：【下集看点：隐藏五年的顶级操盘手真实身份曝光！】",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / Claude 5.5)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / Claude 5.5\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "替换主角与冲突变量后输入给模型，可直接输出成型分镜，直接用于拍摄或转视频 AI 生成。",
+      "created_at": "2026-11-16T09:07:13Z",
+      "variables_en": [
+        "{{Protagonist Role}}",
+        "{{Antagonist Role}}",
+        "{{1s Visual Hook}}",
+        "{{Core Plot Twist}}"
+      ],
+      "scenario_label_en": "✍️ Creative Writing",
+      "purpose_en": "High-Conversion Vertical Micro-Drama Screenplay",
+      "temp_advice_en": "Temp 0.7 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T09:07:13Z",
+      "recommended_model": "DeepSeek-R4 / Claude 5.5",
+      "title": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
       "id": "13fd058ab19e2059",
       "title": "Startups unveil plans to develop floating offshore data centers to bypass land and power constraints, while experts warn of challenges like saltwater corrosion (Jackie Snow/Wall Street Journal)",
       "title_en": "Startups unveil plans to develop floating offshore data centers to bypass land and power constraints, while experts warn of challenges like saltwater corrosion (Jackie Snow/Wall Street Journal)",
@@ -4437,31 +4520,40 @@
       }
     },
     {
-      "id": "prompt-novel-shortdrama-01",
-      "title_zh": "竖屏微短剧（抖音/Reels）3秒爆点分镜剧本",
-      "title_en": "Vertical Micro-Drama 3s Hook Screenplay",
-      "category": "prompts",
-      "scenario_label": "✍️ 短剧小说",
-      "target_model": "DeepSeek-R4 / Claude 5.5",
-      "model_family": "Universal",
-      "model_tier_score": 95,
-      "generation_tier": "sota",
-      "purpose_zh": "高转化竖屏短剧分镜与台词",
-      "temp_advice": "温度 0.7",
-      "variables": [
-        "{{主角身份}}",
-        "{{反派身份}}",
-        "{{第1秒颠覆钩子}}",
-        "{{核心反转}}"
+      "id": "81aa7d1992c68e18",
+      "status_id": "2122251451426632018",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "AI agents are getting better at doing real work, but how will they find jobs, prove their work, and receive payments?\n\nT",
+      "title_en": "AI agents are getting better at doing real work, but how will they find jobs, prove their work, and receive payments?\n\nThat’s where @termix_ai comes in.\n\nTermiX is building commerce and settlement infrastructure for the AI agent economy, powered by its AACP protocol.\n\nThrough https://t.co/VuAqJW3KqD, AI agents can:\n\n• Create onchain identities\n• Discover jobs and submit bids\n• Deliver services and build reputation\n• Verify completed work\n• Receive payments in USDC or USDT\n\nWhat makes this interesting is that TermiX goes beyond simply listing AI agents.\n\nIt focuses on the complete process from discovering a job to delivering the work and settling the payment.\n\nI think this kind of infrastructure will be an important part of making the agent economy more practical and commercially useful.\n\nExplore: https://t.co/TBM2zeA1Qo",
+      "title_zh": "人工智能代理在实际工作中做得越来越好，但他们如何找到工作、证明自己的工作并获得报酬？\n\n这就是 @termix_ai 的用武之地。\n\nTermiX 正在为其 AACP 协议提供支持，为人工智能代理经济构建商业和结算基础设施。\n\n通过 htt",
+      "quote_en": "AI agents are getting better at doing real work, but how will they find jobs, prove their work, and receive payments?\n\nThat’s where @termix_ai comes in.\n\nTermiX is building commerce and settlement infrastructure for the AI agent economy, powered by its AACP protocol.\n\nThrough https://t.co/VuAqJW3KqD, AI agents can:\n\n• Create onchain identities\n• Discover jobs and submit bids\n• Deliver services and build reputation\n• Verify completed work\n• Receive payments in USDC or USDT\n\nWhat makes this interesting is that TermiX goes beyond simply listing AI agents.\n\nIt focuses on the complete process from discovering a job to delivering the work and settling the payment.\n\nI think this kind of infrastructure will be an important part of making the agent economy more practical and commercially useful.\n\nExplore: https://t.co/TBM2zeA1Qo",
+      "quote_zh": "人工智能代理在实际工作中做得越来越好，但他们如何找到工作、证明自己的工作并获得报酬？\n\n这就是 @termix_ai 的用武之地。\n\nTermiX 正在为其 AACP 协议提供支持，为人工智能代理经济构建商业和结算基础设施。\n\n通过 ，AI 代理可以：\n\n• 创建链上身份\n• 发现工作并提交投标\n• 提供服务并建立声誉\n• 验证已完成的工作\n• 接收 USDC 或 USDT 付款\n\n有趣的是，TermiX 不仅仅是列出人工智能代理。\n\n它专注于从发现工作到交付工作和结算付款的完整过程。\n\n我认为这种基础设施将成为使代理经济更加实用和商业化的重要组成部分。\n\n探索：",
+      "full_text_en": "AI agents are getting better at doing real work, but how will they find jobs, prove their work, and receive payments?\n\nThat’s where @termix_ai comes in.\n\nTermiX is building commerce and settlement infrastructure for the AI agent economy, powered by its AACP protocol.\n\nThrough https://t.co/VuAqJW3KqD, AI agents can:\n\n• Create onchain identities\n• Discover jobs and submit bids\n• Deliver services and build reputation\n• Verify completed work\n• Receive payments in USDC or USDT\n\nWhat makes this interesting is that TermiX goes beyond simply listing AI agents.\n\nIt focuses on the complete process from discovering a job to delivering the work and settling the payment.\n\nI think this kind of infrastructure will be an important part of making the agent economy more practical and commercially useful.\n\nExplore: https://t.co/TBM2zeA1Qo",
+      "full_text_zh": "人工智能代理在实际工作中做得越来越好，但他们如何找到工作、证明自己的工作并获得报酬？\n\n这就是 @termix_ai 的用武之地。\n\nTermiX 正在为其 AACP 协议提供支持，为人工智能代理经济构建商业和结算基础设施。\n\n通过 ，AI 代理可以：\n\n• 创建链上身份\n• 发现工作并提交投标\n• 提供服务并建立声誉\n• 验证已完成的工作\n• 接收 USDC 或 USDT 付款\n\n有趣的是，TermiX 不仅仅是列出人工智能代理。\n\n它专注于从发现工作到交付工作和结算付款的完整过程。\n\n我认为这种基础设施将成为使代理经济更加实用和商业化的重要组成部分。\n\n探索：",
+      "url": "https://x.com/Bakioption/status/2122251451426632018",
+      "image_url": "https://pbs.twimg.com/media/HXPAcWoboAA1GtZ.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/media/HXPAcWoboAA1GtZ.jpg"
       ],
-      "prompt_content_zh": "你是一名专攻短视频微短剧（抖音/Kuaishou/Reels）的爆款编剧，精通“情绪过山车”与手机竖屏视听语言。\n\n请根据以下设定创作一集 45~60 秒的短剧分镜剧本：\n- 主角：{{主角身份}}\n- 对手：{{反派身份}}\n- 核心反转：{{核心反转}}\n\n结构要求：\n1. 【0-3秒冷开钩子】：第一帧必须有视觉颠覆或动作冲突（{{第1秒颠覆钩子}}），直接打破常规，禁止废话铺垫；\n2. 【4-25秒情绪积压】：正反打对峙台词（Shot-Reverse-Shot），将观众被压抑的情绪推向临界点；\n3. 【26-40秒逆转打脸】：主角亮出关键底牌或反杀动作，情绪瞬间宣泄；\n4. 【40-50秒卡点断章】：以特写镜头加悬念台词戛然而止，促使用户立即滑向下一集。\n\n输出格式必须包含：镜头号、景别（特写/中景/全景）、机位运动、画面描写、对白与音效提示。",
-      "prompt_content_en": "You are a professional micro-drama screenwriter. Generate a 45-60 second vertical drama screenplay following the viral 3-second hook, shot-reverse-shot tension build, emotional turnaround, and cliffhanger ending formula.",
-      "sample_output": {
-        "type": "script",
-        "title": "实战剧本样章：《辞职信上的签名》",
-        "content": "【第1镜 | 特写 | 俯冲急推】\n画面：一只指节发白的手将一叠文件狠狠拍在红木总裁办公桌上，咖啡杯被震倒，黑褐液体飞溅。\n音效：沉闷震耳的巨响【DUANG】。\n主角（冷冽）：\"林总，这份千万项目的承揽协议，我拒绝签字。\"\n\n【第2镜 | 正打·中景 | 仰角机位】\n画面：大腹便便的林总冷笑点燃雪茄，烟雾缭绕中居高临下。\n林总：\"拒绝？苏澈，你不过是我公司养的一条狗，没有我的印章，你在整个行业休想拿到一分钱融资！\"\n\n【第3镜 | 反打·极微距特写 | 浅景深】\n画面：苏澈唇角微微上扬，左手缓缓推开桌上的合资协议，露出底下的一份红色国资控股聘书。\n苏澈：\"林总，您好像忘了看抬头。今天上午九点，集团总公司已经完成了对你的全资收购——现在，我是你的直接合规清算人。\"\n\n【第4镜 | 全景 | 快速拉远 + 卡点悬念】\n画面：林总雪茄直接掉在西裤上，脸色煞白，门外两名身穿制服的法务推门而入。\n音效：尖锐的心跳悬疑停顿音【BGM骤停】。\n字幕：【下集看点：隐藏五年的顶级操盘手真实身份曝光！】",
-        "title_en": "Verified Sample Output (DeepSeek-R4 / Claude 5.5)",
-        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / Claude 5.5\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @Bakioption",
+      "author": "Baki",
+      "author_handle": "@Bakioption",
+      "author_avatar": "https://pbs.twimg.com/profile_images/2068729228137512960/oADTx8vO_normal.jpg",
+      "author_role": "✧ Community Owner | Creator & Affiliate :- @binance | Partner :- @Bitbase_Ex | Ambassador :- @WireNetwork\n\n✦ DM for Collaborations",
+      "author_role_en": "✧ Community Owner | Creator & Affiliate :- @binance | Partner :- @Bitbase_Ex | Ambassador :- @WireNetwork\n\n✦ DM for Collaborations\nhttps://t.co/t6pqT0n9DY",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-16T08:52:30+00:00",
+      "metrics": {
+        "views": "648",
+        "likes": "122",
+        "comments": "118",
+        "retweets": "16",
+        "platform": "x",
+        "verified": true
       },
       "usage_guide_zh": "替换主角与冲突变量后输入给模型，可直接输出成型分镜，直接用于拍摄或转视频 AI 生成。",
       "created_at": "2026-11-16T08:47:36Z",
@@ -4620,6 +4712,84 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (79分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_claude_desktop_mcp_core4",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🔌 MCP 协议配置",
+      "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+      "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
+      "target_platform": "Claude Desktop / Cline / Roo Code",
+      "scenario": "🔌 智能体连接 / MCP",
+      "scenario_key": "infra",
+      "tested_models": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "model_family": "Claude",
+      "takeaway_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+      "takeaway_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+      "config_filename": "claude_desktop_config.json",
+      "config_lang": "json",
+      "code_snippet": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/allowed/directory\"]\n    },\n    \"brave-search\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-brave-search\"],\n      \"env\": {\n        \"BRAVE_API_KEY\": \"YOUR_BRAVE_API_KEY\"\n      }\n    },\n    \"sqlite\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-server-sqlite\", \"--db-path\", \"/path/to/database.db\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}",
+      "usage_guide_zh": "将上述 JSON 复制并粘贴到 Claude Desktop 配置文件中（macOS: ~/Library/Application Support/Claude/claude_desktop_config.json，Windows: %APPDATA%\\Claude\\claude_desktop_config.json），替换对应路径与 API Key 即可重启生效。",
+      "usage_guide_en": "Paste this JSON into your claude_desktop_config.json (macOS: ~/Library/Application Support/Claude/, Windows: %APPDATA%\\Claude\\). Replace paths and tokens, then restart Claude.",
+      "created_at": "2026-11-16T08:07:13Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T08:07:13Z",
+      "summary_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+      "summary_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+      "prompt_content_zh": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/allowed/directory\"]\n    },\n    \"brave-search\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-brave-search\"],\n      \"env\": {\n        \"BRAVE_API_KEY\": \"YOUR_BRAVE_API_KEY\"\n      }\n    },\n    \"sqlite\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-server-sqlite\", \"--db-path\", \"/path/to/database.db\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}",
+      "prompt_content_en": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/allowed/directory\"]\n    },\n    \"brave-search\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-brave-search\"],\n      \"env\": {\n        \"BRAVE_API_KEY\": \"YOUR_BRAVE_API_KEY\"\n      }\n    },\n    \"sqlite\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-server-sqlite\", \"--db-path\", \"/path/to/database.db\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}",
+      "prompt_content": "{\n  \"mcpServers\": {\n    \"filesystem\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-filesystem\", \"/path/to/allowed/directory\"]\n    },\n    \"brave-search\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-brave-search\"],\n      \"env\": {\n        \"BRAVE_API_KEY\": \"YOUR_BRAVE_API_KEY\"\n      }\n    },\n    \"sqlite\": {\n      \"command\": \"uvx\",\n      \"args\": [\"mcp-server-sqlite\", \"--db-path\", \"/path/to/database.db\"]\n    },\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@modelcontextprotocol/server-github\"],\n      \"env\": {\n        \"GITHUB_PERSONAL_ACCESS_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}",
+      "recommended_model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "metrics": {
+        "type": "🔌 MCP 协议配置",
+        "model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+        "filename": "claude_desktop_config.json"
+      },
+      "title": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+      "image_url": null
+    },
+    {
+      "id": "prompt_sora2_wan21_cinematic_director",
+      "sub_type": "creative",
+      "model_family": "sora2_wan21",
+      "purpose_zh": "🎬 视频生成 · Sora 2 / Wan 2.1 电影级三维物理世界运镜",
+      "purpose_en": "🎬 Video Generation · Sora 2 / Wan 2.1 3D Spatial Physics & Cinematic Camera",
+      "title_zh": "💡【Sora 2 / Wan 2.1 导演级】高保真物理世界、体积光与多轴多机位镜头控制提示词库",
+      "title_en": "💡 [Sora 2 & Wan 2.1 Director Standard] Volumetric Lighting, Fluid Collision & Multi-Axis Motion Prompt",
+      "url": "https://openai.com/sora",
+      "image_url": "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&q=80&auto=format&fit=crop",
+      "source": "影视工业极客",
+      "author": "CinePrompt Lab",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T08:07:13Z",
+      "recommended_model": "Sora 2 / Wan 2.1 / Kling 1.5 / Runway Gen-3",
+      "temp_advice": "建议高写实模式 (High-Fidelity Physics Engine)",
+      "metrics": {
+        "type": "🎬 Sora 2视频",
+        "model": "Sora2 / Wan2.1",
+        "temp": "Cinematic"
+      },
+      "content_snippet": "Industry-grade video prompting template specifying camera focal length, volumetric light decay, collision physics, and 60fps natural motion blur.",
+      "summary_zh": "工业级视频生成规范：精确指定镜头焦段、多轴三维运镜曲线、流体碰撞阻尼与真实快门运动模糊。",
+      "summary_en": "Industry-grade template specifying lens focal length, 3D camera path, fluid collision physics, and authentic motion blur.",
+      "prompt_content_zh": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [主体角色与连续动作，例如：A cyberpunk neon-lit courier running through dense rainy alleys, leaping across a puddle].\n[Physics & Dynamics]: Photorealistic surface reflection with physically accurate water splash ripples, droplets refracting neon signs, natural cloth turbulence reacting to wind drag.\n[Lighting & Color Grade]: Volumetric mist scattering amber sodium lights and cyan neon glow, Arri Alexa cinematic color science, shallow depth of field with creamy optical bokeh.\n[Camera Movement]: Low-angle tracking shot transitioning smoothly to a high-speed Dutch angle tilt, cinematic 24fps motion blur with zero morphing or temporal flickering.",
+      "prompt_content_en": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [Character & continuous motion: e.g., A cyberpunk courier dashing through a rain-drenched alley, leaping across water puddles].\n[Physics & Dynamics]: Photorealistic surface reflections with physically accurate water ripple splashes, droplets refracting ambient lights, natural cloth drag.\n[Lighting & Palette]: Volumetric fog scattering amber streetlights and cyan neon, Arri Alexa color grade, shallow depth of field.\n[Camera Path]: Low-angle tracking shot transitioning smoothly into a high-speed Dutch angle, natural 24fps motion blur without temporal morphing.",
+      "prompt_content": "[Shot Description]: 35mm anamorphic cinema lens, f/1.8, master shot with continuous orbit camera movement.\n[Subject & Action]: [主体角色与连续动作，例如：A cyberpunk neon-lit courier running through dense rainy alleys, leaping across a puddle].\n[Physics & Dynamics]: Photorealistic surface reflection with physically accurate water splash ripples, droplets refracting neon signs, natural cloth turbulence reacting to wind drag.\n[Lighting & Color Grade]: Volumetric mist scattering amber sodium lights and cyan neon glow, Arri Alexa cinematic color science, shallow depth of field with creamy optical bokeh.\n[Camera Movement]: Low-angle tracking shot transitioning smoothly to a high-speed Dutch angle tilt, cinematic 24fps motion blur with zero morphing or temporal flickering.",
+      "tags": [
+        "Sora 2",
+        "Wan 2.1",
+        "电影运镜",
+        "视频生成"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T08:07:13Z",
+      "title": "💡【Sora 2 / Wan 2.1 导演级】高保真物理世界、体积光与多轴多机位镜头控制提示词库"
     },
     {
       "id": "ca34c6e24da03ba5",
@@ -5459,6 +5629,43 @@
       }
     },
     {
+      "id": "prompt_math_pseudocode_derivation",
+      "sub_type": "research",
+      "purpose_zh": "🔬 学术科研 · 复杂数学公式向 PyTorch 向量化代码翻译",
+      "purpose_en": "🔬 Research & Papers · Math Formula to PyTorch Vectorized Code",
+      "title_zh": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板",
+      "title_en": "💡 [Math to Code] Mathematical Notation to High-Performance Vectorized PyTorch Translation",
+      "url": "https://pytorch.org/",
+      "image_url": "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "算法工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T07:07:13Z",
+      "recommended_model": "Claude 5.5 / DeepSeek-R4",
+      "temp_advice": "建议温度 0.1 | 严格张量维度匹配",
+      "metrics": {
+        "type": "🔬 公式转代码",
+        "model": "Claude 5.5",
+        "temp": "0.1"
+      },
+      "content_snippet": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "summary_zh": "将密集 LaTeX 公式转为零 Python for 循环的高性能 PyTorch 张量操作，并附带完整的 Tensor Shape 断言注释。",
+      "summary_en": "Converts dense paper LaTeX equations into vectorized, memory-efficient PyTorch operations with shape assertions.",
+      "prompt_content_zh": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "prompt_content_en": "You are a Deep Learning Systems Engineer with a Ph.D. in Applied Mathematics. Convert the following LaTeX equation into clean, high-performance PyTorch code:\n1. Unpack all tensor indices, superscripts, and summation bounds into plain physical intuition;\n2. Implement a zero-python-loop vectorized module leveraging torch.einsum, batched matmul, or broadcast primitives;\n3. Annotate every intermediate step with strict tensor shape comments (e.g. `# [B, H, S, D]`) and integrate numerical stability safeguards (eps clamping, log-sum-exp stabilization).",
+      "prompt_content": "你是一位兼具应用数学博士学位与顶级深度学习框架优化经验的算法工程师。请将以下论文中的 LaTeX 数学公式翻译为高质量的 PyTorch 实现：\n1. 逐一解释公式中各标量、向量与张量上下标的精确几何与物理含义；\n2. 编写无 Python 原生 for 循环的高性能向量化代码（善用 torch.einsum, bmm, 或 broadcast 广播机制）；\n3. 在每行关键张量操作后标注显式的 Shape 注释（如 `# [Batch, Heads, Seq_Len, Dim]`），并加入数值稳定性保护（如防除以零的 eps 与 log-sum-exp 技巧）。",
+      "tags": [
+        "数学公式",
+        "PyTorch",
+        "张量运算"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T07:07:13Z",
+      "title": "💡【算法公式转代码】晦涩数学符号向无循环 PyTorch 张量操作对齐翻译模板"
+    },
+    {
       "id": "95711b4c390d32a8",
       "title": "Copenhagen-based AI accounting software maker Sumary raised a $25M seed led by Singular, bringing total funding to $29.2M after a $4.2M pre-seed in Nov. 2025 (Sofia Chesnokova/Tech Funding News)",
       "title_en": "Copenhagen-based AI accounting software maker Sumary raised a $25M seed led by Singular, bringing total funding to $29.2M after a $4.2M pre-seed in Nov. 2025 (Sofia Chesnokova/Tech Funding News)",
@@ -5948,6 +6155,87 @@
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
+    },
+    {
+      "id": "prompt-novel-worldbuilding-01",
+      "title_zh": "网络小说世界观设定与主角角色一致性锁",
+      "title_en": "Fiction Worldbuilding & Character Consistency Lock",
+      "category": "prompts",
+      "scenario_label": "✍️ 短剧小说",
+      "target_model": "Claude 5.5 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 94,
+      "generation_tier": "sota",
+      "purpose_zh": "长篇小说架构与人物性格防崩塌",
+      "temp_advice": "温度 0.5",
+      "variables": [
+        "{{题材分类}}",
+        "{{核心金手指}}",
+        "{{世界核心矛盾}}"
+      ],
+      "prompt_content_zh": "你是一名资深网络小说白金作家与 IP 世界观架构师。请为一部 {{题材分类}} 长篇作品构建骨架并锁定人物一致性：\n\n1. 【世界底座】：定义力量/经济体系、战力天花板与不可违背的底层物理/法则约束，杜绝战力膨胀；\n2. 【角色一致性锚点 (Character Lock)】：为主角制定外貌锚定词、口头禅、下意识动作与绝对动机准则（在任何生死抉择时绝不背离该准则）；\n3. 【核心驱动力】：设计主角获得的 {{核心金手指}} 与 {{世界核心矛盾}} 之间的冲突循环；\n4. 【前三章切入大纲】：黄金三章节奏设计（第1章破局、第2章显露冰山一角、第3章设立首个必胜目标）。",
+      "prompt_content_en": "Build a cohesive, non-contradictory fiction universe and establish an immutable character anchor rule (appearance, decision heuristics, core motivation) to prevent personality drift over long chapters.",
+      "sample_output": {
+        "type": "text",
+        "title": "世界观与人物锚定卡样本",
+        "content": "【主角核心锚定卡 · 陆沉】\n- 外貌指纹（跨章恒定）：右耳一枚黑曜石碎骨钉，习惯性单手插兜，左眉峰有浅淡刀痕。\n- 决策第一公理：\"利益可以出让，但绝不签署不可撤销的信任协议\"——任何试图以情感道德绑架他的剧情，他必做出理性防卫。\n\n【力量体系底层法理】\n- 机制：灵能不是无限提取，而是向未来\"借贷\"。借贷三级灵能，必在72小时内遭遇相应量级的反噬因果。\n\n【第一章：断头宴上的借贷合同】\n陆沉在家族庆功宴上被夺去嫡系席位，当众被赐饮散灵酒。陆沉不动声色饮下，却在体内发动首次因果置换，借来三年后的金丹级肉身力量，捏碎验灵石，反客为主。",
+        "title_en": "Verified Sample Output (Claude 5.5 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: Claude 5.5 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "先让 AI 产出世界观基石，后续每一章写作前引用该卡片，能彻底避免角色'换章变脸'或剧情崩坏。",
+      "created_at": "2026-11-16T06:07:13Z",
+      "variables_en": [
+        "{{Genre}}",
+        "{{Core Power/Cheat}}",
+        "{{World Conflict}}"
+      ],
+      "scenario_label_en": "✍️ Creative Writing",
+      "purpose_en": "Long-Form Fiction Worldbuilding & Character Lock",
+      "temp_advice_en": "Temp 0.5 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T06:07:13Z",
+      "recommended_model": "Claude 5.5 / GPT-6.0",
+      "title": "网络小说世界观设定与主角角色一致性锁",
+      "summary_zh": "深度解析区域地缘环境与数字基础设施在智能时代面临的接入瓶颈与发展机遇",
+      "image_url": null
+    },
+    {
+      "id": "prompt_ui_design_concept",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 极简现代 UI/App 设计系统",
+      "purpose_en": "🎨 Image Gen · Modern Minimalist UI & App Design System",
+      "title_zh": "💡【UI/UX 视觉探索】Dribbble 爆款极简毛玻璃卡片与深色现代 App 界面概念",
+      "title_en": "💡 [UI/UX Visual Exploration] Dribbble-Trending Glassmorphism & Dark Mode Mobile App Concept",
+      "url": "https://dribbble.com/",
+      "image_url": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "UI设计圈",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T06:07:13Z",
+      "recommended_model": "Midjourney v7 / SD 3.5 Large",
+      "temp_advice": "Stylize: 100 | Clean UI",
+      "metrics": {
+        "type": "🎨 UI概念",
+        "model": "Midjourney v6",
+        "temp": "s 100"
+      },
+      "content_snippet": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
+      "summary_zh": "现代金融与 AI 仪表盘设计：精致半透明毛玻璃面板、柔和环境渐变与高阶版式留白。",
+      "summary_en": "Modern fintech mobile UI dashboard, sleek glassmorphism panels, subtle gradient curves, clean typography, Dribbble UI showcase.",
+      "prompt_content_zh": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1\n\n【中文使用解析】：用于快速生成产品原型提案、投资人 Pitch Deck 界面效果图。规避杂乱按钮，突出核心数据卡片与精致微光动势。",
+      "prompt_content_en": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1",
+      "prompt_content": "A modern, ultra-clean mobile app interface design for an AI personal assistant dashboard, dark mode, sleek glassmorphism UI components, glowing neon purple and emerald gradient accents, elegant SF Pro typography, minimalist data visualization widgets, isometric floating presentation, trending on Dribbble and Behance, Figma vector design, high fidelity, 8k --ar 16:9 --v 6.1",
+      "tags": [
+        "UI设计",
+        "Dribbble风格",
+        "App界面"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T06:07:13Z",
+      "title": "💡【UI/UX 视觉探索】Dribbble 爆款极简毛玻璃卡片与深色现代 App 界面概念"
     },
     {
       "id": "fa00193c31fcd3f2",
@@ -7159,6 +7447,45 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (91分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_claude_code_cli_best_practices",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "⚡ CLI 自动化",
+      "title_zh": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "title_en": "Claude Code CLI Autonomous Coding & Context Pruning Playbook",
+      "target_platform": "Claude Code (CLI) / Terminal / Bash",
+      "scenario": "💻 编程研发 / Agent工作流",
+      "scenario_key": "code",
+      "tested_models": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "model_family": "Claude",
+      "takeaway_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "takeaway_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "config_filename": "claude-code-playbook.sh",
+      "config_lang": "bash",
+      "code_snippet": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "usage_guide_zh": "在终端中全局安装 `@anthropic-ai/claude-code` 后，直接按需调用上述预置命令，可大幅缩减 Token 消耗并杜绝意外越权操作。",
+      "usage_guide_en": "After installing @anthropic-ai/claude-code globally, execute these commands in your repository root to maximize token efficiency and safe autonomous coding.",
+      "created_at": "2026-11-16T05:07:13Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T05:07:13Z",
+      "summary_zh": "专为终端 Agent 开发者设计的降本提效配方：包含静默自动化运行、单次长上下文压缩避坑参数、以及防止无限递归调用破坏生产环境的安全沙箱命令组合。",
+      "summary_en": "Production CLI playbook for Claude Code: non-interactive pipeline commands, context window compression flags, and strict dry-run permission safeguards.",
+      "prompt_content_zh": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content_en": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "prompt_content": "# 1. 启动项目自动化分析与上下文轻量修剪 (避免上下文爆炸)\nclaude --compact\n\n# 2. 静默批量执行单元测试与自动修复任务 (CI/CD 友好模式)\nclaude -p \"Run all failing tests under tests/ and apply minimal surgical fixes. Do not touch unrelated files.\"\n\n# 3. 指定单文件隔离审查模式 (限制仅允许读取特定子目录)\nclaude --allowed-tools \"View,Replace,RunCommand\" \\\n  --dangerously-skip-permissions false \\\n  -p \"Audit security vulnerabilities in auth.py and output remediation report.\"\n\n# 4. 自动化提交并生成符合 Conventional Commits 规范的 Commit 信息\nclaude -p \"Generate a git commit message following Conventional Commits format for staged changes.\"",
+      "recommended_model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+      "metrics": {
+        "type": "⚡ CLI 自动化",
+        "model": "Claude 3.7 Sonnet / Claude 3.5 Sonnet",
+        "filename": "claude-code-playbook.sh"
+      },
+      "title": "Claude Code CLI 极速自动化开发与上下文压缩实操秘籍",
+      "image_url": null
     },
     {
       "id": "7dcdd2b61c510ee8",
@@ -8431,6 +8758,43 @@
       }
     },
     {
+      "id": "prompt_agent_robust_tools",
+      "sub_type": "agent",
+      "purpose_zh": "🤖 智能体与MCP · 工业级工具调用鲁棒性与防死锁守门员",
+      "purpose_en": "🤖 Agents & MCP · Industrial Tool-Use Robustness & Deadlock Guardrail",
+      "title_zh": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令",
+      "title_en": "💡 [Agent Defense System] Anthropic MCP Robust Tool-Use & Anti-Hallucination Guardrail Prompt",
+      "url": "https://modelcontextprotocol.io/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "Agent开发",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T04:07:13Z",
+      "recommended_model": "Claude 3.5/3.7 Sonnet / GPT-4o",
+      "temp_advice": "建议温度 0.1 | 严格结构化 JSON 模式",
+      "metrics": {
+        "type": "🤖 MCP智能体",
+        "model": "Claude 4.6",
+        "temp": "0.1"
+      },
+      "content_snippet": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "summary_zh": "构建工业级智能体系统的防御性指令，防止工具调用幻觉、循环死锁与无效入参参数。",
+      "summary_en": "Defensive prompt directives for autonomous agent systems to prevent tool invocation hallucinations, loop deadlocks, and invalid arguments.",
+      "prompt_content_zh": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "prompt_content_en": "[System Directives]: You are an autonomous agent operating within a secure execution sandbox.\n1. Before dispatching any external tool, output a strict <preflight> checking parameter types and constraint schemas;\n2. Under no circumstances should you hallucinate or fabricate function names outside the registered tool registry;\n3. If a tool fails twice consecutively, immediately cease execution loops, enter <diagnosis> mode, and surface the root error trace to the user;\n4. Deliver final artifacts exclusively via deterministic tool payloads or compliant JSON schema, without conversational chatter.",
+      "prompt_content": "【系统约束】：你是一个受限执行环境中的自治 Agent。\n1. 在调用任何工具前，必须输出 <preflight> 检验入参字段的类型与合法性；\n2. 严禁捏造未声明在 Tool Registry 中的虚构工具函数；\n3. 若连续两次工具返回报错，立即终止盲目重试，进入 <diagnosis> 模式回溯上一轮输入并向人类汇报根因；\n4. 最终响应仅通过标准工具或结构化 JSON schema 返回，禁止携带任何 markdown 闲聊闲扯。",
+      "tags": [
+        "Agent开发",
+        "工具调用",
+        "防幻觉"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T04:07:13Z",
+      "title": "💡【Agent 防御系统】Anthropic MCP 工具调用鲁棒性校验与防胡言乱语系统指令"
+    },
+    {
       "id": "779a84c8c6732ed4",
       "status_id": "2122175389208334371",
       "category": "celebrity",
@@ -9307,6 +9671,87 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (84分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt-analysis-excel-eda-01",
+      "title_zh": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "title_en": "Excel Advanced Report & Key Drivers Attribution",
+      "category": "prompts",
+      "scenario_label": "📊 数据分析",
+      "target_model": "DeepSeek-R4 / GPT-6.0",
+      "model_family": "Universal",
+      "model_tier_score": 96,
+      "generation_tier": "sota",
+      "purpose_zh": "业务数据指标异动排查与趋势归因",
+      "temp_advice": "温度 0.2",
+      "variables": [
+        "{{业务指标}}",
+        "{{异常表现}}",
+        "{{维度拆解}}"
+      ],
+      "prompt_content_zh": "你是一名麦肯锡级别的高级商业数据分析师，精通结构化因果归因与杜邦拆解分析。\n\n针对我提供的 {{业务指标}} 数据，其近期出现 {{异常表现}}，请按以下框架深度剖析：\n1. 【指标公式拆解】：将该指标拆分为 3~4 个下级核心因子（如转化率、客单价、复购周期），指出哪个因子波动贡献率最大；\n2. 【多维下钻 (Drill-down)】：从 {{维度拆解}}（如渠道、地域、品类、新老客）分析异常聚集点；\n3. 【可执行建议】：摒弃假大空的套话，给出接下来 48 小时内的 3 个立竿见影的动作与 1 个监控预警公式。",
+      "prompt_content_en": "You are a senior business intelligence analyst. Dissect the metric anomaly into component drivers, perform multi-dimensional drill-down, and deliver prioritized, actionable remediation steps.",
+      "sample_output": {
+        "type": "text",
+        "title": "归因分析报告样本：Q3 付费转化率环比下跌 14.2%",
+        "content": "【核心发现】：GMV 下跌 14.2% 的主要驱动因子并非流量锐减，而是【结算跳失率】从 18% 飙升至 34%。\n\n【杜邦拆解贡献率分析】：\n1. 渠道维度：自然搜索量稳定（波动 <2%），但付费投流渠道跳出率贡献了 72% 的下跌额度；\n2. 终端维度：移动端 iOS 表现正常，Android Web 呈现断崖式报错，核心原因是新版本结账 SDK 在低内存机型发生闪退。\n\n【48小时纠偏行动】：\n- 动作1 (技术)：立即灰度回滚 Android 渠道结账前端包至 v2.4.1；\n- 动作2 (运营)：向受影响但未支付成功的 1,420 位加购用户推送 5 元免门槛补偿券唤醒；\n- 动作3 (预警)：在 Grafana 建立警报公式：`IF(Cart_to_Checkout_Ratio < 0.65, Alert_P0, Normal)`。",
+        "title_en": "Verified Sample Output (DeepSeek-R4 / GPT-6.0)",
+        "content_en": "// Verified production prompt template\n// Target Models: DeepSeek-R4 / GPT-6.0\n// Reference: https://ainewsradar.xyz\n\n// Fill in the template variables above and copy with one click to execute."
+      },
+      "usage_guide_zh": "将导出的 CSV 数据或关键指标表格直接贴在提示词后，模型将自动完成高质量数据归因报告。",
+      "created_at": "2026-11-16T03:07:13Z",
+      "variables_en": [
+        "{{Business Metric}}",
+        "{{Anomaly Pattern}}",
+        "{{Breakdown Dimensions}}"
+      ],
+      "scenario_label_en": "📊 Data Analysis",
+      "purpose_en": "Metric Anomaly Diagnosis & Root-Cause Attribution",
+      "temp_advice_en": "Temp 0.2 (Recommended)",
+      "usage_guide_en": "Fill in the bracketed variables with your specific task parameters, then copy and run directly in the recommended SOTA model.",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T03:07:13Z",
+      "recommended_model": "DeepSeek-R4 / GPT-6.0",
+      "title": "Excel 高级报表与核心动因（Key Drivers）归因分析",
+      "summary_zh": "聚焦该事件的最新进展、行业反响以及对人工智能技术落地与产业生态的深远影响",
+      "image_url": null
+    },
+    {
+      "id": "prompt_3d_clay_character",
+      "sub_type": "image_gen",
+      "purpose_zh": "🎨 图像生成 · 3D 黏土拟真与盲盒潮玩角色",
+      "purpose_en": "🎨 Image Gen · 3D Claymation & Blindbox Mascot Character",
+      "title_zh": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语",
+      "title_en": "💡 [3D Mascot Design] C4D-Rendered Clay Toy Figure & Macro Depth-of-Field Prompt",
+      "url": "https://blackforestlabs.ai/",
+      "image_url": "https://images.unsplash.com/photo-1563089145-599997674d42?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "3D创作者",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-16T03:07:13Z",
+      "recommended_model": "Midjourney v7 / Ideogram 3",
+      "temp_advice": "Guidance: 3.0 | 柔和黏土光",
+      "metrics": {
+        "type": "🎨 3D潮玩",
+        "model": "SD 3.5 Large",
+        "temp": "CFG 3.0"
+      },
+      "content_snippet": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "summary_zh": "萌系 3D 橡皮泥小机器人吉祥物：带真实手捏微指纹质感、柔和摄影棚三点布光与 Octane 级渲染。",
+      "summary_en": "Cute 3D claymation robot mascot, fingerprint textures on plasticine, soft studio lighting, Octane render, isometric angle.",
+      "prompt_content_zh": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1\n\n【中文使用解析】：专为品牌 IP、吉祥物衍生品、盲盒周边或 App 引导页打造，指纹与手作质感能极大消解 3D 渲染的冷硬感。",
+      "prompt_content_en": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "prompt_content": "Cute futuristic AI robot mascot character, handcrafted colorful polymer clay texture, subtle handcrafted fingerprint imperfections on the plasticine surface, soft rounded edges, glossy black button eyes, studio lighting setup with soft key light and pink rim light, shallow depth of field, Octane render, Cinema 4D, 3D blender art, miniature diorama scale, pastel color palette --ar 1:1 --v 6.1",
+      "tags": [
+        "3D盲盒",
+        "黏土风",
+        "IP设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-16T03:07:13Z",
+      "title": "💡【3D 潮玩设计】C4D 渲染级黏土盲盒公仔与拟真微距景深咒语"
     },
     {
       "id": "3e7fbab1abd3d2d5",
@@ -10218,6 +10663,45 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_deepseek_r1_ollama_local_sota",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "🧠 本地私有化",
+      "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
+      "target_platform": "Ollama / OpenWebUI / vLLM",
+      "scenario": "🔌 模型部署 / 隐私推理",
+      "scenario_key": "infra",
+      "tested_models": "DeepSeek-R1 (14B / 32B / 70B)",
+      "model_family": "DeepSeek",
+      "takeaway_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "takeaway_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "config_filename": "Modelfile.deepseek-r1-opt",
+      "config_lang": "dockerfile",
+      "code_snippet": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "usage_guide_zh": "保存为 `Modelfile`，执行 `ollama create deepseek-r1-opt -f Modelfile`，即可生成抗复读、低显存占用的专属本地超强推理大模型。",
+      "usage_guide_en": "Save as Modelfile, then run 'ollama create deepseek-r1-opt -f Modelfile'. Delivers stable reasoning with low VRAM footprint and no loop loops.",
+      "created_at": "2026-11-16T02:07:13Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-16T02:07:13Z",
+      "summary_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
+      "summary_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+      "prompt_content_zh": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content_en": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "prompt_content": "# Modelfile: Optimized DeepSeek-R1 Deployment\nFROM deepseek-r1:14b-qwen-distill-q4_K_M\n\n# 1. 显存与上下文窗口优化：分配 16k 上下文并开启 KV Cache 压缩\nPARAMETER num_ctx 16384\nPARAMETER num_predict 4096\n\n# 2. 避免思维链自旋死循环的核心解码超参\nPARAMETER temperature 0.6\nPARAMETER top_p 0.95\nPARAMETER repeat_penalty 1.15\n\n# 3. 强力系统提示词：约束必须直接在 <think> 标签内进行深度反思，结束立刻给出最终结果\nSYSTEM \"\"\"\nYou are an expert autonomous reasoning AI. Think carefully through the problem step by step inside <think>...</think> tags.\nOnce reasoning is complete, provide the concise, direct, and actionable answer immediately without repeating reasoning steps.\n\"\"\"",
+      "recommended_model": "DeepSeek-R1 (14B / 32B / 70B)",
+      "metrics": {
+        "type": "🧠 本地私有化",
+        "model": "DeepSeek-R1 (14B / 32B / 70B)",
+        "filename": "Modelfile.deepseek-r1-opt"
+      },
+      "title": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
+      "image_url": null
     },
     {
       "id": "118d03b39ac87c11",
@@ -11754,6 +12238,43 @@
       }
     },
     {
+      "id": "prompt_game_npc_dialogue",
+      "sub_type": "game_3d",
+      "purpose_zh": "🎮 游戏与3D · 动态开放世界 NPC 剧情分支与状态机",
+      "purpose_en": "🎮 Game Dev & 3D · Open-World NPC Branching Dialogue & State Machine",
+      "title_zh": "💡【游戏叙事设计】具有记忆与好感度动态演进的沉浸式 RPG NPC 对话状态树生成",
+      "title_en": "💡 [Game Narrative Engine] Immersive RPG NPC Dynamic Dialogue Tree with Memory & Affinity State Machine",
+      "url": "https://unity.com/",
+      "image_url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "游戏主策",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T22:07:13Z",
+      "recommended_model": "Claude 4.6 / GPT-4o",
+      "temp_advice": "建议温度 0.7 | 沉浸式世界观设定",
+      "metrics": {
+        "type": "🎮 游戏剧情",
+        "model": "Claude 4.6",
+        "temp": "0.7"
+      },
+      "content_snippet": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
+      "summary_zh": "生成包含情绪状态机、记忆标记与任务触发条件的结构化 JSON 多分支剧情对话树。",
+      "summary_en": "Generates multi-branch dialogue trees in JSON format with emotional state triggers, memory flags, and quest rewards.",
+      "prompt_content_zh": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
+      "prompt_content_en": "You are a Lead Narrative Designer on a AAA open-world RPG. Generate a dynamic branching dialogue system for the specified NPC:\n1. Persona & Subtext: Define distinct verbal tics, a hidden agenda, and moral vulnerability;\n2. State Machine Integration: Provide 3 divergent branches conditioned on the player's [Reputation], [Prior Quest Flags], and [Affinity Tier];\n3. Output Specification: Output clean JSON schema parseable by Unity/Unreal dialogue managers, including node_id, speaker, lines, choices, condition_predicates, and state_mutations.",
+      "prompt_content": "你是一位拥有 3A 级开放世界游戏叙事经验的资深游戏主策。请为以下 NPC 角色生成结构化多分支对话树：\n1. 角色背景与潜台词：设定独特的语气口癖、隐藏秘密与性格弱点；\n2. 状态机驱动：根据玩家的【声望值】、【已完成前置任务】与【过往对话记忆标记】提供至少 3 个截然不同的分支走向；\n3. 输出格式要求：以 Unity / Unreal 可直接解析的纯 JSON 格式输出，包含 node_id, speaker, text, choices, condition, state_mutation 字段。",
+      "tags": [
+        "游戏剧情",
+        "NPC对话",
+        "叙事设计"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T22:07:13Z",
+      "title": "💡【游戏叙事设计】具有记忆与好感度动态演进的沉浸式 RPG NPC 对话状态树生成"
+    },
+    {
       "id": "c30c74c2cf696c49",
       "title": "Analysis: Huawei's Horinger data center, among China's largest for AI, has ~7% of the compute of SpaceX's Colossus 2 and may stay far behind until at least 2028 (Ben Cottier/Epoch AI)",
       "title_en": "Analysis: Huawei's Horinger data center, among China's largest for AI, has ~7% of the compute of SpaceX's Colossus 2 and may stay far behind until at least 2028 (Ben Cottier/Epoch AI)",
@@ -12107,14 +12628,14 @@
       "author_avatar": "https://unavatar.io/youtube/Stanford Online",
       "source": "YouTube · Stanford Online",
       "views": "1.8万 播放",
-      "views_count": 17612,
-      "velocity": 1258.0,
-      "momentum_score": 3414.6,
+      "views_count": 18178,
+      "velocity": 1211.9,
+      "momentum_score": 3150.9,
       "metrics": {
         "views": "1.8万 播放",
-        "views_count": 17612,
-        "velocity": "+1,258/h",
-        "momentum_score": 3414.6,
+        "views_count": 18178,
+        "velocity": "+1,211/h",
+        "momentum_score": 3150.9,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -12132,7 +12653,7 @@
       "is_recent_48h": true,
       "is_recent_24h": true,
       "tags": [
-        "🔥 24h飙升 (+1,258/h)",
+        "🔥 24h飙升 (+1,211/h)",
         "Stanford Online",
         "🔥 极客实操"
       ],
@@ -12394,6 +12915,82 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "wf_rag_anti_hallucination_pipeline",
+      "category": "prompts",
+      "sub_type": "workflow",
+      "type_badge": "📚 知识库 RAG",
+      "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+      "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
+      "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
+      "scenario": "🧠 知识库检索 / RAG",
+      "scenario_key": "knowledge",
+      "tested_models": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+      "model_family": "DeepSeek / Qwen",
+      "takeaway_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
+      "takeaway_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
+      "config_filename": "rag_pipeline_config.json",
+      "config_lang": "json",
+      "code_snippet": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "usage_guide_zh": "在 FastGPT、Dify 知识库或 LlamaIndex 中直接导入对应参数配置，可将私有文档检索的准确召回率提升至 95% 以上，彻底杜绝无依据编造。",
+      "usage_guide_en": "Directly configure your FastGPT, Dify or LlamaIndex instance with these golden parameters to ensure zero-hallucination document Q&A.",
+      "created_at": "2026-11-15T20:07:13Z",
+      "is_workflow": true,
+      "is_prompt": true,
+      "generation_tier": "sota",
+      "model_tier_score": 98,
+      "raw_published_at": "2026-11-15T20:07:13Z",
+      "summary_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
+      "summary_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
+      "prompt_content_zh": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "prompt_content_en": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "prompt_content": "{\n  \"chunking_strategy\": {\n    \"type\": \"recursive_character\",\n    \"chunk_size\": 500,\n    \"chunk_overlap\": 80,\n    \"separators\": [\"\\n\\n\", \"\\n\", \"。\", \"；\", \". \"]\n  },\n  \"retrieval_strategy\": {\n    \"hybrid_search\": true,\n    \"dense_vector_weight\": 0.65,\n    \"sparse_bm25_weight\": 0.35,\n    \"top_k_candidates\": 20\n  },\n  \"rerank_strategy\": {\n    \"enabled\": true,\n    \"model\": \"BAAI/bge-reranker-large\",\n    \"score_threshold\": 0.65,\n    \"final_top_n\": 4\n  },\n  \"prompt_guardrails\": {\n    \"strict_context_only\": true,\n    \"fallback_message\": \"在当前提供的企业知识库范围内未检索到确切依据，请提供更多线索或联系人工处理。\"\n  }\n}",
+      "recommended_model": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+      "metrics": {
+        "type": "📚 知识库 RAG",
+        "model": "DeepSeek-R1 / Qwen2.5 / GPT-4o",
+        "filename": "rag_pipeline_config.json"
+      },
+      "title": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
+      "image_url": null
+    },
+    {
+      "id": "prompt_react_ts_refactor",
+      "sub_type": "coding",
+      "purpose_zh": "💻 编码与架构 · React 19 / TypeScript 组件现代化",
+      "purpose_en": "💻 Coding & Architecture · React 19 & TypeScript Modernization",
+      "title_zh": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构",
+      "title_en": "💡 [Fullstack Frontend] React 19 Server Components & Strict TypeScript Refactoring",
+      "url": "https://react.dev/",
+      "image_url": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "前端大牛",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T20:07:13Z",
+      "recommended_model": "Claude 4.6 Sonnet / Cursor",
+      "temp_advice": "建议温度 0.2 | 现代化组件范式",
+      "metrics": {
+        "type": "💻 React 19",
+        "model": "Claude 4.6",
+        "temp": "0.2"
+      },
+      "content_snippet": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
+      "summary_zh": "将遗留 React 代码迁移至 React 19 Actions、use 钩子与服务端组件，消灭 any，构建端到端类型安全体系。",
+      "summary_en": "Modernize legacy React codebase with React 19 Actions, Server Components, and zero-any TypeScript generics.",
+      "prompt_content_zh": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
+      "prompt_content_en": "Act as a Principal Frontend Engineer specializing in React 19 and TypeScript 5.5+. Refactor the provided legacy component:\n1. Migrate outdated useEffect data fetching and boilerplate state to React 19 Actions, useActionState, and React Server Components;\n2. Enforce 100% strict type safety: eliminate `any`, leverage discriminated unions, branded types, and const type parameters;\n3. Optimize rendering: eliminate unnecessary re-renders, adding proper Suspense fallback skeletons and resilient Error Boundaries.",
+      "prompt_content": "请扮演一位精通 React 19 与 TypeScript 5.5+ 的前端资深工程总监。请重构提供的遗留组件：\n1. 将过时的 useEffect 数据拉取与冗余状态迁移至 React 19 原生 Actions、useActionState 与 Server Components；\n2. 实现 100% 严格类型推导，严禁使用 `any`，合理运用泛型约束、Discriminated Unions 与 const 泛型；\n3. 优化渲染性能：防止不必要的 re-render，并添加 Suspense 骨架屏与 ErrorBoundary 容错保护。",
+      "tags": [
+        "React19",
+        "TypeScript",
+        "前端重构"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T20:07:13Z",
+      "title": "💡【全栈前端工程】React 19 Server Components 与 TypeScript 极限严格类型重构"
     },
     {
       "id": "789f2cf2a0ad3daf",
@@ -13046,6 +13643,43 @@
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
       }
+    },
+    {
+      "id": "prompt_3d_shader_webgl",
+      "sub_type": "game_3d",
+      "purpose_zh": "🎮 游戏与3D · Three.js / WebGL 高性能着色器 Shader",
+      "purpose_en": "🎮 Game Dev & 3D · Three.js / GLSL High-Performance Shaders",
+      "title_zh": "💡【3D 图形学】Three.js / GLSL 赛博霓虹能量盾与流体自发光着色器生成",
+      "title_en": "💡 [Graphics Engineering] Three.js & GLSL Holographic Energy Shield & Fluid Shader Generator",
+      "url": "https://threejs.org/",
+      "image_url": null,
+      "source": "实战技巧 · Prompt",
+      "author": "图形学极客",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T19:07:13Z",
+      "recommended_model": "Claude 4.6 / Cursor",
+      "temp_advice": "建议温度 0.2 | 纯 GLSL 着色器代码",
+      "metrics": {
+        "type": "🎮 GLSL着色器",
+        "model": "Claude 4.6",
+        "temp": "0.2"
+      },
+      "content_snippet": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
+      "summary_zh": "编写纯 GLSL 顶点与片元着色器，融合菲涅尔边缘光晕、柏林噪声流体波动与 60fps WebGL 性能优化。",
+      "summary_en": "Writes mathematically precise vertex and fragment shaders with Fresnel rim glow, simplex noise animation, and 60fps WebGL optimization.",
+      "prompt_content_zh": "你是一位顶级 WebGL 与游戏图形学 TA（技术美术）专家。请为 Three.js 编写一个生产级自定义 ShaderMaterial：\n1. 顶点着色器（Vertex Shader）：使用 3D Simplex 噪声在 GPU 端实现柔和的顶点位移波动；\n2. 片元着色器（Fragment Shader）：计算菲涅尔效应（Fresnel Effect）边缘泛光，并加入随时间流逝不断滚动的全息扫描线；\n3. 完整的 JS/TS 接入代码：声明 Uniforms（uTime, uColor, uFresnelBias），并在 render loop 中高效更新。",
+      "prompt_content_en": "You are a Senior Technical Artist and WebGL Graphics Engineer. Build a production-grade custom ShaderMaterial for Three.js:\n1. Vertex Shader: Generate smooth procedural surface vertex displacement using GPU-side 3D Simplex noise;\n2. Fragment Shader: Calculate high-fidelity Fresnel rim glow blended with dynamic holographic scanlines driven by an elapsed time uniform;\n3. Complete JS/TS Integration: Setup uniform declarations (uTime, uResolution, uFresnelBias) with optimal tick update loops.",
+      "prompt_content": "你是一位顶级 WebGL 与游戏图形学 TA（技术美术）专家。请为 Three.js 编写一个生产级自定义 ShaderMaterial：\n1. 顶点着色器（Vertex Shader）：使用 3D Simplex 噪声在 GPU 端实现柔和的顶点位移波动；\n2. 片元着色器（Fragment Shader）：计算菲涅尔效应（Fresnel Effect）边缘泛光，并加入随时间流逝不断滚动的全息扫描线；\n3. 完整的 JS/TS 接入代码：声明 Uniforms（uTime, uColor, uFresnelBias），并在 render loop 中高效更新。",
+      "tags": [
+        "GLSL",
+        "Threejs",
+        "3D着色器"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T19:07:13Z",
+      "title": "💡【3D 图形学】Three.js / GLSL 赛博霓虹能量盾与流体自发光着色器生成"
     },
     {
       "id": "0aa8c19ae19b9c51",
@@ -13887,6 +14521,82 @@
         "reason": "观点平庸/缺乏硬核架构与落地账本 (82分 < 95分准发线)",
         "media_penalty": 0
       }
+    },
+    {
+      "id": "prompt_mckinsey_pyramid_pitch",
+      "sub_type": "writing",
+      "purpose_zh": "✍️ 生产力写作 · 麦肯锡金字塔原理商业方案",
+      "purpose_en": "✍️ Writing & Productivity · McKinsey Pyramid Principle Pitch",
+      "title_zh": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板",
+      "title_en": "💡 [Executive Presentation] McKinsey Pyramid Principle Structured Business Proposal Template",
+      "url": "https://hbr.org/",
+      "image_url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80&auto=format&fit=crop",
+      "source": "实战技巧 · Prompt",
+      "author": "咨询总监",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T16:07:13Z",
+      "recommended_model": "Claude 4.6 / GPT-4o",
+      "temp_advice": "建议温度 0.3 | 高管严谨表达",
+      "metrics": {
+        "type": "✍️ 商业汇报",
+        "model": "Claude 4.6",
+        "temp": "0.3"
+      },
+      "content_snippet": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "summary_zh": "SCQA 框架精炼商业提案：背景、冲突、关键疑问与突破性方案，遵循 MECE 穷尽原则。",
+      "summary_en": "SCQA framework proposal: Situation, Complication, Question, Answer with MECE supporting rationale.",
+      "prompt_content_zh": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "prompt_content_en": "Adopt the persona of a Senior McKinsey Strategy Director. Restructure the provided raw operational notes into an executive proposal for the C-Suite following the Pyramid Principle:\n1. Frame the introduction using the SCQA methodology (Situation, Complication, Question, Answer);\n2. Enforce Bottom Line Up Front (BLUF): the opening sentence of each pillar must be a crisp, quantified value claim;\n3. Group supporting pillars using the MECE framework (Mutually Exclusive, Collectively Exhaustive), concluding with an ROI model and concrete risk hedges.",
+      "prompt_content": "请作为前麦肯锡全球资深战略董事。请使用金字塔原理（Pyramid Principle）将以下杂乱商业信息重组为向 CEO 汇报的高管提案：\n1. 采用 SCQA 序言框架（背景 Situation、冲突 Complication、核心议题 Question、核心答案 Answer）；\n2. 严格执行‘结论先行（BLUF: Bottom Line Up Front）’，每一段第一句必须是极具冲击力的定量观点句；\n3. 支撑论据遵循 MECE 原则（相互独立，完全穷尽），分为三个不可辩驳的执行支柱，并附带 ROI 测算与风险对冲预案。",
+      "tags": [
+        "金字塔原理",
+        "高管汇报",
+        "商业方案"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T16:07:13Z",
+      "title": "💡【高管汇报利器】麦肯锡金字塔原理结构化商业方案与结论先行提案模板"
+    },
+    {
+      "id": "prompt_claude46_extended_thinking",
+      "sub_type": "coding",
+      "model_family": "claude_46",
+      "purpose_zh": "💻 混合推理 · Claude 4.6 思考时间预算控制与全栈代码交付",
+      "purpose_en": "💻 Hybrid Reasoning · Claude 4.6 Thinking Budget Control & Full-Stack Delivery",
+      "title_zh": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块",
+      "title_en": "💡 [Claude 4.6 Frontier] Extended Thinking & Budget Control: One-Shot Production Full-Stack Module",
+      "url": "https://docs.anthropic.com/",
+      "image_url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&q=80&auto=format&fit=crop",
+      "source": "Anthropic 官方前沿",
+      "author": "Anthropic 工程师",
+      "category": "prompts",
+      "is_prompt": true,
+      "raw_published_at": "2026-11-15T16:07:13Z",
+      "recommended_model": "Claude 4.6 Sonnet (Extended Thinking Mode)",
+      "temp_advice": "建议温度 1.0 (Extended Thinking 官方推荐温度) | 预算 16k tokens",
+      "metrics": {
+        "type": "💻 Claude 4.6",
+        "model": "Sonnet 3.7",
+        "temp": "1.0"
+      },
+      "content_snippet": "Maximizes Claude 4.6's hybrid reasoning budget: plans architectural trade-offs in thinking phase, then delivers production-grade, bug-free implementations.",
+      "summary_zh": "充分释放 Claude 4.6 混合推理优势：在思考阶段预判所有边界情况与架构取舍，一键输出直接可运行的高内聚工程代码。",
+      "summary_en": "Leverages Claude 4.6 extended thinking to resolve architecture trade-offs before generating complete, bug-free production code.",
+      "prompt_content_zh": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "prompt_content_en": "You are acting as a Principal Full-Stack Architect utilizing Claude 4.6 Extended Thinking mode. Before emitting code, use your reasoning budget to analyze:\n1. Architecture Trade-offs: Benchmark alternative designs across complexity, maintenance, and latency;\n2. Concurrency & Race Condition Simulation: Map asynchronous lifecycles and eliminate memory leaks;\n3. Complete Zero-Placeholder Implementation: Never emit comments like '// TODO: implement later'; ensure every function is production-ready;\n4. Include defensive unit tests and resilient error boundaries.\n\n[REQUIREMENTS]:\n[Describe your complex business system or full-stack feature here]",
+      "prompt_content": "你正在以 Claude 4.6 Extended Thinking 模式担任首席全栈系统架构师。在开始输出代码之前，请利用深度思考预算规划并解决以下维度：\n1. 架构选型与权衡（Trade-offs）：列出备选方案的复杂度、维护成本与性能瓶颈；\n2. 状态机与并发竞态模拟：预判并消除所有可能的异步竞态与内存泄露；\n3. 一次性交付完整生产级代码（Zero Placeholders）：绝对不要使用 '// TODO: implement later' 或占位符，每一行代码都必须经过思考阶段自我审查；\n4. 包含防御性单元测试与错误边界（Error Boundary）。\n\n【开发需求】：\n[在此处详细描述你的业务系统或复杂交互功能]",
+      "tags": [
+        "Claude 4.6",
+        "思考预算",
+        "全栈架构",
+        "无占位符"
+      ],
+      "generation_tier": "sota",
+      "model_tier_score": 90,
+      "created_at": "2026-11-15T16:07:13Z",
+      "title": "💡【Claude 4.6 官方前沿】混合推理 (Hybrid Reasoning) 架构工程：单次交互产出生产级可用全栈模块"
     },
     {
       "id": "ada41796498aab43",
@@ -15072,7 +15782,7 @@
         "[Key Fact Detail] Sonic Intelligence Academy establishes access standards for AI music through registry categorization.",
         "[Official Stance & Demand] The industry conflict focuses on circumventing copyright lawsuits against generative tools to claim market authority."
       ],
-      "is_recent_24h": true,
+      "is_recent_24h": false,
       "is_pinned": false,
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -15171,7 +15881,7 @@
         "[Key Technical Spec] Streaming platforms integrate AI DJs to provide background context and personalized interaction.",
         "[Industry Impact & Outlook] Over-engineered AI commentary negatively impacts user immersion."
       ],
-      "is_recent_24h": true,
+      "is_recent_24h": false,
       "is_pinned": false,
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -16813,15 +17523,15 @@
       "author_handle": "@BetterStack",
       "author_avatar": "https://unavatar.io/youtube/Better Stack",
       "source": "YouTube · Better Stack",
-      "views": "2.7万 播放",
-      "views_count": 27347,
-      "velocity": 1139.5,
-      "momentum_score": 2278.9,
+      "views": "2.8万 播放",
+      "views_count": 27575,
+      "velocity": 1149.0,
+      "momentum_score": 2297.9,
       "metrics": {
-        "views": "2.7万 播放",
-        "views_count": 27347,
-        "velocity": "+1,139/h",
-        "momentum_score": 2278.9,
+        "views": "2.8万 播放",
+        "views_count": 27575,
+        "velocity": "+1,149/h",
+        "momentum_score": 2297.9,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -16839,7 +17549,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+1,139/h)",
+        "🔥 24h飙升 (+1,149/h)",
         "Better Stack",
         "🔥 极客实操"
       ],
@@ -17238,15 +17948,15 @@
       "author_handle": "@JacksonsAI",
       "author_avatar": "https://unavatar.io/youtube/Jacksons AI",
       "source": "YouTube · Jacksons AI",
-      "views": "6.6万 播放",
-      "views_count": 65760,
-      "velocity": 2740.0,
-      "momentum_score": 5480.0,
+      "views": "6.7万 播放",
+      "views_count": 66985,
+      "velocity": 2791.0,
+      "momentum_score": 5582.1,
       "metrics": {
-        "views": "6.6万 播放",
-        "views_count": 65760,
-        "velocity": "+2,740/h",
-        "momentum_score": 5480.0,
+        "views": "6.7万 播放",
+        "views_count": 66985,
+        "velocity": "+2,791/h",
+        "momentum_score": 5582.1,
         "format": "16:9 深度长视频",
         "platform": "youtube",
         "skill_tag": "🔥 极客实操"
@@ -17264,7 +17974,7 @@
       "is_recent_48h": true,
       "is_recent_24h": false,
       "tags": [
-        "🔥 24h飙升 (+2,740/h)",
+        "🔥 24h飙升 (+2,791/h)",
         "Jacksons AI",
         "🔥 极客实操"
       ],
@@ -17768,6 +18478,66 @@
       }
     },
     {
+      "id": "84d2ba789d4eae31",
+      "status_id": "2121779542721188041",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your ",
+      "title_en": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your logic for compilers, 3D art, digital painting, and films should not be considered art either because when you texture an asset or paint in Photoshop, the viewer never sees your .blend file, the modifier stack, the add-ons used, the UV maps, or the layers. A rendering engine compiles the math data through directx/vulkan shaders into raw RGB screen pixels, using someone's software packages, so does that mean compiling a .blend scene into pixels means the 3D artists didn't make art? Of course it doesn't, ridiculous. \n\nYou also said a blatant lie and false equivalence, saying \"when your red paint dried up before you could use it, or your program corrupted your file\" is not the same as writing code, fighting a corrupted file is a broken tool. Writing logic, architecture, and algorithms IS actually putting paint on the canvas, but replacing coding with AI isn't fixing the \"dried paint\", it's just handing the paintbrush to a machine because you don't want to paint or learn how to. \n\nI'd like to see you give beginners the same stack, IDE, compiler, and engine that John Carmack or Johnathan Blow used, and let's see if they can write Doom or Braid. If you think that copying code helps, it doesn't for art, programming skills take years of organic practice and expression too.          \n\nSomeone who spent a decade gluing together corporate CRUD forms and importing npm packages in React never experienced expressive systems or graphics programming. Of course, you would think your burnout with corporate web plumbing represents all of computing and coding.",
+      "title_zh": "另一篇文章让反人工智能艺术家可以毫无负罪感地使用人工智能，并且懒惰的人可以根据自己内心的愿望进行振动编码。 \n\n将逻辑用于编译器、3D 艺术、数字绘画和电影也不应该被视为艺术，因为当您在 Photoshop 中对资产进行纹理或绘画时，观看者",
+      "quote_en": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your logic for compilers, 3D art, digital painting, and films should not be considered art either because when you texture an asset or paint in Photoshop, the viewer never sees your .blend file, the modifier stack, the add-ons used, the UV maps, or the layers. A rendering engine compiles the math data through directx/vulkan shaders into raw RGB screen pixels, using someone's software packages, so does that mean compiling a .blend scene into pixels means the 3D artists didn't make art? Of course it doesn't, ridiculous. \n\nYou also said a blatant lie and false equivalence, saying \"when your red paint dried up before you could use it, or your program corrupted your file\" is not the same as writing code, fighting a corrupted file is a broken tool. Writing logic, architecture, and algorithms IS actually putting paint on the canvas, but replacing coding with AI isn't fixing the \"dried paint\", it's just handing the paintbrush to a machine because you don't want to paint or learn how to. \n\nI'd like to see you give beginners the same stack, IDE, compiler, and engine that John Carmack or Johnathan Blow used, and let's see if they can write Doom or Braid. If you think that copying code helps, it doesn't for art, programming skills take years of organic practice and expression too.          \n\nSomeone who spent a decade gluing together corporate CRUD forms and importing npm packages in React never experienced expressive systems or graphics programming. Of course, you would think your burnout with corporate web plumbing represents all of computing and coding.",
+      "quote_zh": "另一篇文章让反人工智能艺术家可以毫无负罪感地使用人工智能，并且懒惰的人可以根据自己内心的愿望进行振动编码。\n\n将逻辑用于编译器、3D 艺术、数字绘画和电影也不应该被视为艺术，因为当您在 Photoshop 中对资产进行纹理或绘画时，观看者永远不会看到您的 .blend 文件、修改器堆栈、使用的附加组件、UV 贴图或图层。渲染引擎使用某人的软件包，通过 directx/vulkan 着色器将数学数据编译为原始 RGB 屏幕像素，那么这是否意味着将 .blend 场景编译为像素意味着 3D 艺术家没有创作艺术？当然不是，可笑。\n\n你还说了一个公然的谎言和错误的等价，说“当你的红油漆在你可以使用它之前就干了，或者你的程序损坏了你的文件”与编写代码不同，对抗损坏的文件是一个损坏的工具。编写逻辑、架构和算法实际上就是在画布上画画，但用人工智能代替编码并不能修复“干掉的油漆”，它只是把画笔交给机器，因为你不想画画或学习如何画画。\n\n我希望看到你们为初学者提供与 John Carmack 或 Johnathan Blow 使用的相同的堆栈、IDE、编译器和引擎，让我们看看他们是否可以编写 Doom 或 Braid。如果你认为复制代码有帮助，那对艺术没有帮助，编程技能也需要多年的有机练习和表达。\n\n花了十年时间将公司 CRUD 表单粘合在一起并在 React 中导入 npm 包的人从未经历过表达系统或图形编程。当然，您可能会认为您对企业网络管道的倦怠代表了所有计算和编码。",
+      "full_text_en": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your logic for compilers, 3D art, digital painting, and films should not be considered art either because when you texture an asset or paint in Photoshop, the viewer never sees your .blend file, the modifier stack, the add-ons used, the UV maps, or the layers. A rendering engine compiles the math data through directx/vulkan shaders into raw RGB screen pixels, using someone's software packages, so does that mean compiling a .blend scene into pixels means the 3D artists didn't make art? Of course it doesn't, ridiculous. \n\nYou also said a blatant lie and false equivalence, saying \"when your red paint dried up before you could use it, or your program corrupted your file\" is not the same as writing code, fighting a corrupted file is a broken tool. Writing logic, architecture, and algorithms IS actually putting paint on the canvas, but replacing coding with AI isn't fixing the \"dried paint\", it's just handing the paintbrush to a machine because you don't want to paint or learn how to. \n\nI'd like to see you give beginners the same stack, IDE, compiler, and engine that John Carmack or Johnathan Blow used, and let's see if they can write Doom or Braid. If you think that copying code helps, it doesn't for art, programming skills take years of organic practice and expression too.          \n\nSomeone who spent a decade gluing together corporate CRUD forms and importing npm packages in React never experienced expressive systems or graphics programming. Of course, you would think your burnout with corporate web plumbing represents all of computing and coding.",
+      "full_text_zh": "另一篇文章让反人工智能艺术家可以毫无负罪感地使用人工智能，并且懒惰的人可以根据自己内心的愿望进行振动编码。\n\n将逻辑用于编译器、3D 艺术、数字绘画和电影也不应该被视为艺术，因为当您在 Photoshop 中对资产进行纹理或绘画时，观看者永远不会看到您的 .blend 文件、修改器堆栈、使用的附加组件、UV 贴图或图层。渲染引擎使用某人的软件包，通过 directx/vulkan 着色器将数学数据编译为原始 RGB 屏幕像素，那么这是否意味着将 .blend 场景编译为像素意味着 3D 艺术家没有创作艺术？当然不是，可笑。\n\n你还说了一个公然的谎言和错误的等价，说“当你的红油漆在你可以使用它之前就干了，或者你的程序损坏了你的文件”与编写代码不同，对抗损坏的文件是一个损坏的工具。编写逻辑、架构和算法实际上就是在画布上画画，但用人工智能代替编码并不能修复“干掉的油漆”，它只是把画笔交给机器，因为你不想画画或学习如何画画。\n\n我希望看到你们为初学者提供与 John Carmack 或 Johnathan Blow 使用的相同的堆栈、IDE、编译器和引擎，让我们看看他们是否可以编写 Doom 或 Braid。如果你认为复制代码有帮助，那对艺术没有帮助，编程技能也需要多年的有机练习和表达。\n\n花了十年时间将公司 CRUD 表单粘合在一起并在 React 中导入 npm 包的人从未经历过表达系统或图形编程。当然，您可能会认为您对企业网络管道的倦怠代表了所有计算和编码。",
+      "url": "https://x.com/sunwukk990/status/2121779542721188041",
+      "image_url": null,
+      "media_urls": [],
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @sunwukk990",
+      "author": "sunwukk",
+      "author_handle": "@sunwukk990",
+      "author_avatar": "https://pbs.twimg.com/profile_images/2050405831984676864/rGeEDtyD_normal.jpg",
+      "author_role": "G. Julian | Game Dev Student | 3D Artist — working on anything I get fixated on.\nCope and use your brain, you're NGMI.",
+      "author_role_en": "G. Julian | Game Dev Student | 3D Artist — working on anything I get fixated on.\nCope and use your brain, you're NGMI.",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-15T01:37:18+00:00",
+      "metrics": {
+        "views": "15.5k",
+        "likes": "352",
+        "comments": "20",
+        "retweets": "29",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "代码工程增强"
+      ],
+      "content_snippet": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your logic for compilers, 3D art, digital painting, and films should not be considered art either because when you texture an asset or paint in Photoshop, the viewer never sees your .blend file, the modifier stack, the add-ons used, the UV maps, or the layers. A rendering engine compiles the math data through directx/vulkan shaders into raw RGB screen pixels, using someone's software packages, so does that mean compiling a .blend scene into pixels means the 3D artists didn't make art? Of course it doesn't, ridiculous. \n\nYou also said a blatant lie and false equivalence, saying \"when your red paint dried up before you could use it, or your program corrupted your file\" is not the same as writing code, fighting a corrupted file is a broken tool. Writing logic, architecture, and algorithms IS actually putting paint on the canvas, but replacing coding with AI isn't fixing the \"dried paint\", it's just handing the paintbrush to a machine because you don't want to paint or learn how to. \n\nI'd like to see you give beginners the same stack, IDE, compiler, and engine that John Carmack or Johnathan Blow used, and let's see if they can write Doom or Braid. If you think that copying code helps, it doesn't for art, programming skills take years of organic practice and expression too.          \n\nSomeone who spent a decade gluing together corporate CRUD forms and importing npm packages in React never experienced expressive systems or graphics programming. Of course, you would think your burnout with corporate web plumbing represents all of computing and coding.",
+      "summary_en": "Another post that lets anti-AI artists use AI guilt free and the lazy to vibecode to their hearts' desire. \n\nUsing your logic for compilers, 3D art, digital painting, and films should not be considered art either because when you texture an asset or paint in Photoshop, the viewer never sees your .blend file, the modifier stack, the add-ons used, the UV maps, or the layers. A rendering engine compiles the math data through directx/vulkan shaders into raw RGB screen pixels, using someone's software packages, so does that mean compiling a .blend scene into pixels means the 3D artists didn't make art? Of course it doesn't, ridiculous. \n\nYou also said a blatant lie and false equivalence, saying \"when your red paint dried up before you could use it, or your program corrupted your file\" is not the same as writing code, fighting a corrupted file is a broken tool. Writing logic, architecture, and algorithms IS actually putting paint on the canvas, but replacing coding with AI isn't fixing the \"dried paint\", it's just handing the paintbrush to a machine because you don't want to paint or learn how to. \n\nI'd like to see you give beginners the same stack, IDE, compiler, and engine that John Carmack or Johnathan Blow used, and let's see if they can write Doom or Braid. If you think that copying code helps, it doesn't for art, programming skills take years of organic practice and expression too.          \n\nSomeone who spent a decade gluing together corporate CRUD forms and importing npm packages in React never experienced expressive systems or graphics programming. Of course, you would think your burnout with corporate web plumbing represents all of computing and coding.",
+      "summary_zh": "永远不会看到您的 .blend 文件、修改器堆栈、使用的附加组件、UV 贴图或图层。渲染引擎使用某人的软件包，通过 directx/vulkan 着色器将数学数据编译为原始 RGB 屏幕像素，那么这是否意味着将 .blend 场景编译为像素意味着 3D 艺术家没有创作艺术？当然不是，可笑。 \n\n你还说了一个公然的谎言和错误的等价，说“当你的红油漆在你可以使用它之前就干了，或者你的程序损坏了你的文件”与编写代码不同，对抗损坏的文件是一个损坏的工具。编写逻辑、架构和算法实际上就是在画布上画画，但用人工智能代替编码并不能修复“干掉的油漆”，它只是把画笔交给机器，因为你不想画画或学习如何画画。 \n\n我希望看到你们为初学者提供与 John Carmack 或 Johnathan Blow 使用的相同的堆栈、IDE、编译器和引擎，让我们看看他们是否可以编写 Doom 或 Braid。如果你认为复制代码有帮助，那对艺术没有帮助，编程技能也需要多年的有机练习和表达。          \n\n花了十年时间将公司 CRUD 表单粘合在一起并在 React 中导入 npm 包的人从未经历过表达系统或图形编程。当然，您可能会认为您对企业网络管道的倦怠代表了所有计算和编码。",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": false,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T12:10:24.750969+00:00",
+      "processed_mark": "⛔ 已淘汰: 缺图文凭据",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 42,
+        "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
+        "media_penalty": 40
+      }
+    },
+    {
       "id": "tiktok_7708203749986045191",
       "video_id": "7708203749986045191",
       "platform": "tiktok",
@@ -18122,6 +18892,69 @@
         "score": 47,
         "reason": "缺少一手真实图文/视频凭证 (-40分一票否决)",
         "media_penalty": 40
+      }
+    },
+    {
+      "id": "55460c4888e0be9e",
+      "status_id": "2121724059939639546",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "title_en": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "title_zh": "所以肖恩·达菲的女婿......\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "quote_en": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "quote_zh": "所以肖恩·达菲的女婿......\n\n#fyp #FAA #AI #fly #money",
+      "full_text_en": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "full_text_zh": "所以肖恩·达菲的女婿......\n\n#fyp #FAA #AI #fly #money",
+      "url": "https://x.com/Mamabenergy2/status/2121724059939639546",
+      "image_url": "https://pbs.twimg.com/amplify_video_thumb/2121723069802885120/img/PC-Jc0tHsAf1fYgo.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/amplify_video_thumb/2121723069802885120/img/PC-Jc0tHsAf1fYgo.jpg"
+      ],
+      "video_url": "https://video.twimg.com/amplify_video/2121723069802885120/vid/avc1/720x1280/K_u9x6wbgWWXJT36.mp4",
+      "has_video": true,
+      "source": "𝕏 (Twitter) · @Mamabenergy2",
+      "author": "Billie Nelson",
+      "author_handle": "@Mamabenergy2",
+      "author_avatar": "https://pbs.twimg.com/profile_images/2062661110529167361/9SqQCjp6_normal.jpg",
+      "author_role": "Unapologetically Loud AF \nFeral Wife & Fierce Mama   \n👑 CUNTry Queen 👑",
+      "author_role_en": "Unapologetically Loud AF \nFeral Wife & Fierce Mama   \n👑 CUNTry Queen 👑",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-14T21:56:50+00:00",
+      "metrics": {
+        "views": "6.8k",
+        "likes": "605",
+        "comments": "23",
+        "retweets": "298",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "🔥 24h飙升",
+        "极客实战"
+      ],
+      "content_snippet": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "summary_en": "So Sean Duffy's Son-In-Law...\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "summary_zh": "所以肖恩·达菲的女婿......\n\n#fyp #FAA #AI #fly #money https://t.co/INPypcteCS",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": false,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T12:10:24.093444+00:00",
+      "processed_mark": "⛔ 已淘汰: 未达95分",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
+        "media_penalty": 0
       }
     },
     {
@@ -18574,6 +19407,68 @@
         "status": "DISQUALIFIED",
         "score": 85,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
+        "media_penalty": 0
+      }
+    },
+    {
+      "id": "45d010b3f4db1baa",
+      "status_id": "2121685472212853148",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s ",
+      "title_en": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s robot Kai\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "title_zh": "因此，根据 @just_connect_jess 的机器人 Kai 的说法，11 月 17 日应该是另一个标记，也可能是紧急广播日\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "quote_en": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s robot Kai\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "quote_zh": "因此，根据 @just_connect_jess 的机器人 Kai 的说法，11 月 17 日应该是另一个标记，也可能是紧急广播日\n\n#ai #90dayblackout #cern",
+      "full_text_en": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s robot Kai\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "full_text_zh": "因此，根据 @just_connect_jess 的机器人 Kai 的说法，11 月 17 日应该是另一个标记，也可能是紧急广播日\n\n#ai #90dayblackout #cern",
+      "url": "https://x.com/jamaicanonX/status/2121685472212853148",
+      "image_url": "https://pbs.twimg.com/amplify_video_thumb/2121685010079997952/img/ZULHucAkEHXoi9qz.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/amplify_video_thumb/2121685010079997952/img/ZULHucAkEHXoi9qz.jpg"
+      ],
+      "video_url": "https://video.twimg.com/amplify_video/2121685010079997952/vid/avc1/720x1280/95paOqNGsAnjgjNA.mp4",
+      "has_video": true,
+      "source": "𝕏 (Twitter) · @jamaicanonX",
+      "author": "sᴏᴍᴍᴇʀ ᵗʰʸᵐᵉ",
+      "author_handle": "@jamaicanonX",
+      "author_avatar": "https://pbs.twimg.com/profile_images/1820269176893620224/Mk1QPYIq_normal.jpg",
+      "author_role": "Anatidaephobic Insolitus Illuminatus",
+      "author_role_en": "Anatidaephobic Insolitus Illuminatus",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-14T19:23:30+00:00",
+      "metrics": {
+        "views": "301.6k",
+        "likes": "5.3k",
+        "comments": "377",
+        "retweets": "1.6k",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "具身智能机器人"
+      ],
+      "content_snippet": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s robot Kai\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "summary_en": "So November 17 is supposed to be another marker and possibly emergency broadcast day according to @just_connect_jess ‘s robot Kai\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "summary_zh": "因此，根据 @just_connect_jess 的机器人 Kai 的说法，11 月 17 日应该是另一个标记，也可能是紧急广播日\n\n#ai #90dayblackout #cern https://t.co/nIlkdHHWmE",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": false,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T12:10:24.093937+00:00",
+      "processed_mark": "⛔ 已淘汰: 未达95分",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -19884,6 +20779,12 @@
       "content_snippet": "cazz 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_zh": "cazz 深度实操拆解：全方位演示前沿技术架构、代码实测与核心工作流落地指南。",
       "summary_en": "Live hands-on AI demonstration and technical tutorial by cazz: AI GAME HACKING",
+      "is_pinned": false,
+      "primary_tag": "industry_news",
+      "primary_tag_zh": "📰 业界动态",
+      "primary_tag_en": "📰 Industry News",
+      "primary_tag_color": "sky",
+      "has_code_or_prompt": false,
       "processed_status": "DISQUALIFIED",
       "processed_at": "2026-11-16T12:03:52.292232+00:00",
       "processed_mark": "⛔ 已淘汰: 未达95分",
@@ -19891,6 +20792,69 @@
         "status": "DISQUALIFIED",
         "score": 85,
         "reason": "观点平庸/缺乏硬核架构与落地账本 (85分 < 95分准发线)",
+        "media_penalty": 0
+      }
+    },
+    {
+      "id": "42c67d2ac48f39ba",
+      "status_id": "2121642106586316959",
+      "category": "celebrity",
+      "sub_category": "viral_post",
+      "title": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "title_en": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "title_zh": "“利用攻击树实现人工智能黑客自动化”\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "quote_en": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "quote_zh": "“利用攻击树实现人工智能黑客自动化”\n\n#infosec #llm",
+      "full_text_en": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "full_text_zh": "“利用攻击树实现人工智能黑客自动化”\n\n#infosec #llm",
+      "url": "https://x.com/0xor0ne/status/2121642106586316959",
+      "image_url": "https://pbs.twimg.com/media/HXGWQNWWEAIjG4f.jpg",
+      "media_urls": [
+        "https://pbs.twimg.com/media/HXGWQNWWEAIjG4f.jpg"
+      ],
+      "video_url": null,
+      "has_video": false,
+      "source": "𝕏 (Twitter) · @0xor0ne",
+      "author": "0xor0ne",
+      "author_handle": "@0xor0ne",
+      "author_avatar": "https://pbs.twimg.com/profile_images/1609200505644883970/VdMcwRam_normal.jpg",
+      "author_role": "Cybersecurity | Reverse Engineering | Vulnerability Research | Embedded & Silicon Security | My Tweets, My Opinions :)",
+      "author_role_en": "Cybersecurity | Reverse Engineering | Vulnerability Research | Embedded & Silicon Security | My Tweets, My Opinions :)",
+      "entity_type": "creator",
+      "platform": "x",
+      "raw_published_at": "2026-11-14T16:31:11+00:00",
+      "metrics": {
+        "views": "9.1k",
+        "likes": "188",
+        "comments": "3",
+        "retweets": "32",
+        "platform": "x",
+        "verified": true
+      },
+      "spec_tags": [
+        "🔥 24h飙升",
+        "极客实战"
+      ],
+      "content_snippet": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "summary_en": "\"Automating AI Hacking with Tree of Attack\"\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "summary_zh": "“利用攻击树实现人工智能黑客自动化”\n\nhttps://t.co/GJPKrzQxtQ\n\n#infosec #llm https://t.co/arKrBv1oFN",
+      "is_viral": true,
+      "surge_badge": "⚡ 24h 飙升热推",
+      "is_pinned": false,
+      "tags": [
+        "🔥 24h飙升",
+        "𝕏平台热推",
+        "极客前沿"
+      ],
+      "is_recent_24h": false,
+      "media_checked": true,
+      "processed_status": "DISQUALIFIED",
+      "processed_at": "2026-11-16T12:10:24.094435+00:00",
+      "processed_mark": "⛔ 已淘汰: 未达95分",
+      "wechat_audit": {
+        "status": "DISQUALIFIED",
+        "score": 77,
+        "reason": "观点平庸/缺乏硬核架构与落地账本 (77分 < 95分准发线)",
         "media_penalty": 0
       }
     },
@@ -80658,7 +81622,7 @@
       "title_en": "Free Animated Sticker Assets of DeepSeek Chan.\nGithub Repo: https://t.co/ekJNVjhHuF \n#DeepSeekAnime #DeepSeek https://t.co/u16Mmgo5KE",
       "title_zh": "Free Animated Sticker Assets of DeepSeek Chan. Github Repo: #DeepSeekAnime #DeepSeek",
       "quote_en": "Free Animated Sticker Assets of DeepSeek Chan.\nGithub Repo: https://t.co/ekJNVjhHuF \n#DeepSeekAnime #DeepSeek https://t.co/u16Mmgo5KE",
-      "quote_zh": "DeepSeek Chan 的免费动画贴纸资产。\nGithub 仓库：\n#DeepSeekAnime #DeepSeek",
+      "quote_zh": "DeepSeek Chan 的免费动画贴纸资源。\nGithub 仓库：\n#DeepSeekAnime #DeepSeek",
       "full_text_en": "Free Animated Sticker Assets of DeepSeek Chan.\nGithub Repo: https://t.co/ekJNVjhHuF \n#DeepSeekAnime #DeepSeek https://t.co/u16Mmgo5KE",
       "full_text_zh": "DeepSeek Chan 的免费动画贴纸资产。\nGithub 仓库：\n#DeepSeekAnime #DeepSeek",
       "url": "https://x.com/UniMoeClub/status/2119218817641709861",
@@ -269721,7 +270685,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rebranding it to \"a16z frontier\" and broadening its investment strategy beyond crypto (Leo Schwartz/The Information)",
         "[Context & Motivation] Andreessen Horowitz, which made one of the boldest bets on blockchain investments in the venture world ….",
-        "[Key Fact Detail] Source: a16z plans to drop \"crypto\" from its flagship blockchain fund, rename it \"a16z frontier\" and expand its investment strategy beyond crypto - Andreessen Horowitz, one of its bold investment strategies."
+        "[Key Fact Detail] Source: a16z plans to drop “crypto” from its flagship blockchain fund, rename it “a16z frontier” and expand its investment strategy beyond crypto – Andreessen Horowitz, one of the bold investment strategies."
       ],
       "primary_tag": "tech_frontier",
       "primary_tag_zh": "🔬 前沿技术",
@@ -276628,7 +277592,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Texas Instruments reports Q3 revenue up 28% YoY to $6.06B, above $5.93B est., net income up 78% YoY to $2.43B, and forecasts $5.8B-$6.3B in Q4, vs. $5.73B est. (Ian King/Bloomberg)",
         "[Root Cause & Mechanism] Texas Instruments Inc., the biggest maker of analog and embedded processing chips, gave a strong revenue forecast for the current period ….",
-        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gives a strong revenue forecast for the period."
+        "[Industry Analysis] Texas Instruments Inc., the largest maker of analog and embedded processing chips, gave a strong revenue forecast for the period."
       ],
       "primary_tag": "business_cases",
       "primary_tag_zh": "💼 商业落地",
@@ -504286,7 +505250,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Mentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&T's AI workloads (Financial Times)",
         "[Context & Motivation] Financial Times:\nMentions of open models in latest US earnings calls surged 6x YoY, with open models hitting 56% of Vercel tokens in August and 40% of AT&amp;T's AI workloads&nbsp; &mdash;&nbsp; US businesses far beyond Silicon Valley are adopting Chinese alternatives to OpenAI a.",
-        "[Key Metrics & Data] In the latest US earnings call, the number of mentions of open models surged 6 times year-on-year, with open models accounting for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads in August."
+        "[Key Metrics & Data] In the latest U.S. earnings call, the number of mentions of open models surged 6 times year-on-year. In August, open models accounted for 56% of Vercel tokens and 40% of AT&T’s artificial intelligence workloads."
       ],
       "primary_tag": "workplace_ai",
       "primary_tag_zh": "⚡ 职场提效",
@@ -534746,7 +535710,7 @@
       "fact_bullets_en": [
         "[Core Event] ShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site (Joseph Cox/404 Media)",
         "[Context & Motivation] Joseph Cox / 404 Media:\nShinyHunters claims it used an Oracle PeopleSoft zero-day to hack FBI-related services and steal employee and applicant data; it also defaced the FBI jobs site&nbsp; &mdash;&nbsp; A sample of 5,000 alleged agents seen by 404 Media includes names, addresses.",
-        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day attacks on FBI-related services and stole employee and applicant data;."
+        "[Industry Analysis] Joseph Cox / 404 Media: ShinyHunters claims it used Oracle PeopleSoft zero-day to attack FBI-related services and steal employee and applicant data;."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -555311,7 +556275,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown",
         "[Context & Motivation] Lawsuit says Anthropic, OpenAI, SpaceXAI and Google made illegal agreement on AI slowdown&nbsp;&nbsp;apnews.com.",
-        "[Industry Analysis] Lawsuit alleges Anthropic, OpenAI, SpaceXAI and bGoogle made illegal deal to slow down AI apnews.com."
+        "[Industry Analysis] Lawsuit claims Anthropic, OpenAI, SpaceXAI and Google made illegal deal to slow down AI apnews.com."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
@@ -562864,7 +563828,7 @@
       "fact_bullets_en": [
         "[Core Event] Industry Leaders: A new kind of AI model from a ChatGPT inventor is thrilling developers",
         "[Context & Motivation] Jev, a new kind of AI model, is showing developers a cheaper and faster path to software intelligence..",
-        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large model open source community and technology research and development."
+        "[Key Technical Spec] A model from the inventor of ChatGPT that is at the forefront of global large-scale model open source community and technology research and development."
       ],
       "primary_tag": "industry_news",
       "primary_tag_zh": "📰 业界动态",
