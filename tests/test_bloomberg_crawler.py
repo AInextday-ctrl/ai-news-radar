@@ -67,7 +67,8 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertEqual(res["status"], "success")
         self.assertEqual(res["title"], "US Moves to Curb Remote Access to Nvidia's Advanced AI Chips")
         self.assertEqual(res["author"], "Maggie Eastland and Magan Crane")
-        self.assertEqual(res["cover_image"], "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifaDFO9IlcgI/v1/1200x800.jpg")
+        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
+        self.assertTrue(res.get("has_video", False))
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertGreaterEqual(res["paras_count"], 5)
@@ -83,7 +84,8 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res.get("is_paywalled", False))
         self.assertGreaterEqual(len(res["paragraphs"]), 5)
-        self.assertEqual(res["cover_image"], "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifaDFO9IlcgI/v1/1200x800.jpg")
+        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
+        self.assertTrue(res.get("has_video", False))
 
 
 if __name__ == '__main__':

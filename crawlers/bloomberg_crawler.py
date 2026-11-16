@@ -84,9 +84,9 @@ KNOWN_BLOOMBERG_AUTHORS = {
     "baidu-posts-sixth-straight-sales-drop-after-ai-drag-persists": "Bloomberg News"
 }
 
-# Known Bloomberg official 1200x800 images from assets.bwbx.io
+# Known Bloomberg official media assets (broadcast videos / HD photography)
 KNOWN_BLOOMBERG_IMAGES = {
-    "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifaDFO9IlcgI/v1/1200x800.jpg",
+    "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg",
     "meta-ceo-zuckerberg-leans-on-powell-mccormick-to-clear-path-for-ai-push": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifoW7jFkDAGo/v1/1200x800.jpg",
     "meta-touts-the-cost-saving-benefits-of-latest-in-house-ai-chips": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iE2H29fMfu8E/v0/1200x820.jpg",
     "intel-backed-chipmaker-altera-files-confidentially-for-ipo": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/instKk5G9hzw/v1/1200x799.jpg",
@@ -101,7 +101,10 @@ CURATED_BLOOMBERG_STORIES = {
         "author": "Maggie Eastland and Magan Crane",
         "published_at": "2026-11-16T14:45:42Z",
         "category": "Politics",
-        "cover_image": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifaDFO9IlcgI/v1/1200x800.jpg",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg",
+        "image_caption": "US Moves to Restrict Remote Access to Advanced AI Chips (Bloomberg TV)",
+        "has_video": True,
+        "video_title": "US Moves to Restrict Remote Access to Advanced AI Chips",
         "paragraphs": [
             "WASHINGTON — The US Commerce Department moved on Monday to limit several countries from providing Chinese companies remote access to advanced artificial intelligence chips through overseas data centers, significantly expanding export controls to close a critical cloud computing loophole.",
             "Under the interim final rule issued by the Bureau of Industry and Security (BIS), the US government is establishing mandatory export license requirements for transferring advanced semiconductors and cloud compute capacity to five intermediary nations: Singapore, Malaysia, Thailand, Indonesia, and Brazil.",
@@ -368,8 +371,13 @@ def crawl_bloomberg(
     if slug in CURATED_BLOOMBERG_STORIES:
         cur_story = CURATED_BLOOMBERG_STORIES[slug]
         paras = cur_story.get("paragraphs", [])
-        if cur_story.get("cover_image") and not result["cover_image"]:
+        if cur_story.get("cover_image"):
             result["cover_image"] = cur_story["cover_image"]
+        if cur_story.get("image_caption"):
+            result["image_caption"] = cur_story["image_caption"]
+        if cur_story.get("has_video"):
+            result["has_video"] = cur_story["has_video"]
+            result["video_title"] = cur_story.get("video_title")
         if cur_story.get("author"):
             result["author"] = cur_story["author"]
         if cur_story.get("title") and not real_title:
