@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 04:05:00 UTC",
+  "generated_at": "2026-11-16 04:18:39 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 04:05:00 UTC",
+      "updated_at": "2026-11-16 04:18:39 UTC",
       "headline_item": {
-        "id": "0bfbcb4426e0e2d0",
-        "tag_zh": "🔬 前沿技术",
-        "tag_en": "🔬 Frontier Tech",
-        "title_zh": "阿里巴巴发布Qwen4-Max模型，性能超GPT-4o级基准",
-        "title_en": "Alibaba says Qwen4-Max, which isn't open weight, beats Fable 5.1 and Kimi K3.1 Pro in coding benchmarks, and plans to release weights for smaller Qwen4 models (Luz Ding/Bloomberg)",
-        "source": "Bloomberg",
-        "published_at": "2026-11-16T03:45:00+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-16/alibaba-unveils-new-flagship-ai-model-in-riposte-to-us-rivals",
-        "event_summary_zh": "阿里巴巴推出旗舰级MoE架构模型Qwen4-Max，拥有2.4万亿参数及100万token上下文窗口，在多项编程基准测试中超越主流竞品",
-        "event_summary_en": "Alibaba Group has launched Qwen4-Max, a 2.4-trillion-parameter MoE model featuring a 1M-token context window. The company reports that the closed-source model outperforms Fable 5.1 and Kimi K3.1 Pro in coding benchmarks while achieving up to 50% higher token efficiency compared to its predecessor, Qwen3.8-Max.",
+        "id": "3e31277bb87154e4",
+        "tag_zh": "📰 业界动态",
+        "tag_en": "📰 Industry News",
+        "title_zh": "苹果启动健康AI应用研究计划",
+        "title_en": "Apple launches its Health AI Usage Study, with an OpenEvidence-powered app that answers health questions and can use HealthKit data, for up to 200,000 US users (Ivan Mehta/TechCrunch)",
+        "source": "TechCrunch",
+        "published_at": "2026-11-16T04:10:02+00:00",
+        "url": "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
+        "event_summary_zh": "苹果联合OpenEvidence推出健康AI研究应用，邀请20万美国用户参与，探索临床数据驱动的AI问答模式",
+        "event_summary_en": "grade AI responses to health queries, leveraging data from reputable journals to assess real-world human-AI interaction in medical contexts.",
         "core_facts_zh": [
-          "【核心事件】阿里巴巴集团在企业级产品发布会：发布参数规模达2.4万亿的闭源旗舰模型Qwen4-Max",
-          "【起因与机理】通过MoE架构与效率优化提升代码生成与复杂任务处理能力",
-          "【关键数据与实测】核心架构：采用2.4万亿参数的混合专家（MoE）模型架构。",
-          "【涉及范围与推进】竞争布局：闭源Qwen4-Max主攻高端编程与复杂任务，后续将分批释放轻量化版本权重以覆盖广泛生态。"
+          "【核心事件】Apple健康与健身副总裁Sumbul Desai、OpenEvidence在美国市场及苹果健康生态系统：推出研究类APP，基于临床证据库提供问答，并调用HealthKit数据进行个性化反馈",
+          "【起因与机理】探索AI在医疗健康场景下的临床严谨性与用户信任构建机制",
+          "【关键数据与实测】招募20万美国用户进行为期超12个月的医疗AI交互研究。",
+          "【各方立场与态度】承诺数据匿名处理，且明确禁止相关数据用于AI模型训练。"
         ],
         "core_facts_en": [
-          "[Core Event] Alibaba Group (Corporate product launch): Released the 2.4T parameter closed-source Qwen4-Max model",
-          "[Root Cause & Mechanism] Improving coding capabilities and inference efficiency via MoE architecture",
-          "[Key Metrics] Performance Specs: 1M-token context window with 50% higher efficiency than Qwen3.8-Max.",
-          "[Key Position & Outlook] Market Strategy: Closed-source flagship for enterprise tasks, with future open-weight versions for smaller models."
+          "[Core Event] Sumbul Desai, VP of Health at Apple; OpenEvidence: Launch of a study app providing clinically-grounded AI answers with HealthKit integration",
+          "[Root Cause & Mechanism] To establish clinical rigor and trust for AI in health-related applications",
+          "[Key Fact Detail] Recruitment of 200,000 U.S. users for a 12-month+ AI interaction study.",
+          "[Key Position & Outlook] Data privacy guarantees prohibiting the use of participant data for AI model training."
         ],
-        "industry_impact_zh": "Qwen4-Max的发布标志着阿里正通过MoE架构在超大规模模型中寻求推理成本与性能的平衡，利用闭源旗舰级模型抢占企业级AI市场的认知高地。同时，策略性开放中小型模型权重，旨在通过差异化的生态部署覆盖从端侧到云侧的多元场景，从而在当前的参数规模军备竞赛中实现更具经济效益的落地渗透。",
-        "industry_impact_en": "The release of Qwen4-Max signifies Alibaba's push to balance inference cost and performance via MoE architecture in the ultra-large-scale model segment. By maintaining a closed-source flagship while open-sourcing smaller models, Alibaba is strategically capturing both the high-end enterprise market and the broader edge-to-cloud ecosystem, optimizing commercial utility amidst the ongoing scale-driven arms race."
+        "industry_impact_zh": "苹果此次布局规避了通用大模型在医疗领域的盲目扩张，选择以封闭式科研闭环路径验证“临床证据链”的合规性，旨在建立极高行业壁垒的健康生态。通过严格限定数据匿名化处理及禁止用于模型训练的承诺，苹果试图在监管压力下，将HealthKit数据转化为核心竞争壁垒，为未来在Apple Intelligence中部署高附加值的医疗辅助功能进行合规化试探。",
+        "industry_impact_en": "Apple is pursuing a conservative, closed-loop clinical validation strategy, prioritizing evidence-based accuracy over mass-market AI deployment to build an impenetrable moat in health-tech. By strictly isolating user data from model training and enforcing privacy compliance, Apple is positioning itself to integrate high-value medical assistance into its ecosystem while preempting stringent regulatory oversight."
       },
       "headlines": [
+        {
+          "id": "3e31277bb87154e4",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "苹果启动健康AI应用研究计划",
+          "title_en": "Apple launches its Health AI Usage Study, with an OpenEvidence-powered app that answers health questions and can use HealthKit data, for up to 200,000 US users (Ivan Mehta/TechCrunch)",
+          "source": "TechCrunch",
+          "published_at": "2026-11-16T04:10:02+00:00",
+          "url": "https://techcrunch.com/2026/11/15/apple-launches-new-app-to-study-how-people-use-ai-for-health/",
+          "event_summary_zh": "苹果联合OpenEvidence推出健康AI研究应用，邀请20万美国用户参与，探索临床数据驱动的AI问答模式",
+          "event_summary_en": "grade AI responses to health queries, leveraging data from reputable journals to assess real-world human-AI interaction in medical contexts.",
+          "core_facts_zh": [
+            "【核心事件】Apple健康与健身副总裁Sumbul Desai、OpenEvidence在美国市场及苹果健康生态系统：推出研究类APP，基于临床证据库提供问答，并调用HealthKit数据进行个性化反馈",
+            "【起因与机理】探索AI在医疗健康场景下的临床严谨性与用户信任构建机制",
+            "【关键数据与实测】招募20万美国用户进行为期超12个月的医疗AI交互研究。",
+            "【各方立场与态度】承诺数据匿名处理，且明确禁止相关数据用于AI模型训练。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Sumbul Desai, VP of Health at Apple; OpenEvidence: Launch of a study app providing clinically-grounded AI answers with HealthKit integration",
+            "[Root Cause & Mechanism] To establish clinical rigor and trust for AI in health-related applications",
+            "[Key Fact Detail] Recruitment of 200,000 U.S. users for a 12-month+ AI interaction study.",
+            "[Key Position & Outlook] Data privacy guarantees prohibiting the use of participant data for AI model training."
+          ],
+          "industry_impact_zh": "苹果此次布局规避了通用大模型在医疗领域的盲目扩张，选择以封闭式科研闭环路径验证“临床证据链”的合规性，旨在建立极高行业壁垒的健康生态。通过严格限定数据匿名化处理及禁止用于模型训练的承诺，苹果试图在监管压力下，将HealthKit数据转化为核心竞争壁垒，为未来在Apple Intelligence中部署高附加值的医疗辅助功能进行合规化试探。",
+          "industry_impact_en": "Apple is pursuing a conservative, closed-loop clinical validation strategy, prioritizing evidence-based accuracy over mass-market AI deployment to build an impenetrable moat in health-tech. By strictly isolating user data from model training and enforcing privacy compliance, Apple is positioning itself to integrate high-value medical assistance into its ecosystem while preempting stringent regulatory oversight."
+        },
         {
           "id": "0bfbcb4426e0e2d0",
           "tag_zh": "🔬 前沿技术",
@@ -82,38 +108,12 @@
           ],
           "industry_impact_zh": "降低开发者微调与工程落地的门槛与算力开销，加速端到端应用在真实业务中生根发芽。",
           "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
-        },
-        {
-          "id": "587a5b9a4fcd4237",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达CEO黄仁勋辞职，首席财务官接任",
-          "title_en": "Sources: Jensen Huang had planned to pull back Nvidia's aggressive financing and told neoclouds to get upfront customer payments; Colette Kress may go further (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-16T03:30:00+00:00",
-          "url": "https://www.wsj.com/tech/ai/nvidias-days-as-an-open-checkbook-for-the-ai-economy-are-numbered-90c7b388",
-          "event_summary_zh": "英伟达创始人黄仁勋因个人丑闻辞去CEO职务，由原CFO科莱特·克雷斯接任临时CEO",
-          "event_summary_en": "Nvidia founder Jensen Huang resigned as CEO on Thursday, with CFO Colette Kress appointed as interim CEO. The departure follows reports of personal misconduct involving investigations into potential diversion of restricted Nvidia chips to China via Southeast Asian partners.",
-          "core_facts_zh": [
-            "【核心事件】黄仁勋（前英伟达CEO）、科莱特·克雷斯（现英伟达临时CEO）在英伟达总部及企业治理层：黄仁勋辞职，管理层交接，面临供应链合规性调查",
-            "【起因与机理】因个人不当行为指控及芯片合规转运风险导致的治理危机",
-            "【核心事实细节】黄仁勋因个人行为指控卸任，科莱特·克雷斯代理CEO职务。",
-            "【各方立场与态度】公司正处于从激进扩张转向合规重整的战略调整期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Jensen Huang (Former CEO), Colette Kress (Interim CEO) (Nvidia corporate governance): CEO resignation and leadership transition amidst compliance investigations",
-            "[Root Cause & Mechanism] Personal misconduct allegations and risks related to chip diversion",
-            "[Key Fact Detail] Jensen Huang resigns amid misconduct allegations; Colette Kress takes over.",
-            "[Industry Impact & Outlook] Strategic shift from aggressive growth to supply chain compliance."
-          ],
-          "industry_impact_zh": "英伟达不仅面临顶级创始人的治理真空，更严峻的是其长期依赖的东南亚高性能计算（HPC）云厂商渠道或将面临美方出口管制审查的收紧。新任管理层需立即调整高度激进的融资与销售策略，以应对市场对供应链合规透明度的极度不安。",
-          "industry_impact_en": "Nvidia faces not only a leadership vacuum but also acute scrutiny of its secondary sales channels in Southeast Asia, which may trigger tighter U.S. export compliance enforcement. The new leadership must urgently recalibrate aggressive sales strategies to restore market confidence in supply chain integrity."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 04:05:00 UTC",
+      "updated_at": "2026-11-16 04:18:39 UTC",
       "author": "Yann LeCun",
       "author_handle": "@ylecun",
       "author_role_zh": "Meta 首席AI科学家 / 深度学习三巨头 / 图灵奖得主",
@@ -280,7 +280,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 04:05:00 UTC",
+      "updated_at": "2026-11-16 04:18:39 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -389,12 +389,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,271)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,272)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,271 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,272 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
