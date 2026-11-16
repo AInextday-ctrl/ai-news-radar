@@ -437,14 +437,14 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                     # If this is the China AI-native generation story, guarantee pristine photo gallery
                     if "inside-chinas-drive-build-an-ai-native-generation" in clean_url.lower():
                         flight_sim_img = {
-                            "url": "/images/reuters_bnta_flight_simulator.jpg",
+                            "url": "/images/reuters_bnta_flight_simulator_pristine.jpg",
                             "caption": "A primary-level student operates the control of a flight simulator during a smart flight class at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
                             "caption_en": "A primary-level student operates the control of a flight simulator during a smart flight class at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
                             "caption_zh": "北京新英才学校（BNTA）智能飞行课堂上，一名小学生正在操作飞行模拟器控制器。(摄影：路透社/Tingshu Wang)",
                             "alt": "A primary-level student operates the control of a flight simulator at Beijing New Talent Academy"
                         }
                         underwater_robot_img = {
-                            "url": "/images/reuters_bnta_underwater_robot.jpg",
+                            "url": "/images/reuters_bnta_underwater_robot_pristine.jpg",
                             "caption": "A student operates an underwater robot during a robotics course at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
                             "caption_en": "A student operates an underwater robot during a robotics course at Beijing New Talent Academy (BNTA) in Beijing, China. (Photo: REUTERS/Tingshu Wang)",
                             "caption_zh": "北京新英才学校（BNTA）水下机器人课堂上，一名学生正在操作水下机器人。(摄影：路透社/Tingshu Wang)",
