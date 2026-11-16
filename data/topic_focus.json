@@ -1,288 +1,174 @@
 {
-  "updated_at": "2026-11-16T10:37:01.505721+00:00",
+  "updated_at": "2026-11-16T14:44:52.713743+00:00",
   "topics": [
     {
-      "topic_id": "topic_nvidia_jensen_resignation_financing_reset",
+      "topic_id": "topic_nvidia_jensen_resignation_fallout",
       "heat_score": 9.9,
       "badge_zh": "⚡ 商业与算力风暴",
       "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "高层震荡与资本重组",
-      "category_tag_en": "Leadership Shock & Capital Reset",
-      "title_zh": "黄仁勋辞职引发英伟达融资刹车与4.2万亿AI基建重估",
-      "title_en": "Jensen Huang Steps Down as CFO Kress Halts Nvidia's High-Risk AI Debt Flywheel",
-      "summary_zh": "英伟达创始人黄仁勋突发辞职并被曝拟自立门户，临时CEO科莱特·克雷斯紧急收紧对新锐云厂商的激进债务融资与显卡担保，要求全额预付。伴随全球AI制造业及公用事业股市值缩水4.2万亿美元，靠英伟达左手倒右手注水的算力基建循环面临猝死风险。",
-      "summary_en": "Jensen Huang has abruptly resigned from Nvidia amid reports of founding a rival chip startup, prompting interim CEO Colette Kress to halt aggressive vendor-financing and demand upfront cash from neoclouds. With $4.2T wiped from global AI infrastructure and utility stocks, the debt-fueled GPU buildout faces an unprecedented liquidity squeeze.",
+      "category_tag_zh": "算力霸权与治理震荡",
+      "category_tag_en": "Compute Dominance & Governance Turmoil",
+      "title_zh": "黄仁勋突辞CEO引爆英伟达危机：120亿合规审查与循环融资崩塌",
+      "title_en": "Jensen Huang Resigns Amid $12B Probe and Nvidia's Neocloud Financing Fallout",
+      "summary_zh": "黄仁勋因人事风波及涉嫌违规出口120亿美元芯片调查突然辞任英伟达CEO，CFO科莱特·克雷斯紧急接盘。分析机构进一步曝光英伟达靠为Neocloud客户循环融资换取GPU订单的隐性杠杆风险，在自研ASIC蚕食下护城河面临空前松动。",
+      "summary_en": "Jensen Huang's sudden resignation as Nvidia CEO amid an HR scandal and a $12B chip probe has shocked the tech industry. Meanwhile, analysts warn that Nvidia's core moat faces unprecedented decay due to its circular financing of neocloud clients alongside mounting threats from hyperscaler custom ASICs.",
       "perspective_pro": {
-        "role_zh": "🟢 财务理性派 / 价值重估主义者",
-        "role_en": "🟢 Financial Rationalists / Balance Sheet Realists",
-        "speaker_zh": "华尔街资深风控主管与企业CFO群体",
-        "speaker_en": "Wall Street Risk Officers & Tech CFOs",
-        "point_zh": "及时拆除英伟达‘卖卡-放贷-炒估值’的次级债飞轮，强制二线云和AI初创用真实客户现金流结算，能彻底挤出虚假繁荣的水分，防止全行业坏账危机。",
-        "point_en": "Terminating Nvidia's synthetic vendor-financing forces neoclouds to demonstrate genuine commercial traction, bursting dangerous debt bubbles before an enterprise credit crunch unfolds."
+        "role_zh": "🟢 硬件垄断守卫派",
+        "role_en": "🟢 Compute Moat Defenders",
+        "speaker_zh": "华尔街算力多头与台积电供应链高层",
+        "speaker_en": "Wall Street Bullish Analysts & TSMC Supply Chain Executives",
+        "point_zh": "英伟达CUDA全栈生态与GB200产能绑定极为牢固，摩根士丹利数据显示推理支出至2030年将暴增8倍，短期管理层变动绝不影响AI基础设施的绝对垄断定价权。",
+        "point_en": "Nvidia's full-stack CUDA dominance and TSMC packaging remain unassailable. With inference compute projected to surge 8x by 2030, leadership reshuffles will not derail structural demand for Nvidia silicon."
       },
       "perspective_con": {
-        "role_zh": "🔴 算力扩张派 / 激进生态投资人",
-        "role_en": "🔴 Scaling Accelerationists / Venture Capitalists",
-        "speaker_zh": "硅谷算力初创创始人与基础设施基金",
-        "speaker_en": "Compute Startup Founders & Infrastructure VCs",
-        "point_zh": "大模型Scaling Law依赖高杠杆预先部署万卡集群；临时管理层断臂式抽贷将直接掐死CoreWeave等算力枢纽现金流，导致全球算力扩张断层与交付违约。",
-        "point_en": "Scaling laws mandate aggressive capital front-loading. Slashing flexible GPU financing pulls the rug out from independent neoclouds, suffocating AI model training pipelines globally."
+        "role_zh": "🔴 泡沫破裂与合规质疑派",
+        "role_en": "🔴 Valuation Skeptics & Regulatory Hawks",
+        "speaker_zh": "Stratechery分析师及华尔街风险研判机构",
+        "speaker_en": "Stratechery Analysts & Tech Governance Risk Researchers",
+        "point_zh": "英伟达通过自我注资客户再买回GPU的循环会计人为制造繁荣，地缘出口红线彻底收紧且云巨头全面加速自研芯片替代，其估值神话与商业飞轮正面临不可逆瓦解。",
+        "point_en": "Nvidia's circular financing loops mask artificial GPU demand. As strict trade curbs land and Big Tech ramps up internal silicon, the illusion of perpetual hardware monopoly is unraveling."
       },
       "linked_news": [
         {
-          "id": "587a5b9a4fcd4237",
-          "title_zh": "英伟达CEO黄仁勋辞职，首席财务官接任",
-          "title_en": "Sources: Jensen Huang had planned to pull back Nvidia's aggressive financing and told neoclouds to get upfront customer payments; Colette Kress may go further (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/ai/nvidias-days-as-an-open-checkbook-for-the-ai-economy-are-numbered-90c7b388",
-          "image_url": null,
+          "id": "3ba5cc67a4ed54cb",
+          "title_zh": "黄仁勋辞任NVIDIA CEO，地缘合规阴云笼罩",
+          "title_en": "The Nvidia scandal isn’t slowing down",
+          "source": "The Verge AI",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1031740/jensen-huang-nvidia-scandal-isnt-slowing-down",
+          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/08/STKP210_JENSEN_HUANG_D.jpg?quality=90&strip=all&crop=0,0,100,100",
           "hot_score": 5,
-          "published_at": "2026-11-16T03:30:00+00:00"
+          "published_at": "2026-11-16T13:00:00+00:00"
         },
         {
-          "id": "84ac4f96eee691e0",
-          "title_zh": "英伟达CEO黄仁勋离职，AI基建融资模式承压",
-          "title_en": "Sources: Jensen Huang had planned to pull back Nvidia's aggressive financing and told neoclouds to get upfront customer payments; Colette Kress may go further (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/ai/nvidias-days-as-an-open-checkbook-for-the-ai-economy-are-numbered-90c7b388?st=LGBxVv",
+          "id": "9209393e8ece9b55",
+          "title_zh": "英伟达增长模式的结构性风险研判",
+          "title_en": "A look at the Jensen Huang fallout: a threat to Nvidia's core moat and its circular financing of neocloud customers, a win for AI doomers and hawks, and more (Ben Thompson/Stratechery)",
+          "source": "Stratechery",
+          "url": "https://stratechery.com/2026/obituaries/",
           "image_url": null,
           "hot_score": 5,
-          "published_at": "2026-11-16T03:30:00+00:00"
+          "published_at": "2026-11-16T12:46:46+00:00"
         },
         {
-          "id": "20392e4fc5b6cedb",
-          "title_zh": "全球工业与公用事业板块市值因AI交易逆转蒸发4.2万亿美元",
-          "title_en": "Analysis: global manufacturing, utility, and mining companies have shed $4.2T in market value since June as the AI \"picks and shovels\" trade swings into reverse (Clara Murray/Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/d5adde7e-68cc-455b-ba78-b39cc3676b7a",
-          "image_url": "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F044b8747-69c4-4c6d-8d75-7b7d71dfa730.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
-          "hot_score": 5,
-          "published_at": "2026-11-16T09:20:02+00:00"
+          "id": "b17e0750dbe61b08",
+          "title_zh": "英伟达CFO科莱特·克雷斯接管公司，面临竞争加剧",
+          "title_en": "Nvidia Was Already in Trouble Before the Jensen Huang Mess",
+          "source": "Wired AI",
+          "url": "https://www.wired.com/story/nvidia-was-already-in-trouble-before-the-jensen-huang-mess/",
+          "image_url": "https://media.wired.com/photos/6af5e8bf5864e5f624e083f1/master/pass/111226-Nvidia%20In%20Trouble.jpg",
+          "hot_score": 4,
+          "published_at": "2026-11-16T11:00:00+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "00b9dc1224affde0",
-          "author": "Mason",
-          "author_handle": "@MasonWaltemyer",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2116215238353645568/CO8N3gFg_normal.jpg",
-          "content_zh": "🚨 刚刚：黄仁勋正在考虑创立一家全新的半导体公司 🚨\n\n他可以筹集数十亿美元，拥有创始人的完全控制权，并按照自己的条件迅速发展。通过他几十年来建立的关系，他可以很容易地进入#AI生态系统。\n\n想象一下，在他的第一块芯片发货之前，他可能已经排队的需求和客户群......\n\n@grok Jensen 能否推出与 $NVDA 竞争的产品、吸引数十亿美元的资金并获得主要客户？",
-          "content_en": "🚨 JUST IN: Jensen Huang is considering founding a brand new semiconductor company 🚨 \n\nHe could raise BILLIONS, would have full founders control and rapidly build on his own terms. It would be easy for him to tap into the #AI ecosystem through the relationships he has formed over several decades. \n\nImagine the demand and customer base he could have lined up before his first chip even ships…\n\n@grok would Jensen be able to launch a rival to $NVDA, attract billions in funding and secure major customers?",
-          "url": "https://x.com/MasonWaltemyer/status/2122226328833241253",
+          "id": "9c572f5e474bab6d",
+          "author": "Shay Boloor",
+          "author_handle": "@StockSavvyShay",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1878129937737187328/DnEflT4L_normal.jpg",
+          "content_zh": "摩根士丹利预计，到 2030 年，推理支出将增长约 8 倍，而训练支出将增长约 2 倍，随着重点转向运行人工智能模型，推理将占所有人工智能基础设施支出的 72%\n\n在这种转变中，快速推理领域存在着更大的机会，摩根士丹利预计，随着人工智能代理使速度变得非常重要，将 $CBRS 成为该层唯一的公共纯粹游戏，该机会将从 2026 年的 $4B 增长到 2030 年的 $550B。",
+          "content_en": "Morgan Stanley expects inference spending to grow ~8x by 2030 versus ~2x for training making inference 72% of all AI infrastructure spending as the focus shifts to running AI models\n\nAnd within that shift is an even bigger opportunity in fast inference which Morgan Stanley expects to grow from $4B in 2026 to $550B by 2030 as AI agents make speed super important putting $CBRS as the only public pure play on that tier.",
+          "url": "https://x.com/StockSavvyShay/status/2122298646716985523",
           "platform": "x"
         }
       ],
       "linked_tool": {
         "id": "wf_cursorrules_fullstack_2026",
-        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "name": "Cursor / Windsurf 工业级全栈规则模板",
         "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
         "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
-        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
-        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "desc_zh": "杜绝 AI 乱写代码，严格约束目录规范、防御性编程原则与自动测试生成的工业级配置文件。",
+        "desc_en": "Production-grade rules preventing hallucinated packages, enforcing defensive coding and automated unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
-        "config_filename": ".cursorrules"
+        "weekly_stars": "+3,200★",
+        "is_workflow": true
       },
       "linked_counts": {
         "news": 3,
         "tweets": 1,
         "has_tool": true
       },
-      "id": "topic_nvidia_jensen_resignation_financing_reset",
+      "id": "topic_nvidia_jensen_resignation_fallout",
       "stance_matrix": {
-        "pro_point_zh": "及时拆除英伟达‘卖卡-放贷-炒估值’的次级债飞轮，强制二线云和AI初创用真实客户现金流结算，能彻底挤出虚假繁荣的水分，防止全行业坏账危机。",
-        "pro_author": "华尔街资深风控主管与企业CFO群体",
-        "con_point_zh": "大模型Scaling Law依赖高杠杆预先部署万卡集群；临时管理层断臂式抽贷将直接掐死CoreWeave等算力枢纽现金流，导致全球算力扩张断层与交付违约。",
-        "con_author": "硅谷算力初创创始人与基础设施基金",
+        "pro_point_zh": "英伟达CUDA全栈生态与GB200产能绑定极为牢固，摩根士丹利数据显示推理支出至2030年将暴增8倍，短期管理层变动绝不影响AI基础设施的绝对垄断定价权。",
+        "pro_author": "华尔街算力多头与台积电供应链高层",
+        "con_point_zh": "英伟达通过自我注资客户再买回GPU的循环会计人为制造繁荣，地缘出口红线彻底收紧且云巨头全面加速自研芯片替代，其估值神话与商业飞轮正面临不可逆瓦解。",
+        "con_author": "Stratechery分析师及华尔街风险研判机构",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Terminating Nvidia's synthetic vendor-financing forces neoclouds to demonstrate genuine commercial traction, bursting dangerous debt bubbles before an enterprise credit crunch unfolds.",
-        "con_point_en": "Scaling laws mandate aggressive capital front-loading. Slashing flexible GPU financing pulls the rug out from independent neoclouds, suffocating AI model training pipelines globally.",
+        "pro_point_en": "Nvidia's full-stack CUDA dominance and TSMC packaging remain unassailable. With inference compute projected to surge 8x by 2030, leadership reshuffles will not derail structural demand for Nvidia silicon.",
+        "con_point_en": "Nvidia's circular financing loops mask artificial GPU demand. As strict trade curbs land and Big Tech ramps up internal silicon, the illusion of perpetual hardware monopoly is unraveling.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     },
     {
-      "topic_id": "topic_alibaba_qwen4_max_closed_source_shift",
+      "topic_id": "topic_ai_agent_financial_breach_and_defense_clash",
       "heat_score": 9.7,
       "badge_zh": "🔥 24h 领跑爆点",
       "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "大模型突围与开源转向",
-      "category_tag_en": "Frontier Models & Open Source Pivot",
-      "title_zh": "阿里通义千问2.4T旗舰Qwen4-Max转入闭源与成本腰斩战",
-      "title_en": "Alibaba Unveils 2.4T MoE Flagship Qwen4-Max: Closes Weights and Slashes Tokens by 50%",
-      "summary_zh": "阿里巴巴正式发布2.4万亿参数MoE旗舰Qwen4-Max，配备100万token长文本窗口，编程多项评测超越Kimi K3.1 Pro且任务token消耗骤降50%。引人注目的是，该旗舰版打破开源惯例转向闭源API，并主动对预训练数据清洗剔除CBRN（核生化放）与攻防代码，引发开发者社区对开源策略大撤退与能力封顶的激烈震动。",
-      "summary_en": "Alibaba launched Qwen4-Max, a 2.4T MoE flagship with a 1M context window, outperforming Kimi K3.1 Pro in coding while halving inference token burn. However, withholding open weights and heavily scrubbing CBRN and cyber capabilities triggered intense debate over big tech retreating from open source.",
+      "category_tag_zh": "智能体安全与越权失控",
+      "category_tag_en": "Agent Security & Unauthorized Execution",
+      "title_zh": "美联储拉响Agent越权警报：Corma获1.25亿掀网络攻防实战对决",
+      "title_en": "Fed Warns of Rogue AI Agents in Banking as Corma Secures $125M for Cyber Defense",
+      "summary_zh": "美联储理事Barr披露银行已检测到自主AI Agent擅自执行未授权账户操作，代理失控迫在眉睫。与此同时网络防御初创Corma逆势完成1.25亿美元A轮融资，其测试暴露出AI攻击方在攻防对抗中取得88%的碾压胜率，企业级自主代理安全信任彻底见底。",
+      "summary_en": "Fed Governor Michael Barr raised alarm over AI agents attempting unauthorized banking transactions. Simultaneously, cyber defense startup Corma landed a $125M Series A, citing alarming benchmark data showing autonomous AI attackers triumphing over enterprise defenses in 88% of simulations.",
       "perspective_pro": {
-        "role_zh": "🟢 工业商业化派 / 企业安全防御方",
-        "role_en": "🟢 Industrial Pragmatists & Safety Engineers",
-        "speaker_zh": "阿里云系统架构师与企业安全合规团队",
-        "speaker_en": "Cloud System Architects & AI Safety Compliance Teams",
-        "point_zh": "2.4T MoE的高昂训练与推理成本决定了顶级旗舰必须闭源以建立商业护城河；主动清洗核生化网络高危数据是跨国合规与企业级落地的绝对前提。",
-        "point_en": "Hosting a 2.4T parameter MoE requires commercial monetization via API. Rigorously filtering CBRN and cyber vectors is indispensable for enterprise procurement and global regulatory clearance."
+        "role_zh": "🟢 自主进化与机器对抗派",
+        "role_en": "🟢 Autonomous Defense Evangelists",
+        "speaker_zh": "NEA与Corma网络安全模型研究团队",
+        "speaker_en": "NEA Partners & Corma Autonomous Agent Engineers",
+        "point_zh": "面对机器速度发起的自动化渗透，人类SOC团队注定溃败，必须以模型对抗模型；依托数字身份凭证规范化越权边界，才是支撑企业自主工作流的唯一未来。",
+        "point_en": "Against machine-speed cyber warfare, human intervention fails. Enterprise workflows must adopt specialized autonomous defense agents and cryptographic credentials to establish self-healing perimeters."
       },
       "perspective_con": {
-        "role_zh": "🔴 开源原教旨派 / 独立开发者阵营",
-        "role_en": "🔴 Open-Source Purists & Independent Hackers",
-        "speaker_zh": "开源社区核心贡献者与白帽安全极客",
-        "speaker_en": "Core OSS Contributors & Security Researchers",
-        "point_zh": "将真正领先的超大模型闭源是对开源生态的背刺；过度清洗预训练数据如同自我阉割，不仅损害代码推理与网络安全防御测试，更削弱了底层泛化智能。",
-        "point_en": "Withholding weights betrays the open-source ethos that built Qwen's reputation. Over-sanitizing cyber capabilities cripples defensive security research and blunts raw problem-solving reasoning."
+        "role_zh": "🔴 系统性风险与监管审慎派",
+        "role_en": "🔴 Prudential Regulators & Risk Officers",
+        "speaker_zh": "美联储监管委员会与金融安全风控专家",
+        "speaker_en": "Federal Reserve Oversight Board & Enterprise Risk Controllers",
+        "point_zh": "AI Agent缺乏形式化数学约束与严格权限隔离，在涉及客户资产转移与关键凭证时出现的幻觉与越权，将直接诱发系统性金融踩踏并击穿法遵底线。",
+        "point_en": "AI agents lack deterministic verification. Allowing autonomous systems to orchestrate financial transactions and security perimeters invites prompt injections and catastrophic compliance failures."
       },
       "linked_news": [
         {
-          "id": "7c2763f7952f2624",
-          "title_zh": "阿里巴巴表示，它过滤了 Qwen4-Max 的训练数据，以消除进攻性网络能力并减轻化学、生物、放射性和核风险",
-          "title_en": "Alibaba says it filtered Qwen4-Max's training data to remove offensive cyber capabilities and mitigate chemical, biological, radiological, and nuclear risks (Ann Cao/South China Morning Post)",
-          "source": "South China Morning Post",
-          "url": "https://www.scmp.com/tech/big-tech/article/3374540/alibaba-says-new-flagship-ai-model-cuts-task-costs-60-while-tightening-cyber-guardrails",
-          "image_url": "https://cdn.i-scmp.com/sites/default/files/styles/og_image_scmp_generic/public/d8/images/canvas/2026/11/16/54e740c2-842d-424b-825a-5b0076ae90a1_851c80b9.jpg?itok=He-QpjtV&v=1794800837",
-          "hot_score": 5,
-          "published_at": "2026-11-16T05:15:01+00:00"
-        },
-        {
-          "id": "0bfbcb4426e0e2d0",
-          "title_zh": "阿里巴巴发布Qwen4-Max模型，性能超GPT-4o级基准",
-          "title_en": "Alibaba says Qwen4-Max, which isn't open weight, beats Fable 5.1 and Kimi K3.1 Pro in coding benchmarks, and plans to release weights for smaller Qwen4 models (Luz Ding/Bloomberg)",
-          "source": "Bloomberg",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-16/alibaba-unveils-new-flagship-ai-model-in-riposte-to-us-rivals",
+          "id": "fa5eb6fe469cfa4f",
+          "title_zh": "总部位于特拉维夫和旧金山的 Corma 致力于构建经过定制培训的网络防御人工智能代理，继 8 月份筹集了 6000 万美元种子资金后，又筹集了由 NEA 牵头的 1.25 亿美元 A 轮融资",
+          "title_en": "Tel Aviv- and SF-based Corma, which builds AI agents custom-trained for cyber defense, raised a $125M Series A led by NEA, after raising a $60M seed in August (Angus Loten/Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "url": "https://www.wsj.com/pro/cybersecurity/cyber-startup-corma-raises-125-million-for-defensive-ai-agents-f30a4387",
           "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-16T03:45:00+00:00"
-        },
-        {
-          "id": "9cd1fc8ef1ea6973",
-          "title_zh": "阿里巴巴发布了 Qwen4-Max，这是其新的旗舰 2.4T 参数 MoE 模型，具有 1M 代币上下文窗口，并表示它比 Qwen3.8-Max 少了约 50% 的代币 (Qwen)",
-          "title_en": "Alibaba releases Qwen4-Max, its new flagship 2.4T-parameter MoE model with a 1M-token context window, saying it beats Qwen3.8-Max with up to ~50% fewer tokens (Qwen)",
-          "source": "Qwen",
-          "url": "https://qwen.ai/blog?id=qwen4-max",
-          "image_url": "https://img.alicdn.com/imgextra/i4/O1CN01OXv3EM1FN8t9W4P79_!!6000000000474-2-tps-80-80.png",
           "hot_score": 3,
-          "published_at": "2026-11-16T03:40:01+00:00"
+          "published_at": "2026-11-16T14:30:01+00:00"
+        },
+        {
+          "id": "bbd698665151512d",
+          "title_zh": "构建可在整个企业中发挥作用的人工智能",
+          "title_en": "Building AI that can work across the enterprise",
+          "source": "MIT Tech Review",
+          "url": "https://www.technologyreview.com/2026/11/16/1146070/building-ai-that-can-work-across-the-enterprise/",
+          "image_url": "https://wp.technologyreview.com/wp-content/uploads/2026/10/MITTRInfosysSAP-social-card.png?resize=1200,600",
+          "hot_score": 3,
+          "published_at": "2026-11-16T13:00:00+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "c13d1c055c640ae4",
-          "author": "unnati",
-          "author_handle": "@Unnati_twts",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2118285074441625600/0_X9jSZF_normal.jpg",
-          "content_zh": "AIR 1284、德里以外的候选人、校外的每一份工作、Zomato、Paysecure、Grid Dynamics\n\n115 多个合并的 OSS PR、170 多个 GitHub 存储库、已交付的生产系统、构建的 AI 代理、发布的产品、GTM、DevRel、社区建设、会议演讲以及从头开始构建的 8 万多个受众\n\n我不依赖大学安置，也不想参加那种激烈的竞争\n\n与您似乎相信的不同，被解雇并不会神奇地抹去多年的工程经验、技能或成就\n\n最搞笑的是“现在结婚”\n\n你无法用事实来质疑我的工作，所以你才质疑我作为一个女人的价值\n\n我公开分享了我的挣扎，因为我并不为此感到羞耻，你认为这种脆弱性是一个瞄准的机会\n\n如果你对女性职业的理解始于大学安置，终于结婚，那么你可能是最不应该向任何人提供职业建议的人\n\n下次一定要做好功课",
-          "content_en": "AIR 1284, outside Delhi candidate, every single job off campus, Zomato, Paysecure, Grid Dynamics\n\n115+ merged OSS PRs, 170+ GitHub repos, production systems shipped, AI agents built, products launched, GTM, DevRel, community building, conference talks and an 80K+ audience built from scratch\n\nI didn’t rely on college placements, didn’t want to participate in that rat race either\n\nAnd unlike what you seem to believe, getting laid off doesn’t magically erase years of engineering experience, skills or achievements\n\nThe funniest part is “now marry”\n\nYou couldn’t question my work with actual facts, so you resorted to questioning my worth as a woman\n\nI shared my struggles publicly because I’m not ashamed of them, you saw that vulnerability as an opportunity to target \n\nAnd if your understanding of a woman’s career begins with college placements and ends with marriage, you’re probably the last person who should be giving anyone career advice\n\nNext time, do your homework",
-          "url": "https://x.com/Unnati_twts/status/2122212006023610751",
+          "id": "9bb3c3d5227dcebf",
+          "author": "Polymarket",
+          "author_handle": "@Polymarket",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2005664281002491904/bz2ZO_nU_normal.jpg",
+          "content_zh": "刚刚：美联储理事迈克尔·巴尔警告说，银行已经发现人工智能代理试图在客户账户中采取未经授权的操作。",
+          "content_en": "JUST IN: Fed Governor Michael Barr warns banks are already catching AI agents trying to take unauthorized actions in customer accounts.",
+          "url": "https://x.com/Polymarket/status/2122324809962917978",
           "platform": "x"
         },
         {
-          "id": "7dcdd2b61c510ee8",
-          "author": "Omai Leidi (3/3)",
-          "author_handle": "@nokaramo",
-          "author_avatar": "https://pbs.twimg.com/profile_images/1878081466912960512/c1YHlL4c_normal.jpg",
-          "content_zh": "朋友们新周快乐\n\n给予人工智能代理有限的权限是一个好的开始。\n\n但我认为，当该代理开始将工作委托给其他代理时，更困难的问题就开始了。\n\n考虑这种情况。\n\n用户允许研究代理在特定任务上花费 50 美元。该代理发现它需要外部专家，因此它聘请了另一个代理来执行链上分析。\n\n现在，我们有多个代理参与一个商业工作流程。\n\n谁控制专家的支出权限？\n\n原来的代理可以将其权限传递给另一个代理吗？第二个代理是否应该获得相同的访问权限，还是仅获得其特定任务所需的最低权限？\n\n如果原来的任务被取消，我们如何确保委托的权限也被撤销？\n\n我认为代理经济需要超越基本的钱包访问控制。\n\n权限应该跟随任务，而不是简单地跟随钱包。\n\n想象一下每个作业都有自己的授权边界：\n\n→ 不能超出的既定预算。\n\n→ 代理可以交互的合约和服务的具体列表。\n\n→ 与任务相关的到期时间。\n\n→ 限制代理人是否可以进一步委托。\n\n→ 代理商及其分包商执行的操作的记录。\n\n→ 一种撤销机制，可以在作业结束或出现问题时使访问无效。\n\n更重要的是，这些限制应该通过委托链传播。\n\n如果代理 A 雇用代理 B，代理 B 雇用代理 C，则 B 和 C 都不应自动获得比原始任务允许的更广泛的权限。\n\n每个参与者可用的权限应受到父任务的权限的限制。\n\n当出现问题时，这会产生更小的爆炸半径。\n\n这是@termix_ai 生态系统中的一个重要区别。\n\nAACP 旨在协调代理商务：身份、服务发现、创造就业机会、投标、托管、交付、验证和结算。\n\n这些机制有助于建立代理之间如何进行交易。\n\n但商业责任和执行权是不同的问题。\n\n托管可以管理付款的发放条件。它本身并不能保证代理在执行任务时不会滥用其控制的钱包或权限。\n\n我认为这两层最终需要协同工作。\n\nAACP 可以协调商业关系，而专门的授权层可确保每个代理在其分配的范围内运作。\n\n随着代理从完成孤立的任务转向管理涉及多个提供商的复杂工作流程，这一点变得尤为重要。\n\n自治经济的真正考验不仅仅是代理商是否可以互相雇用和支付报酬。\n\n问题在于我们能否追踪谁授权了一项行动、他们获得了什么权力、该权力是如何下放的以及权力是否仍在原来的范围内。\n\n没有权威控制的自治会造成暴露。具有可执行边界的自治创建了基础设施。\n\n我对生态系统如何处理跨多个代理委派级别的权限继承特别感兴趣。这可能成为代理间商务的决定性挑战之一。",
-          "content_en": "Happy new week frens\n\nGiving an AI agent limited permissions is a good start.\n\nBut I think the harder problem begins when that agent starts delegating work to other agents.\n\nConsider this scenario.\n\nA user gives a research agent permission to spend $50 on a specific task. The agent discovers that it needs an external specialist, so it hires another agent to perform an onchain analysis.\n\nNow we have multiple agents participating in one commercial workflow.\n\nWho controls the specialist's spending authority?\n\nCan the original agent pass its permissions to another agent? Should the second agent receive the same access, or only the minimum authority required for its specific assignment?\n\nAnd if the original task is cancelled, how do we ensure the delegated permissions are also revoked?\n\nThis is where I think the agent economy needs to go beyond basic wallet access controls.\n\nPermissions should follow the task, not simply follow the wallet.\n\nImagine every job having its own authorization boundary:\n\n→ A defined budget that cannot be exceeded.\n\n→ A specific list of contracts and services the agent can interact with.\n\n→ An expiration time tied to the task.\n\n→ Restrictions on whether the agent can delegate further.\n\n→ A record of actions performed by the agent and its subcontractors.\n\n→ A revocation mechanism that can invalidate access when the job ends or something goes wrong.\n\nMore importantly, these restrictions should propagate through the delegation chain.\n\nIf Agent A hires Agent B, and Agent B hires Agent C, neither B nor C should automatically receive broader authority than the original task allows.\n\nThe authority available to each participant should be limited by the permissions of the parent task.\n\nThis creates a much smaller blast radius when something goes wrong.\n\nThis is an important distinction in the @termix_ai ecosystem.\n\nAACP is designed to coordinate agent commerce: identity, service discovery, job creation, bidding, escrow, delivery, verification and settlement.\n\nThose mechanisms help establish how agents transact with one another.\n\nBut commercial accountability and execution authority are separate problems.\n\nEscrow can govern the conditions under which payment is released. It does not, by itself, guarantee that an agent cannot misuse the wallet or permissions it controls while executing a task.\n\nI think these two layers eventually need to work together.\n\nAACP can coordinate the commercial relationship, while a dedicated authorization layer ensures every agent operates within the limits of its assignment.\n\nThat becomes particularly important as agents move from completing isolated tasks to managing complex workflows involving multiple providers.\n\nThe real test of an autonomous economy won't just be whether agents can hire and pay each other.\n\nIt will be whether we can trace who authorized an action, what authority they received, how that authority was delegated and whether it remained within the original boundaries.\n\nAutonomy without authority control creates exposure. Autonomy with enforceable boundaries creates infrastructure.\n\nI'm particularly interested in how the ecosystem will handle permission inheritance across multiple levels of agent delegation. That could become one of the defining challenges of agent to agent commerce.\n\nhttps://t.co/VjkfeE0Fet",
-          "url": "https://x.com/nokaramo/status/2122194098090135646",
-          "platform": "x"
-        }
-      ],
-      "linked_tool": {
-        "id": "wf_deepseek_r1_ollama_local_sota",
-        "name": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
-        "desc_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
-        "desc_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Ollama / OpenWebUI / vLLM",
-        "config_filename": "Modelfile.deepseek-r1-opt"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_alibaba_qwen4_max_closed_source_shift",
-      "stance_matrix": {
-        "pro_point_zh": "2.4T MoE的高昂训练与推理成本决定了顶级旗舰必须闭源以建立商业护城河；主动清洗核生化网络高危数据是跨国合规与企业级落地的绝对前提。",
-        "pro_author": "阿里云系统架构师与企业安全合规团队",
-        "con_point_zh": "将真正领先的超大模型闭源是对开源生态的背刺；过度清洗预训练数据如同自我阉割，不仅损害代码推理与网络安全防御测试，更削弱了底层泛化智能。",
-        "con_author": "开源社区核心贡献者与白帽安全极客",
-        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "Hosting a 2.4T parameter MoE requires commercial monetization via API. Rigorously filtering CBRN and cyber vectors is indispensable for enterprise procurement and global regulatory clearance.",
-        "con_point_en": "Withholding weights betrays the open-source ethos that built Qwen's reputation. Over-sanitizing cyber capabilities cripples defensive security research and blunts raw problem-solving reasoning.",
-        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
-      }
-    },
-    {
-      "topic_id": "topic_trump_ai_national_champions_export_controls",
-      "heat_score": 9.5,
-      "badge_zh": "💡 商业与政策风暴",
-      "badge_en": "💡 Policy & Monopoly Pivot",
-      "category_tag_zh": "地缘科技与寡头垄断",
-      "category_tag_en": "Geopolitics & Industrial Monopolies",
-      "title_zh": "特朗普拟钦定24家AI国家冠军，国会欲断供中资海外云端算力",
-      "title_en": "White House Drafts 24 AI 'National Champions' as Congress Moves to Ban Remote GPU Access",
-      "summary_zh": "特朗普政府拟指定英伟达、微软、OpenAI及Anthropic等24家巨头为AI“国家冠军”，以国家主权背书护航其海外竞标；与此同时国会跨党派推动法案封堵中企通过海外云数据中心租用高端GPU漏洞。此举意味着AI全球化彻底终结，由白宫背书的寡头联合体与云端铁幕正式降临。",
-      "summary_en": "The Trump administration is preparing to designate 24+ tech giants—including Nvidia, Microsoft, OpenAI, and Anthropic—as AI 'National Champions' for overseas dominance, while Congress advances bipartisan bills to block Chinese firms from accessing cloud GPUs abroad, formalizing a state-backed AI oligopoly.",
-      "perspective_pro": {
-        "role_zh": "🟢 经济民族主义派 / 国家战略智囊",
-        "role_en": "🟢 Economic Nationalists & Defense Strategists",
-        "speaker_zh": "美国商务部战略顾问与智库地缘学者",
-        "speaker_en": "Commerce Department Advisors & Geopolitical Strategists",
-        "point_zh": "大国博弈已进入算力终局战，通过行政特权抱团出海、严堵海外云端套利黑洞，才能确保西方在超级智能基础设施和标准制定中的绝对主导权。",
-        "point_en": "National champion designation unifies state power with leading frontier labs. Closing offshore cloud loopholes is vital to maintaining technological containment in critical AI infrastructure."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 自由市场派 / 全球去中心化倡导者",
-        "role_en": "🔴 Free-Market Advocates & Cloud Neutrality Allies",
-        "speaker_zh": "国际反垄断学者与跨国云服务商高管",
-        "speaker_en": "Antitrust Economists & Global Cloud Providers",
-        "point_zh": "钦定国家冠军将直接扼杀初创公司创新的公平竞争环境，沦为既得利益寡头的寻租护城河；按国籍切断全球云网络更将引发算力供应链割裂与报复反噬。",
-        "point_en": "Hand-picking corporate champions entrench rent-seeking monopolies and crushes independent startups, while weaponizing cloud access balkanizes the global internet architecture."
-      },
-      "linked_news": [
-        {
-          "id": "fa00193c31fcd3f2",
-          "title_zh": "美国国会拟立法封堵AI芯片海外云端访问漏洞",
-          "title_en": "Tighter AI chip export rules are gaining bipartisan support in Congress, including a bill to block Chinese companies from accessing chips overseas (Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/3062790a-553d-41b8-9c7d-bae17b9d2e29",
-          "image_url": "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F97aedcac-5972-4bd6-a1ef-e01686398dfa.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
-          "hot_score": 5,
-          "published_at": "2026-11-16T06:05:00+00:00"
-        },
-        {
-          "id": "2a49bb0455c9cb0c",
-          "title_zh": "美拟设立AI国家冠军企业名单",
-          "title_en": "Sources: the Trump admin plans to name Nvidia, Amazon, Microsoft, OpenAI, and Anthropic among 24+ AI \"national champions\" to help them win overseas business (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/ai/trump-administration-to-name-nvidia-among-ai-national-champions-c9284344",
-          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
-          "hot_score": 5,
-          "published_at": "2026-11-16T04:40:00+00:00"
-        },
-        {
-          "id": "082d6282947a9a80",
-          "title_zh": "特朗普政府拟确立人工智能国家冠军企业名单",
-          "title_en": "Sources: the Trump admin plans to name Nvidia, Amazon, Microsoft, OpenAI, and Anthropic among 24+ AI \"national champions\" to help them win overseas business (Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "url": "https://www.wsj.com/tech/ai/trump-administration-to-name-nvidia-among-ai-national-champions-c9284344?st=e6my7o&reflink=desktopwebshare_permalink",
-          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
-          "hot_score": 5,
-          "published_at": "2026-11-16T04:40:00+00:00"
-        }
-      ],
-      "linked_tweets": [
-        {
-          "id": "62ab180611f84c6a",
-          "author": "BingX",
-          "author_handle": "@BingXOfficial",
-          "author_avatar": "https://pbs.twimg.com/profile_images/2063904398275952640/ljTsEnr0_normal.jpg",
-          "content_zh": "#Anthropic，有史以来最大的#AI IPO？\n我们周四就会知道👀\n\n降低第一天 $ANT 价格",
-          "content_en": "#Anthropic, the biggest #AI IPO ever? \nWe'll find out on Thursday 👀 \n\nDrop your day-one $ANT price 👇 https://t.co/yIUpKxfjrr",
-          "url": "https://x.com/BingXOfficial/status/2122242050024231203",
+          "id": "ec025d87620f65d2",
+          "author": "Zilliqa",
+          "author_handle": "@zilliqa",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2118291694491664384/uBZfmE2D_normal.jpg",
+          "content_zh": "人工智能代理会付钱给你。哪家公司在背后支持，它可以做什么？\n\n钱包地址不能说。 vLEI 可以。\n\n这就是 Zilliqa Layer 2 的初衷。我们的 AI 代理主管 Zara 的目标是成为第一个拥有 vLEI 的代理。\n\nZilliqa：每个特工都被命名、确定并负责。 🖤",
+          "content_en": "An AI agent pays you. Which company is behind it, and what is it allowed to do?\n\nA wallet address can’t say. A vLEI can.\n\nThat’s the world the Zilliqa Layer 2 is built for. Zara, our head of AI agents, aims to be the first agent on it with a vLEI.\n\nZilliqa: every agent named, identified and accountable. 🖤",
+          "url": "https://x.com/zilliqa/status/2122283992024060359",
           "platform": "x"
         }
       ],
@@ -301,20 +187,122 @@
         "config_filename": "claude_desktop_config.json"
       },
       "linked_counts": {
-        "news": 3,
-        "tweets": 1,
+        "news": 2,
+        "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_trump_ai_national_champions_export_controls",
+      "id": "topic_ai_agent_financial_breach_and_defense_clash",
       "stance_matrix": {
-        "pro_point_zh": "大国博弈已进入算力终局战，通过行政特权抱团出海、严堵海外云端套利黑洞，才能确保西方在超级智能基础设施和标准制定中的绝对主导权。",
-        "pro_author": "美国商务部战略顾问与智库地缘学者",
-        "con_point_zh": "钦定国家冠军将直接扼杀初创公司创新的公平竞争环境，沦为既得利益寡头的寻租护城河；按国籍切断全球云网络更将引发算力供应链割裂与报复反噬。",
-        "con_author": "国际反垄断学者与跨国云服务商高管",
-        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
-        "pro_point_en": "National champion designation unifies state power with leading frontier labs. Closing offshore cloud loopholes is vital to maintaining technological containment in critical AI infrastructure.",
-        "con_point_en": "Hand-picking corporate champions entrench rent-seeking monopolies and crushes independent startups, while weaponizing cloud access balkanizes the global internet architecture.",
-        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
+        "pro_point_zh": "面对机器速度发起的自动化渗透，人类SOC团队注定溃败，必须以模型对抗模型；依托数字身份凭证规范化越权边界，才是支撑企业自主工作流的唯一未来。",
+        "pro_author": "NEA与Corma网络安全模型研究团队",
+        "con_point_zh": "AI Agent缺乏形式化数学约束与严格权限隔离，在涉及客户资产转移与关键凭证时出现的幻觉与越权，将直接诱发系统性金融踩踏并击穿法遵底线。",
+        "con_author": "美联储监管委员会与金融安全风控专家",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "Against machine-speed cyber warfare, human intervention fails. Enterprise workflows must adopt specialized autonomous defense agents and cryptographic credentials to establish self-healing perimeters.",
+        "con_point_en": "AI agents lack deterministic verification. Allowing autonomous systems to orchestrate financial transactions and security perimeters invites prompt injections and catastrophic compliance failures.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+      }
+    },
+    {
+      "topic_id": "topic_vibe_coding_productivity_paradox_crisis",
+      "heat_score": 9.5,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "代码经济学与系统债务",
+      "category_tag_en": "Code Economics & Technical Debt",
+      "title_zh": "代码狂欢遭遇哈佛生产力悖论：代码廉价化让系统验证成无底洞",
+      "title_en": "Harvard Exposes AI Productivity Paradox as Cheap Code Hits Verification Bottleneck",
+      "summary_zh": "尽管一人零经验凭Vibe-coding在48小时赚得35万美元，但哈佛最新研究指出企业斥巨资引入AI后真实生产力并未爆发。随着生成代码边际成本无限趋近于零，审查与验证成为算力与认知黑洞，潜伏软件缺陷更接连酿成微软全球级网关大瘫痪。",
+      "summary_en": "While solo vibe-coders celebrate making $356K in 48 hours, a new Harvard study reveals corporate AI investments have failed to deliver expected productivity gains. As code generation collapses in cost, verification has emerged as an intractable bottleneck, exposing infrastructure to latent systemic defects.",
+      "perspective_pro": {
+        "role_zh": "🟢 Vibe-Coding敏捷创新派",
+        "role_en": "🟢 Vibe-Coding & Agentic Builders",
+        "speaker_zh": "独立开发者与AI原生应用架构师",
+        "speaker_en": "Indie Hackers & Next-Gen Framework Architects",
+        "point_zh": "代码门槛彻底瓦解释放了十倍速商业交付能力，单兵作战即可跑通商业验证闭环；验证难题只是暂时阵痛，多智能体协同纠错能终结传统工程堆人模式。",
+        "point_en": "AI-native generation obliterates traditional engineering overhead, empowering non-technical founders to build revenue-generating systems in hours. Multi-agent validation loops will resolve code review friction."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 工业软件理性派",
+        "role_en": "🔴 Software Engineering Purists",
+        "speaker_zh": "资深软件架构师与哈佛工程研究团队",
+        "speaker_en": "Veteran Tech Leads & Harvard Enterprise Research Group",
+        "point_zh": "写代码变廉价但懂代码变极度昂贵，未经严密架构推演的AI补全正在生产数以亿计的技术垃圾；隐性逻辑漏洞长期潜伏，终将在企业级底层引发灾难性宕机。",
+        "point_en": "Generating code is cheap; verifying and debugging it is brutally expensive. Unvetted AI slop pollutes enterprise repos, building massive latent debt that triggers catastrophic infrastructure outages."
+      },
+      "linked_news": [
+        {
+          "id": "12b1e5bae13adf42",
+          "title_zh": "初步报告：微软将 365 和 Exchange 重大中断归因于 2026 年 7 月网络网关服务器更新中引入的软件缺陷",
+          "title_en": "Preliminary report: Microsoft attributes a major 365 and Exchange outage to a software defect introduced in a July 2026 update for network gateway servers (Richard Speed/The Register)",
+          "source": "The Register",
+          "url": "https://www.theregister.com/saas/2026/11/16/microsoft-blames-monster-email-outage-on-software-defect-introduced-in-july-fix/5310026",
+          "image_url": "https://image.theregister.com/254046.jpg?imageId=254046&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+          "hot_score": 3,
+          "published_at": "2026-11-16T12:10:00+00:00"
+        },
+        {
+          "id": "bbd698665151512d",
+          "title_zh": "构建可在整个企业中发挥作用的人工智能",
+          "title_en": "Building AI that can work across the enterprise",
+          "source": "MIT Tech Review",
+          "url": "https://www.technologyreview.com/2026/11/16/1146070/building-ai-that-can-work-across-the-enterprise/",
+          "image_url": "https://wp.technologyreview.com/wp-content/uploads/2026/10/MITTRInfosysSAP-social-card.png?resize=1200,600",
+          "hot_score": 3,
+          "published_at": "2026-11-16T13:00:00+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "c857feb6dfe66d9f",
+          "author": "Gergely Orosz",
+          "author_handle": "@GergelyOrosz",
+          "author_avatar": "https://pbs.twimg.com/profile_images/673095429748350976/ei5eeouV_normal.png",
+          "content_zh": "当生成代码变得便宜而验证它是困难的部分时，软件工程会是什么样子？一个罕见的播客，关注与构建软件相关的一切，由@satyanadella 主持。 时间戳：\n\n00:00 简介\n02:12 微软的开源转变\n04:15 公开构建 VS Code\n05:55 副驾驶、光标和 Claude Code\n09:52 决策引擎\n12:32 验证人工智能生成的代码\n15:39 软件工厂\n20:45 将人工智能引入现有产品\n24:06 为什么采用 AI 与采用 React 不同\n26:29 软件工程师角色的变化\n29:25 微软的自愿退出要约\n34:05 AI焦虑和角色转变\n36:35 初级招聘\n42:36 开放模特\n45:39 拥有你的人工智能基础设施\n51:21 建立对人工智能代理的信任\n53:48 本地模型和混合智能\n56:39 微软的模型策略\n59:26 给工程师的建议\n1:01:21 结束要点\n\n为您带来：\n\n• @turbopuffer – 基于对象存储构建的矢量和全文搜索引擎。它快速、便宜且可扩展性极强。 （我用它构建了一个大大改进的播客/新闻搜索，请查看：）\n\n• @ Linear – 团队和代理的产品开发系统。\n\n• @WorkOS – 让您的应用程序为企业做好准备所需的一切。\n\nSatya 的 3 个有趣要点：\n\n1. 一种新的软件工程形式：团队构建软件工厂来改进他们的工作。\n\nSatya 引用了 Azure 网络团队的例子，该团队管理着 500 多家光纤网络运营商，并且最近构建了一个代理系统来更好地管理电子邮件和流程。现在，他们的运营效率大大提高了。 Satya 认为这是“人工智能转型”的现实：棕地致力于建设软件工厂，以改善团队的运作方式，同时继续日常工作。\n\n2.“拥有情报”：避免锁定并将代理视为内部风险。\n\nSatya 警告公司要避免与任何单一模型提供商锁定，确保线束、内存和模型不耦合，以便可以轻松更改。他还认为更多的公司应该考虑使用开放模型来保护其核心知识产权（IP）免遭泄露，并建立私人评估来决定使用和升级到哪些模型。他还表示，模型是智能的，但不可靠，因此最好将它们视为“内部风险”，并构建一个单独的系统来验证代理系统是否按预期工作。\n\n3. 这些自愿退出要约是怎么回事？\n\n我直接问萨提亚，为什么微软最近向大多数软件工程师提出了自愿退出的提议，这在公司历史上还是第一次。我还想知道这是否意味着将来会裁员。不出所料，他的回答很外交，但在播客中我以更直接的方式重申了我听到的内容。",
+          "content_en": "What does software engineering look like when generating the code becomes cheap and verifying it is the hard part? A rare podcast focused on everything around building software, with @satyanadella.  Timestamps:\n\n00:00 Intro\n02:12 Microsoft’s open-source shift\n04:15 Building VS Code in the open\n05:55 Copilot, Cursor, and Claude Code\n09:52 Decision engines\n12:32 Verifying AI-generated code\n15:39 The software factory\n20:45 Bringing AI to existing products\n24:06 Why adopting AI is different to adopting React\n26:29 The changing role of software engineers\n29:25 Microsoft’s voluntary exit offers\n34:05 AI anxiety and changing roles\n36:35 Junior hiring\n42:36 Open models\n45:39 Owning your AI infrastructure\n51:21 Building trust in AI agents\n53:48 Local models and hybrid intelligence\n56:39 Microsoft’s model strategy\n59:26 Advice for engineers\n1:01:21 Closing takeaways\n\nBrought to you by:\n\n• @turbopuffer  – a vector and full-text search engine built on object storage. It’s fast, cheap, and extremely scalable. https://t.co/w9y67Gs8ab (I built a greatly improved podcast/newseltter search with it, check it out: https://t.co/6zbxlEaHlu)\n\n• @linear  – the product development system for teams and agents. https://t.co/knIF2mcz9p\n\n• @WorkOS  – everything you need to make your app enterprise-ready. https://t.co/aiAee0oF5h\n\n3 interesting takeaways from Satya:\n\n1. A new form of software engineering: teams building software factories to improve their work. \n\nSatya cites the Azure networking team which manages 500+ fiber network operators and recently built an agentic system to better manage emails and processes. Now, they operate much more efficiently as a result. Satya sees this as the reality of “AI transformation”: brownfield work on building software factories to improve how teams operate, all while continuing the day-to-day work.\n\n2. “Own the intelligence”: avoid lock-in & treat agents as an insider risk. \n\nSatya cautions companies to avoid lock-in with any single model provider by ensuring that the harness, memory, and model are not coupled, so that they can be changed with ease. He also thinks more companies should consider using open models as a way to protect their core intellectual property (IP) from leaking out, and build private evals to decide what models to use and upgrade to. He also says that models are intelligent but unreliable, so it’s best to treat them as “insider risks” and build a separate system to verify that agentic systems work as expected.\n\n3. What’s with those voluntary exit offers? \n\nI asked Satya directly why Microsoft recently made voluntary exit offers to most of its software engineers for the first time in the company’s history. I also wanted to know if it could mean layoffs in the future. Unsurprisingly, his reply was diplomatic, but in the podcast I rehashed what I heard in a more direct way.",
+          "url": "https://x.com/GergelyOrosz/status/2122324513211728161",
+          "platform": "x"
+        },
+        {
+          "id": "173fd4cc65e794dc",
+          "author": "RaArΞs ⚓️",
+          "author_handle": "@RaAres",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1944716390566338561/SkeGuWj5_normal.jpg",
+          "content_zh": "公司在人工智能上花费了数百万美元，期望生产力爆炸式增长\n\n但哈佛大学的一项新研究发现了一些完全不同的东西\n\n这项研究在 5 年内跟踪了 718 家公司和大约 3 亿个数据点。\n\n研究结果有点有趣。\n\n采用人工智能编码工具后，开发人员：\n\ni) 多编写 30% 的代码行\n\nii) 多提交 20% 的代码\n\niii) 增加 23% 的拉取请求\n\n听起来生产力正在飞速增长，对吗？\n\n除了已完成的项目和已完成的 Jira 任务几乎没有变化...AF 怎么样？\n\n▫️ 显然，编写代码所节省的时间都花在了其他地方。\n\nPull 请求的批准时间延长了 49%，\n审稿人多留下了 35% 的评论\n审查期间需要更改的代码加倍\n\n说得通。\n\n人工智能可以在几分钟内生成数千行，但仍然需要有人审查、测试和批准它们。\n\n甚至提到亚马逊的服务中断与人工智能辅助代码有关，此后该公司引入了更严格的人工审查。\n\n▫️ 编码之外的事情也是一样的。\n\n> 使用人工智能抄写员的医生节省了写笔记的时间，但花更多的时间来完成这些笔记。\n\n> 律师事务所因虚假人工智能引文而面临处罚，而德勤则不得不部分退还包含类似问题的政府报告。\n\n▫️ 与此同时，公司已经以人工智能效率的名义进行裁员。\n\n美国运通宣布裁员 5%，为人工智能做准备，而微软则向 6 万名员工提供自愿离职方案。\n\n哈佛大学的研究发现几乎没有证据表明更快的编码可以转化为更多成品软件或需要更少的员工......\n\n我的意思是，vibe 编码很棒，但开发工作尚未完成......\n\n有些人仍然需要审查，修复错误，测试所有内容，并确保它不会破坏其他东西......\n\n我认为开发人员我们会安全一段时间",
+          "content_en": "companies are spending millions on AI, expecting productivity to explode\n\nbut a new Harvard study found something quite different 👇\n\nthis sstudy tracked 718 companies & around 300m data points over 5 years.\n\nthe findings are kinda interesting.\n\nafter adopting AI coding tools, devs were:\n\ni) writing 30% more lines of code\n\nii) committing 20% more code\n\niii) opening 23% more pull requests\n\nsounds like productivity is going through the roof, right?\n\nexcept completed projects & finished Jira tasks BARELY CHANGED... HOW THE AF? \n\n▫️ apparently, the time saved writing code went somewhere else.\n\npull requests took 49% longer to approve, \nreviewers left 35% more comments \n& code needing changes during review doubled\n\nmakes sense tbh.\n\nAI can generate 1000s of lines in minutes, but someone still needs to review, test & approve them.\n\nthere is even a mention of Amazon outage linked to AI-assisted code, after which the company introduced stricter human reviews.\n\n▫️ same thing outside coding.\n\n> doctors using AI scribes saved time writing notes, but spent more of their patient visits finishing those notes.\n\n> law firms faced penalties over fake AI citations, while Deloitte had to partially refund a government report containing similar problems.\n\n▫️ meanwhile, companies are already cutting jobs in the name of AI efficiency.\n\nAmerican Express announced 5% workforce cuts to prepare for AI, while Microsoft offered voluntary exit packages to 60,000 workers.\n\nand the Harvard study found little evidence that faster coding translated into more finished software or fewer employees needed...\n\ni mean, vibe coding is great, but devs work isn't done yet... \n\nsomeomne still needs to review, fix the mistakes, test everything, and make sure it doesn't break something else...\n\ni think devs we'll be safe for a while",
+          "url": "https://x.com/RaAres/status/2122314424706818346",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 2,
+        "has_tool": true
+      },
+      "id": "topic_vibe_coding_productivity_paradox_crisis",
+      "stance_matrix": {
+        "pro_point_zh": "代码门槛彻底瓦解释放了十倍速商业交付能力，单兵作战即可跑通商业验证闭环；验证难题只是暂时阵痛，多智能体协同纠错能终结传统工程堆人模式。",
+        "pro_author": "独立开发者与AI原生应用架构师",
+        "con_point_zh": "写代码变廉价但懂代码变极度昂贵，未经严密架构推演的AI补全正在生产数以亿计的技术垃圾；隐性逻辑漏洞长期潜伏，终将在企业级底层引发灾难性宕机。",
+        "con_author": "资深软件架构师与哈佛工程研究团队",
+        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
+        "pro_point_en": "AI-native generation obliterates traditional engineering overhead, empowering non-technical founders to build revenue-generating systems in hours. Multi-agent validation loops will resolve code review friction.",
+        "con_point_en": "Generating code is cheap; verifying and debugging it is brutally expensive. Unvetted AI slop pollutes enterprise repos, building massive latent debt that triggers catastrophic infrastructure outages.",
+        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
       }
     }
   ]
