@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-16 15:05:24 UTC",
+  "generated_at": "2026-11-16 15:35:36 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-16 15:05:25 UTC",
+      "updated_at": "2026-11-16 15:35:37 UTC",
       "headline_item": {
-        "id": "f5087d885ca8efeb",
+        "id": "d5bc5f032f5215fa",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达CEO黄仁勋任免风波与地缘监管疑云",
-        "title_en": "President Trump says he \"would not mind\" the reinstatement of Jensen Huang as Nvidia CEO and \"I don't know that she was a spy at all\", referencing Alice Huang (Emily Goodin/New York Post)",
-        "source": "New York Post",
-        "published_at": "2026-11-16T14:55:00+00:00",
-        "url": "https://nypost.com/2026/11/16/us-news/trump-would-not-mind-jensen-huang-returning-as-nvidia-ceo/",
-        "event_summary_zh": "针对黄仁勋因私人关系辞任英伟达CEO一事，白宫表态不排斥其回归，并对涉事人员背景评价持审慎态度",
-        "event_summary_en": "Nvidia CEO Jensen Huang resigned following a scandal involving a romantic entanglement with a suspected foreign intelligence asset, triggering a Silicon Valley lobbying effort for his reinstatement. The White House recently signaled no opposition to his potential return, while questioning intelligence assessments regarding the individual's alleged espionage ties.",
+        "title_zh": "Anthropic揭示AI代理记忆优化核心：减法胜于加法",
+        "title_en": "Anthropic says the key to agent memory is knowing what to forget, not how much to store",
+        "source": "THE DECODER",
+        "published_at": "2026-11-16T15:25:48+00:00",
+        "url": "https://the-decoder.com/anthropic-says-the-key-to-agent-memory-is-knowing-what-to-forget-not-how-much-to-store/",
+        "event_summary_zh": "Anthropic通过Pokémon游戏测试发现，AI代理的长程记忆效能取决于精简信息存储，而非冗余存档，引入“睡眠复盘”机制可修正记忆偏差",
+        "event_summary_en": "Anthropic research indicates that Claude models improve agent performance by optimizing selective memory rather than exhaustive archival, as redundant storage leads to inefficient metadata management. Implementing a 'dreaming' review mechanism, which checks past notes against raw transcripts, effectively mitigates logical loops caused by false memories.",
         "core_facts_zh": [
-          "【核心事件】唐纳德·特朗普（美国总统）、黄仁勋（前英伟达CEO）在白宫离境简报会：表态不排斥黄仁勋回归英伟达，并对情报机构的“间谍”指控持保留意见",
-          "【起因与机理】因私人关系导致核心科技企业权力真空，引发硅谷游说压力与地缘安全审查博弈",
-          "【调查与监管诉求】黄仁勋因私人关系辞职引发硅谷高层震动。",
-          "【各方立场与态度】企业权力架构与国家安全审查的博弈进入关键平衡期。"
+          "【核心事件】Anthropic（AI研究机构）：验证选择性存储对AI代理长程任务的重要性，并引入自我审计纠偏技术",
+          "【起因与机理】解决AI代理在多会话任务中因记忆过载和虚假记忆导致的性能瓶颈",
+          "【调查与监管诉求】代理任务中选择性记录优于冗余备份。",
+          "【行业影响与走向】长程记忆效率直接影响复杂任务执行率。"
         ],
         "core_facts_en": [
-          "[Core Event] Donald Trump (US President), Jensen Huang (Former Nvidia CEO) (White House departure briefing): Signals openness to Huang's reinstatement and skepticism regarding intelligence agencies' espionage claims.",
-          "[Root Cause & Mechanism] Vacuum in core tech leadership triggered intense lobbying and geopolitical security scrutiny.",
-          "[Key Fact Detail] Jensen Huang's resignation triggers Silicon Valley lobbying.",
-          "[Key Position & Outlook] A critical balancing act between corporate governance and national security oversight."
+          "[Core Event] Anthropic: Validation of selective storage importance and implementation of self-correction mechanisms",
+          "[Root Cause & Mechanism] Addressing performance bottlenecks caused by memory overload and hallucinations in multi-session tasks",
+          "[Key Technical Spec] Selective recording outperforms exhaustive backup in agent tasks.",
+          "[Key Position & Outlook] Long-term memory efficiency correlates directly with complex task completion."
         ],
-        "industry_impact_zh": "英伟达作为全球AI算力基础设施的核心，其最高管理层的变动直接关联国家级技术供应链安全。政府的表态反映出在当前半导体技术封锁与地缘博弈背景下，维持企业核心技术迭代的稳定性被置于个人合规瑕疵之上，体现了典型的‘战略性容忍’逻辑。",
-        "industry_impact_en": "As a cornerstone of global AI infrastructure, leadership flux at Nvidia poses systemic risks to supply chain stability. The administration's stance underscores a prioritization of technical continuity over individual compliance failures, revealing a strategic tolerance logic in the face of semiconductor hegemony and geopolitical containment."
+        "industry_impact_zh": "AI代理的性能瓶颈已从模型推理算力转向长程上下文的“信息熵”管理。商业化应用中，构建具备自我清理与交叉验证能力的记忆系统，将成为区分通用对话机器人与高阶自动化代理的分水岭。",
+        "industry_impact_en": "The performance bottleneck for AI agents is shifting from raw inference capacity to the management of 'information entropy' in long-range context. Building memory systems capable of self-purging and cross-verification will define the threshold between conversational bots and high-level autonomous agents."
       },
       "headlines": [
+        {
+          "id": "d5bc5f032f5215fa",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Anthropic揭示AI代理记忆优化核心：减法胜于加法",
+          "title_en": "Anthropic says the key to agent memory is knowing what to forget, not how much to store",
+          "source": "THE DECODER",
+          "published_at": "2026-11-16T15:25:48+00:00",
+          "url": "https://the-decoder.com/anthropic-says-the-key-to-agent-memory-is-knowing-what-to-forget-not-how-much-to-store/",
+          "event_summary_zh": "Anthropic通过Pokémon游戏测试发现，AI代理的长程记忆效能取决于精简信息存储，而非冗余存档，引入“睡眠复盘”机制可修正记忆偏差",
+          "event_summary_en": "Anthropic research indicates that Claude models improve agent performance by optimizing selective memory rather than exhaustive archival, as redundant storage leads to inefficient metadata management. Implementing a 'dreaming' review mechanism, which checks past notes against raw transcripts, effectively mitigates logical loops caused by false memories.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic（AI研究机构）：验证选择性存储对AI代理长程任务的重要性，并引入自我审计纠偏技术",
+            "【起因与机理】解决AI代理在多会话任务中因记忆过载和虚假记忆导致的性能瓶颈",
+            "【调查与监管诉求】代理任务中选择性记录优于冗余备份。",
+            "【行业影响与走向】长程记忆效率直接影响复杂任务执行率。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Anthropic: Validation of selective storage importance and implementation of self-correction mechanisms",
+            "[Root Cause & Mechanism] Addressing performance bottlenecks caused by memory overload and hallucinations in multi-session tasks",
+            "[Key Technical Spec] Selective recording outperforms exhaustive backup in agent tasks.",
+            "[Key Position & Outlook] Long-term memory efficiency correlates directly with complex task completion."
+          ],
+          "industry_impact_zh": "AI代理的性能瓶颈已从模型推理算力转向长程上下文的“信息熵”管理。商业化应用中，构建具备自我清理与交叉验证能力的记忆系统，将成为区分通用对话机器人与高阶自动化代理的分水岭。",
+          "industry_impact_en": "The performance bottleneck for AI agents is shifting from raw inference capacity to the management of 'information entropy' in long-range context. Building memory systems capable of self-purging and cross-verification will define the threshold between conversational bots and high-level autonomous agents."
+        },
+        {
+          "id": "e5ca2bb5e3039fe8",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "险资深度介入AI融资，隐性杠杆风险攀升",
+          "title_en": "Moody's: major US life insurers like Athene held $85.2B in AI debt as of June 30, up 24% from December 31, and the figure could rise to $185B by the end of 2027 (New York Times)",
+          "source": "New York Times",
+          "published_at": "2026-11-16T15:10:04+00:00",
+          "url": "https://www.nytimes.com/2026/11/16/business/insurance-ai-debt.html",
+          "event_summary_zh": "美国寿险业AI债持仓半年暴增24%至852亿美元，且呈现出通过SPV绕道借贷的复杂化趋势，引发金融稳定性监管担忧",
+          "event_summary_en": "As of June 30, major US life insurers like Athene held $85.2 billion in AI-related debt, a 24% increase within six months, with projections reaching $185 billion by 2027. Tech giants are utilizing complex Special Purpose Vehicles (SPVs) to offload computing procurement debt, concentrating risk among a few vendors and sparking concerns regarding the stability of insurance capital exposures.",
+          "core_facts_zh": [
+            "【核心事件】Athene、Corebridge Financial（寿险公司）、Moody's（评级机构）在美国金融信贷与科技基础设施融资市场：保险机构通过债权投资深度参与AI算力建设，总额达852亿美元",
+            "【起因与机理】科技巨头寻求绕过常规财报资产负债表实现大规模芯片与算力设施融资",
+            "【关键数据与实测】寿险资金AI持债额半年激增至852亿美元。",
+            "【行业影响与走向】风险高度依赖少数头部算力供应商的偿付能力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Athene, Corebridge Financial, Moody's: Insurance firms are heavily invested in AI infrastructure debt, reaching $85.2 billion",
+            "[Root Cause & Mechanism] Tech giants are seeking off-balance-sheet financing for large-scale chip and compute procurement",
+            "[Key Metrics] AI debt holdings by life insurers surged to $85.2B in six months.",
+            "[Industry Impact & Outlook] Risk concentration on the solvency of a few top-tier compute suppliers."
+          ],
+          "industry_impact_zh": "寿险资金的入局标志着AI资本支出已突破常规风险投资基金的范畴，开始通过信贷机制渗透进核心金融系统。此类债务的本质是对少数几家芯片及云巨头的无条件信任，一旦发生研发延迟或技术迭代失效，将形成跨行业的信用传染风险。",
+          "industry_impact_en": "The infusion of life insurance capital signifies that AI capital expenditures have transcended traditional venture capital, infiltrating the core financial system via credit mechanisms. These debt instruments rely heavily on the unconditioned solvency of a few hardware and cloud titans, creating significant cross-industry systemic risk in the event of technology cycle failures."
+        },
         {
           "id": "f5087d885ca8efeb",
           "tag_zh": "📰 业界动态",
@@ -57,112 +109,61 @@
           ],
           "industry_impact_zh": "英伟达作为全球AI算力基础设施的核心，其最高管理层的变动直接关联国家级技术供应链安全。政府的表态反映出在当前半导体技术封锁与地缘博弈背景下，维持企业核心技术迭代的稳定性被置于个人合规瑕疵之上，体现了典型的‘战略性容忍’逻辑。",
           "industry_impact_en": "As a cornerstone of global AI infrastructure, leadership flux at Nvidia poses systemic risks to supply chain stability. The administration's stance underscores a prioritization of technical continuity over individual compliance failures, revealing a strategic tolerance logic in the face of semiconductor hegemony and geopolitical containment."
-        },
-        {
-          "id": "7b0269daaa7c43f7",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "首个完全自主化AI漏洞挖掘框架现身",
-          "title_en": "Google's TIG reports the first observed instance of attackers using an autonomous AI framework with no human in the loop to turn security patches into exploits (Duncan Riley/SiliconANGLE)",
-          "source": "SiliconANGLE",
-          "published_at": "2026-11-16T14:40:01+00:00",
-          "url": "https://siliconangle.com/2026/11/16/google-says-an-ai-framework-turned-security-patches-into-exploits-with-no-human-in-the-loop/",
-          "event_summary_zh": "谷歌威胁情报小组发现攻击者利用无需人工干预的AI框架，实现对软件补丁的自动化漏洞挖掘与利用",
-          "event_summary_en": "Google Threat Intelligence Group (GTIG) identified 'exploit_agent,' the first fully autonomous framework that executes the entire loop of patch-to-exploit creation without human intervention. By connecting frontier and local LLMs, attackers automate vulnerability analysis of patches and generate exploits, targeting web applications in the media and education sectors.",
-          "core_facts_zh": [
-            "【核心事件】谷歌威胁情报小组（GTIG）在暴露的暂存服务器：首次发现无人工干预的自动化AI漏洞挖掘框架，能够实现补丁分析至自动化漏洞生成的全链路攻击",
-            "【起因与机理】利用大型语言模型处理已知补丁逻辑的效率远超人工寻找零日漏洞",
-            "【核心事实细节】首次发现无需人类介入的完全自主攻击AI框架。",
-            "【各方立场与态度】网络安全防御门槛因攻方效率暴增而被迫重构。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google Threat Intelligence Group (GTIG) (Exposed staging server): Discovery of the first human-in-the-loop-free AI exploit framework for continuous vulnerability analysis and automatic code execution.",
-            "[Root Cause & Mechanism] LLMs provide superior efficiency in exploit development via n-day vulnerability analysis compared to traditional zero-day hunting.",
-            "[Regulatory & Investigation Focus] First discovery of a fully autonomous AI attack framework.",
-            "[Key Position & Outlook] Forced reconfiguration of security defenses against high-efficiency automated threats."
-          ],
-          "industry_impact_zh": "该现象标志着网络攻防进入‘代理人战争’阶段，即通过自动化Agent的规模化部署极大地压缩了N-day漏洞的利用窗口。随着防御侧与攻击侧同时使用大模型，漏洞披露后的响应速度与自动化修复能力将决定企业安全体系的存亡。",
-          "industry_impact_en": "This development signals a shift to 'agentic warfare' in cybersecurity, where large-scale autonomous deployments drastically shrink the exploitation window for n-day vulnerabilities. With both sides leveraging LLMs, the race between automated vulnerability creation and automated remediation becomes the decisive factor in organizational security resilience."
-        },
-        {
-          "id": "8296c6e4f9661c29",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Knit Health 利用其人工智能世界模型来预测患者护理需求、预测治疗影响并优化转诊，筹集了由 NEA (Will Maddox/Axios) 牵头的 3500 万美元 A 轮融资",
-          "title_en": "Knit Health, which uses its AI world model to predict patient care needs, forecast treatment impacts, and optimize referrals, raised a $35M Series A led by NEA (Will Maddox/Axios)",
-          "source": "Axios",
-          "published_at": "2026-11-16T14:35:05+00:00",
-          "url": "https://www.axios.com/pro/health-tech-deals/2026/11/16/knit-health-35m-ai-patient-referrals",
-          "event_summary_zh": "Knit Health 是一家旨在优化患者转诊的初创公司，首席执行官 Jonathan Kolstad 独家告诉 Axios Pro，该公司已筹集了 3500 万美元的 A 轮融资。总体情况：投资者押注人工智能能够预测患者下一步的健康需求，而不是简单地记录他们当前的健康需求",
-          "event_summary_en": "Knit Health, a startup aiming to optimize patient referrals, raised a $35 million Series A round, CEO Jonathan Kolstad tells Axios Pro exclusively.\n\nThe big picture: Investors are betting on AI that predicts patients' next health needs, rather than simply documenting their current ones.",
-          "core_facts_zh": [
-            "【核心事件】Knit Health 利用其人工智能世界模型来预测患者护理需求、预测治疗影响并优化转诊，筹集了由 NEA (Will Maddox/Axios) 牵头的 3500 万美元 A 轮融资",
-            "【起因与机理】巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
-            "【关键数据与实测】Knit Health 是一家旨在优化患者转诊的初创公司，首席执行官 Jonathan Kolstad 独家告诉 Axios Pro，该公司已筹集了 3500 万美元的 A 轮融资。",
-            "【各方立场与态度】Knit在全球大模型开源社区与技术研发一线。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Knit Health, which uses its AI world model to predict patient care needs, forecast treatment impacts, and optimize referrals, raised a $35M Series A led by NEA (Will Maddox/Axios)",
-            "[Context & Motivation] Knit Health, a startup aiming to optimize patient referrals, raised a $35 million Series A round, CEO Jonathan Kolstad tells Axios Pro exclusively.",
-            "[Market & Financial Detail] The big picture: Investors are betting on AI that predicts patients' next health needs, rather than simply documenting their current ones."
-          ],
-          "industry_impact_zh": "巨额融资意向凸显出头部模型公司在研发前沿架构与构建超级计算集群过程中巨大的资本消耗率，企业正力求在公开上市前锁定充沛流动性以构筑壁垒。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-16 15:05:25 UTC",
+      "updated_at": "2026-11-16 15:35:37 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
-      "url": "https://x.com/AravSrinivas/status/2122338465648103676",
-      "published_at": "2026-11-16T14:38:16+00:00",
-      "quote_zh": "《神鬼寓言 5.2》中的《队友》以 1986 年霓虹灯迈阿密为背景，构建了一款开放世界驾驶游戏，可在浏览器中运行：。没有游戏引擎，没有 Three.js，也没有外部资源：Teammate 编写了自己的 WebGL2 渲染器，城市、汽车、车库、下雨和引擎声音都是由代码生成的。大约 63,000 行 JavaScript，9 MB。这部 40 秒的影片由 Teammate 在租用的云 GPU 上以 1080p60 渲染。",
-      "quote_en": "Teammate on Fable 5.2 built an open-world driving game set in a neon 1986 Miami that runs in your browser at https://t.co/oIeUkHjWof. No game engine, no Three.js and no external assets: Teammate wrote its own WebGL2 renderer, and the city, cars, garage, rain and engine sounds are all generated by code. About 63,000 lines of JavaScript, 9 MB. This 40-second film was rendered by Teammate on a rented cloud GPU at 1080p60.",
-      "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-      "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+      "url": "https://x.com/AravSrinivas/status/2122347790672216191",
+      "published_at": "2026-11-16T15:15:19+00:00",
+      "quote_zh": "困惑代理（计算机或队友）可以将金融研究和分析任务中的每个数字引用到文件中的确切行项目",
+      "quote_en": "Perplexity agents (Computer or Teammate) can cite each number in a financial research and analysis task to the exact line item on the filings  https://t.co/f4SziblIoc",
+      "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+      "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "5.6k",
-        "likes": "71",
-        "comments": "22",
-        "retweets": "4",
+        "views": "4.9k",
+        "likes": "37",
+        "comments": "11",
+        "retweets": "1",
         "platform": "x",
         "verified": true
       },
       "titans": [
         {
-          "id": "62227ce66c0ab375",
+          "id": "2b886863a590680c",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/x/AravSrinivas",
-          "topic_zh": "AI 编程范式变革",
-          "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "自己的 WebGL2 渲染器，城市、汽车、车库、下雨和引擎声音都是由代码生成的。大约 63,000 行 JavaScript，9 MB。这部 40 秒的影片由 Teammate 在租用的云 GPU 上以 1080p60 渲染。",
-          "event_context_en": "Teammate on Fable 5.2 built an open-world driving game set in a neon 1986 Miami that runs in your browser at https://t.c",
-          "quote_zh": "《神鬼寓言 5.2》中的《队友》以 1986 年霓虹灯迈阿密为背景，构建了一款开放世界驾驶游戏，可在浏览器中运行：。没有游戏引擎，没有 Three.js，也没有外部资源：Teammate 编写了自己的 WebGL2 渲染器，城市、汽车、车库、下雨和引擎声音都是由代码生成的。大约 63,000 行 JavaScript，9 MB。这部 40 秒的影片由 Teammate 在租用的云 GPU 上以 1080p60 渲染。",
-          "quote_en": "Teammate on Fable 5.2 built an open-world driving game set in a neon 1986 Miami that runs in your browser at https://t.co/oIeUkHjWof. No game engine, no Three.js and no external assets: Teammate wrote its own WebGL2 renderer, and the city, cars, garage, rain and engine sounds are all generated by code. About 63,000 lines of JavaScript, 9 MB. This 40-second film was rendered by Teammate on a rented cloud GPU at 1080p60.",
-          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "智能体架构与协同",
+          "topic_en": "Agentic Workflows",
+          "event_context_zh": "困惑代理（计算机或队友）可以将金融研究和分析任务中的每个数字引用到文件中的确切行项目",
+          "event_context_en": "Perplexity agents (Computer or Teammate) can cite each number in a financial research and analysis task to the exact lin",
+          "quote_zh": "困惑代理（计算机或队友）可以将金融研究和分析任务中的每个数字引用到文件中的确切行项目",
+          "quote_en": "Perplexity agents (Computer or Teammate) can cite each number in a financial research and analysis task to the exact line item on the filings  https://t.co/f4SziblIoc",
+          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "5.6k",
-            "likes": "71",
-            "comments": "22",
-            "retweets": "4",
+            "views": "4.9k",
+            "likes": "37",
+            "comments": "11",
+            "retweets": "1",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-16T14:38:16+00:00",
-          "url": "https://x.com/AravSrinivas/status/2122338465648103676"
+          "published_at": "2026-11-16T15:15:19+00:00",
+          "url": "https://x.com/AravSrinivas/status/2122347790672216191"
         },
         {
           "id": "97d737a427417dd6",
@@ -221,6 +222,34 @@
           "url": "https://x.com/swyx/status/2122236664408084526"
         },
         {
+          "id": "e4e198e3b83b6a9f",
+          "name": "Noah Morris",
+          "handle": "@noahmorris",
+          "role_zh": "🌐 YouTube nerd that runs channels. 2.5 mil subscribers. - Discussing & building tools like @nexlevio & @vidrush for the YouTube (faceless) space",
+          "role_en": "🌐 YouTube nerd that runs channels. 2.5 mil subscribers. - Discussing & building tools like @nexlevio & @vidrush for the YouTube (faceless) space",
+          "avatar": "https://pbs.twimg.com/profile_images/1879834975337644032/a7w58zvj_normal.jpg",
+          "topic_zh": "AI 编程范式变革",
+          "topic_en": "AI Coding & Engineering",
+          "event_context_zh": "我们刚刚杀死了 Claude Opus 5.5 视频编辑\n\nVidRush V2 简介\n\n适用于视频制作团队的 Claude Code。\n\n我简要介绍了这就是发生的事情（更多内容在线程中）↓",
+          "event_context_en": "We just KILLED Claude Opus 5.5 Video Editing\n\nIntroducing VidRush V2 \n\nThe Claude Code for video production teams. \n\nI g",
+          "quote_zh": "我们刚刚杀死了 Claude Opus 5.5 视频编辑\n\nVidRush V2 简介\n\n适用于视频制作团队的 Claude Code。\n\n我简要介绍了这就是发生的事情（更多内容在线程中）↓",
+          "quote_en": "We just KILLED Claude Opus 5.5 Video Editing\n\nIntroducing VidRush V2 \n\nThe Claude Code for video production teams. \n\nI gave it a brief Here's what happened (more in thread)↓ https://t.co/HOLVHgSflD",
+          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "3.5k",
+            "likes": "118",
+            "comments": "46",
+            "retweets": "22",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-16T15:02:50+00:00",
+          "url": "https://x.com/noahmorris/status/2122344648220017101"
+        },
+        {
           "id": "87af53452413884f",
           "name": "Fei-Fei Li 李飞飞",
           "handle": "@drfeifei",
@@ -247,40 +276,12 @@
           },
           "published_at": "2026-11-16T14:44:30+00:00",
           "url": "https://x.com/drfeifei/status/2122340036645621862"
-        },
-        {
-          "id": "d0138c88722653c5",
-          "name": "Sebastian Raschka",
-          "handle": "@rasbt",
-          "role_zh": "ML/AI research engineer. Ex stats professor.\nAuthor of \"Build a Large Language Model From Scratch\" ( & reasoning (",
-          "role_en": "ML/AI research engineer. Ex stats professor.\nAuthor of \"Build a Large Language Model From Scratch\" (https://t.co/O8LAAMRzzW) & reasoning (https://t.co/5TueQKx2Fk)",
-          "avatar": "https://pbs.twimg.com/profile_images/1661187442043486209/a3E4t1eV_normal.jpg",
-          "topic_zh": "AI 编程范式变革",
-          "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "GQA 与 MLA 交换、将密集 FFN 与 MoE 交换、将注意力层与 Mamba2 或门控 DeltaNet 交换、或者将标准残差连接与注意力残差交换。\n\n目前，即使使用法学硕士辅助编码，它也非常混乱。\n\n它可能直接位于 PyTorch 或 CUDA 之上，但它需要精心设计和维护（而不是在周末快速进行振动编码）并且足够高效，以便人们相信它可以在生产中使用（这确实是超越玩具示例的要求）。\n\n也许对于一个资金充足的大型实验室来说是值得深思的:)\n\n（有一些努力朝着这个方向发展，比如 torchtitan、torchtune、Megatron Core、OLMo-core，但我想说，它们还没有达到那个抽象级别。\n\n而且，一如既往，存在先有鸡还是先有蛋的问题：它需要受欢迎才能被广泛采用，并且它需要被广泛采用才能流行。）",
-          "event_context_en": "The open-source LLM ecosystem could really benefit from an LLM building-block API.\n\nWe have so many LLM components acros",
-          "quote_zh": "开源 LLM 生态系统确实可以从 LLM 构建块 API 中受益。\n\n我们现在有很多跨不同模型的法学硕士组件。无论您是直接使用 PyTorch 还是 C++ 和 CUDA 代码，当您想要运行实验或消融研究时，都会产生重大的切换成本，例如将 GQA 与 MLA 交换、将密集 FFN 与 MoE 交换、将注意力层与 Mamba2 或门控 DeltaNet 交换、或者将标准残差连接与注意力残差交换。\n\n目前，即使使用法学硕士辅助编码，它也非常混乱。\n\n它可能直接位于 PyTorch 或 CUDA 之上，但它需要精心设计和维护（而不是在周末快速进行振动编码）并且足够高效，以便人们相信它可以在生产中使用（这确实是超越玩具示例的要求）。\n\n也许对于一个资金充足的大型实验室来说是值得深思的:)\n\n（有一些努力朝着这个方向发展，比如 torchtitan、torchtune、Megatron Core、OLMo-core，但我想说，它们还没有达到那个抽象级别。\n\n而且，一如既往，存在先有鸡还是先有蛋的问题：它需要受欢迎才能被广泛采用，并且它需要被广泛采用才能流行。）",
-          "quote_en": "The open-source LLM ecosystem could really benefit from an LLM building-block API.\n\nWe have so many LLM components across different models now. Whether you are using PyTorch or C++ and CUDA code directly, there is a major switching cost when you want to run experiments or ablation studies, say swapping GQA with MLA, dense FFNs with MoE, attention layers with Mamba2 or Gated DeltaNet, or standard residual connections with attention residuals.\n\nCurrently, it’s very messy even with LLM-assisted coding.\n\nIt could maybe be on top of PyTorch or CUDA directly, but it needs to be carefully engineered and maintained (versus quickly vibe-coded on a weekend) and efficient enough that people trust it to use in production (which is really a requirement to move beyond toy examples).\n\nMaybe some food for thought for a big, well-funded lab :)\n\n(There are some efforts that go into that direction, like torchtitan, torchtune, Megatron Core, OLMo-core, but they are not quite that level of abstraction, I'd say. \n\nAnd, as always, there’s the chicken-and-egg problem: it needs to be popular to get widely adopted, and it needs to get widely adopted to become popular.)",
-          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "5.6k",
-            "likes": "135",
-            "comments": "22",
-            "retweets": "11",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-16T14:28:37+00:00",
-          "url": "https://x.com/rasbt/status/2122336040899711282"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-16 15:05:25 UTC",
+      "updated_at": "2026-11-16 15:35:37 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -389,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,513)",
+            "📈 社区热度指数级飙升：本周新增 +4,719 Stars (总星标 24,516)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,719 stars this week (24,513 total)",
+            "📈 Exponential community momentum: +4,719 stars this week (24,516 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
