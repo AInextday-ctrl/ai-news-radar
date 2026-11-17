@@ -114,6 +114,16 @@ CURATED_BLOOMBERG_STORIES = {
             "While renting cloud compute does not violate legacy rules restricted to physical hardware delivery, the Commerce Department determined that remote access effectively nullifies national security protections by enabling Chinese frontier labs to train advanced large language models using American supercomputing infrastructure.",
             "Under the new framework, cloud providers must implement verified customer identity protocols and adhere to strict compute quotas. Global data center operators serving clients in designated restricted regions will be prohibited from dedicating more than 50% of aggregate cluster capacity to Chinese firms without explicit Commerce Department authorization.",
             "The interim rule takes effect immediately with an open public comment period. Lawmakers on Capitol Hill welcomed the measure as an essential step toward hardening the semiconductor perimeter, with members of the House Foreign Affairs Committee indicating plans for oversight hearings on export control enforcement mechanisms."
+        ],
+        "paragraphs_zh": [
+            "华盛顿——美国商务部周一采取行动，限制多个国家通过海外数据中心向中国企业提供先进人工智能芯片的远程访问权限，大幅扩展了出口管制范围，以堵塞关键的云计算监管漏洞。",
+            "根据美国工业与安全局（BIS）发布的临时最终规则，美国政府对向五个中间国家转移先进半导体及云算力设立了强制性出口许可证要求：这五个国家分别是新加坡、马来西亚、泰国、印度尼西亚和巴西。",
+            "该新规直接针对全球范围内向总部位于中国大陆或澳门的实体提供高聚合总处理性能（TPP）算力的数据中心与“新云”（neocloud）运营商。目前正为这些客户提供服务的基础设施获得了 90 天的宽限期，以便申请许可证并调整运营以符合监管要求。",
+            "这一强硬的政策转向出台之际，华盛顿正进一步强化对受限美国技术如何绕过全面硬件出口禁令流入中国科技巨头的审查。近几个月以来的多份报道显示，中国企业越来越多地通过租用部署在东南亚各地、配备英伟达 H100 和 H200 加速卡的计算集群，来规避实物芯片禁运。",
+            "随着英伟达前首席执行官黄仁勋突然离任，执法层面的担忧急剧升温，国会正对英伟达与新加坡云算力提供商 Megaspeed International 之间的交易展开调查。Megaspeed 在 2023 年至 2025 年期间进口了价值数十亿美元的英伟达硬件，并将高性能计算集群转租给包括阿里巴巴集团和字节跳动在内的海外客户。",
+            "尽管租用云算力并不违反仅限于实物硬件交付的传统出口管制规则，但商务部认定，远程访问实质上削弱了国家安全保护屏障，使中国前沿实验室得以利用美国超算基础设施训练先进的大语言模型。",
+            "在新的监管框架下，云服务提供商必须执行经核验的客户身份识别协议（KYC），并恪守严格的算力配额。为指定受限地区客户提供服务的全球数据中心运营商，在未经商务部明确批准的情况下，严禁将超过 50% 的集群总算力分配给中国企业。",
+            "该临时规则立即生效，并开启公开征求意见期。国会议员对该举措表示欢迎，称其为巩固半导体防线所迈出的关键一步，众议院外交事务委员会成员已表态计划就出口管制执法机制举行专题监督听证会。"
         ]
     }
 }
@@ -208,6 +218,42 @@ def clean_title_to_slug_title(slug: str) -> str:
     return " ".join(capitalized)
 
 
+def is_tail_boilerplate(text: str) -> bool:
+    """
+    Detects author bios, think-tank affiliations, trailing reading prompts, and noise signatures
+    (both Chinese and English) commonly found at the bottom of syndication feeds and scraped articles.
+    """
+    if not text:
+        return True
+    t = text.strip()
+    
+    # Author bios / titles
+    bio_patterns = [
+        r'^.{2,35}\s*(?:\([^)]*\))?\s*是.{2,50}的(?:副主任|主任|助理主任|高级研究员|研究员|学者|顾问|分析师|执行董事|主席|副总裁)[。.\s]*$',
+        r'^.{2,35}\s+is\s+(?:the\s+)?(?:deputy\s+|assistant\s+)?(?:director|fellow|senior\s+fellow|researcher|analyst|chair)\s+(?:at|of)\s+.+?[。.\s]*$',
+    ]
+    for pat in bio_patterns:
+        if re.match(pat, t, re.IGNORECASE):
+            return True
+
+    # Trailing reading prompt / suggested questions
+    question_patterns = [
+        r'^(?:为什么|怎样才能|如何|能否|什么是|未来.*?将如何).{4,60}[?？]?$',
+        r'^(?:Why|How|What|Can|Will)\s+.{5,80}\?\s*$',
+        r'^(?:相关阅读|延伸阅读|推荐阅读|往期推荐|阅读更多|相关资讯|Related Articles?|Recommended Reading|Read More|More Stories):?$'
+    ]
+    for pat in question_patterns:
+        if re.match(pat, t, re.IGNORECASE):
+            return True
+
+    # Think-tank trailing signatures
+    if any(sig in t for sig in ["大西洋理事会", "Atlantic Council", "Brookings Institution", "CSIS"]):
+        if any(role in t for role in ["副主任", "助理主任", "研究员", "deputy director", "fellow"]):
+            return True
+
+    return False
+
+
 def _clean_paragraph(text: str) -> str:
     """Cleans a single paragraph of text and strips boilerplate noise."""
     if not text:
@@ -232,6 +278,8 @@ def _clean_paragraph(text: str) -> str:
         'copyright bloomberg'
     ]
     if any(np in low for np in noise_phrases):
+        return ""
+    if is_tail_boilerplate(t):
         return ""
     return t
 
@@ -318,6 +366,60 @@ def resolve_authentic_bloomberg_headline(
         pass
 
     return None, None
+
+
+def resolve_bloomberg_syndicated_fulltext(
+    slug: str,
+    title: str = "",
+    proxies: Optional[Dict[str, str]] = None
+) -> Optional[List[str]]:
+    """
+    Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:
+    When PerimeterX blocks direct bloomberg.com HTTP access, queries global news wire networks
+    (Bing News RSS / open syndication networks) for the Bloomberg slug and headline to discover authorized
+    full-text syndication mirrors (e.g. The Japan Times, MSN, CBS News, The Verge, Yahoo Finance).
+    Systematically filters out boilerplate noise, author bios, and trailing reading recommendations.
+    """
+    if not slug and not title:
+        return None
+
+    query_keywords = title or slug.replace('-', ' ')
+    clean_q = re.sub(r'^(?:US|Report|Scoop|Exclusive)[:\s]+', '', query_keywords, flags=re.I).strip()
+    search_q = f'"{clean_q[:50]}"' if len(clean_q) >= 10 else f"{clean_q} Bloomberg"
+    
+    rss_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(search_q)}&format=rss"
+    try:
+        import httpx
+        from article_extractor import ArticleExtractor
+        proxy_url = proxies.get("http") if proxies else None
+        with httpx.Client(proxy=proxy_url, timeout=7, follow_redirects=True) as client:
+            resp = client.get(rss_url)
+            if resp.status_code != 200:
+                return None
+            root = ET.fromstring(resp.content)
+            items = root.findall('.//item')
+            for it in items[:6]:
+                raw_link = it.findtext('link') or ''
+                actual_url = raw_link
+                if 'url=' in raw_link:
+                    actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
+                if not actual_url or any(pw in actual_url.lower() for pw in ['bloomberg.com', 'wsj.com', 'ft.com']):
+                    continue
+                try:
+                    ext = ArticleExtractor.extract_article(actual_url)
+                    if ext.get('status') == 'success' and len(ext.get('paragraphs', [])) >= 3:
+                        cand_paras = []
+                        for p in ext['paragraphs']:
+                            cleaned_p = _clean_paragraph(p)
+                            if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
+                                cand_paras.append(cleaned_p)
+                        if len(cand_paras) >= 3:
+                            return cand_paras
+                except Exception:
+                    continue
+    except Exception:
+        pass
+    return None
 
 
 def crawl_bloomberg(
@@ -431,6 +533,10 @@ def crawl_bloomberg(
             result["author"] = cur_story["author"]
         if cur_story.get("title") and not real_title:
             result["title"] = cur_story["title"]
+        if cur_story.get("title_zh"):
+            result["title_zh"] = cur_story["title_zh"]
+        if cur_story.get("paragraphs_zh"):
+            result["paragraphs_zh"] = cur_story["paragraphs_zh"]
         result["paragraphs"] = paras
         result["paras_count"] = len(paras)
         result["full_text"] = "\n\n".join(paras)
@@ -491,6 +597,22 @@ def crawl_bloomberg(
                     return result
         except Exception:
             pass
+
+    # Fourth: Automated Generic Syndication Wire Penetration (Tier-3)
+    # Queries open syndication networks (BNN, Yahoo Finance, MSN, The Japan Times, etc.)
+    if not result.get("paragraphs"):
+        syndicated_paras = resolve_bloomberg_syndicated_fulltext(slug, title=result.get("title", ""), proxies=proxies)
+        if syndicated_paras and len(syndicated_paras) >= 3:
+            result["paragraphs"] = syndicated_paras
+            result["paras_count"] = len(syndicated_paras)
+            result["full_text"] = "\n\n".join(syndicated_paras)
+            result["lead_paragraph"] = syndicated_paras[0]
+            result["is_substantive"] = True
+            result["is_paywalled"] = False
+            result["status"] = "success"
+            _BLOOMBERG_CACHE[clean_url] = dict(result)
+            _save_to_disk_cache(clean_url, dict(result))
+            return result
 
     # If title was successfully resolved, mark as success with substantive headline and attribution
     if result["title"]:

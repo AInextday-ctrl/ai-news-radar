@@ -1292,8 +1292,19 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </h1>
         {author_byline_html}
 
-        <!-- CTA & Social Share Capsule Bar -->
-        <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            {escape(summary)}
+          </p>
+        </div>
+
+        {bullets_html}
+        {analysis_html}
+        {full_coverage_html}
+
+        <!-- CTA & Social Share Capsule Bar (Universal Article End Action Bar) -->
+        <div class="mt-10 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
           
           <!-- Primary Source Link Button -->
           <a href="{escape(source_target_url)}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
@@ -1316,17 +1327,6 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
           </div>
 
         </div>
-
-        <!-- News Briefing Content -->
-        <div class="mt-8">
-          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
-            {escape(summary)}
-          </p>
-        </div>
-
-        {bullets_html}
-        {analysis_html}
-        {full_coverage_html}
 
       </div>
     </article>

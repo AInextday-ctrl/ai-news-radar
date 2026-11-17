@@ -555,6 +555,41 @@ AGGREGATOR_NOISE_RULES = [
 ]
 
 
+def is_tail_boilerplate_para(para: str, is_zh: bool = False) -> bool:
+    """
+    通用信源正文尾部噪点识别器：
+    系统性识别并剔除爬虫/聚合器在文章尾部附带的作者简介签名、智库头衔、推荐阅读问题、导流链接与版权声明。
+    """
+    if not para:
+        return True
+    p = para.strip()
+    
+    # 1. 作者履历、智库任职与专家头衔 (中英文双语)
+    bio_patterns = [
+        r'^.{2,35}\s*(?:\([^)]*\))?\s*是.{2,50}的(?:副主任|主任|助理主任|高级研究员|研究员|学者|顾问|分析师|执行董事|主席|副总裁)[。.\s]*$',
+        r'^.{2,35}\s+is\s+(?:the\s+)?(?:deputy\s+|assistant\s+)?(?:director|fellow|senior\s+fellow|researcher|analyst|chair)\s+(?:at|of)\s+.+?[。.\s]*$',
+    ]
+    for pat in bio_patterns:
+        if re.match(pat, p, re.IGNORECASE):
+            return True
+
+    # 2. 尾部推荐阅读、提示性问题或延伸思考
+    question_patterns = [
+        r'^(?:为什么|怎样才能|如何|能否|什么是|未来.*?将如何).{4,60}[?？]?$',
+        r'^(?:Why|How|What|Can|Will)\s+.{5,80}\?\s*$',
+        r'^(?:相关阅读|延伸阅读|推荐阅读|往期推荐|阅读更多|相关资讯|Related Articles?|Recommended Reading|Read More|More Stories):?$'
+    ]
+    for pat in question_patterns:
+        if re.match(pat, p, re.IGNORECASE):
+            return True
+
+    # 3. 智库机构尾部署名过滤
+    if any(sig in p for sig in ["大西洋理事会", "Atlantic Council", "Brookings Institution", "CSIS"]):
+        if any(role in p for role in ["副主任", "助理主任", "研究员", "deputy director", "fellow"]):
+            return True
+
+    return False
+
 
 def sanitize_article_content(text: str, is_zh: bool = False) -> str:
     """深度过滤文章长正文中的广告嵌入、推广引流、记者爆料提示与媒体废话，返回高纯度长文段落。"""
@@ -573,6 +608,8 @@ def sanitize_article_content(text: str, is_zh: bool = False) -> str:
     for p in paras:
         pl = p.lower()
         if any(phrase in pl for phrase in ad_phrases):
+            continue
+        if is_tail_boilerplate_para(p, is_zh=is_zh):
             continue
         p_clean = p
         for rule in AGGREGATOR_NOISE_RULES:
@@ -1575,6 +1612,9 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["author"] = ext["author"]
                 if is_bloomberg and ext.get("cover_image"):
                     item["image_url"] = ext["cover_image"]
+                if is_bloomberg and ext.get("paragraphs_zh"):
+                    item["article_content_zh"] = "\n\n".join(ext["paragraphs_zh"])
+                    art_zh = item["article_content_zh"]
             except Exception:
                 pass
 
@@ -1582,9 +1622,13 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         art_en_lines = len([l for l in raw_art_en.splitlines() if len(l.strip()) > 30])
         art_zh_lines = len([l for l in art_zh.splitlines() if len(l.strip()) > 20])
         
-        # 判断中文是否缺失、缺乏实质长文或仅为极简导语 (如英文上万字符但中文仅百余字符)
+        # 判断中文是否缺失、缺乏实质长文或仅为极简导语，或者被外部智库/杂质污染
+        is_contaminated = bool(
+            ("大西洋理事会" in art_zh or "Nikoladze" in art_zh or "Kruijf" in art_zh) and "Atlantic Council" not in raw_art_en
+        )
         is_zh_stub = bool(
             not art_zh or 
+            is_contaminated or
             not any('\u4e00' <= c <= '\u9fff' for c in art_zh) or 
             (art_en_lines >= 3 and art_zh_lines <= 1) or
             (len(raw_art_en) >= 800 and len(art_zh) < 400) or
