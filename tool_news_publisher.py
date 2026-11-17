@@ -118,6 +118,11 @@ def get_optimized_og_image(raw_url: str, title: str = '', category: str = '') ->
     if 'opengraph.githubassets.com' in raw_url:
         return raw_url
 
+    # Known anti-hotlinking domains (CNBC, FT, WSJ) that return 403 Forbidden to client browsers
+    anti_hotlink_domains = ['cnbcfm.com', 'images.ft.com', 'wsj.net']
+    if any(bd in raw_url.lower() for bd in anti_hotlink_domains):
+        return get_thematic_fallback_image(title, category)
+
     # Other authentic direct HTTPS image URLs
     return raw_url
 
@@ -1275,7 +1280,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
       
       <!-- Preview Image -->
       <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
-        <img src="{image_url}" alt="{escape(title)}" class="w-full h-full object-cover" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <img src="{image_url}" alt="{escape(title)}" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
         <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
           <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
