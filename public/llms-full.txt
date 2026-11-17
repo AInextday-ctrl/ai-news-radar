@@ -1,12 +1,32 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-17 18:52:18Z
+Generated: 2026-11-17 19:07:28Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)
+- URL: https://ainewsradar.xyz/news/54ecb7a012a52ca5
+- Source: TechCrunch (https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/)
+- Executive Summary: Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.
+- Key Verified Facts:
+* [Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.
+* [Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.
+* [Key Fact Detail] Google extended temporary chat retention to approximately two months.
+* [Key Position & Outlook] Temporary conversations remain excluded from AI training data.
+
+### Google’s Spark AI agent becomes ‘Tasks’ — and now it’s free
+- URL: https://ainewsradar.xyz/news/2cededdf6305daa5
+- Source: The Verge AI (https://www.theverge.com/tech/1035756/google-spark-ai-tasks-free)
+- Executive Summary: Google rebranded its Spark AI agent to 'Tasks' and expanded its availability as a free service across the US, Canada, Japan, Korea, Australia, and India. Powered by the Gemini 4 Hydrogen model, the agent operates within hardware-isolated virtual machines to perform tasks such as calendar management and email analysis. For sensitive actions involving financial transactions, the agent is programmed to halt and require explicit user authorization.
+- Key Verified Facts:
+* [Core Event] Google (Gemini App interface): Launched Tasks agent powered by Gemini 4 Hydrogen, now free for selected regions.
+* [Root Cause & Mechanism] To boost ecosystem stickiness by transitioning AI from passive chat to active task execution.
+* [Key Technical Spec] Rebranded as Tasks and expanded to free users across multiple regions.
+* [Key Position & Outlook] Mandatory user authorization for sensitive financial or high-stakes actions.
 
 ### Xreal Aura review: portable, crisp display, and runs multiple Android apps on a virtual display, but Android XR lacks unique apps and VR controller support (Scott Stein/CNET)
 - URL: https://ainewsradar.xyz/news/c817b07c98856013
@@ -285,26 +305,6 @@ Canonical: https://ainewsradar.xyz
 * [Key Metrics] Science Corp, founded by Max Hodak, raised $400M.
 * [Key Position & Outlook] Technology targets blindness caused by age-related macular degeneration.
 
-### Anthropic Is Said To Guide IPO Price To Top Of Range Or Above
-- URL: https://ainewsradar.xyz/news/efad9796d942dbde
-- Source: Bloomberg (https://www.bloomberg.com/news/articles/2026-11-17/anthropic-is-said-to-guide-ipo-price-to-top-of-range-or-above)
-- Executive Summary: AI lab Anthropic is guiding its IPO pricing to the top of its range or higher, fueled by significant institutional oversubscription. This pricing action establishes the first public market benchmark for pure-play AI labs, effectively resetting valuation models for the private AI sector.
-- Key Verified Facts:
-* [Core Event] Anthropic (AI startup): Guiding IPO price to the top of the range or higher, reflecting institutional oversubscription
-* [Root Cause & Mechanism] Establishing a market benchmark for pure-play AI labs, impacting private valuation cycles
-* [Key Metrics] At that price, and including a $26 billion private placement, the IPO would raise $90.
-* [Key Position & Outlook] The event dictates valuation logic for the broader private AI sector.
-
-### Research Reports
-- URL: https://ainewsradar.xyz/news/55ff06d049583c56
-- Source: MIT Tech Review (https://www.technologyreview.com/2026/11/17/1148203/research-reports/)
-- Executive Summary: The global walk-assist robot market is projected to reach a CAGR of 15.01% from 2026 to 2031. Growth is driven by the aging population, rising stroke-related rehabilitation demand, and advancements in AI-driven motion control and hybrid material systems, facilitating a shift from clinical rehabilitation to home-care settings.
-- Key Verified Facts:
-* [Core Event] ResearchAndMarkets.com: Published a 2026-2031 market forecast projecting a 15.01% CAGR
-* [Root Cause & Mechanism] Driven by global aging trends, rising stroke prevalence, and advancements in AI-integrated hybrid robotics
-* [Key Metrics] Market Forecast: Projected CAGR of 15.01% between 2026 and 2031.
-* [Industry Impact & Outlook] Technical Trends: AI-driven adaptive gait control and integration of rigid-soft hybrid materials.
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -313,8 +313,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/e3ca255877a6d63c
 - Official Source: https://github.com/vercel-labs/agent-desktop?ref=ainewsradar
 - Headline: Computer use CLI for AI agents
-- Overview: agent-desktop is a fast-growing open-source AI tool for Web Search & Browser Automation (+4,451 stars this week, 24,956 total). Computer use CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +4,451 stars this week (24,956 total)', '🎯 Specialized engineering for Web Search & Browser Automation', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-desktop is a fast-growing open-source AI tool for Web Search & Browser Automation (+4,451 stars this week, 24,961 total). Computer use CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +4,451 stars this week (24,961 total)', '🎯 Specialized engineering for Web Search & Browser Automation', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Web Search & Browser Automation workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-desktop.git`
 
@@ -322,8 +322,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,765 stars this week, 28,792 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +4,765 stars this week (28,792 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,765 stars this week, 28,799 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +4,765 stars this week (28,799 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -331,8 +331,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/62a8982796e5111f
 - Official Source: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
 - Headline: The open, self-hostable alternative to closed AI bots. Production-ready, fully c
-- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,035 stars this week, 12,718 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
-- Features: ['📈 Exponential community momentum: +2,035 stars this week (12,718 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,035 stars this week, 12,719 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
+- Features: ['📈 Exponential community momentum: +2,035 stars this week (12,719 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/CopilotKit/OpenBot.git`
 
@@ -340,8 +340,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,569 stars this week, 19,897 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +1,569 stars this week (19,897 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,569 stars this week, 19,904 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +1,569 stars this week (19,904 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -349,8 +349,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/0d9bdefb9cf43c09
 - Official Source: https://github.com/google/elephant-goldfish-model?ref=ainewsradar
 - Headline: Open-source plugin for designing and reviewing software with agents
-- Overview: elephant-goldfish-model is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,249 stars this week, 20,711 total). Open-source plugin for designing and reviewing software with agents.
-- Features: ['📈 Exponential community momentum: +4,249 stars this week (20,711 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: elephant-goldfish-model is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,249 stars this week, 20,716 total). Open-source plugin for designing and reviewing software with agents.
+- Features: ['📈 Exponential community momentum: +4,249 stars this week (20,716 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/google/elephant-goldfish-model.git`
 
@@ -358,8 +358,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
 - Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+1,528 stars this week, 7,669 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +1,528 stars this week (7,669 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+1,528 stars this week, 7,675 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +1,528 stars this week (7,675 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
 - Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -367,8 +367,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/ebdd81d4384fdddc
 - Official Source: https://github.com/homeassistant-ai/ha-mcp?ref=ainewsradar
 - Headline: Configure and automate Home Assistant with Claude, ChatGPT, and other AI assista
-- Overview: ha-mcp is a fast-growing open-source AI tool for Finance, Career & Daily Life (+2,221 stars this week, 7,947 total). Configure and automate Home Assistant with Claude, ChatGPT, and other AI assistants..
-- Features: ['📈 Exponential community momentum: +2,221 stars this week (7,947 total)', '🎯 Specialized engineering for Finance, Career & Daily Life', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ha-mcp is a fast-growing open-source AI tool for Finance, Career & Daily Life (+2,221 stars this week, 7,948 total). Configure and automate Home Assistant with Claude, ChatGPT, and other AI assistants..
+- Features: ['📈 Exponential community momentum: +2,221 stars this week (7,948 total)', '🎯 Specialized engineering for Finance, Career & Daily Life', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Finance, Career & Daily Life workflows
 - Quickstart: `git clone https://github.com/homeassistant-ai/ha-mcp.git`
 
@@ -376,8 +376,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a9682d2a9aa41848
 - Official Source: https://github.com/openai/codex-security?ref=ainewsradar
 - Headline: OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixi
-- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,352 stars this week, 13,920 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
-- Features: ['📈 Exponential community momentum: +2,352 stars this week (13,920 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,352 stars this week, 13,924 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
+- Features: ['📈 Exponential community momentum: +2,352 stars this week (13,924 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/openai/codex-security.git`
 
@@ -394,8 +394,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/adbd0d0908f7dd83
 - Official Source: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - Headline: Browser automation CLI for AI agents
-- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,760 stars this week, 52,312 total). Browser automation CLI for AI agents.
-- Features: ['📈 Exponential community momentum: +3,760 stars this week (52,312 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: agent-browser is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,760 stars this week, 52,316 total). Browser automation CLI for AI agents.
+- Features: ['📈 Exponential community momentum: +3,760 stars this week (52,316 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -403,8 +403,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+3,056 stars this week, 53,593 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +3,056 stars this week (53,593 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+3,056 stars this week, 53,599 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +3,056 stars this week (53,599 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -412,8 +412,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/0831ca93321eceea
 - Official Source: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - Headline: A Claude Code skill bundle for bug hunting and external red-team work - 82 skill
-- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,747 stars this week, 8,806 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
-- Features: ['📈 Exponential community momentum: +1,747 stars this week (8,806 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: Claude-BugHunter is a fast-growing open-source AI tool for AI Coding & Developer Tools (+1,747 stars this week, 8,830 total). A Claude Code skill bundle for bug hunting and external red-team work - 82 skills, 15 slash commands, 681 disclosed-report patterns curated across 24 core vulnerability classes, plus enterprise identity + infrastructure attack matrices..
+- Features: ['📈 Exponential community momentum: +1,747 stars this week (8,830 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -421,8 +421,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+10,939 stars this week, 30,042 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +10,939 stars this week (30,042 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+10,939 stars this week, 30,049 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +10,939 stars this week (30,049 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -430,8 +430,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,325 stars this week, 12,981 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +2,325 stars this week (12,981 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,325 stars this week, 12,984 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +2,325 stars this week (12,984 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -439,8 +439,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,542 stars this week, 8,358 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +6,542 stars this week (8,358 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+6,542 stars this week, 8,360 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +6,542 stars this week (8,360 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -448,8 +448,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
 - Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
 - Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,738 stars this week, 264,163 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +4,738 stars this week (264,163 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,738 stars this week, 264,164 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +4,738 stars this week (264,164 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/hermes-agent.git`
 

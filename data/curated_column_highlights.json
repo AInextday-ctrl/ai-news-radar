@@ -1,36 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 18:52:00 UTC",
+  "generated_at": "2026-11-17 19:07:06 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 18:52:00 UTC",
+      "updated_at": "2026-11-17 19:07:06 UTC",
       "headline_item": {
-        "id": "c817b07c98856013",
+        "id": "54ecb7a012a52ca5",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Xreal Aura 评测：便携、清晰的显示屏，并在虚拟显示屏上运行多个 Android 应用程序，但 Android XR 缺乏独特的应用程序和 VR 控制器支持",
-        "title_en": "Xreal Aura review: portable, crisp display, and runs multiple Android apps on a virtual display, but Android XR lacks unique apps and VR controller support (Scott Stein/CNET)",
-        "source": "CNET",
-        "published_at": "2026-11-17T18:35:05+00:00",
-        "url": "https://www.cnet.com/tech/computing/google-xreal-aura-glasses-hands-on/",
-        "event_summary_zh": "我长期以来使用过的最令人着迷和令人沮丧的设备推动了耳机发展的边缘，眼镜也在不断发展。让我告诉你一个奇怪的、迷人的、粗糙的中间产品，叫做 Xreal Aura。有VR耳机，也有智能眼镜",
-        "event_summary_en": "The most fascinating and frustrating device I've used in a long time pushes at the edges of where headsets are heading, and glasses are evolving.\n\nLet me tell you about a strange, fascinating and rough tweener product called Xreal Aura.\n\nThere are VR headsets, and there are smart glasses. And there’s a new class of devices that’s falling right in between. What do we call these things? I have no idea. The category includes the Meta VR Glasses coming next year and now the Aura, a collaboration by",
+        "title_zh": "谷歌延长Gemini临时对话留存期至两个月",
+        "title_en": "Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)",
+        "source": "TechCrunch",
+        "published_at": "2026-11-17T19:00:47+00:00",
+        "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
+        "event_summary_zh": "谷歌将Gemini临时聊天记录的保留周期从72小时大幅延长至约两个月，并实现对话记录与模型训练的解耦",
+        "event_summary_en": "Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.",
         "core_facts_zh": [
-          "【核心事件】Meta (扎克伯格团队)：Xreal Aura 评测：便携、清晰的显示屏，并在虚拟显示屏上运行多个 Android 应用程序，但 Android XR 缺乏独特的应用程序和 VR 控制器支持",
-          "【核心事实细节】我长期以来使用过的最令人着迷和令人沮丧的设备推动了耳机发展的边缘，眼镜也在不断发展。",
-          "【行业研判】让我告诉你一个奇怪的、迷人的、粗糙的中间产品，叫做 Xreal Aura。"
+          "【核心事件】Google（谷歌）：将临时聊天数据存储期限从72小时延长至约两个月，并实现聊天记录存储与AI模型训练的可独立控制",
+          "【起因与机理】旨在应对AI系统复杂性，增强安全审计、故障诊断能力及用户反馈处理需求",
+          "【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。",
+          "【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: Xreal Aura review: portable, crisp display, and runs multiple Android apps on a virtual display, but Android XR lacks unique apps and VR controller support (Scott Stein/CNET)",
-          "[Context & Motivation] The most fascinating and frustrating device I've used in a long time pushes at the edges of where headsets are heading, and glasses are evolving.",
-          "[Key Metrics] It’s $1,279 for the version with 256GB of storage and 12GB RAM or $1,499 for 512GB/16GB, but it’s on sale until the end of the year for $1,099/$1,299.",
-          "[Industry Analysis] The category includes the Meta VR Glasses coming next year and now the Aura, a collaboration by."
+          "[Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.",
+          "[Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.",
+          "[Key Fact Detail] Google extended temporary chat retention to approximately two months.",
+          "[Key Position & Outlook] Temporary conversations remain excluded from AI training data."
         ],
-        "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-        "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
+        "industry_impact_zh": "延长留存期是谷歌在数据安全合规与算法鲁棒性博弈间的权衡，通过将留存数据与模型训练彻底切割，谷歌在缓解隐私舆论压力的同时，获得了更长的时间窗口进行内控审计与安全迭代。这种设置逻辑暗示了当前主流AI厂商正在从简单的全量数据收集转向分层的细粒度数据管控，以应对日益严格的全球数据保护法规要求。",
+        "industry_impact_en": "The retention extension reflects Google's balancing act between data compliance and system robustness, leveraging the decoupling of storage from model training to secure a wider window for security auditing without violating user trust. This strategic shift signals an industry-wide move toward granular data control, aimed at navigating tightening global data protection regulations."
       },
       "headlines": [
+        {
+          "id": "54ecb7a012a52ca5",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "谷歌延长Gemini临时对话留存期至两个月",
+          "title_en": "Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)",
+          "source": "TechCrunch",
+          "published_at": "2026-11-17T19:00:47+00:00",
+          "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
+          "event_summary_zh": "谷歌将Gemini临时聊天记录的保留周期从72小时大幅延长至约两个月，并实现对话记录与模型训练的解耦",
+          "event_summary_en": "Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.",
+          "core_facts_zh": [
+            "【核心事件】Google（谷歌）：将临时聊天数据存储期限从72小时延长至约两个月，并实现聊天记录存储与AI模型训练的可独立控制",
+            "【起因与机理】旨在应对AI系统复杂性，增强安全审计、故障诊断能力及用户反馈处理需求",
+            "【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。",
+            "【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.",
+            "[Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.",
+            "[Key Fact Detail] Google extended temporary chat retention to approximately two months.",
+            "[Key Position & Outlook] Temporary conversations remain excluded from AI training data."
+          ],
+          "industry_impact_zh": "延长留存期是谷歌在数据安全合规与算法鲁棒性博弈间的权衡，通过将留存数据与模型训练彻底切割，谷歌在缓解隐私舆论压力的同时，获得了更长的时间窗口进行内控审计与安全迭代。这种设置逻辑暗示了当前主流AI厂商正在从简单的全量数据收集转向分层的细粒度数据管控，以应对日益严格的全球数据保护法规要求。",
+          "industry_impact_en": "The retention extension reflects Google's balancing act between data compliance and system robustness, leveraging the decoupling of storage from model training to secure a wider window for security auditing without violating user trust. This strategic shift signals an industry-wide move toward granular data control, aimed at navigating tightening global data protection regulations."
+        },
+        {
+          "id": "2cededdf6305daa5",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "谷歌发布免费AI智能体Tasks",
+          "title_en": "Google’s Spark AI agent becomes ‘Tasks’ — and now it’s free",
+          "source": "The Verge AI",
+          "published_at": "2026-11-17T18:58:01+00:00",
+          "url": "https://www.theverge.com/tech/1035756/google-spark-ai-tasks-free",
+          "event_summary_zh": "谷歌将原Spark AI智能体更名为Tasks并向全球多地免费开放，由Gemini 4 Hydrogen模型驱动以执行自动化代理任务",
+          "event_summary_en": "Google rebranded its Spark AI agent to 'Tasks' and expanded its availability as a free service across the US, Canada, Japan, Korea, Australia, and India. Powered by the Gemini 4 Hydrogen model, the agent operates within hardware-isolated virtual machines to perform tasks such as calendar management and email analysis. For sensitive actions involving financial transactions, the agent is programmed to halt and require explicit user authorization.",
+          "core_facts_zh": [
+            "【核心事件】Google（谷歌）在Gemini应用界面：发布Gemini 4 Hydrogen模型驱动的Tasks智能体并实现跨地域免费提供",
+            "【起因与机理】通过强化代理式AI应用以提升用户生态黏性，并推进AI从对话向任务执行转型",
+            "【核心事实细节】智能体更名为Tasks并向全球多地用户免费开放。",
+            "【各方立场与态度】执行金融敏感任务需强制执行二次权限确认。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Google (Gemini App interface): Launched Tasks agent powered by Gemini 4 Hydrogen, now free for selected regions.",
+            "[Root Cause & Mechanism] To boost ecosystem stickiness by transitioning AI from passive chat to active task execution.",
+            "[Key Technical Spec] Rebranded as Tasks and expanded to free users across multiple regions.",
+            "[Key Position & Outlook] Mandatory user authorization for sensitive financial or high-stakes actions."
+          ],
+          "industry_impact_zh": "将Tasks智能体下放至免费版并引入硬件隔离虚拟机运行环境，标志着谷歌正在通过“AI代理”策略争夺终端用户生态的控制权。这种做法通过提升AI的自主决策与任务执行深度，直接对标OpenAI等竞品的代理能力，并将安全作为低门槛普及的核心护城河，试图加速AI从生成式辅助向代理式生产力工具的范式转移。",
+          "industry_impact_en": "Rolling out the Tasks agent to free tiers while leveraging hardware-isolated VMs signals Google's aggressive push to capture user ecosystem control through agentic AI. By prioritizing autonomous task execution over passive generation, Google is directly competing with OpenAI's agent strategies while using security as a defensive moat to facilitate the industry's shift toward agent-based productivity tools."
+        },
         {
           "id": "c817b07c98856013",
           "tag_zh": "📰 业界动态",
@@ -55,64 +108,12 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "d1235c58027b86ea",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "微软发布六款AI专有模型，旨在降低企业AI部署成本",
-          "title_en": "Microsoft unveils six AI models spanning coding, cybersecurity, images, and voice, saying MAI Code 2 has 98% of GPT-6.1 Sol's performance at 40% of the price (Ina Fried/Axios)",
-          "source": "Axios",
-          "published_at": "2026-11-17T18:25:02+00:00",
-          "url": "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite",
-          "event_summary_zh": "微软在Ignite大会推出六款涵盖代码、网络安全等领域的专有模型，旨在以40%的成本实现与行业领先模型接近的性能",
-          "event_summary_en": "Microsoft AI CEO Mustafa Suleyman announced six new AI models specializing in coding, cybersecurity, image generation, and voice. By optimizing parameter efficiency, these models deliver performance comparable to top-tier offerings from OpenAI and Anthropic at 40% of the cost, while allowing enterprise customers to fine-tune weights using proprietary data within the Azure ecosystem.",
-          "core_facts_zh": [
-            "【核心事件】Mustafa Suleyman（微软AI首席执行官）在旧金山Ignite大会：发布六款垂直领域AI模型，提供权重授权与Azure私有部署支持",
-            "【起因与机理】降低对单一模型供应商的依赖，通过成本优势抢占企业级AI部署市场",
-            "【关键数据与实测】核心架构优势在于高参数密度，使MAI Code 2等模型在保持98%性能前提下成本仅为竞品的40%。",
-            "【各方立场与态度】强制要求企业在Azure环境下进行模型部署与私有数据微调，强化云平台粘性。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Mustafa Suleyman, CEO of Microsoft AI (Ignite conference in San Francisco): Launched six specialized AI models with model weights licensing and Azure-native deployment",
-            "[Root Cause & Mechanism] Reduce reliance on OpenAI and capture enterprise market share via aggressive pricing and efficiency",
-            "[Key Metrics] The core advantage is high parameter density, with MAI Code 2 achieving 98% performance of rivals at 40% of the cost.",
-            "[Key Position & Outlook] Enterprise customers are required to deploy and fine-tune models within Azure, reinforcing cloud ecosystem lock-in."
-          ],
-          "industry_impact_zh": "此举标志着微软正从单纯的算力租赁方与AI应用集成商，转型为底层模型架构的自研参与者，通过“垂直模型+Azure云环境”的绑定策略，实质上是在削弱OpenAI模型的不可替代性。将模型权重授权与Azure平台绑定，既能保持数据合规与安全护城河，又能通过成本结构重塑，构建独立于大模型的差异化商业闭环。",
-          "industry_impact_en": "This move signals Microsoft's strategic pivot from a compute provider to an in-house model architect, effectively commoditizing OpenAI's flagship offerings through vertical specialization. By anchoring licensed model weights within the Azure ecosystem, Microsoft is tightening its vendor lock-in strategy while leveraging cost efficiency to disrupt the broader foundation model market."
-        },
-        {
-          "id": "33776898231d84a2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价",
-          "title_en": "GPT-6.2 Astra costs $8/1M input and $40/1M output tokens, down 20% from GPT-6 Astra; GPT-6.2 Sol keeps GPT-6.1 Sol's $2/1M input and $10/1M output token pricing (Zac Hall/9to5Mac)",
-          "source": "9to5Mac",
-          "published_at": "2026-11-17T18:15:03+00:00",
-          "url": "https://9to5mac.com/2026/11/17/openai-upgrades-chatgpt-and-codex-with-new-gpt-6-2-astra-and-sol-models/",
-          "event_summary_zh": "OpenAI 在 9 月份与 Astra 一起启动了 GPT-6 一代，然后在几周后的 DevDay 上将 Sol 升级到了 GPT-6.1。今天，GPT-6.2 Astra 和 GPT-6.2 Sol 将一起来到 ChatGPT Work 和 Codex。 OpenAI 表示，两者都可以用更少的输出令牌完成要求较高的任务，因此您可以在完成任务之前完成更多工作",
-          "event_summary_en": "OpenAI kicked off the GPT-6 generation with Astra in September, then upgraded Sol to GPT-6.1 a few weeks later at DevDay.\n\nToday, GPT-6.2 Astra and GPT-6.2 Sol are coming to ChatGPT Work and Codex together. OpenAI says both can finish demanding tasks with fewer output tokens, so you can get more done before hitting your usage limit.\n\nAstra is still the model OpenAI recommends for your hardest projects.\n\nSay you have a screenshot of a slide and want the rest of your presentation to look like it.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI 官方团队在全球社交网络与AI增值服务商业化市场：GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价",
-            "【起因与机理】该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。",
-            "【关键数据与实测】GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价。",
-            "【各方立场与态度】OpenAI 官方团队在全球社交网络与AI增值服务商业化市场。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: GPT-6.2 Astra costs $8/1M input and $40/1M output tokens, down 20% from GPT-6 Astra; GPT-6.2 Sol keeps GPT-6.1 Sol's $2/1M input and $10/1M output token pricing (Zac Hall/9to5Mac)",
-            "[Context & Motivation] OpenAI kicked off the GPT-6 generation with Astra in September, then upgraded Sol to GPT-6.1 a few weeks later at DevDay.",
-            "[Key Metrics] The $200/month Pro plan also gets Ultrafast mode for the first time with Sol.",
-            "[Industry Analysis] Say you have a screenshot of a slide and want the rest of your presentation to look like it."
-          ],
-          "industry_impact_zh": "该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 18:52:01 UTC",
+      "updated_at": "2026-11-17 19:07:06 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -192,7 +193,7 @@
           "url": "https://x.com/AravSrinivas/status/2122734422445445629"
         },
         {
-          "id": "5017db27a84c3202",
+          "id": "9a9a49c3eb9360ca",
           "name": "OpenAI Developers",
           "handle": "@OpenAIDevs",
           "role_zh": "OpenAI 开发者官方平台",
@@ -200,24 +201,24 @@
           "avatar": "https://unavatar.io/openai",
           "topic_zh": "OpenAI Developer",
           "topic_en": "OpenAI Developers on",
-          "event_context_zh": "在 API 中，使用 gpt-6.2-astra 和 gpt-6.2-sol。两种型号还支持快速和超快模式。我们将在接下来的三个月内将 Ultrafast 的价格削减 50%，使 API 和企业用户的使用成本仅为 Standard 的 3 倍。超快是一个",
-          "event_context_en": "In the API, use gpt-6.2-astra and gpt-6.2-sol. Both models also support Fast and Ultrafast modes.\n\nWe’re cutting Ultrafa",
-          "quote_zh": "在 API 中，使用 gpt-6.2-astra 和 gpt-6.2-sol。两种型号还支持快速和超快模式。\n\n我们将在接下来的三个月内将 Ultrafast 的价格削减 50%，使 API 和企业用户的使用成本仅为 Standard 的 3 倍。\n\n从 GPT-6.2 Sol 开始，Ultrafast 也将面向 Pro 200 订阅者提供。",
-          "quote_en": "In the API, use gpt-6.2-astra and gpt-6.2-sol. Both models also support Fast and Ultrafast modes.\n\nWe’re cutting Ultrafast pricing by 50% for the next three months, making it available at just 3x the cost of Standard for API and Enterprise users.\n\nUltrafast is also coming to Pro 200 subscribers, starting with GPT-6.2 Sol.\n\nhttps://t.co/24iOMuYTRf",
+          "event_context_zh": "行像素级编辑，并内置世界知识。每个镜头都保持电影级后期制作所需的图像深度。\n\n现在正在与选定的测试人员进行私人测试。即将来到希格斯菲尔德 MCP。\n\n在 ChatGPT 中设置 Higgsfield 插件，成为第一个尝试它的人。",
+          "event_context_en": "RT @higgsfield: We built Higgsfield Miracle to address one of the biggest challenges in AI video: editing a specific par",
+          "quote_zh": "RT @higgsfield：我们构建 Higgsfield Miracle 是为了解决 AI 视频中最大的挑战之一：编辑镜头的特定部分而不更改其余部分。\n\n它由 GPT-6.2 Astra 提供支持，可将任何视频分割成多个图层，以便实时进行像素级编辑，并内置世界知识。每个镜头都保持电影级后期制作所需的图像深度。\n\n现在正在与选定的测试人员进行私人测试。即将来到希格斯菲尔德 MCP。\n\n在 ChatGPT 中设置 Higgsfield 插件，成为第一个尝试它的人。",
+          "quote_en": "RT @higgsfield: We built Higgsfield Miracle to address one of the biggest challenges in AI video: editing a specific part of a shot without changing the rest.\n\nPowered by GPT-6.2 Astra, it splits any video into layers for pixel-level editing in real time, with world knowledge built in. Every shot keeps the image depth that cinema-grade post-production needs.\n\nNow in private beta with select testers. Coming soon to Higgsfield MCP.\n\nSet up Higgsfield plugin in ChatGPT to be the first to try it.",
           "thesis_zh": "深入探讨OpenAI Developer的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in OpenAI Developers on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "0",
-            "likes": "1",
-            "comments": "0",
-            "retweets": "0",
+            "views": "24.4k",
+            "likes": "243",
+            "comments": "38",
+            "retweets": "120",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-17T18:03:29+00:00",
-          "url": "https://x.com/OpenAIDevs/status/2122752500877144461"
+          "published_at": "2026-11-17T18:39:36+00:00",
+          "url": "https://x.com/OpenAIDevs/status/2122761589527044434"
         },
         {
           "id": "7358320b01f21439",
@@ -279,7 +280,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 18:52:01 UTC",
+      "updated_at": "2026-11-17 19:07:06 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -388,12 +389,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,956)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,961)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,956 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,961 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
