@@ -9687,7 +9687,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const expandBtnEl = document.getElementById('ai-modal-expand-btn');
       const expandTextEl = document.getElementById('ai-modal-expand-text');
 
-      const origContentEn = String(item.article_content || item.original_content || '').trim();
+      const origContentEn = String(item.article_content_en || item.article_content || item.original_content || '').trim();
       const origContentZh = String(item.article_content_zh || '').trim();
 
       const hasValidZh = Boolean(origContentZh && origContentZh.length >= 80 && (origContentZh.match(/[\u4e00-\u9fa5]/g) || []).length >= 50);
@@ -9697,6 +9697,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
       // 深度检测是否为顶级硬付费墙媒体 (The Information, Bloomberg, WSJ, FT, etc.)
       const isPaywalled = (() => {
+        // 若已成功穿透抓取到高品质长文或权威正文，绝非付费墙受限状态
+        if (hasValidZh || hasValidEn) return false;
+        if (item.is_paywalled !== undefined && !item.is_paywalled) return false;
         if (item.is_paywalled) return true;
         const s = (source || item.source || '').toLowerCase();
         const u = (item.url || '').toLowerCase();
@@ -9734,7 +9737,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               .then(html => {
                 if (!html) return;
                 const doc = new DOMParser().parseFromString(html, 'text/html');
-                const articleDiv = doc.querySelector('.space-y-4');
+                const articleDiv = doc.querySelector('.article-body, .space-y-4, [itemprop="articleBody"]');
                 if (articleDiv && articleDiv.innerHTML.length > 200 && currentActiveNewsItem && String(currentActiveNewsItem.id) === String(curId)) {
                   originalTextEl.innerHTML = articleDiv.innerHTML;
                   if (originalTitleEl) {

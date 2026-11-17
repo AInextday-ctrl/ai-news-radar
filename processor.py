@@ -506,8 +506,8 @@ AGGREGATOR_NOISE_RULES = [
 
     # 6. 电头与记者署名前缀
     r'^(?:By|Author:)\s+[A-Za-z\s.\'\-]+(?:\s*\|\s*[A-Za-z\s.\'\-]+)?\s*[-—–:：|]\s*',
-    r'^(?:REUTERS|AP|BLOOMBERG|AFP|DPA|UPI)\s*[-—–]\s*',
-    r'^(?:美联社|路透社|新华社|彭博社|法新社|央视网|CNN|DW|AP)\s*[\(（]?[^）\)]*?[\)）]?[讯电]?\s*[-—–:：·]\s*',
+    r'^(?:REUTERS|\bAP\b|BLOOMBERG|AFP|DPA|UPI)\s*[-—–]\s*',
+    r'^(?:美联社|路透社|新华社|彭博社|法新社|央视网|CNN|DW|\bAP\b)(?:\s*[\(（][^）\)]+[\)）])?[讯电]?\s*[-—–:：·]\s*',
     r'^据(?:知情人士|外媒|外媒报道|多位知情人士|业内人士|最新消息|相关报道|彭博社|路透社|美联社)(?:透露|称|报道|指出|消息)[，,：:]\s*',
     r'^(?:Sources?|Report|Reports?|Exclusive|Analysis)[：:\s]+',
 

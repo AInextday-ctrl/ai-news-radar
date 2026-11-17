@@ -392,13 +392,13 @@ def resolve_bloomberg_syndicated_fulltext(
         import httpx
         from article_extractor import ArticleExtractor
         proxy_url = proxies.get("http") if proxies else None
-        with httpx.Client(proxy=proxy_url, timeout=7, follow_redirects=True) as client:
+        with httpx.Client(proxy=proxy_url, timeout=10, follow_redirects=True) as client:
             resp = client.get(rss_url)
             if resp.status_code != 200:
                 return None
             root = ET.fromstring(resp.content)
             items = root.findall('.//item')
-            for it in items[:6]:
+            for it in items[:8]:
                 raw_link = it.findtext('link') or ''
                 actual_url = raw_link
                 if 'url=' in raw_link:
@@ -414,7 +414,17 @@ def resolve_bloomberg_syndicated_fulltext(
                             if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
                                 cand_paras.append(cleaned_p)
                         if len(cand_paras) >= 3:
-                            return cand_paras
+                            cand_img = ext.get('image_url')
+                            if not cand_img and ext.get('inline_images'):
+                                for in_img in ext['inline_images']:
+                                    if isinstance(in_img, dict) and in_img.get('url') and not in_img.get('url', '').endswith('.svg'):
+                                        cand_img = in_img['url']
+                                        break
+                            return {
+                                "paragraphs": cand_paras,
+                                "cover_image": cand_img,
+                                "inline_images": ext.get('inline_images', [])
+                            }
                 except Exception:
                     continue
     except Exception:
@@ -601,7 +611,17 @@ def crawl_bloomberg(
     # Fourth: Automated Generic Syndication Wire Penetration (Tier-3)
     # Queries open syndication networks (BNN, Yahoo Finance, MSN, The Japan Times, etc.)
     if not result.get("paragraphs"):
-        syndicated_paras = resolve_bloomberg_syndicated_fulltext(slug, title=result.get("title", ""), proxies=proxies)
+        synd_res = resolve_bloomberg_syndicated_fulltext(slug, title=result.get("title", ""), proxies=proxies)
+        syndicated_paras = []
+        if isinstance(synd_res, dict):
+            syndicated_paras = synd_res.get("paragraphs", [])
+            if not result.get("cover_image") and synd_res.get("cover_image"):
+                result["cover_image"] = synd_res["cover_image"]
+            if not result.get("inline_images") and synd_res.get("inline_images"):
+                result["inline_images"] = synd_res["inline_images"]
+        elif isinstance(synd_res, list):
+            syndicated_paras = synd_res
+
         if syndicated_paras and len(syndicated_paras) >= 3:
             result["paragraphs"] = syndicated_paras
             result["paras_count"] = len(syndicated_paras)
@@ -614,11 +634,13 @@ def crawl_bloomberg(
             _save_to_disk_cache(clean_url, dict(result))
             return result
 
-    # If title was successfully resolved, mark as success with substantive headline and attribution
+    # If title was successfully resolved, mark as success only when substantive full text is present
     if result["title"]:
-        result["status"] = "success"
         result["is_substantive"] = bool(result["paragraphs"])
+        result["status"] = "success" if result["is_substantive"] else "partial"
 
-    _BLOOMBERG_CACHE[clean_url] = dict(result)
-    _save_to_disk_cache(clean_url, dict(result))
+    # Only persist to cache if substantive content was found, preventing poison caching of empty crawls
+    if result.get("is_substantive"):
+        _BLOOMBERG_CACHE[clean_url] = dict(result)
+        _save_to_disk_cache(clean_url, dict(result))
     return result
