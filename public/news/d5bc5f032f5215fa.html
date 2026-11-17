@@ -218,7 +218,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic says the key to agent memory is knowing what to forget, not how much to store
@@ -252,9 +252,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic research indicates that Claude models improve agent performance by optimizing selective memory rather than exhaustive archival, as redundant storage leads to inefficient metadata management. Implementing a &#x27;dreaming&#x27; review mechanism, which checks past notes against raw transcripts, effectively mitigates logical loops caused by false memories.
-          </div>
+          </p>
         </div>
 
         
@@ -276,69 +276,70 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 Full In-Depth Coverage</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER Full Report</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Anthropic studied how Claude retains knowledge across sessions. Its tests show that selective notes outperform exhaustive archives and that having Claude review its own memories after the fact can correct errors.</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Anthropic studied how Claude retains knowledge across sessions. Its tests show that selective notes outperform exhaustive archives and that having Claude review its own memories after the fact can correct errors.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anyone who works with an AI agent on a project over several days hits a wall fast, because every new session starts from scratch. In a research post, Anthropic describes how Claude is supposed to retain knowledge across sessions while the model stays unchanged. Claude writes notes to a folder that it can read back later.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anyone who works with an AI agent on a project over several days hits a wall fast, because every new session starts from scratch. In a research post, Anthropic describes how Claude is supposed to retain knowledge across sessions while the model stays unchanged. Claude writes notes to a folder that it can read back later.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge." class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge." class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge.</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The core problem, according to Anthropic, is selection. Before it knows what comes next, the agent has to decide in the moment what might matter later, so every note is a bet on the future.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The core problem, according to Anthropic, is selection. Before it knows what comes next, the agent has to decide in the moment what might matter later, so every note is a bet on the future.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In an Anthropic test with Pokémon Red, the older Claude Sonnet 3.7 treated everything as potentially important and, across roughly 10,000 game steps, created 413 files in 225 folders, often a separate one for each battle and item it found. Because the game state keeps changing, the archive goes stale fast. At times, the model did nothing but reorganize its notes instead of playing, and it finished with just a single badge.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In an Anthropic test with Pokémon Red, the older Claude Sonnet 3.7 treated everything as potentially important and, across roughly 10,000 game steps, created 413 files in 225 folders, often a separate one for each battle and item it found. Because the game state keeps changing, the archive goes stale fast. At times, the model did nothing but reorganize its notes instead of playing, and it finished with just a single badge.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The newer Claude Fable 5 limited its memory to a few files and earned four badges. Fable 5 didn&#x27;t record information already visible on screen and instead wrote down plans, strategies, and rules it had tested. Anthropic&#x27;s comparison, however, covers only a single playthrough per model.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The newer Claude Fable 5 limited its memory to a few files and earned four badges. Fable 5 didn&#x27;t record information already visible on screen and instead wrote down plans, strategies, and rules it had tested. Anthropic&#x27;s comparison, however, covers only a single playthrough per model.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic recommends explaining the purpose of memory to Claude and letting the model decide how to use it. In one benchmark, according to Anthropic, rigid instructions such as &quot;only record mistakes&quot; wiped out most of the advantage for stronger models. Older models, by contrast, benefited from clear instructions, such as being told to actually read their notes before every response.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic recommends explaining the purpose of memory to Claude and letting the model decide how to use it. In one benchmark, according to Anthropic, rigid instructions such as &quot;only record mistakes&quot; wiped out most of the advantage for stronger models. Older models, by contrast, benefited from clear instructions, such as being told to actually read their notes before every response.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The bigger risk comes from faulty notes that the agent blindly trusts later. Dreaming, an idea that builds on research from Letta and UC Berkeley, is designed to address this. Much like the human brain processes experiences during sleep, Claude goes through transcripts of earlier sessions during a break and checks its notes against them.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The bigger risk comes from faulty notes that the agent blindly trusts later. Dreaming, an idea that builds on research from Letta and UC Berkeley, is designed to address this. Much like the human brain processes experiences during sleep, Claude goes through transcripts of earlier sessions during a break and checks its notes against them.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In the Pokémon test, Claude had incorrectly noted which side of a mountain a landmark was on. Relying on that faulty note, Claude fell into the same trap three times, eventually wanted to give up, and missed its goal. After a Dreaming pass, Claude caught the error by checking the note against the transcript and found the right path.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In the Pokémon test, Claude had incorrectly noted which side of a mountain a landmark was on. Relying on that faulty note, Claude fell into the same trap three times, eventually wanted to give up, and missed its goal. After a Dreaming pass, Claude caught the error by checking the note against the transcript and found the right path.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-2 tracking-wide select-none">According to Anthropic</span>Dreaming can also organize larger knowledge bases. Claude built a linked wiki from about 350,000 internal documents from Stainless, a software company Anthropic acquired. Dreaming is supposed to generate new pages while fixing gaps, duplicates, and broken links. The payoff was greatest when Claude could combine the wiki with search, so the wiki worked as a complement rather than a replacement.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to Anthropic, Dreaming can also organize larger knowledge bases. Claude built a linked wiki from about 350,000 internal documents from Stainless, a software company Anthropic acquired. Dreaming is supposed to generate new pages while fixing gaps, duplicates, and broken links. The payoff was greatest when Claude could combine the wiki with search, so the wiki worked as a complement rather than a replacement.Ad</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg" alt="Specific memory rules help older models, while stronger models perform worse with rigid instructions" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg" alt="Specific memory rules help older models, while stronger models perform worse with rigid instructions" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: Specific memory rules help older models, while stronger models perform worse with rigid instructions</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In a separate legal test by Anthropic, a wiki helped most with questions whose answers were spread across multiple documents. Claude scored 87 percent with the wiki, compared to 73 percent with search alone. For simple lookup tasks, the wiki performed roughly on par with search, and in one case it even grew larger than the source documents.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In a separate legal test by Anthropic, a wiki helped most with questions whose answers were spread across multiple documents. Claude scored 87 percent with the wiki, compared to 73 percent with search alone. For simple lookup tasks, the wiki performed roughly on par with search, and in one case it even grew larger than the source documents.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic acknowledges that key questions remain open. Taking notes mid-task distracts the agent from its work, Dreaming costs extra compute, and its results arrive only after a delay. Wikis and notes also need regular upkeep, or errors and hallucinations pile up. Anthropic also warns against automatically loading too many memories into every session, because they eat up context and pass any bad note along to every future session.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic acknowledges that key questions remain open. Taking notes mid-task distracts the agent from its work, Dreaming costs extra compute, and its results arrive only after a delay. Wikis and notes also need regular upkeep, or errors and hallucinations pile up. Anthropic also warns against automatically loading too many memories into every session, because they eat up context and pass any bad note along to every future session.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">All of these tests come from Anthropic. The overall takeaway is that a useful agent memory depends less on storing as much as possible than on keeping the right information and correcting mistakes later.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">All of these tests come from Anthropic. The overall takeaway is that a useful agent memory depends less on storing as much as possible than on keeping the right information and correcting mistakes later.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic introduced Dreaming in May as a research preview for Claude Managed Agents, the company&#x27;s cloud platform for AI agents. The service reads an existing memory store and up to 100 past sessions, removes duplicate and outdated entries, and creates a reorganized store, leaving the original untouched. At launch, Dreaming supported only Claude Opus 4.7 and Sonnet 4.6.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic introduced Dreaming in May as a research preview for Claude Managed Agents, the company&#x27;s cloud platform for AI agents. The service reads an existing memory store and up to 100 past sessions, removes duplicate and outdated entries, and creates a reorganized store, leaving the original untouched. At launch, Dreaming supported only Claude Opus 4.7 and Sonnet 4.6.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">OpenAI also calls ChatGPT&#x27;s memory, which it overhauled in June, &quot;Dreaming.&quot; That system maintains a user profile in the background and automatically corrects outdated information. According to OpenAI, this raised temporal accuracy from 52.2 to 75.1 percent.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">OpenAI also calls ChatGPT&#x27;s memory, which it overhauled in June, &quot;Dreaming.&quot; That system maintains a user profile in the background and automatically corrects outdated information. According to OpenAI, this raised temporal accuracy from 52.2 to 75.1 percent.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Researchers at Google and Google DeepMind also let AI agents dream, but they use dreaming to improve an agent&#x27;s search strategy. Their agent works through alternative solutions using results it has already stored, without calling the model again. Google has also built WikiSkill, a wiki for agents. As in Anthropic&#x27;s system, WikiSkill keeps raw transcripts, distilled knowledge, and specific instructions in separate layers.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Researchers at Google and Google DeepMind also let AI agents dream, but they use dreaming to improve an agent&#x27;s search strategy. Their agent works through alternative solutions using results it has already stored, without calling the model again. Google has also built WikiSkill, a wiki for agents. As in Anthropic&#x27;s system, WikiSkill keeps raw transcripts, distilled knowledge, and specific instructions in separate layers.</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -349,14 +350,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)</h4>
-            </a>
-            
             <a href="/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with &quot;basically no human intervention&quot;, vs. the usual 6-12 months (Shane Downing/Tom&#x27;s Hardware)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -379,6 +372,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sources: Jensen Huang&#x27;s daughter remains in a senior Nvidia role; before Jensen Huang resigned, she was his de facto chief of staff with considerable authority (New York Times)</h4>
+            </a>
+            
+            <a href="/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)</h4>
             </a>
             
               </div>

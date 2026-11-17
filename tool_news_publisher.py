@@ -703,37 +703,13 @@ def extract_ai_analysis_text(analysis_data: Any, is_zh: bool) -> str:
 def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, str]], is_zh: bool = True) -> str:
     """
     Magazine-Grade Professional Typography & Inline Media Injector:
-    - Lead Paragraph Accent: distinct styling for the opening narrative lead.
-    - Timeline & Context Badges: elegant pill badges for date / time / key pivot markers.
-    - Pull Quote Callouts: editorial blockquotes with serif quote glyphs.
+    - Editorial Lead: distinguished opening narrative prose without jarring boxes.
+    - Clean Editorial Typography: generous line-height and paragraph spacing for effortless long-form reading.
+    - Editorial Pull Quote: understated, elegant accent border for notable quotes.
     - Inline Photo & Figure Injection: interleaves authentic article photography between narrative beats.
     """
     rendered_elements = []
     total = len(paras)
-
-    zh_badge_patterns = [
-        r"^(\d{4}\s*年(?:[0-9]{1,2}\s*月)?(?:，|,)?)\s*",
-        r"^(今年\s*[0-9]{1,2}\s*月(?:，|,)?)\s*",
-        r"^(大约在同一时间(?:，|,)?)\s*",
-        r"^(诉讼指控称(?:，|,)?)\s*",
-        r"^(据(?:知情人士|执行该项目的乔比航空公司|公开资料)透露(?:，|,)?)\s*",
-        r"^(与此同时(?:，|,)?)\s*",
-        r"^(分析师指出(?:，|,)?)\s*",
-        r"^(商业发布似乎指日可待(?:。|，)?)\s*",
-        r"^(据执行该项目的乔比航空公司称(?:，|,)?)\s*",
-        r"^(最终目标要远大得多(?:。|，)?)\s*",
-    ]
-    en_badge_patterns = [
-        r"^(In\s+\d{4},?)\s*",
-        r"^(Earlier this year,?)\s*",
-        r"^(Around the same time,?)\s*",
-        r"^(Meanwhile,?)\s*",
-        r"^(According to [^,]+,?)\s*",
-        r"^(Analysts (?:note|point out) that,?)\s*",
-        r"^(At the same time,?)\s*",
-    ]
-    badge_regexes = zh_badge_patterns if is_zh else en_badge_patterns
-
     img_idx = 0
 
     for i, p in enumerate(paras):
@@ -759,51 +735,33 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
         if is_subheading:
             clean_heading = raw_p.lstrip('#').strip()
             rendered_elements.append(f"""
-            <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+            <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>{escape(clean_heading)}</span>
             </h3>
             """.strip())
             continue
 
         is_pure_quote = bool(re.match(r'^[“"][^”"]+[”"]$', raw_p) or re.match(r'^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$', raw_p))
-
-        badge_html = ""
-        p_body = raw_p
-        for bp in badge_regexes:
-            bm = re.match(bp, p_body)
-            if bm:
-                marker = bm.group(1).rstrip('，,。')
-                p_body = p_body[bm.end():].strip()
-                badge_html = f'<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-2 tracking-wide select-none">{escape(marker)}</span>'
-                break
-
-        escaped_body = escape(p_body)
-        styled_content = f"{badge_html}{escaped_body}"
+        escaped_body = escape(raw_p)
 
         # 1. Lead Paragraph (First paragraph when article is substantive)
         if i == 0 and total >= 3:
             rendered_elements.append(f"""
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">{styled_content}</p>
-            </div>
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">{escaped_body}</p>
             """.strip())
         # 2. Editorial Pull Quote
         elif is_pure_quote:
             clean_q = escape(raw_p)
             rendered_elements.append(f"""
-            <blockquote class="my-6 p-4 sm:p-5 rounded-2xl bg-amber-50/40 dark:bg-amber-950/20 border-l-4 border-amber-500/80 dark:border-amber-400 text-slate-800 dark:text-slate-200 shadow-xs">
-              <div class="flex items-start gap-2.5">
-                <span class="text-3xl text-amber-500/70 font-serif leading-none select-none shrink-0">“</span>
-                <div class="text-sm sm:text-base leading-relaxed sm:leading-loose italic font-serif flex-1">{clean_q}</div>
-                <span class="text-3xl text-amber-500/70 font-serif leading-none select-none shrink-0 self-end">”</span>
-              </div>
+            <blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
+              <p>{clean_q}</p>
             </blockquote>
             """.strip())
         # 3. Regular Paragraph
         else:
             rendered_elements.append(f"""
-            <p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">{styled_content}</p>
+            <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">{escaped_body}</p>
             """.strip())
 
         # Interleave inline photos between narrative beats
@@ -835,8 +793,8 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
                 """.strip()
 
             rendered_elements.append(f"""
-            <figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="{escape(i_url)}" alt="{escape(i_cap)}" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+            <figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="{escape(i_url)}" alt="{escape(i_cap)}" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               {caption_html}
             </figure>
             """.strip())
@@ -1046,18 +1004,21 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             """
 
         full_coverage_html = f"""
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>{sec_title}</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">{escape(src_note)}</span>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="{sec_title}">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                {sec_title}
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">{escape(src_note)}</span>
           </div>
-          <div class="space-y-4">
+          <div class="article-body space-y-6 sm:space-y-7">
             {p_html}
           </div>
           {excerpt_notice_html}
-        </div>
+        </section>
         """
 
     related_html = ""
@@ -1324,7 +1285,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           {escape(title)}
@@ -1358,9 +1319,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             {escape(summary)}
-          </div>
+          </p>
         </div>
 
         {bullets_html}

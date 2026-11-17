@@ -202,7 +202,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic揭示AI代理记忆优化核心：减法胜于加法
@@ -236,9 +236,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic通过Pokémon游戏测试发现，AI代理的长程记忆效能取决于精简信息存储，而非冗余存档，引入“睡眠复盘”机制可修正记忆偏差
-          </div>
+          </p>
         </div>
 
         
@@ -260,67 +260,68 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 深度报道原文实录</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER 权威实录</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Anthropic 研究了克劳德如何在不同的课程中保留知识。它的测试表明，选择性笔记胜过详尽的档案，并且让克劳德在事后回顾自己的记忆可以纠正错误。</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Anthropic 研究了克劳德如何在不同的课程中保留知识。它的测试表明，选择性笔记胜过详尽的档案，并且让克劳德在事后回顾自己的记忆可以纠正错误。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">任何在一个项目上与人工智能代理一起工作几天的人都会很快碰壁，因为每个新的会话都是从头开始的。在一篇研究文章中，Anthropic 描述了 Claude 如何在模型保持不变的情况下跨会话保留知识。克劳德将注释写入一个文件夹，以便稍后读取。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">任何在一个项目上与人工智能代理一起工作几天的人都会很快碰壁，因为每个新的会话都是从头开始的。在一篇研究文章中，Anthropic 描述了 Claude 如何在模型保持不变的情况下跨会话保留知识。克劳德将注释写入一个文件夹，以便稍后读取。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">根据 Anthropic 的说法，核心问题是选择。在知道接下来会发生什么之前，智能体必须立即决定稍后可能发生的事情，因此每一个音符都是对未来的赌注。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据 Anthropic 的说法，核心问题是选择。在知道接下来会发生什么之前，智能体必须立即决定稍后可能发生的事情，因此每一个音符都是对未来的赌注。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在 Pokémon Red 的 Anthropic 测试中，较旧的 Claude Sonnet 3.7 将所有内容视为潜在重要的内容，并在大约 10,000 个游戏步骤中，在 225 个文件夹中创建了 413 个文件，通常为它发现的每一场战斗和项目创建一个单独的文件。由于游戏状态不断变化，存档很快就会过时。有时，模型除了重新组织音符而不是演奏之外什么也不做，最后只留下一个徽章。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Pokémon Red 的 Anthropic 测试中，较旧的 Claude Sonnet 3.7 将所有内容视为潜在重要的内容，并在大约 10,000 个游戏步骤中，在 225 个文件夹中创建了 413 个文件，通常为它发现的每一场战斗和项目创建一个单独的文件。由于游戏状态不断变化，存档很快就会过时。有时，模型除了重新组织音符而不是演奏之外什么也不做，最后只留下一个徽章。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">较新的《克劳德寓言 5》将其内存限制为几个文件，并获得了四个徽章。 《神鬼寓言 5》并没有记录屏幕上已经可见的信息，而是写下了已经测试过的计划、策略和规则。然而，Anthropic 的比较仅涵盖每个模型的一次游戏。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">较新的《克劳德寓言 5》将其内存限制为几个文件，并获得了四个徽章。 《神鬼寓言 5》并没有记录屏幕上已经可见的信息，而是写下了已经测试过的计划、策略和规则。然而，Anthropic 的比较仅涵盖每个模型的一次游戏。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 建议向 Claude 解释记忆的用途，并让模型决定如何使用它。根据 Anthropic 的说法，在一项基准测试中，诸如“仅记录错误”之类的严格指令消除了更强大模型的大部分优势。相比之下，较旧的模型受益于明确的指示，例如被告知在每次回答之前实际阅读他们的笔记。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 建议向 Claude 解释记忆的用途，并让模型决定如何使用它。根据 Anthropic 的说法，在一项基准测试中，诸如“仅记录错误”之类的严格指令消除了更强大模型的大部分优势。相比之下，较旧的模型受益于明确的指示，例如被告知在每次回答之前实际阅读他们的笔记。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">更大的风险来自于代理人后来盲目信任的错误票据。梦想是一个建立在莱塔和加州大学伯克利分校研究基础上的想法，旨在解决这个问题。就像人类大脑在睡眠期间处理经历一样，克劳德在休息期间查看早期会议的记录，并对照记录进行检查。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">更大的风险来自于代理人后来盲目信任的错误票据。梦想是一个建立在莱塔和加州大学伯克利分校研究基础上的想法，旨在解决这个问题。就像人类大脑在睡眠期间处理经历一样，克劳德在休息期间查看早期会议的记录，并对照记录进行检查。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在神奇宝贝测试中，克劳德错误地指出了地标位于山的哪一侧。靠着那张错误的音符，克劳德三度陷入同样的​​陷阱，最终想要放弃，却未能达到目的。在梦想通过后，克劳德通过检查记录中的注释发现了错误，并找到了正确的路径。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在神奇宝贝测试中，克劳德错误地指出了地标位于山的哪一侧。靠着那张错误的音符，克劳德三度陷入同样的​​陷阱，最终想要放弃，却未能达到目的。在梦想通过后，克劳德通过检查记录中的注释发现了错误，并找到了正确的路径。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">据Anthropic介绍，Dreaming还可以组织更大的知识库。克劳德利用 Anthropic 收购的软件公司不锈钢的约 350,000 份内部文档构建了一个链接维基。梦想应该生成新页面，同时修复间隙、重复和损坏的链接。当克劳德能够将 wiki 与搜索结合起来时，回报是最大的，因此 wiki 作为补充而不是替代。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">据Anthropic介绍，Dreaming还可以组织更大的知识库。克劳德利用 Anthropic 收购的软件公司不锈钢的约 350,000 份内部文档构建了一个链接维基。梦想应该生成新页面，同时修复间隙、重复和损坏的链接。当克劳德能够将 wiki 与搜索结合起来时，回报是最大的，因此 wiki 作为补充而不是替代。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg" alt="Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg" alt="Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在 Anthropic 进行的一项单独的法律测试中，维基百科对答案分散在多个文档中的问题提供了最大的帮助。克劳德在 wiki 上的得分为 87%，而仅在搜索方面得分为 73%。对于简单的查找任务，wiki 的性能与搜索大致相当，在一种情况下，它甚至比源文档还要大。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Anthropic 进行的一项单独的法律测试中，维基百科对答案分散在多个文档中的问题提供了最大的帮助。克劳德在 wiki 上的得分为 87%，而仅在搜索方面得分为 73%。对于简单的查找任务，wiki 的性能与搜索大致相当，在一种情况下，它甚至比源文档还要大。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 承认关键问题仍然悬而未决。在任务中做笔记会分散代理的工作注意力，做梦会消耗额外的计算资源，而且结果只有在延迟后才会到达。维基和注释也需要定期维护，否则错误和幻觉就会堆积起来。 Anthropic 还警告不要在每个会话中自动加载太多记忆，因为它们会耗尽上下文并将任何不良记录传递给未来的每个会话。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 承认关键问题仍然悬而未决。在任务中做笔记会分散代理的工作注意力，做梦会消耗额外的计算资源，而且结果只有在延迟后才会到达。维基和注释也需要定期维护，否则错误和幻觉就会堆积起来。 Anthropic 还警告不要在每个会话中自动加载太多记忆，因为它们会耗尽上下文并将任何不良记录传递给未来的每个会话。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">所有这些测试都来自 Anthropic。总的结论是，有用的代理记忆更多地取决于保留正确的信息并在以后纠正错误，而不是尽可能多地存储。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">所有这些测试都来自 Anthropic。总的结论是，有用的代理记忆更多地取决于保留正确的信息并在以后纠正错误，而不是尽可能多地存储。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 在 5 月份推出了 Dreaming，作为该公司的 AI 代理云平台 Claude Managed Agents 的研究预览。该服务读取现有内存存储和最多 100 个过去的会话，删除重复和过时的条目，并创建重新组织的存储，使原始存储保持不变。发布时，Dreaming 仅支持 Claude Opus 4.7 和 Sonnet 4.6。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 在 5 月份推出了 Dreaming，作为该公司的 AI 代理云平台 Claude Managed Agents 的研究预览。该服务读取现有内存存储和最多 100 个过去的会话，删除重复和过时的条目，并创建重新组织的存储，使原始存储保持不变。发布时，Dreaming 仅支持 Claude Opus 4.7 和 Sonnet 4.6。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">OpenAI 还将 6 月份检修的 ChatGPT 内存称为“梦想”。该系统在后台维护用户配置文件并自动更正过时的信息。据 OpenAI 称，这将时间准确度从 52.2% 提高到了 75.1%。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">OpenAI 还将 6 月份检修的 ChatGPT 内存称为“梦想”。该系统在后台维护用户配置文件并自动更正过时的信息。据 OpenAI 称，这将时间准确度从 52.2% 提高到了 75.1%。</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -331,14 +332,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta在泰国与土耳其测试独立Instagram消息应用" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta在泰国与土耳其测试独立Instagram消息应用</h4>
-            </a>
-            
             <a href="/zh/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic通过AI自动化实现模型跨硬件高效迁移" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -361,6 +354,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">黄仁勋卸任后英伟达面临家族治理危机</h4>
+            </a>
+            
+            <a href="/zh/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="苹果macOS 15.3 beta加强AI应用访问权限限制" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">苹果macOS 15.3 beta加强AI应用访问权限限制</h4>
             </a>
             
               </div>

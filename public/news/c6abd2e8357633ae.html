@@ -223,7 +223,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic&#x27;s Claude Fable 5.2 doesn&#x27;t generate images, it paints them
@@ -257,9 +257,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic researcher Jake Eaton introduced Claude Fable 5.2, a model that bypasses traditional diffusion-based image generation by executing 1,000 to 2,000 lines of Python code. This system simulates physical brushstrokes, paint textures, and corrective layering within a virtual environment, rendering images through thousands of manually placed, coordinate-defined strokes that mimic human artistic behavior.
-          </div>
+          </p>
         </div>
 
         
@@ -281,67 +281,68 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 Full In-Depth Coverage</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER Full Report</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Anthropic&#x27;s new language model Claude Fable 5.2 can create complex and even photorealistic paintings by using code to place hundreds of thousands of individual brushstrokes on a virtual canvas.</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Anthropic&#x27;s new language model Claude Fable 5.2 can create complex and even photorealistic paintings by using code to place hundreds of thousands of individual brushstrokes on a virtual canvas.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Current image models like Midjourney typically use diffusion, which gradually refines a noisy image into a clear result. Fable 5.2 takes a different approach by simulating the physical painting process, including bristle texture, how the paint goes on, and mistakes it then has to paint over.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Current image models like Midjourney typically use diffusion, which gradually refines a noisy image into a clear result. Fable 5.2 takes a different approach by simulating the physical painting process, including bristle texture, how the paint goes on, and mistakes it then has to paint over.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fa" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fa" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fa</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Developer Jake Eaton showed on X what the approach can do. Eaton works at Anthropic, where he regularly contributes to research on language model values, safety mechanisms, and AI agent behavior.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Developer Jake Eaton showed on X what the approach can do. Eaton works at Anthropic, where he regularly contributes to research on language model values, safety mechanisms, and AI agent behavior.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">When he asked Fable 5.2 to create a painting as hard to distinguish from a photograph as possible, the model generated an image of a shopping cart in a parking garage using roughly 700,000 simulated brushstrokes.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When he asked Fable 5.2 to create a painting as hard to distinguish from a photograph as possible, the model generated an image of a shopping cart in a parking garage using roughly 700,000 simulated brushstrokes.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-2 tracking-wide select-none">According to Eaton</span>Claude works without an external image model and without pre-rendered or traced source images. Each piece is a Python program of 1,000 to 2,000 lines that drives a simulated paint engine. The approach resembles agentic image editing, where language models pick tools and evaluate results.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to Eaton, Claude works without an external image model and without pre-rendered or traced source images. Each piece is a Python program of 1,000 to 2,000 lines that drives a simulated paint engine. The approach resembles agentic image editing, where language models pick tools and evaluate results.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Earlier attempts with the sibling model Opus 5.5 drew criticism for merely imitating existing art. Eaton responded by having Fable 5.2 develop its own artist personas with fictional backstories and consistent styles. The model needs several thousand brushstrokes per painting, and Eaton redirects them with comments.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Earlier attempts with the sibling model Opus 5.5 drew criticism for merely imitating existing art. Eaton responded by having Fable 5.2 develop its own artist personas with fictional backstories and consistent styles. The model needs several thousand brushstrokes per painting, and Eaton redirects them with comments.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic engineer Michael Graczyk shared a chat log and video of an experiment in which he asked Fable 5.2 to paint a bird at sunrise. The model could only use code to simulate the physics of bristles, wet paint, and canvas texture. It had to output every brushstroke manually as its own coordinate line, with no way to undo strokes once placed. That&#x27;s what sets this method apart from AI-generated videos, where models like Flux 3 generate image sequences and their temporal consistency directly.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic engineer Michael Graczyk shared a chat log and video of an experiment in which he asked Fable 5.2 to paint a bird at sunrise. The model could only use code to simulate the physics of bristles, wet paint, and canvas texture. It had to output every brushstroke manually as its own coordinate line, with no way to undo strokes once placed. That&#x27;s what sets this method apart from AI-generated videos, where models like Flux 3 generate image sequences and their temporal consistency directly.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The resulting 21-second video uses a counter to track how the painting takes shape from exactly 111 strokes on a blank canvas. For the first stroke, the model output the color code #30346a, a width of 90 pixels, and five slightly wobbling waypoints. Fable 5.2 said it added the roughly seven-pixel wobble on purpose because a human arm doesn&#x27;t draw a perfectly straight line either.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The resulting 21-second video uses a counter to track how the painting takes shape from exactly 111 strokes on a blank canvas. For the first stroke, the model output the color code #30346a, a width of 90 pixels, and five slightly wobbling waypoints. Fable 5.2 said it added the roughly seven-pixel wobble on purpose because a human arm doesn&#x27;t draw a perfectly straight line either.Ad</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Between passes, the model looked at the canvas and reacted to its own mistakes like a real painter would. When the bird&#x27;s back came out too thin and scraggly, the AI laid a bolder stroke over it, so the stray bristle marks along the edges now look like ruffled feathers.Ad</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Between passes, the model looked at the canvas and reacted to its own mistakes like a real painter would. When the bird&#x27;s back came out too thin and scraggly, the AI laid a bolder stroke over it, so the stray bristle marks along the edges now look like ruffled feathers.Ad</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="Field scene" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="Field scene" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: Field scene</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In a second, 280-stroke piece showing two people painting at dusk, a late lighting effect accidentally smeared paint tubes and a cup on the table. Claude repainted those objects after the fact. The model also had both figures paint with their outer hands so their inner shoulders could touch, just as the prompt requested.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In a second, 280-stroke piece showing two people painting at dusk, a late lighting effect accidentally smeared paint tubes and a cup on the table. Claude repainted those objects after the fact. The model also had both figures paint with their outer hands so their inner shoulders could touch, just as the prompt requested.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Fable 5.2&#x27;s ability to plan step by step and self-correct under physical constraints isn&#x27;t limited to virtual canvases. According to Anthropic, the model is built for extremely demanding long-horizon technical tasks, as is Mythos 5.2, a version designed for verified security and biology researchers.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Fable 5.2&#x27;s ability to plan step by step and self-correct under physical constraints isn&#x27;t limited to virtual canvases. According to Anthropic, the model is built for extremely demanding long-horizon technical tasks, as is Mythos 5.2, a version designed for verified security and biology researchers.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In internal tests, Fable 5.2 solved two open problems in black hole physics, designed three working electronic devices with circuit board manufacturer Diode, and used more than 1,000 sub-agents to program its own laptop operating system in eight days.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In internal tests, Fable 5.2 solved two open problems in black hole physics, designed three working electronic devices with circuit board manufacturer Diode, and used more than 1,000 sub-agents to program its own laptop operating system in eight days.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">AI researcher Aris Zhu tested how the model performs with real robotic arms. He pitted Fable 5.2 against OpenAI&#x27;s competing model GPT-6 Astra, with each using a physical robot arm to paint Van Gogh&#x27;s &quot;The Starry Night.&quot; Anthropic reports a score of 64.9 percent for Fable 5.2 on its internal RoboDojo Sim benchmark, compared with 29.8 percent for GPT-6 Astra.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">AI researcher Aris Zhu tested how the model performs with real robotic arms. He pitted Fable 5.2 against OpenAI&#x27;s competing model GPT-6 Astra, with each using a physical robot arm to paint Van Gogh&#x27;s &quot;The Starry Night.&quot; Anthropic reports a score of 64.9 percent for Fable 5.2 on its internal RoboDojo Sim benchmark, compared with 29.8 percent for GPT-6 Astra.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Zhu&#x27;s real-world comparison still shows limits in fine motor control. Astra painted faster, and so far only OpenAI&#x27;s model has managed to stand a domino on end. It did so by slowly loosening its gripper to use gravity as a pivot point.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Zhu&#x27;s real-world comparison still shows limits in fine motor control. Astra painted faster, and so far only OpenAI&#x27;s model has managed to stand a domino on end. It did so by slowly loosening its gripper to use gravity as a pivot point.</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -352,14 +353,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)</h4>
-            </a>
-            
             <a href="/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with &quot;basically no human intervention&quot;, vs. the usual 6-12 months (Shane Downing/Tom&#x27;s Hardware)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -382,6 +375,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sources: Jensen Huang&#x27;s daughter remains in a senior Nvidia role; before Jensen Huang resigned, she was his de facto chief of staff with considerable authority (New York Times)</h4>
+            </a>
+            
+            <a href="/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)</h4>
             </a>
             
               </div>

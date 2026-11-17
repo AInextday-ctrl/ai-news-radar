@@ -223,7 +223,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Google&#x27;s TIG reports the first observed instance of attackers using an autonomous AI framework with no human in the loop to turn security patches into exploits (Duncan Riley/SiliconANGLE)
@@ -257,9 +257,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Google Threat Intelligence Group (GTIG) identified &#x27;exploit_agent,&#x27; the first fully autonomous framework that executes the entire loop of patch-to-exploit creation without human intervention. By connecting frontier and local LLMs, attackers automate vulnerability analysis of patches and generate exploits, targeting web applications in the media and education sectors.
-          </div>
+          </p>
         </div>
 
         
@@ -281,83 +281,84 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 Full In-Depth Coverage</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">SiliconANGLE Full Report</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">A new report out today from Google LLC’s Google Threat Intelligence Group finds that for the first time, attackers have used an artificial intelligence framework running with no human in the loop to turn security patches into exploits.</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">SiliconANGLE Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">A new report out today from Google LLC’s Google Threat Intelligence Group finds that for the first time, attackers have used an artificial intelligence framework running with no human in the loop to turn security patches into exploits.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Called exploit_agent, the framework turned up on an exposed staging server, where it was wired into several frontier and locally hosted large language models. Its job, according to GTIG, is continuous comparison of popular web application code before and after each patch announcement. Once a likely flaw is identified, the exploit it drafts is executed automatically.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Called exploit_agent, the framework turned up on an exposed staging server, where it was wired into several frontier and locally hosted large language models. Its job, according to GTIG, is continuous comparison of popular web application code before and after each patch announcement. Once a likely flaw is identified, the exploit it drafts is executed automatically.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/e810e50d-1091-4ce3-9cc2-0232848a8d60.png" alt="theCUBE" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/e810e50d-1091-4ce3-9cc2-0232848a8d60.png" alt="theCUBE" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: theCUBE</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Data taken from victims was sitting on the same server, alongside scripts for brute-forcing, installing webshells and even removing webshells left by rival attackers. Victim telemetry suggests the operator was most interested in French websites tied to media, entertainment and education. Written in Russian, one comment in the framework’s configuration file tells whoever set it up to enter the keys “right here, not in the chat.”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Data taken from victims was sitting on the same server, alongside scripts for brute-forcing, installing webshells and even removing webshells left by rival attackers. Victim telemetry suggests the operator was most interested in French websites tied to media, entertainment and education. Written in Russian, one comment in the framework’s configuration file tells whoever set it up to enter the keys “right here, not in the chat.”</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In the previous edition of the quarterly tracker two months ago, GTIG said it had not observed fully autonomous attack pipelines deployed against targets in the wild. That changed over the past quarter, according to the new report, titled “Agentic Threat Activity Crosses a Significant Threshold.” Because the source material for a patched flaw is finite, GTIG believes attackers may find it more efficient to point LLMs at n-day vulnerabilities than to hunt for zero-days.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In the previous edition of the quarterly tracker two months ago, GTIG said it had not observed fully autonomous attack pipelines deployed against targets in the wild. That changed over the past quarter, according to the new report, titled “Agentic Threat Activity Crosses a Significant Threshold.” Because the source material for a patched flaw is finite, GTIG believes attackers may find it more efficient to point LLMs at n-day vulnerabilities than to hunt for zero-days.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">How quickly the gap between disclosure and a working exploit can close shows in the case of two flaws in print management servers from PaperCut Software Pty Ltd., chained together and exploited as zero-days in late August. Security researchers and Huntress Labs Inc. used large language models to generate working exploits within a day of disclosure.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">How quickly the gap between disclosure and a working exploit can close shows in the case of two flaws in print management servers from PaperCut Software Pty Ltd., chained together and exploited as zero-days in late August. Security researchers and Huntress Labs Inc. used large language models to generate working exploits within a day of disclosure.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/04ae65c6-92d8-4203-904e-2ee935b71f1f.png" alt="theCUBE Research" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://s3.us-west-2.amazonaws.com/cube365-prod/related-content/04ae65c6-92d8-4203-904e-2ee935b71f1f.png" alt="theCUBE Research" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: theCUBE Research</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">A campaign tracked by GreyNoise Intelligence Inc. four days after disclosure is believed to have relied on LLMs to build its exploits before it hit hundreds of organizations. One foothold in that campaign reached domain administrator within minutes, GreyNoise found.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A campaign tracked by GreyNoise Intelligence Inc. four days after disclosure is believed to have relied on LLMs to build its exploits before it hit hundreds of organizations. One foothold in that campaign reached domain administrator within minutes, GreyNoise found.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Elsewhere, open-source agentic penetration testing frameworks are being used to automate discrete steps of live intrusions. During one intrusion against the U.S. aerospace sector, a threat actor was observed using the multi-agent framework CAIRN.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Elsewhere, open-source agentic penetration testing frameworks are being used to automate discrete steps of live intrusions. During one intrusion against the U.S. aerospace sector, a threat actor was observed using the multi-agent framework CAIRN.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Another actor ran a customized platform built on PentAGI between late August and early October to scan a wide range of organizations in Asia for vulnerabilities. For now, the noisy forensic trail left by unrestricted autonomous execution is said to make the frameworks easier to detect.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Another actor ran a customized platform built on PentAGI between late August and early October to scan a wide range of organizations in Asia for vulnerabilities. For now, the noisy forensic trail left by unrestricted autonomous execution is said to make the frameworks easier to detect.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-100/90 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 mr-2 tracking-wide select-none">According to GTIG</span>influence operations now use models for far more than writing posts. Using cloud phone farms, a turnkey platform that one commercial contractor was building with help from the Gemini API is designed to run more than 100,000 social media accounts. To make generated photos pass as smartphone shots, prompts behind a separate platform, which targeted political sentiment across Europe and the Middle East, are said to have called for deliberate camera flaws.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to GTIG, influence operations now use models for far more than writing posts. Using cloud phone farms, a turnkey platform that one commercial contractor was building with help from the Gemini API is designed to run more than 100,000 social media accounts. To make generated photos pass as smartphone shots, prompts behind a separate platform, which targeted political sentiment across Europe and the Middle East, are said to have called for deliberate camera flaws.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Among government-backed actors, photos on the fake recruiter profiles that a suspected North Korean group tracked as UNC6836 used to approach cryptocurrency organizations in North America and Europe were found to carry Google’s SynthID watermarks. By way of altered .claude/settings.json files in internal code repositories, the group later rigged each launch of Anthropic PBC’s Claude Code to download its SOMBERMEME backdoor.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Among government-backed actors, photos on the fake recruiter profiles that a suspected North Korean group tracked as UNC6836 used to approach cryptocurrency organizations in North America and Europe were found to carry Google’s SynthID watermarks. By way of altered .claude/settings.json files in internal code repositories, the group later rigged each launch of Anthropic PBC’s Claude Code to download its SOMBERMEME backdoor.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Google said it disabled the accounts and assets tied to the Gemini misuse it found. Google DeepMind has also used the findings to strengthen its classifiers.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Google said it disabled the accounts and assets tied to the Gemini misuse it found. Google DeepMind has also used the findings to strengthen its classifiers.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Support our mission to keep content open and free by engaging with theCUBE community. Join theCUBE’s Alumni Trust Network, where technology leaders connect, share intelligence and create opportunities.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Support our mission to keep content open and free by engaging with theCUBE community. Join theCUBE’s Alumni Trust Network, where technology leaders connect, share intelligence and create opportunities.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Founded by tech visionaries John Furrier and Dave Vellante, SiliconANGLE Media has built a dynamic ecosystem of industry-leading digital media brands that reach 15+ million elite tech professionals. Our new proprietary theCUBE AI Video Cloud is breaking ground in audience interaction, leveraging theCUBEai.com neural network to help technology companies make data-driven decisions and stay at the forefront of industry conversations.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Founded by tech visionaries John Furrier and Dave Vellante, SiliconANGLE Media has built a dynamic ecosystem of industry-leading digital media brands that reach 15+ million elite tech professionals. Our new proprietary theCUBE AI Video Cloud is breaking ground in audience interaction, leveraging theCUBEai.com neural network to help technology companies make data-driven decisions and stay at the forefront of industry conversations.</p>
 
-<h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>CLOUD - BY DUNCAN RILEY . 57 MINUTES AGO</span>
             </h3>
 
-<h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>BY MIKE WHEATLEY . 57 MINUTES AGO</span>
             </h3>
 
-<h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>SECURITY - BY DUNCAN RILEY . 2 HOURS AGO</span>
             </h3>
 
-<h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>SECURITY - BY DUNCAN RILEY . 3 HOURS AGO</span>
             </h3>
 
-<h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 mt-8 mb-3 tracking-tight flex items-center gap-2">
-              <span class="w-1.5 h-4 bg-indigo-600 rounded-full inline-block"></span>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
               <span>SECURITY - BY DUNCAN RILEY . 7 HOURS AGO</span>
             </h3>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -368,14 +369,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)</h4>
-            </a>
-            
             <a href="/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with &quot;basically no human intervention&quot;, vs. the usual 6-12 months (Shane Downing/Tom&#x27;s Hardware)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -398,6 +391,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sources: Jensen Huang&#x27;s daughter remains in a senior Nvidia role; before Jensen Huang resigned, she was his de facto chief of staff with considerable authority (New York Times)</h4>
+            </a>
+            
+            <a href="/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)</h4>
             </a>
             
               </div>

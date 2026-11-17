@@ -223,7 +223,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with &quot;basically no human intervention&quot;, vs. the usual 6-12 months (Shane Downing/Tom&#x27;s Hardware)
@@ -257,9 +257,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic Chief Compute Officer Tom Brown announced that using Claude Mythos Preview, the company reduced the time required to port models to AMD GPUs from 6-12 months to roughly 3 days with minimal human intervention. This strategy aims to bypass the CUDA-centric lock-in and operationalize a heterogeneous compute pool comprising Nvidia GPUs, AMD hardware, Google TPUs, and AWS Trainium.
-          </div>
+          </p>
         </div>
 
         
@@ -281,83 +281,84 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 Full In-Depth Coverage</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">Tom&#x27;s Hardware Full Report</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">If AI can write the low-level code that ties models to Nvidia, CUDA matters less.</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 Full In-Depth Coverage">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 Full In-Depth Coverage
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Tom&#x27;s Hardware Full Report</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">If AI can write the low-level code that ties models to Nvidia, CUDA matters less.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Tom Brown, Anthropic’s co-founder and chief compute officer, made the time comparison, noting to investors that the original meant using a team of “dozens of engineers.” The company already runs its models on multiple kinds of chips — on GPUs from Nvidia and AMD, Google’s TPUs, and AWS Trainium — and its fleet is managed as “one fungible pool of compute.” Brown called the early multi-chip decision “an unconventional bet.” It may have been a wise one, given that Google’s TPUs can now natively run AI models built in PyTorch, and Meta uses them in production.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Tom Brown, Anthropic’s co-founder and chief compute officer, made the time comparison, noting to investors that the original meant using a team of “dozens of engineers.” The company already runs its models on multiple kinds of chips — on GPUs from Nvidia and AMD, Google’s TPUs, and AWS Trainium — and its fleet is managed as “one fungible pool of compute.” Brown called the early multi-chip decision “an unconventional bet.” It may have been a wise one, given that Google’s TPUs can now natively run AI models built in PyTorch, and Meta uses them in production.</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://cdn.mos.cms.futurecdn.net/jcG9LwCNh8XUGiSJ9Pxw7Z.jpg" alt="(Image credit: AMD)" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://cdn.mos.cms.futurecdn.net/jcG9LwCNh8XUGiSJ9Pxw7Z.jpg" alt="(Image credit: AMD)" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: (Image credit: AMD)</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic&#x27;s claim that the job used to take six to 12 months comes from past work, from its “historical experience bringing up new accelerators using traditional engineering approaches,” where tailoring the code to each hardware platform was a challenge. Removing that onboarding barrier could reduce things to a purchase decision, and Anthropic started working with AMD GPUs for the first time this year, with an agreement for up to 2 gigawatts now in place.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic&#x27;s claim that the job used to take six to 12 months comes from past work, from its “historical experience bringing up new accelerators using traditional engineering approaches,” where tailoring the code to each hardware platform was a challenge. Removing that onboarding barrier could reduce things to a purchase decision, and Anthropic started working with AMD GPUs for the first time this year, with an agreement for up to 2 gigawatts now in place.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">CUDA, Nvidia’s programming platform, is very mature at nearly two decades old. AMD has an equivalent, ROCm, with HIP as its programming layer. Code written for CUDA has to be transformed to work there, and AMD even built a tool called HIPify for the process. There is still a conversion cost to switching, and AMD’s vice president of AI software, Anush Elangovan, told EE Times in April that “Claude is better than HIPify because it has web search built in.”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">CUDA, Nvidia’s programming platform, is very mature at nearly two decades old. AMD has an equivalent, ROCm, with HIP as its programming layer. Code written for CUDA has to be transformed to work there, and AMD even built a tool called HIPify for the process. There is still a conversion cost to switching, and AMD’s vice president of AI software, Anush Elangovan, told EE Times in April that “Claude is better than HIPify because it has web search built in.”</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">AMD has been making the argument that AI can write this type of code since August of last year, presenting a research agent that fell short of human experts at the time. In September of that year, AMD CEO Lisa Su said on the Possible podcast that much of AI software is written in CUDA, which needs to be “translated to AMD,” and “a ton of that can now be done in software.”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">AMD has been making the argument that AI can write this type of code since August of last year, presenting a research agent that fell short of human experts at the time. In September of that year, AMD CEO Lisa Su said on the Possible podcast that much of AI software is written in CUDA, which needs to be “translated to AMD,” and “a ton of that can now be done in software.”</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://cdn.mos.cms.futurecdn.net/qkDmAUP4gEEK88Sc6vyaQV.jpg" alt="(Image credit: Anthropic)" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://cdn.mos.cms.futurecdn.net/qkDmAUP4gEEK88Sc6vyaQV.jpg" alt="(Image credit: Anthropic)" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: (Image credit: Anthropic)</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Moving forward to July earlier this year, AMD’s senior vice president of AI, Vamsi Boppana, said its engineers were using AI models to generate GPU kernels, and Su said that when she asked whether her team was helping the Anthropic engineer working on the MI355X, she was told they didn’t need any help. Boppana said that in some cases, the resulting kernels were even “better than the most manually tuned versions.” Under its July agreement with Anthropic, AMD is also using Claude to optimize workloads for its Instinct GPUs and to speed up ROCm development.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Moving forward to July earlier this year, AMD’s senior vice president of AI, Vamsi Boppana, said its engineers were using AI models to generate GPU kernels, and Su said that when she asked whether her team was helping the Anthropic engineer working on the MI355X, she was told they didn’t need any help. Boppana said that in some cases, the resulting kernels were even “better than the most manually tuned versions.” Under its July agreement with Anthropic, AMD is also using Claude to optimize workloads for its Instinct GPUs and to speed up ROCm development.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">At AMD’s Advancing AI event in July, OpenAI’s Philippe Tillet said that once OpenAI got its Helios racks, a single engineer confirmed everything worked within a few days, and that “agents are taking over our jobs, in a sense, as kernel engineers.” Before the event, AMD’s Andrew Dieckman, corporate vice president and general manager of the company’s data center GPU business, told reporters that he has had practically zero conversations with AMD’s customers about CUDA.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At AMD’s Advancing AI event in July, OpenAI’s Philippe Tillet said that once OpenAI got its Helios racks, a single engineer confirmed everything worked within a few days, and that “agents are taking over our jobs, in a sense, as kernel engineers.” Before the event, AMD’s Andrew Dieckman, corporate vice president and general manager of the company’s data center GPU business, told reporters that he has had practically zero conversations with AMD’s customers about CUDA.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Published GEAK, an AI agent that writes GPU kernels; against 30 expert-written kernels it got 19 right, at 0.92 times the experts’ speed on average</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Published GEAK, an AI agent that writes GPU kernels; against 30 expert-written kernels it got 19 right, at 0.92 times the experts’ speed on average</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">“We use a ton of AI to create the kernels that we have”; “nobody knows our architecture better than we do”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“We use a ton of AI to create the kernels that we have”; “nobody knows our architecture better than we do”</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://cdn.mos.cms.futurecdn.net/Zosi9VrDytS9FkgJiHvc69.png" alt="Shane Downing" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://cdn.mos.cms.futurecdn.net/Zosi9VrDytS9FkgJiHvc69.png" alt="Shane Downing" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 Field Scene: Shane Downing</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Mythos “got Claude running on AMD in just three days with basically no human intervention”; the slide footnote limits the three days to prompt processing for one model</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Mythos “got Claude running on AMD in just three days with basically no human intervention”; the slide footnote limits the three days to prompt processing for one model</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Until this week, though, all of this came from AMD or its stage, not from Anthropic to its own investors. Anthropic buys the chips rather than selling them, and it’s heading into its IPO next week, so its multi-chip approach — now with at least some numbers to back it up — carries more weight than a chipmaker’s claims. Its prospectus says it in writing, too, though without a number: “We can onboard new chip platforms in a fraction of the time it once took.”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Until this week, though, all of this came from AMD or its stage, not from Anthropic to its own investors. Anthropic buys the chips rather than selling them, and it’s heading into its IPO next week, so its multi-chip approach — now with at least some numbers to back it up — carries more weight than a chipmaker’s claims. Its prospectus says it in writing, too, though without a number: “We can onboard new chip platforms in a fraction of the time it once took.”</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Not stated; left running “over the weekend”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Not stated; left running “over the weekend”</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">IPO roadshow video, narration, Nov. 10</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">IPO roadshow video, narration, Nov. 10</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels”</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">IPO roadshow video, slide footnote, Nov. 10</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">IPO roadshow video, slide footnote, Nov. 10</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Bringing “new chip platforms into production”; no chip named</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Bringing “new chip platforms into production”; no chip named</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">The prompt processing (prefill) part of the workload is the step where a model reads and processes what it’s been given before it starts replying, and Anthropic hasn’t said whether the replying step (decode) was included as well. Anthropic’s chart, with its axis labeled “Time to onboard new silicon,” shows both lines reaching the same “~100%” mark without saying 100% of what. The company also hasn’t said how fast the model ran on AMD’s GPUs versus Nvidia’s, and that’s the comparison we want to see to show whether AMD’s chips, running AI-written code, can match Nvidia silicon.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The prompt processing (prefill) part of the workload is the step where a model reads and processes what it’s been given before it starts replying, and Anthropic hasn’t said whether the replying step (decode) was included as well. Anthropic’s chart, with its axis labeled “Time to onboard new silicon,” shows both lines reaching the same “~100%” mark without saying 100% of what. The company also hasn’t said how fast the model ran on AMD’s GPUs versus Nvidia’s, and that’s the comparison we want to see to show whether AMD’s chips, running AI-written code, can match Nvidia silicon.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">On the other hand, Nvidia CEO Jensen Huang said in an April interview with Dwarkesh Patel that Nvidia already uses AI on its own kernels and knows its chips best — “nobody knows our architecture better than we do” — and can get the most out of them. Asked why labs like Anthropic use other accelerators, he called Anthropic “a unique instance, not a trend.” Nvidia and AMD, among seven companies, are buying $26.0 billion of Anthropic’s stock at the IPO price, so Nvidia is investing in the very company Huang called the exception.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">On the other hand, Nvidia CEO Jensen Huang said in an April interview with Dwarkesh Patel that Nvidia already uses AI on its own kernels and knows its chips best — “nobody knows our architecture better than we do” — and can get the most out of them. Asked why labs like Anthropic use other accelerators, he called Anthropic “a unique instance, not a trend.” Nvidia and AMD, among seven companies, are buying $26.0 billion of Anthropic’s stock at the IPO price, so Nvidia is investing in the very company Huang called the exception.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">In late July, SemiAnalysis published an article, “Can AMD break the CUDA Moat?,” which essentially said that software creation is not the same moat it was even a year ago. That said, the catch for AMD is that with agentic coding, “each agent requires GPUs to test their code against,” which means that the AI writing the code still needs the hardware. It has found a constant lack of GPUs inside AMD for this type of development, which has held AMD back and may be a new bottleneck.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In late July, SemiAnalysis published an article, “Can AMD break the CUDA Moat?,” which essentially said that software creation is not the same moat it was even a year ago. That said, the catch for AMD is that with agentic coding, “each agent requires GPUs to test their code against,” which means that the AI writing the code still needs the hardware. It has found a constant lack of GPUs inside AMD for this type of development, which has held AMD back and may be a new bottleneck.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">That leaves CUDA’s moat somewhere in between. Getting a model running on a new chip, once the expensive part, appears to be getting cheaper, and better AI may wear down Nvidia’s claim that it knows its hardware best. As for Anthropic’s fungible pool, the chips in it aren’t fully interchangeable — Google’s TPUs are increasingly specialized, for example — and getting the most out of any of them still takes the hardware to test on. The moat is narrowing, but is not gone.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">That leaves CUDA’s moat somewhere in between. Getting a model running on a new chip, once the expensive part, appears to be getting cheaper, and better AI may wear down Nvidia’s claim that it knows its hardware best. As for Anthropic’s fungible pool, the chips in it aren’t fully interchangeable — Google’s TPUs are increasingly specialized, for example — and getting the most out of any of them still takes the hardware to test on. The moat is narrowing, but is not gone.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic’s first AMD MI450 chips, in Helios racks, are expected in the first half of 2027. That’s a new generation and an opportunity to see if the three-day bring-up can be repeated. Anthropic’s IPO comes sooner, after which it will report as a public company.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic’s first AMD MI450 chips, in Helios racks, are expected in the first half of 2027. That’s a new generation and an opportunity to see if the three-day bring-up can be repeated. Anthropic’s IPO comes sooner, after which it will report as a public company.</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Shane Downing Contributing Writer Shane Downing is a Contributing Writer for Tom’s Hardware, covering consumer storage, PC hardware, and AI.</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Shane Downing Contributing Writer Shane Downing is a Contributing Writer for Tom’s Hardware, covering consumer storage, PC hardware, and AI.</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -368,14 +369,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">More Breaking AI News</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta is testing Direct, a standalone messaging app for Instagram that doesn&#x27;t require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)</h4>
-            </a>
-            
             <a href="/news/0d4f34b78258a09d" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://image.cnbcfm.com/api/v1/image/108342704-1785438454346-dsc_2664.jpg?v=1785438632&amp;w=1920&amp;h=1080" alt="Filing: Leopold Aschenbrenner&#x27;s hedge fund Situational Awareness, after nearly blowing up, loaded back up on AI stocks at the end of Q3; all have since plunged (Sean Conlon/CNBC)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -398,6 +391,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">macOS 27.3 beta warns if an app would get full device control, nudging users to &quot;Choose Apps&quot; for the app to control instead, brought on by AI apps&#x27; popularity (Juli Clover/MacRumors)</h4>
+            </a>
+            
+            <a href="/news/3047cbf6a3dbb9cd" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://s.yimg.com/lo/mysterio/api/ed1474eacef7e3ff4d53578a284374cb607dd2ab4293e294075629c946f161d2/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_webp/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Freuters.com%2F764e73147963db9455f860e1395b99e8.jpg" alt="Sources: the US DOJ will review DoorDash&#x27;s ~$17B acquisition of Instacart; DoorDash has agreed to pay a $1.25B breakup fee if the deal fails antitrust review (Jody Godoy/Reuters)" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Reuters</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Sources: the US DOJ will review DoorDash&#x27;s ~$17B acquisition of Instacart; DoorDash has agreed to pay a $1.25B breakup fee if the deal fails antitrust review (Jody Godoy/Reuters)</h4>
             </a>
             
               </div>

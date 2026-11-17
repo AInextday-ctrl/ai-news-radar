@@ -209,7 +209,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic提示优化提示词以提升Claude Opus 5.5效能
@@ -243,9 +243,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic指出用户应摒弃过时提示词习惯，改用单次指令输入及调整 effort 等级，以最大化发挥Claude Opus 5.5的自适应推理效能
-          </div>
+          </p>
         </div>
 
         
@@ -267,47 +267,48 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 深度报道原文实录</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER 权威实录</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">据 Anthropic 称，任何使用 Claude Opus 5.5 的人都应该首先放弃一些从老一代型号中继承下来的提示习惯。</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">据 Anthropic 称，任何使用 Claude Opus 5.5 的人都应该首先放弃一些从老一代型号中继承下来的提示习惯。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 表示，该模型现在是 Pro、Max、Ultra 和 Team 计划的默认模型，其工作原理与其前身不同，并且许多用户使用过时的说明来阻止它。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 表示，该模型现在是 Pro、Max、Ultra 和 Team 计划的默认模型，其工作原理与其前身不同，并且许多用户使用过时的说明来阻止它。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/opus55_prompting.png" alt="Anthropic&#x27;s prompting tips for Opus 5.5 include connecting files and systems, describing the desired end result, dropping &quot;think hard,&quot; starting at Medium effor" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/opus55_prompting.png" alt="Anthropic&#x27;s prompting tips for Opus 5.5 include connecting files and systems, describing the desired end result, dropping &quot;think hard,&quot; starting at Medium effor" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: Anthropic&#x27;s prompting tips for Opus 5.5 include connecting files and systems, describing the desired end result, dropping &quot;think hard,&quot; starting at Medium effor</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">排在首位的是 Anthropic 建议从提示中删除“认真思考”或“仔细思考”等短语。据该公司称，该模型始终自行推理，并根据任务和选定的努力水平调整推理深度。在 Anthropic 的测试中，没有这些短语的反应开始得更快，而且质量没有明显下降。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">排在首位的是 Anthropic 建议从提示中删除“认真思考”或“仔细思考”等短语。据该公司称，该模型始终自行推理，并根据任务和选定的努力水平调整推理深度。在 Anthropic 的测试中，没有这些短语的反应开始得更快，而且质量没有明显下降。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">这些短语可以追溯到推理模型的早期，在今天的标准自适应推理存在之前。 “那时候”，意思是大约一年半前，用户有时可以从模型中获得更高的性能，或者以这种方式引导路由器。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这些短语可以追溯到推理模型的早期，在今天的标准自适应推理存在之前。 “那时候”，意思是大约一年半前，用户有时可以从模型中获得更高的性能，或者以这种方式引导路由器。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 还建议从“中等”努力级别开始，这是 Opus 5.5 的默认值。该公司表示，在内部测试中，Opus 5.5 在“Medium”上的性能与其前身 Opus 5 在“High”上的性能相当。设置越高，成本越高，并且并不总是能产生更好的结果。 Anthropic 建议仅当“中”不够时才切换到“高”，并且用户可以在发送按钮旁边的模型菜单中更改设置。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 还建议从“中等”努力级别开始，这是 Opus 5.5 的默认值。该公司表示，在内部测试中，Opus 5.5 在“Medium”上的性能与其前身 Opus 5 在“High”上的性能相当。设置越高，成本越高，并且并不总是能产生更好的结果。 Anthropic 建议仅当“中”不够时才切换到“高”，并且用户可以在发送按钮旁边的模型菜单中更改设置。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 表示，之前使用更便宜的 Sonnet 并为复杂项目保留 Opus 的团队应该重新考虑这种方法。该公司认为，功能更强大的模型可以用更少的步骤完成任务，这可以部分抵消其较高的每代币价格。 Anthropic 表示，任何经常将 Sonnet 调到“超高”或“最大”强度的人最终都会付出与 Opus 5.5 一样多的费用。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 表示，之前使用更便宜的 Sonnet 并为复杂项目保留 Opus 的团队应该重新考虑这种方法。该公司认为，功能更强大的模型可以用更少的步骤完成任务，这可以部分抵消其较高的每代币价格。 Anthropic 表示，任何经常将 Sonnet 调到“超高”或“最大”强度的人最终都会付出与 Opus 5.5 一样多的费用。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 建议在一条消息中描述所需的结果，而不是一次给出一个指令，包括目标、输出格式以及模型何时应检查问题。据该公司称，Opus 5.5 在处理多部分任务方面比其前身更好。该模型可以越来越多地接管用户在聊天中处理的来回操作，有时做得更好，并通过单个初始输入有效地提示自己。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 建议在一条消息中描述所需的结果，而不是一次给出一个指令，包括目标、输出格式以及模型何时应检查问题。据该公司称，Opus 5.5 在处理多部分任务方面比其前身更好。该模型可以越来越多地接管用户在聊天中处理的来回操作，有时做得更好，并通过单个初始输入有效地提示自己。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 建议将图表和表格作为图像或文件附加，而不是打印出来。该公司表示，不再需要旧模型所需的解决方法，例如手动转录图表值。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 建议将图表和表格作为图像或文件附加，而不是打印出来。该公司表示，不再需要旧模型所需的解决方法，例如手动转录图表值。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">需要成品文档或电子表格的用户应直接索取，而不是先索取草稿。该公司表示，Opus 5.5 通常从请求到成品只需一次即可完成。 Opus 5.5 的图像读取能力也显着提高。该公司表示，即使在最低的努力水平上，它从密集的图表中读取值的准确性也比最高水平的 Opus 5 更高。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">需要成品文档或电子表格的用户应直接索取，而不是先索取草稿。该公司表示，Opus 5.5 通常从请求到成品只需一次即可完成。 Opus 5.5 的图像读取能力也显着提高。该公司表示，即使在最低的努力水平上，它从密集的图表中读取值的准确性也比最高水平的 Opus 5 更高。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">对于设计任务，Anthropic 建议专门命名不需要的样式，例如奶油色背景或药丸形按钮，而不是含糊地禁止“通用设计”。据该公司称，一般说明仅将一种默认样式替换为另一种默认样式。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">对于设计任务，Anthropic 建议专门命名不需要的样式，例如奶油色背景或药丸形按钮，而不是含糊地禁止“通用设计”。据该公司称，一般说明仅将一种默认样式替换为另一种默认样式。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">Anthropic 表示，通过连接器将 Claude 连接到自己的文件和系统的用户可以获得更加定制的结果，因为该模型可以自行提取所需的信息。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 表示，通过连接器将 Claude 连接到自己的文件和系统的用户可以获得更加定制的结果，因为该模型可以自行提取所需的信息。</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -318,14 +319,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta在泰国与土耳其测试独立Instagram消息应用" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta在泰国与土耳其测试独立Instagram消息应用</h4>
-            </a>
-            
             <a href="/zh/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic通过AI自动化实现模型跨硬件高效迁移" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -348,6 +341,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">黄仁勋卸任后英伟达面临家族治理危机</h4>
+            </a>
+            
+            <a href="/zh/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="苹果macOS 15.3 beta加强AI应用访问权限限制" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">苹果macOS 15.3 beta加强AI应用访问权限限制</h4>
             </a>
             
               </div>

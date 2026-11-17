@@ -219,7 +219,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           美团发布LongCat-2.5：全国产算力底座下的万亿参数模型
@@ -253,9 +253,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             美团发布1.6万亿参数多模态Agent模型LongCat-2.5，完全基于国产硬件训练，性能对标Claude Opus 5
-          </div>
+          </p>
         </div>
 
         
@@ -277,67 +277,68 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 深度报道原文实录</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER 权威实录</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">美团发布LongCat-2.5权重，这是一个为AI智能体构建的1.6万亿参数模型。它完全在中国硬件上进行训练，其性能达到了 Claude Opus 5 等美国模型几个月前在编码基准上达到的水平。</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">美团发布LongCat-2.5权重，这是一个为AI智能体构建的1.6万亿参数模型。它完全在中国硬件上进行训练，其性能达到了 Claude Opus 5 等美国模型几个月前在编码基准上达到的水平。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在该模型正式发布一周后，中国食品配送公司美团的 LongCat 团队发布了 LongCat-2.5 的权重。 LongCat-2.5 是为能够自主完成长期、多步骤任务（尤其是编码）的代理而构建的。据美团称，它在多项基准测试中接近西方顶级机型。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在该模型正式发布一周后，中国食品配送公司美团的 LongCat 团队发布了 LongCat-2.5 的权重。 LongCat-2.5 是为能够自主完成长期、多步骤任务（尤其是编码）的代理而构建的。据美团称，它在多项基准测试中接近西方顶级机型。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-02-visual-tokenization.jpg" alt="LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-02-visual-tokenization.jpg" alt="LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat-2.5 是一个专家混合模型，它只为其处理的每个令牌激活其专用子网络的子集。在 1.6 万亿个参数中，每个代币大约有 480 亿个参数处于活跃状态。通过 API，该模型可以一次处理多达 100 万个令牌，并生成长达 128,000 个令牌的响应。它可以理解文本、图像和视频，以文本形式做出响应，并允许用户打开和关闭推理。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 是一个专家混合模型，它只为其处理的每个令牌激活其专用子网络的子集。在 1.6 万亿个参数中，每个代币大约有 480 亿个参数处于活跃状态。通过 API，该模型可以一次处理多达 100 万个令牌，并生成长达 128,000 个令牌的响应。它可以理解文本、图像和视频，以文本形式做出响应，并允许用户打开和关闭推理。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat-2.5 将图像转换为token</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 将图像转换为token</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat-2.5 建立在其前身 LongCat-2.0 的基础上，并增加了图像理解功能。许多多模态模型事后都安装了单独的图像编码器。 LongCat-2.5 相反，将图像转换为模型与文本一起处理的标记，这是当今法学硕士的标准做法。该方法借鉴了 LongCat-Next 研究模型，旨在改进视觉编码、设计和 3D 任务。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 建立在其前身 LongCat-2.0 的基础上，并增加了图像理解功能。许多多模态模型事后都安装了单独的图像编码器。 LongCat-2.5 相反，将图像转换为模型与文本一起处理的标记，这是当今法学硕士的标准做法。该方法借鉴了 LongCat-Next 研究模型，旨在改进视觉编码、设计和 3D 任务。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-04-rl-overview.jpg" alt="Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search and Git history in the sandbox. | Image: Meituan" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-04-rl-overview.jpg" alt="Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search and Git history in the sandbox. | Image: Meituan" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search and Git history in the sandbox. | Image: Meituan</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat-2.5 以原始分辨率将图像分解为模型与文本一起处理的离散标记。 |图片：美团[/标题]</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 以原始分辨率将图像分解为模型与文本一起处理的离散标记。 |图片：美团[/标题]</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">对于强化学习，该团队使用了来自 GitHub 拉取请求的真实软件任务以及重新创建的代理故障。为了确保模型在训练期间确实解决了任务，开发人员在训练环境中阻止了互联网访问，删除了 Git 历史记录和缓存文件，并让语言模型检查其解决方案是否存在技巧。该团队还将几个专门的教师模型用于代理工作、推理和对话的功能提炼到 LongCat-2.5 中。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">对于强化学习，该团队使用了来自 GitHub 拉取请求的真实软件任务以及重新创建的代理故障。为了确保模型在训练期间确实解决了任务，开发人员在训练环境中阻止了互联网访问，删除了 Git 历史记录和缓存文件，并让语言模型检查其解决方案是否存在技巧。该团队还将几个专门的教师模型用于代理工作、推理和对话的功能提炼到 LongCat-2.5 中。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">美团从真实的 GitHub 存储库生成训练任务，并在沙箱中阻止 Web 搜索和 Git 历史记录等快捷方式。 |图片：美团[/标题]</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">美团从真实的 GitHub 存储库生成训练任务，并在沙箱中阻止 Web 搜索和 Git 历史记录等快捷方式。 |图片：美团[/标题]</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">美团将专家的权重和激活量化到 4 位精度，中国芯片可以本地处理。在美团的负载测试中，与 8 位版本相比，即时处理吞吐量提高了 43.3%，响应生成吞吐量提高了 42.77%。美团表示，准确性与未压缩模型保持一致。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">美团将专家的权重和激活量化到 4 位精度，中国芯片可以本地处理。在美团的负载测试中，与 8 位版本相比，即时处理吞吐量提高了 43.3%，响应生成吞吐量提高了 42.77%。美团表示，准确性与未压缩模型保持一致。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-01-benchmark.jpg" alt="In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmark" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-01-benchmark.jpg" alt="In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmark" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmark</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">该版本可在单独的存储库中找到。自托管指南描述了由 Atlas A2 系列的 194 个华为 Ascend 加速器组成的集群。两个处理图像处理，64 个处理提示摄取，以及 128 个处理响应生成。没有针对 Nvidia GPU 的指南。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该版本可在单独的存储库中找到。自托管指南描述了由 Atlas A2 系列的 194 个华为 Ascend 加速器组成的集群。两个处理图像处理，64 个处理提示摄取，以及 128 个处理响应生成。没有针对 Nvidia GPU 的指南。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat-2.5 在终端任务上稍微落后于 Opus 5</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 在终端任务上稍微落后于 Opus 5</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">LongCat 团队在 Terminal Bench v2.1 上获得了 88.4 分，这是衡量代理解决命令行任务效果的基准。美团将 Claude Opus 5 列为 89.1，GPT-5.6 Sol 为 88.8，Deepseek-V4.1-Flash 以 90.6 名列榜首。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat 团队在 Terminal Bench v2.1 上获得了 88.4 分，这是衡量代理解决命令行任务效果的基准。美团将 Claude Opus 5 列为 89.1，GPT-5.6 Sol 为 88.8，Deepseek-V4.1-Flash 以 90.6 名列榜首。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">DeepSWE 测试模型在真实代码存储库中修复错误的效果。这里，LongCat-2.5 从 9.7 分跃升至 64.6 分，落后于表中除 Claude Opus 4.8 之外的所有其他模型，其中 Deepseek-V4.1-Flash 领先，得分为 74.2，GPT-5.6 Sol 得分为 72.7。较新的 Claude Opus 5.5 和 GPT-6.1 Sol 未包含在表中。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">DeepSWE 测试模型在真实代码存储库中修复错误的效果。这里，LongCat-2.5 从 9.7 分跃升至 64.6 分，落后于表中除 Claude Opus 4.8 之外的所有其他模型，其中 Deepseek-V4.1-Flash 领先，得分为 74.2，GPT-5.6 Sol 得分为 72.7。较新的 Claude Opus 5.5 和 GPT-6.1 Sol 未包含在表中。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在美团自己的评估中，LongCat-2.5比其前身有了很大的改进，并且在多个代理基准上接近Claude Opus 5和GPT-5.6 Sol。 |图片：美团[/标题]</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在美团自己的评估中，LongCat-2.5比其前身有了很大的改进，并且在多个代理基准上接近Claude Opus 5和GPT-5.6 Sol。 |图片：美团[/标题]</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -348,14 +349,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta在泰国与土耳其测试独立Instagram消息应用" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta在泰国与土耳其测试独立Instagram消息应用</h4>
-            </a>
-            
             <a href="/zh/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic通过AI自动化实现模型跨硬件高效迁移" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -378,6 +371,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">黄仁勋卸任后英伟达面临家族治理危机</h4>
+            </a>
+            
+            <a href="/zh/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="苹果macOS 15.3 beta加强AI应用访问权限限制" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">苹果macOS 15.3 beta加强AI应用访问权限限制</h4>
             </a>
             
               </div>

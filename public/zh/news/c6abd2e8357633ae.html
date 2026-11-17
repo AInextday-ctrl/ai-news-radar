@@ -209,7 +209,7 @@
       </div>
 
       <!-- Info Body -->
-      <div class="p-6 sm:p-8">
+      <div class="p-6 sm:p-10 lg:p-12">
         
         <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
           Anthropic推出Claude Fable 5.2：重构代码绘图逻辑
@@ -243,9 +243,9 @@
 
         <!-- News Briefing Content -->
         <div class="mt-8">
-          <div class="prose dark:prose-invert max-w-none text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
             Anthropic发布Claude Fable 5.2模型，通过执行数千行Python代码模拟物理笔触生成写实画作
-          </div>
+          </p>
         </div>
 
         
@@ -267,65 +267,66 @@
         </div>
         
         
-        <div class="mt-8 p-6 sm:p-8 rounded-2xl bg-slate-50/60 dark:bg-slate-950/40 border border-slate-200/80 dark:border-slate-800 space-y-4">
-          <div class="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800 pb-3">
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-              <span>📰 深度报道原文实录</span>
-            </h3>
-            <span class="text-xs font-mono px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 border border-indigo-200/50 dark:border-indigo-800/50 font-semibold">THE DECODER 权威实录</span>
-          </div>
-          <div class="space-y-4">
-            <div class="p-4 sm:p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/30 border-l-4 border-indigo-500 shadow-xs mb-5">
-              <p class="text-base sm:text-lg leading-relaxed sm:leading-loose text-slate-800 dark:text-slate-100 font-medium tracking-normal">Anthropic 的新语言模型 Claude Fable 5.2 可以通过使用代码在虚拟画布上放置数十万个单独的笔触来创建复杂甚至逼真的绘画。</p>
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
             </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">THE DECODER 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">Anthropic 的新语言模型 Claude Fable 5.2 可以通过使用代码在虚拟画布上放置数十万个单独的笔触来创建复杂甚至逼真的绘画。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">当前的图像模型（例如 Midjourney）通常使用扩散，逐渐将噪声图像细化为清晰的结果。 《神鬼寓言 5.2》采用了不同的方法，通过模拟物理绘画过程，包括刷毛纹理、绘画如何进行以及必须重新绘画的错误。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当前的图像模型（例如 Midjourney）通常使用扩散，逐渐将噪声图像细化为清晰的结果。 《神鬼寓言 5.2》采用了不同的方法，通过模拟物理绘画过程，包括刷毛纹理、绘画如何进行以及必须重新绘画的错误。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">开发人员 Jake Eaton 在 X 上展示了该方法的用途。 Eaton 在 Anthropic 工作，定期为语言模型值、安全机制和 AI 代理行为的研究做出贡献。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">开发人员 Jake Eaton 在 X 上展示了该方法的用途。 Eaton 在 Anthropic 工作，定期为语言模型值、安全机制和 AI 代理行为的研究做出贡献。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">当他要求《神鬼寓言 5.2》创作一幅尽可能难以与照片区分的绘画时，模型使用大约 700,000 笔模拟笔触生成了停车场中购物车的图像。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当他要求《神鬼寓言 5.2》创作一幅尽可能难以与照片区分的绘画时，模型使用大约 700,000 笔模拟笔触生成了停车场中购物车的图像。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">根据伊顿的说法，克劳德的工作没有外部图像模型，也没有预渲染或跟踪源图像。每一部分都是一个由 1,000 到 2,000 行组成的 Python 程序，用于驱动模拟绘画引擎。该方法类似于代理图像编辑，其中语言模型选择工具并评估结果。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据伊顿的说法，克劳德的工作没有外部图像模型，也没有预渲染或跟踪源图像。每一部分都是一个由 1,000 到 2,000 行组成的 Python 程序，用于驱动模拟绘画引擎。该方法类似于代理图像编辑，其中语言模型选择工具并评估结果。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
                   <span>📷 现场图景: For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton</span>
                 </figcaption>
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">早期对兄弟型号 Opus 5.5 的尝试因仅仅模仿现有艺术而受到批评。伊顿的回应是让神鬼寓言 5.2 开发自己的艺术家角色，具有虚构的背景故事和一致的风格。该模型每幅画需要数千笔触，伊顿通过评论重定向它们。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">早期对兄弟型号 Opus 5.5 的尝试因仅仅模仿现有艺术而受到批评。伊顿的回应是让神鬼寓言 5.2 开发自己的艺术家角色，具有虚构的背景故事和一致的风格。该模型每幅画需要数千笔触，伊顿通过评论重定向它们。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">人类工程师 Michael Graczyk 分享了一段聊天记录和一个实验视频，其中他要求《神鬼寓言 5.2》在日出时画一只鸟。该模型只能使用代码来模拟刷毛、湿油漆和画布纹理的物理特性。它必须手动将每个笔触输出为自己的坐标线，一旦放置就无法撤消笔触。这就是该方法与 AI 生成视频的区别所在，在 AI 生成视频中，Flux 3 等模型直接生成图像序列及其时间一致性。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">人类工程师 Michael Graczyk 分享了一段聊天记录和一个实验视频，其中他要求《神鬼寓言 5.2》在日出时画一只鸟。该模型只能使用代码来模拟刷毛、湿油漆和画布纹理的物理特性。它必须手动将每个笔触输出为自己的坐标线，一旦放置就无法撤消笔触。这就是该方法与 AI 生成视频的区别所在，在 AI 生成视频中，Flux 3 等模型直接生成图像序列及其时间一致性。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">由此产生的 21 秒视频使用计数器来跟踪这幅画是如何通过空白画布上的 111 笔画形成的。对于第一个笔画，模型输出颜色代码#30346a、宽度为 90 像素和五个稍微摆动的路点。 《神鬼寓言 5.2》表示，它故意添加了大约七像素的摆动，因为人的手臂也无法画出完美的直线。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">由此产生的 21 秒视频使用计数器来跟踪这幅画是如何通过空白画布上的 111 笔画形成的。对于第一个笔画，模型输出颜色代码#30346a、宽度为 90 像素和五个稍微摆动的路点。 《神鬼寓言 5.2》表示，它故意添加了大约七像素的摆动，因为人的手臂也无法画出完美的直线。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在两次传递之间，模型会像真正的画家一样看着画布并对自己的错误做出反应。当鸟的背部变得太薄且参差不齐时，人工智能会在它上面进行更大胆的描边，因此边缘上的杂散鬃毛痕迹现在看起来像皱褶的羽毛。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在两次传递之间，模型会像真正的画家一样看着画布并对自己的错误做出反应。当鸟的背部变得太薄且参差不齐时，人工智能会在它上面进行更大胆的描边，因此边缘上的杂散鬃毛痕迹现在看起来像皱褶的羽毛。</p>
 
-<figure class="my-7 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="" class="w-full max-h-[460px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
               
             </figure>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在第二幅 280 笔的作品中，两个人在黄昏时作画，后期的灯光效果意外地弄脏了桌子上的油漆管和杯子。事后克劳德重新粉刷了这些物体。正如提示所要求的那样，模型还用外侧的手绘制两个人物，以便内侧的肩膀可以接触。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在第二幅 280 笔的作品中，两个人在黄昏时作画，后期的灯光效果意外地弄脏了桌子上的油漆管和杯子。事后克劳德重新粉刷了这些物体。正如提示所要求的那样，模型还用外侧的手绘制两个人物，以便内侧的肩膀可以接触。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">《神鬼寓言 5.2》在物理限制下逐步计划和自我修正的能力并不局限于虚拟画布。据 Anthropic 称，该模型是为极其苛刻的长期技术任务而构建的，Mythos 5.2 也是如此，该版本是为经过验证的安全和生物学研究人员设计的。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">《神鬼寓言 5.2》在物理限制下逐步计划和自我修正的能力并不局限于虚拟画布。据 Anthropic 称，该模型是为极其苛刻的长期技术任务而构建的，Mythos 5.2 也是如此，该版本是为经过验证的安全和生物学研究人员设计的。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">在内部测试中，Fable 5.2解决了黑洞物理中的两个悬而未决的问题，与电路板制造商Diode一起设计了三个工作电子设备，并使用1000多个子代理在八天内编程了自己的笔记本电脑操作系统。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在内部测试中，Fable 5.2解决了黑洞物理中的两个悬而未决的问题，与电路板制造商Diode一起设计了三个工作电子设备，并使用1000多个子代理在八天内编程了自己的笔记本电脑操作系统。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">人工智能研究员 Aris Zhu 测试了该模型在真实机械臂上的表现。他将《神鬼寓言 5.2》与 OpenAI 的竞争模型 GPT-6 Astra 进行比较，每个模型都使用物理机器人手臂来绘制梵高的《星夜》。 Anthropic 报告称，《神鬼寓言 5.2》在其内部 RoboDojo Sim 基准测试中的得分为 64.9%，而 GPT-6 Astra 的得分为 29.8%。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">人工智能研究员 Aris Zhu 测试了该模型在真实机械臂上的表现。他将《神鬼寓言 5.2》与 OpenAI 的竞争模型 GPT-6 Astra 进行比较，每个模型都使用物理机器人手臂来绘制梵高的《星夜》。 Anthropic 报告称，《神鬼寓言 5.2》在其内部 RoboDojo Sim 基准测试中的得分为 64.9%，而 GPT-6 Astra 的得分为 29.8%。</p>
 
-<p class="text-sm sm:text-base leading-relaxed sm:leading-loose text-slate-700 dark:text-slate-300 font-normal tracking-normal">朱的现实世界比较仍然显示出精细运动控制的局限性。 Astra 的绘制速度更快，到目前为止，只有 OpenAI 的模型能够将多米诺骨牌竖立起来。它通过缓慢松开夹具以利用重力作为枢轴点来做到这一点。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">朱的现实世界比较仍然显示出精细运动控制的局限性。 Astra 的绘制速度更快，到目前为止，只有 OpenAI 的模型能够将多米诺骨牌竖立起来。它通过缓慢松开夹具以利用重力作为枢轴点来做到这一点。</p>
           </div>
           
-        </div>
+        </section>
         
 
       </div>
@@ -336,14 +337,6 @@
               <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 
-            <a href="/zh/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
-              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
-                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta在泰国与土耳其测试独立Instagram消息应用" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
-              </div>
-              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
-              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta在泰国与土耳其测试独立Instagram消息应用</h4>
-            </a>
-            
             <a href="/zh/news/348454af17913093" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
               <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
                 <img src="https://cdn.mos.cms.futurecdn.net/VF4egKqqkKq5CbHhYxQi6U-1200-80.jpg" alt="Anthropic通过AI自动化实现模型跨硬件高效迁移" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
@@ -366,6 +359,14 @@
               </div>
               <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">New York Times</span>
               <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">黄仁勋卸任后英伟达面临家族治理危机</h4>
+            </a>
+            
+            <a href="/zh/news/8761a66a6f21b33f" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.macrumors.com/t/XEyVh7VFnBpfoKyJ-wxGJUrYFFU=/2500x/article-new/2026/11/claude-warning-2-2.jpg" alt="苹果macOS 15.3 beta加强AI应用访问权限限制" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">MacRumors</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">苹果macOS 15.3 beta加强AI应用访问权限限制</h4>
             </a>
             
               </div>
