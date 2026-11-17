@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 09:20:38 UTC",
+  "generated_at": "2026-11-17 09:37:55 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 09:20:38 UTC",
+      "updated_at": "2026-11-17 09:37:55 UTC",
       "headline_item": {
-        "id": "38b54dc4e64f68c2",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "Meta调整Instagram印度推荐算法以过滤违规内容",
-        "title_en": "Meta says it modified Instagram's recommendation systems in India to show less sexual and violent content, after New Delhi called for tighter content checks (Reuters)",
-        "source": "Reuters",
-        "published_at": "2026-11-17T09:10:01+00:00",
-        "url": "https://www.reuters.com/world/india/meta-says-it-tuned-instagram-curb-suggestive-violent-content-india-2026-11-17/",
-        "event_summary_zh": "Meta为响应印度电子信息技术部对推荐算法的监管要求，针对印度市场升级AI模型，重点过滤Instagram内包含暴力与软色情内容的推荐推送",
-        "event_summary_en": "Meta Platforms has fine-tuned Instagram's recommendation algorithms for the Indian market by deploying advanced AI models to proactively detect and restrict violent and sexually suggestive content across Reels, Explore, and Feed. This adjustment follows a regulatory advisory from the Indian Ministry of Electronics and Information Technology regarding the scrutiny of algorithmic ranking and content amplification.",
+        "id": "aa8521d458ee4e13",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "Numa完成4500万美元C轮融资，估值达5亿美元",
+        "title_en": "Oakland-based Numa, which builds an AI platform to manage car dealership customer service, raised a $45M Series C, a source says at a $500M post-money valuation (Camila Grigera Naón/Fortune)",
+        "source": "Fortune",
+        "published_at": "2026-11-17T09:20:01+00:00",
+        "url": "https://fortune.com/2026/11/16/ai-startup-numa-45-million-car-dealerships-paperwork/",
+        "event_summary_zh": "奥克兰AI平台公司Numa完成4500万美元C轮融资，旨在通过AI智能体优化汽车经销商客户服务与业务流程",
+        "event_summary_en": "Oakland-based AI startup Numa raised $45 million in a Series C round led by Blue Cloud Ventures, reaching a $500 million post-money valuation. The company develops an AI operating system that integrates with dealership software to automate appointment scheduling, inventory management, and warranty paperwork to address inefficiencies in automotive retail.",
         "core_facts_zh": [
-          "【核心事件】Meta Platforms；印度电子信息技术部 (Ministry of Electronics and Information Technology)在印度数字内容分发平台（Instagram）：通过算法升级主动过滤软色情与暴力内容，并优化Reels与推荐机制",
-          "【起因与机理】应对印度政府对算法放大误导性及敏感内容的安全监管合规要求",
-          "【关键技术规格】核心诉求：响应印度电子信息技术部关于审查算法放大误导性内容的行政指导。",
-          "【行业影响与走向】后续影响：平台通过调整推荐逻辑降低了用户违规内容举报率，但未披露具体过滤比例或技术参数。"
+          "【核心事件】Numa（首席执行官 Tasso Roumeliotis），Blue Cloud Ventures（领投方）在汽车零售数字化转型领域：完成4500万美元C轮融资，投后估值5亿美元",
+          "【起因与机理】利用AI智能体解决汽车经销商高频、低效的人工客服与行政流程",
+          "【关键数据与实测】Numa完成4500万美元C轮融资，投后估值升至5亿美元。",
+          "【各方立场与态度】Blue Cloud Ventures领投，累计融资额达9600万美元，旨在扩大AI智能体在垂直行业的渗透。"
         ],
         "core_facts_en": [
-          "[Core Event] Meta Platforms; Ministry of Electronics and Information Technology of India (Instagram ecosystem in India): Upgraded AI models to proactively filter suggestive and violent content in recommendations",
-          "[Root Cause & Mechanism] Regulatory pressure to mitigate algorithmic amplification of sensitive or misleading materials",
-          "[Key Fact Detail] Core demand: Responding to the advisory from the Indian Ministry of Electronics and Information Technology regarding algorithmic transparency.",
-          "[Key Position & Outlook] Outlook: Reported a reduction in user-reported content, though technical metrics and specific filtering thresholds remain undisclosed."
+          "[Core Event] Numa (CEO Tasso Roumeliotis), Blue Cloud Ventures (Lead Investor): $45 million Series C funding, $500M post-money valuation",
+          "[Root Cause & Mechanism] Automating high-frequency, manual customer service and administrative tasks for car dealerships using AI agents",
+          "[Key Metrics] Numa secures $45M Series C, reaching $500M valuation.",
+          "[Key Position & Outlook] Led by Blue Cloud Ventures, total funding reaches $96M to drive industry-specific AI agent adoption."
         ],
-        "industry_impact_zh": "Meta在印度采取的算法合规动作，反映了跨国互联网巨头在大型新兴市场正面临从“事后删除”向“事前算法风控”的技术路线强制转型。这种以局部市场适配为代价的合规策略，预示着全球社交平台需为各主权国家定制特定的AI安全对齐标准，以规避针对算法推荐逻辑的贸易与监管壁垒。",
-        "industry_impact_en": "Meta's compliance adjustment in India reflects a forced shift for global platforms from reactive content removal to proactive algorithmic risk management in key emerging markets. This regional-specific alignment strategy suggests that major social platforms will increasingly need to engineer sovereignty-compliant AI safety guardrails to mitigate regulatory barriers targeting their recommendation logic."
+        "industry_impact_zh": "Numa的商业模型标志着AI智能体从通用助理向特定行业深层工作流（Workflow-Specific）的垂直演进。通过获取经销商底层的库存与销售数据，该平台在实现业务流程闭环的同时，建立了极高的行业壁垒，使其不仅是自动化工具，更成为汽车后市场的数据枢纽。",
+        "industry_impact_en": "Numa’s model signals a shift from general-purpose assistants to workflow-specific AI agents within vertical industries. By integrating with underlying dealer inventory and transaction systems, Numa creates high switching costs and establishes itself as a data hub in the automotive aftermarket, moving beyond simple automation tools."
       },
       "headlines": [
+        {
+          "id": "aa8521d458ee4e13",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "Numa完成4500万美元C轮融资，估值达5亿美元",
+          "title_en": "Oakland-based Numa, which builds an AI platform to manage car dealership customer service, raised a $45M Series C, a source says at a $500M post-money valuation (Camila Grigera Naón/Fortune)",
+          "source": "Fortune",
+          "published_at": "2026-11-17T09:20:01+00:00",
+          "url": "https://fortune.com/2026/11/16/ai-startup-numa-45-million-car-dealerships-paperwork/",
+          "event_summary_zh": "奥克兰AI平台公司Numa完成4500万美元C轮融资，旨在通过AI智能体优化汽车经销商客户服务与业务流程",
+          "event_summary_en": "Oakland-based AI startup Numa raised $45 million in a Series C round led by Blue Cloud Ventures, reaching a $500 million post-money valuation. The company develops an AI operating system that integrates with dealership software to automate appointment scheduling, inventory management, and warranty paperwork to address inefficiencies in automotive retail.",
+          "core_facts_zh": [
+            "【核心事件】Numa（首席执行官 Tasso Roumeliotis），Blue Cloud Ventures（领投方）在汽车零售数字化转型领域：完成4500万美元C轮融资，投后估值5亿美元",
+            "【起因与机理】利用AI智能体解决汽车经销商高频、低效的人工客服与行政流程",
+            "【关键数据与实测】Numa完成4500万美元C轮融资，投后估值升至5亿美元。",
+            "【各方立场与态度】Blue Cloud Ventures领投，累计融资额达9600万美元，旨在扩大AI智能体在垂直行业的渗透。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Numa (CEO Tasso Roumeliotis), Blue Cloud Ventures (Lead Investor): $45 million Series C funding, $500M post-money valuation",
+            "[Root Cause & Mechanism] Automating high-frequency, manual customer service and administrative tasks for car dealerships using AI agents",
+            "[Key Metrics] Numa secures $45M Series C, reaching $500M valuation.",
+            "[Key Position & Outlook] Led by Blue Cloud Ventures, total funding reaches $96M to drive industry-specific AI agent adoption."
+          ],
+          "industry_impact_zh": "Numa的商业模型标志着AI智能体从通用助理向特定行业深层工作流（Workflow-Specific）的垂直演进。通过获取经销商底层的库存与销售数据，该平台在实现业务流程闭环的同时，建立了极高的行业壁垒，使其不仅是自动化工具，更成为汽车后市场的数据枢纽。",
+          "industry_impact_en": "Numa’s model signals a shift from general-purpose assistants to workflow-specific AI agents within vertical industries. By integrating with underlying dealer inventory and transaction systems, Numa creates high switching costs and establishes itself as a data hub in the automotive aftermarket, moving beyond simple automation tools."
+        },
         {
           "id": "38b54dc4e64f68c2",
           "tag_zh": "📰 业界动态",
@@ -59,62 +85,36 @@
           "industry_impact_en": "Meta's compliance adjustment in India reflects a forced shift for global platforms from reactive content removal to proactive algorithmic risk management in key emerging markets. This regional-specific alignment strategy suggests that major social platforms will increasingly need to engineer sovereignty-compliant AI safety guardrails to mitigate regulatory barriers targeting their recommendation logic."
         },
         {
-          "id": "2d9efb19784a5413",
-          "tag_zh": "🔬 前沿技术",
-          "tag_en": "🔬 Frontier Tech",
-          "title_zh": "英伟达发布Rubin HPC架构GPU",
-          "title_en": "Nvidia unveils its Rubin HPC GPU with \"more than 50,000\" CUDA cores, up from 28,672 in the current Rubin GPU, for agentic workflows and scientific simulations (Jeffrey Kampman/Tom's Hardware)",
-          "source": "Tom's Hardware",
-          "published_at": "2026-11-17T06:20:00+00:00",
-          "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-announces-rubin-hpc-gpu-with-record-number-of-cuda-cores-at-supercomputing-2026-new-chip-accelerates-agentic-hpc-workloads-arrives-in-2028",
-          "event_summary_zh": "英伟达推出Rubin HPC GPU，集成超5万个CUDA核心，旨在通过NVLink 7互联强化科研与智能体工作流，预计2028年上市",
-          "event_summary_en": "Nvidia unveiled its Rubin HPC GPU designed for scientific simulation and agentic workflows, featuring over 50,000 CUDA cores and NVLink 7 interconnect technology. The architecture utilizes a multi-die configuration to scale compute density and minimize idle resources, with a market release scheduled for 2028.",
-          "core_facts_zh": [
-            "【核心事件】英伟达（Nvidia）在高性能计算产品规划发布：发布集成超5万CUDA核心的Rubin HPC GPU及NVLink 7互联技术",
-            "【起因与机理】满足科研领域对智能体工作流及海量数据模拟的算力爆发性需求",
-            "【关键数据与实测】核心架构：集成超5万个CUDA核心，支持多裸片封装与NVLink 7互联。",
-            "【涉及范围与推进】后续节点：产品计划于2028年正式推向市场。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Nvidia: Announced Rubin HPC GPU with 50,000+ CUDA cores and NVLink 7 interconnect",
-            "[Root Cause & Mechanism] To address growing computational demands in scientific simulations and agentic workflows",
-            "[Key Technical Spec] Architecture: 50,000+ CUDA cores with multi-die packaging and NVLink 7 support.",
-            "[Scope & Next Steps] Timeline: Market release scheduled for 2028."
-          ],
-          "industry_impact_zh": "英伟达通过Rubin HPC进一步强化HPC领域护城河，利用多裸片封装技术平衡大语言模型推理与高性能科学计算的双重需求。其核心竞争力在于NVLink 7提供的超高吞吐带宽，旨在物理层面解决集群扩展限制，强迫市场在超大规模基础设施建设中持续依赖其私有生态。",
-          "industry_impact_en": "Nvidia is deepening its competitive moat in HPC by leveraging multi-die packaging to balance LLM inference and scientific computing. The critical value lies in NVLink 7's high-throughput interconnect, which forces reliance on Nvidia's proprietary ecosystem for large-scale data center infrastructure."
-        },
-        {
-          "id": "ed8c868cc84deb03",
+          "id": "8a58e41c275493d4",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "美商务部披露 Megaspeed 调查案细节：确认调查早于 2024 年启动，重点彻查高端 AI 芯片通过东南亚云端转租合规漏洞",
-          "title_en": "US releases details of Megaspeed probe, says investigation began in 2024",
+          "title_zh": "应对美方芯片禁令制约，中国研发机构与企业广泛借助“模型蒸馏”加速孵化本土 AI",
+          "title_en": "China taps US AI models to train homegrown rivals as chip curbs bite",
           "source": "Reuters",
-          "published_at": "2026-11-17T05:55:00+00:00",
-          "url": "https://www.reuters.com/world/asia-pacific/us-releases-details-of-megaspeed-probe-says-investigation-began-2024-2026-11-17/",
-          "event_summary_zh": "美商务部与司法部联合公布对新加坡云服务商 Megaspeed 的调查细节，证实针对其向中国客户违规转租 Nvidia 高端 AI 算力的调查早于 2024 年启动，美新执法部门已在多地执行搜查并扣押相关涉案设备",
-          "event_summary_en": "WASHINGTON, Nov 16 (Reuters) - The US Commerce Department and Justice Department released information on Sunday about an investigation into Singapore-based company Megaspeed, saying the probe began in 2024.",
+          "published_at": "2026-11-17T07:30:01+00:00",
+          "url": "https://www.reuters.com/world/china/china-taps-us-ai-models-train-homegrown-rivals-chip-curbs-bite-2026-11-17/",
+          "event_summary_zh": "路透社查阅逾 300 份学术论文、专利与企业披露文件发现，面对美国收紧先进制程芯片限制，中国学术机构和科技公司正广泛运用“知识蒸馏”技术，借助顶尖美国大模型的输出数据来高效训练更小、更低成本的本土 AI 替代模型",
+          "event_summary_en": "Chinese entities are adopting increasingly sophisticated ways to use output from leading American AI models to train domestic competitors, as Beijing seeks workarounds to tightening US curbs on advanced chips.",
           "core_facts_zh": [
-            "【核心事件】美国商务部、美国司法部、Megaspeed国际（新加坡云服务商）、前Nvidia CEO Jensen Huang、前Megaspeed CEO Alice Huang在美国司法/监管调查体系及新加坡：针对敏感芯片潜在转运至受限地区的违规调查，以及针对Megaspeed的刑事立案",
-            "【起因与机理】防范高性能算力芯片绕过出口管制进入地缘政治博弈中的高风险渠道",
-            "【调查与监管诉求】监管机构指控Megaspeed存在敏感半导体产品违规转运风险。",
-            "【涉及范围与推进】案件已由贸易合规核查升级为刑事调查，并涉及对前核心高管的跨境盘查。"
+            "【核心事件】中国科研机构、AI技术企业在中国境内产业技术研发环境：将高算力模型能力蒸馏至轻量化模型以实现产业规模化应用",
+            "【起因与机理】降低大模型算力部署门槛并提升业务端性能表现",
+            "【关键技术规格】核心技术路径：将教师模型复杂能力迁移至轻量级学生模型。",
+            "【各方立场与态度】战略动因：降低算力资源依赖与运营部署成本。"
           ],
           "core_facts_en": [
-            "[Core Event] US Department of Commerce, US Department of Justice, Megaspeed International, former Nvidia CEO Jensen Huang, former Megaspeed CEO Alice Huang: Investigation into unauthorized diversion of sensitive semiconductors and subsequent criminal probe",
-            "[Root Cause & Mechanism] Preventing circumvention of export controls for high-performance computing hardware",
-            "[Regulatory & Investigation Focus] Regulatory allegations of unauthorized semiconductor diversion by Megaspeed.",
-            "[Scope & Next Steps] Case escalated from export control review to a formal criminal investigation involving high-level executive questioning."
+            "[Core Event] Chinese research institutes and AI tech enterprises (Domestic industrial R&D ecosystem): Scalable industrial deployment of knowledge distillation",
+            "[Root Cause & Mechanism] To lower computational thresholds and optimize deployment efficiency",
+            "[Regulatory & Investigation Focus] Core technique: Knowledge distillation for model capability transfer.",
+            "[Key Position & Outlook] Strategic driver: Mitigating computational bottlenecks and operational overhead."
           ],
-          "industry_impact_zh": "本案揭示了美国监管机构正将出口管制执行重心从纯粹的贸易限制转向针对海外云数据中心节点的物理现场核查与刑事打击。Nvidia与渠道伙伴关系的切断，反映出芯片巨头在面对监管压力时，已将“合规隔离”视为保护其全球供应链生态的核心底线，这将迫使东南亚地区的第三方云服务商面临更严格的终端用户审查机制。",
-          "industry_impact_en": "This case signifies a shift in US enforcement toward on-site physical verification and criminal litigation for overseas cloud data centers. Nvidia’s preemptive blacklisting highlights the transition toward 'compliance isolation' as the new standard for global semiconductor supply chains, forcing regional cloud service providers to adopt stringent end-user vetting protocols."
+          "industry_impact_zh": "此举标志着中国AI产业正从盲目堆叠参数的‘军备竞赛’转向基于工程化效率的‘降本增效’路线。通过知识蒸馏在终端侧实现模型能力嫁接，将有效规避高端算力受限风险，并构建起区别于硅谷大参数规模化的分布式边缘智能生态。",
+          "industry_impact_en": "This indicates a strategic shift in the Chinese AI industry from a parameter-heavy 'arms race' to an efficiency-driven deployment model. By leveraging distillation for edge-side model capability grafting, firms can mitigate high-end compute constraints while establishing a distributed edge-intelligence ecosystem distinct from Silicon Valley's massive-scale models."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 09:20:38 UTC",
+      "updated_at": "2026-11-17 09:37:56 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 09:20:38 UTC",
+      "updated_at": "2026-11-17 09:37:56 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,775)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,785)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,775 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,785 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
