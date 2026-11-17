@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 22:35:14 UTC",
+  "generated_at": "2026-11-17 22:49:55 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 22:35:14 UTC",
+      "updated_at": "2026-11-17 22:49:55 UTC",
       "headline_item": {
-        "id": "25989aec153eb21c",
+        "id": "47d3a13c046f7894",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达董事会否决黄仁勋回归担任CEO的可能",
-        "title_en": "Nvidia’s Board Has No Plans to Bring Back Jensen Huang",
-        "source": "Wired AI",
-        "published_at": "2026-11-17T22:19:19+00:00",
-        "url": "https://www.wired.com/story/nvidias-board-has-no-plans-to-reinstate-jensen-huang/",
-        "event_summary_zh": "英伟达董事会主席哈维·琼斯正式确认，因黄仁勋个人行为违反公司准则，董事会将拒绝其复职",
-        "event_summary_en": "Nvidia Board Chair Harvey Jones announced during an earnings call that Jensen Huang resigned on November 12 due to personal conduct inconsistent with company standards. The board has unanimously accepted the resignation and confirmed there are no plans to reinstate Huang as CEO.",
+        "title_zh": "Optimizely供应链遭受攻击，百余家大型机构网站沦陷",
+        "title_en": "Malicious code delivered through Optimizely hits visitors to hundreds of sites",
+        "source": "Ars Technica",
+        "published_at": "2026-11-17T22:32:16+00:00",
+        "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/",
+        "event_summary_zh": "数字优化平台Optimizely的CDN基础设施遭恶意代码篡改，致使CNN、Zoom等178家机构网站向访客推送加密货币盗窃及iOS漏洞利用程序",
+        "event_summary_en": "The website optimization platform Optimizely suffered a compromise of its infrastructure, leading to the distribution of malicious JavaScript via its legitimate CDN to 178 client sites, including CNN, Zoom, and Salesforce. The injected code targeted visitor devices with cryptocurrency wallet hijacking, payment data theft, and the deployment of iOS exploits such as DarkSword.",
         "core_facts_zh": [
-          "【核心事件】英伟达董事会主席哈维·琼斯（Harvey Jones）、前CEO黄仁勋在英伟达财报电话会议：确认黄仁勋因行为不当辞职，且董事会拒绝其复职",
-          "【起因与机理】个人行为违反公司既定的行为准则、标准与企业文化",
-          "【核心事实细节】董事会明确拒绝黄仁勋复职请求。",
-          "【各方立场与态度】人事变动日期定于11月12日，英伟达管理层架构进入调整期。"
+          "【核心事件】Optimizely（数字优化平台）：植入并分发恶意track.js脚本以窃取数据及推送iOS漏洞工具",
+          "【起因与机理】攻击者获取了Optimizely跨客户项目的写入权限",
+          "【关键数据与实测】网站优化平台Optimizely的基础设施被植入恶意JavaScript脚本，该脚本经由合法CDN分发至包括CNN、Zoom、BBC及Salesforce在内的178个客户站点。",
+          "【行业影响与走向】受影响范围涉及全球百余家高权重站点，供应链防御机制存在严重合规缺口。"
         ],
         "core_facts_en": [
-          "[Core Event] Harvey Jones, Chair of Nvidia Board; Jensen Huang, former CEO (Nvidia Earnings Call): Confirmation of resignation due to conduct and denial of reinstatement",
-          "[Root Cause & Mechanism] Personal behavior inconsistent with corporate code of conduct and cultural standards",
-          "[Key Fact Detail] Board explicitly rejects potential reinstatement of Jensen Huang.",
-          "[Key Position & Outlook] Effective date of resignation is November 12, signaling structural transition."
+          "[Core Event] Exploitation of Optimizely's legitimate distribution mechanism to push malware to global audiences.",
+          "[Root Cause & Mechanism] Unauthorized write access to Optimizely's customer project management systems",
+          "[Key Technical Spec] Malware capabilities include payment interception, cookie theft, and iOS device privilege escalation.",
+          "[Industry Impact & Outlook] Broad impact across 178 high-profile websites exposing critical supply chain security gaps."
         ],
-        "industry_impact_zh": "此次人事动荡标志着英伟达进入后黄仁勋时代的极高不确定期，由于黄仁勋对公司技术路线及供应生态拥有极强的个人控制力，董事会的快速切割旨在通过重申合规红线以平抑资本市场波动。短期内英伟达在面对AMD、Intel以及定制芯片（ASIC）崛起夹击时，能否保持产品迭代节奏与客户粘性将成为估值重塑的关键变量。",
-        "industry_impact_en": "The departure marks a period of extreme uncertainty in the post-Huang era, as Jensen Huang’s personal influence over Nvidia’s technical roadmap and supply chain ecosystem was foundational. The board’s decisive action aims to curb market volatility by enforcing governance standards, yet the firm now faces significant risks in maintaining its product iteration speed and client loyalty against intensifying competition from AMD, Intel, and hyperscaler custom silicon initiatives."
+        "industry_impact_zh": "此类攻击暴露了SaaS供应链中第三方JavaScript代码库的信任边界缺陷，即使代码拥有合法数字签名也无法免疫恶意劫持。对于企业而言，单纯依赖CDN分发信任已失效，必须强制实施严格的子资源完整性（SRI）校验及动态实时内容安全策略（CSP）。",
+        "industry_impact_en": "This incident highlights the inherent fragility of trust boundaries in SaaS supply chains, where valid digital signatures fail to prevent malicious code injection. Enterprises must move beyond implicit trust in CDN-hosted third-party scripts by enforcing strict Subresource Integrity (SRI) validation and granular Content Security Policies (CSP)."
       },
       "headlines": [
+        {
+          "id": "47d3a13c046f7894",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Optimizely供应链遭受攻击，百余家大型机构网站沦陷",
+          "title_en": "Malicious code delivered through Optimizely hits visitors to hundreds of sites",
+          "source": "Ars Technica",
+          "published_at": "2026-11-17T22:32:16+00:00",
+          "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/",
+          "event_summary_zh": "数字优化平台Optimizely的CDN基础设施遭恶意代码篡改，致使CNN、Zoom等178家机构网站向访客推送加密货币盗窃及iOS漏洞利用程序",
+          "event_summary_en": "The website optimization platform Optimizely suffered a compromise of its infrastructure, leading to the distribution of malicious JavaScript via its legitimate CDN to 178 client sites, including CNN, Zoom, and Salesforce. The injected code targeted visitor devices with cryptocurrency wallet hijacking, payment data theft, and the deployment of iOS exploits such as DarkSword.",
+          "core_facts_zh": [
+            "【核心事件】Optimizely（数字优化平台）：植入并分发恶意track.js脚本以窃取数据及推送iOS漏洞工具",
+            "【起因与机理】攻击者获取了Optimizely跨客户项目的写入权限",
+            "【关键数据与实测】网站优化平台Optimizely的基础设施被植入恶意JavaScript脚本，该脚本经由合法CDN分发至包括CNN、Zoom、BBC及Salesforce在内的178个客户站点。",
+            "【行业影响与走向】受影响范围涉及全球百余家高权重站点，供应链防御机制存在严重合规缺口。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Exploitation of Optimizely's legitimate distribution mechanism to push malware to global audiences.",
+            "[Root Cause & Mechanism] Unauthorized write access to Optimizely's customer project management systems",
+            "[Key Technical Spec] Malware capabilities include payment interception, cookie theft, and iOS device privilege escalation.",
+            "[Industry Impact & Outlook] Broad impact across 178 high-profile websites exposing critical supply chain security gaps."
+          ],
+          "industry_impact_zh": "此类攻击暴露了SaaS供应链中第三方JavaScript代码库的信任边界缺陷，即使代码拥有合法数字签名也无法免疫恶意劫持。对于企业而言，单纯依赖CDN分发信任已失效，必须强制实施严格的子资源完整性（SRI）校验及动态实时内容安全策略（CSP）。",
+          "industry_impact_en": "This incident highlights the inherent fragility of trust boundaries in SaaS supply chains, where valid digital signatures fail to prevent malicious code injection. Enterprises must move beyond implicit trust in CDN-hosted third-party scripts by enforcing strict Subresource Integrity (SRI) validation and granular Content Security Policies (CSP)."
+        },
         {
           "id": "25989aec153eb21c",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "英伟达果断切割创始人体现了头部科技企业在面对地缘政治审查与监管合规风暴时的生存逻辑：即通过剥离高风险个人标签，防止公司整体经营牌照陷入被动。此举不仅是企业治理的防卫性动作，更是为了安抚华尔街并应对即将到来的国会听证，实质上是在国家安全议题与商业连续性之间进行的惨烈止损。",
           "industry_impact_en": "Nvidia's swift dissociation from its founder highlights a survival strategy for Big Tech amid geopolitical scrutiny: purging high-risk individuals to preserve operational licenses and mitigate systemic regulatory fallout. This defensive governance move is a calculated effort to appease capital markets and prepare for Congressional oversight, prioritizing institutional stability over founder-centric continuity."
-        },
-        {
-          "id": "babc7a1eea9391a2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "AI作为情感伴侣：人际关系的异化与重塑",
-          "title_en": "My Husband and His Chatbot",
-          "source": "Bloomberg",
-          "published_at": "2026-11-17T22:05:10+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-17/ai-music-generator-suno-to-let-users-create-music-videos",
-          "event_summary_zh": "生成式AI在亲密关系中的深度渗透引发临床心理学关注，其作为“情感辅助工具”的双刃剑效应显著",
-          "event_summary_en": "As generative AI's conversational capabilities advance, it is rapidly transitioning from a task assistant to an emotional companion, introducing risks of alienation in personal relationships. Clinicians and legal experts observe that AI, due to its infinite patience and vast knowledge, is increasingly used for marital advice and emotional catharsis, though it also triggers concerns regarding social withdrawal and dependency.",
-          "core_facts_zh": [
-            "【核心事件】临床心理学家Shira Sobol Goldberg、家庭律师Benny Don-Yehia：AI介入婚姻沟通与情感排解过程，作为辅助工具的双重属性显现",
-            "【起因与机理】AI模型提供的信息获取便利性与全天候陪伴能力导致用户情感投射转移",
-            "【核心事实细节】AI由工具转向情感补偿与沟通中介角色。",
-            "【各方立场与态度】AI在家庭法律和情感治疗领域表现出双刃剑特征。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Clinical psychologist Shira Sobol Goldberg, Family lawyer Benny Don-Yehia: AI integration into marital communication and emotional regulation",
-            "[Root Cause & Mechanism] AI's 24/7 availability and knowledge accessibility shift user emotional investment",
-            "[Key Metrics] com and the Kinsey Institute found that 61% of singles considered falling in love with an AI or sexting with a chatbot to be cheating.",
-            "[Industry Impact & Outlook] Dual-natured impact of AI in family law and therapy."
-          ],
-          "industry_impact_zh": "AI深度介入私人情感领域揭示了技术的“情绪杠杆效应”：当算法能够提供即时反馈与共情模拟时，人类处理真实复杂关系的人格韧性正在被弱化。这预示着未来AI辅助软件将形成新的垂直产业，但也需要面对极其严峻的心理成瘾与社会原子化失控的监管道德挑战。",
-          "industry_impact_en": "The integration of AI into private emotional spheres reveals a 'psychological leverage effect': as algorithms provide instant feedback and empathy simulations, the resilience required for navigating complex human relationships is being eroded. This suggests an emerging vertical for AI companionship software, while simultaneously posing severe ethical risks regarding addiction and societal atomization."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 22:35:14 UTC",
+      "updated_at": "2026-11-17 22:49:55 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 22:35:14 UTC",
+      "updated_at": "2026-11-17 22:49:55 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,983)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,985)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,983 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,985 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
