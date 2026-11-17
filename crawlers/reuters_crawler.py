@@ -149,10 +149,21 @@ def _clean_paragraph(text: str) -> str:
         'for more information on reuters',
         'subscribe to reuters',
         'reporting by',
-        'editing by'
+        'editing by',
+        'sign up for free newsletters',
+        'got a confidential news tip',
+        'data is a real-time snapshot',
+        'get this delivered to your inbox',
+        'global business and financial news',
+        'stock quotes, and market data',
+        'purchase licensing rights',
+        'suggested topics:',
+        'all quotes delayed',
+        'disclaimer:',
+        'copyright ©'
     ]
     if any(np in low for np in noise_phrases):
-        if len(t) < 180:
+        if len(t) < 300:
             return ""
     return t
 
@@ -307,23 +318,62 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
             root = ET.fromstring(xml_data)
             items = root.findall('.//item')
 
-            # Priority ranking: MarketScreener / Zonebourse > Yahoo Finance/News > Others
+            # Competitor & aggregator blacklist that publish their own divergent reporting
+            COMPETITOR_DOMAINS = [
+                'cnbc.com', 'bloomberg.com', 'wsj.com', 'nytimes.com', 'cnn.com',
+                'forbes.com', 'washingtonpost.com', 'ft.com', 'theverge.com', 'techcrunch.com',
+                'coindesk.com', 'cointelegraph.com', 'foxbusiness.com', 'businessinsider.com',
+                'barrons.com', 'investors.com', 'marketwatch.com', 'apnews.com', 'axios.com'
+            ]
+            COMPETITOR_SOURCES = [
+                'cnbc', 'bloomberg', 'wsj', 'wall street journal', 'forbes', 'cnn',
+                'coindesk', 'cointelegraph', 'barron', 'investor', 'financial times',
+                'new york times', 'washington post', 'techcrunch', 'the verge'
+            ]
+
+            # Priority ranking:
+            # Wire syndication partners (MarketScreener / Yahoo / JPost / MSN / TradingView)
             def _score_synd_item(it):
                 s = (it.findtext('source') or '').lower()
                 t = (it.findtext('title') or '').lower()
+                if any(comp in s for comp in COMPETITOR_SOURCES):
+                    return -100
                 if 'marketscreener' in s or 'zonebourse' in s or 'marketscreener' in t:
                     return 100
                 if 'yahoo' in s or 'yahoo' in t:
+                    return 90
+                if any(wire in s for wire in ['jpost', 'jerusalem post', 'tradingview', 'msn', 'the star', 'straitstimes', 'aol']):
+                    return 85
+                if 'reuters' in s or 'reuters' in t:
                     return 80
                 return 10
 
             sorted_items = sorted(items, key=_score_synd_item, reverse=True)
 
+            # Semantic alignment verification
+            slug_words = [w for w in slug.split('-') if len(w) > 2 and w not in ['the', 'and', 'for', 'with', 'from', 'into', 'over']]
+            slug_has_acquit = any(v in slug for v in ['clear', 'acquit', 'dismiss', 'drop', 'not-guilty'])
+            slug_has_charge = any(v in slug for v in ['charge', 'indict', 'arrest', 'sue'])
+
             for it in sorted_items:
                 s_name = (it.findtext('source') or '').lower()
+                it_title = (it.findtext('title') or '').lower()
                 link = it.findtext('link') or ''
                 if not link:
                     continue
+                # Skip competitor sources
+                if any(comp in s_name for comp in COMPETITOR_SOURCES):
+                    continue
+                # If slug is an acquittal story, candidate title MUST NOT be purely an indictment story
+                if slug_has_acquit:
+                    if any(v in it_title for v in ['charge', 'indict', 'arrest']) and not any(v in it_title for v in ['clear', 'acquit', 'dismiss', 'drop', 'win', 'judge']):
+                        continue
+                # Overlap check: candidate title must share key entities
+                title_words = set(re.findall(r'[a-z0-9]+', it_title))
+                overlap = sum(1 for w in slug_words if w in title_words)
+                if slug_words and overlap < max(2, min(4, len(slug_words) // 2)):
+                    continue
+
                 # Skip direct Reuters links in syndication lookup as they are DataDome blocked
                 if 'reuters' in s_name and 'reuters.com' in link.lower():
                     continue
@@ -335,6 +385,10 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                     continue
 
                 if not dec_url or 'reuters.com' in dec_url:
+                    continue
+
+                parsed_domain = urllib.parse.urlparse(dec_url).netloc.lower()
+                if any(comp in parsed_domain for comp in COMPETITOR_DOMAINS):
                     continue
 
                 # Fetch syndicated partner page
@@ -426,11 +480,13 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
 
                     # Include primary photo as high-res inline image if available
                     if result.get("cover_image") and not any(im.get('url') == result["cover_image"] for im in result["inline_images"]):
+                        caption_en = f"{result['title']} (Photo: REUTERS)"
+                        caption_zh = f"{result['title']} (摄影：路透社)"
                         result["inline_images"].append({
                             "url": result["cover_image"],
-                            "caption": result["title"] + " (Photo: REUTERS/Tingshu Wang)",
-                            "caption_en": result["title"] + " (Photo: REUTERS/Tingshu Wang)",
-                            "caption_zh": result["title"] + " (摄影：路透社/Tingshu Wang)",
+                            "caption": caption_en,
+                            "caption_en": caption_en,
+                            "caption_zh": caption_zh,
                             "alt": result["title"]
                         })
 
