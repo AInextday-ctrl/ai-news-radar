@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 10:36:18 UTC",
+  "generated_at": "2026-11-17 10:50:43 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 10:36:18 UTC",
+      "updated_at": "2026-11-17 10:50:43 UTC",
       "headline_item": {
-        "id": "56313c69a3bd467a",
-        "tag_zh": "🎁 算力福利",
-        "tag_en": "🎁 Promos & Credits",
-        "title_zh": "英伟达警示客户：远程访问法案将收紧算力合规边界",
-        "title_en": "Sources: Nvidia warns customers that the proposed Remote Access Security Act could subject chip buyers to US legal action if Chinese companies access AI chips (Kai Nicol-Schwarz/CNBC)",
-        "source": "CNBC",
-        "published_at": "2026-11-17T10:32:01+00:00",
-        "url": "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-chip-access.html",
-        "event_summary_zh": "英伟达内部通知客户，《远程访问安全法案》可能使违规接入中国算力的各方均面临美国法律制裁，公司已通过限制出租比例应对",
-        "event_summary_en": "Nvidia has warned customers that the proposed Remote Access Security Act (RASA) would expand export controls to cloud-based GPU access, subjecting both providers and users to U.S. legal action for non-compliance. To mitigate regulatory risk, Nvidia has implemented a strict policy prohibiting clients from renting out more than 50% of their GPU capacity to Chinese entities.",
+        "id": "e44193b8a0c2800b",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "英伟达高管致信董事会力挺黄仁勋",
+        "title_en": "Sources: Nvidia Developer Tech Director Nader Khalil wrote to board arguing that failing to reinstate Jensen Huang could cost Nvidia \"irreplaceable talent\" (Wall Street Journal)",
+        "source": "Wall Street Journal",
+        "published_at": "2026-11-17T10:40:00+00:00",
+        "url": "https://www.wsj.com/business/nvidia-board-warned-of-irreplaceable-talent-loss-in-employee-letter-b9783b1e?st=CMxakK&reflink=desktopwebshare_permalink",
+        "event_summary_zh": "英伟达开发者技术总监Nader Khalil向董事会及数十名核心直属高管致信，警告若无法挽留首席执行官黄仁勋将导致不可替代的人才流失",
+        "event_summary_en": "Nader Khalil, Director of Developer Technology at Nvidia, formally addressed the company's board and approximately 60 of Jensen Huang’s direct reports, expressing grave concerns regarding the potential departure of CEO Jensen Huang. The letter contends that Huang’s exit would trigger a cascade of departures among irreplaceable technical talent, jeopardizing Nvidia’s dominance in the AI computing market.",
         "core_facts_zh": [
-          "【核心事件】英伟达（Nvidia）、美国众议院（提出法案）、美国商务部工业与安全局（BIS）在美国云服务与全球数据中心算力租赁市场：拟通过RASA法案管控算力远程访问，并限制云服务商向中国客户租赁的算力比例不超过50%",
-          "【起因与机理】防止中国企业通过海外云端绕过物理出口管制，维持美国在人工智能基础设施领域的绝对垄断地位",
-          "【关键数据与实测】关键细节：英伟达强制实施50%出租红线，且RASA法案若在参议院通过将赋予政府云端执法权。",
-          "【涉及范围与推进】后续研判：全球云服务商将面临严苛的身份审核审计，算力基础设施的国际化供应链路将面临长期成本上涨。"
+          "【核心事件】英伟达开发者技术总监Nader Khalil；英伟达董事会；首席执行官黄仁勋在英伟达企业内部管理层沟通渠道：致信警告董事会需挽留黄仁勋，否则面临核心人才流失的风险",
+          "【起因与机理】对公司当前高层动荡可能导致的研发体系崩溃及市场竞争力下滑的担忧",
+          "【核心事实细节】Nader Khalil代表技术部门向董事会施压要求挽留黄仁勋。",
+          "【各方立场与态度】信件被分发至60名直属高管，显示公司内部已出现针对管理权变动的分歧。"
         ],
         "core_facts_en": [
-          "[Core Event] Nvidia, U.S. House of Representatives, U.S. Bureau of Industry and Security (BIS): Implementation of RASA to regulate remote GPU access; capping Chinese entity rentals at 50% capacity",
-          "[Root Cause & Mechanism] Preventing circumvention of physical export controls via cloud-based remote access to maintain U.S. AI superiority",
-          "[Key Metrics] Key details: Nvidia enforces a 50% rental cap; RASA, if enacted, grants the U.S. government direct enforcement authority over cloud services.",
-          "[Industry Impact & Outlook] Outlook: Cloud providers face heightened identity auditing; international compute supply chains are likely to see sustained cost increases."
+          "[Core Event] Nader Khalil, Director of Developer Technology at Nvidia; Nvidia Board of Directors; CEO Jensen Huang: Sent a letter urging the board to retain Jensen Huang to prevent the loss of critical technical talent",
+          "[Root Cause & Mechanism] Concerns over the potential erosion of R&D capabilities and market competitiveness stemming from executive instability",
+          "[Key Fact Detail] Nader Khalil pressures the board to retain Jensen Huang on behalf of the tech team.",
+          "[Key Position & Outlook] Distribution of the letter to 60 direct reports indicates internal division regarding executive leadership transition."
         ],
-        "industry_impact_zh": "此举标志着美国出口管制体系从物理硬件销售向“算力服务即资产”的深度延伸，云服务商将从单纯的算力分销商转型为受美方监管的合规节点。对于算力密集型行业而言，这意味着全球云资源调度协议需经历重构，以应对日益严苛的溯源与配额审计，长期来看将进一步割裂全球统一的公共云市场。",
-        "industry_impact_en": "This shift marks an evolution of U.S. export controls from hardware to 'compute-as-a-service,' forcing cloud providers to function as regulatory gatekeepers. This will necessitate a structural overhaul of global cloud resource allocation protocols, further fragmenting the public cloud market as compliance auditing becomes the primary bottleneck for operational expansion."
+        "industry_impact_zh": "此事件揭示了英伟达高度依赖“创始人驱动”的技术战略路径，黄仁勋在软硬协同开发体系中的领袖地位已转化为企业的系统性资产。若人才流失从管理层向底层架构师传导，将直接影响其CUDA生态的粘性，造成严重的商业连续性风险。",
+        "industry_impact_en": "This incident highlights Nvidia's heavy reliance on a founder-driven strategic path, where Jensen Huang’s leadership is deeply embedded in the hardware-software co-design architecture. Should the talent attrition ripple from executive management down to core architects, it would threaten the stickiness of the CUDA ecosystem and create significant business continuity risks."
       },
       "headlines": [
+        {
+          "id": "e44193b8a0c2800b",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "英伟达高管致信董事会力挺黄仁勋",
+          "title_en": "Sources: Nvidia Developer Tech Director Nader Khalil wrote to board arguing that failing to reinstate Jensen Huang could cost Nvidia \"irreplaceable talent\" (Wall Street Journal)",
+          "source": "Wall Street Journal",
+          "published_at": "2026-11-17T10:40:00+00:00",
+          "url": "https://www.wsj.com/business/nvidia-board-warned-of-irreplaceable-talent-loss-in-employee-letter-b9783b1e?st=CMxakK&reflink=desktopwebshare_permalink",
+          "event_summary_zh": "英伟达开发者技术总监Nader Khalil向董事会及数十名核心直属高管致信，警告若无法挽留首席执行官黄仁勋将导致不可替代的人才流失",
+          "event_summary_en": "Nader Khalil, Director of Developer Technology at Nvidia, formally addressed the company's board and approximately 60 of Jensen Huang’s direct reports, expressing grave concerns regarding the potential departure of CEO Jensen Huang. The letter contends that Huang’s exit would trigger a cascade of departures among irreplaceable technical talent, jeopardizing Nvidia’s dominance in the AI computing market.",
+          "core_facts_zh": [
+            "【核心事件】英伟达开发者技术总监Nader Khalil；英伟达董事会；首席执行官黄仁勋在英伟达企业内部管理层沟通渠道：致信警告董事会需挽留黄仁勋，否则面临核心人才流失的风险",
+            "【起因与机理】对公司当前高层动荡可能导致的研发体系崩溃及市场竞争力下滑的担忧",
+            "【核心事实细节】Nader Khalil代表技术部门向董事会施压要求挽留黄仁勋。",
+            "【各方立场与态度】信件被分发至60名直属高管，显示公司内部已出现针对管理权变动的分歧。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nader Khalil, Director of Developer Technology at Nvidia; Nvidia Board of Directors; CEO Jensen Huang: Sent a letter urging the board to retain Jensen Huang to prevent the loss of critical technical talent",
+            "[Root Cause & Mechanism] Concerns over the potential erosion of R&D capabilities and market competitiveness stemming from executive instability",
+            "[Key Fact Detail] Nader Khalil pressures the board to retain Jensen Huang on behalf of the tech team.",
+            "[Key Position & Outlook] Distribution of the letter to 60 direct reports indicates internal division regarding executive leadership transition."
+          ],
+          "industry_impact_zh": "此事件揭示了英伟达高度依赖“创始人驱动”的技术战略路径，黄仁勋在软硬协同开发体系中的领袖地位已转化为企业的系统性资产。若人才流失从管理层向底层架构师传导，将直接影响其CUDA生态的粘性，造成严重的商业连续性风险。",
+          "industry_impact_en": "This incident highlights Nvidia's heavy reliance on a founder-driven strategic path, where Jensen Huang’s leadership is deeply embedded in the hardware-software co-design architecture. Should the talent attrition ripple from executive management down to core architects, it would threaten the stickiness of the CUDA ecosystem and create significant business continuity risks."
+        },
         {
           "id": "56313c69a3bd467a",
           "tag_zh": "🎁 算力福利",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举标志着英伟达将地缘政治合规性从行政运营提升至最高决策维度，意在通过董事会直接介入，减少因出口政策突变导致的技术脱钩风险。这不仅是对美国商务部出口管制政策的制度化响应，也是为了在应对持续收紧的监管审查时，能够通过更专业、更具透明度的治理架构获取政府侧的信任红利。",
           "industry_impact_en": "This move signals the elevation of geopolitical compliance from operational routine to top-tier strategic governance, aimed at mitigating technical decoupling risks from sudden policy shifts. It serves as both a proactive institutional alignment with US export controls and a mechanism to secure regulatory credibility by institutionalizing oversight in response to intensifying geopolitical scrutiny."
-        },
-        {
-          "id": "aa8521d458ee4e13",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "Numa完成4500万美元C轮融资，估值达5亿美元",
-          "title_en": "Oakland-based Numa, which builds an AI platform to manage car dealership customer service, raised a $45M Series C, a source says at a $500M post-money valuation (Camila Grigera Naón/Fortune)",
-          "source": "Fortune",
-          "published_at": "2026-11-17T09:20:01+00:00",
-          "url": "https://fortune.com/2026/11/16/ai-startup-numa-45-million-car-dealerships-paperwork/",
-          "event_summary_zh": "奥克兰AI平台公司Numa完成4500万美元C轮融资，旨在通过AI智能体优化汽车经销商客户服务与业务流程",
-          "event_summary_en": "Oakland-based AI startup Numa raised $45 million in a Series C round led by Blue Cloud Ventures, reaching a $500 million post-money valuation. The company develops an AI operating system that integrates with dealership software to automate appointment scheduling, inventory management, and warranty paperwork to address inefficiencies in automotive retail.",
-          "core_facts_zh": [
-            "【核心事件】Numa（首席执行官 Tasso Roumeliotis），Blue Cloud Ventures（领投方）在汽车零售数字化转型领域：完成4500万美元C轮融资，投后估值5亿美元",
-            "【起因与机理】利用AI智能体解决汽车经销商高频、低效的人工客服与行政流程",
-            "【关键数据与实测】Numa完成4500万美元C轮融资，投后估值升至5亿美元。",
-            "【各方立场与态度】Blue Cloud Ventures领投，累计融资额达9600万美元，旨在扩大AI智能体在垂直行业的渗透。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Numa (CEO Tasso Roumeliotis), Blue Cloud Ventures (Lead Investor): $45 million Series C funding, $500M post-money valuation",
-            "[Root Cause & Mechanism] Automating high-frequency, manual customer service and administrative tasks for car dealerships using AI agents",
-            "[Key Metrics] Numa secures $45M Series C, reaching $500M valuation.",
-            "[Key Position & Outlook] Led by Blue Cloud Ventures, total funding reaches $96M to drive industry-specific AI agent adoption."
-          ],
-          "industry_impact_zh": "Numa的商业模型标志着AI智能体从通用助理向特定行业深层工作流（Workflow-Specific）的垂直演进。通过获取经销商底层的库存与销售数据，该平台在实现业务流程闭环的同时，建立了极高的行业壁垒，使其不仅是自动化工具，更成为汽车后市场的数据枢纽。",
-          "industry_impact_en": "Numa’s model signals a shift from general-purpose assistants to workflow-specific AI agents within vertical industries. By integrating with underlying dealer inventory and transaction systems, Numa creates high switching costs and establishes itself as a data hub in the automotive aftermarket, moving beyond simple automation tools."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 10:36:18 UTC",
+      "updated_at": "2026-11-17 10:50:43 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 10:36:18 UTC",
+      "updated_at": "2026-11-17 10:50:43 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,808)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,811)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,808 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,811 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
