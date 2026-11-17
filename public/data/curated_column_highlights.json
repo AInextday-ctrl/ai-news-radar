@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 18:21:12 UTC",
+  "generated_at": "2026-11-17 18:35:37 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 18:21:12 UTC",
+      "updated_at": "2026-11-17 18:35:37 UTC",
       "headline_item": {
-        "id": "33776898231d84a2",
+        "id": "d1235c58027b86ea",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价",
-        "title_en": "GPT-6.2 Astra costs $8/1M input and $40/1M output tokens, down 20% from GPT-6 Astra; GPT-6.2 Sol keeps GPT-6.1 Sol's $2/1M input and $10/1M output token pricing (Zac Hall/9to5Mac)",
-        "source": "9to5Mac",
-        "published_at": "2026-11-17T18:15:03+00:00",
-        "url": "https://9to5mac.com/2026/11/17/openai-upgrades-chatgpt-and-codex-with-new-gpt-6-2-astra-and-sol-models/",
-        "event_summary_zh": "OpenAI 在 9 月份与 Astra 一起启动了 GPT-6 一代，然后在几周后的 DevDay 上将 Sol 升级到了 GPT-6.1。今天，GPT-6.2 Astra 和 GPT-6.2 Sol 将一起来到 ChatGPT Work 和 Codex。 OpenAI 表示，两者都可以用更少的输出令牌完成要求较高的任务，因此您可以在完成任务之前完成更多工作",
-        "event_summary_en": "OpenAI kicked off the GPT-6 generation with Astra in September, then upgraded Sol to GPT-6.1 a few weeks later at DevDay.\n\nToday, GPT-6.2 Astra and GPT-6.2 Sol are coming to ChatGPT Work and Codex together. OpenAI says both can finish demanding tasks with fewer output tokens, so you can get more done before hitting your usage limit.\n\nAstra is still the model OpenAI recommends for your hardest projects.\n\nSay you have a screenshot of a slide and want the rest of your presentation to look like it.",
+        "title_zh": "微软发布六款AI专有模型，旨在降低企业AI部署成本",
+        "title_en": "Microsoft unveils six AI models spanning coding, cybersecurity, images, and voice, saying MAI Code 2 has 98% of GPT-6.1 Sol's performance at 40% of the price (Ina Fried/Axios)",
+        "source": "Axios",
+        "published_at": "2026-11-17T18:25:02+00:00",
+        "url": "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite",
+        "event_summary_zh": "微软在Ignite大会推出六款涵盖代码、网络安全等领域的专有模型，旨在以40%的成本实现与行业领先模型接近的性能",
+        "event_summary_en": "Microsoft AI CEO Mustafa Suleyman announced six new AI models specializing in coding, cybersecurity, image generation, and voice. By optimizing parameter efficiency, these models deliver performance comparable to top-tier offerings from OpenAI and Anthropic at 40% of the cost, while allowing enterprise customers to fine-tune weights using proprietary data within the Azure ecosystem.",
         "core_facts_zh": [
-          "【核心事件】OpenAI 官方团队在全球社交网络与AI增值服务商业化市场：GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价",
-          "【起因与机理】该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。",
-          "【关键数据与实测】GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价。",
-          "【各方立场与态度】OpenAI 官方团队在全球社交网络与AI增值服务商业化市场。"
+          "【核心事件】Mustafa Suleyman（微软AI首席执行官）在旧金山Ignite大会：发布六款垂直领域AI模型，提供权重授权与Azure私有部署支持",
+          "【起因与机理】降低对单一模型供应商的依赖，通过成本优势抢占企业级AI部署市场",
+          "【关键数据与实测】核心架构优势在于高参数密度，使MAI Code 2等模型在保持98%性能前提下成本仅为竞品的40%。",
+          "【各方立场与态度】强制要求企业在Azure环境下进行模型部署与私有数据微调，强化云平台粘性。"
         ],
         "core_facts_en": [
-          "[Core Event] Industry Leaders: GPT-6.2 Astra costs $8/1M input and $40/1M output tokens, down 20% from GPT-6 Astra; GPT-6.2 Sol keeps GPT-6.1 Sol's $2/1M input and $10/1M output token pricing (Zac Hall/9to5Mac)",
-          "[Context & Motivation] OpenAI kicked off the GPT-6 generation with Astra in September, then upgraded Sol to GPT-6.1 a few weeks later at DevDay.",
-          "[Key Metrics] The $200/month Pro plan also gets Ultrafast mode for the first time with Sol.",
-          "[Industry Analysis] Say you have a screenshot of a slide and want the rest of your presentation to look like it."
+          "[Core Event] Mustafa Suleyman, CEO of Microsoft AI (Ignite conference in San Francisco): Launched six specialized AI models with model weights licensing and Azure-native deployment",
+          "[Root Cause & Mechanism] Reduce reliance on OpenAI and capture enterprise market share via aggressive pricing and efficiency",
+          "[Key Metrics] The core advantage is high parameter density, with MAI Code 2 achieving 98% performance of rivals at 40% of the cost.",
+          "[Key Position & Outlook] Enterprise customers are required to deploy and fine-tune models within Azure, reinforcing cloud ecosystem lock-in."
         ],
-        "industry_impact_zh": "该调整标志着核心数字基础设施正告别长期的免费补贴模式，通过向高频商业结算收取增值服务费以分摊高昂的结算与算力基础设施运维成本。",
-        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        "industry_impact_zh": "此举标志着微软正从单纯的算力租赁方与AI应用集成商，转型为底层模型架构的自研参与者，通过“垂直模型+Azure云环境”的绑定策略，实质上是在削弱OpenAI模型的不可替代性。将模型权重授权与Azure平台绑定，既能保持数据合规与安全护城河，又能通过成本结构重塑，构建独立于大模型的差异化商业闭环。",
+        "industry_impact_en": "This move signals Microsoft's strategic pivot from a compute provider to an in-house model architect, effectively commoditizing OpenAI's flagship offerings through vertical specialization. By anchoring licensed model weights within the Azure ecosystem, Microsoft is tightening its vendor lock-in strategy while leveraging cost efficiency to disrupt the broader foundation model market."
       },
       "headlines": [
+        {
+          "id": "d1235c58027b86ea",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "微软发布六款AI专有模型，旨在降低企业AI部署成本",
+          "title_en": "Microsoft unveils six AI models spanning coding, cybersecurity, images, and voice, saying MAI Code 2 has 98% of GPT-6.1 Sol's performance at 40% of the price (Ina Fried/Axios)",
+          "source": "Axios",
+          "published_at": "2026-11-17T18:25:02+00:00",
+          "url": "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite",
+          "event_summary_zh": "微软在Ignite大会推出六款涵盖代码、网络安全等领域的专有模型，旨在以40%的成本实现与行业领先模型接近的性能",
+          "event_summary_en": "Microsoft AI CEO Mustafa Suleyman announced six new AI models specializing in coding, cybersecurity, image generation, and voice. By optimizing parameter efficiency, these models deliver performance comparable to top-tier offerings from OpenAI and Anthropic at 40% of the cost, while allowing enterprise customers to fine-tune weights using proprietary data within the Azure ecosystem.",
+          "core_facts_zh": [
+            "【核心事件】Mustafa Suleyman（微软AI首席执行官）在旧金山Ignite大会：发布六款垂直领域AI模型，提供权重授权与Azure私有部署支持",
+            "【起因与机理】降低对单一模型供应商的依赖，通过成本优势抢占企业级AI部署市场",
+            "【关键数据与实测】核心架构优势在于高参数密度，使MAI Code 2等模型在保持98%性能前提下成本仅为竞品的40%。",
+            "【各方立场与态度】强制要求企业在Azure环境下进行模型部署与私有数据微调，强化云平台粘性。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Mustafa Suleyman, CEO of Microsoft AI (Ignite conference in San Francisco): Launched six specialized AI models with model weights licensing and Azure-native deployment",
+            "[Root Cause & Mechanism] Reduce reliance on OpenAI and capture enterprise market share via aggressive pricing and efficiency",
+            "[Key Metrics] The core advantage is high parameter density, with MAI Code 2 achieving 98% performance of rivals at 40% of the cost.",
+            "[Key Position & Outlook] Enterprise customers are required to deploy and fine-tune models within Azure, reinforcing cloud ecosystem lock-in."
+          ],
+          "industry_impact_zh": "此举标志着微软正从单纯的算力租赁方与AI应用集成商，转型为底层模型架构的自研参与者，通过“垂直模型+Azure云环境”的绑定策略，实质上是在削弱OpenAI模型的不可替代性。将模型权重授权与Azure平台绑定，既能保持数据合规与安全护城河，又能通过成本结构重塑，构建独立于大模型的差异化商业闭环。",
+          "industry_impact_en": "This move signals Microsoft's strategic pivot from a compute provider to an in-house model architect, effectively commoditizing OpenAI's flagship offerings through vertical specialization. By anchoring licensed model weights within the Azure ecosystem, Microsoft is tightening its vendor lock-in strategy while leveraging cost efficiency to disrupt the broader foundation model market."
+        },
         {
           "id": "33776898231d84a2",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "OpenAI此举标志着模型竞争逻辑从单一的参数规模竞赛转向“单位推理成本下的任务完成度”优化，意在通过极具侵略性的定价挤压竞争对手的生存空间。通过针对科学计算（Terminal-Bench-Science）的专项优化，其目标已明确指向高价值科研数据资产的处理权，这将迫使云服务厂商进一步压缩大模型托管的利润率。",
           "industry_impact_en": "OpenAI's strategy shifts from parameter scaling to optimizing task completion per unit of inference cost, aggressively compressing the market space for rivals. By specializing in scientific computing, OpenAI aims to capture high-value research data processing, forcing cloud providers to compress margins on LLM hosting services."
-        },
-        {
-          "id": "a1a63d40c4bd4836",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "今年夏天美国西南部水力发电量创历史新低",
-          "title_en": "Hydropower hit record lows in the US Southwest this summer",
-          "source": "MIT Tech Review",
-          "published_at": "2026-11-17T17:52:10+00:00",
-          "url": "https://www.technologyreview.com/2026/11/17/1148742/hydropower-drought-colorado-river/",
-          "event_summary_zh": "美国能源情报署的最新数据显示，4 月至 8 月期间，美国西南部的水力发电量比 10 年平均水平减少了 28%。美国大多数水力发电厂都依靠水坝来蓄水，形成水库。水可以通过涡轮机、发电机释放",
-          "event_summary_en": "The US Southwest generated 28% less electricity via hydropower between April and August than the 10-year average, according to new data from the US Energy Information Administration.\n\nMost hydropower plants in the US rely on dams to hold back water, creating reservoirs. The water can be released through turbines, generating electricity on demand. But an extreme, prolonged drought in the Colorado River Basin has resulted in dangerously low water levels in the Southwest’s two largest reservoirs, a",
-          "core_facts_zh": [
-            "【核心事件】今年夏天美国西南部水力发电量创历史新低",
-            "【起因与机理】超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
-            "【关键数据与实测】美国能源情报署的最新数据显示，4 月至 8 月期间，美国西南部的水力发电量比 10 年平均水平减少了 28%。",
-            "【各方立场与态度】今年夏天美国西南部水力发电量创在全球产业与技术前沿一线。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Industry Leaders: Hydropower hit record lows in the US Southwest this summer",
-            "[Root Cause & Mechanism] But an extreme, prolonged drought in the Colorado River Basin has resulted in dangerously low water levels in the Southwest’s two largest reservoirs, a.",
-            "[Key Metrics] The US Southwest generated 28% less electricity via hydropower between April and August than the 10-year average, according to new data from the US Energy Information Administration.",
-            "[Key Position & Outlook] Hydropower hit record lows in the US Southwest this summer."
-          ],
-          "industry_impact_zh": "超算集群极速扩张面临区域电网承载与清洁能源供应瓶颈，倒逼科技巨头深度布局专用能源基础设施以保障算力生命线。",
-          "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 18:21:12 UTC",
+      "updated_at": "2026-11-17 18:35:37 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 18:21:12 UTC",
+      "updated_at": "2026-11-17 18:35:37 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -379,7 +379,7 @@
           "id": "agent-desktop",
           "name": "agent-desktop",
           "icon": "🌐",
-          "stars": "24.9k",
+          "stars": "25k",
           "weekly_growth_zh": "本周暴增 +13,858 ★ · 24H 爆火黑马",
           "weekly_growth_en": "+13,858 ★ this week · 24H Trending Breakout",
           "license": "MIT",
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,948)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,952)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,948 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,952 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
