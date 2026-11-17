@@ -1,12 +1,22 @@
 # AI 资讯雷达 - 全量深度情报与技术档案
 
 > 汇聚最新突发快讯要点、落地开发工具深度评测与旗舰技术长文全量文本。
-生成时间: 2026-11-17 04:36:24Z
+生成时间: 2026-11-17 04:50:28Z
 权威网址: https://ainewsradar.xyz/zh
 
 ---
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
+
+### Meta在泰国与土耳其测试独立Instagram消息应用
+- 落地页链接: https://ainewsradar.xyz/zh/news/9f3ea940e0ef6730
+- 原始信源: Engadget (https://www.engadget.com/2318452/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/)
+- 核心摘要: Meta推出独立通讯应用Direct进行区域性测试，用户无需关联Instagram主账号即可实现社交连接
+- 核验事实清单:
+  * 【核心事件】元平台公司在泰国与土耳其市场：推出独立消息应用Direct并开启试点测试
+  * 【起因与机理】降低通讯功能进入门槛，验证剥离核心社交功能的可行性
+  * 【核心事实细节】Meta将Instagram核心收件箱剥离，开发无需关联主账号的独立App。
+  * 【各方立场与态度】该策略旨在评估通讯功能独立化对Meta生态增量用户的获取能力。
 
 ### Anthropic通过AI自动化实现模型跨硬件高效迁移
 - 落地页链接: https://ainewsradar.xyz/zh/news/348454af17913093
@@ -298,16 +308,6 @@
   * 【核心事实细节】董事会否认黄仁勋复职的可能性。
   * 【各方立场与态度】已启动全球猎头寻找新任首席执行官。
 
-### 为了应对人工智能驱动的错误发现，Anthropic 将高危和危急问题的协调漏洞披露窗口从 90 天缩短至 30 天 (Anthropic)
-- 落地页链接: https://ainewsradar.xyz/zh/news/64b55329cad6d481
-- 原始信源: Anthropic (https://www.anthropic.com/research/coordinated-vulnerability-disclosure-timelines)
-- 核心摘要: 在过去的几个月里，前沿模型在发现漏洞方面变得更加出色。我们仍然乐观地认为，这将帮助防御者比以往更快地发现和修复漏洞。然而，人工智能改进的速度改变了我们对自己的披露实践的看法
-- 核验事实清单:
-  * 【核心事件】Anthropic (Claude 研发团队)：为了应对人工智能驱动的错误发现，Anthropic 将高危和危急问题的协调漏洞披露窗口从 90 天缩短至 30 天 (Anthropic)
-  * 【起因与机理】前沿模型研发面临海量数据抓取合规争议与创作者信任危机，亟需构建透明可信的追溯机制与合理的版权利益分配方案。
-  * 【核心事实细节】Anthropic (Claude 研发团队)在全球产业与技术前沿一线。
-  * 【行业研判】然而，人工智能改进的速度改变了我们对自己的披露实践的看法。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -316,8 +316,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/e3ca255877a6d63c
 - 官方/开源地址: https://github.com/vercel-labs/agent-desktop?ref=ainewsradar
 - 一句话亮点: 计算机使用 CLI 进行 AI 代理
-- 核心概览: agent-desktop 是一款专注于 🌐 联网搜索与浏览器 的开源 AI 工具（本周新增 +4,451 Stars，总计 24,678 Stars）。计算机使用 CLI 进行 AI 代理，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,678)', '🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-desktop 是一款专注于 🌐 联网搜索与浏览器 的开源 AI 工具（本周新增 +4,451 Stars，总计 24,681 Stars）。计算机使用 CLI 进行 AI 代理，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,681)', '🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🌐 联网搜索与浏览器 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-desktop.git`
 
@@ -325,19 +325,37 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/8902d312579bff23
 - 官方/开源地址: https://github.com/pingdotgg/t3code?ref=ainewsradar
 - 一句话亮点: 从任何计算机或手机控制 Claude Code、Codex 等的最佳方式
-- 核心概览: t3code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +8,993 Stars，总计 63,022 Stars）。从任何计算机或手机控制 Claude Code、Codex 等的最佳方式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +8,993 Stars (总星标 63,022)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: t3code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +8,993 Stars，总计 63,037 Stars）。从任何计算机或手机控制 Claude Code、Codex 等的最佳方式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +8,993 Stars (总星标 63,037)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/pingdotgg/t3code.git`
+
+### gbrain
+- 落地页链接: https://ainewsradar.xyz/zh/tools/1847de3fb2fff3fd
+- 官方/开源地址: https://gbrain.io/gratis/product-hunt?ref=ainewsradar
+- 一句话亮点: 加里固执己见的 OpenClaw/Hermes 特工大脑
+- 核心概览: gbrain 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +1,186 Stars，总计 33,166 Stars）。加里固执己见的 OpenClaw/Hermes 特工大脑，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,186 Stars (总星标 33,166)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/garrytan/gbrain.git`
 
 ### univer
 - 落地页链接: https://ainewsradar.xyz/zh/tools/f689ccec41c0119a
 - 官方/开源地址: https://github.com/dream-num/univer?ref=ainewsradar
 - 一句话亮点: 使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔
-- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,765 Stars，总计 27,935 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,765 Stars (总星标 27,935)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: univer 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,765 Stars，总计 27,940 Stars）。使用 Univer Office SDK 构建您自己的 AI 办公室。将编辑、计算、协作和文件处理引入您的产品中，供人员和 AI 代理使用。布尔，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,765 Stars (总星标 27,940)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/dream-num/univer.git`
+
+### ag-ui
+- 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
+- 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
+- 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
+- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,569 Stars，总计 19,287 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,569 Stars (总星标 19,287)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
 ### OpenBot
 - 落地页链接: https://ainewsradar.xyz/zh/tools/62a8982796e5111f
@@ -352,17 +370,44 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/1c5edee7c934959a
 - 官方/开源地址: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - 一句话亮点: 用于编码代理的 Chrome DevTools
-- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,593 Stars，总计 57,778 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,593 Stars (总星标 57,778)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,593 Stars，总计 57,782 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,593 Stars (总星标 57,782)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
+
+### instagram-agent-skill
+- 落地页链接: https://ainewsradar.xyz/zh/tools/44ef8e5ea5a50148
+- 官方/开源地址: https://github.com/Jakeschincariol/instagram-agent-skill?ref=ainewsradar
+- 一句话亮点: 管理 Instagram 帐户的 13 项 Claude 技能：讲述 26 个得分挂钩公式、一项病毒式研究技能、标题短绒和人性化。免费，麻省理工学院。
+- 核心概览: instagram-agent-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,131 Stars，总计 6,842 Stars）。管理 Instagram 帐户的 13 项 Claude 技能：讲述 26 个得分挂钩公式、一项病毒式研究技能、标题短绒和人性化。免费，麻省理工学院。，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,131 Stars (总星标 6,842)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/Jakeschincariol/instagram-agent-skill.git`
+
+### ffmpeg-skill
+- 落地页链接: https://ainewsradar.xyz/zh/tools/5765d0dd8c4b61bf
+- 官方/开源地址: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
+- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切
+- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +1,528 Stars，总计 7,042 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,528 Stars (总星标 7,042)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🎬 视频剪辑与生成 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
+
+### claude-quickstarts
+- 落地页链接: https://ainewsradar.xyz/zh/tools/04a6fb355033e4bc
+- 官方/开源地址: https://github.com/anthropics/claude-quickstarts?ref=ainewsradar
+- 一句话亮点: 旨在帮助开发人员快速开始使用 Claude API 构建可部署应用程序的项目集合
+- 核心概览: claude-quickstarts 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,241 Stars，总计 21,072 Stars）。旨在帮助开发人员快速开始使用 Claude API 构建可部署应用程序的项目集合，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,241 Stars (总星标 21,072)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/anthropics/claude-quickstarts.git`
 
 ### Claude-BugHunter
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0831ca93321eceea
 - 官方/开源地址: https://github.com/elementalsouls/Claude-BugHunter?ref=ainewsradar
 - 一句话亮点: 用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式
-- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,747 Stars，总计 7,593 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,747 Stars (总星标 7,593)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: Claude-BugHunter 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +1,747 Stars，总计 7,609 Stars）。用于 bug 搜寻和外部红队工作的 Claude Code 技能包 - 82 项技能、15 个斜杠命令、跨 24 个核心漏洞策划的 681 个披露报告模式，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,747 Stars (总星标 7,609)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/elementalsouls/Claude-BugHunter.git`
 
@@ -375,12 +420,21 @@
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💼 金融看盘·求职与生活 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/homeassistant-ai/ha-mcp.git`
 
+### qwen-code
+- 落地页链接: https://ainewsradar.xyz/zh/tools/03ee96d1f7317517
+- 官方/开源地址: https://github.com/QwenLM/qwen-code?ref=ainewsradar
+- 一句话亮点: 位于您终端中的开源人工智能编码代理。
+- 核心概览: qwen-code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +711 Stars，总计 28,454 Stars）。面向AI 编程与开发场景的实用 AI 工具，支持终端命令行交互与自动化脚本执行，赋能全流程代码编写、审查与工程构建，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +711 Stars (总星标 28,454)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
+- 快速启动指令: `git clone https://github.com/QwenLM/qwen-code.git`
+
 ### codex-security
 - 落地页链接: https://ainewsradar.xyz/zh/tools/a9682d2a9aa41848
 - 官方/开源地址: https://github.com/openai/codex-security?ref=ainewsradar
 - 一句话亮点: OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npm
-- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,352 Stars，总计 13,802 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,352 Stars (总星标 13,802)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: codex-security 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,352 Stars，总计 13,804 Stars）。OpenAI 的 Codex Security CLI 和 TypeScript SDK 用于查找、验证和修复安全漏洞。 npm：https://www.npmjs.com/package/@openai/codex-se，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,352 Stars (总星标 13,804)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/openai/codex-security.git`
 
@@ -388,8 +442,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/3924c8f295303f30
 - 官方/开源地址: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - 一句话亮点: 安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释
-- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,056 Stars，总计 53,085 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,056 Stars (总星标 53,085)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
+- 核心概览: open-code-review 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +3,056 Stars，总计 53,091 Stars）。安全、快速、高效，经过阿里巴巴规模的实战考验。混合架构代码审查工具：确定性管道+LLM Agent，精确的行级注释，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,056 Stars (总星标 53,091)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -397,8 +451,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/0d9bdefb9cf43c09
 - 官方/开源地址: https://github.com/google/elephant-goldfish-model?ref=ainewsradar
 - 一句话亮点: 用于与代理一起设计和审查软件的开源插件
-- 核心概览: elephant-goldfish-model 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,249 Stars，总计 20,452 Stars）。用于与代理一起设计和审查软件的开源插件，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,249 Stars (总星标 20,452)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: elephant-goldfish-model 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +4,249 Stars，总计 20,455 Stars）。用于与代理一起设计和审查软件的开源插件，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +4,249 Stars (总星标 20,455)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/google/elephant-goldfish-model.git`
 
@@ -406,8 +460,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/adbd0d0908f7dd83
 - 官方/开源地址: https://github.com/vercel-labs/agent-browser?ref=ainewsradar
 - 一句话亮点: 用于 AI 代理的浏览器自动化 CLI
-- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,760 Stars，总计 52,088 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,760 Stars (总星标 52,088)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: agent-browser 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +3,760 Stars，总计 52,092 Stars）。用于 AI 代理的浏览器自动化 CLI，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,760 Stars (总星标 52,092)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/vercel-labs/agent-browser.git`
 
@@ -415,8 +469,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/6eabee8f4881846c
 - 官方/开源地址: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - 一句话亮点: 保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席
-- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,325 Stars，总计 12,698 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,325 Stars (总星标 12,698)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: plannotator 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +2,325 Stars，总计 12,701 Stars）。保持在循环中并在座席之上的工作区 - 塑造、决定、计划、注释、审查代码、与团队共享以及通过一个 c 将所有反馈发送给座席，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,325 Stars (总星标 12,701)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -424,8 +478,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/204fecd7e0bc86d7
 - 官方/开源地址: https://github.com/meta/astryx?ref=ainewsradar
 - 一句话亮点: 完全可定制且可供代理使用的开源设计系统
-- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +10,939 Stars，总计 29,716 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +10,939 Stars (总星标 29,716)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: astryx 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +10,939 Stars，总计 29,723 Stars）。完全可定制且可供代理使用的开源设计系统，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +10,939 Stars (总星标 29,723)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/meta/astryx.git`
 
@@ -433,8 +487,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/46d8a8c5c5bcc404
 - 官方/开源地址: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - 一句话亮点: 让您的编码代理了解最新的网络最佳实践
-- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,542 Stars，总计 8,083 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,542 Stars (总星标 8,083)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: modern-web-guidance-src 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +6,542 Stars，总计 8,089 Stars）。让您的编码代理了解最新的网络最佳实践，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +6,542 Stars (总星标 8,089)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
 
@@ -464,60 +518,6 @@
 - 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +3,172 Stars (总星标 41,185)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，并提供在线官网/文档直达']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/Codewhale.git`
-
-### gbrain
-- 落地页链接: https://ainewsradar.xyz/zh/tools/1847de3fb2fff3fd
-- 官方/开源地址: https://gbrain.io/gratis/product-hunt?ref=ainewsradar
-- 一句话亮点: 加里固执己见的 OpenClaw/Hermes 特工大脑
-- 核心概览: gbrain 是一款专注于 🧠 知识库与学术研究 的开源 AI 工具（本周新增 +1,186 Stars，总计 33,162 Stars）。加里固执己见的 OpenClaw/Hermes 特工大脑，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,186 Stars (总星标 33,162)', '🎯 针对 🧠 知识库与学术研究 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🧠 知识库与学术研究 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/gbrain.git`
-
-### ag-ui
-- 落地页链接: https://ainewsradar.xyz/zh/tools/10af45cace9eba68
-- 官方/开源地址: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
-- 一句话亮点: AG-UI：代理-用户交互协议。将代理引入前端应用程序。
-- 核心概览: ag-ui 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,569 Stars，总计 19,214 Stars）。AG-UI：代理-用户交互协议。将代理引入前端应用程序。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,569 Stars (总星标 19,214)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
-
-### instagram-agent-skill
-- 落地页链接: https://ainewsradar.xyz/zh/tools/44ef8e5ea5a50148
-- 官方/开源地址: https://github.com/Jakeschincariol/instagram-agent-skill?ref=ainewsradar
-- 一句话亮点: 管理 Instagram 帐户的 13 项 Claude 技能：讲述 26 个得分挂钩公式、一项病毒式研究技能、标题短绒和人性化。免费，麻省理工学院。
-- 核心概览: instagram-agent-skill 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,131 Stars，总计 6,837 Stars）。管理 Instagram 帐户的 13 项 Claude 技能：讲述 26 个得分挂钩公式、一项病毒式研究技能、标题短绒和人性化。免费，麻省理工学院。，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,131 Stars (总星标 6,837)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/Jakeschincariol/instagram-agent-skill.git`
-
-### ffmpeg-skill
-- 落地页链接: https://ainewsradar.xyz/zh/tools/5765d0dd8c4b61bf
-- 官方/开源地址: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
-- 一句话亮点: 用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切
-- 核心概览: ffmpeg-skill 是一款专注于 🎬 视频剪辑与生成 的开源 AI 工具（本周新增 +1,528 Stars，总计 6,960 Stars）。用于编码代理的本地视频编辑器：42 个 FFmpeg 工具，带有机器可读合约和 MCP 服务器，用于 Claude Code、Cursor 和 Codex。剪切、字幕、引用，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,528 Stars (总星标 6,960)', '🎯 针对 🎬 视频剪辑与生成 场景深度调优与工程封装', '⚡ 支持 🐳 Docker 一键部署，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🎬 视频剪辑与生成 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
-
-### claude-quickstarts
-- 落地页链接: https://ainewsradar.xyz/zh/tools/04a6fb355033e4bc
-- 官方/开源地址: https://github.com/anthropics/claude-quickstarts?ref=ainewsradar
-- 一句话亮点: 旨在帮助开发人员快速开始使用 Claude API 构建可部署应用程序的项目集合
-- 核心概览: claude-quickstarts 是一款专注于 🤖 智能体工作流编排 的开源 AI 工具（本周新增 +1,241 Stars，总计 21,072 Stars）。旨在帮助开发人员快速开始使用 Claude API 构建可部署应用程序的项目集合，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +1,241 Stars (总星标 21,072)', '🎯 针对 🤖 智能体工作流编排 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 🤖 智能体工作流编排 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/anthropics/claude-quickstarts.git`
-
-### qwen-code
-- 落地页链接: https://ainewsradar.xyz/zh/tools/03ee96d1f7317517
-- 官方/开源地址: https://github.com/QwenLM/qwen-code?ref=ainewsradar
-- 一句话亮点: 位于您终端中的开源人工智能编码代理。
-- 核心概览: qwen-code 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +711 Stars，总计 28,454 Stars）。面向AI 编程与开发场景的实用 AI 工具，支持终端命令行交互与自动化脚本执行，赋能全流程代码编写、审查与工程构建，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +711 Stars (总星标 28,454)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
-- 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
-- 快速启动指令: `git clone https://github.com/QwenLM/qwen-code.git`
 
 ### oh-my-pi
 - 落地页链接: https://ainewsradar.xyz/zh/tools/fe2cb26e6766533f
