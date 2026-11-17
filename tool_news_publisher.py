@@ -926,12 +926,34 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </div>
         """
 
+    video_html = ""
+    if item.get("has_video") or item.get("video_url"):
+        v_url = item.get("video_url") or item.get("video_direct_url") or source_url
+        v_title = "现场视频报道" if is_zh else "Live Video Coverage"
+        v_action = "播放视频 ↗" if is_zh else "Watch Video ↗"
+        v_desc = f"原文包含 {source_name} 独家现场视频报道与深度实录。" if is_zh else f"Original reporting includes exclusive live video coverage and analysis from {source_name}."
+        video_html = f"""
+        <div class="mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-3 text-amber-900 dark:text-amber-200">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="text-xl">📹</span>
+            <div>
+              <div class="text-xs sm:text-sm font-bold">{v_title}</div>
+              <div class="text-xs text-amber-700/80 dark:text-amber-300/80 truncate">{v_desc}</div>
+            </div>
+          </div>
+          <a href="{escape(v_url)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
+            <span>▶</span> <span>{v_action}</span>
+          </a>
+        </div>
+        """
+
     full_coverage_html = ""
     full_text = str((item.get("article_content_zh") if is_zh else (item.get("article_content_en") or item.get("article_content") or item.get("original_content"))) or "").strip()
     is_reuters = "reuters" in (item.get("source") or "").lower() or "reuters.com" in (item.get("url") or "").lower()
     is_bloomberg = "bloomberg" in (item.get("source") or "").lower() or "bloomberg.com" in (item.get("url") or "").lower()
-    is_paywalled = bool((not is_reuters and not (is_bloomberg and item.get("is_substantive")) and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "wsj", "the information"]))
-    if is_reuters or (is_bloomberg and (item.get("is_substantive") or len(full_text) >= 200)):
+    is_fortune = "fortune" in (item.get("source") or "").lower() or "fortune.com" in (item.get("url") or "").lower()
+    is_paywalled = bool((not is_reuters and not (is_bloomberg and item.get("is_substantive")) and not (is_fortune and item.get("is_substantive")) and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "wsj", "the information"]))
+    if is_reuters or ((is_bloomberg or is_fortune) and (item.get("is_substantive") or len(full_text) >= 200)):
         is_paywalled = False
         if len(full_text) >= 200:
             item["is_substantive"] = True
@@ -1306,6 +1328,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
         {bullets_html}
         {analysis_html}
+        {video_html}
         {full_coverage_html}
 
         <!-- CTA & Social Share Capsule Bar (Universal Article End Action Bar) -->

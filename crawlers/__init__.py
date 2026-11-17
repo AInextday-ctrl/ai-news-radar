@@ -9,11 +9,14 @@ Each news source has its own isolated crawler implementation to guarantee:
 
 from .reuters_crawler import crawl_reuters, is_reuters_url
 from .bloomberg_crawler import crawl_bloomberg, is_bloomberg_url, resolve_bloomberg_broadcast_media
+from .fortune_crawler import crawl_fortune, is_fortune_url
 
 __all__ = [
     "crawl_reuters",
     "is_reuters_url",
     "crawl_bloomberg",
     "is_bloomberg_url",
-    "resolve_bloomberg_broadcast_media"
+    "resolve_bloomberg_broadcast_media",
+    "crawl_fortune",
+    "is_fortune_url"
 ]

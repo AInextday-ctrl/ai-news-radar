@@ -78,6 +78,7 @@ class ArticleExtractor:
         "theverge.com": "_extract_theverge",
         "reuters.com": "_extract_reuters",
         "bloomberg.com": "_extract_bloomberg",
+        "fortune.com": "_extract_fortune",
         "technologyreview.com": "_extract_techreview",
         "arstechnica.com": "_extract_arstechnica",
     }
@@ -434,6 +435,19 @@ class ArticleExtractor:
             return []
 
     @classmethod
+    def _extract_fortune(cls, html_text: str, url: str = "") -> List[str]:
+        """
+        财富杂志 (Fortune) 专属单一抓取器：
+        全面路由至独立隔离的 crawlers.fortune_crawler 专属模块。
+        """
+        try:
+            from crawlers.fortune_crawler import crawl_fortune
+            data = crawl_fortune(url=url, html_text=html_text)
+            return data.get("paragraphs", [])
+        except Exception:
+            return []
+
+    @classmethod
     def _extract_techreview(cls, html_text: str) -> List[str]:
         """MIT Technology Review 专属单一抓取器"""
         paras = cls._extract_from_json_ld(html_text)
@@ -699,6 +713,16 @@ class ArticleExtractor:
                 bloomberg_data = crawl_bloomberg(url, html_text=html_text)
                 if bloomberg_data.get("is_substantive") or bloomberg_data.get("paras_count", 0) >= 1 or bloomberg_data.get("title"):
                     result.update(bloomberg_data)
+                    return result
+            except Exception:
+                pass
+
+        if "fortune.com" in domain or "fortune.net" in domain:
+            try:
+                from crawlers.fortune_crawler import crawl_fortune
+                fortune_data = crawl_fortune(url, html_text=html_text)
+                if fortune_data.get("is_substantive") or fortune_data.get("paras_count", 0) >= 1 or fortune_data.get("title"):
+                    result.update(fortune_data)
                     return result
             except Exception:
                 pass
