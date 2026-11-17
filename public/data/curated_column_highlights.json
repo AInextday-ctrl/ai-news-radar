@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 12:40:08 UTC",
+  "generated_at": "2026-11-17 12:52:55 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 12:40:08 UTC",
+      "updated_at": "2026-11-17 12:52:55 UTC",
       "headline_item": {
-        "id": "fa501fee660ee02f",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "谷歌签署5亿美元地热能采购协议",
-        "title_en": "Google signs a $500M+ deal to secure 50MW of geothermal power from Quaise Energy in Oregon, starting as early as 2030, to support its data centers in the state (Benoît Morenne/Wall Street Journal)",
-        "source": "Wall Street Journal",
-        "published_at": "2026-11-17T12:30:02+00:00",
-        "url": "https://www.wsj.com/business/energy-oil/google-embraces-geothermal-technology-to-vaporize-rock-for-clean-power-dbd66d05?st=pFHTBt&reflink=desktopwebshare_permalink",
-        "event_summary_zh": "谷歌与Quaise Energy签署购电协议，将在俄勒冈州部署50兆瓦超高温地热能，2030年起并网支持数据中心运营",
-        "event_summary_en": "Google signed a power purchase agreement with Quaise Energy for 50MW of superhot geothermal power from the Project Obsidian site in Oregon. The initiative utilizes millimeter-wave drilling technology to access deep-crust thermal energy, targeting a 2030 commercial grid connection to provide resilient, carbon-free energy for data centers.",
+        "id": "420ca19d03ed9a1e",
+        "tag_zh": "🎁 算力福利",
+        "tag_en": "🎁 Promos & Credits",
+        "title_zh": "美国拟严管海外AI算力租赁，东南亚数据中心面临合规围堵",
+        "title_en": "The Trump administration's proposal to curb China's remote access to AI chips rattles Southeast Asia, threatening a data center boom fueled by Chinese companies (New York Times)",
+        "source": "New York Times",
+        "published_at": "2026-11-17T12:45:03+00:00",
+        "url": "https://www.nytimes.com/2026/11/17/business/southeast-asia-china-ai-chips.html?unlocked_article_code=1.RFE.3pta.az4-gkX5GBns&smid=url-share",
+        "event_summary_zh": "美国商务部发布新规，要求海外数据中心向中国实体提供大规模算力需申请许可证，旨在堵死中国通过东南亚规避芯片禁令的通道",
+        "event_summary_en": "The U.S. Commerce Department released a 132-page policy requiring overseas data center operators to obtain U.S. licenses before providing significant computing power to Chinese entities, effective in 90 days. This move aims to close loopholes allowing Chinese firms to bypass semiconductor export restrictions by leasing capacity in Southeast Asia, while Nvidia has established a specialized committee to oversee national security and export compliance.",
         "core_facts_zh": [
-          "【核心事件】谷歌（Google）；Quaise Energy（首席执行官 Carlos Araque）在美国俄勒冈州达尔斯（The Dalles）：签署50兆瓦超高温地热购电协议（PPA），涉及毫米波钻探技术应用",
-          "【起因与机理】满足数据中心对清洁、恒定基荷能源的迫切需求，规避传统风光电力波动性",
-          "【商业与财务细节】谷歌锁定50兆瓦长期碳中和基荷电力。",
-          "【各方立场与态度】预计2030年并网，保障区域算力设施持续供能。"
+          "【核心事件】美国商务部、NVIDIA（英伟达）董事会、 interim CEO Colette Kress：针对海外数据中心对华算力供给的强制许可制度及NVIDIA合规内部审查机制",
+          "【起因与机理】应对中国通过海外基础设施规避高性能AI芯片出口禁令的国家安全风险",
+          "【关键数据与实测】后续节点：政策将于90天内正式生效，NVIDIA已进入最高级别合规审计与管理层重组阶段。",
+          "【涉及范围与推进】涉案细节：新规针对“显著规模”算力交付，实行许可证管理，且涉及东南亚数据中心投资审查。"
         ],
         "core_facts_en": [
-          "[Core Event] Google; Quaise Energy (CEO Carlos Araque) (The Dalles, Oregon, USA): 50MW geothermal PPA, involving millimeter-wave drilling technology",
-          "[Root Cause & Mechanism] Securing constant, carbon-free baseload power for energy-intensive data centers",
-          "[Key Metrics] 41% Agreement advances development of commercial-scale superhot geothermal, will supply carbon-free energy to Oregon communities as early as 2030.",
-          "[Key Position & Outlook] Grid connection targeted by 2030 to ensure continuous power for regional compute facilities."
+          "[Core Event] U.S. Department of Commerce, Nvidia Board of Directors, Interim CEO Colette Kress: Mandatory licensing for overseas data centers providing compute to China and establishment of Nvidia's national security oversight committee",
+          "[Root Cause & Mechanism] Mitigating national security risks posed by Chinese AI entities bypassing advanced chip export controls through offshore infrastructure",
+          "[Regulatory & Investigation Focus] Core demand: Closing the regulatory loophole in cloud computing services to block Chinese access to high-performance AI hardware.",
+          "[Key Position & Outlook] Timeline: Policy enters into force within 90 days; Nvidia initiates high-level compliance auditing and executive transition."
         ],
-        "industry_impact_zh": "通过超高温地热技术锁定基荷电力，体现了科技巨头对能源供给侧的深度垂直整合逻辑。毫米波钻探若能在商业规模验证成功，将打破传统地理位置对地热能的硬性约束，重塑全球算力基础设施的选址策略与能源成本结构。",
-        "industry_impact_en": "Securing baseload geothermal power signifies a shift toward vertical integration of energy supply by tech giants. Successful commercialization of millimeter-wave drilling would bypass geological constraints of traditional geothermal, fundamentally altering the site-selection strategy and energy cost profiles for global computing infrastructure."
+        "industry_impact_zh": "该监管政策标志着美国出口管制已从单纯的“产品与设备贸易”向“算力与服务交付”纵深演进，试图对全球云服务边界进行穿透式监管。此举将重塑东南亚作为全球AI基础设施枢纽的估值逻辑，迫使中资AI企业加速布局去中心化的分布式算力架构或转向更隐蔽的区域性合规租赁模式。",
+        "industry_impact_en": "This regulatory shift marks the transition of U.S. export controls from hardware-centric mandates to the oversight of cross-border computing services, effectively seeking to implement penetrative supervision over global cloud infrastructure. This policy will recalibrate the investment valuation of Southeast Asia as an AI hub, compelling Chinese AI firms to accelerate the transition toward decentralized computing architectures or obscured, locally-compliant leasing models."
       },
       "headlines": [
+        {
+          "id": "420ca19d03ed9a1e",
+          "tag_zh": "🎁 算力福利",
+          "tag_en": "🎁 Promos & Credits",
+          "title_zh": "美国拟严管海外AI算力租赁，东南亚数据中心面临合规围堵",
+          "title_en": "The Trump administration's proposal to curb China's remote access to AI chips rattles Southeast Asia, threatening a data center boom fueled by Chinese companies (New York Times)",
+          "source": "New York Times",
+          "published_at": "2026-11-17T12:45:03+00:00",
+          "url": "https://www.nytimes.com/2026/11/17/business/southeast-asia-china-ai-chips.html?unlocked_article_code=1.RFE.3pta.az4-gkX5GBns&smid=url-share",
+          "event_summary_zh": "美国商务部发布新规，要求海外数据中心向中国实体提供大规模算力需申请许可证，旨在堵死中国通过东南亚规避芯片禁令的通道",
+          "event_summary_en": "The U.S. Commerce Department released a 132-page policy requiring overseas data center operators to obtain U.S. licenses before providing significant computing power to Chinese entities, effective in 90 days. This move aims to close loopholes allowing Chinese firms to bypass semiconductor export restrictions by leasing capacity in Southeast Asia, while Nvidia has established a specialized committee to oversee national security and export compliance.",
+          "core_facts_zh": [
+            "【核心事件】美国商务部、NVIDIA（英伟达）董事会、 interim CEO Colette Kress：针对海外数据中心对华算力供给的强制许可制度及NVIDIA合规内部审查机制",
+            "【起因与机理】应对中国通过海外基础设施规避高性能AI芯片出口禁令的国家安全风险",
+            "【关键数据与实测】后续节点：政策将于90天内正式生效，NVIDIA已进入最高级别合规审计与管理层重组阶段。",
+            "【涉及范围与推进】涉案细节：新规针对“显著规模”算力交付，实行许可证管理，且涉及东南亚数据中心投资审查。"
+          ],
+          "core_facts_en": [
+            "[Core Event] U.S. Department of Commerce, Nvidia Board of Directors, Interim CEO Colette Kress: Mandatory licensing for overseas data centers providing compute to China and establishment of Nvidia's national security oversight committee",
+            "[Root Cause & Mechanism] Mitigating national security risks posed by Chinese AI entities bypassing advanced chip export controls through offshore infrastructure",
+            "[Regulatory & Investigation Focus] Core demand: Closing the regulatory loophole in cloud computing services to block Chinese access to high-performance AI hardware.",
+            "[Key Position & Outlook] Timeline: Policy enters into force within 90 days; Nvidia initiates high-level compliance auditing and executive transition."
+          ],
+          "industry_impact_zh": "该监管政策标志着美国出口管制已从单纯的“产品与设备贸易”向“算力与服务交付”纵深演进，试图对全球云服务边界进行穿透式监管。此举将重塑东南亚作为全球AI基础设施枢纽的估值逻辑，迫使中资AI企业加速布局去中心化的分布式算力架构或转向更隐蔽的区域性合规租赁模式。",
+          "industry_impact_en": "This regulatory shift marks the transition of U.S. export controls from hardware-centric mandates to the oversight of cross-border computing services, effectively seeking to implement penetrative supervision over global cloud infrastructure. This policy will recalibrate the investment valuation of Southeast Asia as an AI hub, compelling Chinese AI firms to accelerate the transition toward decentralized computing architectures or obscured, locally-compliant leasing models."
+        },
         {
           "id": "fa501fee660ee02f",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举标志着美方对基础设施供应链的干预从终端设备下沉至底层物理层光学元器件。这不仅会导致北美数据中心建设的短期成本激增，更将倒逼全球光模块厂商进行供应链重构，甚至引发光子技术领域的进一步脱钩。",
           "industry_impact_en": "This move signals a pivot in U.S. intervention from end-user hardware to base-layer physical optical components. It will likely trigger short-term cost spikes for North American data centers and force a global supply chain restructuring for optical modules, accelerating technological decoupling in photonics."
-        },
-        {
-          "id": "dc02776b33f04b24",
-          "tag_zh": "💼 商业落地",
-          "tag_en": "💼 Business Cases",
-          "title_zh": "Isomorphic Labs获50亿美元融资",
-          "title_en": "Sequoia, Greenoaks Lead Isomorphic Lab’s $5 Billion Funding Round",
-          "source": "Bloomberg",
-          "published_at": "2026-11-17T12:11:18+00:00",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-17/sequoia-greenoaks-lead-isomorphic-lab-s-5-billion-funding-round",
-          "event_summary_zh": "Isomorphic Labs完成50亿美元C轮融资，由Sequoia与Greenoaks领投，Alphabet持续加码以加速AI驱动的药物研发",
-          "event_summary_en": "Isomorphic Labs announced a $5 billion Series C financing round, co-led by Sequoia Capital and Greenoaks, with participation from Alphabet and Andreessen Horowitz. The capital will scale its proprietary drug design engine, IsoDDE, and advance its AI-generated therapeutic pipeline for oncology and immunology into clinical trials.",
-          "core_facts_zh": [
-            "【核心事件】Isomorphic Labs；红杉资本（Sequoia Capital）；Greenoaks在全球生命科学AI市场：完成50亿美元C轮融资，用于IsoDDE研发引擎升级及管线临床转化",
-            "【起因与机理】利用基础模拟AI模型解决生物复杂性难题，加速药物发现周期",
-            "【关键数据与实测】50亿美元融资支持AI药物研发引擎IsoDDE。",
-            "【行业影响与走向】行业影响：制药业AI范式转移进入资本重仓期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Isomorphic Labs; Sequoia Capital; Greenoaks (Global Life Sciences AI market): $5 billion Series C funding for IsoDDE engine scaling and clinical pipeline",
-            "[Root Cause & Mechanism] Leveraging foundational simulation AI to address biological complexity and accelerate drug discovery",
-            "[Key Metrics] $5 billion funding to scale IsoDDE AI-drug discovery engine.",
-            "[Industry Impact & Outlook] Impact: AI-first pharmacology enters a high-capital intensity phase."
-          ],
-          "industry_impact_zh": "50亿美元的单轮融资额显示资本市场对“AI原生”药物开发平台的极高估值溢价，其商业模式已从单纯的技术验证转向临床转化。Isomorphic Labs在数据、模型算力与药效验证的闭环构建上具备先发优势，正在重塑制药巨头的研发投资优先级。",
-          "industry_impact_en": "The $5B round reflects a premium valuation for 'AI-native' drug platforms as the model shifts from validation to clinical deployment. Isomorphic Labs holds a distinct competitive edge in the closed-loop integration of data, compute, and bio-validation, forcing Big Pharma to re-evaluate their R&D resource allocation."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 12:40:08 UTC",
+      "updated_at": "2026-11-17 12:52:55 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 12:40:08 UTC",
+      "updated_at": "2026-11-17 12:52:55 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,852)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,855)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,852 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,855 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
