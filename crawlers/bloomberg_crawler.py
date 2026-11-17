@@ -372,12 +372,12 @@ def resolve_bloomberg_syndicated_fulltext(
     slug: str,
     title: str = "",
     proxies: Optional[Dict[str, str]] = None
-) -> Optional[List[str]]:
+) -> Optional[Dict[str, Any]]:
     """
     Tier-3 Automated Generic Syndication Wire Penetration for Bloomberg articles:
     When PerimeterX blocks direct bloomberg.com HTTP access, queries global news wire networks
     (Bing News RSS / open syndication networks) for the Bloomberg slug and headline to discover authorized
-    full-text syndication mirrors (e.g. The Japan Times, MSN, CBS News, The Verge, Yahoo Finance).
+    full-text syndication mirrors (e.g. The Japan Times, MSN, CBS News, The Verge, Yahoo Finance, Bloomberg Law).
     Systematically filters out boilerplate noise, author bios, and trailing reading recommendations.
     """
     if not slug and not title:
@@ -385,50 +385,68 @@ def resolve_bloomberg_syndicated_fulltext(
 
     query_keywords = title or slug.replace('-', ' ')
     clean_q = re.sub(r'^(?:US|Report|Scoop|Exclusive)[:\s]+', '', query_keywords, flags=re.I).strip()
-    search_q = f'"{clean_q[:50]}"' if len(clean_q) >= 10 else f"{clean_q} Bloomberg"
-    
-    rss_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(search_q)}&format=rss"
-    try:
-        import httpx
-        from article_extractor import ArticleExtractor
-        proxy_url = proxies.get("http") if proxies else None
-        with httpx.Client(proxy=proxy_url, timeout=10, follow_redirects=True) as client:
-            resp = client.get(rss_url)
-            if resp.status_code != 200:
-                return None
-            root = ET.fromstring(resp.content)
-            items = root.findall('.//item')
-            for it in items[:8]:
-                raw_link = it.findtext('link') or ''
-                actual_url = raw_link
-                if 'url=' in raw_link:
-                    actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
-                if not actual_url or any(pw in actual_url.lower() for pw in ['bloomberg.com', 'wsj.com', 'ft.com']):
+    clean_q_unquoted = re.sub(r'[\'\"‘’“”]', '', clean_q).strip()
+
+    # Generate cascade candidate search queries
+    candidate_queries = []
+    if clean_q_unquoted:
+        words = clean_q_unquoted.split()
+        if len(words) > 7:
+            candidate_queries.append(" ".join(words[:7]))
+        candidate_queries.append(clean_q_unquoted[:60])
+    if slug:
+        candidate_queries.append(slug.replace('-', ' ')[:60])
+
+    seen_queries = set()
+    candidate_queries = [q for q in candidate_queries if q and q not in seen_queries and not seen_queries.add(q)]
+
+    import httpx
+    from article_extractor import ArticleExtractor
+    proxy_url = proxies.get("http") if proxies else None
+
+    for search_q in candidate_queries:
+        rss_url = f"https://www.bing.com/news/search?q={urllib.parse.quote(search_q)}&format=rss"
+        try:
+            with httpx.Client(proxy=proxy_url, timeout=10, follow_redirects=True) as client:
+                resp = client.get(rss_url)
+                if resp.status_code != 200:
                     continue
-                try:
-                    ext = ArticleExtractor.extract_article(actual_url)
-                    if ext.get('status') == 'success' and len(ext.get('paragraphs', [])) >= 3:
-                        cand_paras = []
-                        for p in ext['paragraphs']:
-                            cleaned_p = _clean_paragraph(p)
-                            if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
-                                cand_paras.append(cleaned_p)
-                        if len(cand_paras) >= 3:
-                            cand_img = ext.get('image_url')
-                            if not cand_img and ext.get('inline_images'):
-                                for in_img in ext['inline_images']:
-                                    if isinstance(in_img, dict) and in_img.get('url') and not in_img.get('url', '').endswith('.svg'):
-                                        cand_img = in_img['url']
-                                        break
-                            return {
-                                "paragraphs": cand_paras,
-                                "cover_image": cand_img,
-                                "inline_images": ext.get('inline_images', [])
-                            }
-                except Exception:
-                    continue
-    except Exception:
-        pass
+                root = ET.fromstring(resp.content)
+                items = root.findall('.//item')
+                for it in items[:10]:
+                    raw_link = it.findtext('link') or ''
+                    actual_url = raw_link
+                    if 'url=' in raw_link:
+                        actual_url = urllib.parse.unquote(raw_link.split('url=')[1].split('&')[0])
+                    if not actual_url:
+                        continue
+                    # Skip hard paywalled Bloomberg news landing pages, but allow open Bloomberg Law or external syndications
+                    if any(pw in actual_url.lower() for pw in ['bloomberg.com/news/', 'wsj.com', 'ft.com']):
+                        continue
+                    try:
+                        ext = ArticleExtractor.extract_article(actual_url)
+                        if ext.get('status') == 'success' and len(ext.get('paragraphs', [])) >= 3:
+                            cand_paras = []
+                            for p in ext['paragraphs']:
+                                cleaned_p = _clean_paragraph(p)
+                                if cleaned_p and not is_tail_boilerplate(cleaned_p) and len(cleaned_p) >= 30:
+                                    cand_paras.append(cleaned_p)
+                            if len(cand_paras) >= 3:
+                                cand_img = ext.get('image_url')
+                                if not cand_img and ext.get('inline_images'):
+                                    for in_img in ext['inline_images']:
+                                        if isinstance(in_img, dict) and in_img.get('url') and not in_img.get('url', '').endswith('.svg'):
+                                            cand_img = in_img['url']
+                                            break
+                                return {
+                                    "paragraphs": cand_paras,
+                                    "cover_image": cand_img,
+                                    "inline_images": ext.get('inline_images', [])
+                                }
+                    except Exception:
+                        continue
+        except Exception:
+            continue
     return None
 
 
