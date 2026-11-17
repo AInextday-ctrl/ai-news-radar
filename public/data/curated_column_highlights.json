@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 22:49:55 UTC",
+  "generated_at": "2026-11-17 23:04:40 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 22:49:55 UTC",
+      "updated_at": "2026-11-17 23:04:40 UTC",
       "headline_item": {
-        "id": "47d3a13c046f7894",
+        "id": "cef1fdaf9efb4cd6",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Optimizely供应链遭受攻击，百余家大型机构网站沦陷",
-        "title_en": "Malicious code delivered through Optimizely hits visitors to hundreds of sites",
-        "source": "Ars Technica",
-        "published_at": "2026-11-17T22:32:16+00:00",
-        "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/",
-        "event_summary_zh": "数字优化平台Optimizely的CDN基础设施遭恶意代码篡改，致使CNN、Zoom等178家机构网站向访客推送加密货币盗窃及iOS漏洞利用程序",
-        "event_summary_en": "The website optimization platform Optimizely suffered a compromise of its infrastructure, leading to the distribution of malicious JavaScript via its legitimate CDN to 178 client sites, including CNN, Zoom, and Salesforce. The injected code targeted visitor devices with cryptocurrency wallet hijacking, payment data theft, and the deployment of iOS exploits such as DarkSword.",
+        "title_zh": "微软Exchange服务大规模宕机始末及技术失效机制",
+        "title_en": "Sources detail how the Microsoft 365 outage began in Switzerland and spread as failover systems shifted traffic, leaving 80%+ of Exchange servers unresponsive (Tom Warren/The Verge)",
+        "source": "The Verge",
+        "published_at": "2026-11-17T22:50:01+00:00",
+        "url": "https://www.theverge.com/tech/1035364/microsoft-outlook-outage-notepad?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlJMSEZCU1NVZHYiLCJwIjoiL3RlY2gvMTAzNTM2NC9taWNyb3NvZnQtb3V0bG9vay1vdXRhZ2Utbm90ZXBhZCIsImV4cCI6MTc5NTM2Njg5NywiaWF0IjoxNzk0OTM0ODk3fQ.qvNcpytW9E3bjpGqPWJDeMM-dLOfUvq1QT9fb4fxHec&utm_medium=gift-link",
+        "event_summary_zh": "微软Exchange Online因瑞士节点故障及自动故障转移机制触发网络拥塞，导致全球80%以上服务器陷入重启循环",
+        "event_summary_en": "Microsoft's Exchange Online service suffered a sev0-rated outage initiated by server failures in Switzerland, which triggered failover mechanisms that propagated the issue, leaving over 80% of Exchange servers unresponsive. The root cause involved a traffic surge during PXE-based reboot attempts that overwhelmed monitoring systems, forcing servers into a recursive failure loop.",
         "core_facts_zh": [
-          "【核心事件】Optimizely（数字优化平台）：植入并分发恶意track.js脚本以窃取数据及推送iOS漏洞工具",
-          "【起因与机理】攻击者获取了Optimizely跨客户项目的写入权限",
-          "【关键数据与实测】网站优化平台Optimizely的基础设施被植入恶意JavaScript脚本，该脚本经由合法CDN分发至包括CNN、Zoom、BBC及Salesforce在内的178个客户站点。",
-          "【行业影响与走向】受影响范围涉及全球百余家高权重站点，供应链防御机制存在严重合规缺口。"
+          "【核心事件】微软（Microsoft）工程团队在全球Exchange Online服务器基础设施：全球范围内超80%的Exchange服务器因自动故障转移机制导致的重启循环瘫痪近24小时",
+          "【起因与机理】瑞士区域节点异常触发自动流量转移，引发针对服务器启动及监控系统的流量拥塞",
+          "【关键数据与实测】全球超80%的Exchange服务器受影响，暴露出云服务冗余架构在极端负载下的逻辑缺陷。",
+          "【涉及范围与推进】自动故障转移机制将流量涌向健康节点，诱发服务器PXE启动阶段的重启循环。"
         ],
         "core_facts_en": [
-          "[Core Event] Exploitation of Optimizely's legitimate distribution mechanism to push malware to global audiences.",
-          "[Root Cause & Mechanism] Unauthorized write access to Optimizely's customer project management systems",
-          "[Key Technical Spec] Malware capabilities include payment interception, cookie theft, and iOS device privilege escalation.",
-          "[Industry Impact & Outlook] Broad impact across 178 high-profile websites exposing critical supply chain security gaps."
+          "[Core Event] Microsoft Engineering Teams: Over 80% of Exchange servers failed for nearly 24 hours due to a reboot loop triggered by automated failover systems.",
+          "[Root Cause & Mechanism] Initial local failure in Switzerland triggered recursive traffic surges during server recovery attempts.",
+          "[Key Metrics] Over 80% of global Exchange capacity impacted, exposing architectural vulnerabilities in cloud failover logic.",
+          "[Key Position & Outlook] Automated failover systems caused recursive reboot loops by overwhelming PXE boot processes."
         ],
-        "industry_impact_zh": "此类攻击暴露了SaaS供应链中第三方JavaScript代码库的信任边界缺陷，即使代码拥有合法数字签名也无法免疫恶意劫持。对于企业而言，单纯依赖CDN分发信任已失效，必须强制实施严格的子资源完整性（SRI）校验及动态实时内容安全策略（CSP）。",
-        "industry_impact_en": "This incident highlights the inherent fragility of trust boundaries in SaaS supply chains, where valid digital signatures fail to prevent malicious code injection. Enterprises must move beyond implicit trust in CDN-hosted third-party scripts by enforcing strict Subresource Integrity (SRI) validation and granular Content Security Policies (CSP)."
+        "industry_impact_zh": "此次事件揭示了超大规模云架构中‘自动化故障转移’机制的负反馈效应：当系统规模超过临界点，自动容灾脚本可能演变为分布式拒绝服务（DDoS）攻击效应，导致基础设施雪崩。对于高度依赖微软生产力套件的企业而言，过度集中的后端架构缺乏多云冗余，在极端失效场景下已构成系统性操作风险。",
+        "industry_impact_en": "This incident highlights the negative feedback loops inherent in large-scale automated failover mechanisms, where recovery protocols can inadvertently act as a self-inflicted DDoS attack during system saturation. The event underscores the systemic operational risk of centralized cloud dependencies and the urgent need for multi-cloud redundancy in critical enterprise communication workflows."
       },
       "headlines": [
+        {
+          "id": "cef1fdaf9efb4cd6",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "微软Exchange服务大规模宕机始末及技术失效机制",
+          "title_en": "Sources detail how the Microsoft 365 outage began in Switzerland and spread as failover systems shifted traffic, leaving 80%+ of Exchange servers unresponsive (Tom Warren/The Verge)",
+          "source": "The Verge",
+          "published_at": "2026-11-17T22:50:01+00:00",
+          "url": "https://www.theverge.com/tech/1035364/microsoft-outlook-outage-notepad?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlJMSEZCU1NVZHYiLCJwIjoiL3RlY2gvMTAzNTM2NC9taWNyb3NvZnQtb3V0bG9vay1vdXRhZ2Utbm90ZXBhZCIsImV4cCI6MTc5NTM2Njg5NywiaWF0IjoxNzk0OTM0ODk3fQ.qvNcpytW9E3bjpGqPWJDeMM-dLOfUvq1QT9fb4fxHec&utm_medium=gift-link",
+          "event_summary_zh": "微软Exchange Online因瑞士节点故障及自动故障转移机制触发网络拥塞，导致全球80%以上服务器陷入重启循环",
+          "event_summary_en": "Microsoft's Exchange Online service suffered a sev0-rated outage initiated by server failures in Switzerland, which triggered failover mechanisms that propagated the issue, leaving over 80% of Exchange servers unresponsive. The root cause involved a traffic surge during PXE-based reboot attempts that overwhelmed monitoring systems, forcing servers into a recursive failure loop.",
+          "core_facts_zh": [
+            "【核心事件】微软（Microsoft）工程团队在全球Exchange Online服务器基础设施：全球范围内超80%的Exchange服务器因自动故障转移机制导致的重启循环瘫痪近24小时",
+            "【起因与机理】瑞士区域节点异常触发自动流量转移，引发针对服务器启动及监控系统的流量拥塞",
+            "【关键数据与实测】全球超80%的Exchange服务器受影响，暴露出云服务冗余架构在极端负载下的逻辑缺陷。",
+            "【涉及范围与推进】自动故障转移机制将流量涌向健康节点，诱发服务器PXE启动阶段的重启循环。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Microsoft Engineering Teams: Over 80% of Exchange servers failed for nearly 24 hours due to a reboot loop triggered by automated failover systems.",
+            "[Root Cause & Mechanism] Initial local failure in Switzerland triggered recursive traffic surges during server recovery attempts.",
+            "[Key Metrics] Over 80% of global Exchange capacity impacted, exposing architectural vulnerabilities in cloud failover logic.",
+            "[Key Position & Outlook] Automated failover systems caused recursive reboot loops by overwhelming PXE boot processes."
+          ],
+          "industry_impact_zh": "此次事件揭示了超大规模云架构中‘自动化故障转移’机制的负反馈效应：当系统规模超过临界点，自动容灾脚本可能演变为分布式拒绝服务（DDoS）攻击效应，导致基础设施雪崩。对于高度依赖微软生产力套件的企业而言，过度集中的后端架构缺乏多云冗余，在极端失效场景下已构成系统性操作风险。",
+          "industry_impact_en": "This incident highlights the negative feedback loops inherent in large-scale automated failover mechanisms, where recovery protocols can inadvertently act as a self-inflicted DDoS attack during system saturation. The event underscores the systemic operational risk of centralized cloud dependencies and the urgent need for multi-cloud redundancy in critical enterprise communication workflows."
+        },
         {
           "id": "47d3a13c046f7894",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次人事动荡标志着英伟达进入后黄仁勋时代的极高不确定期，由于黄仁勋对公司技术路线及供应生态拥有极强的个人控制力，董事会的快速切割旨在通过重申合规红线以平抑资本市场波动。短期内英伟达在面对AMD、Intel以及定制芯片（ASIC）崛起夹击时，能否保持产品迭代节奏与客户粘性将成为估值重塑的关键变量。",
           "industry_impact_en": "The departure marks a period of extreme uncertainty in the post-Huang era, as Jensen Huang’s personal influence over Nvidia’s technical roadmap and supply chain ecosystem was foundational. The board’s decisive action aims to curb market volatility by enforcing governance standards, yet the firm now faces significant risks in maintaining its product iteration speed and client loyalty against intensifying competition from AMD, Intel, and hyperscaler custom silicon initiatives."
-        },
-        {
-          "id": "c568b75bd315972d",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达董事会否决黄仁勋复职计划",
-          "title_en": "On Q3 earnings call, Nvidia Chair Harvey Jones says the board does not intend to reinstate Jensen Huang as CEO (Hayden Field/The Verge)",
-          "source": "The Verge",
-          "published_at": "2026-11-17T22:15:01+00:00",
-          "url": "https://www.theverge.com/report/1035465/nvidia-says-it-will-not-reinstate-jensen-huang-as-ceo?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjA3cFNpbDJCT1MiLCJwIjoiL3JlcG9ydC8xMDM1NDY1L252aWRpYS1zYXlzLWl0LXdpbGwtbm90LXJlaW5zdGF0ZS1qZW5zZW4taHVhbmctYXMtY2VvIiwiZXhwIjoxNzk1Mzg1NDc1LCJpYXQiOjE3OTQ5NTM0NzV9.PWMNbp8LvjiIh6EH1gdv9OqWZ7SGbuRwywWf6K983Vg&utm_medium=gift-link",
-          "event_summary_zh": "英伟达现任董事长Harvey Jones正式否决前CEO黄仁勋的复职诉求，并将继续推进针对其个人行为的内部调查",
-          "event_summary_en": "Nvidia Board Chair Harvey Jones stated in the quarterly earnings call that the board unanimously rejects former CEO Jensen Huang's reinstatement request, as the internal investigation into his personal conduct and alleged links to Chinese intelligence assets continues. Despite Huang's public efforts to return and support from political figures, the board maintains his removal to mitigate escalating regulatory and compliance risks following his resignation on November 12th.",
-          "core_facts_zh": [
-            "【核心事件】Harvey Jones（英伟达董事会主席）、黄仁勋（英伟达前CEO）在英伟达季度财报会议：董事会明确拒绝复职请求，并将继续内部调查与国会听证准备",
-            "【起因与机理】因涉及员工丑闻及与中国情报资产疑似关联的严重合规与国家安全调查",
-            "【核心事实细节】英伟达董事会正式否决黄仁勋复职诉求。",
-            "【涉及范围与推进】后续焦点集中在12月1日的国会听证会及潜在的政党腐败调查。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Harvey Jones (Nvidia Board Chair), Jensen Huang (Former CEO) (Nvidia Q3 Earnings Call): Rejection of reinstatement, continuation of internal investigation, and preparations for Congressional hearings",
-            "[Root Cause & Mechanism] Serious compliance and national security concerns regarding personal conduct and alleged ties to foreign intelligence",
-            "[Key Metrics] , spending $5 million in 2025 and $4.",
-            "[Key Position & Outlook] Focus shifts to December 1st Congressional testimony and potential political corruption inquiries."
-          ],
-          "industry_impact_zh": "英伟达果断切割创始人体现了头部科技企业在面对地缘政治审查与监管合规风暴时的生存逻辑：即通过剥离高风险个人标签，防止公司整体经营牌照陷入被动。此举不仅是企业治理的防卫性动作，更是为了安抚华尔街并应对即将到来的国会听证，实质上是在国家安全议题与商业连续性之间进行的惨烈止损。",
-          "industry_impact_en": "Nvidia's swift dissociation from its founder highlights a survival strategy for Big Tech amid geopolitical scrutiny: purging high-risk individuals to preserve operational licenses and mitigate systemic regulatory fallout. This defensive governance move is a calculated effort to appease capital markets and prepare for Congressional oversight, prioritizing institutional stability over founder-centric continuity."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 22:49:55 UTC",
+      "updated_at": "2026-11-17 23:04:40 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -222,66 +222,66 @@
           "url": "https://x.com/AravSrinivas/status/2122815321958695096"
         },
         {
-          "id": "3d0fed74e545b166",
-          "name": "Claude Developers",
-          "handle": "@ClaudeDevs",
-          "role_zh": "Anthropic Claude 官方开发者平台",
-          "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/anthropic",
-          "topic_zh": "AI 编程范式变革",
-          "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "查看代码模式，这是 Claude Code 使用工具的一种新的实验性方式。 Claude 编写的脚本以复杂的方式将您的工具链接在一起，并且它可以在长命令仍在运行时回答您。通过 CLAUDE_CODE_EXPERIMENTAL_CODE_ 选择加入",
-          "event_context_en": "Check out Code Mode, a new, experimental way for Claude Code to work with tools. Claude writes scripts that chain your t",
-          "quote_zh": "查看代码模式，这是 Claude Code 使用工具的一种新的实验性方式。 Claude 编写的脚本以复杂的方式将您的工具链接在一起，并且它可以在长命令仍在运行时回答您。\n\n选择加入 CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1",
-          "quote_en": "Check out Code Mode, a new, experimental way for Claude Code to work with tools. Claude writes scripts that chain your tools together in sophisticated ways, and it can answer you while long commands are still running. \n\nOpt in with CLAUDE_CODE_EXPERIMENTAL_CODE_MODE=1 https://t.co/Aj5ofLiK1y",
-          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
-          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
-          "debate_en": "Global developer community actively debates the broader industry implications.",
-          "metrics": {
-            "views": "33.2k",
-            "likes": "696",
-            "comments": "42",
-            "retweets": "37",
-            "platform": "x",
-            "verified": true
-          },
-          "published_at": "2026-11-17T21:18:55+00:00",
-          "url": "https://x.com/ClaudeDevs/status/2122801681939234950"
-        },
-        {
-          "id": "7e9d0f7de3bdb2ef",
+          "id": "20d4c1de897a8748",
           "name": "OpenAI Developers",
           "handle": "@OpenAIDevs",
           "role_zh": "OpenAI 开发者官方平台",
           "role_en": "AI Engineer / Tech Builder",
           "avatar": "https://unavatar.io/openai",
-          "topic_zh": "AI 编程范式变革",
-          "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "RT @thebuggeddev: Painting artwork created by GPT 6.2 Astra using PURE CODE 👀。",
-          "event_context_en": "RT @thebuggeddev: Painting artwork created by GPT 6.2 Astra using PURE CODE 👀 https://t.co/oqkOeL90Ex",
-          "quote_zh": "RT @thebuggeddev: Painting artwork created by GPT 6.2 Astra using PURE CODE 👀。",
-          "quote_en": "RT @thebuggeddev: Painting artwork created by GPT 6.2 Astra using PURE CODE 👀 https://t.co/oqkOeL90Ex",
-          "thesis_zh": "深入探讨AI 编程范式变革的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in AI Coding & Engineering, highlighting system trade-offs and engineering shifts.",
+          "topic_zh": "OpenAI Developer",
+          "topic_en": "OpenAI Developers on",
+          "event_context_zh": "我们更新了 API 使用情况仪表板，以便更轻松地监控您的使用情况并调查问题。在 Analytics 中，您现在可以： • 更好地跟踪使用情况和支出 • 检查速率限制和速率限制请求 • 按模型、项目或 API 密钥 https://t 探索错误。",
+          "event_context_en": "We updated the API usage dashboard to make it easier to monitor your usage and investigate issues.\n\nIn Analytics, you ca",
+          "quote_zh": "我们更新了 API 使用情况仪表板，以便更轻松地监控您的使用情况并调查问题。\n\n在 Analytics 中，您现在可以：\n• 更好地跟踪使用情况和支出\n• 检查速率限制和速率限制请求\n• 按模型、项目或 API 密钥探索错误",
+          "quote_en": "We updated the API usage dashboard to make it easier to monitor your usage and investigate issues.\n\nIn Analytics, you can now:\n• Better track usage and spend\n• Check rate limits and rate-limited requests\n• Explore errors by model, project, or API key https://t.co/IFHhB2LBvj",
+          "thesis_zh": "深入探讨OpenAI Developer的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in OpenAI Developers on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "1.5k",
-            "likes": "21",
-            "comments": "2",
-            "retweets": "1",
+            "views": "7.1k",
+            "likes": "86",
+            "comments": "13",
+            "retweets": "5",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-17T19:56:11+00:00",
-          "url": "https://x.com/OpenAIDevs/status/2122780861708083461"
+          "published_at": "2026-11-17T22:51:01+00:00",
+          "url": "https://x.com/OpenAIDevs/status/2122824859491205152"
+        },
+        {
+          "id": "41728c3664a74ea1",
+          "name": "Claude Developers",
+          "handle": "@ClaudeDevs",
+          "role_zh": "Anthropic Claude 官方开发者平台",
+          "role_en": "AI Engineer / Tech Builder",
+          "avatar": "https://unavatar.io/anthropic",
+          "topic_zh": "Claude Developer",
+          "topic_en": "Claude Developers on",
+          "event_context_zh": "您现在可以选择在 Windows 和 Mac 上更频繁地构建 Claude Desktop。在“设置”>“桌面应用程序”中切换到最新发布频道。您将更快地获得修复和改进，但这些构建可能不如稳定版可靠，后者保持默认状态",
+          "event_context_en": "You can now opt into more frequent builds of Claude Desktop on Windows and Mac.\n\nSwitch to the Latest release channel in",
+          "quote_zh": "您现在可以选择在 Windows 和 Mac 上更频繁地构建 Claude Desktop。\n\n在“设置”>“桌面应用程序”中切换到最新发布频道。您将更快地获得修复和改进，但这些构建可能不如稳定版可靠，后者保持默认状态。",
+          "quote_en": "You can now opt into more frequent builds of Claude Desktop on Windows and Mac.\n\nSwitch to the Latest release channel in Settings > Desktop app. You'll get fixes and improvements faster, but these builds can be less reliable than Stable, which stays the default. https://t.co/JENzaTa2Pw",
+          "thesis_zh": "深入探讨Claude Developer的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Claude Developers on, highlighting system trade-offs and engineering shifts.",
+          "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
+          "debate_en": "Global developer community actively debates the broader industry implications.",
+          "metrics": {
+            "views": "42.0k",
+            "likes": "629",
+            "comments": "39",
+            "retweets": "15",
+            "platform": "x",
+            "verified": true
+          },
+          "published_at": "2026-11-17T22:35:53+00:00",
+          "url": "https://x.com/ClaudeDevs/status/2122821051910684824"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 22:49:55 UTC",
+      "updated_at": "2026-11-17 23:04:40 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
