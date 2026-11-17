@@ -160,6 +160,17 @@ def _clean_paragraph(text: str) -> str:
         'suggested topics:',
         'all quotes delayed',
         'disclaimer:',
+        'the above button links to',
+        'yahoo finance is not a broker-dealer',
+        'this article is licensed under',
+        'see /legal/citation-policy',
+        'recommended citation for',
+        'eligible departing employees can apply',
+        'is the deputy director at',
+        'assistant director at',
+        'download the standard app',
+        'download the app',
+        'standard marketing',
         'copyright ©'
     ]
     if any(np in low for np in noise_phrases):
@@ -168,7 +179,7 @@ def _clean_paragraph(text: str) -> str:
     return t
 
 
-def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str] = None) -> Dict[str, Any]:
+def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str] = None, force_refresh: bool = False) -> Dict[str, Any]:
     """
     Dedicated Reuters Article Crawler.
     Extracts full text paragraphs, official high-res photography, inline captions,
@@ -197,7 +208,7 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
         return result
 
     clean_url = url.split('#')[0].strip()
-    if not html_text:
+    if not html_text and not force_refresh:
         if clean_url in _REUTERS_CACHE:
             cached = _REUTERS_CACHE[clean_url]
             if cached.get("status") == "success" and cached.get("is_substantive"):
@@ -318,17 +329,38 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
             root = ET.fromstring(xml_data)
             items = root.findall('.//item')
 
+            slug_words = [w for w in slug.split('-') if len(w) > 2 and w not in ['the', 'and', 'for', 'with', 'from', 'into', 'over']]
+
+            # Fallback query expansion if initial items are sparse
+            if len(items) < 3 and len(slug_words) >= 3:
+                fallback_term = f"{' '.join(slug_words[:6])} reuters"
+                gnews_rss_fb = f"https://news.google.com/rss/search?q={urllib.parse.quote(fallback_term)}&hl=en-US&gl=US&ceid=US:en"
+                try:
+                    req_fb = urllib.request.Request(gnews_rss_fb, headers={
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0 Safari/537.36"
+                    })
+                    with opener.open(req_fb, timeout=6) as r_fb:
+                        xml_data_fb = r_fb.read()
+                    root_fb = ET.fromstring(xml_data_fb)
+                    items.extend(root_fb.findall('.//item'))
+                except Exception:
+                    pass
+
             # Competitor & aggregator blacklist that publish their own divergent reporting
             COMPETITOR_DOMAINS = [
                 'cnbc.com', 'bloomberg.com', 'wsj.com', 'nytimes.com', 'cnn.com',
-                'forbes.com', 'washingtonpost.com', 'ft.com', 'theverge.com', 'techcrunch.com',
-                'coindesk.com', 'cointelegraph.com', 'foxbusiness.com', 'businessinsider.com',
-                'barrons.com', 'investors.com', 'marketwatch.com', 'apnews.com', 'axios.com'
+                'forbes.com', 'fortune.com', 'theinformation.com', 'thestreet.com',
+                'atlanticcouncil.org', 'washingtonpost.com', 'ft.com', 'theverge.com',
+                'techcrunch.com', 'coindesk.com', 'cointelegraph.com', 'foxbusiness.com',
+                'businessinsider.com', 'insider.com', 'barrons.com', 'investors.com',
+                'marketwatch.com', 'apnews.com', 'axios.com', 'fool.com'
             ]
             COMPETITOR_SOURCES = [
-                'cnbc', 'bloomberg', 'wsj', 'wall street journal', 'forbes', 'cnn',
+                'cnbc', 'bloomberg', 'wsj', 'wall street journal', 'forbes', 'fortune',
+                'atlantic council', 'the information', 'thestreet', 'cnn',
                 'coindesk', 'cointelegraph', 'barron', 'investor', 'financial times',
-                'new york times', 'washington post', 'techcrunch', 'the verge'
+                'new york times', 'washington post', 'techcrunch', 'the verge',
+                'motley fool'
             ]
 
             # Priority ranking:
@@ -351,7 +383,6 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
             sorted_items = sorted(items, key=_score_synd_item, reverse=True)
 
             # Semantic alignment verification
-            slug_words = [w for w in slug.split('-') if len(w) > 2 and w not in ['the', 'and', 'for', 'with', 'from', 'into', 'over']]
             slug_has_acquit = any(v in slug for v in ['clear', 'acquit', 'dismiss', 'drop', 'not-guilty'])
             slug_has_charge = any(v in slug for v in ['charge', 'indict', 'arrest', 'sue'])
 
@@ -424,7 +455,9 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                     # Title
                     h1 = tree.css_first('h1')
                     if h1 and len(h1.text().strip()) > 10:
-                        result["title"] = h1.text().strip()
+                        cand_h1 = h1.text().strip()
+                        if not any(cand_h1.lower() == junk for junk in ['trendingnow', 'trending now', 'home', 'reuters', 'news', 'latest news', 'editorial']):
+                            result["title"] = cand_h1
 
                     # Master photo
                     og_img = tree.css_first('meta[property="og:image"]') or tree.css_first('meta[name="twitter:image"]')
