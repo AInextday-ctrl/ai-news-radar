@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revolut利用OpenAI模型升级反洗钱风控 | AI 资讯雷达</title>
+  <meta name="description" content="金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/728c406cb2075977">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/728c406cb2075977">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Revolut利用OpenAI模型升级反洗钱风控 | AI 资讯雷达">
+  <meta property="og:description" content="金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化">
+  <meta property="og:image" content="https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill">
+  <meta property="og:image:secure_url" content="https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Revolut利用OpenAI模型升级反洗钱风控">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <meta name="twitter:title" content="Revolut利用OpenAI模型升级反洗钱风控 | AI 资讯雷达">
+  <meta name="twitter:description" content="金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化">
+  <meta name="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill">
+  <meta property="twitter:image" content="https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill">
+  <meta name="twitter:image:alt" content="Revolut利用OpenAI模型升级反洗钱风控">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Revolut利用OpenAI模型升级反洗钱风控">
+  <meta name="citation_publication_date" content="2026-11-16">
+  <meta name="citation_author" content="OpenAI 官方动态">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/zh/news/728c406cb2075977">
+  <meta name="citation_abstract" content="金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI News Radar",
+          "item": "https://ainewsradar.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI 行业快讯",
+          "item": "https://ainewsradar.xyz/zh#news"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Revolut利用OpenAI模型升级反洗钱风控",
+          "item": "https://ainewsradar.xyz/zh/news/728c406cb2075977"
+        }
+      ]
+    },
+    {
+      "@type": "NewsArticle",
+      "headline": "Revolut利用OpenAI模型升级反洗钱风控",
+      "description": "金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化",
+      "image": [
+        "https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill"
+      ],
+      "url": "https://ainewsradar.xyz/zh/news/728c406cb2075977",
+      "datePublished": "2026-11-16T09:30:00+00:00",
+      "dateModified": "2026-11-16T09:30:00+00:00",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/728c406cb2075977",
+      "articleSection": "Artificial Intelligence",
+      "isBasedOn": "https://openai.com/business/customer-stories/revolut?ref=ainewsradar",
+      "about": [
+        {
+          "@type": "Organization",
+          "name": "OpenAI",
+          "sameAs": "https://en.wikipedia.org/wiki/OpenAI"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".executive-summary",
+          "h1"
+        ]
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AI News Radar Editorial Team",
+        "url": "https://ainewsradar.xyz/zh/about"
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ainewsradar.xyz/favicon.ico"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Revolut利用OpenAI模型升级反洗钱风控 的核心事实与事件脉络是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Revolut (金融科技公司)；OpenAI (技术服务方)在金融合规与反欺诈业务部门：部署基于GPT-5.5的FinCrime智能代理，实现交易风险自动甄别与调查 全球交易量爆发导致合规人力缺口，需通过AI提升风险监测效率与缩放能力 核心举措：部署基于GPT-5.5的智能代理，全面自动化反洗钱（FinCrime）审核流程。 合规逻辑：将复杂合规规则注入模型，确保自动调查流程符合金融监管要求。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Revolut的实践证明了AI在金融合规领域从“辅助决策”转向“全流程托管”的技术跨越。GPT-5.5在成本控制与逻辑严密性上的提升，使得金融机构能够将高频、重复的合规审计任务剥离给智能代理，这是银行IT基础设施实现轻量化扩张的标志性应用案例。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI 资讯雷达</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回雷达首页
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/728c406cb2075977" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 切换英文 (EN)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&h=900&fit=fill" alt="Revolut利用OpenAI模型升级反洗钱风控" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: OpenAI 官方动态
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Revolut利用OpenAI模型升级反洗钱风控
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>记者 / 供稿: OpenAI 官方动态</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="核心要点提炼与关键事实" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Revolut (金融科技公司)；OpenAI (技术服务方)在金融合规与反欺诈业务部门：部署基于GPT-5.5的FinCrime智能代理，实现交易风险自动甄别与调查</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>全球交易量爆发导致合规人力缺口，需通过AI提升风险监测效率与缩放能力</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键技术规格】</strong>核心举措：部署基于GPT-5.5的智能代理，全面自动化反洗钱（FinCrime）审核流程。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【涉及范围与推进】</strong>合规逻辑：将复杂合规规则注入模型，确保自动调查流程符合金融监管要求。</li>
+          </ul>
+        </section>
+        
+        
+        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">Revolut的实践证明了AI在金融合规领域从“辅助决策”转向“全流程托管”的技术跨越。GPT-5.5在成本控制与逻辑严密性上的提升，使得金融机构能够将高频、重复的合规审计任务剥离给智能代理，这是银行IT基础设施实现轻量化扩张的标志性应用案例。</p>
+        </div>
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">OpenAI 官方动态 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">借助 OpenAI 模型和 Codex，Revolut 为其团队提供了更多空间来解决从软件工程到金融犯罪的复杂问题。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Revolut⁠（在新窗口中打开）旨在挑战人们与金钱互动的方式。这一雄心现已覆盖 40 多个市场、80 万家企业以及过去 12 个月增长了 23% 的消费者群。</p>
+
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://images.ctfassets.net/kftzwdyauwt9/4hoSVzGnXTL7t0Lc8leJTZ/bc394d73a743bc7c555a0ef89df90c2a/square.png?w=3840&amp;q=90&amp;fm=webp" alt="Benefit Street Partners — Cover" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+              <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
+                  <span>📷 现场图景: Benefit Street Partners — Cover</span>
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">再加上公司文化要求小型、精干的团队能够快速行动，因此事实证明 ChatGPT 和 Codex 是天生的搭档也就不足为奇了。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Revolut 全球业务营销主管 Kim Maniovich 表示：“对高素质 Revolut 人员的完美描述是能够快速识别问题、推断解决方案、设计四种方案、确定这四种方案中最好的一种，然后将其推向市场。”</p>
+
+<blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
+              <p>“与 OpenAI 合作使我们能够以极其精简、经济高效且真正适合我们独特工作方式的方式构建许多此类解决方案。”</p>
+            </blockquote>
+
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://images.ctfassets.net/kftzwdyauwt9/6IJsWuQa1blfxNfvbdIF1m/0868067102440aea5fd1ad35ba436a77/square.png?w=3840&amp;q=90&amp;fm=webp" alt="1Password &gt; Card image &gt; Fiber ridge close-up" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+              <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
+                  <span>📷 现场图景: 1Password &gt; Card image &gt; Fiber ridge close-up</span>
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">但更快的行动只是机遇的一部分。对于 Revolut 来说，更大的问题是，当有才华的人花更少的时间在完成工作的机制上，而花更多的时间来解决可能从根本上改变金融服务的问题时，会发生什么。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">随着 Revolut 的发展，保护客户的复杂性也随之增加。根据一份报告（在新窗口中打开），全球超过一半的成年人报告称在 2025 年遭遇过诈骗。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">对于 Revolut 来说，每笔交易都会创造另一个机会来识别可疑活动、调查潜在风险并为其客户实施强大且量身定制的保护。但这些交易的绝对数量远远超出了任何银行可用的人力资源。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">人工智能负责人戴维·阿比特博尔 (David Abitbol) 表示：“当今人工智能可以解决的最大问题是人类的规模与我们所获得的需求之间的关系。”这就是为什么 Revolut 最大的人工智能应用程序之一是由 OpenAI 模型支持的 FinCrime 代理。</p>
+
+<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
+              <img src="https://images.ctfassets.net/kftzwdyauwt9/4Xbch93T1BBvgoZ1l9G1hD/097c1514aee377faba18810c482e620b/credit-saison-art-card-crop-c.png?w=3840&amp;q=90&amp;fm=webp" alt="credit-saison-art-card-crop-c" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+              <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
+                  <span>📷 现场图景: credit-saison-art-card-crop-c</span>
+                </figcaption>
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">代理可以检查信息、应用 Revolut 规则并自动完成定义的流程，而不是要求调查人员手动处理每个符合条件的案件。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">GPT-5.5 的发布是一个转折点。 Abitbol 表示，就在那时，这些模型已经变得足够强大且具有成本效益，Revolut 可以将筛选和调查工作流程完全委托给代理。其结果是，在不按需求增加调查员人数的情况下，监控交易的能力得到提高。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">信息安全工程师 Mo Amiri 补充道，“这直接转化为我们的客户可以信赖的更强大的保护和更具弹性的系统。”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“快速行动，但建立信任”很容易成为 Revolut 的内部工程口号。虽然 Abitbol 指出 Codex 已将编码时间缩短了 30-60%，但他也明确指出某些护栏是不容协商的。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“我们有一个系统框架，公司中使用人工智能构建任何东西的任何人在开发、A/B 测试和业务指标预测方面都拥有相同的一套标准，”他说。 “因此，整个公司的每位工程师都必须遵守相同的质量标准。我们开始以合理的成本获得足够的情报，从而可以将初步调查和筛查越来越多地委托给代理。”</p>
+          </div>
+          
+        </section>
+        
+
+        <!-- CTA & Social Share Capsule Bar (Universal Article End Action Bar) -->
+        <div class="mt-10 pt-6 border-t border-slate-200/80 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          
+          <!-- Primary Source Link Button -->
+          <a href="https://openai.com/business/customer-stories/revolut?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/20 active:scale-95 transition-all">
+            <span>📖 阅读原资讯官网报道 ↗</span>
+          </a>
+
+          <!-- Social Sharing & Bookmark Actions -->
+          <div class="flex items-center gap-2">
+            <button onclick="shareDirect('x')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 𝕏">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>𝕏</span>
+            </button>
+            <button onclick="shareDirect('threads')" class="px-3 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 Threads">
+              <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+              <span>Threads</span>
+            </button>
+            <button onclick="copyCurrentLink()" class="px-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+              <span>🔗</span> <span>复制分享链接</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/2d9efb19784a5413" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://cdn.mos.cms.futurecdn.net/wJ2qnaAhPDGJQVsKBgLAri-1920-80.png" alt="英伟达发布Rubin HPC架构GPU" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Tom&#x27;s Hardware</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">英伟达发布Rubin HPC架构GPU</h4>
+            </a>
+            
+            <a href="/zh/news/ed8c868cc84deb03" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://dam.mediacorp.sg/image/upload/s--OrnYfObd--/c_crop,h_1125,w_2000,x_0,y_29/c_fill,g_auto,h_676,w_1200/fl_relative,g_south_east,l_mediacorp:cna:watermark:2023-11:afp_watermark_14112023,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2026/11/17/000_d7976wf.jpg?itok=LmLnYDgr" alt="美国商务部调查Megaspeed出口违规" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Reuters</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">美国商务部调查Megaspeed出口违规</h4>
+            </a>
+            
+            <a href="/zh/news/8b9fc00ce9f128ca" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F993146c3-1e7d-4e71-9a5c-5ae28a66973b.jpg?source=next-article&amp;fit=scale-down&amp;quality=highest&amp;width=700&amp;dpr=1" alt="俄亥俄州基建公投致亚马逊170亿美元数据中心受阻" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Financial Times</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">俄亥俄州基建公投致亚马逊170亿美元数据中心受阻</h4>
+            </a>
+            
+            <a href="/zh/news/9f3ea940e0ef6730" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://www.engadget.com/img/gallery/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/l-intro-1794862378.jpg" alt="Meta在泰国与土耳其测试独立Instagram消息应用" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Engadget</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Meta在泰国与土耳其测试独立Instagram消息应用</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "728c406cb2075977",
+      type: "news",
+      title: "Revolut利用OpenAI模型升级反洗钱风控",
+      snippet: "金融科技公司Revolut接入OpenAI模型，通过部署智能反洗钱（FinCrime）代理实现交易监测与风险调查自动化",
+      url: window.location.href,
+      image_url: "https://images.ctfassets.net/kftzwdyauwt9/41tqM423rl34f77g33NcJB/df1ae54cfce7ec525cea365c54358579/revolut-social.png?w=1600&amp;h=900&amp;fit=fill"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Revolut利用OpenAI模型升级反洗钱风控";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>

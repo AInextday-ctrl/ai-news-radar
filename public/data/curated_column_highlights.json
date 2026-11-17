@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 06:21:38 UTC",
+  "generated_at": "2026-11-17 06:35:36 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 06:21:38 UTC",
+      "updated_at": "2026-11-17 06:35:36 UTC",
       "headline_item": {
-        "id": "ed8c868cc84deb03",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "美国商务部调查Megaspeed出口违规",
-        "title_en": "The US Commerce Department says it began probing Megaspeed in 2024 over possible export rule violations; Nvidia put Megaspeed on its \"no sell\" list in June 2025 (Kanishka Singh/Reuters)",
-        "source": "Reuters",
-        "published_at": "2026-11-17T05:55:00+00:00",
-        "url": "https://www.reuters.com/world/asia-pacific/us-releases-details-of-megaspeed-probe-says-investigation-began-2024-2026-11-17/",
-        "event_summary_zh": "美国商务部与司法部联合证实，自2024年起对新加坡数据中心公司Megaspeed展开调查，指控其涉嫌违规转运敏感半导体技术",
-        "event_summary_en": "The US Commerce and Justice Departments confirmed a probe into Singapore-based Megaspeed since 2024 for potential unauthorized diversion of sensitive semiconductors. Following a June 2025 on-site inspection and executive interview, Nvidia formally blacklisted the firm, and the case has transitioned into a criminal investigation led by the Justice Department.",
+        "id": "2d9efb19784a5413",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "英伟达发布Rubin HPC架构GPU",
+        "title_en": "Nvidia unveils its Rubin HPC GPU with \"more than 50,000\" CUDA cores, up from 28,672 in the current Rubin GPU, for agentic workflows and scientific simulations (Jeffrey Kampman/Tom's Hardware)",
+        "source": "Tom's Hardware",
+        "published_at": "2026-11-17T06:20:00+00:00",
+        "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-announces-rubin-hpc-gpu-with-record-number-of-cuda-cores-at-supercomputing-2026-new-chip-accelerates-agentic-hpc-workloads-arrives-in-2028",
+        "event_summary_zh": "英伟达推出Rubin HPC GPU，集成超5万个CUDA核心，旨在通过NVLink 7互联强化科研与智能体工作流，预计2028年上市",
+        "event_summary_en": "Nvidia unveiled its Rubin HPC GPU designed for scientific simulation and agentic workflows, featuring over 50,000 CUDA cores and NVLink 7 interconnect technology. The architecture utilizes a multi-die configuration to scale compute density and minimize idle resources, with a market release scheduled for 2028.",
         "core_facts_zh": [
-          "【核心事件】美国商务部、美国司法部、Megaspeed国际（新加坡云服务商）、前Nvidia CEO Jensen Huang、前Megaspeed CEO Alice Huang在美国司法/监管调查体系及新加坡：针对敏感芯片潜在转运至受限地区的违规调查，以及针对Megaspeed的刑事立案",
-          "【起因与机理】防范高性能算力芯片绕过出口管制进入地缘政治博弈中的高风险渠道",
-          "【调查与监管诉求】监管机构指控Megaspeed存在敏感半导体产品违规转运风险。",
-          "【涉及范围与推进】案件已由贸易合规核查升级为刑事调查，并涉及对前核心高管的跨境盘查。"
+          "【核心事件】英伟达（Nvidia）在高性能计算产品规划发布：发布集成超5万CUDA核心的Rubin HPC GPU及NVLink 7互联技术",
+          "【起因与机理】满足科研领域对智能体工作流及海量数据模拟的算力爆发性需求",
+          "【关键数据与实测】核心架构：集成超5万个CUDA核心，支持多裸片封装与NVLink 7互联。",
+          "【涉及范围与推进】后续节点：产品计划于2028年正式推向市场。"
         ],
         "core_facts_en": [
-          "[Core Event] US Department of Commerce, US Department of Justice, Megaspeed International, former Nvidia CEO Jensen Huang, former Megaspeed CEO Alice Huang: Investigation into unauthorized diversion of sensitive semiconductors and subsequent criminal probe",
-          "[Root Cause & Mechanism] Preventing circumvention of export controls for high-performance computing hardware",
-          "[Regulatory & Investigation Focus] Regulatory allegations of unauthorized semiconductor diversion by Megaspeed.",
-          "[Scope & Next Steps] Case escalated from export control review to a formal criminal investigation involving high-level executive questioning."
+          "[Core Event] Nvidia: Announced Rubin HPC GPU with 50,000+ CUDA cores and NVLink 7 interconnect",
+          "[Root Cause & Mechanism] To address growing computational demands in scientific simulations and agentic workflows",
+          "[Key Technical Spec] Architecture: 50,000+ CUDA cores with multi-die packaging and NVLink 7 support.",
+          "[Scope & Next Steps] Timeline: Market release scheduled for 2028."
         ],
-        "industry_impact_zh": "本案揭示了美国监管机构正将出口管制执行重心从纯粹的贸易限制转向针对海外云数据中心节点的物理现场核查与刑事打击。Nvidia与渠道伙伴关系的切断，反映出芯片巨头在面对监管压力时，已将“合规隔离”视为保护其全球供应链生态的核心底线，这将迫使东南亚地区的第三方云服务商面临更严格的终端用户审查机制。",
-        "industry_impact_en": "This case signifies a shift in US enforcement toward on-site physical verification and criminal litigation for overseas cloud data centers. Nvidia’s preemptive blacklisting highlights the transition toward 'compliance isolation' as the new standard for global semiconductor supply chains, forcing regional cloud service providers to adopt stringent end-user vetting protocols."
+        "industry_impact_zh": "英伟达通过Rubin HPC进一步强化HPC领域护城河，利用多裸片封装技术平衡大语言模型推理与高性能科学计算的双重需求。其核心竞争力在于NVLink 7提供的超高吞吐带宽，旨在物理层面解决集群扩展限制，强迫市场在超大规模基础设施建设中持续依赖其私有生态。",
+        "industry_impact_en": "Nvidia is deepening its competitive moat in HPC by leveraging multi-die packaging to balance LLM inference and scientific computing. The critical value lies in NVLink 7's high-throughput interconnect, which forces reliance on Nvidia's proprietary ecosystem for large-scale data center infrastructure."
       },
       "headlines": [
+        {
+          "id": "2d9efb19784a5413",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "英伟达发布Rubin HPC架构GPU",
+          "title_en": "Nvidia unveils its Rubin HPC GPU with \"more than 50,000\" CUDA cores, up from 28,672 in the current Rubin GPU, for agentic workflows and scientific simulations (Jeffrey Kampman/Tom's Hardware)",
+          "source": "Tom's Hardware",
+          "published_at": "2026-11-17T06:20:00+00:00",
+          "url": "https://www.tomshardware.com/pc-components/gpus/nvidia-announces-rubin-hpc-gpu-with-record-number-of-cuda-cores-at-supercomputing-2026-new-chip-accelerates-agentic-hpc-workloads-arrives-in-2028",
+          "event_summary_zh": "英伟达推出Rubin HPC GPU，集成超5万个CUDA核心，旨在通过NVLink 7互联强化科研与智能体工作流，预计2028年上市",
+          "event_summary_en": "Nvidia unveiled its Rubin HPC GPU designed for scientific simulation and agentic workflows, featuring over 50,000 CUDA cores and NVLink 7 interconnect technology. The architecture utilizes a multi-die configuration to scale compute density and minimize idle resources, with a market release scheduled for 2028.",
+          "core_facts_zh": [
+            "【核心事件】英伟达（Nvidia）在高性能计算产品规划发布：发布集成超5万CUDA核心的Rubin HPC GPU及NVLink 7互联技术",
+            "【起因与机理】满足科研领域对智能体工作流及海量数据模拟的算力爆发性需求",
+            "【关键数据与实测】核心架构：集成超5万个CUDA核心，支持多裸片封装与NVLink 7互联。",
+            "【涉及范围与推进】后续节点：产品计划于2028年正式推向市场。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nvidia: Announced Rubin HPC GPU with 50,000+ CUDA cores and NVLink 7 interconnect",
+            "[Root Cause & Mechanism] To address growing computational demands in scientific simulations and agentic workflows",
+            "[Key Technical Spec] Architecture: 50,000+ CUDA cores with multi-die packaging and NVLink 7 support.",
+            "[Scope & Next Steps] Timeline: Market release scheduled for 2028."
+          ],
+          "industry_impact_zh": "英伟达通过Rubin HPC进一步强化HPC领域护城河，利用多裸片封装技术平衡大语言模型推理与高性能科学计算的双重需求。其核心竞争力在于NVLink 7提供的超高吞吐带宽，旨在物理层面解决集群扩展限制，强迫市场在超大规模基础设施建设中持续依赖其私有生态。",
+          "industry_impact_en": "Nvidia is deepening its competitive moat in HPC by leveraging multi-die packaging to balance LLM inference and scientific computing. The critical value lies in NVLink 7's high-throughput interconnect, which forces reliance on Nvidia's proprietary ecosystem for large-scale data center infrastructure."
+        },
         {
           "id": "ed8c868cc84deb03",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "超大规模数据中心与地区电网、土地资源的矛盾已触及临界点，单纯依靠资本规模扩张的路径正面临“社区政治”的地缘性阻断。随着地方反制力量在全美范围内（包括俄亥俄之外的19项措施）呈现组织化趋势，云巨头的全球基础设施布局需从单一的成本-效能模型，转向深度本地化共赢与公共服务公关的新型博弈模式。",
           "industry_impact_en": "The tension between hyperscale data centers and local grid/land resources has hit a breaking point, where purely capital-driven expansion is now being thwarted by localized political activism. As regional pushback becomes institutionalized across the US, hyperscalers must pivot their infrastructure strategy from pure cost-efficiency models toward a new paradigm of deep local social integration and public-interest advocacy."
-        },
-        {
-          "id": "9f3ea940e0ef6730",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Meta在泰国与土耳其测试独立Instagram消息应用",
-          "title_en": "Meta is testing Direct, a standalone messaging app for Instagram that doesn't require an existing Instagram account to use, in Thailand and Turkey (Karissa Bell/Engadget)",
-          "source": "Engadget",
-          "published_at": "2026-11-17T04:40:01+00:00",
-          "url": "https://www.engadget.com/2318452/meta-is-testing-direct-a-standalone-messaging-app-for-instagram/",
-          "event_summary_zh": "Meta推出独立通讯应用Direct进行区域性测试，用户无需关联Instagram主账号即可实现社交连接",
-          "event_summary_en": "Meta is testing a standalone messaging app named Direct in Thailand and Turkey, which decouples Instagram’s inbox and allows users to register without an existing Instagram account. The move seeks to capture users outside the current ecosystem while integrating parental controls and safety monitoring features.",
-          "core_facts_zh": [
-            "【核心事件】元平台公司在泰国与土耳其市场：推出独立消息应用Direct并开启试点测试",
-            "【起因与机理】降低通讯功能进入门槛，验证剥离核心社交功能的可行性",
-            "【核心事实细节】Meta将Instagram核心收件箱剥离，开发无需关联主账号的独立App。",
-            "【各方立场与态度】该策略旨在评估通讯功能独立化对Meta生态增量用户的获取能力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Meta Platforms, Inc. (Thailand and Turkey): Launched a standalone messaging app 'Direct' for pilot testing",
-            "[Root Cause & Mechanism] To lower entry barriers for communication features and test the viability of unbundling core social functions",
-            "[Key Fact Detail] Meta decouples Instagram inbox into a standalone app without requiring a master account.",
-            "[Key Position & Outlook] The strategy aims to evaluate the potential for acquiring incremental users through unbundled communication tools."
-          ],
-          "industry_impact_zh": "此举标志着Meta试图通过去中心化的“社交组件拆分”策略，对抗WhatsApp在特定市场的存量博弈，通过降低账号绑定门槛吸引轻量化社交用户。该试验实质是Meta在平衡核心应用粘性与全渠道触达策略间的矛盾，通过差异化产品形态在不侵蚀母体流量的基础上进行增量突围。",
-          "industry_impact_en": "This move signals Meta's strategy of 'social unbundling' to challenge WhatsApp's market dominance through lowered account-linking barriers for lightweight users. It represents a tactical shift to balance core application stickiness with omni-channel reach, aiming for incremental growth without cannibalizing primary platform traffic."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 06:21:38 UTC",
+      "updated_at": "2026-11-17 06:35:36 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 06:21:38 UTC",
+      "updated_at": "2026-11-17 06:35:36 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,705)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,709)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,705 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,709 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
