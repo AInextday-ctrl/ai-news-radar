@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 20:20:58 UTC",
+  "generated_at": "2026-11-17 20:37:19 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 20:20:58 UTC",
+      "updated_at": "2026-11-17 20:37:19 UTC",
       "headline_item": {
-        "id": "e2c242abb328674e",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "加州交通局禁行Waymo高速路段",
-        "title_en": "California bans Waymo robotaxis from freeways after a viral video showed one failing to yield to the highway patrol; Waymo halts freeway service nationwide (Jeremy C. Owens/San Francisco ...)",
-        "source": "San Francisco ...",
-        "published_at": "2026-11-17T20:10:01+00:00",
-        "url": "https://www.bizjournals.com/sanfrancisco/news/2026/11/17/waymo-california-freeway-ban-dmv-chp.html?page=all",
-        "event_summary_zh": "加州交通管理局因自动驾驶车辆未能避让公路巡逻车，正式禁止Waymo自动驾驶出租车在高速公路上运行",
-        "event_summary_en": "The California Department of Motor Vehicles (DMV) has banned Alphabet’s Waymo from operating its robotaxis on highways following a viral video showing a vehicle failing to yield to a California Highway Patrol (CHP) cruiser. In response to this safety breach, Waymo has suspended its automated driving services on freeways nationwide pending further review.",
+        "id": "653f61725664aed1",
+        "tag_zh": "🔬 前沿技术",
+        "tag_en": "🔬 Frontier Tech",
+        "title_zh": "OpenAI发布GPT-6.2系列模型并下调API定价",
+        "title_en": "OpenAI launches GPT-6.2 Astra and Sol with lower API prices and some benchmark gains",
+        "source": "THE DECODER",
+        "published_at": "2026-11-17T20:30:50+00:00",
+        "url": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+        "event_summary_zh": "OpenAI推出GPT-6.2 Astra与Sol模型，在提升专业任务性能的同时降低了API调用成本",
+        "event_summary_en": "OpenAI has officially released the GPT-6.2 Astra and GPT-6.2 Sol models, optimized for high-complexity professional workflows and daily tasks respectively. In terms of pricing, the API cost for GPT-6.2 Astra has been reduced by 20%, with input pricing set at $8 per million tokens, further enhanced by caching mechanisms for improved computational efficiency; both models are now available to enterprise and developer users.",
         "core_facts_zh": [
-          "【核心事件】加州机动车管理局（DMV）、Alphabet旗下Waymo、加州公路巡逻队（CHP）在加州公共高速公路：禁止Waymo高速路运营并迫使全国停驶，因车辆未能避让执法车辆",
-          "【起因与机理】因安全违规录像引发监管介入，暴露出感知系统对特定场景执法车辆的识别与避让逻辑缺陷",
-          "【调查与监管诉求】监管方采取强制禁令，要求Waymo撤出所有高速路网运营。",
-          "【各方立场与态度】导致全国范围服务受限，行业或将面临更严苛的视觉感知基准压力测试。"
+          "【核心事件】OpenAI（人工智能研究机构）：发布GPT-6.2 Astra与Sol模型，并下调Astra API调用价格至每百万输入Token 8美元",
+          "【起因与机理】旨在通过更高的算力性价比在法律、金融及复杂设计等专业领域确立模型竞争力",
+          "【关键数据与实测】财务细节：Astra模型输入API价格降至8美元/百万Token，较前代下调20%。",
+          "【各方立场与态度】性能表现：在Harvey LAB-AA及GDPval-v2等专业基准中，成本与效能比优于Claude Fable 5.2。"
         ],
         "core_facts_en": [
-          "[Core Event] California DMV, Waymo (Alphabet), California Highway Patrol (CHP) (California state freeways): Ban on freeway operations following a failure to yield to law enforcement",
-          "[Root Cause & Mechanism] Regulatory response to safety violations highlighting gaps in sensor perception and emergency response protocols",
-          "[Regulatory & Investigation Focus] Regulatory authority issues a mandatory ban on freeway operations for Waymo.",
-          "[Key Position & Outlook] Nationwide service suspension, likely triggering intensified regulatory pressure on visual perception benchmarks."
+          "[Core Event] OpenAI: Released GPT-6.2 Astra and Sol models, and reduced the API price of Astra to $8 per million input tokens",
+          "[Root Cause & Mechanism] To establish competitive dominance in professional fields such as law, finance, and complex design through superior price-to-performance ratios",
+          "[Key Metrics] Financials: API input cost for Astra reduced to $8/million tokens, a 20% decrease.",
+          "[Key Position & Outlook] Performance: Outperforms Claude Fable 5.2 in professional benchmarks like Harvey LAB-AA and GDPval-v2 with higher cost-efficiency."
         ],
-        "industry_impact_zh": "此事件揭示了自动驾驶在长尾场景（Corner Cases）下的感知局限，执法车辆的复杂灯光与动态调度仍是L4级系统架构的重大攻坚技术点。监管机构从测试许可向强制执行转变，意味着自动驾驶行业已进入高密度安全审查窗口期，商业化落地进程将因合规成本的陡增而放缓。",
-        "industry_impact_en": "This incident highlights significant gaps in perception systems regarding corner cases, specifically the navigation of law enforcement dynamic patterns. The shift from testing permits to strict regulatory enforcement signals that the L4 industry is entering a high-scrutiny window, where compliance costs will inevitably decelerate the pace of commercial scaling."
+        "industry_impact_zh": "此次降价与基准性能提升标志着OpenAI在参数规模红利减弱后，通过精细化算力调优与垂直领域适配转向商业化变现深水区。模型在Agents' Last Exam等复杂多步基准上的显著性能优势，直接威胁到以Claude Fable为代表的竞争对手在企业级自动化市场的份额。",
+        "industry_impact_en": "This pricing reduction and benchmark gain signify OpenAI's shift towards deep commercialization via refined compute optimization and vertical alignment as scaling laws face diminishing returns. The substantial performance leads in multi-step benchmarks like 'Agents' Last Exam' directly threaten the market share of competitors like Claude Fable in the enterprise automation sector."
       },
       "headlines": [
+        {
+          "id": "653f61725664aed1",
+          "tag_zh": "🔬 前沿技术",
+          "tag_en": "🔬 Frontier Tech",
+          "title_zh": "OpenAI发布GPT-6.2系列模型并下调API定价",
+          "title_en": "OpenAI launches GPT-6.2 Astra and Sol with lower API prices and some benchmark gains",
+          "source": "THE DECODER",
+          "published_at": "2026-11-17T20:30:50+00:00",
+          "url": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+          "event_summary_zh": "OpenAI推出GPT-6.2 Astra与Sol模型，在提升专业任务性能的同时降低了API调用成本",
+          "event_summary_en": "OpenAI has officially released the GPT-6.2 Astra and GPT-6.2 Sol models, optimized for high-complexity professional workflows and daily tasks respectively. In terms of pricing, the API cost for GPT-6.2 Astra has been reduced by 20%, with input pricing set at $8 per million tokens, further enhanced by caching mechanisms for improved computational efficiency; both models are now available to enterprise and developer users.",
+          "core_facts_zh": [
+            "【核心事件】OpenAI（人工智能研究机构）：发布GPT-6.2 Astra与Sol模型，并下调Astra API调用价格至每百万输入Token 8美元",
+            "【起因与机理】旨在通过更高的算力性价比在法律、金融及复杂设计等专业领域确立模型竞争力",
+            "【关键数据与实测】财务细节：Astra模型输入API价格降至8美元/百万Token，较前代下调20%。",
+            "【各方立场与态度】性能表现：在Harvey LAB-AA及GDPval-v2等专业基准中，成本与效能比优于Claude Fable 5.2。"
+          ],
+          "core_facts_en": [
+            "[Core Event] OpenAI: Released GPT-6.2 Astra and Sol models, and reduced the API price of Astra to $8 per million input tokens",
+            "[Root Cause & Mechanism] To establish competitive dominance in professional fields such as law, finance, and complex design through superior price-to-performance ratios",
+            "[Key Metrics] Financials: API input cost for Astra reduced to $8/million tokens, a 20% decrease.",
+            "[Key Position & Outlook] Performance: Outperforms Claude Fable 5.2 in professional benchmarks like Harvey LAB-AA and GDPval-v2 with higher cost-efficiency."
+          ],
+          "industry_impact_zh": "此次降价与基准性能提升标志着OpenAI在参数规模红利减弱后，通过精细化算力调优与垂直领域适配转向商业化变现深水区。模型在Agents' Last Exam等复杂多步基准上的显著性能优势，直接威胁到以Claude Fable为代表的竞争对手在企业级自动化市场的份额。",
+          "industry_impact_en": "This pricing reduction and benchmark gain signify OpenAI's shift towards deep commercialization via refined compute optimization and vertical alignment as scaling laws face diminishing returns. The substantial performance leads in multi-step benchmarks like 'Agents' Last Exam' directly threaten the market share of competitors like Claude Fable in the enterprise automation sector."
+        },
         {
           "id": "e2c242abb328674e",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此次密集的技术故障暴露了头部科技企业在追求全球化、高并发部署中对底层软件调度系统的过度依赖，任何单一故障点（Single Point of Failure）的级联效应均会对全球业务连续性构成严重威胁。云端生态系统的闭环程度越高，一旦触发服务层异常，其跨地域、跨业务线的同步崩塌将对品牌信用与用户资产安全产生难以估量的负面效应。",
           "industry_impact_en": "These frequent outages reveal an over-reliance on centralized underlying software scheduling systems by hyperscalers, where single points of failure trigger cascading global disruptions. The tighter the integration of cloud ecosystems, the greater the catastrophic risk to brand equity and user asset security when fundamental operational layers suffer synchronization failures."
-        },
-        {
-          "id": "54ecb7a012a52ca5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "谷歌延长Gemini临时对话留存期至两个月",
-          "title_en": "Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)",
-          "source": "TechCrunch",
-          "published_at": "2026-11-17T19:00:47+00:00",
-          "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
-          "event_summary_zh": "谷歌将Gemini临时聊天记录的保留周期从72小时大幅延长至约两个月，并实现对话记录与模型训练的解耦",
-          "event_summary_en": "Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.",
-          "core_facts_zh": [
-            "【核心事件】Google（谷歌）：将临时聊天数据存储期限从72小时延长至约两个月，并实现聊天记录存储与AI模型训练的可独立控制",
-            "【起因与机理】旨在应对AI系统复杂性，增强安全审计、故障诊断能力及用户反馈处理需求",
-            "【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。",
-            "【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.",
-            "[Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.",
-            "[Key Fact Detail] Google extended temporary chat retention to approximately two months.",
-            "[Key Position & Outlook] Temporary conversations remain excluded from AI training data."
-          ],
-          "industry_impact_zh": "延长留存期是谷歌在数据安全合规与算法鲁棒性博弈间的权衡，通过将留存数据与模型训练彻底切割，谷歌在缓解隐私舆论压力的同时，获得了更长的时间窗口进行内控审计与安全迭代。这种设置逻辑暗示了当前主流AI厂商正在从简单的全量数据收集转向分层的细粒度数据管控，以应对日益严格的全球数据保护法规要求。",
-          "industry_impact_en": "The retention extension reflects Google's balancing act between data compliance and system robustness, leveraging the decoupling of storage from model training to secure a wider window for security auditing without violating user trust. This strategic shift signals an industry-wide move toward granular data control, aimed at navigating tightening global data protection regulations."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 20:20:58 UTC",
+      "updated_at": "2026-11-17 20:37:19 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 20:20:58 UTC",
+      "updated_at": "2026-11-17 20:37:19 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,969)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,970)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,969 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,970 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
