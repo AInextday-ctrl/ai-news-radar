@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 05:51:34 UTC",
+  "generated_at": "2026-11-17 06:08:08 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 05:51:35 UTC",
+      "updated_at": "2026-11-17 06:08:08 UTC",
       "headline_item": {
-        "id": "8b9fc00ce9f128ca",
+        "id": "ed8c868cc84deb03",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "俄亥俄州基建公投致亚马逊170亿美元数据中心受阻",
-        "title_en": "Analysis: Amazon's $17B+ planned investment in Ohio data centers is at risk after midterm voters passed restriction measures affecting three proposed projects (Rafe Rosner-Uddin/Financial Times)",
-        "source": "Financial Times",
-        "published_at": "2026-11-17T05:40:01+00:00",
-        "url": "https://www.ft.com/content/e95adad4-b428-477d-9716-92172bbd199f",
-        "event_summary_zh": "亚马逊在俄亥俄州规划的170亿美元数据中心投资，因州内多项针对性基建限制提案通过而面临开发停滞风险",
-        "event_summary_en": "Amazon's plan to deploy 1.8 gigawatts of data center capacity in Ohio faces administrative stagnation after voters approved 21 restrictive measures in recent midterm elections, threatening $17 billion in infrastructure investments. This grassroots 'NIMBY' backlash signifies a shift from isolated incidents to systemic regulatory friction, forcing hyperscalers to confront escalating community opposition and compliance costs in energy-intensive infrastructure expansion.",
+        "title_zh": "美国商务部调查Megaspeed出口违规",
+        "title_en": "The US Commerce Department says it began probing Megaspeed in 2024 over possible export rule violations; Nvidia put Megaspeed on its \"no sell\" list in June 2025 (Kanishka Singh/Reuters)",
+        "source": "Reuters",
+        "published_at": "2026-11-17T05:55:00+00:00",
+        "url": "https://www.reuters.com/world/asia-pacific/us-releases-details-of-megaspeed-probe-says-investigation-began-2024-2026-11-17/",
+        "event_summary_zh": "美国商务部与司法部联合证实，自2024年起对新加坡数据中心公司Megaspeed展开调查，指控其涉嫌违规转运敏感半导体技术",
+        "event_summary_en": "The US Commerce and Justice Departments confirmed a probe into Singapore-based Megaspeed since 2024 for potential unauthorized diversion of sensitive semiconductors. Following a June 2025 on-site inspection and executive interview, Nvidia formally blacklisted the firm, and the case has transitioned into a criminal investigation led by the Justice Department.",
         "core_facts_zh": [
-          "【核心事件】亚马逊(Amazon)、俄亥俄州选民及Conserve Ohio组织在美国俄亥俄州：通过基建限制提案，阻碍三个核心数据中心项目推进",
-          "【起因与机理】当地社区对数据中心高能耗、低就业带动效应及项目透明度缺失感到不满",
-          "【关键数据与实测】受影响项目涉及170亿美元投资与1.8吉瓦的电力需求，且面临持续性法律挑战。",
-          "【各方立场与态度】数据中心高能耗带来的“邻避效应”已在全美呈现组织化抵抗趋势。"
+          "【核心事件】美国商务部、美国司法部、Megaspeed国际（新加坡云服务商）、前Nvidia CEO Jensen Huang、前Megaspeed CEO Alice Huang在美国司法/监管调查体系及新加坡：针对敏感芯片潜在转运至受限地区的违规调查，以及针对Megaspeed的刑事立案",
+          "【起因与机理】防范高性能算力芯片绕过出口管制进入地缘政治博弈中的高风险渠道",
+          "【调查与监管诉求】监管机构指控Megaspeed存在敏感半导体产品违规转运风险。",
+          "【涉及范围与推进】案件已由贸易合规核查升级为刑事调查，并涉及对前核心高管的跨境盘查。"
         ],
         "core_facts_en": [
-          "[Core Event] Amazon, Ohio voters, and grassroots organization Conserve Ohio (Ohio, USA): Passed infrastructure restriction measures blocking three major data center projects",
-          "[Root Cause & Mechanism] Local concerns over high power consumption, lack of local employment benefits, and project opacity",
-          "[Key Metrics] Affected projects involve $17B in capital expenditure and 1.8GW of power capacity, facing ongoing legal risks.",
-          "[Key Position & Outlook] The 'NIMBY' backlash against data center energy consumption is scaling into a nationwide organized movement."
+          "[Core Event] US Department of Commerce, US Department of Justice, Megaspeed International, former Nvidia CEO Jensen Huang, former Megaspeed CEO Alice Huang: Investigation into unauthorized diversion of sensitive semiconductors and subsequent criminal probe",
+          "[Root Cause & Mechanism] Preventing circumvention of export controls for high-performance computing hardware",
+          "[Regulatory & Investigation Focus] Regulatory allegations of unauthorized semiconductor diversion by Megaspeed.",
+          "[Scope & Next Steps] Case escalated from export control review to a formal criminal investigation involving high-level executive questioning."
         ],
-        "industry_impact_zh": "超大规模数据中心与地区电网、土地资源的矛盾已触及临界点，单纯依靠资本规模扩张的路径正面临“社区政治”的地缘性阻断。随着地方反制力量在全美范围内（包括俄亥俄之外的19项措施）呈现组织化趋势，云巨头的全球基础设施布局需从单一的成本-效能模型，转向深度本地化共赢与公共服务公关的新型博弈模式。",
-        "industry_impact_en": "The tension between hyperscale data centers and local grid/land resources has hit a breaking point, where purely capital-driven expansion is now being thwarted by localized political activism. As regional pushback becomes institutionalized across the US, hyperscalers must pivot their infrastructure strategy from pure cost-efficiency models toward a new paradigm of deep local social integration and public-interest advocacy."
+        "industry_impact_zh": "本案揭示了美国监管机构正将出口管制执行重心从纯粹的贸易限制转向针对海外云数据中心节点的物理现场核查与刑事打击。Nvidia与渠道伙伴关系的切断，反映出芯片巨头在面对监管压力时，已将“合规隔离”视为保护其全球供应链生态的核心底线，这将迫使东南亚地区的第三方云服务商面临更严格的终端用户审查机制。",
+        "industry_impact_en": "This case signifies a shift in US enforcement toward on-site physical verification and criminal litigation for overseas cloud data centers. Nvidia’s preemptive blacklisting highlights the transition toward 'compliance isolation' as the new standard for global semiconductor supply chains, forcing regional cloud service providers to adopt stringent end-user vetting protocols."
       },
       "headlines": [
+        {
+          "id": "ed8c868cc84deb03",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "美国商务部调查Megaspeed出口违规",
+          "title_en": "The US Commerce Department says it began probing Megaspeed in 2024 over possible export rule violations; Nvidia put Megaspeed on its \"no sell\" list in June 2025 (Kanishka Singh/Reuters)",
+          "source": "Reuters",
+          "published_at": "2026-11-17T05:55:00+00:00",
+          "url": "https://www.reuters.com/world/asia-pacific/us-releases-details-of-megaspeed-probe-says-investigation-began-2024-2026-11-17/",
+          "event_summary_zh": "美国商务部与司法部联合证实，自2024年起对新加坡数据中心公司Megaspeed展开调查，指控其涉嫌违规转运敏感半导体技术",
+          "event_summary_en": "The US Commerce and Justice Departments confirmed a probe into Singapore-based Megaspeed since 2024 for potential unauthorized diversion of sensitive semiconductors. Following a June 2025 on-site inspection and executive interview, Nvidia formally blacklisted the firm, and the case has transitioned into a criminal investigation led by the Justice Department.",
+          "core_facts_zh": [
+            "【核心事件】美国商务部、美国司法部、Megaspeed国际（新加坡云服务商）、前Nvidia CEO Jensen Huang、前Megaspeed CEO Alice Huang在美国司法/监管调查体系及新加坡：针对敏感芯片潜在转运至受限地区的违规调查，以及针对Megaspeed的刑事立案",
+            "【起因与机理】防范高性能算力芯片绕过出口管制进入地缘政治博弈中的高风险渠道",
+            "【调查与监管诉求】监管机构指控Megaspeed存在敏感半导体产品违规转运风险。",
+            "【涉及范围与推进】案件已由贸易合规核查升级为刑事调查，并涉及对前核心高管的跨境盘查。"
+          ],
+          "core_facts_en": [
+            "[Core Event] US Department of Commerce, US Department of Justice, Megaspeed International, former Nvidia CEO Jensen Huang, former Megaspeed CEO Alice Huang: Investigation into unauthorized diversion of sensitive semiconductors and subsequent criminal probe",
+            "[Root Cause & Mechanism] Preventing circumvention of export controls for high-performance computing hardware",
+            "[Regulatory & Investigation Focus] Regulatory allegations of unauthorized semiconductor diversion by Megaspeed.",
+            "[Scope & Next Steps] Case escalated from export control review to a formal criminal investigation involving high-level executive questioning."
+          ],
+          "industry_impact_zh": "本案揭示了美国监管机构正将出口管制执行重心从纯粹的贸易限制转向针对海外云数据中心节点的物理现场核查与刑事打击。Nvidia与渠道伙伴关系的切断，反映出芯片巨头在面对监管压力时，已将“合规隔离”视为保护其全球供应链生态的核心底线，这将迫使东南亚地区的第三方云服务商面临更严格的终端用户审查机制。",
+          "industry_impact_en": "This case signifies a shift in US enforcement toward on-site physical verification and criminal litigation for overseas cloud data centers. Nvidia’s preemptive blacklisting highlights the transition toward 'compliance isolation' as the new standard for global semiconductor supply chains, forcing regional cloud service providers to adopt stringent end-user vetting protocols."
+        },
         {
           "id": "8b9fc00ce9f128ca",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此举标志着Meta试图通过去中心化的“社交组件拆分”策略，对抗WhatsApp在特定市场的存量博弈，通过降低账号绑定门槛吸引轻量化社交用户。该试验实质是Meta在平衡核心应用粘性与全渠道触达策略间的矛盾，通过差异化产品形态在不侵蚀母体流量的基础上进行增量突围。",
           "industry_impact_en": "This move signals Meta's strategy of 'social unbundling' to challenge WhatsApp's market dominance through lowered account-linking barriers for lightweight users. It represents a tactical shift to balance core application stickiness with omni-channel reach, aiming for incremental growth without cannibalizing primary platform traffic."
-        },
-        {
-          "id": "348454af17913093",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "Anthropic通过AI自动化实现模型跨硬件高效迁移",
-          "title_en": "Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with \"basically no human intervention\", vs. the usual 6-12 months (Shane Downing/Tom's Hardware)",
-          "source": "Tom's Hardware",
-          "published_at": "2026-11-17T04:02:44+00:00",
-          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
-          "event_summary_zh": "Anthropic联合创始人Tom Brown透露，利用Claude Mythos Preview技术，AI模型在AMD GPU上的适配部署时间从数月压缩至三天，且几乎无需人工干预",
-          "event_summary_en": "Anthropic Chief Compute Officer Tom Brown announced that using Claude Mythos Preview, the company reduced the time required to port models to AMD GPUs from 6-12 months to roughly 3 days with minimal human intervention. This strategy aims to bypass the CUDA-centric lock-in and operationalize a heterogeneous compute pool comprising Nvidia GPUs, AMD hardware, Google TPUs, and AWS Trainium.",
-          "core_facts_zh": [
-            "【核心事件】Anthropic联合创始人兼首席算力官Tom Brown在投资者简报会议：通过AI驱动的自动代码生成缩短硬件适配周期，构建异构算力池",
-            "【起因与机理】降低对CUDA生态的依赖，提升数据中心硬件部署效率与采购决策灵活性",
-            "【关键数据与实测】将适配周期从6-12个月压缩至3天，无需深度人工干预。",
-            "【各方立场与态度】建立跨平台硬件适配策略，增强对单一算力供应方的议价能力。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Tom Brown, Co-founder and Chief Compute Officer at Anthropic (Investor briefing): Shortened hardware onboarding time via AI-generated GPU kernels",
-            "[Root Cause & Mechanism] To reduce CUDA dependency and establish a flexible, fungible compute architecture",
-            "[Key Metrics] Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels.",
-            "[Key Position & Outlook] Established a platform-agnostic compute pool to mitigate single-vendor dependency."
-          ],
-          "industry_impact_zh": "若AI模型能自主生成跨硬件平台的底层算子，英伟达长期构建的CUDA壁垒将面临结构性瓦解，软件定义硬件（SDH）将成为缓解算力供需失衡的终极手段。此举标志着模型厂商正从被动的硬件适配者转向主动的底层架构重构者，使得高端芯片的商业竞争核心从单一的软硬捆绑转向“模型跨平台兼容性”的标准化进程。",
-          "industry_impact_en": "The ability of AI models to autonomously generate low-level kernels for heterogeneous hardware fundamentally erodes Nvidia’s CUDA moat, shifting the competitive landscape from hardware-centric integration to model-agnostic software stacks. This development suggests a strategic transition where model companies dictate infrastructure compatibility, effectively commoditizing underlying hardware accelerators."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 05:51:35 UTC",
+      "updated_at": "2026-11-17 06:08:08 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 05:51:35 UTC",
+      "updated_at": "2026-11-17 06:08:08 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,696)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,699)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,696 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,699 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
