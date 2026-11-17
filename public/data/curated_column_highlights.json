@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 04:05:56 UTC",
+  "generated_at": "2026-11-17 04:21:20 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 04:05:56 UTC",
+      "updated_at": "2026-11-17 04:21:20 UTC",
       "headline_item": {
-        "id": "0d4f34b78258a09d",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "Situational Awareness基金重仓AI股后再度面临大幅回撤",
-        "title_en": "Filing: Leopold Aschenbrenner's hedge fund Situational Awareness, after nearly blowing up, loaded back up on AI stocks at the end of Q3; all have since plunged (Sean Conlon/CNBC)",
-        "source": "CNBC",
-        "published_at": "2026-11-17T03:35:00+00:00",
-        "url": "https://www.cnbc.com/2026/11/16/situational-awareness-aschenbrenner-new-ai-bets.html",
-        "event_summary_zh": "前OpenAI研究员Leopold Aschenbrenner创办的Situational Awareness基金在三季度末重新建仓AI相关资产，但随后的市场下行导致其持仓价值显著缩水",
-        "event_summary_en": "Leopold Aschenbrenner, founder of Situational Awareness, re-entered the market at the end of Q3 following a summer liquidation, aggressively acquiring AI-focused assets. Regulatory filings reveal a $440 million stake in SharonAI alongside equity in Cleanspark, IREN, Bitdeer, and Fermi, plus call options in memory chip and data center energy plays, all of which have faced significant market sell-offs since October.",
+        "id": "348454af17913093",
+        "tag_zh": "⚡ 职场提效",
+        "tag_en": "⚡ Workplace AI",
+        "title_zh": "Anthropic通过AI自动化实现模型跨硬件高效迁移",
+        "title_en": "Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with \"basically no human intervention\", vs. the usual 6-12 months (Shane Downing/Tom's Hardware)",
+        "source": "Tom's Hardware",
+        "published_at": "2026-11-17T04:02:44+00:00",
+        "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
+        "event_summary_zh": "Anthropic联合创始人Tom Brown透露，利用Claude Mythos Preview技术，AI模型在AMD GPU上的适配部署时间从数月压缩至三天，且几乎无需人工干预",
+        "event_summary_en": "Anthropic Chief Compute Officer Tom Brown announced that using Claude Mythos Preview, the company reduced the time required to port models to AMD GPUs from 6-12 months to roughly 3 days with minimal human intervention. This strategy aims to bypass the CUDA-centric lock-in and operationalize a heterogeneous compute pool comprising Nvidia GPUs, AMD hardware, Google TPUs, and AWS Trainium.",
         "core_facts_zh": [
-          "【核心事件】Leopold Aschenbrenner（Situational Awareness基金创始人）在美国证券交易委员会（SEC）13F监管备案：三季度末大规模建仓AI及能源基础设施股票与期权，随后资产组合遭遇显著市值折损",
-          "【起因与机理】基金在经历夏季清盘后寻求通过高风险AI主题资产实现财务复苏，但未能抵御AI板块近期因盈利预期疲软引发的回调",
-          "【关键数据与实测】据监管文件显示，该基金持有价值超4.4亿美元的SharonAI股份，以及Cleanspark、IREN、Bitdeer与Fermi等公司的股权，并持有多项内存芯片及数据中心能源企业的看涨期权，但相关标的在10月后均出现大幅度市值回调。",
-          "【行业影响与走向】持仓资产自9月底以来受行业盈利预期不确定性影响，普遍遭遇大幅市值缩水。"
+          "【核心事件】Anthropic联合创始人兼首席算力官Tom Brown在投资者简报会议：通过AI驱动的自动代码生成缩短硬件适配周期，构建异构算力池",
+          "【起因与机理】降低对CUDA生态的依赖，提升数据中心硬件部署效率与采购决策灵活性",
+          "【关键数据与实测】将适配周期从6-12个月压缩至3天，无需深度人工干预。",
+          "【各方立场与态度】建立跨平台硬件适配策略，增强对单一算力供应方的议价能力。"
         ],
         "core_facts_en": [
-          "[Core Event] Leopold Aschenbrenner, Founder of Situational Awareness (US SEC 13F regulatory filing): Heavy re-entry into AI-themed equities and options at Q3 end, followed by significant portfolio value depreciation",
-          "[Root Cause & Mechanism] Attempting a financial comeback after summer liquidation, while failing to hedge against the broader AI sector cooling driven by weak growth outlooks",
-          "[Key Metrics] Regulatory filings reveal a $440 million stake in SharonAI alongside equity in Cleanspark, IREN, Bitdeer, and Fermi, plus call options in memory chip and data center energy plays, all of which have faced significant market sell-offs since October.",
-          "[Key Position & Outlook] Holdings have experienced severe valuation declines since September 30 due to cooling industry growth expectations."
+          "[Core Event] Tom Brown, Co-founder and Chief Compute Officer at Anthropic (Investor briefing): Shortened hardware onboarding time via AI-generated GPU kernels",
+          "[Root Cause & Mechanism] To reduce CUDA dependency and establish a flexible, fungible compute architecture",
+          "[Key Metrics] Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels.",
+          "[Key Position & Outlook] Established a platform-agnostic compute pool to mitigate single-vendor dependency."
         ],
-        "industry_impact_zh": "Aschenbrenner的投资策略集中于AI基础设施的边缘环节与二线标的，其在财务脆弱期仍维持高贝塔值敞口，显示出对AI算力紧缺叙事的极端押注。这种基于单一宏观预测的交易模型在当前AI产业资本支出边际效益递减、市场从“概念追逐”转向“盈利兑现”的转换期内，面临极高的流动性与估值修复双重风险。",
-        "industry_impact_en": "Aschenbrenner’s strategy centers on tertiary AI infrastructure and fringe plays, maintaining high-beta exposure despite extreme financial vulnerability, reflecting an aggressive bet on the persistent compute scarcity narrative. This model faces heightened liquidity and valuation risks as the industry transitions from pure hype-driven allocation to a phase demanding tangible ROI and earnings performance."
+        "industry_impact_zh": "若AI模型能自主生成跨硬件平台的底层算子，英伟达长期构建的CUDA壁垒将面临结构性瓦解，软件定义硬件（SDH）将成为缓解算力供需失衡的终极手段。此举标志着模型厂商正从被动的硬件适配者转向主动的底层架构重构者，使得高端芯片的商业竞争核心从单一的软硬捆绑转向“模型跨平台兼容性”的标准化进程。",
+        "industry_impact_en": "The ability of AI models to autonomously generate low-level kernels for heterogeneous hardware fundamentally erodes Nvidia’s CUDA moat, shifting the competitive landscape from hardware-centric integration to model-agnostic software stacks. This development suggests a strategic transition where model companies dictate infrastructure compatibility, effectively commoditizing underlying hardware accelerators."
       },
       "headlines": [
+        {
+          "id": "348454af17913093",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "Anthropic通过AI自动化实现模型跨硬件高效迁移",
+          "title_en": "Anthropic tells investors Claude Mythos Preview got its AI running on AMD GPUs in ~3 days with \"basically no human intervention\", vs. the usual 6-12 months (Shane Downing/Tom's Hardware)",
+          "source": "Tom's Hardware",
+          "published_at": "2026-11-17T04:02:44+00:00",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
+          "event_summary_zh": "Anthropic联合创始人Tom Brown透露，利用Claude Mythos Preview技术，AI模型在AMD GPU上的适配部署时间从数月压缩至三天，且几乎无需人工干预",
+          "event_summary_en": "Anthropic Chief Compute Officer Tom Brown announced that using Claude Mythos Preview, the company reduced the time required to port models to AMD GPUs from 6-12 months to roughly 3 days with minimal human intervention. This strategy aims to bypass the CUDA-centric lock-in and operationalize a heterogeneous compute pool comprising Nvidia GPUs, AMD hardware, Google TPUs, and AWS Trainium.",
+          "core_facts_zh": [
+            "【核心事件】Anthropic联合创始人兼首席算力官Tom Brown在投资者简报会议：通过AI驱动的自动代码生成缩短硬件适配周期，构建异构算力池",
+            "【起因与机理】降低对CUDA生态的依赖，提升数据中心硬件部署效率与采购决策灵活性",
+            "【关键数据与实测】将适配周期从6-12个月压缩至3天，无需深度人工干预。",
+            "【各方立场与态度】建立跨平台硬件适配策略，增强对单一算力供应方的议价能力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Tom Brown, Co-founder and Chief Compute Officer at Anthropic (Investor briefing): Shortened hardware onboarding time via AI-generated GPU kernels",
+            "[Root Cause & Mechanism] To reduce CUDA dependency and establish a flexible, fungible compute architecture",
+            "[Key Metrics] Getting “Claude running on AMD”; Claude “ported or wrote almost 100% of the kernels.",
+            "[Key Position & Outlook] Established a platform-agnostic compute pool to mitigate single-vendor dependency."
+          ],
+          "industry_impact_zh": "若AI模型能自主生成跨硬件平台的底层算子，英伟达长期构建的CUDA壁垒将面临结构性瓦解，软件定义硬件（SDH）将成为缓解算力供需失衡的终极手段。此举标志着模型厂商正从被动的硬件适配者转向主动的底层架构重构者，使得高端芯片的商业竞争核心从单一的软硬捆绑转向“模型跨平台兼容性”的标准化进程。",
+          "industry_impact_en": "The ability of AI models to autonomously generate low-level kernels for heterogeneous hardware fundamentally erodes Nvidia’s CUDA moat, shifting the competitive landscape from hardware-centric integration to model-agnostic software stacks. This development suggests a strategic transition where model companies dictate infrastructure compatibility, effectively commoditizing underlying hardware accelerators."
+        },
         {
           "id": "0d4f34b78258a09d",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "黄仁勋时代的个人集权治理模式已随其离职瓦解，英伟达目前面临严重的权力交接合规风险与内部信任断层。对于临时领导层而言，肃清黄氏家族在运营流程中的过度干扰是稳定资本市场预期、剥离地缘安全敏感度（China exposure）的必要财务与治理重塑手段。",
           "industry_impact_en": "The departure of Jensen Huang signals the collapse of his centralized governance model, leaving Nvidia vulnerable to significant compliance risks and internal trust deficits. The interim leadership must prioritize the immediate pruning of family-influenced power structures to restore investor confidence and mitigate the escalating geopolitical security scrutiny surrounding the firm's legacy ties."
-        },
-        {
-          "id": "8761a66a6f21b33f",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "苹果macOS 15.3 beta加强AI应用访问权限限制",
-          "title_en": "macOS 27.3 beta warns if an app would get full device control, nudging users to \"Choose Apps\" for the app to control instead, brought on by AI apps' popularity (Juli Clover/MacRumors)",
-          "source": "MacRumors",
-          "published_at": "2026-11-17T02:31:00+00:00",
-          "url": "https://www.macrumors.com/2026/11/16/macos-27-3-full-desk-access/",
-          "event_summary_zh": "苹果在macOS 15.3 beta中升级了全盘访问与设备控制权限接口，要求应用处理更细粒度的授权请求，以防范AI代理潜在的数据安全风险",
-          "event_summary_en": "Apple introduced stricter compliance requirements for Full Disk Access and Device Control APIs in the macOS 15.3 beta. Developers must refine onboarding processes to handle granular access permissions, specifically targeting AI agents to mitigate risks of unauthorized data exposure in emails, messages, and browsing history.",
-          "core_facts_zh": [
-            "【核心事件】苹果公司（Apple Inc.）在macOS 15.3操作系统开发环境：强制实施全盘访问权限（Full Disk Access）和设备控制API的升级，引入“选择应用”授权模式",
-            "【起因与机理】应对AI代理工具过度索取系统权限导致的用户敏感数据泄露风险",
-            "【调查与监管诉求】核心调查与诉求：苹果要求AI应用开发者必须调整权限申请逻辑，避免全盘访问滥用。",
-            "【行业影响与走向】后续影响：现有授权保持不变，新应用需在系统弹窗中引导用户进行显式授权以确保存储安全。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Apple Inc. (macOS 15.3 development environment): Overhauled Full Disk Access and Device Control APIs, introducing 'Choose Apps' authorization models",
-            "[Root Cause & Mechanism] Mitigate data leakage risks posed by AI agents over-requesting system-level permissions",
-            "[Key Technical Spec] Core demand: Developers must adjust permission requests to prevent abuse of full disk access by AI agents.",
-            "[Key Position & Outlook] Outlook: Existing permissions remain, but new apps must prompt users for specific access to maintain security integrity."
-          ],
-          "industry_impact_zh": "此举标志着操作系统底层逻辑正从“信任应用全权访问”向“最小权限原则”的强制性转型，苹果通过技术围栏直接遏制AI代理作为黑盒程序的潜在破坏力。这不仅迫使AI应用开发者调整架构，也进一步巩固了Apple在生态系统合规性上的绝对控制权，使AI产品的部署门槛向系统底层隐私沙盒靠拢。",
-          "industry_impact_en": "This shift marks a fundamental transition from full-trust application models to mandatory least-privilege architectures, with Apple using system barriers to contain the potential destructiveness of black-box AI agents. It forces developers to restructure AI workflows while reinforcing Apple's centralized control over ecosystem compliance, pushing AI deployments toward stricter privacy sandboxes."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 04:05:57 UTC",
+      "updated_at": "2026-11-17 04:21:20 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 04:05:57 UTC",
+      "updated_at": "2026-11-17 04:21:20 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,673)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,675)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,673 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,675 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
