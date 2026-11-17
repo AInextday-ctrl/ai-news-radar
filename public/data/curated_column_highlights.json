@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 17:21:29 UTC",
+  "generated_at": "2026-11-17 17:43:25 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 17:21:29 UTC",
+      "updated_at": "2026-11-17 17:43:25 UTC",
       "headline_item": {
-        "id": "3db66dcc75bc6c8c",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "顶级AI模型在战争模拟测试中频繁误伤平民目标",
-        "title_en": "Anthropic, Other AI Models Regularly Identify Civilians as Military Targets in Tests",
-        "source": "Bloomberg",
-        "published_at": "2026-11-17T17:10:00+00:00",
-        "url": "https://www.bloomberg.com/news/articles/2026-11-17/top-ai-models-regularly-identify-civilians-as-military-targets-in-tests",
-        "event_summary_zh": "独立评估机构Vals的测试显示，Anthropic等主流AI模型在军事目标识别模拟中，常将平民设施及人员标记为打击目标",
-        "event_summary_en": "San Francisco-based AI evaluator Vals tested advanced AI models in simulated combat scenarios, revealing frequent misidentification of ambulances, schools, and surrendering soldiers as military targets. Anthropic's models exhibited the highest error rates and most aggressive misclassifications, while OpenAI’s models, despite relatively better performance, still demonstrated significant failure in adherence to safety protocols.",
+        "id": "6dcc3a7927ea2b20",
+        "tag_zh": "💼 商业落地",
+        "tag_en": "💼 Business Cases",
+        "title_zh": "英伟达隐匿新加坡业务营收及黄仁勋卸任CEO",
+        "title_en": "Docs: Nvidia stopped reporting Singapore unit revenue in 2025 as it accounted for nearly 50% of global revenue; the unit's revenue rose 72% YoY to $104B in 2025 (Financial Times)",
+        "source": "Financial Times",
+        "published_at": "2026-11-17T17:30:01+00:00",
+        "url": "https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf",
+        "event_summary_zh": "英伟达在面临芯片转运违规调查背景下，于2025年起停止单独披露新加坡营收，创始人黄仁勋宣布卸任",
+        "event_summary_en": "Nvidia co-founder Jensen Huang has stepped down as CEO, with CFO Colette Kress assuming the role on an interim basis. Following reports that major client Megaspeed allegedly diverted $7.5 billion in chips to China, Nvidia blacklisted the firm in June 2025 and ceased granular reporting of Singapore-based revenue, which previously accounted for nearly 50% of the company's total.",
         "core_facts_zh": [
-          "【核心事件】旧金山AI评估机构Vals；Anthropic PBC；OpenAI：AI模型在军事模拟测试中频繁误伤平民，且违反了企业内部制定的安全准则",
-          "【起因与机理】AI模型在处理高风险战争博弈决策时，其视觉识别与意图判断逻辑存在严重的算法对齐失效",
-          "【关键技术规格】Vals测试显示Anthropic模型在军事识别中误判率极高。",
-          "【各方立场与态度】测试结果直接冲击大模型进入防务领域的安全性合规底线。"
+          "【核心事件】英伟达（Nvidia）、前CEO黄仁勋、代理CEO科莱特·克雷斯（Colette Kress）、Megaspeed公司在美国、新加坡市场及企业财务报告：黄仁勋卸任CEO，英伟达停止披露新加坡营收，并对涉嫌违规转运的Megaspeed实施禁运",
+          "【起因与机理】Megaspeed涉嫌违反美国出口管制将高端芯片非法转运至中国，引发监管调查与企业治理动荡",
+          "【关键数据与实测】Megaspeed涉嫌向中国转运75亿美元芯片，英伟达对其采取封锁措施。",
+          "【各方立场与态度】英伟达修改财务审计披露准则，停止披露新加坡市场营收数据。"
         ],
         "core_facts_en": [
-          "[Core Event] Independent evaluator Vals; Anthropic PBC; OpenAI: AI models misidentified civilians and infrastructure as military targets, violating corporate safety policies",
-          "[Root Cause & Mechanism] Failure in algorithmic alignment and intent recognition during high-stakes combat simulations",
-          "[Key Technical Spec] Vals findings indicate high failure rates in Anthropic models during military target identification.",
-          "[Key Position & Outlook] Implications for AI deployment in defense sectors and rigorous compliance requirements."
+          "[Core Event] Nvidia, former CEO Jensen Huang, interim CEO Colette Kress, Megaspeed: Jensen Huang resigned; Nvidia stopped reporting Singapore revenue and blacklisted Megaspeed for export violations",
+          "[Root Cause & Mechanism] Megaspeed allegedly diverted high-end chips to China, triggering regulatory scrutiny and corporate management overhaul",
+          "[Key Metrics] Megaspeed suspected of diverting $7.5B in chips; Nvidia blacklisted the firm.",
+          "[Key Position & Outlook] Nvidia ceases reporting Singapore revenue amid compliance scrutiny."
         ],
-        "industry_impact_zh": "此项研究揭示了生成式AI在致命性自主武器系统（LAWS）应用中的致命软肋，即算法对复杂战地环境的上下文推理逻辑存在结构性缺陷。该测试结果将极大影响五角大楼等国防客户对现有商业大模型的采纳策略，强制要求闭源模型必须在安全围栏与逻辑对齐上进行根本性重构，否则将面临严苛的出口管制与合规准入压力。",
-        "industry_impact_en": "This research exposes structural flaws in reasoning and context-awareness within generative AI models when applied to lethal autonomous weapons systems (LAWS). These findings will inevitably force the Department of Defense and similar stakeholders to re-evaluate the procurement of commercial LLMs, mandating significant breakthroughs in safety-alignment to avoid regulatory restrictions and potential liability."
+        "industry_impact_zh": "英伟达通过隐匿新加坡区域营收掩盖单一地理市场过度依赖及供应链合规风险的策略宣告破产，此举暴露了高端算力出口管制执行层面的系统性漏洞。随着核心掌舵人更替，英伟达将进入被迫重塑全球合规框架与供应链透明度的痛苦转型期。",
+        "industry_impact_en": "Nvidia's attempt to obfuscate its dependence on the Singaporean market through accounting shifts highlights the fragility of its export compliance architecture. The leadership transition marks a forced strategic pivot towards extreme supply chain transparency to mitigate systemic geopolitical risks and potential secondary sanctions."
       },
       "headlines": [
+        {
+          "id": "6dcc3a7927ea2b20",
+          "tag_zh": "💼 商业落地",
+          "tag_en": "💼 Business Cases",
+          "title_zh": "英伟达隐匿新加坡业务营收及黄仁勋卸任CEO",
+          "title_en": "Docs: Nvidia stopped reporting Singapore unit revenue in 2025 as it accounted for nearly 50% of global revenue; the unit's revenue rose 72% YoY to $104B in 2025 (Financial Times)",
+          "source": "Financial Times",
+          "published_at": "2026-11-17T17:30:01+00:00",
+          "url": "https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf",
+          "event_summary_zh": "英伟达在面临芯片转运违规调查背景下，于2025年起停止单独披露新加坡营收，创始人黄仁勋宣布卸任",
+          "event_summary_en": "Nvidia co-founder Jensen Huang has stepped down as CEO, with CFO Colette Kress assuming the role on an interim basis. Following reports that major client Megaspeed allegedly diverted $7.5 billion in chips to China, Nvidia blacklisted the firm in June 2025 and ceased granular reporting of Singapore-based revenue, which previously accounted for nearly 50% of the company's total.",
+          "core_facts_zh": [
+            "【核心事件】英伟达（Nvidia）、前CEO黄仁勋、代理CEO科莱特·克雷斯（Colette Kress）、Megaspeed公司在美国、新加坡市场及企业财务报告：黄仁勋卸任CEO，英伟达停止披露新加坡营收，并对涉嫌违规转运的Megaspeed实施禁运",
+            "【起因与机理】Megaspeed涉嫌违反美国出口管制将高端芯片非法转运至中国，引发监管调查与企业治理动荡",
+            "【关键数据与实测】Megaspeed涉嫌向中国转运75亿美元芯片，英伟达对其采取封锁措施。",
+            "【各方立场与态度】英伟达修改财务审计披露准则，停止披露新加坡市场营收数据。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nvidia, former CEO Jensen Huang, interim CEO Colette Kress, Megaspeed: Jensen Huang resigned; Nvidia stopped reporting Singapore revenue and blacklisted Megaspeed for export violations",
+            "[Root Cause & Mechanism] Megaspeed allegedly diverted high-end chips to China, triggering regulatory scrutiny and corporate management overhaul",
+            "[Key Metrics] Megaspeed suspected of diverting $7.5B in chips; Nvidia blacklisted the firm.",
+            "[Key Position & Outlook] Nvidia ceases reporting Singapore revenue amid compliance scrutiny."
+          ],
+          "industry_impact_zh": "英伟达通过隐匿新加坡区域营收掩盖单一地理市场过度依赖及供应链合规风险的策略宣告破产，此举暴露了高端算力出口管制执行层面的系统性漏洞。随着核心掌舵人更替，英伟达将进入被迫重塑全球合规框架与供应链透明度的痛苦转型期。",
+          "industry_impact_en": "Nvidia's attempt to obfuscate its dependence on the Singaporean market through accounting shifts highlights the fragility of its export compliance architecture. The leadership transition marks a forced strategic pivot towards extreme supply chain transparency to mitigate systemic geopolitical risks and potential secondary sanctions."
+        },
+        {
+          "id": "d2ab23c4a8f03d9f",
+          "tag_zh": "⚡ 职场提效",
+          "tag_en": "⚡ Workplace AI",
+          "title_zh": "Take-Two旗下Firaxis工作室裁员三分之一",
+          "title_en": "Take-Two’s Firaxis, Maker of ‘Civilization,’ Cuts a Third of Its Staff",
+          "source": "Bloomberg",
+          "published_at": "2026-11-17T17:20:01+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-17/take-two-s-firaxis-maker-of-civilization-cuts-a-third-of-its-staff?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NDkzMjgwNywiZXhwIjoxNzk1NTM3NjA3LCJhcnRpY2xlSWQiOiJUT05OMDlLSUpIOTQwMCIsImJjb25uZWN0SWQiOiJCMUVBQkI5NjQ2QUM0REZFQTJBRkI4MjI1MzgyQTJFQSJ9.UB2VStiHDC6AEPIoF0t33xZ72QVmViJYS4hB0UM7vs8&leadSource=article-gifting",
+          "event_summary_zh": "Firaxis工作室裁员约60人，工作室主管希瑟·哈森离职，后续产品开发面临开发困境",
+          "event_summary_en": "Take-Two Interactive's subsidiary Firaxis Games is cutting approximately one-third of its staff, totaling roughly 60 employees, alongside the departure of studio head Heather Hazen. The restructuring follows significant development struggles regarding the studio's upcoming XCOM title.",
+          "core_facts_zh": [
+            "【核心事件】Take-Two Interactive、Firaxis工作室、前工作室主管希瑟·哈森（Heather Hazen）在游戏工作室内部组织架构调整：裁员约60人并更换高管，项目研发受阻",
+            "【起因与机理】新产品开发进程未达预期，面临严峻的财务与资源优化压力",
+            "【关键数据与实测】Firaxis裁员约60人，占总员工的三分之一。",
+            "【各方立场与态度】XCOM新作开发进度受阻，面临运营优化压力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Take-Two Interactive, Firaxis Games, former studio head Heather Hazen (Internal studio restructuring): 60 layoffs, leadership change, and project delays",
+            "[Root Cause & Mechanism] Development struggles with upcoming titles and financial optimization needs",
+            "[Key Fact Detail] Firaxis cuts 60 staff, representing one-third of the workforce.",
+            "[Key Position & Outlook] XCOM project faces development struggles and operational pressure."
+          ],
+          "industry_impact_zh": "顶级策略游戏制作组的动荡反映了精品化开发周期与当前游戏市场长周期回报之间的结构性矛盾。在高研发成本与商业变现压力下，传统游戏大厂倾向于通过削减冗余团队来应对大型IP交付延期的风险。",
+          "industry_impact_en": "The turbulence at a premier strategy studio highlights the structural conflict between long-cycle premium development and market expectations for short-term returns. Faced with soaring R&D costs, major publishers are increasingly prioritizing headcount reduction to manage the risk of delayed delivery on legacy IPs."
+        },
         {
           "id": "3db66dcc75bc6c8c",
           "tag_zh": "📰 业界动态",
@@ -52,69 +104,17 @@
           "core_facts_en": [
             "[Core Event] Independent evaluator Vals; Anthropic PBC; OpenAI: AI models misidentified civilians and infrastructure as military targets, violating corporate safety policies",
             "[Root Cause & Mechanism] Failure in algorithmic alignment and intent recognition during high-stakes combat simulations",
-            "[Key Technical Spec] Vals findings indicate high failure rates in Anthropic models during military target identification.",
+            "[Key Metrics] 5 selecting the school in 69% of ordinary trials and 72% of game-framed trials.",
             "[Key Position & Outlook] Implications for AI deployment in defense sectors and rigorous compliance requirements."
           ],
           "industry_impact_zh": "此项研究揭示了生成式AI在致命性自主武器系统（LAWS）应用中的致命软肋，即算法对复杂战地环境的上下文推理逻辑存在结构性缺陷。该测试结果将极大影响五角大楼等国防客户对现有商业大模型的采纳策略，强制要求闭源模型必须在安全围栏与逻辑对齐上进行根本性重构，否则将面临严苛的出口管制与合规准入压力。",
           "industry_impact_en": "This research exposes structural flaws in reasoning and context-awareness within generative AI models when applied to lethal autonomous weapons systems (LAWS). These findings will inevitably force the Department of Defense and similar stakeholders to re-evaluate the procurement of commercial LLMs, mandating significant breakthroughs in safety-alignment to avoid regulatory restrictions and potential liability."
-        },
-        {
-          "id": "66535e832b1b3879",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达董事会拒绝前CEO黄仁勋复职请求",
-          "title_en": "Source: Nvidia's board is not considering reinstating Huang, after he released a statement saying he \"made serious mistakes\" and fell below \"the standards\" (CNN)",
-          "source": "CNN",
-          "published_at": "2026-11-17T17:00:54+00:00",
-          "url": "http://www.cnn.com/2026/11/17/business/jensen-huang-nvidia-ceo-statement",
-          "event_summary_zh": "英伟达前CEO黄仁勋因私生活丑闻及潜在国家安全风险辞职后申请复职，遭董事会明确拒绝",
-          "event_summary_en": "Former Nvidia CEO Jensen Huang has requested reinstatement after his resignation following personal misconduct scandals and an investigation into ties with a potential foreign intelligence asset; however, the board has rejected the bid. Despite endorsements from President Donald Trump and Silicon Valley figures, the company’s governing body prioritizes risk mitigation regarding corporate compliance and geopolitical scrutiny over leadership continuity.",
-          "core_facts_zh": [
-            "【核心事件】黄仁勋（英伟达前CEO）、英伟达董事会、美国总统唐纳德·特朗普在硅谷科技界及华盛顿决策层：黄仁勋请求复职遭拒，公司对其个人丑闻及与Alice Huang的关联进行深度审查",
-            "【起因与机理】涉及个人私生活丑闻及与潜在外国情报关联的国家安全审查风险",
-            "【调查与监管诉求】黄仁勋因私生活争议与潜在情报关联调查辞职，申请复职被董事会否决。",
-            "【涉及范围与推进】后续进展取决于针对Alice Huang关系的美国情报部门审查结果。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Jensen Huang (Former CEO of Nvidia), Nvidia Board of Directors, Donald Trump (US President): Huang's reinstatement request rejected; board conducting reviews on personal misconduct and potential intelligence ties",
-            "[Root Cause & Mechanism] Personal scandal and national security implications surrounding ties to a potential foreign intelligence asset",
-            "[Key Fact Detail] Huang's reinstatement rejected following resignation over misconduct and intelligence concerns.",
-            "[Scope & Next Steps] Future developments pending US intelligence investigation into relationships."
-          ],
-          "industry_impact_zh": "英伟达作为全球AI算力基础设施的核心，其治理结构的变动已上升为国家安全范畴，任何潜在的情报风险均会触发董事会的断然切割。此次拒绝复职反映出科技巨头在应对复杂地缘摩擦时，已将合规红线与品牌安全性置于创始人个人能力之上，旨在向资本市场与监管机构传递治理稳健的信号。",
-          "industry_impact_en": "Nvidia’s governance has become a matter of national security given its critical role in AI infrastructure, forcing the board to prioritize risk containment over individual leadership. This rejection signals that for hyperscale tech entities, corporate compliance and geopolitical safety now supersede founder legacy in the eyes of regulators and institutional investors."
-        },
-        {
-          "id": "93d3b1f1b7d8da7f",
-          "tag_zh": "⚡ 职场提效",
-          "tag_en": "⚡ Workplace AI",
-          "title_zh": "OpenAI推出GPT-6系列医疗自动化智能体",
-          "title_en": "AI agents are starting to fill out medical forms and file insurance requests in place of human staff",
-          "source": "THE DECODER",
-          "published_at": "2026-11-17T16:55:47+00:00",
-          "url": "https://the-decoder.com/ai-agents-are-starting-to-fill-out-medical-forms-and-file-insurance-requests-in-place-of-human-staff/",
-          "event_summary_zh": "OpenAI推出GPT-6 Astra与Luna模型，旨在通过自动操作UI处理医疗行政与保险文书",
-          "event_summary_en": "OpenAI has introduced GPT-6 Astra and Luna models designed to automate administrative tasks by interacting with electronic health records (EHR) and insurance portals via UI automation. With a 94.3% accuracy rate on the Stanford HealthAdminBench, these models are now being integrated via API by partners like CVS Health to streamline high-volume healthcare workflows.",
-          "core_facts_zh": [
-            "【核心事件】OpenAI在医疗机构行政与保险审核系统：发布GPT-6 Astra与Luna模型，通过API自动处理病历数据与医疗保险预授权申请",
-            "【起因与机理】针对医疗行业API匮乏的现状，降低人工行政处理成本并提升临床效率",
-            "【关键数据与实测】在Stanford HealthAdminBench测试中模型准确率高达94.3%，且成本大幅降低。",
-            "【各方立场与态度】已与CVS Health等机构合作，主要应用于病历转录、保险预授权与医疗预约处理。"
-          ],
-          "core_facts_en": [
-            "[Core Event] OpenAI: Launched GPT-6 Astra and Luna models to automate health record management and insurance pre-authorizations via API",
-            "[Root Cause & Mechanism] Addressing the lack of APIs in healthcare to reduce administrative costs and improve clinical efficiency",
-            "[Key Metrics] Achieved 94.3% accuracy on Stanford HealthAdminBench with optimized API pricing.",
-            "[Key Position & Outlook] Pilot programs active at CVS Health for clinical referrals and insurance workflows."
-          ],
-          "industry_impact_zh": "医疗行业的自动化瓶颈在于高度碎片化的遗留系统与缺乏开放API，OpenAI的Agent-to-UI路径绕过了传统IT改造难度，直接通过视觉模拟人类操作，是LLM从生成式辅助向执行式生产力转化的关键节点。这一技术路线将显著降低保险审核与医院行政运维成本，但也对现有的数据合规性审查机制提出了更严峻的合规与信任挑战。",
-          "industry_impact_en": "The bottleneck in healthcare automation lies in fragmented legacy systems and lack of APIs; OpenAI's Agent-to-UI approach circumvents these barriers by simulating human interaction, marking a pivot from generative assistance to agentic execution. While this drastically lowers administrative overhead, it introduces significant new compliance and security risks for data integrity."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 17:21:29 UTC",
+      "updated_at": "2026-11-17 17:43:25 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -129,10 +129,10 @@
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "59.4k",
-        "likes": "496",
-        "comments": "16",
-        "retweets": "24",
+        "views": "68.5k",
+        "likes": "550",
+        "comments": "17",
+        "retweets": "26",
         "platform": "x",
         "verified": true
       },
@@ -155,10 +155,10 @@
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "59.4k",
-            "likes": "496",
-            "comments": "16",
-            "retweets": "24",
+            "views": "68.5k",
+            "likes": "550",
+            "comments": "17",
+            "retweets": "26",
             "platform": "x",
             "verified": true
           },
@@ -183,10 +183,10 @@
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "3.1k",
-            "likes": "62",
-            "comments": "15",
-            "retweets": "2",
+            "views": "16.5k",
+            "likes": "366",
+            "comments": "46",
+            "retweets": "20",
             "platform": "x",
             "verified": true
           },
@@ -202,7 +202,7 @@
           "avatar": "https://unavatar.io/openai",
           "topic_zh": "AI 编程范式变革",
           "topic_en": "AI Coding & Engineering",
-          "event_context_zh": "RT @phiandersson：在旧金山举行的@aiDotEngineer 代码峰会上为期两天。最好的对话发生在我们的@OpenAI 休息室，那里的构建者分享了他们如何与我们构建以及我们可以改进的地方。",
+          "event_context_zh": "RT @phiandersson：在旧金山举行的@aiDotEngineer 代码峰会上为期两天。最好的对话发生在我们的@OpenAI 休息室，那里的构建者分享了他们如何与我们构建以及我们可以改进的地方。。",
           "event_context_en": "RT @phiandersson: Two days at the @aiDotEngineer Code Summit in SF. The best conversations happened at our @OpenAI loung",
           "quote_zh": "RT @phiandersson：在旧金山举行的@aiDotEngineer 代码峰会上为期两天。最好的对话发生在我们的@OpenAI 休息室，那里的构建者分享了他们如何与我们构建以及我们可以改进的地方。",
           "quote_en": "RT @phiandersson: Two days at the @aiDotEngineer Code Summit in SF. The best conversations happened at our @OpenAI lounge where builders shared how they are building with us and what we can improve on. https://t.co/5wJwwqv8Xo",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 17:21:29 UTC",
+      "updated_at": "2026-11-17 17:43:25 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,933)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,941)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,933 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,941 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
