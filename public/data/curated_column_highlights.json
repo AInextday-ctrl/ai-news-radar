@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 19:18:59 UTC",
+  "generated_at": "2026-11-17 19:36:03 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 19:18:59 UTC",
+      "updated_at": "2026-11-17 19:36:03 UTC",
       "headline_item": {
-        "id": "54ecb7a012a52ca5",
+        "id": "affc55a93864acb9",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "谷歌延长Gemini临时对话留存期至两个月",
-        "title_en": "Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)",
+        "title_zh": "苹果云服务与应用商店大面积宕机",
+        "title_en": "Apple's System Status page shows an outage affecting iCloud sign-in for \"all users\", the App Store, and Apple Music; some users report failed iPhone activations (Sarah Perez/TechCrunch)",
         "source": "TechCrunch",
-        "published_at": "2026-11-17T19:00:47+00:00",
-        "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
-        "event_summary_zh": "谷歌将Gemini临时聊天记录的保留周期从72小时大幅延长至约两个月，并实现对话记录与模型训练的解耦",
-        "event_summary_en": "Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.",
+        "published_at": "2026-11-17T19:25:01+00:00",
+        "url": "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
+        "event_summary_zh": "苹果系统状态页面显示，包括iCloud登录、App Store及Apple Music在内的多项核心服务出现全球性中断",
+        "event_summary_en": "Apple's system status page confirmed a global service outage affecting iCloud login, App Store, Apple Music, and Apple School Manager, with some users reporting failure to activate new iPhones. This incident follows closely after Microsoft's recent cloud service failure, intensifying market concerns regarding the structural vulnerability of centralized cloud architectures.",
         "core_facts_zh": [
-          "【核心事件】Google（谷歌）：将临时聊天数据存储期限从72小时延长至约两个月，并实现聊天记录存储与AI模型训练的可独立控制",
-          "【起因与机理】旨在应对AI系统复杂性，增强安全审计、故障诊断能力及用户反馈处理需求",
-          "【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。",
-          "【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。"
+          "【核心事件】苹果公司（Apple Inc.）在全球云基础设施与Apple系统状态页面：iCloud登录、App Store、Apple Music及设备激活功能出现大规模技术性故障",
+          "【起因与机理】因软件或基础设施底层架构的技术问题（尚未证实为网络攻击）",
+          "【核心事实细节】苹果核心生态服务（iCloud、App Store、Apple Music）发生全球性不可用故障。",
+          "【各方立场与态度】近期云服务厂商接连发生软件性宕机，凸显全球云基础设施在灾备与级联防御上的薄弱环节。"
         ],
         "core_facts_en": [
-          "[Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.",
-          "[Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.",
-          "[Key Fact Detail] Google extended temporary chat retention to approximately two months.",
-          "[Key Position & Outlook] Temporary conversations remain excluded from AI training data."
+          "[Core Event] Apple Inc. (Global cloud infrastructure): Widespread service outages affecting iCloud, App Store, Apple Music, and device activation",
+          "[Root Cause & Mechanism] Underlying software/infrastructure technical glitches (unrelated to cyberattacks)",
+          "[Key Fact Detail] Major Apple ecosystem services including iCloud and App Store suffered global outages.",
+          "[Scope & Next Steps] Sequential cloud service failures across the industry highlight systemic weaknesses in disaster recovery and cascading error prevention."
         ],
-        "industry_impact_zh": "延长留存期是谷歌在数据安全合规与算法鲁棒性博弈间的权衡，通过将留存数据与模型训练彻底切割，谷歌在缓解隐私舆论压力的同时，获得了更长的时间窗口进行内控审计与安全迭代。这种设置逻辑暗示了当前主流AI厂商正在从简单的全量数据收集转向分层的细粒度数据管控，以应对日益严格的全球数据保护法规要求。",
-        "industry_impact_en": "The retention extension reflects Google's balancing act between data compliance and system robustness, leveraging the decoupling of storage from model training to secure a wider window for security auditing without violating user trust. This strategic shift signals an industry-wide move toward granular data control, aimed at navigating tightening global data protection regulations."
+        "industry_impact_zh": "此次密集的技术故障暴露了头部科技企业在追求全球化、高并发部署中对底层软件调度系统的过度依赖，任何单一故障点（Single Point of Failure）的级联效应均会对全球业务连续性构成严重威胁。云端生态系统的闭环程度越高，一旦触发服务层异常，其跨地域、跨业务线的同步崩塌将对品牌信用与用户资产安全产生难以估量的负面效应。",
+        "industry_impact_en": "These frequent outages reveal an over-reliance on centralized underlying software scheduling systems by hyperscalers, where single points of failure trigger cascading global disruptions. The tighter the integration of cloud ecosystems, the greater the catastrophic risk to brand equity and user asset security when fundamental operational layers suffer synchronization failures."
       },
       "headlines": [
         {
-          "id": "54ecb7a012a52ca5",
+          "id": "affc55a93864acb9",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "谷歌延长Gemini临时对话留存期至两个月",
-          "title_en": "Google updates Gemini Privacy Hub to extend its retention period for temporary chats and chats with history turned off from 72 hours to around two months (Jagmeet Singh/TechCrunch)",
+          "title_zh": "苹果云服务与应用商店大面积宕机",
+          "title_en": "Apple's System Status page shows an outage affecting iCloud sign-in for \"all users\", the App Store, and Apple Music; some users report failed iPhone activations (Sarah Perez/TechCrunch)",
           "source": "TechCrunch",
-          "published_at": "2026-11-17T19:00:47+00:00",
-          "url": "https://techcrunch.com/2026/11/17/google-to-keep-gemini-chats-for-two-months-up-from-72-hours-even-with-history-off/",
-          "event_summary_zh": "谷歌将Gemini临时聊天记录的保留周期从72小时大幅延长至约两个月，并实现对话记录与模型训练的解耦",
-          "event_summary_en": "Google updated its Gemini Apps Privacy Hub to extend the retention period for temporary chats from 72 hours to approximately two months. The company stated this change aims to improve system safety and incident response, explicitly noting that these conversations remain excluded from AI model training. Additionally, Google decoupled chat history retention from model training permissions, allowing users to maintain logs without contributing to model development.",
+          "published_at": "2026-11-17T19:25:01+00:00",
+          "url": "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
+          "event_summary_zh": "苹果系统状态页面显示，包括iCloud登录、App Store及Apple Music在内的多项核心服务出现全球性中断",
+          "event_summary_en": "Apple's system status page confirmed a global service outage affecting iCloud login, App Store, Apple Music, and Apple School Manager, with some users reporting failure to activate new iPhones. This incident follows closely after Microsoft's recent cloud service failure, intensifying market concerns regarding the structural vulnerability of centralized cloud architectures.",
           "core_facts_zh": [
-            "【核心事件】Google（谷歌）：将临时聊天数据存储期限从72小时延长至约两个月，并实现聊天记录存储与AI模型训练的可独立控制",
-            "【起因与机理】旨在应对AI系统复杂性，增强安全审计、故障诊断能力及用户反馈处理需求",
-            "【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。",
-            "【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。"
+            "【核心事件】苹果公司（Apple Inc.）在全球云基础设施与Apple系统状态页面：iCloud登录、App Store、Apple Music及设备激活功能出现大规模技术性故障",
+            "【起因与机理】因软件或基础设施底层架构的技术问题（尚未证实为网络攻击）",
+            "【核心事实细节】苹果核心生态服务（iCloud、App Store、Apple Music）发生全球性不可用故障。",
+            "【各方立场与态度】近期云服务厂商接连发生软件性宕机，凸显全球云基础设施在灾备与级联防御上的薄弱环节。"
           ],
           "core_facts_en": [
-            "[Core Event] Google (Gemini Apps Privacy Hub): Extended temporary chat retention to approx. two months and decoupled chat history from AI training settings.",
-            "[Root Cause & Mechanism] To improve safety, system security, and troubleshooting capabilities while addressing user control over data usage.",
-            "[Key Fact Detail] Google extended temporary chat retention to approximately two months.",
-            "[Key Position & Outlook] Temporary conversations remain excluded from AI training data."
+            "[Core Event] Apple Inc. (Global cloud infrastructure): Widespread service outages affecting iCloud, App Store, Apple Music, and device activation",
+            "[Root Cause & Mechanism] Underlying software/infrastructure technical glitches (unrelated to cyberattacks)",
+            "[Key Fact Detail] Major Apple ecosystem services including iCloud and App Store suffered global outages.",
+            "[Scope & Next Steps] Sequential cloud service failures across the industry highlight systemic weaknesses in disaster recovery and cascading error prevention."
           ],
-          "industry_impact_zh": "延长留存期是谷歌在数据安全合规与算法鲁棒性博弈间的权衡，通过将留存数据与模型训练彻底切割，谷歌在缓解隐私舆论压力的同时，获得了更长的时间窗口进行内控审计与安全迭代。这种设置逻辑暗示了当前主流AI厂商正在从简单的全量数据收集转向分层的细粒度数据管控，以应对日益严格的全球数据保护法规要求。",
-          "industry_impact_en": "The retention extension reflects Google's balancing act between data compliance and system robustness, leveraging the decoupling of storage from model training to secure a wider window for security auditing without violating user trust. This strategic shift signals an industry-wide move toward granular data control, aimed at navigating tightening global data protection regulations."
+          "industry_impact_zh": "此次密集的技术故障暴露了头部科技企业在追求全球化、高并发部署中对底层软件调度系统的过度依赖，任何单一故障点（Single Point of Failure）的级联效应均会对全球业务连续性构成严重威胁。云端生态系统的闭环程度越高，一旦触发服务层异常，其跨地域、跨业务线的同步崩塌将对品牌信用与用户资产安全产生难以估量的负面效应。",
+          "industry_impact_en": "These frequent outages reveal an over-reliance on centralized underlying software scheduling systems by hyperscalers, where single points of failure trigger cascading global disruptions. The tighter the integration of cloud ecosystems, the greater the catastrophic risk to brand equity and user asset security when fundamental operational layers suffer synchronization failures."
         },
         {
           "id": "2cededdf6305daa5",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 19:18:59 UTC",
+      "updated_at": "2026-11-17 19:36:03 UTC",
       "author": "Demis Hassabis",
       "author_handle": "@demishassabis",
       "author_role_zh": "Google DeepMind CEO / 诺贝尔化学奖得主",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 19:18:59 UTC",
+      "updated_at": "2026-11-17 19:36:03 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
