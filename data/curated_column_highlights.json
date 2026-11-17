@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 02:20:54 UTC",
+  "generated_at": "2026-11-17 02:36:28 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 02:20:54 UTC",
+      "updated_at": "2026-11-17 02:36:28 UTC",
       "headline_item": {
-        "id": "3047cbf6a3dbb9cd",
+        "id": "8761a66a6f21b33f",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美国司法部启动DoorDash收购Instacart反垄断审查",
-        "title_en": "Sources: the US DOJ will review DoorDash's ~$17B acquisition of Instacart; DoorDash has agreed to pay a $1.25B breakup fee if the deal fails antitrust review (Jody Godoy/Reuters)",
-        "source": "Reuters",
-        "published_at": "2026-11-17T00:16:11+00:00",
-        "url": "https://www.reuters.com/world/doordash-instacart-merger-be-reviewed-by-doj-sources-say-2026-11-16/",
-        "event_summary_zh": "美国司法部将审查DoorDash斥资约170亿美元收购Instacart的交易，该协议包含12.5亿美元的终止违约金",
-        "event_summary_en": "The US Department of Justice is launching an antitrust review of DoorDash's proposed $17 billion acquisition of Instacart to assess potential competitive harm in the grocery delivery market. DoorDash has contractually agreed to pay a $1.25 billion breakup fee should the merger fail to receive regulatory clearance.",
+        "title_zh": "苹果macOS 15.3 beta加强AI应用访问权限限制",
+        "title_en": "macOS 27.3 beta warns if an app would get full device control, nudging users to \"Choose Apps\" for the app to control instead, brought on by AI apps' popularity (Juli Clover/MacRumors)",
+        "source": "MacRumors",
+        "published_at": "2026-11-17T02:31:00+00:00",
+        "url": "https://www.macrumors.com/2026/11/16/macos-27-3-full-desk-access/",
+        "event_summary_zh": "苹果在macOS 15.3 beta中升级了全盘访问与设备控制权限接口，要求应用处理更细粒度的授权请求，以防范AI代理潜在的数据安全风险",
+        "event_summary_en": "Apple introduced stricter compliance requirements for Full Disk Access and Device Control APIs in the macOS 15.3 beta. Developers must refine onboarding processes to handle granular access permissions, specifically targeting AI agents to mitigate risks of unauthorized data exposure in emails, messages, and browsing history.",
         "core_facts_zh": [
-          "【核心事件】DoorDash、Instacart、美国司法部(DOJ)在美国反垄断监管审查：启动170亿美元并购审查，设立12.5亿美元违约金",
-          "【起因与机理】旨在巩固杂货配送市场份额，引发对行业竞争水平的担忧",
-          "【关键数据与实测】DOJ启动针对170亿美元并购案的反垄断审查。",
-          "【行业影响与走向】审查核心在于杂货配送市场的竞争格局影响。"
+          "【核心事件】苹果公司（Apple Inc.）在macOS 15.3操作系统开发环境：强制实施全盘访问权限（Full Disk Access）和设备控制API的升级，引入“选择应用”授权模式",
+          "【起因与机理】应对AI代理工具过度索取系统权限导致的用户敏感数据泄露风险",
+          "【调查与监管诉求】核心调查与诉求：苹果要求AI应用开发者必须调整权限申请逻辑，避免全盘访问滥用。",
+          "【行业影响与走向】后续影响：现有授权保持不变，新应用需在系统弹窗中引导用户进行显式授权以确保存储安全。"
         ],
         "core_facts_en": [
-          "[Core Event] DoorDash, Instacart, US Department of Justice (DOJ) (US antitrust regulatory review): Initiation of $17B merger review with a $1.25B breakup fee",
-          "[Root Cause & Mechanism] Strategic push into grocery delivery raising competition concerns",
-          "[Key Metrics] DOJ antitrust review of the $17B acquisition.",
-          "[Key Position & Outlook] Core focus on market competition within grocery delivery."
+          "[Core Event] Apple Inc. (macOS 15.3 development environment): Overhauled Full Disk Access and Device Control APIs, introducing 'Choose Apps' authorization models",
+          "[Root Cause & Mechanism] Mitigate data leakage risks posed by AI agents over-requesting system-level permissions",
+          "[Key Technical Spec] Core demand: Developers must adjust permission requests to prevent abuse of full disk access by AI agents.",
+          "[Key Position & Outlook] Outlook: Existing permissions remain, but new apps must prompt users for specific access to maintain security integrity."
         ],
-        "industry_impact_zh": "此案是美国平台经济领域反垄断审查的高标尺，司法部旨在抑制配送领域的高度集中化趋势，以防范算法定价对终端价格的操纵。若该并购受阻，将迫使DoorDash及同类平台转向通过有机扩张或细分垂直赛道收购来实现增长，而非通过横向合并收割市场。",
-        "industry_impact_en": "This case sets a high benchmark for antitrust scrutiny in the platform economy, with the DOJ aiming to curb extreme concentration in delivery services to prevent algorithmic price manipulation. Should the merger be blocked, it will force DoorDash and its peers to pivot toward organic growth or niche vertical acquisitions rather than horizontal market consolidation."
+        "industry_impact_zh": "此举标志着操作系统底层逻辑正从“信任应用全权访问”向“最小权限原则”的强制性转型，苹果通过技术围栏直接遏制AI代理作为黑盒程序的潜在破坏力。这不仅迫使AI应用开发者调整架构，也进一步巩固了Apple在生态系统合规性上的绝对控制权，使AI产品的部署门槛向系统底层隐私沙盒靠拢。",
+        "industry_impact_en": "This shift marks a fundamental transition from full-trust application models to mandatory least-privilege architectures, with Apple using system barriers to contain the potential destructiveness of black-box AI agents. It forces developers to restructure AI workflows while reinforcing Apple's centralized control over ecosystem compliance, pushing AI deployments toward stricter privacy sandboxes."
       },
       "headlines": [
+        {
+          "id": "8761a66a6f21b33f",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "苹果macOS 15.3 beta加强AI应用访问权限限制",
+          "title_en": "macOS 27.3 beta warns if an app would get full device control, nudging users to \"Choose Apps\" for the app to control instead, brought on by AI apps' popularity (Juli Clover/MacRumors)",
+          "source": "MacRumors",
+          "published_at": "2026-11-17T02:31:00+00:00",
+          "url": "https://www.macrumors.com/2026/11/16/macos-27-3-full-desk-access/",
+          "event_summary_zh": "苹果在macOS 15.3 beta中升级了全盘访问与设备控制权限接口，要求应用处理更细粒度的授权请求，以防范AI代理潜在的数据安全风险",
+          "event_summary_en": "Apple introduced stricter compliance requirements for Full Disk Access and Device Control APIs in the macOS 15.3 beta. Developers must refine onboarding processes to handle granular access permissions, specifically targeting AI agents to mitigate risks of unauthorized data exposure in emails, messages, and browsing history.",
+          "core_facts_zh": [
+            "【核心事件】苹果公司（Apple Inc.）在macOS 15.3操作系统开发环境：强制实施全盘访问权限（Full Disk Access）和设备控制API的升级，引入“选择应用”授权模式",
+            "【起因与机理】应对AI代理工具过度索取系统权限导致的用户敏感数据泄露风险",
+            "【调查与监管诉求】核心调查与诉求：苹果要求AI应用开发者必须调整权限申请逻辑，避免全盘访问滥用。",
+            "【行业影响与走向】后续影响：现有授权保持不变，新应用需在系统弹窗中引导用户进行显式授权以确保存储安全。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Apple Inc. (macOS 15.3 development environment): Overhauled Full Disk Access and Device Control APIs, introducing 'Choose Apps' authorization models",
+            "[Root Cause & Mechanism] Mitigate data leakage risks posed by AI agents over-requesting system-level permissions",
+            "[Key Technical Spec] Core demand: Developers must adjust permission requests to prevent abuse of full disk access by AI agents.",
+            "[Key Position & Outlook] Outlook: Existing permissions remain, but new apps must prompt users for specific access to maintain security integrity."
+          ],
+          "industry_impact_zh": "此举标志着操作系统底层逻辑正从“信任应用全权访问”向“最小权限原则”的强制性转型，苹果通过技术围栏直接遏制AI代理作为黑盒程序的潜在破坏力。这不仅迫使AI应用开发者调整架构，也进一步巩固了Apple在生态系统合规性上的绝对控制权，使AI产品的部署门槛向系统底层隐私沙盒靠拢。",
+          "industry_impact_en": "This shift marks a fundamental transition from full-trust application models to mandatory least-privilege architectures, with Apple using system barriers to contain the potential destructiveness of black-box AI agents. It forces developers to restructure AI workflows while reinforcing Apple's centralized control over ecosystem compliance, pushing AI deployments toward stricter privacy sandboxes."
+        },
         {
           "id": "3047cbf6a3dbb9cd",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "Kalshi此举意在通过收购牌照获得合规入场券，从而将现有的博弈类流量转化为高频金融交易需求。在预测市场面临严峻州级法律挑战的背景下，切入高流动性的股权交易是其缓解单一商业模式风险、提升整体估值溢价的必然选择。",
           "industry_impact_en": "By acquiring a licensed entity, Kalshi is securing its regulatory entry point to convert existing gambling-style traffic into high-frequency financial trading volume. Amidst severe state-level legal challenges, pivoting toward high-liquidity equity trading is a strategic move to mitigate single-business-model risks and enhance overall valuation."
-        },
-        {
-          "id": "87d8b15b1e319080",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Optimizely供应链被攻陷，百余家大型机构面临安全威胁",
-          "title_en": "Researchers find Optimizely serving malicious JavaScript to sites of 178 orgs including Zoom, CNN, HSBC, Salesforce, GitLab, Ledger, BBC, Equifax, IKEA, more (Scott Helme/Report URI Blog)",
-          "source": "Report URI Blog",
-          "published_at": "2026-11-16T23:20:01+00:00",
-          "url": "https://blog.report-uri.com/worlds-largest-brands-infected-with-malware-via-optimizely/",
-          "event_summary_zh": "2026年11月16日，Optimizely平台被植入恶意JavaScript代码，导致包括Zoom、BBC及汇丰银行在内的178家机构网站受感染",
-          "event_summary_en": "The Optimizely Web experimentation platform suffered a supply chain attack where attackers injected malicious code into the Project JavaScript field, affecting 178 organizations including Zoom, CNN, and HSBC. The payload enabled cryptocurrency theft, payment card skimming, data exfiltration, and the delivery of Coruna and DarkSword iOS exploit kits via legitimate CDN scripts.",
-          "core_facts_zh": [
-            "【核心事件】Optimizely（Web实验平台供应商）；受影响机构包括Zoom、CNN、汇丰银行、Salesforce、GitLab等：攻击者通过Optimizely控制面板篡改Project JavaScript，导致下游网站加载恶意脚本，引发资产窃取与iOS漏洞攻击",
-            "【起因与机理】第三方依赖项的信任机制被利用，绕过了单一企业网站自身的安全基础设施防护",
-            "【关键技术规格】Optimizely平台被非法篡改，恶意JS代码通过合法CDN分发。",
-            "【各方立场与态度】第三方依赖项信任机制引发的供应链安全隐患。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Optimizely; impacted organizations include Zoom, CNN, HSBC, Salesforce, GitLab, etc.: Attackers manipulated the Project JavaScript field to inject malicious scripts, leading to asset theft and iOS exploit delivery",
-            "[Root Cause & Mechanism] Exploitation of implicit trust in third-party CDN-served dependencies bypassing local security infrastructure",
-            "[Key Fact Detail] Optimizely platform compromised, distributing malicious JS via legitimate CDN.",
-            "[Key Position & Outlook] Systemic vulnerability caused by excessive trust in third-party dependencies."
-          ],
-          "industry_impact_zh": "此事件标志着现代Web架构中‘CDN即信任源’的范式漏洞被彻底放大，第三方脚本执行权限缺乏细粒度隔离已成为企业的系统性软肋。即使拥有完备的主站安全防护，企业若无强制执行内容安全策略（CSP）与子资源完整性（SRI）校验，仍无法阻断此类经由合法第三方基础设施转递的复杂供应链攻击。",
-          "industry_impact_en": "This incident highlights the systemic vulnerability in modern web architectures where CDNs are treated as inherently trusted sources without fine-grained execution isolation. Even with robust perimeter security, organizations lacking enforced Content Security Policy (CSP) and Subresource Integrity (SRI) remain exposed to complex supply chain compromises delivered via legitimate third-party infrastructure."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 02:20:54 UTC",
+      "updated_at": "2026-11-17 02:36:28 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -250,38 +250,38 @@
           "url": "https://x.com/ClaudeDevs/status/2122457608963395586"
         },
         {
-          "id": "7f6d43d06ce0ede7",
-          "name": "NVIDIA AI",
-          "handle": "@NVIDIAAI",
-          "role_zh": "NVIDIA AI 研究与开发者生态",
+          "id": "8fd8a6338dddc809",
+          "name": "Swyx (Shawn Wang)",
+          "handle": "@swyx",
+          "role_zh": "AI Engineer Foundation / Latent Space 主理人",
           "role_en": "AI Engineer / Tech Builder",
-          "avatar": "https://unavatar.io/nvidia",
-          "topic_zh": "智能体架构与协同",
-          "topic_en": "Agentic Workflows",
-          "event_context_zh": "代理可以规划任务、运行模拟、检查结果并随时进行调整。",
-          "event_context_en": "Introducing NVIDIA Nemotron for Science, just announced at #SC26 by Ian Buck, our VP of Hyperscale and High-Performance ",
-          "quote_zh": "我们的超大规模和高性能计算副总裁 Ian Buck 刚刚在 #SC26 上宣布推出 NVIDIA Nemotron for Science。\n\n该集合包括开放模型、数据集、工具和训练后配方，可帮助研究人员构建更准确、更高效的 AI 科学代理。代理可以规划任务、运行模拟、检查结果并随时进行调整。",
-          "quote_en": "Introducing NVIDIA Nemotron for Science, just announced at #SC26 by Ian Buck, our VP of Hyperscale and High-Performance Computing.\n\nThe collection includes open models, datasets, tools, and post-training recipes to help researchers build more accurate and efficient AI agents for science. Agents can plan tasks, run simulations, check results, and adjust as they go.",
-          "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
-          "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
+          "avatar": "https://unavatar.io/x/swyx",
+          "topic_zh": "Swyx (Shawn Wang",
+          "topic_en": "Swyx (Shawn Wang) on",
+          "event_context_zh": "女人正在摧毁男人，wtf 正在发生 rn",
+          "event_context_en": "women are destroying the men, wtf is happening rn https://t.co/KckmQKykvy",
+          "quote_zh": "女人正在摧毁男人，wtf 正在发生 rn",
+          "quote_en": "women are destroying the men, wtf is happening rn https://t.co/KckmQKykvy",
+          "thesis_zh": "深入探讨Swyx (Shawn Wang的关键演进，直指核心工程落地与技术范式转移。",
+          "thesis_en": "Dissecting crucial inflection points in Swyx (Shawn Wang) on, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "1.3k",
-            "likes": "12",
-            "comments": "2",
-            "retweets": "4",
+            "views": "756",
+            "likes": "5",
+            "comments": "1",
+            "retweets": "0",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-16T23:59:54+00:00",
-          "url": "https://x.com/NVIDIAAI/status/2122479807858680178"
+          "published_at": "2026-11-17T02:08:09+00:00",
+          "url": "https://x.com/swyx/status/2122512082835067151"
         }
       ]
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 02:20:54 UTC",
+      "updated_at": "2026-11-17 02:36:28 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,635)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,640)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,635 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,640 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
@@ -410,7 +410,7 @@
         {
           "name": "astryx",
           "icon": "🤖",
-          "stars": "29.6k",
+          "stars": "29.7k",
           "growth_badge_zh": "本周暴增 +13,660 ★",
           "growth_badge_en": "+13,660 ★ this week",
           "category_zh": "🤖 自主智能体与协作编排",
