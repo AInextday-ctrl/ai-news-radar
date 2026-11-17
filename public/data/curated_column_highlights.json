@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 10:21:39 UTC",
+  "generated_at": "2026-11-17 10:36:18 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 10:21:39 UTC",
+      "updated_at": "2026-11-17 10:36:18 UTC",
       "headline_item": {
-        "id": "727e886bf5f03a63",
-        "tag_zh": "📰 业界动态",
-        "tag_en": "📰 Industry News",
-        "title_zh": "英伟达组建国家安全与出口管制监督委员会",
-        "title_en": "Nvidia's board establishes a National Security and Export Control Oversight Committee to oversee national security policies, export control compliance, and more (Nvidia Newsroom)",
-        "source": "Nvidia Newsroom",
-        "published_at": "2026-11-17T10:13:45+00:00",
-        "url": "https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee",
-        "event_summary_zh": "英伟达董事会设立专项委员会，旨在强化全球贸易风险管理及出口合规的董事会层级监管",
-        "event_summary_en": "NVIDIA's Board of Directors has established the National Security and Export Control Oversight Committee, chaired by Suzanne Nora Johnson, with Stephen C. Neal and John O. Dabiri as members. This committee will provide direct board-level oversight for the company's National Security Team and Global Trade Compliance Team to manage global trade risks.",
+        "id": "56313c69a3bd467a",
+        "tag_zh": "🎁 算力福利",
+        "tag_en": "🎁 Promos & Credits",
+        "title_zh": "英伟达警示客户：远程访问法案将收紧算力合规边界",
+        "title_en": "Sources: Nvidia warns customers that the proposed Remote Access Security Act could subject chip buyers to US legal action if Chinese companies access AI chips (Kai Nicol-Schwarz/CNBC)",
+        "source": "CNBC",
+        "published_at": "2026-11-17T10:32:01+00:00",
+        "url": "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-chip-access.html",
+        "event_summary_zh": "英伟达内部通知客户，《远程访问安全法案》可能使违规接入中国算力的各方均面临美国法律制裁，公司已通过限制出租比例应对",
+        "event_summary_en": "Nvidia has warned customers that the proposed Remote Access Security Act (RASA) would expand export controls to cloud-based GPU access, subjecting both providers and users to U.S. legal action for non-compliance. To mitigate regulatory risk, Nvidia has implemented a strict policy prohibiting clients from renting out more than 50% of their GPU capacity to Chinese entities.",
         "core_facts_zh": [
-          "【核心事件】英伟达(NVIDIA)董事会；委员会主席Suzanne Nora Johnson在企业治理架构层面：设立国家安全与出口管制监督委员会，将国家安全团队与贸易合规团队纳入委员会直接监管体系",
-          "【起因与机理】应对先进计算技术对国家安全影响的复杂挑战，确保在全球贸易监管环境下实现合规与业务平衡",
-          "【调查与监管诉求】核心动因：应对先进算力技术对国家安全带来的地缘政治合规挑战。",
-          "【行业影响与走向】后续影响：强化供应链防御韧性，降低因合规性缺失带来的全球化业务中断风险。"
+          "【核心事件】英伟达（Nvidia）、美国众议院（提出法案）、美国商务部工业与安全局（BIS）在美国云服务与全球数据中心算力租赁市场：拟通过RASA法案管控算力远程访问，并限制云服务商向中国客户租赁的算力比例不超过50%",
+          "【起因与机理】防止中国企业通过海外云端绕过物理出口管制，维持美国在人工智能基础设施领域的绝对垄断地位",
+          "【关键数据与实测】关键细节：英伟达强制实施50%出租红线，且RASA法案若在参议院通过将赋予政府云端执法权。",
+          "【涉及范围与推进】后续研判：全球云服务商将面临严苛的身份审核审计，算力基础设施的国际化供应链路将面临长期成本上涨。"
         ],
         "core_facts_en": [
-          "[Core Event] NVIDIA Board of Directors; Suzanne Nora Johnson (Chair) (Corporate governance): Established a new committee to oversee the National Security Team and Global Trade Compliance Team",
-          "[Root Cause & Mechanism] To address national security challenges posed by advanced AI silicon and navigate tightening global trade regulations",
-          "[Regulatory & Investigation Focus] Core driver: Addressing geopolitical compliance risks surrounding advanced AI silicon.",
-          "[Industry Impact & Outlook] Outlook: Strengthening supply chain resilience to minimize operational disruptions under strict trade regulations."
+          "[Core Event] Nvidia, U.S. House of Representatives, U.S. Bureau of Industry and Security (BIS): Implementation of RASA to regulate remote GPU access; capping Chinese entity rentals at 50% capacity",
+          "[Root Cause & Mechanism] Preventing circumvention of physical export controls via cloud-based remote access to maintain U.S. AI superiority",
+          "[Key Metrics] Key details: Nvidia enforces a 50% rental cap; RASA, if enacted, grants the U.S. government direct enforcement authority over cloud services.",
+          "[Industry Impact & Outlook] Outlook: Cloud providers face heightened identity auditing; international compute supply chains are likely to see sustained cost increases."
         ],
-        "industry_impact_zh": "此举标志着英伟达将地缘政治合规性从行政运营提升至最高决策维度，意在通过董事会直接介入，减少因出口政策突变导致的技术脱钩风险。这不仅是对美国商务部出口管制政策的制度化响应，也是为了在应对持续收紧的监管审查时，能够通过更专业、更具透明度的治理架构获取政府侧的信任红利。",
-        "industry_impact_en": "This move signals the elevation of geopolitical compliance from operational routine to top-tier strategic governance, aimed at mitigating technical decoupling risks from sudden policy shifts. It serves as both a proactive institutional alignment with US export controls and a mechanism to secure regulatory credibility by institutionalizing oversight in response to intensifying geopolitical scrutiny."
+        "industry_impact_zh": "此举标志着美国出口管制体系从物理硬件销售向“算力服务即资产”的深度延伸，云服务商将从单纯的算力分销商转型为受美方监管的合规节点。对于算力密集型行业而言，这意味着全球云资源调度协议需经历重构，以应对日益严苛的溯源与配额审计，长期来看将进一步割裂全球统一的公共云市场。",
+        "industry_impact_en": "This shift marks an evolution of U.S. export controls from hardware to 'compute-as-a-service,' forcing cloud providers to function as regulatory gatekeepers. This will necessitate a structural overhaul of global cloud resource allocation protocols, further fragmenting the public cloud market as compliance auditing becomes the primary bottleneck for operational expansion."
       },
       "headlines": [
+        {
+          "id": "56313c69a3bd467a",
+          "tag_zh": "🎁 算力福利",
+          "tag_en": "🎁 Promos & Credits",
+          "title_zh": "英伟达警示客户：远程访问法案将收紧算力合规边界",
+          "title_en": "Sources: Nvidia warns customers that the proposed Remote Access Security Act could subject chip buyers to US legal action if Chinese companies access AI chips (Kai Nicol-Schwarz/CNBC)",
+          "source": "CNBC",
+          "published_at": "2026-11-17T10:32:01+00:00",
+          "url": "https://www.cnbc.com/2026/11/17/nvidia-china-cloud-ai-chip-access.html",
+          "event_summary_zh": "英伟达内部通知客户，《远程访问安全法案》可能使违规接入中国算力的各方均面临美国法律制裁，公司已通过限制出租比例应对",
+          "event_summary_en": "Nvidia has warned customers that the proposed Remote Access Security Act (RASA) would expand export controls to cloud-based GPU access, subjecting both providers and users to U.S. legal action for non-compliance. To mitigate regulatory risk, Nvidia has implemented a strict policy prohibiting clients from renting out more than 50% of their GPU capacity to Chinese entities.",
+          "core_facts_zh": [
+            "【核心事件】英伟达（Nvidia）、美国众议院（提出法案）、美国商务部工业与安全局（BIS）在美国云服务与全球数据中心算力租赁市场：拟通过RASA法案管控算力远程访问，并限制云服务商向中国客户租赁的算力比例不超过50%",
+            "【起因与机理】防止中国企业通过海外云端绕过物理出口管制，维持美国在人工智能基础设施领域的绝对垄断地位",
+            "【关键数据与实测】关键细节：英伟达强制实施50%出租红线，且RASA法案若在参议院通过将赋予政府云端执法权。",
+            "【涉及范围与推进】后续研判：全球云服务商将面临严苛的身份审核审计，算力基础设施的国际化供应链路将面临长期成本上涨。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Nvidia, U.S. House of Representatives, U.S. Bureau of Industry and Security (BIS): Implementation of RASA to regulate remote GPU access; capping Chinese entity rentals at 50% capacity",
+            "[Root Cause & Mechanism] Preventing circumvention of physical export controls via cloud-based remote access to maintain U.S. AI superiority",
+            "[Key Metrics] Key details: Nvidia enforces a 50% rental cap; RASA, if enacted, grants the U.S. government direct enforcement authority over cloud services.",
+            "[Industry Impact & Outlook] Outlook: Cloud providers face heightened identity auditing; international compute supply chains are likely to see sustained cost increases."
+          ],
+          "industry_impact_zh": "此举标志着美国出口管制体系从物理硬件销售向“算力服务即资产”的深度延伸，云服务商将从单纯的算力分销商转型为受美方监管的合规节点。对于算力密集型行业而言，这意味着全球云资源调度协议需经历重构，以应对日益严苛的溯源与配额审计，长期来看将进一步割裂全球统一的公共云市场。",
+          "industry_impact_en": "This shift marks an evolution of U.S. export controls from hardware to 'compute-as-a-service,' forcing cloud providers to function as regulatory gatekeepers. This will necessitate a structural overhaul of global cloud resource allocation protocols, further fragmenting the public cloud market as compliance auditing becomes the primary bottleneck for operational expansion."
+        },
         {
           "id": "727e886bf5f03a63",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "Numa的商业模型标志着AI智能体从通用助理向特定行业深层工作流（Workflow-Specific）的垂直演进。通过获取经销商底层的库存与销售数据，该平台在实现业务流程闭环的同时，建立了极高的行业壁垒，使其不仅是自动化工具，更成为汽车后市场的数据枢纽。",
           "industry_impact_en": "Numa’s model signals a shift from general-purpose assistants to workflow-specific AI agents within vertical industries. By integrating with underlying dealer inventory and transaction systems, Numa creates high switching costs and establishes itself as a data hub in the automotive aftermarket, moving beyond simple automation tools."
-        },
-        {
-          "id": "38b54dc4e64f68c2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Meta调整Instagram印度推荐算法以过滤违规内容",
-          "title_en": "Meta says it modified Instagram's recommendation systems in India to show less sexual and violent content, after New Delhi called for tighter content checks (Reuters)",
-          "source": "Reuters",
-          "published_at": "2026-11-17T09:10:01+00:00",
-          "url": "https://www.reuters.com/world/india/meta-says-it-tuned-instagram-curb-suggestive-violent-content-india-2026-11-17/",
-          "event_summary_zh": "Meta为响应印度电子信息技术部对推荐算法的监管要求，针对印度市场升级AI模型，重点过滤Instagram内包含暴力与软色情内容的推荐推送",
-          "event_summary_en": "Meta Platforms has fine-tuned Instagram's recommendation algorithms for the Indian market by deploying advanced AI models to proactively detect and restrict violent and sexually suggestive content across Reels, Explore, and Feed. This adjustment follows a regulatory advisory from the Indian Ministry of Electronics and Information Technology regarding the scrutiny of algorithmic ranking and content amplification.",
-          "core_facts_zh": [
-            "【核心事件】Meta Platforms；印度电子信息技术部 (Ministry of Electronics and Information Technology)在印度数字内容分发平台（Instagram）：通过算法升级主动过滤软色情与暴力内容，并优化Reels与推荐机制",
-            "【起因与机理】应对印度政府对算法放大误导性及敏感内容的安全监管合规要求",
-            "【关键技术规格】核心诉求：响应印度电子信息技术部关于审查算法放大误导性内容的行政指导。",
-            "【行业影响与走向】后续影响：平台通过调整推荐逻辑降低了用户违规内容举报率，但未披露具体过滤比例或技术参数。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Meta Platforms; Ministry of Electronics and Information Technology of India (Instagram ecosystem in India): Upgraded AI models to proactively filter suggestive and violent content in recommendations",
-            "[Root Cause & Mechanism] Regulatory pressure to mitigate algorithmic amplification of sensitive or misleading materials",
-            "[Key Fact Detail] Core demand: Responding to the advisory from the Indian Ministry of Electronics and Information Technology regarding algorithmic transparency.",
-            "[Key Position & Outlook] Outlook: Reported a reduction in user-reported content, though technical metrics and specific filtering thresholds remain undisclosed."
-          ],
-          "industry_impact_zh": "Meta在印度采取的算法合规动作，反映了跨国互联网巨头在大型新兴市场正面临从“事后删除”向“事前算法风控”的技术路线强制转型。这种以局部市场适配为代价的合规策略，预示着全球社交平台需为各主权国家定制特定的AI安全对齐标准，以规避针对算法推荐逻辑的贸易与监管壁垒。",
-          "industry_impact_en": "Meta's compliance adjustment in India reflects a forced shift for global platforms from reactive content removal to proactive algorithmic risk management in key emerging markets. This regional-specific alignment strategy suggests that major social platforms will increasingly need to engineer sovereignty-compliant AI safety guardrails to mitigate regulatory barriers targeting their recommendation logic."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 10:21:39 UTC",
+      "updated_at": "2026-11-17 10:36:18 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 10:21:39 UTC",
+      "updated_at": "2026-11-17 10:36:18 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,805)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,808)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,805 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,808 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
