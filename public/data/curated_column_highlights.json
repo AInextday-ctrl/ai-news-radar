@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 23:04:40 UTC",
+  "generated_at": "2026-11-17 23:21:04 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 23:04:40 UTC",
+      "updated_at": "2026-11-17 23:21:04 UTC",
       "headline_item": {
-        "id": "cef1fdaf9efb4cd6",
+        "id": "1d2ad87f42a00ecc",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "微软Exchange服务大规模宕机始末及技术失效机制",
-        "title_en": "Sources detail how the Microsoft 365 outage began in Switzerland and spread as failover systems shifted traffic, leaving 80%+ of Exchange servers unresponsive (Tom Warren/The Verge)",
-        "source": "The Verge",
-        "published_at": "2026-11-17T22:50:01+00:00",
-        "url": "https://www.theverge.com/tech/1035364/microsoft-outlook-outage-notepad?view_token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IlJMSEZCU1NVZHYiLCJwIjoiL3RlY2gvMTAzNTM2NC9taWNyb3NvZnQtb3V0bG9vay1vdXRhZ2Utbm90ZXBhZCIsImV4cCI6MTc5NTM2Njg5NywiaWF0IjoxNzk0OTM0ODk3fQ.qvNcpytW9E3bjpGqPWJDeMM-dLOfUvq1QT9fb4fxHec&utm_medium=gift-link",
-        "event_summary_zh": "微软Exchange Online因瑞士节点故障及自动故障转移机制触发网络拥塞，导致全球80%以上服务器陷入重启循环",
-        "event_summary_en": "Microsoft's Exchange Online service suffered a sev0-rated outage initiated by server failures in Switzerland, which triggered failover mechanisms that propagated the issue, leaving over 80% of Exchange servers unresponsive. The root cause involved a traffic surge during PXE-based reboot attempts that overwhelmed monitoring systems, forcing servers into a recursive failure loop.",
+        "title_zh": "苹果HomeView拆解：维修难度大幅回升",
+        "title_en": "Apple HomeView teardown: a step backward in repairability compared to recent iPads and HomePods, with heavily glued display, speakers, and logic board (Carsten Frauenheim/iFixit News)",
+        "source": "iFixit News",
+        "published_at": "2026-11-17T23:15:01+00:00",
+        "url": "https://www.ifixit.com/News/120317/homeview-teardown-a-surprising-step-backward",
+        "event_summary_zh": "iFixit拆解显示，苹果新款智能家居设备HomeView内部高度依赖强力胶粘合，维修难度远超近年推出的iPad与HomePod产品线",
+        "event_summary_en": "iFixit's teardown of the Apple HomeView reveals a heavy reliance on structural adhesives for its display, speakers, and logic board, marking a regressive step in modular design. Despite recent improvements in repairability across iPad and HomePod lines, HomeView’s integration forces high-risk disassembly that frequently leads to component failure.",
         "core_facts_zh": [
-          "【核心事件】微软（Microsoft）工程团队在全球Exchange Online服务器基础设施：全球范围内超80%的Exchange服务器因自动故障转移机制导致的重启循环瘫痪近24小时",
-          "【起因与机理】瑞士区域节点异常触发自动流量转移，引发针对服务器启动及监控系统的流量拥塞",
-          "【关键数据与实测】全球超80%的Exchange服务器受影响，暴露出云服务冗余架构在极端负载下的逻辑缺陷。",
-          "【涉及范围与推进】自动故障转移机制将流量涌向健康节点，诱发服务器PXE启动阶段的重启循环。"
+          "【核心事件】拆解机构iFixit；硬件厂商苹果公司(Apple Inc.)在实验室拆解环境：显示核心组件强力胶固定，维修与拆解难度极高",
+          "【起因与机理】苹果在智能家居类新型复合设备的工程设计上优先考虑了极致集成度与工业强度，放弃了近期在便携设备上体现的维修友好型策略",
+          "【核心事实细节】HomeView产品采用高强度强力胶封装，维修难度回归苹果早期水平。",
+          "【行业影响与走向】苹果在单一产品设计路径上表现出明显的维修策略退步，或影响第三方服务市场。"
         ],
         "core_facts_en": [
-          "[Core Event] Microsoft Engineering Teams: Over 80% of Exchange servers failed for nearly 24 hours due to a reboot loop triggered by automated failover systems.",
-          "[Root Cause & Mechanism] Initial local failure in Switzerland triggered recursive traffic surges during server recovery attempts.",
-          "[Key Metrics] Over 80% of global Exchange capacity impacted, exposing architectural vulnerabilities in cloud failover logic.",
-          "[Key Position & Outlook] Automated failover systems caused recursive reboot loops by overwhelming PXE boot processes."
+          "[Core Event] iFixit; Apple Inc. (Laboratory teardown): High-strength adhesive usage prevents non-destructive access to display and logic board",
+          "[Root Cause & Mechanism] Prioritization of tight integration and structural rigidity over serviceability in the new smart home product architecture",
+          "[Key Fact Detail] HomeView uses industrial-grade adhesives, regressing on recent repairability progress.",
+          "[Key Position & Outlook] Shift in design strategy highlights potential conflict between tight hardware integration and right-to-repair standards."
         ],
-        "industry_impact_zh": "此次事件揭示了超大规模云架构中‘自动化故障转移’机制的负反馈效应：当系统规模超过临界点，自动容灾脚本可能演变为分布式拒绝服务（DDoS）攻击效应，导致基础设施雪崩。对于高度依赖微软生产力套件的企业而言，过度集中的后端架构缺乏多云冗余，在极端失效场景下已构成系统性操作风险。",
-        "industry_impact_en": "This incident highlights the negative feedback loops inherent in large-scale automated failover mechanisms, where recovery protocols can inadvertently act as a self-inflicted DDoS attack during system saturation. The event underscores the systemic operational risk of centralized cloud dependencies and the urgent need for multi-cloud redundancy in critical enterprise communication workflows."
+        "industry_impact_zh": "此举揭示了苹果在处理多模块复合型产品时，仍倾向于通过极致封装提升设备稳固性，而非兼顾循环经济的维修权要求。对于高密度集成的智能终端，苹果在平衡轻薄化与内部组装稳定性方面，再次向高成本、一次性制造工艺回归，这对第三方维修生态及设备全生命周期价值构成了直接挑战。",
+        "industry_impact_en": "The design shift underscores Apple's preference for structural integrity over serviceability in complex, multi-modular smart devices. This regression suggests that for highly integrated terminals, Apple continues to prioritize manufacturing-side yield and aesthetic rigidity, effectively creating a barrier for third-party repair markets and complicating product lifecycle management."
       },
       "headlines": [
+        {
+          "id": "1d2ad87f42a00ecc",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "苹果HomeView拆解：维修难度大幅回升",
+          "title_en": "Apple HomeView teardown: a step backward in repairability compared to recent iPads and HomePods, with heavily glued display, speakers, and logic board (Carsten Frauenheim/iFixit News)",
+          "source": "iFixit News",
+          "published_at": "2026-11-17T23:15:01+00:00",
+          "url": "https://www.ifixit.com/News/120317/homeview-teardown-a-surprising-step-backward",
+          "event_summary_zh": "iFixit拆解显示，苹果新款智能家居设备HomeView内部高度依赖强力胶粘合，维修难度远超近年推出的iPad与HomePod产品线",
+          "event_summary_en": "iFixit's teardown of the Apple HomeView reveals a heavy reliance on structural adhesives for its display, speakers, and logic board, marking a regressive step in modular design. Despite recent improvements in repairability across iPad and HomePod lines, HomeView’s integration forces high-risk disassembly that frequently leads to component failure.",
+          "core_facts_zh": [
+            "【核心事件】拆解机构iFixit；硬件厂商苹果公司(Apple Inc.)在实验室拆解环境：显示核心组件强力胶固定，维修与拆解难度极高",
+            "【起因与机理】苹果在智能家居类新型复合设备的工程设计上优先考虑了极致集成度与工业强度，放弃了近期在便携设备上体现的维修友好型策略",
+            "【核心事实细节】HomeView产品采用高强度强力胶封装，维修难度回归苹果早期水平。",
+            "【行业影响与走向】苹果在单一产品设计路径上表现出明显的维修策略退步，或影响第三方服务市场。"
+          ],
+          "core_facts_en": [
+            "[Core Event] iFixit; Apple Inc. (Laboratory teardown): High-strength adhesive usage prevents non-destructive access to display and logic board",
+            "[Root Cause & Mechanism] Prioritization of tight integration and structural rigidity over serviceability in the new smart home product architecture",
+            "[Key Fact Detail] HomeView uses industrial-grade adhesives, regressing on recent repairability progress.",
+            "[Key Position & Outlook] Shift in design strategy highlights potential conflict between tight hardware integration and right-to-repair standards."
+          ],
+          "industry_impact_zh": "此举揭示了苹果在处理多模块复合型产品时，仍倾向于通过极致封装提升设备稳固性，而非兼顾循环经济的维修权要求。对于高密度集成的智能终端，苹果在平衡轻薄化与内部组装稳定性方面，再次向高成本、一次性制造工艺回归，这对第三方维修生态及设备全生命周期价值构成了直接挑战。",
+          "industry_impact_en": "The design shift underscores Apple's preference for structural integrity over serviceability in complex, multi-modular smart devices. This regression suggests that for highly integrated terminals, Apple continues to prioritize manufacturing-side yield and aesthetic rigidity, effectively creating a barrier for third-party repair markets and complicating product lifecycle management."
+        },
         {
           "id": "cef1fdaf9efb4cd6",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此类攻击暴露了SaaS供应链中第三方JavaScript代码库的信任边界缺陷，即使代码拥有合法数字签名也无法免疫恶意劫持。对于企业而言，单纯依赖CDN分发信任已失效，必须强制实施严格的子资源完整性（SRI）校验及动态实时内容安全策略（CSP）。",
           "industry_impact_en": "This incident highlights the inherent fragility of trust boundaries in SaaS supply chains, where valid digital signatures fail to prevent malicious code injection. Enterprises must move beyond implicit trust in CDN-hosted third-party scripts by enforcing strict Subresource Integrity (SRI) validation and granular Content Security Policies (CSP)."
-        },
-        {
-          "id": "25989aec153eb21c",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达董事会否决黄仁勋回归担任CEO的可能",
-          "title_en": "Nvidia’s Board Has No Plans to Bring Back Jensen Huang",
-          "source": "Wired AI",
-          "published_at": "2026-11-17T22:19:19+00:00",
-          "url": "https://www.wired.com/story/nvidias-board-has-no-plans-to-reinstate-jensen-huang/",
-          "event_summary_zh": "英伟达董事会主席哈维·琼斯正式确认，因黄仁勋个人行为违反公司准则，董事会将拒绝其复职",
-          "event_summary_en": "Nvidia Board Chair Harvey Jones announced during an earnings call that Jensen Huang resigned on November 12 due to personal conduct inconsistent with company standards. The board has unanimously accepted the resignation and confirmed there are no plans to reinstate Huang as CEO.",
-          "core_facts_zh": [
-            "【核心事件】英伟达董事会主席哈维·琼斯（Harvey Jones）、前CEO黄仁勋在英伟达财报电话会议：确认黄仁勋因行为不当辞职，且董事会拒绝其复职",
-            "【起因与机理】个人行为违反公司既定的行为准则、标准与企业文化",
-            "【核心事实细节】董事会明确拒绝黄仁勋复职请求。",
-            "【各方立场与态度】人事变动日期定于11月12日，英伟达管理层架构进入调整期。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Harvey Jones, Chair of Nvidia Board; Jensen Huang, former CEO (Nvidia Earnings Call): Confirmation of resignation due to conduct and denial of reinstatement",
-            "[Root Cause & Mechanism] Personal behavior inconsistent with corporate code of conduct and cultural standards",
-            "[Key Fact Detail] Board explicitly rejects potential reinstatement of Jensen Huang.",
-            "[Key Position & Outlook] Effective date of resignation is November 12, signaling structural transition."
-          ],
-          "industry_impact_zh": "此次人事动荡标志着英伟达进入后黄仁勋时代的极高不确定期，由于黄仁勋对公司技术路线及供应生态拥有极强的个人控制力，董事会的快速切割旨在通过重申合规红线以平抑资本市场波动。短期内英伟达在面对AMD、Intel以及定制芯片（ASIC）崛起夹击时，能否保持产品迭代节奏与客户粘性将成为估值重塑的关键变量。",
-          "industry_impact_en": "The departure marks a period of extreme uncertainty in the post-Huang era, as Jensen Huang’s personal influence over Nvidia’s technical roadmap and supply chain ecosystem was foundational. The board’s decisive action aims to curb market volatility by enforcing governance standards, yet the firm now faces significant risks in maintaining its product iteration speed and client loyalty against intensifying competition from AMD, Intel, and hyperscaler custom silicon initiatives."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 23:04:40 UTC",
+      "updated_at": "2026-11-17 23:21:04 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 23:04:40 UTC",
+      "updated_at": "2026-11-17 23:21:04 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,985)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,988)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,985 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,988 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
