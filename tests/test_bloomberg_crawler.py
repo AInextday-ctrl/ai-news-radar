@@ -69,6 +69,16 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertEqual(res["author"], "Maggie Eastland and Magan Crane")
         self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
         self.assertTrue(res.get("has_video", False))
+
+    def test_resolve_bloomberg_broadcast_media(self):
+        """Verifies broadcast media resolver identifies Bloomberg TV video segments."""
+        from crawlers.bloomberg_crawler import resolve_bloomberg_broadcast_media
+        slug = "us-moves-to-limit-remote-access-to-advanced-ai-chips"
+        media = resolve_bloomberg_broadcast_media(slug)
+        self.assertIsNotNone(media)
+        self.assertTrue(media.get("has_video"))
+        self.assertEqual(media.get("anchor"), "Ed Ludlow")
+        self.assertIn("bloomberg_73a3b9085b60c810.jpg", media.get("cover_image", ""))
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertGreaterEqual(res["paras_count"], 5)
@@ -86,6 +96,16 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertGreaterEqual(len(res["paragraphs"]), 5)
         self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
         self.assertTrue(res.get("has_video", False))
+
+    def test_resolve_bloomberg_broadcast_media(self):
+        """Verifies broadcast media resolver identifies Bloomberg TV video segments."""
+        from crawlers.bloomberg_crawler import resolve_bloomberg_broadcast_media
+        slug = "us-moves-to-limit-remote-access-to-advanced-ai-chips"
+        media = resolve_bloomberg_broadcast_media(slug)
+        self.assertIsNotNone(media)
+        self.assertTrue(media.get("has_video"))
+        self.assertEqual(media.get("anchor"), "Ed Ludlow")
+        self.assertIn("bloomberg_73a3b9085b60c810.jpg", media.get("cover_image", ""))
 
 
 if __name__ == '__main__':
