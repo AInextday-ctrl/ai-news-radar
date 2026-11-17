@@ -67,7 +67,7 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertEqual(res["status"], "success")
         self.assertEqual(res["title"], "US Moves to Curb Remote Access to Nvidia's Advanced AI Chips")
         self.assertEqual(res["author"], "Maggie Eastland and Magan Crane")
-        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
+        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg")
         self.assertTrue(res.get("has_video", False))
 
     def test_resolve_bloomberg_broadcast_media(self):
@@ -78,7 +78,7 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertIsNotNone(media)
         self.assertTrue(media.get("has_video"))
         self.assertEqual(media.get("anchor"), "Ed Ludlow")
-        self.assertIn("bloomberg_73a3b9085b60c810.jpg", media.get("cover_image", ""))
+        self.assertIn("bloomberg_73a3b9085b60c810_master.jpg", media.get("cover_image", ""))
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertGreaterEqual(res["paras_count"], 5)
@@ -94,7 +94,7 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res.get("is_paywalled", False))
         self.assertGreaterEqual(len(res["paragraphs"]), 5)
-        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg")
+        self.assertEqual(res["cover_image"], "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg")
         self.assertTrue(res.get("has_video", False))
 
     def test_resolve_bloomberg_broadcast_media(self):
@@ -105,7 +105,7 @@ class TestBloombergCrawler(unittest.TestCase):
         self.assertIsNotNone(media)
         self.assertTrue(media.get("has_video"))
         self.assertEqual(media.get("anchor"), "Ed Ludlow")
-        self.assertIn("bloomberg_73a3b9085b60c810.jpg", media.get("cover_image", ""))
+        self.assertIn("bloomberg_73a3b9085b60c810_master.jpg", media.get("cover_image", ""))
 
 
 if __name__ == '__main__':

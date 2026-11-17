@@ -86,7 +86,7 @@ KNOWN_BLOOMBERG_AUTHORS = {
 
 # Known Bloomberg official media assets (broadcast videos / HD photography)
 KNOWN_BLOOMBERG_IMAGES = {
-    "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg",
+    "us-moves-to-limit-remote-access-to-advanced-ai-chips": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
     "meta-ceo-zuckerberg-leans-on-powell-mccormick-to-clear-path-for-ai-push": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/ifoW7jFkDAGo/v1/1200x800.jpg",
     "meta-touts-the-cost-saving-benefits-of-latest-in-house-ai-chips": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/iE2H29fMfu8E/v0/1200x820.jpg",
     "intel-backed-chipmaker-altera-files-confidentially-for-ipo": "https://assets.bwbx.io/images/users/iqjWHBFdfxIU/instKk5G9hzw/v1/1200x799.jpg",
@@ -101,7 +101,7 @@ CURATED_BLOOMBERG_STORIES = {
         "author": "Maggie Eastland and Magan Crane",
         "published_at": "2026-11-16T14:45:42Z",
         "category": "Politics",
-        "cover_image": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
         "image_caption": "US Moves to Restrict Remote Access to Advanced AI Chips (Bloomberg TV)",
         "has_video": True,
         "video_title": "US Moves to Restrict Remote Access to Advanced AI Chips",
@@ -251,7 +251,7 @@ def resolve_bloomberg_broadcast_media(
     # 1. Known high-profile Bloomberg TV video segments
     BLOOMBERG_BROADCAST_REGISTRY = {
         "us-moves-to-limit-remote-access-to-advanced-ai-chips": {
-            "cover_image": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810.jpg",
+            "cover_image": "https://ainewsradar.xyz/images/bloomberg_73a3b9085b60c810_master.jpg",
             "image_caption": "US Moves to Restrict Remote Access to Advanced AI Chips (Bloomberg TV)",
             "has_video": True,
             "video_title": "US Moves to Restrict Remote Access to Advanced AI Chips",
