@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-17 03:21:41 UTC",
+  "generated_at": "2026-11-17 03:35:59 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-17 03:21:41 UTC",
+      "updated_at": "2026-11-17 03:35:59 UTC",
       "headline_item": {
-        "id": "8761a66a6f21b33f",
+        "id": "72cb2d30a1838a11",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "苹果macOS 15.3 beta加强AI应用访问权限限制",
-        "title_en": "macOS 27.3 beta warns if an app would get full device control, nudging users to \"Choose Apps\" for the app to control instead, brought on by AI apps' popularity (Juli Clover/MacRumors)",
-        "source": "MacRumors",
-        "published_at": "2026-11-17T02:31:00+00:00",
-        "url": "https://www.macrumors.com/2026/11/16/macos-27-3-full-desk-access/",
-        "event_summary_zh": "苹果在macOS 15.3 beta中升级了全盘访问与设备控制权限接口，要求应用处理更细粒度的授权请求，以防范AI代理潜在的数据安全风险",
-        "event_summary_en": "Apple introduced stricter compliance requirements for Full Disk Access and Device Control APIs in the macOS 15.3 beta. Developers must refine onboarding processes to handle granular access permissions, specifically targeting AI agents to mitigate risks of unauthorized data exposure in emails, messages, and browsing history.",
+        "title_zh": "黄仁勋卸任后英伟达面临家族治理危机",
+        "title_en": "Sources: Jensen Huang's daughter remains in a senior Nvidia role; before Jensen Huang resigned, she was his de facto chief of staff with considerable authority (New York Times)",
+        "source": "New York Times",
+        "published_at": "2026-11-17T03:20:00+00:00",
+        "url": "https://www.nytimes.com/2026/11/16/technology/nvidia-jensen-madison-huang.html?unlocked_article_code=1.RFE.d0Ui.v_uJvV3zdxPR&smid=nytcore-ios-share",
+        "event_summary_zh": "英伟达CEO黄仁勋因关联中国情报风险及婚外情辞职，其女Madison Huang在公司内部的过度权威引发高层动荡与继任困局",
+        "event_summary_en": "Nvidia CEO Jensen Huang has resigned following revelations of inappropriate relationships involving a client linked to Chinese intelligence and an internal executive. Colette Kress has assumed the role of interim CEO while the company faces a management crisis regarding the unchecked authority of Huang's daughter, Madison Huang, who acted as a de facto chief of staff and exerted disproportionate influence over senior executives.",
         "core_facts_zh": [
-          "【核心事件】苹果公司（Apple Inc.）在macOS 15.3操作系统开发环境：强制实施全盘访问权限（Full Disk Access）和设备控制API的升级，引入“选择应用”授权模式",
-          "【起因与机理】应对AI代理工具过度索取系统权限导致的用户敏感数据泄露风险",
-          "【调查与监管诉求】核心调查与诉求：苹果要求AI应用开发者必须调整权限申请逻辑，避免全盘访问滥用。",
-          "【行业影响与走向】后续影响：现有授权保持不变，新应用需在系统弹窗中引导用户进行显式授权以确保存储安全。"
+          "【核心事件】前英伟达CEO黄仁勋、临时CEO Colette Kress、Madison Huang（黄仁勋之女）在英伟达公司内部管理层：黄仁勋辞职引发的权力真空与家族成员任职风险调查",
+          "【起因与机理】黄仁勋涉及与中国情报工作相关客户的违规关联及个人品行丑闻",
+          "【核心事实细节】核心涉案：黄仁勋因涉及中国情报链条关联方与内部违规关系辞职。",
+          "【涉及范围与推进】后续预期：高层动荡引发离职潮与管理混乱，市场与政治压力迫使公司急需重构权力结构以平复监管质疑。"
         ],
         "core_facts_en": [
-          "[Core Event] Apple Inc. (macOS 15.3 development environment): Overhauled Full Disk Access and Device Control APIs, introducing 'Choose Apps' authorization models",
-          "[Root Cause & Mechanism] Mitigate data leakage risks posed by AI agents over-requesting system-level permissions",
-          "[Key Technical Spec] Core demand: Developers must adjust permission requests to prevent abuse of full disk access by AI agents.",
-          "[Key Position & Outlook] Outlook: Existing permissions remain, but new apps must prompt users for specific access to maintain security integrity."
+          "[Core Event] Former CEO Jensen Huang, Interim CEO Colette Kress, Madison Huang (Nvidia corporate headquarters): Management crisis and internal governance restructuring",
+          "[Root Cause & Mechanism] Unethical conduct involving Chinese intelligence-linked parties and nepotistic management",
+          "[Key Metrics] In March, at its developer conference, Nvidia sold a $178 sweater with Toy Jensen on it.",
+          "[Official Stance & Demand] Strategic outlook: Ongoing management instability and geopolitical scrutiny necessitate an urgent restructuring to maintain operational continuity."
         ],
-        "industry_impact_zh": "此举标志着操作系统底层逻辑正从“信任应用全权访问”向“最小权限原则”的强制性转型，苹果通过技术围栏直接遏制AI代理作为黑盒程序的潜在破坏力。这不仅迫使AI应用开发者调整架构，也进一步巩固了Apple在生态系统合规性上的绝对控制权，使AI产品的部署门槛向系统底层隐私沙盒靠拢。",
-        "industry_impact_en": "This shift marks a fundamental transition from full-trust application models to mandatory least-privilege architectures, with Apple using system barriers to contain the potential destructiveness of black-box AI agents. It forces developers to restructure AI workflows while reinforcing Apple's centralized control over ecosystem compliance, pushing AI deployments toward stricter privacy sandboxes."
+        "industry_impact_zh": "黄仁勋时代的个人集权治理模式已随其离职瓦解，英伟达目前面临严重的权力交接合规风险与内部信任断层。对于临时领导层而言，肃清黄氏家族在运营流程中的过度干扰是稳定资本市场预期、剥离地缘安全敏感度（China exposure）的必要财务与治理重塑手段。",
+        "industry_impact_en": "The departure of Jensen Huang signals the collapse of his centralized governance model, leaving Nvidia vulnerable to significant compliance risks and internal trust deficits. The interim leadership must prioritize the immediate pruning of family-influenced power structures to restore investor confidence and mitigate the escalating geopolitical security scrutiny surrounding the firm's legacy ties."
       },
       "headlines": [
+        {
+          "id": "72cb2d30a1838a11",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "黄仁勋卸任后英伟达面临家族治理危机",
+          "title_en": "Sources: Jensen Huang's daughter remains in a senior Nvidia role; before Jensen Huang resigned, she was his de facto chief of staff with considerable authority (New York Times)",
+          "source": "New York Times",
+          "published_at": "2026-11-17T03:20:00+00:00",
+          "url": "https://www.nytimes.com/2026/11/16/technology/nvidia-jensen-madison-huang.html?unlocked_article_code=1.RFE.d0Ui.v_uJvV3zdxPR&smid=nytcore-ios-share",
+          "event_summary_zh": "英伟达CEO黄仁勋因关联中国情报风险及婚外情辞职，其女Madison Huang在公司内部的过度权威引发高层动荡与继任困局",
+          "event_summary_en": "Nvidia CEO Jensen Huang has resigned following revelations of inappropriate relationships involving a client linked to Chinese intelligence and an internal executive. Colette Kress has assumed the role of interim CEO while the company faces a management crisis regarding the unchecked authority of Huang's daughter, Madison Huang, who acted as a de facto chief of staff and exerted disproportionate influence over senior executives.",
+          "core_facts_zh": [
+            "【核心事件】前英伟达CEO黄仁勋、临时CEO Colette Kress、Madison Huang（黄仁勋之女）在英伟达公司内部管理层：黄仁勋辞职引发的权力真空与家族成员任职风险调查",
+            "【起因与机理】黄仁勋涉及与中国情报工作相关客户的违规关联及个人品行丑闻",
+            "【核心事实细节】核心涉案：黄仁勋因涉及中国情报链条关联方与内部违规关系辞职。",
+            "【涉及范围与推进】后续预期：高层动荡引发离职潮与管理混乱，市场与政治压力迫使公司急需重构权力结构以平复监管质疑。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Former CEO Jensen Huang, Interim CEO Colette Kress, Madison Huang (Nvidia corporate headquarters): Management crisis and internal governance restructuring",
+            "[Root Cause & Mechanism] Unethical conduct involving Chinese intelligence-linked parties and nepotistic management",
+            "[Key Metrics] In March, at its developer conference, Nvidia sold a $178 sweater with Toy Jensen on it.",
+            "[Official Stance & Demand] Strategic outlook: Ongoing management instability and geopolitical scrutiny necessitate an urgent restructuring to maintain operational continuity."
+          ],
+          "industry_impact_zh": "黄仁勋时代的个人集权治理模式已随其离职瓦解，英伟达目前面临严重的权力交接合规风险与内部信任断层。对于临时领导层而言，肃清黄氏家族在运营流程中的过度干扰是稳定资本市场预期、剥离地缘安全敏感度（China exposure）的必要财务与治理重塑手段。",
+          "industry_impact_en": "The departure of Jensen Huang signals the collapse of his centralized governance model, leaving Nvidia vulnerable to significant compliance risks and internal trust deficits. The interim leadership must prioritize the immediate pruning of family-influenced power structures to restore investor confidence and mitigate the escalating geopolitical security scrutiny surrounding the firm's legacy ties."
+        },
         {
           "id": "8761a66a6f21b33f",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此案是美国平台经济领域反垄断审查的高标尺，司法部旨在抑制配送领域的高度集中化趋势，以防范算法定价对终端价格的操纵。若该并购受阻，将迫使DoorDash及同类平台转向通过有机扩张或细分垂直赛道收购来实现增长，而非通过横向合并收割市场。",
           "industry_impact_en": "This case sets a high benchmark for antitrust scrutiny in the platform economy, with the DOJ aiming to curb extreme concentration in delivery services to prevent algorithmic price manipulation. Should the merger be blocked, it will force DoorDash and its peers to pivot toward organic growth or niche vertical acquisitions rather than horizontal market consolidation."
-        },
-        {
-          "id": "307ad4375d773471",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "预测市场平台Kalshi收购券商布局股票交易",
-          "title_en": "Sources: Kalshi bought FB Securities, a small New York-based broker, in July and plans to launch equity trading within the next two months (Vicky Ge Huang/Wall Street Journal)",
-          "source": "Wall Street Journal",
-          "published_at": "2026-11-17T00:05:01+00:00",
-          "url": "https://www.wsj.com/finance/kalshi-buys-securities-firm-to-expand-into-stock-trading-8c1ade89",
-          "event_summary_zh": "预测市场平台Kalshi于7月收购纽约经纪商FB Securities，计划在两个月内推出股票与ETF交易功能",
-          "event_summary_en": "Prediction-market platform Kalshi acquired New York-based broker-dealer FB Securities in July as part of a strategic shift toward traditional financial assets. The company plans to launch stock and ETF trading services within the next two months to expand its multi-asset capabilities.",
-          "core_facts_zh": [
-            "【核心事件】卡尔希、FB证券在纽约金融监管环境：完成对FB Securities的收购并筹备股票及ETF交易业务",
-            "【起因与机理】寻求突破单一预测合约限制，实现平台资产类别多元化",
-            "【调查与监管诉求】预测市场平台Kalshi在7月完成了对纽约小型经纪商FB Securities的收购，正致力于将其业务版图扩展至传统金融资产领域。",
-            "【行业影响与走向】在预测市场面临严峻州级法律挑战的背景下，切入高流动性的股权交易是其缓解单一商业模式风险、提升整体估值溢价的必然选择。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Kalshi, FB Securities: Acquisition of FB Securities and preparation for stock/ETF trading",
-            "[Root Cause & Mechanism] Diversification beyond prediction contracts into traditional assets",
-            "[Regulatory & Investigation Focus] Prediction-market platform Kalshi acquired New York-based broker-dealer FB Securities in July as part of a strategic shift toward traditional financial assets.",
-            "[Industry Impact & Outlook] Amidst severe state-level legal challenges, pivoting toward high-liquidity equity trading is a strategic move to mitigate single-business-model risks and enhance overall valuation."
-          ],
-          "industry_impact_zh": "Kalshi此举意在通过收购牌照获得合规入场券，从而将现有的博弈类流量转化为高频金融交易需求。在预测市场面临严峻州级法律挑战的背景下，切入高流动性的股权交易是其缓解单一商业模式风险、提升整体估值溢价的必然选择。",
-          "industry_impact_en": "By acquiring a licensed entity, Kalshi is securing its regulatory entry point to convert existing gambling-style traffic into high-frequency financial trading volume. Amidst severe state-level legal challenges, pivoting toward high-liquidity equity trading is a strategic move to mitigate single-business-model risks and enhance overall valuation."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-17 03:21:41 UTC",
+      "updated_at": "2026-11-17 03:35:59 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-17 03:21:41 UTC",
+      "updated_at": "2026-11-17 03:35:59 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,657)",
+            "📈 社区热度指数级飙升：本周新增 +4,451 Stars (总星标 24,662)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +4,451 stars this week (24,657 total)",
+            "📈 Exponential community momentum: +4,451 stars this week (24,662 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
