@@ -1841,6 +1841,9 @@ def load_existing_items() -> list:
                         if w_data.get("video_id"):
                             it["video_id"] = w_data["video_id"]
                         it["video_provider"] = w_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if w_data.get(vk):
+                                it[vk] = w_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

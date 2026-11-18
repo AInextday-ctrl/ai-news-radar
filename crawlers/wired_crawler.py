@@ -270,6 +270,52 @@ def _localize_wired_image(img_url: str, proxies: Optional[Dict[str, str]] = None
     return img_url
 
 
+def _resolve_cne_video_metadata(cne_id: str, proxies: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+    """
+    Resolves Condé Nast CNE video metadata via official `embed-api.json`:
+    returns direct ad-free MP4 stream, exact aspect_ratio (`9x16`, `16x9`, `1x1`),
+    poster frame, and video title, with iframe fallback.
+    """
+    meta: Dict[str, Any] = {
+        "has_video": True,
+        "video_id": cne_id,
+        "video_provider": "iframe",
+        "video_url": f"https://player.cnevids.com/iframe/video/{cne_id}",
+        "video_aspect": "",
+        "video_poster": None,
+        "video_title": "",
+    }
+    if not cne_id or not HAS_REQUESTS:
+        return meta
+    try:
+        r = requests.get(
+            f"https://player.cnevids.com/embed-api.json?videoId={cne_id}",
+            proxies=proxies,
+            timeout=10,
+            headers={"User-Agent": "Mozilla/5.0", "Referer": "https://www.wired.com/"},
+        )
+        if r.status_code == 200:
+            v = (r.json() or {}).get("video") or {}
+            if isinstance(v, dict):
+                ar = str(v.get("aspect_ratio") or "").strip().lower()
+                if ar:
+                    meta["video_aspect"] = ar
+                if v.get("title"):
+                    meta["video_title"] = _clean_text(v["title"])
+                pf = str(v.get("poster_frame") or "").strip()
+                if pf.startswith("http"):
+                    meta["video_poster"] = pf
+                # Prefer direct ad-free mp4-high stream for seamless adaptive playback
+                for src in v.get("sources") or []:
+                    if isinstance(src, dict) and src.get("type") == "video/mp4" and str(src.get("src") or "").startswith("http"):
+                        meta["video_provider"] = "mp4"
+                        meta["video_url"] = src["src"]
+                        break
+    except Exception:
+        pass
+    return meta
+
+
 def _parse_wired_html(html_text: str) -> Dict[str, Any]:
     out: Dict[str, Any] = {
         "title": "",
@@ -511,6 +557,9 @@ def crawl_wired(
         "video_url": None,
         "video_id": None,
         "video_provider": None,
+        "video_aspect": "",
+        "video_poster": None,
+        "video_title": "",
         "extraction_tier": "failed",
     }
 
@@ -560,10 +609,24 @@ def crawl_wired(
     if parsed.get("subheadings"):
         result["subheadings"] = parsed["subheadings"]
     if parsed.get("has_video") and parsed.get("video_url"):
-        result["has_video"] = True
-        result["video_url"] = parsed["video_url"]
-        result["video_id"] = parsed.get("video_id")
-        result["video_provider"] = parsed.get("video_provider") or "iframe"
+        cne_id = parsed.get("video_id")
+        if cne_id and html_text is None:
+            vmeta = _resolve_cne_video_metadata(cne_id, proxies=proxies)
+            result["has_video"] = True
+            result["video_url"] = vmeta["video_url"]
+            result["video_id"] = vmeta["video_id"]
+            result["video_provider"] = vmeta["video_provider"]
+            if vmeta.get("video_aspect"):
+                result["video_aspect"] = vmeta["video_aspect"]
+            if vmeta.get("video_poster"):
+                result["video_poster"] = vmeta["video_poster"]
+            if vmeta.get("video_title"):
+                result["video_title"] = vmeta["video_title"]
+        else:
+            result["has_video"] = True
+            result["video_url"] = parsed["video_url"]
+            result["video_id"] = cne_id
+            result["video_provider"] = parsed.get("video_provider") or "iframe"
 
     result["paragraphs"] = paras
     result["paras_count"] = len(paras)

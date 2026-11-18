@@ -1626,7 +1626,7 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["image_url"] = ext["cover_image"]
                 if (is_fortune or is_wired) and ext.get("has_video"):
                     item["has_video"] = True
-                    for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script"):
+                    for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title"):
                         if ext.get(vk):
                             item[vk] = ext[vk]
                 if is_bloomberg and ext.get("paragraphs_zh"):
@@ -1802,7 +1802,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         it["image_url"] = ext["cover_image"]
                     if (is_fortune or is_wired) and ext.get("has_video"):
                         it["has_video"] = True
-                        for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script"):
+                        for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title"):
                             if ext.get(vk):
                                 it[vk] = ext[vk]
                 except Exception:

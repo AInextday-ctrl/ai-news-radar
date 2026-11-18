@@ -9962,10 +9962,21 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               videoPlayerWrapEl.appendChild(ifr);
               videoPlayerWrapEl.classList.remove('hidden');
             } else if (vProvider === 'mp4' || /\.mp4(\?|$)/i.test(vRaw)) {
-              videoPlayerWrapEl.innerHTML = `<video controls playsinline preload="metadata" class="w-full aspect-video bg-black block"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video>`;
+              const vAsp = String(item.video_aspect || '').toLowerCase();
+              const isVert = /^(9x16|9:16|4x5|4:5|3x4|3:4|vertical|portrait)$/.test(vAsp);
+              const vPoster = item.video_poster || primaryImg || '';
+              const boxCls = isVert ? 'w-full bg-slate-950 flex items-center justify-center py-3 px-2' : 'w-full bg-black flex items-center justify-center';
+              const vidCls = isVert ? 'w-full max-w-[320px] aspect-[9/16] max-h-[560px] bg-black rounded-xl object-contain block' : 'w-full max-h-[540px] bg-black object-contain block';
+              videoPlayerWrapEl.innerHTML = `<div class="${boxCls}"><video controls playsinline preload="metadata"${vPoster ? ` poster="${escapeHtml(vPoster)}"` : ''} class="${vidCls}" onloadedmetadata="if(this.videoHeight>this.videoWidth){this.style.maxWidth='320px';this.style.maxHeight='560px';this.style.aspectRatio='9/16';this.style.borderRadius='0.75rem';this.parentElement.style.padding='12px 8px';}"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video></div>`;
               videoPlayerWrapEl.classList.remove('hidden');
             } else if (vProvider === 'iframe' || /youtube\.com\/embed|player\.vimeo\.com|players\.brightcove\.net|player\.cnevids\.com/i.test(vRaw)) {
-              videoPlayerWrapEl.innerHTML = `<iframe src="${escapeHtml(vRaw)}" class="w-full aspect-video border-0 bg-slate-950 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+              const vAsp = String(item.video_aspect || '').toLowerCase();
+              const isVert = /^(9x16|9:16|4x5|4:5|3x4|3:4|vertical|portrait)$/.test(vAsp);
+              if (isVert) {
+                videoPlayerWrapEl.innerHTML = `<div class="w-full bg-slate-950 flex items-center justify-center py-3 px-2"><div class="w-full max-w-[320px] aspect-[9/16] max-h-[560px] rounded-xl overflow-hidden bg-black"><iframe src="${escapeHtml(vRaw)}" scrolling="no" class="w-full h-full border-0 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>`;
+              } else {
+                videoPlayerWrapEl.innerHTML = `<iframe src="${escapeHtml(vRaw)}" class="w-full aspect-video border-0 bg-slate-950 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+              }
               videoPlayerWrapEl.classList.remove('hidden');
             } else {
               videoPlayerWrapEl.innerHTML = '';
