@@ -36,7 +36,10 @@ SAMPLE_N95M_HTML = """<!doctype html>
         <img src="https://9to5mac.com/wp-content/uploads/sites/6/2024/01/mosyle-banner-2024.png?w=1024" alt="Mosyle sponsor" />
       </figure>
       <figure class="wp-block-embed is-type-video is-provider-youtube">
-        <iframe src="https://www.youtube.com/embed/C1zYX5jwqq4?feature=oembed" title="Demo Video"></iframe>
+        <iframe data-src="https://www.youtube.com/embed/C1zYX5jwqq4?feature=oembed" title="Demo Video"></iframe>
+      </figure>
+      <figure class="wp-block-embed is-type-rich is-provider-x">
+        <blockquote class="twitter-tweet"><p>GPT-6.2 Astra and Sol are now available for everyone. <a href="https://t.co/abc">https://t.co/abc</a> pic.twitter.com/xyz</p>— OpenAI (@OpenAI) <a href="https://x.com/OpenAI/status/2122750124543926515">November 17, 2026</a></blockquote>
       </figure>
       <blockquote class="wp-block-quote">
         <p>“Making Apple’s operating system and silicon available at datacenter-scale is a massive untapped opportunity for AI workloads.”</p>
@@ -69,6 +72,9 @@ class TestNineTo5MacCrawler(unittest.TestCase):
         self.assertEqual(res["author"], "Bradley C")
         self.assertIn("### Wrap up", res["full_text"])
         self.assertIn("massive untapped opportunity", res["full_text"])
+        self.assertIn("GPT-6.2 Astra and Sol are now available for everyone.", res["full_text"])
+        self.assertIn("OpenAI (@OpenAI)", res["full_text"])
+        self.assertNotIn("https://t.co/", res["full_text"])
         # Zero sponsor text, zero About bio, zero FTC disclaimer, zero Mosyle banner
         self.assertNotIn("Mosyle", res["full_text"])
         self.assertNotIn("About Apple @ Work", res["full_text"])

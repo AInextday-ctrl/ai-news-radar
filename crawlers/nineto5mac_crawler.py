@@ -35,6 +35,7 @@ import os
 import re
 import html
 import json
+import math
 import hashlib
 from typing import Dict, Any, List, Optional, Tuple
 from .content_filters import detect_low_value_roundup_or_promo
@@ -378,7 +379,82 @@ def _localize_n95m_image(img_url: str, proxies: Optional[Dict[str, str]] = None)
     return img_url
 
 
-def _parse_nineto5mac_html(html_text: str) -> Dict[str, Any]:
+def _x_syndication_token(tid: str) -> str:
+    """Computes X's public embed syndication token for a numeric tweet ID."""
+    n = (int(tid) / 1e15) * math.pi
+    digits = "0123456789abcdefghijklmnopqrstuvwxyz"
+    int_part = int(n)
+    frac_part = n - int_part
+    if int_part == 0:
+        s_int = "0"
+    else:
+        s_int = ""
+        while int_part > 0:
+            s_int = digits[int_part % 36] + s_int
+            int_part //= 36
+    s_frac = ""
+    for _ in range(11):
+        frac_part *= 36
+        d = int(frac_part)
+        s_frac += digits[d]
+        frac_part -= d
+    return (s_int + "." + s_frac).replace("0", "").replace(".", "")
+
+
+def _resolve_x_embed_media(tweet_id: str, proxies: Optional[Dict[str, str]] = None) -> Dict[str, Any]:
+    """Resolves official X embed video MP4 / photos & metadata via X public syndication."""
+    res: Dict[str, Any] = {"videos": [], "images": [], "author": "", "handle": "", "text": ""}
+    if not tweet_id or not tweet_id.isdigit():
+        return res
+    try:
+        tok = _x_syndication_token(tweet_id)
+        url = f"https://cdn.syndication.twimg.com/tweet-result?id={tweet_id}&lang=en&token={tok}"
+        data = None
+        if HAS_CURL_CFFI:
+            r = cffi_requests.get(url, impersonate="chrome124", proxies=proxies, timeout=12)
+            if r.status_code == 200 and r.text.strip().startswith("{"):
+                data = r.json()
+        elif HAS_REQUESTS:
+            r = requests.get(url, proxies=proxies, timeout=12)
+            if r.status_code == 200 and r.text.strip().startswith("{"):
+                data = r.json()
+        if not isinstance(data, dict):
+            return res
+        user = data.get("user") or {}
+        res["author"] = _clean_text(user.get("name") or "")
+        res["handle"] = _clean_text(user.get("screen_name") or "")
+        raw_txt = str(data.get("text") or "")
+        raw_txt = re.sub(r"https?://t\.co/\S+", "", raw_txt)
+        res["text"] = _clean_text(raw_txt)
+        for m in (data.get("mediaDetails") or []):
+            if not isinstance(m, dict):
+                continue
+            mtype = (m.get("type") or "").lower()
+            poster = str(m.get("media_url_https") or "").strip()
+            if mtype in ("video", "animated_gif"):
+                variants = [
+                    v for v in ((m.get("video_info") or {}).get("variants") or [])
+                    if isinstance(v, dict) and v.get("content_type") == "video/mp4" and v.get("url")
+                ]
+                if variants:
+                    # Prefer 720p (~2 Mbps) or crispest <= 4 Mbps, fallback to highest bitrate
+                    mid = [v for v in variants if 700_000 <= int(v.get("bitrate") or 0) <= 4_000_000]
+                    best = max(mid, key=lambda v: int(v.get("bitrate") or 0)) if mid else max(variants, key=lambda v: int(v.get("bitrate") or 0))
+                    ar = (m.get("video_info") or {}).get("aspect_ratio") or [16, 9]
+                    aspect = "9x16" if (isinstance(ar, list) and len(ar) == 2 and ar[1] > ar[0]) else "16x9"
+                    res["videos"].append({
+                        "url": str(best["url"]).strip(),
+                        "poster": poster,
+                        "aspect": aspect,
+                    })
+            elif mtype == "photo" and poster:
+                res["images"].append(poster)
+    except Exception:
+        pass
+    return res
+
+
+def _parse_nineto5mac_html(html_text: str, proxies: Optional[Dict[str, str]] = None, resolve_social: bool = True) -> Dict[str, Any]:
     out: Dict[str, Any] = {
         "title": "",
         "summary": "",
@@ -596,8 +672,69 @@ def _parse_nineto5mac_html(html_text: str) -> Dict[str, Any]:
 
         if tag == "figure":
             fcls = (node.attributes.get("class") or "").lower()
-            if "is-provider-x" in fcls or "is-provider-twitter" in fcls:
-                # Skip raw tweet embed wrapper card
+            if "is-provider-x" in fcls or "is-provider-twitter" in fcls or node.css_first("blockquote.twitter-tweet"):
+                # Preserve embedded X/Twitter post quote + resolve official X video/photo media in exact DOM order
+                bq = node.css_first("blockquote.twitter-tweet") or node
+                bq_html = bq.html or ""
+                m_tid = re.search(r"https?://(?:x|twitter)\.com/[^/\"'\s]+/status/(\d+)", bq_html, re.I)
+                tid = m_tid.group(1) if m_tid else ""
+                p_el = bq.css_first("p")
+                raw_q = _clean_text(p_el.text(separator=" ") if p_el else bq.text(separator=" "))
+                raw_q = re.sub(r"https?://t\.co/\S+", "", raw_q)
+                raw_q = re.sub(r"\bpic\.twitter\.com/\S+", "", raw_q)
+                raw_q = _clean_text(raw_q)
+                # Extract author attribution like "— OpenAI (@OpenAI)" (strictly after em/en dash, never matching hyphens like GPT-6.2)
+                full_bq_txt = _clean_text(bq.text(separator=" "))
+                m_attr = re.search(r"(?:—|–|&mdash;)\s*([^—–()]{1,60}\(@[A-Za-z0-9_]+\))", full_bq_txt)
+                attr_str = _clean_text(m_attr.group(1)) if m_attr else ""
+
+                x_media = _resolve_x_embed_media(tid, proxies=proxies) if (tid and resolve_social) else {}
+                if not raw_q and x_media.get("text"):
+                    raw_q = x_media["text"]
+                if not attr_str and x_media.get("handle"):
+                    attr_str = f"{x_media.get('author') or x_media['handle']} (@{x_media['handle']})"
+
+                if raw_q and len(raw_q) >= 15:
+                    q_para = f"“{raw_q}” — {attr_str}" if attr_str else f"“{raw_q}”"
+                    q_key = q_para.lower()[:120]
+                    if q_key not in seen_p:
+                        seen_p.add(q_key)
+                        paragraphs.append(q_para)
+
+                x_cap = f"{attr_str} (X)" if attr_str else "Embedded X Post"
+                for xv in (x_media.get("videos") or []):
+                    _record_video(
+                        xv["url"],
+                        "mp4",
+                        vid_id=f"x_{tid}" if tid else None,
+                        v_title=x_cap,
+                        aspect=xv.get("aspect") or "16x9",
+                        poster=xv.get("poster") or "",
+                    )
+                for xim in (x_media.get("images") or []):
+                    if _is_valid_n95m_image(xim):
+                        stem = _n95m_media_stem(xim)
+                        if stem and stem not in seen_stems:
+                            seen_stems.add(stem)
+                            dom_seq += 1
+                            inline_images.append({
+                                "url": xim,
+                                "after_para": max(-1, len(paragraphs) - 1),
+                                "dom_order": dom_seq,
+                                "caption": x_cap[:240],
+                                "caption_en": x_cap[:240],
+                            })
+                continue
+
+            if "is-provider-instagram" in fcls or node.css_first("blockquote.instagram-media"):
+                bq_ig = node.css_first("blockquote.instagram-media") or node
+                ig_txt = _clean_text(bq_ig.text(separator=" "))
+                ig_txt = re.sub(r"\bView this post on Instagram\b", "", ig_txt, flags=re.I).strip()
+                if ig_txt and len(ig_txt) >= 20:
+                    ig_key = ig_txt.lower()[:120]
+                    if ig_key not in seen_p:
+                        seen_p.add(ig_key)
+                        paragraphs.append(ig_txt)
                 continue
             if "wp-block-gallery" in fcls:
                 gal_cap_el = node.css_first("figcaption.blocks-gallery-caption")
@@ -818,7 +955,7 @@ def crawl_nineto5mac(
     if not raw_html:
         return result
 
-    parsed = _parse_nineto5mac_html(raw_html)
+    parsed = _parse_nineto5mac_html(raw_html, proxies=proxies, resolve_social=(html_text is None))
     if not parsed:
         return result
 
