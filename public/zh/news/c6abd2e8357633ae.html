@@ -250,10 +250,10 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当前的图像模型（例如 Midjourney）通常使用扩散，逐渐将噪声图像细化为清晰的结果。 《神鬼寓言 5.2》采用了不同的方法，通过模拟物理绘画过程，包括刷毛纹理、绘画如何进行以及必须重新绘画的错误。</p>
 
-<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
-              <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
-                  <span>📷 现场图景: About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton</span>
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton
                 </figcaption>
             </figure>
 
@@ -263,10 +263,10 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据伊顿的说法，克劳德的工作没有外部图像模型，也没有预渲染或跟踪源图像。每一部分都是一个由 1,000 到 2,000 行组成的 Python 程序，用于驱动模拟绘画引擎。该方法类似于代理图像编辑，其中语言模型选择工具并评估结果。</p>
 
-<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
-              <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
-                  <span>📷 现场图景: For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton</span>
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton
                 </figcaption>
             </figure>
 
@@ -278,8 +278,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在两次传递之间，模型会像真正的画家一样看着画布并对自己的错误做出反应。当鸟的背部变得太薄且参差不齐时，人工智能会在它上面进行更大胆的描边，因此边缘上的杂散鬃毛痕迹现在看起来像皱褶的羽毛。</p>
 
-<figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="资讯配图" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               
             </figure>
 

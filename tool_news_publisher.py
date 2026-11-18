@@ -785,22 +785,33 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
             img_idx += 1
             i_url = cur_img["url"]
             if is_zh:
-                i_cap = cur_img.get("caption_zh") or cur_img.get("caption") or cur_img.get("alt") or ""
+                raw_cap = (cur_img.get("caption_zh") or cur_img.get("caption") or cur_img.get("alt") or "").strip()
             else:
-                i_cap = cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "Field scene"
-            
+                raw_cap = (cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "").strip()
+
+            # 杜绝无意义的 "Field scene" / "Article image" 占位图注，仅保留真实新闻图注
+            is_dummy_cap = (not raw_cap) or (raw_cap.lower() in ("field scene", "article image", "image", "photo", "现场图景", "配图", "资讯原文配图"))
+            alt_text = raw_cap if not is_dummy_cap else ("资讯配图" if is_zh else "Editorial illustration")
             caption_html = ""
-            if i_cap:
-                prefix = "📷 现场图景: " if is_zh else "📷 Field Scene: "
+            if not is_dummy_cap:
                 caption_html = f"""
-                <figcaption class="px-4 py-2.5 text-xs text-slate-500 dark:text-slate-400 flex items-center gap-2 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium">
-                  <span>{prefix}{escape(i_cap)}</span>
+                <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 {escape(raw_cap)}
                 </figcaption>
                 """.strip()
 
+            # 全尺寸自适应配图：竖屏截图/图表居中完整展示不裁切，横屏高清自适应，自动移除小图标与超宽水印/广告条
+            img_onload = (
+                "if(this.naturalWidth&&this.naturalHeight){"
+                "if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){"
+                "var f=this.closest('figure');if(f)f.remove();return;}"
+                "if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}"
+                "else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}"
+                "}"
+            )
             rendered_elements.append(f"""
-            <figure class="my-8 rounded-2xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-sm transition hover:shadow-md">
-              <img src="{escape(i_url)}" alt="{escape(i_cap)}" class="w-full max-h-[480px] object-cover sm:rounded-t-2xl transition duration-300 hover:opacity-95" loading="lazy" />
+            <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="{escape(i_url)}" alt="{escape(alt_text)}" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="{img_onload}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               {caption_html}
             </figure>
             """.strip())
@@ -889,7 +900,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         author_prefix = "记者 / 供稿: " if is_zh else "By "
         author_byline_html = f'<div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>{author_prefix}{escape(author_name)}</span></div>'
 
-    # 全局付费墙/订阅促销话术防线（杜绝 "Pay a year upfront and save 20%" 等污染要点与正文）
+    # 全局付费墙/订阅促销/返佣广告话术防线（杜绝 "Pay a year upfront" / "earn a small commission" 等污染要点与正文）
     PROMO_NOISE_RE = re.compile(
         r"(?:pay a year upfront|then \$\d+\s*per month|complete digital access to quality|"
         r"essential digital access to quality|cancel or change your plan anytime|"
@@ -898,7 +909,11 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         r"already a subscriber\??\s*log in|myft digest|unlock the editor['’]s digest|"
         r"most read from the washington post|democracy dies in darkness|you were gifted this article|"
         r"posts from this topic will be added to your daily email digest|delivered directly to your inbox|"
-        r"预付一年.*省\s*\d+%|每月\s*\d+\s*美元.*数字访问|完整数字访问|基本数字访问|订阅以解锁)",
+        r"when you purchase through links in our articles|we may earn a (?:small )?commission|"
+        r"doesn['’]t affect our editorial independence|income earning auto affiliate links|"
+        r"subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|where was nvidia['’]s security team\?|"
+        r"预付一年.*省\s*\d+%|每月\s*\d+\s*美元.*数字访问|完整数字访问|基本数字访问|订阅以解锁|"
+        r"通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)",
         re.I,
     )
 
@@ -957,6 +972,17 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             v_provider = "stn"
 
         v_outbound = v_direct_url or (v_raw_url if (v_raw_url.startswith("http") and "embedcode" not in v_raw_url and "cloudfront.net" not in v_raw_url) else source_url)
+        # 严格拦截广告联盟/推广视频播放器 (doubleclick, jwplayer inline promo, taboola, connatix, primis, outbrain 等)
+        AD_VIDEO_TOKENS = (
+            "doubleclick", "googlesyndication", "taboola", "outbrain", "connatix",
+            "primis", "anyclip", "ex.co", "jw-player-inline-promo", "cdn.jwplayer.com",
+            "video-ad", "sponsored", "adsystem", "adsafeprotected"
+        )
+        is_ad_video = any(tok in v_raw_url.lower() for tok in AD_VIDEO_TOKENS)
+        if is_ad_video:
+            v_raw_url = ""
+            v_provider = ""
+            v_id = ""
         v_custom_title = str(item.get("video_title") or "").strip()
         v_aspect = str(item.get("video_aspect") or "").strip().lower()
         v_poster = str(item.get("video_poster") or "").strip() or image_url
@@ -983,7 +1009,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         v_action = "原站观看 ↗" if is_zh else "Watch on Source ↗"
         v_desc = f"原文包含 {escape(source_name)} 独家现场视频报道与深度实录。" if is_zh else f"Embedded official video report from {escape(source_name)}."
 
-        if v_provider == "stn" and v_id:
+        if is_ad_video:
+            video_html = ""
+        elif v_provider == "stn" and v_id:
             sc_play = re.sub(r'-14497$', '-16481', v_id)
             stn_srcdoc = (
                 "<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
@@ -1078,9 +1106,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
 
     paras = []
     if full_text and len(full_text) > 120:
-        paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) >= 3]
+        paras = [p.strip() for p in full_text.split("\n\n") if len(p.strip()) >= 3 and not PROMO_NOISE_RE.search(p)]
         if not paras:
-            paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) >= 3]
+            paras = [p.strip() for p in full_text.split("\n") if len(p.strip()) >= 3 and not PROMO_NOISE_RE.search(p)]
         is_excerpt = is_paywalled or (len(paras) <= 6 and not item.get("is_substantive"))
     elif is_paywalled:
         fallback_snippet = str((item.get("summary_zh") or item.get("content_snippet") or summary) if is_zh else (item.get("summary_en") or item.get("content_snippet") or summary) or "").strip()
@@ -1114,7 +1142,10 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             "gravatar", "profile_image", "profile-pic", "-portrait-", "-mug-", "staff-",
             "resize/312x208", "resize/330x220", "resize/300x200",
             "w_40,h_40", "w_48,h_48", "w_64,h_64", "w_80,h_80", "w_96,h_96",
-            "h_116,c_limit", "375x375", "150x150", "200x200", "bloomberg-bna-brightspot"
+            "h_116,c_limit", "375x375", "150x150", "200x200", "bloomberg-bna-brightspot",
+            "grey-placeholder", "techcrunch-logo", "tc-logo", "wordmark", "site-logo",
+            "brand-logo", "ad-banner", "/ads/", "doubleclick", "googlesyndication",
+            "taboola", "outbrain", "mgid", "promo-banner", "sponsored", "default-share", ".svg"
         )
 
         for img_entry in raw_inline_images:

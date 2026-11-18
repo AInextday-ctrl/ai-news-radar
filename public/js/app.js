@@ -9299,9 +9299,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${styledContent}</p>`;
       };
 
-      // 组装段落与正文穿插配图
+      // 组装段落与正文穿插配图（过滤返佣/订阅/促销广告段 + 全尺寸自适应无裁切配图）
+      const modalPromoParaRe = /(?:when you purchase through links in our articles|we may earn a (?:small )?commission|doesn['’]t affect our editorial independence|income earning auto affiliate links|pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|posts from this topic will be added to your daily email digest|where was nvidia['’]s security team\?|通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)/i;
       const elements = [];
       for (let i = 0; i < rawParas.length; i++) {
+        if (modalPromoParaRe.test(String(rawParas[i] || ''))) continue;
         elements.push(renderPara(rawParas[i], i));
 
         let shouldInsertPhoto = false;
@@ -9313,14 +9315,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
 
         if (shouldInsertPhoto) {
           const curImg = usableImages[imgIdx++];
-          const prefix = isZh ? '📷 现场图景: ' : '📷 Field Scene: ';
-          const rawCap = isZh ? (curImg.caption || curImg.alt || '') : (curImg.caption_en || curImg.alt || curImg.caption || '');
-          const capHtml = rawCap
-            ? `<figcaption class="px-3.5 py-2 text-[11px] text-slate-500 dark:text-slate-400 flex items-center gap-1.5 border-t border-slate-200/60 dark:border-slate-800/60 bg-white/70 dark:bg-slate-950/70 font-medium"><span>${prefix}${escapeHtml(rawCap)}</span></figcaption>`
+          const rawCap = (isZh ? (curImg.caption || curImg.alt || '') : (curImg.caption_en || curImg.alt || curImg.caption || '')).trim();
+          const isDummyCap = !rawCap || /^(?:field scene|article image|image|photo|现场图景|配图|资讯原文配图)$/i.test(rawCap);
+          const capHtml = !isDummyCap
+            ? `<figcaption class="mt-2 px-1 text-[11px] text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">📷 ${escapeHtml(rawCap)}</figcaption>`
             : '';
+          const imgOnload = "if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,360px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,460px)';}}";
           elements.push(`
-            <figure class="my-4 rounded-xl overflow-hidden border border-slate-200/80 dark:border-slate-800 bg-slate-100/60 dark:bg-slate-900/60 shadow-xs">
-              <img src="${escapeHtml(curImg.url)}" alt="${escapeHtml(rawCap || 'Article image')}" class="w-full max-h-[380px] object-cover sm:rounded-t-xl transition duration-300 hover:opacity-95" loading="lazy" />
+            <figure class="my-5 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="${escapeHtml(curImg.url)}" alt="${escapeHtml(!isDummyCap ? rawCap : (isZh ? '资讯配图' : 'Editorial illustration'))}" class="w-auto max-w-full h-auto max-h-[600px] rounded-xl border border-slate-200/80 dark:border-slate-800 shadow-xs transition duration-300 hover:shadow-md block" loading="lazy" onload="${imgOnload}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               ${capHtml}
             </figure>
           `);
@@ -9560,7 +9563,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const cap = (typeof entry === 'object' && entry ? (entry.caption || entry.alt || '') : '').toLowerCase().trim();
         const authLow = String(item.author || '').toLowerCase().trim();
         if (!u) return true;
-        const avatarTokens = ['blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 'profile_image', 'profile-pic', '-portrait-', '375x375', '150x150', '200x200', 'w_40,h_40', 'bloomberg-bna-brightspot'];
+        const avatarTokens = ['blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 'profile_image', 'profile-pic', '-portrait-', '-mug-', 'staff-', 'resize/312x208', 'resize/330x220', 'resize/300x200', '375x375', '150x150', '200x200', 'w_40,h_40', 'bloomberg-bna-brightspot', 'grey-placeholder', 'techcrunch-logo', 'tc-logo', 'wordmark', 'site-logo', 'brand-logo', 'ad-banner', '/ads/', 'doubleclick', 'googlesyndication', 'taboola', 'outbrain', 'mgid', 'promo-banner', 'sponsored', 'default-share', '.svg'];
         if (avatarTokens.some(tok => u.includes(tok))) return true;
         if (authLow && authLow.length > 3 && (cap === authLow || cap === `by ${authLow}`)) return true;
         return false;
@@ -9641,7 +9644,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ? (item.fact_bullets_zh || analysis.key_points_zh || analysis.fact_bullets_zh || [])
         : (item.fact_bullets_en || analysis.key_points_en || analysis.fact_bullets_en || []);
 
-      const promoBulletRe = /(?:pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|cancel or change your plan|free access via your university|try unlimited access|subscribe to unlock|want all of the times|already a subscriber|myft digest|unlock the editor['’]s digest|posts from this topic will be added to your daily email digest|delivered directly to your inbox|预付一年.*省|完整数字访问|基本数字访问|订阅以解锁)/i;
+      const promoBulletRe = /(?:pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|cancel or change your plan|free access via your university|try unlimited access|subscribe to unlock|want all of the times|already a subscriber|myft digest|unlock the editor['’]s digest|posts from this topic will be added to your daily email digest|delivered directly to your inbox|when you purchase through links in our articles|we may earn a (?:small )?commission|doesn['’]t affect our editorial independence|income earning auto affiliate links|subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|预付一年.*省|完整数字访问|基本数字访问|订阅以解锁|通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)/i;
       if (bulletsWrapEl && bulletsListEl) {
         let finalBullets = (Array.isArray(rawBullets) && rawBullets.length > 0)
           ? rawBullets.filter(b => b && !promoBulletRe.test(String(b)))
@@ -9927,8 +9930,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       if (videoBadgeEl) {
-        if (hasVideo) {
-          const vRaw = String(item.video_url || '').trim();
+        const adVideoRe = /(?:doubleclick|googlesyndication|taboola|outbrain|connatix|primis|anyclip|ex\.co|jw-player-inline-promo|cdn\.jwplayer\.com|video-ad|sponsored|adsystem|adsafeprotected)/i;
+        const vRawCheck = String(item.video_url || '').trim();
+        if (hasVideo && !adVideoRe.test(vRawCheck)) {
+          const vRaw = vRawCheck;
           const vDirect = String(item.video_direct_url || '').trim();
           let vId = String(item.video_id || '').trim();
           if (!vId && vRaw.includes('SC=')) {

@@ -92,6 +92,14 @@ TC_NOISE_PHRASES = [
     "all rights reserved",
     "advertisement",
     "sponsored content",
+    "when you purchase through links",
+    "we may earn a small commission",
+    "earn a small commission",
+    "affect our editorial independence",
+    "affiliate links",
+    "sponsored by",
+    "where was nvidia's security team",
+    "where was nvidia’s security team",
 ]
 
 AUDIO_ONLY_IFRAME_DOMAINS = (
@@ -128,6 +136,16 @@ BAD_IMAGE_TOKENS = (
     "disrupt-banner",
     "event-banner",
     "strictlyvc",
+    "techcrunch-logo",
+    "tc-logo",
+    "wordmark",
+    "site-logo",
+    "brand-logo",
+    "grey-placeholder",
+    "ad-banner",
+    "/ads/",
+    "taboola",
+    "outbrain",
     "1x1",
 )
 
