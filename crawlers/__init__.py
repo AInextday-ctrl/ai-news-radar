@@ -25,6 +25,7 @@ from .decoder_crawler import crawl_decoder, is_decoder_url
 from .openai_crawler import crawl_openai, is_openai_url
 from .siliconangle_crawler import crawl_siliconangle, is_siliconangle_url
 from .semafor_crawler import crawl_semafor, is_semafor_url
+from .coindesk_crawler import crawl_coindesk, is_coindesk_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -65,6 +66,8 @@ __all__ = [
     "is_siliconangle_url",
     "crawl_semafor",
     "is_semafor_url",
+    "crawl_coindesk",
+    "is_coindesk_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]

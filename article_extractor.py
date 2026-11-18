@@ -901,6 +901,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "coindesk.com" in domain:
+            try:
+                from crawlers.coindesk_crawler import crawl_coindesk
+                cd_data = crawl_coindesk(url, html_text=html_text)
+                if cd_data.get("is_filtered_out"):
+                    result.update(cd_data)
+                    return result
+                if cd_data.get("is_substantive") or cd_data.get("paras_count", 0) >= 1 or cd_data.get("title"):
+                    result.update(cd_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

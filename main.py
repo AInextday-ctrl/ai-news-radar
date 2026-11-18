@@ -1153,6 +1153,7 @@ def load_existing_items() -> list:
     openai_live_budget = 4
     siliconangle_live_budget = 4
     semafor_live_budget = 4
+    coindesk_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2405,6 +2406,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if sem_data.get(vk):
                                 it[vk] = sem_data[vk]
+                except Exception:
+                    pass
+
+        # 6.19 CoinDesk (coindesk.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "coindesk.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_cd = _extract_item_ts(it)
+            is_recent_cd = (ts_cd > 0) and ((now_ts_load - ts_cd) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_cd_fix = is_recent_cd and coindesk_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "CoinDesk") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/coindesk_")
+            )
+            if needs_cd_fix:
+                coindesk_live_budget -= 1
+                try:
+                    from crawlers.coindesk_crawler import crawl_coindesk
+                    cd_data = crawl_coindesk(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if cd_data.get("is_filtered_out"):
+                        continue
+                    if cd_data.get("title"):
+                        it["title"] = cd_data["title"]
+                        it["title_en"] = cd_data["title"]
+                    if cd_data.get("author") and cd_data["author"] != "CoinDesk":
+                        it["author"] = cd_data["author"]
+                    if cd_data.get("cover_image") and str(cd_data["cover_image"]).startswith("http"):
+                        it["image_url"] = cd_data["cover_image"]
+                        it["cover_image"] = cd_data["cover_image"]
+                    if cd_data.get("is_substantive") and cd_data.get("full_text"):
+                        it["paragraphs"] = cd_data.get("paragraphs", [])
+                        it["subheadings"] = cd_data.get("subheadings", [])
+                        it["article_content"] = cd_data["full_text"]
+                        it["article_content_en"] = cd_data["full_text"]
+                        it["inline_images"] = cd_data.get("inline_images", [])
+                        if cd_data.get("inline_videos"):
+                            it["inline_videos"] = cd_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if cd_data.get("has_video") and cd_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = cd_data["video_url"]
+                        if cd_data.get("video_id"):
+                            it["video_id"] = cd_data["video_id"]
+                        it["video_provider"] = cd_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if cd_data.get(vk):
+                                it[vk] = cd_data[vk]
                 except Exception:
                     pass
 
