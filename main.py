@@ -1158,6 +1158,7 @@ def load_existing_items() -> list:
     ifixit_live_budget = 4
     nineto5mac_live_budget = 4
     tomshardware_live_budget = 4
+    bbc_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2660,6 +2661,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if th_data.get(vk):
                                 it[vk] = th_data[vk]
+                except Exception:
+                    pass
+
+        # 6.24 BBC News (bbc.com / bbc.co.uk) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and ("bbc.com/" in str(it.get("url") or "").lower() or "bbc.co.uk/" in str(it.get("url") or "").lower()):
+            u_now = str(it.get("url") or "")
+            ts_bbc = _extract_item_ts(it)
+            is_recent_bbc = (ts_bbc > 0) and ((now_ts_load - ts_bbc) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_bbc_fix = is_recent_bbc and bbc_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "BBC", "BBC News") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/bbc_")
+            )
+            if needs_bbc_fix:
+                bbc_live_budget -= 1
+                try:
+                    from crawlers.bbc_crawler import crawl_bbc
+                    bbc_data = crawl_bbc(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if bbc_data.get("is_filtered_out"):
+                        continue
+                    if bbc_data.get("title"):
+                        it["title"] = bbc_data["title"]
+                        it["title_en"] = bbc_data["title"]
+                    if bbc_data.get("author") and bbc_data["author"] not in ("BBC", "BBC News"):
+                        it["author"] = bbc_data["author"]
+                    if bbc_data.get("cover_image") and str(bbc_data["cover_image"]).startswith("http"):
+                        it["image_url"] = bbc_data["cover_image"]
+                        it["cover_image"] = bbc_data["cover_image"]
+                    if bbc_data.get("is_substantive") and bbc_data.get("full_text"):
+                        it["paragraphs"] = bbc_data.get("paragraphs", [])
+                        it["subheadings"] = bbc_data.get("subheadings", [])
+                        it["article_content"] = bbc_data["full_text"]
+                        it["article_content_en"] = bbc_data["full_text"]
+                        it["inline_images"] = bbc_data.get("inline_images", [])
+                        if bbc_data.get("inline_videos"):
+                            it["inline_videos"] = bbc_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if bbc_data.get("has_video") and bbc_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = bbc_data["video_url"]
+                        if bbc_data.get("video_id"):
+                            it["video_id"] = bbc_data["video_id"]
+                        it["video_provider"] = bbc_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if bbc_data.get(vk):
+                                it[vk] = bbc_data[vk]
                 except Exception:
                     pass
 
