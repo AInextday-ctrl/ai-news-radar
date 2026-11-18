@@ -102,6 +102,69 @@ def is_reuters_url(url: str) -> bool:
     return "reuters.com" in u or "reutersagency.com" in u
 
 
+def _is_valid_cover_image(img_url: Optional[str]) -> bool:
+    """Validates that a candidate cover image is an absolute, non-placeholder photographic URL."""
+    if not img_url or not isinstance(img_url, str):
+        return False
+    u = img_url.strip()
+    if not (u.startswith("http://") or u.startswith("https://")):
+        return False
+    low = u.lower()
+    bad_tokens = [
+        "promo_area", "stock%20exchange", "stock-exchange", "logo", "icon",
+        "pixel", "avatar", "banner", "placeholder", "favicon", "site-logo",
+        "unsplash.com", "atlanticcouncil.org", "default-share", "og-default"
+    ]
+    return not any(b in low for b in bad_tokens)
+
+
+def _localize_reuters_image(img_url: str, canonical_url: str, proxies: Optional[Dict[str, str]] = None) -> str:
+    """Downloads authentic Reuters wire photo locally to public/images/reuters_<hash>.jpg to prevent hotlink breakage."""
+    if not _is_valid_cover_image(img_url):
+        return img_url
+    if "ainewsradar.xyz/images/" in img_url or "images.reuters.com/sample_" in img_url:
+        return img_url
+    try:
+        import hashlib
+        img_id = hashlib.md5(canonical_url.encode("utf-8")).hexdigest()[:16]
+        filename = f"reuters_{img_id}.jpg"
+        local_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "public", "images", filename
+        )
+        cdn_url = f"https://ainewsradar.xyz/images/{filename}"
+        if os.path.exists(local_path) and os.path.getsize(local_path) > 5000:
+            return cdn_url
+
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Referer": "https://www.marketscreener.com/"
+        }
+        content = None
+        if HAS_CURL_CFFI:
+            try:
+                r = cffi_requests.get(img_url, impersonate="chrome120", headers=headers, proxies=proxies, timeout=12)
+                if r.status_code == 200 and len(r.content) > 5000 and r.headers.get("content-type", "").startswith("image/"):
+                    content = r.content
+            except Exception:
+                pass
+        if not content and HAS_REQUESTS:
+            try:
+                r = requests.get(img_url, headers=headers, proxies=proxies, timeout=12)
+                if r.status_code == 200 and len(r.content) > 5000 and r.headers.get("content-type", "").startswith("image/"):
+                    content = r.content
+            except Exception:
+                pass
+        if content:
+            os.makedirs(os.path.dirname(local_path), exist_ok=True)
+            with open(local_path, "wb") as f:
+                f.write(content)
+            return cdn_url
+    except Exception:
+        pass
+    return img_url
+
+
 def _get_proxies() -> Optional[Dict[str, str]]:
     """Discovers available network proxies (env vars or local port 7890/7897)."""
     http_p = os.environ.get("HTTP_PROXY") or os.environ.get("http_proxy")
@@ -207,21 +270,21 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
     if not url:
         return result
 
-    clean_url = url.split('#')[0].strip()
+    clean_url = url.split('#')[0].split('?')[0].strip()
     if not html_text and not force_refresh:
         if clean_url in _REUTERS_CACHE:
             cached = _REUTERS_CACHE[clean_url]
-            if cached.get("status") == "success" and cached.get("is_substantive"):
+            if cached.get("status") == "success" and cached.get("is_substantive") and _is_valid_cover_image(cached.get("cover_image")):
                 return dict(cached)
         disk_cached = _get_from_disk_cache(clean_url)
-        if disk_cached and disk_cached.get("status") == "success" and disk_cached.get("is_substantive"):
+        if disk_cached and disk_cached.get("status") == "success" and disk_cached.get("is_substantive") and _is_valid_cover_image(disk_cached.get("cover_image")):
             _REUTERS_CACHE[clean_url] = dict(disk_cached)
             return dict(disk_cached)
 
     proxies = _get_proxies()
 
-    # Extract article slug from URL
-    slug = url.rstrip('/').split('/')[-1]
+    # Extract article slug from canonical path (query params stripped)
+    slug = clean_url.rstrip('/').split('/')[-1]
     slug = re.sub(r'-\d{4}-\d{2}-\d{2}$', '', slug)
     if not result["title"] and slug:
         result["title"] = slug.replace('-', ' ').title()
@@ -455,20 +518,22 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                     # Title
                     h1 = tree.css_first('h1')
                     if h1 and len(h1.text().strip()) > 10:
-                        cand_h1 = h1.text().strip()
-                        if not any(cand_h1.lower() == junk for junk in ['trendingnow', 'trending now', 'home', 'reuters', 'news', 'latest news', 'editorial']):
+                        cand_h1 = re.sub(r'^(?:EXCLUSIVE|Exclusive|UPDATE\s*\d+|CORRECTED|RPT|FACTBOX|TIMELINE)\s*[-:]\s*', '', h1.text().strip()).strip()
+                        if cand_h1 and not any(cand_h1.lower() == junk for junk in ['trendingnow', 'trending now', 'home', 'reuters', 'news', 'latest news', 'editorial']):
                             result["title"] = cand_h1
 
                     # Master photo
                     og_img = tree.css_first('meta[property="og:image"]') or tree.css_first('meta[name="twitter:image"]')
                     if og_img and og_img.attributes.get('content'):
-                        cover_img = og_img.attributes.get('content').strip()
+                        cand_img = og_img.attributes.get('content').strip()
+                        if _is_valid_cover_image(cand_img):
+                            cover_img = cand_img
 
                     # Fallback to article image if meta image is missing
                     if not cover_img:
                         for img in tree.css('img'):
-                            src = img.attributes.get('src') or img.attributes.get('data-src') or ''
-                            if any(ext in src.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']) and not any(b in src.lower() for b in ['logo', 'icon', 'pixel', 'avatar', 'banner']):
+                            src = (img.attributes.get('src') or img.attributes.get('data-src') or '').strip()
+                            if any(ext in src.lower() for ext in ['.jpg', '.jpeg', '.png', '.webp']) and _is_valid_cover_image(src):
                                 cover_img = src
                                 break
 
@@ -478,17 +543,30 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                         for p_node in container.css('p'):
                             txt = _clean_paragraph(p_node.text())
                             if txt and len(txt) >= 25 and not txt.startswith('Published on') and not txt.startswith('Modified on'):
+                                if txt.startswith('FILE PHOTO:') or (txt.startswith('REUTERS/') and len(txt) < 220):
+                                    continue
                                 if txt.startswith('By ') and len(txt) < 80:
                                     author = txt.replace('By ', '').strip()
                                     continue
                                 if txt not in paras:
                                     paras.append(txt)
                 else:
-                    # Regex fallback
+                    # Regex fallback (also extracts authentic title & og:image)
+                    m_og_t = re.search(r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']', synd_html, re.I)
+                    if m_og_t:
+                        cand_h1 = re.sub(r'^(?:EXCLUSIVE|Exclusive|UPDATE\s*\d+|CORRECTED|RPT|FACTBOX|TIMELINE)\s*[-:]\s*', '', html.unescape(m_og_t.group(1)).strip()).strip()
+                        cand_h1 = re.sub(r'\s*[-|]\s*(?:MarketScreener|Yahoo.*|Zonebourse|TradingView|MSN).*$', '', cand_h1, flags=re.I).strip()
+                        if len(cand_h1) > 10:
+                            result["title"] = cand_h1
+                    m_og_i = re.search(r'<meta[^>]+(?:property|name)=["\'](?:og:image|twitter:image)["\'][^>]+content=["\']([^"\']+)["\']', synd_html, re.I)
+                    if m_og_i:
+                        cand_img = html.unescape(m_og_i.group(1)).strip()
+                        if _is_valid_cover_image(cand_img):
+                            cover_img = cand_img
                     p_matches = re.findall(r'<p[^>]*>(.*?)</p>', synd_html, re.DOTALL | re.I)
                     for pm in p_matches:
                         cp = _clean_paragraph(pm)
-                        if cp and len(cp) >= 25 and not cp.startswith('Published on'):
+                        if cp and len(cp) >= 25 and not cp.startswith('Published on') and not cp.startswith('FILE PHOTO:'):
                             if cp not in paras:
                                 paras.append(cp)
 
@@ -503,10 +581,10 @@ def crawl_reuters(url: str, title: Optional[str] = None, html_text: Optional[str
                     result["full_text"] = "\n\n".join(paras)
                     result["lead_paragraph"] = paras[0]
                     result["subheadings"] = [p for p in paras if p.isupper() and 5 <= len(p) <= 80 and not p.startswith('($') and not p.endswith('.')]
-                    if cover_img:
-                        result["cover_image"] = cover_img
-                    elif result["inline_images"]:
-                        result["cover_image"] = result["inline_images"][0]["url"]
+                    if cover_img and _is_valid_cover_image(cover_img):
+                        result["cover_image"] = _localize_reuters_image(cover_img, clean_url, proxies=proxies)
+                    elif result["inline_images"] and _is_valid_cover_image(result["inline_images"][0].get("url")):
+                        result["cover_image"] = _localize_reuters_image(result["inline_images"][0]["url"], clean_url, proxies=proxies)
 
                     if author:
                         result["author"] = author

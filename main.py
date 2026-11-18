@@ -1235,6 +1235,26 @@ def load_existing_items() -> list:
                                 it["image_url"] = b_data["cover_image"]
                         except Exception:
                             pass
+                    # 若解析还原为 Reuters 路透社，立即同步获取其源站真实官方标题、官方原图与全文
+                    elif "reuters.com" in real_u.lower() or "reutersagency.com" in real_u.lower():
+                        try:
+                            from crawlers.reuters_crawler import crawl_reuters
+                            r_data = crawl_reuters(real_u, title=it.get("title", ""))
+                            if r_data.get("title"):
+                                it["title"] = r_data["title"]
+                                it["title_en"] = r_data["title"]
+                            if r_data.get("author"):
+                                it["author"] = r_data["author"]
+                            if r_data.get("cover_image") and str(r_data["cover_image"]).startswith("http"):
+                                it["image_url"] = r_data["cover_image"]
+                            if r_data.get("is_substantive") and r_data.get("full_text"):
+                                it["paragraphs"] = r_data.get("paragraphs", [])
+                                it["article_content"] = r_data["full_text"]
+                                it["article_content_en"] = r_data["full_text"]
+                                it["is_substantive"] = True
+                                it["is_paywalled"] = False
+                        except Exception:
+                            pass
                 else:
                     continue
             else:
@@ -1266,6 +1286,55 @@ def load_existing_items() -> list:
                         it["article_content_en"] = b_data["full_text"]
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
+                except Exception:
+                    pass
+
+        # 6.2 路透社 (Reuters) 官方真实标题、官方高清原图与全文自愈保真机制 (防首次入库抓空锁死与 Techmeme 标题污染)
+        u_now = str(it.get("url") or u or "")
+        if "reuters.com" in u_now.lower() or "reutersagency.com" in u_now.lower():
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_r_fix = (
+                ("(" in t_curr and "reuters" in t_curr.lower()) or
+                t_curr.startswith("Sources:") or
+                not img_curr or
+                not img_curr.startswith("http") or
+                "unsplash.com" in img_curr or
+                "promo_area" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200
+            )
+            if needs_r_fix:
+                try:
+                    from crawlers.reuters_crawler import crawl_reuters
+                    r_data = crawl_reuters(u_now, title=t_curr)
+                    if r_data.get("title") and not ("(" in r_data["title"] and "reuters" in r_data["title"].lower()):
+                        it["title"] = r_data["title"]
+                        it["title_en"] = r_data["title"]
+                    if r_data.get("author"):
+                        it["author"] = r_data["author"]
+                    if r_data.get("cover_image") and str(r_data["cover_image"]).startswith("http"):
+                        it["image_url"] = r_data["cover_image"]
+                    if r_data.get("is_substantive") and len(r_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = r_data.get("paragraphs", [])
+                        it["article_content"] = r_data["full_text"]
+                        it["article_content_en"] = r_data["full_text"]
+                        if r_data.get("inline_images"):
+                            it["inline_images"] = r_data["inline_images"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = r_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_paras = []
+                        for p in paras_en:
+                            tr = free_translate_zh(p)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_paras.append(tr.strip())
+                        if zh_paras:
+                            it["article_content_zh"] = "\n\n".join(zh_paras)
                 except Exception:
                     pass
 

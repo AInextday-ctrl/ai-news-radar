@@ -67,6 +67,25 @@ class TestReutersCrawler(unittest.TestCase):
         self.assertGreaterEqual(len(res["paragraphs"]), 15)
         self.assertIsNotNone(res["cover_image"])
 
+    def test_cover_image_validation_and_query_stripping(self):
+        """Verifies relative/promo cover images are rejected and ?ref= params do not corrupt slug."""
+        from crawlers.reuters_crawler import _is_valid_cover_image
+        self.assertFalse(_is_valid_cover_image("/sites/default/files/styles/promo_area/public/2026-03/Athens%20Stock%20Exchange%20a.png"))
+        self.assertFalse(_is_valid_cover_image("https://images.unsplash.com/photo-1620712943543-bcc4688e7485"))
+        self.assertFalse(_is_valid_cover_image("https://www.atlanticcouncil.org/wp-content/uploads/test.jpg"))
+        self.assertTrue(_is_valid_cover_image("https://cdn.zonebourse.com/static/resize/0/0//images/reuters/2026-07/CRITEO.JPG"))
+        self.assertTrue(_is_valid_cover_image("https://ainewsradar.xyz/images/reuters_51756a89978254ea.jpg"))
+
+    def test_requirements_include_crawler_deps(self):
+        """Verifies GitHub Actions requirements.txt includes curl-cffi and selectolax for isolated crawlers."""
+        import os
+        req_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "requirements.txt")
+        with open(req_path, "r", encoding="utf-8") as f:
+            reqs = f.read().lower()
+        self.assertIn("curl-cffi", reqs)
+        self.assertIn("selectolax", reqs)
+        self.assertIn("googlenewsdecoder", reqs)
+
 
 if __name__ == '__main__':
     unittest.main()
