@@ -2578,7 +2578,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               if (existingMap.has(k)) {
                 // 深度回填与补全长文、多图与深度研判，杜绝由于首页轻量 JSON 导致的截断
                 const ex = existingMap.get(k);
-                ['article_content', 'article_content_zh', 'inline_images', 'fact_bullets_zh', 'fact_bullets_en', 'ai_analysis'].forEach(fld => {
+                ['article_content', 'article_content_zh', 'inline_images', 'inline_videos', 'fact_bullets_zh', 'fact_bullets_en', 'ai_analysis'].forEach(fld => {
                   if (it[fld] && (!ex[fld] || (Array.isArray(it[fld]) && !ex[fld].length))) ex[fld] = it[fld];
                 });
               } else {
@@ -9177,9 +9177,9 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     // ==========================================
     // 专访与深度长文富文本排版引擎 (Rich Interview & Article Formatter)
     // ==========================================
-    function formatRichArticleContent(rawText, isZh, inlineImages, noInnerCollapse = true) {
+    function formatRichArticleContent(rawText, isZh, inlineImages, noInnerCollapse = true, inlineVideos = null, refParaCount = 0) {
       if (!rawText || typeof rawText !== 'string') return '';
-      const rawParas = rawText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 20);
+      const rawParas = rawText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.startsWith('### ') || p.startsWith('## ') || p.length > 20);
       if (rawParas.length === 0) return `<p class="leading-relaxed text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-normal">${escapeHtml(rawText)}</p>`;
 
       const usableImages = [];
@@ -9188,11 +9188,18 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         for (const img of inlineImages) {
           const u = typeof img === 'string' ? img.trim() : (img && img.url ? String(img.url).trim() : '');
           const cap = (img && typeof img === 'object') ? (img.caption || img.alt || '') : '';
+          const capEn = (img && typeof img === 'object') ? (img.caption_en || img.alt || img.caption || '') : '';
           if (!u || !u.startsWith('http')) continue;
           const cleanK = u.split('?')[0];
           if (seenImgs.has(cleanK)) continue;
           seenImgs.add(cleanK);
-          usableImages.push({ url: u, caption: cap });
+          usableImages.push({
+            url: u,
+            caption: cap,
+            caption_en: capEn,
+            after_para: (img && typeof img === 'object' && typeof img.after_para === 'number') ? img.after_para : null,
+            dom_order: (img && typeof img === 'object' && typeof img.dom_order === 'number') ? img.dom_order : null
+          });
         }
       }
 
@@ -9310,35 +9317,72 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${styledContent}</p>`;
       };
 
-      // 组装段落与正文穿插配图（过滤返佣/订阅/促销广告段 + 全量配图按精确锚点或均匀分布渲染，绝不遗漏后段配图）
+      // 组装段落与正文穿插配图/内嵌视频（过滤返佣/订阅/促销广告段 + 全量配图与视频按精确锚点渲染）
       const modalPromoParaRe = /(?:when you purchase through links in our articles|we may earn a (?:small )?commission|doesn['’]t affect our editorial independence|income earning auto affiliate links|pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|posts from this topic will be added to your daily email digest|where was nvidia['’]s security team\?|通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)/i;
-      const anchoredMap = {};
-      const unanchoredImgs = [];
-      for (const im of usableImages) {
-        if (im && typeof im.after_para === 'number' && im.after_para >= 0) {
-          const slot = Math.min(Math.max(0, total - 1), im.after_para);
-          if (!anchoredMap[slot]) anchoredMap[slot] = [];
-          anchoredMap[slot].push(im);
-        } else {
-          unanchoredImgs.push(im);
+      const mapSlot = (rawAp) => {
+        if (rawAp < 0) return -1;
+        if (isZh && refParaCount > 1 && total > 1 && total !== refParaCount) {
+          return Math.min(Math.max(0, total - 1), Math.max(0, Math.round((rawAp * (total - 1)) / (refParaCount - 1))));
         }
-      }
+        return Math.min(Math.max(0, total - 1), rawAp);
+      };
+      const anchoredMedia = {};
+      const unanchoredImgs = [];
+      usableImages.forEach((im, idxM) => {
+        const ord = (im && typeof im.dom_order === 'number') ? im.dom_order : idxM;
+        if (im && typeof im.after_para === 'number' && im.after_para >= -1) {
+          const slot = mapSlot(im.after_para);
+          if (!anchoredMedia[slot]) anchoredMedia[slot] = [];
+          anchoredMedia[slot].push({ ord, kind: 'img', data: im });
+        } else {
+          unanchoredImgs.push({ ord, data: im });
+        }
+      });
       if (unanchoredImgs.length > 0) {
         const nU = unanchoredImgs.length;
-        unanchoredImgs.forEach((im, k) => {
+        unanchoredImgs.forEach((entry, k) => {
           const slot = total <= 2 ? Math.min(total - 1, k) : Math.min(total - 1, Math.max(0, Math.round(((k + 1) * total) / (nU + 1)) - 1));
-          if (!anchoredMap[slot]) anchoredMap[slot] = [];
-          anchoredMap[slot].push(im);
+          if (!anchoredMedia[slot]) anchoredMedia[slot] = [];
+          anchoredMedia[slot].push({ ord: entry.ord, kind: 'img', data: entry.data });
         });
       }
-      const elements = [];
-      for (let i = 0; i < rawParas.length; i++) {
-        if (!modalPromoParaRe.test(String(rawParas[i] || ''))) {
-          elements.push(renderPara(rawParas[i], i));
-        }
+      if (Array.isArray(inlineVideos)) {
+        inlineVideos.forEach((vid, idxV) => {
+          if (!vid || typeof vid !== 'object' || !vid.url || !String(vid.url).startsWith('http')) return;
+          const ord = typeof vid.dom_order === 'number' ? vid.dom_order : (1000 + idxV);
+          const slot = (typeof vid.after_para === 'number' && vid.after_para >= -1) ? mapSlot(vid.after_para) : 0;
+          if (!anchoredMedia[slot]) anchoredMedia[slot] = [];
+          anchoredMedia[slot].push({ ord, kind: 'vid', data: vid });
+        });
+      }
+      Object.keys(anchoredMedia).forEach(sl => anchoredMedia[sl].sort((a, b) => a.ord - b.ord));
 
-        const slotImgs = anchoredMap[i] || [];
-        for (const curImg of slotImgs) {
+      const emitMediaForSlot = (slotIdx) => {
+        const itemsAtSlot = anchoredMedia[slotIdx] || [];
+        for (const entry of itemsAtSlot) {
+          if (entry.kind === 'vid') {
+            const vid = entry.data;
+            const vUrl = String(vid.url || '').trim();
+            const vProv = String(vid.provider || '').toLowerCase();
+            const vAsp = String(vid.aspect || '').toLowerCase();
+            const whM = vAsp.match(/^(\d+(?:\.\d+)?)\s*[x:]\s*(\d+(?:\.\d+)?)$/);
+            const isVert = /^(9x16|9:16|4x5|4:5|3x4|3:4|vertical|portrait)$/.test(vAsp) || /youtube\.com\/shorts|tiktok\.com\/|instagram\.com\/reel/i.test(vUrl) || (whM && parseFloat(whM[2]) > parseFloat(whM[1]) * 1.08);
+            const isSq = /^(1x1|1:1|square)$/.test(vAsp) || (whM && Math.abs(parseFloat(whM[2]) - parseFloat(whM[1])) <= parseFloat(whM[1]) * 0.08);
+            const vLabel = String(vid.title || vid.caption || '').trim();
+            const capHtml = vLabel ? `<figcaption class="mt-2 px-1 text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">🎬 ${escapeHtml(vLabel)}</figcaption>` : '';
+            if (vProv === 'mp4' || /\.(?:mp4|webm)(\?|$)/i.test(vUrl)) {
+              const maxCls = isVert ? 'max-w-[320px]' : (isSq ? 'max-w-[440px]' : 'w-full');
+              const ratioCls = (isVert || isSq) ? '' : 'aspect-video ';
+              const vPoster = String(vid.poster || '').trim();
+              const playUrl = (vPoster || vUrl.includes('#')) ? vUrl : `${vUrl}#t=0.5`;
+              elements.push(`<figure class="my-5 mx-auto w-full ${maxCls}"><video controls playsinline preload="metadata"${vPoster ? ` poster="${escapeHtml(vPoster)}"` : ''} class="w-full ${ratioCls}h-auto max-h-[560px] rounded-2xl shadow-md bg-black block object-contain"><source src="${escapeHtml(playUrl)}" type="video/mp4"></video>${capHtml}</figure>`);
+            } else if (vProv === 'iframe' || /youtube\.com\/embed|youtube-nocookie\.com\/embed|player\.vimeo\.com/i.test(vUrl)) {
+              const maxCls = isVert ? 'max-w-[320px] aspect-[9/16] max-h-[560px]' : (isSq ? 'max-w-[440px] aspect-square max-h-[460px]' : 'w-full aspect-video');
+              elements.push(`<figure class="my-5 mx-auto w-full ${isVert ? 'max-w-[320px]' : (isSq ? 'max-w-[440px]' : 'w-full')}"><div class="w-full ${maxCls} rounded-2xl overflow-hidden shadow-md bg-black"><iframe src="${escapeHtml(vUrl)}" scrolling="no" loading="lazy" class="w-full h-full border-0 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>${capHtml}</figure>`);
+            }
+            continue;
+          }
+          const curImg = entry.data;
           imgIdx++;
           const rawCap = (isZh ? (curImg.caption || curImg.alt || '') : (curImg.caption_en || curImg.alt || curImg.caption || '')).trim();
           const isDummyCap = !rawCap || /^(?:field scene|article image|image|photo|现场图景|配图|资讯原文配图)$/i.test(rawCap);
@@ -9353,6 +9397,15 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             </figure>
           `);
         }
+      };
+
+      const elements = [];
+      emitMediaForSlot(-1);
+      for (let i = 0; i < rawParas.length; i++) {
+        if (!modalPromoParaRe.test(String(rawParas[i] || ''))) {
+          elements.push(renderPara(rawParas[i], i));
+        }
+        emitMediaForSlot(i);
       }
 
       if (noInnerCollapse || rawParas.length <= 6) {
@@ -9839,7 +9892,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const paras = rawTextToRender
           .split(/\n\s*\n/)
           .map(p => p.trim())
-          .filter(p => p.length > 20 && !adNoiseRegexes.some(r => r.test(p)));
+          .filter(p => (p.startsWith('### ') || p.startsWith('## ') || p.length > 20) && !adNoiseRegexes.some(r => r.test(p)));
 
         const isExcerpt = Boolean(
           isPaywalled || 
@@ -9871,7 +9924,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
         }
 
-        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh', inlines, true);
+        const enRefCount = origContentEn
+          ? origContentEn.split(/\n\s*\n/).map(p => p.trim()).filter(p => (p.startsWith('### ') || p.startsWith('## ') || p.length > 20) && !adNoiseRegexes.some(r => r.test(p))).length
+          : 0;
+        const inlineVids = Array.isArray(item.inline_videos) ? item.inline_videos : [];
+        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh', inlines, true, inlineVids, enRefCount);
 
         if (expandWrapEl && expandBtnEl && expandTextEl) {
           if (paras.length > 4) {
@@ -9957,7 +10014,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (videoBadgeEl) {
         const adVideoRe = /(?:doubleclick|googlesyndication|taboola|outbrain|connatix|primis|anyclip|ex\.co|jw-player-inline-promo|cdn\.jwplayer\.com|video-ad|sponsored|adsystem|adsafeprotected)/i;
         const vRawCheck = String(item.video_url || '').trim();
-        if (hasVideo && !adVideoRe.test(vRawCheck)) {
+        const hasInlineVideos = Array.isArray(item.inline_videos) && item.inline_videos.length > 0 && Boolean(origContentEn || origContentZh);
+        if (hasVideo && !adVideoRe.test(vRawCheck) && !hasInlineVideos) {
           const vRaw = vRawCheck;
           const vDirect = String(item.video_direct_url || '').trim();
           let vId = String(item.video_id || '').trim();

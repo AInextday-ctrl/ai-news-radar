@@ -392,19 +392,98 @@ def _extract_video_from_html(fragment: str) -> Dict[str, Any]:
     return out
 
 
-def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> Tuple[List[str], List[str], List[Any], Dict[str, Any]]:
-    """Single-pass DOM-order parser preserving inline `### ` subheadings and exact `after_para` chart anchors."""
+def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> Tuple[List[str], List[str], List[Any], List[Dict[str, Any]], Dict[str, Any]]:
+    """Single-pass DOM-order parser preserving inline `### ` subheadings, ALL `after_para` figures, and ALL `after_para` inline videos."""
     paragraphs: List[str] = []
     subheadings: List[str] = []
     inline_images: List[Any] = []
+    inline_videos: List[Dict[str, Any]] = []
     seen_p = set()
     seen_stems = set()
+    seen_vids = set()
+    dom_seq = 0
     if cover_image:
         seen_stems.add(_decoder_media_stem(cover_image))
 
     vmeta = _extract_video_from_html(content_html)
     if not content_html:
-        return paragraphs, subheadings, inline_images, vmeta
+        return paragraphs, subheadings, inline_images, inline_videos, vmeta
+
+    def _record_video(
+        v_url: str,
+        provider: str,
+        vid_id: Optional[str] = None,
+        v_title: str = "",
+        aspect: str = "16x9",
+        poster: str = "",
+        caption: str = "",
+    ) -> None:
+        nonlocal dom_seq
+        u = _upgrade_https(v_url or "")
+        if not u.startswith(("http://", "https://")):
+            return
+        low = u.lower()
+        if any(aud in low for aud in AUDIO_ONLY_IFRAME_DOMAINS):
+            return
+        if any(ad in low for ad in ("doubleclick", "googlesyndication", "taboola", "outbrain", "connatix", "primis", "jw-player-inline-promo")):
+            return
+        dedup_k = (provider, (vid_id or u.split("?")[0].split("#")[0].lower()))
+        if dedup_k in seen_vids:
+            return
+        seen_vids.add(dedup_k)
+        dom_seq += 1
+        vid_obj: Dict[str, Any] = {
+            "url": u,
+            "provider": provider,
+            "after_para": len(paragraphs) - 1,
+            "aspect": aspect or "16x9",
+            "dom_order": dom_seq,
+        }
+        if vid_id:
+            vid_obj["video_id"] = vid_id
+        clean_t = _clean_text(v_title or "")
+        if clean_t:
+            vid_obj["title"] = clean_t[:200]
+        clean_c = _clean_text(caption or "")
+        if clean_c and len(clean_c) >= 5:
+            vid_obj["caption"] = clean_c[:240]
+        if poster:
+            p_up = _upgrade_https(poster)
+            if _is_valid_decoder_image(p_up):
+                vid_obj["poster"] = p_up
+        inline_videos.append(vid_obj)
+
+    def _inspect_video_node(vid_el, cap_txt: str = "") -> bool:
+        v_src = (vid_el.attributes.get("src") or vid_el.attributes.get("data-src") or "").strip()
+        if not v_src:
+            src_el = vid_el.css_first("source")
+            if src_el:
+                v_src = (src_el.attributes.get("src") or src_el.attributes.get("data-src") or "").strip()
+        if not v_src:
+            return False
+        w_s = (vid_el.attributes.get("width") or "").strip()
+        h_s = (vid_el.attributes.get("height") or "").strip()
+        aspect = f"{w_s}x{h_s}" if (w_s.isdigit() and h_s.isdigit()) else "16x9"
+        poster = (vid_el.attributes.get("poster") or "").strip()
+        v_title = (vid_el.attributes.get("title") or vid_el.attributes.get("aria-label") or "").strip()
+        _record_video(v_src, "mp4", v_title=v_title, aspect=aspect, poster=poster, caption=cap_txt)
+        return True
+
+    def _inspect_iframe_node(ifr_el, cap_txt: str = "") -> bool:
+        src = html.unescape((ifr_el.attributes.get("src") or ifr_el.attributes.get("data-src") or "").strip())
+        if not src:
+            return False
+        low = src.lower()
+        v_title = (ifr_el.attributes.get("title") or "").strip()
+        if "youtube.com/embed/" in low or "youtube-nocookie.com/embed/" in low:
+            m_yt = re.search(r"embed/([A-Za-z0-9_-]{8,15})", src)
+            _record_video(src, "iframe", vid_id=(m_yt.group(1) if m_yt else None), v_title=v_title, aspect="16x9", caption=cap_txt)
+            return True
+        if "player.vimeo.com/video/" in low:
+            m_vid = re.search(r"player\.vimeo\.com/video/(\d+)", src, re.I)
+            _record_video(src, "iframe", vid_id=(m_vid.group(1) if m_vid else None), v_title=v_title, aspect="16x9", caption=cap_txt)
+            return True
+        return False
 
     if HAS_SELECTOLAX and LexborHTMLParser is not None:
         tree = LexborHTMLParser(content_html)
@@ -418,7 +497,7 @@ def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> 
             for n in tree.css(sel):
                 n.decompose()
 
-        for node in tree.css("h2, h3, h4, figure, p, blockquote, li"):
+        for node in tree.css("h2, h3, h4, figure, video, iframe, p, blockquote, li"):
             tag = (node.tag or "").lower()
             if tag in ("p", "li", "blockquote"):
                 p_anc = node.parent
@@ -432,6 +511,14 @@ def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> 
                     continue
 
             if tag == "figure":
+                cap_el = node.css_first("figcaption")
+                cap_txt = _clean_text(cap_el.text(separator=" ") if cap_el else "")
+                vid_el = node.css_first("video")
+                if vid_el and _inspect_video_node(vid_el, cap_txt=cap_txt):
+                    continue
+                ifr_el = node.css_first("iframe")
+                if ifr_el and _inspect_iframe_node(ifr_el, cap_txt=cap_txt):
+                    continue
                 img_el = node.css_first("img")
                 if img_el:
                     src = _upgrade_https(img_el.attributes.get("data-src") or img_el.attributes.get("src") or "")
@@ -439,16 +526,25 @@ def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> 
                         stem = _decoder_media_stem(src)
                         if stem and stem not in seen_stems:
                             seen_stems.add(stem)
-                            cap_el = node.css_first("figcaption")
-                            cap_txt = _clean_text(cap_el.text(separator=" ") if cap_el else img_el.attributes.get("alt") or "")
+                            dom_seq += 1
+                            img_cap = cap_txt or _clean_text(img_el.attributes.get("alt") or "")
                             img_obj: Dict[str, Any] = {
                                 "url": src,
-                                "after_para": max(0, len(paragraphs) - 1),
+                                "after_para": len(paragraphs) - 1,
+                                "dom_order": dom_seq,
                             }
-                            if cap_txt and len(cap_txt) >= 5:
-                                img_obj["caption"] = cap_txt[:240]
-                                img_obj["caption_en"] = cap_txt[:240]
+                            if img_cap and len(img_cap) >= 5:
+                                img_obj["caption"] = img_cap[:240]
+                                img_obj["caption_en"] = img_cap[:240]
                             inline_images.append(img_obj)
+                continue
+
+            if tag == "video":
+                _inspect_video_node(node)
+                continue
+
+            if tag == "iframe":
+                _inspect_iframe_node(node)
                 continue
 
             txt = _clean_text(node.text(separator=" "))
@@ -471,7 +567,19 @@ def _parse_content_dom(content_html: str, cover_image: Optional[str] = None) -> 
                 seen_p.add(key)
                 paragraphs.append(txt)
 
-    return paragraphs, subheadings, inline_images[:6], vmeta
+    if inline_videos:
+        first_v = inline_videos[0]
+        vmeta = {
+            "has_video": True,
+            "video_url": first_v["url"],
+            "video_id": first_v.get("video_id"),
+            "video_provider": first_v.get("provider") or "iframe",
+            "video_aspect": first_v.get("aspect") or "16x9",
+            "video_poster": first_v.get("poster"),
+            "video_title": first_v.get("title") or first_v.get("caption") or "",
+        }
+
+    return paragraphs, subheadings, inline_images[:30], inline_videos[:12], vmeta
 
 
 def _parse_decoder_wp_post(post: Dict[str, Any]) -> Dict[str, Any]:
@@ -484,6 +592,7 @@ def _parse_decoder_wp_post(post: Dict[str, Any]) -> Dict[str, Any]:
         "paragraphs": [],
         "subheadings": [],
         "inline_images": [],
+        "inline_videos": [],
         "has_video": False,
         "video_url": None,
         "video_id": None,
@@ -524,10 +633,11 @@ def _parse_decoder_wp_post(post: Dict[str, Any]) -> Dict[str, Any]:
 
     content_html = (post.get("content") or {}).get("rendered") if isinstance(post.get("content"), dict) else ""
     out["raw_content_text"] = _clean_text(re.sub(r"<[^>]+>", " ", content_html))
-    paras, subs, inls, vmeta = _parse_content_dom(content_html, cover_image=out["cover_image"])
+    paras, subs, inls, inl_vids, vmeta = _parse_content_dom(content_html, cover_image=out["cover_image"])
     out["paragraphs"] = paras
     out["subheadings"] = subs
     out["inline_images"] = inls
+    out["inline_videos"] = inl_vids
     if vmeta.get("has_video"):
         out.update(vmeta)
 
@@ -544,6 +654,7 @@ def _parse_decoder_html(html_text: str) -> Dict[str, Any]:
         "paragraphs": [],
         "subheadings": [],
         "inline_images": [],
+        "inline_videos": [],
         "has_video": False,
         "video_url": None,
         "video_id": None,
@@ -596,10 +707,11 @@ def _parse_decoder_html(html_text: str) -> Dict[str, Any]:
         if body:
             frag = body.html or ""
             out["raw_content_text"] = _clean_text(body.text(separator=" "))
-            paras, subs, inls, vmeta = _parse_content_dom(frag, cover_image=out["cover_image"])
+            paras, subs, inls, inl_vids, vmeta = _parse_content_dom(frag, cover_image=out["cover_image"])
             out["paragraphs"] = paras
             out["subheadings"] = subs
             out["inline_images"] = inls
+            out["inline_videos"] = inl_vids
             if vmeta.get("has_video"):
                 out.update(vmeta)
 
@@ -682,6 +794,7 @@ def crawl_decoder(
         "cover_image": None,
         "image_url": None,
         "inline_images": [],
+        "inline_videos": [],
         "lead_paragraph": "",
         "paragraphs": [],
         "full_text": "",
@@ -803,6 +916,11 @@ def crawl_decoder(
                     parsed["paragraphs"] = hp["paragraphs"]
                     parsed["subheadings"] = hp.get("subheadings") or parsed.get("subheadings") or []
                     parsed["inline_images"] = hp.get("inline_images") or parsed.get("inline_images") or []
+                    parsed["inline_videos"] = hp.get("inline_videos") or parsed.get("inline_videos") or []
+                    if hp.get("has_video") and not parsed.get("has_video"):
+                        for vk in ("has_video", "video_url", "video_id", "video_provider", "video_aspect", "video_poster", "video_title"):
+                            if hp.get(vk):
+                                parsed[vk] = hp[vk]
                     tier = f"{tier}+{html_tier}"
 
     if not parsed:
@@ -840,6 +958,7 @@ def crawl_decoder(
         result["cover_image"] = cover
         result["image_url"] = cover
     result["inline_images"] = inlines
+    result["inline_videos"] = list(parsed.get("inline_videos") or [])
     if parsed.get("subheadings"):
         result["subheadings"] = parsed["subheadings"]
     if parsed.get("has_video") and parsed.get("video_url"):
@@ -849,6 +968,10 @@ def crawl_decoder(
         result["video_provider"] = parsed.get("video_provider") or "iframe"
         if parsed.get("video_aspect"):
             result["video_aspect"] = parsed["video_aspect"]
+        if parsed.get("video_poster"):
+            result["video_poster"] = parsed["video_poster"]
+        if parsed.get("video_title"):
+            result["video_title"] = parsed["video_title"]
 
     result["paragraphs"] = paras
     result["paras_count"] = len(paras)

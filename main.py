@@ -2213,6 +2213,8 @@ def load_existing_items() -> list:
                         it["article_content"] = d_data["full_text"]
                         it["article_content_en"] = d_data["full_text"]
                         it["inline_images"] = d_data.get("inline_images", [])
+                        if d_data.get("inline_videos"):
+                            it["inline_videos"] = d_data["inline_videos"]
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = d_data["full_text"]
@@ -2331,7 +2333,7 @@ def save_news(items: list):
             if k in master_dict:
                 existing = master_dict[k]
                 curr_has_fulltext = bool(it.get("is_substantive") or len(str(it.get("article_content") or it.get("article_content_en") or "")) >= 400)
-                for preserve_field in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
+                for preserve_field in ["article_content", "article_content_zh", "inline_images", "inline_videos", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
                     if preserve_field == "inline_images" and curr_has_fulltext:
                         continue
                     if existing.get(preserve_field) and not it.get(preserve_field):

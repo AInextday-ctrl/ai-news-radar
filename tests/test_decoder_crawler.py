@@ -85,6 +85,49 @@ class TestDecoderCrawler(unittest.TestCase):
         self.assertEqual(res["cover_image"], "https://the-decoder.com/wp-content/uploads/2026/11/matharena_chart.png")
         self.assertEqual(len(res["inline_images"]), 0)
 
+    def test_multi_inline_videos_and_more_than_six_images(self):
+        figs_html = "\n".join(
+            f'<p>Detailed benchmark paragraph number {i} discussing latency, accuracy, and token throughput across real enterprise tasks.</p>'
+            f'<figure><img src="https://the-decoder.com/wp-content/uploads/2026/11/chart_{i}.png"/><figcaption>Benchmark chart {i}</figcaption></figure>'
+            for i in range(1, 8)
+        )
+        content_html = (
+            '<p>Opening overview of the new flagship release with significant gains across coding, reasoning, and automated lab work.</p>'
+            '<iframe title="First Official Launch Video" src="https://www.youtube.com/embed/C1zYX5jwqq4?feature=oembed"></iframe>'
+            + figs_html
+            + '<p>In a physical robotics and computer-use demo, the model builds 3D scenes autonomously.</p>'
+            '<iframe title="Building 3D video sets with GPT-6.2 Astra" src="https://www.youtube.com/embed/tKoDPOrLMX0?feature=oembed"></iframe>'
+            '<figure class="wp-block-video"><video controls width="854" height="480" src="https://the-decoder.com/wp-content/uploads/2026/11/lab_demo.mp4"></video></figure>'
+            '<p>Final closing paragraph on API pricing and general availability worldwide.</p>'
+        )
+        wp_post = {
+            "id": 99125,
+            "class_list": ["type-post"],
+            "title": {"rendered": "Multi-video and 7-chart benchmark review"},
+            "jetpack_featured_media_url": "https://the-decoder.com/wp-content/uploads/2026/11/hero_cover.png",
+            "_embedded": {"author": [{"name": "Jonathan Kemper"}]},
+            "content": {"rendered": content_html},
+        }
+        res = crawl_decoder(
+            "https://the-decoder.com/multi-video-7-chart-review/",
+            wp_post=wp_post,
+            localize_cover=False,
+            use_cache=False,
+        )
+        self.assertEqual(res["status"], "success")
+        # All 7 inline images preserved (no [:6] truncation!)
+        self.assertEqual(len(res["inline_images"]), 7)
+        self.assertEqual(res["inline_images"][-1]["url"], "https://the-decoder.com/wp-content/uploads/2026/11/chart_7.png")
+        # All 3 inline videos (2 YouTube + 1 MP4) captured in exact DOM order with distinct after_para anchors
+        self.assertEqual(len(res["inline_videos"]), 3)
+        self.assertEqual(res["inline_videos"][0]["video_id"], "C1zYX5jwqq4")
+        self.assertEqual(res["inline_videos"][0]["after_para"], 0)
+        self.assertEqual(res["inline_videos"][1]["video_id"], "tKoDPOrLMX0")
+        self.assertEqual(res["inline_videos"][1]["after_para"], 8)
+        self.assertEqual(res["inline_videos"][2]["provider"], "mp4")
+        self.assertEqual(res["inline_videos"][2]["aspect"], "854x480")
+        self.assertEqual(res["inline_videos"][2]["after_para"], 8)
+
 
 if __name__ == "__main__":
     unittest.main()

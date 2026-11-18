@@ -706,36 +706,200 @@ def extract_ai_analysis_text(analysis_data: Any, is_zh: bool) -> str:
     return ""
 
 
-def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, str]], is_zh: bool = True) -> str:
+def _render_inline_video_figure(vid: Dict[str, Any], is_zh: bool, source_name: str, source_url: str) -> str:
+    v_raw_url = str(vid.get("url") or "").strip()
+    if not v_raw_url or not v_raw_url.startswith("http"):
+        return ""
+    ad_tokens = (
+        "doubleclick", "googlesyndication", "taboola", "outbrain", "connatix",
+        "primis", "anyclip", "ex.co", "jw-player-inline-promo", "cdn.jwplayer.com",
+        "video-ad", "sponsored", "adsystem", "adsafeprotected"
+    )
+    low_u = v_raw_url.lower()
+    if any(tok in low_u for tok in ad_tokens):
+        return ""
+    v_provider = str(vid.get("provider") or "").lower().strip()
+    if not v_provider:
+        if re.search(r'\.(?:mp4|webm)(\?|$)', low_u):
+            v_provider = "mp4"
+        elif any(h in low_u for h in ("youtube.com/embed", "youtube-nocookie.com/embed", "player.vimeo.com", "youtube.com/shorts")):
+            v_provider = "iframe"
+    v_aspect = str(vid.get("aspect") or "").strip().lower()
+    is_vertical_vid = v_aspect in ("9x16", "9:16", "4x5", "4:5", "3x4", "3:4", "vertical", "portrait") or any(
+        tok in low_u for tok in ("youtube.com/shorts/", "tiktok.com/", "instagram.com/reel/")
+    )
+    is_square_vid = v_aspect in ("1x1", "1:1", "square")
+    if not is_vertical_vid and not is_square_vid and v_aspect:
+        m_wh = re.match(r'^(\d+(?:\.\d+)?)\s*[x:]\s*(\d+(?:\.\d+)?)$', v_aspect)
+        if m_wh:
+            vw, vh = float(m_wh.group(1)), float(m_wh.group(2))
+            if vw > 0 and vh > 0:
+                if vh > vw * 1.08:
+                    is_vertical_vid = True
+                elif abs(vh - vw) <= vw * 0.08:
+                    is_square_vid = True
+
+    v_label = str(vid.get("title") or vid.get("caption") or "").strip()
+    if not v_label:
+        v_label = f"视频演示 · {source_name}" if is_zh else f"Featured Video · {source_name}"
+    v_action = "原站观看 ↗" if is_zh else "Watch on Source ↗"
+    v_outbound = source_url or v_raw_url
+    if "youtube.com/embed/" in low_u or "youtube-nocookie.com/embed/" in low_u:
+        m_yt = re.search(r"embed/([A-Za-z0-9_-]{8,15})", v_raw_url)
+        if m_yt:
+            v_outbound = f"https://www.youtube.com/watch?v={m_yt.group(1)}"
+
+    if v_provider == "mp4" or re.search(r'\.(?:mp4|webm)(\?|$)', low_u):
+        fig_max = "max-w-[360px]" if is_vertical_vid else ("max-w-[480px]" if is_square_vid else "w-full")
+        vid_ratio_cls = "" if (is_vertical_vid or is_square_vid) else "aspect-video "
+        v_poster = str(vid.get("poster") or "").strip()
+        poster_attr = f' poster="{escape(v_poster)}"' if v_poster else ""
+        src_play = v_raw_url if (v_poster or "#" in v_raw_url) else f"{v_raw_url}#t=0.5"
+        return f"""
+        <figure class="my-8 mx-auto w-full {fig_max}">
+          <video controls playsinline preload="metadata"{poster_attr} class="w-full {vid_ratio_cls}h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){{var f=this.closest('figure');if(f){{if(this.videoHeight>this.videoWidth*1.08){{f.style.maxWidth='360px';this.classList.remove('aspect-video');}}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){{f.style.maxWidth='480px';this.classList.remove('aspect-video');}}else{{f.style.maxWidth='100%';}}}}}}">
+            <source src="{escape(src_play)}" type="video/mp4">
+          </video>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 {escape(v_label)}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">{v_action}</a>
+          </figcaption>
+        </figure>
+        """.strip()
+
+    if v_provider == "iframe" or any(h in low_u for h in ("youtube.com/embed", "youtube-nocookie.com/embed", "player.vimeo.com", "players.brightcove.net", "player.cnevids.com", "youtube.com/shorts")):
+        if is_vertical_vid:
+            fig_max = "max-w-[360px]"
+            ifr_ratio = "aspect-[9/16] max-h-[640px]"
+        elif is_square_vid:
+            fig_max = "max-w-[480px]"
+            ifr_ratio = "aspect-square max-h-[520px]"
+        else:
+            fig_max = "w-full"
+            ifr_ratio = "aspect-video"
+        return f"""
+        <figure class="my-8 mx-auto w-full {fig_max}">
+          <div class="w-full {ifr_ratio} rounded-2xl overflow-hidden shadow-lg bg-black">
+            <iframe src="{escape(v_raw_url)}" class="w-full h-full border-0 block" loading="lazy" scrolling="no" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="{escape(v_label)}"></iframe>
+          </div>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 {escape(v_label)}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">{v_action}</a>
+          </figcaption>
+        </figure>
+        """.strip()
+    return ""
+
+
+def format_editorial_paragraphs(
+    paras: List[str],
+    usable_images: List[Dict[str, str]],
+    is_zh: bool = True,
+    usable_videos: Optional[List[Dict[str, Any]]] = None,
+    source_name: str = "",
+    source_url: str = "",
+    ref_para_count: int = 0,
+) -> str:
     """
     Magazine-Grade Professional Typography & Inline Media Injector:
     - Editorial Lead: distinguished opening narrative prose without jarring boxes.
     - Clean Editorial Typography: generous line-height and paragraph spacing for effortless long-form reading.
     - Editorial Pull Quote: understated, elegant accent border for notable quotes.
-    - Inline Photo & Figure Injection: interleaves authentic article photography between narrative beats.
+    - Inline Photo, Chart & Video Injection: interleaves authentic photography and embedded videos at exact DOM anchors.
     """
     rendered_elements = []
     total = len(paras)
     img_idx = 0
 
-    # 预计算全量配图插入位置：优先按原文精确锚点 `after_para`，其余按段落均匀分布（杜绝第 4/5/6 张配图被漏渲染）
-    _anchored_map = {}
+    def _map_slot(raw_ap: int) -> int:
+        if raw_ap < 0:
+            return -1
+        if is_zh and ref_para_count > 1 and total > 1 and total != ref_para_count:
+            scaled = int(round(raw_ap * (total - 1) / float(ref_para_count - 1)))
+            return min(max(0, total - 1), max(0, scaled))
+        return min(max(0, total - 1), raw_ap)
+
+    # 预计算全量配图与正文内嵌视频的精确插入位置（按原文精确锚点 `after_para` + `dom_order` 排序）
+    _anchored_media: Dict[int, List[tuple]] = {}
     _unanchored = []
-    for _im in usable_images:
+    for _idx_m, _im in enumerate(usable_images):
         _ap = _im.get("after_para") if isinstance(_im, dict) else None
-        if isinstance(_ap, int) and _ap >= 0:
-            _slot = min(max(0, total - 1), _ap)
-            _anchored_map.setdefault(_slot, []).append(_im)
+        _raw_ord = _im.get("dom_order") if isinstance(_im, dict) else None
+        _ord = _raw_ord if isinstance(_raw_ord, int) else _idx_m
+        if isinstance(_ap, int) and _ap >= -1:
+            _slot = _map_slot(_ap)
+            _anchored_media.setdefault(_slot, []).append((_ord, "img", _im))
         else:
-            _unanchored.append(_im)
+            _unanchored.append((_ord, _im))
     if _unanchored and total > 0:
         _n_u = len(_unanchored)
-        for _k, _im in enumerate(_unanchored):
+        for _k, (_ord, _im) in enumerate(_unanchored):
             if total <= 2:
                 _slot = min(total - 1, _k)
             else:
                 _slot = min(total - 1, max(0, int(round((_k + 1) * total / float(_n_u + 1))) - 1))
-            _anchored_map.setdefault(_slot, []).append(_im)
+            _anchored_media.setdefault(_slot, []).append((_ord, "img", _im))
+
+    for _idx_v, _vid in enumerate(usable_videos or []):
+        if not isinstance(_vid, dict):
+            continue
+        _ap = _vid.get("after_para")
+        _raw_vord = _vid.get("dom_order")
+        _ord = _raw_vord if isinstance(_raw_vord, int) else (1000 + _idx_v)
+        if isinstance(_ap, int) and _ap >= -1:
+            _slot = _map_slot(_ap)
+        else:
+            _slot = 0 if total > 0 else -1
+        _anchored_media.setdefault(_slot, []).append((_ord, "vid", _vid))
+
+    for _sl in _anchored_media:
+        _anchored_media[_sl].sort(key=lambda x: x[0])
+
+    def _emit_slot_media(slot_idx: int) -> None:
+        nonlocal img_idx
+        for _ord, m_kind, m_obj in _anchored_media.get(slot_idx, []):
+            if m_kind == "vid":
+                v_fig = _render_inline_video_figure(m_obj, is_zh=is_zh, source_name=source_name, source_url=source_url)
+                if v_fig:
+                    rendered_elements.append(v_fig)
+                continue
+            cur_img = m_obj
+            img_idx += 1
+            i_url = cur_img["url"]
+            if is_zh:
+                raw_cap = (cur_img.get("caption_zh") or cur_img.get("caption") or cur_img.get("alt") or "").strip()
+            else:
+                raw_cap = (cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "").strip()
+
+            # 杜绝无意义的 "Field scene" / "Article image" 占位图注，仅保留真实新闻图注
+            is_dummy_cap = (not raw_cap) or (raw_cap.lower() in ("field scene", "article image", "image", "photo", "现场图景", "配图", "资讯原文配图"))
+            alt_text = raw_cap if not is_dummy_cap else ("资讯配图" if is_zh else "Editorial illustration")
+            caption_html = ""
+            if not is_dummy_cap:
+                caption_html = f"""
+                <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 {escape(raw_cap)}
+                </figcaption>
+                """.strip()
+
+            # 全尺寸自适应配图：竖屏截图/图表居中完整展示不裁切，横屏高清自适应，自动移除小图标与超宽水印/广告条
+            img_onload = (
+                "if(this.naturalWidth&&this.naturalHeight){"
+                "if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){"
+                "var f=this.closest('figure');if(f)f.remove();return;}"
+                "if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}"
+                "else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}"
+                "}"
+            )
+            rendered_elements.append(f"""
+            <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="{escape(i_url)}" alt="{escape(alt_text)}" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="{img_onload}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              {caption_html}
+            </figure>
+            """.strip())
+
+    # 若首段前存在前置视频/配图（after_para == -1），在正文开头原位输出
+    _emit_slot_media(-1)
 
     for i, p in enumerate(paras):
         raw_p = p.strip()
@@ -788,41 +952,7 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
                 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">{escaped_body}</p>
                 """.strip())
 
-        imgs_to_insert = _anchored_map.get(i, [])
-        for cur_img in imgs_to_insert:
-            img_idx += 1
-            i_url = cur_img["url"]
-            if is_zh:
-                raw_cap = (cur_img.get("caption_zh") or cur_img.get("caption") or cur_img.get("alt") or "").strip()
-            else:
-                raw_cap = (cur_img.get("caption_en") or cur_img.get("alt") or (cur_img.get("caption") if not re.search(r'[\u4e00-\u9fa5]', cur_img.get("caption", "")) else "") or "").strip()
-
-            # 杜绝无意义的 "Field scene" / "Article image" 占位图注，仅保留真实新闻图注
-            is_dummy_cap = (not raw_cap) or (raw_cap.lower() in ("field scene", "article image", "image", "photo", "现场图景", "配图", "资讯原文配图"))
-            alt_text = raw_cap if not is_dummy_cap else ("资讯配图" if is_zh else "Editorial illustration")
-            caption_html = ""
-            if not is_dummy_cap:
-                caption_html = f"""
-                <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 {escape(raw_cap)}
-                </figcaption>
-                """.strip()
-
-            # 全尺寸自适应配图：竖屏截图/图表居中完整展示不裁切，横屏高清自适应，自动移除小图标与超宽水印/广告条
-            img_onload = (
-                "if(this.naturalWidth&&this.naturalHeight){"
-                "if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){"
-                "var f=this.closest('figure');if(f)f.remove();return;}"
-                "if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}"
-                "else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}"
-                "}"
-            )
-            rendered_elements.append(f"""
-            <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="{escape(i_url)}" alt="{escape(alt_text)}" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="{img_onload}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              {caption_html}
-            </figure>
-            """.strip())
+        _emit_slot_media(i)
 
     return "\n\n".join(rendered_elements)
 
@@ -1190,9 +1320,27 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 "caption_zh": img_entry.get("caption_zh", "").strip() if isinstance(img_entry, dict) else "",
                 "alt": img_entry.get("alt", "").strip() if isinstance(img_entry, dict) else "",
                 "after_para": img_entry.get("after_para") if isinstance(img_entry, dict) and isinstance(img_entry.get("after_para"), int) else None,
+                "dom_order": img_entry.get("dom_order") if isinstance(img_entry, dict) and isinstance(img_entry.get("dom_order"), int) else None,
             })
 
-        p_html = format_editorial_paragraphs(paras, usable_images, is_zh=is_zh)
+        usable_inline_videos = [
+            v for v in (item.get("inline_videos") or [])
+            if isinstance(v, dict) and str(v.get("url") or "").startswith("http")
+        ]
+        en_raw_for_ref = str(item.get("article_content_en") or item.get("article_content") or "").strip()
+        en_ref_paras = [p.strip() for p in en_raw_for_ref.split("\n\n") if len(p.strip()) >= 3 and not PROMO_NOISE_RE.search(p)] if en_raw_for_ref else []
+        p_html = format_editorial_paragraphs(
+            paras,
+            usable_images,
+            is_zh=is_zh,
+            usable_videos=usable_inline_videos,
+            source_name=source_name,
+            source_url=source_target_url,
+            ref_para_count=len(en_ref_paras),
+        )
+        # 当文章正文已按原文精确 DOM 位置原位渲染内嵌视频时，隐藏顶部重复/错位的全局视频块
+        if usable_inline_videos:
+            video_html = ""
         sec_title = ("📰 权威报道核心实录 (精选)" if is_excerpt else "📰 深度报道原文实录") if is_zh else ("📰 In-Depth Coverage (Excerpt)" if is_excerpt else "📰 Full In-Depth Coverage")
         src_note = f"{source_name} 权威实录" if is_zh else f"{source_name} Full Report"
 

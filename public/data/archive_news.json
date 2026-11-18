@@ -3395,36 +3395,42 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/Agents-Last-Exam-v1.1.png",
         "after_para": 5,
+        "dom_order": 2,
         "caption": "GPT-6.2 Astra achieves the highest scores on Agents' Last Exam v1.1 at low cost per task. Claude Fable 5.2 reaches a similar score but costs several times more per task. | Image: OpenAI",
         "caption_en": "GPT-6.2 Astra achieves the highest scores on Agents' Last Exam v1.1 at low cost per task. Claude Fable 5.2 reaches a similar score but costs several times more per task. | Image: OpenAI"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/FrontierCode-2.0.png",
         "after_para": 11,
+        "dom_order": 4,
         "caption": "On the coding benchmark FrontierCode 2.0, GPT-6.2 Sol scores nearly as high as GPT-6.2 Astra but at a fraction of the cost. Claude Fable 5.2 hits the highest peak score but costs several times more per task. | Image: OpenAI",
         "caption_en": "On the coding benchmark FrontierCode 2.0, GPT-6.2 Sol scores nearly as high as GPT-6.2 Astra but at a fraction of the cost. Claude Fable 5.2 hits the highest peak score but costs several times more per task. | Image: OpenAI"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/ExploitBench-–-Internal-Port-June–August-2026.png",
         "after_para": 13,
+        "dom_order": 5,
         "caption": "On the internal ExploitBench test, models must turn known browser vulnerabilities into working exploits. GPT-6.2 Astra clears a 50 percent success rate, far outpacing its predecessor GPT-6 Astra. Results come from tests with safeguards turn",
         "caption_en": "On the internal ExploitBench test, models must turn known browser vulnerabilities into working exploits. GPT-6.2 Astra clears a 50 percent success rate, far outpacing its predecessor GPT-6 Astra. Results come from tests with safeguards turn"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/artificial_analysis_astra_so-score.jpg",
         "after_para": 17,
+        "dom_order": 6,
         "caption": "GPT-6.2 Astra reaches 62 points, taking second place in the Intelligence Index just behind Claude Fable 5.2 (65). OpenAI models dominate the Pareto frontier on cost-performance. | Image: Artificial Analysis",
         "caption_en": "GPT-6.2 Astra reaches 62 points, taking second place in the Intelligence Index just behind Claude Fable 5.2 (65). OpenAI models dominate the Pareto frontier on cost-performance. | Image: Artificial Analysis"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/epochai_astra.png",
         "after_para": 23,
+        "dom_order": 7,
         "caption": "GPT-6.2 Astra scores 174 points in the Epoch Capabilities Index, tying Anthropic's Fable 5.2. Both sit above the previous trend line for reasoning models. Astra is significantly cheaper. | Image: Epoch AI",
         "caption_en": "GPT-6.2 Astra scores 174 points in the Epoch Capabilities Index, tying Anthropic's Fable 5.2. Both sit above the previous trend line for reasoning models. Astra is significantly cheaper. | Image: Epoch AI"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/vals_index.png",
         "after_para": 27,
+        "dom_order": 8,
         "caption": "GPT-6.2 Astra and Sol rank 7th and 9th in the Vals Index. Sol runs $3.18 per task, less than a third of Astra's $10.68, and is the cheapest model in the top 10. Claude Fable 5.2 tops the ranking. | Image: Vals AI",
         "caption_en": "GPT-6.2 Astra and Sol rank 7th and 9th in the Vals Index. Sol runs $3.18 per task, less than a third of Astra's $10.68, and is the cheapest model in the top 10. Claude Fable 5.2 tops the ranking. | Image: Vals AI"
       }
@@ -3558,7 +3564,28 @@
     "video_url": "https://www.youtube.com/embed/C1zYX5jwqq4?feature=oembed",
     "video_id": "C1zYX5jwqq4",
     "video_provider": "iframe",
-    "video_aspect": "16x9"
+    "video_aspect": "16x9",
+    "inline_videos": [
+      {
+        "url": "https://www.youtube.com/embed/C1zYX5jwqq4?feature=oembed",
+        "provider": "iframe",
+        "after_para": 2,
+        "aspect": "16x9",
+        "dom_order": 1,
+        "video_id": "C1zYX5jwqq4",
+        "title": "GPT-6.2 Astra and GPT-6.2 Sol—Models built for the real world"
+      },
+      {
+        "url": "https://www.youtube.com/embed/tKoDPOrLMX0?feature=oembed",
+        "provider": "iframe",
+        "after_para": 7,
+        "aspect": "16x9",
+        "dom_order": 3,
+        "video_id": "tKoDPOrLMX0",
+        "title": "Building 3D video sets with GPT-6.2 Astra"
+      }
+    ],
+    "video_title": "GPT-6.2 Astra and GPT-6.2 Sol—Models built for the real world"
   },
   {
     "id": "e2c242abb328674e",
@@ -5106,6 +5133,7 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/physician_asessment_ehr_inbox_work-770x364.png",
         "after_para": 4,
+        "dom_order": 2,
         "caption": "Evaluation of GPT-6 Astra’s inbox tasks by physicians using maximum reasoning effort. | Image: OpenAI",
         "caption_en": "Evaluation of GPT-6 Astra’s inbox tasks by physicians using maximum reasoning effort. | Image: OpenAI"
       }
@@ -5210,7 +5238,17 @@
       "Data privacy, health records, and Europe"
     ],
     "video_url": "https://the-decoder.com/wp-content/uploads/2026/11/OpenAI-Healthcare-Teams.mp4",
-    "video_provider": "mp4"
+    "video_provider": "mp4",
+    "inline_videos": [
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/11/OpenAI-Healthcare-Teams.mp4",
+        "provider": "mp4",
+        "after_para": 2,
+        "aspect": "1280x720",
+        "dom_order": 1
+      }
+    ],
+    "video_aspect": "1280x720"
   },
   {
     "id": "9ac2b4f00063cd3e",
@@ -5323,7 +5361,8 @@
       "Reuters investigation maps China's distillation industry",
       "AI News Without the Hype – Curated by Humans",
       "Read on for the full picture. Subscribe for hype-free coverage."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "927448e513934e69",
@@ -6511,7 +6550,8 @@
     "paragraphs": [
       "OpenAI is giving NATO and several European governments access to its cybersecurity tool Daybreak. Through Daybreak, cyber defense teams can use OpenAI's models to audit software, find vulnerabilities, and patch security gaps. The NATO Communications and Information Agency (NCIA) says it's already using the underlying models heavily. NCIA chief Dylan Browne called it a generational leap in cyber defense. During the NATO exercise Crossed Swords 2026, participants deployed AI agents for cyber operations under human oversight for the first time.",
       "The models have already delivered results elsewhere. The EU's cybersecurity agency ENISA used them to find four vulnerabilities in software used by EU institutions. A joint report with CERT-EU examined 27 software projects, and 95 percent of the 88 reported issues turned out to be real bugs. Poland's CERT Polska found six vulnerabilities in MikroTik routers that were being actively exploited. Ukraine is using Daybreak to protect civilian infrastructure. France, Germany, and Poland have also been granted access."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "7733f122c34eb531",
@@ -6596,7 +6636,8 @@
       "Reports of AI being used for the sexual exploitation of children have jumped more than 8,400 percent in two years. According to a report by Edinburgh's Childlight Institute, the number of reported AI-generated abuse images climbed from about 4,700 in 2023 to over 400,000 in 2025, The Guardian reports. The material includes AI-manipulated images (deepfakes) from so-called \"nudify apps\"that digitally strip people of their clothing. Abusers can use the faked images to blackmail children into handing over money or more photos.",
       "The data comes from reports that tech companies filed with the US National Center for Missing & Exploited Children (NCMEC). The UK's Internet Watch Foundation (IWF) reviewed 6,310 criminal, photorealistic AI-generated abuse images in the first half of 2026 alone. That's 40 percent more than in all of 2025.",
       "Childlight data director Debi Fry acknowledges that better detection systems partly explain the spike. She still calls for swift action from lawmakers and tech companies. Childlight CEO Paul Stanfield wants governments to classify the problem as a preventable public health emergency, dedicate funding to prevention, and coordinate efforts across healthcare, schools, child protection services, and the justice system."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "cea755825223843d",
@@ -6685,7 +6726,8 @@
       "The company had already raised $2.1 billion back in May 2026. The money will go toward advancing its in-house platform IsoDDE (Isomorphic Drug Design Engine) and pushing its drug pipeline toward clinical trials. IsoDDE goes beyond AlphaFold 3, according to the company founded in 2021, and aims to better predict drug binding and docking sites. Isomorphic Labs works with Novartis, Eli Lilly, and Johnson & Johnson but has no approved drug to show for it yet.",
       "The company is led by Demis Hassabis, who stepped down from day-to-day leadership of Google Deepmind in August 2026 and now serves as Alphabet's Chief Scientist. Hassabis won the 2024 Nobel Prize in Chemistry alongside John Jumper for their work on AlphaFold.",
       "Deepmind's original AlphaFold team was disbanded in July 2026. Many researchers moved to Isomorphic Labs or were reassigned to other projects. Nearly a quarter left Deepmind entirely. Deepmind still shipped AlphaGenome 2 in early November 2026, which predicts how DNA variants affect gene activity in specific cell types."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "cf4fe75886414c0e",
@@ -6773,7 +6815,8 @@
       "California Attorney General Rob Bonta is suing OpenAI over a cyberattack that the company's out-of-control AI models launched against AI platform Hugging Face in July. The lawsuit alleges OpenAI tested advanced models without proper safety measures and misled the public about how safe its experiments were.",
       "Around 700 AI agents broke loose during internal testing, according to an external investigation. They got onto the open internet, traded secret messages, and coordinated the attack over seven days. Bonta pointed to at least 80 incidents where OpenAI lost control of its own technology, Politico reports. Rogue AI could threaten critical infrastructure like power grids, hospitals, and financial systems, he said.",
       "OpenAI called the lawsuit one-sided and pointed out that all major AI labs are dealing with similar problems. The company now backs stricter safety laws, shutdown controls, and independent auditors in AI labs. Two more lawsuits against OpenAI over the incident are already pending. One of them also names Anthropic, Google, Meta, and SpaceXSI as defendants."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "023dcc0785676182",
@@ -12320,7 +12363,8 @@
     "paragraphs": [
       "Google's Threat Intelligence Group (GTIG) says it has observed attackers fully automating vulnerability discovery and exploitation for the first time, with no human in the loop. GTIG found an exposed server running an AI framework called \"exploit_agent\"that connects to multiple language models, according to the GTIG AI Threat Tracker. The system compares software code before and after patches, identifies vulnerabilities, develops exploits, and runs them automatically. Russian-language comments in the configuration files suggest the operator speaks Russian.",
       "Server data suggests the operator targeted French websites in media, entertainment, and education. GTIG calls the shift a critical turning point but says these automated attacks currently sacrifice stealth for speed, leaving forensic traces that make them easier to detect."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "3a2d2e414cb5af84",
@@ -12536,6 +12580,7 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/standard_modell_laticce-770x333.png",
         "after_para": 2,
+        "dom_order": 1,
         "caption": "The diagram shows how comparing increasingly finer lattices helps correct the phase shift on the original lattice. | Image: Nathaniel Craig / GPT-6 Astra",
         "caption_en": "The diagram shows how comparing increasingly finer lattices helps correct the phase shift on the original lattice. | Image: Nathaniel Craig / GPT-6 Astra"
       }
@@ -12625,7 +12670,8 @@
       "Craig had a strategy to fix the phase by comparing progressively finer lattices, but couldn't prove it worked in all the cases it needed to cover. GPT-6 Astra turned the idea into a working construction and took the lead on the detailed proof. Lattice field theorists Maarten Golterman, Andreas Kronfeld, and Yigal Shamir reviewed the proof and raised questions that Craig says helped build confidence in the result. He calls the work \"much more a beginning than an end\"and says a lot remains before realistic simulations are possible.",
       "The result follows a run of AI advances in mathematics that started in January 2026. In May, OpenAI's disproof of Erdős's unit distance conjecture became the first AI proof worthy of math's top journal. Days later, Google Deepmind's AlphaProof Nexus solved nine of 353 open Erdős problems for a few hundred dollars, and by October its results had passed peer review.",
       "The most far-reaching claim came in September, when OpenAI submitted a 166-page proof for the Navier-Stokes Millennium Prize Problem and the Clay Mathematics Institute said it had \"apparently been settled\". The solution remains under review, and mathematicians have questioned whether OpenAI fully understands its own proof. Across the field, mathematicians have mixed feelings as AI keeps cracking unsolved problems."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "b67c7a2d1bb78cad",
@@ -12888,7 +12934,8 @@
       "Because Moonshot AI sees diminishing returns in coding, the Beijing startup is redirecting its Kimi language models toward biology, chemistry, and pharma research. International director Giacomo Ficari said at the Web Summit in Lisbon that science demands smarter AI models than law, finance, or code.",
       "Beijing startup DP Technology is integrating Kimi K3.1 Pro into its research assistant BioMaster. In one test, the AI analyzed gene data from 3,696 mouse pancreatic cells and flagged 100 candidate genes in 90 minutes instead of an estimated four hours of human work.",
       "Fully independent breakthroughs are still a long way off. On TCSExam, a 100-problem theoretical CS benchmark, leading models produced verifiable proofs but couldn't crack any open conjectures alone. US rivals hit similar limits. Anthropic's Claude found an enzyme system in September, but mathematicians criticized OpenAI's claimed math and physics breakthroughs. The pharma industry isn't sold yet either. A June Citi survey of 50 US research leaders found 72 percent already using AI broadly, but only 24 percent expect it to noticeably improve drug development success rates."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "a63cc7fb519627ab",
@@ -13661,38 +13708,51 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-03-architecture.jpg",
         "after_para": 3,
+        "dom_order": 1,
         "caption": "Qwen4-Max compresses prior text across three layers before a fourth layer takes a closer look at only the important sections. | Image: Alibaba",
         "caption_en": "Qwen4-Max compresses prior text across three layers before a fourth layer takes a closer look at only the important sections. | Image: Alibaba"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-04-training-loss.jpg",
         "after_para": 4,
+        "dom_order": 2,
         "caption": "Training loss declined steadily throughout the run with no loss spikes, according to Alibaba. | Image: Alibaba",
         "caption_en": "Training loss declined steadily throughout the run with no loss spikes, according to Alibaba. | Image: Alibaba"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-05-base-model-comparison.jpg",
         "after_para": 5,
+        "dom_order": 3,
         "caption": "Qwen4-Max-Base posts the lowest, and therefore best, values in all four categories. | Image: Alibaba",
         "caption_en": "Qwen4-Max-Base posts the lowest, and therefore best, values in all four categories. | Image: Alibaba"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-02-token-efficiency.jpg",
         "after_para": 8,
+        "dom_order": 4,
         "caption": "Qwen4-Max beats its predecessor on both benchmarks while using far fewer tokens. | Image: Alibaba",
         "caption_en": "Qwen4-Max beats its predecessor on both benchmarks while using far fewer tokens. | Image: Alibaba"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-01-benchmark-overview.jpg",
         "after_para": 9,
+        "dom_order": 5,
         "caption": "Alibaba says Qwen4-Max leads on agent and work tasks, while Opus 5.5 and the GPT models come out ahead on Humanity's Last Exam. | Image: Alibaba",
         "caption_en": "Alibaba says Qwen4-Max leads on agent and work tasks, while Opus 5.5 and the GPT models come out ahead on Humanity's Last Exam. | Image: Alibaba"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/artificial-analysis-qwen4-max-1794798067998.jpeg",
         "after_para": 11,
+        "dom_order": 6,
         "caption": "Qwen4-Max gains nine points on the Artificial Analysis Intelligence Index and costs only about a third as much per task as its predecessor. | Image: Artificial Analysis",
         "caption_en": "Qwen4-Max gains nine points on the Artificial Analysis Intelligence Index and costs only about a third as much per task as its predecessor. | Image: Artificial Analysis"
+      },
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/11/qwen4-max-06-game-meow-of-magic.jpg",
+        "after_para": 23,
+        "dom_order": 8,
+        "caption": "Qwen4-Max built a wizard adventure in Unreal Engine in which players, as a cat, battle waves of enemies and bosses. | Image: Alibaba",
+        "caption_en": "Qwen4-Max built a wizard adventure in Unreal Engine in which players, as a cat, battle waves of enemies and bosses. | Image: Alibaba"
       }
     ],
     "has_video": true,
@@ -13817,7 +13877,17 @@
       "Alibaba says the model writes safer code and offers no real CBRN uplift"
     ],
     "video_url": "https://the-decoder.com/wp-content/uploads/2026/11/Qwen_AI_for_science_wordpress_small_480p.mp4",
-    "video_provider": "mp4"
+    "video_provider": "mp4",
+    "inline_videos": [
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/11/Qwen_AI_for_science_wordpress_small_480p.mp4",
+        "provider": "mp4",
+        "after_para": 20,
+        "aspect": "854x480",
+        "dom_order": 7
+      }
+    ],
+    "video_aspect": "854x480"
   },
   {
     "id": "2f98dadd86b80e8d",
@@ -14410,7 +14480,17 @@
       "Google is developing HTML-in-Canvas as a web standard that preserves both interactivity and accessibility. The feature works in Chrome and Edge starting with version 157 and in Claude's desktop apps from version 5.11492. Safari and Firefox don't support it yet. Users need to ask Claude for HTML-in-Canvas explicitly in their prompt. Claude keeps getting more creative with visual tasks. Recently, Claude Fable 5.2 painted photorealistic artwork stroke by stroke using self-written Python code."
     ],
     "video_url": "https://the-decoder.de/wp-content/uploads/2026/11/Felix_Rieseberg_wordpress_small_480p.mp4",
-    "video_provider": "mp4"
+    "video_provider": "mp4",
+    "inline_videos": [
+      {
+        "url": "https://the-decoder.de/wp-content/uploads/2026/11/Felix_Rieseberg_wordpress_small_480p.mp4",
+        "provider": "mp4",
+        "after_para": 1,
+        "aspect": "854x480",
+        "dom_order": 1
+      }
+    ],
+    "video_aspect": "854x480"
   },
   {
     "id": "1950f76c4943e2d8",
@@ -14532,36 +14612,42 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg",
         "after_para": 2,
+        "dom_order": 1,
         "caption": "A wrong note about the Pokémon Center's location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic",
         "caption_en": "A wrong note about the Pokémon Center's location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg",
         "after_para": 5,
+        "dom_order": 2,
         "caption": "Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic",
         "caption_en": "Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg",
         "after_para": 6,
+        "dom_order": 3,
         "caption": "Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic",
         "caption_en": "Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-02-memory-hierarchy.jpg",
         "after_para": 8,
+        "dom_order": 4,
         "caption": "During \"Dreaming,\"Claude processes old transcripts in idle periods and builds the upper layers of its memory from them. | Image: Anthropic",
         "caption_en": "During \"Dreaming,\"Claude processes old transcripts in idle periods and builds the upper layers of its memory from them. | Image: Anthropic"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-09-cerulean-progress.jpg",
         "after_para": 9,
+        "dom_order": 5,
         "caption": "Claude made it past Mt. Moon to Cerulean City only with the note Dreaming had corrected. | Image: Anthropic",
         "caption_en": "Claude made it past Mt. Moon to Cerulean City only with the note Dreaming had corrected. | Image: Anthropic"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-11-wiki-scaling.jpg",
         "after_para": 10,
+        "dom_order": 6,
         "caption": "The longer Claude worked on the wiki of Stainless documents, the better it answered questions, with the best results coming from combining the wiki with search. | Image: Anthropic",
         "caption_en": "The longer Claude worked on the wiki of Stainless documents, the better it answered questions, with the best results coming from combining the wiki with search. | Image: Anthropic"
       }
@@ -14668,7 +14754,8 @@
       "Agents that save everything lose track",
       "Dreaming aims to fix false memories",
       "Memory is still a work in progress"
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "e5ca2bb5e3039fe8",
@@ -22553,23 +22640,26 @@
       {
         "url": "https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&name=medium",
         "after_para": 3,
+        "dom_order": 1,
         "caption": "About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton",
         "caption_en": "About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fable 5.2. | Image: Jake Eaton"
       },
       {
         "url": "https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&name=900x900",
         "after_para": 5,
+        "dom_order": 2,
         "caption": "For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton",
         "caption_en": "For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python code. | Image: Jake Eaton"
       },
       {
         "url": "https://pbs.twimg.com/media/HWtL7-naIAAKLny?format=jpg&name=medium",
         "after_para": 10,
+        "dom_order": 4,
         "caption": "Even complex perspectives and lighting are handled by the language model through thousands of individual code instructions. | Image: Jake Eaton",
         "caption_en": "Even complex perspectives and lighting are handled by the language model through thousands of individual code instructions. | Image: Jake Eaton"
       }
     ],
-    "has_video": false,
+    "has_video": true,
     "source": "THE DECODER",
     "author": "Manuel Uth",
     "author_handle": "",
@@ -22678,7 +22768,26 @@
       "The same spatial reasoning transfers to physical robots",
       "AI News Without the Hype – Curated by Humans",
       "Read on for the full picture. Subscribe for hype-free coverage."
-    ]
+    ],
+    "inline_videos": [
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4",
+        "provider": "mp4",
+        "after_para": 8,
+        "aspect": "1080x1350",
+        "dom_order": 3
+      },
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/11/aris_zhu_fable52_painting.mp4",
+        "provider": "mp4",
+        "after_para": 14,
+        "aspect": "1920x1080",
+        "dom_order": 5
+      }
+    ],
+    "video_url": "https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4",
+    "video_provider": "mp4",
+    "video_aspect": "1080x1350"
   },
   {
     "id": "e9250aab5b255907",
@@ -23063,7 +23172,8 @@
       "Original article, November 15, 2026:",
       "Megaspeed arranged nearly $12 billion worth of Nvidia high-performance chip orders for Chinese companies between March 2024 and June 2025, according to documents reviewed by the Wall Street Journal. The company is owned by Alice Huang, the former lover of since-ousted Nvidia CEO Jensen Huang. Megaspeed shipped the chips to buyers in China who maintained long-standing business ties with local tech giants, the WSJ reports. The orders covered several hundred thousand chips that the US had sought to keep out of China through export controls. Megaspeed reportedly gained preferential access to scarce AI chips as an Nvidia cloud partner, apparently because it counted Chinese cloud and tech company Alibaba as a major client.",
       "Nvidia officially reported $12.4 billion in China revenue over six months, accounting for 7 percent of total revenue. Short-selling firm Culper Research estimates, however, that more than 20 percent of Nvidia's revenue in the last fiscal year came from Chinese customers. A significant share of that China business may have flowed through indirect channels."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "8549b67caa4f8bfa",
@@ -23192,6 +23302,7 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/employment_ai_australia-770x587.png",
         "after_para": 2,
+        "dom_order": 1,
         "caption": "In jobs with high potential AI exposure (quintile 5), employment among young people has declined since late 2022, while employment among older workers has risen. | Source: Reserve Bank of Australia (RBA)",
         "caption_en": "In jobs with high potential AI exposure (quintile 5), employment among young people has declined since late 2022, while employment among older workers has risen. | Source: Reserve Bank of Australia (RBA)"
       }
@@ -23289,7 +23400,8 @@
     ],
     "subheadings": [
       "Other studies paint a similar picture, with caveats"
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "72247c3e792a49dc",
@@ -23301,18 +23413,21 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-02-visual-tokenization.jpg",
         "after_para": 4,
+        "dom_order": 1,
         "caption": "LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan",
         "caption_en": "LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-04-rl-overview.jpg",
         "after_para": 5,
+        "dom_order": 2,
         "caption": "Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search and Git history in the sandbox. | Image: Meituan",
         "caption_en": "Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search and Git history in the sandbox. | Image: Meituan"
       },
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-01-benchmark.jpg",
         "after_para": 11,
+        "dom_order": 3,
         "caption": "In Meituan's own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmarks. | Image: Meituan",
         "caption_en": "In Meituan's own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmarks. | Image: Meituan"
       }
@@ -23427,7 +23542,8 @@
       "LongCat-2.5 trails Opus 5 slightly on terminal tasks",
       "AI News Without the Hype – Curated by Humans",
       "Read on for the full picture. Subscribe for hype-free coverage."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "7656d2288dc357d2",
@@ -24758,7 +24874,8 @@
       "Anthropic wants the IPO to cushion against the unknown",
       "AI News Without the Hype – Curated by Humans",
       "Read on for the full picture. Subscribe for hype-free coverage."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "b8d1fb1e31cedd8d",
@@ -25312,7 +25429,8 @@
     "paragraphs": [
       "Google's Gemini 4 Carbon has become the first non-OpenAI model in a while to top the MathArena math benchmark. It knocked GPT-6.1 Sol from the top spot, while Claude Fable 5.2 came in second, making it potentially one of the most capable publicly available models for math tasks. OpenAI's models, which recently allegedly solved demanding equations like the Navier-Stokes equations, aren't publicly available yet.",
       "Gemini 4 Carbon's most common failure mode is exceeding the time limit. The model also almost never gives up on a task, a trait that can be read as either positive or negative. In one case, it launched a script that ran for more than eleven hours without checking on its progress. That extra performance comes at a price, though. With the reasoning settings used in testing, Carbon and Fable 5.2 cost roughly 15 and 40 times as much as GPT-6.1 Sol, respectively."
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "4d60cf848d78e15f",
@@ -25324,6 +25442,7 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/opus55_prompting.png",
         "after_para": 4,
+        "dom_order": 1,
         "caption": "Anthropic's prompting tips for Opus 5.5 include connecting files and systems, describing the desired end result, dropping \"think hard,\"starting at Medium effort, sharing diagrams directly, naming unwanted design patterns, and sharing your o",
         "caption_en": "Anthropic's prompting tips for Opus 5.5 include connecting files and systems, describing the desired end result, dropping \"think hard,\"starting at Medium effort, sharing diagrams directly, naming unwanted design patterns, and sharing your o"
       }
@@ -25424,7 +25543,8 @@
     "subheadings": [
       "From chatting to setting goals",
       "Naming specific styles works better than banning generic design"
-    ]
+    ],
+    "inline_videos": []
   },
   {
     "id": "99a7e5862859195c",
@@ -26166,7 +26286,17 @@
       "OpenAI and robots, it's complicated"
     ],
     "video_url": "https://the-decoder.com/wp-content/uploads/2026/09/astra_robot_kitchen_test.mp4",
-    "video_provider": "mp4"
+    "video_provider": "mp4",
+    "inline_videos": [
+      {
+        "url": "https://the-decoder.com/wp-content/uploads/2026/09/astra_robot_kitchen_test.mp4",
+        "provider": "mp4",
+        "after_para": 4,
+        "aspect": "1920x1080",
+        "dom_order": 1
+      }
+    ],
+    "video_aspect": "1920x1080"
   },
   {
     "id": "8e21c58f34a004d6",
@@ -26178,6 +26308,7 @@
       {
         "url": "https://the-decoder.com/wp-content/uploads/2026/11/anthropic_pre_compute.jpeg",
         "after_para": 3,
+        "dom_order": 1,
         "caption": "This slide from Anthropic's IPO roadshow shows the \"Pre-training compute multiplier\"for code over time. The y-axis is logarithmic. Former Anthropic researcher Jacob Coxon says the steep climb from July 2024 to October 2026 points to superex",
         "caption_en": "This slide from Anthropic's IPO roadshow shows the \"Pre-training compute multiplier\"for code over time. The y-axis is logarithmic. Former Anthropic researcher Jacob Coxon says the steep climb from July 2024 to October 2026 points to superex"
       }
@@ -26267,6 +26398,7 @@
       "Coxon argues that Anthropic's Mythos model, a major capability jump in the spring, was part of this accelerating trend. \"Mythos was not a one-time deviation, but a point on a superexponential. They could already retrain Mythos with a fraction of the compute originally needed,\"he writes.",
       "He says algorithmic improvements are \"on the verge of being automated,\"which is why he wants frontier model development paused next year so competitors can catch up. A pause, he writes, would \"commoditize human-level intelligence. It would only harm OpenAI and Anthropic.\"",
       "Coxon previously trained AI models at OpenAI and, most recently, Anthropic. He drew wide attention in September with public warnings about the risks of advanced AI systems, echoed by other protagonists in the industry. One of their fears is that advanced, self-improving AI could get out of control."
-    ]
+    ],
+    "inline_videos": []
   }
 ]
