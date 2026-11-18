@@ -1157,6 +1157,7 @@ def load_existing_items() -> list:
     cbsnews_live_budget = 4
     ifixit_live_budget = 4
     nineto5mac_live_budget = 4
+    tomshardware_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2609,6 +2610,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if n95_data.get(vk):
                                 it[vk] = n95_data[vk]
+                except Exception:
+                    pass
+
+        # 6.23 Tom's Hardware (tomshardware.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "tomshardware.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_th = _extract_item_ts(it)
+            is_recent_th = (ts_th > 0) and ((now_ts_load - ts_th) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_th_fix = is_recent_th and tomshardware_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "Tom's Hardware", "Tom’s Hardware") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/toms_")
+            )
+            if needs_th_fix:
+                tomshardware_live_budget -= 1
+                try:
+                    from crawlers.tomshardware_crawler import crawl_tomshardware
+                    th_data = crawl_tomshardware(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if th_data.get("is_filtered_out"):
+                        continue
+                    if th_data.get("title"):
+                        it["title"] = th_data["title"]
+                        it["title_en"] = th_data["title"]
+                    if th_data.get("author") and th_data["author"] != "Tom's Hardware":
+                        it["author"] = th_data["author"]
+                    if th_data.get("cover_image") and str(th_data["cover_image"]).startswith("http"):
+                        it["image_url"] = th_data["cover_image"]
+                        it["cover_image"] = th_data["cover_image"]
+                    if th_data.get("is_substantive") and th_data.get("full_text"):
+                        it["paragraphs"] = th_data.get("paragraphs", [])
+                        it["subheadings"] = th_data.get("subheadings", [])
+                        it["article_content"] = th_data["full_text"]
+                        it["article_content_en"] = th_data["full_text"]
+                        it["inline_images"] = th_data.get("inline_images", [])
+                        if th_data.get("inline_videos"):
+                            it["inline_videos"] = th_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if th_data.get("has_video") and th_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = th_data["video_url"]
+                        if th_data.get("video_id"):
+                            it["video_id"] = th_data["video_id"]
+                        it["video_provider"] = th_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if th_data.get(vk):
+                                it[vk] = th_data[vk]
                 except Exception:
                     pass
 

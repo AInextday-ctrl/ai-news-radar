@@ -953,6 +953,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "tomshardware.com" in domain:
+            try:
+                from crawlers.tomshardware_crawler import crawl_tomshardware
+                th_data = crawl_tomshardware(url, html_text=html_text)
+                if th_data.get("is_filtered_out"):
+                    result.update(th_data)
+                    return result
+                if th_data.get("is_substantive") or th_data.get("paras_count", 0) >= 1 or th_data.get("title"):
+                    result.update(th_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

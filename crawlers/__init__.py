@@ -29,6 +29,7 @@ from .coindesk_crawler import crawl_coindesk, is_coindesk_url
 from .cbsnews_crawler import crawl_cbsnews, is_cbsnews_url
 from .ifixit_crawler import crawl_ifixit, is_ifixit_url
 from .nineto5mac_crawler import crawl_nineto5mac, is_nineto5mac_url
+from .tomshardware_crawler import crawl_tomshardware, is_tomshardware_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -77,6 +78,8 @@ __all__ = [
     "is_ifixit_url",
     "crawl_nineto5mac",
     "is_nineto5mac_url",
+    "crawl_tomshardware",
+    "is_tomshardware_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]
