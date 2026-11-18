@@ -928,12 +928,76 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         """
 
     video_html = ""
-    if item.get("has_video") or item.get("video_url"):
-        v_url = item.get("video_url") or item.get("video_direct_url") or source_url
-        v_title = "现场视频报道" if is_zh else "Live Video Coverage"
-        v_action = "播放视频 ↗" if is_zh else "Watch Video ↗"
-        v_desc = f"原文包含 {source_name} 独家现场视频报道与深度实录。" if is_zh else f"Original reporting includes exclusive live video coverage and analysis from {source_name}."
-        video_html = f"""
+    if item.get("has_video") or item.get("video_url") or item.get("video_id"):
+        v_raw_url = str(item.get("video_url") or "").strip()
+        v_direct_url = str(item.get("video_direct_url") or "").strip()
+        v_provider = str(item.get("video_provider") or "").lower().strip()
+        v_id = str(item.get("video_id") or "").strip()
+        if not v_id and "SC=" in v_raw_url:
+            m_sc = re.search(r'SC=([A-Za-z0-9_-]+)', v_raw_url)
+            if m_sc:
+                v_id = m_sc.group(1)
+        if v_id and not v_provider:
+            v_provider = "stn"
+
+        v_outbound = v_direct_url or (v_raw_url if (v_raw_url.startswith("http") and "embedcode" not in v_raw_url) else source_url)
+        v_title = f"现场视频报道 · {escape(source_name)}" if is_zh else f"Featured Video Coverage · {escape(source_name)}"
+        v_action = "原站观看 ↗" if is_zh else "Watch on Source ↗"
+        v_desc = f"原文包含 {escape(source_name)} 独家现场视频报道与深度实录。" if is_zh else f"Embedded official video report from {escape(source_name)}."
+
+        if v_provider == "stn" and v_id:
+            sc_play = re.sub(r'-14497$', '-16481', v_id)
+            stn_srcdoc = (
+                "<!DOCTYPE html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'>"
+                "<style>html,body{margin:0;padding:0;width:100%;height:100%;background:#020617;overflow:hidden;display:flex;align-items:center;justify-content:center;}"
+                ".stn-video-player{width:100%;height:100%;}</style></head><body>"
+                f"<div class='stn-video-player k-{escape(sc_play)} s2nPlayer-{escape(sc_play)}' data-content-placement='stn-video'></div>"
+                "<script>window.addEventListener('voltaxPlayerLoaded',function(e){try{if(e.detail&&e.detail.player&&e.detail.player.setFloatingEnabled){e.detail.player.setFloatingEnabled(false);}}catch(err){}});</script>"
+                f"<script src='https://embed.sendtonews.com/player3/embedcode.js?SC={escape(sc_play)}' async></script>"
+                "</body></html>"
+            )
+            video_html = f"""
+        <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
+          <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="inline-flex h-2 w-2 rounded-full bg-rose-500 animate-pulse shrink-0"></span>
+              <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">🎬 {v_title}</span>
+            </div>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-colors">
+              {v_action}
+            </a>
+          </div>
+          <div class="w-full aspect-video bg-slate-950 relative">
+            <iframe class="w-full h-full border-0" loading="lazy" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="{v_title}" srcdoc="{html.escape(stn_srcdoc, quote=True)}"></iframe>
+          </div>
+        </div>
+        """
+        elif v_provider == "mp4" or v_raw_url.lower().endswith(".mp4"):
+            video_html = f"""
+        <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
+          <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">
+            <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">🎬 {v_title}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-colors">{v_action}</a>
+          </div>
+          <video controls playsinline preload="metadata" poster="{escape(image_url)}" class="w-full aspect-video bg-black">
+            <source src="{escape(v_raw_url)}" type="video/mp4">
+          </video>
+        </div>
+        """
+        elif v_provider == "iframe" or any(h in v_raw_url.lower() for h in ("youtube.com/embed", "player.vimeo.com", "players.brightcove.net")):
+            video_html = f"""
+        <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
+          <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">
+            <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">🎬 {v_title}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-colors">{v_action}</a>
+          </div>
+          <div class="w-full aspect-video bg-slate-950">
+            <iframe src="{escape(v_raw_url)}" class="w-full h-full border-0" loading="lazy" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="{v_title}"></iframe>
+          </div>
+        </div>
+        """
+        else:
+            video_html = f"""
         <div class="mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-3 text-amber-900 dark:text-amber-200">
           <div class="flex items-center gap-2.5 min-w-0">
             <span class="text-xl">📹</span>
@@ -942,7 +1006,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
               <div class="text-xs text-amber-700/80 dark:text-amber-300/80 truncate">{v_desc}</div>
             </div>
           </div>
-          <a href="{escape(v_url)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
+          <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-3 py-1.5 rounded-lg bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs shadow-sm transition-all flex items-center gap-1">
             <span>▶</span> <span>{v_action}</span>
           </a>
         </div>

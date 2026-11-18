@@ -9687,8 +9687,8 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const expandBtnEl = document.getElementById('ai-modal-expand-btn');
       const expandTextEl = document.getElementById('ai-modal-expand-text');
 
-      const origContentEn = String(item.article_content_en || item.article_content || item.original_content || '').trim();
-      const origContentZh = String(item.article_content_zh || '').trim();
+      const origContentEn = String(item.article_content_en || item.article_content || (Array.isArray(item.paragraphs) ? item.paragraphs.join('\n\n') : '') || item.original_content || '').trim();
+      const origContentZh = String(item.article_content_zh || (Array.isArray(item.paragraphs_zh) ? item.paragraphs_zh.join('\n\n') : '') || '').trim();
 
       const hasValidZh = Boolean(origContentZh && origContentZh.length >= 80 && (origContentZh.match(/[\u4e00-\u9fa5]/g) || []).length >= 50);
       const hasValidEn = Boolean(origContentEn && origContentEn.length >= 180 && !/[\u4e00-\u9fa5]/.test(origContentEn));
@@ -9897,27 +9897,73 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         }
       }
 
-      // 现场视频报道提示栏控制
+      // 现场视频报道提示栏与嵌入式播放器控制 (支持 Fortune STN/Voltax、YouTube/Vimeo iframe 与原生 MP4)
       const videoBadgeEl = document.getElementById('ai-modal-video-badge');
       const videoTextEl = document.getElementById('ai-modal-video-text');
       const videoBtnEl = document.getElementById('ai-modal-video-btn');
       const videoBtnTextEl = document.getElementById('ai-modal-video-btn-text');
-      const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5));
+      const hasVideo = !!(item.has_video || (item.media_assets && item.media_assets.has_video) || (item.video_url && item.video_url.length > 5) || item.video_id);
+
+      let videoPlayerWrapEl = document.getElementById('ai-modal-video-player-wrap');
+      if (!videoPlayerWrapEl && videoBadgeEl && videoBadgeEl.parentElement) {
+        videoPlayerWrapEl = document.createElement('div');
+        videoPlayerWrapEl.id = 'ai-modal-video-player-wrap';
+        videoPlayerWrapEl.className = 'hidden rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-md';
+        videoBadgeEl.insertAdjacentElement('afterend', videoPlayerWrapEl);
+      }
 
       if (videoBadgeEl) {
         if (hasVideo) {
+          const vRaw = String(item.video_url || '').trim();
+          const vDirect = String(item.video_direct_url || '').trim();
+          let vId = String(item.video_id || '').trim();
+          if (!vId && vRaw.includes('SC=')) {
+            const mSc = vRaw.match(/SC=([A-Za-z0-9_-]+)/);
+            if (mSc) vId = mSc[1];
+          }
+          const vProvider = String(item.video_provider || (vId ? 'stn' : '')).toLowerCase();
+          const safeOutbound = vDirect || (vRaw && !vRaw.includes('embedcode') ? vRaw : '') || item.url || '#';
+
           videoBadgeEl.classList.remove('hidden');
           if (videoTextEl) {
             videoTextEl.textContent = isZh ? `原文包含 ${source} 一线现场独家视频报道` : `Original coverage includes live video report from ${source}`;
           }
           if (videoBtnEl) {
-            videoBtnEl.href = item.video_url || item.url || '#';
+            videoBtnEl.href = safeOutbound;
           }
           if (videoBtnTextEl) {
-            videoBtnTextEl.textContent = isZh ? '播放视频' : 'Watch Video';
+            videoBtnTextEl.textContent = isZh ? '原站观看' : 'Watch on Source';
+          }
+
+          if (videoPlayerWrapEl) {
+            if (vProvider === 'stn' && vId) {
+              const scPlay = vId.replace(/-14497$/, '-16481');
+              const stnDoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:100%;height:100%;background:#020617;overflow:hidden;display:flex;align-items:center;justify-content:center;}.stn-video-player{width:100%;height:100%;}</style></head><body><div class="stn-video-player k-${scPlay} s2nPlayer-${scPlay}" data-content-placement="stn-video"></div><script>window.addEventListener('voltaxPlayerLoaded',function(e){try{if(e.detail&&e.detail.player&&e.detail.player.setFloatingEnabled){e.detail.player.setFloatingEnabled(false);}}catch(err){}});<\/script><script src="https://embed.sendtonews.com/player3/embedcode.js?SC=${scPlay}" async><\/script></body></html>`;
+              videoPlayerWrapEl.innerHTML = '';
+              const ifr = document.createElement('iframe');
+              ifr.className = 'w-full aspect-video border-0 bg-slate-950 block';
+              ifr.setAttribute('allow', 'autoplay; fullscreen; encrypted-media; picture-in-picture');
+              ifr.setAttribute('allowfullscreen', '');
+              ifr.srcdoc = stnDoc;
+              videoPlayerWrapEl.appendChild(ifr);
+              videoPlayerWrapEl.classList.remove('hidden');
+            } else if (vProvider === 'mp4' || /\.mp4(\?|$)/i.test(vRaw)) {
+              videoPlayerWrapEl.innerHTML = `<video controls playsinline preload="metadata" class="w-full aspect-video bg-black block"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video>`;
+              videoPlayerWrapEl.classList.remove('hidden');
+            } else if (vProvider === 'iframe' || /youtube\.com\/embed|player\.vimeo\.com|players\.brightcove\.net/i.test(vRaw)) {
+              videoPlayerWrapEl.innerHTML = `<iframe src="${escapeHtml(vRaw)}" class="w-full aspect-video border-0 bg-slate-950 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+              videoPlayerWrapEl.classList.remove('hidden');
+            } else {
+              videoPlayerWrapEl.innerHTML = '';
+              videoPlayerWrapEl.classList.add('hidden');
+            }
           }
         } else {
           videoBadgeEl.classList.add('hidden');
+          if (videoPlayerWrapEl) {
+            videoPlayerWrapEl.innerHTML = '';
+            videoPlayerWrapEl.classList.add('hidden');
+          }
         }
       }
 
@@ -9947,6 +9993,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (videoBadgeEl) {
         videoBadgeEl.classList.add('hidden');
+      }
+      const videoPlayerWrapEl = document.getElementById('ai-modal-video-player-wrap');
+      if (videoPlayerWrapEl) {
+        videoPlayerWrapEl.innerHTML = '';
+        videoPlayerWrapEl.classList.add('hidden');
       }
       const originalCardEl = document.getElementById('ai-modal-original-card');
       if (originalCardEl) {

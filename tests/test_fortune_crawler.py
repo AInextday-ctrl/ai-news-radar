@@ -62,8 +62,12 @@ class TestFortuneCrawler(unittest.TestCase):
         self.assertTrue(res["has_video"])
         self.assertEqual(res["video_id"], "SM900242588-900242588-14497")
         self.assertEqual(res["video_provider"], "stn")
-        self.assertIn("embed.sendtonews.com", res["video_url"])
+        self.assertIn("embed.sendtonews.com/player3/embedcode.js?SC=", res["video_url"])
+        self.assertNotIn("embedcode.3.1.1.php", res["video_url"])
         self.assertEqual(len(res["paragraphs"]), 4)  # Copyright footer excluded
+        self.assertEqual(res["article_content"], res["full_text"])
+        self.assertEqual(res["article_content_en"], res["full_text"])
+        self.assertEqual(res["image_url"], res["cover_image"])
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertEqual(res["subheadings"], ["Expansion into new territory"])

@@ -1133,6 +1133,7 @@ def load_existing_items() -> list:
     now_ts_load = time.time()
     bloomberg_live_budget = 3
     reuters_live_budget = 3
+    fortune_live_budget = 3
 
     for it in items:
         u = it.get("url", "")
@@ -1335,6 +1336,71 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = r_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.3 财富杂志 (Fortune) 官方真实标题、作者、原图、全文与 STN 视频嵌入式自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "fortune.com" in u_now.lower() or "fortune.net" in u_now.lower():
+            f_ts = parse_time_for_sort(it)
+            is_recent_f = (f_ts > 0) and ((now_ts_load - f_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            v_curr = str(it.get("video_url") or "")
+            needs_f_fix = is_recent_f and fortune_live_budget > 0 and (
+                ("(" in t_curr and "fortune" in t_curr.lower()) or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200 or
+                "embedcode.3.1.1.php" in v_curr or
+                not it.get("video_id")
+            )
+            if needs_f_fix:
+                fortune_live_budget -= 1
+                try:
+                    from crawlers.fortune_crawler import crawl_fortune
+                    f_data = crawl_fortune(u_now)
+                    if f_data.get("title"):
+                        it["title"] = f_data["title"]
+                        it["title_en"] = f_data["title"]
+                    if f_data.get("author") and f_data["author"] != "Fortune":
+                        it["author"] = f_data["author"]
+                    if f_data.get("cover_image") and str(f_data["cover_image"]).startswith("http"):
+                        it["image_url"] = f_data["cover_image"]
+                        it["cover_image"] = f_data["cover_image"]
+                    if f_data.get("is_substantive") and f_data.get("full_text"):
+                        it["paragraphs"] = f_data.get("paragraphs", [])
+                        it["subheadings"] = f_data.get("subheadings", [])
+                        it["article_content"] = f_data["full_text"]
+                        it["article_content_en"] = f_data["full_text"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = f_data["full_text"]
+                    if f_data.get("has_video"):
+                        it["has_video"] = True
+                        for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script"):
+                            if f_data.get(vk):
+                                it[vk] = f_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

@@ -75,23 +75,20 @@ _DISK_CACHE_FILE = os.path.join(
 )
 
 # Known proxies for network resilience
-DEFAULT_PROXIES = ["http://127.0.0.1:7897"]
+DEFAULT_PROXIES = ["http://127.0.0.1:7890", "http://127.0.0.1:7897"]
 
 
 def _get_proxies() -> Optional[Dict[str, str]]:
     """Detects available local or environment proxy."""
     env_https = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
     env_http = os.environ.get("HTTP_PROXY") or os.environ.get("http_proxy")
-    if env_https:
-        return {"http": env_http or env_https, "https": env_https}
+    if env_https or env_http:
+        return {"http": env_http or env_https, "https": env_https or env_http}
     for p in DEFAULT_PROXIES:
         try:
-            import urllib.request
-            req = urllib.request.Request("http://127.0.0.1:7897", headers={"User-Agent": "Test"})
-            # quick socket check
             import socket
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(0.5)
+            sock.settimeout(0.3)
             host, port = p.replace("http://", "").split(":")
             if sock.connect_ex((host, int(port))) == 0:
                 sock.close()
@@ -242,39 +239,47 @@ def download_and_host_image(image_url: str, article_id: str) -> Optional[str]:
     return clean_download_url
 
 
-def crawl_fortune(url: str, html_text: str = "") -> Dict[str, Any]:
+def crawl_fortune(url: str, html_text: str = "", force_refresh: bool = False) -> Dict[str, Any]:
     """
     Comprehensive Fortune crawler:
     Extracts authentic headline, author, full 100% paragraphs, subheadings,
-    master cover photography, and video embeds/streams.
+    master cover photography, and playable STN/iframe/MP4 video embeds.
     """
-    # 1. Check memory & disk cache
-    if url in _FORTUNE_CACHE:
-        return _FORTUNE_CACHE[url]
-    cached = _get_from_disk_cache(url)
-    if cached and (cached.get("is_substantive") or cached.get("paras_count", 0) >= 3):
-        _FORTUNE_CACHE[url] = cached
-        return cached
+    clean_url = url.split("#")[0].split("?")[0].strip() if url else ""
 
-    clean_id = hashlib.md5(url.encode("utf-8")).hexdigest()[:16]
+    # 1. Check memory & disk cache (only when fresh HTML is not explicitly supplied)
+    if not html_text and not force_refresh and clean_url:
+        for cached in (_FORTUNE_CACHE.get(clean_url), _get_from_disk_cache(clean_url)):
+            if cached and (cached.get("is_substantive") or cached.get("paras_count", 0) >= 3):
+                # Reject legacy cache entries that still carry 404 .3.1.1.php video URL or missing article_content
+                v_old = str(cached.get("video_url") or "")
+                if "embedcode.3.1.1.php" not in v_old and cached.get("article_content") and cached.get("image_url"):
+                    _FORTUNE_CACHE[clean_url] = dict(cached)
+                    return dict(cached)
+
+    clean_id = hashlib.md5(clean_url.encode("utf-8")).hexdigest()[:16]
     result: Dict[str, Any] = {
         "id": clean_id,
-        "url": url,
+        "url": clean_url,
         "title": "",
         "author": "Fortune",
         "published_at": None,
         "cover_image": None,
+        "image_url": None,
         "original_image_url": None,
         "inline_images": [],
         "paragraphs": [],
         "subheadings": [],
         "paras_count": 0,
         "full_text": "",
+        "article_content": "",
+        "article_content_en": "",
         "lead_paragraph": "",
         "is_substantive": False,
         "is_paywalled": False,
         "has_video": False,
         "video_url": None,
+        "video_embed_script": None,
         "video_id": None,
         "video_provider": None,
         "video_direct_url": None,
@@ -284,7 +289,7 @@ def crawl_fortune(url: str, html_text: str = "") -> Dict[str, Any]:
 
     # 2. Obtain HTML
     if not html_text:
-        html_text = fetch_fortune_html(url) or ""
+        html_text = fetch_fortune_html(clean_url) or ""
 
     if not html_text:
         return result
@@ -379,9 +384,10 @@ def crawl_fortune(url: str, html_text: str = "") -> Dict[str, Any]:
         # Localize image
         hosted_url = download_and_host_image(clean_remote_img, clean_id)
         result["cover_image"] = hosted_url or clean_remote_img
+        result["image_url"] = result["cover_image"]
 
     # 4. Embedded Video Stream & Metadata Resolution
-    # Fortune uses STN Video (SendtoNews / Minute Media) embedded via Next.js components
+    # Fortune uses STN Video (SendtoNews / Minute Media Voltax) embedded via Next.js components
     related_video_id = None
     # Pattern 1: Next.js component props with possible escaped quotes: {\"relatedVideoId\":\"SM900242588-900242588-14497\"}
     m_vid_id = re.search(r'relatedVideoId["\\]*:\s*\\*["\']([^"\'\\]+)', html_text)
@@ -400,13 +406,15 @@ def crawl_fortune(url: str, html_text: str = "") -> Dict[str, Any]:
         if m_fk:
             related_video_id = m_fk.group(1).strip()
 
-    # Check for STN Video
+    # Check for STN Video (official HTTP 200 Voltax/STN embed script; no-ads variant -16481 also supported)
     if related_video_id:
+        stn_embed_url = f"https://embed.sendtonews.com/player3/embedcode.js?SC={related_video_id}"
         result["has_video"] = True
         result["video_id"] = related_video_id
         result["video_provider"] = "stn"
-        result["video_url"] = f"https://embed.sendtonews.com/player3/embedcode.3.1.1.php?SC={related_video_id}"
-        result["video_direct_url"] = f"{url}#related-video"
+        result["video_url"] = stn_embed_url
+        result["video_embed_script"] = stn_embed_url
+        result["video_direct_url"] = f"{clean_url}#related-video"
 
     # Check for stnMeta franchise tags in JSON-LD
     if json_ld_article.get("stnMeta"):
@@ -520,15 +528,18 @@ def crawl_fortune(url: str, html_text: str = "") -> Dict[str, Any]:
         result["subheadings"] = subheadings
         result["inline_images"] = inline_figures
 
-        # Format full text with subheadings if available
-        result["full_text"] = "\n\n".join(substantive_paras)
-        result["is_substantive"] = len(substantive_paras) >= 3 or len(result["full_text"]) >= 300
+        # Format full text and populate all canonical text fields for downstream pipeline parity
+        full_body = "\n\n".join(substantive_paras)
+        result["full_text"] = full_body
+        result["article_content"] = full_body
+        result["article_content_en"] = full_body
+        result["is_substantive"] = len(substantive_paras) >= 3 or len(full_body) >= 300
         result["is_paywalled"] = False
         result["status"] = "success"
 
-    # Save to disk and memory cache
-    if result["is_substantive"]:
-        _FORTUNE_CACHE[url] = result
-        _save_to_disk_cache(url, result)
+    # Save to disk and memory cache (avoid caching unit-test mock URLs)
+    if result["is_substantive"] and clean_url and "test-story" not in clean_url:
+        _FORTUNE_CACHE[clean_url] = dict(result)
+        _save_to_disk_cache(clean_url, dict(result))
 
     return result
