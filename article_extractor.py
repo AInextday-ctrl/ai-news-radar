@@ -823,6 +823,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "arstechnica.com" in domain:
+            try:
+                from crawlers.arstechnica_crawler import crawl_arstechnica
+                ars_data = crawl_arstechnica(url, html_text=html_text)
+                if ars_data.get("is_filtered_out"):
+                    result.update(ars_data)
+                    return result
+                if ars_data.get("is_substantive") or ars_data.get("paras_count", 0) >= 1 or ars_data.get("title"):
+                    result.update(ars_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

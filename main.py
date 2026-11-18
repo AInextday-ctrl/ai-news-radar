@@ -1147,6 +1147,7 @@ def load_existing_items() -> list:
     wired_live_budget = 4
     mittr_live_budget = 4
     tc_live_budget = 4
+    ars_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2003,6 +2004,79 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if tc_data.get(vk):
                                 it[vk] = tc_data[vk]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.13 Ars Technica 官方真实标题、实名记者署名、多区块 .post-content 长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "arstechnica.com" in u_now.lower():
+            ars_ts = parse_time_for_sort(it)
+            is_recent_ars = (ars_ts > 0) and ((now_ts_load - ars_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_ars_fix = is_recent_ars and ars_live_budget > 0 and (
+                ("(" in t_curr and "ars technica" in t_curr.lower()) or
+                "&#" in t_curr or
+                auth_curr in ("", "Ars Technica") or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                "ainewsradar.xyz/images/ars_" not in img_curr or
+                len(art_en_curr) < 800 or
+                len(art_zh_curr) < 200
+            )
+            if needs_ars_fix:
+                ars_live_budget -= 1
+                try:
+                    from crawlers.arstechnica_crawler import crawl_arstechnica
+                    ars_data = crawl_arstechnica(u_now, title=t_curr)
+                    if ars_data.get("is_filtered_out"):
+                        continue
+                    if ars_data.get("title"):
+                        it["title"] = ars_data["title"]
+                        it["title_en"] = ars_data["title"]
+                    if ars_data.get("author") and ars_data["author"] != "Ars Technica":
+                        it["author"] = ars_data["author"]
+                    if ars_data.get("cover_image") and str(ars_data["cover_image"]).startswith("http"):
+                        it["image_url"] = ars_data["cover_image"]
+                        it["cover_image"] = ars_data["cover_image"]
+                    if ars_data.get("is_substantive") and ars_data.get("full_text"):
+                        it["paragraphs"] = ars_data.get("paragraphs", [])
+                        it["subheadings"] = ars_data.get("subheadings", [])
+                        it["article_content"] = ars_data["full_text"]
+                        it["article_content_en"] = ars_data["full_text"]
+                        it["inline_images"] = ars_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = ars_data["full_text"]
+                    if ars_data.get("has_video") and ars_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = ars_data["video_url"]
+                        if ars_data.get("video_id"):
+                            it["video_id"] = ars_data["video_id"]
+                        it["video_provider"] = ars_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if ars_data.get(vk):
+                                it[vk] = ars_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
