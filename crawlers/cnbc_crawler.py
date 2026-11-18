@@ -713,7 +713,12 @@ def crawl_cnbc(
         if parsed.get("video_aspect"):
             result["video_aspect"] = parsed["video_aspect"]
         if parsed.get("video_poster"):
-            result["video_poster"] = parsed["video_poster"]
+            vp = parsed["video_poster"]
+            if localize_cover and html_text is None:
+                vp = _localize_cnbc_image(vp, proxies=proxies)
+            result["video_poster"] = vp
+        elif cover:
+            result["video_poster"] = cover
         if parsed.get("video_title"):
             result["video_title"] = parsed["video_title"]
 

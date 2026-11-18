@@ -994,6 +994,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         v_custom_title = str(item.get("video_title") or "").strip()
         v_aspect = str(item.get("video_aspect") or "").strip().lower()
         v_poster = str(item.get("video_poster") or "").strip() or image_url
+        if "image.cnbcfm.com" in v_poster.lower() and image_url and "ainewsradar.xyz/images/" in image_url:
+            v_poster = image_url
 
         # 通用宽高比自动解析：支持 9x16 / 9:16 / 720x1280 等任意数值比例 + 第三方竖屏短片 URL 识别
         is_vertical_vid = v_aspect in ("9x16", "9:16", "4x5", "4:5", "3x4", "3:4", "vertical", "portrait") or any(
@@ -1048,9 +1050,10 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         """
         elif v_provider == "mp4" or v_raw_url.lower().endswith(".mp4"):
             fig_max = "max-w-[360px]" if is_vertical_vid else ("max-w-[480px]" if is_square_vid else "w-full")
+            vid_ratio_cls = "" if (is_vertical_vid or is_square_vid) else "aspect-video "
             video_html = f"""
         <figure class="my-8 mx-auto w-full {fig_max}">
-          <video controls playsinline preload="metadata" poster="{escape(v_poster)}" class="w-full h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black" onloadedmetadata="if(this.videoWidth&&this.videoHeight){{var f=this.closest('figure');if(f){{if(this.videoHeight>this.videoWidth*1.08){{f.style.maxWidth='360px';}}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){{f.style.maxWidth='480px';}}else{{f.style.maxWidth='100%';}}}}}}">
+          <video controls playsinline preload="metadata" poster="{escape(v_poster)}" class="w-full {vid_ratio_cls}h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){{var f=this.closest('figure');if(f){{if(this.videoHeight>this.videoWidth*1.08){{f.style.maxWidth='360px';this.classList.remove('aspect-video');}}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){{f.style.maxWidth='480px';this.classList.remove('aspect-video');}}else{{f.style.maxWidth='100%';}}}}}}">
             <source src="{escape(v_raw_url)}" type="video/mp4">
           </video>
           <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">

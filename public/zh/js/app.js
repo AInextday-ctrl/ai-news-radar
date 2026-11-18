@@ -9996,9 +9996,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
               const whM = vAsp.match(/^(\d+(?:\.\d+)?)\s*[x:]\s*(\d+(?:\.\d+)?)$/);
               const isVert = /^(9x16|9:16|4x5|4:5|3x4|3:4|vertical|portrait)$/.test(vAsp) || (whM && parseFloat(whM[2]) > parseFloat(whM[1]) * 1.08);
               const isSq = /^(1x1|1:1|square)$/.test(vAsp) || (whM && Math.abs(parseFloat(whM[2]) - parseFloat(whM[1])) <= parseFloat(whM[1]) * 0.08);
-              const vPoster = item.video_poster || primaryImg || '';
+              let vPoster = item.video_poster || primaryImg || '';
+              if (String(vPoster).toLowerCase().includes('image.cnbcfm.com') && primaryImg && String(primaryImg).includes('ainewsradar.xyz/images/')) {
+                vPoster = primaryImg;
+              }
               const maxCls = isVert ? 'max-w-[320px]' : (isSq ? 'max-w-[440px]' : 'w-full');
-              videoPlayerWrapEl.innerHTML = `<div class="mx-auto w-full ${maxCls}"><video controls playsinline preload="metadata"${vPoster ? ` poster="${escapeHtml(vPoster)}"` : ''} class="w-full h-auto max-h-[560px] rounded-2xl shadow-md bg-black block" onloadedmetadata="if(this.videoWidth&&this.videoHeight){var w=this.parentElement;if(w){if(this.videoHeight>this.videoWidth*1.08){w.style.maxWidth='320px';}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){w.style.maxWidth='440px';}else{w.style.maxWidth='100%';}}}"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video></div>`;
+              const ratioCls = (isVert || isSq) ? '' : 'aspect-video ';
+              videoPlayerWrapEl.innerHTML = `<div class="mx-auto w-full ${maxCls}"><video controls playsinline preload="metadata"${vPoster ? ` poster="${escapeHtml(vPoster)}"` : ''} class="w-full ${ratioCls}h-auto max-h-[560px] rounded-2xl shadow-md bg-black block object-contain" onloadedmetadata="if(this.videoWidth&&this.videoHeight){var w=this.parentElement;if(w){if(this.videoHeight>this.videoWidth*1.08){w.style.maxWidth='320px';this.classList.remove('aspect-video');}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){w.style.maxWidth='440px';this.classList.remove('aspect-video');}else{w.style.maxWidth='100%';}}}"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video></div>`;
               videoPlayerWrapEl.classList.remove('hidden');
             } else if (vProvider === 'iframe' || /youtube\.com\/embed|youtube\.com\/shorts|tiktok\.com\/|instagram\.com\/reel|player\.vimeo\.com|players\.brightcove\.net|player\.cnevids\.com/i.test(vRaw)) {
               const vAsp = String(item.video_aspect || '').toLowerCase();
