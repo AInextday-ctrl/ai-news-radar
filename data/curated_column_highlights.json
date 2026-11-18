@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-18 03:06:10 UTC",
+  "generated_at": "2026-11-18 03:19:11 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-18 03:06:10 UTC",
+      "updated_at": "2026-11-18 03:19:11 UTC",
       "headline_item": {
-        "id": "f7e430662d712486",
+        "id": "3a35f36396010f6b",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达董事会内部分化：部分成员推动黄仁勋回归",
-        "title_en": "Sources: a faction of Nvidia board members is pushing for Jensen Huang's return despite Chair Harvey Jones stating the board has no plans to reinstate Huang (Semafor)",
-        "source": "Semafor",
-        "published_at": "2026-11-18T02:50:08+00:00",
-        "url": "https://www.semafor.com/article/11/17/2026/some-nvidia-directors-push-to-bring-huang-back-despite-board-opposition",
-        "event_summary_zh": "英伟达董事会成员正就黄仁勋去留问题产生分歧，部分董事私下接触黄仁勋商讨回归可能性，而主席哈维·琼斯则重申目前无此计划",
-        "event_summary_en": "A faction within Nvidia’s board is actively pushing for the return of former CEO Jensen Huang despite Chairman Harvey Jones' public denial of any such plans. Meanwhile, the board is concurrently vetting candidates for the CEO vacancy, including ARM CEO Rene Haas and Marvell CEO Matt Murphy, amid growing internal governance friction.",
+        "title_zh": "卢比奥否认近期美技术宕机系系统性攻击",
+        "title_en": "Marco Rubio says there's \"zero evidence\" linking the recent FAA ground stop, Microsoft outage, and bank service issues, and the US isn't \"under systemic attack\" (Kiki Intarasuwan/CBS News)",
+        "source": "CBS News",
+        "published_at": "2026-11-18T03:15:00+00:00",
+        "url": "https://www.cbsnews.com/news/marco-rubio-tech-outages-not-connected/",
+        "event_summary_zh": "美国国务卿马可·卢比奥明确指出，近期民航、银行及微软等领域的技术中断事件互无关联，非网络攻击所致",
+        "event_summary_en": "U.S. Secretary of State Marco Rubio stated during a press conference in the Philippines that recent technical outages affecting Microsoft, the Federal Aviation Administration (FAA), and major banks are isolated incidents. Rubio emphasized that intelligence assessments show no evidence of malicious cyber activity, foreign state involvement, or a systemic attack on U.S. infrastructure.",
         "core_facts_zh": [
-          "【核心事件】英伟达主席哈维·琼斯、前CEO黄仁勋、ARM CEO雷内·哈斯、Marvell CEO马特·墨菲在英伟达董事会内部治理与继任考察流程：部分董事游说黄仁勋回归，董事会高层公开辟谣，同步推进外部候选人甄选",
-          "【起因与机理】公司权力核心重构期间的治理结构矛盾与市场对黄仁勋领导力的依赖",
-          "【核心事实细节】董事会内部存在支持黄仁勋复职的压力群体，与现任主席哈维·琼斯的官方立场直接对立。",
-          "【行业影响与走向】公司治理僵局将直接影响英伟达在下一代AI芯片研发与产能布局的战略延续性。"
+          "【核心事件】美国国务卿马可·卢比奥：排除近期大规模技术宕机属于地缘政治攻击的嫌疑",
+          "【起因与机理】针对民航停飞、银行系统故障及微软服务中断引发的公众与金融市场恐慌进行辟谣",
+          "【核心事实细节】官方澄清近期宕机非网络攻击或敌对国干预。",
+          "【核心诉求与态度】强调行政部门已提升对关键基础设施潜在威胁的监测力度。"
         ],
         "core_facts_en": [
-          "[Core Event] Nvidia Chairman Harvey Jones, former CEO Jensen Huang, ARM CEO Rene Haas, Marvell CEO Matt Murphy: Internal lobbying for Huang's reinstatement, official denial by the Chairman, and parallel candidate search",
-          "[Root Cause & Mechanism] Internal governance conflict and market reliance on leadership stability during a transition period",
-          "[Key Fact Detail] Internal board division between pro-Huang factions and the official position led by Chairman Harvey Jones.",
-          "[Industry Impact & Outlook] Governance impasse threatening the strategic continuity of AI chip R&D and supply chain management."
+          "[Core Event] Marco Rubio, U.S. Secretary of State: Disclaimed any link between recent tech outages and malicious cyber/geopolitical attacks",
+          "[Root Cause & Mechanism] To mitigate public and financial market concerns following a series of infrastructure failures",
+          "[Key Fact Detail] Official denial of foreign state or cyber-attack involvement in recent outages.",
+          "[Key Position & Outlook] Reiteration of administration's vigilance regarding infrastructure vulnerability monitoring."
         ],
-        "industry_impact_zh": "黄仁勋作为英伟达核心战略资产与文化符号，其离职导致董事会决策层与市场信心的割裂。当前的继任者寻觅因涉及复杂竞业与并购背景受阻，此番内部分裂若持续，将直接威胁英伟达在高性能AI计算市场的绝对领先地位及供应链协作稳定性。",
-        "industry_impact_en": "As the foundational architect of Nvidia's AI hegemony, Huang's departure creates a volatile power vacuum that threatens both market capitalization and supply chain predictability. The ongoing internal boardroom friction and the complexity of vetting external CEOs signify a high-risk transition period that could compromise Nvidia’s execution roadmap."
+        "industry_impact_zh": "此类高频基础设施宕机事件暴露了美国软件供应链在复杂系统架构下的脆弱性，单一供应商或维护方的失误极易引发连锁式级联故障。在当前地缘对抗压力下，行政层面对非攻击性的定性旨在平抑市场恐慌，但实质上凸显了分布式系统在容灾架构与合规审计上存在的严重短板。",
+        "industry_impact_en": "High-frequency infrastructure failures reveal critical vulnerabilities in the U.S. software supply chain, where single-point failures in complex systems trigger massive cascading effects. While the executive branch's attribution aims to curb market panic, the reality underscores a systemic deficiency in disaster recovery architectures and oversight protocols for critical digital assets."
       },
       "headlines": [
+        {
+          "id": "3a35f36396010f6b",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "卢比奥否认近期美技术宕机系系统性攻击",
+          "title_en": "Marco Rubio says there's \"zero evidence\" linking the recent FAA ground stop, Microsoft outage, and bank service issues, and the US isn't \"under systemic attack\" (Kiki Intarasuwan/CBS News)",
+          "source": "CBS News",
+          "published_at": "2026-11-18T03:15:00+00:00",
+          "url": "https://www.cbsnews.com/news/marco-rubio-tech-outages-not-connected/",
+          "event_summary_zh": "美国国务卿马可·卢比奥明确指出，近期民航、银行及微软等领域的技术中断事件互无关联，非网络攻击所致",
+          "event_summary_en": "U.S. Secretary of State Marco Rubio stated during a press conference in the Philippines that recent technical outages affecting Microsoft, the Federal Aviation Administration (FAA), and major banks are isolated incidents. Rubio emphasized that intelligence assessments show no evidence of malicious cyber activity, foreign state involvement, or a systemic attack on U.S. infrastructure.",
+          "core_facts_zh": [
+            "【核心事件】美国国务卿马可·卢比奥：排除近期大规模技术宕机属于地缘政治攻击的嫌疑",
+            "【起因与机理】针对民航停飞、银行系统故障及微软服务中断引发的公众与金融市场恐慌进行辟谣",
+            "【核心事实细节】官方澄清近期宕机非网络攻击或敌对国干预。",
+            "【核心诉求与态度】强调行政部门已提升对关键基础设施潜在威胁的监测力度。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Marco Rubio, U.S. Secretary of State: Disclaimed any link between recent tech outages and malicious cyber/geopolitical attacks",
+            "[Root Cause & Mechanism] To mitigate public and financial market concerns following a series of infrastructure failures",
+            "[Key Fact Detail] Official denial of foreign state or cyber-attack involvement in recent outages.",
+            "[Key Position & Outlook] Reiteration of administration's vigilance regarding infrastructure vulnerability monitoring."
+          ],
+          "industry_impact_zh": "此类高频基础设施宕机事件暴露了美国软件供应链在复杂系统架构下的脆弱性，单一供应商或维护方的失误极易引发连锁式级联故障。在当前地缘对抗压力下，行政层面对非攻击性的定性旨在平抑市场恐慌，但实质上凸显了分布式系统在容灾架构与合规审计上存在的严重短板。",
+          "industry_impact_en": "High-frequency infrastructure failures reveal critical vulnerabilities in the U.S. software supply chain, where single-point failures in complex systems trigger massive cascading effects. While the executive branch's attribution aims to curb market panic, the reality underscores a systemic deficiency in disaster recovery architectures and oversight protocols for critical digital assets."
+        },
         {
           "id": "f7e430662d712486",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "此案不仅是法律层面的诉讼，更是美国通过司法长臂管辖阻断华为全球融资能力与产业扩张的核心手段。若陪审团判定罪名成立，将极大增加华为在海外市场供应链获取与跨境金融结算的合规成本，标志着中美科技摩擦从纯粹的实体清单管制向深度法律围堵演进。",
           "industry_impact_en": "This case functions as a key instrument for the US to leverage judicial long-arm jurisdiction to disrupt Huawei's global financing and industrial expansion. A guilty verdict would significantly increase Huawei's compliance costs in supply chain procurement and cross-border financial settlements, signaling a shift in US-China tech friction from entity-list restrictions to comprehensive legal containment."
-        },
-        {
-          "id": "c02220519bec39b5",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Anthropic IPO引发AI泡沫与债务链式风险质疑",
-          "title_en": "Anthropic’s IPO Is Igniting a Massive AI Wealth Boom in San Francisco",
-          "source": "Bloomberg",
-          "published_at": "2026-11-18T01:50:07+00:00",
-          "url": "https://www.bloomberg.com/news/features/2026-11-17/san-francisco-s-anthropic-openai-boom-could-create-1-2-trillion-in-wealth?accessToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb3VyY2UiOiJTdWJzY3JpYmVyR2lmdGVkQXJ0aWNsZSIsImlhdCI6MTc5NDkzNTQyNCwiZXhwIjoxNzk1NTQwMjI0LCJhcnRpY2xlSWQiOiJUT043VzdOM04wOUcwMCIsImJjb25uZWN0SWQiOiJBRjJFNDMxQTgzRjk0OTU3QUIxNzg5NTgwOEU2Q0YxMiJ9.7VayFY-M2sQ5RZu3yUtftUqTb-0UIpPVnEz898iFnWw",
-          "event_summary_zh": "投资者迈克尔·伯里指控Anthropic招股书隐藏巨额算力债务，质疑超大规模云厂商的闭环融资模式存在系统性崩溃风险",
-          "event_summary_en": "Investor Michael Burry, analyzing Anthropic's S-1 filing, identified $537 billion in compute procurement commitments to hyperscalers like Amazon, Alphabet, and Microsoft, representing 12 times its annual run-rate revenue. Burry warned that these complex financing loops, involving vendor financing and structured credit, create systemic fragility, suggesting that any deceleration in AI demand could trigger catastrophic debt defaults across the ecosystem.",
-          "core_facts_zh": [
-            "【核心事件】投资人迈克尔·伯里（Michael Burry）；Anthropic公司；亚马逊、谷歌、微软（云厂商/股东）：揭露Anthropic高达5370亿美元的算力债务 commitments，抨击超大规模云厂商构筑的“出借人、供应商与股东”三位一体闭环模式",
-            "【起因与机理】质疑当前AI基础设施融资依赖高杠杆债务，类比互联网泡沫时期的厂商融资模式，认为整体系统缺乏现金流支撑",
-            "【关键数据与实测】披露Anthropic与云巨头绑定高达5370亿美元的算力采购债务，杠杆倍数远超其营收能力。",
-            "【行业影响与走向】类比互联网泡沫时期的厂商融资模式，预警若算力基建投资进入下行周期将引发系统性风险。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Michael Burry (Investor); Anthropic; Amazon, Alphabet, Microsoft (Hyperscalers) (Anthropic S-1 IPO Filing): Exposed $537 billion in compute debt commitments; criticized the circular 'lender-vendor-shareholder' ecosystem",
-            "[Root Cause & Mechanism] Concerns over high-leverage financing models reminiscent of dot-com era vendor financing, lacking sustainable cash flow",
-            "[Key Metrics] Uncovered $537B compute debt commitments, reflecting extreme leverage far exceeding revenue base.",
-            "[Official Stance & Demand] Warned of dot-com era parallels where infrastructure buildouts collapse during demand downturns."
-          ],
-          "industry_impact_zh": "该事件揭示了当前AI产业繁荣背后的资产负债表虚构风险，即通过债务转移将庞大的算力资本支出账面化，实现收入增长的自我循环。这种结构性套利本质上将AI模型厂商与云厂商深度绑定为风险共同体，一旦推理端商业化变现不及预期，云厂商的账面资产将面临大规模减记压力。",
-          "industry_impact_en": "This incident exposes the risk of balance-sheet engineering in the AI boom, where capital expenditures are disguised through circular debt arrangements to inflate revenue visibility. This structural arbitrage binds model developers and hyperscalers into a mutual liability trap, leaving hyperscalers vulnerable to massive asset write-downs should AI inference commercialization fail to meet aggressive growth targets."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-18 03:06:10 UTC",
+      "updated_at": "2026-11-18 03:19:11 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-18 03:06:10 UTC",
+      "updated_at": "2026-11-18 03:19:11 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,033)",
+            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,038)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +3,817 stars this week (25,033 total)",
+            "📈 Exponential community momentum: +3,817 stars this week (25,038 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
