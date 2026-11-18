@@ -1137,6 +1137,8 @@ def load_existing_items() -> list:
     wsj_live_budget = 3
     verge_live_budget = 4
     nyt_live_budget = 4
+    wapo_live_budget = 4
+    washsun_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1590,6 +1592,124 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = n_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.7 华盛顿邮报 (The Washington Post) 官方真实标题、记者署名、MSN 官方分发长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "washingtonpost.com" in u_now.lower() or "wapo.st" in u_now.lower():
+            wp_ts = parse_time_for_sort(it)
+            is_recent_wp = (wp_ts > 0) and ((now_ts_load - wp_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_wp_fix = is_recent_wp and wapo_live_budget > 0 and (
+                ("(" in t_curr and "washington post" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 800 or
+                len(art_zh_curr) < 200
+            )
+            if needs_wp_fix:
+                wapo_live_budget -= 1
+                try:
+                    from crawlers.wapo_crawler import crawl_wapo
+                    wp_data = crawl_wapo(u_now, title=t_curr)
+                    if wp_data.get("title"):
+                        it["title"] = wp_data["title"]
+                        it["title_en"] = wp_data["title"]
+                    if wp_data.get("author") and wp_data["author"] != "The Washington Post":
+                        it["author"] = wp_data["author"]
+                    if wp_data.get("cover_image") and str(wp_data["cover_image"]).startswith("http"):
+                        it["image_url"] = wp_data["cover_image"]
+                        it["cover_image"] = wp_data["cover_image"]
+                    if wp_data.get("is_substantive") and len(wp_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = wp_data.get("paragraphs", [])
+                        it["subheadings"] = wp_data.get("subheadings", [])
+                        it["article_content"] = wp_data["full_text"]
+                        it["article_content_en"] = wp_data["full_text"]
+                        it["inline_images"] = wp_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = wp_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.8 华盛顿太阳报 (The Washington Sun) 官方真实标题、记者署名、Brightspot 全量长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "washingtonsun.com" in u_now.lower():
+            ws_ts = parse_time_for_sort(it)
+            is_recent_ws = (ws_ts > 0) and ((now_ts_load - ws_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_ws_fix = is_recent_ws and washsun_live_budget > 0 and (
+                ("(" in t_curr and "washington sun" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200
+            )
+            if needs_ws_fix:
+                washsun_live_budget -= 1
+                try:
+                    from crawlers.washsun_crawler import crawl_washsun
+                    ws_data = crawl_washsun(u_now, title=t_curr)
+                    if ws_data.get("title"):
+                        it["title"] = ws_data["title"]
+                        it["title_en"] = ws_data["title"]
+                    if ws_data.get("author") and ws_data["author"] != "The Washington Sun":
+                        it["author"] = ws_data["author"]
+                    if ws_data.get("cover_image") and str(ws_data["cover_image"]).startswith("http"):
+                        it["image_url"] = ws_data["cover_image"]
+                        it["cover_image"] = ws_data["cover_image"]
+                    if ws_data.get("is_substantive") and len(ws_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = ws_data.get("paragraphs", [])
+                        it["subheadings"] = ws_data.get("subheadings", [])
+                        it["article_content"] = ws_data["full_text"]
+                        it["article_content_en"] = ws_data["full_text"]
+                        it["inline_images"] = ws_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = ws_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

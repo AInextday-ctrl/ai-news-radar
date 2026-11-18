@@ -757,6 +757,26 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "washingtonpost.com" in domain or "wapo.st" in domain:
+            try:
+                from crawlers.wapo_crawler import crawl_wapo
+                wapo_data = crawl_wapo(url, html_text=html_text)
+                if wapo_data.get("is_substantive") or wapo_data.get("paras_count", 0) >= 1 or wapo_data.get("title"):
+                    result.update(wapo_data)
+                    return result
+            except Exception:
+                pass
+
+        if "washingtonsun.com" in domain:
+            try:
+                from crawlers.washsun_crawler import crawl_washsun
+                wsun_data = crawl_washsun(url, html_text=html_text)
+                if wsun_data.get("is_substantive") or wsun_data.get("paras_count", 0) >= 1 or wsun_data.get("title"):
+                    result.update(wsun_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

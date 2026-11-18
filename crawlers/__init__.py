@@ -13,6 +13,8 @@ from .fortune_crawler import crawl_fortune, is_fortune_url
 from .wsj_crawler import crawl_wsj, is_wsj_url
 from .verge_crawler import crawl_verge, is_verge_url
 from .nyt_crawler import crawl_nyt, is_nyt_url
+from .wapo_crawler import crawl_wapo, is_wapo_url
+from .washsun_crawler import crawl_washsun, is_washsun_url
 
 __all__ = [
     "crawl_reuters",
@@ -27,5 +29,9 @@ __all__ = [
     "crawl_verge",
     "is_verge_url",
     "crawl_nyt",
-    "is_nyt_url"
+    "is_nyt_url",
+    "crawl_wapo",
+    "is_wapo_url",
+    "crawl_washsun",
+    "is_washsun_url"
 ]
