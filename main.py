@@ -1161,6 +1161,7 @@ def load_existing_items() -> list:
     bbc_live_budget = 4
     nypost_live_budget = 4
     tfn_live_budget = 4
+    ign_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2813,6 +2814,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if tfn_data.get(vk):
                                 it[vk] = tfn_data[vk]
+                except Exception:
+                    pass
+
+        # 6.27 IGN (ign.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and (("://ign.com/" in str(it.get("url") or "").lower()) or (".ign.com/" in str(it.get("url") or "").lower())):
+            u_now = str(it.get("url") or "")
+            ts_ign = _extract_item_ts(it)
+            is_recent_ign = (ts_ign > 0) and ((now_ts_load - ts_ign) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_ign_fix = is_recent_ign and ign_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "IGN", "IGN Staff") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/ign_")
+            )
+            if needs_ign_fix:
+                ign_live_budget -= 1
+                try:
+                    from crawlers.ign_crawler import crawl_ign
+                    ign_data = crawl_ign(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if ign_data.get("is_filtered_out"):
+                        continue
+                    if ign_data.get("title"):
+                        it["title"] = ign_data["title"]
+                        it["title_en"] = ign_data["title"]
+                    if ign_data.get("author") and ign_data["author"] not in ("IGN", "IGN Staff"):
+                        it["author"] = ign_data["author"]
+                    if ign_data.get("cover_image") and str(ign_data["cover_image"]).startswith("http"):
+                        it["image_url"] = ign_data["cover_image"]
+                        it["cover_image"] = ign_data["cover_image"]
+                    if ign_data.get("is_substantive") and ign_data.get("full_text"):
+                        it["paragraphs"] = ign_data.get("paragraphs", [])
+                        it["subheadings"] = ign_data.get("subheadings", [])
+                        it["article_content"] = ign_data["full_text"]
+                        it["article_content_en"] = ign_data["full_text"]
+                        it["inline_images"] = ign_data.get("inline_images", [])
+                        if ign_data.get("inline_videos"):
+                            it["inline_videos"] = ign_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if ign_data.get("has_video") and ign_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = ign_data["video_url"]
+                        if ign_data.get("video_id"):
+                            it["video_id"] = ign_data["video_id"]
+                        it["video_provider"] = ign_data.get("video_provider", "mp4")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if ign_data.get(vk):
+                                it[vk] = ign_data[vk]
                 except Exception:
                     pass
 

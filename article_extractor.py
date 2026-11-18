@@ -1005,6 +1005,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if domain == "ign.com" or domain.endswith(".ign.com"):
+            try:
+                from crawlers.ign_crawler import crawl_ign
+                ign_data = crawl_ign(url, html_text=html_text)
+                if ign_data.get("is_filtered_out"):
+                    result.update(ign_data)
+                    return result
+                if ign_data.get("is_substantive") or ign_data.get("paras_count", 0) >= 1 or ign_data.get("title"):
+                    result.update(ign_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
