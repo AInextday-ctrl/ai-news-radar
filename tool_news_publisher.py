@@ -960,8 +960,22 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         v_custom_title = str(item.get("video_title") or "").strip()
         v_aspect = str(item.get("video_aspect") or "").strip().lower()
         v_poster = str(item.get("video_poster") or "").strip() or image_url
-        is_vertical_vid = v_aspect in ("9x16", "9:16", "4x5", "4:5", "3x4", "3:4", "vertical", "portrait")
+
+        # 通用宽高比自动解析：支持 9x16 / 9:16 / 720x1280 等任意数值比例 + 第三方竖屏短片 URL 识别
+        is_vertical_vid = v_aspect in ("9x16", "9:16", "4x5", "4:5", "3x4", "3:4", "vertical", "portrait") or any(
+            tok in v_raw_url.lower() for tok in ("youtube.com/shorts/", "tiktok.com/", "instagram.com/reel/")
+        )
         is_square_vid = v_aspect in ("1x1", "1:1", "square")
+        if not is_vertical_vid and not is_square_vid and v_aspect:
+            m_wh = re.match(r'^(\d+(?:\.\d+)?)\s*[x:]\s*(\d+(?:\.\d+)?)$', v_aspect)
+            if m_wh:
+                vw, vh = float(m_wh.group(1)), float(m_wh.group(2))
+                if vw > 0 and vh > 0:
+                    if vh > vw * 1.08:
+                        is_vertical_vid = True
+                    elif abs(vh - vw) <= vw * 0.08:
+                        is_square_vid = True
+
         v_title = (
             f"{escape(v_custom_title)} · {escape(source_name)}" if v_custom_title
             else (f"现场视频报道 · {escape(source_name)}" if is_zh else f"Featured Video Coverage · {escape(source_name)}")
@@ -997,53 +1011,38 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </div>
         """
         elif v_provider == "mp4" or v_raw_url.lower().endswith(".mp4"):
-            if is_vertical_vid:
-                vid_box_cls = "w-full bg-slate-950 flex items-center justify-center py-4 px-3"
-                vid_el_cls = "w-full max-w-[360px] aspect-[9/16] max-h-[640px] bg-black rounded-xl shadow-2xl object-contain"
-            elif is_square_vid:
-                vid_box_cls = "w-full bg-slate-950 flex items-center justify-center py-3 px-3"
-                vid_el_cls = "w-full max-w-[480px] aspect-square max-h-[520px] bg-black rounded-xl shadow-2xl object-contain"
-            else:
-                vid_box_cls = "w-full bg-black flex items-center justify-center"
-                vid_el_cls = "w-full max-h-[640px] bg-black object-contain"
+            fig_max = "max-w-[360px]" if is_vertical_vid else ("max-w-[480px]" if is_square_vid else "w-full")
             video_html = f"""
-        <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
-          <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="inline-flex h-2 w-2 rounded-full bg-rose-500 animate-pulse shrink-0"></span>
-              <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">🎬 {v_title}</span>
-            </div>
-            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-colors">{v_action}</a>
-          </div>
-          <div class="{vid_box_cls}">
-            <video controls playsinline preload="metadata" poster="{escape(v_poster)}" class="{vid_el_cls}" onloadedmetadata="if(this.videoHeight>this.videoWidth){{this.style.maxWidth='360px';this.style.maxHeight='640px';this.style.aspectRatio='9/16';this.style.borderRadius='0.75rem';this.parentElement.style.padding='16px 12px';}}">
-              <source src="{escape(v_raw_url)}" type="video/mp4">
-            </video>
-          </div>
-        </div>
+        <figure class="my-8 mx-auto w-full {fig_max}">
+          <video controls playsinline preload="metadata" poster="{escape(v_poster)}" class="w-full h-auto max-h-[640px] rounded-2xl shadow-lg block bg-black" onloadedmetadata="if(this.videoWidth&&this.videoHeight){{var f=this.closest('figure');if(f){{if(this.videoHeight>this.videoWidth*1.08){{f.style.maxWidth='360px';}}else if(Math.abs(this.videoHeight-this.videoWidth)<=this.videoWidth*0.08){{f.style.maxWidth='480px';}}else{{f.style.maxWidth='100%';}}}}}}">
+            <source src="{escape(v_raw_url)}" type="video/mp4">
+          </video>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 {v_title}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">{v_action}</a>
+          </figcaption>
+        </figure>
         """
-        elif v_provider == "iframe" or any(h in v_raw_url.lower() for h in ("youtube.com/embed", "player.vimeo.com", "players.brightcove.net", "player.cnevids.com")):
+        elif v_provider == "iframe" or any(h in v_raw_url.lower() for h in ("youtube.com/embed", "player.vimeo.com", "players.brightcove.net", "player.cnevids.com", "youtube.com/shorts", "tiktok.com/", "instagram.com/reel")):
             if is_vertical_vid:
-                ifr_wrap_cls = "w-full bg-slate-950 flex items-center justify-center py-4 px-3"
-                ifr_box_cls = "w-full max-w-[360px] aspect-[9/16] max-h-[640px] rounded-xl overflow-hidden shadow-2xl bg-black"
+                fig_max = "max-w-[360px]"
+                ifr_ratio = "aspect-[9/16] max-h-[640px]"
             elif is_square_vid:
-                ifr_wrap_cls = "w-full bg-slate-950 flex items-center justify-center py-3 px-3"
-                ifr_box_cls = "w-full max-w-[480px] aspect-square max-h-[520px] rounded-xl overflow-hidden shadow-2xl bg-black"
+                fig_max = "max-w-[480px]"
+                ifr_ratio = "aspect-square max-h-[520px]"
             else:
-                ifr_wrap_cls = "w-full bg-slate-950"
-                ifr_box_cls = "w-full aspect-video bg-slate-950"
+                fig_max = "w-full"
+                ifr_ratio = "aspect-video"
             video_html = f"""
-        <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
-          <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">
-            <span class="text-xs sm:text-sm font-bold text-slate-100 truncate">🎬 {v_title}</span>
-            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-slate-700 transition-colors">{v_action}</a>
+        <figure class="my-8 mx-auto w-full {fig_max}">
+          <div class="w-full {ifr_ratio} rounded-2xl overflow-hidden shadow-lg bg-black">
+            <iframe src="{escape(v_raw_url)}" class="w-full h-full border-0 block" loading="lazy" scrolling="no" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="{v_title}"></iframe>
           </div>
-          <div class="{ifr_wrap_cls}">
-            <div class="{ifr_box_cls}">
-              <iframe src="{escape(v_raw_url)}" class="w-full h-full border-0" loading="lazy" scrolling="no" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen title="{v_title}"></iframe>
-            </div>
-          </div>
-        </div>
+          <figcaption class="mt-2.5 flex items-center justify-between gap-3 px-1 text-xs text-slate-500 dark:text-slate-400">
+            <span class="truncate font-medium">🎬 {v_title}</span>
+            <a href="{escape(v_outbound)}" target="_blank" rel="noopener noreferrer" class="shrink-0 font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">{v_action}</a>
+          </figcaption>
+        </figure>
         """
         else:
             video_html = f"""
