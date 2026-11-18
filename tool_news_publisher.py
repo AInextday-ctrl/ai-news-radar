@@ -919,7 +919,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     analysis_html = ""
     if ai_analysis:
         analysis_html = f"""
-        <div class="mt-6 p-5 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
           <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
             <span>🤖</span> <span>{analysis_title}</span>
           </h3>
@@ -1411,9 +1411,9 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         </div>
 
         {bullets_html}
-        {analysis_html}
         {video_html}
         {full_coverage_html}
+        {analysis_html}
 
       </div>
 
