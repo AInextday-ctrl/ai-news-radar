@@ -349,29 +349,296 @@ def _localize_openai_image(img_url: str, proxies: Optional[Dict[str, str]] = Non
     return img_url
 
 
-def _extract_rsc_flight_media(
-    html_text: str,
-    paragraphs: List[str],
-    seen_stems: set,
-    seen_vids: set,
-    base_dom_seq: int = 500,
-    include_images: bool = True,
-) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
-    """
-    Parses the actual Next.js App Router React Flight chunk graph
-    (`self.__next_f.push([1,"..."])`), locates the `<article>` root chunk, and
-    walks every `$<hex>` / `$L<hex>` reference in **true DOM order** (stopping
-    at `Author` / `Footnotes` / `Keep reading`).
+OPENAI_THEME_COLORS = {
+    "theme1_blue": "#60A5FA",
+    "theme2_blue": "#3B82F6",
+    "theme3_blue": "#3B82F6",
+    "theme4_blue": "#2563EB",
+    "theme5_blue": "#1D4ED8",
+    "theme1_yellow": "#FDE047",
+    "theme2_yellow": "#FACC15",
+    "theme3_yellow": "#EAB308",
+    "theme4_yellow": "#CA8A04",
+    "theme5_yellow": "#A16207",
+    "theme1_green": "#34D399",
+    "theme2_green": "#10B981",
+    "theme3_green": "#059669",
+    "theme1_purple": "#C084FC",
+    "theme2_purple": "#A855F7",
+    "theme3_purple": "#9333EA",
+    "theme1_red": "#F87171",
+    "theme2_red": "#EF4444",
+    "theme1_gray": "#CBD5E1",
+    "theme2_gray": "#94A3B8",
+    "theme3_gray": "#94A3B8",
+    "theme4_gray": "#64748B",
+    "theme5_gray": "#64748B",
+}
 
-    Because this walks the real React component tree rather than flat regex
-    offsets, every embedded Vimeo/YouTube video and MDX showcase image receives
-    the exact `after_para` index of its true preceding paragraph/subheading in
-    `<article>` with zero heuristic drift.
+FALLBACK_SERIES_PALETTE = [
+    "#3B82F6", "#FACC15", "#94A3B8", "#10B981", "#A855F7", "#F97316", "#64748B", "#38BDF8",
+]
+
+
+def _resolve_openai_color(token: str, model_name: str, idx: int) -> str:
+    if isinstance(token, str):
+        if token.startswith("#"):
+            return token
+        if token in OPENAI_THEME_COLORS:
+            return OPENAI_THEME_COLORS[token]
+    low = (model_name or "").lower()
+    if "6.2 astra" in low or "astra for law" in low:
+        return "#3B82F6"
+    if "6 astra" in low:
+        return "#1D4ED8"
+    if "6.2 sol" in low:
+        return "#FACC15"
+    if "6.1 sol" in low:
+        return "#CA8A04"
+    if "gemini" in low:
+        return "#10B981"
+    if "claude" in low:
+        return "#94A3B8"
+    return FALLBACK_SERIES_PALETTE[idx % len(FALLBACK_SERIES_PALETTE)]
+
+
+def _resolve_openai_marker(model_name: str, idx: int) -> str:
+    low = (model_name or "").lower()
+    if "astra" in low:
+        return "*"
+    if "sol" in low:
+        return "o"
+    if "gemini" in low:
+        return "^"
+    if "fable" in low:
+        return "s"
+    if "opus" in low:
+        return "D"
+    return ["o", "s", "^", "D", "P", "v"][idx % 6]
+
+
+def _extract_encoding_axis(spec: Dict[str, Any], channel: str) -> Dict[str, Any]:
+    enc = spec.get("encoding")
+    if isinstance(enc, dict) and isinstance(enc.get(channel), dict):
+        return enc[channel]
+    for lay in (spec.get("layer") or []):
+        if not isinstance(lay, dict):
+            continue
+        l_enc = lay.get("encoding")
+        if isinstance(l_enc, dict) and isinstance(l_enc.get(channel), dict):
+            return l_enc[channel]
+        for sub in (lay.get("layer") or []):
+            if isinstance(sub, dict):
+                s_enc = sub.get("encoding")
+                if isinstance(s_enc, dict) and isinstance(s_enc.get(channel), dict):
+                    return s_enc[channel]
+    return {}
+
+
+def _render_openai_vegalite_chart(spec: Dict[str, Any]) -> Optional[Tuple[str, str]]:
+    """
+    Renders an OpenAI official Vega-Lite v6 `DotcomChartView` JSON spec into a
+    crisp dark-theme high-DPI PNG saved to `public/images/openai_chart_<hash>.png`.
+    Returns `(public_url, chart_title)` or `None` if rendering is unavailable.
+    """
+    if not isinstance(spec, dict):
+        return None
+    vals = (spec.get("data") or {}).get("values")
+    if not isinstance(vals, list) or len(vals) < 2:
+        return None
+
+    raw_title = spec.get("title")
+    title_txt = _clean_text(raw_title.get("text") if isinstance(raw_title, dict) else str(raw_title or ""))
+    if not title_txt:
+        return None
+
+    try:
+        root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        img_dir = os.path.join(root_dir, "public", "images")
+        os.makedirs(img_dir, exist_ok=True)
+        sig_payload = json.dumps({"t": title_txt, "v": vals}, sort_keys=True, ensure_ascii=False)
+        h = hashlib.md5(sig_payload.encode("utf-8")).hexdigest()[:16]
+        fname = f"openai_chart_{h}.png"
+        fpath = os.path.join(img_dir, fname)
+        public_url = f"https://ainewsradar.xyz/images/{fname}"
+        if os.path.exists(fpath) and os.path.getsize(fpath) > 5000:
+            return public_url, title_txt
+
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from matplotlib.ticker import FuncFormatter
+
+        x_enc = _extract_encoding_axis(spec, "x")
+        y_enc = _extract_encoding_axis(spec, "y")
+        c_enc = _extract_encoding_axis(spec, "color")
+
+        x_field = x_enc.get("field")
+        y_field = y_enc.get("field")
+        c_field = c_enc.get("field") or ("model" if any("model" in r for r in vals if isinstance(r, dict)) else None)
+        if not x_field or not y_field:
+            return None
+
+        # Determine chart type: bar vs quantitative scatter/line Pareto frontier
+        marks_str = json.dumps(spec.get("layer") or spec.get("mark") or "").lower()
+        is_bar = ('"type": "bar"' in marks_str or '"type":"bar"' in marks_str) or x_enc.get("type") in ("ordinal", "nominal")
+
+        # Build color map from Vega-Lite color scale if present
+        color_scale = (c_enc.get("scale") or {}) if isinstance(c_enc, dict) else {}
+        c_dom = color_scale.get("domain") or []
+        c_rng = color_scale.get("range") or []
+        token_by_name = {d: r for d, r in zip(c_dom, c_rng) if isinstance(d, str)}
+
+        fig, ax = plt.subplots(figsize=(8.6, 5.2), dpi=180)
+        bg = "#0B0D12"
+        fig.patch.set_facecolor(bg)
+        ax.set_facecolor(bg)
+
+        def _fmt_axis(enc_dict):
+            ax_obj = enc_dict.get("axis") or {}
+            fmt = str(ax_obj.get("format") or "")
+            l_expr = str(ax_obj.get("labelExpr") or "")
+            title_s = str(ax_obj.get("title") or enc_dict.get("title") or "")
+            if "$" in fmt or "$" in l_expr or "cost" in title_s.lower():
+                return FuncFormatter(lambda v, _: f"${v:,.0f}" if abs(v - round(v)) < 1e-6 else f"${v:,.2f}"), title_s
+            if "%" in fmt or re.search(r"['\"][^'\"]*%['\"]", l_expr):
+                return FuncFormatter(lambda v, _: f"{v * 100:.0f}%" if abs(v * 100 - round(v * 100)) < 1e-6 else f"{v * 100:.1f}%"), title_s
+            return None, title_s
+
+        if is_bar:
+            sort_order = x_enc.get("sort")
+            rows = [r for r in vals if isinstance(r, dict) and r.get(x_field) is not None and r.get(y_field) is not None]
+            if isinstance(sort_order, list):
+                rank = {k: i for i, k in enumerate(sort_order)}
+                rows.sort(key=lambda r: rank.get(r.get(x_field), 999))
+            labels = []
+            heights = []
+            colors = []
+            for idx_r, r in enumerate(rows):
+                raw_x = str(r.get(x_field))
+                clean_x = re.sub(r"^\d+\|", "", raw_x).strip()
+                prompt_s = str(r.get("prompt") or "").replace("\n", " ").strip()
+                if prompt_s and prompt_s.lower() not in clean_x.lower():
+                    clean_x = f"{clean_x}\n({prompt_s[:28]})"
+                labels.append(clean_x)
+                heights.append(float(r.get(y_field)))
+                m_name = str(r.get(c_field) or clean_x)
+                colors.append(_resolve_openai_color(token_by_name.get(m_name, ""), m_name, idx_r))
+
+            xs = list(range(len(labels)))
+            bars = ax.bar(xs, heights, width=0.58, color=colors, edgecolor="none", zorder=3)
+            y_fmt, y_title = _fmt_axis(y_enc)
+            is_pct_y = "%" in str((y_enc.get("axis") or {}).get("format") or "") or bool(re.search(r"['\"][^'\"]*%['\"]", str((y_enc.get("axis") or {}).get("labelExpr") or "")))
+            for bar, val in zip(bars, heights):
+                lbl = f"{val * 100:.1f}%" if is_pct_y else f"{val:.2f}"
+                ax.text(bar.get_x() + bar.get_width() / 2.0, val + (max(heights) * 0.025 if heights else 0.01), lbl,
+                        ha="center", va="bottom", color="#E2E8F0", fontsize=8.5, fontweight="bold")
+            ax.set_xticks(xs)
+            ax.set_xticklabels(labels, color="#CBD5E1", fontsize=8, rotation=24, ha="right")
+            if y_fmt:
+                ax.yaxis.set_major_formatter(y_fmt)
+            if y_title:
+                ax.set_ylabel(y_title, color="#94A3B8", fontsize=9.5, labelpad=8)
+            y_dom = (y_enc.get("scale") or {}).get("domain")
+            if isinstance(y_dom, list) and len(y_dom) == 2:
+                ax.set_ylim(float(y_dom[0]), float(y_dom[1]) * 1.08)
+        else:
+            # Group points by series (model) in domain order
+            series_map: Dict[str, List[Dict[str, Any]]] = {}
+            for r in vals:
+                if not isinstance(r, dict):
+                    continue
+                if r.get(x_field) is None or r.get(y_field) is None:
+                    continue
+                try:
+                    float(r[x_field])
+                    float(r[y_field])
+                except Exception:
+                    continue
+                sname = str(r.get(c_field) or "Series") if c_field else "Series"
+                series_map.setdefault(sname, []).append(r)
+
+            if not series_map:
+                plt.close(fig)
+                return None
+
+            ordered_names = [d for d in c_dom if d in series_map] + [k for k in series_map if k not in c_dom]
+            for idx_s, sname in enumerate(ordered_names):
+                pts = series_map[sname]
+                pts.sort(key=lambda r: (float(r.get("order")) if r.get("order") is not None else float(r[x_field])))
+                xs = [float(r[x_field]) for r in pts]
+                ys = [float(r[y_field]) for r in pts]
+                col = _resolve_openai_color(token_by_name.get(sname, ""), sname, idx_s)
+                mk = _resolve_openai_marker(sname, idx_s)
+                ms = 9.5 if mk == "*" else 6.2
+                lw = 2.0 if "6.2" in sname else 1.4
+                alpha = 0.96 if "6.2" in sname else 0.78
+                if len(xs) >= 2:
+                    ax.plot(xs, ys, color=col, linewidth=lw, alpha=alpha, zorder=4 if "6.2" in sname else 3)
+                ax.scatter(xs, ys, color=col, marker=mk, s=ms * ms, label=sname, alpha=alpha, edgecolors="#0B0D12", linewidths=0.4, zorder=5 if "6.2" in sname else 4)
+
+            x_fmt, x_title = _fmt_axis(x_enc)
+            y_fmt, y_title = _fmt_axis(y_enc)
+            if x_fmt:
+                ax.xaxis.set_major_formatter(x_fmt)
+            if y_fmt:
+                ax.yaxis.set_major_formatter(y_fmt)
+            if x_title:
+                ax.set_xlabel(x_title, color="#94A3B8", fontsize=9.5, labelpad=8)
+            if y_title:
+                ax.set_ylabel(y_title, color="#94A3B8", fontsize=9.5, labelpad=8)
+            x_dom = (x_enc.get("scale") or {}).get("domain")
+            if isinstance(x_dom, list) and len(x_dom) == 2:
+                ax.set_xlim(float(x_dom[0]) - (float(x_dom[1]) - float(x_dom[0])) * 0.03, float(x_dom[1]) * 1.03)
+            x_ticks = (x_enc.get("axis") or {}).get("values")
+            if isinstance(x_ticks, list) and len(x_ticks) >= 2:
+                ax.set_xticks([float(v) for v in x_ticks])
+            y_dom = (y_enc.get("scale") or {}).get("domain")
+            if isinstance(y_dom, list) and len(y_dom) == 2:
+                ax.set_ylim(float(y_dom[0]), float(y_dom[1]))
+            y_ticks = (y_enc.get("axis") or {}).get("values")
+            if isinstance(y_ticks, list) and len(y_ticks) >= 2:
+                ax.set_yticks([float(v) for v in y_ticks])
+            if len(ordered_names) > 1:
+                leg = ax.legend(
+                    loc="upper center",
+                    bbox_to_anchor=(0.5, 1.15),
+                    ncol=min(4, len(ordered_names)),
+                    frameon=False,
+                    fontsize=8.0,
+                    labelcolor="#E2E8F0",
+                    handletextpad=0.4,
+                    columnspacing=1.1,
+                )
+
+        ax.grid(True, axis="y", color="#1E293B", linestyle="--", linewidth=0.7, alpha=0.85, zorder=1)
+        ax.grid(True, axis="x", color="#1E293B", linestyle=":", linewidth=0.5, alpha=0.45, zorder=1)
+        for sp in ("top", "right"):
+            ax.spines[sp].set_visible(False)
+        for sp in ("bottom", "left"):
+            ax.spines[sp].set_color("#334155")
+            ax.spines[sp].set_linewidth(0.8)
+        ax.tick_params(colors="#94A3B8", labelsize=8.5, length=3)
+        fig.suptitle(title_txt, x=0.05, y=0.96, ha="left", color="#F8FAFC", fontsize=12.5, fontweight="bold")
+        plt.tight_layout(rect=[0.01, 0.01, 0.99, 0.89])
+        fig.savefig(fpath, dpi=180, facecolor=bg)
+        plt.close(fig)
+        if os.path.exists(fpath) and os.path.getsize(fpath) > 5000:
+            return public_url, title_txt
+    except Exception:
+        pass
+    return None
+
+
+def _parse_rsc_flight_nodes(html_text: str) -> Dict[str, Any]:
+    """
+    Properly decodes Next.js App Router React Flight stream chunks, including
+    length-prefixed `T<hex_len>,` UTF-8 records that omit trailing newlines
+    before the next chunk ID (such as OpenAI `DotcomChartView` Vega-Lite specs).
     """
     chunks_raw = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)</script>', html_text or "", re.S)
-    if not chunks_raw or not paragraphs:
-        return [], []
-
+    if not chunks_raw:
+        return {}
     decoded_parts: List[str] = []
     for c in chunks_raw:
         try:
@@ -380,18 +647,64 @@ def _extract_rsc_flight_media(
             decoded_parts.append(c.replace('\\"', '"').replace("\\n", "\n").replace("\\\\", "\\"))
     decoded = "".join(decoded_parts)
 
+    raw_b = decoded.encode("utf-8")
+    i = 0
+    n = len(raw_b)
     nodes: Dict[str, Any] = {}
-    for line in decoded.splitlines():
-        m = re.match(r"^([0-9a-f]+):(.*)$", line)
-        if not m:
+    while i < n:
+        colon = raw_b.find(b":", i)
+        if colon == -1:
+            break
+        cid = raw_b[i:colon].decode("utf-8", "ignore").strip()
+        pos = colon + 1
+        if pos < n and raw_b[pos:pos + 1] == b"T":
+            comma = raw_b.find(b",", pos)
+            if comma == -1:
+                break
+            try:
+                blen = int(raw_b[pos + 1:comma].decode("ascii"), 16)
+            except Exception:
+                i = comma + 1
+                continue
+            nodes[cid] = raw_b[comma + 1:comma + 1 + blen].decode("utf-8", "ignore")
+            i = comma + 1 + blen
             continue
-        cid, body = m.group(1), m.group(2)
+        nl = raw_b.find(b"\n", pos)
+        end = nl if nl != -1 else n
+        body = raw_b[pos:end].decode("utf-8", "ignore")
         if body.startswith(("[", "{")):
             try:
                 nodes[cid] = json.loads(body)
             except Exception:
                 pass
+        i = end + 1
+    return nodes
 
+
+def _extract_rsc_flight_media(
+    html_text: str,
+    paragraphs: List[str],
+    seen_stems: set,
+    seen_vids: set,
+    base_dom_seq: int = 500,
+    include_images: bool = True,
+    render_charts: bool = True,
+) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """
+    Parses the actual Next.js App Router React Flight chunk graph
+    (`self.__next_f.push([1,"..."])`), locates the `<article>` root chunk, and
+    walks every `$<hex>` / `$L<hex>` reference in **true DOM order** (stopping
+    at `Author` / `Footnotes` / `Keep reading`).
+
+    Extracts:
+    - Embedded Vimeo/YouTube videos at exact `after_para` positions
+    - Official Vega-Lite `DotcomChartView` benchmark charts rendered to PNGs at
+      exact `after_para` positions
+    - High-res MDX showcase visuals (`Workbooks`, `Slideshows`) capped at 2 per slot
+    """
+    if not html_text or not paragraphs:
+        return [], []
+    nodes = _parse_rsc_flight_nodes(html_text)
     if not nodes:
         return [], []
 
@@ -433,8 +746,10 @@ def _extract_rsc_flight_media(
     found_videos: List[Dict[str, Any]] = []
     found_images: List[Dict[str, Any]] = []
     slot_img_counts: Dict[int, int] = {}
+    slot_chart_counts: Dict[int, int] = {}
     slot_vid_counts: Dict[int, int] = {}
     visited_refs = set()
+    seen_chart_titles = set()
 
     def _advance_para(txt: str) -> None:
         nonlocal cur_para_idx, stopped
@@ -505,6 +820,28 @@ def _extract_rsc_flight_media(
             # Structured MDX heading component: `{"headlineTag":"h2"|"h3","headline":"..."}`
             if isinstance(obj.get("headline"), str) and obj.get("headlineTag") in ("h2", "h3", "h4"):
                 _advance_para(obj["headline"])
+                return
+
+            # Official Vega-Lite v6 benchmark chart (`DotcomChartView`)
+            if render_charts and isinstance(obj.get("vegaLiteSpec"), dict):
+                spec = obj["vegaLiteSpec"]
+                c_slot = max(0, cur_para_idx)
+                raw_t = spec.get("title")
+                t_key = _clean_text(raw_t.get("text") if isinstance(raw_t, dict) else str(raw_t or "")).lower()
+                if t_key and t_key not in seen_chart_titles and slot_chart_counts.get(c_slot, 0) < 2:
+                    rendered = _render_openai_vegalite_chart(spec)
+                    if rendered:
+                        c_url, c_title = rendered
+                        seen_chart_titles.add(t_key)
+                        slot_chart_counts[c_slot] = slot_chart_counts.get(c_slot, 0) + 1
+                        dom_seq += 1
+                        found_images.append({
+                            "url": c_url,
+                            "caption": f"{c_title} (OpenAI Benchmark Data)",
+                            "caption_en": f"{c_title} (OpenAI Benchmark Data)",
+                            "after_para": c_slot,
+                            "dom_order": dom_seq,
+                        })
                 return
 
             # Embedded Vimeo / YouTube video component
@@ -598,7 +935,7 @@ def _extract_rsc_flight_media(
                 _walk(x, depth + 1, portrait_ctx=portrait_ctx)
 
     _walk(art_root, depth=0, portrait_ctx=False)
-    return found_images[:20], found_videos[:12]
+    return found_images[:24], found_videos[:12]
 
 
 def _parse_openai_html(html_text: str) -> Dict[str, Any]:
