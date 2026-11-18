@@ -259,6 +259,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anyone who works with an AI agent on a project over several days hits a wall fast, because every new session starts from scratch. In a research post, Anthropic describes how Claude is supposed to retain knowledge across sessions while the model stays unchanged. Claude writes notes to a folder that it can read back later.</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The core problem, according to Anthropic, is selection. Before it knows what comes next, the agent has to decide in the moment what might matter later, so every note is a bet on the future.Ad</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge." class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -266,11 +268,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The core problem, according to Anthropic, is selection. Before it knows what comes next, the agent has to decide in the moment what might matter later, so every note is a bet on the future.Ad</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In an Anthropic test with Pokémon Red, the older Claude Sonnet 3.7 treated everything as potentially important and, across roughly 10,000 game steps, created 413 files in 225 folders, often a separate one for each battle and item it found. Because the game state keeps changing, the archive goes stale fast. At times, the model did nothing but reorganize its notes instead of playing, and it finished with just a single badge.Ad</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The newer Claude Fable 5 limited its memory to a few files and earned four badges. Fable 5 didn&#x27;t record information already visible on screen and instead wrote down plans, strategies, and rules it had tested. Anthropic&#x27;s comparison, however, covers only a single playthrough per model.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic recommends explaining the purpose of memory to Claude and letting the model decide how to use it. In one benchmark, according to Anthropic, rigid instructions such as &quot;only record mistakes&quot; wiped out most of the advantage for stronger models. Older models, by contrast, benefited from clear instructions, such as being told to actually read their notes before every response.Ad</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -278,8 +280,6 @@
                   📷 Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and
                 </figcaption>
             </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic recommends explaining the purpose of memory to Claude and letting the model decide how to use it. In one benchmark, according to Anthropic, rigid instructions such as &quot;only record mistakes&quot; wiped out most of the advantage for stronger models. Older models, by contrast, benefited from clear instructions, such as being told to actually read their notes before every response.Ad</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The bigger risk comes from faulty notes that the agent blindly trusts later. Dreaming, an idea that builds on research from Letta and UC Berkeley, is designed to address this. Much like the human brain processes experiences during sleep, Claude goes through transcripts of earlier sessions during a break and checks its notes against them.</p>
 
@@ -299,6 +299,13 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic acknowledges that key questions remain open. Taking notes mid-task distracts the agent from its work, Dreaming costs extra compute, and its results arrive only after a delay. Wikis and notes also need regular upkeep, or errors and hallucinations pile up. Anthropic also warns against automatically loading too many memories into every session, because they eat up context and pass any bad note along to every future session.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">All of these tests come from Anthropic. The overall takeaway is that a useful agent memory depends less on storing as much as possible than on keeping the right information and correcting mistakes later.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-02-memory-hierarchy.jpg" alt="During &quot;Dreaming,&quot; Claude processes old transcripts in idle periods and builds the upper layers of i" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 During &quot;Dreaming,&quot; Claude processes old transcripts in idle periods and builds the upper layers of i
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic introduced Dreaming in May as a research preview for Claude Managed Agents, the company&#x27;s cloud platform for AI agents. The service reads an existing memory store and up to 100 past sessions, removes duplicate and outdated entries, and creates a reorganized store, leaving the original untouched. At launch, Dreaming supported only Claude Opus 4.7 and Sonnet 4.6.</p>
 

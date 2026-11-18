@@ -242,6 +242,11 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">ReportURI said it identified 178 websites—including CNN, Zoom, the BBC, and Salesforce—that were affected. JavaScript digitally signed by Optimizely and then loaded into customer pages had been modified to include malicious components that attempted to infect visitor devices with multiple payloads. When wares were installed successfully, they swapped user cryptocurrency wallet addresses for the attackers. Other components skimmed payment cards, stole cookies and screenshots, and, on iPhones and iPads, delivered iOS exploit kits known as Coruna and DarkSword.</p>
 
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
+              <span>Optimizely infrastructure delivers multipurpose malware</span>
+            </h3>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Optimizely serves JavaScript “snippets” that include both company code and code that is provided by each customer. The JavaScript, which can be served directly from Optimizely or from a customer endpoint, runs on every page the customer serves. Somehow, the attackers wrote their own code into a portion of each affected customer’s JavaScript and then delivered it from cdn.optimizely.com. A valid certificate for that domain signed the JavaScript.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">ReportURI researcher Scott Helme said the delivery mechanism wasn’t a CDN cache poisoning attack, which uses HTTP to cause a CDN to cache harmful responses. Instead, the attack relied on Optimizely’s legitimate infrastructure, including its domains, to serve the tainted code. Optimizely’s own customer JavaScript for the www.optimizely.com and login.optimizely.com URLs were also affected.</p>

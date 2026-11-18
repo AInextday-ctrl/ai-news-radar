@@ -9225,6 +9225,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const renderPara = (p, idx) => {
         const clean = p.replace(/^&[a-z]+;\s*/i, '').trim();
 
+        // 0. 识别章节小标题 (### / ##)
+        if (clean.startsWith('### ') || clean.startsWith('## ')) {
+          const hText = clean.replace(/^#{2,3}\s+/, '').trim();
+          return `
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-slate-100 mt-6 mb-2 tracking-tight flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block shrink-0"></span>
+              <span>${escapeHtml(hText)}</span>
+            </h3>
+          `;
+        }
+
         // 1. 识别记者/采访提问 (Q: / 问: / 简短问句且包含问号)
         const isQ = clean.startsWith('Q:') || clean.startsWith('问：') || clean.startsWith('问:') || 
                     (clean.endsWith('?') && clean.length < 260) || (clean.endsWith('？') && clean.length < 260) ||
@@ -9299,22 +9310,36 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return `<p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal">${styledContent}</p>`;
       };
 
-      // 组装段落与正文穿插配图（过滤返佣/订阅/促销广告段 + 全尺寸自适应无裁切配图）
+      // 组装段落与正文穿插配图（过滤返佣/订阅/促销广告段 + 全量配图按精确锚点或均匀分布渲染，绝不遗漏后段配图）
       const modalPromoParaRe = /(?:when you purchase through links in our articles|we may earn a (?:small )?commission|doesn['’]t affect our editorial independence|income earning auto affiliate links|pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|subscribe to .{0,30} newsletter|sign up for .{0,30} newsletter|posts from this topic will be added to your daily email digest|where was nvidia['’]s security team\?|通过我们文章中的链接购买|可能会赚取少量佣金|不影响我们的编辑独立性|联盟链接)/i;
+      const anchoredMap = {};
+      const unanchoredImgs = [];
+      for (const im of usableImages) {
+        if (im && typeof im.after_para === 'number' && im.after_para >= 0) {
+          const slot = Math.min(Math.max(0, total - 1), im.after_para);
+          if (!anchoredMap[slot]) anchoredMap[slot] = [];
+          anchoredMap[slot].push(im);
+        } else {
+          unanchoredImgs.push(im);
+        }
+      }
+      if (unanchoredImgs.length > 0) {
+        const nU = unanchoredImgs.length;
+        unanchoredImgs.forEach((im, k) => {
+          const slot = total <= 2 ? Math.min(total - 1, k) : Math.min(total - 1, Math.max(0, Math.round(((k + 1) * total) / (nU + 1)) - 1));
+          if (!anchoredMap[slot]) anchoredMap[slot] = [];
+          anchoredMap[slot].push(im);
+        });
+      }
       const elements = [];
       for (let i = 0; i < rawParas.length; i++) {
-        if (modalPromoParaRe.test(String(rawParas[i] || ''))) continue;
-        elements.push(renderPara(rawParas[i], i));
-
-        let shouldInsertPhoto = false;
-        if (imgIdx < usableImages.length) {
-          if ((i === 1 && total >= 3) || (i === 0 && total == 2)) shouldInsertPhoto = true;
-          else if (i === 4 && total >= 6) shouldInsertPhoto = true;
-          else if (i === 8 && total >= 10) shouldInsertPhoto = true;
+        if (!modalPromoParaRe.test(String(rawParas[i] || ''))) {
+          elements.push(renderPara(rawParas[i], i));
         }
 
-        if (shouldInsertPhoto) {
-          const curImg = usableImages[imgIdx++];
+        const slotImgs = anchoredMap[i] || [];
+        for (const curImg of slotImgs) {
+          imgIdx++;
           const rawCap = (isZh ? (curImg.caption || curImg.alt || '') : (curImg.caption_en || curImg.alt || curImg.caption || '')).trim();
           const isDummyCap = !rawCap || /^(?:field scene|article image|image|photo|现场图景|配图|资讯原文配图)$/i.test(rawCap);
           const capHtml = !isDummyCap

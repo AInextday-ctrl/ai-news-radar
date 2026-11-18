@@ -264,6 +264,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Current image models like Midjourney typically use diffusion, which gradually refines a noisy image into a clear result. Fable 5.2 takes a different approach by simulating the physical painting process, including bristle texture, how the paint goes on, and mistakes it then has to paint over.</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Developer Jake Eaton showed on X what the approach can do. Eaton works at Anthropic, where he regularly contributes to research on language model values, safety mechanisms, and AI agent behavior.Ad</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://pbs.twimg.com/media/HWtMXeqboAA3yPD?format=jpg&amp;name=medium" alt="About 700,000 simulated brushstrokes went into this photorealistic parking garage scene by Claude Fa" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -271,11 +273,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Developer Jake Eaton showed on X what the approach can do. Eaton works at Anthropic, where he regularly contributes to research on language model values, safety mechanisms, and AI agent behavior.Ad</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When he asked Fable 5.2 to create a painting as hard to distinguish from a photograph as possible, the model generated an image of a shopping cart in a parking garage using roughly 700,000 simulated brushstrokes.Ad</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to Eaton, Claude works without an external image model and without pre-rendered or traced source images. Each piece is a Python program of 1,000 to 2,000 lines that drives a simulated paint engine. The approach resembles agentic image editing, where language models pick tools and evaluate results.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Earlier attempts with the sibling model Opus 5.5 drew criticism for merely imitating existing art. Eaton responded by having Fable 5.2 develop its own artist personas with fictional backstories and consistent styles. The model needs several thousand brushstrokes per painting, and Eaton redirects them with comments.Ad</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://pbs.twimg.com/media/HWtL7-tbkAAfCwe?format=jpg&amp;name=900x900" alt="For its paintings, Fable 5.2 develops its own artist personas and controls brushwork through Python" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -284,22 +286,27 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Earlier attempts with the sibling model Opus 5.5 drew criticism for merely imitating existing art. Eaton responded by having Fable 5.2 develop its own artist personas with fictional backstories and consistent styles. The model needs several thousand brushstrokes per painting, and Eaton redirects them with comments.Ad</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic engineer Michael Graczyk shared a chat log and video of an experiment in which he asked Fable 5.2 to paint a bird at sunrise. The model could only use code to simulate the physics of bristles, wet paint, and canvas texture. It had to output every brushstroke manually as its own coordinate line, with no way to undo strokes once placed. That&#x27;s what sets this method apart from AI-generated videos, where models like Flux 3 generate image sequences and their temporal consistency directly.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The resulting 21-second video uses a counter to track how the painting takes shape from exactly 111 strokes on a blank canvas. For the first stroke, the model output the color code #30346a, a width of 90 pixels, and five slightly wobbling waypoints. Fable 5.2 said it added the roughly seven-pixel wobble on purpose because a human arm doesn&#x27;t draw a perfectly straight line either.Ad</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Between passes, the model looked at the canvas and reacted to its own mistakes like a real painter would. When the bird&#x27;s back came out too thin and scraggly, the AI laid a bolder stroke over it, so the stray bristle marks along the edges now look like ruffled feathers.Ad</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/graczyk_demo.mp4" alt="Editorial illustration" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               
             </figure>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Between passes, the model looked at the canvas and reacted to its own mistakes like a real painter would. When the bird&#x27;s back came out too thin and scraggly, the AI laid a bolder stroke over it, so the stray bristle marks along the edges now look like ruffled feathers.Ad</p>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In a second, 280-stroke piece showing two people painting at dusk, a late lighting effect accidentally smeared paint tubes and a cup on the table. Claude repainted those objects after the fact. The model also had both figures paint with their outer hands so their inner shoulders could touch, just as the prompt requested.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Fable 5.2&#x27;s ability to plan step by step and self-correct under physical constraints isn&#x27;t limited to virtual canvases. According to Anthropic, the model is built for extremely demanding long-horizon technical tasks, as is Mythos 5.2, a version designed for verified security and biology researchers.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://pbs.twimg.com/media/HWtL7-naIAAKLny?format=jpg&amp;name=medium" alt="Even complex perspectives and lighting are handled by the language model through thousands of indivi" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 Even complex perspectives and lighting are handled by the language model through thousands of indivi
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In internal tests, Fable 5.2 solved two open problems in black hole physics, designed three working electronic devices with circuit board manufacturer Diode, and used more than 1,000 sub-agents to program its own laptop operating system in eight days.</p>
 

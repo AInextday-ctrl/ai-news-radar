@@ -242,25 +242,13 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">According to a preliminary post incident report published by Microsoft on November 15, the defect was introduced in July 2026. The update looked fine at the time, Microsoft says, having passed load testing and been deployed without any impact.</p>
 
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://image.theregister.com/5289080.jpg?imageId=5289080&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=0.00&amp;heighty=0.00&amp;heightw=100.00&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="Aerial view of a large industrial site with DataVIta" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 Aerial view of a large industrial site with DataVIta
-                </figcaption>
-            </figure>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">However, the testing wasn&#x27;t good enough. Microsoft&#x27;s report states: &quot;Our load testing tended to focus on weaker hardware with fewer cores.&quot; The defect caused &quot;lock contention inside an internal Windows process which caused the machine&#x27;s resources (CPU &amp; memory) to be exhausted.&quot;</p>
 
 <blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
-              <p>&quot;The contention issue is worsened on machines with more cores and newer hardware.&quot;</p>
-            </blockquote>
+                  <p>&quot;The contention issue is worsened on machines with more cores and newer hardware.&quot;</p>
+                </blockquote>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The fix containing the defect was prepared specifically for Microsoft 365 network gateway servers. Then two things happened at once. Teams failed over to the &quot;primary&quot; gateway that supports Exchange Online, creating a surge in load that was not, in itself, particularly unusual. At the same time, almost 14 percent of server capacity for the networking gateway was out of service, which wasn&#x27;t a problem by itself either: it was on its way to being restored and, according to Microsoft, &quot;the service had sufficient capacity headroom.&quot; Together, they pushed the gateway into the defect and chaos ensued.</p>
-
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://image.theregister.com/247482.jpg?imageId=247482&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=11.19&amp;heighty=0.00&amp;heightw=30.95&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="Editorial illustration" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              
-            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">It was a classic cascading failure scenario. When a server loses connectivity, traffic gets routed to the next healthy endpoint. Which encountered the same problem. So traffic was rerouted again and… you can see where this was going. Within two hours, the defect was encountered across Microsoft&#x27;s fleet. &quot;At its lowest,&quot; the report states, &quot;more than 80 percent of servers were unresponsive.&quot;</p>
 
@@ -269,6 +257,13 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">&quot;Our normally automated recovery processes were not designed to restore service from this broad unresponsive state.&quot; A straightforward rollback was also not possible because the defect was months old.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Instead, engineers developed patch for the patch or, in Microsoft&#x27;s words, &quot;an update that returned the code path to the previously known good state in Windows.&quot; The patch was applied to groups of servers and service was gradually restored.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://image.theregister.com/5289080.jpg?imageId=5289080&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=0.00&amp;heighty=0.00&amp;heightw=100.00&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="Aerial view of a large industrial site with DataVIta" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 Aerial view of a large industrial site with DataVIta
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The timings show the pain customers experienced and the floundering in Redmond as Microsoft tried to work out why Exchange Online and other cloud services were so poorly. The Teams failover, which turned out to be a factor in the outage, happened at 0107 UTC on November 12. During the day, the load began to ramp up until, at 1603 UTC, Microsoft&#x27;s connectivity anomaly detection monitor identified an increase in connectivity issues.</p>
 
@@ -285,6 +280,11 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">However, it took until 0720 UTC before &quot;We identified a mitigation and applied the mitigation – an update that reverted the defective change.&quot;</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">At 1610 UTC, Microsoft confirmed that things were once again looking healthy and, at 0415 on November 14, issued its final customer update.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://image.theregister.com/247482.jpg?imageId=247482&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=11.19&amp;heighty=0.00&amp;heightw=30.95&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="Editorial illustration" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">A final post incident report is due on November 20. However, the preliminary report will do little to calm jangling nerves. An update applied three months ago managed to cause Exchange Online (and other services) disruption on a global scale? With load testing that didn&#x27;t reflect scenarios under Microsoft&#x27;s control?</p>
 

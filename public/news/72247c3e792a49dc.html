@@ -259,6 +259,10 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The LongCat team at Chinese food delivery company Meituan has released the weights for LongCat-2.5, one week after the model&#x27;s official unveiling. LongCat-2.5 is built for agents that work through long, multi-step tasks autonomously, particularly coding. According to Meituan, it comes close to top Western models on several benchmarks.</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 is a mixture-of-experts model that activates only a subset of its specialized subnetworks for each token it processes. Out of 1.6 trillion total parameters, roughly 48 billion are active per token. Through the API, the model handles up to one million tokens at once and generates responses up to 128,000 tokens long. It understands text, images, and video, responds in text, and lets users toggle reasoning on and off.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 converts images into tokens</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-02-visual-tokenization.jpg" alt="LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model proces" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -266,18 +270,7 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 is a mixture-of-experts model that activates only a subset of its specialized subnetworks for each token it processes. Out of 1.6 trillion total parameters, roughly 48 billion are active per token. Through the API, the model handles up to one million tokens at once and generates responses up to 128,000 tokens long. It understands text, images, and video, responds in text, and lets users toggle reasoning on and off.</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 converts images into tokens</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">LongCat-2.5 builds on its predecessor LongCat-2.0 and adds image understanding. Many multimodal models bolt on a separate image encoder after the fact. LongCat-2.5 instead converts images into tokens that the model processes alongside text, as is standard practice for today&#x27;s LLMs. The approach draws on the research model LongCat-Next and aims to improve visual coding, design, and 3D tasks.</p>
-
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-04-rl-overview.jpg" alt="Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search
-                </figcaption>
-            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">[caption id=&quot;attachment_42886&quot; align=&quot;alignnone&quot; width=&quot;1800&quot;] LongCat-2.5 breaks images down at their native resolution into discrete tokens that the model processes alongside text. | Image: Meituan[/caption]</p>
 
@@ -288,9 +281,9 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Meituan quantizes the experts&#x27; weights and activations to 4-bit precision, which Chinese chips can process natively. In Meituan&#x27;s load tests, throughput rises 43.3 percent for prompt processing and 42.77 percent for response generation compared with an 8-bit version. Meituan says accuracy stays on par with the uncompressed model.</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-01-benchmark.jpg" alt="In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-04-rl-overview.jpg" alt="Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close
+                  📷 Meituan generates training tasks from real GitHub repositories and blocks shortcuts like web search
                 </figcaption>
             </figure>
 
@@ -303,6 +296,13 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">DeepSWE tests how well models fix bugs in real code repositories. Here LongCat-2.5 jumps from 9.7 to 64.6 points, placing it behind every other model in the table except Claude Opus 4.8, with Deepseek-V4.1-Flash leading at 74.2 and GPT-5.6 Sol at 72.7. The more recent Claude Opus 5.5 and GPT-6.1 Sol are not included in the table.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">[caption id=&quot;attachment_42887&quot; align=&quot;alignnone&quot; width=&quot;1800&quot;] In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close to Claude Opus 5 and GPT-5.6 Sol on several agent benchmarks. | Image: Meituan[/caption]</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/longcat-25-01-benchmark.jpg" alt="In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 In Meituan&#x27;s own evaluation, LongCat-2.5 improves substantially over its predecessor and comes close
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Terminal Bench v4.0, the harder variant, puts LongCat-2.5 at 38.5 points, slightly above GPT-5.6 Sol&#x27;s 37.3 but well below Opus 5&#x27;s 53.9. The model posts 91.9 on the web search benchmark BrowseComp, the highest score in the table, though Meituan ran this test in its own environment.</p>
 

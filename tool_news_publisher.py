@@ -718,6 +718,25 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
     total = len(paras)
     img_idx = 0
 
+    # 预计算全量配图插入位置：优先按原文精确锚点 `after_para`，其余按段落均匀分布（杜绝第 4/5/6 张配图被漏渲染）
+    _anchored_map = {}
+    _unanchored = []
+    for _im in usable_images:
+        _ap = _im.get("after_para") if isinstance(_im, dict) else None
+        if isinstance(_ap, int) and _ap >= 0:
+            _slot = min(max(0, total - 1), _ap)
+            _anchored_map.setdefault(_slot, []).append(_im)
+        else:
+            _unanchored.append(_im)
+    if _unanchored and total > 0:
+        _n_u = len(_unanchored)
+        for _k, _im in enumerate(_unanchored):
+            if total <= 2:
+                _slot = min(total - 1, _k)
+            else:
+                _slot = min(total - 1, max(0, int(round((_k + 1) * total / float(_n_u + 1))) - 1))
+            _anchored_map.setdefault(_slot, []).append(_im)
+
     for i, p in enumerate(paras):
         raw_p = p.strip()
         if not raw_p:
@@ -728,11 +747,11 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
         if not has_chinese:
             is_subheading = (
                 (raw_p.isupper() and 5 <= len(raw_p) <= 80 and not raw_p.startswith('($') and not raw_p.endswith('.')) or
-                raw_p.startswith('### ')
+                raw_p.startswith('### ') or raw_p.startswith('## ')
             )
         else:
             is_subheading = (
-                raw_p.startswith('### ') or
+                raw_p.startswith('### ') or raw_p.startswith('## ') or
                 raw_p in ["未来的教室", "没有明确成绩单的试验", "寻找恰当的平衡点"] or
                 (len(raw_p) <= 30 and not raw_p.endswith('。') and not raw_p.endswith('，') and not raw_p.endswith('”') and (
                     raw_p.startswith("【") or raw_p.startswith("一、") or raw_p.startswith("二、") or raw_p.startswith("三、")
@@ -746,42 +765,31 @@ def format_editorial_paragraphs(paras: List[str], usable_images: List[Dict[str, 
               <span>{escape(clean_heading)}</span>
             </h3>
             """.strip())
-            continue
-
-        is_pure_quote = bool(re.match(r'^[“"][^”"]+[”"]$', raw_p) or re.match(r'^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$', raw_p))
-        escaped_body = escape(raw_p)
-
-        # 1. Lead Paragraph (First paragraph when article is substantive)
-        if i == 0 and total >= 3:
-            rendered_elements.append(f"""
-            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">{escaped_body}</p>
-            """.strip())
-        # 2. Editorial Pull Quote
-        elif is_pure_quote:
-            clean_q = escape(raw_p)
-            rendered_elements.append(f"""
-            <blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
-              <p>{clean_q}</p>
-            </blockquote>
-            """.strip())
-        # 3. Regular Paragraph
         else:
-            rendered_elements.append(f"""
-            <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">{escaped_body}</p>
-            """.strip())
+            is_pure_quote = bool(re.match(r'^[“"][^”"]+[”"]$', raw_p) or re.match(r'^[^：:\s]{2,16}[：:][\s]*[“"][^”"]+[”"]$', raw_p))
+            escaped_body = escape(raw_p)
 
-        # Interleave inline photos between narrative beats
-        should_insert_photo = False
-        if img_idx < len(usable_images):
-            if (i == 1 and total >= 3) or (i == 0 and total == 2):
-                should_insert_photo = True
-            elif i == 4 and total >= 6:
-                should_insert_photo = True
-            elif i == 8 and total >= 10:
-                should_insert_photo = True
+            # 1. Lead Paragraph (First paragraph when article is substantive)
+            if i == 0 and total >= 3:
+                rendered_elements.append(f"""
+                <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">{escaped_body}</p>
+                """.strip())
+            # 2. Editorial Pull Quote
+            elif is_pure_quote:
+                clean_q = escape(raw_p)
+                rendered_elements.append(f"""
+                <blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
+                  <p>{clean_q}</p>
+                </blockquote>
+                """.strip())
+            # 3. Regular Paragraph
+            else:
+                rendered_elements.append(f"""
+                <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">{escaped_body}</p>
+                """.strip())
 
-        if should_insert_photo:
-            cur_img = usable_images[img_idx]
+        imgs_to_insert = _anchored_map.get(i, [])
+        for cur_img in imgs_to_insert:
             img_idx += 1
             i_url = cur_img["url"]
             if is_zh:
@@ -1177,7 +1185,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
                 "caption": img_entry.get("caption", "").strip() if isinstance(img_entry, dict) else "",
                 "caption_en": img_entry.get("caption_en", "").strip() if isinstance(img_entry, dict) else "",
                 "caption_zh": img_entry.get("caption_zh", "").strip() if isinstance(img_entry, dict) else "",
-                "alt": img_entry.get("alt", "").strip() if isinstance(img_entry, dict) else ""
+                "alt": img_entry.get("alt", "").strip() if isinstance(img_entry, dict) else "",
+                "after_para": img_entry.get("after_para") if isinstance(img_entry, dict) and isinstance(img_entry.get("after_para"), int) else None,
             })
 
         p_html = format_editorial_paragraphs(paras, usable_images, is_zh=is_zh)

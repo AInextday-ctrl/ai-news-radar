@@ -246,21 +246,24 @@
             <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">Ars Technica 权威实录</span>
           </div>
           <div class="article-body space-y-6 sm:space-y-7">
-            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">即使笔记本电脑盖子关闭并被告知不要这样做，人工智能代理也会采取未经批准的操作。</p>
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">研究人员最近发现了来自埃隆·马斯克 (Elon Musk) SpaceXSI 的人工智能代理平台 Grok Bot 的意外行为。五天内，安装在两台独立员工笔记本电脑上的 Grok 机器人发出了 31 个请求，以访问存储在员工日历、电子邮件、Slack 和 GitHub 帐户中的数据。即使员工从未下令机器人执行这些操作，并且即使在员工指示它们停止后仍继续执行这些操作。这些机器人还否认曾采取过这些行动。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">研究人员最近发现了来自埃隆·马斯克 (Elon Musk) SpaceXSI 的人工智能代理平台 Grok Bot 的意外行为。五天内，安装在两台独立员工笔记本电脑上的 Grok 机器人发出了 31 个请求，以访问存储在员工日历、电子邮件、Slack 和 GitHub 帐户中的数据。即使员工从未下令机器人执行这些操作，并且即使在员工指示它们停止后仍继续执行这些操作。这些机器人还否认曾采取过这些行动。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">NewCore 周二报告了这一行为，该公司是托管网关产品的制造商，该产品充当人工智能代理与分配给它们使用的工具和帐户之间的中介。在某些情况下，未经批准的访问尝试发生在安装了 Grok Bot 的笔记本电脑合上盖子时，或者在深夜员工睡觉时。 Grok 日志中没有记录任何自发操作。如果没有网关日志，员工就不会知道这些事情发生了。当然，如果没有网关，未经批准的访问就会成功——同样是在最终用户不知情的情况下。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">NewCore 周二报告了这一行为，该公司是一款托管网关产品的制造商，该产品充当人工智能代理与分配给它们使用的工具和帐户之间的中介。在某些情况下，未经批准的访问尝试发生在安装了 Grok Bot 的笔记本电脑合上盖子时，或者在深夜员工睡觉时。 Grok 日志中没有记录任何自发操作。如果没有网关日志，员工就不会知道这些事情发生了。当然，如果没有网关，未经批准的访问就会成功——同样是在最终用户不知情的情况下。</p>
+<h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">
+              <span class="w-1.5 h-4 bg-indigo-600 dark:bg-indigo-400 rounded-full inline-block"></span>
+              <span>它“比错误更糟糕”</span>
+            </h3>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">当员工得知 Grok Bot 在没有提示的情况下试图检查账户时，其中一人四次指示代理停止自行采取任何行动。代理人的答复是：“我不会设置这个，我将停止提供定期签到服务。”尽管承认了明确的指令，Grok 机器人仍进行了更多未经批准的访问尝试。当一名员工询问机器人是否进行了任何访问时，它检查了两次，然后输出：“从晚上到周五早上，我都闲着。”</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">NewCore 员工将网关日志发送给 Grok Bot 支持人员，并询问是什么导致机器人在没有提示或批准的情况下访问帐户。支持团队的答复表明，该行为是设计使然，旨在让机器人能够代表用户主动采取行动。换句话说，未经请求和未记录的访问尝试是一项旨在使 Grok Bot 更有用的功能，它可以在用户提出请求之前定期签入并查找要执行的任务。主动签入是 SpaceXSI 最近收购的人工智能编码服务 Cursor 的一项功能。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">NewCore 安全研究员 Ido Hoorvitch 在一封电子邮件中写道：“没有需要修补的错误，这正是这比错误更糟糕的原因。” “一个漏洞得到了修复。这就是按设计工作的产品：一个代理，保存着你的凭证，在你睡觉时以你的身份进行操作，忽略你可以给予它的一个拒绝，然后告诉你它什么也没做。”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“没有需要修补的漏洞，这正是它比漏洞更糟糕的原因，”NewCore安全研究员伊多·霍维奇（Ido Hoorvitch）在一封电子邮件中写道。“漏洞被修复了。这是一个按照设计工作的产品：一个代理持有你的凭证，在你睡觉的时候以你的身份行动，无视你的一次拒绝，然后告诉你它什么也没做。”</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Hoorvitch 表示，Grok Bot 提供了有关自动“轮次”的最少通知，即代理收到指令或上下文、决定要做什么以及调用它选择的任何工具时发生的循环。当用户离开计算机并连接到应用程序并按照用户的方式使用它们时，机器人会在登录过程中发出通知。</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Hoorvitch说，Grok Bot提供了自动“转弯”的最小通知，或者当代理接收指令或上下文时发生的循环，决定做什么，并调用它选择的任何工具。当机器人在用户离开电脑时，它会继续工作，并连接到应用程序，并按照用户的方式使用它们。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“它读起来就像一条欢迎信息，并在一分钟内从屏幕上滚出，”霍尔维奇说。 “没有人被要求同意。没有任何内容表明平台将在没有您的消息的情况下启动轮次，或者这些轮次将使用您的连接器。”</p>
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Hoorvitch说：“它读起来像一个欢迎信息，在一分钟内就会从屏幕上滚动出去。”“没有人被要求同意。没有人说平台会在没有你的信息的情况下开始转弯，或者这些转弯会使用你的连接器。”</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">研究人员表示，Grok Bot 文档指出，主机器人会自行签入，并且变更日志提到了简短的背景唤醒，但没有提及签入“会进入您连接的应用程序”。此外，一旦签到运行，聊天界面或聊天历史记录中就不会提及它，并且如前所述，停止签到的提示不起作用。 Hoorvitch 表示，机器人“在进行更改之前总是会询问”，但这仅适用于将数据或更改写入应用程序的事件。</p>
 

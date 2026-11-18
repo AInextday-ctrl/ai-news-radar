@@ -242,11 +242,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The malware was a multi-purpose kit. It swapped cryptocurrency wallet addresses for the attacker&#x27;s, skimmed payment cards, stole cookies and screenshots, and on iPhones and iPads it delivered the Coruna and DarkSword iOS exploit kits. Crypto has already been stolen, with verified transactions to the attackers.</p>
 
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/2026/11/Screenshot-2026-11-16-214353.png" alt="Editorial illustration" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              
-            </figure>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">This is exactly the kind of attack Report URI is designed to detect. Our platform can identify unexpected changes to trusted JavaScript, detect new scripts being loaded and reveal suspicious connections to external destinations. In this case, those signals would have exposed the malicious activity, even though the original script was being served from a trusted Optimizely domain. With an appropriate CSP in enforcement mode, organisations could have gone a step further and blocked key parts of the attack before they succeeded.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The important lesson here is that trusted JavaScript doesn&#x27;t always remain trustworthy. A website can be compromised through a third-party dependency without its own code or infrastructure ever being breached.</p>
@@ -254,10 +249,8 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Most of the malicious code has now been removed. At 21:52 UTC we found it in only 1 of the 188 infected snippets, down from 169 at 20:56 UTC. If your site uses Optimizely Web, or you visited any of the sites below today, read on.</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/JS-Time-Machine_-Neon-Code-Timeline.png" alt="Introducing the JS Time Machine" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 Introducing the JS Time Machine
-                </figcaption>
+              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/2026/11/Screenshot-2026-11-16-214353.png" alt="Editorial illustration" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              
             </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Optimizely Web works by having each customer load a JavaScript &quot;snippet&quot; from Optimizely&#x27;s CDN, for example https://cdn.optimizely.com/js/6395285578973184.js. The snippet contains Optimizely&#x27;s code, the customer&#x27;s experiments and an optional field called Project JavaScript (projectJS): custom code the customer writes in their Optimizely dashboard, which runs on every page.</p>
@@ -268,16 +261,16 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Some customers serve their snippet from their own domain, such as opt.scheels.com/js/&lt;id&gt;.js or www.vodafone.com.au/js/&lt;id&gt;.js. Those were affected too, because the content comes from the same Optimizely project.</p>
 
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/Secure-Checkout-Under-Threat.png" alt="The Skimmer That Adds a Card Form to Checkouts That Never Ask for a Card" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
-                  📷 The Skimmer That Adds a Card Form to Checkouts That Never Ask for a Card
-                </figcaption>
-            </figure>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">We don&#x27;t know how the attacker got write access to so many unrelated customer projects: a compromised Optimizely system, a compromised credential with cross-customer access, or something else. That&#x27;s for Optimizely to explain. To be clear, Optimizely&#x27;s CDN served exactly what it was given; this was not a CDN cache-poisoning attack. Optimizely&#x27;s own sites were affected as well: the snippets for www.optimizely.com and login.optimizely.com both carried the code.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The payload was rebuilt 26 times during the day. The attacker added features, and added wallets but never removed any.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/JS-Time-Machine_-Neon-Code-Timeline.png" alt="Introducing the JS Time Machine" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 Introducing the JS Time Machine
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Every visitor received the same script, track.js, and every part of it was active at once. What a visitor experienced depended on their device and what they did on the page.</p>
 
@@ -288,6 +281,13 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Added at 13:43 UTC. The script watches form submissions and every fetch/XHR POST for a card number (Luhn-checked), expiry date and CVV. When it has all three, it sends them to https://1688360.cc/card.php with navigator.sendBeacon. Cards entered in hosted payment iframes (Stripe, Adyen and similar) were out of its reach. Cards typed into a site&#x27;s own form fields were not.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">When it swaps an address next to wallet or payment wording, it sends the following to https://1688360.cc/hit.php:</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/Secure-Checkout-Under-Threat.png" alt="The Skimmer That Adds a Card Form to Checkouts That Never Ask for a Card" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 The Skimmer That Adds a Card Form to Checkouts That Never Ask for a Card
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">On iPhones and iPads the script loads boot.js from 5vobauua3ojpklx.icu and eil786npto9u5bq.icu. It reads the iOS version and loads an exploit chain in a hidden iframe:</p>
 
@@ -300,6 +300,13 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Ranked by Tranco position within each sector and the status at 21:52 UTC: every snippet except TalkTalk&#x27;s had been cleaned.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">The earlier webshell.lol wave, through Kissmetrics, StorifyMe and Minute Media, affected other sites and isn&#x27;t included above.</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/hexmage.png" alt="HexMage, Ten Weeks Later: 533 Infected Shops and Counting" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 HexMage, Ten Weeks Later: 533 Infected Shops and Counting
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">It&#x27;s possible to go even further and deploy a CSP that could actively block these attacks and prevent any data breach happening. The websites affected by this attack weren&#x27;t necessarily running vulnerable code of their own, they were loading JavaScript from a provider they trusted, and that trust was exploited. This is why monitoring what runs in your visitors&#x27; browsers is so important. Report URI gives organisations the visibility to detect when trusted dependencies change or behave unexpectedly, and the tools to help enforce policies that prevent malicious scripts and connections from succeeding.</p>
 

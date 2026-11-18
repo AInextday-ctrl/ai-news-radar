@@ -259,6 +259,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Today&#x27;s Rubin GPU has 224 SMs and 28,672 CUDA cores, so scaling compute resources to the degree Rubin HPC does would necessarily require more dies on a package. Nvidia didn&#x27;t reveal more details of the chip&#x27;s physical layout alongside the announcement. (The representative image shared by the company wouldn&#x27;t appear to take this into account.)</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To keep data moving between Rubin HPC GPUs, Nvidia will use its NVLink 7 interconnect. The company didn&#x27;t share any new details of the bandwidth or physical layer of this interconnect within the rack, but past disclosures about the tech have indicated that it retains the 3.6 TB/s of per-GPU bandwidth that NVLink 6 delivers while enlarging the size of its scale-up domain.</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://cdn.mos.cms.futurecdn.net/wJ2qnaAhPDGJQVsKBgLAri.png" alt="(Image credit: Nvidia)" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -266,11 +268,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">To keep data moving between Rubin HPC GPUs, Nvidia will use its NVLink 7 interconnect. The company didn&#x27;t share any new details of the bandwidth or physical layer of this interconnect within the rack, but past disclosures about the tech have indicated that it retains the 3.6 TB/s of per-GPU bandwidth that NVLink 6 delivers while enlarging the size of its scale-up domain.</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Nvidia didn&#x27;t share any details of the Rubin HPC GPU&#x27;s HBM capacity or bandwidth, and it also didn&#x27;t share whether this part includes a rebalancing of compute resources towards native FP64, as AMD and Intel are touting at the conference with their own GPUs this week.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Nvidia instead touts the suitability of this chip for scientists and engineers using agentic workflows, for which the company expects faster simulation performance and therefore faster opportunities for discovery in those fields thanks to better agent performance in those domains.</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In fields like climate research, genomic analysis, and financial simulation, Nvidia says the Rubin HPC GPU&#x27;s &quot;balanced design,&quot; with both higher compute resources and (presumably) faster data movement between nodes, will help feed the chip with the massive data sets typical of those workloads, minimizing idle compute resources and achieving better utilization.</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://cdn.mos.cms.futurecdn.net/8JCjGs5yVZds2YdKmzjUDE.jpg" alt="Jeffrey Kampman" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -278,8 +280,6 @@
                   📷 Jeffrey Kampman
                 </figcaption>
             </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">In fields like climate research, genomic analysis, and financial simulation, Nvidia says the Rubin HPC GPU&#x27;s &quot;balanced design,&quot; with both higher compute resources and (presumably) faster data movement between nodes, will help feed the chip with the massive data sets typical of those workloads, minimizing idle compute resources and achieving better utilization.</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Researchers, engineers, and analysts marshaling agent swarms to explore the problem spaces in their domains will also be able to take advantage of Nvidia&#x27;s CUDA-X domain-specific libraries to boost performance on Rubin HPC, tightening the reasoning loop from hypothesis to simulation to refinement and hastening the pursuit of the most promising results.</p>
 

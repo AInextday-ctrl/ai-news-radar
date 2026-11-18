@@ -243,12 +243,12 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该恶意软件是一个多用途工具包。它将加密货币钱包地址交换为攻击者的地址，浏览支付卡，窃取 cookie 和屏幕截图，并在 iPhone 和 iPad 上提供 Coruna 和 DarkSword iOS 漏洞利用套件。加密货币已经被盗，攻击者已验证交易。</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这正是 Report URI 旨在检测的攻击类型。我们的平台可以识别受信任 JavaScript 的意外更改、检测正在加载的新脚本并揭示与外部目的地的可疑连接。在这种情况下，即使原始脚本是由受信任的 Optimizely 域提供的，这些信号也会暴露恶意活动。通过适当的 CSP 执行模式，组织可以更进一步，在攻击成功之前阻止其关键部分。</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/2026/11/Screenshot-2026-11-16-214353.png" alt="资讯配图" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               
             </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这正是 Report URI 旨在检测的攻击类型。我们的平台可以识别受信任 JavaScript 的意外更改、检测正在加载的新脚本并揭示与外部目的地的可疑连接。在这种情况下，即使原始脚本是由受信任的 Optimizely 域提供的，这些信号也会暴露恶意活动。通过适当的 CSP 执行模式，组织可以更进一步，在攻击成功之前阻止其关键部分。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这里重要的教训是，受信任的 JavaScript 并不总是值得信赖的。网站可能会因第三方依赖而受到损害，而其自身的代码或基础设施却不会被破坏。</p>
 
@@ -267,8 +267,6 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">有些客户从自己的域提供代码片段，例如 opt.scheels.com/js/&lt;id&gt;.js 或 www.vodafone.com.au/js/&lt;id&gt;.js。这些也受到影响，因为内容来自同一个 Optimizely 项目。</p>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们不知道攻击者如何获得对如此多不相关的客户项目的写入权限：受损的 Optimizely 系统、受损的跨客户访问凭据或其他内容。这是由Optimizely 来解释的。需要明确的是，Optimizely 的 CDN 完全满足了它的要求；这不是 CDN 缓存中毒攻击。 Optimizely 自己的网站也受到了影响：www.optimizely.com 和 login.optimizely.com 的片段都携带了该代码。</p>
-
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/Secure-Checkout-Under-Threat.png" alt="The Skimmer That Adds a Card Form to Checkouts That Never Ask for a Card" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -276,7 +274,16 @@
                 </figcaption>
             </figure>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">我们不知道攻击者如何获得对如此多不相关的客户项目的写入权限：受损的 Optimizely 系统、受损的跨客户访问凭据或其他内容。这是由Optimizely 来解释的。需要明确的是，Optimizely 的 CDN 完全满足了它的要求；这不是 CDN 缓存中毒攻击。 Optimizely 自己的网站也受到了影响：www.optimizely.com 和 login.optimizely.com 的片段都携带了该代码。</p>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">一天之内，有效载荷被重建了 26 次。攻击者添加了功能，并添加了钱包，但从未删除过任何内容。</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://storage.ghost.io/c/2d/aa/2daa4f7f-a71b-47d2-a54c-06b8c60222ef/content/images/size/w600/2026/11/hexmage.png" alt="HexMage, Ten Weeks Later: 533 Infected Shops and Counting" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 HexMage, Ten Weeks Later: 533 Infected Shops and Counting
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">每个访问者都会收到相同的脚本 track.js，并且它的每个部分都立即处于活动状态。访问者的体验取决于他们的设备以及他们在页面上执行的操作。</p>
 

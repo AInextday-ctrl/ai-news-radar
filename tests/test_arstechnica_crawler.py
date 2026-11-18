@@ -26,15 +26,17 @@ class TestArsTechnicaCrawler(unittest.TestCase):
               <img src="https://cdn.arstechnica.net/wp-content/uploads/2026/11/hero-ignite-1152x648.jpg" />
               <figcaption>Enlarge / Hero duplicate</figcaption>
             </figure>
+            <h2>All about agents</h2>
             <p>The announcement marks a striking inversion of how enterprise software has worked for decades, placing conversational AI agents ahead of traditional desktop windows.</p>
           </div>
           <div class="ad-slot"><p>Sponsored ad slot that must never appear in editorial paragraphs.</p></div>
           <div class="post-content post-content-double">
+            <h2>The outage in the room</h2>
+            <p>Nadella also addressed last week’s enterprise cloud outage while introducing Microsoft IQ as an intelligence orchestration layer across corporate tenants.</p>
             <figure>
               <img src="https://cdn.arstechnica.net/wp-content/uploads/2026/11/MS_New_Ecosystem_Stack_AI.jpg" />
               <figcaption>Enlarge / Microsoft's new Ignite AI ecosystem stack.</figcaption>
             </figure>
-            <p>Nadella also addressed last week’s enterprise cloud outage while introducing Microsoft IQ as an intelligence orchestration layer across corporate tenants.</p>
             <p>When you purchase through links in our articles, we may earn a small commission.</p>
           </div>
         </body>
@@ -50,14 +52,17 @@ class TestArsTechnicaCrawler(unittest.TestCase):
         self.assertEqual(res["status"], "success")
         self.assertEqual(res["title"], "Copilot is “the new OS for work,” and now Office runs inside of it")
         self.assertEqual(res["author"], "Nick Indge")
-        # Both .post-content blocks aggregated, ad slot and affiliate disclosure excluded
-        self.assertEqual(res["paras_count"], 3)
+        # Both .post-content blocks aggregated with inline subheadings (`### `) preserved in exact order
+        self.assertEqual(res["paras_count"], 5)
+        self.assertIn("### All about agents", res["paragraphs"])
+        self.assertIn("### The outage in the room", res["paragraphs"])
         self.assertNotIn("Sponsored ad slot", res["full_text"])
         self.assertNotIn("earn a small commission", res["full_text"])
-        # Hero cover deduplicated; authentic figure kept with `Enlarge /` stripped
+        # Hero cover deduplicated; authentic figure kept with `Enlarge /` stripped and exact `after_para` anchor
         self.assertEqual(len(res["inline_images"]), 1)
         self.assertEqual(res["inline_images"][0]["url"], "https://cdn.arstechnica.net/wp-content/uploads/2026/11/MS_New_Ecosystem_Stack_AI.jpg")
         self.assertEqual(res["inline_images"][0]["caption"], "Microsoft's new Ignite AI ecosystem stack.")
+        self.assertEqual(res["inline_images"][0]["after_para"], 4)
 
 
 if __name__ == "__main__":

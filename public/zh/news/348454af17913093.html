@@ -260,6 +260,10 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 的联合创始人兼首席计算官汤姆·布朗 (Tom Brown) 进行了时间比较，他向投资者指出，最初意味着使用一个由“数十名工程师”组成的团队。该公司已经在多种芯片上运行其模型——Nvidia 和 AMD 的 GPU、谷歌的 TPU 和 AWS Trainium——并且其机群作为“一个可替代的计算池”进行管理。布朗称早期的多芯片决策是“一次非常规的赌注”。这可能是明智之举，因为谷歌的 TPU 现在可以本地运行 PyTorch 中构建的 AI 模型，并且 Meta 在生产中使用它们。</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 声称，这项工作过去需要 6 到 12 个月的时间，这来自过去的工作，来自其“使用传统工程方法开发新加速器的历史经验”，其中为每个硬件平台定制代码是一项挑战。消除这一入门障碍可能会减少购买决策的难度，Anthropic 今年首次开始与 AMD GPU 合作，目前已达成高达 2 吉瓦的协议。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">CUDA 是 Nvidia 的编程平台，已有近二十年的历史，非常成熟。 AMD 有一个等效的 ROCm，以 HIP 作为其编程层。为 CUDA 编写的代码必须进行转换才能在那里工作，AMD 甚至为此过程构建了一个名为 HIPify 的工具。转换仍然存在转换成本，AMD 人工智能软件副总裁 Anush Elangovan 在 4 月份告诉《EE Times》，“Claude 比 HIPify 更好，因为它内置了网络搜索。”</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://cdn.mos.cms.futurecdn.net/jcG9LwCNh8XUGiSJ9Pxw7Z.jpg" alt="(Image credit: AMD)" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -267,11 +271,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 声称，这项工作过去需要 6 到 12 个月的时间，这来自过去的工作，来自其“使用传统工程方法开发新加速器的历史经验”，其中为每个硬件平台定制代码是一项挑战。消除这一入门障碍可能会减少购买决策的难度，Anthropic 今年首次开始与 AMD GPU 合作，目前已达成高达 2 吉瓦的协议。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">CUDA 是 Nvidia 的编程平台，已有近二十年的历史，非常成熟。 AMD 有一个等效的 ROCm，以 HIP 作为其编程层。为 CUDA 编写的代码必须进行转换才能在那里工作，AMD 甚至为此过程构建了一个名为 HIPify 的工具。转换仍然存在转换成本，AMD 人工智能软件副总裁 Anush Elangovan 在 4 月份告诉《EE Times》，“Claude 比 HIPify 更好，因为它内置了网络搜索。”</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">自去年 8 月以来，AMD 一直在论证人工智能可以编写此类代码，并推出了当时达不到人类专家水平的研究代理。同年 9 月，AMD 首席执行官苏姿丰 (Lisa Su) 在Possible 播客上表示，大部分人工智能软件都是用 CUDA 编写的，需要“翻译成 AMD”，并且“现在很多工作都可以用软件来完成”。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">今年 7 月初，AMD 人工智能高级副总裁 Vamsi Boppana 表示，其工程师正在使用人工智能模型生成 GPU 内核，Su 表示，当她询问她的团队是否正在帮助 Anthropic 工程师开发 MI355X 时，她被告知他们不需要任何帮助。 Boppana 表示，在某些情况下，生成的内核甚至“比大多数手动调整的版本更好”。根据 7 月份与 Anthropic 达成的协议，AMD 还使用 Claude 来优化其 Instinct GPU 的工作负载并加速 ROCm 开发。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 7 月份的 AMD 高级人工智能活动中，OpenAI 的 Philippe Tillet 表示，一旦 OpenAI 拿到了 Helios 机架，一名工程师就在几天内确认一切正常，并且“从某种意义上说，代理正在接管我们的工作，就像内核工程师一样。”活动之前，AMD 公司副总裁兼公司数据中心 GPU 业务总经理 Andrew Dieckman 告诉记者，他与 AMD 客户关于 CUDA 的对话几乎为零。</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://cdn.mos.cms.futurecdn.net/qkDmAUP4gEEK88Sc6vyaQV.jpg" alt="(Image credit: Anthropic)" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -280,13 +284,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">今年 7 月初，AMD 人工智能高级副总裁 Vamsi Boppana 表示，其工程师正在使用人工智能模型生成 GPU 内核，Su 表示，当她询问她的团队是否正在帮助 Anthropic 工程师开发 MI355X 时，她被告知他们不需要任何帮助。 Boppana 表示，在某些情况下，生成的内核甚至“比大多数手动调整的版本更好”。根据 7 月份与 Anthropic 达成的协议，AMD 还使用 Claude 来优化其 Instinct GPU 的工作负载并加速 ROCm 开发。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 7 月份的 AMD 高级人工智能活动中，OpenAI 的 Philippe Tillet 表示，一旦 OpenAI 拿到了 Helios 机架，一名工程师就在几天内确认一切正常，并且“从某种意义上说，代理正在接管我们的工作，就像内核工程师一样。”活动之前，AMD 公司副总裁兼公司数据中心 GPU 业务总经理 Andrew Dieckman 告诉记者，他与 AMD 客户关于 CUDA 的对话几乎为零。</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">发布GEAK，一个编写GPU内核的AI代理；针对 30 个专家编写的内核，它正确了 19 个，平均速度是专家速度的 0.92 倍</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“我们使用大量人工智能来创建我们拥有的内核”； “没有人比我们更了解我们的架构”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Mythos“让 Claude 在短短三天内在 AMD 上运行，基本上没有人为干预”；幻灯片脚注限制了一个模型的三天提示处理时间</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://cdn.mos.cms.futurecdn.net/Zosi9VrDytS9FkgJiHvc69.png" alt="Shane Downing" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -294,8 +296,6 @@
                   📷 Shane Downing
                 </figcaption>
             </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Mythos“让 Claude 在短短三天内在 AMD 上运行，基本上没有人为干预”；幻灯片脚注限制了一个模型的三天提示处理时间</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">不过，直到本周，所有这些都来自 AMD 或其舞台，而不是来自 Anthropic 自己的投资者。 Anthropic 购买芯片而不是出售它们，而且该公司将于下周进行 IPO，因此其多芯片方法（现在至少有一些数据支持）比芯片制造商的声明更有分量。它的招股说明书也以书面形式表示，尽管没有具体数字：“我们可以用以前所用时间的一小部分来安装新的芯片平台。”</p>
 

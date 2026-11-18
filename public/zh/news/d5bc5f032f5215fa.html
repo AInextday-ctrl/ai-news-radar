@@ -243,6 +243,8 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">任何在一个项目上与人工智能代理一起工作几天的人都会很快碰壁，因为每个新的会话都是从头开始的。在一篇研究文章中，Anthropic 描述了 Claude 如何在模型保持不变的情况下跨会话保留知识。克劳德将注释写入一个文件夹，以便稍后读取。</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据 Anthropic 的说法，核心问题是选择。在知道接下来会发生什么之前，智能体必须立即决定稍后可能发生的事情，因此每一个音符都是对未来的赌注。</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-08-pokemon-ledge.jpg" alt="A wrong note about the Pokémon Center&#x27;s location caused Claude to repeatedly fall back over a ledge. | Image: Anthropic" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
@@ -250,11 +252,11 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据 Anthropic 的说法，核心问题是选择。在知道接下来会发生什么之前，智能体必须立即决定稍后可能发生的事情，因此每一个音符都是对未来的赌注。</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Pokémon Red 的 Anthropic 测试中，较旧的 Claude Sonnet 3.7 将所有内容视为潜在重要的内容，并在大约 10,000 个游戏步骤中，在 225 个文件夹中创建了 413 个文件，通常为它发现的每一场战斗和项目创建一个单独的文件。由于游戏状态不断变化，存档很快就会过时。有时，模型除了重新组织音符而不是演奏之外什么也不做，最后只留下一个徽章。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">较新的《克劳德寓言 5》将其内存限制为几个文件，并获得了四个徽章。 《神鬼寓言 5》并没有记录屏幕上已经可见的信息，而是写下了已经测试过的计划、策略和规则。然而，Anthropic 的比较仅涵盖每个模型的一次游戏。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 建议向 Claude 解释记忆的用途，并让模型决定如何使用它。根据 Anthropic 的说法，在一项基准测试中，诸如“仅记录错误”之类的严格指令消除了更强大模型的大部分优势。相比之下，较旧的模型受益于明确的指示，例如被告知在每次回答之前实际阅读他们的笔记。</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-05-pokemon-memory-treemap.jpg" alt="Sonnet 3.7 saved nearly everything while playing Pokémon, whereas Fable 5 saved only strategies and verified rules and got much further. | Image: Anthropic" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -263,13 +265,9 @@
                 </figcaption>
             </figure>
 
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 建议向 Claude 解释记忆的用途，并让模型决定如何使用它。根据 Anthropic 的说法，在一项基准测试中，诸如“仅记录错误”之类的严格指令消除了更强大模型的大部分优势。相比之下，较旧的模型受益于明确的指示，例如被告知在每次回答之前实际阅读他们的笔记。</p>
-
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">更大的风险来自于代理人后来盲目信任的错误票据。梦想是一个建立在莱塔和加州大学伯克利分校研究基础上的想法，旨在解决这个问题。就像人类大脑在睡眠期间处理经历一样，克劳德在休息期间查看早期会议的记录，并对照记录进行检查。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在神奇宝贝测试中，克劳德错误地指出了地标位于山的哪一侧。靠着那张错误的音符，克劳德三度陷入同样的​​陷阱，最终想要放弃，却未能达到目的。在梦想通过后，克劳德通过检查记录中的注释发现了错误，并找到了正确的路径。</p>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">据Anthropic介绍，Dreaming还可以组织更大的知识库。克劳德利用 Anthropic 收购的软件公司不锈钢的约 350,000 份内部文档构建了一个链接维基。梦想应该生成新页面，同时修复间隙、重复和损坏的链接。当克劳德能够将 wiki 与搜索结合起来时，回报是最大的，因此 wiki 作为补充而不是替代。</p>
 
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-06-memory-steering.jpg" alt="Specific memory rules help older models, while stronger models perform worse with rigid instructions. | Image: Anthropic" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
@@ -278,9 +276,18 @@
                 </figcaption>
             </figure>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">据Anthropic介绍，Dreaming还可以组织更大的知识库。克劳德利用 Anthropic 收购的软件公司不锈钢的约 350,000 份内部文档构建了一个链接维基。梦想应该生成新页面，同时修复间隙、重复和损坏的链接。当克劳德能够将 wiki 与搜索结合起来时，回报是最大的，因此 wiki 作为补充而不是替代。</p>
+
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在 Anthropic 进行的一项单独的法律测试中，维基百科对答案分散在多个文档中的问题提供了最大的帮助。克劳德在 wiki 上的得分为 87%，而仅在搜索方面得分为 73%。对于简单的查找任务，wiki 的性能与搜索大致相当，在一种情况下，它甚至比源文档还要大。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Anthropic 承认关键问题仍然悬而未决。在任务中做笔记会分散代理的工作注意力，做梦会消耗额外的计算资源，而且结果只有在延迟后才会到达。维基和注释也需要定期维护，否则错误和幻觉就会堆积起来。 Anthropic 还警告不要在每个会话中自动加载太多记忆，因为它们会耗尽上下文并将任何不良记录传递给未来的每个会话。</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://the-decoder.com/wp-content/uploads/2026/11/anthropic-agent-memory-02-memory-hierarchy.jpg" alt="During &quot;Dreaming,&quot; Claude processes old transcripts in idle periods and builds the upper layers of its memory from them. | Image: Anthropic" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
+                  📷 During &quot;Dreaming,&quot; Claude processes old transcripts in idle periods and builds the upper layers of its memory from them. | Image: Anthropic
+                </figcaption>
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">所有这些测试都来自 Anthropic。总的结论是，有用的代理记忆更多地取决于保留正确的信息并在以后纠正错误，而不是尽可能多地存储。</p>
 

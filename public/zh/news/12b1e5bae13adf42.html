@@ -243,24 +243,19 @@
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">根据微软 11 月 15 日发布的初步事件后报告，该缺陷于 2026 年 7 月引入。微软表示，该更新当时看起来不错，已通过负载测试并部署，没有任何影响。</p>
 
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">然而，测试还不够好。微软的报告指出：“我们的负载测试往往侧重于内核较少的较弱硬件。”该缺陷导致“内部 Windows 进程内部发生锁争用，导致机器资源（CPU 和内存）耗尽”。</p>
+
+<blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
+                  <p>“在具有更多内核和更新硬件的机器上，争用问题会更加严重。”</p>
+                </blockquote>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">包含该缺陷的修复是专门为 Microsoft 365 网络网关服务器准备的。然后两件事同时发生了。团队故障转移到支持 Exchange Online 的“主”网关，导致负载激增，这本身并不特别不寻常。与此同时，网络网关近 14% 的服务器容量停止服务，这本身也不是问题：它正在恢复，并且根据微软的说法，“该服务有足够的容量空间”。他们一起推开了通往缺陷的大门，混乱随之而来。</p>
+
 <figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
               <img src="https://image.theregister.com/5289080.jpg?imageId=5289080&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=0.00&amp;heighty=0.00&amp;heightw=100.00&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="Aerial view of a large industrial site with DataVIta" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
               <figcaption class="mt-2 px-1 text-xs text-slate-500 dark:text-slate-400 text-center max-w-full font-medium leading-snug">
                   📷 Aerial view of a large industrial site with DataVIta
                 </figcaption>
-            </figure>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">然而，测试还不够好。微软的报告指出：“我们的负载测试往往侧重于内核较少的较弱硬件。”该缺陷导致“内部 Windows 进程内部发生锁争用，导致机器资源（CPU 和内存）耗尽”。</p>
-
-<blockquote class="my-8 pl-5 sm:pl-6 border-l-2 border-indigo-500 dark:border-indigo-400 text-slate-700 dark:text-slate-300 italic font-serif text-[18px] sm:text-[19px] leading-[1.85]">
-              <p>“在具有更多内核和更新硬件的机器上，争用问题会更加严重。”</p>
-            </blockquote>
-
-<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">包含该缺陷的修复是专门为 Microsoft 365 网络网关服务器准备的。然后两件事同时发生了。团队故障转移到支持 Exchange Online 的“主”网关，导致负载激增，这本身并不特别不寻常。与此同时，网络网关近 14% 的服务器容量停止服务，这本身也不是问题：它正在恢复，并且根据微软的说法，“该服务有足够的容量空间”。他们一起推开了通往缺陷的大门，混乱随之而来。</p>
-
-<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
-              <img src="https://image.theregister.com/247482.jpg?imageId=247482&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=11.19&amp;heighty=0.00&amp;heightw=30.95&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="资讯配图" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
-              
             </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这是一个典型的级联故障场景。当服务器失去连接时，流量将路由到下一个健康端点。哪位遇到同样的问题。所以交通再次改变路线……你可以看到这是怎么回事。两个小时内，整个 Microsoft 团队都遇到了该缺陷。报告指出，“最低时，超过 80% 的服务器没有响应。”</p>
@@ -270,6 +265,11 @@
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“我们通常的自动恢复流程并不是为了从这种广泛的无响应状态中恢复服务而设计的。”直接回滚也是不可能的，因为缺陷已经存在几个月了。</p>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">相反，工程师们为该补丁开发了补丁，或者用微软的话说，“一个更新，将代码路径恢复到 Windows 中之前已知的良好状态”。补丁已应用于多组服务器，服务逐渐恢复。</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://image.theregister.com/247482.jpg?imageId=247482&amp;panox=0.00&amp;panoy=0.00&amp;panow=100.00&amp;panoh=100.00&amp;heightx=11.19&amp;heighty=0.00&amp;heightw=30.95&amp;heighth=100.00&amp;width=960&amp;height=432&amp;format=webp&amp;format=jpg" alt="资讯配图" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              
+            </figure>
 
 <p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">这些时间安排显示了当微软试图找出 Exchange Online 和其他云服务如此糟糕的原因时，客户所经历的痛苦和雷德蒙德的困境。 Teams 故障转移发生在 11 月 12 日 0107 UTC（世界标准时间 0107 点），这被证明是导致中断的一个因素。白天，负载开始增加，直到 1603 UTC（世界标准时间），Microsoft 连接异常检测监视器发现连接问题有所增加。</p>
 

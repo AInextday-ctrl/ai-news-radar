@@ -193,6 +193,20 @@ def _clean_ars_caption(raw: str) -> str:
     return t[:220]
 
 
+def _is_noise_heading(h: str) -> bool:
+    if not h:
+        return True
+    t = _clean_text(h)
+    if len(t) < 3 or len(t) > 140:
+        return True
+    low = t.lower()
+    if any(phrase in low for phrase in ARS_NOISE_PHRASES):
+        return True
+    if low in ("related", "further reading", "comments", "reader comments", "more stories", "advertisement"):
+        return True
+    return False
+
+
 def _is_noise_paragraph(p: str) -> bool:
     if not p:
         return True
@@ -522,40 +536,52 @@ def _parse_ars_html(html_text: str) -> Dict[str, Any]:
             blk_html = blk.html or ""
             raw_frags.append(blk_html)
 
-            # Extract figures/images with clean captions first (avoid capturing figcaption text as body <p>)
-            for fig in blk.css("figure"):
-                img_el = fig.css_first("img")
-                if img_el:
-                    src = _clean_ars_image_url(img_el.attributes.get("data-src") or img_el.attributes.get("src") or "")
-                    if _is_valid_ars_image(src):
-                        stem = _ars_media_stem(src)
-                        if stem and stem not in seen_stems:
-                            seen_stems.add(stem)
-                            cap_el = fig.css_first("figcaption")
-                            cap_txt = _clean_ars_caption(cap_el.text(separator=" ") if cap_el else img_el.attributes.get("alt") or "")
-                            if cap_txt:
-                                out["inline_images"].append({"url": src, "caption": cap_txt, "caption_en": cap_txt})
-                            else:
-                                out["inline_images"].append(src)
-                fig.decompose()
-
-            # Standalone inline <img> not inside <figure>
-            for img_el in blk.css("img"):
-                src = _clean_ars_image_url(img_el.attributes.get("data-src") or img_el.attributes.get("src") or "")
-                if _is_valid_ars_image(src):
-                    stem = _ars_media_stem(src)
-                    if stem and stem not in seen_stems:
-                        seen_stems.add(stem)
-                        out["inline_images"].append(src)
-
-            for node in blk.css("h2, h3, p, blockquote, li"):
+            # Single-pass DOM-order traversal preserves exact positions of subheadings (`### `) and figure anchors (`after_para`)
+            for node in blk.css("h2, h3, h4, figure, p, blockquote, li"):
                 tag = (node.tag or "").lower()
+                # Skip <p>/<li> nested inside <figure> or <figcaption> (already handled by <figure>)
+                if tag in ("p", "li", "blockquote"):
+                    p_anc = node.parent
+                    in_fig = False
+                    while p_anc is not None:
+                        ptag = (p_anc.tag or "").lower()
+                        if ptag in ("figure", "figcaption"):
+                            in_fig = True
+                            break
+                        if ptag == "div" and "post-content" in (p_anc.attributes.get("class") or ""):
+                            break
+                        p_anc = p_anc.parent
+                    if in_fig:
+                        continue
+
+                if tag == "figure":
+                    img_el = node.css_first("img")
+                    if img_el:
+                        src = _clean_ars_image_url(img_el.attributes.get("data-src") or img_el.attributes.get("src") or "")
+                        if _is_valid_ars_image(src):
+                            stem = _ars_media_stem(src)
+                            if stem and stem not in seen_stems:
+                                seen_stems.add(stem)
+                                cap_el = node.css_first("figcaption")
+                                cap_txt = _clean_ars_caption(cap_el.text(separator=" ") if cap_el else img_el.attributes.get("alt") or "")
+                                after_idx = max(0, len(out["paragraphs"]) - 1)
+                                img_obj: Dict[str, Any] = {"url": src, "after_para": after_idx}
+                                if cap_txt:
+                                    img_obj["caption"] = cap_txt
+                                    img_obj["caption_en"] = cap_txt
+                                out["inline_images"].append(img_obj)
+                    continue
+
                 txt = _clean_text(node.text(separator=" "))
                 if not txt:
                     continue
-                if tag in ("h2", "h3"):
-                    if 4 <= len(txt) <= 140 and not _is_noise_paragraph(txt):
+                if tag in ("h2", "h3", "h4"):
+                    if not _is_noise_heading(txt):
                         out["subheadings"].append(txt)
+                        h_key = f"h:{txt.lower()}"
+                        if h_key not in seen_p:
+                            seen_p.add(h_key)
+                            out["paragraphs"].append(f"### {txt}")
                     continue
                 if tag == "li" and len(txt) < 35:
                     continue
@@ -565,6 +591,24 @@ def _parse_ars_html(html_text: str) -> Dict[str, Any]:
                 if key not in seen_p:
                     seen_p.add(key)
                     out["paragraphs"].append(txt)
+
+            # Fallback for standalone inline <img> outside <figure>
+            for img_el in blk.css("img"):
+                p_anc = img_el.parent
+                in_fig = False
+                while p_anc is not None:
+                    if (p_anc.tag or "").lower() == "figure":
+                        in_fig = True
+                        break
+                    p_anc = p_anc.parent
+                if in_fig:
+                    continue
+                src = _clean_ars_image_url(img_el.attributes.get("data-src") or img_el.attributes.get("src") or "")
+                if _is_valid_ars_image(src):
+                    stem = _ars_media_stem(src)
+                    if stem and stem not in seen_stems:
+                        seen_stems.add(stem)
+                        out["inline_images"].append({"url": src, "after_para": max(0, len(out["paragraphs"]) - 1)})
 
         joined_frags = "\n".join(raw_frags)
         out["raw_content_text"] = _clean_text(re.sub(r"<[^>]+>", " ", joined_frags))
