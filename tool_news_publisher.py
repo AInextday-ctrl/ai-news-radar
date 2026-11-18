@@ -906,9 +906,12 @@ def format_editorial_paragraphs(
         if not raw_p:
             continue
 
-        # Section Subheading Recognition
+        # Section Subheading Recognition (H3 primary section vs H4 secondary sub-subheading)
         has_chinese = bool(re.search(r'[\u4e00-\u9fa5]', raw_p))
-        if not has_chinese:
+        is_sub_subheading = raw_p.startswith('#### ')
+        if is_sub_subheading:
+            is_subheading = False
+        elif not has_chinese:
             is_subheading = (
                 (raw_p.isupper() and 5 <= len(raw_p) <= 80 and not raw_p.startswith('($') and not raw_p.endswith('.')) or
                 raw_p.startswith('### ') or raw_p.startswith('## ')
@@ -921,7 +924,12 @@ def format_editorial_paragraphs(
                     raw_p.startswith("【") or raw_p.startswith("一、") or raw_p.startswith("二、") or raw_p.startswith("三、")
                 ))
             )
-        if is_subheading:
+        if is_sub_subheading:
+            clean_h4 = raw_p.lstrip('#').strip()
+            rendered_elements.append(f"""
+            <h4 class="text-base sm:text-[17px] font-bold text-slate-800 dark:text-slate-200 mt-4 mb-3 tracking-tight">{escape(clean_h4)}</h4>
+            """.strip())
+        elif is_subheading:
             clean_heading = raw_p.lstrip('#').strip()
             rendered_elements.append(f"""
             <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 tracking-tight flex items-center gap-2.5">

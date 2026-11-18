@@ -991,7 +991,7 @@ def _parse_ign_html(
             last_was_h2 = False
             continue
 
-        # Headings
+        # Headings (preserve H2 -> `### ` primary section, H3/H4 -> `#### ` secondary subheading)
         if tag in ("h2", "h3", "h4"):
             htext = _clean_text(node.text())
             if htext and not _is_noise_heading(htext):
@@ -999,12 +999,8 @@ def _parse_ign_html(
                     paragraphs.append(f"### {htext}")
                     subheadings.append(htext)
                     last_was_h2 = True
-                elif last_was_h2 and len(htext) <= 80:
-                    # Concise sub-label immediately under an h2 (e.g., "Completion Time: 70 hours")
-                    paragraphs.append(htext)
-                    last_was_h2 = False
                 else:
-                    paragraphs.append(f"### {htext}")
+                    paragraphs.append(f"#### {htext}")
                     subheadings.append(htext)
                     last_was_h2 = False
             continue

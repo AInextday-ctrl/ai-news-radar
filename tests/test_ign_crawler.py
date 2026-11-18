@@ -185,8 +185,8 @@ class TestIGNCrawler(unittest.TestCase):
         self.assertEqual(res["author"], "Luke Reilly and Simon Cardy")
         self.assertIn("four reviewers", res["summary"])
         self.assertIn("### Campaign Playtimes", res["paragraphs"])
-        # h3 right after h2 should NOT get a second stacked ### prefix
-        self.assertIn("Completion Time: 70 hours", res["paragraphs"])
+        # h3 preserves secondary heading hierarchy (`#### `) below h2 (`### `)
+        self.assertIn("#### Completion Time: 70 hours", res["paragraphs"])
         self.assertNotIn("### Completion Time: 70 hours", res["paragraphs"])
         # Bullet list preserved cleanly
         self.assertTrue(any(p.startswith("• Our fastest reviewer") for p in res["paragraphs"]))
