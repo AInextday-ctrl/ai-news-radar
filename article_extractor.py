@@ -992,6 +992,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "techfundingnews.com" in domain:
+            try:
+                from crawlers.techfundingnews_crawler import crawl_techfundingnews
+                tfn_data = crawl_techfundingnews(url, html_text=html_text)
+                if tfn_data.get("is_filtered_out"):
+                    result.update(tfn_data)
+                    return result
+                if tfn_data.get("is_substantive") or tfn_data.get("paras_count", 0) >= 1 or tfn_data.get("title"):
+                    result.update(tfn_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

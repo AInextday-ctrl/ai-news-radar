@@ -1160,6 +1160,7 @@ def load_existing_items() -> list:
     tomshardware_live_budget = 4
     bbc_live_budget = 4
     nypost_live_budget = 4
+    tfn_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2762,6 +2763,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if nyp_data.get(vk):
                                 it[vk] = nyp_data[vk]
+                except Exception:
+                    pass
+
+        # 6.26 Tech Funding News (techfundingnews.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "techfundingnews.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_tfn = _extract_item_ts(it)
+            is_recent_tfn = (ts_tfn > 0) and ((now_ts_load - ts_tfn) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_tfn_fix = is_recent_tfn and tfn_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "Tech Funding News", "TFN") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/tfn_")
+            )
+            if needs_tfn_fix:
+                tfn_live_budget -= 1
+                try:
+                    from crawlers.techfundingnews_crawler import crawl_techfundingnews
+                    tfn_data = crawl_techfundingnews(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if tfn_data.get("is_filtered_out"):
+                        continue
+                    if tfn_data.get("title"):
+                        it["title"] = tfn_data["title"]
+                        it["title_en"] = tfn_data["title"]
+                    if tfn_data.get("author") and tfn_data["author"] not in ("Tech Funding News", "TFN"):
+                        it["author"] = tfn_data["author"]
+                    if tfn_data.get("cover_image") and str(tfn_data["cover_image"]).startswith("http"):
+                        it["image_url"] = tfn_data["cover_image"]
+                        it["cover_image"] = tfn_data["cover_image"]
+                    if tfn_data.get("is_substantive") and tfn_data.get("full_text"):
+                        it["paragraphs"] = tfn_data.get("paragraphs", [])
+                        it["subheadings"] = tfn_data.get("subheadings", [])
+                        it["article_content"] = tfn_data["full_text"]
+                        it["article_content_en"] = tfn_data["full_text"]
+                        it["inline_images"] = tfn_data.get("inline_images", [])
+                        if tfn_data.get("inline_videos"):
+                            it["inline_videos"] = tfn_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if tfn_data.get("has_video") and tfn_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = tfn_data["video_url"]
+                        if tfn_data.get("video_id"):
+                            it["video_id"] = tfn_data["video_id"]
+                        it["video_provider"] = tfn_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if tfn_data.get(vk):
+                                it[vk] = tfn_data[vk]
                 except Exception:
                     pass
 

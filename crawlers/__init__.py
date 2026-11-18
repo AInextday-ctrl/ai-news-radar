@@ -32,6 +32,7 @@ from .nineto5mac_crawler import crawl_nineto5mac, is_nineto5mac_url
 from .tomshardware_crawler import crawl_tomshardware, is_tomshardware_url
 from .bbc_crawler import crawl_bbc, is_bbc_url
 from .nypost_crawler import crawl_nypost, is_nypost_url
+from .techfundingnews_crawler import crawl_techfundingnews, is_techfundingnews_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -86,6 +87,8 @@ __all__ = [
     "is_bbc_url",
     "crawl_nypost",
     "is_nypost_url",
+    "crawl_techfundingnews",
+    "is_techfundingnews_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]
