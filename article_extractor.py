@@ -747,6 +747,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "nytimes.com" in domain or "nyti.ms" in domain:
+            try:
+                from crawlers.nyt_crawler import crawl_nyt
+                nyt_data = crawl_nyt(url, html_text=html_text)
+                if nyt_data.get("is_substantive") or nyt_data.get("paras_count", 0) >= 1 or nyt_data.get("title"):
+                    result.update(nyt_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

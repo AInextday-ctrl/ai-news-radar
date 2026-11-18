@@ -1136,6 +1136,7 @@ def load_existing_items() -> list:
     fortune_live_budget = 3
     wsj_live_budget = 3
     verge_live_budget = 4
+    nyt_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1526,6 +1527,69 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = v_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.6 纽约时报 (The New York Times) 官方真实标题、记者署名、__preloadedData 全量正文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "nytimes.com" in u_now.lower() or "nyti.ms" in u_now.lower():
+            n_ts = parse_time_for_sort(it)
+            is_recent_n = (n_ts > 0) and ((now_ts_load - n_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_n_fix = is_recent_n and nyt_live_budget > 0 and (
+                ("(" in t_curr and "new york times" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200
+            )
+            if needs_n_fix:
+                nyt_live_budget -= 1
+                try:
+                    from crawlers.nyt_crawler import crawl_nyt
+                    n_data = crawl_nyt(u_now)
+                    if n_data.get("title"):
+                        it["title"] = n_data["title"]
+                        it["title_en"] = n_data["title"]
+                    if n_data.get("author") and n_data["author"] != "The New York Times":
+                        it["author"] = n_data["author"]
+                    if n_data.get("cover_image") and str(n_data["cover_image"]).startswith("http"):
+                        it["image_url"] = n_data["cover_image"]
+                        it["cover_image"] = n_data["cover_image"]
+                    if n_data.get("is_substantive") and len(n_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = n_data.get("paragraphs", [])
+                        it["subheadings"] = n_data.get("subheadings", [])
+                        it["article_content"] = n_data["full_text"]
+                        it["article_content_en"] = n_data["full_text"]
+                        it["inline_images"] = n_data.get("inline_images", [])
+                        if n_data.get("has_video") and n_data.get("video_url"):
+                            it["has_video"] = True
+                            it["video_url"] = n_data["video_url"]
+                            it["video_provider"] = n_data.get("video_provider", "direct")
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = n_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
