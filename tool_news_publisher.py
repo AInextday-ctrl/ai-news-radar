@@ -889,11 +889,26 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         author_prefix = "记者 / 供稿: " if is_zh else "By "
         author_byline_html = f'<div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>{author_prefix}{escape(author_name)}</span></div>'
 
+    # 全局付费墙/订阅促销话术防线（杜绝 "Pay a year upfront and save 20%" 等污染要点与正文）
+    PROMO_NOISE_RE = re.compile(
+        r"(?:pay a year upfront|then \$\d+\s*per month|complete digital access to quality|"
+        r"essential digital access to quality|cancel or change your plan anytime|"
+        r"free access via your university|digital access for organisations|try unlimited access|"
+        r"subscribe to unlock|want all of the times|thank you for your patience while we verify access|"
+        r"already a subscriber\??\s*log in|myft digest|unlock the editor['’]s digest|"
+        r"most read from the washington post|democracy dies in darkness|you were gifted this article|"
+        r"posts from this topic will be added to your daily email digest|delivered directly to your inbox|"
+        r"预付一年.*省\s*\d+%|每月\s*\d+\s*美元.*数字访问|完整数字访问|基本数字访问|订阅以解锁)",
+        re.I,
+    )
+
     bullets_html = ""
     if fact_bullets:
         formatted_items = []
         for b in fact_bullets:
             b_str = str(b).strip()
+            if not b_str or PROMO_NOISE_RE.search(b_str):
+                continue
             if b_str.startswith("【") and "】" in b_str:
                 tag, rest = b_str.split("】", 1)
                 tag_html = f"<strong class='font-bold text-indigo-900 dark:text-indigo-200'>{escape(tag)}】</strong>"
@@ -905,7 +920,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             else:
                 formatted_items.append(f"<li class='text-sm sm:text-base leading-relaxed pl-1'>{escape(b_str)}</li>")
         bullet_items = "".join(formatted_items)
-        bullets_html = f"""
+        if bullet_items:
+            bullets_html = f"""
         <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="{briefing_title}" data-geocitation="true">
           <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
             <span>⚡</span> <span>{briefing_title}</span>
@@ -1020,7 +1036,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     is_wsj = "wsj" in (item.get("source") or "").lower() or "wall street journal" in (item.get("source") or "").lower() or "wsj.com" in (item.get("url") or "").lower()
     is_dedicated_full = (
         is_reuters or is_bloomberg or is_fortune or is_wsj or
-        any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/"))
+        any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/", "wired.com/"))
     )
     is_paywalled = bool((not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and item.get("is_paywalled")) or (not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"])))
     if is_reuters or (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)):

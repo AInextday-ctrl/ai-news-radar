@@ -9641,8 +9641,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         ? (item.fact_bullets_zh || analysis.key_points_zh || analysis.fact_bullets_zh || [])
         : (item.fact_bullets_en || analysis.key_points_en || analysis.fact_bullets_en || []);
 
+      const promoBulletRe = /(?:pay a year upfront|then \$\d+\s*per month|complete digital access|essential digital access|cancel or change your plan|free access via your university|try unlimited access|subscribe to unlock|want all of the times|already a subscriber|myft digest|unlock the editor['’]s digest|posts from this topic will be added to your daily email digest|delivered directly to your inbox|预付一年.*省|完整数字访问|基本数字访问|订阅以解锁)/i;
       if (bulletsWrapEl && bulletsListEl) {
-        let finalBullets = (Array.isArray(rawBullets) && rawBullets.length > 0) ? rawBullets : [];
+        let finalBullets = (Array.isArray(rawBullets) && rawBullets.length > 0)
+          ? rawBullets.filter(b => b && !promoBulletRe.test(String(b)))
+          : [];
         if (finalBullets.length === 0) {
           if (isZh) {
             const elems = analysis.elements_zh || {};

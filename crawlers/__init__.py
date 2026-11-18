@@ -16,6 +16,7 @@ from .nyt_crawler import crawl_nyt, is_nyt_url
 from .wapo_crawler import crawl_wapo, is_wapo_url
 from .washsun_crawler import crawl_washsun, is_washsun_url
 from .ft_crawler import crawl_ft, is_ft_url
+from .wired_crawler import crawl_wired, is_wired_url
 
 __all__ = [
     "crawl_reuters",
@@ -36,5 +37,7 @@ __all__ = [
     "crawl_washsun",
     "is_washsun_url",
     "crawl_ft",
-    "is_ft_url"
+    "is_ft_url",
+    "crawl_wired",
+    "is_wired_url"
 ]

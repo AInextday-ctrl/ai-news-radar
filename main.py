@@ -1144,6 +1144,7 @@ def load_existing_items() -> list:
     wapo_live_budget = 4
     washsun_live_budget = 4
     ft_live_budget = 4
+    wired_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1775,6 +1776,65 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = ft_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.10 WIRED (连线杂志) 官方真实标题、记者署名、.body__inner-container 全量长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "wired.com/" in u_now.lower():
+            w_ts = parse_time_for_sort(it)
+            is_recent_w = (w_ts > 0) and ((now_ts_load - w_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_w_fix = is_recent_w and wired_live_budget > 0 and (
+                ("(" in t_curr and "wired" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 800 or
+                len(art_zh_curr) < 200
+            )
+            if needs_w_fix:
+                wired_live_budget -= 1
+                try:
+                    from crawlers.wired_crawler import crawl_wired
+                    w_data = crawl_wired(u_now, title=t_curr)
+                    if w_data.get("title"):
+                        it["title"] = w_data["title"]
+                        it["title_en"] = w_data["title"]
+                    if w_data.get("author") and w_data["author"] != "WIRED":
+                        it["author"] = w_data["author"]
+                    if w_data.get("cover_image") and str(w_data["cover_image"]).startswith("http"):
+                        it["image_url"] = w_data["cover_image"]
+                        it["cover_image"] = w_data["cover_image"]
+                    if w_data.get("is_substantive") and len(w_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = w_data.get("paragraphs", [])
+                        it["subheadings"] = w_data.get("subheadings", [])
+                        it["article_content"] = w_data["full_text"]
+                        it["article_content_en"] = w_data["full_text"]
+                        it["inline_images"] = w_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = w_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

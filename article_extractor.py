@@ -787,6 +787,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "wired.com" in domain:
+            try:
+                from crawlers.wired_crawler import crawl_wired
+                wired_data = crawl_wired(url, html_text=html_text)
+                if wired_data.get("is_substantive") or wired_data.get("paras_count", 0) >= 1 or wired_data.get("title"):
+                    result.update(wired_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
