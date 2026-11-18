@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-18 00:49:14 UTC",
+  "generated_at": "2026-11-18 01:09:36 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-18 00:49:14 UTC",
+      "updated_at": "2026-11-18 01:09:36 UTC",
       "headline_item": {
-        "id": "08fd21507b3b8561",
+        "id": "80842cce71f39730",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "美联邦航空局叫停Juniper路由器安装以排查故障",
-        "title_en": "FAA pauses installations of Juniper routers like the one officials believe contributed to Friday's nationwide ground stop; HPE says its device wasn't defective (Neil Vigdor/New York Times)",
-        "source": "New York Times",
-        "published_at": "2026-11-18T00:45:01+00:00",
-        "url": "https://www.nytimes.com/2026/11/17/us/faa-routers-ground-stop.html?unlocked_article_code=1.RVE.NvSB.4mbzPoegpFNf&smid=url-share",
-        "event_summary_zh": "美国联邦航空局因近期全国性航班停飞故障，紧急叫停并关闭了Juniper路由器，正在排查硬件与系统集成风险",
-        "event_summary_en": "The U.S. Federal Aviation Administration (FAA) has suspended the installation and operation of Juniper Networks routers, following findings that a recently installed unit in El Dorado, Arkansas, contributed to last week's nationwide air traffic control ground stop. Despite Hewlett Packard Enterprise (HPE) asserting no defects, the incident, coupled with recent outages at the National Security Agency's classified communications network, highlights mounting concerns over the resilience of critical infrastructure supply chains and maintenance protocols.",
+        "title_zh": "基础设施系统性失灵引发社会避险情绪蔓延",
+        "title_en": "Tech Paranoia Intensifies After Outages Roil Public Trust",
+        "source": "Bloomberg",
+        "published_at": "2026-11-18T00:55:03+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-17/tech-paranoia-intensifies-after-outages-roil-public-trust",
+        "event_summary_zh": "近期航空、金融及国家安全局关键系统频发宕机，导致公众对基础设施可靠性产生深度不信任，促使消费端出现囤积物资现象",
+        "event_summary_en": "Recent high-profile system outages across the NSA, FAA, and Microsoft have paralyzed essential services, fueling public anxiety despite no evidence of malicious cyber-attacks. Senator Mark Warner emphasized that AI-driven vulnerability discovery is forcing organizations to push updates at an unsustainable pace, exposing the systemic fragility of aging digital infrastructure.",
         "core_facts_zh": [
-          "【核心事件】美国联邦航空局（FAA）、惠普企业（HPE）、Juniper Networks在美国国家航空交通管制系统及政府分类通信网络：暂停并禁用Juniper系列路由器，开展深度故障排查",
-          "【起因与机理】因新设路由器与全国性航空停飞事件存在直接技术关联",
-          "【关键数据与实测】That means the American taxpayers are spending about $1 billion a month just on this blockade,” Warren stated.。",
-          "【各方立场与态度】国家安全局分类网络同日发生运维离线事件引发广泛排查。"
+          "【核心事件】美国国家安全局（NSA）、联邦航空管理局（FAA）、微软公司、弗吉尼亚州民主党参议员马克·沃纳在美国境内关键数字化基础设施：系统性宕机导致服务中断及公众恐慌性消费，引发政界对于AI辅助攻防压力过载的关注",
+          "【起因与机理】AI驱动的自动化漏洞扫描与修复周期错位，导致基础设施在不堪重负的状态下崩塌",
+          "【核心事实细节】核心事件：跨领域关键信息系统连续多日发生不明原因故障。",
+          "【涉及范围与推进】后续研判：监管侧正将矛头指向AI驱动的快速补丁需求与系统承载力不足之间的结构性矛盾。"
         ],
         "core_facts_en": [
-          "[Core Event] FAA, HPE, Juniper Networks: Suspension and shutdown of Juniper routers pending technical audit",
-          "[Root Cause & Mechanism] Direct correlation between the hardware installation and the nationwide grounding of flights",
-          "[Key Metrics] I don’t think the full $50 billion will be funded.",
-          "[Key Position & Outlook] NSA network outage occurs simultaneously, prompting heightened critical infrastructure review."
+          "[Core Event] NSA, FAA, Microsoft, and Senator Mark Warner (US critical digital infrastructure): Widespread system outages and public panic buying triggered by concerns over infrastructure reliability",
+          "[Root Cause & Mechanism] AI-accelerated vulnerability scanning forces unsustainable patch management cycles, straining legacy systems",
+          "[Key Metrics] In the wake of the FAA failures, the Trump administration is seeking US$50.",
+          "[Industry Impact & Outlook] Outlook: Policymakers are highlighting the structural tension between AI-accelerated vulnerability detection and the inability of legacy systems to handle rapid patch management."
         ],
-        "industry_impact_zh": "此次故障凸显了关键基础设施在异构网络集成中的脆弱性，即便是非恶意配置错误在分布式架构中也会形成系统性风险放大器。若后续调查确认该事件非网络攻击所致，将迫使国防及航空工业重新审视高可靠性计算环境下的设备准入认证标准，并可能加速高性能网络硬件的去库存与供应商备份审查周期。",
-        "industry_impact_en": "This incident exposes the fragility of critical infrastructure in heterogeneous network environments, where even non-malicious configuration errors can become systemic force multipliers. If confirmed as non-adversarial, the investigation will force a reassessment of equipment validation standards for aerospace and defense, likely accelerating supplier diversification and rigorous technical vetting cycles."
+        "industry_impact_zh": "此次连锁性宕机揭示了数字化转型中‘速度错位’的深层危机：AI工具虽提升了攻击效率，但防御侧过度依赖高频补丁，反而诱发了因操作过载导致的系统失稳。这标志着关键基础设施已进入‘复杂性灾难’窗口期，未来合规与安全架构需从传统的修补模式向主动式防御系统架构进行范式转换。",
+        "industry_impact_en": "This chain of outages highlights a 'velocity mismatch' crisis in digital transformation: AI-driven attack speeds are forcing defensive teams into unsustainable patching cycles that inadvertently trigger system instability. This signals that critical infrastructure has entered a 'complexity disaster' phase, necessitating a paradigm shift from reactive patching to proactive, hardened systemic architecture."
       },
       "headlines": [
+        {
+          "id": "80842cce71f39730",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "基础设施系统性失灵引发社会避险情绪蔓延",
+          "title_en": "Tech Paranoia Intensifies After Outages Roil Public Trust",
+          "source": "Bloomberg",
+          "published_at": "2026-11-18T00:55:03+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-17/tech-paranoia-intensifies-after-outages-roil-public-trust",
+          "event_summary_zh": "近期航空、金融及国家安全局关键系统频发宕机，导致公众对基础设施可靠性产生深度不信任，促使消费端出现囤积物资现象",
+          "event_summary_en": "Recent high-profile system outages across the NSA, FAA, and Microsoft have paralyzed essential services, fueling public anxiety despite no evidence of malicious cyber-attacks. Senator Mark Warner emphasized that AI-driven vulnerability discovery is forcing organizations to push updates at an unsustainable pace, exposing the systemic fragility of aging digital infrastructure.",
+          "core_facts_zh": [
+            "【核心事件】美国国家安全局（NSA）、联邦航空管理局（FAA）、微软公司、弗吉尼亚州民主党参议员马克·沃纳在美国境内关键数字化基础设施：系统性宕机导致服务中断及公众恐慌性消费，引发政界对于AI辅助攻防压力过载的关注",
+            "【起因与机理】AI驱动的自动化漏洞扫描与修复周期错位，导致基础设施在不堪重负的状态下崩塌",
+            "【核心事实细节】核心事件：跨领域关键信息系统连续多日发生不明原因故障。",
+            "【涉及范围与推进】后续研判：监管侧正将矛头指向AI驱动的快速补丁需求与系统承载力不足之间的结构性矛盾。"
+          ],
+          "core_facts_en": [
+            "[Core Event] NSA, FAA, Microsoft, and Senator Mark Warner (US critical digital infrastructure): Widespread system outages and public panic buying triggered by concerns over infrastructure reliability",
+            "[Root Cause & Mechanism] AI-accelerated vulnerability scanning forces unsustainable patch management cycles, straining legacy systems",
+            "[Key Metrics] In the wake of the FAA failures, the Trump administration is seeking US$50.",
+            "[Industry Impact & Outlook] Outlook: Policymakers are highlighting the structural tension between AI-accelerated vulnerability detection and the inability of legacy systems to handle rapid patch management."
+          ],
+          "industry_impact_zh": "此次连锁性宕机揭示了数字化转型中‘速度错位’的深层危机：AI工具虽提升了攻击效率，但防御侧过度依赖高频补丁，反而诱发了因操作过载导致的系统失稳。这标志着关键基础设施已进入‘复杂性灾难’窗口期，未来合规与安全架构需从传统的修补模式向主动式防御系统架构进行范式转换。",
+          "industry_impact_en": "This chain of outages highlights a 'velocity mismatch' crisis in digital transformation: AI-driven attack speeds are forcing defensive teams into unsustainable patching cycles that inadvertently trigger system instability. This signals that critical infrastructure has entered a 'complexity disaster' phase, necessitating a paradigm shift from reactive patching to proactive, hardened systemic architecture."
+        },
         {
           "id": "08fd21507b3b8561",
           "tag_zh": "📰 业界动态",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "英伟达放弃中国高端芯片出口协议，标志着科技企业试图通过关税换取市场准入的折中策略已在地缘政治高压下彻底失效。此举将迫使中国AI算力基础设施加速向国产化算力集群迁移，同时也预示英伟达面临全球存量市场竞争加剧的财务压力，必须将增长重心从中国溢价市场彻底转向欧美本土及非华语系东南亚数据中心建设。",
           "industry_impact_en": "Nvidia's exit from the China market highlights the collapse of trade-off strategies involving tariffs for market access under geopolitical pressure. This transition will accelerate China's shift toward domestic compute infrastructure while forcing Nvidia to reallocate its growth focus from high-margin China sales to the US and non-Chinese Southeast Asian data center markets to offset revenue volatility."
-        },
-        {
-          "id": "2f225a7353693295",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "微软CEO纳德拉：AGI将重塑全球政治经济结构",
-          "title_en": "Satya Nadella says he’s AGI-pilled now",
-          "source": "The Verge AI",
-          "published_at": "2026-11-17T23:41:18+00:00",
-          "url": "https://www.theverge.com/tech/1036111/satya-nadella-says-hes-agi-pilled-now",
-          "event_summary_zh": "微软CEO萨提亚·纳德拉在Ignite大会后强调，AGI带来的经济与社会影响将超越科技企业的市场竞争，需警惕垄断风险",
-          "event_summary_en": "Microsoft CEO Satya Nadella stated at a post-Ignite roundtable that AGI could fundamentally reshape political economy by collapsing human capital into token capital, challenging the traditional role of firms. He rejected assigning moral status to AI models and warned that a monopolistic AI entity could pose systemic risks to healthcare, financial services, and democratic governance.",
-          "core_facts_zh": [
-            "【核心事件】萨提亚·纳德拉 (微软公司首席执行官)：探讨AGI对经济组织、企业存续及民主政治的颠覆性影响，并反驳赋予AI模型道德主体地位的观点",
-            "【起因与机理】AI模型具备跨行业渗透能力且呈现网络效应，需探讨技术普及过程中的社会经济治理机制",
-            "【核心事实细节】AGI技术具备跨行业渗透力，可能重塑劳动力与资本的本质结构。",
-            "【行业影响与走向】警示单一AI垄断对政治经济与民主制度构成的深层风险。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Satya Nadella (CEO of Microsoft): Discussed the disruptive impact of AGI on economic organization, the future of firms, and democratic stability, while opposing the assignment of moral status to AI.",
-            "[Root Cause & Mechanism] To address the cross-sectoral penetration and network effects of AI, focusing on the diffusion of technology and governance.",
-            "[Regulatory & Investigation Focus] AGI capability for cross-sector disruption and potential collapse of human capital.",
-            "[Official Stance & Demand] Warning against monopolistic AI control threatening political stability and democratic governance."
-          ],
-          "industry_impact_zh": "纳德拉的表态揭示了微软在AI垄断指控下的防御性监管策略，通过将AGI定性为“宏观政治经济议题”而非“企业间竞争”，试图减轻反垄断调查压力。其强调AI应作为生产力扩散而非垄断性资本，反映了科技巨头在追求AGI霸权的同时，正试图通过公共治理叙事平衡社会对劳动力剥夺与资本集中的深层担忧。",
-          "industry_impact_en": "Nadella’s rhetoric marks a strategic shift to frame AGI as a geopolitical and macroeconomic issue rather than a standard commercial rivalry, aimed at pre-empting antitrust scrutiny. By distancing the firm from the 'AI rights' movement, Microsoft seeks to position itself as a responsible steward of diffusion while hedging against the social backlash of potential labor displacement."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-18 00:49:14 UTC",
+      "updated_at": "2026-11-18 01:09:36 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-18 00:49:14 UTC",
+      "updated_at": "2026-11-18 01:09:36 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,003)",
+            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,005)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +3,817 stars this week (25,003 total)",
+            "📈 Exponential community momentum: +3,817 stars this week (25,005 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
@@ -410,7 +410,7 @@
         {
           "name": "astryx",
           "icon": "🤖",
-          "stars": "30.1k",
+          "stars": "30.2k",
           "growth_badge_zh": "本周暴增 +13,660 ★",
           "growth_badge_en": "+13,660 ★ this week",
           "category_zh": "🤖 自主智能体与协作编排",
