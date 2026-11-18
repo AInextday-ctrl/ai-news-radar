@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-18 10:18:22 UTC",
+  "generated_at": "2026-11-18 10:33:02 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-18 10:18:22 UTC",
+      "updated_at": "2026-11-18 10:33:02 UTC",
       "headline_item": {
-        "id": "f886057b43271267",
+        "id": "2297282a32991c9f",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "英伟达被指曾在2022年为涉谍人士引荐阿里",
-        "title_en": "Sources: Nvidia made two separate introductions in 2022 connecting Alibaba with alleged Chinese spy Alice Huang, actively helping Megaspeed land Alibaba (The Information)",
-        "source": "The Information",
-        "published_at": "2026-11-18T09:25:30+00:00",
-        "url": "https://www.theinformation.com/articles/nvidia-introduced-alibaba-alice-huang-workaround-u-s-export-controls",
-        "event_summary_zh": "英伟达销售团队曾在2022年两次将阿里巴巴引荐给被指控从事间谍活动的Alice Huang，并协助Megaspeed公司获取阿里巴巴业务",
-        "event_summary_en": "Nvidia's sales team facilitated two introductions between Alibaba and Alice Huang, an individual accused of espionage, in 2022. This move was intended to help Megaspeed secure business deals with Alibaba, raising significant concerns regarding multinational corporations' compliance boundaries and vetting processes in China.",
+        "title_zh": "Suno推出视觉生成功能，整合MiniMax模型拓展AI创作边界",
+        "title_en": "Suno's new Visuals feature pairs AI-generated music with AI-generated video",
+        "source": "THE DECODER",
+        "published_at": "2026-11-18T10:22:45+00:00",
+        "url": "https://the-decoder.com/sunos-new-visuals-feature-pairs-ai-generated-music-with-ai-generated-video/",
+        "event_summary_zh": "AI音乐生成平台Suno推出Visuals功能，通过调用MiniMax的H3 Move视频模型，实现音乐与视频内容的自动化同步生成",
+        "event_summary_en": "Suno has launched its Visuals feature, utilizing a safety-filtered version of MiniMax’s H3 Move video model to generate synchronized video clips of up to 15 seconds. The feature supports lyric-based lip-syncing and allows users to create content via prompts or reference images, while incorporating mandatory watermarking and copyright filters.",
         "core_facts_zh": [
-          "【核心事件】英伟达（Nvidia）销售团队、阿里巴巴（Alibaba）、Alice Huang（被控间谍）、Megaspeed在2022年中国区商业合作市场：英伟达通过销售渠道引荐中间人Alice Huang，促成Megaspeed与阿里巴巴达成业务合作",
-          "【起因与机理】利用中间渠道规避复杂商务流程或加速关键算力产品在华部署",
-          "【商业与财务细节】英伟达销售团队介入关键商业引荐以帮助Megaspeed获取阿里巴巴订单。",
-          "【各方立场与态度】事件可能导致英伟达在华市场运营面临更严厉的国家安全及合规审计。"
+          "【核心事件】Suno (AI音乐生成平台)；MiniMax (模型提供方)在Suno网页端、iOS及Android应用平台：发布Visuals功能，引入H3 Move模型，支持生成15秒内与音乐联动的AI视频",
+          "【起因与机理】在音乐生成基础上整合视觉模态以提升产品竞争力，同时通过水印机制缓解版权诉讼带来的舆论与合规风险",
+          "【关键技术规格】Suno整合MiniMax的H3 Move模型，实现AI音频到视觉内容的自动化生产。",
+          "【各方立场与态度】在慕尼黑地方法院版权判决及大型唱片公司诉讼背景下，此举旨在平衡用户体验与合规化运营。"
         ],
         "core_facts_en": [
-          "[Core Event] Nvidia sales team, Alibaba, Alice Huang (accused spy), Megaspeed (2022 Chinese commercial market): Nvidia facilitated introductions to Alice Huang to secure Megaspeed's business with Alibaba",
-          "[Root Cause & Mechanism] Utilizing intermediaries to accelerate product deployment and market entry",
-          "[Key Fact Detail] Nvidia's sales team facilitated introductions to help Megaspeed win Alibaba business.",
-          "[Industry Impact & Outlook] The incident may invite heightened scrutiny from national security regulators into Nvidia's supply chain transparency."
+          "[Core Event] Suno; MiniMax (Web, iOS, and Android platforms): Launched 'Visuals' feature utilizing H3 Move model for 15-second music-synced video generation",
+          "[Root Cause & Mechanism] To expand multi-modal capabilities and mitigate ongoing copyright litigation through embedded watermarking and safety filters",
+          "[Key Technical Spec] Integration of MiniMax's H3 Move model for AI-driven visual production.",
+          "[Official Stance & Demand] Strategic response to ongoing copyright lawsuits and regulatory pressure."
         ],
-        "industry_impact_zh": "此事件揭示了跨国算力巨头在追求中国市场份额时，对中间渠道商的尽职调查存在巨大真空。在全球出口管制日益严苛的背景下，此类深层合规漏洞可能引发美监管机构对英伟达在华供应链透明度的进一步穿透式调查。",
-        "industry_impact_en": "This incident highlights a significant due diligence gap in how multinational compute providers manage intermediary channels. Amid tightening export controls, such compliance lapses may trigger aggressive regulatory scrutiny regarding the supply chain transparency of major chip manufacturers operating within the Chinese market."
+        "industry_impact_zh": "Suno的此次技术整合不仅是产品功能的垂类延伸，更标志着AI内容生成领域已进入“音乐-视觉”强耦合的垂直化竞争阶段。通过引入水印与版权过滤机制，公司旨在通过建立技术合规防火墙，在持续的音乐版权诉讼风波中通过提升产品闭环价值来稳固商业基本盘。",
+        "industry_impact_en": "Suno's integration signals a shift toward tight 'music-to-visual' coupling, marking a competitive move into specialized multi-modal content creation. By embedding watermarks and copyright filters, Suno is attempting to build a technical compliance moat to protect its commercial viability amid mounting litigation from major labels."
       },
       "headlines": [
+        {
+          "id": "2297282a32991c9f",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "Suno推出视觉生成功能，整合MiniMax模型拓展AI创作边界",
+          "title_en": "Suno's new Visuals feature pairs AI-generated music with AI-generated video",
+          "source": "THE DECODER",
+          "published_at": "2026-11-18T10:22:45+00:00",
+          "url": "https://the-decoder.com/sunos-new-visuals-feature-pairs-ai-generated-music-with-ai-generated-video/",
+          "event_summary_zh": "AI音乐生成平台Suno推出Visuals功能，通过调用MiniMax的H3 Move视频模型，实现音乐与视频内容的自动化同步生成",
+          "event_summary_en": "Suno has launched its Visuals feature, utilizing a safety-filtered version of MiniMax’s H3 Move video model to generate synchronized video clips of up to 15 seconds. The feature supports lyric-based lip-syncing and allows users to create content via prompts or reference images, while incorporating mandatory watermarking and copyright filters.",
+          "core_facts_zh": [
+            "【核心事件】Suno (AI音乐生成平台)；MiniMax (模型提供方)在Suno网页端、iOS及Android应用平台：发布Visuals功能，引入H3 Move模型，支持生成15秒内与音乐联动的AI视频",
+            "【起因与机理】在音乐生成基础上整合视觉模态以提升产品竞争力，同时通过水印机制缓解版权诉讼带来的舆论与合规风险",
+            "【关键技术规格】Suno整合MiniMax的H3 Move模型，实现AI音频到视觉内容的自动化生产。",
+            "【各方立场与态度】在慕尼黑地方法院版权判决及大型唱片公司诉讼背景下，此举旨在平衡用户体验与合规化运营。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Suno; MiniMax (Web, iOS, and Android platforms): Launched 'Visuals' feature utilizing H3 Move model for 15-second music-synced video generation",
+            "[Root Cause & Mechanism] To expand multi-modal capabilities and mitigate ongoing copyright litigation through embedded watermarking and safety filters",
+            "[Key Technical Spec] Integration of MiniMax's H3 Move model for AI-driven visual production.",
+            "[Official Stance & Demand] Strategic response to ongoing copyright lawsuits and regulatory pressure."
+          ],
+          "industry_impact_zh": "Suno的此次技术整合不仅是产品功能的垂类延伸，更标志着AI内容生成领域已进入“音乐-视觉”强耦合的垂直化竞争阶段。通过引入水印与版权过滤机制，公司旨在通过建立技术合规防火墙，在持续的音乐版权诉讼风波中通过提升产品闭环价值来稳固商业基本盘。",
+          "industry_impact_en": "Suno's integration signals a shift toward tight 'music-to-visual' coupling, marking a competitive move into specialized multi-modal content creation. By embedding watermarks and copyright filters, Suno is attempting to build a technical compliance moat to protect its commercial viability amid mounting litigation from major labels."
+        },
         {
           "id": "f886057b43271267",
           "tag_zh": "📰 业界动态",
@@ -63,7 +89,7 @@
           "tag_zh": "💼 商业落地",
           "tag_en": "💼 Business Cases",
           "title_zh": "Payhawk获高盛领投2.8亿美元融资，估值达20亿美元",
-          "title_en": "Goldman Backs Fintech Startup Payhawk At 2 Billion Value",
+          "title_en": "Goldman Backs Fintech Startup Payhawk at $2 Billion Value",
           "source": "Bloomberg",
           "published_at": "2026-11-18T09:00:13+00:00",
           "url": "https://www.bloomberg.com/news/articles/2026-11-18/goldman-backs-fintech-startup-payhawk-at-2-billion-value",
@@ -83,38 +109,12 @@
           ],
           "industry_impact_zh": "在高利率环境下，资本市场对具备高留存率与现金流数字化能力的SaaS企业青睐度显著回升。Payhawk的估值逻辑在于其打通了银行卡支付与ERP系统的后端集成，将单纯的费用报销转化为企业财资管理的闭环数据节点，这种商业模型具备极高的粘性与防御壁垒。",
           "industry_impact_en": "In a high-interest environment, capital markets are favoring SaaS platforms that offer high retention and clear ROI in digitized cash flow management. Payhawk's valuation is driven by its ability to integrate card payments with ERP systems, shifting from simple expense tracking to a high-moat, closed-loop corporate treasury management model."
-        },
-        {
-          "id": "8021e3973f7a24b8",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "Anthropic启动IPO，VC市场权力格局重塑",
-          "title_en": "Anthropic IPO set to deliver windfall to handful of smaller VC firms",
-          "source": "Financial Times",
-          "published_at": "2026-11-18T07:00:41+00:00",
-          "url": "https://www.ft.com/content/a3430f0d-0080-4970-8eec-2c14c8438b3d?accessToken=zwAAAaHtopUSkdOjQw8NAIBJcNOO7CwUyEOLPQ.MEUCIF1q7aLCnP63ba_HSXgJrufMSFKbE0XM6j8UzDPK2UaJAiEAwlWU3Tct7FROgNE7x9sr3LUUt1DjFS0mZu406msl96Y&sharetype=gift&token=a97c7641-a9cb-433e-a6b6-ea4083f6a825",
-          "event_summary_zh": "Anthropic计划上市，预估市值达1.4万亿美元，将导致早期风投机构获得千亿美元级回报，并改变硅谷创投权力排行榜",
-          "event_summary_en": "AI startup Anthropic is preparing for its IPO with an expected valuation of $1.4 trillion, set to deliver over $100 billion in combined returns to early-stage venture capital firms including Spark Capital and Factorial Funds. Post-IPO, Amazon and Google will collectively control nearly 30% of the company, while major investors like Iconiq Capital, Lightspeed Ventures, and Menlo Ventures see their stakes reach multi-billion dollar valuations.",
-          "core_facts_zh": [
-            "【核心事件】Anthropic（AI初创企业）、亚马逊（投资者）、谷歌（投资者）、Spark Capital（风投机构）、Iconiq Capital（风投机构）在美国资本市场/硅谷创投圈：启动规模达1.4万亿美元市值的IPO，引发早期投资者资本回报剧增",
-            "【起因与机理】AI模型基础设施的高昂成本与市场对生成式AI估值的激进定价",
-            "【关键数据与实测】Anthropic计划以1.4万亿美元市值上市，触发早期风投机构千亿美元规模套现。",
-            "【行业影响与走向】本次IPO将导致硅谷风险投资权力排名重塑，资源向少数深度绑定大厂的基金集中。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Anthropic, Amazon, Google, Spark Capital, Iconiq Capital: Initiating an IPO at a $1.4 trillion valuation, triggering massive returns for early investors",
-            "[Root Cause & Mechanism] High cost of AI infrastructure and aggressive market pricing for generative AI leaders",
-            "[Key Metrics] Anthropic targets a $1.4T IPO valuation, triggering over $100B in returns for early backers.",
-            "[Official Stance & Demand] The IPO reorders VC influence, centralizing capital toward firms strategically aligned with hyperscalers."
-          ],
-          "industry_impact_zh": "Anthropic的超高估值预示着AI模型层竞争已从单纯的技术对抗演变为资本密集型的资源垄断博弈。头部云厂商通过深度绑定控制权，将迫使未获得此类战略联盟的传统风投基金面临边际效应递减的退出环境，进而引发硅谷资本结构向大厂控制的寡头模式倾斜。",
-          "industry_impact_en": "Anthropic's massive valuation signals that competition in the AI model layer has shifted from pure technology rivalry to capital-intensive resource monopoly. With hyperscalers tightening control through strategic stakes, traditional VC funds lacking such alliances face diminishing exit returns, accelerating the drift toward an oligopolistic capital structure dominated by Big Tech."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-18 10:18:22 UTC",
+      "updated_at": "2026-11-18 10:33:02 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-18 10:18:22 UTC",
+      "updated_at": "2026-11-18 10:33:02 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,145)",
+            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,146)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +3,817 stars this week (25,145 total)",
+            "📈 Exponential community momentum: +3,817 stars this week (25,146 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
