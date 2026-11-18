@@ -737,6 +737,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "theverge.com" in domain:
+            try:
+                from crawlers.verge_crawler import crawl_verge
+                verge_data = crawl_verge(url, html_text=html_text)
+                if verge_data.get("is_substantive") or verge_data.get("paras_count", 0) >= 1 or verge_data.get("title"):
+                    result.update(verge_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

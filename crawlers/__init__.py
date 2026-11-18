@@ -11,6 +11,7 @@ from .reuters_crawler import crawl_reuters, is_reuters_url
 from .bloomberg_crawler import crawl_bloomberg, is_bloomberg_url, resolve_bloomberg_broadcast_media
 from .fortune_crawler import crawl_fortune, is_fortune_url
 from .wsj_crawler import crawl_wsj, is_wsj_url
+from .verge_crawler import crawl_verge, is_verge_url
 
 __all__ = [
     "crawl_reuters",
@@ -21,5 +22,7 @@ __all__ = [
     "crawl_fortune",
     "is_fortune_url",
     "crawl_wsj",
-    "is_wsj_url"
+    "is_wsj_url",
+    "crawl_verge",
+    "is_verge_url"
 ]

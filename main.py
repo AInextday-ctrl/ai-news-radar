@@ -1135,6 +1135,7 @@ def load_existing_items() -> list:
     reuters_live_budget = 3
     fortune_live_budget = 3
     wsj_live_budget = 3
+    verge_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1462,6 +1463,70 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = w_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.5 The Verge 官方真实标题、记者署名、Next.js 结构化长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "theverge.com" in u_now.lower():
+            v_ts = parse_time_for_sort(it)
+            is_recent_v = (v_ts > 0) and ((now_ts_load - v_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_v_fix = is_recent_v and verge_live_budget > 0 and (
+                ("(" in t_curr and "the verge" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 400 or
+                len(art_zh_curr) < 200
+            )
+            if needs_v_fix:
+                verge_live_budget -= 1
+                try:
+                    from crawlers.verge_crawler import crawl_verge
+                    v_data = crawl_verge(u_now)
+                    if v_data.get("title"):
+                        it["title"] = v_data["title"]
+                        it["title_en"] = v_data["title"]
+                    if v_data.get("author") and v_data["author"] != "The Verge":
+                        it["author"] = v_data["author"]
+                    if v_data.get("cover_image") and str(v_data["cover_image"]).startswith("http"):
+                        it["image_url"] = v_data["cover_image"]
+                        it["cover_image"] = v_data["cover_image"]
+                    if v_data.get("is_substantive") and len(v_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = v_data.get("paragraphs", [])
+                        it["subheadings"] = v_data.get("subheadings", [])
+                        it["article_content"] = v_data["full_text"]
+                        it["article_content_en"] = v_data["full_text"]
+                        if v_data.get("inline_images"):
+                            it["inline_images"] = v_data["inline_images"]
+                        if v_data.get("has_video") and v_data.get("video_url"):
+                            it["has_video"] = True
+                            it["video_url"] = v_data["video_url"]
+                            it["video_provider"] = v_data.get("video_provider", "iframe")
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = v_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
