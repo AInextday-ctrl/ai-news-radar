@@ -1143,7 +1143,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             "resize/312x208", "resize/330x220", "resize/300x200",
             "w_40,h_40", "w_48,h_48", "w_64,h_64", "w_80,h_80", "w_96,h_96",
             "h_116,c_limit", "375x375", "150x150", "200x200", "bloomberg-bna-brightspot",
-            "grey-placeholder", "techcrunch-logo", "tc-logo", "wordmark", "site-logo",
+            "grey-placeholder", "techcrunch-logo", "tc-logo", "tc-lockup", "lockup", "wordmark", "site-logo",
             "brand-logo", "ad-banner", "/ads/", "doubleclick", "googlesyndication",
             "taboola", "outbrain", "mgid", "promo-banner", "sponsored", "default-share", ".svg"
         )

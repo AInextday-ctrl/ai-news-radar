@@ -138,6 +138,8 @@ BAD_IMAGE_TOKENS = (
     "strictlyvc",
     "techcrunch-logo",
     "tc-logo",
+    "tc-lockup",
+    "lockup",
     "wordmark",
     "site-logo",
     "brand-logo",

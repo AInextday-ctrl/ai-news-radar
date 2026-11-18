@@ -9563,7 +9563,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         const cap = (typeof entry === 'object' && entry ? (entry.caption || entry.alt || '') : '').toLowerCase().trim();
         const authLow = String(item.author || '').toLowerCase().trim();
         if (!u) return true;
-        const avatarTokens = ['blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 'profile_image', 'profile-pic', '-portrait-', '-mug-', 'staff-', 'resize/312x208', 'resize/330x220', 'resize/300x200', '375x375', '150x150', '200x200', 'w_40,h_40', 'bloomberg-bna-brightspot', 'grey-placeholder', 'techcrunch-logo', 'tc-logo', 'wordmark', 'site-logo', 'brand-logo', 'ad-banner', '/ads/', 'doubleclick', 'googlesyndication', 'taboola', 'outbrain', 'mgid', 'promo-banner', 'sponsored', 'default-share', '.svg'];
+        const avatarTokens = ['blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 'profile_image', 'profile-pic', '-portrait-', '-mug-', 'staff-', 'resize/312x208', 'resize/330x220', 'resize/300x200', '375x375', '150x150', '200x200', 'w_40,h_40', 'bloomberg-bna-brightspot', 'grey-placeholder', 'techcrunch-logo', 'tc-logo', 'tc-lockup', 'lockup', 'wordmark', 'site-logo', 'brand-logo', 'ad-banner', '/ads/', 'doubleclick', 'googlesyndication', 'taboola', 'outbrain', 'mgid', 'promo-banner', 'sponsored', 'default-share', '.svg'];
         if (avatarTokens.some(tok => u.includes(tok))) return true;
         if (authLow && authLow.length > 3 && (cap === authLow || cap === `by ${authLow}`)) return true;
         return false;

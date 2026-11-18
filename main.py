@@ -2077,7 +2077,8 @@ def save_news(items: list):
             return f"tweet_{sid}"
         return it.get("url") or it.get("id") or ""
 
-    for old_file in [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE]:
+    # 优先级与 load_existing_items 严格对齐：PUBLIC_ARCHIVE_OUTPUT_FILE 与 MASTER_ARCHIVE_FILE 必须先于陈旧的 data/archive_news.json
+    for old_file in [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE, ARCHIVE_OUTPUT_FILE]:
         if os.path.exists(old_file):
             try:
                 with open(old_file, "r", encoding="utf-8") as f:
@@ -2091,7 +2092,11 @@ def save_news(items: list):
                                     master_dict[k] = it
                                 else:
                                     exist = master_dict[k]
+                                    exist_has_fulltext = bool(exist.get("is_substantive") or len(str(exist.get("article_content") or exist.get("article_content_en") or "")) >= 400)
                                     for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                                        # 已由独立爬虫清洗为 inline_images=[] 的长文，严禁被陈旧归档中的脏插图/SVG水印回填污染
+                                        if fld == "inline_images" and exist_has_fulltext:
+                                            continue
                                         if it.get(fld) and not exist.get(fld):
                                             exist[fld] = it[fld]
             except Exception as e:
@@ -2103,7 +2108,10 @@ def save_news(items: list):
             # 永久保留已人工精修或大模型深度还原的大V原帖正文与双语速读引言
             if k in master_dict:
                 existing = master_dict[k]
+                curr_has_fulltext = bool(it.get("is_substantive") or len(str(it.get("article_content") or it.get("article_content_en") or "")) >= 400)
                 for preserve_field in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "article_text_zh", "article_text_en", "full_text_zh", "full_text_en", "quote_zh", "quote_en", "surge_badge", "is_viral", "sub_category", "metrics", "comments_list", "spec_tags", "spec_tags_en", "has_video", "video_url", "media_checked"]:
+                    if preserve_field == "inline_images" and curr_has_fulltext:
+                        continue
                     if existing.get(preserve_field) and not it.get(preserve_field):
                         it[preserve_field] = existing[preserve_field]
                 # 严密保护已解析的高清原图，绝不允许被后续爬虫抓到的低清微缩图或站内图标覆盖降级！
@@ -2145,8 +2153,14 @@ def save_news(items: list):
 
             if it.get("inline_images") and isinstance(it["inline_images"], list):
                 it["inline_images"] = [
-                    u for u in it["inline_images"] 
-                    if not any(bad in str(u).lower() for bad in ["pml.png", "techmeme.com/img", "pixel", "icon"])
+                    u for u in it["inline_images"]
+                    if not any(bad in str(u).lower() for bad in [
+                        "pml.png", "techmeme.com/img", "pixel", "icon", ".svg",
+                        "tc-lockup", "lockup", "wordmark", "techcrunch-logo", "tc-logo",
+                        "site-logo", "brand-logo", "grey-placeholder", "ad-banner", "/ads/",
+                        "doubleclick", "googlesyndication", "taboola", "outbrain", "avatar",
+                        "headshot", "gravatar", "resize/312x208", "resize/330x220", "resize/300x200",
+                    ])
                 ]
 
             # 坚决杜绝摘要复读标题与媒体噪音
