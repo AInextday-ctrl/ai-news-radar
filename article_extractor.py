@@ -888,6 +888,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "semafor.com" in domain:
+            try:
+                from crawlers.semafor_crawler import crawl_semafor
+                sem_data = crawl_semafor(url, html_text=html_text)
+                if sem_data.get("is_filtered_out"):
+                    result.update(sem_data)
+                    return result
+                if sem_data.get("is_substantive") or sem_data.get("paras_count", 0) >= 1 or sem_data.get("title"):
+                    result.update(sem_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
