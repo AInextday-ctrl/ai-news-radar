@@ -810,6 +810,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "techcrunch.com" in domain:
+            try:
+                from crawlers.techcrunch_crawler import crawl_techcrunch
+                tc_data = crawl_techcrunch(url, html_text=html_text)
+                if tc_data.get("is_filtered_out"):
+                    result.update(tc_data)
+                    return result
+                if tc_data.get("is_substantive") or tc_data.get("paras_count", 0) >= 1 or tc_data.get("title"):
+                    result.update(tc_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

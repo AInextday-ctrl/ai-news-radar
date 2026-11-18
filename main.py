@@ -1146,6 +1146,7 @@ def load_existing_items() -> list:
     ft_live_budget = 4
     wired_live_budget = 4
     mittr_live_budget = 4
+    tc_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1929,6 +1930,79 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if m_data.get(vk):
                                 it[vk] = m_data[vk]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.12 TechCrunch 官方真实标题、记者署名、WP REST 全量长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "techcrunch.com" in u_now.lower():
+            tc_ts = parse_time_for_sort(it)
+            is_recent_tc = (tc_ts > 0) and ((now_ts_load - tc_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_tc_fix = is_recent_tc and tc_live_budget > 0 and (
+                ("(" in t_curr and "techcrunch" in t_curr.lower()) or
+                "&#" in t_curr or
+                auth_curr in ("", "TechCrunch") or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                "ainewsradar.xyz/images/tc_" not in img_curr or
+                len(art_en_curr) < 800 or
+                len(art_zh_curr) < 200
+            )
+            if needs_tc_fix:
+                tc_live_budget -= 1
+                try:
+                    from crawlers.techcrunch_crawler import crawl_techcrunch
+                    tc_data = crawl_techcrunch(u_now, title=t_curr)
+                    if tc_data.get("is_filtered_out"):
+                        continue
+                    if tc_data.get("title"):
+                        it["title"] = tc_data["title"]
+                        it["title_en"] = tc_data["title"]
+                    if tc_data.get("author") and tc_data["author"] != "TechCrunch":
+                        it["author"] = tc_data["author"]
+                    if tc_data.get("cover_image") and str(tc_data["cover_image"]).startswith("http"):
+                        it["image_url"] = tc_data["cover_image"]
+                        it["cover_image"] = tc_data["cover_image"]
+                    if tc_data.get("is_substantive") and tc_data.get("full_text"):
+                        it["paragraphs"] = tc_data.get("paragraphs", [])
+                        it["subheadings"] = tc_data.get("subheadings", [])
+                        it["article_content"] = tc_data["full_text"]
+                        it["article_content_en"] = tc_data["full_text"]
+                        it["inline_images"] = tc_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = tc_data["full_text"]
+                    if tc_data.get("has_video") and tc_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = tc_data["video_url"]
+                        if tc_data.get("video_id"):
+                            it["video_id"] = tc_data["video_id"]
+                        it["video_provider"] = tc_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if tc_data.get(vk):
+                                it[vk] = tc_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
