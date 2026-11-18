@@ -1,37 +1,89 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-18 04:19:26 UTC",
+  "generated_at": "2026-11-18 04:34:08 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-18 04:19:26 UTC",
+      "updated_at": "2026-11-18 04:34:08 UTC",
       "headline_item": {
-        "id": "3a35f36396010f6b",
+        "id": "0465d1c4a5573abf",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "卢比奥否认近期美技术宕机系系统性攻击",
-        "title_en": "Marco Rubio says there's \"zero evidence\" linking the recent FAA ground stop, Microsoft outage, and bank service issues, and the US isn't \"under systemic attack\" (Kiki Intarasuwan/CBS News)",
-        "source": "CBS News",
-        "published_at": "2026-11-18T03:15:00+00:00",
-        "url": "https://www.cbsnews.com/news/marco-rubio-tech-outages-not-connected/",
-        "event_summary_zh": "美国国务卿马可·卢比奥明确指出，近期民航、银行及微软等领域的技术中断事件互无关联，非网络攻击所致",
-        "event_summary_en": "U.S. Secretary of State Marco Rubio stated during a press conference in the Philippines that recent technical outages affecting Microsoft, the Federal Aviation Administration (FAA), and major banks are isolated incidents. Rubio emphasized that intelligence assessments show no evidence of malicious cyber activity, foreign state involvement, or a systemic attack on U.S. infrastructure.",
+        "title_zh": "LanceDB完成5750万美元B轮融资",
+        "title_en": "LanceDB, which makes a multimodal lakehouse for AI training, built on the open format Lance, raised a $57.5M Series B led by Bessemer and Innovation Endeavors (Kyt Dotson/SiliconANGLE)",
+        "source": "SiliconANGLE",
+        "published_at": "2026-11-18T04:30:05+00:00",
+        "url": "https://siliconangle.com/2026/11/17/lancedb-raises-57-5m-to-accelerate-ai-model-training-with-multimodal-data-platform/",
+        "event_summary_zh": "AI多模态数据底座公司LanceDB获5750万美元B轮融资，将用于加速构建统一AI多模态数据湖仓",
+        "event_summary_en": "LanceDB has secured $57.5 million in Series B funding, led by Bessemer Venture Partners and Innovation Endeavors, bringing its total capital to $98.5 million. Built on the open-source Lance format, the company provides a multimodal data lakehouse that unifies structured and unstructured data, addressing infrastructure bottlenecks in AI training workflows.",
         "core_facts_zh": [
-          "【核心事件】美国国务卿马可·卢比奥：排除近期大规模技术宕机属于地缘政治攻击的嫌疑",
-          "【起因与机理】针对民航停飞、银行系统故障及微软服务中断引发的公众与金融市场恐慌进行辟谣",
-          "【核心事实细节】官方澄清近期宕机非网络攻击或敌对国干预。",
-          "【核心诉求与态度】强调行政部门已提升对关键基础设施潜在威胁的监测力度。"
+          "【核心事件】LanceDB Inc. 首席执行官 Chang She在企业融资市场：完成5750万美元B轮融资，用于构建统一AI多模态数据湖仓",
+          "【起因与机理】解决模型训练中多模态数据存储与检索的碎片化管理成本问题",
+          "【关键数据与实测】融资规模：5750万美元B轮，总融资额达9850万美元。",
+          "【各方立场与态度】行业痛点：解决多模态数据源碎片化带来的预处理效率问题。"
         ],
         "core_facts_en": [
-          "[Core Event] Marco Rubio, U.S. Secretary of State: Disclaimed any link between recent tech outages and malicious cyber/geopolitical attacks",
-          "[Root Cause & Mechanism] To mitigate public and financial market concerns following a series of infrastructure failures",
-          "[Key Fact Detail] Official denial of foreign state or cyber-attack involvement in recent outages.",
-          "[Key Position & Outlook] Reiteration of administration's vigilance regarding infrastructure vulnerability monitoring."
+          "[Core Event] Chang She, CEO of LanceDB Inc. (Corporate financing market): Raised $57.5M in Series B for a multimodal data lakehouse",
+          "[Root Cause & Mechanism] To address infrastructure inefficiencies in managing and preparing large-scale AI training datasets",
+          "[Key Metrics] Financing: $57.5M Series B, $98.5M total.",
+          "[Key Position & Outlook] Market Pain Point: Eliminating fragmentation in AI training data preprocessing."
         ],
-        "industry_impact_zh": "此类高频基础设施宕机事件暴露了美国软件供应链在复杂系统架构下的脆弱性，单一供应商或维护方的失误极易引发连锁式级联故障。在当前地缘对抗压力下，行政层面对非攻击性的定性旨在平抑市场恐慌，但实质上凸显了分布式系统在容灾架构与合规审计上存在的严重短板。",
-        "industry_impact_en": "High-frequency infrastructure failures reveal critical vulnerabilities in the U.S. software supply chain, where single-point failures in complex systems trigger massive cascading effects. While the executive branch's attribution aims to curb market panic, the reality underscores a systemic deficiency in disaster recovery architectures and oversight protocols for critical digital assets."
+        "industry_impact_zh": "AI训练阶段的数据工程瓶颈正从算力向数据存取效率转移，LanceDB通过对开源Lance格式的商业化封装，切入了向量数据库与传统数据湖之间的市场真空地带。这种架构避开了存算耦合的沉重资产模式，通过提供与云存储直连的中间层，有望成为大模型开发栈中极具黏性的数据资产管理标准。",
+        "industry_impact_en": "The bottleneck in AI training is shifting from raw compute to data retrieval latency, positioning LanceDB to capture the vacuum between vector databases and traditional data lakes. By monetizing the Lance format, the company provides an decoupled, cloud-native middle layer that is poised to become a critical infrastructure standard for data orchestration."
       },
       "headlines": [
+        {
+          "id": "0465d1c4a5573abf",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "LanceDB完成5750万美元B轮融资",
+          "title_en": "LanceDB, which makes a multimodal lakehouse for AI training, built on the open format Lance, raised a $57.5M Series B led by Bessemer and Innovation Endeavors (Kyt Dotson/SiliconANGLE)",
+          "source": "SiliconANGLE",
+          "published_at": "2026-11-18T04:30:05+00:00",
+          "url": "https://siliconangle.com/2026/11/17/lancedb-raises-57-5m-to-accelerate-ai-model-training-with-multimodal-data-platform/",
+          "event_summary_zh": "AI多模态数据底座公司LanceDB获5750万美元B轮融资，将用于加速构建统一AI多模态数据湖仓",
+          "event_summary_en": "LanceDB has secured $57.5 million in Series B funding, led by Bessemer Venture Partners and Innovation Endeavors, bringing its total capital to $98.5 million. Built on the open-source Lance format, the company provides a multimodal data lakehouse that unifies structured and unstructured data, addressing infrastructure bottlenecks in AI training workflows.",
+          "core_facts_zh": [
+            "【核心事件】LanceDB Inc. 首席执行官 Chang She在企业融资市场：完成5750万美元B轮融资，用于构建统一AI多模态数据湖仓",
+            "【起因与机理】解决模型训练中多模态数据存储与检索的碎片化管理成本问题",
+            "【关键数据与实测】融资规模：5750万美元B轮，总融资额达9850万美元。",
+            "【各方立场与态度】行业痛点：解决多模态数据源碎片化带来的预处理效率问题。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Chang She, CEO of LanceDB Inc. (Corporate financing market): Raised $57.5M in Series B for a multimodal data lakehouse",
+            "[Root Cause & Mechanism] To address infrastructure inefficiencies in managing and preparing large-scale AI training datasets",
+            "[Key Metrics] Financing: $57.5M Series B, $98.5M total.",
+            "[Key Position & Outlook] Market Pain Point: Eliminating fragmentation in AI training data preprocessing."
+          ],
+          "industry_impact_zh": "AI训练阶段的数据工程瓶颈正从算力向数据存取效率转移，LanceDB通过对开源Lance格式的商业化封装，切入了向量数据库与传统数据湖之间的市场真空地带。这种架构避开了存算耦合的沉重资产模式，通过提供与云存储直连的中间层，有望成为大模型开发栈中极具黏性的数据资产管理标准。",
+          "industry_impact_en": "The bottleneck in AI training is shifting from raw compute to data retrieval latency, positioning LanceDB to capture the vacuum between vector databases and traditional data lakes. By monetizing the Lance format, the company provides an decoupled, cloud-native middle layer that is poised to become a critical infrastructure standard for data orchestration."
+        },
+        {
+          "id": "a70c1c3f691e1eb3",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "NVIDIA前高管被质疑介入Super Micro销售链",
+          "title_en": "Sources: former Nvidia exec Jay Puri, who oversaw chip clients like Alice Huang, controlled chip sales to Super Micro; Puri is married to an ex-Super Micro exec (The Information)",
+          "source": "The Information",
+          "published_at": "2026-11-18T04:15:00+00:00",
+          "url": "https://www.theinformation.com/articles/jensen-huangs-right-hand-man-oversaw-chip-customers-including-alice-huang",
+          "event_summary_zh": "Muddy Waters做空NVIDIA，质疑其前高管Ajay K. Puri与其核心客户Super Micro相关人员存在利益关联",
+          "event_summary_en": "Muddy Waters has initiated a short position on NVIDIA, alleging undisclosed personal ties between former EVP Ajay K. Puri and former Super Micro Chief Growth Officer Cenly Chen. The move raises concerns over potential insider influence in GPU allocation, adding complexity to NVIDIA's current regulatory turmoil, including Congressional investigations into Chinese export control compliance.",
+          "core_facts_zh": [
+            "【核心事件】NVIDIA前执行副总裁 Ajay K. Puri；Super Micro前首席增长官 Cenly Chen在美国资本市场与众议院委员会调查：Muddy Waters通过做空报告指控双方存在潜在关联交易风险",
+            "【起因与机理】因NVIDIA正面临CEO辞职危机与美国众议院关于中国芯片出口合规的多重审查",
+            "【关键数据与实测】Finance readers: 55% off for Black Friday, plus an extra 15% at checkout. Subscribe today。",
+            "【行业影响与走向】后续影响：面临国会听证与潜在的SEC合规性审查双重压力。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Ajay K. Puri (Former EVP, NVIDIA); Cenly Chen (Former CGO, Super Micro): Short seller allegations regarding potential insider influence and conflict of interest",
+            "[Root Cause & Mechanism] Heightened scrutiny following the CEO's resignation and ongoing congressional investigations into export compliance",
+            "[Key Metrics] 18% Trading disclosure The above button links to Coinbase.",
+            "[Key Position & Outlook] Outlook: Increasing pressure from Congressional hearings and potential SEC scrutiny."
+          ],
+          "industry_impact_zh": "此事件标志着NVIDIA的合规风险正从单纯的出口政策合规扩展至深度的公司治理与供应链权力制衡领域。在GPU极度稀缺的卖方市场，高管与核心分销商/集成商间的私人网络若未隔离，将直接冲击市场公平竞争原则，可能引发证监会（SEC）层面的进一步调查，导致供应链利益相关者的资产重估。",
+          "industry_impact_en": "This development marks a shift in NVIDIA's risk profile from regulatory export compliance to internal governance and supply chain integrity. In a supply-constrained market, opaque ties between executives and key integrators create systemic fragility, potentially inviting SEC-level oversight and forcing a revaluation of its distribution channels."
+        },
         {
           "id": "3a35f36396010f6b",
           "tag_zh": "📰 业界动态",
@@ -57,64 +109,12 @@
           ],
           "industry_impact_zh": "此类高频基础设施宕机事件暴露了美国软件供应链在复杂系统架构下的脆弱性，单一供应商或维护方的失误极易引发连锁式级联故障。在当前地缘对抗压力下，行政层面对非攻击性的定性旨在平抑市场恐慌，但实质上凸显了分布式系统在容灾架构与合规审计上存在的严重短板。",
           "industry_impact_en": "High-frequency infrastructure failures reveal critical vulnerabilities in the U.S. software supply chain, where single-point failures in complex systems trigger massive cascading effects. While the executive branch's attribution aims to curb market panic, the reality underscores a systemic deficiency in disaster recovery architectures and oversight protocols for critical digital assets."
-        },
-        {
-          "id": "f7e430662d712486",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "英伟达董事会内部分化：部分成员推动黄仁勋回归",
-          "title_en": "Sources: a faction of Nvidia board members is pushing for Jensen Huang's return despite Chair Harvey Jones stating the board has no plans to reinstate Huang (Semafor)",
-          "source": "Semafor",
-          "published_at": "2026-11-18T02:50:08+00:00",
-          "url": "https://www.semafor.com/article/11/17/2026/some-nvidia-directors-push-to-bring-huang-back-despite-board-opposition",
-          "event_summary_zh": "英伟达董事会成员正就黄仁勋去留问题产生分歧，部分董事私下接触黄仁勋商讨回归可能性，而主席哈维·琼斯则重申目前无此计划",
-          "event_summary_en": "A faction within Nvidia’s board is actively pushing for the return of former CEO Jensen Huang despite Chairman Harvey Jones' public denial of any such plans. Meanwhile, the board is concurrently vetting candidates for the CEO vacancy, including ARM CEO Rene Haas and Marvell CEO Matt Murphy, amid growing internal governance friction.",
-          "core_facts_zh": [
-            "【核心事件】英伟达主席哈维·琼斯、前CEO黄仁勋、ARM CEO雷内·哈斯、Marvell CEO马特·墨菲在英伟达董事会内部治理与继任考察流程：部分董事游说黄仁勋回归，董事会高层公开辟谣，同步推进外部候选人甄选",
-            "【起因与机理】公司权力核心重构期间的治理结构矛盾与市场对黄仁勋领导力的依赖",
-            "【核心事实细节】董事会内部存在支持黄仁勋复职的压力群体，与现任主席哈维·琼斯的官方立场直接对立。",
-            "【行业影响与走向】公司治理僵局将直接影响英伟达在下一代AI芯片研发与产能布局的战略延续性。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Nvidia Chairman Harvey Jones, former CEO Jensen Huang, ARM CEO Rene Haas, Marvell CEO Matt Murphy: Internal lobbying for Huang's reinstatement, official denial by the Chairman, and parallel candidate search",
-            "[Root Cause & Mechanism] Internal governance conflict and market reliance on leadership stability during a transition period",
-            "[Key Fact Detail] Internal board division between pro-Huang factions and the official position led by Chairman Harvey Jones.",
-            "[Industry Impact & Outlook] Governance impasse threatening the strategic continuity of AI chip R&D and supply chain management."
-          ],
-          "industry_impact_zh": "黄仁勋作为英伟达核心战略资产与文化符号，其离职导致董事会决策层与市场信心的割裂。当前的继任者寻觅因涉及复杂竞业与并购背景受阻，此番内部分裂若持续，将直接威胁英伟达在高性能AI计算市场的绝对领先地位及供应链协作稳定性。",
-          "industry_impact_en": "As the foundational architect of Nvidia's AI hegemony, Huang's departure creates a volatile power vacuum that threatens both market capitalization and supply chain predictability. The ongoing internal boardroom friction and the complexity of vetting external CEOs signify a high-risk transition period that could compromise Nvidia’s execution roadmap."
-        },
-        {
-          "id": "825ff42b94ff06f2",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "华为应对美国刑事指控案件进入陪审团裁决阶段",
-          "title_en": "Huawei says US put ‘sinister spin’ on business activities, failed to prove charges at trial",
-          "source": "Reuters",
-          "published_at": "2026-11-18T02:45:01+00:00",
-          "url": "https://www.reuters.com/legal/litigation/huawei-says-us-put-sinister-spin-business-activities-failed-prove-charges-trial-2026-11-18/",
-          "event_summary_zh": "美国布鲁克林联邦法院就华为被控银行欺诈及窃取商业机密一案进入结案陈词阶段，陪审团即将开始审议",
-          "event_summary_en": "US federal prosecutors accused Huawei of a 20-year scheme to defraud financial institutions regarding its Iran operations and conspiring to steal trade secrets from five American tech firms, characterizing it as a criminal enterprise. Huawei's defense lawyer, Brian Heberlig, countered in closing arguments that the prosecution failed to prove its charges, asserting that the banks were aware of the risks and that Huawei's market success was earned through innovation rather than illicit activities.",
-          "core_facts_zh": [
-            "【核心事件】华为（被告）、美国联邦检察官Meredith Arfa、华为代理律师Brian Heberlig在美国布鲁克林联邦法院：针对银行欺诈、盗窃商业机密及运营犯罪企业的刑事指控进行结案陈词",
-            "【起因与机理】针对2018年以来美国对华为的系列制裁与法律调查收尾",
-            "【核心事实细节】美检方指控华为涉及银行欺诈、窃取机密及犯罪经营。",
-            "【行业影响与走向】案件进入陪审团审议阶段，裁决结果可能影响华为全球金融合规路径。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Huawei (defendant), Prosecutor Meredith Arfa, Defense Counsel Brian Heberlig (US Federal Court in Brooklyn): Closing arguments regarding charges of bank fraud, trade secret theft, and operating a criminal enterprise",
-            "[Root Cause & Mechanism] Conclusion of legal investigations originating from the 2018 charges",
-            "[Regulatory & Investigation Focus] US prosecution alleges bank fraud, trade secret theft, and criminal enterprise activity.",
-            "[Industry Impact & Outlook] Jury deliberations commence, with potential long-term impacts on Huawei's global financial compliance."
-          ],
-          "industry_impact_zh": "此案不仅是法律层面的诉讼，更是美国通过司法长臂管辖阻断华为全球融资能力与产业扩张的核心手段。若陪审团判定罪名成立，将极大增加华为在海外市场供应链获取与跨境金融结算的合规成本，标志着中美科技摩擦从纯粹的实体清单管制向深度法律围堵演进。",
-          "industry_impact_en": "This case functions as a key instrument for the US to leverage judicial long-arm jurisdiction to disrupt Huawei's global financing and industrial expansion. A guilty verdict would significantly increase Huawei's compliance costs in supply chain procurement and cross-border financial settlements, signaling a shift in US-China tech friction from entity-list restrictions to comprehensive legal containment."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-18 04:19:26 UTC",
+      "updated_at": "2026-11-18 04:34:08 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-18 04:19:26 UTC",
+      "updated_at": "2026-11-18 04:34:08 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,050)",
+            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,051)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +3,817 stars this week (25,050 total)",
+            "📈 Exponential community momentum: +3,817 stars this week (25,051 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],

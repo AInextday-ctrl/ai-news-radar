@@ -8,6 +8,26 @@
 
 ## 第一部分：突发 AI 快讯与结构化事实研判
 
+### LanceDB完成5750万美元B轮融资
+- 落地页链接: https://ainewsradar.xyz/zh/news/0465d1c4a5573abf
+- 原始信源: SiliconANGLE (https://siliconangle.com/2026/11/17/lancedb-raises-57-5m-to-accelerate-ai-model-training-with-multimodal-data-platform/)
+- 核心摘要: AI多模态数据底座公司LanceDB获5750万美元B轮融资，将用于加速构建统一AI多模态数据湖仓
+- 核验事实清单:
+  * 【核心事件】LanceDB Inc. 首席执行官 Chang She在企业融资市场：完成5750万美元B轮融资，用于构建统一AI多模态数据湖仓
+  * 【起因与机理】解决模型训练中多模态数据存储与检索的碎片化管理成本问题
+  * 【关键数据与实测】融资规模：5750万美元B轮，总融资额达9850万美元。
+  * 【各方立场与态度】行业痛点：解决多模态数据源碎片化带来的预处理效率问题。
+
+### NVIDIA前高管被质疑介入Super Micro销售链
+- 落地页链接: https://ainewsradar.xyz/zh/news/a70c1c3f691e1eb3
+- 原始信源: The Information (https://www.theinformation.com/articles/jensen-huangs-right-hand-man-oversaw-chip-customers-including-alice-huang)
+- 核心摘要: Muddy Waters做空NVIDIA，质疑其前高管Ajay K. Puri与其核心客户Super Micro相关人员存在利益关联
+- 核验事实清单:
+  * 【核心事件】NVIDIA前执行副总裁 Ajay K. Puri；Super Micro前首席增长官 Cenly Chen在美国资本市场与众议院委员会调查：Muddy Waters通过做空报告指控双方存在潜在关联交易风险
+  * 【起因与机理】因NVIDIA正面临CEO辞职危机与美国众议院关于中国芯片出口合规的多重审查
+  * 【关键数据与实测】Finance readers: 55% off for Black Friday, plus an extra 15% at checkout. Subscribe today。
+  * 【行业影响与走向】后续影响：面临国会听证与潜在的SEC合规性审查双重压力。
+
 ### 卢比奥否认近期美技术宕机系系统性攻击
 - 落地页链接: https://ainewsradar.xyz/zh/news/3a35f36396010f6b
 - 原始信源: CBS News (https://www.cbsnews.com/news/marco-rubio-tech-outages-not-connected/)
@@ -288,26 +308,6 @@
   * 【核心事实细节】谷歌将临时对话数据留存期从72小时延长至约两个月。
   * 【各方立场与态度】明确声明临时对话数据不用于任何模型训练过程。
 
-### 谷歌发布免费AI智能体Tasks
-- 落地页链接: https://ainewsradar.xyz/zh/news/2cededdf6305daa5
-- 原始信源: The Verge AI (https://www.theverge.com/tech/1035756/google-spark-ai-tasks-free)
-- 核心摘要: 谷歌将原Spark AI智能体更名为Tasks并向全球多地免费开放，由Gemini 4 Hydrogen模型驱动以执行自动化代理任务
-- 核验事实清单:
-  * 【核心事件】Google（谷歌）在Gemini应用界面：发布Gemini 4 Hydrogen模型驱动的Tasks智能体并实现跨地域免费提供
-  * 【起因与机理】通过强化代理式AI应用以提升用户生态黏性，并推进AI从对话向任务执行转型
-  * 【核心事实细节】智能体更名为Tasks并向全球多地用户免费开放。
-  * 【各方立场与态度】执行金融敏感任务需强制执行二次权限确认。
-
-### 脑机接口与记忆云端化：认知永生前沿探索
-- 落地页链接: https://ainewsradar.xyz/zh/news/745a12593f501e9a
-- 原始信源: MIT Tech Review (https://www.technologyreview.com/2026/11/17/1148049/roundtables-inside-the-quest-for-cognitive-immortality/)
-- 核心摘要: 麻省理工科技评论资深编辑探讨脑机接口与记忆上传技术，评估将人类认知连续性超越生物学死亡限制的可能性
-- 核验事实清单:
-  * 【核心事件】Antonio Regalado（生物医学高级编辑）、Mary Beth Griggs（科学编辑）在麻省理工科技评论圆桌专题讨论：探讨渐进式脑组织替换与记忆云端上传技术路线
-  * 【起因与机理】旨在寻找实现自我意识跨越生物生命周期的可行性方案
-  * 【核心事实细节】核心议题：探索超越生物生理限制的自我意识连续性与认知永生。
-  * 【各方立场与态度】行业意义：标志着脑机接口从修复医学向认知备份与数字生存范式的跨越。
-
 ---
 
 ## 第二部分：开发者落地工具全量评测
@@ -388,8 +388,8 @@
 - 落地页链接: https://ainewsradar.xyz/zh/tools/1c5edee7c934959a
 - 官方/开源地址: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - 一句话亮点: 用于编码代理的 Chrome DevTools
-- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,948 Stars，总计 58,076 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
-- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,948 Stars (总星标 58,076)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
+- 核心概览: chrome-devtools-mcp 是一款专注于 💻 AI 编程与开发 的开源 AI 工具（本周新增 +2,948 Stars，总计 58,078 Stars）。用于编码代理的 Chrome DevTools，支持免费部署与使用。
+- 功能矩阵: ['📈 社区热度指数级飙升：本周新增 +2,948 Stars (总星标 58,078)', '🎯 针对 💻 AI 编程与开发 场景深度调优与工程封装', '⚡ 支持 ⚡ 命令行/一键执行，开箱即用']
 - 适用人群与场景: 适合需要本地部署、二次开发或私有化运行 💻 AI 编程与开发 的工程师与技术团队
 - 快速启动指令: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
