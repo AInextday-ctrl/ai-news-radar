@@ -862,6 +862,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if domain == "openai.com" or domain.endswith(".openai.com"):
+            try:
+                from crawlers.openai_crawler import crawl_openai
+                oai_data = crawl_openai(url, html_text=html_text)
+                if oai_data.get("is_filtered_out"):
+                    result.update(oai_data)
+                    return result
+                if oai_data.get("is_substantive") or oai_data.get("paras_count", 0) >= 1 or oai_data.get("title"):
+                    result.update(oai_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

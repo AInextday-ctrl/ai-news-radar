@@ -1150,6 +1150,7 @@ def load_existing_items() -> list:
     ars_live_budget = 4
     cnbc_live_budget = 4
     decoder_live_budget = 4
+    openai_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2245,6 +2246,61 @@ def load_existing_items() -> list:
                                 zh_chunks.append(tr.strip())
                         if zh_chunks:
                             it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.16 OpenAI (openai.com) 官方博客隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and ("://openai.com/" in str(it.get("url") or "").lower() or "://www.openai.com/" in str(it.get("url") or "").lower()):
+            u_now = str(it.get("url") or "")
+            ts_oai = _extract_item_ts(it)
+            is_recent_oai = (ts_oai > 0) and ((now_ts_load - ts_oai) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            auth_curr = str(it.get("author") or "")
+            if any("\u4e00" <= c <= "\u9fff" for c in auth_curr):
+                it["author"] = "OpenAI"
+                auth_curr = "OpenAI"
+            needs_oai_fix = is_recent_oai and openai_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                "opens in a new window" in art_en_curr.lower() or
+                not img_curr.startswith("https://ainewsradar.xyz/images/openai_") or
+                (len(art_en_curr) > 2000 and len(art_zh_curr) < len(art_en_curr) * 0.25)
+            )
+            if needs_oai_fix:
+                openai_live_budget -= 1
+                try:
+                    from crawlers.openai_crawler import crawl_openai
+                    o_data = crawl_openai(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if o_data.get("is_filtered_out"):
+                        continue
+                    if o_data.get("title"):
+                        it["title"] = o_data["title"]
+                        it["title_en"] = o_data["title"]
+                    it["author"] = o_data.get("author") or "OpenAI"
+                    if o_data.get("cover_image") and str(o_data["cover_image"]).startswith("http"):
+                        it["image_url"] = o_data["cover_image"]
+                        it["cover_image"] = o_data["cover_image"]
+                    if o_data.get("is_substantive") and o_data.get("full_text"):
+                        it["paragraphs"] = o_data.get("paragraphs", [])
+                        it["subheadings"] = o_data.get("subheadings", [])
+                        it["article_content"] = o_data["full_text"]
+                        it["article_content_en"] = o_data["full_text"]
+                        it["inline_images"] = o_data.get("inline_images", [])
+                        if o_data.get("inline_videos"):
+                            it["inline_videos"] = o_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = o_data["full_text"]
+                    if o_data.get("has_video") and o_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = o_data["video_url"]
+                        if o_data.get("video_id"):
+                            it["video_id"] = o_data["video_id"]
+                        it["video_provider"] = o_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if o_data.get(vk):
+                                it[vk] = o_data[vk]
                 except Exception:
                     pass
 
