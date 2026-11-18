@@ -1,62 +1,62 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-18 10:33:02 UTC",
+  "generated_at": "2026-11-18 10:46:26 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-18 10:33:02 UTC",
+      "updated_at": "2026-11-18 10:46:26 UTC",
       "headline_item": {
-        "id": "2297282a32991c9f",
+        "id": "e031d480ae5815c4",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "Suno推出视觉生成功能，整合MiniMax模型拓展AI创作边界",
-        "title_en": "Suno's new Visuals feature pairs AI-generated music with AI-generated video",
-        "source": "THE DECODER",
-        "published_at": "2026-11-18T10:22:45+00:00",
-        "url": "https://the-decoder.com/sunos-new-visuals-feature-pairs-ai-generated-music-with-ai-generated-video/",
-        "event_summary_zh": "AI音乐生成平台Suno推出Visuals功能，通过调用MiniMax的H3 Move视频模型，实现音乐与视频内容的自动化同步生成",
-        "event_summary_en": "Suno has launched its Visuals feature, utilizing a safety-filtered version of MiniMax’s H3 Move video model to generate synchronized video clips of up to 15 seconds. The feature supports lyric-based lip-syncing and allows users to create content via prompts or reference images, while incorporating mandatory watermarking and copyright filters.",
+        "title_zh": "Osmo研发嗅觉基础模型实现人脑级识别",
+        "title_en": "This smell startup says its AI nose is as good as a human’s",
+        "source": "MIT Tech Review",
+        "published_at": "2026-11-18T10:20:30+00:00",
+        "url": "https://www.technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans/",
+        "event_summary_zh": "AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用",
+        "event_summary_en": "Osmo, founded by former Google Brain researcher Alex Wiltschko, has developed the first foundation model for smell using a proprietary dataset of 10 million human labels and 800 million 'scent tokens'. The model demonstrates human-level proficiency in identifying and synthesizing scents, outperforming professional perfumers in tests conducted by major global consumer goods companies.",
         "core_facts_zh": [
-          "【核心事件】Suno (AI音乐生成平台)；MiniMax (模型提供方)在Suno网页端、iOS及Android应用平台：发布Visuals功能，引入H3 Move模型，支持生成15秒内与音乐联动的AI视频",
-          "【起因与机理】在音乐生成基础上整合视觉模态以提升产品竞争力，同时通过水印机制缓解版权诉讼带来的舆论与合规风险",
-          "【关键技术规格】Suno整合MiniMax的H3 Move模型，实现AI音频到视觉内容的自动化生产。",
-          "【各方立场与态度】在慕尼黑地方法院版权判决及大型唱片公司诉讼背景下，此举旨在平衡用户体验与合规化运营。"
+          "【核心事件】Osmo创始人 Alex Wiltschko在美国新泽西州纽瓦克实验室：通过化学传感器分析与人工嗅觉标注，构建气味基础模型并投入香氛商业化应用",
+          "【起因与机理】利用数据驱动的机器学习填补气味科学中长期存在的“数据集匮乏”及行业封闭性缺口",
+          "【关键数据与实测】Osmo构建了涵盖1000万人工标注与8亿气味Token的独特数据集。",
+          "【各方立场与态度】未来有望扩展至机场安检、疾病辅助诊断等复杂感知场景。"
         ],
         "core_facts_en": [
-          "[Core Event] Suno; MiniMax (Web, iOS, and Android platforms): Launched 'Visuals' feature utilizing H3 Move model for 15-second music-synced video generation",
-          "[Root Cause & Mechanism] To expand multi-modal capabilities and mitigate ongoing copyright litigation through embedded watermarking and safety filters",
-          "[Key Technical Spec] Integration of MiniMax's H3 Move model for AI-driven visual production.",
-          "[Official Stance & Demand] Strategic response to ongoing copyright lawsuits and regulatory pressure."
+          "[Core Event] Alex Wiltschko, Founder of Osmo (Lab in Newark, New Jersey): Built a foundation model for olfaction using chemical sensor data and human labeling for commercial fragrance design",
+          "[Root Cause & Mechanism] To bridge the data scarcity and industry secrecy in olfactory science through large-scale machine learning",
+          "[Key Metrics] The Gates Foundation, which invested $5 million when Osmo launched, later gave the company a $3.",
+          "[Key Position & Outlook] Future applications target airport security and medical diagnostics."
         ],
-        "industry_impact_zh": "Suno的此次技术整合不仅是产品功能的垂类延伸，更标志着AI内容生成领域已进入“音乐-视觉”强耦合的垂直化竞争阶段。通过引入水印与版权过滤机制，公司旨在通过建立技术合规防火墙，在持续的音乐版权诉讼风波中通过提升产品闭环价值来稳固商业基本盘。",
-        "industry_impact_en": "Suno's integration signals a shift toward tight 'music-to-visual' coupling, marking a competitive move into specialized multi-modal content creation. By embedding watermarks and copyright filters, Suno is attempting to build a technical compliance moat to protect its commercial viability amid mounting litigation from major labels."
+        "industry_impact_zh": "嗅觉数字化是AI在非视觉/听觉感知领域的最后一片蓝海，Osmo通过将气味分子转化为可量化的“Token”，成功绕过了传统香氛行业高度依赖个人经验的闭环壁垒。该技术若在机场安检或病理诊断场景实现低成本部署，将重塑感官传感器产业链，推动生物感知计算进入商业化深水区。",
+        "industry_impact_en": "Olfactory digitalization represents the final frontier for AI in sensory perception, where Osmo has bypassed industry opacity by tokenizing molecular data. If successfully deployed in low-cost hardware for threat detection or diagnostics, this will disrupt the sensory sensor supply chain and accelerate the commercialization of biological sensory computing."
       },
       "headlines": [
         {
-          "id": "2297282a32991c9f",
+          "id": "e031d480ae5815c4",
           "tag_zh": "📰 业界动态",
           "tag_en": "📰 Industry News",
-          "title_zh": "Suno推出视觉生成功能，整合MiniMax模型拓展AI创作边界",
-          "title_en": "Suno's new Visuals feature pairs AI-generated music with AI-generated video",
-          "source": "THE DECODER",
-          "published_at": "2026-11-18T10:22:45+00:00",
-          "url": "https://the-decoder.com/sunos-new-visuals-feature-pairs-ai-generated-music-with-ai-generated-video/",
-          "event_summary_zh": "AI音乐生成平台Suno推出Visuals功能，通过调用MiniMax的H3 Move视频模型，实现音乐与视频内容的自动化同步生成",
-          "event_summary_en": "Suno has launched its Visuals feature, utilizing a safety-filtered version of MiniMax’s H3 Move video model to generate synchronized video clips of up to 15 seconds. The feature supports lyric-based lip-syncing and allows users to create content via prompts or reference images, while incorporating mandatory watermarking and copyright filters.",
+          "title_zh": "Osmo研发嗅觉基础模型实现人脑级识别",
+          "title_en": "This smell startup says its AI nose is as good as a human’s",
+          "source": "MIT Tech Review",
+          "published_at": "2026-11-18T10:20:30+00:00",
+          "url": "https://www.technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans/",
+          "event_summary_zh": "AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用",
+          "event_summary_en": "Osmo, founded by former Google Brain researcher Alex Wiltschko, has developed the first foundation model for smell using a proprietary dataset of 10 million human labels and 800 million 'scent tokens'. The model demonstrates human-level proficiency in identifying and synthesizing scents, outperforming professional perfumers in tests conducted by major global consumer goods companies.",
           "core_facts_zh": [
-            "【核心事件】Suno (AI音乐生成平台)；MiniMax (模型提供方)在Suno网页端、iOS及Android应用平台：发布Visuals功能，引入H3 Move模型，支持生成15秒内与音乐联动的AI视频",
-            "【起因与机理】在音乐生成基础上整合视觉模态以提升产品竞争力，同时通过水印机制缓解版权诉讼带来的舆论与合规风险",
-            "【关键技术规格】Suno整合MiniMax的H3 Move模型，实现AI音频到视觉内容的自动化生产。",
-            "【各方立场与态度】在慕尼黑地方法院版权判决及大型唱片公司诉讼背景下，此举旨在平衡用户体验与合规化运营。"
+            "【核心事件】Osmo创始人 Alex Wiltschko在美国新泽西州纽瓦克实验室：通过化学传感器分析与人工嗅觉标注，构建气味基础模型并投入香氛商业化应用",
+            "【起因与机理】利用数据驱动的机器学习填补气味科学中长期存在的“数据集匮乏”及行业封闭性缺口",
+            "【关键数据与实测】Osmo构建了涵盖1000万人工标注与8亿气味Token的独特数据集。",
+            "【各方立场与态度】未来有望扩展至机场安检、疾病辅助诊断等复杂感知场景。"
           ],
           "core_facts_en": [
-            "[Core Event] Suno; MiniMax (Web, iOS, and Android platforms): Launched 'Visuals' feature utilizing H3 Move model for 15-second music-synced video generation",
-            "[Root Cause & Mechanism] To expand multi-modal capabilities and mitigate ongoing copyright litigation through embedded watermarking and safety filters",
-            "[Key Technical Spec] Integration of MiniMax's H3 Move model for AI-driven visual production.",
-            "[Official Stance & Demand] Strategic response to ongoing copyright lawsuits and regulatory pressure."
+            "[Core Event] Alex Wiltschko, Founder of Osmo (Lab in Newark, New Jersey): Built a foundation model for olfaction using chemical sensor data and human labeling for commercial fragrance design",
+            "[Root Cause & Mechanism] To bridge the data scarcity and industry secrecy in olfactory science through large-scale machine learning",
+            "[Key Metrics] The Gates Foundation, which invested $5 million when Osmo launched, later gave the company a $3.",
+            "[Key Position & Outlook] Future applications target airport security and medical diagnostics."
           ],
-          "industry_impact_zh": "Suno的此次技术整合不仅是产品功能的垂类延伸，更标志着AI内容生成领域已进入“音乐-视觉”强耦合的垂直化竞争阶段。通过引入水印与版权过滤机制，公司旨在通过建立技术合规防火墙，在持续的音乐版权诉讼风波中通过提升产品闭环价值来稳固商业基本盘。",
-          "industry_impact_en": "Suno's integration signals a shift toward tight 'music-to-visual' coupling, marking a competitive move into specialized multi-modal content creation. By embedding watermarks and copyright filters, Suno is attempting to build a technical compliance moat to protect its commercial viability amid mounting litigation from major labels."
+          "industry_impact_zh": "嗅觉数字化是AI在非视觉/听觉感知领域的最后一片蓝海，Osmo通过将气味分子转化为可量化的“Token”，成功绕过了传统香氛行业高度依赖个人经验的闭环壁垒。该技术若在机场安检或病理诊断场景实现低成本部署，将重塑感官传感器产业链，推动生物感知计算进入商业化深水区。",
+          "industry_impact_en": "Olfactory digitalization represents the final frontier for AI in sensory perception, where Osmo has bypassed industry opacity by tokenizing molecular data. If successfully deployed in low-cost hardware for threat detection or diagnostics, this will disrupt the sensory sensor supply chain and accelerate the commercialization of biological sensory computing."
         },
         {
           "id": "f886057b43271267",
@@ -114,7 +114,7 @@
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-18 10:33:02 UTC",
+      "updated_at": "2026-11-18 10:46:26 UTC",
       "author": "Sam Altman",
       "author_handle": "@sama",
       "author_role_zh": "OpenAI CEO",
@@ -281,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-18 10:33:02 UTC",
+      "updated_at": "2026-11-18 10:46:26 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
@@ -390,12 +390,12 @@
           "pain_point_zh": "大模型原生缺乏实时动态穿透互联网能力，无法自动化执行跨平台社交检索、动态渲染抓取与免凭证信息聚合。",
           "pain_point_en": "Frontier models lack direct dynamic web access, unable to seamlessly retrieve real-time cross-platform content.",
           "key_features_zh": [
-            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,146)",
+            "📈 社区热度指数级飙升：本周新增 +3,817 Stars (总星标 25,128)",
             "🎯 针对 🌐 联网搜索与浏览器 场景深度调优与工程封装",
             "⚡ 支持 ⚡ 命令行/一键执行，开箱即用"
           ],
           "key_features_en": [
-            "📈 Exponential community momentum: +3,817 stars this week (25,146 total)",
+            "📈 Exponential community momentum: +3,817 stars this week (25,128 total)",
             "🎯 Specialized engineering for Web Search & Browser Automation",
             "⚡ Native support for CLI & 1-Click Run"
           ],
