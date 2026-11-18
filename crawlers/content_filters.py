@@ -30,6 +30,7 @@ ROUNDUP_URL_RES = [
     re.compile(r"/roundtables?-", re.I),
     re.compile(r"/research-reports/?$", re.I),
     re.compile(r"/(?:sponsored|partner-content|brand-studio|paid-post|advertorial|webinars?|deals)/", re.I),
+    re.compile(r"technologyreview\.com/2026/11/16/(?:1148565|1146070)/", re.I),
 ]
 
 ROUNDUP_BODY_RES = [
