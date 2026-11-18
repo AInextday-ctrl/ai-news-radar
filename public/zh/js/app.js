@@ -9555,9 +9555,20 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const allImages = [];
       const primaryImg = item.image_url || item.cover_image || (item.media_assets && item.media_assets.cover_image);
       if (primaryImg && typeof primaryImg === 'string') allImages.push(primaryImg.trim());
-      const inlines = item.inline_images || (item.media_assets && item.media_assets.inline_images) || [];
+      const isAuthorAvatarImg = (entry) => {
+        const u = (typeof entry === 'string' ? entry : (entry && entry.url ? entry.url : '')).toLowerCase();
+        const cap = (typeof entry === 'object' && entry ? (entry.caption || entry.alt || '') : '').toLowerCase().trim();
+        const authLow = String(item.author || '').toLowerCase().trim();
+        if (!u) return true;
+        const avatarTokens = ['blurple', 'author_profile_images', 'headshot', 'avatar', 'byline', 'gravatar', 'profile_image', 'profile-pic', '-portrait-', '375x375', '150x150', '200x200', 'w_40,h_40', 'bloomberg-bna-brightspot'];
+        if (avatarTokens.some(tok => u.includes(tok))) return true;
+        if (authLow && authLow.length > 3 && (cap === authLow || cap === `by ${authLow}`)) return true;
+        return false;
+      };
+      const inlines = (item.inline_images || (item.media_assets && item.media_assets.inline_images) || []).filter(e => !isAuthorAvatarImg(e));
       inlines.forEach(img => {
-        if (img && typeof img === 'string' && !allImages.includes(img.trim())) allImages.push(img.trim());
+        const u = typeof img === 'string' ? img.trim() : (img && img.url ? img.url.trim() : '');
+        if (u && !allImages.includes(u)) allImages.push(u);
       });
 
       let validImages = allImages.filter(img => 
@@ -9829,7 +9840,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           }
         }
 
-        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh', item.inline_images, true);
+        originalTextEl.innerHTML = formatRichArticleContent(displayParas.join('\n\n'), activeArticleLang === 'zh', inlines, true);
 
         if (expandWrapEl && expandBtnEl && expandTextEl) {
           if (paras.length > 4) {

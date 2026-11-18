@@ -1518,8 +1518,7 @@ def load_existing_items() -> list:
                         it["subheadings"] = v_data.get("subheadings", [])
                         it["article_content"] = v_data["full_text"]
                         it["article_content_en"] = v_data["full_text"]
-                        if v_data.get("inline_images"):
-                            it["inline_images"] = v_data["inline_images"]
+                        it["inline_images"] = v_data.get("inline_images", [])
                         if v_data.get("has_video") and v_data.get("video_url"):
                             it["has_video"] = True
                             it["video_url"] = v_data["video_url"]

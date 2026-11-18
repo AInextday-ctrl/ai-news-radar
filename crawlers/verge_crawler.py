@@ -130,7 +130,9 @@ def _is_valid_verge_image(img_url: Optional[str]) -> bool:
     low = u.lower()
     bad_tokens = [
         "unsplash.com", "placeholder", "icon", "pixel", "avatar",
-        "favicon", "og-default", "1x1", "spacer", "verge_logo"
+        "favicon", "og-default", "1x1", "spacer", "verge_logo",
+        "blurple", "author_profile_images", "headshot", "byline",
+        "gravatar", "profile_image", "profile-pic", "-portrait-"
     ]
     return not any(b in low for b in bad_tokens)
 

@@ -1048,13 +1048,21 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             else:
                 paras[-1] = clean_last_p
 
-        # 提取真实文章正文配图与图表
+        # 提取真实文章正文配图与图表 (严禁作者头像/大头照/正方形个人照混入正文)
         raw_inline_images = item.get("inline_images", [])
         usable_images = []
         seen_img_urls = set()
         cover_url = item.get("image_url") or item.get("cover_image")
         if cover_url:
             seen_img_urls.add(cover_url.split("?")[0])
+        auth_name_low = str(item.get("author") or "").strip().lower()
+        auth_avatar_base = str(item.get("author_avatar") or "").split("?")[0].strip().lower()
+        AVATAR_URL_TOKENS = (
+            "blurple", "author_profile_images", "headshot", "avatar", "byline",
+            "gravatar", "profile_image", "profile-pic", "-portrait-",
+            "w_40,h_40", "w_48,h_48", "w_64,h_64", "w_80,h_80", "w_96,h_96",
+            "h_116,c_limit", "375x375", "150x150", "200x200", "bloomberg-bna-brightspot"
+        )
 
         for img_entry in raw_inline_images:
             if isinstance(img_entry, dict):
@@ -1066,6 +1074,15 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
             else:
                 continue
             if not i_url or (not i_url.startswith("http") and not i_url.startswith("/")):
+                continue
+            low_u = i_url.lower()
+            low_c = i_cap.lower().strip()
+            if (
+                (auth_avatar_base and auth_avatar_base in low_u) or
+                any(tok in low_u for tok in AVATAR_URL_TOKENS) or
+                (auth_name_low and len(auth_name_low) > 3 and low_c in (auth_name_low, f"by {auth_name_low}", f"photo of {auth_name_low}", f"headshot of {auth_name_low}")) or
+                low_c in ("thumbnail", "author", "avatar", source_name.lower())
+            ):
                 continue
             clean_k = i_url.split("?")[0]
             if clean_k in seen_img_urls:
