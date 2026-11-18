@@ -727,6 +727,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "wsj.com" in domain or "dowjones.com" in domain:
+            try:
+                from crawlers.wsj_crawler import crawl_wsj
+                wsj_data = crawl_wsj(url, html_text=html_text)
+                if wsj_data.get("is_substantive") or wsj_data.get("paras_count", 0) >= 1 or wsj_data.get("title"):
+                    result.update(wsj_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

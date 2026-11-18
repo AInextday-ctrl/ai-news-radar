@@ -10,6 +10,7 @@ Each news source has its own isolated crawler implementation to guarantee:
 from .reuters_crawler import crawl_reuters, is_reuters_url
 from .bloomberg_crawler import crawl_bloomberg, is_bloomberg_url, resolve_bloomberg_broadcast_media
 from .fortune_crawler import crawl_fortune, is_fortune_url
+from .wsj_crawler import crawl_wsj, is_wsj_url
 
 __all__ = [
     "crawl_reuters",
@@ -18,5 +19,7 @@ __all__ = [
     "is_bloomberg_url",
     "resolve_bloomberg_broadcast_media",
     "crawl_fortune",
-    "is_fortune_url"
+    "is_fortune_url",
+    "crawl_wsj",
+    "is_wsj_url"
 ]
