@@ -1,178 +1,77 @@
 {
-  "updated_at": "2026-11-17T20:20:35.642350+00:00",
+  "updated_at": "2026-11-18T00:38:09.765598+00:00",
   "topics": [
     {
-      "topic_id": "topic_openai_gpt62_release_strategy",
+      "topic_id": "topic_openai_gpt62_astra_vs_microsoft_mai",
       "heat_score": 9.8,
-      "badge_zh": "⚡ 商业与算力风暴",
-      "badge_en": "⚡ Compute & Market Storm",
-      "category_tag_zh": "模型定价与效能博弈",
-      "category_tag_en": "Model Pricing & Efficacy Gaming",
-      "title_zh": "OpenAI发布GPT-6.2系列：通过降价与分级构建高壁垒生态",
-      "title_en": "OpenAI Launches GPT-6.2: High-Performance Tiers Meet Aggressive Pricing",
-      "summary_zh": "OpenAI推出GPT-6.2 Astra与Sol模型，前者主打高复杂度科学推理，后者专注日常任务。核心争议在于其通过20%的降价策略进一步挤压中小模型厂商的生存空间，同时被质疑产品接口解析难度增加，缺乏对知识盲区的自我认知。",
-      "summary_en": "OpenAI releases GPT-6.2 Astra and Sol, segmenting professional vs. daily workflows. While the 20% price drop targets enterprise market dominance, critics argue the model lacks awareness of knowledge gaps and provides output formats that are increasingly difficult for developers to parse.",
+      "badge_zh": "🔥 24h 领跑爆点",
+      "badge_en": "🔥 24h Breakthrough",
+      "category_tag_zh": "大模型价格战与工程落地",
+      "category_tag_en": "Frontier Model Price War & Deployments",
+      "title_zh": "OpenAI发布GPT-6.2降价反攻，微软MAI以四折成本掀工程围剿",
+      "title_en": "OpenAI Launches GPT-6.2 Astra with Price Cuts as Microsoft Strikes Back with 40%-Cost MAI",
+      "summary_zh": "OpenAI正式推出GPT-6.2 Astra与Sol，全面下调API定价并在AA-3D等交互基准上领跑。微软随即在Ignite发布MAI Code 2等六款专有模型反制，宣称以40%价格实现GPT-6.1 Sol 98%的性能，通用巨模型与垂直小模型的成本割喉战全面打响。",
+      "summary_en": "OpenAI released GPT-6.2 Astra and Sol with lower API fees, sweeping interactive 3D and media benchmarks. Microsoft countered instantly at Ignite with six proprietary models, led by MAI Code 2, delivering 98% of GPT-6.1 Sol's coding performance at just 40% of the cost, triggering a direct foundation-versus-vertical price war.",
       "perspective_pro": {
-        "role_zh": "🟢 演进派 / OpenAI支持者",
-        "role_en": "🟢 Evolutionist / Pro-OpenAI",
-        "speaker_zh": "OpenAI产品工程团队",
-        "speaker_en": "OpenAI Product Engineering Team",
-        "point_zh": "通过优化输入输出代币配比，GPT-6.2在处理复杂任务时表现出更高的性价比，能有效降低企业级复杂应用的部署与迭代门槛。",
-        "point_en": "Optimized input/output token ratios in GPT-6.2 offer unmatched cost-efficiency for complex enterprise tasks, drastically lowering the barrier to entry for high-stakes AI applications."
+        "role_zh": "🟢 生产力演进派 / 全栈开发者社区",
+        "role_en": "🟢 Frontier Productivity Proponent / Dev Community",
+        "speaker_zh": "Artificial Analysis基准团队与独立AI全栈工程师",
+        "speaker_en": "Artificial Analysis Benchmarking Team & Indie AI Engineers",
+        "point_zh": "GPT-6.2 Astra展现出原生级空间几何与连续帧理解力，API大幅降价抹平了生产力壁垒，全功能大模型依然是驱动复杂多模态管线的最优解。",
+        "point_en": "GPT-6.2 Astra sets an undisputed high bar in native spatial 3D reasoning and continuous-cut media editing. Slashed API fees directly dismantle the unit-economics barrier for high-complexity multimodal pipelines."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业理性派 / 开发者群体",
-        "role_en": "🔴 Industrial Pragmatist / Dev Community",
-        "speaker_zh": "独立AI开发者",
-        "speaker_en": "Independent AI Developers",
-        "point_zh": "频繁的模型迭代与模糊的知识边界表现让开发者极其沮丧，复杂化的输出格式增加了调试成本，且模型缺乏对自身能力边界的感知。",
-        "point_en": "Frequent model updates and erratic performance in knowledge boundaries make integration frustrating. The complex output formats increase debugging overhead without clear competency guarantees."
+        "role_zh": "🔴 工业理性派 / 企业架构成本核算专家",
+        "role_en": "🔴 Pragmatic Systems Architect / IT Cost Controller",
+        "speaker_zh": "微软云方案架构师与跨国企业首席信息官群体",
+        "speaker_en": "Microsoft Enterprise Cloud Architects & Corporate CIOs",
+        "point_zh": "通用超大模型的所谓全能溢价正在崩解，企业代码与安防不需要昂贵的通识堆砌，微软MAI以40%成本逼平顶级性能才是工业落地分水岭。",
+        "point_en": "The premium charged by monolithic generalist models is facing massive margin compression. Enterprise workloads require narrow, hyper-efficient SLMs like MAI Code 2 that deliver parity at 40% the compute budget."
       },
       "linked_news": [
         {
-          "id": "33776898231d84a2",
-          "title_zh": "GPT-6.2 Astra 的输入成本为 8/100 万美元，输出代币为 40/100 万美元，比 GPT-6 Astra 下降了 20%； GPT-6.2 Sol 保持 GPT-6.1 Sol 的 2/100 万美元输入和 10/100 万美元输出代币定价",
-          "title_en": "GPT-6.2 Astra costs $8/1M input and $40/1M output tokens, down 20% from GPT-6 Astra; GPT-6.2 Sol keeps GPT-6.1 Sol's $2/1M input and $10/1M output token pricing (Zac Hall/9to5Mac)",
-          "source": "9to5Mac",
-          "url": "https://9to5mac.com/2026/11/17/openai-upgrades-chatgpt-and-codex-with-new-gpt-6-2-astra-and-sol-models/",
-          "image_url": "https://9to5mac.com/wp-content/uploads/sites/6/2026/09/chatgpt-codex-gpt-6-astra-1.webp?resize=1200,628",
-          "hot_score": 3,
-          "published_at": "2026-11-17T18:15:03+00:00"
-        },
-        {
-          "id": "bb302d19327d86b5",
-          "title_zh": "OpenAI发布GPT-6.2系列模型，主打高性价比与科学推理能力",
-          "title_en": "OpenAI launches GPT-6.2 Astra, its new frontier model for \"complex professional work\", and GPT-6.2 Sol, its new \"go-to model for everyday work\" (OpenAI)",
-          "source": "OpenAI",
-          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
-          "image_url": "https://cdn.openai.com/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png",
+          "id": "653f61725664aed1",
+          "title_zh": "OpenAI发布GPT-6.2系列模型并下调API定价",
+          "title_en": "OpenAI launches GPT-6.2 Astra and Sol with lower API prices and some benchmark gains",
+          "source": "THE DECODER",
+          "url": "https://the-decoder.com/openai-launches-gpt-6-2-astra-and-sol-with-lower-api-prices-and-some-benchmark-gains/",
+          "image_url": "https://the-decoder.com/wp-content/uploads/2026/11/openai_vals_sol.png",
           "hot_score": 5,
-          "published_at": "2026-11-17T18:00:57+00:00"
+          "published_at": "2026-11-17T20:30:50+00:00"
         },
         {
-          "id": "d845fb5ff0b7f58b",
-          "title_zh": "Introducing GPT-6.2 Astra and Sol",
-          "title_en": "Introducing GPT-6.2 Astra and Sol",
-          "source": "OpenAI 官方动态",
-          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol",
-          "image_url": "https://cdn.openai.com/mdx-assets/e193aefe-5e58-431c-8cd2-adadac0c1496/44573edd-9653-49b3-ba07-7b3643545ef9.d3072be3.png",
-          "hot_score": 3,
-          "published_at": "2026-11-17T17:45:00+00:00"
+          "id": "d1235c58027b86ea",
+          "title_zh": "微软发布六款AI专有模型，旨在降低企业AI部署成本",
+          "title_en": "Microsoft unveils six AI models spanning coding, cybersecurity, images, and voice, saying MAI Code 2 has 98% of GPT-6.1 Sol's performance at 40% of the price (Ina Fried/Axios)",
+          "source": "Axios",
+          "url": "https://www.axios.com/2026/11/17/microsoft-ai-models-openai-anthropic-ignite",
+          "image_url": "https://images.axios.com/QfA162E7xBSeGMH0c83ZfblV_AM=/1366x768/smart/2023/09/05/210407-1693947847469.jpg",
+          "hot_score": 5,
+          "published_at": "2026-11-17T18:25:02+00:00"
         }
       ],
       "linked_tweets": [
         {
-          "id": "42534a1d1904fd20",
-          "author": "@theo",
-          "author_handle": "@theo",
-          "author_avatar": "https://unavatar.io/x/theo",
-          "content_zh": "GPT-6.2 Astra 评论：使用起来令人沮丧，该模型没有知识差距的概念，其输出很难解析，并且在长任务上绕圈运行",
-          "content_en": "GPT-6.2 Astra review: frustrating to use, the model has no concept of knowledge gaps, its outputs are very hard to parse, and it runs in circles on long tasks (@theo)",
-          "url": "https://x.com/theo/status/2122760447103484410",
-          "platform": "x"
-        },
-        {
-          "id": "45d960bb3b75a178",
+          "id": "c1b74c23fb775b0f",
           "author": "OpenAI Developers",
           "author_handle": "@OpenAIDevs",
           "author_avatar": "https://unavatar.io/openai",
-          "content_zh": "RT @Angaisb_：GPT-6.2 Astra 在类似于 PS1 的控制台内构建了一个组合",
-          "content_en": "RT @Angaisb_: GPT-6.2 Astra built a portfolio inside a console similar to a PS1 https://t.co/LhvKHrG5e8",
-          "url": "https://x.com/OpenAIDevs/status/2122775496480157700",
+          "content_zh": "RT @covacut：该视频几乎完全使用 6.2 astra 进行编辑，仅进行了小的手动调整🌟\n\n- 粗剪\n- 颜色等级\n- 字幕\n- 动画\n- 音效\n- 视觉特效（即摇摆我的艺术）\n- 最终检查（丢帧等）\n- 语音笔记的全面变化\n\n这是我在 davinci 上制作的第一个视频，一天后在 ig 上已经获得了 5 万个赞！\n\n很快每个创作者都会有一个了解他们风格的人工智能编辑器",
+          "content_en": "RT @covacut: this video was edited almost entirely with 6.2 astra, with only small manual tweaks 🌟\n\n- rough cut\n- colour-grade\n- captions\n- animations\n- sfx\n- vfx (i.e. wiggled my art)\n- final checks (dropped frames, etc.)\n- full sweeps of changes from voice notes \n\nthis is my first video made on davinci, and it's already sitting at 50k likes on ig after 1 day!\n\nsoon every creator will have an ai editor that knows their style",
+          "url": "https://x.com/OpenAIDevs/status/2122845067501252610",
+          "platform": "x"
+        },
+        {
+          "id": "53777ca311f693e1",
+          "author": "OpenAI Developers",
+          "author_handle": "@OpenAIDevs",
+          "author_avatar": "https://unavatar.io/openai",
+          "content_zh": "RT @ArtificialAnlys：GPT-6.2 Astra 在 AA-3D 上排名第一，AA-3D 是我们衡量模型构建交互式 3D 体验的基准。在与其他模型的 152 次面对面投票中，人类有 139 次更喜欢这些场景",
+          "content_en": "RT @ArtificialAnlys: GPT-6.2 Astra ranks #1 on AA-3D, our benchmark measuring how well models can build interactive 3D experiences. Humans preferred these scenes in 139 of 152 head-to-head votes against other models https://t.co/uJOzbYWUiy",
+          "url": "https://x.com/OpenAIDevs/status/2122834960423752181",
           "platform": "x"
         }
       ],
-      "linked_tool": {
-        "id": "wf_rag_anti_hallucination_pipeline",
-        "name": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_zh": "企业级防幻觉 RAG 混合检索与双路重排实战配置",
-        "title_en": "Enterprise Anti-Hallucination Hybrid RAG & Re-Ranking Pipeline",
-        "desc_zh": "彻底解决企业私有知识库‘答非所问’和‘空穴来风’的问题，采用 BM25 关键词匹配 + 稠密向量混合召回 + BGE-Reranker 双路重排的最佳实战黄金参数组合。",
-        "desc_en": "Solves knowledge-base hallucination via hybrid search (BM25 + Dense Vector) fused with BGE-Reranker cross-encoder scoring and semantic chunking.",
-        "url": "https://github.com",
-        "github_url": "https://github.com",
-        "weekly_stars": "+3,800★",
-        "is_workflow": true,
-        "target_platform": "Dify / FastGPT / LlamaIndex / LangChain",
-        "config_filename": "rag_pipeline_config.json"
-      },
-      "linked_counts": {
-        "news": 3,
-        "tweets": 2,
-        "has_tool": true
-      },
-      "id": "topic_openai_gpt62_release_strategy",
-      "stance_matrix": {
-        "pro_point_zh": "通过优化输入输出代币配比，GPT-6.2在处理复杂任务时表现出更高的性价比，能有效降低企业级复杂应用的部署与迭代门槛。",
-        "pro_author": "OpenAI产品工程团队",
-        "con_point_zh": "频繁的模型迭代与模糊的知识边界表现让开发者极其沮丧，复杂化的输出格式增加了调试成本，且模型缺乏对自身能力边界的感知。",
-        "con_author": "独立AI开发者",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Optimized input/output token ratios in GPT-6.2 offer unmatched cost-efficiency for complex enterprise tasks, drastically lowering the barrier to entry for high-stakes AI applications.",
-        "con_point_en": "Frequent model updates and erratic performance in knowledge boundaries make integration frustrating. The complex output formats increase debugging overhead without clear competency guarantees.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
-      }
-    },
-    {
-      "topic_id": "topic_nvidia_leadership_crisis",
-      "heat_score": 9.7,
-      "badge_zh": "🔥 24h 领跑爆点",
-      "badge_en": "🔥 24h Breakthrough",
-      "category_tag_zh": "高层动荡与供应链监管",
-      "category_tag_en": "Leadership Chaos & Supply Chain",
-      "title_zh": "黄仁勋辞职引发英伟达权力危机与新加坡营收调查",
-      "title_en": "Jensen Huang's Resignation Triggers Nvidia Governance Crisis & DOJ Probe",
-      "summary_zh": "英伟达CEO黄仁勋因丑闻辞职并请求复职被拒，公司停止披露新加坡营收引发美司法部与商务部针对Megaspeed违规转运的联合调查。内部权力架构博弈加剧，公司面临失去掌门人后的合规合产双重危机。",
-      "summary_en": "Following Jensen Huang's resignation and failed reinstatement bid, Nvidia is under intense scrutiny. The DOJ and Commerce Department are investigating Megaspeed for potential export violations, while hidden Singapore unit revenue raises alarms about the future of Nvidia’s supply chain.",
-      "perspective_pro": {
-        "role_zh": "🟢 愿景派 / 危机处理方",
-        "role_en": "🟢 Strategic/Crisis Management",
-        "speaker_zh": "英伟达家族管理层",
-        "speaker_en": "Nvidia Leadership/Madison Huang",
-        "point_zh": "在复杂地缘政治压力下，收紧营收披露与精简市场决策是应对合规审查的必要过渡手段，需维持核心业务稳定性。",
-        "point_en": "Tightening financial disclosure and streamlining marketing decisions are necessary transitional moves to navigate geopolitical compliance pressures while maintaining operational stability."
-      },
-      "perspective_con": {
-        "role_zh": "🔴 质疑派 / 行业分析师",
-        "role_en": "🔴 Skeptic / Industry Analyst",
-        "speaker_zh": "金融时报与华尔街机构",
-        "speaker_en": "Financial Times & Wall Street Analysts",
-        "point_zh": "隐瞒高额营收及家族式权力扩张凸显了公司治理结构的巨大泡沫与透明度缺失，合规风险已成为阻碍英伟达全球发展的核心掣肘。",
-        "point_en": "Concealing massive revenue and relying on family-led power consolidation expose a lack of corporate transparency, making compliance risks a structural bottleneck for future growth."
-      },
-      "linked_news": [
-        {
-          "id": "6dcc3a7927ea2b20",
-          "title_zh": "英伟达隐匿新加坡业务营收及黄仁勋卸任CEO",
-          "title_en": "Docs: Nvidia stopped reporting Singapore unit revenue in 2025 as it accounted for nearly 50% of global revenue; the unit's revenue rose 72% YoY to $104B in 2025 (Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf",
-          "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-17T17:30:01+00:00"
-        },
-        {
-          "id": "927448e513934e69",
-          "title_zh": "英伟达内部权力架构调整与接班人选博弈",
-          "title_en": "Sources: Jensen Huang's daughter Madison, a marketing director, helped steer Nvidia's response to Megaspeed scrutiny and temporarily sidelined a top comms exec (Financial Times)",
-          "source": "Financial Times",
-          "url": "https://www.ft.com/content/65ff066f-a81c-4d24-95da-73c2d7b83a27",
-          "image_url": null,
-          "hot_score": 5,
-          "published_at": "2026-11-17T16:30:01+00:00"
-        },
-        {
-          "id": "073221684bf9f36d",
-          "title_zh": "美司法部与商务部联手调查Megaspeed",
-          "title_en": "The DOJ says it’s investigating Megaspeed",
-          "source": "The Verge AI",
-          "url": "https://www.theverge.com/policy/1035410/doj-megaspeed-nvidia-investigation-update",
-          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/25461724/STK432_Government__CVirginia_B.jpg?quality=90&strip=all&crop=0,0,100,100",
-          "hot_score": 5,
-          "published_at": "2026-11-17T16:19:03+00:00"
-        }
-      ],
-      "linked_tweets": [],
       "linked_tool": {
         "id": "wf_claude_desktop_mcp_core4",
         "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
@@ -188,91 +87,224 @@
         "config_filename": "claude_desktop_config.json"
       },
       "linked_counts": {
-        "news": 3,
-        "tweets": 0,
+        "news": 2,
+        "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_nvidia_leadership_crisis",
+      "id": "topic_openai_gpt62_astra_vs_microsoft_mai",
       "stance_matrix": {
-        "pro_point_zh": "在复杂地缘政治压力下，收紧营收披露与精简市场决策是应对合规审查的必要过渡手段，需维持核心业务稳定性。",
-        "pro_author": "英伟达家族管理层",
-        "con_point_zh": "隐瞒高额营收及家族式权力扩张凸显了公司治理结构的巨大泡沫与透明度缺失，合规风险已成为阻碍英伟达全球发展的核心掣肘。",
-        "con_author": "金融时报与华尔街机构",
-        "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Tightening financial disclosure and streamlining marketing decisions are necessary transitional moves to navigate geopolitical compliance pressures while maintaining operational stability.",
-        "con_point_en": "Concealing massive revenue and relying on family-led power consolidation expose a lack of corporate transparency, making compliance risks a structural bottleneck for future growth.",
-        "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+        "pro_point_zh": "GPT-6.2 Astra展现出原生级空间几何与连续帧理解力，API大幅降价抹平了生产力壁垒，全功能大模型依然是驱动复杂多模态管线的最优解。",
+        "pro_author": "Artificial Analysis基准团队与独立AI全栈工程师",
+        "con_point_zh": "通用超大模型的所谓全能溢价正在崩解，企业代码与安防不需要昂贵的通识堆砌，微软MAI以40%成本逼平顶级性能才是工业落地分水岭。",
+        "con_author": "微软云方案架构师与跨国企业首席信息官群体",
+        "action_advice_zh": "团队应评估多模型自适应路由与本地小模型蒸馏，分散供应链与成本风险，避免单一云厂商深度绑定。",
+        "pro_point_en": "GPT-6.2 Astra sets an undisputed high bar in native spatial 3D reasoning and continuous-cut media editing. Slashed API fees directly dismantle the unit-economics barrier for high-complexity multimodal pipelines.",
+        "con_point_en": "The premium charged by monolithic generalist models is facing massive margin compression. Enterprise workloads require narrow, hyper-efficient SLMs like MAI Code 2 that deliver parity at 40% the compute budget.",
+        "action_advice_en": "Adopt multi-model adaptive routing and local distillation to diversify supply chain risks and curb cloud vendor lock-in."
       }
     },
     {
-      "topic_id": "topic_ai_military_target_failure",
-      "heat_score": 9.5,
-      "badge_zh": "💡 开源与落地潮",
-      "badge_en": "💡 Open Source Wave",
-      "category_tag_zh": "算法安全与战争伦理",
-      "category_tag_en": "Algorithmic Safety & Ethics",
-      "title_zh": "顶级模型战争模拟实测：Anthropic等AI误伤平民目标",
-      "title_en": "Military Simulation Failure: Top AI Models Misidentify Civilian Targets",
-      "summary_zh": "最新测试揭示Anthropic等顶级模型在模拟军事场景中频繁将平民设施标记为打击目标。争议核心在于大模型在缺乏战场多模态实时纠偏下，其泛化能力在致命决策领域呈现出极高的误报风险与伦理隐患。",
-      "summary_en": "Independent testing shows Anthropic and other leading AI models frequently misidentify civilians as military targets in simulations. The core dispute centers on the extreme risk of deploying LLMs in lethal decision-making contexts without robust, real-time multimodal guardrails.",
+      "topic_id": "topic_gpt6_cyber_java4shell_pypi_exploit",
+      "heat_score": 9.6,
+      "badge_zh": "⚡ 商业与算力风暴",
+      "badge_en": "⚡ Compute & Market Storm",
+      "category_tag_zh": "AI攻防失衡与供应链危机",
+      "category_tag_en": "AI Cyber Asymmetry & Supply Chain Risk",
+      "title_zh": "GPT-6 Cyber掘出Java4Shell核级漏洞，武器化POC与PyPI投毒齐爆",
+      "title_en": "GPT-6 Cyber Discovers Lethal 'Java4Shell' RCE as Functional PoCs and PyPI Poisoning Collide",
+      "summary_zh": "Calif利用OpenAI的GPT-6 Cyber自动挖出Java致命远程代码执行漏洞Java4Shell（CVE-2026-114938），黑客圈紧随其后公开可用POC。同时微软官方AI Agent框架在PyPI遭投毒劫持，AI漏洞挖掘自动化使传统补丁防御周期彻底失效。",
+      "summary_en": "Security firm Calif leveraged OpenAI's GPT-6 Cyber to uncover 'Java4Shell' (CVE-2026-114938), a severe remote code execution flaw in Java. As functional weaponized PoCs instantly circulated publicly, Microsoft's official agent package on PyPI was hijacked, highlighting how AI-driven discovery is breaking traditional patch lifecycles.",
       "perspective_pro": {
-        "role_zh": "🟢 研发支持者 / 自动化军工派",
-        "role_en": "🟢 R&D Supporter / Military Autonomy",
-        "speaker_zh": "AI防务系统研究人员",
-        "speaker_en": "AI Defense System Researchers",
-        "point_zh": "通过引入更细粒度的地理空间多模态数据，AI能显著提升战场信息处理效率，目前的误报是模型初期训练偏差，可通过迭代校准。",
-        "point_en": "Integrating granular geospatial multimodal data significantly boosts battlefield processing efficiency. Initial misidentifications are training biases that can be mitigated through iterative reinforcement learning."
+        "role_zh": "🟢 自动化防御派 / AI红队先锋",
+        "role_en": "🟢 Automated Defense Maximalist / AI Red-teamer",
+        "speaker_zh": "Calif漏洞挖掘团队与前沿AI网络安全研究员",
+        "speaker_en": "Calif Vulnerability Research Team & Frontier AI Red-teamers",
+        "point_zh": "GPT-6 Cyber能在黑客攻击前排查复杂代码中沉睡数十年的架构隐患，唯有将前沿AI融入自动化审计，才能应对愈演愈烈的软件供应链危机。",
+        "point_en": "GPT-6 Cyber can surface legacy architectural vulnerabilities hidden for decades before malicious threat actors exploit them. Deploying frontier AI on defense is the sole defense against modern software supply chain rot."
       },
       "perspective_con": {
-        "role_zh": "🔴 工业理性派 / 战争伦理监督者",
-        "role_en": "🔴 Industrial Rationalist / Ethics Watchdog",
-        "speaker_zh": "Vals安全评估专家",
-        "speaker_en": "Vals Evaluation Specialists",
-        "point_zh": "在缺乏绝对可解释性的前提下，将复杂的作战逻辑交由大模型处理，不仅是技术层面的失职，更是严重的国际人道主义伦理灾难。",
-        "point_en": "Delegating complex combat logic to LLMs without interpretability is not just technical failure, but a grave violation of international humanitarian law and ethics."
+        "role_zh": "🔴 威胁泛滥质疑派 / DevSecOps工程师",
+        "role_en": "🔴 Threat Proliferation Skeptic / SecOps Lead",
+        "speaker_zh": "独立漏洞分析师与开源生态维护者（如KevTheHermit）",
+        "speaker_en": "Independent Vulnerability Analysts (e.g. KevTheHermit) & Open Source Maintainers",
+        "point_zh": "大模型大幅降低了武器化0-day利用链编写门槛，防御者响应窗口被压缩至零，AI正让基础软件与开源生态陷入不可控的不对称攻防灾难。",
+        "point_en": "Frontier models radically compress the timeline for turning abstract flaws into weaponized zero-day exploits. The asymmetric offensive leverage will inevitably overwhelm understaffed open-source maintainers and corporate SecOps."
       },
       "linked_news": [
         {
-          "id": "3db66dcc75bc6c8c",
-          "title_zh": "顶级AI模型在战争模拟测试中频繁误伤平民目标",
-          "title_en": "Anthropic, Other AI Models Regularly Identify Civilians as Military Targets in Tests",
-          "source": "Bloomberg",
-          "url": "https://www.bloomberg.com/news/articles/2026-11-17/top-ai-models-regularly-identify-civilians-as-military-targets-in-tests",
-          "image_url": "https://images.openai.com/blob/574ebad3-c5b7-4147-920f-07440409a341/introducing-the-misalignment-reporting-framework.png",
+          "id": "47d3a13c046f7894",
+          "title_zh": "Optimizely供应链遭受攻击，百余家大型机构网站沦陷",
+          "title_en": "Malicious code delivered through Optimizely hits visitors to hundreds of sites",
+          "source": "Ars Technica",
+          "url": "https://arstechnica.com/security/2026/11/malicious-code-delivered-through-optimizely-hits-visitors-to-hundreds-of-sites/",
+          "image_url": "https://cdn.arstechnica.net/wp-content/uploads/2026/11/malicious-website-1152x648.jpg",
           "hot_score": 5,
-          "published_at": "2026-11-17T17:10:00+00:00"
+          "published_at": "2026-11-17T22:32:16+00:00"
+        },
+        {
+          "id": "08da9849a1768637",
+          "title_zh": "OpenAI发布GPT-6 Cyber，自动化挖掘关键漏洞",
+          "title_en": "Cybersecurity startup Calif says it used GPT-6 Cyber to uncover an RCE flaw in Java dubbed \"Java4Shell\"; Oracle has released a patch (New York Times)",
+          "source": "New York Times",
+          "url": "https://www.nytimes.com/2026/11/17/us/politics/ai-security-bug-java.html?unlocked_article_code=1.RFE.J4uR.JL0Qv-280ALN",
+          "image_url": null,
+          "hot_score": 4,
+          "published_at": "2026-11-17T21:20:04+00:00"
         }
       ],
-      "linked_tweets": [],
+      "linked_tweets": [
+        {
+          "id": "0c775834ac9e7a33",
+          "author": "KevTheHermit",
+          "author_handle": "@KevTheHermit",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1615336177640345601/o1SFlrGs_normal.png",
+          "content_zh": "对 CVE-2026-114938（又名 Java4Shell）进行功能利用 POC。这不是通用漏洞，需要针对特定​​应用程序，您需要具有 AVX-512 VBMI 支持的 CPU、易受攻击的 JDK 版本，并且应用程序需要使用 Base64，请注意 tomcats 基本身份验证和 java-jwt 提供预身份验证可利用路径。这次是 GLM5.3 运行我的代理而不是 Claude Code",
+          "content_en": "Have a functional exploit POC for CVE-2026-114938 aka Java4Shell. This is not a generic exploit and will need to be application specific, you need a CPU with AVX-512 VBMI support, vulnerable JDK Version, and the app needs to use Base64, note that tomcats basic auth and java-jwt provide pre-auth exploitable path. This time it was GLM5.3 was running my agents instead of Claude Code",
+          "url": "https://x.com/KevTheHermit/status/2122829165925998824",
+          "platform": "x"
+        },
+        {
+          "id": "1d8a197bb08f0d32",
+          "author": "International Cyber Digest",
+          "author_handle": "@IntCyberDigest",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1831435438562615296/imkSFey2_normal.jpg",
+          "content_zh": "🚨 突发事件：微软官方 AI 代理包 agent-framework 在 PyPI 上被劫持。\n\n版本 1.26.1 和 1.26.2 会在每次 Python 启动时窃取 Azure、CI 和云机密，即使没有导入任何内容。\n\nPyPI 阻止第一个版本后，攻击者上传了第二个版本。",
+          "content_en": "🚨 BREAKING: Microsoft's official AI agent package agent-framework was hijacked on PyPI.\n\nVersions 1.26.1 and 1.26.2 steal Azure, CI and cloud secrets every time Python starts, even if nothing imports them.\n\nAfter PyPI blocked the first version, the attacker uploaded a second. https://t.co/chKLhS7jzc",
+          "url": "https://x.com/IntCyberDigest/status/2122829002981130469",
+          "platform": "x"
+        }
+      ],
       "linked_tool": {
-        "id": "wf_deepseek_r1_ollama_local_sota",
-        "name": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_zh": "DeepSeek-R1 本地私有化推理 + Ollama 显存优化参数配方",
-        "title_en": "DeepSeek-R1 Local Deployment & GPU Memory Tuning via Ollama",
-        "desc_zh": "解决消费级显卡（RTX 4060/4090/Mac M系列）部署 DeepSeek-R1 时显存溢出（OOM）与思维链无限复读问题的精调 Modelfile 参数配置。",
-        "desc_en": "Optimized Ollama Modelfile for running DeepSeek-R1 on consumer GPUs (RTX 4090/Mac M-series) without OOM or infinite reasoning loops.",
+        "id": "wf_cursorrules_fullstack_2026",
+        "name": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_zh": "Cursor / Windsurf 工业级全栈架构 .cursorrules 规则模板",
+        "title_en": "Production-Grade Fullstack .cursorrules Template for Cursor & Windsurf",
+        "desc_zh": "杜绝 AI 盲目重构全量文件、使用已弃用 API 或编造虚假第三方依赖包，强制执行防御性编程与自动化单测补全。",
+        "desc_en": "Prevents AI from hallucinating npm packages, breaking documentation, or re-writing entire files. Enforces defensive coding and unit tests.",
         "url": "https://github.com",
         "github_url": "https://github.com",
         "weekly_stars": "+3,800★",
         "is_workflow": true,
-        "target_platform": "Ollama / OpenWebUI / vLLM",
-        "config_filename": "Modelfile.deepseek-r1-opt"
+        "target_platform": "Cursor / Windsurf / Copilot / VSCode",
+        "config_filename": ".cursorrules"
       },
       "linked_counts": {
-        "news": 1,
-        "tweets": 0,
+        "news": 2,
+        "tweets": 2,
         "has_tool": true
       },
-      "id": "topic_ai_military_target_failure",
+      "id": "topic_gpt6_cyber_java4shell_pypi_exploit",
       "stance_matrix": {
-        "pro_point_zh": "通过引入更细粒度的地理空间多模态数据，AI能显著提升战场信息处理效率，目前的误报是模型初期训练偏差，可通过迭代校准。",
-        "pro_author": "AI防务系统研究人员",
-        "con_point_zh": "在缺乏绝对可解释性的前提下，将复杂的作战逻辑交由大模型处理，不仅是技术层面的失职，更是严重的国际人道主义伦理灾难。",
-        "con_author": "Vals安全评估专家",
+        "pro_point_zh": "GPT-6 Cyber能在黑客攻击前排查复杂代码中沉睡数十年的架构隐患，唯有将前沿AI融入自动化审计，才能应对愈演愈烈的软件供应链危机。",
+        "pro_author": "Calif漏洞挖掘团队与前沿AI网络安全研究员",
+        "con_point_zh": "大模型大幅降低了武器化0-day利用链编写门槛，防御者响应窗口被压缩至零，AI正让基础软件与开源生态陷入不可控的不对称攻防灾难。",
+        "con_author": "独立漏洞分析师与开源生态维护者（如KevTheHermit）",
         "action_advice_zh": "推荐密切跟踪该技术在主流开发工具链与开源社区的集成适配，先期在受限沙箱中开展工程实测。",
-        "pro_point_en": "Integrating granular geospatial multimodal data significantly boosts battlefield processing efficiency. Initial misidentifications are training biases that can be mitigated through iterative reinforcement learning.",
-        "con_point_en": "Delegating complex combat logic to LLMs without interpretability is not just technical failure, but a grave violation of international humanitarian law and ethics.",
+        "pro_point_en": "GPT-6 Cyber can surface legacy architectural vulnerabilities hidden for decades before malicious threat actors exploit them. Deploying frontier AI on defense is the sole defense against modern software supply chain rot.",
+        "con_point_en": "Frontier models radically compress the timeline for turning abstract flaws into weaponized zero-day exploits. The asymmetric offensive leverage will inevitably overwhelm understaffed open-source maintainers and corporate SecOps.",
         "action_advice_en": "Track integration across leading developer toolchains and validate boundary reliability within sandboxed environments."
+      }
+    },
+    {
+      "topic_id": "topic_jpmorgan_agent_finance_flash_bank_run",
+      "heat_score": 9.4,
+      "badge_zh": "💡 开源与落地潮",
+      "badge_en": "💡 Open Source Wave",
+      "category_tag_zh": "金融Agent落地与算法挤兑",
+      "category_tag_en": "Autonomous Agent Finance & Algorithmic Runs",
+      "title_zh": "摩根大通下场AI Agent无人结算，千万笔交易激化“算法挤兑”警报",
+      "title_en": "JPMorgan Launches Autonomous Trading Agents as 11.7M Machine Txs Ignite 'Flash Run' Alarm",
+      "summary_zh": "摩根大通成功研发无需人类干预的金融交易AI Agent，t54协议亦宣布自主结算突破1170万笔。伴随微软纳德拉对AGI颠覆全球政经体系的预警，公链协议Sui与风控机构紧急发出预警：若无确定性链上熔断与额度控制，Agent群体的同质化反应将引爆毫秒级算法挤兑。",
+      "summary_en": "JPMorgan unveiled autonomous AI agents capable of settling financial transactions without human oversight, as t54's agent payment rails cleared over 11.7 million autonomous txs. Amid Satya Nadella's warnings on AGI rewriting macro economics, protocol architects at Sui warned that unconstrained autonomous agents could trigger unprecedented millisecond-level algorithmic bank runs.",
+      "perspective_pro": {
+        "role_zh": "🟢 机器经济先锋派 / Agentic协议开拓者",
+        "role_en": "🟢 Machine Economy Pioneer / Agentic Protocol Architect",
+        "speaker_zh": "华尔街量化高管与自主支付协议构建者（t54与Shield）",
+        "speaker_en": "Wall Street Quant Desks & Autonomous Payment Builders (t54, Shield)",
+        "point_zh": "AI Agent通过标准协议实现全天候无摩擦资金调配与跨资产清算，消除了人为情绪与延迟损耗，是全球资本效率步入真正机器经济的里程碑。",
+        "point_en": "Autonomous AI agents executing via protocolized permissions strip out latency and human emotion, optimizing capital allocation in milliseconds and unlocking a hyper-efficient machine-to-machine financial paradigm."
+      },
+      "perspective_con": {
+        "role_zh": "🔴 宏观风控理性派 / 金融合规监管研究者",
+        "role_en": "🔴 Macro Prudential Realist / Financial Regulators",
+        "speaker_zh": "分布式系统风控架构师与跨国清算观察员",
+        "speaker_en": "Distributed System Risk Architects & Financial Regulators",
+        "point_zh": "自主智能体缺乏宏观信贷弹性，高度趋同的模型提示词与抛售逻辑会在毫秒内抽干流动性，没有硬编码熔断的无人金融系统等于在悬崖边裸奔。",
+        "point_en": "Autonomous agents suffer from algorithmic herd behavior; aligned risk-off triggers could vaporize market liquidity in fractions of a second. Unleashing autonomous agent settlements without on-chain deterministic allowances is reckless."
+      },
+      "linked_news": [
+        {
+          "id": "2f225a7353693295",
+          "title_zh": "微软CEO纳德拉：AGI将重塑全球政治经济结构",
+          "title_en": "Satya Nadella says he’s AGI-pilled now",
+          "source": "The Verge AI",
+          "url": "https://www.theverge.com/tech/1036111/satya-nadella-says-hes-agi-pilled-now",
+          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/Screenshot-2026-11-17-at-3.00.15-PM.png?quality=90&strip=all&crop=0,0,100,100",
+          "hot_score": 5,
+          "published_at": "2026-11-17T23:41:18+00:00"
+        },
+        {
+          "id": "2cededdf6305daa5",
+          "title_zh": "谷歌发布免费AI智能体Tasks",
+          "title_en": "Google’s Spark AI agent becomes ‘Tasks’ — and now it’s free",
+          "source": "The Verge AI",
+          "url": "https://www.theverge.com/tech/1035756/google-spark-ai-tasks-free",
+          "image_url": "https://platform.theverge.com/wp-content/uploads/sites/2/2026/11/Tasks-in-Gemini.png?quality=90&strip=all&crop=0,0,100,100",
+          "hot_score": 5,
+          "published_at": "2026-11-17T18:58:01+00:00"
+        }
+      ],
+      "linked_tweets": [
+        {
+          "id": "5e06b09ce8dfb8f0",
+          "author": "Watcher Guru",
+          "author_handle": "@WatcherGuru",
+          "author_avatar": "https://pbs.twimg.com/profile_images/1641221212578754562/DfiC0KW2_normal.png",
+          "content_zh": "最新消息：摩根大通开发了能够在无需人工参与的情况下进行金融交易的人工智能代理。",
+          "content_en": "JUST IN: JPMorgan develops AI agents capable of carrying out financial transactions without human involvement.",
+          "url": "https://x.com/WatcherGuru/status/2122835720893342129",
+          "platform": "x"
+        },
+        {
+          "id": "0ca972a6e296de23",
+          "author": "Sui",
+          "author_handle": "@SuiNetwork",
+          "author_avatar": "https://pbs.twimg.com/profile_images/2109510639106551808/rgEuX5N0_normal.jpg",
+          "content_zh": "人工智能代理可以让银行运行得更快。在代理人采取行动之前需要存在保障措施。\n\n在隋，津贴允许资助者预先设定支出上限和利率限制，并可以随时撤销许可。",
+          "content_en": "AI agents could make bank runs faster. Safeguards need to exist before an agent acts.\n\nOn Sui, Allowances let funders set spending caps and rate limits up front, with permission they can revoke at any time.",
+          "url": "https://x.com/SuiNetwork/status/2122827158976671801",
+          "platform": "x"
+        }
+      ],
+      "linked_tool": {
+        "id": "wf_claude_desktop_mcp_core4",
+        "name": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_zh": "Claude Desktop / Cline 核心四件套 MCP 服务配置清单",
+        "title_en": "Claude Desktop & Cline Core 4 MCP Server Production Config",
+        "desc_zh": "一次性为本地 Claude 桌面端打通：本地文件操作、Brave 实时联网搜索、SQLite 数据库即时直连与 GitHub 代码协作四大杀手级 MCP 扩展能力。",
+        "desc_en": "Equips local Claude Desktop with 4 essential superpowers via MCP: Filesystem read/write, Brave web search, SQLite query, and GitHub API integration.",
+        "url": "https://github.com",
+        "github_url": "https://github.com",
+        "weekly_stars": "+3,800★",
+        "is_workflow": true,
+        "target_platform": "Claude Desktop / Cline / Roo Code",
+        "config_filename": "claude_desktop_config.json"
+      },
+      "linked_counts": {
+        "news": 2,
+        "tweets": 2,
+        "has_tool": true
+      },
+      "id": "topic_jpmorgan_agent_finance_flash_bank_run",
+      "stance_matrix": {
+        "pro_point_zh": "AI Agent通过标准协议实现全天候无摩擦资金调配与跨资产清算，消除了人为情绪与延迟损耗，是全球资本效率步入真正机器经济的里程碑。",
+        "pro_author": "华尔街量化高管与自主支付协议构建者（t54与Shield）",
+        "con_point_zh": "自主智能体缺乏宏观信贷弹性，高度趋同的模型提示词与抛售逻辑会在毫秒内抽干流动性，没有硬编码熔断的无人金融系统等于在悬崖边裸奔。",
+        "con_author": "分布式系统风控架构师与跨国清算观察员",
+        "action_advice_zh": "建议优先在受限沙箱中针对核心智能体任务开展端到端评测，借力 Ollama 实现零数据留存私有化部署。",
+        "pro_point_en": "Autonomous AI agents executing via protocolized permissions strip out latency and human emotion, optimizing capital allocation in milliseconds and unlocking a hyper-efficient machine-to-machine financial paradigm.",
+        "con_point_en": "Autonomous agents suffer from algorithmic herd behavior; aligned risk-off triggers could vaporize market liquidity in fractions of a second. Unleashing autonomous agent settlements without on-chain deterministic allowances is reckless.",
+        "action_advice_en": "Benchmark in isolated sandboxes for agentic tasks, leveraging Ollama for zero-data-retention private hosting."
       }
     }
   ]
