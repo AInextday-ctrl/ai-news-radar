@@ -9964,7 +9964,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             } else if (vProvider === 'mp4' || /\.mp4(\?|$)/i.test(vRaw)) {
               videoPlayerWrapEl.innerHTML = `<video controls playsinline preload="metadata" class="w-full aspect-video bg-black block"><source src="${escapeHtml(vRaw)}" type="video/mp4"></video>`;
               videoPlayerWrapEl.classList.remove('hidden');
-            } else if (vProvider === 'iframe' || /youtube\.com\/embed|player\.vimeo\.com|players\.brightcove\.net/i.test(vRaw)) {
+            } else if (vProvider === 'iframe' || /youtube\.com\/embed|player\.vimeo\.com|players\.brightcove\.net|player\.cnevids\.com/i.test(vRaw)) {
               videoPlayerWrapEl.innerHTML = `<iframe src="${escapeHtml(vRaw)}" class="w-full aspect-video border-0 bg-slate-950 block" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
               videoPlayerWrapEl.classList.remove('hidden');
             } else {

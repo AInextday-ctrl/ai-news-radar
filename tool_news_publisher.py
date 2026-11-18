@@ -1000,7 +1000,7 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
           </video>
         </div>
         """
-        elif v_provider == "iframe" or any(h in v_raw_url.lower() for h in ("youtube.com/embed", "player.vimeo.com", "players.brightcove.net")):
+        elif v_provider == "iframe" or any(h in v_raw_url.lower() for h in ("youtube.com/embed", "player.vimeo.com", "players.brightcove.net", "player.cnevids.com")):
             video_html = f"""
         <div class="mt-8 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-950 shadow-lg">
           <div class="px-4 py-3 bg-slate-900/95 border-b border-slate-800 flex items-center justify-between gap-3">

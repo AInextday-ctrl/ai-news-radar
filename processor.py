@@ -1624,7 +1624,7 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["author"] = ext["author"]
                 if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                     item["image_url"] = ext["cover_image"]
-                if is_fortune and ext.get("has_video"):
+                if (is_fortune or is_wired) and ext.get("has_video"):
                     item["has_video"] = True
                     for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script"):
                         if ext.get(vk):
@@ -1800,7 +1800,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         it["author"] = ext["author"]
                     if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                         it["image_url"] = ext["cover_image"]
-                    if is_fortune and ext.get("has_video"):
+                    if (is_fortune or is_wired) and ext.get("has_video"):
                         it["has_video"] = True
                         for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script"):
                             if ext.get(vk):

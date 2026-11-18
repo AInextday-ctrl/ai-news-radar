@@ -1835,6 +1835,12 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = w_data["full_text"]
+                    if w_data.get("has_video") and w_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = w_data["video_url"]
+                        if w_data.get("video_id"):
+                            it["video_id"] = w_data["video_id"]
+                        it["video_provider"] = w_data.get("video_provider", "iframe")
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

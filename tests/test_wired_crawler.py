@@ -28,6 +28,7 @@ SAMPLE_WIRED_HTML = """<!DOCTYPE html>
   <script type="application/ld+json">
     {"@type": "NewsArticle", "headline": "Nvidia’s Board Has No Plans to Bring Back Jensen Huang", "datePublished": "2026-11-17T17:19:19-05:00", "author": [{"@type": "Person", "name": "Lauren Goode"}]}
   </script>
+  <script>window.__PRELOADED_STATE__ = {"transformed": {"article": {"headerProps": {"contributors": {"author": {"items": [{"name": "Lauren Goode"}, {"name": "Kate Taylor"}]}}}, "body": [["inline-embed", {"type": "cneinterlude", "props": {"interludeOverrideId": "6afb509689cc35ea8d45c201"}}]]}}};</script>
 </head>
 <body>
   <h1 data-testid="ContentHeaderHed">Nvidia’s Board Has No Plans to Bring Back Jensen Huang</h1>
@@ -48,6 +49,7 @@ SAMPLE_WIRED_HTML = """<!DOCTYPE html>
       <figcaption>Nvidia headquarters in Santa Clara, California.</figcaption>
     </figure>
     <p>Analysts said customer demand for next-generation AI accelerators remains strong despite leadership turbulence in Silicon Valley.</p>
+    <p>Connect to what matters with the WIRED App. DOWNLOAD NOW</p>
     <p>Subscribe to WIRED for unlimited digital access.</p>
   </div>
 </body>
@@ -72,10 +74,14 @@ class TestWiredCrawler(unittest.TestCase):
         self.assertTrue(res["is_substantive"])
         self.assertFalse(res["is_paywalled"])
         self.assertEqual(res["title"], "Nvidia’s Board Has No Plans to Bring Back Jensen Huang")
-        self.assertEqual(res["author"], "Lauren Goode")
+        self.assertEqual(res["author"], "Lauren Goode and Kate Taylor")
+        self.assertTrue(res["has_video"])
+        self.assertEqual(res["video_provider"], "iframe")
+        self.assertEqual(res["video_url"], "https://player.cnevids.com/iframe/video/6afb509689cc35ea8d45c201")
         self.assertEqual(res["paras_count"], 3)
         self.assertEqual(res["subheadings"], ["Board Governance Under Scrutiny"])
         self.assertNotIn("Subscribe to WIRED", res["full_text"])
+        self.assertNotIn("WIRED App", res["full_text"])
         # Duplicate cover + 1:1 author avatar both rejected; only distinct HQ photo kept
         self.assertEqual(len(res["inline_images"]), 1)
         self.assertIn("6afce5159891667de5f2b6dd", res["inline_images"][0]["url"])

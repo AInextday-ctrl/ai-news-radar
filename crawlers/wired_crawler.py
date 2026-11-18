@@ -76,6 +76,11 @@ WIRED_NOISE_PHRASES = [
     "wired may earn a portion of sales",
     "if you buy something using links in our stories",
     "delivered to your inbox",
+    "connect to what matters with the wired app",
+    "the wired app is here",
+    "download now",
+    "featured video",
+    "advertisement",
 ]
 
 AVATAR_BAD_TOKENS = (
@@ -275,7 +280,54 @@ def _parse_wired_html(html_text: str) -> Dict[str, Any]:
         "paragraphs": [],
         "subheadings": [],
         "inline_images": [],
+        "has_video": False,
+        "video_url": None,
+        "video_id": None,
+        "video_provider": None,
     }
+
+    # 0. Condé Nast `window.__PRELOADED_STATE__` (complete multi-author list & CNE embedded video)
+    m_st = re.search(r'window\.__PRELOADED_STATE__\s*=\s*(\{.*?\});\s*</script>', html_text, re.DOTALL | re.I)
+    if m_st:
+        try:
+            st = json.loads(m_st.group(1))
+            art = (st.get("transformed") or {}).get("article") or {}
+            if isinstance(art, dict):
+                # Multi-author contributors (e.g. Lauren Goode and Kate Taylor)
+                auth_items = (((art.get("headerProps") or {}).get("contributors") or {}).get("author") or {}).get("items") or []
+                names = [str(a.get("name")).strip() for a in auth_items if isinstance(a, dict) and a.get("name")]
+                if names:
+                    out["author"] = " and ".join(names) if len(names) <= 2 else ", ".join(names[:-1]) + f", and {names[-1]}"
+                # Condé Nast embedded video (`cneinterlude` / `cnevideo` / `interludeOverrideId` / `embeddedVideos`)
+                cne_vid_id = None
+                body_nodes = art.get("body")
+                if isinstance(body_nodes, list):
+                    for node in body_nodes:
+                        if isinstance(node, list) and len(node) >= 2 and isinstance(node[1], dict):
+                            props = node[1].get("props") or node[1]
+                            if isinstance(props, dict):
+                                ov = props.get("interludeOverrideId") or props.get("videoId") or props.get("cneVideoId")
+                                if ov and re.match(r'^[0-9a-f]{24}$', str(ov), re.I):
+                                    cne_vid_id = str(ov)
+                                    break
+                                evs = props.get("embeddedVideos") or []
+                                if isinstance(evs, list) and evs:
+                                    first_ev = evs[0]
+                                    ev_id = first_ev.get("id") if isinstance(first_ev, dict) else str(first_ev)
+                                    if ev_id and re.match(r'^[0-9a-f]{24}$', str(ev_id), re.I):
+                                        cne_vid_id = str(ev_id)
+                                        break
+                if not cne_vid_id:
+                    rel = (art.get("relatedVideo") or {}).get("related")
+                    if isinstance(rel, dict) and rel.get("id") and re.match(r'^[0-9a-f]{24}$', str(rel["id"]), re.I):
+                        cne_vid_id = str(rel["id"])
+                if cne_vid_id:
+                    out["has_video"] = True
+                    out["video_id"] = cne_vid_id
+                    out["video_provider"] = "iframe"
+                    out["video_url"] = f"https://player.cnevids.com/iframe/video/{cne_vid_id}"
+        except Exception:
+            pass
 
     # 1. JSON-LD NewsArticle metadata + articleBody backup
     ld_body = ""
@@ -455,6 +507,10 @@ def crawl_wired(
         "paras_count": 0,
         "is_substantive": False,
         "is_paywalled": False,
+        "has_video": False,
+        "video_url": None,
+        "video_id": None,
+        "video_provider": None,
         "extraction_tier": "failed",
     }
 
@@ -503,6 +559,11 @@ def crawl_wired(
         result["inline_images"] = parsed["inline_images"]
     if parsed.get("subheadings"):
         result["subheadings"] = parsed["subheadings"]
+    if parsed.get("has_video") and parsed.get("video_url"):
+        result["has_video"] = True
+        result["video_url"] = parsed["video_url"]
+        result["video_id"] = parsed.get("video_id")
+        result["video_provider"] = parsed.get("video_provider") or "iframe"
 
     result["paragraphs"] = paras
     result["paras_count"] = len(paras)
