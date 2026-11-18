@@ -27,6 +27,7 @@ from .siliconangle_crawler import crawl_siliconangle, is_siliconangle_url
 from .semafor_crawler import crawl_semafor, is_semafor_url
 from .coindesk_crawler import crawl_coindesk, is_coindesk_url
 from .cbsnews_crawler import crawl_cbsnews, is_cbsnews_url
+from .ifixit_crawler import crawl_ifixit, is_ifixit_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -71,6 +72,8 @@ __all__ = [
     "is_coindesk_url",
     "crawl_cbsnews",
     "is_cbsnews_url",
+    "crawl_ifixit",
+    "is_ifixit_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]

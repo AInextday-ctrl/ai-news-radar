@@ -927,6 +927,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "ifixit.com" in domain:
+            try:
+                from crawlers.ifixit_crawler import crawl_ifixit
+                ifx_data = crawl_ifixit(url, html_text=html_text)
+                if ifx_data.get("is_filtered_out"):
+                    result.update(ifx_data)
+                    return result
+                if ifx_data.get("is_substantive") or ifx_data.get("paras_count", 0) >= 1 or ifx_data.get("title"):
+                    result.update(ifx_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

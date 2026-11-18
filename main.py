@@ -1155,6 +1155,7 @@ def load_existing_items() -> list:
     semafor_live_budget = 4
     coindesk_live_budget = 4
     cbsnews_live_budget = 4
+    ifixit_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2507,6 +2508,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if cbs_data.get(vk):
                                 it[vk] = cbs_data[vk]
+                except Exception:
+                    pass
+
+        # 6.21 iFixit News (ifixit.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "ifixit.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_ifx = _extract_item_ts(it)
+            is_recent_ifx = (ts_ifx > 0) and ((now_ts_load - ts_ifx) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_ifx_fix = is_recent_ifx and ifixit_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "iFixit News", "iFixit") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/ifixit_")
+            )
+            if needs_ifx_fix:
+                ifixit_live_budget -= 1
+                try:
+                    from crawlers.ifixit_crawler import crawl_ifixit
+                    ifx_data = crawl_ifixit(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if ifx_data.get("is_filtered_out"):
+                        continue
+                    if ifx_data.get("title"):
+                        it["title"] = ifx_data["title"]
+                        it["title_en"] = ifx_data["title"]
+                    if ifx_data.get("author") and ifx_data["author"] != "iFixit News":
+                        it["author"] = ifx_data["author"]
+                    if ifx_data.get("cover_image") and str(ifx_data["cover_image"]).startswith("http"):
+                        it["image_url"] = ifx_data["cover_image"]
+                        it["cover_image"] = ifx_data["cover_image"]
+                    if ifx_data.get("is_substantive") and ifx_data.get("full_text"):
+                        it["paragraphs"] = ifx_data.get("paragraphs", [])
+                        it["subheadings"] = ifx_data.get("subheadings", [])
+                        it["article_content"] = ifx_data["full_text"]
+                        it["article_content_en"] = ifx_data["full_text"]
+                        it["inline_images"] = ifx_data.get("inline_images", [])
+                        if ifx_data.get("inline_videos"):
+                            it["inline_videos"] = ifx_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if ifx_data.get("has_video") and ifx_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = ifx_data["video_url"]
+                        if ifx_data.get("video_id"):
+                            it["video_id"] = ifx_data["video_id"]
+                        it["video_provider"] = ifx_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if ifx_data.get(vk):
+                                it[vk] = ifx_data[vk]
                 except Exception:
                     pass
 
