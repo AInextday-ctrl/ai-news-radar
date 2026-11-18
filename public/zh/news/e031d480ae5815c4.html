@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osmo研发嗅觉基础模型实现人脑级识别 | AI 资讯雷达</title>
+  <meta name="description" content="AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <link rel="alternate" hreflang="en" href="https://ainewsradar.xyz/news/e031d480ae5815c4">
+  <link rel="alternate" hreflang="zh" href="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <link rel="alternate" hreflang="zh-CN" href="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <link rel="alternate" hreflang="x-default" href="https://ainewsradar.xyz/news/e031d480ae5815c4">
+  
+  <!-- OpenGraph Metadata -->
+  <meta property="og:site_name" content="AI News Radar">
+  <meta property="og:title" content="Osmo研发嗅觉基础模型实现人脑级识别 | AI 资讯雷达">
+  <meta property="og:description" content="AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用">
+  <meta property="og:image" content="https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg">
+  <meta property="og:image:secure_url" content="https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Osmo研发嗅觉基础模型实现人脑级识别">
+  <meta property="og:url" content="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <meta property="og:type" content="article">
+  
+  <!-- Twitter Card (Large Clickable Thumbnail) -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ainewsradar">
+  <meta name="twitter:creator" content="@ainewsradar">
+  <meta name="twitter:domain" content="ainewsradar.xyz">
+  <meta name="twitter:url" content="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <meta name="twitter:title" content="Osmo研发嗅觉基础模型实现人脑级识别 | AI 资讯雷达">
+  <meta name="twitter:description" content="AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用">
+  <meta name="twitter:image" content="https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg">
+  <meta property="twitter:image" content="https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg">
+  <meta name="twitter:image:alt" content="Osmo研发嗅觉基础模型实现人脑级识别">
+
+  <!-- Academic & GEO Citation Meta Tags -->
+  <meta name="citation_title" content="Osmo研发嗅觉基础模型实现人脑级识别">
+  <meta name="citation_publication_date" content="2026-11-18">
+  <meta name="citation_author" content="MIT Tech Review">
+  <meta name="citation_journal_title" content="AI News Radar">
+  <meta name="citation_fulltext_html_url" content="https://ainewsradar.xyz/zh/news/e031d480ae5815c4">
+  <meta name="citation_abstract" content="AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用">
+  
+  <!-- LLMs.txt Discovery (llmstxt.org) -->
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/llms.txt" title="LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/llms-full.txt" title="Full LLMs.txt">
+  <link rel="help" type="text/plain" href="https://ainewsradar.xyz/zh/llms.txt" title="Chinese LLMs.txt Manifest">
+  <link rel="alternate" type="text/plain" href="https://ainewsradar.xyz/zh/llms-full.txt" title="Chinese Full LLMs.txt">
+  
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <link rel="alternate" type="application/rss+xml" title="AI News Radar RSS" href="https://ainewsradar.xyz/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="AI 资讯雷达 RSS" href="https://ainewsradar.xyz/zh/feed.xml">
+  <link rel="alternate" type="application/json" title="AI News Radar JSON Feed" href="https://ainewsradar.xyz/feed.json">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4912808437101130" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "zasso3bkvl");
+</script>
+  
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "AI News Radar",
+          "item": "https://ainewsradar.xyz/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "AI 行业快讯",
+          "item": "https://ainewsradar.xyz/zh#news"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Osmo研发嗅觉基础模型实现人脑级识别",
+          "item": "https://ainewsradar.xyz/zh/news/e031d480ae5815c4"
+        }
+      ]
+    },
+    {
+      "@type": "NewsArticle",
+      "headline": "Osmo研发嗅觉基础模型实现人脑级识别",
+      "description": "AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用",
+      "image": [
+        "https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg"
+      ],
+      "url": "https://ainewsradar.xyz/zh/news/e031d480ae5815c4",
+      "datePublished": "2026-11-18T10:20:30+00:00",
+      "dateModified": "2026-11-18T10:20:30+00:00",
+      "inLanguage": "zh-CN",
+      "mainEntityOfPage": "https://ainewsradar.xyz/zh/news/e031d480ae5815c4",
+      "articleSection": "Artificial Intelligence",
+      "isBasedOn": "https://www.technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans/?ref=ainewsradar",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Artificial Intelligence",
+          "sameAs": "https://en.wikipedia.org/wiki/Artificial_intelligence"
+        }
+      ],
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".executive-summary",
+          "h1"
+        ]
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AI News Radar Editorial Team",
+        "url": "https://ainewsradar.xyz/zh/about"
+      },
+      "publisher": {
+        "@type": "NewsMediaOrganization",
+        "name": "AI News Radar",
+        "url": "https://ainewsradar.xyz",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://ainewsradar.xyz/favicon.ico"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Osmo研发嗅觉基础模型实现人脑级识别 的核心事实与事件脉络是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Osmo创始人 Alex Wiltschko在美国新泽西州纽瓦克实验室：通过化学传感器分析与人工嗅觉标注，构建气味基础模型并投入香氛商业化应用 利用数据驱动的机器学习填补气味科学中长期存在的“数据集匮乏”及行业封闭性缺口 Osmo构建了涵盖1000万人工标注与8亿气味Token的独特数据集。 未来有望扩展至机场安检、疾病辅助诊断等复杂感知场景。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "AI 资讯雷达对该事件的技术研判与行业影响是什么？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "嗅觉数字化是AI在非视觉/听觉感知领域的最后一片蓝海，Osmo通过将气味分子转化为可量化的“Token”，成功绕过了传统香氛行业高度依赖个人经验的闭环壁垒。该技术若在机场安检或病理诊断场景实现低成本部署，将重塑感官传感器产业链，推动生物感知计算（Biological Sensory Computing）进入商业化深水区。"
+          }
+        }
+      ]
+    }
+  ]
+}
+  </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen font-sans antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Nav Bar -->
+  <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/zh" class="font-extrabold text-base tracking-tight flex items-center gap-2 hover:opacity-85 transition-opacity">
+          <span class="text-xl">🤖</span>
+          <span class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI 资讯雷达</span>
+        </a>
+        <span class="text-slate-300 dark:text-slate-700">/</span>
+        <a href="/zh" class="text-xs text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors font-medium">
+          ← 返回雷达首页
+        </a>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="https://ainewsradar.xyz/news/e031d480ae5815c4" class="px-2.5 py-1 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+          🌐 切换英文 (EN)
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    
+    <!-- Hero Article Card -->
+    <article class="rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 shadow-xl overflow-hidden" itemscope itemtype="https://schema.org/NewsArticle">
+      
+      <!-- Preview Image -->
+      <div class="w-full aspect-[16/9] bg-slate-950 relative overflow-hidden flex items-center justify-center">
+        <img src="https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg" alt="Osmo研发嗅觉基础模型实现人脑级识别" class="w-full h-full object-cover" referrerpolicy="no-referrer" onerror="this.src='https://ainewsradar.xyz/images/og-default.jpg'">
+        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-6 right-6 flex items-center justify-between gap-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-600 text-white shadow-md">
+            权威消息来源: MIT Tech Review
+          </span>
+        </div>
+      </div>
+
+      <!-- Info Body -->
+      <div class="p-6 sm:p-10 lg:p-12">
+        
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 leading-tight">
+          Osmo研发嗅觉基础模型实现人脑级识别
+        </h1>
+        <div class="mt-2.5 text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1.5"><span>✍️</span> <span>记者 / 供稿: Amit Katwala</span></div>
+
+        <!-- News Briefing Content -->
+        <div class="mt-6">
+          <p class="text-[17px] sm:text-[18px] text-slate-700 dark:text-slate-300 leading-[1.85] sm:leading-[1.9] font-normal">
+            AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用
+          </p>
+        </div>
+
+        
+        <section class="executive-summary mt-6 p-5 rounded-2xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-200 dark:border-indigo-800/40" role="region" aria-label="核心要点提炼与关键事实" data-geocitation="true">
+          <h3 class="text-sm font-bold text-indigo-900 dark:text-indigo-200 mb-3 flex items-center gap-2">
+            <span>⚡</span> <span>核心要点提炼与关键事实</span>
+          </h3>
+          <ul class="list-disc list-inside space-y-2.5 text-indigo-950 dark:text-indigo-100" itemprop="articleBody">
+            <li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【核心事件】</strong>Osmo创始人 Alex Wiltschko在美国新泽西州纽瓦克实验室：通过化学传感器分析与人工嗅觉标注，构建气味基础模型并投入香氛商业化应用</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【起因与机理】</strong>利用数据驱动的机器学习填补气味科学中长期存在的“数据集匮乏”及行业封闭性缺口</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【关键数据与实测】</strong>Osmo构建了涵盖1000万人工标注与8亿气味Token的独特数据集。</li><li class='text-sm sm:text-base leading-relaxed pl-1'><strong class='font-bold text-indigo-900 dark:text-indigo-200'>【各方立场与态度】</strong>未来有望扩展至机场安检、疾病辅助诊断等复杂感知场景。</li>
+          </ul>
+        </section>
+        
+        
+        
+        <section class="mt-10 pt-8 border-t border-slate-200/90 dark:border-slate-800" aria-label="📰 深度报道原文实录">
+          <div class="flex items-center justify-between pb-4 mb-7 border-b border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2 h-2 rounded-full bg-indigo-600 dark:bg-indigo-400"></span>
+              <h2 class="text-base sm:text-lg font-bold text-slate-900 dark:text-slate-100 tracking-tight">
+                📰 深度报道原文实录
+              </h2>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 font-semibold border border-slate-200/60 dark:border-slate-700/60">MIT Tech Review 权威实录</span>
+          </div>
+          <div class="article-body space-y-6 sm:space-y-7">
+            <p class="text-[18px] sm:text-[20px] leading-[1.85] sm:leading-[1.9] text-slate-900 dark:text-slate-100 font-medium tracking-normal mb-6">在新泽西州纽瓦克机场附近的一个实验室里，一支由大约 30 名经验丰富的人类嗅探员组成的团队正在慢慢地寻找地球上的每一种气味。他们仔细的笔记——“坚果味”、“桃味”、“海洋味”——与化学分析交叉引用，为人工智能初创公司 Osmo 所说的世界上第一个嗅觉基础模型创建了一组丰富的训练数据。创始人 Alex Wiltschko 表示，该公司的目标是“让计算机拥有嗅觉”。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“气味分子确实是这个星球上大多数物种能说的唯一语言，”他说。 “大多数物种无法通过声音或视觉进行交流，所以它确实是地球的原始语言。从记忆和情感的角度来看，它对我们来说非常强大。你可以闻一次某种味道，并记住它的余生。你可以在街上闻到某种味道，然后被拉回高中。”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Wiltschko 声称，在过去的几个月里，Osmo 的模型已经实现了“人类水平的嗅觉智能”。该公司对此的定义是，该模型在检测和区分气味方面与普通人一样好，在创造气味方面与初级香水设计师一样好。该公司表示，其技术已被应用于香水行业，帮助品牌设计和制造新香水。该公司表示，上个月，Osmo 的人工智能模型优于全球最大消费品公司之一的内部调香师。威尔奇科认为，它最终可能会被部署用于机场威胁检测或诊断疾病等。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Wiltschko 于 2023 年从搜索巨头 Google Brain（这家搜索巨头的前人工智能研究实验室）的工作中剥离了这家初创公司，他正在运行与其他领域的人工智能初创公司相同的剧本：在困难问题上投入大量数据，看看会发生什么。威尔奇科说，气味的挑战在于缺乏良好的数据。据他统计，在 Osmo 出现之前，现有数据库中人类对气味的描述不足 20 万条。此外，收集数据所需的化学传感器设备价格昂贵，而且香水行业对其在嗅觉科学方面的工作保密。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该公司的大部分工作都是创建自己的数据集，其中包含超过 1000 万个人类标签和 8 亿个“气味标记”，这些标记描述了产生特定气味的确切分子和浓度。 Osmo 使用光谱仪和其他化学传感器全天候运行，分解从水果和鲜花到食品储藏室主食和器官的所有物质的分子组成。一支由大约 70 名美国和海外训练有素的数据贴标员组成的团队每天都在嗅闻东西，并使用标准化的香水词汇写下它们的气味。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">以这种方式绘制气味图会排除一些不太可能的相似之处。就像改变单词的顺序可以极大地影响句子的含义一样，以不同比例重新排列气味分子可以极大地改变人类感知的气味。 “定义新生儿气味的气味标记与一盘新鲜煮熟的意大利面条中的气味标记有很大的重叠，”威尔奇科说。 （他说，特别是巴里拉（Barilla）品牌的意大利面，这可能会给面食工厂的人们带来一些问题。）</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">该公司还创造自己的香水，使用校车大小的气味打印机器人，根据精确的配方混合成分，为 Osmo 自己的研究制作样品，并为付费客户制作香水。它可以根据 ChatGPT 风格的提示设计和打印订购的气味。威尔奇科打开他的笔记本电脑，向我展示人工智能模型是如何工作的。他在屏幕上打开了一个文本框，我让他制作一款闻起来像葡萄牙蛋挞的香水（我们在里斯本参加网络峰会），针对 18 至 23 岁的男性。该系统花了几分钟思考，然后生成了三种与概要相匹配的潜在气味特征的选项（奶油味、椰子味、果味）以及创建它们所需的分子。如果我继续订购过程，我的招牌蛋奶之水大约一周后就会准备好。</p>
+
+<figure class="my-8 mx-auto w-fit max-w-full flex flex-col items-center">
+              <img src="https://wp.technologyreview.com/wp-content/uploads/2026/11/Copy-of-Copy-of-BH1_6183_Ben_Hider_250430.jpg" alt="资讯配图" class="w-auto max-w-full h-auto max-h-[680px] rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm transition duration-300 hover:shadow-md block" loading="lazy" onload="if(this.naturalWidth&&this.naturalHeight){if(this.naturalWidth<80||this.naturalHeight<80||(this.naturalWidth/this.naturalHeight>5.5&&this.naturalHeight<180)){var f=this.closest('figure');if(f)f.remove();return;}if(this.naturalHeight>this.naturalWidth*1.15){this.style.maxWidth='min(100%,420px)';}else if(Math.abs(this.naturalHeight-this.naturalWidth)<=this.naturalWidth*0.15){this.style.maxWidth='min(100%,520px)';}}" onerror="var f=this.closest('figure');if(f)f.remove();" />
+              
+            </figure>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">Osmo 的技术已被用于制造零售香水，包括宝洁等巨头。盖茨基金会在 Osmo 推出时投资了 500 万美元，后来又向该公司提供了 350 万美元的赠款，用于评估驱除携带疾病的昆虫的分子，Osmo 确定了八种比避蚊胺更驱避的物质。 Osmo 还与在线服装市场 StockX 合作，通过检测鞋子所用材料的化学成分差异，利用气味来识别假冒运动鞋。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">但并非所有人都相信这项技术或该公司的重大主张。气味科学家、《鼻子知道什么》一书的作者艾弗里·吉尔伯特 (Avery Gilbert) 在他的 Substack 上对 Osmo 提出了尖锐的批评，认为它的一些营销主张没有记录在案，而且它的专利申请仍然依赖于人类感官小组和调香师，而不是人工智能。 “对于一家以超酷人工智能为基础的公司来说，这种对人类感官判断的严重依赖似乎很奇怪，”他在三月份写道。 Osmo 的代表没有及时做出回应。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">赫特福德郡大学前神经计算教授 Michael Schmuker 曾为 Osmo 提供咨询，他表示该公司的技术是一项成就。他与同事一起创建了 Osmo 2023 模型的开源逆向工程版本，但缺乏该公司此后收集的大量数据。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">但即使有了所有这些气味数据，Osmo也可能遗漏了一些使人类嗅觉独特的因素，Schmuker说。“嗅觉是超级复杂的。环境对嗅觉非常重要。同样的分子可能会根据环境引起不同的联想，”他说。“像卡芒贝尔奶酪这样的法国奶酪的气味与用过的尿布中的分子部分相同。你不会因为上下文而混淆这两者。”</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">在像香水实验室这样的受控环境中，缺乏背景可能并不那么重要。但如果 Osmo 的技术如 Wiltschko 所说，成为人工智能世界模型的“嗅觉通道”，那么它可能会产生影响。想象一下，一台机器可以嗅出生产线上食物的腐败情况，或者通过气味检测肿瘤，就像狗在试点研究中接受的训练那样。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">施穆克说，要实现这一目标，传感器技术需要变得更好。这些模型需要不断改进。医学诊断是最大的奖项。</p>
+
+<p class="text-[17px] sm:text-[18px] leading-[1.85] sm:leading-[1.9] text-slate-800 dark:text-slate-200 font-normal tracking-normal">“历史上有很多公司直接登上了这座山峰，但不幸的是，它们都没有成功，因为它非常昂贵，而且非常困难，”威尔奇科说。 “所以我们正在做的就是在所有这些山脉的山脚下建立这个基础。我们派遣探险队到山上进行探索，基本上是嗅遍整个世界。”</p>
+          </div>
+          
+        </section>
+        
+        
+        <div class="mt-10 p-5 sm:p-6 rounded-2xl bg-purple-50/50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-800/40">
+          <h3 class="text-sm font-bold text-purple-900 dark:text-purple-200 mb-2 flex items-center gap-2">
+            <span>🤖</span> <span>雷达专属 AI 研判与技术透视</span>
+          </h3>
+          <p class="text-sm sm:text-base text-purple-950 dark:text-purple-100 leading-relaxed whitespace-pre-line">嗅觉数字化是AI在非视觉/听觉感知领域的最后一片蓝海，Osmo通过将气味分子转化为可量化的“Token”，成功绕过了传统香氛行业高度依赖个人经验的闭环壁垒。该技术若在机场安检或病理诊断场景实现低成本部署，将重塑感官传感器产业链，推动生物感知计算（Biological Sensory Computing）进入商业化深水区。</p>
+        </div>
+        
+
+      </div>
+
+      <!-- Dedicated Article Action Footer Dock (Visually Separated from Body: Left=Share, Right=Direct Source CTA) -->
+      <div class="px-6 sm:px-10 lg:px-12 py-5 sm:py-6 bg-gradient-to-r from-slate-100/95 via-indigo-50/45 to-slate-100/95 dark:from-slate-950/95 dark:via-indigo-950/35 dark:to-slate-950/95 border-t-2 border-slate-200 dark:border-slate-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-none flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-between gap-4">
+
+        <!-- Left: Social Sharing & Link Copy Group -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 select-none">
+            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+            <span>分享至</span>
+          </span>
+          <button onclick="shareDirect('x')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 𝕏">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>X</span>
+          </button>
+          <button onclick="shareDirect('threads')" class="px-3.5 py-2.5 rounded-xl bg-black hover:bg-neutral-800 text-white dark:bg-white dark:text-black dark:hover:bg-neutral-100 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer" title="分享到 Threads">
+            <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 192 192"><path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"/></svg>
+            <span>Threads</span>
+          </button>
+          <button onclick="copyCurrentLink()" class="px-3.5 py-2.5 rounded-xl border border-slate-300/90 dark:border-slate-600 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-all text-xs font-semibold flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer">
+            <span>🔗</span> <span>复制分享链接</span>
+          </button>
+        </div>
+
+        <!-- Right: Primary Original Source Link CTA -->
+        <a href="https://www.technologyreview.com/2026/11/18/1148816/smell-startup-osmo-ai-nose-good-as-humans/?ref=ainewsradar" target="_blank" rel="noopener noreferrer" class="sm:ml-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-indigo-500/25 active:scale-95 transition-all">
+          <span>📖 阅读原资讯官网报道 ↗</span>
+        </a>
+
+      </div>
+    </article>
+
+    
+            <div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-slate-100 mb-4">更多前沿 AI 资讯</h3>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                
+            <a href="/zh/news/94069e6d6514a6f7" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://ainewsradar.xyz/images/verge_0cd984e2acf7e908.jpg" alt="Rockstar北区揭秘侠盗猎车手6开发逻辑" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">The Verge</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">Rockstar北区揭秘侠盗猎车手6开发逻辑</h4>
+            </a>
+            
+            <a href="/zh/news/133f7c6a325312d2" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://assets-prd.ignimgs.com/2026/11/18/g-blog-12-1794995262221.jpg?width=1280&amp;format=jpg&amp;auto=webp&amp;quality=80" alt="GTA 6通关时长区间：42至115小时" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA 6通关时长区间：42至115小时</h4>
+            </a>
+            
+            <a href="/zh/news/8a708c35d1409a42" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://assets-prd.ignimgs.com/2025/02/26/ps5console-1740609475402.jpeg?width=1280&amp;format=jpg&amp;auto=webp&amp;quality=80" alt="索尼强制更新PS5固件以防GTA6破解" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">IGN</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">索尼强制更新PS5固件以防GTA6破解</h4>
+            </a>
+            
+            <a href="/zh/news/5c1db2259346bf51" class="group block p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700/80 hover:border-indigo-500/60 transition-all shadow-xs">
+              <div class="h-28 rounded-lg overflow-hidden bg-slate-900 mb-3 relative">
+                <img src="https://i.guim.co.uk/img/media/53ac3eb2cb6dc9001ada3ba916d998589415975e/0_1_2596_1460/master/2596.jpg?width=465&amp;dpr=1&amp;s=none&amp;crop=none" alt="GTA6口碑炸裂：叙事深度与沉浸感" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.style.display='none'">
+              </div>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-200 dark:bg-slate-700 text-slate-700 dark:text-slate-300">Bloomberg</span>
+              <h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-500 transition-colors line-clamp-2 mt-2 leading-snug">GTA6口碑炸裂：叙事深度与沉浸感</h4>
+            </a>
+            
+              </div>
+            </div>
+            
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+    <p>© 2026 AI News Radar · Global Artificial Intelligence Intelligence</p>
+  </footer>
+
+  <script>
+    const NEWS_DATA = {
+      id: "e031d480ae5815c4",
+      type: "news",
+      title: "Osmo研发嗅觉基础模型实现人脑级识别",
+      snippet: "AI初创企业Osmo开发出嗅觉基础模型，在气味识别与合成领域达到人类专家水平，已在香氛行业落地应用",
+      url: window.location.href,
+      image_url: "https://ainewsradar.xyz/images/mittr_8eb579fe008146ab.jpg"
+    };
+
+    function shareDirect(platform) {
+      const baseShareUrl = window.location.origin + window.location.pathname;
+      const shareUrl = `${baseShareUrl}?utm_source=social_share&utm_medium=${platform}&utm_campaign=ainewsradar&v=6.8`;
+      const title = "Osmo研发嗅觉基础模型实现人脑级识别";
+      const rawTitle = title.replace(/<[^>]+>/g, '').trim();
+      const cleanTitleX = rawTitle.slice(0, 140);
+      const cleanTitleThreads = rawTitle.slice(0, 300);
+      if (platform === 'x') {
+        const text = encodeURIComponent(cleanTitleX + "\n\n#AI #AINewsRadar");
+        window.open(`https://x.com/intent/tweet?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      } else if (platform === 'threads') {
+        const text = encodeURIComponent(cleanTitleThreads + "\n\n#AI #AINewsRadar");
+        window.open(`https://www.threads.net/intent/post?text=${text}&url=${encodeURIComponent(shareUrl)}`, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function copyCurrentLink() {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert("分享链接已复制到剪贴板！🔗");
+      }).catch(() => {
+        prompt("Copy link:", window.location.href);
+      });
+    }
+  </script>
+</body>
+</html>
