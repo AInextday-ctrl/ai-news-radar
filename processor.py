@@ -1595,7 +1595,8 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
         is_washsun = "washingtonsun.com" in item_url.lower()
         is_ft = "ft.com/" in item_url.lower()
         is_wired = "wired.com/" in item_url.lower()
-        needs_art_refresh = (len(raw_art_en) < 600) or raw_art_en.startswith("STORY:") or is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired
+        is_mittr = "technologyreview.com" in item_url.lower()
+        needs_art_refresh = (len(raw_art_en) < 600) or raw_art_en.startswith("STORY:") or is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr
         if needs_art_refresh and item_url.startswith("http"):
             try:
                 from article_extractor import ArticleExtractor
@@ -1605,11 +1606,11 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                     item["article_content"] = raw_art_en
                     item["article_content_en"] = raw_art_en
                     item["is_substantive"] = True
-                    if is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired:
+                    if is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr:
                         item["is_paywalled"] = False
                     if ext.get("paragraphs"):
                         item["paragraphs"] = ext["paragraphs"]
-                    if is_nyt or is_verge or is_wapo or is_washsun or is_ft or is_wired:
+                    if is_nyt or is_verge or is_wapo or is_washsun or is_ft or is_wired or is_mittr:
                         item["inline_images"] = ext.get("inline_images", [])
                     elif ext.get("inline_images"):
                         item["inline_images"] = ext["inline_images"]
@@ -1617,14 +1618,14 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
                         item["subheadings"] = ext["subheadings"]
                     if ext.get("cover_image") and not item.get("image_url"):
                         item["image_url"] = ext["cover_image"]
-                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("title"):
+                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("title"):
                     item["title"] = ext["title"]
                     item["title_en"] = ext["title"]
-                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("author") and ext["author"] not in ("Bloomberg News", "Reuters", "Fortune", "Wall Street Journal", "The Verge", "The New York Times", "The Washington Post", "The Washington Sun", "Financial Times", "WIRED"):
+                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("author") and ext["author"] not in ("Bloomberg News", "Reuters", "Fortune", "Wall Street Journal", "The Verge", "The New York Times", "The Washington Post", "The Washington Sun", "Financial Times", "WIRED", "MIT Technology Review"):
                     item["author"] = ext["author"]
-                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
+                if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                     item["image_url"] = ext["cover_image"]
-                if (is_fortune or is_wired) and ext.get("has_video"):
+                if (is_fortune or is_wired or is_mittr) and ext.get("has_video"):
                     item["has_video"] = True
                     for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title"):
                         if ext.get(vk):
@@ -1771,7 +1772,8 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             is_washsun = "washingtonsun.com" in item_url.lower()
             is_ft = "ft.com/" in item_url.lower()
             is_wired = "wired.com/" in item_url.lower()
-            needs_full_text = (len(curr_content) < 600) or curr_content.startswith("STORY:") or is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired
+            is_mittr = "technologyreview.com" in item_url.lower()
+            needs_full_text = (len(curr_content) < 600) or curr_content.startswith("STORY:") or is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr
             if it.get("category") == "news" and needs_full_text and item_url.startswith("http"):
                 try:
                     from article_extractor import ArticleExtractor
@@ -1780,11 +1782,11 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         it["article_content"] = ext["full_text"]
                         it["article_content_en"] = ext["full_text"]
                         it["is_substantive"] = True
-                        if is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired:
+                        if is_reuters or is_bloomberg or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr:
                             it["is_paywalled"] = False
                         if ext.get("paragraphs"):
                             it["paragraphs"] = ext["paragraphs"]
-                        if is_nyt or is_verge or is_wapo or is_washsun or is_ft or is_wired:
+                        if is_nyt or is_verge or is_wapo or is_washsun or is_ft or is_wired or is_mittr:
                             it["inline_images"] = ext.get("inline_images", [])
                         elif ext.get("inline_images"):
                             it["inline_images"] = ext["inline_images"]
@@ -1793,14 +1795,14 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                         if ext.get("cover_image") and not it.get("image_url"):
                             it["image_url"] = ext["cover_image"]
                         print(f"  ✨ [processor] 成功穿透抓取源站长文 ({len(ext['full_text'])} 字): {it.get('title', '')[:40]}")
-                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("title"):
+                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("title"):
                         it["title"] = ext["title"]
                         it["title_en"] = ext["title"]
-                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("author") and ext["author"] not in ("Bloomberg News", "Reuters", "Fortune", "Wall Street Journal", "The Verge", "The New York Times", "The Washington Post", "The Washington Sun", "Financial Times", "WIRED"):
+                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("author") and ext["author"] not in ("Bloomberg News", "Reuters", "Fortune", "Wall Street Journal", "The Verge", "The New York Times", "The Washington Post", "The Washington Sun", "Financial Times", "WIRED", "MIT Technology Review"):
                         it["author"] = ext["author"]
-                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
+                    if (is_bloomberg or is_reuters or is_fortune or is_wsj or is_verge or is_nyt or is_wapo or is_washsun or is_ft or is_wired or is_mittr) and ext.get("cover_image") and str(ext["cover_image"]).startswith("http"):
                         it["image_url"] = ext["cover_image"]
-                    if (is_fortune or is_wired) and ext.get("has_video"):
+                    if (is_fortune or is_wired or is_mittr) and ext.get("has_video"):
                         it["has_video"] = True
                         for vk in ("video_url", "video_id", "video_provider", "video_direct_url", "video_embed_script", "video_aspect", "video_poster", "video_title"):
                             if ext.get(vk):

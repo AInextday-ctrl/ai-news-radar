@@ -1145,6 +1145,7 @@ def load_existing_items() -> list:
     washsun_live_budget = 4
     ft_live_budget = 4
     wired_live_budget = 4
+    mittr_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1844,6 +1845,74 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if w_data.get(vk):
                                 it[vk] = w_data[vk]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.11 MIT Technology Review (麻省理工科技评论) 官方真实标题、记者署名、WP REST 全量长文、Vimeo 视频与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "technologyreview.com" in u_now.lower():
+            m_ts = parse_time_for_sort(it)
+            is_recent_m = (m_ts > 0) and ((now_ts_load - m_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_m_fix = is_recent_m and mittr_live_budget > 0 and (
+                ("(" in t_curr and "technology review" in t_curr.lower()) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                len(art_en_curr) < 1300 or
+                len(art_zh_curr) < 200
+            )
+            if needs_m_fix:
+                mittr_live_budget -= 1
+                try:
+                    from crawlers.mittr_crawler import crawl_mittr
+                    m_data = crawl_mittr(u_now, title=t_curr)
+                    if m_data.get("title"):
+                        it["title"] = m_data["title"]
+                        it["title_en"] = m_data["title"]
+                    if m_data.get("author") and m_data["author"] != "MIT Technology Review":
+                        it["author"] = m_data["author"]
+                    if m_data.get("cover_image") and str(m_data["cover_image"]).startswith("http"):
+                        it["image_url"] = m_data["cover_image"]
+                        it["cover_image"] = m_data["cover_image"]
+                    if m_data.get("is_substantive") and len(m_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = m_data.get("paragraphs", [])
+                        it["subheadings"] = m_data.get("subheadings", [])
+                        it["article_content"] = m_data["full_text"]
+                        it["article_content_en"] = m_data["full_text"]
+                        it["inline_images"] = m_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = m_data["full_text"]
+                    if m_data.get("has_video") and m_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = m_data["video_url"]
+                        if m_data.get("video_id"):
+                            it["video_id"] = m_data["video_id"]
+                        it["video_provider"] = m_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if m_data.get(vk):
+                                it[vk] = m_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

@@ -797,6 +797,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "technologyreview.com" in domain:
+            try:
+                from crawlers.mittr_crawler import crawl_mittr
+                mittr_data = crawl_mittr(url, html_text=html_text)
+                if mittr_data.get("is_substantive") or mittr_data.get("paras_count", 0) >= 1 or mittr_data.get("title"):
+                    result.update(mittr_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
