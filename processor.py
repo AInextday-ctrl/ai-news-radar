@@ -1601,6 +1601,9 @@ def sanitize_bilingual_item(item: Dict[str, Any]) -> Dict[str, Any]:
             try:
                 from article_extractor import ArticleExtractor
                 ext = ArticleExtractor.extract_article(item_url)
+                if ext.get("is_filtered_out"):
+                    item["is_filtered_out"] = True
+                    return item
                 if ext.get("is_substantive") or len(ext.get("full_text", "")) >= 200:
                     raw_art_en = ext["full_text"]
                     item["article_content"] = raw_art_en
@@ -1778,6 +1781,9 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
                 try:
                     from article_extractor import ArticleExtractor
                     ext = ArticleExtractor.extract_article(item_url)
+                    if ext.get("is_filtered_out"):
+                        it["is_filtered_out"] = True
+                        continue
                     if ext.get("is_substantive") or len(ext.get("full_text", "")) >= 200:
                         it["article_content"] = ext["full_text"]
                         it["article_content_en"] = ext["full_text"]
@@ -2009,7 +2015,7 @@ def process_items_batch(items: List[Dict[str, Any]], batch_size: int = 8) -> Lis
             import concurrent.futures
             with concurrent.futures.ThreadPoolExecutor(max_workers=min(8, len(chunk))) as executor:
                 results.extend(list(executor.map(_quick_fallback, chunk)))
-    all_final = [sanitize_bilingual_item(it) for it in (direct_items + results)]
+    all_final = [sanitize_bilingual_item(it) for it in (direct_items + results) if not it.get("is_filtered_out")]
     # 🛡️ 强制执行语言质检与自愈哨兵流水线：对所有产出资讯进行双语对称性与纯净度门禁审查
     try:
         from language_sentinel import run_pipeline_language_audit

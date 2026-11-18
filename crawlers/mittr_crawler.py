@@ -28,6 +28,7 @@ import json
 import hashlib
 from urllib.parse import quote, urlparse
 from typing import Dict, Any, List, Optional, Tuple
+from .content_filters import detect_low_value_roundup_or_promo
 
 try:
     from curl_cffi import requests as cffi_requests
@@ -689,6 +690,8 @@ def _parse_mittr_wp_post(post: Dict[str, Any], resolve_oembed: bool = False, pro
         "video_aspect": "",
         "video_poster": None,
         "video_title": "",
+        "class_list": post.get("class_list") if isinstance(post.get("class_list"), list) else [],
+        "raw_content_text": "",
     }
     raw_title = (post.get("title") or {}).get("rendered") if isinstance(post.get("title"), dict) else post.get("title")
     if raw_title:
@@ -722,6 +725,7 @@ def _parse_mittr_wp_post(post: Dict[str, Any], resolve_oembed: bool = False, pro
 
     # Body HTML
     content_html = (post.get("content") or {}).get("rendered") if isinstance(post.get("content"), dict) else ""
+    out["raw_content_text"] = _clean_text(re.sub(r"<[^>]+>", " ", content_html))
     paras, subs, inls = _parse_content_fragment(content_html, cover_image=out["cover_image"])
     out["paragraphs"] = paras
     out["subheadings"] = subs
@@ -774,16 +778,31 @@ def crawl_mittr(
         "video_aspect": "",
         "video_poster": None,
         "video_title": "",
+        "is_filtered_out": False,
+        "filter_reason": "",
         "extraction_tier": "failed",
     }
 
     if not url or not is_mittr_url(url):
         return result
 
+    # Early fast-reject for obvious link-roundups ("The Download"), event promos ("Roundtables"), and hub pages ("Research Reports")
+    pre_flagged, pre_reason = detect_low_value_roundup_or_promo(title=title, url=url)
+    if pre_flagged:
+        result["status"] = "filtered_promo_or_roundup"
+        result["is_filtered_out"] = True
+        result["filter_reason"] = pre_reason
+        return result
+
     cache_key = _canonical_mittr_key(url)
     if use_cache and html_text is None and wp_post is None:
         _load_disk_cache()
         cached = _MITTR_CACHE.get(cache_key)
+        if isinstance(cached, dict) and cached.get("is_filtered_out"):
+            merged = dict(result)
+            merged.update(cached)
+            merged["url"] = url
+            return merged
         if isinstance(cached, dict) and cached.get("is_substantive") and len(cached.get("full_text", "")) >= 300:
             merged = dict(result)
             merged.update(cached)
@@ -803,6 +822,25 @@ def crawl_mittr(
         if post_obj:
             parsed = _parse_mittr_wp_post(post_obj, resolve_oembed=True, proxies=proxies)
             tier = wp_tier
+
+    # Post-WP taxonomy & raw-body check (catches `tag-sponsored`, `category-download-newsletter`, `tag-roundtables`, brand-studio advertorials)
+    if parsed:
+        post_flagged, post_reason = detect_low_value_roundup_or_promo(
+            title=parsed.get("title") or title,
+            url=url,
+            body=parsed.get("raw_content_text") or "\n\n".join(parsed.get("paragraphs") or []),
+            summary=parsed.get("summary") or "",
+            classes=parsed.get("class_list"),
+        )
+        if post_flagged:
+            result["status"] = "filtered_promo_or_roundup"
+            result["is_filtered_out"] = True
+            result["filter_reason"] = post_reason
+            if use_cache and html_text is None and wp_post is None:
+                _load_disk_cache()
+                _MITTR_CACHE[cache_key] = dict(result)
+                _save_disk_cache()
+            return result
 
     # 2. HTML enrichment / fallback (when injected, or missing cover/author/body)
     need_html = (

@@ -801,6 +801,9 @@ class ArticleExtractor:
             try:
                 from crawlers.mittr_crawler import crawl_mittr
                 mittr_data = crawl_mittr(url, html_text=html_text)
+                if mittr_data.get("is_filtered_out"):
+                    result.update(mittr_data)
+                    return result
                 if mittr_data.get("is_substantive") or mittr_data.get("paras_count", 0) >= 1 or mittr_data.get("title"):
                     result.update(mittr_data)
                     return result

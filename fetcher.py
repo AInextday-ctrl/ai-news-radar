@@ -2829,6 +2829,14 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                     if img_url and any(bad in img_url.lower() for bad in ["lh3.googleusercontent.com/j6_cofbog", "lh3.googleusercontent.com", "pml.png"]):
                         img_url = None
 
+                    # 严格剔除“外链汇总型简报（如 The Download）”、“订阅推广页（Research Reports / Roundtables）”、“商业赞助软文”及促销榜单
+                    try:
+                        from crawlers.content_filters import is_low_value_roundup_or_promo
+                        if is_low_value_roundup_or_promo(title=title, url=url, summary=clean_summary):
+                            continue
+                    except Exception:
+                        pass
+
                     # 提取权威媒体长篇原文段落/深入摘要 (The Verge, Ars Technica, The Decoder, Techmeme 援引的 WSJ/彭博等)
                     article_text_en = extract_rich_article_text(entry, is_techmeme=is_techmeme)
 
@@ -2870,9 +2878,15 @@ def fetch_rss_channel(source_key: str, max_items: int = 8) -> List[Dict[str, Any
                             clean_summary = article_text_en[:280]
                             is_dummy_summary = False
 
-                    # 【核心质量把控】：如果经落地页探测后仍无法获取具体事件内容（依然为空壳），坚决丢弃，绝不收录！
+                    # 【核心质量把控】：如果经落地页探测后仍无法获取具体事件内容（依然为空壳），或正文/标签触发外链汇总/赞助软文拦截，坚决丢弃！
                     if is_dummy_summary or not clean_summary or len(clean_summary) < 15:
                         continue
+                    try:
+                        from crawlers.content_filters import is_low_value_roundup_or_promo
+                        if is_low_value_roundup_or_promo(title=title, url=url, body=article_text_en or "", summary=clean_summary):
+                            continue
+                    except Exception:
+                        pass
 
                     if not img_url:
                         img_url = get_smart_cover_url(title, category, cfg["name"])

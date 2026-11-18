@@ -1161,6 +1161,20 @@ def load_existing_items() -> list:
         if "news.google.com/rss/articles" in u:
             continue
 
+        # 2.2 坚决丢弃全站低价值外链汇总简报（如 The Download）、订阅推广活动页（Research Reports / Roundtables）及商业赞助软文
+        if it.get("category") in ("news", None, ""):
+            try:
+                from crawlers.content_filters import is_low_value_roundup_or_promo
+                if it.get("is_filtered_out") or is_low_value_roundup_or_promo(
+                    title=str(it.get("title_en") or it.get("title") or ""),
+                    url=u,
+                    body=str(it.get("article_content_en") or it.get("article_content") or ""),
+                    summary=str(it.get("summary_en") or it.get("summary") or ""),
+                ):
+                    continue
+            except Exception:
+                pass
+
         # 2.5 修正历史数据中被误归类为 celebrity 的普通 web 新闻
         if it.get("category") == "celebrity" and platform == "web":
             it["category"] = "news"
@@ -1887,6 +1901,8 @@ def load_existing_items() -> list:
                 try:
                     from crawlers.mittr_crawler import crawl_mittr
                     m_data = crawl_mittr(u_now, title=t_curr)
+                    if m_data.get("is_filtered_out"):
+                        continue
                     if m_data.get("title"):
                         it["title"] = m_data["title"]
                         it["title_en"] = m_data["title"]
