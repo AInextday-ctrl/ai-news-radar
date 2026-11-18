@@ -1148,6 +1148,7 @@ def load_existing_items() -> list:
     mittr_live_budget = 4
     tc_live_budget = 4
     ars_live_budget = 4
+    cnbc_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2077,6 +2078,79 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if ars_data.get(vk):
                                 it[vk] = ars_data[vk]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.14 CNBC 官方真实标题、实名记者署名、.ArticleBody-articleBody 长文、官方 Akamai HD MP4 广播视频与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "cnbc.com" in u_now.lower():
+            cnbc_ts = parse_time_for_sort(it)
+            is_recent_cnbc = (cnbc_ts > 0) and ((now_ts_load - cnbc_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_cnbc_fix = is_recent_cnbc and cnbc_live_budget > 0 and (
+                ("(" in t_curr and "cnbc" in t_curr.lower()) or
+                "&#" in t_curr or
+                auth_curr in ("", "CNBC") or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                "ainewsradar.xyz/images/cnbc_" not in img_curr or
+                len(art_en_curr) < 1000 or
+                len(art_zh_curr) < 200
+            )
+            if needs_cnbc_fix:
+                cnbc_live_budget -= 1
+                try:
+                    from crawlers.cnbc_crawler import crawl_cnbc
+                    c_data = crawl_cnbc(u_now, title=t_curr)
+                    if c_data.get("is_filtered_out"):
+                        continue
+                    if c_data.get("title"):
+                        it["title"] = c_data["title"]
+                        it["title_en"] = c_data["title"]
+                    if c_data.get("author") and c_data["author"] != "CNBC":
+                        it["author"] = c_data["author"]
+                    if c_data.get("cover_image") and str(c_data["cover_image"]).startswith("http"):
+                        it["image_url"] = c_data["cover_image"]
+                        it["cover_image"] = c_data["cover_image"]
+                    if c_data.get("is_substantive") and c_data.get("full_text"):
+                        it["paragraphs"] = c_data.get("paragraphs", [])
+                        it["subheadings"] = c_data.get("subheadings", [])
+                        it["article_content"] = c_data["full_text"]
+                        it["article_content_en"] = c_data["full_text"]
+                        it["inline_images"] = c_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = c_data["full_text"]
+                    if c_data.get("has_video") and c_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = c_data["video_url"]
+                        if c_data.get("video_id"):
+                            it["video_id"] = c_data["video_id"]
+                        it["video_provider"] = c_data.get("video_provider", "mp4")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if c_data.get(vk):
+                                it[vk] = c_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

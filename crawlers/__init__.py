@@ -20,6 +20,7 @@ from .wired_crawler import crawl_wired, is_wired_url
 from .mittr_crawler import crawl_mittr, is_mittr_url
 from .techcrunch_crawler import crawl_techcrunch, is_techcrunch_url
 from .arstechnica_crawler import crawl_arstechnica, is_arstechnica_url
+from .cnbc_crawler import crawl_cnbc, is_cnbc_url
 from .content_filters import is_low_value_roundup_or_promo, detect_low_value_roundup_or_promo
 
 __all__ = [
@@ -50,6 +51,8 @@ __all__ = [
     "is_techcrunch_url",
     "crawl_arstechnica",
     "is_arstechnica_url",
+    "crawl_cnbc",
+    "is_cnbc_url",
     "is_low_value_roundup_or_promo",
     "detect_low_value_roundup_or_promo"
 ]

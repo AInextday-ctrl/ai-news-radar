@@ -836,6 +836,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "cnbc.com" in domain:
+            try:
+                from crawlers.cnbc_crawler import crawl_cnbc
+                cnbc_data = crawl_cnbc(url, html_text=html_text)
+                if cnbc_data.get("is_filtered_out"):
+                    result.update(cnbc_data)
+                    return result
+                if cnbc_data.get("is_substantive") or cnbc_data.get("paras_count", 0) >= 1 or cnbc_data.get("title"):
+                    result.update(cnbc_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
