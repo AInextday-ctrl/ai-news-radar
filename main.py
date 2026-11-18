@@ -1154,6 +1154,7 @@ def load_existing_items() -> list:
     siliconangle_live_budget = 4
     semafor_live_budget = 4
     coindesk_live_budget = 4
+    cbsnews_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2456,6 +2457,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if cd_data.get(vk):
                                 it[vk] = cd_data[vk]
+                except Exception:
+                    pass
+
+        # 6.20 CBS News (cbsnews.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "cbsnews.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_cbs = _extract_item_ts(it)
+            is_recent_cbs = (ts_cbs > 0) and ((now_ts_load - ts_cbs) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_cbs_fix = is_recent_cbs and cbsnews_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "CBS News") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/cbsnews_")
+            )
+            if needs_cbs_fix:
+                cbsnews_live_budget -= 1
+                try:
+                    from crawlers.cbsnews_crawler import crawl_cbsnews
+                    cbs_data = crawl_cbsnews(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if cbs_data.get("is_filtered_out"):
+                        continue
+                    if cbs_data.get("title"):
+                        it["title"] = cbs_data["title"]
+                        it["title_en"] = cbs_data["title"]
+                    if cbs_data.get("author") and cbs_data["author"] != "CBS News":
+                        it["author"] = cbs_data["author"]
+                    if cbs_data.get("cover_image") and str(cbs_data["cover_image"]).startswith("http"):
+                        it["image_url"] = cbs_data["cover_image"]
+                        it["cover_image"] = cbs_data["cover_image"]
+                    if cbs_data.get("is_substantive") and cbs_data.get("full_text"):
+                        it["paragraphs"] = cbs_data.get("paragraphs", [])
+                        it["subheadings"] = cbs_data.get("subheadings", [])
+                        it["article_content"] = cbs_data["full_text"]
+                        it["article_content_en"] = cbs_data["full_text"]
+                        it["inline_images"] = cbs_data.get("inline_images", [])
+                        if cbs_data.get("inline_videos"):
+                            it["inline_videos"] = cbs_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if cbs_data.get("has_video") and cbs_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = cbs_data["video_url"]
+                        if cbs_data.get("video_id"):
+                            it["video_id"] = cbs_data["video_id"]
+                        it["video_provider"] = cbs_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if cbs_data.get(vk):
+                                it[vk] = cbs_data[vk]
                 except Exception:
                     pass
 
