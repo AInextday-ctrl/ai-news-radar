@@ -1086,8 +1086,8 @@ def resolve_techmeme_url_and_source(curr_url: str, title: str) -> tuple:
 
 def load_existing_items() -> list:
     """Load previously saved news items from JSON to support incremental updates and complete history retention."""
-    # 优先载入具备完整长文解构与 AI 深度研判的最新看板库，绝不让轻量归档冲刷掉深度内容
-    files_to_check = [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, ARCHIVE_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE]
+    # 优先载入具备完整长文解构与 AI 深度研判的最新看板库与公开归档库，绝不让陈旧 data/archive_news.json 冲刷掉已重构的深度内容
+    files_to_check = [OUTPUT_FILE, PUBLIC_OUTPUT_FILE, PUBLIC_ARCHIVE_OUTPUT_FILE, MASTER_ARCHIVE_FILE, ARCHIVE_OUTPUT_FILE]
     seen_map = {}
 
     for target_file in files_to_check:
@@ -1111,7 +1111,11 @@ def load_existing_items() -> list:
                         seen_map[k] = it
                     else:
                         existing = seen_map[k]
+                        existing_has_fulltext = bool(existing.get("is_substantive")) or len(str(existing.get("article_content") or existing.get("article_content_en") or "")) >= 400
                         for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                            # 已由独立爬虫完成正文解构的文章，其空 inline_images=[] 代表刻意清洗了头像/侧栏脏图，严禁被低优先级旧归档回填污染
+                            if fld == "inline_images" and existing_has_fulltext:
+                                continue
                             if it.get(fld) and not existing.get(fld):
                                 existing[fld] = it[fld]
         except Exception as e:

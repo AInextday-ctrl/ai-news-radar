@@ -1059,7 +1059,8 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
         auth_avatar_base = str(item.get("author_avatar") or "").split("?")[0].strip().lower()
         AVATAR_URL_TOKENS = (
             "blurple", "author_profile_images", "headshot", "avatar", "byline",
-            "gravatar", "profile_image", "profile-pic", "-portrait-",
+            "gravatar", "profile_image", "profile-pic", "-portrait-", "-mug-", "staff-",
+            "resize/312x208", "resize/330x220", "resize/300x200",
             "w_40,h_40", "w_48,h_48", "w_64,h_64", "w_80,h_80", "w_96,h_96",
             "h_116,c_limit", "375x375", "150x150", "200x200", "bloomberg-bna-brightspot"
         )

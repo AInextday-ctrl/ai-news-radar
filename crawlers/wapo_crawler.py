@@ -486,7 +486,7 @@ def _fetch_wapo_via_msn_syndication(
                 if len(paras) < 3:
                     continue
 
-                # Extract MSN imageResources (hero + clean inline images, excluding logos)
+                # Extract MSN imageResources (hero + genuine distinct inline images, avoiding cover duplication)
                 msn_cover = None
                 msn_inlines: List[Dict[str, str]] = []
                 for idx, im in enumerate(data.get("imageResources") or []):
@@ -504,7 +504,10 @@ def _fetch_wapo_via_msn_syndication(
                         msn_cover = sized_u
                     else:
                         cap = _clean_text(im.get("caption") or "")
-                        msn_inlines.append({"url": sized_u, "caption": cap, "alt": cap or msn_title})
+                        # Skip unlabeled / title-duplicate secondary renditions of the hero photo
+                        if not cap or cap.lower().strip() == msn_title.lower().strip():
+                            continue
+                        msn_inlines.append({"url": sized_u, "caption": cap, "alt": cap})
 
                 authors = []
                 for a in data.get("authors") or []:
