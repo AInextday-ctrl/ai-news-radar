@@ -777,6 +777,16 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "ft.com" in domain:
+            try:
+                from crawlers.ft_crawler import crawl_ft
+                ft_data = crawl_ft(url, html_text=html_text)
+                if ft_data.get("is_substantive") or ft_data.get("paras_count", 0) >= 1 or ft_data.get("title"):
+                    result.update(ft_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

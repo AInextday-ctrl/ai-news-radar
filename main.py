@@ -1143,6 +1143,7 @@ def load_existing_items() -> list:
     nyt_live_budget = 4
     wapo_live_budget = 4
     washsun_live_budget = 4
+    ft_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -1714,6 +1715,66 @@ def load_existing_items() -> list:
                         it["is_substantive"] = True
                         it["is_paywalled"] = False
                         art_en_curr = ws_data["full_text"]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.9 金融时报 (Financial Times) 官方真实标题、记者署名、.n-content-body 全量长文与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "ft.com/" in u_now.lower():
+            ft_ts = parse_time_for_sort(it)
+            is_recent_ft = (ft_ts > 0) and ((now_ts_load - ft_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            needs_ft_fix = is_recent_ft and ft_live_budget > 0 and (
+                ("(" in t_curr and ("financial times" in t_curr.lower() or "/ft)" in t_curr.lower())) or
+                "&#" in t_curr or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                "images.openai.com" in img_curr or
+                len(art_en_curr) < 600 or
+                len(art_zh_curr) < 200
+            )
+            if needs_ft_fix:
+                ft_live_budget -= 1
+                try:
+                    from crawlers.ft_crawler import crawl_ft
+                    ft_data = crawl_ft(u_now, title=t_curr)
+                    if ft_data.get("title"):
+                        it["title"] = ft_data["title"]
+                        it["title_en"] = ft_data["title"]
+                    if ft_data.get("author") and ft_data["author"] != "Financial Times":
+                        it["author"] = ft_data["author"]
+                    if ft_data.get("cover_image") and str(ft_data["cover_image"]).startswith("http"):
+                        it["image_url"] = ft_data["cover_image"]
+                        it["cover_image"] = ft_data["cover_image"]
+                    if ft_data.get("is_substantive") and len(ft_data.get("full_text", "")) > len(art_en_curr):
+                        it["paragraphs"] = ft_data.get("paragraphs", [])
+                        it["subheadings"] = ft_data.get("subheadings", [])
+                        it["article_content"] = ft_data["full_text"]
+                        it["article_content_en"] = ft_data["full_text"]
+                        it["inline_images"] = ft_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = ft_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []

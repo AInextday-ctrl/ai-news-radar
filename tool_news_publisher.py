@@ -1018,8 +1018,12 @@ def build_news_html(item: Dict[str, Any], is_zh: bool = False, related_news: Lis
     is_bloomberg = "bloomberg" in (item.get("source") or "").lower() or "bloomberg.com" in (item.get("url") or "").lower()
     is_fortune = "fortune" in (item.get("source") or "").lower() or "fortune.com" in (item.get("url") or "").lower()
     is_wsj = "wsj" in (item.get("source") or "").lower() or "wall street journal" in (item.get("source") or "").lower() or "wsj.com" in (item.get("url") or "").lower()
-    is_paywalled = bool((not is_reuters and not (is_bloomberg and item.get("is_substantive")) and not (is_fortune and item.get("is_substantive")) and not (is_wsj and item.get("is_substantive")) and item.get("is_paywalled")) or any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"]))
-    if is_reuters or ((is_bloomberg or is_fortune or is_wsj) and (item.get("is_substantive") or len(full_text) >= 200)):
+    is_dedicated_full = (
+        is_reuters or is_bloomberg or is_fortune or is_wsj or
+        any(d in (item.get("url") or "").lower() for d in ("theverge.com", "nytimes.com", "washingtonpost.com", "washingtonsun.com", "ft.com/"))
+    )
+    is_paywalled = bool((not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and item.get("is_paywalled")) or (not (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)) and any(k in (item.get("source") or "").lower() for k in ["financial times", "ft.com", "the information"])))
+    if is_reuters or (is_dedicated_full and (item.get("is_substantive") or len(full_text) >= 400)):
         is_paywalled = False
         if len(full_text) >= 200:
             item["is_substantive"] = True
