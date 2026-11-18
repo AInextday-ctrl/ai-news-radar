@@ -875,6 +875,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "siliconangle.com" in domain:
+            try:
+                from crawlers.siliconangle_crawler import crawl_siliconangle
+                sa_data = crawl_siliconangle(url, html_text=html_text)
+                if sa_data.get("is_filtered_out"):
+                    result.update(sa_data)
+                    return result
+                if sa_data.get("is_substantive") or sa_data.get("paras_count", 0) >= 1 or sa_data.get("title"):
+                    result.update(sa_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

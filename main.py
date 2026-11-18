@@ -1151,6 +1151,7 @@ def load_existing_items() -> list:
     cnbc_live_budget = 4
     decoder_live_budget = 4
     openai_live_budget = 4
+    siliconangle_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2301,6 +2302,58 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if o_data.get(vk):
                                 it[vk] = o_data[vk]
+                except Exception:
+                    pass
+
+        # 6.17 SiliconANGLE (siliconangle.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "siliconangle.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_sa = _extract_item_ts(it)
+            is_recent_sa = (ts_sa > 0) and ((now_ts_load - ts_sa) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_sa_fix = is_recent_sa and siliconangle_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                "support our mission" in art_en_curr.lower() or
+                "are you an aws customer" in art_en_curr.lower() or
+                auth_curr in ("", "SiliconANGLE") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/sa_")
+            )
+            if needs_sa_fix:
+                siliconangle_live_budget -= 1
+                try:
+                    from crawlers.siliconangle_crawler import crawl_siliconangle
+                    s_data = crawl_siliconangle(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if s_data.get("is_filtered_out"):
+                        continue
+                    if s_data.get("title"):
+                        it["title"] = s_data["title"]
+                        it["title_en"] = s_data["title"]
+                    if s_data.get("author") and s_data["author"] != "SiliconANGLE":
+                        it["author"] = s_data["author"]
+                    if s_data.get("cover_image") and str(s_data["cover_image"]).startswith("http"):
+                        it["image_url"] = s_data["cover_image"]
+                        it["cover_image"] = s_data["cover_image"]
+                    if s_data.get("is_substantive") and s_data.get("full_text"):
+                        it["paragraphs"] = s_data.get("paragraphs", [])
+                        it["subheadings"] = s_data.get("subheadings", [])
+                        it["article_content"] = s_data["full_text"]
+                        it["article_content_en"] = s_data["full_text"]
+                        it["inline_images"] = s_data.get("inline_images", [])
+                        if s_data.get("inline_videos"):
+                            it["inline_videos"] = s_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if s_data.get("has_video") and s_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = s_data["video_url"]
+                        if s_data.get("video_id"):
+                            it["video_id"] = s_data["video_id"]
+                        it["video_provider"] = s_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if s_data.get(vk):
+                                it[vk] = s_data[vk]
                 except Exception:
                     pass
 
