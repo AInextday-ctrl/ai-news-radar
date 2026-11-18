@@ -1130,6 +1130,9 @@ def load_existing_items() -> list:
         "x_noam_plagiarism_clarify"
     }
     x_status_pattern = re.compile(r'https?://(?:twitter|x)\.com/[^/]+/status/\d+', re.IGNORECASE)
+    now_ts_load = time.time()
+    bloomberg_live_budget = 3
+    reuters_live_budget = 3
 
     for it in items:
         u = it.get("url", "")
@@ -1260,16 +1263,19 @@ def load_existing_items() -> list:
             else:
                 continue
 
-        # 6.1 彭博社 (Bloomberg) 官方真实标题、署名记者与 bwbx 官方高清配图保真机制
+        # 6.1 彭博社 (Bloomberg) 官方真实标题、署名记者与 bwbx 官方高清配图保真机制 (仅针对近 3 天资讯且限流防超时)
         if "bloomberg.com" in u.lower() or "bloomberg.net" in u.lower():
+            b_ts = parse_time_for_sort(it)
+            is_recent_b = (b_ts > 0) and ((now_ts_load - b_ts) <= 3 * 86400)
             t_curr = it.get("title", "")
-            needs_b_fix = (
+            needs_b_fix = is_recent_b and bloomberg_live_budget > 0 and (
                 ("(" in t_curr and "bloomberg" in t_curr.lower()) or
                 not it.get("image_url") or
                 "unsplash.com" in str(it.get("image_url", "")) or
                 not it.get("paragraphs")
             )
             if needs_b_fix:
+                bloomberg_live_budget -= 1
                 try:
                     from crawlers.bloomberg_crawler import crawl_bloomberg
                     b_data = crawl_bloomberg(u, title=t_curr)
@@ -1289,14 +1295,16 @@ def load_existing_items() -> list:
                 except Exception:
                     pass
 
-        # 6.2 路透社 (Reuters) 官方真实标题、官方高清原图与全文自愈保真机制 (防首次入库抓空锁死与 Techmeme 标题污染)
+        # 6.2 路透社 (Reuters) 官方真实标题、官方高清原图与全文自愈保真机制 (仅针对近 3 天资讯且限流防超时)
         u_now = str(it.get("url") or u or "")
         if "reuters.com" in u_now.lower() or "reutersagency.com" in u_now.lower():
+            r_ts = parse_time_for_sort(it)
+            is_recent_r = (r_ts > 0) and ((now_ts_load - r_ts) <= 3 * 86400)
             t_curr = str(it.get("title") or "")
             img_curr = str(it.get("image_url") or "")
             art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
             art_zh_curr = str(it.get("article_content_zh") or "")
-            needs_r_fix = (
+            needs_r_fix = is_recent_r and reuters_live_budget > 0 and (
                 ("(" in t_curr and "reuters" in t_curr.lower()) or
                 t_curr.startswith("Sources:") or
                 not img_curr or
@@ -1307,6 +1315,7 @@ def load_existing_items() -> list:
                 len(art_zh_curr) < 200
             )
             if needs_r_fix:
+                reuters_live_budget -= 1
                 try:
                     from crawlers.reuters_crawler import crawl_reuters
                     r_data = crawl_reuters(u_now, title=t_curr)
@@ -1328,13 +1337,22 @@ def load_existing_items() -> list:
                         art_en_curr = r_data["full_text"]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
-                        zh_paras = []
+                        zh_chunks = []
+                        buf = ""
                         for p in paras_en:
-                            tr = free_translate_zh(p)
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
                             if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
-                                zh_paras.append(tr.strip())
-                        if zh_paras:
-                            it["article_content_zh"] = "\n\n".join(zh_paras)
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
                 except Exception:
                     pass
 
