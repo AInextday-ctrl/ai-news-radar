@@ -52,7 +52,15 @@ class TestOpenAICrawler(unittest.TestCase):
         self.assertEqual(res["inline_images"][0]["after_para"], 1)
 
     def test_mdx_rsc_vimeo_videos_and_portrait_aspect(self):
-        html_doc = """
+        import json as _json
+        flight_lines = "\n".join([
+            '10:["$","div",null,{"children":{"videoEmbedUrl":"https://player.vimeo.com/video/1244350136?h=abc","posterImageUrl":"https://cdn.openai.com/mdx-assets/p0.webp","altText":"Introducing GPT-6.2 Astra and Sol"}}]',
+            '11:["$","div",null,{"children":{"videoEmbedUrl":"https://player.vimeo.com/video/1245939846?h=def","posterImageUrl":"https://cdn.openai.com/mdx-assets/p1.webp","altText":"Roadster demo"}}]',
+            '12:["$","div",null,{"className":"aspect-9/16","children":{"videoEmbedUrl":"https://player.vimeo.com/video/1245920978?h=ghi","posterImageUrl":"https://cdn.openai.com/mdx-assets/p2.webp","altText":"Paper lamp portrait demo"}}]',
+            '47:["$","article",null,{"children":[["$","p",null,{"children":"GPT-6.2 Astra sets a new frontier standard for scientific reasoning, engineering, and complex multi-step workflows across industries."}],"$10",["$","h2",null,{"children":"Driving simulation"}],["$","p",null,{"children":"Using computer use, Astra built a complete 3D vehicle scene and animated a roadster along a winding mountain highway."}],"$11",["$","h3",null,{"children":"From CAD to a paper lamp"}],["$","p",null,{"children":"In another workflow, Astra generated CAD geometry and step-by-step assembly instructions for a vertical paper lamp."}],"$12"]}]',
+        ])
+        rsc_literal = _json.dumps(flight_lines)[1:-1]
+        html_doc = f"""
         <html>
         <head>
           <meta property="og:title" content="Introducing GPT-6.2 Astra and Sol" />
@@ -67,7 +75,7 @@ class TestOpenAICrawler(unittest.TestCase):
             <h3>From CAD to a paper lamp</h3>
             <p>In another workflow, Astra generated CAD geometry and step-by-step assembly instructions for a vertical paper lamp.</p>
           </article>
-          <script>self.__next_f.push([1,"\\"children\\":\\"GPT-6.2 Astra sets a new frontier standard\\" ... {\\"videoEmbedUrl\\":\\"https://player.vimeo.com/video/1244350136?h=abc\\",\\"posterImageUrl\\":\\"https://cdn.openai.com/mdx-assets/p0.webp\\",\\"altText\\":\\"Introducing GPT-6.2 Astra and Sol\\"} ... \\"Driving simulation\\" ... {\\"videoEmbedUrl\\":\\"https://player.vimeo.com/video/1245939846?h=def\\",\\"posterImageUrl\\":\\"https://cdn.openai.com/mdx-assets/p1.webp\\",\\"altText\\":\\"Roadster demo\\"} ... \\"From CAD to a paper lamp\\" ... aspect-9/16 {\\"videoEmbedUrl\\":\\"https://player.vimeo.com/video/1245920978?h=ghi\\",\\"posterImageUrl\\":\\"https://cdn.openai.com/mdx-assets/p2.webp\\",\\"altText\\":\\"Paper lamp portrait demo\\"}"])</script>
+          <script>self.__next_f.push([1,"{rsc_literal}"])</script>
         </body>
         </html>
         """
@@ -78,9 +86,9 @@ class TestOpenAICrawler(unittest.TestCase):
         self.assertEqual(res["inline_videos"][0]["after_para"], 0)
         self.assertEqual(res["inline_videos"][0]["aspect"], "16x9")
         self.assertEqual(res["inline_videos"][1]["video_id"], "1245939846")
-        self.assertEqual(res["inline_videos"][1]["after_para"], 1)
+        self.assertEqual(res["inline_videos"][1]["after_para"], 2)
         self.assertEqual(res["inline_videos"][2]["video_id"], "1245920978")
-        self.assertEqual(res["inline_videos"][2]["after_para"], 3)
+        self.assertEqual(res["inline_videos"][2]["after_para"], 4)
         self.assertEqual(res["inline_videos"][2]["aspect"], "9x16")
 
 
