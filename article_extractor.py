@@ -940,6 +940,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "9to5mac.com" in domain:
+            try:
+                from crawlers.nineto5mac_crawler import crawl_nineto5mac
+                n95_data = crawl_nineto5mac(url, html_text=html_text)
+                if n95_data.get("is_filtered_out"):
+                    result.update(n95_data)
+                    return result
+                if n95_data.get("is_substantive") or n95_data.get("paras_count", 0) >= 1 or n95_data.get("title"):
+                    result.update(n95_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

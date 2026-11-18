@@ -1156,6 +1156,7 @@ def load_existing_items() -> list:
     coindesk_live_budget = 4
     cbsnews_live_budget = 4
     ifixit_live_budget = 4
+    nineto5mac_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2558,6 +2559,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if ifx_data.get(vk):
                                 it[vk] = ifx_data[vk]
+                except Exception:
+                    pass
+
+        # 6.22 9to5Mac (9to5mac.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "9to5mac.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_n95 = _extract_item_ts(it)
+            is_recent_n95 = (ts_n95 > 0) and ((now_ts_load - ts_n95) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_n95_fix = is_recent_n95 and nineto5mac_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "9to5Mac") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/n95m_")
+            )
+            if needs_n95_fix:
+                nineto5mac_live_budget -= 1
+                try:
+                    from crawlers.nineto5mac_crawler import crawl_nineto5mac
+                    n95_data = crawl_nineto5mac(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if n95_data.get("is_filtered_out"):
+                        continue
+                    if n95_data.get("title"):
+                        it["title"] = n95_data["title"]
+                        it["title_en"] = n95_data["title"]
+                    if n95_data.get("author") and n95_data["author"] != "9to5Mac":
+                        it["author"] = n95_data["author"]
+                    if n95_data.get("cover_image") and str(n95_data["cover_image"]).startswith("http"):
+                        it["image_url"] = n95_data["cover_image"]
+                        it["cover_image"] = n95_data["cover_image"]
+                    if n95_data.get("is_substantive") and n95_data.get("full_text"):
+                        it["paragraphs"] = n95_data.get("paragraphs", [])
+                        it["subheadings"] = n95_data.get("subheadings", [])
+                        it["article_content"] = n95_data["full_text"]
+                        it["article_content_en"] = n95_data["full_text"]
+                        it["inline_images"] = n95_data.get("inline_images", [])
+                        if n95_data.get("inline_videos"):
+                            it["inline_videos"] = n95_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if n95_data.get("has_video") and n95_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = n95_data["video_url"]
+                        if n95_data.get("video_id"):
+                            it["video_id"] = n95_data["video_id"]
+                        it["video_provider"] = n95_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if n95_data.get(vk):
+                                it[vk] = n95_data[vk]
                 except Exception:
                     pass
 
