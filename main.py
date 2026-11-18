@@ -1112,7 +1112,7 @@ def load_existing_items() -> list:
                     else:
                         existing = seen_map[k]
                         existing_has_fulltext = bool(existing.get("is_substantive")) or len(str(existing.get("article_content") or existing.get("article_content_en") or "")) >= 400
-                        for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                        for fld in ["article_content", "article_content_zh", "inline_images", "inline_videos", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
                             # 已由独立爬虫完成正文解构的文章，其空 inline_images=[] 代表刻意清洗了头像/侧栏脏图，严禁被低优先级旧归档回填污染
                             if fld == "inline_images" and existing_has_fulltext:
                                 continue
@@ -2373,7 +2373,7 @@ def save_news(items: list):
                                 else:
                                     exist = master_dict[k]
                                     exist_has_fulltext = bool(exist.get("is_substantive") or len(str(exist.get("article_content") or exist.get("article_content_en") or "")) >= 400)
-                                    for fld in ["article_content", "article_content_zh", "inline_images", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
+                                    for fld in ["article_content", "article_content_zh", "inline_images", "inline_videos", "ai_analysis", "fact_bullets_zh", "fact_bullets_en", "image_url"]:
                                         # 已由独立爬虫清洗为 inline_images=[] 的长文，严禁被陈旧归档中的脏插图/SVG水印回填污染
                                         if fld == "inline_images" and exist_has_fulltext:
                                             continue

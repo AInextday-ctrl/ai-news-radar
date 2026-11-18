@@ -349,7 +349,56 @@ def _localize_openai_image(img_url: str, proxies: Optional[Dict[str, str]] = Non
     return img_url
 
 
-def _extract_rsc_inline_videos(html_text: str, paragraphs: List[str], base_dom_seq: int = 500) -> List[Dict[str, Any]]:
+def _compute_rsc_para_offsets(joined: str, paragraphs: List[str]) -> List[Tuple[int, int]]:
+    """
+    Monotonically maps each paragraph/subheading to its offset inside the Next.js
+    RSC body stream (starting from paragraph 0 so early Table-of-Contents labels
+    never hijack later headings like 'Pricing and availability').
+    """
+    para_offsets: List[Tuple[int, int]] = []
+    # Find body start near first substantive paragraph (skipping header/TOC)
+    cursor = 0
+    for idx, p in enumerate(paragraphs):
+        clean_p = p.lstrip("#").strip()
+        if not p.startswith("### ") and len(clean_p) >= 35:
+            pos0 = joined.find(clean_p[:50])
+            if pos0 != -1:
+                cursor = max(0, pos0 - 600)
+                break
+
+    for idx, p in enumerate(paragraphs):
+        clean_p = p.lstrip("#").strip()
+        needle = clean_p[:55] if len(clean_p) >= 24 else clean_p
+        if len(needle) < 8:
+            continue
+        pos = joined.find(needle, cursor)
+        if pos == -1 and len(needle) > 22:
+            pos = joined.find(needle[:22], cursor)
+        if pos != -1:
+            para_offsets.append((pos, idx))
+            cursor = pos
+    return para_offsets
+
+
+def _best_semantic_para_index(text_hint: str, paragraphs: List[str], default_idx: int) -> int:
+    """Fallback chapter matcher for out-of-order Next.js lazy RSC chunks."""
+    if not text_hint or not paragraphs:
+        return default_idx
+    stop = {"the", "and", "for", "with", "that", "this", "from", "into", "over", "gpt", "astra", "sol", "openai", "model", "models", "shown", "alongside"}
+    words = {w for w in re.findall(r"[a-z0-9]{4,}", text_hint.lower()) if w not in stop}
+    if not words:
+        return default_idx
+    best_i, best_score = default_idx, 0
+    for idx, p in enumerate(paragraphs):
+        p_low = p.lower()
+        score = sum(1 for w in words if w in p_low)
+        if score > best_score:
+            best_score = score
+            best_i = idx
+    return best_i if best_score >= 2 else default_idx
+
+
+def _extract_rsc_inline_videos(html_text: str, paragraphs: List[str], base_dom_seq: int = 500, article_title: str = "") -> List[Dict[str, Any]]:
     """
     Extracts Vimeo / MP4 demo videos embedded in OpenAI Next.js App Router RSC
     payloads (`self.__next_f.push([1,"..."])`) and maps each video to its exact
@@ -362,19 +411,9 @@ def _extract_rsc_inline_videos(html_text: str, paragraphs: List[str], base_dom_s
     if "videoEmbedUrl" not in joined and "player.vimeo.com/video/" not in joined:
         return []
 
-    # Precompute normalized anchor positions of paragraphs/subheadings inside the RSC payload
-    para_offsets: List[Tuple[int, int]] = []
-    for idx, p in enumerate(paragraphs):
-        clean_p = p.lstrip("#").strip()
-        needle = clean_p[:60] if len(clean_p) >= 24 else clean_p
-        if len(needle) < 10:
-            continue
-        pos = joined.find(needle)
-        if pos == -1 and len(needle) > 25:
-            pos = joined.find(needle[:25])
-        if pos != -1:
-            para_offsets.append((pos, idx))
-    para_offsets.sort(key=lambda x: x[0])
+    para_offsets = _compute_rsc_para_offsets(joined, paragraphs)
+    last_para_pos = para_offsets[-1][0] if para_offsets else 0
+    title_low = _clean_text(article_title).lower()
 
     out: List[Dict[str, Any]] = []
     seen = set()
@@ -399,13 +438,26 @@ def _extract_rsc_inline_videos(html_text: str, paragraphs: List[str], base_dom_s
         is_portrait = ("aspect-9/16" in ctx_before) or ("portrait-video" in ctx_before)
         aspect = "9x16" if is_portrait else "16x9"
 
-        # Find nearest preceding paragraph/heading in RSC stream
-        after_para = 0
-        for p_pos, p_idx in para_offsets:
-            if p_pos < m.start():
-                after_para = p_idx
-            else:
-                break
+        # Hero launch video matching article title sits right at the lead
+        if k == 0 and title_low and alt_txt and (title_low in alt_txt.lower() or alt_txt.lower() in title_low):
+            after_para = 0
+        else:
+            after_para = 0
+            for p_pos, p_idx in para_offsets:
+                if p_pos < m.start():
+                    after_para = p_idx
+                else:
+                    break
+            # If video sits in a lazy out-of-order RSC chunk past the final paragraph,
+            # try semantic alignment against article chapters so tabbed demos stay with their section.
+            if last_para_pos and m.start() > last_para_pos + 1500 and alt_txt:
+                sem_idx = _best_semantic_para_index(alt_txt, paragraphs, after_para)
+                if sem_idx == after_para and any(k3 in alt_txt.lower() for k3 in ("walkthrough", "3d", "nave", "rendered", "interactive", "game")):
+                    for idx_p, pp in enumerate(paragraphs):
+                        if "3d design" in pp.lower() or "3d " in pp.lower():
+                            sem_idx = idx_p
+                            break
+                after_para = sem_idx
 
         vid_obj: Dict[str, Any] = {
             "url": v_url,
@@ -424,6 +476,95 @@ def _extract_rsc_inline_videos(html_text: str, paragraphs: List[str], base_dom_s
         out.append(vid_obj)
 
     return out[:12]
+
+
+def _extract_rsc_inline_images(
+    html_text: str,
+    paragraphs: List[str],
+    seen_stems: set,
+    base_dom_seq: int = 700,
+) -> List[Dict[str, Any]]:
+    """
+    Extracts high-resolution MDX showcase images (Workbooks, Slideshows, visual
+    examples) stored inside Next.js RSC payloads (`posterImage`/`image` blocks),
+    ignoring small customer testimonial logos.
+    """
+    rsc_chunks = re.findall(r'self\.__next_f\.push\(\[1,"(.*?)"\]\)</script>', html_text or "", re.S)
+    if not rsc_chunks:
+        return []
+    joined = "".join(rsc_chunks).replace('\\"', '"').replace("\\\\", "\\")
+    if "cdn.openai.com/mdx-assets/" not in joined and "images.ctfassets.net/" not in joined:
+        return []
+
+    para_offsets = _compute_rsc_para_offsets(joined, paragraphs)
+    last_para_pos = para_offsets[-1][0] if para_offsets else 0
+
+    out: List[Dict[str, Any]] = []
+    pat = re.compile(
+        r'"(?:posterImage|image)":\{"src":"(https://(?:cdn\.openai\.com/mdx-assets|images\.ctfassets\.net)/[^"]+)"'
+        r'(?:,"width":(\d+),"height":(\d+))?',
+        re.I,
+    )
+    for k, m in enumerate(pat.finditer(joined)):
+        src = html.unescape(m.group(1).strip())
+        if not _is_valid_openai_image(src):
+            continue
+        w = int(m.group(2)) if m.group(2) else 0
+        h = int(m.group(3)) if m.group(3) else 0
+        if w and h and (w < 400 or h < 220):
+            continue
+        stem = _media_stem(src)
+        if not stem or stem in seen_stems:
+            continue
+        seen_stems.add(stem)
+
+        ctx_before = joined[max(0, m.start() - 320):m.start()]
+        ctx_after = joined[m.end():min(len(joined), m.end() + 180)]
+        cap_txt = ""
+        m_cap = re.findall(r'"([^"]{12,180}(?:GPT-[0-9.]+[^"]*|Astra[^"]*|Sol[^"]*|slide[^"]*|deck[^"]*|sheet[^"]*|workbook[^"]*|memo[^"]*))"', ctx_before, re.I)
+        if m_cap:
+            cap_txt = _clean_text(m_cap[-1])
+        else:
+            m_alt = re.search(r'"alt":"([^"]{8,180})"', ctx_after)
+            if m_alt:
+                cap_txt = _clean_text(m_alt.group(1))
+
+        after_para = 0
+        for p_pos, p_idx in para_offsets:
+            if p_pos < m.start():
+                after_para = p_idx
+            else:
+                break
+        if last_para_pos and m.start() > last_para_pos + 1500:
+            # Align lazy MDX Workbooks/Slideshows showcase chunks strictly to their dedicated `### ` subheadings first
+            hint = (cap_txt or ctx_before[-120:]).lower()
+            matched_h = False
+            if any(tok in hint for tok in ("slide", "deck", "presentation")):
+                for idx_p, pp in enumerate(paragraphs):
+                    if pp.startswith("### ") and ("slideshow" in pp.lower() or "slide" in pp.lower()):
+                        after_para = idx_p + 1 if (idx_p + 1 < len(paragraphs) and not paragraphs[idx_p + 1].startswith("### ")) else idx_p
+                        matched_h = True
+                        break
+            if not matched_h and any(tok in hint for tok in ("workbook", "sheet", "memo", "readout", "review", "model")):
+                for idx_p, pp in enumerate(paragraphs):
+                    if pp.startswith("### ") and ("workbook" in pp.lower() or "memo" in pp.lower() or "professional output" in pp.lower()):
+                        after_para = idx_p + 1 if (idx_p + 1 < len(paragraphs) and not paragraphs[idx_p + 1].startswith("### ")) else idx_p
+                        matched_h = True
+                        break
+            if not matched_h:
+                after_para = _best_semantic_para_index(hint, paragraphs, after_para)
+
+        img_obj: Dict[str, Any] = {
+            "url": src,
+            "after_para": after_para,
+            "dom_order": base_dom_seq + k,
+        }
+        if cap_txt and len(cap_txt) >= 5:
+            img_obj["caption"] = cap_txt[:240]
+            img_obj["caption_en"] = cap_txt[:240]
+        out.append(img_obj)
+
+    return out[:20]
 
 
 def _parse_openai_html(html_text: str) -> Dict[str, Any]:
@@ -666,13 +807,17 @@ def _parse_openai_html(html_text: str) -> Dict[str, Any]:
                 seen_p.add(key)
                 paragraphs.append(txt)
 
-    # Supplement with Next.js RSC embedded Vimeo demo videos if DOM didn't directly expose them
-    rsc_vids = _extract_rsc_inline_videos(html_text, paragraphs, base_dom_seq=dom_seq + 10)
+    # Supplement with Next.js RSC embedded Vimeo demo videos & MDX showcase images
+    rsc_vids = _extract_rsc_inline_videos(html_text, paragraphs, base_dom_seq=dom_seq + 10, article_title=out["title"])
     for rv in rsc_vids:
         dk = (rv.get("provider", "iframe"), rv.get("video_id") or rv["url"].split("?")[0].lower())
         if dk not in seen_vids:
             seen_vids.add(dk)
             inline_videos.append(rv)
+
+    if len(inline_images) == 0:
+        rsc_imgs = _extract_rsc_inline_images(html_text, paragraphs, seen_stems, base_dom_seq=dom_seq + 100)
+        inline_images.extend(rsc_imgs)
 
     out["paragraphs"] = paragraphs
     out["subheadings"] = subheadings
