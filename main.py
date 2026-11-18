@@ -1159,6 +1159,7 @@ def load_existing_items() -> list:
     nineto5mac_live_budget = 4
     tomshardware_live_budget = 4
     bbc_live_budget = 4
+    nypost_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2711,6 +2712,56 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if bbc_data.get(vk):
                                 it[vk] = bbc_data[vk]
+                except Exception:
+                    pass
+
+        # 6.25 New York Post (nypost.com) 隔离自愈（限近 3 天文章 + 预算上限 4）
+        if it.get("category") == "news" and "nypost.com" in str(it.get("url") or "").lower():
+            u_now = str(it.get("url") or "")
+            ts_nyp = _extract_item_ts(it)
+            is_recent_nyp = (ts_nyp > 0) and ((now_ts_load - ts_nyp) <= 3 * 86400)
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content_en") or it.get("article_content") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_nyp_fix = is_recent_nyp and nypost_live_budget > 0 and (
+                len(art_en_curr) < 400 or
+                auth_curr in ("", "New York Post", "NY Post") or
+                not img_curr.startswith("https://ainewsradar.xyz/images/nypost_")
+            )
+            if needs_nyp_fix:
+                nypost_live_budget -= 1
+                try:
+                    from crawlers.nypost_crawler import crawl_nypost
+                    nyp_data = crawl_nypost(u_now, title=str(it.get("title_en") or it.get("title") or ""))
+                    if nyp_data.get("is_filtered_out"):
+                        continue
+                    if nyp_data.get("title"):
+                        it["title"] = nyp_data["title"]
+                        it["title_en"] = nyp_data["title"]
+                    if nyp_data.get("author") and nyp_data["author"] not in ("New York Post", "NY Post"):
+                        it["author"] = nyp_data["author"]
+                    if nyp_data.get("cover_image") and str(nyp_data["cover_image"]).startswith("http"):
+                        it["image_url"] = nyp_data["cover_image"]
+                        it["cover_image"] = nyp_data["cover_image"]
+                    if nyp_data.get("is_substantive") and nyp_data.get("full_text"):
+                        it["paragraphs"] = nyp_data.get("paragraphs", [])
+                        it["subheadings"] = nyp_data.get("subheadings", [])
+                        it["article_content"] = nyp_data["full_text"]
+                        it["article_content_en"] = nyp_data["full_text"]
+                        it["inline_images"] = nyp_data.get("inline_images", [])
+                        if nyp_data.get("inline_videos"):
+                            it["inline_videos"] = nyp_data["inline_videos"]
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                    if nyp_data.get("has_video") and nyp_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = nyp_data["video_url"]
+                        if nyp_data.get("video_id"):
+                            it["video_id"] = nyp_data["video_id"]
+                        it["video_provider"] = nyp_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if nyp_data.get(vk):
+                                it[vk] = nyp_data[vk]
                 except Exception:
                     pass
 

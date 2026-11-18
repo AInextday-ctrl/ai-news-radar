@@ -979,6 +979,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "nypost.com" in domain:
+            try:
+                from crawlers.nypost_crawler import crawl_nypost
+                nyp_data = crawl_nypost(url, html_text=html_text)
+                if nyp_data.get("is_filtered_out"):
+                    result.update(nyp_data)
+                    return result
+                if nyp_data.get("is_substantive") or nyp_data.get("paras_count", 0) >= 1 or nyp_data.get("title"):
+                    result.update(nyp_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)
