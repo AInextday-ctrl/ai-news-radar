@@ -849,6 +849,19 @@ class ArticleExtractor:
             except Exception:
                 pass
 
+        if "the-decoder.com" in domain:
+            try:
+                from crawlers.decoder_crawler import crawl_decoder
+                dec_data = crawl_decoder(url, html_text=html_text)
+                if dec_data.get("is_filtered_out"):
+                    result.update(dec_data)
+                    return result
+                if dec_data.get("is_substantive") or dec_data.get("paras_count", 0) >= 1 or dec_data.get("title"):
+                    result.update(dec_data)
+                    return result
+            except Exception:
+                pass
+
         # 获取 HTML
         if not html_text:
             html_text = cls.fetch_html(url)

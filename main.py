@@ -1149,6 +1149,7 @@ def load_existing_items() -> list:
     tc_live_budget = 4
     ars_live_budget = 4
     cnbc_live_budget = 4
+    decoder_live_budget = 4
 
     for it in items:
         u = it.get("url", "")
@@ -2151,6 +2152,79 @@ def load_existing_items() -> list:
                         for vk in ("video_aspect", "video_poster", "video_title"):
                             if c_data.get(vk):
                                 it[vk] = c_data[vk]
+                    if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
+                        paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
+                        zh_chunks = []
+                        buf = ""
+                        for p in paras_en:
+                            if len(buf) + len(p) > 1200 and buf:
+                                tr = free_translate_zh(buf)
+                                if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                    zh_chunks.append(tr.strip())
+                                buf = p
+                            else:
+                                buf = (buf + "\n\n" + p) if buf else p
+                        if buf:
+                            tr = free_translate_zh(buf)
+                            if tr and any('\u4e00' <= c <= '\u9fff' for c in tr):
+                                zh_chunks.append(tr.strip())
+                        if zh_chunks:
+                            it["article_content_zh"] = "\n\n".join(zh_chunks)
+                except Exception:
+                    pass
+
+        # 6.15 THE DECODER 官方真实标题、实名记者署名、WP REST/DOM 章节小标题、基准评测图表锚点与高清原图自愈保真机制 (仅针对近 3 天资讯且限流防超时)
+        if "the-decoder.com" in u_now.lower():
+            dec_ts = parse_time_for_sort(it)
+            is_recent_dec = (dec_ts > 0) and ((now_ts_load - dec_ts) <= 3 * 86400)
+            t_curr = str(it.get("title") or "")
+            img_curr = str(it.get("image_url") or "")
+            art_en_curr = str(it.get("article_content") or it.get("article_content_en") or "")
+            art_zh_curr = str(it.get("article_content_zh") or "")
+            auth_curr = str(it.get("author") or "")
+            needs_dec_fix = is_recent_dec and decoder_live_budget > 0 and (
+                "&#" in t_curr or
+                auth_curr in ("", "THE DECODER", "The Decoder") or
+                not img_curr or
+                "unsplash.com" in img_curr or
+                img_curr.startswith("http://") or
+                "ainewsradar.xyz/images/decoder_" not in img_curr or
+                len(art_en_curr) < 800 or
+                len(art_zh_curr) < 200
+            )
+            if needs_dec_fix:
+                decoder_live_budget -= 1
+                try:
+                    from crawlers.decoder_crawler import crawl_decoder
+                    d_data = crawl_decoder(u_now, title=t_curr)
+                    if d_data.get("is_filtered_out"):
+                        continue
+                    if d_data.get("title"):
+                        it["title"] = d_data["title"]
+                        it["title_en"] = d_data["title"]
+                    if d_data.get("author") and d_data["author"] != "THE DECODER":
+                        it["author"] = d_data["author"]
+                    if d_data.get("cover_image") and str(d_data["cover_image"]).startswith("http"):
+                        it["image_url"] = d_data["cover_image"]
+                        it["cover_image"] = d_data["cover_image"]
+                    if d_data.get("is_substantive") and d_data.get("full_text"):
+                        it["paragraphs"] = d_data.get("paragraphs", [])
+                        it["subheadings"] = d_data.get("subheadings", [])
+                        it["article_content"] = d_data["full_text"]
+                        it["article_content_en"] = d_data["full_text"]
+                        it["inline_images"] = d_data.get("inline_images", [])
+                        it["is_substantive"] = True
+                        it["is_paywalled"] = False
+                        art_en_curr = d_data["full_text"]
+                    if d_data.get("has_video") and d_data.get("video_url"):
+                        it["has_video"] = True
+                        it["video_url"] = d_data["video_url"]
+                        if d_data.get("video_id"):
+                            it["video_id"] = d_data["video_id"]
+                        it["video_provider"] = d_data.get("video_provider", "iframe")
+                        for vk in ("video_aspect", "video_poster", "video_title"):
+                            if d_data.get(vk):
+                                it[vk] = d_data[vk]
                     if art_en_curr and len(str(it.get("article_content_zh") or "")) < 200:
                         paras_en = [p.strip() for p in art_en_curr.split("\n\n") if len(p.strip()) > 20]
                         zh_chunks = []
