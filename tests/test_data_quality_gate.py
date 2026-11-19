@@ -15,7 +15,7 @@ from processor import has_chinglish_seams
 
 
 def run_quality_gate_assertions(payload: dict) -> bool:
-    """Run 18 hard assertions against the latest news payload."""
+    """Run 19 hard assertions against the latest news payload."""
     grouped = payload.get("grouped", {})
 
     print("\n" + "=" * 60)
@@ -444,6 +444,39 @@ def run_quality_gate_assertions(payload: dict) -> bool:
     assert len(fake_time_videos) == 0, f"断言 18 失败：检测到 {len(fake_time_videos)} 个历史视频被伪造时效标签: {fake_time_videos[:3]}"
     print(f"✅ 断言 18 通过: 视频真实发布时间与防伪造标签门禁达标 (全网 {len(videos)} 个视频零虚假 TODAY / 24h 飙升)")
 
+    # 19. 信源纯正性与零异源通讯社污染 / 零悬空截断门禁 (Source Integrity & Clean Truncation)
+    pollution_violations = []
+    wire_agency_regex = re.compile(r'By\s+[A-Za-z\s,]+?\((?:Reuters|AFP|AP|Xinhua|Kyodo|Bloomberg)\)\s*[-–]', re.IGNORECASE)
+    trailing_trunc_regex = re.compile(r'(?:such as|including|and other|以及|例如)\s*(?:\.{2,3}|…)\s*$', re.IGNORECASE)
+
+    for it in news:
+        nid = it.get("id")
+        src = str(it.get("source") or it.get("news_source") or "").lower()
+        
+        # 检查正文段落
+        paras = it.get("paragraphs") or []
+        for idx, p in enumerate(paras):
+            p_str = str(p or "").strip()
+            # 异源污染：例如 Bloomberg 报道中出现 Reuters 署名
+            if "bloomberg" in src and "reuters" in p_str.lower():
+                if "(reuters)" in p_str.lower() or "reuters -" in p_str.lower():
+                    pollution_violations.append((nid, src, f"段落[{idx}]存在异源通讯社污染", p_str[:80]))
+            # 外电记者署名残留检测
+            if wire_agency_regex.search(p_str):
+                pollution_violations.append((nid, src, f"段落[{idx}]存在外电记者署名残留", p_str[:80]))
+            # 悬空截断检测 (如 such as ...)
+            if trailing_trunc_regex.search(p_str):
+                pollution_violations.append((nid, src, f"段落[{idx}]存在未闭合悬空截断", p_str[-40:]))
+
+        # 检查摘要与核心事实
+        for fld in ("summary_en", "summary_zh", "app_hook"):
+            val = str(it.get(fld) or "").strip()
+            if trailing_trunc_regex.search(val):
+                pollution_violations.append((nid, src, f"{fld}存在未闭合悬空截断", val[-40:]))
+
+    assert len(pollution_violations) == 0, f"断言 19 失败：检测到 {len(pollution_violations)} 处信源污染或悬空截断杂质: {pollution_violations[:3]}"
+    print(f"✅ 断言 19 通过: 信源纯正性与零异源通讯社污染/零悬空截断门禁达标 (0 处污染 / 全站 {len(news)} 篇深度资讯)")
+
     print("=" * 60)
     print("🏆 【质量门禁 100% 审计通过】全站数据满足零垃圾、高价值上线标准！")
     print("=" * 60 + "\n")
@@ -609,6 +642,31 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
                             b_en.append(f"Frontier update: {t_en[:40]}")
                     it["fact_bullets_zh"] = b_zh
                     it["fact_bullets_en"] = b_en
+
+    # 4.5 清理跨信源通讯社污染与未闭合悬空截断
+    wire_reg = re.compile(r'By\s+[A-Za-z\s,]+?\((?:Reuters|AFP|AP|Xinhua|Kyodo|Bloomberg)\)\s*[-–]\s*', re.IGNORECASE)
+    trailing_reg = re.compile(r'\s*(?:such as|including|and other|以及|例如)\s*(?:\.{2,3}|…)\s*$', re.IGNORECASE)
+    if "news" in grouped and isinstance(grouped["news"], list):
+        for it in grouped["news"]:
+            src = str(it.get("source") or it.get("news_source") or "").lower()
+            paras = it.get("paragraphs")
+            if isinstance(paras, list):
+                new_paras = []
+                for p in paras:
+                    p_str = str(p or "").strip()
+                    if "bloomberg" in src and "(reuters)" in p_str.lower():
+                        continue
+                    p_str = wire_reg.sub('', p_str).strip()
+                    p_str = trailing_reg.sub('.', p_str).strip()
+                    if p_str:
+                        new_paras.append(p_str)
+                it["paragraphs"] = new_paras
+            for fld in ("summary_en", "summary_zh", "app_hook"):
+                val = str(it.get(fld) or "").strip()
+                if val:
+                    val = wire_reg.sub('', val).strip()
+                    val = trailing_reg.sub('.', val).strip()
+                    it[fld] = val
 
     # 5. 确保 public 目录文件轻量化 (剔除冗余大键)
     STRIP_PUB = {'ai_analysis', 'original_content', 'article_content', 'article_content_zh', 'article_content_en', 'raw_payload', 'raw_content', 'raw_html'}
