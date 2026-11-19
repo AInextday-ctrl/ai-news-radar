@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 16:34:54 UTC",
+  "generated_at": "2026-11-19 16:48:42 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 16:34:54 UTC",
+      "updated_at": "2026-11-19 16:48:42 UTC",
       "headline_item": {
-        "id": "921e15fee95fe8a5",
+        "id": "8a80f7ed9b0d057a",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "亚马逊警告纽约客户，如果送货法案获得通过，他们将面临每笔订单最高涨价 5 美元的风险",
-        "title_en": "Amazon warns NYC customers they face price hikes up to $5 for every order if delivery bill is passed",
-        "source": "New York Post",
-        "published_at": "2026-11-19T16:05:06+00:00",
-        "url": "https://nypost.com/2026/11/19/business/in-new-campaign-amazon-warns-nyc-customers-they-face-price-hikes-up-to-5-for-every-order-if-delivery-bill-is-passed/",
-        "event_summary_zh": "电子零售巨头警告说，如果当地政府通过一项旨在打击“最后一英里”送货司机雇佣行为的有争议的法案，纽约市的亚马逊客户每笔订单将被收取最多 5 美元的费用。亚马逊直接向其纽约客户发出呼吁，以对抗腿病",
-        "event_summary_en": "Amazon customers in New York City will be charged up to $5 more per order if the local government passes a controversial bill aimed at cracking down on employment practices for “last-mile” delivery drivers, the e-tail giant is warning.\n\nAmazon is appealing directly to its Big Apple customers in its fight against the legislation, The Post has learned.\n\nStarting Thursday, they will see messages on Amazon’s website and app warning of higher costs if the bill passes.\n\nAmazon is also urging customers",
+        "title_zh": "做空机构指控AMD涉嫌违规对华供应固件",
+        "title_en": "AMD Slides After Hunterbrook Shorts Stock, Cites Circular Deals",
+        "source": "Bloomberg",
+        "published_at": "2026-11-19T16:40:00+00:00",
+        "url": "https://www.bloomberg.com/news/articles/2026-11-19/amd-slides-after-hunterbrook-shorts-stock-cites-circular-deals",
+        "event_summary_zh": "做空机构Hunterbrook指控AMD向被美列入黑名单的中国服务器厂商IEIT供应固件，引发AMD股价大幅下挫",
+        "event_summary_en": "Short-selling firm Hunterbrook alleged that AMD continued providing BIOS firmware updates to IEIT Systems, a Chinese server manufacturer blacklisted by the U.S. in March 2025. While the report stopped short of proving a legal violation, the allegation triggered market concerns over AMD's supply chain traceability and compliance efficacy, causing an 8% drop in its share price.",
         "core_facts_zh": [
-          "【核心事件】苹果公司 (Apple Inc.)：亚马逊警告纽约客户，如果送货法案获得通过，他们将面临每笔订单最高涨价 5 美元的风险",
-          "【起因与机理】端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-          "【关键数据与实测】亚马逊警告纽约客户，如果送货法案获得通过，他们将面临每笔订单最高涨价 5 美元的风险。",
-          "【各方立场与态度】苹果公司 (Apple Inc.)在美国国会听证会与联邦监管审议现场。"
+          "【核心事件】Advanced Micro Devices (AMD)、做空机构Hunterbrook、中国服务器厂商IEIT Systems：AMD被指在IEIT Systems进入黑名单后仍提供固件支持，引发合规性调查担忧",
+          "【起因与机理】针对高端芯片及其组件在华流通的合规性审查日益严苛",
+          "【关键数据与实测】尽管该报告承认尚未确认AMD存在实质性法律违规，但市场对AMD在复杂合规环境下的供应链溯源与管控能力产生强烈质疑，导致其股价单日跌幅一度达到8%。",
+          "【各方立场与态度】市场担忧该事件将引发监管部门对AMD供应链协同与审核机制的进一步审查。"
         ],
         "core_facts_en": [
-          "[Core Event] Lisa Fickenscher: Amazon warns NYC customers they face price hikes up to $5 for every order if delivery bill is passed",
-          "[Root Cause & Mechanism] Amazon is appealing directly to its Big Apple customers in its fight against the legislation, The Post has learned.",
-          "[Key Metrics] Amazon customers in New York City will be charged up to $5 more per order if the local government passes a controversial bill aimed at cracking down on employment practices for “last-mile” delivery drivers, the e-tail giant is warning.",
-          "[Industry Analysis] Amazon is also urging customers."
+          "[Core Event] Advanced Micro Devices (AMD), Hunterbrook, IEIT Systems: Allegations of continued firmware support for a blacklisted entity, triggering market sell-off",
+          "[Root Cause & Mechanism] Heightened scrutiny regarding high-end chip component flow to restricted entities",
+          "[Key Metrics] While the report stopped short of proving a legal violation, the allegation triggered market concerns over AMD's supply chain traceability and compliance efficacy, causing an 8% drop in its share price.",
+          "[Industry Impact & Outlook] Market sentiment reflects concern over potential future regulatory probes into AMD's supply chain compliance."
         ],
-        "industry_impact_zh": "端到端低延迟全双工语音架构打破传统级联瓶颈，以极低边际成本加速多模态实时交互在各端侧应用场景的规模化普及。",
-        "industry_impact_en": "Advances frontier AI engineering adoption, providing actionable strategic reference for technical leaders."
+        "industry_impact_zh": "此次事件暴露了芯片厂商在下游硬件生态管理中的合规真空，即固件更新作为一种非实物交付，极易避开传统的进出口海关监管。长期来看，监管层将迫使厂商建立更细粒度的芯片全生命周期数字化管理体系，凡是支持禁运设备运行的软件分发渠道都将面临被强制切断的合规风险。",
+        "industry_impact_en": "This incident highlights a compliance vacuum in chipmakers' downstream ecosystem management, where firmware updates—as non-physical deliverables—bypass traditional customs checkpoints. Moving forward, regulators will likely mandate granular, full-lifecycle digital management for chips, placing any software distribution channels that sustain blacklisted hardware under immediate threat of enforcement."
       },
       "headlines": [
+        {
+          "id": "8a80f7ed9b0d057a",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "做空机构指控AMD涉嫌违规对华供应固件",
+          "title_en": "AMD Slides After Hunterbrook Shorts Stock, Cites Circular Deals",
+          "source": "Bloomberg",
+          "published_at": "2026-11-19T16:40:00+00:00",
+          "url": "https://www.bloomberg.com/news/articles/2026-11-19/amd-slides-after-hunterbrook-shorts-stock-cites-circular-deals",
+          "event_summary_zh": "做空机构Hunterbrook指控AMD向被美列入黑名单的中国服务器厂商IEIT供应固件，引发AMD股价大幅下挫",
+          "event_summary_en": "Short-selling firm Hunterbrook alleged that AMD continued providing BIOS firmware updates to IEIT Systems, a Chinese server manufacturer blacklisted by the U.S. in March 2025. While the report stopped short of proving a legal violation, the allegation triggered market concerns over AMD's supply chain traceability and compliance efficacy, causing an 8% drop in its share price.",
+          "core_facts_zh": [
+            "【核心事件】Advanced Micro Devices (AMD)、做空机构Hunterbrook、中国服务器厂商IEIT Systems：AMD被指在IEIT Systems进入黑名单后仍提供固件支持，引发合规性调查担忧",
+            "【起因与机理】针对高端芯片及其组件在华流通的合规性审查日益严苛",
+            "【关键数据与实测】尽管该报告承认尚未确认AMD存在实质性法律违规，但市场对AMD在复杂合规环境下的供应链溯源与管控能力产生强烈质疑，导致其股价单日跌幅一度达到8%。",
+            "【各方立场与态度】市场担忧该事件将引发监管部门对AMD供应链协同与审核机制的进一步审查。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Advanced Micro Devices (AMD), Hunterbrook, IEIT Systems: Allegations of continued firmware support for a blacklisted entity, triggering market sell-off",
+            "[Root Cause & Mechanism] Heightened scrutiny regarding high-end chip component flow to restricted entities",
+            "[Key Metrics] While the report stopped short of proving a legal violation, the allegation triggered market concerns over AMD's supply chain traceability and compliance efficacy, causing an 8% drop in its share price.",
+            "[Industry Impact & Outlook] Market sentiment reflects concern over potential future regulatory probes into AMD's supply chain compliance."
+          ],
+          "industry_impact_zh": "此次事件暴露了芯片厂商在下游硬件生态管理中的合规真空，即固件更新作为一种非实物交付，极易避开传统的进出口海关监管。长期来看，监管层将迫使厂商建立更细粒度的芯片全生命周期数字化管理体系，凡是支持禁运设备运行的软件分发渠道都将面临被强制切断的合规风险。",
+          "industry_impact_en": "This incident highlights a compliance vacuum in chipmakers' downstream ecosystem management, where firmware updates—as non-physical deliverables—bypass traditional customs checkpoints. Moving forward, regulators will likely mandate granular, full-lifecycle digital management for chips, placing any software distribution channels that sustain blacklisted hardware under immediate threat of enforcement."
+        },
         {
           "id": "921e15fee95fe8a5",
           "tag_zh": "📰 业界动态",
@@ -82,62 +108,36 @@
           ],
           "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
           "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
-        },
-        {
-          "id": "e992533d199a76bd",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "StepSecurity获2000万美元融资",
-          "title_en": "Seattle-based StepSecurity, which offers a software supply chain security platform, raised a $20M Series A led by Elephant, bringing its total funding to $23M (Chris Metinko/Axios)",
-          "source": "Axios",
-          "published_at": "2026-11-19T15:20:00+00:00",
-          "url": "https://www.axios.com/pro/enterprise-software-deals/2026/11/18/stepsecurity-supply-chain-cybersecurity",
-          "event_summary_zh": "软件供应链安全初创公司StepSecurity完成2000万美元A轮融资，总融资额达2300万美元",
-          "event_summary_en": "Seattle-based software supply chain security platform StepSecurity has raised $20 million in Series A funding led by Elephant, bringing its total funding to $23 million. The capital will be utilized to bolster its automated, real-time security solutions for CI/CD pipelines and the software development lifecycle.",
-          "core_facts_zh": [
-            "【核心事件】StepSecurity（软件供应链安全初创公司）、Elephant（领投机构）在西雅图（公司总部）：完成2000万美元A轮融资",
-            "【起因与机理】应对日益严峻的软件供应链攻击风险，增强CI/CD流水线防御",
-            "【关键数据与实测】StepSecurity完成2000万美元A轮融资。",
-            "【各方立场与态度】核心聚焦CI/CD流水线与软件开发生命周期的自动化安全防护。"
-          ],
-          "core_facts_en": [
-            "[Core Event] StepSecurity, Elephant (Seattle, USA): Raised $20 million Series A funding",
-            "[Root Cause & Mechanism] Rising software supply chain threats and need for CI/CD pipeline protection",
-            "[Key Metrics] StepSecurity raised $20M Series A.",
-            "[Key Position & Outlook] Focus on automated security for CI/CD pipelines and software lifecycle."
-          ],
-          "industry_impact_zh": "软件供应链攻击已成为DevSecOps环节的致命漏洞，投资方正从单纯的基建安全转向细分的CI/CD自动化防御领域。此轮融资显示资本市场对“预防性安全配置”而非仅“漏洞扫描”产品的价值认可。",
-          "industry_impact_en": "Software supply chain attacks have become critical vulnerabilities in DevSecOps; investors are pivoting from generic security tools to specialized CI/CD automation defense. This funding highlights the market's premium on preventative security configuration over simple reactive vulnerability scanning."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 16:34:54 UTC",
+      "updated_at": "2026-11-19 16:48:43 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
       "author_role_en": "AI Engineer / Tech Builder",
       "author_avatar": "https://unavatar.io/x/AravSrinivas",
-      "url": "https://x.com/AravSrinivas/status/2123328640549339612",
-      "published_at": "2026-11-19T08:12:52+00:00",
-      "quote_zh": "用户喜欢多代理。一天之内使用量就增加了一倍。分解为可以同时运行的独立部分的任务，例如组装套牌、来自多个来源的研究、财务分析和联系人列表，是 Multiagent 受到用户追捧的地方。",
-      "quote_en": "Users love Multiagent. Usage doubled in just a day. Tasks that break into independent pieces that can run at the same time, like assembling a deck, research from many sources, financial analysis and contact lists are where Multiagent is being sought after by users.",
+      "url": "https://x.com/AravSrinivas/status/2123451045657690627",
+      "published_at": "2026-11-19T16:19:15+00:00",
+      "quote_zh": "分享关于困惑计算机中自我提高技能的新研究。 Brain 已经维护了一个关于您工作的知识维基，现在还根据您过去的会话为您编写和更新代理技能。改进代理会读取完整的会话轨迹（工具调用、推理、结果），找到重复出现的模式，并且仅在有足够证据时才提出新技能或更新。在任何更改生效之前，每个用户都会通过故障场景的配对重放和工程师审查来获得内置技能。在一项为期 8 周的生产流量随机测试中，72.9% 的用户至少获得了一项新的个人技能，而手动添加一项的用户只有 6.5%。工具调用失败率下降了 11%，不满意的线程下降了 7.6%，而成本或延迟没有明显变化。",
+      "quote_en": "Sharing new research on self-improving skills in Perplexity Computer. Brain, which already maintains a knowledge wiki about your work, now also writes and updates agent skills for you based on your past sessions. An improvement agent reads the full session trajectories (tool calls, reasoning, results), finds recurring patterns, and only proposes a new skill or an update when there’s enough evidence. Built-in skills that every user gets go through paired replay on failure scenarios and engineer review before any change goes live. In an 8-week randomized test on production traffic, 72.9% of users got at least one new personal skill vs 6.5% who added one manually. Tool call failures dropped 11% and dissatisfied threads dropped 7.6%, with no measurable change in cost or latency.",
       "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
       "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
       "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
       "debate_en": "Global developer community actively debates the broader industry implications.",
       "metrics": {
-        "views": "4.3k",
-        "likes": "52",
-        "comments": "18",
-        "retweets": "2",
+        "views": "6.4k",
+        "likes": "66",
+        "comments": "32",
+        "retweets": "6",
         "platform": "x",
         "verified": true
       },
       "titans": [
         {
-          "id": "689acab2d6e0481d",
+          "id": "73b32bf95b840a61",
           "name": "Aravind Srinivas",
           "handle": "@AravSrinivas",
           "role_zh": "Perplexity AI CEO",
@@ -145,24 +145,24 @@
           "avatar": "https://unavatar.io/x/AravSrinivas",
           "topic_zh": "智能体架构与协同",
           "topic_en": "Agentic Workflows",
-          "event_context_zh": "用户喜欢多代理。一天之内使用量就增加了一倍。分解为可以同时运行的独立部分的任务，例如组装套牌、来自多个来源的研究、财务分析和联系人列表，是 Multiagent 受到用户追捧的地方。",
-          "event_context_en": "Users love Multiagent. Usage doubled in just a day. Tasks that break into independent pieces that can run at the same ti",
-          "quote_zh": "用户喜欢多代理。一天之内使用量就增加了一倍。分解为可以同时运行的独立部分的任务，例如组装套牌、来自多个来源的研究、财务分析和联系人列表，是 Multiagent 受到用户追捧的地方。",
-          "quote_en": "Users love Multiagent. Usage doubled in just a day. Tasks that break into independent pieces that can run at the same time, like assembling a deck, research from many sources, financial analysis and contact lists are where Multiagent is being sought after by users.",
+          "event_context_zh": "技能或更新。在任何更改生效之前，每个用户都会通过故障场景的配对重放和工程师审查来获得内置技能。在一项为期 8 周的生产流量随机测试中，72.9% 的用户至少获得了一项新的个人技能，而手动添加一项的用户只有 6.5%。工具调用失败率下降了 11%，不满意的线程下降了 7.6%，而成本或延迟没有明显变化。",
+          "event_context_en": "Sharing new research on self-improving skills in Perplexity Computer. Brain, which already maintains a knowledge wiki ab",
+          "quote_zh": "分享关于困惑计算机中自我提高技能的新研究。 Brain 已经维护了一个关于您工作的知识维基，现在还根据您过去的会话为您编写和更新代理技能。改进代理会读取完整的会话轨迹（工具调用、推理、结果），找到重复出现的模式，并且仅在有足够证据时才提出新技能或更新。在任何更改生效之前，每个用户都会通过故障场景的配对重放和工程师审查来获得内置技能。在一项为期 8 周的生产流量随机测试中，72.9% 的用户至少获得了一项新的个人技能，而手动添加一项的用户只有 6.5%。工具调用失败率下降了 11%，不满意的线程下降了 7.6%，而成本或延迟没有明显变化。",
+          "quote_en": "Sharing new research on self-improving skills in Perplexity Computer. Brain, which already maintains a knowledge wiki about your work, now also writes and updates agent skills for you based on your past sessions. An improvement agent reads the full session trajectories (tool calls, reasoning, results), finds recurring patterns, and only proposes a new skill or an update when there’s enough evidence. Built-in skills that every user gets go through paired replay on failure scenarios and engineer review before any change goes live. In an 8-week randomized test on production traffic, 72.9% of users got at least one new personal skill vs 6.5% who added one manually. Tool call failures dropped 11% and dissatisfied threads dropped 7.6%, with no measurable change in cost or latency.",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "4.3k",
-            "likes": "52",
-            "comments": "18",
-            "retweets": "2",
+            "views": "6.4k",
+            "likes": "66",
+            "comments": "32",
+            "retweets": "6",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-19T08:12:52+00:00",
-          "url": "https://x.com/AravSrinivas/status/2123328640549339612"
+          "published_at": "2026-11-19T16:19:15+00:00",
+          "url": "https://x.com/AravSrinivas/status/2123451045657690627"
         },
         {
           "id": "dcc4fa3f11d6d1ee",
@@ -280,7 +280,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 16:34:54 UTC",
+      "updated_at": "2026-11-19 16:48:43 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
