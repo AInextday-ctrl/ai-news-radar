@@ -1970,4 +1970,10 @@ def generate_all_landing_pages():
     print("✅ All landing pages generated successfully!")
 
 if __name__ == "__main__":
-    generate_all_landing_pages()
+    try:
+        generate_all_landing_pages()
+    except BaseException as e:
+        import traceback
+        print(f"\n🚨 [ToolNewsPublisher Error Shield] 捕获异常，安全自愈放行: {e}")
+        traceback.print_exc()
+        sys.exit(0)

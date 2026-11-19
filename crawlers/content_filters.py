@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 """
 Site-wide Editorial Purity Filter
 =================================
@@ -11,7 +12,7 @@ enters or remains in the AI News Radar pipeline.
 """
 
 import re
-from typing import Iterable, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple, Union
 
 ROUNDUP_TITLE_RES = [
     re.compile(r"^\s*the\s+download\s*:", re.I),
