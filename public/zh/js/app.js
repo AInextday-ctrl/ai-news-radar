@@ -2096,6 +2096,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (tagParam) {
             socialCelebrityTagFilter = tagParam;
           }
+          const openParam = params.get('open');
+          if (openParam) {
+            setTimeout(() => {
+              if (tab === 'tools') {
+                if (typeof openToolDetailModal === 'function') openToolDetailModal(openParam);
+              } else {
+                if (typeof openAiNewsModal === 'function') openAiNewsModal(openParam);
+              }
+            }, 350);
+          }
         } catch (e) {}
       }
       return VALID_TABS.includes(tab) ? tab : null;
@@ -2636,61 +2646,120 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
     // ==========================================
-    // 专栏独立自主归档加载引擎 (Per-Column Self-Archiving Loader)
-    // 首页严格展示 24 小时热点，各栏目按需异步拉取自身专属归档，分页按时间严格倒序
+    // 全量静态分卷按需加载引擎 (Volume Chunking Engine)
+    // 彻底告别单体 6MB 归档大文件，实现“翻到哪一页就加载哪一卷 (仅 20-30KB)”
+    // 全量解锁 9,200+ 条历史数据，支持无上限深度翻页
     // ==========================================
+    const _volumeMeta = {};
+    const _volumeStatus = {}; // { cat: { volNum: 'loading' | 'loaded' | 'failed' } }
+    const _volumePromises = {}; // { `${cat}_${volNum}`: Promise }
+    const _volumeCache = {}; // { cat: { volNum: [items...] } }
     const _columnArchiveStatus = {};
     const _columnArchivePromises = {};
 
-    function loadColumnArchive(tab) {
+    function getCategoryTotalArchived(tab) {
+      if (_volumeMeta[tab]?.total_items) return _volumeMeta[tab].total_items;
+      if (cachedData?.archive_meta?.category_totals?.[tab]) {
+        return cachedData.archive_meta.category_totals[tab];
+      }
+      return cachedData?.grouped?.[tab]?.length || 0;
+    }
+
+    function loadCategoryMeta(tab) {
       const validTabs = ['news', 'celebrity', 'tools', 'videos', 'prompts'];
-      if (!validTabs.includes(tab)) return Promise.resolve([]);
-      if (_columnArchiveStatus[tab] === 'loaded') {
-        return Promise.resolve(cachedData?.grouped?.[tab] || []);
+      if (!validTabs.includes(tab)) return Promise.resolve(null);
+      if (_volumeMeta[tab]) return Promise.resolve(_volumeMeta[tab]);
+
+      if (cachedData?.archive_meta?.category_totals?.[tab]) {
+        const total = cachedData.archive_meta.category_totals[tab];
+        _volumeMeta[tab] = {
+          category: tab,
+          total_items: total,
+          total_pages: Math.ceil(total / categoryPageSize),
+          volume_size: 96,
+          total_volumes: Math.ceil(total / 96)
+        };
       }
-      if (_columnArchivePromises[tab]) {
-        return _columnArchivePromises[tab];
-      }
 
-      _columnArchiveStatus[tab] = 'loading';
-      const cacheBuster = '6.9.23';
-      const archiveUrl = `/data/archive_${tab}.json?v=${cacheBuster}`;
-
-      _columnArchivePromises[tab] = fetch(archiveUrl)
-        .then(res => {
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          return res.json();
-        })
-        .then(items => {
-          if (Array.isArray(items) && items.length > 0) {
-            mergeArchiveIntoCachedData(items);
-            _columnArchiveStatus[tab] = 'loaded';
-
-            // 严格按发布时间倒序排列 (最新 -> 历史)
-            if (cachedData?.grouped?.[tab]) {
-              cachedData.grouped[tab].sort((a, b) => {
-                const timeA = a.raw_published_at ? new Date(a.raw_published_at).getTime() : 0;
-                const timeB = b.raw_published_at ? new Date(b.raw_published_at).getTime() : 0;
-                return timeB - timeA;
-              });
-            }
-
-            if (currentTab === tab) {
-              renderCategoryView(tab);
-            }
-          } else {
-            _columnArchiveStatus[tab] = 'loaded';
+      return fetch(`/data/archive/${tab}/meta.json?v=7.0.0`)
+        .then(r => r.ok ? r.json() : null)
+        .then(meta => {
+          if (meta && meta.total_items) {
+            _volumeMeta[tab] = meta;
           }
-          return cachedData?.grouped?.[tab] || [];
+          return _volumeMeta[tab] || null;
         })
         .catch(err => {
-          console.warn(`[archive] Failed to load archive for ${tab}:`, err);
-          _columnArchiveStatus[tab] = null;
-          delete _columnArchivePromises[tab];
-          return cachedData?.grouped?.[tab] || [];
+          console.warn(`[archive] Failed to load meta for ${tab}:`, err);
+          return _volumeMeta[tab] || null;
+        });
+    }
+
+    function loadCategoryVolume(tab, volNum) {
+      const validTabs = ['news', 'celebrity', 'tools', 'videos', 'prompts'];
+      if (!validTabs.includes(tab) || volNum < 1) return Promise.resolve([]);
+      const key = `${tab}_${volNum}`;
+      if (_volumeStatus[tab]?.[volNum] === 'loaded') {
+        return Promise.resolve(_volumeCache[tab]?.[volNum] || []);
+      }
+      if (_volumePromises[key]) {
+        return _volumePromises[key];
+      }
+
+      if (!_volumeStatus[tab]) _volumeStatus[tab] = {};
+      if (!_volumeCache[tab]) _volumeCache[tab] = {};
+      _volumeStatus[tab][volNum] = 'loading';
+
+      _volumePromises[key] = fetch(`/data/archive/${tab}/vol_${volNum}.json?v=7.0.0`)
+        .then(r => {
+          if (!r.ok) throw new Error(`HTTP ${r.status}`);
+          return r.json();
+        })
+        .then(items => {
+          if (Array.isArray(items)) {
+            _volumeCache[tab][volNum] = items;
+            _volumeStatus[tab][volNum] = 'loaded';
+            mergeArchiveIntoCachedData(items);
+          }
+          return _volumeCache[tab][volNum] || [];
+        })
+        .catch(err => {
+          console.warn(`[archive] Failed to load volume ${volNum} for ${tab}:`, err);
+          _volumeStatus[tab][volNum] = 'failed';
+          delete _volumePromises[key];
+          return [];
         });
 
-      return _columnArchivePromises[tab];
+      return _volumePromises[key];
+    }
+
+    function getVolumeSlice(tab, startIndex, count) {
+      const meta = _volumeMeta[tab];
+      const volSize = (meta && meta.volume_size) || 96;
+      const startVol = Math.floor(startIndex / volSize) + 1;
+      const endVol = Math.floor((startIndex + count - 1) / volSize) + 1;
+      const offsetInStart = startIndex % volSize;
+
+      const v1 = _volumeCache[tab]?.[startVol];
+      if (!v1 || !v1.length) {
+        if (startIndex === 0 && cachedData?.grouped?.[tab]) {
+          return cachedData.grouped[tab].slice(0, count);
+        }
+        return [];
+      }
+
+      if (startVol === endVol) {
+        return v1.slice(offsetInStart, offsetInStart + count);
+      }
+      const v2 = _volumeCache[tab]?.[endVol] || [];
+      const fromV1 = v1.slice(offsetInStart);
+      const neededFromV2 = count - fromV1.length;
+      return fromV1.concat(v2.slice(0, neededFromV2));
+    }
+
+    function loadColumnArchive(tab) {
+      loadCategoryMeta(tab);
+      return loadCategoryVolume(tab, 1);
     }
 
     async function ensureArchiveLoaded() {
@@ -4757,15 +4826,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
       const targetUrl = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-      const isNewsTab = (typeof currentTab !== 'undefined' && currentTab === 'news') || (window.location.hash === '#news');
-      if (isNewsTab) {
-        window.location.href = targetUrl;
-        return;
-      }
       if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          openAiNewsModal(newsId);
-          return;
+          const opened = openAiNewsModal(newsId);
+          if (opened !== false) return;
         } catch (e) {
           console.error('[handleNewsCardClick] openAiNewsModal error:', e);
         }
@@ -4777,15 +4841,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && (event.ctrlKey || event.metaKey || event.shiftKey || event.button === 1)) {
         return; // 允许原生新标签页打开 (中键 / Ctrl / Command)
       }
-      const isNewsTab = (typeof currentTab !== 'undefined' && currentTab === 'news') || (window.location.hash === '#news');
-      if (isNewsTab) {
-        return; // 在独立快讯流中，允许原生链接跳转
-      }
       if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          if (event) event.preventDefault();
-          openAiNewsModal(newsId);
-          return;
+          const opened = openAiNewsModal(newsId);
+          if (opened !== false) {
+            if (event) event.preventDefault();
+            return;
+          }
         } catch (e) {
           console.error('[handleNewsTitleClick] openAiNewsModal error:', e);
         }
@@ -4796,15 +4858,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
       const targetUrl = isZh ? `/zh/tools/${toolId}` : `/tools/${toolId}`;
-      const isToolsTab = (typeof currentTab !== 'undefined' && currentTab === 'tools') || (window.location.hash === '#tools');
-      if (isToolsTab) {
-        window.location.href = targetUrl;
-        return;
-      }
       if (typeof openToolDetailModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          openToolDetailModal(toolId);
-          return;
+          const opened = openToolDetailModal(toolId);
+          if (opened !== false) return;
         } catch (e) {
           console.error('[handleToolCardClick] openToolDetailModal error:', e);
         }
@@ -4851,7 +4908,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           'icon.',
           'avatar.',
           '260915_thespark_climateinnovators.jpg',
-          '6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg'
+          '6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg',
+          's.yimg.com',
+          'bloomberglaw.com',
+          'bwrite-generic-profile',
+          'scorecardresearch.com'
         ];
         return badPatterns.some(p => u.includes(p));
       };
@@ -8224,27 +8285,49 @@ AI资讯雷达=رادار الذكاء الاصطناعي
     }
 
 
-    // 专栏分页核心状态与交互逻辑 (每页默认 100 条，支持 30 / 50 / 100 自由切换与无缝翻页)
+    // 专栏分页核心状态与交互逻辑 (分卷按需秒级加载，支持 24 / 50 / 100 自由切换)
     function changeCategoryPage(p) {
       if (p < 1) return;
       categoryCurrentPage = p;
-      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(currentTab) && _columnArchiveStatus[currentTab] === 'loading') {
-        const container = document.getElementById('cat-grid-container');
-        if (container) {
-          const isZh = currentLang === 'zh';
-          container.innerHTML = `
-            <div class="col-span-full py-16 text-center flex flex-col items-center justify-center space-y-3 text-slate-400">
-              <div class="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-              <p class="text-xs font-mono">${isZh ? '正在从该专栏归档库载入历史数据...' : 'Loading column historical archive...'}</p>
-            </div>
-          `;
+      const tab = currentTab;
+      const validTabs = ['news', 'celebrity', 'tools', 'videos', 'prompts'];
+
+      if (validTabs.includes(tab)) {
+        const meta = _volumeMeta[tab];
+        const volSize = (meta && meta.volume_size) || 96;
+        const startIndex = (p - 1) * categoryPageSize;
+        const endIndex = startIndex + categoryPageSize;
+        const startVol = Math.floor(startIndex / volSize) + 1;
+        const endVol = Math.floor((endIndex - 1) / volSize) + 1;
+
+        const startLoaded = _volumeStatus[tab]?.[startVol] === 'loaded';
+        const endLoaded = (startVol === endVol) || (_volumeStatus[tab]?.[endVol] === 'loaded');
+
+        if (!startLoaded || !endLoaded) {
+          const container = document.getElementById('cat-grid-container');
+          if (container) {
+            const isZh = currentLang === 'zh';
+            container.innerHTML = `
+              <div class="col-span-full py-16 text-center flex flex-col items-center justify-center space-y-3 text-slate-400">
+                <div class="w-8 h-8 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs font-mono">${isZh ? `正在按需拉取第 ${p} 页历史情报 (切片秒级加载)...` : `Fetching page ${p} archive slice on-demand...`}</p>
+              </div>
+            `;
+          }
+          const reqs = [];
+          if (!startLoaded) reqs.push(loadCategoryVolume(tab, startVol));
+          if (!endLoaded && startVol !== endVol) reqs.push(loadCategoryVolume(tab, endVol));
+
+          Promise.all(reqs).then(() => {
+            renderCategoryView(tab);
+          });
+          const el = document.getElementById('view-category');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
         }
-        loadColumnArchive(currentTab).then(() => {
-          renderCategoryView(currentTab);
-        });
-      } else {
-        renderCategoryView(currentTab);
       }
+
+      renderCategoryView(tab);
       const el = document.getElementById('view-category');
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
@@ -8401,9 +8484,12 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         return;
       }
 
-      // 栏目独立自主归档：数据就绪后按需拉取专属历史数据，翻页按时间倒序
-      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(tab) && _columnArchiveStatus[tab] !== 'loaded') {
-        loadColumnArchive(tab);
+      // 静态分卷切片：按需预载元数据与第 1 卷
+      if (['news', 'celebrity', 'tools', 'videos', 'prompts'].includes(tab)) {
+        loadCategoryMeta(tab);
+        if (_volumeStatus[tab]?.[1] !== 'loaded') {
+          loadCategoryVolume(tab, 1);
+        }
       }
       window._gridChunkToken = (window._gridChunkToken || 0) + 1;
 
@@ -8418,24 +8504,41 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
 
       if (tab === 'news') {
-        let fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
-        fullList.sort((a, b) => {
-          const timeA = new Date(a.raw_published_at || a.published_at || 0).getTime();
-          const timeB = new Date(b.raw_published_at || b.published_at || 0).getTime();
-          return timeB - timeA;
-        });
-        const totalItems = fullList.length;
-        if (totalItems === 0) {
+        const isSearchOrFilter = !!(searchQuery && searchQuery.trim());
+        let totalItems = 0;
+        let totalPages = 1;
+        let pageItems = [];
+
+        if (isSearchOrFilter) {
+          let fullList = filterList(cachedData.grouped?.news || cachedData.news || cachedData.industry_news || []);
+          fullList.sort((a, b) => {
+            const timeA = new Date(a.raw_published_at || a.published_at || 0).getTime();
+            const timeB = new Date(b.raw_published_at || b.published_at || 0).getTime();
+            return timeB - timeA;
+          });
+          totalItems = fullList.length;
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = fullList.slice(startIndex, startIndex + categoryPageSize);
+        } else {
+          totalItems = getCategoryTotalArchived('news');
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = getVolumeSlice('news', startIndex, categoryPageSize);
+          if (!pageItems.length && categoryCurrentPage === 1 && cachedData.grouped?.news) {
+            pageItems = cachedData.grouped.news.slice(0, categoryPageSize);
+          }
+        }
+
+        if (totalItems === 0 || (!pageItems.length && isSearchOrFilter)) {
           container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
           container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full">${t.newsNoMatch}</div>`;
           renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          const totalPages = Math.ceil(totalItems / categoryPageSize);
-          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
-          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
-          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
-          const pageItems = fullList.slice(startIndex, startIndex + categoryPageSize);
-
           container.className = "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5";
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           renderGridChunked(container, pageItems, renderNewsCard, applyCurrentTranslation);
@@ -8566,18 +8669,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
             return timeB - timeA;
           });
 
-          const totalItems = list.length;
-          if (totalItems === 0) {
+          const isCelebFiltered = !!(searchQuery || (socialCelebrityTagFilter && socialCelebrityTagFilter !== 'all') || socialPlatformFilter !== 'all');
+          let totalItems = 0;
+          let totalPages = 1;
+          let pageItems = [];
+
+          if (isCelebFiltered) {
+            totalItems = list.length;
+            totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+            pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+          } else {
+            totalItems = getCategoryTotalArchived('celebrity');
+            totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+            pageItems = getVolumeSlice('celebrity', startIndex, categoryPageSize);
+            if (!pageItems.length && categoryCurrentPage === 1) {
+              pageItems = allCelebRaw.slice(0, categoryPageSize);
+            }
+          }
+
+          if (totalItems === 0 || (!pageItems.length && isCelebFiltered)) {
             container.className = "w-full";
             container.innerHTML = `<div class="text-slate-500 text-center py-12">${t.celebrityNoMatch || '暂无动态'}</div>`;
             renderCategoryPagination(0, 0, 1, categoryPageSize);
           } else {
-            const totalPages = Math.ceil(totalItems / categoryPageSize);
-            if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
-            if (categoryCurrentPage < 1) categoryCurrentPage = 1;
-            const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
-            const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
-
             container.className = "w-full";
             container.innerHTML = renderCelebrityTimeline(pageItems);
             renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
@@ -8662,18 +8782,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           list = list.filter(it => normalizeToolScenarioKey(it.scenario_key || it.scenario_tag || '') === toolScenarioFilter);
         }
 
-        const totalItems = list.length;
-        if (totalItems === 0) {
+        const isToolFiltered = !!(searchQuery || toolOriginFilter !== 'all' || (toolScenarioFilter && toolScenarioFilter !== 'all'));
+        let totalItems = 0;
+        let totalPages = 1;
+        let pageItems = [];
+
+        if (isToolFiltered) {
+          totalItems = list.length;
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+        } else {
+          totalItems = getCategoryTotalArchived('tools');
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = getVolumeSlice('tools', startIndex, categoryPageSize);
+          if (!pageItems.length && categoryCurrentPage === 1 && cachedData.grouped?.tools) {
+            pageItems = cachedData.grouped.tools.slice(0, categoryPageSize);
+          }
+        }
+
+        if (totalItems === 0 || (!pageItems.length && isToolFiltered)) {
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
           container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full">${t.toolsNoMatch}</div>`;
           renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          const totalPages = Math.ceil(totalItems / categoryPageSize);
-          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
-          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
-          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
-          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
-
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           renderGridChunked(container, pageItems, renderToolCard, applyCurrentTranslation);
@@ -8735,17 +8872,35 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           list = interleaved;
         }
 
-        const totalItems = list.length;
-        if (totalItems === 0) {
+        const isVideoFiltered = !!(searchQuery || videoPlatformFilter !== 'all' || (videoSubFilter && videoSubFilter !== 'all') || selectedCreator);
+        let totalItems = 0;
+        let totalPages = 1;
+        let pageItems = [];
+
+        if (isVideoFiltered) {
+          totalItems = list.length;
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+        } else {
+          totalItems = getCategoryTotalArchived('videos');
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = getVolumeSlice('videos', startIndex, categoryPageSize);
+          if (!pageItems.length && categoryCurrentPage === 1 && cachedData.grouped?.videos) {
+            pageItems = cachedData.grouped.videos.slice(0, categoryPageSize);
+          }
+        }
+
+        if (totalItems === 0 || (!pageItems.length && isVideoFiltered)) {
           container.className = "w-full";
           container.innerHTML = `<div class="text-slate-500 text-center py-12">${t.videosNoMatch}</div>`;
           renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          const totalPages = Math.ceil(totalItems / categoryPageSize);
-          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
-          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
-          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
-          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
 
           if (videoPlatformFilter === 'youtube-shorts' || videoPlatformFilter === 'tiktok') {
             container.className = "space-y-4 w-full";
@@ -8915,8 +9070,31 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           return scoreB - scoreA;
         });
 
-        const totalItems = list.length;
-        if (totalItems === 0) {
+        const isPromptFiltered = !!(searchQuery || (typeof promptTierFilter !== 'undefined' && promptTierFilter !== 'all') || (typeof promptScenarioFilter !== 'undefined' && promptScenarioFilter !== 'all') || (typeof promptGenerationFilter !== 'undefined' && promptGenerationFilter !== 'all') || (typeof promptSubmodeFilter !== 'undefined' && promptSubmodeFilter !== 'all') || (promptCategoryFilter && promptCategoryFilter !== 'all'));
+        let totalItems = 0;
+        let totalPages = 1;
+        let pageItems = [];
+
+        if (isPromptFiltered) {
+          totalItems = list.length;
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = list.slice(startIndex, startIndex + categoryPageSize);
+        } else {
+          totalItems = getCategoryTotalArchived('prompts');
+          totalPages = Math.max(1, Math.ceil(totalItems / categoryPageSize));
+          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
+          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
+          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
+          pageItems = getVolumeSlice('prompts', startIndex, categoryPageSize);
+          if (!pageItems.length && categoryCurrentPage === 1 && cachedData.grouped?.prompts) {
+            pageItems = cachedData.grouped.prompts.slice(0, categoryPageSize);
+          }
+        }
+
+        if (totalItems === 0 || (!pageItems.length && isPromptFiltered)) {
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
           container.innerHTML = `<div class="text-slate-500 text-center py-12 col-span-full text-xs bg-slate-100/50 dark:bg-slate-900/40 rounded-xl border border-slate-200 dark:border-slate-800/80 p-8 space-y-2">
                <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">${isZh ? (promptGenerationFilter === 'legacy' ? '📦 历史模型归档库暂无此类内容' : '💡 该场景下暂无提示词或实战工作流') : 'No matching prompts or workflows'}</p>
@@ -8924,12 +9102,6 @@ AI资讯雷达=رادار الذكاء الاصطناعي
              </div>`;
           renderCategoryPagination(0, 0, 1, categoryPageSize);
         } else {
-          const totalPages = Math.ceil(totalItems / categoryPageSize);
-          if (categoryCurrentPage > totalPages) categoryCurrentPage = totalPages;
-          if (categoryCurrentPage < 1) categoryCurrentPage = 1;
-          const startIndex = (categoryCurrentPage - 1) * categoryPageSize;
-          const pageItems = list.slice(startIndex, startIndex + categoryPageSize);
-
           container.className = "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5";
           renderCategoryPagination(totalPages, totalItems, categoryCurrentPage, categoryPageSize);
           renderGridChunked(container, pageItems, it => (it.is_workflow || it.sub_type === 'workflow') ? renderWorkflowCard(it) : renderPromptCard(it), applyCurrentTranslation);
@@ -9470,7 +9642,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       if (!cachedData) {
         window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-        return;
+        return false;
       }
       const t = I18N[currentLang] || I18N.zh;
       const buckets = [
@@ -9484,6 +9656,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         cachedData.grouped?.videos,
         cachedData.grouped?.prompts
       ];
+      if (typeof _volumeCache !== 'undefined' && _volumeCache) {
+        Object.keys(_volumeCache).forEach(cat => {
+          Object.values(_volumeCache[cat] || {}).forEach(chunk => {
+            if (Array.isArray(chunk)) buckets.push(chunk);
+            else if (chunk && Array.isArray(chunk.items)) buckets.push(chunk.items);
+          });
+        });
+      }
+      if (typeof cachedArchiveData !== 'undefined' && cachedArchiveData && Array.isArray(cachedArchiveData.items)) {
+        buckets.push(cachedArchiveData.items);
+      }
       const matches = collectCachedMatches(buckets, it => String(it.id) === String(newsId));
       let item = matches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || matches[0];
       if (!item && String(newsId).startsWith('top_')) {
@@ -9496,7 +9679,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (!item) {
         window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-        return;
+        return false;
       }
       currentActiveNewsItem = item;
 
@@ -11188,11 +11371,24 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       if (!cachedData) {
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
-        return;
+        return false;
       }
-      const rawTools = (cachedData.grouped?.tools && cachedData.grouped.tools.length)
-        ? cachedData.grouped.tools
-        : (cachedData.tools || (cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools'));
+      const volumeTools = [];
+      if (typeof _volumeCache !== 'undefined' && _volumeCache && _volumeCache.tools) {
+        Object.values(_volumeCache.tools).forEach(chunk => {
+          if (Array.isArray(chunk)) volumeTools.push(...chunk);
+          else if (chunk && Array.isArray(chunk.items)) volumeTools.push(...chunk.items);
+        });
+      }
+      if (typeof cachedArchiveData !== 'undefined' && cachedArchiveData && Array.isArray(cachedArchiveData.items)) {
+        volumeTools.push(...cachedArchiveData.items.filter(it => it.category === 'tools' || it.category === 'applied_tools'));
+      }
+      const rawTools = [
+        ...((cachedData.grouped?.tools && cachedData.grouped.tools.length)
+          ? cachedData.grouped.tools
+          : (cachedData.tools || (cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools'))),
+        ...volumeTools
+      ];
       const allTools = rawTools;
       const dedupedTools = dedupToolItems(rawTools);
 
@@ -11202,7 +11398,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                  allTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId);
       if (!item) {
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
-        return;
+        return false;
       }
 
       // 始终优先选用去重合并后的最优版本（具备真实官网直达链接与完整实测画廊大图）

@@ -4,6 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found - AI News Radar</title>
+  <script>
+    (function() {
+      try {
+        var pathname = window.location.pathname || '';
+        var match = pathname.match(/^\/(zh\/)?(news|tools)\/([a-zA-Z0-9_-]+)/);
+        if (match) {
+          var isZh = !!match[1];
+          var section = match[2];
+          var rawId = match[3].replace(/\.html$/, '');
+          var target = (isZh ? '/zh/' : '/') + '#' + section + '?open=' + encodeURIComponent(rawId);
+          window.location.replace(target);
+        }
+      } catch (e) {}
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Microsoft Clarity -->
   <script type="text/javascript">

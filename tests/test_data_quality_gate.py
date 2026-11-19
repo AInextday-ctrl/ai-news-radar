@@ -611,7 +611,7 @@ def auto_heal_dataset(data: dict, file_path: str) -> bool:
                     it["fact_bullets_en"] = b_en
 
     # 5. 确保 public 目录文件轻量化 (剔除冗余大键)
-    STRIP_PUB = {'ai_analysis', 'original_content', 'article_content', 'article_content_zh', 'raw_payload', 'raw_content', 'raw_html'}
+    STRIP_PUB = {'ai_analysis', 'original_content', 'article_content', 'article_content_zh', 'article_content_en', 'raw_payload', 'raw_content', 'raw_html'}
     data.pop("items", None)
     for cat_k, items in grouped.items():
         if isinstance(items, list):

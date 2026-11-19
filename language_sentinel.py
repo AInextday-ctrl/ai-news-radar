@@ -503,7 +503,7 @@ if __name__ == "__main__":
 
             if is_public:
                 STRIP_PUBLIC_KEYS = {
-                    'original_content',
+                    'original_content', 'article_content_en', 'article_content_zh',
                     'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
                     'wechat_published_draft', 'processed_mark', 'processed_status',
                     'processed_at', 'media_checked', 'raw_content', 'raw_html'

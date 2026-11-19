@@ -96,6 +96,32 @@ KNOWN_BLOOMBERG_IMAGES = {
 
 # Curated substantive reportings for top regulatory/investigative exclusives
 CURATED_BLOOMBERG_STORIES = {
+    "lenovo-sales-beat-estimate-due-to-solid-ai-hardware-demand": {
+        "title": "Lenovo Sales Beat Estimate Due to Solid AI Hardware Demand",
+        "title_zh": "联想二季度营收激增48%超预期，AI基础设施需求强劲爆发",
+        "author": "Bloomberg News",
+        "published_at": "2026-11-19T06:50:02Z",
+        "category": "Tech",
+        "cover_image": "https://ainewsradar.xyz/images/bloomberg_38013f91b14b2ef0.jpg",
+        "image_caption": "Lenovo ThinkSystem AI Server Infrastructure Portfolio (Lenovo / Bloomberg)",
+        "has_video": False,
+        "paragraphs": [
+            "Lenovo Group Ltd. reported a stronger-than-expected 48% surge in second-quarter revenue, propelled by soaring enterprise demand for artificial intelligence servers and cloud computing infrastructure.",
+            "Revenue for the three months ended September 30 climbed to $30.24 billion, handily beating the $27.6 billion average estimate compiled by analysts. The top-line performance keeps the Beijing-based tech giant firmly on track to achieve its $100 billion annual revenue target.",
+            "The exceptional revenue beat was driven by Lenovo's Infrastructure Solutions Group (ISG), which encompasses data center systems and AI server deployments. ISG revenue surged 178% year-on-year to reach a record $11.3 billion, bolstered by a more than 300% jump in GPU server sales to global cloud hyperscalers.",
+            "Total AI-related sales across the enterprise—spanning specialized computing hardware, high-performance storage, and hybrid AI workstations—expanded by 79% year-on-year to $10.8 billion, representing 36% of the company's total group turnover.",
+            "While adjusted operating net income jumped 166% to $1.36 billion reflecting robust commercial momentum, the company recorded a statutory accounting loss under HKFRS due to non-cash fair-value revaluations of derivative liabilities linked to warrants and strategic partnership bonds.",
+            "Chairman and Chief Executive Officer Yang Yuanqing stated that enterprise AI transformation is transitioning from experimental pilot phases to full-scale infrastructure deployments, creating sustained tailwinds for Lenovo's hybrid AI ecosystem across server clusters and smart client devices."
+        ],
+        "paragraphs_zh": [
+            "联想集团公布第二财季业绩，单季营收同比强劲增长48%，显著超出分析师平均预期，主要受企业级人工智能服务器与云计算基础设施采购激增的驱动。",
+            "截至9月30日的三个月内，联想集团总营收攀升至302.4亿美元，大幅超过市场此前预测的276亿美元中枢水平。这一稳健表现使这家总部位于北京的科技巨头更加坚定地迈向其设定的1000亿美元年度营收战略目标。",
+            "本次超预期业绩的核心增长引擎来自基础设施方案业务集团（ISG），该业务涵盖数据中心算力设备与AI服务器交付。ISG单季营收同比暴增178%达创纪录的113亿美元，其中面向全球大型云服务商的GPU算力服务器销售额实现了超过300%的爆发式增长。",
+            "联想全线AI相关产品销售（包括专用算力硬件、高性能存储及混合式AI工作站）整体同比增长79%至108亿美元，占到整个集团业务总收入的36%。",
+            "在经营层面，经调整后的运营净利润在强劲商业交付的推动下同比激增166%至1.36亿美元；但根据香港财务报告准则，由于与认股权证及战略合作可转债相关的衍生负债产生了非现金公允价值变动损益，账面体现了阶段性估值亏损。",
+            "联想集团董事长兼首席执行官杨元庆表示，全球企业的生成式AI转型正从初期的概念验证与实验测试阶段，全面步入大规模基础设施投产与商业化落地周期，这为联想横跨算力集群、混合式AI架构与端侧智能设备的生态体系带来了持久的发展动能。"
+        ]
+    },
     "us-moves-to-limit-remote-access-to-advanced-ai-chips": {
         "title": "US Moves to Curb Remote Access to Nvidia's Advanced AI Chips",
         "author": "Maggie Eastland and Magan Crane",

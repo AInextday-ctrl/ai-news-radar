@@ -2096,6 +2096,16 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           if (tagParam) {
             socialCelebrityTagFilter = tagParam;
           }
+          const openParam = params.get('open');
+          if (openParam) {
+            setTimeout(() => {
+              if (tab === 'tools') {
+                if (typeof openToolDetailModal === 'function') openToolDetailModal(openParam);
+              } else {
+                if (typeof openAiNewsModal === 'function') openAiNewsModal(openParam);
+              }
+            }, 350);
+          }
         } catch (e) {}
       }
       return VALID_TABS.includes(tab) ? tab : null;
@@ -4816,15 +4826,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
       const targetUrl = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-      const isNewsTab = (typeof currentTab !== 'undefined' && currentTab === 'news') || (window.location.hash === '#news');
-      if (isNewsTab) {
-        window.location.href = targetUrl;
-        return;
-      }
       if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          openAiNewsModal(newsId);
-          return;
+          const opened = openAiNewsModal(newsId);
+          if (opened !== false) return;
         } catch (e) {
           console.error('[handleNewsCardClick] openAiNewsModal error:', e);
         }
@@ -4836,15 +4841,13 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && (event.ctrlKey || event.metaKey || event.shiftKey || event.button === 1)) {
         return; // 允许原生新标签页打开 (中键 / Ctrl / Command)
       }
-      const isNewsTab = (typeof currentTab !== 'undefined' && currentTab === 'news') || (window.location.hash === '#news');
-      if (isNewsTab) {
-        return; // 在独立快讯流中，允许原生链接跳转
-      }
       if (typeof openAiNewsModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          if (event) event.preventDefault();
-          openAiNewsModal(newsId);
-          return;
+          const opened = openAiNewsModal(newsId);
+          if (opened !== false) {
+            if (event) event.preventDefault();
+            return;
+          }
         } catch (e) {
           console.error('[handleNewsTitleClick] openAiNewsModal error:', e);
         }
@@ -4855,15 +4858,10 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       if (event && event.target && event.target.closest('a, button')) return;
       const isZh = (typeof currentLang !== 'undefined' && currentLang === 'zh') || window.location.pathname.startsWith('/zh');
       const targetUrl = isZh ? `/zh/tools/${toolId}` : `/tools/${toolId}`;
-      const isToolsTab = (typeof currentTab !== 'undefined' && currentTab === 'tools') || (window.location.hash === '#tools');
-      if (isToolsTab) {
-        window.location.href = targetUrl;
-        return;
-      }
       if (typeof openToolDetailModal === 'function' && typeof cachedData !== 'undefined' && cachedData) {
         try {
-          openToolDetailModal(toolId);
-          return;
+          const opened = openToolDetailModal(toolId);
+          if (opened !== false) return;
         } catch (e) {
           console.error('[handleToolCardClick] openToolDetailModal error:', e);
         }
@@ -9644,7 +9642,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       if (!cachedData) {
         window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-        return;
+        return false;
       }
       const t = I18N[currentLang] || I18N.zh;
       const buckets = [
@@ -9658,6 +9656,17 @@ AI资讯雷达=رادار الذكاء الاصطناعي
         cachedData.grouped?.videos,
         cachedData.grouped?.prompts
       ];
+      if (typeof _volumeCache !== 'undefined' && _volumeCache) {
+        Object.keys(_volumeCache).forEach(cat => {
+          Object.values(_volumeCache[cat] || {}).forEach(chunk => {
+            if (Array.isArray(chunk)) buckets.push(chunk);
+            else if (chunk && Array.isArray(chunk.items)) buckets.push(chunk.items);
+          });
+        });
+      }
+      if (typeof cachedArchiveData !== 'undefined' && cachedArchiveData && Array.isArray(cachedArchiveData.items)) {
+        buckets.push(cachedArchiveData.items);
+      }
       const matches = collectCachedMatches(buckets, it => String(it.id) === String(newsId));
       let item = matches.find(it => it.image_url && !it.image_url.includes('techmeme.com') && !it.image_url.includes('pml.png')) || matches[0];
       if (!item && String(newsId).startsWith('top_')) {
@@ -9670,7 +9679,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       }
       if (!item) {
         window.location.href = isZh ? `/zh/news/${newsId}` : `/news/${newsId}`;
-        return;
+        return false;
       }
       currentActiveNewsItem = item;
 
@@ -11362,11 +11371,24 @@ AI资讯雷达=رادار الذكاء الاصطناعي
       const isZh = currentLang === 'zh';
       if (!cachedData) {
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
-        return;
+        return false;
       }
-      const rawTools = (cachedData.grouped?.tools && cachedData.grouped.tools.length)
-        ? cachedData.grouped.tools
-        : (cachedData.tools || (cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools'));
+      const volumeTools = [];
+      if (typeof _volumeCache !== 'undefined' && _volumeCache && _volumeCache.tools) {
+        Object.values(_volumeCache.tools).forEach(chunk => {
+          if (Array.isArray(chunk)) volumeTools.push(...chunk);
+          else if (chunk && Array.isArray(chunk.items)) volumeTools.push(...chunk.items);
+        });
+      }
+      if (typeof cachedArchiveData !== 'undefined' && cachedArchiveData && Array.isArray(cachedArchiveData.items)) {
+        volumeTools.push(...cachedArchiveData.items.filter(it => it.category === 'tools' || it.category === 'applied_tools'));
+      }
+      const rawTools = [
+        ...((cachedData.grouped?.tools && cachedData.grouped.tools.length)
+          ? cachedData.grouped.tools
+          : (cachedData.tools || (cachedData.items || []).filter(it => it.category === 'tools' || it.category === 'applied_tools'))),
+        ...volumeTools
+      ];
       const allTools = rawTools;
       const dedupedTools = dedupToolItems(rawTools);
 
@@ -11376,7 +11398,7 @@ AI资讯雷达=رادار الذكاء الاصطناعي
                  allTools.find(it => it.url === toolId || it.source_url === toolId || it.official_url === toolId || it.title === toolId);
       if (!item) {
         window.location.href = isZh ? `/zh/tools/${toolId}.html` : `/tools/${toolId}.html`;
-        return;
+        return false;
       }
 
       // 始终优先选用去重合并后的最优版本（具备真实官网直达链接与完整实测画廊大图）

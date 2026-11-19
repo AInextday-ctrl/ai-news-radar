@@ -1468,11 +1468,19 @@ def fetch_cross_grounding_facts(item: Dict[str, Any]) -> Optional[str]:
                 except Exception:
                     pass
 
-            # 2. 若无完整正文，提取 Bing News 官方聚合的多家权威报道摘要片段
+            # 2. 若无完整正文，提取 Bing News 官方聚合的多家权威报道摘要片段，并彻底清洗通讯社异源署名与截断污染
             snippets = []
             for it in items[:5]:
                 desc = it.findtext('description') or ''
                 clean_desc = html.unescape(re.sub(r'<[^>]+>', '', desc)).strip()
+                if not clean_desc or len(clean_desc) <= 30:
+                    continue
+                # 剔除异源通讯社前缀 (例如把路透社 By ... (Reuters) 署名前缀清洗掉，避免与当前源站冲突)
+                clean_desc = re.sub(r'^(?:By\s+[^—–-]+?|BEIJING|WASHINGTON|NEW YORK|LONDON|HONG KONG|TOKYO|SAN FRANCISCO)[,\s\w]*\([^)]+\)\s*[-—–]\s*', '', clean_desc, flags=re.I)
+                clean_desc = re.sub(r'^[A-Z\s,]+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d+\s*\([^)]+\)\s*[-—–]\s*', '', clean_desc, flags=re.I)
+                # 剔除末尾不完整的截断词，如 "such as ...", "including ...", "..."
+                clean_desc = re.sub(r'(?:,\s*|\s+)(?:such as|including|and other|as well as)\s*(?:\.\.\.|…)?\s*$', '.', clean_desc, flags=re.I)
+                clean_desc = re.sub(r'(?:\.\.\.|…)\s*$', '.', clean_desc).strip()
                 if len(clean_desc) > 30 and clean_desc not in snippets:
                     snippets.append(clean_desc)
             if snippets:
