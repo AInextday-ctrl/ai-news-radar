@@ -238,6 +238,24 @@
     ],
     "headers": [
       {
+        "source": "**/js/*-v*.min.js",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "**/css/*-v*.min.css",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
         "source": "**/*.@(js|css|mjs)",
         "headers": [
           {
@@ -359,7 +377,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=120, stale-while-revalidate=600"
           }
         ]
       },
@@ -368,7 +386,7 @@
         "headers": [
           {
             "key": "Cache-Control",
-            "value": "no-cache, no-store, must-revalidate"
+            "value": "public, max-age=120, stale-while-revalidate=600"
           }
         ]
       },

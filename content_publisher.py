@@ -3083,10 +3083,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 if not lcp_image_en_url:
                     lcp_image_en_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_en_html else 'loading="lazy"'
-                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
+                img_slot = f'<a href="/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_en}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></a>'
 
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
@@ -3094,9 +3094,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
                       <span class="text-[10px] text-slate-400 font-mono">Breaking</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      {t_en}
-                    </button>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
+                      <a href="/news/{it_id}" onclick="handleNewsTitleClick('{it_id}', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
+                        {t_en}
+                      </a>
+                    </h3>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
                       {s_en}
                     </p>
@@ -3114,7 +3116,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_en_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <div>
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
@@ -3123,9 +3125,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     </div>
                     <span class="text-[10px] text-slate-400 font-mono">Wire</span>
                   </div>
-                  <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                    {t_en}
-                  </button>
+                  <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
+                    <a href="/news/{it_id}" onclick="handleNewsTitleClick('{it_id}', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
+                      {t_en}
+                    </a>
+                  </h3>
                   <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
                     {s_en}
                   </p>
@@ -3689,10 +3693,10 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                 if not lcp_image_zh_url:
                     lcp_image_zh_url = opt_img
                 loading_attr = 'loading="eager" fetchpriority="high"' if not news_cards_zh_html else 'loading="lazy"'
-                img_slot = f'<div class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></div>'
+                img_slot = f'<a href="/zh/news/{it_id}" onclick="handleNewsTitleClick(\'{it_id}\', event)" class="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-24 rounded-xl overflow-hidden shrink-0 bg-slate-900 border border-slate-800 self-start shadow-xs block group-hover:opacity-90 transition-opacity"><img src="{opt_img}" alt="{t_zh}" width="480" height="270" {loading_attr} decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.style.display=\'none\';"></a>'
 
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news rounded-2xl p-3.5 sm:p-4 flex flex-row gap-3 sm:gap-3.5 border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 {img_slot}
                 <div class="flex-1 flex flex-col justify-between min-w-0">
                   <div>
@@ -3700,9 +3704,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                       <span class="font-bold text-[10px] text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-500/15 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-500/30 font-mono">⚡ {src}</span>
                       <span class="text-[10px] text-slate-400 font-mono">快讯</span>
                     </div>
-                    <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                      {t_zh}
-                    </button>
+                    <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
+                      <a href="/zh/news/{it_id}" onclick="handleNewsTitleClick('{it_id}', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
+                        {t_zh}
+                      </a>
+                    </h3>
                     <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-400 line-clamp-2 mt-1 leading-relaxed">
                       {s_zh}
                     </p>
@@ -3720,7 +3726,7 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
               </article>"""
             else:
                 news_cards_zh_html += f"""
-              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="if(!event.target.closest('a, button')) openAiNewsModal('{it_id}')" itemscope itemtype="https://schema.org/NewsArticle">
+              <article class="glass-card feed-card feed-card-news feed-card-editorial rounded-2xl p-3.5 sm:p-4 flex flex-col justify-between border border-slate-200/80 dark:border-slate-800/80 border-l-4 border-l-indigo-500/80 hover:border-indigo-500/60 transition-all cursor-pointer shadow-sm hover:shadow-lg hover:-translate-y-0.5 bg-white/95 dark:bg-slate-900/90 h-full group" onclick="handleNewsCardClick('{it_id}', event)" itemscope itemtype="https://schema.org/NewsArticle">
                 <div>
                   <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5 gap-2 flex-wrap">
                     <div class="flex items-center gap-1.5 flex-wrap">
@@ -3729,9 +3735,11 @@ def prerender_homepage(items: List[Dict[str, Any]], top_three: List[Dict[str, An
                     </div>
                     <span class="text-[10px] text-slate-400 font-mono">专电</span>
                   </div>
-                  <button type="button" onclick="openAiNewsModal('{it_id}')" class="block text-left w-full font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug cursor-pointer line-clamp-2 tracking-tight">
-                    {t_zh}
-                  </button>
+                  <h3 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-slate-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors leading-snug line-clamp-2 tracking-tight">
+                    <a href="/zh/news/{it_id}" onclick="handleNewsTitleClick('{it_id}', event)" class="hover:underline focus:outline-none focus:ring-1 focus:ring-indigo-500 rounded block">
+                      {t_zh}
+                    </a>
+                  </h3>
                   <p itemprop="description" class="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 line-clamp-3 mt-1.5 leading-relaxed font-normal">
                     {s_zh}
                   </p>

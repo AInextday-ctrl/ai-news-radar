@@ -920,12 +920,14 @@ def build_topic_focus_html(topics: List[Dict[str, Any]], lang: str = "zh") -> st
                 n_source = "Global AI"
             n_id = n.get("id", "")
             n_url = n.get("url", "#")
-            click_attr = f'onclick="if(!event.target.closest(\'a\')) openAiNewsModal(\'{n_id}\')"' if n_id else ''
+            click_attr = f'onclick="handleNewsCardClick(\'{n_id}\', event)"' if n_id else ''
+            internal_url = f"/zh/news/{n_id}" if is_zh else f"/news/{n_id}"
+            link_url = internal_url if n_id else n_url
             news_html_items.append(f"""
             <div class="flex items-start gap-2.5 p-2 rounded-lg bg-slate-50 hover:bg-slate-100/80 dark:bg-slate-950/60 dark:hover:bg-slate-800/80 border border-slate-200 dark:border-slate-800/80 hover:border-indigo-400/50 dark:hover:border-indigo-500/40 transition-colors cursor-pointer group shadow-xs" {click_attr}>
               <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-300 font-semibold border border-amber-300/80 dark:border-amber-500/30 shrink-0 font-mono mt-0.5">{n_source[:10]}</span>
               <div class="min-w-0 flex-1">
-                <a href="{n_url}" target="_blank" rel="noopener noreferrer" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
+                <a href="{link_url}" onclick="handleNewsTitleClick(\'{n_id}\', event)" class="text-xs text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors line-clamp-2 leading-snug font-medium block">
                   {n_title}
                 </a>
               </div>
