@@ -22,7 +22,7 @@ import re
 import json
 import html
 from datetime import datetime, timezone
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 
 try:
     sys.stdout.reconfigure(encoding='utf-8')
