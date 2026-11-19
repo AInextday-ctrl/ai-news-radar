@@ -62,3 +62,21 @@
 ## 5. 质量门禁一票否决制 (CI Quality Gate Hard Enforcement)
 
 - 任何功能开发与数据变更必须 100% 通过 `python tests/test_data_quality_gate.py` 的所有断言（目前共 21 项硬性断言），任何断言失败均视为不可发布缺陷，自动化部署将自动拦截并回退。
+
+---
+
+## 6. 防回退与爆炸半径控制准则 (Zero Regression & Blast Radius Control —— 杜绝“改一个错一个”)
+
+1. **运行时环境平权与类型注解安全 (Runtime Parity & PEP 563/649)**：
+   - 凡修改或新建 Python 代码，模块头部必须强制声明 `from __future__ import annotations`。
+   - 所有在类型标注中使用的类型符号（`Any`, `List`, `Dict`, `Optional`, `Tuple`, `Union`, `Iterable`, `Set` 等）必须 100% 显式从 `typing` 导入。
+   - 严禁依赖本地高版本 Python（如 3.14）的延迟求值特性，必须确保代码在 CI 生产基准（Python 3.12）下可无错导入。
+2. **底层改动必须做干净子进程与全消费者仿真 (Clean Subprocess Dry-Run)**：
+   - 任何对 `crawlers/`、`processor.py`、`article_extractor.py` 等公共基础模块的修改，在提交前必须在本地依次执行三级验证：
+     1. `python -c "import <修改的模块>"`：验证全新无状态子进程下的导包安全性；
+     2. `python tool_news_publisher.py` & `python content_publisher.py`：完整跑通直接调用该模块的下游静态发布链路；
+     3. `python tools/verify_code_integrity.py` & `python tests/test_data_quality_gate.py`：双门禁 100% 通过。
+3. **流水线入口顶级自愈防御护盾 (Defensive Entrypoint Shielding)**：
+   - 所有在 GitHub Actions CI 中被调用的核心 Python 脚本（`main.py`、`content_publisher.py`、`tool_news_publisher.py`、`curator_engine.py` 等），其 `if __name__ == '__main__':` 必须具备顶层 `try...except BaseException` 护盾，打印详细堆栈并实施自愈降级，严禁因偶发非关键报错以 exit code 1 导致整条 24x7 部署流水线中断。
+4. **数据存储序列化防污染与体积守恒 (Serialization Invariants)**：
+   - 数据文件（`latest_news.json` 等）必须保持既定的序列化紧凑规范（`separators=(',', ':')`），严禁在修改时随意切换格式导致产生数十万行无意义 diff，污染代码审查与历史记录。
