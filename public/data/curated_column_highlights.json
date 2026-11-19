@@ -1,37 +1,63 @@
 {
   "version": "3.3",
-  "generated_at": "2026-11-19 21:03:47 UTC",
+  "generated_at": "2026-11-19 21:21:58 UTC",
   "columns": {
     "news": {
       "category": "news",
-      "updated_at": "2026-11-19 21:03:47 UTC",
+      "updated_at": "2026-11-19 21:21:58 UTC",
       "headline_item": {
-        "id": "5c018ad712a699be",
+        "id": "d87c27e166f8d649",
         "tag_zh": "📰 业界动态",
         "tag_en": "📰 Industry News",
-        "title_zh": "俄罗斯籍间谍被控跟踪监控硅谷国防企业",
-        "title_en": "Man hired by Russia spied on Silicon Valley tech and defense company, feds say",
-        "source": "Ars Technica",
-        "published_at": "2026-11-19T20:29:46+00:00",
-        "url": "https://arstechnica.com/security/2026/11/man-charged-with-spying-on-silicon-valley-tech-and-defense-company-for-russia/",
-        "event_summary_zh": "25岁俄罗斯公民伊戈尔·迪尤因非法入境并长期监视Palantir等公司员工被联邦起诉",
-        "event_summary_en": "Igor D’iu, a 25-year-old Russian national, has been indicted for espionage after illegally entering the U.S. to surveil employees of a Silicon Valley defense tech firm, widely identified as Palantir. The defendant allegedly gathered intelligence on the company's military support and weapon supply chain to Ukraine.",
+        "title_zh": "特朗普CISA局长提名人LoSapio听证会表现引争议",
+        "title_en": "At a Senate hearing, Trump's CISA director nominee Michael LoSapio dodged questions about the agency's priorities, denied January 6 was an attack, and more (Eric Geller/Cybersecurity Dive)",
+        "source": "Cybersecurity Dive",
+        "published_at": "2026-11-19T21:01:29+00:00",
+        "url": "https://www.cybersecuritydive.com/news/cisa-nominee-michael-losapio-confirmation-hearing/875197/",
+        "event_summary_zh": "帕兰提尔高管LoSapio在参议院提名听证会上回避预算削减质疑，并对国会山骚乱性质发表争议言论",
+        "event_summary_en": "Michael LoSapio, CISO of Palantir and Trump’s nominee for CISA director, faced significant scrutiny during his Senate Homeland Security Committee confirmation hearing. He evaded questions regarding the administration’s budget cuts to CISA and denied the nature of the January 6, 2021 Capitol attack, raising alarms among lawmakers about his political alignment and commitment to agency autonomy.",
         "core_facts_zh": [
-          "【核心事件】被告伊戈尔·迪尤（Igor D’iu），疑似受害者为Palantir公司：通过非法入境与物理跟踪，搜集向乌克兰供应国防技术的公司员工隐私及机密信息",
-          "【起因与机理】受境外势力委托，旨在破坏或获取针对俄乌冲突的西方防务供应链情报",
-          "【调查与监管诉求】俄罗斯公民伊戈尔·迪尤因非法入境并从事间谍活动被联邦政府起诉。",
-          "【涉及范围与推进】此次调查凸显了核心防务科技企业在当前全球政治动荡中的反情报合规压力。"
+          "【核心事件】Michael LoSapio（帕兰提尔首席信息安全官、CISA局长提名人）在美国参议院国土安全委员会确认听证会：回避关于CISA预算削减的立场询问，否认国会山骚乱性质，承诺上任后进行缺口分析",
+          "【起因与机理】作为特朗普政府行政官员提名人，在行政机构精简政策与部门核心职能之间寻求平衡，但其立场遭质疑",
+          "【调查与监管诉求】提名人对CISA预算削减持回避态度，拒绝承诺应对威胁所需的资源增量。",
+          "【各方立场与态度】参议员质疑帕兰提尔背景与特朗普政府的关系将导致CISA独立监管职能被削弱。"
         ],
         "core_facts_en": [
-          "[Core Event] Defendant Igor D’iu; alleged target: Palantir: Illegal entry and physical surveillance of employees at a defense-tech firm to collect information on weapon supplies to Ukraine",
-          "[Root Cause & Mechanism] Directed espionage activity to gather intelligence on Western defense supply chains supporting Ukraine",
-          "[Key Fact Detail] Russian national Igor D’iu indicted for espionage and illegal entry.",
-          "[Key Position & Outlook] Highlights intensifying counter-intelligence mandates for critical defense enterprises."
+          "[Core Event] Michael LoSapio (CISO at Palantir, CISA Director Nominee): Evaded questions on CISA budget cuts, denied the nature of the Jan 6 attack, and promised a gap analysis",
+          "[Root Cause & Mechanism] Struggling to balance administration austerity goals with the agency's operational requirements amid political polarization",
+          "[Regulatory & Investigation Focus] Nominee evaded CISA budget cut questions and failed to commit to necessary resource increases.",
+          "[Industry Impact & Outlook] Legislators questioned the impact of Palantir's industry ties on CISA's regulatory autonomy."
         ],
-        "industry_impact_zh": "此案揭示了地缘冲突已从传统战场延伸至硅谷科技中心，国防类软件公司成为大国博弈的前沿目标。随着人工智能与大数据分析在现代战争中的核心作用凸显，针对关键防务企业内部人员的物理渗透与反渗透将成为地缘合规性工作的常态化重点。",
-        "industry_impact_en": "This case illustrates that geopolitical conflicts have extended to the heart of Silicon Valley, marking defense-tech firms as high-priority intelligence targets. As AI-driven analytics become critical to modern warfare, physical and cyber perimeter defense of key personnel has become a fundamental strategic imperative for defense-tier enterprises."
+        "industry_impact_zh": "该提名反映出白宫意图将高敏感安全机构的领导权与科技巨头及政治忠诚度深度绑定，试图通过私营企业视角重构政府网络防御架构。LoSapio对预算和政治事件的回避姿态，预示着CISA未来可能从“联邦行政主导防御”转向更具防御性、甚至倾向性极强的技术交付模式，这将加剧政府内部与国会针对网络基础设施控制权的权力博弈。",
+        "industry_impact_en": "This nomination signals an intent to align sensitive security agencies with corporate technology partners and political loyalty, aiming to restructure federal cyber defense. The nominee’s evasiveness suggests CISA may transition from a centralized federal defense coordinator toward a highly privatized, politically sensitive operational model, heightening institutional friction between the executive branch and Congress."
       },
       "headlines": [
+        {
+          "id": "d87c27e166f8d649",
+          "tag_zh": "📰 业界动态",
+          "tag_en": "📰 Industry News",
+          "title_zh": "特朗普CISA局长提名人LoSapio听证会表现引争议",
+          "title_en": "At a Senate hearing, Trump's CISA director nominee Michael LoSapio dodged questions about the agency's priorities, denied January 6 was an attack, and more (Eric Geller/Cybersecurity Dive)",
+          "source": "Cybersecurity Dive",
+          "published_at": "2026-11-19T21:01:29+00:00",
+          "url": "https://www.cybersecuritydive.com/news/cisa-nominee-michael-losapio-confirmation-hearing/875197/",
+          "event_summary_zh": "帕兰提尔高管LoSapio在参议院提名听证会上回避预算削减质疑，并对国会山骚乱性质发表争议言论",
+          "event_summary_en": "Michael LoSapio, CISO of Palantir and Trump’s nominee for CISA director, faced significant scrutiny during his Senate Homeland Security Committee confirmation hearing. He evaded questions regarding the administration’s budget cuts to CISA and denied the nature of the January 6, 2021 Capitol attack, raising alarms among lawmakers about his political alignment and commitment to agency autonomy.",
+          "core_facts_zh": [
+            "【核心事件】Michael LoSapio（帕兰提尔首席信息安全官、CISA局长提名人）在美国参议院国土安全委员会确认听证会：回避关于CISA预算削减的立场询问，否认国会山骚乱性质，承诺上任后进行缺口分析",
+            "【起因与机理】作为特朗普政府行政官员提名人，在行政机构精简政策与部门核心职能之间寻求平衡，但其立场遭质疑",
+            "【调查与监管诉求】提名人对CISA预算削减持回避态度，拒绝承诺应对威胁所需的资源增量。",
+            "【各方立场与态度】参议员质疑帕兰提尔背景与特朗普政府的关系将导致CISA独立监管职能被削弱。"
+          ],
+          "core_facts_en": [
+            "[Core Event] Michael LoSapio (CISO at Palantir, CISA Director Nominee): Evaded questions on CISA budget cuts, denied the nature of the Jan 6 attack, and promised a gap analysis",
+            "[Root Cause & Mechanism] Struggling to balance administration austerity goals with the agency's operational requirements amid political polarization",
+            "[Regulatory & Investigation Focus] Nominee evaded CISA budget cut questions and failed to commit to necessary resource increases.",
+            "[Industry Impact & Outlook] Legislators questioned the impact of Palantir's industry ties on CISA's regulatory autonomy."
+          ],
+          "industry_impact_zh": "该提名反映出白宫意图将高敏感安全机构的领导权与科技巨头及政治忠诚度深度绑定，试图通过私营企业视角重构政府网络防御架构。LoSapio对预算和政治事件的回避姿态，预示着CISA未来可能从“联邦行政主导防御”转向更具防御性、甚至倾向性极强的技术交付模式，这将加剧政府内部与国会针对网络基础设施控制权的权力博弈。",
+          "industry_impact_en": "This nomination signals an intent to align sensitive security agencies with corporate technology partners and political loyalty, aiming to restructure federal cyber defense. The nominee’s evasiveness suggests CISA may transition from a centralized federal defense coordinator toward a highly privatized, politically sensitive operational model, heightening institutional friction between the executive branch and Congress."
+        },
         {
           "id": "5c018ad712a699be",
           "tag_zh": "📰 业界动态",
@@ -83,37 +109,12 @@
           ],
           "industry_impact_zh": "Meta试图通过独立硬件剥离对移动端操作系统的依赖，建立直接触达用户的AI交互入口。然而在智能穿戴设备市场，Muse Charm需在手机深度集成AI功能与智能眼镜类产品的挤压下证明其作为独立终端的不可替代性，否则将面临极高的用户留存挑战。",
           "industry_impact_en": "Meta aims to bypass mobile OS dependencies by creating a dedicated hardware entry point for AI interaction. However, the device faces significant challenges in justifying its utility as a standalone terminal against increasingly AI-integrated smartphones and emerging AR glasses."
-        },
-        {
-          "id": "b858edea5f569dcc",
-          "tag_zh": "📰 业界动态",
-          "tag_en": "📰 Industry News",
-          "title_zh": "谷歌将人工智能聊天放在主页上",
-          "title_en": "Google is putting AI chats right on the homepage",
-          "source": "The Verge AI",
-          "published_at": "2026-11-19T20:05:06+00:00",
-          "url": "https://www.theverge.com/tech/1038059/google-search-homepage-ai-chats",
-          "event_summary_zh": "谷歌正在更新其主页，加入人工智能搜索。b谷歌的产品副总裁罗比·斯坦（Robby Stein）在X上的一篇文章中展示了如何打开一个可折叠的侧边栏来查看和继续你的人工智能聊天。根据Stein分享的动图，看起来你可以通过点击出现在上面的灰色条打开侧边栏",
-          "event_summary_en": "Google is updating its homepage to include AI searches. In a post on X, Google’s vice president of product, Robby Stein, shows how you can now open a collapsible sidebar to view and continue your AI chats.\n\nBased on the GIF shared by Stein, it looks like you can open the sidebar by clicking the gray bar that appears on the left side of your screen. From there, Google will show a list of the searches you’ve made using AI Mode, along with the ability to start a new thread, search your threads, or",
-          "core_facts_zh": [
-            "【核心事件】谷歌 (Google / DeepMind)：谷歌将人工智能聊天放在主页上",
-            "【核心事实细节】谷歌将人工智能聊天放在主页上。",
-            "【行业研判】根据 Stein 分享的 GIF，看起来您可以通过单击屏幕左侧出现的灰色条来打开侧边栏。"
-          ],
-          "core_facts_en": [
-            "[Core Event] Emma Roth: Google is putting AI chats right on the homepage",
-            "[Context & Motivation] Google is updating its homepage to include AI searches.",
-            "[Key Fact Detail] In a post on X, Google’s vice president of product, Robby Stein, shows how you can now open a collapsible sidebar to view and continue your AI chats.",
-            "[Industry Analysis] From there, Google will show a list of the searches you’ve made using AI Mode, along with the ability to start a new thread, search your threads, or."
-          ],
-          "industry_impact_zh": "该突破凸显了前沿 AI 技术在垂直场景落地中的工程化深度，系统稳定性与实际生产力回报正在成为行业竞争的新标尺。",
-          "industry_impact_en": "This breakthrough demonstrates accelerating engineering maturity in frontier AI, where system reliability and tangible ROI increasingly define competitive moats."
         }
       ]
     },
     "celebrity": {
       "category": "celebrity",
-      "updated_at": "2026-11-19 21:03:48 UTC",
+      "updated_at": "2026-11-19 21:21:58 UTC",
       "author": "Aravind Srinivas",
       "author_handle": "@AravSrinivas",
       "author_role_zh": "Perplexity AI CEO",
@@ -165,7 +166,7 @@
           "url": "https://x.com/AravSrinivas/status/2123490843428622413"
         },
         {
-          "id": "9b8029dc61ed647f",
+          "id": "c48f48d18a59bb8d",
           "name": "OpenAI Developers",
           "handle": "@OpenAIDevs",
           "role_zh": "OpenAI 开发者官方平台",
@@ -173,24 +174,24 @@
           "avatar": "https://unavatar.io/openai",
           "topic_zh": "智能体架构与协同",
           "topic_en": "Agentic Workflows",
-          "event_context_zh": "流程委托给您选择的后端模型，而不会中断对话流程。",
-          "event_context_en": "Sound familiar? GPT-Live-1.1 has powered voice in ChatGPT Plus and Pro since October 15th. Now it can power your apps.\n\n",
-          "quote_zh": "听起来很熟悉吗？自 10 月 15 日起，GPT-Live-1.1 在 ChatGPT Plus 和 Pro 中支持语音。现在它可以为您的应用程序提供动力。\n\n构建更好的语音代理，可以可靠地理解字母和数字等精确细节，遵循指令，并将复杂的工作流程委托给您选择的后端模型，而不会中断对话流程。",
-          "quote_en": "Sound familiar? GPT-Live-1.1 has powered voice in ChatGPT Plus and Pro since October 15th. Now it can power your apps.\n\nBuild better voice agents that can reliably understand precise details like letters and numbers, follow instructions, and delegate complex workflows to the backend model of your choice without breaking the flow of conversation.\n\nhttps://t.co/n4Q84balAS",
+          "event_context_zh": "RT @covacut：@twitchcon 你好！ 💙我们构建了一款带有聊天功能的游戏，从长达一小时的视频流中提取剪辑，并展示了我们如何与代理一起编辑视频，同时我们还对您的项目进行了评审并颁发了 10,000 美元奖金！接下来我们应该在流上构建什么？ 🫶 https://",
+          "event_context_en": "RT @covacut: hello from @twitchcon! 💙\n\nwe built a game with chat, pulled clips from hour-long streams, and showed how we",
+          "quote_zh": "RT @covacut：@twitchcon 你好！ 💙\n\n我们构建了一款带有聊天功能的游戏，从长达一小时的视频流中提取剪辑，并展示了如何与代理一起编辑视频\n\n评审您的项目并颁发我们的 10k 奖金也很愉快！\n\n接下来我们应该在流上构建什么？ 🫶",
+          "quote_en": "RT @covacut: hello from @twitchcon! 💙\n\nwe built a game with chat, pulled clips from hour-long streams, and showed how we edit videos with agents\n\nalso had a blast judging your projects and handing out our 10k prize!\n\nwhat should we build on stream next? 🫶 https://t.co/nRSm7C3uwm",
           "thesis_zh": "深入探讨智能体架构与协同的关键演进，直指核心工程落地与技术范式转移。",
           "thesis_en": "Dissecting crucial inflection points in Agentic Workflows, highlighting system trade-offs and engineering shifts.",
           "debate_zh": "全球极客社群就此展开全网大讨论与热烈思辨。",
           "debate_en": "Global developer community actively debates the broader industry implications.",
           "metrics": {
-            "views": "2.0k",
-            "likes": "14",
-            "comments": "0",
-            "retweets": "1",
+            "views": "3.4k",
+            "likes": "41",
+            "comments": "1",
+            "retweets": "6",
             "platform": "x",
             "verified": true
           },
-          "published_at": "2026-11-19T20:00:42+00:00",
-          "url": "https://x.com/OpenAIDevs/status/2123506775077077489"
+          "published_at": "2026-11-19T20:49:16+00:00",
+          "url": "https://x.com/OpenAIDevs/status/2123518995860975845"
         },
         {
           "id": "d899838edc1d5edf",
@@ -280,7 +281,7 @@
     },
     "tools": {
       "category": "tools",
-      "updated_at": "2026-11-19 21:03:48 UTC",
+      "updated_at": "2026-11-19 21:21:58 UTC",
       "domains_subtitle_zh": "精选三大不同领域黑马：自主智能体编排 · 代码架构与AST · 浏览器自主感知",
       "domains_subtitle_en": "Top 3 Distinct Domains: Agent Fleet · Codebase AST · Browser Agent",
       "tool_item": {
