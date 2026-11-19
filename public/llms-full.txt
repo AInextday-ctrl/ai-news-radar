@@ -1,12 +1,22 @@
 # AI News Radar - Comprehensive Intelligence Document
 
 > Complete text and structured briefings of latest frontier AI intelligence, applied tools, and engineering architectures.
-Generated: 2026-11-19 04:10:58Z
+Generated: 2026-11-19 04:18:15Z
 Canonical: https://ainewsradar.xyz
 
 ---
 
 ## Section 1: Breaking AI Intelligence Briefings
+
+### Sources: Jeffrey Kessler, who oversees the Commerce Dept.'s BIS, pressured staff to expedite Nvidia H200 China sales despite red flags from other departments (The Information)
+- Canonical URL: https://ainewsradar.xyz/news/d1ea29c8cd14e0bb
+- Primary Source: The Information (https://www.theinformation.com/articles/u-s-commerce-department-rushed-clear-nvidia-h200-exports-china)
+- Executive Summary: Jeffrey Kessler, the Assistant Secretary for Export Administration at the U.S. Bureau of Industry and Security (BIS), reportedly pressured staff to expedite export license approvals for Nvidia's H200 GPUs to China, bypassing internal security red flags. This action has triggered significant friction within BIS regarding the consistency and integrity of enforcement protocols.
+- Key Verified Facts:
+* [Core Event] Jeffrey Kessler (Assistant Secretary of Commerce for Export Administration), Nvidia: Pushing for accelerated export license approval for H200 chips
+* [Root Cause & Mechanism] Inter-departmental friction between strict compliance enforcement and commercial interest pressure
+* [Regulatory & Investigation Focus] Core actor: Jeffrey Kessler bypassed internal security concerns to push export approvals.
+* [Key Position & Outlook] Outlook: Potential erosion of internal authority and imminent re-evaluation of AI hardware export policies.
 
 ### Intel signs first external customer for advanced 18A chips
 - Canonical URL: https://ainewsradar.xyz/news/6c300267f1652815
@@ -683,35 +693,6 @@ Canonical: https://ainewsradar.xyz
 > In the third quarter, “every single person sings,” she said. “It is impressive to see them all together, all in harmony singing that song … Do you know what? We’re gonna hear that song, guys. And I believe in all of you, that you will help sing it. Nvidia, we’ve got this.”
 > Updated: 11/18/2026 1:26 p.m. EST: Updated with new details on comments made during the Nvidia all-hands meeting.
 
-### Artex Is Criminals’ New Favorite ‘Point-and-Shoot’ AI Hacking Tool
-- Canonical URL: https://ainewsradar.xyz/news/fad07a5ab0e510f7
-- Primary Source: Wired AI (https://www.wired.com/story/artex-ai-hacking-tools/)
-- Executive Summary: Independent evaluation firm Vals AI found that leading models from Anthropic, OpenAI, and Google lack effective safeguards against use in autonomous weapon systems. Experiments demonstrated that through 'video game' framing, models could be manipulated into marking civilians, medics, and surrendering soldiers as targets for drone strikes with minimal refusal.
-- Key Verified Facts:
-* [Core Event] Vals AI, Anthropic, OpenAI, Google (AI weaponization testing): Models found susceptible to assisting autonomous drone strikes
-* [Root Cause & Mechanism] Safety filters fail under specific contextual prompting
-* [Market & Financial Detail] Independent evaluation firm Vals AI found that leading models from Anthropic, OpenAI, and Google lack effective safeguards against use in autonomous weapon systems.
-* [Key Position & Outlook] Once models are detached from reality via 'gamification' prompts, safety boundaries dissolve, posing a severe regulatory challenge for high-stakes AI applications.
-- Substantive Intelligence Report:
-> Over the past year, security researchers have warned that AI agents could vastly speed up cybercriminals’ ability to launch cyberattacks, breach companies, and ultimately steal money, data, or sensitive information from those compromised systems. For at least one subset of hackers, it appears that era has now arrived.
-> Since around the end of August, multiple companies, government agencies, and banks around the world have been targeted by cybercriminals adopting a new wave of AI-powered penetration testing tools. These setups —many of which mimic legitimate defensive penetration testing techniques—use LLMs to autonomously scan potential hacking targets and attempt to force their way into poorly secured networks, then carry out attack plans written by human operators.
-> Dozens of these AI penetration frameworks or “harnesses,” which detail how an AI model should carry out cybersecurity testing or attacks, are increasingly being linked to real-world attacks. The tools do not introduce new ways to attack websites or servers and are not sophisticated, according to alerts from around half a dozen security companies. Instead, they allow cybercriminals to launch attacks at speeds that would be impossible for humans to do.
-> Hackers also don’t need to be skilled to use the tools, researchers say, and attacks that would have taken days are completed in just hours. “Agentic frameworks have progressed from experimental use to sustained, multi-objective offensive operations that run with minimal human intervention,” CJ Moses, AWS’s chief information security officer, wrote in a company blog post recently.
-> The most prominent of these tools is Artex. Written in the programming language Go, the open-source framework was first published on GitHub in July by a pseudonymous developer using the handle Autumn-27, and it’s been spreading across some hacker communities ever since. Artex has been used across all parts of attacks, from conducting initial analysis of networks and gaining access to moving within systems and preparing data to be exported.
-> “It’s really an all-in-one product,” says Jacob Larsen, an offensive security researcher and founder of security firm Cypen. “Previous iterations of AI agent pen-testing tools would either only do reconnaissance—like the scanning and analysis [of targets]—and some would only do testing. This is really a point-and-shoot weapon.”
-> As with other AI hacking frameworks, Artex isn’t an AI product itself. Instead, it is essentially a guide that points external frontier and open-source AI models—that can be connected to it via APIs—to a series of existing penetration testing tools and processes. People using Artex or other similar setups can give simple, natural-language prompts to begin their operations. “Launch a penetration attack on [Redacted victim] to gain access to the site’s admin panel, database, or server,” one set of hackers prompted Artex, according to researchers at the security firm Check Point.
-> Once the instructions have been issued, multiple AI agents then carry them out. One agent will break down the plans into a series of tasks, others will try to perform these actions, and the system will then present its findings. Safety guardrails in the underlying AI models, particularly those from frontier labs, can stop hacking activity when they detect it. Increasingly, however, free Chinese and abliterated models are getting better at breaking into systems.
-> “It's fast; it’s efficient,” Guillaume Valadon, a researcher at security firm GitGuardian, says of Artex. Valadon and others say the simplicity of the tools makes it easier for unskilled wannabe hackers to try to enter the market—even if they have no clue about what they’re doing. “It lowers the bar,” Valadon says. “I would say my grandmother can do it, except that she doesn't have a laptop, but the bar is that low.”
-> As a result, a flurry of reports from cybersecurity companies have linked Artex use to attempted and successful hacks—often by Chinese-speaking cybercriminals trying to make money. These include the theft of personal information from thousands of South Korean financial institutions, potential cryptocurrency theft, and hunting for exposed login details on GitHub.
-> “A variety of malicious cyber actors have used Artex to conduct campaigns targeting organizations globally across multiple sectors, including financial services, government, technology, defense, semiconductor, energy, health care, manufacturing, telecommunications, and legal industries,” the FBI warned in an alert about Artex last week.
-> In October, China-linked hackers known as Vapor Panda used Artex to target more than 200 organizations, including think tanks, semiconductor and defense firms in the US, and government foreign ministries in Europe and elsewhere, according to security firm CrowdStrike. Microsoft spotted Chinese hackers that it tracks as Storm-0940 using Artex to try to sign in to Microsoft 365 setups following a supply chain attack. It took hackers less than three hours to gain privileged access to systems.
-> On October 8, the Autumn-27 developer removed Artex from GitHub, stating in a comment that they are “no way associated with these malicious attacks” and that the tools were developed for “educational and research purposes.” An email WIRED sent to an address linked to the developer did not receive a response.
-> Despite the developer pulling Artex, multiple versions of the framework have been copied and continue to be developed and used, alongside other similar tools. Valadon says GitGuardian has documented 45 different AI attack frameworks so far, with CyberstrikeAI, Hexstrike, CAIRN, and PentAGI being frequently mentioned by researchers. They all work in similar ways, with some slightly different technical capabilities. One silver lining for people defending against attacks using such tools is that they’re currently easy to spot.
-> “These tools are not stealthy right now,” says Silas Cutler, principal security researcher at internet security firm Censys. Many of the attacks create a lot of noise in systems—making thousands of probes in quick succession. For instance, agentic coding platform Dosu said Artex was used to send 80,000 requests to its systems in just 90 minutes. Researchers say that basic security fundamentals—patching software, not using default credentials or exposing secrets, and monitoring for unusual network activity—can help defend against many of the approaches from those using Artex.
-> Pinpointing the number of cybercriminals using Artex and other frameworks isn’t easy; however, thousands of instances of the systems being set up have been exposed to the internet, according to analysis by Censys and the Shadowserver Foundation. Perhaps hinting at the sophistication of those using Artex, researchers have found multiple instances of the tool left unsecured and fully open to the internet, allowing them to inspect how operators are using it.
-> Last week, Cutler says, two exposed Artex servers appeared to show Chinese native speakers targeting other Chinese entities. “In one of the cases, it was a university that was being targeted with a password spraying attack, and it has all of that vibe of a student trying to change their grades,” he says.
-> “There is a level of this activity that’s occurring that is likely organized, sophisticated, criminal activity,” Cutler says. “There is also, in parallel, likely a subset of the activity that falls more into that juvenile crime realm.”
-
 ---
 
 ## Section 2: Applied AI Developer Tools
@@ -720,8 +701,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/62a8982796e5111f
 - Official Source: https://github.com/CopilotKit/OpenBot?ref=ainewsradar
 - Headline: The open, self-hostable alternative to closed AI bots. Production-ready, fully c
-- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,901 stars this week, 12,883 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
-- Features: ['📈 Exponential community momentum: +1,901 stars this week (12,883 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: OpenBot is a fast-growing open-source AI tool for Multi-Agent Workflows (+1,901 stars this week, 12,884 total). The open, self-hostable alternative to closed AI bots. Production-ready, fully customizable, and plugs into every stack: any agent, any model, any tool..
+- Features: ['📈 Exponential community momentum: +1,901 stars this week (12,884 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/CopilotKit/OpenBot.git`
 
@@ -729,8 +710,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a586541f8b0974e7
 - Official Source: https://github.com/blader/humanizer?ref=ainewsradar
 - Headline: Agent skill that removes signs of AI-generated writing from text
-- Overview: humanizer is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,924 stars this week, 70,872 total). Agent skill that removes signs of AI-generated writing from text.
-- Features: ['📈 Exponential community momentum: +2,924 stars this week (70,872 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: humanizer is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,924 stars this week, 70,875 total). Agent skill that removes signs of AI-generated writing from text.
+- Features: ['📈 Exponential community momentum: +2,924 stars this week (70,875 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/blader/humanizer.git`
 
@@ -738,8 +719,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5765d0dd8c4b61bf
 - Official Source: https://github.com/kajisho5/ffmpeg-skill?ref=ainewsradar
 - Headline: Local video editor for coding agents: 42 FFmpeg tools with a machine-readable co
-- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,894 stars this week, 8,055 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
-- Features: ['📈 Exponential community momentum: +2,894 stars this week (8,055 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: ffmpeg-skill is a fast-growing open-source AI tool for Video Editing & Generation (+2,894 stars this week, 8,057 total). Local video editor for coding agents: 42 FFmpeg tools with a machine-readable contract and an MCP server, for Claude Code, Cursor and Codex. Cut, captions, reframe, loudness, platform exports. No cloud, no API keys..
+- Features: ['📈 Exponential community momentum: +2,894 stars this week (8,057 total)', '🎯 Specialized engineering for Video Editing & Generation', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Video Editing & Generation workflows
 - Quickstart: `git clone https://github.com/kajisho5/ffmpeg-skill.git`
 
@@ -747,8 +728,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/f689ccec41c0119a
 - Official Source: https://github.com/dream-num/univer?ref=ainewsradar
 - Headline: Build your own AI office with Univer Office SDK. Bring editing, calculation, col
-- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,840 stars this week, 29,920 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
-- Features: ['📈 Exponential community momentum: +6,840 stars this week (29,920 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: univer is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,840 stars this week, 29,924 total). Build your own AI office with Univer Office SDK. Bring editing, calculation, collaboration, and file processing into your product for people and AI agents. Built on an extensible open-source core..
+- Features: ['📈 Exponential community momentum: +6,840 stars this week (29,924 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/dream-num/univer.git`
 
@@ -756,8 +737,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/a9682d2a9aa41848
 - Official Source: https://github.com/openai/codex-security?ref=ainewsradar
 - Headline: OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixi
-- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,630 stars this week, 14,132 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
-- Features: ['📈 Exponential community momentum: +2,630 stars this week (14,132 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: codex-security is a fast-growing open-source AI tool for AI Coding & Developer Tools (+2,630 stars this week, 14,133 total). OpenAI's Codex Security CLI and TypeScript SDK for finding, validating, and fixing security vulnerabilities. npm: https://www.npmjs.com/package/@openai/codex-security.
+- Features: ['📈 Exponential community momentum: +2,630 stars this week (14,133 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/openai/codex-security.git`
 
@@ -774,8 +755,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/10af45cace9eba68
 - Official Source: https://github.com/ag-ui-protocol/ag-ui?ref=ainewsradar
 - Headline: AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applicati
-- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,221 stars this week, 20,474 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
-- Features: ['📈 Exponential community momentum: +3,221 stars this week (20,474 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: ag-ui is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,221 stars this week, 20,476 total). AG-UI: the Agent-User Interaction Protocol. Bring Agents into Frontend Applications..
+- Features: ['📈 Exponential community momentum: +3,221 stars this week (20,476 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/ag-ui-protocol/ag-ui.git`
 
@@ -783,8 +764,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/5b083f806d24b3ce
 - Official Source: https://github.com/mvanhorn/last30days-skill?ref=ainewsradar
 - Headline: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymark
-- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,423 stars this week, 70,160 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
-- Features: ['📈 Exponential community momentum: +2,423 stars this week (70,160 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: last30days-skill is a fast-growing open-source AI tool for Multi-Agent Workflows (+2,423 stars this week, 70,168 total). AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary.
+- Features: ['📈 Exponential community momentum: +2,423 stars this week (70,168 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/mvanhorn/last30days-skill.git`
 
@@ -792,8 +773,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/1c5edee7c934959a
 - Official Source: https://github.com/ChromeDevTools/chrome-devtools-mcp?ref=ainewsradar
 - Headline: Chrome DevTools for coding agents
-- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,143 stars this week, 58,244 total). Chrome DevTools for coding agents.
-- Features: ['📈 Exponential community momentum: +3,143 stars this week (58,244 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: chrome-devtools-mcp is a fast-growing open-source AI tool for AI Coding & Developer Tools (+3,143 stars this week, 58,245 total). Chrome DevTools for coding agents.
+- Features: ['📈 Exponential community momentum: +3,143 stars this week (58,245 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/ChromeDevTools/chrome-devtools-mcp.git`
 
@@ -801,8 +782,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/3924c8f295303f30
 - Official Source: https://github.com/alibaba/open-code-review?ref=ainewsradar
 - Headline: Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture c
-- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,383 stars this week, 54,209 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
-- Features: ['📈 Exponential community momentum: +4,383 stars this week (54,209 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
+- Overview: open-code-review is a fast-growing open-source AI tool for Knowledge Base & Deep Research (+4,383 stars this week, 54,213 total). Secure, fast, efficient, battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in multi-language ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible..
+- Features: ['📈 Exponential community momentum: +4,383 stars this week (54,213 total)', '🎯 Specialized engineering for Knowledge Base & Deep Research', '⚡ Native support for Docker 1-Click Deploy']
 - Best For: Ideal for developers seeking local deployment and customizable Knowledge Base & Deep Research workflows
 - Quickstart: `git clone https://github.com/alibaba/open-code-review.git`
 
@@ -810,8 +791,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/204fecd7e0bc86d7
 - Official Source: https://github.com/meta/astryx?ref=ainewsradar
 - Headline: An open source design system that's fully customizable and agent ready
-- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,250 stars this week, 30,633 total). An open source design system that's fully customizable and agent ready.
-- Features: ['📈 Exponential community momentum: +6,250 stars this week (30,633 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: astryx is a fast-growing open-source AI tool for Multi-Agent Workflows (+6,250 stars this week, 30,637 total). An open source design system that's fully customizable and agent ready.
+- Features: ['📈 Exponential community momentum: +6,250 stars this week (30,637 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/meta/astryx.git`
 
@@ -819,8 +800,8 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/6eabee8f4881846c
 - Official Source: https://github.com/backnotprop/plannotator?ref=ainewsradar
 - Headline: The workspace to stay in the loop and on top of agents - shape, decide, plan, an
-- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,290 stars this week, 13,490 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
-- Features: ['📈 Exponential community momentum: +3,290 stars this week (13,490 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
+- Overview: plannotator is a fast-growing open-source AI tool for Multi-Agent Workflows (+3,290 stars this week, 13,491 total). The workspace to stay in the loop and on top of agents - shape, decide, plan, annotate, review code, share with team, and send all feedback to agents with one click..
+- Features: ['📈 Exponential community momentum: +3,290 stars this week (13,491 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/backnotprop/plannotator.git`
 
@@ -828,10 +809,19 @@ Canonical: https://ainewsradar.xyz
 - URL: https://ainewsradar.xyz/tools/46d8a8c5c5bcc404
 - Official Source: https://github.com/GoogleChrome/modern-web-guidance-src?ref=ainewsradar
 - Headline: Keep your coding agent up to date with the latest web best practices
-- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+7,257 stars this week, 8,888 total). Keep your coding agent up to date with the latest web best practices.
-- Features: ['📈 Exponential community momentum: +7,257 stars this week (8,888 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
+- Overview: modern-web-guidance-src is a fast-growing open-source AI tool for AI Coding & Developer Tools (+7,257 stars this week, 8,889 total). Keep your coding agent up to date with the latest web best practices.
+- Features: ['📈 Exponential community momentum: +7,257 stars this week (8,889 total)', '🎯 Specialized engineering for AI Coding & Developer Tools', '⚡ Native support for CLI & 1-Click Run']
 - Best For: Ideal for developers seeking local deployment and customizable AI Coding & Developer Tools workflows
 - Quickstart: `git clone https://github.com/GoogleChrome/modern-web-guidance-src.git`
+
+### hermes-agent
+- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
+- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
+- Headline: The agent that grows with you
+- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,924 stars this week, 264,535 total). The agent that grows with you.
+- Features: ['📈 Exponential community momentum: +4,924 stars this week (264,535 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
+- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
+- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### SoduWork
 - URL: https://ainewsradar.xyz/tools/5a0ec8eced4523f3
@@ -841,15 +831,6 @@ Canonical: https://ainewsradar.xyz
 - Features: ['📈 Exponential community momentum: +2,590 stars this week (2,981 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
 - Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
 - Quickstart: `git clone https://github.com/SoduWork.git`
-
-### hermes-agent
-- URL: https://ainewsradar.xyz/tools/60ff2010aa4a95f7
-- Official Source: https://hermes-agent.nousresearch.com?ref=ainewsradar
-- Headline: The agent that grows with you
-- Overview: hermes-agent is a fast-growing open-source AI tool for Multi-Agent Workflows (+4,924 stars this week, 264,534 total). The agent that grows with you.
-- Features: ['📈 Exponential community momentum: +4,924 stars this week (264,534 total)', '🎯 Specialized engineering for Multi-Agent Workflows', '⚡ Native support for CLI & 1-Click Run with live web site/demo']
-- Best For: Ideal for developers seeking local deployment and customizable Multi-Agent Workflows workflows
-- Quickstart: `git clone https://github.com/hermes-agent.git`
 
 ### ppt-master
 - URL: https://ainewsradar.xyz/tools/bb9ac6458e9aef22
