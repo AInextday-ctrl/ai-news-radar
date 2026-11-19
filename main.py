@@ -3760,7 +3760,7 @@ def save_news(items: list):
     STRIP_ARCHIVE_KEYS = {
         'original_content', 'full_raw_text', 'wechat_audit', 'wechat_article_draft', 'raw_payload',
         'wechat_published_draft', 'processed_mark', 'processed_status',
-        'processed_at', 'media_checked', 'raw_content'
+        'processed_at', 'media_checked', 'raw_content', 'paragraphs', 'article_content_en'
     }
     def _clean_archive_item(it, target_cat=None):
         cat = target_cat or it.get('category')
@@ -3843,7 +3843,7 @@ def save_news(items: list):
     # 写入各专栏独立历史归档库 (news, celebrity, tools, videos, prompts)，供前端按需分页拉取
     categories_list = ['news', 'celebrity', 'tools', 'videos', 'prompts']
     category_totals = {}
-    archive_caps = {'news': 250, 'celebrity': 250, 'tools': 150, 'videos': 100, 'prompts': 60}
+    archive_caps = {'news': 300, 'celebrity': 400, 'tools': 350, 'videos': 300, 'prompts': 60}
     for cat_name in categories_list:
         cat_archive = [
             _clean_archive_item(it, cat_name) for it in all_archive_items 

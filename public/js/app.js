@@ -4851,7 +4851,11 @@ AI资讯雷达=رادار الذكاء الاصطناعي
           'icon.',
           'avatar.',
           '260915_thespark_climateinnovators.jpg',
-          '6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg'
+          '6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg',
+          's.yimg.com',
+          'bloomberglaw.com',
+          'bwrite-generic-profile',
+          'scorecardresearch.com'
         ];
         return badPatterns.some(p => u.includes(p));
       };

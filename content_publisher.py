@@ -380,7 +380,8 @@ def is_valid_news_lead_image(url: Any) -> bool:
         "techmeme_sq", "pml.png", "pixel", "spacer", "tracking", "icon.", "avatar.",
         "placeholder", "photo-1618005182384-a83a8bd57fbe", "photo-1620712943543",
         "photo-1558494949-ef010cbdcc31", "photo-1526374965328", "photo-1485827404703",
-        "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg"
+        "260915_thespark_climateinnovators.jpg", "6b72d2fb-fbfe-41f2-ba26-d64817454f73_1200x675.jpeg",
+        "s.yimg.com", "bloomberglaw.com", "bwrite-generic-profile", "scorecardresearch.com"
     ]
     return not any(b in u for b in bad_patterns)
 
